@@ -1,0 +1,1892 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:48:59.229Z",
+  "account": {
+    "slug": "toyota",
+    "displayName": "Toyota Motor North America",
+    "archetype": "oem-automotive",
+    "siteCount": 17,
+    "coverageNote": {
+      "auditedCount": 17,
+      "estimatedFootprint": null,
+      "droppedStubCount": 0,
+      "capHit": false,
+      "note": "Audited all 17 identifiable facilities."
+    }
+  },
+  "research": {
+    "facility_count": 17,
+    "audited_facilities": 17,
+    "source": "yard-audit",
+    "confidence": "verified",
+    "caveats": [
+      "Toyota Battery Manufacturing North Carolina - Liberty NC: audit note mentions 'under construction'",
+      "Toyota Logistics Services Vehicle Distribution Center - Portland OR: audit note mentions 'closed'"
+    ]
+  },
+  "network": {
+    "bbox": [
+      -122.7565,
+      29.252,
+      -71.233,
+      45.6405
+    ],
+    "archetypeMix": {
+      "#6": 3,
+      "#10": 2,
+      "#9": 5,
+      "#7": 6,
+      "#3": 1
+    },
+    "totals": {
+      "dockDoors": 1063,
+      "trailerCapacity": 4577,
+      "gates": 26,
+      "railServed": 7,
+      "acres": 5895.9
+    },
+    "sites": [
+      {
+        "id": "01-georgetown-ky",
+        "name": "Toyota Motor Manufacturing Kentucky - Georgetown KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 38.262,
+          "lng": -84.535
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.2475,
+            "west": -84.5475,
+            "north": 38.2705,
+            "east": -84.5265
+          },
+          "truckGate": {
+            "south": 38.2518,
+            "west": -84.5318,
+            "north": 38.2528,
+            "east": -84.5302
+          },
+          "dropYards": [
+            {
+              "south": 38.247,
+              "west": -84.5318,
+              "north": 38.2502,
+              "east": -84.5265
+            },
+            {
+              "south": 38.2545,
+              "west": -84.5485,
+              "north": 38.259,
+              "east": -84.5435
+            },
+            {
+              "south": 38.251,
+              "west": -84.543,
+              "north": 38.255,
+              "east": -84.5385
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 38.257,
+              "west": -84.541,
+              "north": 38.2605,
+              "east": -84.537
+            },
+            {
+              "south": 38.253,
+              "west": -84.534,
+              "north": 38.257,
+              "east": -84.529
+            }
+          ],
+          "staging": {
+            "south": 38.2525,
+            "west": -84.53,
+            "north": 38.256,
+            "east": -84.5265
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 220,
+          "trailersVisible": 850,
+          "trailerParkingCapacity": 1100,
+          "truckGateCount": 3,
+          "buildingCount": 14,
+          "siteAreaAcres": 1050,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate (38.257524, -84.547591) geocoded ~5.4 km off — it landed on\nI-75 / open land on the SW edge of the property, confirmed by a satellite probe\nshowing only highway and trees. Recentering east on the white-roofed industrial\nmass produced the real plant. Web research confirms TMMK at 1001 Cherry Blossom\nWay, Georgetown KY — Toyota's largest plant globally (~7.5M sq ft under roof on a\n~1,300-acre campus, producing Camry/Camry Hybrid/RAV4 Hybrid/Lexus ES). Locked\ncampus center at 38.262, -84.535.",
+        "mapsUrl": "https://www.google.com/maps/@38.262,-84.535,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Toyota's largest plant globally (~7.5M sq ft under roof, ~1,300-acre campus). Fully fenced, multi-building manufacturing campus with central assembly plant, two large inbound-logistics/cross-dock buildings on the SE side, powertrain/engine buildings, and a paint/utility cluster.",
+          "truckGate": "TMMK is a fully fenced, security-controlled campus. Toyota numbers its gates (visitor route uses 'Gate 2'). Street View on internal roads and at a perimeter fence line shows chain-link perimeter fencing with a cantilever/swing gate across an access drive. Truck gates are controlled checkpoints.",
+          "guardShack": "Manned guard houses are standard at Toyota assembly-plant primary gates and are visible as small structures near the entrance roundabouts in z16/z18 imagery; assigned true with high confidence given facility type, fenced perimeter and numbered-gate system.",
+          "dropArea": "Exceptional drop-yard scale: z19 imagery of the SE inbound-logistics complex shows hundreds of trailers packed in dense rows; Street View along the south perimeter shows a continuous line of parked trailers behind the berm. Easily 50+ band.",
+          "dockDoors": "Hundreds of dock doors across the inbound-logistics buildings and the assembly plant's multiple internal dock courtyards; 220 is a conservative honest estimate, 50+ band certain.",
+          "multipleFacilities": "Campus has 10+ distinct large buildings (assembly plant, two logistics/cross-dock buildings, engine/powertrain shops, paint, utilities).",
+          "railServed": "Rail spur present; auto plants of this scale and the visible rail-served areas on the campus support railServed true (also seen as long red/pink rail-served rolling stock in z17/z18).",
+          "shipRcvSeparate": "Inbound parts/cross-dock logistics complex (SE) is physically separate from finished-vehicle outbound staging and from the assembly building dock courtyards.",
+          "fastLaneOpportunity": "Wide multi-lane internal approach roads and large gate aprons leave clear room for express/bypass lanes.",
+          "perimeter": "Box covers the core fenced developed campus; outlying TMMK-owned land (test track, retention areas) extends beyond it."
+        }
+      },
+      {
+        "id": "02-princeton-in",
+        "name": "Toyota Motor Manufacturing Indiana - Princeton IN",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 38.29,
+          "lng": -87.563
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.282,
+            "west": -87.572,
+            "north": 38.2985,
+            "east": -87.553
+          },
+          "truckGate": {
+            "south": 38.2868,
+            "west": -87.563,
+            "north": 38.2878,
+            "east": -87.5614
+          },
+          "dropYards": [
+            {
+              "south": 38.287,
+              "west": -87.56,
+              "north": 38.2905,
+              "east": -87.5565
+            },
+            {
+              "south": 38.289,
+              "west": -87.5685,
+              "north": 38.2935,
+              "east": -87.564
+            },
+            {
+              "south": 38.2895,
+              "west": -87.563,
+              "north": 38.293,
+              "east": -87.5595
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 38.2885,
+              "west": -87.565,
+              "north": 38.292,
+              "east": -87.561
+            },
+            {
+              "south": 38.291,
+              "west": -87.56,
+              "north": 38.294,
+              "east": -87.5565
+            }
+          ],
+          "staging": {
+            "south": 38.287,
+            "west": -87.5625,
+            "north": 38.2895,
+            "east": -87.5595
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 150,
+          "trailersVisible": 600,
+          "trailerParkingCapacity": 850,
+          "truckGateCount": 2,
+          "buildingCount": 9,
+          "siteAreaAcres": 730,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate (38.291234, -87.565041) geocoded ~6.4 km off but still\nlanded within the property. A wide satellite probe immediately showed the large\nwhite-roofed assembly complex surrounded by farmland on Tulip Tree Drive west of\nPrinceton, IN — unambiguously TMMI. Locked campus center at 38.290, -87.563.",
+        "mapsUrl": "https://www.google.com/maps/@38.29,-87.563,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "TMMI — Toyota's Indiana assembly plant (Highlander, Grand Highlander, 3-row BEV SUV; $8B total IN investment incl. $1.4B BEV retool). Large central white-roof assembly building plus ~8 supporting structures (logistics/cross-dock, paint, supplier buildings, on-site test track on the east).",
+          "truckGate": "Fully fenced, security-controlled automotive plant set in farmland. Wide multi-lane internal approach road (Tulip Tree Drive) leads from the public road into the plant; truck entrances are controlled checkpoints. truckGate true with high confidence.",
+          "guardShack": "Manned guard houses are standard at Toyota assembly-plant gates; small guard structures present at the plant entrance points. guardShack true; remoteGs false.",
+          "dropArea": "Very large drop yards: multiple distinct trailer lots on the west and east sides of the plant, each with dozens of trailers in dense rows (z16-z18 imagery). Easily 50+ band; dropYard true.",
+          "dockDoors": "Extensive dock banks along the assembly plant and logistics buildings; ~150 conservative estimate, 50+ band certain.",
+          "urbanRural": "Plant is surrounded by open farmland and forest buffer outside Princeton IN (pop ~8,500) — clearly Rural.",
+          "shipRcvSeparate": "Separate inbound cross-dock/logistics buildings vs. finished-vehicle outbound staging lots (rows of finished cars seen on the N and E sides).",
+          "multipleFacilities": "Campus has multiple large buildings plus an on-site vehicle test track.",
+          "fastLaneOpportunity": "Wide multi-lane approach roads and large gate aprons leave clear room for express/bypass lanes.",
+          "railServed": "Rail spur serves the plant (standard for an assembly plant of this scale; rail-served areas visible on campus).",
+          "perimeter": "Box covers the core developed plant campus; TMMI owns substantial additional open buffer land beyond it."
+        }
+      },
+      {
+        "id": "03-san-antonio-tx",
+        "name": "Toyota Motor Manufacturing Texas - San Antonio TX",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "dropArea",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 29.2625,
+          "lng": -98.5425
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 29.252,
+            "west": -98.553,
+            "north": 29.27,
+            "east": -98.534
+          },
+          "truckGate": {
+            "south": 29.2588,
+            "west": -98.5462,
+            "north": 29.2598,
+            "east": -98.5446
+          },
+          "dropYards": [
+            {
+              "south": 29.2635,
+              "west": -98.5455,
+              "north": 29.267,
+              "east": -98.5425
+            },
+            {
+              "south": 29.26,
+              "west": -98.543,
+              "north": 29.2635,
+              "east": -98.5395
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 29.261,
+              "west": -98.5435,
+              "north": 29.2645,
+              "east": -98.539
+            },
+            {
+              "south": 29.2595,
+              "west": -98.5455,
+              "north": 29.2625,
+              "east": -98.5425
+            }
+          ],
+          "staging": {
+            "south": 29.258,
+            "west": -98.5455,
+            "north": 29.2605,
+            "east": -98.543
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 350,
+          "trailerParkingCapacity": 600,
+          "truckGateCount": 2,
+          "buildingCount": 20,
+          "siteAreaAcres": 900,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate (29.260605, -98.545494) was GEOMETRIC_CENTER precision and\nlanded on the SW edge of the campus (open land / undeveloped tracts confirmed by\nsatellite probes). A wide satellite probe immediately showed the large industrial\ncomplex in far-south San Antonio. Web research confirms TMMTX at 1 Lone Star Pass:\nthe $1.2B Tundra/Tacoma plant Chris Nielsen designed and built (2003-2006), with\nits distinctive integrated on-site supplier park. Locked the developed-campus\ncenter at 29.2625, -98.5425.",
+        "mapsUrl": "https://www.google.com/maps/@29.2625,-98.5425,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "TMMTX — the $1.2B San Antonio assembly plant that Chris Nielsen designed and built (2003-2006); produces Tundra and Tacoma trucks. Notable for an integrated on-site supplier park: ~20 co-located Tier-1 supplier buildings inside the campus feeding the assembly line directly.",
+          "truckGate": "Fully fenced, security-controlled campus. Web sources confirm the main gate is reached where Lone Star Pass / Watson Rd dead-ends into the campus at Applewhite Rd, with visitors continuing through the intersection to the Main Gate. Truck entrances are controlled checkpoints. truckGate true, high confidence.",
+          "guardShack": "Manned guard houses are standard at Toyota assembly-plant primary gates and the 'Main Gate' is a staffed checkpoint; small guard structures visible near the plant entrance. guardShack true; remoteGs false.",
+          "dropArea": "Substantial trailer drop yards visible center-campus (rows of trailers near the assembly plant and logistics buildings) — placed in the 25-50 band, flagged uncertain; the on-site supplier-park model reduces external trailer staging vs. a comparable Toyota plant. dropYard true.",
+          "dockDoors": "Extensive dock banks on the assembly plant, logistics buildings and the ~20 supplier buildings; 130 conservative estimate, 50+ band certain.",
+          "multipleFacilities": "Campus is effectively a manufacturing park: central assembly plant plus ~20 on-site supplier buildings plus logistics/utility structures and an on-site test track. multipleFacilities true.",
+          "urbanRural": "Located at the rural southern edge of San Antonio surrounded by open scrubland and farmland — judged Rural per rubric (edge-of-metro, open country setting).",
+          "shipRcvSeparate": "Inbound supplier/parts flow (supplier park + cross-dock) is physically separate from finished-vehicle (Tundra/Tacoma) outbound staging.",
+          "fastLaneOpportunity": "Wide multi-lane internal roads and large gate aprons leave room for express/bypass lanes.",
+          "railServed": "Rail-served (standard for an assembly plant of this scale; the plant was master-planned with rail access).",
+          "perimeter": "Box covers the core developed campus including the supplier park; TMMTX owns substantial additional buffer/test-track land beyond it."
+        }
+      },
+      {
+        "id": "04-blue-springs-ms",
+        "name": "Toyota Motor Manufacturing Mississippi - Blue Springs MS",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "dropArea",
+          "connectivityIssue",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 34.3805,
+          "lng": -88.895
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.376,
+            "west": -88.901,
+            "north": 34.387,
+            "east": -88.884
+          },
+          "truckGate": {
+            "south": 34.3782,
+            "west": -88.8908,
+            "north": 34.3792,
+            "east": -88.8892
+          },
+          "dropYards": [
+            {
+              "south": 34.377,
+              "west": -88.8915,
+              "north": 34.3798,
+              "east": -88.888
+            },
+            {
+              "south": 34.3785,
+              "west": -88.895,
+              "north": 34.381,
+              "east": -88.8918
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.379,
+              "west": -88.8955,
+              "north": 34.382,
+              "east": -88.8915
+            },
+            {
+              "south": 34.3805,
+              "west": -88.8985,
+              "north": 34.383,
+              "east": -88.8955
+            }
+          ],
+          "staging": {
+            "south": 34.378,
+            "west": -88.8918,
+            "north": 34.3805,
+            "east": -88.8895
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 400,
+          "truckGateCount": 2,
+          "buildingCount": 5,
+          "siteAreaAcres": 470,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate (34.38039, -88.895064) was ROOFTOP precision and landed\ndirectly on the plant. A wide satellite probe confirmed the large white-roofed\nassembly building in heavily forested rural NE Mississippi between Tupelo and\nPontotoc — unambiguously TMMMS (Corolla / Corolla Cross plant). Locked center at\n34.3805, -88.8950.",
+        "mapsUrl": "https://www.google.com/maps/@34.3805,-88.895,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "TMMMS — Toyota's Mississippi assembly plant (Corolla, Corolla Cross). Single large central assembly building (one contiguous footprint) plus a few small ancillary structures, set in heavily forested rural NE Mississippi between Tupelo and Pontotoc.",
+          "truckGate": "Fully fenced, security-controlled automotive assembly plant with a perimeter loop road. Wide multi-lane internal approach roads with roundabouts lead from the public highway into the campus; truck entrances are controlled checkpoints. truckGate true, high confidence.",
+          "guardShack": "Manned guard houses are standard at Toyota assembly-plant primary gates; small guard structures present at the entrances. guardShack true; remoteGs false.",
+          "dropArea": "Two distinct trailer drop yards on the E and SE sides — dense rows of red/white/colored trailers in dedicated lots (z17-z18 imagery), plus dock-apron trailers. Placed in 25-50 band, flagged uncertain. dropYard true.",
+          "dockDoors": "Clear dock banks with trailers backed in along the E and W faces of the assembly building; ~90 estimate, 50+ band certain.",
+          "urbanRural": "Plant is surrounded by dense forest and farmland, well outside Blue Springs MS (a very small town) — clearly Rural.",
+          "connectivityIssue": "Site is rural and forested but adjacent to a US highway and the Tupelo metro corridor — cellular coverage likely adequate; connectivityIssue left false but flagged uncertain.",
+          "shipRcvSeparate": "Inbound parts dock cluster vs. finished-vehicle outbound staging run from different building faces.",
+          "multipleFacilities": "Effectively a single large assembly building with minor ancillary structures — not a multi-building campus; multipleFacilities false.",
+          "fastLaneOpportunity": "Wide multi-lane internal approach roads and large gate aprons leave clear room for express/bypass lanes.",
+          "railServed": "Rail-served (standard for an assembly plant of this scale; planned with rail access).",
+          "perimeter": "Box covers the core developed campus; TMMMS owns extensive additional forested buffer land beyond it."
+        }
+      },
+      {
+        "id": "05-buffalo-wv",
+        "name": "Toyota Motor Manufacturing West Virginia - Buffalo WV",
+        "type": "Powertrain Plant (engines/transmissions)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "scale",
+          "multiStep",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 38.598,
+          "lng": -81.992
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.591712,
+            "west": -81.997172,
+            "north": 38.604288,
+            "east": -81.986828
+          },
+          "truckGate": {
+            "south": 38.59475,
+            "west": -81.9956,
+            "north": 38.59585,
+            "east": -81.9942
+          },
+          "dropYards": [
+            {
+              "south": 38.6001,
+              "west": -81.9918,
+              "north": 38.6043,
+              "east": -81.9878
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 38.597,
+              "west": -81.9911,
+              "north": 38.6002,
+              "east": -81.9899
+            },
+            {
+              "south": 38.5942,
+              "west": -81.9932,
+              "north": 38.5963,
+              "east": -81.9915
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 85,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 311,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (38.597545, -81.993022, GEOMETRIC_CENTER, ~2 km move) landed\non employee parking between the plant buildings. Satellite probing at z16–z20\naround that point positively identified the facility: a very large multi-building\nmanufacturing complex sandwiched between the Kanawha River (west) and a public\nroad (south/east), near the small town of Buffalo, WV. Web search confirmed the\naddress (1 Sugar Maple Lane) and that TMMWV builds engines and transmissions only\n— no vehicle assembly. The locked center 38.598, -81.992 sits over the main\nnorthern powertrain building.",
+        "mapsUrl": "https://www.google.com/maps/@38.598,-81.992,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Site is fully chain-link perimeter-fenced (visible in 2024-10 Street View along the public road). Truck/dock operations are inside a controlled fenced perimeter; truck access is gated. Plant-property gate not directly visible in Street View (coverage stops at the public road) so the gate structure type is inferred.",
+          "guardShack": "No guard booth could be positively identified in imagery; main employee/visitor entrance from the public road is an open unguarded driveway opening into employee parking. Marked false / remoteGs true as a medium-confidence call - a TPS plant of this scale very likely has controlled truck check-in but the structure is not confirmable from overhead.",
+          "remoteGs": "Inferred - gate present, no confirmed guard shack.",
+          "multipleFacilities": "Large campus: a northern main powertrain building cluster and a separate large southern building cluster, plus utility/water-treatment buildings and an electrical substation on a separate east parcel.",
+          "dropYard": "Very large dedicated trailer drop yard on the north side - rows of 80+ trailers (red and silver) parked in marked stalls, separate from the active dock aprons.",
+          "dockDoors": "Trailers backed in along the east face of the north building and the south/east faces of the south building; estimated 60+ total dock doors across the campus.",
+          "shipRcvSeparate": "Inbound parts docks and trailer staging are on the east face; the south building has its own separate dock bank - shipping and receiving run from physically distinct dock clusters.",
+          "fastLaneOpportunity": "Wide internal service roads and a large apron between the drop yard and the dock building leave ample paved width to add an express/bypass lane.",
+          "urbanRural": "Rural - the plant sits between the Kanawha River and farmland near the small town of Buffalo, WV; surrounded by open fields.",
+          "railServed": "No rail spur runs into the property; the plant ships engines/transmissions by truck.",
+          "siteAreaAcres": "~311 acres for the fenced industrial footprint; excludes the adjacent solar farm on a separate parcel to the east."
+        }
+      },
+      {
+        "id": "06-huntsville-al-mtmus",
+        "name": "Mazda Toyota Manufacturing USA - Huntsville AL",
+        "type": "Vehicle Assembly Plant (Mazda-Toyota JV)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "scale",
+          "multiStep",
+          "entryLanes",
+          "exitLanes",
+          "truckGateCount"
+        ],
+        "center": {
+          "lat": 34.6835,
+          "lng": -86.848
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.6755,
+            "west": -86.8545,
+            "north": 34.6915,
+            "east": -86.842
+          },
+          "truckGate": {
+            "south": 34.6833,
+            "west": -86.8465,
+            "north": 34.6847,
+            "east": -86.8451
+          },
+          "dropYards": [
+            {
+              "south": 34.6838,
+              "west": -86.8462,
+              "north": 34.6856,
+              "east": -86.8434
+            },
+            {
+              "south": 34.68,
+              "west": -86.8492,
+              "north": 34.6818,
+              "east": -86.8464
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.6842,
+              "west": -86.8472,
+              "north": 34.6862,
+              "east": -86.8454
+            },
+            {
+              "south": 34.6825,
+              "west": -86.8468,
+              "north": 34.6841,
+              "east": -86.8454
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 80,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 300,
+          "truckGateCount": 2,
+          "buildingCount": 8,
+          "siteAreaAcres": 504,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (34.677446, -86.8589, ROOFTOP, moved only 8 m) were highly\nprecise. Satellite probing at z14–z20 positively identified the facility: an\nenormous greenfield vehicle-assembly campus on the Greenbrier megasite southwest\nof Huntsville, AL. Street View (April 2026) of the entrance road confirmed the\n\"MAZDA TOYOTA\" building signage. The campus center is over the main assembly /\nbody / paint building cluster at 34.6835, -86.848 — the roster point sat at the\nSW corner of the very large property.",
+        "mapsUrl": "https://www.google.com/maps/@34.6835,-86.848,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Massive JV assembly campus, fully perimeter-fenced (chain-link visible in 2026-04 Street View). Truck/dock operations are inside the secured perimeter; multiple controlled access points serve trucks. The truck gate structures are not directly viewable in Street View (coverage is limited to the public approach roads) so the gate-type call is inferred.",
+          "guardShack": "Main employee/visitor entrance off Greenbrier Pkwy is an open parking lot fronting the 'MAZDA TOYOTA' main building - no guard booth on that side. A guard/dispatch building could not be positively confirmed at the truck gates from overhead imagery. guardShack false / remoteGs true at medium confidence; both flagged uncertain.",
+          "remoteGs": "Inferred - gate present, no confirmed guard shack.",
+          "multipleFacilities": "Large campus of 8+ distinct building masses - assembly, body, paint, stamping, plus utility and logistics buildings - spanning a very large site.",
+          "dropYard": "Two large dedicated trailer drop yards observed: one north-central yard with rows of 50+ trailers and a south staging yard; separate from active dock aprons.",
+          "dockDoors": "Trailers backed in along multiple building faces; estimated 80+ total dock doors across the campus (50+ band).",
+          "shipRcvSeparate": "Inbound parts/cross-dock receiving and finished-vehicle outbound run from physically separate dock and yard clusters on different building faces and different sides of the campus.",
+          "entryExitSeparate": "Campus has multiple distinct access roads off Greenbrier Pkwy - separate entry and exit points across the large property line.",
+          "fastLaneOpportunity": "Very wide internal aprons and roadways and large undeveloped/graded paved areas leave ample room to add express/bypass lanes.",
+          "urbanRural": "Rural - the plant sits on a greenfield megasite surrounded by farmland southwest of Huntsville; large open fields border the property.",
+          "railServed": "No rail spur observed running into the property.",
+          "truckGateCount": "Estimated 2 truck access points; the campus has several gated road junctions, exact count uncertain.",
+          "siteAreaAcres": "~504 acres for the fenced campus footprint."
+        }
+      },
+      {
+        "id": "07-liberty-nc-battery",
+        "name": "Toyota Battery Manufacturing North Carolina - Liberty NC",
+        "type": "Battery Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "preGateStaging",
+          "postGateStaging",
+          "drivewayLong",
+          "entryExitSeparate",
+          "entryLanes",
+          "exitLanes",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "scale",
+          "multiStep",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "truckGateCount",
+          "buildingCount"
+        ],
+        "center": {
+          "lat": 35.8955,
+          "lng": -79.63
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.886,
+            "west": -79.642,
+            "north": 35.906,
+            "east": -79.6195
+          },
+          "truckGate": {
+            "south": 35.8932,
+            "west": -79.6332,
+            "north": 35.8946,
+            "east": -79.6318
+          },
+          "dropYards": [
+            {
+              "south": 35.895,
+              "west": -79.6325,
+              "north": 35.8972,
+              "east": -79.6295
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.8946,
+              "west": -79.6335,
+              "north": 35.8962,
+              "east": -79.6306
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 50,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 1116,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinates (35.896442, -79.642555) had a flagged 11.4 km geocode\nmove and pointed at the town of Liberty, not the plant. Web search confirmed\nTBMNC sits on the Greensboro-Randolph Megasite off US-421 southeast of\nLiberty. A wide satellite scan (z13) located the unmistakable mega-industrial\ncomplex and the operational plant building cluster was locked at ~35.8955,\n-79.6300.",
+        "mapsUrl": "https://www.google.com/maps/@35.8955,-79.63,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "_general": "TBMNC is a $13.9B greenfield battery megasite on the Greensboro-Randolph Megasite. The latest available Maxar satellite imagery shows the site mid-construction - large operational buildings are complete (the plant has produced HEV batteries since 2025) but extensive areas remain graded construction land and additional production phases are still being built. Yard configuration is therefore still in flux and most classification values are best-effort estimates flagged uncertain.",
+          "_location": "Roster coordinates (35.896442, -79.642555) moved 11.4 km and pointed near Liberty town center, NOT the plant. The actual megasite was relocated by web search + satellite scan to ~35.8955, -79.6300, southeast of Liberty along the megasite access roads off US-421.",
+          "truckGate": "Site is a controlled megasite with a roundabout-based internal road network and gated industrial access; truck access is controlled. Gate structure not directly viewable - no Street View coverage at this remote greenfield site. Inferred.",
+          "guardShack": "Could not be confirmed from overhead construction-era imagery. Set false / remoteGs true at low confidence.",
+          "multipleFacilities": "Large multi-building campus - the main battery building plus several support/utility buildings and an electrical substation; further production buildings under construction.",
+          "dropYard": "Trailer parking and a construction/logistics lay-down yard observed adjacent to the main building; a dedicated operational drop yard is present but its mature extent is not yet clear from construction-era imagery.",
+          "dockDoors": "Dock doors with trailers backed in observed along the north face of the main building; ~50 estimated but the full operational dock count is uncertain while the plant is still ramping.",
+          "urbanRural": "Rural - the megasite is greenfield, surrounded by farmland and woods in northeast Randolph County near the small town of Liberty.",
+          "railServed": "No rail spur observed entering the operational footprint in current imagery.",
+          "siteAreaAcres": "~1,116 acres for the active/operational footprint estimated here; the full Greensboro-Randolph Megasite parcel is ~1,850 acres."
+        }
+      },
+      {
+        "id": "08-huntsville-al-engine",
+        "name": "Toyota Motor Manufacturing Alabama - Huntsville AL",
+        "type": "Engine Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "multiStep",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 34.8295,
+          "lng": -86.6375
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.8255,
+            "west": -86.6435,
+            "north": 34.835,
+            "east": -86.632
+          },
+          "truckGate": {
+            "south": 34.8272,
+            "west": -86.6368,
+            "north": 34.8283,
+            "east": -86.6354
+          },
+          "dropYards": [
+            {
+              "south": 34.83,
+              "west": -86.6373,
+              "north": 34.8327,
+              "east": -86.6348
+            },
+            {
+              "south": 34.83,
+              "west": -86.6347,
+              "north": 34.8327,
+              "east": -86.633
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.8285,
+              "west": -86.637,
+              "north": 34.8306,
+              "east": -86.6356
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 250,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 275,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (34.829479, -86.638376, ROOFTOP, ~3.4 km move) landed\ncorrectly on a large industrial plant building north of Huntsville. Satellite\nprobing at z15–z21 confirmed a single large engine-plant building with trailers\nbacked into the east face and large trailer drop yards to the north — fully\nconsistent with the TMMAL engine plant. This is **distinct from the Mazda-Toyota\nJV assembly plant (idx 6)** — they are two separate Toyota facilities in the\nHuntsville area.",
+        "mapsUrl": "https://www.google.com/maps/@34.8295,-86.6375,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Positively confirmed - a controlled truck checkpoint on the truck lane at the SE side of the property (~34.8278, -86.6360): a marked pinch-point lane with crosswalk-style stripes across the truck lane and a checkpoint structure beside it.",
+          "guardShack": "Positively confirmed - a small blue-roofed booth-sized structure (≈1-vehicle footprint) sits directly beside the marked truck-gate lane, with guards' vehicles parked alongside. Classic staffed guard booth.",
+          "drivewayLong": "The gate-to-dock approach runs a long internal road with ample stacking room for 3+ trucks.",
+          "postGateStaging": "Large paved trailer staging/drop yards inside the gate before the dock doors.",
+          "dropYard": "Two large dedicated trailer drop yards on the north side of the plant - a central yard (rows of ~60+ mixed-color trailers) and an east yard (rows of ~50+ trailers), separate from the active dock apron.",
+          "dropArea": "50+ - the combined north drop yards hold well over 100 parked trailers.",
+          "dockDoors": "Dock doors with trailers backed in along the east face of the engine plant building; estimated ~35 doors (25-50 band). Count is approximate.",
+          "fastLaneOpportunity": "Wide truck-gate apron and wide internal roads leave clear room to add an express/bypass lane.",
+          "multipleFacilities": "Single main engine-plant building (plus minor support structures) - not a multi-building campus, so multipleFacilities false.",
+          "urbanRural": "Rural - the plant sits on a greenfield industrial parcel north of Huntsville surrounded by farmland; a large solar farm occupies adjacent land to the east.",
+          "railServed": "No rail spur runs into the property.",
+          "siteAreaAcres": "~275 acres fenced plant footprint (excludes the adjacent solar farm).",
+          "_note": "TMMAL is the Toyota engine plant (V6/V8 engines), distinct from the nearby Mazda-Toyota JV assembly plant (idx 6). The two are separate Huntsville-area Toyota facilities."
+        }
+      },
+      {
+        "id": "09-troy-mo",
+        "name": "Toyota Motor Manufacturing Missouri - Troy MO",
+        "type": "Powertrain Plant (aluminum castings)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 38.9636,
+          "lng": -90.96904
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.9608,
+            "west": -90.9712,
+            "north": 38.9662,
+            "east": -90.9655
+          },
+          "truckGate": {
+            "south": 38.96535,
+            "west": -90.96845,
+            "north": 38.96575,
+            "east": -90.96795
+          },
+          "dropYards": [
+            {
+              "south": 38.9637,
+              "west": -90.9673,
+              "north": 38.9656,
+              "east": -90.9653
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 38.96255,
+              "west": -90.9685,
+              "north": 38.9631,
+              "east": -90.9668
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 73.4,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinates (38.963601, -90.969039, ROOFTOP, ~1.9 km move) landed\ndirectly on a large white-roofed industrial building northeast of Troy, MO.\nSatellite at zoom 16-19 confirms a single dominant ~550,000 sq ft manufacturing\nbuilding with a casting-plant signature (roof exhaust stacks, multiple support\nbuildings, electrical substation, water-treatment structures). Street View at\nthe north entrance shows a **Toyota monument sign reading \"TOYOTA — MOTOR\nMANUFACTURING MISSOURI, PROCESSING\"**, positively identifying the site as\nTMMMO / the former Bodine Aluminum Troy plant. Web research corroborates:\nBodine Aluminum Troy is a 550,000 sq ft plant on ~75 acres, ~1,000+ employees,\nproducing 4/6/8-cylinder aluminum castings for Toyota's North American assembly\noperations (recently $57.1M expansion for hybrid cylinder-head line, 2025).",
+        "mapsUrl": "https://www.google.com/maps/@38.96360,-90.96904,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single controlled entrance off the public road on the north side; Toyota monument sign + paved entrance with lane split.",
+          "guardShack": "Staffed gatehouse confirmed in Street View (2024-09): a small grey 1-2-vehicle-footprint booth set in the median of the entrance drive, lanes splitting around it.",
+          "dropArea": "Large gravel trailer drop yard on the NE side of the property holding ~40-55 trailers parked angled; counted from zoom-19/20 imagery.",
+          "dockDoorCount": "~14 dock doors estimated along the south face of the plant; partly shadowed in imagery — flagged as estimate.",
+          "fastLaneOpportunity": "Wide entrance apron and generous paved width at the gate; physical room to add an express lane.",
+          "multipleFacilities": "Single primary plant building plus ancillary structures (water treatment, electrical substation, smaller support buildings) — one operational facility, not a multi-building campus.",
+          "railServed": "No rail spur visible entering the property."
+        }
+      },
+      {
+        "id": "10-jackson-tn",
+        "name": "Toyota Motor Manufacturing Tennessee - Jackson TN",
+        "type": "Powertrain Plant (aluminum castings)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "dropArea"
+        ],
+        "center": {
+          "lat": 35.598,
+          "lng": -88.941
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.5945,
+            "west": -88.9445,
+            "north": 35.602,
+            "east": -88.938
+          },
+          "truckGate": {
+            "south": 35.597,
+            "west": -88.93995,
+            "north": 35.5974,
+            "east": -88.9394
+          },
+          "dropYards": [
+            {
+              "south": 35.5998,
+              "west": -88.9431,
+              "north": 35.6008,
+              "east": -88.9417
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.5976,
+              "west": -88.9425,
+              "north": 35.599,
+              "east": -88.9412
+            }
+          ],
+          "staging": {
+            "south": 35.5972,
+            "west": -88.9406,
+            "north": 35.5983,
+            "east": -88.9395
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 12,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 121,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode (35.597387, -88.940858) was flagged with a 14 km move,\nso the location was verified carefully. Satellite at zoom 16 over the roster\ncoordinates shows a large industrial plant complex set in farmland/woods\nnortheast of Jackson, TN, with a long access drive running south to a public\nroad, large employee parking, and a multi-section manufacturing building. Web\nresearch confirms the address (301 James Lawrence Road) and that the site is\nToyota Motor Manufacturing Tennessee — the former Bodine Aluminum Jackson\nplant (renamed from Bodine Aluminum to TMMTN in 2020). Street View at the\nentrance shows a Toyota monument sign, positively identifying the site.\nThe roster coordinates land correctly on the plant — the 14 km flag did not\nindicate an error.",
+        "mapsUrl": "https://www.google.com/maps/@35.59800,-88.94100,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single controlled entrance off the public road on the south side; long access drive leads to a gatehouse with a barrier arm visible across the road in zoom-20 imagery.",
+          "guardShack": "Staffed gatehouse confirmed: a white security building set beside the entrance drive with a horizontal barrier-arm gate spanning the truck lane; trucks/trailers staged just inside.",
+          "preGateStaging": "Long paved access drive and apron outside the gatehouse give room for trucks to wait before the checkpoint.",
+          "drivewayLong": "Deep entrance approach off the public road can hold a queue of 3+ trucks.",
+          "dropArea": "Trailer parking / staging is modest for this casting plant — trailers parked along the building aprons and a small NE yard; band 10-25, estimate flagged.",
+          "dockDoorCount": "~12 dock doors estimated along the building's truck-side aprons; partly obscured by canopy structures — flagged as estimate.",
+          "fastLaneOpportunity": "Wide entrance apron and generous paved width at the gatehouse leave room for an express lane.",
+          "multipleFacilities": "One large interconnected casting-plant complex plus a few support structures (utility buildings, materials yard) — single operational facility.",
+          "railServed": "No active rail spur runs into the plant property.",
+          "urbanRural": "Large isolated industrial tract on the edge of Jackson, TN surrounded by farmland and woods — Rural per rubric, but a sizeable town is nearby so connectivity is fine."
+        }
+      },
+      {
+        "id": "11-long-beach-ca",
+        "name": "TABC Inc - Long Beach CA",
+        "type": "Parts/Components Plant (stamping, welding, catalytic converters)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "truckGateCount",
+          "buildingCount",
+          "drivewayShort",
+          "backupSensitive"
+        ],
+        "center": {
+          "lat": 33.8715,
+          "lng": -118.162
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.87,
+            "west": -118.1645,
+            "north": 33.8725,
+            "east": -118.1603
+          },
+          "truckGate": {
+            "south": 33.8725,
+            "west": -118.16095,
+            "north": 33.8729,
+            "east": -118.1603
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 33.871,
+              "west": -118.1628,
+              "north": 33.872,
+              "east": -118.1619
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 10,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 2,
+          "buildingCount": 5,
+          "siteAreaAcres": 26.7,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode (33.872001, -118.162735, GEOMETRIC_CENTER) lands in a dense\nindustrial cluster in north Long Beach. Web research confirms TABC at 6375 N\nParamount Blvd — a 430,700 sq ft manufacturing facility on ~30 acres, the\nfirst Toyota plant in North America (established 1972), supplying Tacoma parts\nand past-model service parts. Street View along Paramount Blvd positively\nidentifies the building: a long industrial building with red/cream banding and\na tall stack, fronting Paramount behind a hedge and steel security fence, with\nthe address numerals visible on the wall. The TABC plant is the large\nwhite-roofed multi-section building on the west side of Paramount Blvd.",
+        "mapsUrl": "https://www.google.com/maps/@33.87150,-118.16200,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Fully fenced urban plant; controlled vehicle gates in the steel perimeter fence off N Paramount Blvd confirmed in Street View (2022/2025). Truck access is gated.",
+          "guardShack": "No distinct freestanding guard-booth structure beside a truck lane was visible in imagery. A modern office building sits at the north entrance — check-in is likely handled at/near the office rather than a standalone booth. Flagged uncertain.",
+          "remoteGs": "Set true (truck gate present, no visible standalone guard shack) — but this is a medium-confidence inference; security may be office-based or staffed in a way not resolvable from overhead/Street View.",
+          "backupSensitive": "Tight urban site directly on N Paramount Blvd, a busy arterial; little stacking room outside the gates so a truck queue could spill toward the road.",
+          "dockDoors": "Old (1972) tightly-built urban manufacturing plant; building covers most of the 30-acre parcel. Dock doors are tucked along interior building faces — ~10 estimated, band 0-10.",
+          "dropArea": "Outdoor space is used mainly for stacked metal/parts racks and equipment storage rather than a trailer drop yard; very few free-standing trailers visible.",
+          "truckGateCount": "At least 2 vehicle gates in the perimeter fence (north entrance off Paramount plus additional access) — count is approximate.",
+          "railServed": "A rail line runs along the far west of the industrial district but does not clearly spur into the TABC property; treated as not rail-served.",
+          "multipleFacilities": "One large multi-section manufacturing complex (stamping/welding/cat-converter) plus support structures and a separate office building — single operational facility, not a multi-building campus.",
+          "siteAreaAcres": "Web sources cite ~30 acres; parcel boundaries in the dense industrial district are hard to delineate from imagery — perimeter box estimates ~27 acres."
+        }
+      },
+      {
+        "id": "12-hebron-ky",
+        "name": "North American Parts Center Kentucky - Hebron KY",
+        "type": "Parts Procurement & Distribution Hub",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 39.0533,
+          "lng": -84.709
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.05,
+            "west": -84.7115,
+            "north": 39.056,
+            "east": -84.705
+          },
+          "truckGate": {
+            "south": 39.0532,
+            "west": -84.7053,
+            "north": 39.054,
+            "east": -84.7046
+          },
+          "dropYards": [
+            {
+              "south": 39.0506,
+              "west": -84.7108,
+              "north": 39.0528,
+              "east": -84.7078
+            },
+            {
+              "south": 39.0518,
+              "west": -84.7078,
+              "north": 39.0543,
+              "east": -84.706
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.0513,
+              "west": -84.7101,
+              "north": 39.0545,
+              "east": -84.7083
+            },
+            {
+              "south": 39.0523,
+              "west": -84.7072,
+              "north": 39.0548,
+              "east": -84.7062
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 240,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 92.8,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode (39.053725, -84.707684, ROOFTOP) lands directly on a very\nlarge distribution warehouse in the Hebron, KY industrial corridor near CVG\nairport. Web research confirms NAPCK at 2450 Wright Blvd, Hebron — Toyota's\nNorth American Parts Center Kentucky, a critical logistics hub that handles\nthe flow of 117,000+ service parts and accessories between assembly plants /\nsuppliers and 12 US Parts Distribution Centers. The building's scale (a huge\nsingle-footprint warehouse with extensive dock banks and trailer yards) is\nfully consistent with a national parts hub.",
+        "mapsUrl": "https://www.google.com/maps/@39.05330,-84.70900,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Large fenced Toyota parts-distribution hub set back from the public road (Aero Pkwy); a controlled access road funnels traffic onto the property. Truck access is gated.",
+          "guardShack": "Set true on the strong prior that NAPCK — a critical national Toyota parts hub feeding 12 US PDCs — runs a staffed truck-gate checkpoint. A standalone booth could not be positively isolated in imagery (truck-side access is tree-screened from the public road); flagged uncertain.",
+          "remoteGs": "False on the same logic — but the guard-shack vs. remote-check-in split is genuinely uncertain here; flagged for human review.",
+          "dockDoors": "Very large DC — dozens of dock doors with trailers backed in along the SW long face and the SE face; band 50+. Exact count obscured by trailers/canopies — estimate flagged.",
+          "dropArea": "Extensive trailer drop yards: a large cul-de-sac trailer-storage lot off the SW and additional rows along the SE; many dozens of parked trailers. Band 50+.",
+          "shipRcvSeparate": "Docks appear on two distinct building faces (SW and SE) suggesting separate inbound/outbound dock clusters — set true at medium confidence, flagged.",
+          "fastLaneOpportunity": "Wide internal truck roads and a long approach drive give physical room to add an express/bypass lane at the gate.",
+          "railServed": "No rail spur visible running into the property.",
+          "urbanRural": "Industrial-park setting near the CVG airport / Hebron, KY — edge-of-town industrial amid open land and other big-box DCs; classified Rural per rubric. CVG corridor has good connectivity, so connectivityIssue = false.",
+          "siteAreaAcres": "Perimeter box ~93 acres capturing the warehouse plus its surrounding drop yards and parking."
+        }
+      },
+      {
+        "id": "13-long-beach-vdc",
+        "name": "Toyota Logistics Services Vehicle Distribution Center - Long Beach CA",
+        "type": "Vehicle Distribution Center (port processing)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "dockDoors",
+          "entryLanes",
+          "exitLanes",
+          "truckGateCount",
+          "scale"
+        ],
+        "center": {
+          "lat": 33.778,
+          "lng": -118.2185
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.7733,
+            "west": -118.2233,
+            "north": 33.7823,
+            "east": -118.2147
+          },
+          "truckGate": {
+            "south": 33.7801,
+            "west": -118.2195,
+            "north": 33.7809,
+            "east": -118.2185
+          },
+          "dropYards": [
+            {
+              "south": 33.777,
+              "west": -118.2233,
+              "north": 33.782,
+              "east": -118.2185
+            },
+            {
+              "south": 33.774,
+              "west": -118.22,
+              "north": 33.777,
+              "east": -118.2165
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.7748,
+              "west": -118.218,
+              "north": 33.7762,
+              "east": -118.2165
+            }
+          ],
+          "staging": {
+            "south": 33.7762,
+            "west": -118.218,
+            "north": 33.7778,
+            "east": -118.2162
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 18,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 62,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster supplied a generic \"Port of Long Beach, Pier B\" point (33.7798, -118.2174).\nWeb research resolved the precise TLS facility to 785 Edison Ave — confirmed\nvia Yelp, D&B, and the Oltmans/Lionakis/DCI construction-firm project pages for\nthe \"Toyota Logistics Services Vehicle Processing & Distribution Center (VDC).\"\nSatellite at z15-z20 confirms a large fenced complex of striped vehicle-storage\nlots packed with thousands of new cars, a cluster of processing/warehouse\nbuildings on the east side, fuel/car-wash structures, and multiple rail spurs\nalong the NE edge — exactly matching the described 155,000 sf VDC that processes\n~180,000-200,000 imported vehicles per year for western North America.",
+        "mapsUrl": "https://www.google.com/maps/@33.778,-118.2185,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facilityType": "Port of Long Beach vehicle processing & distribution center (TLS, ~180,000-200,000 vehicles/yr). Not a conventional dock warehouse — vehicles arrive by ro/ro ship at the Pier B wharf and by unit train on the rail spurs along the NE edge, are processed (accessory install, car wash, fuel) at the 155,000 sf processing building, and leave on auto-hauler trucks.",
+          "truckGate": "Whole property is inside a port-secure fenced perimeter (chain-link fence visible in Street View on every public-road edge; z20 sat shows a continuous fence line with marked lane crossings). Port of Long Beach maritime-security site (TWIC required, USCG oversight, random checks per construction-phase reporting) — controlled gated entry is certain.",
+          "guardShack": "Inferred true — TWIC-controlled maritime facilities have staffed gatehouses for vehicle ID/credential checks. A small gatehouse structure is consistent with the office cluster at the NW corner near the rail crossing, but a discrete guard booth could not be isolated in imagery; medium confidence.",
+          "dockDoors": "The processing building has a bank of dock-style doors along its NE face where auto-haulers and parts trailers load (a row of ~12-18 trailers is staged along that face in z18 imagery). Banded 10-25; this is a vehicle-processing site so 'dock doors' are atypical.",
+          "dropArea": "Vast — the entire site is effectively a vehicle marshalling yard; thousands of finished vehicles staged in striped lots. 'dropArea' as trailer stalls is less applicable, but auto-hauler/trailer drop capacity is large; banded 50+.",
+          "railServed": "Confirmed — multiple rail spurs run into the NE edge of the property; Street View shows tank/covered-hopper rail cars on the in-site track. TLS uses unit trains to distribute vehicles inland.",
+          "scale": "No truck scale identified; vehicle-processing ports typically do not weigh auto-haulers. Left false, flagged uncertain.",
+          "fastLaneOpportunity": "Wide paved aprons and multi-lane gate crossings at the rail-side entrance give ample room for an express/bypass lane.",
+          "siteAreaAcres": "Perimeter box ~62 acres covering the contiguous TLS fenced lots and processing buildings between Pico Ave / the rail corridor and the Pier B wharf.",
+          "truckGateCount": "At least one main rail-side gate plus a secondary lot access; estimated 2, flagged uncertain."
+        }
+      },
+      {
+        "id": "14-portland-vdc",
+        "name": "Toyota Logistics Services Vehicle Distribution Center - Portland OR",
+        "type": "Vehicle Distribution Center (port processing)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "dockDoors",
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 45.6365,
+          "lng": -122.754
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 45.6325,
+            "west": -122.7565,
+            "north": 45.6405,
+            "east": -122.749
+          },
+          "truckGate": {
+            "south": 45.6366,
+            "west": -122.7556,
+            "north": 45.6376,
+            "east": -122.7543
+          },
+          "dropYards": [
+            {
+              "south": 45.637,
+              "west": -122.7555,
+              "north": 45.6405,
+              "east": -122.7505
+            },
+            {
+              "south": 45.6355,
+              "west": -122.7545,
+              "north": 45.6372,
+              "east": -122.7495
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 45.636,
+              "west": -122.755,
+              "north": 45.6372,
+              "east": -122.753
+            }
+          ],
+          "staging": {
+            "south": 45.6362,
+            "west": -122.7556,
+            "north": 45.6372,
+            "east": -122.7543
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 48,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "0-10",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster supplied a Terminal 4 point (45.6373, -122.7550). Web research resolved the\nprecise TLS lease to 11020 N Lombard St — the ~101,000 sf VDC building Toyota\nLogistics Services operates at Port of Portland Terminal 4 (confirmed via Yelp,\nD&B, BBB, and Port of Portland Terminal 4 pages). Toyota has operated here since\n1971, handling more than 10,000 vehicles per month. Satellite at z15-z21 confirms\na large white-roofed processing building, striped vehicle-marshalling lots, rail\nrunning into the yard, and a fenced perimeter — matching the described VDC.",
+        "mapsUrl": "https://www.google.com/maps/@45.6365,-122.754,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facilityType": "Port of Portland Terminal 4 vehicle distribution center operated by Toyota Logistics Services. ~101,000 sf VDC building; Toyota has handled vehicles here since 1971, >10,000 vehicles/month. Vehicles arrive by ro/ro ship at the Terminal 4 wharf and by auto-rack rail and leave on auto-hauler trucks.",
+          "truckGate": "Facility is enclosed within the Port of Portland Terminal 4 secure area with chain-link perimeter and internal fencing visible in z19-z21 satellite. Maritime port facility — controlled gated entry. The access road off N Lombard St runs into the property as a wide multi-lane apron with stop markings; a small standalone gatehouse-type building sits at the NW corner of the operational yard.",
+          "guardShack": "Inferred true. A small standalone building with its own short-side footprint sits beside the internal yard entrance at the NW; consistent with a gatehouse. Port facilities are credentialed/staffed at the gate. Could not unambiguously confirm a discrete booth at the road edge; medium confidence.",
+          "remoteGs": "False — guard shack inferred present.",
+          "railServed": "Confirmed — auto-rack rail tracks run into and through the yard; rail cars / covered rail-side structures visible in z20 imagery. TLS uses rail for inland vehicle distribution from Terminal 4.",
+          "dockDoors": "VDC building is a vehicle-processing building, not a classic cross-dock. A small number of dock/grade doors for parts and accessory work; banded 0-10. Atypical metric for this facility type.",
+          "dropArea": "Large vehicle marshalling lots fill the N and E of the site; striped lots holding finished vehicles. Auto-hauler / trailer drop capacity moderate; banded 25-50.",
+          "drivewayLong": "Entrance apron off N Lombard is deep and multi-lane — room for a 3+ truck queue.",
+          "fastLaneOpportunity": "Wide entrance apron with unused paved width gives room for an express/bypass lane.",
+          "backupSensitive": "Entrance apron is set well back from N Lombard with a deep throat; a queue would not immediately spill onto the public road. False.",
+          "scale": "No truck scale identified. Left false, flagged uncertain.",
+          "siteAreaAcres": "Perimeter box ~48 acres covering the TLS-operated VDC building and vehicle lots within Terminal 4; the broader Terminal 4 also hosts container/other operations not part of the Toyota lease.",
+          "urbanRural": "Within the Portland metro industrial waterfront (Rivergate / Terminal 4); classified Urban."
+        }
+      },
+      {
+        "id": "15-newark-vdc",
+        "name": "Toyota Logistics Services Vehicle Distribution Center - Newark NJ",
+        "type": "Vehicle Distribution Center (port processing)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "dockDoors",
+          "entryLanes",
+          "exitLanes",
+          "truckGateCount",
+          "scale"
+        ],
+        "center": {
+          "lat": 40.694,
+          "lng": -74.136
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.6905,
+            "west": -74.1395,
+            "north": 40.6985,
+            "east": -74.132
+          },
+          "truckGate": {
+            "south": 40.6923,
+            "west": -74.1352,
+            "north": 40.6933,
+            "east": -74.134
+          },
+          "dropYards": [
+            {
+              "south": 40.692,
+              "west": -74.137,
+              "north": 40.6985,
+              "east": -74.132
+            },
+            {
+              "south": 40.6905,
+              "west": -74.139,
+              "north": 40.6935,
+              "east": -74.1355
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.6938,
+              "west": -74.137,
+              "north": 40.6952,
+              "east": -74.1352
+            }
+          ],
+          "staging": {
+            "south": 40.6923,
+            "west": -74.1355,
+            "north": 40.6938,
+            "east": -74.134
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 12,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 2,
+          "buildingCount": 5,
+          "siteAreaAcres": 58,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster supplied a generic Port Newark point (40.69001, -74.151753) which falls in\nthe container terminal. Web research resolved the precise TLS facility to\nBuilding 390, E Port St — confirmed via Yelp (\"Toyota Motor Sales Boston\nRegion\"), CMac, Macrae's Blue Book, Kompass and a Port Authority portfolio page\nthat names the Toyota Motor Logistics Center as one of three vehicle\nprocessors at the Port of NY/NJ (with FAPS and BMW Port Jersey). Satellite at\nz16-z20 along E Port St shows a large auto-processing complex — a sawtooth-roof\nprocessing building, an adjacent flat-roof building, extensive vehicle\nmarshalling lots, a ro/ro wharf, and a dense auto-hauler/tractor yard — matching\nthe described TLS VDC.",
+        "mapsUrl": "https://www.google.com/maps/@40.694,-74.136,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facilityType": "Port Newark auto-processing terminal operated by Toyota Logistics Services (Toyota Motor Logistics Center), Building 390 E Port St. One of three vehicle processors at the Port of New York/New Jersey (alongside FAPS and BMW Port Jersey). Vehicles arrive by ro/ro vessel at the wharf, are processed (accessory install, recon, PDI) and distributed by auto-hauler truck and rail to the eastern US.",
+          "truckGate": "Port Newark is a TWIC-controlled marine terminal — controlled gated entry is certain. The facility is fenced (chain-link visible in Street View along E Port St) with vehicle lots and processing buildings inside. E Port St frontage gives a controlled entrance to the processing complex.",
+          "guardShack": "Inferred true. A small gatehouse-type structure sits at the SE corner near where E Port St meets the facility. TWIC marine terminals are staffed at the gate. A discrete booth could not be isolated frame-by-frame; medium confidence.",
+          "remoteGs": "False — guard shack inferred present.",
+          "railServed": "Confirmed — rail tracks run along E Port St adjacent to the facility (visible in Street View) and Port Newark's auto terminals are served by on-dock rail. TLS distributes vehicles inland by rail.",
+          "dockDoors": "The processing complex includes a large sawtooth-roof building and an adjacent flat-roof building with dock-style doors for parts/accessory and auto-hauler loading; banded 10-25. Atypical metric for a vehicle-processing site.",
+          "dropArea": "Vast — the facility is dominated by striped vehicle marshalling lots holding thousands of finished vehicles, plus a dense yard of auto-haulers/tractors and trailers (~45 visible in z20 imagery); banded 50+.",
+          "trailersVisible": "z20 imagery shows a packed yard of tractors, trailers and auto-hauler units — estimated ~45 visible; high truck activity.",
+          "scale": "No truck scale identified; left false, flagged uncertain.",
+          "fastLaneOpportunity": "Wide paved aprons and multiple yard lanes give room for an express/bypass lane.",
+          "truckGateCount": "At least one main E Port St gate; a secondary access likely — estimated 2, flagged uncertain.",
+          "siteAreaAcres": "Perimeter box ~58 acres covering the TLS processing buildings and contiguous vehicle lots fronting E Port St between the Port Newark Channel wharf and the rail corridor.",
+          "urbanRural": "Within the Port Newark/Elizabeth marine-terminal complex in the New York metro; classified Urban."
+        }
+      },
+      {
+        "id": "16-ontario-pdc",
+        "name": "Toyota Parts Distribution Center - Ontario CA",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "truckGateCount",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 34.033,
+          "lng": -117.5818
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.0305,
+            "west": -117.5852,
+            "north": 34.0347,
+            "east": -117.5768
+          },
+          "truckGate": {
+            "south": 34.0309,
+            "west": -117.58,
+            "north": 34.0316,
+            "east": -117.579
+          },
+          "dropYards": [
+            {
+              "south": 34.0306,
+              "west": -117.5842,
+              "north": 34.032,
+              "east": -117.578
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.0318,
+              "west": -117.5845,
+              "north": 34.0325,
+              "east": -117.5778
+            }
+          ],
+          "staging": {
+            "south": 34.0309,
+            "west": -117.58,
+            "north": 34.0318,
+            "east": -117.5785
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 42,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster supplied only a city-level Ontario point (34.034814, -117.584802,\n\"APPROXIMATE\"). Web research resolved the facility to **1425 Toyota Way, Ontario\nCA 91761** — the Toyota North American Parts Center, Toyota's largest US parts\ndistribution facility (confirmed via Yellow Pages, LoopNet, D&B/Panjiva, an\nITA Foreign-Trade-Zone site listing, and the Aramark cafe page for \"NAPCC\").\nLoopNet records the building as ~817,493 SF Class A industrial (built 1996).\n\nSatellite at z15-z20 resolves the site to the large white-roof tilt-up warehouse\nrunning E-W between Toyota Way (north frontage, with employee parking) and\nthe CA-60 freeway (south). The building's single ~800K sf mass, modern\nconstruction, the Toyota Way street name, and the geocoded point all point to\nthis footprint as the NAPDC. (One caveat: the precise parcel boundary of \"1425\"",
+        "mapsUrl": "https://www.google.com/maps/@34.033,-117.5818,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facilityType": "Toyota North American Parts Center (NAPDC), Toyota's largest US parts distribution facility — ~817,000 sf Class A warehouse at 1425 Toyota Way, Ontario CA (Inland Empire). Stocks 185,000-260,000+ unique service parts; ships ~65,000 order lines/day; an FTZ site.",
+          "buildingIdentification": "Resolved to the large white-roof tilt-up warehouse running E-W between Toyota Way (north frontage / employee parking) and the CA-60 freeway (south). The building's scale (~800K sf single mass), modern construction, and the Toyota Way street name match the NAPDC. The roster's APPROXIMATE city-level point sits at this building. Cannot 100% confirm this exact footprint is parcel 1425 vs an immediate neighbor — flagged.",
+          "truckGate": "The south truck yard / dock apron and drop yard are fenced off from the CA-60 frontage road. Truck access is via a controlled gate at the SE end of the property. A large modern OEM parts DC of this profile operates a controlled truck gate.",
+          "guardShack": "No discrete guard booth was isolated in imagery. Modern Inland Empire DCs of this type commonly run a controlled gate with kiosk / badge / app check-in rather than a staffed booth — classified guardShack false / remoteGs true, but flagged uncertain (a small booth could exist at the SE gate).",
+          "remoteGs": "True (inferred) — gate present, no confirmed staffed booth.",
+          "dockDoors": "The building's full south face is one continuous dock bank — a regular rhythm of ~70 dock doors with trailers backed in across most of them. Banded 50+.",
+          "dropArea": "A large fenced drop yard along the south side parallel to the dock apron holds ~70 parked trailers in striped rows; capacity ~110. Banded 50+.",
+          "postGateStaging": "Deep paved apron between the dock face and the drop yard gives interior queue/staging room (drivewayLong true).",
+          "shipRcvSeparate": "All dock activity is on the single south face — shipping and receiving are not on physically separate building faces. False.",
+          "scale": "No truck scale identified. False.",
+          "railServed": "No rail spur into the property — the building fronts the CA-60 freeway, not a rail line. False.",
+          "fastLaneOpportunity": "Wide paved truck apron and drop-yard lanes give ample room for an express/bypass lane at the gate.",
+          "siteAreaAcres": "Perimeter box ~42 acres for the building + south truck yard / drop yard; flagged approximate."
+        }
+      },
+      {
+        "id": "17-mansfield-pdc",
+        "name": "Toyota Parts Distribution Center - Mansfield MA",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "truckGate",
+          "railServed"
+        ],
+        "center": {
+          "lat": 42.01685,
+          "lng": -71.23445
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.0153,
+            "west": -71.2368,
+            "north": 42.0183,
+            "east": -71.233
+          },
+          "truckGate": {
+            "south": 42.0168,
+            "west": -71.2342,
+            "north": 42.0174,
+            "east": -71.2334
+          },
+          "dropYards": [
+            {
+              "south": 42.0171,
+              "west": -71.2366,
+              "north": 42.018,
+              "east": -71.2352
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 42.0172,
+              "west": -71.2362,
+              "north": 42.0179,
+              "east": -71.2342
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 22,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 16,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster supplied a confirmed address (440 Forbes Blvd) and a GEOMETRIC_CENTER\npoint (42.016967, -71.234706). Web research (Yelp \"Toyota Parts Warehouse\",\nMacrae's Blue Book, Manta, MerchantCircle) confirms a Toyota Parts Distribution\nCenter / regional office at this address serving Toyota's New England dealer\nnetwork. Satellite at z17-z20 resolves the facility to the white-roof warehouse\nin the Forbes Blvd industrial park: a dock bank with trailers backed in, a drop\nyard with parked trailers, and employee parking. Street View at the entrance\nshows monument signage, an American flag, and the building with trailers staged\nalongside — confirming the identification. High confidence.",
+        "mapsUrl": "https://www.google.com/maps/@42.01685,-71.23445,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facilityType": "Toyota Parts Distribution Center (Boston-region PDC), 440 Forbes Blvd, Mansfield MA — a regional service-parts warehouse for Toyota's New England dealer network, in the Forbes Blvd / Cabot industrial park.",
+          "buildingIdentification": "Resolved to the white-roof warehouse at ~42.0168, -71.2344. Street View at the Forbes Blvd entrance shows monument signage, an American flag and a building with trailers staged alongside; satellite confirms the dock bank, drop yard and employee parking. The roster's GEOMETRIC_CENTER point sits on this building. High confidence.",
+          "truckGate": "The entrance off Forbes Blvd is an open driveway — no barrier arm, sliding gate or guard booth was visible at the road in 2025-06 Street View or in z20 satellite. The truck driveway runs straight into the dock yard. Classified truckGate false (open site). A small structure beside the employee-parking lot is an ancillary building, not a gate booth. Flagged uncertain — perimeter security at the dock yard could not be fully ruled out.",
+          "guardShack": "False — no gate, so no guard booth.",
+          "remoteGs": "False — no truck gate.",
+          "dockDoors": "The building's NW face is a single dock bank — ~18 dock doors with trailers (green/orange/white) backed into most. Banded 10-25.",
+          "dropArea": "A drop yard at the NW corner holds ~20+ parked trailers in rows; banded 10-25; dropYard true.",
+          "postGateStaging": "Deep paved truck apron between the dock face and the drop yard gives interior queue room (drivewayLong true).",
+          "shipRcvSeparate": "All dock activity is on the single NW face — shipping and receiving not on separate building faces. False.",
+          "railServed": "A rail line runs along the NW edge and crosses Forbes Blvd near the facility, but it serves the adjacent corridor / neighboring buildings — no spur clearly enters the Toyota parcel itself. Classified false, flagged uncertain.",
+          "urbanRural": "Suburban Mansfield MA industrial park — edge-of-town setting with woods around the parcel; per the rubric's tie-break toward Rural for small-town industrial, classified Rural.",
+          "scale": "No truck scale identified. False.",
+          "siteAreaAcres": "Perimeter box ~16 acres for the building + dock yard + drop yard + employee parking."
+        }
+      }
+    ]
+  }
+}

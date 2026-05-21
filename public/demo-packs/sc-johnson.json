@@ -1,0 +1,1137 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:48:08.463Z",
+  "account": {
+    "slug": "sc-johnson",
+    "displayName": "SC Johnson",
+    "archetype": "cpg",
+    "siteCount": 10,
+    "coverageNote": {
+      "auditedCount": 10,
+      "estimatedFootprint": null,
+      "droppedStubCount": 0,
+      "capHit": false,
+      "note": "Audited all 10 identifiable facilities."
+    }
+  },
+  "research": {
+    "facility_count": 10,
+    "audited_facilities": 10,
+    "source": "yard-audit",
+    "confidence": "verified",
+    "caveats": [
+      "Sturtevant Regional Distribution Center - Sturtevant WI: audit note mentions 'closed'"
+    ]
+  },
+  "network": {
+    "bbox": [
+      -121.7285,
+      32.9669,
+      -77.2408,
+      43.6256
+    ],
+    "archetypeMix": {
+      "#6": 1,
+      "#9": 4,
+      "#3": 5
+    },
+    "totals": {
+      "dockDoors": 630,
+      "trailerCapacity": 1178,
+      "gates": 14,
+      "railServed": 3,
+      "acres": 808
+    },
+    "sites": [
+      {
+        "id": "01-waxdale-mt-pleasant",
+        "name": "Waxdale Plant - Mt. Pleasant WI",
+        "type": "Manufacturing Plant (Aerosol / Liquid / Gel)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "scale"
+        ],
+        "center": {
+          "lat": 42.7075,
+          "lng": -87.885
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.7018,
+            "west": -87.8905,
+            "north": 42.7128,
+            "east": -87.881
+          },
+          "truckGate": {
+            "south": 42.7116,
+            "west": -87.8866,
+            "north": 42.713,
+            "east": -87.8852
+          },
+          "dropYards": [
+            {
+              "south": 42.7098,
+              "west": -87.8878,
+              "north": 42.7115,
+              "east": -87.8856
+            },
+            {
+              "south": 42.707,
+              "west": -87.8878,
+              "north": 42.7088,
+              "east": -87.8856
+            },
+            {
+              "south": 42.7056,
+              "west": -87.8856,
+              "north": 42.709,
+              "east": -87.8842
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 42.7082,
+              "west": -87.8856,
+              "north": 42.7092,
+              "east": -87.8838
+            },
+            {
+              "south": 42.7056,
+              "west": -87.8842,
+              "north": 42.7068,
+              "east": -87.8825
+            }
+          ],
+          "staging": {
+            "south": 42.7095,
+            "west": -87.8866,
+            "north": 42.7116,
+            "east": -87.8852
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 9,
+          "siteAreaAcres": 218,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster's supplied coordinate (42.712313, -87.885932) lands in open green\nspace at the north edge of the property — it is the geocode of the street\naddress, not the plant. Probing satellite outward (z14-z21) and corroborating\nwith the SC Johnson Waxdale Fact Sheet (the world's largest/fastest aerosol\nplant, 2.2M sq ft, opened 1955) confirmed the facility: the very large\nmulti-building industrial campus immediately south of the supplied point,\nbounded by a private entry boulevard on the north, 16th St on the south, a\nwooded/wetland buffer on the west, and open land on the east. SC Johnson\nsignage (\"SC Johnson — A Family Center\") and SC Johnson's known on-site wind\nturbines are both visible in Street View, confirming ownership. Locked center\nat 42.70750, -87.88500 (centroid of the developed footprint).",
+        "mapsUrl": "https://www.google.com/maps/@42.7075,-87.885,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Engineered multi-lane controlled entry at the head of the private north boulevard (~42.7121, -87.8860); white directional lane arrows split inbound/outbound around a central guard building.",
+          "guardShack": "Substantial central guardhouse with hipped roof, ~3-4 vehicle footprint, set in the median of the entry boulevard with traffic lanes routed around both sides. Larger than a typical booth but functions as the manned gate house.",
+          "fastLaneOpportunity": "Wide gate apron with multiple paved lanes and a deep boulevard approach; ample paved width to add an express/bypass lane.",
+          "drivewayLong": "Private boulevard from public road to gate and on to the docks is several hundred metres; easily holds 3+ trucks queued.",
+          "dropArea": "Multiple large trailer-storage lots in the north and mid-west of the campus, rows of nose-out parked trailers (white/blue/orange fleet) plus dock-adjacent banks; 50+ easily.",
+          "dockDoors": "2.2M sq ft, 15 production lines; multiple dock banks visible on separate building faces (NW bank and S/SE bank). Door count is an overhead-imagery estimate, banded 50+.",
+          "shipRcvSeparate": "Distinct dock banks on different building faces (north-west building face vs south/south-east face) consistent with separated shipping and receiving.",
+          "multipleFacilities": "Campus of ~9 distinct large buildings (manufacturing halls, warehouse, components plant, tank farm/dome) on one fenced property.",
+          "railServed": "Active rail spur curves into the property from the south-west with multiple sidings holding boxcars / covered hoppers.",
+          "scale": "No truck scale positively identified in the gate path; left false but listed uncertain — a scale could exist within the unmapped interior.",
+          "urbanRural": "Edge-of-town industrial setting in Mt. Pleasant; large natural buffer (woods/wetland) on the west and open land around; broader setting judged Rural per rubric.",
+          "siteAreaAcres": "Perimeter box ~1.22 km N-S x 0.78 km E-W of fenced developed property; ~218 acres is an estimate of the active fenced footprint (SC Johnson land holding here is larger)."
+        }
+      },
+      {
+        "id": "02-bay-city-ziploc",
+        "name": "Bay City Plant (Ziploc) - Bay City MI",
+        "type": "Manufacturing Plant (Home Storage - Ziploc)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "truckGateCount",
+          "scale",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 43.6205,
+          "lng": -83.8705
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 43.6156,
+            "west": -83.8738,
+            "north": 43.6256,
+            "east": -83.8645
+          },
+          "truckGate": {
+            "south": 43.623,
+            "west": -83.8734,
+            "north": 43.6239,
+            "east": -83.8723
+          },
+          "dropYards": [
+            {
+              "south": 43.6236,
+              "west": -83.8734,
+              "north": 43.6254,
+              "east": -83.8695
+            },
+            {
+              "south": 43.6186,
+              "west": -83.8712,
+              "north": 43.62,
+              "east": -83.8685
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 43.6224,
+              "west": -83.8734,
+              "north": 43.6233,
+              "east": -83.8665
+            },
+            {
+              "south": 43.6194,
+              "west": -83.8732,
+              "north": 43.6203,
+              "east": -83.872
+            }
+          ],
+          "staging": {
+            "south": 43.62,
+            "west": -83.8732,
+            "north": 43.6216,
+            "east": -83.8717
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 2,
+          "buildingCount": 8,
+          "siteAreaAcres": 400,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate (43.619016, -83.872098) was a ROOFTOP geocode of 405\nMarquette Dr and landed on the correct campus. Satellite probing (z14-z20)\nplus the SC Johnson Bay City careers page confirmed the facility: a large,\nmostly-fenced industrial campus on the east side of Bay City between the\nresidential grid and the Saginaw River. SC Johnson describes the site as\n\"more than 400 acres\" with six production plants and ~400 team members\nproducing billions of Ziploc bags per year. Locked center at the developed\nbuilding cluster, 43.62050, -83.87050.",
+        "mapsUrl": "https://www.google.com/maps/@43.6205,-83.8705,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Large perimeter-fenced campus (chain-link fencing confirmed in Street View along the property edge). Buildings sit behind the fence with controlled access drives; classified as a gated site.",
+          "guardShack": "No manned guard booth positively identified at any entrance from available Street View; entrances appear to be fenced drives without a visible booth. Left false but flagged uncertain.",
+          "remoteGs": "Set true on the basis that a gated/fenced site with no visible guard booth implies kiosk / call-box / remote check-in. Medium confidence.",
+          "drivewayLong": "Internal campus roads run several hundred metres from public road to dock faces; ample queue depth.",
+          "entryExitSeparate": "Sprawling campus with multiple building access drives; inbound and outbound flows are not pinched through one common gate. Approximate call.",
+          "fastLaneOpportunity": "Large empty paved overflow/staging lots beside the warehouse leave abundant room for express-lane buildout.",
+          "dockDoors": "Multiple dock banks across the warehouse and production buildings; trailers backed in observed on at least three building faces. ~45 doors estimated, banded 25-50.",
+          "dropArea": "Fan-pattern rows of parked trailers near the north warehouse and rows near the core production buildings; clear drop-yard activity, banded 25-50.",
+          "shipRcvSeparate": "Dock activity on physically separate buildings (north warehouse vs core production cluster).",
+          "multipleFacilities": "SC Johnson Bay City is a campus of ~6 production buildings plus warehouse, office and R&D structures on one ~400-acre property.",
+          "railServed": "Rail lines run along the east edge of the property with rail-served lots adjacent; the campus footprint borders active rail. Rail service likely; flagged medium.",
+          "scale": "No truck scale identified; left false.",
+          "siteAreaAcres": "SC Johnson states the Bay City site is more than 400 acres; much of it is undeveloped land. Perimeter box approximates the property; ~400 acres per company figure.",
+          "urbanRural": "Edge-of-town Bay City setting with adjacent residential and farmland/open land; judged Rural per rubric (small-city industrial)."
+        }
+      },
+      {
+        "id": "03-method-pullman-chicago",
+        "name": "South Side Soapbox Plant (method / Ecover) - Chicago IL",
+        "type": "Manufacturing Plant + Distribution (method / Ecover)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "railServed"
+        ],
+        "center": {
+          "lat": 41.697,
+          "lng": -87.6016
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.6954,
+            "west": -87.6032,
+            "north": 41.6987,
+            "east": -87.5998
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 41.6977,
+              "west": -87.6024,
+              "north": 41.6987,
+              "east": -87.6
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.6978,
+              "west": -87.6026,
+              "north": 41.6985,
+              "east": -87.6008
+            }
+          ],
+          "staging": {
+            "south": 41.6978,
+            "west": -87.6011,
+            "north": 41.6985,
+            "east": -87.5999
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 24,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 22,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate (41.696681, -87.601644) landed directly on the\ndistinctive method factory. Satellite probing and web research (Chicago\nNeighborhood Development Awards, William McDonough + Partners, City of\nChicago) positively confirmed it: the \"South Side Soapbox\", method's first\nU.S. manufacturing plant — a 150,000 sq ft LEED Platinum (first in the\ncleaners industry, 85 points) soap factory in the historic Pullman district.\nTwo unmistakable signatures clinch the ID: a 230-ft on-site wind turbine\n(visible in z20 imagery north of the building) and the Gotham Greens\n75,000 sq ft rooftop greenhouse (the glass sawtooth roof section). Locked\ncenter at 41.69700, -87.60160.",
+        "mapsUrl": "https://www.google.com/maps/@41.697,-87.6016,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No barrier arm, sliding gate or checkpoint pinch-point observed. The truck driveway runs open from the public road into the dock yard; the building fronts open paved drives with no controlled entry. truckGate false.",
+          "guardShack": "No guard booth anywhere on the site. False.",
+          "remoteGs": "False — there is no gate, so no remote check-in implied.",
+          "postGateStaging": "Large paved truck yard north-east of the building provides interior holding space before the docks.",
+          "drivewayLong": "Open NE truck yard is deep — easily holds 3+ trucks staged.",
+          "fastLaneOpportunity": "Abundant unused paved width in the NE truck yard; ample room for any lane configuration.",
+          "dockDoors": "Truck docks on the NE building face — a modest recessed dock bank with trailers backed in. ~16 doors estimated, banded 10-25.",
+          "dropArea": "Rows of parked trailers in the NE truck yard (some shared with adjacent Pullman-development buildings); banded 10-25 for the method-attributable portion.",
+          "shipRcvSeparate": "Single dock bank on one building face; shipping and receiving not physically separated.",
+          "multipleFacilities": "One building (the 150,000 sq ft soap factory, which incorporates the Gotham Greens rooftop greenhouse). buildingCount 1.",
+          "railServed": "A rail line runs along the west edge of the property but it is a through line / neighbor siding, not a spur into the method property. railServed false (flagged uncertain).",
+          "urbanRural": "Inside the City of Chicago (Pullman neighborhood); Urban despite the on-site restored prairie.",
+          "siteAreaAcres": "Per published facility data the site is 22 acres, of which only ~3.5 acres are developed (building + pavement) and the rest is restored natural prairie. Perimeter box approximates the developed/usable portion.",
+          "scale": "No truck scale observed."
+        }
+      },
+      {
+        "id": "04-scjp-stanley-nc",
+        "name": "SC Johnson Professional Plant - Stanley NC",
+        "type": "Manufacturing Plant (Professional - hand care / floor care)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "railServed",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 35.3403,
+          "lng": -81.078
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.3393,
+            "west": -81.0798,
+            "north": 35.3413,
+            "east": -81.0762
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 35.3397,
+              "west": -81.0776,
+              "north": 35.3406,
+              "east": -81.0764
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.3404,
+              "west": -81.0774,
+              "north": 35.3411,
+              "east": -81.0762
+            }
+          ],
+          "staging": {
+            "south": 35.3405,
+            "west": -81.0776,
+            "north": 35.3412,
+            "east": -81.0764
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 12,
+          "trailersVisible": 10,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 14,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster's street address (\"100 Technology Center Dr\") could not be\nconfirmed and the roster coordinate (35.353526, -81.090317) was an\nAPPROXIMATE city-centroid landing in downtown Stanley — not the plant.\nWeb research resolved the correct facility: SC Johnson Professional USA's\nStanley plant is the former Deb USA plant at 1100 S Highway 27 (NC-27),\nconfirmed by the Waze business listing, the LoopNet property record (1100 S\nHighway 27, APN/Parcel 176716, a 73,956 sq ft industrial building built\n1986) and FDA / Panjiva records for \"Deb USA Inc., 1100 S. Highway 27,\nStanley NC\". SC Johnson Professional acquired Deb Group in 2015. The building\nwas located by probing the SE Stanley industrial corridor along NC-27 and\npositively identified in Street View — a long industrial building with a",
+        "mapsUrl": "https://www.google.com/maps/@35.3403,-81.078,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "addressCorrection": "Roster address '100 Technology Center Dr' is incorrect. Verified address is 1100 S Highway 27 (NC-27), Stanley, NC 28164 — the former Deb USA plant, now SC Johnson Professional USA (Waze, LoopNet APN 176716, FDA/Panjiva records). Roster coordinate (35.353526, -81.090317) was a city-centroid in downtown Stanley; corrected to the plant at ~35.3403, -81.0780.",
+          "truckGate": "No barrier arm, gate or checkpoint. The dock face fronts NC-27 directly with an open paved truck apron; trucks pull in straight off the highway. truckGate false.",
+          "guardShack": "No guard booth on the property. False.",
+          "remoteGs": "False — no gate, so no remote check-in implied.",
+          "drivewayShort": "The apron between NC-27 and the dock doors is shallow — room for only 1-2 trucks staged before the docks.",
+          "postGateStaging": "The paved apron in front of the docks doubles as a small post-entry staging strip.",
+          "dockDoors": "A continuous bank of ~10-12 dock doors along the NE building face fronting NC-27, confirmed in Street View (red-trimmed dock wall with dock doors and trailers). Banded 10-25.",
+          "dropArea": "Only a handful of trailers parked on the apron / east side; no dedicated trailer-storage lot. Banded 0-10; dropYard false.",
+          "shipRcvSeparate": "Single dock bank on one face. Raw materials likely received at the SW tank/silo area but no separate truck dock bank there; shipRcvSeparate false.",
+          "multipleFacilities": "One building (~73,956 sq ft, built 1986). buildingCount 1.",
+          "scale": "No truck scale observed.",
+          "railServed": "A rail line runs immediately along the west edge of the property; trailers/rail cars seen alongside the building's west face. Rail access likely but an in-property spur not definitively confirmed — flagged uncertain.",
+          "urbanRural": "Small-town Stanley, NC (Gaston County), surrounded by fields and woods; Rural per rubric.",
+          "siteAreaAcres": "Building ~73,956 sq ft; the fenced/paved operational parcel is small (~14 acres estimated from the perimeter box). Flagged uncertain."
+        }
+      },
+      {
+        "id": "05-sturtevant-rdc",
+        "name": "Sturtevant Regional Distribution Center - Sturtevant WI",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 42.7036,
+          "lng": -87.9116
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.7025,
+            "west": -87.9134,
+            "north": 42.7048,
+            "east": -87.9094
+          },
+          "truckGate": {
+            "south": 42.7029,
+            "west": -87.9124,
+            "north": 42.7032,
+            "east": -87.9116
+          },
+          "dropYards": [
+            {
+              "south": 42.70285,
+              "west": -87.913,
+              "north": 42.7032,
+              "east": -87.9099
+            },
+            {
+              "south": 42.70435,
+              "west": -87.913,
+              "north": 42.70475,
+              "east": -87.9099
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 42.70295,
+              "west": -87.913,
+              "north": 42.70322,
+              "east": -87.9099
+            },
+            {
+              "south": 42.70432,
+              "west": -87.913,
+              "north": 42.70458,
+              "east": -87.9099
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 118,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 33,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied coordinates of 42.704751, -87.90962 (geocode moved 1,024 m).\nThose coordinates land on the NE office/parking corner of the property, not\nthe building footprint. Satellite probing around the point identified the\ncorrect structure ~250 m to the SW: a single very large white-roof warehouse.\n\nIdentity confirmed via the EPA Risk Management Plan record for the\n\"Sturtevant Regional Distribution Center\" at 2600 Enterprise Dr and\nLoopNet / Colliers / CommercialCafe listings: a **552,000 sq ft SCJ-owned\naerosol-storage warehouse, LEED-Gold, 32-ft clear height, 55 loading docks\nand 118 tractor-trailer staging positions**. The RMP exists because the\nbuilding stores LPG-propellant (propane/butane/isobutane) aerosol finished\ngoods. The site sits adjacent to the Waxdale plant complex, ~1 km SW of the",
+        "mapsUrl": "https://www.google.com/maps/@42.70360,-87.91160,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed via EPA RMP record (Sturtevant Regional Distribution Center, 2600 Enterprise Dr) + LoopNet/Colliers listings: 552,000 sq ft SCJ-owned aerosol-storage warehouse, LEED-Gold, 32-ft clear, 55 docks, 118 trailer staging positions. Roster coords (42.704751,-87.90962) sat near the NE office corner; building center relocated to ~42.70360,-87.91160 from satellite.",
+          "truckGate": "The truck yards on both the north and south long faces are fully enclosed by chain-link perimeter fencing — Street View (Jun 2019) along Enterprise Dr clearly shows continuous chain-link with trailers parked behind it on the south side. Controlled-access fenced compound with truck gates in the fence line where the perimeter loop road enters the yards.",
+          "guardShack": "No staffed guard booth visible at any gate in multiple Street View headings walked along Enterprise Dr (south side) and the NE/E access road. Entry is controlled by the fence/gates but unstaffed.",
+          "remoteGs": "Gate present, no guard shack -> remote check-in (kiosk/badge/app) is the implied control. Site sits inside a private SCJ-owned industrial parcel.",
+          "shipRcvSeparate": "Cross-dock building: continuous dock banks on BOTH the north and south long faces (visible in z18/z19 satellite, trailers backed in on both sides). Shipping and receiving run from physically separate dock clusters on opposite faces.",
+          "dockDoors": "Continuous dock bank along both ~220m faces; web research confirms 55 loading docks. Many trailers backed in on both faces -> 50+ band.",
+          "dropArea": "Large paved drop yards flank both long faces with numerous trailers parked without tractors; web research cites 118 trailer staging positions -> 50+.",
+          "fastLaneOpportunity": "Very wide paved truck aprons on both faces with ample unused width to add an express/bypass lane at a gate.",
+          "buildingCount": "Main 552,000 sq ft RDC plus a separate smaller SCJ-occupied building immediately SW within the same fenced parcel.",
+          "truckGateCount": "Two truck-yard gate openings observed in the perimeter fence (south yard and north/east loop).",
+          "urbanRural": "Edge-of-town industrial park in Sturtevant WI (small village adjacent to I-94); open farmland borders the parcel to the west. Judged Rural per rubric tie-break.",
+          "multiStep": "No second checkpoint observed; left false but flagged as not fully confirmable from overhead imagery.",
+          "siteAreaAcres": "Estimate from perimeter box covering the building, both truck yards, and the office/parking; adjacent vacant land excluded."
+        }
+      },
+      {
+        "id": "06-fort-worth-regional-distribution-center",
+        "name": "Fort Worth Regional Distribution Center - Fort Worth TX",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 32.96895,
+          "lng": -97.33145
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.9669,
+            "west": -97.333,
+            "north": 32.9709,
+            "east": -97.3299
+          },
+          "truckGate": {
+            "south": 32.9672,
+            "west": -97.3338,
+            "north": 32.9677,
+            "east": -97.3331
+          },
+          "dropYards": [
+            {
+              "south": 32.9673,
+              "west": -97.3329,
+              "north": 32.9709,
+              "east": -97.332
+            },
+            {
+              "south": 32.9673,
+              "west": -97.3308,
+              "north": 32.9709,
+              "east": -97.3299
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.9674,
+              "west": -97.3322,
+              "north": 32.9707,
+              "east": -97.3317
+            },
+            {
+              "south": 32.9674,
+              "west": -97.3313,
+              "north": 32.9707,
+              "east": -97.3308
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 140,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 30,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates 32.968943, -97.331494 (ROOFTOP geocode, moved 143 m) land\ncorrectly on the building. Identity is supported by the **EPA Risk Management\nPlan record** for the \"Fort Worth Regional Distribution Center\" and a Waze\nlisting (\"DHL - SC Johnson\"). The facility sits in the AllianceTexas\nindustrial area on the far north side of Fort Worth and is operated with DHL\nSupply Chain. It is the dossier-noted Fort Worth RDC. Locked center\n(per the JSON): 32.96895, -97.33145.",
+        "mapsUrl": "https://www.google.com/maps/@32.96895,-97.33145,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Truck driveways enter the site from the perimeter industrial road on the SW (Transport Dr side) and around the building with no barrier arm, sliding gate, or checkpoint. Street View (Sep 2025) of the truck roads shows wide-open paved driveways with no control. Open site.",
+          "guardShack": "No staffed booth at any truck entrance. The dark elongated structure beside the SW driveway in z20 imagery is a parked trailer/container, not a guard booth.",
+          "shipRcvSeparate": "Cross-dock building with continuous dock banks on both the east and west long faces - shipping and receiving run from physically separate dock clusters on opposite building faces.",
+          "dockDoors": "Continuous bank of dock doors along both ~430m long faces; ~95 trailers backed in across the imagery, total doors well over 100 -> 50+ band.",
+          "dropArea": "Large paved drop yards flank both long faces with many trailers parked without tractors; capacity 50+.",
+          "fastLaneOpportunity": "Very wide paved truck yards and multiple wide open driveways - ample room for express/bypass lanes if a gate were added.",
+          "entryLanes": "Open multi-tenant park roads; lane counts approximate from imagery.",
+          "siteAreaAcres": "Estimate from perimeter box covering the building and both truck yards; vacant land to the north excluded."
+        }
+      },
+      {
+        "id": "07-fairburn-rdc",
+        "name": "Fairburn Regional Distribution Center - Fairburn GA",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 33.5333,
+          "lng": -84.5959
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.5317,
+            "west": -84.5972,
+            "north": 33.5356,
+            "east": -84.5944
+          },
+          "truckGate": {
+            "south": 33.535,
+            "west": -84.5954,
+            "north": 33.5356,
+            "east": -84.5946
+          },
+          "dropYards": [
+            {
+              "south": 33.5321,
+              "west": -84.597,
+              "north": 33.5348,
+              "east": -84.5964
+            },
+            {
+              "south": 33.5321,
+              "west": -84.5954,
+              "north": 33.5348,
+              "east": -84.5947
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.5321,
+              "west": -84.5966,
+              "north": 33.5348,
+              "east": -84.5963
+            },
+            {
+              "south": 33.5321,
+              "west": -84.5956,
+              "north": 33.5348,
+              "east": -84.5953
+            }
+          ],
+          "staging": {
+            "south": 33.5316,
+            "west": -84.5966,
+            "north": 33.5322,
+            "east": -84.5952
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 26,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates 33.533794, -84.595568 (geocode moved 226 m) land between two\nadjacent warehouses in a wooded industrial park south of the Atlanta metro,\njust off I-85. Identity confirmed via the EPA Risk Management Plan record\nfor the \"Fairburn Regional Distribution Center\" at 1555 Oakley Industrial Blvd,\na Panjiva buyer record (\"S.C. Johnson & Son Inc., 1555 Oakley Ind Blvd\nFairburn GA\"), and a Waze listing (\"Exel Logistics/SC Johnson & Son Inc\") — the\nRDC is operated with Exel/DHL Supply Chain and stores LPG-propellant aerosol\nfinished goods.\n\nOf the two warehouses, the SC Johnson building is the western (left) one,\nidentified by a distinctive curved truck-loop apron at its south end. The\neastern building (1525 Oakley Industrial Blvd, Southcreek Distribution Center\nIV) is a separate tenant. Locked center: 33.53330, -84.59590.",
+        "mapsUrl": "https://www.google.com/maps/@33.53330,-84.59590,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed via EPA RMP record (Fairburn Regional Distribution Center, 1555 Oakley Industrial Blvd) + Panjiva buyer record (S.C. Johnson & Son Inc., 1555 Oakley Ind Blvd Fairburn GA) + Waze 'Exel Logistics/SC Johnson & Son Inc' listing. Atlanta-metro aerosol RDC, operated with Exel/DHL. SCJ building is the LEFT (western) of two warehouses, identified by the distinctive curved truck-loop apron at its south end; the right building (1525 Oakley) is a separate tenant.",
+          "truckGate": "Single private access drive enters the property from the NE off Oakley Industrial Blvd through a wooded buffer. No barrier arm, sliding gate, or checkpoint structure on the drive or at the building loop in Street View (Feb 2022). Open site within a wooded industrial park.",
+          "guardShack": "No staffed booth observed at the access drive or anywhere on the truck loop road.",
+          "shipRcvSeparate": "Cross-dock building: continuous dock banks on BOTH long faces (west face fronts a trailer drop yard, east face has docks with trailers backed in). Shipping and receiving run from separate dock clusters on opposite faces.",
+          "dockDoors": "Continuous dock bank along both ~330m long faces; ~95 trailers backed in across the imagery -> 50+ band.",
+          "dropArea": "Large paved drop yards flank both long faces full of trailers parked without tractors -> 50+.",
+          "preGateStaging": "No gate, so no pre-gate staging.",
+          "postGateStaging": "The wide curved truck-loop apron at the south end functions as an internal staging/queue area before the dock faces.",
+          "fastLaneOpportunity": "Wide truck aprons and the large curved southern loop give ample paved width to add an express lane if a gate were installed.",
+          "drivewayLong": "The private access drive plus the deep wrap-around loop road comfortably hold a 3+ truck queue.",
+          "urbanRural": "Wooded industrial-park setting on the southern edge of the Atlanta metro near I-85; tree buffers and low surrounding density -> judged Rural per rubric tie-break.",
+          "entryLanes": "Single open access drive; lane count approximate.",
+          "siteAreaAcres": "Estimate from perimeter box covering the building, both drop yards and the southern loop apron."
+        }
+      },
+      {
+        "id": "08-woodland-rdc",
+        "name": "Woodland Regional Distribution Center - Woodland CA",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "trailersVisible"
+        ],
+        "center": {
+          "lat": 38.6784,
+          "lng": -121.7273
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.6774,
+            "west": -121.7285,
+            "north": 38.6793,
+            "east": -121.7262
+          },
+          "truckGate": {
+            "south": 38.6776,
+            "west": -121.7267,
+            "north": 38.678,
+            "east": -121.7262
+          },
+          "dropYards": [
+            {
+              "south": 38.6776,
+              "west": -121.7282,
+              "north": 38.678,
+              "east": -121.7264
+            },
+            {
+              "south": 38.6789,
+              "west": -121.7282,
+              "north": 38.67925,
+              "east": -121.7264
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 38.67772,
+              "west": -121.7281,
+              "north": 38.67795,
+              "east": -121.7265
+            },
+            {
+              "south": 38.67875,
+              "west": -121.7281,
+              "north": 38.67898,
+              "east": -121.7265
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 42,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 14,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates 38.678343, -121.72736 (geocode moved 103 m) land correctly\non the building. Identity confirmed via the EPA Risk Management Plan record\nfor the \"Woodland Regional Distribution Center\" at 2030 Hanson Way, a **Panjiva\nbuyer record** (S.C. Johnson & Son Inc., 2030 Hanson Way Woodland CA), and the\nLoopNet \"Hanson Way Distribution Center\" listing. The Journal Times reported\nSC Johnson leasing a ~200,000 sq ft distribution facility in Woodland; the\nLoopNet record gives the building specs: **built 2002, 30-ft clear height,\n40 docks plus 1 drive-in.** It serves Northern California and stores\nLPG-propellant aerosol finished goods (the basis for the RMP filing).\n\nThe SCJ building is the lone mid-size white-roof warehouse; the much larger\nbuildings immediately to the north and east are separate tenants. Locked",
+        "mapsUrl": "https://www.google.com/maps/@38.67840,-121.72730,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed via EPA RMP record (Woodland Regional Distribution Center, 2030 Hanson Way) + Panjiva buyer record + LoopNet 'Hanson Way Distribution Center'. JournalTimes reported SCJ leasing a ~200,000 sq ft Woodland facility. Building (built 2002, ~200,000 sq ft, 30-ft clear, 40 docks + 1 drive-in) is the lone mid-size white-roof warehouse; surrounding much larger buildings are separate tenants. Roster coords (geocode moved 103 m) land correctly on the building.",
+          "truckGate": "The truck-side parking/yard areas on the north and south faces are bounded by chain-link fencing; the west-side office parking is also chain-link fenced (Street View Jan/Mar 2026). Controlled-access fenced parcel with gate openings where the perimeter drive enters the truck yards.",
+          "guardShack": "No staffed guard booth observed at the entrance or yard gates in Street View along both fronting roads.",
+          "remoteGs": "Gate/fence present, no guard shack -> remote check-in (kiosk/badge) implied.",
+          "shipRcvSeparate": "Dock banks on BOTH the north and south long faces (z18/z19 satellite) with trailers backed in -> shipping and receiving on physically separate faces. Consistent with a ~200k sq ft DC with 40 docks split across faces.",
+          "dockDoors": "Web research confirms 40 docks + 1 drive-in; banks split across the north and south faces -> 25-50 band.",
+          "dropArea": "Moderate paved truck yards on both faces with a smaller set of parked trailers without tractors than the larger SCJ RDCs -> 10-25.",
+          "trailersVisible": "Imagery (winter/dry-season captures) shows a modest number of trailers parked; count approximate.",
+          "fastLaneOpportunity": "Truck yards are functional but not notably oversized; no clear unused width for an express lane -> false.",
+          "urbanRural": "Edge-of-town industrial area on the NW side of Woodland CA (small Yolo County city) with open farmland immediately to the west -> Rural per rubric tie-break.",
+          "siteAreaAcres": "Estimate from perimeter box; ~200,000 sq ft building plus truck yards on a compact ~14-acre parcel.",
+          "entryLanes": "Single open access drive; lane count approximate."
+        }
+      },
+      {
+        "id": "09-carlisle-rdc",
+        "name": "Carlisle Regional Distribution Center - Carlisle PA",
+        "type": "Regional Distribution Center (aerosol storage)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 40.1751,
+          "lng": -77.2428
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.1733,
+            "west": -77.245,
+            "north": 40.177,
+            "east": -77.2408
+          },
+          "truckGate": {
+            "south": 40.176,
+            "west": -77.242,
+            "north": 40.1766,
+            "east": -77.241
+          },
+          "dropYards": [
+            {
+              "south": 40.1736,
+              "west": -77.2448,
+              "north": 40.1764,
+              "east": -77.2438
+            },
+            {
+              "south": 40.1736,
+              "west": -77.2421,
+              "north": 40.1764,
+              "east": -77.241
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.1737,
+              "west": -77.2443,
+              "north": 40.1763,
+              "east": -77.2439
+            },
+            {
+              "south": 40.1737,
+              "west": -77.2424,
+              "north": 40.1763,
+              "east": -77.242
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 38,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode was flagged as having moved 8,791 m — the supplied\ncoordinates needed verification. Satellite probing around 40.175046, -77.24279\nlanded on the correct building: a very large cross-dock warehouse in the\nCarlisle/Harrisburg logistics corridor.\n\nIdentity confirmed via the EPA Risk Management Plan record for the\n\"Carlisle Regional Distribution Center\" at 5 True Temper Dr, the **Margulies\nHoelzli Architecture project page, an FCC ULS license (\"EXEL SC JOHNSON\")**,\nand LoopNet/FCC listings. The architect describes a **500,000 sq ft northeast\nregional logistics facility, 450 ft × 1,100 ft cross-dock**, fast-track\ntilt-wall construction by First Industrial Realty Trust, with local operations\nsupport offices. It is operated with DHL/Exel and stores LPG-propellant\naerosol finished goods (basis for the RMP). It is the Northeast RDC succeeding",
+        "mapsUrl": "https://www.google.com/maps/@40.17510,-77.24280,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed via EPA RMP record (Carlisle Regional Distribution Center, 5 True Temper Dr) + Margulies Hoelzli Architecture project page + FCC ULS license 'EXEL SC JOHNSON' + LoopNet/FCC listings. 500,000 sq ft, 450 ft x 1,100 ft cross-dock built by First Industrial Realty Trust, tilt-wall, with local operations offices; operated with DHL/Exel. Roster geocode moved 8,791 m -> the supplied coords were far off; correct building locked from satellite at the True Temper Dr cross-dock.",
+          "truckGate": "The truck loop road wraps the entire building; the access road comes in from the NE off True Temper Dr. Street View (Nov 2023) of the entrance shows open driveways with no barrier arm, sliding gate, or checkpoint. Open site.",
+          "guardShack": "No staffed booth at the entrance. A small office/operations annex sits at the NE corner of the building, not a road-side guard booth.",
+          "shipRcvSeparate": "Cross-dock building (450x1,100 ft) with continuous dock banks on BOTH long faces (NW and SE), trailers backed in on both -> shipping and receiving run from physically separate dock clusters on opposite faces.",
+          "dockDoors": "Continuous dock bank along both ~335m long faces of the cross-dock -> well over 100 doors -> 50+ band.",
+          "dropArea": "Large paved drop yards flank both long faces, plus additional trailer rows to the SE; many trailers parked without tractors -> 50+.",
+          "entryExitSeparate": "The wrap-around loop road allows distinct in and out routing at different points of the building perimeter.",
+          "fastLaneOpportunity": "Very wide truck aprons and the full wrap-around loop give ample room to add an express/bypass lane if a gate were installed.",
+          "drivewayLong": "Long NE access road plus deep wrap-around loop easily hold a 3+ truck queue.",
+          "urbanRural": "Rural Cumberland County PA logistics cluster (the Carlisle/Harrisburg distribution corridor) with farmland and woods around the parcel -> Rural.",
+          "truckGateCount": "Two open truck entrances/exits off the perimeter loop.",
+          "siteAreaAcres": "Estimate from perimeter box covering the 500k sq ft cross-dock and the wrap-around truck yards.",
+          "entryLanes": "Open driveways; lane counts approximate."
+        }
+      },
+      {
+        "id": "10-ontario-dc",
+        "name": "Ontario Distribution Center - Ontario CA",
+        "type": "Distribution Center (aerosol storage)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "trailersVisible"
+        ],
+        "center": {
+          "lat": 34.0461,
+          "lng": -117.6184
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.045,
+            "west": -117.6197,
+            "north": 34.0472,
+            "east": -117.6173
+          },
+          "truckGate": {
+            "south": 34.0453,
+            "west": -117.6196,
+            "north": 34.0457,
+            "east": -117.6191
+          },
+          "dropYards": [
+            {
+              "south": 34.04545,
+              "west": -117.6196,
+              "north": 34.0469,
+              "east": -117.61905
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.04545,
+              "west": -117.61905,
+              "north": 34.0469,
+              "east": -117.6187
+            },
+            {
+              "south": 34.0451,
+              "west": -117.6187,
+              "north": 34.0454,
+              "east": -117.6174
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 20,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 13,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates 34.046012, -117.618383 (geocode moved 125 m) land correctly\non the building. Identity confirmed via the EPA Risk Management Plan record\nfor the \"Ontario Distribution Center\" at 1545 E Locust St Building 7, the\nLoopNet APN listing (parcel 0113-441-12), and the Smart Warehousing facility\ndirectory. The building is ~268,830 sq ft, built 1997/98, in Thoroughbred\nBusiness Park Phase II. Locked center: 34.04610, -117.61840.",
+        "mapsUrl": "https://www.google.com/maps/@34.04610,-117.61840,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "tenancy": "ROSTER NOTE CONFIRMED: the building at 1545 E Locust St, Bldg 7 (Thoroughbred Business Park Phase II, APN 0113-441-12, ~268,830 sq ft, built 1997/98) is now branded and operated by Smart Warehousing, a 3PL — Street View (Feb/May 2025) shows a 'Smart Warehousing' sign on the office face. The EPA RMP 'Ontario Distribution Center' historically tied SC Johnson aerosol storage to this address; SCJ's current direct tenancy here is doubtful — likely a 3PL-operated DC that may still handle SCJ aerosol product or have transitioned. Audited as the physical RDC site per the roster.",
+          "location": "Confirmed via EPA RMP record (Ontario Distribution Center) + LoopNet APN listing (0113-441-12, 1545 E Locust St) + Smart Warehousing 'Ontario #2' warehouse listing. Roster geocode moved 125 m and lands on the correct building.",
+          "truckGate": "Street View (May 2022) of the truck yard on the west side shows a clear sliding/cantilever gate across the truck driveway, with chain-link fence flanking it and FedEx trailers parked inside the fenced yard. Controlled truck entrance.",
+          "guardShack": "No staffed multi-window guard booth at the gate; a small structure sits at the SW corner of the truck yard near the gate but it is not a road-side staffed booth.",
+          "remoteGs": "Truck gate present, no guard shack -> remote check-in (kiosk/badge/app) implied.",
+          "shipRcvSeparate": "Dock banks on the WEST face (continuous bank fronting the fenced truck drop yard) and the SOUTH face -> shipping and receiving on physically separate building faces.",
+          "dockDoors": "Continuous dock bank along the ~150m west face plus a shorter bank on the south face -> 25-50 band for a ~268k sq ft DC.",
+          "dropArea": "Fenced truck drop yard along the west face holds a moderate number of trailers without tractors -> 10-25.",
+          "trailersVisible": "Imagery shows a modest count of trailers (some FedEx) in the west yard; count approximate.",
+          "fastLaneOpportunity": "Truck yard is functional but compact, squeezed between buildings; no clear unused width for an express lane -> false.",
+          "urbanRural": "Dense Inland Empire industrial fabric in Ontario CA -- wall-to-wall large distribution buildings in every direction -> Urban.",
+          "siteAreaAcres": "Estimate from perimeter box; ~268,830 sq ft building on a compact ~13-acre parcel.",
+          "entryLanes": "Single gated truck drive; lane count approximate."
+        }
+      }
+    ]
+  }
+}

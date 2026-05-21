@@ -1,0 +1,1653 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:36:22.821Z",
+  "account": {
+    "slug": "daimler-truck-north-america",
+    "displayName": "Daimler Truck North America",
+    "archetype": "oem-automotive",
+    "siteCount": 16,
+    "coverageNote": {
+      "auditedCount": 16,
+      "estimatedFootprint": null,
+      "droppedStubCount": 0,
+      "capHit": false,
+      "note": "Audited all 16 identifiable facilities."
+    }
+  },
+  "research": {
+    "facility_count": 16,
+    "audited_facilities": 16,
+    "source": "yard-audit",
+    "confidence": "verified"
+  },
+  "network": {
+    "bbox": [
+      -122.7172,
+      32.7959,
+      -80.019,
+      47.3944
+    ],
+    "archetypeMix": {
+      "#9": 4,
+      "#3": 9,
+      "#6": 3
+    },
+    "totals": {
+      "dockDoors": 562,
+      "trailerCapacity": 1944,
+      "gates": 16,
+      "railServed": 6,
+      "acres": 1010.5
+    },
+    "sites": [
+      {
+        "id": "01-cleveland-truck-manufacturing-plant",
+        "name": "Cleveland Truck Manufacturing Plant - Cleveland NC",
+        "type": "Truck assembly plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "scale",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 35.732,
+          "lng": -80.691
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.7289,
+            "west": -80.6988,
+            "north": 35.7354,
+            "east": -80.6845
+          },
+          "truckGate": {
+            "south": 35.73035,
+            "west": -80.6949,
+            "north": 35.7309,
+            "east": -80.6942
+          },
+          "dropYards": [
+            {
+              "south": 35.7326,
+              "west": -80.7002,
+              "north": 35.7353,
+              "east": -80.6944
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.7316,
+              "west": -80.6924,
+              "north": 35.733,
+              "east": -80.689
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 450,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 200,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster coords (35.730924, -80.694178, ROOFTOP) landed on the SW corner of the\n  campus. Satellite at z16 immediately confirmed the facility: the main white\n  assembly roof carries a large painted \"DAIMLER\" wordmark.\n- Address 11550 Statesville Boulevard, Cleveland NC 27013 confirmed via DTNA\n  career locations page and Waze listing. This is DTNA's flagship NA assembly\n  plant (Freightliner Cascadia and Western Star; 850,000th truck built July 2025).\n- Locked working center: 35.732000, -80.691000 (center of the assembly\n  building complex).",
+        "mapsUrl": "https://www.google.com/maps/@35.732000,-80.691000,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Main controlled entrance on Statesville Blvd (US-70) at a signalized intersection, with a 'DAIMLER TRUCK' canopy gateway structure over a divided entry drive. Campus fully fenced (continuous chain-link confirmed in multiple Street Views along the road frontage).",
+          "guardShack": "No discrete 1-3-vehicle guard booth visible at the canopy entrance in satellite or Street View; entrance is a canopy/gateway-sign structure, so a staffed booth could not be confirmed - treated as remote/kiosk check-in.",
+          "remoteGs": "Set true because a controlled gate exists but no guard shack was confirmed; could be a staffed booth obscured by the canopy - flagged uncertain.",
+          "dockDoors": "Dozens of trailers backed against multiple building faces (N and interior court); easily 50+ doors across the campus.",
+          "dropArea": "Very large dedicated trailer drop yard in the NW with hundreds of trailers in long rows; clearly 50+.",
+          "trailersVisible": "Approximate count from N drop-yard imagery (~320 trailers visible across rows and dock faces).",
+          "railServed": "Rail spur runs along the NW edge into the trailer-storage strip.",
+          "multipleFacilities": "Large multi-building campus: main assembly building, paint/body buildings, and a separate trailer-yard outbuilding.",
+          "scale": "No truck scale identified in imagery; flagged uncertain.",
+          "shipRcvSeparate": "Inbound parts docks (interior court / N face) are physically separate from finished-vehicle outbound flow (S/E finished-truck lots).",
+          "urbanRural": "Small town of Cleveland NC surrounded by farmland; rural setting despite the large industrial footprint."
+        }
+      },
+      {
+        "id": "02-mount-holly-truck-manufacturing-plant",
+        "name": "Mount Holly Truck Manufacturing Plant - Mount Holly NC",
+        "type": "Truck assembly plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "multiStep",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 35.323,
+          "lng": -81.0015
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.3185,
+            "west": -81.0058,
+            "north": 35.331,
+            "east": -80.9955
+          },
+          "truckGate": {
+            "south": 35.3274,
+            "west": -81.0021,
+            "north": 35.3279,
+            "east": -81.0013
+          },
+          "dropYards": [
+            {
+              "south": 35.3242,
+              "west": -81.0034,
+              "north": 35.3263,
+              "east": -81.0009
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.3209,
+              "west": -81.0018,
+              "north": 35.3242,
+              "east": -80.9996
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 130,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster coords (35.322672, -81.00161) were geocoded GEOMETRIC_CENTER and moved\n  2149m, so treated as approximate. They landed inside a large industrial\n  campus near the Catawba River, ringed by residential subdivisions.\n- Web search (DTNA career-locations page, Waze, FreightWaves) confirms the\n  Freightliner Mount Holly truck plant at 1800/1803 N Main Street, Mount Holly\n  NC 28120 — established 1979, building medium-duty M2/SD trucks and e-coated\n  cabs for Western Star. The campus has two large buildings joined by an\n  internal road: a sprawling SW main assembly building and a large NE\n  rail-served building.\n- Working center: 35.323000, -81.001500 (between the two buildings).",
+        "mapsUrl": "https://www.google.com/maps/@35.323000,-81.001500,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Geocode (GEOMETRIC_CENTER, moved 2149m) landed inside the campus. Confirmed Freightliner Mount Holly M2/SD medium-duty truck plant via DTNA career-locations page and Waze (1803 N Main St). Two-building campus: SW main assembly building plus a large NE rail-served building, joined by an internal road.",
+          "truckGate": "Campus is a controlled industrial site; the access road enters from the residential road network to the NE. The actual gate sits back behind a wooded buffer and could not be reached in Street View (only residential roads have panos, all from 2023-04). Controlled-access industrial campus, so truckGate set true with the gate box placed at the access-road head.",
+          "guardShack": "No guard booth confirmed; gate area not reachable in Street View. Defaulted guardShack false / remoteGs true - flagged uncertain.",
+          "dockDoors": "Trailers backed against the NW and S/SE faces of the SW main building; estimate 25-50 doors, flagged uncertain (some faces obscured).",
+          "dropArea": "Large dedicated trailer drop yard between the two buildings with many rows of dropped trailers - clearly 50+.",
+          "trailersVisible": "Approximate count (~130) from drop-yard and dock imagery.",
+          "railServed": "Rail line runs alongside the NE building.",
+          "multipleFacilities": "Two large building clusters (SW assembly building, NE rail-served building) on one connected campus.",
+          "shipRcvSeparate": "Inbound parts docks on the NW/S faces are physically separate from the NE rail-served building and the SE laydown/yard flow.",
+          "urbanRural": "Mount Holly is a Charlotte-metro suburb; the campus is ringed by dense residential subdivisions - judged Urban.",
+          "entryLanes": "Could not count lanes at the gate (not reachable in Street View) - flagged uncertain.",
+          "scale": "No truck scale identified - flagged uncertain.",
+          "preGateStaging": "Quarry/construction activity SE of the NE building may serve staging but is not a clear pre-gate truck apron - left false."
+        }
+      },
+      {
+        "id": "03-portland-truck-manufacturing-plant",
+        "name": "Portland Truck Manufacturing Plant - Portland OR",
+        "type": "Truck assembly plant (battery-electric)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dropArea",
+          "dockDoorCount",
+          "scale"
+        ],
+        "center": {
+          "lat": 45.573869,
+          "lng": -122.714444
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 45.571,
+            "west": -122.7172,
+            "north": 45.5756,
+            "east": -122.7095
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 45.5736,
+              "west": -122.7122,
+              "north": 45.5746,
+              "east": -122.7103
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 45.5724,
+              "west": -122.7162,
+              "north": 45.575,
+              "east": -122.7138
+            },
+            {
+              "south": 45.5741,
+              "west": -122.7136,
+              "north": 45.5751,
+              "east": -122.7112
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 0,
+          "buildingCount": 5,
+          "siteAreaAcres": 72,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster coords (45.573869, -122.714444, ROOFTOP, moved 188m) landed on the roof\n  of the large white main plant building in the Swan Island Industrial Park.\n- Web search (DTNA career-locations page, OPB, Oregon Business) confirms this as\n  DTNA's Portland Truck Manufacturing Plant at 6936 N Fathom Street, Portland OR\n  97217 — in continuous operation since 1969, today building the battery-electric\n  Freightliner eCascadia / eM2 and the Western Star X-Series. DTNA also runs a\n  $40M engineering facility and headquarters functions on Swan Island.\n- Working center: 45.573869, -122.714444 (main plant building).",
+        "mapsUrl": "https://www.google.com/maps/@45.573869,-122.714444,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (ROOFTOP, moved 188m) landed on the roof of the main Portland Truck Manufacturing Plant in the Swan Island Industrial Park. Confirmed via DTNA career-locations page and OPB/Oregon Business reporting - DTNA's Portland operation (Western Star X-Series, Freightliner eCascadia/eM2) at 6936 N Fathom Street.",
+          "truckGate": "Open industrial-park layout: the plant and DTNA's adjacent buildings front directly onto N Fathom Street / N Channel Avenue with no single controlled perimeter gate. Dock yards are open to the park roads. Some rail-side yards have chain-link fencing but no manned gate/barrier arm was identified - truckGate set false, flagged uncertain.",
+          "guardShack": "No guard booth identified in satellite or Street View.",
+          "dockDoors": "Trailers backed at docks across multiple building faces (W face of the main building and N face of the NE wing); estimate 25-50 doors, flagged uncertain.",
+          "dropArea": "Trailer staging present in lots and along dock faces but no single large dedicated drop yard; banded 10-25, flagged uncertain.",
+          "dropYard": "No dedicated standalone trailer-storage lot - trailers are staged in working dock yards.",
+          "railServed": "An active rail spur runs through the industrial park directly alongside the plant.",
+          "multipleFacilities": "DTNA's Portland operation spans several adjacent large buildings within the Swan Island park (main plant plus the SW and NE buildings).",
+          "backupSensitive": "Tight industrial-park geometry - dock aprons open directly onto narrow shared park streets with little stacking room; a truck queue would block the internal artery.",
+          "shipRcvSeparate": "Dock banks on different building faces / different buildings handle separate inbound and outbound flows.",
+          "drivewayShort": "Approaches from the park street to the dock faces are short (1-2 trucks).",
+          "urbanRural": "Swan Island is a dense industrial peninsula inside the Portland metro - Urban.",
+          "scale": "No truck scale identified - flagged uncertain."
+        }
+      },
+      {
+        "id": "04-thomas-built-buses-manufacturing-plant",
+        "name": "Thomas Built Buses Manufacturing Plant - High Point NC",
+        "type": "Bus assembly plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dockDoorCount",
+          "dropArea",
+          "scale"
+        ],
+        "center": {
+          "lat": 35.941867,
+          "lng": -80.022076
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.9385,
+            "west": -80.026,
+            "north": 35.9445,
+            "east": -80.019
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 35.9417,
+              "west": -80.0216,
+              "north": 35.9428,
+              "east": -80.0201
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.9402,
+              "west": -80.0241,
+              "north": 35.9426,
+              "east": -80.022
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 25,
+          "trailersVisible": 50,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 0,
+          "buildingCount": 8,
+          "siteAreaAcres": 80,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster coords (35.941867, -80.022076, ROOFTOP, moved 30m) landed directly on\n  the legacy Thomas Built Buses plant complex.\n- Web search (Thomas Built Buses and DTNA news releases) confirms the legacy\n  manufacturing plant at 1408 Courtesy Road, High Point NC — the company's\n  original site dating to 1916, currently building school buses with a Type A\n  Minotour capacity expansion announced December 2025. (A separate Saf-T-Liner\n  C2 plant on a 90-acre plot was added in 2004; the Courtesy Road address audited\n  here is the legacy plant.)\n- Working center: 35.941867, -80.022076.",
+        "mapsUrl": "https://www.google.com/maps/@35.941867,-80.022076,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (ROOFTOP, moved 30m) landed on the legacy Thomas Built Buses plant. Confirmed via Thomas Built Buses / DTNA news pages - 1408 Courtesy Road, High Point NC, the company's original site since 1916, building Type A Minotour / Type C / Type D school buses (Minotour capacity expansion announced Dec 2025).",
+          "truckGate": "Sprawling legacy urban industrial complex straddling Courtesy Road; buildings line both sides of the public street. Individual yards are fenced (privacy-slat chain-link seen in Street View) but there is no single dominant manned perimeter gate or barrier arm controlling all truck traffic - access is from the public road into multiple fenced yards. truckGate set false, flagged uncertain.",
+          "guardShack": "No guard booth identified at any frontage in Street View.",
+          "dockDoors": "Trailers backed at docks across several buildings; estimate 25-50 doors total, flagged uncertain (legacy multi-building layout, several faces obscured).",
+          "dropArea": "School buses and some trailers staged in lots along the rail side; banded 10-25, flagged uncertain.",
+          "dropYard": "No single dedicated trailer-storage lot - finished buses and trailers staged in working yards.",
+          "railServed": "Multiple active rail spurs run into the property along the NE-SW rail corridor.",
+          "multipleFacilities": "Legacy campus of many connected/adjacent buildings straddling Courtesy Road = a multi-building complex.",
+          "backupSensitive": "Plant fronts directly on a narrow public street (Courtesy Road) with little stacking room; a truck queue at any yard entrance would spill onto the road.",
+          "shipRcvSeparate": "Dock activity is spread across separate buildings/faces handling different inbound and outbound flows.",
+          "drivewayShort": "Yard approaches off Courtesy Road are short (1-2 trucks).",
+          "urbanRural": "Dense urban industrial fabric of High Point - Urban.",
+          "scale": "No truck scale identified - flagged uncertain."
+        }
+      },
+      {
+        "id": "05-freightliner-custom-chassis-manufacturing-plant",
+        "name": "Freightliner Custom Chassis Manufacturing Plant - Gaffney SC",
+        "type": "Custom chassis assembly plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "scale",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 35.075,
+          "lng": -81.681
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.0715,
+            "west": -81.6845,
+            "north": 35.079,
+            "east": -81.676
+          },
+          "truckGate": {
+            "south": 35.0755,
+            "west": -81.6798,
+            "north": 35.0759,
+            "east": -81.6791
+          },
+          "dropYards": [
+            {
+              "south": 35.0748,
+              "west": -81.6794,
+              "north": 35.0774,
+              "east": -81.6762
+            },
+            {
+              "south": 35.0756,
+              "west": -81.6838,
+              "north": 35.0778,
+              "east": -81.6807
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.0761,
+              "west": -81.6822,
+              "north": 35.0771,
+              "east": -81.6802
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 250,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 120,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster coords (35.074048, -81.68243, ROOFTOP but moved 2489m) landed near the\n  plant. Satellite at z16/z17 confirmed a large multi-building manufacturing\n  complex with hundreds of completed chassis staged in rows.\n- Web search (FCCC contact page, SC Department of Commerce and SC Governor\n  releases, FCCC RV pages) confirms the Freightliner Custom Chassis plant at\n  552 Hyatt Street, Gaffney SC 29341 — ~289,000 sq ft, three production lines,\n  600+ employees, building custom RV/motorhome and walk-in-van chassis.\n- Working center: 35.075000, -81.681000 (main plant building).",
+        "mapsUrl": "https://www.google.com/maps/@35.075000,-81.681000,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (ROOFTOP, moved 2489m) landed near the FCCC plant. Confirmed via FCCC contact page and SC Commerce / SC Governor releases - 552 Hyatt Street, Gaffney SC, ~289,000 sq ft, three production lines, building RV/motorhome and walk-in-van custom chassis. Working center set on the main plant building.",
+          "truckGate": "Campus is fenced (chain-link along the road frontage and around the east storage yard). A small white ~1-vehicle-footprint structure sits at a gated internal road junction between the main plant and the east chassis-storage building, controlling truck movement - treated as a controlled truck gate.",
+          "guardShack": "The small white structure at the gated internal junction has the footprint and position of a guard/check booth; called guardShack true at medium confidence (could be an equipment shed) - flagged uncertain.",
+          "dockDoors": "Trailers backed at dock doors on the N face of the main plant building; estimate 10-25 doors, flagged uncertain.",
+          "dropArea": "Very large finished-chassis storage yard to the east plus extensive chassis/trailer staging around the main plant - clearly 50+.",
+          "dropYard": "Dedicated standalone chassis/trailer storage lot east of the main plant, full of completed chassis.",
+          "trailerParkingCapacity": "High capacity because the east lot and surrounding aprons hold hundreds of completed chassis/RVs; ~250 estimate.",
+          "railServed": "Rail line runs along the SW edge with spurs toward the plant.",
+          "multipleFacilities": "Main plant building plus a separate east chassis-storage building, connected by an internal road = multi-building campus.",
+          "shipRcvSeparate": "Inbound parts docks on the N face are separate from the east finished-chassis storage / outbound flow.",
+          "drivewayLong": "The internal approach from the gated junction to the dock/yard areas is long, holding 3+ vehicles.",
+          "urbanRural": "Gaffney is a small South Carolina town; the plant sits in an edge-of-town industrial area among woods and scattered residential - Rural.",
+          "scale": "No truck scale identified - flagged uncertain.",
+          "entryLanes": "Lane count at the internal gate not clearly resolvable - flagged uncertain."
+        }
+      },
+      {
+        "id": "06-detroit-diesel-corporation-engine-plant",
+        "name": "Detroit Diesel Corporation Engine Plant - Redford MI",
+        "type": "Engine / powertrain plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "exitLanes",
+          "scale",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 42.37745,
+          "lng": -83.2675
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.3735,
+            "west": -83.2753,
+            "north": 42.3787,
+            "east": -83.2635
+          },
+          "truckGate": {
+            "south": 42.37605,
+            "west": -83.2752,
+            "north": 42.37665,
+            "east": -83.2744
+          },
+          "dropYards": [
+            {
+              "south": 42.376,
+              "west": -83.2752,
+              "north": 42.3782,
+              "east": -83.2725
+            },
+            {
+              "south": 42.3768,
+              "west": -83.2668,
+              "north": 42.3786,
+              "east": -83.2632
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 42.3782,
+              "west": -83.272,
+              "north": 42.3788,
+              "east": -83.266
+            },
+            {
+              "south": 42.377,
+              "west": -83.2752,
+              "north": 42.3785,
+              "east": -83.2745
+            }
+          ],
+          "staging": {
+            "south": 42.376,
+            "west": -83.2752,
+            "north": 42.3766,
+            "east": -83.2742
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 138,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Account: Daimler Truck North America\n- Type: Engine / powertrain plant\n- Roster address: 13400 West Outer Drive, Redford, MI 48239\n- Resolved center: 42.37745, -83.2675\n- Method: deep-audit | Confidence: high",
+        "mapsUrl": "https://www.google.com/maps/@42.37745,-83.2675,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Geocoded point (GEOMETRIC_CENTER, moved 1434m) landed in an east-side staging lot. Confirmed the correct facility: the very large blue/gray-roofed Detroit Diesel engine plant complex bounded by Telegraph Rd / W Outer Drive on the west and a rail line on the north. A Street View 'TRUCK ENTRANCE -> 12200 TELEGRAPH' sign and DAIMLER TRUCK building branding positively identify the site.",
+          "truckGate": "Clear controlled truck entrance on the SW corner off Telegraph Rd: dedicated 'TRUCK ENTRANCE' signage, a wide gated opening in tall chain-link perimeter fence with privacy screening, and a checkpoint apron set back from the road.",
+          "guardShack": "A wide blue/gray flat canopy structure spans the inbound truck lane just inside the gate (visible in Street View 2025-09 and satellite). Functions as a staffed vehicle-check canopy; a discrete free-standing booth is not separately resolvable but a world-HQ engine plant of this scale operates manned security, so guardShack=true with remoteGs=false. Listed uncertain.",
+          "preGateStaging": "Diagonally-striped truck stalls visible on the paved apron at/outside the gate.",
+          "postGateStaging": "Wide paved truck artery and marked stalls inside the gate before the docks.",
+          "drivewayLong": "Internal truck artery from the gate runs deep north along the west yard; easily holds 3+ trucks.",
+          "fastLaneOpportunity": "Very wide gate apron and multi-lane Telegraph Rd frontage leave ample room for an express/bypass lane.",
+          "dockDoors": "Estimated 25-50: dock doors with trailers backed in along the north building face and additional banks on the west face. Count approximate from overhead imagery.",
+          "dropArea": "50+ trailers parked across the west truck yard and the NE trailer-storage rows.",
+          "shipRcvSeparate": "Dock activity appears on two distinct building faces (north face and west face) suggesting separate ship/receive clusters; medium confidence.",
+          "multipleFacilities": "Campus includes the main plant plus a separate DAIMLER-branded office building, an east-side ancillary building, and large support lots.",
+          "railServed": "An active rail line runs along the north property edge with spurs/sidings fanning into the plant's north face.",
+          "urbanRural": "Inside the Detroit metro (Redford Township), surrounded by dense residential fabric -> Urban.",
+          "buildingCount": "Main plant complex + DAIMLER office building + east ancillary building + smaller support structures.",
+          "scale": "No truck scale clearly visible in the gate path; flagged uncertain."
+        }
+      },
+      {
+        "id": "07-gastonia-components-and-logistics",
+        "name": "Gastonia Components and Logistics - Gastonia NC",
+        "type": "Component / parts subassembly and logistics plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 35.288,
+          "lng": -81.2052
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.2858,
+            "west": -81.2082,
+            "north": 35.2902,
+            "east": -81.201
+          },
+          "truckGate": {
+            "south": 35.28785,
+            "west": -81.20325,
+            "north": 35.28825,
+            "east": -81.20275
+          },
+          "dropYards": [
+            {
+              "south": 35.2884,
+              "west": -81.2072,
+              "north": 35.29,
+              "east": -81.205
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.2884,
+              "west": -81.2068,
+              "north": 35.289,
+              "east": -81.2045
+            },
+            {
+              "south": 35.2868,
+              "west": -81.2074,
+              "north": 35.2884,
+              "east": -81.2068
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 95,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 73,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Account: Daimler Truck North America\n- Type: Component / parts subassembly and logistics plant\n- Roster address: 1400 Tulip Drive, Gastonia, NC 28052\n- Resolved center: 35.288, -81.2052\n- Method: deep-audit | Confidence: high",
+        "mapsUrl": "https://www.google.com/maps/@35.288,-81.2052,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Geocoded point (GEOMETRIC_CENTER, moved only 44m) landed accurately on the campus. Confirmed: a large white-roofed components/logistics plant plus a separate gray-roofed building to the east, on a wooded campus off Tulip Drive south of I-85. DTNA / Waze listings confirm 'Daimler Truck North America Components & Logistics, 1400 Tulip Dr.'",
+          "truckGate": "Controlled vehicle entrance on the SE: Street View (captured 2026-02) shows a checkpoint canopy/gatehouse with orange bollards lining the lane and chain-link fencing; satellite shows a small white-canopy structure spanning the entry drive with a trailer passing through.",
+          "guardShack": "A small canopied gatehouse structure sits over the SE entry lane. Functions as the staffed check-in point. Discrete booth form not perfectly resolvable; a 24/7 logistics plant of this scale runs manned security -> guardShack=true, remoteGs=false. Flagged uncertain.",
+          "postGateStaging": "Wide paved aprons and the north drop yard provide internal holding before the docks.",
+          "drivewayLong": "Internal drives from the SE gate run a long way around the plant to the north drop yard and docks; easily 3+ trucks.",
+          "dockDoors": "Estimated 25-50: dock doors with trailers backed in along the north face, plus banks on the west and SW faces.",
+          "dropArea": "25-50 trailers parked in angled stalls in the dedicated north drop yard.",
+          "shipRcvSeparate": "Dock activity on multiple distinct building faces (north, west, SW) consistent with separate shipping/receiving clusters; medium confidence.",
+          "multipleFacilities": "Campus has two distinct large buildings -- the main white components plant and a separate gray-roofed building to the east -- linked by an internal road.",
+          "dropYard": "Dedicated trailer-storage lot on the north side, full of parked trailers in marked angled stalls, separate from active dock staging.",
+          "railServed": "No rail spur observed entering the property.",
+          "urbanRural": "Edge-of-town site heavily ringed by woods, fronting I-85 on the south edge of Gastonia (a small city in the Charlotte metro). Per rubric tie-breaker -> Rural.",
+          "scale": "No truck scale visible in the entry path.",
+          "entryLanes": "Single entry lane through the SE gate canopy as best resolved; flagged uncertain."
+        }
+      },
+      {
+        "id": "08-detroit-reman-east",
+        "name": "Detroit Reman East - Byesville OH",
+        "type": "Remanufacturing plant (engines/components)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dockDoors",
+          "dropArea",
+          "buildingCount",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 39.97815,
+          "lng": -81.56675
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.9768,
+            "west": -81.568,
+            "north": 39.9796,
+            "east": -81.5656
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 39.9789,
+              "west": -81.5677,
+              "north": 39.9795,
+              "east": -81.5658
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 17,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Account: Daimler Truck North America\n- Type: Remanufacturing plant (engines/components)\n- Roster address: 60703 Country Club Road, Byesville, OH 43723\n- Resolved center: 39.97815, -81.56675\n- Method: deep-audit | Confidence: medium",
+        "mapsUrl": "https://www.google.com/maps/@39.97815,-81.56675,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Geocoded point (ROOFTOP, moved 2417m) landed on the large modern blue/dark-roofed industrial building in the Southgate industrial park area near Byesville OH, just west of the Cambridge Country Club golf course (consistent with 'Country Club Road'). Identified this building as Detroit Reman East -- the largest, most modern facility on the parcel. A separate lighter-roofed building sits to the west (a different occupant). DTNA / Yelp / D&B confirm Detroit Diesel Remanufacturing at 60703 Country Club Rd, Byesville.",
+          "truckGate": "No controlled truck gate observed. The buildings sit in an open industrial-park road network; access roads and the shared parking lot connect directly to public roads with no barrier arm, sliding gate or guard booth at the entrance. Some perimeter chain-link fencing exists but the truck approach is uncontrolled. Flagged uncertain.",
+          "guardShack": "No guard booth visible at any entrance.",
+          "drivewayShort": "Short, direct approach from the industrial-park road to the dock apron; little stacking depth.",
+          "dockDoors": "Estimated 10-25: a single dock bank with covered dock canopies along the north face of the blue building; count approximate -- east side had active construction at imagery date.",
+          "dropArea": "0-10: only a handful of trailers in the shared lot; no dedicated drop yard.",
+          "dropYard": "No dedicated trailer-storage lot; trailers park ad hoc in the shared parking lot.",
+          "multipleFacilities": "Detroit Reman East occupies a single large building. A separate building to the west is a different occupant and not part of this facility -> multipleFacilities=false.",
+          "railServed": "No rail spur into the property.",
+          "urbanRural": "Byesville is a small Ohio town; the site is in an edge-of-town industrial park ringed by fields, woods and a golf course -> Rural.",
+          "shipRcvSeparate": "Dock activity appears concentrated on one (north) building face -> shipRcvSeparate=false; flagged uncertain due to active construction obscuring the east face.",
+          "confidence": "Medium: building identity is a reasoned best-fit (Street View cannot resolve building signage and 2025 imagery shows active construction); gate/dock determinations are imagery-based."
+        }
+      },
+      {
+        "id": "09-detroit-reman-west",
+        "name": "Detroit Reman West - Tooele UT",
+        "type": "Remanufacturing plant (engines/components)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "dockDoors",
+          "shipRcvSeparate",
+          "connectivityIssue",
+          "railServed"
+        ],
+        "center": {
+          "lat": 40.52945,
+          "lng": -112.34998
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.5266,
+            "west": -112.3524,
+            "north": 40.531,
+            "east": -112.3483
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 40.528,
+              "west": -112.352,
+              "north": 40.5288,
+              "east": -112.35
+            },
+            {
+              "south": 40.5288,
+              "west": -112.3524,
+              "north": 40.53,
+              "east": -112.3512
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.5282,
+              "west": -112.3514,
+              "north": 40.5286,
+              "east": -112.3495
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 55,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Account: Daimler Truck North America\n- Type: Remanufacturing plant (engines/components)\n- Roster address: 100 South Lodestone Way, Tooele, UT 84074\n- Resolved center: 40.52945, -112.34998\n- Method: deep-audit | Confidence: medium",
+        "mapsUrl": "https://www.google.com/maps/@40.52945,-112.34998,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Geocoded point (ROOFTOP, moved 145m) lands squarely on the large white-roofed plant building in the Utah Industrial Depot (former Tooele Army Depot, built by the Army early 1990s, converted to commercial use by Penske 1996). Confirmed as Detroit Reman West -- the second-largest Detroit Reman plant (~330 workers), per DTNA, Tooele Chamber and Yelp at 100 South Lodestone Way.",
+          "truckGate": "Perimeter chain-link fencing is visible on multiple building faces, implying controlled access, but Street View coverage at the entrances is sparse (mostly 2015-2018) and shows no barrier arm, sliding gate or guard booth. Recorded truckGate=false with the field flagged uncertain -- a gate is plausible for a 330-worker DTNA plant but is not visually confirmed.",
+          "guardShack": "No guard booth observed; flagged uncertain due to poor Street View coverage.",
+          "drivewayShort": "Short direct approaches from the depot road grid to the dock aprons.",
+          "dockDoors": "Estimated 10-25 dock doors along the building's south/SW face; count approximate, partly obscured by parked trailers.",
+          "dropArea": "25-50: long rows of parked trailers in dedicated drop yards on the south and SW, plus extensive outdoor core/component storage.",
+          "dropYard": "Dedicated trailer-storage rows on the south and SW sides, separate from the dock apron; consistent with a reman plant holding cores and finished goods.",
+          "railServed": "A rail line/spur runs along a SEPARATE building to the SE, not the Detroit Reman West building. No spur observed reaching this facility -> railServed=false; flagged uncertain given the depot's heavy historical rail network.",
+          "multipleFacilities": "Detroit Reman West occupies a single large building (plus attached office). The neighboring large buildings are separate occupants in the industrial depot -> multipleFacilities=false.",
+          "urbanRural": "High-desert site in the Utah Industrial Depot outside Tooele, ringed by open desert and mountains -> Rural.",
+          "connectivityIssue": "Isolated high-desert location; cellular coverage may be moderate. Tooele city and an active industrial park are nearby, so not extreme -> recorded false but flagged uncertain.",
+          "shipRcvSeparate": "Dock activity appears concentrated on the south/SW face -> shipRcvSeparate=false; flagged uncertain.",
+          "confidence": "Medium: building positively identified, but gate/guard determinations limited by sparse Street View coverage and dock counts partly obscured by trailers."
+        }
+      },
+      {
+        "id": "10-detroit-diesel-remanufacturing",
+        "name": "Detroit Diesel Remanufacturing - Hibbing MN",
+        "type": "Remanufacturing plant (engines/components)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "connectivityIssue"
+        ],
+        "center": {
+          "lat": 47.393282,
+          "lng": -92.829402
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 47.3922,
+            "west": -92.8308,
+            "north": 47.3944,
+            "east": -92.8276
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 47.3935,
+              "west": -92.8302,
+              "north": 47.394,
+              "east": -92.8294
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 14,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 14,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": true,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Account: Daimler Truck North America\n- Type: Remanufacturing plant (engines/components)\n- Roster address: 3895 South Hughes Road, Hibbing, MN 55746\n- Resolved center: 47.393282, -92.829402\n- Method: deep-audit | Confidence: high",
+        "mapsUrl": "https://www.google.com/maps/@47.393282,-92.829402,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Geocoded point (ROOFTOP, moved 115m) lands accurately on a single tan industrial building in open country on the Range Regional Airport property south of US-169 near Hibbing MN. Confirmed via DTNA press releases as Detroit Diesel Remanufacturing -- the Hibbing reman plant whose 2024 expansion doubled the footprint to ~120,000 sq ft and added BEV battery/inverter remanufacturing. Address 3895 South Hughes Road.",
+          "truckGate": "No controlled truck gate. A single open driveway runs from US-169 down to the building's parking lots; Street View (captured 2025-08) shows no barrier arm, gate or guard booth, and no perimeter fence at the road -- the site is fully open.",
+          "guardShack": "No guard booth anywhere on site.",
+          "drivewayShort": "Short, direct open driveway from the highway to the dock apron and lots; minimal stacking depth.",
+          "dockDoors": "0-10: a single covered dock canopy with roughly 6-10 doors on the building's NW face; count approximate, flagged uncertain.",
+          "dropArea": "0-10: only a few trailers parked along the south edge; no dedicated drop yard.",
+          "dropYard": "No dedicated trailer-storage lot; the few trailers park ad hoc near the south parking lot.",
+          "multipleFacilities": "Single building. The red-roofed structure to the east is a separate airport-related building, not part of this plant.",
+          "railServed": "No rail spur into the property.",
+          "urbanRural": "Isolated site in open fields/farmland on airport property near Hibbing, a small northern-Minnesota town -> Rural.",
+          "connectivityIssue": "Rural, isolated open-country location on the Iron Range; cellular coverage may be weaker. Hibbing town and the regional airport are nearby so it is not extreme -> recorded true at medium confidence, flagged uncertain.",
+          "confidence": "High: the facility is positively identified and the small open layout reads clearly from satellite + recent (2025) Street View. Only the exact dock-door count and the inferred connectivity flag are uncertain."
+        }
+      },
+      {
+        "id": "11-whitestown-redistribution-center",
+        "name": "Whitestown Redistribution Center (RDC) - Whitestown IN",
+        "type": "Parts redistribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "trailersVisible",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 39.97755,
+          "lng": -86.363
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.9763,
+            "west": -86.3648,
+            "north": 39.9788,
+            "east": -86.3619
+          },
+          "truckGate": {
+            "south": 39.97845,
+            "west": -86.3643,
+            "north": 39.9788,
+            "east": -86.3639
+          },
+          "dropYards": [
+            {
+              "south": 39.9763,
+              "west": -86.3642,
+              "north": 39.9767,
+              "east": -86.36195
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.97655,
+              "west": -86.36415,
+              "north": 39.97695,
+              "east": -86.36195
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 14.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Address: 4337 AllPoints Drive, Whitestown, IN 46075\n- Locked center: 39.977550, -86.363000\n- Maps: https://www.google.com/maps/@39.977550,-86.363000,400m/data=!3m1!1e3\n\nThe roster geocode (39.978443, -86.364644) moved 1,950 m and landed inside the\nAllPoints at Anson industrial park. Web research confirmed the facility is\n\"AllPoints at Anson Building 10,\" a 605,000 sq ft (570' x 1,026') LEED Silver\nbuild-to-suit Redistribution Center opened in 2023 for DTNA — its largest\ncentralized parts-consolidation node, replenishing the 10 PDCs across the US\nand Canada. The building was located in satellite imagery by matching the\nsingle largest fresh-construction warehouse with a 140'-deep south truck court\nand adjacent stormwater pond, consistent with the developer spec sheet\n(Browning / Prologis). Center locked on that building.",
+        "mapsUrl": "https://www.google.com/maps/@39.977550,-86.363000,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed via web research as AllPoints at Anson Building 10, 4337 AllPoints Drive — a 605,000 sq ft (570' x 1,026') build-to-suit RDC opened 2023 for DTNA. Roster geocode moved 1,950 m; the rooftop pin landed near the building. Building center locked at 39.977550, -86.363000.",
+          "truckGate": "No fencing, no gate, no guard booth visible anywhere on the property. Spec-built Prologis park building with open perimeter drive and two open driveway connections (north and southwest) to AllPoints Drive. Open-site archetype.",
+          "dockDoors": "Web spec sheet: 40 9'x10' dock doors plus two 12'x16' drive-in doors, all on the south long face. Satellite confirms a dock door rhythm and 140'-deep truck court on the south side.",
+          "dropArea": "Web spec sheet: 71 trailer parking spaces, expandable to 124. Imagery (2026 Maxar) shows striped trailer stalls along the south truck court but no trailers parked yet; capacity estimated ~90 mid-range.",
+          "trailersVisible": "Imagery captured shortly after construction shows the truck court empty — 0 trailers visible, low confidence on operational state.",
+          "drivewayLong": "Perimeter truck court is wide and deep (140' truck court plus loop drive); easily holds 3+ trucks staging before docks.",
+          "fastLaneOpportunity": "Wide, fully paved truck court and unused apron width — ample room for an express bypass lane.",
+          "entryExitSeparate": "Two separate open driveway connections to AllPoints Drive (one at the north end by car parking, one at the southwest corner) function as distinct in/out routes.",
+          "urbanRural": "Edge-of-town setting but within the dense 616-acre AllPoints at Anson industrial park in metro Indianapolis; classified Urban for the industrial-park density and metro proximity.",
+          "railServed": "No rail spur enters the property."
+        }
+      },
+      {
+        "id": "12-indianapolis-parts-distribution-center",
+        "name": "Indianapolis Parts Distribution Center - Whitestown IN",
+        "type": "Parts distribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 39.979,
+          "lng": -86.3863
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.97785,
+            "west": -86.3879,
+            "north": 39.98005,
+            "east": -86.3847
+          },
+          "truckGate": {
+            "south": 39.9789,
+            "west": -86.3852,
+            "north": 39.97925,
+            "east": -86.3848
+          },
+          "dropYards": [
+            {
+              "south": 39.97785,
+              "west": -86.3871,
+              "north": 39.9782,
+              "east": -86.385
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.97815,
+              "west": -86.3872,
+              "north": 39.97855,
+              "east": -86.385
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 34,
+          "trailersVisible": 32,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 12,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Address: 4140 Anson Boulevard, Whitestown, IN 46075\n- Locked center: 39.979000, -86.386300\n- Maps: https://www.google.com/maps/@39.979000,-86.386300,400m/data=!3m1!1e3\n\nThe roster rooftop geocode (39.979271, -86.386135) moved only 181 m and landed\non the correct building. Web research confirms this is DTNA's 283,500 sq ft\nIndianapolis Parts Distribution Center, opened 2017 in the AllPoints at Anson\npark near I-65 ($12.35M lease/build). It processes ~7,000 parts/day and serves\nregional Freightliner / Western Star / Thomas Built Buses dealers. This is the\nolder, smaller of DTNA's two Whitestown facilities (the 605,000 sq ft RDC,\nidx 11, is ~1.6 km west).",
+        "mapsUrl": "https://www.google.com/maps/@39.979000,-86.386300,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed via web research as the 283,500 sq ft Indianapolis PDC at 4140 Anson Boulevard, AllPoints at Anson park, opened 2017 by DTNA ($12.35M lease/build). Roster rooftop geocode moved only 181 m and landed on the correct building. Center locked at 39.979000, -86.386300.",
+          "truckGate": "No perimeter fence, no barrier arm, no gate, no checkpoint at any road connection. Street View (2023-05) along Anson Boulevard shows open grass frontage and open driveways. Standard open spec-park layout.",
+          "guardShack": "No booth structure beside any driveway. A green utility transformer cabinet sits in the south grass (not a guard shack).",
+          "dockDoors": "All dock doors on the south long face. Counting the door rhythm and trailers backed in across both halves of the south face gives roughly 30-38 doors; estimate 34, flagged uncertain.",
+          "dropArea": "Active facility: ~15-20 trailers backed into docks plus a row of ~12-15 parked trailers in the south truck court — a clear trailer drop/parking row, dropYard true.",
+          "trailersVisible": "Counted approximately 32 trailers total in captured imagery (backed-in plus the parking row).",
+          "drivewayLong": "Wide perimeter truck court / loop drive easily holds 3+ trucks staging before docks.",
+          "fastLaneOpportunity": "Wide, fully paved truck court with unused apron width — room for an express bypass lane.",
+          "entryExitSeparate": "Two open driveway connections to Anson Boulevard (one near the NE office/car-park area, one toward the south truck court) act as separate in/out routes.",
+          "urbanRural": "Within the dense AllPoints at Anson industrial park, near I-65 in metro Indianapolis; classified Urban.",
+          "railServed": "No rail spur enters the property."
+        }
+      },
+      {
+        "id": "13-memphis-parts-distribution-center",
+        "name": "Memphis Parts Distribution Center - Memphis TN",
+        "type": "Parts distribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "shipRcvSeparate",
+          "buildingCount",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 35.03765,
+          "lng": -89.87405
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.03555,
+            "west": -89.8757,
+            "north": 35.03975,
+            "east": -89.8734
+          },
+          "truckGate": {
+            "south": 35.0394,
+            "west": -89.8741,
+            "north": 35.03975,
+            "east": -89.8735
+          },
+          "dropYards": [
+            {
+              "south": 35.036,
+              "west": -89.87365,
+              "north": 35.0393,
+              "east": -89.8734
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.036,
+              "west": -89.874,
+              "north": 35.0393,
+              "east": -89.8735
+            },
+            {
+              "south": 35.0393,
+              "west": -89.8756,
+              "north": 35.03975,
+              "east": -89.8735
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 24,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Address: 5745 Challenge Drive, Memphis, TN 38115\n- Locked center: 35.037650, -89.874050\n- Maps: https://www.google.com/maps/@35.037650,-89.874050,400m/data=!3m1!1e3\n\nThe roster geocode (35.037713, -89.873982) moved 3,427 m before landing in the\nMDC (Memphis Distribution Center) industrial park in the Hickory Hill area of\nMemphis. Web research (Daimler careers location page, LoopNet parcel APN\n09-3400-0-0603, multiple business listings) confirms DTNA's Memphis PDC is at\n5745 Challenge Drive in this park. The Memphis PDC serves regional Freightliner\n/ Western Star / Thomas Built Buses dealers and is DTNA's national distribution\ncenter for chassis parts.\n\nCaveat: MDC is a large multi-tenant industrial park (5625 = Building K /\n592,766 sq ft; 5750 = Building J / 420,000 sq ft; Cummins at 5800). DTNA leases",
+        "mapsUrl": "https://www.google.com/maps/@35.037650,-89.874050,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Address 5745 Challenge Drive in the MDC (Memphis Distribution Center) industrial park, Hickory Hill, Memphis TN 38115 — confirmed via web (Daimler careers page, LoopNet parcel APN 09-3400-0-0603). Roster geocode moved 3,427 m; the corrected pin landed on a large warehouse in the MDC park. Center locked at 35.037650, -89.874050 on that building. Note: MDC is a multi-tenant park (5625 = Bldg K, 5750 = Bldg J, Cummins at 5800); DTNA leases the 5745 suite. The exact tenant footprint and dock allocation cannot be isolated from imagery alone — medium confidence on the precise building/zone boundaries.",
+          "truckGate": "No barrier arm, sliding/swing gate, or guarded checkpoint on the truck side. Dock corridors are internal MDC park roads, open. A chain-link fence around the south-end CAR parking lot has an open vehicle gate — that is car-park perimeter security, not a truck gate.",
+          "guardShack": "No guard booth observed at any truck driveway or dock corridor. A green box near the SW corner is a utility transformer cabinet.",
+          "dockDoors": "Long warehouse with a continuous dock-door rhythm along the entire east long face plus the north end; well over 50 doors total — 50+ band. Count is an honest estimate from overhead imagery (~60), flagged uncertain because the building is multi-tenant.",
+          "dropArea": "Truck courts on the east and north are densely packed with parked trailers (50+) plus trailers backed into docks. dropYard true; 50+ band.",
+          "trailersVisible": "Roughly 70 trailers counted across the east and north truck courts in captured imagery — estimate, flagged uncertain.",
+          "shipRcvSeparate": "Dock banks on two separate building faces (east long face and north end) could function as separate ship/receive clusters; inferred, flagged uncertain.",
+          "drivewayLong": "Wide internal dock corridors easily stage 3+ trucks before the docks.",
+          "fastLaneOpportunity": "Ample paved truck-court width in the internal corridors — room for a bypass lane.",
+          "buildingCount": "The DTNA PDC occupies one warehouse, but the MDC park has many adjacent buildings; counted as 1 for the audited building, flagged uncertain given the campus context.",
+          "siteAreaAcres": "~24 acres for the single audited building plus its truck courts; approximate, flagged uncertain due to multi-tenant boundaries.",
+          "urbanRural": "Dense industrial fabric within the City of Memphis (Hickory Hill); Urban.",
+          "railServed": "No rail spur enters the audited building's property."
+        }
+      },
+      {
+        "id": "14-atlanta-parts-distribution-center",
+        "name": "Atlanta Parts Distribution Center - Buford GA",
+        "type": "Parts distribution center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 34.11785,
+          "lng": -83.98265
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.1161,
+            "west": -83.98405,
+            "north": 34.11945,
+            "east": -83.9813
+          },
+          "truckGate": {
+            "south": 34.11615,
+            "west": -83.98295,
+            "north": 34.1164,
+            "east": -83.9826
+          },
+          "dropYards": [
+            {
+              "south": 34.1163,
+              "west": -83.98405,
+              "north": 34.1169,
+              "east": -83.9815
+            },
+            {
+              "south": 34.11845,
+              "west": -83.98405,
+              "north": 34.11945,
+              "east": -83.9815
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.11665,
+              "west": -83.984,
+              "north": 34.11705,
+              "east": -83.9815
+            },
+            {
+              "south": 34.1183,
+              "west": -83.984,
+              "north": 34.1187,
+              "east": -83.9815
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 52,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 26,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Address: 2510 Mill Center Parkway, Suite 100, Buford, GA 30518\n- Locked center: 34.117850, -83.982650\n- Maps: https://www.google.com/maps/@34.117850,-83.982650,400m/data=!3m1!1e3\n\nThe roster geocode (34.11763, -83.983054) moved 4,842 m before landing on the\ncorrect building. Positive confirmation: Street View shows a large\n\"DAIMLER - Daimler Trucks North America\" sign mounted on the building wall at\nthe southwest corner. The building is \"Bldg I,\" an 870,480 sq ft cross-dock\ndistribution facility (built 2006) in the Mill Center / Hamilton Mill business\npark. DTNA's Atlanta PDC occupies Suite 100; Radial (ecommerce fulfillment) and\nRNC Industries occupy other suites of this multi-tenant building.",
+        "mapsUrl": "https://www.google.com/maps/@34.117850,-83.982650,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Positively confirmed: Street View shows a large 'DAIMLER - Daimler Trucks North America' sign on the building wall at the SW corner. Address 2510 Mill Center Parkway, Suite 100, Buford GA — building 'Bldg I', an 870,480 sq ft cross-dock distribution facility (built 2006) in the Mill Center / Hamilton Mill business park. Roster geocode moved 4,842 m; the corrected pin landed on the correct building. DTNA occupies Suite 100 (a portion of the multi-tenant building; Radial and RNC Industries occupy other suites). Center locked at 34.117850, -83.982650.",
+          "truckGate": "TRUE. Street View shows a black ornamental perimeter fence with a swing gate enclosing the DTNA dock yard, separating the secured truck court from the public car parking lot at the DTNA suite.",
+          "guardShack": "FALSE. No guard booth structure at the gate or anywhere on the truck side.",
+          "remoteGs": "TRUE. There is a controlled truck gate but no guard shack — implies kiosk / badge / app check-in.",
+          "dockDoors": "Cross-dock building with dock doors on both the north and south long faces. The building listing cites 52 dock doors / 152 truck dock positions; 50+ band. Count flagged uncertain because DTNA occupies only one suite of the multi-tenant building.",
+          "dropArea": "Truck courts on both faces are packed with parked trailers in angled drop stalls; building listing cites 166 trailer parking stalls. 50+ band, dropYard true.",
+          "trailersVisible": "Roughly 75 trailers counted across the north and south truck courts in captured imagery — estimate, flagged uncertain.",
+          "shipRcvSeparate": "Cross-dock layout: dock banks on two separate building faces (north and south) function as physically separate ship/receive clusters.",
+          "drivewayLong": "Wide 185'-deep truck courts easily stage 3+ trucks before the docks.",
+          "entryExitTogether": "DTNA's fenced dock yard has a single gated access point used for both entry and exit.",
+          "fastLaneOpportunity": "Single gated access into a fenced suite yard; no obvious unused width for an express bypass at the gate.",
+          "entryLanes": "Single gate lane; exact lane count not resolvable from imagery — flagged uncertain.",
+          "urbanRural": "Mill Center / Hamilton Mill business park in Gwinnett County within metro Atlanta's industrial fabric; classified Urban.",
+          "railServed": "No rail spur enters the property."
+        }
+      },
+      {
+        "id": "15-dallas-parts-distribution-center",
+        "name": "Dallas Parts Distribution Center - Grand Prairie TX",
+        "type": "Parts distribution center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 32.7973,
+          "lng": -97.0317
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.7959,
+            "west": -97.0334,
+            "north": 32.79805,
+            "east": -97.0299
+          },
+          "truckGate": {
+            "south": 32.7963,
+            "west": -97.0308,
+            "north": 32.7966,
+            "east": -97.0304
+          },
+          "dropYards": [
+            {
+              "south": 32.79615,
+              "west": -97.0331,
+              "north": 32.7968,
+              "east": -97.0302
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.79655,
+              "west": -97.0331,
+              "north": 32.79695,
+              "east": -97.0302
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 19,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Address: 3010 Roy Orr Blvd, Suite 140, Grand Prairie, TX 75050\n- Locked center: 32.797300, -97.031700\n- Maps: https://www.google.com/maps/@32.797300,-97.031700,400m/data=!3m1!1e3\n\nThe roster rooftop geocode (32.797248, -97.031664) moved only 111 m and landed\ndirectly on the correct building. Web research (Daimler careers location page,\nDTNA Dallas PDC business listings) confirms the facility is the 275,000 sq ft\nDallas Parts Distribution Center, serving regional Freightliner / Western Star\n/ Thomas Built Buses dealers. DTNA occupies Suite 140.",
+        "mapsUrl": "https://www.google.com/maps/@32.797300,-97.031700,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Address 3010 Roy Orr Blvd, Suite 140, Grand Prairie TX 75050 — DTNA Dallas PDC, a 275,000 sq ft facility, confirmed via Daimler careers location page and business listings. Roster rooftop geocode moved only 111 m and landed on the correct building. Center locked at 32.797300, -97.031700.",
+          "truckGate": "TRUE. Street View (2024-12) shows a chain-link perimeter fence enclosing the south truck court / dock yard, with a controlled slide gate at the driveway entrance — a truck was captured driving in through the gate.",
+          "guardShack": "FALSE. No guard booth structure at the gate or anywhere on the truck side.",
+          "remoteGs": "TRUE. There is a controlled truck gate but no guard shack — implies kiosk / badge / app check-in.",
+          "dockDoors": "All dock doors on the south long face (single dock bank). Continuous door rhythm the full building length; estimate ~40 doors, 25-50 band — flagged uncertain.",
+          "dropArea": "South truck court has rows of angled trailer drop stalls plus trailers backed into docks; well over 50 trailers' worth of parking. 50+ band, dropYard true.",
+          "trailersVisible": "Roughly 55 trailers counted across the south truck court (backed-in plus parking rows) — estimate, flagged uncertain.",
+          "shipRcvSeparate": "FALSE. Docks are a single bank on the south face only; the north wall has no dock face (it abuts a neighboring equipment-rental yard).",
+          "drivewayLong": "Wide, deep south truck court easily stages 3+ trucks before the docks.",
+          "entryExitTogether": "Single gated driveway into the fenced truck court used for both entry and exit.",
+          "fastLaneOpportunity": "Single gated entrance into the fenced yard; no obvious unused paved width for an express bypass at the gate.",
+          "urbanRural": "Dense industrial district of Grand Prairie within the Dallas-Fort Worth metroplex; Urban.",
+          "railServed": "No rail spur enters the property."
+        }
+      },
+      {
+        "id": "16-des-moines-parts-distribution-center",
+        "name": "Des Moines Parts Distribution Center - Grimes IA",
+        "type": "Parts distribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "urbanRural"
+        ],
+        "center": {
+          "lat": 41.67105,
+          "lng": -93.7837
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.67,
+            "west": -93.7844,
+            "north": 41.6721,
+            "east": -93.7826
+          },
+          "truckGate": {
+            "south": 41.6718,
+            "west": -93.7831,
+            "north": 41.6721,
+            "east": -93.7827
+          },
+          "dropYards": [
+            {
+              "south": 41.6703,
+              "west": -93.783,
+              "north": 41.6719,
+              "east": -93.78265
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.6703,
+              "west": -93.78325,
+              "north": 41.6719,
+              "east": -93.7829
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 28,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 16,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Address: 1000 SE 19th Street, Grimes, IA 50111\n- Locked center: 41.671050, -93.783700\n- Maps: https://www.google.com/maps/@41.671050,-93.783700,400m/data=!3m1!1e3\n\nThe roster geocode (41.671071, -93.783676) moved 1,901 m and landed on the\ncorrect building. Web research (DTNA press release, Grimes Iowa and Greater Des\nMoines Partnership business directories) confirms this is DTNA's Iowa / Des\nMoines Parts Distribution Center — the 9th PDC in DTNA's network, serving 200+\ndealers across the Midwest and Great Plains, ~50 employees on two shifts,\nreceiving up to 8 truckloads/day. The facility's footprint was doubled in a\n2024 expansion.",
+        "mapsUrl": "https://www.google.com/maps/@41.671050,-93.783700,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Address 1000 SE 19th Street, Grimes IA — DTNA's Iowa / Des Moines Parts Distribution Center, the 9th PDC in DTNA's network, serving 200+ Midwest/Great Plains dealers; 50 employees, two shifts, up to 8 truckloads/day; footprint doubled in a 2024 expansion. Confirmed via DTNA press release and Grimes/Greater Des Moines business directories. Roster geocode moved 1,901 m; the corrected pin landed on the correct building. Center locked at 41.671050, -93.783700.",
+          "truckGate": "No perimeter fence, no barrier arm or gate, no guarded checkpoint at any road connection. Street View (2022-10) shows open grass frontage and uncontrolled driveways. Standard open spec-park layout.",
+          "guardShack": "No booth structure at any driveway or in the truck court.",
+          "dockDoors": "All dock doors on the east long face (single dock bank). Continuous door rhythm with trailers backed in; estimate ~30 doors, 25-50 band — flagged uncertain.",
+          "dropArea": "East truck court holds trailers backed into docks plus a parking row of drop trailers; ~25-50 band, dropYard true.",
+          "trailersVisible": "Roughly 28 trailers counted in the east truck court (backed-in plus parking row).",
+          "shipRcvSeparate": "FALSE. Docks are a single bank on the east face only.",
+          "drivewayLong": "Wide, deep east truck court easily stages 3+ trucks before the docks.",
+          "fastLaneOpportunity": "Wide, fully paved truck court with unused apron width — room for an express bypass lane.",
+          "entryExitSeparate": "Two open driveway connections to the road (one near the north car-park area, one toward the south end of the truck court) act as separate in/out routes.",
+          "urbanRural": "Borderline. The PDC sits at the development edge of Grimes (a fast-growing Des Moines suburb) with farmland on the immediate west/south, but surrounded by an industrial park, big-box retail and dense residential subdivisions; classified Urban for the metro-Des-Moines suburban-industrial setting — flagged uncertain.",
+          "connectivityIssue": "FALSE. Within a developed metro-Des-Moines industrial/retail area, not isolated; cellular coverage expected to be normal.",
+          "railServed": "No rail spur enters the property."
+        }
+      }
+    ]
+  }
+}

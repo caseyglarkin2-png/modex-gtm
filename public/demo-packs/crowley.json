@@ -1,0 +1,1503 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:36:01.887Z",
+  "account": {
+    "slug": "crowley",
+    "displayName": "Crowley",
+    "archetype": "logistics-carrier",
+    "siteCount": 14,
+    "coverageNote": {
+      "auditedCount": 14,
+      "estimatedFootprint": null,
+      "droppedStubCount": 0,
+      "capHit": false,
+      "note": "Audited all 14 identifiable facilities."
+    }
+  },
+  "research": {
+    "facility_count": 14,
+    "audited_facilities": 14,
+    "source": "yard-audit",
+    "confidence": "verified",
+    "caveats": [
+      "Crowley Gulfport Terminal - Gulfport MS: audit note mentions 'closed'"
+    ]
+  },
+  "network": {
+    "bbox": [
+      -89.097,
+      18.45,
+      -66.096,
+      39.907
+    ],
+    "archetypeMix": {
+      "#6": 10,
+      "#4": 1,
+      "#9": 2,
+      "#3": 1
+    },
+    "totals": {
+      "dockDoors": 333,
+      "trailerCapacity": 6920,
+      "gates": 13,
+      "railServed": 9,
+      "acres": 1306.6
+    },
+    "sites": [
+      {
+        "id": "01-crowley-jaxport-marine-terminal",
+        "name": "Crowley JAXPORT Marine Terminal - Jacksonville FL",
+        "type": "Marine terminal / container port",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "dockDoors"
+        ],
+        "center": {
+          "lat": 30.3544,
+          "lng": -81.6239
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 30.35,
+            "west": -81.628,
+            "north": 30.3588,
+            "east": -81.6195
+          },
+          "truckGate": {
+            "south": 30.35705,
+            "west": -81.6256,
+            "north": 30.3576,
+            "east": -81.6247
+          },
+          "dropYards": [
+            {
+              "south": 30.3542,
+              "west": -81.6259,
+              "north": 30.3567,
+              "east": -81.6229
+            },
+            {
+              "south": 30.351,
+              "west": -81.6245,
+              "north": 30.354,
+              "east": -81.6205
+            },
+            {
+              "south": 30.3555,
+              "west": -81.6228,
+              "north": 30.3582,
+              "east": -81.62
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 30.3503,
+              "west": -81.6215,
+              "north": 30.3518,
+              "east": -81.6202
+            }
+          ],
+          "staging": {
+            "south": 30.3568,
+            "west": -81.6262,
+            "north": 30.3577,
+            "east": -81.6254
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 12,
+          "trailersVisible": 600,
+          "trailerParkingCapacity": 1400,
+          "truckGateCount": 1,
+          "buildingCount": 9,
+          "siteAreaAcres": 197,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 3,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster point (30.356209, -81.625015 / 2831 Talleyrand Ave) is the\nCrowley Main Port Office — an L-shaped office building ringed by employee\nparking, confirmed at satellite z19. The office is not the operational yard;\nthe audited facility is the Crowley Talleyrand container terminal that the\noffice serves. Wide imagery (z15) shows a continuous container terminal running\nroughly 1 km along the west bank of the St. Johns River: container stacks,\nchassis/trailer yards, gantry-crane berths, transit-shed warehouses, and a tank\nfarm at the north end. Web research (crowley.com, jaxport.com) confirms Crowley\nruns LNG-powered ConRo ships from JAXPORT's Talleyrand Marine Terminal and that\nthe north gate was reconstructed during a terminal modernization.\n\nAudited center set to the terminal interior (~30.3544, -81.6239).",
+        "mapsUrl": "https://www.google.com/maps/@30.354400,-81.623900,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "siteIdentification": "Pinned address 2831 Talleyrand Ave is the Crowley Main Port Office (L-shaped office building w/ employee lot). The audited facility is the full Crowley Talleyrand container terminal that the office serves - a large ConRo terminal running ~1km along the St. Johns River.",
+          "truckGate": "Modernized 'north gate' confirmed in satellite z20 and Street View (2022/2023): a multi-lane covered canopy gate structure with painted yellow lane chevrons and check-in booth modules. Crowley press states the north gate was reconstructed and trucker turn time cut to ~20 min.",
+          "guardShack": "Canopied gate has integrated check-in booth modules under/beside the canopy; a separate small booth structure sits near the road - staffed gate operation.",
+          "entryLanes": "~3 inbound lanes visible under the gate canopy with yellow directional chevrons; exit lanes ~2. Counts approximate.",
+          "fastLaneOpportunity": "Wide gate apron and multi-lane canopy provide physical room for an express/bypass lane.",
+          "dropYard": "Extensive container/chassis stacking yard and trailer parking - many hundreds of containers and trailers visible across the terminal.",
+          "dockDoors": "Marine terminal - no warehouse-style dock bank; count reflects loading doors on the riverside transit shed at the south end (z17). Low confidence.",
+          "scale": "No truck scale clearly resolved in imagery; common at ports but not confirmed - flagged uncertain.",
+          "railServed": "Rail spurs run into the terminal area (visible NW of the gate and along the west edge); Talleyrand has an adjacent intermodal yard (ICTF).",
+          "multipleFacilities": "Campus-scale: gate complex, multiple transit sheds/warehouses, tank farm, container yards and crane-served berths."
+        }
+      },
+      {
+        "id": "02-crowley-jaxport-terminal-office-2",
+        "name": "Crowley JAXPORT Terminal Office #2 - Jacksonville FL",
+        "type": "Marine terminal / container yard",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "dockDoors",
+          "scale",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 30.337571,
+          "lng": -81.628575
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 30.3358,
+            "west": -81.6306,
+            "north": 30.3392,
+            "east": -81.627
+          },
+          "truckGate": {
+            "south": 30.3381,
+            "west": -81.6303,
+            "north": 30.3386,
+            "east": -81.6297
+          },
+          "dropYards": [
+            {
+              "south": 30.3379,
+              "west": -81.6301,
+              "north": 30.3391,
+              "east": -81.6272
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 30.3368,
+              "west": -81.6287,
+              "north": 30.3377,
+              "east": -81.6278
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 32,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "1163 Talleyrand Avenue is Crowley Port Office #2, at the southern end of\nthe Talleyrand terminal complex. The roster geocode reported `movedMeters:\nnull` (low precision), so I verified by imagery and web research. Satellite\n(z16-z21) and Street View (Feb 2025) show a fenced container/trailer yard with\na long warehouse (matching the ~10,000 sqft warehouse Crowley lists for this\noffice) and a \"CROWLEY\" sign on Talleyrand Avenue. Web research confirms Office\n#2 handles Puerto Rico, Port Transfers, Breakbulk/NIT, Car Haulers, individual\nvehicle shippers, and Cross Dock; vehicle receiving M-F 0800-1600.",
+        "mapsUrl": "https://www.google.com/maps/@30.337571,-81.628575,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "siteIdentification": "1163 Talleyrand Ave = Crowley Port Office #2, southern end of the Talleyrand terminal complex. Roster geocode movedMeters null (low precision). Confirmed via satellite + Street View: a fenced container yard with a long warehouse (the ~10,000 sqft warehouse Crowley lists) and a 'CROWLEY' sign on Talleyrand Ave. Office #2 handles Puerto Rico, Breakbulk, Car Haulers, Cross Dock, vehicle receiving.",
+          "truckGate": "Confirmed in Street View 2025-02: a swing/slide gate in the chain-link fence line on Talleyrand Ave, truck observed passing through; 'NO STANDING' sign posted on the road.",
+          "guardShack": "A small booth/kiosk structure with a canopy sits beside the gate (visible in Street View and as a small white structure in z21). Modest footprint; classified guardShack true given port TWIC access control, but the structure is small - flagged uncertain (could be an unmanned kiosk).",
+          "remoteGs": "False because a booth structure is present; flagged uncertain - if the booth is an unmanned kiosk, remoteGs would be true instead.",
+          "backupSensitive": "Gate opens directly onto Talleyrand Avenue, a two-lane through road with a 'NO STANDING' sign - little room to queue without spilling onto the road.",
+          "dockDoors": "Long warehouse with loading doors on the yard-facing side; ~8 estimated, low confidence (port warehouse, not a standard dock bank).",
+          "dropArea": "Container/trailer yard holds several dozen trailers and container stacks; banded 25-50.",
+          "entryLanes": "Single gate opening; ~1 in / 1 out (shared). Counts low confidence.",
+          "scale": "Web profile mentions scales at the broader Talleyrand terminal, but none clearly resolved at this Office #2 gate - left false, flagged uncertain.",
+          "railServed": "Heavy rail yards run immediately west/southwest of the property; spurs serve the Talleyrand terminal complex."
+        }
+      },
+      {
+        "id": "03-crowley-jaxport-terminal-office-3",
+        "name": "Crowley JAXPORT Terminal Office #3 - Jacksonville FL",
+        "type": "Marine terminal / container yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "dockDoors",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 30.35699,
+          "lng": -81.625431
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 30.354,
+            "west": -81.628,
+            "north": 30.359,
+            "east": -81.621
+          },
+          "truckGate": {
+            "south": 30.35655,
+            "west": -81.6261,
+            "north": 30.3576,
+            "east": -81.625
+          },
+          "dropYards": [
+            {
+              "south": 30.354,
+              "west": -81.6259,
+              "north": 30.3567,
+              "east": -81.6222
+            },
+            {
+              "south": 30.3565,
+              "west": -81.6226,
+              "north": 30.3585,
+              "east": -81.621
+            }
+          ],
+          "dockAprons": [],
+          "staging": {
+            "south": 30.3568,
+            "west": -81.6262,
+            "north": 30.3576,
+            "east": -81.6254
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 350,
+          "trailerParkingCapacity": 900,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 93,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 3,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "0-10",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": true
+        },
+        "dossierExcerpt": "3001 Talleyrand Avenue is Crowley Port Office #3. The roster point lands\nessentially on the modernized north-gate canopy of the Talleyrand terminal.\nThis is the same physical terminal as idx 1 (2831 Talleyrand, Main Port Office)\nand idx 4 (2085 Talleyrand) — three Crowley offices on one terminal complex.\nIdx 3 is audited as the **northern terminal section centered on the north\ngate**. Web research (crowley.com) confirms Office #3 handles containers and\nindividual vehicle shippers to Puerto Rico and Central America.",
+        "mapsUrl": "https://www.google.com/maps/@30.356990,-81.625431,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "siteIdentification": "3001 Talleyrand Ave = Crowley Port Office #3. The roster point sits essentially ON the modernized north-gate canopy of the Talleyrand terminal. Idx 1 (2831), idx 3 (3001) and idx 4 (2085) are three Crowley offices on the SAME physical Talleyrand terminal complex; idx 3 is the gate/office at the north end. Audited as the northern terminal section centered on the gate.",
+          "truckGate": "Confirmed at satellite z20: a multi-lane covered gate canopy with yellow lane chevrons painted on the apron - the modernized 'north gate'. A check-in booth structure sits at the head of the canopy.",
+          "guardShack": "A booth/check-in structure is integrated at the head of the gate canopy. Staffed gate (port TWIC access).",
+          "entryLanes": "~5 covered lanes under the gate canopy by the chevron count; assigned ~3 inbound / ~2 outbound. Exit-lane split low confidence.",
+          "fastLaneOpportunity": "Multi-lane covered canopy with a wide apron - clear room for an express/bypass lane.",
+          "scale": "Web profile states the Talleyrand terminal has 3 scales; the modernized multi-lane gate canopy is consistent with in-lane scales. Set true but flagged uncertain (not individually resolved in imagery).",
+          "multiStep": "Multi-lane gated check-in plus the booth at the canopy head, with likely in-lane scaling, indicates a staged check-in process.",
+          "dropArea": "Extensive container/trailer stacking yard east of the gate - hundreds of units; banded 50+.",
+          "dockDoors": "Marine terminal - minimal warehouse dock doors near the gate area; ~6 estimated, low confidence.",
+          "railServed": "Rail spurs serve the Talleyrand terminal complex (visible NW and along the west edge).",
+          "multipleFacilities": "Campus: gate complex, multiple offices/transit sheds, tank farm, container yards."
+        }
+      },
+      {
+        "id": "04-crowley-jaxport-terminal-office-4",
+        "name": "Crowley JAXPORT Terminal Office #4 - Jacksonville FL",
+        "type": "Marine terminal / container yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoors",
+          "scale",
+          "exitLanes",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 30.348098,
+          "lng": -81.622531
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 30.3445,
+            "west": -81.6285,
+            "north": 30.3505,
+            "east": -81.621
+          },
+          "truckGate": {
+            "south": 30.348,
+            "west": -81.6259,
+            "north": 30.3487,
+            "east": -81.625
+          },
+          "dropYards": [
+            {
+              "south": 30.3455,
+              "west": -81.628,
+              "north": 30.3495,
+              "east": -81.6255
+            },
+            {
+              "south": 30.3465,
+              "west": -81.625,
+              "north": 30.349,
+              "east": -81.6228
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 30.347,
+              "west": -81.624,
+              "north": 30.35,
+              "east": -81.6215
+            }
+          ],
+          "staging": {
+            "south": 30.3487,
+            "west": -81.6259,
+            "north": 30.3495,
+            "east": -81.6249
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 15,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 300,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 120,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 3,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": true
+        },
+        "dossierExcerpt": "2085 Talleyrand Avenue is Crowley Port Office #4 (roster geocode reported\n`movedMeters: 370` — moderate uncertainty, so verified by imagery). Satellite\n(z16-z20) and Street View confirm this is the **southern RoRo / vehicle section\nof the Talleyrand terminal**: a vast automobile staging yard with thousands of\nvehicles in marked rows, a large riverside transit-shed warehouse, and\nbreakbulk / car-hauler operations. Web research confirms Office #4 handles Car\nHaulers, Motorcycles, and Individual Vehicle Shippers. This is the same\nphysical Talleyrand terminal as idx 1 (2831) and idx 3 (3001).",
+        "mapsUrl": "https://www.google.com/maps/@30.348098,-81.622531,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "siteIdentification": "2085 Talleyrand Ave = Crowley Port Office #4 (roster geocode movedMeters 370). Confirmed by imagery: the southern RoRo/vehicle section of the Talleyrand terminal - a vast automobile staging yard (thousands of vehicles in rows), a large riverside transit-shed warehouse, and breakbulk/car-hauler operations. Office #4 handles Car Haulers, Motorcycles, Individual Vehicle Shippers. Same physical terminal as idx 1 (2831) and idx 3 (3001).",
+          "truckGate": "Confirmed - the consolidated modernized covered multi-lane terminal gate, seen from inside in interior Street View (gantry cranes behind it, auto-storage rows alongside). Web directions: 'turn left to 2085 where the gate will be on the right.'",
+          "guardShack": "Booth/check-in structures at the covered gate canopy; staffed port gate (TWIC access control).",
+          "entryLanes": "Multi-lane covered gate canopy; ~3 inbound / ~2 outbound assigned; exit split low confidence.",
+          "fastLaneOpportunity": "Wide covered multi-lane gate with ample apron - room for an express/bypass lane.",
+          "dockDoors": "Large riverside transit-shed warehouse with loading doors on its faces; ~15 estimated, banded 10-25, low confidence (port transit shed, not a standard cross-dock).",
+          "dropArea": "Vehicle-staging RoRo cargo is the dominant 'drop' use - thousands of cars in marked rows, plus trailer/container storage; banded 50+.",
+          "scale": "Talleyrand terminal advertises 3 scales; set true consistent with the multi-lane gate, flagged uncertain (not individually resolved).",
+          "multiStep": "Multi-lane gated check-in with canopy booth and likely in-lane scaling - staged process.",
+          "railServed": "Rail spurs run alongside Talleyrand Ave into the terminal (visible at z20).",
+          "multipleFacilities": "Campus-scale terminal: gate complex, transit-shed warehouse, multiple auto-storage yards, offices."
+        }
+      },
+      {
+        "id": "05-crowley-port-everglades-terminal",
+        "name": "Crowley Port Everglades Terminal - Fort Lauderdale FL",
+        "type": "Marine terminal / container port",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 26.065508,
+          "lng": -80.124022
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 26.0635,
+            "west": -80.1262,
+            "north": 26.07,
+            "east": -80.1215
+          },
+          "truckGate": {
+            "south": 26.0649,
+            "west": -80.1246,
+            "north": 26.0662,
+            "east": -80.1234
+          },
+          "dropYards": [
+            {
+              "south": 26.0636,
+              "west": -80.1236,
+              "north": 26.0695,
+              "east": -80.1216
+            },
+            {
+              "south": 26.064,
+              "west": -80.1261,
+              "north": 26.069,
+              "east": -80.1247
+            }
+          ],
+          "dockAprons": [],
+          "staging": {
+            "south": 26.0664,
+            "west": -80.1239,
+            "north": 26.0672,
+            "east": -80.1228
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 700,
+          "trailerParkingCapacity": 1500,
+          "truckGateCount": 1,
+          "buildingCount": 7,
+          "siteAreaAcres": 78,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 4,
+          "exitLanes": 4,
+          "fastLaneOpportunity": true,
+          "dockDoors": "NONE",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": true
+        },
+        "dossierExcerpt": "4300 McIntosh Road is the Crowley Port Everglades Terminal, a 78-acre\ncontainer terminal in the Southport area of Port Everglades. The roster\ncoordinates are accurate. Satellite imagery (z15-z21) shows a large container\nterminal — container stacks, chassis/trailer yards, gantry-crane berths along\nthe waterway, and intermodal rail spurs on the west side. Web research\n(crowley.com, porteverglades.net, petpev.com) confirms the terminal: 78 acres,\n8 lanes, 4 scales, 3 berths, 5,000-FEU yard capacity, rail access.",
+        "mapsUrl": "https://www.google.com/maps/@26.065508,-80.124022,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "siteIdentification": "4300 McIntosh Road = Crowley Port Everglades Terminal, a 78-acre container terminal in Port Everglades' Southport area. Confirmed by imagery + web (crowley.com, porteverglades.net, petpev.com): container stacks, chassis yards, 3 gantry-crane berths, rail spurs. Roster coords accurate.",
+          "truckGate": "Confirmed - the terminal has a covered multi-lane in-gate (white canopy structures at z20 with painted lane arrows and an office/check-in building). Trucks also pass the outer McIntosh Road port security checkpoint. Web: 8 lanes, 4 scales.",
+          "guardShack": "Check-in booth structures at the covered gate canopy plus the McIntosh Road security checkpoint; staffed (TWIC port access, escort fees collected).",
+          "entryLanes": "Web states 8 total lanes; assigned ~4 inbound / ~4 outbound. Exit-lane split flagged uncertain.",
+          "fastLaneOpportunity": "8-lane covered gate with wide aprons - clear room for express/bypass lanes.",
+          "scale": "Web confirms 4 scales at the terminal gate complex - scale TRUE (high confidence).",
+          "multiStep": "Two-stage entry: outer McIntosh Road port security checkpoint, then the terminal's own multi-lane scaled in-gate - clearly a staged check-in.",
+          "dropArea": "Very large container/chassis stacking yard, 5,000 FEU yard capacity per web; hundreds of trailers/containers - banded 50+.",
+          "dockDoors": "Marine container terminal - no warehouse dock-door bank; cargo handled crane-to-yard at 3 berths. dockDoors NONE.",
+          "railServed": "Rail spurs run along the west side of the terminal (intermodal rail yard) - rail-served TRUE.",
+          "multipleFacilities": "Campus-scale terminal: gate complex, offices, maintenance buildings, multiple container/chassis yards, 3 berths.",
+          "backupSensitive": "Large queuing aprons and a roundabout at the McIntosh Road entry give ample truck stacking room - not backup-sensitive."
+        }
+      },
+      {
+        "id": "06-isla-grande-terminal",
+        "name": "Crowley Isla Grande Terminal - San Juan PR",
+        "type": "Marine terminal / container port (LNG-fueled microgrid, ConRo)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "exitLanes",
+          "scale"
+        ],
+        "center": {
+          "lat": 18.454,
+          "lng": -66.1005
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 18.45,
+            "west": -66.1045,
+            "north": 18.4565,
+            "east": -66.096
+          },
+          "truckGate": {
+            "south": 18.4542,
+            "west": -66.1021,
+            "north": 18.4548,
+            "east": -66.1013
+          },
+          "dropYards": [
+            {
+              "south": 18.4525,
+              "west": -66.1018,
+              "north": 18.4547,
+              "east": -66.0965
+            },
+            {
+              "south": 18.4505,
+              "west": -66.1008,
+              "north": 18.453,
+              "east": -66.097
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 18.4538,
+              "west": -66.1042,
+              "north": 18.4552,
+              "east": -66.1025
+            }
+          ],
+          "staging": {
+            "south": 18.4547,
+            "west": -66.1025,
+            "north": 18.4553,
+            "east": -66.0985
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 12,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 600,
+          "truckGateCount": 1,
+          "buildingCount": 9,
+          "siteAreaAcres": 160,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": true,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 3,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinates (18.45679, -66.093211) fell on the **Isla Grande airport\nrunway**, roughly 1 km NE of the actual terminal. Web research confirmed the\nterminal is \"across from Isla Grande Airport\" on Calle Lindbergh. Wide z16\nsatellite revealed the container terminal southwest of the runway: distinctive\nred/blue container stacks, a ConRo pier with a container barge berthed, and\nchassis/trailer marshalling rows. Street View along the perimeter road shows\nCrowley-branded trailers, tractors, and gantry cranes — positively identified.",
+        "mapsUrl": "https://www.google.com/maps/@18.45400,-66.10050,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (18.45679,-66.093211) landed on the Isla Grande airport runway ~1km NE of the terminal. True terminal located SW of the runway via satellite + Street View; access road is Calle Lindbergh running along the airport's south edge.",
+          "truckGate": "Multi-lane gate complex with a long overhead steel canopy spanning the inbound/outbound lanes, visible in Street View (sv12/sv14) at ~18.4546,-66.1015. Controlled marine-terminal gate.",
+          "guardShack": "Gate booth structures sit beneath the canopy at the gate lanes; an additional red/pink kiosk-style booth is present. Staffed marine-terminal gate per port operating practice.",
+          "entryExitSeparate": "Multiple parallel lanes under the canopy; inbound and outbound separated within the gate complex.",
+          "dockDoors": "Marine terminal — primary cargo handling is vessel-side at the ConRo pier, not building dock doors. Counted ~12 warehouse/maintenance-building dock positions; low-confidence band 10-25.",
+          "dropArea": "Very large chassis/trailer/container marshalling yard with hundreds of trailers and container stacks visible in tight imagery.",
+          "scale": "No truck scale clearly identified in imagery; flagged uncertain.",
+          "backupSensitive": "Gate sits directly on Calle Lindbergh; trailer staging already lines the road, so a queue can spill onto the public road.",
+          "railServed": "No rail spur entering the terminal property.",
+          "multipleFacilities": "Campus: ConRo pier, multiple warehouse and maintenance buildings, large open container/chassis yard."
+        }
+      },
+      {
+        "id": "07-penn-terminals",
+        "name": "Crowley Penn Terminals - Eddystone PA",
+        "type": "Marine terminal with dry + refrigerated warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 39.853,
+          "lng": -75.338
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.8495,
+            "west": -75.3415,
+            "north": 39.856,
+            "east": -75.3345
+          },
+          "truckGate": {
+            "south": 39.8549,
+            "west": -75.3392,
+            "north": 39.8556,
+            "east": -75.338
+          },
+          "dropYards": [
+            {
+              "south": 39.851,
+              "west": -75.34,
+              "north": 39.8545,
+              "east": -75.3355
+            },
+            {
+              "south": 39.8525,
+              "west": -75.338,
+              "north": 39.8555,
+              "east": -75.335
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.8532,
+              "west": -75.34,
+              "north": 39.8547,
+              "east": -75.337
+            }
+          ],
+          "staging": {
+            "south": 39.8544,
+            "west": -75.3405,
+            "north": 39.8556,
+            "east": -75.338
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 260,
+          "trailerParkingCapacity": 500,
+          "truckGateCount": 1,
+          "buildingCount": 8,
+          "siteAreaAcres": 107,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (39.853752, -75.338927) landed inside the terminal —\nconfirmed correct (ROOFTOP geocode). Penn Terminals sits at the end of Saville\nAvenue on the Delaware River in Eddystone, PA. Web research confirmed the\naddress and that the terminal is \"straight ahead at the end of Saville Avenue.\"\nSatellite imagery shows the long dry warehouse, refrigerated warehouse, a large\ncontainer/chassis storage yard, and a river pier. Street View along Saville Ave\nshows the terminal warehouse, chain-link perimeter fence, and the historic\nbrick Penn Terminals office building near the entrance.",
+        "mapsUrl": "https://www.google.com/maps/@39.85300,-75.33800,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (39.853752,-75.338927) landed inside the terminal — confirmed correct. Penn Terminals at the end of Saville Avenue, Eddystone PA, on the Delaware River. Confirmed via satellite (warehouses + container yard + pier) and Street View along Saville Ave (terminal warehouse, perimeter fence, historic brick Penn Terminals office building).",
+          "truckGate": "Marine terminal operated under MTSA/ISPS security regime — access is via a controlled gate at the east end of Saville Avenue. Street View coverage ended at the warehouse before the gate itself, so the gate structure was not directly imaged; marked uncertain. Chain-link perimeter fencing visible in multiple Street View frames.",
+          "guardShack": "Inferred from MTSA-regulated marine terminal access control; the Penn Terminals office sits at the entrance and an escort/check-in process is documented (escort fee paid at the terminal entrance). Not directly imaged — marked uncertain.",
+          "dockDoors": "Long ~300,000 sq ft dry warehouse with a continuous bank of dock doors on its NW face; trailers/containers backed in confirm dock positions. Counted ~35; band 25-50.",
+          "dropArea": "Extensive container and chassis storage across the open terminal yard — hundreds of containers/trailers in stacks and rows.",
+          "railServed": "Rail line and rail yard run along the north edge of the terminal; rail tracks cross Saville Avenue at the terminal entrance (visible in Street View). Penn Terminals is rail-served.",
+          "multipleFacilities": "Campus: dry warehouse, refrigerated warehouse, multiple ancillary buildings, pier, large container yard.",
+          "drivewayLong": "Saville Avenue is a long approach road dedicated to the terminal; ample queue room before the gate.",
+          "entryLanes": "Not directly imaged; estimated single in/out lane at the gate — low confidence.",
+          "scale": "No truck scale clearly identified; flagged uncertain."
+        }
+      },
+      {
+        "id": "08-holt-terminals-gloucester-terminal",
+        "name": "Crowley Holt Terminals (Gloucester Terminal) - Gloucester City NJ",
+        "type": "Marine terminal / breakbulk yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "trailersVisible"
+        ],
+        "center": {
+          "lat": 39.9035,
+          "lng": -75.1255
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.9005,
+            "west": -75.1305,
+            "north": 39.907,
+            "east": -75.1215
+          },
+          "truckGate": {
+            "south": 39.9023,
+            "west": -75.1242,
+            "north": 39.903,
+            "east": -75.123
+          },
+          "dropYards": [
+            {
+              "south": 39.901,
+              "west": -75.127,
+              "north": 39.9035,
+              "east": -75.1225
+            },
+            {
+              "south": 39.904,
+              "west": -75.1275,
+              "north": 39.9068,
+              "east": -75.123
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.901,
+              "west": -75.1295,
+              "north": 39.9032,
+              "east": -75.1265
+            }
+          ],
+          "staging": {
+            "south": 39.9023,
+            "west": -75.126,
+            "north": 39.9033,
+            "east": -75.1235
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 350,
+          "truckGateCount": 1,
+          "buildingCount": 7,
+          "siteAreaAcres": 137,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (39.903121, -75.122743) land at the terminal — confirmed\ncorrect. Web research established that 160 Essex Street is the **Pier 8 & 9\nWarehouse**: a solar-powered, 25-million-cubic-foot refrigerated facility with\n100+ dock doors, part of the Holt-operated Gloucester Marine Terminal in the\nPort of Philadelphia. Satellite imagery shows a complex of large solar-roofed\nwarehouses on piers extending into the Delaware River, with a breakbulk/\ncontainer yard. Street View at the east entrance shows a posted \"TRUCK\nENTRANCE\" sign and a \"GATE\" sign — positively identified.",
+        "mapsUrl": "https://www.google.com/maps/@39.90350,-75.12550,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (39.903121,-75.122743) land at the terminal — confirmed correct. 160 Essex Street is the Pier 8 & 9 Warehouse (solar-powered, 25M cu ft refrigerated, 100+ dock doors) within the Holt-operated Gloucester Marine Terminal. Identified via satellite (solar-roofed warehouse complex on the Delaware River) and Street View (signed TRUCK ENTRANCE / GATE).",
+          "truckGate": "Confirmed — Street View shows a posted 'TRUCK ENTRANCE' sign and a 'GATE' sign at the east entrance off Essex/King Street; a gate building and cone-managed gate lanes are visible (sv2/sv4). Satellite z20 shows a gate booth structure and a gate barrier arm across the lane.",
+          "guardShack": "A small staffed gate building sits at the truck-entrance lanes (dark structure visible in z20 satellite and in Street View). Marine terminal under MTSA security. remoteGs = false.",
+          "dockDoors": "Pier 8 & 9 refrigerated warehouse alone has 100+ dock doors per Holt documentation; the terminal complex carries well over 50 dock doors. Band 50+.",
+          "dropArea": "Open paved yard holds breakbulk cargo, parked trailers, and rows of chassis/equipment; estimated 25-50 drop trailers.",
+          "railServed": "Rail tracks serve the terminal complex (rail/road bridge crosses the property; rail access into the Port of Philadelphia complex). railServed = true.",
+          "multipleFacilities": "Campus: multiple large solar-roofed warehouses (Pier 8&9 plus northern warehouse blocks), breakbulk yard, piers.",
+          "backupSensitive": "Truck gate fronts a street with adjacent residential development; limited stacking before the gate can push a queue toward the road.",
+          "fastLaneOpportunity": "Wide paved gate apron with multiple lanes and unused width.",
+          "entryLanes": "Approximately 2 in / 2 out at the gate, cone-managed — counts are estimates, flagged uncertain.",
+          "scale": "No truck scale clearly identified; flagged uncertain."
+        }
+      },
+      {
+        "id": "09-wilmington-port-terminal",
+        "name": "Crowley Wilmington Port Terminal - Wilmington NC",
+        "type": "Marine terminal / cargo yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes",
+          "scale"
+        ],
+        "center": {
+          "lat": 34.193,
+          "lng": -77.952
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.187,
+            "west": -77.9555,
+            "north": 34.198,
+            "east": -77.9485
+          },
+          "truckGate": {
+            "south": 34.1913,
+            "west": -77.9497,
+            "north": 34.192,
+            "east": -77.9485
+          },
+          "dropYards": [
+            {
+              "south": 34.189,
+              "west": -77.9535,
+              "north": 34.1945,
+              "east": -77.949
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.188,
+              "west": -77.9555,
+              "north": 34.196,
+              "east": -77.953
+            }
+          ],
+          "staging": {
+            "south": 34.1912,
+            "west": -77.951,
+            "north": 34.1925,
+            "east": -77.949
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 400,
+          "truckGateCount": 1,
+          "buildingCount": 8,
+          "siteAreaAcres": 182,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "0-10",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (34.196262, -77.948378) landed at the port's\nadministrative/office cluster on Burnett Boulevard. Web research established\nthat 2202 Burnett Boulevard is the address of the **Port of Wilmington (NC\nState Ports Authority)** — the container terminal from which Crowley operates\nits Wilmington marine service. The operational container terminal lies SW of\nthe office cluster; the locked center is ~34.1930, -77.9520. Street View near\nthe access road shows a \"NORTH CAROLINA PORTS\" sign, gantry cranes, and\ncontainer stacks — positively identified.",
+        "mapsUrl": "https://www.google.com/maps/@34.19300,-77.95200,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (34.196262,-77.948378) landed at the port's administrative/office area on Burnett Boulevard. 2202 Burnett Blvd is the address of the Port of Wilmington (NC State Ports Authority) container terminal, where Crowley operates its Wilmington marine service. The operational container terminal is SW of the office cluster — locked center ~34.1930,-77.9520.",
+          "truckGate": "Confirmed — Street View shows the divided port access road leading to a controlled gate; z20 satellite shows a gate booth structure with lane markings and a barrier arm, with a tractor-trailer passing through.",
+          "guardShack": "A gate booth structure sits at the gate lanes (visible in z19-20 satellite). Marine terminal under MTSA/port security. remoteGs = false.",
+          "entryExitSeparate": "Divided multi-lane port access road with separate inbound/outbound lanes through the gate complex.",
+          "dockDoors": "Marine container terminal — cargo handling is vessel-side via gantry cranes, not building dock doors. Few warehouse dock positions visible; band 0-10, low confidence.",
+          "dropArea": "Very large container/chassis marshalling yard with extensive container stacks and chassis rows.",
+          "railServed": "Rail line runs into and along the terminal (rail crossing on the access road visible in Street View); on-dock rail. railServed = true.",
+          "multipleFacilities": "Port campus: container yard, multiple warehouse/admin buildings, berths, gantry cranes.",
+          "fastLaneOpportunity": "Wide divided gate apron with multiple lanes and spare paved width.",
+          "scale": "No truck scale clearly identified; flagged uncertain.",
+          "entryLanes": "Approximately 2 in / 2 out — estimate from satellite, flagged uncertain."
+        }
+      },
+      {
+        "id": "10-gulfport-terminal",
+        "name": "Crowley Gulfport Terminal - Gulfport MS",
+        "type": "Marine terminal / port facility",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 30.36,
+          "lng": -89.095
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 30.355,
+            "west": -89.097,
+            "north": 30.3645,
+            "east": -89.0905
+          },
+          "truckGate": {
+            "south": 30.3628,
+            "west": -89.0952,
+            "north": 30.3642,
+            "east": -89.0942
+          },
+          "dropYards": [
+            {
+              "south": 30.3555,
+              "west": -89.096,
+              "north": 30.361,
+              "east": -89.0925
+            },
+            {
+              "south": 30.361,
+              "west": -89.0965,
+              "north": 30.364,
+              "east": -89.094
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 30.3555,
+              "west": -89.0965,
+              "north": 30.36,
+              "east": -89.0948
+            }
+          ],
+          "staging": {
+            "south": 30.3628,
+            "west": -89.096,
+            "north": 30.3642,
+            "east": -89.0945
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 10,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 450,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 163,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "0-10",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (30.363167, -89.096963) carried a RANGE_INTERPOLATED\ngeocode and landed near the Gulfport small-craft harbor / port edge. Web\nresearch established that Crowley's Gulfport facility is at 692 West Pier\n— the West Pier Terminal of the Port of Gulfport (Mississippi State Port\nAuthority), where Crowley leases warehouse/yard space alongside Dole and\nChiquita. The operational marine terminal is the pier complex extending into\nthe Gulf of Mexico; the locked center is ~30.3600, -89.0950. CROWLEY-branded\ncontainers are visible at the port entrance in Street View — confirmed.",
+        "mapsUrl": "https://www.google.com/maps/@30.36000,-89.09500,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (30.363167,-89.096963, RANGE_INTERPOLATED) landed near the Gulfport small-craft harbor / port edge. 692 30th Avenue / 692 West Pier is the West Pier Terminal of the Port of Gulfport (MS State Port Authority), where Crowley leases space alongside Dole and Chiquita. The operational marine terminal is the pier complex extending into the Gulf — locked center ~30.3600,-89.0950.",
+          "truckGate": "Confirmed — the entire Port of Gulfport is enclosed by a tall ornamental steel security fence (visible in multiple Street View frames). The truck access road runs into the secured terminal through a controlled checkpoint; a 'GULFPORT' port-entrance sign and CROWLEY-branded containers are visible at the entrance. Marine terminal under MTSA security.",
+          "guardShack": "Inferred — MTSA-regulated secured port; access road has a controlled entrance. Street View coverage ended at the gate so the gate booth itself was not directly imaged; flagged uncertain. remoteGs = false.",
+          "dockDoors": "Marine terminal — cargo is handled vessel-side via gantry cranes; warehouses (Shed 16, West Pier Terminal Warehouse) carry limited dock doors. Band 0-10, low confidence.",
+          "dropArea": "Extensive container/chassis marshalling across the West Pier and adjacent laydown yards — large stacks and chassis rows visible.",
+          "railServed": "Multiple rail lines run into and along the terminal (visible in satellite); on-dock rail. railServed = true.",
+          "multipleFacilities": "Port campus: West Pier Terminal, warehouses, container yard, berths/gantry cranes, plus the Port of Gulfport marine building.",
+          "fastLaneOpportunity": "Wide port entrance road and apron with ample paved width and multiple lanes.",
+          "scale": "No truck scale clearly identified; flagged uncertain.",
+          "entryLanes": "Approximately 2 in / 2 out — estimate, flagged uncertain (gate not directly imaged in Street View)."
+        }
+      },
+      {
+        "id": "11-crowley-conley-container-yard",
+        "name": "Crowley Conley Container Yard - Conley GA (Atlanta)",
+        "type": "Inland container yard / intermodal logistics hub",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "buildingCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 33.65645,
+          "lng": -84.3447
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.6548,
+            "west": -84.3462,
+            "north": 33.6573,
+            "east": -84.3433
+          },
+          "truckGate": {
+            "south": 33.65655,
+            "west": -84.3443,
+            "north": 33.65685,
+            "east": -84.34395
+          },
+          "dropYards": [
+            {
+              "south": 33.65555,
+              "west": -84.3461,
+              "north": 33.6573,
+              "east": -84.3442
+            },
+            {
+              "south": 33.655,
+              "west": -84.3442,
+              "north": 33.6565,
+              "east": -84.34335
+            }
+          ],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 13.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "NONE",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied 33.656392, -84.344522 (geocoding-api, ROOFTOP, moved 52 m).\nSatellite probes (z16-z20) around that point show the **\"Transport City\"\nindustrial outdoor-storage (IOS) park** off Transport City Drive in Conley,\nthe dense SE industrial edge of metro Atlanta (\"Trucker's Alley\").\n\nWeb research confirmed:\n- LoopNet / property listings describe Transport City as a full-service IOS\n  asset offering trailer/truck parking, service & maintenance, and\n  equipment/material storage along the I-285/I-675 corridor.\n- Crowley's locations page lists a Conley (Atlanta-area) container yard;\n  Crowley's land-transportation arm runs intermodal/drayage container service.\n\nCrowley's Conley operation is a drayage / intermodal container drop yard —\na large fenced lot for trailer and container storage with a small office, not",
+        "mapsUrl": "https://www.google.com/maps/@33.65645,-84.34470,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facility": "Crowley's Conley (Atlanta) inland container yard sits inside the 'Transport City' industrial outdoor storage park off Transport City Drive. It is a drayage/intermodal container drop yard, not a dock-door warehouse.",
+          "truckGate": "Street View (pano 33.65675,-84.34416, captured 2025-02) shows a chain-link SWING GATE across a single yard drive, with multiple signs mounted on the gate/fence. Whole yard ringed by chain-link perimeter fence.",
+          "guardShack": "No staffed booth at the gate. The only structure is a single-story metal office building set well back from the gate, not a gate-side booth — classified remoteGs (gate but no guard shack, kiosk/sign check-in).",
+          "dropArea": "Large gravel/paved drop yard holds ~50-55 visible parked trailers/containers in diagonal rows plus a separate container storage area with stacked containers and chassis; capacity easily 50+.",
+          "dockDoors": "No loading-dock doors; this is a container/trailer storage and drayage yard with no warehouse dock face.",
+          "postGateStaging": "Open paved apron immediately inside the gate provides interior staging room before trailers are spotted.",
+          "drivewayLong": "Internal yard drive from the gate is long with ample room to stack 3+ trucks before reaching parking rows.",
+          "urbanRural": "Conley is at Atlanta's dense SE industrial edge ('Trucker's Alley'), surrounded by warehouses and LTL terminals — Urban.",
+          "buildingCount": "Two small structures: a metal office building and an adjacent office trailer/equipment shed; no large warehouse.",
+          "confidence": "Medium — facility is unambiguously Crowley's Conley container yard within Transport City, gate and yard layout clearly visible in 2025 Street View and Maxar satellite, but exact parcel boundary between Crowley's yard and neighboring IOS tenants is approximate, and lane counts are inferred from a single-drive gate."
+        }
+      },
+      {
+        "id": "12-crowley-jacksonville-distribution-center",
+        "name": "Crowley Jacksonville Distribution Center (Dry/LCL) - Jacksonville FL",
+        "type": "Distribution center / dry + LCL warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 30.3634,
+          "lng": -81.69445
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 30.3627,
+            "west": -81.6956,
+            "north": 30.36405,
+            "east": -81.69335
+          },
+          "truckGate": {
+            "south": 30.3629,
+            "west": -81.6956,
+            "north": 30.3632,
+            "east": -81.69525
+          },
+          "dropYards": [
+            {
+              "south": 30.3628,
+              "west": -81.6943,
+              "north": 30.3636,
+              "east": -81.69335
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 30.3632,
+              "west": -81.695,
+              "north": 30.3639,
+              "east": -81.69455
+            },
+            {
+              "south": 30.3628,
+              "west": -81.69455,
+              "north": 30.36335,
+              "east": -81.69385
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 27,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 5.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied 30.363189, -81.694406 (geocoding-api, ROOFTOP, moved 93 m).\nThis point lands on a white-roofed, L-shaped warehouse in Jacksonville's NW\nindustrial district near JAXPORT.\n\nThere are several warehouses in this block, so identification was checked\ncarefully:\n- The large brown-roofed warehouse immediately NORTH carries a wall sign\n  reading \"USA BIG MOUNTAIN PAPER 2160\" (Street View 2025-03) — a SEPARATE\n  tenant, NOT Crowley. Address 2160, not 2113.\n- The white L-shaped warehouse (the geocoded building) shows **CROWLEY-branded\n  trailers backed into its dock doors** in 2025-03 Street View — positively\n  confirming this as Crowley's 2113 W 30th Street DC.\n\nWeb research (Crowley logistics pages, Racklify, TruckMap, JaxDailyRecord)\nconfirms 2113 W 30th St as a 100,418 sq ft Crowley distribution center with",
+        "mapsUrl": "https://www.google.com/maps/@30.36340,-81.69445,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facility": "Crowley Jacksonville Dry/LCL Distribution Center, 2113 W 30th Street. Identified positively by CROWLEY-branded trailers backed into the dock face in 2025-03 Street View. The roster's geocoded point landed on this white L-shaped warehouse; the brown-roofed building to the north is a separate tenant ('USA Big Mountain Paper, 2160').",
+          "truckGate": "The fenced truck yard (chain-link perimeter) is entered from the unnamed industrial street on the SW side. Street View shows a chain-link gate opening; no barrier-arm at the public road but a controlled fenced yard entrance.",
+          "guardShack": "No staffed guard booth at the yard gate. Web research confirms 24/7 security monitoring (camera/electronic), consistent with remote check-in rather than a manned booth — classified remoteGs.",
+          "dockDoors": "Web research (Crowley/Racklify listings) states 27 dock doors at the 100,418 sq ft facility. Satellite + Street View confirm two dock banks: a west-face bank (~7-8 doors) and a south-east-face bank (~10+ doors with CROWLEY trailers backed in) — band 25-50.",
+          "shipRcvSeparate": "Dock doors are split across two physically separate building faces of the L-shaped warehouse (a west bank and a south-east bank), supporting separate shipping/receiving clusters.",
+          "dropArea": "10-25 trailers parked in the yard south/east of the building (CROWLEY trailers and others); not a large dedicated drop lot but a working trailer yard.",
+          "bonded": "Facility is a U.S. Customs bonded warehouse (LCL consolidation/deconsolidation, dry cargo, plus an in-building CrowleyFresh cold-storage section).",
+          "drivewayLong": "Large open paved truck apron in front of the dock banks easily holds a 3+ truck queue.",
+          "urbanRural": "Inside Jacksonville's NW industrial fabric near JAXPORT — Urban.",
+          "confidence": "High — facility positively identified by Crowley branding on docked trailers; dock count corroborated by web research; layout, gate, and yard clearly visible in 2025 Street View and Maxar satellite. Lane counts and exact drop-yard capacity remain estimates."
+        }
+      },
+      {
+        "id": "13-crowley-jacksonville-cross-dock-facility",
+        "name": "Crowley Jacksonville Cross Dock Facility - Jacksonville FL",
+        "type": "Cross-dock / distribution warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "guardShack",
+          "trailerParkingCapacity",
+          "railServed"
+        ],
+        "center": {
+          "lat": 30.3464,
+          "lng": -81.6968
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 30.3447,
+            "west": -81.6982,
+            "north": 30.3481,
+            "east": -81.6954
+          },
+          "truckGate": {
+            "south": 30.34735,
+            "west": -81.69605,
+            "north": 30.34775,
+            "east": -81.6956
+          },
+          "dropYards": [
+            {
+              "south": 30.3449,
+              "west": -81.6982,
+              "north": 30.3462,
+              "east": -81.6964
+            },
+            {
+              "south": 30.3462,
+              "west": -81.6962,
+              "north": 30.3476,
+              "east": -81.69545
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 30.3462,
+              "west": -81.6979,
+              "north": 30.347,
+              "east": -81.6962
+            }
+          ],
+          "staging": {
+            "south": 30.347,
+            "west": -81.6964,
+            "north": 30.348,
+            "east": -81.69555
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 58,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 12.1,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied 30.324541, -81.663312 (geocoding-api, GEOMETRIC_CENTER,\nmoved 3 m). Satellite probes there showed downtown Jacksonville's St. Johns\nRiver waterfront — an office tower, a swimming pool, riverwalk — not a\ncross-dock facility. The geocode was badly wrong.\n\nRe-resolution by research:\n- 2061 SCL Drive is in ZIP 32209 (the same NW-Jacksonville industrial\n  district as Crowley's 2113 W 30th St DC).\n- \"SCL Drive\" is named for the Seaboard Coast Line railroad.\n- Web research (Crowley/LogiCore listings) places the cross-dock near I-95 and\n  MLK Jr Parkway, adjacent to the West Jacksonville rail yard.\n\nProbing the rail-yard edge of NW Jacksonville located a large LTL/cross-dock\nterminal complex pressed hard against the CSX/Seaboard rail yard at\n~30.3464, -81.6968. This is the only facility of this kind on SCL Drive by",
+        "mapsUrl": "https://www.google.com/maps/@30.34640,-81.69680,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facility": "Crowley Jacksonville Cross Dock at 2061 Seaboard Coast Line (SCL) Drive, 32209. The roster's geocoded coordinate (30.324541,-81.663312, GEOMETRIC_CENTER) was WRONG — it pointed at downtown Jacksonville's St. Johns riverfront. SCL Drive is named for the Seaboard Coast Line railroad; web research places the cross-dock near I-95 / MLK Jr Parkway adjacent to the West Jacksonville rail yard. The resolved site is the large LTL/cross-dock terminal complex hard against the CSX/Seaboard rail yard at ~30.3464,-81.6968.",
+          "identification": "No explicit Crowley nameplate was visible in available Street View, so identification is by strong circumstantial match: it is the only large cross-dock/LTL terminal complex on SCL Drive beside the rail yard in 32209, and its physical profile matches Crowley's published spec exactly (12.1 acres, ~45,580 sq ft of buildings with a 31,500 sq ft long cross-dock, a separate ~10,000 sq ft trailer maintenance building, 150+ trailer yard). Hapag-Lloyd / China Shipping ocean containers in the yard fit an ocean-carrier LCL/cross-dock operation.",
+          "truckGate": "TRUE. Street View (2022-12) shows a chain-link sliding gate across the truck driveway off the east access road.",
+          "guardShack": "TRUE (medium confidence). Street View shows a small peaked-roof gatehouse structure beside the entrance lane just inside the gate; satellite z20 confirms a small building footprint at the gate. Listed in uncertainFields because the structure could not be 100% confirmed as a manned booth vs a small office.",
+          "dockDoors": "50+ band. Web research states 58 dock doors; satellite confirms a long cross-dock building with dock doors and trailers backed in along both long faces.",
+          "shipRcvSeparate": "TRUE. The long cross-dock building has dock banks on both opposing long faces — a classic cross-dock through-flow with separate inbound/outbound sides.",
+          "dropArea": "50+. A very large paved trailer drop yard holds well over 100 trailers/tractors; Crowley spec lists 150+ yard capacity.",
+          "multipleFacilities": "TRUE. The campus has the long cross-dock building plus several support buildings, including a separate ~10,000 sq ft trailer maintenance facility.",
+          "fastLaneOpportunity": "TRUE. Wide paved gate apron and abundant unused paved width inside the gate provide room to add an express/bypass lane.",
+          "railServed": "Set false. The site abuts a major rail yard but no dedicated rail spur is clearly visible running into the property; flagged uncertain.",
+          "confidence": "Medium — the cross-dock site is resolved with high spatial confidence (only matching facility on SCL Drive by the rail yard) and the layout matches Crowley's published spec, but no on-site Crowley signage was visible and the roster geocode was badly wrong, so the operator identity rests on circumstantial evidence."
+        }
+      },
+      {
+        "id": "14-crowley-crowleyfresh-distribution-center",
+        "name": "Crowley CrowleyFresh Distribution Center (Temperature Controlled) - Medley FL",
+        "type": "Temperature-controlled distribution center / warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 25.8736,
+          "lng": -80.3585
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 25.8728,
+            "west": -80.35935,
+            "north": 25.87445,
+            "east": -80.3572
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 25.8729,
+              "west": -80.3583,
+              "north": 25.87385,
+              "east": -80.3573
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 25.87295,
+              "west": -80.3593,
+              "north": 25.8738,
+              "east": -80.3579
+            },
+            {
+              "south": 25.8737,
+              "west": -80.3587,
+              "north": 25.87445,
+              "east": -80.35735
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 52,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 6.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied 25.873515, -80.358245 (geocoding-api, ROOFTOP, moved\n108 m). The point lands on a large warehouse in the Medley industrial\ndistrict of the Miami metro, near a rail corridor.\n\nThe address includes \"Suite 1\" — CrowleyFresh occupies one tenant unit\nwithin a larger multi-tenant industrial warehouse, not a standalone building.\n\nConfirmed by Street View (2025-11): multiple CROWLEY reefer trailers are\nbacked into the dock doors and parked in the yard of this building (FedEx\ntrailers are also present — a co-tenant). This positively identifies the\nbuilding as the one housing CrowleyFresh's Suite 1.\n\nWeb research (Crowley / CrowleyFresh / Perishable News / FleetOwner) confirms\nCrowleyFresh at 11401 NW 100th Road, Medley: 400,000+ cu ft of refrigerated\nspace, a refrigerated dock with 9 access doors, a forced-air pre-cooling",
+        "mapsUrl": "https://www.google.com/maps/@25.87360,-80.35850,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facility": "CrowleyFresh temperature-controlled distribution center, 11401 NW 100th Road, Suite 1, Medley FL. The address is a SUITE — CrowleyFresh occupies one tenant unit (the cold-storage section, 9 refrigerated dock doors per Crowley's spec) within a larger multi-tenant industrial warehouse. Positively identified by multiple CROWLEY reefer trailers backed into the dock face and parked in the yard (Street View 2025-11).",
+          "truckGate": "FALSE. No controlled truck entrance. Street View shows open, ungated access from the industrial-park street directly into a shared paved dock court; only a stop sign at the road. No barrier arm, gate, or pinch-point.",
+          "guardShack": "FALSE. No guard booth anywhere at the property entrance or dock court.",
+          "remoteGs": "FALSE — there is no gate at all.",
+          "multipleFacilities": "FALSE. A single warehouse building; CrowleyFresh shares it with other tenants (FedEx trailers also seen) — multi-tenant, not a multi-building campus.",
+          "dockDoors": "50+ band for the whole building. The multi-tenant warehouse has dock doors running along both long (SW and NE) faces with trailers backed in. CrowleyFresh's own suite has 9 refrigerated dock doors per web research; the band reflects the whole building per the rubric (count across all faces). dockDoorCount metric ~52 is an estimate and flagged uncertain.",
+          "shipRcvSeparate": "TRUE. Dock doors are on two opposite long faces of the building (SW and NE), giving physically separate dock clusters.",
+          "dropArea": "10-25 trailers parked in the open court / yard, including CROWLEY reefers; not a dedicated fenced drop lot.",
+          "drivewayShort": "Short open approach from the park street straight into the dock court; no deep internal queue.",
+          "railServed": "FALSE. A rail line runs alongside the NE side of the property but no spur enters the building.",
+          "urbanRural": "Medley is a dense industrial municipality in the Miami metro — Urban.",
+          "coldStorage": "Crowley web research: 400,000+ cu ft refrigerated space, a refrigerated dock with 9 access doors, a forced-air pre-cooling chamber (20,000 kg/hr), and four independent temperature-controlled chambers (32-50 F).",
+          "confidence": "High for facility identification and the no-gate/no-guard-shack determination (open multi-tenant warehouse, Crowley branding confirmed on docked reefers). Whole-building dock count and lane counts remain overhead/Street-View estimates and are flagged uncertain."
+        }
+      }
+    ]
+  }
+}

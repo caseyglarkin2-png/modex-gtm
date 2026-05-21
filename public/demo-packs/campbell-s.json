@@ -1,0 +1,2138 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:33:33.277Z",
+  "account": {
+    "slug": "campbell-s",
+    "displayName": "Campbell's",
+    "archetype": "cpg",
+    "siteCount": 21,
+    "coverageNote": {
+      "auditedCount": 21,
+      "estimatedFootprint": null,
+      "droppedStubCount": 0,
+      "capHit": false,
+      "note": "Audited all 21 identifiable facilities."
+    }
+  },
+  "research": {
+    "facility_count": 21,
+    "audited_facilities": 21,
+    "source": "yard-audit",
+    "confidence": "verified",
+    "caveats": [
+      "Pepperidge Farm - Lakeland FL: audit note mentions 'closed'",
+      "Lance - Charlotte NC: audit note mentions 'closed'",
+      "Lance - Burlington IA: audit note mentions 'divested'",
+      "Campbell's - Milwaukee WI: audit note mentions 'closed'",
+      "Sovos / Rao's - Austin TX: audit note mentions 'closed'"
+    ]
+  },
+  "network": {
+    "bbox": [
+      -123.0001,
+      28.0727,
+      -72.7169,
+      44.9268
+    ],
+    "archetypeMix": {
+      "#6": 2,
+      "#9": 8,
+      "#3": 9,
+      "#1": 1,
+      "#7": 1
+    },
+    "totals": {
+      "dockDoors": 712,
+      "trailerCapacity": 1814,
+      "gates": 26,
+      "railServed": 2,
+      "acres": 1213.5
+    },
+    "sites": [
+      {
+        "id": "01-campbells-soup-maxton-nc",
+        "name": "Campbell's Soup - Maxton NC",
+        "type": "Manufacturing - thermal/aseptic soup",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "scale",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 34.7708,
+          "lng": -79.3252
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.766,
+            "west": -79.3292,
+            "north": 34.7756,
+            "east": -79.3215
+          },
+          "truckGate": {
+            "south": 34.774,
+            "west": -79.32345,
+            "north": 34.7747,
+            "east": -79.3227
+          },
+          "dropYards": [
+            {
+              "south": 34.7661,
+              "west": -79.3276,
+              "north": 34.7696,
+              "east": -79.3232
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.7692,
+              "west": -79.3256,
+              "north": 34.7706,
+              "east": -79.324
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 8,
+          "siteAreaAcres": 165,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (34.771797, -79.325047) landed inside the plant footprint.\nSatellite probes z16-18 around that point revealed a very large industrial\nmanufacturing campus surrounded by pine forest, consistent with a thermal/\naseptic soup plant. Street View on NC-71 N confirmed a Campbell's-branded\nproperty sign and chain-link perimeter fence facing the highway. This is the\nCampbell's Maxton soup plant — site of the named $150M aseptic soup expansion.",
+        "mapsUrl": "https://www.google.com/maps/@34.770800,-79.325200,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Main entrance off NC-71 N; entrance road splits, guarded checkpoint visible at z20-21 ~34.7743,-79.3231",
+          "guardShack": "Small guard-booth structure with dark roof at the checkpoint apron, ~1-vehicle footprint, confirmed at z21",
+          "dockDoorCount": "Sprawling campus, docks distributed across multiple building faces; ~40 estimate is low-confidence, banded 25-50",
+          "dropYard": "Very large drop yard south of plant, 8+ rows packed with parked trailers (80-100+)",
+          "multipleFacilities": "Campus of 8+ connected/separate buildings: process halls, silos, warehouses",
+          "fastLaneOpportunity": "Wide entrance apron off the highway with room for additional lanes",
+          "siteAreaAcres": "Derived from perimeter box ~1060m N-S x ~700m E-W of fenced/cleared area"
+        }
+      },
+      {
+        "id": "02-campbells-soup-napoleon-oh",
+        "name": "Campbell's Soup - Napoleon OH",
+        "type": "Manufacturing - soup/broth/V8 juice",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "dockDoorCount",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 41.3975,
+          "lng": -84.1035
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.3935,
+            "west": -84.1085,
+            "north": 41.4015,
+            "east": -84.0985
+          },
+          "truckGate": {
+            "south": 41.3937,
+            "west": -84.1068,
+            "north": 41.3944,
+            "east": -84.1058
+          },
+          "dropYards": [
+            {
+              "south": 41.3968,
+              "west": -84.1022,
+              "north": 41.3999,
+              "east": -84.0987
+            },
+            {
+              "south": 41.3923,
+              "west": -84.1052,
+              "north": 41.393,
+              "east": -84.1025
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.3962,
+              "west": -84.1035,
+              "north": 41.3978,
+              "east": -84.101
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 9,
+          "siteAreaAcres": 175,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates landed inside the plant. Satellite probes z16-18 revealed a\nvery large industrial manufacturing campus on the south bank of the Maumee\nRiver, with a big distribution warehouse on the NE, production halls along\nSR-110 on the west, and a wastewater-treatment plant (multiple digester domes)\non the SW. This is the well-known Campbell's Napoleon soup/broth/V8 plant — one\nof the company's largest. SR-110 (Scott Street / State Route 110) runs along\nthe west; an industrial connector road runs along the south.",
+        "mapsUrl": "https://www.google.com/maps/@41.397500,-84.103500,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Large fenced manufacturing campus; perimeter chain-link fence confirmed all around in Street View. Controlled truck entry inferred via internal driveway off the south road / SR-110.",
+          "guardShack": "No guard booth positively identified on public-road Street View frontage (all visible frontage is employee parking behind fence). Marked false / remoteGs true at medium confidence.",
+          "dropYard": "Extensive trailer parking on the NE side (130+ trailers, third-party carriers: Western Express, Marten, etc.) plus rows along the south road.",
+          "dockDoorCount": "Multiple dock banks across NE warehouse faces and central buildings; ~55 estimate banded 50+, low confidence.",
+          "shipRcvSeparate": "Distinct dock clusters on separate building faces (NE warehouse vs central plant docks).",
+          "multipleFacilities": "Large campus: production halls, big NE distribution warehouse, wastewater treatment plant with multiple digester domes.",
+          "fastLaneOpportunity": "Wide internal yard aprons with ample paved width.",
+          "siteAreaAcres": "Derived from perimeter box ~890m N-S x ~830m E-W."
+        }
+      },
+      {
+        "id": "03-campbells-paris-tx",
+        "name": "Campbell's - Paris TX",
+        "type": "Manufacturing - sauces (flagship sauce facility)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "dockDoorCount",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 33.6905,
+          "lng": -95.561
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.6855,
+            "west": -95.564,
+            "north": 33.696,
+            "east": -95.5585
+          },
+          "truckGate": {
+            "south": 33.6862,
+            "west": -95.5625,
+            "north": 33.6869,
+            "east": -95.5617
+          },
+          "dropYards": [
+            {
+              "south": 33.6918,
+              "west": -95.5638,
+              "north": 33.6956,
+              "east": -95.5602
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.6905,
+              "west": -95.5605,
+              "north": 33.693,
+              "east": -95.5588
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 50,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 170,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 110,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (GEOMETRIC_CENTER, ~1800 m offset) landed inside the plant\nfootprint. Satellite probes z16-18 revealed a large industrial manufacturing\ncampus with a main plant building, large NW warehouse blocks, extensive trailer\ndrop yards, big employee parking lots, and an active rail line on the east\nside. NW Loop 286 runs along the south. This is the Campbell's Paris plant,\nnow the company's flagship sauce facility (soup production ended July 2024).",
+        "mapsUrl": "https://www.google.com/maps/@33.690500,-95.561000,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Main entrance road off NW Loop 286 (~33.6865,-95.5622) with a Campbell's sign; perimeter fence around the plant. Gate is inside, set back from the public road.",
+          "guardShack": "No guard booth visible from public-road Street View (plant sits far back behind grass buffer and fence). Marked false / remoteGs true at medium confidence.",
+          "railServed": "Active rail line / spur runs along the east side of the plant; rail cars visible in imagery.",
+          "dropYard": "Very large trailer drop yard on the NW with many rows of parked trailers (100+).",
+          "dockDoorCount": "Multiple dock banks; trailers backed into dock face on the NW warehouse and main plant. ~50 estimate banded 50+, low confidence.",
+          "multipleFacilities": "Large multi-building manufacturing complex plus separate NW warehouse blocks.",
+          "fastLaneOpportunity": "Wide entrance road and ample paved internal yard.",
+          "siteAreaAcres": "Derived from perimeter box ~1170m N-S x ~510m E-W."
+        }
+      },
+      {
+        "id": "04-snyders-of-hanover-hanover-pa",
+        "name": "Snyder's of Hanover - Hanover PA",
+        "type": "Manufacturing - pretzels/snacks (kettle chip lines added 2024)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 39.8057,
+          "lng": -76.952
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.803,
+            "west": -76.9556,
+            "north": 39.8085,
+            "east": -76.9485
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 39.8047,
+              "west": -76.9548,
+              "north": 39.8071,
+              "east": -76.9528
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.8056,
+              "west": -76.9535,
+              "north": 39.8072,
+              "east": -76.9515
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 0,
+          "buildingCount": 4,
+          "siteAreaAcres": 70,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates landed inside the plant footprint. Satellite probes z16-18\nrevealed a large industrial plant with a separate office building at the SW\ncorner and a large solar farm immediately to the south. Street View at the SW\ncorner confirmed a Campbell's-branded monument sign at the office entrance off\nthe access road. This is the Snyder's of Hanover pretzel/snack plant\n(kettle-chip lines added 2024).",
+        "mapsUrl": "https://www.google.com/maps/@39.805700,-76.952000,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Open campus layout - plant set back behind broad grass buffers, no perimeter fence or controlled checkpoint visible from public-road Street View. Classified no gate.",
+          "guardShack": "No guard booth observed anywhere along the public-road frontage; office building with a Campbell's monument sign at the SW corner.",
+          "dropYard": "Large trailer parking with rows of parked trailers along the west side of the plant.",
+          "dockDoorCount": "Dock banks on the west and around the main plant building; ~45 estimate banded 25-50, low confidence.",
+          "multipleFacilities": "Multiple buildings - main pretzel/snack plant, separate office building SW, additional industrial structures NE.",
+          "drivewayShort": "Short internal approach from the access road to the dock aprons.",
+          "siteAreaAcres": "Derived from perimeter box ~610m N-S x ~610m E-W; excludes the separate solar farm to the south.",
+          "railServed": "No rail spur into the property; adjacent solar farm occupies the land to the south."
+        }
+      },
+      {
+        "id": "05-pepperidge-farm-willard-oh",
+        "name": "Pepperidge Farm - Willard OH",
+        "type": "Manufacturing - bakery (primary Goldfish cracker plant)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 41.0544,
+          "lng": -82.7085
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.0518,
+            "west": -82.713,
+            "north": 41.057,
+            "east": -82.7038
+          },
+          "truckGate": {
+            "south": 41.0533,
+            "west": -82.7137,
+            "north": 41.054,
+            "east": -82.7127
+          },
+          "dropYards": [
+            {
+              "south": 41.0542,
+              "west": -82.7072,
+              "north": 41.0562,
+              "east": -82.704
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.0548,
+              "west": -82.71,
+              "north": 41.0564,
+              "east": -82.7072
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 50,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 110,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (APPROXIMATE, moved only 6 m) landed in a residential\nneighborhood of Willard — clearly wrong. Web search established the plant\naddress as 3320 State Route 103 E. Satellite probes east of Willard along\nSR-103 located a large industrial bakery complex with silos, extensive trailer\ndrop yards, and dock banks. Street View at the access drive confirmed a\nPepperidge Farm sign. This is the primary Goldfish cracker bakery.",
+        "mapsUrl": "https://www.google.com/maps/@41.054400,-82.708500,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single access road off State Route 103 E (~41.0533,-82.7137) with a Pepperidge Farm sign; chain-link perimeter fence visible along the access drive. Controlled gate inferred, set back from the public road.",
+          "guardShack": "No guard booth visible at the public-road junction (plant set back behind grass buffer). Marked false / remoteGs true at medium confidence.",
+          "dropYard": "Very large trailer drop yard on the east side of the plant with many rows of parked trailers (100+).",
+          "dockDoorCount": "Extensive dock banks on the north and around the plant; trailers backed in. ~50 estimate banded 50+, low confidence.",
+          "multipleFacilities": "Bakery plant complex with attached process buildings, silos, and a separate large warehouse block to the NE.",
+          "fastLaneOpportunity": "Long access drive and wide internal yard aprons.",
+          "siteAreaAcres": "Derived from perimeter box ~580m N-S x ~770m E-W.",
+          "locationResolution": "Roster coordinates (APPROXIMATE) landed in residential Willard; web search located plant at 3320 State Route 103 E. Confirmed by satellite."
+        }
+      },
+      {
+        "id": "06-pepperidge-farm-richmond-ut",
+        "name": "Pepperidge Farm - Richmond UT",
+        "type": "Manufacturing - bakery (Goldfish crackers, +50% capacity 2024)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "truckGate",
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 41.9396,
+          "lng": -111.8163
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.9362,
+            "west": -111.8185,
+            "north": 41.943,
+            "east": -111.814
+          },
+          "truckGate": {
+            "south": 41.9395,
+            "west": -111.8149,
+            "north": 41.9402,
+            "east": -111.814
+          },
+          "dropYards": [
+            {
+              "south": 41.9372,
+              "west": -111.8172,
+              "north": 41.9381,
+              "east": -111.8153
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.9373,
+              "west": -111.8172,
+              "north": 41.938,
+              "east": -111.8145
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 50,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 80,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (RANGE_INTERPOLATED) landed in the central/south part of the\nsmall town of Richmond, in residential/farmland — no plant there. Web search\nestablished the plant address as 901 N 200 W. Satellite probes north of the\nroster point located a large industrial bakery on the west side of 200 West:\na long N-S building with silos, dock banks, a rail spur, and yard areas. This\nis Pepperidge Farm's Richmond plant — its only manufacturing facility west of\nthe Rocky Mountains, a Goldfish/Milano bakery (+50% Goldfish capacity 2024).",
+        "mapsUrl": "https://www.google.com/maps/@41.939600,-111.816300,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Plant set back from 200 West behind grass buffers; access road off 200 West into the yard. No barrier/booth visible from Street View - controlled gate inferred at low-medium confidence.",
+          "guardShack": "No guard booth visible from public-road Street View. Marked false / remoteGs true at low-medium confidence.",
+          "railServed": "Rail spur runs along the west side of the plant; rail cars/tankers visible in the north yard.",
+          "dropYard": "Trailer drop yard and dock apron along the south face of the bakery building; ~25 trailers visible.",
+          "dockDoorCount": "Dock banks along the south building face; ~35 estimate banded 25-50, low confidence.",
+          "multipleFacilities": "Single large bakery building (N-S) with attached process structures; not a multi-cluster campus.",
+          "siteAreaAcres": "Derived from perimeter box ~755m N-S x ~370m E-W.",
+          "locationResolution": "Roster coordinates (RANGE_INTERPOLATED) landed in central/south Richmond; web search located plant at 901 N 200 W. Confirmed by satellite ~41.9388,-111.8165."
+        }
+      },
+      {
+        "id": "07-pepperidge-farm-denver-pa",
+        "name": "Pepperidge Farm - Denver PA",
+        "type": "Manufacturing - bakery (baked goods and cookies)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "dockDoorCount",
+          "entryExitSeparate"
+        ],
+        "center": {
+          "lat": 40.2228,
+          "lng": -76.0855
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.2192,
+            "west": -76.0905,
+            "north": 40.227,
+            "east": -76.082
+          },
+          "truckGate": {
+            "south": 40.2225,
+            "west": -76.089,
+            "north": 40.2232,
+            "east": -76.088
+          },
+          "dropYards": [
+            {
+              "south": 40.2202,
+              "west": -76.0847,
+              "north": 40.2221,
+              "east": -76.0825
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.2207,
+              "west": -76.0856,
+              "north": 40.2222,
+              "east": -76.0833
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 95,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates landed inside the plant footprint. Satellite probes z16-18\nrevealed a large industrial bakery near a highway/PA-272 interchange, with\nemployee parking on the SW, a trailer drop yard on the SE, and dock banks along\nthe SE building face. Street View at the entrance confirmed a Pepperidge Farm\nmonument sign on the private entrance road. This is the 611,000 sq ft\nPepperidge Farm Denver PA bakery (opened 1991, baked goods and cookies).",
+        "mapsUrl": "https://www.google.com/maps/@40.222800,-76.085500,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single private entrance road (Pepperidge Farm Drive) off the public road; entrance has a monument sign and a posted 'TRUCKS' directional sign separating truck and car routes. Controlled gate inferred inside.",
+          "guardShack": "No guard booth visible at the public-road junction; plant set back. Marked false / remoteGs true at medium confidence.",
+          "entryExitSeparate": "Entrance road splits with a posted 'TRUCKS' sign directing trucks along a separate route from cars/visitors - suggests separated entry/exit handling.",
+          "dropYard": "Large trailer drop yard and dock apron along the SE building face with many rows of parked trailers (60-70+).",
+          "dockDoorCount": "Dock banks along the SE face; trailers backed in. ~45 estimate banded 25-50, low confidence.",
+          "multipleFacilities": "Single large bakery building (separate small industrial buildings to the NW are not part of this property).",
+          "fastLaneOpportunity": "Long entrance approach with a wide apron and truck/car lane separation - room for an express lane.",
+          "drivewayLong": "Long private entrance drive from the public road to the plant yard.",
+          "siteAreaAcres": "Derived from perimeter box ~870m N-S x ~720m E-W.",
+          "locationResolution": "Roster coordinates landed inside the plant footprint; confirmed by satellite and Street View (Pepperidge Farm monument sign at the entrance)."
+        }
+      },
+      {
+        "id": "08-pepperidge-farm-bloomfield-ct",
+        "name": "Pepperidge Farm - Bloomfield CT",
+        "type": "Manufacturing - bakery (bread, rolls, stuffing, croutons)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 41.86885,
+          "lng": -72.719
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.8664,
+            "west": -72.7212,
+            "north": 41.87055,
+            "east": -72.7169
+          },
+          "truckGate": {
+            "south": 41.8689,
+            "west": -72.7219,
+            "north": 41.86925,
+            "east": -72.7214
+          },
+          "dropYards": [
+            {
+              "south": 41.86975,
+              "west": -72.72075,
+              "north": 41.87045,
+              "east": -72.7196
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.86955,
+              "west": -72.7197,
+              "north": 41.8701,
+              "east": -72.7184
+            },
+            {
+              "south": 41.8678,
+              "west": -72.7183,
+              "north": 41.8685,
+              "east": -72.7174
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 42,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 33,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Pepperidge Farm - Bloomfield CT\n- Type: Manufacturing - bakery (fresh breads, rolls, croutons, stuffing)\n- Address: 1414 Blue Hills Avenue, Bloomfield, CT 06002\n- Resolved center: 41.86885, -72.71900",
+        "mapsUrl": "https://www.google.com/maps/@41.86885,-72.71900,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Both the NW driveway (signalized junction with Blue Hills Ave) and the SE driveway are wide-open uncontrolled entrances - no barrier arm, sliding gate, or pinch-point checkpoint visible in 2025-07 Street View or satellite imagery.",
+          "guardShack": "No guard booth at either entrance. Small utility cabinet at the NW driveway mouth, not a staffed booth.",
+          "entryExitSeparate": "Two separate driveways onto Blue Hills Avenue (NW and SE), each connecting to a perimeter loop road; trucks can use either.",
+          "drivewayLong": "Long approach from either road junction to the dock circulation road - room for 3+ trucks.",
+          "dockDoors": "~25-40 dock doors estimated: a long bank along the north face with trailers backed in, plus additional dock positions on the SE side. Counted from zoom-20 imagery; band 25-50.",
+          "dropArea": "Dedicated drop yard at the NW corner with rows of parked trailers (no tractors); 25-50 band.",
+          "shipRcvSeparate": "Dock activity on two distinct building faces - long north-face dock bank and a separate SE-side dock cluster.",
+          "urbanRural": "Bloomfield CT industrial park on the northern edge of the Hartford metro; large warehouses adjacent but woodland and open land around - edge-of-town industrial, classified Rural per rubric tiebreak.",
+          "siteAreaAcres": "~33 acres derived from perimeter box (~415m N-S x ~360m E-W of fenced property).",
+          "railServed": "No rail spur into the property; solar array occupies land to the east where a spur might otherwise run."
+        }
+      },
+      {
+        "id": "09-pepperidge-farm-downingtown-pa",
+        "name": "Pepperidge Farm - Downingtown PA",
+        "type": "Manufacturing - bakery",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "buildingCount"
+        ],
+        "center": {
+          "lat": 40.0042,
+          "lng": -75.6855
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.003,
+            "west": -75.689,
+            "north": 40.005,
+            "east": -75.6835
+          },
+          "truckGate": {
+            "south": 40.00345,
+            "west": -75.6853,
+            "north": 40.00375,
+            "east": -75.6848
+          },
+          "dropYards": [
+            {
+              "south": 40.0042,
+              "west": -75.685,
+              "north": 40.00485,
+              "east": -75.6838
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.00455,
+              "west": -75.6853,
+              "north": 40.005,
+              "east": -75.6845
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 11,
+          "trailerParkingCapacity": 18,
+          "truckGateCount": 3,
+          "buildingCount": 2,
+          "siteAreaAcres": 14,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Pepperidge Farm - Downingtown PA\n- Type: Manufacturing - bakery (cookies / Distinctive line, frozen food operation)\n- Roster address: 300 Pepperidge Farm Lane, Downingtown, PA 19335\n- Actual address (web-confirmed): 421 Boot Road, Downingtown, PA 19335\n- Resolved center: 40.00420, -75.68550",
+        "mapsUrl": "https://www.google.com/maps/@40.00420,-75.68550,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Older 1949 urban bakery; multiple driveways open directly off Boot Road into a combined parking/yard area. No barrier arm, sliding gate, or checkpoint pinch-point visible in 2023-08 Street View of all road frontage.",
+          "guardShack": "No guard booth at any entrance. Small employee break gazebos near building 425 are not gate booths.",
+          "drivewayShort": "Constrained urban site - driveways run a short distance from Boot Road straight into the yard/dock area; little stacking depth.",
+          "backupSensitive": "Boot Road frontage is tight with employee parking abutting the road; a truck queue at any driveway would quickly spill toward the public road - flagged as backup-sensitive.",
+          "entryExitSeparate": "Three separate curb cuts onto Boot Road serving the parking lots and the east-end truck yard.",
+          "dockDoors": "Dock canopies on the NE/east face of the main building plus dock positions on the secondary east-end building; ~12-20 doors estimated - band 10-25. Old facility, many doors hidden under canopies.",
+          "dropArea": "East-end yard holds parked trailers without tractors; ~10-15 - band 10-25.",
+          "multipleFacilities": "Main bakery building plus a separate white-roofed warehouse/distribution structure at the east end share the lot; treated as the same campus so multipleFacilities left false (single cluster), buildingCount = 2.",
+          "urbanRural": "Downingtown PA - dense industrial/commercial corridor along Boot Road with adjacent warehouses and residential townhouses across the street; classified Urban (Philadelphia exurban metro fabric).",
+          "siteAreaAcres": "~14 acres from perimeter box (~220m N-S x ~470m E-W) - a compact older urban plant.",
+          "railServed": "Multi-track rail mainline runs along the north property edge but no spur enters the property; not rail-served.",
+          "confidence": "Building positively confirmed - a Campbell's-marked box truck and building 425 signage visible in Street View; Pepperidge Farm Downingtown plant at 421 Boot Road."
+        }
+      },
+      {
+        "id": "10-pepperidge-farm-lakeland-fl",
+        "name": "Pepperidge Farm - Lakeland FL",
+        "type": "Manufacturing - bakery and crackers",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "postGateStaging"
+        ],
+        "center": {
+          "lat": 28.07405,
+          "lng": -81.9815
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 28.0727,
+            "west": -81.984,
+            "north": 28.076,
+            "east": -81.9785
+          },
+          "truckGate": {
+            "south": 28.07315,
+            "west": -81.9821,
+            "north": 28.07345,
+            "east": -81.98165
+          },
+          "dropYards": [
+            {
+              "south": 28.074,
+              "west": -81.9829,
+              "north": 28.07475,
+              "east": -81.9818
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 28.07355,
+              "west": -81.9823,
+              "north": 28.0742,
+              "east": -81.9799
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 44,
+          "trailersVisible": 24,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 38,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Pepperidge Farm - Lakeland FL\n- Type: Manufacturing - bakery and crackers (bread, cookies, crackers,\n  pastries, frozen breads for the Southeastern US)\n- Address: 2222 Interstate Drive, Lakeland, FL 33805\n- Resolved center: 28.07405, -81.98150",
+        "mapsUrl": "https://www.google.com/maps/@28.07405,-81.98150,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Controlled fenced entry. Perimeter chain-link fence runs continuously along Interstate Drive; the truck driveway enters through a single gap in the fence at ~28.0733, -81.9819. Web listings note visitors must show a driver's license at the gate for a parking pass - corroborates a manned/controlled gate.",
+          "guardShack": "A small ~1-vehicle-footprint structure sits on the east side of the driveway opening at the property line - a gatehouse/guard booth. A second small structure visible in the dock-apron imagery near the entry.",
+          "remoteGs": "False - guard shack present, so not a remote/kiosk check-in.",
+          "postGateStaging": "Large paved apron inside the gate before the dock bank can hold queued trucks; medium confidence.",
+          "drivewayLong": "Long approach from the Interstate Drive gate across a deep paved apron to the south-face dock bank - room for 3+ trucks.",
+          "entryExitTogether": "Single controlled truck gate off Interstate Drive serving both inbound and outbound.",
+          "dockDoors": "Long dock bank along the south face with ~15-24 trailers backed in and many more empty dock positions; estimated ~40-50 doors total - band 25-50.",
+          "dropArea": "Trailers parked without tractors in the NW-side drop yard and along the building's north/west edge; band 25-50.",
+          "dropYard": "Dedicated trailer-storage area at the NW corner of the property.",
+          "urbanRural": "Lakeland FL - industrial corridor flanking I-4 with adjacent large warehouses, an electrical substation, and nearby residential; classified Urban.",
+          "siteAreaAcres": "~38 acres from perimeter box (~365m N-S x ~540m E-W).",
+          "railServed": "No rail spur enters the property.",
+          "status": "Yelp marks the retail/outlet listing as CLOSED, but 2026 Maxar satellite imagery shows an active operation - trailers backed into docks, process equipment running. Audited as an operating facility."
+        }
+      },
+      {
+        "id": "11-lance-charlotte-nc",
+        "name": "Lance - Charlotte NC",
+        "type": "Manufacturing - crackers/sandwich snacks",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "buildingCount",
+          "scale",
+          "postGateStaging",
+          "fastLaneOpportunity"
+        ],
+        "center": {
+          "lat": 35.1218,
+          "lng": -80.8845
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.1185,
+            "west": -80.8895,
+            "north": 35.1248,
+            "east": -80.881
+          },
+          "truckGate": {
+            "south": 35.1211,
+            "west": -80.8826,
+            "north": 35.1216,
+            "east": -80.8819
+          },
+          "dropYards": [
+            {
+              "south": 35.1226,
+              "west": -80.8882,
+              "north": 35.1236,
+              "east": -80.886
+            },
+            {
+              "south": 35.1192,
+              "west": -80.8856,
+              "north": 35.1202,
+              "east": -80.8842
+            },
+            {
+              "south": 35.1232,
+              "west": -80.8855,
+              "north": 35.1242,
+              "east": -80.884
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.1223,
+              "west": -80.8856,
+              "north": 35.123,
+              "east": -80.8838
+            },
+            {
+              "south": 35.1193,
+              "west": -80.8862,
+              "north": 35.1199,
+              "east": -80.8848
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 108,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Lance - Charlotte NC (Campbell's Snacks)\n- Type: Manufacturing - crackers/sandwich snacks (Lance crackers; Campbell's\n  Snacks production campus)\n- Address: 8600 South Boulevard / 8600 Crump Road, Charlotte, NC 28273\n- Resolved center: 35.12180, -80.88450",
+        "mapsUrl": "https://www.google.com/maps/@35.12180,-80.88450,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Large 108-acre Campbell's Snacks campus enclosed by a continuous chain-link perimeter fence (clearly visible in 2019-2025 Street View around the bakery building and yards). Access is via a single bridge road off South Boulevard crossing the LYNX light-rail line. Web sources reference a 'Campbell's Snacks Bakery Production Plant Entrance' sign. Classified as a controlled gated entry.",
+          "guardShack": "A major 1,500-employee Campbell's production campus with a dedicated plant entrance - a manned gatehouse is the strong norm for this facility profile. However, the specific booth could not be positively pinpointed in available imagery (Street View covers the outer campus loop road but not the inner production-yard gate). Marked true on operational likelihood; flagged uncertain.",
+          "remoteGs": "False given guardShack assumed true; flagged uncertain.",
+          "multipleFacilities": "Confirmed campus - the ~700,000 sq ft Lance cracker bakery plus distribution warehouses, a mixing center, and a 2024 office building; 6+ distinct large buildings on 108 acres.",
+          "dropYard": "Extensive trailer storage - trailers lined along the campus perimeter road and in multiple lots throughout the campus.",
+          "dockDoors": "Numerous dock banks across multiple buildings; aggregate well into the 50+ band - estimated ~70 doors.",
+          "dropArea": "Many parked trailers without tractors across multiple lots; 50+ band.",
+          "shipRcvSeparate": "Multiple buildings (bakery, distribution warehouses, mixing center) run shipping/receiving from physically separate dock clusters.",
+          "drivewayLong": "Long access road from South Boulevard over the rail bridge and through the campus before reaching dock areas - ample queue depth.",
+          "fastLaneOpportunity": "Wide multi-lane campus access road with room for an express lane; medium confidence.",
+          "postGateStaging": "Extensive internal paved areas can hold queued trucks inside the campus; medium confidence.",
+          "urbanRural": "Charlotte NC - inside the metro, served by the LYNX Blue Line light rail, dense commercial/industrial surroundings; Urban.",
+          "siteAreaAcres": "108 acres per published facility history (Lance moved to the South Boulevard site on 108 acres in 1962).",
+          "railServed": "A light-rail (LYNX) passenger line runs through/alongside the campus, but no freight rail spur serves the docks; railServed false.",
+          "confidence": "Medium overall - the facility is positively identified (LANCE water tower and buildings visible in Street View) and the fenced campus perimeter is confirmed, but the exact gate/guard-booth structure and several counts are estimates from a very large multi-building campus."
+        }
+      },
+      {
+        "id": "12-lance-burlington-ia",
+        "name": "Lance - Burlington IA",
+        "type": "Manufacturing - snacks/crackers",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "dockDoors",
+          "dropArea",
+          "buildingCount",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 40.8277,
+          "lng": -91.1395
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.8262,
+            "west": -91.1418,
+            "north": 40.8295,
+            "east": -91.1375
+          },
+          "truckGate": {
+            "south": 40.8278,
+            "west": -91.1388,
+            "north": 40.8282,
+            "east": -91.1382
+          },
+          "dropYards": [
+            {
+              "south": 40.8279,
+              "west": -91.1387,
+              "north": 40.8287,
+              "east": -91.1377
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.8279,
+              "west": -91.14,
+              "north": 40.8285,
+              "east": -91.1382
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 32,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Lance - Burlington IA (roster) — actually Shearer's Foods\n  Burlington plant\n- Type: Manufacturing - snacks/crackers (private-label cookies and crackers)\n- Roster address: 3300 Roosevelt Avenue, Burlington, IA 52601\n- Actual address: 3000 Mt Pleasant St / Roosevelt Ave, Burlington, IA 52601\n- Resolved center: 40.82770, -91.13950",
+        "mapsUrl": "https://www.google.com/maps/@40.82770,-91.13950,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "ownership": "IMPORTANT: This site is the former Lance / Snyder's-Lance private-label cookie/cracker plant, but it was DIVESTED to Shearer's Foods in 2014 (sale of Snyder's-Lance's private-label business) - four years before Campbell's acquired Snyder's-Lance in 2018. The current operator is Shearer's Foods (~800 employees, address 3000 Mt Pleasant St / Roosevelt Ave, Burlington IA). The roster lists it under the Campbell's account; audited as the intended physical site but it is NOT currently a Campbell's facility.",
+          "location": "Roster coords (40.832609, -91.14054) were ~1.2 km off in a residential area. Correct plant located via web research at 3000 Mt Pleasant St, Burlington IA - the large industrial snack building.",
+          "truckGate": "Open-access site. Driveways from Mt Pleasant Street are uncontrolled - 2016/2019 Street View shows wide open aprons with no barrier arm, sliding gate, or checkpoint. No perimeter fence around the property.",
+          "guardShack": "No guard booth at any entrance. The structure near the office front is the plant office building, not a gate booth.",
+          "drivewayLong": "Long approach from Mt Pleasant Street across deep paved aprons to the building.",
+          "entryExitSeparate": "Multiple separate driveways onto Mt Pleasant Street serving the office, parking, and truck/dock areas.",
+          "dockDoors": "Dock activity on the building's N/NE face with a few trailers visible; the wide single-story plant likely has ~15-25 doors - band 10-25, flagged uncertain (docks partly obscured / hard to count from overhead).",
+          "dropArea": "Trailers parked on the NE side without tractors; ~10-25 band, flagged uncertain.",
+          "buildingCount": "Main plant building plus a long metal-roofed warehouse to the NE on the same property; buildingCount = 2. (A separate industrial complex to the WEST and a baseball complex to the EAST are distinct properties, not part of this site.)",
+          "urbanRural": "Burlington IA - a small Mississippi River city; the plant is in an edge-of-town industrial/commercial area with adjacent farmland and a sports complex. Per rubric tiebreak (small-town industrial), classified Rural.",
+          "siteAreaAcres": "~32 acres from perimeter box (~365m N-S x ~365m E-W).",
+          "railServed": "A rail mainline runs along the NW edge of the property but no spur enters; railServed false.",
+          "confidence": "Medium - the plant is positively identified and the open-access (no gate/no guard) determination is confident from Street View, but dock/trailer counts are difficult to read from overhead and the ownership is a notable data discrepancy."
+        }
+      },
+      {
+        "id": "13-kettle-brand-salem-or",
+        "name": "Kettle Brand - Salem OR",
+        "type": "Manufacturing - kettle potato chips",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "dropArea"
+        ],
+        "center": {
+          "lat": 44.9253,
+          "lng": -122.9985
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 44.9242,
+            "west": -123.0001,
+            "north": 44.9268,
+            "east": -122.9965
+          },
+          "truckGate": {
+            "south": 44.925,
+            "west": -122.9972,
+            "north": 44.92535,
+            "east": -122.9967
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 44.9252,
+              "west": -122.998,
+              "north": 44.9258,
+              "east": -122.9972
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 12,
+          "trailersVisible": 7,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 16,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Kettle Brand - Salem OR (Campbell's Snacks)\n- Type: Manufacturing - kettle potato chips\n- Address: 3125 Kettle Court SE, Salem, OR 97301\n- Resolved center: 44.92530, -122.99850",
+        "mapsUrl": "https://www.google.com/maps/@44.92530,-122.99850,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Open-access site. Kettle Court SE ends in a wide open paved cul-de-sac/apron directly in front of the plant's dock face. 2025-06 Street View shows no barrier arm, sliding gate, or checkpoint - and no perimeter fence on the truck side. A Campbell's sign confirms the facility identity.",
+          "guardShack": "No guard booth at the entrance - only the plant building and a Campbell's identity sign.",
+          "drivewayShort": "Kettle Court SE is a short dead-end street; the approach from the road to the dock area is shallow (1-2 truck depth).",
+          "entryExitTogether": "Single open approach via Kettle Court SE serves both inbound and outbound.",
+          "dockDoors": "Dock bank on the building's east face with ~4-7 trailers backed in under dock canopies; estimated ~10-15 doors - band 10-25. Counted from zoom-20 imagery, flagged uncertain.",
+          "dropArea": "Few trailers parked without tractors near the dock apron; 0-10 band - no dedicated drop yard.",
+          "dropYard": "No dedicated trailer-storage lot; trailer parking is limited to the dock-apron area.",
+          "urbanRural": "Salem OR (state capital, mid-size metro) - the plant sits in an established SE-Salem industrial park surrounded by other industrial buildings; classified Urban. Mill Creek and a wetland border the west/south.",
+          "siteAreaAcres": "~16 acres from perimeter box (~290m N-S x ~285m E-W of the developed parcel).",
+          "railServed": "No rail spur serves the property.",
+          "solar": "Large rooftop solar array (one of the larger PNW installations, installed 2001) - confirms identity but not operationally relevant to the yard classification.",
+          "confidence": "High - facility positively confirmed by Campbell's signage in Street View; open no-gate/no-guard determination is clear. Dock and trailer counts are honest overhead estimates (flagged)."
+        }
+      },
+      {
+        "id": "14-snyders-lance-beloit-wi",
+        "name": "Snyder's-Lance - Beloit WI",
+        "type": "Manufacturing - snacks/potato chips",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "dockDoors",
+          "dropArea",
+          "entryLanes",
+          "exitLanes",
+          "siteAreaAcres",
+          "coords"
+        ],
+        "center": {
+          "lat": 42.5121,
+          "lng": -88.9938
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.5113,
+            "west": -88.995,
+            "north": 42.5132,
+            "east": -88.9928
+          },
+          "truckGate": {
+            "south": 42.51185,
+            "west": -88.9938,
+            "north": 42.51215,
+            "east": -88.9932
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 42.51185,
+              "west": -88.994,
+              "north": 42.51215,
+              "east": -88.9932
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 10,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 10,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Snyder's-Lance - Beloit WI (Campbell's Snacks / Kettle Foods)\n- Type: Manufacturing - snacks/potato chips (Kettle Brand, Cape Cod chips)\n- Roster address: 1101 Willowbrook Road, Beloit, WI 53511\n- Web-confirmed plant address: 3150 Kettle Way, Beloit, WI 53511\n  (Gateway Business Park)\n- Audited candidate center: 42.51210, -88.99380",
+        "mapsUrl": "https://www.google.com/maps/@42.51210,-88.99380,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "LOW CONFIDENCE on building identity. The roster address '1101 Willowbrook Road, Beloit WI' does not resolve to any confirmed Campbell's address. Web research establishes the Campbell's/Kettle Foods Beloit potato-chip plant is at 3150 Kettle Way in Gateway Business Park - a 73,000-140,000 sq ft LEED-Gold plant (~300 employees, processes ~50M lbs potatoes/yr, 18 rooftop wind turbines). The large process complex initially examined nearby (with silos/tanks) was positively identified as an IFF (International Flavors & Fragrances) facility, NOT Campbell's. The audited building (~42.5121, -88.9938) is the best-matching candidate: a ~73,000 sq ft white-roof industrial building in Gateway Business Park consistent with the Kettle plant scale - but signage could not be confirmed in Street View and the address mismatch was not resolved.",
+          "truckGate": "On the candidate building, the Gateway Business Park access roads are open with no visible barrier arm, gate, or guard booth - typical open business-park access. Flagged uncertain due to building-identity uncertainty.",
+          "guardShack": "No guard booth identified at the candidate building.",
+          "drivewayShort": "Short shallow approach from the park road to the building's dock area.",
+          "dockDoors": "A modest dock presence on the building's SE face with a few trailers/trucks visible; estimated 0-10 doors. The Kettle plant is a compact 73k sq ft facility. Flagged uncertain.",
+          "dropArea": "Few trailers near the dock; no dedicated drop yard - 0-10 band.",
+          "urbanRural": "Beloit WI - the plant sits in Gateway Business Park on the edge of town, bordered by farmland and a rail line; small-city industrial setting, classified Rural per rubric tiebreak.",
+          "siteAreaAcres": "~10 acres estimate for the candidate parcel; flagged uncertain given identity uncertainty.",
+          "railServed": "A rail line runs along the SE of the business park but no spur enters the candidate parcel.",
+          "windTurbines": "The Kettle Beloit plant is documented as having 18 rooftop wind turbines and LEED-Gold certification - a distinctive marker that could not be clearly confirmed on the candidate building at available imagery resolution.",
+          "recommendation": "Flagged for human review - the exact Campbell's/Kettle building in Beloit (3150 Kettle Way) should be confirmed against the roster's '1101 Willowbrook Road' address before relying on this audit."
+        }
+      },
+      {
+        "id": "15-campbells-franklin-wi",
+        "name": "Campbell's - Franklin WI",
+        "type": "Manufacturing - tortilla chips (Late July; capacity expanded 2024)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoors",
+          "shipRcvSeparate",
+          "dropArea",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 42.8594,
+          "lng": -87.9863
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.8585,
+            "west": -87.9888,
+            "north": 42.8608,
+            "east": -87.9845
+          },
+          "truckGate": {
+            "south": 42.86055,
+            "west": -87.98875,
+            "north": 42.86075,
+            "east": -87.98835
+          },
+          "dropYards": [
+            {
+              "south": 42.85895,
+              "west": -87.98775,
+              "north": 42.85935,
+              "east": -87.9873
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 42.85895,
+              "west": -87.9876,
+              "north": 42.85955,
+              "east": -87.9869
+            },
+            {
+              "south": 42.8591,
+              "west": -87.9852,
+              "north": 42.85945,
+              "east": -87.9848
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 13,
+          "trailerParkingCapacity": 18,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 16,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "0-10",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Campbell's - Franklin WI (Late July tortilla chips; capacity expanded 2024)\n- Type: Manufacturing - tortilla chips / baked snacks\n- Operating entity: Baptista's Bakery, Inc. (a Campbell Snacks / Campbell's Company division)\n- Roster address: 9999 South 60th Street, Franklin, WI 53132 — incorrect\n- Resolved address: 4625 W Oakwood Park Drive, Franklin, WI 53132 (Franklin Business Park)\n- Locked coordinates: 42.8594, -87.9863",
+        "mapsUrl": "https://www.google.com/maps/@42.8594,-87.9863,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "identity": "Roster address 9999 S 60th St is incorrect; the Baptista's Bakery / Campbell Snacks tortilla-chip plant is at 4625 W Oakwood Park Dr in the Franklin Business Park. Locked the large white industrial building at 42.8594,-87.9863 - footprint measures ~205m x 114m (~252,000 sq ft, matches the ~250-300K sq ft reported plant size), has a curved-glass office wing at the NW corner and ~10 dock doors with trailers backed in on the SW face. 2019 Street View showed a 'Central' monument sign (likely a former tenant or office sub-tenant); building footprint, food-plant dock layout, and Franklin Business Park location all match the Campbell snacks plant - medium confidence on identity.",
+          "truckGate": "Both driveways from the road (NW truck/parking drive and NE office drive) are open paved entrances with no barrier arm, sliding gate, or pinch-point checkpoint. truckGate=false.",
+          "guardShack": "No booth structure at either driveway; office front and dock areas show no guard shack.",
+          "drivewayLong": "Long N-S internal drive runs from the road down the W side past parking to the SW dock apron - holds 3+ trucks.",
+          "dockDoors": "~10 dock doors on the SW face (trailers backed in confirm) plus a small dock/material-handling apron at the SE corner; total estimated 12-14 -> 10-25 band. Low confidence on exact count.",
+          "dropArea": "3-4 free-standing trailers parked near the SW dock apron without tractors - small drop area, 0-10 band.",
+          "dropYard": "A modest cluster of parked trailers exists adjacent to the SW dock apron; counted as a small on-site drop yard.",
+          "shipRcvSeparate": "Main dock bank on SW face plus a separate small dock/staging apron on the SE corner - likely separate ship/receive clusters; medium confidence.",
+          "entryExitSeparate": "Two distinct driveways to the road (NW and NE) allow separate in/out routing.",
+          "urbanRural": "Franklin WI is a suburb within the Milwaukee metro; the site sits in a dense business park - Urban.",
+          "trailerParkingCapacity": "Estimated from SW apron + adjacent paved space; honest overhead estimate."
+        }
+      },
+      {
+        "id": "16-campbells-milwaukee-wi",
+        "name": "Campbell's - Milwaukee WI",
+        "type": "Manufacturing - spice production (Campbell Soup Supply Co.)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "dockDoors",
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 42.9525,
+          "lng": -87.9182
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.9516,
+            "west": -87.9193,
+            "north": 42.9537,
+            "east": -87.9175
+          },
+          "truckGate": {
+            "south": 42.95165,
+            "west": -87.91865,
+            "north": 42.95205,
+            "east": -87.91825
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 42.95225,
+              "west": -87.91875,
+              "north": 42.95275,
+              "east": -87.9183
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 1,
+          "trailerParkingCapacity": 6,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 7.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Campbell's - Milwaukee WI\n- Type: Manufacturing - spice production (Campbell Soup Supply Co., LLC)\n- Roster address: 445 South 32nd Street, Milwaukee, WI 53215 — incorrect\n- Resolved address: 500 W Edgerton Avenue, Milwaukee, WI 53207\n- Locked coordinates: 42.9525, -87.9182",
+        "mapsUrl": "https://www.google.com/maps/@42.9525,-87.9182,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "identity": "Roster address (445 South 32nd Street) and roster coords are wrong - they land in a residential Milwaukee neighborhood. The Campbell's Milwaukee facility is the Campbell Soup Supply Co. spice plant at 500 W Edgerton Ave, Milwaukee WI 53207, operating since 1966 as Campbell's only US spice operation. OSM confirms the building and company at 42.95258,-87.91817; satellite shows a brick/white industrial building with heavy rooftop process silos/tanks. Locked center 42.9525,-87.9182.",
+          "truckGate": "The site has chain-link perimeter fencing along the W Edgerton frontage, but the single driveway from W Edgerton Ave appears OPEN (no barrier arm, no closed sliding/swing gate panel, no guard booth) in 2025 Street View and z21 satellite. STOP/wrong-way signage at the throat but no physical control. Called truckGate=false (open driveway despite perimeter fence) - medium confidence; a swing gate could be present and held open.",
+          "guardShack": "No booth structure at the driveway entrance.",
+          "drivewayLong": "Driveway runs a long straight ~80m from W Edgerton Ave to the building, through the parking lot to the W truck yard - holds 3+ trucks.",
+          "dockDoors": "Modest loading on the W building face; Street View shows a prominent 'TM TRUCK' overhead door plus adjacent doors. A specialized spice plant - estimated 4-8 dock/overhead doors -> 0-10 band. Low confidence on exact count.",
+          "dropArea": "No marked trailer-parking stalls with parked trailers; the W yard is a paved process/maneuvering area. dropArea NONE, dropYard false.",
+          "entryExitTogether": "Single driveway serves entry and exit.",
+          "urbanRural": "Dense Milwaukee industrial district immediately west of General Mitchell International Airport - Urban.",
+          "railServed": "No rail spur runs into the property; a rail corridor exists in the broader district but not onto this parcel."
+        }
+      },
+      {
+        "id": "17-pace-prego-dixon-ca",
+        "name": "Pace / Prego - Dixon CA",
+        "type": "Manufacturing - tomato processing for sauces (Prego / Pace), Campbell Soup Supply Co.",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "dockDoors",
+          "dockDoorCount",
+          "scale",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 38.4745,
+          "lng": -121.8025
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.4722,
+            "west": -121.8042,
+            "north": 38.477,
+            "east": -121.8008
+          },
+          "truckGate": {
+            "south": 38.4755,
+            "west": -121.80405,
+            "north": 38.47585,
+            "east": -121.80365
+          },
+          "dropYards": [
+            {
+              "south": 38.47305,
+              "west": -121.803,
+              "north": 38.4742,
+              "east": -121.8014
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 38.4739,
+              "west": -121.8029,
+              "north": 38.4743,
+              "east": -121.8021
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 12,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 2,
+          "buildingCount": 8,
+          "siteAreaAcres": 39,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Pace / Prego - Dixon CA\n- Type: Manufacturing - tomato processing for Prego/Pace sauces (Campbell Soup Supply Co.)\n- Roster address: 1606 Pedrick Road, Dixon, CA 95620 — incorrect\n- Resolved address: 8380 Pedrick Road, Dixon, CA 95620\n- Locked coordinates: 38.4745, -121.8025",
+        "mapsUrl": "https://www.google.com/maps/@38.4745,-121.8025,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "identity": "Roster address (1606 Pedrick Road) is incorrect. The Campbell's Dixon facility is the Campbell Soup Supply Co. tomato-processing plant at 8380 Pedrick Road, Dixon CA 95620 - it processes ~660,000 tons of tomatoes/year into Prego spaghetti sauce and Pace picante sauce base. OSM places 8380 Pedrick Rd at 38.4743,-121.8038. Satellite confirms a large multi-building agricultural processing campus surrounded by farmland. Locked center 38.4745,-121.8025.",
+          "truckGate": "Main entrance off Pedrick Road has a fenced driveway with a sliding/rolling chain-link gate (visible parked open in 2024 Street View) and white jersey-barrier lane chicane creating a checkpoint pinch-point. truckGate=true.",
+          "guardShack": "No proper staffed guard booth visible at the gate - only a small portable structure (appears to be a portable toilet). guardShack=false; medium confidence (a booth could be obscured).",
+          "remoteGs": "Gate present but no guard booth -> remote/kiosk/call-box check-in implied. remoteGs=true.",
+          "postGateStaging": "Large paved interior holding/queue areas inside the gate before the docks and drop yard.",
+          "dropArea": "Extensive on-site drop yard with 50+ parked trailers across the central/southern yard. dropArea 50+, dropYard true.",
+          "dockDoors": "Loading docks distributed across warehouses in the trailer-yard area; tomato intake is largely bulk (gondola/tanker), not dock-door. Estimated 10-20 dock doors total -> 10-25 band; low confidence.",
+          "shipRcvSeparate": "Bulk tomato receiving at the N processing plant is physically separate from the warehouse/drop-yard shipping operations to the south.",
+          "multipleFacilities": "Campus of 8+ distinct buildings: processing plant, warehouses, outbuildings, plus settling ponds.",
+          "urbanRural": "Surrounded by open farmland east of Dixon - clearly Rural.",
+          "connectivityIssue": "Rural but adjacent to a developed industrial strip and not deeply isolated; cellular coverage likely adequate. Marked false, low confidence.",
+          "railServed": "A rail corridor runs in the broader area but no spur enters the property; tomato intake is by truck. railServed=false.",
+          "scale": "Truck scales are likely present at an agricultural intake plant of this scale but not clearly resolved in imagery - left false, flagged uncertain."
+        }
+      },
+      {
+        "id": "18-campbells-stockton-ca",
+        "name": "Campbell's - Stockton CA",
+        "type": "Manufacturing - tomato processing (Campbell Soup Supply Co.)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "dockDoors",
+          "dockDoorCount",
+          "dropArea",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 37.9087,
+          "lng": -121.2654
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 37.9075,
+            "west": -121.2662,
+            "north": 37.9096,
+            "east": -121.264
+          },
+          "truckGate": {
+            "south": 37.9091,
+            "west": -121.26525,
+            "north": 37.90945,
+            "east": -121.26485
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 37.9083,
+              "west": -121.26545,
+              "north": 37.90875,
+              "east": -121.2649
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 11,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Campbell's - Stockton CA\n- Type: Manufacturing - tomato processing (Campbell Soup Supply Co., LLC)\n- Roster address: 1330 W Fremont Street, Stockton, CA 95203 — incorrect\n- Resolved address: 750 / 760 Industrial Drive, Stockton, CA 95206\n- Locked coordinates: 37.9087, -121.2654",
+        "mapsUrl": "https://www.google.com/maps/@37.9087,-121.2654,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "identity": "Roster address (1330 W Fremont Street) is incorrect - it lands in a mixed urban area near the Stockton channel. The Campbell's Stockton facility is the Campbell Soup Supply Co. tomato-processing plant at 750/760 Industrial Drive, Stockton CA 95206 (Ortega area, south Stockton). OSM places 750 Industrial Drive at 37.9090,-121.2657; 2023 Street View shows a process tank bearing the red Campbell's logo. Locked center 37.9087,-121.2654.",
+          "truckGate": "Main entrance off Industrial Drive is a fenced driveway with a chain-link sliding gate (gate panels visible parked open in 2023 Street View). The whole frontage is fenced with privacy-slat chain-link. truckGate=true.",
+          "guardShack": "No staffed guard booth visible at the gate. guardShack=false; medium confidence.",
+          "remoteGs": "Gate present, no guard booth -> remote/kiosk/call-box check-in implied. remoteGs=true.",
+          "drivewayShort": "Short approach from Industrial Drive into a parking lot/yard - holds only 1-2 trucks before the building.",
+          "postGateStaging": "Paved yard inside the gate provides some holding space before loading.",
+          "dockDoors": "This is a tomato-processing/paste plant dominated by process equipment (cooling towers, evaporators, tanks); modest dock-door loading. Estimated 4-8 -> 0-10 band; low confidence.",
+          "dropArea": "A few trailers parked in the yard (~8 visible); the long E-side rows are stacked bin/tote storage, not parked trailers. Small drop activity -> 0-10 band.",
+          "dropYard": "No dedicated trailer-storage lot - only a handful of trailers in the working yard. dropYard=false.",
+          "buildingCount": "Main processing building plus a secondary structure; the large white warehouse to the SW is a separate property, not counted.",
+          "urbanRural": "Dense south-Stockton industrial district - Urban.",
+          "railServed": "No rail spur enters the property."
+        }
+      },
+      {
+        "id": "19-campbells-goodyear-az",
+        "name": "Campbell's - Goodyear AZ",
+        "type": "Manufacturing - snacks/food production (Snyder's of Hanover pretzel plant)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible"
+        ],
+        "center": {
+          "lat": 33.4595,
+          "lng": -112.3795
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.458,
+            "west": -112.3818,
+            "north": 33.4609,
+            "east": -112.3768
+          },
+          "truckGate": {
+            "south": 33.45995,
+            "west": -112.3782,
+            "north": 33.46055,
+            "east": -112.3773
+          },
+          "dropYards": [
+            {
+              "south": 33.45935,
+              "west": -112.3817,
+              "north": 33.45995,
+              "east": -112.3809
+            },
+            {
+              "south": 33.45855,
+              "west": -112.3804,
+              "north": 33.45915,
+              "east": -112.3788
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.45945,
+              "west": -112.3812,
+              "north": 33.4601,
+              "east": -112.3806
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 32,
+          "trailersVisible": 46,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 16.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Campbell's - Goodyear AZ (Campbell Snacks / Snyder's of Hanover pretzel plant)\n- Type: Manufacturing — snacks/food production (pretzels; Snack Factory Pretzel Crisps)\n- Confirmed address: 1200 N Bullard Ave, Goodyear, AZ 85338\n- Locked coordinates: 33.4595, -112.3795",
+        "mapsUrl": "https://www.google.com/maps/@33.4595,-112.3795,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address '13301 W Van Buren St' and roster coords (33.44986,-112.34641) geocoded to a residential block and were wrong. Correct facility is the Campbell Snacks / Snyder's of Hanover pretzel plant at 1200 N Bullard Ave, Goodyear AZ 85338 - confirmed via web search, OSM ('Campbell's Food' node) and satellite, with 'Campbell's Snacks' building signage visible in Street View. Locked center 33.4595,-112.3795.",
+          "truckGate": "Entrance is an open driveway off the I-10 south frontage road at the NE corner; no barrier arm or sliding gate visible in z19-z20 satellite. Open-access site.",
+          "guardShack": "No guard booth visible at the entrance or anywhere along the access road in overhead imagery.",
+          "remoteGs": "False because there is no controlled truck gate at all.",
+          "dropYard": "Two trailer-parking areas: a row of ~15-20 drop trailers on the W dock yard and a marked drop yard on the S/SE apron holding ~20+ trailers.",
+          "dockDoors": "Dock doors along the W building face (~12-15 trailers backed in visible) plus a SW/S dock cluster; 25-50 band, estimate ~32, flagged low-confidence.",
+          "urbanRural": "Edge-of-town: plant is bordered by I-10 to the north and active agricultural fields to the south/east/west - rural industrial setting on the western fringe of metro Phoenix.",
+          "drivewayLong": "Long internal access/loop road wraps from the NE entrance around to the W docks - ample stacking depth for 3+ trucks inside the property.",
+          "buildingCount": "Main manufacturing/warehouse building plus a small utility/outbuilding on the south side.",
+          "scale": "No truck scale visible.",
+          "railServed": "No rail spur enters the property."
+        }
+      },
+      {
+        "id": "20-sovos-raos-austin-tx",
+        "name": "Sovos / Rao's - Austin TX",
+        "type": "Manufacturing - premium pasta sauces / frozen Italian foods (Michael Angelo's Gourmet Foods; Rao's Made for Home)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible"
+        ],
+        "center": {
+          "lat": 30.47105,
+          "lng": -97.677
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 30.47015,
+            "west": -97.6783,
+            "north": 30.4723,
+            "east": -97.676
+          },
+          "truckGate": {
+            "south": 30.47075,
+            "west": -97.67625,
+            "north": 30.4712,
+            "east": -97.67575
+          },
+          "dropYards": [
+            {
+              "south": 30.4703,
+              "west": -97.6771,
+              "north": 30.47085,
+              "east": -97.676
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 30.47055,
+              "west": -97.6779,
+              "north": 30.471,
+              "east": -97.6762
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 18,
+          "trailerParkingCapacity": 28,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 9.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Sovos / Rao's - Austin TX (Michael Angelo's Gourmet Foods plant)\n- Type: Manufacturing — premium pasta sauces / frozen Italian foods\n  (Michael Angelo's; Rao's Made for Home)\n- Confirmed address: 200 Michael Angelo Way, Austin, TX 78728 (Wells Branch)\n- Locked coordinates: 30.47105, -97.67700",
+        "mapsUrl": "https://www.google.com/maps/@30.47105,-97.677,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster gave only 'Austin, TX' (city centroid). The Sovos/Rao's Austin operation is the Michael Angelo's Gourmet Foods plant at 200 Michael Angelo Way, Austin TX 78728 (Wells Branch / north Austin) - where Sovos produced Rao's Made for Home and Michael Angelo's frozen Italian foods. Confirmed via web research and Street View signage reading 'MICHAEL ANGELO'S Gourmet Foods, Inc.' Google Maps places 200 Michael Angelo Way at 30.4713683,-97.6768125; locked plant center 30.47105,-97.67700.",
+          "truckGate": "The truck dock yard on the south side of the building is enclosed by chain-link fence (confirmed in Street View). A sliding gate controls the truck-yard access opening on the east side; classified truckGate true.",
+          "guardShack": "No staffed guard booth at the truck-yard gate. The small white-roofed structure near the building edge is a utility building abutting the plant, not a freestanding 1-3-vehicle booth beside the truck lane.",
+          "remoteGs": "True - there is a controlled (fenced) truck gate but no guard shack, implying kiosk/call-box/app check-in.",
+          "drivewayShort": "Short approach: the gate sits close to the perimeter road inside a compact business-park parcel; only 1-2 trucks of stacking depth between the gate and the docks.",
+          "dropYard": "Drop trailers parked along the SE of the fenced truck yard.",
+          "dockDoors": "Dock doors along the south building face with ~12-15 trailers backed in; 10-25 band, estimate ~22, flagged low-confidence.",
+          "urbanRural": "Urban - the plant sits inside a dense north-Austin (Wells Branch) industrial/business park surrounded by large warehouses, within the Austin metro fabric.",
+          "backupSensitive": "False - the gate opens onto an internal business-park cul-de-sac/loop road, not a busy public arterial; a short queue would not block public traffic.",
+          "buildingCount": "Single L-shaped manufacturing/warehouse building.",
+          "scale": "No truck scale visible.",
+          "railServed": "No rail spur enters the property."
+        }
+      },
+      {
+        "id": "21-campbells-distribution-center-findlay-oh",
+        "name": "Campbell's Distribution Center - Findlay OH",
+        "type": "Distribution center (740,000 sq ft; DHL Supply Chain operated)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "connectivityIssue"
+        ],
+        "center": {
+          "lat": 41.079,
+          "lng": -83.6355
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.0755,
+            "west": -83.6412,
+            "north": 41.0823,
+            "east": -83.6308
+          },
+          "truckGate": {
+            "south": 41.07785,
+            "west": -83.6329,
+            "north": 41.07855,
+            "east": -83.632
+          },
+          "dropYards": [
+            {
+              "south": 41.07955,
+              "west": -83.641,
+              "north": 41.0813,
+              "east": -83.6385
+            },
+            {
+              "south": 41.0756,
+              "west": -83.6395,
+              "north": 41.0772,
+              "east": -83.6315
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.0772,
+              "west": -83.6387,
+              "north": 41.0779,
+              "east": -83.6325
+            }
+          ],
+          "staging": {
+            "south": 41.0779,
+            "west": -83.6335,
+            "north": 41.0788,
+            "east": -83.6315
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 230,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 58,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Campbell's Distribution Center - Findlay OH\n- Type: Distribution center — 740,000 sq ft, $44M, operated by DHL Supply Chain\n- Confirmed address: 1000 E Bigelow Ave, Findlay, OH 45840\n  (Tall Timbers West Industrial Park, I-75 corridor)\n- Locked coordinates: 41.07900, -83.63550",
+        "mapsUrl": "https://www.google.com/maps/@41.079,-83.6355,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster gave only 'Findlay, OH 45840' with APPROXIMATE geocode at downtown Findlay. The facility is the $44M, 740,000 sq ft Campbell's distribution center (DHL Supply Chain operated) at 1000 E Bigelow Ave, Findlay OH 45840, in the Tall Timbers West Industrial Park along I-75, across from the Lowe's RDC. OSM reverse-geocode of the building returns 'Campbell's, 1000 East Bigelow Avenue, Findlay'. Locked center 41.0790,-83.6355.",
+          "truckGate": "Controlled truck entrance: a truck lane pinches at a checkpoint on the SE side of the building leading into the dock yard.",
+          "guardShack": "A small 1-vehicle-footprint gatehouse structure sits directly beside the SE truck lane (visible at z18-z20). Classic guard-booth position controlling the truck entrance.",
+          "remoteGs": "False - a staffed guard booth is present.",
+          "dockDoors": "Long dock-door bank along the building's south/SE face serving a 740,000 sq ft DC; 50+ band, estimate ~90, flagged low-confidence (variable imagery resolution).",
+          "dropYard": "Two large trailer drop yards: a NW/W yard and a very large S trailer-storage yard with many marked rows; hundreds of trailers parked.",
+          "dropArea": "50+ - the south trailer yard alone holds well over 100 trailers in marked rows.",
+          "trailersVisible": "~230 trailers counted across the captured imagery; estimate is approximate given resolution, flagged.",
+          "fastLaneOpportunity": "Wide paved aprons and ample yard width around the SE truck checkpoint - physical room to add an express/bypass lane.",
+          "urbanRural": "Rural - the DC sits in an edge-of-town industrial park surrounded by active agricultural fields, on the I-75 corridor outside Findlay.",
+          "connectivityIssue": "Edge-of-town rural site but within an industrial park near I-75 and other large DCs; cellular coverage likely adequate - low confidence, flagged.",
+          "staging": "Paved post-gate holding area between the SE guard booth and the dock apron.",
+          "scale": "No truck scale visible.",
+          "railServed": "No rail spur enters the property (despite the park's proximity to the CSX North Baltimore railyard)."
+        }
+      }
+    ]
+  }
+}

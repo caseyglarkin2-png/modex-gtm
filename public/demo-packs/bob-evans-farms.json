@@ -1,0 +1,607 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:33:14.429Z",
+  "account": {
+    "slug": "bob-evans-farms",
+    "displayName": "Bob Evans Farms",
+    "archetype": "cpg",
+    "siteCount": 6,
+    "coverageNote": {
+      "auditedCount": 6,
+      "estimatedFootprint": null,
+      "droppedStubCount": 1,
+      "capHit": false,
+      "note": "Audited all 6 identifiable facilities (1 additional were unresolvable from public sources)."
+    }
+  },
+  "research": {
+    "facility_count": 7,
+    "audited_facilities": 7,
+    "source": "yard-audit",
+    "confidence": "verified",
+    "caveats": [
+      "Bob Evans Farms - Forney TX Transportation Outpost: audit note mentions 'closed'"
+    ]
+  },
+  "network": {
+    "bbox": [
+      -111.9021,
+      33.1278,
+      -83.8556,
+      43.68455
+    ],
+    "archetypeMix": {
+      "#3": 4,
+      "#9": 2
+    },
+    "totals": {
+      "dockDoors": 76,
+      "trailerCapacity": 298,
+      "gates": 9,
+      "railServed": 0,
+      "acres": 114.5
+    },
+    "sites": [
+      {
+        "id": "01-bob-evans-farms-xenia-oh-plant",
+        "name": "Bob Evans Farms - Xenia OH Plant",
+        "type": "Manufacturing plant (fresh pork sausage rolls & links)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 39.68005,
+          "lng": -83.9111
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.67905,
+            "west": -83.91245,
+            "north": 39.68105,
+            "east": -83.9099
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 39.67935,
+              "west": -83.9109,
+              "north": 39.67965,
+              "east": -83.9101
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 1,
+          "trailerParkingCapacity": 8,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 10.1,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The supplied geocode (39.680221, -83.911228, GEOMETRIC_CENTER) landed directly\non the plant complex. Satellite probes at z16-z20 show a multi-section\nindustrial / food-processing building with rooftop process equipment, an\nemployee parking lot to the north, and a paved truck yard to the east.\nStreet View (captured 2022-06) along Birch Rd shows the building branded\n\"Bob Evans\" in the company's signature red script on both the west office wing\n(with red awning and US flag) and the main plant wall — positive ID. Web\nresearch corroborates: 640 Birch Rd is the historic Xenia sausage plant, in\noperation since 1953, ~30,000 sq ft core, >100 employees, ~30M lb/yr fresh\nproduct; subject of a $6.15M expansion announced April 2014. This is the\nplant, not a restaurant. Note: a Yelp listing tags this address as \"CLOSED\" —",
+        "mapsUrl": "https://www.google.com/maps/@39.680050,-83.911100,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "East-side truck yard opens directly onto Birch Rd with no barrier arm, gate, or checkpoint. Street View (2022-06) confirms a wide-open paved apron meeting the public road. The west office/parking driveway is also an open curb cut. No truck gate.",
+          "guardShack": "No booth structure of any kind at either driveway. Confirmed in Street View from multiple headings.",
+          "drivewayShort": "Plant fronts directly on Birch Rd with minimal setback; the truck approach from road to dock is short, holding only 1-2 trucks.",
+          "dockDoors": "Estimated 6 visible loading/overhead doors on the east and south building faces from satellite z20 and Street View; older small-footprint plant (~30,000 sq ft core). Low confidence on exact count due to building face angles.",
+          "dropArea": "No marked trailer-parking stalls; the east apron is open paved space, not a drop lot.",
+          "urbanRural": "Edge-of-town Xenia surrounded by farm fields, ball fields, and scattered rural residential; classified Rural.",
+          "trailerParkingCapacity": "East paved apron could informally hold ~8 trailers but has no marked stalls; low confidence.",
+          "buildingCount": "Single connected/multi-section plant complex counted as ~4 distinct attached structures plus accessory equipment buildings."
+        }
+      },
+      {
+        "id": "02-bob-evans-farms-lima-oh-plant",
+        "name": "Bob Evans Farms - Lima OH Plant",
+        "type": "Manufacturing plant (refrigerated sides - mashed potatoes & macaroni & cheese; former Kettle Creations facility)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "guardShack",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 40.6968,
+          "lng": -84.0953
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.6949,
+            "west": -84.0971,
+            "north": 40.6992,
+            "east": -84.0939
+          },
+          "truckGate": {
+            "south": 40.6952,
+            "west": -84.09545,
+            "north": 40.69555,
+            "east": -84.09515
+          },
+          "dropYards": [
+            {
+              "south": 40.6989,
+              "west": -84.0951,
+              "north": 40.6994,
+              "east": -84.0942
+            },
+            {
+              "south": 40.6953,
+              "west": -84.0949,
+              "north": 40.6964,
+              "east": -84.0941
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.69585,
+              "west": -84.0961,
+              "north": 40.6962,
+              "east": -84.0948
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 23.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The supplied geocode (40.696965, -84.095537, ROOFTOP) landed on the large plant\nbuilding. Satellite at z16-z20 shows a single very large connected\nfood-processing building with extensive trailer parking. Street View along\nCommerce Pkwy (captured 2024-10) shows the building branded \"Bob Evans\" in red\nscript on the west elevation — positive ID. Note: the smaller white building\nimmediately to the west is a separate company, \"Logoplaste\" (plastics\npackaging), clearly labeled in Street View — it was excluded from the audit.\nWeb research confirms 651 Commerce Pkwy is the former Kettle Creations plant,\nacquired by Bob Evans in August 2012 for $50M; ~150,000 sq ft after expansions,\n~300 employees, 5 production lines, ~130M lb/yr of mashed potatoes and mac &\ncheese.",
+        "mapsUrl": "https://www.google.com/maps/@40.696800,-84.095300,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single truck driveway off Commerce Pkwy crosses a chain-link perimeter fence; a gate opening is visible in the fence line at satellite z21 (~40.6953, -84.0952). The whole trailer yard is fenced. Truck gate confirmed.",
+          "guardShack": "No booth structure visible beside the gate in satellite z20/z21 or in Street View (2024-10) from the road. Street View coverage does not extend up the private drive; absence of a booth at the fence crossing is the basis for the call. Flagged uncertain.",
+          "remoteGs": "Gate present but no guard shack -> remote/unmanned check-in implied (sliding gate / call-box / app).",
+          "postGateStaging": "Long paved drive and a wide internal apron between the gate and the dock bank give ample inside-the-fence staging room.",
+          "drivewayLong": "Gate-to-dock approach is a long deep drive that can hold 3+ trucks.",
+          "dockDoors": "Large dock bank on the south building face with ~12-15 trailers backed in plus additional doors; estimated ~28 doors total. 25-50 band; exact count uncertain from overhead angles.",
+          "dropArea": "Multiple dedicated trailer-storage lots on the NE and SE of the property, full of parked trailers without tractors; well over 50 trailer stalls visible.",
+          "dropYard": "Dedicated trailer-storage lots clearly present on the NE and SE corners.",
+          "urbanRural": "Edge-of-town industrial park on the south edge of Lima near I-75, bordered by farm fields; classified Rural.",
+          "trailerParkingCapacity": "~55 trailers visible in the imagery; lots could hold ~70. Estimate.",
+          "buildingCount": "One large ~150,000 sq ft connected plant building (the adjacent Logoplaste building to the west is a separate company, excluded)."
+        }
+      },
+      {
+        "id": "03-bob-evans-farms-hillsdale-mi-plant",
+        "name": "Bob Evans Farms - Hillsdale MI Plant",
+        "type": "Manufacturing plant (fresh pork sausage rolls & patties; USDA FSIS inspected)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 41.9216,
+          "lng": -84.6153
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.9199,
+            "west": -84.6169,
+            "north": 41.9231,
+            "east": -84.6137
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 41.9217,
+              "west": -84.6149,
+              "north": 41.9225,
+              "east": -84.6139
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.92125,
+              "west": -84.61545,
+              "north": 41.9216,
+              "east": -84.6147
+            },
+            {
+              "south": 41.92175,
+              "west": -84.6158,
+              "north": 41.92205,
+              "east": -84.6152
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 18.7,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The supplied geocode (41.921573, -84.615533, GEOMETRIC_CENTER) landed on the\nplant complex. Satellite at z16-z20 shows a multi-building food-processing\ncampus set well back from public roads, surrounded by residential streets,\nfarm fields, and woodland on the edge of Hillsdale. Street View (captured\n2024-09) from the SW access road shows a \"Bob Evans Farms\" entrance sign and\nthe plant building branded with Bob Evans red script — positive ID. Note: the\naddress \"200 N Wolcott St\" is the postal address, but Wolcott St itself is\nresidential and the plant is set back behind houses; the actual truck/vehicle\naccess is a long private drive that connects to a side street SW of the site.\nWeb research confirms this is the company's third plant, producing fresh pork\nsausage since 1964, 50+ SKUs, 25M+ lb/yr; BEF Foods operates it as a sow",
+        "mapsUrl": "https://www.google.com/maps/@41.921600,-84.615300,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Plant set well back from public roads on a long private access drive that connects to a residential side street SW of the site. The entrance has a Bob Evans Farms sign and decorative split-rail fence along the road, but the driveway is an open curb cut with no barrier arm, gate, or pinch-point. Confirmed in Street View (2024-09).",
+          "guardShack": "No booth structure at the entrance drive or anywhere on the access path; confirmed in Street View and satellite.",
+          "remoteGs": "No gate, so no remote check-in implied.",
+          "drivewayLong": "Long private access drive from the public road to the plant; ample queue depth (3+ trucks).",
+          "postGateStaging": "Large internal paved courtyard and yard between the access drive and the dock buildings provides ample staging room.",
+          "dockDoors": "Docks distributed across multiple building faces (central dock buildings + east building); ~16 doors estimated. Older multi-building campus; exact count uncertain from overhead angles.",
+          "dropArea": "Trailer drop yard on the NE of the property with ~10-14 trailers parked without tractors.",
+          "dropYard": "Dedicated trailer-storage area on the NE corner, separate from the dock aprons.",
+          "multipleFacilities": "Campus of 5 distinct buildings: main west plant, connected processing building, central dock buildings, and a separate east building.",
+          "urbanRural": "Small-town Hillsdale, MI; the plant is on the edge of town surrounded by residential streets, farm fields, and woodland. Classified Rural.",
+          "trailerParkingCapacity": "NE drop yard plus internal yard could hold ~25 trailers; estimate.",
+          "buildingCount": "Counted ~5 distinct structures on the campus."
+        }
+      },
+      {
+        "id": "04-bob-evans-farms-sulphur-springs-tx-plant",
+        "name": "Bob Evans Farms - Sulphur Springs TX Plant",
+        "type": "Manufacturing plant (refrigerated sides, including Bob Evans Macaroni & Cheese)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 33.1295,
+          "lng": -95.5806
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.1278,
+            "west": -95.5821,
+            "north": 33.1309,
+            "east": -95.5791
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 33.1289,
+              "west": -95.5813,
+              "north": 33.1293,
+              "east": -95.5803
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 12,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 15,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 14.2,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The supplied geocode (33.129289, -95.580222, ROOFTOP) landed on the plant\nbuilding. Satellite at z16-z20 shows a large connected industrial building\nbeside Interstate 30, with a distinctive red-roofed section, open paved truck\nyard, and employee parking. Street View along Industrial Dr E (captured\n2025-06) shows the building branded \"Bob Evans\" in red script — positive ID.\nWeb research confirms 1109 Industrial Dr E is the Bob Evans Sulphur Springs\nready-to-eat plant, acquired in 2003, ~70 employees, producing refrigerated\nsides (mac & cheese, mashed potatoes).",
+        "mapsUrl": "https://www.google.com/maps/@33.129500,-95.580600,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Two open driveways off Industrial Dr E (front employee/visitor drive and a west truck drive). Both are open curb cuts with no barrier arm, gate, or pinch-point. Confirmed in Street View (2025-06) — no perimeter fence around the property.",
+          "guardShack": "No booth at either driveway. A covered shelter near the parking lot is a carport/break shelter, not a guard booth.",
+          "remoteGs": "No gate, so no remote check-in implied.",
+          "drivewayLong": "Large open paved yard between Industrial Dr E and the south dock face gives deep approach room (3+ trucks).",
+          "postGateStaging": "Wide open paved truck yard on the south/west of the building provides ample internal staging.",
+          "dockDoors": "South-facing dock bank with ~5-6 angled dock bays with trailers backed in, plus additional doors along the building face; ~12 doors estimated. 10-25 band; exact count uncertain.",
+          "dropArea": "A few trailers parked near the dock apron without tractors; no dedicated striped drop lot. 0-10 band.",
+          "urbanRural": "Edge-of-town industrial area along I-30 near Sulphur Springs, TX, bordered by farm fields and scattered industrial buildings; classified Rural.",
+          "trailerParkingCapacity": "Open paved yard could hold ~15 trailers informally; estimate.",
+          "buildingCount": "One large connected plant building plus an attached/adjacent processing wing — counted as ~2 structures."
+        }
+      },
+      {
+        "id": "05-bob-evans-farms-rigby-id-plant",
+        "name": "Bob Evans Farms - Rigby ID Plant",
+        "type": "Manufacturing plant (refrigerated and frozen potato products; Potato Products of Idaho facility absorbed under Post Holdings)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 43.6839,
+          "lng": -111.9004
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 43.6821,
+            "west": -111.9021,
+            "north": 43.68455,
+            "east": -111.898
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 43.6835,
+              "west": -111.9016,
+              "north": 43.684,
+              "east": -111.9009
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 43.6836,
+              "west": -111.9013,
+              "north": 43.68395,
+              "east": -111.9006
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 10,
+          "trailersVisible": 3,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 22,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The supplied geocode (43.684086, -111.900523, ROOFTOP) landed on the plant\ncomplex. Satellite at z16-z20 shows a large multi-building potato-processing\nplant along N Yellowstone Hwy, surrounded by farm fields with a highway\ninterchange nearby. Web research confirms 398 N Yellowstone Hwy is the Potato\nProducts of Idaho (PPI) plant — a frozen/dehydrated potato-products\nmanufacturer established 1998, acquired by Post Holdings (parent of the Bob\nEvans Refrigerated Retail business). The roster note matches: Post folded PPI\ninto the Refrigerated Retail network. Street View from the frontage road\nshowed an adjacent \"BV's PRODUCE\" sign (Rigby Produce, a neighboring business)\n— the PPI plant itself is the large building cluster, positively located.",
+        "mapsUrl": "https://www.google.com/maps/@43.683900,-111.900400,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Plant accessed via open gravel/paved yards off N Yellowstone Hwy frontage; multiple open driveways with no barrier arm, gate, or checkpoint pinch-point. No perimeter fence around the property. Confirmed in satellite z19-z20.",
+          "guardShack": "No booth structure at any driveway or on the access yards.",
+          "remoteGs": "No gate, so no remote check-in implied.",
+          "drivewayLong": "Large open gravel/paved truck yards give deep approach room (3+ trucks).",
+          "postGateStaging": "Extensive open paved/gravel yard between the highway and the plant buildings provides ample internal staging.",
+          "dockDoors": "Dock activity concentrated at the building's west end where trucks load; few discrete dock doors visible (~10). Potato processors often load via fewer high-throughput doors and bulk infeed; exact count uncertain.",
+          "dropArea": "A small number of trailers in the west-end yard without tractors; no large striped drop lot. 0-10 band.",
+          "dropYard": "An informal trailer-staging area exists at the building's west end, treated as a small drop yard.",
+          "multipleFacilities": "Campus of ~4 distinct structures: main processing plant, attached/adjacent buildings, and separate potato-storage cellar buildings to the south.",
+          "railServed": "A rail line runs parallel to N Yellowstone Hwy along the north of the property, but it does NOT spur into the plant -- a drainage canal separates the property from the rail corridor. railServed false.",
+          "urbanRural": "Rural Rigby, ID; the plant is surrounded by farm fields with a highway interchange nearby. Classified Rural.",
+          "trailersVisible": "Few trailers visible in 2021/2026 imagery (~3); count uncertain.",
+          "trailerParkingCapacity": "Open yards could hold ~20 trailers informally; estimate."
+        }
+      },
+      {
+        "id": "06-bob-evans-farms-springfield-oh-transportation-hub",
+        "name": "Bob Evans Farms - Springfield OH Transportation Hub",
+        "type": "Distribution / transportation hub (private fleet terminal - Bob Evans Transportation Company LLC, USDOT 911163; ~100 tractor-trailers)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 39.838,
+          "lng": -83.8572
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.8361,
+            "west": -83.8587,
+            "north": 39.8397,
+            "east": -83.8556
+          },
+          "truckGate": {
+            "south": 39.8383,
+            "west": -83.8565,
+            "north": 39.8387,
+            "east": -83.8559
+          },
+          "dropYards": [
+            {
+              "south": 39.8371,
+              "west": -83.8584,
+              "north": 39.8389,
+              "east": -83.8575
+            },
+            {
+              "south": 39.8371,
+              "west": -83.857,
+              "north": 39.8389,
+              "east": -83.8561
+            }
+          ],
+          "dockAprons": [],
+          "staging": {
+            "south": 39.8376,
+            "west": -83.8575,
+            "north": 39.8385,
+            "east": -83.857
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 4,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 26,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The supplied geocode (39.837963, -83.857367, ROOFTOP) landed on a fleet\nterminal — a central dispatch/maintenance building flanked by extensive rows\nof parked trailers. Web research confirms 6088 Green-Field Dr is the Bob Evans\nTransportation Company LLC terminal (USDOT 911163): ~150 employees including\n~100 drivers, ~126 tractors, 100+ tractor-trailers, ~20,000 deliveries/yr,\n~10M miles/yr. The satellite layout — a terminal building with trailer-storage\nrows on both sides — is exactly consistent with a private fleet hub. Positive\nID.",
+        "mapsUrl": "https://www.google.com/maps/@39.838000,-83.857200,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "imagery": "Only available satellite coverage of this site is heavy snow-cover imagery, which obscures fine ground detail (gate hardware, booths, lane markings). No Street View coverage reaches the property. Overall confidence set to medium.",
+          "truckGate": "This is a private fleet terminal (Bob Evans Transportation Company, USDOT 911163; ~126 tractors, 100+ tractor-trailers, 20,000 deliveries/yr). The terminal is reached via an internal campus road off Green-Field Dr. A controlled truck entrance is the strong norm for a private fleet hub of this scale, but the gate hardware cannot be positively confirmed in the snow imagery -- flagged uncertain.",
+          "guardShack": "No guard booth could be resolved in the snow imagery. Set false (no booth seen) but flagged uncertain.",
+          "remoteGs": "Given a probable gate and no visible booth, remote check-in is the best inference; flagged uncertain.",
+          "dropArea": "Extensive trailer-parking rows on both sides of the central terminal building; well over 50 trailers -- this is the dominant feature of the site.",
+          "dropYard": "The whole site functions as a fleet trailer yard / terminal.",
+          "drivewayLong": "Long internal campus road from Green-Field Dr to the terminal; ample queue depth.",
+          "dockDoorCount": "This is a fleet terminal, not a DC dock building; only a few service/maintenance bays on the central dispatch/shop building (~4). Not a loading-dock operation.",
+          "trailersVisible": "~120 trailers estimated in the parking rows from z17-z19 snow imagery; count approximate.",
+          "trailerParkingCapacity": "Marked rows could hold ~160 trailers; estimate.",
+          "urbanRural": "Rural -- the terminal sits on the edge of Springfield surrounded by farm fields.",
+          "buildingCount": "Central dispatch/maintenance building plus an accessory structure; ~2 (the large SW building is part of the wider distribution-center campus and treated as separate from the fleet terminal proper)."
+        }
+      }
+    ]
+  }
+}

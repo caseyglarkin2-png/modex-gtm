@@ -1,0 +1,3177 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:38:56.300Z",
+  "account": {
+    "slug": "frito-lay",
+    "displayName": "Frito-Lay",
+    "archetype": "cpg",
+    "siteCount": 29,
+    "coverageNote": {
+      "auditedCount": 29,
+      "estimatedFootprint": 200,
+      "droppedStubCount": 1,
+      "capHit": false,
+      "note": "Frito-Lay runs ~200 NA DSD warehouses and plants; we audited the 30 largest. Smaller DSD branches share gate/dock archetypes with the audited cohort."
+    }
+  },
+  "research": {
+    "facility_count": 230,
+    "audited_facilities": 30,
+    "source": "yard-audit",
+    "confidence": "verified",
+    "caveats": [
+      "Frito-Lay - Rancho Cucamonga CA (DC): audit note mentions 'closed'",
+      "Frito-Lay - Casa Grande AZ: audit note mentions 'closed'",
+      "Frito-Lay - Brookhollow Plant Dallas TX: audit note mentions 'closed'",
+      "Frito-Lay - Vancouver WA: audit note mentions 'closed'",
+      "Frito-Lay - Pulaski TN: audit note mentions 'closed'"
+    ]
+  },
+  "network": {
+    "bbox": [
+      -122.6947,
+      28.5757,
+      -71.8875,
+      46.2085
+    ],
+    "archetypeMix": {
+      "#6": 4,
+      "#1": 2,
+      "#10": 2,
+      "#7": 3,
+      "#9": 13,
+      "#3": 5
+    },
+    "totals": {
+      "dockDoors": 1301,
+      "trailerCapacity": 5027,
+      "gates": 31,
+      "railServed": 17,
+      "acres": 1727
+    },
+    "sites": [
+      {
+        "id": "01-frito-lay-modesto-ca",
+        "name": "Frito-Lay - Modesto CA",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 37.63115,
+          "lng": -120.9202
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 37.6294,
+            "west": -120.923,
+            "north": 37.6336,
+            "east": -120.915
+          },
+          "truckGate": {
+            "south": 37.62935,
+            "west": -120.91745,
+            "north": 37.6303,
+            "east": -120.9167
+          },
+          "dropYards": [
+            {
+              "south": 37.6296,
+              "west": -120.917,
+              "north": 37.6332,
+              "east": -120.915
+            },
+            {
+              "south": 37.6295,
+              "west": -120.9229,
+              "north": 37.6306,
+              "east": -120.9207
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 37.6298,
+              "west": -120.9218,
+              "north": 37.6303,
+              "east": -120.9186
+            },
+            {
+              "south": 37.6303,
+              "west": -120.9179,
+              "north": 37.6332,
+              "east": -120.9172
+            }
+          ],
+          "staging": {
+            "south": 37.6295,
+            "west": -120.91745,
+            "north": 37.6303,
+            "east": -120.9165
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 160,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 81,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Address: 600 Garner Rd, Modesto, CA 95357\n- Locked center: 37.631150, -120.920200 (main plant building mass)\n- Confidence: High\n\nRoster supplied 37.631499, -120.920769 (ROOFTOP geocode). Satellite probes z16-z19\nlanded directly on a large tan/cream-colored manufacturing complex. Confirmed it is\nthe Frito-Lay plant via Street View of the south face: branded Frito-Lay / Cheetos /\nDoritos trailers backed into a long dock bank. Web research corroborates: Frito-Lay\nModesto is a flagship facility — 500,000 sq ft, 80 acres, 1,100+ associates, and the\ncompany's zero-/near-zero-emissions fleet showcase (Tesla Semis, 38 Volvo VNL CNG\ntractors, Peterbilt 220EV box trucks). The west side of the property carries large\nsolar carports consistent with that sustainability program.",
+        "mapsUrl": "https://www.google.com/maps/@37.631150,-120.920200,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single controlled truck entrance off Garner Rd at the SE corner. Wide divided driveway with a landscaped median island, yellow lane channelization striping, and a guard booth set inside the apron (visible z21 satellite as a dark canopied structure).",
+          "guardShack": "Small canopied guard booth structure inside the entrance lane, ~1-2 vehicle footprint, beside the divided in/out lanes - confirmed in z21 satellite imagery.",
+          "remoteGs": "False - a physical guard booth is present.",
+          "postGateStaging": "Large paved apron and trailer staging area inside the gate before docks; the SE entrance opens onto an expansive yard.",
+          "drivewayLong": "Deep apron and internal yard easily holds 3+ trucks between the gate and dock doors.",
+          "fastLaneOpportunity": "Very wide entrance apron and divided lanes with ample unused paved width - room to add an express/bypass lane.",
+          "entryExitTogether": "Single entrance point on Garner Rd serves both in and out via the divided driveway.",
+          "entryLanes": "Estimated 2 inbound from divided-lane striping; satellite resolution limits exact count - low confidence.",
+          "exitLanes": "Estimated 1 outbound - low confidence.",
+          "dockDoors": "South face of the lower plant building shows a long bank of dock doors with branded Frito-Lay trailers backed in; additional dock bank on the east face. Total estimated 60+ across faces - 50+ band.",
+          "dropArea": "Extensive marked trailer-parking rows on the east side and along the south - well over 50 trailer stalls.",
+          "shipRcvSeparate": "Dock banks on two distinct building faces (south face and east face) indicating separate ship/receive clusters.",
+          "urbanRural": "Within Modesto metro industrial fabric, surrounded by other large DCs/warehouses.",
+          "multipleFacilities": "Plant comprises multiple connected building masses plus a separate large warehouse building to the north (co-located Modesto Exchange Warehouse) - campus character.",
+          "scale": "No truck scale clearly visible in the truck path - low confidence, possible but not confirmed.",
+          "railServed": "No active rail spur entering the property; a rail/road corridor runs along the north boundary but no spur into the yard.",
+          "siteAreaAcres": "Perimeter box yields ~81 acres, matching the publicly stated 80-acre / 500k sq ft facility.",
+          "dockDoorCount": "Overhead count estimate; some dock faces partially obscured by trailers - moderate confidence."
+        }
+      },
+      {
+        "id": "02-frito-lay-rancho-cucamonga-ca-dc",
+        "name": "Frito-Lay - Rancho Cucamonga CA (DC)",
+        "type": "Distribution Center",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "guardShack",
+          "dockDoorCount",
+          "buildingCount"
+        ],
+        "center": {
+          "lat": 34.080051,
+          "lng": -117.591112
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.0775,
+            "west": -117.5935,
+            "north": 34.0813,
+            "east": -117.5885
+          },
+          "truckGate": {
+            "south": 34.07755,
+            "west": -117.5907,
+            "north": 34.0785,
+            "east": -117.5902
+          },
+          "dropYards": [
+            {
+              "south": 34.0779,
+              "west": -117.5926,
+              "north": 34.0794,
+              "east": -117.589
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.0792,
+              "west": -117.5926,
+              "north": 34.0797,
+              "east": -117.5888
+            }
+          ],
+          "staging": {
+            "south": 34.0783,
+            "west": -117.5908,
+            "north": 34.0792,
+            "east": -117.59
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 150,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 48,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Address: 9535 Archibald Ave, Rancho Cucamonga, CA 91730\n- Locked center: 34.080051, -117.591112 (large warehouse building mass)\n- Confidence: Medium\n\nRoster supplied 34.080051, -117.591112 (ROOFTOP geocode). Satellite probes z16-z19\nlanded on a large tan-roofed warehouse/DC building with an extensive south-side trailer\nyard, consistent with a Frito-Lay distribution facility. Address corroborated by web\nsources.\n\nOperational caveat: Web research (KTLA, Food Dive, The Real Deal, Food Business\nNews — all June 2025) confirms PepsiCo fully closed this site: manufacturing ended in\n2024 and the distribution hub closed June 6, 2025 with 248 layoffs (680 total across\nthe round, including warehouse workers and a hostler). The roster's premise that the\nDC continues is outdated. PepsiCo said it would shift operations to a new, unnamed",
+        "mapsUrl": "https://www.google.com/maps/@34.080051,-117.591112,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "operationalStatus": "Web research (KTLA, Food Dive, The Real Deal, June 2025) confirms PepsiCo SHUT DOWN this facility entirely: manufacturing ended ~June 2024, the distribution hub closed June 6 2025 with 248 layoffs (680 total over the round). The roster's premise that the DC continues is outdated - the site is likely vacant or being repurposed. Classification reflects the PHYSICAL yard as it exists in imagery; operationally it is no longer an active Frito-Lay DC.",
+          "truckGate": "Single controlled truck entrance on the south frontage (6th St). Satellite z19 shows a guard-booth structure set inside the entrance with a divided in/out lane and channelization; perimeter wall/fence flanks the driveway.",
+          "guardShack": "A small booth structure is visible inside the entrance lane in z19 satellite; Street View partly obscured by mature trees. Moderate confidence.",
+          "remoteGs": "False - a physical guard booth appears present at the gate.",
+          "postGateStaging": "Large paved yard inside the gate before the dock doors provides ample queue/holding room.",
+          "drivewayLong": "Deep internal yard between gate and docks holds well over 3 trucks.",
+          "entryExitTogether": "Single entrance point on the south frontage serves both directions.",
+          "entryLanes": "Estimated 1 inbound from the divided driveway - low confidence.",
+          "exitLanes": "Estimated 1 outbound - low confidence.",
+          "dockDoors": "Long dock bank along the building's south face with many trailers backed in. Estimated 55+ doors - 50+ band.",
+          "dropArea": "Extensive marked trailer-parking rows fill the south yard - well over 50 stalls.",
+          "shipRcvSeparate": "Dock activity concentrated on the single south face - no clearly separate ship/receive cluster.",
+          "urbanRural": "Within the Rancho Cucamonga / Inland Empire dense industrial fabric.",
+          "multipleFacilities": "One primary large building; a smaller ancillary building sits at the SE - not a true multi-building campus.",
+          "buildingCount": "Primary warehouse plus a small ancillary structure - count approximate.",
+          "scale": "No truck scale identifiable in the truck path.",
+          "railServed": "No rail spur enters the property.",
+          "siteAreaAcres": "Perimeter box yields ~48 acres for the large DC/plant footprint.",
+          "dockDoorCount": "Overhead estimate; trailers obscure portions of the dock face - moderate confidence."
+        }
+      },
+      {
+        "id": "03-frito-lay-memphis-tn",
+        "name": "Frito-Lay - Memphis TN",
+        "type": "Manufacturing Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "dockDoorCount",
+          "railServed"
+        ],
+        "center": {
+          "lat": 35.0325,
+          "lng": -89.891
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.0294,
+            "west": -89.8952,
+            "north": 35.035,
+            "east": -89.886
+          },
+          "truckGate": {
+            "south": 35.0343,
+            "west": -89.8896,
+            "north": 35.0348,
+            "east": -89.889
+          },
+          "dropYards": [
+            {
+              "south": 35.0297,
+              "west": -89.8905,
+              "north": 35.034,
+              "east": -89.8875
+            },
+            {
+              "south": 35.0302,
+              "west": -89.8869,
+              "north": 35.0345,
+              "east": -89.884
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.03,
+              "west": -89.8909,
+              "north": 35.0332,
+              "east": -89.8902
+            },
+            {
+              "south": 35.0297,
+              "west": -89.893,
+              "north": 35.0302,
+              "east": -89.8905
+            }
+          ],
+          "staging": {
+            "south": 35.0336,
+            "west": -89.8897,
+            "north": 35.0345,
+            "east": -89.8889
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 240,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 78,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Frito-Lay - Memphis TN\n- Type: Manufacturing Plant\n- Address: 5160 E Raines Rd, Memphis, TN 38118\n- Resolved center: 35.032500, -89.891000\n- Roster coords: 35.035607, -89.891572 (sat on E Raines Rd itself; building lies just south)",
+        "mapsUrl": "https://www.google.com/maps/@35.032500,-89.891000,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single controlled truck entrance via a divided driveway running south off E Raines Rd at a signalized intersection. z19-z20 satellite shows the in/out divided lanes, perimeter chain-link fence meeting the entrance on both sides, and a guard booth in the median - vehicles visibly queued at the checkpoint.",
+          "guardShack": "Confirmed at z20: a small ~1-vehicle-footprint structure sits in the median island of the divided entrance lane, with a stopped vehicle beside it and the perimeter fence terminating at it. Classic staffed guard booth.",
+          "remoteGs": "False - a physical guard booth is present.",
+          "postGateStaging": "Deep paved apron between the gate and the building/dock area; the entrance opens onto a large internal yard with ample holding room.",
+          "drivewayLong": "Long divided approach from Raines Rd to the building plus a large internal apron - easily holds 3+ trucks queued.",
+          "fastLaneOpportunity": "Wide divided entrance apron with significant unused paved width beside the in/out lanes - room to add an express/bypass lane.",
+          "entryExitTogether": "Single entrance point on E Raines Rd handles both in and out via the divided driveway.",
+          "entryLanes": "Estimated 1 inbound lane from the divided-driveway striping; satellite resolution limits exact count - low confidence.",
+          "exitLanes": "Estimated 1 outbound lane - low confidence.",
+          "dockDoors": "Long bank of dock doors on the east face of the main building with many Frito-Lay trailers backed in; additional dock doors on the south/SW face. Total estimated ~55 across faces - 50+ band.",
+          "dropArea": "Extensive marked trailer-parking rows on the east side (hundreds of trailers in long rows) plus additional drop space - well over 50 trailer stalls. Note: the easternmost lot (5261 E Raines Rd) is a separate Container Transload & Export operation; the on-property Frito-Lay drop yard alone still exceeds 50.",
+          "shipRcvSeparate": "Dock banks on two distinct building faces (east face and south/SW face) indicating separate shipping/receiving clusters.",
+          "urbanRural": "Within the Memphis metro southeast industrial corridor, surrounded by large warehouses and distribution centers.",
+          "multipleFacilities": "Single large connected plant building mass; the adjacent transload yard to the east is a separate company, so not a Frito-Lay campus.",
+          "scale": "No truck scale clearly identifiable in the truck path - low confidence, possible but not confirmed.",
+          "railServed": "A major rail yard and curving rail line run along the SW of the broader industrial park, but no spur clearly penetrates the Frito-Lay property; marked false with low confidence.",
+          "siteAreaAcres": "Perimeter box yields ~78 acres for the plant building, dock aprons, and on-property drop yard.",
+          "trailersVisible": "~240 trailers counted across the east-side drop yard and dock faces in z18 imagery - approximate.",
+          "dockDoorCount": "Overhead count estimate; portions of dock faces obscured by backed-in trailers - moderate confidence."
+        }
+      },
+      {
+        "id": "04-frito-lay-perry-ga-kathleen",
+        "name": "Frito-Lay - Perry GA (Kathleen)",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "dockDoorCount",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 32.483737,
+          "lng": -83.609766
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.4795,
+            "west": -83.6135,
+            "north": 32.4872,
+            "east": -83.6042
+          },
+          "truckGate": {
+            "south": 32.4854,
+            "west": -83.6114,
+            "north": 32.4859,
+            "east": -83.6106
+          },
+          "dropYards": [
+            {
+              "south": 32.4818,
+              "west": -83.6082,
+              "north": 32.4848,
+              "east": -83.6048
+            },
+            {
+              "south": 32.4802,
+              "west": -83.6124,
+              "north": 32.4814,
+              "east": -83.61
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.4835,
+              "west": -83.6063,
+              "north": 32.4852,
+              "east": -83.6053
+            },
+            {
+              "south": 32.4854,
+              "west": -83.6106,
+              "north": 32.4864,
+              "east": -83.6086
+            }
+          ],
+          "staging": {
+            "south": 32.4801,
+            "west": -83.6125,
+            "north": 32.4814,
+            "east": -83.6106
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 420,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 130,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Frito-Lay - Perry GA (Kathleen)\n- Type: Manufacturing Plant\n- Address: 1200 GA Highway 247 S, Kathleen, GA 31047\n- Resolved center: 32.483737, -83.609766\n- Roster coords: 32.483737, -83.609766 (landed dead-center on the plant — accurate)",
+        "mapsUrl": "https://www.google.com/maps/@32.483737,-83.609766,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single primary entrance road off GA Highway 247 in the NW. The entrance road crosses the BNSF/Norfolk Southern mainline at a grade crossing (confirmed in Street View) then runs into the secured plant property. The whole campus is fenced; the controlled entrance is a clear pinch-point.",
+          "guardShack": "A guard booth is almost certainly present at this flagship secured plant - the largest Frito-Lay snack plant in the US with 1000+ employees and tightly controlled internal roads. However it could not be directly confirmed: Street View does not reach the internal entrance road and z20-z21 satellite at the gate zone is washed out. Marked true at medium confidence.",
+          "remoteGs": "False - guard booth assumed present.",
+          "preGateStaging": "Truck staging/parking lot with parked trailers in the SW of the property (confirmed at z20), providing pre-/post-gate holding room.",
+          "postGateStaging": "Large internal paved aprons and a roundabout-style distribution junction between the gate and the dock banks - ample inside holding room.",
+          "drivewayLong": "Long entrance road from GA-247 plus expansive internal road network and staging lots - holds well over 3 trucks.",
+          "fastLaneOpportunity": "Wide entrance road and large paved aprons with significant unused width - room to add an express/bypass lane.",
+          "entryExitTogether": "Single primary entrance road off GA-247 serves both in and out.",
+          "entryLanes": "Estimated 1 inbound; satellite resolution limits exact count - low confidence.",
+          "exitLanes": "Estimated 1 outbound - low confidence.",
+          "dockDoors": "Long dock banks on multiple building faces (east face of the main plant and the NW warehouse face) with many trailers backed in. Total estimated ~70 - 50+ band.",
+          "dropArea": "Massive trailer drop yard on the east side with hundreds of trailers in long rows, plus the SW staging lot - far exceeds 50 stalls.",
+          "shipRcvSeparate": "Dock banks on physically distinct building faces (east face and NW warehouse) indicating separate shipping/receiving clusters.",
+          "urbanRural": "Edge-of-town location in Kathleen/Houston County GA, surrounded by farmland and open fields; small-town industrial setting - Rural.",
+          "multipleFacilities": "Campus character: the main plant mass plus a separate NW warehouse building and process/utility structures - multiple large building clusters on one property.",
+          "scale": "No truck scale clearly identifiable - low confidence, possible but not confirmed.",
+          "railServed": "Confirmed - a rail mainline runs along the west; rail spurs penetrate the plant property and rail tank cars are parked on-site (visible in z19 imagery on the SW side).",
+          "siteAreaAcres": "Perimeter box yields ~130 acres for the very large plant campus, consistent with the largest US Frito-Lay snack plant.",
+          "trailersVisible": "~320 trailers counted across the east drop yard, dock faces, and SW staging - approximate.",
+          "dockDoorCount": "Overhead count estimate; dock faces partially obscured by trailers and washed-out imagery - moderate confidence.",
+          "multiStep": "Possible second checkpoint given the internal road system and rail crossing, but not confirmed - left false."
+        }
+      },
+      {
+        "id": "05-frito-lay-casa-grande-az",
+        "name": "Frito-Lay - Casa Grande AZ",
+        "type": "Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "dockDoors",
+          "dockDoorCount",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 32.9015,
+          "lng": -111.792
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.8994,
+            "west": -111.795,
+            "north": 32.9047,
+            "east": -111.7915
+          },
+          "truckGate": {
+            "south": 32.9017,
+            "west": -111.792,
+            "north": 32.9023,
+            "east": -111.7915
+          },
+          "dropYards": [
+            {
+              "south": 32.9024,
+              "west": -111.793,
+              "north": 32.9043,
+              "east": -111.7916
+            },
+            {
+              "south": 32.9015,
+              "west": -111.795,
+              "north": 32.9034,
+              "east": -111.7936
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.9013,
+              "west": -111.7936,
+              "north": 32.9026,
+              "east": -111.7924
+            },
+            {
+              "south": 32.8998,
+              "west": -111.7942,
+              "north": 32.9006,
+              "east": -111.7926
+            }
+          ],
+          "staging": {
+            "south": 32.9017,
+            "west": -111.7926,
+            "north": 32.9026,
+            "east": -111.7918
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 95,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Frito-Lay - Casa Grande AZ\n- Type: Manufacturing Plant\n- Address: 1450 W Maricopa-Casa Grande Hwy, Casa Grande, AZ 85193\n- Resolved center: 32.901500, -111.792000\n- Roster coords: 32.900692, -111.793276 (within the plant complex — accurate)",
+        "mapsUrl": "https://www.google.com/maps/@32.901500,-111.792000,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "The entire plant perimeter is enclosed by chain-link fencing (confirmed in multiple Street View captures from the east access road). A single internal access road runs along the east side from the public road network in the N; the truck entrance is a controlled gate where a driveway crosses the fence line onto this access road.",
+          "guardShack": "A guard booth is likely at this flagship 'near net zero' secured plant, but could not be visually confirmed - z21 satellite at the gate zone is washed out and Street View of the entrance is heavily sun-glared. Marked true at medium confidence and flagged.",
+          "remoteGs": "False - guard booth assumed present.",
+          "postGateStaging": "Large internal paved aprons and trailer yard between the gate and the dock areas - ample inside holding room.",
+          "drivewayLong": "Long east-side access road plus expansive internal paved yard - holds 3+ trucks.",
+          "fastLaneOpportunity": "Wide access road and large paved internal aprons with significant unused width - room to add an express/bypass lane.",
+          "entryExitTogether": "Single access road / entrance serves both in and out.",
+          "entryLanes": "Estimated 1 inbound - low confidence, imagery washed out.",
+          "exitLanes": "Estimated 1 outbound - low confidence.",
+          "dockDoors": "Dock doors along the building with trailers backed in; partial visibility - estimated 25-50 band, low confidence.",
+          "dropArea": "Extensive trailer drop yard on the NE with dozens of trailers in rows, plus additional trailers on the W side - exceeds 50 stalls.",
+          "shipRcvSeparate": "Could not clearly confirm physically separate ship/receive dock clusters - left false, flagged.",
+          "urbanRural": "Set in the Sonoran desert at the edge of Casa Grande, surrounded by farmland and open desert - Rural.",
+          "multipleFacilities": "Single large connected plant building mass with attached process structures - not a multi-cluster campus. An electrical substation NE of the property is a separate utility.",
+          "scale": "No truck scale clearly identifiable - low confidence.",
+          "railServed": "Confirmed - a rail line runs along the east edge of the property and rail cars/tankers are parked on a spur serving the plant (visible in Street View and satellite).",
+          "siteAreaAcres": "Perimeter box yields ~95 acres; public sources cite the building at ~188,000 sq ft on 200+ acres of owned land (much of it desert buffer).",
+          "trailersVisible": "~110 trailers counted across the NE drop yard, W side, and dock faces - approximate.",
+          "dockDoorCount": "Overhead estimate; imagery resolution and trailer obstruction limit confidence."
+        }
+      },
+      {
+        "id": "06-frito-lay-kern-plant-bakersfield-ca",
+        "name": "Frito-Lay - Kern Plant Bakersfield CA",
+        "type": "Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "dockDoors",
+          "scale",
+          "multiStep",
+          "postGateStaging"
+        ],
+        "center": {
+          "lat": 35.39575,
+          "lng": -119.32045
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.39185,
+            "west": -119.3242,
+            "north": 35.3987,
+            "east": -119.3176
+          },
+          "truckGate": {
+            "south": 35.3973,
+            "west": -119.319,
+            "north": 35.39845,
+            "east": -119.3179
+          },
+          "dropYards": [
+            {
+              "south": 35.3932,
+              "west": -119.3213,
+              "north": 35.3966,
+              "east": -119.3183
+            },
+            {
+              "south": 35.392,
+              "west": -119.321,
+              "north": 35.394,
+              "east": -119.3182
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.3956,
+              "west": -119.3215,
+              "north": 35.3968,
+              "east": -119.319
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 110,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinates (35.367588, -119.07772, \"GEOMETRIC_CENTER\") were wrong —\nroughly 25 km off-target, landing on a petroleum tank farm and the Kern River\nbed east of Bakersfield. The roster address \"28490 Highway 58\" is also imprecise.\n\nWeb research (CLUI Land Use Database, PotatoPro, TruckMap, ClustrMaps) resolved\nthe real Frito-Lay Kern Plant to 28801 Hwy 58, Bakersfield, CA 93314 —\nan isolated industrial complex northwest of Bakersfield, in an area of pivot-\nirrigated farmland, dairies and oil leases. CLUI describes it as \"the world's\nlargest Frito factory,\" a 375,000 sq ft processing/warehouse facility on ~640\nacres (one square mile) with its own LEED-Gold co-generation power plant.\n\nSatellite probing confirmed the building: at ~35.396, -119.318 a large white-\nroofed manufacturing building with process silos, a wastewater/treatment area,",
+        "mapsUrl": "https://www.google.com/maps/@35.39575,-119.32045,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (35.367588,-119.07772) were ~25 km off, landing on an oil tank farm. Resolved the real Kern Plant via web search (CLUI, PotatoPro, TruckMap) to 28801 Hwy 58, Bakersfield CA 93314 — an isolated industrial complex NW of Bakersfield surrounded by pivot-irrigated farmland. Locked center at 35.39575,-119.32045.",
+          "truckGate": "Single truck entrance: a wide paved driveway off the north public road (Hwy 58 / Rosedale Hwy frontage) that crosses a BNSF rail spur and curves into the property. Street View (captured 2026-04) shows a continuous chain-link perimeter fence with a single driveway gap, orange lane delineators in the drive, and a small structure beside the lane. A LEED-Gold flagship food-manufacturing plant of this scale on an isolated site is gated as a matter of course.",
+          "guardShack": "A small structure sits beside the entrance driveway near the rail crossing with vehicles parked around it, consistent with a guard booth. Imagery resolution at the entrance is limited (heavy tree shadow on satellite, booth at edge of Street View range) so this is medium-confidence.",
+          "fastLaneOpportunity": "The entrance driveway is wide with a large open paved apron inside the rail crossing — ample unused width to add an express/bypass lane.",
+          "dockDoors": "Dock doors run along the south/southeast face of the main building where trailers are backed in; exact count not crisply resolvable from overhead — estimated 25-50 band.",
+          "dropArea": "Large drop yard south of the main building holds many rows of parked trailers (90+ counted in z19 imagery), clearly a 50+ band trailer-storage yard.",
+          "railServed": "BNSF rail spur runs along the north edge of the property; Street View shows covered-hopper rail cars parked on the spur (bulk grain/corn inbound).",
+          "drivewayLong": "Driveway crosses the rail then opens onto a deep paved apron that can stack 3+ trucks before reaching the docks.",
+          "siteAreaAcres": "Perimeter box covers the active fenced developed footprint (~110 acres). The full Kern Plant land holding is ~640 acres (one square mile) of mostly undeveloped farmland; the audited yard is the developed core.",
+          "scale": "No truck scale clearly visible in imagery; left false (low confidence).",
+          "postGateStaging": "Open paved apron inside the gate before the docks provides holding room; inferred from layout."
+        }
+      },
+      {
+        "id": "07-frito-lay-killingly-ct",
+        "name": "Frito-Lay - Killingly CT",
+        "type": "Manufacturing Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "fastLaneOpportunity",
+          "scale",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 41.8605,
+          "lng": -71.8905
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.8555,
+            "west": -71.8932,
+            "north": 41.8658,
+            "east": -71.8875
+          },
+          "truckGate": {
+            "south": 41.8624,
+            "west": -71.8932,
+            "north": 41.863,
+            "east": -71.8926
+          },
+          "dropYards": [
+            {
+              "south": 41.8625,
+              "west": -71.8922,
+              "north": 41.8655,
+              "east": -71.8885
+            },
+            {
+              "south": 41.8556,
+              "west": -71.8926,
+              "north": 41.8595,
+              "east": -71.8895
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.8605,
+              "west": -71.8918,
+              "north": 41.8628,
+              "east": -71.8906
+            },
+            {
+              "south": 41.8595,
+              "west": -71.8904,
+              "north": 41.8615,
+              "east": -71.8888
+            }
+          ],
+          "staging": {
+            "south": 41.862,
+            "west": -71.8926,
+            "north": 41.863,
+            "east": -71.8918
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 50,
+          "trailersVisible": 350,
+          "trailerParkingCapacity": 450,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 90,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Frito-Lay - Killingly CT\n- Type: Manufacturing Plant\n- Roster address: 20 Killingly Commons Dr, Dayville (Killingly), CT 06241\n- Corrected address: 1886 Upper Maple St, Dayville, CT 06241\n- Resolved center: 41.860500, -71.890500\n- Roster coords: 41.84156, -71.88248 (WRONG — landed on a retail shopping center)",
+        "mapsUrl": "https://www.google.com/maps/@41.860500,-71.890500,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "ROSTER COORDINATE CORRECTION: the supplied coords landed on the Killingly Commons retail shopping center, not the plant. The real Frito-Lay Killingly plant is at 1886 Upper Maple St, ~2.3 km NW (center ~41.8605, -71.8905). A single access road off Upper Maple St crosses the New England Central rail line at a grade crossing and runs into the secured plant property; the truck entrance is a controlled gate on this access road. The wooded approach obscures the exact gate from satellite and Street View - medium confidence, flagged.",
+          "guardShack": "A guard booth is likely at this 700-employee plant given the single controlled access road, but it could not be visually confirmed - the entrance road runs under heavy tree canopy. Marked true at medium confidence and flagged.",
+          "remoteGs": "False - guard booth assumed present.",
+          "postGateStaging": "Large internal paved aprons and trailer yards between the gate and the dock banks - ample inside holding room.",
+          "drivewayLong": "Long wooded access road from Upper Maple St plus expansive internal yard - holds well over 3 trucks.",
+          "fastLaneOpportunity": "The wooded entrance road is constrained; unclear whether there is room to add an express lane - flagged, left false.",
+          "entryExitTogether": "Single access road serves both in and out.",
+          "entryLanes": "Estimated 1 inbound - low confidence, entrance obscured by tree canopy.",
+          "exitLanes": "Estimated 1 outbound - low confidence.",
+          "dockDoors": "Long dock banks on multiple building faces (north face and east/SE faces) with many trailers backed in. Total estimated ~50 - 50+ band.",
+          "dropArea": "Very extensive trailer drop yards on the north (paved) and south/SW (gravel overflow lot) - hundreds of trailers in long rows, far exceeding 50 stalls.",
+          "shipRcvSeparate": "Dock banks on physically distinct building faces (north face and east/SE faces) indicating separate shipping/receiving clusters.",
+          "urbanRural": "Located in the small town of Dayville (Killingly), CT, surrounded by woods, lakes/ponds, and a quarry; small-town/rural industrial setting - Rural.",
+          "multipleFacilities": "Single large connected plant building mass with attached process structures - not a multi-cluster campus.",
+          "scale": "No truck scale clearly identifiable - low confidence.",
+          "railServed": "Confirmed - the New England Central rail line runs along the west side of the property; the plant access road crosses it at a grade crossing and a spur appears to serve the site.",
+          "siteAreaAcres": "Perimeter box yields ~90 acres including the plant building and the north and south drop yards.",
+          "trailersVisible": "~350 trailers counted across the north paved yard, south gravel yard, and dock faces - approximate.",
+          "dockDoorCount": "Overhead estimate; dock faces partially obscured by backed-in trailers - moderate confidence."
+        }
+      },
+      {
+        "id": "08-frito-lay-topeka-ks",
+        "name": "Frito-Lay - Topeka KS",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 38.987236,
+          "lng": -95.691136
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.9835,
+            "west": -95.6945,
+            "north": 38.9905,
+            "east": -95.6885
+          },
+          "truckGate": {
+            "south": 38.9889,
+            "west": -95.6926,
+            "north": 38.9896,
+            "east": -95.692
+          },
+          "dropYards": [
+            {
+              "south": 38.9878,
+              "west": -95.6905,
+              "north": 38.9902,
+              "east": -95.6887
+            },
+            {
+              "south": 38.9838,
+              "west": -95.6932,
+              "north": 38.9865,
+              "east": -95.69
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 38.9868,
+              "west": -95.6923,
+              "north": 38.989,
+              "east": -95.6908
+            },
+            {
+              "south": 38.9858,
+              "west": -95.6908,
+              "north": 38.9878,
+              "east": -95.6892
+            }
+          ],
+          "staging": {
+            "south": 38.9888,
+            "west": -95.6926,
+            "north": 38.9895,
+            "east": -95.6916
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 300,
+          "trailerParkingCapacity": 380,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 105,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Frito-Lay - Topeka KS\n- Type: Manufacturing Plant\n- Address: 4236 SW Kirklawn Ave, Topeka, KS 66609\n- Resolved center: 38.987236, -95.691136\n- Roster coords: 38.987236, -95.691136 (landed on the plant — accurate)",
+        "mapsUrl": "https://www.google.com/maps/@38.987236,-95.691136,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single main truck entrance off SW Kirklawn Ave on the north side. The plant perimeter is chain-link fenced throughout (confirmed in multiple 2024 Street View captures). The entrance is a wide divided/curving driveway with lane markings; a sliding gate is likely (consistent with the fenced perimeter) though it was open in the imagery. Marked true at medium confidence and flagged.",
+          "guardShack": "No guard booth is visible at the truck entrance in clear 2024 Street View or z20-z21 satellite - the entrance off Kirklawn Ave is a wide open driveway with no checkpoint structure at the property line. Marked false.",
+          "remoteGs": "True - there IS a controlled fenced entrance but NO guard booth, implying kiosk / call-box / app check-in. Flagged.",
+          "postGateStaging": "Large internal paved aprons and trailer yards between the entrance and the dock banks - ample inside holding room.",
+          "drivewayLong": "Wide curving entrance driveway plus expansive internal paved yard - holds well over 3 trucks.",
+          "fastLaneOpportunity": "Very wide entrance apron with significant unused paved width and lane markings - room to add an express/bypass lane.",
+          "entryExitTogether": "Single entrance off SW Kirklawn Ave serves both in and out.",
+          "entryLanes": "Estimated 2 inbound from the wide divided/curving driveway - low confidence.",
+          "exitLanes": "Estimated 1 outbound - low confidence.",
+          "dockDoors": "Long dock banks on multiple building faces with many trailers backed in - total estimated ~55, 50+ band.",
+          "dropArea": "Very extensive trailer drop yards - paved rows on the NE and a large gravel overflow lot on the SW - hundreds of trailers, far exceeding 50 stalls.",
+          "shipRcvSeparate": "Dock banks on physically distinct building faces (NE/N face and SE face) indicating separate shipping/receiving clusters.",
+          "urbanRural": "Within the Topeka metro industrial area, adjacent to a highway interchange and other industrial development - Urban.",
+          "multipleFacilities": "Campus character: the main plant mass plus a separate NW office building and a separate W-side warehouse building - multiple building clusters on one property.",
+          "scale": "No truck scale clearly identifiable - low confidence.",
+          "railServed": "Confirmed - a rail line and spur run along the SE/E side of the property, serving the plant.",
+          "siteAreaAcres": "Perimeter box yields ~105 acres covering the plant building, office, warehouse, and drop yards.",
+          "trailersVisible": "~300 trailers counted across the NE paved yard, SW gravel yard, and dock faces - approximate.",
+          "dockDoorCount": "Overhead estimate; dock faces partially obscured by backed-in trailers - moderate confidence."
+        }
+      },
+      {
+        "id": "09-frito-lay-san-antonio-tx",
+        "name": "Frito-Lay - San Antonio TX",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 29.472769,
+          "lng": -98.396782
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 29.47055,
+            "west": -98.3996,
+            "north": 29.47435,
+            "east": -98.3954
+          },
+          "truckGate": {
+            "south": 29.472,
+            "west": -98.39885,
+            "north": 29.47265,
+            "east": -98.398
+          },
+          "dropYards": [
+            {
+              "south": 29.4714,
+              "west": -98.3969,
+              "north": 29.4734,
+              "east": -98.39555
+            },
+            {
+              "south": 29.4728,
+              "west": -98.3981,
+              "north": 29.474,
+              "east": -98.397
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 29.4715,
+              "west": -98.397,
+              "north": 29.4723,
+              "east": -98.3956
+            },
+            {
+              "south": 29.4706,
+              "west": -98.3987,
+              "north": 29.4711,
+              "east": -98.3974
+            }
+          ],
+          "staging": {
+            "south": 29.4723,
+            "west": -98.3982,
+            "north": 29.473,
+            "east": -98.3969
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 33,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Address: 4855 Greatland Dr, San Antonio, TX 78218\n- Locked center: 29.472769, -98.396782 (rooftop process-equipment cluster)\n- Confirmation: Web search corroborated the address and a published coordinate\n  (29.472769, -98.396782) matching the roster point. Satellite shows a large\n  multi-building manufacturing campus with rooftop silos, ducting and exhaust\n  stacks — unmistakable food-manufacturing plant, not an office. The roster\n  point landed on the NE building corner; center re-locked on the process core.",
+        "mapsUrl": "https://www.google.com/maps/@29.472769,-98.396782,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed via web search (4855 Greatland Dr, coords 29.472769,-98.396782) and satellite: large multi-building manufacturing campus with rooftop process equipment (silos, ducting, exhaust stacks), dock banks on multiple faces, and large trailer drop yard. Roster point landed on the building corner; locked center on the rooftop equipment cluster.",
+          "truckGate": "Plant is chain-link fenced (visible in 2024 Street View along the west/Greatland frontage). Truck/employee access funnels through a controlled fenced opening off the internal driveway; classified as a truck gate.",
+          "guardShack": "Street View shows a small structure beside the entrance fence opening near the plant facade; consistent with a guard booth but partly obscured by parked trailers and distance — medium confidence, flagged.",
+          "dockDoors": "Dock banks visible on the south building face (orange-cab Frito-Lay tractors backed in) and along the east face with many trailers backed in; aggregate clearly 50+.",
+          "dropArea": "60-75+ trailers parked in rows on the east and southeast yard plus along internal drives; large dedicated drop yard.",
+          "shipRcvSeparate": "Distinct dock clusters on different building faces (south face and east face) indicate physically separated shipping/receiving.",
+          "multipleFacilities": "Campus of ~4 interconnected large buildings (manufacturing, warehouse, support).",
+          "railServed": "A rail line runs along the SE perimeter in the adjacent corridor but no spur enters the property.",
+          "urbanRural": "Dense Northeast San Antonio industrial park near I-35 — Urban.",
+          "entryLanes": "Single combined in/out driveway estimated; lane count not clearly resolvable from imagery."
+        }
+      },
+      {
+        "id": "11-frito-lay-brookhollow-plant-dallas-tx",
+        "name": "Frito-Lay - Brookhollow Plant Dallas TX",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "dropArea",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 32.82925,
+          "lng": -96.8854
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.8286,
+            "west": -96.8863,
+            "north": 32.8299,
+            "east": -96.8845
+          },
+          "truckGate": {
+            "south": 32.8293,
+            "west": -96.88475,
+            "north": 32.8296,
+            "east": -96.8845
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 32.8295,
+              "west": -96.8851,
+              "north": 32.82985,
+              "east": -96.8846
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 6,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster address was wrong. Roster listed \"1500 N Cockrell Hill Rd, Dallas, TX 75211\" with\n  geocoded coords 32.762606, -96.894419 — that point is a generic SW-Dallas industrial park\n  with no Frito-Lay plant.\n- Correct address: 1141 Regal Row, Dallas, TX 75247 — confirmed by PotatoPro\n  (\"Frito Lay - Brookhollow (Dallas)\"), Waze (\"Frito-Lay Brookhollow, 1141 Regal Row\"),\n  Yellowpages and Superpages.\n- Locked center: 32.82925, -96.88540 — the large manufacturing building in the\n  Brookhollow / Stemmons (I-35E) industrial corridor, NW Dallas near Love Field.\n- Positive ID: 2024/2025 Street View shows a red Frito-Lay wall sign on the east face of\n  the building, plus a row of bulk material silos at the north end and a rail spur on the\n  south side — all consistent with a snack-manufacturing plant (PotatoPro lists it as",
+        "mapsUrl": "https://www.google.com/maps/@32.829250,-96.885400,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address (1500 N Cockrell Hill Rd) was WRONG. Correct address is 1141 Regal Row, Dallas TX 75247 (PotatoPro + Waze + Yellowpages confirm). Building positively identified by red Frito-Lay wall sign visible in 2024/2025 Street View on the east building face.",
+          "truckGate": "Entire property enclosed by chain-link / iron fence; sliding gates control vehicle access at the east office/parking entrance and the dock-yard entrance. No open uncontrolled driveway.",
+          "guardShack": "No staffed guard booth visible at any gate in Street View or satellite. Older urban plant with self-managed sliding gates.",
+          "remoteGs": "Gate present but no guard shack -> remote / call-box / badge check-in implied.",
+          "railServed": "Rail spur runs along the south/southwest side of the building; covered hopper / tank rail cars visible parked against the building in 2019 Street View (rail-served snack manufacturing — receives bulk grain/corn).",
+          "dockDoors": "Dock doors with trailers backed in visible along the east and north building faces; band 10-25 estimated, exact count obscured by adjacent buildings and fence — low confidence.",
+          "backupSensitive": "Constrained urban site hemmed by neighboring industrial buildings on the south and west; narrow streets and short driveways leave little truck stacking room before gates.",
+          "multipleFacilities": "Single Frito-Lay building. Adjacent large warehouses belong to other companies, not Frito-Lay.",
+          "siteArea": "~6 acres for the fenced property derived from the perimeter box; building footprint alone ~4.2 acres."
+        }
+      },
+      {
+        "id": "12-frito-lay-beloit-wi",
+        "name": "Frito-Lay - Beloit WI",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "scale",
+          "entryLanes",
+          "exitLanes",
+          "railServed"
+        ],
+        "center": {
+          "lat": 42.5165,
+          "lng": -88.9845
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.5131,
+            "west": -88.9878,
+            "north": 42.5193,
+            "east": -88.9818
+          },
+          "truckGate": {
+            "south": 42.5164,
+            "west": -88.9856,
+            "north": 42.517,
+            "east": -88.9847
+          },
+          "dropYards": [
+            {
+              "south": 42.5131,
+              "west": -88.9852,
+              "north": 42.5149,
+              "east": -88.9827
+            },
+            {
+              "south": 42.5178,
+              "west": -88.9864,
+              "north": 42.519,
+              "east": -88.9848
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 42.518,
+              "west": -88.9862,
+              "north": 42.5187,
+              "east": -88.9833
+            },
+            {
+              "south": 42.5154,
+              "west": -88.9862,
+              "north": 42.5172,
+              "east": -88.9856
+            }
+          ],
+          "staging": {
+            "south": 42.5154,
+            "west": -88.9866,
+            "north": 42.5179,
+            "east": -88.9856
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 170,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 68,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Address: 2810 Kennedy Dr, Beloit, WI 53511\n- Locked center: 42.51650, -88.98450 (main manufacturing building)\n- Confirmation: Web research confirms the address and a large Frito-Lay\n  manufacturing plant — 140M+ lbs of snacks per year (Lay's, Fritos, Doritos,\n  Cheetos, Ruffles, Tostitos), ~500 jobs, LEED-EB Gold, first zero-landfill\n  Frito-Lay site (Greater Beloit Chamber, PotatoPro, Beloit Daily News).\n  Satellite shows a large dark-roof manufacturing building with rooftop process\n  equipment and silos — unmistakable food plant. The roster point landed on\n  Kennedy Dr; center re-locked on the plant building.",
+        "mapsUrl": "https://www.google.com/maps/@42.51650,-88.98450,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed: 2810 Kennedy Dr, Beloit WI 53511. Web research corroborates a large Frito-Lay manufacturing plant (140M+ lbs of snacks/yr, ~500 jobs, LEED-EB Gold, zero-landfill). Satellite shows a large dark-roof manufacturing building with rooftop process equipment and silos, dock banks, a large trailer drop yard, and a rail siding. Roster point landed on Kennedy Dr; center re-locked on the main plant building.",
+          "truckGate": "Plant is chain-link fenced (visible in 2024 Street View along the Kennedy Dr frontage). Truck operations are accessed through a controlled fenced opening off the internal road; classified as a truck gate.",
+          "guardShack": "No clear guard booth resolved at the truck entrance from satellite or Street View — entrance appears to be a gated opening without a dedicated multi-window booth, so classified remoteGs (kiosk/badge check-in). Medium confidence, flagged.",
+          "dockDoors": "Dock banks on the north building face and along the west side with many trailers backed in; aggregate clearly 50+.",
+          "dropArea": "Very large trailer drop yard SE of the plant with 100+ trailers in marked rows, plus overflow trailers on a grass apron near the rail. 50+ band; dedicated dropYard true.",
+          "shipRcvSeparate": "Dock clusters on physically separate building faces (north and west) indicate separated shipping/receiving.",
+          "railServed": "Multiple rail tracks and a siding run alongside the SE building face near the silo/process area, consistent with rail delivery of raw materials. Marked true; flagged as the spur/siding-vs-mainline distinction is not fully certain.",
+          "fastLaneOpportunity": "Wide paved apron and ample yard width at the truck entrance leave room for a bypass/express lane.",
+          "urbanRural": "Beloit is a small Wisconsin city; the plant sits in an edge-of-town industrial/agricultural setting with farm fields bordering the north and south. Classified Rural per the small-town tiebreaker.",
+          "buildingCount": "Main manufacturing plant plus an attached/adjacent warehouse section and a small office structure; ~3 distinct buildings on one contiguous campus (not a multi-cluster campus, so multipleFacilities false)."
+        }
+      },
+      {
+        "id": "13-frito-lay-canton-oh",
+        "name": "Frito-Lay - Canton OH",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "railServed",
+          "scale"
+        ],
+        "center": {
+          "lat": 40.7831,
+          "lng": -81.4222
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.78175,
+            "west": -81.4252,
+            "north": 40.7848,
+            "east": -81.4205
+          },
+          "truckGate": {
+            "south": 40.78305,
+            "west": -81.4218,
+            "north": 40.7835,
+            "east": -81.4211
+          },
+          "dropYards": [
+            {
+              "south": 40.7825,
+              "west": -81.4247,
+              "north": 40.784,
+              "east": -81.4233
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.7829,
+              "west": -81.4233,
+              "north": 40.7838,
+              "east": -81.4226
+            },
+            {
+              "south": 40.78215,
+              "west": -81.4229,
+              "north": 40.7828,
+              "east": -81.4219
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 33,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster address was WRONG: roster gave \"5555 Sterilite St SE, Canton OH\n  44730\", which geocoded ~17.1 km off (movedMeters 17150) into a generic\n  warehouse/distribution area in eastern Canton — not the plant.\n- Correct address: 4030 16th St SW, Canton, OH 44710 — Frito-Lay North\n  America, Rold Gold Foods Division (pretzels), production began 1967, ~150\n  employees.\n- Locked center: 40.78310, -81.42220\n- Confirmation: Web research (IndustryNet, Yelp, D&B, PotatoPro) gave the\n  16th St SW address. Positively confirmed in 2019 Street View: the building\n  carries the Frito-Lay red sun logo and there is an orange/yellow Frito-Lay\n  \"Canton Plant\" monument sign at the entrance.",
+        "mapsUrl": "https://www.google.com/maps/@40.78310,-81.42220,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "ROSTER ADDRESS WRONG. Roster gave '5555 Sterilite St SE, Canton OH 44730' which geocoded 17.1 km off into a generic warehouse/distribution area in eastern Canton. Web research identifies the real plant as '4030 16th St SW, Canton OH 44710' (Frito-Lay North America / Rold Gold Foods Division — pretzels; production began 1967, ~150 employees). Positively confirmed in 2019 Street View: the Frito-Lay red sun logo on the building and an orange/yellow Frito-Lay 'Canton Plant' monument sign. Locked center at 40.78310, -81.42220.",
+          "truckGate": "No controlled barrier gate or checkpoint resolved at the plant entrance — the office/parking and building front are open directly to the access road in Street View. Classified false; flagged as the drop-yard perimeter has some fencing but no clear truck-gate barrier was visible.",
+          "guardShack": "No guard booth observed at any entrance. False.",
+          "dockDoors": "Dock banks on the NW building face (trailers backed in) and a covered loading area on the south face; aggregate estimated ~25-50.",
+          "dropArea": "Trailer drop yard west of the plant with ~2 rows of trailers (~40-50) plus dock-staged trailers; 25-50 band. dropYard true.",
+          "shipRcvSeparate": "Dock clusters on physically separate building faces (NW and south).",
+          "railServed": "A rail line runs along the south perimeter; no active spur clearly entering the plant was resolved (older plants of this era sometimes had sidings). Marked false; flagged.",
+          "urbanRural": "Within the city of Canton, OH in a dense urban industrial district. Urban.",
+          "drivewayLong": "Ample internal paved approach depth between the access road and the dock faces — can hold 3+ trucks.",
+          "buildingCount": "Main manufacturing building plus an attached warehouse and a separate metal warehouse/garage in the west yard; ~3 buildings on one contiguous site."
+        }
+      },
+      {
+        "id": "14-frito-lay-frankfort-in",
+        "name": "Frito-Lay - Frankfort IN (Core & East Plants)",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 40.284,
+          "lng": -86.5575
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.281,
+            "west": -86.5625,
+            "north": 40.2868,
+            "east": -86.551
+          },
+          "truckGate": {
+            "south": 40.2823,
+            "west": -86.5618,
+            "north": 40.283,
+            "east": -86.5608
+          },
+          "dropYards": [
+            {
+              "south": 40.2848,
+              "west": -86.5612,
+              "north": 40.2862,
+              "east": -86.559
+            },
+            {
+              "south": 40.2825,
+              "west": -86.557,
+              "north": 40.2843,
+              "east": -86.5535
+            },
+            {
+              "south": 40.2812,
+              "west": -86.5605,
+              "north": 40.2826,
+              "east": -86.5585
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.2856,
+              "west": -86.557,
+              "north": 40.2864,
+              "east": -86.5536
+            },
+            {
+              "south": 40.2828,
+              "west": -86.561,
+              "north": 40.2836,
+              "east": -86.5585
+            }
+          ],
+          "staging": {
+            "south": 40.2823,
+            "west": -86.5608,
+            "north": 40.2833,
+            "east": -86.5592
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 75,
+          "trailersVisible": 160,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 155,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Address: 323 S County Road 300 W, Frankfort, IN 46041\n- Locked center: 40.28400, -86.55750\n- Confirmation: The roster point landed directly on the plant. Web research\n  confirms two co-located Frito-Lay plants — the Frankfort Core Plant and the\n  Frankfort East Plant — sharing the County Road 300 W address; combined ~1100\n  employees and 17 snack production lines (Waze, fritolayfrankfortinfo.com,\n  PotatoPro). The 2026 Street View shows a Frito-Lay monument sign at the SW\n  entrance road. Satellite shows an unmistakable large food-manufacturing\n  campus.",
+        "mapsUrl": "https://www.google.com/maps/@40.28400,-86.55750,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed: 323 S County Road 300 W, Frankfort IN 46041. Roster point landed directly on the plant. Web research confirms two co-located Frito-Lay plants (Core Plant and East Plant) sharing the address — combined ~1100 employees, 17 snack production lines. Satellite shows a very large multi-building manufacturing campus with rooftop process equipment, on-site wastewater treatment ponds, bulk silos, a rail spur/yard, and extensive trailer yards. Frito-Lay monument sign visible at the SW entrance in 2026 Street View.",
+          "truckGate": "Campus is fenced (decorative metal fence visible along the County Road 300 W frontage in Street View). The entrance road has a checkpoint structure / guard booth at the point where it enters the secured plant area; classified as a controlled truck gate.",
+          "guardShack": "A small booth-footprint structure with a canopy sits on the entrance road at the secured-area boundary, consistent with a staffed guard booth. Medium confidence (resolved from satellite, not directly photographed), flagged.",
+          "dockDoors": "Multiple large dock banks across both the Core and East plant buildings with many trailers backed in; aggregate well past 50.",
+          "dropArea": "Several large trailer drop yards (NW yard, an east-side yard, and a south yard) holding 150+ trailers in marked rows; 50+ band. dropYard true.",
+          "shipRcvSeparate": "Dock clusters distributed across multiple, physically separate building faces of the two plants — shipping and receiving run from separate banks.",
+          "railServed": "A rail spur/yard with multiple tracks and rail hopper cars runs onto the NE part of the property alongside bulk silos — confirmed rail-served for raw-material delivery.",
+          "multipleFacilities": "Definitively a campus: two named plants (Core + East), plus a separate warehouse cluster to the north and support buildings — multiple large building clusters on one property.",
+          "fastLaneOpportunity": "Wide entrance apron and ample paved yard width leave clear room for a bypass/express lane.",
+          "urbanRural": "Edge of Frankfort, IN, surrounded on multiple sides by agricultural fields — Rural.",
+          "siteAreaAcres": "~155 acres estimate for the built campus footprint (plants + yards + parking); the surrounding owned land including fields is larger."
+        }
+      },
+      {
+        "id": "15-frito-lay-kirkwood-plant-binghamton-ny",
+        "name": "Frito-Lay - Kirkwood Plant Binghamton NY",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "scale",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 42.0978,
+          "lng": -75.8388
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.0952,
+            "west": -75.842,
+            "north": 42.1003,
+            "east": -75.837
+          },
+          "truckGate": {
+            "south": 42.0993,
+            "west": -75.8382,
+            "north": 42.1001,
+            "east": -75.8372
+          },
+          "dropYards": [
+            {
+              "south": 42.096,
+              "west": -75.8415,
+              "north": 42.0987,
+              "east": -75.839
+            },
+            {
+              "south": 42.0955,
+              "west": -75.841,
+              "north": 42.097,
+              "east": -75.8387
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 42.0965,
+              "west": -75.8398,
+              "north": 42.0979,
+              "east": -75.8387
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 61,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster input: 200 Frito Lay Dr, Kirkwood NY 13795 — lat/lng 42.039983, -75.79687 (geocode precision APPROXIMATE).\n- Problem: the roster point fell in a residential / wooded area of Kirkwood ~6 km SE of the actual plant.\n- Resolution: web research returned the operating address 10 Spud Ln, Binghamton/Kirkwood NY 13795 / 13904 (PotatoPro, Yelp, Greater Binghamton Chamber). Nominatim placed Spud Lane at 42.0982, -75.8403. Satellite there shows a large riverside snack-manufacturing complex.\n- Confirmed center: ~42.0978, -75.8388. Street View from NY Route 11 confirmed multiple potato/corn silos, a steam plume rising from the frying operation, a rail line in front, and a blue Frito-Lay sign at the access intersection — definitively the Frito-Lay Kirkwood chip plant.",
+        "mapsUrl": "https://www.google.com/maps/@42.0978,-75.8388,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster point (42.039983,-75.79687, geocode precision APPROXIMATE) fell in a residential area of Kirkwood ~6 km SE of the plant. Web research resolved the true address to 10 Spud Ln, Binghamton/Kirkwood NY 13795/13904; Nominatim placed Spud Lane at 42.0982,-75.8403. Satellite there shows the Frito-Lay snack plant on the Susquehanna River; Street View confirmed silos, a steam plume from the fryers, and a blue Frito-Lay sign.",
+          "truckGate": "Single dedicated plant access road runs from a signalized public-road intersection (~42.0997,-75.8374) across a rail line into the property. Controlled-access industrial campus; no Street View available on the private drive so a barrier arm could not be directly imaged, but a controlled checkpoint is standard for a major Frito-Lay manufacturing plant. Medium confidence.",
+          "guardShack": "No clearly resolvable guard booth in satellite at the entrance; classified remoteGs (gate, no visible shack). Low confidence - the booth, if present, sits along the unviewable private drive.",
+          "dropYard": "Extensive trailer storage: dozens of trailers parked in long marked rows on the west/southwest side of the property along the river. Easily 50+ stalls.",
+          "dockDoorCount": "Trailers visible backed into dock faces on the SW side of the main building; door count estimated at ~40 from overhead imagery - approximate.",
+          "railServed": "An active rail line runs along the NE edge of the property between the plant and the road; the plant historically receives bulk inbound (potatoes/corn/oil). Spur appears to serve the plant though it also parallels neighboring industrial parcels.",
+          "urbanRural": "Kirkwood is a small town SE of Binghamton; the plant sits in a riverside small-town industrial corridor - classified Rural per rubric tie-break."
+        }
+      },
+      {
+        "id": "16-frito-lay-lynchburg-va",
+        "name": "Frito-Lay - Lynchburg VA",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "multipleFacilities"
+        ],
+        "center": {
+          "lat": 37.40036,
+          "lng": -79.238328
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 37.3982,
+            "west": -79.2405,
+            "north": 37.403,
+            "east": -79.236
+          },
+          "truckGate": {
+            "south": 37.4022,
+            "west": -79.2368,
+            "north": 37.4029,
+            "east": -79.2359
+          },
+          "dropYards": [
+            {
+              "south": 37.4011,
+              "west": -79.2374,
+              "north": 37.4025,
+              "east": -79.2362
+            },
+            {
+              "south": 37.3994,
+              "west": -79.239,
+              "north": 37.4011,
+              "east": -79.2363
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 37.3995,
+              "west": -79.2382,
+              "north": 37.4012,
+              "east": -79.2373
+            },
+            {
+              "south": 37.3984,
+              "west": -79.2397,
+              "north": 37.3992,
+              "east": -79.2378
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 140,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 45,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster supplied `4500 Murray Pl, Lynchburg, VA` at `37.371152, -79.170245`. That address is wrong — satellite probe there showed an unrelated industrial cluster, not a Frito-Lay plant.\n- Web search (VEDP press release, Roanoke Times archive, Waze, Yelp, PotatoPro) places the Frito-Lay Lynchburg manufacturing/distribution plant at 230 Jefferson Ridge Pkwy, Lynchburg, VA 24501.\n- Probed `37.40036, -79.238328` and confirmed a large L-shaped manufacturing/distribution building with a major truck yard, long dock banks, and extensive trailer parking — consistent with the $150M, 800-job FLNA plant (produces Lay's, Ruffles, Doritos, Cheetos, Tostitos).\n- Locked center: 37.40036, -79.238328.",
+        "mapsUrl": "https://www.google.com/maps/@37.40036,-79.238328,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address (4500 Murray Pl) is wrong. Real plant confirmed at 230 Jefferson Ridge Pkwy, Lynchburg VA 24501 via Waze/Yelp/PotatoPro. Locked center 37.40036,-79.238328.",
+          "truckGate": "Truck driveway connects to Jefferson Ridge Pkwy as a wide open paved apron at z19/z20 imagery with no barrier arm, sliding gate, or pinch-point checkpoint. Open ingress.",
+          "guardShack": "No guard booth visible at the entrance or inside the yard. A cluster mid-yard read as parked tractors, not a structure. Listed uncertain because Street View coverage on the private parkway is partial.",
+          "drivewayLong": "Long approach from parkway into the trailer yard easily holds 3+ trucks.",
+          "fastLaneOpportunity": "Very wide gate apron and large open yard mouth; ample paved width to add an express bypass lane.",
+          "dropArea": "Two large drop-trailer fields (north fan-out lot ~50+ stalls; east linear rows 40+) — well over 50 trailers visible.",
+          "shipRcvSeparate": "Docks span multiple building faces (long east bank plus south/southeast bank) — distinct clusters consistent with separate ship/receive.",
+          "multipleFacilities": "A separate smaller building sits at the north end of the property near the drop yard; counted as buildingCount 2 but it is a single Frito-Lay campus, not separate facilities.",
+          "urbanRural": "Edge-of-town hilltop industrial park in Lynchburg surrounded by woods; Rural per rubric.",
+          "yardMetrics": "Counts are honest overhead estimates; dock doors ~70 across long east bank and south bank, trailers ~110 in drop rows and at docks."
+        }
+      },
+      {
+        "id": "17-frito-lay-charlotte-nc",
+        "name": "Frito-Lay - Charlotte NC",
+        "type": "Manufacturing Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 35.115626,
+          "lng": -80.941746
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.1135,
+            "west": -80.9446,
+            "north": 35.1182,
+            "east": -80.9405
+          },
+          "truckGate": {
+            "south": 35.116,
+            "west": -80.9412,
+            "north": 35.1168,
+            "east": -80.9404
+          },
+          "dropYards": [
+            {
+              "south": 35.1162,
+              "west": -80.9445,
+              "north": 35.118,
+              "east": -80.942
+            },
+            {
+              "south": 35.1135,
+              "west": -80.9425,
+              "north": 35.1148,
+              "east": -80.9405
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.115,
+              "west": -80.9432,
+              "north": 35.117,
+              "east": -80.9422
+            }
+          ],
+          "staging": {
+            "south": 35.1158,
+            "west": -80.9416,
+            "north": 35.1168,
+            "east": -80.9408
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 80,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 42,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster supplied `2911 Nevada Blvd, Charlotte, NC 28273` at `35.115626, -80.941746` (geocode moved 5764 m, so verification was essential).\n- Address confirmed via Hub.biz, Yellowpages, PotatoPro, Foursquare — all list Frito-Lay's Charlotte manufacturing plant at 2911 Nevada Blvd.\n- Satellite probe at the roster coords landed directly on a large manufacturing building with process silos, tanks, water-treatment clarifiers and dock activity. Street View along Nevada Blvd shows the red Frito-Lay logo on the building wall — positive ID.\n- Locked center: 35.115626, -80.941746.",
+        "mapsUrl": "https://www.google.com/maps/@35.115626,-80.941746,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Address 2911 Nevada Blvd, Charlotte NC 28273 confirmed via Hub.biz/Yellowpages/PotatoPro. Plant positively identified by the red Frito-Lay logo on the building wall in Street View. Locked center 35.115626,-80.941746.",
+          "truckGate": "Continuous chain-link perimeter fence runs along Nevada Blvd; the truck driveway pierces the fence at a controlled gated opening. Visible in Street View (Oct 2025) and z20 satellite.",
+          "guardShack": "Small white booth structure sits just inside the fenced truck entrance off Nevada Blvd, confirmed in multiple Street View headings and z20 satellite — staffed guard shack at the gate.",
+          "drivewayLong": "Deep paved approach from the Nevada Blvd gate into the truck yard; holds 3+ trucks.",
+          "dockDoors": "Trailers backed against the building west/southwest face; ~35 doors estimated but smoke/equipment clutter obscures an exact count — flagged uncertain.",
+          "dropArea": "Two large drop-trailer fields — long angled rows along the northwest woods edge and a southern lot — well over 50 trailers parked.",
+          "shipRcvSeparate": "Single dominant dock bank on the building west face; could not confirm a physically separate ship/receive cluster — flagged uncertain.",
+          "multipleFacilities": "An office building and a conveyor-bridged warehouse across Nevada Blvd are associated, but the plant proper is one building cluster; buildingCount 2 counts the plant office.",
+          "urbanRural": "Inside the Charlotte metro industrial fabric (Steele Creek / I-485 corridor); Urban.",
+          "yardMetrics": "Honest overhead estimates; ~35 dock doors, ~80 trailers visible across drop yards and docks, ~42 acres from perimeter box."
+        }
+      },
+      {
+        "id": "18-frito-lay-aberdeen-md",
+        "name": "Frito-Lay - Aberdeen MD",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "scale",
+          "railServed"
+        ],
+        "center": {
+          "lat": 39.49876,
+          "lng": -76.18868
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.4958,
+            "west": -76.1925,
+            "north": 39.5005,
+            "east": -76.1864
+          },
+          "truckGate": {
+            "south": 39.4983,
+            "west": -76.1879,
+            "north": 39.4989,
+            "east": -76.1872
+          },
+          "dropYards": [
+            {
+              "south": 39.496,
+              "west": -76.1918,
+              "north": 39.4982,
+              "east": -76.1895
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.4967,
+              "west": -76.1912,
+              "north": 39.499,
+              "east": -76.1885
+            },
+            {
+              "south": 39.4986,
+              "west": -76.1925,
+              "north": 39.5,
+              "east": -76.189
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 58,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster input: 1080 Old Philadelphia Rd, Aberdeen MD 21001 — lat/lng 39.489025, -76.189621 (geocode precision RANGE_INTERPOLATED, moved 80 m).\n- Resolution: the roster point landed in the right industrial park but not on the plant. Web research returned the operating address 800 Hickory Dr, Aberdeen MD 21001 (Waze, BBB, Maryland Dept. of Commerce). OpenStreetMap tags the Frito-Lay building directly at 39.49876, -76.188679.\n- Confirmation: Street View on Hickory Drive shows the \"Frito-Lay, Inc.\" blue monument sign, the large manufacturing-distribution building, and Cheetos-branded Frito-Lay trailers backed into the dock — positive identification.",
+        "mapsUrl": "https://www.google.com/maps/@39.49876,-76.18868,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address (1080 Old Philadelphia Rd) was approximate (geocode RANGE_INTERPOLATED). Web research and OpenStreetMap resolved the operating address to 800 Hickory Dr, Aberdeen MD 21001; OSM tags the Frito-Lay building at 39.49876,-76.188679. Street View confirmed the 'Frito-Lay, Inc.' monument sign and Cheetos-branded trailers at the dock.",
+          "truckGate": "Street View (2024 pano on Hickory Dr) clearly shows a barrier arm across the single truck driveway with continuous chain-link perimeter fencing - controlled truck gate confirmed.",
+          "guardShack": "A small structure sits beside the gate barrier arm in both Street View and z21 satellite, but it reads as a small check-in kiosk/booth (~1-vehicle footprint) rather than a clearly staffed multi-window guard shack. Classified remoteGs (gate, no clear staffed shack); flagged uncertain.",
+          "dockDoors": "Trailers backed into dock doors on the west, north, south, and east building faces in satellite imagery; total door count well into the 50+ band (~70 estimated, approximate).",
+          "dropArea": "Large trailer drop yard on the SW/south side - long rows of parked trailers, easily 50+ stalls.",
+          "railServed": "A rail line runs along the NW edge of the property; a spur appears to reach the plant's NW corner near the bulk ingredient tanks. Frito-Lay Aberdeen is a manufacturing-distribution center that historically received rail inbound. Flagged uncertain - the spur may serve only the adjacent corridor.",
+          "urbanRural": "Aberdeen is a small Harford County city; the plant sits in a wooded edge-of-town industrial park. Classified Rural per rubric tie-break.",
+          "buildingCount": "One large connected manufacturing-distribution building; counted as 1 despite multiple roof sections."
+        }
+      },
+      {
+        "id": "19-frito-lay-vancouver-wa",
+        "name": "Frito-Lay - Vancouver WA",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "buildingCount",
+          "scale"
+        ],
+        "center": {
+          "lat": 45.65685,
+          "lng": -122.6918
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 45.6535,
+            "west": -122.6947,
+            "north": 45.66,
+            "east": -122.6901
+          },
+          "truckGate": {
+            "south": 45.655,
+            "west": -122.6916,
+            "north": 45.656,
+            "east": -122.6908
+          },
+          "dropYards": [
+            {
+              "south": 45.6556,
+              "west": -122.6944,
+              "north": 45.659,
+              "east": -122.6923
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 45.6548,
+              "west": -122.6913,
+              "north": 45.6582,
+              "east": -122.6906
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 56,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster input: 4808 NW Fruit Valley Rd, Vancouver WA 98660 — lat/lng 45.656846, -122.691343 (geocode precision GEOMETRIC_CENTER, moved 53 m).\n- Resolution: the roster point landed directly on the plant. Web research confirmed the address and that this is a ~300,000 sq ft Frito-Lay manufacturing, warehousing and distribution complex — operating since 1972, ~460 employees, producing Doritos, Tostitos, and Cheetos for the Northwest, western Canada, and Alaska (The Columbian).\n- Confirmation: Street View on NW Fruit Valley Rd shows a Lay's-branded trailer backed into the dock and tall black security fencing enclosing the entire property — positive identification.",
+        "mapsUrl": "https://www.google.com/maps/@45.65685,-122.6918,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster point (45.656846,-122.691343, geocode GEOMETRIC_CENTER) landed directly on the plant. Web research confirmed 4808 NW Fruit Valley Rd, Vancouver WA - a ~300,000 sq ft Frito-Lay manufacturing/warehousing/distribution complex (operating since 1972, ~460 employees). Street View confirmed a Lay's-branded trailer at the dock and tall black security fencing around the entire property.",
+          "truckGate": "The entire property is enclosed by tall black ornamental/security fencing seen in every Street View along NW Fruit Valley Rd; the dock apron is fenced off from the public road. Truck access is via a controlled gate, but the specific barrier-arm opening could not be pinpointed in available imagery. Classified truckGate true; flagged uncertain.",
+          "guardShack": "No guard booth resolvable. Given a fully fenced controlled property with an unconfirmed gate structure, classified remoteGs (gate, no visible shack). Flagged uncertain.",
+          "dockDoors": "Long row of trailers backed into dock doors along the building's east face facing NW Fruit Valley Rd; ~25-35 doors estimated - the 25-50 band.",
+          "dropArea": "Large trailer drop yard on the west side of the building - dozens of trailers in rows, 50+ stalls.",
+          "railServed": "Rail spurs are visible running into the property on the NW/west side; a major rail corridor parallels the site to the east. The plant historically receives bulk inbound. railServed true.",
+          "buildingCount": "Main manufacturing-distribution building plus at least one separate structure (red-roofed building / outbuilding to the north); counted as 2.",
+          "urbanRural": "Vancouver WA is part of the Portland-Vancouver metro; the site sits in a dense industrial corridor. Classified Urban."
+        }
+      },
+      {
+        "id": "20-frito-lay-jonesboro-ar",
+        "name": "Frito-Lay - Jonesboro AR",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "scale",
+          "fastLaneOpportunity"
+        ],
+        "center": {
+          "lat": 35.8145,
+          "lng": -90.5605
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.811,
+            "west": -90.564,
+            "north": 35.8168,
+            "east": -90.558
+          },
+          "truckGate": {
+            "south": 35.8153,
+            "west": -90.5628,
+            "north": 35.816,
+            "east": -90.5618
+          },
+          "dropYards": [
+            {
+              "south": 35.8156,
+              "west": -90.5623,
+              "north": 35.817,
+              "east": -90.5585
+            },
+            {
+              "south": 35.8148,
+              "west": -90.564,
+              "north": 35.8162,
+              "east": -90.5626
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.8153,
+              "west": -90.5624,
+              "north": 35.8162,
+              "east": -90.5585
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 280,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 87,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster input: 2810 Quality Way, Jonesboro AR 72401 — lat/lng 35.814768, -90.56181 (geocode flagged ROOFTOP but `movedMeters` 8439, which raised a concern).\n- Resolution: despite the large geocode move, the supplied lat/lng landed directly on the Frito-Lay plant. Web research confirmed the address — a large Frito-Lay manufacturing plant producing Lay's, Ruffles, and Doritos (PotatoPro, BBB, Jonesboro Chamber; Frito-Lay announced an expansion in 2016).\n- Confirmation: Street View from surrounding farm roads shows the plant building with process silos and a Frito-Lay monument sign in the adjacent field — positive identification.",
+        "mapsUrl": "https://www.google.com/maps/@35.8145,-90.5605,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster geocode flagged ROOFTOP but moved 8439 m - the supplied lat/lng (35.814768,-90.56181) nonetheless landed directly on the Frito-Lay plant. Web research confirmed 2810 Quality Way, Jonesboro AR 72401 - a large Frito-Lay manufacturing plant producing Lay's, Ruffles, and Doritos. Street View from the surrounding farm roads confirmed the plant with silos and a Frito-Lay sign in the field.",
+          "truckGate": "Large modern manufacturing plant set well back from public roads across open farmland, reached by a single private access road from the west. A controlled truck gate is standard for a plant of this scale, but Street View does not cover the private drive so a barrier arm could not be directly imaged. Classified truckGate true; flagged uncertain.",
+          "guardShack": "No guard booth resolvable in available imagery; the gate would sit on the unviewable private access road. Classified remoteGs (gate, no visible shack); flagged uncertain.",
+          "dockDoors": "Extensive dock doors with trailers backed in along the building's north face; door count well into the 50+ band (~60 estimated).",
+          "dropArea": "Very large trailer drop yard on the north side - hundreds of trailers parked in long rows; easily 50+ (200+ trailers visible).",
+          "fastLaneOpportunity": "Wide paved aprons and abundant yard space around the access road suggest physical room to add a bypass/express lane; flagged uncertain.",
+          "railServed": "A rail spur curves into the property at the SW corner reaching the process/tank area - confirmed rail-served.",
+          "urbanRural": "The plant is surrounded by open agricultural fields on the edge of Jonesboro - clearly Rural.",
+          "connectivityIssue": "Rural but on the developed edge of Jonesboro (a mid-size city) with neighboring industrial parcels; cellular coverage likely adequate - set false."
+        }
+      },
+      {
+        "id": "21-frito-lay-pulaski-tn",
+        "name": "Frito-Lay - Pulaski TN",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "dockDoorCount",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 35.2158,
+          "lng": -87.0605
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.2122,
+            "west": -87.0636,
+            "north": 35.219,
+            "east": -87.0576
+          },
+          "truckGate": {
+            "south": 35.2177,
+            "west": -87.0634,
+            "north": 35.2183,
+            "east": -87.0628
+          },
+          "dropYards": [
+            {
+              "south": 35.2172,
+              "west": -87.064,
+              "north": 35.2196,
+              "east": -87.0628
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.216,
+              "west": -87.0605,
+              "north": 35.2172,
+              "east": -87.059
+            },
+            {
+              "south": 35.213,
+              "west": -87.0598,
+              "north": 35.2142,
+              "east": -87.0585
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 52,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Address: 298 Industrial Blvd, Pulaski, TN 38478\n- Locked center: 35.21580, -87.06050\n- Confirmation: Street View (heading 70° from a public-road pano on the west\n  side, 2023-07 capture) clearly shows the Frito-Lay logo on the plant's\n  office building. The geocoded roster coordinates (ROOFTOP, 90 m move) landed\n  inside the campus and required no correction. Web search (PotatoPro, Giles\n  County Chamber) confirms this as the Frito-Lay Pulaski snack plant\n  (chips, extruded snacks, pretzels, tortilla chips).",
+        "mapsUrl": "https://www.google.com/maps/@35.21580,-87.06050,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facility": "Confirmed via Street View — Frito-Lay logo visible on the office building (sv19, 2023-07 capture). Large multi-building manufacturing campus at 298 Industrial Blvd, Pulaski TN. Geocoded coords accurate.",
+          "truckGate": "Whole campus is enclosed by black metal/chain-link fence (confirmed in 5+ Street Views). Trucks reach the active dock yards and the NW drop yard via internal driveways from the public road; the drop-yard entrance is a fenced, controlled opening. Treated as a controlled truck entrance.",
+          "guardShack": "No classic 1-3-vehicle guard booth visible at a public-road gate. A small angled-roof structure sits at the drop-yard entrance and may serve as a transportation/check-in office, but it could not be positively confirmed as a staffed guard shack — flagged uncertain.",
+          "remoteGs": "Set true given a controlled truck entrance with no confirmed guard booth — implies kiosk/app/office check-in. Low confidence.",
+          "dropYard": "Large dedicated drop yard on the NW side — two long rows of carrier trailers (orange/white, ~40-55 trailers) plus box trucks, chain-link fenced, served by a rail spur. Capacity ~70.",
+          "railServed": "Confirmed — a rail spur crosses the west access road and runs into the property alongside the drop yard and dock buildings (sv13, dropyard satellite).",
+          "dockDoorCount": "Estimate ~45 across the rail-served dock building, the warehouse SW/west edge, and a sawtooth dock building. Multiple separate dock banks on different building faces → shipRcvSeparate true. Count is an honest overhead estimate.",
+          "multipleFacilities": "Campus has 6+ distinct buildings — main process plant, large finished-goods warehouse, sawtooth dock building, rail dock building, office, and the drop-yard transportation building.",
+          "urbanRural": "Edge-of-town industrial setting in Pulaski TN, surrounded by woods and open fields — Rural.",
+          "drivewayLong": "Internal driveways from public road to docks are long with ample room to stack 3+ trucks."
+        }
+      },
+      {
+        "id": "22-frito-lay-fayetteville-tn",
+        "name": "Frito-Lay - Fayetteville TN",
+        "type": "Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "scale",
+          "fastLaneOpportunity"
+        ],
+        "center": {
+          "lat": 35.156,
+          "lng": -86.5101
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.1533,
+            "west": -86.5127,
+            "north": 35.1585,
+            "east": -86.5078
+          },
+          "truckGate": {
+            "south": 35.157,
+            "west": -86.5095,
+            "north": 35.1578,
+            "east": -86.5085
+          },
+          "dropYards": [
+            {
+              "south": 35.156,
+              "west": -86.5094,
+              "north": 35.1582,
+              "east": -86.5078
+            },
+            {
+              "south": 35.154,
+              "west": -86.5127,
+              "north": 35.1568,
+              "east": -86.5115
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.1544,
+              "west": -86.511,
+              "north": 35.1556,
+              "east": -86.5088
+            },
+            {
+              "south": 35.157,
+              "west": -86.5108,
+              "north": 35.1582,
+              "east": -86.5095
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 140,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 71,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster input: 101 Industrial Blvd, Fayetteville TN 37334 — lat/lng 35.156146, -86.510063 (geocode precision ROOFTOP, moved 93 m).\n- Resolution: the roster point landed directly on the plant. Web research confirmed the address — a Frito-Lay manufacturing plant operating since 1997, ~500 employees; Frito-Lay bought the plant from Eagle Snacks after Eagle announced its closure (Elk Valley Times).\n- Confirmation: Street View from Industrial Blvd shows the plant building with process silos and trailers at the dock — positive identification.",
+        "mapsUrl": "https://www.google.com/maps/@35.156,-86.5101,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster point (35.156146,-86.510063, geocode ROOFTOP, moved 93 m) landed directly on the plant. Web research confirmed 101 Industrial Blvd, Fayetteville TN 37334 - a Frito-Lay manufacturing plant operating since 1997 (~500 employees; the company bought the plant from Eagle Snacks). Street View confirmed the plant with silos and Frito-Lay/Eagle-era trailers.",
+          "truckGate": "The plant access road runs from a wide entrance off US-64; Street View (2023 pano) shows a checkpoint structure with yellow bollards at the entrance to the plant proper, and the trailer drop yard is enclosed by chain-link fencing. Controlled truck gate confirmed.",
+          "guardShack": "A small structure with yellow bollards sits at the plant entrance pinch-point in Street View - reads as a guard/check-in booth. Classified guardShack true; flagged uncertain (could not confirm it is staffed).",
+          "dockDoors": "Dock doors with trailers backed in along multiple building faces (north, south); total well into the 50+ band (~55 estimated).",
+          "dropArea": "Trailer drop yards on the NE side (large fenced lot) and the west/SW side - dozens of trailers in rows, 50+ stalls combined.",
+          "fastLaneOpportunity": "Wide multi-lane entrance apron off US-64 with abundant paved width suggests room for an express/bypass lane; flagged uncertain.",
+          "railServed": "No rail spur visible reaching the property; the NE boundary is a divided highway (US-64), not rail. railServed false.",
+          "urbanRural": "The plant sits in a small-town industrial area on the edge of Fayetteville, surrounded by woods and farm fields - Rural.",
+          "buildingCount": "One large continuous manufacturing-distribution building; counted as 1 despite multiple roof sections."
+        }
+      },
+      {
+        "id": "23-frito-lay-rosenberg-tx",
+        "name": "Frito-Lay - Rosenberg TX",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "scale"
+        ],
+        "center": {
+          "lat": 29.57769,
+          "lng": -95.86902
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 29.574,
+            "west": -95.8732,
+            "north": 29.5811,
+            "east": -95.8648
+          },
+          "truckGate": {
+            "south": 29.574,
+            "west": -95.8702,
+            "north": 29.5748,
+            "east": -95.8695
+          },
+          "dropYards": [
+            {
+              "south": 29.5744,
+              "west": -95.8732,
+              "north": 29.58,
+              "east": -95.87
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 29.5765,
+              "west": -95.8706,
+              "north": 29.5802,
+              "east": -95.8696
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 95,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode (29.57769, -95.86902) — flagged as GEOMETRIC_CENTER with an\n8,524 m correction — landed directly on a very large industrial plant in open\nfarmland southwest of Rosenberg. Satellite probes at z16/z17 show a massive\nmulti-building manufacturing complex with extensive multi-row trailer parking\non the west side, fronting Highway 36 S to the south. Web search confirms\nFrito-Lay North America, Inc. at 3310 Highway 36, Rosenberg TX 77471, with a\n2022 \"Rosenberg Phase 2 ASF\" (Associate Service Facility) construction project.\nLocation positively confirmed.",
+        "mapsUrl": "https://www.google.com/maps/@29.57769,-95.86902,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single private access driveway leaves Hwy 36 S, crosses a railroad spur, and runs ~350 m north into the plant — a clear single controlled approach / pinch-point. No barrier arm visible at the highway, but the long private drive functions as the controlled entry.",
+          "guardShack": "No guard booth visible at the Hwy 36 entrance; trees and the rail crossing partly obscure the inner approach. Booth-style structure not confirmed in imagery, so guardShack=false / remoteGs=true (kiosk/call-box likely on a plant this size).",
+          "drivewayLong": "Private drive from highway to dock yard is ~350 m and can easily stack 3+ trucks.",
+          "fastLaneOpportunity": "Wide drive apron at the highway and ample paved width on the internal approach.",
+          "dropArea": "Extensive multi-row trailer drop lot along the west property edge — well over 50 trailer stalls.",
+          "railServed": "Rail spur runs along the south/southwest property edge and the access drive crosses it; a major plant of this scale is rail-served.",
+          "multipleFacilities": "Large multi-building manufacturing campus (process building, warehouses, ASF/associate service facility, fleet/maintenance buildings).",
+          "siteAreaAcres": "Estimated from the perimeter box (~95 acres including the drop lot and farmland buffer)."
+        }
+      },
+      {
+        "id": "24-frito-lay-williamsport-pa-dc",
+        "name": "Frito-Lay - Williamsport PA (DC)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "truckGate",
+          "truckGateCount"
+        ],
+        "center": {
+          "lat": 41.227785,
+          "lng": -77.068961
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.2264,
+            "west": -77.0705,
+            "north": 41.2292,
+            "east": -77.067
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 41.2276,
+              "west": -77.0687,
+              "north": 41.229,
+              "east": -77.0672
+            },
+            {
+              "south": 41.2279,
+              "west": -77.068,
+              "north": 41.2287,
+              "east": -77.067
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.227,
+              "west": -77.069,
+              "north": 41.2276,
+              "east": -77.0678
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 11,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode (ROOFTOP, 44 m correction) landed directly on the Frito-Lay\nbuilding inside the N Reach Rd industrial park southeast of central\nWilliamsport. Web search confirms Frito-Lay, Inc. at 220 N Reach Rd,\nWilliamsport PA 17701 — described as a production plant and distribution\ncenter. The building is identified by its food-process silo/tank cluster\n(visible in Street View) and the trailer drop rows wrapping its north and east\nsides. Location confirmed.",
+        "mapsUrl": "https://www.google.com/maps/@41.227785,-77.068961,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Open industrial-park setting. The facility fronts directly onto N Reach Rd / internal industrial-park streets with no barrier arm, sliding gate, or checkpoint pinch-point at any approach. Trucks drive straight into the drop yards from the public road.",
+          "guardShack": "No guard booth visible. A small fenced/landscaped structure on the north side appears to be a site utility/break building, not a gate booth.",
+          "drivewayShort": "Open paved approach directly off the road; no deep gated queue lane.",
+          "dropArea": "Multiple rows of parked trailers in drop yards wrapping the north and east sides of the building; ~55 trailers visible, capacity ~80.",
+          "dockDoors": "Dock doors along the south/east building faces partly obscured by parked trailers and trees; estimate ~22 in the 10-25 band.",
+          "railServed": "An active rail line runs through the eastern part of the property, with rail tank cars and trailers parked beside it.",
+          "urbanRural": "Located within the Williamsport, PA industrial fabric — dense surrounding industrial development; classed Urban.",
+          "buildingCount": "Main plant/DC building plus the silo/process structure cluster on the SE; counted as 2."
+        }
+      },
+      {
+        "id": "25-frito-lay-denver-co",
+        "name": "Frito-Lay - Denver CO",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "truckGateCount",
+          "guardShack"
+        ],
+        "center": {
+          "lat": 39.77066,
+          "lng": -104.85292
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.7684,
+            "west": -104.8562,
+            "north": 39.7747,
+            "east": -104.849
+          },
+          "truckGate": {
+            "south": 39.7684,
+            "west": -104.8558,
+            "north": 39.7689,
+            "east": -104.855
+          },
+          "dropYards": [
+            {
+              "south": 39.77,
+              "west": -104.8562,
+              "north": 39.7747,
+              "east": -104.8542
+            },
+            {
+              "south": 39.7687,
+              "west": -104.8506,
+              "north": 39.773,
+              "east": -104.8494
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.769,
+              "west": -104.8542,
+              "north": 39.7697,
+              "east": -104.8506
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 260,
+          "truckGateCount": 2,
+          "buildingCount": 3,
+          "siteAreaAcres": 38,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate (39.771666, -104.977696, \"3601 Brighton Blvd\") landed in\nthe redeveloped River North (RiNo) district of central Denver — mixed-use\ncondos and offices, no industrial facility. The roster source itself flagged\nthe address as \"approximate from public listings.\" Web search resolved the real\nFrito-Lay Denver plant & warehouse to 3995 Nome St / 11645 E 37th Ave, Denver CO\n80239, in the Montbello/Gateway industrial area, coords 39.77066, -104.85292.\nSatellite confirms a large industrial plant there with extensive trailer rows\non all sides — positively identified.",
+        "mapsUrl": "https://www.google.com/maps/@39.77066,-104.85292,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "addressCorrection": "Roster address (3601 Brighton Blvd) is wrong — that point falls in the redeveloped RiNo district of central Denver with no industrial facility. The real Frito-Lay Denver plant & warehouse is at 3995 Nome St / 11645 E 37th Ave, Denver CO 80239 (Montbello/Gateway), coords 39.77066,-104.85292. Confirmed via web search and satellite.",
+          "truckGate": "Street View of the south side shows a chain-link sliding gate across a truck driveway with a STOP sign and a posted sign reading 'GATE 8' — a numbered, controlled truck entry. The entire property is enclosed by chain-link perimeter fence (confirmed on multiple SV faces).",
+          "guardShack": "No full guard-booth structure visible at the truck gate; a small kiosk-style box sits beside the sliding gate, consistent with remote/badge or call-box check-in rather than a staffed booth.",
+          "remoteGs": "Gate present, no staffed booth -> remote check-in (kiosk/badge/call-box). Gate numbering ('Gate 8') confirms a managed multi-gate site.",
+          "shipRcvSeparate": "Dock banks on physically separate building faces (south/west dock line plus an east dock line), each fronting its own fenced trailer yard.",
+          "dropArea": "Large multi-row trailer drop yards on the west and east sides of the plant — well over 50 trailers; ~180 visible.",
+          "railServed": "An active rail yard runs along the south edge of the property with a spur reaching the site.",
+          "truckGateCount": "At least one numbered gate confirmed ('Gate 8'); numbering implies multiple gates around the fenced perimeter — estimated 2.",
+          "siteAreaAcres": "Estimated ~38 acres from the perimeter box covering the plant, both trailer yards, and office parking."
+        }
+      },
+      {
+        "id": "26-orlando-fl",
+        "name": "Frito-Lay - Orlando FL",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "shipRcvSeparate",
+          "remoteGs",
+          "railServed"
+        ],
+        "center": {
+          "lat": 28.5772,
+          "lng": -81.4182
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 28.5757,
+            "west": -81.4203,
+            "north": 28.5786,
+            "east": -81.4166
+          },
+          "truckGate": {
+            "south": 28.57795,
+            "west": -81.41935,
+            "north": 28.57825,
+            "east": -81.4188
+          },
+          "dropYards": [
+            {
+              "south": 28.5764,
+              "west": -81.4203,
+              "north": 28.5778,
+              "east": -81.4193
+            },
+            {
+              "south": 28.57755,
+              "west": -81.41935,
+              "north": 28.57825,
+              "east": -81.41855
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 28.5765,
+              "west": -81.41955,
+              "north": 28.5777,
+              "east": -81.4189
+            },
+            {
+              "south": 28.5766,
+              "west": -81.4178,
+              "north": 28.5775,
+              "east": -81.417
+            }
+          ],
+          "staging": {
+            "south": 28.5777,
+            "west": -81.4193,
+            "north": 28.5784,
+            "east": -81.418
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 25,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster address is wrong. The roster lists `8000 S Orange Ave, Orlando, FL 32809`\n  (lat 28.4546, -81.3655) — that point is a mixed retail/commercial strip on\n  S Orange Ave and corresponds to a Frito-Lay divisional/distribution listing,\n  not a manufacturing plant.\n- Web research found Frito-Lay's actual Orlando **manufacturing plant at\n  2800 Silver Star Rd, Orlando, FL 32808** — in operation since 1965, the site\n  named in the Nov-2025 closure WARN notices (454 manufacturing layoffs).\n- Locked center: 28.5772, -81.4182. Satellite confirms a large industrial\n  manufacturing complex: multi-section building with rooftop snack-food\n  processing equipment, storage silos/tanks, and a visible steam plume —\n  consistent with a Frito-Lay plant, not an office.\n- Closure note: PepsiCo Foods closed the Orlando plant; operations ceased by",
+        "mapsUrl": "https://www.google.com/maps/@28.5772,-81.4182,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address 8000 S Orange Ave is wrong (a divisional/distribution listing). Resolved to the actual Frito-Lay manufacturing plant at 2800 Silver Star Rd, Orlando FL 32808 (operating since 1965). Confirmed via web research and satellite: large industrial complex with rooftop snack-food processing equipment, silos, and steam plume.",
+          "closure": "PepsiCo/Frito-Lay announced closure of its Orlando facilities Nov 2025; the Silver Star Rd plant ceased operations by May 9, 2026 and per news was being demolished in spring 2026. Maxar imagery and 2025-04 Street View show it operational; audit reflects the physical yard as imaged.",
+          "truckGate": "Truck entrance is off an internal access road that runs south from Silver Star Rd. Chain-link perimeter fence with a sliding/swing gate across the truck lane confirmed in 2025-04 Street View; truck yard is fully fenced.",
+          "remoteGs": "A blue canopy structure covers an internal check-in lane just inside the gate; no separate staffed guard booth visible at the road. Treated as remote/kiosk-style check-in.",
+          "shipRcvSeparate": "Dock banks observed on both the west face (trailers + canopy docks along the rail side) and the east face (4-5 trailers backed into an east dock apron) — separate clusters on different building faces.",
+          "dockDoorCount": "Estimated ~28 across west and east faces from zoom-20 imagery; production-side faces obscured by rooftop equipment, so count is approximate.",
+          "dropYard": "Dedicated trailer/box-truck parking yard north of the docks (the staging/parking lot) plus trailer rows along the west rail side.",
+          "railServed": "A rail line runs NW-SE along the west property edge with rail cars/a siding adjacent to the building; appears rail-served, medium confidence.",
+          "fastLaneOpportunity": "Wide gate apron and large open paved staging area inside the fence give ample room to add a bypass/express lane.",
+          "buildingCount": "Main plant complex plus a separate warehouse-style building on the west and a small shop building on the south."
+        }
+      },
+      {
+        "id": "27-west-valley-city-ut",
+        "name": "Frito-Lay - West Valley City UT (DC)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "guardShack",
+          "remoteGs",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 40.6662,
+          "lng": -112.0402
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.6645,
+            "west": -112.0425,
+            "north": 40.668,
+            "east": -112.0368
+          },
+          "truckGate": {
+            "south": 40.667,
+            "west": -112.0409,
+            "north": 40.6676,
+            "east": -112.04055
+          },
+          "dropYards": [
+            {
+              "south": 40.6655,
+              "west": -112.0388,
+              "north": 40.6678,
+              "east": -112.0368
+            },
+            {
+              "south": 40.6663,
+              "west": -112.0425,
+              "north": 40.6678,
+              "east": -112.0412
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.6648,
+              "west": -112.0408,
+              "north": 40.6658,
+              "east": -112.0392
+            },
+            {
+              "south": 40.6658,
+              "west": -112.0425,
+              "north": 40.6672,
+              "east": -112.0415
+            }
+          ],
+          "staging": {
+            "south": 40.6664,
+            "west": -112.0412,
+            "north": 40.6678,
+            "east": -112.0398
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 140,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 43,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster address is wrong. The roster lists `3450 W 2100 S` — a generic\n  point in a West Valley City industrial park, not the Frito-Lay facility.\n- Web research and imagery resolved the real **Frito-Lay West Valley City\n  plant/DC at 6301 W 4700 S, West Valley City, UT 84118**.\n- Locked center: 40.6662, -112.0402. Satellite confirms a large industrial\n  manufacturing complex consistent with a Frito-Lay snack-food plant: a\n  multi-section building with rooftop processing equipment, storage silos, and\n  a steam plume; 2024-10 Street View of the truck yard shows trailers in red\n  Lay's / Doritos livery and a tall Frito-Lay logo sign on the building — not\n  an office or unrelated property.\n- Facility type note: The roster types this as a Distribution Center; the\n  site is in practice a combined production plant + distribution operation",
+        "mapsUrl": "https://www.google.com/maps/@40.6662,-112.0402,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address 3450 W 2100 S is wrong (a generic industrial-park point). Resolved to the real Frito-Lay West Valley City facility at 6301 W 4700 S, West Valley City UT 84118 (40.6662,-112.0402). Confirmed via web research and satellite + 2024-10 Street View: large industrial complex with red Frito-Lay logo signage, rooftop snack-food processing equipment, corn silos, and a steam plume.",
+          "facilityType": "Roster types this as a Distribution Center; the site is actually a combined production plant + distribution operation (produces Doritos, Lay's, Ruffles). Audited as the freight/truck yard regardless.",
+          "truckGate": "Entire property enclosed by tall ornamental steel security fencing (clear in Street View). A single controlled driveway off 4700 S leads through a gate; a gate/checkpoint is visible in the driveway in zoom-20 imagery.",
+          "guardShack": "No clearly staffed guard booth visible at the gate; a small checkpoint structure is present in the driveway but cannot be confirmed as a manned shack from imagery. Flagged uncertain; treated as remote/kiosk check-in.",
+          "dockDoors": "~10+ trailers backed in on the south face plus a west-face dock bank; total estimated ~45 doors. Approximate — building is large and some faces obscured by rooftop equipment.",
+          "dropArea": "Very large east-side trailer drop yard with 40+ trailers in rows, plus additional trailer rows on the west and north — well into the 50+ band.",
+          "shipRcvSeparate": "Dock banks on the south face and the west face are physically separate clusters on different building faces.",
+          "fastLaneOpportunity": "Wide entry driveway and large open paved staging area inside the gate give ample room for a bypass/express lane.",
+          "railServed": "No rail spur observed entering the property; not rail-served.",
+          "buildingCount": "Main plant/warehouse plus a smaller separate building to the south."
+        }
+      },
+      {
+        "id": "28-frito-lay-forest-city-nc-dc",
+        "name": "Frito-Lay - Forest City NC (DC)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 35.33855,
+          "lng": -81.8864
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.3376,
+            "west": -81.8874,
+            "north": 35.3396,
+            "east": -81.8854
+          },
+          "truckGate": {
+            "south": 35.3379,
+            "west": -81.887,
+            "north": 35.3382,
+            "east": -81.8866
+          },
+          "dropYards": [
+            {
+              "south": 35.3378,
+              "west": -81.8866,
+              "north": 35.3385,
+              "east": -81.8856
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.3378,
+              "west": -81.8864,
+              "north": 35.3384,
+              "east": -81.8856
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 9,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 14,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode (ROOFTOP, 1,876 m correction) landed near, but slightly off,\nthe building. Probing around the point found a single ~115,000 sq ft warehouse\non a wooded parcel off a private drive from Lawing Rd. Web search (Matthews /\nLoopNet listings) confirms this as the Frito-Lay PepsiCo distribution center at\n277 Lawing Rd, built 2023, ~114,998 sq ft, on a 10-year Frito-Lay NNN lease\ncommenced Nov 2023, serving as a product-exchange center. Location positively\nconfirmed; center adjusted to 35.33855, -81.88640.",
+        "mapsUrl": "https://www.google.com/maps/@35.33855,-81.88640,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "April-2025 Street View shows the whole truck yard enclosed by a chain-link perimeter fence with box trucks/trailers parked inside; the access driveway passes through a gate opening in the fence. Controlled entry confirmed.",
+          "guardShack": "No guard-booth structure visible at the gate. As a small ~115k sq ft product-exchange DC (built 2023, leased Nov 2023), the gate is a remote/badge-controlled sliding gate.",
+          "remoteGs": "Gate present, no booth -> remote check-in (kiosk/badge/call-box).",
+          "drivewayShort": "Access drive from Lawing Rd to the gated yard is short (~80 m), with room for only 1-2 trucks before the gate.",
+          "dockDoors": "Single dock bank on the SW building face; ~9 doors estimated (0-10 band) — Frito-Lay route-truck/exchange operation, not a high-door DC.",
+          "dropArea": "A few trailers/box trucks parked in the small fenced yard; no dedicated drop-yard lot — dropArea 0-10.",
+          "dropYard": "False — no dedicated trailer-storage lot; only a small operational truck yard.",
+          "urbanRural": "Rural — single building surrounded by woods on a wooded access road off Lawing Rd, edge of Forest City, NC.",
+          "siteAreaAcres": "Small parcel, ~5 acres of cleared/paved area within the wooded lot.",
+          "railServed": "No rail spur — facility is a truck-only product-exchange DC."
+        }
+      },
+      {
+        "id": "29-frito-lay-prichard-al-dc",
+        "name": "Frito-Lay - Prichard AL (DC)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "siteAreaAcres",
+          "buildingCount"
+        ],
+        "center": {
+          "lat": 30.7401,
+          "lng": -88.1201
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 30.7393,
+            "west": -88.1212,
+            "north": 30.7411,
+            "east": -88.1188
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 30.7405,
+              "west": -88.1211,
+              "north": 30.741,
+              "east": -88.1198
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 16,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 6,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied no street address and an APPROXIMATE geocode\n(30.732069, -88.060756) that probing showed to be a residential/light-industrial\narea ~5 km from the actual site. Web search consistently places the new\nFrito-Lay distribution center at 3221 Anton St, Prichard, AL — an ~25,000\nsq ft, $8M DSD hub for the greater Mobile area, ground-broken June 2024 and\nexpected fully operational June 2025. OpenStreetMap places Anton St at\n~30.7408, -88.1194.\n\nProbing Anton St, the strongest candidate is a large white metal warehouse with\na distinctive yellow horizontal stripe on the west side of the street\n(~30.74010, -88.12010), captured in April-2026 Street View. The yellow stripe\nmatches a Frito-Lay brand color, but no Frito-Lay logo or sign is visible to\nconfirm positively, and the building appears larger and older than a brand-new",
+        "mapsUrl": "https://www.google.com/maps/@30.74010,-88.12010,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "buildingIdentification": "Roster gave no street address and the geocode (APPROXIMATE) was ~5 km off. News sources place the new Frito-Lay DSD distribution center at 3221 Anton St, Prichard AL 36612 — ~25,000 sq ft, broke ground June 2024, operational June 2025, $8M. OSM places Anton St at ~30.7408,-88.1194. The best-candidate building is a large white metal warehouse with a yellow horizontal stripe on the west side of Anton St (~30.74010,-88.12010), visible in April-2026 Street View. The yellow stripe matches Frito-Lay brand color, but no Frito-Lay logo/sign is visible to positively confirm, and the building looks larger and older than a brand-new 25k sq ft build — identification is NOT certain.",
+          "truckGate": "No barrier arm, gate, or checkpoint visible. The building fronts an open industrial street (Anton St) with no perimeter fence — open-access layout.",
+          "guardShack": "No guard booth visible; small DSD hub.",
+          "dockDoors": "Small dock bank on the NW building face with a few trailers backed in; ~8 doors estimated (0-10 band).",
+          "dropArea": "Only a handful of trailers in the yard; no dedicated drop lot.",
+          "urbanRural": "Edge-of-town light-industrial district of Prichard, AL — wooded surroundings; classed Rural.",
+          "confidence": "Low overall — the facility is newly built/leased, the exact building could not be positively confirmed from imagery, and current Maxar satellite may predate the completed DC."
+        }
+      },
+      {
+        "id": "30-frito-lay-burbank-wa-dc",
+        "name": "Frito-Lay - Burbank WA (DC)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "preGateStaging",
+          "postGateStaging",
+          "drivewayLong",
+          "drivewayShort",
+          "backupSensitive",
+          "entryExitTogether",
+          "entryExitSeparate",
+          "entryLanes",
+          "exitLanes",
+          "fastLaneOpportunity",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "connectivityIssue",
+          "multipleFacilities",
+          "scale",
+          "dropYard",
+          "multiStep",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "buildingCount",
+          "siteAreaAcres",
+          "railServed"
+        ],
+        "center": {
+          "lat": 46.2065,
+          "lng": -119.015
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 46.205,
+            "west": -119.017,
+            "north": 46.2085,
+            "east": -119.0135
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 0,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "NONE",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied no street address and an APPROXIMATE geocode\n(46.199857, -119.013062). Web search across The Registry, Crexi, Syndicated\nEquities and Neagley+Chase Construction identifies the facility as a **newly\nconstructed ~107,200 sq ft pre-engineered-metal-building (PEMB) Frito-Lay\ndistribution warehouse at 458 Second Avenue, Burbank, WA**, listed for sale in\nearly 2024. It is a regional DC with administrative space, expansive\nwarehousing, multiple-level loading docks, and a developed truck-access area.\n\nThe address \"458 Second Avenue\" could not be geocoded to a precise rooftop\n(OSM only returns a short \"Old Second Avenue\" service road). Probing the Burbank\nindustrial park near the US-12 / SR-124 interchange found:\n- The \"Precision\" building — confirmed via its rooftop sign in April-2026",
+        "mapsUrl": "https://www.google.com/maps/@46.20650,-119.01500,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "locationProblem": "Roster gave no street address and an APPROXIMATE geocode. Web search (The Registry, Crexi, Syndicated Equities, Neagley+Chase) places the facility at 458 Second Avenue, Burbank, WA — a NEWLY CONSTRUCTED ~107,200 sq ft pre-engineered-metal-building (PEMB) Frito-Lay distribution warehouse, listed for sale in early 2024.",
+          "imageryGap": "The address '458 Second Avenue' could not be geocoded to a precise rooftop. Probing the Burbank industrial park near the US-12/SR-124 interchange found: (a) the 'Precision' building (confirmed NOT Frito-Lay via its rooftop sign in 2026 Street View), (b) several unbranded smaller warehouses, and (c) multiple still-vacant lots. Current Maxar/USDA-FPAC satellite imagery appears to PREDATE the completed Frito-Lay DC — no ~107k sq ft building matching the listing, and no Frito-Lay-branded structure, could be positively identified.",
+          "classification": "Because the exact building could not be confirmed, all classification fields are best-guess defaults (no-gate / no docks) and ALL are flagged uncertain. A Frito-Lay regional DC of ~107k sq ft would typically have a substantial dock bank, a trailer yard, and likely a fenced/gated truck entry — none of which could be verified.",
+          "urbanRural": "Burbank, WA is a small unincorporated community; the industrial park sits at the edge of town near farmland and a highway interchange — Rural.",
+          "recommendation": "Flag for human review and a fresh imagery pass once newer satellite covering the completed 458 Second Ave building is available."
+        }
+      }
+    ]
+  }
+}

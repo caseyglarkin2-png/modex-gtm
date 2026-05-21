@@ -1,0 +1,2701 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:38:23.766Z",
+  "account": {
+    "slug": "ford",
+    "displayName": "Ford Motor Company",
+    "archetype": "oem-automotive",
+    "siteCount": 24,
+    "coverageNote": {
+      "auditedCount": 24,
+      "estimatedFootprint": null,
+      "droppedStubCount": 0,
+      "capHit": false,
+      "note": "Audited all 24 identifiable facilities."
+    }
+  },
+  "research": {
+    "facility_count": 24,
+    "audited_facilities": 24,
+    "source": "yard-audit",
+    "confidence": "verified",
+    "caveats": [
+      "Ford - Cleveland Engine Plant, Brook Park OH: audit note mentions 'sold'",
+      "Ford - Van Dyke Electric Powertrain Center, Sterling Heights MI: audit note mentions 'closed'",
+      "Ford - Rawsonville Components Plant, Ypsilanti MI: audit note mentions 'closed'"
+    ],
+    "freightValue": {
+      "company": "Ford Motor Company",
+      "truckloads": 90000,
+      "fleet_size": "Dedicated DDS fleet + supplier carriers",
+      "freight_type": "Dry van + parts logistics",
+      "facilities": "",
+      "intent_signals": "📰 nuVizz/Ford: retooling the DDS network exposes trailer visibility and gate scheduling as the last-mile optimizer.",
+      "source": "tam_csv"
+    }
+  },
+  "network": {
+    "bbox": [
+      -117.556,
+      34.099,
+      -78.8385,
+      42.79
+    ],
+    "archetypeMix": {
+      "#6": 13,
+      "#7": 3,
+      "#9": 6,
+      "#1": 1,
+      "#4": 1
+    },
+    "totals": {
+      "dockDoors": 907,
+      "trailerCapacity": 2692,
+      "gates": 37,
+      "railServed": 20,
+      "acres": 6336.8
+    },
+    "sites": [
+      {
+        "id": "01-dearborn-truck-plant",
+        "name": "Ford - Dearborn Truck Plant, Dearborn MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 42.3128,
+          "lng": -83.164
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.3085,
+            "west": -83.172,
+            "north": 42.3175,
+            "east": -83.158
+          },
+          "truckGate": {
+            "south": 42.303,
+            "west": -83.1678,
+            "north": 42.3042,
+            "east": -83.1662
+          },
+          "dropYards": [
+            {
+              "south": 42.3105,
+              "west": -83.1635,
+              "north": 42.3125,
+              "east": -83.1608
+            },
+            {
+              "south": 42.3148,
+              "west": -83.1638,
+              "north": 42.3162,
+              "east": -83.161
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 42.3104,
+              "west": -83.167,
+              "north": 42.3115,
+              "east": -83.1648
+            },
+            {
+              "south": 42.3146,
+              "west": -83.1655,
+              "north": 42.3156,
+              "east": -83.1628
+            }
+          ],
+          "staging": {
+            "south": 42.3042,
+            "west": -83.1678,
+            "north": 42.3056,
+            "east": -83.1656
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 2,
+          "buildingCount": 6,
+          "siteAreaAcres": 285.3,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": true
+        },
+        "dossierExcerpt": "- Name: Ford - Dearborn Truck Plant, Dearborn MI\n- Type: Vehicle Assembly Plant (F-150 / F-150 Lightning)\n- Address: 3001 Miller Rd, Dearborn, MI 48120\n- Resolved coords: 42.31280, -83.16400",
+        "mapsUrl": "https://www.google.com/maps/@42.31280,-83.16400,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facility": "Dearborn Truck Plant inside the Ford Rouge Complex; coords land exactly on the DTP's 10.4-acre living (green) roof, an unmistakable landmark confirming identity.",
+          "truckGate": "Rouge Complex is a fully fenced, controlled-access campus. Truck and employee traffic enters via guarded Miller Rd gates; gate infrastructure, fencing and Ford gate signage visible in Street View.",
+          "guardShack": "Rouge operates staffed security gatehouses at its entrances (standard for the campus); booth structures present at controlled entries.",
+          "multiStep": "Campus-scale security: outer Rouge perimeter gate, then internal plant-specific checkpoints before DTP docks.",
+          "railServed": "Multiple active rail spurs run directly through the property; long covered rail auto-rack loading structures for finished F-150s are visible NW of the plant.",
+          "multipleFacilities": "DTP is one plant within the larger integrated Rouge manufacturing campus (stamping, frame, other buildings adjacent).",
+          "dockDoorCount": "Estimate from overhead imagery; docks distributed across multiple building faces of a very large assembly building plus parts-receiving banks.",
+          "scale": "No truck scale clearly identified in imagery; left uncertain."
+        }
+      },
+      {
+        "id": "02-kentucky-truck-plant",
+        "name": "Ford - Kentucky Truck Plant, Louisville KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "guardShack"
+        ],
+        "center": {
+          "lat": 38.294,
+          "lng": -85.5335
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.29,
+            "west": -85.542,
+            "north": 38.301,
+            "east": -85.529
+          },
+          "truckGate": {
+            "south": 38.2948,
+            "west": -85.5398,
+            "north": 38.296,
+            "east": -85.5382
+          },
+          "dropYards": [
+            {
+              "south": 38.2928,
+              "west": -85.541,
+              "north": 38.2944,
+              "east": -85.5388
+            },
+            {
+              "south": 38.299,
+              "west": -85.53,
+              "north": 38.3005,
+              "east": -85.528
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 38.292,
+              "west": -85.538,
+              "north": 38.2938,
+              "east": -85.5352
+            },
+            {
+              "south": 38.295,
+              "west": -85.535,
+              "north": 38.2968,
+              "east": -85.5325
+            }
+          ],
+          "staging": {
+            "south": 38.2944,
+            "west": -85.539,
+            "north": 38.2956,
+            "east": -85.537
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 2,
+          "buildingCount": 8,
+          "siteAreaAcres": 343.7,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": true
+        },
+        "dossierExcerpt": "- Name: Ford - Kentucky Truck Plant, Louisville KY\n- Type: Vehicle Assembly Plant (Super Duty, Expedition, Navigator)\n- Address: 3001 Chamberlain Ln, Louisville, KY 40241\n- Resolved coords: 38.29400, -85.53350",
+        "mapsUrl": "https://www.google.com/maps/@38.29400,-85.53350,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facility": "Kentucky Truck Plant (Super Duty, Expedition, Navigator); the geocode point lands on the south edge of the plant - the building cluster is unmistakable: one of Ford's largest assembly sites on Chamberlain Ln near I-71.",
+          "truckGate": "Secured Ford assembly campus - perimeter fencing, controlled access roads from Chamberlain Ln, distinct truck route to the SW drop yard / dock banks. Truck gate confirmed.",
+          "guardShack": "Ford assembly plants run staffed security gatehouses at controlled entrances; gate-area structures present. Marked uncertain - could not isolate the booth crisply in imagery (plant access roads not Street-View accessible).",
+          "multiStep": "Outer campus gate plus internal checkpoints typical of an assembly plant of this scale.",
+          "railServed": "Extensive on-site rail yard NE of the plant with multi-colored auto-rack rail cars and covered rail loading structures for outbound trucks.",
+          "dropYard": "Large dedicated trailer drop yard on the SW side near I-71, full of parked trailers separate from active dock staging.",
+          "dropArea": "50+ trailers visible across the SW drop yard and dock faces.",
+          "urbanRural": "Edge-of-metro / suburban Louisville - surrounded by residential subdivisions and woods, set off I-71; per rubric, when torn between small-town industrial and Urban, choose Rural.",
+          "multipleFacilities": "Multiple large connected and separate buildings forming an integrated assembly campus.",
+          "scale": "No truck scale clearly identified; left uncertain."
+        }
+      },
+      {
+        "id": "03-kansas-city-assembly-plant",
+        "name": "Ford - Kansas City Assembly Plant, Claycomo MO",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 39.2025,
+          "lng": -94.477
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.1955,
+            "west": -94.4865,
+            "north": 39.2095,
+            "east": -94.4695
+          },
+          "truckGate": {
+            "south": 39.2,
+            "west": -94.4728,
+            "north": 39.2011,
+            "east": -94.4712
+          },
+          "dropYards": [
+            {
+              "south": 39.2032,
+              "west": -94.4728,
+              "north": 39.2048,
+              "east": -94.4702
+            },
+            {
+              "south": 39.1955,
+              "west": -94.4755,
+              "north": 39.1985,
+              "east": -94.471
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.202,
+              "west": -94.4815,
+              "north": 39.2042,
+              "east": -94.479
+            },
+            {
+              "south": 39.2025,
+              "west": -94.4735,
+              "north": 39.2046,
+              "east": -94.471
+            }
+          ],
+          "staging": {
+            "south": 39.1998,
+            "west": -94.4728,
+            "north": 39.201,
+            "east": -94.4708
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 50,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 2,
+          "buildingCount": 6,
+          "siteAreaAcres": 564.8,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": true
+        },
+        "dossierExcerpt": "- Name: Ford - Kansas City Assembly Plant, Claycomo MO\n- Type: Vehicle Assembly Plant (F-150 + Transit)\n- Address: 8121 US Highway 69, Claycomo, MO 64119\n- Resolved coords: 39.20250, -94.47700",
+        "mapsUrl": "https://www.google.com/maps/@39.20250,-94.47700,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facility": "Kansas City Assembly Plant (F-150 + Transit, two high-volume lines) in Claycomo MO; geocode point lands directly on the plant - identity unambiguous.",
+          "truckGate": "Street View of the SE plant access road shows a clear truck gate: a guard booth, kiosk/card-reader pedestal, stop sign, concrete median separating in/out lanes, and trailers backed into docks beyond. Confirmed controlled truck entrance.",
+          "guardShack": "Street View shows a small multi-window guard booth at the gate with a uniformed guard standing beside it - definitive guard shack.",
+          "entryExitTogether": "Concrete median splits the gate into in/out lanes at one entrance point - treated as together (one gate group).",
+          "multiStep": "Gate booth plus a separate kiosk/card-reader pedestal indicates a layered check-in stage; campus also has internal checkpoints.",
+          "railServed": "Substantial multi-track rail yard runs into the property at the SE with auto-rack rail cars visible.",
+          "dropYard": "Trailer drop yards along the NE building face and near the rail yard - many trailers parked separate from active docks.",
+          "urbanRural": "Claycomo is a small edge-of-metro town; the plant is bordered by woods and modest residential development - per rubric, choose Rural over small-town industrial.",
+          "multipleFacilities": "Multiple large connected and a separate detached building to the south form an integrated assembly campus.",
+          "dockDoorCount": "Overhead estimate; dock doors distributed across multiple building faces.",
+          "scale": "No truck scale clearly identified; left uncertain."
+        }
+      },
+      {
+        "id": "04-louisville-assembly-plant",
+        "name": "Ford - Louisville Assembly Plant, Louisville KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "scale",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 38.1547,
+          "lng": -85.7285
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.1493,
+            "west": -85.734,
+            "north": 38.1585,
+            "east": -85.7218
+          },
+          "truckGate": {
+            "south": 38.1568,
+            "west": -85.7312,
+            "north": 38.1578,
+            "east": -85.7295
+          },
+          "dropYards": [
+            {
+              "south": 38.153,
+              "west": -85.7338,
+              "north": 38.1562,
+              "east": -85.7318
+            },
+            {
+              "south": 38.1518,
+              "west": -85.7318,
+              "north": 38.1536,
+              "east": -85.7288
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 38.1528,
+              "west": -85.7318,
+              "north": 38.1542,
+              "east": -85.729
+            },
+            {
+              "south": 38.1548,
+              "west": -85.7332,
+              "north": 38.156,
+              "east": -85.731
+            }
+          ],
+          "staging": {
+            "south": 38.156,
+            "west": -85.7312,
+            "north": 38.157,
+            "east": -85.7295
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 2,
+          "buildingCount": 6,
+          "siteAreaAcres": 277,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": true
+        },
+        "dossierExcerpt": "- Name: Ford - Louisville Assembly Plant, Louisville KY\n- Type: Vehicle Assembly Plant (Ford Escape, Lincoln Corsair)\n- Address: 2000 Fern Valley Rd, Louisville, KY 40213\n- Resolved center: 38.15470, -85.72850",
+        "mapsUrl": "https://www.google.com/maps/@38.15470,-85.72850,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facility": "Louisville Assembly Plant (Ford Escape, Lincoln Corsair), 2000 Fern Valley Rd. Geocode landed on the rooftop (moved 15m); confirmed as the large assembly complex immediately south of Louisville International Airport / UPS Worldport, bounded by Fern Valley Rd to the north, Grade Lane to the west, and a rail corridor to the south. ~3.15M sq ft of building.",
+          "truckGate": "Secured Ford assembly campus with continuous perimeter chain-link fencing visible in multiple Street View captures along Grade Lane and Fern Valley Rd. Controlled truck access driveway off Fern Valley Rd into the west dock/yard area. A clearly visible internal vehicle-control gate (blue-roofed booth with gate arms and crosswalk markings) controls movement between the plant and finished-vehicle lots on the east side.",
+          "guardShack": "Ford assembly plants run staffed security gatehouses at controlled entrances; a distinct booth structure with gate arms is visible at the internal east checkpoint. Marked uncertain - the perimeter truck-gate booth could not be crisply isolated because Street View panos sit on the secured campus loop road rather than at the public-road gate itself.",
+          "multiStep": "Outer perimeter truck gate plus a separate internal vehicle-control checkpoint (booth + gate arms) between the plant and the finished-vehicle storage lots.",
+          "railServed": "Active rail yard with auto-rack rail cars running the full length of the south side of the plant; covered rail loading and adjacent trailer drop rows visible.",
+          "dropYard": "Large dedicated trailer drop yard along the west side (Grade Lane frontage) plus trailer rows south of the building near the rail corridor - dozens of parked trailers without tractors.",
+          "dropArea": "50+ trailers visible across the west drop yard and south dock face.",
+          "dockDoors": "Counted ~45 loading doors across the south and west building faces; banked dock doors with trailers backed in. Estimate from overhead imagery - marked uncertain.",
+          "shipRcvSeparate": "Distinct dock banks on the south face and the west face, plus a separate finished-vehicle dispatch operation on the east - shipping and receiving run from physically separate clusters.",
+          "fastLaneOpportunity": "Wide paved aprons and multi-lane driveways at the Fern Valley Rd entry with unused width for an express bypass.",
+          "urbanRural": "Inside the dense Louisville metro fabric, hemmed by the international airport, interstate, and industrial corridor - Urban.",
+          "scale": "No truck scale clearly identified; left uncertain."
+        }
+      },
+      {
+        "id": "05-michigan-assembly-plant",
+        "name": "Ford - Michigan Assembly Plant, Wayne MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "scale",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 42.2764,
+          "lng": -83.4136
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.269,
+            "west": -83.4215,
+            "north": 42.281,
+            "east": -83.4055
+          },
+          "truckGate": {
+            "south": 42.2778,
+            "west": -83.4185,
+            "north": 42.2786,
+            "east": -83.417
+          },
+          "dropYards": [
+            {
+              "south": 42.2718,
+              "west": -83.4175,
+              "north": 42.2738,
+              "east": -83.4135
+            },
+            {
+              "south": 42.272,
+              "west": -83.4125,
+              "north": 42.2742,
+              "east": -83.4085
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 42.272,
+              "west": -83.411,
+              "north": 42.2734,
+              "east": -83.407
+            },
+            {
+              "south": 42.2752,
+              "west": -83.412,
+              "north": 42.2764,
+              "east": -83.408
+            }
+          ],
+          "staging": {
+            "south": 42.277,
+            "west": -83.4185,
+            "north": 42.278,
+            "east": -83.4165
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 2,
+          "buildingCount": 5,
+          "siteAreaAcres": 369,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": true
+        },
+        "dossierExcerpt": "- Name: Ford - Michigan Assembly Plant, Wayne MI\n- Type: Vehicle Assembly Plant (Ford Ranger, Bronco)\n- Address: 38303 Michigan Ave, Wayne, MI 48184\n- Resolved center: 42.27640, -83.41360",
+        "mapsUrl": "https://www.google.com/maps/@42.27640,-83.41360,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facility": "Michigan Assembly Plant (Ford Ranger, Bronco), 38303 Michigan Ave, Wayne MI. Geocode landed on the rooftop (moved 170m); confirmed as the large assembly complex on the south side of Michigan Ave - ~5M sq ft of building on a 369-acre site (web-confirmed). Two large connected building clusters split by an active rail corridor.",
+          "truckGate": "Secured Ford assembly campus with perimeter fencing and wooded buffer along Michigan Ave. Controlled truck access driveways into the dock/yard areas; an internal vehicle-control gate (small canopy/booth structure with markings) controls movement between the plant and employee/finished-vehicle areas on the SW side.",
+          "guardShack": "Ford assembly plants run staffed security gatehouses at controlled entrances. Marked uncertain - the perimeter truck-gate booth could not be crisply isolated; the residential streets north of the plant prevent a clean Street View of the public-road truck gate.",
+          "multiStep": "Outer perimeter truck gate plus internal vehicle-control checkpoints typical of an assembly plant of this scale.",
+          "railServed": "Extensive rail yard with auto-rack rail cars loaded with finished vehicles running between the two building clusters along the south/center of the site.",
+          "dropYard": "Trailer drop rows visible along the rail corridor between the two buildings and on the east side - dozens of parked trailers separate from active dock staging.",
+          "dropArea": "50+ trailers visible across the inter-building drop rows and dock faces.",
+          "dockDoors": "Counted ~40 loading doors across the south building faces and dock aprons; estimate from overhead imagery - marked uncertain.",
+          "shipRcvSeparate": "Distinct dock banks on the south face of the assembly building and the south stamping/integrated building - shipping and receiving run from physically separate clusters.",
+          "fastLaneOpportunity": "Wide multi-lane internal driveways and aprons with unused paved width for an express bypass.",
+          "multipleFacilities": "Two large building complexes on one fenced property - the assembly plant and an integrated stamping building - a campus.",
+          "urbanRural": "Inside the dense Detroit metro fabric in Wayne MI, surrounded by residential subdivisions and commercial corridors along Michigan Ave - Urban.",
+          "scale": "No truck scale clearly identified; left uncertain."
+        }
+      },
+      {
+        "id": "06-chicago-assembly-plant",
+        "name": "Ford - Chicago Assembly Plant, Chicago IL",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "scale",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 41.66662,
+          "lng": -87.559702
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.6593,
+            "west": -87.5645,
+            "north": 41.6688,
+            "east": -87.55925
+          },
+          "truckGate": {
+            "south": 41.6612,
+            "west": -87.55965,
+            "north": 41.662,
+            "east": -87.55905
+          },
+          "dropYards": [
+            {
+              "south": 41.65955,
+              "west": -87.5608,
+              "north": 41.6613,
+              "east": -87.55935
+            },
+            {
+              "south": 41.6602,
+              "west": -87.5626,
+              "north": 41.6618,
+              "east": -87.56075
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.6602,
+              "west": -87.5611,
+              "north": 41.6611,
+              "east": -87.5598
+            }
+          ],
+          "staging": {
+            "south": 41.6611,
+            "west": -87.5596,
+            "north": 41.6623,
+            "east": -87.55905
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 130,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (geocode ROOFTOP, moved 26 m) landed directly on the main\nplant building. Wide satellite (z15-16) shows a large industrial complex with a\ndistinctive multi-bay sawtooth assembly building along the Calumet River, with\nTorrence Ave running NE-SW along the east side and dense residential\nneighbourhoods east of the road. Street View on the west side of Torrence Ave\n(2024) shows the building wall lettered \"CHICAGO ASSEMBLY PLANT\" with the Ford\noval — positively the right facility. The Hegewisch-neighbourhood / Calumet\nRiver / Torrence Ave context matches all web sources.",
+        "mapsUrl": "https://www.google.com/maps/@41.66662,-87.559702,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Guarded truck gate confirmed mid-property on Torrence Ave (~41.6615, -87.5593). 2024 Street View shows a tan single-story guard house with multi-side windows at the perimeter fence line, bollards/lane-control structures, directional signage ('ALL INBOUND TRAFFIC', 'VISITOR PARKING'), and trucks staged in the apron.",
+          "guardShack": "Confirmed - small staffed booth (1-2 vehicle footprint, Ford-branded) set beside the gate lane, distinct from the main building.",
+          "fastLaneOpportunity": "Very wide paved gate apron with multiple usable lane widths; room for a bypass/express lane.",
+          "drivewayLong": "Deep paved approach between Torrence Ave and the docks/fence; easily holds a 3+ truck queue.",
+          "shipRcvSeparate": "Inbound supplier/sequencing docks (LEAR seat plant + JIT yard) on the south/SE; finished-vehicle outbound handled separately via rail and the river-side marshalling lots - distinct dock clusters.",
+          "multipleFacilities": "Large interconnected campus - main sawtooth assembly building plus a body shop, paint, the LEAR supplier building, water-treatment plant, and a river-side marshalling/staging lot.",
+          "railServed": "Multiple rail tracks run the SW property edge with spurs entering the plant - historic and active rail service.",
+          "dropYard": "Dedicated south trailer-storage yard packed with parked drop trailers (Innovative Logistics Group and others), separate from active dock staging.",
+          "dockDoorCount": "Estimate ~45 across the supplier/JIT dock banks visible in z19-20 imagery; full plant has additional internal docks not all visible from overhead - low confidence.",
+          "scale": "No clear truck scale identified in imagery; left false.",
+          "exitLanes": "Single combined entry/exit gate group; outbound lane count inferred."
+        }
+      },
+      {
+        "id": "07-ohio-assembly-plant",
+        "name": "Ford - Ohio Assembly Plant, Avon Lake OH",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "connectivityIssue"
+        ],
+        "center": {
+          "lat": 41.4872,
+          "lng": -82.0655
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.4795,
+            "west": -82.0755,
+            "north": 41.4935,
+            "east": -82.057
+          },
+          "truckGate": {
+            "south": 41.4856,
+            "west": -82.0717,
+            "north": 41.4868,
+            "east": -82.07
+          },
+          "dropYards": [
+            {
+              "south": 41.49,
+              "west": -82.066,
+              "north": 41.4925,
+              "east": -82.0615
+            },
+            {
+              "south": 41.4856,
+              "west": -82.0735,
+              "north": 41.4872,
+              "east": -82.071
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.4845,
+              "west": -82.0635,
+              "north": 41.487,
+              "east": -82.0605
+            },
+            {
+              "south": 41.488,
+              "west": -82.064,
+              "north": 41.49,
+              "east": -82.061
+            }
+          ],
+          "staging": {
+            "south": 41.4865,
+            "west": -82.0715,
+            "north": 41.4882,
+            "east": -82.069
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 80,
+          "trailerParkingCapacity": 170,
+          "truckGateCount": 2,
+          "buildingCount": 6,
+          "siteAreaAcres": 419,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": true
+        },
+        "dossierExcerpt": "- Name: Ford - Ohio Assembly Plant, Avon Lake OH\n- Type: Vehicle Assembly Plant (Super Duty chassis cab, F-650/750, E-Series)\n- Address: 650 Miller Rd, Avon Lake, OH 44012\n- Resolved center: 41.48720, -82.06550",
+        "mapsUrl": "https://www.google.com/maps/@41.48720,-82.06550,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facility": "Ohio Assembly Plant (Super Duty chassis cab, F-650/750 medium-duty, E-Series), 650 Miller Rd, Avon Lake OH. Geocode landed on the rooftop (moved 348m); confirmed as the large multi-roof assembly complex - ~3.7M sq ft of building on a 419-acre site (web-confirmed).",
+          "truckGate": "CONFIRMED. A definitive truck gate with a guard shack is visible at z19/z20 on the west side: a square guard building with a central courtyard, multiple truck lanes splitting around it, gate canopies/arms over the lanes, and a wide paved staging apron upstream. Clear controlled checkpoint where the truck route meets the access road.",
+          "guardShack": "CONFIRMED. Distinct square multi-lane guard booth structure beside the truck lane at the west gate - classic staffed gatehouse footprint with windows on multiple sides and gate canopies.",
+          "remoteGs": "False - a staffed guard booth is present at the gate.",
+          "multiStep": "Outer guarded truck gate plus internal vehicle-control checkpoints typical of an assembly plant of this scale.",
+          "railServed": "Rail corridor runs along the east side of the campus with rail access into the plant; assembly plant of this scale relies on rail for inbound/outbound. Marked supported by the rail line visible east of the complex.",
+          "dropYard": "Large dedicated trailer drop yard on the NE side with dozens of trailers in organized rows, plus trailer rows near the west gate - separate from active dock staging.",
+          "dropArea": "50+ trailers visible across the NE drop yard and dock faces.",
+          "dockDoors": "Counted ~45 loading doors across the building faces and a long modern dock bank visible in Street View on the west side; estimate from overhead imagery - marked uncertain.",
+          "shipRcvSeparate": "Distinct dock banks on separate building faces plus a large modern dock building on the west side - shipping and receiving run from physically separate clusters.",
+          "fastLaneOpportunity": "Wide gate apron with multiple lanes splitting around the guard booth and substantial unused paved width - clear room for an express bypass.",
+          "multipleFacilities": "Multiple large connected and separate buildings forming an integrated assembly campus, plus a large modern distribution/dock building on the west.",
+          "urbanRural": "Edge-of-town Avon Lake / Sheffield with farmland and woods on the west and a golf course to the north - per rubric, when torn between small-town industrial and Urban, choose Rural.",
+          "connectivityIssue": "Site is on the edge of a small town with farmland adjacent but within the Cleveland metro reach - cellular coverage likely adequate; false but flagged as inferred.",
+          "scale": "No truck scale clearly identified; left uncertain."
+        }
+      },
+      {
+        "id": "08-flat-rock-assembly-plant",
+        "name": "Ford - Flat Rock Assembly Plant, Flat Rock MI",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "scale",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 42.1056,
+          "lng": -83.2482
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.098,
+            "west": -83.2575,
+            "north": 42.1125,
+            "east": -83.241
+          },
+          "truckGate": {
+            "south": 42.1088,
+            "west": -83.2508,
+            "north": 42.1099,
+            "east": -83.2492
+          },
+          "dropYards": [
+            {
+              "south": 42.103,
+              "west": -83.256,
+              "north": 42.107,
+              "east": -83.252
+            },
+            {
+              "south": 42.1038,
+              "west": -83.2485,
+              "north": 42.1095,
+              "east": -83.2445
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 42.1035,
+              "west": -83.252,
+              "north": 42.1065,
+              "east": -83.249
+            },
+            {
+              "south": 42.1045,
+              "west": -83.2485,
+              "north": 42.108,
+              "east": -83.2455
+            }
+          ],
+          "staging": {
+            "south": 42.1075,
+            "west": -83.25,
+            "north": 42.1088,
+            "east": -83.248
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 350,
+          "truckGateCount": 2,
+          "buildingCount": 5,
+          "siteAreaAcres": 400,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": true
+        },
+        "dossierExcerpt": "- Name: Ford - Flat Rock Assembly Plant, Flat Rock MI\n- Type: Vehicle Assembly Plant (Ford Mustang — exclusive NA production)\n- Address: 1 International Dr, Flat Rock, MI 48134\n- Resolved center: 42.10560, -83.24820",
+        "mapsUrl": "https://www.google.com/maps/@42.10560,-83.24820,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facility": "Flat Rock Assembly Plant (Ford Mustang - exclusive NA production site), 1 International Dr, Flat Rock MI. Roster geocode (moved 3258m) nonetheless landed centrally on the plant; confirmed as the large assembly complex - ~2.9M sq ft of building on a 400-acre site (web-confirmed).",
+          "truckGate": "Secured Ford assembly campus with continuous perimeter chain-link fencing visible in Street View. Controlled access driveway off the public road with a Ford-branded entrance; an internal gate/checkpoint structure with a guard booth and crosswalk markings controls movement between the perimeter storage lots and the inner yard.",
+          "guardShack": "Ford assembly plants run staffed security gatehouses; a booth structure is visible at the internal checkpoint. Marked uncertain - the perimeter truck-gate booth could not be crisply isolated; Street View panos sit on the campus loop road rather than directly at the public-road gate.",
+          "remoteGs": "False - a staffed gatehouse model is used.",
+          "multiStep": "Outer perimeter gate plus an internal vehicle-control checkpoint between the storage lots and the inner yard.",
+          "railServed": "Rail infrastructure visible at the NW of the campus; assembly plant of this scale relies on rail. Rail yard adjacent to the complex.",
+          "dropYard": "Very large dedicated trailer drop yards - hundreds of trailers in multiple organized rows along the NE side and additional rows on the west - among the largest trailer-parking footprints in the Ford roster.",
+          "dropArea": "50+ trailers visible; the NE drop yard alone holds well over 100 trailers.",
+          "trailersVisible": "~220 trailers counted across the NE and west drop yards - approximate, high count.",
+          "dockDoors": "Counted ~40 loading doors across building faces; estimate from overhead imagery - marked uncertain.",
+          "shipRcvSeparate": "Distinct dock banks on separate building faces serving the inbound trailer yards and outbound vehicle dispatch.",
+          "fastLaneOpportunity": "Wide gate aprons and multi-lane internal driveways with substantial unused paved width for an express bypass.",
+          "multipleFacilities": "Multiple large connected buildings forming an integrated assembly campus.",
+          "urbanRural": "Edge-of-town Flat Rock with farmland and open land adjacent to the campus - per rubric, when torn between small-town industrial and Urban, choose Rural.",
+          "scale": "No truck scale clearly identified; left uncertain."
+        }
+      },
+      {
+        "id": "09-blueoval-city-tennessee-electric-vehicle-center",
+        "name": "Ford - BlueOval City / Tennessee Electric Vehicle Center, Stanton TN",
+        "type": "Vehicle Assembly Plant (greenfield, ramp-up)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "scale",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "dropArea",
+          "trailerParkingCapacity",
+          "siteAreaAcres",
+          "railServed",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 35.42,
+          "lng": -89.418
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.405,
+            "west": -89.435,
+            "north": 35.438,
+            "east": -89.402
+          },
+          "truckGate": {
+            "south": 35.42,
+            "west": -89.4125,
+            "north": 35.4215,
+            "east": -89.4105
+          },
+          "dropYards": [
+            {
+              "south": 35.4205,
+              "west": -89.411,
+              "north": 35.4225,
+              "east": -89.407
+            },
+            {
+              "south": 35.4185,
+              "west": -89.427,
+              "north": 35.4205,
+              "east": -89.423
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.419,
+              "west": -89.424,
+              "north": 35.4205,
+              "east": -89.412
+            }
+          ],
+          "staging": {
+            "south": 35.4195,
+            "west": -89.412,
+            "north": 35.421,
+            "east": -89.41
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 2,
+          "buildingCount": 12,
+          "siteAreaAcres": 950,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": true
+        },
+        "dossierExcerpt": "- Name: Ford - BlueOval City / Tennessee Electric Vehicle Center, Stanton TN\n- Type: Vehicle Assembly Plant (greenfield, ramp-up)\n- Address: TN-222 at Stanton-Somerville Rd, Stanton, TN 38069\n  (street address now 2025 BlueOval City Drive, Stanton, TN)\n- Resolved center: 35.42000, -89.41800 (CORRECTED — see below)",
+        "mapsUrl": "https://www.google.com/maps/@35.42000,-89.41800,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facility": "BlueOval City / Tennessee Electric Vehicle Center, Stanton TN - Ford's $5.6B greenfield EV truck + battery campus on the 4,100-acre Memphis Regional Megasite in SW Haywood County. IMPORTANT - the roster geocode (35.457145, -89.405212) landed on the town of Stanton itself, ~4 km NE of the actual campus. The real campus was located ~2.5 miles south of Stanton via web research (Haywood County / TN Megasite Authority sources) and confirmed by satellite at approximately 35.420, -89.418.",
+          "locationCorrection": "Roster lat/lng were wrong (pointed at Stanton town). Corrected center is 35.42000, -89.41800 - the center of the large industrial campus visible at z14-z17.",
+          "truckGate": "Campus shows continuous perimeter chain-link fencing (confirmed in Feb 2026 Street View) and a controlled internal road network with roundabouts. A gate/checkpoint structure with crosswalk markings is visible on the NE truck route. Marked uncertain - the site is mid-ramp-up and imagery is mixed-era; final gate configuration not fully verifiable.",
+          "guardShack": "A booth/checkpoint structure is visible at the NE truck route. Ford runs staffed gatehouses at all assembly campuses. Marked uncertain due to greenfield ramp-up status and construction-era imagery.",
+          "rampUp": "BlueOval City is a greenfield site in active ramp-up - the main assembly building and several supplier buildings are complete (white roofs, fenced) but large portions of the campus remain raw graded land with earthmoving equipment visible in Feb 2026 Street View. Metrics are best-effort and will change as the site builds out.",
+          "railServed": "A large auto/EV campus of this scale is planned with rail service; rail infrastructure is part of the megasite design. Marked uncertain - rail spur not crisply confirmed in current imagery.",
+          "dropYard": "Trailer parking and laydown areas visible at multiple points around the campus; construction laydown yards plus emerging operational trailer parking near the NE and W building faces.",
+          "dockDoors": "Estimated ~35 doors from the assembly building faces; the building is vast but dock banks are still being established - marked uncertain.",
+          "siteAreaAcres": "Perimeter box covers ~950 acres of the developed core; the full Memphis Regional Megasite is 4,100 acres and Ford's footprint within it is still expanding - figure is approximate.",
+          "buildingCount": "~12 distinct buildings - the main assembly/battery plant plus numerous supplier and support buildings; campus still adding structures.",
+          "multipleFacilities": "Large multi-building campus - assembly plant, battery plant, and a supplier park - clearly a campus.",
+          "urbanRural": "Deep rural SW Haywood County, surrounded by farmland and woods, 2.5 miles from the small town of Stanton (~600 residents) - Rural.",
+          "connectivityIssue": "Rural location but a major industrial campus with substantial built infrastructure and a new electrical substation - cellular coverage likely provisioned; set false but flagged as inferred.",
+          "scale": "No truck scale clearly identified; left uncertain."
+        }
+      },
+      {
+        "id": "10-blueoval-sk-battery-park",
+        "name": "Ford - BlueOval SK Battery Park, Glendale KY",
+        "type": "Battery Manufacturing Plant (JV with SK On)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "preGateStaging",
+          "postGateStaging",
+          "entryLanes",
+          "exitLanes",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "dockDoorCount",
+          "fastLaneOpportunity",
+          "multiStep",
+          "scale"
+        ],
+        "center": {
+          "lat": 37.586,
+          "lng": -85.88
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 37.578,
+            "west": -85.8895,
+            "north": 37.5945,
+            "east": -85.871
+          },
+          "truckGate": {
+            "south": 37.5905,
+            "west": -85.876,
+            "north": 37.5918,
+            "east": -85.874
+          },
+          "dropYards": [
+            {
+              "south": 37.58,
+              "west": -85.8795,
+              "north": 37.5835,
+              "east": -85.875
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 37.5815,
+              "west": -85.887,
+              "north": 37.584,
+              "east": -85.8835
+            }
+          ],
+          "staging": {
+            "south": 37.589,
+            "west": -85.877,
+            "north": 37.591,
+            "east": -85.8745
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 740,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinates (37.601728, -85.905519) point at the town center of\nGlendale, KY — not the plant. The BlueOval SK Battery Park sits ~2.4 km\nsoutheast, immediately west of Interstate 65 on the Glendale Megasite. I\nlocated it by stepping back to z13 (which showed a large white-roof building\ncluster near the I-65 corridor) and then centering and zooming on the\ndual-plant complex. Web research confirmed the identity: BlueOval SK is the\nFord / SK On JV; the Glendale park has two ~4M sq ft battery plant buildings\n(~8M sq ft combined). Production officially began Aug 19, 2025; Ford has since\nannounced the workforce would be idled by Feb 2026 with rehire planned for\n2027 after retooling — the plant is built and was operational but is currently\nin a retooling pause.",
+        "mapsUrl": "https://www.google.com/maps/@37.586,-85.88,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "BlueOval SK Battery Park, Glendale (Hardin County) KY - a Ford / SK On joint-venture EV battery campus on the Glendale Megasite, two ~4M sq ft battery plant buildings (~8M sq ft combined). Roster coordinates (37.6017,-85.9055) point at Glendale town center, ~2.4 km NW of the actual plant. Corrected center to ~37.5860,-85.8800 (the white-roof dual-plant complex) confirmed by satellite: two giant battery plant buildings sit immediately west of I-65, with employee parking lots full of cars on the west side and process/utility structures (tank farms, conveyor bridges) at the south. Production officially began Aug 2025; Ford announced the workforce would be idled by Feb 2026 with rehire planned for 2027 after retooling - so the plant is operational but currently in a retooling pause.",
+          "imagery": "Available Maxar/Airbus satellite tiles capture the site during the active construction / early-ramp phase: surrounding ground is largely bare graded dirt and construction laydown, so the final operational truck-yard, drop-yard and gate configuration is NOT fully built out in imagery. Most layout/count fields are therefore low-confidence estimates and flagged uncertain.",
+          "truckGate": "Marked true (low confidence). Chain-link perimeter fencing is clearly visible along the public perimeter road in 2025-08 Street View; a megasite battery plant of this security profile (JV with valuable IP, hazmat) operates controlled gated truck access. The exact gate structure could not be positively resolved in construction-era imagery.",
+          "guardShack": "Marked true (low confidence) - a secured automotive-JV battery campus of this scale conventionally operates a staffed gatehouse at the main entrance. A booth structure was not positively resolved; flagged uncertain. remoteGs false as a consequence.",
+          "shipRcvSeparate": "Marked true (low confidence) - two separate ~4M sq ft plant buildings each with their own dock banks on different faces; raw-material receiving and finished-cell shipping would run from physically distinct dock clusters.",
+          "dockDoors": "Estimated 25-50 across the two large plant buildings; regular bay rhythm visible along the SW building's south/west faces in z18-z19 imagery. Exact count obscured by roof angle and construction state - flagged uncertain.",
+          "dropArea": "Banded 10-25; a paved truck/trailer staging area is visible toward the south of the complex but much of the surrounding area is still construction laydown - flagged uncertain. dropYard true.",
+          "multipleFacilities": "True - two enormous separate plant buildings plus multiple process/utility support structures form a single campus.",
+          "railServed": "No rail spur into the property could be identified; the CSX line corridor is some distance away. railServed false.",
+          "urbanRural": "Glendale is a small rural Hardin County community surrounded by farmland; the megasite is greenfield development off I-65. Rural.",
+          "fastLaneOpportunity": "True (low confidence) - the megasite has vast unused paved/graded width around the entrance, ample physical room for express/bypass lanes.",
+          "geofence": "perimeter box covers the developed/fenced plant complex core (~740 acres); the broader Glendale Megasite parcel is larger (~1,500+ acres). Sub-zones are best-effort estimates from construction-era imagery."
+        }
+      },
+      {
+        "id": "11-dearborn-stamping-plant",
+        "name": "Ford - Dearborn Stamping Plant, Dearborn MI",
+        "type": "Stamping Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoors",
+          "entryLanes",
+          "exitLanes",
+          "postGateStaging",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 42.3068,
+          "lng": -83.1605
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.3042,
+            "west": -83.1633,
+            "north": 42.3092,
+            "east": -83.1578
+          },
+          "truckGate": {
+            "south": 42.3015,
+            "west": -83.1696,
+            "north": 42.3021,
+            "east": -83.1685
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 42.3062,
+              "west": -83.1628,
+              "north": 42.3074,
+              "east": -83.162
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 15,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 35,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Stamping Plant\nResolved center: 42.30680, -83.16050\nConfidence: medium\n\n### Location resolution\nThe roster supplied 42.313554, -83.164654 — identical to idx 1 (Dearborn Truck\nPlant) and the generic Rouge Complex address (3001 Miller Rd). Web research\nestablished the Dearborn Stamping Plant (DSP) as a distinct 2.7M-sq-ft, ~35-acre\nfacility that stamps F-150 doors and hoods, in operation since 1939. A common\ngeocode for it (42.3083377, -83.1563218) was probed and found to land on the\nRouge Center central road/parking spine — not a building.\n\nSatellite probing of the Rouge interior (z16-z19) identified the actual stamping\nplant: the large single flat-roofed press building with characteristic rows of\nroof skylights/monitors and flanking rail spurs, centered near 42.3068,-83.1605.",
+        "mapsUrl": "https://www.google.com/maps/@42.3068,-83.1605,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Dearborn Stamping Plant (DSP) is an interior building of Ford's 93-building Rouge Center campus. 2.7M sq ft on a ~35-acre footprint; stamps F-150 doors and hoods. Generic geocode (42.3083,-83.1563) lands on the Rouge central road/parking spine, not the building; building center relocated to ~42.3068,-83.1605 via satellite identification of the large single flat-roofed press structure with skylight rows and flanking rail spurs.",
+          "truckGate": "The Rouge Center is a fully fenced and guarded campus; the stamping plant is served by the complex's controlled gate system rather than its own street-facing gate. Z19 satellite of the SW Rouge gate (~42.3017,-83.169) shows a canopied checkpoint with guard booth and lane markings; Street View on the Rouge access road shows perimeter fence and a controlled pinch-point.",
+          "guardShack": "Staffed guard-booth structure with canopy visible at the Rouge gate in z19 imagery; Rouge Center has manned security gates.",
+          "dockDoors": "Low confidence - DSP is interior to the Rouge; F-150 stampings ship internally to the Truck Plant and material arrives largely by rail. Few external truck docks visible; estimated 0-10 exterior doors on the SW/W building face.",
+          "multipleFacilities": "DSP is one of 93 buildings in the Rouge Center; Dearborn Truck Plant and Dearborn Engine Plant are adjacent on the same secured campus.",
+          "railServed": "Rail spurs run directly alongside and into the DSP building (steel coil inbound); visible as dark linear features along the building's east edge in z19 imagery.",
+          "dropArea": "No external trailer drop yard for this interior building; outbound stampings move internally to assembly. dropYard false.",
+          "perimeter": "Box approximates the DSP building footprint within the larger Rouge campus; the Rouge campus perimeter is far larger but the stamping plant occupies this ~35-acre sub-footprint.",
+          "urbanRural": "Dense Detroit/Dearborn metro industrial fabric - clearly Urban."
+        }
+      },
+      {
+        "id": "12-dearborn-engine-plant",
+        "name": "Ford - Dearborn Engine Plant, Dearborn MI",
+        "type": "Engine Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoors",
+          "entryLanes",
+          "exitLanes",
+          "postGateStaging",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 42.3128,
+          "lng": -83.1588
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.3109,
+            "west": -83.1608,
+            "north": 42.3147,
+            "east": -83.157
+          },
+          "truckGate": {
+            "south": 42.3094,
+            "west": -83.1601,
+            "north": 42.31,
+            "east": -83.159
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 42.3118,
+              "west": -83.16,
+              "north": 42.3133,
+              "east": -83.1592
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 7,
+          "trailersVisible": 3,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 31,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Engine Plant\nResolved center: 42.31280, -83.15880\nConfidence: medium\n\n### Location resolution\nThe roster supplied 42.314553, -83.162142 (GEOMETRIC_CENTER, Rouge Complex\naddress). Probing showed that point lands on the north edge of the green-roofed\nDearborn Truck Plant, not the engine plant. Web research confirmed the Dearborn\nEngine Plant (also the Dearborn Engine and Fuel Tank Plant) as a distinct Rouge\nCenter building. Satellite probing (z16-z19) of the Truck Plant's neighbors\nidentified the engine plant as the long large building running NW-SE\nimmediately east of the Truck Plant, flanked on its NE face by multiple rail\nspurs. Center locked at ~42.3128,-83.1588.\n\n### Key views\n- z16 cluster: Green-roofed Dearborn Truck Plant at left; the long\n  lighter-roofed building to its east, with rail spurs alongside, is the engine",
+        "mapsUrl": "https://www.google.com/maps/@42.3128,-83.1588,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Dearborn Engine Plant (DEP / Dearborn Engine and Fuel Tank Plant) is an interior building of Ford's Rouge Center campus. Roster geocode (42.3145,-83.1621) landed on the north edge of the green-roofed Dearborn Truck Plant. Satellite identification (z16-z19) located the engine plant as the long large NW-SE building immediately east of the Truck Plant, flanked by rail spurs on its NE face; center relocated to ~42.3128,-83.1588.",
+          "truckGate": "The Rouge Center is a fully fenced, guarded campus. Street View along the internal access road shows chain-link perimeter fence with privacy slats around the engine plant; the plant is served by the Rouge gate/guard system rather than its own street-facing gate.",
+          "guardShack": "Rouge Center operates manned security gates with guard booths (confirmed at the SW Rouge gate in idx-11 imagery). The engine plant shares this campus gate system.",
+          "dockDoors": "Low confidence - engine plant interior to the Rouge with material flow largely internal and by rail; few external truck docks visible. Estimated 0-10 on the SW building face.",
+          "multipleFacilities": "DEP is one of ~93 Rouge Center buildings; Dearborn Truck Plant and the Rouge Electric Vehicle Center are immediately adjacent on the same secured campus.",
+          "railServed": "Multiple rail spurs run directly alongside the engine plant building's NE face - clearly rail-served.",
+          "dropArea": "No dedicated trailer drop yard for this interior building. The finished-vehicle staging lots seen nearby belong to the adjacent Truck Plant. dropYard false.",
+          "perimeter": "Box approximates the engine plant building footprint (~31 acres) within the larger Rouge campus.",
+          "urbanRural": "Dense Detroit/Dearborn metro industrial fabric - Urban."
+        }
+      },
+      {
+        "id": "13-cleveland-engine-plant",
+        "name": "Ford - Cleveland Engine Plant, Brook Park OH",
+        "type": "Engine Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "dockDoors",
+          "multipleFacilities"
+        ],
+        "center": {
+          "lat": 41.41645,
+          "lng": -81.8219
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.4126,
+            "west": -81.8268,
+            "north": 41.4196,
+            "east": -81.818
+          },
+          "truckGate": {
+            "south": 41.4133,
+            "west": -81.8218,
+            "north": 41.4142,
+            "east": -81.8205
+          },
+          "dropYards": [
+            {
+              "south": 41.4133,
+              "west": -81.822,
+              "north": 41.4147,
+              "east": -81.8195
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.4136,
+              "west": -81.824,
+              "north": 41.4147,
+              "east": -81.8215
+            }
+          ],
+          "staging": {
+            "south": 41.413,
+            "west": -81.822,
+            "north": 41.4136,
+            "east": -81.82
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 19,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 95,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Engine Plant\nResolved center: 41.41645, -81.82190\nConfidence: medium\n\n### Location resolution\nThe roster supplied 41.416738, -81.821992 (ROOFTOP, 17601 Brookpark Rd). The\nz16 probe placed that point directly on the large multi-roof Ford Cleveland\nEngine Plant building — confirmed correct, no relocation needed. Web research\nconfirmed the active Cleveland Engine Plant No. 1: 1.6M sq ft, ~2,055 employees,\nproducing 2.0/2.3L EcoBoost I4 and 3.5L EcoBoost V6 engines. The former\nCleveland Engine Plant No. 2 immediately SW has been demolished — cleared land\nis visible in imagery (that parcel sold for ~$31.5M).\n\n### Key views\n- z16 overview: Large multi-roof plant building, employee parking lots W and\n  SW, rail spurs along the NW edge, freeway interchanges (I-71/I-480) to the NE,",
+        "mapsUrl": "https://www.google.com/maps/@41.41645,-81.8219,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Ford Cleveland Engine Plant (No. 1), Brook Park OH - active engine plant producing 2.0/2.3L EcoBoost I4 and 3.5L EcoBoost V6 engines, ~2,055 employees, 1.6M sq ft. Roster geocode (41.4167,-81.8220) lands directly on the large multi-roof plant building - confirmed correct. Former Cleveland Engine Plant No. 2 immediately to the SW has been demolished (cleared land visible; the former plant parcel sold for $31.5M).",
+          "truckGate": "Chain-link perimeter fence encircles the property; Street View (2016 & 2025) shows the fenced property line with gated entry points. The plant's south-side truck/drop yard connects to the public road via a controlled driveway.",
+          "guardShack": "Marked true at medium confidence - a fenced, ~2,000-employee active Ford engine plant of this scale conventionally operates a staffed gatehouse, and the perimeter is clearly secured. A guard-booth structure could not be positively resolved in available imagery (some panos are 2016); flagged uncertain.",
+          "dropArea": "South-side truck yard holds an estimated 15-20 parked trailers in rows against a paved apron (z19/z20 imagery); banded 10-25. dropYard true.",
+          "dockDoors": "Estimated 10-25 dock doors along the south building face serving the truck yard; exact count obscured by roof angle - flagged uncertain.",
+          "railServed": "Rail spurs run NW-SE directly alongside the plant's NW face - clearly rail-served.",
+          "fastLaneOpportunity": "The south truck yard apron is wide with substantial unused paved width; physical room exists for a bypass/express lane.",
+          "multipleFacilities": "buildingCount 2 reflects the main plant plus a detached NW office building; the adjacent former Plant No. 2 is demolished. multipleFacilities marked false (single active plant cluster); flagged uncertain.",
+          "urbanRural": "Brook Park is a dense industrial suburb within the Cleveland metro, hemmed by I-71/I-480 interchanges and continuous industrial development - Urban."
+        }
+      },
+      {
+        "id": "14-lima-engine-plant",
+        "name": "Ford - Lima Engine Plant, Lima OH",
+        "type": "Engine Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "dockDoors",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 40.7775,
+          "lng": -84.086
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.7735,
+            "west": -84.091,
+            "north": 40.7825,
+            "east": -84.0805
+          },
+          "truckGate": {
+            "south": 40.7738,
+            "west": -84.0828,
+            "north": 40.7748,
+            "east": -84.0812
+          },
+          "dropYards": [
+            {
+              "south": 40.78,
+              "west": -84.0862,
+              "north": 40.7813,
+              "east": -84.0828
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.7793,
+              "west": -84.0862,
+              "north": 40.7801,
+              "east": -84.0835
+            }
+          ],
+          "staging": {
+            "south": 40.7741,
+            "west": -84.0825,
+            "north": 40.7753,
+            "east": -84.081
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 50,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 219,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode (40.777522, -84.086641) lands directly on a large\nmulti-roof industrial plant building. Satellite confirmed this is the Ford\nLima Engine Plant at 1155 Bible Rd, Lima (Allen County) OH — an active Ford\npowertrain plant producing V6/V8 engines with ~1,500+ employees. The plant\nsits on the semi-rural northeast edge of Lima, surrounded by farmland and\nwoods, with rail lines along the west and east sides and Bible Rd along the\nsouth. No coordinate correction needed.",
+        "mapsUrl": "https://www.google.com/maps/@40.7775,-84.086,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Ford Lima Engine Plant, 1155 Bible Rd, Lima (Allen County) OH - active Ford powertrain plant (produces V6/V8 engines, ~1,500+ employees). Roster geocode (40.7775,-84.0866) lands directly on the large multi-roof plant building - confirmed correct. The plant sits on the semi-rural edge of Lima, surrounded by farmland and woods, with rail lines on the west and east sides and Bible Rd along the south.",
+          "truckGate": "Confirmed - Street View (2024-08) along Bible Rd shows a marked 'TRUCK ENTRANCE' sign on the chain-link perimeter fence at a wide paved entry apron (~40.7743,-84.0820 area). Chain-link fence encircles the property; the truck entrance opens off Bible Rd into a deep paved staging apron before the internal gate.",
+          "guardShack": "Marked true at medium confidence - a fenced ~1,500-employee active Ford engine plant of this scale conventionally operates a staffed gatehouse, and the truck entrance has a controlled fenced checkpoint. A booth structure could not be positively resolved at Street-View distance; flagged uncertain. remoteGs false as a consequence.",
+          "preGateStaging": "True - the truck entrance off Bible Rd opens onto a large, deep paved apron well outside the building, providing clear pre-gate truck staging room.",
+          "drivewayLong": "True - the approach from the Bible Rd truck entrance to the dock yard is long and deep with ample room to queue 3+ trucks.",
+          "dropArea": "The north-side drop yard holds an estimated 25-40 parked trailers in rows (z18/z19 imagery); banded 25-50. dropYard true. trailersVisible ~30.",
+          "dockDoors": "Estimated 10-25 dock doors along the north building face serving the truck yard; exact count partly obscured by roof angle - flagged uncertain.",
+          "shipRcvSeparate": "Marked false (medium confidence) - the main freight operation (docks + drop yard) is concentrated on the north side; no clearly separate second dock cluster confirmed. Flagged uncertain.",
+          "railServed": "Rail lines run along both the west and east sides of the property with spurs connecting toward the plant - rail-served.",
+          "fastLaneOpportunity": "True - the Bible Rd truck entrance apron is very wide with substantial unused paved width; physical room exists for an express/bypass lane.",
+          "multipleFacilities": "False - a single large interconnected plant building (multi-roof but one structure); buildingCount 1.",
+          "urbanRural": "The plant is on the semi-rural northeast edge of Lima, surrounded by farmland and woodland - Rural."
+        }
+      },
+      {
+        "id": "15-livonia-transmission-plant",
+        "name": "Ford - Livonia Transmission Plant, Livonia MI",
+        "type": "Transmission Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "truckGateCount",
+          "entryLanes",
+          "exitLanes",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "preGateStaging",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 42.3715,
+          "lng": -83.398
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.3678,
+            "west": -83.4025,
+            "north": 42.3762,
+            "east": -83.3925
+          },
+          "truckGate": {
+            "south": 42.3738,
+            "west": -83.4022,
+            "north": 42.3747,
+            "east": -83.4008
+          },
+          "dropYards": [
+            {
+              "south": 42.3743,
+              "west": -83.4005,
+              "north": 42.3752,
+              "east": -83.397
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 42.3742,
+              "west": -83.4005,
+              "north": 42.375,
+              "east": -83.3985
+            },
+            {
+              "south": 42.3705,
+              "west": -83.3958,
+              "north": 42.373,
+              "east": -83.3948
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 2,
+          "buildingCount": 3,
+          "siteAreaAcres": 190,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode (42.372187, -83.398969) is flagged GEOMETRIC_CENTER, moved\n1204 m — but it lands inside the correct plant complex. Satellite confirmed\nthis is the Ford Livonia Transmission Plant at 36200 Plymouth Rd, Livonia\n(Wayne County) MI. Web research (Wikipedia, Ford Authority) confirms it is the\nlargest transmission plant in North America: ~3.3M sq ft of enclosed floor\nspace on ~182 acres, established 1952, producing the 6R/10R transmission\nfamilies used in the F-150, Mustang, Expedition, Navigator and Transit. I\nrefined the center slightly to ~42.3715,-83.3980 on the main plant building\ncluster.",
+        "mapsUrl": "https://www.google.com/maps/@42.3715,-83.398,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Ford Livonia Transmission Plant, 36200 Plymouth Rd, Livonia (Wayne County) MI - the largest transmission plant in North America (~3.3M sq ft, ~182 acres, est. 1952; produces the 6R/10R transmission families). Roster geocode (42.3722,-83.3990, GEOMETRIC_CENTER, moved 1204m) lands within the plant complex; refined center to ~42.3715,-83.3980 on the main plant building cluster. Web research (Wikipedia, Ford Authority) confirms identity and the 182-acre / 3.3M sq ft figures.",
+          "layout": "A large sprawling integrated multi-building plant in dense industrial Livonia; employee parking lots ring the building on the south (Plymouth Rd) and west (Levan Rd); a vehicle test-track oval occupies the east of the property; rail lines run along the north edge with spurs into the plant.",
+          "truckGate": "Marked true - chain-link perimeter fencing is visible along the west (Levan Rd) and other property edges in Street View (2024-2026); a gated truck/material entrance with truck signage and trailers visible inside is confirmed on the west side near the north dock yard. Some campus driveways off Plymouth Rd are open employee access. truckGateCount estimated 2 (flagged uncertain).",
+          "guardShack": "Marked true at medium confidence - a fenced ~3.3M sq ft Ford powertrain plant of this scale conventionally operates staffed gatehouses at controlled entries. A booth structure could not be positively resolved in available imagery; flagged uncertain. remoteGs false as a consequence.",
+          "dockDoors": "Estimated 10-25 dock doors; a clear dock bank with several trailers backed in is visible on the north side, plus dock activity along the east building face. Exact count obscured by roof angle - flagged uncertain.",
+          "dropArea": "North-side truck yard holds an estimated 10-20 trailers amid a large material laydown area (stacked steel racks / returnable containers); banded 10-25. dropYard true.",
+          "shipRcvSeparate": "Marked true (medium confidence) - dock activity is present on physically separate building faces (north dock yard and east building face); flagged uncertain.",
+          "preGateStaging": "Marked false (uncertain) - no clear dedicated pre-gate truck staging apron outside a gate identified; the campus entrances open onto internal roads/parking. Flagged uncertain.",
+          "postGateStaging": "True - the internal road network and paved areas between the gates and the north dock yard provide post-gate queue/holding room.",
+          "railServed": "Rail lines run along the north property edge with spurs serving the north material/dock yard - rail-served.",
+          "multipleFacilities": "True - the plant property includes multiple large interconnected building masses plus detached office/support buildings and a test-track oval; buildingCount 3 (main plant + detached support/office buildings).",
+          "urbanRural": "Livonia is a dense Detroit-metro industrial suburb; the plant is hemmed by continuous industrial development - Urban."
+        }
+      },
+      {
+        "id": "16-sharonville-transmission-plant",
+        "name": "Ford - Sharonville Transmission Plant, Sharonville OH",
+        "type": "Transmission Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 39.27229,
+          "lng": -84.42525
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.2685,
+            "west": -84.4311,
+            "north": 39.27585,
+            "east": -84.4196
+          },
+          "truckGate": {
+            "south": 39.27475,
+            "west": -84.4301,
+            "north": 39.2754,
+            "east": -84.4293
+          },
+          "dropYards": [
+            {
+              "south": 39.2737,
+              "west": -84.43,
+              "north": 39.2753,
+              "east": -84.4285
+            },
+            {
+              "south": 39.2708,
+              "west": -84.4287,
+              "north": 39.2724,
+              "east": -84.4273
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.2715,
+              "west": -84.4283,
+              "north": 39.2723,
+              "east": -84.427
+            },
+            {
+              "south": 39.275,
+              "west": -84.427,
+              "north": 39.2756,
+              "east": -84.4248
+            }
+          ],
+          "staging": {
+            "south": 39.2724,
+            "west": -84.43,
+            "north": 39.2737,
+            "east": -84.4285
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 168,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Transmission Plant\nAddress: 3000 E Sharon Rd, Cincinnati (Sharonville), OH 45241\nLocked coordinates: 39.27229, -84.42525\nConfidence: high",
+        "mapsUrl": "https://www.google.com/maps/@39.27229,-84.42525,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster point landed mid-building; locked center to 39.27229,-84.42525, the centroid of the single large transmission-plant complex on E Sharon Rd. Confirmed via Ford Authority / AmericanAutoWorker as Sharonville Transmission Plant (est. 1958, 10R140/10R80 transmissions).",
+          "truckGate": "Fenced truck-yard entrance on the NW side off Mosteller Rd: continuous chain-link perimeter fence, Ford signboard, wide paved apron and gate opening into the trailer-canopy drop yard (Street View 2025-06).",
+          "guardShack": "No distinct guard booth resolved at the NW truck gate in z21 satellite or Street View; treated as remote/kiosk check-in (remoteGs true). Low confidence on absence.",
+          "remoteGs": "Set true because there is a controlled truck gate but no visible staffed booth.",
+          "dropYard": "Large dedicated trailer-storage yard on NW side: dozens of trailers parked under and around canopy structures, plus a second drop area on the SW side.",
+          "dockDoors": "Dock banks on the SW and N building faces; ~30 doors estimated across faces, regular bay rhythm partially obscured by canopies — band 25-50.",
+          "shipRcvSeparate": "Distinct dock clusters on different building faces (SW truck yard vs N rail-served face) indicate separate shipping/receiving.",
+          "railServed": "Rail line runs along the north edge with a spur reaching the building's north face; classic mid-century assembly-area rail service.",
+          "fastLaneOpportunity": "Wide paved gate apron at the NW entrance with ample unused width to add an express/bypass lane.",
+          "entryLanes": "Estimated 2 in / 2 out from gate-apron width; not precisely countable from imagery.",
+          "urbanRural": "Sharonville is inside the Cincinnati metro industrial fabric — Urban."
+        }
+      },
+      {
+        "id": "17-van-dyke-electric-powertrain-center",
+        "name": "Ford - Van Dyke Electric Powertrain Center, Sterling Heights MI",
+        "type": "Powertrain / Transmission Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "truckGateCount",
+          "entryLanes",
+          "exitLanes",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 42.5978,
+          "lng": -83.0355
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.5945,
+            "west": -83.04,
+            "north": 42.6015,
+            "east": -83.0295
+          },
+          "truckGate": {
+            "south": 42.6008,
+            "west": -83.039,
+            "north": 42.6016,
+            "east": -83.0378
+          },
+          "dropYards": [
+            {
+              "south": 42.5965,
+              "west": -83.0395,
+              "north": 42.5985,
+              "east": -83.0375
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 42.596,
+              "west": -83.039,
+              "north": 42.5978,
+              "east": -83.037
+            }
+          ],
+          "staging": {
+            "south": 42.5995,
+            "west": -83.039,
+            "north": 42.601,
+            "east": -83.0365
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 166,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster address (8000 Van Dyke Ave) and geocode (42.389201, -83.022218,\nRANGE_INTERPOLATED) are wrong — they land in a residential Detroit\nneighborhood roughly 23 km south of the actual plant. The wide z14 view at the\nroster point showed only houses, with a large industrial building visible far\nto the NW.\n\nWeb research (Detroit News, Ford Authority, AmericanAutoWorker, Yelp) confirmed\nthe correct address: 41111 Van Dyke Ave, Sterling Heights, MI 48314, just\nnorth of 18 Mile Road. I corrected the center to ~42.5978, -83.0355 and\nverified by satellite that it is the large multi-roof Ford plant building. The\nVan Dyke Electric Powertrain Center is a ~2M sq ft plant operating since 1968;\nit was renamed in 2021 from the Van Dyke Transmission Plant as it shifted to\nproducing electric motors and transaxles for hybrid/EV vehicles (including the",
+        "mapsUrl": "https://www.google.com/maps/@42.5978,-83.0355,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Ford Van Dyke Electric Powertrain Center, 41111 Van Dyke Ave, Sterling Heights (Macomb County) MI - a ~2M sq ft Ford powertrain plant operating since 1968, renamed in 2021 from the Van Dyke Transmission Plant as it shifted to producing electric motors and transaxles for hybrid/EV vehicles (incl. the F-150 Lightning). LOCATION CORRECTION: the roster address (8000 Van Dyke Ave) and geocode (42.3892,-83.0222, RANGE_INTERPOLATED) are WRONG - they point at a residential Detroit neighborhood ~23 km south. Web research (Detroit News, Ford Authority, AmericanAutoWorker, Yelp) confirms the correct address 41111 Van Dyke Ave, Sterling Heights MI 48314, just north of 18 Mile Rd. Corrected center to ~42.5978,-83.0355 - confirmed by satellite as the large multi-roof Ford plant building.",
+          "truckGate": "Confirmed - Street View (2025-03) on the north road shows a chain-link sliding truck/vehicle gate (closed, with a gate-number sign) across a wide driveway leading down an internal access drive to the west-side material/dock yard. The property is fully encircled by chain-link perimeter fencing. truckGateCount estimated 2 (a separate north employee/vehicle entrance plus the gated truck drive) - flagged uncertain.",
+          "guardShack": "Marked true at medium confidence - a fenced ~2M sq ft active Ford powertrain plant of this scale conventionally operates a staffed gatehouse at the main entry. No booth was positively resolved at the NW truck gate (which appears badge/remote-style); flagged uncertain along with remoteGs.",
+          "preGateStaging": "True - the NW truck gate opens onto a long, wide internal access drive with ample paved staging room before reaching the dock yard.",
+          "drivewayLong": "True - the access drive from the NW gate to the west dock yard is long and deep, with room for 3+ trucks to queue.",
+          "dockDoors": "Estimated 10-25 dock doors along the west building face; a dock bank with trailers backed in is visible in Street View and z19 imagery. Exact count obscured by roof angle - flagged uncertain.",
+          "dropArea": "West-side material/dock yard holds an estimated 10-20 trailers amid a large laydown area of stacked steel racks / returnable containers; banded 10-25. dropYard true.",
+          "shipRcvSeparate": "Marked false (medium confidence) - the main freight operation (docks + drop yard) is concentrated on the west side; no clearly separate second dock cluster confirmed. Flagged uncertain.",
+          "railServed": "Rail lines run along the west property edge with spurs serving the west material yard - rail-served.",
+          "fastLaneOpportunity": "True - the NW truck gate apron and internal access drive are very wide with substantial unused paved width; physical room exists for an express/bypass lane.",
+          "multipleFacilities": "False - a single large interconnected plant building (multi-roof but one structure) plus a detached SE office; buildingCount 2.",
+          "urbanRural": "Sterling Heights is a dense Detroit-metro suburb; the plant is surrounded by continuous suburban/industrial development - Urban."
+        }
+      },
+      {
+        "id": "18-sterling-axle-plant",
+        "name": "Ford - Sterling Axle Plant, Sterling Heights MI",
+        "type": "Axle / Components Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "preGateStaging"
+        ],
+        "center": {
+          "lat": 42.58358,
+          "lng": -83.04497
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.5795,
+            "west": -83.0495,
+            "north": 42.5875,
+            "east": -83.0405
+          },
+          "truckGate": {
+            "south": 42.5866,
+            "west": -83.048,
+            "north": 42.5874,
+            "east": -83.0468
+          },
+          "dropYards": [
+            {
+              "south": 42.5855,
+              "west": -83.047,
+              "north": 42.5872,
+              "east": -83.0435
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 42.584,
+              "west": -83.043,
+              "north": 42.5862,
+              "east": -83.0415
+            }
+          ],
+          "staging": {
+            "south": 42.5858,
+            "west": -83.0478,
+            "north": 42.5868,
+            "east": -83.046
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 18,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 162,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster address (29900 Mound Rd) and geocode (42.514132, -83.046583,\nRANGE_INTERPOLATED) are wrong — they land on an office/tech campus roughly\n3.5 km south of the actual plant. Web research (Ford Authority, Waze,\nCommercialCafe) established the correct address as **39000 Mound Rd, Sterling\nHeights, MI 48310**. The exact coordinates 42.583580, -83.044966 were obtained\nfrom the US EPA Superfund site profile for the Ford Motor Company Sterling\nAxle Plant, and verified by satellite as the large multi-roof Ford plant\nbuilding bounded by Mound Rd on the west.\n\nThe Sterling Axle Plant has operated under Ford since 1956, employs ~2,295,\nand produces rear axles for the F-150, Super Duty, Expedition, Navigator,\nMustang and Transit.",
+        "mapsUrl": "https://www.google.com/maps/@42.58358,-83.04497,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Ford Sterling Axle Plant, 39000 Mound Rd, Sterling Heights (Macomb County) MI - an active Ford components plant operating since 1956, ~2,295 employees, producing rear axles for the F-150, Super Duty, Expedition, Navigator, Mustang and Transit. LOCATION CORRECTION: the roster address (29900 Mound Rd) and geocode (42.5141,-83.0466, RANGE_INTERPOLATED) are WRONG - they point at an office/tech campus ~3.5 km south. Correct address is 39000 Mound Rd, Sterling Heights MI 48310 (confirmed via Ford Authority, Waze, CommercialCafe). Exact coordinates 42.583580,-83.044966 obtained from the US EPA Superfund site profile for the Ford Motor Company Sterling Axle Plant - confirmed by satellite as the large multi-roof Ford plant building bounded by Mound Rd on the west.",
+          "truckGate": "Confirmed - Street View (2025) on Mound Rd at the NW corner shows a wide gated truck entrance: a tractor pulling an intermodal container is seen exiting through a chain-link sliding-gate opening, with trailers parked inside the yard and dock doors on the adjacent building face. Chain-link perimeter fencing runs the full Mound Rd frontage. truckGateCount 1 (primary truck gate at the NW).",
+          "guardShack": "Marked true at medium confidence - a fenced ~2,295-employee active Ford plant of this scale conventionally operates a staffed gatehouse. A small structure is visible beside the NW truck gate but a clear guard-booth could not be positively confirmed - the gate may be badge/remote-controlled. Flagged uncertain along with remoteGs.",
+          "preGateStaging": "Marked false (uncertain) - the NW truck gate opens more or less directly into the drop yard / dock area; no clear dedicated pre-gate truck staging apron outside the gate identified. Flagged uncertain.",
+          "postGateStaging": "True - the internal yard between the NW gate and the dock doors provides post-gate queue/holding room.",
+          "drivewayLong": "True - the internal yard from the NW truck gate to the dock doors and through the drop yard is deep, with room to queue 3+ trucks.",
+          "dockDoors": "Estimated 10-25 dock doors along the NE/E building faces serving the drop yard; exact count obscured by roof angle - flagged uncertain.",
+          "dropArea": "NW/N drop yard holds an estimated 15-20 parked trailers in rows amid material laydown areas (z19 imagery); banded 10-25. dropYard true. trailersVisible ~18.",
+          "shipRcvSeparate": "Marked false (medium confidence) - freight is concentrated on the N/NE side; no clearly separate second dock cluster confirmed. Flagged uncertain.",
+          "railServed": "A rail spur runs into the property from the rail yard on the east, serving the N/NE material laydown area - rail-served.",
+          "multipleFacilities": "False - a single large interconnected plant building (multi-roof but one structure); buildingCount 1.",
+          "urbanRural": "Sterling Heights is a dense Detroit-metro suburb; the plant is hemmed by continuous suburban/industrial development - Urban."
+        }
+      },
+      {
+        "id": "19-rawsonville-components-plant",
+        "name": "Ford - Rawsonville Components Plant, Ypsilanti MI",
+        "type": "Components / Battery Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 42.1992,
+          "lng": -83.557
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.195,
+            "west": -83.5615,
+            "north": 42.2035,
+            "east": -83.552
+          },
+          "truckGate": {
+            "south": 42.1972,
+            "west": -83.553,
+            "north": 42.1978,
+            "east": -83.5523
+          },
+          "dropYards": [
+            {
+              "south": 42.1968,
+              "west": -83.557,
+              "north": 42.1979,
+              "east": -83.5554
+            },
+            {
+              "south": 42.2,
+              "west": -83.5553,
+              "north": 42.2011,
+              "east": -83.5538
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 42.197,
+              "west": -83.5592,
+              "north": 42.198,
+              "east": -83.5578
+            },
+            {
+              "south": 42.1972,
+              "west": -83.5558,
+              "north": 42.1983,
+              "east": -83.5547
+            }
+          ],
+          "staging": {
+            "south": 42.1985,
+            "west": -83.5552,
+            "north": 42.2,
+            "east": -83.5538
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 145,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster coords (42.20279, -83.581749) were wrong — they landed in a residential\n  neighborhood on Textile Rd ~2 km west of the plant. Roster address (9000 Textile Rd)\n  is also off; the correct address is 10300 Textile Rd, Ypsilanti Twp, MI 48197.\n- Probed east along Textile Rd and found the large industrial complex on the south\n  side of Textile Rd between the road and Ford Lake.\n- Locked center: 42.19920, -83.55700 — the ~1.7M sq ft Rawsonville plant building.\n- Confirmed via web research: Ford Rawsonville Components Plant, ~650 employees,\n  produces transmission oil pumps, hybrid/PHEV battery packs, air induction systems,\n  ignition coils, fuel pumps. Operating since 1956.",
+        "mapsUrl": "https://www.google.com/maps/@42.19920,-83.55700,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Chain-link perimeter fence rings the property; closed double-swing vehicle gate on the SW (truck-yard) side and a rolling chain-link gate on the NE both confirmed in 2024-25 Street View.",
+          "guardShack": "No staffed booth at any gate in Street View - gates are plain chain-link, no booth structure beside the lane.",
+          "remoteGs": "Gate present but unmanned (no booth) - kiosk / badge / app check-in implied.",
+          "shipRcvSeparate": "Dock banks on the SW building face and a separate dock/staging cluster on the SE building face - two distinct truck zones.",
+          "fastLaneOpportunity": "Wide unmarked paved aprons inside both gates leave room for an express lane.",
+          "urbanRural": "Edge-of-township site bordered by Ford Lake and farmland to the south; small-town industrial setting -> Rural.",
+          "dockDoorCount": "~1.7M sq ft sprawling 1950s plant; door count is an overhead estimate across multiple building faces.",
+          "entryLanes": "Single-lane chain-link gates; lane count low-confidence from overhead.",
+          "railServed": "No rail spur visible entering the property; web research did not indicate rail service."
+        }
+      },
+      {
+        "id": "20-buffalo-stamping-plant",
+        "name": "Ford - Buffalo Stamping Plant, Hamburg NY",
+        "type": "Stamping Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "truckGateCount"
+        ],
+        "center": {
+          "lat": 42.7865,
+          "lng": -78.8428
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.7825,
+            "west": -78.8472,
+            "north": 42.79,
+            "east": -78.8385
+          },
+          "truckGate": {
+            "south": 42.7882,
+            "west": -78.8468,
+            "north": 42.7888,
+            "east": -78.846
+          },
+          "dropYards": [
+            {
+              "south": 42.789,
+              "west": -78.843,
+              "north": 42.7899,
+              "east": -78.8408
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 42.7854,
+              "west": -78.8426,
+              "north": 42.7872,
+              "east": -78.8415
+            }
+          ],
+          "staging": {
+            "south": 42.7884,
+            "west": -78.8458,
+            "north": 42.7897,
+            "east": -78.8438
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 25,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 165,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster coords (42.74703, -78.902483) were wrong — they landed in a residential\n  lakeshore neighborhood in Hamburg town, ~5 km SSW of the plant. Roster address\n  (5000 Lakeshore Rd) is also off.\n- Web research gave the correct address — **3663 Lake Shore Rd, Hamburg/Blasdell,\n  NY 14219** — and Wikipedia coordinates 42°47′13″N 78°50′35″W.\n- Probed there and found the Buffalo Stamping Plant: a ~2.45M sq ft building on an\n  88-acre site at the east end of Lake Erie, beside Route 5 (Lake Shore Rd / NY-5).\n- Locked center: 42.78650, -78.84280. Ford branding on the building wall and a\n  \"Buffalo Stamping Plant\" sign confirmed in Street View.",
+        "mapsUrl": "https://www.google.com/maps/@42.78650,-78.84280,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Continuous chain-link perimeter fence rings the property (confirmed in Street View along the Route 5 service road). Main controlled entrance off the NW service road into the front parking/staging lot.",
+          "guardShack": "A small structure sits at the building base beside the entrance gate; from highway-distance Street View it could be a guard booth or a utility/electrical structure - cannot confirm staffing, flagged uncertain.",
+          "remoteGs": "Set to true on the basis that a gate exists but no booth is clearly confirmed; low confidence.",
+          "railServed": "Multi-track rail yard runs into the property along the entire east/SE side - clearly rail-served (typical for a stamping plant: inbound steel coil, outbound panels).",
+          "dropArea": "South and SE yards are full of steel-coil / material storage racks, not parked trailers; only a handful of trailers visible. Not a trailer drop yard.",
+          "dockDoorCount": "Dock canopies visible along the east building face near the rail yard; count is an overhead estimate.",
+          "urbanRural": "Site is inside the Buffalo metro fabric (Blasdell/Lackawanna), bordered by Route 5 and dense industrial/residential development -> Urban.",
+          "fastLaneOpportunity": "Large open paved frontage between Route 5 and the building leaves ample room for additional lanes.",
+          "entryLanes": "Lane count not resolvable from highway-distance Street View."
+        }
+      },
+      {
+        "id": "21-chicago-stamping-plant",
+        "name": "Ford - Chicago Stamping Plant, Chicago Heights IL",
+        "type": "Stamping Plant",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 41.50315,
+          "lng": -87.6023
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.4995,
+            "west": -87.6085,
+            "north": 41.5056,
+            "east": -87.5975
+          },
+          "truckGate": {
+            "south": 41.5056,
+            "west": -87.60175,
+            "north": 41.50625,
+            "east": -87.6011
+          },
+          "dropYards": [
+            {
+              "south": 41.5023,
+              "west": -87.6056,
+              "north": 41.5037,
+              "east": -87.6033
+            },
+            {
+              "south": 41.4998,
+              "west": -87.5998,
+              "north": 41.5014,
+              "east": -87.5976
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.5015,
+              "west": -87.6028,
+              "north": 41.5026,
+              "east": -87.5998
+            },
+            {
+              "south": 41.5023,
+              "west": -87.5992,
+              "north": 41.5042,
+              "east": -87.598
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 154,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Stamping Plant\nResolved coordinates: 41.50315, -87.60230\nConfidence: High\n\n---",
+        "mapsUrl": "https://www.google.com/maps/@41.50315,-87.60230,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster lat/lng (41.506099,-87.673466) was ~6 km off, landing on a retail strip on W Lincoln Hwy in Chicago Heights. Correct site is 1000 E Lincoln Hwy at the Chicago Heights/Ford Heights line, ~41.50315,-87.60230, confirmed via web research and satellite (a ~2M sq ft stamping plant, opened 1956, 136-acre Ford parcel).",
+          "truckGate": "Single controlled entrance off the south side of Lincoln Hwy at a signalized 4-way intersection (~41.5060,-87.6014). Chain-link gate across the driveway with access-control signage ('STOP / NO TRUCK ... ENTRY ... ACCESS ... ONLY'). A former second truck entrance ~250 m west (~41.5061,-87.6045) is barricaded with concrete jersey barriers and out of service.",
+          "guardShack": "A small structure with a 1-vehicle footprint sits beside the gate driveway just inside the property (visible at z21 satellite and in Street View). Consistent with a guard booth; medium confidence as resolution does not let me confirm multi-side windows.",
+          "drivewayShort": "Gate sits close to the public highway; the approach offers room for only 1-2 trucks before reaching the office parking area.",
+          "backupSensitive": "Gate is at a busy signalized intersection on a 5-lane arterial (Lincoln Hwy / US-30 corridor); a truck queue at the gate would quickly spill toward the intersection.",
+          "dockDoors": "Dock banks are on the building's south and east faces (trailers seen backed in). Estimated 45 total doors across faces; rooftop imagery obscures full counts - low confidence.",
+          "dropArea": "Two large trailer drop yards: one on the south/SW side (trailers in rows amid laydown storage) and one on the SE side (~40+ trailers in tidy rows). Combined well over 50 trailer stalls.",
+          "railServed": "Multiple parallel rail tracks and a rail spur run along the entire south boundary with railcars present - heavy inbound steel-coil rail service typical of a stamping plant.",
+          "shipRcvSeparate": "Dock activity is split between the south face and the SE face, indicating physically separate dock clusters.",
+          "multipleFacilities": "false - one large connected stamping building; a small detached structure (guard/ancillary) does not count as a separate facility cluster.",
+          "buildingCount": "Main stamping building plus the gate/guard structure = 2.",
+          "postGateStaging": "Large paved yard areas inside the gate before the dock faces provide ample internal truck holding space.",
+          "urbanRural": "Site sits within the dense south-suburban Chicago industrial fabric (Chicago Heights / Ford Heights), bordered by other plants, a salvage yard and residential blocks - Urban.",
+          "multiStep": "No clearly visible second checkpoint after the gate; left false."
+        }
+      },
+      {
+        "id": "22-national-parts-distribution-center",
+        "name": "Ford - National Parts Distribution Center, Livonia MI",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "railServed"
+        ],
+        "center": {
+          "lat": 42.3728,
+          "lng": -83.336
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.369,
+            "west": -83.3385,
+            "north": 42.378,
+            "east": -83.3334
+          },
+          "truckGate": {
+            "south": 42.3717,
+            "west": -83.3342,
+            "north": 42.3723,
+            "east": -83.3335
+          },
+          "dropYards": [
+            {
+              "south": 42.3757,
+              "west": -83.338,
+              "north": 42.3772,
+              "east": -83.3342
+            },
+            {
+              "south": 42.372,
+              "west": -83.3355,
+              "north": 42.375,
+              "east": -83.334
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 42.3698,
+              "west": -83.3356,
+              "north": 42.3756,
+              "east": -83.3344
+            }
+          ],
+          "staging": {
+            "south": 42.37,
+            "west": -83.3344,
+            "north": 42.3755,
+            "east": -83.3335
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 100,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster coords (42.3728, -83.33552) land on the east edge of a very large warehouse\n  on Middlebelt Rd — they are essentially correct (the geocode \"movedMeters 3497\" was\n  measured against an earlier wrong point, not a current error).\n- Probed the building and confirmed: a ~1M sq ft distribution warehouse running\n  north-south along Middlebelt Rd, dock doors on the east face, trailers backed in.\n- Web research confirms address 11871 Middlebelt Rd, Livonia, MI 48150 — Ford\n  Customer Service Division National Parts Distribution Center, opened 1951 (once the\n  world's largest parts warehouse under one roof, ~1M sq ft).\n- Locked center: 42.37280, -83.33600.",
+        "mapsUrl": "https://www.google.com/maps/@42.37280,-83.33600,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Continuous chain-link perimeter fence rings the property along Middlebelt Rd (confirmed in 2025 Street View). Controlled driveway entrances through the fence into the dock yard.",
+          "guardShack": "No clearly identifiable staffed booth at the entrances in Street View; small structures present but not confirmable as guard booths - flagged uncertain.",
+          "remoteGs": "Gate present, no confirmed booth - set true at low confidence.",
+          "dockDoors": "Long bank of dock doors running the full east face of the ~1M sq ft building with trailers backed in; ~70 estimated -> 50+ band.",
+          "dropArea": "Large dedicated trailer-storage yard north of the property across the CSX rail line, plus trailers staged in the east yard; well over 50 -> 50+ band.",
+          "dropYard": "Dedicated trailer-storage lot (dozens of trailers) immediately north across the rail line.",
+          "railServed": "CSX rail line with sidings runs along the entire north edge of the property; rail cars present on the siding. A direct spur into the building is not clearly visible - set true at medium confidence.",
+          "multipleFacilities": "Main ~1M sq ft DC plus a separate office/support building and trailer yard on the same campus.",
+          "urbanRural": "Dense Livonia industrial/commercial corridor on Middlebelt Rd between major roads -> Urban.",
+          "fastLaneOpportunity": "Wide paved yard and multiple driveway aprons leave room for an express lane."
+        }
+      },
+      {
+        "id": "23-parts-redistribution-center",
+        "name": "Ford - Parts Redistribution Center, Brownstown Township MI",
+        "type": "Parts Distribution / Redistribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 42.1764,
+          "lng": -83.2812
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.1725,
+            "west": -83.2872,
+            "north": 42.1815,
+            "east": -83.2755
+          },
+          "truckGate": {
+            "south": 42.1745,
+            "west": -83.287,
+            "north": 42.1756,
+            "east": -83.286
+          },
+          "dropYards": [
+            {
+              "south": 42.1726,
+              "west": -83.2856,
+              "north": 42.1742,
+              "east": -83.28
+            },
+            {
+              "south": 42.18,
+              "west": -83.285,
+              "north": 42.1812,
+              "east": -83.279
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 42.174,
+              "west": -83.2856,
+              "north": 42.1746,
+              "east": -83.28
+            },
+            {
+              "south": 42.1792,
+              "west": -83.2848,
+              "north": 42.1799,
+              "east": -83.279
+            }
+          ],
+          "staging": {
+            "south": 42.176,
+            "west": -83.2778,
+            "north": 42.179,
+            "east": -83.276
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 200,
+          "trailerParkingCapacity": 350,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 200,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster coords (42.176414, -83.281372) land squarely on a massive distribution\n  warehouse — they are correct (the geocode \"movedMeters 5444\" was measured against an\n  earlier wrong point, not a current error).\n- Web research confirms the facility: **Ford Parts Redistribution Center, 25555\n  Pennsylvania Rd, Brownstown Charter Twp / Romulus, MI 48174** — a Ford Customer\n  Service Division redistribution center.\n- Locked center: 42.17640, -83.28120.",
+        "mapsUrl": "https://www.google.com/maps/@42.17640,-83.28120,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Continuous chain-link perimeter fence rings the property (confirmed in 2024 Street View along Inkster Rd). Single controlled entry via a long ~600m private access road from Pennsylvania Rd to the north.",
+          "guardShack": "Access road is private - Street View does not go down it. A small structure is visible near the building-end yard entrance but cannot be confirmed as a staffed guard booth. Flagged uncertain.",
+          "remoteGs": "Gate present; no confirmed booth - set true at low confidence.",
+          "preGateStaging": "The long private access road and its widenings provide ample off-road truck waiting space before the yard.",
+          "dockDoors": "Dock doors with trailers backed in along the north and south building faces; ~90 estimated -> 50+ band.",
+          "dropArea": "Very large organized trailer-storage yards on the north and south sides - well over 200 trailers visible -> 50+ band.",
+          "dropYard": "Two dedicated trailer-storage lots (north and south yards) packed with parked trailers.",
+          "shipRcvSeparate": "Dock banks on physically separate north and south building faces.",
+          "railServed": "A rail line passes well east of the property; no spur enters the site - not rail-served.",
+          "urbanRural": "Edge-of-township site surrounded by woods, open fields and low-density residential; isolated industrial setting -> Rural.",
+          "fastLaneOpportunity": "Wide private access road and large paved yard aprons leave clear room for an express lane.",
+          "trailerParkingCapacity": "Capacity is a high-confidence-range overhead estimate from the dense trailer rows."
+        }
+      },
+      {
+        "id": "24-parts-distribution-center",
+        "name": "Ford - Parts Distribution Center, Rancho Cucamonga CA",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 34.0999,
+          "lng": -117.5525
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.099,
+            "west": -117.556,
+            "north": 34.1011,
+            "east": -117.5492
+          },
+          "truckGate": {
+            "south": 34.099,
+            "west": -117.5519,
+            "north": 34.0995,
+            "east": -117.5513
+          },
+          "dropYards": [
+            {
+              "south": 34.0993,
+              "west": -117.5552,
+              "north": 34.09985,
+              "east": -117.5498
+            },
+            {
+              "south": 34.1003,
+              "west": -117.5553,
+              "north": 34.10095,
+              "east": -117.5496
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.09965,
+              "west": -117.5552,
+              "north": 34.1,
+              "east": -117.5498
+            },
+            {
+              "south": 34.1,
+              "west": -117.5552,
+              "north": 34.1004,
+              "east": -117.5496
+            }
+          ],
+          "staging": {
+            "south": 34.0993,
+            "west": -117.553,
+            "north": 34.09985,
+            "east": -117.5508
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 28,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster coords (34.099865, -117.551907) are ROOFTOP-accurate and land on the correct\n  building — a large solar-roofed cross-dock warehouse on Milliken Ave.\n- Web research confirms 8449 Milliken Ave, Rancho Cucamonga, CA 91730 — a ~449,370\n  sq ft warehouse/distribution building (completed 2000, \"Prologis Rancho Cucamonga\n  Distribution Center\"), leased by Ford as its West Coast Parts Distribution Center.\n- Locked center: 34.09990, -117.55250.",
+        "mapsUrl": "https://www.google.com/maps/@34.09990,-117.55250,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Modern (built 2000) ~449k sq ft cross-dock warehouse. Office driveway has a visible sliding gate (2025 Street View); the two truck yards (north and south faces) are fenced/walled with controlled driveway entrances.",
+          "guardShack": "No staffed guard booth visible at the driveway entrances in Street View; entrances are gated but unmanned-appearing. Flagged uncertain.",
+          "remoteGs": "Controlled gates, no booth - set true at low confidence.",
+          "dockDoors": "Long continuous dock-door banks on BOTH the north and south building faces with many trailers backed in; ~70 estimated -> 50+ band.",
+          "dropArea": "Trailer parking in both the south yard and the shared north yard; ~55 trailers visible -> 25-50 / borderline 50+ band, called 25-50 conservatively.",
+          "dropYard": "Dedicated trailer-parking lots on both the south and north sides of the building.",
+          "shipRcvSeparate": "True cross-dock building - dock banks on physically separate north and south faces.",
+          "entryExitSeparate": "Separate truck yards / driveways serve the north and south dock faces.",
+          "railServed": "No rail spur; dense Inland Empire warehouse district served entirely by truck.",
+          "urbanRural": "Dense Rancho Cucamonga industrial/logistics district off a major arterial (Milliken Ave) -> Urban.",
+          "fastLaneOpportunity": "Wide truck yards and multiple driveway aprons leave room for an express lane.",
+          "siteAreaAcres": "~449k sq ft building on a ~28-acre parcel (overhead estimate from the perimeter box)."
+        }
+      }
+    ]
+  }
+}

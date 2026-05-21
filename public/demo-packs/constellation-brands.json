@@ -1,0 +1,1075 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:35:38.701Z",
+  "account": {
+    "slug": "constellation-brands",
+    "displayName": "Constellation Brands",
+    "archetype": "beverage",
+    "siteCount": 11,
+    "coverageNote": {
+      "auditedCount": 11,
+      "estimatedFootprint": null,
+      "droppedStubCount": 0,
+      "capHit": false,
+      "note": "Audited all 11 identifiable facilities."
+    }
+  },
+  "research": {
+    "facility_count": 11,
+    "audited_facilities": 11,
+    "source": "yard-audit",
+    "confidence": "verified",
+    "caveats": [
+      "Mount Veeder Winery / Franciscan Estate - Napa CA: audit note mentions 'sold'"
+    ]
+  },
+  "network": {
+    "bbox": [
+      -123.0943,
+      30.42175,
+      -81.6307,
+      45.0746
+    ],
+    "archetypeMix": {
+      "#3": 9,
+      "#10": 1,
+      "#1": 1
+    },
+    "totals": {
+      "dockDoors": 148,
+      "trailerCapacity": 179,
+      "gates": 10,
+      "railServed": 2,
+      "acres": 323.5
+    },
+    "sites": [
+      {
+        "id": "01-constellation-beer-dc-jurupa-valley-ca",
+        "name": "Constellation Beer DC - Jurupa Valley CA",
+        "type": "Distribution Center (beer/wine/spirits)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "preGateStaging",
+          "postGateStaging",
+          "drivewayLong",
+          "drivewayShort",
+          "backupSensitive",
+          "entryExitTogether",
+          "entryExitSeparate",
+          "entryLanes",
+          "exitLanes",
+          "fastLaneOpportunity",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "scale",
+          "dropYard",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 34.02585,
+          "lng": -117.53575
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.0241,
+            "west": -117.54,
+            "north": 34.0273,
+            "east": -117.5315
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 71,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "NONE",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Constellation Beer DC - Jurupa Valley CA\n- Type: Distribution Center (beer/wine/spirits)\n- Address: 3413 Manitou Court, Jurupa Valley, CA 92509 (also styled 91752 / Mira Loma)\n- Roster source: Commercial Observer 2023 — Constellation preleased 1.4M sq ft at the\n  \"Space Center\" development (Link Logistics / Blackstone) near I-15/SR-60; primary\n  US receiving/distribution hub for Mexico-origin beer.",
+        "mapsUrl": "https://www.google.com/maps/@34.02585,-117.53575,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "_site": "Building POSITIVELY IDENTIFIED as the Constellation Brands DC at 3413 Manitou Court (Link Logistics 'Space Center' development, Jurupa Valley CA). However, the most recent Maxar/Airbus satellite imagery shows the site MID-CONSTRUCTION: the ~1.4M sq ft warehouse shell is structurally topped out but the surrounding truck court, dock equipment, parking, and trailer yard are still raw graded dirt with construction material stockpiles. No operational yard infrastructure exists in imagery yet.",
+          "dockDoors": "Set to NONE because no dock doors / dock equipment are visible in current imagery — the dock faces are unpaved dirt. The completed facility (1.4M sq ft cross-dock) will almost certainly have 100+ dock doors (likely a '50+' band) once operational; cannot count from construction-phase imagery.",
+          "dropArea": "No trailer parking stalls striped yet; raw dirt. A facility of this scale will have a large drop yard once complete.",
+          "truckGate": "Truck entrance / guard booth not yet constructed. Modern IE cross-dock DCs of this class almost always have a guarded gate; expect truckGate=true once operational, but not confirmable from current imagery.",
+          "urbanRural": "Urban — site sits inside the dense Inland Empire (Mira Loma / Jurupa Valley) industrial corridor, immediately off I-15/SR-60, surrounded by large Amazon/Nestle/Walmart/FedEx warehouses.",
+          "railServed": "Set false: a BNSF main line runs immediately south of the parcel but no rail spur enters the building footprint in current imagery. Given the rail is at the property edge a spur could be added, but none is visible — flagged uncertain.",
+          "buildingCount": "One single very large warehouse on the Constellation parcel. The dark-roofed building to the SE and the long white warehouse to the north are separate parcels/tenants.",
+          "siteAreaAcres": "~71 acres estimated from the perimeter box (parcel ~870m E-W x ~330m N-S). Approximate.",
+          "_recommendation": "Site flagged for human review / re-audit once current satellite imagery captures the completed, operational facility. The 2023 prelease source confirms this was an under-construction build-to-suit; imagery has not yet caught up to completion."
+        }
+      },
+      {
+        "id": "02-constellation-beer-dc-wilmer-tx-dallas-i-45",
+        "name": "Constellation Beer DC - Wilmer TX (Dallas I-45)",
+        "type": "Distribution Center (beer cross-dock, rail-served)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "railServed",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 32.6212,
+          "lng": -96.7295
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.6193,
+            "west": -96.7327,
+            "north": 32.6239,
+            "east": -96.7256
+          },
+          "truckGate": {
+            "south": 32.6184,
+            "west": -96.7323,
+            "north": 32.6196,
+            "east": -96.7308
+          },
+          "dropYards": [
+            {
+              "south": 32.6198,
+              "west": -96.73,
+              "north": 32.6231,
+              "east": -96.7262
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.6197,
+              "west": -96.7312,
+              "north": 32.6233,
+              "east": -96.7266
+            },
+            {
+              "south": 32.6199,
+              "west": -96.7327,
+              "north": 32.6234,
+              "east": -96.729
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 64,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 41,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Constellation Beer DC - Wilmer TX (Dallas I-45)\n- Type: Distribution Center (beer cross-dock, rail-served)\n- Roster address: \"I-45 corridor / southern Dallas County, Wilmer, TX (approx.)\"\n- Actual operating address: 1401 W Wintergreen Rd, Hutchins, TX 75141\n- Operator: Biagi Bros (3PL handling Constellation beer distribution)\n- Roster source: Good Beer Hunting Sightlines 2016 + Biagi Bros / Evans GC —\n  450–475K sq ft build-to-suit cross-dock, rail-served, 24 rail + 64 truck dock doors.",
+        "mapsUrl": "https://www.google.com/maps/@32.62120,-96.72950,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "_site": "Facility identified as the Biagi Bros / Constellation Brands beer cross-dock at 1401 W Wintergreen Rd, Hutchins TX 75141 (roster listed it as Wilmer, but the actual operating address per Biagi Bros' own website is W Wintergreen Rd, Hutchins — same I-45/I-20 logistics corridor immediately adjacent to Wilmer). Confirmed via Biagi Bros website, Evans General Contractors project page, Good Beer Hunting 2016 Sightlines, and current (2026-02) Street View showing the operating building.",
+          "_geocode": "Roster pin (32.589661, -96.678392) was Wilmer city geometric-center and ~5 km off the real building. Re-located via Nominatim + satellite to the verified Biagi building. Locked center 32.62120, -96.72950.",
+          "truckGate": "No barrier-arm or sliding gate is clearly visible across the truck driveway in the available satellite imagery; the SW-end driveway off W Wintergreen Rd appears open. Set false but flagged uncertain — a 3PL beer DC of this class typically controls its entrance; a gate may exist but is not resolvable.",
+          "guardShack": "No guard booth resolvable at the entrance — false, uncertain.",
+          "shipRcvSeparate": "True — this is a true cross-dock with dock doors on BOTH long faces: trailers backed in along the SE apron (truck distribution) and along the NW face (rail-side / receiving). The two dock banks are on physically separate building faces.",
+          "dockDoors": "Banded 50+. Roster cites 64 truck dock doors plus 24 rail doors. Overhead count of trailers backed in on both faces is consistent with a 50+ door building; exact count not verifiable from imagery — flagged uncertain.",
+          "dropArea": "25-50 — a striped trailer-parking apron on the SE side holds dozens of drop trailers separate from active dock positions.",
+          "railServed": "Set true. A rail line runs immediately along the NW face of the building and the NW dock face is configured for rail-side handling; roster (Good Beer Hunting / Biagi / Evans GC) describes the build-to-suit as rail-served with 24 rail doors and capacity to unload four 30-car trains. A dedicated spur curving into the footprint is not crisply resolved in current imagery, so flagged uncertain — but the rail-adjacent NW dock configuration corroborates rail service.",
+          "drivewayLong": "The SE truck court is very wide / deep concrete apron — easily holds a 3+ truck queue between the entrance and the dock face.",
+          "fastLaneOpportunity": "Wide entrance apron and large open truck court provide ample paved width to add an express/bypass lane.",
+          "postGateStaging": "Large paved truck court inside the property before the dock doors functions as a holding/queue area.",
+          "urbanRural": "Rural — the site sits on the developing edge of the Hutchins industrial corridor, surrounded by farm fields and open graded land; not embedded in dense metro fabric. Per rubric, edge-of-town industrial = Rural.",
+          "siteAreaAcres": "~41 acres operational footprint (building + truck court + trailer apron) estimated from the perimeter box; the broader parcel per RealtyTrac is ~33.7 acres for the building lot — perimeter box includes adjacent paved/graded yard.",
+          "buildingCount": "One large cross-dock building. Some adjacent construction activity is visible nearby but not part of this Constellation/Biagi parcel."
+        }
+      },
+      {
+        "id": "03-constellation-beer-dc-jacksonville-fl",
+        "name": "Constellation Beer DC - Jacksonville FL",
+        "type": "Distribution Center (beer, rail-served)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "trailersVisible",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 30.42385,
+          "lng": -81.63238
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 30.42175,
+            "west": -81.634,
+            "north": 30.4256,
+            "east": -81.6307
+          },
+          "truckGate": {
+            "south": 30.4251,
+            "west": -81.6318,
+            "north": 30.42585,
+            "east": -81.631
+          },
+          "dropYards": [
+            {
+              "south": 30.4218,
+              "west": -81.6317,
+              "north": 30.4253,
+              "east": -81.6307
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 30.4219,
+              "west": -81.63215,
+              "north": 30.4253,
+              "east": -81.6315
+            },
+            {
+              "south": 30.4219,
+              "west": -81.6334,
+              "north": 30.4253,
+              "east": -81.6327
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 54,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 25,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Constellation Beer DC - Jacksonville FL\n- Type: Distribution Center (beer, rail-served)\n- Address: 600 Whittaker Road, Imeson Industrial Park, Jacksonville, FL 32218\n- Roster source: Jacksonville Daily Record 2022 — 469,830 sq ft warehouse on 24 acres,\n  ~1.5 mi east of I-95; first Constellation DC in North Florida; receives beer by rail,\n  distributes by truck; 54 docks plus trailer yard and guard house.",
+        "mapsUrl": "https://www.google.com/maps/@30.42385,-81.63238,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "_site": "Positively identified as the Constellation Brands beer DC at 600 Whittaker Road, Imeson Industrial Park, North Jacksonville FL — 469,830 SF on 24 acres, 54 docks, ~1.5 mi east of I-95, first Constellation DC in North Florida; receives beer by rail, distributes by truck. Confirmed via Jacksonville Daily Record (2022), CBRE, REBusinessOnline, and current 2025/2026 satellite + 2025-02 Street View.",
+          "_geocode": "Roster pin (ROOFTOP, moved 204 m) landed on the correct building; locked center refined to the building centroid 30.42385, -81.63238.",
+          "truckGate": "TRUE — z21 satellite and 2025-02 Street View clearly show a controlled truck entrance off Whittaker Rd at the NE corner: a landscaped median island with gate arms across the lane(s) and a vehicle stopped at the checkpoint.",
+          "guardShack": "TRUE — a small staffed guard booth sits on the entrance island beside the truck lane (clearly visible in z21 satellite and confirmed in Street View as a small white booth). Roster source explicitly notes a 'guard house.'",
+          "remoteGs": "FALSE — guard shack is present, so this is a staffed gate, not a remote kiosk.",
+          "shipRcvSeparate": "TRUE — true cross-dock: rail-side receiving docks run along the W face (rail spur alongside), truck-side shipping docks along the E face (truck court). Two dock banks on physically separate building faces.",
+          "dockDoors": "Banded 50+. Roster cites 54 docks total; dock-door rhythm visible on both the E and W faces is consistent.",
+          "dropArea": "10-25 — the E truck court holds drop trailers; a moderate number of trailer positions are visible/striped. Trailer count is modest in the captured imagery.",
+          "dropYard": "TRUE — the E-side truck court functions as a trailer drop/parking yard separate from active dock positions; roster confirms 'trailer yard.'",
+          "railServed": "TRUE — a rail spur runs N-S directly alongside the W face of the building into the property; the W dock face is configured for rail-side unloading. Roster confirms 'direct rail access; receives beer by rail.'",
+          "drivewayLong": "The E truck court is a long, wide concrete apron — easily holds a 3+ truck queue between the guarded gate and the dock face.",
+          "postGateStaging": "The wide E truck court inside the gate, before the dock doors, serves as an internal holding/queue area.",
+          "fastLaneOpportunity": "The gate apron is wide and the truck court spacious — physical room exists to add an express/bypass lane at the guarded entrance.",
+          "urbanRural": "Urban — the site sits inside Imeson Industrial Park, a dense built-out North Jacksonville industrial district surrounded on all sides by comparable distribution warehouses, within the Jacksonville metro.",
+          "trailersVisible": "~12 trailers visible in the captured imagery (E court and W apron); flagged uncertain as imagery dates vary and the count is approximate.",
+          "siteAreaAcres": "~25 acres from the perimeter box, consistent with the roster's stated 24 acres.",
+          "buildingCount": "One single warehouse on the parcel; neighboring warehouses are separate Imeson Industrial Park properties."
+        }
+      },
+      {
+        "id": "04-constellation-gonzales-winery",
+        "name": "Constellation Gonzales Winery - Gonzales CA",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "dockDoors",
+          "dropArea",
+          "scale",
+          "trailersVisible",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 36.5024,
+          "lng": -121.4347
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 36.4999,
+            "west": -121.4367,
+            "north": 36.5046,
+            "east": -121.4329
+          },
+          "truckGate": {
+            "south": 36.50025,
+            "west": -121.4349,
+            "north": 36.50065,
+            "east": -121.43435
+          },
+          "dropYards": [
+            {
+              "south": 36.5019,
+              "west": -121.4357,
+              "north": 36.5027,
+              "east": -121.4349
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 36.5017,
+              "west": -121.4349,
+              "north": 36.5023,
+              "east": -121.4341
+            }
+          ],
+          "staging": {
+            "south": 36.5005,
+            "west": -121.4351,
+            "north": 36.5013,
+            "east": -121.4342
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 10,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 41,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate (36.501207, -121.433476, GEOMETRIC_CENTER, moved 1073 m)\nlanded inside the correct industrial area but was imprecise. Satellite probing\nat zoom 16-20 plus web research positively identified the facility.\n\nThe key finding: **two separate industrial operations sit side by side on S\nAlta Street.** Street View at the SW industrial building revealed a sign\nreading \"braga ... LINE TRUCK ENTRANCE\" — that building cluster is **Braga\nFresh** (a produce/vegetable packer, 500 S Alta St), NOT Constellation. It has\na large, busy trailer yard, but it was excluded from this audit.\n\nThe Constellation Gonzales Winery (800 S Alta St) is the large complex to\nthe NE: a massive open-air tank farm (~70-80 large white wine tanks), a\nbig warehouse with an extensive rooftop solar array, a **crush/processing",
+        "mapsUrl": "https://www.google.com/maps/@36.502400,-121.434700,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facilityId": "Constellation Gonzales Winery confirmed at 800 S Alta St, Gonzales CA. The large warehouse + tank farm + crush-pad campus NE of the road is the winery. The SW industrial building with a heavy trailer yard is a SEPARATE company - Braga Fresh produce (500 S Alta St) - confirmed by a 'braga ... LINE TRUCK ENTRANCE' sign in Street View; it was excluded from this audit.",
+          "truckGate": "Winery main entrance is a divided in/out road off the public road at the SE of the campus, with a small admin/office structure beside it. No barrier arm or sliding/swing gate is visible across the truck lane in satellite imagery; Street View does not cover the private drive. Treated as an open/uncontrolled industrial entrance - marked false but low confidence.",
+          "guardShack": "Small structure near the entrance road appears to be an administrative/reception office, not a dedicated 1-3-vehicle guard booth set beside a gated lane. No guard shack identified.",
+          "remoteGs": "No truck gate identified, so remoteGs is false.",
+          "entryExitSeparate": "The entrance road is physically divided into separate inbound and outbound lanes with painted ENTER/EXIT pavement markings.",
+          "fastLaneOpportunity": "Wide divided entrance road and large paved aprons/circulation areas leave ample room to add a bypass/express lane.",
+          "drivewayLong": "Long approach: the entrance road runs several hundred feet from the public road, past the south admin buildings and around a landscaped oval, before reaching the production area - easily holds a 3+ truck queue.",
+          "dockDoors": "Winery production campus, not a freight DC. No long bank of freight dock doors visible. Estimate ~6-12 service/loading doors across the warehouse south face and crush-pad service area. Low confidence from overhead imagery.",
+          "dropArea": "A modest number of trailers (roughly 6-10) seen parked along internal roads and the crush-pad area; not a large dedicated marked drop lot. Banded 0-10, low confidence.",
+          "shipRcvSeparate": "Grape intake / crush pad (receiving) is physically distinct from the finished-goods warehouse and tank-farm loading area - effectively separate receiving and shipping zones.",
+          "postGateStaging": "Large paved circulation/holding areas inside the property between the entrance and the production buildings provide internal staging.",
+          "multipleFacilities": "Campus with multiple distinct large buildings: the main warehouse, the open-air tank farm, a crush/processing structure, and a south administrative/processing building cluster.",
+          "scale": "No truck scale / weigh platform clearly identified in the truck path; marked false with low confidence (a harvest grape scale may exist but is not confirmed in imagery).",
+          "railServed": "A rail line runs along the US-101 corridor on the east side of the property, but no rail spur enters the winery property.",
+          "urbanRural": "Edge of the small town of Gonzales, Monterey County - surrounded by farmland and vineyards, well outside any dense metro fabric.",
+          "connectivityIssue": "Rural, but immediately adjacent to the town of Gonzales and US-101 with normal cellular coverage; connectivityIssue false.",
+          "trailersVisible": "Approximately 8 trailers visible in captured imagery on the winery property (excluding the Braga Fresh yard); honest estimate.",
+          "trailerParkingCapacity": "Ample paved space could hold ~20 trailers, but the site is not laid out as a dedicated drop yard; estimate."
+        }
+      },
+      {
+        "id": "05-robert-mondavi-winery",
+        "name": "Robert Mondavi Winery - Oakville CA",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "dockDoors",
+          "dropArea",
+          "scale",
+          "trailersVisible",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 38.4357,
+          "lng": -122.4013
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.4336,
+            "west": -122.4031,
+            "north": 38.4378,
+            "east": -122.3994
+          },
+          "truckGate": {
+            "south": 38.4365,
+            "west": -122.4026,
+            "north": 38.43695,
+            "east": -122.40215
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 38.4359,
+              "west": -122.4011,
+              "north": 38.4364,
+              "east": -122.4005
+            }
+          ],
+          "staging": {
+            "south": 38.4365,
+            "west": -122.4023,
+            "north": 38.43695,
+            "east": -122.4017
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 5,
+          "trailersVisible": 2,
+          "trailerParkingCapacity": 4,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 14,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate (38.434323, -122.400476, RANGE_INTERPOLATED, moved only\n4 m) was placed precisely against the street address, but the address\ninterpolation landed in the To Kalon vineyard just SE of the actual built\ncampus. Satellite probing at zoom 16-21 located the real building complex\n~150 m NW of the roster point, centered ~38.4357, -122.4013.\n\nThis is positively the Robert Mondavi Winery — the historic Napa Valley\nestate winery in Oakville, anchored by the renowned To Kalon Vineyard, with\nthe iconic Cliff May Mission-style arch and bell tower. Web research confirms\nthe estate reopened to visitors on April 20, 2026 following a multi-year\ntransformation (PRNewswire / Constellation press releases). The estate sits on\nthe EAST side of CA-29 / St. Helena Highway, surrounded by vineyards.",
+        "mapsUrl": "https://www.google.com/maps/@38.435700,-122.401300,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facilityId": "Robert Mondavi Winery confirmed at 7801 St. Helena Highway, Oakville CA - the iconic Napa Valley estate winery (To Kalon Vineyard), reopened April 2026 after a multi-year transformation. The estate sits on the EAST side of CA-29 / St. Helena Highway. The roster coordinate (38.434323, -122.400476) landed in the To Kalon vineyard just SE of the building complex; the actual built campus center is ~38.4357, -122.4013.",
+          "truckGate": "Main entrance is an open landscaped driveway off CA-29 with a stone monument sign pier and visitor parking; no barrier arm, sliding/swing gate, or checkpoint pinch-point across the lane (Street View 2024-08). Open winery estate entrance - marked false.",
+          "guardShack": "No staffed guard booth at the entrance. Only a landscaped monument sign and the visitor parking lot.",
+          "remoteGs": "No truck gate identified, so remoteGs is false.",
+          "drivewayShort": "Short approach: the entrance driveway runs only a short distance from CA-29 into the front parking/courtyard area before reaching the buildings - holds at most 1-2 trucks.",
+          "entryExitTogether": "Trucks and visitors enter and exit through the same single driveway off CA-29.",
+          "dockDoors": "Estate winery, not a freight DC. No long bank of freight dock doors. A small service/loading area on the production-cellar building handles wine and grape movement; estimate ~3-7 service doors. Low confidence from overhead imagery.",
+          "dropArea": "No marked trailer-parking stalls holding bobtailed trailers; not a drop yard. dropArea NONE.",
+          "shipRcvSeparate": "No physically separate shipping and receiving dock clusters; a single service area on the production building. shipRcvSeparate false.",
+          "multipleFacilities": "Estate campus with multiple distinct buildings: the large red-roofed production/aging cellar, a visitor/hospitality building with the iconic Cliff May arch and courtyard, an outdoor stainless tank farm, a crush/processing structure, and ancillary estate buildings.",
+          "scale": "No truck scale / weigh platform identified in the truck path; marked false with low confidence (a harvest grape scale may exist near the crush pad but is not confirmed in imagery).",
+          "railServed": "A rail line runs alongside CA-29 on the property's west frontage, but no rail spur enters the winery property.",
+          "urbanRural": "Heart of Napa Valley wine country - the estate is surrounded by the To Kalon vineyard and other vineyards near the small unincorporated community of Oakville, well outside any dense metro fabric.",
+          "connectivityIssue": "Rural, but Oakville / central Napa Valley is well-developed wine country with normal cellular coverage; connectivityIssue false.",
+          "trailersVisible": "Roughly 2 trucks/trailers visible in the production service area in captured imagery; honest estimate - the site is a visitor estate, not a trailer-heavy yard.",
+          "trailerParkingCapacity": "Limited service-yard space; could hold only ~4 trailers; estimate.",
+          "siteAreaAcres": "Perimeter box covers the developed estate campus (buildings, tank farm, crush pad, parking, immediate landscaping) - ~14 acres. The broader To Kalon vineyard holding is far larger but is farmland, not yard."
+        }
+      },
+      {
+        "id": "06-the-prisoner-wine-company",
+        "name": "The Prisoner Wine Company - St. Helena CA",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoors",
+          "connectivityIssue"
+        ],
+        "center": {
+          "lat": 38.47475,
+          "lng": -122.43185
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.4726,
+            "west": -122.4339,
+            "north": 38.4764,
+            "east": -122.4303
+          },
+          "truckGate": {
+            "south": 38.47275,
+            "west": -122.434,
+            "north": 38.47298,
+            "east": -122.4337
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 38.47475,
+              "west": -122.43225,
+              "north": 38.4752,
+              "east": -122.4318
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 3,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 4,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 33,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (38.474583, -122.432152, ROOFTOP, moved 98 m) landed directly\non the winery. Satellite probe at z17/z18 showed a large industrial winery\nbuilding with a solar-panel roof, an outdoor stainless-steel tank farm, and\nwater-treatment ponds — all surrounded by vineyards. Web search confirmed The\nPrisoner Wine Company operates a production estate and tasting room at this\naddress (1178 Galleron Road). Locked center on the production building cluster.",
+        "mapsUrl": "https://www.google.com/maps/@38.474750,-122.431850,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Driveway entrance off Galleron Road flanked by two decorative stone monument pillars; no barrier arm, sliding/swing gate, or checkpoint pinch-point across the lane. Open winery entrance.",
+          "guardShack": "No staffed booth at the entrance. Only a small white utility cabinet beside the lane and the two ornamental stone pillars.",
+          "drivewayLong": "Long approach from Galleron Road across a rail crossing, then up the west side of the property to the building/parking area — easily holds a 3+ truck queue.",
+          "dockDoors": "No row of dedicated freight dock doors. A small winery service/loading area on the NW (crush-pad) face of the production building shows roughly 2-4 service doors. Low confidence on exact count from overhead imagery.",
+          "railServed": "A rail line (Napa Valley Wine Train corridor) runs along Galleron Road and the property driveway crosses it at grade, but no rail spur enters the property.",
+          "urbanRural": "Napa Valley agricultural setting — winery surrounded entirely by vineyards near St. Helena, well outside any dense metro fabric.",
+          "connectivityIssue": "Rural setting, but St. Helena/Napa Valley is well-developed wine country with reasonable cellular coverage; marked uncertain.",
+          "multipleFacilities": "Single integrated winery building cluster plus a separate small structure to the north (treatment/equipment); treated as one campus, multipleFacilities false."
+        }
+      },
+      {
+        "id": "07-mount-veeder-winery-franciscan-estate",
+        "name": "Mount Veeder Winery / Franciscan Estate - Napa CA",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoors",
+          "connectivityIssue",
+          "siteAreaAcres",
+          "drivewayShort"
+        ],
+        "center": {
+          "lat": 38.36045,
+          "lng": -122.4019
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.3575,
+            "west": -122.4052,
+            "north": 38.3635,
+            "east": -122.399
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 60,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "NONE",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": true,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinates (38.298851, -122.282898, ROOFTOP) landed in downtown\nNapa on the Napa River — the urban tasting room location (930 3rd St), not a\nproduction site. Web research established the relevant estate is the hillside\nvineyard at 1999 Mount Veeder Road. Geocoded that address via the Google\nGeocoding API to 38.3606213, -122.4017761 (ROOFTOP) and audited there.\n\nSatellite probes (z17-z19) confirmed a terraced mountain vineyard estate in the\nMayacamas Range: blocks of contoured vineyard on forested slopes, a small\nirrigation pond, and a single modest estate building reached by dirt access\ntracks. Street View on Mount Veeder Road showed only a narrow rural mountain\nroad with deer fencing — no commercial entrance.",
+        "mapsUrl": "https://www.google.com/maps/@38.360450,-122.401900,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facilityResolution": "Roster coords (38.298851, -122.282898) landed on the downtown Napa tasting room (930 3rd St). The actual Mount Veeder estate is the hillside vineyard at 1999 Mt Veeder Rd, Napa — geocoded via Google Geocoding API to 38.3606213, -122.4017761 (ROOFTOP). Audited the estate.",
+          "facilityNature": "This is a hillside vineyard estate, not a freight/production warehouse. Web research: Mount Veeder Winery is a Constellation brand whose bulk wine has historically been produced at the shared Franciscan/Galleron Road facility (now The Prisoner Wine Co., idx 6). The Mt Veeder Rd site is a terraced mountain vineyard with one modest estate building. Franciscan Estate brand itself was sold to E&J Gallo in 2021 and is no longer Constellation-owned; Mount Veeder remains with Constellation.",
+          "truckGate": "No controlled truck entrance. Access is a narrow one-lane dirt/gravel road off Mount Veeder Road; Street View shows only deer fencing along a rural mountain road, no barrier, no checkpoint.",
+          "guardShack": "No staffed booth anywhere on the property.",
+          "dockDoors": "No loading docks. Single small estate building with an adjacent dirt yard clearing. No freight-dock rhythm visible.",
+          "drivewayShort": "Single short dirt access track from Mount Veeder Road to the building; not built for truck queuing.",
+          "urbanRural": "Remote hillside in the Mayacamas Range, surrounded by forest and terraced vineyard, far from town.",
+          "connectivityIssue": "Isolated mountain location with heavy tree cover and no nearby development — cellular coverage likely weak. Medium confidence.",
+          "siteAreaAcres": "Perimeter is an estimate of the vineyard estate parcel; the built footprint is far smaller.",
+          "buildingCount": "One distinct estate building visible; small outbuildings may exist under tree canopy."
+        }
+      },
+      {
+        "id": "08-booker-vineyard-my-favorite-neighbor",
+        "name": "Booker Vineyard / My Favorite Neighbor - Paso Robles CA",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoors",
+          "connectivityIssue"
+        ],
+        "center": {
+          "lat": 35.57865,
+          "lng": -120.74015
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.5779,
+            "west": -120.7412,
+            "north": 35.5796,
+            "east": -120.7388
+          },
+          "truckGate": {
+            "south": 35.57812,
+            "west": -120.7403,
+            "north": 35.57832,
+            "east": -120.74
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 35.5784,
+              "west": -120.74035,
+              "north": 35.5788,
+              "east": -120.7399
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 2,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 3,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 14,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (35.578597, -120.739649, ROOFTOP, moved 44 m) landed on the\nwinery. Satellite probes (z17-z21) showed an estate winery on Paso Robles'\nwestside: a production building cluster, a hospitality/tasting building, and\nestate vineyards/olive groves on all sides. Web search confirmed Booker Vineyard\noperates at 2644 Anderson Rd and produces the My Favorite Neighbor Cabernet\nbrand in which Constellation holds a stake. Locked center on the production\ncomplex.",
+        "mapsUrl": "https://www.google.com/maps/@35.578650,-120.740150,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Driveway entrance off Anderson Road has a low decorative metal arch / cattle-grate gate frame, not a barrier arm or a controlled checkpoint that closes the truck lane. Wire stock fencing along the property line. Treated as open estate access — truckGate false.",
+          "guardShack": "No staffed booth at the entrance. Estate-style entry with decorative metalwork only.",
+          "drivewayLong": "Long winding driveway from Anderson Road through olive trees and vineyard up to the production buildings — easily holds a 3+ vehicle queue.",
+          "dockDoors": "Small estate winery — production complex of a long solar-roofed winery building plus a red-roof building, with clustered white wine tanks. No bank of dedicated freight dock doors; ~2 at-grade roll-up/service doors estimated. Low confidence on exact count.",
+          "dropArea": "No marked trailer-parking stalls with parked trailers. A row of staged white tanks/bins sits along the upper driveway, but that is production storage, not a trailer drop area.",
+          "buildingCount": "Three distinct structures: the main winery/barrel building, an adjacent red-roof production building, and the hospitality/tasting building to the east.",
+          "urbanRural": "Paso Robles westside wine country — winery surrounded by estate vineyards and olive groves, far from any dense urban fabric.",
+          "connectivityIssue": "Rural but within the well-developed Paso Robles wine region; cellular coverage likely adequate. Marked uncertain.",
+          "railServed": "No rail anywhere near the property."
+        }
+      },
+      {
+        "id": "09-sea-smoke-cellars",
+        "name": "Sea Smoke Cellars - Lompoc CA",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoors"
+        ],
+        "center": {
+          "lat": 34.664044,
+          "lng": -120.465851
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.66325,
+            "west": -120.4665,
+            "north": 34.66485,
+            "east": -120.46525
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 34.6636,
+              "west": -120.4657,
+              "north": 34.66455,
+              "east": -120.46535
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 3,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 2,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 4.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates carried `movedMeters: 1399`, so the address was\nre-geocoded via the Google Geocoding API: 1604 N O St, Lompoc resolves to\nexactly 34.6640444, -120.4658515 (ROOFTOP) — identical to the roster coords.\nSatellite probes (z17-z21) showed a long winery production building (maroon\nroof) in the Lompoc industrial / \"Wine Ghetto\" district near the city airport.\nWeb search confirmed Sea Smoke Cellars' winemaking facility is at 1604 N O\nStreet and that Constellation Brands acquired Sea Smoke in May 2024. Locked\ncenter on that building.",
+        "mapsUrl": "https://www.google.com/maps/@34.664044,-120.465851,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No controlled truck entrance. Property fronts a public street (N O Street) that ends in a cul-de-sac turnaround; the building's parking and the east-side tank/work yard are reached directly from the street with no barrier arm, gate, or checkpoint.",
+          "guardShack": "No staffed booth anywhere on the property. Modern office facade on the west end, but no guard structure.",
+          "drivewayShort": "Short access straight off the N O Street cul-de-sac to the parking lot and yard; minimal queuing depth.",
+          "dockDoors": "Winery production building. No bank of dedicated freight dock doors visible. Personnel doors and ~2-4 at-grade service/roll-up doors estimated along the working (east) face by the tank farm. Low confidence on exact count.",
+          "dropArea": "No marked trailer-parking stalls with parked trailers. The east-side row is outdoor wine storage tanks, not a trailer drop.",
+          "urbanRural": "Lompoc is a small city (~42K). The facility sits in the Lompoc industrial/'Wine Ghetto' district on the edge of town next to the airport and farmland. Per rubric, small-town industrial resolves to Rural.",
+          "buildingCount": "Single long winery production building (the maroon-roof structure at 1604 N O Street). The adjacent large white building to the east is a separate, unrelated tenant.",
+          "railServed": "No rail spur into the property.",
+          "publicAccess": "Sea Smoke is not open for public tastings; wines are pre-allocated. Operation is winery production and allocated shipping only."
+        }
+      },
+      {
+        "id": "10-lingua-franca-winery",
+        "name": "Lingua Franca Winery - Salem OR",
+        "type": "Winery / Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoors",
+          "connectivityIssue"
+        ],
+        "center": {
+          "lat": 45.0732,
+          "lng": -123.09345
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 45.0724,
+            "west": -123.0943,
+            "north": 45.0746,
+            "east": -123.0923
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 45.0728,
+              "west": -123.0937,
+              "north": 45.07315,
+              "east": -123.09325
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 3,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 3,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 9,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": true,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (45.073266, -123.093419, ROOFTOP, moved 15 m) landed on the\nwinery. Satellite probes (z17-z21) showed a large winery production building\n(blue-grey roof) with a separate smaller building, parking, and a pond, set\namid vineyards and farmland in the Eola-Amity Hills. Web search confirmed Lingua\nFranca operates its estate winery at 9675 Hopewell Rd NW; Constellation Brands\nacquired Lingua Franca in April 2022 and retains it. Locked center on the\nproduction building.",
+        "mapsUrl": "https://www.google.com/maps/@45.073200,-123.093450,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No controlled truck entrance. A long winery driveway runs off Hopewell Road NW (set back, screened by trees/hedgerow with winery signs at the road) to the parking lot and building; no barrier arm, gate, or checkpoint visible.",
+          "guardShack": "No staffed booth anywhere on the property.",
+          "drivewayLong": "Long driveway from Hopewell Road NW past the parking lot to the building cluster, with paved aprons around the building — easily holds 3+ vehicles.",
+          "dockDoors": "Winery production building. No bank of dedicated freight dock doors. The south end has a covered crush-pad structure and an at-grade service apron; ~2-4 service/roll-up doors estimated. Low confidence on exact count.",
+          "dropArea": "No marked trailer-parking stalls with parked trailers.",
+          "buildingCount": "Two distinct structures: the main winery production building and a smaller separate building to the NW with its own paved apron.",
+          "urbanRural": "Eola-Amity Hills (Willamette Valley) — winery surrounded by estate vineyards and farmland on a rural two-lane road, well outside Salem's urban fabric.",
+          "connectivityIssue": "Rural farmland setting away from town; cellular coverage may be moderate. Medium confidence — flagged.",
+          "railServed": "No rail spur into the property."
+        }
+      },
+      {
+        "id": "11-high-west-distillery",
+        "name": "High West Distillery - Wanship UT",
+        "type": "Distillery / Production Facility",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dockDoors",
+          "connectivityIssue",
+          "multiStep",
+          "buildingCount"
+        ],
+        "center": {
+          "lat": 40.808264,
+          "lng": -111.444419
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.8066,
+            "west": -111.4458,
+            "north": 40.8094,
+            "east": -111.4432
+          },
+          "truckGate": {
+            "south": 40.7981,
+            "west": -111.4474,
+            "north": 40.7985,
+            "east": -111.4469
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 40.8085,
+              "west": -111.44495,
+              "north": 40.80885,
+              "east": -111.44455
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 4,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 3,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 11,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": true,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (40.808264, -111.444419, ROOFTOP, moved 23 m) landed on the\ndistillery complex. Satellite probes (z17-z21) showed a large cluster of\nred-roof buildings on a hillside, with parking lots and a long winding private\naccess road — consistent with a production distillery and hospitality complex.\nWeb search confirmed High West Distillery's Wanship distillery (opened 2015) is\nat 27649 Old Lincoln Highway on the Blue Sky Ranch property. Locked center on\nthe distillery building complex.",
+        "mapsUrl": "https://www.google.com/maps/@40.808264,-111.444419,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "High West's official distillery directions state visitors and deliveries follow Old Lincoln Highway ~2 miles to the 'Blue Sky Ranch gatehouse', after which they are directed to the distillery. The entire Blue Sky Ranch is gated private property reached by one access road — so a controlled property gate exists. Marked uncertain because the gatehouse structure could not be pinpointed in satellite imagery (no Street View on the private road) and it controls the whole ranch resort, not the distillery dock specifically. The truckGate geofence is an approximate box near the base parking area.",
+          "guardShack": "A 'gatehouse' is explicitly described in High West's official directions, implying a staffed booth at the ranch entrance. Could not be visually confirmed in imagery; marked uncertain.",
+          "remoteGs": "False because a staffed gatehouse is described rather than a kiosk/call-box.",
+          "drivewayLong": "Access to the distillery is a long winding private mountain road from the base parking area up to the building cluster; ample queue depth.",
+          "dockDoors": "Craft distillery. The NW face of the main distillery building has a covered/canopy loading apron with a few tanks and equipment; ~3-5 service/loading doors estimated. No large freight-dock bank. Low confidence on exact count.",
+          "dropArea": "No marked trailer-parking stalls with parked trailers. Lots near the distillery are visitor/employee car parking.",
+          "buildingCount": "The distillery complex is several connected/adjacent red-roof structures (distillery, refectory/restaurant, general store). Treated as one campus; multipleFacilities left false as it is a single integrated complex. buildingCount ~3 distinct roof sections — marked uncertain.",
+          "urbanRural": "Remote hillside in the mountains near Wanship/Park City, surrounded by open rangeland on the private Blue Sky Ranch; clearly Rural.",
+          "connectivityIssue": "Isolated mountain location far from any town, on a large private ranch — cellular coverage likely weak. Medium confidence.",
+          "multiStep": "Possible second checkpoint (ranch gatehouse, then distillery arrival) but no clear evidence of a separate dock-side checkpoint; left false, flagged uncertain.",
+          "railServed": "No rail spur into the property."
+        }
+      }
+    ]
+  }
+}

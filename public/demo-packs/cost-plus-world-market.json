@@ -1,0 +1,286 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:35:56.342Z",
+  "account": {
+    "slug": "cost-plus-world-market",
+    "displayName": "Cost Plus World Market",
+    "archetype": "retailer",
+    "siteCount": 2,
+    "coverageNote": {
+      "auditedCount": 2,
+      "estimatedFootprint": null,
+      "droppedStubCount": 0,
+      "capHit": false,
+      "note": "Audited all 2 identifiable facilities."
+    }
+  },
+  "research": {
+    "facility_count": 5,
+    "audited_facilities": 2,
+    "source": "yard-audit",
+    "confidence": "inferred",
+    "caveats": [
+      "Cost Plus World Market - Stockton CA Distribution Center: audit note mentions 'closed'"
+    ]
+  },
+  "network": {
+    "bbox": [
+      -121.2596,
+      36.798,
+      -76.7105,
+      37.9187
+    ],
+    "archetypeMix": {
+      "#9": 1,
+      "#10": 1
+    },
+    "totals": {
+      "dockDoors": 200,
+      "trailerCapacity": 500,
+      "gates": 2,
+      "railServed": 1,
+      "acres": 170
+    },
+    "sites": [
+      {
+        "id": "01-cost-plus-world-market-stockton-ca-distribution-center",
+        "name": "Cost Plus World Market - Stockton CA Distribution Center",
+        "type": "Distribution Center / Import Warehouse (West Coast)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "truckGate",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 37.916788,
+          "lng": -121.25568
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 37.9135,
+            "west": -121.2596,
+            "north": 37.9187,
+            "east": -121.2518
+          },
+          "truckGate": {
+            "south": 37.9156,
+            "west": -121.253,
+            "north": 37.9164,
+            "east": -121.2521
+          },
+          "dropYards": [
+            {
+              "south": 37.9179,
+              "west": -121.256,
+              "north": 37.9188,
+              "east": -121.253
+            },
+            {
+              "south": 37.9161,
+              "west": -121.2532,
+              "north": 37.9186,
+              "east": -121.2518
+            },
+            {
+              "south": 37.9135,
+              "west": -121.2596,
+              "north": 37.9147,
+              "east": -121.2518
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 37.9182,
+              "west": -121.2596,
+              "north": 37.9187,
+              "east": -121.2524
+            },
+            {
+              "south": 37.915,
+              "west": -121.2592,
+              "north": 37.9156,
+              "east": -121.2522
+            }
+          ],
+          "staging": {
+            "south": 37.9144,
+            "west": -121.2596,
+            "north": 37.9149,
+            "east": -121.2518
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 240,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 95,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate sits squarely on a very large rectangular distribution\nwarehouse with rooftop solar panels. Web research (Yelp, Manta, Foursquare,\nYellowpages, CMac) all list the **Cost Plus World Market Stockton Distribution\nCenter at 3610 S Airport Way, Stockton CA 95206**, and a Kaleris case study\nnames it as the company's West Coast DC. A 500,000 sq ft DC was built for Cost\nPlus World Market by Ellis-Gibson Development — consistent with the footprint\nseen here. The roster geocode (ROOTOP, moved 2,396 m) landed correctly on the\nbuilding. The truck gate is separately listed as \"Cost Plus World Market Truck\nGate\" at 1735 Zephyr St on Waze, with operating hours Mon-Sat 07:00-16:00.\nBuilding positively identified.",
+        "mapsUrl": "https://www.google.com/maps/@37.916788,-121.25568,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "A named 'Cost Plus World Market Truck Gate' business exists at 1735 Zephyr St per Waze, with managed hours (Mon-Sat 07:00-16:00). The entire property is enclosed by a continuous block/concrete perimeter wall plus hedge along Zephyr St and chain-link fence around the north and south trailer yards. Truck gate confirmed by listing; treated as true.",
+          "guardShack": "No guard booth was visible in any Street View pano along Zephyr St (continuous wall), nor at the open office driveway on the east side. No 1-3-vehicle-footprint booth structure identified at any entrance - low confidence.",
+          "remoteGs": "Set true because a controlled/named truck gate exists but no guard shack could be confirmed visually - implies kiosk/call-box/app check-in. Medium confidence.",
+          "dockDoors": "Dock doors run along both the long north face (trailers backed in, visible at z19-20) and the long south face (trailers along the rail line). Combined estimate ~90 doors across the ~250m+ building faces - clearly the 50+ band.",
+          "shipRcvSeparate": "Two distinct dock banks on opposite (north and south) faces of the building, suggesting separate ship/receive clusters. Medium confidence - could also be one continuous receiving operation.",
+          "dropYard": "Dedicated trailer-storage lots: angled-stall drop yard north and NE of the building, plus a very large drop yard south of the rail line packed with rows of parked trailers.",
+          "railServed": "An active rail spur runs along the entire south face of the building between the dock apron and the south drop yard.",
+          "trailersVisible": "~240 trailers counted across the north drop yard, NE angled stalls, and the large south drop yard - approximate honest estimate from overhead imagery.",
+          "entryLanes": "Could not positively count gate lanes - estimate 1 in / 1 out at a shared truck gate.",
+          "preGateStaging": "Trucks observed parked/staged along Zephyr St in multiple Street View captures (2022 and 2024) outside the gate.",
+          "siteAreaAcres": "~95 acres derived from the perimeter box which includes the building, north drop yard, and the large south drop yard across the rail line."
+        }
+      },
+      {
+        "id": "02-cost-plus-world-market-windsor-va-distribution-center",
+        "name": "Cost Plus World Market - Windsor VA Distribution Center",
+        "type": "Distribution Center / Import Warehouse (East Coast)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "shipRcvSeparate",
+          "connectivityIssue"
+        ],
+        "center": {
+          "lat": 36.799902,
+          "lng": -76.713042
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 36.798,
+            "west": -76.719,
+            "north": 36.8016,
+            "east": -76.7105
+          },
+          "truckGate": {
+            "south": 36.7982,
+            "west": -76.7132,
+            "north": 36.7987,
+            "east": -76.7125
+          },
+          "dropYards": [
+            {
+              "south": 36.8002,
+              "west": -76.718,
+              "north": 36.8008,
+              "east": -76.7115
+            },
+            {
+              "south": 36.7983,
+              "west": -76.718,
+              "north": 36.7989,
+              "east": -76.7125
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 36.8,
+              "west": -76.718,
+              "north": 36.8002,
+              "east": -76.7115
+            },
+            {
+              "south": 36.7988,
+              "west": -76.718,
+              "north": 36.799,
+              "east": -76.712
+            }
+          ],
+          "staging": {
+            "south": 36.7983,
+            "west": -76.7135,
+            "north": 36.799,
+            "east": -76.7124
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 75,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate (ROOFTOP geocode, moved only 8 m) landed directly on a\nvery large rectangular distribution warehouse set in open farmland off US Route\n460. Web research (Nextdoor, CMac, Foursquare, TruckMap, Isle of Wight Chamber\nof Commerce, and a Cost Plus press release) all confirm the **Cost Plus World\nMarket Virginia Distribution Center at 12300 Dominion Way, Windsor VA 23487**.\nA \"World Market\" monument sign is visible at the entrance driveway in Street\nView. Building positively identified — the roster point is correct.",
+        "mapsUrl": "https://www.google.com/maps/@36.799902,-76.713042,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Trucks use a dedicated gate separate from the car/office entrance. The west driveway off Route 460 carries a 'NO TRUCKS' sign (Street View). The truck route wraps to the SE corner of the building where a controlled gate / guard-booth pinch-point sits beside the truck lane.",
+          "guardShack": "A small rectangular guard-booth structure is clearly visible at z20 sitting on a triangular paved island at the SE corner of the building, with the truck lane splitting around it (in/out). Web research (TruckMap driver notes) explicitly states 'Check-in is at the security guard shack.' High confidence.",
+          "remoteGs": "False - a staffed guard shack is present, confirmed by imagery and driver notes.",
+          "dockDoors": "Dock doors run the full length of both long building faces (north and south), each ~600 m, with trailers backed in. Driver notes reference door 17 and door 41 and a high-numbered door range. Combined estimate ~110 doors - clearly 50+.",
+          "dropArea": "Trailer drop stalls line the north drop yard and the south drop-yard apron; estimated 25-50 trailers parked without tractors in captured imagery.",
+          "shipRcvSeparate": "Two distinct dock banks on opposite (north and south) building faces - likely separate shipping vs. receiving. Medium confidence.",
+          "dropYard": "Dedicated trailer-storage rows along the north face drop yard and the NW corner; trailers stored separate from active dock staging.",
+          "railServed": "No rail spur enters the property - the site is served entirely by truck off US Route 460.",
+          "urbanRural": "Rural - the DC sits in open farmland and woods on the edge of the small town of Windsor, VA, surrounded by fields, forest and a few scattered houses.",
+          "connectivityIssue": "Rural location but directly on a US highway with nearby development - cellular coverage likely adequate; set false, low confidence.",
+          "entryLanes": "Single shared truck gate at the guard shack; estimated 1 in / 1 out lane - could not positively count.",
+          "preGateStaging": "No dedicated paved pre-gate truck staging area observed outside the gate; driver notes say no overnight parking.",
+          "postGateStaging": "Paved internal yard space inside the gate before the dock doors provides queue/holding room.",
+          "siteAreaAcres": "~75 acres derived from the perimeter box covering the building, north and south drop yards, retention ponds, employee parking and truck circulation."
+        }
+      }
+    ]
+  }
+}

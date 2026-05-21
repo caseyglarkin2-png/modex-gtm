@@ -1,0 +1,3271 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:48:22.653Z",
+  "account": {
+    "slug": "the-home-depot",
+    "displayName": "The Home Depot",
+    "archetype": "retailer",
+    "siteCount": 30,
+    "coverageNote": {
+      "auditedCount": 30,
+      "estimatedFootprint": 70,
+      "droppedStubCount": 0,
+      "capHit": true,
+      "note": "Home Depot operates ~70 RDC/SDC/FDC/DFC/BDC facilities supporting ~2,300 stores. We audited 30 representative supply-chain facilities; the audited cohort spans every facility type."
+    }
+  },
+  "research": {
+    "facility_count": 200,
+    "audited_facilities": 30,
+    "source": "yard-audit",
+    "confidence": "third-party",
+    "caveats": [
+      "Home Depot SDC - Jersey Village TX: audit note mentions 'closed'",
+      "Home Depot DFC - Locust Grove GA: audit note mentions 'closed'"
+    ],
+    "freightValue": {
+      "company": "The Home Depot",
+      "truckloads": 600000,
+      "fleet_size": "Large regional private fleet (hundreds of tractors) plus dedicated last-mile carriers",
+      "freight_type": "Dry van + last-mile pallets",
+      "facilities": "",
+      "intent_signals": "📰 DC Velocity: automated trailer check-in/kiosks and hydrogen fueling shave entry time, so yards must keep pace with higher throughput.",
+      "source": "tam_csv"
+    }
+  },
+  "network": {
+    "bbox": [
+      -122.9645,
+      29.7286,
+      -72.7333,
+      44.9075
+    ],
+    "archetypeMix": {
+      "#9": 10,
+      "#7": 1,
+      "#10": 14,
+      "#3": 3,
+      "#4": 1,
+      "#1": 1
+    },
+    "totals": {
+      "dockDoors": 4456,
+      "trailerCapacity": 8030,
+      "gates": 34,
+      "railServed": 2,
+      "acres": 2227.7
+    },
+    "sites": [
+      {
+        "id": "01-dallas-fdc",
+        "name": "Home Depot FDC - Dallas TX",
+        "type": "Flatbed Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "preGateStaging",
+          "postGateStaging",
+          "drivewayLong",
+          "drivewayShort",
+          "backupSensitive",
+          "entryExitTogether",
+          "entryExitSeparate",
+          "entryLanes",
+          "exitLanes",
+          "fastLaneOpportunity",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "scale",
+          "dropYard",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 32.7415,
+          "lng": -96.9755
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.7385,
+            "west": -96.98,
+            "north": 32.7445,
+            "east": -96.972
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 32.739,
+              "west": -96.973,
+              "north": 32.743,
+              "east": -96.9715
+            }
+          ],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 70,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster's geocoded coordinates do not point at a distribution center.\nSatellite probes at 32.747894, -96.923588 (zoom 15 through 19) show a small\nempty dirt lot at a multi-leg road intersection, flanked by auto-salvage yards,\nsmall commercial buildings, and a residential subdivision. There is no\n800,000 sq ft building anywhere near that point — confirmed across z15 (≈2.5 km\nfield of view) and z19 imagery.\n\nThe address itself is real (W Jefferson Blvd, in the Mountain Creek industrial\ndistrict of southwest Dallas), but the geocode appears to be a street-range\ninterpolation that landed on an undeveloped parcel.\n\nPublic sources conflict on the FDC's true address:\n- SupplierWiki HD DC list ties DC #5824 to **9222 / 9302 W Jefferson Blvd,\n  Dallas 75211**.\n- Press coverage (multiple outlets, 2020 opening) places HD's first FDC at",
+        "mapsUrl": "https://www.google.com/maps/@32.7415,-96.9755,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "FACILITY NOT POSITIVELY RESOLVED. Roster geocode (32.747894,-96.923588 / 9222 W Jefferson Blvd) lands on a small empty dirt lot at a road intersection with auto-salvage lots and small commercial buildings — NOT an 800,000 sq ft distribution center. Public sources conflict: SupplierWiki HD DC list ties DC #5824 to 9222/9302 W Jefferson Blvd, while press coverage places HD's first FDC at 3730/4721 Mountain Creek Parkway, Dallas 75236. The coords used here (32.7415,-96.9755) are a best-estimate placement on the largest dock-and-drop-yard warehouse in the Mountain Creek industrial corridor, but it was NOT confirmed as HD-operated. Multiple large warehouses exist in this corridor and the FDC's distinctive drive-through tunnel was not clearly identifiable from satellite. Flag for human review / Google Maps place-ID lookup.",
+          "classification": "All classification values are inferred from the HD FDC archetype (press: 800,000 sq ft drive-through building handling 65-75 flatbeds/day, both-sides loading, 75-mile radius delivery) rather than confirmed imagery of the correct building. HD distribution facilities are universally gated; FDC throughput design implies long internal staging and bypass-lane room — hence fastLaneOpportunity true. dockDoors/dropArea bands reflect FDC scale assumptions.",
+          "yardMetrics": "All counts are FDC-archetype estimates, not measured from confirmed imagery."
+        }
+      },
+      {
+        "id": "02-sparrows-point-fdc",
+        "name": "Home Depot FDC - Sparrows Point MD",
+        "type": "Flatbed Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "scale"
+        ],
+        "center": {
+          "lat": 39.22255,
+          "lng": -76.4842
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.2194,
+            "west": -76.4872,
+            "north": 39.2256,
+            "east": -76.4815
+          },
+          "truckGate": {
+            "south": 39.2196,
+            "west": -76.4856,
+            "north": 39.2202,
+            "east": -76.4847
+          },
+          "dropYards": [
+            {
+              "south": 39.2199,
+              "west": -76.487,
+              "north": 39.2248,
+              "east": -76.4853
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.2203,
+              "west": -76.4851,
+              "north": 39.225,
+              "east": -76.484
+            },
+            {
+              "south": 39.2205,
+              "west": -76.4836,
+              "north": 39.2252,
+              "east": -76.4823
+            }
+          ],
+          "staging": {
+            "south": 39.2195,
+            "west": -76.485,
+            "north": 39.2203,
+            "east": -76.4836
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 240,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 64,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode landed inside the Tradepoint Atlantic industrial megasite\n(the redeveloped former Bethlehem Steel Sparrows Point mill) but ~1.4 km off the\nactual building — the campus is huge and densely built with very large\nwarehouses (HD, Amazon, Under Armour, FedEx and others all occupy it).\n\nHD press releases (Aug 2021) confirm HD completed a **3-building, ~1.5 million\nsq ft campus at 6311 Tradepoint Ave: an appliance facility, a flatbed\ndelivery center (the FDC)**, and an online-fulfillment building, creating ~500\njobs. Roster idx 2 is specifically the FDC.\n\nI identified the FDC as the long (~520 m), narrow, NE-SW-oriented warehouse\ncentered at ≈39.2225, -76.4842, distinguished by:\n- A large rooftop solar PV array covering roughly half the roof.\n- An open-air bulk-material yard along its NW side — rows of stacked",
+        "mapsUrl": "https://www.google.com/maps/@39.22255,-76.4842,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Resolved with medium-high confidence. Roster geocode moved 1439 m within the Tradepoint Atlantic megasite; the FDC building is the long (~520 m) NE-SW oriented warehouse at ~39.2225,-76.4842 with a roof half-covered in a large solar PV array. Identified by: (a) HD press confirms a 3-building, 1.5M sq ft HD campus at 6311 Tradepoint Ave including a flatbed delivery center; (b) the building's distinctive bulk-material yard — rows of stacked lumber/blocks/pallets in open air along its NW side — matches an FDC handling oversized building materials. The two larger plain-roofed warehouses to the NE/SE are the HD appliance and online-fulfillment buildings or other Tradepoint tenants (Amazon, Under Armour also occupy this park).",
+          "guardShack": "truckGate true with high confidence (enterprise HD FDC, fenced campus). guardShack inferred true from the HD-DC norm of staffed gate check-in; a discrete booth structure was not unambiguously isolated in imagery — listed uncertain.",
+          "dropYard": "Extensive open-air bulk-material storage and trailer parking along the NW side of the building — clear drop-yard / bulk-staging signature, dropArea 50+.",
+          "railServed": "true — active rail line runs immediately NW of the FDC along the access corridor; Street View on that road shows loaded rail cars adjacent to the site (Tradepoint Atlantic is rail-served via CSX/NS).",
+          "dockDoorCount": "~70 estimate across both long faces; high-resolution count obscured by the solar array shading and trailer clutter — listed uncertain.",
+          "fastLaneOpportunity": "Wide paved aprons and deep approach roads at this purpose-built 2021 facility leave room for a bypass/express lane."
+        }
+      },
+      {
+        "id": "03-dallas-rdc",
+        "name": "Home Depot RDC - Dallas TX",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 32.63905,
+          "lng": -96.851
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.6362,
+            "west": -96.8532,
+            "north": 32.6408,
+            "east": -96.8492
+          },
+          "truckGate": {
+            "south": 32.6399,
+            "west": -96.8518,
+            "north": 32.6405,
+            "east": -96.8508
+          },
+          "dropYards": [
+            {
+              "south": 32.6364,
+              "west": -96.853,
+              "north": 32.6403,
+              "east": -96.8516
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.6368,
+              "west": -96.8516,
+              "north": 32.6404,
+              "east": -96.8509
+            },
+            {
+              "south": 32.637,
+              "west": -96.8497,
+              "north": 32.6404,
+              "east": -96.8492
+            }
+          ],
+          "staging": {
+            "south": 32.6399,
+            "west": -96.8512,
+            "north": 32.6406,
+            "east": -96.8496
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 200,
+          "trailerParkingCapacity": 300,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 55,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Despite a large `movedMeters` (5664), the roster's final lat/lng land **directly\non the RDC rooftop** — the geocoder corrected a street-range guess to the\nrooftop. The building is a long warehouse at 2300 Beckleymeade Ave in the\nDallas Logistics Hub in south Dallas (zip 75232). SupplierWiki and an FCC\nindustrial-radio license record both tie this address to HD DC #5023, an\nRDC also carrying the XD06 (rapid-deployment) designation. Confirmed.",
+        "mapsUrl": "https://www.google.com/maps/@32.63905,-96.851,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Resolved with high confidence. Roster geocode (movedMeters 5664) lands directly on the long cross-dock RDC building at 2300 Beckleymeade Ave in the Dallas Logistics Hub (south Dallas, zip 75232). Confirmed as HD RDC #5023 / XD06 via SupplierWiki and FCC license records (DC 5023).",
+          "truckGate": "CONFIRMED via Street View on Beckleymeade Ave: a swing/sliding gate spans the truck entrance driveway, set well back from the public road with a deep paved apron; full perimeter security fencing (black ornamental + chain-link) wraps the property.",
+          "guardShack": "A small structure is visible just inside the gate in both satellite and Street View — staffed guard-booth check-in, consistent with the HD RDC standard.",
+          "shipRcvSeparate": "Cross-dock RDC layout — dock doors run along both long faces of the building; inbound (receiving) and outbound (shipping) operate from physically separate dock banks.",
+          "dropArea": "Dense trailer parking in long rows on the building's west/south side, hundreds of trailers without tractors — dropArea 50+, dedicated drop yard.",
+          "dockDoorCount": "~130 estimate across both long elevations of a ~550K sq ft RDC; exact count obscured by backed-in trailers — listed uncertain.",
+          "fastLaneOpportunity": "Wide gate apron and deep approach leave room for an express bypass lane."
+        }
+      },
+      {
+        "id": "04-topeka-rdc",
+        "name": "Home Depot RDC - Topeka KS",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 38.97299,
+          "lng": -95.69715
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.9693,
+            "west": -95.7,
+            "north": 38.9752,
+            "east": -95.6943
+          },
+          "truckGate": {
+            "south": 38.9709,
+            "west": -95.6987,
+            "north": 38.9716,
+            "east": -95.6977
+          },
+          "dropYards": [
+            {
+              "south": 38.9696,
+              "west": -95.6985,
+              "north": 38.9723,
+              "east": -95.6947
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 38.9724,
+              "west": -95.6984,
+              "north": 38.9747,
+              "east": -95.6944
+            }
+          ],
+          "staging": {
+            "south": 38.9707,
+            "west": -95.699,
+            "north": 38.9718,
+            "east": -95.6972
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 230,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 60,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster's final lat/lng land directly on the RDC rooftop (the large\n`movedMeters` reflects a street-range guess corrected to the rooftop). The\nbuilding is a long warehouse at 5200 SW Wenger Drive, Topeka KS, on the\ncity's southern industrial edge. SupplierWiki ties this address to **HD DC\n#5024 (an RDC)**, and Waze lists the place explicitly as \"The Home Depot Rapid\nDeployment Center.\" Confirmed.",
+        "mapsUrl": "https://www.google.com/maps/@38.97299,-95.69715,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Resolved with high confidence. Roster geocode (movedMeters 5133) lands directly on the long cross-dock RDC building at 5200 SW Wenger Drive, Topeka KS 66609. Confirmed as HD RDC #5024 via SupplierWiki and Waze (\"The Home Depot Rapid Deployment Center\").",
+          "truckGate": "truckGate true with high confidence. A single curved truck access road runs up from SW Wenger Drive to the trailer yard; it is the only vehicle entry and pinches into a controlled gate where it meets the fenced yard. Trucks observed staged along the access road in Street View. Perimeter chain-link fencing encloses the trailer yard.",
+          "guardShack": "Gate is confirmed present; a discrete guard booth was not unambiguously isolated from imagery — guardShack set true per the HD-RDC norm of staffed gate check-in, but listed uncertain.",
+          "shipRcvSeparate": "Cross-dock RDC: dock doors run along both long faces; receiving and shipping operate from separate dock banks.",
+          "dropArea": "Very large trailer drop yard south of the building — long rows holding 200+ trailers without tractors. dropArea 50+.",
+          "urbanRural": "Rural — the site is on the southern edge of Topeka, with active farmland immediately north of the building and open country around; an industrial park sits adjacent but the broader setting is edge-of-town.",
+          "railServed": "false — no rail spur enters the property; nearest rail is not connected.",
+          "dockDoorCount": "~120 estimate across both long elevations of a ~550K sq ft RDC; backed-in trailers obscure exact count.",
+          "extra": "A Plug Power hydrogen fuel station for fuel-cell forklifts sits at the building's office/SW side — a hallmark of HD RDC operations, corroborating HD tenancy."
+        }
+      },
+      {
+        "id": "05-monroe-oh-rdc",
+        "name": "Home Depot RDC - Monroe OH",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "scale"
+        ],
+        "center": {
+          "lat": 39.4346,
+          "lng": -84.3213
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.431,
+            "west": -84.3236,
+            "north": 39.4385,
+            "east": -84.319
+          },
+          "truckGate": {
+            "south": 39.4334,
+            "west": -84.3232,
+            "north": 39.4342,
+            "east": -84.3223
+          },
+          "dropYards": [
+            {
+              "south": 39.4362,
+              "west": -84.3213,
+              "north": 39.4377,
+              "east": -84.3196
+            },
+            {
+              "south": 39.4318,
+              "west": -84.3206,
+              "north": 39.4362,
+              "east": -84.3196
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.4318,
+              "west": -84.3223,
+              "north": 39.4377,
+              "east": -84.3213
+            },
+            {
+              "south": 39.4318,
+              "west": -84.3213,
+              "north": 39.4377,
+              "east": -84.3203
+            }
+          ],
+          "staging": {
+            "south": 39.4325,
+            "west": -84.3232,
+            "north": 39.4342,
+            "east": -84.3223
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 220,
+          "trailersVisible": 300,
+          "trailerParkingCapacity": 360,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 73,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode (39.434303, -84.321602, ROOFTOP, moved 337 m) landed\ndirectly on the correct building. The site sits inside the \"Gateway\"\nbusiness park north of Monroe, OH (Warren County), between I-75 and an open\nagricultural belt to the east. Web confirmation: multiple business listings\n(Foursquare, Waze, SupplierWiki HD DC list) place HD RDC #5084 at 500 Gateway\nBlvd, Monroe. The target is the central of three large distribution buildings\nin the park — a single, very long (~580 m) cross-dock structure with trailers\nbacked in along both long faces. The west building and other park buildings\nare separate tenants and were excluded.",
+        "mapsUrl": "https://www.google.com/maps/@39.43460,-84.32130,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Trucker reviews of RDC 5084 explicitly describe a gated check-in with 10-20 min in-gate processing and 10-12 trucks queued at the entrance; the private campus ring road is the controlled truck approach to the building.",
+          "guardShack": "Trucker reviews explicitly reference a 'guard shack' staffed by check-in personnel at this RDC. Booth not directly visible in public Street View (gate is internal to the private Gateway-park campus), but operational evidence is strong.",
+          "shipRcvSeparate": "Cross-dock RDC with continuous dock doors on BOTH long faces of the building (east and west) — inbound and outbound run from physically separate dock banks.",
+          "dropArea": "Large marked trailer drop yard at the north end plus a second full row of parked trailers along the east apron — well over 50 trailers visible.",
+          "drivewayLong": "Trucker reviews note 10-12 trucks queued to in-gate; ample ring-road approach holds a deep queue.",
+          "fastLaneOpportunity": "Wide ring-road apron and unused paved width at the campus entrance leave room to add an express/bypass lane.",
+          "entryLanes": "Estimated from approach width; gate booth not directly imaged.",
+          "scale": "No truck scale visible in satellite imagery.",
+          "siteAreaAcres": "Derived from perimeter box (~820m x ~360m developed footprint within the Gateway business park)."
+        }
+      },
+      {
+        "id": "06-locust-grove-ga-rdc",
+        "name": "Home Depot RDC - Locust Grove GA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dropArea",
+          "trailersVisible",
+          "scale"
+        ],
+        "center": {
+          "lat": 33.363,
+          "lng": -84.119
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.3595,
+            "west": -84.123,
+            "north": 33.367,
+            "east": -84.1145
+          },
+          "truckGate": {
+            "south": 33.3605,
+            "west": -84.1203,
+            "north": 33.3618,
+            "east": -84.1188
+          },
+          "dropYards": [
+            {
+              "south": 33.3628,
+              "west": -84.1172,
+              "north": 33.366,
+              "east": -84.1155
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.361,
+              "west": -84.118,
+              "north": 33.3656,
+              "east": -84.1162
+            },
+            {
+              "south": 33.3608,
+              "west": -84.1213,
+              "north": 33.3638,
+              "east": -84.1198
+            }
+          ],
+          "staging": {
+            "south": 33.3608,
+            "west": -84.12,
+            "north": 33.3628,
+            "east": -84.1182
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 130,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode (33.216581, -83.930773) was wrong by ~25 km — it\nlanded in rural farmland/woodland SE of Locust Grove with no industrial\nbuilding anywhere near it (confirmed by z15/z17 satellite of that point).\n\nThe correct facility was re-resolved by web research:\n- HD DC #5250 / \"RDC 5250\" is a 657,518 sq ft distribution center on\n  ~130 acres at 3150 Hwy 42 South, Locust Grove, GA (Henry County),\n  immediately off I-75, ~36 miles south of downtown Atlanta.\n- The property was bought by Monmouth REIT for $96.7M in Dec 2020, net-\n  leased 20 years to Home Depot U.S.A.\n- HD careers and Work Safety Index list \"5250 Locust Grove RDC\" as an active\n  HD rapid-deployment facility.\n\nThe building was located on satellite at ~33.363, -84.119 — a large\ndistribution building set behind a rail line and tree buffer, with extensive",
+        "mapsUrl": "https://www.google.com/maps/@33.36300,-84.11900,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "resolution": "Roster geocode (33.216581,-83.930773) was wrong by ~25 km — landed in rural farmland SE of Locust Grove. Correct facility resolved via web research to 3150 Hwy 42 S, Locust Grove (HD DC #5250 / RDC 5250), a 657,518 sq ft RDC on ~130 acres off I-75, bought by Monmouth REIT for $96.7M in 2020. Building positively located at ~33.363,-84.119.",
+          "imagery": "Satellite imagery of this site is significantly cloud-affected at z16-z19 — the central building roof and the truck entrance are partially obscured. Building outline, the SE-face dock bank, and trailer rows are still readable; the gate structure itself could not be directly imaged.",
+          "truckGate": "Not directly imaged due to cloud cover; HD's own security-guard role descriptions for its RDC network describe staffed truck check-in (in-gate/out-gate). Inferred TRUE as standard for an HD RDC of this scale; flagged uncertain.",
+          "guardShack": "Inferred TRUE — HD RDC security guards staff truck check-in per HD job descriptions; booth not directly imaged. Flagged uncertain.",
+          "shipRcvSeparate": "Continuous dock doors visible on the long SE face plus a separate dock bank on the SW face — inbound/outbound likely run from separate banks (typical RDC cross-dock).",
+          "dropArea": "A trailer parking area is visible NE of the building; count obscured by cloud — estimated 10-25 band, flagged uncertain.",
+          "drivewayLong": "130-acre site with deep ring-road approach gives ample queue depth before docks.",
+          "fastLaneOpportunity": "Very large site (land-to-building ratio ~9x) with abundant unused paved/undeveloped width near the entrance — room for an express lane.",
+          "urbanRural": "Edge-of-town Locust Grove (Henry County), small town 36 mi south of Atlanta — industrial pocket surrounded by woodland and farmland. Classed Rural per rubric (small-town industrial -> Rural).",
+          "railServed": "A rail line runs along the SW edge between Hwy 42 and the property, but no spur is visible entering the DC — set false.",
+          "siteAreaAcres": "130 acres per the Monmouth REIT acquisition disclosure (authoritative)."
+        }
+      },
+      {
+        "id": "07-redlands-ca-rdc",
+        "name": "Home Depot RDC - Redlands CA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "scale"
+        ],
+        "center": {
+          "lat": 34.0882,
+          "lng": -117.2044
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.0856,
+            "west": -117.2085,
+            "north": 34.091,
+            "east": -117.2002
+          },
+          "truckGate": {
+            "south": 34.0864,
+            "west": -117.2078,
+            "north": 34.0872,
+            "east": -117.2068
+          },
+          "dropYards": [
+            {
+              "south": 34.0892,
+              "west": -117.2068,
+              "north": 34.0906,
+              "east": -117.201
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.0866,
+              "west": -117.2068,
+              "north": 34.0872,
+              "east": -117.2008
+            },
+            {
+              "south": 34.089,
+              "west": -117.2068,
+              "north": 34.0896,
+              "east": -117.2008
+            },
+            {
+              "south": 34.087,
+              "west": -117.2008,
+              "north": 34.0892,
+              "east": -117.2002
+            }
+          ],
+          "staging": {
+            "south": 34.0872,
+            "west": -117.2078,
+            "north": 34.089,
+            "east": -117.207
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 200,
+          "trailersVisible": 280,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 57,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode (34.088222, -117.204711, ROOFTOP, moved 142 m) landed on\nthe correct building. Web confirmation: TruckMap, BusinessYab, SupplierWiki HD\nDC list, and HD careers all place HD DC #5087 / RDC 5087 at 27352 River Bluff\nAve, Redlands, CA. The facility is a large RDC in the dense San\nBernardino/Redlands logistics corridor, with the I-10 freeway forming its east\nboundary. The building was positively identified — a large rectangular\ndistribution building with trailers backed in on all four faces.",
+        "mapsUrl": "https://www.google.com/maps/@34.08820,-117.20440,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Street View confirms a continuous black metal perimeter security fence enclosing the entire truck yard along River Bluff Avenue, with gate sections in the fence line. Driver reviews report a check-in process ('easy and quick check in and out'), confirming a controlled gated entrance.",
+          "guardShack": "Inferred TRUE — fully fenced/gated truck yard with a driver check-in process; a guard booth is the HD-RDC norm and the dense SoCal logistics-park standard. Booth not isolated in a clean view (palms/landscaping screen the fence line) — flagged uncertain.",
+          "shipRcvSeparate": "Continuous loading-dock doors with trailers backed in on all four building faces (N, S, E, W) — inbound and outbound run from separate dock banks.",
+          "dropArea": "Large trailer drop area along the north side plus a second parallel trailer row in the south apron; well over 50 trailers visible site-wide.",
+          "drivewayLong": "Large site with a deep ring-road / yard approach able to hold a 3+ truck queue inside the gate.",
+          "fastLaneOpportunity": "Wide divided entrance driveway and generous paved yard width leave room to add an express/bypass lane.",
+          "urbanRural": "Dense San Bernardino / Redlands logistics corridor — wall-to-wall distribution buildings, immediately adjacent to I-10. Urban.",
+          "railServed": "No rail spur enters the property; the east boundary is the I-10 freeway.",
+          "siteAreaAcres": "Derived from the perimeter box (~700 m x ~330 m developed footprint).",
+          "buildingCount": "Single very large RDC building; neighboring DC buildings are separate properties and excluded."
+        }
+      },
+      {
+        "id": "08-houston-tx-rdc",
+        "name": "Home Depot RDC - Houston TX",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "scale"
+        ],
+        "center": {
+          "lat": 29.9405,
+          "lng": -95.5543
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 29.9387,
+            "west": -95.559,
+            "north": 29.9448,
+            "east": -95.5502
+          },
+          "truckGate": {
+            "south": 29.939,
+            "west": -95.5583,
+            "north": 29.9399,
+            "east": -95.5573
+          },
+          "dropYards": [
+            {
+              "south": 29.9418,
+              "west": -95.5578,
+              "north": 29.9447,
+              "east": -95.5506
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 29.9396,
+              "west": -95.5573,
+              "north": 29.9402,
+              "east": -95.551
+            },
+            {
+              "south": 29.9412,
+              "west": -95.5573,
+              "north": 29.9418,
+              "east": -95.551
+            }
+          ],
+          "staging": {
+            "south": 29.9396,
+            "west": -95.5583,
+            "north": 29.9412,
+            "east": -95.5574
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 180,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 400,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 103,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode (29.940329, -95.554781, ROOFTOP, moved 2095 m) landed on\nthe correct building despite the large geocode move — the RDC is the large\ndistribution building immediately at that point. Web confirmation: TruckMap,\nSupplierWiki HD DC list, Manta, and HD careers all place HD RDC #5521 at 11333\nN. Gessner Rd, Houston, TX 77064. It is described as Home Depot's Northwest\nHouston rapid deployment center (Willowbrook / Hwy 249 area), operating 24/7.",
+        "mapsUrl": "https://www.google.com/maps/@29.94050,-95.55430,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single controlled private access road enters the property at the SW corner, crossing a drainage easement that separates the site from public roads. The whole property is set back behind the easement with a perimeter edge — a true checkpoint pinch-point at the SW access. RDC #5521 runs 24/7.",
+          "guardShack": "Inferred TRUE — a guard booth at the SW access is the HD-RDC norm; the gate sits deep on the private drive and is not reachable by public Street View, and no clean booth was isolated in satellite (a small structure is visible near the SW access lane). Flagged uncertain.",
+          "shipRcvSeparate": "Long building with continuous dock doors and trailers backed in on BOTH long faces (north face onto the large drop yard, south face onto the apron) — inbound and outbound run from separate dock banks.",
+          "dropArea": "Very large trailer drop yard fills the north half of the property — rows of marked stalls packed with parked trailers, easily 100+; 50+ band.",
+          "drivewayLong": "Long private SW access drive plus deep internal yard circulation hold a 3+ truck queue well clear of any public road.",
+          "fastLaneOpportunity": "Abundant unused paved width on the SW access drive and yard; clear room for an express/bypass lane.",
+          "backupSensitive": "FALSE — the wide drainage easement and long private drive isolate any gate queue from public roads.",
+          "urbanRural": "Northwest Houston metro (Willowbrook / Hwy 249 area) — surrounded by residential subdivisions and other industrial development. Urban.",
+          "railServed": "No rail spur enters the property.",
+          "siteAreaAcres": "Derived from the perimeter box (~540 m N-S x ~770 m E-W developed footprint incl. north drop yard).",
+          "buildingCount": "Single RDC building; the smaller building to the east is a separate property."
+        }
+      },
+      {
+        "id": "09-breinigsville-pa",
+        "name": "Home Depot RDC - Breinigsville PA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 40.551634,
+          "lng": -75.627668
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.5488,
+            "west": -75.6324,
+            "north": 40.5546,
+            "east": -75.6233
+          },
+          "truckGate": {
+            "south": 40.55075,
+            "west": -75.6247,
+            "north": 40.55135,
+            "east": -75.6236
+          },
+          "dropYards": [
+            {
+              "south": 40.54935,
+              "west": -75.627,
+              "north": 40.55175,
+              "east": -75.6236
+            },
+            {
+              "south": 40.5523,
+              "west": -75.6306,
+              "north": 40.5546,
+              "east": -75.6268
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.55115,
+              "west": -75.6296,
+              "north": 40.5534,
+              "east": -75.6252
+            },
+            {
+              "south": 40.54995,
+              "west": -75.6319,
+              "north": 40.552,
+              "east": -75.6276
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 240,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 64,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate (ROOFTOP geocode, 142 m offset) lands directly on a large\ndistribution building inside a Lehigh Valley logistics park west of Allentown,\nbetween Willard Drive and the surrounding industrial-park road network. Web\nsearch confirms \"The Home Depot Distribution Center, 8500 Willard Dr,\nBreinigsville, PA 18031\" as an active 24/5 distribution facility (610-573-5771,\n209 reviews). Satellite imagery shows a cross-dock building with loading doors\non both long faces and very large trailer yards — consistent with an HD RDC.\nAdjacent large warehouses in the park are separate tenants; the audited parcel\nis the building the pin lands on.",
+        "mapsUrl": "https://www.google.com/maps/@40.551634,-75.627668,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No barrier arm, sliding gate, or guard checkpoint found at any road-edge entrance. Building sits ~120m back from Willard Drive behind a wide landscaped tree buffer; Street View along the public road shows open lawn with no gate. Truck circulation enters via uncontrolled internal logistics-park drives.",
+          "guardShack": "No staffed booth structure visible at any entrance in zoom-19/20 imagery.",
+          "remoteGs": "False because there is no controlled truck gate at all.",
+          "dropYard": "Large dedicated trailer-storage rows wrap the east and north faces around landscaped islands — clearly drop-trailer storage separate from active dock staging.",
+          "shipRcvSeparate": "Dock doors run along both long building faces (NW and SE), forming two distinct dock banks.",
+          "dockDoors": "~130 doors estimated across both long faces; high-throughput RDC cross-dock.",
+          "fastLaneOpportunity": "Very wide paved truck yard with ample unused width — abundant room to add express/bypass lanes.",
+          "entryLanes": "Estimated 2 inbound from the SE driveway; no painted lane control so count is approximate.",
+          "urbanRural": "Edge-of-town Lehigh Valley logistics park; farmland on the west and south sides — Rural per rubric."
+        }
+      },
+      {
+        "id": "10-winchester-va-rdc",
+        "name": "Home Depot RDC - Winchester VA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 39.201,
+          "lng": -78.1402
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.1979,
+            "west": -78.1443,
+            "north": 39.2041,
+            "east": -78.1362
+          },
+          "truckGate": {
+            "south": 39.2018,
+            "west": -78.1429,
+            "north": 39.2027,
+            "east": -78.1415
+          },
+          "dropYards": [
+            {
+              "south": 39.2018,
+              "west": -78.1395,
+              "north": 39.2041,
+              "east": -78.1362
+            },
+            {
+              "south": 39.198,
+              "west": -78.1431,
+              "north": 39.2002,
+              "east": -78.1398
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.2002,
+              "west": -78.1418,
+              "north": 39.2033,
+              "east": -78.1376
+            },
+            {
+              "south": 39.1985,
+              "west": -78.1435,
+              "north": 39.2016,
+              "east": -78.1393
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 140,
+          "trailersVisible": 200,
+          "trailerParkingCapacity": 280,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 58,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode (39.200647, -78.139858, ROOFTOP but an 8493 m offset flag)\nlands on a large white-roofed cross-dock distribution building in an industrial\npark on the west side of Winchester, VA, immediately adjacent to Interstate 81.\nWeb search confirms \"The Home Depot RDC 5030, 480 Park Center Dr, Winchester VA\"\nas a ~466,000 sq ft Rapid Deployment Center, 24/5 operations. Satellite imagery\nshows loading docks on both long faces with trailers backed in and large\ntrailer yards — unambiguous RDC. The pin building is positively identified\ndespite the geocode offset flag.",
+        "mapsUrl": "https://www.google.com/maps/@39.201000,-78.140200,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No barrier arm, sliding gate, or guard checkpoint found at the NW-end access drive or anywhere along the property line. Building sits well back from Park Center Drive behind a grass buffer; Street View (2024-06) shows the access road curving in openly with no gate.",
+          "guardShack": "No staffed booth structure at any entrance in zoom-19/20 imagery; the only office structure is the building's own attached front office.",
+          "remoteGs": "False because there is no controlled truck gate at all.",
+          "dropYard": "Dedicated trailer-storage rows on the NE side and at the SW corner, separate from active dock staging.",
+          "shipRcvSeparate": "Dock doors run along both long faces (NE and SW) — two distinct dock banks.",
+          "dockDoors": "~140 doors estimated across both long faces; large cross-dock RDC (~466,000 sq ft per public listing).",
+          "fastLaneOpportunity": "Very wide paved truck yard on both long faces with ample unused width for an express/bypass lane.",
+          "entryLanes": "Estimated 2 inbound at the NW access drive; no painted lane control, count approximate.",
+          "urbanRural": "Edge-of-Winchester industrial park beside I-81 with adjacent farmland and a mobile-home neighborhood; Rural per rubric.",
+          "geocode": "Roster lat/lng geocode had an 8493 m offset; verified pin still lands on the correct HD RDC building. ZIP corrected to 22603 (roster says 22602)."
+        }
+      },
+      {
+        "id": "11-mccalla-al-rdc",
+        "name": "Home Depot RDC - McCalla AL",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 33.322267,
+          "lng": -87.025569
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.3187,
+            "west": -87.0296,
+            "north": 33.3253,
+            "east": -87.0215
+          },
+          "truckGate": {
+            "south": 33.3187,
+            "west": -87.0284,
+            "north": 33.3196,
+            "east": -87.0272
+          },
+          "dropYards": [
+            {
+              "south": 33.3223,
+              "west": -87.025,
+              "north": 33.3252,
+              "east": -87.0216
+            },
+            {
+              "south": 33.3196,
+              "west": -87.029,
+              "north": 33.3223,
+              "east": -87.0252
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.3205,
+              "west": -87.0272,
+              "north": 33.324,
+              "east": -87.0232
+            },
+            {
+              "south": 33.3192,
+              "west": -87.0288,
+              "north": 33.3226,
+              "east": -87.0247
+            }
+          ],
+          "staging": {
+            "south": 33.319,
+            "west": -87.0283,
+            "north": 33.3204,
+            "east": -87.0265
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 150,
+          "trailersVisible": 280,
+          "trailerParkingCapacity": 360,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 70,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode was flagged GEOMETRIC_CENTER with a 2790 m offset, so the\ncoordinate needed verification. Probing wide (zoom 15) showed two large\nwhite-roofed distribution buildings in the Jefferson Metropolitan Park\nindustrial area SW of Birmingham, with a rail line running NE–SW between them.\nThe pin lands on the larger upper building — a cross-dock with loading docks on\nboth long faces and extensive trailer yards. Web search confirms \"Home Depot\nDistribution Center / RDC 5086, 6400 Jefferson Metro Pkwy, McCalla AL 35111\",\n24/7 operations. The pin building is positively identified as the HD RDC.",
+        "mapsUrl": "https://www.google.com/maps/@33.322267,-87.025569,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Controlled truck gate confirmed at the SW-end entrance: a guard-booth island where the access road narrows and splits, with an orange/yellow barrier-arm/gate object visible on the lane in zoom-21 satellite. Street View (2023-01) shows perimeter fencing, an 'ATTENTION' sign and a '10 mph' speed sign at the entrance. Web driver review explicitly cites 'security and receiving personnel'.",
+          "guardShack": "Small square guard-booth building (~1-2 vehicle footprint) with a flagpole and an attached canopy/awning, sitting on a triangular island in the truck lane — classic gatehouse, separate from the main building.",
+          "remoteGs": "False — a staffed guard shack is present.",
+          "postGateStaging": "Wide paved apron inside the gate before the dock banks provides truck holding/queue space.",
+          "dropYard": "Large dedicated trailer-storage rows on the NE side and along the SE face — clearly drop-trailer storage separate from active dock staging.",
+          "shipRcvSeparate": "Dock doors run along both long faces (NW and SE) — two distinct dock banks.",
+          "dockDoors": "~150 doors estimated across both long faces; large high-throughput RDC.",
+          "fastLaneOpportunity": "Very wide gate apron and truck yard with abundant unused paved width for an express/bypass lane.",
+          "entryLanes": "Estimated 2 inbound; the road splits around the booth island. No painted lane control, count approximate.",
+          "urbanRural": "Rural McCalla AL industrial park with surrounding woodland and a rail line alongside; Rural per rubric."
+        }
+      },
+      {
+        "id": "12-west-columbia-sc-rdc",
+        "name": "Home Depot RDC - West Columbia SC",
+        "type": "Rapid Deployment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 33.908633,
+          "lng": -81.074818
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.907,
+            "west": -81.0786,
+            "north": 33.9111,
+            "east": -81.071
+          },
+          "truckGate": {
+            "south": 33.9088,
+            "west": -81.072,
+            "north": 33.9097,
+            "east": -81.0706
+          },
+          "dropYards": [
+            {
+              "south": 33.9095,
+              "west": -81.0782,
+              "north": 33.9109,
+              "east": -81.0712
+            },
+            {
+              "south": 33.9072,
+              "west": -81.078,
+              "north": 33.9083,
+              "east": -81.0715
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.909,
+              "west": -81.0778,
+              "north": 33.9099,
+              "east": -81.0715
+            },
+            {
+              "south": 33.9077,
+              "west": -81.0778,
+              "north": 33.9086,
+              "east": -81.0715
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 230,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 62,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode (ROOFTOP, flagged 3918 m offset) lands on a large\nwhite-roofed cross-dock distribution building in a multi-building logistics\npark in the Saxe Gotha / Southport area of West Columbia, SC. Web search\nconfirms \"The Home Depot (West Columbia RDC) / RDC #5088, 420 Foster Brothers\nDr, West Columbia SC 29172\", 24/5 operations. Satellite imagery shows loading\ndocks on both long faces with trailers backed in and large trailer yards — an\nunambiguous RDC. The pin building is positively identified.",
+        "mapsUrl": "https://www.google.com/maps/@33.908633,-81.074818,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No barrier arm, sliding gate, or guard-booth checkpoint structure found at any road-edge entrance across zoom 19-20 satellite and Street View (2023-08). Building sits well back inside a logistics park behind retention ponds and grass buffers; truck access is via uncontrolled internal park roads. A web listing cites 'entrance security and strict appointments' — interpreted as appointment-based dock scheduling and a security desk at the building dock office rather than a physical road gate. Marked medium-confidence; the office/check-in area was partly obscured by ponds in available imagery.",
+          "guardShack": "No standalone staffed booth structure visible at any entrance.",
+          "remoteGs": "False because no controlled physical truck gate was observed.",
+          "dropYard": "Dedicated trailer-storage rows along both long faces, separate from active dock staging.",
+          "shipRcvSeparate": "Dock doors run along both long faces (N and S) — two distinct dock banks.",
+          "dockDoors": "~130 doors estimated across both long faces; large cross-dock RDC.",
+          "fastLaneOpportunity": "Very wide paved truck yard with abundant unused width for an express/bypass lane.",
+          "entryLanes": "Estimated 2 inbound; no painted lane control, count approximate.",
+          "urbanRural": "Logistics park in the Saxe Gotha / Southport area of West Columbia with surrounding woodland and a residential edge; Rural per rubric.",
+          "geocode": "Roster geocode had a 3918 m offset flag; verified pin lands on the correct HD RDC building."
+        }
+      },
+      {
+        "id": "13-pittston-township-pa",
+        "name": "Home Depot RDC - Pittston Township PA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 41.31555,
+          "lng": -75.7666
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.313,
+            "west": -75.7702,
+            "north": 41.3182,
+            "east": -75.7625
+          },
+          "truckGate": {
+            "south": 41.3138,
+            "west": -75.7695,
+            "north": 41.3144,
+            "east": -75.7685
+          },
+          "dropYards": [
+            {
+              "south": 41.316,
+              "west": -75.7652,
+              "north": 41.3176,
+              "east": -75.7627
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.3143,
+              "west": -75.769,
+              "north": 41.3162,
+              "east": -75.7643
+            },
+            {
+              "south": 41.3154,
+              "west": -75.7676,
+              "north": 41.317,
+              "east": -75.7635
+            }
+          ],
+          "staging": {
+            "south": 41.3138,
+            "west": -75.7683,
+            "north": 41.3148,
+            "east": -75.7665
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 150,
+          "trailersVisible": 230,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 75,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster supplied 41.314542, -75.769187 (ROOFTOP, moved 1714 m), which landed just\nSW of the building in the access-drive/parking area. Probing satellite at zooms\n16-20 around that point positively identified the RDC: a single very large\ncross-dock distribution building with a dark roof, dock doors and trailers\nbacked in along both long faces, an attached trailer drop yard on the NE end,\nand employee parking on the SW end — all consistent with a Home Depot Rapid\nDeployment Center. The building sits inside CenterPoint Commerce & Trade Park in\nPittston Township, surrounded by other large warehouses. Web search confirmed\n300 Enterprise Way as the Home Depot Distribution Center / RDC 5089 (also\nreferenced as RLC 8618 / XD09). Locked center: 41.31555, -75.76660.",
+        "mapsUrl": "https://www.google.com/maps/@41.31555,-75.76660,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Cross-dock RDC; truck entrance off the public road at the SW corner. A z20 view of the inner perimeter point shows a small guard-booth structure beside the drive where it crosses the property line into the yard.",
+          "guardShack": "Small 1-2-vehicle-footprint booth visible at the inner gate point where the access drive enters the truck yard, set back from the public road behind the employee parking.",
+          "postGateStaging": "Large paved apron between the inner gate and the dock faces gives ample post-gate queue room.",
+          "drivewayLong": "Deep approach from the SW gate along the long dock apron; comfortably 3+ trucks of stacking.",
+          "fastLaneOpportunity": "Wide gate apron and generous paved width at the SW entrance; room for an express/bypass lane.",
+          "dockDoors": "Dense regular dock-door rhythm with trailers backed in along the long NW face and the long SE face — well over 100 doors total (cross-dock RDC).",
+          "shipRcvSeparate": "Cross-dock layout: receiving on one long face, shipping on the opposite long face — two distinct dock banks.",
+          "dropYard": "Dedicated trailer drop yard with multiple rows of parked trailers on the NE end of the property.",
+          "urbanRural": "Edge-of-town industrial park (CenterPoint Commerce & Trade Park) outside Pittston Township, surrounded by warehouses and woodland — judged Rural per rubric.",
+          "entryLanes": "Estimated from imagery; lane count at the gate not fully resolved.",
+          "trailersVisible": "Approximate count from z17-z19 imagery across dock faces and drop yard."
+        }
+      },
+      {
+        "id": "14-tracy-ca",
+        "name": "Home Depot RDC - Tracy CA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 37.7592,
+          "lng": -121.403
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 37.757,
+            "west": -121.4085,
+            "north": 37.7613,
+            "east": -121.398
+          },
+          "truckGate": {
+            "south": 37.7577,
+            "west": -121.408,
+            "north": 37.7585,
+            "east": -121.4067
+          },
+          "dropYards": [
+            {
+              "south": 37.76,
+              "west": -121.408,
+              "north": 37.7612,
+              "east": -121.3985
+            },
+            {
+              "south": 37.7572,
+              "west": -121.407,
+              "north": 37.758,
+              "east": -121.399
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 37.758,
+              "west": -121.407,
+              "north": 37.7587,
+              "east": -121.399
+            },
+            {
+              "south": 37.7596,
+              "west": -121.407,
+              "north": 37.7601,
+              "east": -121.399
+            }
+          ],
+          "staging": {
+            "south": 37.7577,
+            "west": -121.4072,
+            "north": 37.7585,
+            "east": -121.4055
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 160,
+          "trailersVisible": 210,
+          "trailerParkingCapacity": 300,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 70,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster supplied 37.759049, -121.404099 (ROOFTOP, moved 278 m), which landed\nsquarely on a large E-W cross-dock distribution building. Probing satellite at\nzooms 16-20 confirmed a single very large RDC: dock doors with trailers backed\nin along both long faces, trailer drop-yard rows on the north side, and an\noffice/employee-parking frontage on N Tracy Blvd. Web search confirmed 1400 E\nPescadero Ave as Home Depot RDC #5641 — a 657,000 sq ft warehouse opened to\nserve ~100 California stores, operating 24 h Mon-Fri. Locked center:\n37.75920, -121.40300.",
+        "mapsUrl": "https://www.google.com/maps/@37.75920,-121.40300,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Cross-dock RDC (DC #5641, 657K sq ft). Truck yard entrance off the access road at the SW corner; the office/parking front faces N Tracy Blvd, the truck side is fenced and gated.",
+          "guardShack": "Standard guarded RDC entry — booth at the SW truck-yard entrance. HD RDCs of this generation consistently run a staffed gate; the SW gate apron shows the checkpoint geometry.",
+          "postGateStaging": "Wide paved aprons on both long faces give substantial inside-the-gate queue room before the dock doors.",
+          "drivewayLong": "Long internal aprons running the full length of both faces — 3+ trucks of stacking.",
+          "fastLaneOpportunity": "Generous paved width at the SW gate apron; room to add a bypass/express lane.",
+          "dockDoors": "Dense regular dock-door rhythm with trailers backed in along both the long north and long south faces — well over 100 doors (cross-dock RDC).",
+          "shipRcvSeparate": "Cross-dock layout — receiving on one long face, shipping on the opposite face; two distinct dock banks.",
+          "dropYard": "Dedicated trailer drop-yard rows along the north side and additional trailer parking on the south.",
+          "urbanRural": "Edge-of-town industrial/logistics district on the north side of Tracy CA; large warehouses and open/fallow parcels around it — judged Rural per rubric.",
+          "entryLanes": "Estimated; exact lane count at the gate not fully resolved from imagery.",
+          "trailersVisible": "Approximate count from z16-z20 imagery."
+        }
+      },
+      {
+        "id": "15-tolleson-az",
+        "name": "Home Depot RDC - Tolleson AZ",
+        "type": "Rapid Deployment Center",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 33.4448,
+          "lng": -112.253
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.4426,
+            "west": -112.2562,
+            "north": 33.4464,
+            "east": -112.249
+          },
+          "truckGate": {
+            "south": 33.4448,
+            "west": -112.256,
+            "north": 33.4456,
+            "east": -112.2549
+          },
+          "dropYards": [
+            {
+              "south": 33.4432,
+              "west": -112.255,
+              "north": 33.4446,
+              "east": -112.2495
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.4444,
+              "west": -112.255,
+              "north": 33.4451,
+              "east": -112.2495
+            }
+          ],
+          "staging": {
+            "south": 33.4448,
+            "west": -112.2556,
+            "north": 33.4456,
+            "east": -112.254
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 240,
+          "trailerParkingCapacity": 330,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 55,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster supplied 33.445211, -112.25435 (ROOFTOP, moved 1320 m), which landed near\nthe NW corner of the RDC. Probing satellite at zooms 15-20 confirmed a single\nlarge E-W cross-dock distribution building with dock doors and dense trailer\nrows on its south face, a residential subdivision directly to the north, and an\noffice/employee-parking frontage. Web search confirmed 9081 W Washington St as\nHome Depot RDC #5643 (also referenced via a W Jefferson St entrance), open 24 h\nMon-Fri. Locked center: 33.44480, -112.25300.",
+        "mapsUrl": "https://www.google.com/maps/@33.44480,-112.25300,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "RDC #5643. Truck yard entrance at the SW/W corner off the road; driver reviews explicitly mention a guard shack and a gate where trucks check in.",
+          "guardShack": "Confirmed by web reviews: drivers describe 'friendly staff at the guard shack' and report waiting 'over an hour to enter' at the gate — a staffed guard booth with significant check-in queuing.",
+          "backupSensitive": "Driver reviews report 1+ hour gate waits; the gate is close to public roads with limited stacking room, so a truck queue spills toward the road — backup-sensitive.",
+          "preGateStaging": "Long gate waits imply trucks stage outside/before the gate; paved apron and road shoulder available for waiting.",
+          "dockDoors": "Dense dock-door rhythm with trailers backed in along the long south face (and north) of the RDC building — well over 100 doors.",
+          "dropYard": "Large dedicated trailer drop yard with many rows of parked trailers on the south side of the building.",
+          "railServed": "A rail line runs E-W through the property, immediately south of the main trailer drop yard — the site is rail-adjacent/rail-served.",
+          "shipRcvSeparate": "Most dock activity concentrated on the south face; whether shipping and receiving use physically separate banks is not clearly resolved — flagged uncertain.",
+          "urbanRural": "Tolleson is inside the Phoenix metro's continuous urban fabric — residential subdivisions directly north of the RDC, dense industrial all around — judged Urban.",
+          "entryLanes": "Estimated; exact lane count at the gate not fully resolved.",
+          "trailersVisible": "Approximate count from z16-z19 imagery across dock face and drop yard."
+        }
+      },
+      {
+        "id": "16-elwood-il",
+        "name": "Home Depot RDC - Elwood IL",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 41.4401,
+          "lng": -88.1432
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.4362,
+            "west": -88.1462,
+            "north": 41.4432,
+            "east": -88.1407
+          },
+          "truckGate": {
+            "south": 41.4362,
+            "west": -88.1447,
+            "north": 41.4371,
+            "east": -88.143
+          },
+          "dropYards": [
+            {
+              "south": 41.4376,
+              "west": -88.146,
+              "north": 41.4428,
+              "east": -88.1447
+            },
+            {
+              "south": 41.438,
+              "west": -88.1425,
+              "north": 41.4428,
+              "east": -88.1409
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.4376,
+              "west": -88.1447,
+              "north": 41.4428,
+              "east": -88.1438
+            },
+            {
+              "south": 41.4376,
+              "west": -88.1426,
+              "north": 41.4428,
+              "east": -88.1418
+            }
+          ],
+          "staging": {
+            "south": 41.4365,
+            "west": -88.1443,
+            "north": 41.4376,
+            "east": -88.1425
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 150,
+          "trailersVisible": 280,
+          "trailerParkingCapacity": 360,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 60,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 3,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster supplied 41.440126, -88.144081 (ROOFTOP, moved 9468 m — the largest move\nin the account), which landed between two large warehouses inside the\nCenterPoint Intermodal Center. Probing satellite at zooms 14-19 and\ncross-checking against the leasing record resolved the ambiguity: CenterPoint's\nproperty page lists 2950 CenterPoint Way as a **657,600 sq ft building on ~55\nacres* — that footprint matches the western, slightly smaller, lighter-roofed*\nN-S building, not the much larger building immediately to its east (a separate\nfacility). The western building shows dock doors with trailers along both long\nfaces and a guarded gate complex on the south — a Home Depot RDC. Web search\nconfirmed 2950 CenterPoint Way as HD RDC #5851. Locked center:\n41.44010, -88.14320.",
+        "mapsUrl": "https://www.google.com/maps/@41.44010,-88.14320,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Cross-dock RDC #5851 (657K sq ft) in the CenterPoint Intermodal Center, Joliet/Elwood. A clear guarded gate complex on the south side: guard booth with a canopy, multiple inbound/outbound lanes, and a chevron-striped apron with trucks queued through the checkpoint (z19 imagery).",
+          "guardShack": "A canopy-roofed guard booth straddling the gate lanes is plainly visible at the south truck entrance. remoteGs = false accordingly.",
+          "preGateStaging": "Trucks visibly staged/queued on the approach road before the gate; striped apron and road shoulder provide pre-gate waiting room.",
+          "postGateStaging": "Wide internal aprons inside the gate before the dock faces.",
+          "drivewayLong": "Long internal aprons running both long faces of the N-S building — well over 3 trucks of stacking.",
+          "fastLaneOpportunity": "Multi-lane gate (3 inbound observed) with a wide striped apron — room for an express bypass lane.",
+          "dockDoors": "Dense dock-door rhythm with trailers backed in along both the long east and long west faces — well over 100 doors (cross-dock RDC).",
+          "shipRcvSeparate": "Cross-dock layout — receiving on one long face, shipping on the opposite; two distinct dock banks.",
+          "dropYard": "Dedicated trailer drop-yard rows flanking both long faces.",
+          "urbanRural": "CenterPoint Intermodal Center is a large logistics park on rural land between Joliet and Elwood IL, surrounded by farmland and warehouses — judged Rural per rubric.",
+          "railServed": "The CenterPoint Intermodal Center has major intermodal rail yards, but no rail spur runs into this RDC's own property — railServed = false for this facility.",
+          "entryLanes": "Three inbound lanes estimated from gate imagery; exact count not fully resolved."
+        }
+      },
+      {
+        "id": "17-salem-or-rdc",
+        "name": "Home Depot RDC - Salem OR",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 44.9046,
+          "lng": -122.9617
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 44.9008,
+            "west": -122.9645,
+            "north": 44.9075,
+            "east": -122.9595
+          },
+          "truckGate": {
+            "south": 44.9046,
+            "west": -122.9632,
+            "north": 44.9052,
+            "east": -122.9623
+          },
+          "dropYards": [
+            {
+              "south": 44.9009,
+              "west": -122.9644,
+              "north": 44.9046,
+              "east": -122.961
+            },
+            {
+              "south": 44.9042,
+              "west": -122.9632,
+              "north": 44.9056,
+              "east": -122.9613
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 44.903,
+              "west": -122.9627,
+              "north": 44.9065,
+              "east": -122.9605
+            },
+            {
+              "south": 44.9048,
+              "west": -122.9625,
+              "north": 44.9078,
+              "east": -122.9603
+            }
+          ],
+          "staging": {
+            "south": 44.9042,
+            "west": -122.9628,
+            "north": 44.9049,
+            "east": -122.9618
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 230,
+          "trailerParkingCapacity": 300,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 72,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate (44.904755, -122.962671) landed in the central truck yard\nof the facility — within ~150 m of the building, accurate enough for Step 0.\nWeb research confirms 4999 Depot Court SE is Home Depot's RDC: a ~467,000 sq ft\nbuilding opened in 2010 in the Mill Creek Corporate Center industrial district\njust east of Interstate 5, serving HD stores across OR, WA, ID, MT and WY,\nrunning 24 hours Monday-Friday. Satellite imagery shows one long white\ndistribution building running NE-SW, with dock doors on both long faces and a\nlarge trailer drop yard wrapping its SW and NE sides. The locked center sits on\nthat building. A second very large building lies to the SW; it is a separate\ntenant in the same corporate park and is excluded from the HD perimeter.",
+        "mapsUrl": "https://www.google.com/maps/@44.90460,-122.96170,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Truck-only entrance off Depot Court SE; internal yard controlled by a checkpoint with gate islands and lane markings.",
+          "guardShack": "Small dark-roofed booth (~1-vehicle footprint) sits in the middle of the central truck drive between the RDC building and the trailer drop yard, with gate islands and a queuing truck visible at z20.",
+          "shipRcvSeparate": "Cross-dock RDC: dock doors run along both long faces of the building (inbound one side, outbound the other).",
+          "fastLaneOpportunity": "Very wide paved gate apron and large open yard around the checkpoint leave ample room for an express/bypass lane.",
+          "dropYard": "Hundreds of marked trailer stalls fill the yard SW of the building and along the NE side.",
+          "entryLanes": "Lane count at the checkpoint estimated from overhead gate-island markings; not crisply resolved.",
+          "buildingCount": "HD RDC is the single ~467k sq ft building; the larger building to the SW is a separate tenant in the Mill Creek Corporate Center industrial park, excluded from the HD perimeter."
+        }
+      },
+      {
+        "id": "18-westfield-ma-rdc",
+        "name": "Home Depot RDC - Westfield MA",
+        "type": "Rapid Deployment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "dropArea"
+        ],
+        "center": {
+          "lat": 42.1703,
+          "lng": -72.7362
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.1685,
+            "west": -72.7385,
+            "north": 42.1728,
+            "east": -72.7333
+          },
+          "truckGate": {
+            "south": 42.1691,
+            "west": -72.7349,
+            "north": 42.16965,
+            "east": -72.7341
+          },
+          "dropYards": [
+            {
+              "south": 42.1683,
+              "west": -72.7362,
+              "north": 42.1698,
+              "east": -72.7347
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 42.1698,
+              "west": -72.7379,
+              "north": 42.1728,
+              "east": -72.7362
+            },
+            {
+              "south": 42.1698,
+              "west": -72.736,
+              "north": 42.1728,
+              "east": -72.7342
+            }
+          ],
+          "staging": {
+            "south": 42.16965,
+            "west": -72.7356,
+            "north": 42.1703,
+            "east": -72.7347
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 50,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate (42.169402, -72.734316) landed at the SE truck-entrance\nend of the property, within ~150 m of the building. Web research confirms 50\nCampanelli Drive is Home Depot RDC #5221 — a Rapid Deployment Center operating\n24/7, noted as the #1 RDC in HD's network in 2020. Satellite imagery shows one\nvery large white distribution building running NW-SE in an edge-of-town\nindustrial park surrounded by woodland on the outskirts of Westfield. The locked\ncenter is the building's centroid.",
+        "mapsUrl": "https://www.google.com/maps/@42.17030,-72.73620,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Clear checkpoint with painted striped lane markings (pinch-point) on the SE access drive; a vehicle is stopped at it in z21 imagery.",
+          "guardShack": "A small light-coloured booth sits right at the striped checkpoint with a car parked beside it — a staffed guard booth, not the main building.",
+          "shipRcvSeparate": "Cross-dock RDC: dock doors run along both long faces of the building.",
+          "drivewayLong": "Long wooded approach from Campanelli Drive to the gate; deep internal yard gives 3+ truck stacking room.",
+          "backupSensitive": "Gate set far back from the public road behind a long wooded drive — a queue would not reach Campanelli Drive.",
+          "urbanRural": "Edge-of-town industrial park surrounded by woodland on the outskirts of Westfield; judged Rural.",
+          "dropArea": "Trailer drop yard at the SW end holds ~95 trailers visible; band estimated from overhead imagery.",
+          "dropYard": "Dedicated trailer-storage rows at the SW corner of the property, separate from the dock aprons.",
+          "entryLanes": "Single inbound lane at the checkpoint; exit shares the same gate group."
+        }
+      },
+      {
+        "id": "19-mira-loma-ca-sdc",
+        "name": "Home Depot SDC - Mira Loma CA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "truckGateCount"
+        ],
+        "center": {
+          "lat": 34.029,
+          "lng": -117.53575
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.0263,
+            "west": -117.5418,
+            "north": 34.0316,
+            "east": -117.53
+          },
+          "truckGate": {
+            "south": 34.0274,
+            "west": -117.5327,
+            "north": 34.028,
+            "east": -117.5318
+          },
+          "dropYards": [
+            {
+              "south": 34.0268,
+              "west": -117.541,
+              "north": 34.0281,
+              "east": -117.531
+            },
+            {
+              "south": 34.0302,
+              "west": -117.541,
+              "north": 34.0315,
+              "east": -117.531
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.0268,
+              "west": -117.541,
+              "north": 34.0279,
+              "east": -117.5308
+            },
+            {
+              "south": 34.0301,
+              "west": -117.541,
+              "north": 34.0313,
+              "east": -117.5308
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 360,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 420,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 158,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate (34.028294, -117.536009; geocode moved 3,606 m) landed on\nthe correct building — a single enormous distribution building running E-W in\nthe Mira Loma / Jurupa Valley warehouse district. Web research confirms 11650\nVenture Drive is Home Depot's SDC, housing five HD DC numbers (#5556-5559 and\n#5645) under one roof. The locked center is the building centroid.",
+        "mapsUrl": "https://www.google.com/maps/@34.02900,-117.53575,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Very large fenced SDC truck yards on both long faces; striped checkpoint pinch-point lane markings observed at the SE corner where the access road meets the truck yard — a controlled entrance.",
+          "guardShack": "No standalone guard booth positively resolved on satellite imagery; the dock yards are open paved aprons inside the property fence. HD's practice at large DCs likely includes a staffed gate, but imagery could not confirm a booth — call flagged as uncertain.",
+          "remoteGs": "Set true on the basis truckGate is true and no booth was confirmed; flagged as uncertain.",
+          "shipRcvSeparate": "Dock doors run along both N and S long faces of the building (cross-dock SDC).",
+          "multipleFacilities": "Single physical building, but it houses five HD DC operations (DCs #5556-5559, #5645) under one roof — set false because it is one building cluster, not a campus of separate buildings.",
+          "fastLaneOpportunity": "Very wide paved truck yards leave ample room for express/bypass lanes.",
+          "dropYard": "Hundreds of trailers parked along both dock-yard faces; dedicated trailer storage rows.",
+          "urbanRural": "Located in the Mira Loma / Jurupa Valley industrial cluster of the Inland Empire — the densest warehouse fabric in the US; Urban.",
+          "truckGateCount": "Estimated 2 truck entrances (one per long-face yard); not all positively confirmed.",
+          "dockDoorCount": "~360 doors estimated across both faces of this ~700m-long building; approximate."
+        }
+      },
+      {
+        "id": "20-savannah-ga-sdc",
+        "name": "Home Depot SDC - Savannah GA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 32.1582,
+          "lng": -81.2038
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.1545,
+            "west": -81.2085,
+            "north": 32.1615,
+            "east": -81.2
+          },
+          "truckGate": {
+            "south": 32.1592,
+            "west": -81.2072,
+            "north": 32.1603,
+            "east": -81.2058
+          },
+          "dropYards": [
+            {
+              "south": 32.1555,
+              "west": -81.2085,
+              "north": 32.1603,
+              "east": -81.2062
+            },
+            {
+              "south": 32.155,
+              "west": -81.2035,
+              "north": 32.1602,
+              "east": -81.2002
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.1556,
+              "west": -81.2068,
+              "north": 32.1603,
+              "east": -81.2056
+            },
+            {
+              "south": 32.1552,
+              "west": -81.2048,
+              "north": 32.16,
+              "east": -81.2036
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 200,
+          "trailersVisible": 300,
+          "trailerParkingCapacity": 380,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 154,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate (32.158137, -81.203756) landed dead-center on a colossal\nsingle distribution building — the Crossroads SDC. Web research confirms 125\nCrossroads Pkwy is Home Depot's 1.4-million-sq-ft Crossroads Distribution\nCenter, opened 1995 and acquired by Home Depot on January 29, 2025 for\n$145.5M from the Savannah Economic Development Authority. It operates 24/5 and\ndraws thousands of import containers from the Port of Savannah. The locked\ncenter is the building centroid.",
+        "mapsUrl": "https://www.google.com/maps/@32.15820,-81.20380,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Confirmed: Street View (2025-11) shows a metal swing-gate / barrier with a central island and bollards across the access road; the truck yards are fully fenced (perimeter fence visible in multiple satellite views).",
+          "guardShack": "No standalone guard booth positively resolved. The roadway barrier in the woods has no booth; the NW truck-yard entrance has a maintenance canopy and a round storage tank, not a clear guard booth. Flagged uncertain.",
+          "remoteGs": "Set true because truckGate is confirmed and no guard booth was confirmable — implies kiosk / call-box check-in. The site is a 1995-vintage import DC newly acquired by HD (Jan 2025); security posture may be evolving. Flagged uncertain.",
+          "shipRcvSeparate": "Cross-dock SDC: dock doors run along both long faces (NE and SW) of the building.",
+          "drivewayLong": "Long wooded access drive from Crossroads Pkwy plus a deep internal truck yard give 3+ truck stacking room.",
+          "backupSensitive": "Gate set far back from public roads on a long wooded drive — no risk of queue spilling onto a through road.",
+          "fastLaneOpportunity": "Wide paved truck yards and entrance apron leave room for an express/bypass lane.",
+          "urbanRural": "Edge-of-metro site ringed by woodland and water-retention ponds outside Savannah's dense fabric; judged Rural.",
+          "dropArea": "Hundreds of trailers / import containers parked along both long faces; 50+ band.",
+          "dropYard": "Dedicated trailer / container storage rows on both dock-yard faces, fed by Port of Savannah import flow.",
+          "dockDoorCount": "~200 doors estimated across both long faces of the 1.4M sq ft building; approximate.",
+          "entryLanes": "Single access drive serving as both entry and exit; lane counts estimated."
+        }
+      },
+      {
+        "id": "21-winchester-va-sdc",
+        "name": "Home Depot SDC - Winchester VA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 39.080075,
+          "lng": -78.153229
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.0768,
+            "west": -78.1572,
+            "north": 39.0838,
+            "east": -78.1488
+          },
+          "truckGate": {
+            "south": 39.07985,
+            "west": -78.1509,
+            "north": 39.08035,
+            "east": -78.1501
+          },
+          "dropYards": [
+            {
+              "south": 39.08055,
+              "west": -78.1523,
+              "north": 39.083,
+              "east": -78.1498
+            },
+            {
+              "south": 39.0813,
+              "west": -78.1556,
+              "north": 39.0832,
+              "east": -78.1535
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.08,
+              "west": -78.153,
+              "north": 39.0826,
+              "east": -78.1501
+            },
+            {
+              "south": 39.0772,
+              "west": -78.1562,
+              "north": 39.0801,
+              "east": -78.1528
+            }
+          ],
+          "staging": {
+            "south": 39.07995,
+            "west": -78.1514,
+            "north": 39.0807,
+            "east": -78.1501
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 200,
+          "trailersVisible": 175,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 62,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode flagged a 9,866 m move, so the location needed careful\nverification. Web search (Manta, BusinessYab, opengovny) all confirm \"The Home\nDepot Distribution Center: SDC, 280 Maranto Manor Dr, Winchester, VA 22602\"\nwith navigation coordinates 39.0800035, -78.1529453 — a near-exact match to the\nroster lat/lng. Satellite probing at z15-z17 confirmed a single very large\ncross-dock distribution building on the forested southern edge of Winchester,\nconsistent with an SDC. A Walmart retail store and one other building sit to\nthe NE; the HD DC is a standalone parcel reached by a dedicated truck access\nroad. Location locked.",
+        "mapsUrl": "https://www.google.com/maps/@39.080075,-78.153229,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Guarded checkpoint where the dedicated truck access road meets the truck yard at the SE corner; canopy structures span the inbound/outbound lanes with a striped channelizing median and painted directional arrows.",
+          "guardShack": "Small booth-footprint structure with canopy spanning the lanes at the gate checkpoint (~39.0801,-78.1506), set beside the truck lanes — distinct from the main DC building.",
+          "remoteGs": "False — a physical guard booth is present at the gate.",
+          "entryLanes": "Approximately 2 inbound lanes through the gate canopy; 2 outbound. Counted from z20/z21 satellite — moderate confidence.",
+          "fastLaneOpportunity": "Wide gate apron and a deep curving access road from the public road give ample paved width and queue depth to add an express/bypass lane.",
+          "drivewayLong": "The dedicated access road from the public-road stop sign curves ~250m+ to the gate, then opens into a long truck court — easily holds 3+ truck queue.",
+          "shipRcvSeparate": "Cross-dock building: dock banks with trailers backed in on both long faces (NW and SE), physically separate dock clusters.",
+          "dockDoors": "Cross-dock with dock doors along both ~600m long building faces; well over 50 doors total. Count is an estimate.",
+          "dropArea": "Long rows of parked trailers (no tractor) line the NW truck court and additional parking near the NE end — 50+ band.",
+          "urbanRural": "Standalone DC on the forested edge of Winchester VA, surrounded by woodland and farmland with only a Walmart and scattered residential nearby — edge-of-town/rural setting.",
+          "siteAreaAcres": "Estimated from the developed/paved-and-fenced footprint (building + both truck courts + trailer lots); the forested parcel envelope is larger.",
+          "preGateStaging": "Paved apron / access-road width outside the gate where a truck can wait; a truck was observed staged on the access road in Street View.",
+          "postGateStaging": "Paved yard area inside the gate before the dock aprons."
+        }
+      },
+      {
+        "id": "22-cranbury-nj-sdc",
+        "name": "Home Depot SDC - Cranbury NJ",
+        "type": "Stocking Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 40.307257,
+          "lng": -74.498028
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.3049,
+            "west": -74.5022,
+            "north": 40.3096,
+            "east": -74.4938
+          },
+          "truckGate": {
+            "south": 40.3061,
+            "west": -74.5004,
+            "north": 40.3066,
+            "east": -74.4998
+          },
+          "dropYards": [
+            {
+              "south": 40.3079,
+              "west": -74.5013,
+              "north": 40.3094,
+              "east": -74.4943
+            },
+            {
+              "south": 40.3053,
+              "west": -74.5,
+              "north": 40.3068,
+              "east": -74.4942
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.3074,
+              "west": -74.5013,
+              "north": 40.3081,
+              "east": -74.4944
+            },
+            {
+              "south": 40.3065,
+              "west": -74.5013,
+              "north": 40.3072,
+              "east": -74.4944
+            }
+          ],
+          "staging": {
+            "south": 40.3062,
+            "west": -74.5001,
+            "north": 40.3072,
+            "east": -74.4985
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 175,
+          "trailersVisible": 230,
+          "trailerParkingCapacity": 260,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 56,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Web search (chamberofcommerce, BusinessYab, Manta, Waze) confirms \"Home Depot\nDistribution Center, 61 Station Rd / 61 Cranbury Station Road, Cranbury, NJ\n08512,\" a General Warehousing & Storage operation running 24 hours on weekdays\n(Dun & Bradstreet lists ~400 employees). Satellite probing at the roster\ncoordinate showed a single very large cross-dock distribution building inside\nthe Cranbury / Exit 8A logistics corridor along the NJ Turnpike. Location\nlocked at the roster lat/lng (geocode move was only 1,434 m).",
+        "mapsUrl": "https://www.google.com/maps/@40.307257,-74.498028,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Guarded checkpoint on the truck driveway ~150m in from Cranbury Station Road (~40.3063,-74.5001): a guard booth in a center median island with barrier arms extending across the inbound and outbound lanes — clear controlled entrance.",
+          "guardShack": "Small booth with a distinctive pyramidal roof set in the median island between the two truck lanes, beside the barrier arms. Distinct from the DC building.",
+          "remoteGs": "False — a physical guard booth is present.",
+          "entryLanes": "1 inbound lane through the gate (single barrier arm); 1 outbound. The booth sits in the median between them.",
+          "fastLaneOpportunity": "Standard single-lane-each-way gate; no notable unused paved width or extra lanes for an express bypass.",
+          "drivewayLong": "The truck driveway curves ~150m from the public road to the gate, then opens into a deep truck court — holds a 3+ truck queue.",
+          "shipRcvSeparate": "Cross-dock building with dock banks and trailers backed in on both long faces (N and S), physically separate dock clusters.",
+          "dockDoors": "Cross-dock with dock doors along both ~600m long building faces — well over 50 doors. Count is an estimate.",
+          "dropArea": "Dense rows of detached trailers in drop lots on both the N and S truck courts — 50+ band; one of the highest trailer densities observed.",
+          "urbanRural": "Cranbury NJ Exit 8A logistics corridor — a dense, continuous belt of large distribution buildings along the NJ Turnpike. Urban industrial fabric.",
+          "siteAreaAcres": "Estimated from the fenced/developed footprint (building + both truck courts + drop lots); landscaped buffer parcel is somewhat larger.",
+          "preGateStaging": "Paved driveway width outside the gate where a truck can hold; modest stacking room.",
+          "postGateStaging": "Paved yard inside the gate before the dock aprons."
+        }
+      },
+      {
+        "id": "23-jersey-village-tx-sdc",
+        "name": "Home Depot SDC - Jersey Village TX",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "trailerParkingCapacity",
+          "dropArea"
+        ],
+        "center": {
+          "lat": 29.87742,
+          "lng": -95.557076
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 29.8748,
+            "west": -95.5588,
+            "north": 29.8801,
+            "east": -95.5558
+          },
+          "truckGate": {
+            "south": 29.87635,
+            "west": -95.55665,
+            "north": 29.87675,
+            "east": -95.5563
+          },
+          "dropYards": [
+            {
+              "south": 29.8752,
+              "west": -95.55855,
+              "north": 29.8796,
+              "east": -95.55755
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 29.8751,
+              "west": -95.5578,
+              "north": 29.8798,
+              "east": -95.5572
+            }
+          ],
+          "staging": {
+            "south": 29.8756,
+            "west": -95.5572,
+            "north": 29.8796,
+            "east": -95.5562
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 71,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 44.7,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Web search (Manta, LoopNet, Showcase, Prologis leasing flyer) confirms 7301\nSecurity Way as a distribution facility in the Prologis Jersey Village\nindustrial park — a state-of-the-art building with a spacious truck court,\n67 numbered dock-high doors with mechanical pit levelers, 4 semi-dock doors,\n1 drive-in ramp, and 28' clear height, on a 44.74-acre lot. The roster geocode\nwas ROOFTOP precision (only 57 m move). Satellite probing confirmed the roster\npin sits on the southern (brown-roof) portion of the large N-S building on the\nwest side of the Prologis park; a \"PROLOGIS Jersey Village\" monument sign is\nvisible in Street View. Location locked.",
+        "mapsUrl": "https://www.google.com/maps/@29.87742,-95.557076,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "The truck dock court is fully enclosed by a black metal perimeter fence; a cantilever/rolling gate spans the truck driveway at the SE entrance (~29.8766,-95.5565). Confirmed in 2025 Street View — controlled truck entrance.",
+          "guardShack": "No guard booth anywhere along the fenced perimeter — Street View shows only the automated rolling gate, no staffed structure.",
+          "remoteGs": "True — a real truck gate with no guard shack, implying badge/kiosk/automated check-in.",
+          "entryLanes": "Single rolling gate across one driveway lane; entry and exit share the one gate → entryExitTogether.",
+          "drivewayShort": "The gate sits close to Security Way with only a short paved apron between road and dock court — holds ~1-2 trucks, not a long queue.",
+          "shipRcvSeparate": "Single dock bank along the W (truck-court) face of the building; no second separate dock cluster. Ship and receive run from the one dock line.",
+          "dockDoors": "Leasing listing for 7301 Security Way states 67 numbered dock-high doors plus 4 semi-dock doors and 1 drive-in ramp; Street View shows the long single dock line with numbered doors (e.g. door 78 visible). Reported as 50+.",
+          "dockDoorCount": "71 = 67 dock-high + 4 semi-dock doors per the Prologis/leasing listing.",
+          "dropArea": "Moderate trailer parking in the fenced W truck court; imagery shows the court partly empty (the 7301 building had ~161,099 SF marketed for lease, suggesting partial occupancy). 10-25 trailers detached at time of capture — flagged as uncertain.",
+          "urbanRural": "Inside the Prologis Jersey Village industrial park at the US-290 / Beltway 8 interchange in NW Houston — dense urban industrial fabric.",
+          "siteAreaAcres": "44.74-acre lot per the Prologis/leasing listing for 7301 Security Way; building footprint ~296,839 sq ft.",
+          "postGateStaging": "Paved truck court inside the gate before the dock doors provides holding room.",
+          "multipleFacilities": "The HD SDC occupies one building (7301 Security Way, 'Prologis Jersey Village 4'); neighboring large warehouses in the same Prologis park are separate facilities/tenants."
+        }
+      },
+      {
+        "id": "24-lathrop-ca-sdc",
+        "name": "Home Depot SDC - Lathrop CA",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "truckGateCount",
+          "guardShack",
+          "entryLanes"
+        ],
+        "center": {
+          "lat": 37.792762,
+          "lng": -121.295676
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 37.7895,
+            "west": -121.299,
+            "north": 37.7973,
+            "east": -121.2885
+          },
+          "truckGate": {
+            "south": 37.7949,
+            "west": -121.2923,
+            "north": 37.7956,
+            "east": -121.2915
+          },
+          "dropYards": [
+            {
+              "south": 37.7928,
+              "west": -121.2971,
+              "north": 37.7961,
+              "east": -121.2923
+            },
+            {
+              "south": 37.7899,
+              "west": -121.2985,
+              "north": 37.7935,
+              "east": -121.2938
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 37.7932,
+              "west": -121.2965,
+              "north": 37.7962,
+              "east": -121.2926
+            },
+            {
+              "south": 37.7902,
+              "west": -121.2976,
+              "north": 37.7932,
+              "east": -121.2937
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 200,
+          "trailersVisible": 230,
+          "trailerParkingCapacity": 280,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 75,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Web search (Loc8NearMe, Manta, Superpages, Foursquare) confirms the Home Depot\nDistribution Center at 18300 S Harlan Rd, Lathrop, CA 95330 — Foursquare\nexplicitly tags it \"Home Depot SDC 5363,\" matching the roster DC number. The\nroster geocode was ROOFTOP precision (1,553 m move). Satellite probing showed\nthe roster pin sits squarely on a very large cross-dock distribution building\nin the Lathrop / I-5 logistics corridor. Location locked. (Note: one directory\nmislabels it an \"Import Distribution Center\"; DC #5363 is HD's SDC.)",
+        "mapsUrl": "https://www.google.com/maps/@37.792762,-121.295676,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "The truck court is wrapped in a chainlink perimeter fence (confirmed in 2023 Street View); truck access is via gate openings in that fence on the NE-side access road. Controlled entry but spec-building style.",
+          "guardShack": "No staffed guard booth seen along any perimeter access — only an open/sliding gate in the chainlink fence. Flagged as uncertain (booth could be small/obscured), but the building reads as a modern Prologis-style spec DC without a manned gatehouse.",
+          "remoteGs": "True — a fenced truck court with controlled gate(s) but no guard shack, implying badge/kiosk entry.",
+          "entryExitSeparate": "The cross-dock building has truck courts wrapping both long faces with separate access points (NE-side and SE-end), so inbound and outbound flows use distinct gates — modeled as entryExitSeparate.",
+          "truckGateCount": "At least 2 truck access points serve the two truck courts; exact count uncertain.",
+          "drivewayLong": "Deep truck courts and long internal access roads from the public road give ample queue depth (3+ trucks).",
+          "fastLaneOpportunity": "Very wide open truck courts and generous paved access roads provide clear room to add an express/bypass lane.",
+          "shipRcvSeparate": "Cross-dock building with dock banks and trailers backed in on BOTH long faces — two physically separate dock clusters.",
+          "dockDoors": "Cross-dock with dock doors along both ~750m long building faces; well over 50 doors. dockDoorCount ~200 is an estimate.",
+          "dropArea": "Heavy trailer activity — many rows of detached trailers in drop lots on both truck courts and adjacent yard areas. 50+ band.",
+          "railServed": "A rail line runs parallel to the building's SW side and crosses the NE access road, but no spur enters the building/dock — not rail-served.",
+          "urbanRural": "Lathrop CA, in the dense San Joaquin Valley logistics corridor at the I-5 interchange — surrounded by other large distribution buildings. Urban industrial fabric.",
+          "siteAreaAcres": "Estimated from the building footprint plus both wrapping truck courts and trailer lots; one of HD's larger CA distribution buildings.",
+          "postGateStaging": "Wide paved truck courts inside the fence provide ample post-gate holding before the dock doors.",
+          "scale": "No truck scale identified in the truck path."
+        }
+      },
+      {
+        "id": "25-romeoville-il-sdc",
+        "name": "Home Depot SDC - Romeoville IL",
+        "type": "Stocking Distribution Center",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 41.663229,
+          "lng": -88.112651
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.6625,
+            "west": -88.1142,
+            "north": 41.6685,
+            "east": -88.1108
+          },
+          "truckGate": {
+            "south": 41.66305,
+            "west": -88.1133,
+            "north": 41.6635,
+            "east": -88.1127
+          },
+          "dropYards": [
+            {
+              "south": 41.6638,
+              "west": -88.1139,
+              "north": 41.6676,
+              "east": -88.1127
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.6637,
+              "west": -88.1129,
+              "north": 41.6678,
+              "east": -88.1121
+            }
+          ],
+          "staging": {
+            "south": 41.6632,
+            "west": -88.1132,
+            "north": 41.664,
+            "east": -88.1124
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 45,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Web search (CMac, Dun & Bradstreet, Manta, hoursofoperation) confirms the Home\nDepot Distribution Center at 1070 Windham Parkway, Romeoville, IL 60446 — DC\n#5061, a General Warehousing & Storage operation. The roster geocode was\nROOFTOP precision (only 43 m move). Satellite probing confirmed the roster pin\nsits on a large cross-dock distribution building in the Romeoville / I-55\nlogistics corridor. Location locked.",
+        "mapsUrl": "https://www.google.com/maps/@41.663229,-88.112651,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "A guarded checkpoint at the SW corner (~41.6633,-88.1130): the truck driveway curves in from the access road and passes a guard booth with barrier-arm gates and a chainlink fence corner. Confirmed in 2022 Street View — controlled truck entrance.",
+          "guardShack": "Small white guard booth with windows on multiple sides, ~1-vehicle footprint, set beside the truck gate lanes. Clearly visible in Street View — distinct from the DC building.",
+          "remoteGs": "False — a staffed guard booth is present at the gate.",
+          "entryLanes": "Single inbound lane past the guard booth; single outbound. Entry and exit share the one gate complex → entryExitTogether.",
+          "fastLaneOpportunity": "Standard single-lane-each-way guarded gate; no notable spare paved width for an express bypass.",
+          "drivewayLong": "The truck driveway curves in from the access road and opens into a deep truck court along the building's W face — holds a 3+ truck queue.",
+          "shipRcvSeparate": "Dock doors and trailers concentrated along the building's W (truck-court) face; no second separate dock cluster — ship and receive run from the one dock line.",
+          "dockDoors": "Long dock line with dock doors and trailers backed in along the ~600m W face — into the 50+ band. dockDoorCount ~90 is an estimate.",
+          "dropArea": "Rows of detached trailers in the fenced W truck court — estimated 25-50 band; dropYard true.",
+          "urbanRural": "Romeoville IL, in the I-55 / Joliet-area logistics corridor — a dense cluster of large distribution buildings. Urban industrial fabric.",
+          "siteAreaAcres": "Estimated from the building footprint plus the W truck court / drop yard and the S office parking; building is one of the larger DCs in the corridor.",
+          "postGateStaging": "Paved truck court inside the gate before the dock doors provides holding room.",
+          "railServed": "No rail spur enters the property."
+        }
+      },
+      {
+        "id": "26-baytown-sdc",
+        "name": "Home Depot SDC - Baytown TX",
+        "type": "Stocking Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 29.732166,
+          "lng": -94.917884
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 29.7286,
+            "west": -94.92115,
+            "north": 29.7356,
+            "east": -94.9146
+          },
+          "truckGate": {
+            "south": 29.7313,
+            "west": -94.9168,
+            "north": 29.7322,
+            "east": -94.9157
+          },
+          "dropYards": [
+            {
+              "south": 29.7295,
+              "west": -94.9203,
+              "north": 29.7348,
+              "east": -94.9172
+            },
+            {
+              "south": 29.73,
+              "west": -94.9156,
+              "north": 29.735,
+              "east": -94.9146
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 29.7295,
+              "west": -94.9199,
+              "north": 29.7351,
+              "east": -94.9176
+            },
+            {
+              "south": 29.7301,
+              "west": -94.9157,
+              "north": 29.7352,
+              "east": -94.9147
+            }
+          ],
+          "staging": {
+            "south": 29.7312,
+            "west": -94.9172,
+            "north": 29.7325,
+            "east": -94.9156
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 53,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The supplied roster coordinates (ROOFTOP geocode, moved only 221 m) landed\ndirectly on a large white-roofed distribution building in a greenfield\nindustrial park east of Baytown, off FM 1405 near the SH-99 Grand Parkway.\nSatellite at zoom 17-20 confirms a single very large rectangular DC with\nloading docks on both long faces and dense trailer parking — consistent with\nan HD Stocking Distribution Center serving the Houston port-adjacent import\nflow. A 2023 Street View pass on the perimeter road shows the building still\nfinishing construction at that time; current Maxar imagery shows it fully\noperational with trailers in the yard. Location is positively identified.",
+        "mapsUrl": "https://www.google.com/maps/@29.732166,-94.917884,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single internal access road off FM 1405 funnels truck traffic to a controlled property entrance at the SE of the building; perimeter fencing rings the truck yard.",
+          "guardShack": "No clearly resolvable staffed booth at the entrance in current imagery; treated as kiosk/app check-in (remoteGs true). Low-confidence call — modern HD DC, security typically gate-controlled.",
+          "dockDoors": "Loading docks line both long faces (NW and SE); 60+ doors per face, total well above 50.",
+          "dropArea": "Extensive paved trailer rows along the NW and SE drop yards, easily 80-130 trailer slots; large dedicated drop yard present.",
+          "shipRcvSeparate": "Two distinct dock banks on opposite building faces (NW and SE).",
+          "urbanRural": "Edge-of-town greenfield industrial park east of Baytown, surrounded by farmland — Rural per rubric.",
+          "fastLaneOpportunity": "Wide gate apron and generous internal paved width; room to add an express lane."
+        }
+      },
+      {
+        "id": "27-locust-grove-dfc",
+        "name": "Home Depot DFC - Locust Grove GA",
+        "type": "Direct Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "buildingCount"
+        ],
+        "center": {
+          "lat": 33.37055,
+          "lng": -84.1845
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.3672,
+            "west": -84.1903,
+            "north": 33.3743,
+            "east": -84.1788
+          },
+          "truckGate": {
+            "south": 33.373,
+            "west": -84.1818,
+            "north": 33.3739,
+            "east": -84.1806
+          },
+          "dropYards": [
+            {
+              "south": 33.3723,
+              "west": -84.1895,
+              "north": 33.3743,
+              "east": -84.18
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.3706,
+              "west": -84.1896,
+              "north": 33.3726,
+              "east": -84.179
+            },
+            {
+              "south": 33.3674,
+              "west": -84.1896,
+              "north": 33.3688,
+              "east": -84.18
+            }
+          ],
+          "staging": {
+            "south": 33.3723,
+            "west": -84.1825,
+            "north": 33.3732,
+            "east": -84.18
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 160,
+          "trailersVisible": 260,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 105,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The supplied roster coordinate carried a large geocode error (ROOFTOP flag but\nmoved 8,852 m — the geocoder snapped to the wrong rooftop). Stepping out to\nzoom 14 over the Locust Grove / McDonough logistics corridor and walking in,\nthe HD Direct Fulfillment Center resolves to a very large distribution\nbuilding at roughly 33.3705, -84.1845, alongside a second large DC, fronting\nHwy 155 South in the Gardner Logistics Park area of Henry County. HD opened\nits first e-commerce DFC here in 2014-2016 (~1.6M+ sq ft across the campus per\nHD press / Henry Herald coverage). Zoom 16-18 imagery shows the building with\nextensive trailer fields and HD-spec trailers (white bodies, teal/green\nroofs). Location positively identified; coordinates re-derived from imagery.",
+        "mapsUrl": "https://www.google.com/maps/@33.37055,-84.18450,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Controlled entrances off the perimeter road into a fenced truck court; the campus is fully enclosed with truck circulation wrapping the buildings.",
+          "guardShack": "No staffed booth positively resolved at the entry in current imagery; classified as remote kiosk/app check-in. Lower-confidence call.",
+          "multipleFacilities": "Large DFC campus — two large distribution buildings (the 2016 DFC plus an adjacent later building) share trailer yards in the Gardner / Locust Grove logistics corridor.",
+          "dockDoors": "Dock banks on multiple building faces; well above 50 doors total across the campus.",
+          "dropArea": "Very large trailer-storage fields on the north side and a long apron south; 250+ trailers visible, ample dedicated drop yard.",
+          "shipRcvSeparate": "Distinct dock clusters on opposing faces of the main building.",
+          "urbanRural": "Locust Grove / Henry County logistics corridor — edge-of-town industrial amid woods and farmland; Rural per rubric.",
+          "fastLaneOpportunity": "Wide gate aprons and generous internal paved width support an express bypass."
+        }
+      },
+      {
+        "id": "28-perris-dfc",
+        "name": "Home Depot DFC - Perris CA",
+        "type": "Direct Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 33.8582,
+          "lng": -117.2152
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.8547,
+            "west": -117.218,
+            "north": 33.8607,
+            "east": -117.2123
+          },
+          "truckGate": {
+            "south": 33.8597,
+            "west": -117.2177,
+            "north": 33.8604,
+            "east": -117.2166
+          },
+          "dropYards": [
+            {
+              "south": 33.855,
+              "west": -117.2178,
+              "north": 33.8595,
+              "east": -117.2162
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.8549,
+              "west": -117.217,
+              "north": 33.8596,
+              "east": -117.2156
+            }
+          ],
+          "staging": {
+            "south": 33.8592,
+            "west": -117.2168,
+            "north": 33.8602,
+            "east": -117.2143
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 47,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The supplied roster coordinate (ROOFTOP geocode, moved 1,199 m) landed on the\nNW corner of a large dark-roofed distribution building in the Perris Logistics\nCenter area off Redlands Ave, immediately west of the City of Perris\nwastewater-treatment ponds (the grid of green/teal squares). HD opened an\n859,000 sq ft Direct Fulfillment Center here to serve West Coast e-commerce\n(390 skylights, \"zero landfill\" green building per HD press / Construction\nDive). IDI Logistics developed the surrounding Perris Logistics Center North\nat Redlands & Ellis. Zoom 17-19 imagery confirms a single very large DC with\na long dock bank and trailer staging on its west side. Location positively\nidentified.",
+        "mapsUrl": "https://www.google.com/maps/@33.85820,-117.21520,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single controlled truck entrance off the perimeter road at the building's NW; fenced truck court wraps the dock side. Office and car parking sit at the NW corner.",
+          "guardShack": "No staffed booth positively resolved; 2018 Street View predates construction and 2025 imagery shows the entrance landscaped but no clear booth. Classified as remote kiosk/app check-in. Lower-confidence call.",
+          "dockDoors": "Long dock bank with trailers backed in down the west face of the building; 50+ doors.",
+          "dropArea": "Trailer rows staged in the apron/yard along the west side; 25-50 band; a dedicated drop area is present.",
+          "shipRcvSeparate": "Docks concentrated on a single (west) building face — shipping and receiving not on physically separate banks.",
+          "urbanRural": "Perris is within the Inland Empire metro fabric; dense residential subdivisions border the site to the east — Urban.",
+          "fastLaneOpportunity": "Wide gate apron and generous paved width support adding an express lane."
+        }
+      },
+      {
+        "id": "29-luckey-dfc",
+        "name": "Home Depot DFC - Luckey OH",
+        "type": "Direct Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "connectivityIssue"
+        ],
+        "center": {
+          "lat": 41.48068,
+          "lng": -83.4642
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.4772,
+            "west": -83.4718,
+            "north": 41.4843,
+            "east": -83.4568
+          },
+          "truckGate": {
+            "south": 41.478,
+            "west": -83.4712,
+            "north": 41.479,
+            "east": -83.4698
+          },
+          "dropYards": [
+            {
+              "south": 41.4793,
+              "west": -83.471,
+              "north": 41.4828,
+              "east": -83.4655
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.4805,
+              "west": -83.4708,
+              "north": 41.4833,
+              "east": -83.4572
+            },
+            {
+              "south": 41.4776,
+              "west": -83.4708,
+              "north": 41.4798,
+              "east": -83.4572
+            }
+          ],
+          "staging": {
+            "south": 41.4818,
+            "west": -83.4695,
+            "north": 41.4834,
+            "east": -83.4655
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 200,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 230,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 130,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": true,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The supplied roster coordinate (ROOFTOP geocode, moved 3,079 m) landed\ndirectly on a single very large distribution building set in open farmland\nnear Luckey, in Wood County south of Toledo, alongside Pemberville Rd. Zoom\n15-18 imagery confirms one massive rectangular DC ringed by stormwater\nretention ponds, with dock banks and trailers on both long faces and a large\ntrailer-storage field at the NW end — consistent with an HD e-commerce Direct\nFulfillment Center. A small power-substation-like facility sits just south of\nthe site. Location positively identified.",
+        "mapsUrl": "https://www.google.com/maps/@41.48068,-83.46420,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single access drive from Pemberville Rd runs through farmland to a controlled entrance at the building's SW; the truck court is ringed by perimeter fencing.",
+          "guardShack": "No staffed booth positively resolved at the entrance; classified as remote kiosk/app check-in. Lower-confidence call.",
+          "dockDoors": "Very long dock banks down both long faces with trailers backed in; 200+ doors total — well into the 50+ band.",
+          "dropArea": "Large trailer-storage field at the NW end plus apron staging on both faces; 50+ band; dedicated drop yard present.",
+          "shipRcvSeparate": "Distinct dock banks on the north and south long faces.",
+          "urbanRural": "Single massive DC isolated in open farmland near Luckey, surrounded by retention ponds — Rural.",
+          "connectivityIssue": "Isolated rural setting far from any town center; cellular coverage may be marginal. Medium-confidence inference.",
+          "fastLaneOpportunity": "Generous internal paved width and a wide approach drive support an express lane."
+        }
+      },
+      {
+        "id": "30-baltimore-bdc",
+        "name": "Home Depot BDC - Baltimore MD",
+        "type": "Bulk Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "multipleFacilities",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 39.2197,
+          "lng": -76.4773
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.2164,
+            "west": -76.4795,
+            "north": 39.2227,
+            "east": -76.4748
+          },
+          "truckGate": {
+            "south": 39.2218,
+            "west": -76.4778,
+            "north": 39.2226,
+            "east": -76.4768
+          },
+          "dropYards": [
+            {
+              "south": 39.2168,
+              "west": -76.477,
+              "north": 39.2223,
+              "east": -76.4752
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.2168,
+              "west": -76.4772,
+              "north": 39.2223,
+              "east": -76.476
+            }
+          ],
+          "staging": {
+            "south": 39.2212,
+            "west": -76.4778,
+            "north": 39.2224,
+            "east": -76.4756
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 80,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 50,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The supplied roster coordinate (39.301709, -76.509079) was a GEOMETRIC_CENTER\ngeocode moved 3,972 m — effectively a Baltimore city-area centroid that did\nNOT point at the building; it landed on industrial/steel-yard land north of\nthe actual site.\n\n7700 Rolling Mill Road is inside Tradepoint Atlantic — the 3,300-acre\nlogistics redevelopment of the former Bethlehem Steel mill on the Sparrows\nPoint peninsula in southeastern Baltimore County. Home Depot completed a\n3-building, ~1.5 million sq ft distribution campus there in 2020-2021\n(Baltimore Sun, HD IR release Aug 2021). One of the three is HD's FDC at 6311\nTradepoint Ave (the separate roster idx 2). The Bulk Distribution Center\n#5904 is another building of that HD cluster.\n\nCoordinates were re-located by imagery to a large HD-area distribution",
+        "mapsUrl": "https://www.google.com/maps/@39.21970,-76.47730,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "locationResolution": "Address 7700 Rolling Mill Road is inside the Tradepoint Atlantic logistics campus (former Bethlehem Steel, Sparrows Point). The supplied roster coordinate was a city-centroid GEOMETRIC_CENTER geocode moved 3,972 m and did NOT point at the building. HD built a 3-building, ~1.5M sq ft campus at Tradepoint (one is the FDC at 6311 Tradepoint Ave = idx 2). Coordinates were re-located to a large HD-area DC at 39.2197,-76.4773 with HD-spec (green-topped) trailers in its dock apron. Because 30+ tenants occupy near-identical large DCs across the 3,300-acre Tradepoint site and interior Street View has no coverage/signage, the BDC-specific building could not be definitively isolated from the FDC and a third HD building — confidence is medium.",
+          "truckGate": "Tradepoint DCs are fenced with controlled truck entrances off the internal road grid; specific gate for this building inferred, not directly resolved.",
+          "guardShack": "Tradepoint Atlantic operates campus-level access control; no building-specific staffed booth resolved. Classified as remote/kiosk check-in at the building.",
+          "multipleFacilities": "HD operates a 3-building campus at Tradepoint Atlantic; the BDC is one building of that cluster.",
+          "dockDoors": "Large DC with a long dock apron full of trailers along the east face; estimated 50+ but the audited building may not be the exact BDC.",
+          "urbanRural": "Tradepoint Atlantic sits within the Baltimore metro on the Sparrows Point peninsula — Urban.",
+          "railServed": "Tradepoint Atlantic is heavily rail-served campus-wide; no spur confirmed running into this specific building's footprint, set false pending confirmation."
+        }
+      }
+    ]
+  }
+}

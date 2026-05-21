@@ -1,0 +1,2591 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:45:16.476Z",
+  "account": {
+    "slug": "mondelez-international",
+    "displayName": "Mondelez International",
+    "archetype": "cpg",
+    "siteCount": 22,
+    "coverageNote": {
+      "auditedCount": 22,
+      "estimatedFootprint": 26,
+      "droppedStubCount": 0,
+      "capHit": false,
+      "note": "We audited 22 of an estimated 26 Mondelez NA manufacturing and DC facilities. The 4 not shown are co-manufacturer / contract sites that operate inside other companies’ footprints."
+    }
+  },
+  "research": {
+    "facility_count": 22,
+    "audited_facilities": 22,
+    "source": "yard-audit",
+    "confidence": "verified",
+    "caveats": [
+      "Mondelez Toledo Flour Mill - Toledo OH: audit note mentions 'closed'",
+      "duplicate dropped from aggregate: Nabisco Allentown Sales Distribution Center - Allentown PA",
+      "Nabisco Atlanta Sales Distribution Center - Atlanta GA: audit note mentions 'sold'",
+      "duplicate dropped from aggregate: Nabisco Atlanta Sales Distribution Center - Atlanta GA"
+    ]
+  },
+  "network": {
+    "bbox": [
+      -122.668,
+      29.87015,
+      -72.76425,
+      45.5825
+    ],
+    "archetypeMix": {
+      "#6": 3,
+      "#4": 1,
+      "#3": 11,
+      "#9": 7
+    },
+    "totals": {
+      "dockDoors": 698,
+      "trailerCapacity": 1292,
+      "gates": 22,
+      "railServed": 6,
+      "acres": 720
+    },
+    "sites": [
+      {
+        "id": "01-nabisco-richmond-biscuit-bakery",
+        "name": "Nabisco Richmond Biscuit Bakery - Richmond VA",
+        "type": "Manufacturing - biscuit/cookie bakery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 37.496,
+          "lng": -77.354
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 37.4928,
+            "west": -77.3572,
+            "north": 37.4983,
+            "east": -77.3507
+          },
+          "truckGate": {
+            "south": 37.4944,
+            "west": -77.3554,
+            "north": 37.4949,
+            "east": -77.3547
+          },
+          "dropYards": [
+            {
+              "south": 37.4946,
+              "west": -77.3564,
+              "north": 37.4972,
+              "east": -77.3551
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 37.495,
+              "west": -77.3548,
+              "north": 37.496,
+              "east": -77.352
+            }
+          ],
+          "staging": {
+            "south": 37.4938,
+            "west": -77.3546,
+            "north": 37.4949,
+            "east": -77.3536
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 84,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (37.495999, -77.352959) landed on/near S Laburnum Ave just\neast of the building. Satellite probes (z16-z18) around that point revealed a\nlarge industrial complex on the west side of S Laburnum Ave. Street View at\n37.49334,-77.35344 (capture 2019-05) shows the entrance driveway with a\n\"Mondelez International\" monument sign and the distinctive dark-clad bakery\nbuilding — positively confirming the facility. Web research corroborates: this\nis Mondelez's Richmond biscuit bakery, ~1 million sq ft, ~650 employees, making\nOreo, Ritz, Nilla, Wheat Thins, Chips Ahoy. Locked center moved ~120m WNW of\nthe roster point to the true building-complex centroid.",
+        "mapsUrl": "https://www.google.com/maps/@37.49600,-77.35400,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/mondelez-international/01-nabisco-richmond-biscuit-bakery-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 37.496,
+              "lng": -77.354
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/mondelez-international/01-nabisco-richmond-biscuit-bakery-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 37.496,
+              "lng": -77.354
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
+        "fieldNotes": {
+          "truckGate": "Internal truck gate inside the property: chain-link fencing crosses the truck driveway ~150m in from S Laburnum Ave, with a gate where the drive meets the fenced trailer/dock yard (z21 imagery at 37.4947,-77.3551). The road-edge driveway entrance itself is open (no road-side barrier).",
+          "guardShack": "Small white/brown-roofed 1-2 vehicle-footprint structure beside the internal gate (visible z21 at 37.4943,-77.3551) - consistent with a staffed guard booth controlling truck-yard access.",
+          "drivewayLong": "Long entrance driveway runs ~150m from S Laburnum Ave intersection along the south building face before reaching the gated yard - ample queue depth for 3+ trucks.",
+          "fastLaneOpportunity": "Wide paved driveway apron and large open yard area at the internal gate; physical room to add an express/bypass lane.",
+          "dropArea": "Large dedicated west-side drop yard with many trailers parked in marked rows (z19 at 37.4950,-77.3555); estimate 55+ trailers visible, capacity ~90.",
+          "dockDoors": "Loading docks with trailers backed in along the south face of the main building; estimate ~40 doors, banded 25-50.",
+          "multipleFacilities": "Three distinct buildings on the property: the main ~1M sq ft bakery, a connected north wing, and a separate brown-roof building at the south.",
+          "scale": "No truck scale clearly visible in overhead imagery; left low-confidence.",
+          "exitLanes": "Single shared in/out gate; outbound lane count not separately determinable."
+        }
+      },
+      {
+        "id": "02-nabisco-chicago-bakery",
+        "name": "Nabisco Chicago Bakery - Chicago IL",
+        "type": "Manufacturing - biscuit/cracker bakery",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "multiStep",
+          "buildingCount"
+        ],
+        "center": {
+          "lat": 41.7588,
+          "lng": -87.7065
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.7566,
+            "west": -87.7123,
+            "north": 41.7615,
+            "east": -87.7025
+          },
+          "truckGate": {
+            "south": 41.7599,
+            "west": -87.7033,
+            "north": 41.76045,
+            "east": -87.7027
+          },
+          "dropYards": [
+            {
+              "south": 41.757,
+              "west": -87.712,
+              "north": 41.7588,
+              "east": -87.7085
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.757,
+              "west": -87.7075,
+              "north": 41.7579,
+              "east": -87.7035
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 50,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 100,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinate (41.760327, -87.703165) landed at the residential edge just\nNE of the plant. Satellite probes (z16-17) revealed a very large multi-building\nindustrial complex bordered by dense residential housing on the N/W and a major\nrail corridor on the S. Street View along S Kedzie Ave (panos 2024-2025) shows\nthe multi-story bakery with a red NABISCO sign and a Mondelez monument\nsign at the main entrance — positively confirming the facility. Locked center\nmoved ~330m SW to the building-complex centroid.",
+        "mapsUrl": "https://www.google.com/maps/@41.75880,-87.70650,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/mondelez-international/02-nabisco-chicago-bakery-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 41.7588,
+              "lng": -87.7065
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/mondelez-international/02-nabisco-chicago-bakery-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 41.7588,
+              "lng": -87.7065
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
+        "fieldNotes": {
+          "truckGate": "Fully fenced legacy urban plant. Main vehicle entrance off S Kedzie Ave (~41.7602,-87.7030) crosses the perimeter fence; satellite z21 shows split in/out lanes with directional arrows; Street View shows a guard booth in the entry lot.",
+          "guardShack": "Small white guard-booth structure visible in Street View (2024-07 / 2025-06 panos) standing in the entry parking lot just inside the Kedzie gate.",
+          "drivewayShort": "Tight urban site - the gate sits directly on S Kedzie Ave with limited internal stacking before the yard splits to docks/parking.",
+          "backupSensitive": "Gate opens directly onto S Kedzie Ave, a busy 4-lane urban arterial; a truck queue at the gate would spill onto the public road.",
+          "dockDoors": "Multiple dock banks - south building face along the rail line and east-side docks; total well over 50 doors. Banded 50+.",
+          "dropArea": "Very large dedicated trailer drop yard on the SW of the property, full of trailers parked in dense rows (z18/z19 imagery); 100+ trailers visible, capacity ~200.",
+          "shipRcvSeparate": "Distinct dock clusters on different building faces (rail-side south docks vs east-side truck docks) - shipping/receiving physically separated.",
+          "railServed": "Rail spur tracks run directly along the south building face off the adjacent Belt Railway corridor; the plant is rail-served (z19 imagery at 41.7576,-87.7055).",
+          "scale": "No truck scale clearly identified; left low-confidence.",
+          "multiStep": "Single gate stage observed; no clear second checkpoint - left false.",
+          "buildingCount": "Plant is a connected multi-section complex; counted as effectively 2 main masses but it is one continuous facility."
+        }
+      },
+      {
+        "id": "03-nabisco-portland-bakery",
+        "name": "Nabisco Portland Bakery - Portland OR",
+        "type": "Manufacturing - biscuit/cookie bakery",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "scale",
+          "dropArea",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 45.5811,
+          "lng": -122.6652
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 45.5797,
+            "west": -122.668,
+            "north": 45.5825,
+            "east": -122.6625
+          },
+          "truckGate": {
+            "south": 45.5804,
+            "west": -122.6634,
+            "north": 45.58095,
+            "east": -122.6628
+          },
+          "dropYards": [
+            {
+              "south": 45.5795,
+              "west": -122.6648,
+              "north": 45.5803,
+              "east": -122.663
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 45.5805,
+              "west": -122.6638,
+              "north": 45.5812,
+              "east": -122.6628
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 33,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinate (45.581046, -122.664875) landed on the bakery property.\nSatellite probes (z16-18) revealed a large legacy industrial bakery complex\nbordered by NE Columbia Blvd on the NE and a multi-track rail corridor on the\nSW/S. Web research (OPB, Panjiva, Yelp, Waze) confirms 100 NE Columbia Blvd as\nthe Mondelez/Nabisco Portland bakery producing Oreo, Ritz, and Chips Ahoy. Locked\ncenter on the main building-complex centroid.",
+        "mapsUrl": "https://www.google.com/maps/@45.58110,-122.66520,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/mondelez-international/03-nabisco-portland-bakery-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 45.5811,
+              "lng": -122.6652
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/mondelez-international/03-nabisco-portland-bakery-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 45.5811,
+              "lng": -122.6652
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
+        "fieldNotes": {
+          "truckGate": "Legacy urban plant. The SE truck-dock court is open access off a side street - Street View (2025-07) shows trucks/trailers parked at dock doors with no barrier arm or gate at the public road. Main bakery is perimeter-fenced along NE Columbia Blvd, but the active truck-dock court has open driveway access. Called false (open driveway, no road-side control); flagged uncertain.",
+          "guardShack": "A small square roofed structure sits internally near the dock court (~45.5808,-122.6634) - possibly a booth or covered checkpoint, but it is not positioned at a road-side gate. No clear staffed booth at a controlled truck entrance; called false, flagged uncertain.",
+          "drivewayShort": "Tight urban site; the dock court connects almost directly to the side street with minimal stacking depth.",
+          "dockDoors": "Truck dock doors on the SE dock building with several trucks/trailers backed in (Street View + z20 imagery); estimate ~18, banded 10-25.",
+          "dropArea": "Trailers parked at the dock building and a green-trailer lot just SE across NE Columbia Blvd that may be associated trailer storage; estimate 10-25, low confidence on count.",
+          "shipRcvSeparate": "Rail receiving (flour silos / rail siding) on the south building face is physically separate from the SE truck-dock cluster.",
+          "railServed": "Rail siding runs to flour silos on the south building face off the adjacent main-line corridor (z19 imagery at 45.5798,-122.664 and 45.5805,-122.666) - the plant is rail-served for ingredients.",
+          "multipleFacilities": "Multiple connected/adjacent building masses: the main bakery, the SE dock building, and ancillary structures.",
+          "scale": "No truck scale clearly identified; left low-confidence."
+        }
+      },
+      {
+        "id": "04-nabisco-naperville-bakery",
+        "name": "Nabisco Naperville Bakery - Naperville IL",
+        "type": "Manufacturing - cracker bakery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "scale",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 41.7714,
+          "lng": -88.188
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.77,
+            "west": -88.1915,
+            "north": 41.7742,
+            "east": -88.1845
+          },
+          "truckGate": {
+            "south": 41.7703,
+            "west": -88.1892,
+            "north": 41.77085,
+            "east": -88.1885
+          },
+          "dropYards": [
+            {
+              "south": 41.771,
+              "west": -88.191,
+              "north": 41.7734,
+              "east": -88.189
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.7726,
+              "west": -88.1896,
+              "north": 41.7736,
+              "east": -88.1885
+            }
+          ],
+          "staging": {
+            "south": 41.771,
+            "west": -88.1882,
+            "north": 41.772,
+            "east": -88.1872
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 32,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 100,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 58,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinate (41.771784, -88.187766) landed on the bakery property.\nSatellite probes (z16-18) revealed a large multi-building industrial bakery\ncampus with a U-shaped trailer drop yard on the west and flour silos. Web\nresearch (Yelp, Waze, Baking Business) confirms 1555 W Ogden Ave as the\nMondelez/Nabisco Naperville bakery — the sole North America Triscuit plant.\nStreet View confirms a fenced industrial facility with flour silos. Locked\ncenter on the building-complex centroid.",
+        "mapsUrl": "https://www.google.com/maps/@41.77140,-88.18800,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/mondelez-international/04-nabisco-naperville-bakery-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 41.7714,
+              "lng": -88.188
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/mondelez-international/04-nabisco-naperville-bakery-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 41.7714,
+              "lng": -88.188
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
+        "fieldNotes": {
+          "truckGate": "Plant is fully perimeter-fenced (chain-link with barbed wire confirmed in Street View 2018/2024). The internal truck road off Quincy Ave (south) passes a gate/checkpoint structure with a canopy near the rail-car loading area (~41.7705,-88.1888) - a controlled truck entrance.",
+          "guardShack": "A canopy-covered checkpoint structure stands at the truck gate lane (visible in Street View background, panos at 41.7694/-88.1895 and 41.7701/-88.1884). Consistent with a staffed guard booth/checkpoint; called true at medium confidence and flagged uncertain.",
+          "drivewayLong": "The internal truck road runs a long distance from the Quincy Ave gate up to the docks and trailer yard - ample queue depth for 3+ trucks.",
+          "fastLaneOpportunity": "Wide internal road and large open yard areas; physical room to add an express/bypass lane.",
+          "dockDoors": "Dock doors with trailers backed in on multiple building faces (NW face and others); estimate ~32, banded 25-50.",
+          "dropArea": "Large U-shaped trailer drop yard on the west side, full of trailers parked in rows (z19 imagery at 41.7718,-88.1908); 60+ trailers visible, capacity ~100.",
+          "shipRcvSeparate": "Rail receiving (flour hopper cars at the silos) is physically separate from the truck dock clusters.",
+          "railServed": "Rail spur runs into the property; rail hopper/tank cars parked at the flour silos (z19 imagery at 41.7709,-88.1888). Corroborated by industrial-history source noting the Naperville plant 'is still rail served'.",
+          "multipleFacilities": "Multiple buildings on the campus: the main bakery, a separate trailer-dock building to the N, and ancillary/utility structures.",
+          "scale": "No truck scale clearly identified; left low-confidence.",
+          "exitLanes": "Single shared in/out gate; outbound lane count not separately determinable."
+        }
+      },
+      {
+        "id": "05-clif-bar-baking-co-of-indianapolis",
+        "name": "Clif Bar Baking Co. of Indianapolis - Indianapolis IN",
+        "type": "Manufacturing - energy/nutrition bar bakery",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "dockDoorCount",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 39.88865,
+          "lng": -86.241
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.8868,
+            "west": -86.2432,
+            "north": 39.89,
+            "east": -86.2395
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 39.8874,
+              "west": -86.2425,
+              "north": 39.8882,
+              "east": -86.2413
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.888,
+              "west": -86.2413,
+              "north": 39.8892,
+              "east": -86.2401
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 16,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 28,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinate (39.888649, -86.241363) landed directly on the bakery\nbuilding complex. Satellite probes (z16-20) confirmed a single large industrial\nbakery building with an associated trailer drop yard and employee parking, in a\nNW-Indianapolis industrial park. Web research (IBJ, Pepper Construction, Baking\nBusiness) confirms 7575 Georgetown Rd as the Clif Bar Baking Co. of\nIndianapolis — a 185,000 sq ft plant (plus a 24,000 sq ft expansion), ~430\nemployees, opened 2012, fully owned by Clif Bar since 2016. Locked center on the\nbuilding centroid.",
+        "mapsUrl": "https://www.google.com/maps/@39.88865,-86.24100,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/mondelez-international/05-clif-bar-baking-co-of-indianapolis-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 39.88865,
+              "lng": -86.241
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/mondelez-international/05-clif-bar-baking-co-of-indianapolis-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 39.88865,
+              "lng": -86.241
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
+        "fieldNotes": {
+          "truckGate": "Open industrial-park facility. Street View (2024-07) shows the building set back behind an open grass lawn with no perimeter fence at the road and open driveway entrances - no barrier arm, gate, or checkpoint. Open driveway with no control = truckGate false. truckGateCount set to 0.",
+          "guardShack": "No truck gate and no booth structure at any entrance - false.",
+          "drivewayShort": "Industrial-park entrance driveways are short, connecting directly to internal parking/yard with minimal stacking depth.",
+          "dockDoors": "Truck dock bank on the E/SE building face with several trailers backed in (z19/z20 imagery); estimate ~14 doors, banded 10-25; flagged uncertain.",
+          "dropArea": "Trailer drop/staging yard on the SW with trailers parked in angled rows (z20 imagery at 39.8880,-86.2421); ~12-16 trailers, banded 10-25.",
+          "railServed": "A through rail line runs along the east edge of the property behind a tree buffer, but no spur enters the building - the facility is NOT rail-served.",
+          "multipleFacilities": "One main bakery building (~209,000 sq ft after expansion). Neighboring buildings (a Concentra clinic, an adjacent warehouse) are separate parcels, not part of the Clif Bar campus.",
+          "scale": "No truck scale identified; left low-confidence.",
+          "exitLanes": "Open driveway; outbound lane count not separately determinable."
+        }
+      },
+      {
+        "id": "06-tates-bake-shop-factory",
+        "name": "Tate's Bake Shop Factory - East Moriches NY",
+        "type": "Manufacturing - cookie bakery",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 40.81055,
+          "lng": -72.76535
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.8098,
+            "west": -72.7661,
+            "north": 40.8117,
+            "east": -72.76425
+          },
+          "truckGate": {
+            "south": 40.81055,
+            "west": -72.76475,
+            "north": 40.81085,
+            "east": -72.7643
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 40.8108,
+              "west": -72.76555,
+              "north": 40.81105,
+              "east": -72.7649
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 5,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 6,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 7.3,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Tate's Bake Shop Factory - East Moriches NY\n- Type: Manufacturing - cookie bakery (Mondelez-owned, acquired 2018)\n- Address: 62 Pine St, East Moriches, NY 11940\n- Locked coordinates: 40.81055, -72.76535",
+        "mapsUrl": "https://www.google.com/maps/@40.81055,-72.76535,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/mondelez-international/06-tates-bake-shop-factory-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 40.81055,
+              "lng": -72.76535
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/mondelez-international/06-tates-bake-shop-factory-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 40.81055,
+              "lng": -72.76535
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
+        "fieldNotes": {
+          "truckGate": "Single open driveway off Pine St with a TATE'S monument sign at the corner; no barrier arm, no controlled checkpoint. A short decorative fence segment exists near the sign but is pedestrian-scale, not a truck barrier.",
+          "guardShack": "No staffed booth at the entrance. Only a small office annex on the NE side of the building, well inside the property, not a gate-side guard structure.",
+          "backupSensitive": "Driveway meets a quiet two-lane public road with the dock apron close to the entrance and very little internal stacking room; a truck queue would back toward the road.",
+          "dockDoors": "Small 40,000 sq ft bakery. Loading occurs on the north building face; satellite z21 shows ~4 trailers/units backed against the wall plus a couple of additional bays. Estimated band 0-10.",
+          "dropArea": "A few trailers parked along the north apron without tractors; small count, band 0-10.",
+          "drivewayShort": "Gate-to-dock approach holds only 1-2 trucks; loading apron is immediately inside the entrance.",
+          "buildingCount": "Main bakery building plus a small attached/adjacent office annex on the NE corner."
+        }
+      },
+      {
+        "id": "07-mondelez-richmond-distribution-center",
+        "name": "Mondelez Richmond Distribution Center - Sandston VA",
+        "type": "Distribution center (3PL-operated, Kenco)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 37.4798,
+          "lng": -77.3382
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 37.4777,
+            "west": -77.34,
+            "north": 37.4825,
+            "east": -77.3358
+          },
+          "truckGate": {
+            "south": 37.4813,
+            "west": -77.3397,
+            "north": 37.482,
+            "east": -77.339
+          },
+          "dropYards": [
+            {
+              "south": 37.4788,
+              "west": -77.3378,
+              "north": 37.4807,
+              "east": -77.336
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 37.4782,
+              "west": -77.3383,
+              "north": 37.481,
+              "east": -77.3364
+            },
+            {
+              "south": 37.4788,
+              "west": -77.3397,
+              "north": 37.4817,
+              "east": -77.3387
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 45,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Mondelez Richmond Distribution Center - Sandston VA\n- Type: Distribution center (3PL-operated, Kenco)\n- Roster address: Airport Drive at SR-895 Interchange, Henrico County (Sandston), VA\n- Resolved address: 953 S. Airport Drive, Sauer Industrial Center, Sandston VA\n- Locked coordinates: 37.47980, -77.33820",
+        "mapsUrl": "https://www.google.com/maps/@37.47980,-77.33820,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/mondelez-international/07-mondelez-richmond-distribution-center-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 37.4798,
+              "lng": -77.3382
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/mondelez-international/07-mondelez-richmond-distribution-center-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 37.4798,
+              "lng": -77.3382
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
+        "fieldNotes": {
+          "locate": "Roster lat/lng was a GEOMETRIC_CENTER landing on open farmland 1.5 km from the actual building. Resolved via web research: the DC is at 953 S. Airport Drive in the Sauer Industrial Center, a Becknell build-to-suit just south of Richmond International Airport at the SR-895 / Airport Drive interchange. Locked to the southern of two large warehouses in the park (37.4798, -77.3382).",
+          "truckGate": "No clearly visible barrier arm, sliding gate, or staffed checkpoint at the property entrance in the available satellite imagery. The private access road off the SR-895 interchange feeds an open driveway/apron at the building's NW corner. Modern build-to-suit DCs commonly have a gate that may simply not be resolvable here, so this is flagged uncertain.",
+          "guardShack": "No guard booth identified at the entrance. The only small structure near the NW corner is a covered employee-entrance canopy on the building, not a gate-side booth.",
+          "remoteGs": "No gate confirmed, so no remote check-in inferred; flagged uncertain.",
+          "dockDoors": "Large cross-dock warehouse (~447,000 sq ft) with dock doors on the west, south and east faces; aggregate clearly 50+. Count of ~90 is an honest estimate from z18-z20 imagery.",
+          "dropArea": "Extensive trailer drop yard on the SE side near the stormwater pond with multiple rows of marked stalls full of untethered trailers; 50+ band, ~90 capacity estimate.",
+          "shipRcvSeparate": "Dock doors run on multiple distinct building faces (west bank vs east/south bank), consistent with separated ship/receive flows on a cross-dock layout; flagged uncertain since face roles cannot be confirmed from imagery.",
+          "drivewayLong": "Access road plus large open yard apron gives ample deep stacking for 3+ trucks before the docks.",
+          "fastLaneOpportunity": "Wide private access road and large paved yard apron leave abundant unused width to add an express/bypass lane.",
+          "postGateStaging": "Large paved yard apron inside the property before the dock faces functions as a holding/queue area.",
+          "urbanRural": "Edge-of-metro location: industrial park amid woods and farmland south of the airport, bordered by rural residential. Judged Rural per the small-town/edge-of-town rule.",
+          "yardMetrics": "Imagery is recent and clear; trailer and dock counts are honest overhead estimates and may vary."
+        }
+      },
+      {
+        "id": "08-mondelez-montgomery-sales-distribution-center",
+        "name": "Mondelez Montgomery Sales Distribution Center - Montgomery NY",
+        "type": "Distribution center / sales warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 41.494,
+          "lng": -74.2236
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.49255,
+            "west": -74.22455,
+            "north": 41.4949,
+            "east": -74.22215
+          },
+          "truckGate": {
+            "south": 41.49405,
+            "west": -74.2242,
+            "north": 41.49445,
+            "east": -74.22375
+          },
+          "dropYards": [
+            {
+              "south": 41.49255,
+              "west": -74.2242,
+              "north": 41.49385,
+              "east": -74.223
+            },
+            {
+              "south": 41.4932,
+              "west": -74.2231,
+              "north": 41.4942,
+              "east": -74.22215
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.4936,
+              "west": -74.224,
+              "north": 41.4942,
+              "east": -74.2232
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 32,
+          "trailerParkingCapacity": 37,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 11.6,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Mondelez Montgomery Sales Distribution Center - Montgomery NY\n- Type: Distribution center / sales warehouse\n- Address: 272 Neelytown Rd, Montgomery, NY 12549\n- Locked coordinates: 41.49400, -74.22360",
+        "mapsUrl": "https://www.google.com/maps/@41.49400,-74.22360,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/mondelez-international/08-mondelez-montgomery-sales-distribution-center-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 41.494,
+              "lng": -74.2236
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/mondelez-international/08-mondelez-montgomery-sales-distribution-center-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 41.494,
+              "lng": -74.2236
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
+        "fieldNotes": {
+          "truckGate": "Two open paved curb cuts off Neelytown Rd into the yard. No barrier arm, sliding gate, or checkpoint pinch-point; no perimeter fence along the road frontage in Street View (2025-08). Open-access facility.",
+          "guardShack": "No staffed booth at either driveway. The only secondary structure is a small office annex attached to the warehouse front, not a gate-side booth.",
+          "remoteGs": "No gate, so no remote check-in inferred.",
+          "entryExitSeparate": "Two separate driveways off Neelytown Rd serve the property, allowing distinct in/out points.",
+          "dockDoors": "100,300 sq ft sales DC. Street View shows ~8-12 bay doors on the NW building face; additional doors likely on the south/yard face. Estimated band 10-25, count ~14 - flagged uncertain (faces partly obscured at z21).",
+          "dropArea": "Large open trailer yard with multiple rows of parked trailers; published spec is 37 truck spots. ~32 trailers counted in imagery, band 25-50.",
+          "dropYard": "Dedicated trailer-storage yard wraps the south and east of the building, full of parked trailers.",
+          "drivewayLong": "Large open paved yard between the driveways and the dock face gives deep stacking for 3+ trucks.",
+          "fastLaneOpportunity": "Wide open yard apron and two driveways leave abundant unused paved width for an express/bypass lane.",
+          "postGateStaging": "Open paved yard inside the property before the docks functions as a holding/queue area.",
+          "urbanRural": "Facility sits on a rural two-lane road (Neelytown Rd) surrounded by woods and grass on the edge of Montgomery; clearly Rural.",
+          "truckGateCount": "Two distinct driveway entrances observed."
+        }
+      },
+      {
+        "id": "09-nabisco-norcross-distribution-center",
+        "name": "Nabisco Norcross Distribution Center - Norcross GA",
+        "type": "Distribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "dropArea",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 33.92175,
+          "lng": -84.2181
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.92105,
+            "west": -84.219,
+            "north": 33.9226,
+            "east": -84.2173
+          },
+          "truckGate": {
+            "south": 33.9221,
+            "west": -84.21895,
+            "north": 33.92245,
+            "east": -84.2185
+          },
+          "dropYards": [
+            {
+              "south": 33.9216,
+              "west": -84.21805,
+              "north": 33.9224,
+              "east": -84.21735
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.9215,
+              "west": -84.2181,
+              "north": 33.92215,
+              "east": -84.21755
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 13,
+          "trailersVisible": 5,
+          "trailerParkingCapacity": 14,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 6.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Nabisco Norcross Distribution Center - Norcross GA\n- Type: Distribution center\n- Roster address: Norcross, GA (city-level only)\n- Resolved address: 6300 Brook Hollow Pkwy, Norcross, GA 30071\n- Locked coordinates: 33.92175, -84.21810",
+        "mapsUrl": "https://www.google.com/maps/@33.92175,-84.21810,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/mondelez-international/09-nabisco-norcross-distribution-center-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 33.92175,
+              "lng": -84.2181
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/mondelez-international/09-nabisco-norcross-distribution-center-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 33.92175,
+              "lng": -84.2181
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
+        "fieldNotes": {
+          "locate": "Roster gave APPROXIMATE (city-level) coordinates. Resolved via web research (Businessyab, Chamber of Commerce, Becknell Industrial listing) to 6300 Brook Hollow Pkwy, Norcross GA 30071, then geocoded via Google Geocoding API to a ROOFTOP point at 33.9214824, -84.2181224. Locked to the warehouse there.",
+          "truckGate": "Open paved driveway off Brook Hollow Parkway into a front car-parking lot and on to the NE truck court. No barrier arm, sliding gate, or checkpoint pinch-point visible in satellite or Street View (2025-12).",
+          "guardShack": "No guard booth at the entrance. The building has an office front on the SW corner but no separate gate-side booth.",
+          "remoteGs": "No gate, so no remote check-in inferred.",
+          "dockDoors": "Moderate distribution warehouse; NE face shows a dock apron with roughly 10-14 dock-door positions and a few trailers. Band 10-25, count ~13 - flagged uncertain.",
+          "dropArea": "NE truck court holds only a handful of untethered trailers; small count, band 0-10 - flagged uncertain (court partly shadowed).",
+          "dropYard": "No dedicated standalone trailer-storage lot; the modest NE truck court doubles as dock staging, so dropYard left false.",
+          "drivewayShort": "Short approach - the front lot and truck court give room for only 1-2 trucks before the docks.",
+          "shipRcvSeparate": "Dock doors observed only on the NE face; no second distinct dock bank, so shipRcvSeparate false - flagged uncertain.",
+          "urbanRural": "Facility sits in the dense Norcross / Atlanta-metro industrial corridor along Brook Hollow Parkway, surrounded by large warehouses - Urban.",
+          "postGateStaging": "Front lot and NE truck court provide some inside-property holding space before the docks."
+        }
+      },
+      {
+        "id": "10-nabisco-aurora-sales-distribution-center",
+        "name": "Nabisco Aurora Sales & Distribution Center - Aurora CO",
+        "type": "Sales / distribution center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "dropArea",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 39.75895,
+          "lng": -104.7815
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.7581,
+            "west": -104.7821,
+            "north": 39.75985,
+            "east": -104.7806
+          },
+          "truckGate": {
+            "south": 39.7595,
+            "west": -104.78095,
+            "north": 39.7599,
+            "east": -104.78055
+          },
+          "dropYards": [
+            {
+              "south": 39.75835,
+              "west": -104.7813,
+              "north": 39.7597,
+              "east": -104.78075
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.75835,
+              "west": -104.78145,
+              "north": 39.75975,
+              "east": -104.78095
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 6,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Nabisco Aurora Sales & Distribution Center - Aurora CO\n- Type: Sales / distribution center\n- Roster address: Aurora, CO 80011 (ZIP-level only)\n- Resolved address: 17689 E 30th Ave, Aurora, CO 80011\n- Locked coordinates: 39.75895, -104.78150",
+        "mapsUrl": "https://www.google.com/maps/@39.75895,-104.78150,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/mondelez-international/10-nabisco-aurora-sales-distribution-center-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 39.75895,
+              "lng": -104.7815
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/mondelez-international/10-nabisco-aurora-sales-distribution-center-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 39.75895,
+              "lng": -104.7815
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
+        "fieldNotes": {
+          "locate": "Roster gave APPROXIMATE ZIP-level (80011) coordinates. Resolved via web research (Superpages, Chamber of Commerce, Yellowpages, Bandana) to 17689 E 30th Ave, Aurora CO 80011, then geocoded via Google Geocoding API to a ROOFTOP point at 39.7588784, -104.7818061. Locked to the tan-roof warehouse there.",
+          "truckGate": "Truck court and dock face are on the EAST side of the building. Driveways into the court are open paved curb cuts; no barrier arm or guard booth identified in satellite or Street View. Street View shows a black metal perimeter fence along the SOUTH frontage (car-parking side), so a sliding gate at the truck court entrance is possible but not resolvable - flagged uncertain.",
+          "guardShack": "No gate-side booth identified at either truck-court driveway. Flagged uncertain (entrance partly tree-obscured in Street View).",
+          "remoteGs": "No gate confirmed, so no remote check-in inferred; flagged uncertain.",
+          "dockDoors": "East face is the dock face; ~8-12 trailers/rigs backed in with empty positions between, implying roughly 15-25 doors. Band 10-25, count ~20 - flagged uncertain.",
+          "dropArea": "East truck court holds a mix of tractor-trailer rigs being loaded (DSD/sales operation) and some dropped trailers; band 10-25 - flagged uncertain.",
+          "dropYard": "The east truck court functions as both dock staging and trailer parking and is reasonably full of trailers; dropYard set true.",
+          "entryExitSeparate": "Two open driveways serve the east truck court (one toward the NE, one toward the SE), allowing distinct in/out points.",
+          "drivewayLong": "Long open east truck court gives deep stacking room for 3+ trucks before the dock doors.",
+          "shipRcvSeparate": "Dock doors observed only on the east face; no second distinct dock bank - shipRcvSeparate false, flagged uncertain.",
+          "urbanRural": "Facility is in a dense Aurora/Denver-metro industrial park (Stapleton/Northfield area), surrounded by large warehouses - Urban.",
+          "postGateStaging": "Open east truck court inside the property functions as a holding/queue area before the docks.",
+          "truckGateCount": "Two driveway entrances to the east truck court observed."
+        }
+      },
+      {
+        "id": "11-clif-bar-twin-falls",
+        "name": "Clif Bar Baking Co. of Twin Falls - Twin Falls ID",
+        "type": "Manufacturing - energy/nutrition bar bakery",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "truckGate"
+        ],
+        "center": {
+          "lat": 42.53985,
+          "lng": -114.40805
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.5378,
+            "west": -114.4106,
+            "north": 42.5418,
+            "east": -114.4056
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 42.5405,
+              "west": -114.4079,
+              "north": 42.5411,
+              "east": -114.4062
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 42.5396,
+              "west": -114.40895,
+              "north": 42.54035,
+              "east": -114.4084
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 10,
+          "trailersVisible": 9,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 88,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "0-10",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied city-centroid coordinates (42.5826, -114.4286) which fell in\na residential / farm area roughly 5 km northwest of the actual plant. Web\nresearch (Idaho Commerce ground-breaking release, BoiseDev, Magic Valley /\nTimes-News, Twin Falls Chamber) places the Clif Bar bakery on a ~90-acre parcel\nin the Jayco Industrial Park, in the area of **Champlin Road and Eldridge\nAvenue in southeast Twin Falls — street address commonly listed as 3438\nEldridge Ave** (ZIP 83341). The Chobani plant (3450 Kimberly Rd) is the large\n1M+ sq ft white facility immediately to the northwest, consistent with the\nroster note \"near the Chobani plant.\"\n\nSatellite confirmation: the building is the distinctive ~275,000 sq ft Clif Bar\nbakery — an L-shaped plant with a covered dock on its west face, an extensive",
+        "mapsUrl": "https://www.google.com/maps/@42.53985,-114.40805,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/mondelez-international/11-clif-bar-twin-falls-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 42.53985,
+              "lng": -114.40805
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/mondelez-international/11-clif-bar-twin-falls-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 42.53985,
+              "lng": -114.40805
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
+        "fieldNotes": {
+          "location": "Resolved to the Clif Bar bakery in the Jayco Industrial Park, area of Champlin Rd & Eldridge Ave, southeast Twin Falls (street address 3438 Eldridge Ave, ZIP 83341 per Waze listing). Roster city-centroid coords (42.5826,-114.4286) were ~5km NW in a residential/farm area; corrected via web research (Idaho Commerce, BoiseDev, Magic Valley) plus satellite confirmation of the distinctive ~275,000 sq ft biophilic-design plant with on-site solar arrays.",
+          "truckGate": "No barrier arm, sliding gate or checkpoint pinch-point visible at any driveway. The site sits on a ~90-acre standalone parcel with wide-open undeveloped buffer land; access roads are part of the industrial-park network and run open into the property. Classified false.",
+          "guardShack": "No staffed booth structure visible anywhere along the access roads or at the building. False.",
+          "remoteGs": "False — no gate present, so no remote check-in implied.",
+          "dockDoors": "Covered dock canopy on the west building face; ~9 trailers backed in / parked at the dock line. Total dock-door count ~8-12, banded 0-10 (low confidence — partly shadowed). Bulk-bar bakery, modest dock count.",
+          "dropArea": "Drop trailers staged along the north/east internal access road plus the open yard west of the dock; estimated 10-25 trailer capacity.",
+          "fastLaneOpportunity": "Very wide paved aprons and abundant unused paved width around the building loop — ample room to add express/bypass lanes.",
+          "drivewayLong": "Internal loop road from the park network to the dock can hold a 3+ truck queue.",
+          "urbanRural": "Edge-of-town isolated industrial site surrounded by farmland and open scrub; Rural.",
+          "imagery": "Street View at the property dates to 2012 (pre-construction empty land) so gate determination relies on current satellite (Maxar 2026), which is clear."
+        }
+      },
+      {
+        "id": "12-tates-shirley-distribution",
+        "name": "Tate's Bake Shop Production & Distribution Facility - Shirley NY",
+        "type": "Manufacturing / warehouse - cookie bakery + distribution",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "truckGate"
+        ],
+        "center": {
+          "lat": 40.8472,
+          "lng": -72.8717
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.8461,
+            "west": -72.8729,
+            "north": 40.8485,
+            "east": -72.8702
+          },
+          "truckGate": {
+            "south": 40.8481,
+            "west": -72.872,
+            "north": 40.8486,
+            "east": -72.8712
+          },
+          "dropYards": [
+            {
+              "south": 40.8468,
+              "west": -72.8711,
+              "north": 40.8483,
+              "east": -72.8704
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.8466,
+              "west": -72.8713,
+              "north": 40.8484,
+              "east": -72.8706
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 14.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied city-centroid coordinates (40.8015, -72.8743) with no\nstreet address. Web research established that in December 2023 Mondelez moved\nTate's into a newly-constructed warehouse and distribution development in\nShirley; the Precision Innovation Park — a two-building, ~400,000 sq ft\nClass-A logistics park delivered 2023 directly off the Long Island Expressway\n(I-495) in the Brookhaven research/technology park — is the matching\ndevelopment.\n\nPositive confirmation came from Street View (June 2024): a monument sign at the\npark entrance reads **\"TATE'S — PICK UP AND DELIVERIES — 111 Precision Drive —\nENTRANCE.\"** The corrected coordinates point to the large Class-A warehouse on\nthe south side of the LIE service road. (Notably, the roster's supplied\nlongitude, -72.8743, already matched Precision Drive almost exactly — only the",
+        "mapsUrl": "https://www.google.com/maps/@40.84720,-72.87170,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/mondelez-international/12-tates-shirley-distribution-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 40.8472,
+              "lng": -72.8717
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/mondelez-international/12-tates-shirley-distribution-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 40.8472,
+              "lng": -72.8717
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
+        "fieldNotes": {
+          "location": "Positively resolved to 111 Precision Drive, Shirley NY 11967 — a monument sign at the entrance reads 'TATE'S — PICK UP AND DELIVERIES — 111 Precision Drive — ENTRANCE' (Street View, Jun 2024). This is a building in the Precision Innovation Park, a Class-A logistics development directly off the Long Island Expressway delivered 2023; Mondelez moved Tate's into this newly-built warehouse/distribution facility in December 2023. Roster city-centroid coords (40.8015,-72.8743) were ~5km south; corrected — note the roster longitude already matched Precision Drive.",
+          "truckGate": "The truck court runs the full east face of the warehouse and connects to the Precision Innovation Park internal loop road at the NE corner. No barrier arm, sliding gate or checkpoint pinch-point is visible at the truck-court entry or at the 111 Precision Drive driveway. Classified false.",
+          "guardShack": "No staffed booth structure visible at the entrance, the truck court, or beside the building. False.",
+          "remoteGs": "False — no gate present.",
+          "dockDoors": "Dock doors line the full east face; ~25-30 doors estimated with ~12 trailers backed in / parked. Banded 25-50.",
+          "dropArea": "Trailers parked in the east truck court drop lanes outside the active dock positions; ~10-25.",
+          "shipRcvSeparate": "All dock doors are on a single (east) building face — shipping and receiving are not on physically separate banks.",
+          "fastLaneOpportunity": "Generous truck-court width and unused paved apron — room to add a bypass lane.",
+          "urbanRural": "Edge-of-town logistics park off the LIE, bordered by woods with single-family residential beyond; judged Rural per the small-town-industrial tie-break rule.",
+          "drivewayLong": "Loop road plus deep truck court can hold a 3+ truck queue.",
+          "buildingCount": "One large warehouse on this parcel; the cleared land to the NE is the (un-built) second building of the Precision Innovation Park master plan, not part of the Tate's parcel."
+        }
+      },
+      {
+        "id": "13-mondelez-toledo-flour-mill",
+        "name": "Mondelez Toledo Flour Mill - Toledo OH",
+        "type": "Manufacturing - flour mill (input/ingredient)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "scale"
+        ],
+        "center": {
+          "lat": 41.6651,
+          "lng": -83.4993
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.663,
+            "west": -83.5022,
+            "north": 41.6672,
+            "east": -83.4965
+          },
+          "truckGate": {
+            "south": 41.664,
+            "west": -83.4985,
+            "north": 41.6649,
+            "east": -83.4975
+          },
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 2,
+          "trailerParkingCapacity": 10,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 22,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied city-centroid coordinates (41.6528, -83.5379) with no street\naddress — these fell ~2 km southwest in a downtown-Toledo riverfront park.\nResearch established the published address as **2221 Front Street, Toledo OH\n43605** (Mennel Milling site, OSHA inspection record, World-Grain directory).\nThe mill sits in the historic Birmingham / Ironville heavy-industrial\ndistrict of East Toledo, on the east bank of the Maumee River. A Nominatim\ngeocode of the street address (41.6640, -83.4978) put the search in the right\nneighborhood; satellite then revealed the grain-elevator + milling complex, and\nStreet View (Aug 2023) gave positive confirmation — the riverside silo cluster\nis branded \"Mondelez.\"\n\nOwnership note: Mennel Milling completed acquisition of this mill from",
+        "mapsUrl": "https://www.google.com/maps/@41.66510,-83.49930,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/mondelez-international/13-mondelez-toledo-flour-mill-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 41.6651,
+              "lng": -83.4993
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/mondelez-international/13-mondelez-toledo-flour-mill-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 41.6651,
+              "lng": -83.4993
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
+        "fieldNotes": {
+          "location": "Positively resolved to 2221 Front St, Toledo OH 43605 — the historic Toledo Flour Mill on the east bank of the Maumee River in the Birmingham/Ironville industrial district of East Toledo. Street View (Aug 2023) shows the riverside grain-elevator silo cluster branded 'Mondelez'. Roster city-centroid (41.6528,-83.5379) was ~2km SW in a downtown riverfront park; corrected via Nominatim geocode of the street address plus satellite + Street View confirmation. NOTE: Mennel Milling acquired this mill from Mondelez in November 2025 — under Mondelez ownership for the campaign period, now Mennel-operated.",
+          "facilityType": "Bulk soft-wheat flour mill, not a packaged-goods DC. ~61,000 sq ft six-story mill plus extensive grain-elevator silos; 4.9-5.5M bushel storage. Truck activity is bulk flour loadout and bulk wheat receiving via silo spouts, plus heavy rail; there is no conventional packaged-goods dock-door bank.",
+          "truckGate": "TRUE — the property is enclosed by chain-link fencing along Front Street (visible in Street View); the truck driveway off Front St passes through a fenced entry. A controlled fenced industrial entrance.",
+          "guardShack": "FALSE — no staffed guard booth visible at the Front St entrance in 2022/2023 Street View or in satellite. The low brick building at the frontage is the mill office, not a gate booth.",
+          "remoteGs": "TRUE — there is a controlled/fenced truck gate but no guard shack, implying self / kiosk check-in at the mill office.",
+          "dockDoors": "0-10 — bulk flour loadout points, not a packaged-goods dock bank; only a handful of truck loadout positions. Low confidence on exact count.",
+          "dropArea": "NONE — no marked drop-trailer parking; this is a bulk mill, trucks load and leave.",
+          "scale": "TRUE (medium confidence) — a truck scale is standard at a grain/flour mill for inbound wheat and outbound flour weighing; a small scale-house structure is consistent with the imagery near the entrance, though not unambiguously resolved.",
+          "railServed": "TRUE — extensive rail yard with many curving spurs woven through the entire property serving the grain elevators; a railroad-crossing marking is painted on Front St. River barge dock also present.",
+          "multipleFacilities": "TRUE — the site is a campus of multiple distinct structures: the milling building, separate grain-elevator silo banks, warehouse/loadout buildings, and the office.",
+          "urbanRural": "Urban — dense East Toledo industrial/residential fabric on the Maumee riverfront."
+        }
+      },
+      {
+        "id": "14-mondelez-tatamy-distribution-center",
+        "name": "Mondelez/Nabisco Tatamy Sales Distribution Center - Tatamy PA",
+        "type": "Distribution center / sales warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "truckGate",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 40.7351,
+          "lng": -75.2612
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.7337,
+            "west": -75.2634,
+            "north": 40.7362,
+            "east": -75.2596
+          },
+          "truckGate": {
+            "south": 40.7349,
+            "west": -75.2634,
+            "north": 40.7358,
+            "east": -75.2627
+          },
+          "dropYards": [
+            {
+              "south": 40.7346,
+              "west": -75.2633,
+              "north": 40.736,
+              "east": -75.2624
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.7344,
+              "west": -75.2624,
+              "north": 40.7356,
+              "east": -75.2606
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 24,
+          "trailersVisible": 32,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 12.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied city-centroid coordinates (40.7401, -75.2557) with no street\naddress — ~1 km northeast of the actual facility. Web research resolved the\naddress: Becknell Industrial built a ~100,300 sq ft build-to-suit Nabisco /\nMondelez food-and-beverage distribution warehouse in Tatamy, and the Becknell\nproperty listing, a Foursquare DC listing, and the Mondelez hourly-jobs portal\nall give the branch address as 120 Commerce Lane, Tatamy PA 18085\n(Northampton County, Lehigh Valley; the Becknell page also shows the\nPalmer-Township ZIP 18045).\n\nA Nominatim geocode (40.7362, -75.2619) put the search in the Becknell\nindustrial park; satellite then identified the modern grey warehouse with purple\naccent striping — a build-to-suit DC with a fenced truck/drop yard on its south\nface, matching the documented ~100,300 sq ft Nabisco facility.",
+        "mapsUrl": "https://www.google.com/maps/@40.73510,-75.26120,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/mondelez-international/14-mondelez-tatamy-distribution-center-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 40.7351,
+              "lng": -75.2612
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/mondelez-international/14-mondelez-tatamy-distribution-center-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 40.7351,
+              "lng": -75.2612
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
+        "fieldNotes": {
+          "location": "Resolved to 120 Commerce Lane, Tatamy PA 18085 (Northampton County, Lehigh Valley) — a Becknell Industrial build-to-suit warehouse in the Tatamy/Palmer Township industrial park. Roster city-centroid (40.7401,-75.2557) was ~1km NE; corrected via web research (Becknell property page, Foursquare, Mondelez hourly-jobs portal all list 120 Commerce Lane) plus Nominatim geocode and satellite. The modern grey warehouse with purple accent striping and a fenced truck/drop yard matches the ~100,300 sq ft build-to-suit Nabisco DC.",
+          "truckGate": "TRUE — Street View (Jul 2024) of the Commerce Lane frontage shows chain-link perimeter fencing enclosing the truck/drop yard with branded trailers parked inside; the yard is accessed through a fenced gate off the loop road. A controlled, fenced industrial entrance.",
+          "guardShack": "FALSE — no staffed guard-booth structure visible at the yard entrance or building in Street View or satellite.",
+          "remoteGs": "TRUE — fenced/controlled truck gate present but no guard shack, implying kiosk / app / dock-office check-in.",
+          "dockDoors": "10-25 — dock doors line the south building face; ~20-24 estimated with many trailers backed in. Banded 10-25.",
+          "dropArea": "25-50 — a long row of drop trailers parked in the yard alongside the docked trailers; counts in the 30-40 range.",
+          "shipRcvSeparate": "FALSE — all dock doors are on a single (south) building face.",
+          "fastLaneOpportunity": "TRUE — wide paved truck yard with substantial unused apron width.",
+          "drivewayLong": "Deep truck yard / loop road can hold a 3+ truck queue.",
+          "urbanRural": "Edge-of-town build-to-suit industrial park bordered by other warehouses and single-family residential; judged Rural per the small-town-industrial tie-break.",
+          "buildingCount": "One warehouse on the Mondelez parcel; neighboring buildings in the Becknell park are separate tenants."
+        }
+      },
+      {
+        "id": "15-mondelez-aurora-distribution-center",
+        "name": "Mondelez Aurora Distribution Center (DHL/Exel-operated) - Aurora IL",
+        "type": "Distribution center (3PL-operated, DHL/Exel Logistics)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "railServed"
+        ],
+        "center": {
+          "lat": 41.7355,
+          "lng": -88.347
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.733,
+            "west": -88.3496,
+            "north": 41.7385,
+            "east": -88.3442
+          },
+          "truckGate": {
+            "south": 41.7335,
+            "west": -88.349,
+            "north": 41.7342,
+            "east": -88.3481
+          },
+          "dropYards": [
+            {
+              "south": 41.7333,
+              "west": -88.3478,
+              "north": 41.7348,
+              "east": -88.3445
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.7343,
+              "west": -88.349,
+              "north": 41.7349,
+              "east": -88.3447
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 7,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 38,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied coordinates (41.7405, -88.3506) and the street address\n2380 Sullivan Rd, Aurora IL 60506. The roster coords were ~0.6 km northwest of\nthe building. Web research (Waze \"DHL Mondelez,\" LoopNet, businessyab,\nIllinois-pages) all corroborate 2380 Sullivan Rd as the DHL Supply Chain /\nExel Logistics distribution center serving Mondelez / Kraft Foods — a ~533,232\nsq ft warehouse (~144,112 sq ft of it temperature-controlled) with immediate\nI-88 access. Satellite and Street View confirmed the large warehouse on the\ncorrected coordinates.\n\nOperational note: one real-estate listing flags the building as possibly\navailable / for lease, while other 2025 sources still reference it as\noperational. The current satellite shows a vast but nearly empty truck yard,\nconsistent with reduced operations or a transitional state.",
+        "mapsUrl": "https://www.google.com/maps/@41.73550,-88.34700,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/mondelez-international/15-mondelez-aurora-distribution-center-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 41.7355,
+              "lng": -88.347
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/mondelez-international/15-mondelez-aurora-distribution-center-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 41.7355,
+              "lng": -88.347
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
+        "fieldNotes": {
+          "location": "Resolved to 2380 Sullivan Rd, Aurora IL 60506 — a ~533,232 sq ft warehouse with immediate I-88 access, long operated as the DHL Supply Chain / Exel Logistics distribution center for Mondelez/Kraft Foods. Roster city-centroid (41.7405,-88.3506) was ~0.6km NW; corrected via web research (Waze 'DHL Mondelez', LoopNet, businessyab all confirm 2380 Sullivan Rd) plus satellite and Street View. Note one real-estate listing flags the building as possibly available/underutilized — the very large but near-empty truck yard in current imagery is consistent with reduced operations.",
+          "truckGate": "TRUE — Street View (Apr 2024) of the Sullivan Rd entrance clearly shows a black ornamental metal perimeter fence with a sliding/swing gate across the truck driveway. A controlled truck entrance.",
+          "guardShack": "FALSE — no staffed guard-booth structure visible beside the gated entrance in Street View or satellite.",
+          "remoteGs": "TRUE — a controlled gate is present but there is no guard shack, implying kiosk / app / remote check-in.",
+          "drivewayShort": "The gate sits fairly close to Sullivan Rd with a short approach between road and gate; marked both drivewayShort and drivewayLong because the interior yard beyond the gate is extremely deep (3+ truck queue capacity inside).",
+          "dockDoors": "25-50 — a dock bank with covered dock canopies runs along the south building face; ~40-50 doors estimated across the long facade. Banded 25-50.",
+          "dropArea": "0-10 — the truck yard is enormous but currently nearly empty (only ~3-7 trailers visible); striped trailer stalls exist but are largely unoccupied in current imagery.",
+          "trailerParkingCapacity": "The paved south yard is very large (could hold 150+ trailers) even though it is mostly empty now.",
+          "railServed": "TRUE (medium confidence) — a rail spur/line runs along the north edge of the property; whether an active spur enters the dock is not certain from imagery, but rail infrastructure is adjacent and the corridor on the east side carries multiple tracks.",
+          "buildingCount": "Two — the main ~533k sq ft warehouse plus a separate smaller building at the SW of the parcel.",
+          "fastLaneOpportunity": "TRUE — a vast paved yard and wide gate apron leave abundant room for express/bypass lanes.",
+          "urbanRural": "Edge-of-Aurora industrial area bordered by retention ponds, light industrial, and open land; judged Rural per the small-town-industrial tie-break."
+        }
+      },
+      {
+        "id": "16-east-hanover-nj",
+        "name": "Mondelez North America Headquarters / East Hanover Bakery Campus - East Hanover NJ",
+        "type": "Corporate HQ + active manufacturing/distribution campus (Nabisco bakery)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "scale",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 40.812,
+          "lng": -74.3738
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.8082,
+            "west": -74.3795,
+            "north": 40.8162,
+            "east": -74.3692
+          },
+          "truckGate": {
+            "south": 40.8085,
+            "west": -74.3752,
+            "north": 40.8092,
+            "east": -74.3742
+          },
+          "dropYards": [
+            {
+              "south": 40.8112,
+              "west": -74.3742,
+              "north": 40.8128,
+              "east": -74.3718
+            },
+            {
+              "south": 40.8132,
+              "west": -74.3768,
+              "north": 40.8148,
+              "east": -74.3742
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.811,
+              "west": -74.3748,
+              "north": 40.813,
+              "east": -74.3712
+            },
+            {
+              "south": 40.813,
+              "west": -74.3772,
+              "north": 40.815,
+              "east": -74.374
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 2,
+          "buildingCount": 8,
+          "siteAreaAcres": 78,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "### Resolved location\n- Roster supplied: 40.8126, -74.3676 — a city-level centroid that landed\n  in cemetery / open green space roughly 600 m east of the real campus.\n- Resolved: ~40.8120, -74.3738 (100 DeForest Avenue, East Hanover, NJ\n  07936). Confirmed via web research (Mondelez US site, East Hanover\n  Partnership directory, Morris Chamber) plus satellite — the only\n  large-scale industrial complex matching the address corridor.\n- Confidence in location: high.\n\n### Facility type — office vs freight\nThis is both. The East Hanover address is officially Mondelez's North\nAmerica headquarters, but the campus is a large multi-building **industrial\ncomplex** — it houses the Nabisco East Hanover bakery and a major\ndistribution operation. This is a genuine, high-relevance freight facility,",
+        "mapsUrl": "https://www.google.com/maps/@40.812,-74.3738,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/mondelez-international/16-east-hanover-nj-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 40.812,
+              "lng": -74.3738
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/mondelez-international/16-east-hanover-nj-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 40.812,
+              "lng": -74.3738
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
+        "fieldNotes": {
+          "location": "Roster coords (40.8126,-74.3676) were a city centroid landing in Restland/Whippany-area cemetery green space ~600m east of the real site. Resolved to the Mondelez East Hanover industrial campus at 100 DeForest Ave via web research + satellite. Locked center 40.8120,-74.3738.",
+          "facilityType": "This is NOT a pure office. The East Hanover address is Mondelez's North America HQ, but the campus is a large multi-building industrial complex housing the Nabisco East Hanover bakery and a major distribution operation. Satellite shows extensive truck activity: long warehouse rows, dock aprons on multiple building faces, and 100+ trailers parked across two large drop areas. Freight relevance is HIGH.",
+          "truckGate": "Campus is a private internal-road industrial complex set well back from public roads (DeForest Ave). Public Street View only reaches the adjacent retail plaza and brick building exteriors, not the truck entrance. A controlled/fenced perimeter with internal access roads is visible in satellite; a guarded gate is the strong norm for a corporate-HQ-grade industrial campus of this size — classified true with guardShack true, but flagged uncertain because the booth itself was not directly imaged.",
+          "railServed": "Street View on the NW frontage shows a rail spur running along the base of a brick Mondelez building - confirms rail service into the property.",
+          "multipleFacilities": "Confirmed campus: 8+ distinct large buildings, mix of warehouse rows and an office-profile structure at the NW end.",
+          "fastLaneOpportunity": "Wide internal aprons and abundant paved width seen in satellite.",
+          "dockDoorCount": "90 is an overhead estimate across multiple building faces; bands clearly land in 50+.",
+          "scale": "No truck scale positively identified in available imagery; left false."
+        }
+      },
+      {
+        "id": "17-whippany-nj",
+        "name": "Mondelez Global R&D Innovation Center - Whippany NJ",
+        "type": "R&D / global innovation center (office + lab, pilot & scale-up lines)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoors",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 40.82,
+          "lng": -74.4097
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.8186,
+            "west": -74.4118,
+            "north": 40.8214,
+            "east": -74.4076
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 1,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 9,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "NONE",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "### Resolved location\n- Roster supplied: 40.8198, -74.4179 — an approximate Route 10 / Whippany\n  centroid roughly 700 m WNW of the real building.\n- Resolved: ~40.8200, -74.4097 — **941/945 State Route 10, Whippany, NJ\n  07981**, the former Cadbury \"Channel Building\". Confirmed via web research\n  (Real Estate NJ, CoStar, Mondelez IR) plus satellite: the only Route-10\n  building matching the size and the repurposed-Cadbury-lab description.\n- Background: the building was leased and built out ~2004-05 as a\n  148,000 sq ft candy/gum laboratory for Cadbury Adams USA; Mondelez\n  repurposed it (~$50M) into its Global R&D Innovation Center, which opened\n  May 2023 with pilot and scale-up lines for cookies, crackers and candy.\n- Confidence in location: medium-high.\n\n### Facility type — office vs freight",
+        "mapsUrl": "https://www.google.com/maps/@40.82,-74.4097,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/mondelez-international/17-whippany-nj-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 40.82,
+              "lng": -74.4097
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/mondelez-international/17-whippany-nj-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 40.82,
+              "lng": -74.4097
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
+        "fieldNotes": {
+          "location": "Roster coords (40.8198,-74.4179) were an approximate Route 10 / Whippany centroid ~700m WNW of the real building. Resolved via web research to 941/945 State Route 10 (the former Cadbury 'Channel Building', a ~148-150k sq ft former Cadbury Adams candy/gum lab) and confirmed via satellite. Locked center 40.8200,-74.4097.",
+          "facilityType": "This is a corporate R&D / global innovation center - office + lab, NOT a freight plant. ~150,000 sq ft, ~$50M repurposed Cadbury R&D building, opened May 2023, houses ~50 R&D makers/bakers plus pilot and scale-up lines for cookies, crackers and candy. Freight relevance is LOW: it consumes small material shipments, not a distribution operation.",
+          "layout": "Satellite (z19-z20) shows a long L-shaped low-rise building with rooftop HVAC, ringed by car/employee parking and a large ground-mount solar array on the SW lot (consistent with Mondelez electric-baking / net-zero messaging). No dock apron, no trailer parking, no dock-door bank visible.",
+          "truckGate": "Open office-park driveway off Route 10 with no barrier, no guard booth - false. Street View from inside the lot shows landscaped employee parking and a flagpole, no controlled truck entrance.",
+          "dockDoors": "No loading-dock bank. Classified NONE; dockDoorCount set to 1 as a conservative allowance for a single small service/materials door typical of an R&D building - flagged uncertain.",
+          "drivewayShort": "Short office-park entrance drive only.",
+          "urbanRural": "Suburban Morris County office/commercial corridor on Route 10 with dense surrounding residential and retail - classified Urban."
+        }
+      },
+      {
+        "id": "18-chicago-il",
+        "name": "Mondelez Global Headquarters - Chicago IL",
+        "type": "Corporate HQ (global) - downtown office building",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoors",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 41.8866,
+          "lng": -87.6513
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.8862,
+            "west": -87.6517,
+            "north": 41.887,
+            "east": -87.6509
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 1,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 0.6,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": false,
+          "backupSensitive": true,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "NONE",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "### Resolved location\n- Roster supplied: 41.8866, -87.6513 — already accurate to the building.\n- Confirmed: 905 W Fulton Market, Chicago, IL 60607 — a 5-story office\n  building in the Fulton Market neighborhood. Mondelez leases all office\n  floors (~77,100 sq ft office + ~6,150 sq ft retail, 15-year lease) as its\n  global headquarters, relocated from Deerfield, IL in 2020.\n- Confidence in location: high.\n\n### Facility type — office vs freight\nThis is a downtown corporate office building. It has **zero freight\nrelevance** for yard management — no truck yard, no dock bank, no trailer\nparking, no gate.\n\n### What the imagery showed\n- z20 satellite: the building is positively identified by its\n  distinctive green roof / landscaped terrace, which matches the\n  published description of 905 W Fulton Market. It is a full-block-edge",
+        "mapsUrl": "https://www.google.com/maps/@41.8866,-87.6513,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/mondelez-international/18-chicago-il-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 41.8866,
+              "lng": -87.6513
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/mondelez-international/18-chicago-il-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 41.8866,
+              "lng": -87.6513
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
+        "fieldNotes": {
+          "location": "Roster coords (41.8866,-87.6513) were already accurate to the building. Confirmed as 905 W Fulton Market, Chicago IL 60607 - a 5-story office building. Mondelez leases all office floors (~77,100 sq ft office + ~6,150 sq ft retail) as its global HQ, relocated from Deerfield IL in 2020.",
+          "facilityType": "This is a downtown corporate office building, NOT a freight facility. Zero freight relevance for yard management - it has no truck yard, no dock bank, no trailer parking, no gate.",
+          "layout": "Satellite z20 confirms the building by its distinctive green roof / landscaped terrace (matching published descriptions). It is a full-block-edge loft-style building flush to the sidewalk on all sides in dense Fulton Market.",
+          "truckGate": "No truck entrance - the building meets the public sidewalk directly. Curbside delivery only. truckGate/guardShack/remoteGs all false.",
+          "dockDoors": "No loading-dock bank. Set NONE; dockDoorCount=1 as a nominal allowance for an interior freight-elevator / service door reached from the alley or curb - flagged uncertain.",
+          "backupSensitive": "Set true: any delivery truck must stop curbside on a dense downtown street, which interrupts traffic - there is zero off-street stacking room.",
+          "entryLanes": "null - no truck gate exists.",
+          "urbanRural": "Dense urban core (Fulton Market, Chicago) - unambiguously Urban."
+        }
+      },
+      {
+        "id": "20-memphis-tn",
+        "name": "Nabisco Memphis Sales Distribution Center - Memphis TN",
+        "type": "Distribution center / sales warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "railServed"
+        ],
+        "center": {
+          "lat": 35.0184,
+          "lng": -89.8695
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.0173,
+            "west": -89.8712,
+            "north": 35.0196,
+            "east": -89.8678
+          },
+          "truckGate": {
+            "south": 35.0182,
+            "west": -89.8692,
+            "north": 35.0187,
+            "east": -89.8686
+          },
+          "dropYards": [
+            {
+              "south": 35.0186,
+              "west": -89.8708,
+              "north": 35.0193,
+              "east": -89.8682
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.0184,
+              "west": -89.871,
+              "north": 35.019,
+              "east": -89.868
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 9,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 7.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "### Resolved location\n- Roster supplied: 35.1175, -89.9711 — a downtown-Memphis centroid\n  roughly 16 km NW of the real site.\n- Resolved: ~35.0184, -89.8695 — **5812 Distribution Drive, Memphis, TN\n  38141**, in the SE Memphis (Lamar / Getwell) industrial corridor.\n- How confirmed: Superpages/Yellowpages list \"Nabisco, 5812 Distribution\n  Dr, Memphis TN 38141\"; Shelby County tax-assessor records (via city-data)\n  list the 5812 Distribution Drive parcel owner as MONDELEZ GLOBAL LLC —\n  a strong, independent confirmation. Satellite then matched a fenced\n  distribution warehouse at that point.\n- Confidence in location: high.\n\n### Facility type — office vs freight\nThis is a genuine freight facility — a single-story Nabisco/Mondelez\nsales-distribution warehouse with an office front. Freight relevance is HIGH.",
+        "mapsUrl": "https://www.google.com/maps/@35.0184,-89.8695,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/mondelez-international/20-memphis-tn-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 35.0184,
+              "lng": -89.8695
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/mondelez-international/20-memphis-tn-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 35.0184,
+              "lng": -89.8695
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
+        "fieldNotes": {
+          "location": "Roster coords (35.1175,-89.9711) were a downtown-Memphis centroid ~16 km NW of the real site. Resolved to 5812 Distribution Dr, Memphis TN 38141 via web research; Shelby County tax-assessor records confirm the 5812 parcel is owned by MONDELEZ GLOBAL LLC. Locked center 35.0184,-89.8695 in the SE Memphis (Lamar/Getwell) industrial corridor.",
+          "facilityType": "Genuine freight facility - a single-story Nabisco/Mondelez sales-distribution warehouse, not an office. Freight relevance HIGH.",
+          "truckGate": "Property is fully chain-link fenced. Street View shows a gate opening at the office-front entrance off Distribution Dr; no manned guard booth is visible at the gate - classified truckGate true, guardShack false, remoteGs true (kiosk / call-box check-in implied). guardShack/remoteGs flagged uncertain since a small booth could be obscured.",
+          "docks": "Long dock bank fronting Distribution Dr on the north building face; Street View shows a continuous run of dock doors with trailers/pallets staged. Counted ~22 doors -> band 10-25.",
+          "dropArea": "A row of trailers and several tractors parked on the north apron / yard; capacity ~25 -> band 10-25. dropYard true.",
+          "railServed": "A rail line runs E-W immediately along the SOUTH edge of the building, but it reads as a through-line with no spur or rail dock into the property - classified false, flagged uncertain.",
+          "drivewayShort": "Short entrance drive from Distribution Dr into the yard - only 1-2 truck depth before the apron.",
+          "urbanRural": "Dense SE Memphis industrial park, surrounded by warehouses and metro fabric - Urban."
+        }
+      },
+      {
+        "id": "21-mondelez-fort-worth-dc",
+        "name": "Mondelez Fort Worth Distribution Center - Fort Worth TX",
+        "type": "Distribution center / cross-dock warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "guardShack"
+        ],
+        "center": {
+          "lat": 33.03158,
+          "lng": -97.30073
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.0301,
+            "west": -97.3038,
+            "north": 33.0334,
+            "east": -97.2975
+          },
+          "truckGate": {
+            "south": 33.0306,
+            "west": -97.2959,
+            "north": 33.0311,
+            "east": -97.2951
+          },
+          "dropYards": [
+            {
+              "south": 33.0323,
+              "west": -97.3034,
+              "north": 33.0333,
+              "east": -97.2976
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.0319,
+              "west": -97.3034,
+              "north": 33.0325,
+              "east": -97.2976
+            },
+            {
+              "south": 33.0307,
+              "west": -97.3034,
+              "north": 33.0311,
+              "east": -97.2978
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 115,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 53.3,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Status: RESOLVED — confidence HIGH (re-audit of an earlier low-confidence stub)\n\n### Step 0 — Location\nConfirmed address: 16200 Three Wide Dr, Ste 172, Fort Worth TX 76177 — the\nIDI / Speedway Distribution Center Building C (a ~316,128 SF Class-A\ndistribution building delivered 2018) in the AllianceTexas logistics corridor\nadjacent to Texas Motor Speedway. Google geocode returned a ROOFTOP match at\n`33.0315793, -97.3007312`; satellite confirmed a large completed cross-dock\ndistribution building consistent with the listing. Locked center:\n`33.03158, -97.30073`.\n\n> The earlier stub mislabeled this site \"Garland, TX\" and could not resolve it.\n> It is in Fort Worth — corrected here.\n\n### Steps 1-5 — Audit\n\nBuilding & layout. A long single cross-dock warehouse running roughly\neast-west. Dock banks on both the north and south faces — the north face",
+        "mapsUrl": "https://www.google.com/maps/@33.03158,-97.30073,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/mondelez-international/21-mondelez-fort-worth-dc-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 33.03158,
+              "lng": -97.30073
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/mondelez-international/21-mondelez-fort-worth-dc-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 33.03158,
+              "lng": -97.30073
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
+        "fieldNotes": {
+          "locate": "Resolved to 16200 Three Wide Dr, Fort Worth TX 76177 (IDI/Speedway Distribution Center Building C), in the AllianceTexas industrial corridor near Texas Motor Speedway. Google geocode returned a ROOFTOP hit at 33.0315793,-97.3007312 (returned with the 76247 Northlake ZIP, but the building is the one a confirmed-address probe pinned). Satellite confirms a large completed Class-A cross-dock distribution building consistent with the listed 316,128 SF Building C. The old stub mislabeled this site 'Garland TX' — corrected to Fort Worth.",
+          "shipRcvSeparate": "Cross-dock building: dock banks on BOTH the north and the south building faces. The north face carries the bulk of the trailer activity plus the drop yard; the south face has a second dock bank fronting the office/car-parking side. Counted as separate ship/receive clusters.",
+          "truckGate": "The truck court is fully enclosed by chain-link fencing. Street View (Dec 2024) at the SE truck-court entrance shows a sliding chain-link gate across the truck driveway where it enters the fenced truck court between Building C and the adjacent building. truckGate = true.",
+          "guardShack": "No staffed guard booth observed beside the truck-court gate in Street View — a sliding chain-link gate only. remoteGs (kiosk / app / call-box check-in) inferred. Flagged uncertain: a small booth could be obscured by trailers in the available panos.",
+          "fastLaneOpportunity": "The truck court and gate apron are very wide with substantial unused paved width and deep stacking depth — physical room to add an express/bypass lane.",
+          "dockDoorCount": "Estimated ~115 doors total across the long north dock bank and the south dock bank of this ~316k SF cross-dock building. Honest overhead estimate — flagged uncertain.",
+          "drop": "Large drop yard along the north side with rows of parked trailers (no tractors); dropArea 50+.",
+          "urbanRural": "AllianceTexas is an edge-of-metro master-planned logistics park surrounded by open land, the speedway, and FM-156 — graded Rural per the rubric tie-breaker (large speculative-industrial park, not dense metro fabric).",
+          "geofences": "Perimeter captures the building plus the north truck/drop yard and south car-parking apron: ~367 m N-S x ~588 m E-W = ~53 acres. truckGate box is the SE fenced-court entrance."
+        }
+      },
+      {
+        "id": "22-mondelez-houston-dc",
+        "name": "Mondelez Houston Distribution Center - Houston TX",
+        "type": "Distribution center / multi-tenant warehouse (tenant)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "guardShack"
+        ],
+        "center": {
+          "lat": 29.87074,
+          "lng": -95.56503
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 29.87015,
+            "west": -95.56565,
+            "north": 29.87195,
+            "east": -95.564
+          },
+          "truckGate": {
+            "south": 29.87215,
+            "west": -95.5643,
+            "north": 29.87255,
+            "east": -95.5638
+          },
+          "dropYards": [
+            {
+              "south": 29.8712,
+              "west": -95.5656,
+              "north": 29.87195,
+              "east": -95.5641
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 29.87105,
+              "west": -95.5656,
+              "north": 29.87145,
+              "east": -95.5642
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 7.9,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Status: RESOLVED — confidence HIGH (re-audit of an earlier low-confidence stub)\n\n### Step 0 — Location\nConfirmed address: 6903 W Sam Houston Pkwy N, Houston TX 77041 — a\n~105,594 SF industrial distribution building in a corporate park fronting\nBeltway 8 (W Sam Houston Pkwy N) in NW Houston, near the US-290 interchange.\nGoogle geocode returned a ROOFTOP match at `29.870738, -95.565030`. This is a\nmulti-tenant warehouse — Mondelez is one tenant of the building (other\nindustrial tenants / FMCSA-registered carriers are also tied to the address).\nLocked center: `29.87074, -95.56503`.\n\n### Steps 1-5 — Audit\n\nBuilding & layout. A single rectangular warehouse. Dock doors run along\nthe north face under a dock canopy; the south face is a two-story\noffice with landscaped employee/visitor parking and an open, uncontrolled car",
+        "mapsUrl": "https://www.google.com/maps/@29.87074,-95.56503,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/mondelez-international/22-mondelez-houston-dc-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 29.87074,
+              "lng": -95.56503
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/mondelez-international/22-mondelez-houston-dc-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 29.87074,
+              "lng": -95.56503
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
+        "fieldNotes": {
+          "locate": "Resolved to 6903 W Sam Houston Pkwy N, Houston TX 77041 — a ~105,594 SF industrial distribution building in a corporate park off Beltway 8 (W Sam Houston Pkwy N) in NW Houston. Google geocode returned a ROOFTOP hit at 29.870738,-95.565030. This is a multi-tenant warehouse; Mondelez is one tenant of the building (the building also shows other industrial tenants / FMCSA-registered carriers).",
+          "facilityNature": "Multi-tenant warehouse. The audit covers the geocoded building and its shared truck yard. Dock doors run along the building's NORTH face under a dock canopy; the south face is a two-story office with landscaped employee/visitor parking and an open (uncontrolled) car entrance.",
+          "truckGate": "The truck yard on the north side is fully enclosed by chain-link fence with privacy slats. Street View (Oct 2025) shows the truck-yard entrance on the NE side as a sliding chain-link gate across the truck driveway off the side street. truckGate = true.",
+          "guardShack": "No staffed guard booth observed at the truck-yard gate — sliding chain-link gate only; remote/kiosk check-in inferred. Flagged uncertain (multi-tenant yard; a small booth could be present but not clearly visible).",
+          "drop": "The shared truck yard is busy and packed — trailers, tractors, equipment, lumber and materials. A band of parked trailers without tractors gives a drop area in the 25-50 band; classed dropYard true.",
+          "dockDoorCount": "Estimated ~22 doors along the geocoded building's north dock canopy for a ~105k SF warehouse. Overhead estimate — flagged uncertain.",
+          "urbanRural": "Deep inside NW Houston's dense industrial fabric beside Beltway 8 / US-290 interchange — Urban.",
+          "shipRcvSeparate": "Single dock cluster on the north face — ship/receive not physically separate.",
+          "geofences": "Perimeter captures the geocoded building and its north truck-yard share: ~200 m N-S x ~160 m E-W ≈ 7.9 acres. The truck yard is shared with the neighboring building's tenants."
+        }
+      },
+      {
+        "id": "24-mondelez-ontario-dc",
+        "name": "Mondelez Ontario Distribution Center - Ontario CA",
+        "type": "Distribution center / sales warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "guardShack"
+        ],
+        "center": {
+          "lat": 34.045,
+          "lng": -117.52555
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.0442,
+            "west": -117.52685,
+            "north": 34.04575,
+            "east": -117.5245
+          },
+          "truckGate": {
+            "south": 34.04425,
+            "west": -117.5264,
+            "north": 34.04455,
+            "east": -117.52595
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 34.0444,
+              "west": -117.5267,
+              "north": 34.0448,
+              "east": -117.52545
+            },
+            {
+              "south": 34.04475,
+              "west": -117.5268,
+              "north": 34.04545,
+              "east": -117.52645
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 9.3,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Status: RESOLVED — confidence HIGH (re-audit of an earlier low-confidence stub)\n\n### Step 0 — Location\nConfirmed address: 5815 Clark St, Ontario CA 91761 — a single-tenant\ndistribution warehouse in the dense Inland Empire industrial fabric of\nOntario, San Bernardino County. Google geocode returned a ROOFTOP match at\n`34.0451114, -117.524735`. Locked center: `34.04500, -117.52555`.\n\n> The earlier stub mislabeled this site \"Los Angeles, CA\" and could not\n> resolve it. It is in Ontario, CA (the Inland Empire) — corrected here.\n\n### Steps 1-5 — Audit\n\nBuilding & layout. A single rectangular warehouse with dock banks on\ntwo faces: a dock bank along the south face inside a screened truck\ncourt, and a second dock bank along the building's west-facing court.\nEmployee car-parking wraps the east (Clark St) and south frontages; the",
+        "mapsUrl": "https://www.google.com/maps/@34.04500,-117.52555,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/mondelez-international/24-mondelez-ontario-dc-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 34.045,
+              "lng": -117.52555
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/mondelez-international/24-mondelez-ontario-dc-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 34.045,
+              "lng": -117.52555
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
+        "fieldNotes": {
+          "locate": "Resolved to 5815 Clark St, Ontario CA 91761 — a single-tenant distribution warehouse in the dense Inland Empire industrial fabric of Ontario, San Bernardino County. Google geocode returned a ROOFTOP hit at 34.0451114,-117.524735. The old stub mislabeled this site 'Los Angeles CA' — corrected to Ontario, CA (Inland Empire).",
+          "truckGate": "The truck court is screened by a tilt-up concrete screen wall along the public street. Street View (Jan 2025) at the truck-court driveway shows a wheeled SLIDING CHAIN-LINK GATE across the entrance, set between the screen-wall sections. truckGate = true.",
+          "guardShack": "No staffed guard booth observed at the truck-court gate — a sliding chain-link gate with what appears to be a small kiosk/call-box and signage post beside it; no standalone guard building. remoteGs (kiosk/call-box/app) inferred. Flagged uncertain.",
+          "shipRcvSeparate": "The building has dock banks on TWO faces — a dock bank along the south face (in the screened truck court) and a second dock bank along the building's west-facing court. Two distinct dock clusters — shipRcvSeparate = true.",
+          "dockDoorCount": "Estimated ~38 doors total across the south and west dock banks. Overhead estimate — flagged uncertain.",
+          "drop": "Trailers backed into docks and a modest band of parked trailers within the truck court — drop area in the 10-25 band. No separate dedicated trailer-storage lot, so dropYard = false.",
+          "rail": "A rail line runs E-W along the building's NORTH property line, but it serves the building to the north and does NOT spur into the 5815 Clark St property — railServed = false.",
+          "urbanRural": "Ontario / Inland Empire is one of the densest warehouse-industrial submarkets in the US — clearly Urban.",
+          "geofences": "Perimeter captures the building plus the screened south truck court and the west dock court: ~173 m N-S x ~217 m E-W ≈ 9.3 acres. truckGate box is the south-side screened-court entrance off the public street."
+        }
+      }
+    ]
+  }
+}

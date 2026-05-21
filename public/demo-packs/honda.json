@@ -1,0 +1,2103 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:41:41.333Z",
+  "account": {
+    "slug": "honda",
+    "displayName": "Honda",
+    "archetype": "oem-automotive",
+    "siteCount": 18,
+    "coverageNote": {
+      "auditedCount": 18,
+      "estimatedFootprint": null,
+      "droppedStubCount": 0,
+      "capHit": false,
+      "note": "Audited all 18 identifiable facilities."
+    }
+  },
+  "research": {
+    "facility_count": 18,
+    "audited_facilities": 18,
+    "source": "yard-audit",
+    "confidence": "verified",
+    "caveats": [
+      "LG Energy Solution-Honda EV Battery Plant (L-H Battery Co.) - Jeffersonville OH: audit note mentions 'under construction'",
+      "Honda Transmission Mfg. of America - Russells Point OH: audit note mentions 'closed'"
+    ]
+  },
+  "network": {
+    "bbox": [
+      -117.7018,
+      32.92065,
+      -79.3412,
+      40.4515
+    ],
+    "archetypeMix": {
+      "#6": 9,
+      "#3": 3,
+      "#7": 1,
+      "#1": 1,
+      "#10": 2,
+      "#9": 2
+    },
+    "totals": {
+      "dockDoors": 1019,
+      "trailerCapacity": 3895,
+      "gates": 28,
+      "railServed": 4,
+      "acres": 5675
+    },
+    "sites": [
+      {
+        "id": "01-marysville-auto-plant",
+        "name": "Honda - Marysville Auto Plant (MAP) - Marysville OH",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "guardShack",
+          "scale",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 40.2778,
+          "lng": -83.506
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.2695,
+            "west": -83.515,
+            "north": 40.2865,
+            "east": -83.4965
+          },
+          "truckGate": {
+            "south": 40.2752,
+            "west": -83.5062,
+            "north": 40.2762,
+            "east": -83.5048
+          },
+          "dropYards": [
+            {
+              "south": 40.2795,
+              "west": -83.5033,
+              "north": 40.2825,
+              "east": -83.4975
+            },
+            {
+              "south": 40.2762,
+              "west": -83.5023,
+              "north": 40.2788,
+              "east": -83.4978
+            },
+            {
+              "south": 40.273,
+              "west": -83.5032,
+              "north": 40.2752,
+              "east": -83.4985
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.2768,
+              "west": -83.5042,
+              "north": 40.2788,
+              "east": -83.501
+            },
+            {
+              "south": 40.28,
+              "west": -83.5048,
+              "north": 40.2818,
+              "east": -83.5015
+            }
+          ],
+          "staging": {
+            "south": 40.275,
+            "west": -83.5035,
+            "north": 40.2764,
+            "east": -83.501
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 240,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 3,
+          "buildingCount": 8,
+          "siteAreaAcres": 720,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (40.274666, -83.503609) landed on the southeast office /\nparking cluster of the campus. Satellite probes (z15-z18) and the roster\naddress confirm the facility: this is the sprawling multi-building Honda\nMarysville Auto Plant complex. Web search (Wikipedia, manufacturing.honda.com,\namericanautoworker.com) corroborates the plant at 24000 Honda Parkway, ~6 mi\nNW of Marysville near US-33 / SR-739. The assembly campus proper is the huge\ncontiguous dark-roof building complex centered ~40.2778,-83.5060; the roster\npoint sits at its SE edge.",
+        "mapsUrl": "https://www.google.com/maps/@40.2778,-83.506,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Marysville Auto Plant confirmed via satellite + roster address 24000 Honda Parkway. Roster point landed on the SE office cluster; the assembly campus proper is the massive multi-building complex centered ~40.2778,-83.5060.",
+          "truckGate": "Major OEM auto assembly plant on a fully secured private campus (Honda Parkway is an internal private road). Controlled truck gates are standard and consistent with the gated road network observed; treated as true with medium confidence on exact lane geometry.",
+          "guardShack": "Guarded entry assumed for a high-security auto plant; not individually resolved on Street View (private-road, limited 2021 coverage). Listed uncertain.",
+          "dropArea": "Extensive trailer drop yards visible on multiple building faces and standalone lots - many dozens of parked trailers; clearly 50+.",
+          "dockDoors": "Dock banks with trailers backed in along multiple long building faces; 50+ band, count is an overhead estimate.",
+          "railServed": "Confirmed - a multi-track rail yard with rail cars runs into the property along the north side (autorack staging).",
+          "multipleFacilities": "Campus: assembly plant proper plus logistics/sequencing buildings, paint, stamping and associated structures.",
+          "scale": "No truck scale clearly identified; left false.",
+          "shipRcvSeparate": "Dock activity on physically separate building faces (logistics building docks vs main plant docks) supports separate ship/receive."
+        }
+      },
+      {
+        "id": "02-east-liberty-auto-plant",
+        "name": "Honda - East Liberty Auto Plant (ELP) - East Liberty OH",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "guardShack",
+          "scale",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 40.3285,
+          "lng": -83.5475
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.323,
+            "west": -83.5535,
+            "north": 40.3345,
+            "east": -83.5405
+          },
+          "truckGate": {
+            "south": 40.3242,
+            "west": -83.5494,
+            "north": 40.3254,
+            "east": -83.548
+          },
+          "dropYards": [
+            {
+              "south": 40.3248,
+              "west": -83.549,
+              "north": 40.3276,
+              "east": -83.5445
+            },
+            {
+              "south": 40.33,
+              "west": -83.5518,
+              "north": 40.3328,
+              "east": -83.5472
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.3298,
+              "west": -83.5515,
+              "north": 40.3315,
+              "east": -83.5482
+            },
+            {
+              "south": 40.326,
+              "west": -83.5475,
+              "north": 40.3278,
+              "east": -83.5448
+            }
+          ],
+          "staging": {
+            "south": 40.3244,
+            "west": -83.5482,
+            "north": 40.3258,
+            "east": -83.546
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 260,
+          "truckGateCount": 2,
+          "buildingCount": 5,
+          "siteAreaAcres": 560,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (40.329087, -83.549523) landed near the plant center\n(geocode moved only ~1.4 km). Satellite probes (z15-z20) confirm a large auto\nassembly campus: main assembly building, separate logistics buildings,\nfinished-vehicle staging lots, retention ponds, and a vehicle test track on\nthe SW corner — all consistent with Honda ELP at 11000 SR-347.",
+        "mapsUrl": "https://www.google.com/maps/@40.3285,-83.5475,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "East Liberty Auto Plant confirmed via satellite + roster address 11000 SR-347. Roster point landed near plant center; assembly campus centered ~40.3285,-83.5475 with test track to the SW.",
+          "truckGate": "Major OEM auto assembly plant on a fully secured private campus - no public Street View reaches the gates (multiple ZERO_RESULTS probes). Controlled truck gates standard; treated true.",
+          "guardShack": "Guarded entry assumed for a high-security auto plant; not individually imaged. Listed uncertain.",
+          "dropArea": "Extensive trailer drop yards on the S/SW and N building faces - many dozens of trailers in rows; clearly 50+.",
+          "dockDoors": "Dock banks with trailers backed in along multiple long building faces; 50+ band, overhead estimate ~70.",
+          "railServed": "Confirmed - a rail spur with staged railcars runs into the property from the south.",
+          "multipleFacilities": "Campus: main assembly building plus separate logistics buildings; vehicle test track on the SW corner.",
+          "shipRcvSeparate": "Dock activity on physically separate building faces supports separate ship/receive.",
+          "scale": "No truck scale clearly identified; left false.",
+          "urbanRural": "Open farmland setting near East Liberty - Rural."
+        }
+      },
+      {
+        "id": "03-performance-manufacturing-center",
+        "name": "Honda - Performance Manufacturing Center (PMC) - Marysville OH",
+        "type": "Auto Assembly Plant (low-volume)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 40.2793,
+          "lng": -83.5253
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.277,
+            "west": -83.5272,
+            "north": 40.2811,
+            "east": -83.5228
+          },
+          "truckGate": {
+            "south": 40.2778,
+            "west": -83.5244,
+            "north": 40.2785,
+            "east": -83.5236
+          },
+          "dropYards": [
+            {
+              "south": 40.2788,
+              "west": -83.5247,
+              "north": 40.2802,
+              "east": -83.5234
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.2788,
+              "west": -83.5252,
+              "north": 40.2801,
+              "east": -83.5244
+            }
+          ],
+          "staging": {
+            "south": 40.2784,
+            "west": -83.5247,
+            "north": 40.2792,
+            "east": -83.5238
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 9,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 18,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 36,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster geocode (40.27761, -83.525972) was effectively rooftop-accurate (moved\n26 m). Satellite probes confirm a single dark-roof main building with an\nattached white-roof east annex. A user-contributed Street View interior photo\nat the site shows the Acura NSX assembly floor — positively identifying this as\nthe Performance Manufacturing Center. Web research (hondanews, Gardner Web)\nconfirms PMC is a ~184,000 sq ft low-volume plant with ~100 associates, housed\nin Honda's former North American Logistics facility, which built the NSX\n2016-2022 and later the Acura Integra Type S.",
+        "mapsUrl": "https://www.google.com/maps/@40.2793,-83.5253,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "PMC confirmed - roster geocode moved only 26 m. Satellite shows a single dark-roof main building with a white-roof east annex; a user-contributed Street View interior photo shows the NSX assembly floor, positively identifying the Performance Manufacturing Center.",
+          "scale_of_facility": "PMC is a small low-volume specialty plant (~184,000 sq ft, ~100 associates) housed in Honda's former North American Logistics facility (per hondanews / Gardner Web). Modest yard footprint compared to the big assembly plants.",
+          "truckGate": "Driveway from Honda Parkway runs to the building's east-side yard. No barrier arm or guard booth resolvable in z19-z21 imagery; the entrance reads as an open driveway. Set false (truckGate) with low confidence - flagged uncertain.",
+          "guardShack": "No guard booth identified at the entrance; false.",
+          "dockDoors": "Dock bank on the building's east face - roughly 6-9 doors with several trailers backed in (former logistics building retains dock infrastructure). 0-10 band; count is an overhead estimate.",
+          "dropArea": "Small paved yard on the east side holds a handful of parked trailers - 0-10.",
+          "drivewayLong": "Long approach drive from Honda Parkway into the building yard - can hold 3+ trucks.",
+          "buildingCount": "Main plant building plus an attached white-roof east annex.",
+          "railServed": "No rail spur into the property.",
+          "urbanRural": "Open farmland setting on the Marysville complex outskirts - Rural."
+        }
+      },
+      {
+        "id": "04-anna-engine-plant",
+        "name": "Honda - Anna Engine Plant (AEP) - Anna OH",
+        "type": "Engine Plant / EV Battery Pack (IPU) Assembly",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "guardShack",
+          "scale",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 40.376,
+          "lng": -84.1925
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.3705,
+            "west": -84.1998,
+            "north": 40.381,
+            "east": -84.1865
+          },
+          "truckGate": {
+            "south": 40.3755,
+            "west": -84.1962,
+            "north": 40.3765,
+            "east": -84.1948
+          },
+          "dropYards": [
+            {
+              "south": 40.3745,
+              "west": -84.1985,
+              "north": 40.3782,
+              "east": -84.195
+            },
+            {
+              "south": 40.3725,
+              "west": -84.1945,
+              "north": 40.3755,
+              "east": -84.189
+            },
+            {
+              "south": 40.372,
+              "west": -84.2003,
+              "north": 40.3742,
+              "east": -84.1962
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.375,
+              "west": -84.1962,
+              "north": 40.3772,
+              "east": -84.1938
+            },
+            {
+              "south": 40.3732,
+              "west": -84.1935,
+              "north": 40.3752,
+              "east": -84.1895
+            }
+          ],
+          "staging": {
+            "south": 40.3752,
+            "west": -84.195,
+            "north": 40.3765,
+            "east": -84.193
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 420,
+          "truckGateCount": 3,
+          "buildingCount": 9,
+          "siteAreaAcres": 690,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (40.37761, -84.191785) landed near the plant center\n(geocode moved 3.9 km from a city-level point but resolved to the plant).\nSatellite probes (z15-z19) confirm a massive multi-building industrial complex\namid farmland N of Anna OH — consistent with Honda AEP at 12500 Meranda Road.\nWeb research (manufacturing.honda.com, PR Newswire, AMS) confirms AEP is a\n~2.8 million sq ft facility, Honda's largest auto engine plant in the world,\nnow also building EV battery packs (IPU units).",
+        "mapsUrl": "https://www.google.com/maps/@40.376,-84.1925,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Anna Engine Plant confirmed via satellite + roster address 12500 Meranda Road. Roster point landed near plant center; the engine-plant campus is the massive multi-building complex centered ~40.3760,-84.1925, amid farmland N of Anna OH.",
+          "scale_of_facility": "AEP is ~2.8 million sq ft - Honda's largest auto engine plant in the world (web research). Now also building EV battery packs (IPU).",
+          "truckGate": "Major OEM engine plant on a fully secured private campus - public Street View only shows wide-lawn road frontage on Meranda Rd, no gates. Controlled truck gates standard; treated true (medium confidence on lane geometry).",
+          "guardShack": "Guarded entry assumed for a high-security plant of this scale; not individually imaged. Listed uncertain.",
+          "dropArea": "Extremely large trailer drop yards on the west and south sides - hundreds of trailers in dense rows; clearly 50+.",
+          "dockDoors": "Multiple long dock banks with trailers backed in on several building faces; 50+ band, overhead estimate ~110.",
+          "railServed": "No rail spur identified entering the property in z16-z18 probes of all sides; AEP runs truck-based inbound/outbound logistics. Set false.",
+          "multipleFacilities": "Campus of engine machining/assembly, casting, support and logistics buildings.",
+          "shipRcvSeparate": "Dock activity on physically separate building faces (west vs south banks) supports separate ship/receive.",
+          "scale": "No truck scale clearly identified; left false.",
+          "urbanRural": "Open farmland setting N of Anna - Rural."
+        }
+      },
+      {
+        "id": "05-honda-manufacturing-of-alabama",
+        "name": "Honda Manufacturing of Alabama (HMA) - Lincoln AL",
+        "type": "Auto Assembly Plant + Engine Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "guardShack",
+          "scale",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 33.6155,
+          "lng": -86.144
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.6095,
+            "west": -86.153,
+            "north": 33.6235,
+            "east": -86.1345
+          },
+          "truckGate": {
+            "south": 33.6115,
+            "west": -86.1525,
+            "north": 33.6128,
+            "east": -86.1505
+          },
+          "dropYards": [
+            {
+              "south": 33.6125,
+              "west": -86.146,
+              "north": 33.615,
+              "east": -86.139
+            },
+            {
+              "south": 33.6155,
+              "west": -86.1415,
+              "north": 33.6185,
+              "east": -86.1355
+            },
+            {
+              "south": 33.6105,
+              "west": -86.1475,
+              "north": 33.6132,
+              "east": -86.1425
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.613,
+              "west": -86.146,
+              "north": 33.6148,
+              "east": -86.1415
+            },
+            {
+              "south": 33.616,
+              "west": -86.1425,
+              "north": 33.6178,
+              "east": -86.138
+            }
+          ],
+          "staging": {
+            "south": 33.6124,
+            "west": -86.149,
+            "north": 33.6138,
+            "east": -86.1465
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 280,
+          "trailerParkingCapacity": 380,
+          "truckGateCount": 3,
+          "buildingCount": 10,
+          "siteAreaAcres": 900,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (33.616074, -86.145538) landed near the plant center\n(geocode moved 5.9 km from a city-level point but resolved to the plant).\nSatellite probes (z14-z20) confirm a massive multi-building auto+engine plant\ncampus with an on-site vehicle test track, SW of Lincoln AL in Talladega\nCounty. Web research (Encyclopedia of Alabama, Wikipedia, Automotive World)\nconfirms HMA is a ~4.9 million sq ft facility on a 1,350-acre property — the\nfirst Honda facility with engine and vehicle assembly in the same complex,\nbuilding the Odyssey, Pilot, Passport and Ridgeline plus V6 engines.",
+        "mapsUrl": "https://www.google.com/maps/@33.6155,-86.144,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "HMA confirmed via satellite + roster address 1800 Honda Drive. Roster point landed near plant center; the auto+engine campus is the massive multi-building complex centered ~33.6155,-86.1440, with an on-site vehicle test track to the north, SW of Lincoln AL.",
+          "scale_of_facility": "HMA is ~4.9 million sq ft on a 1,350-acre property in Talladega County (web research) - the first Honda facility with engine and vehicle assembly in the same complex. Builds Odyssey, Pilot, Passport, Ridgeline plus V6 engines.",
+          "truckGate": "Major OEM auto+engine plant on a fully secured private campus - public Street View reaches only wooded approach roads, no gates. A checkpoint structure with vehicle lanes is visible at the SW entrance off Honda Drive. Treated true (medium confidence on lane geometry).",
+          "guardShack": "Guarded entry standard for a high-security plant of this scale; a small checkpoint structure is visible at the SW entrance. Listed uncertain on exact form.",
+          "dropArea": "Extensive trailer drop yards on multiple building faces - many dozens to hundreds of trailers in rows; clearly 50+.",
+          "dockDoors": "Multiple long dock banks with trailers backed in on several building faces; 50+ band, overhead estimate ~120.",
+          "railServed": "No rail spur identified entering the property; HMA runs truck-based logistics. Set false.",
+          "multipleFacilities": "Campus of vehicle assembly, engine plant, support and logistics buildings, plus an on-site vehicle test track.",
+          "shipRcvSeparate": "Dock activity on physically separate building faces supports separate ship/receive.",
+          "scale": "No truck scale clearly identified; left false.",
+          "siteAreaAcres": "Perimeter box captures the developed plant core plus lots (~900 ac); the full Honda-owned property is ~1,350 ac including test track and wooded buffer.",
+          "urbanRural": "Rural / edge-of-town setting SW of Lincoln AL amid woods and farmland."
+        }
+      },
+      {
+        "id": "06-honda-manufacturing-of-indiana-hmin-greensburg-in",
+        "name": "Honda Manufacturing of Indiana (HMIN) - Greensburg IN",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "multiStep",
+          "scale",
+          "truckGateCount"
+        ],
+        "center": {
+          "lat": 39.368,
+          "lng": -85.541
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.3555,
+            "west": -85.5575,
+            "north": 39.3785,
+            "east": -85.526
+          },
+          "truckGate": {
+            "south": 39.3664,
+            "west": -85.547,
+            "north": 39.3676,
+            "east": -85.5455
+          },
+          "dropYards": [
+            {
+              "south": 39.3715,
+              "west": -85.5445,
+              "north": 39.375,
+              "east": -85.5355
+            },
+            {
+              "south": 39.3688,
+              "west": -85.5448,
+              "north": 39.3713,
+              "east": -85.536
+            },
+            {
+              "south": 39.3695,
+              "west": -85.5355,
+              "north": 39.3755,
+              "east": -85.5295
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.3693,
+              "west": -85.5448,
+              "north": 39.3702,
+              "east": -85.5355
+            },
+            {
+              "south": 39.3698,
+              "west": -85.5425,
+              "north": 39.371,
+              "east": -85.536
+            }
+          ],
+          "staging": {
+            "south": 39.364,
+            "west": -85.5425,
+            "north": 39.3675,
+            "east": -85.5385
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 380,
+          "trailerParkingCapacity": 600,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 1480,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster pin (39.370161, -85.543533) landed inside the plant's northern trailer\nlots. Satellite probes z14-z19 confirmed the building: a vast auto assembly\ncampus in rural Decatur County, bounded by Interstate 74 to the north and\nfarmland on all other sides. A vehicle proving/test-track oval occupies the\nsouthern half of the property — characteristic of an OEM auto assembly plant.\nWeb research (Greensburg Chamber, Wikipedia, Honda manufacturing.honda.com)\nconfirms HMIN / Indiana Auto Plant builds the Civic hatchback and CR-V at\n~250,000 vehicles/yr, operating 24/7. The building center was relocated south to\n39.3680, -85.5410.",
+        "mapsUrl": "https://www.google.com/maps/@39.368,-85.541,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Waze records a distinct 'Truck entrance' at 2755 N Michigan Ave separate from the visitor 'Main entrance'. Entire campus is fenced and set ~400m back from public roads with a single managed industrial access corridor. truckGate=true is high confidence; the specific gate structure could not be directly imaged.",
+          "guardShack": "Not directly visible in available satellite crops and Street View pano coverage stops at the employee lot. A 24/7 auto assembly plant of this scale (Civic + CR-V, 250k vehicles/yr) effectively always has a staffed guarded truck gate; classified true on facility-class basis, flagged uncertain.",
+          "multipleFacilities": "Campus has the main dark-roofed assembly building, a large adjacent bright-roofed building (likely logistics/welding), support buildings (water treatment, paint ancillary), and a separate vehicle test track oval - true.",
+          "shipRcvSeparate": "Inbound parts docks line the north faces of both main buildings; finished-vehicle outbound staging and rail loadout are on the south/southeast - physically separate clusters.",
+          "dropArea": "Hundreds of trailers parked in organized rows across multiple large drop lots north and east of the buildings, plus covered trailer stalls - well into the 50+ band.",
+          "railServed": "A rail spur with a line of rail cars runs into the property along the southeast side of the assembly building (visible in z18 crop).",
+          "dockDoorCount": "~70 is an estimate aggregated across the long dock lines on the north faces of both main buildings; flagged approximate.",
+          "trailersVisible": "~380 trailers counted across the captured drop lots and dock lines; approximate.",
+          "siteAreaAcres": "Perimeter box covers the full fenced property including the vehicle test track; ~1480 acres is derived from the box and is a rough figure.",
+          "fastLaneOpportunity": "Wide internal access corridors and ample paved apron width provide room to add an express/bypass lane.",
+          "scale": "No truck scale identified in imagery; flagged uncertain."
+        }
+      },
+      {
+        "id": "07-lg-energy-solution-honda-ev-battery-plant-l-h-battery-co-jeffersonville-oh",
+        "name": "LG Energy Solution-Honda EV Battery Plant (L-H Battery Co.) - Jeffersonville OH",
+        "type": "EV Battery Cell Plant (JV)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "preGateStaging",
+          "postGateStaging",
+          "drivewayLong",
+          "entryLanes",
+          "exitLanes",
+          "fastLaneOpportunity",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "dropYard",
+          "multiStep",
+          "scale",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 39.6248,
+          "lng": -83.57
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.6165,
+            "west": -83.582,
+            "north": 39.6305,
+            "east": -83.563
+          },
+          "truckGate": {
+            "south": 39.622,
+            "west": -83.5672,
+            "north": 39.6232,
+            "east": -83.5656
+          },
+          "dropYards": [
+            {
+              "south": 39.623,
+              "west": -83.567,
+              "north": 39.6265,
+              "east": -83.5635
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.6228,
+              "west": -83.568,
+              "north": 39.6268,
+              "east": -83.5662
+            }
+          ],
+          "staging": {
+            "south": 39.6185,
+            "west": -83.575,
+            "north": 39.6215,
+            "east": -83.569
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 290,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster pin (39.653047, -83.562103, GEOMETRIC_CENTER) landed on the village\nof Jeffersonville itself, not the plant. Web research (lgeshonda.com, Honda/LGES\ngroundbreaking releases, Dayton Daily News, Statehouse News Bureau) places the\nL-H Battery Company plant \"west of Ohio 729 and south of Interstate 71, easily\nvisible from the interstate\" in Jefferson Township, Fayette County —\napproximately 40 miles southwest of Columbus. Satellite probes confirmed a\nmassive single-building industrial plant under construction at ~39.6248,\n-83.5700, bracketed by I-71 to the NW and SR 729 to the E. The building center\nwas relocated ~3.5 km south-southwest of the roster pin.",
+        "mapsUrl": "https://www.google.com/maps/@39.6248,-83.57,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "_status": "Facility is a brand-new EV battery cell plant still under construction in available satellite imagery (winter/snowy Maxar capture). Per news the plant was 'nearly complete' as of Feb 2026; final truck-yard infrastructure - gates, guard booth, dock build-out, trailer lots - is not yet fully formed or is obscured by snow and construction laydown. Most operational fields are best-effort inference and flagged uncertain.",
+          "truckGate": "A $3.5B EV cell plant with controlled-access security; the property is set behind a roundabout main entrance off the access road and ringed by buffer land. A controlled truck gate is expected but the specific structure is not resolvable in construction-phase imagery.",
+          "guardShack": "Assumed present on facility-class grounds (high-security battery plant); not directly imaged - flagged uncertain.",
+          "dockDoors": "An east-facing building wing with a dock apron and a few trailers is visible; door count obscured by snow - ~35 is a rough mid-band estimate.",
+          "dropArea": "Limited trailer parking visible; much of the open ground is construction laydown, not a settled drop yard.",
+          "railServed": "No rail spur identified entering the property.",
+          "urbanRural": "Rural - Jefferson Township, Fayette County, OH; farmland and small residential clusters; ~40 mi SW of Columbus, just south of I-71.",
+          "siteAreaAcres": "Perimeter box covers the core fenced plant property; ~290 acres derived from the box. The full announced site is larger (~78 football fields of building plus grounds); figure is approximate.",
+          "multipleFacilities": "Single primary battery building with a connected utility/support wing - treated as one facility cluster.",
+          "_revisit": "Recommend re-audit once non-winter, post-construction imagery is available to confirm gate, guard booth, dock count and trailer yard."
+        }
+      },
+      {
+        "id": "08-honda-transmission-mfg-of-america-russells-point-oh",
+        "name": "Honda Transmission Mfg. of America - Russells Point OH",
+        "type": "Transmission Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "trailersVisible",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 40.4475,
+          "lng": -83.8995
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.4435,
+            "west": -83.9042,
+            "north": 40.4515,
+            "east": -83.894
+          },
+          "truckGate": {
+            "south": 40.4478,
+            "west": -83.904,
+            "north": 40.4487,
+            "east": -83.903
+          },
+          "dropYards": [
+            {
+              "south": 40.4476,
+              "west": -83.8972,
+              "north": 40.4501,
+              "east": -83.8948
+            },
+            {
+              "south": 40.4455,
+              "west": -83.897,
+              "north": 40.4476,
+              "east": -83.895
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.4483,
+              "west": -83.898,
+              "north": 40.45,
+              "east": -83.896
+            },
+            {
+              "south": 40.4476,
+              "west": -83.9005,
+              "north": 40.449,
+              "east": -83.8985
+            }
+          ],
+          "staging": {
+            "south": 40.4485,
+            "west": -83.8998,
+            "north": 40.4503,
+            "east": -83.8972
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 80,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster pin (40.447438, -83.90246) landed just west of the plant, over a row\nof long ancillary warehouse/storage buildings on the far side of SR 235.\nSatellite probes z15-z20 confirmed the main transmission plant: a large\nwhite-roofed manufacturing building on the east side of SR 235, surrounded by\nfarmland in Logan County, with employee parking on the SW and trailer drop lots\non the east. Building center relocated ~250 m east-southeast to 40.4475,\n-83.8995. Honda Transmission Mfg. of America is a long-running Honda powertrain\nplant.",
+        "mapsUrl": "https://www.google.com/maps/@40.4475,-83.8995,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Plant property is fully enclosed by chain-link fence with green privacy slats (confirmed in Street View from multiple headings along SR 235). A single managed driveway crosses the fence line from SR 235; entrance has lane markings and a covered island/canopy - controlled truck gate.",
+          "guardShack": "A small white booth-sized structure with an adjacent canopy island sits in the entrance driveway just inside the property line (z20 satellite). Consistent with a staffed guard booth at a Honda powertrain plant; classified true, flagged uncertain because Street View pano coverage stays on the public road and does not directly image the booth.",
+          "postGateStaging": "Wide internal paved aprons between the gate and the dock/trailer lots provide deep queuing room - drivewayLong = true.",
+          "dropArea": "Multiple organized trailer-parking rows east of the building with ~90 trailers visible across the drop lots - 25-50 band.",
+          "dockDoors": "Dock lines with trailers backed in on the east and northeast building faces; ~40 doors estimated, flagged approximate.",
+          "shipRcvSeparate": "Docks and trailer rows are concentrated along the east/northeast faces in one general cluster; no clearly separate second ship-vs-receive bank confirmed - false, flagged uncertain.",
+          "railServed": "No rail spur runs into the property.",
+          "urbanRural": "Rural - plant sits amid farmland near Russells Point in Logan County, OH; no dense metro fabric.",
+          "multipleFacilities": "Single main transmission plant building with attached wings plus a few small support/storage buildings - treated as one facility cluster (long warehouse buildings west of SR 235 appear separate-use).",
+          "siteAreaAcres": "~80 acres derived from the perimeter box; approximate.",
+          "scale": "No truck scale identified."
+        }
+      },
+      {
+        "id": "09-honda-precision-parts-of-georgia-transmission-plant-tallapoosa-ga",
+        "name": "Honda Precision Parts of Georgia (Transmission Plant) - Tallapoosa GA",
+        "type": "Transmission Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "connectivityIssue",
+          "dockDoorCount",
+          "trailersVisible",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 33.691,
+          "lng": -85.2845
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.6865,
+            "west": -85.2885,
+            "north": 33.695,
+            "east": -85.279
+          },
+          "truckGate": {
+            "south": 33.6921,
+            "west": -85.2815,
+            "north": 33.693,
+            "east": -85.2803
+          },
+          "dropYards": [
+            {
+              "south": 33.6887,
+              "west": -85.2862,
+              "north": 33.6902,
+              "east": -85.2843
+            },
+            {
+              "south": 33.692,
+              "west": -85.2828,
+              "north": 33.6933,
+              "east": -85.281
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.6888,
+              "west": -85.286,
+              "north": 33.691,
+              "east": -85.2835
+            },
+            {
+              "south": 33.691,
+              "west": -85.283,
+              "north": 33.6928,
+              "east": -85.2815
+            }
+          ],
+          "staging": {
+            "south": 33.6915,
+            "west": -85.2828,
+            "north": 33.6933,
+            "east": -85.2808
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 50,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 130,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": true,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster pin (33.691229, -85.283853) landed directly on the plant. Satellite\nprobes z16-z21 confirmed the building: a large light-roofed manufacturing plant\nset deep in forested terrain near Tallapoosa, Haralson County, GA. Extensive\ndock lines with trailers backed in along the south/southwest faces, employee\nparking on the east, and a controlled truck checkpoint on the east access road\npositively identify it as Honda Precision Parts of Georgia (HPP-GA), Honda's\nGeorgia transmission/CVT plant. Building center adjusted slightly to 33.6910,\n-85.2845.",
+        "mapsUrl": "https://www.google.com/maps/@33.691,-85.2845,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "A controlled truck checkpoint sits on the east access road: a small guard-booth structure stands beside/in the truck lanes with a parked vehicle next to it and painted lane markings splitting the truck path into multiple lanes (z20 satellite). Clear controlled truck gate.",
+          "guardShack": "The small booth-sized structure positioned in the truck lanes at the checkpoint is a staffed guard shack - high confidence from z20 imagery.",
+          "remoteGs": "false - a physical guard booth is present.",
+          "preGateStaging": "false - the area before the gate is the wooded access road; no dedicated outside-the-gate truck stalls.",
+          "postGateStaging": "Trailers staged on the apron just inside the checkpoint; broad internal aprons give deep queuing (drivewayLong = true).",
+          "fastLaneOpportunity": "Truck lanes at the checkpoint are already split into 2+ marked lanes with paved width to add an express bypass.",
+          "dockDoors": "Extensive dock lines with trailers backed in along the south and southwest building faces; ~50 doors estimated - 50+ band.",
+          "dropArea": "Multiple organized trailer-parking rows on the south apron and near the checkpoint, ~110 trailers visible - 25-50 band.",
+          "shipRcvSeparate": "Dock banks appear on two distinct building faces (south and southwest) - likely separate ship/receive; flagged uncertain.",
+          "railServed": "No rail spur into the property.",
+          "urbanRural": "Rural - plant is set deep in forested terrain near Tallapoosa, Haralson County, GA; surrounded by woodland with scattered rural homes.",
+          "connectivityIssue": "Inferred - the site is rural and ringed by dense forest, away from town fabric; cellular coverage may be weaker. Medium-confidence at best, flagged uncertain.",
+          "multipleFacilities": "Single large transmission plant building with attached wings plus minor support buildings - one facility cluster.",
+          "siteAreaAcres": "~130 acres derived from the perimeter box; approximate (much of the surrounding land is forest buffer).",
+          "scale": "No truck scale identified."
+        }
+      },
+      {
+        "id": "10-honda-of-south-carolina-mfg-atv-utv-plant-timmonsville-sc",
+        "name": "Honda of South Carolina Mfg. (ATV/UTV Plant) - Timmonsville SC",
+        "type": "ATV / UTV / Side-by-Side Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "trailersVisible",
+          "scale"
+        ],
+        "center": {
+          "lat": 34.1105,
+          "lng": -79.9165
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.1065,
+            "west": -79.9235,
+            "north": 34.1155,
+            "east": -79.9115
+          },
+          "truckGate": {
+            "south": 34.1134,
+            "west": -79.9149,
+            "north": 34.1142,
+            "east": -79.9139
+          },
+          "dropYards": [
+            {
+              "south": 34.1078,
+              "west": -79.9232,
+              "north": 34.1103,
+              "east": -79.9202
+            },
+            {
+              "south": 34.1088,
+              "west": -79.9195,
+              "north": 34.1108,
+              "east": -79.917
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.1105,
+              "west": -79.9155,
+              "north": 34.1128,
+              "east": -79.9135
+            },
+            {
+              "south": 34.1095,
+              "west": -79.92,
+              "north": 34.1115,
+              "east": -79.918
+            }
+          ],
+          "staging": {
+            "south": 34.1115,
+            "west": -79.915,
+            "north": 34.1134,
+            "east": -79.913
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 230,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster pin (34.110581, -79.917171, GEOMETRIC_CENTER) landed adjacent to the\nplant; satellite probes z15-z20 confirmed the building immediately to the\neast-southeast. Honda of South Carolina Manufacturing is a large multi-wing\nplant beside Interstate 95 near Timmonsville, Florence County, SC, with an ATV\nproving/test track to the northwest. Honda's South Carolina plant builds\nATVs/UTVs/side-by-sides. Building center adjusted to 34.1105, -79.9165.",
+        "mapsUrl": "https://www.google.com/maps/@34.1105,-79.9165,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Confirmed in Street View and z20 satellite: a controlled entrance on the access road (Honda Way) with a guard booth straddling the entry, traffic cones marking multiple lanes, and an island. Clear controlled truck gate.",
+          "guardShack": "Confirmed - Street View (2019 capture) shows a uniformed guard standing at the gate beside a small multi-window guard booth. High confidence.",
+          "remoteGs": "false - a staffed guard booth is present.",
+          "postGateStaging": "Internal paved aprons between the gate and the dock/trailer areas provide deep queuing room (drivewayLong = true).",
+          "fastLaneOpportunity": "The gate has multiple marked lanes and paved apron width allowing an express/bypass lane.",
+          "dockDoors": "Extensive dock lines with trailers backed in along multiple building wings (east face and interior wings); ~55 doors estimated - 50+ band.",
+          "dropArea": "Very large trailer drop yards southwest of the plant with hundreds of trailers in organized rows (multiple carrier colors); well into the 50+ band.",
+          "shipRcvSeparate": "Dock banks appear on physically separate building faces / wings - shipping and receiving run from distinct clusters.",
+          "railServed": "No rail spur runs into the property.",
+          "urbanRural": "Rural - plant is in farmland/woodland near Timmonsville, Florence County, SC, beside I-95; small-town industrial setting, not dense metro.",
+          "multipleFacilities": "Campus has multiple connected and adjacent large building wings plus an ATV proving/test track to the northwest - multiple building clusters.",
+          "siteAreaAcres": "~230 acres derived from the perimeter box (excludes the separate test-track land); approximate.",
+          "scale": "No truck scale identified in imagery; flagged uncertain."
+        }
+      },
+      {
+        "id": "11-honda-power-equipment-mfg-swepsonville-nc",
+        "name": "Honda Power Equipment Mfg. - Swepsonville NC",
+        "type": "Power Equipment / General-Purpose Engine Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "truckGate",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 36.033436,
+          "lng": -79.344443
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 36.0298,
+            "west": -79.3488,
+            "north": 36.0372,
+            "east": -79.3412
+          },
+          "truckGate": {
+            "south": 36.03196,
+            "west": -79.3425,
+            "north": 36.03236,
+            "east": -79.3418
+          },
+          "dropYards": [
+            {
+              "south": 36.0315,
+              "west": -79.3468,
+              "north": 36.0342,
+              "east": -79.346
+            },
+            {
+              "south": 36.0334,
+              "west": -79.3468,
+              "north": 36.0352,
+              "east": -79.3456
+            },
+            {
+              "south": 36.033,
+              "west": -79.3448,
+              "north": 36.0347,
+              "east": -79.3436
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 36.0326,
+              "west": -79.3456,
+              "north": 36.0342,
+              "east": -79.3444
+            },
+            {
+              "south": 36.0342,
+              "west": -79.3448,
+              "north": 36.0356,
+              "east": -79.3438
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 95,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Honda Power Equipment Mfg., Inc.\n- Type: Power Equipment / General-Purpose Engine Plant (manufacturing + R&D)\n- Address: 3721 S NC Highway 119, Swepsonville/Haw River, NC 27359\n- Resolved coordinates: 36.033436, -79.344443 (center of the main plant campus)",
+        "mapsUrl": "https://www.google.com/maps/@36.033436,-79.344443,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No controlled truck gate at any public road. The campus is set well back from NC-119 (west) behind dense woods; the main access is an open driveway off the east-side road into the parking lot — no barrier arm, no guard booth, no checkpoint pinch-point. Truck docks and drop yards are reached via private internal roads inside the wooded campus. Classified false.",
+          "guardShack": "No guard booth observed at the entrance driveway or anywhere along the property perimeter in Street View (2023) or satellite.",
+          "postGateStaging": "Large paved internal aprons in front of the central and NW dock banks provide ample inside-property holding/queue room.",
+          "drivewayLong": "Long private access road from the public road through the campus to the docks easily holds 3+ trucks.",
+          "dropYard": "Multiple dedicated trailer-storage lots: a long SW row of ~25+ trailers parked nose-out, plus NW and central drop rows. Clearly separate from active dock staging.",
+          "dockDoors": "60+ dock doors estimated across multiple building faces (NW bank, central dock zone between buildings, SW building). High trailer density backed in. Count is an honest overhead estimate.",
+          "dropArea": "Drop lots hold well over 50 trailers without tractors across the SW, NW and central rows.",
+          "shipRcvSeparate": "Dock activity is split across physically separate banks on different building faces (NW face vs central courtyard vs SW building) consistent with separate ship/receive clusters.",
+          "multipleFacilities": "Campus has 4 distinct large buildings: main plant, NW production building, central buildings, and a separate older west building, plus north test/proving fields.",
+          "fastLaneOpportunity": "Wide open private access roads and broad aprons leave room to add bypass/express lanes.",
+          "entryLanes": "Driveway is a wide open 2-lane apron; exact lane count for trucks not separately marked. Low confidence.",
+          "siteAreaAcres": "Web sources state an 87-acre site; perimeter box captures the developed core plus north test field — ~95 acres estimate.",
+          "railServed": "No rail spur runs into the property."
+        }
+      },
+      {
+        "id": "12-honda-marysville-motorcycle-plant-mmp-marysville-oh",
+        "name": "Honda - Marysville Motorcycle Plant (MMP) - Marysville OH",
+        "type": "Motorcycle / Powersports Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "buildingCount",
+          "dockDoorCount",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 40.279,
+          "lng": -83.5025
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.273,
+            "west": -83.509,
+            "north": 40.2835,
+            "east": -83.4965
+          },
+          "truckGate": {
+            "south": 40.2742,
+            "west": -83.5064,
+            "north": 40.275,
+            "east": -83.5053
+          },
+          "dropYards": [
+            {
+              "south": 40.2768,
+              "west": -83.5032,
+              "north": 40.2808,
+              "east": -83.4968
+            },
+            {
+              "south": 40.28,
+              "west": -83.505,
+              "north": 40.282,
+              "east": -83.501
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.279,
+              "west": -83.5048,
+              "north": 40.281,
+              "east": -83.5032
+            },
+            {
+              "south": 40.2768,
+              "west": -83.5036,
+              "north": 40.2782,
+              "east": -83.5026
+            }
+          ],
+          "staging": {
+            "south": 40.2795,
+            "west": -83.502,
+            "north": 40.281,
+            "east": -83.4995
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 450,
+          "truckGateCount": 3,
+          "buildingCount": 1,
+          "siteAreaAcres": 130,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Honda - Marysville Motorcycle Plant (MMP)\n- Type: Motorcycle / Powersports Assembly Plant (historical) — now vehicle\n  suspension sub-assembly\n- Address: 24000 Honda Parkway area, Marysville, OH 43040 (co-located on the\n  Marysville complex)\n- Resolved coordinates: 40.279000, -83.502500 (eastern wing of the Marysville\n  Auto Plant complex — the historical MMP building)",
+        "mapsUrl": "https://www.google.com/maps/@40.279000,-83.502500,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "siteIdentity": "The Marysville Motorcycle Plant (Honda's original 1979 US plant) ceased motorcycle production in June 2009 and was converted to vehicle suspension sub-assembly. It is NOT a separable standalone facility — it occupies the eastern wing of the contiguous Marysville Auto Plant (MAP) building footprint and shares the MAP truck/trailer/rail infrastructure. Coordinates and geofences were placed on that eastern wing and its associated east-side truck yard. The roster's idx-1 (MAP) and idx-12 (MMP) reference the same physical complex.",
+          "truckGate": "The MAP/MMP complex is a fully guarded, fenced auto-manufacturing campus. Honda Parkway entrances are signalized and controlled; satellite shows checkpoint/booth structures at the truck-yard access. Classified true with medium confidence — no Street View coverage exists inside the secured property to confirm a specific barrier arm.",
+          "guardShack": "Small booth-footprint structures visible at the truck-yard checkpoint on satellite, consistent with staffed guard booths standard at auto plants of this scale. Medium confidence (no on-the-ground SV inside the gate).",
+          "postGateStaging": "Extensive paved internal aprons and holding lanes between the gate and the dock banks / drop yard.",
+          "drivewayLong": "Long internal approach roads easily hold queues of 3+ trucks.",
+          "entryExitSeparate": "Multiple separate entrances around the complex perimeter (employee entrances on Honda Parkway, truck/rail access on the east) — distinct in and out points.",
+          "dockDoors": "Long dock-door banks with trailers backed in along multiple building faces of the eastern wing; 90+ doors estimated. Honest overhead estimate.",
+          "dropArea": "Massive marked trailer drop yard on the east side holding hundreds of trailers without tractors.",
+          "dropYard": "Dedicated multi-row trailer-storage yard east of the building, clearly separate from active dock staging.",
+          "railServed": "A rail spur runs along and into the east side of the complex serving the manufacturing operation.",
+          "multipleFacilities": "The MMP wing is one part of the larger contiguous Marysville complex (MAP + MMP + adjacent support buildings) — a multi-building campus.",
+          "fastLaneOpportunity": "Vast paved truck-yard width leaves ample room for express/bypass lanes.",
+          "buildingCount": "Counted as 1 for the MMP wing itself, though it is physically joined to the larger MAP complex.",
+          "multiStep": "An auto-plant truck yard of this size plausibly has a gate plus a separate yard-control checkpoint, but a clear second checkpoint stage was not confirmed in imagery — left flagged.",
+          "scale": "No truck scale identified.",
+          "urbanRural": "Rural — the complex sits in open farmland NW of Marysville, OH."
+        }
+      },
+      {
+        "id": "13-honda-aircraft-company-hondajet-greensboro-nc",
+        "name": "Honda Aircraft Company (HondaJet) - Greensboro NC",
+        "type": "Aircraft Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 36.1025,
+          "lng": -79.9235
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 36.0985,
+            "west": -79.93,
+            "north": 36.1055,
+            "east": -79.9205
+          },
+          "truckGate": {
+            "south": 36.1004,
+            "west": -79.9213,
+            "north": 36.101,
+            "east": -79.9205
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 36.1013,
+              "west": -79.9252,
+              "north": 36.1023,
+              "east": -79.9242
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 2,
+          "trailerParkingCapacity": 8,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 133,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Honda Aircraft Company (HondaJet) — world headquarters & production\n- Type: Aircraft Assembly Plant\n- Address: 6430 Ballinger Road, Greensboro, NC 27410 (Piedmont Triad\n  International Airport)\n- Resolved coordinates: 36.102500, -79.923500 (center of the production\n  campus on the NE side of the airfield)",
+        "mapsUrl": "https://www.google.com/maps/@36.102500,-79.923500,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "siteIdentity": "The roster coordinates (geocoded to 6430 Ballinger Rd, movedMeters 462) landed on the PTI passenger terminal. The actual Honda Aircraft Company world-HQ campus is on the NE side of Piedmont Triad International Airport at ~36.1025, -79.9235 — a large multi-building aircraft assembly complex with an aircraft apron opening onto an airfield taxiway. Confirmed by satellite (a HondaJet business jet visible on the apron) and 2026 Street View showing HONDA signage on the production building. 133-acre campus.",
+          "facilityNature": "This is an aircraft ASSEMBLY plant, not a freight/distribution facility. Truck activity is light (inbound parts, supplies); there are no trailer drop yards and only a handful of service dock doors. The dominant 'yard' is the airside aircraft apron, which is not a truck yard.",
+          "truckGate": "The campus vehicle entrance road off the public road has a small guard-booth structure with gate hardware, visible in 2026 Street View — a controlled entry consistent with a secured aerospace facility. Classified true.",
+          "guardShack": "A small staffed booth (1-vehicle footprint) sits at the campus entrance road. Classified true.",
+          "remoteGs": "False — a physical guard booth is present.",
+          "drivewayLong": "The entrance road runs a long way through landscaped grounds to the buildings, with ample queuing length.",
+          "dockDoors": "0-10 — only a few service/parts dock doors at the production building's landside face; one semi-trailer observed parked there. Honest estimate.",
+          "dropArea": "NONE — no marked trailer drop stalls; this facility does not run a trailer drop operation.",
+          "dropYard": "False — no dedicated trailer-storage lot.",
+          "multipleFacilities": "Campus has the main production/assembly complex plus the SW wing-production building and adjacent office buildings — a multi-building campus.",
+          "railServed": "False — no rail spur; the facility is served by the airfield, not rail.",
+          "urbanRural": "Rural — the campus sits at the wooded NE edge of the airport surrounded by woods and open land; 2026 Street View shows a rural two-lane road.",
+          "scale": "No truck scale.",
+          "entryLanes": "Single controlled entry lane at the guard booth; low confidence on exact count."
+        }
+      },
+      {
+        "id": "14-honda-aero-inc-burlington-nc",
+        "name": "Honda Aero, Inc. (GE Honda HF120 engines) - Burlington NC",
+        "type": "Aircraft Engine Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "truckGate",
+          "dockDoorCount",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 36.047,
+          "lng": -79.481
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 36.0454,
+            "west": -79.483,
+            "north": 36.0483,
+            "east": -79.4795
+          },
+          "truckGate": {
+            "south": 36.0467,
+            "west": -79.4831,
+            "north": 36.0471,
+            "east": -79.4825
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 36.0456,
+              "west": -79.4818,
+              "north": 36.0464,
+              "east": -79.4812
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 4,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 4,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 14,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Honda Aero, Inc. (GE Honda HF120 turbofan engines)\n- Type: Aircraft Engine Plant\n- Address: 2989 Tucker St, Burlington, NC 27215 (Burlington-Alamance\n  Regional Airport)\n- Resolved coordinates: 36.047000, -79.481000 (center of the Honda Aero\n  manufacturing building)",
+        "mapsUrl": "https://www.google.com/maps/@36.047000,-79.481000,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "siteIdentity": "Honda Aero, Inc. at 2989 Tucker St, Burlington NC — the GE Honda HF120 turbofan engine assembly/test plant adjacent to Burlington-Alamance Regional Airport. Confirmed: a single large modern white-roof manufacturing building (~132,000 sq ft after the 2016/2017 50,000 sq ft expansion) with an aircraft apron facing the runway. Verified by 2026 Street View showing the modern facility on Tucker St and z19-z20 satellite. The roster coordinates (movedMeters 36) sat on the airport apron just east of the building; coords were tightened onto the building center.",
+          "facilityNature": "This is a jet-engine ASSEMBLY and test plant, not a freight/distribution facility. Truck activity is minimal (small inbound parts shipments). There are no trailer drop yards and only a few service dock doors. The dominant 'yard' is the airside aircraft apron, irrelevant to a truck-yard engagement.",
+          "truckGate": "No controlled truck gate. The vehicle entrance off Tucker St is an open landscaped driveway into the employee parking lot — no barrier arm, no booth, no checkpoint. The chain-link fencing seen in Street View is the airport perimeter fence, not a Honda Aero truck-gate control. Classified false.",
+          "guardShack": "No guard booth observed at the entrance driveway in 2026 Street View or satellite.",
+          "remoteGs": "False — there is no truck gate at all.",
+          "drivewayShort": "The short open driveway from Tucker St to the parking lot would hold at most 1-2 vehicles.",
+          "dockDoors": "0-10 — only a handful of service/parts dock doors at the building; no regular bank of loading bays. Honest overhead estimate.",
+          "dropArea": "NONE — no marked trailer drop stalls; no trailer drop operation.",
+          "dropYard": "False — no dedicated trailer-storage lot.",
+          "multipleFacilities": "Single building; the nearby buildings are separate airport tenants, not part of Honda Aero.",
+          "railServed": "False — no rail spur; served by road and the adjacent airfield.",
+          "urbanRural": "Rural — the site is at the edge of a small regional airport surrounded by farmland and light development; 2026 Street View shows a rural two-lane road.",
+          "scale": "No truck scale.",
+          "siteAreaAcres": "~14 acres for the Honda Aero parcel (building plus parking and apron frontage); the perimeter box is a best estimate as the parcel blends into the airport grounds."
+        }
+      },
+      {
+        "id": "15-american-honda-troy-parts-distribution-center",
+        "name": "American Honda - Troy Parts Distribution Center - Troy OH",
+        "type": "Parts Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "multipleFacilities"
+        ],
+        "center": {
+          "lat": 40.0485,
+          "lng": -84.2372
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.0455,
+            "west": -84.2415,
+            "north": 40.0512,
+            "east": -84.235
+          },
+          "truckGate": {
+            "south": 40.0466,
+            "west": -84.2396,
+            "north": 40.0472,
+            "east": -84.2388
+          },
+          "dropYards": [
+            {
+              "south": 40.0478,
+              "west": -84.24,
+              "north": 40.0508,
+              "east": -84.2386
+            },
+            {
+              "south": 40.0464,
+              "west": -84.2408,
+              "north": 40.0476,
+              "east": -84.2392
+            },
+            {
+              "south": 40.0483,
+              "west": -84.2372,
+              "north": 40.0508,
+              "east": -84.2356
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.0504,
+              "west": -84.238,
+              "north": 40.0512,
+              "east": -84.2356
+            },
+            {
+              "south": 40.0472,
+              "west": -84.2362,
+              "north": 40.0504,
+              "east": -84.2354
+            }
+          ],
+          "staging": {
+            "south": 40.0464,
+            "west": -84.24,
+            "north": 40.0492,
+            "east": -84.2388
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 80,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: American Honda - Troy Parts Distribution Center (PDC)\n- Type: Parts Distribution Center\n- Address: Commerce Center Boulevard area off I-75, Troy, OH 45373\n- Resolved coordinates: 40.048500, -84.237200 (center of the PDC warehouse —\n  the northern of two adjacent Honda warehouses)",
+        "mapsUrl": "https://www.google.com/maps/@40.048500,-84.237200,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "siteIdentity": "American Honda's Troy Parts Distribution Center (PDC) — a 534,000 sq ft parts DC operating in Troy since 1986. It is the northern of two adjacent large Honda warehouses off Commerce Center Blvd; the southern building is the 2007 Midwest Consolidation Center (MCC, roster idx 16, at 151 Commerce Center Blvd). The roster idx-15 geocode landed in a residential area; the facility was re-located via satellite and web research. Building center locked at ~40.0485, -84.2372. The PDC/MCC assignment (PDC = north building) follows from the MCC roster coordinates pointing to the southern building and the MCC being described as built adjacent to the older PDC.",
+          "truckGate": "The PDC campus is fenced with a controlled entrance — a Honda monument sign and flag at the entry road off the public road, and a small guard-booth-footprint structure beside the internal access road. Classified true (medium confidence — no Street View inside the gate to confirm a barrier arm).",
+          "guardShack": "A small building consistent with a staffed guard booth sits beside the entrance access road. Medium confidence.",
+          "remoteGs": "False — a guard-booth structure appears present.",
+          "preGateStaging": "A large paved staging/parking lot sits between the public road and the building, usable for truck holding.",
+          "postGateStaging": "Ample paved internal aprons and lanes between the gate and the dock banks.",
+          "drivewayLong": "A long internal access road runs from the entrance through the campus to the docks — easily holds 3+ trucks.",
+          "dockDoors": "50+ dock doors estimated across the north and east building faces, with many trailers backed in. Honest overhead estimate.",
+          "dropArea": "Extensive trailer drop yards on the west and east sides holding well over 50 Honda trailers (visible in dense colored rows) without tractors.",
+          "dropYard": "Multiple dedicated trailer-storage lots, clearly separate from active dock staging.",
+          "multipleFacilities": "The PDC sits in a two-building Honda campus with the adjacent MCC; counted as a multi-facility campus, though the PDC itself is a single building.",
+          "fastLaneOpportunity": "Large empty paved staging lots and wide aprons leave clear room to add a bypass/express lane.",
+          "shipRcvSeparate": "Dock activity appears consolidated on the north/east faces; not clearly split into separate ship vs receive clusters — left false.",
+          "railServed": "No rail spur into the property.",
+          "urbanRural": "Rural — edge-of-town setting along the I-75 corridor with farmland to the west and a water tower nearby; small-town industrial, so classified Rural.",
+          "buildingCount": "1 building for the PDC itself."
+        }
+      },
+      {
+        "id": "16-midwest-consolidation-center",
+        "name": "American Honda - Midwest Consolidation Center (MCC) - Troy OH",
+        "type": "Parts Consolidation Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 40.0463,
+          "lng": -84.236
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.0432,
+            "west": -84.2405,
+            "north": 40.0488,
+            "east": -84.2323
+          },
+          "truckGate": {
+            "south": 40.04595,
+            "west": -84.24045,
+            "north": 40.0464,
+            "east": -84.2399
+          },
+          "dropYards": [
+            {
+              "south": 40.04335,
+              "west": -84.2356,
+              "north": 40.0442,
+              "east": -84.2329
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.0464,
+              "west": -84.2351,
+              "north": 40.0471,
+              "east": -84.2325
+            },
+            {
+              "south": 40.04425,
+              "west": -84.2372,
+              "north": 40.0447,
+              "east": -84.2328
+            }
+          ],
+          "staging": {
+            "south": 40.0459,
+            "west": -84.2401,
+            "north": 40.047,
+            "east": -84.2383
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 58,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Parts Consolidation Center\nResolved coordinates: 40.04630, -84.23600\nMaps: https://www.google.com/maps/@40.04630,-84.23600,400m/data=!3m1!1e3\nConfidence: high\n\n---",
+        "mapsUrl": "https://www.google.com/maps/@40.04630,-84.23600,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Guarded checkpoint on the property access road off Commerce Center Blvd, ~340 m before the building; gate/barrier canopy spans the lanes (z20 satellite + Street View 2024-06).",
+          "guardShack": "Small blue/white staffed booth (~1-2 vehicle footprint, windows on multiple sides, overhead canopy over the lanes) sits beside the gate lanes - confirmed in Street View.",
+          "remoteGs": "False - a physical staffed guard booth is present.",
+          "postGateStaging": "Long deep approach drive plus a wide paved apron between the gate and the building affords ample inside-the-fence queuing.",
+          "drivewayLong": "Gate-to-dock approach is several hundred meters of internal road - easily holds 3+ trucks.",
+          "entryLanes": "Estimated 2; checkpoint widens into a multi-lane canopy area - approximate from imagery.",
+          "exitLanes": "Estimated 2; entry/exit share the one gated checkpoint.",
+          "fastLaneOpportunity": "Wide multi-lane gate canopy and a long approach road give physical room for an express/bypass lane.",
+          "dockDoors": "Long dock bank on the NE building face (toward I-75) plus a second dock bank on the SW/south face; 549,000 sq ft hub handling up to 270 freighter-loads/day - well into 50+ band. Door count is an estimate from overhead imagery.",
+          "dropArea": "Large dedicated trailer drop yard south of the building packed with parked trailers (no tractors), well over 50 stalls.",
+          "shipRcvSeparate": "Two distinct dock clusters on different building faces (NE face toward I-75 and SW/south face).",
+          "urbanRural": "Edge-of-town industrial setting off I-75 in Troy OH bordered by open farmland to the south - judged Rural per rubric tie-break.",
+          "multipleFacilities": "False for this property - the MCC building is the subject site; the older Troy PDC (idx 15) is a separate adjacent facility on the same campus, not counted here. buildingCount=2 includes the MCC's small gatehouse/annex.",
+          "dropYard": "Dedicated on-site trailer-storage lot south of the building, separate from active dock staging.",
+          "trailerParkingCapacity": "Estimate combining the southern drop yard and apron staging - approximate.",
+          "railServed": "No rail spur enters the property; I-75 runs along the east edge but no rail."
+        }
+      },
+      {
+        "id": "17-chino-parts-distribution-center",
+        "name": "American Honda - Chino Parts Distribution Center (NA Hub West) - Chino CA",
+        "type": "Parts / Accessories Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 33.99624,
+          "lng": -117.6996
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.9944,
+            "west": -117.7018,
+            "north": 33.9978,
+            "east": -117.6979
+          },
+          "truckGate": {
+            "south": 33.99485,
+            "west": -117.69835,
+            "north": 33.9952,
+            "east": -117.69795
+          },
+          "dropYards": [
+            {
+              "south": 33.995,
+              "west": -117.6987,
+              "north": 33.9972,
+              "east": -117.6979
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.9954,
+              "west": -117.6992,
+              "north": 33.997,
+              "east": -117.6986
+            },
+            {
+              "south": 33.9948,
+              "west": -117.7008,
+              "north": 33.9954,
+              "east": -117.6987
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 30,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Parts / Accessories Distribution Center\nResolved coordinates: 33.99624, -117.69960\nMaps: https://www.google.com/maps/@33.99624,-117.69960,400m/data=!3m1!1e3\nConfidence: high\n\n---",
+        "mapsUrl": "https://www.google.com/maps/@33.99624,-117.69960,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Wide chain-link rolling/sliding gate across the truck-court driveway off the east frontage road - a controlled truck entrance. Confirmed in Street View 2025-10; trailer court visible behind the gate.",
+          "guardShack": "No staffed guard booth visible at the truck gate in Street View - the gate appears to be a remote/badge-operated sliding gate. The east and south perimeter are hedge-screened so a small booth cannot be 100% excluded, hence flagged uncertain.",
+          "remoteGs": "Set true because there is a truck gate but no visible guard shack, implying badge/kiosk/remote check-in - moderate confidence.",
+          "postGateStaging": "Large paved truck court inside the fence between the gate and the dock doors provides ample inside queuing.",
+          "drivewayLong": "Deep paved truck court inside the gate easily holds 3+ trucks.",
+          "entryLanes": "Estimated 1 - single sliding-gate driveway; approximate.",
+          "exitLanes": "Estimated 1 - shares the single gated driveway.",
+          "dockDoors": "Dock banks on the east face (into the large trailer court) and the south/SW face; building is the 500,000 sq ft NA Hub West with heavy trailer activity - door total estimated ~55, in the 50+ band.",
+          "dropArea": "Large dedicated trailer-storage court on the east/south of the building packed with parked trailers and stacked intermodal containers - well over 50 stalls.",
+          "shipRcvSeparate": "Two distinct dock clusters on different building faces (east face and south/SW face).",
+          "urbanRural": "Dense Chino/Inland Empire industrial fabric, fully surrounded by warehouses and city development - Urban.",
+          "multipleFacilities": "One Honda PDC building on this property; the large warehouse immediately south is a separate (non-Honda) building, not counted.",
+          "dropYard": "Dedicated on-site trailer-storage court, separate from active dock staging - many parked trailers and containers.",
+          "trailerParkingCapacity": "Estimate from the east/south trailer court - approximate.",
+          "railServed": "No rail spur enters the property.",
+          "location": "Roster coords (34.012023,-117.678685, APPROXIMATE) landed in a Chino residential neighborhood. Resolved to 14141 Yorba Ave via web research; satellite/Street View confirmed the large solar-roofed PDC building with Honda-colored trailers."
+        }
+      },
+      {
+        "id": "18-irving-parts-distribution-center",
+        "name": "American Honda - Irving Parts Distribution Center - Irving TX",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 32.92215,
+          "lng": -97.0091
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.92065,
+            "west": -97.0101,
+            "north": 32.9241,
+            "east": -97.0079
+          },
+          "truckGate": {
+            "south": 32.9216,
+            "west": -97.00845,
+            "north": 32.92195,
+            "east": -97.00805
+          },
+          "dropYards": [
+            {
+              "south": 32.923,
+              "west": -97.009,
+              "north": 32.92375,
+              "east": -97.0082
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.9214,
+              "west": -97.0088,
+              "north": 32.9234,
+              "east": -97.00815
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 19,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Parts Distribution Center\nResolved coordinates: 32.92215, -97.00910\nMaps: https://www.google.com/maps/@32.92215,-97.00910,400m/data=!3m1!1e3\nConfidence: high\n\n---",
+        "mapsUrl": "https://www.google.com/maps/@32.92215,-97.00910,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Two controlled truck gates confirmed in Street View 2025-05: a south driveway signed 'HONDA - TRUCK ENTRANCE ONLY' and a NE driveway signed 'NO ENTRY / EXIT ONLY'. Both have sliding chain-link gates and perimeter fencing.",
+          "guardShack": "No staffed guard booth visible at either truck gate in Street View - the gates read as remote/badge-operated sliding gates. A small set-back utility/pump structure near the entry is not a gate booth. Flagged uncertain.",
+          "remoteGs": "Set true - truck gates exist with no visible guard shack, implying badge/kiosk/remote check-in. Moderate confidence.",
+          "preGateStaging": "No dedicated paved waiting area outside the gate; the entry driveway apron is short.",
+          "postGateStaging": "Wide paved truck apron inside the gate along the east dock face provides inside queuing room.",
+          "drivewayLong": "The internal truck apron along the east face is long enough to hold 3+ trucks between the entry gate and the docks.",
+          "entryExitSeparate": "Distinct gates at different points of the property line: a dedicated entry gate on the south and a dedicated exit gate on the NE - clearly signed.",
+          "entryLanes": "One inbound lane at the truck-entrance gate.",
+          "exitLanes": "One outbound lane at the exit-only gate.",
+          "dockDoors": "Dock bank on the east building face with trailers backed in along most of the building length; door total estimated ~30, in the 25-50 band. Mid-size 1980s-era PDC.",
+          "dropArea": "A row of trailers parked in a staging/drop area at the NE of the property; estimated 10-25 stalls.",
+          "shipRcvSeparate": "Loading concentrated on a single east-face dock bank - shipping and receiving not on physically separate dock clusters.",
+          "urbanRural": "Dense Irving/Las Colinas industrial-office corridor near DFW Airport, fully surrounded by city development - Urban.",
+          "multipleFacilities": "One Honda PDC warehouse plus an attached/adjacent office building on the same property - a single facility. buildingCount=2 counts the warehouse and the SW office building.",
+          "dropYard": "Dedicated trailer-staging/drop area at the NE of the property, separate from the active dock apron.",
+          "siteAreaAcres": "~19 acres derived from the perimeter box - estimate; no published acreage found.",
+          "trailerParkingCapacity": "Estimate from the NE staging area plus apron - approximate.",
+          "railServed": "No rail spur enters the property.",
+          "location": "Roster coords (32.911717,-96.99072, APPROXIMATE) landed in the Las Colinas office/residential district. Resolved to 4525 W Royal Lane, Irving TX via web research; satellite and Street View confirmed the warehouse with 'HONDA' signage on the building and gates."
+        }
+      }
+    ]
+  }
+}

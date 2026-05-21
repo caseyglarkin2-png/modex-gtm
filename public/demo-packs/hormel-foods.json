@@ -1,0 +1,2755 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:42:04.787Z",
+  "account": {
+    "slug": "hormel-foods",
+    "displayName": "Hormel Foods",
+    "archetype": "cpg",
+    "siteCount": 27,
+    "coverageNote": {
+      "auditedCount": 27,
+      "estimatedFootprint": null,
+      "droppedStubCount": 0,
+      "capHit": false,
+      "note": "Audited all 27 identifiable facilities."
+    }
+  },
+  "research": {
+    "facility_count": 40,
+    "audited_facilities": 27,
+    "source": "yard-audit",
+    "confidence": "third-party",
+    "caveats": [
+      "Osceola Food - Osceola IA: audit note mentions 'closed'",
+      "Hormel Atlanta Plant - Tucker GA: audit note mentions 'closed'",
+      "Creative Contract Packaging - Aurora IL: audit note mentions 'closed'",
+      "Skippy Foods - Little Rock AR: audit note mentions 'closed'",
+      "Hormel Beloit Plant - Beloit WI: audit note mentions 'closed'"
+    ]
+  },
+  "network": {
+    "bbox": [
+      -122.0542,
+      33.8385,
+      -76.5799,
+      45.979
+    ],
+    "archetypeMix": {
+      "#6": 3,
+      "#3": 16,
+      "#9": 7,
+      "#2": 1
+    },
+    "totals": {
+      "dockDoors": 766,
+      "trailerCapacity": 1609,
+      "gates": 28,
+      "railServed": 5,
+      "acres": 997.8
+    },
+    "sites": [
+      {
+        "id": "01-hormel-flagship-austin-plant",
+        "name": "Hormel Flagship Austin Plant - Austin MN",
+        "type": "Meat Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 43.6765,
+          "lng": -92.9665
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 43.6708,
+            "west": -92.9725,
+            "north": 43.6808,
+            "east": -92.9625
+          },
+          "truckGate": {
+            "south": 43.6737,
+            "west": -92.967,
+            "north": 43.6742,
+            "east": -92.9662
+          },
+          "dropYards": [
+            {
+              "south": 43.6718,
+              "west": -92.9718,
+              "north": 43.6762,
+              "east": -92.969
+            },
+            {
+              "south": 43.6748,
+              "west": -92.9682,
+              "north": 43.6762,
+              "east": -92.9668
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 43.6749,
+              "west": -92.9681,
+              "north": 43.6762,
+              "east": -92.967
+            },
+            {
+              "south": 43.6738,
+              "west": -92.9668,
+              "north": 43.6748,
+              "east": -92.9656
+            }
+          ],
+          "staging": {
+            "south": 43.673,
+            "west": -92.9672,
+            "north": 43.674,
+            "east": -92.966
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 2,
+          "buildingCount": 12,
+          "siteAreaAcres": 120,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinates (43.68237, -92.968394, \"ROOFTOP\", address \"1 Hormel\nPlace\") point at the Hormel World Headquarters / R&D campus — a cluster of\nmulti-story office/lab buildings — not the production plant. Step-0 satellite\nprobing at z16-z17 around that point showed only office-scale buildings.\n\nThe actual flagship Austin processing plant (1.3M sq ft, ~1,900 employees,\nSPAM / Cure 81 / bacon / pepperoni) is a sprawling industrial complex ~1.1 km\nsouth, centered ~43.6765, -92.9665. Confirmed by: (a) z16-z17 satellite showing\na 10+ building manufacturing complex with dock banks and trailer yards;\n(b) web research — the Hormel Austin Plant main gate is on 14th Ave NE\n(CMac listing, phone 507-437-5293); (c) the Cedar River bounds the plant on the\nwest, 14th Ave NE / residential streets on the east, matching public records.",
+        "mapsUrl": "https://www.google.com/maps/@43.6765,-92.9665,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster lat/lng (43.68237,-92.968394) pointed at Hormel World HQ / R&D campus, not the production plant. The flagship 1.3M sq ft processing plant is ~1.1 km south, centered ~43.6765,-92.9665, bounded by the Cedar River on the west and 14th Ave NE / residential streets on the east.",
+          "truckGate": "Entire property is fenced with chain-link plus privacy slats (confirmed in multiple Street Views). A guard-booth checkpoint with an apparent barrier arm straddles the internal truck road at ~43.6740,-92.9665 (z20 satellite). Web research confirms a 'guarded gate for security clearance' (CMac listing for Hormel Austin Plant main gate on 14th Ave, 507-437-5293).",
+          "guardShack": "Small (~1-vehicle footprint) structure straddling the truck lane at the internal checkpoint, visible at z20.",
+          "scale": "Truck scale likely present for a hog-receiving plant of this size but not positively isolated in imagery; flagged uncertain.",
+          "shipRcvSeparate": "Multiple distinct dock banks on different building faces (SW dock apron with trailers backed in; central-south building face) consistent with separate ship/receive operations.",
+          "multipleFacilities": "Sprawling campus of 10+ connected and standalone industrial buildings on one fenced property.",
+          "railServed": "Active rail spur runs along the east edge of the property into the plant area.",
+          "dockDoors": "50+ band; large multi-building food plant with extensive dock activity, trailers backed in on the SW face. Count is an overhead estimate.",
+          "dropArea": "Extensive trailer-parking rows on the SW (50+ stalls of parked trailers without tractors).",
+          "fastLaneOpportunity": "Wide paved aprons at the plant frontage and ample yard width provide room for a bypass/express lane."
+        }
+      },
+      {
+        "id": "02-hormel-algona-plant",
+        "name": "Hormel Algona Plant - Algona IA",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dockDoorCount",
+          "dropArea",
+          "scale"
+        ],
+        "center": {
+          "lat": 43.0793,
+          "lng": -94.2233
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 43.0774,
+            "west": -94.2256,
+            "north": 43.0813,
+            "east": -94.2215
+          },
+          "truckGate": {
+            "south": 43.0805,
+            "west": -94.2244,
+            "north": 43.0811,
+            "east": -94.2238
+          },
+          "dropYards": [
+            {
+              "south": 43.0796,
+              "west": -94.2229,
+              "north": 43.0803,
+              "east": -94.2218
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 43.0788,
+              "west": -94.2225,
+              "north": 43.0797,
+              "east": -94.2216
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 30,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (43.079868, -94.222893, \"ROOFTOP\") landed on the plant.\nStep-0 satellite probing at z16-z18 confirmed a single ~150,000 sq ft\nindustrial building on the SW edge of Algona, IA, with employee parking and a\nsmall trailer yard — consistent with the facility. Web research confirms the\nHormel Algona Plant: opened 1970, ~250 employees, 150,000 sq ft, produces\npepperoni and value-added sausage products (pork cured, sliced, packaged), with\na recent ~8,800 sq ft expansion separating raw-food and ready-to-eat areas.",
+        "mapsUrl": "https://www.google.com/maps/@43.0793,-94.2233,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster lat/lng confirmed accurate (geocode moved 1042 m, ROOFTOP). Plant centered ~43.0793,-94.2233 — a single ~150,000 sq ft pepperoni/sausage plant on the SW edge of Algona, IA, accessed by a private road off the public road to the north.",
+          "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point at the public-road junction — the entrance is an open driveway with Hormel signage (Street View 2025-08). No continuous perimeter fence around the property. A small structure sits beside the ~250 m private access road (~43.0807,-94.2241) which could be a small check-in/booth, but no controlled barrier is visible. Classified false; flagged uncertain.",
+          "guardShack": "No clear staffed booth at a controlled entrance. The small roadside structure on the access road is ambiguous at z20 — flagged uncertain.",
+          "drivewayLong": "The private access road is ~250 m long and easily holds a queue of 3+ trucks before reaching the yard.",
+          "dockDoors": "10-25 band — modest-sized single plant; dock doors with a few trailers backed in on the east/center building face. Overhead estimate, flagged uncertain.",
+          "dropArea": "~6-8 trailers parked in the NE yard area; no large dedicated drop lot. 0-10 band.",
+          "urbanRural": "Plant sits on the SW edge of Algona (pop ~5,500) surrounded by farmland — Rural.",
+          "railServed": "A rail line passes near the SE property edge but no spur runs into the plant; classified false.",
+          "buildingCount": "One main connected plant building plus a small outbuilding."
+        }
+      },
+      {
+        "id": "03-progressive-processing",
+        "name": "Progressive Processing - Dubuque IA",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "urbanRural",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 42.4879,
+          "lng": -90.7661
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.4862,
+            "west": -90.7687,
+            "north": 42.4895,
+            "east": -90.7634
+          },
+          "truckGate": {
+            "south": 42.4865,
+            "west": -90.7659,
+            "north": 42.487,
+            "east": -90.7651
+          },
+          "dropYards": [
+            {
+              "south": 42.487,
+              "west": -90.768,
+              "north": 42.488,
+              "east": -90.7669
+            },
+            {
+              "south": 42.4868,
+              "west": -90.7672,
+              "north": 42.4872,
+              "east": -90.7659
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 42.4868,
+              "west": -90.7676,
+              "north": 42.4873,
+              "east": -90.7656
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 37,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster address (\"11400 Stratton Dr\") and coordinates (42.41162,\n-90.658333, \"APPROXIMATE\", 9396 m off) were wrong. Web research established\nthe correct address: 1205 Chavenelle Court, Dubuque, IA 52002, in the\nDubuque Industrial Center West. Coordinates 42.48810, -90.76661 were confirmed\nby satellite probing at z16-z17, which showed a large (~348,000 sq ft)\nsingle-building production plant with a trailer drop yard — matching the\nfacility. Web confirms: Progressive Processing LLC, a wholly owned Hormel\nsubsidiary, opened 2010, ~400 employees, makes Hormel Compleats microwave\nmeals, chunk-chicken items, bacon toppings and SPAM products.",
+        "mapsUrl": "https://www.google.com/maps/@42.4879,-90.7661,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address '11400 Stratton Dr' and coordinates were wrong (geocode APPROXIMATE, 9396 m off). Web research found the real address: 1205 Chavenelle Court, Dubuque IA 52002, in the Dubuque Industrial Center West. Locked center 42.4879,-90.7661 — a 348,000 sq ft Hormel-owned production plant (Compleats meals, chunk chicken, bacon toppings, SPAM), opened 2010.",
+          "truckGate": "No barrier arm, gate, or checkpoint at the plant entrance; no perimeter fence around the property. The plant is set back behind a landscaped lawn off the public industrial-park road (Chavenelle Court). Open access driveway with a wide truck apron. Classified false.",
+          "guardShack": "No staffed booth at any controlled entrance — fully open site.",
+          "drivewayLong": "Long landscaped approach plus a very wide internal truck apron easily holds a 3+ truck queue.",
+          "fastLaneOpportunity": "Very wide unused paved apron south of the dock face leaves ample room to add a bypass/express lane.",
+          "dockDoors": "25-50 band — clear dock face along the south building wall with ~20+ trailers backed in plus additional dock positions. Overhead estimate.",
+          "dropArea": "25-50 band — multiple rows of parked trailers in the SW drop yard (gravel/paved), ~30-40 trailers without tractors.",
+          "dropYard": "Dedicated SW trailer-storage lot, partly unpaved, separate from the active dock apron.",
+          "urbanRural": "Plant sits in an industrial park on the edge of Dubuque with farmland immediately to the south; borderline call, scored Rural per the 'when torn, choose Rural' guidance. Flagged uncertain.",
+          "railServed": "No rail spur into the property."
+        }
+      },
+      {
+        "id": "04-hormel-knoxville-plant",
+        "name": "Hormel Knoxville Plant - Knoxville IA",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 41.3173,
+          "lng": -93.061
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.3155,
+            "west": -93.0635,
+            "north": 41.3192,
+            "east": -93.0585
+          },
+          "truckGate": {
+            "south": 41.3168,
+            "west": -93.0627,
+            "north": 41.3172,
+            "east": -93.062
+          },
+          "dropYards": [
+            {
+              "south": 41.3157,
+              "west": -93.0625,
+              "north": 41.3164,
+              "east": -93.06
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.317,
+              "west": -93.0615,
+              "north": 41.3176,
+              "east": -93.0601
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 28,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 42,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster address (\"703 E Robinson St\") and coordinates (41.318297,\n-93.091383, \"RANGE_INTERPOLATED\") landed in residential Knoxville — no\nindustrial building. Web research established the correct address:\n209 N Godfrey Ln, Knoxville, IA 50138, on the east edge of town.\nSatellite probing at z17-z18 around 41.3173, -93.0610 confirmed a single\nprocessing plant with employee parking, a south-face dock, and a trailer drop\nyard. Web confirms the Hormel Knoxville Plant: dry sausage (pepperoni/salami),\n~150 production employees, ~1M lbs of dry sausage per week.\n\nNote: a separate heavy-industrial complex (process tanks, cooling towers) sits\nimmediately west of Godfrey Lane — it is not the Hormel plant; the Hormel\nplant is the food-processing building east of Godfrey Lane.",
+        "mapsUrl": "https://www.google.com/maps/@41.3173,-93.061,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address '703 E Robinson St' and coordinates were wrong (RANGE_INTERPOLATED, landed in residential Knoxville). Web research found the real address: 209 N Godfrey Ln, Knoxville IA 50138, on the east edge of town. Locked center 41.3173,-93.0610 — a single dry-sausage plant (pepperoni/salami, ~150 employees, ~1M lbs/week). The adjacent heavy industrial complex with tanks/cooling towers immediately west of Godfrey Ln is a separate (non-Hormel) facility.",
+          "truckGate": "The plant property has a continuous chain-link perimeter fence (confirmed in multiple Street Views, 2026-04). A single gate opening in the fence controls the entrance driveway off Godfrey Lane. No barrier arm clearly resolved, but the fenced perimeter with one defined gated driveway is a controlled entrance. Classified true; flagged uncertain.",
+          "guardShack": "No staffed guard booth visible at the entrance.",
+          "remoteGs": "Gate present but no guard booth — implies kiosk/badge/app check-in. Flagged uncertain.",
+          "drivewayLong": "Long open driveway from Godfrey Lane into the parking/dock area holds a 3+ truck queue.",
+          "dockDoors": "10-25 band — dock face along the south building wall with ~8-12 trailers backed in (Street View ent2). Overhead estimate.",
+          "dropArea": "10-25 band — a dedicated trailer drop yard with ~15-20 angled trailer stalls sits south of the plant between the property and the rail line.",
+          "dropYard": "Separate trailer-storage lot south of the plant, distinct from the active dock apron.",
+          "railServed": "A rail line runs parallel to the road along the south edge but no spur enters the plant property; classified false.",
+          "urbanRural": "Plant sits on the east edge of Knoxville (pop ~7,300) surrounded by farmland and scattered industrial — Rural."
+        }
+      },
+      {
+        "id": "05-osceola-food",
+        "name": "Osceola Food - Osceola IA",
+        "type": "Meat Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "dockDoorCount",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 41.0238,
+          "lng": -93.786
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.021,
+            "west": -93.791,
+            "north": 41.0265,
+            "east": -93.782
+          },
+          "truckGate": {
+            "south": 41.0218,
+            "west": -93.7876,
+            "north": 41.0224,
+            "east": -93.7868
+          },
+          "dropYards": [
+            {
+              "south": 41.0213,
+              "west": -93.7858,
+              "north": 41.023,
+              "east": -93.7834
+            },
+            {
+              "south": 41.0248,
+              "west": -93.7876,
+              "north": 41.0262,
+              "east": -93.7856
+            },
+            {
+              "south": 41.0234,
+              "west": -93.7908,
+              "north": 41.0243,
+              "east": -93.7893
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.0225,
+              "west": -93.7858,
+              "north": 41.0232,
+              "east": -93.7834
+            }
+          ],
+          "staging": {
+            "south": 41.022,
+            "west": -93.7876,
+            "north": 41.023,
+            "east": -93.7864
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 140,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 90,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster address (\"2280 W McLane St\") and coordinates (41.030578,\n-93.773051, \"GEOMETRIC_CENTER\") landed in residential Osceola — no\nindustrial building. Web research established the correct address:\n1027 Warren Ave, Osceola, IA 50213. Satellite probing at z16-z17 around\n41.0238, -93.7860 confirmed a large multi-building meat-processing campus with\nextensive trailer yards. Web confirms Osceola Food, LLC — Hormel-owned (bought\n1995, production from 1996; originally built for Jimmy Dean in 1972) — 900+\nteam members, 24/7 continuous operations, foodservice and retail products.",
+        "mapsUrl": "https://www.google.com/maps/@41.0238,-93.786,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address '2280 W McLane St' and coordinates were wrong (GEOMETRIC_CENTER, landed in residential Osceola). Web research found the real address: 1027 Warren Ave, Osceola IA 50213. Locked center 41.0238,-93.7860 — a large multi-building meat-processing campus (Osceola Food LLC, Hormel-owned since 1995/1996, originally Jimmy Dean, 900+ employees, 24/7 operations).",
+          "truckGate": "A guard booth with an apparent gate arm controls the truck entrance on the SW access road (~41.0221,-93.7872, clearly visible at z20). The campus is enclosed by chain-link perimeter fence (confirmed in Street View). Trucks were observed queued at the checkpoint.",
+          "guardShack": "Small (~1-vehicle footprint) white booth set beside the truck lane at the SW checkpoint, with a thin barrier line across the lane. Consistent with a 900-employee secured meat plant.",
+          "remoteGs": "False — a staffed guard booth is present.",
+          "drivewayLong": "Long SW access road from the public road to the checkpoint and on to the docks easily holds a 3+ truck queue.",
+          "postGateStaging": "Paved holding area inside the gate before the docks.",
+          "fastLaneOpportunity": "Wide access road and paved aprons leave room for a bypass/express lane.",
+          "dockDoors": "25-50 band — dock faces with trailers backed in along the south building face plus other faces. Overhead estimate, flagged uncertain.",
+          "dropArea": "50+ band — very extensive trailer drop yards: a packed south yard (~40-50 trailers), additional trailer rows north of the plant, and trailers at the SW warehouse.",
+          "dropYard": "Multiple dedicated trailer-storage lots (south, north, SW warehouse).",
+          "shipRcvSeparate": "Multiple distinct dock banks on different building faces across a multi-building campus.",
+          "multipleFacilities": "Campus of 6+ buildings including a large SW distribution/cold-storage warehouse connected by the internal access road.",
+          "scale": "A truck scale is plausible at the SW checkpoint for a plant of this scale but not positively isolated in imagery; flagged uncertain.",
+          "railServed": "No rail spur into the property.",
+          "urbanRural": "Plant sits in an industrial area on the edge of Osceola (pop ~5,000) surrounded by farmland — Rural."
+        }
+      },
+      {
+        "id": "06-burke-corp-nevada-ia",
+        "name": "Burke Corp. - Nevada IA",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "truckGate",
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 42.0085,
+          "lng": -93.4392
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.0073,
+            "west": -93.4418,
+            "north": 42.0107,
+            "east": -93.4365
+          },
+          "truckGate": {
+            "south": 42.01,
+            "west": -93.4415,
+            "north": 42.01055,
+            "east": -93.4409
+          },
+          "dropYards": [
+            {
+              "south": 42.00855,
+              "west": -93.4372,
+              "north": 42.0091,
+              "east": -93.4366
+            },
+            {
+              "south": 42.01,
+              "west": -93.4406,
+              "north": 42.0103,
+              "east": -93.439
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 42.0079,
+              "west": -93.4385,
+              "north": 42.0084,
+              "east": -93.4374
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 41,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinates (42.026791, -93.448181) placed the pin in a residential\nneighborhood in central Nevada, IA — confirmed by satellite probes showing\nsingle-family homes, a school, and small light-industrial sheds near the rail\nline. Burke is a large fully-cooked-meat plant, none of which matched.\n\nWeb research surfaced the real address: 1516 S D Avenue, Nevada, IA 50201\n(Burke Marketing Corporation), corroborated by the Ames Chamber of Commerce\nmember listing, Panjiva supplier report, and USDA FSIS inspected-establishment\nrecords. Satellite probe at 42.0078, -93.4389 immediately revealed a large\nindustrial plant with loading docks and parked trailers on the south edge of\ntown beside the US-30 divided highway. Roster pin was ~2.3 km off.",
+        "mapsUrl": "https://www.google.com/maps/@42.0085,-93.4392,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (42.0268,-93.4482) were ~2.3km off in a residential district. Correct facility is 1516 S D Avenue, Nevada IA 50201, confirmed via Ames Chamber/Panjiva/USDA FSIS listings (Burke Marketing Corporation). Locked center ~42.0085,-93.4392.",
+          "truckGate": "No barrier arm, sliding gate, or pinch-point checkpoint visible at any perimeter road junction. Driveways from the bounding public roads run open into the campus paved yard. Marked false.",
+          "guardShack": "No small 1-3-vehicle-footprint guard booth at a defined truck entrance. Two small buildings sit near the NW driveway off the perimeter road, but they are larger office/maintenance-scale structures, not gate booths beside a controlled lane.",
+          "dockDoorCount": "Diagonal SW dock bank shows ~12-14 trailers backed in; additional dock doors on north and east building faces. Total estimated 25-50 band (~35) - low confidence from overhead-only imagery, much of the roof is overexposed.",
+          "shipRcvSeparate": "Two distinct dock clusters on different faces (diagonal SW bank and additional doors on the north/east faces) suggest separate ship/receive operations - inferred.",
+          "dropYard": "Dedicated trailer storage: a ~20+ trailer row along the east edge plus drop rows along the north of the property, separate from active dock staging.",
+          "fastLaneOpportunity": "Very wide paved aprons and multiple open driveways give ample room to add bypass/express lanes.",
+          "railServed": "A rail line runs through northern Nevada IA but no spur reaches this plant, which sits on the south edge of town beside US-30."
+        }
+      },
+      {
+        "id": "07-dold-foods-wichita-ks",
+        "name": "Dold Foods - Wichita KS",
+        "type": "Meat Processing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 37.7352,
+          "lng": -97.3256
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 37.7331,
+            "west": -97.3272,
+            "north": 37.7371,
+            "east": -97.324
+          },
+          "truckGate": {
+            "south": 37.734,
+            "west": -97.3249,
+            "north": 37.7345,
+            "east": -97.3242
+          },
+          "dropYards": [
+            {
+              "south": 37.7351,
+              "west": -97.32685,
+              "north": 37.7362,
+              "east": -97.3263
+            },
+            {
+              "south": 37.7334,
+              "west": -97.32685,
+              "north": 37.7342,
+              "east": -97.3263
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 37.7353,
+              "west": -97.3261,
+              "north": 37.736,
+              "east": -97.3256
+            },
+            {
+              "south": 37.7359,
+              "west": -97.326,
+              "north": 37.7364,
+              "east": -97.3254
+            }
+          ],
+          "staging": {
+            "south": 37.734,
+            "west": -97.3248,
+            "north": 37.7347,
+            "east": -97.3242
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 32,
+          "trailersVisible": 38,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 31,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (37.736379, -97.325459) landed directly on a large\nindustrial complex in north Wichita. Despite the geocode note (movedMeters\n2004), the pin sat on the correct property. Street View along N Ohio St\nshows the building plainly lettered \"DOLD\" — positive ID. Web research\nconfirmed 2929 N Ohio St, Wichita KS 67219 as Dold Foods, a Hormel bacon\nplant (~760 employees, joined Hormel 1984, subject of a $50M / 156,000 sq ft\ncooked-bacon-line expansion).",
+        "mapsUrl": "https://www.google.com/maps/@37.7352,-97.3256,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (37.736379,-97.325459) were ~well-placed at the plant; geocode noted movedMeters 2004 but landed on the correct complex. Confirmed by Street View 'DOLD' building signage. Locked center ~37.7352,-97.3256, address 2929 N Ohio St, Wichita KS 67219.",
+          "truckGate": "Confirmed via Street View (captured 2026-02): fenced perimeter with sliding gates across the truck driveway off N Ohio St on the south end of the plant. Truck Entrance/Exit signage present.",
+          "guardShack": "A small booth structure sits on an island in the entrance driveway, splitting inbound and outbound truck lanes - visible in multiple Street View frames. Classic gate + guard-shack configuration.",
+          "dockDoorCount": "Multiple dock faces with trailers backed in: a west-facing dock (~5-6 trailers seen), a north-segment dock (~5-6), plus additional dock banks. Total estimated 25-50 band (~32). Roof imagery partly overexposed - estimate.",
+          "shipRcvSeparate": "Distinct dock clusters on the west and north building faces suggest separate shipping/receiving - inferred.",
+          "dropYard": "Two trailer drop-yard clusters along the west side of the plant (between the building and the rail/canal), ~18-20 marked trailer stalls total.",
+          "fastLaneOpportunity": "Wide entrance apron with an island booth and lanes on both sides; ample paved width to add an express bypass.",
+          "railServed": "A rail line runs N-S in the floodway corridor immediately west of the plant but no spur crosses the grass buffer into the property. Not rail-served.",
+          "urbanRural": "Located within a dense industrial district of north Wichita, a major metro - Urban.",
+          "multipleFacilities": "Plant complex includes the main processing building plus connected secondary buildings (a south warehouse and a north office block) - treated as a campus."
+        }
+      },
+      {
+        "id": "08-alma-foods-alma-ks",
+        "name": "Alma Foods - Alma KS",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 39.011,
+          "lng": -96.2879
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.01,
+            "west": -96.2892,
+            "north": 39.0119,
+            "east": -96.2873
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 39.0101,
+              "west": -96.2885,
+              "north": 39.0107,
+              "east": -96.2879
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.01075,
+              "west": -96.2884,
+              "north": 39.0111,
+              "east": -96.2879
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 7,
+          "trailersVisible": 11,
+          "trailerParkingCapacity": 14,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 8.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster gave the address as \"215 Missouri St\" with coords (39.012236,\n-96.289857). The roster point landed on a block in Alma but not on the plant.\nWeb research (Wabaunsee County business directory, USDA FSIS, Waze, Bandana\njob listings) consistently identifies the Hormel/Alma Foods plant at\n110/114 E First Street, Alma KS 66401. Satellite probing southeast of the\nroster pin found a metal industrial plant with process equipment and parked\ntrailers; Street View (captured 2023-08) confirmed an industrial plant with an\noffice annex in a small-town industrial pocket. Locked center 39.0110,\n-96.2879.",
+        "mapsUrl": "https://www.google.com/maps/@39.0110,-96.2879,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (39.012236,-96.289857) landed near the correct block; the plant proper is at ~39.0110,-96.2879. Real address is 110/114 E First St, Alma KS 66401 (geocoded as 215 Missouri St in roster). Confirmed via Street View - a metal industrial plant with office annex, process equipment and trailers in a small-town industrial pocket.",
+          "truckGate": "No barrier arm, gate, or controlled checkpoint. The site is open to the gravel town streets; vehicles park right up to the buildings and a residential house sits across the street. truckGateCount=1 reflects the single open driveway access, not a controlled gate.",
+          "guardShack": "No guard booth anywhere on site - small open small-town facility.",
+          "dockDoorCount": "Modest dock count - a few dock doors with trailers backed in along the south/SW building faces. Estimated 0-10 band (~7). Low confidence from overhead imagery.",
+          "dropYard": "~8-9 trailers parked in an angled row in the south yard along the rail line, plus 2-3 scattered trailers near the docks. Small drop yard, 0-10 band.",
+          "railServed": "A rail line runs along the SE edge of the property but no spur crosses onto the site. Not rail-served.",
+          "urbanRural": "Alma, KS is a small Flint Hills town (~800 population). Edge-of-town small-town industrial setting - Rural.",
+          "drivewayShort": "Short open driveway access from the gravel street; only room for 1-2 trucks to approach the dock.",
+          "buildingCount": "Main processing building plus 2-3 connected/adjacent secondary buildings (office annex, dark-roofed shop/warehouse buildings) - treated as one facility, not a campus."
+        }
+      },
+      {
+        "id": "09-hormel-atlanta-plant-tucker-ga",
+        "name": "Hormel Atlanta Plant - Tucker GA",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes",
+          "truckGateCount"
+        ],
+        "center": {
+          "lat": 33.8393,
+          "lng": -84.2506
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.8385,
+            "west": -84.2515,
+            "north": 33.8408,
+            "east": -84.2493
+          },
+          "truckGate": {
+            "south": 33.84015,
+            "west": -84.2509,
+            "north": 33.84055,
+            "east": -84.2502
+          },
+          "dropYards": [
+            {
+              "south": 33.8387,
+              "west": -84.2497,
+              "north": 33.8399,
+              "east": -84.2493
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.8387,
+              "west": -84.2501,
+              "north": 33.8399,
+              "east": -84.2496
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 32,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 12.8,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Both the roster coordinates (33.86701, -84.188105) and the roster address\n(\"3700 Mountain Industrial Blvd\") were incorrect — that point sits ~6 km\nnortheast in a commercial/residential area near a road intersection. Web\nresearch (Hormel \"Our Locations\", Waze, USDA FSIS, Yelp) consistently gives\nthe real address as 3367 Montreal Industrial Way, Tucker GA 30084, with\ncoordinates ~33.8392, -84.2510. Satellite probing there revealed a large\nprocessing plant with dock banks and trailers; Street View showed a sign\nreading \"ATLANTA PLANT ... SAFETY ... AWARD WINNER\" — positive ID.",
+        "mapsUrl": "https://www.google.com/maps/@33.8393,-84.2506,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (33.86701,-84.188105) and the roster address '3700 Mountain Industrial Blvd' were both wrong - that point is ~6km NE in a commercial/residential area. The real plant is 3367 Montreal Industrial Way, Tucker GA 30084, confirmed via Hormel/Waze/FSIS listings and a Street View sign reading 'ATLANTA PLANT'. Locked center ~33.8393,-84.2506.",
+          "truckGate": "Property has a perimeter chain-link fence, but the truck driveways from Montreal Industrial Way and the east road appear to be open driveway gaps without barrier arms or a guard booth. No controlled checkpoint identified - marked false at medium confidence (Street View coverage does not reach the dock-yard entrance directly).",
+          "guardShack": "No guard booth identified at any truck entrance. A small structure seen near a driveway appears to be a utility/picnic structure beside employee parking, not a gate booth.",
+          "dockDoorCount": "East dock face shows ~14-16 trailers backed in; additional dock doors on other faces. Total estimated 25-50 band (~28). Roof imagery overexposed - estimate.",
+          "dropYard": "Trailer drop yard along the east property edge (~8-12 trailers) plus trailers staged along Montreal Industrial Way. dropArea 10-25 band.",
+          "truckGateCount": "Two driveway access points (off Montreal Industrial Way and the east perimeter road); neither is a controlled gate.",
+          "railServed": "A rail line runs along the SE edge beyond the property's tree buffer but no spur enters the site. Not rail-served.",
+          "urbanRural": "Tucker, GA is part of the Atlanta metro (DeKalb County) - dense industrial/commercial fabric. Urban.",
+          "buildingCount": "The plant is a single large connected processing complex (built 1969). Adjacent large buildings are separate companies' warehouses, not part of this facility.",
+          "operations": "Plant runs Hormel chili and Dinty Moore stew; the precooked bacon line was closed in 2025 with 135 of ~350 employees laid off (Aug 2025) - operations reduced."
+        }
+      },
+      {
+        "id": "10-creative-contract-packaging-aurora-il",
+        "name": "Creative Contract Packaging - Aurora IL",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes",
+          "urbanRural"
+        ],
+        "center": {
+          "lat": 41.80475,
+          "lng": -88.2709
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.8036,
+            "west": -88.2718,
+            "north": 41.8061,
+            "east": -88.27
+          },
+          "truckGate": {
+            "south": 41.8055,
+            "west": -88.2704,
+            "north": 41.806,
+            "east": -88.27
+          },
+          "dropYards": [
+            {
+              "south": 41.80385,
+              "west": -88.2712,
+              "north": 41.8044,
+              "east": -88.2701
+            },
+            {
+              "south": 41.8044,
+              "west": -88.2705,
+              "north": 41.8056,
+              "east": -88.2701
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.804,
+              "west": -88.27085,
+              "north": 41.8052,
+              "east": -88.2705
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 10.2,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster gave the address \"2001 Bilter Rd, Aurora IL 60502\" with coordinates\n(41.806642, -88.267623). The roster point itself lands on a residential strip.\n~250 m south, on a N-S road in the same 60502 (NE Aurora) zip area, sits a\nlarge warehouse/packaging facility with an attached office annex and a sizable\ntrailer yard — the only facility matching a contract-packaging operation near\nthe roster pin. Hormel's own materials state CCP operates two Aurora\nfacilities; the web-listed address (3777 Exchange Ave, zip 60504, SW Aurora)\nis the other one. The roster's zip 60502 and Bilter Rd reference both point to\nNE Aurora, so this building (~41.8047, -88.2709) was audited as the\nroster-intended site.",
+        "mapsUrl": "https://www.google.com/maps/@41.80475,-88.2709,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster gave '2001 Bilter Rd, Aurora IL 60502' with coords (41.806642,-88.267623). The roster point itself is a residential strip; ~250m south sits a large warehouse/packaging facility with an office annex and a big trailer yard, in the 60502 (NE Aurora) area - consistent with the roster. CCP operates TWO Aurora facilities (Hormel says so); the web-listed 3777 Exchange Ave (60504) is the other one. Audited the building at ~41.8047,-88.2709 as the roster-intended site.",
+          "truckGate": "The truck yard is enclosed by chain-link fencing (visible in Street View), but the driveway entrances appear to be open gate gaps with no barrier arm and no staffed booth. No controlled checkpoint identified - marked false at medium confidence.",
+          "guardShack": "No guard booth identified at any entrance. A canopy/carport structure on the NE side is an equipment shelter, not a guard booth.",
+          "dockDoorCount": "East building face has trailers backed in along a dock bank; estimated ~14-18 doors visible plus more. Total estimated 10-25 band (~22). Estimate from overhead imagery.",
+          "dropYard": "Large trailer drop yard - a south-yard row of ~20+ parked trailers plus additional rows along the east. dropArea 25-50 band; many trailers branded for outside fleets (Penske rental, beverage brands), consistent with a contract-packaging logistics yard.",
+          "fastLaneOpportunity": "Wide paved yard and open driveway aprons give ample room to add a bypass/express lane.",
+          "railServed": "No rail spur into the property.",
+          "urbanRural": "Aurora is part of the Chicago metropolitan area; the site has a major retail/mall complex immediately south and dense suburbs to the west, though farm fields border it north and west. Judged Urban (metro fabric) - flagged as borderline given the edge-of-development setting.",
+          "buildingCount": "Main warehouse/packaging building plus an attached office annex - counted as 2 structures, one integrated facility."
+        }
+      },
+      {
+        "id": "11-fontanini-foods",
+        "name": "Fontanini Foods - McCook IL",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 41.79935,
+          "lng": -87.8378
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.797868,
+            "west": -87.839367,
+            "north": 41.800832,
+            "east": -87.836233
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 41.80072,
+              "west": -87.838624,
+              "north": 41.80108,
+              "east": -87.836576
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.798792,
+              "west": -87.839562,
+              "north": 41.800408,
+              "east": -87.838838
+            },
+            {
+              "south": 41.798596,
+              "west": -87.839404,
+              "north": 41.799404,
+              "east": -87.837596
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 16,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 21.2,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster pin (41.80571, -87.833375) landed on the I-55 / 1st Ave interchange,\nnot a building. Web research established the plant's true address as 8751 W 50th\nSt, McCook IL 60525 (the roster's \"8499 W 47th St\" is incorrect) and listed\ncoordinates near 41.7993, -87.8376. A z18 satellite probe there showed a large\nwhite-roofed industrial building with a rooftop solar array, dock doors and\ntrailers — consistent with Fontanini's modern ~188,000+ sq ft plant (built 2008,\nexpanded several times; Hormel-owned since 2017; Food Processing's 2023 Green\nPlant of the Year). Locked center at 41.79935, -87.83780.",
+        "mapsUrl": "https://www.google.com/maps/@41.79935,-87.83780,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No barrier arm, sliding gate, or pinch-point checkpoint at any property access. Site sits within the McCook industrial park; truck yard opens directly onto private/industrial-park streets. Confirmed via 2019, 2025-09 and 2025-10 Street View of the north and west roads.",
+          "guardShack": "No staffed booth structure visible at any access point.",
+          "dockDoors": "West building face has a continuous dock line plus a south-facing dock cluster; ~22 doors estimated across both faces from z20 imagery. Pipe rack overhangs the SW apron, partially obscuring count.",
+          "dropArea": "Trailers parked along the north edge near the entry road and within the open west yard apron; estimated 16 trailers visible, lot could hold ~35.",
+          "fastLaneOpportunity": "Very large open paved yard apron on the west and south sides — abundant unused width to add bypass lanes if a gate were installed.",
+          "dropYard": "Open west/north paved apron functions as on-site trailer storage and drop area separate from the active dock line.",
+          "urbanRural": "Dense Chicago-metro industrial fabric (McCook), surrounded by large distribution buildings on all sides."
+        }
+      },
+      {
+        "id": "12-rochelle-foods",
+        "name": "Rochelle Foods - Rochelle IL",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "dropArea",
+          "trailerParkingCapacity",
+          "buildingCount"
+        ],
+        "center": {
+          "lat": 41.9205,
+          "lng": -89.0698
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.919467,
+            "west": -89.071792,
+            "north": 41.921533,
+            "east": -89.067808
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 41.919786,
+              "west": -89.070924,
+              "north": 41.920414,
+              "east": -89.069476
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 2,
+          "trailerParkingCapacity": 8,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 18.8,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocoded \"200 Caron Rd, Rochelle IL\" to 41.935628, -89.054638. A z17\nprobe there showed a large white building with a big car parking lot but **no\nloading docks, no trailer yard, and no refrigeration plant** — inconsistent with\nan 800-employee meat plant. Hormel's own \"Our Locations\" page lists the plant at\n1001 S Main St, Rochelle IL and describes a 400,000 sq ft facility \"just\noutside a two-block downtown.\"\n\nTracing S Main St through downtown Rochelle led to an old rail-served industrial\nparcel at the Main St rail crossing (~41.9205, -89.0698). Street View there\nconfirmed a tall industrial smokestack, an elevated water tower, ammonia /\nrefrigeration tank batteries, rail tank cars, and overhead conveyor/pipe bridges\nlinking buildings — the unmistakable signature of an older urban meat-packing",
+        "mapsUrl": "https://www.google.com/maps/@41.92050,-89.06980,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster's geocode (200 Caron Rd / 41.9356,-89.0546) landed on a large white retail/warehouse-type building with no docks or trailer yard — NOT the meat plant. Hormel's own page lists the plant at 1001 S Main St. Resolved the plant to the old rail-served industrial parcel at the Main St rail crossing (~41.9205,-89.0698), confirmed by Street View showing a tall smokestack, water tower, ammonia/refrigeration tanks and rail tank cars — classic markers of an older urban meat-packing plant.",
+          "truckGate": "No barrier arm, sliding gate, or checkpoint visible at any access point. The plant is an old, compact, open urban facility hemmed by residential streets and rail; truck access is via the rail-crossing road and an unpaved/gravel lot on the east side (Street View 2022).",
+          "guardShack": "No staffed booth structure visible.",
+          "dockDoors": "Low-confidence — this is a dense multi-building old plant with conveyor bridges between structures; visible dock-door banks are small. Estimated ~8 doors (0-10 band).",
+          "backupSensitive": "Plant is tightly bounded by active rail lines on both north and south and by residential streets; any truck queue would have very little stacking room and could foul a rail crossing.",
+          "railServed": "Rail spur and tank cars confirmed in Street View; the plant sits between two rail lines.",
+          "urbanRural": "Rochelle is a small Ogle County town (~9,000 pop.); the plant sits just outside a two-block downtown surrounded by residential blocks — small-town industrial, classified Rural per rubric.",
+          "buildingCount": "Multiple connected old structures with overhead conveyor/pipe bridges; counted ~4 distinct buildings, low confidence."
+        }
+      },
+      {
+        "id": "13-papillion-foods",
+        "name": "Papillion Foods - Papillion NE",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "dropArea"
+        ],
+        "center": {
+          "lat": 41.152,
+          "lng": -96.124
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.149485,
+            "west": -96.127698,
+            "north": 41.154515,
+            "east": -96.120302
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 41.150471,
+              "west": -96.123374,
+              "north": 41.151729,
+              "east": -96.121226
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.150031,
+              "west": -96.126051,
+              "north": 41.150569,
+              "east": -96.122949
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 85.8,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocoded \"11840 Standing Stone Dr, Papillion NE\" to 41.15444,\n-96.043031 — a major intersection in downtown Papillion with only small\ncommercial buildings. That is wrong.\n\nWeb research established that Papillion Foods is the **former Shopko\ndistribution center at 10808 S 132nd St, Papillion NE 68138**: a 535,000 sq ft\nbuilding on an ~80-acre site, originally built by Shopko in 2000 with a 2004\naddition, vacated 2019, acquired and significantly renovated by Hormel's\nPapillion Foods LLC, and opened in December 2020 to produce dry sausage and\nsalami. (Note: a separate large building further north on S 132nd St at 8401 is\nCLAAS Omaha, the German farm-machinery maker — not Hormel; that was excluded.)\n\nThe converted DC was resolved to a large warehouse at ~41.1518, -96.1245 in the\nSarpy West industrial submarket. The match: an ~86-acre parcel (consistent with",
+        "mapsUrl": "https://www.google.com/maps/@41.15200,-96.12400,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster geocode (11840 Standing Stone Dr / 41.1544,-96.0430) landed in downtown Papillion — wrong. Hormel's own page and CRE reporting confirm Papillion Foods is the former Shopko distribution center at 10808 S 132nd St, Papillion NE 68138 (built 2000, +2004 addition, 535,000 sq ft, 80-acre site, converted by Hormel and opened 2020 for Columbus dry sausage/salami). Resolved to the large converted DC at ~41.1518,-96.1245 in the Sarpy West industrial submarket: footprint and ~86-acre parcel match the 535k sq ft / 80-acre figures, the roof shows a two-phase (2000/2004) addition seam, large ammonia-refrigeration condenser arrays and rooftop solar, a south-facing dock bank with trailers, employee parking, and a formal flagpole-circle entrance. Confidence medium because the corridor has several large warehouses and recent on-site Street View was unavailable to read current signage.",
+          "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point seen in satellite imagery; truck access road runs openly from the public road into the dock yard. A small utility building sits in a landscaped grass island near the access road but is NOT a guard booth (not astride the lane). Flagged uncertain — only older (2007-2010) interior Street View was available.",
+          "guardShack": "No staffed guard booth straddling the truck lane visible. Uncertain due to imagery age.",
+          "postGateStaging": "Large paved truck yard inside the property between the access road and the dock face provides ample queue/holding room.",
+          "drivewayLong": "Deep paved approach from the public road through the yard to the dock face — easily holds 3+ trucks.",
+          "fastLaneOpportunity": "Very large open paved truck yard with unused width — abundant room for an express/bypass lane.",
+          "dockDoors": "South building face carries a long dock bank; estimated ~40 doors (25-50 band) from z17-z19 imagery.",
+          "dropArea": "Trailers parked across the south/east paved yard; estimated ~25 visible, capacity ~80.",
+          "buildingCount": "Main plant building plus a smaller attached/adjacent office structure on the east side.",
+          "urbanRural": "Within the Omaha metro's Sarpy West industrial submarket, surrounded by other large warehouses and suburban development — Urban.",
+          "railServed": "No rail spur into the property visible."
+        }
+      },
+      {
+        "id": "14-skippy-foods",
+        "name": "Skippy Foods - Little Rock AR",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 34.7079,
+          "lng": -92.1843
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.705924,
+            "west": -92.187032,
+            "north": 34.709876,
+            "east": -92.181568
+          },
+          "truckGate": {
+            "south": 34.707041,
+            "west": -92.182037,
+            "north": 34.707759,
+            "east": -92.181163
+          },
+          "dropYards": [
+            {
+              "south": 34.708896,
+              "west": -92.185839,
+              "north": 34.709704,
+              "east": -92.182561
+            },
+            {
+              "south": 34.706992,
+              "west": -92.183292,
+              "north": 34.708608,
+              "east": -92.182308
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.708341,
+              "west": -92.186321,
+              "north": 34.709059,
+              "east": -92.183479
+            }
+          ],
+          "staging": {
+            "south": 34.706961,
+            "west": -92.183456,
+            "north": 34.708039,
+            "east": -92.182144
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 54.4,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster address (5111 Fairway Ave, Little Rock) and its geocode landed in a\nresidential neighborhood — wrong. Web research (Hormel \"Our Locations\", Little\nRock Chamber, ADEQ permit records) established the Skippy plant's true address\nas 8201 Frazier Pike, Little Rock AR 72206, at the Port of Little Rock, with\ncoordinates near 34.7072, -92.1850.\n\nA satellite probe there showed a large industrial plant with docks and trailer\nyards. 2026 Street View confirmed the \"Skippy\" logo on the building tower —\npositive identification. Locked center at 34.70790, -92.18430. The plant has\nmade Skippy peanut butter since 1977 (166,500 sq ft, ~160 employees, 11\nvarieties, >3.5M lbs/week); it suffered a fire in September 2025 and returned to\noperation by December 2025.",
+        "mapsUrl": "https://www.google.com/maps/@34.70790,-92.18430,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address (5111 Fairway Ave) and geocode landed in a residential neighborhood — wrong. Skippy Foods is at 8201 Frazier Pike, at the Port of Little Rock (confirmed by Hormel/Little Rock Chamber/ADEQ). Resolved to 34.7079,-92.1843 — the 'Skippy' logo is visible on the building tower in 2026 Street View.",
+          "truckGate": "Property is fully enclosed by chain-link perimeter fence. The truck entrance off Frazier Pike (a long paved/gravel driveway on the SE) passes through a chain-link sliding gate at the fence opening near the building yard (gate rail visible in z21 satellite; chain-link gate visible in 2026 Street View). truckGate = true.",
+          "guardShack": "No staffed guard booth straddling the truck lane was identified — the slide gate appears unstaffed (motorized / badge or remote check-in). Flagged uncertain. remoteGs set true accordingly.",
+          "postGateStaging": "Loop driveway and large paved yard inside the gate give ample holding room before the docks.",
+          "drivewayLong": "Long approach driveway from Frazier Pike into the fenced yard easily holds 3+ trucks.",
+          "fastLaneOpportunity": "Wide gate apron and broad open yard — physical room for a bypass/express lane.",
+          "dockDoors": "Dock bank along the NW building face with a dock canopy and trailers backed in; estimated ~22 doors (10-25 band).",
+          "dropArea": "Many trailers parked in rows around the building loop and along the N and E yard — estimated ~45 visible (25-50 band).",
+          "dropYard": "Dedicated trailer parking rows around the loop drive separate from the active dock face.",
+          "railServed": "No rail spur into the property visible despite the port setting.",
+          "note": "The plant suffered a fire in September 2025 and returned to operation by December 2025; 2026 Street View shows it intact and operating."
+        }
+      },
+      {
+        "id": "15-hormel-fort-smith-plant",
+        "name": "Hormel Fort Smith Plant - Fort Smith AR",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 35.3035,
+          "lng": -94.3813
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.300985,
+            "west": -94.383612,
+            "north": 35.306015,
+            "east": -94.378988
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 35.304161,
+              "west": -94.381071,
+              "north": 35.305239,
+              "east": -94.379529
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.301702,
+              "west": -94.381885,
+              "north": 35.303498,
+              "east": -94.381115
+            },
+            {
+              "south": 35.304586,
+              "west": -94.382401,
+              "north": 35.305214,
+              "east": -94.380199
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 58.1,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster gave \"4307 Planters Rd\" — that address is wrong. Web research\n(Hormel \"Our Locations\", Fort Smith Chamber, ADEQ permit records, Waze) confirms\nthe Hormel-Planters Fort Smith plant is at **4020 Planters Rd, Fort Smith AR\n72908**; a \"Mr Peanut Sign\" is a registered landmark at 4020. Neighboring\naddresses on the same street are separate companies — International Paper at\n4215 and Grainger at 3807.\n\nThe plant was resolved to the large multi-building, rail-served processing\ncomplex at ~35.3035, -94.3813. The roster's geocoded pin (35.3056, -94.3815)\nlands at the NW employee parking lot of this very complex, which confirms the\ncomplex itself. The street (\"Planters Rd\") is named for the plant, and the\ncampus footprint, dock banks, drop yards and rail spur all match a 230+\n-employee peanut/snack processing facility.",
+        "mapsUrl": "https://www.google.com/maps/@35.30350,-94.38130,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address (4307 Planters Rd) is wrong — Hormel-Planters' Fort Smith plant is at 4020 Planters Rd, Fort Smith AR 72908 (confirmed by Hormel, Fort Smith Chamber, ADEQ permit records; a 'Mr Peanut Sign' landmark sits at 4020). 4307, 4215 (International Paper) and 3807 (Grainger) are separate neighboring addresses on Planters Rd. Resolved to the large multi-building rail-served processing complex at ~35.3035,-94.3813; the roster's geocoded pin landed at the NW employee parking of this complex, so the complex itself is confirmed.",
+          "truckGate": "No controlled perimeter gate, barrier arm, or checkpoint pinch-point identified. The Google Street View vehicle drove freely along internal plant roads and dock areas with no gate, and the public-road frontage / employee parking entrances are open. Flagged uncertain because the sprawling complex has several access points. truckGateCount kept at 1 as a nominal value for the primary truck entrance.",
+          "guardShack": "No staffed guard booth straddling a truck lane was identified.",
+          "multipleFacilities": "A campus of multiple connected processing/warehouse buildings — main processing block plus a long dock warehouse and ancillary structures.",
+          "shipRcvSeparate": "Dock activity occurs on physically separate building faces (a west-facing dock bank on the long warehouse and a north-facing dock area), supporting separate ship/receive clusters.",
+          "railServed": "Rail spur runs into the property on the east side with rail cars present in imagery.",
+          "dockDoors": "Dock banks across multiple building faces; estimated ~45 total doors (25-50 band) from z18-z19 imagery.",
+          "dropArea": "Trailers parked across the interior yards and dock aprons; estimated ~35 visible (25-50 band).",
+          "drivewayLong / postGateStaging": "Deep internal roads and yard space easily hold 3+ trucks before the docks.",
+          "fastLaneOpportunity": "Ample open paved internal yard width.",
+          "urbanRural": "Fort Smith industrial district on the edge of town, surrounded by woods and other plants — classified Rural per the small-town-industrial rubric.",
+          "buildingCount": "Estimated ~4 distinct connected buildings; low confidence given the merged complex."
+        }
+      },
+      {
+        "id": "16-hormel-beloit-plant",
+        "name": "Hormel Beloit Plant - Beloit WI",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 42.521,
+          "lng": -88.9778
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.5196,
+            "west": -88.9801,
+            "north": 42.5228,
+            "east": -88.976
+          },
+          "truckGate": {
+            "south": 42.5203,
+            "west": -88.9792,
+            "north": 42.5208,
+            "east": -88.9786
+          },
+          "dropYards": [
+            {
+              "south": 42.5199,
+              "west": -88.9801,
+              "north": 42.5222,
+              "east": -88.9787
+            },
+            {
+              "south": 42.5196,
+              "west": -88.9784,
+              "north": 42.5201,
+              "east": -88.977
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 42.52,
+              "west": -88.9787,
+              "north": 42.5222,
+              "east": -88.9782
+            },
+            {
+              "south": 42.51975,
+              "west": -88.9782,
+              "north": 42.52005,
+              "east": -88.9768
+            }
+          ],
+          "staging": {
+            "south": 42.5202,
+            "west": -88.9795,
+            "north": 42.5211,
+            "east": -88.9788
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 34,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 23.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinates (42.532852, -88.956507) and the \"2001 Gateway Blvd\"\naddress both landed in an empty farm field beside the I-43/I-90 interchange\n— not a building. Web search established the Hormel Beloit Plant is actually at\n3000 Kennedy Drive, Beloit, WI 53511 (produces CHI-CHI'S salsa, Hormel\nchili, Mary Kitchen hash; ~300 employees). OpenStreetMap returns a named\n\"Hormel Foods\" industrial building at 42.5210326, -88.9775939. Satellite\nconfirmed a large industrial plant there, and Street View shows the **Hormel\nlogo on the west wall. Locked center: 42.5210, -88.9778**.",
+        "mapsUrl": "https://www.google.com/maps/@42.52100,-88.97780,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (2001 Gateway Blvd, 42.5328,-88.9565) landed in an empty farm field near the I-43/I-90 interchange. Correct facility is at 3000 Kennedy Dr, Beloit, confirmed via web search and OSM (Hormel Foods industrial building, 42.5210,-88.9776). Hormel logo visible on the west wall in Street View.",
+          "truckGate": "Sliding chain-link gate across the truck driveway at the SW corner of the yard (off the Kennedy Dr / Gateway business-park cul-de-sac). The whole truck yard is enclosed by chain-link fence with green privacy slats. Open driveway apron leads to the gate.",
+          "guardShack": "No staffed booth observed beside the truck gate in Street View (2022-11) or satellite imagery; entry appears uncontrolled-by-person / kiosk-style.",
+          "remoteGs": "Gate present but no guard shack -> remote check-in inferred.",
+          "dockDoorCount": "Counted ~20 dock doors with trailers backed in along the west wall plus ~12-14 along the south wall; ~34 total is an honest estimate, hence 25-50 band.",
+          "dropArea": "Two trailer drop areas: long row of parked trailers along the west drop yard (40+ trailers in rows) and an angled row of ~10-12 trailers at the SE; clearly 50+ across the site.",
+          "shipRcvSeparate": "Dock banks on two distinct building faces (west wall and south wall) - likely separate ship/receive clusters.",
+          "fastLaneOpportunity": "Wide paved gate apron and large open yard at the SW entrance gives room for a bypass/express lane.",
+          "urbanRural": "Edge-of-town Beloit business park, bordered by farm fields and I-90; small-metro industrial setting -> Rural per rubric.",
+          "buildingCount": "Main plant building plus a small detached storage shed/building north of the parking lot.",
+          "railServed": "No rail spur runs into the property; I-90 borders the east side."
+        }
+      },
+      {
+        "id": "17-century-foods-international",
+        "name": "Century Foods International - Sparta WI",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 43.94255,
+          "lng": -90.7912
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 43.9407,
+            "west": -90.7929,
+            "north": 43.9434,
+            "east": -90.7888
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 43.9417,
+              "west": -90.7909,
+              "north": 43.9432,
+              "east": -90.7894
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 43.9425,
+              "west": -90.7918,
+              "north": 43.9432,
+              "east": -90.7911
+            },
+            {
+              "south": 43.94215,
+              "west": -90.7911,
+              "north": 43.943,
+              "east": -90.7905
+            }
+          ],
+          "staging": {
+            "south": 43.9415,
+            "west": -90.7911,
+            "north": 43.9423,
+            "east": -90.7903
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 32,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 0,
+          "buildingCount": 2,
+          "siteAreaAcres": 21,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The geocoded roster point moved 1613 m and landed on an industrial facility on\nCentury Court, Sparta, beside a multi-track rail mainline north of US-16.\nWeb search confirms Century Foods International (a Hormel Foods subsidiary,\ncontract manufacturer of nutritional / protein-powder products) at 400 Century\nCourt. The satellite layout — a single large plant/office building with a\ntrailer drop yard and rail at the rear — matches a contract food-manufacturing\nplant. Locked center: 43.94255, -90.79120.",
+        "mapsUrl": "https://www.google.com/maps/@43.94255,-90.79120,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords moved 1613m and resolved to a Century Foods / Hormel nutritional-products plant on Century Court, Sparta WI, off Hwy 16 / next to a Canadian Pacific rail mainline. Confirmed via web search (Hormel 'Our Locations', 400 Century Court) and matching industrial layout. Locked center 43.94255,-90.79120.",
+          "truckGate": "No gate or perimeter fence on the truck side. Century Court (private drive) runs straight onto the open paved truck yard; Street View (2025-08) shows no barrier arm, sliding gate, or pinch-point. Open uncontrolled access.",
+          "guardShack": "No staffed booth anywhere along the access road or at the building.",
+          "remoteGs": "False - no gate exists, so no remote check-in.",
+          "dockDoorCount": "Counted ~6-8 trailers backed in along the NW building face plus dock doors along the NE corner; ~18 total estimated, 10-25 band. Trees partly obscure the count.",
+          "dropArea": "Large gravel/dirt drop lot east of the building with ~25-30 trailers parked in angled rows; dropArea = 25-50, dedicated drop yard present.",
+          "drivewayLong": "Long open paved approach from Century Court into the yard; easily holds 3+ trucks.",
+          "railServed": "A multi-track rail mainline runs along the NW property edge but no spur enters the building - the plant backs up to the tracks with no rail dock. railServed = false.",
+          "buildingCount": "Main plant/office building plus a small detached storage building near the NW tracks.",
+          "urbanRural": "Small-town edge of Sparta WI, surrounded by woods, a golf course, and farmland - clearly Rural.",
+          "shipRcvSeparate": "Dock activity concentrated on adjacent NW and NE faces around one yard - treated as a single combined ship/receive operation."
+        }
+      },
+      {
+        "id": "18-columbus-craft-meats",
+        "name": "Columbus Craft Meats - Hayward CA",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 37.6133,
+          "lng": -122.0526
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 37.6124,
+            "west": -122.0542,
+            "north": 37.6142,
+            "east": -122.0523
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 37.613,
+              "west": -122.0529,
+              "north": 37.614,
+              "east": -122.0524
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 13,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 8,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 7,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinates landed in a dense Hayward industrial park. The address\n30977 San Clemente St geocodes (OpenStreetMap) to 37.6132936, -122.0526313,\nwhich sits on the east face of a large single-tenant industrial building.\nWeb research found Columbus Craft Meats (Hormel-owned salami/charcuterie maker)\noperates two Hayward plants — the San Antonio Street plant was announced\nfor closure in March 2025, while a second Hayward location remains open.\nThe roster address is San Clemente Street, so this audit covers the **remaining\nSan Clemente St facility**, not the closing plant. Locked center:\n37.6133, -122.0526.",
+        "mapsUrl": "https://www.google.com/maps/@37.61330,-122.05260,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords landed in a dense Hayward industrial park; address 30977 San Clemente St geocoded (OSM) to 37.6133,-122.0526. Note: Hormel/Columbus has TWO Hayward plants - the San Antonio St plant was announced for closure (March 2025), the San Clemente St plant remains. This audit is the San Clemente St facility. Locked center 37.6133,-122.0526.",
+          "truckGate": "No perimeter fence, barrier arm, or gate. The building's dock face fronts directly on San Clemente St with open parking-lot access on all sides - fully uncontrolled.",
+          "guardShack": "No staffed booth observed anywhere on the property in Street View (2025-10) or satellite.",
+          "remoteGs": "False - no gate, so no remote check-in.",
+          "dockDoors": "Dock doors recessed along the east face fronting San Clemente St; ~10-15 doors visible with a few trailers/vans backed in. 10-25 band. A couple of additional dock positions at the SE corner.",
+          "dropArea": "No trailer drop yard - the lots around the building are marked car-parking stalls (employee parking), no parked trailers without tractors observed. dropArea NONE.",
+          "drivewayShort": "Docks open onto a narrow apron directly off San Clemente St; only 1-2 trucks fit in the approach.",
+          "railServed": "A single through-track runs along the west side between buildings but does not spur into the plant - no rail dock. railServed false.",
+          "urbanRural": "Dense Hayward (San Francisco Bay Area metro) industrial-park fabric - Urban.",
+          "buildingCount": "One large single-tenant industrial building.",
+          "shipRcvSeparate": "Dock activity concentrated on a single east-face bank - combined ship/receive."
+        }
+      },
+      {
+        "id": "19-swiss-american-sausage-co",
+        "name": "Swiss American Sausage Co. - Lathrop CA",
+        "type": "Meat Processing Plant",
+        "archetype": "#2",
+        "archetypeName": "Gate + GS (not BU sens.) + separate",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 37.8018,
+          "lng": -121.2965
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 37.8008,
+            "west": -121.2982,
+            "north": 37.8029,
+            "east": -121.2954
+          },
+          "truckGate": {
+            "south": 37.80115,
+            "west": -121.2983,
+            "north": 37.8017,
+            "east": -121.2977
+          },
+          "dropYards": [
+            {
+              "south": 37.80095,
+              "west": -121.296,
+              "north": 37.80175,
+              "east": -121.29545
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 37.80115,
+              "west": -121.2972,
+              "north": 37.80165,
+              "east": -121.296
+            }
+          ],
+          "staging": {
+            "south": 37.80105,
+            "west": -121.2972,
+            "north": 37.80155,
+            "east": -121.2956
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 28,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 11.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster address \"16500 Harlan Rd\" geocoded to a Shell gas station — an\nimprecise/incorrect address. Web research found the actual Swiss American\nSausage Co. address: 251 D'Arcy Parkway, Lathrop, CA 95330, in the\nCrossroads Commerce Center. Satellite probing along D'Arcy Parkway located the\nmatching facility — a single large meat/sausage processing building with\nrefrigerated docks, a fenced trailer yard, and a guard-booth entrance — at\n37.8018, -121.2965. Swiss American (a Hormel/Burke supplier of dry sausage,\npepperoni and pizza toppings, ~110 employees) is confirmed by Hormel \"Our\nLocations\" and press releases about a 2,000-panel solar array at the site.",
+        "mapsUrl": "https://www.google.com/maps/@37.80180,-121.29650,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address 16500 Harlan Rd geocoded to a Shell gas station - wrong. Web search found the actual address: 251 D'Arcy Parkway, Lathrop (Crossroads Commerce Center). Located the matching meat/sausage plant at 37.8018,-121.2965 - single processing building with refrigerated docks, trailer yard, and a guard-booth entrance off D'Arcy Parkway. Locked center 37.8018,-121.2965.",
+          "truckGate": "TRUE. A red-paved entrance apron off D'Arcy Parkway leads to a controlled entry; the truck yard is fenced. Visible in Street View (2023-08) and satellite z20.",
+          "guardShack": "TRUE. A small guard booth with a red-tile roof sits in the middle of the entry driveway, splitting it into separate lanes - a classic staffed guard shack. Clearly visible in Street View and confirmed on satellite z20.",
+          "remoteGs": "False - a guard shack is present, so not remote check-in.",
+          "entryExitSeparate": "The driveway splits into separate in/out lanes around the central guard booth -> entry/exit separate.",
+          "dockDoors": "~12-14 refrigerated dock doors with reefer trailers (red tractors) backed in along the south building face, plus a few additional positions; ~16 total estimated, 10-25 band.",
+          "dropArea": "Row of ~12-15 parked trailers along the SE edge of the paved truck yard - dropArea 10-25, dedicated drop yard present.",
+          "drivewayLong": "Long red-paved entry apron plus a large internal paved yard - easily holds 3+ trucks between gate and docks.",
+          "postGateStaging": "Large open paved yard inside the gate before the docks serves as a staging/holding area.",
+          "railServed": "No rail spur into the property.",
+          "urbanRural": "Lathrop is in the San Joaquin Valley / greater Stockton metro; the site is in a dense planned commerce-center industrial park - Urban.",
+          "buildingCount": "Single processing/office building.",
+          "shipRcvSeparate": "Dock activity concentrated on one south-face bank - combined ship/receive."
+        }
+      },
+      {
+        "id": "20-hormel-stockton-plant-fresno",
+        "name": "Hormel Stockton Plant / Fresno - Fresno CA",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes",
+          "railServed"
+        ],
+        "center": {
+          "lat": 36.7184,
+          "lng": -119.7527
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 36.717,
+            "west": -119.7542,
+            "north": 36.7196,
+            "east": -119.7521
+          },
+          "truckGate": {
+            "south": 36.7175,
+            "west": -119.7523,
+            "north": 36.7179,
+            "east": -119.7518
+          },
+          "dropYards": [
+            {
+              "south": 36.718,
+              "west": -119.7542,
+              "north": 36.7193,
+              "east": -119.7533
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 36.7182,
+              "west": -119.7537,
+              "north": 36.7193,
+              "east": -119.7532
+            }
+          ],
+          "staging": {
+            "south": 36.718,
+            "west": -119.7534,
+            "north": 36.7192,
+            "east": -119.7528
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 10,
+          "trailersVisible": 20,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 12,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster address \"3438 W Pontiac Way\" geocoded into a **residential\nneighborhood** in NW Fresno (houses and baseball fields) — clearly wrong. Web\nresearch established the Hormel Fresno Plant is the Corn Nuts roasting\nand packaging facility at 4343 E Florence Ave, Fresno, CA 93725, in the\nsoutheast Fresno industrial district (Hormel \"Our Locations\" Fresno Plant +\nmultiple articles on the Corn Nuts solar array). Satellite probing found a\nmatching processing plant — solar field, refrigerated/dry trailer docks, a\nfenced yard — at 36.7184, -119.7527. Locked center there. The roster name\nalso references \"Stockton CA\"; the audited and confirmed site is the Fresno\nplant.",
+        "mapsUrl": "https://www.google.com/maps/@36.71840,-119.75270,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address '3438 W Pontiac Way' geocoded to a residential neighborhood in NW Fresno - wrong. The Hormel Fresno Plant is the Corn Nuts roasting/packaging facility at 4343 E Florence Ave, Fresno 93725 (SE Fresno industrial area), confirmed via web search (Hormel 'Our Locations' Fresno Plant + Corn Nuts solar-array articles). A matching processing plant with a solar field, trailer docks, and a fenced yard sits at 36.7184,-119.7527. Locked center there. Note: roster name also mentions 'Stockton' - the audited site is the Fresno plant.",
+          "truckGate": "Property is fully enclosed by a tubular-metal perimeter fence with a landscaped buffer along E Florence Ave. Vehicle access is via gated driveway openings in the fence. A gate is present (medium confidence - Street View only reaches the public road and could not capture the gate panel directly).",
+          "guardShack": "No staffed guard booth visible at any driveway in Street View (2024-12) or satellite imagery.",
+          "remoteGs": "Gate present, no guard shack -> remote/kiosk check-in inferred.",
+          "dockDoorCount": "~6-8 dock doors along the west building face with green/white trailers backed in; ~10 total estimated, 0-10 band.",
+          "dropArea": "Trailers parked in the paved west truck yard plus an adjacent dirt overflow lot with ~8-12 parked trailers; dropArea 10-25, dedicated drop yard present.",
+          "drivewayLong": "Large paved truck yard on the west side easily holds a 3+ truck queue between the gate and the docks.",
+          "postGateStaging": "Open paved truck yard inside the fence before the docks serves as staging.",
+          "railServed": "A rail line runs along the east edge of the property; spur tracks appear to serve a neighboring facility rather than the Hormel building - no clear rail dock on the plant. Marked false, flagged uncertain.",
+          "urbanRural": "Dense SE Fresno industrial district (Fresno metro) - Urban.",
+          "buildingCount": "Single Corn Nuts processing/packaging building.",
+          "shipRcvSeparate": "Dock activity concentrated on the single west face - combined ship/receive."
+        }
+      },
+      {
+        "id": "21-hormel-suffolk-plant",
+        "name": "Hormel Suffolk Plant - Suffolk VA",
+        "type": "Production Facility",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 36.7232,
+          "lng": -76.5827
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 36.7198,
+            "west": -76.5853,
+            "north": 36.7253,
+            "east": -76.5799
+          },
+          "truckGate": {
+            "south": 36.72385,
+            "west": -76.58325,
+            "north": 36.72425,
+            "east": -76.5828
+          },
+          "dropYards": [
+            {
+              "south": 36.7228,
+              "west": -76.5833,
+              "north": 36.724,
+              "east": -76.5823
+            },
+            {
+              "south": 36.7202,
+              "west": -76.585,
+              "north": 36.7212,
+              "east": -76.584
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 36.7229,
+              "west": -76.5832,
+              "north": 36.724,
+              "east": -76.5825
+            },
+            {
+              "south": 36.7229,
+              "west": -76.5825,
+              "north": 36.724,
+              "east": -76.5817
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 24,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 32,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Hormel Suffolk Plant — Planters peanut processing\n- Type: Production Facility\n- Roster address: 1 Planters St, Suffolk, VA 23434\n- Resolved address: 245 Culloden St, Suffolk, VA 23434 (historic Planters / Mr. Peanut factory)",
+        "mapsUrl": "https://www.google.com/maps/@36.72320,-76.58270,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster lat/lng (36.723019,-76.619984) landed in a residential subdivision ~3.5 km west of the real plant. Corrected via EPA FRS registry 110001135762 and the 245 Culloden St address to the historic Planters/Mr. Peanut factory complex in downtown Suffolk; locked center 36.72320,-76.58270.",
+          "truckGate": "Truck yard is fully enclosed by chain-link fence with privacy slats (StreetView 2022-2023). A chain-link gate spans the truck drive at the north end of the internal yard. No barrier arm but a controlled fenced gate = truckGate true.",
+          "guardShack": "No guard booth visible at the truck gate in satellite or StreetView. The blue-roofed pavilion on Culloden St is the office/visitor entrance (Mr. Peanut statue), not a truck checkpoint.",
+          "remoteGs": "Gated truck entry with no guard shack -> remote check-in (kiosk/call-box) implied.",
+          "dockDoors": "Counted ~38 dock doors across the two building faces lining the internal drive yard plus the SW dock apron; banded 25-50.",
+          "dropArea": "10-25 leased XTRA trailers parked in the internal yard and SW lot without tractors.",
+          "urbanRural": "Old urban factory in downtown Suffolk VA, surrounded on all sides by dense residential streets; classified Urban.",
+          "drivewayLong": "Internal drive yard between buildings is long enough to stack 3+ trucks before docks.",
+          "multipleFacilities": "Single connected industrial complex (4 attached/adjacent buildings); treated as one facility, not a multi-campus -> multipleFacilities false."
+        }
+      },
+      {
+        "id": "22-dans-prize",
+        "name": "Dan's Prize - Long Prairie MN",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 45.9772,
+          "lng": -94.8678
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 45.9748,
+            "west": -94.8701,
+            "north": 45.979,
+            "east": -94.8651
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 45.9767,
+              "west": -94.8694,
+              "north": 45.9779,
+              "east": -94.8678
+            },
+            {
+              "south": 45.975,
+              "west": -94.8694,
+              "north": 45.9758,
+              "east": -94.8678
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 45.977,
+              "west": -94.8673,
+              "north": 45.978,
+              "east": -94.866
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 28,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Dan's Prize, LLC — Long Prairie Plant (Hormel subsidiary)\n- Type: Meat Processing Plant\n- Address: 20 Riverside Dr, Long Prairie, MN 56347",
+        "mapsUrl": "https://www.google.com/maps/@45.97720,-94.86780,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (45.975374,-94.865992) landed at the SE corner of the property near the river; the plant complex sits NW of that point. Locked center 45.97720,-94.86780 on the main plant building. Confirmed via Hormel careers page and the 20 Riverside Dr address.",
+          "truckGate": "Open site. StreetView (2014) shows the access road running straight into the complex with no barrier arm, no gate across the truck drive, and no perimeter fence. A tractor-trailer is parked in the open yard directly off the public road. truckGate false.",
+          "guardShack": "No guard booth anywhere along the entry road or yard.",
+          "multipleFacilities": "Sprawling campus of ~5 separate large buildings (main processing plant, attached gray building, a separate gray-roofed dock building, plus support warehouses) -> multipleFacilities true.",
+          "dropYard": "Large open trailer-storage areas with 40+ trailers parked across the campus, separate from the active dock apron -> dropYard true.",
+          "dockDoors": "~22 dock doors counted, primarily on the SW face of the lower gray-roofed building plus the main plant; banded 10-25, low-confidence due to scattered building faces.",
+          "dropArea": "25-50 untethered trailers parked in the open lots.",
+          "urbanRural": "Long Prairie MN is a small rural town (~3,400 pop); the plant sits at the edge of town beside the Long Prairie River and farmland -> Rural.",
+          "truckGateCount": "No controlled gate; the count of 1 reflects the single open access point off the public road."
+        }
+      },
+      {
+        "id": "23-lloyds-barbeque-company",
+        "name": "Lloyd's Barbeque Company - Mendota Heights MN",
+        "type": "Production Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "truckGate"
+        ],
+        "center": {
+          "lat": 44.8664,
+          "lng": -93.1705
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 44.8653,
+            "west": -93.17175,
+            "north": 44.8679,
+            "east": -93.1694
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 44.8668,
+              "west": -93.1708,
+              "north": 44.8677,
+              "east": -93.1697
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 44.8662,
+              "west": -93.1708,
+              "north": 44.8668,
+              "east": -93.1699
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 16,
+          "trailerParkingCapacity": 24,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 12,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Lloyd's Barbeque Company — Mendota Heights Plant (Hormel-owned)\n- Type: Production Facility (fully-cooked BBQ meats — shredded pork/chicken/\n  beef, ribs)\n- Address: 1455 Mendota Heights Rd, Mendota Heights, MN 55120",
+        "mapsUrl": "https://www.google.com/maps/@44.86640,-93.17050,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (44.86629,-93.170877, ROOFTOP) landed on/near the plant. Confirmed via Hormel ownership and the 1455 Mendota Heights Rd address: a single large white-roofed meat-processing building with heavy rooftop refrigeration/processing equipment in the Mendota Heights industrial park. Locked center 44.86640,-93.17050.",
+          "truckGate": "Open site. Satellite shows no perimeter fence; the truck yard, dock apron and employee parking form one continuous paved lot off Mendota Heights Rd. StreetView confirms open landscaped frontage with no gate or barrier arm. truckGate false. (StreetView has no road access into the truck yard itself, so a low-likelihood internal gate cannot be 100% excluded -> flagged.)",
+          "guardShack": "No guard booth visible on any frontage or in the yard.",
+          "dropYard": "Rows of untethered trailers parked in the NE yard, distinct from the dock apron -> dropYard true.",
+          "dockDoors": "~14 dock doors on the NE face of the plant building (trailers backed in); banded 10-25, low-confidence.",
+          "dropArea": "10-25 trailers parked without tractors in the NE trailer yard.",
+          "urbanRural": "Mendota Heights is an inner-ring suburb of the Minneapolis-St. Paul metro; the site sits in a dense suburban office/industrial park beside I-494 -> Urban.",
+          "drivewayShort": "Short approach from the road driveway into the dock apron, holding only 1-2 trucks.",
+          "buildingCount": "Single connected plant building (the SE office structure is a separate neighboring property, not Lloyd's)."
+        }
+      },
+      {
+        "id": "24-jennie-o-turkey-store-willmar",
+        "name": "Jennie-O Turkey Store - Willmar MN",
+        "type": "Meat Processing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "scale"
+        ],
+        "center": {
+          "lat": 45.1087,
+          "lng": -95.0795
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 45.1056,
+            "west": -95.0836,
+            "north": 45.1106,
+            "east": -95.0765
+          },
+          "truckGate": {
+            "south": 45.10905,
+            "west": -95.0832,
+            "north": 45.1096,
+            "east": -95.0825
+          },
+          "dropYards": [
+            {
+              "south": 45.1058,
+              "west": -95.0833,
+              "north": 45.1078,
+              "east": -95.0802
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 45.108,
+              "west": -95.082,
+              "north": 45.1092,
+              "east": -95.0798
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 2,
+          "buildingCount": 8,
+          "siteAreaAcres": 75,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Jennie-O Turkey Store — Willmar Plant (Hormel subsidiary; Jennie-O HQ)\n- Type: Meat Processing Plant (turkey slaughter + processing)\n- Roster address: 2505 Willmar Ave SE — actual: 2505 Willmar Ave SW,\n  Willmar, MN 56201",
+        "mapsUrl": "https://www.google.com/maps/@45.10870,-95.07950,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (45.110536,-95.008269) landed in farmland ~5.5 km east of the plant; address listed 'SE' but is actually Willmar Ave SW. Corrected via web search to 2505 Willmar Ave SW; locked center 45.10870,-95.07950 on the main processing campus on the SW edge of Willmar.",
+          "truckGate": "Plant is fully enclosed by a continuous white privacy-slat chain-link fence (StreetView 2025). A posted sign at the north visitor gate reads 'ALL TRUCKS MUST USE SOUTH ENTRANCE' -> there is a controlled, function-separated truck gate. truckGate true.",
+          "guardShack": "Could not positively confirm a guard-booth structure at the truck gate from satellite or StreetView (gate obscured by fence/trees). Large USDA turkey plants often have staffed security, but with no visual confirmation classified guardShack false and flagged as uncertain.",
+          "remoteGs": "Set true (gate present, no confirmed booth); flagged uncertain alongside guardShack.",
+          "entryExitSeparate": "North gate handles visitors/employees; trucks routed to a separate south entrance per posted signage -> entry and exit functions are at distinct points -> entryExitSeparate true.",
+          "shipRcvSeparate": "Large multi-building turkey campus with dock banks on separate building faces (raw receiving vs finished shipping typical for a slaughter+processing plant) -> shipRcvSeparate true.",
+          "railServed": "An active rail line runs along the SE edge of the property; spur access into the campus is plausible -> railServed true.",
+          "multipleFacilities": "Sprawling ~8-building turkey-processing campus -> multipleFacilities true.",
+          "dropYard": "Extensive trailer drop yards in the SW with 100+ trailers parked in rows -> dropYard true; dropArea 50+.",
+          "dockDoors": "~45 dock doors estimated across multiple building faces; banded 25-50, low-confidence.",
+          "fastLaneOpportunity": "Wide paved entrances and large yard space leave room for an express/bypass lane.",
+          "urbanRural": "Willmar is a small rural city (~21k); the plant sits at the SW edge surrounded by farmland -> Rural.",
+          "scale": "A truck scale is likely at a USDA slaughter plant but was not positively identified in imagery -> flagged uncertain, classified false."
+        }
+      },
+      {
+        "id": "25-jennie-o-turkey-store-melrose",
+        "name": "Jennie-O Turkey Store - Melrose MN",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "buildingCount",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 45.6763,
+          "lng": -94.7942
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 45.6738,
+            "west": -94.7962,
+            "north": 45.6779,
+            "east": -94.7921
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 45.6756,
+              "west": -94.7932,
+              "north": 45.6768,
+              "east": -94.7922
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 45.6762,
+              "west": -94.7932,
+              "north": 45.6772,
+              "east": -94.7923
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 18,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 34,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Jennie-O Turkey Store — Melrose Plant\n- Type: Meat Processing Plant (turkey)\n- Roster address: 123 5th Ave E, Melrose, MN 56352",
+        "mapsUrl": "https://www.google.com/maps/@45.67630,-94.79420,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "LOW-CONFIDENCE LOCATION. Roster coords (45.675694,-94.807948) for '123 5th Ave E' landed in downtown Melrose with no plant. The large food-processing complex at ~45.6705,-94.800 was positively identified by StreetView signage as a LAND O'LAKES Inc. plant, not Jennie-O. The audited building is the next-largest modern processing plant on the NE edge of Melrose by the Sauk River (~45.6763,-94.7942) -- a large single-building plant with numbered truck drive-in bays (1B-5B), dock doors with trailers, an E-side trailer drop yard, and a perimeter loop drive. This best matches the new $137M / ~300k-sq-ft Jennie-O Melrose plant profile but could NOT be confirmed by signage; treat the identity as unverified.",
+          "truckGate": "Open site -- StreetView shows no perimeter fence and no gate/barrier at the plant approach. Classified false but flagged given the location uncertainty.",
+          "guardShack": "No guard booth visible at any approach.",
+          "drivewayLong": "A perimeter loop drive and large paved yard give a long approach able to stack 3+ trucks.",
+          "dropYard": "Rows of untethered trailers on the E side of the building -> dropYard true; dropArea 10-25.",
+          "dockDoors": "~22 doors estimated: numbered drive-in bays plus dock doors with trailers backed in; banded 10-25, low-confidence.",
+          "fastLaneOpportunity": "Wide open paved yard and loop drive leave ample room for an express/bypass lane.",
+          "urbanRural": "Melrose is a small rural city (~3,700); the plant is on the NE edge by the Sauk River and farmland -> Rural.",
+          "buildingCount": "One main processing building plus a detached SW building (~2); uncertain.",
+          "shipRcvSeparate": "Could not confirm separate ship/receive dock banks from imagery -> classified false, flagged."
+        }
+      },
+      {
+        "id": "26-jennie-o-turkey-store-barron",
+        "name": "Jennie-O Turkey Store - Barron WI",
+        "type": "Meat Processing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "scale"
+        ],
+        "center": {
+          "lat": 45.4024,
+          "lng": -91.8468
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 45.4011,
+            "west": -91.8493,
+            "north": 45.4041,
+            "east": -91.8432
+          },
+          "truckGate": {
+            "south": 45.40115,
+            "west": -91.8452,
+            "north": 45.40155,
+            "east": -91.8445
+          },
+          "dropYards": [
+            {
+              "south": 45.4024,
+              "west": -91.8448,
+              "north": 45.4036,
+              "east": -91.8433
+            },
+            {
+              "south": 45.4014,
+              "west": -91.8474,
+              "north": 45.4022,
+              "east": -91.846
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 45.4028,
+              "west": -91.8478,
+              "north": 45.4037,
+              "east": -91.846
+            },
+            {
+              "south": 45.4014,
+              "west": -91.8478,
+              "north": 45.4022,
+              "east": -91.8462
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 7,
+          "siteAreaAcres": 37,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Jennie-O Turkey Store — Barron Plant\n- Type: Meat Processing Plant (turkey slaughter + processing)\n- Address: 34 N 7th St, Barron, WI 54812",
+        "mapsUrl": "https://www.google.com/maps/@45.40240,-91.84680,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (45.40239,-91.847592, ROOFTOP) landed directly on the plant. Confirmed Jennie-O via the green Jennie-O logo on the 3-story office building (StreetView 2024) and the 34 N 7th St address. Locked center 45.40240,-91.84680 on the main turkey-processing complex in Barron, WI.",
+          "truckGate": "Open truck entrance. StreetView (2024) shows the main truck driveway off the public road running uncontrolled into the plant yard -- no barrier arm and no gate across the truck drive. A green privacy-slat chain-link fence encloses the office/employee area and part of the south yard, but the truck entry itself is open. truckGate false.",
+          "guardShack": "No guard booth at the open truck entrance.",
+          "remoteGs": "No controlled gate -> remoteGs false.",
+          "railServed": "An active rail line runs straight through the complex with spurs serving buildings and the grain/feed silos -> railServed true.",
+          "multipleFacilities": "Large multi-building turkey campus (processing buildings, separate warehouse/DC, feed mill with silos, support buildings) -> multipleFacilities true.",
+          "shipRcvSeparate": "Dock banks on separate building faces (N and S), consistent with separate raw-receive vs finished-ship operations at a slaughter+processing plant -> shipRcvSeparate true.",
+          "dropYard": "Multiple trailer drop areas -- a large NE trailer yard and a S-side yard -- with 45+ trailers parked -> dropYard true; dropArea 25-50.",
+          "dockDoors": "~40 dock doors estimated across the multiple building faces; banded 25-50, low-confidence.",
+          "fastLaneOpportunity": "Wide open truck entrance and large paved yard leave ample room for an express/bypass lane.",
+          "urbanRural": "Barron WI is a small rural city (~3,400); the plant is at the edge of town surrounded by small-town residential and farmland -> Rural.",
+          "scale": "A truck scale is plausible at a turkey slaughter plant but was not positively identified in imagery -> classified false, flagged."
+        }
+      },
+      {
+        "id": "27-hormel-dhl-southaven-distribution-center",
+        "name": "Hormel / DHL Southaven Distribution Center - Southaven MS",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "guardShack"
+        ],
+        "center": {
+          "lat": 34.9882,
+          "lng": -90.041
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.9862,
+            "west": -90.0434,
+            "north": 34.9908,
+            "east": -90.0395
+          },
+          "truckGate": {
+            "south": 34.9864,
+            "west": -90.043,
+            "north": 34.987,
+            "east": -90.0423
+          },
+          "dropYards": [
+            {
+              "south": 34.9866,
+              "west": -90.043,
+              "north": 34.9898,
+              "east": -90.0413
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.9868,
+              "west": -90.0428,
+              "north": 34.99,
+              "east": -90.0418
+            },
+            {
+              "south": 34.9864,
+              "west": -90.0418,
+              "north": 34.987,
+              "east": -90.0399
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 44,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Hormel / DHL Southaven Distribution Center\n- Type: Distribution Center (refrigerated; DHL Supply Chain-operated)\n- Address: 8690 Tulane Rd W, Southaven, MS 38671",
+        "mapsUrl": "https://www.google.com/maps/@34.98820,-90.04100,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (34.988048,-90.040999) landed in the correct industrial park (geocode flagged 6135 m moved). Confirmed via the 8690 Tulane Rd address and web reporting: this is the former Associated Wholesale Grocers (AWG) distribution center in Southaven, MS, renovated (>$12M) and reopened in 2025 as Hormel's largest DC, operated by DHL Supply Chain. Locked center 34.98820,-90.04100 on the large white-roofed warehouse.",
+          "truckGate": "The truck yard is fully enclosed by a barbed-wire-topped chain-link fence (StreetView 2025-04 and 2025-12). A chain-link gate (flanked by yellow bollards) controls the truck drive entrance on the SW side. truckGate true.",
+          "guardShack": "No guard-booth structure was positively confirmed at the truck gate. A small structure exists inside the yard but does not read as a gatehouse beside the gate. Classified guardShack false; flagged uncertain.",
+          "remoteGs": "Modern DHL-operated DC with a fenced gated yard and no confirmed guard booth -> remote/kiosk/app check-in implied -> remoteGs true.",
+          "dockDoors": "50+ dock doors -- long continuous dock banks on the west and south building faces (former AWG grocery DC). Banded 50+, honest overhead estimate.",
+          "dropArea": "50+ untethered trailers parked across the large fenced truck yard -> dropArea 50+.",
+          "dropYard": "Extensive on-site fenced trailer-storage yard distinct from the active dock apron -> dropYard true.",
+          "drivewayLong": "Large fenced yard provides a deep approach able to stack many trucks before the docks.",
+          "fastLaneOpportunity": "Very wide paved gate apron and yard leave clear room for an express/bypass lane.",
+          "urbanRural": "Southaven MS is part of the Memphis metro; the DC sits in a dense suburban industrial park -> Urban.",
+          "buildingCount": "Single very large warehouse building (multi-section roof) -> buildingCount 1.",
+          "shipRcvSeparate": "Dock banks on two faces but operated as one DC flow; no clear separate ship/receive split -> shipRcvSeparate false."
+        }
+      }
+    ]
+  }
+}
