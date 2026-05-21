@@ -75,40 +75,40 @@ export interface RegionTest {
 /**
  * Region matchers. Lat/lng boxes are deliberate over-approximations
  * (state lines are messier than rectangles) — close enough for a demo
- * that's already disclaiming itself as modeled. The named regions
- * mirror the original Figma yns-network demand-shock prototype.
+ * that's already disclaiming itself as modeled. Capacity multipliers
+ * are passed at the event level (not hard-coded per region) so the
+ * same region can be cited at "regional weather" (10% impact) and
+ * "severe weather" (20% impact) intensities — matching the original
+ * yns-network demand-shock prototype's intensity model.
  */
-const REGIONS: Record<string, RegionTest> = {
-  gulf: {
-    // Texas / Louisiana / Mississippi / Alabama / FL panhandle coastal.
-    match: (p) => p.lat >= 24 && p.lat <= 31 && p.lng >= -98 && p.lng <= -82,
-    capacityMultiplier: 0.4,
-  },
-  florida: {
-    match: (p) => p.lat >= 24 && p.lat <= 31 && p.lng >= -88 && p.lng <= -79.5,
-    capacityMultiplier: 0.4,
-  },
-  'east-coast': {
-    // VA / NC / SC / GA Atlantic strip.
-    match: (p) => p.lat >= 30 && p.lat <= 39 && p.lng >= -82 && p.lng <= -75,
-    capacityMultiplier: 0.5,
-  },
-  northeast: {
-    // NY / NJ / PA / CT / MA / ME / NH / VT / RI / DE / MD.
-    match: (p) => p.lat >= 38 && p.lat <= 47 && p.lng >= -80 && p.lng <= -67,
-    capacityMultiplier: 0.6,
-  },
-  midwest: {
-    // ND / SD / MN / WI / IL / IA / MI / OH / IN.
-    match: (p) => p.lat >= 38 && p.lat <= 49 && p.lng >= -104 && p.lng <= -80,
-    capacityMultiplier: 0.65,
-  },
+const REGIONS: Record<string, (p: LatLng) => boolean> = {
+  // Texas / Louisiana / Mississippi / Alabama / FL panhandle coastal.
+  gulf: (p) => p.lat >= 24 && p.lat <= 31 && p.lng >= -98 && p.lng <= -82,
+  // Florida peninsula.
+  florida: (p) => p.lat >= 24 && p.lat <= 31 && p.lng >= -88 && p.lng <= -79.5,
+  // VA / NC / SC / GA Atlantic strip.
+  'east-coast': (p) => p.lat >= 30 && p.lat <= 39 && p.lng >= -82 && p.lng <= -75,
+  // NY / NJ / PA / CT / MA / ME / NH / VT / RI / DE / MD.
+  northeast: (p) => p.lat >= 38 && p.lat <= 47 && p.lng >= -80 && p.lng <= -67,
+  // ND / SD / MN / WI / IL / IA / MI / OH / IN.
+  midwest: (p) => p.lat >= 38 && p.lat <= 49 && p.lng >= -104 && p.lng <= -80,
 };
+
+export type WeatherRegion = 'gulf' | 'florida' | 'east-coast' | 'northeast' | 'midwest';
 
 export type WeatherEvent =
   | { type: 'none' }
-  | { type: 'hurricane'; region: 'gulf' | 'florida' | 'east-coast' }
-  | { type: 'winter-storm'; region: 'northeast' | 'midwest' }
+  | {
+      type: 'regional';
+      region: WeatherRegion;
+      /** Capacity impact pct (10 = 10% capacity reduction on affected sites). */
+      impactPct: number;
+    }
+  | {
+      type: 'severe';
+      region: WeatherRegion;
+      impactPct: number;
+    }
   /** Network-wide carrier-capacity reduction (driver shortage / spot-rate spike). */
   | { type: 'carrier-cuts'; reductionPct: number };
 
@@ -116,10 +116,10 @@ function siteWeatherMultiplier(site: Site, event: WeatherEvent): number {
   switch (event.type) {
     case 'none':
       return 1;
-    case 'hurricane':
-    case 'winter-storm': {
-      const region = REGIONS[event.region];
-      return region.match(site.center) ? region.capacityMultiplier : 1;
+    case 'regional':
+    case 'severe': {
+      const test = REGIONS[event.region];
+      return test(site.center) ? 1 - event.impactPct / 100 : 1;
     }
     case 'carrier-cuts':
       // Carrier cuts hit every site uniformly — there's no region geography
@@ -158,6 +158,29 @@ export interface SiteSimState {
   weatherAffected: boolean;
 }
 
+/**
+ * Modeled operational KPIs derived from the simulation state. Same single
+ * source of truth as the markers — every number flows from utilization +
+ * config, never sourced independently. The accompanying disclaimer in
+ * the UI calls this out.
+ */
+export interface OperationalKpis {
+  /** Average truck turnaround time in minutes. */
+  truckTurnaroundMin: number;
+  /** Average empty-trailer dwell in days. */
+  emptyDwellDays: number;
+  /** Trailer-pool compliance vs target, percent (target = 100). */
+  poolCompliancePct: number;
+  /** Drivers awaiting service network-wide (proxy for queue depth). */
+  driversAwaitingService: number;
+  /** Inbound shipment age in days (proxy for cycle time on loaded trailers). */
+  inboundAgeDays: number;
+  /** Outbound shipment age in days (proxy for outbound cycle time). */
+  outboundAgeDays: number;
+  /** Out-of-service trailers as a percentage of fleet. */
+  oosTrailersPct: number;
+}
+
 export interface NetworkSimState {
   sites: SiteSimState[];
   totals: {
@@ -171,6 +194,7 @@ export interface NetworkSimState {
     utilization: number;
   };
   countsByRisk: Record<RiskLevel, number>;
+  kpis: OperationalKpis;
 }
 
 // ── Helpers ─────────────────────────────────────────────────────────────────
@@ -234,6 +258,7 @@ export function simulate(pack: DemoPack, config: SimConfig): NetworkSimState {
 
   const totalDemand = sites.reduce((s, x) => s + x.demand, 0);
   const totalEffective = sites.reduce((s, x) => s + x.effectiveCapacity, 0);
+  const networkUtilization = totalEffective > 0 ? totalDemand / totalEffective : 0;
 
   const countsByRisk: Record<RiskLevel, number> = { ok: 0, tight: 0, overloaded: 0, critical: 0 };
   for (const s of sites) countsByRisk[s.riskLevel]++;
@@ -244,9 +269,52 @@ export function simulate(pack: DemoPack, config: SimConfig): NetworkSimState {
       baselineCapacity: totalBaseline,
       effectiveCapacity: totalEffective,
       demand: totalDemand,
-      utilization: totalEffective > 0 ? totalDemand / totalEffective : 0,
+      utilization: networkUtilization,
     },
     countsByRisk,
+    kpis: deriveKpis(networkUtilization, countsByRisk, config),
+  };
+}
+
+/**
+ * KPI model. All quantities derive from (utilization, ynsMode, counts).
+ * Numbers cited:
+ *   - 30 min baseline turn time (industry drop-and-hook benchmark).
+ *   - 0.6 YNS multiplier reflects the Primo 48→24 min compression (50%).
+ *   - 12% OOS / 100% pool compliance are industry-typical resting values.
+ */
+function deriveKpis(util: number, counts: Record<RiskLevel, number>, config: SimConfig): OperationalKpis {
+  // Utilization stress: clamp 0.7..1.6 so wild slider values still produce
+  // legible numbers (no negative turnaround times under extreme collapse).
+  const stress = Math.max(0.7, Math.min(1.6, util));
+  const ynsMul = config.ynsMode ? 0.6 : 1;
+  const truckTurnaroundMin = Math.round(30 * stress * ynsMul);
+
+  // Dwell inverts with stress (busier yards cycle trailers faster).
+  // YNS knocks dwell down further via better visibility.
+  const emptyDwellDays = Number((2.4 / stress * (config.ynsMode ? 0.85 : 1)).toFixed(1));
+
+  // Pool compliance drifts off-target as stress rises; YNS adds 3-4 pts.
+  const poolCompliancePct = Math.round(102 - (stress - 1) * 10 + (config.ynsMode ? 3 : 0));
+
+  // Queue depth proxy: 2 drivers per critical site, 1 per overloaded.
+  const driversAwaitingService = counts.critical * 2 + counts.overloaded * 1;
+
+  // Cycle time proxies — small under YNS, longer under stress.
+  const inboundAgeDays = Number((0.6 * stress * (config.ynsMode ? 0.8 : 1)).toFixed(1));
+  const outboundAgeDays = Number((1.2 * stress * (config.ynsMode ? 0.75 : 1)).toFixed(1));
+
+  // OOS trailers — industry-typical ~12%; YNS cuts ~4 pts via tracking.
+  const oosTrailersPct = Math.round(12 - (config.ynsMode ? 4 : 0));
+
+  return {
+    truckTurnaroundMin,
+    emptyDwellDays,
+    poolCompliancePct,
+    driversAwaitingService,
+    inboundAgeDays,
+    outboundAgeDays,
+    oosTrailersPct,
   };
 }
 
@@ -261,58 +329,51 @@ export interface ScenarioPreset {
 }
 
 /**
- * Scenario presets surfaced in the simulator UI. Each one is a single-click
- * shortcut that sets demandFactor + weather event together. Mirrors the
- * original Figma yns-network demand-shock prototype's scenario row.
+ * Scenario presets surfaced in the simulator UI. Mirrors the original
+ * yns-network demand-shock prototype:
+ *   Live · Demand +10% · Demand −10% · Regional weather · Severe weather
+ *
+ * Magnitudes deliberately kept conservative (single-digit percent on
+ * demand, 10–20% on weather impact). The original's numbers — and ours —
+ * are sized so that even small shocks compound into visible network-state
+ * deltas, not so big that every preset turns the whole map red.
  */
 export const PRESETS: ScenarioPreset[] = [
   {
-    id: 'baseline',
-    label: 'Baseline',
-    caption: 'Steady-state network. Every site at nominal demand.',
+    id: 'live',
+    label: 'Live network',
+    caption: 'Steady-state. Every site at nominal demand, no weather event in play.',
     config: { demandFactor: 1, weather: { type: 'none' } },
   },
   {
-    id: 'demand-surge',
-    label: 'Demand surge +50%',
-    caption: 'Sudden 50% lift in inbound — holiday push, promo cycle, post-blizzard rebound.',
-    config: { demandFactor: 1.5, weather: { type: 'none' } },
+    id: 'demand-up',
+    label: 'Demand +10%',
+    caption: 'Sudden 10% lift in inbound — promo cycle, retail pull-forward, post-storm rebound.',
+    config: { demandFactor: 1.1, weather: { type: 'none' } },
   },
   {
-    id: 'demand-collapse',
-    label: 'Demand collapse −50%',
-    caption: 'Half the network demand falls off — retail pull-down, contract churn, demand-side shock.',
-    config: { demandFactor: 0.5, weather: { type: 'none' } },
+    id: 'demand-down',
+    label: 'Demand −10%',
+    caption: 'Network demand falls off 10% — retail pull-down, contract churn, demand-side shock.',
+    config: { demandFactor: 0.9, weather: { type: 'none' } },
   },
   {
-    id: 'hurricane-gulf',
-    label: 'Hurricane (Gulf)',
-    caption: 'Gulf-Coast hurricane closes Texas / Louisiana / Mississippi / Florida-panhandle yards.',
-    config: { demandFactor: 1.1, weather: { type: 'hurricane', region: 'gulf' } },
+    id: 'regional-weather-ne',
+    label: 'Regional weather (NE, 10%)',
+    caption: 'Northeast regional storm reduces affected-site capacity by 10%.',
+    config: {
+      demandFactor: 1,
+      weather: { type: 'regional', region: 'northeast', impactPct: 10 },
+    },
   },
   {
-    id: 'hurricane-florida',
-    label: 'Hurricane (Florida)',
-    caption: 'Florida-landfall hurricane disrupts Atlantic-coast yards through both peninsulas.',
-    config: { demandFactor: 1.1, weather: { type: 'hurricane', region: 'florida' } },
-  },
-  {
-    id: 'winter-storm-ne',
-    label: 'Winter storm (NE)',
-    caption: 'Northeast winter storm plus panic-buying pre-surge — capacity down where demand peaks.',
-    config: { demandFactor: 1.3, weather: { type: 'winter-storm', region: 'northeast' } },
-  },
-  {
-    id: 'carrier-cuts',
-    label: 'Carrier cuts −30%',
-    caption: 'Trailer availability drops 30% network-wide — driver shortage or spot-rate spike.',
-    config: { demandFactor: 1, weather: { type: 'carrier-cuts', reductionPct: 30 } },
-  },
-  {
-    id: 'q4-peak',
-    label: 'Q4 peak',
-    caption: 'Q4 peak season — 40% demand lift across the network, Northeast weather risk layered on.',
-    config: { demandFactor: 1.4, weather: { type: 'winter-storm', region: 'northeast' } },
+    id: 'severe-hurricane',
+    label: 'Severe weather (Hurricane, 20%)',
+    caption: 'Gulf-Coast hurricane reduces affected-site capacity by 20%. Demand lifts 5% on rebound.',
+    config: {
+      demandFactor: 1.05,
+      weather: { type: 'severe', region: 'gulf', impactPct: 20 },
+    },
   },
 ];
 
