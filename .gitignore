@@ -15,3 +15,12 @@ my-contacts.csv
 .superpowers/
 docs/audits/screenshots/.progress.json
 !docs/audits/screenshots/
+
+.vercel
+.env*.local
+
+# YNS demo-pack satellite tiles — regenerable via
+# `npx tsx scripts/yard-audit/build-all-packs.ts --tiles`
+# ~484 MB across 1.6k JPEGs at 300KB each; too big for git.
+# Pack JSONs (under the same dir) DO commit; only the tile binaries are excluded.
+public/demo-packs/tiles/
