@@ -1,0 +1,115 @@
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
+import type { ArchetypeId, DemoPack } from '@/lib/demo/pack-schema';
+import { NetworkAtlas } from './network-atlas';
+import { SiteDetailPanel } from './site-detail-panel';
+import { ArchetypeMixChart } from './archetype-mix-chart';
+import { CoverageHonesty } from './coverage-honesty';
+
+/**
+ * Top-level client surface for /demo/[account]. Manages cross-component
+ * state (selected site, archetype filter), lays out the two columns.
+ *
+ * `mode === 'embed'` strips the header and footer for use inside the
+ * existing /for/[account] microsites (D2.8). In that mode the surface
+ * is purely the atlas + click-to-detail; the microsite owns the chrome.
+ */
+
+interface Props {
+  pack: DemoPack;
+  mode: 'standalone' | 'embed';
+}
+
+export function DemoSurface({ pack, mode }: Props) {
+  const [selectedSiteId, setSelectedSiteId] = useState<string | null>(null);
+  const [archetypeFilter, setArchetypeFilter] = useState<Set<ArchetypeId> | null>(null);
+
+  const toggleArchetype = (archetype: ArchetypeId) => {
+    setArchetypeFilter((prev) => {
+      // Treat "no filter" as "all selected" — clicking one inverts to single-select
+      const current = prev ?? new Set(Object.keys(pack.network.archetypeMix) as ArchetypeId[]);
+      const next = new Set(current);
+      if (next.has(archetype)) {
+        next.delete(archetype);
+      } else {
+        next.add(archetype);
+      }
+      // Empty set means "show none" — reset to null (= all) on second toggle of last selected
+      if (next.size === 0) return null;
+      // If all archetypes are now selected, drop the filter entirely to keep state clean
+      const total = Object.keys(pack.network.archetypeMix).length;
+      if (next.size === total) return null;
+      return next;
+    });
+  };
+
+  const selectedSite = selectedSiteId ? pack.network.sites.find((s) => s.id === selectedSiteId) ?? null : null;
+
+  const { displayName, siteCount } = pack.account;
+  const { dockDoors, trailerCapacity, railServed } = pack.network.totals;
+
+  return (
+    <div className={mode === 'standalone' ? 'flex min-h-screen flex-col' : 'flex h-[600px] flex-col rounded-lg border border-stone-200 bg-white shadow-sm'}>
+      {/* Header — only in standalone mode */}
+      {mode === 'standalone' && (
+        <header className="shrink-0 border-b border-stone-200 bg-white">
+          <div className="mx-auto flex max-w-5xl items-end justify-between gap-6 px-5 py-4">
+            <div>
+              <div className="text-[10px] uppercase tracking-widest text-stone-500">YardFlow · YNS network audit</div>
+              <h1 className="mt-1 text-xl font-semibold text-stone-900">{displayName}</h1>
+              <p className="mt-1 text-sm text-stone-600">
+                <span className="tabular-nums">{siteCount}</span> facilities ·{' '}
+                <span className="tabular-nums">{dockDoors.toLocaleString()}</span> dock doors ·{' '}
+                <span className="tabular-nums">{trailerCapacity.toLocaleString()}</span> trailer spots ·{' '}
+                <span className="tabular-nums">{railServed}</span> rail-served
+              </p>
+            </div>
+            <Link
+              href={`/for/${pack.account.slug}`}
+              className="hidden text-xs uppercase tracking-widest text-stone-500 transition hover:text-stone-900 md:inline"
+            >
+              ← Read the full memo
+            </Link>
+          </div>
+          <CoverageHonesty pack={pack} />
+        </header>
+      )}
+
+      {/* Main: split view — map left, panel right */}
+      <main className="flex flex-1 flex-col overflow-hidden md:flex-row">
+        <div className="relative h-[400px] flex-1 md:h-auto">
+          <NetworkAtlas
+            pack={pack}
+            selectedSiteId={selectedSiteId}
+            archetypeFilter={archetypeFilter}
+            onSelectSite={setSelectedSiteId}
+          />
+        </div>
+        <aside className="flex w-full shrink-0 flex-col overflow-hidden border-t border-stone-200 bg-white md:w-[400px] md:border-l md:border-t-0">
+          {selectedSite ? (
+            <SiteDetailPanel site={selectedSite} onClose={() => setSelectedSiteId(null)} />
+          ) : (
+            <ArchetypeMixChart pack={pack} archetypeFilter={archetypeFilter} onToggleArchetype={toggleArchetype} />
+          )}
+        </aside>
+      </main>
+
+      {/* Footer — only in standalone mode */}
+      {mode === 'standalone' && (
+        <footer className="shrink-0 border-t border-stone-200 bg-stone-50 px-5 py-4">
+          <div className="mx-auto flex max-w-5xl flex-col items-start justify-between gap-2 text-xs text-stone-600 md:flex-row md:items-center">
+            <span>
+              Sourced from public satellite + Street View imagery. Geofences modeled by YardFlow.{' '}
+              <Link href={`/for/${pack.account.slug}`} className="underline-offset-2 hover:underline">
+                See the full network memo →
+              </Link>
+            </span>
+            <span className="text-[10px] uppercase tracking-widest text-stone-400">YardFlow YNS · {pack.builtAt.slice(0, 10)}</span>
+          </div>
+        </footer>
+      )}
+    </div>
+  );
+}

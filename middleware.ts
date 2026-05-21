@@ -20,6 +20,8 @@ export const config = {
      * - /proposal (public proposal decks)
      * - /api/proposal (public proposal data API)
      * - /for (public account microsites)
+     * - /demo (public YNS network demo — same prospect-facing audience as /for)
+     * - /demo-packs (public demo pack JSON + satellite tiles consumed by /demo)
      * - /opengraph-image, /twitter-image (public social metadata images)
      * - /audio (public audio briefs served alongside /for/* memos)
      * - /video (public video codas served alongside /for/* memos)
@@ -27,6 +29,6 @@ export const config = {
      * - /_next (Next.js internals)
      * - /manifest.json, /robots.txt, /favicon.ico (static assets)
      */
-    '/((?!login|api/auth|api/webhooks|api/unsubscribe|api/microsites/track|api/cron|api/proposal|api/proof|unsubscribe|proposal|for|opengraph-image|twitter-image|audio|video|artifacts|_next|manifest\\.json|robots\\.txt|favicon\\.ico).*)',
+    '/((?!login|api/auth|api/webhooks|api/unsubscribe|api/microsites/track|api/cron|api/proposal|api/proof|unsubscribe|proposal|for|demo|demo-packs|opengraph-image|twitter-image|audio|video|artifacts|_next|manifest\\.json|robots\\.txt|favicon\\.ico).*)',
   ],
 };
