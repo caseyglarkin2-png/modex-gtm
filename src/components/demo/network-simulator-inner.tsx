@@ -116,11 +116,7 @@ export default function NetworkSimulatorInner({ state, bbox, selectedSiteId, onS
 
   return (
     <MapContainer
-      // Bright magenta inline background is a temporary diagnostic — if
-      // the user sees magenta, the MapContainer mounted with non-zero
-      // size but tiles aren't loading (CDN/CORS). If they see white,
-      // the MapContainer never got dimensions.
-      style={{ width: '100%', height: '100%', background: '#ec4899', outline: '4px solid #ec4899' }}
+      style={{ width: '100%', height: '100%', background: '#0f172a' }}
       center={[39.5, -98.35]}
       zoom={4}
       scrollWheelZoom

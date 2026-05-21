@@ -195,11 +195,20 @@ export function NetworkSimulator({ pack }: Props) {
         <Kpi icon="⚠" label="OOS trailers" value={`${kpis.oosTrailersPct}%`} />
       </div>
 
-      {/* Map (flex-1 so it claims remaining vertical room).
-          Explicit `h-[420px] md:h-auto` mirrors NetworkAtlas — gives Leaflet
-          a concrete height to init against on first mount (it caches size at
-          init and renders blank if it computes zero). */}
-      <div className="relative h-[420px] flex-1 md:h-auto md:min-h-[320px]">
+      {/* Map wrapper.
+          CRITICAL: use CONCRETE pixel heights (`h-[420px]` mobile,
+          `md:h-[520px]` desktop) — NOT flex-1 / md:h-auto / min-h.
+          MapContainer inside has `style={height: '100%'}`. CSS spec:
+          percentage heights only resolve against an explicit `height`,
+          NOT against `min-height` or flex-allocated `auto`. Because the
+          MapContainer is the wrapper's only non-absolute child, an
+          `auto` wrapper height creates a circular dependency that CSS
+          resolves to 0 — the symptom: getSize() returns 1280x0 and the
+          map renders as an 8px outline-only bar. NetworkAtlas avoids
+          this because its parent is flex-row on desktop, so the wrapper
+          gets cross-axis stretched (a definite height). Sim's parent is
+          flex-col — no stretch — so we hardcode height. */}
+      <div className="relative h-[420px] md:h-[520px]">
         <MapBoundary>
           <Inner
             state={state}
