@@ -109,10 +109,15 @@ export function DriverJourneyReplay({ site, scenario, onClose }: Props) {
           {phase === 'waiting' && <span className="ml-2 text-stone-500">⏸ waiting</span>}
           {phase === 'done' && <span className="ml-2 text-emerald-700">✓ done</span>}
         </div>
+        {/* Lift above Leaflet's attribution control (z-index ~999) so the
+            click reaches THIS button, not the OSM/ESRI text underneath.
+            `bottom-7` (vs. bottom-2) also moves the button visually off
+            the attribution strip. Verify regression with
+            `scripts/verify-replay.mjs`. */}
         <button
           type="button"
           onClick={() => setRestartKey((k) => k + 1)}
-          className="absolute bottom-2 right-2 rounded-md bg-white/95 px-3 py-1.5 text-[11px] text-stone-700 shadow-sm backdrop-blur transition hover:bg-white"
+          className="absolute bottom-7 right-2 z-[1100] rounded-md bg-white/95 px-3 py-1.5 text-[11px] text-stone-700 shadow-sm backdrop-blur transition hover:bg-white"
         >
           ⟲ Replay
         </button>
