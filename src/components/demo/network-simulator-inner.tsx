@@ -18,13 +18,25 @@ function FitBounds({ bbox }: { bbox: BboxTuple }) {
   const map = useMap();
   useEffect(() => {
     const [w, s, e, n] = bbox;
-    map.fitBounds(
-      [
-        [s, w],
-        [n, e],
-      ],
-      { padding: [40, 40], animate: false },
-    );
+    // Leaflet caches container size at init. When MapContainer mounts inside
+    // a conditionally-rendered tab (the sim view is mounted lazily when the
+    // user clicks the "Network simulator" tab), the container size at mount
+    // can be wrong/zero — the map then renders blank until the next resize.
+    // Force a recompute on next tick before fitting bounds, and again after
+    // a short delay to catch any layout settling.
+    const fit = () => {
+      map.invalidateSize({ animate: false });
+      map.fitBounds(
+        [
+          [s, w],
+          [n, e],
+        ],
+        { padding: [40, 40], animate: false },
+      );
+    };
+    fit();
+    const t = setTimeout(fit, 250);
+    return () => clearTimeout(t);
   }, [map, bbox]);
   return null;
 }

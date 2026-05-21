@@ -167,8 +167,11 @@ export function NetworkSimulator({ pack }: Props) {
         <Kpi icon="⚠" label="OOS trailers" value={`${kpis.oosTrailersPct}%`} />
       </div>
 
-      {/* Map (flex-1 so it claims remaining vertical room) */}
-      <div className="relative flex-1 min-h-[320px]">
+      {/* Map (flex-1 so it claims remaining vertical room).
+          Explicit `h-[420px] md:h-auto` mirrors NetworkAtlas — gives Leaflet
+          a concrete height to init against on first mount (it caches size at
+          init and renders blank if it computes zero). */}
+      <div className="relative h-[420px] flex-1 md:h-auto md:min-h-[320px]">
         <Inner
           state={state}
           bbox={pack.network.bbox}

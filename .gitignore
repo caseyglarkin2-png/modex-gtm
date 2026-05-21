@@ -24,3 +24,9 @@ docs/audits/screenshots/.progress.json
 # ~484 MB across 1.6k JPEGs at 300KB each; too big for git.
 # Pack JSONs (under the same dir) DO commit; only the tile binaries are excluded.
 public/demo-packs/tiles/
+
+# Local scratch dir — saved HTTP responses, probe images, batch logs.
+# Tailwind 4 scans the project for class names; saved HTML in here can
+# emit malformed CSS (e.g. error responses containing __next_f streaming
+# buffers parsed as arbitrary-value classes). Keep out of source scan.
+tmp/
