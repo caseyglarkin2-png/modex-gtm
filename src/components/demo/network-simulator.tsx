@@ -1,7 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useMemo, useState } from 'react';
+import { Component, type ReactNode, useMemo, useState } from 'react';
 import type { DemoPack } from '@/lib/demo/pack-schema';
 import {
   PRESETS,
@@ -13,6 +13,34 @@ import {
   type SimConfig,
   type WeatherEvent,
 } from '@/lib/demo/network-sim';
+
+/**
+ * Diagnostic error boundary so any throw inside the dynamic-loaded
+ * Leaflet `Inner` (chunk-load failure, react-leaflet incompat, runtime
+ * type error) surfaces as visible text instead of an invisible
+ * unmount — which is what we just spent hours debugging.
+ */
+class MapBoundary extends Component<{ children: ReactNode }, { error: Error | null }> {
+  state = { error: null as Error | null };
+  static getDerivedStateFromError(error: Error) {
+    return { error };
+  }
+  componentDidCatch(error: Error) {
+    // eslint-disable-next-line no-console
+    console.error('[YNS sim map] caught error:', error);
+  }
+  render() {
+    if (this.state.error) {
+      return (
+        <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-red-50 p-6 text-center text-xs text-red-800">
+          <div className="font-semibold">Map failed to mount</div>
+          <div className="font-mono text-[10px] opacity-70">{String(this.state.error?.message ?? this.state.error)}</div>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 /**
  * D4 — Network Simulator surface.
@@ -172,12 +200,14 @@ export function NetworkSimulator({ pack }: Props) {
           a concrete height to init against on first mount (it caches size at
           init and renders blank if it computes zero). */}
       <div className="relative h-[420px] flex-1 md:h-auto md:min-h-[320px]">
-        <Inner
-          state={state}
-          bbox={pack.network.bbox}
-          selectedSiteId={selectedSiteId}
-          onSelectSite={setSelectedSiteId}
-        />
+        <MapBoundary>
+          <Inner
+            state={state}
+            bbox={pack.network.bbox}
+            selectedSiteId={selectedSiteId}
+            onSelectSite={setSelectedSiteId}
+          />
+        </MapBoundary>
         {/* Floating active-scenario banner */}
         {activePreset && (
           <div className="pointer-events-none absolute left-3 top-3 max-w-[360px] rounded-md bg-white/95 px-3 py-2 text-[11px] shadow-md backdrop-blur">

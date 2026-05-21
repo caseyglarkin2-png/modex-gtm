@@ -31,26 +31,42 @@ function FitBounds({ bbox }: { bbox: BboxTuple }) {
   const map = useMap();
   useEffect(() => {
     const [w, s, e, n] = bbox;
-    // Leaflet caches container size at init. Force a recompute on the
-    // next animation frame so the map has the real container dimensions
-    // (the simulator is a lazy-mounted tab, so we cannot assume the
-    // container had its final size when Leaflet first measured it).
-    const raf = requestAnimationFrame(() => {
+    // Diagnostic: log size at each invalidate so we can tell whether
+    // Leaflet ever sees non-zero dimensions. Stripped on the next
+    // working iteration.
+    const fit = (label: string) => {
+      const sz = map.getSize();
+      // eslint-disable-next-line no-console
+      console.log(`[YNS sim map] ${label} container=${sz.x}x${sz.y}`);
       map.invalidateSize({ animate: false });
-      map.fitBounds(
-        [
-          [s, w],
-          [n, e],
-        ],
-        { padding: [40, 40], animate: false },
-      );
-    });
-    // Window resize is a cheap insurance for orientation changes and
-    // sidebar/drawer toggles that may shift the container later.
+      const sz2 = map.getSize();
+      // eslint-disable-next-line no-console
+      console.log(`[YNS sim map] ${label} after-invalidate=${sz2.x}x${sz2.y}`);
+      if (sz2.x > 0 && sz2.y > 0) {
+        map.fitBounds(
+          [
+            [s, w],
+            [n, e],
+          ],
+          { padding: [40, 40], animate: false },
+        );
+      } else {
+        // eslint-disable-next-line no-console
+        console.warn('[YNS sim map] container is 0x0 — skipping fitBounds');
+      }
+    };
+    // Three passes catch typical settle windows: immediately after
+    // mount, after 100ms (most layouts settle), and after 500ms
+    // (slow layout chains, image fonts, etc.). Each is cheap and
+    // idempotent if size hasn't changed.
+    fit('mount');
+    const t1 = setTimeout(() => fit('100ms'), 100);
+    const t2 = setTimeout(() => fit('500ms'), 500);
     const onResize = () => map.invalidateSize({ animate: false });
     window.addEventListener('resize', onResize);
     return () => {
-      cancelAnimationFrame(raf);
+      clearTimeout(t1);
+      clearTimeout(t2);
       window.removeEventListener('resize', onResize);
     };
   }, [map, bbox]);
@@ -93,9 +109,18 @@ function CritHalo({ lat, lng, radius }: { lat: number; lng: number; radius: numb
 export default function NetworkSimulatorInner({ state, bbox, selectedSiteId, onSelectSite }: Props) {
   const maxDemand = useMemo(() => Math.max(...state.sites.map((s) => s.demand), 1), [state]);
 
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log(`[YNS sim map] Inner mounted, ${state.sites.length} sites`);
+  }, [state.sites.length]);
+
   return (
     <MapContainer
-      style={{ width: '100%', height: '100%', background: '#0f172a' }}
+      // Bright magenta inline background is a temporary diagnostic — if
+      // the user sees magenta, the MapContainer mounted with non-zero
+      // size but tiles aren't loading (CDN/CORS). If they see white,
+      // the MapContainer never got dimensions.
+      style={{ width: '100%', height: '100%', background: '#ec4899', outline: '4px solid #ec4899' }}
       center={[39.5, -98.35]}
       zoom={4}
       scrollWheelZoom
