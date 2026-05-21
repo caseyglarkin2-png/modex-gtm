@@ -1,0 +1,49 @@
+{
+  "name": "Cascade Hollow Distilling Co. (George Dickel) - Tullahoma TN",
+  "type": "Distillery",
+  "coords": { "lat": 35.43850, "lng": -86.24400 },
+  "geofences": {
+    "perimeter": { "south": 35.43400, "west": -86.24800, "north": 35.44100, "east": -86.23900 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 35.43850, "west": -86.24400, "north": 35.43920, "east": -86.24300 }
+    ],
+    "staging": { "south": 35.43880, "west": -86.24340, "north": 35.43950, "east": -86.24250 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 6, "trailersVisible": 6, "trailerParkingCapacity": 12,
+    "truckGateCount": 1, "buildingCount": 8, "siteAreaAcres": 18.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.43850,-86.24400,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": true, "multipleFacilities": true,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "scale", "connectivityIssue"],
+  "fieldNotes": {
+    "truckGate": "No controlled truck entrance. The campus is reached by a single private drive off Cascade Hollow Road; the only barrier is a decorative split-rail fence and a branded welcome sign at the visitor entrance (2024-11 Street View). No barrier arm, sliding gate, or checkpoint structure on the truck approach.",
+    "guardShack": "No staffed guard booth. The buildings near the entrance are the public visitor center.",
+    "scale": "No truck scale resolved in imagery; left false (low confidence).",
+    "dockDoors": "Loading area on the north face of the production complex - z20 imagery shows ~6 trailers/trucks parked with a gravel staging/turnaround apron. Estimated ~6 doors, band 0-10, medium confidence.",
+    "dropArea": "No marked trailer-parking stalls; trailers present are at the active loading apron, not a drop lot.",
+    "dropYard": "No dedicated trailer-storage lot observed.",
+    "multipleFacilities": "Campus: production/distillery complex, visitor center, and ~2 single-story sheet-metal rickhouses set in the woods to the southeast.",
+    "drivewayLong": "Long wooded private drive (>500 m) from Cascade Hollow Road plus an open internal yard - ample queuing depth.",
+    "staging": "Gravel turnaround/staging area on the north side of the production buildings, used by inbound/outbound trucks.",
+    "urbanRural": "Deep in a wooded hollow in rural Coffee County TN, well outside Tullahoma's developed fabric - Rural.",
+    "connectivityIssue": "Rural and isolated in a forested hollow surrounded by woods; cellular coverage likely weak - inferred, medium confidence.",
+    "railServed": "No rail spur into the property.",
+    "general": "Per The Spirits Business, production was paused September 2025; the site continues operating for warehousing/maturation, so freight activity is reduced."
+  },
+  "method": "deep-audit"
+}

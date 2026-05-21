@@ -1,0 +1,360 @@
+{
+  "account": "Keurig Dr Pepper",
+  "generatedAt": "2026-05-17",
+  "facilityCount": 22,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "KDP Coffee Roasting & K-Cup Plant - Spartanburg (Moore) SC",
+      "city": "Moore",
+      "state": "SC",
+      "type": "Manufacturing - Coffee/K-Cup",
+      "address": "3220 Moore Duncan Hwy, Moore, SC 29369",
+      "lat": 34.870596,
+      "lng": -82.032427,
+      "source": "SC Governor / SC Dept of Commerce releases; dossier-named major K-Cup hub; new K-Rounds production site",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 724
+      }
+    },
+    {
+      "idx": 2,
+      "name": "KDP K-Cup Plant - Essex Junction VT",
+      "city": "Essex Junction",
+      "state": "VT",
+      "type": "Manufacturing - Coffee/K-Cup",
+      "address": "63 South Park Dr, Essex Junction, VT 05452",
+      "lat": 44.503824,
+      "lng": -73.180386,
+      "source": "Dossier-named (Essex VT K-Cup production); Vermont Business Magazine (Williston consolidated into Essex Jct, 2024)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 1
+      }
+    },
+    {
+      "idx": 3,
+      "name": "KDP Coffee Plant - Waterbury VT",
+      "city": "Waterbury",
+      "state": "VT",
+      "type": "Manufacturing - Coffee",
+      "address": "33 Coffee Ln, Waterbury, VT 05676",
+      "lat": 44.336491,
+      "lng": -72.755118,
+      "source": "Dossier-named (original Green Mountain Coffee facility)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 4
+      }
+    },
+    {
+      "idx": 4,
+      "name": "KDP Beverage Manufacturing & Distribution - Allentown PA",
+      "city": "Allentown",
+      "state": "PA",
+      "type": "Manufacturing & Distribution - Beverage",
+      "address": "7350 Industrial Blvd, Allentown, PA 18106",
+      "lat": 40.572414,
+      "lng": -75.605843,
+      "source": "Lehigh Valley EDC; 2021 Food Engineering Plant of the Year; 1.5M sq ft cold-beverage plant + DC, Upper Macungie Twp",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 3237
+      }
+    },
+    {
+      "idx": 5,
+      "name": "KDP Beverage Plant - Victorville CA",
+      "city": "Victorville",
+      "state": "CA",
+      "type": "Manufacturing - Beverage",
+      "address": "16200 Nisqualli Rd, Victorville, CA 92395",
+      "lat": 34.485332,
+      "lng": -117.310196,
+      "source": "Dossier-named; Beverage Industry (West Coast production facility, 850k sq ft, cold/hot-fill CSD, energy drinks, teas, juices, water)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 1
+      }
+    },
+    {
+      "idx": 6,
+      "name": "KDP Mott's Plant - Williamson NY",
+      "city": "Williamson",
+      "state": "NY",
+      "type": "Manufacturing - Juice/Applesauce",
+      "address": "4363 State Route 104, Williamson, NY 14589",
+      "lat": 43.236371,
+      "lng": -77.176978,
+      "source": "Dossier-named (Mott's production); IndustryNet listing - ~1M sq ft, 217 acres, Home of the Brand Mott's",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 197
+      }
+    },
+    {
+      "idx": 7,
+      "name": "KDP Mott's Plant - Aspers PA",
+      "city": "Aspers",
+      "state": "PA",
+      "type": "Manufacturing - Juice/Applesauce",
+      "address": "45 Aspers North Rd, Aspers, PA 17304",
+      "lat": 39.975785,
+      "lng": -77.220423,
+      "source": "Dossier-named (Mott's/juice production); Beverage-World / Yelp - Mott's largest US production operation",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 384
+      }
+    },
+    {
+      "idx": 8,
+      "name": "KDP Beverage Plant - Houston TX",
+      "city": "Houston",
+      "state": "TX",
+      "type": "Manufacturing - Beverage",
+      "address": "5301 Polk St, Houston, TX 77023",
+      "lat": 29.735471,
+      "lng": -95.319727,
+      "source": "Dossier-named (Houston Dr Pepper manufacturing); IndustryNet listing - Houston beverage production. Address approximate, deep-audit to refine",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 500
+      }
+    },
+    {
+      "idx": 9,
+      "name": "KDP Beverage Plant - Northlake IL",
+      "city": "Northlake",
+      "state": "IL",
+      "type": "Manufacturing - Beverage",
+      "address": "500 N Wolf Rd, Northlake, IL 60164",
+      "lat": 41.918007,
+      "lng": -87.903662,
+      "source": "Dossier-named (Northlake beverage production); IndustryNet listing; MAP Mechanical (wastewater treatment plant project). Address approximate",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 1
+      }
+    },
+    {
+      "idx": 10,
+      "name": "KDP Beverage Plant - Waco TX",
+      "city": "Waco",
+      "state": "TX",
+      "type": "Manufacturing - Beverage",
+      "address": "5301 Bagby Ave, Waco, TX 76711",
+      "lat": 31.503764,
+      "lng": -97.161503,
+      "source": "Greater Waco Chamber; Alibaba production guide - Waco facility operational in KDP network, Dr Pepper + other brands. Address approximate",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 1
+      }
+    },
+    {
+      "idx": 11,
+      "name": "KDP Beverage Concentrates Plant - St. Louis MO",
+      "city": "St. Louis",
+      "state": "MO",
+      "type": "Manufacturing - Concentrates/Syrups",
+      "address": "8400 N Broadway, St. Louis, MO 63147",
+      "lat": 38.715265,
+      "lng": -90.229618,
+      "source": "KDP 10-K (Beverage Concentrates segment); IndustryNet listing - St. Louis concentrate/syrup manufacturing. Address approximate",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 20
+      }
+    },
+    {
+      "idx": 12,
+      "name": "KDP Coffee Roasting Plant - Castroville CA",
+      "city": "Castroville",
+      "state": "CA",
+      "type": "Manufacturing - Coffee",
+      "address": "10711 Cara Mia Pkwy, Castroville, CA 95012",
+      "lat": 36.759254,
+      "lng": -121.743628,
+      "source": "Keurig Green Mountain locations page; one of six KDP US coffee roasting facilities. Address approximate",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 1
+      }
+    },
+    {
+      "idx": 13,
+      "name": "KDP Coffee Roasting / K-Cup Plant - Sumner WA",
+      "city": "Sumner",
+      "state": "WA",
+      "type": "Manufacturing - Coffee/K-Cup",
+      "address": "3424 142nd Ave E, Sumner, WA 98390",
+      "lat": 47.225036,
+      "lng": -122.241426,
+      "source": "Waze / Puyallup-Sumner Chamber; Haskell (K-Cup packaging line controls in Sumner); KDP coffee roasting facility",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 100
+      }
+    },
+    {
+      "idx": 14,
+      "name": "KDP Coffee Roasting / Distribution - Knoxville TN",
+      "city": "Knoxville",
+      "state": "TN",
+      "type": "Manufacturing & Distribution - Coffee",
+      "address": "5000 Western Ave, Knoxville, TN 37921",
+      "lat": 35.972701,
+      "lng": -84.003191,
+      "source": "Knoxville Chamber; Manta; Haskell (K-Cup packaging line controls in Knoxville); roasts/packages/distributes specialty coffee. Address approximate",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 1701
+      }
+    },
+    {
+      "idx": 15,
+      "name": "KDP Production / DSD Operations - Tucson AZ",
+      "city": "Tucson",
+      "state": "AZ",
+      "type": "Manufacturing & Distribution - Beverage/DSD",
+      "address": "3401 E Columbia St, Tucson, AZ 85714",
+      "lat": 32.172725,
+      "lng": -110.917068,
+      "source": "KDP press release - Kalil Bottling Co. acquisition (2024); production facility + DSD distribution in Tucson. Address approximate",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 4
+      }
+    },
+    {
+      "idx": 16,
+      "name": "KDP DSD Distribution Center - Tempe AZ",
+      "city": "Tempe",
+      "state": "AZ",
+      "type": "Distribution Center - DSD",
+      "address": "1850 W University Dr, Tempe, AZ 85281",
+      "lat": 33.422218,
+      "lng": -111.967153,
+      "source": "KDP press release - Kalil Bottling Co. acquisition (2024); sales and distribution center in Tempe. Address approximate",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 32
+      }
+    },
+    {
+      "idx": 17,
+      "name": "KDP Distribution Center - Jacksonville FL",
+      "city": "Jacksonville",
+      "state": "FL",
+      "type": "Distribution Center - Beverage",
+      "address": "3800 Fairchild St, Jacksonville, FL 32254",
+      "lat": 30.36584,
+      "lng": -81.731962,
+      "source": "Dun & Bradstreet company profile; Dennis Group (KDP regional hub). Verified street address",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 13
+      }
+    },
+    {
+      "idx": 18,
+      "name": "KDP Distribution Center - Irving TX",
+      "city": "Irving",
+      "state": "TX",
+      "type": "Distribution Center - Beverage/DSD",
+      "address": "2304 Century Center Blvd, Irving, TX 75062",
+      "lat": 32.843407,
+      "lng": -96.894755,
+      "source": "Irving Chamber of Commerce listing; KDP regional distribution hub. Verified street address",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 6209
+      }
+    },
+    {
+      "idx": 19,
+      "name": "KDP Cowpens K-Cup Packaging - Cowpens SC",
+      "city": "Cowpens",
+      "state": "SC",
+      "type": "Manufacturing - Coffee/K-Cup Packaging",
+      "address": "Cowpens, SC 29330",
+      "lat": 35.016998,
+      "lng": -81.804141,
+      "source": "Dossier-named (Cowpens SC K-Cup packaging). Specific street address not located - flag for deep-audit",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 2
+      }
+    },
+    {
+      "idx": 20,
+      "name": "KDP Distribution Center - Indianapolis IN",
+      "city": "Indianapolis",
+      "state": "IN",
+      "type": "Distribution Center - Beverage/DSD",
+      "address": "Indianapolis, IN",
+      "lat": 39.76909,
+      "lng": -86.158018,
+      "source": "Indeed KDP locations (Indiana); regional DSD distribution presence. Specific street address not located - flag for deep-audit",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 12818
+      }
+    },
+    {
+      "idx": 21,
+      "name": "KDP Distribution Center - Evansville IN",
+      "city": "Evansville",
+      "state": "IN",
+      "type": "Distribution Center - DSD",
+      "address": "Evansville, IN",
+      "lat": 37.971559,
+      "lng": -87.57109,
+      "source": "Indeed/KDP office locations list (DSD depot). Specific street address not located - flag for deep-audit",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 292
+      }
+    },
+    {
+      "idx": 22,
+      "name": "KDP Distribution Center - Fontana CA",
+      "city": "Fontana",
+      "state": "CA",
+      "type": "Distribution Center - DSD",
+      "address": "Fontana, CA",
+      "lat": 34.092233,
+      "lng": -117.435048,
+      "source": "Indeed/KDP office locations list (Southern California DSD depot). Specific street address not located - flag for deep-audit",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 439
+      }
+    }
+  ],
+  "geocodedAt": "2026-05-18"
+}

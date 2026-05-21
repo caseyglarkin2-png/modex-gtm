@@ -1,0 +1,64 @@
+{
+  "name": "Universal Intermodal Services - Harvey Chicago Operations Center - Harvey IL",
+  "type": "Intermodal / Drayage container & chassis yard",
+  "coords": { "lat": 41.58770, "lng": -87.64400 },
+  "geofences": {
+    "perimeter": { "south": 41.58620, "west": -87.64550, "north": 41.58880, "east": -87.64200 },
+    "truckGate": { "south": 41.58625, "west": -87.64400, "north": 41.58660, "east": -87.64340 },
+    "dropYards": [
+      { "south": 41.58660, "west": -87.64550, "north": 41.58870, "east": -87.64360 },
+      { "south": 41.58680, "west": -87.64300, "north": 41.58860, "east": -87.64210 }
+    ],
+    "dockAprons": [],
+    "staging": { "south": 41.58680, "west": -87.64360, "north": 41.58780, "east": -87.64260 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 4,
+    "trailersVisible": 250,
+    "trailerParkingCapacity": 600,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 20.9,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.58770,-87.64400,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "0-10",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "locate": "Re-resolved to 250 E 167th St, Harvey IL 60426 — Universal Intermodal Services' Chicago operations center. The EARLIER audit geocoded the wrong building (an older brick industrial building on a mixed residential block) and was flagged low-confidence; this re-audit uses the confirmed address and pins the actual operating drayage yard. Google geocode returned 41.5877278,-87.6439306. Satellite confirms a large open container/chassis drayage yard with an office and maintenance buildings, sitting directly against the CN Harvey rail corridor.",
+    "facilityNature": "An open intermodal/drayage yard — NOT a warehouse. The site is a large paved lot used for chassis storage, container storage, and drayage-tractor parking, with a small office building and maintenance/repair shop buildings. There is essentially no dock-warehouse function.",
+    "truckGate": "The yard is fully enclosed by chain-link fence along E 167th St. Street View (Jul 2024) shows a defined truck-entrance pinch-point — a wide paved gate opening in the fence line off 167th St. truckGate = true (controlled fenced perimeter with a single defined entrance).",
+    "guardShack": "No staffed standalone guard booth observed at the gate opening — a fenced entrance with no median booth and no barrier arm visible. Check-in is presumed handled at the interior office building. Classed remoteGs = true; guardShack flagged uncertain (a small gate booth could exist but is not visible in imagery).",
+    "dockDoors": "No warehouse dock bank. The maintenance/repair shop buildings have a handful of service-bay doors only — dockDoors 0-10 (effectively a maintenance shop, not loading docks).",
+    "drop": "The dominant feature is massive chassis and container storage — hundreds of chassis in skeletal rows plus stacked containers across the open lot. dropArea 50+, dropYard true.",
+    "railServed": "The CN Harvey (CN Gateway) intermodal rail corridor runs immediately west of the yard, and the yard exists to dray containers to/from that ramp — but NO rail spur runs into this property itself. railServed = false.",
+    "fastLaneOpportunity": "Very large open paved yard with abundant unused width at the entrance — ample room for an express/bypass lane.",
+    "urbanRural": "Harvey IL is inside the dense south-suburban Chicago metro fabric — Urban.",
+    "geofences": "Perimeter captures the fenced drayage yard: ~290 m N-S x ~292 m E-W ≈ 21 acres. dropYards boxes cover the chassis/container storage blocks; truckGate box is the 167th St entrance pinch-point."
+  },
+  "method": "deep-audit"
+}

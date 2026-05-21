@@ -1,0 +1,45 @@
+{
+  "name": "Campbell's - Milwaukee WI",
+  "type": "Manufacturing - spice production (Campbell Soup Supply Co.)",
+  "coords": { "lat": 42.9525, "lng": -87.9182 },
+  "geofences": {
+    "perimeter": { "south": 42.9516, "west": -87.9193, "north": 42.9537, "east": -87.9175 },
+    "truckGate": { "south": 42.95165, "west": -87.91865, "north": 42.95205, "east": -87.91825 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 42.95225, "west": -87.91875, "north": 42.95275, "east": -87.91830 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 6, "trailersVisible": 1, "trailerParkingCapacity": 6,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 7.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.9525,-87.9182,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "dockDoors", "dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "identity": "Roster address (445 South 32nd Street) and roster coords are wrong - they land in a residential Milwaukee neighborhood. The Campbell's Milwaukee facility is the Campbell Soup Supply Co. spice plant at 500 W Edgerton Ave, Milwaukee WI 53207, operating since 1966 as Campbell's only US spice operation. OSM confirms the building and company at 42.95258,-87.91817; satellite shows a brick/white industrial building with heavy rooftop process silos/tanks. Locked center 42.9525,-87.9182.",
+    "truckGate": "The site has chain-link perimeter fencing along the W Edgerton frontage, but the single driveway from W Edgerton Ave appears OPEN (no barrier arm, no closed sliding/swing gate panel, no guard booth) in 2025 Street View and z21 satellite. STOP/wrong-way signage at the throat but no physical control. Called truckGate=false (open driveway despite perimeter fence) - medium confidence; a swing gate could be present and held open.",
+    "guardShack": "No booth structure at the driveway entrance.",
+    "drivewayLong": "Driveway runs a long straight ~80m from W Edgerton Ave to the building, through the parking lot to the W truck yard - holds 3+ trucks.",
+    "dockDoors": "Modest loading on the W building face; Street View shows a prominent 'TM TRUCK' overhead door plus adjacent doors. A specialized spice plant - estimated 4-8 dock/overhead doors -> 0-10 band. Low confidence on exact count.",
+    "dropArea": "No marked trailer-parking stalls with parked trailers; the W yard is a paved process/maneuvering area. dropArea NONE, dropYard false.",
+    "entryExitTogether": "Single driveway serves entry and exit.",
+    "urbanRural": "Dense Milwaukee industrial district immediately west of General Mitchell International Airport - Urban.",
+    "railServed": "No rail spur runs into the property; a rail corridor exists in the broader district but not onto this parcel."
+  },
+  "method": "deep-audit"
+}

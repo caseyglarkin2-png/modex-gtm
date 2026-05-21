@@ -1,0 +1,55 @@
+{
+  "name": "Pepperidge Farm - Lakeland FL",
+  "type": "Manufacturing - bakery and crackers",
+  "coords": { "lat": 28.07405, "lng": -81.98150 },
+  "geofences": {
+    "perimeter": { "south": 28.07270, "west": -81.98400, "north": 28.07600, "east": -81.97850 },
+    "truckGate": { "south": 28.07315, "west": -81.98210, "north": 28.07345, "east": -81.98165 },
+    "dropYards": [
+      { "south": 28.07400, "west": -81.98290, "north": 28.07475, "east": -81.98180 }
+    ],
+    "dockAprons": [
+      { "south": 28.07355, "west": -81.98230, "north": 28.07420, "east": -81.97990 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 44,
+    "trailersVisible": 24,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 38.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@28.07405,-81.98150,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "postGateStaging"],
+  "fieldNotes": {
+    "truckGate": "Controlled fenced entry. Perimeter chain-link fence runs continuously along Interstate Drive; the truck driveway enters through a single gap in the fence at ~28.0733, -81.9819. Web listings note visitors must show a driver's license at the gate for a parking pass - corroborates a manned/controlled gate.",
+    "guardShack": "A small ~1-vehicle-footprint structure sits on the east side of the driveway opening at the property line - a gatehouse/guard booth. A second small structure visible in the dock-apron imagery near the entry.",
+    "remoteGs": "False - guard shack present, so not a remote/kiosk check-in.",
+    "postGateStaging": "Large paved apron inside the gate before the dock bank can hold queued trucks; medium confidence.",
+    "drivewayLong": "Long approach from the Interstate Drive gate across a deep paved apron to the south-face dock bank - room for 3+ trucks.",
+    "entryExitTogether": "Single controlled truck gate off Interstate Drive serving both inbound and outbound.",
+    "dockDoors": "Long dock bank along the south face with ~15-24 trailers backed in and many more empty dock positions; estimated ~40-50 doors total - band 25-50.",
+    "dropArea": "Trailers parked without tractors in the NW-side drop yard and along the building's north/west edge; band 25-50.",
+    "dropYard": "Dedicated trailer-storage area at the NW corner of the property.",
+    "urbanRural": "Lakeland FL - industrial corridor flanking I-4 with adjacent large warehouses, an electrical substation, and nearby residential; classified Urban.",
+    "siteAreaAcres": "~38 acres from perimeter box (~365m N-S x ~540m E-W).",
+    "railServed": "No rail spur enters the property.",
+    "status": "Yelp marks the retail/outlet listing as CLOSED, but 2026 Maxar satellite imagery shows an active operation - trailers backed into docks, process equipment running. Audited as an operating facility."
+  },
+  "method": "deep-audit"
+}

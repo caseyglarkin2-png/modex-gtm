@@ -1,0 +1,66 @@
+{
+  "name": "Pactiv Evergreen - Stockton CA",
+  "type": "Manufacturing Plant (Foodservice; co-located warehouse)",
+  "coords": { "lat": 37.89400, "lng": -121.26035 },
+  "geofences": {
+    "perimeter": { "south": 37.89255, "west": -121.26165, "north": 37.89540, "east": -121.25910 },
+    "truckGate": { "south": 37.89255, "west": -121.26020, "north": 37.89300, "east": -121.25955 },
+    "dropYards": [
+      { "south": 37.89300, "west": -121.26100, "north": 37.89470, "east": -121.25985 }
+    ],
+    "dockAprons": [
+      { "south": 37.89300, "west": -121.26110, "north": 37.89480, "east": -121.26005 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40,
+    "trailersVisible": 22,
+    "trailerParkingCapacity": 35,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 16.5,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.89400,-121.26035,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes", "truckGate"],
+  "fieldNotes": {
+    "truckGate": "The truck dock court runs along the SW face of the building - a long fenced corridor shared with the rail spur. Mar-2026 Street View at the SE corridor mouth (where it meets the public street and crosses the rail) shows a chain-link perimeter fence with a sliding gate across the truck corridor entrance. The NE office/visitor frontage on Performance Drive is open (no barrier, no booth) but the truck/dock side is fence-and-gate controlled. Verdict: gated truck side.",
+    "guardShack": "No staffed guard booth visible at either the SE corridor gate or the NE office entrance. The corridor gate is an unmanned chain-link sliding gate.",
+    "remoteGs": "True - there IS a controlled (fenced + sliding-gate) truck entrance but NO guard booth, implying badge/kiosk/call-box check-in.",
+    "dockDoorCount": "Long dock bank along the building's SW face into the truck corridor; ~40 doors estimated from the regular bay rhythm and trailers backed in across two satellite passes. Band 25-50 - flagged as an estimate.",
+    "dropArea": "Trailers parked tractor-less in the SW corridor truck court alongside the dock-backed trailers; ~22 trailers visible, court holds noticeably more.",
+    "postGateStaging": "The SW corridor between the gate and the dock doors is a long deep paved truck court that holds a substantial queue inside the fence.",
+    "drivewayLong": "The fenced SW corridor is ~340 m long - easily holds a 3+ truck queue inside the property.",
+    "railServed": "A multi-track rail spur runs the length of the SW corridor directly past the dock face and crosses the public street at the SE end (grade crossing with signals visible in Street View). The building is genuinely rail-served.",
+    "urbanRural": "Located in a dense large-scale logistics/distribution park on the south side of Stockton CA (near I-5/Hwy 99), surrounded by other large warehouses - judged Urban.",
+    "entryLanes": "Single-lane fenced corridor mouth; entry/exit share it - flagged uncertain.",
+    "siteAreaAcres": "Perimeter box ~16.5 acres covering the single large building, NE office parking and the SW dock corridor; the building is one tenant unit within a larger multi-building park."
+  },
+  "method": "deep-audit"
+}

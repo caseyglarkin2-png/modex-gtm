@@ -1,0 +1,68 @@
+{
+  "name": "Pactiv Evergreen - Romeoville Regional Mixing Center IL",
+  "type": "Distribution Center / Regional Mixing Center",
+  "coords": { "lat": 41.627000, "lng": -88.116500 },
+  "geofences": {
+    "perimeter": { "south": 41.62290, "west": -88.11920, "north": 41.63080, "east": -88.11270 },
+    "truckGate": { "south": 41.62600, "west": -88.11600, "north": 41.62650, "east": -88.11520 },
+    "dropYards": [
+      { "south": 41.62420, "west": -88.11920, "north": 41.63010, "east": -88.11790 },
+      { "south": 41.62450, "west": -88.11420, "north": 41.62960, "east": -88.11290 }
+    ],
+    "dockAprons": [
+      { "south": 41.62430, "west": -88.11830, "north": 41.62990, "east": -88.11760 },
+      { "south": 41.62460, "west": -88.11460, "north": 41.62950, "east": -88.11390 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 91,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 180,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 50.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.627000,-88.116500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "truckGate", "guardShack"],
+  "fieldNotes": {
+    "truckGate": "The RMC is reached by an open access drive off Taylor Rd; no barrier arm, sliding gate or checkpoint pinch-point is visible at the property line. A perimeter fence is visible around the dock yard edges, but the road entrance itself reads as an open drive. Classified false, flagged uncertain (entrance Street View panos placed the camera inside the yard rather than at the road gate).",
+    "guardShack": "No clear guard-booth structure resolved at the road entrance; a small white structure sits near the entrance drive but could not be confirmed as a staffed booth versus a utility/water structure. Classified false, flagged uncertain.",
+    "remoteGs": "False — no confirmed controlled truck gate.",
+    "dockDoors": "Web research confirms 91 dock openings plus two 12x15 ft drive-through doors (Pizzuti build-to-suit project page). 50+ band.",
+    "dropArea": "Trailer drop yards run the full length of both the west dock face (along the creek) and the east dock face; ~90 trailers visible, capacity well over 100. 50+ band.",
+    "shipRcvSeparate": "Dock banks on both the west and east faces of the building serve physically separate inbound/outbound flows.",
+    "railServed": "A rail line runs along the west side of the property within the drainage corridor.",
+    "fastLaneOpportunity": "Heavy-duty drive lanes and very wide concrete dock aprons (designed for ample truck maneuverability) provide room to add a bypass/express lane.",
+    "buildingCount": "Single ~898,000 sq ft build-to-suit distribution building (expandable to 1.3M sq ft per the developer).",
+    "urbanRural": "Romeoville logistics corridor — large speculative-warehouse cluster on the edge of town adjoining farm fields; classified Rural per the rubric tie-break toward small-town/edge-of-town industrial.",
+    "siteAreaAcres": "Perimeter box covers the ~898k sq ft building plus its full dock yards and parking — roughly 50 acres."
+  },
+  "method": "deep-audit"
+}

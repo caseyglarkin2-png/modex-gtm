@@ -1,0 +1,57 @@
+{
+  "name": "Nestlé Beverage - Anderson IN",
+  "type": "Beverage manufacturing plant + distribution center",
+  "coords": { "lat": 40.03820, "lng": -85.74400 },
+  "geofences": {
+    "perimeter": { "south": 40.03390, "west": -85.74920, "north": 40.04160, "east": -85.73980 },
+    "truckGate": { "south": 40.03850, "west": -85.74820, "north": 40.03930, "east": -85.74720 },
+    "dropYards": [
+      { "south": 40.03520, "west": -85.74720, "north": 40.03900, "east": -85.74480 },
+      { "south": 40.03640, "west": -85.74480, "north": 40.03940, "east": -85.74380 }
+    ],
+    "dockAprons": [
+      { "south": 40.03640, "west": -85.74660, "north": 40.03960, "east": -85.74560 },
+      { "south": 40.03560, "west": -85.74560, "north": 40.03680, "east": -85.74420 }
+    ],
+    "staging": { "south": 40.03840, "west": -85.74720, "north": 40.03960, "east": -85.74480 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 260,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 80.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.03820,-85.74400,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "truckGateCount"],
+  "fieldNotes": {
+    "locating": "Roster coords (40.171509, -85.766582) landed in farmland ~15 km NW of the plant. Web research established the Nestlé beverage factory + DC is south of Anderson along I-69 (a.k.a. 4301 W 450 S / 4301 W 73rd St). The correct building - a ~1.1M sq ft multi-section plant with milk/liquid storage tanks on the NE and large trailer drop yards on the W - was located at approximately 40.0382, -85.7440 ('I-69/Hwy 38 west of exit 222, north side', per the Nesquik Bunny landmark). Locked center 40.03820, -85.74400.",
+    "truckGate": "Modern (2008-built, $359M) Nestlé beverage factory + distribution center on a fully private campus with a perimeter road loop, surrounded by buffer land, ponds and farmland. A controlled, guarded truck gate is near-certain for a food-grade beverage plant + DC of this scale; the truck flow enters from the W side. The exact barrier arm could not be isolated in satellite imagery and there is no public Street View reaching the entrance, so flagged uncertain.",
+    "guardShack": "No guard booth positively confirmed in available overhead imagery; classified guardShack false with remoteGs true (kiosk / app check-in) as the conservative read - low confidence on the pair.",
+    "dockDoors": "Large dock banks on the W and SW building faces with many trailers backed in; estimated 50+ doors across faces - banded 50+.",
+    "dropArea": "Very large trailer drop yards on the W and SW: multiple long rows holding well over 150 trailers in the captured imagery - clearly 50+.",
+    "dropYard": "Dedicated large trailer-storage lots, separate from the active dock aprons.",
+    "shipRcvSeparate": "Distinct dock clusters on the W (DC/distribution) and SW (factory) faces suggest physically separate ship/receive operations - medium confidence.",
+    "fastLaneOpportunity": "Wide paved aprons and a private road loop with ample width give clear room for an express/bypass lane.",
+    "railServed": "No rail spur runs into the property; the plant is entirely truck-served.",
+    "urbanRural": "South of Anderson along I-69 amid farmland and an edge-of-metro industrial park; per rubric, classified Rural (open-country/edge setting).",
+    "siteAreaAcres": "Derived from perimeter box (~850m N-S x ~800m E-W) ~ 80 acres for the campus footprint.",
+    "buildingCount": "Main factory/DC building plus an ancillary structure; effectively a combined factory + distribution center under one campus.",
+    "multiStep": "No second checkpoint visible."
+  },
+  "method": "deep-audit"
+}

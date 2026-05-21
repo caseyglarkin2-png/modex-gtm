@@ -1,0 +1,69 @@
+{
+  "name": "Coca-Cola Consolidated - Indianapolis Production Facility, IN",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 39.80390, "lng": -86.24550 },
+  "geofences": {
+    "perimeter": { "south": 39.80240, "west": -86.24970, "north": 39.80500, "east": -86.24340 },
+    "truckGate": { "south": 39.80280, "west": -86.24770, "north": 39.80320, "east": -86.24710 },
+    "dropYards": [
+      { "south": 39.80300, "west": -86.24830, "north": 39.80470, "east": -86.24680 }
+    ],
+    "dockAprons": [
+      { "south": 39.80450, "west": -86.24640, "north": 39.80500, "east": -86.24420 },
+      { "south": 39.80280, "west": -86.24420, "north": 39.80470, "east": -86.24340 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 50,
+    "trailersVisible": 65,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 38.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.8039,-86.2455,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "dockDoorCount", "dockDoors", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "facility": "Coca-Cola Consolidated Indianapolis manufacturing facility at 5000 W 25th St, operating since 1968. Four production lines (2 PET/rPET bottle, 2 can) plus a production warehouse; $35M glass-bottle line expansion announced May 2026. Roster lat/lng (geocode moved 1523m) landed on-target; the large white-roofed plant at the coordinates matches.",
+    "truckGate": "No barrier arm, gate, or guard booth. Street View (2024-07) of the main driveway off W 25th St shows a wide open entrance with a Coca-Cola entrance sign but no barrier or checkpoint. The driveway leads into the car parking lot and onward to the trailer yard.",
+    "guardShack": "No staffed booth at the property line. A small canopy/structure sits inside the yard near the parking/yard boundary but is not a gate booth. Listed uncertain.",
+    "remoteGs": "False - no truck gate exists.",
+    "dockDoors": "Dock-door rows on the north face and east face, each with multiple trailers backed in. Total estimated ~50; banded 50+ but could be 25-50 - flagged uncertain.",
+    "dropArea": "Large herringbone trailer drop yard on the west side with well over 50 trailers/tankers parked.",
+    "shipRcvSeparate": "Dock banks on physically separate building faces (north face vs. east face), consistent with separate shipping/receiving.",
+    "drivewayLong": "Deep open paved yard between the entrance and the trailer yard / docks; ample stacking for 3+ trucks.",
+    "fastLaneOpportunity": "Wide open driveway apron and extensive paved width at the entrance; room to add an express lane.",
+    "buildingCount": "One large connected plant/warehouse with an attached south office wing (counted as 2); a small NE structure (possible scale/canopy) not counted as a full building.",
+    "railServed": "No rail spur enters the property.",
+    "urbanRural": "Within Indianapolis metro; bordered by dense residential subdivisions and near the Indianapolis Motor Speedway. Classified Urban.",
+    "scale": "No truck scale identified in imagery."
+  },
+  "method": "deep-audit"
+}

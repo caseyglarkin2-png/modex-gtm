@@ -1,0 +1,52 @@
+{
+  "name": "Danone - Bridgeton NJ",
+  "type": "Plant-based beverage plant (refrigerated)",
+  "coords": { "lat": 39.445900, "lng": -75.213800 },
+  "geofences": {
+    "perimeter": { "south": 39.444500, "west": -75.215100, "north": 39.447500, "east": -75.212200 },
+    "truckGate": { "south": 39.446900, "west": -75.213500, "north": 39.447400, "east": -75.213000 },
+    "dropYards": [
+      { "south": 39.444900, "west": -75.213500, "north": 39.445700, "east": -75.212600 }
+    ],
+    "dockAprons": [
+      { "south": 39.445100, "west": -75.214400, "north": 39.445700, "east": -75.213400 }
+    ],
+    "staging": { "south": 39.445500, "west": -75.214400, "north": 39.446200, "east": -75.213000 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 24,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 16.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.445900,-75.213800,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "The main driveway off Rosenhayn Avenue is a wide open driveway with no barrier arm or sliding gate at the road. There are pavement stop/lane markings partway down the drive but no controlled checkpoint structure. The driveway feeds a perimeter loop road to the docks.",
+    "guardShack": "No staffed guard booth at the driveway or anywhere on the perimeter. A Danone monument sign and flags stand at the front; the small structures by the south dock are tank/silo pads (process equipment), not gate booths.",
+    "remoteGs": "False - there is no controlled truck gate at all.",
+    "dropYard": "A dedicated trailer drop yard on the SE side of the property holds ~12 trailers parked in angled marked stalls, separate from the active dock face.",
+    "postGateStaging": "A large paved maneuvering/staging area sits inside the property between the perimeter road and the south dock face.",
+    "drivewayLong": "The driveway plus the perimeter loop road to the docks is long, with ample room for a 3+ truck queue.",
+    "dockDoors": "Dock face along the building's south side with trailers backed in; estimate ~22 doors, banded 10-25 - moderate confidence due to trailer occlusion.",
+    "dropArea": "~12 trailers in marked drop stalls in the SE drop yard, banded 10-25.",
+    "urbanRural": "Rural - the plant sits on the edge of Bridgeton, NJ (a small South Jersey city) with farmland, woods, and scattered houses around it; not dense metro fabric.",
+    "operationalNote": "Closure announced - Danone plans to shut this plant Aug 2, 2026 with 114 layoffs, relocating Silk production to Mount Crawford VA, Dallas TX, and Jacksonville FL. Still operating as of the May 2026 audit date; imagery (satellite + Dec 2025 Street View) shows active trailers and dock use."
+  },
+  "method": "deep-audit"
+}

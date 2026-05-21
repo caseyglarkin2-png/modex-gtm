@@ -1,0 +1,72 @@
+{
+  "name": "John Deere Kernersville (Deere-Hitachi Construction) - Kernersville NC",
+  "type": "Assembly Plant",
+  "coords": { "lat": 36.13670, "lng": -80.09250 },
+  "geofences": {
+    "perimeter": { "south": 36.12950, "west": -80.09720, "north": 36.14050, "east": -80.08250 },
+    "truckGate": { "south": 36.13450, "west": -80.09160, "north": 36.13530, "east": -80.09060 },
+    "dropYards": [
+      { "south": 36.13420, "west": -80.09080, "north": 36.13680, "east": -80.08820 },
+      { "south": 36.13180, "west": -80.08560, "north": 36.13420, "east": -80.08340 }
+    ],
+    "dockAprons": [
+      { "south": 36.13560, "west": -80.09380, "north": 36.13720, "east": -80.09180 },
+      { "south": 36.13320, "west": -80.08800, "north": 36.13460, "east": -80.08660 }
+    ],
+    "staging": { "south": 36.13380, "west": -80.09120, "north": 36.13470, "east": -80.08980 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30,
+    "trailersVisible": 80,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 2,
+    "buildingCount": 6,
+    "siteAreaAcres": 145.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.13670,-80.09250,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity", "truckGateCount"],
+  "fieldNotes": {
+    "truckGate": "Confirmed in 2026-03 Street View on John Deere Rd: a controlled truck entrance to the Main Campus - chain-link perimeter fence with sliding gate sections across the drive, entrance lane pinch-point. The East Campus has its own gated access on a separate internal/access road; truckGateCount set to 2.",
+    "guardShack": "Confirmed: a white guard booth (~1-vehicle footprint) sits beside the Main Campus entrance lane, clearly visible in 2026-03 Street View and z19 satellite. Staffed checkpoint.",
+    "remoteGs": "False - a physical staffed guard booth is present.",
+    "postGateStaging": "Paved/yard areas inside the gate before the dock banks can hold queuing trucks.",
+    "drivewayLong": "Long access drives from John Deere Rd into the campus and between the Main and East campuses - can stack 3+ trucks.",
+    "dockDoors": "25-50: dock banks on the Main Campus and the East Campus W face show continuous dock-door rhythm with trailers backed in. Counted ~30; some building faces obscured by construction.",
+    "dropArea": "50+: extensive trailer parking and staging across both campuses - z19 imagery shows dozens of trailers in rows, plus large finished-excavator staging yards. High-volume drop operation.",
+    "shipRcvSeparate": "Shipping and receiving run from physically separate dock clusters - Main Campus (plate/weld/machine/paint) and East Campus (assembly/logistics) are distinct.",
+    "multipleFacilities": "Campus with two large building clusters - Main Campus and East Campus across 145 acres, connected by internal roads. A new 380,000 sq ft excavator factory was under construction at audit time (visible earthwork/construction).",
+    "urbanRural": "The facility sits on the rural edge of Kernersville surrounded by woods and farmland (John Deere Rd is a rural two-lane road). Per the rubric's edge-of-town/farmland guidance, classified Rural.",
+    "scale": "No truck scale / weigh platform observed in the truck path.",
+    "railServed": "A rail line passes the SW edge of the property; no active spur observed entering either campus - railServed false.",
+    "siteAreaAcres": "Web sources cite 145 acres across the Main and East campuses; used directly. The perimeter bounding box is larger because the two campuses are separated.",
+    "truckGateCount": "Main Campus gate confirmed via Street View; East Campus has its own access - estimated 2 truck gates total (East gate not directly Street-View confirmed).",
+    "fieldNote_construction": "Active construction at audit time - the $70M / 380,000 sq ft small-excavator factory expansion. Some yard geometry will change once complete."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,66 @@
+{
+  "name": "Universal Logistics - Nissan Integrated Logistics Center - Smyrna TN",
+  "type": "Integrated Logistics Center / Sequencing Warehouse",
+  "coords": { "lat": 35.95250, "lng": -86.48480 },
+  "geofences": {
+    "perimeter": { "south": 35.94850, "west": -86.48780, "north": 35.95680, "east": -86.48280 },
+    "truckGate": { "south": 35.94900, "west": -86.48470, "north": 35.94960, "east": -86.48380 },
+    "dropYards": [
+      { "south": 35.95080, "west": -86.48740, "north": 35.95560, "east": -86.48600 },
+      { "south": 35.95480, "west": -86.48560, "north": 35.95620, "east": -86.48420 }
+    ],
+    "dockAprons": [
+      { "south": 35.95020, "west": -86.48680, "north": 35.95560, "east": -86.48560 }
+    ],
+    "staging": { "south": 35.94940, "west": -86.48560, "north": 35.95060, "east": -86.48400 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 95,
+    "trailerParkingCapacity": 230,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 70.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.9525,-86.4848,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "buildingCount"],
+  "fieldNotes": {
+    "siteResolution": "Confirmed via TruckMap, ImportYeti, Indeed and Chamber of Commerce listings as the Nissan Integrated Logistics Center operated by Universal Logistics at 200 Sam Griffin Rd, Smyrna TN 37167. A single very large (~1.5M sq ft) low white-roof warehouse running roughly NNE-SSW, immediately southwest of the Nissan Smyrna assembly plant. Roster coords landed mid-roof; locked center at 35.95250,-86.48480.",
+    "truckGate": "Z19 satellite of the SW corner shows a clear controlled checkpoint where the main driveway meets the access road: a small guard-booth structure straddling the lane with pedestrian turnstiles alongside, perimeter chain-link fence around the whole property. Street View of Sam Griffin Rd / the back access road confirms continuous perimeter fencing. truckGate = true.",
+    "guardShack": "A distinct small booth-footprint structure sits in the truck lane at the SW entrance (visible in the z19 SW-corner crop) with the turnstile array beside it. Consistent with a staffed guard booth controlling a large auto-OEM logistics facility. guardShack = true; remoteGs = false.",
+    "drivewayLong": "The internal driveway from the SW gate runs a long distance up the SW/NW face of the building before reaching the dock aprons - easily holds a 3+ truck queue. drivewayLong = true.",
+    "docks": "Dock doors are concentrated on the long NW face of the building; z19 NW crop shows a continuous bank of dock doors with many trailers backed in. Estimated ~70 doors across the NW face; flagged uncertain - the building is long and partly cut off in tight imagery.",
+    "dropYard": "Extensive marked trailer-parking rows along the NW side of the building and a second cluster near the NE end - dozens of dropped trailers without tractors. Clear dedicated drop-yard character. dropArea 50+, dropYard = true.",
+    "fastLaneOpportunity": "Wide paved gate apron and generous internal driveway width at the SW entrance - physical room to add an express/bypass lane. fastLaneOpportunity = true.",
+    "buildingCount": "Primary structure is one continuous warehouse; a smaller separate office/support building sits near the NE end - counted as 2. multipleFacilities left false as it is not a true campus of large buildings.",
+    "urbanRural": "Smyrna TN is a small town; the facility sits in an edge-of-town industrial setting beside the Nissan plant with farmland/woods to the west and south. Classified Rural per the rubric tie-break.",
+    "railServed": "No rail spur enters the property; CSX line runs east of the Nissan plant but does not serve this warehouse. railServed = false."
+  },
+  "method": "deep-audit"
+}

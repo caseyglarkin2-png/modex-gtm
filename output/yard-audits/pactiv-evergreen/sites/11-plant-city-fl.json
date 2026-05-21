@@ -1,0 +1,61 @@
+{
+  "name": "Pactiv Evergreen - Plant City FL",
+  "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
+  "coords": { "lat": 28.01800, "lng": -82.10030 },
+  "geofences": {
+    "perimeter": { "south": 28.01700, "west": -82.10190, "north": 28.01905, "east": -82.09850 },
+    "truckGate": { "south": 28.01695, "west": -82.09930, "north": 28.01735, "east": -82.09860 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 28.01735, "west": -82.09930, "north": 28.01880, "east": -82.09855 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 16,
+    "trailersVisible": 9,
+    "trailerParkingCapacity": 14,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 18.8,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@28.01800,-82.10030,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoors"],
+  "fieldNotes": {
+    "truckGate": "2025 Street View at the dock-apron entrance shows an open paved apron directly off the public road (Henderson Way internal road) with only a 'SHIPPING' directional sign - no barrier arm, sliding gate, or pinch-point lane control.",
+    "guardShack": "No booth structure anywhere at the apron entrance or office entrance; both are open.",
+    "remoteGs": "False because there is no truck gate at all.",
+    "dockDoors": "Single dock bank on the east face; ~9 trailers backed in with apron room for several more. Door count estimated at ~16 from trailer spacing and building depth - flagged as a band estimate.",
+    "drivewayLong": "Internal access road from the SW Henderson Way intersection to the east apron is ~250 m and the apron itself is deep - easily holds a 3+ truck queue off the public road.",
+    "railServed": "A rail line runs parallel just north of the property but no spur enters the site; the building's north face is grass strip only.",
+    "urbanRural": "Edge-of-town industrial park on the SE side of Plant City FL, bordered by wetland/lakes and farmland - judged Rural per the small-town rule.",
+    "dropArea": "No marked trailer-only drop stalls; trailers seen are backed into dock doors."
+  },
+  "method": "deep-audit"
+}

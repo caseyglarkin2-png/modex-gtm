@@ -1,0 +1,663 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.6315,
+              40.5722
+            ],
+            [
+              -75.6258,
+              40.5722
+            ],
+            [
+              -75.6258,
+              40.5775
+            ],
+            [
+              -75.6315,
+              40.5775
+            ],
+            [
+              -75.6315,
+              40.5722
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "boston-beer-company",
+        "name": "Samuel Adams Pennsylvania Brewery - Breinigsville PA",
+        "type": "Brewery / production facility (largest in network; includes ~1M sq ft brewery + warehouse space on ~76 acres)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 170,
+          "trailerParkingCapacity": 250,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 70.3,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.6303,
+              40.576
+            ],
+            [
+              -75.6295,
+              40.576
+            ],
+            [
+              -75.6295,
+              40.5766
+            ],
+            [
+              -75.6303,
+              40.5766
+            ],
+            [
+              -75.6303,
+              40.576
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "boston-beer-company",
+        "name": "Samuel Adams Pennsylvania Brewery - Breinigsville PA",
+        "type": "Brewery / production facility (largest in network; includes ~1M sq ft brewery + warehouse space on ~76 acres)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.6303,
+              40.573
+            ],
+            [
+              -75.628,
+              40.573
+            ],
+            [
+              -75.628,
+              40.5748
+            ],
+            [
+              -75.6303,
+              40.5748
+            ],
+            [
+              -75.6303,
+              40.573
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "boston-beer-company",
+        "name": "Samuel Adams Pennsylvania Brewery - Breinigsville PA",
+        "type": "Brewery / production facility (largest in network; includes ~1M sq ft brewery + warehouse space on ~76 acres)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.6313,
+              40.5746
+            ],
+            [
+              -75.63,
+              40.5746
+            ],
+            [
+              -75.63,
+              40.576
+            ],
+            [
+              -75.6313,
+              40.576
+            ],
+            [
+              -75.6313,
+              40.5746
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "boston-beer-company",
+        "name": "Samuel Adams Pennsylvania Brewery - Breinigsville PA",
+        "type": "Brewery / production facility (largest in network; includes ~1M sq ft brewery + warehouse space on ~76 acres)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.628,
+              40.574
+            ],
+            [
+              -75.6268,
+              40.574
+            ],
+            [
+              -75.6268,
+              40.5762
+            ],
+            [
+              -75.628,
+              40.5762
+            ],
+            [
+              -75.628,
+              40.574
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "boston-beer-company",
+        "name": "Samuel Adams Pennsylvania Brewery - Breinigsville PA",
+        "type": "Brewery / production facility (largest in network; includes ~1M sq ft brewery + warehouse space on ~76 acres)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.63,
+              40.5748
+            ],
+            [
+              -75.6288,
+              40.5748
+            ],
+            [
+              -75.6288,
+              40.5758
+            ],
+            [
+              -75.63,
+              40.5758
+            ],
+            [
+              -75.63,
+              40.5748
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "boston-beer-company",
+        "name": "Samuel Adams Pennsylvania Brewery - Breinigsville PA",
+        "type": "Brewery / production facility (largest in network; includes ~1M sq ft brewery + warehouse space on ~76 acres)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5242,
+              39.1131
+            ],
+            [
+              -84.5212,
+              39.1131
+            ],
+            [
+              -84.5212,
+              39.1153
+            ],
+            [
+              -84.5242,
+              39.1153
+            ],
+            [
+              -84.5242,
+              39.1131
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "boston-beer-company",
+        "name": "Cincinnati Brewery - Cincinnati OH",
+        "type": "Brewery / canning production facility (Over-the-Rhine; $85M canning expansion 2020 quadrupled canning capacity)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 22,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 0,
+          "buildingCount": 5,
+          "siteAreaAcres": 15.7,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.524,
+              39.1142
+            ],
+            [
+              -84.5228,
+              39.1142
+            ],
+            [
+              -84.5228,
+              39.1149
+            ],
+            [
+              -84.524,
+              39.1149
+            ],
+            [
+              -84.524,
+              39.1142
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "boston-beer-company",
+        "name": "Cincinnati Brewery - Cincinnati OH",
+        "type": "Brewery / canning production facility (Over-the-Rhine; $85M canning expansion 2020 quadrupled canning capacity)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5232,
+              39.1141
+            ],
+            [
+              -84.5222,
+              39.1141
+            ],
+            [
+              -84.5222,
+              39.1147
+            ],
+            [
+              -84.5232,
+              39.1147
+            ],
+            [
+              -84.5232,
+              39.1141
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "boston-beer-company",
+        "name": "Cincinnati Brewery - Cincinnati OH",
+        "type": "Brewery / canning production facility (Over-the-Rhine; $85M canning expansion 2020 quadrupled canning capacity)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.312,
+              38.7692
+            ],
+            [
+              -75.3082,
+              38.7692
+            ],
+            [
+              -75.3082,
+              38.7714
+            ],
+            [
+              -75.312,
+              38.7714
+            ],
+            [
+              -75.312,
+              38.7692
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "boston-beer-company",
+        "name": "Milton Brewery (Dogfish Head) - Milton DE",
+        "type": "Brewery / production facility (Dogfish Head main production; acquired by Boston Beer 2019)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 12,
+          "trailersVisible": 3,
+          "trailerParkingCapacity": 15,
+          "truckGateCount": 0,
+          "buildingCount": 2,
+          "siteAreaAcres": 20,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.3094,
+              38.7703
+            ],
+            [
+              -75.3083,
+              38.7703
+            ],
+            [
+              -75.3083,
+              38.7711
+            ],
+            [
+              -75.3094,
+              38.7711
+            ],
+            [
+              -75.3094,
+              38.7703
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "boston-beer-company",
+        "name": "Milton Brewery (Dogfish Head) - Milton DE",
+        "type": "Brewery / production facility (Dogfish Head main production; acquired by Boston Beer 2019)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.311,
+              38.7706
+            ],
+            [
+              -75.31,
+              38.7706
+            ],
+            [
+              -75.31,
+              38.7712
+            ],
+            [
+              -75.311,
+              38.7712
+            ],
+            [
+              -75.311,
+              38.7706
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "boston-beer-company",
+        "name": "Milton Brewery (Dogfish Head) - Milton DE",
+        "type": "Brewery / production facility (Dogfish Head main production; acquired by Boston Beer 2019)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.1037,
+              42.3141
+            ],
+            [
+              -71.1024,
+              42.3141
+            ],
+            [
+              -71.1024,
+              42.3149
+            ],
+            [
+              -71.1037,
+              42.3149
+            ],
+            [
+              -71.1037,
+              42.3141
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "boston-beer-company",
+        "name": "Samuel Adams Boston Brewery - Jamaica Plain, Boston MA",
+        "type": "Brewery / production facility (heritage Jamaica Plain site; smaller footprint, taproom-attached)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 2,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 0,
+          "buildingCount": 3,
+          "siteAreaAcres": 2.4,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.2262,
+              41.5878
+            ],
+            [
+              -74.2196,
+              41.5878
+            ],
+            [
+              -74.2196,
+              41.5928
+            ],
+            [
+              -74.2262,
+              41.5928
+            ],
+            [
+              -74.2262,
+              41.5878
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "boston-beer-company",
+        "name": "Angry Orchard Innovation Cidery - Walden NY",
+        "type": "Cidery / production facility (company-owned 60-acre apple orchard + Innovation Cider House; specialty/small-batch cider production)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 1,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 0,
+          "buildingCount": 2,
+          "siteAreaAcres": 75.6,
+          "railServed": false
+        }
+      }
+    }
+  ]
+}

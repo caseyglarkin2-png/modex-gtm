@@ -1,0 +1,62 @@
+{
+  "name": "Lingua Franca Winery - Salem OR",
+  "type": "Winery / Production Facility",
+  "coords": { "lat": 45.073200, "lng": -123.093450 },
+  "geofences": {
+    "perimeter": { "south": 45.072400, "west": -123.094300, "north": 45.074600, "east": -123.092300 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 45.072800, "west": -123.093700, "north": 45.073150, "east": -123.093250 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 3,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 3,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 9.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@45.073200,-123.093450,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": true,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoors", "connectivityIssue"],
+  "fieldNotes": {
+    "truckGate": "No controlled truck entrance. A long winery driveway runs off Hopewell Road NW (set back, screened by trees/hedgerow with winery signs at the road) to the parking lot and building; no barrier arm, gate, or checkpoint visible.",
+    "guardShack": "No staffed booth anywhere on the property.",
+    "drivewayLong": "Long driveway from Hopewell Road NW past the parking lot to the building cluster, with paved aprons around the building — easily holds 3+ vehicles.",
+    "dockDoors": "Winery production building. No bank of dedicated freight dock doors. The south end has a covered crush-pad structure and an at-grade service apron; ~2-4 service/roll-up doors estimated. Low confidence on exact count.",
+    "dropArea": "No marked trailer-parking stalls with parked trailers.",
+    "buildingCount": "Two distinct structures: the main winery production building and a smaller separate building to the NW with its own paved apron.",
+    "urbanRural": "Eola-Amity Hills (Willamette Valley) — winery surrounded by estate vineyards and farmland on a rural two-lane road, well outside Salem's urban fabric.",
+    "connectivityIssue": "Rural farmland setting away from town; cellular coverage may be moderate. Medium confidence — flagged.",
+    "railServed": "No rail spur into the property."
+  },
+  "method": "deep-audit"
+}

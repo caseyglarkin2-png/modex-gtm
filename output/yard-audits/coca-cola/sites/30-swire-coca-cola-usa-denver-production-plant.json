@@ -1,0 +1,58 @@
+{
+  "name": "Swire Coca-Cola USA - Denver Production Plant, CO",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 39.77010, "lng": -104.96180 },
+  "geofences": {
+    "perimeter": { "south": 39.76870, "west": -104.96450, "north": 39.77190, "east": -104.95950 },
+    "truckGate": { "south": 39.77000, "west": -104.96390, "north": 39.77075, "east": -104.96320 },
+    "dropYards": [
+      { "south": 39.77020, "west": -104.96380, "north": 39.77170, "east": -104.96100 }
+    ],
+    "dockAprons": [
+      { "south": 39.76960, "west": -104.96320, "north": 39.77110, "east": -104.96100 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 85,
+    "truckGateCount": 2,
+    "buildingCount": 3,
+    "siteAreaAcres": 16.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.77010,-104.96180,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes", "truckGateCount", "shipRcvSeparate"],
+  "fieldNotes": {
+    "location": "Roster supplied '14025 E 38th Ave' and coords 39.770555,-104.819041 - that address is NOT a Swire facility and the coordinates landed in a far-east Denver industrial park (unrelated buildings). The confirmed Swire Coca-Cola Denver production plant is at 3825 N York St / 2145 E 40th Ave, Denver, CO 80205. Positively identified: the building's east facade carries a large Coca-Cola logo with the red dynamic-ribbon wave (confirmed in Street View). Locked center ~39.7701,-104.9618.",
+    "facilityNote": "This is the oldest operating Coca-Cola bottling plant in the United States (~90 years old). Swire is building a $475M replacement plant in Colorado Springs (opens spring 2028); the Denver plant is still operating as of May 2026.",
+    "truckGate": "The trailer yard is enclosed by chain-link fencing with chain-link sliding gates (visible in Street View, with bollards). Two gate openings observed on the SW side off the yard road. Controlled truck access.",
+    "guardShack": "No staffed guard booth visible at the chain-link truck gates in Street View or satellite - basic sliding gates only.",
+    "remoteGs": "Truck gate present but no guard shack - check-in is kiosk/remote style.",
+    "entryExitSeparate": "Multiple chain-link gate openings in the yard fence serve as distinct in/out points.",
+    "postGateStaging": "The large fenced trailer yard inside the gate functions as a post-gate holding/queue area before the docks.",
+    "drivewayLong": "The fenced trailer yard is large and deep, easily holding a queue of 3+ trucks between the gate and the dock banks.",
+    "dockDoors": "Large multi-building production+distribution plant - long dock banks span the north and west faces of the warehouse buildings with dozens of trailers backed in. Banded 50+; exact count is an overhead estimate.",
+    "dropArea": "Fenced trailer drop yard with red Coca-Cola trailers/tractors and blue/white trailers - banded 25-50.",
+    "multipleFacilities": "Campus of 3+ connected buildings: the main production plant (Coca-Cola logo facade), a long sawtooth-roof warehouse, and additional warehouse buildings.",
+    "shipRcvSeparate": "Multiple dock faces across the complex but a single integrated operation - could not confirm physically separate ship vs receive clusters; left false, flagged uncertain.",
+    "truckGateCount": "At least 2 gate openings observed in the yard fence; estimate.",
+    "siteAreaAcres": "Derived from perimeter box (~355m N-S x ~430m E-W complex) ~ 16 acres - approximate.",
+    "railServed": "A rail line / intermodal yard runs immediately north of the property, but no spur appears to run into the plant itself - left false.",
+    "urbanRural": "Urban - dense Denver (Cole/Clayton neighborhood) industrial fabric surrounded by residential."
+  },
+  "method": "deep-audit"
+}

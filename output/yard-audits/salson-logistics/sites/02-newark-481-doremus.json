@@ -1,0 +1,64 @@
+{
+  "name": "SalSon Logistics - Newark NJ (481 Doremus Warehouse)",
+  "type": "Food-Grade Warehouse / Container Storage",
+  "coords": { "lat": 40.716800, "lng": -74.130000 },
+  "geofences": {
+    "perimeter": { "south": 40.71460, "west": -74.13230, "north": 40.71850, "east": -74.12800 },
+    "truckGate": { "south": 40.71600, "west": -74.12930, "north": 40.71650, "east": -74.12860 },
+    "dropYards": [
+      { "south": 40.71500, "west": -74.13030, "north": 40.71640, "east": -74.12860 }
+    ],
+    "dockAprons": [
+      { "south": 40.71550, "west": -74.13190, "north": 40.71700, "east": -74.12960 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 38,
+    "trailersVisible": 40,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 16.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.716800,-74.130000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dropArea", "scale"],
+  "fieldNotes": {
+    "truckGate": "Truck entrance off Doremus Avenue at the SE end of the property (~40.7162,-74.1289). Street View (2025) shows a sliding chainlink gate across a wide truck driveway, full chainlink perimeter fencing along Doremus, and a small gatehouse-scale structure beside the entry. Z20 satellite confirms the gated driveway apron and a small booth structure beside the entry lane.",
+    "guardShack": "A small 1-vehicle-footprint structure sits beside the truck-gate driveway (visible in z20 satellite and Street View) — consistent with a staffed gatehouse for an AIB-rated food-grade warehouse / container-storage yard. remoteGs false.",
+    "dockDoors": "Long dock line runs along the SW face of the warehouse with numerous trailers backed in; estimate ~38 doors, 25-50 band.",
+    "dropArea": "Trailer/container drop area along the south and east sides of the property; 10-25 band estimate, flagged uncertain because the large open lot to the SW appears to be shared/adjacent rather than fenced inside the SalSon parcel.",
+    "backupSensitive": "Gate sits directly on Doremus Avenue, a two-lane city arterial; truck queue at the gate would stack onto the public road. Limited stacking depth before the road.",
+    "drivewayLong": "Wide internal driveway/apron from the gate runs deep alongside the building toward the dock face — room for a 3+ truck queue inside the gate.",
+    "multipleFacilities": "Single main warehouse plus a small attached office/secondary structure; not a multi-building campus.",
+    "railServed": "No rail spur enters this parcel; the Newark rail corridor is nearby but does not serve this building directly.",
+    "scale": "No truck scale positively identified from overhead imagery; left uncertain."
+  },
+  "method": "deep-audit"
+}

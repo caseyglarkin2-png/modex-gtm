@@ -1,0 +1,45 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+Danone - Mount Crawford VA,Multi-category beverage plant (refrigerated),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@38.36880,-78.93980,400m/data=!3m1!1e3"
+Danone - Minster OH,Fresh yogurt plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@40.38440,-84.37300,400m/data=!3m1!1e3"
+Danone - Jacksonville FL (plant),Coffee & creamer plant (refrigerated),#4,Gate + GS (BU sens.),,,,,,,,,,,YES,YES,,,YES,,YES,YES,YES,,1,1,,,YES,,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@30.33240,-81.69790,400m/data=!3m1!1e3"
+Danone - Jacksonville FL (distribution center),Regional distribution center (Southeast hub),#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Urban,,,,,
+Danone - City of Industry CA,Plant-based & coffee beverage plant (refrigerated),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,YES,YES,,1,1,,,YES,,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@34.00460,-117.90590,400m/data=!3m1!1e3"
+Danone - Dallas TX,Multi-category beverage plant (refrigerated),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,YES,,YES,Urban,,YES,,YES,"https://www.google.com/maps/@32.704900,-96.921000,400m/data=!3m1!1e3"
+Danone - DuBois PA,Plant-based yogurt plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,YES,,,YES,,,,,Rural,,,,,"https://www.google.com/maps/@41.105800,-78.731100,400m/data=!3m1!1e3"
+Danone - Springfield OR,Plant-based frozen-dessert plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,,,YES,YES,YES,,1,1,,YES,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@44.065600,-123.043500,400m/data=!3m1!1e3"
+Danone - Fort Worth TX,Fresh yogurt plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,YES,YES,,1,1,,,YES,,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@32.741022,-97.339329,400m/data=!3m1!1e3"
+Danone - Bridgeton NJ,Plant-based beverage plant (refrigerated),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,YES,,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@39.445900,-75.213800,400m/data=!3m1!1e3"
+Danone - Chatsworth CA,Plant-based products plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,,YES,,1,1,,YES,,,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@34.23785,-118.60255,400m/data=!3m1!1e3"
+Danone - Portland OR,Frozen yogurt / ice cream plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,,YES,,1,1,,,YES,,,YES,,,,,Urban,,,,YES,"https://www.google.com/maps/@45.56475,-122.57250,400m/data=!3m1!1e3"
+Danone - West Jordan UT,Fresh yogurt plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@40.58110,-112.03600,400m/data=!3m1!1e3"
+Danone - Scottsdale AZ,Equipment / dispensing operations site,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,,,,,,YES,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@33.61915,-111.91230,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,6,43%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,1,7%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,7,50%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,14,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,3,21%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,4,29%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,1,7%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,13,93%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,14,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,14,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

@@ -1,0 +1,488 @@
+{
+  "account": "Pactiv Evergreen",
+  "generatedAt": "2026-05-18",
+  "facilityCount": 30,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Pactiv Evergreen - Aberdeen NC",
+      "city": "Aberdeen",
+      "state": "NC",
+      "type": "Manufacturing Plant (Food Merchandising; foam tray/pad converting)",
+      "address": "3299 NC Hwy 5, Aberdeen, NC 28315",
+      "lat": 35.138989,
+      "lng": -79.437773,
+      "source": "Pactiv Evergreen Locations page (archived 2023-12); dossier-named PINC reference site (NC job post)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 101
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Pactiv Evergreen - Canandaigua NY",
+      "city": "Canandaigua",
+      "state": "NY",
+      "type": "Manufacturing Plant (Food Merchandising campus)",
+      "address": "5250 North Street, Canandaigua, NY 14424",
+      "lat": 42.903839,
+      "lng": -77.301317,
+      "source": "Pactiv Evergreen Locations page; dossier-named 'Inside the Supply Chain' profiled campus",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Pactiv Evergreen - Canandaigua CTC Distribution Center NY",
+      "city": "Canandaigua",
+      "state": "NY",
+      "type": "Distribution Center",
+      "address": "2480 Sommers Drive, Canandaigua, NY 14424",
+      "lat": 42.909565,
+      "lng": -77.304568,
+      "source": "Pactiv Evergreen Locations page (Warehouses and Distribution Centers section)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Pactiv Evergreen - Temple TX Plant",
+      "city": "Temple",
+      "state": "TX",
+      "type": "Manufacturing Plant (Foodservice)",
+      "address": "3002 Pegasus Drive, Temple, TX 76501",
+      "lat": 31.12963,
+      "lng": -97.337975,
+      "source": "Pactiv Evergreen Locations page; dossier-named hub-and-spoke mixing-center hub",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Pactiv Evergreen - Temple TX Distribution Center",
+      "city": "Temple",
+      "state": "TX",
+      "type": "Distribution Center / Regional Mixing Center",
+      "address": "3776 Pegasus Drive, Temple, TX 76501",
+      "lat": 31.133837,
+      "lng": -97.336759,
+      "source": "Pactiv Evergreen Locations page; dossier-named regional mixing center",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Pactiv Evergreen - Abilene TX",
+      "city": "Abilene",
+      "state": "TX",
+      "type": "Manufacturing Plant (Food Merchandising)",
+      "address": "6450 Five Points Pkwy, Abilene, TX 79603",
+      "lat": 32.459931,
+      "lng": -99.81015,
+      "source": "Pactiv Evergreen Locations page; dossier-named site",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 7,
+      "name": "Pactiv Evergreen - Corsicana TX Plant",
+      "city": "Corsicana",
+      "state": "TX",
+      "type": "Manufacturing Plant (Foodservice)",
+      "address": "4501 E. Highway 31, Corsicana, TX 75109",
+      "lat": 32.075885,
+      "lng": -96.397359,
+      "source": "Pactiv Evergreen Locations page",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 4
+      }
+    },
+    {
+      "idx": 8,
+      "name": "Pactiv Evergreen - Corsicana TX Warehouse",
+      "city": "Corsicana",
+      "state": "TX",
+      "type": "Warehouse / Distribution",
+      "address": "2200 S. Business 45, Corsicana, TX 75110",
+      "lat": 32.075124,
+      "lng": -96.457637,
+      "source": "Pactiv Evergreen Locations page (Warehouses and Distribution Centers section)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 9,
+      "name": "Pactiv Evergreen - Athens GA",
+      "city": "Athens",
+      "state": "GA",
+      "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
+      "address": "600 Dairy Pak Road, Athens, GA 30607",
+      "lat": 33.979548,
+      "lng": -83.389046,
+      "source": "Pactiv Evergreen Locations page",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 10,
+      "name": "Pactiv Evergreen - Cedar Rapids IA",
+      "city": "Cedar Rapids",
+      "state": "IA",
+      "type": "Manufacturing Plant (Filling Equipment / carton filling machinery)",
+      "address": "2400 6th Street SW, Cedar Rapids, IA 52404",
+      "lat": 41.95494,
+      "lng": -91.678837,
+      "source": "Pactiv Evergreen Locations page",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 111
+      }
+    },
+    {
+      "idx": 11,
+      "name": "Pactiv Evergreen - Plant City FL",
+      "city": "Plant City",
+      "state": "FL",
+      "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
+      "address": "2104 Henderson Way, Plant City, FL 33563",
+      "lat": 28.01793,
+      "lng": -82.100535,
+      "source": "Pactiv Evergreen Locations page; 'Inside the Supply Chain' profiled facility",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 129
+      }
+    },
+    {
+      "idx": 12,
+      "name": "Pactiv Evergreen - Raleigh NC",
+      "city": "Raleigh",
+      "state": "NC",
+      "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
+      "address": "2215 South Wilmington Street, Raleigh, NC 27603",
+      "lat": 35.750876,
+      "lng": -78.640973,
+      "source": "Pactiv Evergreen Locations page",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 13,
+      "name": "Pactiv Evergreen - Turlock CA",
+      "city": "Turlock",
+      "state": "CA",
+      "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
+      "address": "1500 West Main Street, Turlock, CA 95380",
+      "lat": 37.491536,
+      "lng": -120.866032,
+      "source": "Pactiv Evergreen Locations page",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 128
+      }
+    },
+    {
+      "idx": 14,
+      "name": "Pactiv Evergreen - Bedford Park IL",
+      "city": "Bedford Park",
+      "state": "IL",
+      "type": "Manufacturing Plant (Foodservice)",
+      "address": "7200 S. Mason Avenue, Bedford Park, IL 60638",
+      "lat": 41.761038,
+      "lng": -87.769653,
+      "source": "Pactiv Evergreen Locations page (Foodservice manufacturing; multiple buildings on S. Mason Ave)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 19
+      }
+    },
+    {
+      "idx": 15,
+      "name": "Pactiv Evergreen - Bridgeview IL",
+      "city": "Bridgeview",
+      "state": "IL",
+      "type": "Manufacturing Plant (Foodservice; ISCC PLUS certified)",
+      "address": "7701 W. 79th Street, Bridgeview, IL 60455",
+      "lat": 41.746237,
+      "lng": -87.810149,
+      "source": "Pactiv Evergreen Locations page; ISCC PLUS certification announcement",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 130
+      }
+    },
+    {
+      "idx": 16,
+      "name": "Pactiv Evergreen - Franklin Park IL",
+      "city": "Franklin Park",
+      "state": "IL",
+      "type": "Manufacturing Plant (Food Merchandising)",
+      "address": "2607 N. 25th Ave, Franklin Park, IL 60131",
+      "lat": 41.926483,
+      "lng": -87.864226,
+      "source": "Pactiv Evergreen Locations page",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 17,
+      "name": "Pactiv Evergreen - Manteno IL",
+      "city": "Manteno",
+      "state": "IL",
+      "type": "Manufacturing Plant (Food Merchandising)",
+      "address": "1050 Sycamore St., Manteno, IL 60950",
+      "lat": 41.237499,
+      "lng": -87.817748,
+      "source": "Pactiv Evergreen Locations page",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 18,
+      "name": "Pactiv Evergreen - Frankfort IL",
+      "city": "Frankfort",
+      "state": "IL",
+      "type": "Manufacturing Plant (Foodservice; co-located warehouse)",
+      "address": "437 Center Road, Frankfort, IL 60423",
+      "lat": 41.489891,
+      "lng": -87.843925,
+      "source": "Pactiv Evergreen Locations page",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 19,
+      "name": "Pactiv Evergreen - Romeoville Regional Mixing Center IL",
+      "city": "Romeoville",
+      "state": "IL",
+      "type": "Distribution Center / Regional Mixing Center",
+      "address": "1100 Taylor Road, Romeoville, IL 60446",
+      "lat": 41.624867,
+      "lng": -88.115275,
+      "source": "Pactiv Evergreen Locations page (Warehouses and Distribution Centers section)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 11
+      }
+    },
+    {
+      "idx": 20,
+      "name": "Pactiv Evergreen - Columbus OH",
+      "city": "Columbus",
+      "state": "OH",
+      "type": "Manufacturing Plant (Food Merchandising)",
+      "address": "2120 Westbelt Drive, Columbus, OH 43228",
+      "lat": 39.996034,
+      "lng": -83.122424,
+      "source": "Pactiv Evergreen Locations page",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 55
+      }
+    },
+    {
+      "idx": 21,
+      "name": "Pactiv Evergreen - Conyers GA",
+      "city": "Conyers",
+      "state": "GA",
+      "type": "Manufacturing Plant (Foodservice)",
+      "address": "1501 Rockdale Industrial Blvd, Conyers, GA 30012",
+      "lat": 33.676785,
+      "lng": -84.037382,
+      "source": "Pactiv Evergreen Locations page",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 286
+      }
+    },
+    {
+      "idx": 22,
+      "name": "Pactiv Evergreen - Covington GA Plant",
+      "city": "Covington",
+      "state": "GA",
+      "type": "Manufacturing Plant (Foodservice)",
+      "address": "8170 Alcovy Road, Covington, GA 30014",
+      "lat": 33.612211,
+      "lng": -83.846698,
+      "source": "Pactiv Evergreen Locations page",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 251
+      }
+    },
+    {
+      "idx": 23,
+      "name": "Pactiv Evergreen - Covington GA Distribution Center",
+      "city": "Covington",
+      "state": "GA",
+      "type": "Distribution Center",
+      "address": "15101 Lake Forest Ct., Covington, GA 30014",
+      "lat": 33.605447,
+      "lng": -83.813271,
+      "source": "Pactiv Evergreen Locations page (Warehouses and Distribution Centers section)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 24,
+      "name": "Pactiv Evergreen - Macon GA",
+      "city": "Macon",
+      "state": "GA",
+      "type": "Manufacturing Plant (Food Merchandising)",
+      "address": "7670 Airport Drive, Macon, GA 31216",
+      "lat": 32.705501,
+      "lng": -83.649254,
+      "source": "Pactiv Evergreen Locations page",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 61
+      }
+    },
+    {
+      "idx": 25,
+      "name": "Pactiv Evergreen - Malvern AR",
+      "city": "Malvern",
+      "state": "AR",
+      "type": "Manufacturing Plant (Food Merchandising; ISCC PLUS certified)",
+      "address": "1105 Industrial Lane, Malvern, AR 72104",
+      "lat": 34.379129,
+      "lng": -92.820078,
+      "source": "Pactiv Evergreen Locations page; Malvern AR Facility Fact Sheet (Aug 2024); ISCC PLUS announcement",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 290
+      }
+    },
+    {
+      "idx": 26,
+      "name": "Pactiv Evergreen - Mooresville NC",
+      "city": "Mooresville",
+      "state": "NC",
+      "type": "Manufacturing Plant (Foodservice; ISCC PLUS certified)",
+      "address": "314 Mooresville Blvd., Mooresville, NC 28115",
+      "lat": 35.631521,
+      "lng": -80.786753,
+      "source": "Pactiv Evergreen Locations page; ISCC PLUS certification announcement",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 27,
+      "name": "Pactiv Evergreen - Kinston NC Plant",
+      "city": "Kinston",
+      "state": "NC",
+      "type": "Manufacturing Plant (Foodservice)",
+      "address": "1447 Enterprise Rd, Kinston, NC 28504",
+      "lat": 35.262664,
+      "lng": -77.581635,
+      "source": "Pactiv Evergreen Locations page",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 2103
+      }
+    },
+    {
+      "idx": 28,
+      "name": "Pactiv Evergreen - Moorhead MN",
+      "city": "Moorhead",
+      "state": "MN",
+      "type": "Manufacturing Plant (Food Merchandising)",
+      "address": "3010 42nd Street, Moorhead, MN 56560",
+      "lat": 46.841842,
+      "lng": -96.706159,
+      "source": "Pactiv Evergreen Locations page",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 29,
+      "name": "Pactiv Evergreen - Stockton CA",
+      "city": "Stockton",
+      "state": "CA",
+      "type": "Manufacturing Plant (Foodservice; co-located warehouse)",
+      "address": "1110 Performance Drive, Stockton, CA 95206",
+      "lat": 37.894422,
+      "lng": -121.260196,
+      "source": "Pactiv Evergreen Locations page",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 30,
+      "name": "Pactiv Evergreen - Plattsburgh NY",
+      "city": "Plattsburgh",
+      "state": "NY",
+      "type": "Manufacturing Plant (Food Merchandising)",
+      "address": "74 Weed Street, Plattsburgh, NY 12901",
+      "lat": 44.708769,
+      "lng": -73.453892,
+      "source": "Pactiv Evergreen Locations page",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 1
+      }
+    }
+  ],
+  "geocodedAt": "2026-05-18"
+}

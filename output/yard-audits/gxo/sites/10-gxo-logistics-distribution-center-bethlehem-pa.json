@@ -1,0 +1,55 @@
+{
+  "name": "GXO Logistics Distribution Center - Bethlehem PA",
+  "type": "Distribution Center",
+  "coords": { "lat": 40.61090, "lng": -75.31565 },
+  "geofences": {
+    "perimeter": { "south": 40.60870, "west": -75.31760, "north": 40.61300, "east": -75.31320 },
+    "truckGate": { "south": 40.60887, "west": -75.31708, "north": 40.60923, "east": -75.31662 },
+    "dropYards": [
+      { "south": 40.60955, "west": -75.31680, "north": 40.61280, "east": -75.31575 },
+      { "south": 40.60975, "west": -75.31430, "north": 40.61215, "east": -75.31330 }
+    ],
+    "dockAprons": [
+      { "south": 40.60955, "west": -75.31650, "north": 40.61270, "east": -75.31585 },
+      { "south": 40.60980, "west": -75.31415, "north": 40.61210, "east": -75.31360 }
+    ],
+    "staging": { "south": 40.60840, "west": -75.31720, "north": 40.60900, "east": -75.31640 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 150,
+    "trailersVisible": 110,
+    "trailerParkingCapacity": 220,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 44.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.61090,-75.31565,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "preGateStaging", "dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Controlled truck entrance at the SW corner of the building: a gatehouse/canopy structure sits squarely in the truck lane at the entry to the SW dock court, with channeled lanes (a separate down-arrow lane left of the booth, truck lane past it). A truck with a blue trailer is stopped at the booth in the 2026 Maxar imagery.",
+    "guardShack": "Built gatehouse structure (flat-roofed canopy booth, ~2-3 vehicle footprint) positioned in the truck driveway median at the gate; truck actively stopped at it confirms a staffed check-in point.",
+    "entryLanes": "Gate appears to handle ~1 inbound lane past the booth; exact lane split inferred from pavement markings, low confidence.",
+    "exitLanes": "~1 outbound lane; inferred, low confidence.",
+    "preGateStaging": "Paved internal area south of the gatehouse where trucks can wait before the gate, but it is mixed with internal circulation/parking - medium confidence.",
+    "dockDoorCount": "~1,041,600 sq ft DC (built 2022) with dock doors along both long faces (NE and SW). Estimated 150 total doors from imagery; trailer/door rhythm visible but many doors empty - approximate.",
+    "dropArea": "Multiple striped trailer stalls marked 'DROP POINT 7' / 'DROP POINT 10' across the dock courts; clearly well over 50 drop positions.",
+    "shipRcvSeparate": "Dock doors on two physically separate building faces (NE long face and SW long face) - cross-dock layout with separate dock banks.",
+    "trailerParkingCapacity": "Large striped trailer stall capacity across both dock courts plus dock positions; estimate ~220, approximate.",
+    "railServed": "No rail spur runs into the property; truck-served only.",
+    "urbanRural": "Bethlehem PA / Lehigh Valley distribution corridor adjacent to I-78 - dense major-metro industrial fabric (Majestic Bethlehem Center, 441-acre business park)."
+  },
+  "method": "deep-audit"
+}

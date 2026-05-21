@@ -1,0 +1,54 @@
+{
+  "name": "H-E-B Manufacturing - Houston Snack Plant (Genard Road) - Houston TX",
+  "type": "Manufacturing Plant (Snacks / Tortilla Chips)",
+  "coords": { "lat": 29.843800, "lng": -95.541300 },
+  "geofences": {
+    "perimeter": { "south": 29.84230, "west": -95.54185, "north": 29.84510, "east": -95.54000 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 29.84230, "west": -95.54175, "north": 29.84320, "east": -95.54030 },
+      { "south": 29.84380, "west": -95.54060, "north": 29.84510, "east": -95.54000 }
+    ],
+    "dockAprons": [
+      { "south": 29.84340, "west": -95.54090, "north": 29.84470, "east": -95.54020 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 16,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 130,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 14.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.843800,-95.541300,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "10000 Genard Rd, Houston TX 77041 confirmed - roster ROOFTOP geocode (moved 4 m) landed correctly on the snack-plant building. Verified by satellite (manufacturing building with heavy rooftop process equipment and corn/grain silos consistent with a tortilla-chip plant) and web research.",
+    "truckGate": "The snack plant sits within the large fenced H-E-B Houston manufacturing campus. Campus perimeter has decorative metal fencing, but no barrier arm, sliding gate or guard booth was positively identified at the campus entrances in satellite or Street View - entrances appear as open paved driveways. Classified false but flagged uncertain; a controlled campus gate may exist out of the imagery probed.",
+    "guardShack": "No guard booth identified at the snack-plant area or campus entrances probed.",
+    "multipleFacilities": "The snack plant is one building in a large multi-building H-E-B campus that also contains the Windfern Rd RSC, the milk plant and the bread plant.",
+    "dropYard": "Large trailer drop yards flank the plant - a major drop yard immediately south and additional trailer parking to the NE; campus-wide drop yards extend well beyond.",
+    "dockDoors": "Trailers backed into docks along the plant's NE/E face; estimated ~16 doors - 10-25 band.",
+    "dropArea": "50+ band - the south drop yard alone holds dozens of trailers.",
+    "railServed": "A rail line runs through the broader campus to the SE, but no spur serves the snack-plant building itself.",
+    "urbanRural": "NW Houston - dense urban/suburban industrial fabric, residential immediately adjacent.",
+    "siteAreaAcres": "~14 acres for the snack-plant building and its immediate drop yards; the full H-E-B campus is far larger.",
+    "buildingDescription": "Roster cites 46,000 sq ft (some sources 64,000 sq ft); opened mid-2019; produces plain and flavored tortilla chips."
+  },
+  "method": "deep-audit"
+}

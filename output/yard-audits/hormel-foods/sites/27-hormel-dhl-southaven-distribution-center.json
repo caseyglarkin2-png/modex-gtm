@@ -1,0 +1,68 @@
+{
+  "name": "Hormel / DHL Southaven Distribution Center - Southaven MS",
+  "type": "Distribution Center",
+  "coords": { "lat": 34.98820, "lng": -90.04100 },
+  "geofences": {
+    "perimeter": { "south": 34.98620, "west": -90.04340, "north": 34.99080, "east": -90.03950 },
+    "truckGate": { "south": 34.98640, "west": -90.04300, "north": 34.98700, "east": -90.04230 },
+    "dropYards": [
+      { "south": 34.98660, "west": -90.04300, "north": 34.98980, "east": -90.04130 }
+    ],
+    "dockAprons": [
+      { "south": 34.98680, "west": -90.04280, "north": 34.99000, "east": -90.04180 },
+      { "south": 34.98640, "west": -90.04180, "north": 34.98700, "east": -90.03990 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 44.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.98820,-90.04100,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "guardShack"],
+  "fieldNotes": {
+    "location": "Roster coords (34.988048,-90.040999) landed in the correct industrial park (geocode flagged 6135 m moved). Confirmed via the 8690 Tulane Rd address and web reporting: this is the former Associated Wholesale Grocers (AWG) distribution center in Southaven, MS, renovated (>$12M) and reopened in 2025 as Hormel's largest DC, operated by DHL Supply Chain. Locked center 34.98820,-90.04100 on the large white-roofed warehouse.",
+    "truckGate": "The truck yard is fully enclosed by a barbed-wire-topped chain-link fence (StreetView 2025-04 and 2025-12). A chain-link gate (flanked by yellow bollards) controls the truck drive entrance on the SW side. truckGate true.",
+    "guardShack": "No guard-booth structure was positively confirmed at the truck gate. A small structure exists inside the yard but does not read as a gatehouse beside the gate. Classified guardShack false; flagged uncertain.",
+    "remoteGs": "Modern DHL-operated DC with a fenced gated yard and no confirmed guard booth -> remote/kiosk/app check-in implied -> remoteGs true.",
+    "dockDoors": "50+ dock doors -- long continuous dock banks on the west and south building faces (former AWG grocery DC). Banded 50+, honest overhead estimate.",
+    "dropArea": "50+ untethered trailers parked across the large fenced truck yard -> dropArea 50+.",
+    "dropYard": "Extensive on-site fenced trailer-storage yard distinct from the active dock apron -> dropYard true.",
+    "drivewayLong": "Large fenced yard provides a deep approach able to stack many trucks before the docks.",
+    "fastLaneOpportunity": "Very wide paved gate apron and yard leave clear room for an express/bypass lane.",
+    "urbanRural": "Southaven MS is part of the Memphis metro; the DC sits in a dense suburban industrial park -> Urban.",
+    "buildingCount": "Single very large warehouse building (multi-section roof) -> buildingCount 1.",
+    "shipRcvSeparate": "Dock banks on two faces but operated as one DC flow; no clear separate ship/receive split -> shipRcvSeparate false."
+  },
+  "method": "deep-audit"
+}

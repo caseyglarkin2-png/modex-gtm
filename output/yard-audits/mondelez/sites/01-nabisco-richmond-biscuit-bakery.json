@@ -1,0 +1,64 @@
+{
+  "name": "Nabisco Richmond Biscuit Bakery - Richmond VA",
+  "type": "Manufacturing - biscuit/cookie bakery",
+  "coords": { "lat": 37.49600, "lng": -77.35400 },
+  "geofences": {
+    "perimeter": { "south": 37.49280, "west": -77.35720, "north": 37.49830, "east": -77.35070 },
+    "truckGate": { "south": 37.49440, "west": -77.35540, "north": 37.49490, "east": -77.35470 },
+    "dropYards": [
+      { "south": 37.49460, "west": -77.35640, "north": 37.49720, "east": -77.35510 }
+    ],
+    "dockAprons": [
+      { "south": 37.49500, "west": -77.35480, "north": 37.49600, "east": -77.35200 }
+    ],
+    "staging": { "south": 37.49380, "west": -77.35460, "north": 37.49490, "east": -77.35360 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 84.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.49600,-77.35400,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Internal truck gate inside the property: chain-link fencing crosses the truck driveway ~150m in from S Laburnum Ave, with a gate where the drive meets the fenced trailer/dock yard (z21 imagery at 37.4947,-77.3551). The road-edge driveway entrance itself is open (no road-side barrier).",
+    "guardShack": "Small white/brown-roofed 1-2 vehicle-footprint structure beside the internal gate (visible z21 at 37.4943,-77.3551) - consistent with a staffed guard booth controlling truck-yard access.",
+    "drivewayLong": "Long entrance driveway runs ~150m from S Laburnum Ave intersection along the south building face before reaching the gated yard - ample queue depth for 3+ trucks.",
+    "fastLaneOpportunity": "Wide paved driveway apron and large open yard area at the internal gate; physical room to add an express/bypass lane.",
+    "dropArea": "Large dedicated west-side drop yard with many trailers parked in marked rows (z19 at 37.4950,-77.3555); estimate 55+ trailers visible, capacity ~90.",
+    "dockDoors": "Loading docks with trailers backed in along the south face of the main building; estimate ~40 doors, banded 25-50.",
+    "multipleFacilities": "Three distinct buildings on the property: the main ~1M sq ft bakery, a connected north wing, and a separate brown-roof building at the south.",
+    "scale": "No truck scale clearly visible in overhead imagery; left low-confidence.",
+    "exitLanes": "Single shared in/out gate; outbound lane count not separately determinable."
+  },
+  "method": "deep-audit"
+}

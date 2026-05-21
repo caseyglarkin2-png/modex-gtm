@@ -1,0 +1,2489 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.9428,
+              38.3659
+            ],
+            [
+              -78.9368,
+              38.3659
+            ],
+            [
+              -78.9368,
+              38.3724
+            ],
+            [
+              -78.9428,
+              38.3724
+            ],
+            [
+              -78.9428,
+              38.3659
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Mount Crawford VA",
+        "type": "Multi-category beverage plant (refrigerated)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 93,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.938,
+              38.3656
+            ],
+            [
+              -78.9372,
+              38.3656
+            ],
+            [
+              -78.9372,
+              38.3662
+            ],
+            [
+              -78.938,
+              38.3662
+            ],
+            [
+              -78.938,
+              38.3656
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Mount Crawford VA",
+        "type": "Multi-category beverage plant (refrigerated)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.9417,
+              38.3683
+            ],
+            [
+              -78.9401,
+              38.3683
+            ],
+            [
+              -78.9401,
+              38.3706
+            ],
+            [
+              -78.9417,
+              38.3706
+            ],
+            [
+              -78.9417,
+              38.3683
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Mount Crawford VA",
+        "type": "Multi-category beverage plant (refrigerated)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.9401,
+              38.3695
+            ],
+            [
+              -78.9382,
+              38.3695
+            ],
+            [
+              -78.9382,
+              38.3715
+            ],
+            [
+              -78.9401,
+              38.3715
+            ],
+            [
+              -78.9401,
+              38.3695
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Mount Crawford VA",
+        "type": "Multi-category beverage plant (refrigerated)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.9415,
+              38.3668
+            ],
+            [
+              -78.94,
+              38.3668
+            ],
+            [
+              -78.94,
+              38.3681
+            ],
+            [
+              -78.9415,
+              38.3681
+            ],
+            [
+              -78.9415,
+              38.3668
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Mount Crawford VA",
+        "type": "Multi-category beverage plant (refrigerated)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.9406,
+              38.3672
+            ],
+            [
+              -78.9401,
+              38.3672
+            ],
+            [
+              -78.9401,
+              38.3698
+            ],
+            [
+              -78.9406,
+              38.3698
+            ],
+            [
+              -78.9406,
+              38.3672
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Mount Crawford VA",
+        "type": "Multi-category beverage plant (refrigerated)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3761,
+              40.38255
+            ],
+            [
+              -84.3697,
+              40.38255
+            ],
+            [
+              -84.3697,
+              40.3866
+            ],
+            [
+              -84.3761,
+              40.3866
+            ],
+            [
+              -84.3761,
+              40.38255
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Minster OH",
+        "type": "Fresh yogurt plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 58,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3732,
+              40.3832
+            ],
+            [
+              -84.3725,
+              40.3832
+            ],
+            [
+              -84.3725,
+              40.3837
+            ],
+            [
+              -84.3732,
+              40.3837
+            ],
+            [
+              -84.3732,
+              40.3832
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Minster OH",
+        "type": "Fresh yogurt plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3732,
+              40.3835
+            ],
+            [
+              -84.37,
+              40.3835
+            ],
+            [
+              -84.37,
+              40.386
+            ],
+            [
+              -84.3732,
+              40.386
+            ],
+            [
+              -84.3732,
+              40.3835
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Minster OH",
+        "type": "Fresh yogurt plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3717,
+              40.3839
+            ],
+            [
+              -84.3712,
+              40.3839
+            ],
+            [
+              -84.3712,
+              40.3864
+            ],
+            [
+              -84.3717,
+              40.3864
+            ],
+            [
+              -84.3717,
+              40.3839
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Minster OH",
+        "type": "Fresh yogurt plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.69925,
+              30.33115
+            ],
+            [
+              -81.69625,
+              30.33115
+            ],
+            [
+              -81.69625,
+              30.33345
+            ],
+            [
+              -81.69925,
+              30.33345
+            ],
+            [
+              -81.69925,
+              30.33115
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Jacksonville FL (plant)",
+        "type": "Coffee & creamer plant (refrigerated)",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 18,
+          "trailerParkingCapacity": 28,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 17,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6973,
+              30.33195
+            ],
+            [
+              -81.6968,
+              30.33195
+            ],
+            [
+              -81.6968,
+              30.33235
+            ],
+            [
+              -81.6973,
+              30.33235
+            ],
+            [
+              -81.6973,
+              30.33195
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Jacksonville FL (plant)",
+        "type": "Coffee & creamer plant (refrigerated)",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.697,
+              30.3326
+            ],
+            [
+              -81.69625,
+              30.3326
+            ],
+            [
+              -81.69625,
+              30.33345
+            ],
+            [
+              -81.697,
+              30.33345
+            ],
+            [
+              -81.697,
+              30.3326
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Jacksonville FL (plant)",
+        "type": "Coffee & creamer plant (refrigerated)",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.69925,
+              30.3315
+            ],
+            [
+              -81.6985,
+              30.3315
+            ],
+            [
+              -81.6985,
+              30.3323
+            ],
+            [
+              -81.69925,
+              30.3323
+            ],
+            [
+              -81.69925,
+              30.3315
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Jacksonville FL (plant)",
+        "type": "Coffee & creamer plant (refrigerated)",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6983,
+              30.3315
+            ],
+            [
+              -81.6975,
+              30.3315
+            ],
+            [
+              -81.6975,
+              30.3322
+            ],
+            [
+              -81.6983,
+              30.3322
+            ],
+            [
+              -81.6983,
+              30.3315
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Jacksonville FL (plant)",
+        "type": "Coffee & creamer plant (refrigerated)",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.9073,
+              34.00355
+            ],
+            [
+              -117.9048,
+              34.00355
+            ],
+            [
+              -117.9048,
+              34.0058
+            ],
+            [
+              -117.9073,
+              34.0058
+            ],
+            [
+              -117.9073,
+              34.00355
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - City of Industry CA",
+        "type": "Plant-based & coffee beverage plant (refrigerated)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 14,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 14,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.90605,
+              34.004
+            ],
+            [
+              -117.9056,
+              34.004
+            ],
+            [
+              -117.9056,
+              34.0044
+            ],
+            [
+              -117.90605,
+              34.0044
+            ],
+            [
+              -117.90605,
+              34.004
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - City of Industry CA",
+        "type": "Plant-based & coffee beverage plant (refrigerated)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.9068,
+              34.0043
+            ],
+            [
+              -117.9058,
+              34.0043
+            ],
+            [
+              -117.9058,
+              34.0047
+            ],
+            [
+              -117.9068,
+              34.0047
+            ],
+            [
+              -117.9068,
+              34.0043
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - City of Industry CA",
+        "type": "Plant-based & coffee beverage plant (refrigerated)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.906,
+              34.0043
+            ],
+            [
+              -117.9051,
+              34.0043
+            ],
+            [
+              -117.9051,
+              34.00475
+            ],
+            [
+              -117.906,
+              34.00475
+            ],
+            [
+              -117.906,
+              34.0043
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - City of Industry CA",
+        "type": "Plant-based & coffee beverage plant (refrigerated)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.9243,
+              32.7028
+            ],
+            [
+              -96.917,
+              32.7028
+            ],
+            [
+              -96.917,
+              32.7062
+            ],
+            [
+              -96.9243,
+              32.7062
+            ],
+            [
+              -96.9243,
+              32.7028
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Dallas TX",
+        "type": "Multi-category beverage plant (refrigerated)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 38,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 39,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.9239,
+              32.706
+            ],
+            [
+              -96.9234,
+              32.706
+            ],
+            [
+              -96.9234,
+              32.7064
+            ],
+            [
+              -96.9239,
+              32.7064
+            ],
+            [
+              -96.9239,
+              32.706
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Dallas TX",
+        "type": "Multi-category beverage plant (refrigerated)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.9237,
+              32.7043
+            ],
+            [
+              -96.9226,
+              32.7043
+            ],
+            [
+              -96.9226,
+              32.7057
+            ],
+            [
+              -96.9237,
+              32.7057
+            ],
+            [
+              -96.9237,
+              32.7043
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Dallas TX",
+        "type": "Multi-category beverage plant (refrigerated)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.923,
+              32.7051
+            ],
+            [
+              -96.9192,
+              32.7051
+            ],
+            [
+              -96.9192,
+              32.7057
+            ],
+            [
+              -96.923,
+              32.7057
+            ],
+            [
+              -96.923,
+              32.7051
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Dallas TX",
+        "type": "Multi-category beverage plant (refrigerated)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.9189,
+              32.7051
+            ],
+            [
+              -96.9173,
+              32.7051
+            ],
+            [
+              -96.9173,
+              32.7057
+            ],
+            [
+              -96.9189,
+              32.7057
+            ],
+            [
+              -96.9189,
+              32.7051
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Dallas TX",
+        "type": "Multi-category beverage plant (refrigerated)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.7331,
+              41.1039
+            ],
+            [
+              -78.7294,
+              41.1039
+            ],
+            [
+              -78.7294,
+              41.1076
+            ],
+            [
+              -78.7331,
+              41.1076
+            ],
+            [
+              -78.7331,
+              41.1039
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - DuBois PA",
+        "type": "Plant-based yogurt plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 24,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.7329,
+              41.1046
+            ],
+            [
+              -78.7324,
+              41.1046
+            ],
+            [
+              -78.7324,
+              41.105
+            ],
+            [
+              -78.7329,
+              41.105
+            ],
+            [
+              -78.7329,
+              41.1046
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - DuBois PA",
+        "type": "Plant-based yogurt plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.7305,
+              41.1059
+            ],
+            [
+              -78.7299,
+              41.1059
+            ],
+            [
+              -78.7299,
+              41.1064
+            ],
+            [
+              -78.7305,
+              41.1064
+            ],
+            [
+              -78.7305,
+              41.1059
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - DuBois PA",
+        "type": "Plant-based yogurt plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -78.7322,
+              41.1055
+            ],
+            [
+              -78.7316,
+              41.1055
+            ],
+            [
+              -78.7316,
+              41.1061
+            ],
+            [
+              -78.7322,
+              41.1061
+            ],
+            [
+              -78.7322,
+              41.1055
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - DuBois PA",
+        "type": "Plant-based yogurt plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.0443,
+              44.06495
+            ],
+            [
+              -123.0427,
+              44.06495
+            ],
+            [
+              -123.0427,
+              44.0661
+            ],
+            [
+              -123.0443,
+              44.0661
+            ],
+            [
+              -123.0443,
+              44.06495
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Springfield OR",
+        "type": "Plant-based frozen-dessert plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 8,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 2.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.0431,
+              44.06505
+            ],
+            [
+              -123.0428,
+              44.06505
+            ],
+            [
+              -123.0428,
+              44.0653
+            ],
+            [
+              -123.0431,
+              44.0653
+            ],
+            [
+              -123.0431,
+              44.06505
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Springfield OR",
+        "type": "Plant-based frozen-dessert plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.0438,
+              44.06535
+            ],
+            [
+              -123.0433,
+              44.06535
+            ],
+            [
+              -123.0433,
+              44.0657
+            ],
+            [
+              -123.0438,
+              44.0657
+            ],
+            [
+              -123.0438,
+              44.06535
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Springfield OR",
+        "type": "Plant-based frozen-dessert plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.341,
+              32.7397
+            ],
+            [
+              -97.3378,
+              32.7397
+            ],
+            [
+              -97.3378,
+              32.74235
+            ],
+            [
+              -97.341,
+              32.74235
+            ],
+            [
+              -97.341,
+              32.7397
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Fort Worth TX",
+        "type": "Fresh yogurt plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 10.9,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3407,
+              32.7404
+            ],
+            [
+              -97.3402,
+              32.7404
+            ],
+            [
+              -97.3402,
+              32.7409
+            ],
+            [
+              -97.3407,
+              32.7409
+            ],
+            [
+              -97.3407,
+              32.7404
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Fort Worth TX",
+        "type": "Fresh yogurt plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.341,
+              32.7404
+            ],
+            [
+              -97.3403,
+              32.7404
+            ],
+            [
+              -97.3403,
+              32.7414
+            ],
+            [
+              -97.341,
+              32.7414
+            ],
+            [
+              -97.341,
+              32.7404
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Fort Worth TX",
+        "type": "Fresh yogurt plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3398,
+              32.7414
+            ],
+            [
+              -97.3386,
+              32.7414
+            ],
+            [
+              -97.3386,
+              32.7421
+            ],
+            [
+              -97.3398,
+              32.7421
+            ],
+            [
+              -97.3398,
+              32.7414
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Fort Worth TX",
+        "type": "Fresh yogurt plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.2151,
+              39.4445
+            ],
+            [
+              -75.2122,
+              39.4445
+            ],
+            [
+              -75.2122,
+              39.4475
+            ],
+            [
+              -75.2151,
+              39.4475
+            ],
+            [
+              -75.2151,
+              39.4445
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Bridgeton NJ",
+        "type": "Plant-based beverage plant (refrigerated)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 24,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 16.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.2135,
+              39.4469
+            ],
+            [
+              -75.213,
+              39.4469
+            ],
+            [
+              -75.213,
+              39.4474
+            ],
+            [
+              -75.2135,
+              39.4474
+            ],
+            [
+              -75.2135,
+              39.4469
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Bridgeton NJ",
+        "type": "Plant-based beverage plant (refrigerated)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.2135,
+              39.4449
+            ],
+            [
+              -75.2126,
+              39.4449
+            ],
+            [
+              -75.2126,
+              39.4457
+            ],
+            [
+              -75.2135,
+              39.4457
+            ],
+            [
+              -75.2135,
+              39.4449
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Bridgeton NJ",
+        "type": "Plant-based beverage plant (refrigerated)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.2144,
+              39.4451
+            ],
+            [
+              -75.2134,
+              39.4451
+            ],
+            [
+              -75.2134,
+              39.4457
+            ],
+            [
+              -75.2144,
+              39.4457
+            ],
+            [
+              -75.2144,
+              39.4451
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Bridgeton NJ",
+        "type": "Plant-based beverage plant (refrigerated)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.2144,
+              39.4455
+            ],
+            [
+              -75.213,
+              39.4455
+            ],
+            [
+              -75.213,
+              39.4462
+            ],
+            [
+              -75.2144,
+              39.4462
+            ],
+            [
+              -75.2144,
+              39.4455
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Bridgeton NJ",
+        "type": "Plant-based beverage plant (refrigerated)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.6031,
+              34.237
+            ],
+            [
+              -118.60215,
+              34.237
+            ],
+            [
+              -118.60215,
+              34.23865
+            ],
+            [
+              -118.6031,
+              34.23865
+            ],
+            [
+              -118.6031,
+              34.237
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Chatsworth CA",
+        "type": "Plant-based products plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 2,
+          "trailerParkingCapacity": 4,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 4.6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.6025,
+              34.2373
+            ],
+            [
+              -118.6023,
+              34.2373
+            ],
+            [
+              -118.6023,
+              34.23748
+            ],
+            [
+              -118.6025,
+              34.23748
+            ],
+            [
+              -118.6025,
+              34.2373
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Chatsworth CA",
+        "type": "Plant-based products plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.6025,
+              34.23735
+            ],
+            [
+              -118.60225,
+              34.23735
+            ],
+            [
+              -118.60225,
+              34.238
+            ],
+            [
+              -118.6025,
+              34.238
+            ],
+            [
+              -118.6025,
+              34.23735
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Chatsworth CA",
+        "type": "Plant-based products plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.60248,
+              34.23735
+            ],
+            [
+              -118.60228,
+              34.23735
+            ],
+            [
+              -118.60228,
+              34.2378
+            ],
+            [
+              -118.60248,
+              34.2378
+            ],
+            [
+              -118.60248,
+              34.23735
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Chatsworth CA",
+        "type": "Plant-based products plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.57335,
+              45.56405
+            ],
+            [
+              -122.57185,
+              45.56405
+            ],
+            [
+              -122.57185,
+              45.56545
+            ],
+            [
+              -122.57335,
+              45.56545
+            ],
+            [
+              -122.57335,
+              45.56405
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Portland OR",
+        "type": "Frozen yogurt / ice cream plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 12,
+          "trailersVisible": 9,
+          "trailerParkingCapacity": 15,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.57305,
+              45.5645
+            ],
+            [
+              -122.57288,
+              45.5645
+            ],
+            [
+              -122.57288,
+              45.56462
+            ],
+            [
+              -122.57305,
+              45.56462
+            ],
+            [
+              -122.57305,
+              45.5645
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Portland OR",
+        "type": "Frozen yogurt / ice cream plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.5727,
+              45.565
+            ],
+            [
+              -122.57205,
+              45.565
+            ],
+            [
+              -122.57205,
+              45.56545
+            ],
+            [
+              -122.5727,
+              45.56545
+            ],
+            [
+              -122.5727,
+              45.565
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Portland OR",
+        "type": "Frozen yogurt / ice cream plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.57305,
+              45.56412
+            ],
+            [
+              -122.5726,
+              45.56412
+            ],
+            [
+              -122.5726,
+              45.56445
+            ],
+            [
+              -122.57305,
+              45.56445
+            ],
+            [
+              -122.57305,
+              45.56412
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Portland OR",
+        "type": "Frozen yogurt / ice cream plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.57225,
+              45.56445
+            ],
+            [
+              -122.57195,
+              45.56445
+            ],
+            [
+              -122.57195,
+              45.565
+            ],
+            [
+              -122.57225,
+              45.565
+            ],
+            [
+              -122.57225,
+              45.56445
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Portland OR",
+        "type": "Frozen yogurt / ice cream plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.5729,
+              45.56448
+            ],
+            [
+              -122.57255,
+              45.56448
+            ],
+            [
+              -122.57255,
+              45.5649
+            ],
+            [
+              -122.5729,
+              45.5649
+            ],
+            [
+              -122.5729,
+              45.56448
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Portland OR",
+        "type": "Frozen yogurt / ice cream plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.0388,
+              40.5792
+            ],
+            [
+              -112.0334,
+              40.5792
+            ],
+            [
+              -112.0334,
+              40.583
+            ],
+            [
+              -112.0388,
+              40.583
+            ],
+            [
+              -112.0388,
+              40.5792
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - West Jordan UT",
+        "type": "Fresh yogurt plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 51,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.0369,
+              40.58235
+            ],
+            [
+              -112.0365,
+              40.58235
+            ],
+            [
+              -112.0365,
+              40.58265
+            ],
+            [
+              -112.0369,
+              40.58265
+            ],
+            [
+              -112.0369,
+              40.58235
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - West Jordan UT",
+        "type": "Fresh yogurt plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.035,
+              40.5799
+            ],
+            [
+              -112.0338,
+              40.5799
+            ],
+            [
+              -112.0338,
+              40.5811
+            ],
+            [
+              -112.035,
+              40.5811
+            ],
+            [
+              -112.035,
+              40.5799
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - West Jordan UT",
+        "type": "Fresh yogurt plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.0352,
+              40.5799
+            ],
+            [
+              -112.0342,
+              40.5799
+            ],
+            [
+              -112.0342,
+              40.5816
+            ],
+            [
+              -112.0352,
+              40.5816
+            ],
+            [
+              -112.0352,
+              40.5799
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - West Jordan UT",
+        "type": "Fresh yogurt plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.0356,
+              40.5806
+            ],
+            [
+              -112.0347,
+              40.5806
+            ],
+            [
+              -112.0347,
+              40.5816
+            ],
+            [
+              -112.0356,
+              40.5816
+            ],
+            [
+              -112.0356,
+              40.5806
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - West Jordan UT",
+        "type": "Fresh yogurt plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.91285,
+              33.61878
+            ],
+            [
+              -111.91178,
+              33.61878
+            ],
+            [
+              -111.91178,
+              33.61952
+            ],
+            [
+              -111.91285,
+              33.61952
+            ],
+            [
+              -111.91285,
+              33.61878
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "dannon",
+        "name": "Danone - Scottsdale AZ",
+        "type": "Equipment / dispensing operations site",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 2,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 0.7,
+          "railServed": false
+        }
+      }
+    }
+  ]
+}

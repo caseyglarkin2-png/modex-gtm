@@ -1,0 +1,488 @@
+{
+  "account": "GXO Logistics",
+  "generatedAt": "2026-05-18",
+  "facilityCount": 30,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "GXO Conair Distribution Center - Hagerstown MD",
+      "city": "Hagerstown",
+      "state": "MD",
+      "type": "Distribution Center",
+      "address": "10440 Downsville Pike, Hagerstown, MD 21740",
+      "lat": 39.604697,
+      "lng": -77.760602,
+      "source": "GXO/Maryland Gov press release; 2.1M sq ft small-appliance DC for Conair, largest DC in Maryland (state of MD news; business.maryland.gov). Second leased building at 17250 Sterling Road, Hagerstown.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 2,
+      "name": "GXO Abercrombie & Fitch Distribution Center - Goodyear AZ",
+      "city": "Goodyear",
+      "state": "AZ",
+      "type": "Distribution Center",
+      "address": "16920 W Commerce Dr, Goodyear, AZ 85338",
+      "lat": 33.411968,
+      "lng": -112.422068,
+      "source": "GXO press release; 715,000 sq ft high-tech DC, Abercrombie & Fitch West Coast hub in PV303 industrial park (NE corner of Thomas & Citrus Rds). Address approximate to PV303 park.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 165
+      }
+    },
+    {
+      "idx": 3,
+      "name": "GXO Hasbro Flagship Distribution Center - Midway GA",
+      "city": "Midway",
+      "state": "GA",
+      "type": "Distribution Center",
+      "address": "Tradeport East Business Center, Midway, GA 31320",
+      "lat": 31.771467,
+      "lng": -81.345576,
+      "source": "GXO/Hasbro March 2026 grand-opening press release; 600,000 sq ft flagship U.S. DC, Liberty County GA. Street number not publicly disclosed.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 3
+      }
+    },
+    {
+      "idx": 4,
+      "name": "GXO Logistics Distribution Center - Fairburn GA",
+      "city": "Fairburn",
+      "state": "GA",
+      "type": "Distribution Center",
+      "address": "7300 Oakley Industrial Blvd, Fairburn, GA 30213",
+      "lat": 33.552411,
+      "lng": -84.537454,
+      "source": "Red Rock Developments project page; 907,665 sq ft leased to GXO, I-85 south of Hartsfield-Jackson. Address confirmed via Waze.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 217
+      }
+    },
+    {
+      "idx": 5,
+      "name": "GXO Super Hub - Clayton IN",
+      "city": "Clayton",
+      "state": "IN",
+      "type": "Distribution Center",
+      "address": "2121 Gateway Pt, Clayton, IN 46118",
+      "lat": 39.605914,
+      "lng": -86.483484,
+      "source": "GXO jobs site / GDI Construction 'GXO Super Hub' project; Indianapolis-area super hub.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 6,
+      "name": "GXO Logistics Distribution Center - Lebanon IN",
+      "city": "Lebanon",
+      "state": "IN",
+      "type": "Distribution Center",
+      "address": "135 S Mount Zion Rd, Lebanon, IN 46052",
+      "lat": 40.039161,
+      "lng": -86.483804,
+      "source": "GXO jobs site / Indeed locations; Boone County logistics corridor.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 7,
+      "name": "GXO Logistics Distribution Center - Whitestown IN",
+      "city": "Whitestown",
+      "state": "IN",
+      "type": "Distribution Center",
+      "address": "5490 Industrial Ct, Ste 300, Whitestown, IN 46075",
+      "lat": 39.962504,
+      "lng": -86.383939,
+      "source": "GXO Boone County jobs listings; Indianapolis metro distribution corridor.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 8,
+      "name": "GXO IKEA Customer Distribution Center - Quakertown PA",
+      "city": "Quakertown",
+      "state": "PA",
+      "type": "Fulfillment Center",
+      "address": "150 N West End Blvd, Quakertown, PA 18951",
+      "lat": 40.446872,
+      "lng": -75.360415,
+      "source": "GXO press release; 195,000 sq ft IKEA ecommerce parcel fulfillment center named No. 1 in IKEA global network. Address approximate to Quakertown industrial area.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 5
+      }
+    },
+    {
+      "idx": 9,
+      "name": "GXO Logistics Distribution Center - Carlisle PA",
+      "city": "Carlisle",
+      "state": "PA",
+      "type": "Distribution Center",
+      "address": "1200 Distribution Dr, Carlisle, PA 17013",
+      "lat": 40.204958,
+      "lng": -77.234885,
+      "source": "GXO/BBB Carlisle profile and jobs site; Central PA I-81/I-76 logistics hub. Adjacent GXO building at 1301 Distribution Dr.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 121
+      }
+    },
+    {
+      "idx": 10,
+      "name": "GXO Logistics Distribution Center - Bethlehem PA",
+      "city": "Bethlehem",
+      "state": "PA",
+      "type": "Distribution Center",
+      "address": "3633 Commerce Center Blvd, Bethlehem, PA 18015",
+      "lat": 40.609939,
+      "lng": -75.315452,
+      "source": "GXO jobs site / Lehigh Valley Chamber listing; Lehigh Valley distribution corridor.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 11,
+      "name": "GXO Logistics Distribution Center - Middletown PA",
+      "city": "Middletown",
+      "state": "PA",
+      "type": "Fulfillment Center",
+      "address": "200 Capital Ln, Middletown, PA 17057",
+      "lat": 40.207958,
+      "lng": -76.747805,
+      "source": "GXO locations / Indeed; Harrisburg-area fulfillment center.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 12,
+      "name": "GXO Logistics Distribution Center - Palmyra PA",
+      "city": "Palmyra",
+      "state": "PA",
+      "type": "Distribution Center",
+      "address": "500 N Lingle Ave, Palmyra, PA 17078",
+      "lat": 40.31048,
+      "lng": -76.614852,
+      "source": "GXO locations / Indeed; Central PA distribution corridor.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 13,
+      "name": "GXO IKEA Distribution Center - Westampton NJ",
+      "city": "Westampton",
+      "state": "NJ",
+      "type": "Distribution Center",
+      "address": "100 Ikea Dr, Westampton, NJ 08060",
+      "lat": 40.013963,
+      "lng": -74.853272,
+      "source": "GXO operates IKEA's North American distribution network; IKEA Westampton DC address confirmed via TruckMap/Yelp.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 210
+      }
+    },
+    {
+      "idx": 14,
+      "name": "GXO Logistics Distribution Center - West Jefferson OH",
+      "city": "West Jefferson",
+      "state": "OH",
+      "type": "Distribution Center",
+      "address": "202 Park West Dr, West Jefferson, OH 43162",
+      "lat": 39.946035,
+      "lng": -83.33351,
+      "source": "GXO jobs site (active West Jefferson hiring); Columbus-area I-70 logistics park.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 15,
+      "name": "GXO Logistics Distribution Center - McDonough GA",
+      "city": "McDonough",
+      "state": "GA",
+      "type": "Distribution Center",
+      "address": "159 Westridge Pkwy, McDonough, GA 30253",
+      "lat": 33.411279,
+      "lng": -84.192689,
+      "source": "Dun & Bradstreet company profile (GXO Logistics Supply Chain, Inc., McDonough GA).",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 16,
+      "name": "GXO Logistics Distribution Center - Forest Park GA",
+      "city": "Forest Park",
+      "state": "GA",
+      "type": "Distribution Center",
+      "address": "2145 Anvil Block Rd, Bldg 900, Forest Park, GA 30297",
+      "lat": 33.621768,
+      "lng": -84.316149,
+      "source": "Web research on GXO Atlanta-area network; Atlanta southside industrial corridor.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 17,
+      "name": "GXO Logistics Distribution Center - Tracy CA",
+      "city": "Tracy",
+      "state": "CA",
+      "type": "Distribution Center",
+      "address": "1700 E Pescadero Ave, Tracy, CA 95304",
+      "lat": 37.761554,
+      "lng": -121.413825,
+      "source": "Racklify 3PL warehouse directory; Northern California / Central Valley distribution hub.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 5
+      }
+    },
+    {
+      "idx": 18,
+      "name": "GXO Logistics Distribution Center - Fontana CA",
+      "city": "Fontana",
+      "state": "CA",
+      "type": "Distribution Center",
+      "address": "10746 Commerce Way, Fontana, CA 92337",
+      "lat": 34.058587,
+      "lng": -117.51381,
+      "source": "Web research on GXO California network; Inland Empire distribution corridor.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 54
+      }
+    },
+    {
+      "idx": 19,
+      "name": "GXO Logistics Distribution Center - Statesville NC",
+      "city": "Statesville",
+      "state": "NC",
+      "type": "Distribution Center",
+      "address": "2203 Sherrill Dr, Statesville, NC 28625",
+      "lat": 35.770854,
+      "lng": -80.84131,
+      "source": "Dun & Bradstreet company profile (GXO Logistics Supply Chain, Inc., Statesville NC).",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 20,
+      "name": "GXO Logistics Distribution Center - Cowpens SC",
+      "city": "Cowpens",
+      "state": "SC",
+      "type": "Distribution Center",
+      "address": "1120 E Mountain Olive Rd, Cowpens, SC 29330",
+      "lat": 35.062098,
+      "lng": -81.814033,
+      "source": "GXO jobs site (Cowpens active hiring); Upstate SC / I-85 corridor DC.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 12
+      }
+    },
+    {
+      "idx": 21,
+      "name": "GXO Logistics Distribution Center - Fort Worth TX (Sylvania)",
+      "city": "Fort Worth",
+      "state": "TX",
+      "type": "Distribution Center",
+      "address": "4320 N Sylvania Ave, Ste 100, Fort Worth, TX 76137",
+      "lat": 32.819094,
+      "lng": -97.307487,
+      "source": "Dun & Bradstreet / Waze (GXO Fort Worth); Dallas-Fort Worth metroplex.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 39
+      }
+    },
+    {
+      "idx": 22,
+      "name": "GXO Logistics Distribution Center - Fort Worth TX (Everman)",
+      "city": "Fort Worth",
+      "state": "TX",
+      "type": "Distribution Center",
+      "address": "1401 Everman Pkwy, Fort Worth, TX 76140",
+      "lat": 32.628941,
+      "lng": -97.30685,
+      "source": "Web research on GXO DFW network; south Fort Worth industrial corridor.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 154
+      }
+    },
+    {
+      "idx": 23,
+      "name": "GXO Logistics Distribution Center - Houston TX (Railwood)",
+      "city": "Houston",
+      "state": "TX",
+      "type": "Distribution Center",
+      "address": "9255 Railwood Dr, Houston, TX 77078",
+      "lat": 29.829072,
+      "lng": -95.252448,
+      "source": "Web research on GXO Houston network; northeast Houston distribution corridor.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 24,
+      "name": "GXO Logistics Distribution Center - Houston TX (West Greens)",
+      "city": "Houston",
+      "state": "TX",
+      "type": "Distribution Center",
+      "address": "4800 W Greens Rd, Houston, TX 77066",
+      "lat": 29.944117,
+      "lng": -95.490924,
+      "source": "Web research on GXO Houston network; northwest Houston distribution corridor.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 25,
+      "name": "GXO Logistics Distribution Center - Grapevine TX",
+      "city": "Grapevine",
+      "state": "TX",
+      "type": "Distribution Center",
+      "address": "4220 Diplomacy Rd, Grapevine, TX 76051",
+      "lat": 32.825176,
+      "lng": -97.041109,
+      "source": "Racklify 3PL warehouse directory (GXO Grapevine, TX); DFW Airport-area fulfillment. Address approximate to Grapevine industrial area.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 4
+      }
+    },
+    {
+      "idx": 26,
+      "name": "GXO Logistics Distribution Center - Arlington TX",
+      "city": "Arlington",
+      "state": "TX",
+      "type": "Distribution Center",
+      "address": "3996 Scientific Dr, Arlington, TX 76014",
+      "lat": 32.678848,
+      "lng": -97.07711,
+      "source": "Web research / GlobalData GXO facility listing; DFW metroplex fulfillment center.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 104
+      }
+    },
+    {
+      "idx": 27,
+      "name": "GXO Logistics Distribution Center - West Valley City UT",
+      "city": "West Valley City",
+      "state": "UT",
+      "type": "Distribution Center",
+      "address": "2179 Commerce Center Dr, West Valley City, UT 84120",
+      "lat": 40.723419,
+      "lng": -111.992864,
+      "source": "Web research / GlobalData GXO facility listing; Salt Lake City metro distribution hub.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 67
+      }
+    },
+    {
+      "idx": 28,
+      "name": "GXO Logistics Distribution Center - Hillsboro OR",
+      "city": "Hillsboro",
+      "state": "OR",
+      "type": "Distribution Center",
+      "address": "2501 NE Century Blvd, Hillsboro, OR 97124",
+      "lat": 45.548608,
+      "lng": -122.91177,
+      "source": "Web research on GXO Pacific Northwest network; Portland-area DC.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 29,
+      "name": "GXO Logistics Distribution Center - Aloha OR",
+      "city": "Aloha",
+      "state": "OR",
+      "type": "Distribution Center",
+      "address": "3585 SW 198th Ave, Aloha, OR 97007",
+      "lat": 45.49332,
+      "lng": -122.8834,
+      "source": "Web research on GXO Pacific Northwest network; Portland-metro DC.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 82
+      }
+    },
+    {
+      "idx": 30,
+      "name": "GXO Logistics Distribution Center - Carrollton TX",
+      "city": "Carrollton",
+      "state": "TX",
+      "type": "Distribution Center",
+      "address": "2816 Commodore Dr, Carrollton, TX 75007",
+      "lat": 32.989435,
+      "lng": -96.928073,
+      "source": "Web research on GXO DFW network; north Dallas distribution corridor.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 111
+      }
+    }
+  ],
+  "geocodedAt": "2026-05-18"
+}

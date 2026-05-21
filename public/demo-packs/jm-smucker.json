@@ -1,0 +1,1773 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:43:02.442Z",
+  "account": {
+    "slug": "jm-smucker",
+    "displayName": "The J.M. Smucker Company",
+    "archetype": "cpg",
+    "siteCount": 17,
+    "coverageNote": {
+      "auditedCount": 17,
+      "estimatedFootprint": null,
+      "droppedStubCount": 0,
+      "capHit": false,
+      "note": "Audited all 17 identifiable facilities."
+    }
+  },
+  "research": {
+    "facility_count": 25,
+    "audited_facilities": 17,
+    "source": "yard-audit",
+    "confidence": "third-party",
+    "caveats": [
+      "Coffee Silo Operations - New Orleans LA: audit note mentions 'closed'",
+      "R.W. Knudsen Juices - Chico CA: audit note mentions 'sold'",
+      "Smucker Plant - Salinas CA: audit note mentions 'closed'",
+      "Pet Food Plant - Topeka KS: audit note mentions 'closed'"
+    ]
+  },
+  "network": {
+    "bbox": [
+      -121.8056,
+      29.9132,
+      -76.1072,
+      42.9109
+    ],
+    "archetypeMix": {
+      "#9": 6,
+      "#7": 2,
+      "#3": 9
+    },
+    "totals": {
+      "dockDoors": 504,
+      "trailerCapacity": 1252,
+      "gates": 22,
+      "railServed": 6,
+      "acres": 824.5
+    },
+    "sites": [
+      {
+        "id": "01-coffee-roasting-new-orleans-la",
+        "name": "Coffee Roasting - New Orleans LA",
+        "type": "Manufacturing - Coffee roasting/packaging (bulk)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "scale",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 30.0335,
+          "lng": -89.9112
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 30.0312,
+            "west": -89.914,
+            "north": 30.036,
+            "east": -89.9082
+          },
+          "truckGate": {
+            "south": 30.03145,
+            "west": -89.91375,
+            "north": 30.03175,
+            "east": -89.91325
+          },
+          "dropYards": [
+            {
+              "south": 30.03255,
+              "west": -89.91185,
+              "north": 30.033,
+              "east": -89.9112
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 30.0326,
+              "west": -89.9124,
+              "north": 30.0331,
+              "east": -89.911
+            },
+            {
+              "south": 30.03285,
+              "west": -89.9113,
+              "north": 30.0334,
+              "east": -89.9102
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 11,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 73.8,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster pin (30.034172, -89.911159, ROOFTOP) landed on the north edge of a\nlarge industrial complex. Satellite probes (z16–z19) revealed a massive\nsingle-roof industrial building with attached processing equipment, silos and a\nrail spur along the north edge — consistent with a bulk coffee roasting plant,\nnot an office. Street View (captured Nov 2025) from the south frontage road\nconfirmed the Folgers/Smucker coffee roasting building, with its tall processing\ntower and a continuous chain-link perimeter fence backed by a hedge.\n\nWeb research confirms this is the Old Gentilly Rd plant — opened 1960, acquired\nby J.M. Smucker with Folgers in 2008, described as the largest bulk coffee\nfacility of its kind in the world; it shares the New Orleans operation (>700\nemployees, 300+ products) with the separate Coffee Silo Operations site.",
+        "mapsUrl": "https://www.google.com/maps/@30.0335,-89.9112,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Folgers/J.M. Smucker Old Gentilly Rd coffee roasting plant, New Orleans East. Confirmed via Street View (Nov 2025) showing the large industrial roasting building with processing tower and continuous perimeter fence/hedge, plus web research (largest bulk coffee facility of its kind in the world; opened 1960).",
+          "truckGate": "Wide gated truck entrance on the SW frontage road (~30.0316,-89.9135): a fence opening with sliding/swing gate panels set back from the road and an overhead gantry sign structure spanning the driveway. Clear controlled checkpoint.",
+          "guardShack": "No distinct staffed guard booth resolved at the gate in Street View or satellite; a small structure sits near the gate apron but its function is ambiguous. Low confidence — treated as remote check-in (kiosk/call-box).",
+          "remoteGs": "Set true because a controlled truck gate is present but no clear guard shack — implies kiosk / call-box check-in. Flagged uncertain.",
+          "shipRcvSeparate": "Dock activity is split across more than one building face (south face dock apron near 30.0328,-89.9116 and a separate SE dock band near 30.0331,-89.9109); green coffee receiving and finished-goods shipping are physically distinct per site operations.",
+          "railServed": "Rail spur runs along the north edge of the property; web research confirms finished coffee ships by rail, truck and water.",
+          "multipleFacilities": "Large multi-building campus: main roasting/packaging building, separate processing/silo structures to the NE, and ancillary buildings — more than one large cluster behind the fence.",
+          "fastLaneOpportunity": "Gate driveway is wide with substantial unused paved apron width; room exists to add a bypass/express lane.",
+          "dockDoorCount": "~30 estimate from overhead imagery; many bays partially obscured by building shadow and tree cover along faces. Flagged low confidence.",
+          "siteAreaAcres": "73.8 acres for the full fenced manufacturing complex (building cluster plus rail-served processing yard and dock aprons). Historical 1960 footprint was ~20 acres; the operation has expanded substantially."
+        }
+      },
+      {
+        "id": "02-coffee-silo-operations-new-orleans-la",
+        "name": "Coffee Silo Operations - New Orleans LA",
+        "type": "Distribution/Processing - Green coffee bean silo operations",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "multiStep",
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 29.9139,
+          "lng": -90.1122
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 29.9132,
+            "west": -90.11305,
+            "north": 29.9146,
+            "east": -90.1114
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 29.9137,
+              "west": -90.113,
+              "north": 29.9144,
+              "east": -90.1125
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 29.91345,
+              "west": -90.1126,
+              "north": 29.91385,
+              "east": -90.11175
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 14,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 6.1,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": true,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": true
+        },
+        "dossierExcerpt": "The roster pin (29.914282, -90.114356, ROOFTOP) landed inside container stacks\nof the Port of New Orleans Napoleon Avenue Container Terminal — not on the\nSilocaf building itself. Web research established that Silocaf (\"the world's\nlargest automated silo plant for green-coffee processing\") was built in the\nearly 1990s on the cleared site of the former Public Grain Elevator, at 5240\nCoffee Dr inside the port terminal.\n\nSearching the satellite imagery for the distinctive silo cluster located the\nfacility ~190 m SE of the pin: a compact vertical industrial building with a\nvisible row of cylindrical bulk-storage silos along its south edge,\nprocessing conveyors, and a blue-roofed annex. This matches a green-coffee silo\nplant and is the correct building. Locked center: 29.9139, -90.1122.",
+        "mapsUrl": "https://www.google.com/maps/@29.9139,-90.1122,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Silocaf / Smucker Coffee Silo Operations, the world's largest automated green-coffee silo plant, 5240-5242 Coffee Dr. Built ~1992 on the cleared site of the former Public Grain Elevator. Confirmed via satellite: a compact vertical processing building with a row of cylindrical bulk-storage silos along its south edge, conveyors and a blue-roofed annex, sitting inside the Port of New Orleans Napoleon Avenue Container Terminal.",
+          "truckGate": "TRUE but indirect — the Silocaf building has no separate fenced perimeter or its own gate. It sits deep inside the secured Port of New Orleans Napoleon Avenue Container Terminal; all truck access is controlled at the port terminal's manned gate. Classified as a controlled (gated) truck entrance at the terminal level. Flagged uncertain because the gate is the port's, not the facility's own.",
+          "guardShack": "Marked true — Port of New Orleans container terminals operate manned gatehouses with TWIC/credential checks. Not directly visible in usable imagery (no public Street View inside the secured terminal); inferred from standard port-terminal security practice. Flagged uncertain.",
+          "multiStep": "Set true — a port-terminal context typically involves a first checkpoint at the terminal gate, then a separate check-in/transfer point at the Silocaf building itself for bulk-coffee loading/unloading. Two-stage check-in is characteristic; flagged uncertain.",
+          "dockDoors": "0-10 — this is a vertical silo plant, not a flat distribution center. Bulk green coffee moves via hopper trailers, conveyors and pneumatic transfer rather than a long rhythm of dock doors. ~6 transfer/dock points estimated. Flagged low confidence.",
+          "dropArea": "0-10 — a handful of trailers (~8 visible, bulk hopper + box) parked on the west apron; no large marked drop-yard. Capacity ~14.",
+          "railServed": "TRUE — extensive Public Belt / port rail yards run immediately along the north edge; green coffee is moved by rail as well as truck and ship.",
+          "fastLaneOpportunity": "Large open paved terminal aprons surround the facility; ample room exists to organize bypass/express lanes for bulk-coffee trucks.",
+          "siteAreaAcres": "6.1 acres for the Silocaf building footprint plus its immediate truck apron and silo row. The broader Napoleon Avenue Container Terminal it sits within is far larger but is a separate port property.",
+          "buildingCount": "2 — the main processing/silo building and an adjacent office/ancillary building to the NE.",
+          "confidence": "Medium overall — the facility was positively identified and the silo plant is unambiguous, but it is enclosed within a secured port terminal with no public Street View, so gate/guard-shack/lane details are inferred from port-operations context rather than directly observed."
+        }
+      },
+      {
+        "id": "03-uncrustables-mccalla-al",
+        "name": "Uncrustables - McCalla AL",
+        "type": "Manufacturing - Frozen handhelds (Uncrustables)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "scale"
+        ],
+        "center": {
+          "lat": 33.2992,
+          "lng": -87.0595
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.2969,
+            "west": -87.0632,
+            "north": 33.3024,
+            "east": -87.0568
+          },
+          "truckGate": {
+            "south": 33.2984,
+            "west": -87.058,
+            "north": 33.299,
+            "east": -87.0573
+          },
+          "dropYards": [
+            {
+              "south": 33.2972,
+              "west": -87.0615,
+              "north": 33.2985,
+              "east": -87.0603
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.2976,
+              "west": -87.0625,
+              "north": 33.3006,
+              "east": -87.0608
+            }
+          ],
+          "staging": {
+            "south": 33.2976,
+            "west": -87.0588,
+            "north": 33.2989,
+            "east": -87.0574
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 22,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 90.1,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster pin (33.29206, -87.082404) was geocoded APPROXIMATE and 5963 m off —\nit landed in rural woods near I-20, not on the plant. Web research established\nthe plant address as 7351 Old Tuscaloosa Highway inside the JeffMet McCalla\n(Jefferson Metropolitan Park) industrial park — a 739-acre park on the south\nside of US-11, bordered by Old Tuscaloosa Hwy/US-11 to the NW and Norfolk\nSouthern Railroad to the SE, connected to I-20/59 via McAshan Drive. Smucker\nbought ~225 acres there; the $1.1B, ~900,000 sq ft plant opened Nov 2024 as the\nlargest single-line bakery in the US.\n\nSatellite probing of the JeffMet park located a single very large modern\nfood-plant building (~33.2992, -87.0595): a complex roofline, banks of rooftop\nrefrigeration units (consistent with a frozen-product plant), extensive dock",
+        "mapsUrl": "https://www.google.com/maps/@33.2992,-87.0595,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "J.M. Smucker Uncrustables plant, 7351 Old Tuscaloosa Highway, JeffMet McCalla industrial park, Jefferson County AL. $1.1B, ~900,000 sq ft, opened Nov 2024 — the largest single-line bakery in the US, third Uncrustables plant. The roster pin was 5963m off (geocode flagged APPROXIMATE); resolved by web research (JeffMet McCalla park bordered by Old Tuscaloosa Hwy/US-11 NW, Norfolk Southern rail SE) and satellite — a single very large modern food-plant building with a complex roof, rooftop refrigeration banks (frozen-product plant), dock banks and a controlled gated entrance.",
+          "truckGate": "TRUE — satellite (z20-z22) shows a divided entrance road at the building's SE corner with separate marked IN and OUT lanes (directional arrows), lane striping, and a barrier-arm gate structure spanning the lanes. Clear controlled truck checkpoint.",
+          "guardShack": "TRUE (inferred) — a small structure sits beside the gate lanes; a brand-new $1.1B food plant of this scale standardly runs a manned guard booth at the truck entrance. Not perfectly resolved in imagery — flagged uncertain.",
+          "dockDoors": "50+ — extensive dock banks along the SW/west building face with ~22 trailers visible backed in or parked; a building of ~1,000,000 sq ft footprint of this type carries well over 50 doors. ~55 estimate; flagged low confidence.",
+          "dropArea": "25-50 — a dedicated trailer-parking/drop lot adjacent to the SW dock apron; ~22 trailers visible, capacity ~70 across the apron + drop lot.",
+          "drivewayLong": "Long, deep gate-to-dock approach with ample stacking room — 3+ truck queue capacity.",
+          "fastLaneOpportunity": "Wide divided entrance apron with separated in/out lanes and substantial unused paved width; clear room to add a bypass/express lane.",
+          "postGateStaging": "Paved holding area inside the gate before the dock aprons.",
+          "railServed": "FALSE — Norfolk Southern rail borders the JeffMet park to the SE, but no rail spur runs into the Smucker plant property itself; the plant ships by truck.",
+          "urbanRural": "Rural — McCalla is an edge-of-metro small community; the plant sits in an industrial park surrounded by woodland and farmland off US-11, ~24 miles from Birmingham.",
+          "buildingCount": "1 — a single very large integrated manufacturing/distribution building.",
+          "siteAreaAcres": "90.1 acres for the developed/fenced operational footprint (building + truck yards + drop lot + employee parking + retention). The full Smucker parcel is ~225 acres.",
+          "confidence": "Medium — facility identified by location, scale and frozen-plant roof signature with high confidence, but the available satellite imagery appears to be from the construction/just-opened period and the gate/guard-booth details are partly inferred; no Street View reaches the gate itself."
+        }
+      },
+      {
+        "id": "04-uncrustables-longmont-co",
+        "name": "Uncrustables - Longmont CO",
+        "type": "Manufacturing - Frozen handhelds (Uncrustables)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 40.164,
+          "lng": -105.0525
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.1608,
+            "west": -105.0555,
+            "north": 40.1668,
+            "east": -105.049
+          },
+          "truckGate": {
+            "south": 40.1617,
+            "west": -105.055,
+            "north": 40.16215,
+            "east": -105.05445
+          },
+          "dropYards": [
+            {
+              "south": 40.1638,
+              "west": -105.051,
+              "north": 40.1658,
+              "east": -105.0492
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.1625,
+              "west": -105.0523,
+              "north": 40.1656,
+              "east": -105.0508
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 91.3,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster pin (40.184331, -105.178241) was geocoded RANGE_INTERPOLATED off the\naddress 11555 N 75th St — but that address resolves to rural lake/farmland in NW\nLongmont, with no industrial plant present. Web research established the actual\nSmucker Uncrustables plant location: Smucker bought land in the **Concepts\nIndustrial Park near the NW corner of Colorado Highway 119 and Fairview\nStreet**, on the east end of Longmont in Weld County (~$4.65M land purchase).\nThe plant opened July 2019 ($340-350M, originally ~430,000 sq ft; a ~240,000 sq\nft expansion has since brought it to ~674,000 sq ft).\n\nSatellite probing of the Hwy 119 / Fairview St area located a large white\nfood-plant building (~40.164, -105.0525) with rooftop solar, extensive dock\nbanks, and a large trailer drop yard. Street View (2024) confirmed the building",
+        "mapsUrl": "https://www.google.com/maps/@40.164,-105.0525,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "J.M. Smucker Uncrustables plant, Concepts Industrial Park, NW corner of Colorado Highway 119 (the Diagonal) and Fairview Street, east Longmont CO (Weld County). Opened July 2019 ($340-350M, originally 430,000 sq ft; ~240,000 sq ft expansion since brings total to ~674,000 sq ft). The roster address (11555 N 75th St) geocoded to rural land NW of the actual plant; resolved via web research (Concepts Industrial Park, Hwy 119 & Fairview) and satellite — a large white food-plant building with rooftop solar, extensive dock banks and a large trailer drop yard. Confirmed by Street View 2024 showing the building and the Smucker entrance sign on Fairview St.",
+          "truckGate": "FALSE — the main entrance off Fairview St is a wide OPEN paved driveway with no barrier arm, sliding gate or checkpoint pinch-point at the road (confirmed in Street View 2024). The truck route runs in from this open driveway and loops around the south side of the building to the dock yard. No controlled gate observed at the property line.",
+          "guardShack": "FALSE — no guard booth at the entrance driveway or anywhere along the property frontage in Street View or satellite.",
+          "remoteGs": "FALSE — no truck gate, so remote check-in flag does not apply.",
+          "dockDoors": "25-50 — extensive dock banks on the east face of the building with many trailers backed in; ~45 doors estimated, flagged low confidence (some dock faces partly in shadow).",
+          "dropArea": "50+ — a large dedicated trailer drop yard on the NE of the property holds dozens of parked trailers in marked rows; ~60 trailers visible, capacity ~90.",
+          "drivewayLong": "Long, deep approach — the open driveway and internal truck route provide ample stacking room for 3+ trucks.",
+          "fastLaneOpportunity": "Wide open entrance apron and substantial unused paved/graded width; clear room to add lanes if a controlled gate were installed.",
+          "postGateStaging": "Large paved truck yard inside the property before the dock doors serves as staging.",
+          "railServed": "FALSE — no rail spur into the property; ships by truck.",
+          "urbanRural": "Rural — edge-of-Longmont location in an industrial park, bordered by farmland to the N and E, with Hwy 119 to the S. Treated as Rural per the small-town/edge-of-town rule.",
+          "buildingCount": "2 — the main manufacturing building plus an attached/adjacent warehouse-distribution section on the east side.",
+          "dropYard": "TRUE — large dedicated trailer-storage lot on the NE, distinct from the active dock apron.",
+          "siteAreaAcres": "91.3 acres for the plant parcel including the dock yard, drop lot, employee parking and undeveloped expansion land within the property."
+        }
+      },
+      {
+        "id": "05-uncrustables-scottsville-ky",
+        "name": "Uncrustables - Scottsville KY",
+        "type": "Manufacturing - Frozen handhelds (Uncrustables)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 36.7628,
+          "lng": -86.1815
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 36.7608,
+            "west": -86.185,
+            "north": 36.7656,
+            "east": -86.179
+          },
+          "truckGate": {
+            "south": 36.76385,
+            "west": -86.1851,
+            "north": 36.76425,
+            "east": -86.1846
+          },
+          "dropYards": [
+            {
+              "south": 36.7636,
+              "west": -86.1812,
+              "north": 36.765,
+              "east": -86.1798
+            },
+            {
+              "south": 36.7609,
+              "west": -86.1829,
+              "north": 36.7621,
+              "east": -86.1816
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 36.7638,
+              "west": -86.1842,
+              "north": 36.7648,
+              "east": -86.183
+            },
+            {
+              "south": 36.763,
+              "west": -86.1828,
+              "north": 36.7644,
+              "east": -86.1815
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 65,
+          "trailerParkingCapacity": 100,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 70.7,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster pin (36.764341, -86.183123, ROOFTOP) landed ~1400 m off the building\ncentroid, on the NW edge of the plant property. Satellite probing immediately\nrevealed the plant: a large irregular white food-manufacturing building with\nprocessing silos, two large trailer drop yards (NE and SW) and extensive dock\nbanks — consistent with the J.M. Smucker Uncrustables Scottsville plant. Web\nresearch confirms this as the original Uncrustables plant (opened 2004, ~180,000\nsq ft, since expanded by 80,000+ sq ft; also makes the Snack-N-Waffle line).\n\nStreet View (March 2026) confirmed the plant building and a \"Receiving /\nEmployee Entrance\" sign at the access driveway off Smucker Way. Locked center:\n36.76280, -86.18150.",
+        "mapsUrl": "https://www.google.com/maps/@36.7628,-86.1815,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "J.M. Smucker Uncrustables plant, 299 Smucker Way, Scottsville KY (Allen County). The original (first) Uncrustables plant — opened 2004, ~180,000 sq ft, since expanded by 80,000+ sq ft; also makes Snack-N-Waffle; ~288-500 employees. Roster pin (ROOFTOP) was ~1400m off the building centroid; resolved by satellite — a large irregular white food-plant building with processing silos, two large trailer drop yards (NE and SW) and extensive dock banks. Confirmed by Street View (Mar 2026) showing the plant and a 'Receiving / Employee Entrance' sign at the access driveway.",
+          "truckGate": "FALSE — the plant access driveway off Smucker Way is signed 'Receiving / Employee Entrance' and is a wide OPEN driveway with no barrier arm, sliding gate or checkpoint pinch-point at the public road (confirmed in Street View Mar 2026). The truck route runs in openly and loops around the building to the dock yards. No controlled gate at the property line.",
+          "guardShack": "FALSE — no guard booth at the entrance driveway, the public-road intersection, or anywhere along the frontage in Street View or satellite.",
+          "remoteGs": "FALSE — no truck gate, so remote check-in does not apply.",
+          "dockDoors": "25-50 — dock banks with trailers backed in on the NE building face and a separate dock cluster on the SW face; ~38 doors estimated. Flagged low confidence (some faces shadowed).",
+          "dropArea": "50+ — two large dedicated trailer drop yards, one on the NE and one on the SW, holding dozens of trailers in marked stalls; ~65 trailers visible, capacity ~100 combined.",
+          "shipRcvSeparate": "TRUE — two physically separate dock clusters on different building faces (NE and SW), consistent with separated receiving and shipping operations.",
+          "drivewayLong": "Long, deep approach — the open access driveway plus internal truck route give ample 3+ truck stacking room.",
+          "fastLaneOpportunity": "Wide open entrance apron and substantial unused paved width; room to add lanes if a controlled gate were installed.",
+          "postGateStaging": "Large open paved truck yards inside the property serve as staging before the docks.",
+          "railServed": "FALSE — no rail spur into the property; ships by truck.",
+          "urbanRural": "Rural — Scottsville is a small town; the plant sits on the edge of town surrounded by open farmland and light industry.",
+          "buildingCount": "1 — a single large integrated manufacturing building (irregular footprint from successive expansions).",
+          "dropYard": "TRUE — two dedicated trailer-storage lots distinct from the active dock aprons.",
+          "siteAreaAcres": "70.7 acres for the plant property (building, dock aprons, two drop yards, employee parking and grounds)."
+        }
+      },
+      {
+        "id": "06-smuckers-spreads-toppings-orrville-oh",
+        "name": "Smucker's Spreads/Toppings - Orrville OH",
+        "type": "Manufacturing - Fruit spreads, syrups, ice cream toppings",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "scale"
+        ],
+        "center": {
+          "lat": 40.8478,
+          "lng": -81.7605
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.8437,
+            "west": -81.7648,
+            "north": 40.8525,
+            "east": -81.756
+          },
+          "truckGate": {
+            "south": 40.84395,
+            "west": -81.7601,
+            "north": 40.84455,
+            "east": -81.759
+          },
+          "dropYards": [
+            {
+              "south": 40.8443,
+              "west": -81.7613,
+              "north": 40.8465,
+              "east": -81.7588
+            },
+            {
+              "south": 40.8469,
+              "west": -81.7613,
+              "north": 40.8481,
+              "east": -81.7598
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.8472,
+              "west": -81.7607,
+              "north": 40.849,
+              "east": -81.7598
+            }
+          ],
+          "staging": {
+            "south": 40.8466,
+            "west": -81.7607,
+            "north": 40.8474,
+            "east": -81.7596
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 8,
+          "siteAreaAcres": 64,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Account: JM Smucker\n- Type: Manufacturing — fruit spreads, syrups, ice cream toppings (plus corporate HQ)\n- Address: 1 Strawberry Lane, Orrville, OH 44667\n- Resolved center: 40.84780, -81.76050 (manufacturing/distribution complex)",
+        "mapsUrl": "https://www.google.com/maps/@40.84780,-81.76050,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "South truck driveway opens directly onto the public road with no barrier arm, sliding gate, or checkpoint pinch-point (Street View Apr-2023, Jan-2025). Open uncontrolled entrance into the drop yard / dock area.",
+          "guardShack": "No staffed booth at the south entrance; only a small free-standing yard sign. No booth structure visible at any campus truck access.",
+          "remoteGs": "False because there is no controlled truck gate at all.",
+          "drivewayLong": "Large internal yard between the open entrance and the dock bank can hold a deep queue of 3+ trucks.",
+          "fastLaneOpportunity": "Wide unmarked paved entrance apron and ample yard width — physical room to add an express lane.",
+          "dockDoors": "Main dock bank on the east face shows ~14 trailers backed in; additional dock faces on other building sides bring the site total into the 25-50 band. Count is an overhead estimate.",
+          "dropArea": "Multiple dedicated trailer-storage rows south and southeast of the dock bank, 70+ trailers visible, capacity well above 50.",
+          "multipleFacilities": "Campus of 8+ large buildings: corporate HQ, the main manufacturing/distribution complex, original Orrville plant buildings to the north, and SE warehouse/storage structures.",
+          "railServed": "An active rail line runs north-south through the campus with at least one spur toward the buildings.",
+          "scale": "No truck scale clearly visible in overhead imagery; flagged as uncertain.",
+          "urbanRural": "Orrville is a small Ohio town (~8,300 pop); the campus sits at the edge of town with farmland directly east and south."
+        }
+      },
+      {
+        "id": "07-jif-peanut-butter-lexington-ky",
+        "name": "Jif Peanut Butter - Lexington KY",
+        "type": "Manufacturing - Peanut butter (Jif)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "truckGateCount"
+        ],
+        "center": {
+          "lat": 38.0428,
+          "lng": -84.4778
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.0409,
+            "west": -84.4805,
+            "north": 38.0445,
+            "east": -84.4753
+          },
+          "truckGate": {
+            "south": 38.0415,
+            "west": -84.476,
+            "north": 38.0421,
+            "east": -84.4752
+          },
+          "dropYards": [
+            {
+              "south": 38.0425,
+              "west": -84.4793,
+              "north": 38.0434,
+              "east": -84.4777
+            },
+            {
+              "south": 38.0433,
+              "west": -84.4798,
+              "north": 38.0442,
+              "east": -84.4783
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 38.0419,
+              "west": -84.4762,
+              "north": 38.0428,
+              "east": -84.4753
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 80,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 2,
+          "buildingCount": 9,
+          "siteAreaAcres": 30,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Account: JM Smucker\n- Type: Manufacturing — peanut butter (Jif); the world's largest peanut butter factory\n- Address: 767 Winchester Rd / 767 E Third St, Lexington, KY 40505\n- Resolved center: 38.04280, -84.47780 (manufacturing complex)",
+        "mapsUrl": "https://www.google.com/maps/@38.04280,-84.47780,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "The Jif plant is a fully fenced urban complex. Street View along the internal access road off Winchester Rd shows chain-link / ornamental perimeter fencing and rolling gates at the access points (rail-crossing gate visible open). Trucks enter through a controlled gated point.",
+          "guardShack": "No guard booth positively identified at the truck driveway off Winchester Rd despite checking multiple Street View headings (2024-2025). Signage at the office entrance reads NO TRACTOR TRAILERS, directing trucks to a separate gate; that gate appears to be a rolling fence gate without a staffed booth.",
+          "remoteGs": "Set true: a controlled truck gate exists but no guard shack was found, implying kiosk/call-box/app check-in. Flagged uncertain.",
+          "drivewayShort": "The internal access road off Winchester Rd is short before it reaches dock aprons and the yard; only 1-2 trucks of stacking room.",
+          "backupSensitive": "Tight urban site jammed against Winchester Rd (a major divided arterial) with a rail line; a truck queue at the gate has little room and could spill toward the road.",
+          "dockDoors": "Visible dock faces show ~12-14 trailers backed in on each of multiple building faces; the world's-largest Jif plant spans ~28 acres / multiple buildings, putting the total in the 25-50 band (overhead estimate).",
+          "dropArea": "Multiple large trailer-storage lots on the west/northwest of the complex, 80+ trailers visible, capacity well above 50.",
+          "truckGateCount": "At least one main internal truck driveway off Winchester Rd plus a rail-side gate; counted 2, low confidence.",
+          "multipleFacilities": "Confirmed campus of 9+ interconnected buildings (process plant, warehouses, office) across ~28 acres per web sources.",
+          "railServed": "Active rail spur runs into the plant; Jif-branded silo and rail tracks visible in Street View.",
+          "urbanRural": "Site is within dense Lexington urban fabric — residential, commercial and arterial roads on all sides."
+        }
+      },
+      {
+        "id": "08-smuckers-peanut-butter-new-bethlehem-pa",
+        "name": "Smucker's Peanut Butter - New Bethlehem PA",
+        "type": "Manufacturing - Peanut butter / spreads",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "multipleFacilities"
+        ],
+        "center": {
+          "lat": 41.0029,
+          "lng": -79.326
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.0024,
+            "west": -79.3269,
+            "north": 41.00375,
+            "east": -79.32505
+          },
+          "truckGate": {
+            "south": 41.0032,
+            "west": -79.3258,
+            "north": 41.00355,
+            "east": -79.32525
+          },
+          "dropYards": [
+            {
+              "south": 41.003,
+              "west": -79.32575,
+              "north": 41.00345,
+              "east": -79.3252
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.00295,
+              "west": -79.326,
+              "north": 41.0033,
+              "east": -79.32545
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 10,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 3,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Account: JM Smucker\n- Type: Manufacturing — peanut butter / spreads\n- Address: 300 Keck Ave, New Bethlehem, PA 16242\n- Resolved center: 41.00290, -79.32600",
+        "mapsUrl": "https://www.google.com/maps/@41.00290,-79.32600,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Small old plant integrated into a residential neighborhood. Truck/dock yard reached by an open driveway off the residential street with no barrier arm, gate, or checkpoint. Orange fencing seen in Street View is temporary construction fencing, not a controlled perimeter.",
+          "guardShack": "No guard booth at any plant access point; only a small free-standing Smucker monument sign at the driveway.",
+          "remoteGs": "False — no controlled truck gate exists.",
+          "drivewayShort": "Truck yard is tiny; the approach from the street to the dock holds only 1-2 trucks.",
+          "backupSensitive": "Dock yard opens directly onto a narrow residential street; a truck queue would block the neighborhood street.",
+          "dockDoors": "Small operation — 3-4 trailers and a few dock positions visible; estimated 0-10 doors. Older facility, some dock faces obscured by adjacent buildings.",
+          "dropArea": "Only a handful of trailers parked in the small east-side lot; no dedicated drop yard, 0-10 band.",
+          "dropYard": "No dedicated trailer-storage lot; the few trailers sit in the active truck/dock yard.",
+          "multipleFacilities": "Plant is a single connected cluster of 3 adjacent older industrial buildings, not a multi-cluster campus; flagged uncertain due to the merged building footprints.",
+          "railServed": "No active rail spur into the plant visible (a former rail corridor runs nearby but no spur reaches the site).",
+          "urbanRural": "New Bethlehem is a small Clarion County borough (~900 residents); the plant sits within a small-town residential block — Rural."
+        }
+      },
+      {
+        "id": "09-rw-knudsen-juices-chico-ca",
+        "name": "R.W. Knudsen Juices - Chico CA",
+        "type": "Manufacturing - Juices/beverages (Knudsen)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "scale"
+        ],
+        "center": {
+          "lat": 39.7067,
+          "lng": -121.8025
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.7047,
+            "west": -121.8056,
+            "north": 39.7085,
+            "east": -121.8002
+          },
+          "truckGate": {
+            "south": 39.70475,
+            "west": -121.8045,
+            "north": 39.7052,
+            "east": -121.8039
+          },
+          "dropYards": [
+            {
+              "south": 39.7074,
+              "west": -121.806,
+              "north": 39.7085,
+              "east": -121.8042
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.7059,
+              "west": -121.8036,
+              "north": 39.7068,
+              "east": -121.8027
+            },
+            {
+              "south": 39.7068,
+              "west": -121.802,
+              "north": 39.7074,
+              "east": -121.8012
+            }
+          ],
+          "staging": {
+            "south": 39.7056,
+            "west": -121.8042,
+            "north": 39.7062,
+            "east": -121.8034
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 38,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Account: JM Smucker (roster) — NOTE: divested, see below\n- Type: Manufacturing — juices / beverages (Knudsen)\n- Address: 29-37 Speedway Ave, Chico, CA 95928\n- Resolved center: 39.70670, -121.80250",
+        "mapsUrl": "https://www.google.com/maps/@39.70670,-121.80250,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "DIVESTITURE": "IMPORTANT — this facility is NO LONGER a J.M. Smucker site. Smucker sold its natural/organic beverage and grains businesses (incl. R.W. Knudsen and the Chico plant) to Nexus Capital Management for $110M; the deal closed Jan 31, 2022. The plant now operates under the TruRoots Company / R.W. Knudsen Family. The entrance sign in Street View reads TruRoots Shipping/Receiving, 29 Speedway.",
+          "truckGate": "Truck entrance is a long open driveway off Speedway Ave with a TruRoots Shipping/Receiving sign. No barrier arm or sliding gate is clearly visible at the entrance; trees partly obscure the driveway end. Some internal fenced enclosures exist on the property. Classified false (open) but flagged uncertain.",
+          "guardShack": "No guard booth identified at the Speedway Ave entrance or along the access road in satellite or 2024 Street View. Flagged uncertain due to tree cover at the driveway.",
+          "remoteGs": "False — no controlled truck gate was confirmed.",
+          "drivewayLong": "The access road from Speedway Ave to the docks is long with ample paved width — can hold a deep 3+ truck queue.",
+          "fastLaneOpportunity": "Very wide paved truck approach and yard with unused width — physical room for an express/bypass lane.",
+          "dockDoors": "Docks spread across multiple building faces; ~4-8 trailers seen backed in at a time. Estimated 10-25 total doors (overhead estimate).",
+          "dropArea": "Large dedicated trailer-storage yard on the northwest with multiple long rows of parked trailers; 50+ trailers visible across the site, drop-stall band 25-50.",
+          "dropYard": "Clear dedicated trailer-storage lot northwest of the plant separate from active dock staging.",
+          "multipleFacilities": "Campus of 6+ large buildings — multiple manufacturing/warehouse structures plus process/tank areas.",
+          "railServed": "No rail spur into the property visible.",
+          "scale": "No truck scale clearly identified; flagged uncertain.",
+          "urbanRural": "Site is on the rural edge of Chico with orchards and farmland directly west and a low-density residential fringe south."
+        }
+      },
+      {
+        "id": "10-smucker-plant-salinas-ca",
+        "name": "Smucker Plant - Salinas CA",
+        "type": "Manufacturing - Fruit/produce processing",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dockDoorCount",
+          "dropArea",
+          "scale"
+        ],
+        "center": {
+          "lat": 36.6576,
+          "lng": -121.6248
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 36.6552,
+            "west": -121.6268,
+            "north": 36.659,
+            "east": -121.6224
+          },
+          "truckGate": {
+            "south": 36.657,
+            "west": -121.6262,
+            "north": 36.6576,
+            "east": -121.6254
+          },
+          "dropYards": [
+            {
+              "south": 36.6562,
+              "west": -121.6256,
+              "north": 36.6573,
+              "east": -121.6242
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 36.6564,
+              "west": -121.6254,
+              "north": 36.6576,
+              "east": -121.6246
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 18,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 22,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Account: JM Smucker (roster) — NOTE: closed / former site, see below\n- Type: Manufacturing — fruit / produce processing\n- Address (roster): \"Salinas, CA 93901\" (city-level only)\n- Resolved address: 1275 Hansen St, Salinas, CA 93901\n- Resolved center: 36.65760, -121.62480",
+        "mapsUrl": "https://www.google.com/maps/@36.65760,-121.62480,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "CLOSURE": "IMPORTANT — this is a FORMER J.M. Smucker facility, no longer Smucker-operated. Smucker's Salinas preserves/jelly/ice-cream-topping plant operated 1960/61 and was closed by end of 2005, with production moved to Orrville OH and Memphis TN. The building at 1275 Hansen St is now occupied by Taylor Farms Retail (a fresh-produce company), per the EPA FRS facility registry. The yard audit below describes the current physical site.",
+          "location": "Roster gave only city-level 'Salinas, CA 93901' (APPROXIMATE geocode landed in a residential neighborhood ~4 km from the plant). The historic Smucker plant address was resolved to 1275 Hansen St, Salinas via Macrae's Blue Book and confirmed by the EPA FRS registry (now Taylor Farms Retail). Center relocated to that industrial complex.",
+          "truckGate": "Truck/dock yard is reached by an open driveway off Hansen St between two large buildings. No barrier arm, sliding gate, or checkpoint visible in 2024 Street View; the property line has only low fencing in places. Classified false (open) but flagged uncertain.",
+          "guardShack": "No guard booth identified at the Hansen St entrance or office frontage in satellite or Street View.",
+          "remoteGs": "False — no controlled truck gate confirmed.",
+          "drivewayShort": "The driveway from Hansen St to the dock/yard is short, holding only 1-2 trucks before the docks.",
+          "dockDoors": "Multi-building food-processing complex; ~8-10 trailers staged at building faces. Total estimated 25-50 doors (overhead estimate, several faces partly obscured by canopies/solar).",
+          "dropArea": "Moderate trailer staging along the west building face and interior yard; estimated 10-25 drop stalls.",
+          "dropYard": "Trailers staged in an interior yard separate from the immediate dock apron — qualifies as a small on-site drop yard.",
+          "multipleFacilities": "Complex is a cluster of 5+ adjacent/connected large industrial buildings with process equipment.",
+          "railServed": "No active rail spur into the property visible; a rail line runs through the wider Salinas industrial district but no spur reaches this site.",
+          "scale": "No truck scale clearly identified; flagged uncertain.",
+          "urbanRural": "Site sits within the dense Salinas industrial district, a real city — Urban."
+        }
+      },
+      {
+        "id": "11-smucker-plant-havre-de-grace-md",
+        "name": "Smucker Plant - Havre de Grace MD",
+        "type": "Manufacturing - Spreads / portion control products",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack"
+        ],
+        "center": {
+          "lat": 39.530705,
+          "lng": -76.108505
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.5296,
+            "west": -76.1099,
+            "north": 39.5318,
+            "east": -76.1072
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 39.52985,
+              "west": -76.10905,
+              "north": 39.53025,
+              "east": -76.1082
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 9,
+          "trailersVisible": 7,
+          "trailerParkingCapacity": 8,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 14,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster input: \"1601 Pulaski Hwy, Havre de Grace, MD 21078\" — geocoded to 39.535468, -76.116224.\n- Problem found: That point lands on a long narrow strip building on Pulaski Hwy (US-40) that reads as retail/strip commercial, not a manufacturing plant.\n- Resolution: Web search for the Smucker Havre de Grace plant returned the real address 340 Old Bay Lane, Havre de Grace MD 21078 (operating names: Smucker Quality Beverages / Smucker Natural Foods Inc — fruit/juice canning & bottling, portion-control type products). Listed coordinates ~39.5307, -76.1085.\n- Confirmed building: Satellite probes at 39.530705, -76.108505 show a mid-sized industrial/manufacturing building (~50k sq ft footprint) with a full rooftop solar array on its southern half, process tanks/silos at the NE corner, dock doors with trailers on the SE face, and a perimeter loop driveway. Consistent with a food/beverage plant. Locked center: 39.5305, -76.1085, ~640 m SE of the geocoded point.",
+        "mapsUrl": "https://www.google.com/maps/@39.530705,-76.108505,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address 1601 Pulaski Hwy was imprecise. Web search resolved the actual plant to 340 Old Bay Lane, Havre de Grace MD (Smucker Quality Beverages / Smucker Natural Foods), ~640m SE of the geocoded point. Locked center 39.5305, -76.1085 on the industrial building with rooftop solar.",
+          "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point visible at the property entrance in satellite z20. The perimeter loop driveway connects to an open industrial-park intersection. Chain-link fencing runs along property lines but the truck driveway is uncontrolled. Classified false; flagged uncertain because Street View coverage did not reach the plant itself (panos clustered on Old Bay Ln near the neighboring building).",
+          "guardShack": "No small staffed booth structure beside any entrance. A small outbuilding sits at the NE corner near the tank farm but it is not positioned as an entry guard booth.",
+          "dockDoors": "~9 dock doors counted on the SE/S building face, several with trailers backed in. Band 0-10.",
+          "dropArea": "A handful of trailers parked along the SE apron and near the NE corner without tractors; no dedicated marked drop lot. Band 0-10.",
+          "urbanRural": "Edge-of-town industrial park on the outskirts of Havre de Grace; farmland immediately south. Rural per rubric (small-town industrial defaults to Rural).",
+          "drivewayShort": "Single perimeter loop drive; gate-to-dock approach holds only 1-2 trucks.",
+          "buildingCount": "One main plant building. Other large buildings nearby (incl. a separate distribution warehouse to the east and a building NW with CFI trailer) are separate properties in the same park, not the same parcel.",
+          "yardMetrics": "Counts are honest estimates from z19-z20 imagery; trailer/dock counts low-confidence at the margin."
+        }
+      },
+      {
+        "id": "12-milk-bone-pet-treats-buffalo-ny",
+        "name": "Milk-Bone Pet Treats - Buffalo NY",
+        "type": "Manufacturing - Pet treats (Milk-Bone), ambient + refrigerated",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 42.909089,
+          "lng": -78.829817
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.9081,
+            "west": -78.8318,
+            "north": 42.9109,
+            "east": -78.829
+          },
+          "truckGate": {
+            "south": 42.9092,
+            "west": -78.8311,
+            "north": 42.90945,
+            "east": -78.8306
+          },
+          "dropYards": [
+            {
+              "south": 42.9094,
+              "west": -78.8315,
+              "north": 42.9106,
+              "east": -78.8293
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 42.90825,
+              "west": -78.83,
+              "north": 42.9088,
+              "east": -78.82935
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 48,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 18.2,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster input: \"243 Urban St, Buffalo, NY 14211\" — geocoded 42.909089, -78.829817 (ROOFTOP, moved only 99 m).\n- Confirmed building: Satellite probes land directly on a large multi-section, multi-story historic brick manufacturing complex on Buffalo's East Side. A pink-painted grain-silo tower stands at the SW corner — a well-known landmark of this plant. A rail line runs N-S immediately along the east property edge.\n- Web confirmation: This is the J.M. Smucker Co. Milk-Bone plant at 243 Urban St — 550,000 sq ft, dog-treat operations on this site since 1925, a $53M renovation underway (new production line, oven, freezer expansion; completion ~April 2027), ~280 jobs. Locked center: 42.909089, -78.829817.",
+        "mapsUrl": "https://www.google.com/maps/@42.909089,-78.829817,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "243 Urban St, Buffalo NY. ROOFTOP geocode confirmed (moved 99m). Building positively identified: large multi-section/multi-story historic brick manufacturing complex on Buffalo's East Side, pink grain-silo tower landmark, rail line on the east side. Web-confirmed as the J.M. Smucker Milk-Bone plant (550,000 sq ft, dog-treat ops since 1925, $53M renovation underway, completion April 2027).",
+          "truckGate": "TWO controlled truck entrances. (1) The dedicated drop yard NW of the plant has a wide chain-link SLIDING GATE across its truck driveway (Street View 2025-07 from Urban St shows the slider clearly). (2) The fenced truck/dock yard at the building has sliding chain-link gates. truckGateCount set to 2.",
+          "guardShack": "No staffed guard booth observed at either truck gate in Street View 2025-07 or satellite z20-z21. A small structure sits at the SW corner of the building yard but is not positioned/shaped as an entry guard booth (more a utility/scale-house type). Treated as unmanned controlled gates. Flagged uncertain.",
+          "remoteGs": "True - controlled gates exist but no guard booth, implying kiosk/app/call-box check-in.",
+          "dropYard": "Large dedicated trailer-storage lot NW of the plant building (mostly gravel, with an internal paved loop drive), packed with rows of parked drop trailers. Separate from active dock staging.",
+          "dropArea": "50+ - trailer rows in the drop yard count well above 50 stalls' worth of trailers.",
+          "dockDoors": "~14 dock doors estimated across the building's E/SE faces; the multi-story masonry plant makes door counting harder than a modern tilt-up - flagged uncertain. Band 10-25.",
+          "railServed": "A CSX/active rail line runs immediately along the east property edge with rail cars present, but no rail spur was observed entering the property to a building face. Set false (rail-adjacent, not rail-served).",
+          "fastLaneOpportunity": "The drop yard has a wide gravel apron and ample unused paved/graded width at the gate - room to add a bypass/express lane.",
+          "drivewayLong": "The drop yard interior holds a deep queue (3+ trucks) between the sliding gate and the trailer rows.",
+          "urbanRural": "Dense East Side Buffalo urban fabric - row houses on all surrounding streets. Urban.",
+          "yardMetrics": "trailersVisible ~48 and trailerParkingCapacity ~70 are honest estimates from z19 imagery; dock count low-confidence."
+        }
+      },
+      {
+        "id": "13-meow-mix-pet-food-decatur-al",
+        "name": "Meow Mix Pet Food - Decatur AL",
+        "type": "Manufacturing - Cat food (Meow Mix)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "scale",
+          "dockDoorCount",
+          "entryExitSeparate"
+        ],
+        "center": {
+          "lat": 34.6068,
+          "lng": -86.9685
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.6048,
+            "west": -86.9705,
+            "north": 34.6084,
+            "east": -86.9668
+          },
+          "truckGate": {
+            "south": 34.6048,
+            "west": -86.9702,
+            "north": 34.6051,
+            "east": -86.9696
+          },
+          "dropYards": [
+            {
+              "south": 34.6054,
+              "west": -86.9701,
+              "north": 34.6068,
+              "east": -86.9685
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.6066,
+              "west": -86.9685,
+              "north": 34.6073,
+              "east": -86.9676
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 75,
+          "truckGateCount": 2,
+          "buildingCount": 3,
+          "siteAreaAcres": 33.6,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster input: \"1200 Market St NE, Decatur, AL 35601\" — geocoded 34.607163, -86.968268 (ROOFTOP, moved 190 m).\n- Confirmed building: Satellite probes land on a large white ~200,000 sq ft manufacturing building on the Tennessee River riverfront in Decatur, with an adjacent dock building, a chain-link-fenced trailer yard, a processing/tank cluster, and rail tracks along the south/east edge.\n- Web confirmation: This is the J.M. Smucker Meow Mix plant (operating entity Meow Mix Decatur Production LLC) at 1200 Market St NE — produces ~40% of Smucker's cat food, ~600 tons/day, ~200,000 sq ft, with a recent $21.4M expansion (admin building + new manufacturing equipment). Locked center: 34.6068, -86.9685.",
+        "mapsUrl": "https://www.google.com/maps/@34.606800,-86.968500,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "1200 Market St NE, Decatur AL. ROOFTOP geocode confirmed (moved 190m). Building positively identified: large white ~200,000 sq ft manufacturing building on the Tennessee River riverfront, with an adjacent dock building, a chain-link-fenced trailer yard, and ingredient/process tanks. Web-confirmed as the J.M. Smucker Meow Mix plant (Meow Mix Decatur Production LLC) - ~40% of Smucker's cat food, ~600 tons/day, recent $21.4M expansion.",
+          "truckGate": "Property is fully chain-link fenced. Truck entrances are gated with sliding chain-link gates (visible in Street View 2022 from Market St and from the rail-side road). At least 2 truck access points: one off Market St NE at the SW, one off the rail-side gravel road on the east. truckGateCount = 2.",
+          "guardShack": "No staffed guard booth observed at any truck gate in Street View 2022 or satellite z21. The structure at the Market St frontage is a low admin/office building, not an entry booth. A green-roofed ancillary building near the trailer yard is not positioned as a gate booth. Flagged uncertain.",
+          "remoteGs": "True - controlled chain-link gates with no guard booth, implying kiosk/app check-in.",
+          "railServed": "TRUE - a multi-track rail yard with hopper cars runs along the south/east edge of the property and a spur serves the plant's bulk-ingredient receiving (consistent with grain/ingredient intake for pet food). Clear in z19-z21 and Street View.",
+          "shipRcvSeparate": "Likely true - bulk ingredient receiving is rail-side on the south/east; finished-goods truck shipping docks are on a separate building face. Distinct dock clusters. Flagged via dockDoorCount uncertainty.",
+          "entryExitSeparate": "Two separate truck access points on different property faces (Market St SW vs rail-side road E); set true. Flagged uncertain because in/out lane assignment per gate is not confirmable from imagery.",
+          "dockDoors": "~18 dock doors estimated across the dock building's faces; white-roof glare in z20 limited the count. Band 10-25, flagged uncertain.",
+          "dropArea": "50+ - the chain-link trailer yard holds rows of 50+ drop trailers in z18-z19 imagery.",
+          "scale": "A truck scale is plausible at a rail-served bulk-ingredient plant but none was clearly identified - flagged uncertain, classified false.",
+          "buildingCount": "3 - the main white plant building, the adjacent dock/warehouse building, and the processing/tank building cluster. The large round grain-storage tanks further SE are treated as a separate grain-elevator operation and excluded from the perimeter.",
+          "urbanRural": "Riverside industrial corridor on the edge of Decatur (~55k pop small city); rail/river industrial setting. Rural per rubric (small-town industrial defaults to Rural).",
+          "yardMetrics": "trailersVisible ~55, capacity ~75 are honest estimates from z18-z19; dock count low-confidence due to roof glare."
+        }
+      },
+      {
+        "id": "14-pet-food-plant-topeka-ks",
+        "name": "Pet Food Plant - Topeka KS",
+        "type": "Manufacturing/Distribution - Pet food plant + distribution center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "scale",
+          "truckGate",
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 39.087119,
+          "lng": -95.722563
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.0838,
+            "west": -95.7255,
+            "north": 39.09,
+            "east": -95.716
+          },
+          "truckGate": {
+            "south": 39.084,
+            "west": -95.7245,
+            "north": 39.0844,
+            "east": -95.7236
+          },
+          "dropYards": [
+            {
+              "south": 39.0847,
+              "west": -95.7195,
+              "north": 39.0876,
+              "east": -95.7164
+            },
+            {
+              "south": 39.0868,
+              "west": -95.7233,
+              "north": 39.0883,
+              "east": -95.7205
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.0856,
+              "west": -95.7212,
+              "north": 39.0864,
+              "east": -95.7185
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 140,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster input: address only \"Topeka, KS 66619\", APPROXIMATE geocode 38.948122, -95.693136 (moved 2,646 m) — landed in south-central Topeka, the WRONG area.\n- Resolution: Web search resolved the real plant to 2200 NW Brickyard Rd, Topeka KS 66618 — the Big Heart Pet Brands / J.M. Smucker pet food plant and distribution center (formerly Del Monte Foods, in Topeka 55+ years; produces Meow Mix, Milk-Bone and other dry pet food/snacks; ~1.2M sq ft; ~350 employees; a $20.5M expansion announced). Confirmed coordinates 39.087119, -95.722563 (a directory listing for 2200 NW Brickyard Rd).\n- Disambiguation: Topeka also has a very large Goodyear tire plant at 2000 NW US-24, ~2 km ENE — an even bigger multi-section plant. Care was taken NOT to audit the Goodyear building. The audited site is the Big Heart/Smucker pet-food campus on NW Brickyard Rd.",
+        "mapsUrl": "https://www.google.com/maps/@39.087119,-95.722563,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address was only 'Topeka, KS 66619' with an APPROXIMATE geocode (moved 2646m) landing on south-central Topeka - WRONG location. Web search resolved the real plant to 2200 NW Brickyard Rd, Topeka KS 66618 (Big Heart Pet Brands / J.M. Smucker pet food plant + distribution center, formerly Del Monte). Confirmed coords 39.087119, -95.722563. NOTE: distinct from the nearby Goodyear tire plant at 2000 NW US-24 (the very large multi-section plant ~2km ENE). Building positively identified: large multi-section manufacturing plant joined to a large distribution center, extensive trailer drop yards, ingredient silos along the rail.",
+          "truckGate": "Large fenced industrial campus. Internal truck roads and yards are enclosed; truck access comes from the SW via internal roads off NW Brickyard Rd. Street View coverage does not reach the actual truck gate (panos only reach the corporate office building and surrounding rural roads), so the gate type (arm vs sliding gate) is inferred from a fenced campus of this scale - classified true but flagged uncertain. truckGateCount estimated 2.",
+          "guardShack": "No guard booth positively identified in available imagery. A large food/DC campus of this scale very commonly has a gatehouse, but none was confirmed - classified false, flagged uncertain.",
+          "remoteGs": "Set true on the basis of a controlled gate with no confirmed guard booth; low confidence given imagery limits.",
+          "railServed": "TRUE - a rail line runs along the south edge of the property with a long row of bulk ingredient silos served directly off the rail. Clear in z19-z20.",
+          "scale": "A truck scale is highly likely at a rail-served bulk-ingredient plant + DC of this size; a small pad/structure consistent with a scale appears near the SW entrance area. Classified true, flagged uncertain.",
+          "multipleFacilities": "TRUE - a campus: a multi-section manufacturing plant, a large attached/adjacent distribution center, plus ancillary buildings (corporate office, warehouse/equipment buildings). Web sources describe a 'pet food plant AND distribution center', ~1.2M sq ft.",
+          "shipRcvSeparate": "True - bulk ingredient receiving is rail-side (south/west, near the silos); finished-goods shipping runs from the distribution center dock banks on a separate face.",
+          "dockDoors": "50+ - the distribution center alone shows a long dock face with dozens of doors; combined with plant docks the site is well into the 50+ band. Exact count ~60 is an estimate (roof glare on the DC), flagged uncertain.",
+          "dropArea": "50+ - east-side and central drop yards hold well over 100 parked drop trailers in rows.",
+          "drivewayLong": "Deep internal yards easily hold 3+ truck queues between gate and docks.",
+          "entryExitSeparate": "Large campus with multiple access points on different faces; per-gate in/out lane counts not determinable - entryLanes/exitLanes flagged uncertain.",
+          "urbanRural": "Edge-of-Topeka location at a highway interchange, with farmland and a rail corridor immediately around the property. Topeka is a mid-size city but this site sits on its rural NW fringe - Rural per rubric.",
+          "yardMetrics": "trailersVisible ~130 and capacity ~180 are honest order-of-magnitude estimates across the multiple drop yards; dockDoorCount ~60 is a rough estimate."
+        }
+      },
+      {
+        "id": "15-hostess-bakery-emporia-ks",
+        "name": "Hostess Bakery - Emporia KS",
+        "type": "Manufacturing - Sweet baked snacks (Hostess)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "guardShack"
+        ],
+        "center": {
+          "lat": 38.4173,
+          "lng": -96.2192
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.4153,
+            "west": -96.2216,
+            "north": 38.4197,
+            "east": -96.2168
+          },
+          "truckGate": {
+            "south": 38.41685,
+            "west": -96.21755,
+            "north": 38.41715,
+            "east": -96.2172
+          },
+          "dropYards": [
+            {
+              "south": 38.4185,
+              "west": -96.2208,
+              "north": 38.4197,
+              "east": -96.2185
+            },
+            {
+              "south": 38.416,
+              "west": -96.22,
+              "north": 38.4172,
+              "east": -96.2192
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 38.4163,
+              "west": -96.2192,
+              "north": 38.4172,
+              "east": -96.2182
+            },
+            {
+              "south": 38.4172,
+              "west": -96.22,
+              "north": 38.418,
+              "east": -96.219
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 2,
+          "buildingCount": 3,
+          "siteAreaAcres": 49.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Account: JM Smucker\n- Name: Hostess Bakery - Emporia KS\n- Type: Manufacturing - Sweet baked snacks (Hostess)\n- Address: 1525 Industrial Rd, Emporia, KS 66801\n- Resolved coords: 38.4173, -96.2192 (center of main production block)",
+        "mapsUrl": "https://www.google.com/maps/@38.4173,-96.2192,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Open driveway openings from Industrial Rd; no barrier arm or sliding gate seen in any Street View pass (2025 imagery). South property edge has chain-link fence but the road frontage is open lawn/parking.",
+          "guardShack": "No staffed booth observed at any entrance. Office front is open with employee parking; truck dock driveways are open. Low residual uncertainty since some panos are inside the property.",
+          "dropArea": "Large trailer drop yard at the NW with 50+ trailers in marked rows; clearly exceeds 50.",
+          "dockDoorCount": "Estimate ~40 doors across central building east face, SW building north face, and additional dock banks; overhead-imagery estimate.",
+          "multipleFacilities": "At least 3 distinct buildings: central production block, SW building, plus ancillary structures - a campus.",
+          "shipRcvSeparate": "Dock banks on at least two different building faces (central building east face and SW building north face).",
+          "fastLaneOpportunity": "Wide open driveway aprons and large yard provide ample room to add a bypass lane."
+        }
+      },
+      {
+        "id": "16-hostess-bakery-arkadelphia-ar",
+        "name": "Hostess Bakery - Arkadelphia AR",
+        "type": "Manufacturing - Sweet baked snacks (Hostess Donettes)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "connectivityIssue"
+        ],
+        "center": {
+          "lat": 34.0535,
+          "lng": -93.0935
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.0518,
+            "west": -93.0958,
+            "north": 34.056,
+            "east": -93.0915
+          },
+          "truckGate": {
+            "south": 34.04995,
+            "west": -93.0948,
+            "north": 34.05025,
+            "east": -93.0944
+          },
+          "dropYards": [
+            {
+              "south": 34.053,
+              "west": -93.0928,
+              "north": 34.0556,
+              "east": -93.0913
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.0524,
+              "west": -93.0933,
+              "north": 34.054,
+              "east": -93.0925
+            },
+            {
+              "south": 34.0518,
+              "west": -93.095,
+              "north": 34.0524,
+              "east": -93.0928
+            }
+          ],
+          "staging": {
+            "south": 34.0502,
+            "west": -93.0948,
+            "north": 34.053,
+            "east": -93.0943
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 20,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 45.8,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Account: JM Smucker\n- Name: Hostess Bakery - Arkadelphia AR\n- Type: Manufacturing - Sweet baked snacks (Hostess Donettes)\n- Address: 1 Hostess Way, Arkadelphia, AR 71923\n- Resolved coords: 34.0535, -93.0935 (center of main production building)",
+        "mapsUrl": "https://www.google.com/maps/@34.0535,-93.0935,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Long private access drive (1 Hostess Way) runs ~250 m from the rural public road to the plant. Street View at the road entrance (2024-02) shows only a Hostess monument sign - no barrier arm, gate, or checkpoint. No checkpoint structure on the drive in z20 satellite.",
+          "guardShack": "No staffed booth at the road entrance or anywhere on the access drive.",
+          "drivewayLong": "The ~250 m access drive plus large internal aprons easily hold a 3+ truck queue.",
+          "dropArea": "Trailer drop yard on the E side; ~15-25 drop trailers in marked rows.",
+          "dockDoorCount": "Estimate ~22 doors across the S building face and E dock bank; overhead estimate, satellite imagery may slightly predate full Hostess retrofit.",
+          "shipRcvSeparate": "Separate dock clusters - S face apron and E-face dock bank.",
+          "fastLaneOpportunity": "Long approach drive and wide aprons leave abundant room for a bypass lane.",
+          "buildingCount": "Main 330,000 sq ft production building plus one ancillary utility structure in the NE yard.",
+          "connectivityIssue": "Rural site but only ~3 km from Arkadelphia; cellular coverage likely adequate - flagged as low confidence.",
+          "urbanRural": "Edge-of-town / rural setting, building surrounded by fields and woods."
+        }
+      },
+      {
+        "id": "17-hostess-bakery-columbus-ga",
+        "name": "Hostess Bakery - Columbus GA",
+        "type": "Manufacturing - Sweet baked snacks (Hostess), $120M expansion underway",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "backupSensitive"
+        ],
+        "center": {
+          "lat": 32.4442,
+          "lng": -84.9676
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.4422,
+            "west": -84.9698,
+            "north": 32.446,
+            "east": -84.9663
+          },
+          "truckGate": {
+            "south": 32.4439,
+            "west": -84.9671,
+            "north": 32.4442,
+            "east": -84.96675
+          },
+          "dropYards": [
+            {
+              "south": 32.4438,
+              "west": -84.9676,
+              "north": 32.4458,
+              "east": -84.9664
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.4435,
+              "west": -84.9682,
+              "north": 32.4447,
+              "east": -84.967
+            }
+          ],
+          "staging": {
+            "south": 32.4434,
+            "west": -84.9666,
+            "north": 32.4452,
+            "east": -84.9662
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 34.4,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Account: JM Smucker\n- Name: Hostess Bakery - Columbus GA\n- Type: Manufacturing - Sweet baked snacks (Hostess), $120M expansion underway\n- Address: 1969 Victory Dr, Columbus, GA 31901\n- Resolved coords: 32.4442, -84.9676 (center of main production building)",
+        "mapsUrl": "https://www.google.com/maps/@32.4442,-84.9676,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Property has a confirmed chain-link perimeter fence (visible in 2024-12 Street View along the E side). The truck driveway necessarily passes through a fence opening = a controlled pinch-point, so truckGate set true. No barrier arm directly resolved in imagery - medium confidence.",
+          "guardShack": "No staffed guard booth observed at the truck driveway or any entrance. The small blue-roof structure in the NE yard is an ancillary building, not a gate booth.",
+          "remoteGs": "Fenced perimeter + controlled truck drive but no guard booth implies kiosk / call-box / app check-in - set true; flagged uncertain.",
+          "preGateStaging": "Trucks observed parked along the public E perimeter-road curb (Swift, Denson Freight tractors) - de facto pre-gate staging on the street.",
+          "backupSensitive": "Trucks staging on the public curb indicates limited on-street stacking; a queue could spill along the perimeter road - flagged uncertain.",
+          "dropArea": "Large trailer drop yard on the NE/E side, packed with 50+ trailers in rows.",
+          "dockDoorCount": "Estimate ~35 doors along the SE building face with trailers backed in - overhead estimate.",
+          "urbanRural": "Inside Columbus GA metro along the Victory Drive arterial corridor - Urban.",
+          "method": "Active $120M Smucker expansion underway (completing early 2027); rooftop construction activity visible in satellite imagery."
+        }
+      }
+    ]
+  }
+}

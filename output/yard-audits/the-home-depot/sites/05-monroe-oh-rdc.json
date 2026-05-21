@@ -1,0 +1,53 @@
+{
+  "name": "Home Depot RDC - Monroe OH",
+  "type": "Rapid Deployment Center",
+  "coords": { "lat": 39.43460, "lng": -84.32130 },
+  "geofences": {
+    "perimeter": { "south": 39.43100, "west": -84.32360, "north": 39.43850, "east": -84.31900 },
+    "truckGate": { "south": 39.43340, "west": -84.32320, "north": 39.43420, "east": -84.32230 },
+    "dropYards": [
+      { "south": 39.43620, "west": -84.32130, "north": 39.43770, "east": -84.31960 },
+      { "south": 39.43180, "west": -84.32060, "north": 39.43620, "east": -84.31960 }
+    ],
+    "dockAprons": [
+      { "south": 39.43180, "west": -84.32230, "north": 39.43770, "east": -84.32130 },
+      { "south": 39.43180, "west": -84.32130, "north": 39.43770, "east": -84.32030 }
+    ],
+    "staging": { "south": 39.43250, "west": -84.32320, "north": 39.43420, "east": -84.32230 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 220,
+    "trailersVisible": 300,
+    "trailerParkingCapacity": 360,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 73.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.43460,-84.32130,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "scale"],
+  "fieldNotes": {
+    "truckGate": "Trucker reviews of RDC 5084 explicitly describe a gated check-in with 10-20 min in-gate processing and 10-12 trucks queued at the entrance; the private campus ring road is the controlled truck approach to the building.",
+    "guardShack": "Trucker reviews explicitly reference a 'guard shack' staffed by check-in personnel at this RDC. Booth not directly visible in public Street View (gate is internal to the private Gateway-park campus), but operational evidence is strong.",
+    "shipRcvSeparate": "Cross-dock RDC with continuous dock doors on BOTH long faces of the building (east and west) — inbound and outbound run from physically separate dock banks.",
+    "dropArea": "Large marked trailer drop yard at the north end plus a second full row of parked trailers along the east apron — well over 50 trailers visible.",
+    "drivewayLong": "Trucker reviews note 10-12 trucks queued to in-gate; ample ring-road approach holds a deep queue.",
+    "fastLaneOpportunity": "Wide ring-road apron and unused paved width at the campus entrance leave room to add an express/bypass lane.",
+    "entryLanes": "Estimated from approach width; gate booth not directly imaged.",
+    "scale": "No truck scale visible in satellite imagery.",
+    "siteAreaAcres": "Derived from perimeter box (~820m x ~360m developed footprint within the Gateway business park)."
+  },
+  "method": "deep-audit"
+}

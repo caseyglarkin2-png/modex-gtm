@@ -1,0 +1,51 @@
+{
+  "name": "Swiss American Sausage Co. - Lathrop CA",
+  "type": "Meat Processing Plant",
+  "coords": { "lat": 37.80180, "lng": -121.29650 },
+  "geofences": {
+    "perimeter": { "south": 37.80080, "west": -121.29820, "north": 37.80290, "east": -121.29540 },
+    "truckGate": { "south": 37.80115, "west": -121.29830, "north": 37.80170, "east": -121.29770 },
+    "dropYards": [
+      { "south": 37.80095, "west": -121.29600, "north": 37.80175, "east": -121.29545 }
+    ],
+    "dockAprons": [
+      { "south": 37.80115, "west": -121.29720, "north": 37.80165, "east": -121.29600 }
+    ],
+    "staging": { "south": 37.80105, "west": -121.29720, "north": 37.80155, "east": -121.29560 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 16, "trailersVisible": 28, "trailerParkingCapacity": 35,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 11.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.80180,-121.29650,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Roster address 16500 Harlan Rd geocoded to a Shell gas station - wrong. Web search found the actual address: 251 D'Arcy Parkway, Lathrop (Crossroads Commerce Center). Located the matching meat/sausage plant at 37.8018,-121.2965 - single processing building with refrigerated docks, trailer yard, and a guard-booth entrance off D'Arcy Parkway. Locked center 37.8018,-121.2965.",
+    "truckGate": "TRUE. A red-paved entrance apron off D'Arcy Parkway leads to a controlled entry; the truck yard is fenced. Visible in Street View (2023-08) and satellite z20.",
+    "guardShack": "TRUE. A small guard booth with a red-tile roof sits in the middle of the entry driveway, splitting it into separate lanes - a classic staffed guard shack. Clearly visible in Street View and confirmed on satellite z20.",
+    "remoteGs": "False - a guard shack is present, so not remote check-in.",
+    "entryExitSeparate": "The driveway splits into separate in/out lanes around the central guard booth -> entry/exit separate.",
+    "dockDoors": "~12-14 refrigerated dock doors with reefer trailers (red tractors) backed in along the south building face, plus a few additional positions; ~16 total estimated, 10-25 band.",
+    "dropArea": "Row of ~12-15 parked trailers along the SE edge of the paved truck yard - dropArea 10-25, dedicated drop yard present.",
+    "drivewayLong": "Long red-paved entry apron plus a large internal paved yard - easily holds 3+ trucks between gate and docks.",
+    "postGateStaging": "Large open paved yard inside the gate before the docks serves as a staging/holding area.",
+    "railServed": "No rail spur into the property.",
+    "urbanRural": "Lathrop is in the San Joaquin Valley / greater Stockton metro; the site is in a dense planned commerce-center industrial park - Urban.",
+    "buildingCount": "Single processing/office building.",
+    "shipRcvSeparate": "Dock activity concentrated on one south-face bank - combined ship/receive."
+  },
+  "method": "deep-audit"
+}

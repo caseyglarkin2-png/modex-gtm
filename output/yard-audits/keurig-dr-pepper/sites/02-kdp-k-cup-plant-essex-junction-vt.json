@@ -1,0 +1,54 @@
+{
+  "name": "KDP K-Cup Plant - Essex Junction VT",
+  "type": "Manufacturing - Coffee/K-Cup",
+  "coords": { "lat": 44.513632, "lng": -73.136469 },
+  "geofences": {
+    "perimeter": { "south": 44.51180, "west": -73.13950, "north": 44.51640, "east": -73.13300 },
+    "truckGate": { "south": 44.51400, "west": -73.13820, "north": 44.51460, "east": -73.13740 },
+    "dropYards": [
+      { "south": 44.51480, "west": -73.13620, "north": 44.51620, "east": -73.13380 },
+      { "south": 44.51220, "west": -73.13540, "north": 44.51320, "east": -73.13380 }
+    ],
+    "dockAprons": [
+      { "south": 44.51380, "west": -73.13800, "north": 44.51480, "east": -73.13700 },
+      { "south": 44.51480, "west": -73.13720, "north": 44.51560, "east": -73.13560 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 38,
+    "trailersVisible": 45,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 2,
+    "buildingCount": 4,
+    "siteAreaAcres": 55.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@44.513632,-73.136469,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "buildingCount"],
+  "fieldNotes": {
+    "location": "Roster address '63 South Park Dr' and pin (44.503824,-73.180386) were wrong - ~3.6 km off, landing in Essex Junction commercial sprawl. Correct facility is the Keurig Green Mountain / KDP coffee roasting and K-Cup complex at 30 Gauthier Dr / 5 New England Dr, Essex Junction VT 05452 (44.513632,-73.136469). Confirmed via Vermont Business Magazine, GMCR 2011 expansion press release (350,000 sq ft addition connecting 30 Gauthier Dr and 5 New England Dr), and warehouserating.com listing. Williston VT operations consolidated here in 2024.",
+    "truckGate": "Open driveways from the internal industrial-park road into the W truck court and N dock area. No barrier arm, sliding gate, or checkpoint pinch-point visible in z19-z20 satellite or 2011 Street View. No perimeter fence on the publicly visible sides.",
+    "guardShack": "No booth-footprint structure at any of the truck-court entrances in satellite or Street View.",
+    "multipleFacilities": "Connected multi-building campus - main K-Cup/roasting plant plus additional connected/adjacent buildings, with separate trailer drop yards to the N/NE and S.",
+    "dropArea": "Two dedicated trailer drop yards: a row-parked lot on the N/NE side (~25-30 trailers) and another on the S side (~15-20 trailers). Banded 25-50.",
+    "dockDoors": "Dock banks on the W building face (~10-12 trailers backed in) and the N building face (additional dock bank). Total estimated 25-50, medium confidence.",
+    "shipRcvSeparate": "Dock activity split across at least two distinct building faces (W and N) suggesting separate shipping/receiving clusters.",
+    "urbanRural": "Suburban industrial park within the greater Burlington VT metro fabric (Essex Junction); dense surrounding industrial/commercial development - Urban.",
+    "buildingCount": "4 is an estimate for the connected/adjacent building cluster; the complex is multi-building and hard to count distinct structures from overhead.",
+    "imageryNote": "Street View is 2011-vintage; satellite is recent. Gate/guard-shack determination relies primarily on recent satellite plus older SV - both show open access."
+  },
+  "method": "deep-audit"
+}

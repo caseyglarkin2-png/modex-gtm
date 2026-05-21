@@ -1,0 +1,51 @@
+{
+  "name": "DHL Supply Chain - Siemens Healthineers Life Sciences DC - Memphis TN",
+  "type": "Life Sciences & Healthcare Distribution Center",
+  "coords": { "lat": 34.997800, "lng": -89.859500 },
+  "geofences": {
+    "perimeter": { "south": 34.99680, "west": -89.86090, "north": 34.99885, "east": -89.85820 },
+    "truckGate": { "south": 34.99815, "west": -89.86065, "north": 34.99855, "east": -89.86025 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 34.99745, "west": -89.86040, "north": 34.99845, "east": -89.85950 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14,
+    "trailersVisible": 4,
+    "trailerParkingCapacity": 12,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 24.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.997800,-89.859500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Controlled truck entrance on the west side off Global Drive: a black metal cantilever sliding gate set in the property's ornamental perimeter fence (confirmed in Street View 2025-04). The entire ~24-acre parcel is fenced.",
+    "guardShack": "No guard booth at the gate. Street View shows only the sliding gate plus a control pedestal / card-reader on a yellow bollard — no staffed booth structure.",
+    "remoteGs": "Truck gate present + no guard shack + a control pedestal at the gate = remote/kiosk/card-reader check-in.",
+    "dockDoors": "Dock doors on the building's west face; ~14 doors visible with box trucks and a trailer backed in. Band 10-25.",
+    "dropArea": "Only a few trailers/box trucks in the truck yard; no dedicated trailer-storage lot. Band 0-10.",
+    "shipRcvSeparate": "Single dock bank on the west face — a 'RECEIVING' sign marks it; ship and receive run from the same dock cluster.",
+    "postGateStaging": "Paved truck yard inside the gate ahead of the docks gives room to hold trucks.",
+    "drivewayLong": "Internal west-side truck yard can stack 3+ trucks between the gate and docks.",
+    "urbanRural": "Memphis southeast industrial submarket, dense logistics fabric = Urban.",
+    "dockDoorCount": "~14 doors estimated from satellite z20 and Street View; band 10-25 confident, exact count approximate.",
+    "siteAreaAcres": "422,000 sq ft building (Siemens Healthineers occupies ~260,000 sq ft) on a fenced parcel of ~24 acres."
+  },
+  "method": "deep-audit"
+}

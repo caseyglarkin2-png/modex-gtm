@@ -1,0 +1,54 @@
+{
+  "name": "DHL Supply Chain - IDS Fulfillment DC - Indianapolis IN",
+  "type": "Multi-Customer E-Commerce Fulfillment Center",
+  "coords": { "lat": 39.68545, "lng": -86.31017 },
+  "geofences": {
+    "perimeter": { "south": 39.68340, "west": -86.31350, "north": 39.68720, "east": -86.30870 },
+    "truckGate": { "south": 39.68480, "west": -86.31345, "north": 39.68530, "east": -86.31280 },
+    "dropYards": [
+      { "south": 39.68360, "west": -86.31300, "north": 39.68660, "east": -86.31160 }
+    ],
+    "dockAprons": [
+      { "south": 39.68360, "west": -86.31160, "north": 39.68660, "east": -86.31050 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 14,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 42.9,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.68545,-86.31017,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible"],
+  "fieldNotes": {
+    "location": "Roster had no address/coords. Resolved via web research: IDS Fulfillment's Indianapolis DC (distinct from the Plainfield IN HQ at idx 2) is at 5425 Exploration Drive, Indianapolis IN 46241 - 'World Connect @ Ameriplex - Building 3', a ~620,935-661,324 sq ft LEED-certified distribution building on ~47 acres, built 2018, in the Ameriplex business park across I-70 from Indianapolis International Airport. IDS opened it in 2018 as its second fulfillment center; now part of DHL Supply Chain after the May 2025 acquisition.",
+    "truckGate": "The property is fully perimeter-fenced (chain-link). The truck court is accessed by a driveway from Exploration Drive that enters through a gate in the fence line - confirmed in Street View (2019 + 2024 panos showing fence with a gate opening at the truck driveway). Controlled truck entry.",
+    "guardShack": "No guard booth visible at the truck gate - Street View shows the gated fence opening with no staffed structure.",
+    "remoteGs": "true - there is a truck gate but no guard shack, implying kiosk/app/call-box check-in.",
+    "dockDoors": "Large ~620k sq ft building with loading docks along the full west face; estimated ~100-120 doors. Banded 50+. Exact count uncertain at available resolution.",
+    "dropArea": "Extensive marked, numbered trailer-parking stalls along the west truck court (stalls numbered 70x seen at z20) - a dedicated drop yard. 50+ band.",
+    "trailersVisible": "Imagery captured at a low-occupancy moment - only ~14 trailers visible; the yard capacity is much larger (~90 marked stalls).",
+    "postGateStaging": "Wide west truck court inside the fence provides interior holding/queue space ahead of the docks.",
+    "drivewayLong": "Long curving entry drive from Exploration Drive into the deep truck court - holds 3+ trucks.",
+    "fastLaneOpportunity": "Wide truck court and broad entry driveway provide ample paved width to add an express/bypass lane.",
+    "urbanRural": "Southwest Indianapolis, dense airport-adjacent logistics submarket (Ameriplex business park) within the Indy metro - Urban.",
+    "method": "deep-audit"
+  },
+  "method": "deep-audit"
+}

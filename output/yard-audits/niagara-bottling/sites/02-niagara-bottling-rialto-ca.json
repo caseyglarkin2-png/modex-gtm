@@ -1,0 +1,64 @@
+{
+  "name": "Niagara Bottling - Rialto CA",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 34.12940, "lng": -117.41630 },
+  "geofences": {
+    "perimeter": { "south": 34.12800, "west": -117.41850, "north": 34.13085, "east": -117.41430 },
+    "truckGate": { "south": 34.13045, "west": -117.41760, "north": 34.13085, "east": -117.41700 },
+    "dropYards": [
+      { "south": 34.13010, "west": -117.41840, "north": 34.13075, "east": -117.41460 }
+    ],
+    "dockAprons": [
+      { "south": 34.12990, "west": -117.41840, "north": 34.13015, "east": -117.41460 }
+    ],
+    "staging": { "south": 34.13015, "west": -117.41770, "north": 34.13075, "east": -117.41560 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40,
+    "trailersVisible": 35,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 30.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.12940,-117.41630,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "trailerParkingCapacity", "dropArea", "truckGate-geofence"],
+  "fieldNotes": {
+    "buildingId": "Confirmed Niagara via the distinctive rooftop solar array - Niagara Rialto operates an on-site solar farm (independently documented). 598,750 sq ft single building, 1401 N Alder Ave.",
+    "truckGate": "Entire property is enclosed by a solid masonry perimeter wall - a fully secured site. The truck entrance is a gated opening in the wall on the north side serving the dock yard. No Street View pano sits directly on the gate (interior roads have no coverage), so the exact gate location and any barrier hardware are inferred; medium confidence.",
+    "guardShack": "Not directly visualized. A walled 600k-sq-ft Niagara plant of this scale almost always staffs a guard booth at the truck gate - classified true at medium confidence; flagged for human verification.",
+    "dockDoors": "North building face carries a long continuous run of dock doors with trailers backed in; estimated ~40 - band 25-50.",
+    "dropArea": "Large paved trailer yard north of the dock face holds dozens of dropped trailers in marked rows; band 50+. Some ambiguity at the parcel boundary with the neighboring facility's yard - flagged.",
+    "postGateStaging": "Wide paved staging yard between the gate, the trailer rows, and the dock apron.",
+    "drivewayLong": "Deep internal yard - easily holds a 3+ truck queue.",
+    "siteAreaAcres": "~30 acres from the perimeter box (building + north dock yard + west/north parking).",
+    "railServed": "No rail spur into the property."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,47 @@
+{
+  "name": "Universal Logistics - Vance Value-Added Facility - Vance AL",
+  "type": "Value-Added Logistics / Sequencing Warehouse",
+  "coords": { "lat": 33.18450, "lng": -87.27200 },
+  "geofences": {
+    "perimeter": null,
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 0.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.18450,-87.27200,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural", "connectivityIssue",
+    "multipleFacilities", "scale", "dropYard", "multiStep"
+  ],
+  "fieldNotes": {
+    "_location": "Could NOT positively resolve to a discrete building. The roster supplied no address/coords and was sourced only from an Indeed locations list. Universal Logistics does post Vance/Brookwood AL warehouse-associate and warehouse-supervisor job openings (Salary.com archive 2021, Glassdoor), confirming an operating Universal value-added presence in the Vance automotive-supplier corridor serving Mercedes-Benz U.S. International (MBUSI). However, the publicly-named MBUSI sequencing logistics partners are BLG Logistics, ARD Logistics, and Schnellecke Logistics - Universal/LINC is NOT a publicly-identified MBUSI on-site LSP at a named building, so its specific operating address cannot be confirmed.",
+    "_candidate": "The likely operating environment is a value-added/sequencing line inside an MBUSI-owned or supplier-park building (e.g. the Will Walker Road logistics corridor NW of the plant at ~33.184,-87.272, where several large logistics warehouses sit) or a leased warehouse in the Brookwood/Cottondale corridor. coords here point at the Will Walker Rd logistics-warehouse cluster as the best-available area anchor only - NOT a confirmed Universal building.",
+    "_classification": "All 22 classification fields are best-guess defaults (no-gate / open-site is typical for OEM supplier-park value-added warehouses, and the corridor is Rural) and must be treated as unverified pending a confirmed address. Geofences and yardMetrics left null/zero because no specific building was locked."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,54 @@
+{
+  "name": "Milk-Bone Pet Treats - Buffalo NY",
+  "type": "Manufacturing - Pet treats (Milk-Bone), ambient + refrigerated",
+  "coords": { "lat": 42.909089, "lng": -78.829817 },
+  "geofences": {
+    "perimeter": { "south": 42.90810, "west": -78.83180, "north": 42.91090, "east": -78.82900 },
+    "truckGate": { "south": 42.90920, "west": -78.83110, "north": 42.90945, "east": -78.83060 },
+    "dropYards": [
+      { "south": 42.90940, "west": -78.83150, "north": 42.91060, "east": -78.82930 }
+    ],
+    "dockAprons": [
+      { "south": 42.90825, "west": -78.83000, "north": 42.90880, "east": -78.82935 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14,
+    "trailersVisible": 48,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 18.2,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.909089,-78.829817,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "dockDoorCount"],
+  "fieldNotes": {
+    "location": "243 Urban St, Buffalo NY. ROOFTOP geocode confirmed (moved 99m). Building positively identified: large multi-section/multi-story historic brick manufacturing complex on Buffalo's East Side, pink grain-silo tower landmark, rail line on the east side. Web-confirmed as the J.M. Smucker Milk-Bone plant (550,000 sq ft, dog-treat ops since 1925, $53M renovation underway, completion April 2027).",
+    "truckGate": "TWO controlled truck entrances. (1) The dedicated drop yard NW of the plant has a wide chain-link SLIDING GATE across its truck driveway (Street View 2025-07 from Urban St shows the slider clearly). (2) The fenced truck/dock yard at the building has sliding chain-link gates. truckGateCount set to 2.",
+    "guardShack": "No staffed guard booth observed at either truck gate in Street View 2025-07 or satellite z20-z21. A small structure sits at the SW corner of the building yard but is not positioned/shaped as an entry guard booth (more a utility/scale-house type). Treated as unmanned controlled gates. Flagged uncertain.",
+    "remoteGs": "True - controlled gates exist but no guard booth, implying kiosk/app/call-box check-in.",
+    "dropYard": "Large dedicated trailer-storage lot NW of the plant building (mostly gravel, with an internal paved loop drive), packed with rows of parked drop trailers. Separate from active dock staging.",
+    "dropArea": "50+ - trailer rows in the drop yard count well above 50 stalls' worth of trailers.",
+    "dockDoors": "~14 dock doors estimated across the building's E/SE faces; the multi-story masonry plant makes door counting harder than a modern tilt-up - flagged uncertain. Band 10-25.",
+    "railServed": "A CSX/active rail line runs immediately along the east property edge with rail cars present, but no rail spur was observed entering the property to a building face. Set false (rail-adjacent, not rail-served).",
+    "fastLaneOpportunity": "The drop yard has a wide gravel apron and ample unused paved/graded width at the gate - room to add a bypass/express lane.",
+    "drivewayLong": "The drop yard interior holds a deep queue (3+ trucks) between the sliding gate and the trailer rows.",
+    "urbanRural": "Dense East Side Buffalo urban fabric - row houses on all surrounding streets. Urban.",
+    "yardMetrics": "trailersVisible ~48 and trailerParkingCapacity ~70 are honest estimates from z19 imagery; dock count low-confidence."
+  },
+  "method": "deep-audit"
+}

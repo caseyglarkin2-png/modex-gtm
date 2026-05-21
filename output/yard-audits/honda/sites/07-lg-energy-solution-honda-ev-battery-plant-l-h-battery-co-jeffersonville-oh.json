@@ -1,0 +1,52 @@
+{
+  "name": "LG Energy Solution-Honda EV Battery Plant (L-H Battery Co.) - Jeffersonville OH",
+  "type": "EV Battery Cell Plant (JV)",
+  "coords": { "lat": 39.62480, "lng": -83.57000 },
+  "geofences": {
+    "perimeter": { "south": 39.61650, "west": -83.58200, "north": 39.63050, "east": -83.56300 },
+    "truckGate": { "south": 39.62200, "west": -83.56720, "north": 39.62320, "east": -83.56560 },
+    "dropYards": [
+      { "south": 39.62300, "west": -83.56700, "north": 39.62650, "east": -83.56350 }
+    ],
+    "dockAprons": [
+      { "south": 39.62280, "west": -83.56800, "north": 39.62680, "east": -83.56620 }
+    ],
+    "staging": { "south": 39.61850, "west": -83.57500, "north": 39.62150, "east": -83.56900 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35,
+    "trailersVisible": 25,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 290.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.6248,-83.57,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging", "drivewayLong", "entryLanes", "exitLanes", "fastLaneOpportunity", "dockDoors", "dropArea", "shipRcvSeparate", "dropYard", "multiStep", "scale", "dockDoorCount", "trailersVisible", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "_status": "Facility is a brand-new EV battery cell plant still under construction in available satellite imagery (winter/snowy Maxar capture). Per news the plant was 'nearly complete' as of Feb 2026; final truck-yard infrastructure - gates, guard booth, dock build-out, trailer lots - is not yet fully formed or is obscured by snow and construction laydown. Most operational fields are best-effort inference and flagged uncertain.",
+    "truckGate": "A $3.5B EV cell plant with controlled-access security; the property is set behind a roundabout main entrance off the access road and ringed by buffer land. A controlled truck gate is expected but the specific structure is not resolvable in construction-phase imagery.",
+    "guardShack": "Assumed present on facility-class grounds (high-security battery plant); not directly imaged - flagged uncertain.",
+    "dockDoors": "An east-facing building wing with a dock apron and a few trailers is visible; door count obscured by snow - ~35 is a rough mid-band estimate.",
+    "dropArea": "Limited trailer parking visible; much of the open ground is construction laydown, not a settled drop yard.",
+    "railServed": "No rail spur identified entering the property.",
+    "urbanRural": "Rural - Jefferson Township, Fayette County, OH; farmland and small residential clusters; ~40 mi SW of Columbus, just south of I-71.",
+    "siteAreaAcres": "Perimeter box covers the core fenced plant property; ~290 acres derived from the box. The full announced site is larger (~78 football fields of building plus grounds); figure is approximate.",
+    "multipleFacilities": "Single primary battery building with a connected utility/support wing - treated as one facility cluster.",
+    "_revisit": "Recommend re-audit once non-winter, post-construction imagery is available to confirm gate, guard booth, dock count and trailer yard."
+  },
+  "method": "deep-audit"
+}

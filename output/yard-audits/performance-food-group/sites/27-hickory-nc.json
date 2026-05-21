@@ -1,0 +1,47 @@
+{
+  "name": "Performance Foodservice - Hickory NC",
+  "type": "Broadline Foodservice Distribution Center",
+  "coords": { "lat": 35.73870, "lng": -81.36300 },
+  "geofences": {
+    "perimeter": { "south": 35.73680, "west": -81.36480, "north": 35.74080, "east": -81.36100 },
+    "truckGate": { "south": 35.73960, "west": -81.36240, "north": 35.74010, "east": -81.36160 },
+    "dropYards": [
+      { "south": 35.73960, "west": -81.36300, "north": 35.74060, "east": -81.36150 }
+    ],
+    "dockAprons": [
+      { "south": 35.73850, "west": -81.36420, "north": 35.74000, "east": -81.36280 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35, "trailersVisible": 45, "trailerParkingCapacity": 70,
+    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 14.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.7387,-81.363,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "remoteGs", "dockDoorCount", "buildingCount", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Roster coord (35.73953,-81.363125, movedMeters 1440) lands inside the industrial cluster; resolved the PFG DC to the large building immediately SW at ~35.7387,-81.3630. Address 543 12th Street Drive NW, Hickory NC (PFG Hickory; phone 828-725-4500). The site sits in a dense Hickory industrial district with several neighboring warehouses under separate ownership.",
+    "truckGate": "Street View along 12th St Dr NW and the yard side shows a green-fabric-screened chain-link perimeter fence around the PFG property with a gate across the truck drive. Classed truckGate true; partially obscured by the screening, so listed uncertain.",
+    "guardShack": "No staffed booth structure visible at the entrance.",
+    "remoteGs": "Gate present, no shack — kiosk / call-box check-in implied. true.",
+    "dockDoors": "Dock bank with trailers backed in along the building face plus dark asphalt aprons; ~25-50 doors, banded 25-50.",
+    "dropArea": "Trailer rows in the yard north/NE of the building; ~25-50 trailers, banded 25-50.",
+    "buildingCount": "The PFG DC reads as one main building, possibly with an attached secondary section — counted 2; neighboring warehouses in the frame are separate tenants and excluded.",
+    "railServed": "A rail line / spur runs in the wooded strip along the east edge of the property — likely rail-served; true (medium confidence).",
+    "urbanRural": "Small-city Hickory industrial district — Rural per the rubric tie-break."
+  },
+  "method": "deep-audit"
+}

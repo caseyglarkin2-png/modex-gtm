@@ -1,0 +1,54 @@
+{
+  "name": "Honda Aero, Inc. (GE Honda HF120 engines) - Burlington NC",
+  "type": "Aircraft Engine Plant",
+  "coords": { "lat": 36.047000, "lng": -79.481000 },
+  "geofences": {
+    "perimeter": { "south": 36.04540, "west": -79.48300, "north": 36.04830, "east": -79.47950 },
+    "truckGate": { "south": 36.04670, "west": -79.48310, "north": 36.04710, "east": -79.48250 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 36.04560, "west": -79.48180, "north": 36.04640, "east": -79.48120 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 4,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 4,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 14.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.047000,-79.481000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["truckGate", "dockDoorCount", "siteAreaAcres"],
+  "fieldNotes": {
+    "siteIdentity": "Honda Aero, Inc. at 2989 Tucker St, Burlington NC — the GE Honda HF120 turbofan engine assembly/test plant adjacent to Burlington-Alamance Regional Airport. Confirmed: a single large modern white-roof manufacturing building (~132,000 sq ft after the 2016/2017 50,000 sq ft expansion) with an aircraft apron facing the runway. Verified by 2026 Street View showing the modern facility on Tucker St and z19-z20 satellite. The roster coordinates (movedMeters 36) sat on the airport apron just east of the building; coords were tightened onto the building center.",
+    "facilityNature": "This is a jet-engine ASSEMBLY and test plant, not a freight/distribution facility. Truck activity is minimal (small inbound parts shipments). There are no trailer drop yards and only a few service dock doors. The dominant 'yard' is the airside aircraft apron, irrelevant to a truck-yard engagement.",
+    "truckGate": "No controlled truck gate. The vehicle entrance off Tucker St is an open landscaped driveway into the employee parking lot — no barrier arm, no booth, no checkpoint. The chain-link fencing seen in Street View is the airport perimeter fence, not a Honda Aero truck-gate control. Classified false.",
+    "guardShack": "No guard booth observed at the entrance driveway in 2026 Street View or satellite.",
+    "remoteGs": "False — there is no truck gate at all.",
+    "drivewayShort": "The short open driveway from Tucker St to the parking lot would hold at most 1-2 vehicles.",
+    "dockDoors": "0-10 — only a handful of service/parts dock doors at the building; no regular bank of loading bays. Honest overhead estimate.",
+    "dropArea": "NONE — no marked trailer drop stalls; no trailer drop operation.",
+    "dropYard": "False — no dedicated trailer-storage lot.",
+    "multipleFacilities": "Single building; the nearby buildings are separate airport tenants, not part of Honda Aero.",
+    "railServed": "False — no rail spur; served by road and the adjacent airfield.",
+    "urbanRural": "Rural — the site is at the edge of a small regional airport surrounded by farmland and light development; 2026 Street View shows a rural two-lane road.",
+    "scale": "No truck scale.",
+    "siteAreaAcres": "~14 acres for the Honda Aero parcel (building plus parking and apron frontage); the perimeter box is a best estimate as the parcel blends into the airport grounds."
+  },
+  "method": "deep-audit"
+}

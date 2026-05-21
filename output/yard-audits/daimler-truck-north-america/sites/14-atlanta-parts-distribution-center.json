@@ -1,0 +1,58 @@
+{
+  "name": "Atlanta Parts Distribution Center - Buford GA",
+  "type": "Parts distribution center",
+  "coords": { "lat": 34.117850, "lng": -83.982650 },
+  "geofences": {
+    "perimeter": { "south": 34.116100, "west": -83.984050, "north": 34.119450, "east": -83.981300 },
+    "truckGate": { "south": 34.116150, "west": -83.982950, "north": 34.116400, "east": -83.982600 },
+    "dropYards": [
+      { "south": 34.116300, "west": -83.984050, "north": 34.116900, "east": -83.981500 },
+      { "south": 34.118450, "west": -83.984050, "north": 34.119450, "east": -83.981500 }
+    ],
+    "dockAprons": [
+      { "south": 34.116650, "west": -83.984000, "north": 34.117050, "east": -83.981500 },
+      { "south": 34.118300, "west": -83.984000, "north": 34.118700, "east": -83.981500 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 52,
+    "trailersVisible": 75,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 26.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.117850,-83.982650,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Positively confirmed: Street View shows a large 'DAIMLER - Daimler Trucks North America' sign on the building wall at the SW corner. Address 2510 Mill Center Parkway, Suite 100, Buford GA — building 'Bldg I', an 870,480 sq ft cross-dock distribution facility (built 2006) in the Mill Center / Hamilton Mill business park. Roster geocode moved 4,842 m; the corrected pin landed on the correct building. DTNA occupies Suite 100 (a portion of the multi-tenant building; Radial and RNC Industries occupy other suites). Center locked at 34.117850, -83.982650.",
+    "truckGate": "TRUE. Street View shows a black ornamental perimeter fence with a swing gate enclosing the DTNA dock yard, separating the secured truck court from the public car parking lot at the DTNA suite.",
+    "guardShack": "FALSE. No guard booth structure at the gate or anywhere on the truck side.",
+    "remoteGs": "TRUE. There is a controlled truck gate but no guard shack — implies kiosk / badge / app check-in.",
+    "dockDoors": "Cross-dock building with dock doors on both the north and south long faces. The building listing cites 52 dock doors / 152 truck dock positions; 50+ band. Count flagged uncertain because DTNA occupies only one suite of the multi-tenant building.",
+    "dropArea": "Truck courts on both faces are packed with parked trailers in angled drop stalls; building listing cites 166 trailer parking stalls. 50+ band, dropYard true.",
+    "trailersVisible": "Roughly 75 trailers counted across the north and south truck courts in captured imagery — estimate, flagged uncertain.",
+    "shipRcvSeparate": "Cross-dock layout: dock banks on two separate building faces (north and south) function as physically separate ship/receive clusters.",
+    "drivewayLong": "Wide 185'-deep truck courts easily stage 3+ trucks before the docks.",
+    "entryExitTogether": "DTNA's fenced dock yard has a single gated access point used for both entry and exit.",
+    "fastLaneOpportunity": "Single gated access into a fenced suite yard; no obvious unused width for an express bypass at the gate.",
+    "entryLanes": "Single gate lane; exact lane count not resolvable from imagery — flagged uncertain.",
+    "urbanRural": "Mill Center / Hamilton Mill business park in Gwinnett County within metro Atlanta's industrial fabric; classified Urban.",
+    "railServed": "No rail spur enters the property."
+  },
+  "method": "deep-audit"
+}

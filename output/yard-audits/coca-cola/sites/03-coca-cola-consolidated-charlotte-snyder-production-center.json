@@ -1,0 +1,52 @@
+{
+  "name": "Coca-Cola Consolidated - Charlotte (Snyder) Production Center, NC",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 35.28450, "lng": -80.88300 },
+  "geofences": {
+    "perimeter": { "south": 35.28250, "west": -80.88500, "north": 35.28680, "east": -80.88100 },
+    "truckGate": { "south": 35.28610, "west": -80.88300, "north": 35.28660, "east": -80.88230 },
+    "dropYards": [
+      { "south": 35.28280, "west": -80.88460, "north": 35.28560, "east": -80.88340 },
+      { "south": 35.28500, "west": -80.88340, "north": 35.28640, "east": -80.88230 }
+    ],
+    "dockAprons": [
+      { "south": 35.28560, "west": -80.88330, "north": 35.28650, "east": -80.88220 },
+      { "south": 35.28300, "west": -80.88400, "north": 35.28420, "east": -80.88300 }
+    ],
+    "staging": { "south": 35.28560, "west": -80.88300, "north": 35.28620, "east": -80.88230 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 110,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 38.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.28450,-80.88300,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "railServed"],
+  "fieldNotes": {
+    "truckGate": "Controlled truck entrance off Chesapeake Dr; z20 satellite shows a guard booth and a separate small structure flanking the truck lane, with perimeter fencing and a gate point, and a truck stopped at the booth.",
+    "guardShack": "Dark-roofed guard booth beside the truck lane, distinct from the main building.",
+    "multipleFacilities": "Multi-building campus: main production building, warehouse buildings, and ancillary structures.",
+    "dropYard": "Very extensive trailer parking — diagonal stalls on the west and north sides hold 100+ trailers.",
+    "dockDoors": "Large production/warehouse buildings with dock banks on multiple faces; estimated 60+ doors total.",
+    "shipRcvSeparate": "Dock banks on different building faces (north and southwest) indicate separate shipping/receiving clusters.",
+    "railServed": "A rail line runs along the west boundary but appears to serve the adjacent property; no clear spur into Coca-Cola docks — left false, flagged uncertain.",
+    "scale": "No clear truck scale identified; left false, flagged uncertain."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,63 @@
+{
+  "name": "Universal Intermodal Services - Savannah Terminal - Savannah GA",
+  "type": "Intermodal / Drayage Terminal (owned)",
+  "coords": { "lat": 32.13320, "lng": -81.17500 },
+  "geofences": {
+    "perimeter": { "south": 32.13150, "west": -81.17700, "north": 32.13470, "east": -81.17320 },
+    "truckGate": { "south": 32.13230, "west": -81.17620, "north": 32.13290, "east": -81.17540 },
+    "dropYards": [
+      { "south": 32.13290, "west": -81.17500, "north": 32.13460, "east": -81.17330 },
+      { "south": 32.13150, "west": -81.17560, "north": 32.13280, "east": -81.17420 }
+    ],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 4,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 150,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 9.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.1332,-81.175,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "scale"],
+  "fieldNotes": {
+    "siteResolution": "No street address in roster. Web search + loadmatch directory resolved Universal Intermodal Services' Savannah terminal to 6052 Commerce Court, Garden City/Savannah GA 31408 — ~1.6 mi from the Port of Savannah. Geocoded to 32.1329, -81.1751 and confirmed by satellite as a truck/intermodal terminal: a central shop/office building surrounded by a paved truck yard full of tractors and trailers, fuel tanks, and adjacent trailer-storage parcels. Street View (2025-11) shows tractors and trailers parked behind chain-link fencing. Note: 6052 Commerce Ct is shared with Mason Dixon Intermodal in directories — the audited yard is the Universal Intermodal drayage terminal at that address. Medium confidence.",
+    "truckGate": "The terminal yard is perimeter chain-link fenced; truck access is via a gated fenced opening off the access road on the west side. No barrier arm was directly resolved — classed truckGate true / remoteGs true (gated fenced access, no clearly visible staffed booth). C-TPAT/FAST-certified secure terminal status corroborates access control.",
+    "guardShack": "No staffed guard booth positively resolved at the entrance in satellite or Street View. Access control appears fence/gate-based; classed guardShack false / remoteGs true. Flagged uncertain.",
+    "dockDoors": "This is a drayage terminal, not a warehouse — the central building is an M&R shop (sawtooth-roof shop bays) plus office. Only a handful of shop/dock bays (~4); classed dockDoors 0-10.",
+    "dropArea": "Extensive trailer/container/chassis storage: the paved core yard plus multiple adjacent unpaved storage parcels hold rows of trailers — dropArea 50+ / dropYard true. Classic drayage drop-yard.",
+    "postGateStaging": "Generous paved yard inside the gate gives ample truck holding/queue depth before the shop bays.",
+    "railServed": "A rail line runs along the east side of the corridor (across the highway buffer) but no spur enters the terminal property; drayage moves are truck-only. railServed = false.",
+    "urbanRural": "Edge-of-metro industrial-outdoor-storage zone in Garden City, on the western fringe of the Savannah port area — surrounded by trailer-storage yards and woods, not dense urban fabric. Rural per the rubric's small-town-industrial guidance.",
+    "scale": "No truck scale positively identified — flagged uncertain."
+  },
+  "method": "deep-audit"
+}

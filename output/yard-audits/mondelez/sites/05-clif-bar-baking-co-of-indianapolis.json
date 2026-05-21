@@ -1,0 +1,64 @@
+{
+  "name": "Clif Bar Baking Co. of Indianapolis - Indianapolis IN",
+  "type": "Manufacturing - energy/nutrition bar bakery",
+  "coords": { "lat": 39.88865, "lng": -86.24100 },
+  "geofences": {
+    "perimeter": { "south": 39.88680, "west": -86.24320, "north": 39.89000, "east": -86.23950 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 39.88740, "west": -86.24250, "north": 39.88820, "east": -86.24130 }
+    ],
+    "dockAprons": [
+      { "south": 39.88800, "west": -86.24130, "north": 39.88920, "east": -86.24010 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14,
+    "trailersVisible": 16,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 28.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.88865,-86.24100,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "dockDoorCount", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Open industrial-park facility. Street View (2024-07) shows the building set back behind an open grass lawn with no perimeter fence at the road and open driveway entrances - no barrier arm, gate, or checkpoint. Open driveway with no control = truckGate false. truckGateCount set to 0.",
+    "guardShack": "No truck gate and no booth structure at any entrance - false.",
+    "drivewayShort": "Industrial-park entrance driveways are short, connecting directly to internal parking/yard with minimal stacking depth.",
+    "dockDoors": "Truck dock bank on the E/SE building face with several trailers backed in (z19/z20 imagery); estimate ~14 doors, banded 10-25; flagged uncertain.",
+    "dropArea": "Trailer drop/staging yard on the SW with trailers parked in angled rows (z20 imagery at 39.8880,-86.2421); ~12-16 trailers, banded 10-25.",
+    "railServed": "A through rail line runs along the east edge of the property behind a tree buffer, but no spur enters the building - the facility is NOT rail-served.",
+    "multipleFacilities": "One main bakery building (~209,000 sq ft after expansion). Neighboring buildings (a Concentra clinic, an adjacent warehouse) are separate parcels, not part of the Clif Bar campus.",
+    "scale": "No truck scale identified; left low-confidence.",
+    "exitLanes": "Open driveway; outbound lane count not separately determinable."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,51 @@
+{
+  "name": "K-C DuPont Distribution Center (KCDC) - DuPont WA",
+  "type": "Distribution center",
+  "coords": { "lat": 47.11280, "lng": -122.63800 },
+  "geofences": {
+    "perimeter": { "south": 47.10930, "west": -122.64000, "north": 47.11520, "east": -122.63560 },
+    "truckGate": { "south": 47.10960, "west": -122.63800, "north": 47.11010, "east": -122.63680 },
+    "dropYards": [
+      { "south": 47.11080, "west": -122.63660, "north": 47.11440, "east": -122.63560 }
+    ],
+    "dockAprons": [
+      { "south": 47.11080, "west": -122.63700, "north": 47.11460, "east": -122.63630 },
+      { "south": 47.11080, "west": -122.63960, "north": 47.11460, "east": -122.63890 }
+    ],
+    "staging": { "south": 47.10960, "west": -122.63840, "north": 47.11080, "east": -122.63700 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 130, "trailersVisible": 90, "trailerParkingCapacity": 130,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 54.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@47.11280,-122.63800,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes", "urbanRural"],
+  "fieldNotes": {
+    "location": "Confirmed: 1205 Wharf Rd, DuPont WA - 'Building 1' of The Cubes at DuPont, a 747,488 sq ft Class-A distribution facility 100% leased to Kimberly-Clark (CRG / The Registry). The Cubes is a 1.6M sq ft, 3-building park on the former Intel campus / DuPont Corporate Center in the Northwest Landing community. Building 1 is the largest of the three buildings - the big N-S cross-dock structure at ~47.1128,-122.6380. Roster ROOFTOP coords moved 1879 m and landed near the cluster center; corrected to Building 1.",
+    "truckGate": "TRUE - current (2026 Maxar) z20 satellite of the south truck-court entrance clearly shows a guard booth standing in the middle of the truck driveway with traffic lanes splitting around it (inbound lanes marked with arrows) and yellow-hatched median islands. Facility directory listings independently state 'Check in is required at the security guard for appointments only.'",
+    "guardShack": "TRUE - the mid-lane structure at the gate is a guard booth (~1-vehicle footprint, lanes routed around it). remoteGs therefore false.",
+    "docks": "Cross-dock building with continuous dock banks and trailers backed in along BOTH long faces (east and west). Well into 50+; dockDoorCount ~130 is an honest overhead estimate for the two faces combined (loose).",
+    "shipRcvSeparate": "TRUE - cross-dock = two dock banks on opposite building faces.",
+    "dropYard": "TRUE - extensive marked trailer-parking lanes east of the building, full of tractorless trailers; dropArea 50+.",
+    "entryExit": "Single combined truck gate at the south end. The lanes split around the guard booth - approx 2 inbound lanes and 1 outbound; entryExitTogether true. Lane counts are estimates from overhead imagery.",
+    "postGateStaging": "TRUE - deep paved truck courts inside the gate give 3+ trucks of stacking room before the docks; drivewayLong true.",
+    "fastLaneOpportunity": "TRUE - the gate apron is wide with a multi-lane split around the booth, leaving room for an express/bypass lane.",
+    "rail": "FALSE - no rail spur into the property (former Intel campus redevelopment; the BNSF mainline runs well to the NE near the I-5 corridor but does not serve the site).",
+    "urbanRural": "DuPont is a small city on the I-5 corridor in the southern fringe of the Seattle-Tacoma metro. The Cubes sits in a forested industrial park (Northwest Landing / DuPont Corporate Center) on the edge of town. Borderline - classified Rural per the rubric's 'when torn between small-town industrial and Urban, choose Rural' guidance; flagged in uncertainFields.",
+    "siteAreaAcres": "~54 acres derived from the perimeter box around Building 1's fenced property (building + both truck courts + east trailer yard + south gate)."
+  },
+  "method": "deep-audit"
+}

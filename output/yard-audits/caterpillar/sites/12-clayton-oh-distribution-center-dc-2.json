@@ -1,0 +1,54 @@
+{
+  "name": "Caterpillar - Clayton OH Distribution Center (DC-2)",
+  "type": "Parts distribution center (opened 2011)",
+  "coords": { "lat": 39.84250, "lng": -84.33400 },
+  "geofences": {
+    "perimeter": { "south": 39.83950, "west": -84.33700, "north": 39.84500, "east": -84.33000 },
+    "truckGate": { "south": 39.84120, "west": -84.33230, "north": 39.84210, "east": -84.33130 },
+    "dropYards": [
+      { "south": 39.83980, "west": -84.33500, "north": 39.84300, "east": -84.33050 },
+      { "south": 39.84250, "west": -84.33350, "north": 39.84480, "east": -84.33050 }
+    ],
+    "dockAprons": [
+      { "south": 39.84050, "west": -84.33680, "north": 39.84450, "east": -84.33520 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 80,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 150,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 90.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.8425,-84.334,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "dockDoorCount", "trailersVisible", "scale"],
+  "fieldNotes": {
+    "site": "Confirmed as Caterpillar Distribution Center DC-2, 6611 Hoke Rd, Clayton OH - a 1.6M sq ft parts DC opened 2011. CATERPILLAR monument sign at the Hoke Rd entrance confirmed in Street View. Roster geocode (39.842875, -84.335057, ROOFTOP, moved 4040m) landed on the building. Imagery is winter/snow-covered, reducing fine-detail confidence.",
+    "truckGate": "Defined entry driveway off Hoke Rd leading to a pinch-point at the building; a small structure (blue-roof booth) sits at the entry point - consistent with a controlled gate. truckGate set true.",
+    "guardShack": "A small booth-like structure straddling/beside the entry-lane pinch point is visible in z19/z20 satellite, partly obscured by snow. Classed as a guard shack at medium confidence; flagged.",
+    "fastLaneOpportunity": "Wide entry driveway/apron at the controlled point gives room for an express bypass lane.",
+    "dockDoors": "Long dock-door bank confirmed on the west building face with trailers backed in. 50+ band; exact count low confidence due to snow.",
+    "dropArea": "Very large drop yard on the SE side packed with parked trailers (90+) and rows of stored equipment/material; 50+ band.",
+    "drivewayLong": "Long entry drive and a truck route circling the very large building - ample queueing room.",
+    "urbanRural": "Edge-of-town Clayton OH amid farmland off Hoke Rd; classed Rural per rubric.",
+    "railServed": "No rail spur into the property.",
+    "scale": "No truck scale identified; left false.",
+    "metrics": "Counts are honest estimates from snow-covered overhead imagery of a 1.6M sq ft DC; flagged."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,49 @@
+{
+  "name": "CJ Logistics - Middletown PA",
+  "type": "Distribution Center",
+  "coords": { "lat": 40.2082, "lng": -76.7455 },
+  "geofences": {
+    "perimeter": { "south": 40.20705, "west": -76.74780, "north": 40.20935, "east": -76.74330 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 40.20990, "west": -76.74520, "north": 40.21055, "east": -76.74300 }
+    ],
+    "dockAprons": [
+      { "south": 40.20875, "west": -76.74780, "north": 40.20935, "east": -76.74330 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 14,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 24.2,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.2082,-76.7455,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "dropArea", "trailerParkingCapacity", "shipRcvSeparate", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "No published street address. CJ Logistics is confirmed (Indeed/web) to operate a Middletown PA facility. The only large industrial cluster in Middletown 17057 is the Capital Logistics Center (CLC) off Eisenhower Blvd / Capital Lane in Lower Swatara Township, a ~1.3M sqft, 5-building multi-tenant logistics park next to Penn State Harrisburg. Public records do not identify which CLC building CJ leases. Audited Building C, the largest single building in the park, as the best-fit representative; building-level identity is UNCERTAIN.",
+    "truckGate": "CLC is an open business-park layout: buildings front directly on internal roads, no perimeter fence and no controlled gate observed at the complex or building level (satellite z17-z20 + 2021 Street View on Eisenhower Blvd). truckGate=false.",
+    "guardShack": "No guard booth observed at any building entrance or truck court.",
+    "dockDoors": "Building C is a ~600ft+ cross-dock-style building with dock canopies along its north face (shared truck court with Bldg B) and likely a second dock bank; estimated 50+ total doors. Count is approximate from overhead imagery.",
+    "dropArea": "An organized trailer drop area with ~12-14 trailers sits in the truck court north of Building C. dropYard=true.",
+    "shipRcvSeparate": "Cross-dock-style building likely has docks on opposing faces but ship/rcv split not confirmable; left false.",
+    "urbanRural": "CLC sits within Harrisburg metro on the edge of Penn State Harrisburg campus, surrounded by dense industrial park fabric, campus and suburban development; classified Urban."
+  },
+  "method": "deep-audit"
+}

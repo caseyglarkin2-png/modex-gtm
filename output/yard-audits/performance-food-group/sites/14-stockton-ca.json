@@ -1,0 +1,61 @@
+{
+  "name": "Performance Foodservice - Northern California (Stockton CA)",
+  "type": "Broadline Foodservice Distribution Center",
+  "coords": { "lat": 37.93255, "lng": -121.32450 },
+  "geofences": {
+    "perimeter": { "south": 37.93060, "west": -121.32560, "north": 37.93470, "east": -121.32290 },
+    "truckGate": { "south": 37.93250, "west": -121.32345, "north": 37.93300, "east": -121.32305 },
+    "dropYards": [
+      { "south": 37.93290, "west": -121.32430, "north": 37.93420, "east": -121.32340 }
+    ],
+    "dockAprons": [
+      { "south": 37.93090, "west": -121.32430, "north": 37.93420, "east": -121.32370 }
+    ],
+    "staging": { "south": 37.93230, "west": -121.32330, "north": 37.93300, "east": -121.32270 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 64,
+    "trailersVisible": 12,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 13.8,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.93255,-121.3245,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Street View (2022-01) shows a chain-link sliding gate across the truck driveway off the cul-de-sac on the building's east side.",
+    "guardShack": "A small single-room guard booth with windows sits on the right side of the gate lane, beside the sliding gate.",
+    "dockDoors": "Long dock bank on the east face with levelers, confirmed in Street View; LoopNet spec sheet for Stockton Commerce Center lists 64 dock doors.",
+    "railServed": "Stockton Commerce Center spec sheet lists 5 rail-served receiving doors; rail spur serves the building.",
+    "dropYard": "Striped trailer-parking lanes in the truck court east of the building hold drop trailers.",
+    "siteAreaAcres": "Estimated from perimeter box around the PFG-occupied building and its east truck court."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,59 @@
+{
+  "name": "John Deere Augusta Works (Commercial Products) - Grovetown GA",
+  "type": "Assembly Plant",
+  "coords": { "lat": 33.463818, "lng": -82.185545 },
+  "geofences": {
+    "perimeter": { "south": 33.46060, "west": -82.18820, "north": 33.46560, "east": -82.18280 },
+    "truckGate": { "south": 33.46300, "west": -82.18520, "north": 33.46360, "east": -82.18440 },
+    "dropYards": [
+      { "south": 33.46100, "west": -82.18720, "north": 33.46430, "east": -82.18480 },
+      { "south": 33.46180, "west": -82.18820, "north": 33.46470, "east": -82.18700 }
+    ],
+    "dockAprons": [
+      { "south": 33.46250, "west": -82.18650, "north": 33.46490, "east": -82.18560 },
+      { "south": 33.46180, "west": -82.18560, "north": 33.46260, "east": -82.18380 }
+    ],
+    "staging": { "south": 33.46200, "west": -82.18620, "north": 33.46380, "east": -82.18480 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 95,
+    "trailerParkingCapacity": 150,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 175.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.463818,-82.185545,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "scale", "multiStep"],
+  "fieldNotes": {
+    "truckGate": "Truck operations are on a large fenced parcel; trucks enter off the John Deere Pkwy / Horizon South Pkwy access loop and pass into a perimeter-fenced operational yard with tree-buffer screening. Controlled truck entrance inferred from the continuous fence line and single internal truck route; barrier hardware not directly resolvable in imagery.",
+    "guardShack": "No guard booth positively confirmed at a barrier-arm gate in available satellite/Street View imagery; the entrance is set deep behind tree buffers and Street View only covers the office/employee loop. A staffed entrance is plausible for a major Deere plant but unverified - flagged uncertain.",
+    "remoteGs": "Set true tentatively (gate present, no confirmed guard shack); revise if a staffed booth is later confirmed.",
+    "preGateStaging": "Extensive paved aprons and access-road shoulders provide ample pre-gate truck staging.",
+    "postGateStaging": "Very large paved internal yard between the truck entrance and the dock faces.",
+    "drivewayLong": "Long internal truck approach; easily holds 3+ trucks.",
+    "fastLaneOpportunity": "Abundant unused paved width on the access loop and yard apron; clear room to add an express/bypass lane.",
+    "dockDoors": "Dock doors observed along the west and south faces of the main building plus the NW building, with trailers backed in; estimated 25-50 total, low-confidence count.",
+    "dropArea": "Very large fenced trailer drop yard on the SW/W lots holds dense rows of 80-100+ parked trailers; 50+ band.",
+    "shipRcvSeparate": "Dock banks on physically separate building faces (west face and south face) plus the separate NW building.",
+    "urbanRural": "Edge-of-town industrial park in Grovetown, GA; surrounded by woodland and other industrial parcels rather than dense metro fabric - classified Rural.",
+    "multipleFacilities": "Two distinct buildings (large main assembly building plus a smaller NW building) but a single integrated plant, not a multi-facility campus.",
+    "dropYard": "Dedicated on-site trailer-storage lots, distinct from active dock staging - one of the larger drop yards in this batch.",
+    "railServed": "No rail spur observed entering the property.",
+    "scale": "No truck scale positively identified - flagged uncertain."
+  },
+  "method": "deep-audit"
+}

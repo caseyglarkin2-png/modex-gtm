@@ -1,0 +1,51 @@
+{
+  "name": "Snyder's-Lance - Beloit WI",
+  "type": "Manufacturing - snacks/potato chips",
+  "coords": { "lat": 42.51210, "lng": -88.99380 },
+  "geofences": {
+    "perimeter": { "south": 42.51130, "west": -88.99500, "north": 42.51320, "east": -88.99280 },
+    "truckGate": { "south": 42.51185, "west": -88.99380, "north": 42.51215, "east": -88.99320 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 42.51185, "west": -88.99400, "north": 42.51215, "east": -88.99320 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 8,
+    "trailersVisible": 4,
+    "trailerParkingCapacity": 10,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 10.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.51210,-88.99380,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "dockDoors", "dropArea", "entryLanes", "exitLanes", "siteAreaAcres", "coords"],
+  "fieldNotes": {
+    "location": "LOW CONFIDENCE on building identity. The roster address '1101 Willowbrook Road, Beloit WI' does not resolve to any confirmed Campbell's address. Web research establishes the Campbell's/Kettle Foods Beloit potato-chip plant is at 3150 Kettle Way in Gateway Business Park - a 73,000-140,000 sq ft LEED-Gold plant (~300 employees, processes ~50M lbs potatoes/yr, 18 rooftop wind turbines). The large process complex initially examined nearby (with silos/tanks) was positively identified as an IFF (International Flavors & Fragrances) facility, NOT Campbell's. The audited building (~42.5121, -88.9938) is the best-matching candidate: a ~73,000 sq ft white-roof industrial building in Gateway Business Park consistent with the Kettle plant scale - but signage could not be confirmed in Street View and the address mismatch was not resolved.",
+    "truckGate": "On the candidate building, the Gateway Business Park access roads are open with no visible barrier arm, gate, or guard booth - typical open business-park access. Flagged uncertain due to building-identity uncertainty.",
+    "guardShack": "No guard booth identified at the candidate building.",
+    "drivewayShort": "Short shallow approach from the park road to the building's dock area.",
+    "dockDoors": "A modest dock presence on the building's SE face with a few trailers/trucks visible; estimated 0-10 doors. The Kettle plant is a compact 73k sq ft facility. Flagged uncertain.",
+    "dropArea": "Few trailers near the dock; no dedicated drop yard - 0-10 band.",
+    "urbanRural": "Beloit WI - the plant sits in Gateway Business Park on the edge of town, bordered by farmland and a rail line; small-city industrial setting, classified Rural per rubric tiebreak.",
+    "siteAreaAcres": "~10 acres estimate for the candidate parcel; flagged uncertain given identity uncertainty.",
+    "railServed": "A rail line runs along the SE of the business park but no spur enters the candidate parcel.",
+    "windTurbines": "The Kettle Beloit plant is documented as having 18 rooftop wind turbines and LEED-Gold certification - a distinctive marker that could not be clearly confirmed on the candidate building at available imagery resolution.",
+    "recommendation": "Flagged for human review - the exact Campbell's/Kettle building in Beloit (3150 Kettle Way) should be confirmed against the roster's '1101 Willowbrook Road' address before relying on this audit."
+  },
+  "method": "deep-audit"
+}

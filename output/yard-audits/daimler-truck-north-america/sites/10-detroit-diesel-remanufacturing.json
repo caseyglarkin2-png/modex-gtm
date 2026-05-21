@@ -1,0 +1,52 @@
+{
+  "name": "Detroit Diesel Remanufacturing - Hibbing MN",
+  "type": "Remanufacturing plant (engines/components)",
+  "coords": { "lat": 47.393282, "lng": -92.829402 },
+  "geofences": {
+    "perimeter": { "south": 47.3922, "west": -92.8308, "north": 47.3944, "east": -92.8276 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 47.3935, "west": -92.8302, "north": 47.3940, "east": -92.8294 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 8,
+    "trailersVisible": 6,
+    "trailerParkingCapacity": 14,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 14.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@47.393282,-92.829402,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": true, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "connectivityIssue"],
+  "fieldNotes": {
+    "location": "Geocoded point (ROOFTOP, moved 115m) lands accurately on a single tan industrial building in open country on the Range Regional Airport property south of US-169 near Hibbing MN. Confirmed via DTNA press releases as Detroit Diesel Remanufacturing -- the Hibbing reman plant whose 2024 expansion doubled the footprint to ~120,000 sq ft and added BEV battery/inverter remanufacturing. Address 3895 South Hughes Road.",
+    "truckGate": "No controlled truck gate. A single open driveway runs from US-169 down to the building's parking lots; Street View (captured 2025-08) shows no barrier arm, gate or guard booth, and no perimeter fence at the road -- the site is fully open.",
+    "guardShack": "No guard booth anywhere on site.",
+    "drivewayShort": "Short, direct open driveway from the highway to the dock apron and lots; minimal stacking depth.",
+    "dockDoors": "0-10: a single covered dock canopy with roughly 6-10 doors on the building's NW face; count approximate, flagged uncertain.",
+    "dropArea": "0-10: only a few trailers parked along the south edge; no dedicated drop yard.",
+    "dropYard": "No dedicated trailer-storage lot; the few trailers park ad hoc near the south parking lot.",
+    "multipleFacilities": "Single building. The red-roofed structure to the east is a separate airport-related building, not part of this plant.",
+    "railServed": "No rail spur into the property.",
+    "urbanRural": "Isolated site in open fields/farmland on airport property near Hibbing, a small northern-Minnesota town -> Rural.",
+    "connectivityIssue": "Rural, isolated open-country location on the Iron Range; cellular coverage may be weaker. Hibbing town and the regional airport are nearby so it is not extreme -> recorded true at medium confidence, flagged uncertain.",
+    "confidence": "High: the facility is positively identified and the small open layout reads clearly from satellite + recent (2025) Street View. Only the exact dock-door count and the inferred connectivity flag are uncertain."
+  },
+  "method": "deep-audit"
+}

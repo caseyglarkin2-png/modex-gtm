@@ -1,0 +1,71 @@
+{
+  "name": "John Deere Power Products - Greeneville TN",
+  "type": "Assembly Plant",
+  "coords": { "lat": 36.15268, "lng": -82.88965 },
+  "geofences": {
+    "perimeter": { "south": 36.14920, "west": -82.89400, "north": 36.15660, "east": -82.88560 },
+    "truckGate": { "south": 36.15500, "west": -82.88880, "north": 36.15570, "east": -82.88790 },
+    "dropYards": [
+      { "south": 36.15280, "west": -82.89230, "north": 36.15470, "east": -82.89020 },
+      { "south": 36.15080, "west": -82.89380, "north": 36.15280, "east": -82.89120 }
+    ],
+    "dockAprons": [
+      { "south": 36.15280, "west": -82.88960, "north": 36.15420, "east": -82.88780 },
+      { "south": 36.15080, "west": -82.89060, "north": 36.15230, "east": -82.88880 }
+    ],
+    "staging": { "south": 36.15450, "west": -82.88820, "north": 36.15540, "east": -82.88680 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 8,
+    "siteAreaAcres": 95.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.15268,-82.88965,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity", "connectivityIssue"],
+  "fieldNotes": {
+    "truckGate": "Confirmed in 2023-11 Street View: a controlled, fully fenced truck entrance on the NE access drive (~36.1552, -82.8882). Chain-link perimeter fence with sliding gate sections; entrance lane pinch-point.",
+    "guardShack": "Confirmed: a small white guard booth (~1-vehicle footprint) set beside the entrance lane, visible in Street View and z20 satellite. Staffed checkpoint controlling truck access into the plant.",
+    "remoteGs": "False - a physical staffed guard booth is present.",
+    "postGateStaging": "Paved area inside the gate before the dock banks can hold queuing trucks.",
+    "drivewayLong": "The plant access road runs several hundred metres from the Hal Henard Rd junction to the gate, then continues to the dock areas - ample stacking for 3+ trucks.",
+    "dockDoors": "50+: multiple long building faces with continuous dock-door rhythm, dozens of trailers backed in across at least 3-4 dock banks (z19 imagery shows two long rows of 20+ trailers each). Counted ~60 - high-volume freight operation.",
+    "dropArea": "Trailer drop / staging across several yard areas plus finished-goods staging; banded 25-50. Note the large west-side racks store finished mowers/tractors, not trailers - excluded from this count.",
+    "shipRcvSeparate": "Multiple physically separate dock banks on different building faces - shipping and receiving run from distinct clusters.",
+    "urbanRural": "Facility sits among farmland and woods on the rural edge of Greene County; surrounding land is open pasture and forest - Rural.",
+    "entryLanes": "Single inbound lane through the gate observed; low confidence on exact lane split at the booth.",
+    "scale": "No truck scale / weigh platform observed in the truck path.",
+    "railServed": "A rail line runs along the SW property edge, but no spur was observed entering the plant - railServed false.",
+    "siteAreaAcres": "Developed/fenced plant area estimated ~95 acres; perimeter bounding box is larger because the property is an irregular footprint with open field margins.",
+    "connectivityIssue": "Rural setting but the facility is large, active, and near Greeneville with utility infrastructure - cellular coverage likely adequate; left false, flagged uncertain."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,63 @@
+{
+  "name": "Frito-Lay - Casa Grande AZ",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 32.901500, "lng": -111.792000 },
+  "geofences": {
+    "perimeter": { "south": 32.899400, "west": -111.795000, "north": 32.904700, "east": -111.791500 },
+    "truckGate": { "south": 32.901700, "west": -111.792000, "north": 32.902300, "east": -111.791500 },
+    "dropYards": [
+      { "south": 32.902400, "west": -111.793000, "north": 32.904300, "east": -111.791600 },
+      { "south": 32.901500, "west": -111.795000, "north": 32.903400, "east": -111.793600 }
+    ],
+    "dockAprons": [
+      { "south": 32.901300, "west": -111.793600, "north": 32.902600, "east": -111.792400 },
+      { "south": 32.899800, "west": -111.794200, "north": 32.900600, "east": -111.792600 }
+    ],
+    "staging": { "south": 32.901700, "west": -111.792600, "north": 32.902600, "east": -111.791800 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35,
+    "trailersVisible": 110,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 95.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.901500,-111.792000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "scale", "dockDoors", "dockDoorCount", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "The entire plant perimeter is enclosed by chain-link fencing (confirmed in multiple Street View captures from the east access road). A single internal access road runs along the east side from the public road network in the N; the truck entrance is a controlled gate where a driveway crosses the fence line onto this access road.",
+    "guardShack": "A guard booth is likely at this flagship 'near net zero' secured plant, but could not be visually confirmed - z21 satellite at the gate zone is washed out and Street View of the entrance is heavily sun-glared. Marked true at medium confidence and flagged.",
+    "remoteGs": "False - guard booth assumed present.",
+    "postGateStaging": "Large internal paved aprons and trailer yard between the gate and the dock areas - ample inside holding room.",
+    "drivewayLong": "Long east-side access road plus expansive internal paved yard - holds 3+ trucks.",
+    "fastLaneOpportunity": "Wide access road and large paved internal aprons with significant unused width - room to add an express/bypass lane.",
+    "entryExitTogether": "Single access road / entrance serves both in and out.",
+    "entryLanes": "Estimated 1 inbound - low confidence, imagery washed out.",
+    "exitLanes": "Estimated 1 outbound - low confidence.",
+    "dockDoors": "Dock doors along the building with trailers backed in; partial visibility - estimated 25-50 band, low confidence.",
+    "dropArea": "Extensive trailer drop yard on the NE with dozens of trailers in rows, plus additional trailers on the W side - exceeds 50 stalls.",
+    "shipRcvSeparate": "Could not clearly confirm physically separate ship/receive dock clusters - left false, flagged.",
+    "urbanRural": "Set in the Sonoran desert at the edge of Casa Grande, surrounded by farmland and open desert - Rural.",
+    "multipleFacilities": "Single large connected plant building mass with attached process structures - not a multi-cluster campus. An electrical substation NE of the property is a separate utility.",
+    "scale": "No truck scale clearly identifiable - low confidence.",
+    "railServed": "Confirmed - a rail line runs along the east edge of the property and rail cars/tankers are parked on a spur serving the plant (visible in Street View and satellite).",
+    "siteAreaAcres": "Perimeter box yields ~95 acres; public sources cite the building at ~188,000 sq ft on 200+ acres of owned land (much of it desert buffer).",
+    "trailersVisible": "~110 trailers counted across the NE drop yard, W side, and dock faces - approximate.",
+    "dockDoorCount": "Overhead estimate; imagery resolution and trailer obstruction limit confidence."
+  },
+  "method": "deep-audit"
+}

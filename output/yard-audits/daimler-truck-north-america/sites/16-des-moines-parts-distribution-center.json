@@ -1,0 +1,55 @@
+{
+  "name": "Des Moines Parts Distribution Center - Grimes IA",
+  "type": "Parts distribution center",
+  "coords": { "lat": 41.671050, "lng": -93.783700 },
+  "geofences": {
+    "perimeter": { "south": 41.670000, "west": -93.784400, "north": 41.672100, "east": -93.782600 },
+    "truckGate": { "south": 41.671800, "west": -93.783100, "north": 41.672100, "east": -93.782700 },
+    "dropYards": [
+      { "south": 41.670300, "west": -93.783000, "north": 41.671900, "east": -93.782650 }
+    ],
+    "dockAprons": [
+      { "south": 41.670300, "west": -93.783250, "north": 41.671900, "east": -93.782900 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30,
+    "trailersVisible": 28,
+    "trailerParkingCapacity": 45,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 16.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.671050,-93.783700,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "urbanRural"],
+  "fieldNotes": {
+    "location": "Address 1000 SE 19th Street, Grimes IA — DTNA's Iowa / Des Moines Parts Distribution Center, the 9th PDC in DTNA's network, serving 200+ Midwest/Great Plains dealers; 50 employees, two shifts, up to 8 truckloads/day; footprint doubled in a 2024 expansion. Confirmed via DTNA press release and Grimes/Greater Des Moines business directories. Roster geocode moved 1,901 m; the corrected pin landed on the correct building. Center locked at 41.671050, -93.783700.",
+    "truckGate": "No perimeter fence, no barrier arm or gate, no guarded checkpoint at any road connection. Street View (2022-10) shows open grass frontage and uncontrolled driveways. Standard open spec-park layout.",
+    "guardShack": "No booth structure at any driveway or in the truck court.",
+    "dockDoors": "All dock doors on the east long face (single dock bank). Continuous door rhythm with trailers backed in; estimate ~30 doors, 25-50 band — flagged uncertain.",
+    "dropArea": "East truck court holds trailers backed into docks plus a parking row of drop trailers; ~25-50 band, dropYard true.",
+    "trailersVisible": "Roughly 28 trailers counted in the east truck court (backed-in plus parking row).",
+    "shipRcvSeparate": "FALSE. Docks are a single bank on the east face only.",
+    "drivewayLong": "Wide, deep east truck court easily stages 3+ trucks before the docks.",
+    "fastLaneOpportunity": "Wide, fully paved truck court with unused apron width — room for an express bypass lane.",
+    "entryExitSeparate": "Two open driveway connections to the road (one near the north car-park area, one toward the south end of the truck court) act as separate in/out routes.",
+    "urbanRural": "Borderline. The PDC sits at the development edge of Grimes (a fast-growing Des Moines suburb) with farmland on the immediate west/south, but surrounded by an industrial park, big-box retail and dense residential subdivisions; classified Urban for the metro-Des-Moines suburban-industrial setting — flagged uncertain.",
+    "connectivityIssue": "FALSE. Within a developed metro-Des-Moines industrial/retail area, not isolated; cellular coverage expected to be normal.",
+    "railServed": "No rail spur enters the property."
+  },
+  "method": "deep-audit"
+}

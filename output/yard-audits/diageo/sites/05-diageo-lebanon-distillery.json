@@ -1,0 +1,51 @@
+{
+  "name": "Diageo Lebanon Distillery - Lebanon KY",
+  "type": "Distillery (Carbon-Neutral)",
+  "coords": { "lat": 37.5453, "lng": -85.2790 },
+  "geofences": {
+    "perimeter": { "south": 37.5410, "west": -85.2848, "north": 37.5478, "east": -85.2762 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 37.5452, "west": -85.2796, "north": 37.5460, "east": -85.2790 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 6,
+    "trailersVisible": 4,
+    "trailerParkingCapacity": 12,
+    "truckGateCount": 1,
+    "buildingCount": 11,
+    "siteAreaAcres": 142.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.5453,-85.2790,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["truckGate", "dockDoorCount", "dropArea", "scale", "connectivityIssue"],
+  "fieldNotes": {
+    "truckGate": "Open campus access - the facility access road branches off the public road (Bourbon Drive / KY-208) with no barrier arm or sliding gate at the public-road junction. A chain-link perimeter fence wraps the distillery building itself (visible in Street View 2024-04), but no controlled checkpoint at the road. Defaulted false; flagged uncertain because a gate could exist deeper on the unmapped internal road.",
+    "guardShack": "No staffed guard booth visible at any entrance.",
+    "multipleFacilities": "True - a campus: one 72,000 sq ft distillery/dry house building plus ~9-12 long barrel-aging warehouses (rickhouses) spread across the 144-acre property.",
+    "buildingCount": "~11 - the distillery/dry house plus roughly 10 visible barrel warehouses (press states 12 total; some still under construction in the imagery).",
+    "dockDoors": "Distillery loading is modest: a covered loading area on the distillery building's west side with a few loading positions for grain receiving and product/DDGS shipping. Band 0-10. Distilleries are low-dock-count operations.",
+    "dropArea": "Small SW laydown/equipment yard with a few trailers; not a true trailer drop lot. Band 0-10.",
+    "scale": "A truck scale is plausible for grain receiving at a distillery but not clearly identified in imagery; flagged uncertain.",
+    "connectivityIssue": "Rural Marion County KY location; the site sits in a small industrial cluster off KY-208, not deeply isolated, so cellular coverage is likely adequate - set false but flagged medium-confidence.",
+    "railServed": "No rail spur enters the property.",
+    "urbanRural": "Rural - Lebanon KY, rolling farmland in Marion County.",
+    "drivewayLong": "Long internal campus roads from the public road to the distillery and rickhouses easily hold a queue of 3+ trucks."
+  },
+  "method": "deep-audit"
+}

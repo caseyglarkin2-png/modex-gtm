@@ -1,0 +1,64 @@
+{
+  "name": "Performance Foodservice - Manassas VA",
+  "type": "Broadline Foodservice Distribution Center",
+  "coords": { "lat": 38.79250, "lng": -77.54270 },
+  "geofences": {
+    "perimeter": { "south": 38.79130, "west": -77.54400, "north": 38.79355, "east": -77.54155 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 38.79150, "west": -77.54330, "north": 38.79235, "east": -77.54225 }
+    ],
+    "dockAprons": [
+      { "south": 38.79175, "west": -77.54355, "north": 38.79310, "east": -77.54300 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 32,
+    "trailersVisible": 24,
+    "trailerParkingCapacity": 35,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 11.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.79250,-77.54270,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoors", "guardShack"],
+  "fieldNotes": {
+    "location": "Supplied coords were ROOFTOP precision (movedMeters 84) and landed on the correct building. Confirmed via web research (11777 Balls Ford Road, Manassas VA 20109, Performance Foodservice Manassas, former Reinhart, 703-368-8777, 105,000 sq ft multi-temp) and Street View, which shows the warehouse set behind a stormwater pond off the Balls Ford Road / Doane Drive intersection with a branded sign at the entrance.",
+    "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point. The truck driveway runs open from Doane Drive into the south/west truck yard. Only low chain-link fencing along the road frontage; the entrance itself is uncontrolled.",
+    "guardShack": "No small staffed-booth structure visible beside the driveway in satellite or Street View. The structure at the building's NW corner is the office entry. Street View panos sit on the main roads and cannot fully resolve the Doane Drive driveway, so a small booth cannot be 100% excluded — flagged.",
+    "dockDoors": "Estimated ~32 — a dock line along the west/southwest face of the building with ~12-15 trailers backed in, plus additional doors. Banded 25-50; roof glare makes the exact count an estimate.",
+    "dropArea": "A trailer drop area on the south side holds ~15-20 trailers in rows.",
+    "urbanRural": "Dense suburban industrial park in Manassas / Prince William County, within the Washington DC metro fabric — Urban.",
+    "railServed": "A rail line runs along the east edge of the industrial park but it is a through line; no spur enters the PFG property — railServed false.",
+    "multipleFacilities": "One PFG building. Adjacent warehouses west and southwest are separate properties, not part of this site.",
+    "siteArea": "Relatively compact ~11.5-acre parcel; the building fills much of the lot with truck yard wrapping the south and west."
+  },
+  "method": "deep-audit"
+}

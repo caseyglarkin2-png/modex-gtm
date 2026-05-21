@@ -1,0 +1,50 @@
+{
+  "name": "Caterpillar - Lafayette IN Large Engine Center",
+  "type": "Manufacturing plant (large engines; $725M campus expansion underway)",
+  "coords": { "lat": 40.4138, "lng": -86.8460 },
+  "geofences": {
+    "perimeter": { "south": 40.4095, "west": -86.8512, "north": 40.4178, "east": -86.8420 },
+    "truckGate": { "south": 40.4118, "west": -86.8470, "north": 40.4128, "east": -86.8458 },
+    "dropYards": [
+      { "south": 40.4118, "west": -86.8475, "north": 40.4135, "east": -86.8452 }
+    ],
+    "dockAprons": [
+      { "south": 40.4125, "west": -86.8480, "north": 40.4138, "east": -86.8455 }
+    ],
+    "staging": { "south": 40.4112, "west": -86.8470, "north": 40.4122, "east": -86.8450 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22, "trailersVisible": 24, "trailerParkingCapacity": 45,
+    "truckGateCount": 1, "buildingCount": 4, "siteAreaAcres": 230.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.4138,-86.8460,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "truckGate", "entryLanes", "exitLanes", "scale", "dockDoors", "railServed", "multiStep"],
+  "fieldNotes": {
+    "location": "Roster geocode (40.4165,-86.8443) is ROOFTOP and lands at the Caterpillar Large Engine Center campus. Locked the 1.6M sq ft main building center at 40.4138,-86.8460. Confirmed: long Caterpillar-branded engine plant building seen from South St in Street View, plus a separate customer/training building to the SE, employee parking, tank farms and a substation on the SW.",
+    "truckGate": "Truck/dock operations are on the south/SE face of the building - a large paved truck yard with canopied dock aprons, trailers, and extensive material laydown reached by a long internal road. The South St (north) frontage is open office/employee access with no fence; the truck area is set deep on internal roads, implying a controlled service gate inside the campus.",
+    "guardShack": "No road-visible guard booth - the office frontage is open and the truck gate is internal. Classified remoteGs (controlled service gate, no road-visible booth) at medium-low confidence.",
+    "drivewayLong": "The truck approach runs a long internal road from South St to the south dock yard - ample queue depth.",
+    "fastLaneOpportunity": "The south truck yard is a very wide paved apron with abundant unused width - room to add a bypass/express lane.",
+    "dropArea": "Trailers parked across the wide south truck yard plus drop space alongside the dock canopies; capacity ~45.",
+    "railServed": "A rail line runs diagonally along the SE edge of the property; a spur appears to reach the south dock/laydown area - classified rail-served at medium confidence.",
+    "multipleFacilities": "Main 1.6M sq ft engine plant plus a separate SE building (customer/training center) on the same campus; the $725M expansion is adding more.",
+    "dockDoors": "~22 dock doors estimated under canopied aprons on the south face; canopies obscure exact count - low confidence.",
+    "urbanRural": "Urban - the LEC sits within Lafayette's developed south-side commercial/industrial fabric with retail and subdivisions adjacent.",
+    "siteAreaAcres": "~230 acres for the campus including parking, truck yard and laydown - approximate.",
+    "expansion": "A $725M expansion was underway as of the reporting; imagery may predate completed expansion buildings."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,69 @@
+{
+  "name": "FedEx Ground Hub - Goodyear AZ (Phoenix)",
+  "type": "Ground regional distribution hub (~425K sq ft regional sortation, with package center)",
+  "coords": { "lat": 33.43900, "lng": -112.37120 },
+  "geofences": {
+    "perimeter": { "south": 33.43560, "west": -112.37320, "north": 33.44060, "east": -112.36960 },
+    "truckGate": { "south": 33.43950, "west": -112.37010, "north": 33.44030, "east": -112.36960 },
+    "dropYards": [
+      { "south": 33.43960, "west": -112.37320, "north": 33.44060, "east": -112.36980 },
+      { "south": 33.43560, "west": -112.37320, "north": 33.43770, "east": -112.36980 }
+    ],
+    "dockAprons": [
+      { "south": 33.43900, "west": -112.37320, "north": 33.43990, "east": -112.36980 },
+      { "south": 33.43760, "west": -112.37320, "north": 33.43830, "east": -112.36980 }
+    ],
+    "staging": { "south": 33.43960, "west": -112.37010, "north": 33.44060, "east": -112.36960 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 130,
+    "trailersVisible": 220,
+    "trailerParkingCapacity": 280,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 38.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.43900,-112.37120,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Single truck entrance is on the NE corner off 143rd Ave - a very wide open paved apron/driveway with NO barrier arm or sliding gate across the truck lane (2024/2025 Street View sv13/sv15). The yard interior carries an ornamental steel security fence (visible W side, sv7-sv10) but the truck driveway opening is left open and uncontrolled - truckGate false.",
+    "guardShack": "No staffed guard booth at the NE entrance - only a small free-standing sign post. No checkpoint structure observed. guardShack false; remoteGs false because there is no controlled gate.",
+    "fastLaneOpportunity": "The NE entrance is an exceptionally wide paved apron with abundant unused width - ample room to add lanes / express bypass.",
+    "postGateStaging": "Large paved apron inside the entrance and between the building and yards gives deep internal truck holding room.",
+    "drivewayLong": "Deep paved entry apron and internal drives - room to queue 3+ trucks before docks.",
+    "dockDoors": "Large cross-dock building with continuous dock doors on BOTH the N and S long faces, trailers backed in on each; ~130 doors estimated - count approximate, flagged uncertain.",
+    "dropArea": "Two large trailer drop yards (N of building and S of building) holding well over 50 parked trailers without tractors - dropYard true.",
+    "shipRcvSeparate": "Dock banks on two opposite faces (N and S) of the building act as physically separate dock clusters - likely separate ship/receive flows; flagged uncertain.",
+    "railServed": "No rail spur enters the site - it is an industrial park parcel, not rail-served.",
+    "urbanRural": "Building 2 of Prologis Commerce Park at Goodyear, a 1.7M sq ft 4-building industrial park ~20 mi W of downtown Phoenix - dense industrial fabric, Urban.",
+    "multipleFacilities": "FedEx occupies a single building (Building 2); the other Prologis park buildings are separate tenants - not a FedEx campus.",
+    "buildingCount": "One FedEx cross-dock building (~425K sq ft) confirmed by FedEx logo on the office front in 2024 Street View."
+  },
+  "method": "deep-audit"
+}

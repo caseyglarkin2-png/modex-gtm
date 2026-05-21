@@ -1,0 +1,47 @@
+{
+  "name": "Performance Foodservice - Little Rock AR",
+  "type": "Broadline Foodservice Distribution Center",
+  "coords": { "lat": 34.71940, "lng": -92.32700 },
+  "geofences": {
+    "perimeter": { "south": 34.71760, "west": -92.32900, "north": 34.72120, "east": -92.32520 },
+    "truckGate": { "south": 34.71970, "west": -92.32880, "north": 34.72010, "east": -92.32820 },
+    "dropYards": [
+      { "south": 34.71790, "west": -92.32760, "north": 34.72000, "east": -92.32560 }
+    ],
+    "dockAprons": [
+      { "south": 34.71820, "west": -92.32820, "north": 34.71990, "east": -92.32680 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40, "trailersVisible": 40, "trailerParkingCapacity": 65,
+    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 17.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.7194,-92.327,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Roster coord (34.719308,-92.326965, ROOFTOP, movedMeters 137) is accurate — lands on the PFG DC at 4901 Asher Avenue, Little Rock AR 72204. A long distribution building running NW-SE with docks on its SW face and trailer parking lots to the west and north.",
+    "truckGate": "Street View of the entrance off the access cul-de-sac clearly shows a chain-link sliding/swing gate spanning the full truck driveway, with trailers backed into docks just inside. Controlled truck entrance confirmed — truckGate true.",
+    "guardShack": "No staffed guard booth visible at the gate; a small structure near the gate is utility/equipment, not a multi-window booth.",
+    "remoteGs": "Gate present, no shack — kiosk / call-box / app check-in implied. true.",
+    "dockDoors": "Dock bank along the SW face of the long building with ~40 trailers backed in; banded 25-50.",
+    "dropArea": "Trailer drop rows in the lots west and north of the building; ~25-50 trailers, banded 25-50.",
+    "drivewayLong": "The gate opens onto a deep paved apron / drive in front of the dock face that can hold a 3+ truck queue. drivewayLong true.",
+    "buildingCount": "One long main DC building plus a small attached/secondary section — counted 2.",
+    "urbanRural": "Inside Little Rock's developed fabric on Asher Avenue with single-family houses immediately adjacent to the west — Urban."
+  },
+  "method": "deep-audit"
+}

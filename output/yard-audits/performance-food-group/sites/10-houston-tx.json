@@ -1,0 +1,50 @@
+{
+  "name": "Performance Foodservice - Houston TX",
+  "type": "Broadline Foodservice Distribution Center",
+  "coords": { "lat": 29.97850, "lng": -95.38680 },
+  "geofences": {
+    "perimeter": { "south": 29.97560, "west": -95.38830, "north": 29.98080, "east": -95.38470 },
+    "truckGate": { "south": 29.97880, "west": -95.38930, "north": 29.97935, "east": -95.38870 },
+    "dropYards": [
+      { "south": 29.97640, "west": -95.38830, "north": 29.97830, "east": -95.38700 }
+    ],
+    "dockAprons": [
+      { "south": 29.97620, "west": -95.38700, "north": 29.98000, "east": -95.38640 }
+    ],
+    "staging": { "south": 29.97900, "west": -95.38830, "north": 29.98000, "east": -95.38700 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 6,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 41.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.97850,-95.38680,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "dockDoors", "dropArea", "trailerParkingCapacity", "postGateStaging", "scale"],
+  "fieldNotes": {
+    "site": "Imagery captured mid-construction (Dec 2024 Street View; satellite shows building substantially complete with most of the site still bare graded dirt). Counts are honest projections for the completed facility, not finished-state observations.",
+    "truckGate": "Dedicated truck entrance on the SW corner off Farrell Rd: chain-link sliding gate across the truck lane with facility signage ('NORTH HOUS...'). A separate car/visitor entrance ~120m north is signed 'NO TRUCKS' and has a yellow barrier arm. Trucks have their own controlled gate.",
+    "guardShack": "A modular/booth structure sits just inside the truck gate (visible in Street View). Likely doubles as construction office during build-out but is positioned as a gatehouse. Medium confidence given construction-era imagery.",
+    "dockDoors": "Refrigerated/freezer DC class building (rooftop refrigeration units visible). Dock doors line the long east face; band 50+ is a projection for a facility of this footprint and type.",
+    "dropArea": "Large graded yard south and west of the building being built out as trailer parking; capacity 50+ projected.",
+    "fastLaneOpportunity": "Very wide entrance aprons and ample undeveloped paved width — clear room to add an express/bypass lane.",
+    "urbanRural": "Edge-of-metro setting on a rural-feeling road (Farrell Rd) bordered by woods, a golf course (Lochinvar GC), and scattered rural homes. Classified Rural per rubric tie-break guidance.",
+    "scale": "No truck scale visible in construction-era imagery; cannot rule out installation as the yard is completed."
+  },
+  "method": "deep-audit"
+}

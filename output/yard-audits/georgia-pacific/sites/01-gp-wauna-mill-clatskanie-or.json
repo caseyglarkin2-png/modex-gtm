@@ -1,0 +1,49 @@
+{
+  "name": "GP Wauna Mill - Clatskanie OR",
+  "type": "Tissue/Towel Mill",
+  "coords": { "lat": 46.1552, "lng": -123.4078 },
+  "geofences": {
+    "perimeter": { "south": 46.1485, "west": -123.4135, "north": 46.1605, "east": -123.4015 },
+    "truckGate": { "south": 46.1500, "west": -123.4078, "north": 46.1512, "east": -123.4060 },
+    "dropYards": [
+      { "south": 46.1571, "west": -123.4098, "north": 46.1581, "east": -123.4082 },
+      { "south": 46.1500, "west": -123.4078, "north": 46.1512, "east": -123.4055 }
+    ],
+    "dockAprons": [
+      { "south": 46.1568, "west": -123.4098, "north": 46.1576, "east": -123.4088 }
+    ],
+    "staging": { "south": 46.1497, "west": -123.4080, "north": 46.1510, "east": -123.4062 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 16, "trailersVisible": 23, "trailerParkingCapacity": 50,
+    "truckGateCount": 1, "buildingCount": 12, "siteAreaAcres": 165.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@46.1552,-123.4078,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": true, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "scale", "multiStep", "entryLanes", "exitLanes", "dockDoorCount"],
+  "fieldNotes": {
+    "location": "Roster coords (46.10414,-123.203936) landed in downtown Clatskanie, ~17 km SE of the actual mill. The Wauna Mill is on the Columbia River near Westport OR, ~92326 Taylorville Rd; mill core relocated to 46.1552,-123.4078.",
+    "truckGate": "Single ~1 km dedicated access road runs from US-30 through forest to the mill; integrated 1200-acre, 1100-employee mill universally has a controlled security entrance. Gate is internal/deep on the access road, not reachable by Street View panos which only cover US-30.",
+    "guardShack": "Inferred from facility scale (major integrated GP mill); a manned security booth at a 1100-employee mill is standard, but the booth itself is not positively resolved in overhead imagery — flagged uncertain.",
+    "scale": "Inbound wood-chip and finished-goods truck traffic at a mill of this scale uses a truck scale near the chip yard; small structures observed near the chip-yard access road are consistent with a scale house but not definitively resolved.",
+    "dropArea": "Clear diagonal row of ~13-14 parked trailers plus a ~6-7 trailer cluster in an open lot NE of the warehouse (46.1576,-123.409); a second large gravel staging lot near the access-road junction holds additional trailers.",
+    "dockDoors": "Finished-goods shipping/receiving doors are spread across multiple integrated buildings; ~16 dock positions estimated, low confidence due to process equipment obscuring building faces.",
+    "shipRcvSeparate": "Inbound wood chips delivered to chip yard on the south/east; finished tissue/towel ships from warehouse docks on the north — physically separate operations.",
+    "multipleFacilities": "Large multi-building integrated campus: pulping, paper machines, converting, power/recovery, water treatment, warehouse.",
+    "fastLaneOpportunity": "Wide gravel staging lots at the access-road junction and near the chip yard provide ample unused paved/graded width for bypass lanes.",
+    "urbanRural": "Isolated mill surrounded by forest and the Columbia River; nearest community (Westport) is small. Rural."
+  },
+  "method": "deep-audit"
+}

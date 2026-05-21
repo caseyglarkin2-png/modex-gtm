@@ -1,0 +1,1944 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:44:52.780Z",
+  "account": {
+    "slug": "kimberly-clark",
+    "displayName": "Kimberly-Clark",
+    "archetype": "cpg",
+    "siteCount": 18,
+    "coverageNote": {
+      "auditedCount": 18,
+      "estimatedFootprint": null,
+      "droppedStubCount": 0,
+      "capHit": false,
+      "note": "Audited all 18 identifiable facilities."
+    }
+  },
+  "research": {
+    "facility_count": 18,
+    "audited_facilities": 18,
+    "source": "yard-audit",
+    "confidence": "verified",
+    "caveats": [
+      "K-C Paris Plant - Paris TX: audit note mentions 'closed'",
+      "K-C Hendersonville Nonwovens Plant (Berkeley Mill) - Hendersonville NC: audit note mentions 'closed'",
+      "K-C Corinth Plant - Corinth MS: audit note mentions 'closed'",
+      "K-C Warren Advanced Manufacturing Facility - Warren OH: audit note mentions 'under construction'"
+    ]
+  },
+  "network": {
+    "bbox": [
+      -122.64,
+      30.73,
+      -73.4085,
+      47.1152
+    ],
+    "archetypeMix": {
+      "#6": 2,
+      "#3": 5,
+      "#9": 7,
+      "#1": 1,
+      "#7": 1,
+      "#10": 2
+    },
+    "totals": {
+      "dockDoors": 807,
+      "trailerCapacity": 2264,
+      "gates": 20,
+      "railServed": 5,
+      "acres": 2469.1
+    },
+    "sites": [
+      {
+        "id": "01-k-c-beech-island-mill",
+        "name": "K-C Beech Island Mill - Beech Island SC",
+        "type": "Integrated tissue & personal care manufacturing complex (largest K-C facility globally)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "scale"
+        ],
+        "center": {
+          "lat": 33.417,
+          "lng": -81.8955
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.4088,
+            "west": -81.9065,
+            "north": 33.425,
+            "east": -81.8888
+          },
+          "truckGate": {
+            "south": 33.4177,
+            "west": -81.8934,
+            "north": 33.4183,
+            "east": -81.8923
+          },
+          "dropYards": [
+            {
+              "south": 33.4092,
+              "west": -81.898,
+              "north": 33.4133,
+              "east": -81.8925
+            },
+            {
+              "south": 33.4205,
+              "west": -81.9,
+              "north": 33.4233,
+              "east": -81.8915
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.4131,
+              "west": -81.8985,
+              "north": 33.4138,
+              "east": -81.892
+            },
+            {
+              "south": 33.4196,
+              "west": -81.894,
+              "north": 33.4205,
+              "east": -81.89
+            }
+          ],
+          "staging": {
+            "south": 33.4168,
+            "west": -81.8938,
+            "north": 33.4178,
+            "east": -81.8918
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 450,
+          "truckGateCount": 1,
+          "buildingCount": 7,
+          "siteAreaAcres": 470,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: K-C Beech Island Mill — Beech Island, SC\n- Type: Integrated tissue & personal care manufacturing complex (Kimberly-Clark's largest plant globally — Scott, Cottonelle, Kleenex, Kotex, Huggies; ~2,000 employees)\n- Roster address: 246 Old Jackson Hwy, Beech Island, SC 29842\n- Resolved center: 33.41700, -81.89550",
+        "mapsUrl": "https://www.google.com/maps/@33.41700,-81.89550,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Main entrance off Old Jackson Hwy confirmed in Street View (2026-03): barrier arm across divided lanes, digital 'Beech Island' sign.",
+          "guardShack": "Small guard booth with blue canopy in the median between inbound/outbound lanes, visible in both satellite z20 and Street View.",
+          "fastLaneOpportunity": "Wide gate apron with divided 2-in / 2-out lanes plus landscaped islands; ample paved width to add an express bypass lane.",
+          "shipRcvSeparate": "Dock banks on the south face of the main building and a separate dock bank on the NE building cluster - physically separate clusters on a multi-building campus.",
+          "multipleFacilities": "Sprawling campus: ~7 distinct large building masses plus wastewater treatment ponds, all inside one fenced perimeter.",
+          "dockDoorCount": "Honest estimate - 90+ doors across the south main-building face and the NE building; exact count not resolvable, banded 50+.",
+          "dropArea": "Two large drop yards: a long double row of angled trailers along the south dock apron and extensive rows in the north of the campus; 300+ trailers visible.",
+          "scale": "No truck scale clearly visible from overhead; flagged uncertain.",
+          "urbanRural": "Rural - the complex sits in farmland/forest near the small community of Beech Island, edge of the Augusta GA metro fringe."
+        }
+      },
+      {
+        "id": "02-k-c-beech-island-regional-distribution-center",
+        "name": "K-C Beech Island Regional Distribution Center - Beech Island SC",
+        "type": "Automated regional distribution center (new ~1.1M sq ft, $200M, announced 2025)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "preGateStaging",
+          "postGateStaging",
+          "drivewayLong",
+          "drivewayShort",
+          "backupSensitive",
+          "entryExitTogether",
+          "entryExitSeparate",
+          "entryLanes",
+          "exitLanes",
+          "fastLaneOpportunity",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "connectivityIssue",
+          "multipleFacilities",
+          "scale",
+          "dropYard",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 33.42099,
+          "lng": -81.89067
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.419,
+            "west": -81.896,
+            "north": 33.4245,
+            "east": -81.889
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 0,
+          "siteAreaAcres": 0,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "NONE",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: K-C Beech Island Regional Distribution Center — Beech Island, SC\n- Type: Automated regional distribution center (new ~1.1M sq ft, $200M,\n  announced 2025)\n- Roster address: Old Jackson Hwy area, Beech Island, SC 29842\n- Roster coords: 33.420989, -81.890666 (geometric-center geocode)",
+        "mapsUrl": "https://www.google.com/maps/@33.42099,-81.89067,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "status": "NOT YET BUILT. This is a $200M, ~1.1M sq ft automated regional distribution center announced May 2025 as an expansion of the existing K-C Beech Island plant at 246 Old Jackson Hwy. Per SC Governor's office and Manufacturing Dive, it is projected to be completed and operational in Q2 2027 and will add ~150 jobs.",
+          "location": "Roster coordinates (33.420989, -81.890666) geocode to undeveloped land / residential subdivisions north-east of the K-C plant - not a built DC. The DC is an expansion ON the existing 246 Old Jackson Hwy plant property; current (2026) satellite imagery shows only forest and the plant's existing north building edge in this area - no DC structure, docks, or yard yet exist.",
+          "perimeter": "Best-effort box over the undeveloped K-C-owned land along the north edge of the existing Beech Island plant, the most plausible build footprint. Not a measured fence line - the facility does not yet exist.",
+          "classification": "All physical-layout fields are unobservable because the building has not been constructed. urbanRural set Rural by the surrounding farmland/forest setting; everything else flagged uncertain."
+        }
+      },
+      {
+        "id": "03-k-c-mobile-mill",
+        "name": "K-C Mobile Mill - Mobile AL",
+        "type": "Tissue / paper manufacturing mill",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "scale",
+          "truckGateCount"
+        ],
+        "center": {
+          "lat": 30.7353,
+          "lng": -88.0508
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 30.73,
+            "west": -88.0565,
+            "north": 30.741,
+            "east": -88.0465
+          },
+          "truckGate": {
+            "south": 30.7346,
+            "west": -88.0536,
+            "north": 30.7354,
+            "east": -88.0525
+          },
+          "dropYards": [
+            {
+              "south": 30.7368,
+              "west": -88.0532,
+              "north": 30.739,
+              "east": -88.05
+            },
+            {
+              "south": 30.7308,
+              "west": -88.053,
+              "north": 30.7342,
+              "east": -88.05
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 30.7338,
+              "west": -88.051,
+              "north": 30.7345,
+              "east": -88.0495
+            }
+          ],
+          "staging": {
+            "south": 30.734,
+            "west": -88.053,
+            "north": 30.7352,
+            "east": -88.0505
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 2,
+          "buildingCount": 6,
+          "siteAreaAcres": 95,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: K-C Mobile Mill — Mobile, AL\n- Type: Tissue / paper manufacturing mill (Scott, Cottonelle, K-C Professional\n  bath tissue & paper towels; ~680 employees; acquired from Scott Paper 1995)\n- Roster address: 2200 Paper Mill Rd, Mobile, AL 36610\n- Resolved center: 30.73530, -88.05080",
+        "mapsUrl": "https://www.google.com/maps/@30.73530,-88.05080,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Chain-link perimeter fencing with sliding/rolling gates across the truck access road into the fenced mill yard - confirmed in Street View (2023). Controlled but no staffed booth seen.",
+          "guardShack": "No distinct staffed guard booth visible in satellite or Street View; flagged uncertain. Set false.",
+          "remoteGs": "True by inference - there is a controlled gated truck entrance but no visible staffed guard shack, implying remote/kiosk check-in.",
+          "railServed": "Active rail spur runs through the property alongside the drop yards - clearly visible in satellite and Street View.",
+          "multipleFacilities": "Multi-building manufacturing campus: process/paper-machine buildings, a converting warehouse, an admin building, plus structures split across both sides of the elevated highway.",
+          "dropArea": "Large drop yards north and south of the highway, ~70 trailers visible in angled rows; banded 25-50 for marked drop stalls.",
+          "dockDoorCount": "~14 doors estimated on the converting/warehouse building face; some building faces obscured by process equipment - honest estimate.",
+          "truckGateCount": "At least 2 controlled entry points (north mill yard and south trailer yard); flagged uncertain.",
+          "scale": "No truck scale clearly visible from overhead; flagged uncertain.",
+          "urbanRural": "Urban - the mill sits inside the City of Mobile within a dense riverside industrial corridor."
+        }
+      },
+      {
+        "id": "04-k-c-loudon-mill",
+        "name": "K-C Loudon Mill - Loudon TN",
+        "type": "Tissue manufacturing mill (K-C Professional / consumer tissue)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "scale"
+        ],
+        "center": {
+          "lat": 35.76764,
+          "lng": -84.32992
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.7635,
+            "west": -84.3325,
+            "north": 35.7725,
+            "east": -84.3225
+          },
+          "truckGate": {
+            "south": 35.7643,
+            "west": -84.3302,
+            "north": 35.7651,
+            "east": -84.3292
+          },
+          "dropYards": [
+            {
+              "south": 35.7683,
+              "west": -84.3282,
+              "north": 35.7708,
+              "east": -84.3243
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.766,
+              "west": -84.3315,
+              "north": 35.7685,
+              "east": -84.33
+            },
+            {
+              "south": 35.7676,
+              "west": -84.326,
+              "north": 35.7692,
+              "east": -84.3242
+            }
+          ],
+          "staging": {
+            "south": 35.768,
+            "west": -84.3278,
+            "north": 35.769,
+            "east": -84.3255
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 80,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: K-C Loudon Mill — Loudon, TN\n- Type: Tissue manufacturing mill (K-C Professional away-from-home tissue;\n  Kleenex and Scott towel products)\n- Roster address: 5600 Kimberly Way, Loudon, TN 37774\n- Resolved center: 35.76764, -84.32992",
+        "mapsUrl": "https://www.google.com/maps/@35.76764,-84.32992,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No barrier arm, sliding gate, or staffed checkpoint found at the property entrance in satellite or 2024 Street View. The entry road passes a landscaped monument-sign roundabout but is otherwise an open industrial driveway. Set false; flagged uncertain - a gate further inside the yard cannot be ruled out due to limited Street View coverage of the internal road.",
+          "guardShack": "No guard booth visible at any entrance. Set false.",
+          "remoteGs": "False - no controlled gate identified, so no remote-checkin inference.",
+          "shipRcvSeparate": "Manufacturing mill has dock faces on its SW side; the separate distribution warehouse to the NE has its own dock bank serving the drop yard - physically separate dock clusters on different buildings.",
+          "multipleFacilities": "Campus: main tissue mill, a separate large distribution warehouse, plus a wastewater treatment area to the NW.",
+          "dropArea": "Very large drop yards around the warehouse - multiple long rows of angled-parked trailers, 100+ visible; banded 50+.",
+          "dockDoorCount": "~30 doors estimated across the mill SW face and the warehouse face - honest estimate, banded 25-50.",
+          "railServed": "No rail spur runs into the property in current imagery.",
+          "scale": "No truck scale clearly visible from overhead; flagged uncertain.",
+          "urbanRural": "Rural - the mill sits on Watts Bar Lake at the wooded edge of the small town of Loudon, TN."
+        }
+      },
+      {
+        "id": "05-k-c-new-milford-mill",
+        "name": "K-C New Milford Mill - New Milford CT",
+        "type": "Diaper & tissue manufacturing plant (Huggies, Kleenex, Scott)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "railServed",
+          "dockDoorCount",
+          "scale"
+        ],
+        "center": {
+          "lat": 41.55833,
+          "lng": -73.41361
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.555,
+            "west": -73.4175,
+            "north": 41.5615,
+            "east": -73.4085
+          },
+          "truckGate": {
+            "south": 41.5582,
+            "west": -73.416,
+            "north": 41.5592,
+            "east": -73.4148
+          },
+          "dropYards": [
+            {
+              "south": 41.5587,
+              "west": -73.4152,
+              "north": 41.5605,
+              "east": -73.412
+            },
+            {
+              "south": 41.5556,
+              "west": -73.413,
+              "north": 41.5572,
+              "east": -73.4105
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.5588,
+              "west": -73.415,
+              "north": 41.5598,
+              "east": -73.413
+            }
+          ],
+          "staging": {
+            "south": 41.5584,
+            "west": -73.4156,
+            "north": 41.5596,
+            "east": -73.4138
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 25,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 75,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: K-C New Milford Mill — New Milford, CT\n- Type: Diaper & tissue manufacturing plant (Kleenex facial tissue; ~350\n  employees; operating since the late 1970s)\n- Roster address: Pickett District Rd, New Milford, CT 06776\n  (street number 58 Pickett District Rd per web research)\n- Resolved center: 41.55833, -73.41361",
+        "mapsUrl": "https://www.google.com/maps/@41.55833,-73.41361,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No barrier arm or staffed checkpoint clearly visible from satellite. The complex shares a dense industrial park and the only Street View coverage (2019-2022) is of the office/commercial frontage on Pickett District Rd, where there is no gate. A controlled truck gate on the internal yard road cannot be confirmed or ruled out - set false, flagged uncertain.",
+          "guardShack": "No guard booth visible at any imaged entrance. Set false.",
+          "remoteGs": "False - no controlled gate identified.",
+          "railServed": "A rail line runs along the Housatonic River on the east edge of the property with rail cars (boxcars/hoppers) parked on it - consistent with a rail siding serving the mill. Marked true with medium confidence; flagged uncertain because the spur connection into the property is partly tree-obscured.",
+          "shipRcvSeparate": "Multiple dock faces and drop yards on different building faces (north drop yard near the main mill, plus a separate yard with trailers to the SE) - physically separate clusters.",
+          "multipleFacilities": "Campus: main diaper/tissue mill, an attached utility/boiler plant, office buildings, and a wastewater treatment area.",
+          "dropArea": "Trailer drop yards with ~60 trailers visible in angled rows; banded 25-50 for marked drop stalls.",
+          "dockDoorCount": "~25 doors estimated; much of the building face is obscured by process equipment and roof structures - honest estimate, banded 25-50.",
+          "scale": "No truck scale clearly visible from overhead; flagged uncertain.",
+          "urbanRural": "Urban - the mill sits inside a dense industrial/commercial corridor of New Milford CT (Pickett District Rd)."
+        }
+      },
+      {
+        "id": "06-kc-owensboro-plant",
+        "name": "K-C Owensboro Plant - Owensboro KY",
+        "type": "Diaper / personal care manufacturing plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "truckGate",
+          "scale",
+          "multiStep",
+          "postGateStaging"
+        ],
+        "center": {
+          "lat": 37.8194,
+          "lng": -87.3032
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 37.8146,
+            "west": -87.3086,
+            "north": 37.824,
+            "east": -87.2982
+          },
+          "truckGate": {
+            "south": 37.82085,
+            "west": -87.3057,
+            "north": 37.8213,
+            "east": -87.305
+          },
+          "dropYards": [
+            {
+              "south": 37.8197,
+              "west": -87.3084,
+              "north": 37.8225,
+              "east": -87.305
+            },
+            {
+              "south": 37.8194,
+              "west": -87.305,
+              "north": 37.821,
+              "east": -87.3034
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 37.8194,
+              "west": -87.305,
+              "north": 37.8207,
+              "east": -87.3037
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 160,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 230,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Confirmed: 601 Innovative Way, Owensboro, KY 42301\n- Locked center: 37.819400, -87.303200\n- The roster geocode flagged `movedMeters: 21762`, which looked alarming, but\n  this only reflects the geocoder starting from the Owensboro city centroid.\n  The supplied roster coordinates (37.819139, -87.302856) land squarely on a\n  large industrial complex, and an independent public-records coordinate\n  (37.8188, -87.3031) is essentially identical — so the roster point is\n  correct.\n- Web search confirms K-C operates a diaper / personal-care manufacturing\n  plant at 601 Innovative Way (also building a steam-production facility there\n  per local press). Satellite shows a large multi-building manufacturing +\n  distribution complex on a peninsula bounded by the Green River, with\n  extensive trailer parking — consistent with the facility type.",
+        "mapsUrl": "https://www.google.com/maps/@37.819400,-87.303200,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords landed on the correct building; geocode movedMeters (21762) reflects a poor city-center geocoder start, not an error. Confirmed as 601 Innovative Way, Owensboro KY — large K-C diaper/personal-care manufacturing complex + on-site DC on a peninsula bounded by the Green River.",
+          "truckGate": "Open campus-style entrance off Innovative Way at the public road — Street View (2019) shows a K-C monument sign and manicured-lawn drive with NO barrier at the road. An internal truck-yard checkpoint/pinch-point with fencing and a small structure is visible at ~37.8211,-87.3053 controlling access to the drop yard. Classed truckGate=true on the internal control point; low confidence on a hard barrier.",
+          "guardShack": "No clearly resolvable guard booth at the public-road entrance or the internal checkpoint. A small structure plus parked vehicles sits beside the internal truck route but cannot be confirmed as a staffed booth at z20-21. Classed false / remoteGs true as best estimate.",
+          "dropArea": "Extensive trailer drop yard NW of the main building — 100+ trailers parked in long rows visible at z19-20. Honest estimate of 220 capacity is approximate.",
+          "dockDoors": "Long dock face on the NW edge of the main warehouse/DC building with ~50+ trailers backed in; 55 is an approximate count from z20 imagery.",
+          "multipleFacilities": "Campus: large manufacturing building cluster, separate warehouse/DC, on-site wastewater treatment plant, steam/utility plant, and office front — multiple distinct building clusters.",
+          "railServed": "No rail spur visible entering the property.",
+          "fastLaneOpportunity": "Wide internal paved truck routes and large open apron offer room for an express/bypass lane."
+        }
+      },
+      {
+        "id": "07-kc-maumelle-plant",
+        "name": "K-C Maumelle Plant - Maumelle AR",
+        "type": "Huggies baby wipes manufacturing plant (~400,000 sq ft)",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "railServed"
+        ],
+        "center": {
+          "lat": 34.864832,
+          "lng": -92.393775
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.8629,
+            "west": -92.3956,
+            "north": 34.8666,
+            "east": -92.3914
+          },
+          "truckGate": {
+            "south": 34.86585,
+            "west": -92.39365,
+            "north": 34.86625,
+            "east": -92.39315
+          },
+          "dropYards": [
+            {
+              "south": 34.8655,
+              "west": -92.3944,
+              "north": 34.8664,
+              "east": -92.3919
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.865,
+              "west": -92.3941,
+              "north": 34.8659,
+              "east": -92.3922
+            }
+          ],
+          "staging": {
+            "south": 34.8657,
+            "west": -92.3937,
+            "north": 34.8664,
+            "east": -92.3926
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 36,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 33,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Confirmed: 500 Murphy Dr, Maumelle, AR 72113\n- Locked center: 34.864832, -92.393775\n- Roster supplied only a city-level address (\"Maumelle, AR 72113\") and a\n  coordinate (34.870005, -92.397751) that sat ~700 m NW of the plant amid a\n  cluster of industrial buildings.\n- Web research (Maumelle Chamber, Metro Little Rock Alliance, Waze) confirmed\n  the address as 500 Murphy Dr and yielded an address-level coordinate\n  (34.864832, -92.393775) that lands squarely on a large white-roofed\n  manufacturing building with extensive trailer parking — consistent with the\n  ~400,000+ sq ft Huggies baby-wipes plant (~300 employees, $68M 2015\n  expansion).",
+        "mapsUrl": "https://www.google.com/maps/@34.864832,-92.393775,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed as 500 Murphy Dr, Maumelle, AR 72113 — K-C's Huggies baby-wipes manufacturing plant. Roster coords were ~700m NW of the building; web research yielded the street address and an address-level coordinate (34.864832,-92.393775) that lands squarely on the large white-roofed manufacturing building with extensive trailer parking. Locked center there.",
+          "truckGate": "Confirmed guarded truck gate at the NE corner where the access road from Murphy Dr enters. z21 imagery shows a small white guard booth astride the driveway with barrier arms across the inbound and outbound lanes.",
+          "guardShack": "Small white booth (~1-vehicle footprint) sitting in the pinch-point between the in/out lanes — staffed guard shack.",
+          "dockDoors": "Long dock bank on the NE building face with ~30-40 trailers backed in; 36 is an approximate count from z20 imagery — listed uncertain.",
+          "dropArea": "Trailers parked in rows along the north perimeter, separate from the active dock apron — a drop yard, ~30-40 trailers.",
+          "railServed": "A rail line curves along the SE edge of the property but no spur is visible entering the plant — classed not rail-served, listed uncertain.",
+          "postGateStaging": "Paved area just inside the gate before the dock apron provides truck holding/queue space.",
+          "urbanRural": "Maumelle industrial park on the edge of the Little Rock metro; setting is small-town / edge-of-town industrial with woods around the lot — classed Rural per the tie-break rule.",
+          "multipleFacilities": "One main manufacturing building with an integral eastern addition — a single facility, not a campus. The very large warehouse south of the lot is a separate, unrelated company."
+        }
+      },
+      {
+        "id": "08-kc-paris-plant",
+        "name": "K-C Paris Plant - Paris TX",
+        "type": "Diaper / personal care manufacturing plant (Huggies, Pull-Ups, Little Swimmers, Goodnites)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "truckGate",
+          "scale",
+          "dockDoorCount",
+          "entryExitSeparate",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 33.6389,
+          "lng": -95.5912
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.6335,
+            "west": -95.5965,
+            "north": 33.6425,
+            "east": -95.5855
+          },
+          "truckGate": {
+            "south": 33.6393,
+            "west": -95.5907,
+            "north": 33.6399,
+            "east": -95.5899
+          },
+          "dropYards": [
+            {
+              "south": 33.6365,
+              "west": -95.5938,
+              "north": 33.6386,
+              "east": -95.5912
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.638,
+              "west": -95.5932,
+              "north": 33.6394,
+              "east": -95.5914
+            }
+          ],
+          "staging": {
+            "south": 33.6389,
+            "west": -95.5912,
+            "north": 33.6396,
+            "east": -95.5899
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 200,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Confirmed: 2466 Farm Road 137 (FM 137), Paris, TX 75460\n- Locked center: 33.638900, -95.591200\n- The roster supplied only a city-level address (\"Paris, TX 75460\") and a\n  coordinate (33.660939, -95.555513) that landed in downtown Paris — about\n  5 km from the plant.\n- Web research confirmed the plant: the Paris TX Chamber business directory,\n  a Texas TDLR construction-project record (\"KIMBERLY-CLARK CORP - PARIS,\n  2466 FARM ROAD 137\"), and Yelp all give the address as 2466 FM 137.\n  Trade press confirms a 238-acre Huggies diaper plant operating since 1983\n  off SW Loop 286 in SW Paris (also makes Pull-Ups, Little Swimmers,\n  Goodnites).\n- Identification required scanning SW-Paris industrial sites. Two decoys were\n  ruled out: a lumber/scrap-processing yard with open-sided sheds",
+        "mapsUrl": "https://www.google.com/maps/@33.638900,-95.591200,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster supplied only a city-level address and a coordinate that landed in downtown Paris (~5 km off). Web research (Paris TX Chamber, Texas TDLR project record, Yelp) confirmed the address as 2466 Farm Road 137 (FM 137), Paris, TX 75460 — K-C's 238-acre Huggies diaper/personal-care plant off SW Loop 286. Identified the building by scanning SW Paris industrial sites: the matching facility is a large enclosed manufacturing complex with employee parking, a circular entrance drive, and a large trailer drop yard at ~33.6389,-95.5912. Several other unrelated industrial sites (a lumber/scrap yard, slab/construction site) were ruled out.",
+          "truckGate": "The access road from SW Loop 286 splits into separate inbound/outbound lanes at a pinch-point near the building (~33.6396,-95.5904). The site is perimeter-fenced (chain-link visible in Street View). Small structures/posts cross the lanes at the pinch-point — classed truckGate true, but a hard barrier could not be fully resolved; listed uncertain.",
+          "guardShack": "A small structure with a canopy sits beside the entry road at the pinch-point but cannot be positively confirmed as a staffed guard booth at z20-21. Classed guardShack false / remoteGs true as best estimate.",
+          "entryExitSeparate": "The entry road clearly forks into two separate paved lanes approaching the plant — classed entry/exit separate; listed uncertain as it could be a single divided drive.",
+          "dropArea": "Large trailer drop yard SW of the building with multiple long rows of parked trailers — 50+.",
+          "dockDoors": "Dock bank on the building's south/SW face with trailers backed in; ~40 doors estimated from z18-20 imagery — listed uncertain.",
+          "railServed": "No rail spur visible entering the property.",
+          "urbanRural": "Plant sits on a large wooded/field parcel off SW Loop 286 on the edge of Paris — rural per the tie-break rule.",
+          "fastLaneOpportunity": "Wide entry apron and the forked entry lanes leave room for an express/bypass lane.",
+          "multipleFacilities": "One main manufacturing building with attached/adjacent structures (utility/support buildings) — treated as a single facility, not a multi-cluster campus."
+        }
+      },
+      {
+        "id": "09-kc-chester-mill",
+        "name": "K-C Chester Mill - Chester PA",
+        "type": "Non-integrated tissue mill (Scott 1000 bathroom tissue; ~1.3M sq ft, ~570 employees)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "truckGate",
+          "dockDoorCount",
+          "scale",
+          "truckGateCount",
+          "multiStep",
+          "entryExitTogether"
+        ],
+        "center": {
+          "lat": 39.8442,
+          "lng": -75.3575
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.8408,
+            "west": -75.3605,
+            "north": 39.8472,
+            "east": -75.3545
+          },
+          "truckGate": {
+            "south": 39.8456,
+            "west": -75.3579,
+            "north": 39.8461,
+            "east": -75.3572
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 39.8442,
+              "west": -75.3582,
+              "north": 39.8449,
+              "east": -75.357
+            }
+          ],
+          "staging": {
+            "south": 39.8442,
+            "west": -75.3579,
+            "north": 39.8449,
+            "east": -75.3571
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 2,
+          "buildingCount": 8,
+          "siteAreaAcres": 74,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Confirmed: K-C Chester Mill, 800 W 2nd St, Chester, PA 19013\n- Locked center: 39.844200, -75.357500\n- The roster coordinate (39.841551, -75.369390) sat ~1 km W of the actual\n  mill, in downtown Chester.\n- Resolved via a documented site detail: EPA records state the mill is\n  \"bordered to the East by Harrah's Casino and Race Track.\" Harrah's\n  Philadelphia (777 Harrah's Blvd) has a distinctive harness-racing oval on\n  the Chester waterfront. The K-C mill is the large, dense paper-mill complex\n  immediately WEST of that oval, on the Delaware River — process buildings,\n  cogeneration plant, wastewater clarifiers, and paper rolls stored on the\n  riverfront pier. ~74-acre site.",
+        "mapsUrl": "https://www.google.com/maps/@39.844200,-75.357500,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed K-C Chester non-integrated tissue mill (Scott 1000), ~74 acres on the Delaware River. Roster coord (39.8416,-75.3694) sat ~1 km W of the actual mill in downtown Chester. Resolved via the documented border 'East by Harrah's Casino and Race Track' — the mill is the large dense paper-mill complex immediately W of Harrah's Philadelphia racetrack oval, at ~39.844,-75.357. Address 800 W 2nd St, Chester PA 19013.",
+          "truckGate": "The mill is fully perimeter chain-link fenced (visible all along W 2nd St in Street View). Trucks enter through fence gates; the main entrance off W 2nd St (~39.846,-75.357) opens into the mill yard. Classed truckGate true; a hard barrier arm was not clearly resolved.",
+          "guardShack": "No staffed booth positively confirmed at the W 2nd St entrance — the entry reads as an open fence gate into a parking/yard area. A small white-roofed structure in the freight yard near the rail siding (~39.8446,-75.3576) may be a scale house or gatehouse. Classed guardShack false / remoteGs true; listed uncertain.",
+          "scale": "A small structure beside the rail siding in the freight yard is consistent with a truck scale / scale house, but cannot be confirmed — listed uncertain.",
+          "railServed": "Rail tracks run into and through the mill property (siding visible by the freight yard and along the complex) — classed rail-served.",
+          "dropArea": "No dedicated trailer drop yard — dense urban mill with no room for a trailer storage lot. Only a few trailers parked near the dock building.",
+          "dockDoors": "Compact shipping dock on the warehouse building; ~18 doors estimated — listed uncertain (mill is dense and partly obscured by overhead conveyors).",
+          "backupSensitive": "Tight urban site hemmed in by the river, Harrah's casino, and city streets — little truck stacking room; a queue would spill onto W 2nd St.",
+          "multipleFacilities": "Campus of multiple connected buildings — mill, converting/warehouse, cogeneration plant, wastewater treatment — linked by overhead pipe/conveyor bridges.",
+          "urbanRural": "Dense urban waterfront in Chester, in the Philadelphia metro — Urban.",
+          "truckGateCount": "At least two fence-gate entries observed (W 2nd St main entrance and a freight-yard access); listed uncertain."
+        }
+      },
+      {
+        "id": "10-kc-jenks-mill",
+        "name": "K-C Jenks Mill - Jenks OK",
+        "type": "Tissue paper mill (Cottonelle, Scott bathroom tissue) with regional distribution center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "scale",
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes",
+          "railServed",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 35.9715,
+          "lng": -95.9272
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.9645,
+            "west": -95.9325,
+            "north": 35.9775,
+            "east": -95.9195
+          },
+          "truckGate": {
+            "south": 35.9667,
+            "west": -95.9307,
+            "north": 35.9675,
+            "east": -95.9297
+          },
+          "dropYards": [
+            {
+              "south": 35.968,
+              "west": -95.9255,
+              "north": 35.9725,
+              "east": -95.9215
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.9693,
+              "west": -95.93,
+              "north": 35.9702,
+              "east": -95.9275
+            }
+          ],
+          "staging": {
+            "south": 35.9668,
+            "west": -95.9302,
+            "north": 35.9682,
+            "east": -95.929
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 140,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 320,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Confirmed: K-C Jenks Mill (tissue mill + regional distribution center)\n- Locked center: 35.971500, -95.927200\n- The roster coordinate (35.995258, -95.972683) landed in a Jenks residential\n  subdivision ~10 km from the actual mill. Directory addresses (13252 S Yale\n  Pl / 13219 S Kimberly-Clark Pl, Jenks OK 74037) geocode poorly to south\n  Tulsa.\n- Resolved via a documented detail (Tulsa World): the mill \"sits on the\n  Arkansas River between Jenks and Bixby\" — a 1.8-million-sq-ft factory on 342\n  acres overlooking the river, opened 1990. Probing the Arkansas River bank SE\n  of Jenks located the matching large riverside industrial complex at\n  ~35.9715,-95.9272: a multi-building tissue mill plus a regional distribution\n  center, employee parking, and a large trailer drop yard — consistent with",
+        "mapsUrl": "https://www.google.com/maps/@35.971500,-95.927200,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster supplied only a city-level address and a coordinate (35.9953,-95.9727) that landed in a Jenks residential subdivision ~10 km from the mill. Directory addresses (13252 S Yale Pl / 13219 S Kimberly-Clark Pl) geocode poorly. Resolved via a documented detail (Tulsa World): the mill 'sits on the Arkansas River between Jenks and Bixby' — a 1.8M sq ft factory on 342 acres. Found and confirmed the large riverside industrial complex at ~35.9715,-95.9272: a multi-building tissue mill + regional DC overlooking the Arkansas River, consistent with the facility (opened 1990).",
+          "truckGate": "Controlled truck entrance at the SW corner where the long access road from the public road reaches the mill. z19 imagery shows a pinch-point with a gatehouse structure, marked lanes, and a parked truck in a staging position; Street View confirms a small gate building with a truck at the access road. Classed truckGate true.",
+          "guardShack": "A gatehouse / canopied structure sits beside the checkpoint pinch-point at the truck entrance — classed as a guard shack. Resolution is limited at z20-21 so listed uncertain; remoteGs false.",
+          "scale": "The structure cluster at the entrance checkpoint is consistent with a truck scale / scale house alongside the gatehouse — classed scale true but listed uncertain.",
+          "preGateStaging": "A truck is visible staged on the access road before the gate; the long approach provides pre-gate waiting room.",
+          "drivewayLong": "Long access road from the public road to the gate and on to the docks — easily holds a 3+ truck queue.",
+          "dropArea": "Large trailer drop yard E of the main building with many long rows of parked trailers — 50+.",
+          "dockDoors": "Long dock bank on the south face of the white warehouse/DC building with many trailers backed in; ~45 doors estimated — listed uncertain.",
+          "railServed": "No clear rail spur confirmed entering the property; some linear features near the SE could be rail or road. Listed uncertain; classed false.",
+          "multipleFacilities": "Campus: integrated tissue mill, a large separate warehouse / regional distribution center, wastewater treatment plant, tank farm, and process buildings — multiple distinct building clusters.",
+          "urbanRural": "Large 320+ acre campus on the rural Arkansas River bank between Jenks and Bixby, surrounded by farmland and woods — Rural.",
+          "fastLaneOpportunity": "Wide entry apron and long approach road give ample room for an express/bypass lane.",
+          "entryLanes": "Entry/exit lane counts estimated from the gate pinch-point — listed uncertain."
+        }
+      },
+      {
+        "id": "11-kc-marinette-mill",
+        "name": "K-C Marinette Mill - Marinette WI",
+        "type": "Tissue / wipers manufacturing mill (Scott Shop Towels, Wypall, Viva paper towels; ~230 employees)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 45.10375,
+          "lng": -87.65205
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 45.10095,
+            "west": -87.6556,
+            "north": 45.1065,
+            "east": -87.6487
+          },
+          "truckGate": {
+            "south": 45.10145,
+            "west": -87.6512,
+            "north": 45.10205,
+            "east": -87.6501
+          },
+          "dropYards": [
+            {
+              "south": 45.1013,
+              "west": -87.6532,
+              "north": 45.1028,
+              "east": -87.6506
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 45.1025,
+              "west": -87.6534,
+              "north": 45.1032,
+              "east": -87.6504
+            },
+            {
+              "south": 45.1038,
+              "west": -87.6506,
+              "north": 45.1048,
+              "east": -87.6496
+            }
+          ],
+          "staging": {
+            "south": 45.10135,
+            "west": -87.6506,
+            "north": 45.1021,
+            "east": -87.6495
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 52,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 31,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster coordinates were wrong. The supplied lat/lng (45.099985, -87.630662, geocode precision APPROXIMATE, moved 3554 m) landed in downtown Marinette near the Menominee River bridge — a town-center commercial block, not a paper mill.\n- Web research (Wisconsin DNR Green Tier participant page, Waze, Yelp) gave the real address: 3120 Riverside Ave, Marinette, WI 54143.\n- Satellite probe at the address coordinates confirmed a large industrial tissue / wipers manufacturing mill on the south bank of the Menominee River — multiple connected manufacturing buildings, a large warehouse, water-treatment ponds, and a trailer drop yard. Consistent with the K-C Marinette Mill (Scott Shop Towels, Wypall, Viva; ~230 employees).\n- Locked center: 45.10375, -87.65205.",
+        "mapsUrl": "https://www.google.com/maps/@45.10375,-87.65205,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster lat/lng (45.099985,-87.630662, APPROXIMATE, moved 3554m) landed in downtown Marinette - wrong. Web research (Wisconsin DNR Green Tier, Waze, Yelp) gave 3120 Riverside Ave; satellite confirmed the K-C tissue/wipers mill complex on the south bank of the Menominee River. Locked center 45.10375,-87.65205.",
+          "truckGate": "Guard booth + chain-link sliding gate sits inside the SE yard controlling access to the trailer drop yard / dock area; entrance off Riverside Ave is a wide open paved apron with truck-routing signage ('ALL TRUCKS') - control point is the interior booth.",
+          "guardShack": "Small tan peaked-roof booth (1-2 vehicle footprint) standing alone in the open yard adjacent to the drop yard, confirmed in Street View (2025-08).",
+          "preGateStaging": "Large open paved apron between Riverside Ave and the interior guard booth provides ample truck waiting room before the checkpoint.",
+          "postGateStaging": "Open paved yard between the guard booth and the dock faces / drop yard rows allows post-gate queueing.",
+          "drivewayLong": "Deep open yard from road apron to docks easily holds 3+ trucks queued.",
+          "fastLaneOpportunity": "Very wide unmarked paved apron at the entrance - abundant room to add a bypass/express lane.",
+          "dockDoors": "Estimated ~28 doors: a long dock face along the south/SW of the main warehouse plus a dock bank on the SE manufacturing building. Roof clutter and shadow make exact count uncertain - banded 25-50.",
+          "dropArea": "Dedicated gravel drop yard south of the warehouse with two long rows of parked trailers (~52 trailers counted in imagery, capacity ~70); banded 50+.",
+          "dropYard": "Clear dedicated trailer-storage lot separate from active dock staging.",
+          "urbanRural": "Marinette WI is a small river town (~10k pop); the mill is edge-of-town industrial bounded by river and woods - Rural per rubric.",
+          "shipRcvSeparate": "Dock activity appears split between the SW warehouse face and the SE manufacturing building, but not clearly two distinct shipping vs receiving clusters - low confidence, called false.",
+          "railServed": "No rail spur visible entering the property.",
+          "buildingCount": "Main manufacturing complex (river side), large central warehouse, SE manufacturing/dock building, and the front brick office building - counted as 4 distinct structures; some are interconnected."
+        }
+      },
+      {
+        "id": "12-kc-neenah-experimental-mill",
+        "name": "K-C Neenah Experimental Mill - Neenah WI",
+        "type": "Manufacturing / experimental mill (product & process innovation, Family Care)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "remoteGs",
+          "dockDoorCount",
+          "dockDoors",
+          "buildingCount",
+          "siteAreaAcres",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 44.1883,
+          "lng": -88.4626
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 44.1868,
+            "west": -88.4647,
+            "north": 44.1895,
+            "east": -88.4611
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 44.188,
+              "west": -88.463,
+              "north": 44.1887,
+              "east": -88.462
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 4,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 14,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster coordinates (44.185819, -88.462609, geocode precision APPROXIMATE, moved 137 m) landed in downtown Neenah — close to the target.\n- Web research (Wisconsin DNR Green Tier participant page, Waze, Foursquare) identified the facility as the Kimberly-Clark Experimental Mill (\"X-Mill\") at 126 N Commercial St, Neenah, WI 54956 — the site of K-C's original Globe Mill, the company's first plant, in the downtown core.\n- Satellite and Street View confirmed a K-C industrial/office campus on a Fox River-front block in downtown Neenah.\n- Locked center: 44.18830, -88.46260.",
+        "mapsUrl": "https://www.google.com/maps/@44.18830,-88.46260,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster lat/lng (44.185819,-88.462609, APPROXIMATE) landed in downtown Neenah - close. Web research (Wisconsin DNR Green Tier, Waze, Foursquare) gave the X-Mill / Experimental Mill at 126 N Commercial St - K-C's original Globe Mill site in the downtown core. Locked center 44.18830,-88.46260.",
+          "site": "This is an atypical site: a downtown-embedded R&D / experimental mill, NOT a freight-oriented plant or DC. The K-C campus occupies a riverfront block with the X-Mill industrial building, connected office buildings, a multi-story parking deck, and surface lots, fronting city streets on all sides. Heavy shadow in available imagery limits dock/structure detail.",
+          "truckGate": "No conventional truck gate at a public road. K-C-owned surface parking lots are fenced with chain-link sliding gates and internal service drives gate access into the campus. Marked truckGate=true on the basis of those controlled internal gates, but it is a soft call - flagged uncertain.",
+          "guardShack": "No staffed guard booth visible anywhere on the urban campus.",
+          "remoteGs": "Set true (gate present, no guard shack) - access is via card/badge-controlled sliding gates typical of urban campuses.",
+          "dockDoors": "Loading is via recessed dock bays on the X-Mill industrial building's west/south faces; heavy shadow prevents a precise count. Estimated <10 doors - banded 0-10, flagged uncertain.",
+          "dropArea": "No drop yard or marked trailer-parking stalls - urban site with no yard space.",
+          "drivewayShort": "Any truck approach is a short urban service drive holding 1-2 trucks at most.",
+          "backupSensitive": "Tight downtown geometry - service drives connect directly to city streets; a truck queue would spill onto public streets.",
+          "multipleFacilities": "The K-C downtown campus is multiple connected buildings (X-Mill, office buildings, parking deck) - a campus.",
+          "urbanRural": "Squarely Urban - dense downtown Neenah core with modern apartment blocks, retail, and parking decks on adjacent blocks.",
+          "railServed": "No rail spur into the property.",
+          "siteAreaAcres": "~14 acres for the K-C-controlled riverfront block; soft estimate given the campus is interleaved with downtown streets.",
+          "confidence": "Medium overall - facility positively identified, but it is an unusual urban R&D mill with no conventional truck yard, and shadow obscures dock detail."
+        }
+      },
+      {
+        "id": "13-kc-hendersonville-nonwovens-plant-berkeley-mill",
+        "name": "K-C Hendersonville Nonwovens Plant (Berkeley Mill) - Hendersonville NC",
+        "type": "Nonwovens manufacturing plant (materials for Depend, Poise, U by Kotex)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 35.3463,
+          "lng": -82.4688
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.3425,
+            "west": -82.4723,
+            "north": 35.35,
+            "east": -82.4655
+          },
+          "truckGate": {
+            "south": 35.3486,
+            "west": -82.4702,
+            "north": 35.3494,
+            "east": -82.4688
+          },
+          "dropYards": [
+            {
+              "south": 35.3462,
+              "west": -82.4682,
+              "north": 35.3483,
+              "east": -82.4658
+            },
+            {
+              "south": 35.3428,
+              "west": -82.4712,
+              "north": 35.3448,
+              "east": -82.469
+            },
+            {
+              "south": 35.3438,
+              "west": -82.469,
+              "north": 35.3454,
+              "east": -82.4668
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.3444,
+              "west": -82.4709,
+              "north": 35.3456,
+              "east": -82.4695
+            },
+            {
+              "south": 35.3456,
+              "west": -82.4676,
+              "north": 35.3466,
+              "east": -82.4662
+            }
+          ],
+          "staging": {
+            "south": 35.3478,
+            "west": -82.469,
+            "north": 35.3486,
+            "east": -82.4678
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 36,
+          "trailersVisible": 240,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 78,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster coordinates (35.318728, -82.460953, geocode precision APPROXIMATE, moved 361 m) landed in downtown Hendersonville — a commercial block, not a plant.\n- Web research (PR Newswire, Henderson County Partnership for Economic Development, Yelp) gave the address: 32 Smyth Ave, Hendersonville, NC 28792 — the historic Balfour Mills site (founded 1924 by Capt. Ellison Adger Smyth, hence \"Smyth Ave\"), purchased by a K-C subsidiary in 1946 and renamed Berkeley Mills.\n- Satellite probe found a large nonwovens manufacturing plant roughly 3 km NW of downtown Hendersonville in the Balfour area, with extensive trailer yards and a rail spur — consistent with the K-C Berkeley Mill.\n- Locked center: 35.34630, -82.46880.",
+        "mapsUrl": "https://www.google.com/maps/@35.34630,-82.46880,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster lat/lng (35.318728,-82.460953, APPROXIMATE) landed in downtown Hendersonville - wrong. Web research (PR Newswire, Henderson County EDP, Yelp) gave 32 Smyth Ave (the historic Balfour Mills / Berkeley Mill site). Satellite confirmed a large nonwovens manufacturing plant ~3 km NW of downtown. Locked center 35.34630,-82.46880.",
+          "truckGate": "A dedicated K-C wayfinding sign on the public access road reads 'Kimberly-Clark - TRUCK ENTRANCE - 1/4 MILE NORTH - DOCKS 1-6'. The whole property is enclosed by a continuous chain-link perimeter fence; the truck entrance is a controlled, signed gate on the internal access road set well back from public roads.",
+          "guardShack": "No guard booth could be directly photographed - the truck entrance gate is behind a wood/grass buffer that Street View on public roads does not reach. Marked false (no booth seen); flagged uncertain.",
+          "remoteGs": "Gate present, no guard shack observed - set true (likely kiosk / badge check-in). Flagged uncertain since the gate itself was not directly imaged.",
+          "dockDoors": "Estimated ~36 across multiple building faces - dock banks with trailers backed in on the SW (Docks 1-6 area) and on the building's NE face. Banded 25-50; exact count uncertain due to building size.",
+          "dropArea": "Very large drop-yard operation - multiple gravel/paved lots with hundreds of parked trailers in organized rows (NE lot, south lot, SW lot). ~240 trailers visible, capacity ~320. Banded 50+.",
+          "dropYard": "Clear dedicated trailer-storage lots, distinct from active dock staging.",
+          "drivewayLong": "Long internal access road from the signed truck entrance to the docks - easily holds a 3+ truck queue.",
+          "fastLaneOpportunity": "Wide internal access roads and large open paved yard - ample room for an express/bypass lane.",
+          "railServed": "A rail spur runs into the property on the SW side - rail cars/boxcars observed parked adjacent to the trailer yard alongside the rail corridor.",
+          "shipRcvSeparate": "Dock activity is split between the SW building face ('Docks 1-6') and the building's NE face, suggesting separate shipping/receiving clusters - moderate confidence, flagged uncertain.",
+          "urbanRural": "Edge-of-town industrial site ~3 km NW of small-town Hendersonville, surrounded by woods, grassland and scattered residential - Rural per rubric.",
+          "buildingCount": "One very large interconnected manufacturing complex plus minor support structures - counted as 3 distinct buildings.",
+          "siteAreaAcres": "~78 acres for the fenced property including the building, drop yards, rail siding, parking and grass buffer."
+        }
+      },
+      {
+        "id": "14-kc-corinth-plant",
+        "name": "K-C Corinth Plant - Corinth MS",
+        "type": "Manufacturing plant (nonwovens components for Huggies, Pull-Ups, Poise, Depend, WypAll)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "dockDoors",
+          "buildingCount",
+          "truckGateCount"
+        ],
+        "center": {
+          "lat": 34.9356,
+          "lng": -88.4908
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.9335,
+            "west": -88.49185,
+            "north": 34.9372,
+            "east": -88.4895
+          },
+          "truckGate": {
+            "south": 34.9354,
+            "west": -88.4915,
+            "north": 34.936,
+            "east": -88.491
+          },
+          "dropYards": [
+            {
+              "south": 34.9357,
+              "west": -88.491,
+              "north": 34.9368,
+              "east": -88.4898
+            },
+            {
+              "south": 34.9345,
+              "west": -88.4912,
+              "north": 34.9357,
+              "east": -88.49
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.9356,
+              "west": -88.4913,
+              "north": 34.9366,
+              "east": -88.4901
+            },
+            {
+              "south": 34.9344,
+              "west": -88.4913,
+              "north": 34.9354,
+              "east": -88.4903
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 95,
+          "truckGateCount": 2,
+          "buildingCount": 9,
+          "siteAreaAcres": 24,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster coordinates (34.935342, -88.490748, geocode precision ROOFTOP, moved 54 m) landed directly on the K-C Corinth industrial campus — correct.\n- Web research (Area Development, Mississippi Development Authority) confirms the Kimberly-Clark nonwovens plant at 610 Pinecrest St, Corinth, MS 38834 — a nonwovens manufacturing facility producing components for Huggies, Pull-Ups, Poise, Depend and WypAll, with $140M+ in expansion investment announced 2020-2021.\n- Locked center: 34.93560, -88.49080.",
+        "mapsUrl": "https://www.google.com/maps/@34.93560,-88.49080,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster lat/lng (34.935342,-88.490748, ROOFTOP, moved 54m) landed directly on the K-C Corinth industrial campus - correct. Web research (Area Development, Mississippi Development Authority) confirms the nonwovens plant at 610 Pinecrest St (K-C invested $140M+ in expansions). Locked center 34.93560,-88.49080.",
+          "truckGate": "Campus is enclosed by a continuous chain-link perimeter fence; truck entrances off Pinecrest St have chain-link double swing gates across the drive (seen open in Street View 2025-11), with 'No Trespassing' signage and a K-C signboard. Controlled gated entry.",
+          "guardShack": "No staffed guard booth at any entrance - the gates are unmanned chain-link swing gates.",
+          "remoteGs": "Gate present, no guard shack - set true (kiosk / badge / phone check-in implied).",
+          "dockDoors": "Loading docks face the internal lanes between the manufacturing buildings; the multi-building layout and tight lanes make exact counting hard. Estimated ~22 doors - banded 10-25, flagged uncertain.",
+          "dropArea": "Heavy trailer parking - dozens of trailers staged in the lanes between buildings and along building faces (~70 trailers visible). Banded 50+.",
+          "dropYard": "Trailers are stored across the campus lanes separate from active dock positions - functions as a distributed drop yard.",
+          "drivewayShort": "Truck approach from the gated entrance to the dock lanes is short (1-2 trucks) before reaching the buildings.",
+          "postGateStaging": "Open paved/gravel lanes inside the gates allow trucks to hold before docking.",
+          "multipleFacilities": "The site is a campus of multiple distinct manufacturing and support buildings (gray-roofed plants, the large white-roofed expansion building, smaller support structures).",
+          "truckGateCount": "At least 2 entrance drives off Pinecrest St serve the campus; flagged uncertain since not every gate could be individually confirmed.",
+          "urbanRural": "Small-town industrial setting on the edge of Corinth MS - residential, ball fields and woods surround the campus. Rural per rubric.",
+          "railServed": "A rail corridor runs through the woods along the NE but no spur enters the K-C property.",
+          "buildingCount": "Estimated ~9 distinct buildings across the campus; flagged uncertain - some structures are small support buildings and mixed industrial occupancy is possible at the south end.",
+          "siteAreaAcres": "~24 acres for the fenced K-C campus along Pinecrest St."
+        }
+      },
+      {
+        "id": "15-warren-advanced-manufacturing-facility",
+        "name": "K-C Warren Advanced Manufacturing Facility - Warren OH",
+        "type": "New advanced manufacturing facility (Huggies, Pull-Ups, Kleenex, Scott, Viva, Kotex, Poise, Depend; ~1.2M sq ft, $800M, under construction)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "preGateStaging",
+          "postGateStaging",
+          "drivewayLong",
+          "drivewayShort",
+          "backupSensitive",
+          "entryExitTogether",
+          "entryExitSeparate",
+          "entryLanes",
+          "exitLanes",
+          "fastLaneOpportunity",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "multipleFacilities",
+          "scale",
+          "dropYard",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 41.2235,
+          "lng": -80.8115
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.212,
+            "west": -80.8175,
+            "north": 41.233,
+            "east": -80.8055
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 0,
+          "buildingCount": 0,
+          "siteAreaAcres": 560,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "NONE",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coords: 41.226713, -80.811838 (GEOMETRIC_CENTER, moved 3 m)\nLocked center: ~41.2235, -80.8115 (approximate property center)\nType: New advanced manufacturing facility (Huggies, Pull-Ups, Kleenex, Scott, Viva, Kotex, Poise, Depend) — ~1.0–1.2M sq ft, $800M, under construction\nGate verdict: Indeterminate — no yard infrastructure exists in available imagery\nArchetype: Indeterminate (under construction)\nConfidence: LOW\n\n---",
+        "mapsUrl": "https://www.google.com/maps/@41.2235,-80.8115,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Facility under construction. Located on the 560-acre former Republic Steel / BDM Steel brownfield off Pine Avenue (Niles River Road), spanning Howland Twp, Warren Twp and the City of Warren. Mahoning River bounds the property on the west; a NE-SW rail line runs through the site.",
+          "imagery": "Current Maxar/Airbus satellite layer and the Nov-2024 Street View pano both PREDATE the K-C building. The cleared/graded brownfield is visible but no plant structure, gates, docks or yard pavement appear yet. Per K-C (Vindicator, Jan 2026) the manufacturing building is 'sealed up and weathertight'; production begins H1 2027. The white-roofed building and aggregate/sand-gravel operation visible in the SE of current imagery are pre-existing/separate, not the K-C plant.",
+          "railServed": "Active rail line crosses the property NE-SW; a steel-mill site this size will almost certainly retain rail service for the new plant. Marked true with medium confidence.",
+          "urbanRural": "Site is <1 mile from Warren's Courthouse Square, embedded in the Warren urban fabric (residential grids on both sides). Classified Urban.",
+          "yardMetrics": "All yard counts are 0 because no yard infrastructure exists in available imagery. buildingCount 0 reflects the imagery, not the planned facility (1 plant building plus a proposed 500k-sq-ft DC across Pine Ave). siteAreaAcres 560 is the documented purchased acreage, not derived from the perimeter box.",
+          "perimeter": "Perimeter box drawn around the visibly cleared brownfield footprint; approximate, since the eventual fenced plant pad will occupy only part of the 560-acre parcel."
+        }
+      },
+      {
+        "id": "16-logan-township-distribution-center",
+        "name": "K-C Logan Township Distribution Center - Logan Township NJ",
+        "type": "Distribution center (~600,000 sq ft, LEED-certified)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 39.7385,
+          "lng": -75.4135
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.734,
+            "west": -75.4162,
+            "north": 39.7423,
+            "east": -75.4108
+          },
+          "truckGate": {
+            "south": 39.7411,
+            "west": -75.4123,
+            "north": 39.742,
+            "east": -75.4108
+          },
+          "dropYards": [
+            {
+              "south": 39.734,
+              "west": -75.415,
+              "north": 39.7356,
+              "east": -75.4108
+            },
+            {
+              "south": 39.7356,
+              "west": -75.4118,
+              "north": 39.7415,
+              "east": -75.4108
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.7352,
+              "west": -75.4122,
+              "north": 39.7418,
+              "east": -75.4112
+            },
+            {
+              "south": 39.7352,
+              "west": -75.415,
+              "north": 39.7418,
+              "east": -75.414
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 101,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coords: 39.747335, -75.310914 (APPROXIMATE — WRONG, see below)\nLocked center: 39.7385, -75.4135\nType: Distribution center (~600,000 sq ft, LEED-certified)\nGate verdict: No truck gate / no guard shack visible — open driveways\nArchetype: No-Gate DC with large drop yard and split ship/receive\nConfidence: MEDIUM\n\n---",
+        "mapsUrl": "https://www.google.com/maps/@39.7385,-75.4135,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coordinates (39.747335, -75.310914) were wrong - they fell in the Bridgeport residential village ~9 km NE of the site. The K-C Logan Township DC is documented by its general contractor (Blue Rock Construction) as 'Building GHI at LogistiCenter at Logan', 2651 Oldmans Creek Rd, Logan Township NJ - a 599,500 sq ft, LEED-certified 2007 Dermody Properties build. Locked the large single-tenant white-roofed warehouse at ~39.7385,-75.4135 inside the LogistiCenter at Logan / Logan North logistics park, off I-295.",
+          "tenancy": "Multiple sources indicate Amazon later leased ~1M sq ft at 2651 Oldmans Creek Rd (Amazon FC 'TEB3'). The building audited here is that DC structure regardless of current tenant - it is the facility the roster targets.",
+          "truckGate": "No barrier arm, sliding gate or guard booth visible at the property line in any satellite or Street View imagery (Street View 2019 and 2026-04). The building fronts a public road with open driveways and only employee-parking landscaping out front. A blue 'TRUCK ENTRANCE' directional sign marks the truck route but the entrance itself is uncontrolled. Set truckGate false; guardShack false; remoteGs false. Low confidence - a manned booth could exist deeper in the yard out of Street View reach.",
+          "docks": "Dock doors run nearly continuously along BOTH long faces (east and west) of the ~450-510m building, with trailers backed in along each. Total well into the 50+ band; dockDoorCount ~110 is an honest overhead estimate (loose).",
+          "shipRcvSeparate": "True - dock banks on two physically separate (opposite) building faces, consistent with split shipping/receiving.",
+          "dropYard": "Dedicated trailer-storage lanes south of the building and along the east yard, full of parked trailers without tractors - dropArea 50+.",
+          "drivewayLong": "Deep paved truck approach from the public road into the dock yard, easily 3+ trucks of stacking room. postGateStaging true (paved holding room inside the property before the docks).",
+          "fastLaneOpportunity": "Wide paved yard aprons and a generous gate apron leave ample room to add a bypass/express lane.",
+          "urbanRural": "Class-A logistics park (LogistiCenter at Logan) surrounded by farmland and other big-box warehouses on the rural SW edge of Gloucester County - edge-of-town industrial. Per rubric, classified Rural.",
+          "siteAreaAcres": "~101 acres derived from the perimeter box; the building footprint alone is roughly 600k-1M sq ft.",
+          "buildingCount": "1 - the single DC structure. Other warehouses nearby are separate properties, not part of this campus."
+        }
+      },
+      {
+        "id": "17-graniteville-distribution-center",
+        "name": "K-C Graniteville Distribution Center - Graniteville SC",
+        "type": "Distribution center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "dropArea",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 33.62405,
+          "lng": -81.84755
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.6215,
+            "west": -81.8501,
+            "north": 33.6265,
+            "east": -81.8448
+          },
+          "truckGate": {
+            "south": 33.6229,
+            "west": -81.8468,
+            "north": 33.6234,
+            "east": -81.8461
+          },
+          "dropYards": [
+            {
+              "south": 33.6248,
+              "west": -81.8496,
+              "north": 33.6262,
+              "east": -81.8486
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.6238,
+              "west": -81.8492,
+              "north": 33.6262,
+              "east": -81.8479
+            },
+            {
+              "south": 33.6224,
+              "west": -81.8474,
+              "north": 33.625,
+              "east": -81.846
+            }
+          ],
+          "staging": {
+            "south": 33.622,
+            "west": -81.8472,
+            "north": 33.6229,
+            "east": -81.846
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 30.1,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coords: 33.623638, -81.847485 (ROOFTOP, moved 157 m)\nLocked center: 33.62405, -81.84755\nType: Distribution center\nGate verdict: Truck gate YES — sliding gate + chain-link perimeter fence\nGuard-shack verdict: YES — peaked-roof guard booth beside the truck lane\nArchetype: Gate + Guard Shack DC (cross-dock, split ship/receive)\nConfidence: HIGH\n\n---",
+        "mapsUrl": "https://www.google.com/maps/@33.62405,-81.84755,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed at 1043 Global Ave, Graniteville SC, in Sage Mill Industrial Park. The DC is the 'Global Avenue Logistics Center' - a 450,033 sq ft Class-A cross-dock building on 30.1 acres, leased in full by Kimberly-Clark (CoStar reports K-C renewed its 450,000 sq ft lease). Roster ROOFTOP coords landed within the building footprint; locked center ~33.62405,-81.84755.",
+          "truckGate": "TRUE - Street View (2024-03) of the truck-court entrance off Global Ave clearly shows a chain-link sliding gate across the truck lane plus a chain-link perimeter fence around the property (corroborated by leasing materials describing a 'fully secured site').",
+          "guardShack": "TRUE - a small peaked-roof guard booth sits immediately beside the truck lane at the gate, visible unmistakably in the close Street View frame. remoteGs therefore false.",
+          "docks": "Cross-dock building with dock doors and trailers backed in along BOTH long faces (NE and SW). Total well into the 50+ band; dockDoorCount ~120 is an honest overhead estimate for the two faces combined (loose).",
+          "shipRcvSeparate": "TRUE - cross-dock layout = two dock banks on opposite building faces, standard split shipping/receiving.",
+          "dropYard": "TRUE - marked trailer-parking lanes in the NE truck court hold trailers without tractors; dropArea estimated 25-50.",
+          "postGateStaging": "TRUE - deep paved truck courts (leasing materials cite courts 'up to 185 ft deep') give 3+ trucks of stacking room inside the gate before the docks; drivewayLong true.",
+          "entryExit": "Single combined truck gate at the SE corner off Global Ave - entryExitTogether true; ~1 inbound + 1 outbound lane through the gate.",
+          "fastLaneOpportunity": "FALSE - the gate is a single controlled lane group with no obvious unused paved width for a bypass.",
+          "rail": "FALSE active rail - the site is adjacent to a Norfolk Southern line and leasing materials note it COULD tie in via a rail spur, but no spur currently runs into the property.",
+          "urbanRural": "Sage Mill Industrial Park sits in woodland on the edge of small-town Graniteville SC, ~1.5 mi from I-20. Edge-of-town industrial - classified Rural per rubric.",
+          "siteAreaAcres": "30.1 acres is the documented parcel size; the axis-aligned perimeter box is a loose bounding box around a building elongated NW-SE and so overcounts the corners."
+        }
+      },
+      {
+        "id": "18-dupont-distribution-center",
+        "name": "K-C DuPont Distribution Center (KCDC) - DuPont WA",
+        "type": "Distribution center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "entryLanes",
+          "exitLanes",
+          "urbanRural"
+        ],
+        "center": {
+          "lat": 47.1128,
+          "lng": -122.638
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 47.1093,
+            "west": -122.64,
+            "north": 47.1152,
+            "east": -122.6356
+          },
+          "truckGate": {
+            "south": 47.1096,
+            "west": -122.638,
+            "north": 47.1101,
+            "east": -122.6368
+          },
+          "dropYards": [
+            {
+              "south": 47.1108,
+              "west": -122.6366,
+              "north": 47.1144,
+              "east": -122.6356
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 47.1108,
+              "west": -122.637,
+              "north": 47.1146,
+              "east": -122.6363
+            },
+            {
+              "south": 47.1108,
+              "west": -122.6396,
+              "north": 47.1146,
+              "east": -122.6389
+            }
+          ],
+          "staging": {
+            "south": 47.1096,
+            "west": -122.6384,
+            "north": 47.1108,
+            "east": -122.637
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 54,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coords: 47.114289, -122.631979 (ROOFTOP, moved 1879 m)\nLocked center: 47.11280, -122.63800\nType: Distribution center\nGate verdict: Truck gate YES — guard booth mid-lane with split entry/exit\nGuard-shack verdict: YES — booth standing in the truck driveway\nArchetype: Gate + Guard Shack DC with fast-lane room (cross-dock)\nConfidence: HIGH\n\n---",
+        "mapsUrl": "https://www.google.com/maps/@47.11280,-122.63800,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed: 1205 Wharf Rd, DuPont WA - 'Building 1' of The Cubes at DuPont, a 747,488 sq ft Class-A distribution facility 100% leased to Kimberly-Clark (CRG / The Registry). The Cubes is a 1.6M sq ft, 3-building park on the former Intel campus / DuPont Corporate Center in the Northwest Landing community. Building 1 is the largest of the three buildings - the big N-S cross-dock structure at ~47.1128,-122.6380. Roster ROOFTOP coords moved 1879 m and landed near the cluster center; corrected to Building 1.",
+          "truckGate": "TRUE - current (2026 Maxar) z20 satellite of the south truck-court entrance clearly shows a guard booth standing in the middle of the truck driveway with traffic lanes splitting around it (inbound lanes marked with arrows) and yellow-hatched median islands. Facility directory listings independently state 'Check in is required at the security guard for appointments only.'",
+          "guardShack": "TRUE - the mid-lane structure at the gate is a guard booth (~1-vehicle footprint, lanes routed around it). remoteGs therefore false.",
+          "docks": "Cross-dock building with continuous dock banks and trailers backed in along BOTH long faces (east and west). Well into 50+; dockDoorCount ~130 is an honest overhead estimate for the two faces combined (loose).",
+          "shipRcvSeparate": "TRUE - cross-dock = two dock banks on opposite building faces.",
+          "dropYard": "TRUE - extensive marked trailer-parking lanes east of the building, full of tractorless trailers; dropArea 50+.",
+          "entryExit": "Single combined truck gate at the south end. The lanes split around the guard booth - approx 2 inbound lanes and 1 outbound; entryExitTogether true. Lane counts are estimates from overhead imagery.",
+          "postGateStaging": "TRUE - deep paved truck courts inside the gate give 3+ trucks of stacking room before the docks; drivewayLong true.",
+          "fastLaneOpportunity": "TRUE - the gate apron is wide with a multi-lane split around the booth, leaving room for an express/bypass lane.",
+          "rail": "FALSE - no rail spur into the property (former Intel campus redevelopment; the BNSF mainline runs well to the NE near the I-5 corridor but does not serve the site).",
+          "urbanRural": "DuPont is a small city on the I-5 corridor in the southern fringe of the Seattle-Tacoma metro. The Cubes sits in a forested industrial park (Northwest Landing / DuPont Corporate Center) on the edge of town. Borderline - classified Rural per the rubric's 'when torn between small-town industrial and Urban, choose Rural' guidance; flagged in uncertainFields.",
+          "siteAreaAcres": "~54 acres derived from the perimeter box around Building 1's fenced property (building + both truck courts + east trailer yard + south gate)."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,4543 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.1866,
+              42.37265
+            ],
+            [
+              -83.1819,
+              42.37265
+            ],
+            [
+              -83.1819,
+              42.3794
+            ],
+            [
+              -83.1866,
+              42.3794
+            ],
+            [
+              -83.1866,
+              42.37265
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Logistics Insight Corp - GM EV Parts Warehouse - Detroit MI",
+        "type": "Value-Added Logistics Center / Sequencing Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 68,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.1851,
+              42.37275
+            ],
+            [
+              -83.1844,
+              42.37275
+            ],
+            [
+              -83.1844,
+              42.3733
+            ],
+            [
+              -83.1851,
+              42.3733
+            ],
+            [
+              -83.1851,
+              42.37275
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Logistics Insight Corp - GM EV Parts Warehouse - Detroit MI",
+        "type": "Value-Added Logistics Center / Sequencing Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.1863,
+              42.3734
+            ],
+            [
+              -83.1855,
+              42.3734
+            ],
+            [
+              -83.1855,
+              42.3771
+            ],
+            [
+              -83.1863,
+              42.3771
+            ],
+            [
+              -83.1863,
+              42.3734
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Logistics Insight Corp - GM EV Parts Warehouse - Detroit MI",
+        "type": "Value-Added Logistics Center / Sequencing Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.1856,
+              42.3733
+            ],
+            [
+              -83.1849,
+              42.3733
+            ],
+            [
+              -83.1849,
+              42.3776
+            ],
+            [
+              -83.1856,
+              42.3776
+            ],
+            [
+              -83.1856,
+              42.3733
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Logistics Insight Corp - GM EV Parts Warehouse - Detroit MI",
+        "type": "Value-Added Logistics Center / Sequencing Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.1853,
+              42.3787
+            ],
+            [
+              -83.1836,
+              42.3787
+            ],
+            [
+              -83.1836,
+              42.3792
+            ],
+            [
+              -83.1853,
+              42.3792
+            ],
+            [
+              -83.1853,
+              42.3787
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Logistics Insight Corp - GM EV Parts Warehouse - Detroit MI",
+        "type": "Value-Added Logistics Center / Sequencing Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.1849,
+              42.3733
+            ],
+            [
+              -83.1842,
+              42.3733
+            ],
+            [
+              -83.1842,
+              42.374
+            ],
+            [
+              -83.1849,
+              42.374
+            ],
+            [
+              -83.1849,
+              42.3733
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Logistics Insight Corp - GM EV Parts Warehouse - Detroit MI",
+        "type": "Value-Added Logistics Center / Sequencing Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.035,
+              42.3897
+            ],
+            [
+              -83.0282,
+              42.3897
+            ],
+            [
+              -83.0282,
+              42.3935
+            ],
+            [
+              -83.035,
+              42.3935
+            ],
+            [
+              -83.035,
+              42.3897
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Logistics Insight Corp - Stellantis Sequencing Plant - Detroit MI (Georgia St)",
+        "type": "Parts Sequencing / Sub-Assembly Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 150,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 2,
+          "buildingCount": 3,
+          "siteAreaAcres": 58,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.0344,
+              42.39015
+            ],
+            [
+              -83.0337,
+              42.39015
+            ],
+            [
+              -83.0337,
+              42.39065
+            ],
+            [
+              -83.0344,
+              42.39065
+            ],
+            [
+              -83.0344,
+              42.39015
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Logistics Insight Corp - Stellantis Sequencing Plant - Detroit MI (Georgia St)",
+        "type": "Parts Sequencing / Sub-Assembly Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.035,
+              42.3921
+            ],
+            [
+              -83.0326,
+              42.3921
+            ],
+            [
+              -83.0326,
+              42.3935
+            ],
+            [
+              -83.035,
+              42.3935
+            ],
+            [
+              -83.035,
+              42.3921
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Logistics Insight Corp - Stellantis Sequencing Plant - Detroit MI (Georgia St)",
+        "type": "Parts Sequencing / Sub-Assembly Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.0294,
+              42.3898
+            ],
+            [
+              -83.0282,
+              42.3898
+            ],
+            [
+              -83.0282,
+              42.3907
+            ],
+            [
+              -83.0294,
+              42.3907
+            ],
+            [
+              -83.0294,
+              42.3898
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Logistics Insight Corp - Stellantis Sequencing Plant - Detroit MI (Georgia St)",
+        "type": "Parts Sequencing / Sub-Assembly Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.0344,
+              42.39025
+            ],
+            [
+              -83.0287,
+              42.39025
+            ],
+            [
+              -83.0287,
+              42.39075
+            ],
+            [
+              -83.0344,
+              42.39075
+            ],
+            [
+              -83.0344,
+              42.39025
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Logistics Insight Corp - Stellantis Sequencing Plant - Detroit MI (Georgia St)",
+        "type": "Parts Sequencing / Sub-Assembly Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.0342,
+              42.3919
+            ],
+            [
+              -83.0288,
+              42.3919
+            ],
+            [
+              -83.0288,
+              42.3924
+            ],
+            [
+              -83.0342,
+              42.3924
+            ],
+            [
+              -83.0342,
+              42.3919
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Logistics Insight Corp - Stellantis Sequencing Plant - Detroit MI (Georgia St)",
+        "type": "Parts Sequencing / Sub-Assembly Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.0344,
+              42.3907
+            ],
+            [
+              -83.029,
+              42.3907
+            ],
+            [
+              -83.029,
+              42.3919
+            ],
+            [
+              -83.0344,
+              42.3919
+            ],
+            [
+              -83.0344,
+              42.3907
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Logistics Insight Corp - Stellantis Sequencing Plant - Detroit MI (Georgia St)",
+        "type": "Parts Sequencing / Sub-Assembly Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3265,
+              42.247
+            ],
+            [
+              -83.3205,
+              42.247
+            ],
+            [
+              -83.3205,
+              42.254
+            ],
+            [
+              -83.3265,
+              42.254
+            ],
+            [
+              -83.3265,
+              42.247
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics / LINC - Romulus Value-Added Center - Romulus MI",
+        "type": "Value-Added Logistics Center / Cross-Dock Terminal",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 220,
+          "trailersVisible": 420,
+          "trailerParkingCapacity": 550,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 95,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3249,
+              42.2525
+            ],
+            [
+              -83.324,
+              42.2525
+            ],
+            [
+              -83.324,
+              42.2534
+            ],
+            [
+              -83.3249,
+              42.2534
+            ],
+            [
+              -83.3249,
+              42.2525
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics / LINC - Romulus Value-Added Center - Romulus MI",
+        "type": "Value-Added Logistics Center / Cross-Dock Terminal",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3263,
+              42.2505
+            ],
+            [
+              -83.3246,
+              42.2505
+            ],
+            [
+              -83.3246,
+              42.2529
+            ],
+            [
+              -83.3263,
+              42.2529
+            ],
+            [
+              -83.3263,
+              42.2505
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics / LINC - Romulus Value-Added Center - Romulus MI",
+        "type": "Value-Added Logistics Center / Cross-Dock Terminal",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3238,
+              42.2472
+            ],
+            [
+              -83.3214,
+              42.2472
+            ],
+            [
+              -83.3214,
+              42.2494
+            ],
+            [
+              -83.3238,
+              42.2494
+            ],
+            [
+              -83.3238,
+              42.2472
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics / LINC - Romulus Value-Added Center - Romulus MI",
+        "type": "Value-Added Logistics Center / Cross-Dock Terminal",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.322,
+              42.25
+            ],
+            [
+              -83.3206,
+              42.25
+            ],
+            [
+              -83.3206,
+              42.2532
+            ],
+            [
+              -83.322,
+              42.2532
+            ],
+            [
+              -83.322,
+              42.25
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics / LINC - Romulus Value-Added Center - Romulus MI",
+        "type": "Value-Added Logistics Center / Cross-Dock Terminal",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3246,
+              42.2503
+            ],
+            [
+              -83.3218,
+              42.2503
+            ],
+            [
+              -83.3218,
+              42.253
+            ],
+            [
+              -83.3246,
+              42.253
+            ],
+            [
+              -83.3246,
+              42.2503
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics / LINC - Romulus Value-Added Center - Romulus MI",
+        "type": "Value-Added Logistics Center / Cross-Dock Terminal",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.3246,
+              42.2527
+            ],
+            [
+              -83.323,
+              42.2527
+            ],
+            [
+              -83.323,
+              42.2534
+            ],
+            [
+              -83.3246,
+              42.2534
+            ],
+            [
+              -83.3246,
+              42.2527
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics / LINC - Romulus Value-Added Center - Romulus MI",
+        "type": "Value-Added Logistics Center / Cross-Dock Terminal",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.157,
+              42.3195
+            ],
+            [
+              -83.1525,
+              42.3195
+            ],
+            [
+              -83.1525,
+              42.3235
+            ],
+            [
+              -83.157,
+              42.3235
+            ],
+            [
+              -83.157,
+              42.3195
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Dearborn Terminal - Dearborn MI",
+        "type": "Intermodal / Drayage Terminal (owned)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "NONE",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 300,
+          "trailerParkingCapacity": 450,
+          "truckGateCount": 2,
+          "buildingCount": 3,
+          "siteAreaAcres": 41,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.1571,
+              42.3213
+            ],
+            [
+              -83.1565,
+              42.3213
+            ],
+            [
+              -83.1565,
+              42.3219
+            ],
+            [
+              -83.1571,
+              42.3219
+            ],
+            [
+              -83.1571,
+              42.3213
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Dearborn Terminal - Dearborn MI",
+        "type": "Intermodal / Drayage Terminal (owned)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.1554,
+              42.3218
+            ],
+            [
+              -83.1526,
+              42.3218
+            ],
+            [
+              -83.1526,
+              42.3234
+            ],
+            [
+              -83.1554,
+              42.3234
+            ],
+            [
+              -83.1554,
+              42.3218
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Dearborn Terminal - Dearborn MI",
+        "type": "Intermodal / Drayage Terminal (owned)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.1562,
+              42.3196
+            ],
+            [
+              -83.153,
+              42.3196
+            ],
+            [
+              -83.153,
+              42.3214
+            ],
+            [
+              -83.1562,
+              42.3214
+            ],
+            [
+              -83.1562,
+              42.3196
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Dearborn Terminal - Dearborn MI",
+        "type": "Intermodal / Drayage Terminal (owned)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.1566,
+              42.3212
+            ],
+            [
+              -83.1556,
+              42.3212
+            ],
+            [
+              -83.1556,
+              42.322
+            ],
+            [
+              -83.1566,
+              42.322
+            ],
+            [
+              -83.1566,
+              42.3212
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Dearborn Terminal - Dearborn MI",
+        "type": "Intermodal / Drayage Terminal (owned)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0393,
+              32.7163
+            ],
+            [
+              -97.0356,
+              32.7163
+            ],
+            [
+              -97.0356,
+              32.7228
+            ],
+            [
+              -97.0393,
+              32.7228
+            ],
+            [
+              -97.0393,
+              32.7163
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - GM Arlington Logistics Center - Grand Prairie TX",
+        "type": "Value-Added Logistics / Sub-Assembly Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 0,
+          "buildingCount": 2,
+          "siteAreaAcres": 62,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.039,
+              32.7174
+            ],
+            [
+              -97.0382,
+              32.7174
+            ],
+            [
+              -97.0382,
+              32.7206
+            ],
+            [
+              -97.039,
+              32.7206
+            ],
+            [
+              -97.039,
+              32.7174
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - GM Arlington Logistics Center - Grand Prairie TX",
+        "type": "Value-Added Logistics / Sub-Assembly Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0389,
+              32.7167
+            ],
+            [
+              -97.0381,
+              32.7167
+            ],
+            [
+              -97.0381,
+              32.7223
+            ],
+            [
+              -97.0389,
+              32.7223
+            ],
+            [
+              -97.0389,
+              32.7167
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - GM Arlington Logistics Center - Grand Prairie TX",
+        "type": "Value-Added Logistics / Sub-Assembly Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0369,
+              32.7167
+            ],
+            [
+              -97.036,
+              32.7167
+            ],
+            [
+              -97.036,
+              32.7223
+            ],
+            [
+              -97.0369,
+              32.7223
+            ],
+            [
+              -97.0369,
+              32.7167
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - GM Arlington Logistics Center - Grand Prairie TX",
+        "type": "Value-Added Logistics / Sub-Assembly Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.4878,
+              35.9485
+            ],
+            [
+              -86.4828,
+              35.9485
+            ],
+            [
+              -86.4828,
+              35.9568
+            ],
+            [
+              -86.4878,
+              35.9568
+            ],
+            [
+              -86.4878,
+              35.9485
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Nissan Integrated Logistics Center - Smyrna TN",
+        "type": "Integrated Logistics Center / Sequencing Warehouse",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 230,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 70,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.4847,
+              35.949
+            ],
+            [
+              -86.4838,
+              35.949
+            ],
+            [
+              -86.4838,
+              35.9496
+            ],
+            [
+              -86.4847,
+              35.9496
+            ],
+            [
+              -86.4847,
+              35.949
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Nissan Integrated Logistics Center - Smyrna TN",
+        "type": "Integrated Logistics Center / Sequencing Warehouse",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.4874,
+              35.9508
+            ],
+            [
+              -86.486,
+              35.9508
+            ],
+            [
+              -86.486,
+              35.9556
+            ],
+            [
+              -86.4874,
+              35.9556
+            ],
+            [
+              -86.4874,
+              35.9508
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Nissan Integrated Logistics Center - Smyrna TN",
+        "type": "Integrated Logistics Center / Sequencing Warehouse",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.4856,
+              35.9548
+            ],
+            [
+              -86.4842,
+              35.9548
+            ],
+            [
+              -86.4842,
+              35.9562
+            ],
+            [
+              -86.4856,
+              35.9562
+            ],
+            [
+              -86.4856,
+              35.9548
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Nissan Integrated Logistics Center - Smyrna TN",
+        "type": "Integrated Logistics Center / Sequencing Warehouse",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.4868,
+              35.9502
+            ],
+            [
+              -86.4856,
+              35.9502
+            ],
+            [
+              -86.4856,
+              35.9556
+            ],
+            [
+              -86.4868,
+              35.9556
+            ],
+            [
+              -86.4868,
+              35.9502
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Nissan Integrated Logistics Center - Smyrna TN",
+        "type": "Integrated Logistics Center / Sequencing Warehouse",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.4856,
+              35.9494
+            ],
+            [
+              -86.484,
+              35.9494
+            ],
+            [
+              -86.484,
+              35.9506
+            ],
+            [
+              -86.4856,
+              35.9506
+            ],
+            [
+              -86.4856,
+              35.9494
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Nissan Integrated Logistics Center - Smyrna TN",
+        "type": "Integrated Logistics Center / Sequencing Warehouse",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.9064,
+              37.3698
+            ],
+            [
+              -79.9022,
+              37.3698
+            ],
+            [
+              -79.9022,
+              37.3743
+            ],
+            [
+              -79.9064,
+              37.3743
+            ],
+            [
+              -79.9064,
+              37.3698
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Roanoke/Botetourt Value-Added Facility - Cloverdale VA",
+        "type": "Value-Added Warehouse / Heavy-Truck Assembly Facility (owned)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 26,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 37,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.906,
+              37.3705
+            ],
+            [
+              -79.9048,
+              37.3705
+            ],
+            [
+              -79.9048,
+              37.372
+            ],
+            [
+              -79.906,
+              37.372
+            ],
+            [
+              -79.906,
+              37.3705
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Roanoke/Botetourt Value-Added Facility - Cloverdale VA",
+        "type": "Value-Added Warehouse / Heavy-Truck Assembly Facility (owned)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.9054,
+              37.3715
+            ],
+            [
+              -79.9046,
+              37.3715
+            ],
+            [
+              -79.9046,
+              37.3734
+            ],
+            [
+              -79.9054,
+              37.3734
+            ],
+            [
+              -79.9054,
+              37.3715
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Roanoke/Botetourt Value-Added Facility - Cloverdale VA",
+        "type": "Value-Added Warehouse / Heavy-Truck Assembly Facility (owned)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.906,
+              37.3705
+            ],
+            [
+              -79.9049,
+              37.3705
+            ],
+            [
+              -79.9049,
+              37.3717
+            ],
+            [
+              -79.906,
+              37.3717
+            ],
+            [
+              -79.906,
+              37.3705
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Roanoke/Botetourt Value-Added Facility - Cloverdale VA",
+        "type": "Value-Added Warehouse / Heavy-Truck Assembly Facility (owned)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.0134,
+              35.7538
+            ],
+            [
+              -84.0108,
+              35.7538
+            ],
+            [
+              -84.0108,
+              35.7564
+            ],
+            [
+              -84.0134,
+              35.7564
+            ],
+            [
+              -84.0134,
+              35.7538
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics Services - Maryville Terminal - Maryville TN",
+        "type": "Trucking / Logistics Terminal",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 8.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.013,
+              35.7549
+            ],
+            [
+              -84.0118,
+              35.7549
+            ],
+            [
+              -84.0118,
+              35.7557
+            ],
+            [
+              -84.013,
+              35.7557
+            ],
+            [
+              -84.013,
+              35.7549
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics Services - Maryville Terminal - Maryville TN",
+        "type": "Trucking / Logistics Terminal",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.013,
+              35.7549
+            ],
+            [
+              -84.0117,
+              35.7549
+            ],
+            [
+              -84.0117,
+              35.7554
+            ],
+            [
+              -84.013,
+              35.7554
+            ],
+            [
+              -84.013,
+              35.7549
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics Services - Maryville Terminal - Maryville TN",
+        "type": "Trucking / Logistics Terminal",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.0129,
+              35.7557
+            ],
+            [
+              -84.0115,
+              35.7557
+            ],
+            [
+              -84.0115,
+              35.7564
+            ],
+            [
+              -84.0129,
+              35.7564
+            ],
+            [
+              -84.0129,
+              35.7557
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics Services - Maryville Terminal - Maryville TN",
+        "type": "Trucking / Logistics Terminal",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.699,
+              30.343
+            ],
+            [
+              -81.6952,
+              30.343
+            ],
+            [
+              -81.6952,
+              30.3478
+            ],
+            [
+              -81.699,
+              30.3478
+            ],
+            [
+              -81.699,
+              30.343
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Jacksonville Terminal - Jacksonville FL",
+        "type": "Intermodal / Drayage Terminal (owned)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 230,
+          "trailerParkingCapacity": 420,
+          "truckGateCount": 2,
+          "buildingCount": 5,
+          "siteAreaAcres": 48,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6972,
+              30.347
+            ],
+            [
+              -81.6964,
+              30.347
+            ],
+            [
+              -81.6964,
+              30.3474
+            ],
+            [
+              -81.6972,
+              30.3474
+            ],
+            [
+              -81.6972,
+              30.347
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Jacksonville Terminal - Jacksonville FL",
+        "type": "Intermodal / Drayage Terminal (owned)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6977,
+              30.343
+            ],
+            [
+              -81.696,
+              30.343
+            ],
+            [
+              -81.696,
+              30.3443
+            ],
+            [
+              -81.6977,
+              30.3443
+            ],
+            [
+              -81.6977,
+              30.343
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Jacksonville Terminal - Jacksonville FL",
+        "type": "Intermodal / Drayage Terminal (owned)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.699,
+              30.3448
+            ],
+            [
+              -81.697,
+              30.3448
+            ],
+            [
+              -81.697,
+              30.3462
+            ],
+            [
+              -81.699,
+              30.3462
+            ],
+            [
+              -81.699,
+              30.3448
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Jacksonville Terminal - Jacksonville FL",
+        "type": "Intermodal / Drayage Terminal (owned)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.697,
+              30.3456
+            ],
+            [
+              -81.6956,
+              30.3456
+            ],
+            [
+              -81.6956,
+              30.347
+            ],
+            [
+              -81.697,
+              30.347
+            ],
+            [
+              -81.697,
+              30.3456
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Jacksonville Terminal - Jacksonville FL",
+        "type": "Intermodal / Drayage Terminal (owned)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.6974,
+              30.3462
+            ],
+            [
+              -81.6956,
+              30.3462
+            ],
+            [
+              -81.6956,
+              30.3468
+            ],
+            [
+              -81.6974,
+              30.3468
+            ],
+            [
+              -81.6974,
+              30.3462
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Jacksonville Terminal - Jacksonville FL",
+        "type": "Intermodal / Drayage Terminal (owned)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.2133,
+              33.8664
+            ],
+            [
+              -118.2105,
+              33.8664
+            ],
+            [
+              -118.2105,
+              33.8697
+            ],
+            [
+              -118.2133,
+              33.8697
+            ],
+            [
+              -118.2133,
+              33.8664
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Compton/Rancho Dominguez Terminal - Rancho Dominguez CA",
+        "type": "Intermodal / Drayage Terminal / Container Yard (owned)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 11,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.2129,
+              33.8676
+            ],
+            [
+              -118.2123,
+              33.8676
+            ],
+            [
+              -118.2123,
+              33.8682
+            ],
+            [
+              -118.2129,
+              33.8682
+            ],
+            [
+              -118.2129,
+              33.8676
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Compton/Rancho Dominguez Terminal - Rancho Dominguez CA",
+        "type": "Intermodal / Drayage Terminal / Container Yard (owned)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.2132,
+              33.8666
+            ],
+            [
+              -118.2113,
+              33.8666
+            ],
+            [
+              -118.2113,
+              33.8679
+            ],
+            [
+              -118.2132,
+              33.8679
+            ],
+            [
+              -118.2132,
+              33.8666
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Compton/Rancho Dominguez Terminal - Rancho Dominguez CA",
+        "type": "Intermodal / Drayage Terminal / Container Yard (owned)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.213,
+              33.8687
+            ],
+            [
+              -118.211,
+              33.8687
+            ],
+            [
+              -118.211,
+              33.8696
+            ],
+            [
+              -118.213,
+              33.8696
+            ],
+            [
+              -118.213,
+              33.8687
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Compton/Rancho Dominguez Terminal - Rancho Dominguez CA",
+        "type": "Intermodal / Drayage Terminal / Container Yard (owned)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.2127,
+              33.8684
+            ],
+            [
+              -118.2113,
+              33.8684
+            ],
+            [
+              -118.2113,
+              33.8689
+            ],
+            [
+              -118.2127,
+              33.8689
+            ],
+            [
+              -118.2127,
+              33.8684
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Compton/Rancho Dominguez Terminal - Rancho Dominguez CA",
+        "type": "Intermodal / Drayage Terminal / Container Yard (owned)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.2876,
+              29.8662
+            ],
+            [
+              -95.2847,
+              29.8662
+            ],
+            [
+              -95.2847,
+              29.8715
+            ],
+            [
+              -95.2876,
+              29.8715
+            ],
+            [
+              -95.2876,
+              29.8662
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Houston Terminal - Houston TX",
+        "type": "Intermodal / Drayage Terminal (owned)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 350,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 22,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.2874,
+              29.8664
+            ],
+            [
+              -95.2849,
+              29.8664
+            ],
+            [
+              -95.2849,
+              29.87
+            ],
+            [
+              -95.2874,
+              29.87
+            ],
+            [
+              -95.2874,
+              29.8664
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Houston Terminal - Houston TX",
+        "type": "Intermodal / Drayage Terminal (owned)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.2872,
+              29.8698
+            ],
+            [
+              -95.285,
+              29.8698
+            ],
+            [
+              -95.285,
+              29.8712
+            ],
+            [
+              -95.2872,
+              29.8712
+            ],
+            [
+              -95.2872,
+              29.8698
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Houston Terminal - Houston TX",
+        "type": "Intermodal / Drayage Terminal (owned)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.2868,
+              29.8693
+            ],
+            [
+              -95.2856,
+              29.8693
+            ],
+            [
+              -95.2856,
+              29.8708
+            ],
+            [
+              -95.2868,
+              29.8708
+            ],
+            [
+              -95.2868,
+              29.8693
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Houston Terminal - Houston TX",
+        "type": "Intermodal / Drayage Terminal (owned)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.287,
+              29.8708
+            ],
+            [
+              -95.285,
+              29.8708
+            ],
+            [
+              -95.285,
+              29.8715
+            ],
+            [
+              -95.287,
+              29.8715
+            ],
+            [
+              -95.287,
+              29.8708
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Houston Terminal - Houston TX",
+        "type": "Intermodal / Drayage Terminal (owned)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8762,
+              42.6985
+            ],
+            [
+              -87.8715,
+              42.6985
+            ],
+            [
+              -87.8715,
+              42.7036
+            ],
+            [
+              -87.8762,
+              42.7036
+            ],
+            [
+              -87.8762,
+              42.6985
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics / LINC - Sturtevant Contract Logistics Warehouse - Sturtevant WI",
+        "type": "Contract Logistics / Value-Added Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 47,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8756,
+              42.7002
+            ],
+            [
+              -87.8742,
+              42.7002
+            ],
+            [
+              -87.8742,
+              42.7036
+            ],
+            [
+              -87.8756,
+              42.7036
+            ],
+            [
+              -87.8756,
+              42.7002
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics / LINC - Sturtevant Contract Logistics Warehouse - Sturtevant WI",
+        "type": "Contract Logistics / Value-Added Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8734,
+              42.6996
+            ],
+            [
+              -87.8717,
+              42.6996
+            ],
+            [
+              -87.8717,
+              42.7018
+            ],
+            [
+              -87.8734,
+              42.7018
+            ],
+            [
+              -87.8734,
+              42.6996
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics / LINC - Sturtevant Contract Logistics Warehouse - Sturtevant WI",
+        "type": "Contract Logistics / Value-Added Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8748,
+              42.6997
+            ],
+            [
+              -87.8742,
+              42.6997
+            ],
+            [
+              -87.8742,
+              42.7034
+            ],
+            [
+              -87.8748,
+              42.7034
+            ],
+            [
+              -87.8748,
+              42.6997
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics / LINC - Sturtevant Contract Logistics Warehouse - Sturtevant WI",
+        "type": "Contract Logistics / Value-Added Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8737,
+              42.6997
+            ],
+            [
+              -87.8732,
+              42.6997
+            ],
+            [
+              -87.8732,
+              42.703
+            ],
+            [
+              -87.8737,
+              42.703
+            ],
+            [
+              -87.8737,
+              42.6997
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics / LINC - Sturtevant Contract Logistics Warehouse - Sturtevant WI",
+        "type": "Contract Logistics / Value-Added Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.9001,
+              34.6292
+            ],
+            [
+              -86.8943,
+              34.6292
+            ],
+            [
+              -86.8943,
+              34.6338
+            ],
+            [
+              -86.9001,
+              34.6338
+            ],
+            [
+              -86.9001,
+              34.6292
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Tanner Value-Added Facility - Tanner AL",
+        "type": "Value-Added Logistics / Sequencing Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 51,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 34,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.8972,
+              34.6296
+            ],
+            [
+              -86.8953,
+              34.6296
+            ],
+            [
+              -86.8953,
+              34.6306
+            ],
+            [
+              -86.8972,
+              34.6306
+            ],
+            [
+              -86.8972,
+              34.6296
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Tanner Value-Added Facility - Tanner AL",
+        "type": "Value-Added Logistics / Sequencing Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.8953,
+              34.6301
+            ],
+            [
+              -86.8943,
+              34.6301
+            ],
+            [
+              -86.8943,
+              34.6312
+            ],
+            [
+              -86.8953,
+              34.6312
+            ],
+            [
+              -86.8953,
+              34.6301
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Tanner Value-Added Facility - Tanner AL",
+        "type": "Value-Added Logistics / Sequencing Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.897,
+              34.6301
+            ],
+            [
+              -86.895,
+              34.6301
+            ],
+            [
+              -86.895,
+              34.6315
+            ],
+            [
+              -86.897,
+              34.6315
+            ],
+            [
+              -86.897,
+              34.6301
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Tanner Value-Added Facility - Tanner AL",
+        "type": "Value-Added Logistics / Sequencing Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.8976,
+              34.6314
+            ],
+            [
+              -86.8956,
+              34.6314
+            ],
+            [
+              -86.8956,
+              34.6328
+            ],
+            [
+              -86.8976,
+              34.6328
+            ],
+            [
+              -86.8976,
+              34.6314
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Tanner Value-Added Facility - Tanner AL",
+        "type": "Value-Added Logistics / Sequencing Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.858,
+              34.6488
+            ],
+            [
+              -86.848,
+              34.6488
+            ],
+            [
+              -86.848,
+              34.6565
+            ],
+            [
+              -86.858,
+              34.6565
+            ],
+            [
+              -86.858,
+              34.6488
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Polaris Madison Plant Contract Logistics - Madison AL",
+        "type": "Contract Logistics / inbound logistics inside manufacturing plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 400,
+          "trailerParkingCapacity": 600,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 194,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.8532,
+              34.654
+            ],
+            [
+              -86.8524,
+              34.654
+            ],
+            [
+              -86.8524,
+              34.6546
+            ],
+            [
+              -86.8532,
+              34.6546
+            ],
+            [
+              -86.8532,
+              34.654
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Polaris Madison Plant Contract Logistics - Madison AL",
+        "type": "Contract Logistics / inbound logistics inside manufacturing plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.857,
+              34.6495
+            ],
+            [
+              -86.855,
+              34.6495
+            ],
+            [
+              -86.855,
+              34.6542
+            ],
+            [
+              -86.857,
+              34.6542
+            ],
+            [
+              -86.857,
+              34.6495
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Polaris Madison Plant Contract Logistics - Madison AL",
+        "type": "Contract Logistics / inbound logistics inside manufacturing plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.8535,
+              34.6545
+            ],
+            [
+              -86.851,
+              34.6545
+            ],
+            [
+              -86.851,
+              34.6562
+            ],
+            [
+              -86.8535,
+              34.6562
+            ],
+            [
+              -86.8535,
+              34.6545
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Polaris Madison Plant Contract Logistics - Madison AL",
+        "type": "Contract Logistics / inbound logistics inside manufacturing plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.8545,
+              34.6498
+            ],
+            [
+              -86.8536,
+              34.6498
+            ],
+            [
+              -86.8536,
+              34.653
+            ],
+            [
+              -86.8545,
+              34.653
+            ],
+            [
+              -86.8545,
+              34.6498
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Polaris Madison Plant Contract Logistics - Madison AL",
+        "type": "Contract Logistics / inbound logistics inside manufacturing plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.8545,
+              34.6538
+            ],
+            [
+              -86.852,
+              34.6538
+            ],
+            [
+              -86.852,
+              34.6547
+            ],
+            [
+              -86.8545,
+              34.6547
+            ],
+            [
+              -86.8545,
+              34.6538
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Polaris Madison Plant Contract Logistics - Madison AL",
+        "type": "Contract Logistics / inbound logistics inside manufacturing plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.557,
+              40.8462
+            ],
+            [
+              -89.5495,
+              40.8462
+            ],
+            [
+              -89.5495,
+              40.8502
+            ],
+            [
+              -89.557,
+              40.8502
+            ],
+            [
+              -89.557,
+              40.8462
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Chillicothe Contract Logistics Warehouse - Chillicothe IL",
+        "type": "Contract Logistics / Value-Added Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 78,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.5515,
+              40.847
+            ],
+            [
+              -89.55,
+              40.847
+            ],
+            [
+              -89.55,
+              40.8495
+            ],
+            [
+              -89.5515,
+              40.8495
+            ],
+            [
+              -89.5515,
+              40.847
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Chillicothe Contract Logistics Warehouse - Chillicothe IL",
+        "type": "Contract Logistics / Value-Added Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.5528,
+              40.8468
+            ],
+            [
+              -89.5517,
+              40.8468
+            ],
+            [
+              -89.5517,
+              40.8496
+            ],
+            [
+              -89.5528,
+              40.8496
+            ],
+            [
+              -89.5528,
+              40.8468
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Chillicothe Contract Logistics Warehouse - Chillicothe IL",
+        "type": "Contract Logistics / Value-Added Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.5635,
+              40.8355
+            ],
+            [
+              -89.5485,
+              40.8355
+            ],
+            [
+              -89.5485,
+              40.846
+            ],
+            [
+              -89.5635,
+              40.846
+            ],
+            [
+              -89.5635,
+              40.8355
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Mossville Contract Logistics Warehouse - Mossville IL",
+        "type": "Contract Logistics / Value-Added Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 50,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 180,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.554,
+              40.8415
+            ],
+            [
+              -89.5505,
+              40.8415
+            ],
+            [
+              -89.5505,
+              40.844
+            ],
+            [
+              -89.554,
+              40.844
+            ],
+            [
+              -89.554,
+              40.8415
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Mossville Contract Logistics Warehouse - Mossville IL",
+        "type": "Contract Logistics / Value-Added Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.556,
+              40.8405
+            ],
+            [
+              -89.5535,
+              40.8405
+            ],
+            [
+              -89.5535,
+              40.843
+            ],
+            [
+              -89.556,
+              40.843
+            ],
+            [
+              -89.556,
+              40.8405
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Mossville Contract Logistics Warehouse - Mossville IL",
+        "type": "Contract Logistics / Value-Added Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.177,
+              32.1315
+            ],
+            [
+              -81.1732,
+              32.1315
+            ],
+            [
+              -81.1732,
+              32.1347
+            ],
+            [
+              -81.177,
+              32.1347
+            ],
+            [
+              -81.177,
+              32.1315
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Savannah Terminal - Savannah GA",
+        "type": "Intermodal / Drayage Terminal (owned)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 4,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 9,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.1762,
+              32.1323
+            ],
+            [
+              -81.1754,
+              32.1323
+            ],
+            [
+              -81.1754,
+              32.1329
+            ],
+            [
+              -81.1762,
+              32.1329
+            ],
+            [
+              -81.1762,
+              32.1323
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Savannah Terminal - Savannah GA",
+        "type": "Intermodal / Drayage Terminal (owned)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.175,
+              32.1329
+            ],
+            [
+              -81.1733,
+              32.1329
+            ],
+            [
+              -81.1733,
+              32.1346
+            ],
+            [
+              -81.175,
+              32.1346
+            ],
+            [
+              -81.175,
+              32.1329
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Savannah Terminal - Savannah GA",
+        "type": "Intermodal / Drayage Terminal (owned)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.1756,
+              32.1315
+            ],
+            [
+              -81.1742,
+              32.1315
+            ],
+            [
+              -81.1742,
+              32.1328
+            ],
+            [
+              -81.1756,
+              32.1328
+            ],
+            [
+              -81.1756,
+              32.1315
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Savannah Terminal - Savannah GA",
+        "type": "Intermodal / Drayage Terminal (owned)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.6455,
+              41.5862
+            ],
+            [
+              -87.642,
+              41.5862
+            ],
+            [
+              -87.642,
+              41.5888
+            ],
+            [
+              -87.6455,
+              41.5888
+            ],
+            [
+              -87.6455,
+              41.5862
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Harvey Chicago Operations Center - Harvey IL",
+        "type": "Intermodal / Drayage container & chassis yard",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 4,
+          "trailersVisible": 250,
+          "trailerParkingCapacity": 600,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 20.9,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.644,
+              41.58625
+            ],
+            [
+              -87.6434,
+              41.58625
+            ],
+            [
+              -87.6434,
+              41.5866
+            ],
+            [
+              -87.644,
+              41.5866
+            ],
+            [
+              -87.644,
+              41.58625
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Harvey Chicago Operations Center - Harvey IL",
+        "type": "Intermodal / Drayage container & chassis yard",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.6455,
+              41.5866
+            ],
+            [
+              -87.6436,
+              41.5866
+            ],
+            [
+              -87.6436,
+              41.5887
+            ],
+            [
+              -87.6455,
+              41.5887
+            ],
+            [
+              -87.6455,
+              41.5866
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Harvey Chicago Operations Center - Harvey IL",
+        "type": "Intermodal / Drayage container & chassis yard",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.643,
+              41.5868
+            ],
+            [
+              -87.6421,
+              41.5868
+            ],
+            [
+              -87.6421,
+              41.5886
+            ],
+            [
+              -87.643,
+              41.5886
+            ],
+            [
+              -87.643,
+              41.5868
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Harvey Chicago Operations Center - Harvey IL",
+        "type": "Intermodal / Drayage container & chassis yard",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.6436,
+              41.5868
+            ],
+            [
+              -87.6426,
+              41.5868
+            ],
+            [
+              -87.6426,
+              41.5878
+            ],
+            [
+              -87.6436,
+              41.5878
+            ],
+            [
+              -87.6436,
+              41.5868
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Intermodal Services - Harvey Chicago Operations Center - Harvey IL",
+        "type": "Intermodal / Drayage container & chassis yard",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.8036,
+              38.21345
+            ],
+            [
+              -85.80205,
+              38.21345
+            ],
+            [
+              -85.80205,
+              38.215
+            ],
+            [
+              -85.8036,
+              38.215
+            ],
+            [
+              -85.8036,
+              38.21345
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Louisville Terminal - Louisville KY",
+        "type": "Terminal Yard / Intermodal Cross-Dock Terminal (owned)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 46,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 4.7,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.80305,
+              38.2149
+            ],
+            [
+              -85.8027,
+              38.2149
+            ],
+            [
+              -85.8027,
+              38.21512
+            ],
+            [
+              -85.80305,
+              38.21512
+            ],
+            [
+              -85.80305,
+              38.2149
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Louisville Terminal - Louisville KY",
+        "type": "Terminal Yard / Intermodal Cross-Dock Terminal (owned)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.8036,
+              38.21345
+            ],
+            [
+              -85.80305,
+              38.21345
+            ],
+            [
+              -85.80305,
+              38.21455
+            ],
+            [
+              -85.8036,
+              38.21455
+            ],
+            [
+              -85.8036,
+              38.21345
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Louisville Terminal - Louisville KY",
+        "type": "Terminal Yard / Intermodal Cross-Dock Terminal (owned)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.80315,
+              38.214
+            ],
+            [
+              -85.80265,
+              38.214
+            ],
+            [
+              -85.80265,
+              38.21475
+            ],
+            [
+              -85.80315,
+              38.21475
+            ],
+            [
+              -85.80315,
+              38.214
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Louisville Terminal - Louisville KY",
+        "type": "Terminal Yard / Intermodal Cross-Dock Terminal (owned)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.1319,
+              40.0117
+            ],
+            [
+              -83.1288,
+              40.0117
+            ],
+            [
+              -83.1288,
+              40.0147
+            ],
+            [
+              -83.1319,
+              40.0147
+            ],
+            [
+              -83.1319,
+              40.0117
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Columbus Terminal - Columbus OH",
+        "type": "Intermodal / Drayage Terminal Yard (owned)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "NONE",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 21.8,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.13195,
+              40.01278
+            ],
+            [
+              -83.1315,
+              40.01278
+            ],
+            [
+              -83.1315,
+              40.01305
+            ],
+            [
+              -83.13195,
+              40.01305
+            ],
+            [
+              -83.13195,
+              40.01278
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Columbus Terminal - Columbus OH",
+        "type": "Intermodal / Drayage Terminal Yard (owned)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.1312,
+              40.0118
+            ],
+            [
+              -83.1289,
+              40.0118
+            ],
+            [
+              -83.1289,
+              40.0145
+            ],
+            [
+              -83.1312,
+              40.0145
+            ],
+            [
+              -83.1312,
+              40.0118
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Columbus Terminal - Columbus OH",
+        "type": "Intermodal / Drayage Terminal Yard (owned)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.02455,
+              41.10455
+            ],
+            [
+              -112.022,
+              41.10455
+            ],
+            [
+              -112.022,
+              41.10625
+            ],
+            [
+              -112.02455,
+              41.10625
+            ],
+            [
+              -112.02455,
+              41.10455
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Clearfield Terminal - Clearfield UT",
+        "type": "Intermodal / Rail-Served Transload & Distribution Terminal (owned)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 9.2,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.02455,
+              41.1056
+            ],
+            [
+              -112.0236,
+              41.1056
+            ],
+            [
+              -112.0236,
+              41.10625
+            ],
+            [
+              -112.02455,
+              41.10625
+            ],
+            [
+              -112.02455,
+              41.1056
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Clearfield Terminal - Clearfield UT",
+        "type": "Intermodal / Rail-Served Transload & Distribution Terminal (owned)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.0236,
+              41.1047
+            ],
+            [
+              -112.0225,
+              41.1047
+            ],
+            [
+              -112.0225,
+              41.106
+            ],
+            [
+              -112.0236,
+              41.106
+            ],
+            [
+              -112.0236,
+              41.1047
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Clearfield Terminal - Clearfield UT",
+        "type": "Intermodal / Rail-Served Transload & Distribution Terminal (owned)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.9013,
+              35.0365
+            ],
+            [
+              -89.8987,
+              35.0365
+            ],
+            [
+              -89.8987,
+              35.0398
+            ],
+            [
+              -89.9013,
+              35.0398
+            ],
+            [
+              -89.9013,
+              35.0365
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Memphis Terminal - Memphis TN",
+        "type": "Intermodal / Drayage Terminal & Container Yard (owned)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "NONE",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 350,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 21.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.9012,
+              35.03855
+            ],
+            [
+              -89.9008,
+              35.03855
+            ],
+            [
+              -89.9008,
+              35.03895
+            ],
+            [
+              -89.9012,
+              35.03895
+            ],
+            [
+              -89.9012,
+              35.03855
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Memphis Terminal - Memphis TN",
+        "type": "Intermodal / Drayage Terminal & Container Yard (owned)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.90115,
+              35.0366
+            ],
+            [
+              -89.8988,
+              35.0366
+            ],
+            [
+              -89.8988,
+              35.0396
+            ],
+            [
+              -89.90115,
+              35.0396
+            ],
+            [
+              -89.90115,
+              35.0366
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "universal-logistics",
+        "name": "Universal Logistics - Memphis Terminal - Memphis TN",
+        "type": "Intermodal / Drayage Terminal & Container Yard (owned)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    }
+  ]
+}

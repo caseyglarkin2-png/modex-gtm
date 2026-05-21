@@ -1,0 +1,49 @@
+{
+  "name": "CJ Logistics - New Century KS (Cold Storage)",
+  "type": "Cold Storage Distribution Center",
+  "coords": { "lat": 38.842000, "lng": -94.901500 },
+  "geofences": {
+    "perimeter": { "south": 38.840500, "west": -94.903500, "north": 38.843800, "east": -94.900000 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0, "trailersVisible": 0, "trailerParkingCapacity": 0,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 28.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.842000,-94.901500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "connectivityIssue",
+    "multipleFacilities", "scale", "dropYard", "multiStep",
+    "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "siteAreaAcres"
+  ],
+  "fieldNotes": {
+    "locationNote": "The CJ Logistics New Century cold storage is a brand-new facility (291,000 sq ft, opened Q3 2025) at 27302 W 159th St, New Century KS, immediately west of / adjacent to the Upfield (Flora) production plant at 27080 159th St. The available 2026 Maxar satellite imagery PREDATES construction - the parcel west of the Upfield plant still shows vacant farmland, so the building, docks, gate, and yard cannot be observed. Coordinates and perimeter are a best-effort estimate of the parcel location based on web research and the Upfield plant adjacency.",
+    "railServed": "TRUE - web-confirmed. Multiple sources describe this as a rail-served cold storage facility with direct rail access; an active railway runs between the CJ building and the Upfield plant, and finished product moves from the Upfield/Flora plant into the cold storage via an above-ground conveyor bridge built over the rail.",
+    "urbanRural": "Rural - the site is in the New Century AirCenter industrial park on the edge of New Century KS, surrounded by farmland and a former airfield; ~4 miles from I-35.",
+    "truckGate": "Cannot be determined - building not visible in available imagery. truckCount defaulted to 1 as a placeholder; classification flag set false and listed uncertain.",
+    "dockDoors": "Cannot be counted - building not visible in available imagery. Web sources do not publish a dock-door count for this facility.",
+    "siteAreaAcres": "Best-effort estimate (~28 acres) for a ~291,000 sq ft cold storage building plus yard on the parcel west of the Upfield plant; not measured from imagery.",
+    "multiStep": "False default - cannot verify. Note the conveyor bridge is a product-transfer link, not a truck checkpoint.",
+    "auditLimitation": "Per deep-audit instructions: facility could not be physically audited because it postdates available satellite imagery. Location resolved via web research; physical-yard classification fields are placeholders flagged as uncertain. Recommend re-audit when newer imagery (post-Q3 2025) becomes available."
+  },
+  "method": "deep-audit"
+}

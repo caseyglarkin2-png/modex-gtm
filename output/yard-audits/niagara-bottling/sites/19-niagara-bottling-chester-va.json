@@ -1,0 +1,48 @@
+{
+  "name": "Niagara Bottling - Chester VA",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 37.35420, "lng": -77.32990 },
+  "geofences": {
+    "perimeter": { "south": 37.35190, "west": -77.33190, "north": 37.35710, "east": -77.32840 },
+    "truckGate": { "south": 37.35610, "west": -77.33010, "north": 37.35680, "east": -77.32940 },
+    "dropYards": [
+      { "south": 37.35260, "west": -77.33150, "north": 37.35560, "east": -77.33010 }
+    ],
+    "dockAprons": [
+      { "south": 37.35260, "west": -77.33090, "north": 37.35560, "east": -77.32960 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 50, "trailersVisible": 65, "trailerParkingCapacity": 90,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 35.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.35420,-77.32990,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "The access drive connects to Digital Drive as an open, uncontrolled driveway. Street View (2025-02) of the Digital Drive frontage shows no barrier arm, sliding gate, or checkpoint pinch-point - just a landscaped open entrance. The perimeter access road wrapping the building is likewise ungated.",
+    "guardShack": "No staffed booth visible at the entrance or anywhere on the perimeter drive in satellite or Street View imagery.",
+    "remoteGs": "False - no truck gate identified.",
+    "drivewayLong": "Long internal access drive from Digital Drive plus a full-length perimeter road to the west drop yard - ample queue room.",
+    "dropArea": "Full-length west drop yard with trailers parked nose-out plus dock-staged trailers; 50+ stalls.",
+    "dockDoors": "Long bank of dock doors along the west building face with many trailers backed in; ~50 estimated, banded 50+.",
+    "fastLaneOpportunity": "Wide open Digital Drive entrance and a broad perimeter road with no control structure - room for a bypass lane.",
+    "siteAreaAcres": "Niagara built on a 48-acre parcel; developed footprint measures ~35 acres.",
+    "railServed": "No rail spur enters the property.",
+    "urbanRural": "Located in Meadowville Technology Park, Chesterfield County, within the Richmond VA metro - surrounded by large distribution buildings. Urban."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,53 @@
+{
+  "name": "Cleveland Truck Manufacturing Plant - Cleveland NC",
+  "type": "Truck assembly plant",
+  "coords": { "lat": 35.732000, "lng": -80.691000 },
+  "geofences": {
+    "perimeter": { "south": 35.728900, "west": -80.698800, "north": 35.735400, "east": -80.684500 },
+    "truckGate": { "south": 35.730350, "west": -80.694900, "north": 35.730900, "east": -80.694200 },
+    "dropYards": [
+      { "south": 35.732600, "west": -80.700200, "north": 35.735300, "east": -80.694400 }
+    ],
+    "dockAprons": [
+      { "south": 35.731600, "west": -80.692400, "north": 35.733000, "east": -80.689000 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 320,
+    "trailerParkingCapacity": 450,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 200.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.732000,-80.691000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "scale", "multiStep"],
+  "fieldNotes": {
+    "truckGate": "Main controlled entrance on Statesville Blvd (US-70) at a signalized intersection, with a 'DAIMLER TRUCK' canopy gateway structure over a divided entry drive. Campus fully fenced (continuous chain-link confirmed in multiple Street Views along the road frontage).",
+    "guardShack": "No discrete 1-3-vehicle guard booth visible at the canopy entrance in satellite or Street View; entrance is a canopy/gateway-sign structure, so a staffed booth could not be confirmed - treated as remote/kiosk check-in.",
+    "remoteGs": "Set true because a controlled gate exists but no guard shack was confirmed; could be a staffed booth obscured by the canopy - flagged uncertain.",
+    "dockDoors": "Dozens of trailers backed against multiple building faces (N and interior court); easily 50+ doors across the campus.",
+    "dropArea": "Very large dedicated trailer drop yard in the NW with hundreds of trailers in long rows; clearly 50+.",
+    "trailersVisible": "Approximate count from N drop-yard imagery (~320 trailers visible across rows and dock faces).",
+    "railServed": "Rail spur runs along the NW edge into the trailer-storage strip.",
+    "multipleFacilities": "Large multi-building campus: main assembly building, paint/body buildings, and a separate trailer-yard outbuilding.",
+    "scale": "No truck scale identified in imagery; flagged uncertain.",
+    "shipRcvSeparate": "Inbound parts docks (interior court / N face) are physically separate from finished-vehicle outbound flow (S/E finished-truck lots).",
+    "urbanRural": "Small town of Cleveland NC surrounded by farmland; rural setting despite the large industrial footprint."
+  },
+  "method": "deep-audit"
+}

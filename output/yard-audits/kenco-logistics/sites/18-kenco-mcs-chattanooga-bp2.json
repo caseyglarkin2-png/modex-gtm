@@ -1,0 +1,53 @@
+{
+  "name": "Kenco MCS Chattanooga BP2 - Chattanooga TN",
+  "type": "Multi-Client Distribution Center",
+  "coords": { "lat": 35.06929, "lng": -85.17642 },
+  "geofences": {
+    "perimeter": { "south": 35.06800, "west": -85.17780, "north": 35.07045, "east": -85.17510 },
+    "truckGate": { "south": 35.06800, "west": -85.17745, "north": 35.06840, "east": -85.17695 },
+    "dropYards": [
+      { "south": 35.06960, "west": -85.17700, "north": 35.07030, "east": -85.17540 }
+    ],
+    "dockAprons": [
+      { "south": 35.06955, "west": -85.17710, "north": 35.07025, "east": -85.17530 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 26,
+    "trailersVisible": 15,
+    "trailerParkingCapacity": 22,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 12.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.06929,-85.17642,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "dropArea", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Roster gave an APPROXIMATE geocode for 'Chattanooga, TN 37406' that landed on the CSX DeButts rail yard. Web research positively resolved BP2 to 6301 Enterprise Park Dr, Chattanooga TN 37416: Chattanoogan.com/Times Free Press reported a 210,000 SF industrial warehouse on over 12 acres at 6301 Enterprise Park Dr (built 1995) sold for $67.09M in 2022 as part of a Kenco-affiliate 7-warehouse Chattanooga portfolio. 210,000 SF and 12+ acres are an EXACT match for BP2 (210,000 SF on the Kenco warehousing map). 6301 Enterprise Park Dr geocodes ROOFTOP at 35.069286,-85.1764238.",
+    "buildingChoice": "High confidence on building identity (210,000 SF / 12+ acres / 6301 Enterprise Park Dr matches BP2 exactly). Overall confidence held to medium because the gate/guard determination relies on imagery interpretation and Street View only reached one building face.",
+    "truckGate": "No barrier arm, sliding/swing gate, or guard booth at the property driveway off Enterprise Park Drive. Open paved loop entrance at the SE corner; Street View (Feb 2026) of the SW wall shows a plain warehouse facade with no gate. Typical leased industrial-park warehouse. Medium confidence.",
+    "guardShack": "No booth structure visible at the entrance.",
+    "dockDoors": "Counted ~26 dock doors along the NE building face from z18/z19 imagery (regular bay rhythm, ~12-15 trailers backed in). Band 25-50; low-confidence exact count.",
+    "dropArea": "~15 trailers staged on the NE apron including drop trailers without tractors; estimated ~22-trailer capacity. Band 10-25.",
+    "shipRcvSeparate": "All dock activity is on a single NE-face dock bank - shipping and receiving are not on physically separate clusters.",
+    "fastLaneOpportunity": "Wide NE truck apron with unused paved width and a deep approach - room to add a bypass lane.",
+    "dropYard": "NE apron holds parked drop trailers adjacent to the dock bank.",
+    "railServed": "A rail line runs along the south side of the broader Enterprise Park area; no spur enters this parcel.",
+    "urbanRural": "Within the Chattanooga metro Enterprise Park industrial fabric - Urban."
+  },
+  "method": "deep-audit"
+}

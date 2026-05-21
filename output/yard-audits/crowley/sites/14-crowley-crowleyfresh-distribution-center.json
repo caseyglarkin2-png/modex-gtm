@@ -1,0 +1,69 @@
+{
+  "name": "Crowley CrowleyFresh Distribution Center (Temperature Controlled) - Medley FL",
+  "type": "Temperature-controlled distribution center / warehouse",
+  "coords": { "lat": 25.87360, "lng": -80.35850 },
+  "geofences": {
+    "perimeter": { "south": 25.87280, "west": -80.35935, "north": 25.87445, "east": -80.35720 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 25.87290, "west": -80.35830, "north": 25.87385, "east": -80.35730 }
+    ],
+    "dockAprons": [
+      { "south": 25.87295, "west": -80.35930, "north": 25.87380, "east": -80.35790 },
+      { "south": 25.87370, "west": -80.35870, "north": 25.87445, "east": -80.35735 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 52,
+    "trailersVisible": 30,
+    "trailerParkingCapacity": 45,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 6.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@25.87360,-80.35850,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "facility": "CrowleyFresh temperature-controlled distribution center, 11401 NW 100th Road, Suite 1, Medley FL. The address is a SUITE — CrowleyFresh occupies one tenant unit (the cold-storage section, 9 refrigerated dock doors per Crowley's spec) within a larger multi-tenant industrial warehouse. Positively identified by multiple CROWLEY reefer trailers backed into the dock face and parked in the yard (Street View 2025-11).",
+    "truckGate": "FALSE. No controlled truck entrance. Street View shows open, ungated access from the industrial-park street directly into a shared paved dock court; only a stop sign at the road. No barrier arm, gate, or pinch-point.",
+    "guardShack": "FALSE. No guard booth anywhere at the property entrance or dock court.",
+    "remoteGs": "FALSE — there is no gate at all.",
+    "multipleFacilities": "FALSE. A single warehouse building; CrowleyFresh shares it with other tenants (FedEx trailers also seen) — multi-tenant, not a multi-building campus.",
+    "dockDoors": "50+ band for the whole building. The multi-tenant warehouse has dock doors running along both long (SW and NE) faces with trailers backed in. CrowleyFresh's own suite has 9 refrigerated dock doors per web research; the band reflects the whole building per the rubric (count across all faces). dockDoorCount metric ~52 is an estimate and flagged uncertain.",
+    "shipRcvSeparate": "TRUE. Dock doors are on two opposite long faces of the building (SW and NE), giving physically separate dock clusters.",
+    "dropArea": "10-25 trailers parked in the open court / yard, including CROWLEY reefers; not a dedicated fenced drop lot.",
+    "drivewayShort": "Short open approach from the park street straight into the dock court; no deep internal queue.",
+    "railServed": "FALSE. A rail line runs alongside the NE side of the property but no spur enters the building.",
+    "urbanRural": "Medley is a dense industrial municipality in the Miami metro — Urban.",
+    "coldStorage": "Crowley web research: 400,000+ cu ft refrigerated space, a refrigerated dock with 9 access doors, a forced-air pre-cooling chamber (20,000 kg/hr), and four independent temperature-controlled chambers (32-50 F).",
+    "confidence": "High for facility identification and the no-gate/no-guard-shack determination (open multi-tenant warehouse, Crowley branding confirmed on docked reefers). Whole-building dock count and lane counts remain overhead/Street-View estimates and are flagged uncertain."
+  },
+  "method": "deep-audit"
+}

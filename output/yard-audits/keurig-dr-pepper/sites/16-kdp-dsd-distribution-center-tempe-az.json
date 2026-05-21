@@ -1,0 +1,45 @@
+{
+  "name": "KDP DSD Distribution Center - Tempe AZ",
+  "type": "Distribution Center - DSD",
+  "coords": { "lat": 33.4062, "lng": -111.9540 },
+  "geofences": {
+    "perimeter": { "south": 33.404403, "west": -111.956475, "north": 33.407997, "east": -111.951525 },
+    "truckGate": { "south": 33.406731, "west": -111.955823, "north": 33.407269, "east": -111.955177 },
+    "dropYards": [
+      { "south": 33.406026, "west": -111.955415, "north": 33.407374, "east": -111.953585 }
+    ],
+    "dockAprons": [
+      { "south": 33.40482, "west": -111.954753, "north": 33.40518, "east": -111.953247 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18, "trailersVisible": 8, "trailerParkingCapacity": 25,
+    "truckGateCount": 2, "buildingCount": 4, "siteAreaAcres": 45.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.4062,-111.954,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "guardShack", "remoteGs", "truckGate", "shipRcvSeparate"],
+  "fieldNotes": {
+    "location": "Roster address (1850 W University Dr) is explicitly approximate and geocoded to an office building. Resolved actual KDP Tempe DSD facility to the former Kalil Bottling Co. plant at 2777 S Hardy Dr, Tempe AZ 85282 (Kalil acquired by KDP May 2024). Facility is the beverage bottling + DSD distribution complex on S Hardy Dr immediately south of the Broadway Rd / S Hardy Dr intersection.",
+    "campus": "multipleFacilities true — connected building cluster with a central tank/silo farm (bottling), warehouse with dock doors, and an open DSD fleet yard. A portion fronting S Hardy Dr carries a small 'Schreiber' sign (Schreiber Foods, 2122 S Hardy Dr, occupies adjacent space in the same industrial complex); precise parcel boundary between the KDP/Kalil and Schreiber footprints is ambiguous from overhead imagery.",
+    "dropYard": "Large open paved yard holds two long diagonal rows of DSD route delivery trucks (bay/box beverage trucks) plus a row of 53' trailers — classic DSD fleet staging.",
+    "truckGate": "Perimeter has chain-link fencing with oleander hedge along the S Hardy Dr frontage; driveway openings break the fence at the NW yard and along Hardy Dr. No staffed guard booth visible in Street View or satellite — controlled but unmanned access, so remoteGs true.",
+    "dockDoorCount": "~18 dock doors estimated across the south warehouse face and plant building; partly obscured by trailers and roof structures — low confidence.",
+    "railServed": "No rail spur enters the property.",
+    "urbanRural": "Dense Tempe industrial corridor inside the Phoenix metro — Urban."
+  },
+  "method": "deep-audit"
+}

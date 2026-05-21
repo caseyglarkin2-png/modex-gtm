@@ -1,0 +1,53 @@
+{
+  "name": "Pactiv Evergreen - Corsicana TX Warehouse",
+  "type": "Warehouse / Distribution",
+  "coords": { "lat": 32.07520, "lng": -96.45745 },
+  "geofences": {
+    "perimeter": { "south": 32.07210, "west": -96.46150, "north": 32.07800, "east": -96.45330 },
+    "truckGate": { "south": 32.07390, "west": -96.45470, "north": 32.07470, "east": -96.45350 },
+    "dropYards": [
+      { "south": 32.07260, "west": -96.46120, "north": 32.07480, "east": -96.45850 }
+    ],
+    "dockAprons": [
+      { "south": 32.07320, "west": -96.45900, "north": 32.07640, "east": -96.45520 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 130,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 58.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.07520,-96.45745,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "guardShack", "remoteGs"],
+  "fieldNotes": {
+    "location": "Roster geocode (ROOFTOP, 32.075124,-96.457637) lands directly on a very large modern single-block distribution warehouse — confirmed in satellite z16-z19. Address 2200 S. Business 45, Corsicana. Building is ~1,150 ft x ~400 ft.",
+    "truckGate": "Property is fully fenced; the building sits ~250 m back from S. Business 45 behind a deep landscaped buffer. A single entrance driveway off Business 45 at the SE corner reaches the yard through a perimeter-fence gate (pinch-point). truckGate = true.",
+    "guardShack": "A small dark structure sits at the entrance driveway split (visible z19-z20) — could be a gatehouse/guard booth or a parked trailer/equipment shed; not definitively a multi-window staffed booth. Flagged uncertain. Best read: no staffed shack -> remote check-in.",
+    "remoteGs": "Gate present, no clearly-confirmed staffed booth -> remoteGs = true. Medium confidence; the ambiguous structure at the entrance could be a booth.",
+    "dockDoors": "Long dock-leveler runs along the SW and SE faces of the warehouse; this is a 50+ door cross-dock-scale DC. Exact count not resolvable; estimate ~70.",
+    "dropArea": "Extensive trailer drop yard along the SW dock face — dozens of trailers in organized parking rows (z18-z19). dropArea banded 50+.",
+    "drivewayLong": "Long entrance approach from Business 45 across a deep buffer and wide internal road — ample 3+ truck stacking room.",
+    "fastLaneOpportunity": "Very wide paved aprons and a long approach road; abundant room for express/bypass lanes.",
+    "railServed": "A rail line runs along the far western property edge but no spur turns into the warehouse property — railServed = false.",
+    "urbanRural": "Southwest edge of Corsicana along Business 45; surrounded by woods, scattered industrial parcels and farmland. Edge-of-town / rural.",
+    "shipRcvSeparate": "Docks are concentrated on the SW face with some wrap onto the SE; reads as one continuous dock operation, not physically separated ship/receive banks."
+  },
+  "method": "deep-audit"
+}

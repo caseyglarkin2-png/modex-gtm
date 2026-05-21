@@ -1,0 +1,52 @@
+{
+  "name": "KDP Coffee Roasting Plant - Castroville CA",
+  "type": "Manufacturing - Coffee",
+  "coords": { "lat": 36.757300, "lng": -121.740100 },
+  "geofences": {
+    "perimeter": { "south": 36.756300, "west": -121.740900, "north": 36.758100, "east": -121.739400 },
+    "truckGate": { "south": 36.757500, "west": -121.740900, "north": 36.757800, "east": -121.740600 },
+    "dropYards": [
+      { "south": 36.756600, "west": -121.740300, "north": 36.757500, "east": -121.739600 }
+    ],
+    "dockAprons": [
+      { "south": 36.756600, "west": -121.740100, "north": 36.756900, "east": -121.739500 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14, "trailersVisible": 6, "trailerParkingCapacity": 20,
+    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 4.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.757300,-121.740100,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "entryLanes", "exitLanes", "dockDoors",
+    "dropArea", "shipRcvSeparate", "dropYard", "dockDoorCount", "trailersVisible",
+    "trailerParkingCapacity", "buildingCount", "siteAreaAcres", "multipleFacilities"
+  ],
+  "fieldNotes": {
+    "FACILITY_STATUS": "DEFUNCT - The Keurig Green Mountain Castroville, CA manufacturing/distribution center CLOSED on July 3, 2017 (183 employees laid off; plant contents auctioned September 2017, per CoffeeTalk, Vending Market Watch, Center for Jobs). This is NOT an active KDP facility. The roster source ('one of six KDP US coffee roasting facilities') is outdated. KDP has no current operations here.",
+    "location": "Roster coords (10711 Cara Mia Pkwy, 36.7593/-121.7436) point into the Castroville industrial park but not a confirmed building. Best-documented former Keurig address is 11480 Commercial Pkwy, Castroville CA 95012 (geocoded 36.7570/-121.7385). Audit centered on the 11480 Commercial Pkwy building cluster - a mid-size warehouse with rooftop markings and an adjacent leased warehouse east of it. The former Keurig DC has since been subdivided/re-tenanted; exact original footprint cannot be confirmed.",
+    "truckGate": "No controlled truck gate visible; open warehouse forecourt off Commercial Pkwy. Building shows lease/sale signage in 2024 Street View. All gate-related fields uncertain due to facility closure and re-tenanting.",
+    "guardShack": "No guard booth visible.",
+    "dockDoors": "Estimate ~14 dock doors on the warehouse east face / apron; counts approximate, low confidence given the site is no longer the original single-tenant Keurig facility.",
+    "urbanRural": "Castroville is a small unincorporated agricultural town in Monterey County, surrounded by farmland (the 'Artichoke Capital'). The industrial park sits at the edge of town next to fields - classified Rural.",
+    "railServed": "A rail line runs through the broader Castroville industrial park but does not spur into this specific building parcel.",
+    "buildingCount": "The 11480 cluster comprises the marked warehouse plus an adjacent leased warehouse; treated as 2 buildings.",
+    "OVERALL": "Confidence LOW: facility is closed/defunct, the precise original building footprint is unconfirmed, and the site has been re-tenanted. All classification fields are best-effort estimates from current overhead imagery of the most credible building - flagged for human review."
+  },
+  "method": "deep-audit"
+}

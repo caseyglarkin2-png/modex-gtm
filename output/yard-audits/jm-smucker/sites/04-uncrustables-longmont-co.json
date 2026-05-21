@@ -1,0 +1,56 @@
+{
+  "name": "Uncrustables - Longmont CO",
+  "type": "Manufacturing - Frozen handhelds (Uncrustables)",
+  "coords": { "lat": 40.16400, "lng": -105.05250 },
+  "geofences": {
+    "perimeter": { "south": 40.16080, "west": -105.05550, "north": 40.16680, "east": -105.04900 },
+    "truckGate": { "south": 40.16170, "west": -105.05500, "north": 40.16215, "east": -105.05445 },
+    "dropYards": [
+      { "south": 40.16380, "west": -105.05100, "north": 40.16580, "east": -105.04920 }
+    ],
+    "dockAprons": [
+      { "south": 40.16250, "west": -105.05230, "north": 40.16560, "east": -105.05080 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 91.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.164,-105.0525,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "location": "J.M. Smucker Uncrustables plant, Concepts Industrial Park, NW corner of Colorado Highway 119 (the Diagonal) and Fairview Street, east Longmont CO (Weld County). Opened July 2019 ($340-350M, originally 430,000 sq ft; ~240,000 sq ft expansion since brings total to ~674,000 sq ft). The roster address (11555 N 75th St) geocoded to rural land NW of the actual plant; resolved via web research (Concepts Industrial Park, Hwy 119 & Fairview) and satellite — a large white food-plant building with rooftop solar, extensive dock banks and a large trailer drop yard. Confirmed by Street View 2024 showing the building and the Smucker entrance sign on Fairview St.",
+    "truckGate": "FALSE — the main entrance off Fairview St is a wide OPEN paved driveway with no barrier arm, sliding gate or checkpoint pinch-point at the road (confirmed in Street View 2024). The truck route runs in from this open driveway and loops around the south side of the building to the dock yard. No controlled gate observed at the property line.",
+    "guardShack": "FALSE — no guard booth at the entrance driveway or anywhere along the property frontage in Street View or satellite.",
+    "remoteGs": "FALSE — no truck gate, so remote check-in flag does not apply.",
+    "dockDoors": "25-50 — extensive dock banks on the east face of the building with many trailers backed in; ~45 doors estimated, flagged low confidence (some dock faces partly in shadow).",
+    "dropArea": "50+ — a large dedicated trailer drop yard on the NE of the property holds dozens of parked trailers in marked rows; ~60 trailers visible, capacity ~90.",
+    "drivewayLong": "Long, deep approach — the open driveway and internal truck route provide ample stacking room for 3+ trucks.",
+    "fastLaneOpportunity": "Wide open entrance apron and substantial unused paved/graded width; clear room to add lanes if a controlled gate were installed.",
+    "postGateStaging": "Large paved truck yard inside the property before the dock doors serves as staging.",
+    "railServed": "FALSE — no rail spur into the property; ships by truck.",
+    "urbanRural": "Rural — edge-of-Longmont location in an industrial park, bordered by farmland to the N and E, with Hwy 119 to the S. Treated as Rural per the small-town/edge-of-town rule.",
+    "buildingCount": "2 — the main manufacturing building plus an attached/adjacent warehouse-distribution section on the east side.",
+    "dropYard": "TRUE — large dedicated trailer-storage lot on the NE, distinct from the active dock apron.",
+    "siteAreaAcres": "91.3 acres for the plant parcel including the dock yard, drop lot, employee parking and undeveloped expansion land within the property."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,70 @@
+{
+  "name": "Robert Mondavi Winery - Oakville CA",
+  "type": "Winery / Production Facility",
+  "coords": { "lat": 38.435700, "lng": -122.401300 },
+  "geofences": {
+    "perimeter": { "south": 38.433600, "west": -122.403100, "north": 38.437800, "east": -122.399400 },
+    "truckGate": { "south": 38.436500, "west": -122.402600, "north": 38.436950, "east": -122.402150 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 38.435900, "west": -122.401100, "north": 38.436400, "east": -122.400500 }
+    ],
+    "staging": { "south": 38.436500, "west": -122.402300, "north": 38.436950, "east": -122.401700 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 5,
+    "trailersVisible": 2,
+    "trailerParkingCapacity": 4,
+    "truckGateCount": 1,
+    "buildingCount": 5,
+    "siteAreaAcres": 14.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.435700,-122.401300,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoors", "dropArea", "scale", "trailersVisible", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "facilityId": "Robert Mondavi Winery confirmed at 7801 St. Helena Highway, Oakville CA - the iconic Napa Valley estate winery (To Kalon Vineyard), reopened April 2026 after a multi-year transformation. The estate sits on the EAST side of CA-29 / St. Helena Highway. The roster coordinate (38.434323, -122.400476) landed in the To Kalon vineyard just SE of the building complex; the actual built campus center is ~38.4357, -122.4013.",
+    "truckGate": "Main entrance is an open landscaped driveway off CA-29 with a stone monument sign pier and visitor parking; no barrier arm, sliding/swing gate, or checkpoint pinch-point across the lane (Street View 2024-08). Open winery estate entrance - marked false.",
+    "guardShack": "No staffed guard booth at the entrance. Only a landscaped monument sign and the visitor parking lot.",
+    "remoteGs": "No truck gate identified, so remoteGs is false.",
+    "drivewayShort": "Short approach: the entrance driveway runs only a short distance from CA-29 into the front parking/courtyard area before reaching the buildings - holds at most 1-2 trucks.",
+    "entryExitTogether": "Trucks and visitors enter and exit through the same single driveway off CA-29.",
+    "dockDoors": "Estate winery, not a freight DC. No long bank of freight dock doors. A small service/loading area on the production-cellar building handles wine and grape movement; estimate ~3-7 service doors. Low confidence from overhead imagery.",
+    "dropArea": "No marked trailer-parking stalls holding bobtailed trailers; not a drop yard. dropArea NONE.",
+    "shipRcvSeparate": "No physically separate shipping and receiving dock clusters; a single service area on the production building. shipRcvSeparate false.",
+    "multipleFacilities": "Estate campus with multiple distinct buildings: the large red-roofed production/aging cellar, a visitor/hospitality building with the iconic Cliff May arch and courtyard, an outdoor stainless tank farm, a crush/processing structure, and ancillary estate buildings.",
+    "scale": "No truck scale / weigh platform identified in the truck path; marked false with low confidence (a harvest grape scale may exist near the crush pad but is not confirmed in imagery).",
+    "railServed": "A rail line runs alongside CA-29 on the property's west frontage, but no rail spur enters the winery property.",
+    "urbanRural": "Heart of Napa Valley wine country - the estate is surrounded by the To Kalon vineyard and other vineyards near the small unincorporated community of Oakville, well outside any dense metro fabric.",
+    "connectivityIssue": "Rural, but Oakville / central Napa Valley is well-developed wine country with normal cellular coverage; connectivityIssue false.",
+    "trailersVisible": "Roughly 2 trucks/trailers visible in the production service area in captured imagery; honest estimate - the site is a visitor estate, not a trailer-heavy yard.",
+    "trailerParkingCapacity": "Limited service-yard space; could hold only ~4 trailers; estimate.",
+    "siteAreaAcres": "Perimeter box covers the developed estate campus (buildings, tank farm, crush pad, parking, immediate landscaping) - ~14 acres. The broader To Kalon vineyard holding is far larger but is farmland, not yard."
+  },
+  "method": "deep-audit"
+}

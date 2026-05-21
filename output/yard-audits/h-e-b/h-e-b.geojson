@@ -1,0 +1,3050 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.3931,
+              29.4837
+            ],
+            [
+              -98.3865,
+              29.4837
+            ],
+            [
+              -98.3865,
+              29.4894
+            ],
+            [
+              -98.3931,
+              29.4894
+            ],
+            [
+              -98.3931,
+              29.4837
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B San Antonio RSC (Fratt Road) - San Antonio TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 160,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 2,
+          "buildingCount": 6,
+          "siteAreaAcres": 88,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.39265,
+              29.48535
+            ],
+            [
+              -98.39215,
+              29.48535
+            ],
+            [
+              -98.39215,
+              29.4859
+            ],
+            [
+              -98.39265,
+              29.4859
+            ],
+            [
+              -98.39265,
+              29.48535
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B San Antonio RSC (Fratt Road) - San Antonio TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.3924,
+              29.4849
+            ],
+            [
+              -98.3878,
+              29.4849
+            ],
+            [
+              -98.3878,
+              29.48565
+            ],
+            [
+              -98.3924,
+              29.48565
+            ],
+            [
+              -98.3924,
+              29.4849
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B San Antonio RSC (Fratt Road) - San Antonio TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.3923,
+              29.4856
+            ],
+            [
+              -98.3883,
+              29.4856
+            ],
+            [
+              -98.3883,
+              29.486
+            ],
+            [
+              -98.3923,
+              29.486
+            ],
+            [
+              -98.3923,
+              29.4856
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B San Antonio RSC (Fratt Road) - San Antonio TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.3919,
+              29.48565
+            ],
+            [
+              -98.3879,
+              29.48565
+            ],
+            [
+              -98.3879,
+              29.48605
+            ],
+            [
+              -98.3919,
+              29.48605
+            ],
+            [
+              -98.3919,
+              29.48565
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B San Antonio RSC (Fratt Road) - San Antonio TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.3893,
+              29.4838
+            ],
+            [
+              -98.3879,
+              29.4838
+            ],
+            [
+              -98.3879,
+              29.4844
+            ],
+            [
+              -98.3893,
+              29.4844
+            ],
+            [
+              -98.3893,
+              29.4838
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B San Antonio RSC (Fratt Road) - San Antonio TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.3722,
+              29.4009
+            ],
+            [
+              -98.3624,
+              29.4009
+            ],
+            [
+              -98.3624,
+              29.4092
+            ],
+            [
+              -98.3722,
+              29.4092
+            ],
+            [
+              -98.3722,
+              29.4009
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B East Side Super Regional Grocery Warehouse - San Antonio TX",
+        "type": "Super Regional Grocery Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 200,
+          "trailersVisible": 170,
+          "trailerParkingCapacity": 280,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 130,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.3648,
+              29.401
+            ],
+            [
+              -98.364,
+              29.401
+            ],
+            [
+              -98.364,
+              29.4016
+            ],
+            [
+              -98.3648,
+              29.4016
+            ],
+            [
+              -98.3648,
+              29.401
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B East Side Super Regional Grocery Warehouse - San Antonio TX",
+        "type": "Super Regional Grocery Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.3718,
+              29.4044
+            ],
+            [
+              -98.367,
+              29.4044
+            ],
+            [
+              -98.367,
+              29.4054
+            ],
+            [
+              -98.3718,
+              29.4054
+            ],
+            [
+              -98.3718,
+              29.4044
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B East Side Super Regional Grocery Warehouse - San Antonio TX",
+        "type": "Super Regional Grocery Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.3702,
+              29.4088
+            ],
+            [
+              -98.3648,
+              29.4088
+            ],
+            [
+              -98.3648,
+              29.4092
+            ],
+            [
+              -98.3702,
+              29.4092
+            ],
+            [
+              -98.3702,
+              29.4088
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B East Side Super Regional Grocery Warehouse - San Antonio TX",
+        "type": "Super Regional Grocery Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.3654,
+              29.4017
+            ],
+            [
+              -98.3639,
+              29.4017
+            ],
+            [
+              -98.3639,
+              29.4024
+            ],
+            [
+              -98.3654,
+              29.4024
+            ],
+            [
+              -98.3654,
+              29.4017
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B East Side Super Regional Grocery Warehouse - San Antonio TX",
+        "type": "Super Regional Grocery Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.3718,
+              29.4053
+            ],
+            [
+              -98.367,
+              29.4053
+            ],
+            [
+              -98.367,
+              29.4059
+            ],
+            [
+              -98.3718,
+              29.4059
+            ],
+            [
+              -98.3718,
+              29.4053
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B East Side Super Regional Grocery Warehouse - San Antonio TX",
+        "type": "Super Regional Grocery Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.3702,
+              29.4082
+            ],
+            [
+              -98.3648,
+              29.4082
+            ],
+            [
+              -98.3648,
+              29.4088
+            ],
+            [
+              -98.3702,
+              29.4088
+            ],
+            [
+              -98.3702,
+              29.4082
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B East Side Super Regional Grocery Warehouse - San Antonio TX",
+        "type": "Super Regional Grocery Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.3654,
+              29.4017
+            ],
+            [
+              -98.3638,
+              29.4017
+            ],
+            [
+              -98.3638,
+              29.4026
+            ],
+            [
+              -98.3654,
+              29.4026
+            ],
+            [
+              -98.3654,
+              29.4017
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B East Side Super Regional Grocery Warehouse - San Antonio TX",
+        "type": "Super Regional Grocery Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.5418,
+              29.8315
+            ],
+            [
+              -95.5362,
+              29.8315
+            ],
+            [
+              -95.5362,
+              29.8428
+            ],
+            [
+              -95.5418,
+              29.8428
+            ],
+            [
+              -95.5418,
+              29.8315
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Houston RSC (Windfern Road) - Houston TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 160,
+          "trailersVisible": 280,
+          "trailerParkingCapacity": 400,
+          "truckGateCount": 2,
+          "buildingCount": 7,
+          "siteAreaAcres": 130,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.5399,
+              29.8321
+            ],
+            [
+              -95.5393,
+              29.8321
+            ],
+            [
+              -95.5393,
+              29.8327
+            ],
+            [
+              -95.5399,
+              29.8327
+            ],
+            [
+              -95.5399,
+              29.8321
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Houston RSC (Windfern Road) - Houston TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.541,
+              29.8346
+            ],
+            [
+              -95.5378,
+              29.8346
+            ],
+            [
+              -95.5378,
+              29.8362
+            ],
+            [
+              -95.541,
+              29.8362
+            ],
+            [
+              -95.541,
+              29.8346
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Houston RSC (Windfern Road) - Houston TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.5412,
+              29.838
+            ],
+            [
+              -95.5376,
+              29.838
+            ],
+            [
+              -95.5376,
+              29.8405
+            ],
+            [
+              -95.5412,
+              29.8405
+            ],
+            [
+              -95.5412,
+              29.838
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Houston RSC (Windfern Road) - Houston TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.541,
+              29.8408
+            ],
+            [
+              -95.538,
+              29.8408
+            ],
+            [
+              -95.538,
+              29.8425
+            ],
+            [
+              -95.541,
+              29.8425
+            ],
+            [
+              -95.541,
+              29.8408
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Houston RSC (Windfern Road) - Houston TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.5404,
+              29.836
+            ],
+            [
+              -95.5379,
+              29.836
+            ],
+            [
+              -95.5379,
+              29.8365
+            ],
+            [
+              -95.5404,
+              29.8365
+            ],
+            [
+              -95.5404,
+              29.836
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Houston RSC (Windfern Road) - Houston TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.5408,
+              29.8397
+            ],
+            [
+              -95.5379,
+              29.8397
+            ],
+            [
+              -95.5379,
+              29.8404
+            ],
+            [
+              -95.5408,
+              29.8404
+            ],
+            [
+              -95.5408,
+              29.8397
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Houston RSC (Windfern Road) - Houston TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3665,
+              31.1486
+            ],
+            [
+              -97.356,
+              31.1486
+            ],
+            [
+              -97.356,
+              31.1568
+            ],
+            [
+              -97.3665,
+              31.1568
+            ],
+            [
+              -97.3665,
+              31.1486
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Temple RSC - Temple TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 280,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 105,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3596,
+              31.1503
+            ],
+            [
+              -97.3589,
+              31.1503
+            ],
+            [
+              -97.3589,
+              31.1509
+            ],
+            [
+              -97.3596,
+              31.1509
+            ],
+            [
+              -97.3596,
+              31.1503
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Temple RSC - Temple TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3624,
+              31.1496
+            ],
+            [
+              -97.3598,
+              31.1496
+            ],
+            [
+              -97.3598,
+              31.1514
+            ],
+            [
+              -97.3624,
+              31.1514
+            ],
+            [
+              -97.3624,
+              31.1496
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Temple RSC - Temple TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3662,
+              31.1534
+            ],
+            [
+              -97.3634,
+              31.1534
+            ],
+            [
+              -97.3634,
+              31.1558
+            ],
+            [
+              -97.3662,
+              31.1558
+            ],
+            [
+              -97.3662,
+              31.1534
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Temple RSC - Temple TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3589,
+              31.1504
+            ],
+            [
+              -97.3572,
+              31.1504
+            ],
+            [
+              -97.3572,
+              31.1516
+            ],
+            [
+              -97.3589,
+              31.1516
+            ],
+            [
+              -97.3589,
+              31.1504
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Temple RSC - Temple TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3642,
+              31.152
+            ],
+            [
+              -97.3634,
+              31.152
+            ],
+            [
+              -97.3634,
+              31.1544
+            ],
+            [
+              -97.3642,
+              31.1544
+            ],
+            [
+              -97.3642,
+              31.152
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Temple RSC - Temple TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.362,
+              31.1522
+            ],
+            [
+              -97.3612,
+              31.1522
+            ],
+            [
+              -97.3612,
+              31.1542
+            ],
+            [
+              -97.362,
+              31.1542
+            ],
+            [
+              -97.362,
+              31.1522
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Temple RSC - Temple TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.359,
+              31.1494
+            ],
+            [
+              -97.3572,
+              31.1494
+            ],
+            [
+              -97.3572,
+              31.1506
+            ],
+            [
+              -97.359,
+              31.1506
+            ],
+            [
+              -97.359,
+              31.1494
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Temple RSC - Temple TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.006,
+              26.1608
+            ],
+            [
+              -97.9995,
+              26.1608
+            ],
+            [
+              -97.9995,
+              26.1658
+            ],
+            [
+              -98.006,
+              26.1658
+            ],
+            [
+              -98.006,
+              26.1608
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Weslaco RSC - Weslaco TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 170,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 60,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.0047,
+              26.1649
+            ],
+            [
+              -98.004,
+              26.1649
+            ],
+            [
+              -98.004,
+              26.1655
+            ],
+            [
+              -98.0047,
+              26.1655
+            ],
+            [
+              -98.0047,
+              26.1649
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Weslaco RSC - Weslaco TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.005,
+              26.1634
+            ],
+            [
+              -98.0036,
+              26.1634
+            ],
+            [
+              -98.0036,
+              26.1654
+            ],
+            [
+              -98.005,
+              26.1654
+            ],
+            [
+              -98.005,
+              26.1634
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Weslaco RSC - Weslaco TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.0046,
+              26.1612
+            ],
+            [
+              -98.0024,
+              26.1612
+            ],
+            [
+              -98.0024,
+              26.1624
+            ],
+            [
+              -98.0046,
+              26.1624
+            ],
+            [
+              -98.0046,
+              26.1612
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Weslaco RSC - Weslaco TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.0036,
+              26.1616
+            ],
+            [
+              -98.0029,
+              26.1616
+            ],
+            [
+              -98.0029,
+              26.1644
+            ],
+            [
+              -98.0036,
+              26.1644
+            ],
+            [
+              -98.0036,
+              26.1616
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Weslaco RSC - Weslaco TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.0046,
+              26.1649
+            ],
+            [
+              -98.0036,
+              26.1649
+            ],
+            [
+              -98.0036,
+              26.1656
+            ],
+            [
+              -98.0046,
+              26.1656
+            ],
+            [
+              -98.0046,
+              26.1649
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Weslaco RSC - Weslaco TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.9675,
+              29.8543
+            ],
+            [
+              -97.9603,
+              29.8543
+            ],
+            [
+              -97.9603,
+              29.8605
+            ],
+            [
+              -97.9675,
+              29.8605
+            ],
+            [
+              -97.9675,
+              29.8543
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B San Marcos RSC - San Marcos TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 85,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.9651,
+              29.8599
+            ],
+            [
+              -97.9644,
+              29.8599
+            ],
+            [
+              -97.9644,
+              29.86025
+            ],
+            [
+              -97.9651,
+              29.86025
+            ],
+            [
+              -97.9651,
+              29.8599
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B San Marcos RSC - San Marcos TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.967,
+              29.8536
+            ],
+            [
+              -97.9645,
+              29.8536
+            ],
+            [
+              -97.9645,
+              29.8553
+            ],
+            [
+              -97.967,
+              29.8553
+            ],
+            [
+              -97.967,
+              29.8536
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B San Marcos RSC - San Marcos TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.9632,
+              29.8577
+            ],
+            [
+              -97.9615,
+              29.8577
+            ],
+            [
+              -97.9615,
+              29.859
+            ],
+            [
+              -97.9632,
+              29.859
+            ],
+            [
+              -97.9632,
+              29.8577
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B San Marcos RSC - San Marcos TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.9642,
+              29.8578
+            ],
+            [
+              -97.962,
+              29.8578
+            ],
+            [
+              -97.962,
+              29.86
+            ],
+            [
+              -97.9642,
+              29.86
+            ],
+            [
+              -97.9642,
+              29.8578
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B San Marcos RSC - San Marcos TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.9632,
+              29.8547
+            ],
+            [
+              -97.961,
+              29.8547
+            ],
+            [
+              -97.961,
+              29.8562
+            ],
+            [
+              -97.9632,
+              29.8562
+            ],
+            [
+              -97.9632,
+              29.8547
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B San Marcos RSC - San Marcos TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.9642,
+              29.8565
+            ],
+            [
+              -97.9628,
+              29.8565
+            ],
+            [
+              -97.9628,
+              29.8582
+            ],
+            [
+              -97.9642,
+              29.8582
+            ],
+            [
+              -97.9642,
+              29.8565
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B San Marcos RSC - San Marcos TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.9651,
+              29.8592
+            ],
+            [
+              -97.9638,
+              29.8592
+            ],
+            [
+              -97.9638,
+              29.8601
+            ],
+            [
+              -97.9651,
+              29.8601
+            ],
+            [
+              -97.9651,
+              29.8592
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B San Marcos RSC - San Marcos TX",
+        "type": "Retail Support Center / Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.3901,
+              29.4843
+            ],
+            [
+              -98.3883,
+              29.4843
+            ],
+            [
+              -98.3883,
+              29.4859
+            ],
+            [
+              -98.3901,
+              29.4859
+            ],
+            [
+              -98.3901,
+              29.4843
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Manufacturing - San Antonio Snack Plant - San Antonio TX",
+        "type": "Manufacturing Plant (Snacks / Chips)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 4.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.3901,
+              29.4856
+            ],
+            [
+              -98.3883,
+              29.4856
+            ],
+            [
+              -98.3883,
+              29.4865
+            ],
+            [
+              -98.3901,
+              29.4865
+            ],
+            [
+              -98.3901,
+              29.4856
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Manufacturing - San Antonio Snack Plant - San Antonio TX",
+        "type": "Manufacturing Plant (Snacks / Chips)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.3901,
+              29.4845
+            ],
+            [
+              -98.3896,
+              29.4845
+            ],
+            [
+              -98.3896,
+              29.4856
+            ],
+            [
+              -98.3901,
+              29.4856
+            ],
+            [
+              -98.3901,
+              29.4845
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Manufacturing - San Antonio Snack Plant - San Antonio TX",
+        "type": "Manufacturing Plant (Snacks / Chips)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.54185,
+              29.8423
+            ],
+            [
+              -95.54,
+              29.8423
+            ],
+            [
+              -95.54,
+              29.8451
+            ],
+            [
+              -95.54185,
+              29.8451
+            ],
+            [
+              -95.54185,
+              29.8423
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Manufacturing - Houston Snack Plant (Genard Road) - Houston TX",
+        "type": "Manufacturing Plant (Snacks / Tortilla Chips)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 14,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.54175,
+              29.8423
+            ],
+            [
+              -95.5403,
+              29.8423
+            ],
+            [
+              -95.5403,
+              29.8432
+            ],
+            [
+              -95.54175,
+              29.8432
+            ],
+            [
+              -95.54175,
+              29.8423
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Manufacturing - Houston Snack Plant (Genard Road) - Houston TX",
+        "type": "Manufacturing Plant (Snacks / Tortilla Chips)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.5406,
+              29.8438
+            ],
+            [
+              -95.54,
+              29.8438
+            ],
+            [
+              -95.54,
+              29.8451
+            ],
+            [
+              -95.5406,
+              29.8451
+            ],
+            [
+              -95.5406,
+              29.8438
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Manufacturing - Houston Snack Plant (Genard Road) - Houston TX",
+        "type": "Manufacturing Plant (Snacks / Tortilla Chips)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.5409,
+              29.8434
+            ],
+            [
+              -95.5402,
+              29.8434
+            ],
+            [
+              -95.5402,
+              29.8447
+            ],
+            [
+              -95.5409,
+              29.8447
+            ],
+            [
+              -95.5409,
+              29.8434
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Manufacturing - Houston Snack Plant (Genard Road) - Houston TX",
+        "type": "Manufacturing Plant (Snacks / Tortilla Chips)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.5405,
+              29.8419
+            ],
+            [
+              -95.536,
+              29.8419
+            ],
+            [
+              -95.536,
+              29.8444
+            ],
+            [
+              -95.5405,
+              29.8444
+            ],
+            [
+              -95.5405,
+              29.8419
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Manufacturing - Houston Milk & Bread Plant - Houston TX",
+        "type": "Manufacturing Plant (Dairy / Bakery)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 0,
+          "buildingCount": 2,
+          "siteAreaAcres": 22,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.5405,
+              29.8423
+            ],
+            [
+              -95.5398,
+              29.8423
+            ],
+            [
+              -95.5398,
+              29.8442
+            ],
+            [
+              -95.5405,
+              29.8442
+            ],
+            [
+              -95.5405,
+              29.8423
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Manufacturing - Houston Milk & Bread Plant - Houston TX",
+        "type": "Manufacturing Plant (Dairy / Bakery)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.5376,
+              29.8432
+            ],
+            [
+              -95.5362,
+              29.8432
+            ],
+            [
+              -95.5362,
+              29.8443
+            ],
+            [
+              -95.5376,
+              29.8443
+            ],
+            [
+              -95.5376,
+              29.8432
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Manufacturing - Houston Milk & Bread Plant - Houston TX",
+        "type": "Manufacturing Plant (Dairy / Bakery)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.5398,
+              29.8426
+            ],
+            [
+              -95.539,
+              29.8426
+            ],
+            [
+              -95.539,
+              29.8441
+            ],
+            [
+              -95.5398,
+              29.8441
+            ],
+            [
+              -95.5398,
+              29.8426
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Manufacturing - Houston Milk & Bread Plant - Houston TX",
+        "type": "Manufacturing Plant (Dairy / Bakery)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.3565,
+              29.68095
+            ],
+            [
+              -95.3531,
+              29.68095
+            ],
+            [
+              -95.3531,
+              29.6836
+            ],
+            [
+              -95.3565,
+              29.6836
+            ],
+            [
+              -95.3565,
+              29.68095
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B eCommerce Fulfillment Center - Houston (Holmes Road) - Houston TX",
+        "type": "E-commerce Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 12,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 14,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.3561,
+              29.6817
+            ],
+            [
+              -95.3556,
+              29.6817
+            ],
+            [
+              -95.3556,
+              29.68215
+            ],
+            [
+              -95.3561,
+              29.68215
+            ],
+            [
+              -95.3561,
+              29.6817
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B eCommerce Fulfillment Center - Houston (Holmes Road) - Houston TX",
+        "type": "E-commerce Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.3548,
+              29.6811
+            ],
+            [
+              -95.3532,
+              29.6811
+            ],
+            [
+              -95.3532,
+              29.6821
+            ],
+            [
+              -95.3548,
+              29.6821
+            ],
+            [
+              -95.3548,
+              29.6811
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B eCommerce Fulfillment Center - Houston (Holmes Road) - Houston TX",
+        "type": "E-commerce Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.3556,
+              29.6813
+            ],
+            [
+              -95.3534,
+              29.6813
+            ],
+            [
+              -95.3534,
+              29.68215
+            ],
+            [
+              -95.3556,
+              29.68215
+            ],
+            [
+              -95.3556,
+              29.6813
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B eCommerce Fulfillment Center - Houston (Holmes Road) - Houston TX",
+        "type": "E-commerce Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.3556,
+              29.6824
+            ],
+            [
+              -95.3535,
+              29.6824
+            ],
+            [
+              -95.3535,
+              29.6834
+            ],
+            [
+              -95.3556,
+              29.6834
+            ],
+            [
+              -95.3556,
+              29.6824
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B eCommerce Fulfillment Center - Houston (Holmes Road) - Houston TX",
+        "type": "E-commerce Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.76135,
+              29.80175
+            ],
+            [
+              -95.7596,
+              29.80175
+            ],
+            [
+              -95.7596,
+              29.804
+            ],
+            [
+              -95.76135,
+              29.804
+            ],
+            [
+              -95.76135,
+              29.80175
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B eCommerce Fulfillment Center - Katy - Katy TX",
+        "type": "E-commerce Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 7,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 10.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.7612,
+              29.80328
+            ],
+            [
+              -95.76095,
+              29.80328
+            ],
+            [
+              -95.76095,
+              29.80356
+            ],
+            [
+              -95.7612,
+              29.80356
+            ],
+            [
+              -95.7612,
+              29.80328
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B eCommerce Fulfillment Center - Katy - Katy TX",
+        "type": "E-commerce Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.76115,
+              29.80255
+            ],
+            [
+              -95.7607,
+              29.80255
+            ],
+            [
+              -95.7607,
+              29.804
+            ],
+            [
+              -95.76115,
+              29.804
+            ],
+            [
+              -95.76115,
+              29.80255
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B eCommerce Fulfillment Center - Katy - Katy TX",
+        "type": "E-commerce Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.76095,
+              29.80255
+            ],
+            [
+              -95.76045,
+              29.80255
+            ],
+            [
+              -95.76045,
+              29.804
+            ],
+            [
+              -95.76095,
+              29.804
+            ],
+            [
+              -95.76095,
+              29.80255
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B eCommerce Fulfillment Center - Katy - Katy TX",
+        "type": "E-commerce Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.7983,
+              33.0538
+            ],
+            [
+              -96.7952,
+              33.0538
+            ],
+            [
+              -96.7952,
+              33.056
+            ],
+            [
+              -96.7983,
+              33.056
+            ],
+            [
+              -96.7983,
+              33.0538
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B eCommerce Fulfillment Center - Plano - Plano TX",
+        "type": "E-commerce Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 3,
+          "trailersVisible": 2,
+          "trailerParkingCapacity": 3,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 17.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.7979,
+              33.0543
+            ],
+            [
+              -96.79755,
+              33.0543
+            ],
+            [
+              -96.79755,
+              33.0549
+            ],
+            [
+              -96.7979,
+              33.0549
+            ],
+            [
+              -96.7979,
+              33.0543
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B eCommerce Fulfillment Center - Plano - Plano TX",
+        "type": "E-commerce Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.2315,
+              29.567
+            ],
+            [
+              -98.2285,
+              29.567
+            ],
+            [
+              -98.2285,
+              29.57
+            ],
+            [
+              -98.2315,
+              29.57
+            ],
+            [
+              -98.2315,
+              29.567
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B eCommerce Fulfillment Center - Cibolo - Cibolo TX",
+        "type": "E-commerce Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 4,
+          "trailersVisible": 1,
+          "trailerParkingCapacity": 4,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 24,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.2296,
+              29.5682
+            ],
+            [
+              -98.2291,
+              29.5682
+            ],
+            [
+              -98.2291,
+              29.5693
+            ],
+            [
+              -98.2296,
+              29.5693
+            ],
+            [
+              -98.2296,
+              29.5682
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B eCommerce Fulfillment Center - Cibolo - Cibolo TX",
+        "type": "E-commerce Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8796,
+              33.2196
+            ],
+            [
+              -96.8768,
+              33.2196
+            ],
+            [
+              -96.8768,
+              33.2222
+            ],
+            [
+              -96.8796,
+              33.2222
+            ],
+            [
+              -96.8796,
+              33.2196
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Frisco Electronic Fulfillment Center (in development) - Frisco TX",
+        "type": "E-commerce Fulfillment Center (planned, construction 2026-2027)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "NONE",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 23,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.072,
+              30.098
+            ],
+            [
+              -96.056,
+              30.098
+            ],
+            [
+              -96.056,
+              30.108
+            ],
+            [
+              -96.072,
+              30.108
+            ],
+            [
+              -96.072,
+              30.098
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "h-e-b",
+        "name": "H-E-B Hempstead Distribution Campus (in development) - Hempstead TX",
+        "type": "Distribution Campus (multi-phase, Phase 1 under construction)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "NONE",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 0,
+          "buildingCount": 0,
+          "siteAreaAcres": 423,
+          "railServed": true
+        }
+      }
+    }
+  ]
+}

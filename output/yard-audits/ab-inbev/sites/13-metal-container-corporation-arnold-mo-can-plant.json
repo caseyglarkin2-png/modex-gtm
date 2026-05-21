@@ -1,0 +1,54 @@
+{
+  "name": "Metal Container Corporation - Arnold MO Can Plant",
+  "type": "Can Manufacturing Plant",
+  "coords": { "lat": 38.43380, "lng": -90.35350 },
+  "geofences": {
+    "perimeter": { "south": 38.43220, "west": -90.35500, "north": 38.43650, "east": -90.35000 },
+    "truckGate": { "south": 38.43400, "west": -90.35460, "north": 38.43460, "east": -90.35390 },
+    "dropYards": [
+      { "south": 38.43380, "west": -90.35280, "north": 38.43620, "east": -90.35020 }
+    ],
+    "dockAprons": [
+      { "south": 38.43280, "west": -90.35420, "north": 38.43400, "east": -90.35280 },
+      { "south": 38.43330, "west": -90.35300, "north": 38.43450, "east": -90.35150 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 1,
+    "buildingCount": 5,
+    "siteAreaAcres": 35.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.43380,-90.35350,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "scale", "dockDoorCount", "railServed", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Confirmed Metal Container Corporation (MCC) can plant, 42 Tenbrook Industrial Park, Arnold MO 63010 - AB-owned, the nation's largest can manufacturing operation. Roster coords were ~1.9 km off (movedMeters 1926). Locked center on the MCC manufacturing complex at 38.43380,-90.35350. Identity confirmed by web research (Yelp, TruckMap, EPA TRI facility 63010MTLCN42TEN) and the large manufacturing complex with extensive trailer yards in Tenbrook Industrial Park.",
+    "truckGate": "No controlled truck gate positively identified. The plant sits inside a multi-tenant industrial park; W-side driveways are open paved access with cars parked, and the NE trailer yard is open dirt/gravel with no fence on the powerline-easement side. A slatted chain-link fence is present along part of the W edge but the driveways appear ungated - classified false (no checkpoint), flagged uncertain.",
+    "guardShack": "No guard booth identified at any plant entrance. A brick structure exists near the W driveway but Street View confirms it belongs to the neighboring St. Louis County Health Department / Animal Control building, not MCC. False.",
+    "drivewayShort": "Open short approach from the industrial-park road to the plant docks.",
+    "dockDoors": "Trailers backed in along the SE and S building faces; ~35 estimated, 25-50 band.",
+    "dropArea": "Large open dirt/gravel trailer yard on the NE side holding ~90 trailers; 50+ band, capacity ~160. dropYard true.",
+    "shipRcvSeparate": "Distinct dock banks on separate building faces.",
+    "railServed": "A rail line runs N-S along the E side of the industrial park; a spur appears to reach the property but a siding directly into the MCC building could not be positively confirmed - flagged uncertain.",
+    "multipleFacilities": "MCC operates a multi-building campus - main can manufacturing hall plus several ancillary/warehouse buildings.",
+    "urbanRural": "Small-town industrial park in Arnold MO between residential neighborhoods and the Meramec River; edge-of-town setting - Rural.",
+    "scale": "No truck scale identified - flagged uncertain."
+  },
+  "method": "deep-audit"
+}

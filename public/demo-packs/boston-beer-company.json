@@ -1,0 +1,499 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:33:24.519Z",
+  "account": {
+    "slug": "boston-beer-company",
+    "displayName": "The Boston Beer Company",
+    "archetype": "beverage",
+    "siteCount": 5,
+    "coverageNote": {
+      "auditedCount": 5,
+      "estimatedFootprint": null,
+      "droppedStubCount": 0,
+      "capHit": false,
+      "note": "Audited all 5 identifiable facilities."
+    }
+  },
+  "research": {
+    "facility_count": 5,
+    "audited_facilities": 5,
+    "source": "yard-audit",
+    "confidence": "verified"
+  },
+  "network": {
+    "bbox": [
+      -84.5242,
+      38.7692,
+      -71.1024,
+      42.3149
+    ],
+    "archetypeMix": {
+      "#6": 1,
+      "#3": 4
+    },
+    "totals": {
+      "dockDoors": 71,
+      "trailerCapacity": 300,
+      "gates": 1,
+      "railServed": 1,
+      "acres": 184
+    },
+    "sites": [
+      {
+        "id": "01-samuel-adams-pennsylvania-brewery",
+        "name": "Samuel Adams Pennsylvania Brewery - Breinigsville PA",
+        "type": "Brewery / production facility (largest in network; includes ~1M sq ft brewery + warehouse space on ~76 acres)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 40.5755,
+          "lng": -75.6285
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.5722,
+            "west": -75.6315,
+            "north": 40.5775,
+            "east": -75.6258
+          },
+          "truckGate": {
+            "south": 40.576,
+            "west": -75.6303,
+            "north": 40.5766,
+            "east": -75.6295
+          },
+          "dropYards": [
+            {
+              "south": 40.573,
+              "west": -75.6303,
+              "north": 40.5748,
+              "east": -75.628
+            },
+            {
+              "south": 40.5746,
+              "west": -75.6313,
+              "north": 40.576,
+              "east": -75.63
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.574,
+              "west": -75.628,
+              "north": 40.5762,
+              "east": -75.6268
+            }
+          ],
+          "staging": {
+            "south": 40.5748,
+            "west": -75.63,
+            "north": 40.5758,
+            "east": -75.6288
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 170,
+          "trailerParkingCapacity": 250,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 70.3,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": true
+        },
+        "dossierExcerpt": "The roster's ROOFTOP geocode (40.5752, -75.624758) landed in a gap between\nbuildings in the Penn Drive industrial park. Probing satellite at z16-z18 around\nthe point identified the correct building ~400 m to the WNW: a large\nmanufacturing complex with the unmistakable signature of a brewery — a dense\ncluster of cylindrical fermentation/bright tanks in the NW, brewing process\nequipment, grain silos, a complex multi-section roof with heavy rooftop\nmechanical equipment, an employee parking lot, and a taproom patio with brick\npavers and picnic landscaping on the NE corner. Web research (Lehigh Valley\nChamber, Yelp, Panjiva import records) confirms Boston Beer / Samuel Adams\noperates the Pennsylvania Brewery at 7880 Penn Dr. The neighboring large white\nbuildings to the SW and SE are separate distribution warehouses, not part of",
+        "mapsUrl": "https://www.google.com/maps/@40.5755,-75.6285,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Driver reviews explicitly describe a manned front gate and check-in; satellite shows a fully fenced perimeter with controlled access. Street View does not reach the brewery's internal truck gate, but the gate is corroborated by web research.",
+          "guardShack": "Driver reviews reference 'guard shack personnel' and 'professional front-gate staff' at this brewery — staffed guard booth confirmed.",
+          "scale": "Driver reviews state 'Samuel Adams Brewery delivers convenient on-site scales, and weigh-ins at the property' — on-site truck scale confirmed.",
+          "multiStep": "Gate check-in plus a separate on-site scale/weigh-in step before docks implies a two-stage process; flagged medium-confidence as the scale house was not isolated in imagery.",
+          "dockDoorCount": "~40 estimated across multiple building faces (east dock apron plus loading along the trailer-yard faces); large brewery with extensive trailers backed in. Approximate.",
+          "dropArea": "Extensive multi-row trailer drop yards on the south and west sides — well over 50 trailer stalls visible.",
+          "fastLaneOpportunity": "Large paved yard aprons and wide internal drives give physical room to add an express/bypass lane.",
+          "shipRcvSeparate": "Loading docks appear on the east building face and separate trailer-yard faces on the west/south — distinct dock clusters.",
+          "multipleFacilities": "Brewery complex is a campus: main brewhouse/process building, tank farm structures, and adjacent warehouse/material buildings on one fenced parcel.",
+          "railServed": "A rail spur curves into the NW of the property with rail cars parked on it (visible in z19 imagery).",
+          "urbanRural": "Penn Drive industrial park at the edge of Breinigsville, surrounded by farmland and I-78; small-town/edge-of-town setting -> Rural.",
+          "trailersVisible": "~170 trailers counted across the south and west drop yards in the captured imagery; approximate."
+        }
+      },
+      {
+        "id": "02-cincinnati-brewery",
+        "name": "Cincinnati Brewery - Cincinnati OH",
+        "type": "Brewery / canning production facility (Over-the-Rhine; $85M canning expansion 2020 quadrupled canning capacity)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dockDoorCount",
+          "trailersVisible",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 39.114,
+          "lng": -84.5226
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.1131,
+            "west": -84.5242,
+            "north": 39.1153,
+            "east": -84.5212
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 39.1142,
+              "west": -84.524,
+              "north": 39.1149,
+              "east": -84.5228
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.1141,
+              "west": -84.5232,
+              "north": 39.1147,
+              "east": -84.5222
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 22,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 0,
+          "buildingCount": 5,
+          "siteAreaAcres": 15.7,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster's ROOFTOP geocode (39.114319, -84.522324) landed directly on the\nbrewery complex. Satellite probing (z17-z20) confirmed a dense industrial\ncomplex with extensive brewing process equipment, tank/silo clusters, and\nmulti-story manufacturing buildings — the unmistakable signature of a production\nbrewery. Web research confirms 1625 Central Parkway is the former Schoenling /\nHudepohl-Schoenling plant, acquired by Boston Beer in 1997 and operated as the\nSamuel Adams Cincinnati Brewery; the company invested $85M in 2020 to quadruple\ncanning capacity. The attached taproom is at 1727 Logan St on the same block.",
+        "mapsUrl": "https://www.google.com/maps/@39.114,-84.5226,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No controlled truck gate found. Street View (2024) along Logan St and the side streets shows the brewery's trailer/dock yards as open paved lots that meet the public city streets directly with no barrier arm or sliding gate. One distant red barrier was seen far down a side street, but the brewery's own dock yards are open.",
+          "guardShack": "No guard booth visible at any yard entrance in 2024 Street View; access is via Over-the-Rhine city streets.",
+          "backupSensitive": "Tight urban site in Over-the-Rhine. Trucks maneuver and back into docks directly off narrow city streets; a queue would block public streets. The 2020 $85M project explicitly funded 'new routes for trucks when on-site,' confirming constrained truck geometry.",
+          "drivewayShort": "No deep internal approach; trucks come straight off city streets into short dock aprons.",
+          "dropYard": "An open paved trailer-storage lot on the NW side holds rows of parked trailers (multiple carriers seen: Pegoda, City Bash) — a real drop yard, though urban and ungated.",
+          "dockDoors": "~16 dock doors estimated along the building faces fronting the trailer yard; tightly packed urban building makes exact count hard. Approximate.",
+          "multipleFacilities": "Multi-building complex occupying roughly two city blocks: main brewhouse with extensive process equipment, canning building, tank structures, and the attached taproom block.",
+          "railServed": "No rail spur runs into the property; urban infill site with no rail access.",
+          "urbanRural": "Located in Over-the-Rhine within the dense urban fabric of Cincinnati -> Urban.",
+          "trailersVisible": "~22 trailers across the captured drop-yard and dock imagery; approximate.",
+          "scale": "No truck scale visible in imagery."
+        }
+      },
+      {
+        "id": "03-milton-brewery-dogfish-head",
+        "name": "Milton Brewery (Dogfish Head) - Milton DE",
+        "type": "Brewery / production facility (Dogfish Head main production; acquired by Boston Beer 2019)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dockDoorCount",
+          "dropArea",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 38.7705,
+          "lng": -75.31
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.7692,
+            "west": -75.312,
+            "north": 38.7714,
+            "east": -75.3082
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 38.7703,
+              "west": -75.3094,
+              "north": 38.7711,
+              "east": -75.3083
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 38.7706,
+              "west": -75.311,
+              "north": 38.7712,
+              "east": -75.31
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 12,
+          "trailersVisible": 3,
+          "trailerParkingCapacity": 15,
+          "truckGateCount": 0,
+          "buildingCount": 2,
+          "siteAreaAcres": 20,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "0-10",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster's ROOFTOP geocode (38.770294, -75.310106) landed directly on the\nbrewery building. Satellite probing (z17-z20) confirmed a large production\nbrewery: extensive outdoor fermentation/storage tank farms, brewing process\nequipment, a dedicated on-site wastewater treatment plant (large circular\nclarifier) on the NE, and a green-painted multi-bay industrial building. Web\nresearch and Dogfish Head's own site confirm 6 Cannery Village Center as the\nMilton main production brewery (acquired by Boston Beer in 2019). Street View\nalso surfaced interior brewery imagery (400-BBL fermentation tanks) and\nDogfish Head's signature whimsical structures, all consistent with this site.",
+        "mapsUrl": "https://www.google.com/maps/@38.7705,-75.31,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No controlled truck gate. The brewery is set within the Cannery Village mixed-use development; trucks reach the operational yard directly from public development roads. Street View (2024) shows open road frontage with employee parking and no barrier arm or sliding gate.",
+          "guardShack": "No guard booth visible at any approach in Street View or satellite.",
+          "shipRcvSeparate": "Confirmed by web research: 'The south side of the building receives the beer line and deliveries of bottles, labels, boxes, and kegs, while packaged products load into trucks along the north' — receiving and shipping run from physically separate building faces.",
+          "dockDoors": "~12 dock doors estimated; the brewery integrates loading into the building and the NE/north operational yard. Exact count is hard from overhead because docks are partly recessed. Approximate, flagged.",
+          "dropArea": "Small NE operational yard handles trucks/tankers; no large marked trailer-drop lot. Few trailers seen — dropArea band 0-10, dropYard FALSE.",
+          "backupSensitive": "Operational yard on the NE side is open paved/gravel with room to maneuver; truck approach is not pinched against a busy public road.",
+          "drivewayShort": "Trucks come off development roads into a short approach to the dock/yard area; no deep multi-truck queue lane.",
+          "multipleFacilities": "Primarily one large brewery building. A separate Dogfish Head shipping/distribution site exists at 25740 Cave Neck Rd, but that is a different facility off-site; this audit is of the production brewery only. multipleFacilities FALSE for this parcel.",
+          "railServed": "No rail spur into the property; site borders residential subdivisions and woods.",
+          "urbanRural": "Edge of the small town of Milton DE, surrounded by residential subdivisions, woods and ponds -> Rural.",
+          "scale": "No truck scale visible.",
+          "trailersVisible": "Only ~3 trailers/trucks visible in captured imagery; this brewery runs lighter on-site trailer staging than the larger network sites."
+        }
+      },
+      {
+        "id": "04-samuel-adams-boston-brewery",
+        "name": "Samuel Adams Boston Brewery - Jamaica Plain, Boston MA",
+        "type": "Brewery / production facility (heritage Jamaica Plain site; smaller footprint, taproom-attached)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 42.3145,
+          "lng": -71.1031
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.3141,
+            "west": -71.1037,
+            "north": 42.3149,
+            "east": -71.1024
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 2,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 0,
+          "buildingCount": 3,
+          "siteAreaAcres": 2.4,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster's ROOFTOP geocode (42.314544, -71.102795) landed on the brewery roof\n(solar-paneled). Apple Maps lists 42.3144329, -71.1031187 — essentially the same\nbuilding, a few meters west. Satellite probing (z18-z20) and Street View\nconfirmed the historic Haffenreffer brewery complex: brick industrial buildings\nwith a cupola, a corrugated-metal warehouse section, and a solar-panel roof.\nWeb research and Boston Beer's own site confirm 30 Germania St as the original\nSamuel Adams Boston Brewery — now the company's research-and-development\nbrewhouse with an attached visitor taproom. Street View interior imagery shows\nfermentation tanks, kegs, and bourbon barrels — a working pilot brewery.",
+        "mapsUrl": "https://www.google.com/maps/@42.3145,-71.1031,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No truck gate. This is a small heritage R&D brewery and taproom inside the historic Haffenreffer brewery complex in Jamaica Plain. Access is via narrow public residential streets; only small surface parking lots are present. No barrier arm, sliding gate, or checkpoint.",
+          "guardShack": "No guard booth — small surface parking lots with painted 'PARKING' markings; visitor taproom entrance with outdoor seating. No security structure.",
+          "backupSensitive": "Extremely tight urban site embedded in Jamaica Plain residential fabric. Any delivery vehicle maneuvers on narrow public streets; a truck would block the street. Backup-sensitive by geometry, though only box trucks/vans realistically serve this site.",
+          "drivewayShort": "No internal approach lane; delivery vehicles come straight off the street.",
+          "dockDoors": "~2 service/loading doors at most; this is an R&D brewhouse and taproom, not a distribution facility. Band 0-10. Approximate.",
+          "dropArea": "No trailer drop area — no trailer parking on the site at all.",
+          "multipleFacilities": "The Boston Beer footprint here is a contiguous brewery+taproom occupancy within one historic complex (shared with other tenants). Treated as a single facility -> FALSE.",
+          "railServed": "No rail; dense urban residential neighborhood.",
+          "urbanRural": "Jamaica Plain, within the dense urban fabric of Boston -> Urban.",
+          "scale": "No truck scale.",
+          "trailersVisible": "No tractor-trailers on site; this heritage R&D brewery does not run a trailer yard. Deliveries are by box truck/van."
+        }
+      },
+      {
+        "id": "05-angry-orchard-innovation-cidery",
+        "name": "Angry Orchard Innovation Cidery - Walden NY",
+        "type": "Cidery / production facility (company-owned 60-acre apple orchard + Innovation Cider House; specialty/small-batch cider production)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "connectivityIssue",
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 41.5901,
+          "lng": -74.224
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.5878,
+            "west": -74.2262,
+            "north": 41.5928,
+            "east": -74.2196
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 1,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 0,
+          "buildingCount": 2,
+          "siteAreaAcres": 75.6,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": true,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster's geocode (41.590198, -74.223894, GEOMETRIC_CENTER) is the parcel\ncenter; the cider house building itself is ~120 m WSW at 41.5901, -74.2240.\nSatellite probing (z16-z20) confirmed a distinctive timber-frame building with\nan octagonal/round-roofed tasting-room section, outdoor seating areas with\npicnic tables and umbrellas, and parking lots — set in the middle of a large\napple orchard (regular rows of trees). Street View surfaced interior imagery of\nthe cider house showing fermentation tanks and barrel-aging in a timber-frame\nhall. Web research (I Love NY, NY Gov, Cider Culture) confirms 2241 Albany Post\nRoad as Angry Orchard's Innovation Cider House — a 15,000 sq ft small-batch\ncidery, tasting room, and hard-cider R&D center on a company-owned 60-acre\norchard, opened 2018 with a $9.1M investment and ~7 full-time employees.",
+        "mapsUrl": "https://www.google.com/maps/@41.5901,-74.224,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No truck gate. The Innovation Cider House sits in the middle of a company-owned apple orchard reached by a long winding private driveway off Albany Post Road. The driveway is open with no barrier arm, sliding gate, or checkpoint. The orchard is ringed by agricultural deer fencing, not a security fence.",
+          "guardShack": "No guard booth — the only structure is the 15,000 sq ft timber-frame cider house with a tasting room and small-batch production. This is a hospitality/destination + R&D facility.",
+          "dockDoors": "At most ~1 service/loading door for ingredient and supply deliveries; no dock apron or dock bank. This is not a distribution facility. Band 0-10, flagged.",
+          "dropArea": "No trailer drop area and no trailer parking on the site.",
+          "drivewayShort": "Truck approach is the private driveway into the cidery; short, single-lane, no queue lane.",
+          "backupSensitive": "Wide open rural site with large parking lots and ample maneuvering room; not pinched against a busy road.",
+          "connectivityIssue": "Rural orchard in Walden NY, set back from Albany Post Road and surrounded by orchard, farmland and woods. Cellular coverage may be moderate; flagged medium-confidence in uncertainFields.",
+          "multipleFacilities": "One main cider house building plus a couple of small ancillary farm structures; treated as a single facility -> FALSE.",
+          "railServed": "No rail; rural orchard.",
+          "urbanRural": "Rural orchard at the edge of the small village of Walden, surrounded by farmland and woods -> Rural.",
+          "scale": "No truck scale.",
+          "trailersVisible": "No tractor-trailers on site. Most Angry Orchard production volume is at the Cincinnati brewery; Walden is a small-batch / R&D / specialty cider and visitor destination, so it does not run a freight trailer yard.",
+          "siteAreaAcres": "Perimeter box approximates the deer-fenced orchard/cidery parcel (~60-acre planted orchard plus grounds); ~75.6 acres as boxed."
+        }
+      }
+    ]
+  }
+}

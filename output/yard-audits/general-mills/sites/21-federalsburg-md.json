@@ -1,0 +1,64 @@
+{
+  "name": "General Mills - Federalsburg MD",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 38.69120, "lng": -75.76540 },
+  "geofences": {
+    "perimeter": { "south": 38.68980, "west": -75.76700, "north": 38.69240, "east": -75.76300 },
+    "truckGate": { "south": 38.69035, "west": -75.76610, "north": 38.69075, "east": -75.76555 },
+    "dropYards": [
+      { "south": 38.69060, "west": -75.76470, "north": 38.69110, "east": -75.76380 }
+    ],
+    "dockAprons": [
+      { "south": 38.69105, "west": -75.76630, "north": 38.69145, "east": -75.76540 }
+    ],
+    "staging": { "south": 38.69035, "west": -75.76700, "north": 38.69100, "east": -75.76600 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 8,
+    "trailersVisible": 4,
+    "trailerParkingCapacity": 15,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 22.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.69120,-75.76540,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": true,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoors", "dropArea", "remoteGs", "dropYard"],
+  "fieldNotes": {
+    "siteIdentity": "Site at 300 Reliance Ave was divested by General Mills to Kraft (2010) and now operates as Eastern Shore Forest Products / an agricultural processing facility (banner sign on the gate). Audited as the physical plant at the roster address.",
+    "truckGate": "Chain-link sliding gate across the entrance drive on the property's south frontage, confirmed in Street View (2023-07) - fenced perimeter with a banner sign at the gate.",
+    "guardShack": "No staffed booth visible at the gate in any Street View heading; gate appears un-staffed (chain-link slide gate only).",
+    "remoteGs": "Gate present but no guard shack - treated as remote/self check-in.",
+    "dockDoors": "Modest dock count along the south face of the main building; estimated 6-10, low confidence from overhead foliage shadow.",
+    "dropArea": "A few trailers parked along the central building face and a small paved drop area; estimated under 10.",
+    "urbanRural": "Small-town edge setting - residential houses directly across Reliance Ave, woodland on three sides, river to the west. Rural.",
+    "buildingCount": "Western building, two central connected buildings, and an eastern dark-roof building - 4 distinct structures plus minor outbuildings.",
+    "siteAreaAcres": "MDE Brownfield record lists the General Mills/Pillsbury property as 21.31 acres; perimeter box yields ~22 acres gross."
+  },
+  "method": "deep-audit"
+}

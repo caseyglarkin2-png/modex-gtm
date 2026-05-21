@@ -1,0 +1,48 @@
+{
+  "name": "Home Depot FDC - Dallas TX",
+  "type": "Flatbed Distribution Center",
+  "coords": { "lat": 32.7415, "lng": -96.9755 },
+  "geofences": {
+    "perimeter": { "south": 32.7385, "west": -96.9800, "north": 32.7445, "east": -96.9720 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 32.7390, "west": -96.9730, "north": 32.7430, "east": -96.9715 }
+    ],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 70.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.7415,-96.9755,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "scale", "dropYard", "multiStep"
+  ],
+  "fieldNotes": {
+    "location": "FACILITY NOT POSITIVELY RESOLVED. Roster geocode (32.747894,-96.923588 / 9222 W Jefferson Blvd) lands on a small empty dirt lot at a road intersection with auto-salvage lots and small commercial buildings — NOT an 800,000 sq ft distribution center. Public sources conflict: SupplierWiki HD DC list ties DC #5824 to 9222/9302 W Jefferson Blvd, while press coverage places HD's first FDC at 3730/4721 Mountain Creek Parkway, Dallas 75236. The coords used here (32.7415,-96.9755) are a best-estimate placement on the largest dock-and-drop-yard warehouse in the Mountain Creek industrial corridor, but it was NOT confirmed as HD-operated. Multiple large warehouses exist in this corridor and the FDC's distinctive drive-through tunnel was not clearly identifiable from satellite. Flag for human review / Google Maps place-ID lookup.",
+    "classification": "All classification values are inferred from the HD FDC archetype (press: 800,000 sq ft drive-through building handling 65-75 flatbeds/day, both-sides loading, 75-mile radius delivery) rather than confirmed imagery of the correct building. HD distribution facilities are universally gated; FDC throughput design implies long internal staging and bypass-lane room — hence fastLaneOpportunity true. dockDoors/dropArea bands reflect FDC scale assumptions.",
+    "yardMetrics": "All counts are FDC-archetype estimates, not measured from confirmed imagery."
+  },
+  "method": "deep-audit"
+}

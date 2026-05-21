@@ -1,0 +1,55 @@
+{
+  "name": "Ford - Livonia Transmission Plant, Livonia MI",
+  "type": "Transmission Plant",
+  "coords": { "lat": 42.37150, "lng": -83.39800 },
+  "geofences": {
+    "perimeter": { "south": 42.36780, "west": -83.40250, "north": 42.37620, "east": -83.39250 },
+    "truckGate": { "south": 42.37380, "west": -83.40220, "north": 42.37470, "east": -83.40080 },
+    "dropYards": [
+      { "south": 42.37430, "west": -83.40050, "north": 42.37520, "east": -83.39700 }
+    ],
+    "dockAprons": [
+      { "south": 42.37420, "west": -83.40050, "north": 42.37500, "east": -83.39850 },
+      { "south": 42.37050, "west": -83.39580, "north": 42.37300, "east": -83.39480 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 14,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 2,
+    "buildingCount": 3,
+    "siteAreaAcres": 190.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.3715,-83.398,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "truckGateCount", "entryLanes", "exitLanes", "dockDoors", "dropArea", "shipRcvSeparate", "preGateStaging", "multiStep"],
+  "fieldNotes": {
+    "site": "Ford Livonia Transmission Plant, 36200 Plymouth Rd, Livonia (Wayne County) MI - the largest transmission plant in North America (~3.3M sq ft, ~182 acres, est. 1952; produces the 6R/10R transmission families). Roster geocode (42.3722,-83.3990, GEOMETRIC_CENTER, moved 1204m) lands within the plant complex; refined center to ~42.3715,-83.3980 on the main plant building cluster. Web research (Wikipedia, Ford Authority) confirms identity and the 182-acre / 3.3M sq ft figures.",
+    "layout": "A large sprawling integrated multi-building plant in dense industrial Livonia; employee parking lots ring the building on the south (Plymouth Rd) and west (Levan Rd); a vehicle test-track oval occupies the east of the property; rail lines run along the north edge with spurs into the plant.",
+    "truckGate": "Marked true - chain-link perimeter fencing is visible along the west (Levan Rd) and other property edges in Street View (2024-2026); a gated truck/material entrance with truck signage and trailers visible inside is confirmed on the west side near the north dock yard. Some campus driveways off Plymouth Rd are open employee access. truckGateCount estimated 2 (flagged uncertain).",
+    "guardShack": "Marked true at medium confidence - a fenced ~3.3M sq ft Ford powertrain plant of this scale conventionally operates staffed gatehouses at controlled entries. A booth structure could not be positively resolved in available imagery; flagged uncertain. remoteGs false as a consequence.",
+    "dockDoors": "Estimated 10-25 dock doors; a clear dock bank with several trailers backed in is visible on the north side, plus dock activity along the east building face. Exact count obscured by roof angle - flagged uncertain.",
+    "dropArea": "North-side truck yard holds an estimated 10-20 trailers amid a large material laydown area (stacked steel racks / returnable containers); banded 10-25. dropYard true.",
+    "shipRcvSeparate": "Marked true (medium confidence) - dock activity is present on physically separate building faces (north dock yard and east building face); flagged uncertain.",
+    "preGateStaging": "Marked false (uncertain) - no clear dedicated pre-gate truck staging apron outside a gate identified; the campus entrances open onto internal roads/parking. Flagged uncertain.",
+    "postGateStaging": "True - the internal road network and paved areas between the gates and the north dock yard provide post-gate queue/holding room.",
+    "railServed": "Rail lines run along the north property edge with spurs serving the north material/dock yard - rail-served.",
+    "multipleFacilities": "True - the plant property includes multiple large interconnected building masses plus detached office/support buildings and a test-track oval; buildingCount 3 (main plant + detached support/office buildings).",
+    "urbanRural": "Livonia is a dense Detroit-metro industrial suburb; the plant is hemmed by continuous industrial development - Urban."
+  },
+  "method": "deep-audit"
+}

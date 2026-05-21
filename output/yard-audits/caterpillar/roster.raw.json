@@ -1,0 +1,238 @@
+{
+  "account": "Caterpillar",
+  "generatedAt": "2026-05-17",
+  "facilityCount": 21,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Caterpillar - Decatur IL Plant",
+      "city": "Decatur",
+      "state": "IL",
+      "type": "Manufacturing plant (mining trucks, large wheel loaders, motor graders)",
+      "address": "1300 N 27th St, Decatur, IL 62526",
+      "lat": 39.8703,
+      "lng": -88.9293,
+      "source": "Dossier (largest NA plant, 797F mining trucks); Herald-Review reporting on the ~3M sq ft Decatur campus"
+    },
+    {
+      "idx": 2,
+      "name": "Caterpillar - East Peoria IL Plant",
+      "city": "East Peoria",
+      "state": "IL",
+      "type": "Manufacturing plant (track-type tractors, components)",
+      "address": "100 NE Adams St / Tractor Dr, East Peoria, IL 61611",
+      "lat": 40.6764,
+      "lng": -89.5709,
+      "source": "Dossier (track-type tractors, wheel loaders, components); Kompass / Caterpillar East Peoria facility listings"
+    },
+    {
+      "idx": 3,
+      "name": "Caterpillar - Mapleton IL Foundry",
+      "city": "Mapleton",
+      "state": "IL",
+      "type": "Manufacturing plant (foundry - engine castings for 3500/3600/C175)",
+      "address": "8826 W US-24, Mapleton, IL 61547",
+      "lat": 40.5611,
+      "lng": -89.7211,
+      "source": "Dossier (foundry, ~500 tons sand/day); Macrae's Blue Book / Waze listing"
+    },
+    {
+      "idx": 4,
+      "name": "Caterpillar - Lafayette IN Large Engine Center",
+      "city": "Lafayette",
+      "state": "IN",
+      "type": "Manufacturing plant (large engines; $725M campus expansion underway)",
+      "address": "3701 South St, Lafayette, IN 47905",
+      "lat": 40.4042,
+      "lng": -86.829,
+      "source": "Dossier (Large Engine Center, 1.6M sq ft); Greater Lafayette Commerce directory"
+    },
+    {
+      "idx": 5,
+      "name": "Caterpillar - Sanford NC Plant",
+      "city": "Sanford",
+      "state": "NC",
+      "type": "Manufacturing plant (BCP - skid-steer, multi-terrain, compact track loaders)",
+      "address": "5000 Womack Rd, Sanford, NC 27330",
+      "lat": 35.518,
+      "lng": -79.113,
+      "source": "Dossier (BCP skid-steer/CTL plant); Yelp / Sanford Area Growth Alliance listing"
+    },
+    {
+      "idx": 6,
+      "name": "Caterpillar - Clayton NC Plant",
+      "city": "Clayton",
+      "state": "NC",
+      "type": "Manufacturing plant (BCP - small wheel loader assembly)",
+      "address": "954 Highway 42 E, Clayton, NC 27527",
+      "lat": 35.6326,
+      "lng": -78.4344,
+      "source": "Dossier (BCP small wheel loaders, Rapp Customer & Training Center); Clayton Chamber directory"
+    },
+    {
+      "idx": 7,
+      "name": "Caterpillar - Mossville IL Engine & Research Campus",
+      "city": "Mossville",
+      "state": "IL",
+      "type": "Manufacturing & research campus (engines, components)",
+      "address": "1900 E Old Galena Rd, Mossville, IL 61552",
+      "lat": 40.8378,
+      "lng": -89.5733,
+      "source": "Dossier (manufacturing & research campus); Dun & Bradstreet / IL State Fire Marshal facility records"
+    },
+    {
+      "idx": 8,
+      "name": "Caterpillar - Aurora (Montgomery) IL Plant",
+      "city": "Montgomery",
+      "state": "IL",
+      "type": "Manufacturing plant (wheel loaders; site reportedly listed for sale)",
+      "address": "325 S Route 31, Montgomery, IL 60538",
+      "lat": 41.7322,
+      "lng": -88.3398,
+      "source": "Dossier (Aurora/Montgomery, large wheel loaders); Glassdoor location listing. Note: Equipment World reported Cat put the production plant on the market - status uncertain"
+    },
+    {
+      "idx": 9,
+      "name": "Caterpillar - Morton IL Global Parts Distribution Center",
+      "city": "Morton",
+      "state": "IL",
+      "type": "Parts distribution center (anchor depot, 3M+ sq ft)",
+      "address": "500 N Morton Ave, Morton, IL 61550",
+      "lat": 40.6189,
+      "lng": -89.4684,
+      "source": "Dossier (anchor depot, original Cat Logistics HQ); Yelp / Morton Connect listing"
+    },
+    {
+      "idx": 10,
+      "name": "Caterpillar - Spokane WA Distribution Center (DC-3)",
+      "city": "Spokane",
+      "state": "WA",
+      "type": "Parts distribution center (~562k-600k sq ft, 24/7 three-shift)",
+      "address": "9610 W Hallett Rd, Spokane, WA 99224",
+      "lat": 47.6204,
+      "lng": -117.647,
+      "source": "Dossier (Spokane DC-3); Chamber of Commerce / MapQuest listing"
+    },
+    {
+      "idx": 11,
+      "name": "Caterpillar - Waco TX Distribution Center",
+      "city": "Waco",
+      "state": "TX",
+      "type": "Parts distribution center (opened 2009)",
+      "address": "2901 Gateway Blvd, Waco, TX 76712",
+      "lat": 31.579,
+      "lng": -97.279,
+      "source": "Dossier (Waco PDC 2009); Greater Waco Chamber directory / Waze"
+    },
+    {
+      "idx": 12,
+      "name": "Caterpillar - Clayton OH Distribution Center (DC-2)",
+      "city": "Clayton",
+      "state": "OH",
+      "type": "Parts distribution center (opened 2011)",
+      "address": "6611 Hoke Rd, Clayton, OH 45315",
+      "lat": 39.8765,
+      "lng": -84.353,
+      "source": "Dossier (Clayton OH PDC 2011); National Design Build Services project page"
+    },
+    {
+      "idx": 13,
+      "name": "Caterpillar - York PA Distribution Center",
+      "city": "York",
+      "state": "PA",
+      "type": "Parts distribution center (~1.1M sq ft, opened 1953)",
+      "address": "600 Memory Ln, York, PA 17402",
+      "lat": 39.9821,
+      "lng": -76.677,
+      "source": "Dossier (York PA depot); York County Economic Alliance listing (600 block of Memory Lane, Springettsbury Twp)"
+    },
+    {
+      "idx": 14,
+      "name": "Caterpillar - Seguin TX Engine Plant",
+      "city": "Seguin",
+      "state": "TX",
+      "type": "Manufacturing plant (diesel & gas engine assembly, ~1.7M sq ft)",
+      "address": "1600 W Kingsbury St, Seguin, TX 78155",
+      "lat": 29.576,
+      "lng": -97.981,
+      "source": "Web research - Equipment World plant tour; Dun & Bradstreet / Seguin Chamber listing"
+    },
+    {
+      "idx": 15,
+      "name": "Caterpillar - Victoria TX Hydraulic Excavator Plant",
+      "city": "Victoria",
+      "state": "TX",
+      "type": "Manufacturing plant (hydraulic / large excavators)",
+      "address": "203 Holt Rd, Victoria, TX 77905",
+      "lat": 28.756,
+      "lng": -96.954,
+      "source": "Web research - Victoria EDC; National Design Build Services / Victoria Chamber listing"
+    },
+    {
+      "idx": 16,
+      "name": "Caterpillar - Athens GA Plant",
+      "city": "Athens",
+      "state": "GA",
+      "type": "Manufacturing plant (BCP - mini hydraulic excavators, small track-type tractors)",
+      "address": "250 Dozer Dr, Athens, GA 30606",
+      "lat": 33.912,
+      "lng": -83.438,
+      "source": "Web research - Athens Area Chamber; Gray Construction project page / Panjiva (250 Dozer Drive)"
+    },
+    {
+      "idx": 17,
+      "name": "Caterpillar - Winston-Salem NC Axle Plant",
+      "city": "Winston-Salem",
+      "state": "NC",
+      "type": "Manufacturing plant (axles, ~850k sq ft on 102 acres)",
+      "address": "4770 Axle Dr, Winston-Salem, NC 27107",
+      "lat": 35.987,
+      "lng": -80.185,
+      "source": "Web research - Gray Construction; Dun & Bradstreet listing (4770 Axle Dr)"
+    },
+    {
+      "idx": 18,
+      "name": "Caterpillar Global Mining - South Milwaukee WI Plant",
+      "city": "South Milwaukee",
+      "state": "WI",
+      "type": "Manufacturing plant (large mining equipment - electric rope shovels, draglines)",
+      "address": "1100 Milwaukee Ave, South Milwaukee, WI 53172",
+      "lat": 42.912,
+      "lng": -87.859,
+      "source": "Web research - South Shore Chamber / Dun & Bradstreet (former Bucyrus site, Caterpillar Global Mining)"
+    },
+    {
+      "idx": 19,
+      "name": "Caterpillar - Pontiac IL Plant",
+      "city": "Pontiac",
+      "state": "IL",
+      "type": "Manufacturing plant (fuel injectors / fuel systems)",
+      "address": "1300 4H Park Rd, Pontiac, IL 61764",
+      "lat": 40.88,
+      "lng": -88.63,
+      "source": "Dossier (Pontiac listed in IL footprint); Yelp / Dun & Bradstreet listing"
+    },
+    {
+      "idx": 20,
+      "name": "Caterpillar Work Tools - Wamego KS Plant & Distribution",
+      "city": "Wamego",
+      "state": "KS",
+      "type": "Manufacturing & distribution facility (machine attachments / work tools)",
+      "address": "400 Work Tools Dr, Wamego, KS 66547",
+      "lat": 39.205,
+      "lng": -96.306,
+      "source": "Web research - Yelp / Economic Development Corp brochure (400 Work Tools Drive)"
+    },
+    {
+      "idx": 21,
+      "name": "Caterpillar - Tejon Ranch (Lebec) CA Parts Distribution Center",
+      "city": "Lebec",
+      "state": "CA",
+      "type": "Parts distribution center (~400k sq ft, opened ~2012)",
+      "address": "Tejon Ranch Commerce Center, Lebec, CA 93243",
+      "lat": 34.997,
+      "lng": -118.945,
+      "source": "Web research - Tejon Ranch Co. press releases / Rental Equipment Register (I-5 & Hwy 99 junction). Exact street address not pinned down - approximate"
+    }
+  ]
+}

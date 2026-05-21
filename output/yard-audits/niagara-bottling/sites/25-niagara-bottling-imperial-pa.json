@@ -1,0 +1,52 @@
+{
+  "name": "Niagara Bottling - Imperial PA (Findlay Township)",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 40.44190, "lng": -80.29597 },
+  "geofences": {
+    "perimeter": { "south": 40.44020, "west": -80.29850, "north": 40.44420, "east": -80.29450 },
+    "truckGate": { "south": 40.44240, "west": -80.29870, "north": 40.44290, "east": -80.29800 },
+    "dropYards": [
+      { "south": 40.44120, "west": -80.29560, "north": 40.44380, "east": -80.29460 }
+    ],
+    "dockAprons": [
+      { "south": 40.44140, "west": -80.29600, "north": 40.44360, "east": -80.29500 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 65,
+    "trailersVisible": 75,
+    "trailerParkingCapacity": 95,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 50.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.44190,-80.29597,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "scale"],
+  "fieldNotes": {
+    "facility": "Niagara Bottling Imperial PA, 201 Solar Dr, Findlay Industrial Park near Pittsburgh International Airport. ~$64M plant. Confirmed via web search and Street View: building with blue Niagara branding and bulk water silos.",
+    "truckGate": "No controlled truck gate. Street View (2025-05) at the entrance shows the driveway running straight from the public road into the property with only directional signs and a speed-limit sign - no barrier arm, no sliding gate, no guard booth at the road or along the approach.",
+    "guardShack": "No guard booth identified at the entrance or along the truck route. A small structure near the perimeter-road/dock-yard junction is not a clear staffed booth; flagged uncertain.",
+    "dockDoors": "Long continuous dock face along the E/NE side with trailers backed in plus a full drop row; estimate ~65 doors, 50+ band.",
+    "dropArea": "Heavy trailer drop yard along the E face with multiple rows of parked trailers without tractors; firmly 50+.",
+    "dropYard": "Dedicated trailer-storage rows in the E dock yard, separate from active dock staging.",
+    "postGateStaging": "Wide paved truck route / apron inside the property before the dock doors provides queue/holding space.",
+    "scale": "No truck scale clearly identified; flagged uncertain.",
+    "urbanRural": "Findlay Industrial Park near Pittsburgh airport sits in a hilly, partly wooded area away from dense metro fabric; judged Rural per the small-town-industrial tiebreak.",
+    "siteAreaAcres": "Derived from perimeter box (~445m N-S x ~340m E-W); ~50 acres."
+  },
+  "method": "deep-audit"
+}

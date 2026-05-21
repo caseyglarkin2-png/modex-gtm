@@ -1,0 +1,51 @@
+{
+  "name": "K-C Logan Township Distribution Center - Logan Township NJ",
+  "type": "Distribution center (~600,000 sq ft, LEED-certified)",
+  "coords": { "lat": 39.7385, "lng": -75.4135 },
+  "geofences": {
+    "perimeter": { "south": 39.7340, "west": -75.4162, "north": 39.7423, "east": -75.4108 },
+    "truckGate": { "south": 39.7411, "west": -75.4123, "north": 39.7420, "east": -75.4108 },
+    "dropYards": [
+      { "south": 39.7340, "west": -75.4150, "north": 39.7356, "east": -75.4108 },
+      { "south": 39.7356, "west": -75.4118, "north": 39.7415, "east": -75.4108 }
+    ],
+    "dockAprons": [
+      { "south": 39.7352, "west": -75.4122, "north": 39.7418, "east": -75.4112 },
+      { "south": 39.7352, "west": -75.4150, "north": 39.7418, "east": -75.4140 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110, "trailersVisible": 130, "trailerParkingCapacity": 150,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 101.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.7385,-75.4135,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "location": "Roster coordinates (39.747335, -75.310914) were wrong - they fell in the Bridgeport residential village ~9 km NE of the site. The K-C Logan Township DC is documented by its general contractor (Blue Rock Construction) as 'Building GHI at LogistiCenter at Logan', 2651 Oldmans Creek Rd, Logan Township NJ - a 599,500 sq ft, LEED-certified 2007 Dermody Properties build. Locked the large single-tenant white-roofed warehouse at ~39.7385,-75.4135 inside the LogistiCenter at Logan / Logan North logistics park, off I-295.",
+    "tenancy": "Multiple sources indicate Amazon later leased ~1M sq ft at 2651 Oldmans Creek Rd (Amazon FC 'TEB3'). The building audited here is that DC structure regardless of current tenant - it is the facility the roster targets.",
+    "truckGate": "No barrier arm, sliding gate or guard booth visible at the property line in any satellite or Street View imagery (Street View 2019 and 2026-04). The building fronts a public road with open driveways and only employee-parking landscaping out front. A blue 'TRUCK ENTRANCE' directional sign marks the truck route but the entrance itself is uncontrolled. Set truckGate false; guardShack false; remoteGs false. Low confidence - a manned booth could exist deeper in the yard out of Street View reach.",
+    "docks": "Dock doors run nearly continuously along BOTH long faces (east and west) of the ~450-510m building, with trailers backed in along each. Total well into the 50+ band; dockDoorCount ~110 is an honest overhead estimate (loose).",
+    "shipRcvSeparate": "True - dock banks on two physically separate (opposite) building faces, consistent with split shipping/receiving.",
+    "dropYard": "Dedicated trailer-storage lanes south of the building and along the east yard, full of parked trailers without tractors - dropArea 50+.",
+    "drivewayLong": "Deep paved truck approach from the public road into the dock yard, easily 3+ trucks of stacking room. postGateStaging true (paved holding room inside the property before the docks).",
+    "fastLaneOpportunity": "Wide paved yard aprons and a generous gate apron leave ample room to add a bypass/express lane.",
+    "urbanRural": "Class-A logistics park (LogistiCenter at Logan) surrounded by farmland and other big-box warehouses on the rural SW edge of Gloucester County - edge-of-town industrial. Per rubric, classified Rural.",
+    "siteAreaAcres": "~101 acres derived from the perimeter box; the building footprint alone is roughly 600k-1M sq ft.",
+    "buildingCount": "1 - the single DC structure. Other warehouses nearby are separate properties, not part of this campus."
+  },
+  "method": "deep-audit"
+}

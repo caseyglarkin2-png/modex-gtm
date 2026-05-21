@@ -1,0 +1,3310 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:37:47.148Z",
+  "account": {
+    "slug": "fedex",
+    "displayName": "FedEx",
+    "archetype": "logistics-carrier",
+    "siteCount": 30,
+    "coverageNote": {
+      "auditedCount": 30,
+      "estimatedFootprint": 1800,
+      "droppedStubCount": 0,
+      "capHit": true,
+      "note": "FedEx operates ~1,800 freight/parcel terminals in North America; we audited 30 of the largest by throughput. The other facilities follow the same archetype distribution and are addressable on the same protocol."
+    }
+  },
+  "research": {
+    "facility_count": 30,
+    "audited_facilities": 30,
+    "source": "yard-audit",
+    "confidence": "verified",
+    "caveats": [
+      "FedEx Ground Hub - Hagerstown MD: audit note mentions 'closed'",
+      "FedEx Ground Dallas Hub - Hutchins TX: audit note mentions 'closed'",
+      "FedEx Ground Hub - Keasbey NJ: audit note mentions 'closed'",
+      "FedEx Freight Hub - Hodgkins IL (Chicago): audit note mentions 'closed'"
+    ]
+  },
+  "network": {
+    "bbox": [
+      -122.223,
+      25.79098,
+      -74.1678,
+      41.7935
+    ],
+    "archetypeMix": {
+      "#6": 7,
+      "#9": 8,
+      "#7": 10,
+      "#1": 1,
+      "#3": 4
+    },
+    "totals": {
+      "dockDoors": 4115,
+      "trailerCapacity": 9810,
+      "gates": 32,
+      "railServed": 0,
+      "acres": 3238.9
+    },
+    "sites": [
+      {
+        "id": "01-fedex-express-world-hub-memphis-tn",
+        "name": "FedEx Express World Hub - Memphis TN",
+        "type": "Express national/global superhub (air-to-ground sort)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 35.061887,
+          "lng": -89.960429
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.051,
+            "west": -89.976,
+            "north": 35.069,
+            "east": -89.95
+          },
+          "truckGate": {
+            "south": 35.064,
+            "west": -89.9544,
+            "north": 35.065,
+            "east": -89.9534
+          },
+          "dropYards": [
+            {
+              "south": 35.0652,
+              "west": -89.9631,
+              "north": 35.0664,
+              "east": -89.9608
+            },
+            {
+              "south": 35.06,
+              "west": -89.9535,
+              "north": 35.0625,
+              "east": -89.9505
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.0595,
+              "west": -89.9655,
+              "north": 35.0625,
+              "east": -89.959
+            }
+          ],
+          "staging": {
+            "south": 35.0644,
+            "west": -89.9556,
+            "north": 35.0656,
+            "east": -89.9536
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 300,
+          "truckGateCount": 2,
+          "buildingCount": 8,
+          "siteAreaAcres": 940,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 3,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": true
+        },
+        "dossierExcerpt": "- Coordinates: 35.061887, -89.960429 (roster point, on the main sort building)\n- Address: 2903 Sprankle Ave, Memphis, TN 38118\n- Confirmed: Roster point lands squarely on the FedEx Express World Hub (\"Superhub\"), the company's largest sort facility, on the west side of Memphis International Airport. Satellite imagery shows multiple massive sort buildings, 100+ freighter aircraft parking positions (numbered airside gates 209/210/259/260/679...), and acres of ULD/air-container staging. Web research corroborates: FedEx newsroom describes it as the largest sort facility in the global network — ~940 acres, 171 aircraft gates, 84 miles of conveyor, 13,000 team members, with a new 1.3M sq ft automated sort facility added in 2024.",
+        "mapsUrl": "https://www.google.com/maps/@35.061887,-89.960429,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "siteConfirmation": "Roster point lands on the main sort building of the FedEx Express World Hub on the west side of Memphis International Airport. Confirmed via satellite (multiple sort buildings, 100+ parked freighter aircraft positions, ULD/container staging acres) and web research (FedEx newsroom: largest sort facility in the global network, ~940 acres, 171 aircraft gates, 13,000 team members, 84 miles of conveyor).",
+          "truckGate": "Hardened secured campus. FedEx Main Screening Facility (Flintco-built, 44,000 SF) is the main controlled point of entry. Street View shows steel anti-ram palisade fencing with outriggers, chain-link with coiled razor wire, Jersey-barrier lane channelization on internal roads, and a canopied vehicle checkpoint with multiple lanes.",
+          "guardShack": "Dedicated 44,000 SF Main Screening Facility staffed checkpoint = staffed guard facility (well beyond a simple booth). Multiple manned checkpoints exist for the 5-mile perimeter.",
+          "multiStep": "Vehicle screening checkpoint at perimeter, then secondary controlled access into airside operations areas — multi-stage controlled access.",
+          "dockDoorCount": "This is an air-to-ground hub; primary cargo transfer is aircraft-side. Landside truck docks for road feeder vehicles exist but are dispersed across sort buildings; door count is an estimate from imagery (50+ band).",
+          "dropArea": "Extensive road feeder vehicle / trailer staging visible between sort buildings and in landside lots; well into 50+ band. Counts approximate.",
+          "multipleFacilities": "Campus of 8+ large buildings: original superhub sort building, new 1.3M sq ft automated sort facility (2024), maintenance hangars, screening facility, support/office buildings.",
+          "siteAreaAcres": "940 acres per FedEx newsroom; perimeter box is an approximation of the core landside operations footprint and the published campus figure was used.",
+          "railServed": "No rail spur into the property; airside facility."
+        }
+      },
+      {
+        "id": "02-fedex-express-national-hub-indianapolis-in",
+        "name": "FedEx Express National Hub - Indianapolis IN",
+        "type": "Express national hub (2.4M sq ft, second-largest cargo facility)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "entryLanes",
+          "exitLanes",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 39.715335,
+          "lng": -86.277815
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.7085,
+            "west": -86.287,
+            "north": 39.724,
+            "east": -86.268
+          },
+          "truckGate": {
+            "south": 39.7105,
+            "west": -86.2733,
+            "north": 39.7116,
+            "east": -86.2721
+          },
+          "dropYards": [
+            {
+              "south": 39.7135,
+              "west": -86.278,
+              "north": 39.7155,
+              "east": -86.275
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.7125,
+              "west": -86.2795,
+              "north": 39.716,
+              "east": -86.2745
+            }
+          ],
+          "staging": {
+            "south": 39.71,
+            "west": -86.2745,
+            "north": 39.712,
+            "east": -86.2725
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 50,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 220,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Coordinates: 39.715335, -86.277815 (roster point, on the main sort building)\n- Address: 6648 S Perimeter Rd, Indianapolis, IN 46241\n- Confirmed: Roster point lands on the main sort building of the FedEx Express National Hub at Indianapolis International Airport. Satellite shows a single very large dark-roofed sort building with airside aircraft parking positions and extensive ULD/air-container staging. Web research corroborates: built 1988, the second-largest cargo facility in the FedEx Express system, ~6,000 employees on 24/7 operations, ~650 flights/month.",
+        "mapsUrl": "https://www.google.com/maps/@39.715335,-86.277815,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "siteConfirmation": "Roster point lands on the main sort building of the FedEx Express National Hub at Indianapolis International Airport. Confirmed via satellite (one very large dark-roofed sort building with airside aircraft positions and extensive ULD/air-container staging) and web research (Encyclopedia of Indianapolis / FedEx aviation page: built 1988, second-largest cargo facility in the FedEx Express system, ~6,000 employees, ~650 flights/month).",
+          "truckGate": "Web research explicitly references a 'Truck Gate' and a 'South Perimeter Security Station' controlling access to the hub. The facility sits entirely inside the secured airport perimeter; the support/parking area connects to the airside hub only through the staffed security station. Internal roads have no public Street View coverage (secured property).",
+          "guardShack": "The South Perimeter Security Station is a staffed checkpoint controlling vehicle entry into the secured airside hub.",
+          "remoteGs": "False — entry is staffed/screened, not kiosk-only.",
+          "dockDoors": "Air-to-ground hub; landside truck/road-feeder docks line the sort building face. Door count is an estimate from imagery, well into the 50+ band.",
+          "dropArea": "Z20 imagery shows hundreds of ULD air containers and dollies plus straight trucks and trailers staged along the landside dock face; trailer (no-tractor) drop stalls estimated in the 25-50 band.",
+          "multipleFacilities": "Campus includes the main sort building, several support/office buildings, and maintenance structures.",
+          "siteAreaAcres": "Perimeter box approximates the core hub landside+building footprint; ~220 acres is an estimate, flagged uncertain.",
+          "entryLanes": "Lane counts at the security station could not be directly observed (no Street View on internal roads); estimated.",
+          "railServed": "No rail spur into the property; airside facility."
+        }
+      },
+      {
+        "id": "03-fedex-express-regional-hub-fort-worth-tx",
+        "name": "FedEx Express Regional Hub - Fort Worth TX",
+        "type": "Express regional hub (Fort Worth Alliance Airport)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "siteAreaAcres",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 32.99465,
+          "lng": -97.3129
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.9902,
+            "west": -97.3176,
+            "north": 33.0005,
+            "east": -97.3076
+          },
+          "truckGate": {
+            "south": 32.99175,
+            "west": -97.3096,
+            "north": 32.9925,
+            "east": -97.30855
+          },
+          "dropYards": [
+            {
+              "south": 32.9918,
+              "west": -97.3128,
+              "north": 32.9936,
+              "east": -97.3105
+            },
+            {
+              "south": 32.99,
+              "west": -97.3132,
+              "north": 32.9913,
+              "east": -97.3118
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.991,
+              "west": -97.3142,
+              "north": 32.9928,
+              "east": -97.3123
+            }
+          ],
+          "staging": {
+            "south": 32.99155,
+            "west": -97.3096,
+            "north": 32.9926,
+            "east": -97.3076
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 95,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: FedEx Express Regional Hub - Fort Worth TX\n- Type: Express regional hub (Fort Worth Alliance Airport)\n- Roster address: 2851 Alliance Gateway Fwy, Fort Worth, TX 76177 (incorrect — see below)\n- Resolved location: 2001 World Wide Dr, Fort Worth, TX 76177 — east cargo apron of Perot Field / Fort Worth Alliance Airport\n- Locked center: 32.994650, -97.312900",
+        "mapsUrl": "https://www.google.com/maps/@32.994650,-97.312900,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "siteConfirmation": "Roster address (2851 Alliance Gateway Fwy) was RANGE_INTERPOLATED onto a residential block ~3 km south of the actual hub - the supplied coords were wrong. Web research established the FedEx Express Fort Worth Hub is at 2001 World Wide Dr, on the east cargo apron of Perot Field / Fort Worth Alliance Airport. Satellite confirmed a large white-roofed sort building with aircraft at airside positions, a second large sort/cross-dock building, an office building, and an extensive ULD/trailer drop yard. Locked center 32.99465, -97.31290. FedEx Express opened the Fort Worth Hub in 1997; ~600,000 sq ft, 800+ employees, ~100,000 packages/day on two sorts, ~650 flights/month.",
+          "truckGate": "Z20 satellite at 32.9921,-97.3092 shows a controlled checkpoint where the public access road enters the hub: a small guard booth flanked by sliding gates, perimeter fencing, and lane striping. Street View (2016/2021 panos) confirms a manned gate with a green-windowed guard booth, an overhead gate canopy/barrier frame, multiple in/out lanes, and a 'FedEx Security' sign on the booth. Definitive controlled truck gate.",
+          "guardShack": "Street View clearly shows a small 1-vehicle-footprint booth with windows on multiple sides beside the entrance lane, signed for FedEx Security - a staffed guard shack.",
+          "remoteGs": "False - entrance is staffed, not kiosk/call-box only.",
+          "preGateStaging": "Wide paved apron outside the gate on the public access road provides truck queue/staging room before the checkpoint.",
+          "postGateStaging": "Large paved area inside the gate between the checkpoint and the dock/ramp area allows trucks to hold before docking.",
+          "drivewayLong": "The gate-to-dock approach is long and wide - easily holds a queue of 3+ trucks.",
+          "fastLaneOpportunity": "Gate apron is wide with multiple striped lanes and unused paved width - physical room for an express/bypass lane.",
+          "dockDoors": "Truck/road-feeder docks line the south (second) building face; trailers seen backed in. Door count estimated in the 25-50 band from overhead imagery; flagged uncertain.",
+          "dropArea": "Z20 imagery between the buildings shows dozens of trailers/ULD containers parked in long rows in a dedicated drop yard - well into the 50+ band.",
+          "multipleFacilities": "Campus has the main sort building, a second large sort/cross-dock building, an office building, and support structures - a multi-building campus.",
+          "dropYard": "Dedicated trailer/container storage lot full of parked trailers between the two main buildings.",
+          "shipRcvSeparate": "Hub operation (air-to-ground sort); docks are not split into clearly separate ship vs receive banks on different faces - judged false.",
+          "scale": "No truck scale / weigh platform observed in the truck path.",
+          "railServed": "No rail spur into the property; airside cargo facility.",
+          "siteAreaAcres": "Perimeter box approximates the core landside hub footprint (buildings + drop yard + gate apron); ~95 acres is an estimate, flagged uncertain.",
+          "entryLanes": "Street View shows multiple striped lanes through the checkpoint; ~2 inbound / 2 outbound estimated, flagged uncertain.",
+          "urbanRural": "Inside the AllianceTexas industrial development at a major-metro airport (DFW); Urban."
+        }
+      },
+      {
+        "id": "04-fedex-express-regional-hub-newark-nj",
+        "name": "FedEx Express Regional Hub - Newark NJ",
+        "type": "Express regional hub (Newark Liberty International Airport)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "entryLanes",
+          "exitLanes",
+          "siteAreaAcres",
+          "drivewayShort",
+          "backupSensitive",
+          "postGateStaging"
+        ],
+        "center": {
+          "lat": 40.7068,
+          "lng": -74.171
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.7035,
+            "west": -74.1748,
+            "north": 40.7096,
+            "east": -74.1678
+          },
+          "truckGate": {
+            "south": 40.7075,
+            "west": -74.1732,
+            "north": 40.7083,
+            "east": -74.172
+          },
+          "dropYards": [
+            {
+              "south": 40.705,
+              "west": -74.1735,
+              "north": 40.7068,
+              "east": -74.1718
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.704,
+              "west": -74.1744,
+              "north": 40.7068,
+              "east": -74.1728
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 45,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: FedEx Express Regional Hub - Newark NJ\n- Type: Express regional hub (Newark Liberty International Airport)\n- Roster address: 350 Brewster Rd, Newark, NJ 07114 (the EWR airport address)\n- Resolved location: FedEx Cargo Complex, EWR North Cargo Area —\n  Buildings 347 / 156 / 155, 155 Earhart Dr, Newark, NJ 07114\n- Locked center: 40.706800, -74.171000",
+        "mapsUrl": "https://www.google.com/maps/@40.706800,-74.171000,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "siteConfirmation": "Roster coordinate (40.707912, -74.171912) was RANGE_INTERPOLATED from 350 Brewster Rd (the EWR airport address) and lands directly on the FedEx Express Newark cargo complex in the EWR North Cargo Area. Web research confirms the FedEx Cargo Complex is a ~$60M sort facility occupying Buildings 347, 156 and most of 155 at 155 Earhart Dr, on the grounds of Newark Liberty International Airport; FedEx Express opened its second hub at EWR in 1986. Satellite confirms a cargo building cluster with FedEx-livery freighter aircraft (blue tails) parked at multiple airside positions, an airside ramp with ULD/dolly staging, landside cargo buildings with truck docks, and employee parking. Locked center 40.70680, -74.17100.",
+          "truckGate": "The FedEx complex sits entirely inside the secured EWR airport perimeter; the entire cargo area is access-controlled by the Port Authority, and the airside fence line between the landside cargo buildings and the aircraft ramp is a hard security boundary with controlled vehicle gates. A controlled truck gate is inferred from this secured-airport context rather than directly imaged - flagged uncertain. Public Street View does not reach the FedEx-specific access point.",
+          "guardShack": "Airport cargo facilities of this type are staffed/guarded at the secured access point; guardShack inferred true at medium confidence, flagged uncertain.",
+          "remoteGs": "False given an inferred staffed entry; flagged uncertain.",
+          "postGateStaging": "Paved landside area between the cargo-area road and the dock face allows trucks to hold; inferred, flagged uncertain.",
+          "dockDoors": "Landside faces of the cargo buildings show angled/perpendicular truck dock bays; estimated 25-50 doors band from imagery, flagged uncertain.",
+          "dropArea": "Some trailers and a trailer staging strip visible on the landside; estimated 10-25 band, flagged uncertain.",
+          "drivewayShort": "EWR cargo-area roads are tight with limited dedicated truck queue space at any one building; short approach inferred, flagged uncertain.",
+          "backupSensitive": "Tight airport cargo-area geometry - a truck queue would choke the shared internal cargo-area road; backupSensitive inferred true, flagged uncertain.",
+          "multipleFacilities": "FedEx complex spans multiple buildings (347, 156, 155) plus support structures - a multi-building campus.",
+          "dropYard": "Trailers/ULD staging on the landside function as a drop area.",
+          "shipRcvSeparate": "Air-to-ground hub; docks not clearly split into separate ship vs receive banks - false.",
+          "scale": "No truck scale observed.",
+          "railServed": "No rail spur into the property; airside cargo facility.",
+          "siteAreaAcres": "Perimeter box approximates the FedEx cargo complex footprint within the North Cargo Area; ~45 acres estimate, flagged uncertain.",
+          "urbanRural": "Major-metro airport (Newark) in dense NY/NJ fabric; Urban.",
+          "confidenceNote": "Medium overall: facility positively identified, but truck-gate / guard-shack specifics could not be directly imaged because the FedEx access point is inside the secured airport and not covered by public Street View."
+        }
+      },
+      {
+        "id": "05-fedex-express-regional-hub-oakland-ca",
+        "name": "FedEx Express Regional Hub - Oakland CA",
+        "type": "Express regional hub (Oakland International Airport)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "entryLanes",
+          "exitLanes",
+          "siteAreaAcres",
+          "postGateStaging",
+          "drivewayLong"
+        ],
+        "center": {
+          "lat": 37.720113,
+          "lng": -122.219569
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 37.716,
+            "west": -122.223,
+            "north": 37.7235,
+            "east": -122.214
+          },
+          "truckGate": {
+            "south": 37.7227,
+            "west": -122.2181,
+            "north": 37.7236,
+            "east": -122.2168
+          },
+          "dropYards": [
+            {
+              "south": 37.7185,
+              "west": -122.221,
+              "north": 37.7205,
+              "east": -122.219
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 37.7195,
+              "west": -122.219,
+              "north": 37.7212,
+              "east": -122.2175
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 70,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: FedEx Express Regional Hub - Oakland CA\n- Type: Express regional hub (Oakland International Airport)\n- Roster address: 8455 Pardee Dr, Oakland, CA 94621 (a FedEx Ship Center,\n  NOT the hub — see below)\n- Resolved location: FedEx Express Oakland Regional Hub, 1 Sally Ride Way,\n  Oakland, CA 94621 — airside at Oakland International Airport\n- Locked center: 37.720113, -122.219569",
+        "mapsUrl": "https://www.google.com/maps/@37.720113,-122.219569,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "siteConfirmation": "Roster address (8455 Pardee Dr) is a FedEx Ship Center - a customer-facing retail/pickup site about 2 miles from the airport, NOT the regional hub. Web research established the FedEx Express Oakland Regional Hub (the West Coast hub) is at 1 Sally Ride Way, Oakland CA 94621, on the airside at Oakland International Airport - a ~233,000 sq ft air/ground/trucking sort center able to sort ~12,000 packages/day for the Bay Area. Satellite at 37.72011,-122.21957 confirmed multiple FedEx sort buildings, an aircraft maintenance hangar, FedEx-livery freighter aircraft (purple/red tails) at airside positions, ULD/dolly staging, and rooftop solar. Street View confirmed a barbed-wire secured airport perimeter with 'Restricted Area / Authorized Personnel Only' signage. Locked center 37.72011, -122.21957.",
+          "truckGate": "The FedEx hub sits entirely inside the secured OAK airport perimeter - Street View at the perimeter road shows barbed-wire chain-link fence and a 'No Trespassing / Restricted Area / Authorized Personnel' sign. Truck access into the hub is through a controlled airport security gate off Air Cargo Way. A controlled truck gate is inferred from this secured-airport context; the FedEx-specific gate could not be directly imaged (no public Street View on the internal hub roads). Flagged uncertain.",
+          "guardShack": "Secured-airport air-cargo hubs of this scale are staffed/guarded at the controlled access point; guardShack inferred true at medium confidence, flagged uncertain.",
+          "remoteGs": "False given an inferred staffed entry; flagged uncertain.",
+          "postGateStaging": "Large paved areas inside the secured fence between the access road and the dock/ramp allow trucks to hold; inferred, flagged uncertain.",
+          "drivewayLong": "Wide internal airside roads and apron give a long approach with room for a 3+ truck queue; inferred, flagged uncertain.",
+          "dockDoors": "Z20 imagery shows trailers backed into dock doors along the building landside face plus ULD container rows; estimated 25-50 doors band, flagged uncertain.",
+          "dropArea": "Trailers and tractors parked along internal roads and ULD staging rows; estimated 25-50 band, flagged uncertain.",
+          "multipleFacilities": "Campus includes multiple sort buildings, an aircraft maintenance hangar, and support structures - a multi-building hub.",
+          "dropYard": "Dedicated trailer/ULD staging areas on the landside function as a drop yard.",
+          "shipRcvSeparate": "Air-to-ground hub; docks not clearly split into separate ship vs receive banks - false.",
+          "scale": "No truck scale observed in the truck path.",
+          "railServed": "No rail spur into the property; airside cargo facility.",
+          "siteAreaAcres": "Perimeter box approximates the FedEx hub footprint (buildings + ramp + landside); ~70 acres estimate, flagged uncertain.",
+          "urbanRural": "Major-metro airport (Oakland) in the dense Bay Area; Urban.",
+          "confidenceNote": "Medium overall: facility positively identified (FedEx freighters on the ramp are conclusive), but the truck-gate and guard-shack specifics could not be directly imaged - the FedEx access point is inside the secured airport and not covered by public Street View. Gate/guard-shack calls are inferred and flagged."
+        }
+      },
+      {
+        "id": "06-fedex-express-regional-hub-greensboro-nc",
+        "name": "FedEx Express Regional Hub - Greensboro NC",
+        "type": "Express regional hub (Piedmont Triad / Mid-Atlantic)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "multiStep",
+          "dockDoors",
+          "dropArea"
+        ],
+        "center": {
+          "lat": 36.1058,
+          "lng": -79.9382
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 36.102,
+            "west": -79.942,
+            "north": 36.11,
+            "east": -79.9335
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 36.1042,
+              "west": -79.9392,
+              "north": 36.1072,
+              "east": -79.938
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 168,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": true
+        },
+        "dossierExcerpt": "Type: Express regional hub (Piedmont Triad / Mid-Atlantic air-cargo sort)\nResolved coordinates: 36.10580, -79.93820\nConfidence: medium",
+        "mapsUrl": "https://www.google.com/maps/@36.10580,-79.93820,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "FedEx Express Mid-Atlantic regional air hub on the secured airside of Piedmont Triad International Airport (GSO), Greensboro NC. Roster geocode (36.1043,-79.9838) landed ~4 km west on unrelated warehouses; corrected via web research (hub opened June 2009, ~1M sq ft, 24,000 pkg/hr) and satellite confirmation of the main sort building plus aircraft apron.",
+          "truckGate": "No street-level imagery of a dedicated FedEx truck gate is available — the hub sits inside the airport AOA, so vehicle access is controlled at airport-wide SIDA security checkpoints rather than a single FedEx booth. Marked truckGate=true (controlled access exists) but this is an airport-security control, not a typical yard gate; flagged uncertain.",
+          "guardShack": "No discrete FedEx guard booth identified at a property entrance in satellite imagery; airport AOA access is badge/credential controlled, hence remoteGs=true rather than guardShack.",
+          "multiStep": "Airport access (perimeter security) followed by FedEx ramp control implies a multi-stage entry, but no second booth is directly visible — flagged uncertain.",
+          "dockDoors": "Counted ~25-50 landside cargo dock positions along the southwest face of the sort building (canopied bays); airside cargo wings handle container-to-aircraft transfer. Estimate from overhead imagery.",
+          "dropArea": "Feeder trailers parked along apron/dock edge; ~10-25 trailer positions visible. Approximate.",
+          "multipleFacilities": "Campus has the main sort building, a separate NW office building, and airside cargo wings — multiple distinct structures.",
+          "scale": "No truck scale visible on airport property.",
+          "railServed": "No rail spur enters the property.",
+          "streetView": "Available Street View on adjacent airport service roads (2015/2023 panos) shows only open field/airport land; the hub interior is not street-accessible."
+        }
+      },
+      {
+        "id": "07-fedex-express-regional-hub-ontario-ca",
+        "name": "FedEx Express Regional Hub - Ontario CA",
+        "type": "Express regional hub (Ontario International Airport, So. California)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "multiStep",
+          "dropArea",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 34.05,
+          "lng": -117.584
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.0468,
+            "west": -117.586,
+            "north": 34.053,
+            "east": -117.5755
+          },
+          "truckGate": {
+            "south": 34.0479,
+            "west": -117.5811,
+            "north": 34.0485,
+            "east": -117.5803
+          },
+          "dropYards": [
+            {
+              "south": 34.0482,
+              "west": -117.5813,
+              "north": 34.0492,
+              "east": -117.578
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.0486,
+              "west": -117.5813,
+              "north": 34.052,
+              "east": -117.577
+            }
+          ],
+          "staging": {
+            "south": 34.0488,
+            "west": -117.5805,
+            "north": 34.051,
+            "east": -117.577
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 165,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": true
+        },
+        "dossierExcerpt": "Type: Express regional hub (Ontario International Airport, So. California)\nResolved coordinates: 34.05000, -117.58400\nConfidence: medium",
+        "mapsUrl": "https://www.google.com/maps/@34.05000,-117.58400,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "FedEx Express Southern California regional hub on the south-central cargo apron of Ontario International Airport (ONT). Roster geocode (34.0628,-117.5929) landed near the passenger terminals; corrected via web research (new 251,000 sq ft hub opened Nov 2020 with 9 wide-body and 14 feeder aircraft gates and 18 truck docks) and satellite confirmation of the cargo sort building plus FedEx jet apron at ~34.0500,-117.5840.",
+          "truckGate": "Hub sits inside the airport AOA; vehicle access from Airport Drive is via a connector road controlled at airport SIDA security. No discrete FedEx guard booth resolved in imagery. truckGate=true reflects controlled access; flagged uncertain.",
+          "guardShack": "No FedEx guard booth identified at a property line; airport AOA badge/credential control implies remoteGs=true rather than a staffed FedEx shack.",
+          "dockDoors": "FedEx press confirms 18 truck docks at the new facility; band 10-25.",
+          "dropArea": "A long row of feeder trailers parked along the southern apron edge; ~25-50 trailer positions estimated from overhead imagery.",
+          "dropYard": "Trailers stage on the apron edge alongside ULD container rows rather than in a discrete fenced drop lot — dropYard=false.",
+          "multiStep": "Airport perimeter security followed by FedEx ramp control implies staged entry; no second booth directly imaged; flagged uncertain.",
+          "multipleFacilities": "Single integrated sort/cargo building; the large warehouses south of Airport Drive are unrelated third-party logistics buildings, not part of this campus.",
+          "scale": "No truck scale visible.",
+          "railServed": "No rail spur enters the property.",
+          "streetView": "Airport Drive panos (2018-2025) show a screen/retaining wall along the hub's south edge with FedEx aircraft visible behind it; the hub interior is not street-accessible."
+        }
+      },
+      {
+        "id": "08-fedex-express-regional-hub-miami-fl",
+        "name": "FedEx Express Regional Hub - Miami FL",
+        "type": "Express regional hub (Latin America gateway)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "multiStep",
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 25.79255,
+          "lng": -80.29525
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 25.79098,
+            "west": -80.297,
+            "north": 25.79412,
+            "east": -80.2935
+          },
+          "truckGate": {
+            "south": 25.79055,
+            "west": -80.2938,
+            "north": 25.79095,
+            "east": -80.2933
+          },
+          "dropYards": [
+            {
+              "south": 25.7911,
+              "west": -80.2948,
+              "north": 25.792,
+              "east": -80.2936
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 25.7915,
+              "west": -80.2962,
+              "north": 25.7932,
+              "east": -80.2938
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 22,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 30,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": true
+        },
+        "dossierExcerpt": "- Audited center: 25.79255, -80.29525 — southwest cargo apron, Miami International Airport (MIA)\n- Roster address (7150 NW 25th St, Miami FL 33122): geocodes to a generic warehouse/lease\n  park ~1.5 km west of MIA. Street View at the NW 72nd Ave / NW 25th St intersection (2026-01)\n  shows lease \"AVAILABLE\" signage and unbranded warehouses — no FedEx presence. The roster\n  coordinate is a landside address, not the operational hub.\n- Operational hub: FedEx Express's Americas-gateway air-cargo hub at MIA — a single\n  ~282,000 sq ft cargo distribution facility (a $72.2M expansion added 138,000 sq ft and a\n  70,000 sq ft cold-chain area; PGAL/GRAEF project pages describe ~17 acres of development on a\n  ~30-acre site). The building is the long cargo structure on the southwest cargo apron.",
+        "mapsUrl": "https://www.google.com/maps/@25.79255,-80.29525,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Airport air-cargo hub on the southwest cargo apron of Miami International Airport (MIA). The roster street address 7150 NW 25th St geocodes to a generic warehouse/lease park ~1.5 km west of the airport with no FedEx presence (Street View at NW 72nd Ave shows 'AVAILABLE' lease signs); the operational FedEx Express Americas-gateway hub is the airfield cargo distribution facility, a ~282,000 sq ft single building with airside aircraft apron and landside truck docks.",
+          "buildingAttribution": "MIA's cargo complex is shared by many carriers (a DHL building is confirmed by signage at the east end of the cargo row in 2022 Street View). The exact FedEx building could not be 100% confirmed by visible branding from Street View; identification rests on facility type, scale (~282K sq ft / ~30-acre site per PGAL/GRAEF project pages), and configuration (airside freighter apron + landside truck dock row). Confidence reduced to medium for this reason.",
+          "truckGate": "Airport cargo facilities are accessed via controlled airport cargo-service roads; entry to the Airport Operations Area / cargo zone is security-controlled (badge/credential check at the cargo-zone perimeter rather than a per-building gate). Counted as a controlled truck gate.",
+          "remoteGs": "No dedicated 1-3-vehicle guard booth at this individual building's truck driveway in imagery; access control is the airport cargo-zone credentialing process upstream. Marked remoteGs true (gate, no on-site shack).",
+          "multiStep": "Airport cargo zone access is multi-stage by nature: airport security/credential checkpoint at the cargo-area perimeter, then the building's own dock dispatch. Low confidence.",
+          "dockDoorCount": "~50-60 dock doors estimated along the long landside face from z18-z19 imagery; regular bay rhythm with trailers backed in. Honest overhead estimate.",
+          "dropArea": "Trailers staged in the strip in front of the dock row and in a side parking area; estimated 10-25 drop trailers.",
+          "siteAreaAcres": "~30 acres per PGAL/GRAEF FedEx Cargo Distribution Center Expansion project descriptions (17 acres of site development on a 30-acre site).",
+          "railServed": "No rail spur; airport air-cargo facility."
+        }
+      },
+      {
+        "id": "09-fedex-ground-hub-kernersville-nc",
+        "name": "FedEx Ground Hub - Kernersville NC",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 36.10625,
+          "lng": -80.0355
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 36.1035,
+            "west": -80.0398,
+            "north": 36.1095,
+            "east": -80.032
+          },
+          "truckGate": {
+            "south": 36.10895,
+            "west": -80.03665,
+            "north": 36.10935,
+            "east": -80.03615
+          },
+          "dropYards": [
+            {
+              "south": 36.1063,
+              "west": -80.0398,
+              "north": 36.109,
+              "east": -80.037
+            },
+            {
+              "south": 36.1055,
+              "west": -80.0345,
+              "north": 36.1085,
+              "east": -80.0321
+            },
+            {
+              "south": 36.1038,
+              "west": -80.037,
+              "north": 36.1056,
+              "east": -80.0335
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 36.1056,
+              "west": -80.037,
+              "north": 36.1076,
+              "east": -80.0335
+            },
+            {
+              "south": 36.1038,
+              "west": -80.036,
+              "north": 36.1048,
+              "east": -80.0325
+            }
+          ],
+          "staging": {
+            "south": 36.1078,
+            "west": -80.0368,
+            "north": 36.1089,
+            "east": -80.0345
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 200,
+          "trailersVisible": 600,
+          "trailerParkingCapacity": 700,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 116,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Audited center: 36.10625, -80.03550 — FedEx Ground regional sortation hub, Triad\n  Business Park, Kernersville/Guilford County NC.\n- Roster coordinate (36.106996, -80.035813) landed directly on the hub building. The\n  geocode moved 9.1 km from the listed address (1544 Old Greensboro Rd) but the resulting\n  coordinate is correct — Step 0 satellite immediately showed an unmistakable FedEx Ground hub\n  (central sort building ringed by hundreds of trailer-parking rows).\n- Verified by web research: FedEx Ground opened this hub in October 2011 at 410,000 sq ft and\n  expanded it in 2015 to ~493,000 sq ft, on a ~125-acre site in Triad Business Park.",
+        "mapsUrl": "https://www.google.com/maps/@36.10625,-80.03550,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed FedEx Ground regional sortation hub in Triad Business Park, ~493,000 sq ft on a ~125-acre site (opened 2011 at 410K sq ft, expanded 2015 to 493K sq ft). Roster coordinate landed directly on the hub building despite a 9.1 km geocode move from the listed Old Greensboro Rd address.",
+          "truckGate": "Controlled truck gate confirmed on the north access road off the public road. z20 satellite shows a checkpoint with painted multi-lane markings and a small booth structure straddling the entrance lanes.",
+          "guardShack": "Small guard-booth structure visible centered in the gate lanes in z20 imagery (footprint of ~1-2 vehicle spaces, set between in/out lanes). Standard FedEx Ground guarded hub entry.",
+          "drivewayLong": "Long curved private access road from the public road to the gate, then a deep paved approach into the yard — easily holds 3+ trucks.",
+          "fastLaneOpportunity": "Wide multi-lane gate apron with painted lanes and ample paved width for an express bypass.",
+          "dockDoors": "Very large hub: dock doors on multiple wrapping faces of the central building, well over 50 — estimated ~200 total from z18 imagery. Honest overhead estimate.",
+          "dropArea": "Extensive trailer-parking rows surround the building on all sides, hundreds of drop trailers — clearly 50+. Estimated ~600 trailers visible / ~700 capacity.",
+          "urbanRural": "Edge-of-town industrial business park (Triad Business Park) outside Kernersville's dense fabric, surrounded by woods and other large warehouses. Classed Rural per the small-town-industrial guidance.",
+          "entryLanes": "~2 inbound lanes at the gate from painted markings; exitLanes ~2. Medium confidence on exact lane count.",
+          "siteAreaAcres": "~116 acres from the perimeter box; documented site is ~125 acres in Triad Business Park."
+        }
+      },
+      {
+        "id": "10-fedex-ground-hub-hagerstown-md",
+        "name": "FedEx Ground Hub - Hagerstown MD",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "entryLanes"
+        ],
+        "center": {
+          "lat": 39.6385,
+          "lng": -77.7915
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.6364,
+            "west": -77.795,
+            "north": 39.6418,
+            "east": -77.786
+          },
+          "truckGate": {
+            "south": 39.6378,
+            "west": -77.7876,
+            "north": 39.6387,
+            "east": -77.7868
+          },
+          "dropYards": [
+            {
+              "south": 39.6368,
+              "west": -77.7949,
+              "north": 39.6394,
+              "east": -77.7918
+            },
+            {
+              "south": 39.639,
+              "west": -77.7935,
+              "north": 39.6408,
+              "east": -77.789
+            },
+            {
+              "south": 39.6368,
+              "west": -77.7905,
+              "north": 39.6385,
+              "east": -77.787
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.637,
+              "west": -77.7935,
+              "north": 39.6378,
+              "east": -77.7872
+            },
+            {
+              "south": 39.6385,
+              "west": -77.7935,
+              "north": 39.6392,
+              "east": -77.7872
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 160,
+          "trailersVisible": 400,
+          "trailerParkingCapacity": 500,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 115,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Audited center: 39.63850, -77.79150 — FedEx Ground regional sortation hub, 11825 Newgate\n  Blvd, Newgate Industrial Park, Hagerstown MD.\n- Roster coordinate (39.639503, -77.792408) moved 8.4 km from the listed address\n  (GEOMETRIC_CENTER geocode) but landed correctly on the hub. Step 0 satellite immediately\n  showed a large sort building ringed by trailer fields.\n- Confirmed FedEx by direct Street View branding: \"FedEx Ground\" on the building face and\n  \"FedEx\" logos on dozens of trailers backed into the dock doors (2024 Street View on Newgate\n  Blvd). Web research confirms the facility: 325,000 sq ft, 114-acre site, ~22,500 packages/hr.",
+        "mapsUrl": "https://www.google.com/maps/@39.63850,-77.79150,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed FedEx Ground regional sortation hub at 11825 Newgate Blvd, Newgate Industrial Park, Hagerstown MD. 325,000 sq ft on a 114-acre site, ~22,500 packages/hour, one of FedEx Ground's centralized distribution hubs. Roster coordinate moved 8.4 km (GEOMETRIC_CENTER geocode) but landed correctly on the hub. FedEx Ground branding directly confirmed on the building face and on dozens of trailers in Street View along Newgate Blvd.",
+          "truckGate": "Site is fully enclosed by a chain-link perimeter fence (confirmed in multiple 2024 Street View frames along Newgate Blvd). Single controlled private access road off the Newgate Blvd intersection, with painted dashed lane markings on the approach and a sign monument. Counted as a controlled truck gate.",
+          "guardShack": "A guard booth could not be isolated in satellite imagery at the entry point (the checkpoint sits well back from the public road and Street View does not penetrate the private access drive). Marked true with medium confidence — a fenced FedEx Ground regional hub of this scale is universally guard-staffed at the main truck entrance.",
+          "drivewayLong": "Long private access road from the public-road intersection, then a deep paved approach into the yard before the docks — holds 3+ trucks.",
+          "fastLaneOpportunity": "Wide multi-lane paved gate apron with room for an express bypass.",
+          "dockDoors": "Large hub: continuous dock banks with FedEx trailers backed in along multiple building faces, well over 50 — estimated ~160 total from z17-z19 imagery.",
+          "dropArea": "Hundreds of trailers in marked parking rows on the west, north and east of the building — clearly 50+. Estimated ~400 visible / ~500 capacity.",
+          "urbanRural": "Edge-of-town industrial park surrounded by farmland and woods west of Hagerstown — classed Rural per small-town-industrial guidance.",
+          "entryLanes": "~2 inbound / ~2 outbound estimated from the access-road width; medium confidence.",
+          "siteAreaAcres": "~115 acres from the perimeter box; documented site is 114 acres."
+        }
+      },
+      {
+        "id": "11-fedex-ground-hub-lewisberry-pa",
+        "name": "FedEx Ground Hub - Lewisberry PA",
+        "type": "Ground regional sortation hub (Harrisburg market)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 40.1645,
+          "lng": -76.8405
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.1619,
+            "west": -76.8438,
+            "north": 40.1676,
+            "east": -76.8352
+          },
+          "truckGate": {
+            "south": 40.1637,
+            "west": -76.8362,
+            "north": 40.1642,
+            "east": -76.8355
+          },
+          "dropYards": [
+            {
+              "south": 40.1656,
+              "west": -76.843,
+              "north": 40.1676,
+              "east": -76.8385
+            },
+            {
+              "south": 40.1624,
+              "west": -76.8428,
+              "north": 40.1648,
+              "east": -76.8395
+            },
+            {
+              "south": 40.1621,
+              "west": -76.8395,
+              "north": 40.1633,
+              "east": -76.8365
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.1642,
+              "west": -76.842,
+              "north": 40.1656,
+              "east": -76.837
+            },
+            {
+              "south": 40.163,
+              "west": -76.842,
+              "north": 40.1645,
+              "east": -76.837
+            }
+          ],
+          "staging": {
+            "south": 40.1636,
+            "west": -76.8368,
+            "north": 40.1647,
+            "east": -76.8356
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 150,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 420,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 62,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Type: Ground regional sortation hub (Harrisburg market)\n- Roster address: 510 Industrial Dr, Lewisberry, PA 17339\n- Locked coordinates: 40.16450, -76.84050\n- Confidence: high",
+        "mapsUrl": "https://www.google.com/maps/@40.16450,-76.84050,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Multi-lane controlled gate canopy with guard booth visible at z21 on the E-side access driveway (~40.1640,-76.8358); lane separators and barrier/gate equipment present.",
+          "guardShack": "Small ~1-2 vehicle-footprint white booth set beside the gate lanes, distinct from the main sort building.",
+          "fastLaneOpportunity": "Wide multi-lane gate apron with ample paved width; physical room for an express bypass lane.",
+          "entryLanes": "Approx 2 inbound lanes through the gate canopy; exact lane split hard to read under shadow/tree cover - low confidence.",
+          "dockDoors": "Central sort building has continuous dock-door rhythm on both long faces plus a secondary NW building; total well above 50, estimated ~150 - count is approximate.",
+          "dropYard": "Hundreds of bare trailers parked in marked rows across N, W and S of the property - clearly a dedicated drop/storage operation.",
+          "urbanRural": "Lewisberry is a small town; site sits at edge-of-town in a semi-rural light-industrial pocket with woods and a retention pond to the W - classified Rural per rubric tie-break.",
+          "postGateStaging": "Paved holding area inside the gate before the dock aprons.",
+          "buildingCount": "Main sort building, a secondary NW dock building, plus 1-2 small ancillary structures (gatehouse, maintenance)."
+        }
+      },
+      {
+        "id": "12-fedex-ground-hub-grove-city-oh",
+        "name": "FedEx Ground Hub - Grove City OH",
+        "type": "Ground regional sortation hub (Columbus market)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes",
+          "dropArea"
+        ],
+        "center": {
+          "lat": 39.9036,
+          "lng": -83.0966
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.9015,
+            "west": -83.0973,
+            "north": 39.9058,
+            "east": -83.0948
+          },
+          "truckGate": {
+            "south": 39.9049,
+            "west": -83.0956,
+            "north": 39.9055,
+            "east": -83.095
+          },
+          "dropYards": [
+            {
+              "south": 39.902,
+              "west": -83.0973,
+              "north": 39.9052,
+              "east": -83.0966
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.9018,
+              "west": -83.097,
+              "north": 39.9054,
+              "east": -83.0964
+            },
+            {
+              "south": 39.9018,
+              "west": -83.096,
+              "north": 39.9054,
+              "east": -83.0953
+            }
+          ],
+          "staging": {
+            "south": 39.9047,
+            "west": -83.0964,
+            "north": 39.9056,
+            "east": -83.0952
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 22,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Type: Ground regional sortation hub (Columbus market)\n- Roster address: 2969 Lewis Centre Way, Grove City, OH 43123\n- Locked coordinates: 39.90360, -83.09660\n- Confidence: high",
+        "mapsUrl": "https://www.google.com/maps/@39.90360,-83.09660,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Chain-link perimeter fence around the truck yard with a gate across the W-side truck driveway, visible in 2025 Street View (sv6/sv8).",
+          "guardShack": "No staffed booth observed at the yard entrance - gated but unmanned, so remoteGs = true (kiosk / app check-in implied).",
+          "dockDoors": "Long N-S cross-dock building with continuous dock doors on BOTH long faces; estimated ~90 total - count approximate, flagged uncertain.",
+          "dropArea": "Trailers parked in rows along the W dock apron / drop yard; ~25-50 stalls, hard to separate active staging from storage.",
+          "drivewayLong": "Curved internal driveway from Lewis Centre Way into the yard has room to stack 3+ trucks before the dock apron.",
+          "urbanRural": "Grove City is part of the Columbus OH metro; site sits in a built-up multi-tenant industrial park flanked by other big-box warehouses and suburban residential - Urban.",
+          "multipleFacilities": "FedEx occupies one long building; adjacent big-box warehouses are separate tenants, not part of the FedEx campus.",
+          "buildingCount": "Single FedEx cross-dock building; FedEx branding confirmed on the building face in 2025 Street View."
+        }
+      },
+      {
+        "id": "13-fedex-ground-dallas-hub-hutchins-tx",
+        "name": "FedEx Ground Dallas Hub - Hutchins TX",
+        "type": "Ground regional distribution hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "truckGateCount",
+          "entryLanes"
+        ],
+        "center": {
+          "lat": 32.6576,
+          "lng": -96.7065
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.6548,
+            "west": -96.71,
+            "north": 32.6605,
+            "east": -96.703
+          },
+          "truckGate": {
+            "south": 32.6553,
+            "west": -96.7072,
+            "north": 32.656,
+            "east": -96.7064
+          },
+          "dropYards": [
+            {
+              "south": 32.6582,
+              "west": -96.7095,
+              "north": 32.6604,
+              "east": -96.706
+            },
+            {
+              "south": 32.6556,
+              "west": -96.7062,
+              "north": 32.6592,
+              "east": -96.7035
+            },
+            {
+              "south": 32.6556,
+              "west": -96.71,
+              "north": 32.658,
+              "east": -96.7072
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.6565,
+              "west": -96.7072,
+              "north": 32.659,
+              "east": -96.7045
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 280,
+          "trailersVisible": 700,
+          "trailerParkingCapacity": 850,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 103,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Audited center: 32.65760, -96.70650 — FedEx Ground Dallas Hub, 1101 E Cleveland St,\n  Hutchins TX (Dallas metro logistics corridor, east of I-45).\n- Roster coordinate (32.656667, -96.706918) moved 1.4 km from the listed address\n  (GEOMETRIC_CENTER geocode) but landed correctly on the hub.\n- Confirmed FedEx by direct Street View branding: \"FedEx\" on the building face (2026\n  Street View). Web research confirms one of the largest FedEx Ground hubs: 720,000+ sq ft on\n  a 102-acre site, ~230,000 packages/day, ~1,600 workers.",
+        "mapsUrl": "https://www.google.com/maps/@32.65760,-96.70650,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed FedEx Ground Dallas Hub at 1101 E Cleveland St, Hutchins TX — one of the largest FedEx Ground facilities, 720,000+ sq ft on a 102-acre site, processing 230,000+ packages/day with ~1,600 workers. Roster coordinate (GEOMETRIC_CENTER, moved 1.4 km) landed correctly on the hub. FedEx branding directly confirmed on the building face in 2026 Street View.",
+          "buildingId": "The FedEx hub is the distinctive solar-paneled-roof building at the center of the industrial campus; several neighboring large warehouses (different occupants) surround it, so care was taken to box only the FedEx property.",
+          "truckGate": "Site is fully enclosed by chain-link perimeter fencing with barbed-wire top (clearly confirmed in multiple 2026 Street View frames). Controlled private campus access. Counted as a controlled truck gate.",
+          "guardShack": "A guard booth could not be isolated in satellite — the truck gate sits deep inside the secured campus and Street View does not penetrate it. Marked true with medium confidence: a fenced FedEx Ground regional hub of this scale (one of the network's largest) is universally guard-staffed at the truck entrance. Flagged in uncertainFields.",
+          "truckGateCount": "Likely 2 — a separate employee-vehicle entrance and a truck-yard entrance are typical at hubs this large; exact count is an estimate.",
+          "drivewayLong": "Long private campus access roads and deep paved internal yard approaches — easily holds 3+ trucks.",
+          "fastLaneOpportunity": "Very large paved gate/yard aprons with abundant width for express bypass lanes.",
+          "dockDoors": "Enormous hub: continuous dock banks with hundreds of trailers backed in along multiple building faces — far over 50, estimated ~280 total. Honest overhead estimate.",
+          "dropArea": "Vast trailer-parking fields wrap the building on the north, west and south — hundreds of drop trailers, clearly 50+. Estimated ~700 visible / ~850 capacity.",
+          "urbanRural": "Within the Dallas metro industrial corridor (Hutchins/Wilmer logistics cluster), dense industrial fabric beside I-45 — classed Urban.",
+          "siteAreaAcres": "~103 acres from the perimeter box; documented site is 102 acres."
+        }
+      },
+      {
+        "id": "14-fedex-ground-hub-keasbey-nj",
+        "name": "FedEx Ground Hub - Keasbey NJ",
+        "type": "Ground regional sortation hub (NY/NJ metro)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "truckGateCount",
+          "entryLanes"
+        ],
+        "center": {
+          "lat": 40.5065,
+          "lng": -74.326
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.5025,
+            "west": -74.3295,
+            "north": 40.5102,
+            "east": -74.3225
+          },
+          "truckGate": {
+            "south": 40.5069,
+            "west": -74.3276,
+            "north": 40.5076,
+            "east": -74.3266
+          },
+          "dropYards": [
+            {
+              "south": 40.5055,
+              "west": -74.329,
+              "north": 40.5082,
+              "east": -74.326
+            },
+            {
+              "south": 40.5035,
+              "west": -74.327,
+              "north": 40.507,
+              "east": -74.3235
+            },
+            {
+              "south": 40.5075,
+              "west": -74.3255,
+              "north": 40.51,
+              "east": -74.3228
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.507,
+              "west": -74.3265,
+              "north": 40.51,
+              "east": -74.3238
+            },
+            {
+              "south": 40.504,
+              "west": -74.326,
+              "north": 40.507,
+              "east": -74.3233
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 320,
+          "trailersVisible": 750,
+          "trailerParkingCapacity": 900,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 125,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Audited center: 40.50650, -74.32600 — FedEx Ground regional sortation hub, 6000\n  Riverside Dr, Keasbey NJ (Woodbridge Township), on the Raritan River.\n- Roster coordinate (40.50662, -74.325741) moved 1.2 km from the listed address\n  (GEOMETRIC_CENTER geocode) but landed correctly on the FedEx complex.\n- Confirmed FedEx by direct Street View branding: \"FedEx Ground\" on the office building\n  and on numerous trailers in the yard (2019/2021 Street View). Web research confirms a 24/7\n  FedEx Ground Distribution Center / sortation hub at this address.",
+        "mapsUrl": "https://www.google.com/maps/@40.50650,-74.32600,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed FedEx Ground regional sortation hub at 6000 Riverside Dr, Keasbey NJ (Woodbridge Township), a 24/7 NY/NJ-metro hub on the Raritan River. Roster coordinate (GEOMETRIC_CENTER, moved 1.2 km) landed correctly on the FedEx complex. FedEx Ground branding directly confirmed on the office building and on numerous trailers in Street View.",
+          "campus": "The property is a large FedEx Ground campus with two distinct large sort-building clusters (a northwest building with a big solar roof and a southeast building cluster), each with continuous dock banks and surrounding trailer fields, plus a central office building with a curved entry canopy. multipleFacilities marked true.",
+          "truckGate": "FedEx trailer yard is enclosed by chain-link fencing (confirmed in 2019/2021 Street View — fenced trailer yard behind the office building). Controlled private campus access off Riverside Dr. Counted as a controlled truck gate.",
+          "guardShack": "A guard booth could not be isolated in satellite — the truck gate is internal to the secured campus and Street View (2019/2021 vintage) does not penetrate it. Marked true with medium confidence: a fenced FedEx Ground metro hub of this scale is universally guard-staffed at its truck entrance. Flagged in uncertainFields.",
+          "truckGateCount": "Likely 2 — separate employee-vehicle and truck-yard entrances, plus possibly a gate per building cluster; exact count is an estimate.",
+          "drivewayLong": "Long private campus access roads and deep paved internal yard approaches.",
+          "fastLaneOpportunity": "Very large paved gate/yard aprons with abundant bypass-lane width.",
+          "dockDoors": "Two large sort buildings with continuous dock banks and hundreds of trailers backed in — far over 50, estimated ~320 total across both buildings. Honest overhead estimate.",
+          "dropArea": "Extensive trailer-parking fields surround both buildings — hundreds of drop trailers, clearly 50+. Estimated ~750 visible / ~900 capacity.",
+          "urbanRural": "Dense NY/NJ-metro industrial corridor (Woodbridge Township) — classed Urban.",
+          "siteAreaAcres": "~125 acres from the perimeter box (developed FedEx campus footprint); no published figure found, estimated from imagery."
+        }
+      },
+      {
+        "id": "15-fedex-ground-hub-charlotte-nc",
+        "name": "FedEx Ground Hub - Charlotte NC",
+        "type": "Ground regional sortation hub",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 35.2727,
+          "lng": -80.9181
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.2705,
+            "west": -80.9208,
+            "north": 35.2743,
+            "east": -80.9154
+          },
+          "truckGate": {
+            "south": 35.2721,
+            "west": -80.9205,
+            "north": 35.2727,
+            "east": -80.9198
+          },
+          "dropYards": [
+            {
+              "south": 35.2719,
+              "west": -80.9172,
+              "north": 35.274,
+              "east": -80.9154
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.2724,
+              "west": -80.9189,
+              "north": 35.2742,
+              "east": -80.918
+            },
+            {
+              "south": 35.2721,
+              "west": -80.9198,
+              "north": 35.2739,
+              "east": -80.9189
+            }
+          ],
+          "staging": {
+            "south": 35.272,
+            "west": -80.9199,
+            "north": 35.2728,
+            "east": -80.9187
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 160,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 28,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: FedEx Ground Hub - Charlotte NC\n- Type: Ground regional sortation hub\n- Address: 6604 CSX Way, Charlotte, NC 28214\n- Resolved coords: 35.27270, -80.91810 (building/yard center)\n- Maps: https://www.google.com/maps/@35.27270,-80.91810,400m/data=!3m1!1e3",
+        "mapsUrl": "https://www.google.com/maps/@35.27270,-80.91810,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Controlled truck entrance on the W side of the property where the access road off CSX Way meets the yard - z20 satellite (fedex-15-gate-z20b) clearly shows a barrier across the truck lane, a pinch-point with lane markings, and 'NO PARKING' painted on the apron.",
+          "guardShack": "A small detached structure with a distinctive orange/brown roof sits immediately beside the gate lane at the entrance pinch-point - a staffed guard booth (~1-2 vehicle footprint). remoteGs therefore false.",
+          "preGateStaging": "Trucks observed parked along the CSX Way shoulder outside the gate (fedex-15-gate-z20); paved apron width before the gate gives room to wait.",
+          "postGateStaging": "Large paved yard between the gate and the dock aprons inside the fence provides a deep internal queue/holding area.",
+          "drivewayLong": "Internal driveway from the W gate runs a long, deep paved stretch into the yard before the dock aprons - room for 3+ trucks.",
+          "dockDoors": "Long NE-SW cross-dock building with continuous dock doors along BOTH long faces, trailers backed in along each side; estimated ~110 total - count approximate, flagged uncertain.",
+          "dropArea": "Extensive trailer drop yard on the E side with many marked rows of parked trailers without tractors; well over 50 stalls - dropYard true.",
+          "railServed": "A CSX rail line runs along the N edge of the property but is a through-line bordering the site; no spur enters the FedEx yard - railServed false.",
+          "urbanRural": "Site is within the Charlotte NC metro in a dense multi-tenant industrial corridor (CSX intermodal area, NW Charlotte) flanked by other large warehouses - Urban.",
+          "multipleFacilities": "FedEx occupies a single cross-dock building plus its drop yard; the separate white building to the NE is a different tenant.",
+          "buildingCount": "One FedEx cross-dock building; confirmed by FedEx-branded trailers and a FedEx dropbox/mailbox in 2022 Street View along the access road."
+        }
+      },
+      {
+        "id": "16-fedex-ground-hub-independence-ky",
+        "name": "FedEx Ground Hub - Independence KY (Northern Kentucky / Cincinnati)",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 38.941,
+          "lng": -84.617
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.9385,
+            "west": -84.621,
+            "north": 38.944,
+            "east": -84.6075
+          },
+          "truckGate": {
+            "south": 38.94235,
+            "west": -84.612,
+            "north": 38.943,
+            "east": -84.6113
+          },
+          "dropYards": [
+            {
+              "south": 38.941,
+              "west": -84.6205,
+              "north": 38.9438,
+              "east": -84.617
+            },
+            {
+              "south": 38.94,
+              "west": -84.61,
+              "north": 38.9425,
+              "east": -84.6078
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 38.9415,
+              "west": -84.6198,
+              "north": 38.9437,
+              "east": -84.6148
+            },
+            {
+              "south": 38.9405,
+              "west": -84.6175,
+              "north": 38.9435,
+              "east": -84.6145
+            }
+          ],
+          "staging": {
+            "south": 38.9385,
+            "west": -84.6148,
+            "north": 38.9402,
+            "east": -84.6125
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 160,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 110,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Type: Ground regional sortation hub\n- Address: 11000 Toebben Dr, Independence, KY 41051\n- Resolved center: 38.94100, -84.61700\n- Confidence: high",
+        "mapsUrl": "https://www.google.com/maps/@38.941,-84.617,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "z20/z21 satellite shows a cantilever sliding gate spanning the inbound truck lane where the access road meets the property, with chain-link + barbed-wire perimeter fencing on both sides; vehicles visible queued at the gate.",
+          "guardShack": "Small white ~1-vehicle-footprint booth set beside the lane just inside the gate (z21). Footprint is small enough it could be an unstaffed check-in kiosk; classified as guard shack given major sortation hub, but flagged uncertain.",
+          "entryLanes": "Single shared paved gate lane with yellow centerline visible (z21) - in/out share the gate; lane count an estimate.",
+          "fastLaneOpportunity": "Wide paved gate apron and broad access-road throat give room to add a bypass/express lane.",
+          "dockDoors": "FedEx Ground sortation hub - dock doors with trailers backed in along multiple long building faces (z19 NW/dock views); easily 150+, banded 50+.",
+          "dropArea": "Dense trailer rows in two distinct lots - NW of the building and a large eastern drop lot east of the access road; well over 50.",
+          "postGateStaging": "Large paved aprons inside the gate before the dock faces allow trucks to hold/queue.",
+          "buildingCount": "One large cross/H-shaped sortation building plus a small ancillary structure; counted as 2.",
+          "siteAreaAcres": "Derived from perimeter box (~612 m N-S x ~1169 m E-W), discounted for the irregular L-shaped property footprint."
+        }
+      },
+      {
+        "id": "17-fedex-ground-hub-nashville-tn",
+        "name": "FedEx Ground Hub - Nashville TN",
+        "type": "Ground regional sortation hub",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 36.239,
+          "lng": -86.7935
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 36.236,
+            "west": -86.799,
+            "north": 36.2415,
+            "east": -86.791
+          },
+          "truckGate": {
+            "south": 36.2364,
+            "west": -86.7968,
+            "north": 36.2372,
+            "east": -86.7958
+          },
+          "dropYards": [
+            {
+              "south": 36.2395,
+              "west": -86.7928,
+              "north": 36.2408,
+              "east": -86.7912
+            },
+            {
+              "south": 36.2368,
+              "west": -86.7985,
+              "north": 36.239,
+              "east": -86.7955
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 36.2385,
+              "west": -86.7955,
+              "north": 36.2405,
+              "east": -86.7915
+            },
+            {
+              "south": 36.2375,
+              "west": -86.7948,
+              "north": 36.2395,
+              "east": -86.7918
+            }
+          ],
+          "staging": {
+            "south": 36.2368,
+            "west": -86.7962,
+            "north": 36.2382,
+            "east": -86.7942
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 150,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 260,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 75,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Type: Ground regional sortation hub\n- Address: 3301 Knight Dr, Nashville, TN 37207\n- Resolved center: 36.23900, -86.79350\n- Confidence: high",
+        "mapsUrl": "https://www.google.com/maps/@36.239,-86.7935,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Street View (2019, Knight Dr) shows a controlled, fenced truck entrance: a check-in canopy spanning the drive lanes with a guard/admin building beside it; perimeter chain-link fencing and a US flag.",
+          "guardShack": "Low building with a green awning beside the entrance lanes plus a canopy over the check-in lanes - a staffed gate/security building. remoteGs therefore false.",
+          "entryLanes": "Multiple lanes pass under the entry canopy (estimated 2 in / 1 out); exact lane split not crisply resolvable from imagery.",
+          "fastLaneOpportunity": "Wide gate apron / canopy with multiple lanes leaves room to designate an express bypass.",
+          "dockDoors": "Long main sort building with dock doors and trailers backed in along both long faces (z17/z18); 100+ positions, banded 50+.",
+          "dropArea": "Two trailer drop areas - a large NE drop yard with dense trailer rows and the SW trailer staging rows; over 50.",
+          "buildingCount": "Long main sort building, a parallel secondary building to the N, and a small structure inside the yard; counted as 3 (the blue-roof building SW of the property line is a separate parcel and excluded).",
+          "postGateStaging": "Large paved apron inside the gate before the dock faces for queuing.",
+          "siteAreaAcres": "Derived from perimeter box (~612 m N-S x ~718 m E-W), discounted for the irregular footprint and wooded N buffer."
+        }
+      },
+      {
+        "id": "18-fedex-ground-hub-goodyear-az",
+        "name": "FedEx Ground Hub - Goodyear AZ (Phoenix)",
+        "type": "Ground regional distribution hub (~425K sq ft regional sortation, with package center)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "entryLanes",
+          "exitLanes",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 33.439,
+          "lng": -112.3712
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.4356,
+            "west": -112.3732,
+            "north": 33.4406,
+            "east": -112.3696
+          },
+          "truckGate": {
+            "south": 33.4395,
+            "west": -112.3701,
+            "north": 33.4403,
+            "east": -112.3696
+          },
+          "dropYards": [
+            {
+              "south": 33.4396,
+              "west": -112.3732,
+              "north": 33.4406,
+              "east": -112.3698
+            },
+            {
+              "south": 33.4356,
+              "west": -112.3732,
+              "north": 33.4377,
+              "east": -112.3698
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.439,
+              "west": -112.3732,
+              "north": 33.4399,
+              "east": -112.3698
+            },
+            {
+              "south": 33.4376,
+              "west": -112.3732,
+              "north": 33.4383,
+              "east": -112.3698
+            }
+          ],
+          "staging": {
+            "south": 33.4396,
+            "west": -112.3701,
+            "north": 33.4406,
+            "east": -112.3696
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 280,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 38,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: FedEx Ground Hub - Goodyear AZ (Phoenix)\n- Type: Ground regional distribution hub (~425K sq ft regional sortation\n  with large package center)\n- Address: 890 S 143rd Ave, Goodyear, AZ 85338\n- Resolved coords: 33.43900, -112.37120 (building center)\n- Maps: https://www.google.com/maps/@33.43900,-112.37120,400m/data=!3m1!1e3",
+        "mapsUrl": "https://www.google.com/maps/@33.43900,-112.37120,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single truck entrance is on the NE corner off 143rd Ave - a very wide open paved apron/driveway with NO barrier arm or sliding gate across the truck lane (2024/2025 Street View sv13/sv15). The yard interior carries an ornamental steel security fence (visible W side, sv7-sv10) but the truck driveway opening is left open and uncontrolled - truckGate false.",
+          "guardShack": "No staffed guard booth at the NE entrance - only a small free-standing sign post. No checkpoint structure observed. guardShack false; remoteGs false because there is no controlled gate.",
+          "fastLaneOpportunity": "The NE entrance is an exceptionally wide paved apron with abundant unused width - ample room to add lanes / express bypass.",
+          "postGateStaging": "Large paved apron inside the entrance and between the building and yards gives deep internal truck holding room.",
+          "drivewayLong": "Deep paved entry apron and internal drives - room to queue 3+ trucks before docks.",
+          "dockDoors": "Large cross-dock building with continuous dock doors on BOTH the N and S long faces, trailers backed in on each; ~130 doors estimated - count approximate, flagged uncertain.",
+          "dropArea": "Two large trailer drop yards (N of building and S of building) holding well over 50 parked trailers without tractors - dropYard true.",
+          "shipRcvSeparate": "Dock banks on two opposite faces (N and S) of the building act as physically separate dock clusters - likely separate ship/receive flows; flagged uncertain.",
+          "railServed": "No rail spur enters the site - it is an industrial park parcel, not rail-served.",
+          "urbanRural": "Building 2 of Prologis Commerce Park at Goodyear, a 1.7M sq ft 4-building industrial park ~20 mi W of downtown Phoenix - dense industrial fabric, Urban.",
+          "multipleFacilities": "FedEx occupies a single building (Building 2); the other Prologis park buildings are separate tenants - not a FedEx campus.",
+          "buildingCount": "One FedEx cross-dock building (~425K sq ft) confirmed by FedEx logo on the office front in 2024 Street View."
+        }
+      },
+      {
+        "id": "19-fedex-ground-package-distribution-hub-olive-branch-ms",
+        "name": "FedEx Ground Package Distribution Hub - Olive Branch MS (Memphis metro)",
+        "type": "Ground regional package distribution hub",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "dropArea",
+          "shipRcvSeparate",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 34.9908,
+          "lng": -89.7785
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.9883,
+            "west": -89.7802,
+            "north": 34.9932,
+            "east": -89.777
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 34.9885,
+              "west": -89.7802,
+              "north": 34.9932,
+              "east": -89.7793
+            },
+            {
+              "south": 34.9885,
+              "west": -89.7779,
+              "north": 34.9932,
+              "east": -89.777
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.9885,
+              "west": -89.7793,
+              "north": 34.9932,
+              "east": -89.7788
+            },
+            {
+              "south": 34.9885,
+              "west": -89.7782,
+              "north": 34.9932,
+              "east": -89.7777
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 160,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 26,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: FedEx Ground Package Distribution Hub - Olive Branch MS (Memphis metro)\n- Type: Ground regional package distribution hub\n- Address: 9181 Polk Ln, Olive Branch, MS 38654\n- Audited coords: 34.99080, -89.77850 (long cross-dock building fronting\n  Polk Lane at the roster point)\n- Maps: https://www.google.com/maps/@34.99080,-89.77850,400m/data=!3m1!1e3",
+        "mapsUrl": "https://www.google.com/maps/@34.99080,-89.77850,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "_identity": "FedEx-specific branding could NOT be visually confirmed. 9181 Polk Ln sits in the Crossroads Distribution Center, a large multi-tenant industrial park in Olive Branch (Memphis metro). The roster geocode (RANGE_INTERPOLATED, moved 4m) is precise to the street address and lands on Polk Lane between two long cross-dock buildings; the building fronting Polk Lane at the roster point was audited. 2026 Street View shows mixed-carrier trailers (orange/blue/red dry vans, not the uniform white FedEx Ground fleet) backed in along the dock face - consistent with either a multi-tenant cross-dock or a FedEx Ground linehaul hub serving many contractors. Web research locates the documented FedEx Ground hub in Olive Branch at 8505 Nail Rd (330K sq ft, 94 acres); 9181 Polk Ln may be an address mismatch. Classification reflects the observed physical layout; identity flagged for human review.",
+          "truckGate": "The audited building's dock apron runs directly along Polk Lane with no perimeter fence and no barrier/gate across the apron - an open cross-dock face. No controlled truck gate observed; a sliding gate with call box exists at a DIFFERENT building on the E side of Polk Lane. Flagged uncertain.",
+          "guardShack": "No staffed booth observed at the audited building. guardShack false; remoteGs false (no gate).",
+          "dockDoors": "Very long cross-dock building with continuous dock doors on BOTH long faces, trailers backed in along the full length of each; ~160 doors estimated - count approximate.",
+          "dropArea": "Trailers parked in marked rows along both dock aprons and in a trailer lot to the W; ~25-50 clearly without tractors - dropYard true.",
+          "shipRcvSeparate": "Dock banks on two opposite building faces function as separate dock clusters - flagged uncertain.",
+          "drivewayShort": "Open dock apron directly off the public road - short approach, little internal queuing depth.",
+          "railServed": "No rail spur enters the parcel.",
+          "urbanRural": "Crossroads Distribution Center, Olive Branch MS - dense industrial park in the Memphis metro - Urban.",
+          "buildingCount": "One long cross-dock building audited; the adjacent parallel building is a separate facility."
+        }
+      },
+      {
+        "id": "20-fedex-ground-hub-richfield-oh",
+        "name": "FedEx Ground Hub - Richfield OH (Cleveland/Akron mini-hub)",
+        "type": "Ground automated regional facility (229K sq ft mini-hub)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "preGateStaging",
+          "postGateStaging",
+          "drivewayLong",
+          "drivewayShort",
+          "backupSensitive",
+          "entryExitTogether",
+          "entryExitSeparate",
+          "entryLanes",
+          "exitLanes",
+          "fastLaneOpportunity",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "urbanRural",
+          "connectivityIssue",
+          "multipleFacilities",
+          "scale",
+          "dropYard",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 41.2765,
+          "lng": -81.6155
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.2748,
+            "west": -81.6172,
+            "north": 41.2782,
+            "east": -81.6138
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 0,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "NONE",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: FedEx Ground Hub - Richfield OH (Cleveland/Akron mini-hub)\n- Type: Ground automated regional facility (229K sq ft mini-hub)\n- Roster address: 4500 Renaissance Pkwy, Cleveland, OH 44128 — WRONG\n- Real address: 3245 Henry Rd / 3900 Brecksville Rd, Richfield, OH 44286",
+        "mapsUrl": "https://www.google.com/maps/@41.27650,-81.61550,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "_locationError": "FACILITY COULD NOT BE POSITIVELY LOCATED. The roster address (4500 Renaissance Pkwy, Cleveland OH 44128) and the roster lat/lng (41.437354, -81.493674) are WRONG for this facility - 4500 Renaissance Pkwy is confirmed by web research (LoopNet/BBB) to be Great Lakes Petroleum Co. / Northeast Lubricants in Warrensville Heights, NOT a FedEx facility.",
+          "_realFacility": "The actual facility is the FedEx Ground automated regional 'mini-hub' in RICHFIELD OH 44286 (between Cleveland and Akron), documented at 3245 Henry Rd / 3900 Brecksville Rd. Per Truckinginfo/FleetOwner: 229,000 sq ft, latest camera-based package-sorting technology, capacity for 144 pickup-and-delivery vans, consolidated four older sites (three Cleveland-metro, one Akron). It sits in Richfield's planned 'Crossroads District' (550 acres at Wheatley Rd x Brecksville Rd, bounded by I-271/I-77); the FedEx parcel forms the southern boundary of the 'South Wheatley' focus area.",
+          "_searchEffort": "Probed Richfield village, the Wheatley/Brecksville intersection, the South Wheatley triangle, and the Brecksville/Richfield-Township border industrial area (z15-z18) and walked Street View. The South Wheatley zone is largely undeveloped/wooded. Candidate large cross-dock distribution buildings exist near the Brecksville/Richfield border (~41.276,-81.615) but NONE showed FedEx branding or the distinctive ~144-van FedEx Ground P&D fleet, so the exact building could not be confirmed. The placeholder coords point to that candidate vicinity.",
+          "_recommendation": "Roster address/coords need correction to the Richfield 44286 location (3245 Henry Rd / 3900 Brecksville Rd). A re-audit with corrected coordinates is required. All classification fields left at safe defaults and flagged uncertain."
+        }
+      },
+      {
+        "id": "21-fedex-ground-hub-middletown-pa",
+        "name": "FedEx Ground Hub - Middletown PA (Harrisburg)",
+        "type": "Ground regional sortation hub",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "postGateStaging"
+        ],
+        "center": {
+          "lat": 40.2331,
+          "lng": -76.7308
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.2304,
+            "west": -76.7338,
+            "north": 40.236,
+            "east": -76.7282
+          },
+          "truckGate": {
+            "south": 40.23085,
+            "west": -76.73295,
+            "north": 40.23125,
+            "east": -76.7323
+          },
+          "dropYards": [
+            {
+              "south": 40.2333,
+              "west": -76.7338,
+              "north": 40.2356,
+              "east": -76.7302
+            },
+            {
+              "south": 40.233,
+              "west": -76.73,
+              "north": 40.2342,
+              "east": -76.7283
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.2315,
+              "west": -76.7323,
+              "north": 40.2333,
+              "east": -76.7312
+            },
+            {
+              "south": 40.2313,
+              "west": -76.7312,
+              "north": 40.2329,
+              "east": -76.7287
+            },
+            {
+              "south": 40.2342,
+              "west": -76.7325,
+              "north": 40.2356,
+              "east": -76.729
+            }
+          ],
+          "staging": {
+            "south": 40.2304,
+            "west": -76.7325,
+            "north": 40.2313,
+            "east": -76.73
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 230,
+          "trailersVisible": 420,
+          "trailerParkingCapacity": 600,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 76,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Type: Ground regional sortation hub\n- Address: 111 Fulling Mill Rd, Middletown, PA 17057\n- Resolved center: 40.23310, -76.73080\n- Confidence: medium",
+        "mapsUrl": "https://www.google.com/maps/@40.23310,-76.73080,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facility": "Confirmed FedEx Ground hub at 111 Fulling Mill Rd via FedEx logo visible on building face in Street View (panos along internal driveway, captured 2019/2023). Geocoded point landed on the central sort building; correct facility.",
+          "truckGate": "Truck yard is fully fenced - perimeter fence lines clearly visible on N, NW, W and NE boundaries on satellite. Truck route enters the secured yard through a controlled point; classified truckGate true.",
+          "guardShack": "No guard booth could be positively identified at the yard entrance from satellite or Street View. Low confidence - flagged.",
+          "remoteGs": "Set true by rubric (gate present, no confirmed booth implies kiosk/remote check-in). Uncertain.",
+          "multipleFacilities": "Campus: central L-shaped sort building + a long diagonal cross-dock building to the north + massive trailer drop yards. Two separate FedEx buildings on the property.",
+          "dropArea": "Extensive trailer drop yard on the NW packed with several hundred trailers in long rows; 50+ band, dropYard true.",
+          "dockDoors": "Cross-dock doors with trailers backed in on all faces of both buildings; clearly 50+ band. Door count ~230 is an overhead estimate.",
+          "urbanRural": "Edge-of-town industrial park near Middletown PA, surrounded by farmland, fields and the Swatara Creek - Rural per rubric.",
+          "fastLaneOpportunity": "Wide paved aprons and ample yard width around the entry driveway leave room for an express/bypass lane.",
+          "entryLanes": "Entry/exit lane counts estimated at 2 each from the wide entry driveway; not crisply resolved.",
+          "trailersVisible": "Overhead count across all drop yards and dock aprons is approximate (~420)."
+        }
+      },
+      {
+        "id": "22-fedex-freight-hub-west-jefferson-oh",
+        "name": "FedEx Freight Hub - West Jefferson OH (Columbus, CMH)",
+        "type": "Freight LTL hub service center (~278 doors)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 39.9562,
+          "lng": -83.3437
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.9534,
+            "west": -83.3472,
+            "north": 39.9593,
+            "east": -83.3389
+          },
+          "truckGate": {
+            "south": 39.9554,
+            "west": -83.3406,
+            "north": 39.9559,
+            "east": -83.3398
+          },
+          "dropYards": [
+            {
+              "south": 39.9535,
+              "west": -83.3416,
+              "north": 39.9556,
+              "east": -83.3392
+            },
+            {
+              "south": 39.9578,
+              "west": -83.3462,
+              "north": 39.9591,
+              "east": -83.3428
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.9547,
+              "west": -83.3464,
+              "north": 39.9582,
+              "east": -83.3396
+            },
+            {
+              "south": 39.9556,
+              "west": -83.3472,
+              "north": 39.959,
+              "east": -83.3406
+            }
+          ],
+          "staging": {
+            "south": 39.9548,
+            "west": -83.3402,
+            "north": 39.9562,
+            "east": -83.3392
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 278,
+          "trailersVisible": 360,
+          "trailerParkingCapacity": 450,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 62,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Type: Freight LTL hub service center (~278 doors)\n- Address: 10 Commerce Pkwy, West Jefferson, OH 43162\n- Resolved center: 39.95620, -83.34370\n- Confidence: high",
+        "mapsUrl": "https://www.google.com/maps/@39.95620,-83.34370,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facility": "Confirmed FedEx Freight CMH service center at 10 Commerce Pkwy via the long LTL cross-dock building footprint and the FedEx Freight monument sign visible at the entrance driveway in Street View (pano captured 2024-08). Geocoded point landed on the building.",
+          "truckGate": "Single controlled truck entrance off Commerce Pkwy on the SE side. A fence line crosses the entrance driveway at a pinch point - clearly visible on z20/z21 satellite.",
+          "guardShack": "Small square guard-booth structure (~1-2 parking-space footprint) sits beside the truck driveway at the gate pinch point - clearly resolved on z21 satellite.",
+          "dockDoors": "Long LTL cross-dock building with dock doors and trailers backed in along the entire length of BOTH long faces. ~278 doors per FedEx Freight service-center data; 50+ band.",
+          "dropArea": "Large trailer drop yards on the SE side and beyond the NW dock end; hundreds of parked trailers. dropYard true, 50+ band.",
+          "drivewayLong": "The entrance driveway from Commerce Pkwy to the gate is long and can stack multiple trucks; deep approach.",
+          "fastLaneOpportunity": "Wide paved apron and yard around the gate; room for an express/bypass lane.",
+          "preGateStaging": "Paved apron outside the gate along the entrance driveway provides truck waiting space.",
+          "urbanRural": "Edge-of-town site near West Jefferson OH in a small industrial area surrounded by farmland and retention ponds; Rural per rubric.",
+          "buildingCount": "Main long LTL cross-dock building plus a separate shop/maintenance building on the SE; 2 buildings.",
+          "entryLanes": "Single combined entry/exit driveway through the gate; lane split not crisply resolved."
+        }
+      },
+      {
+        "id": "23-fedex-freight-hub-hagerstown-md",
+        "name": "FedEx Freight Hub - Hagerstown MD (HGR)",
+        "type": "Freight LTL hub service center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "entryLanes",
+          "exitLanes",
+          "scale"
+        ],
+        "center": {
+          "lat": 39.625,
+          "lng": -77.8035
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.6233,
+            "west": -77.8085,
+            "north": 39.6272,
+            "east": -77.7998
+          },
+          "truckGate": {
+            "south": 39.6242,
+            "west": -77.808,
+            "north": 39.6249,
+            "east": -77.807
+          },
+          "dropYards": [
+            {
+              "south": 39.6238,
+              "west": -77.807,
+              "north": 39.6247,
+              "east": -77.8005
+            },
+            {
+              "south": 39.6256,
+              "west": -77.8065,
+              "north": 39.6265,
+              "east": -77.8005
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.6247,
+              "west": -77.807,
+              "north": 39.6253,
+              "east": -77.8005
+            },
+            {
+              "south": 39.6252,
+              "west": -77.807,
+              "north": 39.6258,
+              "east": -77.8005
+            }
+          ],
+          "staging": {
+            "south": 39.6244,
+            "west": -77.8073,
+            "north": 39.6252,
+            "east": -77.8062
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 290,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 400,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 55,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: FedEx Freight Hub - Hagerstown MD (HGR)\n- Type: Freight LTL hub service center\n- Address: 16114 Transportation Cir, Hagerstown, MD 21740\n- Resolved coords: 39.62500, -77.80350 (cross-dock building center)\n- Maps: https://www.google.com/maps/@39.62500,-77.80350,400m/data=!3m1!1e3",
+        "mapsUrl": "https://www.google.com/maps/@39.62500,-77.80350,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Controlled truck entrance at the SW corner off Transportation Circle - 2024 Street View (sv3) clearly shows chain-link security fencing with sliding gates across the truck lanes, bollards, and lane markings; the whole property is fully fenced.",
+          "guardShack": "A gray windowed guard booth stands in the truck lane at the SW gate (windows on multiple sides, ~1-vehicle footprint), with inbound and outbound lanes splitting around it - clearly visible in z20 satellite and 2024 Street View sv3. Staffed booth - remoteGs false.",
+          "preGateStaging": "Wide paved apron outside/before the gate at the SW entrance gives room for trucks to wait before the booth.",
+          "postGateStaging": "Vast paved yard inside the gate before the dock aprons - extensive internal queuing/holding for an LTL hub.",
+          "drivewayLong": "Deep paved approach from the SW gate; easily holds 3+ trucks before the dock aprons.",
+          "fastLaneOpportunity": "Very wide gate apron with multiple lanes and abundant unused paved width - room for an express/bypass lane.",
+          "dockDoors": "Single very long LTL cross-dock building with continuous dock doors on BOTH long faces - FedEx Freight's largest terminal in North America; FedEx Freight HGR is cited at ~278+ doors. Estimated ~290 - count approximate, flagged uncertain. 50+ band.",
+          "dropArea": "Extensive trailer parking on both sides of the cross-dock building; hundreds of marked stalls, many holding parked trailers/dollies without tractors - dropYard true, 50+ band.",
+          "entryExitTogether": "Single SW gate handles both entry and exit, with the lanes splitting around the guard booth.",
+          "multipleFacilities": "Two FedEx buildings on the property - the main LTL cross-dock terminal/office and a separate truck-maintenance shop building at the SW (confirmed by web research describing a Terminal/Office building and a Truck Maintenance building).",
+          "railServed": "No rail spur enters the property.",
+          "urbanRural": "Hagerstown MD - the site is on the edge of town in a highway-adjacent industrial setting with woods and open ground around it; judged Rural.",
+          "scale": "No truck scale clearly identified - flagged uncertain.",
+          "buildingCount": "2 - main LTL cross-dock terminal plus truck-maintenance shop."
+        }
+      },
+      {
+        "id": "24-fedex-freight-hub-conley-ga",
+        "name": "FedEx Freight Hub - Conley GA (Atlanta, ATL)",
+        "type": "Freight LTL hub service center (~304 doors, one of the largest)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "truckGate"
+        ],
+        "center": {
+          "lat": 33.651,
+          "lng": -84.3388
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.6475,
+            "west": -84.342,
+            "north": 33.6548,
+            "east": -84.3355
+          },
+          "truckGate": {
+            "south": 33.6531,
+            "west": -84.3402,
+            "north": 33.6537,
+            "east": -84.3393
+          },
+          "dropYards": [
+            {
+              "south": 33.6478,
+              "west": -84.3415,
+              "north": 33.652,
+              "east": -84.336
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.6516,
+              "west": -84.3412,
+              "north": 33.6528,
+              "east": -84.3375
+            }
+          ],
+          "staging": {
+            "south": 33.652,
+            "west": -84.3408,
+            "north": 33.6528,
+            "east": -84.338
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 304,
+          "trailersVisible": 360,
+          "trailerParkingCapacity": 750,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 121,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Freight LTL hub service center (~304 doors, one of the largest in the FedEx Freight network)\nResolved coordinates: 33.6510, -84.3388\nConfidence: high",
+        "mapsUrl": "https://www.google.com/maps/@33.6510,-84.3388,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address '4900 Welcome All Rd' and roster coordinates (33.620745, -84.525293) both pointed to a residential area in the College Park/Camp Creek area, NOT a freight facility. The correct FedEx Freight ATL break-bulk hub is in the Conley GA 30288 industrial district near Thurman Rd, centered approximately 33.6510, -84.3388. Confirmed by Street View (2025-02) showing fenced parking with a 3-story FedEx Freight office building and FedEx-branded tractors and trailers, and by satellite showing a long cross-dock building with hundreds of trailers.",
+          "truckGate": "Entire ~121-acre property is perimeter-fenced (chain-link visible in Street View around the visitor parking and trailer yard). The truck yard is gated and separated from the front parking by an internal fence line; FedEx Freight break-bulk hubs are universally guard-controlled. Exact truck gate position inferred from the access corridor on the north side near the office; not directly Street-View confirmed because all panos are inside the visitor parking.",
+          "guardShack": "Not directly visible in available imagery (panos are inside the fenced parking lot). FedEx Freight hubs of this scale (~304 doors, a network-largest break-bulk facility) are staffed-guard-controlled at the truck gate as standard; classified true with medium confidence.",
+          "dockDoors": "Long NW-SE cross-dock break-bulk building with a dense, regular rhythm of dock doors on both long faces; the ATL hub is cited in trucking forums as a ~304-door facility, firmly in the 50+ band. A second long narrow dock building sits to the east.",
+          "dropArea": "Vast paved trailer yard south and east of the cross-dock holds hundreds of parked trailers and pup trailers without tractors; firmly 50+.",
+          "dropYard": "Dedicated trailer-storage lot covers the majority of the property south/SE of the docks, full of parked trailers.",
+          "drivewayLong": "Large paved yard and deep approach from the gate to the cross-dock provides ample room for a 3+ truck queue.",
+          "fastLaneOpportunity": "Extensive paved yard width near the gate corridor gives physical room to add a dedicated bypass/express lane.",
+          "entryLanes": "Estimated 2 inbound / 2 outbound lanes at the controlled gate; exact count not resolvable from overhead imagery.",
+          "buildingCount": "Main cross-dock building, a 3-story office building at the NE end, and a second long dock building to the east = 3.",
+          "railServed": "No rail spur enters the property; classified false.",
+          "siteAreaAcres": "Derived from the perimeter box (~813m x ~602m); large but consistent with one of the largest break-bulk hubs in the FedEx Freight network."
+        }
+      },
+      {
+        "id": "25-fedex-freight-hub-harrison-ar",
+        "name": "FedEx Freight Hub - Harrison AR (HRO)",
+        "type": "Freight LTL hub / former American Freightways HQ campus",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "truckGate",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "postGateStaging"
+        ],
+        "center": {
+          "lat": 36.2575,
+          "lng": -93.132
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 36.2545,
+            "west": -93.1355,
+            "north": 36.2605,
+            "east": -93.1285
+          },
+          "truckGate": {
+            "south": 36.2552,
+            "west": -93.1308,
+            "north": 36.2558,
+            "east": -93.13
+          },
+          "dropYards": [
+            {
+              "south": 36.256,
+              "west": -93.1352,
+              "north": 36.2592,
+              "east": -93.133
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 36.258,
+              "west": -93.134,
+              "north": 36.259,
+              "east": -93.1322
+            },
+            {
+              "south": 36.2562,
+              "west": -93.134,
+              "north": 36.2572,
+              "east": -93.1322
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 104,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Freight LTL hub / former American Freightways HQ campus\nResolved coordinates: 36.2575, -93.1320\nConfidence: medium",
+        "mapsUrl": "https://www.google.com/maps/@36.2575,-93.1320,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address '2200 Forward Dr, Harrison AR' and coordinates (36.256793, -93.132174, GEOMETRIC_CENTER) resolve to the correct campus. This is the FedEx Freight HRO service center co-located with FedEx Freight Corporate Offices on the heritage American Freightways HQ campus. Confirmed by satellite (corporate office complex + two LTL cross-dock buildings + large employee parking) and Street View (2024) showing FedEx-branded trailers in the operations yard and perimeter fencing.",
+          "multipleFacilities": "Campus has distinct building clusters: a connected corporate-office complex on the east side plus two separate long LTL cross-dock terminal buildings on the west side, with internal roads and ponds between them.",
+          "truckGate": "Entire campus is perimeter-fenced (chain-link around the operations/parking sides, decorative metal fence on the corporate frontage). The operating LTL terminal yard is access-controlled as a FedEx Freight network standard. The corporate-office driveway off Forward Dr is open-access employee parking; the truck entrance to the dock yard is a separate controlled point. Exact gate not directly Street-View confirmed.",
+          "guardShack": "No staffed guard booth identified in satellite or Street View at the truck entrance. Classified as remote/kiosk check-in (remoteGs true). Low-medium confidence.",
+          "dockDoors": "Two long narrow LTL cross-dock buildings each with a regular rhythm of dock doors on both long faces and trailers backed in; combined estimate ~90 doors, placing the site in the 50+ band. Door count is an overhead estimate.",
+          "dropArea": "Paved trailer parking around both dock buildings holds dozens of trailers/pups without tractors; estimated 25-50 band.",
+          "dropYard": "Dedicated paved trailer-storage areas flank the two cross-dock buildings.",
+          "drivewayLong": "Large internal paved yard between the dock buildings and the office complex gives ample room for a 3+ truck queue.",
+          "urbanRural": "Harrison AR is a small town (~13,000 population) in the Ozarks; the campus sits on the edge of town surrounded by fields and low-density development. Classified Rural.",
+          "buildingCount": "Two LTL cross-dock buildings + a connected corporate-office complex counted as ~3 office structures = 5 distinct buildings.",
+          "railServed": "No rail spur enters the campus; classified false.",
+          "postGateStaging": "Large internal paved yard could serve as a post-gate holding area; inferred, medium confidence.",
+          "siteAreaAcres": "Derived from the perimeter box; includes corporate offices, large employee parking, ponds, and lawns in addition to the truck-operations area."
+        }
+      },
+      {
+        "id": "26-fedex-freight-hub-memphis-tn",
+        "name": "FedEx Freight Hub - Memphis TN",
+        "type": "Freight LTL hub service center (FedEx Freight national HQ market)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 35.05305,
+          "lng": -90.04885
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.0508,
+            "west": -90.0508,
+            "north": 35.0552,
+            "east": -90.047
+          },
+          "truckGate": {
+            "south": 35.0543,
+            "west": -90.0494,
+            "north": 35.0547,
+            "east": -90.0487
+          },
+          "dropYards": [
+            {
+              "south": 35.0508,
+              "west": -90.0508,
+              "north": 35.0535,
+              "east": -90.047
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.0533,
+              "west": -90.05,
+              "north": 35.0543,
+              "east": -90.0472
+            },
+            {
+              "south": 35.0526,
+              "west": -90.0492,
+              "north": 35.0533,
+              "east": -90.047
+            }
+          ],
+          "staging": {
+            "south": 35.0535,
+            "west": -90.05,
+            "north": 35.0542,
+            "east": -90.0482
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 220,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 600,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 41.9,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster address (incorrect): 2851 Bartlett Rd, Memphis, TN 38134 — RANGE_INTERPOLATED geocode at 35.203323, -89.868928. Satellite at that point showed a small commercial strip / vacant land near a rail line in central Memphis (38112 area), with no LTL freight terminal.\n- Correct facility: FedEx Freight LTL hub, 461 Winchester Rd, Memphis, TN 38109 (FedEx Freight terminal code MEM).\n- Locked center: 35.05305, -90.04885.\n- How confirmed: FedEx Freight's own service-center listing for TN lists \"MEMPHIS (MEM) — 461 Winchester Rd, Memphis, TN 38109-3951.\" Satellite at that address shows a large LTL break-bulk terminal — long cross-dock buildings with doors on both faces and a huge trailer yard. Street View (2025-12) along Winchester Rd shows FedEx Freight tractors and trailers (FedEx logos) and FedEx Freight building signage. This is the correct site.",
+        "mapsUrl": "https://www.google.com/maps/@35.05305,-90.04885,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address '2851 Bartlett Rd' geocoded to an unrelated commercial strip in central Memphis (38112). Correct facility is the FedEx Freight LTL hub at 461 Winchester Rd, Memphis, TN 38109 (FedEx Freight terminal code MEM), confirmed by Street View showing FedEx Freight tractors/trailers and FedEx Freight building signage.",
+          "truckGate": "Entire property is fenced with black privacy screening (2025 imagery). Inner controlled gate line separates the front employee/visitor parking from the secured trailer yard; gate openings visible at z21.",
+          "guardShack": "Small ~1-vehicle-footprint booth structure sits beside the inner gate opening at the parking/yard boundary (z21 imagery). Privacy fence blocks ground-level confirmation; classified as guard shack with medium confidence.",
+          "drivewayLong": "Wide entrance apron off Winchester Rd plus deep front parking/staging area gives ample room for a 3+ truck queue before the inner gate.",
+          "fastLaneOpportunity": "Very wide entrance apron and large paved front lot give physical room to add a dedicated bypass/express lane.",
+          "dockDoors": "Large LTL break-bulk hub: two long cross-dock buildings with dock doors on both long faces; door count estimated ~220 total, comfortably 50+ band (comparable FedEx Freight hubs ATL ~304, STL ~240 doors).",
+          "dropYard": "Extensive gravel/paved trailer yard south of the docks holds several hundred parked trailers and pup trailers without tractors.",
+          "entryLanes": "Estimated 2 inbound lanes at the controlled gate; exact count not fully resolvable from overhead imagery due to privacy fencing.",
+          "railServed": "A rail line runs along the east edge of the property but no spur enters the FedEx yard; classified false."
+        }
+      },
+      {
+        "id": "27-fedex-freight-hub-hodgkins-il",
+        "name": "FedEx Freight Hub - Hodgkins IL (Chicago)",
+        "type": "Freight LTL hub service center (Chicago metro)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "preGateStaging",
+          "postGateStaging",
+          "drivewayLong",
+          "drivewayShort",
+          "backupSensitive",
+          "entryExitTogether",
+          "entryExitSeparate",
+          "entryLanes",
+          "exitLanes",
+          "fastLaneOpportunity",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "multipleFacilities",
+          "scale",
+          "dropYard",
+          "multiStep",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "buildingCount",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 41.791181,
+          "lng": -87.856685
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.79,
+            "west": -87.8595,
+            "north": 41.7935,
+            "east": -87.854
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 41.7905,
+              "west": -87.858,
+              "north": 41.7922,
+              "east": -87.8562
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 0,
+          "buildingCount": 4,
+          "siteAreaAcres": 30,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Freight LTL hub service center (Chicago metro)\nRoster coordinates: 41.791181, -87.856685 (RANGE_INTERPOLATED)\nConfidence: low — FACILITY NOT POSITIVELY IDENTIFIED",
+        "mapsUrl": "https://www.google.com/maps/@41.791181,-87.856685,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "FACILITY NOT POSITIVELY IDENTIFIED. The roster address '9501 W 55th St, Hodgkins IL' (RANGE_INTERPOLATED geocode) resolves to a generic multi-tenant big-box industrial/warehouse park in the Hodgkins/McCook IL corridor. Satellite probes (z15-z19) and Street View (2022-2025) across the area found wide-footprint distribution warehouses but NO dedicated FedEx Freight LTL cross-dock hub (no characteristic long-narrow break-bulk building with a large trailer drop yard) and NO FedEx Freight signage. Web research confirms the historical Chicago FedEx Freight terminal (CGO, Lyons/Summit area) was reported closed years ago and the active FedEx Freight Chicago-area service center is BOL at 310 E Crossroads Pkwy, Bolingbrook IL. The Hodgkins roster entry appears to be based on a stale or incorrect locator listing; FedEx Freight may lease cross-dock space within this industrial park, but it could not be visually confirmed.",
+          "classification": "All classification fields are best-effort estimates of what is physically visible at the roster address (an open, unfenced multi-tenant industrial park with big-box warehouse dock faces and some trailers backed in). They do NOT represent a confirmed FedEx Freight facility. All fields flagged uncertain.",
+          "truckGate": "No perimeter fencing or controlled gate observed; the industrial park has open road access. Set false (uncertain).",
+          "dockDoors": "Big-box warehouse buildings in the park have dock doors and some trailers backed in along the central drive aisle; banded 10-25 as a rough best-effort estimate for any single tenant, not a confirmed FedEx count.",
+          "urbanRural": "Hodgkins/McCook is within the dense Chicago metro industrial fabric; classified Urban.",
+          "recommendation": "Flag for human review. The correct active FedEx Freight Chicago-area facility is most likely the Bolingbrook (BOL) service center at 310 E Crossroads Pkwy, Bolingbrook IL 60440 — the roster entry/address should be verified and possibly re-pointed there."
+        }
+      },
+      {
+        "id": "28-fedex-freight-hub-earth-city-mo",
+        "name": "FedEx Freight Hub - Earth City MO (St. Louis, STL)",
+        "type": "Freight LTL hub service center (~240 doors)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "truckGate"
+        ],
+        "center": {
+          "lat": 38.835,
+          "lng": -90.521
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.833,
+            "west": -90.524,
+            "north": 38.8378,
+            "east": -90.5165
+          },
+          "truckGate": {
+            "south": 38.8334,
+            "west": -90.5228,
+            "north": 38.834,
+            "east": -90.5218
+          },
+          "dropYards": [
+            {
+              "south": 38.8345,
+              "west": -90.52,
+              "north": 38.8375,
+              "east": -90.5168
+            },
+            {
+              "south": 38.8358,
+              "west": -90.524,
+              "north": 38.8375,
+              "east": -90.5215
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 38.8344,
+              "west": -90.524,
+              "north": 38.8354,
+              "east": -90.518
+            }
+          ],
+          "staging": {
+            "south": 38.834,
+            "west": -90.5232,
+            "north": 38.8346,
+            "east": -90.521
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 240,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 600,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 86,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Freight LTL hub service center (~240 doors)\nResolved coordinates: 38.8350, -90.5210\nConfidence: high",
+        "mapsUrl": "https://www.google.com/maps/@38.8350,-90.5210,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address '3300 Rider Trl S, Earth City MO' and coordinates (38.761891, -90.455962, ROOFTOP) resolve to a multi-story glass OFFICE building in the Earth City office park - NOT a freight hub. The correct FedEx Freight STL break-bulk hub is at 3951 New Town Blvd, St Charles, MO 63301, centered approximately 38.8350, -90.5210 (across the Missouri River, ~9 km NW of the roster point). Confirmed by satellite showing a classic LTL break-bulk cross-dock building with hundreds of trailers, and by the FedEx Freight STL service-center locator page (local.fedex.com/mo/saint-charles/freight-STL).",
+          "truckGate": "Large dedicated LTL hub property; truck yard access controlled via the New Town Blvd access road on the south/SW side. Perimeter is defined; exact gate position inferred from the access corridor (Street View coverage near the gate is limited). FedEx Freight break-bulk hubs are universally gated.",
+          "guardShack": "Not directly resolved in available imagery. A ~240-door break-bulk hub is staffed-guard-controlled at the truck gate as a FedEx Freight network standard; classified true with medium confidence.",
+          "dockDoors": "Long E-W cross-dock break-bulk building with a dense regular rhythm of dock doors on both long faces plus a perpendicular north wing; trailers backed in along both faces. Cited in trucking forums as a ~240-door hub - firmly 50+ band.",
+          "dropArea": "Vast paved trailer drop yard north and east of the cross-dock holds hundreds of parked trailers/pups without tractors, including organized rows; firmly 50+.",
+          "dropYard": "Dedicated trailer-storage lots flank the cross-dock on the north and east sides.",
+          "drivewayLong": "Large paved yard between the gate and the docks provides ample room for a 3+ truck queue.",
+          "fastLaneOpportunity": "Wide paved approach and large yard near the gate give physical room to add a dedicated bypass/express lane.",
+          "entryLanes": "Estimated 2 inbound / 2 outbound lanes at the controlled gate; exact count not resolvable from overhead imagery.",
+          "buildingCount": "Main cross-dock break-bulk building (with north wing), an office/dispatch building at the south face, and a separate maintenance/shop building on the east side = 3.",
+          "railServed": "No rail spur enters the property; classified false.",
+          "siteAreaAcres": "Derived from the perimeter box (~534m x ~650m), ~86 acres."
+        }
+      },
+      {
+        "id": "29-fedex-freight-hub-dallas-fort-worth-tx",
+        "name": "FedEx Freight Hub - Dallas/Fort Worth TX",
+        "type": "Freight LTL hub service center (DFW metro)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "dropArea",
+          "multipleFacilities",
+          "postGateStaging",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 32.8378,
+          "lng": -97.334
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.8362,
+            "west": -97.3395,
+            "north": 32.8398,
+            "east": -97.33
+          },
+          "truckGate": {
+            "south": 32.8384,
+            "west": -97.3318,
+            "north": 32.839,
+            "east": -97.3308
+          },
+          "dropYards": [
+            {
+              "south": 32.8366,
+              "west": -97.3392,
+              "north": 32.8384,
+              "east": -97.3305
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.8378,
+              "west": -97.3392,
+              "north": 32.8388,
+              "east": -97.3305
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 250,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 70,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Freight LTL hub service center (DFW metro)\nResolved coordinates: 32.8378, -97.3340\nConfidence: medium",
+        "mapsUrl": "https://www.google.com/maps/@32.8378,-97.3340,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address '3600 Reeves Pl, Fort Worth TX 76119' and coordinates (32.790629, -97.223508, RANGE_INTERPOLATED) resolve to a small multi-tenant flex/industrial building in the Carter Industrial Park (SE Fort Worth) - NOT a freight LTL hub. The official FedEx Freight FTW service center is at 1909 Great Southwest Pkwy, Fort Worth, TX 76106 (confirmed by the FedEx Freight FTW service-center map PDF and locator). That address sits in the Great Southwest Industrial District (GSID), inside Loop 820 north of Meacham Blvd. Satellite at the geocoded GSID location reveals an LTL cross-dock terminal complex (multiple long narrow cross-dock buildings with trailers backed in on both faces, dock aprons, trailer parking, rail along the south edge) at approximately 32.8378, -97.3340.",
+          "facilityIdentity": "The cross-dock terminal complex at the resolved GSID location is unmistakably an LTL truck terminal, but it appears to be a multi-carrier terminal corridor (a 'C.M.I.' trailer was seen at one cross-dock in Street View). FedEx Freight FTW occupies a cross-dock within this complex; the exact building could not be 100% confirmed with FedEx signage in Street View. Facility-type and location are confident; the precise FedEx footprint within the complex is medium-confidence.",
+          "truckGate": "LTL cross-dock terminals in this complex have controlled yard access; the terminal yards are fenced and gated off Great Southwest Pkwy. Exact gate not directly confirmed.",
+          "guardShack": "No staffed guard booth identified; LTL service centers of this size typically use remote/kiosk gate check-in. Classified remoteGs true, low-medium confidence.",
+          "dockDoors": "Long narrow cross-dock buildings with a regular rhythm of dock doors on both long faces, trailers backed in; combined estimate ~130 doors across the cross-docks attributable to the terminal -> 50+ band. Overhead estimate.",
+          "dropArea": "Paved trailer parking and dock aprons hold dozens of trailers/pups; estimated 25-50.",
+          "dropYard": "Dedicated trailer parking flanks the cross-dock buildings.",
+          "drivewayLong": "Deep paved aprons and yard between gate and docks give room for a 3+ truck queue.",
+          "fastLaneOpportunity": "Wide paved terminal apron gives physical room to add a bypass/express lane.",
+          "multipleFacilities": "The GSID terminal corridor hosts multiple long cross-dock buildings (multi-carrier); flagged true, but FedEx's own footprint is a subset.",
+          "urbanRural": "Within the dense Fort Worth metro industrial fabric (GSID, inside Loop 820); classified Urban.",
+          "railServed": "A rail line runs along the south edge of the terminal corridor but no spur enters the FedEx truck yard; classified false.",
+          "siteAreaAcres": "Derived from the perimeter box around the terminal complex; FedEx Freight's leased portion is a subset of this."
+        }
+      },
+      {
+        "id": "30-fedex-freight-hub-stockton-ca",
+        "name": "FedEx Freight Hub - Stockton CA",
+        "type": "Freight LTL hub service center (Northern California)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "multipleFacilities",
+          "postGateStaging",
+          "siteAreaAcres",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 37.9118,
+          "lng": -121.2235
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 37.9098,
+            "west": -121.2258,
+            "north": 37.9135,
+            "east": -121.2208
+          },
+          "truckGate": {
+            "south": 37.9104,
+            "west": -121.2252,
+            "north": 37.9109,
+            "east": -121.2244
+          },
+          "dropYards": [
+            {
+              "south": 37.911,
+              "west": -121.225,
+              "north": 37.9132,
+              "east": -121.2212
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 37.9112,
+              "west": -121.2248,
+              "north": 37.9124,
+              "east": -121.2222
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 280,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 40,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Freight LTL hub service center (Northern California)\nResolved coordinates: 37.9118, -121.2235\nConfidence: medium",
+        "mapsUrl": "https://www.google.com/maps/@37.9118,-121.2235,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address '4444 S B St, Stockton CA 95206' and coordinates (37.908392, -121.244053, RANGE_INTERPOLATED) resolve to a modern big-box distribution-warehouse park in south Stockton - NOT an LTL freight hub. The FedEx Freight STK service center is consistently listed (FedEx Freight STK page, Waze, Yellow Pages, Indeed) at 4520 S Highway 99 / 4520 CA-99, Stockton, CA 95215. Geocoding places that address at ~37.9118, -121.2235, where satellite reveals an LTL cross-dock terminal complex along the SR-99 corridor (long narrow cross-dock buildings with trailers backed in on both faces, dock aprons, dense rows of pup trailers).",
+          "facilityIdentity": "The cross-dock terminal complex at the resolved location is unmistakably an LTL truck terminal. Street View (2026-03) shows SAIA branding at the main cross-dock's SW frontage, indicating the complex hosts SAIA LTL Freight; the FedEx Freight STK terminal (address 4520 S Hwy 99) is either co-located in this multi-carrier terminal complex or occupies an adjacent cross-dock within it. Facility type and corridor location are confident; the exact FedEx building footprint within the complex could not be confirmed with FedEx signage - medium confidence.",
+          "truckGate": "LTL cross-dock terminal yards in this complex are perimeter-fenced with controlled gates (a metal security fence and gate visible in Street View along S Highway 99 frontage road).",
+          "guardShack": "No staffed guard booth identified; LTL service centers of this size typically use remote/kiosk gate check-in. Classified remoteGs true, low-medium confidence.",
+          "dockDoors": "Long narrow cross-dock building(s) with a dense regular rhythm of dock doors on both long faces, trailers backed in; estimate ~90+ doors -> 50+ band. Overhead estimate.",
+          "dropArea": "Extensive paved trailer parking with dense rows of pup trailers without tractors; firmly 50+.",
+          "dropYard": "Dedicated trailer-storage yard flanks the cross-dock buildings.",
+          "drivewayLong": "Deep paved aprons and yard between the gate and docks give room for a 3+ truck queue.",
+          "fastLaneOpportunity": "Wide paved terminal apron gives physical room to add a bypass/express lane.",
+          "multipleFacilities": "The S Highway 99 terminal corridor hosts multiple LTL cross-dock buildings/operations (SAIA confirmed; FedEx Freight STK address geocodes into the same complex).",
+          "urbanRural": "Within the Stockton metro industrial fabric along the SR-99 corridor; classified Urban.",
+          "railServed": "No rail spur enters the terminal yard; classified false.",
+          "siteAreaAcres": "Derived from the perimeter box around the terminal complex; FedEx Freight's portion is a subset."
+        }
+      }
+    ]
+  }
+}

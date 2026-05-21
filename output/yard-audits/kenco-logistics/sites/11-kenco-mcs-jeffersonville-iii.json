@@ -1,0 +1,54 @@
+{
+  "name": "Kenco MCS Jeffersonville III - Sellersburg IN",
+  "type": "Multi-Client Distribution Center",
+  "coords": { "lat": 38.37820, "lng": -85.75300 },
+  "geofences": {
+    "perimeter": { "south": 38.37380, "west": -85.75720, "north": 38.38060, "east": -85.74780 },
+    "truckGate": { "south": 38.37650, "west": -85.74800, "north": 38.37730, "east": -85.74700 },
+    "dropYards": [
+      { "south": 38.37560, "west": -85.75250, "north": 38.37840, "east": -85.74950 }
+    ],
+    "dockAprons": [
+      { "south": 38.37600, "west": -85.75450, "north": 38.37900, "east": -85.75050 },
+      { "south": 38.37420, "west": -85.75650, "north": 38.37760, "east": -85.75200 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 96.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.37820,-85.75300,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoors", "dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "location": "Roster coords (38.398626,-85.776916, APPROXIMATE) landed on farmland 2km NW. Resolved via web research to Silver Creek Logistics Center Building B, 7803 Highway 31 E, Sellersburg IN 47172 - the 417,270 SF Class A building (built 2019) exactly matches roster SF. Confirmed on satellite + Street View.",
+    "truckGate": "Open access driveway off Highway 31 E - no barrier arm, no gate, no guard booth. Confirmed via Street View (capture 2026-03): wide unobstructed paved entrance drive with only a monument sign. Modern logistics park, property is unfenced.",
+    "guardShack": "No guard booth anywhere at the entrance or on the access road.",
+    "remoteGs": "False - there is no truck gate at all, so remote guard-shack does not apply.",
+    "multipleFacilities": "Two large Class A buildings on one shared property: Building B (~417,270 SF, north/smaller, the roster facility) and Building A (~660,450 SF, south/larger). Shared access road and drop yard.",
+    "dockDoors": "Building B is ~350m long; dock bank faces SW toward the central drive aisle with many trailers backed in. 25-50 band is a conservative estimate from a single visible dock face; full-site count higher.",
+    "dropYard": "Large paved trailer drop area in the central aisle between the two buildings, full of parked trailers without tractors.",
+    "fastLaneOpportunity": "Wide entrance apron and generous paved drive width with room to add an express/bypass lane.",
+    "urbanRural": "Edge of Sellersburg IN, a small town; adjacent residential subdivision but broader setting is small-town/rural per rubric.",
+    "railServed": "A rail line runs parallel to Highway 31 E along the east property edge but no spur enters the property.",
+    "trailersVisible": "~55 trailers counted across the central drop yard and dock aprons in zoom-19 imagery; approximate."
+  },
+  "method": "deep-audit"
+}

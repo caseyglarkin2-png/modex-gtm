@@ -1,0 +1,63 @@
+{
+  "name": "Pactiv Evergreen - Bedford Park IL",
+  "type": "Manufacturing Plant (Foodservice)",
+  "coords": { "lat": 41.761600, "lng": -87.769100 },
+  "geofences": {
+    "perimeter": { "south": 41.759900, "west": -87.770700, "north": 41.763200, "east": -87.767500 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 41.761200, "west": -87.769200, "north": 41.761700, "east": -87.768300 },
+      { "south": 41.760700, "west": -87.770200, "north": 41.761000, "east": -87.769400 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 12,
+    "trailerParkingCapacity": 20,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 28.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.761600,-87.769100,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "buildingCount"],
+  "fieldNotes": {
+    "truckGate": "No controlled truck gate. The campus access road off S. Mason Avenue is an open, unbarriered private drive — confirmed in 2018-10 and 2025-04 Street View. No barrier arm or gate at the property line.",
+    "guardShack": "No guard booth at the campus entrance in any Street View heading.",
+    "remoteGs": "False — no gate exists, so remote check-in flag does not apply.",
+    "multipleFacilities": "Multi-building Pactiv manufacturing campus — 4+ large buildings clustered around a private internal access road off S. Mason Avenue. Pactiv Evergreen blue branded sign confirmed at the office entrance (2025-04 Street View).",
+    "drivewayLong": "The internal campus road is long and deep; ample queue depth between the public road and the dock banks.",
+    "dockDoors": "Dock banks on the SW face of the dark-roofed central building (~8-10 doors) plus additional doors on the brick building faces; total banded 10-25, estimate.",
+    "railServed": "A rail spur curves into the NE edge of the campus from the adjacent Belt Railway / Clearing Yard; rail cars visible (z19 satellite).",
+    "buildingCount": "4+ large buildings on the campus; exact count uncertain — some may be separately occupied within the same industrial park.",
+    "scale": "No truck scale visible on the campus."
+  },
+  "method": "deep-audit"
+}

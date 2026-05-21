@@ -1,0 +1,50 @@
+{
+  "name": "Coca-Cola Consolidated - Sandston Sales & Distribution Center, VA",
+  "type": "Sales / Distribution Center",
+  "coords": { "lat": 37.532500, "lng": -77.337200 },
+  "geofences": {
+    "perimeter": { "south": 37.5306, "west": -77.3408, "north": 37.5347, "east": -77.3345 },
+    "truckGate": { "south": 37.5337, "west": -77.3372, "north": 37.5343, "east": -77.3363 },
+    "dropYards": [
+      { "south": 37.5331, "west": -77.3407, "north": 37.5340, "east": -77.3392 },
+      { "south": 37.5333, "west": -77.3358, "north": 37.5341, "east": -77.3347 }
+    ],
+    "dockAprons": [
+      { "south": 37.5324, "west": -77.3402, "north": 37.5331, "east": -77.3388 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45, "trailersVisible": 70, "trailerParkingCapacity": 110,
+    "truckGateCount": 1, "buildingCount": 4, "siteAreaAcres": 62.6,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.5325,-77.3372,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "truckGate", "dockDoorCount"],
+  "fieldNotes": {
+    "location": "Roster lat/lng (37.5108,-77.3446) landed in a residential neighborhood ~1.5 km SW of the real site and roster address (5301 Eubank Rd) is also off. Correct facility is Coca-Cola Consolidated at 500 Eastpark Ct, Sandston/Highland Springs VA (37.5324,-77.3369), confirmed via Nominatim geocode and company press releases describing the 63-acre campus, 300,000 sq ft plant/DC plus a new 210,000 sq ft warehouse.",
+    "truckGate": "Single private access drive enters the campus from Eastpark Court at the NE corner; campus is fully fenced/tree-buffered with one controlled entrance. No Street View on the private drive, so the exact gate hardware is inferred from layout - rated as a controlled truck gate at medium confidence.",
+    "guardShack": "No distinct guard-booth structure visible at the entrance in z20 imagery; the small building near the access drive is a metal utility/office structure attached to operations, not a beside-the-lane booth. guardShack=false.",
+    "remoteGs": "Truck gate present but no guard shack visible -> remoteGs=true (kiosk/badge/app check-in implied). Medium confidence.",
+    "dockDoorCount": "~45 total: sawtooth dock canopy on the north face of the west warehouse holds ~30+ doors with trailers backed in; the east warehouse adds another bank of ~10-15 along its east face. Counted from z19 imagery - approximate.",
+    "dropArea": "50+ trailers parked without tractors in the NW drop yard plus a smaller east lot; large fleet of red Coca-Cola Consolidated / Red Classic trailers and bobtail delivery trucks visible.",
+    "shipRcvSeparate": "Dock banks on physically separate building faces - west warehouse north face (canopy docks) and east warehouse east face - support separate ship/receiving operations.",
+    "multipleFacilities": "Campus has 4 distinct buildings: west warehouse, dark dock-canopy structure, central warehouse, and the rail-served manufacturing building.",
+    "railServed": "A rail spur with hopper/gondola cars runs into the north edge of the property serving the manufacturing building (concentrate/syrup intake). Confirmed in z20 imagery.",
+    "drivewayLong": "Long internal approach from the Eastpark Court gate around to the docks easily holds 3+ trucks.",
+    "urbanRural": "Richmond metro, immediately adjacent to Richmond International Airport and I-64, surrounded by industrial parks and dense suburban development - Urban."
+  },
+  "method": "deep-audit"
+}

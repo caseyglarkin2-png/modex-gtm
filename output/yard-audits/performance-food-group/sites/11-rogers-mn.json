@@ -1,0 +1,50 @@
+{
+  "name": "Performance Foodservice - Twin Cities (Rogers MN)",
+  "type": "Broadline Foodservice Distribution Center",
+  "coords": { "lat": 45.197902, "lng": -93.54305 },
+  "geofences": {
+    "perimeter": { "south": 45.19510, "west": -93.54560, "north": 45.19900, "east": -93.54000 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 45.19560, "west": -93.54560, "north": 45.19900, "east": -93.54440 }
+    ],
+    "dockAprons": [
+      { "south": 45.19560, "west": -93.54440, "north": 45.19900, "east": -93.54330 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 23.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@45.197902,-93.54305,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "scale"],
+  "fieldNotes": {
+    "truckGate": "No controlled truck gate. The main access driveway runs straight from Commerce Blvd into the property with no barrier arm, sliding gate, or checkpoint pinch-point. The trailer yard along the west side is open to the property road; perimeter is a grassy berm and trees, no security fence.",
+    "guardShack": "No guard booth anywhere on the property. Entrance from Street View shows an open driveway directly to the building forecourt with employee parking — no gatehouse structure.",
+    "dockDoors": "Long dock face along the east side of the building with trailers backed into doors visible in tight imagery. Counted ~50+; band 50+. Exact count uncertain due to trailers obscuring some doors.",
+    "dropArea": "Extensive trailer drop yard along the west side of the building — dense rows of angled drop trailers (90+ trailers visible in imagery), clearly a dedicated trailer-storage lot.",
+    "postGateStaging": "Wide internal paved apron between the dock face and the drop yard provides ample post-entry queue/staging room.",
+    "urbanRural": "Located in the Rogers MN industrial park on the NW edge of the Twin Cities metro, adjacent to undeveloped wooded/wetland land and a retention pond. Edge-of-metro small-industrial setting; classified Rural per rubric tie-break.",
+    "scale": "No truck scale visible in overhead imagery.",
+    "buildingCount": "Single large L-shaped distribution building."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,61 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+Pactiv Evergreen - Aberdeen NC,Manufacturing Plant (Food Merchandising; foam tray/pad converting),#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,YES,,,,YES,,,,,Rural,,,,,"https://www.google.com/maps/@35.138550,-79.437750,400m/data=!3m1!1e3"
+Pactiv Evergreen - Canandaigua NY,Manufacturing Plant (Food Merchandising campus),#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@42.9055,-77.2998,400m/data=!3m1!1e3"
+Pactiv Evergreen - Canandaigua CTC Distribution Center NY,Distribution Center,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,,Rural,,YES,,YES,"https://www.google.com/maps/@42.9053,-77.3035,400m/data=!3m1!1e3"
+Pactiv Evergreen - Temple TX Plant,Manufacturing Plant (Foodservice),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,YES,,YES,Urban,,YES,,YES,"https://www.google.com/maps/@31.131,-97.339,400m/data=!3m1!1e3"
+Pactiv Evergreen - Temple TX Distribution Center,Distribution Center / Regional Mixing Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@31.1333,-97.3376,400m/data=!3m1!1e3"
+Pactiv Evergreen - Abilene TX,Manufacturing Plant (Food Merchandising),#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,YES,,YES,,,YES,,,,YES,Rural,,,,,"https://www.google.com/maps/@32.459931,-99.81015,400m/data=!3m1!1e3"
+Pactiv Evergreen - Corsicana TX Plant,Manufacturing Plant (Foodservice),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,YES,,,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@32.09865,-96.42055,400m/data=!3m1!1e3"
+Pactiv Evergreen - Corsicana TX Warehouse,Warehouse / Distribution,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@32.07520,-96.45745,400m/data=!3m1!1e3"
+Pactiv Evergreen - Athens GA,Manufacturing Plant (Beverage Merchandising; carton converting),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,YES,,,,YES,,,,Urban,,YES,,YES,"https://www.google.com/maps/@33.97990,-83.38900,400m/data=!3m1!1e3"
+Pactiv Evergreen - Cedar Rapids IA,Manufacturing Plant (Filling Equipment / carton filling machinery),#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,YES,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@41.95460,-91.67890,400m/data=!3m1!1e3"
+Pactiv Evergreen - Plant City FL,Manufacturing Plant (Beverage Merchandising; carton converting),#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,,YES,,,,,,,,Rural,,,,,"https://www.google.com/maps/@28.01800,-82.10030,400m/data=!3m1!1e3"
+Pactiv Evergreen - Raleigh NC,Manufacturing Plant (Beverage Merchandising; carton converting),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,,,YES,YES,YES,,1,1,,,YES,,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@35.750876,-78.640973,400m/data=!3m1!1e3"
+Pactiv Evergreen - Turlock CA,Manufacturing Plant (Beverage Merchandising; carton converting),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,YES,,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@37.491536,-120.866032,400m/data=!3m1!1e3"
+Pactiv Evergreen - Bedford Park IL,Manufacturing Plant (Foodservice),#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,,YES,,,YES,,,,,Urban,,YES,,,"https://www.google.com/maps/@41.761600,-87.769100,400m/data=!3m1!1e3"
+Pactiv Evergreen - Bridgeview IL,Manufacturing Plant (Foodservice; ISCC PLUS certified),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,1,1,YES,,,YES,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@41.746000,-87.810400,400m/data=!3m1!1e3"
+Pactiv Evergreen - Franklin Park IL,Manufacturing Plant (Food Merchandising),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,YES,YES,,1,1,,,YES,,,,YES,,,YES,Urban,,YES,,YES,"https://www.google.com/maps/@41.926483,-87.864226,400m/data=!3m1!1e3"
+Pactiv Evergreen - Manteno IL,Manufacturing Plant (Food Merchandising),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,YES,,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@41.237499,-87.817748,400m/data=!3m1!1e3"
+Pactiv Evergreen - Frankfort IL,Manufacturing Plant (Foodservice; co-located warehouse),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@41.490600,-87.846800,400m/data=!3m1!1e3"
+Pactiv Evergreen - Romeoville Regional Mixing Center IL,Distribution Center / Regional Mixing Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@41.627000,-88.116500,400m/data=!3m1!1e3"
+Pactiv Evergreen - Columbus OH,Manufacturing Plant (Food Merchandising),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,YES,,,,,YES,,,,Urban,,,,,"https://www.google.com/maps/@39.99585,-83.12255,400m/data=!3m1!1e3"
+Pactiv Evergreen - Conyers GA,Manufacturing Plant (Foodservice),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,YES,YES,YES,,,YES,,1,1,,,YES,,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@33.67700,-84.03680,400m/data=!3m1!1e3"
+Pactiv Evergreen - Covington GA Plant,Manufacturing Plant (Foodservice),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,,,YES,,,YES,,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@33.61225,-83.84620,400m/data=!3m1!1e3"
+Pactiv Evergreen - Covington GA Distribution Center,Distribution Center / Regional Mixing Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@33.60620,-83.81260,400m/data=!3m1!1e3"
+Pactiv Evergreen - Macon GA,Manufacturing Plant (Food Merchandising; molded fibre / egg-tray converting),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,,,YES,,,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@32.705850,-83.647600,400m/data=!3m1!1e3"
+Pactiv Evergreen - Malvern AR,Manufacturing Plant (Food Merchandising; polystyrene foam food tray converting; ISCC PLUS certified),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,YES,,,,,,YES,,Rural,,YES,,YES,"https://www.google.com/maps/@34.378750,-92.819200,400m/data=!3m1!1e3"
+Pactiv Evergreen - Mooresville NC,Manufacturing Plant (Foodservice; foodservice & grocery packaging converting; ISCC PLUS certified),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,,,YES,,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@35.631400,-80.786700,400m/data=!3m1!1e3"
+Pactiv Evergreen - Kinston NC Plant,Manufacturing Plant / Distribution (Foodservice paper packaging; ex-Dopaco facility),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@35.271813,-77.667863,400m/data=!3m1!1e3"
+Pactiv Evergreen - Moorhead MN,Manufacturing Plant (Food Merchandising),#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,,YES,,,YES,,,,,Rural,,,,YES,"https://www.google.com/maps/@46.84175,-96.70685,400m/data=!3m1!1e3"
+Pactiv Evergreen - Stockton CA,Manufacturing Plant (Foodservice; co-located warehouse),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@37.89400,-121.26035,400m/data=!3m1!1e3"
+Pactiv Evergreen - Plattsburgh NY,Manufacturing Plant (Food Merchandising),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,YES,,,,,YES,,,Urban,,YES,,YES,"https://www.google.com/maps/@44.71100,-73.45250,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,14,47%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,2,7%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,13,43%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,1,3%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,14,47%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,18,60%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,3,10%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,27,90%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

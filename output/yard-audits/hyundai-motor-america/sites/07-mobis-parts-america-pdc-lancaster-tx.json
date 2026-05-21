@@ -1,0 +1,53 @@
+{
+  "name": "Mobis Parts America PDC - Lancaster TX",
+  "type": "Parts Distribution Center",
+  "coords": { "lat": 32.64030, "lng": -96.80970 },
+  "geofences": {
+    "perimeter": { "south": 32.63870, "west": -96.81140, "north": 32.64180, "east": -96.80820 },
+    "truckGate": { "south": 32.63868, "west": -96.81095, "north": 32.63915, "east": -96.81055 },
+    "dropYards": [
+      { "south": 32.63920, "west": -96.81140, "north": 32.64160, "east": -96.81020 },
+      { "south": 32.63920, "west": -96.80910, "north": 32.64160, "east": -96.80820 }
+    ],
+    "dockAprons": [
+      { "south": 32.63930, "west": -96.81030, "north": 32.64150, "east": -96.80990 },
+      { "south": 32.63930, "west": -96.80940, "north": 32.64150, "east": -96.80905 }
+    ],
+    "staging": { "south": 32.63868, "west": -96.81100, "north": 32.63915, "east": -96.81050 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 75,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 25.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.64030,-96.80970,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Black steel cantilever sliding gate across the truck driveway, confirmed in Feb-2025 Street View and z21 satellite. Property is fully enclosed by an ornamental black steel perimeter fence.",
+    "guardShack": "No staffed booth at the gate. The only small structure beside the gate (z21 satellite) is a utility/electrical pad, not a guard booth.",
+    "remoteGs": "Gated entry with no guard shack implies kiosk/call-box/app check-in.",
+    "preGateStaging": "Wide paved apron between S Pointe Dr and the sliding gate, large enough to hold queued trucks outside the gate.",
+    "shipRcvSeparate": "Two physically separate dock banks on opposite (west and east) building faces, each fully loaded with trailers.",
+    "fastLaneOpportunity": "Very wide gate apron with unused paved width; room to add a bypass/express lane.",
+    "dockDoors": "Both long faces are lined with dock doors; combined estimate ~90 doors across the building (band 50+). Multi-tenant building so Mobis-allocated share uncertain.",
+    "dropArea": "Heavy drop-trailer storage on both the west lot and the east dock court; 50+ band.",
+    "trailersVisible": "~75 trailers counted across west and east courts in captured imagery; honest overhead estimate."
+  },
+  "method": "deep-audit"
+}

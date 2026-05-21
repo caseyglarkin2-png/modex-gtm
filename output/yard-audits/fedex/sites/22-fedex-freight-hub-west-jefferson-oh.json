@@ -1,0 +1,55 @@
+{
+  "name": "FedEx Freight Hub - West Jefferson OH (Columbus, CMH)",
+  "type": "Freight LTL hub service center (~278 doors)",
+  "coords": { "lat": 39.95620, "lng": -83.34370 },
+  "geofences": {
+    "perimeter": { "south": 39.95340, "west": -83.34720, "north": 39.95930, "east": -83.33890 },
+    "truckGate": { "south": 39.95540, "west": -83.34060, "north": 39.95590, "east": -83.33980 },
+    "dropYards": [
+      { "south": 39.95350, "west": -83.34160, "north": 39.95560, "east": -83.33920 },
+      { "south": 39.95780, "west": -83.34620, "north": 39.95910, "east": -83.34280 }
+    ],
+    "dockAprons": [
+      { "south": 39.95470, "west": -83.34640, "north": 39.95820, "east": -83.33960 },
+      { "south": 39.95560, "west": -83.34720, "north": 39.95900, "east": -83.34060 }
+    ],
+    "staging": { "south": 39.95480, "west": -83.34020, "north": 39.95620, "east": -83.33920 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 278,
+    "trailersVisible": 360,
+    "trailerParkingCapacity": 450,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 62.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.95620,-83.34370,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "facility": "Confirmed FedEx Freight CMH service center at 10 Commerce Pkwy via the long LTL cross-dock building footprint and the FedEx Freight monument sign visible at the entrance driveway in Street View (pano captured 2024-08). Geocoded point landed on the building.",
+    "truckGate": "Single controlled truck entrance off Commerce Pkwy on the SE side. A fence line crosses the entrance driveway at a pinch point - clearly visible on z20/z21 satellite.",
+    "guardShack": "Small square guard-booth structure (~1-2 parking-space footprint) sits beside the truck driveway at the gate pinch point - clearly resolved on z21 satellite.",
+    "dockDoors": "Long LTL cross-dock building with dock doors and trailers backed in along the entire length of BOTH long faces. ~278 doors per FedEx Freight service-center data; 50+ band.",
+    "dropArea": "Large trailer drop yards on the SE side and beyond the NW dock end; hundreds of parked trailers. dropYard true, 50+ band.",
+    "drivewayLong": "The entrance driveway from Commerce Pkwy to the gate is long and can stack multiple trucks; deep approach.",
+    "fastLaneOpportunity": "Wide paved apron and yard around the gate; room for an express/bypass lane.",
+    "preGateStaging": "Paved apron outside the gate along the entrance driveway provides truck waiting space.",
+    "urbanRural": "Edge-of-town site near West Jefferson OH in a small industrial area surrounded by farmland and retention ponds; Rural per rubric.",
+    "buildingCount": "Main long LTL cross-dock building plus a separate shop/maintenance building on the SE; 2 buildings.",
+    "entryLanes": "Single combined entry/exit driveway through the gate; lane split not crisply resolved."
+  },
+  "method": "deep-audit"
+}

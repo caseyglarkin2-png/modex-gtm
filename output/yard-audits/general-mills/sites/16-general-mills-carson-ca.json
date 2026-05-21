@@ -1,0 +1,53 @@
+{
+  "name": "General Mills - Carson CA",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 33.86340, "lng": -118.24560 },
+  "geofences": {
+    "perimeter": { "south": 33.86215, "west": -118.24685, "north": 33.86485, "east": -118.24470 },
+    "truckGate": { "south": 33.86215, "west": -118.24585, "north": 33.86255, "east": -118.24530 },
+    "dropYards": [
+      { "south": 33.86250, "west": -118.24500, "north": 33.86445, "east": -118.24470 },
+      { "south": 33.86270, "west": -118.24685, "north": 33.86440, "east": -118.24640 }
+    ],
+    "dockAprons": [
+      { "south": 33.86250, "west": -118.24505, "north": 33.86445, "east": -118.24485 },
+      { "south": 33.86270, "west": -118.24655, "north": 33.86440, "east": -118.24635 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40,
+    "trailersVisible": 36,
+    "trailerParkingCapacity": 55,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 14.8,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.86340,-118.24560,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount"],
+  "fieldNotes": {
+    "truckGate": "Two black sliding gates with continuous wrought-iron perimeter fencing across the wide truck driveway off Beachey Place, confirmed in 2025-03 Street View.",
+    "guardShack": "No standalone guard booth structure beside the gate in satellite z20 or Street View; entrance has only a monument sign and a blue check-in/kiosk post inside the gate.",
+    "remoteGs": "Controlled gate present but unstaffed - implies kiosk/call-box/app check-in.",
+    "shipRcvSeparate": "Dock banks on two distinct building faces (east face ~20-24 doors, west face ~15-18 doors) operating as separate clusters.",
+    "fastLaneOpportunity": "Very wide gate apron and deep internal yard drive provide unused paved width for a bypass lane.",
+    "dockDoorCount": "Estimated ~40 total (24 east + 16 west) from z19 imagery; counted as a band.",
+    "entryExitTogether": "Single gated entrance on the south face serves both entry and exit.",
+    "postGateStaging": "Wide paved yard inside the gate before the dock faces can hold trucks.",
+    "urbanRural": "Dense Watson industrial park within the Los Angeles/Carson metro fabric."
+  },
+  "method": "deep-audit"
+}

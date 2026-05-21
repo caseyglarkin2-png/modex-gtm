@@ -1,0 +1,55 @@
+{
+  "name": "Universal Logistics / LINC - Romulus Value-Added Center - Romulus MI",
+  "type": "Value-Added Logistics Center / Cross-Dock Terminal",
+  "coords": { "lat": 42.251528, "lng": -83.323800 },
+  "geofences": {
+    "perimeter": { "south": 42.247000, "west": -83.326500, "north": 42.254000, "east": -83.320500 },
+    "truckGate": { "south": 42.252500, "west": -83.324900, "north": 42.253400, "east": -83.324000 },
+    "dropYards": [
+      { "south": 42.250500, "west": -83.326300, "north": 42.252900, "east": -83.324600 },
+      { "south": 42.247200, "west": -83.323800, "north": 42.249400, "east": -83.321400 },
+      { "south": 42.250000, "west": -83.322000, "north": 42.253200, "east": -83.320600 }
+    ],
+    "dockAprons": [
+      { "south": 42.250300, "west": -83.324600, "north": 42.253000, "east": -83.321800 }
+    ],
+    "staging": { "south": 42.252700, "west": -83.324600, "north": 42.253400, "east": -83.323000 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 220,
+    "trailersVisible": 420,
+    "trailerParkingCapacity": 550,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 95.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.251528,-83.323800,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "truckGateCount"],
+  "fieldNotes": {
+    "facility": "Universal Logistics / Logistics Insight Corp (LINC) cross-dock and value-added logistics campus at 29129 Ecorse Rd, Romulus MI (Wayne County, near Detroit Metro Airport). A sprawling multi-building terminal: several long narrow cross-dock buildings (dock doors on both long faces) plus extensive trailer-storage yards. Street View shows the yard packed with XPO Logistics-, LINC Logistics- and Universal-branded trailers — operates as a multi-tenant/3PL cross-dock terminal. Confirmed via Yellow Pages, Waze, Universal Logistics hiring posts (incl. a 'Gate Clerk' role at this address).",
+    "truckGate": "Whole campus is fenced — 2025 Street View confirms continuous chain-link perimeter fence along the full Ecorse Rd frontage with trailers parked behind it. Truck access is through a single wide controlled opening in the fence off Ecorse Rd, with jersey-barrier lane control at the gap and a canopy/structure near the entrance drive. A Universal 'Gate Clerk' job posting at this address implies a gate-check function.",
+    "guardShack": "No standalone guard booth (1-3 vehicle footprint) cleanly resolves at the entrance opening, though a small canopy structure sits along the entry drive. Access control most likely a gate-clerk kiosk / check-in point rather than a classic shack -> remoteGs true. Low confidence.",
+    "dockDoors": "Multiple long narrow cross-dock buildings, each with continuous dock-door banks on BOTH long faces and trailers backed in along them -> a very high total, estimated ~200+ doors -> 50+ band.",
+    "dropArea": "The entire campus functions as a drop yard — hundreds of trailers parked in marked rows across multiple lots, including a large gravel trailer-storage yard south of the drainage ditch -> 50+ band; dropYard true.",
+    "multipleFacilities": "Multi-building campus: ~6 distinct cross-dock/warehouse buildings plus separate satellite trailer yards.",
+    "shipRcvSeparate": "Cross-dock buildings load and unload from both faces of the same building; not a separated ship-vs-receive bank layout -> false.",
+    "fastLaneOpportunity": "Wide entrance opening and very large open yard apron leave ample room to add an express/bypass lane.",
+    "urbanRural": "Edge-of-town industrial setting in Romulus — bordered by light residential and open/vacant land, near Detroit Metro Airport; per the rubric's small-town-vs-urban tie-breaker, classified Rural.",
+    "railServed": "No rail spur enters the property -> false.",
+    "siteAreaAcres": "~95 acres for the fenced campus including the southern gravel trailer yard."
+  },
+  "method": "deep-audit"
+}

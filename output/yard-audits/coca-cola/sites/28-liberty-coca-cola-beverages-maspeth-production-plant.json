@@ -1,0 +1,53 @@
+{
+  "name": "Liberty Coca-Cola Beverages - Maspeth Production Plant, NY",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 40.72120, "lng": -73.91450 },
+  "geofences": {
+    "perimeter": { "south": 40.71980, "west": -73.91620, "north": 40.72260, "east": -73.91320 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 7.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.72120,-73.91450,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "multipleFacilities", "scale",
+    "dropYard", "multiStep", "dockDoorCount", "trailersVisible",
+    "trailerParkingCapacity", "siteAreaAcres", "railServed", "coords",
+    "perimeter", "buildingCount"
+  ],
+  "fieldNotes": {
+    "status": "ROSTER ENTRY IS OBSOLETE / MISCLASSIFIED. The Coca-Cola Maspeth PRODUCTION/BOTTLING plant no longer exists. The original bottling plant at 59-02 Borden Ave (202,000 sq ft warehouse on a 7.3-acre site) was sold to Home Depot in 2017 for $63M; Coca-Cola's triple-net lease ended March 2020 and the site became a Home Depot store. Liberty Coca-Cola Beverages' current Maspeth presence is a SALES/DISTRIBUTION CENTER at 58-40 Borden Ave (Block 2657 Lot 23, a 'fireproof warehouse'), which Liberty Coca-Cola purchased in October 2017 for ~$10.4M. Liberty's production now runs from Philadelphia PA, Moorestown NJ, and Elmsford NY - not Maspeth.",
+    "location": "Roster supplied '5612 56th Rd' and coords 40.726817,-73.923183. Those coordinates point to a UPS facility - the wrong building. The correct Liberty Coca-Cola Maspeth address is 58-40 Borden Ave, Maspeth NY 11378, adjacent to the Home Depot at the former Coca-Cola bottling site near the Borden Ave / Maurice Ave intersection.",
+    "coords": "Best-estimate ~40.7212,-73.9145, the large former Coca-Cola complex building on Borden Ave (part now Home Depot, part the Liberty Coca-Cola distribution warehouse). The Liberty Coca-Cola distribution portion (58-40 Borden Ave) could not be cleanly separated from the Home Depot portion in satellite/Street View imagery. Low confidence.",
+    "perimeter": "Estimated from the ~7.3-acre former Coca-Cola parcel - the Liberty Coca-Cola distribution portion is a subset of this; dimensions are an estimate, not a measured demised parcel.",
+    "classification": "All physical-layout flags left false/null because the specific Liberty Coca-Cola distribution building footprint and its truck gate / docks / yard could not be unambiguously identified and isolated from the co-located Home Depot in imagery. Type should likely be reclassified from 'Bottling / Manufacturing Plant' to 'Sales / Distribution Center'.",
+    "urbanRural": "Urban - dense Maspeth, Queens industrial fabric in the NYC metro.",
+    "recommendation": "Reclassify this roster entry: the Maspeth production plant is closed (now Home Depot). Re-audit the actual Liberty Coca-Cola Maspeth Sales/Distribution Center at 58-40 Borden Ave once its precise building footprint is confirmed."
+  },
+  "method": "deep-audit"
+}

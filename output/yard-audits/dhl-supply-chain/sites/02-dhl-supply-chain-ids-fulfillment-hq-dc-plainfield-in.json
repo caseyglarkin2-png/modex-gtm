@@ -1,0 +1,52 @@
+{
+  "name": "DHL Supply Chain - IDS Fulfillment HQ DC - Plainfield IN",
+  "type": "Multi-Customer E-Commerce Fulfillment Center",
+  "coords": { "lat": 39.739272, "lng": -86.353432 },
+  "geofences": {
+    "perimeter": { "south": 39.73730, "west": -86.35560, "north": 39.74100, "east": -86.35140 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 39.73790, "west": -86.35500, "north": 39.74000, "east": -86.35420 },
+      { "south": 39.73790, "west": -86.35280, "north": 39.74010, "east": -86.35200 }
+    ],
+    "dockAprons": [
+      { "south": 39.73780, "west": -86.35470, "north": 39.74010, "east": -86.35390 },
+      { "south": 39.73780, "west": -86.35290, "north": 39.74010, "east": -86.35220 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 55,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 36.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.739272,-86.353432,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "No controlled truck entrance. Open-campus DC in the AllPoints Midwest logistics park. Street View (2019-06) of the Allpoints Parkway entrance shows an unobstructed driveway, no barrier arm, no sliding gate, no perimeter fence. Truck yards on the east and west faces are unfenced.",
+    "guardShack": "No guard booth at any entrance.",
+    "remoteGs": "No gate, so no remote check-in either.",
+    "dockDoorCount": "Cross-dock building with dock doors on both long faces (east and west); ~70 doors estimated, band 50+ confident.",
+    "dropArea": "Rows of unhitched trailers parked on both the east and west truck lanes; 50+.",
+    "shipRcvSeparate": "Dock banks on two opposite long faces support separate ship/receive flows.",
+    "drivewayLong": "Wide internal truck yards on both faces can stack 3+ trucks.",
+    "urbanRural": "Plainfield IN is part of the Indianapolis metro logistics corridor (AllPoints Midwest park, dense industrial fabric) = Urban."
+  },
+  "method": "deep-audit"
+}

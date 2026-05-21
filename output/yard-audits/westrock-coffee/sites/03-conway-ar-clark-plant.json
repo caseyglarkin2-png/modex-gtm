@@ -1,0 +1,58 @@
+{
+  "name": "Westrock Coffee - Conway AR Single-Serve \"Clark\" Plant",
+  "type": "Manufacturing Plant (single-serve / K-cup pods)",
+  "coords": { "lat": 35.057900, "lng": -92.405000 },
+  "geofences": {
+    "perimeter": { "south": 35.056100, "west": -92.407000, "north": 35.059000, "east": -92.403000 },
+    "truckGate": { "south": 35.058500, "west": -92.407600, "north": 35.058900, "east": -92.407000 },
+    "dropYards": [
+      { "south": 35.057200, "west": -92.406700, "north": 35.057700, "east": -92.403300 },
+      { "south": 35.058200, "west": -92.406700, "north": 35.058700, "east": -92.403300 }
+    ],
+    "dockAprons": [
+      { "south": 35.058000, "west": -92.406700, "north": 35.058500, "east": -92.403300 },
+      { "south": 35.057300, "west": -92.406700, "north": 35.057800, "east": -92.403300 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 95,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 28.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.057900,-92.405000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "dockDoorCount", "shipRcvSeparate", "entryLanes", "exitLanes", "scale"],
+  "fieldNotes": {
+    "location": "Identified as the large gray-roof warehouse/manufacturing building on William J. Clark Drive immediately SOUTH of the Westrock DC. This is the 525,000 sq ft 'Clark' single-serve (K-cup pod) facility — 130,000 sq ft manufacturing plus fulfillment/distribution — that Westrock opened July 2025. The shell appears in 2024 imagery (likely a Tempus-developed spec building that Westrock fitted out and occupied in 2025). The roster pin (-92.409215) sat ~350m too far west on an unrelated older trucking yard; center re-locked to the gray building at 35.0578,-92.4050.",
+    "truckGate": "Continuous chain-link perimeter fencing surrounds the property (clearly visible in 2024-07 Street View along the south frontage and around the yard). A sliding chain-link gate across the truck driveway is visible at the NW/SW corner where the yard connects to William J. Clark Drive. The truck yard is fully enclosed.",
+    "guardShack": "No staffed guard booth positively identified. The truck entrance reads as a sliding chain-link gate with no adjacent booth — implying kiosk/remote check-in. Flagged uncertain.",
+    "remoteGs": "Truck gate present, no guard shack seen — remote check-in inferred.",
+    "dockDoors": "Long banks of dock doors with trailers backed in along BOTH the north and south long faces of the building; ~50-70 doors estimated across the two faces — banded 50+. Exact count limited by imagery scale.",
+    "dropYard": "Trailer-parking lanes line both long faces with ~60-80 trailers present; a dedicated drop/storage function is clear (dropArea banded 50+).",
+    "dropArea": "Well over 50 trailers parked along the building's two dock faces.",
+    "shipRcvSeparate": "Dock banks run on two physically separate building faces (north face and south face) — consistent with separate ship/receive flows; marked true but uncertain since both faces could serve mixed traffic.",
+    "fastLaneOpportunity": "Wide perimeter loop road and deep aprons give room to add an express/bypass lane.",
+    "drivewayLong": "Deep gate-to-dock approach along the perimeter loop stacks 3+ trucks.",
+    "postGateStaging": "Paved yard inside the fence provides holding/queue room before the docks.",
+    "urbanRural": "Conway industrial corridor near I-40 with surrounding industrial development — Urban.",
+    "scale": "No truck scale identified.",
+    "imagery": "Building opened operationally July 2025; available satellite/Street View predates full Westrock occupancy. Structure is fully built in imagery, so layout audit is reliable; operational specifics carry medium confidence."
+  },
+  "method": "deep-audit"
+}

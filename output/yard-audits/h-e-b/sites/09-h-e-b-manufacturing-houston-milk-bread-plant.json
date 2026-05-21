@@ -1,0 +1,54 @@
+{
+  "name": "H-E-B Manufacturing - Houston Milk & Bread Plant - Houston TX",
+  "type": "Manufacturing Plant (Dairy / Bakery)",
+  "coords": { "lat": 29.843200, "lng": -95.538400 },
+  "geofences": {
+    "perimeter": { "south": 29.84190, "west": -95.54050, "north": 29.84440, "east": -95.53600 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 29.84230, "west": -95.54050, "north": 29.84420, "east": -95.53980 },
+      { "south": 29.84320, "west": -95.53760, "north": 29.84430, "east": -95.53620 }
+    ],
+    "dockAprons": [
+      { "south": 29.84260, "west": -95.53980, "north": 29.84410, "east": -95.53900 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 0,
+    "buildingCount": 2,
+    "siteAreaAcres": 22.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.843200,-95.538400,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "entryLanes", "exitLanes", "buildingCount"],
+  "fieldNotes": {
+    "location": "Roster GEOMETRIC_CENTER coordinate (29.843857, -95.537401) is roughly the campus center. The milk & bread plant complex was identified as the two large manufacturing buildings immediately E of the snack plant on the H-E-B Windfern campus. The bakery building is confirmed by 'BAKE...' branded trailers backed into its W dock face. All H-E-B Windfern facilities (RSC, milk plant, bread plant) share address 4625 Windfern Rd, Houston TX 77041.",
+    "buildingIdentification": "Two distinct manufacturing buildings audited - the eastern building (bakery, confirmed by branded trailers) and the western building (milk plant, with a process annex). Exact milk-vs-bread assignment and door counts are estimates - medium confidence.",
+    "truckGate": "The plant complex sits within the large fenced H-E-B Windfern campus. No barrier arm, sliding gate or guard booth was positively identified at the complex's access or the campus entrances probed - access is via open campus internal roads. Classified false, flagged uncertain.",
+    "guardShack": "No guard booth identified at the complex or campus entrances probed.",
+    "multipleFacilities": "The milk & bread plant is part of a large multi-building H-E-B campus that also contains the Windfern RSC and (just NW) the snack plant.",
+    "shipRcvSeparate": "Two separate manufacturing buildings (milk plant, bread plant) with distinct dock banks on different building faces.",
+    "dropYard": "Extensive trailer drop yards flank both buildings - a large drop yard on the W and additional trailer parking E.",
+    "dockDoors": "Trailers backed into dock banks on multiple faces of both buildings; estimated ~35 total - 25-50 band.",
+    "railServed": "A rail line with a siding runs along the south edge of the milk & bread plant complex, serving the campus.",
+    "urbanRural": "Dense NW Houston industrial/suburban fabric - Urban.",
+    "siteAreaAcres": "~22 acres for the milk & bread plant complex and immediate yards within the larger campus."
+  },
+  "method": "deep-audit"
+}

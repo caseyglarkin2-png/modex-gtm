@@ -1,0 +1,3104 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:35:01.417Z",
+  "account": {
+    "slug": "coca-cola",
+    "displayName": "The Coca-Cola Company",
+    "archetype": "beverage",
+    "siteCount": 30,
+    "coverageNote": {
+      "auditedCount": 30,
+      "estimatedFootprint": null,
+      "droppedStubCount": 0,
+      "capHit": true,
+      "note": "We audited the 30 largest facilities by throughput. The wider network follows the same archetype distribution."
+    }
+  },
+  "research": {
+    "facility_count": 70,
+    "audited_facilities": 30,
+    "source": "yard-audit",
+    "confidence": "verified",
+    "caveats": [
+      "Coca-Cola Consolidated - Mobile Production Center, AL: audit note mentions 'closed'",
+      "Coca-Cola Consolidated - Louisville Distribution Center, KY: audit note mentions 'closed'",
+      "Coca-Cola UNITED - Chattanooga Production Plant, TN: audit note mentions 'closed'",
+      "Reyes Coca-Cola Bottling - San Leandro Production Plant, CA: audit note mentions 'closed'",
+      "Liberty Coca-Cola Beverages - Philadelphia Production Plant, PA: audit note mentions 'closed'"
+    ]
+  },
+  "network": {
+    "bbox": [
+      -122.1699,
+      29.945,
+      -73.9132,
+      42.0182
+    ],
+    "archetypeMix": {
+      "#10": 1,
+      "#1": 1,
+      "#6": 2,
+      "#3": 13,
+      "#9": 12,
+      "#7": 1
+    },
+    "totals": {
+      "dockDoors": 1059,
+      "trailerCapacity": 2630,
+      "gates": 35,
+      "railServed": 5,
+      "acres": 930.8000000000001
+    },
+    "sites": [
+      {
+        "id": "01-coca-cola-atlanta-syrup-plant",
+        "name": "Coca-Cola Atlanta Syrup Plant - Atlanta GA",
+        "type": "Concentrate / Syrup Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 33.65735,
+          "lng": -84.39335
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.6548,
+            "west": -84.3945,
+            "north": 33.6597,
+            "east": -84.3912
+          },
+          "truckGate": {
+            "south": 33.6558,
+            "west": -84.3925,
+            "north": 33.6564,
+            "east": -84.392
+          },
+          "dropYards": [
+            {
+              "south": 33.6549,
+              "west": -84.393,
+              "north": 33.6564,
+              "east": -84.3917
+            },
+            {
+              "south": 33.657,
+              "west": -84.3928,
+              "north": 33.6584,
+              "east": -84.3916
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.6582,
+              "west": -84.394,
+              "north": 33.659,
+              "east": -84.393
+            },
+            {
+              "south": 33.6564,
+              "west": -84.3945,
+              "north": 33.6578,
+              "east": -84.394
+            }
+          ],
+          "staging": {
+            "south": 33.6556,
+            "west": -84.3926,
+            "north": 33.6562,
+            "east": -84.3918
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 33,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Coca-Cola Atlanta Syrup Plant\n- Type: Concentrate / Syrup Plant\n- Address: 3791 Browns Mill Rd SE, Atlanta, GA 30354\n- Locked coordinates: 33.65735, -84.39335",
+        "mapsUrl": "https://www.google.com/maps/@33.65735,-84.39335,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Controlled entrance off Browns Mill Rd SE; checkpoint canopy/structure visible in Street View (2025-03) near flagpoles, with barrier across the truck lane visible in z20 satellite.",
+          "guardShack": "Small staffed booth/checkpoint canopy beside the truck lane at the entrance drive, distinct from the main building.",
+          "fastLaneOpportunity": "Wide paved gate apron with room for additional lanes; long internal approach drive.",
+          "dropYard": "Extensive diagonal trailer-parking stalls south and east of the main building hold 100+ trailers without tractors.",
+          "railServed": "Active rail line runs along the eastern property boundary with a spur curving into the south yard.",
+          "shipRcvSeparate": "Dock banks on both the north building face (red Coca-Cola trucks) and the southwest face suggest separate dock clusters; medium confidence.",
+          "scale": "No clear truck scale identified in imagery; left false but flagged as uncertain.",
+          "dockDoorCount": "Estimate ~35 across north and southwest dock faces from z18/z19 imagery; approximate."
+        }
+      },
+      {
+        "id": "02-coca-cola-atlanta-beverage-base-plant",
+        "name": "Coca-Cola Atlanta Beverage Base Plant - Atlanta GA",
+        "type": "Concentrate / Beverage Base Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "dockDoors",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 33.7343,
+          "lng": -84.569
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.732,
+            "west": -84.5705,
+            "north": 33.736,
+            "east": -84.5679
+          },
+          "truckGate": {
+            "south": 33.7332,
+            "west": -84.5699,
+            "north": 33.7336,
+            "east": -84.5693
+          },
+          "dropYards": [
+            {
+              "south": 33.7345,
+              "west": -84.57,
+              "north": 33.7355,
+              "east": -84.5692
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.7342,
+              "west": -84.5699,
+              "north": 33.7351,
+              "east": -84.5693
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 18,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 24,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Coca-Cola Atlanta Beverage Base Plant\n- Type: Concentrate / Beverage Base Plant\n- Address: 1001 Great Southwest Pkwy SW, Atlanta, GA 30336\n- Locked coordinates: 33.73430, -84.56900",
+        "mapsUrl": "https://www.google.com/maps/@33.73430,-84.56900,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single controlled entrance drive off the southwest connector road; z21 satellite shows a small structure with the drive splitting into lanes around it and a barrier across the lane.",
+          "guardShack": "A small dark-roofed booth sits in the entrance drive (z21 satellite); Street View obscured by trees so flagged as uncertain, but layout strongly indicates a staffed/controlled booth.",
+          "dropYard": "Diagonal trailer-parking stalls along the northwest building face hold ~15-20 trailers; modest on-site drop yard.",
+          "dockDoors": "Estimated ~16 doors along the west building face; process-plant layout makes exact count uncertain.",
+          "railServed": "Rail line passes through a corridor north of the property serving an adjacent warehouse; no spur enters this facility.",
+          "drivewayLong": "Long internal approach drive from the gate around the west side to the dock area.",
+          "urbanRural": "Inside Atlanta's dense Fulton Industrial Boulevard / I-285 industrial fabric."
+        }
+      },
+      {
+        "id": "03-coca-cola-consolidated-charlotte-snyder-production-center",
+        "name": "Coca-Cola Consolidated - Charlotte (Snyder) Production Center, NC",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "railServed"
+        ],
+        "center": {
+          "lat": 35.2845,
+          "lng": -80.883
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.2825,
+            "west": -80.885,
+            "north": 35.2868,
+            "east": -80.881
+          },
+          "truckGate": {
+            "south": 35.2861,
+            "west": -80.883,
+            "north": 35.2866,
+            "east": -80.8823
+          },
+          "dropYards": [
+            {
+              "south": 35.2828,
+              "west": -80.8846,
+              "north": 35.2856,
+              "east": -80.8834
+            },
+            {
+              "south": 35.285,
+              "west": -80.8834,
+              "north": 35.2864,
+              "east": -80.8823
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.2856,
+              "west": -80.8833,
+              "north": 35.2865,
+              "east": -80.8822
+            },
+            {
+              "south": 35.283,
+              "west": -80.884,
+              "north": 35.2842,
+              "east": -80.883
+            }
+          ],
+          "staging": {
+            "south": 35.2856,
+            "west": -80.883,
+            "north": 35.2862,
+            "east": -80.8823
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 38,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Coca-Cola Consolidated - Charlotte (Snyder) Production Center\n- Type: Bottling / Manufacturing Plant\n- Address: 4901 Chesapeake Dr, Charlotte, NC 28216\n- Locked coordinates: 35.28450, -80.88300",
+        "mapsUrl": "https://www.google.com/maps/@35.28450,-80.88300,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Controlled truck entrance off Chesapeake Dr; z20 satellite shows a guard booth and a separate small structure flanking the truck lane, with perimeter fencing and a gate point, and a truck stopped at the booth.",
+          "guardShack": "Dark-roofed guard booth beside the truck lane, distinct from the main building.",
+          "multipleFacilities": "Multi-building campus: main production building, warehouse buildings, and ancillary structures.",
+          "dropYard": "Very extensive trailer parking — diagonal stalls on the west and north sides hold 100+ trailers.",
+          "dockDoors": "Large production/warehouse buildings with dock banks on multiple faces; estimated 60+ doors total.",
+          "shipRcvSeparate": "Dock banks on different building faces (north and southwest) indicate separate shipping/receiving clusters.",
+          "railServed": "A rail line runs along the west boundary but appears to serve the adjacent property; no clear spur into Coca-Cola docks — left false, flagged uncertain.",
+          "scale": "No clear truck scale identified; left false, flagged uncertain."
+        }
+      },
+      {
+        "id": "04-coca-cola-consolidated-nashville-production-center",
+        "name": "Coca-Cola Consolidated - Nashville Production Center, TN",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dockDoors",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 36.124,
+          "lng": -86.7693
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 36.1225,
+            "west": -86.771,
+            "north": 36.1258,
+            "east": -86.7682
+          },
+          "truckGate": {
+            "south": 36.1253,
+            "west": -86.7699,
+            "north": 36.1257,
+            "east": -86.7693
+          },
+          "dropYards": [
+            {
+              "south": 36.1227,
+              "west": -86.7708,
+              "north": 36.1248,
+              "east": -86.7695
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 36.123,
+              "west": -86.7697,
+              "north": 36.1245,
+              "east": -86.769
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 22,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Coca-Cola Consolidated - Nashville Production Center\n- Type: Bottling / Manufacturing Plant\n- Roster address (incorrect): 2451 Atrium Way, Nashville, TN 37214\n- Corrected address: 407 Craighead St, Nashville, TN 37204 (Berry Hill)\n- Locked coordinates: 36.12400, -86.76930",
+        "mapsUrl": "https://www.google.com/maps/@36.12400,-86.76930,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "locationCorrection": "Roster address 2451 Atrium Way is an office park (wrong site). Web research (Nashville Post, Berry Hill directory) identified the actual Coca-Cola Consolidated production/distribution facility at 407 Craighead St, Nashville TN 37204 (Tennessee Soft Drink Production Co., 21.76-acre property). Audited at the corrected location.",
+          "truckGate": "Older urban infill industrial site reached via a private internal industrial drive shared with adjacent properties; no formal guarded checkpoint at a public road is visible in satellite or Street View. Left false, flagged uncertain.",
+          "guardShack": "No guard booth identified at a property entrance.",
+          "dropYard": "Extensive diagonal trailer-parking stalls on the west and south sides hold 80-100 trailers — a substantial on-site drop yard.",
+          "railServed": "CSX rail line runs along the east edge of the building; rail cars (CSX tank cars) observed in Street View directly alongside the facility.",
+          "dockDoors": "Dock bank along the west building face with ~28 doors estimated; approximate.",
+          "urbanRural": "Dense urban industrial setting in Nashville's Berry Hill area."
+        }
+      },
+      {
+        "id": "05-coca-cola-consolidated-mobile-production-center",
+        "name": "Coca-Cola Consolidated - Mobile Production Center, AL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "dockDoors",
+          "dropArea",
+          "entryLanes",
+          "exitLanes",
+          "trailersVisible"
+        ],
+        "center": {
+          "lat": 30.587,
+          "lng": -88.168
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 30.5854,
+            "west": -88.17,
+            "north": 30.5891,
+            "east": -88.1659
+          },
+          "truckGate": {
+            "south": 30.586,
+            "west": -88.1693,
+            "north": 30.5865,
+            "east": -88.1687
+          },
+          "dropYards": [
+            {
+              "south": 30.5862,
+              "west": -88.1676,
+              "north": 30.588,
+              "east": -88.1664
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 30.587,
+              "west": -88.1676,
+              "north": 30.5885,
+              "east": -88.1666
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 15,
+          "trailerParkingCapacity": 50,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 38,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name (roster): Coca-Cola Consolidated - Mobile Production Center, AL\n- Type: Bottling / Manufacturing Plant\n- Roster address (incorrect): 6350 Rangeline Rd, Mobile, AL 36582\n- Corrected address: 5300 Coca-Cola Rd, Mobile, AL 36619 (Tillmans Corner)\n- Operator (corrected): Coca-Cola Bottling Company UNITED, Inc.\n- Locked coordinates: 30.58700, -88.16800",
+        "mapsUrl": "https://www.google.com/maps/@30.58700,-88.16800,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "locationCorrection": "Roster address (6350 Rangeline Rd) and operator label (Coca-Cola Consolidated) are incorrect. The Mobile production/distribution facility is operated by Coca-Cola UNITED at 5300 Coca-Cola Rd, Mobile AL 36619 (Tillmans Corner). Audited at the corrected location (30.5851, -88.1688 area).",
+          "truckGate": "The facility is enclosed by an ornamental metal perimeter fence (seen in Street View); access is via Coca-Cola Rd. A controlled entry is implied by the fenced perimeter but no formal checkpoint structure is clearly visible in satellite imagery — flagged uncertain.",
+          "guardShack": "No guard booth identified at the entrance; remoteGs set true on the assumption of a fenced controlled entry without a staffed booth.",
+          "dropYard": "Large paved yard with trailer parking on the east/north side; ~15 trailers visible at capture, but the site has substantial paved capacity (~50).",
+          "dockDoors": "Production + distribution hub; dock faces on the building complex estimated ~22 doors. Imagery shows ongoing expansion/construction (the 2021-2022 $48M expansion), so counts are approximate.",
+          "railServed": "No rail spur into the property.",
+          "urbanRural": "Tillmans Corner commercial/industrial area within the Mobile metro."
+        }
+      },
+      {
+        "id": "06-coca-cola-consolidated-roanoke-production-center",
+        "name": "Coca-Cola Consolidated - Roanoke Production Center, VA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "dockDoors",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 37.2755,
+          "lng": -79.9483
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 37.2735,
+            "west": -79.95,
+            "north": 37.2775,
+            "east": -79.946
+          },
+          "truckGate": {
+            "south": 37.2758,
+            "west": -79.949,
+            "north": 37.2764,
+            "east": -79.9484
+          },
+          "dropYards": [
+            {
+              "south": 37.2743,
+              "west": -79.949,
+              "north": 37.2768,
+              "east": -79.9476
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 37.275,
+              "west": -79.9476,
+              "north": 37.2768,
+              "east": -79.9464
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 28,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Coca-Cola Consolidated - Roanoke Production Center, VA\n- Type: Bottling / Manufacturing Plant\n- Roster address (incorrect): 2001 Towne Square Blvd NW, Roanoke, VA 24012\n- Corrected address: 235 Shenandoah Ave NW, Roanoke, VA 24016\n- Locked coordinates: 37.27550, -79.94830",
+        "mapsUrl": "https://www.google.com/maps/@37.27550,-79.94830,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "locationCorrection": "Roster address 2001 Towne Square Blvd NW is a retail/mall address (Valley View area) — wrong site. The actual Coca-Cola Consolidated Roanoke production/distribution facility is at 235 Shenandoah Ave NW, Roanoke VA 24016 (37.27386, -79.94698). Audited at the corrected location.",
+          "truckGate": "Chain-link perimeter fence fully encloses the trailer yard along the public road; a driveway gate provides controlled entry. No formal guard booth structure is visible in satellite or Street View — flagged uncertain.",
+          "guardShack": "No staffed guard booth identified at the entrance.",
+          "remoteGs": "Set true: a fenced controlled entry without a visible staffed booth implies kiosk / remote check-in.",
+          "dropYard": "Very extensive on-site trailer yard — diagonal trailer stalls fill the center/west of the property, ~70 trailers visible (many are Red Classic, Coca-Cola Consolidated's logistics fleet).",
+          "multipleFacilities": "Multiple connected/adjacent buildings: main production building plus warehouse/ancillary structures on a campus.",
+          "dockDoors": "Dock banks on the production/warehouse building faces, estimated ~30 doors; approximate.",
+          "railServed": "A rail yard runs south of the property but no clear spur enters the Coca-Cola facility.",
+          "urbanRural": "Dense urban industrial setting in the city of Roanoke."
+        }
+      },
+      {
+        "id": "07-coca-cola-consolidated-bishopville-production-center-sc",
+        "name": "Coca-Cola Consolidated - Bishopville Production Center, SC",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 34.2231,
+          "lng": -80.2337
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.2216,
+            "west": -80.2364,
+            "north": 34.2252,
+            "east": -80.2306
+          },
+          "truckGate": {
+            "south": 34.2215,
+            "west": -80.2358,
+            "north": 34.222,
+            "east": -80.2349
+          },
+          "dropYards": [
+            {
+              "south": 34.2218,
+              "west": -80.2362,
+              "north": 34.2236,
+              "east": -80.2353
+            },
+            {
+              "south": 34.223,
+              "west": -80.233,
+              "north": 34.2244,
+              "east": -80.2316
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.2216,
+              "west": -80.235,
+              "north": 34.2222,
+              "east": -80.232
+            },
+            {
+              "south": 34.2222,
+              "west": -80.2362,
+              "north": 34.224,
+              "east": -80.2356
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 48,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 44,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster address (245 Cale Yarborough Hwy) with APPROXIMATE geocode landed in\ndowntown Bishopville, ~1.4 km from the actual facility. Web research identified\nthe real site as **South Atlantic Canners, Inc., 601 Cousar Street, Bishopville\nSC 29010** — a Coca-Cola production cooperative managed by Coca-Cola Consolidated\n(50-year operating history; $28.7M expansion to 300,000 sq ft announced 2023,\nfour production lines for cans and 10oz/20oz/half-liter/2-liter bottles).\n\nLocked center: 34.2231, -80.2337. Confirmed via Street View (2024-05): the\nsouth building face carries large \"Coca-Cola\" branding, and \"RED CLASSIC\"\ntrailers (Coca-Cola Consolidated's logistics fleet) are staged on site.",
+        "mapsUrl": "https://www.google.com/maps/@34.2231,-80.2337,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facility": "South Atlantic Canners, Inc. at 601 Cousar St, Bishopville SC - a Coca-Cola production cooperative managed by Coca-Cola Consolidated. Confirmed via Street View signage ('Coca-Cola' building branding and 'RED CLASSIC' trailers, Coke Consolidated's logistics arm). Roster lat/lng (245 Cale Yarborough Hwy) landed in downtown Bishopville ~1.4km off; corrected to the industrial complex.",
+          "truckGate": "No barrier arm, sliding/swing gate, or guard checkpoint observed at any access point. Multiple Street View headings (2024-05) show the south/southwest dock face opening directly onto Cousar St with open paved access; trucks back off the road into docks. Chain-link perimeter fencing rings the trailer yard but the truck-access driveways are ungated open curb cuts.",
+          "guardShack": "No guard booth found. A small red-roofed structure sits in the southwest yard but appears to be a fuel/canopy structure within the yard interior, not a staffed gate booth at the property line. Listed uncertain.",
+          "dockDoors": "Long dock-door row on the south building face with ~20+ trailers backed in, plus additional dock doors on the west face. Total estimated ~40-50 across the complex; banded 25-50.",
+          "dropArea": "Dense trailer/material storage yard on the southwest and a second trailer cluster on the northeast; well over 50 trailers/parking spots visible.",
+          "shipRcvSeparate": "Dock banks on physically separate building faces (south face row vs. west face row), consistent with separate shipping/receiving clusters.",
+          "drivewayLong": "Large open paved yard between the road frontage and the dock doors provides deep stacking room for 3+ trucks.",
+          "fastLaneOpportunity": "Wide unused paved apron at the southwest access; ample room to add an express/bypass lane.",
+          "railServed": "A rail line runs along the north/northeast property edge but no spur appears to enter the property; classified railServed false.",
+          "urbanRural": "Edge-of-town industrial setting in small-town Bishopville (Lee County), surrounded by woods and farmland; classified Rural."
+        }
+      },
+      {
+        "id": "08-coca-cola-consolidated-indianapolis-production-facility-in",
+        "name": "Coca-Cola Consolidated - Indianapolis Production Facility, IN",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "dockDoorCount",
+          "dockDoors",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 39.8039,
+          "lng": -86.2455
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.8024,
+            "west": -86.2497,
+            "north": 39.805,
+            "east": -86.2434
+          },
+          "truckGate": {
+            "south": 39.8028,
+            "west": -86.2477,
+            "north": 39.8032,
+            "east": -86.2471
+          },
+          "dropYards": [
+            {
+              "south": 39.803,
+              "west": -86.2483,
+              "north": 39.8047,
+              "east": -86.2468
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.8045,
+              "west": -86.2464,
+              "north": 39.805,
+              "east": -86.2442
+            },
+            {
+              "south": 39.8028,
+              "west": -86.2442,
+              "north": 39.8047,
+              "east": -86.2434
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 50,
+          "trailersVisible": 65,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 38,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster address (5000 W 25th St, Indianapolis IN) with ROOFTOP geocode (moved\n1523m) landed directly on the facility. Web research confirms: Coca-Cola\nConsolidated's Indianapolis manufacturing plant, operating since 1968, with\nfour production lines (two PET/rPET bottle lines, two can lines) plus a\nproduction warehouse. A $35M investment to add a glass-bottle line was\nannounced May 2026 (one of only three glass-bottling sites in the Coke\nsystem).\n\nLocked center: 39.80390, -86.24550 — the large white-roofed plant.",
+        "mapsUrl": "https://www.google.com/maps/@39.8039,-86.2455,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facility": "Coca-Cola Consolidated Indianapolis manufacturing facility at 5000 W 25th St, operating since 1968. Four production lines (2 PET/rPET bottle, 2 can) plus a production warehouse; $35M glass-bottle line expansion announced May 2026. Roster lat/lng (geocode moved 1523m) landed on-target; the large white-roofed plant at the coordinates matches.",
+          "truckGate": "No barrier arm, gate, or guard booth. Street View (2024-07) of the main driveway off W 25th St shows a wide open entrance with a Coca-Cola entrance sign but no barrier or checkpoint. The driveway leads into the car parking lot and onward to the trailer yard.",
+          "guardShack": "No staffed booth at the property line. A small canopy/structure sits inside the yard near the parking/yard boundary but is not a gate booth. Listed uncertain.",
+          "remoteGs": "False - no truck gate exists.",
+          "dockDoors": "Dock-door rows on the north face and east face, each with multiple trailers backed in. Total estimated ~50; banded 50+ but could be 25-50 - flagged uncertain.",
+          "dropArea": "Large herringbone trailer drop yard on the west side with well over 50 trailers/tankers parked.",
+          "shipRcvSeparate": "Dock banks on physically separate building faces (north face vs. east face), consistent with separate shipping/receiving.",
+          "drivewayLong": "Deep open paved yard between the entrance and the trailer yard / docks; ample stacking for 3+ trucks.",
+          "fastLaneOpportunity": "Wide open driveway apron and extensive paved width at the entrance; room to add an express lane.",
+          "buildingCount": "One large connected plant/warehouse with an attached south office wing (counted as 2); a small NE structure (possible scale/canopy) not counted as a full building.",
+          "railServed": "No rail spur enters the property.",
+          "urbanRural": "Within Indianapolis metro; bordered by dense residential subdivisions and near the Indianapolis Motor Speedway. Classified Urban.",
+          "scale": "No truck scale identified in imagery."
+        }
+      },
+      {
+        "id": "09-coca-cola-consolidated-whitestown-distribution-warehouse-in",
+        "name": "Coca-Cola Consolidated - Whitestown Distribution & Warehouse, IN",
+        "type": "Distribution Center / Automated Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "preGateStaging",
+          "postGateStaging",
+          "drivewayLong",
+          "drivewayShort",
+          "backupSensitive",
+          "entryExitTogether",
+          "entryExitSeparate",
+          "entryLanes",
+          "exitLanes",
+          "fastLaneOpportunity",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "urbanRural",
+          "multipleFacilities",
+          "scale",
+          "dropYard",
+          "multiStep",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "siteAreaAcres",
+          "buildingCount"
+        ],
+        "center": {
+          "lat": 39.952,
+          "lng": -86.372
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.9492,
+            "west": -86.3728,
+            "north": 39.954,
+            "east": -86.3705
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 39.95,
+              "west": -86.3728,
+              "north": 39.9535,
+              "east": -86.3723
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.95,
+              "west": -86.3725,
+              "north": 39.9535,
+              "east": -86.372
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 50,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 17,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster lat/lng (39.966379, -86.381749) are wrong. Satellite probing\nof those coordinates (z16-z18) shows a very large surface parking lot holding\nmultiple thousands of cars beside a campus-style building — consistent with an\nauto auction or large employer, not a beverage distribution center.\n\nWeb research positively establishes the facility's identity and address:\n- Coca-Cola Consolidated Whitestown distribution & automated warehouse,\n  3690 S 500 E, Whitestown IN 46075.\n- Opened April 19, 2021; ~$60M investment; 400,188 sq ft main building +\n  26,000 sq ft office + a separate 15,000 sq ft Red Classic fleet shop;\n  160,000 sq ft of automated material-handling; ~450 employees; distributes\n  20M+ cases/year.\n- Located in Fishback Creek Business Park — north side of Albert S. White",
+        "mapsUrl": "https://www.google.com/maps/@39.952,-86.372,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "RESOLUTION_WARNING": "EXACT BUILDING NOT POSITIVELY CONFIRMED. The roster lat/lng (39.966379,-86.381749) are wrong - they land on a large multi-thousand-car surface parking lot / auto-auction-type campus, not a beverage distribution center. The real facility, per web research, is Coca-Cola Consolidated's $60M, 400,000 sq ft automated distribution & warehouse facility (opened April 19, 2021; 26,000 sq ft office; separate 15,000 sq ft Red Classic fleet shop; 450 employees) at 3690 S 500 E, Whitestown IN 46075, in Fishback Creek Business Park (north side of Albert S. White Blvd, between CR 450E and CR 575E, east of I-65 exit 133).",
+          "identification": "Fishback Creek Business Park contains many near-identical large spec warehouses built 2020-2024. Google Street View in the park is from 2019 (pre-construction of the Coca-Cola building) and shows only farmland, so road-level signage could not be used to disambiguate. No aerial/exterior photo with Coca-Cola branding was findable. The coords given (39.95200,-86.37200) are a BEST-ESTIMATE candidate building - a large warehouse with active trailer staging and a west-face dock row in the park - but this is NOT confirmed to be the Coca-Cola building.",
+          "classification": "All classification fields are best-effort estimates from overhead imagery of the candidate building and should be treated as LOW confidence. The candidate showed an open driveway with no visible barrier gate or guard booth (truckGate/guardShack false), a west-face dock row, and trailer parking - but because the building identity is unconfirmed, every field is listed uncertain.",
+          "recommendation": "Flag idx 9 for human review. Confirm the exact building via Boone County GIS parcel lookup for 3690 S 500 E, or current (2024+) Street View / aerial imagery showing Coca-Cola or Red Classic branding."
+        }
+      },
+      {
+        "id": "10-coca-cola-consolidated-columbus-distribution-center-oh",
+        "name": "Coca-Cola Consolidated - Columbus Distribution Center, OH",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 39.8425,
+          "lng": -82.9625
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.84,
+            "west": -82.965,
+            "north": 39.8458,
+            "east": -82.9605
+          },
+          "truckGate": {
+            "south": 39.8444,
+            "west": -82.9608,
+            "north": 39.845,
+            "east": -82.96
+          },
+          "dropYards": [
+            {
+              "south": 39.8405,
+              "west": -82.962,
+              "north": 39.844,
+              "east": -82.9608
+            },
+            {
+              "south": 39.8432,
+              "west": -82.9645,
+              "north": 39.8448,
+              "east": -82.9628
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.8405,
+              "west": -82.9627,
+              "north": 39.8443,
+              "east": -82.9618
+            },
+            {
+              "south": 39.8408,
+              "west": -82.9652,
+              "north": 39.8442,
+              "east": -82.9644
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 170,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 60,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster lat/lng (39.845821, -82.956124, GEOMETRIC_CENTER on Rohr Rd) landed\n~700m east of the actual campus on undeveloped land — the roster source noted\n\"street number not disclosed.\" Web research confirms: Coca-Cola Consolidated's\n$90M, 60-acre Columbus campus in the Rickenbacker Industrial Center on Rohr\nRoad, groundbreaking Oct 2023, unveiled May 2025. Comprises a 400,000 sq ft\ndistribution & warehouse building plus two 15,000 sq ft buildings (equipment\nrepair + fleet maintenance); ~350 employees; 16M+ cases/year.\n\nLocated the campus on satellite west of the roster point and locked center at\n39.84250, -82.96250. Positively confirmed by a large fleet of **red\nCoca-Cola Consolidated / Red Classic tractors** parked in herringbone rows on\nthe site, and by the distinctive two-small-building fleet-shop layout.",
+        "mapsUrl": "https://www.google.com/maps/@39.8425,-82.9625,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facility": "Coca-Cola Consolidated Columbus Distribution Center - a $90M, 60-acre campus in the Rickenbacker Industrial Center on Rohr Road, opened/unveiled May 2025 (groundbreaking Oct 2023). 400,000 sq ft distribution & warehouse building plus two 15,000 sq ft buildings for equipment repair and fleet maintenance; ~350 employees; 16M+ cases/year. Confirmed visually by the fleet of red Coca-Cola Consolidated / Red Classic tractors parked on site.",
+          "location": "Roster lat/lng (39.845821,-82.956124, GEOMETRIC_CENTER on Rohr Rd) landed ~700m east of the campus on undeveloped land. Corrected to the campus center at 39.84250,-82.96250 via satellite identification (fleet shop buildings + red Coke tractors).",
+          "truckGate": "No barrier arm, sliding gate, or guard booth. Street View (2024-08) of the campus driveway off Rohr Rd shows an open entrance leading to the office and parking; no checkpoint structure.",
+          "guardShack": "No staffed booth at the property line. Listed uncertain (campus interior not fully street-viewable).",
+          "remoteGs": "False - no truck gate.",
+          "multipleFacilities": "True - distinct multi-building campus: one large 400K sq ft DC plus two separate 15K sq ft fleet/equipment buildings.",
+          "dockDoors": "Long dock-door row on the main building's east face (~40 doors, with trailers + red tractors) plus a secondary dock row on the west face (~20). Total estimated ~60; banded 50+.",
+          "shipRcvSeparate": "Cross-dock building - dock banks on two opposite faces (east and west), consistent with separate shipping/receiving flows.",
+          "dropArea": "Extensive herringbone trailer drop yard along the east apron and around the fleet buildings; well over 50 trailers.",
+          "drivewayLong": "Deep open paved campus interior gives ample truck stacking room.",
+          "fastLaneOpportunity": "Wide open campus entrance and large paved aprons; room for an express lane.",
+          "railServed": "No rail spur into the property (Rickenbacker has rail nearby but not into this campus).",
+          "urbanRural": "Within the Columbus OH metro, inside the Rickenbacker Industrial Center; classified Urban.",
+          "scale": "No truck scale identified."
+        }
+      },
+      {
+        "id": "11-coca-cola-consolidated-cincinnati-sales-distribution-center-oh",
+        "name": "Coca-Cola Consolidated - Cincinnati Sales & Distribution Center, OH",
+        "type": "Sales / Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "dockDoors",
+          "dropArea",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 39.2947,
+          "lng": -84.5363
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.2936,
+            "west": -84.5374,
+            "north": 39.2957,
+            "east": -84.5352
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 39.2949,
+              "west": -84.5372,
+              "north": 39.2956,
+              "east": -84.5365
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.2947,
+              "west": -84.5371,
+              "north": 39.2956,
+              "east": -84.5365
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 11,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster address: 1547 Kemper Meadow Dr, Cincinnati OH 45240 — in the Kemper\nMeadow / Forest Park business park. The roster lat/lng (39.292889, -84.53697,\nRANGE_INTERPOLATED) landed at the Kemper Meadow Dr intersection ~250m\nsouthwest of the actual building, near an office building.\n\nLocked center: 39.29470, -84.53630 — a large flex/warehouse building on\nKemper Meadow Dr, beside the Ronald Reagan Cross County Hwy. Identified as the\nbest candidate for the Coca-Cola Consolidated Cincinnati sales/distribution\ncenter: satellite imagery shows white trailers and **red-cab Red Classic\ntractors** (Coca-Cola Consolidated's logistics fleet) backed into the building's\nNW dock row, plus a small trailer drop yard.\n\nBuilding identity is MEDIUM confidence — no road-level Coca-Cola signage could\nbe confirmed because Street View on Kemper Meadow Dr is from 2019 and the dock",
+        "mapsUrl": "https://www.google.com/maps/@39.2947,-84.5363,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facility": "Coca-Cola Consolidated Cincinnati Sales & Distribution Center. The roster address (1547 Kemper Meadow Dr, Cincinnati OH 45240) is in the Kemper Meadow / Forest Park business park. The roster lat/lng (39.292889,-84.53697, RANGE_INTERPOLATED) landed at the Kemper Meadow Dr intersection ~250m southwest of the building; corrected to the large flex/warehouse building at 39.29470,-84.53630.",
+          "identification": "MEDIUM confidence on building identity. The candidate is a large flex/warehouse building with an attached office wing on Kemper Meadow Dr; satellite shows white trailers and red-cab (Red Classic, Coca-Cola Consolidated's logistics fleet) tractors backed into a dock row on its NW face plus a small trailer drop yard - consistent with a Coca-Cola sales/distribution center. No road-level Coca-Cola signage was confirmable: Street View on Kemper Meadow Dr is from 2019 and the dock side is screened by mature trees.",
+          "truckGate": "No barrier arm or guard booth visible. The building is a typical open business-park flex property; truck access is via an open internal driveway off Kemper Meadow Dr. Listed uncertain because the dock side is tree-screened from Street View.",
+          "guardShack": "No booth seen; listed uncertain.",
+          "dockDoors": "Dock-door row on the NW face with ~10-15 trailers backed in; banded 10-25. Estimated from overhead imagery.",
+          "dropArea": "Small trailer drop yard on the NW with a handful of trailers; banded 0-10.",
+          "dropYard": "True - a small dedicated trailer-parking area adjacent to the dock row.",
+          "drivewayShort": "Modest paved apron between the road and docks; stacking room for only 1-2 trucks.",
+          "buildingCount": "Single warehouse building with an attached office wing.",
+          "urbanRural": "Within the Cincinnati metro (Forest Park, 45240), in an established business park beside the Ronald Reagan Cross County Hwy; classified Urban.",
+          "railServed": "No rail spur."
+        }
+      },
+      {
+        "id": "12-coca-cola-consolidated-twinsburg-sales-distribution-center-oh",
+        "name": "Coca-Cola Consolidated - Twinsburg Sales & Distribution Center, OH",
+        "type": "Sales / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "dockDoors",
+          "entryLanes",
+          "exitLanes",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 41.2963,
+          "lng": -81.4554
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.2941,
+            "west": -81.4576,
+            "north": 41.298,
+            "east": -81.453
+          },
+          "truckGate": {
+            "south": 41.2968,
+            "west": -81.4547,
+            "north": 41.2979,
+            "east": -81.4539
+          },
+          "dropYards": [
+            {
+              "south": 41.295,
+              "west": -81.4552,
+              "north": 41.297,
+              "east": -81.4535
+            },
+            {
+              "south": 41.2941,
+              "west": -81.4562,
+              "north": 41.2956,
+              "east": -81.4543
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.2961,
+              "west": -81.4561,
+              "north": 41.2972,
+              "east": -81.4552
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 160,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 40,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster address (8909 Twin Hills Pkwy) is wrong. The roster type\n(\"Sales / Distribution Center\") is also inaccurate. Web research establishes\nthe actual facility as **Coca-Cola Consolidated's Twinsburg manufacturing /\nbottling plant at 1882 E Highland Rd, Twinsburg OH 44087** — a 300,000+ sq ft\nplant operating since 1974, producing 31M+ cases/year, with a $35M new\ncan-line investment announced Oct 2025 (~260 employees). The campus is also\nhome to Red Classic Transit; the company's separate storage warehouse is in\nMacedonia ~2 miles away.\n\nResolved via an OpenStreetMap geocode of 1882 Highland Rd (41.2977, -81.4538)\nfollowed by satellite identification of the plant complex. Locked center:\n41.29630, -81.45540. Positively confirmed by **\"Coca-Cola\" branding\nclearly visible on the building wall** in Street View (2023-07).",
+        "mapsUrl": "https://www.google.com/maps/@41.2963,-81.4554,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facility": "Coca-Cola Consolidated Twinsburg facility. The roster lists it as a 'Sales / Distribution Center' at 8909 Twin Hills Pkwy - that address is WRONG. Web research establishes the actual facility as Coca-Cola Consolidated's Twinsburg MANUFACTURING / bottling plant at 1882 E Highland Rd, Twinsburg OH 44087 - a 300,000+ sq ft plant operating since 1974, producing 31M+ cases/year; $35M new can-line investment announced Oct 2025; ~260 employees; also home to Red Classic Transit. (Note: the company's separate storage warehouse is in Macedonia ~2 miles away.) Resolved coordinates via OSM geocode of 1882 Highland Rd (41.2977,-81.4538) then satellite identification.",
+          "facilityType": "Roster type 'Sales / Distribution Center' is inaccurate - this is a manufacturing/bottling plant with heavy truck staging. JSON keeps the roster name/type for tracking but the dossier documents the correction.",
+          "confirmation": "Positively confirmed: 'Coca-Cola' branding clearly visible on the building wall in Street View (2023-07).",
+          "truckGate": "Truck entrance off E Highland Rd shows a defined truck driveway with yellow lane-control bollards and a perimeter chain-link fence with a gated opening. Classified truckGate true (fenced perimeter + controlled gated truck lane). Flagged uncertain - no barrier arm was unambiguously resolved in the imagery.",
+          "guardShack": "No clearly staffed guard booth identified at the road entrance; the small structures near the drive read as facility buildings, not a booth. Set false (uncertain).",
+          "remoteGs": "Set true - a gated/fenced truck entrance exists but no guard booth, implying kiosk / call-box check-in. Flagged uncertain.",
+          "dockDoors": "Long dock-door row on the plant's east face with many trailers backed in; estimated ~30-40, banded 25-50.",
+          "dropArea": "Very large herringbone trailer drop yards (multiple blocks of trailers); well over 50 - high-throughput plant.",
+          "multipleFacilities": "True - campus with the main multi-section plant plus a separate large building to the south.",
+          "drivewayLong": "Deep paved campus interior provides ample truck stacking.",
+          "fastLaneOpportunity": "Wide truck driveway and large aprons; room for an express lane.",
+          "shipRcvSeparate": "Docks appear concentrated on one primary face; set false (could not confirm a separate second dock bank).",
+          "urbanRural": "Twinsburg is a Cleveland-metro suburb; the site sits in an established industrial park. Classified Urban.",
+          "railServed": "No rail spur into the property observed.",
+          "scale": "No truck scale clearly identified."
+        }
+      },
+      {
+        "id": "13-coca-cola-consolidated-sandston-sales-distribution-center",
+        "name": "Coca-Cola Consolidated - Sandston Sales & Distribution Center, VA",
+        "type": "Sales / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "truckGate",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 37.5325,
+          "lng": -77.3372
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 37.5306,
+            "west": -77.3408,
+            "north": 37.5347,
+            "east": -77.3345
+          },
+          "truckGate": {
+            "south": 37.5337,
+            "west": -77.3372,
+            "north": 37.5343,
+            "east": -77.3363
+          },
+          "dropYards": [
+            {
+              "south": 37.5331,
+              "west": -77.3407,
+              "north": 37.534,
+              "east": -77.3392
+            },
+            {
+              "south": 37.5333,
+              "west": -77.3358,
+              "north": 37.5341,
+              "east": -77.3347
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 37.5324,
+              "west": -77.3402,
+              "north": 37.5331,
+              "east": -77.3388
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 62.6,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "### Resolved location\n- Roster input: 5301 Eubank Rd, Sandston VA; lat/lng 37.510825, -77.344601 (RANGE_INTERPOLATED, \"moved 90 m\").\n- Problem: The roster coordinate landed in a residential neighborhood ~1.5 km southwest of the actual site, and a satellite/Street-View check there showed only single-family homes. The roster address (Eubank Rd) is also incorrect for this facility.\n- Correct facility: Coca-Cola Consolidated, 500 Eastpark Court, Sandston / Highland Springs, VA 23231, centered at 37.5325, -77.3372. Confirmed via Nominatim geocode of 500 Eastpark Ct (37.5323, -77.3369) and corroborated by Coca-Cola Consolidated press releases describing the 63-acre Sandston campus with a 300,000 sq ft manufacturing plant / distribution center and a newly completed 210,000 sq ft warehouse ($50M expansion, March 2024).",
+        "mapsUrl": "https://www.google.com/maps/@37.5325,-77.3372,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster lat/lng (37.5108,-77.3446) landed in a residential neighborhood ~1.5 km SW of the real site and roster address (5301 Eubank Rd) is also off. Correct facility is Coca-Cola Consolidated at 500 Eastpark Ct, Sandston/Highland Springs VA (37.5324,-77.3369), confirmed via Nominatim geocode and company press releases describing the 63-acre campus, 300,000 sq ft plant/DC plus a new 210,000 sq ft warehouse.",
+          "truckGate": "Single private access drive enters the campus from Eastpark Court at the NE corner; campus is fully fenced/tree-buffered with one controlled entrance. No Street View on the private drive, so the exact gate hardware is inferred from layout - rated as a controlled truck gate at medium confidence.",
+          "guardShack": "No distinct guard-booth structure visible at the entrance in z20 imagery; the small building near the access drive is a metal utility/office structure attached to operations, not a beside-the-lane booth. guardShack=false.",
+          "remoteGs": "Truck gate present but no guard shack visible -> remoteGs=true (kiosk/badge/app check-in implied). Medium confidence.",
+          "dockDoorCount": "~45 total: sawtooth dock canopy on the north face of the west warehouse holds ~30+ doors with trailers backed in; the east warehouse adds another bank of ~10-15 along its east face. Counted from z19 imagery - approximate.",
+          "dropArea": "50+ trailers parked without tractors in the NW drop yard plus a smaller east lot; large fleet of red Coca-Cola Consolidated / Red Classic trailers and bobtail delivery trucks visible.",
+          "shipRcvSeparate": "Dock banks on physically separate building faces - west warehouse north face (canopy docks) and east warehouse east face - support separate ship/receiving operations.",
+          "multipleFacilities": "Campus has 4 distinct buildings: west warehouse, dark dock-canopy structure, central warehouse, and the rail-served manufacturing building.",
+          "railServed": "A rail spur with hopper/gondola cars runs into the north edge of the property serving the manufacturing building (concentrate/syrup intake). Confirmed in z20 imagery.",
+          "drivewayLong": "Long internal approach from the Eastpark Court gate around to the docks easily holds 3+ trucks.",
+          "urbanRural": "Richmond metro, immediately adjacent to Richmond International Airport and I-64, surrounded by industrial parks and dense suburban development - Urban."
+        }
+      },
+      {
+        "id": "14-coca-cola-consolidated-erlanger-distribution-sales-center",
+        "name": "Coca-Cola Consolidated - Erlanger Distribution & Sales Center, KY",
+        "type": "Distribution / Sales Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "dropArea",
+          "fastLaneOpportunity",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 39.0368,
+          "lng": -84.6098
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.0345,
+            "west": -84.612,
+            "north": 39.0384,
+            "east": -84.608
+          },
+          "truckGate": {
+            "south": 39.0349,
+            "west": -84.6118,
+            "north": 39.0355,
+            "east": -84.611
+          },
+          "dropYards": [
+            {
+              "south": 39.037,
+              "west": -84.6116,
+              "north": 39.0382,
+              "east": -84.6101
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.0354,
+              "west": -84.6116,
+              "north": 39.0372,
+              "east": -84.6098
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 31.6,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "### Resolved location\n- Roster input: 600 Circleport Dr, Erlanger KY; lat/lng 39.051442, -84.632298 (GEOMETRIC_CENTER — geocoded to a street centerline).\n- Problem: The Circleport Drive area is an office / flex business park near CVG airport — no 300,000 sq ft distribution center there. The roster address appears incorrect.\n- Correct facility: Coca-Cola Consolidated Erlanger Distribution & Sales Center, 680 Erlanger Road, Erlanger, KY 41018 — confirmed by Coca-Cola Consolidated and City of Erlanger sources. It is a 300,000 sq ft sales/distribution facility on ~32 acres, built on the old Showcase Cinema site as a $30M / 430-job project (Hillwood + Al Neyer, opened ~2019-2020). The site runs an automated VPS/Vertique pick-and-load warehouse and employs 500+ teammates.\n- US Census geocoder places 680 Erlanger Rd at 39.0325, -84.6127 — the edge of a 3-building Hillwood-developed commerce park beside I-71/75, just south of I-275.",
+        "mapsUrl": "https://www.google.com/maps/@39.0368,-84.6098,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster lat/lng (39.0514,-84.6323) and roster address (600 Circleport Dr) geocoded to a street centerline in the Circleport office park near CVG airport - that area has only office/flex buildings, not a 300,000 sq ft DC. The real Coca-Cola Consolidated Erlanger Distribution & Sales Center is at 680 Erlanger Road (confirmed by company and city of Erlanger sources; 300,000 sq ft on ~32 acres, built on the old Showcase Cinema site, $30M / 430-job project by Hillwood + Al Neyer, opened ~2019-2020). US Census geocoder places 680 Erlanger Rd at the edge of a 3-building Hillwood commerce park beside I-71/75. The northernmost building (audited here, ~39.0368,-84.6098) shows red Coca-Cola Consolidated / Red Classic fleet vehicles and bobtail delivery trucks at its dock apron - the strongest match.",
+          "buildingMatch": "MEDIUM confidence on exact building. Three similar warehouses sit in this Hillwood commerce park; the audited building best matches the 32-acre figure and is the only one showing an active red Coke fleet. The other two appeared larger / lower-activity.",
+          "truckGate": "Single internal commerce-park access drive feeds the building's yard; the property is gated/fenced at the yard entrance. Gate hardware not directly visible (no Street View on park roads) - inferred from layout, low-medium confidence.",
+          "guardShack": "No distinct beside-the-lane guard booth visible at the yard entrance. guardShack=false.",
+          "remoteGs": "Truck gate present, no guard shack -> remoteGs=true (kiosk/badge check-in implied).",
+          "dockDoors": "50+ - cross-dock layout with dock doors along the NW and SW building faces, trailers backed in along both. ~55 estimated; flagged as approximate.",
+          "shipRcvSeparate": "Dock banks on two physically separate building faces (NW and SW) suggest separate ship/receive flows.",
+          "dropYard": "Trailer drop area on the north yard holds 25-50 trailers without tractors; large fleet of red trailers and delivery trucks staged.",
+          "fastLaneOpportunity": "Wide paved yard and generous apron width provide room for an express/bypass lane.",
+          "railServed": "No rail spur enters the property; I-71/75 borders the site, no rail. railServed=false.",
+          "urbanRural": "Cincinnati/Northern Kentucky metro, directly off I-71/75 just south of I-275, dense industrial/commercial fabric - Urban.",
+          "drivewayLong": "Long internal approach from the park access road to the docks holds 3+ trucks."
+        }
+      },
+      {
+        "id": "15-coca-cola-consolidated-louisville-distribution-center",
+        "name": "Coca-Cola Consolidated - Louisville Distribution Center, KY",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 38.1378,
+          "lng": -85.8906
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.1343,
+            "west": -85.8918,
+            "north": 38.1392,
+            "east": -85.8895
+          },
+          "truckGate": {
+            "south": 38.1385,
+            "west": -85.8915,
+            "north": 38.1391,
+            "east": -85.8908
+          },
+          "dropYards": [
+            {
+              "south": 38.1345,
+              "west": -85.8915,
+              "north": 38.1368,
+              "east": -85.8895
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 38.136,
+              "west": -85.8918,
+              "north": 38.1388,
+              "east": -85.891
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 80,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 27,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "### Resolved location\n- Roster input: 7100 Global Dr, Louisville KY; lat/lng 38.138117, -85.890606 (ROOFTOP, \"moved 626 m\").\n- Confirmed accurate. The roster coordinate landed directly on the correct building. This is the Coca-Cola Consolidated Louisville Distribution Center, 7100 Global Drive, Louisville, KY 40258 — a 305,000 sq ft sales/distribution center in a renovated former Circuit City warehouse on a ~25-acre site (~$12M renovation, ~210 employees).\n- Step-0 verification: Street View on Global Drive shows the red \"Coca-Cola\" script logo on the building's north facade behind a chain-link perimeter fence. The neighboring building to the east is branded \"ATLAS\" (a different tenant); the building to the west is a separate warehouse. The Coca-Cola building is the brown-roofed structure with a white-roofed extension at its south end.",
+        "mapsUrl": "https://www.google.com/maps/@38.1378,-85.8906,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster lat/lng (38.138117,-85.890606, ROOFTOP) is accurate - landed on the correct building. Confirmed as Coca-Cola Consolidated Louisville Distribution Center, 7100 Global Drive, Louisville KY 40258: a 305,000 sq ft sales/distribution center, a renovated former Circuit City warehouse on a ~25-acre site, ~210 employees. Street View shows the red 'Coca-Cola' script logo on the building's north facade.",
+          "truckGate": "Single fenced truck entrance off Global Drive at the NW; the property is fully enclosed by chain-link perimeter fence (visible in Street View). Truck drive runs south down the building's west side into the trailer yard. Gate hardware not directly resolvable in imagery - controlled entrance inferred from continuous fence + single drive.",
+          "guardShack": "No freestanding beside-the-lane guard booth visible. The white structure at the building's NW corner is an attached office/canopy entry, not a guard shack. guardShack=false.",
+          "remoteGs": "Truck gate present, no guard shack -> remoteGs=true (kiosk/badge check-in implied).",
+          "dockDoors": "~40 dock doors along the building's west face with trailers backed in; counted from z18-19 imagery, approximate (band 25-50).",
+          "dropArea": "50+ trailers parked without tractors in the large fenced south trailer yard; substantial fleet of red Coca-Cola / Red Classic trailers and bobtail delivery trucks plus pallet storage.",
+          "shipRcvSeparate": "Single dock bank along one (west) building face - shipping and receiving share the same dock cluster. shipRcvSeparate=false.",
+          "railServed": "A rail line curves along the NW/north edge of the property but runs parallel and does not enter the yard - no active rail spur into the site. railServed=false.",
+          "dropYard": "Large dedicated fenced trailer-storage yard occupying the south half of the property.",
+          "urbanRural": "Southwest Louisville, dense Riverport/industrial-park fabric beside I-265 - Urban.",
+          "drivewayLong": "Long internal approach down the west drive into the south yard easily holds 3+ trucks."
+        }
+      },
+      {
+        "id": "16-coca-cola-united-birmingham-production-plant",
+        "name": "Coca-Cola UNITED - Birmingham Production Plant, AL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "truckGate",
+          "truckGateCount",
+          "dockDoorCount",
+          "entryExitSeparate"
+        ],
+        "center": {
+          "lat": 33.561277,
+          "lng": -86.768222
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.56,
+            "west": -86.7705,
+            "north": 33.5635,
+            "east": -86.7655
+          },
+          "truckGate": {
+            "south": 33.5601,
+            "west": -86.7698,
+            "north": 33.5607,
+            "east": -86.769
+          },
+          "dropYards": [
+            {
+              "south": 33.5618,
+              "west": -86.7702,
+              "north": 33.5628,
+              "east": -86.7682
+            },
+            {
+              "south": 33.562,
+              "west": -86.7672,
+              "north": 33.563,
+              "east": -86.7656
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.5605,
+              "west": -86.7702,
+              "north": 33.5618,
+              "east": -86.7688
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 50,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 140,
+          "truckGateCount": 2,
+          "buildingCount": 3,
+          "siteAreaAcres": 44.7,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "### Resolved location\n- Roster input: 4600 E Lake Blvd, Birmingham AL; lat/lng 33.561277, -86.768222 (ROOFTOP, but flagged \"moved 5725 m\" — a large geocode adjustment).\n- Confirmed accurate despite the large move. The supplied coordinate lands directly on the Coca-Cola UNITED Birmingham campus. Step-0 verification: Street View on East Lake Blvd shows a large red \"Coca-Cola\" script logo mounted on the building facade — unambiguous.\n- This is the Coca-Cola Bottling Company UNITED corporate HQ + Birmingham Production Plant, 4600 E Lake Blvd, Birmingham, AL 35217 — ~350,000 sq ft of office and industrial space on ~39 acres, in operation at this site since 1979, with 750+ employees. (Coca-Cola UNITED also announced a separate $330M new Birmingham facility in May 2024; this audit covers the existing active campus.)",
+        "mapsUrl": "https://www.google.com/maps/@33.561277,-86.768222,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster geocode flagged 'moved 5725 m' but the supplied lat/lng (33.561277,-86.768222) is correct - it lands on the Coca-Cola UNITED Birmingham campus. Confirmed in Street View: a large red 'Coca-Cola' script logo is mounted on the building facing East Lake Blvd. This is the Coca-Cola Bottling Company UNITED corporate HQ + Birmingham Production Plant, 4600 E Lake Blvd, Birmingham AL 35217 - ~350,000 sq ft on ~39 acres, in operation since 1979, 750+ employees.",
+          "campus": "Multi-building HQ + production campus: a large sawtooth-roof production warehouse, a separate north warehouse, and an attached office complex. multipleFacilities=true.",
+          "truckGate": "Property is fenced; trucks enter via a service/truck drive off East Lake Blvd at the SW (separate from the office/visitor entrance to the east). Gate hardware not directly resolvable in overhead imagery; controlled entrance inferred from continuous fence and a distinct truck approach.",
+          "truckGateCount": "Two access points off East Lake Blvd - a SW truck/service drive and a SE office/visitor drive. Truck-relevant gate count ~2; flagged as approximate.",
+          "guardShack": "No clear freestanding beside-the-lane guard booth visible at the truck entrance in z20 imagery. A small structure sits near the SW service drive but reads as a utility/maintenance building, not a guard booth. guardShack=false at medium confidence.",
+          "remoteGs": "Truck gate present, no guard shack identified -> remoteGs=true (kiosk/badge check-in implied). Medium confidence given this is a corporate HQ where staffed security is plausible.",
+          "entryExitSeparate": "Separate truck (SW) and office (SE) entrances; truck in/out likely shares the SW drive. entryExitSeparate set true on the campus-level distinct gates - flagged uncertain.",
+          "dockDoors": "50+ - extensive dock doors along the production warehouse SW face plus the north warehouse, trailers backed in at both. ~50 estimated, approximate.",
+          "dropArea": "50+ trailers parked without tractors across the west and central trailer yards; large red Coca-Cola / UNITED fleet plus delivery trucks.",
+          "shipRcvSeparate": "Dock banks on physically separate building faces (production warehouse SW face and the north warehouse) support separate ship/receive operations.",
+          "railServed": "No rail spur enters the property. railServed=false.",
+          "urbanRural": "Within Birmingham city limits beside I-59, surrounded by dense residential and industrial development - Urban.",
+          "note": "Coca-Cola UNITED announced (May 2024) a $330M new Birmingham facility; this audit covers the existing 4600 E Lake Blvd campus, which remains the active production plant."
+        }
+      },
+      {
+        "id": "17-coca-cola-united-montgomery-production-plant",
+        "name": "Coca-Cola UNITED - Montgomery Production Plant, AL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 32.293,
+          "lng": -86.3428
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.2915,
+            "west": -86.345,
+            "north": 32.295,
+            "east": -86.3415
+          },
+          "truckGate": {
+            "south": 32.2939,
+            "west": -86.344,
+            "north": 32.2944,
+            "east": -86.3432
+          },
+          "dropYards": [
+            {
+              "south": 32.2942,
+              "west": -86.3438,
+              "north": 32.2952,
+              "east": -86.3418
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.2924,
+              "west": -86.3434,
+              "north": 32.293,
+              "east": -86.3418
+            }
+          ],
+          "staging": {
+            "south": 32.294,
+            "west": -86.3434,
+            "north": 32.2944,
+            "east": -86.3425
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 85,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 31.7,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "### Resolved location\n- Roster input: 2000 Coca Cola Rd, Montgomery AL; lat/lng 32.294107, -86.347673 (GEOMETRIC_CENTER — geocoded to a street centerline).\n- Problem: The roster coordinate landed on empty/grassy land along Coca-Cola Road; the roster house number (2000) is wrong.\n- Correct facility: Coca-Cola UNITED Montgomery Production Plant, 300 Coca-Cola Road, Montgomery, AL 36105 — a $35M beverage production facility opened 2016 (home to one of the nation's fastest Dasani lines), ~120 associates, producing ~25M cases/year. Building positively identified at ~32.2930, -86.3428, off the east end of Coca-Cola Road beside I-65.\n- Step-0 verification: Street View shows a red \"Coca-Cola\" logo and, decisively, a branded canopied truck gate carrying the Coca-Cola script logo.",
+        "mapsUrl": "https://www.google.com/maps/@32.293,-86.3428,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster lat/lng (32.294107,-86.347673, GEOMETRIC_CENTER) and roster address (2000 Coca Cola Rd) geocoded to a street centerline on empty land. The real facility is the Coca-Cola UNITED Montgomery Production Plant, 300 Coca-Cola Road, Montgomery AL 36105 - a $35M Dasani/beverage production facility opened 2016, ~120 associates, ~25M cases/year. Building positively identified ~32.2930,-86.3428; Street View shows the red 'Coca-Cola' logo and a branded canopied truck gate.",
+          "truckGate": "STRONG positive. Street View shows a large canopied gatehouse spanning multiple lanes off Coca-Cola Road, with the red Coca-Cola script logo on the canopy, gate barrier arms across the lanes, and a 'Do Not Enter' sign on an outbound lane. Fully controlled truck entrance.",
+          "guardShack": "STRONG positive. A staffed guard booth structure sits beneath the gate canopy between the lanes - clearly visible in Street View. guardShack=true.",
+          "remoteGs": "false - a guard shack is present, so this is not a remote/kiosk gate.",
+          "entryLanes/exitLanes": "The canopied gate spans multiple lanes (~2 in, ~2 out) with the booth in the middle; counts approximate from Street View, flagged uncertain.",
+          "fastLaneOpportunity": "Wide multi-lane canopied gate apron with room for an express/bypass lane. fastLaneOpportunity=true.",
+          "dockDoors": "~30 dock doors with trailers backed in along the production building's south face plus the NW warehouse - band 25-50, approximate.",
+          "dropArea": "25-50 trailers parked without tractors in the north trailer yard inside the gate.",
+          "postGateStaging": "Paved holding area between the gate canopy and the trailer yard/docks - inside the gate, before the docks.",
+          "shipRcvSeparate": "Docks read as a single cluster along the building's south face; no clearly separate ship/receive bank. shipRcvSeparate=false.",
+          "railServed": "No rail spur enters the property; I-65 borders the SE side. railServed=false.",
+          "buildingCount": "Main production building (with attached office) plus a separate NW warehouse = 2.",
+          "urbanRural": "Within the Montgomery metro on the I-65 corridor with adjacent residential subdivisions - Urban."
+        }
+      },
+      {
+        "id": "18-coca-cola-united-college-park-production-plant",
+        "name": "Coca-Cola UNITED - College Park Production Plant, GA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 33.6268,
+          "lng": -84.468
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.6244,
+            "west": -84.4698,
+            "north": 33.6288,
+            "east": -84.4662
+          },
+          "truckGate": {
+            "south": 33.6245,
+            "west": -84.4694,
+            "north": 33.625,
+            "east": -84.4688
+          },
+          "dropYards": [
+            {
+              "south": 33.6258,
+              "west": -84.4698,
+              "north": 33.6285,
+              "east": -84.4682
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.6252,
+              "west": -84.4678,
+              "north": 33.6282,
+              "east": -84.467
+            }
+          ],
+          "staging": {
+            "south": 33.6248,
+            "west": -84.469,
+            "north": 33.6256,
+            "east": -84.468
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 40.4,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "### Resolved location\n- Roster input: 3151 Sullivan Rd, Atlanta GA 30337; lat/lng 33.623174, -84.482599 (RANGE_INTERPOLATED, \"moved 1 m\").\n- Problem: The roster coordinate landed on a vacant paved lot ~1.5 km west of the real site; the roster house number (3151) is wrong. The correct address is 2355 Sullivan Road, College Park, GA 30337, but the Census and Nominatim geocoders for that address also interpolated onto an unrelated rural stretch of Sullivan Road.\n- Correct facility: Coca-Cola UNITED College Park Production Plant, located at ~33.6268, -84.4680, off Sullivan Road in the Cooks Crossing industrial area near the I-85/I-285 interchange (close to Hartsfield-Jackson airport). Pinned via an OpenStreetMap \"Coca-Cola\" POI and confirmed in Step 0 by Street View: the building carries a red \"Coca-Cola\" logo, and the yard entrance has red \"TRUCK ENTRANCE\" signs.",
+        "mapsUrl": "https://www.google.com/maps/@33.6268,-84.468,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster lat/lng (33.623174,-84.482599) and roster address (3151 Sullivan Rd) landed on a vacant paved lot ~1.5 km west of the real site - wrong location. The Census/Nominatim geocoders for the correct address (2355 Sullivan Rd) also interpolated onto a rural stretch. The actual Coca-Cola UNITED College Park Production Plant is at ~33.6268,-84.4680, off Sullivan Road in the Cooks Crossing industrial area near the I-85/I-285 interchange. Confirmed via an OSM 'Coca-Cola' POI and Street View: the building carries a red 'Coca-Cola' logo and the yard entrance has red 'TRUCK ENTRANCE' signs. It is a production + distribution facility, 325+ associates, acquired by Coca-Cola UNITED in April 2017 from The Coca-Cola Company.",
+          "truckGate": "Positive. Street View shows red 'TRUCK ENTRANCE' signs at a driveway off Sullivan Road and a chain-link perimeter fence. The property is fenced with a controlled truck entrance. Gate barrier hardware not clearly resolved in the available views; truckGate=true.",
+          "guardShack": "No distinct freestanding beside-the-lane guard booth identified at the truck entrance in Street View or z20 satellite. guardShack=false at medium confidence.",
+          "remoteGs": "Truck gate present, no guard shack identified -> remoteGs=true (kiosk/badge check-in implied). Medium confidence.",
+          "dockDoors": "~45 dock doors along the production building's long west face with trailers backed in - band 25-50, approximate count from z19 imagery.",
+          "dropArea": "50+ trailers parked without tractors in the large west drop yard - dense rows of staged trailers, a major drop-yard operation.",
+          "railServed": "A rail line runs through the property between the production building and the west trailer yard, directly alongside the building's east/dock side - the site is rail-served. railServed=true.",
+          "shipRcvSeparate": "Docks read as one continuous bank along the building's west face; no clearly separate ship/receive cluster. shipRcvSeparate=false.",
+          "dropYard": "Large dedicated trailer-storage drop yard on the west half of the property, separate from the active dock apron.",
+          "postGateStaging": "Paved holding area inside the gate before the docks/drop yard.",
+          "buildingCount": "Main production/distribution building plus an attached office building = 2.",
+          "urbanRural": "Inside the Atlanta metro near Hartsfield-Jackson airport and the I-85/I-285 interchange, dense industrial fabric - Urban.",
+          "drivewayLong": "Long internal approach from the Sullivan Road gate to the docks holds 3+ trucks."
+        }
+      },
+      {
+        "id": "19-coca-cola-united-marietta-production-plant",
+        "name": "Coca-Cola UNITED - Marietta Production Plant, GA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "truckGate",
+          "railServed"
+        ],
+        "center": {
+          "lat": 33.9748,
+          "lng": -84.5432
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.9738,
+            "west": -84.5447,
+            "north": 33.97625,
+            "east": -84.54165
+          },
+          "truckGate": {
+            "south": 33.97555,
+            "west": -84.5449,
+            "north": 33.97585,
+            "east": -84.5444
+          },
+          "dropYards": [
+            {
+              "south": 33.9756,
+              "west": -84.5435,
+              "north": 33.9762,
+              "east": -84.5418
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.9752,
+              "west": -84.5438,
+              "north": 33.97565,
+              "east": -84.5418
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 38,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 16.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Facility type: Bottling / Manufacturing Plant\nResolved location: ~33.97480, -84.54320 — 1091 Industrial Park Dr, Marietta, GA 30062\nConfidence: High",
+        "mapsUrl": "https://www.google.com/maps/@33.97480,-84.54320,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (33.9357,-84.5037) landed in a residential apartment area ~5km SE. Correct site is 1091 Industrial Park Dr, Marietta GA 30062 (Coca-Cola UNITED Marietta Production page lists this address). Confirmed by Street View showing the Coca-Cola script logo and bottling silos on the building facade fronting Franklin Gateway/Industrial Park Dr.",
+          "truckGate": "No barrier arm or sliding gate observed across the truck driveway off Industrial Park Dr. The truck yard is surrounded by chain-link perimeter fence but the driveway entrance from the public road is an open, uncontrolled curb cut. Flagged uncertain - a gate could exist out of Street View coverage but none seen across multiple headings.",
+          "guardShack": "No standalone guard booth seen at the entrance. A small structure exists near the entrance area but appears to be part of the building cluster, not a checkpoint booth.",
+          "dropArea": "Drop-trailer yard along the north side of the building holds roughly 38 trailers in the imagery, in marked rows with directional arrows painted on the pavement.",
+          "dockDoors": "Estimated 30 loading-dock doors along the north building face where trailers are backed in; counted from zoom-20 imagery, banded 25-50.",
+          "railServed": "A rail line runs immediately north of the property along the truck yard but no spur appears to enter the Coca-Cola property - the yard pavement abuts the rail right-of-way with a fence. Flagged uncertain.",
+          "postGateStaging": "Large internal paved yard between the open entrance and the dock doors provides ample queue/staging room inside the property.",
+          "drivewayLong": "The internal approach from the Industrial Park Dr entrance to the dock doors is deep, easily holding 3+ trucks.",
+          "buildingCount": "Main production/warehouse building plus the office wing and a separate maintenance/shop structure in the truck yard."
+        }
+      },
+      {
+        "id": "20-coca-cola-united-baton-rouge-production-plant",
+        "name": "Coca-Cola UNITED - Baton Rouge Production Plant, LA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "scale"
+        ],
+        "center": {
+          "lat": 30.5365,
+          "lng": -91.135
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 30.5325,
+            "west": -91.1405,
+            "north": 30.5395,
+            "east": -91.1325
+          },
+          "truckGate": {
+            "south": 30.534,
+            "west": -91.1399,
+            "north": 30.5352,
+            "east": -91.1388
+          },
+          "dropYards": [
+            {
+              "south": 30.537,
+              "west": -91.1356,
+              "north": 30.5383,
+              "east": -91.1332
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 30.5356,
+              "west": -91.1368,
+              "north": 30.5364,
+              "east": -91.133
+            }
+          ],
+          "staging": {
+            "south": 30.5342,
+            "west": -91.1378,
+            "north": 30.535,
+            "east": -91.1365
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 112,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Facility type: Bottling / Manufacturing Plant\nResolved location: ~30.53650, -91.13500 — 9696 Plank Rd, Baton Rouge, LA 70811\nConfidence: Medium",
+        "mapsUrl": "https://www.google.com/maps/@30.53650,-91.13500,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address (8484 Airline Hwy) is an obsolete historical Coca-Cola location. The current Coca-Cola UNITED Baton Rouge production plant is at 9696 Plank Rd, Baton Rouge LA 70811, confirmed by the Coca-Cola UNITED Baton Rouge location page and Waze. Roster coords (30.4558,-91.0991) were ~10km southeast of the real plant. Identified the large white-roofed bottling complex beside Baton Rouge Metro Airport with red Coca-Cola fleet trucks at the docks.",
+          "campus": "112-acre LEED-certified campus per Coca-Cola UNITED / Louisiana Economic Development: ~750,000 sq ft bottling facility, 56,000 sq ft corporate office, 50,000 sq ft fleet-maintenance building, plus support buildings. $42M expansion broke ground 2021.",
+          "truckGate": "Could not positively confirm a barrier or gate. The campus is reached via a long winding access road off Plank Rd; the Street View car drove freely down the access road in 2022 with no gate seen, but SV coverage ends before reaching the building checkpoint. A facility of this scale typically has a controlled entrance, but no barrier is visible in satellite or available Street View - flagged uncertain (called FALSE on visible evidence).",
+          "guardShack": "No standalone guard booth confirmed at the entrance from imagery. Flagged uncertain.",
+          "drivewayLong": "Very deep approach - a long access road from Plank Rd plus internal roads provide ample stacking for 3+ trucks.",
+          "postGateStaging": "Trucks observed staged in a long line on a wide internal paved area between the fleet building and the bottling plant - clear post-gate staging/queue zone.",
+          "dockDoors": "Estimated ~60 dock doors along the south and east faces of the bottling building, banded 50+. Counted from zoom-19 imagery.",
+          "dropArea": "Large trailer drop yard on the north side of the building holds ~55 trailers visible plus additional dock-side parking; banded 50+.",
+          "fastLaneOpportunity": "Wide internal paved aprons and a long approach road provide ample room for a bypass/express lane.",
+          "multipleFacilities": "Campus has multiple large buildings: bottling plant, corporate office, fleet-maintenance building, and support structures.",
+          "scale": "No truck scale clearly identified; flagged uncertain.",
+          "buildingCount": "Bottling plant + office + fleet maintenance + pump/utility structure = 4 distinct buildings."
+        }
+      },
+      {
+        "id": "21-coca-cola-united-new-orleans-production-plant",
+        "name": "Coca-Cola UNITED - New Orleans Production Plant, LA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "preGateStaging",
+          "postGateStaging",
+          "drivewayLong",
+          "drivewayShort",
+          "backupSensitive",
+          "entryExitTogether",
+          "entryExitSeparate",
+          "entryLanes",
+          "exitLanes",
+          "fastLaneOpportunity",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "multipleFacilities",
+          "scale",
+          "dropYard",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 29.9468,
+          "lng": -90.1915
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 29.945,
+            "west": -90.1932,
+            "north": 29.9485,
+            "east": -90.1895
+          },
+          "truckGate": {
+            "south": 29.9456,
+            "west": -90.1931,
+            "north": 29.9462,
+            "east": -90.1923
+          },
+          "dropYards": [
+            {
+              "south": 29.945,
+              "west": -90.1918,
+              "north": 29.946,
+              "east": -90.1905
+            }
+          ],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 12,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Facility type: Bottling / Manufacturing Plant\nResolved area: Elmwood industrial park, 5601 Citrus Blvd, Harahan, LA 70123\nBest-estimate center: ~29.94680, -90.19150\nConfidence: LOW — exact building not positively confirmed; flagged for human review.",
+        "mapsUrl": "https://www.google.com/maps/@29.94680,-90.19150,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "EXACT BUILDING NOT POSITIVELY CONFIRMED. Roster address (12970 I-10 Service Rd, New Orleans East) and roster coords (30.0524,-89.9520) are wrong - that point is a residential/stadium area with no industrial plant. Web research is consistent: the Coca-Cola UNITED New Orleans production plant ('New Orleans Production Center', operated by Crescent City Coca-Cola Bottling Company UNITED) is at 5601 Citrus Blvd, Harahan/Elmwood LA 70123 - the largest Coca-Cola plant in Louisiana, described as a 12-story tower spanning a football field, in the Elmwood industrial park.",
+          "search": "Probed the Elmwood industrial park extensively (z15-z20) and street-viewed Citrus Blvd (the Mississippi River levee road) and many internal streets. Could not isolate the 12-story tower - the park has hundreds of similar large warehouses and the tower (likely an internal automated high-bay) is not clearly distinguishable in near-nadir satellite imagery. The strongest positive signal found was a Coca-Cola-branded 'muster station' assembly-point sign at the corner near 29.9461,-90.1928, beside a blue-privacy-fenced industrial facility with a trailer yard.",
+          "estimate": "The coords and geofence here are a BEST ESTIMATE centered on the building cluster near that Coca-Cola muster-station sign. All classification fields are low-confidence inferences from generic Elmwood-industrial-park layout and are listed in uncertainFields.",
+          "urbanRural": "Elmwood is a dense industrial park inside the New Orleans metro - Urban is confident regardless of exact building.",
+          "railServed": "No rail spur evident in the area probed.",
+          "recommendation": "Flag for human review - needs a person to confirm the exact 5601 Citrus Blvd building footprint before classification can be trusted."
+        }
+      },
+      {
+        "id": "22-coca-cola-united-chattanooga-production-plant",
+        "name": "Coca-Cola UNITED - Chattanooga Production Plant, TN",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "remoteGs",
+          "guardShack",
+          "scale"
+        ],
+        "center": {
+          "lat": 35.0923,
+          "lng": -85.253
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.0905,
+            "west": -85.2554,
+            "north": 35.0945,
+            "east": -85.2508
+          },
+          "truckGate": {
+            "south": 35.091,
+            "west": -85.2553,
+            "north": 35.0918,
+            "east": -85.2544
+          },
+          "dropYards": [
+            {
+              "south": 35.0906,
+              "west": -85.2542,
+              "north": 35.0916,
+              "east": -85.2524
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.0912,
+              "west": -85.2543,
+              "north": 35.0923,
+              "east": -85.2532
+            }
+          ],
+          "staging": {
+            "south": 35.0908,
+            "west": -85.255,
+            "north": 35.0916,
+            "east": -85.2542
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 50,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 19,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Facility type: Bottling / Manufacturing Plant\nResolved location: ~35.09230, -85.25300 — 4000 Amnicola Hwy, Chattanooga, TN 37406\nConfidence: Medium",
+        "mapsUrl": "https://www.google.com/maps/@35.09230,-85.25300,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address (2111 Polymer Dr) and roster coords (35.0459,-85.1932) do not match the production plant. The roster label 'Production Plant' corresponds to the Coca-Cola UNITED Chattanooga PRODUCTION CENTER at 4000 Amnicola Hwy, Chattanooga TN 37406 (Coca-Cola UNITED Chattanooga-2 location page; Google Maps place pin 35.0923,-85.2532). Note: 2111 W Shepherd Rd is a SEPARATE Coca-Cola UNITED distribution center/regional HQ - the roster's '2111 Polymer Dr' appears to conflate the two. Confirmed the Amnicola plant by Street View showing Coca-Cola script branding on the building facade plus a 'TRUCK DELIVERY' wayfinding sign.",
+          "truckGate": "The truck/dock yard is enclosed by chain-link fencing; Street View shows the dock yard fenced with gate sections and trailers backed into docks inside. Trucks enter the fenced yard via a gated opening off the internal west-side road - recorded truckGate true. Flagged uncertain as the gate hardware (barrier vs rolling gate) is partly tree-obscured.",
+          "guardShack": "No standalone guard booth seen at the truck-yard gate. The main building entrance off Amnicola Hwy is an open driveway. Recorded false.",
+          "remoteGs": "Gate present without a staffed booth implies kiosk/remote check-in - recorded remoteGs true (flagged uncertain alongside truckGate).",
+          "dockDoors": "Estimated ~35 dock doors across the west and south building faces with trailers backed in; banded 25-50.",
+          "dropArea": "Trailer drop yard on the south side holds ~30 trailers in rows; banded 25-50.",
+          "postGateStaging": "Internal paved staging/parking area south and west of the building between the gate and the docks.",
+          "drivewayLong": "Deep internal approach - the access road plus internal yard easily holds a 3+ truck queue.",
+          "multipleFacilities": "Site is a campus: main production/warehouse building, office wing fronting Amnicola Hwy, plus separate support buildings (equipment refurbishment center / shop). Coca-Cola UNITED describes the Chattanooga site as a production center with multiple functions.",
+          "railServed": "No rail spur into the property - the plant is bordered by Amnicola Hwy and the Tennessee River.",
+          "scale": "No truck scale clearly identified; flagged uncertain.",
+          "urbanRural": "Inside the Chattanooga metro industrial fabric along Amnicola Hwy - Urban."
+        }
+      },
+      {
+        "id": "23-reyes-coca-cola-bottling-niles-production-plant",
+        "name": "Reyes Coca-Cola Bottling - Niles Production Plant, IL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "railServed"
+        ],
+        "center": {
+          "lat": 42.0162,
+          "lng": -87.795
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.0143,
+            "west": -87.7972,
+            "north": 42.0182,
+            "east": -87.7935
+          },
+          "truckGate": {
+            "south": 42.0168,
+            "west": -87.7944,
+            "north": 42.0176,
+            "east": -87.7938
+          },
+          "dropYards": [
+            {
+              "south": 42.0166,
+              "west": -87.7956,
+              "north": 42.018,
+              "east": -87.7939
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 42.0162,
+              "west": -87.796,
+              "north": 42.0178,
+              "east": -87.7942
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 2,
+          "buildingCount": 3,
+          "siteAreaAcres": 28,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Facility type: Bottling / Manufacturing Plant\nResolved location: ~42.01620, -87.79500 — 7400 N Oak Park Ave, Niles, IL 60714\nConfidence: High",
+        "mapsUrl": "https://www.google.com/maps/@42.01620,-87.79500,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (42.0158,-87.7945, ROOFTOP) are accurate - confirmed 7400 N Oak Park Ave, Niles IL 60714, the Reyes Coca-Cola Bottling Niles production plant and Reyes Coca-Cola headquarters. Confirmed by Street View showing Coca-Cola and Sprite branded trailers parked along the truck yard. Facility opened 1964, acquired by Reyes 2016, 365,000+ sq ft, bottles 24M+ cases/year for the Midwest.",
+          "truckGate": "Open site - the truck yard fronts the public road with no perimeter fence, no barrier arm, no sliding gate, and no guard booth at any entrance. Coca-Cola/Sprite trailers are parked openly within view of the road. Multiple wide open driveway entrances. truckGate false.",
+          "guardShack": "No guard booth anywhere on the perimeter - confirmed across multiple Street View headings. False.",
+          "remoteGs": "No gate, so remoteGs false.",
+          "truckGateCount": "Two open driveway entrances into the truck yard counted (one mid-block, one further along) - recorded truckGateCount 2 although neither is a controlled gate.",
+          "entryExitSeparate": "The site has multiple open driveways serving the truck yard at different points along the road, so in-and-out movement is split across separate openings - recorded entryExitSeparate true.",
+          "dockDoors": "Estimated ~30 dock doors along the building faces with trailers backed in; banded 25-50. Flagged uncertain - dock face partly obscured by trailers and rooftop angle.",
+          "dropArea": "Trailer drop yard holds ~35 trailers in marked rows; banded 25-50. dropYard true.",
+          "postGateStaging": "Large open paved truck yard between the entrances and the dock doors provides ample internal staging.",
+          "drivewayLong": "Deep open yard easily holds a 3+ truck queue.",
+          "multipleFacilities": "Campus has the main production/warehouse building plus a connected south warehouse building plus an office building - multiple large structures on one property.",
+          "railServed": "No rail spur into the property evident; flagged uncertain.",
+          "urbanRural": "Niles is a dense inner-ring Chicago suburb - Urban."
+        }
+      },
+      {
+        "id": "24-reyes-coca-cola-bottling-downey-production-plant",
+        "name": "Reyes Coca-Cola Bottling - Downey Production Plant, CA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "scale"
+        ],
+        "center": {
+          "lat": 33.934,
+          "lng": -118.1288
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.9318,
+            "west": -118.1315,
+            "north": 33.9358,
+            "east": -118.1256
+          },
+          "truckGate": {
+            "south": 33.9317,
+            "west": -118.1298,
+            "north": 33.9323,
+            "east": -118.1288
+          },
+          "dropYards": [
+            {
+              "south": 33.9321,
+              "west": -118.1313,
+              "north": 33.9332,
+              "east": -118.129
+            },
+            {
+              "south": 33.9342,
+              "west": -118.1278,
+              "north": 33.9356,
+              "east": -118.1256
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.9323,
+              "west": -118.1295,
+              "north": 33.9333,
+              "east": -118.127
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 80,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 40,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Facility type: Bottling / Manufacturing Plant\nResolved location: ~33.93400, -118.12880 — 11634 Patton Rd, Downey, CA 90241\nConfidence: Medium",
+        "mapsUrl": "https://www.google.com/maps/@33.93400,-118.12880,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster names this the 'Downey Production Plant' but supplied address '12320 Smith Ave, Santa Fe Springs CA 90670' with coords (33.9489,-118.0727). That address/coords land on a generic warehouse street in Santa Fe Springs with no Coca-Cola signage. Web/business research (Buzzfile, OpenGovUS LA business registry) gives the Reyes Coca-Cola Bottling Downey manufacturing address as 11634 Patton Rd, Downey CA 90241. Satellite probing of that location revealed a large bottling/distribution complex, and Street View confirmed it: Coca-Cola red branding stripe on the building plus Coca-Cola-branded red trailers parked inside the fenced yard.",
+          "truckGate": "The plant perimeter is fully secured - masonry walls and chain-link fencing topped with barbed wire. The truck yard is entered through a chain-link rolling/sliding gate (seen open in Street View) - controlled truck gate confirmed. truckGate true.",
+          "guardShack": "No staffed guard booth observed at the truck rolling gate; recorded guardShack false. Flagged uncertain - a booth may sit at another entrance out of Street View coverage.",
+          "remoteGs": "Gate present without a confirmed staffed booth implies kiosk/remote check-in - recorded remoteGs true (flagged uncertain).",
+          "truckGateCount": "At least two gated truck entrances counted in the walled perimeter; recorded 2.",
+          "entryExitSeparate": "Multiple gated entrances at different points of the walled perimeter - in/out movement split - entryExitSeparate true.",
+          "dockDoors": "Estimated ~55 dock doors across multiple building faces with trailers backed in; banded 50+. Flagged uncertain - several dock faces partly obscured by trailers and rooftop angle.",
+          "dropArea": "Two large trailer drop yards (one on the rail/north side, one on the south side) hold ~80 trailers total in rows; banded 50+. dropYard true.",
+          "shipRcvSeparate": "Dock banks appear on physically separate building faces (north/rail side and south side) - shipRcvSeparate true.",
+          "railServed": "A rail line runs along the north edge of the property and a spur appears to serve the site - railServed true.",
+          "postGateStaging": "Large internal paved yards between the gates and the docks give deep staging room.",
+          "drivewayLong": "Deep internal approach holds a 3+ truck queue.",
+          "multipleFacilities": "Large multi-building complex - main production/warehouse building, additional connected warehouses, and an office/support building.",
+          "scale": "No truck scale clearly identified; flagged uncertain.",
+          "urbanRural": "Dense Downey/LA-metro industrial fabric - Urban."
+        }
+      },
+      {
+        "id": "25-reyes-coca-cola-bottling-san-leandro-production-plant",
+        "name": "Reyes Coca-Cola Bottling - San Leandro Production Plant, CA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes",
+          "guardShack",
+          "remoteGs"
+        ],
+        "center": {
+          "lat": 37.6991,
+          "lng": -122.16835
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 37.6973,
+            "west": -122.1699,
+            "north": 37.7006,
+            "east": -122.1664
+          },
+          "truckGate": {
+            "south": 37.6976,
+            "west": -122.168,
+            "north": 37.698,
+            "east": -122.16745
+          },
+          "dropYards": [
+            {
+              "south": 37.6976,
+              "west": -122.16985,
+              "north": 37.6982,
+              "east": -122.167
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 37.6977,
+              "west": -122.16985,
+              "north": 37.6983,
+              "east": -122.167
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 22,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 9,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": true,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Resolved location: 14655 Wicks Blvd, San Leandro, CA 94577\nLocked center: 37.69910, -122.16835\nConfidence: medium\n\n### Step 0 — Location resolution\n\nThe roster supplied 37.712931, -122.160869 with the address \"1101 Marina Blvd.\"\nA satellite probe of that point landed squarely in a retail/commercial district\n(parking lots, strip development) — not an industrial facility. Web research\nresolved the discrepancy:\n\n- Multiple business directories (Chamber of Commerce, Superpages, ImportYeti,\n  Bandana jobs) list Reyes Coca-Cola Bottling LLC at **14655 Wicks Blvd, San\n  Leandro, CA 94577**.\n- A Birdeye review page titled \"Reyes Coca-Cola Truck Entrance\" gives\n  coordinates 37.7003001, -122.1658019 and the same Wicks Blvd address.\n- The Coca-Cola San Leandro bottling plant was established 1967 and serves the",
+        "mapsUrl": "https://www.google.com/maps/@37.69910,-122.16835,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (37.7129,-122.1609 / 1101 Marina Blvd) landed in a retail district and were wrong. Multiple business directories and a Birdeye 'Reyes Coca-Cola Truck Entrance' listing confirm the facility at 14655 Wicks Blvd, San Leandro 94577, coordinates 37.7003,-122.1658. The plant is the large gray-roofed multi-tenant warehouse centered ~37.6991,-122.1684.",
+          "building": "Large industrial warehouse shared by Reyes Coca-Cola Bottling and at least one co-tenant (Accu-Logistics LLC signage visible on the east end). Reyes runs a distribution/production operation in the western/larger portion; red Coca-Cola trailers backed into the south-face docks confirm identity.",
+          "truckGate": "Driver reviews explicitly reference a gate ('park on the curb, just inside the gate'). The south dock yard is enclosed by chain-link fencing with green privacy slats. Truck entrance is on the SE/E side off Griffith St. No barrier arm clearly resolved in imagery but yard is fenced and controlled.",
+          "guardShack": "No guard booth visible at the truck entrance in any Street View or satellite imagery.",
+          "remoteGs": "Driver reviews describe a remote/appointment check-in ('no check-in until 30 minutes before appointment', 'no restroom') consistent with a kiosk/call-box rather than a staffed booth.",
+          "preGateStaging": "Drivers are directed to park on Griffith St (public curb) when arriving early - functions as informal pre-gate staging on the street.",
+          "backupSensitive": "Truck queue spills onto the public industrial street (Griffith St); driver reviews complain of no parking before appointment.",
+          "dockDoorCount": "~25-30 dock doors counted along the building south face from z19/z20 imagery, with ~22 trailers backed in (red Coca-Cola, white, blue). Count is an estimate - banded 25-50.",
+          "dropYard": "Fenced paved dock yard south of the building holds parked trailers separate from active dock staging.",
+          "siteAreaAcres": "Derived from perimeter box (~330m N-S x ~110m E-W building+yard parcel) ~ 9 acres - approximate.",
+          "shipRcvSeparate": "Single dock bank along the south face; no separate ship/receive clusters identified."
+        }
+      },
+      {
+        "id": "26-reyes-coca-cola-bottling-rancho-cucamonga-bottling-distribution-center",
+        "name": "Reyes Coca-Cola Bottling - Rancho Cucamonga Bottling & Distribution Center, CA",
+        "type": "Bottling / Manufacturing + Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "preGateStaging",
+          "postGateStaging",
+          "drivewayLong",
+          "drivewayShort",
+          "backupSensitive",
+          "entryExitTogether",
+          "entryExitSeparate",
+          "entryLanes",
+          "exitLanes",
+          "fastLaneOpportunity",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "multipleFacilities",
+          "scale",
+          "dropYard",
+          "multiStep",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "siteAreaAcres",
+          "railServed",
+          "coords",
+          "perimeter"
+        ],
+        "center": {
+          "lat": 34.0824,
+          "lng": -117.553
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.0812,
+            "west": -117.5545,
+            "north": 34.0834,
+            "east": -117.5515
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 14,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "NONE",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Resolved address: 10670 6th St, Rancho Cucamonga, CA 91730\nBest-estimate center: 34.0824, -117.5530 (NOT confirmed)\nConfidence: low — facility under active demolition/reconstruction\n\n### Status — facility under construction\n\nThis site cannot be given a stable yard audit because the facility is in\nthe middle of a full demolition-and-rebuild. Multiple 2026 news sources confirm:\n\n- Reyes Coca-Cola Bottling broke ground in February 2026 on a complete\n  demolition and reconstruction of its Rancho Cucamonga facility.\n- The existing 125,000 sq ft distribution building (built 1984) at\n  10670 6th St is being torn down and replaced.\n- The new facility will be a **620,000+ sq ft production + distribution\n  campus** occupying about one city block, with 4 production lines, expanded",
+        "mapsUrl": "https://www.google.com/maps/@34.08240,-117.55300,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "status": "FACILITY UNDER ACTIVE DEMOLITION AND RECONSTRUCTION. Multiple 2026 news sources (Reyes Coca-Cola newsroom, IE Business Daily, PRNewswire, BeverageDaily) confirm Reyes Coca-Cola broke ground in February 2026 on a full demolition-and-rebuild of the existing 125,000 sq ft 1984 distribution building at 10670 6th St, replacing it with a 620,000+ sq ft production+distribution campus occupying about one city block. Construction runs through 2027; operations are temporarily relocated to Fontana, CA during construction. The auditable, stable operating yard does not currently exist.",
+          "location": "Roster supplied 11251 6th St and coords 34.084,-117.559; the correct address per the Rancho Cucamonga Chamber, Waze and multiple directories is 10670 6th St, Rancho Cucamonga, CA 91730. 6th St was confirmed via Street View as a 4-lane divided arterial running E-W through the industrial district north of Ontario Mills, ~lat 34.0845. 10670 is east of Milliken Ave (-117.5555). The exact parcel could not be unambiguously identified within the dense 6th St warehouse corridor - no Coca-Cola signage or a clearly-imaged demolition site was resolvable, and current 2026 satellite imagery still shows intact warehouses (likely captured before demolition).",
+          "coords": "Best-estimate parcel center 34.0824,-117.5530 (6th St corridor, ~1 block east of Milliken Ave) - NOT confirmed. Low confidence.",
+          "perimeter": "Estimated one-city-block footprint per news ('takes up about one city block', 620,000+ sq ft) - dimensions are an estimate, not measured from a confirmed parcel.",
+          "classification": "All physical-layout flags left false/null because the facility is mid-demolition - no stable docks, gate, guard booth, or yard exist to classify. The new campus design (per news) will include 4 production lines, a parking garage, EV charging, and a recycling center - but as-built layout is unknown.",
+          "urbanRural": "Urban - dense Inland Empire industrial fabric of Rancho Cucamonga, adjacent to I-15 and Ontario Mills.",
+          "recommendation": "Re-audit after facility completion (expected 2027) when the new 620,000 sq ft campus is operational."
+        }
+      },
+      {
+        "id": "27-liberty-coca-cola-beverages-philadelphia-production-plant",
+        "name": "Liberty Coca-Cola Beverages - Philadelphia Production Plant, PA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 40.007,
+          "lng": -75.1115
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.0054,
+            "west": -75.1138,
+            "north": 40.0092,
+            "east": -75.1092
+          },
+          "truckGate": {
+            "south": 40.00825,
+            "west": -75.1101,
+            "north": 40.00865,
+            "east": -75.10955
+          },
+          "dropYards": [
+            {
+              "south": 40.0064,
+              "west": -75.1115,
+              "north": 40.009,
+              "east": -75.1096
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.006,
+              "west": -75.1128,
+              "north": 40.008,
+              "east": -75.1115
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 2,
+          "buildingCount": 3,
+          "siteAreaAcres": 14,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": true,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Resolved location: 725 E Erie Ave, Philadelphia, PA 19134\nLocked center: 40.00700, -75.11150\nConfidence: high\n\n### Step 0 — Location confirmation\n\nThe roster coordinates (40.006386, -75.113266) landed at the correct\nintersection. The facility is positively identified:\n\n- A large Coca-Cola logo is painted on the NE building face (visible from\n  Street View on the side street).\n- An **enclosed pedestrian skybridge over the side street is Coca-Cola\n  branded**, connecting two buildings of the plant complex.\n- Coca-Cola red delivery trucks and red/blue trailers fill the yard.\n- Web search confirms Liberty Coca-Cola Beverages operates at 725 E Erie Ave,\n  Philadelphia PA 19134.\n\n### Key views\n\n- Overview (z16-z18): Heavy-industrial Kensington/Port Richmond district.\n  The complex comprises a large production-plant building (aged white roof), a",
+        "mapsUrl": "https://www.google.com/maps/@40.00700,-75.11150,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords 40.006386,-75.113266 (725 E Erie Ave) confirmed. The plant is positively identified: a large Coca-Cola logo is painted on the building's NE face, and an enclosed pedestrian skybridge over the side street is Coca-Cola branded. Coca-Cola trucks and trailers fill the yard.",
+          "truckGate": "Multiple chain-link sliding gates along E Erie Ave control the yard - one is explicitly marked 'EXIT'. Carrier-instruction signage on the fence: 'ALL CARRIERS Park on the Street ... Check in With Guard With Paper Work ... Coiled in By Appointment ... DO NOT DOUBLE PARK'.",
+          "guardShack": "A fence sign explicitly reads 'GUARD SHACK - Check in Here' with a directional arrow; carriers are directed to check in with a guard. A small booth structure is visible near the gate inside the yard.",
+          "preGateStaging": "Carrier signage directs all carriers to 'Park on the Street' before check-in - the public E Erie Ave / side streets serve as pre-gate staging.",
+          "postGateStaging": "The very large paved drop yard inside the gate functions as a post-gate holding/queue area before docks.",
+          "entryExitSeparate": "A dedicated 'EXIT' gate is marked separately from the carrier check-in/entrance gate along E Erie Ave - distinct in and out points.",
+          "drivewayLong": "The drop yard is deep and very large, easily holding a queue of 3+ trucks between the gate and the dock banks.",
+          "backupSensitive": "Carrier sign explicitly warns 'DO NOT DOUBLE PARK' and directs street parking - the gate fronts a busy urban arterial (E Erie Ave) with limited stacking room, so a queue spills onto public roads.",
+          "dockDoors": "Large multi-building urban plant - the production building plus a long dock/warehouse building have extensive dock banks with dozens of trailers backed in. Banded 50+; exact count is an overhead estimate.",
+          "dropArea": "Extensive trailer drop yard packed with 100+ Coca-Cola trailers and red delivery trucks - banded 50+.",
+          "multipleFacilities": "Campus of 3+ connected buildings: the main production plant, a long dock/warehouse building, and a building west of the side street linked by the Coca-Cola branded skybridge.",
+          "shipRcvSeparate": "Multiple dock faces across the complex but a single integrated operation - could not confirm physically separate ship vs receive clusters; left false, flagged uncertain.",
+          "siteAreaAcres": "Derived from perimeter box (~420m N-S x ~390m E-W complex) ~ 14 acres - approximate.",
+          "railServed": "No rail spur runs into the property (rail line runs nearby but not into the yard)."
+        }
+      },
+      {
+        "id": "28-liberty-coca-cola-beverages-maspeth-production-plant",
+        "name": "Liberty Coca-Cola Beverages - Maspeth Production Plant, NY",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "preGateStaging",
+          "postGateStaging",
+          "drivewayLong",
+          "drivewayShort",
+          "backupSensitive",
+          "entryExitTogether",
+          "entryExitSeparate",
+          "entryLanes",
+          "exitLanes",
+          "fastLaneOpportunity",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "multipleFacilities",
+          "scale",
+          "dropYard",
+          "multiStep",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "siteAreaAcres",
+          "railServed",
+          "coords",
+          "perimeter",
+          "buildingCount"
+        ],
+        "center": {
+          "lat": 40.7212,
+          "lng": -73.9145
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.7198,
+            "west": -73.9162,
+            "north": 40.7226,
+            "east": -73.9132
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 7.3,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "NONE",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster address: 5612 56th Rd, Maspeth, NY 11378 (imprecise)\nResolved address: 58-40 Borden Ave, Maspeth, NY 11378 (Liberty Coca-Cola\nSales/Distribution Center)\nBest-estimate center: 40.7212, -73.9145 (NOT precisely confirmed)\nConfidence: low — roster entry is obsolete/misclassified\n\n### Status — production plant no longer exists\n\nThe roster lists this as a \"Bottling / Manufacturing Plant,\" but research shows\nthe Coca-Cola Maspeth production/bottling plant no longer exists:\n\n- The original Maspeth bottling plant was at 59-02 Borden Ave — a 202,000\n  sq ft warehouse on a 7.3-acre site, the largest Coke facility in the NY\n  area and the regional Dasani producer.\n- In 2017 the site was sold to Home Depot for $63M. Coca-Cola's\n  triple-net lease ended March 2020, and the site became a **Home Depot",
+        "mapsUrl": "https://www.google.com/maps/@40.72120,-73.91450,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "status": "ROSTER ENTRY IS OBSOLETE / MISCLASSIFIED. The Coca-Cola Maspeth PRODUCTION/BOTTLING plant no longer exists. The original bottling plant at 59-02 Borden Ave (202,000 sq ft warehouse on a 7.3-acre site) was sold to Home Depot in 2017 for $63M; Coca-Cola's triple-net lease ended March 2020 and the site became a Home Depot store. Liberty Coca-Cola Beverages' current Maspeth presence is a SALES/DISTRIBUTION CENTER at 58-40 Borden Ave (Block 2657 Lot 23, a 'fireproof warehouse'), which Liberty Coca-Cola purchased in October 2017 for ~$10.4M. Liberty's production now runs from Philadelphia PA, Moorestown NJ, and Elmsford NY - not Maspeth.",
+          "location": "Roster supplied '5612 56th Rd' and coords 40.726817,-73.923183. Those coordinates point to a UPS facility - the wrong building. The correct Liberty Coca-Cola Maspeth address is 58-40 Borden Ave, Maspeth NY 11378, adjacent to the Home Depot at the former Coca-Cola bottling site near the Borden Ave / Maurice Ave intersection.",
+          "coords": "Best-estimate ~40.7212,-73.9145, the large former Coca-Cola complex building on Borden Ave (part now Home Depot, part the Liberty Coca-Cola distribution warehouse). The Liberty Coca-Cola distribution portion (58-40 Borden Ave) could not be cleanly separated from the Home Depot portion in satellite/Street View imagery. Low confidence.",
+          "perimeter": "Estimated from the ~7.3-acre former Coca-Cola parcel - the Liberty Coca-Cola distribution portion is a subset of this; dimensions are an estimate, not a measured demised parcel.",
+          "classification": "All physical-layout flags left false/null because the specific Liberty Coca-Cola distribution building footprint and its truck gate / docks / yard could not be unambiguously identified and isolated from the co-located Home Depot in imagery. Type should likely be reclassified from 'Bottling / Manufacturing Plant' to 'Sales / Distribution Center'.",
+          "urbanRural": "Urban - dense Maspeth, Queens industrial fabric in the NYC metro.",
+          "recommendation": "Reclassify this roster entry: the Maspeth production plant is closed (now Home Depot). Re-audit the actual Liberty Coca-Cola Maspeth Sales/Distribution Center at 58-40 Borden Ave once its precise building footprint is confirmed."
+        }
+      },
+      {
+        "id": "29-swire-coca-cola-usa-salt-lake-city-production-plant",
+        "name": "Swire Coca-Cola USA - Salt Lake City Production Plant, UT",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "preGateStaging",
+          "postGateStaging",
+          "drivewayLong",
+          "drivewayShort",
+          "backupSensitive",
+          "entryExitTogether",
+          "entryExitSeparate",
+          "entryLanes",
+          "exitLanes",
+          "fastLaneOpportunity",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "multipleFacilities",
+          "scale",
+          "dropYard",
+          "multiStep",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "siteAreaAcres",
+          "railServed",
+          "coords",
+          "perimeter"
+        ],
+        "center": {
+          "lat": 40.7287,
+          "lng": -111.9712
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.7276,
+            "west": -111.9725,
+            "north": 40.73,
+            "east": -111.969
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 12,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "NONE",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster address: 5405 W 1730 S, Salt Lake City, UT 84104 (incorrect)\nResolved address: 2269 S 3270 W, West Valley City, UT 84119\nBest-estimate center: 40.7287, -111.9712 (NOT positively confirmed)\nConfidence: low\n\n### Step 0 — Location resolution\n\nThe roster supplied \"5405 W 1730 S, Salt Lake City\" and coords\n40.732482, -112.02077. Investigation showed these are wrong:\n\n- A satellite + Street View probe of the roster coordinates found an\n  office-style building with a barrier-gate driveway and a \"West 1730 South\"\n  monument sign — no Coca-Cola branding.\n- \"5405 W 1730 S\" does not appear in Swire Coca-Cola's official Utah\n  facility list. Swire's Utah facilities are: Draper HQ (12634 S 265 W),\n  West Valley City production plant (2269 S 3270 W), Ogden, Logan, Price,",
+        "mapsUrl": "https://www.google.com/maps/@40.72870,-111.97120,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster supplied '5405 W 1730 S, Salt Lake City' and coords 40.732482,-112.02077. That address is NOT in Swire Coca-Cola's official Utah facility list (Draper HQ 12634 S 265 W, West Valley City 2269 S 3270 W, Ogden, Logan, Price, Richfield) and the building at the roster coords is an office-style building with a barrier-gate driveway and a 'West 1730 South' monument sign - no Coca-Cola branding. The roster coordinates appear to be wrong.",
+          "resolvedAddress": "The confirmed Swire Coca-Cola Salt Lake City production/manufacturing plant is at 2269 S 3270 W, West Valley City, UT 84119 (phone 801-816-5300; multiple directories incl. Yelp and a Waze 'Swire Coca-Cola truck staging area' entry confirm this). This is the plant that won a 2023 environmental award and cut water use 19% in 2022.",
+          "coords": "Best-estimate ~40.7287,-111.9712, a large warehouse-with-docks complex in the 3270 W industrial corridor of West Valley City. NOT positively confirmed - the corridor is a dense multi-tenant logistics park. One nearby building was observed handling Gatorade (a competitor brand) and others show third-party logistics tenants (UPS, PDIIKE Distribution Logistics), so the exact Swire Coca-Cola building footprint could not be unambiguously isolated in satellite/Street View imagery. Low confidence.",
+          "perimeter": "Estimated box around the candidate warehouse complex - not a confirmed parcel.",
+          "classification": "All physical-layout flags left false/null because the exact Swire Coca-Cola building could not be confirmed; the truck gate, docks, guard booth and yard could not be reliably attributed to the correct facility.",
+          "urbanRural": "Urban - West Valley City industrial corridor within the Salt Lake City metro.",
+          "recommendation": "Correct the roster address to 2269 S 3270 W, West Valley City, UT 84119 and re-audit once the exact Swire Coca-Cola building footprint is confirmed (e.g. via a precise geocode or a Coca-Cola sign in updated imagery)."
+        }
+      },
+      {
+        "id": "30-swire-coca-cola-usa-denver-production-plant",
+        "name": "Swire Coca-Cola USA - Denver Production Plant, CO",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes",
+          "truckGateCount",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 39.7701,
+          "lng": -104.9618
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.7687,
+            "west": -104.9645,
+            "north": 39.7719,
+            "east": -104.9595
+          },
+          "truckGate": {
+            "south": 39.77,
+            "west": -104.9639,
+            "north": 39.77075,
+            "east": -104.9632
+          },
+          "dropYards": [
+            {
+              "south": 39.7702,
+              "west": -104.9638,
+              "north": 39.7717,
+              "east": -104.961
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.7696,
+              "west": -104.9632,
+              "north": 39.7711,
+              "east": -104.961
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 85,
+          "truckGateCount": 2,
+          "buildingCount": 3,
+          "siteAreaAcres": 16,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster address: 14025 E 38th Ave, Denver, CO 80239 (incorrect)\nResolved location: 3825 N York St / 2145 E 40th Ave, Denver, CO 80205\nLocked center: 39.77010, -104.96180\nConfidence: high\n\n### Step 0 — Location resolution\n\nThe roster supplied \"14025 E 38th Ave\" and coords 39.770555, -104.819041.\nThose are wrong:\n\n- A satellite + Street View probe of the roster coordinates found an unrelated\n  far-east Denver industrial park (warehouses, a Staples distribution building)\n  with no Coca-Cola presence.\n- \"14025 E 38th Ave\" does not appear in Swire Coca-Cola's facility list. Per\n  the Swire Colorado page, Swire's Denver facilities are: a **distribution\n  center at 9900 E 40th Ave (Central Park) and the production plant at\n  2145 E 40th Ave / mailing 3825 N York St, Denver CO 80205**.",
+        "mapsUrl": "https://www.google.com/maps/@39.77010,-104.96180,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster supplied '14025 E 38th Ave' and coords 39.770555,-104.819041 - that address is NOT a Swire facility and the coordinates landed in a far-east Denver industrial park (unrelated buildings). The confirmed Swire Coca-Cola Denver production plant is at 3825 N York St / 2145 E 40th Ave, Denver, CO 80205. Positively identified: the building's east facade carries a large Coca-Cola logo with the red dynamic-ribbon wave (confirmed in Street View). Locked center ~39.7701,-104.9618.",
+          "facilityNote": "This is the oldest operating Coca-Cola bottling plant in the United States (~90 years old). Swire is building a $475M replacement plant in Colorado Springs (opens spring 2028); the Denver plant is still operating as of May 2026.",
+          "truckGate": "The trailer yard is enclosed by chain-link fencing with chain-link sliding gates (visible in Street View, with bollards). Two gate openings observed on the SW side off the yard road. Controlled truck access.",
+          "guardShack": "No staffed guard booth visible at the chain-link truck gates in Street View or satellite - basic sliding gates only.",
+          "remoteGs": "Truck gate present but no guard shack - check-in is kiosk/remote style.",
+          "entryExitSeparate": "Multiple chain-link gate openings in the yard fence serve as distinct in/out points.",
+          "postGateStaging": "The large fenced trailer yard inside the gate functions as a post-gate holding/queue area before the docks.",
+          "drivewayLong": "The fenced trailer yard is large and deep, easily holding a queue of 3+ trucks between the gate and the dock banks.",
+          "dockDoors": "Large multi-building production+distribution plant - long dock banks span the north and west faces of the warehouse buildings with dozens of trailers backed in. Banded 50+; exact count is an overhead estimate.",
+          "dropArea": "Fenced trailer drop yard with red Coca-Cola trailers/tractors and blue/white trailers - banded 25-50.",
+          "multipleFacilities": "Campus of 3+ connected buildings: the main production plant (Coca-Cola logo facade), a long sawtooth-roof warehouse, and additional warehouse buildings.",
+          "shipRcvSeparate": "Multiple dock faces across the complex but a single integrated operation - could not confirm physically separate ship vs receive clusters; left false, flagged uncertain.",
+          "truckGateCount": "At least 2 gate openings observed in the yard fence; estimate.",
+          "siteAreaAcres": "Derived from perimeter box (~355m N-S x ~430m E-W complex) ~ 16 acres - approximate.",
+          "railServed": "A rail line / intermodal yard runs immediately north of the property, but no spur appears to run into the plant itself - left false.",
+          "urbanRural": "Urban - dense Denver (Cole/Clayton neighborhood) industrial fabric surrounded by residential."
+        }
+      }
+    ]
+  }
+}

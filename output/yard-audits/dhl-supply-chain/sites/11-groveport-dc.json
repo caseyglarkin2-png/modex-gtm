@@ -1,0 +1,63 @@
+{
+  "name": "DHL Supply Chain - Groveport DC - Groveport OH",
+  "type": "Distribution Center",
+  "coords": { "lat": 39.845500, "lng": -82.900800 },
+  "geofences": {
+    "perimeter": { "south": 39.843800, "west": -82.902200, "north": 39.847000, "east": -82.898800 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 39.845900, "west": -82.901300, "north": 39.846400, "east": -82.900400 }
+    ],
+    "dockAprons": [
+      { "south": 39.845650, "west": -82.901300, "north": 39.846500, "east": -82.900100 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40,
+    "trailersVisible": 10,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 25.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.845500,-82.900800,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoors", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "No barrier arm, sliding gate, or checkpoint anywhere on the property. Trucks enter from Commerce Ct (a private dead-end court shared with adjacent buildings), loop around the SW corner of the building, into the open NW dock yard. The dock apron is open to the access drive with no pinch-point.",
+    "guardShack": "No guard booth structure visible at any approach. Street View of all faces confirms an open, unsecured site.",
+    "dockDoors": "Single dock face along the full NW edge of the building (~250 m long) with a continuous bank of doors and ~6-7 trailers backed in. Door count estimated at ~40 from the regular bay rhythm in z21 imagery; banded 25-50.",
+    "dropYard": "3-4 trailers staged in a marked drop area at the NW end of the dock apron, separate from the doors actively backed into.",
+    "postGateStaging": "Wide paved apron in front of the dock face provides internal queue room (no gate, so this is post-entry holding).",
+    "urbanRural": "Groveport is part of the Columbus metro / Rickenbacker logistics submarket; the building directly abuts a dense residential subdivision on the E. Urban.",
+    "drivewayLong": "The access drive from Commerce Ct wraps around the SW corner and runs the length of the NW apron - room for 3+ trucks to queue.",
+    "trailerParkingCapacity": "Drop/staging space on the apron and yard could hold ~30 trailers; estimate from overhead imagery."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,1309 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:36:43.248Z",
+  "account": {
+    "slug": "dannon",
+    "displayName": "Danone / Dannon",
+    "archetype": "cpg",
+    "siteCount": 13,
+    "coverageNote": {
+      "auditedCount": 13,
+      "estimatedFootprint": null,
+      "droppedStubCount": 1,
+      "capHit": false,
+      "note": "Audited all 13 identifiable facilities (1 additional were unresolvable from public sources)."
+    }
+  },
+  "research": {
+    "facility_count": 14,
+    "audited_facilities": 14,
+    "source": "yard-audit",
+    "confidence": "verified",
+    "caveats": [
+      "Danone - Minster OH: audit note mentions 'closed'",
+      "Danone - Jacksonville FL (plant): audit note mentions 'closed'",
+      "Danone - Jacksonville FL (distribution center): audit note mentions 'under construction'",
+      "Danone - City of Industry CA: audit note mentions 'closed'",
+      "Danone - West Jordan UT: audit note mentions 'closed'"
+    ]
+  },
+  "network": {
+    "bbox": [
+      -123.0443,
+      30.33115,
+      -75.2122,
+      45.56545
+    ],
+    "archetypeMix": {
+      "#3": 5,
+      "#9": 7,
+      "#4": 1
+    },
+    "totals": {
+      "dockDoors": 300,
+      "trailerCapacity": 556,
+      "gates": 15,
+      "railServed": 0,
+      "acres": 337.2
+    },
+    "sites": [
+      {
+        "id": "01-danone-mount-crawford-va",
+        "name": "Danone - Mount Crawford VA",
+        "type": "Multi-category beverage plant (refrigerated)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 38.3688,
+          "lng": -78.9398
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.3659,
+            "west": -78.9428,
+            "north": 38.3724,
+            "east": -78.9368
+          },
+          "truckGate": {
+            "south": 38.3656,
+            "west": -78.938,
+            "north": 38.3662,
+            "east": -78.9372
+          },
+          "dropYards": [
+            {
+              "south": 38.3683,
+              "west": -78.9417,
+              "north": 38.3706,
+              "east": -78.9401
+            },
+            {
+              "south": 38.3695,
+              "west": -78.9401,
+              "north": 38.3715,
+              "east": -78.9382
+            },
+            {
+              "south": 38.3668,
+              "west": -78.9415,
+              "north": 38.3681,
+              "east": -78.94
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 38.3672,
+              "west": -78.9406,
+              "north": 38.3698,
+              "east": -78.9401
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 93,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Danone - Mount Crawford VA\n- Type: Multi-category beverage plant (refrigerated) — Silk, International Delight, SToK, So Delicious, Horizon, Dunkin'\n- Address: 6364 South Valley Pike, Mount Crawford, VA 22841\n- Resolved center: 38.36880, -78.93980",
+        "mapsUrl": "https://www.google.com/maps/@38.36880,-78.93980,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Both road accesses off South Valley Pike are wide open driveways with no barrier arm, sliding gate, or checkpoint pinch-point. Street View at the east main entry (38.3657,-78.9376) shows an open driveway with only directional signage ('ALL LIQUID AND OKARA RECEIVING / ALL COLD & DRY STORAGE RECEIVING OFF #1'), confirming a self-routed ungated site.",
+          "guardShack": "No staffed booth visible at any entrance; drivers self-route via posted signs.",
+          "multipleFacilities": "Campus: main 640k sq ft refrigerated plant, a separate west annex/DC building with its own docks and trailer rows, a wastewater treatment area, plus an extensive tank/silo farm.",
+          "dropArea": "Hundreds of trailers parked in long rows along the west and north perimeter of the main building and around the annex; clearly a 50+ drop operation.",
+          "dockDoors": "Long dock apron on the west face of the main building with many trailers backed in (~40-50 doors), plus additional dock banks on the annex and the liquid-receiving area; total estimated 60, banded 50+.",
+          "shipRcvSeparate": "Posted signage directs liquid/okara receiving and cold/dry receiving to different entrances/dock areas; receiving and shipping run from physically distinct dock clusters.",
+          "scale": "No truck scale identified in overhead imagery; possible but not confirmed - listed uncertain.",
+          "fastLaneOpportunity": "Very wide entrance aprons and large internal yard with ample unused paved width.",
+          "entryExitSeparate": "Two separate road accesses off South Valley Pike (east main entry and a central/west drive), functioning as distinct in/out points.",
+          "railServed": "No rail spur runs into the property.",
+          "postGateStaging": "Large paved internal yard between the trailer rows and the dock doors provides ample interior staging."
+        }
+      },
+      {
+        "id": "02-danone-minster-oh",
+        "name": "Danone - Minster OH",
+        "type": "Fresh yogurt plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 40.3844,
+          "lng": -84.373
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.38255,
+            "west": -84.3761,
+            "north": 40.3866,
+            "east": -84.3697
+          },
+          "truckGate": {
+            "south": 40.3832,
+            "west": -84.3732,
+            "north": 40.3837,
+            "east": -84.3725
+          },
+          "dropYards": [
+            {
+              "south": 40.3835,
+              "west": -84.3732,
+              "north": 40.386,
+              "east": -84.37
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.3839,
+              "west": -84.3717,
+              "north": 40.3864,
+              "east": -84.3712
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 58,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Danone - Minster OH\n- Type: Fresh yogurt plant — Activia, Oikos, Dannon Fruit on the Bottom, Danimals, Light + Fit, Triple Zero\n- Address: 216 Southgate Drive, Minster, OH 45865\n- Resolved center: 40.38440, -84.37300",
+        "mapsUrl": "https://www.google.com/maps/@40.38440,-84.37300,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "The truck/trailer yard on the south side is fully enclosed by chain-link fence. Street View (pano 40.38332,-84.37285) shows a rolling/sliding gate in the fence across the truck entrance lane.",
+          "guardShack": "No staffed guard booth at the gate - Street View shows only signage ('NO PARKING') at the fenced gate, no 1-3-vehicle structure beside the lane.",
+          "remoteGs": "Gate present but unstaffed - implies badge/kiosk/remote check-in.",
+          "dropArea": "Fenced yard holds many trailers parked in rows (drop yard); estimated 60 visible, banded 25-50 of dedicated drop stalls.",
+          "dockDoors": "Long dock face on the west side of the east DC building with trailers backed in (~25-30 doors), plus dock positions on the older plant face; total ~38, banded 25-50.",
+          "drivewayLong": "Large fenced yard interior provides deep stacking room inside the gate.",
+          "multipleFacilities": "Single integrated plant with an attached east DC expansion and a southwest fuel/maintenance support area - treated as one facility, buildingCount 3 counts the support/maintenance structures.",
+          "scale": "No truck scale identified in imagery; possible but unconfirmed.",
+          "railServed": "No rail spur enters the property.",
+          "postGateStaging": "Wide paved interior yard between trailer rows and dock doors offers ample inside staging.",
+          "urbanRural": "Edge-of-town site - the plant abuts a residential subdivision on the north but open farmland on the south, east, and west; small-town setting -> Rural."
+        }
+      },
+      {
+        "id": "03-danone-jacksonville-fl-plant",
+        "name": "Danone - Jacksonville FL (plant)",
+        "type": "Coffee & creamer plant (refrigerated)",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "entryLanes",
+          "exitLanes",
+          "dockDoors"
+        ],
+        "center": {
+          "lat": 30.3324,
+          "lng": -81.6979
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 30.33115,
+            "west": -81.69925,
+            "north": 30.33345,
+            "east": -81.69625
+          },
+          "truckGate": {
+            "south": 30.33195,
+            "west": -81.6973,
+            "north": 30.33235,
+            "east": -81.6968
+          },
+          "dropYards": [
+            {
+              "south": 30.3326,
+              "west": -81.697,
+              "north": 30.33345,
+              "east": -81.69625
+            },
+            {
+              "south": 30.3315,
+              "west": -81.69925,
+              "north": 30.3323,
+              "east": -81.6985
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 30.3315,
+              "west": -81.6983,
+              "north": 30.3322,
+              "east": -81.6975
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 18,
+          "trailerParkingCapacity": 28,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 17,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Danone - Jacksonville FL (plant)\n- Type: Coffee & creamer plant (refrigerated) — International Delight, SToK Cold Brew\n- Address: 2198 West Beaver Street, Jacksonville, FL 32209\n- Resolved center: 30.33240, -81.69790",
+        "mapsUrl": "https://www.google.com/maps/@30.33240,-81.69790,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "The entire site is enclosed by black chain-link fence topped with barbed wire along West Beaver Street and the cross street. A controlled vehicle entrance with yellow bollard-defined lanes leads into the yard/parking.",
+          "guardShack": "Street View (pano 30.33214,-81.69696, heading 250) clearly shows a small standalone guard booth set in the middle of the entrance drive, with yellow bollards channelizing traffic around it - a classic staffed checkpoint.",
+          "remoteGs": "False - a guard shack is present.",
+          "dockDoors": "Modest 115,025 sq ft processing plant; dock doors on the south/SW building faces with a few trailers backed in. Estimated ~16, banded 10-25 (low confidence - dense rooftop process equipment partly obscures the dock face).",
+          "dropArea": "Trailer drop/parking lot east of the building across the cross street with angled trailer stalls, plus trailers staged in the south yard; estimated 10-25.",
+          "backupSensitive": "Urban tight site - the gate/booth entry sits close to West Beaver Street and a signalized intersection with limited stacking depth; a truck queue could spill toward the road.",
+          "drivewayShort": "Short approach from the gate to the docks; only 1-2 trucks of stacking room inside.",
+          "railServed": "CSX rail tracks run along the south property edge but as a through corridor - no spur enters the building.",
+          "multipleFacilities": "One plant; an adjacent construction/expansion area (office trailers) seen in 2025 imagery relates to the $65M new-line expansion - counted as part of the single facility, buildingCount 2.",
+          "scale": "No truck scale identified; unconfirmed.",
+          "urbanRural": "Dense urban Jacksonville industrial corridor along West Beaver Street."
+        }
+      },
+      {
+        "id": "05-danone-city-of-industry-ca",
+        "name": "Danone - City of Industry CA",
+        "type": "Plant-based & coffee beverage plant (refrigerated)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "entryLanes",
+          "exitLanes",
+          "dockDoors"
+        ],
+        "center": {
+          "lat": 34.0046,
+          "lng": -117.9059
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.00355,
+            "west": -117.9073,
+            "north": 34.0058,
+            "east": -117.9048
+          },
+          "truckGate": {
+            "south": 34.004,
+            "west": -117.90605,
+            "north": 34.0044,
+            "east": -117.9056
+          },
+          "dropYards": [
+            {
+              "south": 34.0043,
+              "west": -117.9068,
+              "north": 34.0047,
+              "east": -117.9058
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.0043,
+              "west": -117.906,
+              "north": 34.00475,
+              "east": -117.9051
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 14,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 14,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Danone - City of Industry CA\n- Type: Plant-based & coffee beverage plant (refrigerated) — Silk Beverage,\n  SToK Coffee, International Delight Creamer\n- Address: 18275 Arenth Avenue, City of Industry, CA 91748\n- Resolved center: 34.00460, -117.90590",
+        "mapsUrl": "https://www.google.com/maps/@34.00460,-117.90590,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "The site is fully enclosed by a metal perimeter fence and masonry wall. Street View on Arenth Avenue (pano 34.00407,-117.90599) clearly shows a swing/sliding metal gate across the truck entrance lane, with the process plant (silos, tanks) behind it.",
+          "guardShack": "No staffed guard booth at the gate - Street View shows only wall-mounted signs beside the gate; no 1-3-vehicle-footprint booth structure. Small structures visible inside the fence are process/utility, not a gatehouse.",
+          "remoteGs": "Controlled gate with no guard booth - implies badge/intercom/remote check-in.",
+          "dockDoors": "Tight 284,000 sq ft refrigerated plant; loading occurs on the south/SW face with a covered dock canopy and trailers backed in. Estimated ~14 doors, banded 10-25 (low confidence - dense rooftop process equipment and canopy obscure the dock line).",
+          "dropArea": "Only a handful of trailers parked inside the fence along the SW edge; no dedicated drop-yard lot - banded 0-10, dropYard false.",
+          "backupSensitive": "Tight urban site - the gate opens directly onto Arenth Avenue with almost no stacking depth between the road and the docks; a truck queue would spill onto the public street.",
+          "drivewayShort": "Very short gate-to-dock approach; 1-2 trucks of room at most.",
+          "railServed": "A rail line runs along the north property edge as a through corridor; no spur enters the building.",
+          "multipleFacilities": "One integrated plant plus an SE admin/office building and an on-site wastewater treatment area - counted as one facility, buildingCount 2.",
+          "scale": "No truck scale identified; unconfirmed.",
+          "urbanRural": "Dense City of Industry / San Gabriel Valley industrial fabric - clearly Urban.",
+          "postGateStaging": "Limited paved interior area between the gate and the dock canopy provides minimal inside staging."
+        }
+      },
+      {
+        "id": "06-danone-dallas-tx",
+        "name": "Danone - Dallas TX",
+        "type": "Multi-category beverage plant (refrigerated)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 32.7049,
+          "lng": -96.921
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.7028,
+            "west": -96.9243,
+            "north": 32.7062,
+            "east": -96.917
+          },
+          "truckGate": {
+            "south": 32.706,
+            "west": -96.9239,
+            "north": 32.7064,
+            "east": -96.9234
+          },
+          "dropYards": [
+            {
+              "south": 32.7043,
+              "west": -96.9237,
+              "north": 32.7057,
+              "east": -96.9226
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.7051,
+              "west": -96.923,
+              "north": 32.7057,
+              "east": -96.9192
+            },
+            {
+              "south": 32.7051,
+              "west": -96.9189,
+              "north": 32.7057,
+              "east": -96.9173
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 38,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 39,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinates (32.705103, -96.920756, ROOFTOP, 163 m move) landed directly\non a large industrial building with extensive rooftop process equipment\n(refrigeration units, vertical tanks, pipe racks) consistent with a refrigerated\nbeverage plant. Satellite at z16-z20 confirmed a two-building campus fronting Dan\nMorton Drive. The Danone monument sign is visible in Street View at the west\nentrance. The 357,000 sq ft figure (main) plus 252,000 sq ft (toppers) matches the\ntwo distinct buildings. Locked center on the main complex.",
+        "mapsUrl": "https://www.google.com/maps/@32.704900,-96.921000,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Both road entrances off Dan Morton Drive are wide, open driveways with no barrier arm or sliding gate. Street View (Jan 2025) shows a tractor freely turning into the west driveway with no checkpoint pinch-point. Perimeter is fenced but road access is uncontrolled.",
+          "guardShack": "No staffed booth at either entrance in Street View or satellite imagery. Web research confirms drivers 'check in at the office' for door assignment - check-in is at the building, not a gate booth.",
+          "remoteGs": "False because there is no controlled truck gate at all (remoteGs requires a gate).",
+          "multipleFacilities": "Campus of two large buildings: 357,000 sq ft main plant (west/center) and 252,000 sq ft toppers building (east), separated by an internal driveway.",
+          "shipRcvSeparate": "Dock banks on the north faces of both the main building and the east toppers building - two physically distinct dock clusters.",
+          "dropYard": "Dedicated trailer drop lot on the west side of the property with ~30+ trailers parked in marked rows, separate from active dock staging.",
+          "dockDoorCount": "Estimate ~60 across both north dock faces; partly obscured by parked trailers in imagery - low confidence, banded 50+.",
+          "fastLaneOpportunity": "Wide gate aprons at both entrances with ample unused paved width for an express bypass lane.",
+          "postGateStaging": "Large paved yard areas inside the property between road and dock faces give trucks room to queue/stage."
+        }
+      },
+      {
+        "id": "07-danone-dubois-pa",
+        "name": "Danone - DuBois PA",
+        "type": "Plant-based yogurt plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "dockDoors",
+          "connectivityIssue"
+        ],
+        "center": {
+          "lat": 41.1058,
+          "lng": -78.7311
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.1039,
+            "west": -78.7331,
+            "north": 41.1076,
+            "east": -78.7294
+          },
+          "truckGate": {
+            "south": 41.1046,
+            "west": -78.7329,
+            "north": 41.105,
+            "east": -78.7324
+          },
+          "dropYards": [
+            {
+              "south": 41.1059,
+              "west": -78.7305,
+              "north": 41.1064,
+              "east": -78.7299
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.1055,
+              "west": -78.7322,
+              "north": 41.1061,
+              "east": -78.7316
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 24,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster flagged a 3,159 m geocode move, so location was verified carefully.\nSatellite at z17 around the roster point (41.105801, -78.731049) showed a large\nindustrial building set in forested countryside — consistent with the only Danone\nNA plant-based yogurt plant. Street View (Jun 2025) along Oklahoma-Salem Road\nconfirmed a Danone-branded plant with the company sign and US/PA flags at the\ngreen-fronted office. The 24-acre / 189,158 sq ft figures from web research match\nthe compact two-building complex. Coordinates confirmed correct.",
+        "mapsUrl": "https://www.google.com/maps/@41.105800,-78.731100,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "The plant driveway off Oklahoma-Salem Road is a paved open driveway with directional pavement arrows but no barrier arm or sliding gate at the road. A decorative metal fence with stone pillars runs along the road frontage, but the driveway entrance itself is uncontrolled (Street View Jun 2025).",
+          "guardShack": "No staffed booth visible at the driveway entrance or the internal Y-fork in Street View or satellite. A small orange-roofed structure near the building SE corner is a pump/utility house, not a gate booth.",
+          "remoteGs": "False - no controlled truck gate exists.",
+          "multipleFacilities": "buildingCount=2 (main plant plus the blue-roofed building to the south), but they read as one integrated plant complex on one property, so multipleFacilities (campus) is false.",
+          "dockDoors": "Compact 189,158 sq ft plant; dock face partly under a blue sawtooth canopy on the west side. Estimate ~14 doors - low confidence due to snow-tinted, moderate-resolution imagery.",
+          "dropArea": "Only ~3-4 trailers visible in an informal staging area NE of the building; no marked drop-yard stalls. Banded 0-10, low confidence.",
+          "urbanRural": "Rural - the plant sits in forested countryside outside DuBois, PA, surrounded by woods with only scattered rural homes nearby.",
+          "connectivityIssue": "Rural forested setting; the town of DuBois is a few km away so coverage is likely adequate but not certain - flagged as medium confidence.",
+          "drivewayLong": "The driveway from the road to the dock area is long and curving with ample room for a 3+ truck queue.",
+          "postGateStaging": "Large open paved/graded yard areas inside the property give trucks room to stage before the docks."
+        }
+      },
+      {
+        "id": "08-danone-springfield-or",
+        "name": "Danone - Springfield OR",
+        "type": "Plant-based frozen-dessert plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "dockDoors",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 44.0656,
+          "lng": -123.0435
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 44.06495,
+            "west": -123.0443,
+            "north": 44.0661,
+            "east": -123.0427
+          },
+          "truckGate": {
+            "south": 44.06505,
+            "west": -123.0431,
+            "north": 44.0653,
+            "east": -123.0428
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 44.06535,
+              "west": -123.0438,
+              "north": 44.0657,
+              "east": -123.0433
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 8,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 2.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (44.065549, -123.04481, ROOFTOP, 25 m move) landed inside a\nmulti-tenant industrial park between Highway 126 and a residential neighborhood.\nThe park has several similar warehouse buildings, so the exact plant was confirmed\nby Street View: a building carries a clear \"Danone North America\" logo by its\noffice entrance (Street View Jul 2024). Web research confirms the legacy Turtle\nMountain / So Delicious plant, ~2.5-acre footprint, ~150 employees. Coordinates\nconfirmed; locked center on the Danone-branded building cluster.",
+        "mapsUrl": "https://www.google.com/maps/@44.065600,-123.043500,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "A sliding chain-link gate spans the truck/process drive aisle between the plant buildings (visible in Street View Jul 2024). The gate encloses the production yard with its tanks and reefer trailers. It is a controlled pinch-point across the truck lane = truckGate true.",
+          "guardShack": "No staffed guard booth - the gate is a plain sliding chain-link gate with no booth structure beside it. Driver check-in is at the building office (the Danone-branded entrance).",
+          "remoteGs": "True - there is a controlled gate but no guard shack, implying keypad/call-box/buzz-in check-in.",
+          "multipleFacilities": "The Danone operation occupies ~3 connected/adjacent buildings (~2.5 acres total) within a larger multi-tenant industrial park. It reads as one small integrated plant, not a multi-building campus, so multipleFacilities is false. Note other tenants in the park (e.g. a CrossFit gym) are unrelated.",
+          "backupSensitive": "The truck yard between buildings is very tight - a confined courtyard-style yard. A truck queue would quickly choke the shared park drive aisle, so backup-sensitive.",
+          "drivewayShort": "Short, confined approach - room for only 1-2 trucks between the gate and the dock.",
+          "dockDoors": "Small frozen-dessert plant; only a handful of dock doors visible (estimate ~8). Low confidence - dock face is partly obscured by parked reefer trailers and a covered conveyor structure.",
+          "dropArea": "No dedicated marked trailer drop stalls; trailers seen are backed in at docks or staged transiently in the tight yard.",
+          "urbanRural": "Urban - the plant sits within the dense industrial/residential fabric of Springfield, OR, beside Highway 126.",
+          "entryLanes": "Single shared gate/drive serves both entry and exit; lane count not separately determinable - flagged uncertain."
+        }
+      },
+      {
+        "id": "09-danone-fort-worth-tx",
+        "name": "Danone - Fort Worth TX",
+        "type": "Fresh yogurt plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 32.741022,
+          "lng": -97.339329
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.7397,
+            "west": -97.341,
+            "north": 32.74235,
+            "east": -97.3378
+          },
+          "truckGate": {
+            "south": 32.7404,
+            "west": -97.3407,
+            "north": 32.7409,
+            "east": -97.3402
+          },
+          "dropYards": [
+            {
+              "south": 32.7404,
+              "west": -97.341,
+              "north": 32.7414,
+              "east": -97.3403
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.7414,
+              "west": -97.3398,
+              "north": 32.7421,
+              "east": -97.3386
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 10.9,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (32.741022, -97.339329, ROOFTOP, 121 m move) landed on a large\nmulti-building industrial complex in Fort Worth's Near Southside district, directly\nadjacent to Interstate 30. Web research confirms the historic Dannon Fort Worth\nplant: founded 1925, 10.9-acre site, ~210 employees, producing Danimals, Activia\nand YoCrunch. Street View confirms a \"Shipping & Receiving\" sign at the truck gate.\nCoordinates confirmed correct.",
+        "mapsUrl": "https://www.google.com/maps/@32.741022,-97.339329,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "A sliding chain-link gate spans the truck driveway off the west street, with a 'Shipping & Receiving' directional sign at the entrance (Street View Jan 2025). Clear controlled truck gate.",
+          "guardShack": "No staffed guard booth - no small windowed structure beside the gate in Street View or satellite. The 'Shipping & Receiving' sign directs drivers; check-in is at the building.",
+          "remoteGs": "True - a controlled gate exists with no guard shack, implying call-box/intercom/app check-in.",
+          "backupSensitive": "Dense urban site with the truck gate opening directly onto a narrow city street and little stacking room - a truck queue would spill onto the public street. Backup-sensitive.",
+          "drivewayShort": "Tight urban site; the gate-to-dock approach holds only 1-2 trucks.",
+          "dropYard": "A fenced trailer/equipment yard on the west side holds parked trailers (XTRA Lease and other rental reefers) and equipment laydown, separate from active dock staging.",
+          "dockDoors": "Historic dense plant (founded 1925, 10.9 acres); dock doors spread across building faces are partly obscured by parked trailers and process structures. Estimate ~18, banded 10-25 - moderate confidence.",
+          "railServed": "Mainline railroad tracks run parallel to the plant's north edge beneath the I-30 overpass, but no spur turns into the property - not rail-served.",
+          "multipleFacilities": "One large contiguous multi-section plant building, not a multi-building campus.",
+          "urbanRural": "Urban - the plant sits in Fort Worth's dense Near Southside district, adjacent to I-30, surrounded by city streets and commercial blocks."
+        }
+      },
+      {
+        "id": "10-danone-bridgeton-nj",
+        "name": "Danone - Bridgeton NJ",
+        "type": "Plant-based beverage plant (refrigerated)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 39.4459,
+          "lng": -75.2138
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.4445,
+            "west": -75.2151,
+            "north": 39.4475,
+            "east": -75.2122
+          },
+          "truckGate": {
+            "south": 39.4469,
+            "west": -75.2135,
+            "north": 39.4474,
+            "east": -75.213
+          },
+          "dropYards": [
+            {
+              "south": 39.4449,
+              "west": -75.2135,
+              "north": 39.4457,
+              "east": -75.2126
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.4451,
+              "west": -75.2144,
+              "north": 39.4457,
+              "east": -75.2134
+            }
+          ],
+          "staging": {
+            "south": 39.4455,
+            "west": -75.2144,
+            "north": 39.4462,
+            "east": -75.213
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 24,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 16.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (39.446174, -75.213811, ROOFTOP, 330 m move) landed on a large\nindustrial building fronting Rosenhayn Avenue. Web research confirms the Danone\nBridgeton plant: 185,000 sq ft, operating since 2001, ~120 employees, producing\nSilk plant-based beverages. Street View (Dec 2025) shows a \"DANONE\" monument sign\nand US flags at the front of the building. (Note: a separate large distribution\nwarehouse with many trailers sits to the NW — that is a different facility, not\nDanone.) Coordinates confirmed correct.",
+        "mapsUrl": "https://www.google.com/maps/@39.445900,-75.213800,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "The main driveway off Rosenhayn Avenue is a wide open driveway with no barrier arm or sliding gate at the road. There are pavement stop/lane markings partway down the drive but no controlled checkpoint structure. The driveway feeds a perimeter loop road to the docks.",
+          "guardShack": "No staffed guard booth at the driveway or anywhere on the perimeter. A Danone monument sign and flags stand at the front; the small structures by the south dock are tank/silo pads (process equipment), not gate booths.",
+          "remoteGs": "False - there is no controlled truck gate at all.",
+          "dropYard": "A dedicated trailer drop yard on the SE side of the property holds ~12 trailers parked in angled marked stalls, separate from the active dock face.",
+          "postGateStaging": "A large paved maneuvering/staging area sits inside the property between the perimeter road and the south dock face.",
+          "drivewayLong": "The driveway plus the perimeter loop road to the docks is long, with ample room for a 3+ truck queue.",
+          "dockDoors": "Dock face along the building's south side with trailers backed in; estimate ~22 doors, banded 10-25 - moderate confidence due to trailer occlusion.",
+          "dropArea": "~12 trailers in marked drop stalls in the SE drop yard, banded 10-25.",
+          "urbanRural": "Rural - the plant sits on the edge of Bridgeton, NJ (a small South Jersey city) with farmland, woods, and scattered houses around it; not dense metro fabric.",
+          "operationalNote": "Closure announced - Danone plans to shut this plant Aug 2, 2026 with 114 layoffs, relocating Silk production to Mount Crawford VA, Dallas TX, and Jacksonville FL. Still operating as of the May 2026 audit date; imagery (satellite + Dec 2025 Street View) shows active trailers and dock use."
+        }
+      },
+      {
+        "id": "11-danone-chatsworth-ca",
+        "name": "Danone - Chatsworth CA",
+        "type": "Plant-based products plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 34.23785,
+          "lng": -118.60255
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.237,
+            "west": -118.6031,
+            "north": 34.23865,
+            "east": -118.60215
+          },
+          "truckGate": {
+            "south": 34.2373,
+            "west": -118.6025,
+            "north": 34.23748,
+            "east": -118.6023
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 34.23735,
+              "west": -118.6025,
+              "north": 34.238,
+              "east": -118.60225
+            }
+          ],
+          "staging": {
+            "south": 34.23735,
+            "west": -118.60248,
+            "north": 34.2378,
+            "east": -118.60228
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 2,
+          "trailerParkingCapacity": 4,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 4.6,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Danone - Chatsworth CA\n- Type: Plant-based products plant\n- Address: 9201 Owensmouth Avenue, Chatsworth, CA 91311\n- Resolved coordinates: 34.23785, -118.60255 (building center)",
+        "mapsUrl": "https://www.google.com/maps/@34.23785,-118.60255,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Sliding/swing metal gate across the truck driveway through a tall wrought-iron perimeter fence on the Owensmouth Ave (east) frontage, seen in Jan-2026 Street View at ~34.2373,-118.6024.",
+          "guardShack": "No staffed booth structure beside the gate - the entrance is just a gate in the fence line.",
+          "remoteGs": "Gate present with a small call-box/intercom post beside it and no guard shack - remote/kiosk-style check-in.",
+          "dockDoors": "Recessed dock doors face the fenced east yard inside the perimeter; ~6 estimated, partly obscured by roof overhang and trees - low confidence.",
+          "dropArea": "No dedicated drop lot; a couple of box trucks/trailers seen in the alley and yard - small capacity.",
+          "postGateStaging": "The fenced east yard inside the gate functions as a small paved holding/dock-approach area before the doors.",
+          "urbanRural": "Dense San Fernando Valley industrial park, Chatsworth - clearly Urban.",
+          "siteAreaAcres": "Estimated from perimeter box - constrained urban legacy parcel, ~4-5 acres including building footprint and surface parking."
+        }
+      },
+      {
+        "id": "12-danone-portland-or",
+        "name": "Danone - Portland OR",
+        "type": "Frozen yogurt / ice cream plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "railServed"
+        ],
+        "center": {
+          "lat": 45.56475,
+          "lng": -122.5725
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 45.56405,
+            "west": -122.57335,
+            "north": 45.56545,
+            "east": -122.57185
+          },
+          "truckGate": {
+            "south": 45.5645,
+            "west": -122.57305,
+            "north": 45.56462,
+            "east": -122.57288
+          },
+          "dropYards": [
+            {
+              "south": 45.565,
+              "west": -122.5727,
+              "north": 45.56545,
+              "east": -122.57205
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 45.56412,
+              "west": -122.57305,
+              "north": 45.56445,
+              "east": -122.5726
+            },
+            {
+              "south": 45.56445,
+              "west": -122.57225,
+              "north": 45.565,
+              "east": -122.57195
+            }
+          ],
+          "staging": {
+            "south": 45.56448,
+            "west": -122.5729,
+            "north": 45.5649,
+            "east": -122.57255
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 12,
+          "trailersVisible": 9,
+          "trailerParkingCapacity": 15,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 6,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Danone - Portland OR\n- Type: Frozen yogurt / ice cream plant (legacy YoCream)\n- Address: 5858 NE 87th Avenue, Portland, OR 97220\n- Resolved coordinates: 45.56475, -122.57250 (building center)",
+        "mapsUrl": "https://www.google.com/maps/@45.56475,-122.57250,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Sliding iron gate across the NE 87th Ave entrance into the parking/yard, plus a gated dock driveway to the south dock apron. Whole site fenced with tall iron perimeter fence.",
+          "guardShack": "No staffed booth structure at either gate.",
+          "remoteGs": "Main NE 87th Ave gate has a call-box/intercom post beside it and no guard shack - remote/kiosk check-in.",
+          "dockDoors": "Reefer (refrigerated) trailers backed into dock doors on the SW/south building face, seen in May/Jul 2025 Street View; additional dock positions along the east face by the bulk silos. ~12 total estimated - low confidence.",
+          "dropYard": "Paved trailer-staging yard north/NE of the building holds parked trailers separate from active docks.",
+          "railServed": "A rail track curves along the east/NE edge of the property, but it appears to be a through-siding on/along the adjacent parcel - no rail dock spur visibly entering the YoCream building. Marked false, flagged uncertain.",
+          "truckGateCount": "Counted the NE 87th Ave parking gate plus the separate gated south dock driveway.",
+          "urbanRural": "NE Portland industrial district near the airport - Urban.",
+          "siteAreaAcres": "Estimated from perimeter box; tight urban parcel ~6 acres including building and yard."
+        }
+      },
+      {
+        "id": "13-danone-west-jordan-ut",
+        "name": "Danone - West Jordan UT",
+        "type": "Fresh yogurt plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "scale"
+        ],
+        "center": {
+          "lat": 40.5811,
+          "lng": -112.036
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.5792,
+            "west": -112.0388,
+            "north": 40.583,
+            "east": -112.0334
+          },
+          "truckGate": {
+            "south": 40.58235,
+            "west": -112.0369,
+            "north": 40.58265,
+            "east": -112.0365
+          },
+          "dropYards": [
+            {
+              "south": 40.5799,
+              "west": -112.035,
+              "north": 40.5811,
+              "east": -112.0338
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.5799,
+              "west": -112.0352,
+              "north": 40.5816,
+              "east": -112.0342
+            }
+          ],
+          "staging": {
+            "south": 40.5806,
+            "west": -112.0356,
+            "north": 40.5816,
+            "east": -112.0347
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 51,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Danone - West Jordan UT\n- Type: Fresh yogurt plant\n- Address: 6165 West Dannon Way, West Jordan, UT 84081\n- Resolved coordinates: 40.58110, -112.03600 (plant complex center)",
+        "mapsUrl": "https://www.google.com/maps/@40.58110,-112.03600,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Large 51-acre plant fully enclosed by a tall iron perimeter fence (confirmed on all sides in 2024/2025 Street View). Vehicle entrance off Dannon Way has a kerbed checkpoint island in the driveway - controlled entry.",
+          "guardShack": "No clearly visible freestanding guard booth beside the truck lane in available imagery; entrance area is cluttered with staged construction/expansion material. Marked false but flagged uncertain.",
+          "remoteGs": "Gated, fenced entrance with no confirmed guard booth - remote/kiosk check-in inferred. Flagged uncertain alongside guardShack.",
+          "dockDoors": "Large dock apron on the east/SE building face with ~30 doors estimated and many trailers backed in; honest overhead estimate, low confidence.",
+          "dropArea": "Extensive trailer drop yard in the SE with rows of parked trailers - 50+ stalls. Heavy freight operation, 24/7 plant.",
+          "drivewayLong": "Long internal access road wraps from the Dannon Way entrance around the east side to the dock yard - ample queue depth for 3+ trucks.",
+          "fastLaneOpportunity": "Wide entrance apron and broad internal roadways with unused paved width - room for a bypass/express lane.",
+          "dropYard": "Dedicated trailer-storage lot in the SE, separate from the active dock apron.",
+          "railServed": "No rail spur enters the property; rail line in the broader district does not serve this plant.",
+          "scale": "No truck scale clearly identified; flagged uncertain - a scale could be present in the dock-yard area but not confirmed from overhead.",
+          "buildingCount": "Main manufacturing block plus an attached/adjacent large warehouse section - counted as 2.",
+          "urbanRural": "West Jordan industrial district in the Salt Lake City metro - Urban.",
+          "siteAreaAcres": "Roster cites 51.17-acre site; perimeter box drawn to encompass the full parcel including the southern undeveloped portion."
+        }
+      },
+      {
+        "id": "14-danone-scottsdale-az",
+        "name": "Danone - Scottsdale AZ",
+        "type": "Equipment / dispensing operations site",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 33.61915,
+          "lng": -111.9123
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.61878,
+            "west": -111.91285,
+            "north": 33.61952,
+            "east": -111.91178
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 2,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 0.7,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: Danone - Scottsdale AZ\n- Type: Equipment / dispensing operations site\n- Address: 14674 N. 78th Way, Scottsdale, AZ 85260\n- Resolved coordinates: 33.61915, -111.91230 (building center)",
+        "mapsUrl": "https://www.google.com/maps/@33.61915,-111.91230,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No controlled truck entrance. The building is a small multi-tenant-style flex/industrial unit in the Scottsdale Airpark business park; access is via open, ungated business-park drive aisles and a shared surface parking lot.",
+          "guardShack": "No guard booth - open business-park site.",
+          "remoteGs": "No gate, so false.",
+          "dockDoors": "No dock apron visible; servicing is at grade. Likely 1-2 grade-level overhead doors on the building - low confidence, set to 0-10 band.",
+          "dropArea": "No trailer parking - NONE. Some pallets/equipment staged in the surface lot, but no marked trailer stalls or drop yard.",
+          "drivewayShort": "Only a short open drive aisle off the parking lot serves the building - no queue depth.",
+          "siteAreaAcres": "Small parcel, ~0.7 acre - a 10,000 sq ft building plus shared surface parking.",
+          "urbanRural": "Scottsdale Airpark, within the Phoenix metro - Urban.",
+          "facility-character": "Roster correctly notes this is a low-priority equipment/dispensing operation (~10,000 sq ft, ~23 employees) that builds branded bulk dispensing equipment for International Delight/Silk/SToK - not a high-volume freight yard. No truck-yard infrastructure present."
+        }
+      }
+    ]
+  }
+}

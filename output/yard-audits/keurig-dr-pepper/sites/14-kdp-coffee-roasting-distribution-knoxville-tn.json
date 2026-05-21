@@ -1,0 +1,52 @@
+{
+  "name": "KDP Coffee Roasting / Distribution - Knoxville TN",
+  "type": "Manufacturing & Distribution - Coffee",
+  "coords": { "lat": 35.943600, "lng": -83.824200 },
+  "geofences": {
+    "perimeter": { "south": 35.941800, "west": -83.826200, "north": 35.945500, "east": -83.822400 },
+    "truckGate": { "south": 35.944300, "west": -83.822900, "north": 35.944700, "east": -83.822400 },
+    "dropYards": [
+      { "south": 35.941800, "west": -83.825900, "north": 35.943200, "east": -83.823200 }
+    ],
+    "dockAprons": [
+      { "south": 35.943200, "west": -83.825100, "north": 35.944600, "east": -83.822700 }
+    ],
+    "staging": { "south": 35.943400, "west": -83.824200, "north": 35.944400, "east": -83.823100 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 34, "trailersVisible": 70, "trailerParkingCapacity": 110,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 31.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.943600,-83.824200,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "location": "Roster coords (5000 Western Ave, 35.9727/-84.0032) were wrong - that point is residential NW Knoxville (geocode itself flagged movedMeters 1701). Web research (Waze, Manta, D&B, Green Mountain press releases) confirms the actual facility is the former Green Mountain Coffee / Keurig Knox County plant at 3109 Water Plant Rd, Knoxville TN 37914, in the Forks of the River Industrial Park - a 334,000 sq ft building on ~31 acres, K-Cup manufacturing + coffee roasting/distribution. Positively confirmed by Street View: building front carries the 'Keurig Dr Pepper' logo and address '3109'. Locked center 35.9436/-83.8242.",
+    "truckGate": "No controlled truck gate. The dock apron and truck yard are open directly to Water Plant Rd via wide unbarred driveways; Street View shows no barrier arm and no guard booth - employee parking and the dock bank front the road.",
+    "guardShack": "No guard booth visible at any driveway.",
+    "remoteGs": "No gate, so no remote check-in inferred.",
+    "dockDoors": "25-50 band. A long dock-door row runs along the building's SE/south face with many trailers backed in; ~34 doors estimated (approximate - flagged).",
+    "dropArea": "50+ band. A large trailer drop yard SW of the building holds rows of dozens of parked trailers, separate from the active dock apron.",
+    "shipRcvSeparate": "Docks appear concentrated on a single (SE/south) building face - shipping and receiving not on physically separate banks. False.",
+    "railServed": "A rail spur/siding runs along the SE side of the building with rail/hopper cars parked on it - the plant is rail-served (consistent with green-coffee inbound by rail).",
+    "fastLaneOpportunity": "Wide unbarred dock apron and yard with ample paved width off Water Plant Rd - room for an express/bypass lane.",
+    "entryExitSeparate": "Multiple separate driveway access points off Water Plant Rd serve the dock yard and the drop yard.",
+    "urbanRural": "Forks of the River Industrial Park is a dedicated large-warehouse industrial district within the Knoxville metro area (SE edge of the city). Classified Urban as part of the metro industrial fabric.",
+    "drivewayLong": "Deep dock apron and yard easily stack 3+ trucks before the docks.",
+    "trailersVisible": "~70 trailers estimated across dock apron + drop yard; counts approximate - flagged.",
+    "HISTORY": "KDP completed a $65M sale-leaseback of this Tennessee distribution center in January 2023 (CoStar) - KDP continues to lease and operate the facility."
+  },
+  "method": "deep-audit"
+}

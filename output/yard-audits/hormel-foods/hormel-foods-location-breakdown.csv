@@ -1,0 +1,58 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+Hormel Flagship Austin Plant - Austin MN,Meat Processing Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Urban,,YES,YES,YES,"https://www.google.com/maps/@43.6765,-92.9665,400m/data=!3m1!1e3"
+Hormel Algona Plant - Algona IA,Meat Processing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,,YES,,,YES,,,,,Rural,,,,,"https://www.google.com/maps/@43.0793,-94.2233,400m/data=!3m1!1e3"
+Progressive Processing - Dubuque IA,Production Facility,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,YES,,,YES,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@42.4879,-90.7661,400m/data=!3m1!1e3"
+Hormel Knoxville Plant - Knoxville IA,Production Facility,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,,YES,,,YES,,1,1,,,YES,,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@41.3173,-93.061,400m/data=!3m1!1e3"
+Osceola Food - Osceola IA,Meat Processing Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@41.0238,-93.786,400m/data=!3m1!1e3"
+Burke Corp. - Nevada IA,Production Facility,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,YES,,,YES,,,,YES,,YES,Rural,,YES,,YES,"https://www.google.com/maps/@42.0085,-93.4392,400m/data=!3m1!1e3"
+Dold Foods - Wichita KS,Meat Processing Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,YES,,,YES,,,YES,Urban,,YES,,YES,"https://www.google.com/maps/@37.7352,-97.3256,400m/data=!3m1!1e3"
+Alma Foods - Alma KS,Production Facility,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,YES,,,,YES,,,,,Rural,,,,YES,"https://www.google.com/maps/@39.0110,-96.2879,400m/data=!3m1!1e3"
+Hormel Atlanta Plant - Tucker GA,Production Facility,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,,,,YES,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@33.8393,-84.2506,400m/data=!3m1!1e3"
+Creative Contract Packaging - Aurora IL,Production Facility,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,YES,,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@41.80475,-88.2709,400m/data=!3m1!1e3"
+Fontanini Foods - McCook IL,Meat Processing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,YES,,YES,,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@41.79935,-87.83780,400m/data=!3m1!1e3"
+Rochelle Foods - Rochelle IL,Meat Processing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,YES,YES,,1,1,,YES,,,,YES,,,,,Rural,,,,,"https://www.google.com/maps/@41.92050,-89.06980,400m/data=!3m1!1e3"
+Papillion Foods - Papillion NE,Production Facility,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@41.15200,-96.12400,400m/data=!3m1!1e3"
+Skippy Foods - Little Rock AR,Production Facility,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,YES,,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@34.70790,-92.18430,400m/data=!3m1!1e3"
+Hormel Fort Smith Plant - Fort Smith AR,Production Facility,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,YES,,YES,Rural,,YES,,YES,"https://www.google.com/maps/@35.30350,-94.38130,400m/data=!3m1!1e3"
+Hormel Beloit Plant - Beloit WI,Production Facility,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@42.52100,-88.97780,400m/data=!3m1!1e3"
+Century Foods International - Sparta WI,Production Facility,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,,YES,,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@43.94255,-90.79120,400m/data=!3m1!1e3"
+Columbus Craft Meats - Hayward CA,Meat Processing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,,YES,,,,,,,,Urban,,,,,"https://www.google.com/maps/@37.61330,-122.05260,400m/data=!3m1!1e3"
+Swiss American Sausage Co. - Lathrop CA,Meat Processing Plant,#2,Gate + GS (not BU sens.) + separate,,,,,,,,,,,YES,YES,,,YES,YES,,,,YES,1,1,,,YES,,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@37.80180,-121.29650,400m/data=!3m1!1e3"
+Hormel Stockton Plant / Fresno - Fresno CA,Production Facility,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,YES,,,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@36.71840,-119.75270,400m/data=!3m1!1e3"
+Hormel Suffolk Plant - Suffolk VA,Production Facility,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@36.72320,-76.58270,400m/data=!3m1!1e3"
+Dan's Prize - Long Prairie MN,Meat Processing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,,YES,,,,,YES,,,Rural,,YES,,YES,"https://www.google.com/maps/@45.97720,-94.86780,400m/data=!3m1!1e3"
+Lloyd's Barbeque Company - Mendota Heights MN,Production Facility,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,,YES,,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@44.86640,-93.17050,400m/data=!3m1!1e3"
+Jennie-O Turkey Store - Willmar MN,Meat Processing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,1,1,YES,,,YES,,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@45.10870,-95.07950,400m/data=!3m1!1e3"
+Jennie-O Turkey Store - Melrose MN,Meat Processing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,YES,,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@45.67630,-94.79420,400m/data=!3m1!1e3"
+Jennie-O Turkey Store - Barron WI,Meat Processing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,YES,,YES,Rural,,YES,,YES,"https://www.google.com/maps/@45.40240,-91.84680,400m/data=!3m1!1e3"
+Hormel / DHL Southaven Distribution Center - Southaven MS,Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@34.98820,-90.04100,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,1,4%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,16,59%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,3,11%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,7,26%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,27,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,15,56%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,14,52%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,4,15%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,23,85%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,27,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,27,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

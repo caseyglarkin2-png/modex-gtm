@@ -1,0 +1,47 @@
+{
+  "name": "KDP Coffee Plant - Waterbury VT",
+  "type": "Manufacturing - Coffee",
+  "coords": { "lat": 44.335800, "lng": -72.750500 },
+  "geofences": {
+    "perimeter": { "south": 44.33430, "west": -72.75250, "north": 44.33720, "east": -72.74880 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 2,
+    "trailersVisible": 3,
+    "trailerParkingCapacity": 5,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 18.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@44.335800,-72.750500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoors", "trailersVisible", "buildingCount"],
+  "fieldNotes": {
+    "location": "33 Coffee Lane, Waterbury VT 05676 - the Pilgrim Park office campus, Keurig Green Mountain's original/legacy Waterbury site. Roster pin (44.336491,-72.755118, APPROXIMATE) landed in downtown Waterbury; corrected ~430 m SE to the Pilgrim Park complex. Confirmed via web (VT Farm to Plate, Yelp, Waze all list 33 Coffee Lane) and 2023 Street View showing a multi-building office campus with an entrance sign.",
+    "facilityCharacter": "This is predominantly a CORPORATE OFFICE / R&D campus, not a freight/distribution truck yard. The original Green Mountain Coffee roasting operations were historically here, but KDP coffee production is now consolidated at Essex Junction. Street View and satellite show multi-story office buildings surrounded by large employee car parking lots - no loading-dock banks, no trailer drop yards, no truck gate or guard shack.",
+    "truckGate": "No controlled truck entrance - the campus has open driveways off Pilgrim Park Rd / Coffee Lane serving car parking lots. No barrier arm, gate or checkpoint.",
+    "guardShack": "No guard booth anywhere on the campus.",
+    "dockDoors": "Essentially none of consequence - at most a couple of small service/loading doors at a building rear; banded 0-10. A handful of box trucks/vans seen near one building (counted as ~3 trailersVisible) appear to be service/parcel vehicles, not freight trailers.",
+    "railServed": "An active rail line (Amtrak/NECR Waterbury station corridor) runs alongside the W edge of the campus, but there is NO rail spur into the property.",
+    "urbanRural": "Small-town Vermont setting on the edge of Waterbury village; per the rubric's small-town guidance, classified Rural.",
+    "multipleFacilities": "Multi-building office campus (~4 buildings).",
+    "yardRelevance": "Low YardFlow relevance - office site, minimal freight operations. confidence set to medium because the site is unambiguous but does not present a meaningful truck yard to audit."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,54 @@
+{
+  "name": "UNFI - Centralia WA DC (Pacific Northwest)",
+  "type": "Distribution Center",
+  "coords": { "lat": 46.732800, "lng": -123.009800 },
+  "geofences": {
+    "perimeter": { "south": 46.730050, "west": -123.014300, "north": 46.736150, "east": -123.006400 },
+    "truckGate": { "south": 46.732550, "west": -123.008100, "north": 46.733300, "east": -123.007100 },
+    "dropYards": [
+      { "south": 46.730500, "west": -123.014300, "north": 46.735900, "east": -123.012600 },
+      { "south": 46.732600, "west": -123.008100, "north": 46.734100, "east": -123.005600 }
+    ],
+    "dockAprons": [
+      { "south": 46.730500, "west": -123.012700, "north": 46.736000, "east": -123.011900 },
+      { "south": 46.730100, "west": -123.011000, "north": 46.731000, "east": -123.008700 }
+    ],
+    "staging": { "south": 46.732400, "west": -123.008700, "north": 46.733200, "east": -123.007900 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 130,
+    "trailersVisible": 220,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 79.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@46.732800,-123.009800,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "multiStep", "scale"],
+  "fieldNotes": {
+    "truckGate": "Whole dock yard is chain-link fenced; the access road off the public loop road enters the truck yard through a controlled vehicular gate (SPEED LIMIT 15 sign at the fence line). Confirmed in 2026-03 Street View.",
+    "guardShack": "No staffed guard booth visible in the truck lane in current satellite or Street View. Small covered structures near the entry are employee break/transit amenities, not a checkpoint. UNFI corporate procedure elsewhere uses guard houses, so a booth may exist but is not visually confirmed here — flagged uncertain.",
+    "remoteGs": "Set true because there is a controlled gate but no visually-confirmed staffed booth; check-in likely via kiosk/intercom. Verify in discovery.",
+    "multipleFacilities": "Two large connected DC buildings on the UNFI parcel (a north building and a stepped south building). Note: adjacent buildings further NE belong to separate Port of Centralia industrial-park tenants, not UNFI, and are excluded from the perimeter.",
+    "dockDoors": "1.15M sq ft DC; long dock banks run the full west face of both buildings plus the south face. 50+ band easily met; ~130 estimated.",
+    "dropArea": "Very large striped trailer drop yard along the west property edge (rows of parked trailers) plus a second drop/staging lot on the NE side. 50+ band.",
+    "drivewayLong": "Deep paved internal yard between the gate and the dock face — comfortably holds a 3+ truck queue.",
+    "fastLaneOpportunity": "Wide paved gate apron and generous internal yard width; physical room to add a bypass/express lane exists.",
+    "scale": "No truck scale identified in imagery.",
+    "siteAreaAcres": "Benaroya/UNFI public materials cite a 77-acre site; perimeter box yields ~79 acres including the fenced west yard."
+  },
+  "method": "deep-audit"
+}

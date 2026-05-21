@@ -1,0 +1,49 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+K-C Beech Island Mill - Beech Island SC,Integrated tissue & personal care manufacturing complex (largest K-C facility globally),#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@33.41700,-81.89550,400m/data=!3m1!1e3"
+K-C Beech Island Regional Distribution Center - Beech Island SC,"Automated regional distribution center (new ~1.1M sq ft, $200M, announced 2025)",#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Rural,,,,,"https://www.google.com/maps/@33.42099,-81.89067,400m/data=!3m1!1e3"
+K-C Mobile Mill - Mobile AL,Tissue / paper manufacturing mill,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,YES,,,,,YES,,,Urban,,YES,,YES,"https://www.google.com/maps/@30.73530,-88.05080,400m/data=!3m1!1e3"
+K-C Loudon Mill - Loudon TN,Tissue manufacturing mill (K-C Professional / consumer tissue),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,YES,,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@35.76764,-84.32992,400m/data=!3m1!1e3"
+K-C New Milford Mill - New Milford CT,"Diaper & tissue manufacturing plant (Huggies, Kleenex, Scott)",#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,YES,Urban,,YES,,YES,"https://www.google.com/maps/@41.55833,-73.41361,400m/data=!3m1!1e3"
+K-C Owensboro Plant - Owensboro KY,Diaper / personal care manufacturing plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Rural,,YES,,YES,"https://www.google.com/maps/@37.819400,-87.303200,400m/data=!3m1!1e3"
+K-C Maumelle Plant - Maumelle AR,"Huggies baby wipes manufacturing plant (~400,000 sq ft)",#1,Gate + GS (not BU sens.),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@34.864832,-92.393775,400m/data=!3m1!1e3"
+K-C Paris Plant - Paris TX,"Diaper / personal care manufacturing plant (Huggies, Pull-Ups, Little Swimmers, Goodnites)",#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,1,1,YES,,,YES,,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@33.638900,-95.591200,400m/data=!3m1!1e3"
+K-C Chester Mill - Chester PA,"Non-integrated tissue mill (Scott 1000 bathroom tissue; ~1.3M sq ft, ~570 employees)",#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,YES,YES,,1,1,,,YES,,,,,,,,Urban,,YES,YES,,"https://www.google.com/maps/@39.844200,-75.357500,400m/data=!3m1!1e3"
+K-C Jenks Mill - Jenks OK,"Tissue paper mill (Cottonelle, Scott bathroom tissue) with regional distribution center",#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,1,YES,,,YES,,,,,YES,,Rural,,YES,YES,YES,"https://www.google.com/maps/@35.971500,-95.927200,400m/data=!3m1!1e3"
+K-C Marinette Mill - Marinette WI,"Tissue / wipers manufacturing mill (Scott Shop Towels, Wypall, Viva paper towels; ~230 employees)",#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@45.10375,-87.65205,400m/data=!3m1!1e3"
+K-C Neenah Experimental Mill - Neenah WI,"Manufacturing / experimental mill (product & process innovation, Family Care)",#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,,,YES,YES,YES,,1,1,,YES,,,,,,,,,Urban,,YES,,,"https://www.google.com/maps/@44.18830,-88.46260,400m/data=!3m1!1e3"
+K-C Hendersonville Nonwovens Plant (Berkeley Mill) - Hendersonville NC,"Nonwovens manufacturing plant (materials for Depend, Poise, U by Kotex)",#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@35.34630,-82.46880,400m/data=!3m1!1e3"
+K-C Corinth Plant - Corinth MS,"Manufacturing plant (nonwovens components for Huggies, Pull-Ups, Poise, Depend, WypAll)",#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,,YES,,1,1,,,YES,,,,,,YES,,Rural,,YES,,YES,"https://www.google.com/maps/@34.93560,-88.49080,400m/data=!3m1!1e3"
+K-C Warren Advanced Manufacturing Facility - Warren OH,"New advanced manufacturing facility (Huggies, Pull-Ups, Kleenex, Scott, Viva, Kotex, Poise, Depend; ~1.2M sq ft, $800M, under construction)",#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@41.2235,-80.8115,400m/data=!3m1!1e3"
+K-C Logan Township Distribution Center - Logan Township NJ,"Distribution center (~600,000 sq ft, LEED-certified)",#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@39.7385,-75.4135,400m/data=!3m1!1e3"
+K-C Graniteville Distribution Center - Graniteville SC,Distribution center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,,YES,,,YES,,YES,Rural,,,,YES,"https://www.google.com/maps/@33.62405,-81.84755,400m/data=!3m1!1e3"
+K-C DuPont Distribution Center (KCDC) - DuPont WA,Distribution center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@47.11280,-122.63800,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,1,6%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,5,28%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,2,11%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,1,6%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,7,39%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,2,11%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,18,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,8,44%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,13,72%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,6,33%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,12,67%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,18,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,18,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

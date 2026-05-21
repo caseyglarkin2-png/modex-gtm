@@ -1,0 +1,50 @@
+{
+  "name": "DHL Supply Chain - DC - Mechanicsburg PA",
+  "type": "Distribution Center",
+  "coords": { "lat": 40.23720, "lng": -76.99850 },
+  "geofences": {
+    "perimeter": { "south": 40.23605, "west": -76.99985, "north": 40.23800, "east": -76.99715 },
+    "truckGate": { "south": 40.23605, "west": -77.00000, "north": 40.23640, "east": -76.99940 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 40.23645, "west": -76.99790, "north": 40.23745, "east": -76.99720 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 20,
+    "trailersVisible": 4,
+    "trailerParkingCapacity": 10,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 12.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.2372,-76.9985,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "dropArea"],
+  "fieldNotes": {
+    "location": "Roster had no address/coords. Resolved via web research + Google Geocoding API: DHL Supply Chain (legal entity Exel Inc.) operates a distribution facility at 260 Salem Church Rd, Mechanicsburg PA 17050 - a 174,921 sq ft distribution building on 11.32 acres (built ~1985), owned by LBA Logistics (sold Sept 2024). DHL also holds nearby Salem Church Rd addresses (245/300/350) - the roster's 'leased multi-building presence'; 260 is the primary operating DC. Confirmed by a DHL Supply Chain monument sign at the south entrance (Street View 2023).",
+    "truckGate": "false - both the south and north driveway entrances off Salem Church Rd are open paved drives with no barrier arm, gate, or checkpoint. Street View (2023) confirms open access at both.",
+    "guardShack": "false - no guard booth at either entrance. A small covered structure near the building is a picnic/break shelter (employee amenity), not a guard booth.",
+    "remoteGs": "false - there is no truck gate at all (open access).",
+    "entryExitSeparate": "Two separate driveways off Salem Church Rd (north and south); trucks can enter one and exit the other. truckGateCount=2.",
+    "dockDoors": "Older (1985-era) building with two canopied dock banks on the east face; estimated ~16-25 doors total. Banded 10-25. Exact count uncertain - canopies partly obscure the doors.",
+    "dropArea": "No dedicated drop-trailer lot on the 260 parcel. The trailer/bus-filled lot to the NW is a separate property (a school-bus depot) and was excluded. 0-10.",
+    "drivewayShort": "Modest approach from the entrance drives to the east-face docks - holds only 1-2 trucks.",
+    "urbanRural": "Mechanicsburg/Harrisburg West Shore industrial corridor - a dense, built-out logistics submarket with the Naval Support Activity Mechanicsburg depot and many warehouses nearby. Urban.",
+    "method": "deep-audit"
+  },
+  "method": "deep-audit"
+}

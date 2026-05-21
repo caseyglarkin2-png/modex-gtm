@@ -1,0 +1,55 @@
+{
+  "name": "Anheuser-Busch Brewery - Merrimack NH",
+  "type": "Brewery",
+  "coords": { "lat": 42.82530, "lng": -71.48650 },
+  "geofences": {
+    "perimeter": { "south": 42.82050, "west": -71.48950, "north": 42.82900, "east": -71.48150 },
+    "truckGate": { "south": 42.82640, "west": -71.48560, "north": 42.82710, "east": -71.48460 },
+    "dropYards": [
+      { "south": 42.82700, "west": -71.48800, "north": 42.82850, "east": -71.48500 }
+    ],
+    "dockAprons": [
+      { "south": 42.82420, "west": -71.48820, "north": 42.82580, "east": -71.48720 },
+      { "south": 42.82550, "west": -71.48600, "north": 42.82680, "east": -71.48420 }
+    ],
+    "staging": { "south": 42.82600, "west": -71.48700, "north": 42.82700, "east": -71.48560 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 65.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.82530,-71.48650,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "scale", "entryLanes", "exitLanes", "dockDoorCount"],
+  "fieldNotes": {
+    "location": "Confirmed Anheuser-Busch Merrimack Brewery, 221 Daniel Webster Hwy. Roster coords were ~3.2 km off (movedMeters 3205). Locked center on the main brewhouse/warehouse mass at 42.82530,-71.48650. Identity confirmed by the brewing complex layout (brewhouse, tank farm, 400,000+ sq ft processing facility) between the Everett Turnpike and the Merrimack River, with the on-site Budweiser Brewery Experience visitor center and Clydesdale Hamlet.",
+    "operatingStatus": "IMPORTANT - AB announced (Dec 2025) the Merrimack brewery will close in early 2026 as part of the same realignment that closed Fairfield CA and Newark NJ; 125 jobs affected. As of the audit date (May 2026) the facility has very likely ceased brewing operations. Audit reflects the physical yard infrastructure from pre-closure imagery.",
+    "truckGate": "Large fenced industrial facility - chain-link perimeter fence confirmed in Street View along the W dock face and along Daniel Webster Hwy. Controlled access road into the campus; the truck enters a fenced yard. Exact gate structure not positively confirmed (no clear perimeter Street View of the truck gate).",
+    "guardShack": "A guarded entry is standard for an AB brewery of this scale; a small structure sits at an internal truck-circulation node and a booth-sized structure is near the W parking entrance, but the truck-gate guard booth could not be positively confirmed - medium confidence.",
+    "drivewayLong": "Long internal access from the property line to the dock yard with ample stacking room.",
+    "dockDoors": "Dock doors with backed-in trailers along the W building face (clearly visible in Street View) plus a secondary dock cluster; ~35 estimated, 25-50 band.",
+    "dropArea": "Very large trailer parking yard on the N side of the building holding ~90 trailers in marked rows; 50+ band, capacity ~160.",
+    "shipRcvSeparate": "Distinct dock banks on separate building faces (W dock face vs N/interior docks).",
+    "railServed": "A rail line runs to the brewery from the N - rail-served.",
+    "multipleFacilities": "Campus: brewhouse with tank farm, packaging warehouses, ancillary buildings, separate visitor center (Brewery Experience) and Clydesdale Hamlet.",
+    "urbanRural": "Edge-of-town site between the Everett Turnpike and the Merrimack River, surrounded by woods and the river corridor - Rural setting.",
+    "scale": "No truck scale positively identified - flagged uncertain."
+  },
+  "method": "deep-audit"
+}

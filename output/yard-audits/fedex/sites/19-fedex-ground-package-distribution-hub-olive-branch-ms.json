@@ -1,0 +1,67 @@
+{
+  "name": "FedEx Ground Package Distribution Hub - Olive Branch MS (Memphis metro)",
+  "type": "Ground regional package distribution hub",
+  "coords": { "lat": 34.99080, "lng": -89.77850 },
+  "geofences": {
+    "perimeter": { "south": 34.98830, "west": -89.78020, "north": 34.99320, "east": -89.77700 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 34.98850, "west": -89.78020, "north": 34.99320, "east": -89.77930 },
+      { "south": 34.98850, "west": -89.77790, "north": 34.99320, "east": -89.77700 }
+    ],
+    "dockAprons": [
+      { "south": 34.98850, "west": -89.77930, "north": 34.99320, "east": -89.77880 },
+      { "south": 34.98850, "west": -89.77820, "north": 34.99320, "east": -89.77770 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 160,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 220,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 26.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.99080,-89.77850,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayShort": true,
+    "drivewayLong": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "dropArea", "shipRcvSeparate", "siteAreaAcres"],
+  "fieldNotes": {
+    "_identity": "FedEx-specific branding could NOT be visually confirmed. 9181 Polk Ln sits in the Crossroads Distribution Center, a large multi-tenant industrial park in Olive Branch (Memphis metro). The roster geocode (RANGE_INTERPOLATED, moved 4m) is precise to the street address and lands on Polk Lane between two long cross-dock buildings; the building fronting Polk Lane at the roster point was audited. 2026 Street View shows mixed-carrier trailers (orange/blue/red dry vans, not the uniform white FedEx Ground fleet) backed in along the dock face - consistent with either a multi-tenant cross-dock or a FedEx Ground linehaul hub serving many contractors. Web research locates the documented FedEx Ground hub in Olive Branch at 8505 Nail Rd (330K sq ft, 94 acres); 9181 Polk Ln may be an address mismatch. Classification reflects the observed physical layout; identity flagged for human review.",
+    "truckGate": "The audited building's dock apron runs directly along Polk Lane with no perimeter fence and no barrier/gate across the apron - an open cross-dock face. No controlled truck gate observed; a sliding gate with call box exists at a DIFFERENT building on the E side of Polk Lane. Flagged uncertain.",
+    "guardShack": "No staffed booth observed at the audited building. guardShack false; remoteGs false (no gate).",
+    "dockDoors": "Very long cross-dock building with continuous dock doors on BOTH long faces, trailers backed in along the full length of each; ~160 doors estimated - count approximate.",
+    "dropArea": "Trailers parked in marked rows along both dock aprons and in a trailer lot to the W; ~25-50 clearly without tractors - dropYard true.",
+    "shipRcvSeparate": "Dock banks on two opposite building faces function as separate dock clusters - flagged uncertain.",
+    "drivewayShort": "Open dock apron directly off the public road - short approach, little internal queuing depth.",
+    "railServed": "No rail spur enters the parcel.",
+    "urbanRural": "Crossroads Distribution Center, Olive Branch MS - dense industrial park in the Memphis metro - Urban.",
+    "buildingCount": "One long cross-dock building audited; the adjacent parallel building is a separate facility."
+  },
+  "method": "deep-audit"
+}

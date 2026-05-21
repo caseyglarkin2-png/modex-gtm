@@ -1,0 +1,442 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.4689,
+              40.3563
+            ],
+            [
+              -74.4623,
+              40.3563
+            ],
+            [
+              -74.4623,
+              40.3611
+            ],
+            [
+              -74.4689,
+              40.3611
+            ],
+            [
+              -74.4689,
+              40.3563
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "barnes-noble",
+        "name": "Barnes & Noble - Monroe Township NJ DC",
+        "type": "Distribution Center / E-commerce Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 73.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.463,
+              40.3588
+            ],
+            [
+              -74.4622,
+              40.3588
+            ],
+            [
+              -74.4622,
+              40.3596
+            ],
+            [
+              -74.463,
+              40.3596
+            ],
+            [
+              -74.463,
+              40.3588
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "barnes-noble",
+        "name": "Barnes & Noble - Monroe Township NJ DC",
+        "type": "Distribution Center / E-commerce Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.4678,
+              40.3566
+            ],
+            [
+              -74.4662,
+              40.3566
+            ],
+            [
+              -74.4662,
+              40.3573
+            ],
+            [
+              -74.4678,
+              40.3573
+            ],
+            [
+              -74.4678,
+              40.3566
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "barnes-noble",
+        "name": "Barnes & Noble - Monroe Township NJ DC",
+        "type": "Distribution Center / E-commerce Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.4642,
+              40.3562
+            ],
+            [
+              -74.4623,
+              40.3562
+            ],
+            [
+              -74.4623,
+              40.3569
+            ],
+            [
+              -74.4642,
+              40.3569
+            ],
+            [
+              -74.4642,
+              40.3562
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "barnes-noble",
+        "name": "Barnes & Noble - Monroe Township NJ DC",
+        "type": "Distribution Center / E-commerce Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.4676,
+              40.3568
+            ],
+            [
+              -74.4628,
+              40.3568
+            ],
+            [
+              -74.4628,
+              40.3574
+            ],
+            [
+              -74.4676,
+              40.3574
+            ],
+            [
+              -74.4676,
+              40.3568
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "barnes-noble",
+        "name": "Barnes & Noble - Monroe Township NJ DC",
+        "type": "Distribution Center / E-commerce Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.7525,
+              39.4163
+            ],
+            [
+              -119.7485,
+              39.4163
+            ],
+            [
+              -119.7485,
+              39.4205
+            ],
+            [
+              -119.7525,
+              39.4205
+            ],
+            [
+              -119.7525,
+              39.4163
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "barnes-noble",
+        "name": "Barnes & Noble - Reno NV DC",
+        "type": "Distribution Center / West-Coast Replenishment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 22,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 38.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.7512,
+              39.4168
+            ],
+            [
+              -119.7507,
+              39.4168
+            ],
+            [
+              -119.7507,
+              39.4172
+            ],
+            [
+              -119.7512,
+              39.4172
+            ],
+            [
+              -119.7512,
+              39.4168
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "barnes-noble",
+        "name": "Barnes & Noble - Reno NV DC",
+        "type": "Distribution Center / West-Coast Replenishment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.751,
+              39.417
+            ],
+            [
+              -119.749,
+              39.417
+            ],
+            [
+              -119.749,
+              39.4176
+            ],
+            [
+              -119.751,
+              39.4176
+            ],
+            [
+              -119.751,
+              39.417
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "barnes-noble",
+        "name": "Barnes & Noble - Reno NV DC",
+        "type": "Distribution Center / West-Coast Replenishment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.7518,
+              39.4171
+            ],
+            [
+              -119.7489,
+              39.4171
+            ],
+            [
+              -119.7489,
+              39.4178
+            ],
+            [
+              -119.7518,
+              39.4178
+            ],
+            [
+              -119.7518,
+              39.4171
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "barnes-noble",
+        "name": "Barnes & Noble - Reno NV DC",
+        "type": "Distribution Center / West-Coast Replenishment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.7512,
+              39.4166
+            ],
+            [
+              -119.75,
+              39.4166
+            ],
+            [
+              -119.75,
+              39.4171
+            ],
+            [
+              -119.7512,
+              39.4171
+            ],
+            [
+              -119.7512,
+              39.4166
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "barnes-noble",
+        "name": "Barnes & Noble - Reno NV DC",
+        "type": "Distribution Center / West-Coast Replenishment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    }
+  ]
+}

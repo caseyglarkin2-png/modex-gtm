@@ -1,0 +1,51 @@
+{
+  "name": "Samuel Adams Pennsylvania Brewery - Breinigsville PA",
+  "type": "Brewery / production facility (largest in network; includes ~1M sq ft brewery + warehouse space on ~76 acres)",
+  "coords": { "lat": 40.5755, "lng": -75.6285 },
+  "geofences": {
+    "perimeter": { "south": 40.5722, "west": -75.6315, "north": 40.5775, "east": -75.6258 },
+    "truckGate": { "south": 40.5760, "west": -75.6303, "north": 40.5766, "east": -75.6295 },
+    "dropYards": [
+      { "south": 40.5730, "west": -75.6303, "north": 40.5748, "east": -75.6280 },
+      { "south": 40.5746, "west": -75.6313, "north": 40.5760, "east": -75.6300 }
+    ],
+    "dockAprons": [
+      { "south": 40.5740, "west": -75.6280, "north": 40.5762, "east": -75.6268 }
+    ],
+    "staging": { "south": 40.5748, "west": -75.6300, "north": 40.5758, "east": -75.6288 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40, "trailersVisible": 170, "trailerParkingCapacity": 250,
+    "truckGateCount": 1, "buildingCount": 4, "siteAreaAcres": 70.3,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.5755,-75.6285,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": true, "dropYard": true, "multiStep": true
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount", "multiStep"],
+  "fieldNotes": {
+    "truckGate": "Driver reviews explicitly describe a manned front gate and check-in; satellite shows a fully fenced perimeter with controlled access. Street View does not reach the brewery's internal truck gate, but the gate is corroborated by web research.",
+    "guardShack": "Driver reviews reference 'guard shack personnel' and 'professional front-gate staff' at this brewery — staffed guard booth confirmed.",
+    "scale": "Driver reviews state 'Samuel Adams Brewery delivers convenient on-site scales, and weigh-ins at the property' — on-site truck scale confirmed.",
+    "multiStep": "Gate check-in plus a separate on-site scale/weigh-in step before docks implies a two-stage process; flagged medium-confidence as the scale house was not isolated in imagery.",
+    "dockDoorCount": "~40 estimated across multiple building faces (east dock apron plus loading along the trailer-yard faces); large brewery with extensive trailers backed in. Approximate.",
+    "dropArea": "Extensive multi-row trailer drop yards on the south and west sides — well over 50 trailer stalls visible.",
+    "fastLaneOpportunity": "Large paved yard aprons and wide internal drives give physical room to add an express/bypass lane.",
+    "shipRcvSeparate": "Loading docks appear on the east building face and separate trailer-yard faces on the west/south — distinct dock clusters.",
+    "multipleFacilities": "Brewery complex is a campus: main brewhouse/process building, tank farm structures, and adjacent warehouse/material buildings on one fenced parcel.",
+    "railServed": "A rail spur curves into the NW of the property with rail cars parked on it (visible in z19 imagery).",
+    "urbanRural": "Penn Drive industrial park at the edge of Breinigsville, surrounded by farmland and I-78; small-town/edge-of-town setting -> Rural.",
+    "trailersVisible": "~170 trailers counted across the south and west drop yards in the captured imagery; approximate."
+  },
+  "method": "deep-audit"
+}

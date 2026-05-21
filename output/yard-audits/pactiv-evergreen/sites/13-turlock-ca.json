@@ -1,0 +1,63 @@
+{
+  "name": "Pactiv Evergreen - Turlock CA",
+  "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
+  "coords": { "lat": 37.491536, "lng": -120.866032 },
+  "geofences": {
+    "perimeter": { "south": 37.490400, "west": -120.867350, "north": 37.492450, "east": -120.864900 },
+    "truckGate": { "south": 37.491000, "west": -120.867350, "north": 37.491300, "east": -120.866900 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 37.490950, "west": -120.866900, "north": 37.491400, "east": -120.865200 }
+    ],
+    "staging": { "south": 37.490400, "west": -120.867000, "north": 37.490950, "east": -120.865000 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 16,
+    "trailersVisible": 8,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 14.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.491536,-120.866032,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Chain-link sliding gate across the dock-apron drive on the south side, confirmed in 2026-03 Street View (sv-gate2). The whole property is chain-link fenced.",
+    "guardShack": "No guard booth structure beside the gate in any heading; gate is an unstaffed chain-link slider.",
+    "remoteGs": "Gate present, no guard shack -> remote / manual check-in.",
+    "drivewayLong": "Deep paved dock apron in front of the south docks; comfortably holds a 3+ truck queue.",
+    "postGateStaging": "Open paved apron inside the fence between the gate and the dock doors functions as a staging/queue area.",
+    "fastLaneOpportunity": "The dock apron and the open vacant land south of the building leave ample unused paved width to add a bypass / express lane.",
+    "dockDoorCount": "~10-12 dock doors visible on the south face in Street View; additional doors likely on the west/north faces — banded 10-25, count is an estimate.",
+    "trailerParkingCapacity": "Large open paved apron plus a partly-vacant lot south of the plant could hold ~25 trailers; estimate.",
+    "railServed": "No rail spur visible entering the property.",
+    "scale": "No truck scale visible."
+  },
+  "method": "deep-audit"
+}

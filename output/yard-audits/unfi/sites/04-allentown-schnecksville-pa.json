@@ -1,0 +1,57 @@
+{
+  "name": "UNFI - Allentown PA DC",
+  "type": "Distribution Center",
+  "coords": { "lat": 40.66380, "lng": -75.59470 },
+  "geofences": {
+    "perimeter": { "south": 40.65950, "west": -75.59850, "north": 40.66780, "east": -75.59300 },
+    "truckGate": { "south": 40.66020, "west": -75.59720, "north": 40.66130, "east": -75.59560 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 40.66050, "west": -75.59800, "north": 40.66700, "east": -75.59600 },
+      { "south": 40.66100, "west": -75.59550, "north": 40.66720, "east": -75.59400 }
+    ],
+    "staging": { "south": 40.66050, "west": -75.59700, "north": 40.66650, "east": -75.59550 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 180,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 107.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.66380,-75.59470,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "guardShack", "remoteGs", "entryLanes", "exitLanes",
+    "preGateStaging", "scale", "multiStep", "shipRcvSeparate"
+  ],
+  "fieldNotes": {
+    "location": "CORRECTED LOCATION. The roster address (8550 Willard Dr, Breinigsville PA) and coords (40.554158,-75.632566) are WRONG - they land at the Lehigh Valley industrial complex near Breinigsville, an unrelated site. The roster note itself flagged 'verify exact site.' Web research (WFMZ, Modern Distribution Management, TruckMap, Showcase/LoopNet, Lehigh Valley News) confirms UNFI's Allentown DC is the North Valley Trade Center at ~4255 North Valley Dr / 4105 Independence Dr, Schnecksville PA 18078 - two warehouses totaling 1.3M sq ft on 107 acres, leased by UNFI on a 15-year lease. Resolved center 40.66380,-75.59470 on the large main DC building, with 'UNFI' painted on the SW yard pavement (visible in z18 imagery) confirming identity.",
+    "closureStatus": "UNFI announced closure of this Schnecksville DC in FY26 following loss of the Key Food customer agreement; ~716 jobs affected, layoffs Aug-Oct 2025. The facility is on the public DC-closure cadence in the Bushway dossier. Audited as the physical yard as it stands; operational status winding down.",
+    "buildingCount": "The North Valley Trade Center comprises two large warehouses (UNFI's lease covers both, ~1.3M sq ft combined; one building is ~812k sq ft). Two distinct large buildings on the same trade-center parcel -> buildingCount 2, multipleFacilities true.",
+    "dockDoors": "The main building has continuous dock-door rhythm along BOTH long faces (E face toward the road and W face), with ~90 trailers backed in across both sides in z18/z19 imagery -> band 50+ (estimated ~180 positions across the main building).",
+    "shipRcvSeparate": "Docks on two opposite long faces of the main building (E and W) function as physically separate dock banks -> shipRcvSeparate true (medium confidence).",
+    "dropYard": "Large paved trailer yards flank both dock faces with parked trailers; the W-side apron is very deep with extensive trailer parking -> dropYard true, dropArea band 50+.",
+    "truckGate": "Single controlled truck entrance at the SW corner: a dedicated truck driveway with painted lane arrows leads from the trade-center road into the property through a checkpoint/roundabout area. A small structure is visible beside the entry near the site water tower -> guardShack assumed true (medium confidence; building elevated on a berm above the public road so Street View, 2025-07, cannot see the gate directly). remoteGs false given the apparent booth.",
+    "drivewayLong": "Long dedicated approach from the trade-center road through the gate into the deep dock aprons -> drivewayLong true; ample queue room.",
+    "fastLaneOpportunity": "Wide gate apron and multi-lane painted entry -> physical room for an express/bypass lane.",
+    "urbanRural": "Schnecksville PA is a small unincorporated community NW of Allentown; the parcel is bordered by active farmland on the E and S with scattered rural residences -> per rubric, Rural.",
+    "railServed": "No rail spur enters the property; truck-served grocery DC.",
+    "siteAreaAcres": "107 acres per the published North Valley Trade Center parcel figure.",
+    "entryLanes/exitLanes": "Estimated 2/2; gate not directly visible in Street View (berm blocks view)."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,54 @@
+{
+  "name": "H-E-B eCommerce Fulfillment Center - Houston (Holmes Road) - Houston TX",
+  "type": "E-commerce Fulfillment Center",
+  "coords": { "lat": 29.682200, "lng": -95.354800 },
+  "geofences": {
+    "perimeter": { "south": 29.68095, "west": -95.35650, "north": 29.68360, "east": -95.35310 },
+    "truckGate": { "south": 29.68170, "west": -95.35610, "north": 29.68215, "east": -95.35560 },
+    "dropYards": [
+      { "south": 29.68110, "west": -95.35480, "north": 29.68210, "east": -95.35320 }
+    ],
+    "dockAprons": [
+      { "south": 29.68130, "west": -95.35560, "north": 29.68215, "east": -95.35340 }
+    ],
+    "staging": { "south": 29.68240, "west": -95.35560, "north": 29.68340, "east": -95.35350 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 12,
+    "trailersVisible": 6,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 14.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.682200,-95.354800,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "4520 Holmes Rd, Houston TX 77033 - confirmed by web research and imagery. The roster ROOFTOP geocode (moved 940 m) resolved onto the correct building - a single recently-built fulfillment center wedged between Holmes Rd (W), a rail line (NW) and a freeway (S). The H-E-B red logo is visible on the building in 2026 Street View.",
+    "truckGate": "The site has a fully-fenced perimeter (ornamental metal-mesh fence confirmed on the W, N and E sides in Street View) with a single wide driveway entrance off Holmes Rd on the W - a clear controlled entry pinch-point for a modern automated eFC.",
+    "guardShack": "No staffed guard booth was positively identified at the entrance driveway in satellite or Street View; flagged uncertain.",
+    "remoteGs": "Truck gate present with no visible guard shack - implies kiosk / app / remote check-in, typical of a 2025-era automated eFC.",
+    "postGateStaging": "Paved holding area inside the fence (the wrap-around yard and the N circular turnaround) before the docks.",
+    "drivewayLong": "The gate-to-dock approach wraps around the building with ample depth to hold a 3+ truck queue.",
+    "dockDoors": "Dock bank on the building's south face; ~7 doors with trailers/equipment visible plus the bank continuing - estimated ~12 doors, 10-25 band (could be lower); flagged uncertain.",
+    "dropArea": "0-10 - only a small number of trailers staged in the yard; this is a 100,000 sq ft eFC, not a drop-yard operation.",
+    "railServed": "A rail line runs along the NW edge of the property but no spur enters the site.",
+    "multipleFacilities": "Single stand-alone building - not a campus.",
+    "urbanRural": "Dense SE Houston near a major freeway interchange - Urban.",
+    "buildingDescription": "100,000 sq ft stand-alone e-commerce fulfillment center, opened Feb 2025, H-E-B's 3rd Houston eFC; Swisslog AutoStore + SynQ automation."
+  },
+  "method": "deep-audit"
+}

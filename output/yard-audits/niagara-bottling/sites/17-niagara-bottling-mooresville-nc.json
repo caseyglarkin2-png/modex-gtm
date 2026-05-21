@@ -1,0 +1,49 @@
+{
+  "name": "Niagara Bottling - Mooresville NC",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 35.62870, "lng": -80.78540 },
+  "geofences": {
+    "perimeter": { "south": 35.62640, "west": -80.78760, "north": 35.63100, "east": -80.78340 },
+    "truckGate": { "south": 35.62990, "west": -80.78760, "north": 35.63050, "east": -80.78680 },
+    "dropYards": [
+      { "south": 35.62760, "west": -80.78720, "north": 35.62960, "east": -80.78560 }
+    ],
+    "dockAprons": [
+      { "south": 35.62760, "west": -80.78640, "north": 35.62980, "east": -80.78480 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35, "trailersVisible": 60, "trailerParkingCapacity": 80,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 22.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.62870,-80.78540,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "trailerParkingCapacity", "siteAreaAcres"],
+  "fieldNotes": {
+    "truckGate": "Truck driveway connects to Mooresville Blvd as an open, uncontrolled drive. No barrier arm, sliding gate, or checkpoint pinch-point visible in satellite imagery; Street View (2026-01) does not reach the entrance. Site is mid-expansion which adds uncertainty.",
+    "guardShack": "No staffed booth resolvable at the entrance. A small standalone office-type building sits near the road frontage but is the plant office, not an entrance guard shack.",
+    "remoteGs": "False - no truck gate identified.",
+    "drivewayLong": "Long internal access drive from the road wraps to the SW drop yard / dock face; ample queue room.",
+    "dropArea": "SW drop yard holds trailers parked nose-out in roughly 3 long rows - 50+ stalls in the cleaner (pre-expansion) imagery.",
+    "dockDoors": "Dock doors along the SW long face of the building with trailers backed in; ~35 estimated, banded 25-50. Active construction obscures a precise count.",
+    "fastLaneOpportunity": "Wide open driveway and large paved/graded yard with no existing control structure - room to add a bypass lane.",
+    "siteAreaAcres": "Large parcel (~22 ac) but boundaries are fluid due to ongoing expansion / land clearing on the SE side.",
+    "railServed": "No rail spur enters the property.",
+    "urbanRural": "Borderline. Mooresville is in the Charlotte-Concord-Gastonia metro; the immediate stretch of Mooresville Blvd is a cluster of large warehouses/distribution buildings. Called Urban on the metro + warehouse-cluster basis, though woodland surrounds the parcel.",
+    "expansion": "Niagara is actively expanding the Mooresville plant - 2026-01 imagery shows extensive land clearing and a construction laydown yard on the SE side."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,57 @@
+{
+  "name": "UNFI - Manchester PA DC",
+  "type": "Distribution Center",
+  "coords": { "lat": 40.07043, "lng": -76.74648 },
+  "geofences": {
+    "perimeter": { "south": 40.06400, "west": -76.75250, "north": 40.07650, "east": -76.73950 },
+    "truckGate": { "south": 40.06620, "west": -76.74560, "north": 40.06740, "east": -76.74380 },
+    "dropYards": [
+      { "south": 40.06550, "west": -76.74300, "north": 40.07350, "east": -76.74050 }
+    ],
+    "dockAprons": [
+      { "south": 40.06800, "west": -76.75100, "north": 40.07550, "east": -76.74700 },
+      { "south": 40.06500, "west": -76.74700, "north": 40.07250, "east": -76.74350 }
+    ],
+    "staging": { "south": 40.06550, "west": -76.74600, "north": 40.06800, "east": -76.74300 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 214,
+    "trailersVisible": 40,
+    "trailerParkingCapacity": 492,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 129.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.07043,-76.74648,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "guardShack", "remoteGs", "truckGate", "entryLanes", "exitLanes",
+    "preGateStaging", "scale", "multiStep"
+  ],
+  "fieldNotes": {
+    "location": "Confirmed: 1025 Locust Point Rd, Manchester PA. Roster ROOFTOP geocode 40.070433,-76.746475 lands squarely on the building. A single very large (~1.3M sq ft) DC building, oriented NE-SW, on a 129-acre parcel along the I-83 corridor in York County. Web-corroborated as UNFI's Class-A tri-temp build-to-suit, opened Q1 FY25.",
+    "imageryState": "Best available Maxar satellite shows the site MID-CONSTRUCTION: the building shell is complete (NE half with a finished dark roof, SW half with a lighter still-being-finished roof), but perimeter paving, parking striping, and yard buildout are incomplete; only ~40 trailers were visible. The facility is operational per public reporting (opened Q1 FY25); counts below rely on the published developer spec, not on a count of finished imagery.",
+    "dockDoorCount": "Published spec: 214 dock positions. Dock doors are visible lining BOTH long faces of the building (NW and SE) -> dockDoors band 50+.",
+    "trailerParkingCapacity": "Published spec: 492 trailer parking spaces -> dropArea band 50+, dropYard true.",
+    "shipRcvSeparate": "Two distinct dock banks on the two opposite long faces of the building -> shipping and receiving run from physically separate dock clusters.",
+    "truckGate": "A single truck entrance from the SW via a dedicated access road off Locust Point Rd; a guard-booth-scale structure and gated checkpoint are at the campus entry (~40.0668,-76.7448). Modern build-to-suit grocery DC -> assume staffed guard booth (guardShack true). Gate/booth not fully resolved in construction-era imagery -> flagged.",
+    "drivewayLong": "Long dedicated access road from the public road to the gate; deep approach -> drivewayLong true, ample queue room.",
+    "fastLaneOpportunity": "Wide access road and large open apron at the gate -> physical room for an express/bypass lane.",
+    "urbanRural": "Parcel is surrounded by farmland, woods, and scattered rural residences in York County, off the I-83 corridor -> Rural.",
+    "railServed": "No rail spur observed entering the property; truck-served grocery DC.",
+    "entryLanes/exitLanes": "Estimated 2/2 for a 214-dock facility; not precisely counted in construction-era imagery."
+  },
+  "method": "deep-audit"
+}

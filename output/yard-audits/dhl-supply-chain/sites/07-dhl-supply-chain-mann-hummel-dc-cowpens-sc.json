@@ -1,0 +1,51 @@
+{
+  "name": "DHL Supply Chain - Mann+Hummel DC - Cowpens SC",
+  "type": "Dedicated Customer Distribution Center (filtration)",
+  "coords": { "lat": 35.06105, "lng": -81.78200 },
+  "geofences": {
+    "perimeter": { "south": 35.05780, "west": -81.78760, "north": 35.06480, "east": -81.77620 },
+    "truckGate": { "south": 35.06300, "west": -81.77800, "north": 35.06400, "east": -81.77700 },
+    "dropYards": [
+      { "south": 35.05900, "west": -81.78720, "north": 35.06150, "east": -81.78400 },
+      { "south": 35.06250, "west": -81.78250, "north": 35.06450, "east": -81.77820 }
+    ],
+    "dockAprons": [
+      { "south": 35.06150, "west": -81.78550, "north": 35.06420, "east": -81.77780 },
+      { "south": 35.05850, "west": -81.78700, "north": 35.06250, "east": -81.77920 }
+    ],
+    "staging": { "south": 35.06250, "west": -81.77900, "north": 35.06380, "east": -81.77720 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 104, "trailersVisible": 95, "trailerParkingCapacity": 220,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 90.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.06105,-81.78200,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "shipRcvSeparate", "siteAreaAcres"],
+  "fieldNotes": {
+    "location": "Roster lat/lng landed on the NE edge of the building (ROOFTOP, moved 44m). Re-centered on the single massive cross-dock at 35.0610,-81.7820. Confirmed via web research as the 1,401,200 sq ft DHL/Mann+Hummel spec DC at 600 Webber Drive, Cowpens SC, opened July 2021 - the largest single building in the roster.",
+    "truckGate": "Single controlled entrance off Webber Drive on the NE side - a divided 2-lane drive into the site. Site fenced (chain-link visible in Apr-2024 Street View). Long internal approach.",
+    "guardShack": "No staffed guard booth visible at the entrance in z20 satellite or Street View; modern spec-building entrance.",
+    "remoteGs": "Gate present, no guard booth -> remote/kiosk check-in inferred.",
+    "dockDoors": "Cross-dock building with continuous dock-door rhythm on BOTH long faces (NW and SE); roster cites 104 dock doors. Banded 50+.",
+    "shipRcvSeparate": "Dock banks on the two opposite long faces of the building suggest separate shipping/receiving flows; medium confidence.",
+    "dropYard": "Trailer drop rows along the SW yard and additional rows on the NE apron; perimeter truck-court loop road wraps the building.",
+    "drivewayLong": "Long internal entrance road from Webber Drive and deep truck court easily holds 3+ trucks.",
+    "fastLaneOpportunity": "Very wide truck court and large undeveloped paved/graded area at the SW end - ample room for additional lanes.",
+    "siteAreaAcres": "Building runs diagonally (SE-NW), ~530m long; ~90 acres is the estimated fenced parcel of the building + wraparound truck court (the perimeter bounding box overstates the diagonal parcel). Low-medium confidence.",
+    "trailersVisible": "Approx 95 trailers counted across both dock faces and drop rows; moderate confidence."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,49 @@
+{
+  "name": "Performance Foodservice - Temple TX",
+  "type": "Broadline Foodservice Distribution Center",
+  "coords": { "lat": 31.14380, "lng": -97.34700 },
+  "geofences": {
+    "perimeter": { "south": 31.14180, "west": -97.34900, "north": 31.14620, "east": -97.34450 },
+    "truckGate": { "south": 31.14260, "west": -97.34700, "north": 31.14320, "east": -97.34620 },
+    "dropYards": [
+      { "south": 31.14350, "west": -97.34680, "north": 31.14580, "east": -97.34470 }
+    ],
+    "dockAprons": [
+      { "south": 31.14320, "west": -97.34780, "north": 31.14480, "east": -97.34640 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45, "trailersVisible": 70, "trailerParkingCapacity": 120,
+    "truckGateCount": 2, "buildingCount": 2, "siteAreaAcres": 36.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@31.1438,-97.347,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["truckGate", "remoteGs", "dockDoorCount", "trailerParkingCapacity", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Roster coord (31.14397,-97.34693, GEOMETRIC_CENTER, movedMeters 107) is accurate. Resolved to the modern PFG Temple DC campus at 4141 Lucius McCelvey Dr, Temple TX 76504, in a Temple business park. Street View confirms the corporate office front (stucco facade, Texas-star emblem, US flagpoles, circular drive).",
+    "truckGate": "Modern fenced campus with separate office-side and truck-yard driveways off Lucius McCelvey Dr. The truck yard is fenced; entrance drives are gated. No barrier arm clearly resolved in the 2022/2026 Street View passes (open at capture time), so truckGate is true but listed uncertain.",
+    "guardShack": "No staffed guard booth at the entrances. A small white building sits within the trailer yard — reads as a maintenance / fuel / yard-ops building, not a gate booth.",
+    "remoteGs": "Gate present, no booth — kiosk / call-box / app check-in implied. true.",
+    "dockDoors": "Dock apron with trailers backed in between the DC building and the trailer yard; ~45 doors, banded 25-50.",
+    "dropArea": "Very large trailer drop yard NE/E of the building, full of parked-trailer rows; 50+ trailers, banded 50+.",
+    "fastLaneOpportunity": "Expansive paved yard and wide entrance aprons (recent ~$10M expansion) — clear unused width to add an express/bypass lane. true.",
+    "entryExitSeparate": "Distinct office-side entrance (SW, circular drive) and truck-yard entrance (S) at different points of the property line.",
+    "buildingCount": "Main DC building plus a separate front office structure — counted 2; one campus, so multipleFacilities false.",
+    "urbanRural": "Edge-of-town Temple business park surrounded by open land and scattered industrial — Rural per the rubric tie-break.",
+    "railServed": "No rail spur into the property."
+  },
+  "method": "deep-audit"
+}

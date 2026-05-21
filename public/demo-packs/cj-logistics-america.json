@@ -1,0 +1,2826 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:34:27.811Z",
+  "account": {
+    "slug": "cj-logistics-america",
+    "displayName": "CJ Logistics America",
+    "archetype": "3pl",
+    "siteCount": 27,
+    "coverageNote": {
+      "auditedCount": 27,
+      "estimatedFootprint": null,
+      "droppedStubCount": 1,
+      "capHit": false,
+      "note": "Audited all 27 identifiable facilities (1 additional were unresolvable from public sources)."
+    }
+  },
+  "research": {
+    "facility_count": 27,
+    "audited_facilities": 27,
+    "source": "yard-audit",
+    "confidence": "verified",
+    "caveats": [
+      "CJ Logistics - Elwood IL (Logistics Center 1): audit note mentions 'closed'",
+      "CJ Logistics - Newville PA: audit note mentions 'closed'",
+      "CJ Logistics - Riverside CA: audit note mentions 'closed'",
+      "CJ Logistics - Wilmer TX (Southport Logistics Park): audit note mentions 'closed'",
+      "CJ Logistics - Perris CA: audit note mentions 'closed'"
+    ]
+  },
+  "network": {
+    "bbox": [
+      -119.2,
+      32.6195,
+      -74.0799,
+      41.6524
+    ],
+    "archetypeMix": {
+      "#10": 8,
+      "#7": 1,
+      "#9": 8,
+      "#3": 10
+    },
+    "totals": {
+      "dockDoors": 2134,
+      "trailerCapacity": 3005,
+      "gates": 29,
+      "railServed": 4,
+      "acres": 1137.6999999999998
+    },
+    "sites": [
+      {
+        "id": "01-cj-logistics-elwood-il-logistics-center-1",
+        "name": "CJ Logistics - Elwood IL (Logistics Center 1)",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "scale"
+        ],
+        "center": {
+          "lat": 41.404,
+          "lng": -88.1384
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.401,
+            "west": -88.1408,
+            "north": 41.407,
+            "east": -88.1365
+          },
+          "truckGate": {
+            "south": 41.4056,
+            "west": -88.1404,
+            "north": 41.4065,
+            "east": -88.1394
+          },
+          "dropYards": [
+            {
+              "south": 41.4012,
+              "west": -88.1408,
+              "north": 41.4068,
+              "east": -88.1392
+            },
+            {
+              "south": 41.4012,
+              "west": -88.1376,
+              "north": 41.4068,
+              "east": -88.1365
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.4012,
+              "west": -88.1392,
+              "north": 41.4068,
+              "east": -88.1388
+            },
+            {
+              "south": 41.4012,
+              "west": -88.138,
+              "north": 41.4068,
+              "east": -88.1376
+            }
+          ],
+          "staging": {
+            "south": 41.4052,
+            "west": -88.1402,
+            "north": 41.406,
+            "east": -88.1392
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 116,
+          "trailersVisible": 140,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 59.3,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster pin (41.406701, -88.139492, GEOMETRIC_CENTER, moved 5 m) landed on\nW Mississippi Street between two large warehouses inside the CenterPoint\nIntermodal Center, Elwood. Web research (Racklify, Illinois trucking/warehousing\ndirectory, SIDINGS/Standard Rail) confirms CJ Logistics America operates at\n21705 West Mississippi Street — a 1,024,125 sq ft FTZ warehouse with 116 dock\ndoors, 5 rail doors and 200 yard spots. Satellite probing identified the long\nN-S building immediately south of the pin, with the employee parking lot facing\nW Mississippi St and the blue-accent corporate frontage visible in Street View\n(2025-05). Building center locked at 41.4040, -88.1384.",
+        "mapsUrl": "https://www.google.com/maps/@41.4040,-88.1384,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Truck yard is fully enclosed by chain-link perimeter fencing (visible in Street View 2025-05). The truck driveway off W Mississippi St funnels into a controlled, fenced yard.",
+          "guardShack": "Small blue-roofed guard-booth structure sits mid-driveway inside the truck yard entrance (zoom-20 satellite at 41.4058,-88.1401), with a truck being processed beside it - footprint ~1-2 vehicle spaces.",
+          "dockDoors": "Racklify lists 116 dock doors + 5 rail doors. Satellite confirms long banks of dock doors with trailers backed in on BOTH long building faces (east and west).",
+          "shipRcvSeparate": "Dock banks on two physically separate building faces (east and west), consistent with separate ship/receive operations.",
+          "dropArea": "Racklify lists 200 yard spots. Satellite shows extensive trailer drop yards on both sides of the building with 100+ parked trailers.",
+          "railServed": "SIDINGS/Standard Rail lists this as a CJ Logistics rail facility; Racklify lists 5 rail doors. CenterPoint Intermodal Center site with rail spurs serving the building (visible along east side).",
+          "fastLaneOpportunity": "Wide entry apron and substantial unused paved width at the gate provide room for a bypass/express lane.",
+          "urbanRural": "Edge-of-town location within the CenterPoint Intermodal Center, surrounded by farmland to the north - rural setting despite the industrial cluster.",
+          "entryLanes": "Single shared entry/exit driveway off W Mississippi St; lane split not clearly resolvable from imagery.",
+          "scale": "No truck scale clearly visible; left in uncertainFields."
+        }
+      },
+      {
+        "id": "02-cj-logistics-elwood-il-logistics-center-2-nexus",
+        "name": "CJ Logistics - Elwood IL (Logistics Center 2 / NEXUS)",
+        "type": "Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "preGateStaging",
+          "postGateStaging",
+          "drivewayLong",
+          "drivewayShort",
+          "backupSensitive",
+          "entryExitTogether",
+          "entryExitSeparate",
+          "entryLanes",
+          "exitLanes",
+          "fastLaneOpportunity",
+          "dropArea",
+          "shipRcvSeparate",
+          "scale",
+          "dropYard",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "siteAreaAcres",
+          "perimeter",
+          "coords"
+        ],
+        "center": {
+          "lat": 41.391443,
+          "lng": -88.153535
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.388443,
+            "west": -88.157534,
+            "north": 41.394443,
+            "east": -88.149536
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 110.2,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied no street address and a GEOMETRIC_CENTER geocode of\n\"CenterPoint Intermodal Center, Elwood.\" That point (41.391443, -88.153535)\nlands squarely inside the BNSF Logistics Park Chicago intermodal rail yard\n(rows of containers and rail tracks) — not a building.\n\nWeb research established the facility's real address: CJ Logistics' own\nopen-space sales sheet lists **Elwood 2 at 21012 W. Mississippi Street, Elwood,\nIL**, Q4 2025, 1.1M SF, \"SPACE IS OPEN.\" This is the NEXUS Project second\nElwood distribution center — a build-to-suit by ARCO/Murray, groundbreaking\n10 October 2024, full operations expected H1 2026.\n\nDespite extensive satellite probing along the W Mississippi Street corridor\nand across the CenterPoint Intermodal Center (east, west, south of the existing\nCJ LC1 at 21705 W Mississippi St), **no distinct construction site or new",
+        "mapsUrl": "https://www.google.com/maps/@41.391443,-88.153535,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "EXACT BUILDING NOT POSITIVELY IDENTIFIED. Address confirmed via CJ Logistics' own open-space page: 21012 W. Mississippi Street, Elwood, IL (Elwood 2 / NEXUS). The roster geocode (GEOMETRIC_CENTER of CenterPoint Intermodal Center) landed inside the BNSF intermodal rail yard. This is a brand-new build-to-suit (ARCO/Murray, groundbreaking 10 Oct 2024, full ops H1 2026); current Maxar imagery of the CenterPoint corridor shows only established buildings - no distinct bare-earth construction pad could be matched to 21012 W Mississippi St, and the new building cannot be told apart from the dozens of similar CenterPoint warehouses. Coordinates and perimeter retained from the roster geocode are APPROXIMATE / UNRELIABLE.",
+          "dockDoorCount": "Published spec (CJ open-space sheet / Business Wire): 130 dock positions, 120 fully equipped. 1,105,500 SF, 40 ft clear height, 6,500 SF office with driver area.",
+          "truckGate": "Inferred from CenterPoint Intermodal Center norm - all CJ/CenterPoint DCs in this park have fenced, guarded truck yards (confirmed at CJ Elwood LC1). Not verified for this specific building.",
+          "guardShack": "Inferred from CenterPoint norm; not verified.",
+          "railServed": "Marketed as adjacent to BNSF and Union Pacific rail lines; CenterPoint Intermodal Center is rail-served. Whether a spur enters the building parcel is unverified.",
+          "urbanRural": "CenterPoint Intermodal Center, Elwood - edge-of-town industrial park surrounded by farmland; rural setting.",
+          "review": "Flagged for human review - re-audit once newer satellite imagery resolves the completed building, or once a precise parcel/coordinate is published."
+        }
+      },
+      {
+        "id": "03-cj-logistics-newville-pa",
+        "name": "CJ Logistics - Newville PA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "scale"
+        ],
+        "center": {
+          "lat": 40.1326,
+          "lng": -77.3505
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.13,
+            "west": -77.3522,
+            "north": 40.1352,
+            "east": -77.3475
+          },
+          "truckGate": {
+            "south": 40.1322,
+            "west": -77.3524,
+            "north": 40.133,
+            "east": -77.3514
+          },
+          "dropYards": [
+            {
+              "south": 40.1336,
+              "west": -77.3493,
+              "north": 40.1352,
+              "east": -77.3475
+            },
+            {
+              "south": 40.1303,
+              "west": -77.35,
+              "north": 40.132,
+              "east": -77.348
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.1322,
+              "west": -77.352,
+              "north": 40.1345,
+              "east": -77.349
+            },
+            {
+              "south": 40.1335,
+              "west": -77.35,
+              "north": 40.1352,
+              "east": -77.3478
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 260,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 57.2,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster pin (40.13221, -77.352058, ROOFTOP, moved 33 m) landed at the SW\ncorner of a single very large distribution warehouse off Centerville Road,\nNewville PA. The building is unambiguous - a ~500 m-long warehouse standing\nalone amid open farmland, with continuous dock-door banks and hundreds of\ntrailers. This matches the Racklify listing for CJ Logistics Newville\n(1,138,364 sq ft - the largest single CJ DC in the roster). Building center\nlocked at 40.13260, -77.35050.",
+        "mapsUrl": "https://www.google.com/maps/@40.13260,-77.35050,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Site is enclosed by chain-link perimeter fencing (visible in Street View 2025-06 along Centerville Road). A single wide truck driveway curves off Centerville Road into the truck yard - a controlled entry point.",
+          "guardShack": "No guard-booth structure visible at the entrance driveway in zoom-20/21 satellite. The standalone structure on the SW farmland is a barn/silo, not a guard shack.",
+          "remoteGs": "Set true - there is a controlled fenced gate but no staffed guard booth, implying kiosk/remote check-in. Medium confidence; left in uncertainFields.",
+          "dockDoors": "Massive single warehouse (~500 m long) with continuous dock-door banks and trailers backed in on multiple faces - well into the 50+ band. Largest single CJ DC in roster (1,138,364 sq ft per Racklify).",
+          "shipRcvSeparate": "Dock banks run along multiple separate building faces (SW long face and NE long face), consistent with separate ship/receive clusters.",
+          "dropYard": "Extensive trailer drop yards at the SE end and along the building faces; 150+ trailers parked across the imagery.",
+          "fastLaneOpportunity": "Wide entrance apron and substantial paved truck-court width provide room for a bypass/express lane.",
+          "urbanRural": "Surrounded by open farmland in rural Cumberland County PA - clearly rural.",
+          "railServed": "No rail spur visible entering the property; building is highway-served (adjacent to a multi-lane highway, US-11 corridor).",
+          "entryLanes": "Single shared entry/exit driveway; lane split not resolvable from imagery."
+        }
+      },
+      {
+        "id": "04-cj-logistics-shafter-ca",
+        "name": "CJ Logistics - Shafter CA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "scale"
+        ],
+        "center": {
+          "lat": 35.4521,
+          "lng": -119.1985
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.4502,
+            "west": -119.2,
+            "north": 35.454,
+            "east": -119.1962
+          },
+          "truckGate": {
+            "south": 35.4504,
+            "west": -119.1978,
+            "north": 35.451,
+            "east": -119.1968
+          },
+          "dropYards": [
+            {
+              "south": 35.4505,
+              "west": -119.1975,
+              "north": 35.4537,
+              "east": -119.1962
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.4505,
+              "west": -119.198,
+              "north": 35.4537,
+              "east": -119.1975
+            },
+            {
+              "south": 35.4505,
+              "west": -119.2,
+              "north": 35.4537,
+              "east": -119.1995
+            }
+          ],
+          "staging": {
+            "south": 35.4504,
+            "west": -119.1972,
+            "north": 35.4512,
+            "east": -119.1965
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 36,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster pin (35.450931, -119.198152, ROOFTOP but moved 6,878 m from the\noriginal imprecise coords) landed at the SE corner of a large white-roofed\nwarehouse in the Wonderful Industrial Park area of Shafter, CA. Web research\n(Dun & Bradstreet, Racklify) confirms CJ Logistics America operates at\n3800 Fanucchi Way, Shafter — a ~1,063,337 sq ft distribution warehouse. The\nwhite-roofed building (rooftop solar) immediately N/NW of the pin is the CJ\nfacility. Building center locked at 35.45210, -119.19850.",
+        "mapsUrl": "https://www.google.com/maps/@35.45210,-119.19850,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Controlled truck entrance at the SE corner of the property - the entry driveway funnels through a checkpoint with gate arms/fencing across the truck lane (visible in zoom-20 satellite).",
+          "guardShack": "A distinct guard-booth structure sits in the middle of the entry driveway (zoom-19/20 satellite at ~35.4507,-119.1972), with a tractor-trailer stopped beside it being processed - clear staffed booth.",
+          "dockDoors": "Large white-roofed warehouse (~420 m long, solar panels on roof) with continuous dock-door banks and trailers backed in on BOTH the west and east long faces - well into the 50+ band (1,063,337 sq ft per Racklify).",
+          "shipRcvSeparate": "Dock banks on two separate building faces (east and west).",
+          "dropYard": "Large trailer drop yard along the east side of the building with 100+ parked trailers.",
+          "fastLaneOpportunity": "Very wide concrete entrance apron / truck court at the gate provides ample room for a bypass/express lane.",
+          "urbanRural": "Wonderful Industrial Park area on the edge of Shafter, CA - surrounded by bare lots and farmland; rural setting despite the industrial cluster.",
+          "railServed": "No rail spur visible entering the property.",
+          "entryLanes": "Single shared entry/exit driveway through the guard booth; lane split not resolvable from imagery.",
+          "scale": "No truck scale clearly visible; left in uncertainFields."
+        }
+      },
+      {
+        "id": "05-cj-logistics-riverside-ca",
+        "name": "CJ Logistics - Riverside CA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "scale"
+        ],
+        "center": {
+          "lat": 33.937,
+          "lng": -117.3072
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.9352,
+            "west": -117.3088,
+            "north": 33.9388,
+            "east": -117.305
+          },
+          "truckGate": {
+            "south": 33.9355,
+            "west": -117.3066,
+            "north": 33.9361,
+            "east": -117.3059
+          },
+          "dropYards": [
+            {
+              "south": 33.9353,
+              "west": -117.3088,
+              "north": 33.9383,
+              "east": -117.3082
+            },
+            {
+              "south": 33.9352,
+              "west": -117.3082,
+              "north": 33.9358,
+              "east": -117.3062
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.9357,
+              "west": -117.3085,
+              "north": 33.9385,
+              "east": -117.3081
+            },
+            {
+              "south": 33.9357,
+              "west": -117.3065,
+              "north": 33.9385,
+              "east": -117.3061
+            }
+          ],
+          "staging": {
+            "south": 33.9354,
+            "west": -117.3064,
+            "north": 33.936,
+            "east": -117.3057
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 105,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 170,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 34.8,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster pin (33.936599, -117.306961, ROOFTOP, moved 7,034 m from the\noriginal imprecise coords) landed on a large warehouse in a dense Riverside\nindustrial cluster. Web research (Racklify, Waze, Chamber of Commerce) confirms\nCJ Logistics America at 6275 Lance Drive, Riverside CA 92507 - a ~1,012,995\nsq ft distribution warehouse. The large N-S building under the pin is the CJ\nfacility. Building center locked at 33.93700, -117.30720.",
+        "mapsUrl": "https://www.google.com/maps/@33.93700,-117.30720,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Truck entrance at the S/SE side of the building is a controlled checkpoint - the truck lane has anti-tailgating chevron markings and the yard is enclosed (zoom-19/21 satellite).",
+          "guardShack": "A small orange-roofed guard-booth structure sits at the truck-yard entrance on the south side of the building (zoom-19 satellite at ~33.9358,-117.3063), beside the checkpoint lane.",
+          "dockDoors": "Large warehouse (~400 m long N-S) with continuous dock-door banks and trailers backed in on BOTH the west and east long faces - 50+ band (1,012,995 sq ft per Racklify).",
+          "shipRcvSeparate": "Dock banks on two physically separate building faces (east and west).",
+          "dropYard": "Trailer drop areas along the west face and the south truck court; ~80-100 trailers visible - dropArea 25-50 band.",
+          "fastLaneOpportunity": "Wide truck court at the gate provides room for a bypass/express lane.",
+          "urbanRural": "Inside the dense industrial fabric of Riverside CA (extensive contiguous warehouse cluster) - Urban.",
+          "railServed": "No rail spur visible entering the property.",
+          "entryLanes": "Single shared entry/exit driveway through the guard booth; lane split not resolvable.",
+          "scale": "No truck scale clearly visible; left in uncertainFields."
+        }
+      },
+      {
+        "id": "06-cj-logistics-wilmer-tx-southport-logistics-park",
+        "name": "CJ Logistics - Wilmer TX (Southport Logistics Park)",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "scale"
+        ],
+        "center": {
+          "lat": 32.6228,
+          "lng": -96.685
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.6195,
+            "west": -96.6878,
+            "north": 32.6262,
+            "east": -96.6828
+          },
+          "truckGate": {
+            "south": 32.6255,
+            "west": -96.6852,
+            "north": 32.6262,
+            "east": -96.6843
+          },
+          "dropYards": [
+            {
+              "south": 32.62,
+              "west": -96.6878,
+              "north": 32.6258,
+              "east": -96.6862
+            },
+            {
+              "south": 32.6198,
+              "west": -96.6845,
+              "north": 32.6255,
+              "east": -96.6828
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.6202,
+              "west": -96.6868,
+              "north": 32.6258,
+              "east": -96.686
+            },
+            {
+              "south": 32.62,
+              "west": -96.685,
+              "north": 32.6255,
+              "east": -96.6843
+            }
+          ],
+          "staging": {
+            "south": 32.6253,
+            "west": -96.685,
+            "north": 32.626,
+            "east": -96.6843
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 141,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 310,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 86.4,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster pin (32.622645, -96.684933, ROOFTOP, moved 3,374 m) landed directly\non a large white-roofed warehouse in Southport Logistics Park, Wilmer TX. Web\nresearch (CJ open-space page, Waze, businessyab) confirms CJ Logistics America\noperates at 1200 E. Fulghum Rd. - Southport Logistics Park Building 1, a\n1.1M sq ft DC with 141 dock doors and 310 yard spots. Building center locked at\n32.62280, -96.68500.",
+        "mapsUrl": "https://www.google.com/maps/@32.62280,-96.68500,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "CJ's own facility sheet explicitly describes Wilmer as a 'gated lot with a Welcome Center.' Truck yard is enclosed by chain-link perimeter fencing (confirmed in Street View 2026-02 along E Fulghum Rd); the access driveway off Fulghum Rd is the controlled truck entry.",
+          "guardShack": "The 'Welcome Center' is a staffed driver check-in facility at the gated truck entrance - functions as the guard shack. Check-in lane with chevron markings visible near the NW entry in zoom-20 satellite.",
+          "dockDoors": "Southport Logistics Park Building 1 - 1.1M sq ft with 141 dock doors per CJ's facility sheet. Satellite confirms continuous dock-door banks with trailers backed in on BOTH long building faces - 50+ band.",
+          "shipRcvSeparate": "Dock banks on two physically separate long building faces.",
+          "dropYard": "310 yard spots per CJ's facility sheet; satellite shows extensive trailer drop yards on both sides of the building with 200+ parked trailers - 50+ band.",
+          "fastLaneOpportunity": "Very wide entry apron and large truck courts provide ample room for a bypass/express lane.",
+          "urbanRural": "Southport Logistics Park, Wilmer TX - edge-of-town logistics park south of Dallas, surrounded by undeveloped land and an older industrial yard; rural setting.",
+          "railServed": "No rail spur visible entering the property; facility is 0.5 miles from the nearest intermodal yard but not directly rail-served.",
+          "entryLanes": "Estimated 2 inbound lanes at the gated entry; not precisely resolvable.",
+          "scale": "No truck scale clearly visible; left in uncertainFields."
+        }
+      },
+      {
+        "id": "07-cj-logistics-perris-ca",
+        "name": "CJ Logistics - Perris CA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "scale"
+        ],
+        "center": {
+          "lat": 33.8607,
+          "lng": -117.2652
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.8589,
+            "west": -117.2671,
+            "north": 33.8625,
+            "east": -117.2632
+          },
+          "truckGate": {
+            "south": 33.8619,
+            "west": -117.267,
+            "north": 33.8625,
+            "east": -117.2662
+          },
+          "dropYards": [
+            {
+              "south": 33.8591,
+              "west": -117.2671,
+              "north": 33.8621,
+              "east": -117.2663
+            },
+            {
+              "south": 33.8589,
+              "west": -117.2641,
+              "north": 33.8621,
+              "east": -117.2632
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.8592,
+              "west": -117.2666,
+              "north": 33.862,
+              "east": -117.2661
+            },
+            {
+              "south": 33.8591,
+              "west": -117.2643,
+              "north": 33.862,
+              "east": -117.2638
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 170,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 35.7,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster pin (33.860652, -117.264993, ROOFTOP, moved 3,955 m from the\noriginal imprecise coords) landed on a large warehouse in a dense Perris CA\nindustrial cluster. Web research (Dun & Bradstreet, Racklify, Chamber of\nCommerce) confirms CJ Logistics America at 17789 Harvill Ave, Perris CA 92570 -\na ~730,000 sq ft distribution warehouse (a legacy DSC Logistics site).\nBuilding center locked at 33.86070, -117.26520.",
+        "mapsUrl": "https://www.google.com/maps/@33.86070,-117.26520,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Truck yard is enclosed by black metal perimeter fencing with a sliding gate at the truck-court entrance (clearly visible in Street View 2026-02 at the NW truck-court driveway).",
+          "guardShack": "No staffed guard-booth structure visible at the gated truck entrance in satellite or Street View - the gate appears remotely controlled.",
+          "remoteGs": "Set true - there is a controlled fenced/gated truck entry but no guard booth, implying kiosk/app/remote check-in. Medium confidence; flagged.",
+          "dockDoors": "Large cross-dock warehouse (~375 m long) with continuous dock-door banks and trailers backed in on BOTH the west and east long faces - 50+ band (730,000 sq ft per Racklify; legacy DSC Logistics site).",
+          "shipRcvSeparate": "Dock banks on two physically separate building faces (east and west).",
+          "dropYard": "Trailer drop yards run along both the west and east truck courts with 120+ parked trailers in rows; an additional trailer overflow lot sits SE of the building - dropArea 50+ band.",
+          "fastLaneOpportunity": "Set false - the truck courts are moderately sized and bounded by streets/fence with limited spare apron width for a dedicated express lane.",
+          "urbanRural": "Inside the dense Perris CA industrial fabric - a contiguous cluster of large distribution warehouses; Urban.",
+          "railServed": "No rail spur visible entering the property.",
+          "entryLanes": "Single gated truck-court entry; lane split not resolvable from imagery.",
+          "scale": "No truck scale clearly visible; left in uncertainFields."
+        }
+      },
+      {
+        "id": "08-cj-logistics-champaign-il",
+        "name": "CJ Logistics - Champaign IL",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "railServed",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 40.1231,
+          "lng": -88.274
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.121,
+            "west": -88.277,
+            "north": 40.1253,
+            "east": -88.271
+          },
+          "truckGate": {
+            "south": 40.12185,
+            "west": -88.2771,
+            "north": 40.1225,
+            "east": -88.2762
+          },
+          "dropYards": [
+            {
+              "south": 40.1212,
+              "west": -88.2766,
+              "north": 40.12215,
+              "east": -88.2725
+            },
+            {
+              "south": 40.1247,
+              "west": -88.2755,
+              "north": 40.1253,
+              "east": -88.272
+            },
+            {
+              "south": 40.1229,
+              "west": -88.272,
+              "north": 40.1247,
+              "east": -88.271
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.1219,
+              "west": -88.2766,
+              "north": 40.1225,
+              "east": -88.2725
+            },
+            {
+              "south": 40.1228,
+              "west": -88.2724,
+              "north": 40.1246,
+              "east": -88.2718
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 260,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 58,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: CJ Logistics - Champaign IL\n- Type: Distribution Center\n- Address: 710 North Mattis Avenue, Champaign, IL 61821\n- Resolved coordinates: 40.123100, -88.274000 (building center)",
+        "mapsUrl": "https://www.google.com/maps/@40.123100,-88.274000,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single wide signalized entrance drive off N Mattis Ave at SW corner. No barrier arm, sliding/swing gate, or pinch-point checkpoint visible in z21 satellite or 2025-08 Street View. Drive is open through a gap in the chain-link perimeter fence; a Walmart monument sign sits at the entrance. Open driveway = no controlled truck gate.",
+          "guardShack": "No guard booth structure beside the entrance lane in satellite or Street View.",
+          "remoteGs": "False because there is no truck gate at all.",
+          "shipRcvSeparate": "Dock banks on two distinct building faces - long south face and the east face - consistent with separate ship/receive operations.",
+          "drivewayLong": "Wide deep paved apron between the road entrance and the dock doors; easily holds 3+ trucks queuing.",
+          "fastLaneOpportunity": "Entrance apron is very wide (multi-lane width) with abundant unused paved width to add an express lane.",
+          "railServed": "A rail line runs along the south property edge and through the adjacent Kraft Heinz complex, but no spur appears to enter the CJ building itself; marked false with low confidence.",
+          "dropYard": "Large dedicated trailer-storage lots full of parked trailers on the south, north, and east sides of the building.",
+          "siteAreaAcres": "Estimated from perimeter box (~480m N-S x ~510m E-W of usable yard); east trailer yard partly shared with neighbor so figure is approximate.",
+          "dockDoorCount": "South face long bank plus east face bank; ~110 doors estimated from regular bay rhythm across two faces - approximate.",
+          "urbanRural": "Inside Champaign IL metro fabric - city streets, residential neighborhoods, and a large industrial cluster surround the site."
+        }
+      },
+      {
+        "id": "09-cj-logistics-glendale-az",
+        "name": "CJ Logistics - Glendale AZ",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "entryLanes",
+          "exitLanes",
+          "dropArea"
+        ],
+        "center": {
+          "lat": 33.5096,
+          "lng": -112.3992
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.5083,
+            "west": -112.402,
+            "north": 33.5112,
+            "east": -112.3965
+          },
+          "truckGate": {
+            "south": 33.5083,
+            "west": -112.4015,
+            "north": 33.5089,
+            "east": -112.4007
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 33.5085,
+              "west": -112.4012,
+              "north": 33.5092,
+              "east": -112.3973
+            }
+          ],
+          "staging": {
+            "south": 33.5085,
+            "west": -112.4012,
+            "north": 33.5092,
+            "east": -112.3973
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 32,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: CJ Logistics - Glendale AZ\n- Type: Distribution Center\n- Address: 5215 North Alsup Road, Glendale, AZ 85309 (LoopNet lists Litchfield\n  Park, AZ 85340 — the site straddles the Glendale/Litchfield Park boundary)\n- Resolved coordinates: 33.509600, -112.399200 (building center)",
+        "mapsUrl": "https://www.google.com/maps/@33.509600,-112.399200,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single truck entrance is an open driveway off the E-W public road (N Alsup Rd / industrial collector) at the SW corner of the property. No barrier arm, sliding/swing gate, guard booth, or checkpoint pinch-point visible in z20 satellite (2026) or 2024 Street View. The dock apron is not enclosed by perimeter fence - open desert site. Open driveway = no controlled truck gate.",
+          "guardShack": "No guard booth structure at the entrance in any view.",
+          "remoteGs": "False because there is no truck gate.",
+          "dockDoors": "Single south-facing dock bank running the length of the building; ~70 doors estimated from regular bay rhythm, low confidence as imagery resolution limited the count.",
+          "dropArea": "Building dock apron held only a few trailers in 2026 imagery; no marked drop-trailer stalls. CJ occupies only half the ~663k sq ft building (~331,686 SF) so the yard is lightly used.",
+          "dropYard": "No dedicated trailer-storage lot - the large dirt lot east of the building is undeveloped vacant land, not a trailer yard.",
+          "drivewayLong": "Wide deep concrete apron between the road entrance and the dock doors; ample queuing room for 3+ trucks.",
+          "fastLaneOpportunity": "Very wide entrance apron and abundant unused paved/dirt width to add an express lane.",
+          "shipRcvSeparate": "All dock doors on a single (south) building face; no separate ship/receive dock clusters.",
+          "urbanRural": "Building sits amid irrigated farmland and open desert on the far western fringe of the Phoenix metro (Glendale/Litchfield Park boundary); judged Rural per the broader open-country setting.",
+          "connectivityIssue": "Site is on the metro fringe but not deeply isolated - within an emerging industrial corridor near Glendale Municipal Airport; cellular coverage likely adequate, marked false (medium confidence).",
+          "siteAreaAcres": "Estimated from the developed parcel (building + south apron + parking, ~320m x ~510m); the large vacant lot to the east is excluded.",
+          "railServed": "No rail spur into the property; no rail line adjacent."
+        }
+      },
+      {
+        "id": "10-cj-logistics-breinigsville-pa",
+        "name": "CJ Logistics - Breinigsville PA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes",
+          "railServed"
+        ],
+        "center": {
+          "lat": 40.5727,
+          "lng": -75.6324
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.5707,
+            "west": -75.6346,
+            "north": 40.5748,
+            "east": -75.63
+          },
+          "truckGate": {
+            "south": 40.571,
+            "west": -75.6346,
+            "north": 40.5716,
+            "east": -75.6339
+          },
+          "dropYards": [
+            {
+              "south": 40.5724,
+              "west": -75.6346,
+              "north": 40.5742,
+              "east": -75.6334
+            },
+            {
+              "south": 40.5738,
+              "west": -75.6312,
+              "north": 40.575,
+              "east": -75.6298
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.5711,
+              "west": -75.6339,
+              "north": 40.5736,
+              "east": -75.6312
+            },
+            {
+              "south": 40.5724,
+              "west": -75.6346,
+              "north": 40.5742,
+              "east": -75.6334
+            }
+          ],
+          "staging": {
+            "south": 40.5724,
+            "west": -75.6348,
+            "north": 40.5743,
+            "east": -75.6332
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 160,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 43,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: CJ Logistics - Breinigsville PA\n- Type: Distribution Center\n- Address: 400 Nestle Way, Breinigsville, PA 18031\n- Resolved coordinates: 40.572700, -75.632400 (building center)",
+        "mapsUrl": "https://www.google.com/maps/@40.572700,-75.632400,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Controlled truck entrance at the SW corner: a guard-booth structure sits on a raised island in the truck driveway, with the lane splitting in/out around it - a clear checkpoint pinch-point. Internal pavement markings read 'ALL TRUCKS' directing truck flow. Confirmed in z20-z21 satellite.",
+          "guardShack": "Small dark-roofed booth structure on a raised island in the truck lane at the SW entrance, with a vehicle parked beside it - classic guard shack footprint. Visible in z19-z20 satellite.",
+          "remoteGs": "False - a staffed guard shack is present.",
+          "shipRcvSeparate": "Dock banks on both long building faces (NW and SE), consistent with separate shipping and receiving clusters.",
+          "drivewayLong": "Deep internal truck circulation with a teardrop-shaped 'ALL TRUCKS' staging loop on the NW side; ample room for 3+ trucks to queue between gate and docks.",
+          "dropYard": "Large trailer-storage areas on both the NW and NE sides packed with parked trailers; legacy DSC Logistics DC operating heavy trailer-pool activity.",
+          "dockDoors": "Continuous dock banks on both long faces with many trailers backed in; ~120 doors estimated - low confidence on exact count from overhead imagery.",
+          "railServed": "A rail line runs along the NW side of the industrial park but appears to serve the adjacent buildings/Nestle plant, not the CJ building; no spur enters the CJ DC. Marked false, low confidence.",
+          "urbanRural": "Site is in the Breinigsville/Lehigh Valley industrial corridor - a large warehouse cluster on the edge of farmland and woods, not within dense metro fabric; judged Rural per the broader edge-of-town setting.",
+          "siteAreaAcres": "Estimated from perimeter box (~455m x ~380m) covering the CJ building and its trailer yards.",
+          "facilityNote": "400 Nestle Way is a legacy DSC Logistics distribution center; DSC was acquired by and is now operated as CJ Logistics America. The white-roof building is the CJ DC; the adjacent red/dark building to the NE is the Nestle plant (separate facility)."
+        }
+      },
+      {
+        "id": "11-cj-logistics-tinley-park-il",
+        "name": "CJ Logistics - Tinley Park IL",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "dockDoors",
+          "trailerParkingCapacity",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 41.5856,
+          "lng": -87.7334
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.5838,
+            "west": -87.7355,
+            "north": 41.5877,
+            "east": -87.731
+          },
+          "truckGate": {
+            "south": 41.5839,
+            "west": -87.7353,
+            "north": 41.5845,
+            "east": -87.7346
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 41.5847,
+              "west": -87.735,
+              "north": 41.587,
+              "east": -87.7342
+            }
+          ],
+          "staging": {
+            "south": 41.5847,
+            "west": -87.735,
+            "north": 41.587,
+            "east": -87.7342
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 65,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 40,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: CJ Logistics - Tinley Park IL\n- Type: Distribution Center\n- Address: 16901 South Cicero Avenue, Tinley Park, IL 60478\n- Resolved coordinates: 41.585600, -87.733400 (building center)",
+        "mapsUrl": "https://www.google.com/maps/@41.585600,-87.733400,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single truck entrance is an open driveway off S Cicero Ave at the SW corner of the property. Pavement turn-arrow markings are present but there is no barrier arm, sliding/swing gate, guard booth, or checkpoint pinch-point in z19-z20 satellite (2026) or 2024 Street View. Open driveway = no controlled truck gate.",
+          "guardShack": "No guard booth structure at the entrance in any view.",
+          "remoteGs": "False - no truck gate exists.",
+          "dockDoors": "Main dock bank on the west face fronting a wide truck court; a second dock band on the south face fronts an employee parking lot. ~65 doors estimated - low confidence, band could be 25-50 or 50+.",
+          "dropArea": "Truck court is nearly empty in 2026 imagery - facility appears lightly utilized; no marked drop-trailer stalls.",
+          "dropYard": "No dedicated trailer-storage lot - the west truck court holds only a few trailers.",
+          "drivewayLong": "Wide deep concrete truck court between the road entrance and the west dock face; ample queuing room for 3+ trucks.",
+          "fastLaneOpportunity": "Very wide entrance and an essentially empty truck court leave abundant room to add an express lane.",
+          "shipRcvSeparate": "Primary truck docks on a single (west) face; the south-face dock band fronts employee parking, not a separate active truck cluster.",
+          "urbanRural": "Site is in Tinley Park, a Chicago southwest-suburb metro area, immediately beside I-80 with residential subdivisions adjacent; judged Urban.",
+          "siteAreaAcres": "Estimated from perimeter box (~435m x ~375m) covering the building, truck court, and surrounding parking.",
+          "railServed": "No rail spur into the property; no rail line adjacent (I-80 borders the SE).",
+          "facilityNote": "Racklify lists the Tinley Park CJ facility at 305,545 sq ft. The 2026 satellite shows a large, modern but lightly-used building with an empty truck court."
+        }
+      },
+      {
+        "id": "12-cj-logistics-fontana-ca",
+        "name": "CJ Logistics - Fontana CA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "remoteGs",
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 34.0493,
+          "lng": -117.5174
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.0479,
+            "west": -117.519,
+            "north": 34.0508,
+            "east": -117.515
+          },
+          "truckGate": {
+            "south": 34.048,
+            "west": -117.5164,
+            "north": 34.0486,
+            "east": -117.5156
+          },
+          "dropYards": [
+            {
+              "south": 34.0483,
+              "west": -117.5163,
+              "north": 34.0504,
+              "east": -117.5151
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.0483,
+              "west": -117.5163,
+              "north": 34.0504,
+              "east": -117.5158
+            },
+            {
+              "south": 34.0481,
+              "west": -117.5185,
+              "north": 34.0486,
+              "east": -117.5174
+            }
+          ],
+          "staging": {
+            "south": 34.0483,
+            "west": -117.5163,
+            "north": 34.0504,
+            "east": -117.5151
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 29,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "0-10",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: CJ Logistics - Fontana CA\n- Type: Distribution Center\n- Address: 13204 Jurupa Avenue, Fontana, CA 92337\n- Resolved coordinates: 34.049300, -117.517400 (building center)",
+        "mapsUrl": "https://www.google.com/maps/@34.049300,-117.517400,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "The large east-side truck yard is enclosed by chain-link fence (confirmed in multiple 2023-2025 Street Views) with a single wide driveway opening off Jurupa Ave at the SE corner - a controlled fenced enclosure with one pinch-point entrance. A sliding gate at the opening is implied by the perimeter fence but could not be positively resolved in imagery; classed truckGate true with medium confidence.",
+          "guardShack": "No guard booth structure visible at the truck-yard entrance in z21 satellite or Street View.",
+          "remoteGs": "True - a fenced/controlled truck-yard entrance with no guard booth implies kiosk/app check-in.",
+          "shipRcvSeparate": "Main dock bank on the east face fronting the truck yard, plus a separate smaller dock area on the SW face - two distinct dock clusters.",
+          "dockDoors": "Dock bank on the east face (~35-40 doors) plus a small SW dock area; ~45 doors total estimated - low confidence.",
+          "dropArea": "East truck yard is large but held only a few trailers in 2026 imagery; no dense marked drop-trailer stalls.",
+          "dropYard": "The fenced east truck yard functions as a dedicated trailer-storage / staging lot.",
+          "drivewayLong": "Deep open paved truck yard between the gate opening and the east dock face; ample queuing room for 3+ trucks.",
+          "fastLaneOpportunity": "Very wide entrance and a largely empty truck yard leave abundant room to add an express lane.",
+          "urbanRural": "Site is in the dense Fontana / Inland Empire warehouse district, surrounded on all sides by large distribution buildings; clearly Urban.",
+          "railServed": "No rail spur; a flood-control channel (not rail) borders the east side of the truck yard.",
+          "siteAreaAcres": "Estimated from perimeter box (~323m x ~369m) covering the building, east truck yard, and south parking.",
+          "facilityNote": "Racklify lists the Fontana CJ facility at 250,430 sq ft. CJ Logistics America operates a 3PL/fulfillment DC here; a B&G Foods FSIS-inspected establishment is associated with CJ Logistics America in Fontana."
+        }
+      },
+      {
+        "id": "13-cj-logistics-gainesville-ga",
+        "name": "CJ Logistics - Gainesville GA (Cold Storage)",
+        "type": "Cold Storage Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dropArea",
+          "trailerParkingCapacity",
+          "connectivityIssue",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 34.38,
+          "lng": -83.7188
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.3782,
+            "west": -83.7205,
+            "north": 34.3814,
+            "east": -83.7168
+          },
+          "truckGate": {
+            "south": 34.3783,
+            "west": -83.7201,
+            "north": 34.3789,
+            "east": -83.7193
+          },
+          "dropYards": [
+            {
+              "south": 34.3789,
+              "west": -83.7178,
+              "north": 34.3796,
+              "east": -83.7169
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.3791,
+              "west": -83.7196,
+              "north": 34.3796,
+              "east": -83.7173
+            }
+          ],
+          "staging": {
+            "south": 34.3791,
+            "west": -83.7196,
+            "north": 34.3796,
+            "east": -83.7173
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 10,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 25,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: CJ Logistics - Gainesville GA (Cold Storage)\n- Type: Cold Storage Distribution Center\n- Address: 3875 Cornelia Highway, Gainesville, GA 30507\n- Resolved coordinates: 34.380000, -83.718800 (building center)",
+        "mapsUrl": "https://www.google.com/maps/@34.380000,-83.718800,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single shared access road winds up from Cornelia Highway (US-23) to the hilltop pad. No barrier arm, sliding/swing gate, guard booth, or checkpoint pinch-point visible along the access road or at the dock-yard entrance in z20-z21 satellite. Open driveway = no controlled truck gate.",
+          "guardShack": "No guard booth structure along the access road or at the building in any view.",
+          "remoteGs": "False - no truck gate exists.",
+          "dockDoors": "Single south-facing dock bank; web sources confirm 38 truck dock doors with a 90-foot-deep dock - matches the 25-50 band.",
+          "dropArea": "Web sources cite a 50+ trailer drop lot; in current (2026) imagery the SE area is graded but not yet fully paved/striped, with only modest trailer presence on the dock apron - classed 10-25 from what is visibly developed, low confidence.",
+          "dropYard": "A dedicated trailer drop lot is being developed SE of the dock apron (graded pad in current imagery); web confirms a 50+ trailer drop lot.",
+          "drivewayLong": "Deep 90-foot dock apron plus the long winding access approach give ample queuing room for 3+ trucks.",
+          "shipRcvSeparate": "All dock doors on a single (south) building face; no separate ship/receive clusters.",
+          "urbanRural": "Facility sits on a graded hilltop pad cut into wooded terrain, isolated from any town, with only Cornelia Highway nearby; clearly Rural.",
+          "connectivityIssue": "Site is rural and wooded but sits directly on a major 4-lane highway (US-23) within the Atlanta-Gainesville corridor; cellular coverage likely adequate, marked false (medium confidence).",
+          "siteAreaAcres": "Estimated from the graded pad perimeter (~312m x ~303m).",
+          "railServed": "No rail spur into the property; facility is near the future Northeast Georgia Inland Port but not currently rail-served.",
+          "facilityNote": "New CJ Logistics America cold storage warehouse, opened Nov 2024; 270,000 sq ft, 30,000 racked pallet positions, 3 storage rooms (finished goods, bakery, proteins), Alta EXPERT refrigeration + QFM blast freezing, USDA export office on-site."
+        }
+      },
+      {
+        "id": "14-cj-logistics-new-century-ks",
+        "name": "CJ Logistics - New Century KS (Cold Storage)",
+        "type": "Cold Storage Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "preGateStaging",
+          "postGateStaging",
+          "drivewayLong",
+          "drivewayShort",
+          "backupSensitive",
+          "entryExitTogether",
+          "entryExitSeparate",
+          "entryLanes",
+          "exitLanes",
+          "fastLaneOpportunity",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "connectivityIssue",
+          "multipleFacilities",
+          "scale",
+          "dropYard",
+          "multiStep",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 38.842,
+          "lng": -94.9015
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.8405,
+            "west": -94.9035,
+            "north": 38.8438,
+            "east": -94.9
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 28,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "NONE",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: CJ Logistics - New Century KS (Cold Storage)\n- Type: Cold Storage Distribution Center\n- Address: 27302 W 159th Street, New Century, KS 66031 (roster gave the\n  cross-streets 159th Street & Lenexa Parkway; exact street number 27302\n  resolved via the Johnson County Post tax-abatement article)\n- Resolved coordinates: 38.842000, -94.901500 (best-effort parcel estimate)",
+        "mapsUrl": "https://www.google.com/maps/@38.842000,-94.901500,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "locationNote": "The CJ Logistics New Century cold storage is a brand-new facility (291,000 sq ft, opened Q3 2025) at 27302 W 159th St, New Century KS, immediately west of / adjacent to the Upfield (Flora) production plant at 27080 159th St. The available 2026 Maxar satellite imagery PREDATES construction - the parcel west of the Upfield plant still shows vacant farmland, so the building, docks, gate, and yard cannot be observed. Coordinates and perimeter are a best-effort estimate of the parcel location based on web research and the Upfield plant adjacency.",
+          "railServed": "TRUE - web-confirmed. Multiple sources describe this as a rail-served cold storage facility with direct rail access; an active railway runs between the CJ building and the Upfield plant, and finished product moves from the Upfield/Flora plant into the cold storage via an above-ground conveyor bridge built over the rail.",
+          "urbanRural": "Rural - the site is in the New Century AirCenter industrial park on the edge of New Century KS, surrounded by farmland and a former airfield; ~4 miles from I-35.",
+          "truckGate": "Cannot be determined - building not visible in available imagery. truckCount defaulted to 1 as a placeholder; classification flag set false and listed uncertain.",
+          "dockDoors": "Cannot be counted - building not visible in available imagery. Web sources do not publish a dock-door count for this facility.",
+          "siteAreaAcres": "Best-effort estimate (~28 acres) for a ~291,000 sq ft cold storage building plus yard on the parcel west of the Upfield plant; not measured from imagery.",
+          "multiStep": "False default - cannot verify. Note the conveyor bridge is a product-transfer link, not a truck checkpoint.",
+          "auditLimitation": "Per deep-audit instructions: facility could not be physically audited because it postdates available satellite imagery. Location resolved via web research; physical-yard classification fields are placeholders flagged as uncertain. Recommend re-audit when newer imagery (post-Q3 2025) becomes available."
+        }
+      },
+      {
+        "id": "15-cj-logistics-mira-loma-ca",
+        "name": "CJ Logistics - Mira Loma CA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 34.0319,
+          "lng": -117.552
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.0297,
+            "west": -117.554,
+            "north": 34.0339,
+            "east": -117.5504
+          },
+          "truckGate": {
+            "south": 34.0309,
+            "west": -117.5544,
+            "north": 34.0317,
+            "east": -117.5536
+          },
+          "dropYards": [
+            {
+              "south": 34.0298,
+              "west": -117.5524,
+              "north": 34.0332,
+              "east": -117.5508
+            },
+            {
+              "south": 34.0306,
+              "west": -117.5538,
+              "north": 34.0316,
+              "east": -117.5527
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.0299,
+              "west": -117.5524,
+              "north": 34.0333,
+              "east": -117.5512
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 38.4,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: CJ Logistics - Mira Loma CA\n- Type: Distribution Center\n- Address: 12350 Philadelphia Avenue, Mira Loma (Eastvale), CA 91752\n- Resolved center: 34.0319, -117.5520",
+        "mapsUrl": "https://www.google.com/maps/@34.0319,-117.5520,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed 12350 Philadelphia Ave, Mira Loma/Eastvale CA - historically DSC Logistics Bldg 3, now CJ Logistics America. Large N-S oriented warehouse running along the I-15 freeway.",
+          "truckGate": "No barrier arm, sliding gate or guard booth visible at any access point in Street View probes from 2025. Truck court connects to the road network at the SW corner via an open paved driveway crossing a rail spur. Typical open multi-tenant industrial-park access. Perimeter is partially fenced (chain-link visible on the south side).",
+          "dropYard": "Large drop yard on the east side between building and freeway, filled with 50+ trailers in marked diagonal stalls; second smaller drop area at the SW corner.",
+          "railServed": "Rail spur curves into the property at the SW corner; mainline rail also runs along the south boundary.",
+          "dockDoorCount": "Estimated ~70 dock doors across the east face and south face from overhead imagery; low-confidence count - imagery shows a regular bay rhythm but exact total is approximate.",
+          "urbanRural": "Dense Inland Empire (Mira Loma/Eastvale) warehouse district - clearly Urban."
+        }
+      },
+      {
+        "id": "16-cj-logistics-romeoville-il-normantown",
+        "name": "CJ Logistics - Romeoville IL (Normantown)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "truckGateCount"
+        ],
+        "center": {
+          "lat": 41.651,
+          "lng": -88.131
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.6498,
+            "west": -88.1338,
+            "north": 41.6524,
+            "east": -88.1282
+          },
+          "truckGate": {
+            "south": 41.6516,
+            "west": -88.1328,
+            "north": 41.6521,
+            "east": -88.132
+          },
+          "dropYards": [
+            {
+              "south": 41.65,
+              "west": -88.1295,
+              "north": 41.6516,
+              "east": -88.1284
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.6515,
+              "west": -88.1332,
+              "north": 41.6521,
+              "east": -88.1286
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 33.3,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: CJ Logistics - Romeoville IL (Normantown)\n- Type: Distribution Center\n- Address: 1401 W Normantown Rd, Romeoville, IL 60446\n- Resolved center: 41.6510, -88.1310",
+        "mapsUrl": "https://www.google.com/maps/@41.6510,-88.1310,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed 1401 W Normantown Rd, Romeoville IL - CJ Logistics America (former DSC Logistics) DC. Single large warehouse off I-55 / Weber Rd, between Normantown Rd (north) and a retention pond (south).",
+          "truckGate": "Property truck court is enclosed by a continuous black ornamental (wrought-iron-style) perimeter fence visible in 2018-2025 Street View. The truck driveway breaks through the fence with a gate opening - classified as a controlled truck entrance.",
+          "guardShack": "No guard booth structure visible at the truck-court driveway opening in any Street View probe; entry appears uncontrolled-by-personnel - hence remoteGs true.",
+          "dockDoors": "Extensive dock doors along the north face facing Normantown Rd, with trailers backed in continuously; estimated ~90 doors - low-confidence overhead count.",
+          "dropYard": "Trailer drop yard with marked stalls on the east side of the building; additional trailers in the truck court.",
+          "truckGateCount": "Likely two driveway openings off Normantown Rd (one near the NW office, one for the truck court / east) - count is approximate.",
+          "urbanRural": "Romeoville is a dense Chicago-area logistics corridor (Will County warehouse cluster) - Urban.",
+          "railServed": "No rail spur into the property visible."
+        }
+      },
+      {
+        "id": "17-cj-logistics-romeoville-il-pinnacle-drive",
+        "name": "CJ Logistics - Romeoville IL (Pinnacle Drive)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 41.6042,
+          "lng": -88.1158
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.6028,
+            "west": -88.1172,
+            "north": 41.6052,
+            "east": -88.114
+          },
+          "truckGate": {
+            "south": 41.6033,
+            "west": -88.1145,
+            "north": 41.6038,
+            "east": -88.1138
+          },
+          "dropYards": [
+            {
+              "south": 41.6029,
+              "west": -88.1168,
+              "north": 41.6034,
+              "east": -88.1144
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.6033,
+              "west": -88.1168,
+              "north": 41.6037,
+              "east": -88.1144
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 17.6,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: CJ Logistics - Romeoville IL (Pinnacle Drive)\n- Type: Distribution Center\n- Address: 500 S Pinnacle Dr, Romeoville, IL 60446\n- Resolved center: 41.6042, -88.1158",
+        "mapsUrl": "https://www.google.com/maps/@41.6042,-88.1158,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed 500 S Pinnacle Dr, Romeoville IL - CJ Logistics America DC, a modern speculative-build warehouse in a Will County industrial park, occupied/operated by CJ Logistics (TruckMap, FDA inspection records, Birdeye reviews all cite this address).",
+          "truckGate": "Truck court on the south side is enclosed by a chain-link perimeter fence; the truck driveway enters from Pinnacle Dr through a fence gap with a sliding gate (visible in 2025 Street View). Controlled truck entrance.",
+          "guardShack": "No guard booth structure visible at the truck-court driveway in 2025 Street View - entry is via fenced gate only, hence remoteGs true.",
+          "dockDoors": "Single dock bank along the south face only; north face is car parking with no docks. Estimated ~55 doors - rear-load layout.",
+          "shipRcvSeparate": "False - all docks on one face (south); no second dock bank.",
+          "dropYard": "Row of trailers in marked drop stalls on the south side of the truck court, separate from the dock apron.",
+          "urbanRural": "Romeoville is a dense Chicago-area logistics corridor - Urban.",
+          "railServed": "No rail spur visible."
+        }
+      },
+      {
+        "id": "18-cj-logistics-dallas-tx-regal-row",
+        "name": "CJ Logistics - Dallas TX (Regal Row)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes",
+          "dropArea"
+        ],
+        "center": {
+          "lat": 32.813,
+          "lng": -96.9013
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.8123,
+            "west": -96.9027,
+            "north": 32.8137,
+            "east": -96.8999
+          },
+          "truckGate": {
+            "south": 32.8132,
+            "west": -96.9003,
+            "north": 32.8136,
+            "east": -96.8999
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 32.8131,
+              "west": -96.9026,
+              "north": 32.8135,
+              "east": -96.9
+            },
+            {
+              "south": 32.8123,
+              "west": -96.9026,
+              "north": 32.8126,
+              "east": -96.9
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 15,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 10.1,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: CJ Logistics - Dallas TX (Regal Row)\n- Type: Distribution Center\n- Address: 151 Regal Row, Dallas, TX 75247\n- Resolved center: 32.8130, -96.9013",
+        "mapsUrl": "https://www.google.com/maps/@32.8130,-96.9013,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed 151 Regal Row, Dallas TX 75247 - Prologis Stemmons Industrial Center Building 11, a 217,290 sq ft 1974-era Class B multi-tenant warehouse. CJ Logistics USA Corp occupies a suite (151 Regal Row Suite 112) per Panjiva buyer report.",
+          "truckGate": "Open multi-tenant industrial park - no perimeter fence, no barrier arm, no checkpoint at any driveway. Truck courts on the north and south faces are accessed via open driveways directly off Regal Row. 2025 Street View shows fully open access with trucks parked along the dock court.",
+          "guardShack": "No guard booth anywhere on the property.",
+          "shipRcvSeparate": "True - this is a cross-dock building with dock banks on BOTH the north face and the south face (separate dock courts).",
+          "dockDoors": "Dock doors on both the north and south faces; estimated ~60 total across both banks - low-confidence overhead count for an older multi-tenant building.",
+          "dropYard": "No dedicated marked drop yard; a modest number of trailers park along the open dock courts. dropArea band 10-25 reflects trailers backed in / parked, but dropYard flag is false (no dedicated trailer-storage lot).",
+          "drivewayShort": "Short open driveways from Regal Row into the dock courts - minimal stacking depth before docks.",
+          "urbanRural": "Dallas Medical District / Stemmons industrial corridor - dense urban, minutes from downtown and Love Field.",
+          "railServed": "No rail spur into the property (an old rail line runs nearby but not into this parcel)."
+        }
+      },
+      {
+        "id": "19-cj-logistics-arlington-tx",
+        "name": "CJ Logistics - Arlington TX",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes",
+          "truckGateCount"
+        ],
+        "center": {
+          "lat": 32.6806,
+          "lng": -97.0794
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.679,
+            "west": -97.0812,
+            "north": 32.6822,
+            "east": -97.0775
+          },
+          "truckGate": {
+            "south": 32.6795,
+            "west": -97.0788,
+            "north": 32.68,
+            "east": -97.0781
+          },
+          "dropYards": [
+            {
+              "south": 32.6792,
+              "west": -97.0788,
+              "north": 32.6818,
+              "east": -97.0779
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.6793,
+              "west": -97.079,
+              "north": 32.6819,
+              "east": -97.0782
+            },
+            {
+              "south": 32.6793,
+              "west": -97.0808,
+              "north": 32.6819,
+              "east": -97.0801
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 30.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: CJ Logistics - Arlington TX\n- Type: Distribution Center\n- Address: 4001 New York Avenue, Arlington, TX 76015\n- Resolved center: 32.6806, -97.0794",
+        "mapsUrl": "https://www.google.com/maps/@32.6806,-97.0794,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed 4001 New York Ave, Arlington TX - CJ Logistics America food-grade DC. Large multi-tenant cross-dock warehouse in a dense DFW industrial park; CJ Logistics occupies a ~50,000 SF portion (per CJ open-space page). Hobby Lobby trailers visible at the docks indicate a major co-tenant.",
+          "truckGate": "Open multi-tenant industrial park. No perimeter fence enclosing the whole site and no barrier arm/checkpoint at any driveway. Truck-court driveways on the east and south connect to internal park roads via open curb cuts (2026-March Street View). Some partial chain-link fencing screens portions of the east dock court but does not gate the entrances.",
+          "guardShack": "No guard booth visible at any driveway.",
+          "remoteGs": "False - no controlled truck gate at all.",
+          "shipRcvSeparate": "True - cross-dock building with dock banks on BOTH the east face and the west face, each fronting its own truck court.",
+          "dockDoors": "Extensive dock doors along both the east and west faces; estimated ~90 doors total - low-confidence overhead count.",
+          "dropYard": "Trailers parked in the wide east truck court, separate from the dock apron - functions as a drop yard though stalls are loosely marked.",
+          "urbanRural": "Arlington TX, dense DFW industrial corridor near the airport/intermodal - Urban.",
+          "railServed": "No rail spur into the property."
+        }
+      },
+      {
+        "id": "20-cj-logistics-secaucus-nj",
+        "name": "CJ Logistics - Secaucus NJ",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 40.7717,
+          "lng": -74.0806
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.7704,
+            "west": -74.0815,
+            "north": 40.7726,
+            "east": -74.0799
+          },
+          "truckGate": {
+            "south": 40.7704,
+            "west": -74.0812,
+            "north": 40.7708,
+            "east": -74.0807
+          },
+          "dropYards": [
+            {
+              "south": 40.7705,
+              "west": -74.0812,
+              "north": 40.7712,
+              "east": -74.08
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.7707,
+              "west": -74.0813,
+              "north": 40.7712,
+              "east": -74.0801
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 19,
+          "trailersVisible": 20,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 8.2,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: CJ Logistics - Secaucus NJ\n- Type: Distribution Center\n- Address: 901 Castle Road, Secaucus, NJ 07094\n- Resolved center: 40.7717, -74.0806",
+        "mapsUrl": "https://www.google.com/maps/@40.7717,-74.0806,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed 901 Castle Rd, Secaucus NJ - CJ Logistics America NJ Secaucus Center. CJ open-space spec sheet: 107,929 SF warehouse, 188,615 SF total property (~4.33 acres), 19 exterior docks, 19 trailer positions, 4 drive-in doors, 20 ft clear height.",
+          "truckGate": "The property is enclosed by a continuous chain-link perimeter fence (visible in 2019 and 2024 Street View). The truck driveway off Castle Rd passes through a fence gate opening - a controlled truck entrance.",
+          "guardShack": "No clear guard booth visible at the driveway in Street View; a small structure sits at the SW corner of the yard but is not positioned as a gate booth. Classified guardShack false / remoteGs true.",
+          "dockDoors": "CJ spec sheet states 19 exterior docks - matches the 10-25 band. Docks on the SW and SE faces of the building.",
+          "siteAreaAcres": "Geofence box (~8.2 acres) captures the full building footprint plus the south truck yard. CJ's cited parcel is ~4.33 acres - the dark-roofed building appears to be multi-tenant and larger than CJ's 107,929 SF lease; site-area figure is therefore approximate.",
+          "dropYard": "South truck yard holds parked trailers and tractors - functions as a drop yard.",
+          "drivewayShort": "Short approach from Castle Rd into a tight infill yard - minimal stacking depth.",
+          "urbanRural": "Secaucus / NJ Meadowlands - extremely dense urban industrial area.",
+          "railServed": "A rail line runs nearby (Meadowlands corridor) but no spur into this property."
+        }
+      },
+      {
+        "id": "22-cj-logistics-middletown-pa",
+        "name": "CJ Logistics - Middletown PA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dockDoors",
+          "dropArea",
+          "trailerParkingCapacity",
+          "shipRcvSeparate",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 40.2082,
+          "lng": -76.7455
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.20705,
+            "west": -76.7478,
+            "north": 40.20935,
+            "east": -76.7433
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 40.2099,
+              "west": -76.7452,
+              "north": 40.21055,
+              "east": -76.743
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.20875,
+              "west": -76.7478,
+              "north": 40.20935,
+              "east": -76.7433
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 24.2,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied no street address (source: Indeed CJ Logistics America\nlocations list) and city-level coords (40.1996, -76.7313) that land in\ndowntown Middletown borough — a residential area with no industrial\nbuildings.\n\nWeb research confirmed CJ Logistics operates a Middletown PA 17057\nfacility. The only large industrial cluster in that ZIP is the **Capital\nLogistics Center (CLC)** — a ~1.3M sq ft, 5-building multi-tenant logistics\npark off Eisenhower Boulevard / Capital Lane / Industrial Lane in Lower\nSwatara Township, immediately adjacent to the Penn State Harrisburg campus.\nBuilding 500 (500 Industrial Lane) and Building 200 (200 Capital Lane) are\ndocumented CLC addresses; CBRE/Cushman & Wakefield list space there.\n\nPublic records do not identify which CLC building CJ Logistics leases.",
+        "mapsUrl": "https://www.google.com/maps/@40.2082,-76.7455,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "No published street address. CJ Logistics is confirmed (Indeed/web) to operate a Middletown PA facility. The only large industrial cluster in Middletown 17057 is the Capital Logistics Center (CLC) off Eisenhower Blvd / Capital Lane in Lower Swatara Township, a ~1.3M sqft, 5-building multi-tenant logistics park next to Penn State Harrisburg. Public records do not identify which CLC building CJ leases. Audited Building C, the largest single building in the park, as the best-fit representative; building-level identity is UNCERTAIN.",
+          "truckGate": "CLC is an open business-park layout: buildings front directly on internal roads, no perimeter fence and no controlled gate observed at the complex or building level (satellite z17-z20 + 2021 Street View on Eisenhower Blvd). truckGate=false.",
+          "guardShack": "No guard booth observed at any building entrance or truck court.",
+          "dockDoors": "Building C is a ~600ft+ cross-dock-style building with dock canopies along its north face (shared truck court with Bldg B) and likely a second dock bank; estimated 50+ total doors. Count is approximate from overhead imagery.",
+          "dropArea": "An organized trailer drop area with ~12-14 trailers sits in the truck court north of Building C. dropYard=true.",
+          "shipRcvSeparate": "Cross-dock-style building likely has docks on opposing faces but ship/rcv split not confirmable; left false.",
+          "urbanRural": "CLC sits within Harrisburg metro on the edge of Penn State Harrisburg campus, surrounded by dense industrial park fabric, campus and suburban development; classified Urban."
+        }
+      },
+      {
+        "id": "23-cj-logistics-fairburn-ga",
+        "name": "CJ Logistics - Fairburn GA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 33.5441,
+          "lng": -84.5873
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.541,
+            "west": -84.5908,
+            "north": 33.5472,
+            "east": -84.5838
+          },
+          "truckGate": {
+            "south": 33.5417,
+            "west": -84.5911,
+            "north": 33.5423,
+            "east": -84.59
+          },
+          "dropYards": [
+            {
+              "south": 33.5448,
+              "west": -84.5852,
+              "north": 33.5468,
+              "east": -84.5838
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.541,
+              "west": -84.59,
+              "north": 33.545,
+              "east": -84.5855
+            },
+            {
+              "south": 33.5435,
+              "west": -84.5903,
+              "north": 33.547,
+              "east": -84.5855
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 110.8,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster supplied address 5000A Bohannon Road, Fairburn GA 30213, but the\ngeocode moved 3088 m, so verification was required. Web research confirms\nCJ Logistics America at 5000 Bohannon Rd via Yellowpages, Waze, TruckMap\nand Chamber of Commerce listings. Property records identify the building\nas Shugart Farms Lake Park Industrial - Building A, a Class-A cross-dock\ndistribution center of ~1,037,400 sq ft completed in 2016, fronting I-85 in\nthe Atlanta-South industrial corridor. Satellite confirmed a large\ncross-dock warehouse at this location; locked center at 33.5441, -84.5873.",
+        "mapsUrl": "https://www.google.com/maps/@33.5441,-84.5873,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "5000A Bohannon Road, Fairburn GA 30213 = Shugart Farms Lake Park Industrial Building A, a Class-A cross-dock DC (~1,037,400 sq ft, built 2016) along I-85 in the Atlanta-South industrial corridor. Roster coords moved 3088m; relocated and confirmed via web (Yellowpages/Waze/TruckMap all place CJ Logistics America at 5000 Bohannon Rd) and satellite.",
+          "truckGate": "Chain-link perimeter fencing runs along Bohannon Road frontage (2023 + 2025 Street View). The truck/auto entrance is a divided driveway with separate in/out lanes around a central island; gates set back within the fence line. truckGate=true.",
+          "guardShack": "No staffed guard booth visible at the road frontage or just inside the gate in Street View or satellite. The structure earlier suspected at the SW truck court resolved to a water tank / utility, not a booth. Treated as remote check-in.",
+          "remoteGs": "Gate present, no guard booth seen -> remote kiosk / call-box check-in inferred. Medium confidence.",
+          "entryExitSeparate": "The road entrance is a divided driveway split around a center island with one-way signage -> separate entry and exit lanes.",
+          "dockDoors": "Cross-dock building with trailers backed in along BOTH long faces (SW face toward I-85 and NE face). For a ~1M sq ft building this implies well over 100 dock doors; estimated ~130. Count is approximate from overhead imagery.",
+          "dropArea": "Extensive trailer storage: ~80-90 trailers visible across the SW and NE truck courts plus a dedicated drop area near the SE end. dropArea 50+, dropYard=true.",
+          "shipRcvSeparate": "Docks on two opposing building faces (SW and NE) function as physically separate dock clusters.",
+          "fastLaneOpportunity": "Wide truck courts and divided gate apron leave ample paved width to add an express bypass lane.",
+          "siteAreaAcres": "~111 acres from the perimeter box; includes the building, truck courts on both faces, trailer storage, ponds and auto parking.",
+          "urbanRural": "Fairburn GA along I-85 is part of the dense Atlanta-South metro industrial fabric (multiple million-sqft DCs adjacent) -> Urban."
+        }
+      },
+      {
+        "id": "24-cj-logistics-mount-juliet-tn",
+        "name": "CJ Logistics - Mount Juliet TN",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dockDoors",
+          "dropArea",
+          "trailerParkingCapacity",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 36.0717,
+          "lng": -86.43315
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 36.0695,
+            "west": -86.435,
+            "north": 36.0739,
+            "east": -86.4313
+          },
+          "truckGate": {
+            "south": 36.06975,
+            "west": -86.4343,
+            "north": 36.07025,
+            "east": -86.4338
+          },
+          "dropYards": [
+            {
+              "south": 36.0715,
+              "west": -86.435,
+              "north": 36.0736,
+              "east": -86.434
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 36.0698,
+              "west": -86.4348,
+              "north": 36.0738,
+              "east": -86.4336
+            },
+            {
+              "south": 36.07,
+              "west": -86.4325,
+              "north": 36.0739,
+              "east": -86.4313
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 50,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 40.3,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster supplied no street address (source: Indeed CJ Logistics America\nlocations list) and city-centroid coords (36.2, -86.5186) that land in\ncentral Mount Juliet, ~17 km from the actual building.\n\nWeb research found a documented DSC Logistics facility at **648\nCouchville Pike, Mount Juliet TN 37122**. DSC Logistics is the legacy\ncompany that CJ Logistics America was formed from (DSC rebranded as CJ\nLogistics), so this is the CJ Logistics Mount Juliet site. Geocoding API\nreturned ROOFTOP precision at 36.0714, -86.4330; satellite confirmed a\nlarge cross-dock distribution building.\n\nCaveat: current directory listings (TruckMap, Yellowpages) show the\nbuilding operating as a Denso/ABB Supply Chain facility (~380,000\nsq ft). Tenancy may have changed since the roster was compiled — the\nphysical yard audit below is of the correct building regardless.",
+        "mapsUrl": "https://www.google.com/maps/@36.0717,-86.43315,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster supplied no street address (Indeed locations list) and city-centroid coords (36.2, -86.5186) ~17km off. Resolved to 648 Couchville Pike, Mount Juliet TN 37122 - the documented DSC Logistics Mt Juliet warehouse. DSC Logistics is the legacy company CJ Logistics America was formed from, so this is the CJ Logistics Mt Juliet facility. Geocoded ROOFTOP to 36.0714, -86.4330; satellite confirmed a large cross-dock DC. Note: directory listings show the building is currently operated as a Denso/ABB Supply Chain facility (~380,000 sq ft) - tenancy may have changed since the roster was built.",
+          "truckGate": "An access road runs ~150m from Couchville Pike up to the building. A small white guard-booth structure with canopy sits at the truck court / building entrance beside the auto parking lot (z20-z21 satellite). truckGate=true.",
+          "guardShack": "Small ~1-vehicle-footprint white booth with dark roof at the building entrance / truck court entry, with a walkway - consistent with a staffed guard shack.",
+          "dockDoors": "Cross-dock building with rows of trailers backed into dock doors with canopies along BOTH long faces (NW and SE). For a ~380,000 sq ft building, total doors estimated ~60 (50+ band). Approximate from overhead imagery.",
+          "dropArea": "Trailer storage and parked trailers across the NW and NE truck courts; ~50 trailers visible. dropArea 25-50, dropYard=true.",
+          "shipRcvSeparate": "Docks on two opposing long faces (NW and SE) form physically separate dock clusters.",
+          "drivewayLong": "Long ~150m access road from Couchville Pike to the gate/building plus deep truck courts -> can hold a 3+ truck queue.",
+          "urbanRural": "Couchville Pike SE of Mount Juliet is a Nashville-metro logistics corridor with several adjacent million-sqft DCs; classified Urban.",
+          "siteAreaAcres": "~40 acres from the perimeter box (building plus truck courts on both faces)."
+        }
+      },
+      {
+        "id": "25-cj-logistics-lebanon-tn",
+        "name": "CJ Logistics - Lebanon TN",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "dropArea",
+          "trailerParkingCapacity",
+          "entryLanes",
+          "exitLanes",
+          "truckGateCount"
+        ],
+        "center": {
+          "lat": 36.131,
+          "lng": -86.4064
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 36.1293,
+            "west": -86.4085,
+            "north": 36.1327,
+            "east": -86.4043
+          },
+          "truckGate": {
+            "south": 36.12955,
+            "west": -86.4079,
+            "north": 36.13,
+            "east": -86.4073
+          },
+          "dropYards": [
+            {
+              "south": 36.1307,
+              "west": -86.4057,
+              "north": 36.1323,
+              "east": -86.4047
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 36.1295,
+              "west": -86.4082,
+              "north": 36.1323,
+              "east": -86.4064
+            },
+            {
+              "south": 36.13,
+              "west": -86.4064,
+              "north": 36.1327,
+              "east": -86.4047
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 65,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 35.3,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster supplied no street address (source: Indeed CJ Logistics America\nlocations list) and city-centroid coords (36.2081, -86.2911) that land in\ndowntown Lebanon, ~9 km from the actual building.\n\nWeb research found a documented DSC Logistics facility at **14840\nCentral Pike, Lebanon TN 37090** (also addressed 14840 Duke Dr), operating\na B&G Foods distribution center. DSC Logistics is the legacy company\nthat CJ Logistics America was formed from, so this is the CJ Logistics\nLebanon site. Geocoding API returned ROOFTOP precision at ~36.130,\n-86.406; satellite confirmed a large cross-dock distribution building in\nthe Lebanon / Mount Juliet I-840 logistics corridor.",
+        "mapsUrl": "https://www.google.com/maps/@36.131,-86.4064,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster supplied no street address (Indeed locations list) and city-centroid coords (36.2081, -86.2911) in downtown Lebanon, ~9km off. Resolved to 14840 Central Pike / 14840 Duke Dr, Lebanon TN 37090 - the documented DSC Logistics Lebanon facility (B&G Foods distribution). DSC Logistics is the legacy company CJ Logistics America was formed from, so this is the CJ Logistics Lebanon site. Geocoded ROOFTOP to ~36.130, -86.406; satellite confirmed a large cross-dock DC in the Lebanon / I-840 logistics corridor.",
+          "truckGate": "z20-z21 satellite clearly shows a gate (cantilever / swing gate) spanning the truck lane at the SW end of the truck court, with perimeter fencing along the court. truckGate=true.",
+          "guardShack": "A small booth structure sits immediately beside the SW gate - a guard shack controlling truck entry.",
+          "dockDoors": "Long cross-dock building (~700ft) with trailers backed into dock doors along both long faces (SW and SE/NE). Estimated ~70 total doors (50+ band). Approximate from overhead imagery.",
+          "dropArea": "Row of ~25-30 parked trailers in the SE/NE truck court drop area, separate from active docks. dropArea 25-50, dropYard=true.",
+          "shipRcvSeparate": "Docks on opposing building faces (SW and NE/SE) form physically separate dock clusters.",
+          "drivewayLong": "Gate set well back from the public road with a long internal approach and a deep truck court that wraps the building -> holds a 3+ truck queue.",
+          "truckGateCount": "One confirmed gate at the SW truck court entry; a second NE access point may exist but no gate confirmed there. Counted as 1.",
+          "urbanRural": "14840 Central Pike sits in the Lebanon / Mount Juliet I-840 logistics corridor (Park 840 Logistics Center cluster) within greater Nashville metro, surrounded by multiple large DCs -> Urban.",
+          "siteAreaAcres": "~35 acres from the perimeter box (building plus wrapping truck courts)."
+        }
+      },
+      {
+        "id": "26-cj-logistics-chester-va",
+        "name": "CJ Logistics - Chester VA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dockDoorCount",
+          "dropArea",
+          "trailerParkingCapacity",
+          "connectivityIssue",
+          "dropYard"
+        ],
+        "center": {
+          "lat": 37.29775,
+          "lng": -77.39925
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 37.2955,
+            "west": -77.4015,
+            "north": 37.3,
+            "east": -77.397
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 37.2957,
+              "west": -77.4011,
+              "north": 37.2992,
+              "east": -77.3988
+            },
+            {
+              "south": 37.296,
+              "west": -77.3995,
+              "north": 37.2995,
+              "east": -77.3973
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 49.3,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster supplied no street address (source: Indeed CJ Logistics America\nlocations list) and city-centroid coords (37.3565, -77.4317) for Chester\nVA, ~7 km from the actual building.\n\nWeb research found a documented DSC Logistics / CJ Logistics America\nfacility at 16000 Walthall Industrial Pkwy, South Chesterfield VA 23834\n(the Richmond-area site; the Chester/Colonial Heights/Chesterfield names\nall refer to this cluster). Manta, Yellowpages, Loc8NearMe and D&B all list\nthis DSC Logistics location with cjlogistics.com as the company site. DSC\nLogistics is CJ Logistics America's legacy brand. Geocoding API returned\nROOFTOP precision at 37.2983, -77.3998; satellite confirmed a large\nmulti-section cross-dock distribution building.",
+        "mapsUrl": "https://www.google.com/maps/@37.29775,-77.39925,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster supplied no street address (Indeed locations list) and city-centroid coords (37.3565, -77.4317) for Chester VA, ~7km off. Resolved to 16000 Walthall Industrial Pkwy, South Chesterfield VA 23834 - the documented DSC Logistics / CJ Logistics America Richmond-area facility (the Manta/Yellowpages/D&B listings give cjlogistics.com as the company site). DSC Logistics is CJ Logistics America's legacy brand. Geocoded ROOFTOP to 37.2983, -77.3998; satellite confirmed a large multi-section cross-dock DC.",
+          "truckGate": "The facility is reached by a winding access road through woods from Walthall Industrial Pkwy. At the building, the truck driveway runs into the truck court as an open approach - no barrier arm, sliding gate, or guard booth observed on the truck route (z19-z21 satellite; only utility transformers near the entry). truckGate=false.",
+          "guardShack": "No staffed booth observed at the building entrance or truck court.",
+          "dockDoors": "Long multi-section warehouse (~6 connected gabled sections, ~700ft) with trailers backed into dock doors along BOTH long faces (SW and NE) - cross-dock. ~60 doors estimated (50+ band). Approximate.",
+          "dropArea": "Trailers visible at docks along both faces; no clearly dedicated separate trailer-storage lot - most trailers are backed into docks. dropArea 10-25, dropYard=false (low confidence).",
+          "shipRcvSeparate": "Docks on opposing building faces (SW and NE) form physically separate dock clusters.",
+          "drivewayLong": "Long winding access road from Walthall Industrial Pkwy plus a deep truck court -> holds a 3+ truck queue.",
+          "railServed": "A rail line runs NW-SE just NE of the building beyond a drainage ditch, but it is a through line - no spur enters the property. railServed=false.",
+          "urbanRural": "Site sits in a wooded edge-of-town industrial area off Walthall Industrial Pkwy in South Chesterfield, scattered rural residential and woodland around it -> Rural per the small-town-industrial tie-breaker.",
+          "connectivityIssue": "Site is somewhat isolated in woods but an industrial park is adjacent - cellular coverage likely adequate; left false (low confidence)."
+        }
+      },
+      {
+        "id": "27-cj-logistics-west-memphis-ar",
+        "name": "CJ Logistics - West Memphis AR",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "dropArea",
+          "trailerParkingCapacity",
+          "connectivityIssue",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 35.18595,
+          "lng": -90.2467
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.1843,
+            "west": -90.2492,
+            "north": 35.1876,
+            "east": -90.2442
+          },
+          "truckGate": {
+            "south": 35.1854,
+            "west": -90.2465,
+            "north": 35.18585,
+            "east": -90.2459
+          },
+          "dropYards": [
+            {
+              "south": 35.1868,
+              "west": -90.249,
+              "north": 35.1876,
+              "east": -90.2445
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.1846,
+              "west": -90.2488,
+              "north": 35.1854,
+              "east": -90.2447
+            },
+            {
+              "south": 35.1867,
+              "west": -90.2488,
+              "north": 35.1874,
+              "east": -90.2447
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 41.3,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster supplied no street address (source: Indeed CJ Logistics America\nlocations list) and city-centroid coords (35.1465, -90.1842), ~7 km from\nthe actual building.\n\nWeb research identified the CJ Logistics America (legacy DSC Logistics)\nWest Memphis DC at 3271 Infinity Parkway, West Memphis AR 72301\n(Yahoo Local and Indeed). Geocoding API returned ROOFTOP precision at\n35.1869, -90.2472; satellite confirmed a large cross-dock distribution\nbuilding standing in open farmland.",
+        "mapsUrl": "https://www.google.com/maps/@35.18595,-90.2467,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster supplied no street address (Indeed locations list) and city-centroid coords (35.1465, -90.1842), ~7km off. Resolved to 3271 Infinity Parkway, West Memphis AR 72301 - the documented CJ Logistics America (legacy DSC Logistics) West Memphis DC (Yahoo Local, Indeed). Geocoded ROOFTOP to 35.1869, -90.2472; satellite confirmed a large cross-dock DC in open farmland.",
+          "truckGate": "z20-z21 satellite shows a controlled truck gate on the south side: a guard booth, gate spanning the lane (sliding/swing), and chain-link perimeter fencing. A semi-truck is visible at the gate. 2013 Street View confirms continuous chain-link perimeter fencing around the property. truckGate=true.",
+          "guardShack": "A small tan booth structure sits beside the gate at the south truck entrance, with vehicles/truck present - a staffed guard shack.",
+          "dockDoors": "Large cross-dock building with trailers backed into dock doors along BOTH long faces (north and south). ~70 doors estimated (50+ band). Approximate from overhead imagery.",
+          "dropArea": "Deep truck courts on the north and south faces with ~60 trailers visible, including trailer storage rows in the north court. dropArea 25-50, dropYard=true.",
+          "shipRcvSeparate": "Docks on opposing north and south building faces form physically separate dock clusters.",
+          "drivewayLong": "Gate set well back from any public road, reached by an access road (Infinity Parkway) winding through farmland, with deep truck courts -> holds a 3+ truck queue.",
+          "urbanRural": "Building sits in open farmland off Infinity Parkway, edge of West Memphis -> Rural.",
+          "connectivityIssue": "Site is in open farmland but within the West Memphis logistics/intermodal area; cellular coverage likely adequate - left false (low confidence).",
+          "railServed": "No rail spur enters the property."
+        }
+      },
+      {
+        "id": "28-cj-logistics-kernersville-nc",
+        "name": "CJ Logistics - Kernersville NC",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "dropArea",
+          "trailerParkingCapacity",
+          "shipRcvSeparate",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 36.1263,
+          "lng": -80.06235
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 36.125,
+            "west": -80.0642,
+            "north": 36.1276,
+            "east": -80.0605
+          },
+          "truckGate": {
+            "south": 36.12615,
+            "west": -80.0611,
+            "north": 36.12665,
+            "east": -80.06055
+          },
+          "dropYards": [
+            {
+              "south": 36.1253,
+              "west": -80.0638,
+              "north": 36.12595,
+              "east": -80.0611
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 36.1256,
+              "west": -80.064,
+              "north": 36.1262,
+              "east": -80.061
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 15,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 23.8,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster supplied no street address (source: Indeed CJ Logistics America\nlocations list) and city-centroid coords (36.1199, -80.0736).\n\nWeb research identified the CJ Logistics America Kernersville facility at\n700 N Main St, Kernersville NC 27284 (Yahoo Local listing for \"CJ\nLogistics America - Kernersville\"; Indeed CJ Logistics America NC\nlocations). Geocoding API returned ROOFTOP precision at 36.1261, -80.0627;\nsatellite confirmed a large industrial / distribution building in the\nKernersville town fabric. (Note: 200 Forum Pkwy, Rural Hall NC is a\nseparate nearby CJ location, not this one.)",
+        "mapsUrl": "https://www.google.com/maps/@36.1263,-80.06235,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster supplied no street address (Indeed locations list) and city-centroid coords (36.1199, -80.0736). Resolved to 700 N Main St, Kernersville NC 27284 - the documented CJ Logistics America Kernersville facility (Yahoo Local listing for CJ Logistics America Kernersville; Indeed NC locations). Geocoded ROOFTOP to 36.1261, -80.0627; satellite confirmed a large industrial / distribution building. (200 Forum Pkwy, Rural Hall NC is a separate nearby CJ location, not this one.)",
+          "truckGate": "2026-03 Street View clearly shows a rolling/cantilever gate across the truck driveway at the SE corner, with a STOP sign and PRIVATE PROPERTY NO TRESPASSING signage, and continuous chain-link perimeter fencing around the property. truckGate=true.",
+          "guardShack": "No staffed guard booth observed directly at the gate lane. A small white peaked-roof building sits set back along the building line near the gate but does not read as a gate-side guard booth - treated as remote/badge-controlled entry. Flagged uncertain.",
+          "remoteGs": "Gate present, no staffed booth at the lane -> remote badge/kiosk check-in inferred. Medium confidence.",
+          "dockDoors": "Older industrial/manufacturing-style building with a row of dock doors along the south face and a truck court with marked stalls. ~35 doors estimated (25-50 band). Approximate.",
+          "dropArea": "Truck court on the south face has marked trailer/auto parking stalls; ~15 trailers visible, capacity ~40. dropArea 10-25, dropYard=true.",
+          "shipRcvSeparate": "Docks observed on a single (south) building face only; no separate second dock bank confirmed -> false.",
+          "drivewayShort": "Gate sits close to the public road with a modest truck court -> short approach, holds 1-2 trucks.",
+          "urbanRural": "700 N Main St sits in the Kernersville town fabric, surrounded by residential, commercial and other industrial buildings -> Urban.",
+          "siteAreaAcres": "~24 acres from the perimeter box (building plus south truck court and north auto parking).",
+          "railServed": "No rail spur into the property."
+        }
+      }
+    ]
+  }
+}

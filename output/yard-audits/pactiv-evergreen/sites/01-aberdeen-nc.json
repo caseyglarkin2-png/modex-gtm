@@ -1,0 +1,63 @@
+{
+  "name": "Pactiv Evergreen - Aberdeen NC",
+  "type": "Manufacturing Plant (Food Merchandising; foam tray/pad converting)",
+  "coords": { "lat": 35.138550, "lng": -79.437750 },
+  "geofences": {
+    "perimeter": { "south": 35.137650, "west": -79.439150, "north": 35.139450, "east": -79.436450 },
+    "truckGate": { "south": 35.138050, "west": -79.438850, "north": 35.138400, "east": -79.438450 },
+    "dropYards": [
+      { "south": 35.138350, "west": -79.437300, "north": 35.139100, "east": -79.436500 }
+    ],
+    "dockAprons": [
+      { "south": 35.138300, "west": -79.438300, "north": 35.138550, "east": -79.437100 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 8,
+    "trailersVisible": 2,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 11.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.138550,-79.437750,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoors", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Driveway runs directly from NC Hwy 5 across a CSX-type rail spur into the property with no barrier arm, sliding gate, or checkpoint. Confirmed via 2024-05 Street View at the driveway entrance.",
+    "guardShack": "No booth or staffed structure at the entrance in any Street View heading.",
+    "drivewayLong": "Driveway crosses the rail line then runs ~120 m before reaching the dock apron - room for a 3+ truck queue.",
+    "dockDoors": "South-facing dock face has a covered loading canopy (~3-4 doors) plus 2-3 additional bays to the east; total estimated 6-10. Partly obscured by canopy in satellite - low confidence, banded 0-10.",
+    "dropArea": "Large open paved yard east of the building can hold trailers but few were parked in imagery; banded 0-10 for trailers actually observed dropped.",
+    "trailerParkingCapacity": "Open paved east yard could hold ~20-25 trailers if striped/used; estimate only.",
+    "railServed": "A rail line runs along the property's south edge parallel to NC Hwy 5, but no spur enters the property and docks are not rail-facing - rail not served.",
+    "urbanRural": "Edge-of-town light-industrial corridor on NC Hwy 5 in Aberdeen, surrounded by pine woods - Rural."
+  },
+  "method": "deep-audit"
+}

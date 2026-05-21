@@ -1,0 +1,56 @@
+{
+  "name": "Toyota Motor Manufacturing Alabama - Huntsville AL",
+  "type": "Engine Plant",
+  "coords": { "lat": 34.8295, "lng": -86.6375 },
+  "geofences": {
+    "perimeter": { "south": 34.8255, "west": -86.6435, "north": 34.8350, "east": -86.6320 },
+    "truckGate": { "south": 34.82720, "west": -86.63680, "north": 34.82830, "east": -86.63540 },
+    "dropYards": [
+      { "south": 34.83000, "west": -86.63730, "north": 34.83270, "east": -86.63480 },
+      { "south": 34.83000, "west": -86.63470, "north": 34.83270, "east": -86.63300 }
+    ],
+    "dockAprons": [
+      { "south": 34.82850, "west": -86.63700, "north": 34.83060, "east": -86.63560 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35,
+    "trailersVisible": 120,
+    "trailerParkingCapacity": 250,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 275.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.8295,-86.6375,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "multiStep", "dockDoorCount"],
+  "fieldNotes": {
+    "truckGate": "Positively confirmed - a controlled truck checkpoint on the truck lane at the SE side of the property (~34.8278, -86.6360): a marked pinch-point lane with crosswalk-style stripes across the truck lane and a checkpoint structure beside it.",
+    "guardShack": "Positively confirmed - a small blue-roofed booth-sized structure (≈1-vehicle footprint) sits directly beside the marked truck-gate lane, with guards' vehicles parked alongside. Classic staffed guard booth.",
+    "drivewayLong": "The gate-to-dock approach runs a long internal road with ample stacking room for 3+ trucks.",
+    "postGateStaging": "Large paved trailer staging/drop yards inside the gate before the dock doors.",
+    "dropYard": "Two large dedicated trailer drop yards on the north side of the plant - a central yard (rows of ~60+ mixed-color trailers) and an east yard (rows of ~50+ trailers), separate from the active dock apron.",
+    "dropArea": "50+ - the combined north drop yards hold well over 100 parked trailers.",
+    "dockDoors": "Dock doors with trailers backed in along the east face of the engine plant building; estimated ~35 doors (25-50 band). Count is approximate.",
+    "fastLaneOpportunity": "Wide truck-gate apron and wide internal roads leave clear room to add an express/bypass lane.",
+    "multipleFacilities": "Single main engine-plant building (plus minor support structures) - not a multi-building campus, so multipleFacilities false.",
+    "urbanRural": "Rural - the plant sits on a greenfield industrial parcel north of Huntsville surrounded by farmland; a large solar farm occupies adjacent land to the east.",
+    "railServed": "No rail spur runs into the property.",
+    "siteAreaAcres": "~275 acres fenced plant footprint (excludes the adjacent solar farm).",
+    "_note": "TMMAL is the Toyota engine plant (V6/V8 engines), distinct from the nearby Mazda-Toyota JV assembly plant (idx 6). The two are separate Huntsville-area Toyota facilities."
+  },
+  "method": "deep-audit"
+}

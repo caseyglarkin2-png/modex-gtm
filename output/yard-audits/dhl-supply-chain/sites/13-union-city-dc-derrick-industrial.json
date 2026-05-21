@@ -1,0 +1,65 @@
+{
+  "name": "DHL Supply Chain - Union City DC (Derrick Industrial) - Union City GA",
+  "type": "Distribution Center",
+  "coords": { "lat": 33.631700, "lng": -84.571800 },
+  "geofences": {
+    "perimeter": { "south": 33.629800, "west": -84.575200, "north": 33.634000, "east": -84.569200 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 33.631100, "west": -84.574000, "north": 33.631600, "east": -84.573300 }
+    ],
+    "dockAprons": [
+      { "south": 33.632000, "west": -84.573200, "north": 33.633400, "east": -84.570400 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 40,
+    "trailerParkingCapacity": 50,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 64.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.631700,-84.571800,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "remoteGs", "dockDoorCount", "trailersVisible"],
+  "fieldNotes": {
+    "operatingStatus": "This is the DHL Supply Chain ASOS fulfillment center on Derrick Industrial Parkway. DHL filed a WARN/state layoff notice in Feb 2025 to CLOSE this facility (600+ employees), with layoffs effective ~April 6, 2025 (AJC, Newnan CEO). The building is physically intact in current (2026) imagery, but operational status as an active DHL site is uncertain/likely wound down. Audited as the physical facility.",
+    "truckGate": "No barrier arm, sliding gate, or guard-booth checkpoint identified in satellite or Street View. The site is accessed by a single SW entry road off Derrick Industrial Parkway leading to the dock yard and employee parking. A perimeter access road with painted lane chevrons rings the building but shows no controlled pinch-point. Flagged uncertain - imagery resolution and tree cover limit confidence.",
+    "guardShack": "No guard booth structure visible at the entrance.",
+    "dockDoors": "Large E-commerce fulfillment center; continuous dock-door bank along the NW face with dock numbers visible to 389+ in Street View. Estimated ~90 doors, banded 50+.",
+    "dropArea": "Only ~6-8 trailers seen in a small drop area at the W end; 0-10 band for trailers parked without tractors in marked stalls.",
+    "dropYard": "Small dedicated trailer-storage cluster (red/orange/white trailers) at the W edge of the parking/yard area.",
+    "fastLaneOpportunity": "Very wide entry road and large open paved yard give ample room to add a bypass/express lane.",
+    "drivewayLong": "Long SW entry road and perimeter drive provide deep queuing space (3+ trucks).",
+    "urbanRural": "Union City / South Fulton, within the Atlanta metro, west of Hartsfield-Jackson airport. Urban.",
+    "siteAreaAcres": "Perimeter box includes the cleared developed footprint; the parcel also has substantial wooded buffer. ~64 acres for the cleared area is an estimate."
+  },
+  "method": "deep-audit"
+}

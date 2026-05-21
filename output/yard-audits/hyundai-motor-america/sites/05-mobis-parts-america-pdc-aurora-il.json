@@ -1,0 +1,51 @@
+{
+  "name": "Mobis Parts America PDC - Aurora IL",
+  "type": "Parts Distribution Center",
+  "coords": { "lat": 41.793500, "lng": -88.357300 },
+  "geofences": {
+    "perimeter": { "south": 41.79140, "west": -88.35870, "north": 41.79520, "east": -88.35530 },
+    "truckGate": { "south": 41.79190, "west": -88.35660, "north": 41.79250, "east": -88.35580 },
+    "dropYards": [
+      { "south": 41.79230, "west": -88.35640, "north": 41.79480, "east": -88.35560 }
+    ],
+    "dockAprons": [
+      { "south": 41.79240, "west": -88.35660, "north": 41.79480, "east": -88.35580 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 34, "trailersVisible": 24, "trailerParkingCapacity": 38,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 11.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.793500,-88.357300,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "site": "Mobis Parts America Central Region PDC at 1705 Sequoia Dr, Aurora IL — confirmed by web research (Yellow Pages, Loc8NearMe, Chamber of Commerce) and by a 'MOBIS' sign visible on the building face in Street View. Standalone warehouse in a suburban Chicago-metro business park along I-88. Roster geocode moved 1385 m; the building was positively re-confirmed.",
+    "truckGate": "false — the property is entered from Sequoia Dr via an OPEN, ungated driveway (Street View 2024-04 shows no barrier arm, no sliding gate, no checkpoint). The dock yard wraps around to the building's east face via this open drive.",
+    "guardShack": "false — no staffed booth anywhere at the entrance or in the yard.",
+    "remoteGs": "false — no gate exists.",
+    "dockDoors": "East face of the Mobis building carries a dock-door bank with trailers backed in; counted ~34, placing it in the 25-50 band. Honest overhead estimate.",
+    "dropArea": "Trailers parked along the east dock yard — modest drop activity, 10-25 stalls. Not a dedicated separate drop-yard lot, so dropYard = false.",
+    "drivewayLong": "The wrap-around dock-yard drive on the east side has room to stack 3+ trucks.",
+    "urbanRural": "Urban — built-up suburban Chicago-metro business park (Aurora) along I-88, wall-to-wall warehouses and office buildings; not farmland or open country.",
+    "multipleFacilities": "false — single standalone Mobis building; neighboring warehouses are separate properties.",
+    "shipRcvSeparate": "false — a single east dock bank handles ship and receive.",
+    "railServed": "false — no rail spur into the property.",
+    "scale": "false — no truck scale observed.",
+    "geofence": "Center 41.7935,-88.3573 on the Mobis building; perimeter box encloses the building, its east dock yard and front parking."
+  },
+  "method": "deep-audit"
+}

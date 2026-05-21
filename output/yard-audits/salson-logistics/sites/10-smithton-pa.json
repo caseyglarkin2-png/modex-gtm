@@ -1,0 +1,49 @@
+{
+  "name": "SalSon Logistics - Smithton PA (Dick's Sporting Goods DC)",
+  "type": "Dedicated-Fleet Terminal at Retail Distribution Center",
+  "coords": { "lat": 40.178800, "lng": -79.748000 },
+  "geofences": {
+    "perimeter": { "south": 40.175800, "west": -79.752200, "north": 40.182400, "east": -79.745200 },
+    "truckGate": { "south": 40.181100, "west": -79.750200, "north": 40.181400, "east": -79.749700 },
+    "dropYards": [
+      { "south": 40.179900, "west": -79.751900, "north": 40.182200, "east": -79.748600 }
+    ],
+    "dockAprons": [
+      { "south": 40.176900, "west": -79.749900, "north": 40.180100, "east": -79.745800 }
+    ],
+    "staging": { "south": 40.180600, "west": -79.750400, "north": 40.181000, "east": -79.749200 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120, "trailersVisible": 320, "trailerParkingCapacity": 450,
+    "truckGateCount": 1, "buildingCount": 3, "siteAreaAcres": 95.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.178800,-79.748000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "dockDoorCount", "scale"],
+  "fieldNotes": {
+    "location": "159 Painter Rd, Smithton PA 15479 is the Dick's Sporting Goods regional distribution center campus (Dick's lists the DC as 200 Painter Rd; 159 is the same complex). SalSon Logistics Inc operates a dedicated-fleet truck-transport terminal at this address — SalSon runs the dedicated trucking out of the Dick's DC. The audited yard is the Dick's DC site SalSon's fleet operates from.",
+    "truckGate": "The DC campus is fully fenced (chain-link visible in Street View along the access road off Painter Rd). The single access road into the campus serves as the controlled truck gate.",
+    "guardShack": "Not directly imaged — Street View does not reach the interior gate. A retail RDC of this scale (700k+ SF, 300+ trailers) virtually always has a staffed gatehouse; assessed TRUE with medium confidence. A small detached building sits near the NW access-road entry that is consistent with a gatehouse/office.",
+    "dockDoors": "Both long building faces are lined with dock doors and trailers backed in across the full length; total well into the 50+ band. Count of ~120 is an honest overhead estimate.",
+    "dropArea": "Enormous marked trailer-parking lot on the north side with several hundred striped stalls full of trailers — clear 50+ drop yard.",
+    "shipRcvSeparate": "Dock banks run along distinct building faces (north face into the trailer lot; south face onto a separate apron) — inbound and outbound run from physically separate clusters.",
+    "multipleFacilities": "Main DC plus at least two secondary buildings (a smaller warehouse/annex to the east and a detached structure to the NW) on the same fenced campus.",
+    "fastLaneOpportunity": "Wide access road and large gate apron with ample paved width to add an express/bypass lane.",
+    "urbanRural": "Surrounded by farmland and woods in rural Westmoreland County PA — Rural.",
+    "scale": "No truck scale clearly visible in imagery; left false but flagged uncertain.",
+    "siteAreaAcres": "~95 acres for the full fenced DC campus including the trailer lot and secondary buildings, derived from the perimeter box."
+  },
+  "method": "deep-audit"
+}

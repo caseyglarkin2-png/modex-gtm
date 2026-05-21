@@ -1,0 +1,46 @@
+{
+  "name": "Frito-Lay - Vancouver WA",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 45.65685, "lng": -122.69180 },
+  "geofences": {
+    "perimeter": { "south": 45.65350, "west": -122.69470, "north": 45.66000, "east": -122.69010 },
+    "truckGate": { "south": 45.65500, "west": -122.69160, "north": 45.65600, "east": -122.69080 },
+    "dropYards": [
+      { "south": 45.65560, "west": -122.69440, "north": 45.65900, "east": -122.69230 }
+    ],
+    "dockAprons": [
+      { "south": 45.65480, "west": -122.69130, "north": 45.65820, "east": -122.69060 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35, "trailersVisible": 90, "trailerParkingCapacity": 110,
+    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 56.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@45.65685,-122.6918,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "buildingCount", "scale"],
+  "fieldNotes": {
+    "location": "Roster point (45.656846,-122.691343, geocode GEOMETRIC_CENTER) landed directly on the plant. Web research confirmed 4808 NW Fruit Valley Rd, Vancouver WA - a ~300,000 sq ft Frito-Lay manufacturing/warehousing/distribution complex (operating since 1972, ~460 employees). Street View confirmed a Lay's-branded trailer at the dock and tall black security fencing around the entire property.",
+    "truckGate": "The entire property is enclosed by tall black ornamental/security fencing seen in every Street View along NW Fruit Valley Rd; the dock apron is fenced off from the public road. Truck access is via a controlled gate, but the specific barrier-arm opening could not be pinpointed in available imagery. Classified truckGate true; flagged uncertain.",
+    "guardShack": "No guard booth resolvable. Given a fully fenced controlled property with an unconfirmed gate structure, classified remoteGs (gate, no visible shack). Flagged uncertain.",
+    "dockDoors": "Long row of trailers backed into dock doors along the building's east face facing NW Fruit Valley Rd; ~25-35 doors estimated - the 25-50 band.",
+    "dropArea": "Large trailer drop yard on the west side of the building - dozens of trailers in rows, 50+ stalls.",
+    "railServed": "Rail spurs are visible running into the property on the NW/west side; a major rail corridor parallels the site to the east. The plant historically receives bulk inbound. railServed true.",
+    "buildingCount": "Main manufacturing-distribution building plus at least one separate structure (red-roofed building / outbuilding to the north); counted as 2.",
+    "urbanRural": "Vancouver WA is part of the Portland-Vancouver metro; the site sits in a dense industrial corridor. Classified Urban."
+  },
+  "method": "deep-audit"
+}

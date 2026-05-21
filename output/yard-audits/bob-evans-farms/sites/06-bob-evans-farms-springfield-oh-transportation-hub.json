@@ -1,0 +1,53 @@
+{
+  "name": "Bob Evans Farms - Springfield OH Transportation Hub",
+  "type": "Distribution / transportation hub (private fleet terminal - Bob Evans Transportation Company LLC, USDOT 911163; ~100 tractor-trailers)",
+  "coords": { "lat": 39.838000, "lng": -83.857200 },
+  "geofences": {
+    "perimeter": { "south": 39.836100, "west": -83.858700, "north": 39.839700, "east": -83.855600 },
+    "truckGate": { "south": 39.838300, "west": -83.856500, "north": 39.838700, "east": -83.855900 },
+    "dropYards": [
+      { "south": 39.837100, "west": -83.858400, "north": 39.838900, "east": -83.857500 },
+      { "south": 39.837100, "west": -83.857000, "north": 39.838900, "east": -83.856100 }
+    ],
+    "dockAprons": [],
+    "staging": { "south": 39.837600, "west": -83.857500, "north": 39.838500, "east": -83.857000 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 4,
+    "trailersVisible": 120,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 26.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.838000,-83.857200,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "imagery": "Only available satellite coverage of this site is heavy snow-cover imagery, which obscures fine ground detail (gate hardware, booths, lane markings). No Street View coverage reaches the property. Overall confidence set to medium.",
+    "truckGate": "This is a private fleet terminal (Bob Evans Transportation Company, USDOT 911163; ~126 tractors, 100+ tractor-trailers, 20,000 deliveries/yr). The terminal is reached via an internal campus road off Green-Field Dr. A controlled truck entrance is the strong norm for a private fleet hub of this scale, but the gate hardware cannot be positively confirmed in the snow imagery -- flagged uncertain.",
+    "guardShack": "No guard booth could be resolved in the snow imagery. Set false (no booth seen) but flagged uncertain.",
+    "remoteGs": "Given a probable gate and no visible booth, remote check-in is the best inference; flagged uncertain.",
+    "dropArea": "Extensive trailer-parking rows on both sides of the central terminal building; well over 50 trailers -- this is the dominant feature of the site.",
+    "dropYard": "The whole site functions as a fleet trailer yard / terminal.",
+    "drivewayLong": "Long internal campus road from Green-Field Dr to the terminal; ample queue depth.",
+    "dockDoorCount": "This is a fleet terminal, not a DC dock building; only a few service/maintenance bays on the central dispatch/shop building (~4). Not a loading-dock operation.",
+    "trailersVisible": "~120 trailers estimated in the parking rows from z17-z19 snow imagery; count approximate.",
+    "trailerParkingCapacity": "Marked rows could hold ~160 trailers; estimate.",
+    "urbanRural": "Rural -- the terminal sits on the edge of Springfield surrounded by farm fields.",
+    "buildingCount": "Central dispatch/maintenance building plus an accessory structure; ~2 (the large SW building is part of the wider distribution-center campus and treated as separate from the fleet terminal proper)."
+  },
+  "method": "deep-audit"
+}

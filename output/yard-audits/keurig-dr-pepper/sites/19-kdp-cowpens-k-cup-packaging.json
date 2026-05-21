@@ -1,0 +1,47 @@
+{
+  "name": "KDP Cowpens K-Cup Packaging - Cowpens SC",
+  "type": "Manufacturing - Coffee/K-Cup Packaging",
+  "coords": { "lat": 35.016998, "lng": -81.804141 },
+  "geofences": {
+    "perimeter": { "south": 35.0161, "west": -81.805238, "north": 35.017896, "east": -81.803044 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0, "trailersVisible": 0, "trailerParkingCapacity": 0,
+    "truckGateCount": 0, "buildingCount": 0, "siteAreaAcres": 0.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.016998,-81.804141,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural", "connectivityIssue",
+    "multipleFacilities", "scale", "dropYard", "multiStep"
+  ],
+  "fieldNotes": {
+    "UNRESOLVED": "Could not locate a KDP K-Cup packaging facility in Cowpens, SC. The roster entry is 'dossier-named' with no street address ('Specific street address not located - flag for deep-audit'). The supplied geocode (35.016998,-81.804141) is the Cowpens town center — a small commercial downtown with no industrial facility.",
+    "research": "Extensive web research found NO documented KDP / Keurig K-Cup or coffee facility in Cowpens. Every KDP coffee-roasting / K-Cup-packaging operation in South Carolina is consistently attributed to the MOORE facility in Spartanburg County (6135 Anderson Mill Rd / Tyger River Industrial Park, Moore SC) — which is roster idx 1, itself described in its source note as the 'dossier-named major K-Cup hub.' SC Governor, SC Dept of Commerce, Food Manufacturing, and KDP careers all place K-Cup roasting/packaging in Moore, not Cowpens.",
+    "likelyMisattribution": "This entry (idx 19) appears to be a duplicate / misattribution of the Moore K-Cup hub (idx 1). Cowpens is a very small town (total manufacturing employment ~222 across all employers per Data USA) — implausible for a significant standalone KDP K-Cup packaging plant. No KDP signage or branding found on any Cowpens industrial building.",
+    "cowpensIndustry": "Cowpens does host industrial sites (Upstate Corporate Park / Spartanburg East Logistics Park on Mt Olive Rd; Bericap closures plant at 1300 Mt Olive Rd; a Dollar Tree SE distribution center) but none is a KDP facility.",
+    "recommendation": "Treat idx 19 as a roster error / unresolved. If KDP does lease undocumented packaging space inside a Cowpens warehouse, it could not be confirmed from imagery or public sources — human verification required.",
+    "geofence": "perimeter is a nominal placeholder box around the Cowpens town-center geocode; it does NOT represent an identified facility. yardMetrics are zeroed and all classification fields are uncertain.",
+    "urbanRural": "Cowpens is a small rural town in upstate SC — Rural — but this is moot given the facility is unresolved."
+  },
+  "method": "deep-audit"
+}

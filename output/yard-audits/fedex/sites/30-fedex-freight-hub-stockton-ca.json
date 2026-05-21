@@ -1,0 +1,51 @@
+{
+  "name": "FedEx Freight Hub - Stockton CA",
+  "type": "Freight LTL hub service center (Northern California)",
+  "coords": { "lat": 37.9118, "lng": -121.2235 },
+  "geofences": {
+    "perimeter": { "south": 37.9098, "west": -121.2258, "north": 37.9135, "east": -121.2208 },
+    "truckGate": { "south": 37.9104, "west": -121.2252, "north": 37.9109, "east": -121.2244 },
+    "dropYards": [
+      { "south": 37.9110, "west": -121.2250, "north": 37.9132, "east": -121.2212 }
+    ],
+    "dockAprons": [
+      { "south": 37.9112, "west": -121.2248, "north": 37.9124, "east": -121.2222 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90, "trailersVisible": 130, "trailerParkingCapacity": 280,
+    "truckGateCount": 1, "buildingCount": 4, "siteAreaAcres": 40.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.9118,-121.2235,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "multipleFacilities", "postGateStaging", "siteAreaAcres", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "location": "Roster address '4444 S B St, Stockton CA 95206' and coordinates (37.908392, -121.244053, RANGE_INTERPOLATED) resolve to a modern big-box distribution-warehouse park in south Stockton - NOT an LTL freight hub. The FedEx Freight STK service center is consistently listed (FedEx Freight STK page, Waze, Yellow Pages, Indeed) at 4520 S Highway 99 / 4520 CA-99, Stockton, CA 95215. Geocoding places that address at ~37.9118, -121.2235, where satellite reveals an LTL cross-dock terminal complex along the SR-99 corridor (long narrow cross-dock buildings with trailers backed in on both faces, dock aprons, dense rows of pup trailers).",
+    "facilityIdentity": "The cross-dock terminal complex at the resolved location is unmistakably an LTL truck terminal. Street View (2026-03) shows SAIA branding at the main cross-dock's SW frontage, indicating the complex hosts SAIA LTL Freight; the FedEx Freight STK terminal (address 4520 S Hwy 99) is either co-located in this multi-carrier terminal complex or occupies an adjacent cross-dock within it. Facility type and corridor location are confident; the exact FedEx building footprint within the complex could not be confirmed with FedEx signage - medium confidence.",
+    "truckGate": "LTL cross-dock terminal yards in this complex are perimeter-fenced with controlled gates (a metal security fence and gate visible in Street View along S Highway 99 frontage road).",
+    "guardShack": "No staffed guard booth identified; LTL service centers of this size typically use remote/kiosk gate check-in. Classified remoteGs true, low-medium confidence.",
+    "dockDoors": "Long narrow cross-dock building(s) with a dense regular rhythm of dock doors on both long faces, trailers backed in; estimate ~90+ doors -> 50+ band. Overhead estimate.",
+    "dropArea": "Extensive paved trailer parking with dense rows of pup trailers without tractors; firmly 50+.",
+    "dropYard": "Dedicated trailer-storage yard flanks the cross-dock buildings.",
+    "drivewayLong": "Deep paved aprons and yard between the gate and docks give room for a 3+ truck queue.",
+    "fastLaneOpportunity": "Wide paved terminal apron gives physical room to add a bypass/express lane.",
+    "multipleFacilities": "The S Highway 99 terminal corridor hosts multiple LTL cross-dock buildings/operations (SAIA confirmed; FedEx Freight STK address geocodes into the same complex).",
+    "urbanRural": "Within the Stockton metro industrial fabric along the SR-99 corridor; classified Urban.",
+    "railServed": "No rail spur enters the terminal yard; classified false.",
+    "siteAreaAcres": "Derived from the perimeter box around the terminal complex; FedEx Freight's portion is a subset."
+  },
+  "method": "deep-audit"
+}

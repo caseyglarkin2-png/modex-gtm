@@ -1,0 +1,2271 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:34:00.845Z",
+  "account": {
+    "slug": "caterpillar",
+    "displayName": "Caterpillar",
+    "archetype": "manufacturer",
+    "siteCount": 21,
+    "coverageNote": {
+      "auditedCount": 21,
+      "estimatedFootprint": null,
+      "droppedStubCount": 0,
+      "capHit": false,
+      "note": "Audited all 21 identifiable facilities."
+    }
+  },
+  "research": {
+    "facility_count": 20,
+    "audited_facilities": 20,
+    "source": "yard-audit",
+    "confidence": "verified",
+    "caveats": [
+      "Caterpillar - East Peoria IL Plant: audit note mentions 'closed'",
+      "Caterpillar - Mapleton IL Foundry: audit note mentions 'closed'",
+      "Caterpillar - Sanford NC Plant: audit note mentions 'closed'",
+      "Caterpillar - Waco TX Distribution Center: audit note mentions 'closed'",
+      "Caterpillar - York PA Distribution Center: audit note mentions 'closed'"
+    ]
+  },
+  "network": {
+    "bbox": [
+      -118.9425,
+      28.8145,
+      -76.682,
+      47.599
+    ],
+    "archetypeMix": {
+      "#9": 14,
+      "#6": 4,
+      "#7": 2,
+      "#3": 1
+    },
+    "totals": {
+      "dockDoors": 628,
+      "trailerCapacity": 1340,
+      "gates": 28,
+      "railServed": 10,
+      "acres": 3457
+    },
+    "sites": [
+      {
+        "id": "01-decatur-il-plant",
+        "name": "Caterpillar - Decatur IL Plant",
+        "type": "Manufacturing plant (mining trucks, large wheel loaders, motor graders)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "multiStep",
+          "truckGate"
+        ],
+        "center": {
+          "lat": 39.8788,
+          "lng": -88.91
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.8725,
+            "west": -88.918,
+            "north": 39.8862,
+            "east": -88.902
+          },
+          "truckGate": {
+            "south": 39.8744,
+            "west": -88.9162,
+            "north": 39.8752,
+            "east": -88.9152
+          },
+          "dropYards": [
+            {
+              "south": 39.883,
+              "west": -88.9162,
+              "north": 39.8845,
+              "east": -88.9135
+            },
+            {
+              "south": 39.8826,
+              "west": -88.9105,
+              "north": 39.8842,
+              "east": -88.9088
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.882,
+              "west": -88.9112,
+              "north": 39.8832,
+              "east": -88.9092
+            }
+          ],
+          "staging": {
+            "south": 39.8755,
+            "west": -88.9152,
+            "north": 39.8775,
+            "east": -88.9128
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 38,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 2,
+          "buildingCount": 9,
+          "siteAreaAcres": 360,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster coordinates `39.856341, -88.916917` landed on the Norfolk Southern / city rail yard ~2.3 km SSW of the actual plant — not the facility.\n- Resolved the true plant to `39.8788, -88.9100`, the large Caterpillar manufacturing campus at N 27th St & E Pershing Rd, Decatur IL (TruckMap lists it as 3000 N 27th St; the Building DE-D address is 3125 N 27th St).\n- Confirmation: satellite shows a 3M+ sq ft multi-building heavy-equipment plant with a paved test-track oval, rows of finished mining trucks staged outside, and rail spurs into the site — consistent with the 797F mining-truck / large wheel loader / motor grader plant in the dossier.",
+        "mapsUrl": "https://www.google.com/maps/@39.8788,-88.9100,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster point (39.8563,-88.9169) landed on a rail yard ~2.3 km SSW. Resolved the true plant to 39.8788,-88.9100 - the large multi-building Caterpillar manufacturing campus at N 27th St & E Pershing Rd, confirmed by web (TruckMap 3000 N 27th St) and satellite (test-track oval, mining-truck staging rows, ~3M sq ft footprint).",
+          "truckGate": "Continuous slatted chain-link perimeter fence around the whole campus confirmed in Street View on the west road. Truck access via a wide entrance driveway at the SW corner (~39.8748,-88.9158) feeding a long internal road; gate/checkpoint is set deep inside the property, not visible from the public road.",
+          "guardShack": "No guard booth visible from the public road - the checkpoint sits well inside the fence line. Classified remoteGs given a controlled fenced campus with an internal/deep checkpoint and no road-visible booth; low confidence.",
+          "drivewayLong": "SW entrance driveway runs several hundred feet from N 27th St to the plant interior - ample queue depth for 3+ trucks.",
+          "dockDoors": "~22 dock doors estimated across the central building's E face and the north building; many obscured by trailers and by laydown material.",
+          "dropArea": "North drop yard holds 30+ trailers (multiple carriers - Meijer, MHS, McElroy visible in Street View); plus a second trailer cluster near the east dock face.",
+          "railServed": "Extensive rail yard along the south boundary with multiple spurs running into the property and material/laydown alongside.",
+          "multipleFacilities": "Campus of 9+ distinct large manufacturing/assembly buildings plus a test-track oval.",
+          "scale": "No truck scale clearly identified; the deep internal layout could contain one not resolvable from imagery.",
+          "siteAreaAcres": "~360 acres for the fenced campus including staging and rail - approximate from the perimeter box.",
+          "urbanRural": "Edge-of-Decatur industrial setting bordered by farmland east and a residential subdivision north - classified Rural per the small-town/edge-of-town rule."
+        }
+      },
+      {
+        "id": "02-east-peoria-il-plant",
+        "name": "Caterpillar - East Peoria IL Plant",
+        "type": "Manufacturing plant (track-type tractors, components)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "truckGate",
+          "entryLanes",
+          "exitLanes",
+          "dockDoors",
+          "scale",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 40.673,
+          "lng": -89.5955
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.667,
+            "west": -89.6025,
+            "north": 40.6775,
+            "east": -89.588
+          },
+          "truckGate": {
+            "south": 40.673,
+            "west": -89.592,
+            "north": 40.674,
+            "east": -89.5905
+          },
+          "dropYards": [
+            {
+              "south": 40.6745,
+              "west": -89.5985,
+              "north": 40.6765,
+              "east": -89.5895
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.6735,
+              "west": -89.5925,
+              "north": 40.6755,
+              "east": -89.5905
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 2,
+          "buildingCount": 6,
+          "siteAreaAcres": 230,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster geocode `40.673305, -89.598969` (GEOMETRIC_CENTER, moved 2.4 km) lands inside the historic Caterpillar East Peoria works on the east bank of the Illinois River — close enough.\n- Locked plant center at `40.6730, -89.5955`.\n- Note: the roster address \"100 NE Adams St\" is actually the Caterpillar downtown Peoria HQ / Visitors Center across the river, not the manufacturing plant. The East Peoria works is the correct manufacturing campus.\n- Confirmation: satellite shows a sprawling old multi-building industrial plant with rooftop monitor skylights (classic machine-shop / assembly architecture), large Cat component laydown yards (track-type tractor undercarriage parts / castings), and an adjacent rail yard with spurs.",
+        "mapsUrl": "https://www.google.com/maps/@40.6730,-89.5955,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster geocode (40.6733,-89.5990) moved 2.4 km (GEOMETRIC_CENTER) but landed inside the historic Caterpillar East Peoria works on the east bank of the Illinois River. Confirmed: large old multi-building industrial plant with rooftop monitor skylights, Cat component (undercarriage/casting) laydown yards, and an adjacent rail yard with spurs. Address 100 NE Adams St is actually the Caterpillar downtown HQ/Visitors Center across the river; the East Peoria works is the manufacturing campus.",
+          "truckGate": "Whole campus enclosed by black metal and chain-link perimeter fencing (confirmed in multiple Street View panos). Truck access is via the east access road through fenced openings into the building/laydown areas; no open uncontrolled driveway. Building face entrance E1 visible from the road.",
+          "guardShack": "No standalone guard booth visible from public roads - gates are at building/fence openings typical of an old urban works. Classified remoteGs (controlled gate, no road-visible booth); low confidence.",
+          "drivewayShort": "Old urban plant - building faces sit close to the access road; short approach, little internal stacking.",
+          "backupSensitive": "Plant fronts public city streets with residential homes directly opposite on the south; a truck queue at a gate would sit on a public street.",
+          "dropArea": "Trailers and a large component/casting laydown yard north of the historic building; trailer drop capacity ~30.",
+          "railServed": "Large rail yard immediately south/east of the plant with spurs running into the property; the plant is historically rail-served.",
+          "multipleFacilities": "Continuous campus of 6+ large connected/adjacent manufacturing buildings (historic East Peoria works).",
+          "dockDoors": "~20 dock doors estimated; many obscured by the old building's continuous wall faces - low confidence.",
+          "urbanRural": "Dense urban riverfront industrial setting in East Peoria with residential streets abutting the plant.",
+          "siteAreaAcres": "~230 acres for the fenced East Peoria works including laydown yards - approximate."
+        }
+      },
+      {
+        "id": "03-mapleton-il-foundry",
+        "name": "Caterpillar - Mapleton IL Foundry",
+        "type": "Manufacturing plant (foundry - engine castings for 3500/3600/C175)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "dockDoors",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 40.5597,
+          "lng": -89.7475
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.553,
+            "west": -89.7515,
+            "north": 40.564,
+            "east": -89.74
+          },
+          "truckGate": {
+            "south": 40.5602,
+            "west": -89.7468,
+            "north": 40.5612,
+            "east": -89.7455
+          },
+          "dropYards": [
+            {
+              "south": 40.5598,
+              "west": -89.7465,
+              "north": 40.5612,
+              "east": -89.7448
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.5595,
+              "west": -89.747,
+              "north": 40.561,
+              "east": -89.7452
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 200,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster geocode `40.559538, -89.748172` (ROOFTOP) lands directly on the Caterpillar Mapleton Foundry.\n- Locked center at `40.5597, -89.7475`.\n- Confirmation: satellite shows a large heavy-industrial foundry complex — rust-colored foundry building roofs, sand/material-handling structures to the SW, employee parking lots, and an on-site wastewater treatment plant to the SE. Consistent with the gray-iron engine-casting foundry on US-24 (8826 W US-24). Web (Macrae's, D&B, Heavy Equipment Directory) confirms a high-production gray-iron casting foundry, ~800 employees, operating since 1978.",
+        "mapsUrl": "https://www.google.com/maps/@40.5597,-89.7475,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster geocode (40.5595,-89.7482) is ROOFTOP and lands on the Caterpillar Mapleton Foundry. Confirmed: large heavy-industrial foundry complex with rust-colored foundry building roofs, sand/material handling structures to the SW, employee parking, and a wastewater treatment plant to the SE - consistent with the gray-iron casting foundry on US-24 (8826 W US-24).",
+          "truckGate": "Whole complex enclosed by chain-link perimeter fencing (confirmed in Street View on the south road). Truck access is via the internal access road that connects to US-24; the gate/checkpoint is set inside the property along the entrance drive.",
+          "guardShack": "No standalone guard booth resolvable from public roads - US-24 Street View does not reach the gate. Classified remoteGs (controlled fenced foundry, internal checkpoint, no road-visible booth); low confidence.",
+          "drivewayLong": "The entrance access road off US-24 runs a long distance before reaching the building/dock area - ample queue depth.",
+          "dropArea": "Trailers parked along the foundry's east building face plus material laydown; trailer drop capacity ~30.",
+          "railServed": "A rail line/spur runs along the SW edge with rail cars visible - the foundry is rail-served (sand/raw-material delivery; ~500 tons sand/day).",
+          "scale": "A foundry handling ~500 tons of sand/day inbound almost certainly has a truck scale; a scale-like pad is suggested near the sand-handling area on the SW. Medium confidence.",
+          "multipleFacilities": "Campus of 6+ large connected/adjacent foundry, finishing and material-handling buildings.",
+          "dockDoors": "~14 dock doors estimated along the east building face; many obscured by trailers and structures - low confidence.",
+          "urbanRural": "Rural - the foundry sits among farmland and woods along US-24 by the Illinois River, well outside any town.",
+          "siteAreaAcres": "~200 acres for the fenced foundry complex including material yards - approximate."
+        }
+      },
+      {
+        "id": "04-lafayette-in-large-engine-center",
+        "name": "Caterpillar - Lafayette IN Large Engine Center",
+        "type": "Manufacturing plant (large engines; $725M campus expansion underway)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "truckGate",
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "dockDoors",
+          "railServed",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 40.4138,
+          "lng": -86.846
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.4095,
+            "west": -86.8512,
+            "north": 40.4178,
+            "east": -86.842
+          },
+          "truckGate": {
+            "south": 40.4118,
+            "west": -86.847,
+            "north": 40.4128,
+            "east": -86.8458
+          },
+          "dropYards": [
+            {
+              "south": 40.4118,
+              "west": -86.8475,
+              "north": 40.4135,
+              "east": -86.8452
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.4125,
+              "west": -86.848,
+              "north": 40.4138,
+              "east": -86.8455
+            }
+          ],
+          "staging": {
+            "south": 40.4112,
+            "west": -86.847,
+            "north": 40.4122,
+            "east": -86.845
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 24,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 230,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster geocode `40.416451, -86.844274` (ROOFTOP) lands on the Caterpillar Large Engine Center campus in south Lafayette.\n- Locked the 1.6M sq ft main building center at `40.4138, -86.8460`.\n- Confirmation: Street View from South St shows the long CATERPILLAR-branded engine plant building; web (Chamber of Commerce, Waze \"Building LFT-L\", Caterpillar press release) confirms the 1.6M sq ft Large Engine Center, ~1,900 employees, producing Cat 3500/3600/C175 engines, with a $725M expansion underway.",
+        "mapsUrl": "https://www.google.com/maps/@40.4138,-86.8460,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster geocode (40.4165,-86.8443) is ROOFTOP and lands at the Caterpillar Large Engine Center campus. Locked the 1.6M sq ft main building center at 40.4138,-86.8460. Confirmed: long Caterpillar-branded engine plant building seen from South St in Street View, plus a separate customer/training building to the SE, employee parking, tank farms and a substation on the SW.",
+          "truckGate": "Truck/dock operations are on the south/SE face of the building - a large paved truck yard with canopied dock aprons, trailers, and extensive material laydown reached by a long internal road. The South St (north) frontage is open office/employee access with no fence; the truck area is set deep on internal roads, implying a controlled service gate inside the campus.",
+          "guardShack": "No road-visible guard booth - the office frontage is open and the truck gate is internal. Classified remoteGs (controlled service gate, no road-visible booth) at medium-low confidence.",
+          "drivewayLong": "The truck approach runs a long internal road from South St to the south dock yard - ample queue depth.",
+          "fastLaneOpportunity": "The south truck yard is a very wide paved apron with abundant unused width - room to add a bypass/express lane.",
+          "dropArea": "Trailers parked across the wide south truck yard plus drop space alongside the dock canopies; capacity ~45.",
+          "railServed": "A rail line runs diagonally along the SE edge of the property; a spur appears to reach the south dock/laydown area - classified rail-served at medium confidence.",
+          "multipleFacilities": "Main 1.6M sq ft engine plant plus a separate SE building (customer/training center) on the same campus; the $725M expansion is adding more.",
+          "dockDoors": "~22 dock doors estimated under canopied aprons on the south face; canopies obscure exact count - low confidence.",
+          "urbanRural": "Urban - the LEC sits within Lafayette's developed south-side commercial/industrial fabric with retail and subdivisions adjacent.",
+          "siteAreaAcres": "~230 acres for the campus including parking, truck yard and laydown - approximate.",
+          "expansion": "A $725M expansion was underway as of the reporting; imagery may predate completed expansion buildings."
+        }
+      },
+      {
+        "id": "05-sanford-nc-plant",
+        "name": "Caterpillar - Sanford NC Plant",
+        "type": "Manufacturing plant (BCP - skid-steer, multi-terrain, compact track loaders)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "truckGate",
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "railServed",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 35.5455,
+          "lng": -79.1722
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.5408,
+            "west": -79.1772,
+            "north": 35.5512,
+            "east": -79.1682
+          },
+          "truckGate": {
+            "south": 35.5448,
+            "west": -79.176,
+            "north": 35.5458,
+            "east": -79.1748
+          },
+          "dropYards": [
+            {
+              "south": 35.5448,
+              "west": -79.1748,
+              "north": 35.5462,
+              "east": -79.1725
+            },
+            {
+              "south": 35.5468,
+              "west": -79.1712,
+              "north": 35.5482,
+              "east": -79.1692
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.5448,
+              "west": -79.1745,
+              "north": 35.5468,
+              "east": -79.173
+            }
+          ],
+          "staging": {
+            "south": 35.544,
+            "west": -79.1755,
+            "north": 35.545,
+            "east": -79.1742
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 32,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 2,
+          "buildingCount": 6,
+          "siteAreaAcres": 220,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster geocode `35.544311, -79.171341` (ROOFTOP) lands directly on the Caterpillar Sanford manufacturing campus in Central Carolina Enterprise Park, Lee County NC.\n- The roster's `movedMeters: 6036` is misleading — the ROOFTOP point itself is accurate; it sits on a large multi-building manufacturing complex.\n- Locked center at `35.5455, -79.1722`.\n- Confirmation: satellite shows a large multi-building manufacturing complex — long dock-door bank, trailer parking, material laydown yards, employee parking, slatted perimeter fence. Web (Sanford Area Growth Alliance, WRAL, CBS17) confirms the Caterpillar BCP plant (skid-steer / multi-terrain / compact track loaders) at 5000 Womack Rd, ~25 years in Sanford, grown to 5 buildings, 600 jobs being added.",
+        "mapsUrl": "https://www.google.com/maps/@35.5455,-79.1722,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster geocode (35.5443,-79.1713) is ROOFTOP and - despite the 6 km movedMeters figure - lands directly on the Caterpillar Sanford manufacturing campus in Central Carolina Enterprise Park. Confirmed: large multi-building manufacturing complex with a long row of dock doors, trailer parking, material laydown yards, employee parking and a slatted perimeter fence. Consistent with the BCP skid-steer / multi-terrain / compact track loader plant (5000 Womack Rd; ~25 years in Sanford, 600 jobs being added).",
+          "truckGate": "Whole campus enclosed by a slatted privacy/chain-link perimeter fence (confirmed in Street View on the SW road). Truck access via internal entrance roads off the enterprise-park roads; controlled gates set inside the property.",
+          "guardShack": "No standalone guard booth resolvable from public roads - the gates sit inside the fenced campus. Classified remoteGs (controlled fenced campus, internal checkpoint, no road-visible booth); low confidence.",
+          "drivewayLong": "Internal entrance roads run a long distance from the public road to the dock/yard areas - ample queue depth.",
+          "fastLaneOpportunity": "Wide paved truck aprons along the west dock face with unused width - room for a bypass/express lane.",
+          "dockDoors": "~32 dock doors counted along the long west face of the main building (regular dock rhythm with trailers backed in); band 25-50.",
+          "dropArea": "Trailer parking along the west dock apron plus a second trailer/material staging area on the NE - capacity ~55.",
+          "shipRcvSeparate": "Dock activity is split between the long west-face dock bank and a separate NE building/laydown area, suggesting separate ship/receive clusters.",
+          "railServed": "A rail line runs through/alongside the campus (visible on the west and at the conveyor-bridge crossing); likely a serving spur - rail-served at medium confidence.",
+          "multipleFacilities": "Campus of 6+ large connected/adjacent manufacturing and logistics buildings; Caterpillar has grown to 5 buildings in Lee County.",
+          "scale": "No truck scale clearly identified.",
+          "urbanRural": "Rural - Central Carolina Enterprise Park sits among woods and farmland north of Sanford, well outside any dense metro fabric.",
+          "siteAreaAcres": "~220 acres for the fenced campus including parking, dock yards and laydown - approximate."
+        }
+      },
+      {
+        "id": "06-clayton-nc-plant",
+        "name": "Caterpillar - Clayton NC Plant",
+        "type": "Manufacturing plant (BCP - small wheel loader assembly)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "truckGate",
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "dockDoors",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 35.6405,
+          "lng": -78.4248
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.6372,
+            "west": -78.4282,
+            "north": 35.6435,
+            "east": -78.4205
+          },
+          "truckGate": {
+            "south": 35.6398,
+            "west": -78.4222,
+            "north": 35.6408,
+            "east": -78.421
+          },
+          "dropYards": [
+            {
+              "south": 35.6412,
+              "west": -78.4248,
+              "north": 35.6432,
+              "east": -78.4222
+            },
+            {
+              "south": 35.6388,
+              "west": -78.424,
+              "north": 35.6402,
+              "east": -78.4218
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.6398,
+              "west": -78.4248,
+              "north": 35.6412,
+              "east": -78.4228
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 22,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 130,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster geocode `35.640458, -78.424314` (ROOFTOP) lands on the Caterpillar Clayton plant.\n- Locked the main building center at `35.6405, -78.4248`.\n- Confirmation: satellite shows a large single manufacturing building with rows of finished yellow Caterpillar small wheel loaders staged in the yard — directly confirms the BCP small-wheel-loader assembly plant at 954 NC-42 E. Web (Clayton Chamber, Waze, BBB) confirms Caterpillar Inc. at 954 NC-42 E, Clayton NC 27527; the Rapp Customer & Training Center is the separate distinctive-roof building on the SW of the campus.",
+        "mapsUrl": "https://www.google.com/maps/@35.6405,-78.4248,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster geocode (35.6405,-78.4243) is ROOFTOP and lands on the Caterpillar Clayton plant. Locked the main building center at 35.6405,-78.4248. Confirmed: large single manufacturing building with rows of finished yellow Caterpillar small wheel loaders staged in the yard - directly confirms the BCP small-wheel-loader assembly plant at 954 NC-42 E. The Rapp Customer & Training Center is the separate distinctive-roof building on the SW of the campus.",
+          "truckGate": "Truck access via a long entrance driveway off NC-42 E (confirmed in Street View) running back to the plant; product-staging yards and dock aprons are reached through internal roads. The property is buffered from NC-42 by woods; controlled access via the internal entrance.",
+          "guardShack": "No standalone guard booth resolvable from the public road - the driveway leads back into the property and the checkpoint is internal. Classified remoteGs (controlled internal gate, no road-visible booth); low confidence.",
+          "drivewayLong": "The entrance driveway off NC-42 runs a long distance through woods before reaching the plant - ample queue depth.",
+          "dropArea": "Extensive product-staging and material-laydown yards north and east of the building, full of finished small wheel loaders and components; trailers backed in along the east face and a curved trailer row in the north yard - drop capacity ~40.",
+          "dockDoors": "~16 dock doors estimated along the east building face (trailers backed in); partly obscured by staged equipment - low confidence.",
+          "multipleFacilities": "Main assembly plant plus the separate Rapp Customer & Training Center and an ancillary building on the same campus.",
+          "railServed": "No rail spur into the property identified.",
+          "scale": "No truck scale clearly identified.",
+          "urbanRural": "Rural - the plant sits among woods and farmland on the edge of Clayton with a treed buffer; classified Rural per the edge-of-town rule.",
+          "siteAreaAcres": "~130 acres for the plant campus including staging yards and parking - approximate."
+        }
+      },
+      {
+        "id": "07-mossville-il-engine-research-campus",
+        "name": "Caterpillar - Mossville IL Engine & Research Campus",
+        "type": "Manufacturing & research campus (engines, components)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "truckGate",
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "dockDoors",
+          "shipRcvSeparate",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 40.8445,
+          "lng": -89.5565
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.8385,
+            "west": -89.5635,
+            "north": 40.85,
+            "east": -89.5495
+          },
+          "truckGate": {
+            "south": 40.8424,
+            "west": -89.5605,
+            "north": 40.8432,
+            "east": -89.5592
+          },
+          "dropYards": [
+            {
+              "south": 40.8455,
+              "west": -89.5615,
+              "north": 40.847,
+              "east": -89.5595
+            },
+            {
+              "south": 40.8398,
+              "west": -89.56,
+              "north": 40.841,
+              "east": -89.5585
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.84,
+              "west": -89.5585,
+              "north": 40.8415,
+              "east": -89.5565
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 18,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 2,
+          "buildingCount": 8,
+          "siteAreaAcres": 320,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster geocode `40.84293, -89.563151` (GEOMETRIC_CENTER, moved only 5 m) lands on the western edge of the Caterpillar Mossville Engine & Research Campus (the Caterpillar Technical Center).\n- Locked campus center at `40.8445, -89.5565`.\n- Confirmation: satellite shows a large multi-building campus with a paved test/proving area and a perimeter test track, a cogeneration plant (AES Medina Valley), trailer/material laydown yards, and 7+ large R&D/manufacturing buildings. Web (Peoria Magazine, power-eng.com, D&B) confirms the Tech Center at 1900 E Old Galena Rd — ~900,000 sq ft, ~2,000 scientists/engineers, R&D hub running 24/7.",
+        "mapsUrl": "https://www.google.com/maps/@40.8445,-89.5565,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster geocode (40.8429,-89.5632) is GEOMETRIC_CENTER with movedMeters 5 - lands on the western edge of the Caterpillar Mossville Engine & Research Campus (Caterpillar Technical Center). Locked campus center at 40.8445,-89.5565. Confirmed: large multi-building campus with a paved test/proving area and perimeter test track, a cogeneration plant (AES Medina Valley), trailer/material laydown yards, and 7+ large R&D/manufacturing buildings - consistent with the Tech Center (~900k sq ft, ~2,000 scientists/engineers, 24/7).",
+          "truckGate": "The campus is access-controlled - Street View covers only the perimeter roads and does not penetrate the interior. An internal entrance road off the perimeter road carries a checkpoint structure; a pipe/conveyor bridge crosses the road near the entrance. Controlled campus entry.",
+          "guardShack": "No standalone road-edge guard booth resolvable - the checkpoint sits on the internal entrance road inside the campus. Classified remoteGs (controlled campus, internal checkpoint, no road-visible booth); low confidence.",
+          "drivewayLong": "Internal entrance roads run long distances across the campus to the building/dock areas - ample queue depth.",
+          "fastLaneOpportunity": "Wide internal roads and paved aprons with abundant unused width - room for a bypass/express lane.",
+          "dockDoors": "~16 dock doors estimated across the building faces - this is an R&D-heavy campus so freight/dock operations are modest; many faces obscured by roof overhang - low confidence.",
+          "dropArea": "Trailer laydown yards near the north building and south of the manufacturing building, plus material laydown - drop capacity ~40.",
+          "shipRcvSeparate": "Dock/trailer activity is split between separate building clusters (north R&D/logistics buildings and the south manufacturing building) - likely separate ship/receive; medium confidence.",
+          "multipleFacilities": "Campus of 8+ large buildings (Tech Center R&D buildings plus manufacturing) - explicitly a campus.",
+          "railServed": "No rail spur into the property identified.",
+          "scale": "No truck scale clearly identified.",
+          "urbanRural": "Rural - the campus sits among farmland near Mossville/the Illinois River, outside any dense metro fabric.",
+          "siteAreaAcres": "~320 acres for the campus including the test track, cogen plant, buildings and laydown - approximate."
+        }
+      },
+      {
+        "id": "08-aurora-montgomery-il-plant",
+        "name": "Caterpillar - Aurora (Montgomery) IL Plant",
+        "type": "Manufacturing plant (wheel loaders; site reportedly listed for sale)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "scale"
+        ],
+        "center": {
+          "lat": 41.714,
+          "lng": -88.3645
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.7095,
+            "west": -88.372,
+            "north": 41.7188,
+            "east": -88.358
+          },
+          "truckGate": {
+            "south": 41.7176,
+            "west": -88.3716,
+            "north": 41.7188,
+            "east": -88.3708
+          },
+          "dropYards": [
+            {
+              "south": 41.7184,
+              "west": -88.3645,
+              "north": 41.7196,
+              "east": -88.3628
+            },
+            {
+              "south": 41.7105,
+              "west": -88.367,
+              "north": 41.7145,
+              "east": -88.362
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.7184,
+              "west": -88.3648,
+              "north": 41.7191,
+              "east": -88.3634
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 8,
+          "siteAreaAcres": 298,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster geocode (41.714988, -88.363515, ROOFTOP, moved 2745 m) lands inside a very\nlarge industrial campus. Web search confirmed this is the former Caterpillar\nAurora/Montgomery large-wheel-loader plant — a ~350-acre, 4M+ sq ft campus that\nshut production in 2017 and is now marketed for lease/sale as \"The Grid at\nRoute 31\" (Reich Brothers / LoopNet listings; Equipment World reporting). The\nlocked center sits in the middle of the main manufacturing complex.",
+        "mapsUrl": "https://www.google.com/maps/@41.714,-88.3645,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Confirmed via web search as the former Caterpillar Aurora/Montgomery wheel-loader plant at 325 S Route 31, ~350-acre / 4M+ sq ft campus now marketed as 'The Grid at Route 31'. Geocoded point sits inside the main manufacturing complex.",
+          "truckGate": "Divided entry boulevard off Route 31 (NW corner) with a gatehouse in the median - confirmed in z20 satellite and 2018 Street View showing the booth straight ahead and a CATERPILLAR sign on the main building.",
+          "guardShack": "Substantial pyramid-roof gatehouse straddling the median between the inbound and outbound lanes - classic staffed booth footprint.",
+          "fastLaneOpportunity": "Very wide divided entry boulevard with generous paved width and a long approach drive - ample room for an express bypass lane.",
+          "drivewayLong": "Long divided entry drive from Route 31 to the buildings, easily holds 3+ trucks.",
+          "entryExitSeparate": "Entry boulevard is divided into separate in and out lanes either side of the gatehouse median; counted as together-at-one-point but with split lanes - left entryExitTogether/Separate both false-leaning, primary gate is one location with divided lanes.",
+          "shipRcvSeparate": "Dock activity on the north building (south face, trailers backed in) is physically separate from material yards on the south side of the campus.",
+          "dockDoors": "Heavy-manufacturing plant - no large conventional DC dock-door bank; ~20 visible truck doors estimated across the north building and main complex; low confidence.",
+          "dropYard": "Large outdoor trailer/equipment storage yards on the south side and a trailer cluster (~8-10) near the north building.",
+          "railServed": "Rail line runs along the east edge with a spur entering the property on the south side - visible in z16/z18 imagery.",
+          "multipleFacilities": "Multiple distinct large buildings (main manufacturing complex, north building, south buildings) on one ~298-acre campus.",
+          "urbanRural": "Edge-of-town setting in unincorporated Montgomery surrounded by farmland and a rail corridor - Rural per rubric.",
+          "scale": "No truck scale clearly identified; left false, flagged uncertain."
+        }
+      },
+      {
+        "id": "09-morton-il-global-parts-distribution-center",
+        "name": "Caterpillar - Morton IL Global Parts Distribution Center",
+        "type": "Parts distribution center (anchor depot, 3M+ sq ft)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "scale"
+        ],
+        "center": {
+          "lat": 40.6185,
+          "lng": -89.4585
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.614,
+            "west": -89.465,
+            "north": 40.623,
+            "east": -89.452
+          },
+          "truckGate": {
+            "south": 40.6165,
+            "west": -89.458,
+            "north": 40.6178,
+            "east": -89.456
+          },
+          "dropYards": [
+            {
+              "south": 40.6145,
+              "west": -89.462,
+              "north": 40.6175,
+              "east": -89.455
+            },
+            {
+              "south": 40.619,
+              "west": -89.456,
+              "north": 40.6215,
+              "east": -89.4525
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.6188,
+              "west": -89.4555,
+              "north": 40.6202,
+              "east": -89.453
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 100,
+          "truckGateCount": 2,
+          "buildingCount": 5,
+          "siteAreaAcres": 272,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster geocode (40.618523, -89.460028, ROOFTOP, moved 708 m) lands inside a\nmassive multi-building distribution complex bordered by I-74 to the north and a\nrail line to the south, in Morton IL. Scale, layout and location confirm this\nas Caterpillar's Morton Global Parts Distribution Center — the company's anchor\nparts depot and original Cat Logistics base (~3M+ sq ft under roof).",
+        "mapsUrl": "https://www.google.com/maps/@40.6185,-89.4585,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Caterpillar Morton Global Parts Distribution Center - the company's anchor depot (~3M+ sq ft, original Cat Logistics HQ). Geocoded point lands inside the complex; confirmed by scale, layout and adjacency to I-74 in Morton IL.",
+          "truckGate": "Whole campus is continuously fenced (ornamental steel on the west along Detroit Ave, chain-link/green-screen on the south along the rail line, chain-link on the highway-frontage east). Truck operations and storage yards sit behind that fence, implying controlled truck access. No barrier arm or booth could be cleanly imaged - SE/SW frontages are residential, W/E frontages are screened by employee parking. Flagged uncertain.",
+          "guardShack": "No guard booth positively identified in available satellite/Street View - flagged uncertain. remoteGs set true on the assumption of kiosk/badge access at a fenced depot, also flagged.",
+          "dockDoors": "Anchor parts depot with multiple very large buildings; dock-door banks confirmed on the east building (trailers backed in - 2022 Street View) and along internal faces. Estimated 50+ total; low confidence on exact count.",
+          "dropArea": "Large interior trailer/material storage yards on the SE and rows of stored equipment - 25-50+ band.",
+          "shipRcvSeparate": "Dock activity on the east building is physically separate from material yards and dock faces on the south/SW side.",
+          "railServed": "Rail line runs immediately along the south edge of the property with spur access into the storage yards.",
+          "multipleFacilities": "Multiple distinct very large buildings on one campus (anchor parts depot complex).",
+          "urbanRural": "Edge-of-town Morton IL, bordered by I-74 and a rail corridor with residential and small commercial nearby - small-town industrial, classed Rural per rubric.",
+          "scale": "No truck scale identified; left false.",
+          "metrics": "Counts are honest estimates from overhead imagery of a very large multi-building depot; flagged."
+        }
+      },
+      {
+        "id": "10-spokane-wa-distribution-center-dc-3",
+        "name": "Caterpillar - Spokane WA Distribution Center (DC-3)",
+        "type": "Parts distribution center (~562k-600k sq ft, 24/7 three-shift)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "scale"
+        ],
+        "center": {
+          "lat": 47.5966,
+          "lng": -117.5465
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 47.5942,
+            "west": -117.549,
+            "north": 47.599,
+            "east": -117.544
+          },
+          "truckGate": {
+            "south": 47.5944,
+            "west": -117.5488,
+            "north": 47.5956,
+            "east": -117.5478
+          },
+          "dropYards": [
+            {
+              "south": 47.596,
+              "west": -117.5485,
+              "north": 47.5985,
+              "east": -117.5455
+            },
+            {
+              "south": 47.5948,
+              "west": -117.5487,
+              "north": 47.5962,
+              "east": -117.5475
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 47.5953,
+              "west": -117.5455,
+              "north": 47.5985,
+              "east": -117.5444
+            },
+            {
+              "south": 47.5982,
+              "west": -117.5482,
+              "north": 47.599,
+              "east": -117.5445
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 49,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster geocode (47.597017, -117.546908, ROOFTOP, moved 7941 m) landed correctly\ninside a large distribution warehouse on the West Plains west of Spokane. Web\nsearch confirmed Caterpillar's 562,000 sq ft DC-3 in this West Plains corridor;\nStreet View along the SW frontage shows clear \"CATERPILLAR\" wall signage on the\ncenter building, positively identifying it. (The literal street address \"W\nHallett Rd\" geocodes to a residential street; the actual facility sits in the\nWest Plains industrial corridor near I-90.)",
+        "mapsUrl": "https://www.google.com/maps/@47.5966,-117.5465,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Confirmed via Street View - 'CATERPILLAR' wall signage clearly visible on the center building. This is the Caterpillar Spokane Distribution Center (DC-3), a ~562k sq ft 24/7 three-shift parts DC on the West Plains west of Spokane. Roster geocode (47.597017, -117.546908, moved 7941m) landed correctly inside the property.",
+          "truckGate": "Site has chain-link perimeter fencing (confirmed in Street View along the SW frontage). Truck route circulates around the building from a perimeter access road into fenced dock yards. No barrier arm or guard booth could be cleanly imaged - frontages are landscaped berms screening the lot. truckGate set true on fence + 24/7 controlled-DC layout; flagged uncertain.",
+          "guardShack": "No staffed booth identified; remoteGs set true assuming kiosk/badge check-in at a modern fenced 24/7 DC. Both flagged.",
+          "dockDoors": "Conventional dock-door banks confirmed on the east face (trailers backed in) and the north canopy building. Estimated 25-50 total; low confidence.",
+          "dropArea": "Large outdoor equipment/parts/trailer storage yard on the west side full of rows of stored material; 25-50 band.",
+          "shipRcvSeparate": "Dock activity on the east building face is physically separate from the north canopy building's dock doors.",
+          "drivewayLong": "Long perimeter access drive around the building gives ample truck queueing room.",
+          "urbanRural": "West Plains setting west of Spokane - large industrial/warehouse cluster amid open land near I-90; classed Rural per rubric (edge-of-metro, not dense fabric).",
+          "railServed": "No rail spur into the property.",
+          "scale": "No truck scale identified; left false.",
+          "metrics": "Counts are honest estimates from overhead imagery; flagged."
+        }
+      },
+      {
+        "id": "11-waco-tx-distribution-center",
+        "name": "Caterpillar - Waco TX Distribution Center",
+        "type": "Parts distribution center (opened 2009)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "scale"
+        ],
+        "center": {
+          "lat": 31.4783,
+          "lng": -97.1799
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 31.4762,
+            "west": -97.183,
+            "north": 31.4803,
+            "east": -97.1768
+          },
+          "truckGate": {
+            "south": 31.4784,
+            "west": -97.179,
+            "north": 31.4794,
+            "east": -97.1778
+          },
+          "dropYards": [
+            {
+              "south": 31.4764,
+              "west": -97.182,
+              "north": 31.4785,
+              "east": -97.178
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 31.4778,
+              "west": -97.1828,
+              "north": 31.48,
+              "east": -97.1812
+            },
+            {
+              "south": 31.4764,
+              "west": -97.1812,
+              "north": 31.478,
+              "east": -97.1785
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 66,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster geocode (31.478258, -97.180998, ROOFTOP, moved 14552 m) landed correctly\non a large L-shaped distribution warehouse off TX-6 / Gateway Blvd. Web search\nconfirmed the Caterpillar Waco Distribution Center — a ~750,000 sq ft parts DC\nopened in 2009 supporting six Cat dealerships. Street View on the NE frontage\nshows clear \"CATERPILLAR\" wall signage, positively identifying the building.",
+        "mapsUrl": "https://www.google.com/maps/@31.4783,-97.1799,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Confirmed via Street View - 'CATERPILLAR' wall signage on the building. This is the Caterpillar Waco Distribution Center (2901 Gateway Blvd), a ~750k sq ft parts DC opened 2009. Roster geocode (31.478258, -97.180998, ROOFTOP, moved 14552m) landed correctly on the L-shaped building.",
+          "truckGate": "The truck/dock yards are enclosed by green-screened chain-link perimeter fencing (confirmed at the NW and SE corners). The truck route circulates inside that fence from the Gateway Blvd access road. No barrier arm or guard booth could be cleanly imaged - employee parking on the NE screens the entrance. truckGate set true on the fenced truck yard; flagged uncertain.",
+          "guardShack": "No staffed booth identified; remoteGs set true assuming kiosk/badge check-in at a controlled DC. Both flagged.",
+          "dockDoors": "Long dock-door banks confirmed on the NW/west face (~30+ trailers backed in) and the SE face. Estimated 50+ total; low confidence on exact count.",
+          "dropArea": "Large outdoor storage yard on the south side full of rows of palletized parts/material plus trailer parking; 25-50 band.",
+          "shipRcvSeparate": "Dock banks on the NW/west face and the SE face are on physically separate building faces.",
+          "drivewayLong": "Long access drive from Gateway Blvd / TX-6 and a truck route circling the building - ample queueing room.",
+          "urbanRural": "Edge-of-town location off TX-6 in Woodway/Waco amid open land and a rail corridor - classed Rural per rubric.",
+          "railServed": "A rail line runs along the SE/south of the area but no spur enters the Caterpillar property; left false.",
+          "scale": "No truck scale identified; left false.",
+          "metrics": "Counts are honest estimates from overhead imagery of a large parts DC; flagged."
+        }
+      },
+      {
+        "id": "12-clayton-oh-distribution-center-dc-2",
+        "name": "Caterpillar - Clayton OH Distribution Center (DC-2)",
+        "type": "Parts distribution center (opened 2011)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "trailersVisible",
+          "scale"
+        ],
+        "center": {
+          "lat": 39.8425,
+          "lng": -84.334
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.8395,
+            "west": -84.337,
+            "north": 39.845,
+            "east": -84.33
+          },
+          "truckGate": {
+            "south": 39.8412,
+            "west": -84.3323,
+            "north": 39.8421,
+            "east": -84.3313
+          },
+          "dropYards": [
+            {
+              "south": 39.8398,
+              "west": -84.335,
+              "north": 39.843,
+              "east": -84.3305
+            },
+            {
+              "south": 39.8425,
+              "west": -84.3335,
+              "north": 39.8448,
+              "east": -84.3305
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.8405,
+              "west": -84.3368,
+              "north": 39.8445,
+              "east": -84.3352
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 80,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 90,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster geocode (39.842875, -84.335057, ROOFTOP, moved 4040 m) landed on a very\nlarge distribution warehouse off Hoke Rd in Clayton OH. Web search confirmed\nCaterpillar DC-2 — a 1.6M sq ft parts distribution center opened 2011 (the $69M\ncenter serving five regional Cat dealers). Street View on Hoke Rd shows the\n\"CATERPILLAR\" monument sign at the entrance, positively identifying the site.\nImagery is winter/snow-covered, which limits fine-detail confidence.",
+        "mapsUrl": "https://www.google.com/maps/@39.8425,-84.334,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Confirmed as Caterpillar Distribution Center DC-2, 6611 Hoke Rd, Clayton OH - a 1.6M sq ft parts DC opened 2011. CATERPILLAR monument sign at the Hoke Rd entrance confirmed in Street View. Roster geocode (39.842875, -84.335057, ROOFTOP, moved 4040m) landed on the building. Imagery is winter/snow-covered, reducing fine-detail confidence.",
+          "truckGate": "Defined entry driveway off Hoke Rd leading to a pinch-point at the building; a small structure (blue-roof booth) sits at the entry point - consistent with a controlled gate. truckGate set true.",
+          "guardShack": "A small booth-like structure straddling/beside the entry-lane pinch point is visible in z19/z20 satellite, partly obscured by snow. Classed as a guard shack at medium confidence; flagged.",
+          "fastLaneOpportunity": "Wide entry driveway/apron at the controlled point gives room for an express bypass lane.",
+          "dockDoors": "Long dock-door bank confirmed on the west building face with trailers backed in. 50+ band; exact count low confidence due to snow.",
+          "dropArea": "Very large drop yard on the SE side packed with parked trailers (90+) and rows of stored equipment/material; 50+ band.",
+          "drivewayLong": "Long entry drive and a truck route circling the very large building - ample queueing room.",
+          "urbanRural": "Edge-of-town Clayton OH amid farmland off Hoke Rd; classed Rural per rubric.",
+          "railServed": "No rail spur into the property.",
+          "scale": "No truck scale identified; left false.",
+          "metrics": "Counts are honest estimates from snow-covered overhead imagery of a 1.6M sq ft DC; flagged."
+        }
+      },
+      {
+        "id": "13-york-pa-distribution-center",
+        "name": "Caterpillar - York PA Distribution Center",
+        "type": "Parts distribution center (~1.1M sq ft, opened 1953)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "scale"
+        ],
+        "center": {
+          "lat": 39.9812,
+          "lng": -76.6857
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.9785,
+            "west": -76.6895,
+            "north": 39.984,
+            "east": -76.682
+          },
+          "truckGate": {
+            "south": 39.9818,
+            "west": -76.6834,
+            "north": 39.9828,
+            "east": -76.6822
+          },
+          "dropYards": [
+            {
+              "south": 39.9815,
+              "west": -76.684,
+              "north": 39.9838,
+              "east": -76.6815
+            },
+            {
+              "south": 39.9792,
+              "west": -76.6845,
+              "north": 39.9808,
+              "east": -76.682
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.9815,
+              "west": -76.6838,
+              "north": 39.9833,
+              "east": -76.6818
+            },
+            {
+              "south": 39.979,
+              "west": -76.6885,
+              "north": 39.9805,
+              "east": -76.6865
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 97,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster geocode (39.981109, -76.686396, ROOFTOP, moved 808 m) landed on a large\nindustrial building complex off Memory Lane in Springettsbury Township, York\nPA. Web search confirmed the Caterpillar York Distribution Center — a ~1.1M sq\nft parts depot that opened on Memory Lane in 1953, supporting six regional Cat\ndealers. Street View along Memory Lane shows the distinctive green-and-white\nindustrial building, positively identifying the site.",
+        "mapsUrl": "https://www.google.com/maps/@39.9812,-76.6857,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Confirmed as the Caterpillar York Distribution Center, 600 Memory Lane, Springettsbury Township - a ~1.1M sq ft parts depot opened 1953. Roster geocode (39.981109, -76.686396, ROOFTOP, moved 808m) landed on the building. Identified by the green-and-white industrial building visible in Street View along Memory Lane, the depot layout, and adjacency to US-30.",
+          "truckGate": "Truck/dock yards are enclosed by chain-link perimeter fencing (confirmed at the SW building face in Street View). Truck operations on the NE and SW are access-controlled behind the fence. A small white structure near the SE truck yard may be a booth. No barrier arm cleanly imaged. truckGate set true; flagged uncertain.",
+          "guardShack": "No staffed booth positively confirmed; a small structure near the SE truck yard is ambiguous. remoteGs set true assuming kiosk/badge check-in. Both flagged.",
+          "dockDoors": "Long dock-door banks confirmed on the NE face (rows of trailers backed in) and the SW face. 50+ band; exact count low confidence.",
+          "dropArea": "Trailer drop yards on the NE and SE with parked trailers; 25-50 band.",
+          "shipRcvSeparate": "Dock banks on the NE face and the SW face are on physically separate building faces.",
+          "drivewayLong": "Long internal truck routes around the large building give ample queueing room.",
+          "urbanRural": "Springettsbury Township is part of the York PA metro / suburban fabric, bordered by US-30 with dense commercial and residential development - classed Urban per rubric.",
+          "railServed": "A rail line runs along the south edge of the property with apparent spur access; railServed set true.",
+          "scale": "No truck scale identified; left false.",
+          "metrics": "Counts are honest estimates from overhead imagery of an older 1.1M sq ft DC; flagged."
+        }
+      },
+      {
+        "id": "14-seguin-tx-engine-plant",
+        "name": "Caterpillar - Seguin TX Engine Plant",
+        "type": "Manufacturing plant (diesel & gas engine assembly, ~1.7M sq ft)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "truckGateCount",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "scale"
+        ],
+        "center": {
+          "lat": 29.5755,
+          "lng": -97.9955
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 29.572,
+            "west": -98.001,
+            "north": 29.579,
+            "east": -97.992
+          },
+          "truckGate": {
+            "south": 29.573,
+            "west": -97.9975,
+            "north": 29.574,
+            "east": -97.9963
+          },
+          "dropYards": [
+            {
+              "south": 29.5735,
+              "west": -97.998,
+              "north": 29.578,
+              "east": -97.994
+            },
+            {
+              "south": 29.5755,
+              "west": -98.0005,
+              "north": 29.5785,
+              "east": -97.998
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 29.5735,
+              "west": -97.997,
+              "north": 29.578,
+              "east": -97.995
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 50,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 168,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster geocode (29.573587, -97.994251, ROOFTOP, moved 18 m) is precise and lands\non a very large manufacturing complex off W Kingsbury St in Seguin TX. Web\nsearch confirmed the Caterpillar Seguin Engine Plant — a ~1.7M sq ft diesel and\ngas engine assembly plant (Cat and Perkins engines, ~2,000 workers). Street\nView along W Kingsbury St shows clear \"CATERPILLAR\" wall signage on the office\nbuilding, positively identifying the site.",
+        "mapsUrl": "https://www.google.com/maps/@29.5755,-97.9955,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Confirmed via Street View - 'CATERPILLAR' wall signage on the office building along W Kingsbury St. This is the Caterpillar Seguin Engine Plant (1600 W Kingsbury St), a ~1.7M sq ft diesel & gas engine assembly plant employing ~2,000. Roster geocode (29.573587, -97.994251, ROOFTOP, moved 18m) is precise and lands on the plant complex.",
+          "truckGate": "Very large secured manufacturing campus bordered by I-10. Truck operations (dock banks, trailer staging, component yards) are concentrated on the NW side behind the plant. A truck-route access controls entry; a small booth-like structure is visible at the NW truck yard. truckGate set true.",
+          "guardShack": "A small light-colored booth-like structure sits at the NW truck-yard area beside a row of trailers backed in - classed as a guard shack at medium confidence; flagged.",
+          "fastLaneOpportunity": "Extremely wide truck yards and multiple access roads give ample room for express/bypass lanes.",
+          "dockDoors": "Long dock-door banks confirmed on the NW/west building faces with many trailers backed in. 50+ band; exact count low confidence given the plant's scale.",
+          "dropArea": "Vast trailer/component staging yards on the NW with well over 100 trailers and rows of components/material; 50+ band.",
+          "shipRcvSeparate": "Multiple dock banks on different building faces (NW and west) handle separate flows.",
+          "drivewayLong": "Long internal truck routes around an enormous building - ample queueing room.",
+          "entryExitSeparate": "Multiple access roads/gates serve the campus (employee side off W Kingsbury, truck side on the NW) - entry and exit are at distinct points.",
+          "multipleFacilities": "Several distinct large buildings on one ~168-acre campus (main engine plant, satellite buildings, large component/staging areas).",
+          "urbanRural": "Edge-of-town Seguin TX off I-10 amid farmland; classed Rural per rubric.",
+          "railServed": "No rail spur into the property identified.",
+          "scale": "No truck scale identified; left false.",
+          "metrics": "Counts are honest estimates from overhead imagery of a 1.7M sq ft engine plant; flagged."
+        }
+      },
+      {
+        "id": "15-victoria-tx-hydraulic-excavator-plant",
+        "name": "Caterpillar - Victoria TX Hydraulic Excavator Plant",
+        "type": "Manufacturing plant (hydraulic / large excavators)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "dockDoors",
+          "dropArea",
+          "entryLanes",
+          "exitLanes",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 28.8195,
+          "lng": -96.9375
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 28.8145,
+            "west": -96.9425,
+            "north": 28.8235,
+            "east": -96.9335
+          },
+          "truckGate": {
+            "south": 28.816,
+            "west": -96.939,
+            "north": 28.817,
+            "east": -96.9378
+          },
+          "dropYards": [
+            {
+              "south": 28.8185,
+              "west": -96.9412,
+              "north": 28.8208,
+              "east": -96.9392
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 28.817,
+              "west": -96.9387,
+              "north": 28.8205,
+              "east": -96.9372
+            }
+          ],
+          "staging": {
+            "south": 28.8162,
+            "west": -96.9387,
+            "north": 28.8172,
+            "east": -96.9372
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 161,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster address was wrong. Roster gave \"203 Holt Rd, Victoria, TX 77905\" (geocode\n  precision GEOMETRIC_CENTER). That address geocodes to the HOLT CAT dealership\n  (a Caterpillar equipment dealer with a \"CAT / HOLT CAT\" pylon sign, confirmed in\n  Street View at 28.8405,-96.9078), not the Caterpillar manufacturing plant.\n- Correct facility: Caterpillar North American Hydraulic Excavator plant,\n  7300 Lone Tree Rd, Victoria, TX 77905 — confirmed via the Victoria Chamber of\n  Commerce member listing. The plant is the ~1.1M sq ft tilt-up concrete facility\n  (opened Aug 2012, $200M investment) located ~3.3 km WSW of the roster point, just\n  SW of Victoria Regional Airport, in the Lone Tree Industrial Park.\n- Locked center: 28.81950, -96.93750 — the massive modern white-roofed building",
+        "mapsUrl": "https://www.google.com/maps/@28.81950,-96.93750,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address '203 Holt Rd' geocoded to the HOLT CAT dealership, NOT the Caterpillar manufacturing plant. Correct site is the ~1.1M sq ft Caterpillar North American Hydraulic Excavator plant at 7300 Lone Tree Rd, Victoria TX 77905, ~3.3 km WSW of the roster point, just SW of Victoria Regional Airport. Confirmed via Victoria Chamber of Commerce listing and the massive modern tilt-up building visible in satellite at 28.8195,-96.9375.",
+          "truckGate": "Fully fenced manufacturing campus (chain-link perimeter fence visible in Street View). Truck operations enter via wide internal divided campus roads from Lone Tree Rd; a controlled truck check-in is consistent with a major Cat plant. No barrier arm positively imaged.",
+          "guardShack": "No guard booth positively confirmed. The small SW structure (28.8163,-96.9384) is a windowless utility/electrical building, not a staffed booth. Marked guardShack false / remoteGs true on a remote-checkin assumption - low confidence, flagged.",
+          "dockDoors": "A row of dock doors with trailers backed in is visible along the SW building face in Street View; estimated 10-25 band from overhead/ground imagery.",
+          "dropArea": "Trailers and material laydown staged along the W/NW side of the plant; estimated 25-50 trailer-equivalent area.",
+          "multipleFacilities": "Campus: main 1.1M sq ft plant building plus a second large building NW and a third smaller structure SW, two retention ponds, separate parking.",
+          "siteAreaAcres": "~161 acres for the developed/fenced campus; the property parcel including buffer land is larger.",
+          "railServed": "No rail spur runs into the property; the rail line near the airport does not serve the plant."
+        }
+      },
+      {
+        "id": "16-athens-ga-plant",
+        "name": "Caterpillar - Athens GA Plant",
+        "type": "Manufacturing plant (BCP - mini hydraulic excavators, small track-type tractors)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 33.94,
+          "lng": -83.5185
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.9368,
+            "west": -83.522,
+            "north": 33.9442,
+            "east": -83.511
+          },
+          "truckGate": {
+            "south": 33.9409,
+            "west": -83.5159,
+            "north": 33.9416,
+            "east": -83.5149
+          },
+          "dropYards": [
+            {
+              "south": 33.9398,
+              "west": -83.521,
+              "north": 33.9422,
+              "east": -83.5182
+            },
+            {
+              "south": 33.9387,
+              "west": -83.5172,
+              "north": 33.9432,
+              "east": -83.5128
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.9398,
+              "west": -83.5209,
+              "north": 33.9421,
+              "east": -83.5187
+            }
+          ],
+          "staging": {
+            "south": 33.9406,
+            "west": -83.5164,
+            "north": 33.9416,
+            "east": -83.5146
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 180,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster gave 250 Dozer Dr, Athens, GA 30606, lat/lng 33.941507,-83.511385\n  (geocode ROOFTOP, movedMeters 7). That point actually sits in **woods at a road\n  intersection** ~0.7 km SE of the plant — the geocoder placed it on the access\n  road, not the building.\n- The plant building is the large white-roofed industrial facility just NW.\n  Confirmed via Athens Area Chamber of Commerce and Panjiva listings (Caterpillar\n  Inc. BCP Athens, 250 Dozer Drive) and Caterpillar's own description: a 250-acre\n  campus with 3 buildings totaling 850,000 sq ft producing Mini Hydraulic\n  Excavators and Small Track-Type Tractors.\n- Locked center: 33.94000, -83.51850 (main plant building).",
+        "mapsUrl": "https://www.google.com/maps/@33.94000,-83.51850,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster lat/lng (ROOFTOP, movedMeters 7) sat in woods at a road intersection ~0.7 km SE of the plant. Plant building is just NW. Confirmed via Athens Area Chamber / Panjiva (250 Dozer Dr) and the 850k sq ft / 3-building / 250-acre campus described in web sources. Locked center on the main building at 33.9400,-83.5185.",
+          "truckGate": "Controlled truck/visitor entrance: a guard booth with a canopy over the lane sits on a paved island in the wide entrance road at 33.9412,-83.5154, with a stop sign and a vehicle parked beside it - confirmed in both z21 satellite and 2025 Street View.",
+          "guardShack": "Small staffed booth (~1-2 vehicle footprint, canopy roof) positively imaged at the gate - clear guard shack.",
+          "dockDoors": "A long dock face with ~15-20 dock doors and trailers/containers backed in runs along the NW building face; counted from z18-z19 imagery, 10-25 band.",
+          "dropArea": "Two yard areas: a dock-side trailer/container line on the NW, and a very large finished-goods/equipment yard NE holding rows of new Cat mini excavators and dozers plus parked trailers.",
+          "multipleFacilities": "Campus: 3 buildings totaling 850,000 sq ft per Caterpillar/Chamber sources; main plant plus connected wings, retention ponds, large finished-goods yard.",
+          "fastLaneOpportunity": "Wide multi-lane entrance road with a paved island at the gate gives room for an express/bypass lane.",
+          "siteAreaAcres": "~180 acres for the developed/fenced campus from the perimeter box; the full parcel with wooded buffer is reported as ~250 acres.",
+          "railServed": "No rail spur into the property."
+        }
+      },
+      {
+        "id": "17-winston-salem-nc-axle-plant",
+        "name": "Caterpillar - Winston-Salem NC Axle Plant",
+        "type": "Manufacturing plant (axles, ~850k sq ft on 102 acres)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 36.0603,
+          "lng": -80.118
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 36.0575,
+            "west": -80.121,
+            "north": 36.0635,
+            "east": -80.1145
+          },
+          "truckGate": {
+            "south": 36.0615,
+            "west": -80.1182,
+            "north": 36.0622,
+            "east": -80.1173
+          },
+          "dropYards": [
+            {
+              "south": 36.0609,
+              "west": -80.1183,
+              "north": 36.0625,
+              "east": -80.1162
+            },
+            {
+              "south": 36.0595,
+              "west": -80.1202,
+              "north": 36.0612,
+              "east": -80.1188
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 36.061,
+              "west": -80.1183,
+              "north": 36.0618,
+              "east": -80.116
+            }
+          ],
+          "staging": {
+            "south": 36.0615,
+            "west": -80.1183,
+            "north": 36.0624,
+            "east": -80.1172
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 96,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster gave 4770 Axle Dr, Winston-Salem, NC 27107, lat/lng 36.062052,-80.117703\n  (geocode ROOFTOP, movedMeters 63). The point landed directly on the plant\n  building — accurate.\n- Confirmed via Gray Construction and Dun & Bradstreet listings and Caterpillar's\n  own description: an 850,000 sq ft axle manufacturing facility (machining,\n  assembly, test, painting) on a 102-acre site, opened Nov 2011, $426M investment,\n  ~500 workers. Produces axle assemblies for the largest Cat mining trucks.\n- Locked center: 36.06030, -80.11800 (main plant building).",
+        "mapsUrl": "https://www.google.com/maps/@36.06030,-80.11800,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster lat/lng (ROOFTOP, movedMeters 63) landed directly on the plant building - accurate. Confirmed via Gray Construction / Dun & Bradstreet (4770 Axle Dr) and Caterpillar's own description: 850,000 sq ft axle-machining/assembly/test/paint plant on a 102-acre site, opened 2011, produces axle assemblies for the largest Cat mining trucks.",
+          "truckGate": "Controlled entrance: a private access road runs from the public road (Axle Dr) past a CATERPILLAR monument sign to a gatehouse/booth structure where the road forks into the operational area (36.0618,-80.1178). Confirmed in z21 satellite and 2026 Street View.",
+          "guardShack": "A small gatehouse building sits at the entrance road fork; a separate larger building W of it is the electrical substation. The gatehouse functions as the guard/security checkpoint - guardShack true.",
+          "dockDoors": "Manufacturing plant (not a DC), so a modest dock count. Dock doors with trailers backed in are visible on the N and NE building faces; estimated ~14 doors, 10-25 band - flagged.",
+          "dropArea": "Trailers parked along the N face and W face; extensive outdoor laydown of axle components (pallets/stacks) on the N apron. Trailer-equivalent area 10-25.",
+          "railServed": "No rail spur runs into the property.",
+          "siteAreaAcres": "~96 acres from the perimeter box; the parcel is reported as 102 acres."
+        }
+      },
+      {
+        "id": "18-south-milwaukee-wi-plant",
+        "name": "Caterpillar Global Mining - South Milwaukee WI Plant",
+        "type": "Manufacturing plant (large mining equipment - electric rope shovels, draglines)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "dockDoors",
+          "dropArea",
+          "truckGateCount",
+          "entryLanes",
+          "exitLanes",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 42.9127,
+          "lng": -87.8615
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.9085,
+            "west": -87.8642,
+            "north": 42.9165,
+            "east": -87.8601
+          },
+          "truckGate": {
+            "south": 42.914,
+            "west": -87.8614,
+            "north": 42.9147,
+            "east": -87.8604
+          },
+          "dropYards": [
+            {
+              "south": 42.913,
+              "west": -87.8625,
+              "north": 42.9145,
+              "east": -87.8612
+            }
+          ],
+          "dockAprons": [],
+          "staging": {
+            "south": 42.9135,
+            "west": -87.862,
+            "north": 42.9145,
+            "east": -87.8608
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 2,
+          "buildingCount": 8,
+          "siteAreaAcres": 72,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster gave 1100 Milwaukee Ave, South Milwaukee, WI 53172, lat/lng\n  42.912672,-87.861727 (geocode GEOMETRIC_CENTER, movedMeters 234). The point sits\n  on the campus — accurate enough.\n- Confirmed: the historic former Bucyrus heavy-equipment works (manufacturing\n  on this site since 1893), operated by Caterpillar Global Mining since\n  Caterpillar's 2011 purchase of Bucyrus. The plant produces massive Cat electric\n  rope shovels (7495 series) and draglines — more than 32,000 machines built here\n  over 130 years.\n- Locked center: 42.91270, -87.86150 (main N-S building corridor).",
+        "mapsUrl": "https://www.google.com/maps/@42.91270,-87.86150,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster lat/lng (GEOMETRIC_CENTER, movedMeters 234) sits on the campus. Confirmed: the historic former Bucyrus heavy-equipment works in South Milwaukee, operated by Caterpillar Global Mining since 2011; produces massive Cat electric rope shovels (7495 series) and draglines. Address 1100 Milwaukee Ave. Locked center on the main building corridor at 42.9127,-87.8615.",
+          "type": "Heavy-manufacturing / fabrication complex, NOT a distribution facility. The site assembles room-sized mining-shovel components; it has large open paved assembly/staging yards rather than a conventional bank of loading-dock doors.",
+          "truckGate": "The entire complex is enclosed by a perimeter wall/fence (concrete wall visible along Milwaukee Ave in Street View). Vehicles enter via controlled gated openings in the wall. Set true.",
+          "guardShack": "A small structure with signage sits at the main entrance gate on the W/N side; consistent with a security/guard checkpoint for a fenced industrial works. Marked true at medium confidence - flagged.",
+          "truckGateCount": "At least two gated openings in the perimeter wall (W/N side near the parking lots, and another along the street) - estimated 2, flagged.",
+          "dockDoors": "Heavy-fabrication plant - large oversized bay/shop doors, not a regular dock-door rhythm. Estimated 0-10 conventional dock equivalents, flagged.",
+          "dropArea": "Large open paved yards for staging oversized components, not marked trailer-parking stalls; few standard trailers visible. dropArea 0-10, dropYard false.",
+          "railServed": "TRUE - multiple rail spurs run directly into the property along the W side; oversized shovel components ship by rail. Clearly visible in z17-z18 imagery.",
+          "multipleFacilities": "Campus of ~8 large connected/adjacent heavy-industrial buildings spanning a long N-S corridor.",
+          "urbanRural": "Urban - the works is embedded in the dense South Milwaukee residential street grid, houses directly across the street on all sides.",
+          "backupSensitive": "The complex fronts directly onto public city streets with minimal setback; a truck queue at a gate would spill onto a public road - backupSensitive true.",
+          "entryExitSeparate": "Multiple separate gated openings in the perimeter wall on different street frontages - treated as separate entry/exit."
+        }
+      },
+      {
+        "id": "19-pontiac-il-plant",
+        "name": "Caterpillar - Pontiac IL Plant",
+        "type": "Manufacturing plant (fuel injectors / fuel systems)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "dockDoors",
+          "dropArea",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 40.8867,
+          "lng": -88.6518
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.884,
+            "west": -88.6555,
+            "north": 40.8888,
+            "east": -88.649
+          },
+          "truckGate": {
+            "south": 40.8872,
+            "west": -88.6509,
+            "north": 40.8879,
+            "east": -88.6499
+          },
+          "dropYards": [
+            {
+              "south": 40.8868,
+              "west": -88.6512,
+              "north": 40.8878,
+              "east": -88.65
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.8865,
+              "west": -88.6516,
+              "north": 40.8872,
+              "east": -88.6504
+            }
+          ],
+          "staging": {
+            "south": 40.887,
+            "west": -88.6512,
+            "north": 40.8877,
+            "east": -88.6502
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 10,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 68,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster gave 1300 4H Park Rd, Pontiac, IL 61764, lat/lng 40.887546,-88.651789\n  (geocode ROOFTOP, movedMeters 71). The point landed directly on the plant\n  building — accurate.\n- Confirmed via Panjiva (Caterpillar Engine Systems Inc., 1300 4H Park Rd) and\n  Illinois State Fire Marshal UST records. The plant has operated since 1978,\n  assembling and testing fuel injectors and fuel pumps for Cat products.\n- Locked center: 40.88670, -88.65180 (main plant building).",
+        "mapsUrl": "https://www.google.com/maps/@40.88670,-88.65180,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster lat/lng (ROOFTOP, movedMeters 71) landed directly on the plant building - accurate. Confirmed via Panjiva / Illinois State Fire Marshal records (Caterpillar Engine Systems Inc., 1300 4H Park Rd). The plant has operated since 1978, assembling/testing fuel injectors and fuel pumps for Cat products.",
+          "truckGate": "Fenced manufacturing facility - chain-link perimeter fence visible around the property in multiple Street Views, with Caterpillar signage and a Caterpillar water tower. A controlled entrance road runs from 4H Park Rd into the property. Set true.",
+          "guardShack": "No guard booth positively imaged at the gate. Marked guardShack false / remoteGs true on a remote-check-in assumption - low confidence, flagged.",
+          "dockDoors": "Modest dock activity on the E/NE side: a dock canopy structure with material storage and a few trailers. Estimated ~10 doors, 0-10 band - flagged.",
+          "dropArea": "A small trailer/material yard near the E dock area; no large dedicated drop lot - dropArea 0-10, dropYard false.",
+          "multipleFacilities": "Main plant building plus an attached/adjacent cluster of process and utility structures on the SW side (water treatment, support buildings); counted as 2.",
+          "urbanRural": "Rural - Pontiac IL is a small town; the plant sits on the edge of town surrounded by farmland with a small residential subdivision adjacent to the N.",
+          "railServed": "No rail spur runs into the property.",
+          "siteAreaAcres": "~68 acres for the fenced campus including parking, from the perimeter box."
+        }
+      },
+      {
+        "id": "20-wamego-ks-work-tools-plant",
+        "name": "Caterpillar Work Tools - Wamego KS Plant & Distribution",
+        "type": "Manufacturing & distribution facility (machine attachments / work tools)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 39.2038,
+          "lng": -96.2933
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.2012,
+            "west": -96.2976,
+            "north": 39.2064,
+            "east": -96.2895
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 39.2033,
+              "west": -96.2928,
+              "north": 39.2056,
+              "east": -96.2898
+            },
+            {
+              "south": 39.2018,
+              "west": -96.2942,
+              "north": 39.2033,
+              "east": -96.2913
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.2036,
+              "west": -96.2944,
+              "north": 39.2048,
+              "east": -96.293
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 12,
+          "trailersVisible": 10,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 0,
+          "buildingCount": 9,
+          "siteAreaAcres": 104,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster gave 400 Work Tools Dr, Wamego, KS 66547, lat/lng 39.203556,-96.293537\n  (geocode GEOMETRIC_CENTER, movedMeters 49). The point sits on the campus —\n  accurate.\n- Confirmed via the Wamego EDC for-sale brochure and Panjiva (Caterpillar Work\n  Tools Inc., 400 Work Tools Dr). A 258,112 sq ft crane-served production plant on\n  a ~44-acre core parcel; produces ~50,000 different part types — buckets, blades,\n  hooks, brackets — for excavators and large wheel loaders.\n- Note: Caterpillar announced a 2024 closure of the Wamego plant; Solar Turbines (a\n  Caterpillar subsidiary) took ownership and continues manufacturing with the\n  existing workforce — same facility.\n- Locked center: 39.20380, -96.29330 (production-building cluster).",
+        "mapsUrl": "https://www.google.com/maps/@39.20380,-96.29330,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster lat/lng (GEOMETRIC_CENTER, movedMeters 49) sits on the campus - accurate. Confirmed via Wamego EDC for-sale brochure and Panjiva (Caterpillar Work Tools Inc., 400 Work Tools Dr). A 258,112 sq ft crane-served production plant on a ~44-acre core parcel; produces ~50,000 part types - buckets, blades, hooks, brackets - for excavators and large wheel loaders. Note: Caterpillar announced a 2024 closure with Solar Turbines (a Cat subsidiary) taking over operations; same facility.",
+          "truckGate": "Open heavy-industrial campus - the production buildings, pole-barn covered storage, and vast outdoor steel laydown yards front directly onto internal/public streets. No perimeter fence or guarded truck gate was positively imaged. Set false - flagged.",
+          "guardShack": "No guard booth imaged anywhere on the campus.",
+          "type": "Crane-served heavy-fabrication plant, not a conventional DC. Moderate dock activity at the production buildings; the dominant feature is extensive outdoor laydown of finished steel work-tool products.",
+          "dockDoors": "Modest dock activity along the production-building faces; estimated ~12 doors, 10-25 band - flagged.",
+          "dropArea": "Very extensive outdoor laydown - hundreds of stacks of finished work-tool products and steel - across multiple large yards. dropArea 50+, dropYard true.",
+          "multipleFacilities": "Campus of ~9 distinct buildings (production buildings, office, pole-barn covered-storage rows).",
+          "railServed": "TRUE - a rail line runs along the S/SE edge of the property and the EDC brochure explicitly lists rail access; oversized steel ships by rail.",
+          "urbanRural": "Rural - Wamego KS is a small town; the plant is on the edge of town beside a river/lake with adjacent farmland and small residential streets.",
+          "siteAreaAcres": "~104 acres for the full developed campus including all laydown yards from the perimeter box; the EDC brochure cites a ~44-acre core production parcel plus ~37 additional acres available."
+        }
+      },
+      {
+        "id": "21-tejon-ranch-lebec-ca-parts-distribution-center",
+        "name": "Caterpillar - Tejon Ranch (Lebec) CA Parts Distribution Center",
+        "type": "Parts distribution center (~400k sq ft, opened ~2012)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "low",
+        "uncertainFields": [
+          "coords",
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "dockDoors",
+          "dockDoorCount",
+          "dropArea",
+          "trailerParkingCapacity",
+          "entryLanes",
+          "exitLanes",
+          "buildingCount"
+        ],
+        "center": {
+          "lat": 35.0012,
+          "lng": -118.9405
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.9995,
+            "west": -118.9425,
+            "north": 35.0031,
+            "east": -118.9372
+          },
+          "truckGate": {
+            "south": 35,
+            "west": -118.9412,
+            "north": 35.0006,
+            "east": -118.9402
+          },
+          "dropYards": [
+            {
+              "south": 35.0005,
+              "west": -118.9392,
+              "north": 35.0028,
+              "east": -118.9373
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.9999,
+              "west": -118.9411,
+              "north": 35.0006,
+              "east": -118.9387
+            }
+          ],
+          "staging": {
+            "south": 35,
+            "west": -118.941,
+            "north": 35.0007,
+            "east": -118.9395
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 24,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 46,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster had no street address (\"Tejon Ranch Commerce Center, Lebec, CA 93243\",\n  geocode precision APPROXIMATE). The supplied lat/lng (34.841644,-118.864819) sat\n  in hilly terrain near I-5 ~16 km SOUTH of the actual facility — wrong location.\n- Web research (Tejon Ranch Co., Clayco/LJC design-build) confirms the facility IS\n  at the Tejon Ranch Commerce Center (TRCC), at the junction of Interstate 5 and\n  Highway 99 near Lebec / the foot of the Grapevine south of Bakersfield. It is a\n  409,000 sq ft one-level tilt-up parts distribution center plus a **200,000 sq\n  ft outdoor oversized-parts storage area, on a 46-acre site**, a $50M facility\n  dedicated January 2013, serving Cat dealers across the western US.\n- Best-match building locked at ~35.0012, -118.9405 — see below. This could not",
+        "mapsUrl": "https://www.google.com/maps/@35.00120,-118.94050,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "LOW CONFIDENCE on exact building. Roster had no street address (geocode APPROXIMATE) and the roster point was in hills near I-5, ~16 km from the actual site. Confirmed via Tejon Ranch Co. / Clayco that the facility IS at the Tejon Ranch Commerce Center (TRCC), at the I-5/Hwy 99 junction near Lebec/Grapevine: a 409,000 sq ft one-level tilt-up parts distribution center plus a 200,000 sq ft outdoor oversized-parts storage area, on a 46-acre site, dedicated Jan 2013.",
+          "building": "Best-match building locked at ~35.0012,-118.9405: a large (~400k+ sq ft) one-level distribution building with two-phase construction (original white-roof section + grey-roof expansion - consistent with the documented 'room next door for an additional 350k sq ft'), a large outdoor yard on the E side (consistent with the 200k sq ft oversized-parts outdoor storage), dock doors on the S face, and employee car parking on the W. Could NOT positively confirm via signage that this specific TRCC building is Caterpillar versus an adjacent tenant - flagged.",
+          "truckGate": "Modern distribution warehouse - the truck dock yard on the S/E side is typically gated/fenced. truckGate set true, guardShack false / remoteGs true on a remote-checkin assumption - all flagged given the building could not be positively confirmed.",
+          "dockDoors": "Dock doors run along the S building face; estimated ~24, 25-50 band - flagged (overhead estimate, limited imagery resolution).",
+          "dropArea": "Large outdoor yard E of the building used for oversized-parts storage and trailer staging; dropArea 25-50, dropYard true.",
+          "railServed": "No rail spur into the property; TRCC warehouses are truck-served (the rail line follows the I-5 corridor but does not enter the site).",
+          "urbanRural": "Rural - TRCC sits at the foot of the Grapevine surrounded by farmland and open hills, not within a metro's dense fabric.",
+          "siteAreaAcres": "46 acres per the Tejon Ranch Co. land-acquisition press release."
+        }
+      }
+    ]
+  }
+}

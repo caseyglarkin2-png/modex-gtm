@@ -1,0 +1,55 @@
+{
+  "name": "Metal Container Corporation - Jacksonville FL Can Plant",
+  "type": "Can Manufacturing Plant",
+  "coords": { "lat": 30.33980, "lng": -81.74480 },
+  "geofences": {
+    "perimeter": { "south": 30.33700, "west": -81.74850, "north": 30.34200, "east": -81.74300 },
+    "truckGate": { "south": 30.33760, "west": -81.74680, "north": 30.33820, "east": -81.74600 },
+    "dropYards": [
+      { "south": 30.33700, "west": -81.74800, "north": 30.34000, "east": -81.74560 }
+    ],
+    "dockAprons": [
+      { "south": 30.34000, "west": -81.74600, "north": 30.34130, "east": -81.74450 },
+      { "south": 30.33880, "west": -81.74640, "north": 30.33980, "east": -81.74540 }
+    ],
+    "staging": { "south": 30.33800, "west": -81.74620, "north": 30.33900, "east": -81.74500 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35,
+    "trailersVisible": 110,
+    "trailerParkingCapacity": 180,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 40.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@30.33980,-81.74480,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "scale", "dockDoorCount", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "ROSTER ADDRESS CORRECTED. The roster's address (5775 Skinner Lake Dr) and coords (30.2524,-81.5380) were WRONG - that location is a commercial/retail area in SE Jacksonville. The actual MCC Jacksonville can plant is at 1100 Ellis Rd N, West Jacksonville FL 32254 (EPA TRI facility 32205MTLCN1100N; confirmed via Yelp, Jax Daily Record). Locked center on the MCC manufacturing complex at 30.33980,-81.74480. Note: this plant is in WEST Jacksonville, NOT adjacent to the AB Jacksonville brewery (which is on the city's far north side at Busch Dr) - the roster's 'adjacent to brewery' note is incorrect.",
+    "truckGate": "Large fully-fenced industrial plant - continuous chain-link perimeter fence confirmed all around the building and trailer yard in Street View (2025). A controlled vehicular entrance with divided entry/exit and directional arrow markings on the SE side; a gate spans the truck lane. Controlled truck gate - true.",
+    "guardShack": "No clearly identifiable guard booth at the truck gate; a small structure near the entrance at z21 is ambiguous. Classified false (kiosk/remote check-in implied) but flagged uncertain - medium confidence.",
+    "remoteGs": "Set true because there IS a controlled truck gate but no positively-confirmed guard booth - implies kiosk/call-box/app check-in. Flagged uncertain.",
+    "drivewayShort": "Short approach from the SE gate to the trailer yard / dock aprons.",
+    "dockDoors": "Trailers backed in along the NW and W building faces; ~35 estimated, 25-50 band.",
+    "dropArea": "Large marked-stall trailer drop yard on the W side of the building (yellow stall markings) holding ~110 trailers; 50+ band, capacity ~180. dropYard true.",
+    "shipRcvSeparate": "Dock banks on separate building faces (NW vs W).",
+    "railServed": "A rail line runs along the W edge with covered hopper cars (aluminum coil/feedstock delivery) staged on sidings - clearly rail-served.",
+    "multipleFacilities": "Single large can-manufacturing building plus a small yard maintenance/dock structure - one primary building cluster, not a campus.",
+    "urbanRural": "Dense West Jacksonville industrial district within the Jacksonville metro - Urban.",
+    "scale": "No truck scale positively identified - flagged uncertain."
+  },
+  "method": "deep-audit"
+}

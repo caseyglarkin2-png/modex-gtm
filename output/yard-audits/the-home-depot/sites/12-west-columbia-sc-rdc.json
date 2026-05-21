@@ -1,0 +1,50 @@
+{
+  "name": "Home Depot RDC - West Columbia SC",
+  "type": "Rapid Deployment Center",
+  "coords": { "lat": 33.908633, "lng": -81.074818 },
+  "geofences": {
+    "perimeter": { "south": 33.90700, "west": -81.07860, "north": 33.91110, "east": -81.07100 },
+    "truckGate": { "south": 33.90880, "west": -81.07200, "north": 33.90970, "east": -81.07060 },
+    "dropYards": [
+      { "south": 33.90950, "west": -81.07820, "north": 33.91090, "east": -81.07120 },
+      { "south": 33.90720, "west": -81.07800, "north": 33.90830, "east": -81.07150 }
+    ],
+    "dockAprons": [
+      { "south": 33.90900, "west": -81.07780, "north": 33.90990, "east": -81.07150 },
+      { "south": 33.90770, "west": -81.07780, "north": 33.90860, "east": -81.07150 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 130, "trailersVisible": 230, "trailerParkingCapacity": 320,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 62.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.908633,-81.074818,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "No barrier arm, sliding gate, or guard-booth checkpoint structure found at any road-edge entrance across zoom 19-20 satellite and Street View (2023-08). Building sits well back inside a logistics park behind retention ponds and grass buffers; truck access is via uncontrolled internal park roads. A web listing cites 'entrance security and strict appointments' — interpreted as appointment-based dock scheduling and a security desk at the building dock office rather than a physical road gate. Marked medium-confidence; the office/check-in area was partly obscured by ponds in available imagery.",
+    "guardShack": "No standalone staffed booth structure visible at any entrance.",
+    "remoteGs": "False because no controlled physical truck gate was observed.",
+    "dropYard": "Dedicated trailer-storage rows along both long faces, separate from active dock staging.",
+    "shipRcvSeparate": "Dock doors run along both long faces (N and S) — two distinct dock banks.",
+    "dockDoors": "~130 doors estimated across both long faces; large cross-dock RDC.",
+    "fastLaneOpportunity": "Very wide paved truck yard with abundant unused width for an express/bypass lane.",
+    "entryLanes": "Estimated 2 inbound; no painted lane control, count approximate.",
+    "urbanRural": "Logistics park in the Saxe Gotha / Southport area of West Columbia with surrounding woodland and a residential edge; Rural per rubric.",
+    "geocode": "Roster geocode had a 3918 m offset flag; verified pin lands on the correct HD RDC building."
+  },
+  "method": "deep-audit"
+}

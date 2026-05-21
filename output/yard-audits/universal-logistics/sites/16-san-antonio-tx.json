@@ -1,0 +1,47 @@
+{
+  "name": "Universal Logistics - San Antonio Contract Logistics Warehouse - San Antonio TX",
+  "type": "Contract Logistics / Value-Added Warehouse",
+  "coords": { "lat": 29.29800, "lng": -98.55000 },
+  "geofences": {
+    "perimeter": null,
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 0.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.29800,-98.55000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural", "connectivityIssue",
+    "multipleFacilities", "scale", "dropYard", "multiStep"
+  ],
+  "fieldNotes": {
+    "_location": "Could NOT positively resolve to a discrete building. The roster supplied no address/coords and was sourced only from an Indeed locations list. Universal Logistics does have a San Antonio TX presence (Indeed/Glassdoor list San Antonio jobs) and Universal's value-added 'sequencing' service line is squarely aimed at automotive OEM plants - consistent with the roster note that the facility serves Toyota Motor Manufacturing Texas (TMMTX) in the south San Antonio automotive-supplier corridor. However, no public source ties Universal/LINC to a specific San Antonio building or street address.",
+    "_candidate": "TMMTX (1 Lone Star Pass, off Applewhite Rd, south San Antonio ~29.298,-98.550) is notable for integrating 20+ on-site suppliers ON the same campus - some under the same roof - plus an adjacent supplier-logistics corridor. Universal's San Antonio operation most plausibly runs a sequencing / value-added line INSIDE the Toyota campus or in a leased corridor warehouse, neither of which carries an independent, publicly-mappable Universal street identity. coords here point at the TMMTX campus as a best-available area anchor only - NOT a confirmed Universal building.",
+    "_classification": "All 22 classification fields are best-guess defaults pending a confirmed address and must be treated as unverified. urbanRural set Urban (south San Antonio metro fabric). Geofences and yardMetrics left null/zero because no specific building was locked."
+  },
+  "method": "deep-audit"
+}

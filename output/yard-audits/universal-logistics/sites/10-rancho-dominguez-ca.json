@@ -1,0 +1,66 @@
+{
+  "name": "Universal Intermodal Services - Compton/Rancho Dominguez Terminal - Rancho Dominguez CA",
+  "type": "Intermodal / Drayage Terminal / Container Yard (owned)",
+  "coords": { "lat": 33.86810, "lng": -118.21210 },
+  "geofences": {
+    "perimeter": { "south": 33.86640, "west": -118.21330, "north": 33.86970, "east": -118.21050 },
+    "truckGate": { "south": 33.86760, "west": -118.21290, "north": 33.86820, "east": -118.21230 },
+    "dropYards": [
+      { "south": 33.86660, "west": -118.21320, "north": 33.86790, "east": -118.21130 },
+      { "south": 33.86870, "west": -118.21300, "north": 33.86960, "east": -118.21100 }
+    ],
+    "dockAprons": [
+      { "south": 33.86840, "west": -118.21270, "north": 33.86890, "east": -118.21130 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18,
+    "trailersVisible": 120,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 2,
+    "buildingCount": 2,
+    "siteAreaAcres": 11.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.8681,-118.2121,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "trailerParkingCapacity", "truckGateCount"],
+  "fieldNotes": {
+    "siteResolution": "Universal Intermodal Services / Southern Counties Express Inc dba Universal Intermodal Services, Rancho Dominguez CA terminal at 18020 S Santa Fe Ave, Rancho Dominguez CA 90221 - confirmed via loadmatch.com directory and FMCSA. A drayage / container-yard terminal serving the LA/Long Beach ports in the dense Rancho Dominguez industrial district. Roster geocode moved 149 m; the fenced building-plus-yard property fronting S Santa Fe Ave is the audit target. Center locked at 33.86810,-118.21210.",
+    "truckGate": "The whole property is ringed by chain-link perimeter fence. Street View of the S Santa Fe Ave frontage shows fenced front yards with sliding gates set in the fence line at the driveway openings - controlled truck access. Universal Intermodal markets itself as a C-TPAT certified secure carrier, consistent with access control. truckGate = true (flagged uncertain - sliding gates seen but the gate lane was not captured open / in use in Street View).",
+    "guardShack": "No clear staffed guard booth observed beside the gate in Street View. Classed guardShack = false / remoteGs = true (sliding gate without a visible manned booth implies kiosk or driver check-in). Both flagged uncertain.",
+    "drayageYard": "The property is a working drayage yard: rows of chassis and containers along the W and S of the building, trailer/container storage on the N, and equipment lanes - heavy drop-yard character. dropArea 50+, dropYard = true.",
+    "docks": "The central warehouse building has a modest dock bank (~18 doors estimated) - this is primarily a yard operation, not a dock-heavy DC. Flagged uncertain.",
+    "backupSensitive": "Gates open directly onto S Santa Fe Ave, a busy industrial arterial with little stacking room outside the fence - a truck queue at the gate would spill onto the road. backupSensitive = true.",
+    "buildingCount": "One main warehouse plus a small ancillary building/structure on the parcel - counted as 2. Not a multi-large-building campus, so multipleFacilities = false.",
+    "railServed": "A rail line runs through the broader district nearby but no rail spur enters this fenced parcel - drayage moves are by truck. railServed = false.",
+    "urbanRural": "Rancho Dominguez sits inside the dense LA-metro industrial fabric near the ports. Classified Urban.",
+    "imageryNote": "The dense, irregular industrial parcel and the ~149 m geocode shift make the exact perimeter and truck-gate count approximate; flagged for human review."
+  },
+  "method": "deep-audit"
+}

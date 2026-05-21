@@ -1,0 +1,52 @@
+{
+  "name": "CJ Logistics - Fontana CA",
+  "type": "Distribution Center",
+  "coords": { "lat": 34.049300, "lng": -117.517400 },
+  "geofences": {
+    "perimeter": { "south": 34.047900, "west": -117.519000, "north": 34.050800, "east": -117.515000 },
+    "truckGate": { "south": 34.048000, "west": -117.516400, "north": 34.048600, "east": -117.515600 },
+    "dropYards": [
+      { "south": 34.048300, "west": -117.516300, "north": 34.050400, "east": -117.515100 }
+    ],
+    "dockAprons": [
+      { "south": 34.048300, "west": -117.516300, "north": 34.050400, "east": -117.515800 },
+      { "south": 34.048100, "west": -117.518500, "north": 34.048600, "east": -117.517400 }
+    ],
+    "staging": { "south": 34.048300, "west": -117.516300, "north": 34.050400, "east": -117.515100 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45, "trailersVisible": 14, "trailerParkingCapacity": 80,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 29.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.049300,-117.517400,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "0-10",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "remoteGs", "dockDoorCount", "trailerParkingCapacity", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "The large east-side truck yard is enclosed by chain-link fence (confirmed in multiple 2023-2025 Street Views) with a single wide driveway opening off Jurupa Ave at the SE corner - a controlled fenced enclosure with one pinch-point entrance. A sliding gate at the opening is implied by the perimeter fence but could not be positively resolved in imagery; classed truckGate true with medium confidence.",
+    "guardShack": "No guard booth structure visible at the truck-yard entrance in z21 satellite or Street View.",
+    "remoteGs": "True - a fenced/controlled truck-yard entrance with no guard booth implies kiosk/app check-in.",
+    "shipRcvSeparate": "Main dock bank on the east face fronting the truck yard, plus a separate smaller dock area on the SW face - two distinct dock clusters.",
+    "dockDoors": "Dock bank on the east face (~35-40 doors) plus a small SW dock area; ~45 doors total estimated - low confidence.",
+    "dropArea": "East truck yard is large but held only a few trailers in 2026 imagery; no dense marked drop-trailer stalls.",
+    "dropYard": "The fenced east truck yard functions as a dedicated trailer-storage / staging lot.",
+    "drivewayLong": "Deep open paved truck yard between the gate opening and the east dock face; ample queuing room for 3+ trucks.",
+    "fastLaneOpportunity": "Very wide entrance and a largely empty truck yard leave abundant room to add an express lane.",
+    "urbanRural": "Site is in the dense Fontana / Inland Empire warehouse district, surrounded on all sides by large distribution buildings; clearly Urban.",
+    "railServed": "No rail spur; a flood-control channel (not rail) borders the east side of the truck yard.",
+    "siteAreaAcres": "Estimated from perimeter box (~323m x ~369m) covering the building, east truck yard, and south parking.",
+    "facilityNote": "Racklify lists the Fontana CJ facility at 250,430 sq ft. CJ Logistics America operates a 3PL/fulfillment DC here; a B&G Foods FSIS-inspected establishment is associated with CJ Logistics America in Fontana."
+  },
+  "method": "deep-audit"
+}

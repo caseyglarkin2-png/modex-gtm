@@ -1,0 +1,23 @@
+{
+  "name": "Kraft Heinz - Champaign",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "scale"],
+  "fieldNotes": {
+    "truckGate": "Street View clearly shows a chain-link perimeter fence with a rolling/swing gate across the truck drive - a controlled truck entrance.",
+    "guardShack": "No guard booth visible at the gate in Street View; the gated entry appears unmanned (kiosk/call-box style), so remoteGs is true.",
+    "urbanRural": "Large plant within developed city fabric, residential neighborhood directly across the road - Urban.",
+    "dockDoors": "Very long continuous dock face with many trailers backed in across multiple building faces.",
+    "dropYard": "Extensive trailer-storage rows on satellite to the south, separate from active dock staging."
+  }
+}

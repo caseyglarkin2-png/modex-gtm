@@ -1,0 +1,71 @@
+{
+  "name": "FedEx Freight Hub - Hagerstown MD (HGR)",
+  "type": "Freight LTL hub service center",
+  "coords": { "lat": 39.62500, "lng": -77.80350 },
+  "geofences": {
+    "perimeter": { "south": 39.62330, "west": -77.80850, "north": 39.62720, "east": -77.79980 },
+    "truckGate": { "south": 39.62420, "west": -77.80800, "north": 39.62490, "east": -77.80700 },
+    "dropYards": [
+      { "south": 39.62380, "west": -77.80700, "north": 39.62470, "east": -77.80050 },
+      { "south": 39.62560, "west": -77.80650, "north": 39.62650, "east": -77.80050 }
+    ],
+    "dockAprons": [
+      { "south": 39.62470, "west": -77.80700, "north": 39.62530, "east": -77.80050 },
+      { "south": 39.62520, "west": -77.80700, "north": 39.62580, "east": -77.80050 }
+    ],
+    "staging": { "south": 39.62440, "west": -77.80730, "north": 39.62520, "east": -77.80620 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 290,
+    "trailersVisible": 130,
+    "trailerParkingCapacity": 400,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 55.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.62500,-77.80350,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes", "scale"],
+  "fieldNotes": {
+    "truckGate": "Controlled truck entrance at the SW corner off Transportation Circle - 2024 Street View (sv3) clearly shows chain-link security fencing with sliding gates across the truck lanes, bollards, and lane markings; the whole property is fully fenced.",
+    "guardShack": "A gray windowed guard booth stands in the truck lane at the SW gate (windows on multiple sides, ~1-vehicle footprint), with inbound and outbound lanes splitting around it - clearly visible in z20 satellite and 2024 Street View sv3. Staffed booth - remoteGs false.",
+    "preGateStaging": "Wide paved apron outside/before the gate at the SW entrance gives room for trucks to wait before the booth.",
+    "postGateStaging": "Vast paved yard inside the gate before the dock aprons - extensive internal queuing/holding for an LTL hub.",
+    "drivewayLong": "Deep paved approach from the SW gate; easily holds 3+ trucks before the dock aprons.",
+    "fastLaneOpportunity": "Very wide gate apron with multiple lanes and abundant unused paved width - room for an express/bypass lane.",
+    "dockDoors": "Single very long LTL cross-dock building with continuous dock doors on BOTH long faces - FedEx Freight's largest terminal in North America; FedEx Freight HGR is cited at ~278+ doors. Estimated ~290 - count approximate, flagged uncertain. 50+ band.",
+    "dropArea": "Extensive trailer parking on both sides of the cross-dock building; hundreds of marked stalls, many holding parked trailers/dollies without tractors - dropYard true, 50+ band.",
+    "entryExitTogether": "Single SW gate handles both entry and exit, with the lanes splitting around the guard booth.",
+    "multipleFacilities": "Two FedEx buildings on the property - the main LTL cross-dock terminal/office and a separate truck-maintenance shop building at the SW (confirmed by web research describing a Terminal/Office building and a Truck Maintenance building).",
+    "railServed": "No rail spur enters the property.",
+    "urbanRural": "Hagerstown MD - the site is on the edge of town in a highway-adjacent industrial setting with woods and open ground around it; judged Rural.",
+    "scale": "No truck scale clearly identified - flagged uncertain.",
+    "buildingCount": "2 - main LTL cross-dock terminal plus truck-maintenance shop."
+  },
+  "method": "deep-audit"
+}

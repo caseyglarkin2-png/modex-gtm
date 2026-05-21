@@ -1,0 +1,72 @@
+{
+  "name": "Home Depot SDC - Lathrop CA",
+  "type": "Stocking Distribution Center",
+  "coords": { "lat": 37.792762, "lng": -121.295676 },
+  "geofences": {
+    "perimeter": { "south": 37.78950, "west": -121.29900, "north": 37.79730, "east": -121.28850 },
+    "truckGate": { "south": 37.79490, "west": -121.29230, "north": 37.79560, "east": -121.29150 },
+    "dropYards": [
+      { "south": 37.79280, "west": -121.29710, "north": 37.79610, "east": -121.29230 },
+      { "south": 37.78990, "west": -121.29850, "north": 37.79350, "east": -121.29380 }
+    ],
+    "dockAprons": [
+      { "south": 37.79320, "west": -121.29650, "north": 37.79620, "east": -121.29260 },
+      { "south": 37.79020, "west": -121.29760, "north": 37.79320, "east": -121.29370 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 200,
+    "trailersVisible": 230,
+    "trailerParkingCapacity": 280,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 75.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.792762,-121.295676,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "truckGateCount", "guardShack", "entryLanes"],
+  "fieldNotes": {
+    "truckGate": "The truck court is wrapped in a chainlink perimeter fence (confirmed in 2023 Street View); truck access is via gate openings in that fence on the NE-side access road. Controlled entry but spec-building style.",
+    "guardShack": "No staffed guard booth seen along any perimeter access — only an open/sliding gate in the chainlink fence. Flagged as uncertain (booth could be small/obscured), but the building reads as a modern Prologis-style spec DC without a manned gatehouse.",
+    "remoteGs": "True — a fenced truck court with controlled gate(s) but no guard shack, implying badge/kiosk entry.",
+    "entryExitSeparate": "The cross-dock building has truck courts wrapping both long faces with separate access points (NE-side and SE-end), so inbound and outbound flows use distinct gates — modeled as entryExitSeparate.",
+    "truckGateCount": "At least 2 truck access points serve the two truck courts; exact count uncertain.",
+    "drivewayLong": "Deep truck courts and long internal access roads from the public road give ample queue depth (3+ trucks).",
+    "fastLaneOpportunity": "Very wide open truck courts and generous paved access roads provide clear room to add an express/bypass lane.",
+    "shipRcvSeparate": "Cross-dock building with dock banks and trailers backed in on BOTH long faces — two physically separate dock clusters.",
+    "dockDoors": "Cross-dock with dock doors along both ~750m long building faces; well over 50 doors. dockDoorCount ~200 is an estimate.",
+    "dropArea": "Heavy trailer activity — many rows of detached trailers in drop lots on both truck courts and adjacent yard areas. 50+ band.",
+    "railServed": "A rail line runs parallel to the building's SW side and crosses the NE access road, but no spur enters the building/dock — not rail-served.",
+    "urbanRural": "Lathrop CA, in the dense San Joaquin Valley logistics corridor at the I-5 interchange — surrounded by other large distribution buildings. Urban industrial fabric.",
+    "siteAreaAcres": "Estimated from the building footprint plus both wrapping truck courts and trailer lots; one of HD's larger CA distribution buildings.",
+    "postGateStaging": "Wide paved truck courts inside the fence provide ample post-gate holding before the dock doors.",
+    "scale": "No truck scale identified in the truck path."
+  },
+  "method": "deep-audit"
+}

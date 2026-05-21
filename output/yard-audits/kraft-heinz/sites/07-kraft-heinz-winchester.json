@@ -1,0 +1,23 @@
+{
+  "name": "Kraft Heinz - Winchester",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "streetview": "Street View shows trucks at dock doors with an open yard/driveway - no perimeter fence or gate in this frame.",
+    "truckGate": "No checkpoint resolved on satellite; yard roads run open to the public road.",
+    "multipleFacilities": "Plant with multiple adjacent buildings plus large separate trailer/warehouse lots.",
+    "dropYard": "Extensive trailer-storage rows on multiple sides of the plant.",
+    "urbanRural": "Edge-of-town plant (Winchester VA) with adjacent industrial and woods; judged Rural."
+  }
+}

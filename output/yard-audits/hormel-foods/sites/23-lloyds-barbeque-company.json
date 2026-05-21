@@ -1,0 +1,64 @@
+{
+  "name": "Lloyd's Barbeque Company - Mendota Heights MN",
+  "type": "Production Facility",
+  "coords": { "lat": 44.86640, "lng": -93.17050 },
+  "geofences": {
+    "perimeter": { "south": 44.86530, "west": -93.17175, "north": 44.86790, "east": -93.16940 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 44.86680, "west": -93.17080, "north": 44.86770, "east": -93.16970 }
+    ],
+    "dockAprons": [
+      { "south": 44.86620, "west": -93.17080, "north": 44.86680, "east": -93.16990 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14,
+    "trailersVisible": 16,
+    "trailerParkingCapacity": 24,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 12.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@44.86640,-93.17050,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "truckGate"],
+  "fieldNotes": {
+    "location": "Roster coords (44.86629,-93.170877, ROOFTOP) landed on/near the plant. Confirmed via Hormel ownership and the 1455 Mendota Heights Rd address: a single large white-roofed meat-processing building with heavy rooftop refrigeration/processing equipment in the Mendota Heights industrial park. Locked center 44.86640,-93.17050.",
+    "truckGate": "Open site. Satellite shows no perimeter fence; the truck yard, dock apron and employee parking form one continuous paved lot off Mendota Heights Rd. StreetView confirms open landscaped frontage with no gate or barrier arm. truckGate false. (StreetView has no road access into the truck yard itself, so a low-likelihood internal gate cannot be 100% excluded -> flagged.)",
+    "guardShack": "No guard booth visible on any frontage or in the yard.",
+    "dropYard": "Rows of untethered trailers parked in the NE yard, distinct from the dock apron -> dropYard true.",
+    "dockDoors": "~14 dock doors on the NE face of the plant building (trailers backed in); banded 10-25, low-confidence.",
+    "dropArea": "10-25 trailers parked without tractors in the NE trailer yard.",
+    "urbanRural": "Mendota Heights is an inner-ring suburb of the Minneapolis-St. Paul metro; the site sits in a dense suburban office/industrial park beside I-494 -> Urban.",
+    "drivewayShort": "Short approach from the road driveway into the dock apron, holding only 1-2 trucks.",
+    "buildingCount": "Single connected plant building (the SE office structure is a separate neighboring property, not Lloyd's)."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,53 @@
+{
+  "name": "Pactiv Evergreen - Athens GA",
+  "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
+  "coords": { "lat": 33.97990, "lng": -83.38900 },
+  "geofences": {
+    "perimeter": { "south": 33.97750, "west": -83.39120, "north": 33.98180, "east": -83.38680 },
+    "truckGate": { "south": 33.97870, "west": -83.39060, "north": 33.97950, "east": -83.38960 },
+    "dropYards": [
+      { "south": 33.97950, "west": -83.38900, "north": 33.98100, "east": -83.38760 }
+    ],
+    "dockAprons": [
+      { "south": 33.97950, "west": -83.38900, "north": 33.98120, "east": -83.38730 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 24,
+    "trailersVisible": 30,
+    "trailerParkingCapacity": 45,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 32.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.97990,-83.38900,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoorCount", "guardShack", "remoteGs", "buildingCount", "railServed"],
+  "fieldNotes": {
+    "location": "Roster geocode (ROOFTOP, 33.979548,-83.389046) lands on the main plant building of a multi-building industrial campus off Dairy Pak Road, Athens GA — confirmed at satellite z16-z19. This is the legacy Evergreen Packaging / Pactiv Athens carton-converting plant (Beverage Merchandising; gable-top carton stock).",
+    "truckGate": "The campus is bounded by fencing; the access roads (Dairy Pak Rd and the internal loop) reach the dock/yard area through controlled openings. A fenced compound with a chain-link gate and access-controlled entry is visible in Street View 2025-02 near the southwest entrance. truckGate = true.",
+    "guardShack": "No clearly identifiable multi-window staffed guard booth at the main entrance in satellite or Street View — the entrance reads as an open industrial-park-style gated entry with employee parking and landscaped islands. Flagged uncertain. Best read: no guard shack.",
+    "remoteGs": "Gated/fenced campus with no confirmed staffed booth -> remoteGs = true. Medium confidence.",
+    "multipleFacilities": "Clear multi-building campus — main converting plant plus several adjacent manufacturing/warehouse buildings and ancillary structures (~6 distinct buildings).",
+    "railServed": "A rail spur/line runs along the northeast edge of the campus alongside the main building; it appears to serve the property, consistent with a paperboard/carton plant receiving roll stock by rail. Flagged uncertain — cannot fully confirm the spur enters vs. runs adjacent.",
+    "dockDoors": "Dock doors with trailers backed in run along the northeast face of the main building (orange/white trailers visible z18). Estimated ~20-25 across the campus. Low-confidence count.",
+    "dropArea": "Moderate trailer parking along the northeast dock apron and adjacent paved areas — banded 10-25.",
+    "dropYard": "A dedicated trailer-parking strip exists along the dock apron / NE side, separate from active dock positions.",
+    "urbanRural": "Inside the Athens GA metro fabric — the campus sits in an established industrial district off Newton Bridge Rd / Dairy Pak Rd with dense surrounding development, neighborhoods, and other plants. Urban.",
+    "fastLaneOpportunity": "Entrance and internal roads are moderately constrained by the multi-building campus layout; limited obvious room to add a dedicated express lane."
+  },
+  "method": "deep-audit"
+}

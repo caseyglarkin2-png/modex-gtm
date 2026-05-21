@@ -1,0 +1,67 @@
+{
+  "name": "Pactiv Evergreen - Kinston NC Plant",
+  "type": "Manufacturing Plant / Distribution (Foodservice paper packaging; ex-Dopaco facility)",
+  "coords": { "lat": 35.271813, "lng": -77.667863 },
+  "geofences": {
+    "perimeter": { "south": 35.269700, "west": -77.669600, "north": 35.273600, "east": -77.665800 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 35.270700, "west": -77.666800, "north": 35.272700, "east": -77.665900 }
+    ],
+    "dockAprons": [
+      { "south": 35.270800, "west": -77.667100, "north": 35.272700, "east": -77.666300 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30,
+    "trailersVisible": 18,
+    "trailerParkingCapacity": 50,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 23.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.271813,-77.667863,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "RESOLVED. The roster geocode (35.262664, -77.581635, APPROXIMATE, moved 2103 m) landed in downtown Kinston - wrong. The facility is actually in the Lenoir County industrial park WEST of Kinston, off Enterprise Blvd near West Pharmaceutical Services and Sanderson Farms. Confirmed via property listings (LoopNet/Reonomy/clustrmaps: 1447 Enterprise Blvd, ~400,000 SF, built 1994, 23.02-acre site; clustrmaps also lists prior occupant 'Dopaco Inc' - a paper/foodservice packaging firm absorbed into the Pactiv/Reynolds family) and fresh 2026-03 Street View showing the plant on Enterprise Blvd. Locked center 35.271813, -77.667863 on the large white-roofed building.",
+    "truckGate": "Open campus. Fresh 2026-03 Street View along Enterprise Blvd shows NO perimeter fence and NO gate - the road runs open up to the east dock apron and the front employee parking. Driveways are uncontrolled. truckGate false.",
+    "guardShack": "No staffed booth. A small structure on a grass island near the front parking entrance is a portable office/storage trailer (consistent across z20 satellite and 2026-03 Street View), not a guard booth. guardShack false.",
+    "remoteGs": "No gate present, so remoteGs false.",
+    "drivewayLong": "The open driveway from Enterprise Blvd to the east dock yard runs 100+ m - ample room for a 3+ truck queue inside the property.",
+    "dockDoors": "East building face carries a long dock bank under a canopy with many doors and trailers backed in (clear in z19-z20 satellite and 2026-03 Street View). Consistent with the 400,000 SF building footprint; estimated 25-40 doors, banded 25-50. Medium confidence on exact count.",
+    "dropArea": "Paved east dock yard holds trailers and has room for a substantial drop fleet; counted ~18 trailers in imagery, capacity banded 25-50.",
+    "dropYard": "The east paved yard functions as a trailer drop/staging lot beside the dock bank - dropYard true.",
+    "railServed": "A rail line runs in the corridor immediately east of the property (NE-SW) with a grade crossing on Enterprise Blvd, but no spur branches into the plant; docks are road-facing, not rail-facing. Rail not served.",
+    "urbanRural": "Lenoir County industrial park west of Kinston NC, surrounded by farm fields and a few other large industrial buildings - Rural per rubric.",
+    "siteAreaAcres": "Property listings cite a 23.02-acre site; perimeter box set to match (~430 m N-S x ~350 m E-W). siteAreaAcres 23.",
+    "entryLanes": "Open driveways; entry and exit share the access points. Lane counts are estimates."
+  },
+  "method": "deep-audit"
+}

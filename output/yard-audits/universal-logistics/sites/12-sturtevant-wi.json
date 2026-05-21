@@ -1,0 +1,51 @@
+{
+  "name": "Universal Logistics / LINC - Sturtevant Contract Logistics Warehouse - Sturtevant WI",
+  "type": "Contract Logistics / Value-Added Warehouse",
+  "coords": { "lat": 42.70030, "lng": -87.87400 },
+  "geofences": {
+    "perimeter": { "south": 42.69850, "west": -87.87620, "north": 42.70360, "east": -87.87150 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 42.70020, "west": -87.87560, "north": 42.70360, "east": -87.87420 },
+      { "south": 42.69960, "west": -87.87340, "north": 42.70180, "east": -87.87170 }
+    ],
+    "dockAprons": [
+      { "south": 42.69970, "west": -87.87480, "north": 42.70340, "east": -87.87420 },
+      { "south": 42.69970, "west": -87.87370, "north": 42.70300, "east": -87.87320 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 47.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.70030,-87.87400,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Open site. The building sits behind a wide grass setback on a business-park road; truck driveways connect directly to the public road with no barrier arm, sliding gate, or checkpoint pinch-point. No perimeter fence on the east frontage.",
+    "guardShack": "No guard booth at any driveway. Street View of the east frontage and the south end shows only open paved aprons and a small office at the south corner of the building - no 1-3-space booth structure.",
+    "shipRcvSeparate": "Dock banks on the NE/east face (Werner trailers + container backed in) and on the west face (yard full of CNH agricultural material) are physically separate building faces - inbound material vs outbound flow appear split.",
+    "dropYard": "West-side yard is full of stored agricultural-equipment material on stands and stacked freight (CNH/Case New Holland account) plus parked trailers; east lot holds a row of ~8+ drop trailers - dedicated trailer/material storage separate from active dock staging.",
+    "dockDoorCount": "Estimate from overhead - building is ~1300+ ft long with dock banks on both long faces; ~70 doors is an honest midpoint, flagged low-confidence.",
+    "urbanRural": "Edge-of-town Racine County business park (Sturtevant/Mount Pleasant); farmland and open fields immediately south and west. Small-town industrial setting -> Rural per rubric.",
+    "scale": "No truck scale visible in the truck path."
+  },
+  "method": "deep-audit"
+}

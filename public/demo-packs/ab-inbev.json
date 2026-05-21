@@ -1,0 +1,2212 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:32:42.163Z",
+  "account": {
+    "slug": "ab-inbev",
+    "displayName": "AB InBev",
+    "archetype": "beverage",
+    "siteCount": 21,
+    "coverageNote": {
+      "auditedCount": 21,
+      "estimatedFootprint": null,
+      "droppedStubCount": 0,
+      "capHit": false,
+      "note": "Audited all 21 identifiable facilities."
+    }
+  },
+  "research": {
+    "facility_count": 100,
+    "audited_facilities": 21,
+    "source": "yard-audit",
+    "confidence": "verified",
+    "caveats": [
+      "Anheuser-Busch Brewery - St. Louis MO: audit note mentions 'closed'",
+      "Anheuser-Busch Brewery - Fairfield CA: audit note mentions 'sold'",
+      "Anheuser-Busch Brewery - Merrimack NH: audit note mentions 'closed'",
+      "Anheuser-Busch Brewery - Newark NJ: audit note mentions 'sold'",
+      "Busch Agricultural Resources - Jonesboro AR Rice Mill: audit note mentions 'closed'"
+    ]
+  },
+  "network": {
+    "bbox": [
+      -122.0965,
+      29.7695,
+      -71.4815,
+      43.4465
+    ],
+    "archetypeMix": {
+      "#6": 7,
+      "#9": 2,
+      "#7": 4,
+      "#3": 8
+    },
+    "totals": {
+      "dockDoors": 614,
+      "trailerCapacity": 4072,
+      "gates": 29,
+      "railServed": 15,
+      "acres": 1934.5
+    },
+    "sites": [
+      {
+        "id": "01-anheuser-busch-brewery-st-louis-mo",
+        "name": "Anheuser-Busch Brewery - St. Louis MO",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "multiStep",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 38.5965,
+          "lng": -90.208
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.593,
+            "west": -90.215,
+            "north": 38.6015,
+            "east": -90.2025
+          },
+          "truckGate": {
+            "south": 38.5962,
+            "west": -90.209,
+            "north": 38.5968,
+            "east": -90.208
+          },
+          "dropYards": [
+            {
+              "south": 38.5938,
+              "west": -90.2085,
+              "north": 38.5975,
+              "east": -90.2045
+            },
+            {
+              "south": 38.5945,
+              "west": -90.2045,
+              "north": 38.5985,
+              "east": -90.202
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 38.5956,
+              "west": -90.2095,
+              "north": 38.597,
+              "east": -90.208
+            }
+          ],
+          "staging": {
+            "south": 38.596,
+            "west": -90.2065,
+            "north": 38.5975,
+            "east": -90.205
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 420,
+          "trailerParkingCapacity": 600,
+          "truckGateCount": 3,
+          "buildingCount": 40,
+          "siteAreaAcres": 254,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": true
+        },
+        "dossierExcerpt": "The roster coordinates (38.597062, -90.212157) landed inside the historic\nAnheuser-Busch flagship brewery campus in the Soulard/south-city district of\nSt. Louis. Satellite probes at z16–z18 confirmed the world's-largest-single-site\nbrewery: a multi-block, fully-enclosed legacy industrial campus that runs east\nto the Mississippi River and is bounded by I-55 on the west. The roster pin sits\nin the brewery core; the operational truck yard is the distribution complex on\nthe campus's east side. Center locked at 38.59650, -90.20800.",
+        "mapsUrl": "https://www.google.com/maps/@38.59650,-90.20800,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Flagship 1852 A-B brewery, world's largest single-site brewery. Sprawling fully-enclosed legacy urban industrial campus on the Mississippi River, bounded by I-55 to the west.",
+          "truckGate": "Multiple controlled truck gates confirmed in Street View - sliding/swing metal gates with chain-link/wall perimeter fencing throughout the campus (SV at SW corner off Pestalozzi, internal warehouse gate with yellow-marked swing gate, east trailer-yard gate). Whole campus is fenced/walled.",
+          "guardShack": "A-B St. Louis has a long-documented staffed main entrance/guardhouse. Multiple gated checkpoints on a high-security legacy campus; guard presence is standard. High confidence on guarded entry though individual booth structures partly obscured by buildings in imagery.",
+          "multipleFacilities": "Campus comprises 40+ distinct brewery, packaging, warehouse and support buildings across multiple city blocks plus a large distribution warehouse.",
+          "dropArea": "Hundreds of trailers parked across multiple large drop yards east of the distribution warehouse - estimated 400+ trailers visible, 600+ capacity.",
+          "dockDoors": "50+ dock doors on the large white-roof distribution warehouse plus packaging-building docks; trailers backed in confirm active docks.",
+          "railServed": "Extensive on-site rail yards with many spurs running into the campus and warehouses; rail is heavily used at this site.",
+          "scale": "Truck scale presence inferred from heavy freight operation; not individually resolved in imagery - flagged uncertain.",
+          "multiStep": "Multi-gate campus with internal secondary gates between brewery core and warehouse/trailer-yard zones implies staged checkpoints; flagged uncertain.",
+          "backupSensitive": "Urban campus surrounded by public streets, I-55, and residential blocks; truck queues could spill onto city streets.",
+          "siteAreaAcres": "Perimeter box covers the AB operational footprint (brewery core + distribution warehouse + trailer yards). ~254 acres for the boxed area; brewery proper is ~142 acres."
+        }
+      },
+      {
+        "id": "02-anheuser-busch-brewery-houston-tx",
+        "name": "Anheuser-Busch Brewery - Houston TX",
+        "type": "Brewery",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "scale",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 29.7715,
+          "lng": -95.269
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 29.7695,
+            "west": -95.2745,
+            "north": 29.776,
+            "east": -95.264
+          },
+          "truckGate": {
+            "south": 29.7696,
+            "west": -95.2678,
+            "north": 29.7702,
+            "east": -95.2668
+          },
+          "dropYards": [
+            {
+              "south": 29.7698,
+              "west": -95.2675,
+              "north": 29.7738,
+              "east": -95.2645
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 29.7704,
+              "west": -95.272,
+              "north": 29.7711,
+              "east": -95.2688
+            }
+          ],
+          "staging": {
+            "south": 29.7702,
+            "west": -95.27,
+            "north": 29.7713,
+            "east": -95.268
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 230,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 2,
+          "buildingCount": 8,
+          "siteAreaAcres": 181,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (29.772469, -95.26975) landed squarely on the Houston\nAnheuser-Busch brewery. Satellite probes at z16–z19 confirmed a classic A-B\nbrewery layout: a large brewery/packaging building, brewhouse with cylindrical\nfermentation/storage tanks and silos, an extensive trailer drop yard, and rail\nspurs. Bounded by I-610 on the east and Gellhorn Dr on the south. Center locked\nat 29.77150, -95.26900.",
+        "mapsUrl": "https://www.google.com/maps/@29.77150,-95.26900,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Houston A-B brewery (opened 1966) at 775 Gellhorn Dr. Large brewery building with adjacent very large trailer drop yard to the east, bounded by I-610 on the east and Gellhorn Dr on the south.",
+          "truckGate": "Perimeter fully fenced (wrought-iron and chain-link) confirmed in multiple Street Views. Brewery building has sliding gates in the fence line at its west entrance. Controlled access to the secured site - truckGate TRUE.",
+          "guardShack": "No guard booth observed at the trailer-yard entrance off Gellhorn Dr (wide open driveway with only a stop sign) nor a distinct booth at the brewery building gates in Street View. Classified guardShack FALSE, remoteGs TRUE - flagged uncertain since a booth may be obscured.",
+          "dropYard": "Very large organized trailer drop yard east of the brewery, ~200+ trailers in rows; capacity ~320.",
+          "dockDoors": "Long dock bank along the south face of the brewery building with trailers backed in; estimated 35 doors (band 25-50).",
+          "railServed": "Rail spurs run into the property between the brewery and the trailer yard.",
+          "fastLaneOpportunity": "Wide trailer-yard entrance apron with ample paved width to add lanes.",
+          "scale": "No truck scale resolved in imagery.",
+          "siteAreaAcres": "Perimeter box ~724 x 1015 m covers brewery core plus trailer yard ~181 acres."
+        }
+      },
+      {
+        "id": "03-anheuser-busch-brewery-columbus-oh",
+        "name": "Anheuser-Busch Brewery - Columbus OH",
+        "type": "Brewery",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "truckGate",
+          "entryLanes",
+          "exitLanes",
+          "scale"
+        ],
+        "center": {
+          "lat": 40.105,
+          "lng": -82.9935
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.1018,
+            "west": -82.9975,
+            "north": 40.1085,
+            "east": -82.9895
+          },
+          "truckGate": {
+            "south": 40.1021,
+            "west": -82.9936,
+            "north": 40.1027,
+            "east": -82.9926
+          },
+          "dropYards": [
+            {
+              "south": 40.1056,
+              "west": -82.9972,
+              "north": 40.1082,
+              "east": -82.9948
+            },
+            {
+              "south": 40.103,
+              "west": -82.9972,
+              "north": 40.1055,
+              "east": -82.9952
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.1044,
+              "west": -82.995,
+              "north": 40.1056,
+              "east": -82.993
+            }
+          ],
+          "staging": {
+            "south": 40.104,
+            "west": -82.9945,
+            "north": 40.1052,
+            "east": -82.9928
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 32,
+          "trailersVisible": 240,
+          "trailerParkingCapacity": 350,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 138,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (40.104378, -82.992153) landed on the Columbus\nAnheuser-Busch brewery campus. Satellite probes at z16–z19 confirmed the\ndocumented ~138-acre brewery: a large brewery building, brewhouse with tanks,\nlarge trailer drop yards to the NW/W, employee parking, a stormwater pond, and\nrail spurs. Street View along Schrock Rd showed an A-B monument sign at the\nmain entrance, confirming the site. Center locked at 40.10500, -82.99350.",
+        "mapsUrl": "https://www.google.com/maps/@40.10500,-82.99350,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Columbus A-B brewery (opened 1968), documented ~138-acre site at 700 Schrock Rd. Brewery building with adjacent large trailer drop yards to the NW/W and rail service.",
+          "truckGate": "Campus is fully fenced (chain-link confirmed along Schrock Rd in Street View). Main Schrock Rd entrance is a landscaped boulevard with an A-B monument sign and a 'No Trucks' sign - trucks are routed to a dedicated truck gate elsewhere on the perimeter. Truck gate not crisply resolved in Street View (internal roads not on SV) - flagged uncertain.",
+          "guardShack": "A-B breweries operate guarded truck entrances as standard practice; the 'No Trucks' sign at the visitor entrance confirms a separate controlled truck gate. Booth structure not directly imaged - classified guardShack TRUE per site type, flagged uncertain.",
+          "dropYard": "Large organized trailer drop yards NW and W of the brewery, ~200+ trailers, capacity ~350.",
+          "dockDoors": "Dock bank with trailers backed in visible on the brewery building; estimated ~32 (band 25-50).",
+          "railServed": "Multiple rail spurs run into the campus and trailer yards.",
+          "fastLaneOpportunity": "Wide internal roads and yard aprons leave room to add lanes.",
+          "scale": "No truck scale resolved.",
+          "siteAreaAcres": "Documented 138 acres; boxed footprint approximates this."
+        }
+      },
+      {
+        "id": "04-anheuser-busch-brewery-jacksonville-fl",
+        "name": "Anheuser-Busch Brewery - Jacksonville FL",
+        "type": "Brewery",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "truckGateCount"
+        ],
+        "center": {
+          "lat": 30.4325,
+          "lng": -81.649
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 30.4295,
+            "west": -81.653,
+            "north": 30.436,
+            "east": -81.6455
+          },
+          "truckGate": {
+            "south": 30.4302,
+            "west": -81.6518,
+            "north": 30.4309,
+            "east": -81.6508
+          },
+          "dropYards": [
+            {
+              "south": 30.4305,
+              "west": -81.6525,
+              "north": 30.434,
+              "east": -81.65
+            },
+            {
+              "south": 30.4325,
+              "west": -81.65,
+              "north": 30.4352,
+              "east": -81.6482
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 30.4313,
+              "west": -81.6505,
+              "north": 30.4328,
+              "east": -81.6488
+            }
+          ],
+          "staging": {
+            "south": 30.431,
+            "west": -81.6498,
+            "north": 30.4323,
+            "east": -81.6485
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 2,
+          "buildingCount": 6,
+          "siteAreaAcres": 128,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (30.432295, -81.648029) landed on the Jacksonville\nAnheuser-Busch brewery. Satellite probes at z16–z19 confirmed the brewery: a\nlarge brewery building, brewhouse and tanks, trailer drop yards to the W/SW,\nemployee parking, and rail spurs. Street View showed a large \"Budweiser\" wall\nsign on the brewery building. Bounded by Busch Dr to the south, I-95 to the\neast, and marshland to the north. Center locked at 30.43250, -81.64900.",
+        "mapsUrl": "https://www.google.com/maps/@30.43250,-81.64900,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Jacksonville A-B brewery (opened 1969) at 111 Busch Dr; $30M 2026 investment announced. Brewery building with trailer drop yards W/SW, bounded by Busch Dr on the south, I-95 on the east, marshland to the north. 'Budweiser' sign on the building confirmed in Street View.",
+          "truckGate": "Site fully fenced with chain-link confirmed in multiple Street Views (trailer yard, employee lot perimeters). Driveway truck entrances from Busch Dr at the SW corner. Controlled gated access - truckGate TRUE.",
+          "guardShack": "A-B breweries operate guarded truck entrances as standard. Booth structure not crisply isolated in imagery; classified guardShack TRUE per site type and fenced perimeter, flagged uncertain.",
+          "dropYard": "Two large organized trailer drop yards W and SW of the brewery, ~200+ trailers, capacity ~320.",
+          "dockDoors": "Dock banks with trailers backed in on the W/S faces of the brewery; estimated ~30 (band 25-50).",
+          "railServed": "Rail spurs run into the property from the west side trailer-yard area.",
+          "fastLaneOpportunity": "Wide yard aprons and entrance driveways leave room to add lanes.",
+          "scale": "No truck scale resolved.",
+          "siteAreaAcres": "Boxed footprint ~128 acres for brewery core + trailer yards."
+        }
+      },
+      {
+        "id": "05-anheuser-busch-brewery-williamsburg-va",
+        "name": "Anheuser-Busch Brewery - Williamsburg VA",
+        "type": "Brewery",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 37.238,
+          "lng": -76.6535
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 37.234,
+            "west": -76.6585,
+            "north": 37.242,
+            "east": -76.649
+          },
+          "truckGate": {
+            "south": 37.2401,
+            "west": -76.6576,
+            "north": 37.2409,
+            "east": -76.6564
+          },
+          "dropYards": [
+            {
+              "south": 37.2398,
+              "west": -76.6578,
+              "north": 37.2418,
+              "east": -76.6558
+            },
+            {
+              "south": 37.236,
+              "west": -76.653,
+              "north": 37.2385,
+              "east": -76.6505
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 37.2356,
+              "west": -76.6538,
+              "north": 37.237,
+              "east": -76.6515
+            }
+          ],
+          "staging": {
+            "south": 37.24,
+            "west": -76.6568,
+            "north": 37.2413,
+            "east": -76.6554
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 280,
+          "truckGateCount": 1,
+          "buildingCount": 8,
+          "siteAreaAcres": 185,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (37.237961, -76.652938, ROOFTOP precision) landed on the\nWilliamsburg Anheuser-Busch brewery. Satellite probes at z16–z19 confirmed a\nlarge brewery building set in a wooded campus, with trailer drop yards, rail\nspurs, and the adjacent Busch Gardens theme park to the SE (its large parking\nlots are visible). Center locked at 37.23800, -76.65350.",
+        "mapsUrl": "https://www.google.com/maps/@37.23800,-76.65350,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Williamsburg A-B brewery (opened 1972) at 7801 Pocahontas Trail, adjacent to Busch Gardens. Large brewery building in a wooded campus setting; trailer drop yards and rail.",
+          "truckGate": "CONFIRMED. Street View showed a posted 'TRUCK ENTRANCE' sign at the dedicated truck entrance road; z19 satellite shows a multi-lane guarded truck-gate building with a canopy over the lanes and trucks queued at it. Clear controlled checkpoint.",
+          "guardShack": "CONFIRMED. The z19 satellite shows a distinct guardhouse/checkpoint structure straddling multiple truck lanes at the truck entrance - a classic multi-lane guarded gate. guardShack TRUE.",
+          "preGateStaging": "Paved truck staging area before the gate visible in z19 imagery; trucks can wait outside the checkpoint.",
+          "dropYard": "Trailer drop yards near the truck gate and along the SE side of the brewery; ~180 trailers visible, capacity ~280.",
+          "dockDoors": "Dock banks with trailers backed in along the S/SE faces of the brewery building; estimated ~35 (band 25-50).",
+          "railServed": "Rail spurs run into the property on the SE side.",
+          "urbanRural": "Edge-of-town wooded setting outside Williamsburg, surrounded by forest and the Busch Gardens campus - classified Rural per rubric.",
+          "fastLaneOpportunity": "Multi-lane truck gate with wide apron leaves room for an express bypass.",
+          "scale": "No truck scale resolved separately.",
+          "siteAreaAcres": "Boxed operational footprint ~185 acres (excludes wooded buffer)."
+        }
+      },
+      {
+        "id": "06-anheuser-busch-brewery-baldwinsville-ny",
+        "name": "Anheuser-Busch Brewery - Baldwinsville NY",
+        "type": "Brewery",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "scale",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 43.168,
+          "lng": -76.3105
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 43.164,
+            "west": -76.3155,
+            "north": 43.1715,
+            "east": -76.3055
+          },
+          "truckGate": {
+            "south": 43.1676,
+            "west": -76.3109,
+            "north": 43.1681,
+            "east": -76.31
+          },
+          "dropYards": [
+            {
+              "south": 43.166,
+              "west": -76.3128,
+              "north": 43.1672,
+              "east": -76.31
+            },
+            {
+              "south": 43.1683,
+              "west": -76.3142,
+              "north": 43.171,
+              "east": -76.312
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 43.1685,
+              "west": -76.3135,
+              "north": 43.1698,
+              "east": -76.3115
+            }
+          ],
+          "staging": {
+            "south": 43.1672,
+            "west": -76.3115,
+            "north": 43.1683,
+            "east": -76.31
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 230,
+          "trailerParkingCapacity": 340,
+          "truckGateCount": 1,
+          "buildingCount": 7,
+          "siteAreaAcres": 167,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (43.167683, -76.30974, ROOFTOP precision) landed on the\nBaldwinsville Anheuser-Busch brewery. Satellite probes at z16–z18 confirmed a\nlarge modern brewery building with extensive trailer drop yards to the W/SW\nand rail spurs. Street View along Belgium Rd showed a building with red\n\"Anheuser-Busch\" lettering, confirming the facility. Center locked at\n43.16800, -76.31050.",
+        "mapsUrl": "https://www.google.com/maps/@43.16800,-76.31050,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Baldwinsville NY A-B brewery (opened 1983) at 2885 Belgium Rd. Large modern brewery building set back from Belgium Rd in a wooded campus, with extensive trailer drop yards W/SW and rail service.",
+          "truckGate": "Site is a controlled industrial campus set back from the public road. A small checkpoint structure sits at the internal road junction between the trailer yards and the brewery (visible at z18). Internal access road from Belgium Rd splits to employee parking and truck operations. truckGate TRUE.",
+          "guardShack": "A small booth-sized structure observed at the internal junction near the brewery/yard interface; A-B breweries operate guarded truck gates as standard. Classified guardShack TRUE, flagged uncertain - booth not resolved at high zoom.",
+          "dropYard": "Extensive trailer drop yards W and SW of the brewery in long organized rows, ~200+ trailers, capacity ~340.",
+          "dockDoors": "Dock banks with trailers backed in along the W/N faces of the brewery building; estimated ~38 (band 25-50).",
+          "railServed": "Rail spurs run along the SW edge into the brewery.",
+          "urbanRural": "Edge-of-town setting near Baldwinsville, surrounded by woodland - classified Rural per rubric.",
+          "fastLaneOpportunity": "Wide internal roads and yard aprons leave room to add lanes.",
+          "scale": "No truck scale resolved.",
+          "siteAreaAcres": "Boxed footprint ~167 acres for brewery core + trailer yards."
+        }
+      },
+      {
+        "id": "07-anheuser-busch-brewery-fort-collins-co",
+        "name": "Anheuser-Busch Brewery - Fort Collins CO",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 40.62,
+          "lng": -105.0075
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.614,
+            "west": -105.011,
+            "north": 40.6255,
+            "east": -105.001
+          },
+          "truckGate": {
+            "south": 40.6141,
+            "west": -105.0048,
+            "north": 40.6149,
+            "east": -105.0039
+          },
+          "dropYards": [
+            {
+              "south": 40.615,
+              "west": -105.01,
+              "north": 40.6185,
+              "east": -105.006
+            },
+            {
+              "south": 40.618,
+              "west": -105.01,
+              "north": 40.6205,
+              "east": -105.0075
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.6165,
+              "west": -105.008,
+              "north": 40.6185,
+              "east": -105.006
+            }
+          ],
+          "staging": {
+            "south": 40.6145,
+            "west": -105.0055,
+            "north": 40.616,
+            "east": -105.004
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 260,
+          "trailerParkingCapacity": 400,
+          "truckGateCount": 1,
+          "buildingCount": 10,
+          "siteAreaAcres": 267,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates (40.620469, -105.009384, ROOFTOP precision) landed on the\nFort Collins Anheuser-Busch brewery. Satellite probes at z16–z20 confirmed a\nlarge brewery campus surrounded by open farmland NE of Fort Collins, with a\nbrewery building, a distribution warehouse, extensive trailer drop yards, a\nlarge on-site rail yard, and the Clydesdale stables/visitor center. Street View\nalong Busch Dr showed the brewery building behind a white ranch-style paddock\nfence. Center locked at 40.62000, -105.00750.",
+        "mapsUrl": "https://www.google.com/maps/@40.62000,-105.00750,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Fort Collins CO A-B brewery (opened 1988) at 2351 Busch Dr; Budweiser brewery-tour site with Clydesdale paddock. Large rural brewery campus surrounded by farmland, with brewery, distribution warehouse, extensive trailer drop yards, and a large on-site rail yard.",
+          "truckGate": "CONFIRMED. z19/z20 satellite shows a dedicated truck checkpoint structure on the south access road - a building/canopy over the truck lane with a truck positioned at it. Clear controlled truck gate, separate from the landscaped visitor/Clydesdale entrance off Busch Dr.",
+          "guardShack": "CONFIRMED. The truck checkpoint includes a guard-booth-sized structure alongside the lane. A-B breweries operate guarded truck gates as standard.",
+          "scale": "A truck appears positioned on a weigh-pad-style platform at the gate checkpoint - likely a truck scale; flagged uncertain as exact pad not fully resolved.",
+          "preGateStaging": "Paved truck staging on the south access road before the checkpoint.",
+          "dropYard": "Extensive trailer drop yards on the SW with ~200+ trailers in long rows; capacity ~400.",
+          "dockDoors": "Dock banks with trailers backed in on the distribution warehouse W/NW faces; estimated ~40 (band 25-50).",
+          "railServed": "Large on-site rail yard with curved spurs and rail cars on the SW side - heavily rail-served.",
+          "multipleFacilities": "Campus includes the brewery, a distribution warehouse, the Clydesdale stables/visitor center, and rail facilities - multiple building clusters.",
+          "urbanRural": "Surrounded by open farmland NE of Fort Collins - clearly Rural.",
+          "fastLaneOpportunity": "Wide access roads and yard aprons leave ample room to add lanes.",
+          "siteAreaAcres": "Boxed footprint ~267 acres for the operational campus."
+        }
+      },
+      {
+        "id": "08-anheuser-busch-brewery-cartersville-ga",
+        "name": "Anheuser-Busch Brewery - Cartersville GA",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "guardShack",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 34.257,
+          "lng": -84.783
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.2532,
+            "west": -84.7887,
+            "north": 34.2615,
+            "east": -84.779
+          },
+          "truckGate": {
+            "south": 34.2535,
+            "west": -84.7868,
+            "north": 34.2542,
+            "east": -84.7858
+          },
+          "dropYards": [
+            {
+              "south": 34.258,
+              "west": -84.7835,
+              "north": 34.26,
+              "east": -84.7805
+            },
+            {
+              "south": 34.2575,
+              "west": -84.7805,
+              "north": 34.2592,
+              "east": -84.779
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.258,
+              "west": -84.7842,
+              "north": 34.259,
+              "east": -84.783
+            },
+            {
+              "south": 34.2562,
+              "west": -84.7828,
+              "north": 34.2572,
+              "east": -84.7818
+            }
+          ],
+          "staging": {
+            "south": 34.2575,
+            "west": -84.7848,
+            "north": 34.2584,
+            "east": -84.7838
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 260,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 70,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Facility: Anheuser-Busch Cartersville Brewery, 100 Busch Dr NE, Cartersville, GA 30121\n- Locked center: 34.25700, -84.78300 (main brewery / warehouse mass)\n- Roster coords were ~4.9 km off (geocode `movedMeters` 4905) — they fell SW of the campus. Confirmed correct building via satellite (large brewing/packaging complex with extensive trailer yards) and Street View at the public-road intersection 34.2538,-84.7863, which shows the \"Budweiser\" sign on the brewhouse.\n- Opened 1993; AB's newest brewery. 48 products shipped to 32 states; $230M+ invested since 2020, plus a $9.2M expansion announced Sept 2025.",
+        "mapsUrl": "https://www.google.com/maps/@34.25700,-84.78300,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed Anheuser-Busch Cartersville Brewery, 100 Busch Dr NE. Roster coords were ~4.9 km off (geocode movedMeters 4905). Locked center on the main brewery/warehouse mass at 34.25700,-84.78300. Street View at the public-road intersection (34.2538,-84.7863) shows the 'Budweiser' lettering on the brewhouse confirming identity.",
+          "truckGate": "Long private access road runs ~700 m NNE from the public road; the entry has a divided entry/exit with chevron-channelized lanes and a small structure in the median where the road splits. Controlled entrance to a fenced industrial campus.",
+          "guardShack": "A small median structure at the entry split is consistent with a guard booth; private-road Street View coverage stops at the public road so this is satellite-inferred (medium confidence).",
+          "entryExitSeparate": "Entry and exit lanes are divided/channelized with chevron markings at the road split.",
+          "drivewayLong": "Access road is ~700 m long with ample stacking room before reaching the building.",
+          "scale": "A scale-house-sized structure sits along the truck route near the trailer-yard side; weigh pad inferred, medium confidence.",
+          "dockDoors": "Dock canopies and trailers backed in along the NE warehouse face plus a secondary dock cluster on the SE face; 50+ band, count ~60 estimated from z19-20 imagery.",
+          "dropArea": "Extensive multi-row trailer yard NE of the warehouse holding ~180 visible trailers (red Budweiser and white reefer trailers); capacity well above 50.",
+          "shipRcvSeparate": "Distinct dock banks on different building faces (NE warehouse dock vs SE building dock).",
+          "multipleFacilities": "Campus: main brewhouse/warehouse, packaging hall, ancillary buildings, and a separate small building NE of the trailer yard.",
+          "urbanRural": "Edge-of-town wooded site off I-75 outside Cartersville, surrounded by farmland and forest - Rural setting."
+        }
+      },
+      {
+        "id": "09-anheuser-busch-brewery-van-nuys-los-angeles-ca",
+        "name": "Anheuser-Busch Brewery - Van Nuys (Los Angeles) CA",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 34.2185,
+          "lng": -118.479
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.215,
+            "west": -118.4828,
+            "north": 34.221,
+            "east": -118.476
+          },
+          "truckGate": {
+            "south": 34.2206,
+            "west": -118.4782,
+            "north": 34.2213,
+            "east": -118.4772
+          },
+          "dropYards": [
+            {
+              "south": 34.2156,
+              "west": -118.4828,
+              "north": 34.2178,
+              "east": -118.4812
+            },
+            {
+              "south": 34.2157,
+              "west": -118.4812,
+              "north": 34.2172,
+              "east": -118.4796
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.2176,
+              "west": -118.4806,
+              "north": 34.219,
+              "east": -118.479
+            },
+            {
+              "south": 34.2165,
+              "west": -118.4812,
+              "north": 34.2178,
+              "east": -118.4798
+            }
+          ],
+          "staging": {
+            "south": 34.2195,
+            "west": -118.4785,
+            "north": 34.2205,
+            "east": -118.4772
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 2,
+          "buildingCount": 8,
+          "siteAreaAcres": 60,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Facility: Anheuser-Busch Los Angeles Brewery, 15800 Roscoe Blvd, Van Nuys, CA 91406\n- Locked center: 34.21850, -118.47900 (main brewhouse / warehouse mass)\n- Roster coords (34.220959, -118.476782) were rooftop-accurate (`movedMeters` 55) and fell on the NE part of the campus.\n- Confirmed via satellite (large brewing complex with tank farm and solar-paneled warehouses) and Street View — the E street shows brewery storage tanks behind a hedge, and the Roscoe Blvd frontage carries a \"Bud...\" building sign.\n- Industry sources: 95-acre site, 1.7M sq ft, ~12M barrels/yr, public tours offered. Active brewery.",
+        "mapsUrl": "https://www.google.com/maps/@34.21850,-118.47900,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed Anheuser-Busch Los Angeles (Van Nuys) Brewery, 15800 Roscoe Blvd. Roster coords were rooftop-accurate (movedMeters 55). Locked center on the main brewhouse/warehouse mass at 34.21850,-118.47900. Street View on the E street shows brewery storage tanks behind a hedge, and the Roscoe Blvd frontage carries a 'Bud...' building sign.",
+          "truckGate": "Sliding gate across the main entrance off Roscoe Blvd at the NE corner (34.2210,-118.4775); Street View shows a sliding security gate with a wide multi-lane apron. A second gated truck entrance serves the SW/rail side. truckGateCount 2.",
+          "guardShack": "Z20 satellite shows a distinct rounded guard-booth structure on a paved island at the NE entrance, with a vehicle parked beside it; Street View confirms a small booth just inside the gate.",
+          "backupSensitive": "Gate opens directly onto Roscoe Blvd, a busy 4-6 lane urban arterial; minimal stacking room outside the gate so a truck queue would spill onto the road.",
+          "drivewayShort": "Tight urban campus - gate-to-dock approach is short, no long internal queue lane.",
+          "dockDoors": "25-50 band. Dock canopies and backed-in trailers visible along internal building faces; rooftop solar obscures the count, estimate ~45.",
+          "dropArea": "Large trailer yards within the campus SW corner plus a sizable trailer yard across Roscoe Blvd to the NW; well over 50 stalls. dropYard true.",
+          "shipRcvSeparate": "Multiple distinct dock banks on different building faces around the brewhouse and warehouses.",
+          "railServed": "Multi-track rail line runs along the SE/S edge of the campus with rail siding into the property; trailers staged alongside.",
+          "multipleFacilities": "Campus of 8+ large structures - brewhouse with tank farm, packaging warehouses, ancillary buildings, plus the detached NW trailer yard across Roscoe Blvd.",
+          "urbanRural": "Dense San Fernando Valley industrial fabric within metro Los Angeles - Urban.",
+          "fastLaneOpportunity": "Wide multi-lane gate apron at the NE entrance offers room for an express bypass lane.",
+          "operatingStatus": "Active brewery (95 acres, 1.7M sq ft, ~12M barrels/yr per industry sources); offers public tours."
+        }
+      },
+      {
+        "id": "10-anheuser-busch-brewery-fairfield-ca",
+        "name": "Anheuser-Busch Brewery - Fairfield CA",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "scale",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "truckGate"
+        ],
+        "center": {
+          "lat": 38.2355,
+          "lng": -122.0905
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.232,
+            "west": -122.0965,
+            "north": 38.2387,
+            "east": -122.0865
+          },
+          "truckGate": {
+            "south": 38.237,
+            "west": -122.0925,
+            "north": 38.2377,
+            "east": -122.0915
+          },
+          "dropYards": [
+            {
+              "south": 38.2333,
+              "west": -122.0915,
+              "north": 38.2348,
+              "east": -122.089
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 38.2359,
+              "west": -122.091,
+              "north": 38.2368,
+              "east": -122.0885
+            },
+            {
+              "south": 38.2372,
+              "west": -122.0905,
+              "north": 38.238,
+              "east": -122.0885
+            }
+          ],
+          "staging": {
+            "south": 38.2348,
+            "west": -122.0915,
+            "north": 38.2358,
+            "east": -122.0895
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 75,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Facility: Anheuser-Busch Fairfield Brewery, 3101 Busch Dr, Fairfield, CA 94534\n- Locked center: 38.23550, -122.09050 (main brewhouse / warehouse mass)\n- Roster coords (38.236267, -122.093114) were ~3.5 km off (`movedMeters` 3470) but still landed near the campus.\n- Confirmed by \"THANK YOU TEAM TRAVIS\" painted on the warehouse roof (Travis AFB is nearby) and the unmistakable brewing complex layout — brewhouse, tank farm, rail yard, trailer parking rows.",
+        "mapsUrl": "https://www.google.com/maps/@38.23550,-122.09050,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed Anheuser-Busch Fairfield Brewery, 3101 Busch Dr. Roster coords were ~3.5 km off (movedMeters 3470). Locked center on the main brewhouse/warehouse mass at 38.23550,-122.09050. Identity confirmed by 'THANK YOU TEAM TRAVIS' painted on the warehouse roof (Travis AFB is adjacent) and the brewing complex layout with tank farm and rail yard.",
+          "operatingStatus": "IMPORTANT - this brewery permanently CLOSED on Feb 22, 2026 (production realignment; 238 jobs cut). The site is being sold. Audit reflects the physical yard infrastructure as captured in pre-closure imagery; the facility is no longer operating.",
+          "truckGate": "Controlled private access road runs ~600 m south from the I-80 frontage road into a fenced industrial campus across an open grass buffer; entrance is a gate-controlled approach. Guard-booth structure not positively confirmed from imagery and Street View has no perimeter coverage - flagged uncertain.",
+          "guardShack": "A guarded entry is standard for an AB brewery of this scale and a small structure sits near the entrance node, but it could not be positively confirmed at z20; medium confidence.",
+          "drivewayLong": "Long internal approach from the gate to the dock yard with ample stacking room.",
+          "dockDoors": "Canopied dock banks with backed-in trailers along the N face of the warehouse plus a secondary dock cluster; ~40 estimated, 25-50 band.",
+          "dropArea": "Trailer parking rows N of the building hold ~70 trailers; 25-50 band, capacity ~130.",
+          "shipRcvSeparate": "Distinct dock banks on separate building faces.",
+          "scale": "A scale-house-sized structure sits on the truck route near the trailer yard; weigh pad inferred, medium confidence.",
+          "railServed": "Multi-track rail yard runs along the S edge with sidings into the property - clearly rail-served.",
+          "multipleFacilities": "Campus: brewhouse with tank farm, packaging warehouses, ancillary buildings, separate office building, and a large ground-mounted solar farm in the SW.",
+          "urbanRural": "Edge-of-town site between I-80 and farmland on the W; agricultural land borders the W and SW - Rural setting."
+        }
+      },
+      {
+        "id": "11-anheuser-busch-brewery-merrimack-nh",
+        "name": "Anheuser-Busch Brewery - Merrimack NH",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "scale",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 42.8253,
+          "lng": -71.4865
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.8205,
+            "west": -71.4895,
+            "north": 42.829,
+            "east": -71.4815
+          },
+          "truckGate": {
+            "south": 42.8264,
+            "west": -71.4856,
+            "north": 42.8271,
+            "east": -71.4846
+          },
+          "dropYards": [
+            {
+              "south": 42.827,
+              "west": -71.488,
+              "north": 42.8285,
+              "east": -71.485
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 42.8242,
+              "west": -71.4882,
+              "north": 42.8258,
+              "east": -71.4872
+            },
+            {
+              "south": 42.8255,
+              "west": -71.486,
+              "north": 42.8268,
+              "east": -71.4842
+            }
+          ],
+          "staging": {
+            "south": 42.826,
+            "west": -71.487,
+            "north": 42.827,
+            "east": -71.4856
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 65,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Facility: Anheuser-Busch Merrimack Brewery, 221 Daniel Webster Hwy, Merrimack, NH 03054\n- Locked center: 42.82530, -71.48650 (main brewhouse / warehouse mass)\n- Roster coords (42.823222, -71.484849) were ~3.2 km off (`movedMeters` 3205) but landed near the campus.\n- Confirmed by the brewing complex layout (brewhouse, tank farm, 400,000+ sq ft processing facility) between the Everett Turnpike (W) and the Merrimack River (E), plus the on-site Budweiser Brewery Experience visitor center and Clydesdale Hamlet.",
+        "mapsUrl": "https://www.google.com/maps/@42.82530,-71.48650,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed Anheuser-Busch Merrimack Brewery, 221 Daniel Webster Hwy. Roster coords were ~3.2 km off (movedMeters 3205). Locked center on the main brewhouse/warehouse mass at 42.82530,-71.48650. Identity confirmed by the brewing complex layout (brewhouse, tank farm, 400,000+ sq ft processing facility) between the Everett Turnpike and the Merrimack River, with the on-site Budweiser Brewery Experience visitor center and Clydesdale Hamlet.",
+          "operatingStatus": "IMPORTANT - AB announced (Dec 2025) the Merrimack brewery will close in early 2026 as part of the same realignment that closed Fairfield CA and Newark NJ; 125 jobs affected. As of the audit date (May 2026) the facility has very likely ceased brewing operations. Audit reflects the physical yard infrastructure from pre-closure imagery.",
+          "truckGate": "Large fenced industrial facility - chain-link perimeter fence confirmed in Street View along the W dock face and along Daniel Webster Hwy. Controlled access road into the campus; the truck enters a fenced yard. Exact gate structure not positively confirmed (no clear perimeter Street View of the truck gate).",
+          "guardShack": "A guarded entry is standard for an AB brewery of this scale; a small structure sits at an internal truck-circulation node and a booth-sized structure is near the W parking entrance, but the truck-gate guard booth could not be positively confirmed - medium confidence.",
+          "drivewayLong": "Long internal access from the property line to the dock yard with ample stacking room.",
+          "dockDoors": "Dock doors with backed-in trailers along the W building face (clearly visible in Street View) plus a secondary dock cluster; ~35 estimated, 25-50 band.",
+          "dropArea": "Very large trailer parking yard on the N side of the building holding ~90 trailers in marked rows; 50+ band, capacity ~160.",
+          "shipRcvSeparate": "Distinct dock banks on separate building faces (W dock face vs N/interior docks).",
+          "railServed": "A rail line runs to the brewery from the N - rail-served.",
+          "multipleFacilities": "Campus: brewhouse with tank farm, packaging warehouses, ancillary buildings, separate visitor center (Brewery Experience) and Clydesdale Hamlet.",
+          "urbanRural": "Edge-of-town site between the Everett Turnpike and the Merrimack River, surrounded by woods and the river corridor - Rural setting.",
+          "scale": "No truck scale positively identified - flagged uncertain."
+        }
+      },
+      {
+        "id": "12-anheuser-busch-brewery-newark-nj",
+        "name": "Anheuser-Busch Brewery - Newark NJ",
+        "type": "Brewery",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "scale",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "truckGateCount"
+        ],
+        "center": {
+          "lat": 40.694,
+          "lng": -74.1925
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.69,
+            "west": -74.1965,
+            "north": 40.6985,
+            "east": -74.1885
+          },
+          "truckGate": {
+            "south": 40.6957,
+            "west": -74.1905,
+            "north": 40.6964,
+            "east": -74.1895
+          },
+          "dropYards": [
+            {
+              "south": 40.695,
+              "west": -74.195,
+              "north": 40.697,
+              "east": -74.1925
+            },
+            {
+              "south": 40.6962,
+              "west": -74.1915,
+              "north": 40.6978,
+              "east": -74.1895
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.693,
+              "west": -74.1955,
+              "north": 40.6945,
+              "east": -74.194
+            },
+            {
+              "south": 40.6955,
+              "west": -74.194,
+              "north": 40.697,
+              "east": -74.1925
+            }
+          ],
+          "staging": {
+            "south": 40.6948,
+            "west": -74.1925,
+            "north": 40.6958,
+            "east": -74.191
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 150,
+          "trailerParkingCapacity": 250,
+          "truckGateCount": 2,
+          "buildingCount": 7,
+          "siteAreaAcres": 86,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Facility: Anheuser-Busch Newark Brewery, 200 US-1 (Route 1), Newark, NJ 07114\n- Locked center: 40.69400, -74.19250 (main brewhouse / warehouse mass)\n- Roster coords (40.694002, -74.191885) were ~2.4 km off (`movedMeters` 2445) but landed near the campus.\n- Confirmed by the brewing complex (brick brewhouse, grain-silo tank farm), extensive trailer yards, and the 86-acre footprint on Route 1 between rail lines and Newark Liberty Airport — matching the property in the Goodman Group sale.",
+        "mapsUrl": "https://www.google.com/maps/@40.69400,-74.19250,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed Anheuser-Busch Newark Brewery, 200 US-1, Newark NJ. Roster coords were ~2.4 km off (movedMeters 2445). Locked center on the main brewhouse/warehouse mass at 40.69400,-74.19250. Identity confirmed by the brewing complex (brick brewhouse, grain-silo tank farm), extensive trailer yards, and the 86-acre footprint on Route 1 between rail lines and Newark Liberty Airport - matching the property described in the $360M Goodman Group sale.",
+          "operatingStatus": "IMPORTANT - the Newark brewery (opened 1951, AB's 2nd-oldest) CLOSED in early 2026 and the 86-acre site was SOLD to Goodman Group for ~$360M (deed filed March 2026); Goodman plans an industrial/logistics redevelopment. As of the audit date (May 2026) the facility is no longer operating as a brewery. Audit reflects the physical yard infrastructure from pre-closure imagery.",
+          "truckGate": "Large fenced industrial campus - chain-link perimeter fence confirmed in Street View along the E (Route 1 access road) building face. Multiple controlled access points (truck yard entrances on the N/NE plus a campus entrance off the E access road); exact gate structures not positively imaged.",
+          "guardShack": "A guarded entry is standard for an AB brewery of this scale and age; small structures sit near the trailer-yard entrances, but a truck-gate guard booth could not be positively confirmed at z20 - medium confidence.",
+          "entryExitSeparate": "Distinct truck-yard entrances at different points of the property line (N trailer yard vs E access road) - treated as separate entry/exit points.",
+          "drivewayLong": "Ample internal circulation and stacking room within the large campus.",
+          "dockDoors": "Dock doors with backed-in trailers along multiple building faces; ~45 estimated, 25-50 band.",
+          "dropArea": "Multiple very large trailer yards on the N and NE sides holding ~150 trailers in marked rows; 50+ band, capacity ~250.",
+          "shipRcvSeparate": "Distinct dock banks on separate building faces.",
+          "railServed": "Multiple rail lines run along the W edge with sidings into the property at the tank farm - clearly rail-served.",
+          "multipleFacilities": "Campus: brewhouse with grain-silo tank farm, multiple packaging warehouses, ancillary buildings.",
+          "urbanRural": "Dense Newark / Newark Liberty Airport industrial fabric within the NYC metro - Urban.",
+          "scale": "No truck scale positively identified - flagged uncertain."
+        }
+      },
+      {
+        "id": "13-metal-container-corporation-arnold-mo-can-plant",
+        "name": "Metal Container Corporation - Arnold MO Can Plant",
+        "type": "Can Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "scale",
+          "dockDoorCount",
+          "railServed",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 38.4338,
+          "lng": -90.3535
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.4322,
+            "west": -90.355,
+            "north": 38.4365,
+            "east": -90.35
+          },
+          "truckGate": {
+            "south": 38.434,
+            "west": -90.3546,
+            "north": 38.4346,
+            "east": -90.3539
+          },
+          "dropYards": [
+            {
+              "south": 38.4338,
+              "west": -90.3528,
+              "north": 38.4362,
+              "east": -90.3502
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 38.4328,
+              "west": -90.3542,
+              "north": 38.434,
+              "east": -90.3528
+            },
+            {
+              "south": 38.4333,
+              "west": -90.353,
+              "north": 38.4345,
+              "east": -90.3515
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 35,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Facility: Metal Container Corporation (MCC) can plant, 42 Tenbrook Industrial Park, Arnold, MO 63010\n- Locked center: 38.43380, -90.35350 (MCC manufacturing complex)\n- Roster coords (38.433434, -90.355816) were ~1.9 km off (`movedMeters` 1926) but landed in the industrial park.\n- AB-owned MCC operation — the nation's largest can manufacturer; $150M expansion announced. Identity confirmed via web research (Yelp, TruckMap, EPA TRI facility 63010MTLCN42TEN) and the large manufacturing complex with extensive trailer yards in Tenbrook Industrial Park.",
+        "mapsUrl": "https://www.google.com/maps/@38.43380,-90.35350,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed Metal Container Corporation (MCC) can plant, 42 Tenbrook Industrial Park, Arnold MO 63010 - AB-owned, the nation's largest can manufacturing operation. Roster coords were ~1.9 km off (movedMeters 1926). Locked center on the MCC manufacturing complex at 38.43380,-90.35350. Identity confirmed by web research (Yelp, TruckMap, EPA TRI facility 63010MTLCN42TEN) and the large manufacturing complex with extensive trailer yards in Tenbrook Industrial Park.",
+          "truckGate": "No controlled truck gate positively identified. The plant sits inside a multi-tenant industrial park; W-side driveways are open paved access with cars parked, and the NE trailer yard is open dirt/gravel with no fence on the powerline-easement side. A slatted chain-link fence is present along part of the W edge but the driveways appear ungated - classified false (no checkpoint), flagged uncertain.",
+          "guardShack": "No guard booth identified at any plant entrance. A brick structure exists near the W driveway but Street View confirms it belongs to the neighboring St. Louis County Health Department / Animal Control building, not MCC. False.",
+          "drivewayShort": "Open short approach from the industrial-park road to the plant docks.",
+          "dockDoors": "Trailers backed in along the SE and S building faces; ~35 estimated, 25-50 band.",
+          "dropArea": "Large open dirt/gravel trailer yard on the NE side holding ~90 trailers; 50+ band, capacity ~160. dropYard true.",
+          "shipRcvSeparate": "Distinct dock banks on separate building faces.",
+          "railServed": "A rail line runs N-S along the E side of the industrial park; a spur appears to reach the property but a siding directly into the MCC building could not be positively confirmed - flagged uncertain.",
+          "multipleFacilities": "MCC operates a multi-building campus - main can manufacturing hall plus several ancillary/warehouse buildings.",
+          "urbanRural": "Small-town industrial park in Arnold MO between residential neighborhoods and the Meramec River; edge-of-town setting - Rural.",
+          "scale": "No truck scale identified - flagged uncertain."
+        }
+      },
+      {
+        "id": "14-metal-container-corporation-jacksonville-fl-can-plant",
+        "name": "Metal Container Corporation - Jacksonville FL Can Plant",
+        "type": "Can Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "scale",
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 30.3398,
+          "lng": -81.7448
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 30.337,
+            "west": -81.7485,
+            "north": 30.342,
+            "east": -81.743
+          },
+          "truckGate": {
+            "south": 30.3376,
+            "west": -81.7468,
+            "north": 30.3382,
+            "east": -81.746
+          },
+          "dropYards": [
+            {
+              "south": 30.337,
+              "west": -81.748,
+              "north": 30.34,
+              "east": -81.7456
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 30.34,
+              "west": -81.746,
+              "north": 30.3413,
+              "east": -81.7445
+            },
+            {
+              "south": 30.3388,
+              "west": -81.7464,
+              "north": 30.3398,
+              "east": -81.7454
+            }
+          ],
+          "staging": {
+            "south": 30.338,
+            "west": -81.7462,
+            "north": 30.339,
+            "east": -81.745
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 40,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Facility: Metal Container Corporation (MCC) can plant, 1100 Ellis Rd N, West Jacksonville, FL 32254\n- Locked center: 30.33980, -81.74480 (MCC manufacturing complex)\n- The roster address and coords were WRONG. The roster gave \"5775 Skinner Lake Dr\" / 30.2524,-81.5380 — that location is a commercial/retail area in SE Jacksonville with no industrial plant. The correct MCC plant is at 1100 Ellis Rd N in West Jacksonville (confirmed via Yelp, Jax Daily Record, EPA TRI facility ID 32205MTLCN1100N). Roster `movedMeters` was only 5 because it geocoded the wrong address precisely.\n- The roster's \"adjacent to Jacksonville brewery\" note is also incorrect — this can plant is in West Jacksonville, ~25 km from the AB Jacksonville brewery (which is on the far north side at Busch Dr).",
+        "mapsUrl": "https://www.google.com/maps/@30.33980,-81.74480,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "ROSTER ADDRESS CORRECTED. The roster's address (5775 Skinner Lake Dr) and coords (30.2524,-81.5380) were WRONG - that location is a commercial/retail area in SE Jacksonville. The actual MCC Jacksonville can plant is at 1100 Ellis Rd N, West Jacksonville FL 32254 (EPA TRI facility 32205MTLCN1100N; confirmed via Yelp, Jax Daily Record). Locked center on the MCC manufacturing complex at 30.33980,-81.74480. Note: this plant is in WEST Jacksonville, NOT adjacent to the AB Jacksonville brewery (which is on the city's far north side at Busch Dr) - the roster's 'adjacent to brewery' note is incorrect.",
+          "truckGate": "Large fully-fenced industrial plant - continuous chain-link perimeter fence confirmed all around the building and trailer yard in Street View (2025). A controlled vehicular entrance with divided entry/exit and directional arrow markings on the SE side; a gate spans the truck lane. Controlled truck gate - true.",
+          "guardShack": "No clearly identifiable guard booth at the truck gate; a small structure near the entrance at z21 is ambiguous. Classified false (kiosk/remote check-in implied) but flagged uncertain - medium confidence.",
+          "remoteGs": "Set true because there IS a controlled truck gate but no positively-confirmed guard booth - implies kiosk/call-box/app check-in. Flagged uncertain.",
+          "drivewayShort": "Short approach from the SE gate to the trailer yard / dock aprons.",
+          "dockDoors": "Trailers backed in along the NW and W building faces; ~35 estimated, 25-50 band.",
+          "dropArea": "Large marked-stall trailer drop yard on the W side of the building (yellow stall markings) holding ~110 trailers; 50+ band, capacity ~180. dropYard true.",
+          "shipRcvSeparate": "Dock banks on separate building faces (NW vs W).",
+          "railServed": "A rail line runs along the W edge with covered hopper cars (aluminum coil/feedstock delivery) staged on sidings - clearly rail-served.",
+          "multipleFacilities": "Single large can-manufacturing building plus a small yard maintenance/dock structure - one primary building cluster, not a campus.",
+          "urbanRural": "Dense West Jacksonville industrial district within the Jacksonville metro - Urban.",
+          "scale": "No truck scale positively identified - flagged uncertain."
+        }
+      },
+      {
+        "id": "15-metal-container-corporation-mira-loma-ca-can-plant",
+        "name": "Metal Container Corporation - Mira Loma CA Can Plant",
+        "type": "Can Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "guardShack"
+        ],
+        "center": {
+          "lat": 34.032,
+          "lng": -117.5226
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.03025,
+            "west": -117.52405,
+            "north": 34.03395,
+            "east": -117.52085
+          },
+          "truckGate": {
+            "south": 34.03012,
+            "west": -117.5232,
+            "north": 34.03045,
+            "east": -117.5228
+          },
+          "dropYards": [
+            {
+              "south": 34.03055,
+              "west": -117.52395,
+              "north": 34.03155,
+              "east": -117.5229
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.0311,
+              "west": -117.52385,
+              "north": 34.03155,
+              "east": -117.5225
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 27,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Can Manufacturing Plant\nAccount: AB InBev (`ab-inbev`)\nResolved coords: 34.0320, -117.5226\nAddress: 10980 Inland Ave, Mira Loma / Jurupa Valley, CA 91752",
+        "mapsUrl": "https://www.google.com/maps/@34.032,-117.5226,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "South-side main driveway is a wide open entrance with a landscaped median (rock + agave) and no barrier arm, sliding gate, or checkpoint pinch-point. Street View Feb 2025 from Inland-area road shows free-flowing access. North and west property lines are palisade-fenced perimeter with grassy buffers and no vehicle gate.",
+          "guardShack": "No staffed booth visible at the south entrance in satellite or Street View. A small structure exists on the NE annex but it is part of the can-end processing building, not an entrance booth. Low-confidence negative — booth could be obscured by entrance landscaping, but no evidence of one.",
+          "multipleFacilities": "Two buildings on one fenced parcel: the main can-manufacturing building (west, large white roof) and a separate NE annex building with rooftop tanks/silos (likely can-end or coatings processing).",
+          "dockDoorCount": "Counted ~12-14 dock doors along the building's south face under a continuous blue canopy at zoom 20; estimate, some doors may be obscured by trailers/shadows.",
+          "dropYard": "Large paved truck yard wraps the south and SW of the building with ample marked space for parked trailers; only ~4 trailers present in the captured imagery.",
+          "railServed": "A rail corridor runs NE-SW immediately east and along the west of the property, but it is a through-line/spur shared with neighboring warehouses; no track enters the MCC building.",
+          "fastLaneOpportunity": "The south entrance driveway is very wide with a divided median, providing ample paved width to add a dedicated express/bypass lane.",
+          "urbanRural": "Located in the dense Mira Loma/Jurupa Valley industrial fabric of the Inland Empire metro - surrounded by large distribution warehouses on all sides."
+        }
+      },
+      {
+        "id": "16-metal-container-corporation-newburgh-ny-can-plant",
+        "name": "Metal Container Corporation - Newburgh NY Can Plant",
+        "type": "Can Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 41.4878,
+          "lng": -74.0958
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.4858,
+            "west": -74.0982,
+            "north": 41.4905,
+            "east": -74.0935
+          },
+          "truckGate": {
+            "south": 41.4867,
+            "west": -74.0976,
+            "north": 41.4871,
+            "east": -74.0971
+          },
+          "dropYards": [
+            {
+              "south": 41.4877,
+              "west": -74.0974,
+              "north": 41.4883,
+              "east": -74.0965
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.4878,
+              "west": -74.0972,
+              "north": 41.4887,
+              "east": -74.0966
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 18,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 50,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Can Manufacturing Plant\nAccount: AB InBev (`ab-inbev`)\nResolved coords: 41.4878, -74.0958\nAddress: 130 Breunig Rd, New Windsor, NY 12553 (also called the \"Newburgh Can Plant\")",
+        "mapsUrl": "https://www.google.com/maps/@41.4878,-74.0958,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Main entrance off Breunig Rd (SW) is a wide open driveway with a '130' AB monument sign on a landscaped median - no barrier arm, sliding gate, or checkpoint. Street View Aug 2023 confirms open campus-style frontage with no perimeter fence at the road. A second access road on the NE connects to the broader internal road network; the small peaked-roof structure at that junction is a utility/storage building, not a guard booth.",
+          "guardShack": "No staffed booth at either access point. The NE junction structure is a house-like utility building set back from the road, not a checkpoint booth.",
+          "remoteGs": "No gate exists, so no remote check-in either.",
+          "entryExitSeparate": "The main SW driveway serves the primary entry and the office/parking, while a separate NE road connects the truck-circulation perimeter loop - functioning as distinct in/out points on different sides of the property.",
+          "shipRcvSeparate": "Dock banks appear on two distinct building faces - a row of dock doors with parked trailers on the SW/west face (warehouse side) and a separate dock cluster on the NE face of the building.",
+          "dockDoorCount": "Counted roughly 20-22 dock doors total across the SW/west face and NE face at zoom 19-20; estimate, some obscured by trailers and shadow.",
+          "dropArea": "Two clusters of trailers parked angle-nose-in storage style in the west truck yard - approximately 15-18 trailers visible.",
+          "trailerParkingCapacity": "West yard could hold ~30-40 trailers; estimate from paved area extent.",
+          "railServed": "No rail spur visible entering the property; nearest rail is well off-site.",
+          "urbanRural": "Facility sits in wooded terrain on the edge of New Windsor with only scattered light-industrial and residential development nearby - small-town/edge-of-town setting, classified Rural.",
+          "buildingCount": "Single large connected structure - a warehouse section (NW, large flat roof) joined to a manufacturing section (SE, with rooftop process equipment and silos)."
+        }
+      },
+      {
+        "id": "17-metal-container-corporation-windsor-co-can-plant",
+        "name": "Metal Container Corporation - Windsor CO Can Plant",
+        "type": "Can Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 40.467,
+          "lng": -104.8623
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.4653,
+            "west": -104.8636,
+            "north": 40.4683,
+            "east": -104.8612
+          },
+          "truckGate": {
+            "south": 40.4651,
+            "west": -104.8617,
+            "north": 40.46545,
+            "east": -104.8612
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 40.4663,
+              "west": -104.862,
+              "north": 40.467,
+              "east": -104.8616
+            }
+          ],
+          "staging": {
+            "south": 40.4654,
+            "west": -104.8617,
+            "north": 40.4662,
+            "east": -104.8613
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 2,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 16.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Can Manufacturing Plant\nAccount: AB InBev (`ab-inbev`)\nResolved coords: 40.4670, -104.8623\nAddress: 1201 Metal Container Ct, Windsor, CO 80550",
+        "mapsUrl": "https://www.google.com/maps/@40.467,-104.8623,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single truck driveway off the south public road (Eastman Park Dr area) is a wide open paved driveway with a yellow sign post on the median - no barrier arm, sliding gate, guard booth, or checkpoint. Street View Oct 2025 confirms open access; the driveway curves up into the property toward the building with no internal gate visible.",
+          "guardShack": "No staffed booth at the entrance in satellite or Street View Oct 2025.",
+          "remoteGs": "No gate exists, so no remote check-in.",
+          "drivewayLong": "The gate-to-dock driveway is long - it curves up roughly 200+ m from the south road through the property to the building's truck apron, with ample queue room.",
+          "dockDoors": "Manufacturing plant (~105,000 sq ft, ~2B cans/yr, ~100 workers) with a modest dock count - roughly 6-8 dock doors counted at the NE corner of the building at zoom 20; estimate.",
+          "dropArea": "No dedicated marked trailer-storage lot observed; the east apron is a paved truck-circulation/staging area, not a drop yard. Only ~2 trailers visible in imagery.",
+          "railServed": "A single rail line runs N-S immediately east of the property but it is a corridor/through-line; no spur enters the MCC building.",
+          "urbanRural": "Facility sits among open farmland and scattered industrial buildings on the edge of Windsor, CO - clearly Rural.",
+          "trailerParkingCapacity": "East paved apron could hold ~10-12 trailers if used for staging; low-confidence estimate.",
+          "buildingCount": "Single connected structure - a windowless warehouse/storage section (north) joined to a process-equipment-laden manufacturing section (south)."
+        }
+      },
+      {
+        "id": "18-metal-container-corporation-oklahoma-city-ok-lid-plant",
+        "name": "Metal Container Corporation - Oklahoma City OK Lid Plant",
+        "type": "Lid Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "preGateStaging",
+          "postGateStaging",
+          "drivewayLong",
+          "drivewayShort",
+          "backupSensitive",
+          "entryExitTogether",
+          "entryExitSeparate",
+          "entryLanes",
+          "exitLanes",
+          "fastLaneOpportunity",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "urbanRural",
+          "connectivityIssue",
+          "multipleFacilities",
+          "scale",
+          "dropYard",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 35.425,
+          "lng": -97.608
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.424,
+            "west": -97.6088,
+            "north": 35.4266,
+            "east": -97.6068
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 0,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "NONE",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Lid Manufacturing Plant\nAccount: AB InBev (`ab-inbev`)\nResolved address: 3713 Harmon Ave, Oklahoma City, OK 73179\nBest-estimate coords: 35.425, -97.608 (EPA TRI point — exact building UNCONFIRMED)",
+        "mapsUrl": "https://www.google.com/maps/@35.425,-97.608,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "_locationUncertainty": "The exact MCC OKC Lid Plant building could not be positively identified. The roster supplied only city-level coordinates (35.4676, -97.5164) and no address. Web research resolved the address to 3713 Harmon Ave, Oklahoma City, OK 73179 (Yelp, Manta, CMac, EPA TRI facility 73179MTLCN3713H), and the EPA TRI Explorer reports facility coordinates of lat 35.425, lng -97.608 - a SW Oklahoma City industrial district. Extensive satellite + Street View probing of that district (2024-2025 imagery) identified the large nearby buildings as Veritiv (a packaging distributor, curved-canopy building), a Walmart distribution center, self-storage complexes, and multi-tenant spec warehouses (FedEx-served dock bays) - none of which could be confirmed as the MCC lid plant via signage or layout. The MCC OKC Lid Plant is a major facility (~13 billion lids/year, est. 100-249 employees, operating since 1986) and should be a distinct dedicated industrial building, but no such building could be conclusively isolated at or near the EPA-recorded coordinate. Coordinates recorded here are the EPA TRI point as a best estimate; the perimeter box is a nominal placeholder and yardMetrics are zeroed. Recommend human review with parcel/GIS data or a direct facility contact to confirm the building footprint.",
+          "urbanRural": "Site is within the dense SW Oklahoma City industrial fabric near I-240 - classified Urban with reasonable confidence even though the exact building is unconfirmed.",
+          "railServed": "A rail line runs through the industrial district near the EPA-recorded point; whether a spur serves the actual MCC building is unknown."
+        }
+      },
+      {
+        "id": "19-metal-container-corporation-riverside-ca-lid-plant",
+        "name": "Metal Container Corporation - Riverside CA Lid Plant",
+        "type": "Lid Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "preGateStaging",
+          "postGateStaging",
+          "drivewayLong",
+          "drivewayShort",
+          "backupSensitive",
+          "entryExitTogether",
+          "entryExitSeparate",
+          "entryLanes",
+          "exitLanes",
+          "fastLaneOpportunity",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "connectivityIssue",
+          "multipleFacilities",
+          "scale",
+          "dropYard",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 33.948,
+          "lng": -117.45
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.947,
+            "west": -117.4512,
+            "north": 33.949,
+            "east": -117.4488
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 0,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "NONE",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Lid Manufacturing Plant\nAccount: AB InBev (`ab-inbev`)\nResolved address: 7155 Central Ave, Riverside, CA 92504\nBest-estimate coords: 33.9480, -117.4500 (airport-area industrial cluster — exact building UNCONFIRMED)",
+        "mapsUrl": "https://www.google.com/maps/@33.9480,-117.4500,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "_locationUncertainty": "The exact MCC Riverside Lid Plant building could not be positively identified. The roster supplied only city-level coordinates (33.9533, -117.3962, generic Riverside center) and no address. Web research resolved the address to 7155 Central Ave, Riverside, CA 92504 (Yelp, Yahoo Local, Manta, D&B, CommercialCafe; phone 951-354-0444). CommercialCafe describes it as a Class B industrial building, 83,914 SF, completed 1987, in the 'Airport neighborhood' of Riverside (near Riverside Municipal Airport), with ~200 employees per the listing. However, no precise latitude/longitude could be obtained from any source (Waze, EPA FRS/TRI, real-estate listings all lacked coordinates), and extensive satellite + Street View probing of the industrial districts around Riverside Municipal Airport could not isolate a single building confirmable as the MCC lid plant - the airport-adjacent industrial fabric is dense with similar multi-tenant and mid-size industrial buildings, none with confirmable MCC signage. Coordinates recorded here (33.9480, -117.4500) are a best-estimate point in the airport-NE industrial cluster; the perimeter box is a nominal placeholder and yardMetrics are zeroed. Recommend human review with Riverside County parcel/GIS data for 7155 Central Ave, or a direct facility contact, to confirm the building footprint.",
+          "urbanRural": "The facility is within the dense Riverside metro industrial fabric near Riverside Municipal Airport - classified Urban with reasonable confidence even though the exact building is unconfirmed."
+        }
+      },
+      {
+        "id": "20-busch-agricultural-resources-jonesboro-ar-rice-mill",
+        "name": "Busch Agricultural Resources - Jonesboro AR Rice Mill",
+        "type": "Agricultural Processing - Rice Mill",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 35.8748,
+          "lng": -90.6005
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.8732,
+            "west": -90.6028,
+            "north": 35.8768,
+            "east": -90.5988
+          },
+          "truckGate": {
+            "south": 35.8742,
+            "west": -90.5993,
+            "north": 35.8746,
+            "east": -90.5987
+          },
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": {
+            "south": 35.8737,
+            "west": -90.601,
+            "north": 35.8745,
+            "east": -90.5998
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 4,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 15,
+          "truckGateCount": 2,
+          "buildingCount": 6,
+          "siteAreaAcres": 36,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Agricultural Processing - Rice Mill\nAccount: AB InBev (`ab-inbev`)\nResolved coords: 35.8748, -90.6005\nAddress: 3723 County Road 905, Jonesboro, AR 72401",
+        "mapsUrl": "https://www.google.com/maps/@35.8748,-90.6005,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Two open driveways connect the mill yard to County Road 905 on the east side - both are wide gravel/paved entrances with no barrier arm, sliding gate, or checkpoint structure. Street View Dec 2024 shows the truck entrance has only loose orange jersey barriers placed near the apron (likely traffic-channeling), not an access-control gate, and no guard booth. The west side is bounded by US-49/Hwy 49 and a rail corridor.",
+          "guardShack": "No staffed guard booth at either CR 905 entrance in satellite or Street View Dec 2024.",
+          "remoteGs": "No gate exists, so no remote check-in.",
+          "entryExitSeparate": "Two separate driveways onto CR 905 - a south entrance into the mill/loadout yard and a north entrance to the office area - functioning as distinct access points.",
+          "scale": "Rice mills receive inbound grain by truck and a truck scale is operationally expected; a small structure and a rectangular pad near the truck loadout area are consistent with a scale/scale house but could not be confirmed unambiguously from overhead imagery - flagged uncertain.",
+          "railServed": "Confirmed - a rail siding runs along the west/SW side of the property parallel to Hwy 49, with a string of covered hopper rail cars parked on it adjacent to the mill silos. Federal grain warehouse records list 1,066,000-bushel storage capacity.",
+          "dockDoors": "Not a dock-door distribution facility. Grain/rice moves via bulk loadout - truck loadout spouts and a few enclosed-building doors; estimated ~4 truck/material doors. Open-top hopper grain trucks observed being loaded.",
+          "dropArea": "Some trailers/grain trucks park in the yard but there is no dedicated marked trailer-storage drop lot; ~4 trailers visible.",
+          "multipleFacilities": "Multiple distinct structures on the campus - the main mill/processing building, a large grain silo/bin bank, additional storage buildings, a separate office building, and outbuildings.",
+          "drivewayLong": "The yard between the CR 905 entrances and the mill loadout/processing area is large and open with ample room to queue 3+ trucks.",
+          "urbanRural": "Facility sits in open Arkansas farmland (rice country) along Hwy 49 well outside the Jonesboro urban core - clearly Rural.",
+          "connectivityIssue": "Rural farmland setting but along a US highway with nearby development - cellular coverage likely adequate; set false."
+        }
+      },
+      {
+        "id": "21-busch-agricultural-resources-idaho-falls-id-malt-plant",
+        "name": "Busch Agricultural Resources - Idaho Falls ID Malt Plant",
+        "type": "Agricultural Processing - Malt Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 43.4444,
+          "lng": -112.0685
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 43.4424,
+            "west": -112.0715,
+            "north": 43.4465,
+            "east": -112.0655
+          },
+          "truckGate": {
+            "south": 43.4454,
+            "west": -112.0714,
+            "north": 43.446,
+            "east": -112.0706
+          },
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": {
+            "south": 43.443,
+            "west": -112.069,
+            "north": 43.444,
+            "east": -112.067
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 2,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 1,
+          "buildingCount": 7,
+          "siteAreaAcres": 54,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Agricultural Processing - Malt Plant\nAccount: AB InBev (`ab-inbev`)\nResolved coords: 43.4444, -112.0685\nAddress: 5755 S Yellowstone Hwy, Idaho Falls, ID 83402",
+        "mapsUrl": "https://www.google.com/maps/@43.4444,-112.0685,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "The main entrance off Yellowstone Hwy (S Yellowstone Hwy) is a long open access road that crosses the rail spur and branches into landscaped driveways with a monument sign on the median - no barrier arm, sliding gate, or checkpoint structure visible in satellite at zoom 20. No Street View coverage exists on the access road itself (highway-level panos only), but every satellite probe of the entrance shows open, uncontrolled driveways.",
+          "guardShack": "No staffed guard booth visible at the entrance or anywhere along the access road in satellite imagery.",
+          "remoteGs": "No gate exists, so no remote check-in.",
+          "drivewayLong": "The access road runs a long distance (300+ m) from Yellowstone Hwy across the rail and into the plant, opening into a very large paved truck-circulation yard - ample room to queue many trucks.",
+          "scale": "Malt plants receive inbound barley and ship finished malt by truck; a truck scale is operationally expected and a small structure consistent with a scale house is present in the truck yard, but it could not be confirmed unambiguously from overhead imagery - flagged uncertain.",
+          "railServed": "Confirmed - a rail spur curves off the mainline (parallel to Yellowstone Hwy) into the property; a long string of covered hopper rail cars is parked on the siding alongside the malt plant and grain storage buildings. Rail is a primary mode for both inbound barley and outbound malt.",
+          "dockDoors": "Not a dock-door distribution facility. Malt/barley moves via bulk loadout spouts and conveyors; estimated ~6 truck/material loading points/doors at the process and storage buildings (low-confidence estimate).",
+          "dropArea": "No dedicated marked trailer-storage drop lot; trucks circulate through a large open yard. Set NONE.",
+          "multipleFacilities": "Multiple distinct structures on the campus - the tall malting/process buildings (~250 ft), a large segmented-roof grain storage building, grain silo/germination drum clusters, an office, wastewater treatment ponds, and outbuildings.",
+          "urbanRural": "Facility sits in open Idaho farmland (barley country) south of Idaho Falls along Yellowstone Hwy, surrounded by cropland - clearly Rural.",
+          "connectivityIssue": "Rural farmland setting but directly along a state highway with a neighboring industrial facility - cellular coverage likely adequate; set false.",
+          "buildingCount": "Approximately 7 distinct structures: tall malting/process buildings, large grain storage building, silo/drum clusters, office, plus outbuildings."
+        }
+      }
+    ]
+  }
+}

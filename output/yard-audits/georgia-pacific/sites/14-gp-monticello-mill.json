@@ -1,0 +1,60 @@
+{
+  "name": "GP Monticello Mill - Monticello MS",
+  "type": "Containerboard Mill",
+  "coords": { "lat": 31.6282, "lng": -90.0815 },
+  "geofences": {
+    "perimeter": { "south": 31.6195, "west": -90.0960, "north": 31.6360, "east": -90.0720 },
+    "truckGate": { "south": 31.6228, "west": -90.0850, "north": 31.6244, "east": -90.0826 },
+    "dropYards": [
+      { "south": 31.6280, "west": -90.0875, "north": 31.6310, "east": -90.0840 },
+      { "south": 31.6224, "west": -90.0820, "north": 31.6256, "east": -90.0795 }
+    ],
+    "dockAprons": [
+      { "south": 31.6288, "west": -90.0862, "north": 31.6312, "east": -90.0838 }
+    ],
+    "staging": { "south": 31.6212, "west": -90.0815, "north": 31.6238, "east": -90.0792 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 22,
+    "siteAreaAcres": 320.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@31.6282,-90.0815,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": true, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "scale", "dockDoors", "entryLanes", "exitLanes", "multiStep"],
+  "fieldNotes": {
+    "location": "Roster geocode (31.5795,-90.0394, address 1715 Highway 84 E) sat on Highway 84 in open forest ~5.6 km SSE of the actual mill - a city-level geocode error. Mill core relocated via CLUI/Global Energy Monitor coordinates and satellite to ~31.6282,-90.0815, on Na Sandifer Hwy (Old Highway 84) along the Pearl River, ~1 mile east of Monticello, Lawrence County MS.",
+    "facility": "Georgia-Pacific Monticello Mill - an integrated kraft pulp and linerboard (containerboard) mill. In 2024 it became one of few North American facilities to produce over 1 million tons of product. Subject of a $91M upgrade announced 2023 (Infor Phase 2 per dossier). Large campus: paper machine buildings, woodyard with two radial log/chip storage piles, wastewater treatment clarifiers and ponds, finished-goods shipping warehouse, rail yard, support structures.",
+    "truckGate": "TRUE - controlled mill entrance. The single mill access road branches NE off Na Sandifer Hwy (~31.6213,-90.0805) and runs ~400 m into the property; Street View (2024-03) shows signage, a posted entrance and an industrial checkpoint approach. A controlled, gated/scaled entrance is universal for an integrated paper mill receiving log/chip vans; gate structures sit at the property line beyond Street View coverage.",
+    "guardShack": "TRUE (medium confidence) - a small structure is visible at the entrance/scale area near 31.6236,-90.0838; consistent with a guard/scale house. Not pinpointed at high resolution - flagged.",
+    "preGateStaging": "Long access road and wide gravel aprons outside the gate; satellite shows trailers/trucks queued bumper-to-bumper along the entrance road - ample pre-gate waiting room.",
+    "postGateStaging": "Large paved/gravel yard areas inside the gate before the docks and woodyard scales.",
+    "drivewayLong": "The gate-to-dock approach is a long internal road (hundreds of meters) that easily holds a queue of 3+ trucks; a substantial truck queue was visible in imagery.",
+    "fastLaneOpportunity": "Very wide gravel entrance aprons and unused paved/graded width near the gate provide physical room for a bypass/express lane.",
+    "shipRcvSeparate": "Receiving (woodyard log/chip vans, chemical and rail receiving) is physically separate from finished linerboard shipping at the warehouse dock bank on the NW side - distinct clusters.",
+    "dockDoors": "Finished-goods shipping warehouse on the NW side shows a dock face with banks of doors and trailers backed in; counted band 10-25, medium confidence (roof shadow obscures exact count).",
+    "dropArea": "Extensive trailer drop yards: rows of dozens of parked trailers in the warehouse drop yard and additional trailers staged along the entrance road - well over 50 trailers visible, band 50+.",
+    "multipleFacilities": "Campus: pulp/paper machine core, woodyard with two radial chip/log piles, wastewater treatment plant (clarifiers + multiple ponds), shipping warehouse, rail yard, plus numerous support buildings - 20+ distinct structures.",
+    "railServed": "TRUE - multiple rail spurs run directly into the property, serving the warehouse and woodyard; covered rail loading sheds and rail cars visible.",
+    "scale": "TRUE (medium confidence) - truck scales for chip/log van weigh-in are operationally required at an integrated paper mill of this scale; a scale-house-sized structure sits in the truck path near the entrance. Not resolved precisely - flagged.",
+    "multiStep": "Possible second checkpoint (gate then woodyard scale) but not clearly confirmed in imagery - left false, flagged.",
+    "urbanRural": "Monticello is a small Mississippi town; the mill sits on the edge of town surrounded by forest and the Pearl River. Rural.",
+    "siteAreaAcres": "~320 acres for the full fenced industrial property including warehouse, mill core, woodyard and treatment ponds; honest estimate from the perimeter box."
+  },
+  "method": "deep-audit"
+}

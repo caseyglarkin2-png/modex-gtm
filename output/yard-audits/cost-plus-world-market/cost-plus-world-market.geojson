@@ -1,0 +1,641 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.2596,
+              37.9135
+            ],
+            [
+              -121.2518,
+              37.9135
+            ],
+            [
+              -121.2518,
+              37.9187
+            ],
+            [
+              -121.2596,
+              37.9187
+            ],
+            [
+              -121.2596,
+              37.9135
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cost-plus-world-market",
+        "name": "Cost Plus World Market - Stockton CA Distribution Center",
+        "type": "Distribution Center / Import Warehouse (West Coast)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 240,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 95,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.253,
+              37.9156
+            ],
+            [
+              -121.2521,
+              37.9156
+            ],
+            [
+              -121.2521,
+              37.9164
+            ],
+            [
+              -121.253,
+              37.9164
+            ],
+            [
+              -121.253,
+              37.9156
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cost-plus-world-market",
+        "name": "Cost Plus World Market - Stockton CA Distribution Center",
+        "type": "Distribution Center / Import Warehouse (West Coast)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.256,
+              37.9179
+            ],
+            [
+              -121.253,
+              37.9179
+            ],
+            [
+              -121.253,
+              37.9188
+            ],
+            [
+              -121.256,
+              37.9188
+            ],
+            [
+              -121.256,
+              37.9179
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cost-plus-world-market",
+        "name": "Cost Plus World Market - Stockton CA Distribution Center",
+        "type": "Distribution Center / Import Warehouse (West Coast)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.2532,
+              37.9161
+            ],
+            [
+              -121.2518,
+              37.9161
+            ],
+            [
+              -121.2518,
+              37.9186
+            ],
+            [
+              -121.2532,
+              37.9186
+            ],
+            [
+              -121.2532,
+              37.9161
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cost-plus-world-market",
+        "name": "Cost Plus World Market - Stockton CA Distribution Center",
+        "type": "Distribution Center / Import Warehouse (West Coast)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.2596,
+              37.9135
+            ],
+            [
+              -121.2518,
+              37.9135
+            ],
+            [
+              -121.2518,
+              37.9147
+            ],
+            [
+              -121.2596,
+              37.9147
+            ],
+            [
+              -121.2596,
+              37.9135
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cost-plus-world-market",
+        "name": "Cost Plus World Market - Stockton CA Distribution Center",
+        "type": "Distribution Center / Import Warehouse (West Coast)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.2596,
+              37.9182
+            ],
+            [
+              -121.2524,
+              37.9182
+            ],
+            [
+              -121.2524,
+              37.9187
+            ],
+            [
+              -121.2596,
+              37.9187
+            ],
+            [
+              -121.2596,
+              37.9182
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cost-plus-world-market",
+        "name": "Cost Plus World Market - Stockton CA Distribution Center",
+        "type": "Distribution Center / Import Warehouse (West Coast)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.2592,
+              37.915
+            ],
+            [
+              -121.2522,
+              37.915
+            ],
+            [
+              -121.2522,
+              37.9156
+            ],
+            [
+              -121.2592,
+              37.9156
+            ],
+            [
+              -121.2592,
+              37.915
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cost-plus-world-market",
+        "name": "Cost Plus World Market - Stockton CA Distribution Center",
+        "type": "Distribution Center / Import Warehouse (West Coast)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.2596,
+              37.9144
+            ],
+            [
+              -121.2518,
+              37.9144
+            ],
+            [
+              -121.2518,
+              37.9149
+            ],
+            [
+              -121.2596,
+              37.9149
+            ],
+            [
+              -121.2596,
+              37.9144
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cost-plus-world-market",
+        "name": "Cost Plus World Market - Stockton CA Distribution Center",
+        "type": "Distribution Center / Import Warehouse (West Coast)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.719,
+              36.798
+            ],
+            [
+              -76.7105,
+              36.798
+            ],
+            [
+              -76.7105,
+              36.8016
+            ],
+            [
+              -76.719,
+              36.8016
+            ],
+            [
+              -76.719,
+              36.798
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cost-plus-world-market",
+        "name": "Cost Plus World Market - Windsor VA Distribution Center",
+        "type": "Distribution Center / Import Warehouse (East Coast)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 75,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.7132,
+              36.7982
+            ],
+            [
+              -76.7125,
+              36.7982
+            ],
+            [
+              -76.7125,
+              36.7987
+            ],
+            [
+              -76.7132,
+              36.7987
+            ],
+            [
+              -76.7132,
+              36.7982
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cost-plus-world-market",
+        "name": "Cost Plus World Market - Windsor VA Distribution Center",
+        "type": "Distribution Center / Import Warehouse (East Coast)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.718,
+              36.8002
+            ],
+            [
+              -76.7115,
+              36.8002
+            ],
+            [
+              -76.7115,
+              36.8008
+            ],
+            [
+              -76.718,
+              36.8008
+            ],
+            [
+              -76.718,
+              36.8002
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cost-plus-world-market",
+        "name": "Cost Plus World Market - Windsor VA Distribution Center",
+        "type": "Distribution Center / Import Warehouse (East Coast)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.718,
+              36.7983
+            ],
+            [
+              -76.7125,
+              36.7983
+            ],
+            [
+              -76.7125,
+              36.7989
+            ],
+            [
+              -76.718,
+              36.7989
+            ],
+            [
+              -76.718,
+              36.7983
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cost-plus-world-market",
+        "name": "Cost Plus World Market - Windsor VA Distribution Center",
+        "type": "Distribution Center / Import Warehouse (East Coast)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.718,
+              36.8
+            ],
+            [
+              -76.7115,
+              36.8
+            ],
+            [
+              -76.7115,
+              36.8002
+            ],
+            [
+              -76.718,
+              36.8002
+            ],
+            [
+              -76.718,
+              36.8
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cost-plus-world-market",
+        "name": "Cost Plus World Market - Windsor VA Distribution Center",
+        "type": "Distribution Center / Import Warehouse (East Coast)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.718,
+              36.7988
+            ],
+            [
+              -76.712,
+              36.7988
+            ],
+            [
+              -76.712,
+              36.799
+            ],
+            [
+              -76.718,
+              36.799
+            ],
+            [
+              -76.718,
+              36.7988
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cost-plus-world-market",
+        "name": "Cost Plus World Market - Windsor VA Distribution Center",
+        "type": "Distribution Center / Import Warehouse (East Coast)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.7135,
+              36.7983
+            ],
+            [
+              -76.7124,
+              36.7983
+            ],
+            [
+              -76.7124,
+              36.799
+            ],
+            [
+              -76.7135,
+              36.799
+            ],
+            [
+              -76.7135,
+              36.7983
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "cost-plus-world-market",
+        "name": "Cost Plus World Market - Windsor VA Distribution Center",
+        "type": "Distribution Center / Import Warehouse (East Coast)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    }
+  ]
+}

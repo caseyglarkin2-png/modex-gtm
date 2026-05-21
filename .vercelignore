@@ -11,8 +11,15 @@ tmp/
 test-results/
 screenshots/
 
-# Yard-audit run artifacts — data, not application code
+# Yard-audit run artifacts — raw per-site JSONs + dossiers stay local.
+# The demo PACKS derived from them DO ship: pack JSONs live under
+# public/demo-packs/<slug>.json (5–162 KB each, ~5 MB total — fine to ship).
+# But the SATELLITE TILES (public/demo-packs/tiles/) are ~484 MB across
+# ~1.6k JPEGs — too heavy for the deploy bundle. Tiles are served from a
+# separate CDN (Vercel Blob in D2). Until that's wired up, the demo route
+# falls back to live Google Static Maps URLs.
 output/
+public/demo-packs/tiles/
 
 # Docs and data files not needed by the Next.js build
 docs/

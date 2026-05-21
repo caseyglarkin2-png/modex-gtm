@@ -1,0 +1,68 @@
+{
+  "name": "UNFI - York PA DC (Harrisburg area)",
+  "type": "Distribution Center",
+  "coords": { "lat": 40.06860, "lng": -76.77470 },
+  "geofences": {
+    "perimeter": { "south": 40.06540, "west": -76.77640, "north": 40.07230, "east": -76.77290 },
+    "truckGate": { "south": 40.06820, "west": -76.77430, "north": 40.06910, "east": -76.77330 },
+    "dropYards": [
+      { "south": 40.07120, "west": -76.77500, "north": 40.07230, "east": -76.77290 }
+    ],
+    "dockAprons": [
+      { "south": 40.06640, "west": -76.77620, "north": 40.07090, "east": -76.77540 },
+      { "south": 40.07060, "west": -76.77540, "north": 40.07150, "east": -76.77320 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 130,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 41.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.06860,-76.77470,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "dockDoorCount", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "resolution": "Roster gave only city-level coords (downtown York, wrong site). Resolved to UNFI York DC, 225 Cross Farm Lane, York PA 17406, Greenspring Industrial Park - a 675,000 sq ft legacy-UNFI DC opened 2008. Confirmed via warehouse.ninja, LoopNet/JLL listing, TruckMap and the 2008 UNFI IR press release.",
+    "truckGate": "No barrier arm or sliding/swing gate at the public road (Cross Farm Lane) or on the internal access driveway. Street View 2012/2023 shows an open-campus driveway with a turnaround near the office; trucks reach the dock yard via a wide internal driveway with no checkpoint structure. Open-campus archetype.",
+    "guardShack": "No small staffed booth identified at the property entrance, the office turnaround, or the truck-yard mouth. The internal driveway opens directly onto the dock apron. Listed uncertain - a booth could exist inside the truck yard out of clear view, but none is visible in z19-z20 imagery.",
+    "drivewayLong": "Long internal access driveway from Cross Farm Lane wraps the building to the truck-yard side - easily holds 3+ trucks.",
+    "postGateStaging": "Wide paved dock aprons and a large trailer drop yard north of the building provide ample internal queuing room.",
+    "fastLaneOpportunity": "The internal truck driveway and dock apron are very wide with unused paved width - room to stripe an express bypass lane.",
+    "dropYard": "Dedicated trailer-storage lot at the north end of the building, full of parked trailers in marked rows (`dropArea` well over 50).",
+    "dockDoors": "Estimated ~110 dock doors total across the north, east and west building faces from the continuous rhythm of bays and backed-in trailers. High count appropriate for a 675k sq ft DC; exact number uncertain from overhead imagery.",
+    "shipRcvSeparate": "Docks wrap continuously around the north, east and west faces as one operational complex - not two physically separate ship/rcv banks.",
+    "entryLanes": "Wide truck driveway; lane count estimated at ~2 in / 2 out, uncertain from imagery.",
+    "urbanRural": "Greenspring Industrial Park is set among farmland and woods NE of York city, with a residential subdivision to the SE - edge-of-town / rural setting.",
+    "connectivityIssue": "Within an industrial park near York metro, not isolated - cellular coverage adequate."
+  },
+  "method": "deep-audit"
+}

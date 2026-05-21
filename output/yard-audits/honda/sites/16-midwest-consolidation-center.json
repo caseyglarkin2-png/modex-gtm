@@ -1,0 +1,59 @@
+{
+  "name": "American Honda - Midwest Consolidation Center (MCC) - Troy OH",
+  "type": "Parts Consolidation Center",
+  "coords": { "lat": 40.04630, "lng": -84.23600 },
+  "geofences": {
+    "perimeter": { "south": 40.04320, "west": -84.24050, "north": 40.04880, "east": -84.23230 },
+    "truckGate": { "south": 40.04595, "west": -84.24045, "north": 40.04640, "east": -84.23990 },
+    "dropYards": [
+      { "south": 40.04335, "west": -84.23560, "north": 40.04420, "east": -84.23290 }
+    ],
+    "dockAprons": [
+      { "south": 40.04640, "west": -84.23510, "north": 40.04710, "east": -84.23250 },
+      { "south": 40.04425, "west": -84.23720, "north": 40.04470, "east": -84.23280 }
+    ],
+    "staging": { "south": 40.04590, "west": -84.24010, "north": 40.04700, "east": -84.23830 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 95,
+    "trailerParkingCapacity": 180,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 58.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.04630,-84.23600,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Guarded checkpoint on the property access road off Commerce Center Blvd, ~340 m before the building; gate/barrier canopy spans the lanes (z20 satellite + Street View 2024-06).",
+    "guardShack": "Small blue/white staffed booth (~1-2 vehicle footprint, windows on multiple sides, overhead canopy over the lanes) sits beside the gate lanes - confirmed in Street View.",
+    "remoteGs": "False - a physical staffed guard booth is present.",
+    "postGateStaging": "Long deep approach drive plus a wide paved apron between the gate and the building affords ample inside-the-fence queuing.",
+    "drivewayLong": "Gate-to-dock approach is several hundred meters of internal road - easily holds 3+ trucks.",
+    "entryLanes": "Estimated 2; checkpoint widens into a multi-lane canopy area - approximate from imagery.",
+    "exitLanes": "Estimated 2; entry/exit share the one gated checkpoint.",
+    "fastLaneOpportunity": "Wide multi-lane gate canopy and a long approach road give physical room for an express/bypass lane.",
+    "dockDoors": "Long dock bank on the NE building face (toward I-75) plus a second dock bank on the SW/south face; 549,000 sq ft hub handling up to 270 freighter-loads/day - well into 50+ band. Door count is an estimate from overhead imagery.",
+    "dropArea": "Large dedicated trailer drop yard south of the building packed with parked trailers (no tractors), well over 50 stalls.",
+    "shipRcvSeparate": "Two distinct dock clusters on different building faces (NE face toward I-75 and SW/south face).",
+    "urbanRural": "Edge-of-town industrial setting off I-75 in Troy OH bordered by open farmland to the south - judged Rural per rubric tie-break.",
+    "multipleFacilities": "False for this property - the MCC building is the subject site; the older Troy PDC (idx 15) is a separate adjacent facility on the same campus, not counted here. buildingCount=2 includes the MCC's small gatehouse/annex.",
+    "dropYard": "Dedicated on-site trailer-storage lot south of the building, separate from active dock staging.",
+    "trailerParkingCapacity": "Estimate combining the southern drop yard and apron staging - approximate.",
+    "railServed": "No rail spur enters the property; I-75 runs along the east edge but no rail."
+  },
+  "method": "deep-audit"
+}

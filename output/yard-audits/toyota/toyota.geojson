@@ -1,0 +1,4119 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5475,
+              38.2475
+            ],
+            [
+              -84.5265,
+              38.2475
+            ],
+            [
+              -84.5265,
+              38.2705
+            ],
+            [
+              -84.5475,
+              38.2705
+            ],
+            [
+              -84.5475,
+              38.2475
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Kentucky - Georgetown KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 220,
+          "trailersVisible": 850,
+          "trailerParkingCapacity": 1100,
+          "truckGateCount": 3,
+          "buildingCount": 14,
+          "siteAreaAcres": 1050,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5318,
+              38.2518
+            ],
+            [
+              -84.5302,
+              38.2518
+            ],
+            [
+              -84.5302,
+              38.2528
+            ],
+            [
+              -84.5318,
+              38.2528
+            ],
+            [
+              -84.5318,
+              38.2518
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Kentucky - Georgetown KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5318,
+              38.247
+            ],
+            [
+              -84.5265,
+              38.247
+            ],
+            [
+              -84.5265,
+              38.2502
+            ],
+            [
+              -84.5318,
+              38.2502
+            ],
+            [
+              -84.5318,
+              38.247
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Kentucky - Georgetown KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5485,
+              38.2545
+            ],
+            [
+              -84.5435,
+              38.2545
+            ],
+            [
+              -84.5435,
+              38.259
+            ],
+            [
+              -84.5485,
+              38.259
+            ],
+            [
+              -84.5485,
+              38.2545
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Kentucky - Georgetown KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.543,
+              38.251
+            ],
+            [
+              -84.5385,
+              38.251
+            ],
+            [
+              -84.5385,
+              38.255
+            ],
+            [
+              -84.543,
+              38.255
+            ],
+            [
+              -84.543,
+              38.251
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Kentucky - Georgetown KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.541,
+              38.257
+            ],
+            [
+              -84.537,
+              38.257
+            ],
+            [
+              -84.537,
+              38.2605
+            ],
+            [
+              -84.541,
+              38.2605
+            ],
+            [
+              -84.541,
+              38.257
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Kentucky - Georgetown KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.534,
+              38.253
+            ],
+            [
+              -84.529,
+              38.253
+            ],
+            [
+              -84.529,
+              38.257
+            ],
+            [
+              -84.534,
+              38.257
+            ],
+            [
+              -84.534,
+              38.253
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Kentucky - Georgetown KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.53,
+              38.2525
+            ],
+            [
+              -84.5265,
+              38.2525
+            ],
+            [
+              -84.5265,
+              38.256
+            ],
+            [
+              -84.53,
+              38.256
+            ],
+            [
+              -84.53,
+              38.2525
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Kentucky - Georgetown KY",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.572,
+              38.282
+            ],
+            [
+              -87.553,
+              38.282
+            ],
+            [
+              -87.553,
+              38.2985
+            ],
+            [
+              -87.572,
+              38.2985
+            ],
+            [
+              -87.572,
+              38.282
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Indiana - Princeton IN",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 150,
+          "trailersVisible": 600,
+          "trailerParkingCapacity": 850,
+          "truckGateCount": 2,
+          "buildingCount": 9,
+          "siteAreaAcres": 730,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.563,
+              38.2868
+            ],
+            [
+              -87.5614,
+              38.2868
+            ],
+            [
+              -87.5614,
+              38.2878
+            ],
+            [
+              -87.563,
+              38.2878
+            ],
+            [
+              -87.563,
+              38.2868
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Indiana - Princeton IN",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.56,
+              38.287
+            ],
+            [
+              -87.5565,
+              38.287
+            ],
+            [
+              -87.5565,
+              38.2905
+            ],
+            [
+              -87.56,
+              38.2905
+            ],
+            [
+              -87.56,
+              38.287
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Indiana - Princeton IN",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.5685,
+              38.289
+            ],
+            [
+              -87.564,
+              38.289
+            ],
+            [
+              -87.564,
+              38.2935
+            ],
+            [
+              -87.5685,
+              38.2935
+            ],
+            [
+              -87.5685,
+              38.289
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Indiana - Princeton IN",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.563,
+              38.2895
+            ],
+            [
+              -87.5595,
+              38.2895
+            ],
+            [
+              -87.5595,
+              38.293
+            ],
+            [
+              -87.563,
+              38.293
+            ],
+            [
+              -87.563,
+              38.2895
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Indiana - Princeton IN",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.565,
+              38.2885
+            ],
+            [
+              -87.561,
+              38.2885
+            ],
+            [
+              -87.561,
+              38.292
+            ],
+            [
+              -87.565,
+              38.292
+            ],
+            [
+              -87.565,
+              38.2885
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Indiana - Princeton IN",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.56,
+              38.291
+            ],
+            [
+              -87.5565,
+              38.291
+            ],
+            [
+              -87.5565,
+              38.294
+            ],
+            [
+              -87.56,
+              38.294
+            ],
+            [
+              -87.56,
+              38.291
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Indiana - Princeton IN",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.5625,
+              38.287
+            ],
+            [
+              -87.5595,
+              38.287
+            ],
+            [
+              -87.5595,
+              38.2895
+            ],
+            [
+              -87.5625,
+              38.2895
+            ],
+            [
+              -87.5625,
+              38.287
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Indiana - Princeton IN",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.553,
+              29.252
+            ],
+            [
+              -98.534,
+              29.252
+            ],
+            [
+              -98.534,
+              29.27
+            ],
+            [
+              -98.553,
+              29.27
+            ],
+            [
+              -98.553,
+              29.252
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Texas - San Antonio TX",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 350,
+          "trailerParkingCapacity": 600,
+          "truckGateCount": 2,
+          "buildingCount": 20,
+          "siteAreaAcres": 900,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.5462,
+              29.2588
+            ],
+            [
+              -98.5446,
+              29.2588
+            ],
+            [
+              -98.5446,
+              29.2598
+            ],
+            [
+              -98.5462,
+              29.2598
+            ],
+            [
+              -98.5462,
+              29.2588
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Texas - San Antonio TX",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.5455,
+              29.2635
+            ],
+            [
+              -98.5425,
+              29.2635
+            ],
+            [
+              -98.5425,
+              29.267
+            ],
+            [
+              -98.5455,
+              29.267
+            ],
+            [
+              -98.5455,
+              29.2635
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Texas - San Antonio TX",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.543,
+              29.26
+            ],
+            [
+              -98.5395,
+              29.26
+            ],
+            [
+              -98.5395,
+              29.2635
+            ],
+            [
+              -98.543,
+              29.2635
+            ],
+            [
+              -98.543,
+              29.26
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Texas - San Antonio TX",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.5435,
+              29.261
+            ],
+            [
+              -98.539,
+              29.261
+            ],
+            [
+              -98.539,
+              29.2645
+            ],
+            [
+              -98.5435,
+              29.2645
+            ],
+            [
+              -98.5435,
+              29.261
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Texas - San Antonio TX",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.5455,
+              29.2595
+            ],
+            [
+              -98.5425,
+              29.2595
+            ],
+            [
+              -98.5425,
+              29.2625
+            ],
+            [
+              -98.5455,
+              29.2625
+            ],
+            [
+              -98.5455,
+              29.2595
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Texas - San Antonio TX",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.5455,
+              29.258
+            ],
+            [
+              -98.543,
+              29.258
+            ],
+            [
+              -98.543,
+              29.2605
+            ],
+            [
+              -98.5455,
+              29.2605
+            ],
+            [
+              -98.5455,
+              29.258
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Texas - San Antonio TX",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.901,
+              34.376
+            ],
+            [
+              -88.884,
+              34.376
+            ],
+            [
+              -88.884,
+              34.387
+            ],
+            [
+              -88.901,
+              34.387
+            ],
+            [
+              -88.901,
+              34.376
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Mississippi - Blue Springs MS",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 400,
+          "truckGateCount": 2,
+          "buildingCount": 5,
+          "siteAreaAcres": 470,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.8908,
+              34.3782
+            ],
+            [
+              -88.8892,
+              34.3782
+            ],
+            [
+              -88.8892,
+              34.3792
+            ],
+            [
+              -88.8908,
+              34.3792
+            ],
+            [
+              -88.8908,
+              34.3782
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Mississippi - Blue Springs MS",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.8915,
+              34.377
+            ],
+            [
+              -88.888,
+              34.377
+            ],
+            [
+              -88.888,
+              34.3798
+            ],
+            [
+              -88.8915,
+              34.3798
+            ],
+            [
+              -88.8915,
+              34.377
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Mississippi - Blue Springs MS",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.895,
+              34.3785
+            ],
+            [
+              -88.8918,
+              34.3785
+            ],
+            [
+              -88.8918,
+              34.381
+            ],
+            [
+              -88.895,
+              34.381
+            ],
+            [
+              -88.895,
+              34.3785
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Mississippi - Blue Springs MS",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.8955,
+              34.379
+            ],
+            [
+              -88.8915,
+              34.379
+            ],
+            [
+              -88.8915,
+              34.382
+            ],
+            [
+              -88.8955,
+              34.382
+            ],
+            [
+              -88.8955,
+              34.379
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Mississippi - Blue Springs MS",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.8985,
+              34.3805
+            ],
+            [
+              -88.8955,
+              34.3805
+            ],
+            [
+              -88.8955,
+              34.383
+            ],
+            [
+              -88.8985,
+              34.383
+            ],
+            [
+              -88.8985,
+              34.3805
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Mississippi - Blue Springs MS",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.8918,
+              34.378
+            ],
+            [
+              -88.8895,
+              34.378
+            ],
+            [
+              -88.8895,
+              34.3805
+            ],
+            [
+              -88.8918,
+              34.3805
+            ],
+            [
+              -88.8918,
+              34.378
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Mississippi - Blue Springs MS",
+        "type": "Vehicle Assembly Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.997172,
+              38.591712
+            ],
+            [
+              -81.986828,
+              38.591712
+            ],
+            [
+              -81.986828,
+              38.604288
+            ],
+            [
+              -81.997172,
+              38.604288
+            ],
+            [
+              -81.997172,
+              38.591712
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing West Virginia - Buffalo WV",
+        "type": "Powertrain Plant (engines/transmissions)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 85,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 311,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.9956,
+              38.59475
+            ],
+            [
+              -81.9942,
+              38.59475
+            ],
+            [
+              -81.9942,
+              38.59585
+            ],
+            [
+              -81.9956,
+              38.59585
+            ],
+            [
+              -81.9956,
+              38.59475
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing West Virginia - Buffalo WV",
+        "type": "Powertrain Plant (engines/transmissions)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.9918,
+              38.6001
+            ],
+            [
+              -81.9878,
+              38.6001
+            ],
+            [
+              -81.9878,
+              38.6043
+            ],
+            [
+              -81.9918,
+              38.6043
+            ],
+            [
+              -81.9918,
+              38.6001
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing West Virginia - Buffalo WV",
+        "type": "Powertrain Plant (engines/transmissions)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.9911,
+              38.597
+            ],
+            [
+              -81.9899,
+              38.597
+            ],
+            [
+              -81.9899,
+              38.6002
+            ],
+            [
+              -81.9911,
+              38.6002
+            ],
+            [
+              -81.9911,
+              38.597
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing West Virginia - Buffalo WV",
+        "type": "Powertrain Plant (engines/transmissions)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.9932,
+              38.5942
+            ],
+            [
+              -81.9915,
+              38.5942
+            ],
+            [
+              -81.9915,
+              38.5963
+            ],
+            [
+              -81.9932,
+              38.5963
+            ],
+            [
+              -81.9932,
+              38.5942
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing West Virginia - Buffalo WV",
+        "type": "Powertrain Plant (engines/transmissions)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.8545,
+              34.6755
+            ],
+            [
+              -86.842,
+              34.6755
+            ],
+            [
+              -86.842,
+              34.6915
+            ],
+            [
+              -86.8545,
+              34.6915
+            ],
+            [
+              -86.8545,
+              34.6755
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Mazda Toyota Manufacturing USA - Huntsville AL",
+        "type": "Vehicle Assembly Plant (Mazda-Toyota JV)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 80,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 300,
+          "truckGateCount": 2,
+          "buildingCount": 8,
+          "siteAreaAcres": 504,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.8465,
+              34.6833
+            ],
+            [
+              -86.8451,
+              34.6833
+            ],
+            [
+              -86.8451,
+              34.6847
+            ],
+            [
+              -86.8465,
+              34.6847
+            ],
+            [
+              -86.8465,
+              34.6833
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Mazda Toyota Manufacturing USA - Huntsville AL",
+        "type": "Vehicle Assembly Plant (Mazda-Toyota JV)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.8462,
+              34.6838
+            ],
+            [
+              -86.8434,
+              34.6838
+            ],
+            [
+              -86.8434,
+              34.6856
+            ],
+            [
+              -86.8462,
+              34.6856
+            ],
+            [
+              -86.8462,
+              34.6838
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Mazda Toyota Manufacturing USA - Huntsville AL",
+        "type": "Vehicle Assembly Plant (Mazda-Toyota JV)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.8492,
+              34.68
+            ],
+            [
+              -86.8464,
+              34.68
+            ],
+            [
+              -86.8464,
+              34.6818
+            ],
+            [
+              -86.8492,
+              34.6818
+            ],
+            [
+              -86.8492,
+              34.68
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Mazda Toyota Manufacturing USA - Huntsville AL",
+        "type": "Vehicle Assembly Plant (Mazda-Toyota JV)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.8472,
+              34.6842
+            ],
+            [
+              -86.8454,
+              34.6842
+            ],
+            [
+              -86.8454,
+              34.6862
+            ],
+            [
+              -86.8472,
+              34.6862
+            ],
+            [
+              -86.8472,
+              34.6842
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Mazda Toyota Manufacturing USA - Huntsville AL",
+        "type": "Vehicle Assembly Plant (Mazda-Toyota JV)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.8468,
+              34.6825
+            ],
+            [
+              -86.8454,
+              34.6825
+            ],
+            [
+              -86.8454,
+              34.6841
+            ],
+            [
+              -86.8468,
+              34.6841
+            ],
+            [
+              -86.8468,
+              34.6825
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Mazda Toyota Manufacturing USA - Huntsville AL",
+        "type": "Vehicle Assembly Plant (Mazda-Toyota JV)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.642,
+              35.886
+            ],
+            [
+              -79.6195,
+              35.886
+            ],
+            [
+              -79.6195,
+              35.906
+            ],
+            [
+              -79.642,
+              35.906
+            ],
+            [
+              -79.642,
+              35.886
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Battery Manufacturing North Carolina - Liberty NC",
+        "type": "Battery Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 50,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 1116,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.6332,
+              35.8932
+            ],
+            [
+              -79.6318,
+              35.8932
+            ],
+            [
+              -79.6318,
+              35.8946
+            ],
+            [
+              -79.6332,
+              35.8946
+            ],
+            [
+              -79.6332,
+              35.8932
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Battery Manufacturing North Carolina - Liberty NC",
+        "type": "Battery Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "low",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.6325,
+              35.895
+            ],
+            [
+              -79.6295,
+              35.895
+            ],
+            [
+              -79.6295,
+              35.8972
+            ],
+            [
+              -79.6325,
+              35.8972
+            ],
+            [
+              -79.6325,
+              35.895
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Battery Manufacturing North Carolina - Liberty NC",
+        "type": "Battery Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "low",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.6335,
+              35.8946
+            ],
+            [
+              -79.6306,
+              35.8946
+            ],
+            [
+              -79.6306,
+              35.8962
+            ],
+            [
+              -79.6335,
+              35.8962
+            ],
+            [
+              -79.6335,
+              35.8946
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Battery Manufacturing North Carolina - Liberty NC",
+        "type": "Battery Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "low",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.6435,
+              34.8255
+            ],
+            [
+              -86.632,
+              34.8255
+            ],
+            [
+              -86.632,
+              34.835
+            ],
+            [
+              -86.6435,
+              34.835
+            ],
+            [
+              -86.6435,
+              34.8255
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Alabama - Huntsville AL",
+        "type": "Engine Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 250,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 275,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.6368,
+              34.8272
+            ],
+            [
+              -86.6354,
+              34.8272
+            ],
+            [
+              -86.6354,
+              34.8283
+            ],
+            [
+              -86.6368,
+              34.8283
+            ],
+            [
+              -86.6368,
+              34.8272
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Alabama - Huntsville AL",
+        "type": "Engine Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.6373,
+              34.83
+            ],
+            [
+              -86.6348,
+              34.83
+            ],
+            [
+              -86.6348,
+              34.8327
+            ],
+            [
+              -86.6373,
+              34.8327
+            ],
+            [
+              -86.6373,
+              34.83
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Alabama - Huntsville AL",
+        "type": "Engine Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.6347,
+              34.83
+            ],
+            [
+              -86.633,
+              34.83
+            ],
+            [
+              -86.633,
+              34.8327
+            ],
+            [
+              -86.6347,
+              34.8327
+            ],
+            [
+              -86.6347,
+              34.83
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Alabama - Huntsville AL",
+        "type": "Engine Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.637,
+              34.8285
+            ],
+            [
+              -86.6356,
+              34.8285
+            ],
+            [
+              -86.6356,
+              34.8306
+            ],
+            [
+              -86.637,
+              34.8306
+            ],
+            [
+              -86.637,
+              34.8285
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Alabama - Huntsville AL",
+        "type": "Engine Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.9712,
+              38.9608
+            ],
+            [
+              -90.9655,
+              38.9608
+            ],
+            [
+              -90.9655,
+              38.9662
+            ],
+            [
+              -90.9712,
+              38.9662
+            ],
+            [
+              -90.9712,
+              38.9608
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Missouri - Troy MO",
+        "type": "Powertrain Plant (aluminum castings)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 73.4,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.96845,
+              38.96535
+            ],
+            [
+              -90.96795,
+              38.96535
+            ],
+            [
+              -90.96795,
+              38.96575
+            ],
+            [
+              -90.96845,
+              38.96575
+            ],
+            [
+              -90.96845,
+              38.96535
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Missouri - Troy MO",
+        "type": "Powertrain Plant (aluminum castings)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.9673,
+              38.9637
+            ],
+            [
+              -90.9653,
+              38.9637
+            ],
+            [
+              -90.9653,
+              38.9656
+            ],
+            [
+              -90.9673,
+              38.9656
+            ],
+            [
+              -90.9673,
+              38.9637
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Missouri - Troy MO",
+        "type": "Powertrain Plant (aluminum castings)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.9685,
+              38.96255
+            ],
+            [
+              -90.9668,
+              38.96255
+            ],
+            [
+              -90.9668,
+              38.9631
+            ],
+            [
+              -90.9685,
+              38.9631
+            ],
+            [
+              -90.9685,
+              38.96255
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Missouri - Troy MO",
+        "type": "Powertrain Plant (aluminum castings)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.9445,
+              35.5945
+            ],
+            [
+              -88.938,
+              35.5945
+            ],
+            [
+              -88.938,
+              35.602
+            ],
+            [
+              -88.9445,
+              35.602
+            ],
+            [
+              -88.9445,
+              35.5945
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Tennessee - Jackson TN",
+        "type": "Powertrain Plant (aluminum castings)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 12,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 121,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.93995,
+              35.597
+            ],
+            [
+              -88.9394,
+              35.597
+            ],
+            [
+              -88.9394,
+              35.5974
+            ],
+            [
+              -88.93995,
+              35.5974
+            ],
+            [
+              -88.93995,
+              35.597
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Tennessee - Jackson TN",
+        "type": "Powertrain Plant (aluminum castings)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.9431,
+              35.5998
+            ],
+            [
+              -88.9417,
+              35.5998
+            ],
+            [
+              -88.9417,
+              35.6008
+            ],
+            [
+              -88.9431,
+              35.6008
+            ],
+            [
+              -88.9431,
+              35.5998
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Tennessee - Jackson TN",
+        "type": "Powertrain Plant (aluminum castings)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.9425,
+              35.5976
+            ],
+            [
+              -88.9412,
+              35.5976
+            ],
+            [
+              -88.9412,
+              35.599
+            ],
+            [
+              -88.9425,
+              35.599
+            ],
+            [
+              -88.9425,
+              35.5976
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Tennessee - Jackson TN",
+        "type": "Powertrain Plant (aluminum castings)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.9406,
+              35.5972
+            ],
+            [
+              -88.9395,
+              35.5972
+            ],
+            [
+              -88.9395,
+              35.5983
+            ],
+            [
+              -88.9406,
+              35.5983
+            ],
+            [
+              -88.9406,
+              35.5972
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Motor Manufacturing Tennessee - Jackson TN",
+        "type": "Powertrain Plant (aluminum castings)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.1645,
+              33.87
+            ],
+            [
+              -118.1603,
+              33.87
+            ],
+            [
+              -118.1603,
+              33.8725
+            ],
+            [
+              -118.1645,
+              33.8725
+            ],
+            [
+              -118.1645,
+              33.87
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "TABC Inc - Long Beach CA",
+        "type": "Parts/Components Plant (stamping, welding, catalytic converters)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 10,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 2,
+          "buildingCount": 5,
+          "siteAreaAcres": 26.7,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.16095,
+              33.8725
+            ],
+            [
+              -118.1603,
+              33.8725
+            ],
+            [
+              -118.1603,
+              33.8729
+            ],
+            [
+              -118.16095,
+              33.8729
+            ],
+            [
+              -118.16095,
+              33.8725
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "TABC Inc - Long Beach CA",
+        "type": "Parts/Components Plant (stamping, welding, catalytic converters)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.1628,
+              33.871
+            ],
+            [
+              -118.1619,
+              33.871
+            ],
+            [
+              -118.1619,
+              33.872
+            ],
+            [
+              -118.1628,
+              33.872
+            ],
+            [
+              -118.1628,
+              33.871
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "TABC Inc - Long Beach CA",
+        "type": "Parts/Components Plant (stamping, welding, catalytic converters)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.7115,
+              39.05
+            ],
+            [
+              -84.705,
+              39.05
+            ],
+            [
+              -84.705,
+              39.056
+            ],
+            [
+              -84.7115,
+              39.056
+            ],
+            [
+              -84.7115,
+              39.05
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "North American Parts Center Kentucky - Hebron KY",
+        "type": "Parts Procurement & Distribution Hub",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 240,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 92.8,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.7053,
+              39.0532
+            ],
+            [
+              -84.7046,
+              39.0532
+            ],
+            [
+              -84.7046,
+              39.054
+            ],
+            [
+              -84.7053,
+              39.054
+            ],
+            [
+              -84.7053,
+              39.0532
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "North American Parts Center Kentucky - Hebron KY",
+        "type": "Parts Procurement & Distribution Hub",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.7108,
+              39.0506
+            ],
+            [
+              -84.7078,
+              39.0506
+            ],
+            [
+              -84.7078,
+              39.0528
+            ],
+            [
+              -84.7108,
+              39.0528
+            ],
+            [
+              -84.7108,
+              39.0506
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "North American Parts Center Kentucky - Hebron KY",
+        "type": "Parts Procurement & Distribution Hub",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.7078,
+              39.0518
+            ],
+            [
+              -84.706,
+              39.0518
+            ],
+            [
+              -84.706,
+              39.0543
+            ],
+            [
+              -84.7078,
+              39.0543
+            ],
+            [
+              -84.7078,
+              39.0518
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "North American Parts Center Kentucky - Hebron KY",
+        "type": "Parts Procurement & Distribution Hub",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.7101,
+              39.0513
+            ],
+            [
+              -84.7083,
+              39.0513
+            ],
+            [
+              -84.7083,
+              39.0545
+            ],
+            [
+              -84.7101,
+              39.0545
+            ],
+            [
+              -84.7101,
+              39.0513
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "North American Parts Center Kentucky - Hebron KY",
+        "type": "Parts Procurement & Distribution Hub",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.7072,
+              39.0523
+            ],
+            [
+              -84.7062,
+              39.0523
+            ],
+            [
+              -84.7062,
+              39.0548
+            ],
+            [
+              -84.7072,
+              39.0548
+            ],
+            [
+              -84.7072,
+              39.0523
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "North American Parts Center Kentucky - Hebron KY",
+        "type": "Parts Procurement & Distribution Hub",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.2233,
+              33.7733
+            ],
+            [
+              -118.2147,
+              33.7733
+            ],
+            [
+              -118.2147,
+              33.7823
+            ],
+            [
+              -118.2233,
+              33.7823
+            ],
+            [
+              -118.2233,
+              33.7733
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Logistics Services Vehicle Distribution Center - Long Beach CA",
+        "type": "Vehicle Distribution Center (port processing)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 18,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 62,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.2195,
+              33.7801
+            ],
+            [
+              -118.2185,
+              33.7801
+            ],
+            [
+              -118.2185,
+              33.7809
+            ],
+            [
+              -118.2195,
+              33.7809
+            ],
+            [
+              -118.2195,
+              33.7801
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Logistics Services Vehicle Distribution Center - Long Beach CA",
+        "type": "Vehicle Distribution Center (port processing)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.2233,
+              33.777
+            ],
+            [
+              -118.2185,
+              33.777
+            ],
+            [
+              -118.2185,
+              33.782
+            ],
+            [
+              -118.2233,
+              33.782
+            ],
+            [
+              -118.2233,
+              33.777
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Logistics Services Vehicle Distribution Center - Long Beach CA",
+        "type": "Vehicle Distribution Center (port processing)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.22,
+              33.774
+            ],
+            [
+              -118.2165,
+              33.774
+            ],
+            [
+              -118.2165,
+              33.777
+            ],
+            [
+              -118.22,
+              33.777
+            ],
+            [
+              -118.22,
+              33.774
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Logistics Services Vehicle Distribution Center - Long Beach CA",
+        "type": "Vehicle Distribution Center (port processing)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.218,
+              33.7748
+            ],
+            [
+              -118.2165,
+              33.7748
+            ],
+            [
+              -118.2165,
+              33.7762
+            ],
+            [
+              -118.218,
+              33.7762
+            ],
+            [
+              -118.218,
+              33.7748
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Logistics Services Vehicle Distribution Center - Long Beach CA",
+        "type": "Vehicle Distribution Center (port processing)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.218,
+              33.7762
+            ],
+            [
+              -118.2162,
+              33.7762
+            ],
+            [
+              -118.2162,
+              33.7778
+            ],
+            [
+              -118.218,
+              33.7778
+            ],
+            [
+              -118.218,
+              33.7762
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Logistics Services Vehicle Distribution Center - Long Beach CA",
+        "type": "Vehicle Distribution Center (port processing)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.7565,
+              45.6325
+            ],
+            [
+              -122.749,
+              45.6325
+            ],
+            [
+              -122.749,
+              45.6405
+            ],
+            [
+              -122.7565,
+              45.6405
+            ],
+            [
+              -122.7565,
+              45.6325
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Logistics Services Vehicle Distribution Center - Portland OR",
+        "type": "Vehicle Distribution Center (port processing)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 48,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.7556,
+              45.6366
+            ],
+            [
+              -122.7543,
+              45.6366
+            ],
+            [
+              -122.7543,
+              45.6376
+            ],
+            [
+              -122.7556,
+              45.6376
+            ],
+            [
+              -122.7556,
+              45.6366
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Logistics Services Vehicle Distribution Center - Portland OR",
+        "type": "Vehicle Distribution Center (port processing)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.7555,
+              45.637
+            ],
+            [
+              -122.7505,
+              45.637
+            ],
+            [
+              -122.7505,
+              45.6405
+            ],
+            [
+              -122.7555,
+              45.6405
+            ],
+            [
+              -122.7555,
+              45.637
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Logistics Services Vehicle Distribution Center - Portland OR",
+        "type": "Vehicle Distribution Center (port processing)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.7545,
+              45.6355
+            ],
+            [
+              -122.7495,
+              45.6355
+            ],
+            [
+              -122.7495,
+              45.6372
+            ],
+            [
+              -122.7545,
+              45.6372
+            ],
+            [
+              -122.7545,
+              45.6355
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Logistics Services Vehicle Distribution Center - Portland OR",
+        "type": "Vehicle Distribution Center (port processing)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.755,
+              45.636
+            ],
+            [
+              -122.753,
+              45.636
+            ],
+            [
+              -122.753,
+              45.6372
+            ],
+            [
+              -122.755,
+              45.6372
+            ],
+            [
+              -122.755,
+              45.636
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Logistics Services Vehicle Distribution Center - Portland OR",
+        "type": "Vehicle Distribution Center (port processing)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.7556,
+              45.6362
+            ],
+            [
+              -122.7543,
+              45.6362
+            ],
+            [
+              -122.7543,
+              45.6372
+            ],
+            [
+              -122.7556,
+              45.6372
+            ],
+            [
+              -122.7556,
+              45.6362
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Logistics Services Vehicle Distribution Center - Portland OR",
+        "type": "Vehicle Distribution Center (port processing)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1395,
+              40.6905
+            ],
+            [
+              -74.132,
+              40.6905
+            ],
+            [
+              -74.132,
+              40.6985
+            ],
+            [
+              -74.1395,
+              40.6985
+            ],
+            [
+              -74.1395,
+              40.6905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Logistics Services Vehicle Distribution Center - Newark NJ",
+        "type": "Vehicle Distribution Center (port processing)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 12,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 2,
+          "buildingCount": 5,
+          "siteAreaAcres": 58,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1352,
+              40.6923
+            ],
+            [
+              -74.134,
+              40.6923
+            ],
+            [
+              -74.134,
+              40.6933
+            ],
+            [
+              -74.1352,
+              40.6933
+            ],
+            [
+              -74.1352,
+              40.6923
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Logistics Services Vehicle Distribution Center - Newark NJ",
+        "type": "Vehicle Distribution Center (port processing)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.137,
+              40.692
+            ],
+            [
+              -74.132,
+              40.692
+            ],
+            [
+              -74.132,
+              40.6985
+            ],
+            [
+              -74.137,
+              40.6985
+            ],
+            [
+              -74.137,
+              40.692
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Logistics Services Vehicle Distribution Center - Newark NJ",
+        "type": "Vehicle Distribution Center (port processing)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.139,
+              40.6905
+            ],
+            [
+              -74.1355,
+              40.6905
+            ],
+            [
+              -74.1355,
+              40.6935
+            ],
+            [
+              -74.139,
+              40.6935
+            ],
+            [
+              -74.139,
+              40.6905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Logistics Services Vehicle Distribution Center - Newark NJ",
+        "type": "Vehicle Distribution Center (port processing)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.137,
+              40.6938
+            ],
+            [
+              -74.1352,
+              40.6938
+            ],
+            [
+              -74.1352,
+              40.6952
+            ],
+            [
+              -74.137,
+              40.6952
+            ],
+            [
+              -74.137,
+              40.6938
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Logistics Services Vehicle Distribution Center - Newark NJ",
+        "type": "Vehicle Distribution Center (port processing)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1355,
+              40.6923
+            ],
+            [
+              -74.134,
+              40.6923
+            ],
+            [
+              -74.134,
+              40.6938
+            ],
+            [
+              -74.1355,
+              40.6938
+            ],
+            [
+              -74.1355,
+              40.6923
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Logistics Services Vehicle Distribution Center - Newark NJ",
+        "type": "Vehicle Distribution Center (port processing)",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5852,
+              34.0305
+            ],
+            [
+              -117.5768,
+              34.0305
+            ],
+            [
+              -117.5768,
+              34.0347
+            ],
+            [
+              -117.5852,
+              34.0347
+            ],
+            [
+              -117.5852,
+              34.0305
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Parts Distribution Center - Ontario CA",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 42,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.58,
+              34.0309
+            ],
+            [
+              -117.579,
+              34.0309
+            ],
+            [
+              -117.579,
+              34.0316
+            ],
+            [
+              -117.58,
+              34.0316
+            ],
+            [
+              -117.58,
+              34.0309
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Parts Distribution Center - Ontario CA",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5842,
+              34.0306
+            ],
+            [
+              -117.578,
+              34.0306
+            ],
+            [
+              -117.578,
+              34.032
+            ],
+            [
+              -117.5842,
+              34.032
+            ],
+            [
+              -117.5842,
+              34.0306
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Parts Distribution Center - Ontario CA",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5845,
+              34.0318
+            ],
+            [
+              -117.5778,
+              34.0318
+            ],
+            [
+              -117.5778,
+              34.0325
+            ],
+            [
+              -117.5845,
+              34.0325
+            ],
+            [
+              -117.5845,
+              34.0318
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Parts Distribution Center - Ontario CA",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.58,
+              34.0309
+            ],
+            [
+              -117.5785,
+              34.0309
+            ],
+            [
+              -117.5785,
+              34.0318
+            ],
+            [
+              -117.58,
+              34.0318
+            ],
+            [
+              -117.58,
+              34.0309
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Parts Distribution Center - Ontario CA",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.2368,
+              42.0153
+            ],
+            [
+              -71.233,
+              42.0153
+            ],
+            [
+              -71.233,
+              42.0183
+            ],
+            [
+              -71.2368,
+              42.0183
+            ],
+            [
+              -71.2368,
+              42.0153
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Parts Distribution Center - Mansfield MA",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 22,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 16,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.2342,
+              42.0168
+            ],
+            [
+              -71.2334,
+              42.0168
+            ],
+            [
+              -71.2334,
+              42.0174
+            ],
+            [
+              -71.2342,
+              42.0174
+            ],
+            [
+              -71.2342,
+              42.0168
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Parts Distribution Center - Mansfield MA",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.2366,
+              42.0171
+            ],
+            [
+              -71.2352,
+              42.0171
+            ],
+            [
+              -71.2352,
+              42.018
+            ],
+            [
+              -71.2366,
+              42.018
+            ],
+            [
+              -71.2366,
+              42.0171
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Parts Distribution Center - Mansfield MA",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.2362,
+              42.0172
+            ],
+            [
+              -71.2342,
+              42.0172
+            ],
+            [
+              -71.2342,
+              42.0179
+            ],
+            [
+              -71.2362,
+              42.0179
+            ],
+            [
+              -71.2362,
+              42.0172
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "toyota",
+        "name": "Toyota Parts Distribution Center - Mansfield MA",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    }
+  ]
+}

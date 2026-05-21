@@ -1,0 +1,69 @@
+{
+  "name": "DHL Supply Chain - DHL Commerce Park DC - St. George SC",
+  "type": "Distribution Center (Charleston port-adjacent campus)",
+  "coords": { "lat": 33.177800, "lng": -80.535000 },
+  "geofences": {
+    "perimeter": { "south": 33.174500, "west": -80.537800, "north": 33.179800, "east": -80.533200 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 33.175900, "west": -80.536400, "north": 33.177100, "east": -80.534400 }
+    ],
+    "dockAprons": [
+      { "south": 33.175800, "west": -80.536500, "north": 33.177300, "east": -80.534200 },
+      { "south": 33.178400, "west": -80.535400, "north": 33.179300, "east": -80.533800 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 3,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 75.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.177800,-80.535000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "0-10",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "remoteGs", "dockDoorCount", "trailersVisible", "connectivityIssue"],
+  "fieldNotes": {
+    "siteIdentity": "DHL Commerce Park is a planned 125-acre, three-building, 1.7M sq ft campus near St. George SC serving the Port of Charleston. As of current (2026) imagery only ONE building is built - DHL Commerce Park Building A, 4826 Hwy 78 (~978,805 sq ft, ~74.91-acre parcel per LoopNet/CommercialCafe). The roster's GEOMETRIC_CENTER coord (33.183087,-80.52853) landed ~700 m NE on an unrelated industrial/aggregate yard; corrected to Building A at 33.177800,-80.535000.",
+    "buildingStatus": "Building A appears built but largely vacant - the SW dock face shows a long row of EMPTY marked trailer-parking stalls and almost no trailers across the site. LoopNet lists 4826 Hwy 78 as available for lease, consistent with an empty/marketed building. multipleFacilities set false (only one building exists on the developed parcel).",
+    "truckGate": "No barrier arm, sliding gate, or guard-booth checkpoint identified. A single access road runs from Hwy 78 NE into the truck yard; no controlled pinch-point visible. Flagged uncertain - the site is empty so any gate may be open/undeployed, and imagery resolution limits a definitive call.",
+    "guardShack": "No guard booth visible at the entrance or anywhere on the property.",
+    "dockDoors": "Cross-dock building (~979k sq ft) with continuous dock banks on both the SW and NE long faces. Estimated ~110 doors, banded 50+.",
+    "dropArea": "Marked trailer-parking stalls exist along the SW dock apron but are essentially empty (building vacant) - 0-10 for trailers actually parked without tractors.",
+    "shipRcvSeparate": "Docks on two distinct building faces (SW and NE) - cross-dock layout.",
+    "dropYard": "A dedicated marked trailer-storage area runs along the SW dock apron; currently empty.",
+    "fastLaneOpportunity": "Very wide entry road and large empty paved yard - ample room for a bypass/express lane.",
+    "drivewayLong": "Long access road from Hwy 78 plus large open yard - deep queuing room.",
+    "urbanRural": "St. George / Dorchester County SC is a small rural town; the campus sits in cleared land surrounded by pine forest off a two-lane state highway. Rural.",
+    "connectivityIssue": "Rural setting in pine forest, somewhat isolated from town - cellular coverage could be weaker. Medium-confidence inference, flagged.",
+    "siteAreaAcres": "~75 acres for the Building A developed parcel (per LoopNet listing 74.91 acres); the full DHL Commerce Park is 125 acres including unbuilt Building B/C pads."
+  },
+  "method": "deep-audit"
+}

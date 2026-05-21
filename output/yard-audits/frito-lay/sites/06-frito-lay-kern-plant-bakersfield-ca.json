@@ -1,0 +1,67 @@
+{
+  "name": "Frito-Lay - Kern Plant Bakersfield CA",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 35.39575, "lng": -119.32045 },
+  "geofences": {
+    "perimeter": { "south": 35.39185, "west": -119.32420, "north": 35.39870, "east": -119.31760 },
+    "truckGate": { "south": 35.39730, "west": -119.31900, "north": 35.39845, "east": -119.31790 },
+    "dropYards": [
+      { "south": 35.39320, "west": -119.32130, "north": 35.39660, "east": -119.31830 },
+      { "south": 35.39200, "west": -119.32100, "north": 35.39400, "east": -119.31820 }
+    ],
+    "dockAprons": [
+      { "south": 35.39560, "west": -119.32150, "north": 35.39680, "east": -119.31900 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 110.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.39575,-119.32045,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "dockDoors", "scale", "multiStep", "postGateStaging"],
+  "fieldNotes": {
+    "location": "Roster coords (35.367588,-119.07772) were ~25 km off, landing on an oil tank farm. Resolved the real Kern Plant via web search (CLUI, PotatoPro, TruckMap) to 28801 Hwy 58, Bakersfield CA 93314 — an isolated industrial complex NW of Bakersfield surrounded by pivot-irrigated farmland. Locked center at 35.39575,-119.32045.",
+    "truckGate": "Single truck entrance: a wide paved driveway off the north public road (Hwy 58 / Rosedale Hwy frontage) that crosses a BNSF rail spur and curves into the property. Street View (captured 2026-04) shows a continuous chain-link perimeter fence with a single driveway gap, orange lane delineators in the drive, and a small structure beside the lane. A LEED-Gold flagship food-manufacturing plant of this scale on an isolated site is gated as a matter of course.",
+    "guardShack": "A small structure sits beside the entrance driveway near the rail crossing with vehicles parked around it, consistent with a guard booth. Imagery resolution at the entrance is limited (heavy tree shadow on satellite, booth at edge of Street View range) so this is medium-confidence.",
+    "fastLaneOpportunity": "The entrance driveway is wide with a large open paved apron inside the rail crossing — ample unused width to add an express/bypass lane.",
+    "dockDoors": "Dock doors run along the south/southeast face of the main building where trailers are backed in; exact count not crisply resolvable from overhead — estimated 25-50 band.",
+    "dropArea": "Large drop yard south of the main building holds many rows of parked trailers (90+ counted in z19 imagery), clearly a 50+ band trailer-storage yard.",
+    "railServed": "BNSF rail spur runs along the north edge of the property; Street View shows covered-hopper rail cars parked on the spur (bulk grain/corn inbound).",
+    "drivewayLong": "Driveway crosses the rail then opens onto a deep paved apron that can stack 3+ trucks before reaching the docks.",
+    "siteAreaAcres": "Perimeter box covers the active fenced developed footprint (~110 acres). The full Kern Plant land holding is ~640 acres (one square mile) of mostly undeveloped farmland; the audited yard is the developed core.",
+    "scale": "No truck scale clearly visible in imagery; left false (low confidence).",
+    "postGateStaging": "Open paved apron inside the gate before the docks provides holding room; inferred from layout."
+  },
+  "method": "deep-audit"
+}

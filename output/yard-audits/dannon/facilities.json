@@ -1,0 +1,124 @@
+{
+  "account": "Dannon",
+  "slug": "dannon",
+  "generatedAt": "2026-05-17",
+  "sourceDossier": "docs/research/heiko-gerling-dannon-dossier.md",
+  "parentBrand": "Danone",
+  "hqLocation": "White Plains, NY",
+  "facilityCount": {
+    "repo": "15+",
+    "verified": "13",
+    "verifiedScope": "Danone North America production locations listed on the official company overview page."
+  },
+  "facilityTypes": [
+    "Dairy Production Plants",
+    "Plant-Based Production",
+    "Water Bottling",
+    "Distribution Centers"
+  ],
+  "siteCap": 30,
+  "candidateFacilities": [
+    {
+      "name": "Danone - White Plains",
+      "city": "White Plains",
+      "state": "NY",
+      "confidence": "medium",
+      "likelyHq": true,
+      "context": "our years back at Danone - Currently based in **New York** (White Plains, NY corporate footprint), originally from Germany - Reports into Dan Magliocc",
+      "mapsSearchUrl": "https://www.google.com/maps/search/?api=1&query=Danone%20White%20Plains%20NY",
+      "satelliteUrl": null
+    },
+    {
+      "name": "Danone - Broomfield",
+      "city": "Broomfield",
+      "state": "CO",
+      "confidence": "medium",
+      "likelyHq": false,
+      "context": "(NA):** White Plains, NY (with major corporate presence in Broomfield, CO from the legacy WhiteWave/DanoneWave footprint) - **Status:** Certified B C",
+      "mapsSearchUrl": "https://www.google.com/maps/search/?api=1&query=Danone%20Broomfield%20CO",
+      "satelliteUrl": null
+    },
+    {
+      "name": "Danone - Mount Crawford",
+      "city": "Mount Crawford",
+      "state": "VA",
+      "confidence": "high",
+      "likelyHq": false,
+      "context": "ations umbrella **Key plants (publicly identified):** - **Mount Crawford, VA** — Largest Danone facility in the world. 600,000 sq ft. 600+ workers.",
+      "mapsSearchUrl": "https://www.google.com/maps/search/?api=1&query=Danone%20Mount%20Crawford%20VA",
+      "satelliteUrl": null
+    },
+    {
+      "name": "Danone - Minster",
+      "city": "Minster",
+      "state": "OH",
+      "confidence": "high",
+      "likelyHq": false,
+      "context": "ight, STōK, So Delicious. Recent $60M expansion (2017). - **Minster, OH** — Fresh yogurt plant. ~2.2M lbs/day. Activia, Oikos, Dannon Fruit on the Bot",
+      "mapsSearchUrl": "https://www.google.com/maps/search/?api=1&query=Danone%20Minster%20OH",
+      "satelliteUrl": null
+    },
+    {
+      "name": "Danone - Jacksonville",
+      "city": "Jacksonville",
+      "state": "FL",
+      "confidence": "high",
+      "likelyHq": false,
+      "context": "jobs, 60% more milk volume needed over next two years. - **Jacksonville, FL** — 115,025 sq ft. Coffee/creamer (International Delight, STōK). **June 2",
+      "mapsSearchUrl": "https://www.google.com/maps/search/?api=1&query=Danone%20Jacksonville%20FL",
+      "satelliteUrl": null
+    },
+    {
+      "name": "Danone - City of Industry",
+      "city": "City of Industry",
+      "state": "CA",
+      "confidence": "high",
+      "likelyHq": false,
+      "context": "ng built** in the Jacksonville area to serve Southeast. - **City of Industry, CA** — Silk beverages, STōK, International Delight. Founded 1986. - **Br",
+      "mapsSearchUrl": "https://www.google.com/maps/search/?api=1&query=Danone%20City%20of%20Industry%20CA",
+      "satelliteUrl": null
+    },
+    {
+      "name": "Danone - Bridgeton",
+      "city": "Bridgeton",
+      "state": "NJ",
+      "confidence": "high",
+      "likelyHq": false,
+      "context": "k beverages, STōK, International Delight. Founded 1986. - **Bridgeton, NJ** — Silk dairy-free, So Delicious oat-milk, creamers. 185,000 sq ft. Founded",
+      "mapsSearchUrl": "https://www.google.com/maps/search/?api=1&query=Danone%20Bridgeton%20NJ",
+      "satelliteUrl": null
+    },
+    {
+      "name": "Danone - DuBois",
+      "city": "DuBois",
+      "state": "PA",
+      "confidence": "high",
+      "likelyHq": false,
+      "context": "icious oat-milk, creamers. 185,000 sq ft. Founded 2001. - **DuBois, PA** — Only Danone NA plant-based yogurt producer. Silk dairy-free yogurt, So Deli",
+      "mapsSearchUrl": "https://www.google.com/maps/search/?api=1&query=Danone%20DuBois%20PA",
+      "satelliteUrl": null
+    },
+    {
+      "name": "Danone - Springfield",
+      "city": "Springfield",
+      "state": "OR",
+      "confidence": "high",
+      "likelyHq": false,
+      "context": "o Delicious, Harmless Harvest dairy-free. Founded 2014. - **Springfield, OR** — Only North American plant-based frozen-dessert plant. So Delicious ice",
+      "mapsSearchUrl": "https://www.google.com/maps/search/?api=1&query=Danone%20Springfield%20OR",
+      "satelliteUrl": null
+    },
+    {
+      "name": "Danone - Fort Worth",
+      "city": "Fort Worth",
+      "state": "TX",
+      "confidence": "high",
+      "likelyHq": false,
+      "context": "ant-based frozen-dessert plant. So Delicious ice cream. - **Fort Worth, TX** — Danimals, Activia, YoCrunch. ### Supply Chain Scope Under Heiko Per t",
+      "mapsSearchUrl": "https://www.google.com/maps/search/?api=1&query=Danone%20Fort%20Worth%20TX",
+      "satelliteUrl": null
+    }
+  ],
+  "needsWebSearch": true,
+  "notes": "10 candidate site(s) regex-extracted from dossier prose — verify each. Web-search Phase 1 fills toward the 30-site cap. Candidates with likelyHq:true are probably headquarters, not yards."
+}

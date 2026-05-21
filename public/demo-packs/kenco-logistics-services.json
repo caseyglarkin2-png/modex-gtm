@@ -1,0 +1,2841 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:43:53.395Z",
+  "account": {
+    "slug": "kenco-logistics-services",
+    "displayName": "Kenco Logistics Services",
+    "archetype": "3pl",
+    "siteCount": 28,
+    "coverageNote": {
+      "auditedCount": 28,
+      "estimatedFootprint": null,
+      "droppedStubCount": 2,
+      "capHit": false,
+      "note": "Audited all 28 identifiable facilities (2 additional were unresolvable from public sources)."
+    }
+  },
+  "research": {
+    "facility_count": 30,
+    "audited_facilities": 30,
+    "source": "yard-audit",
+    "confidence": "verified",
+    "caveats": [
+      "Kenco MCS Perris II - Perris CA: audit note mentions 'closed'",
+      "Kenco MCS Chino - Chino CA: audit note mentions 'closed'",
+      "Kenco MCS Chattanooga CH29 - Chattanooga TN: audit note mentions 'sold'",
+      "Kenco MCS Chattanooga BP2 - Chattanooga TN: audit note mentions 'sold'",
+      "Kenco American Standard DC - Hutchins TX: audit note mentions 'closed'"
+    ]
+  },
+  "network": {
+    "bbox": [
+      -117.6629,
+      28.43505,
+      -71.5925,
+      42.5479
+    ],
+    "archetypeMix": {
+      "#9": 7,
+      "#3": 20,
+      "#10": 1
+    },
+    "totals": {
+      "dockDoors": 1996,
+      "trailerCapacity": 2614,
+      "gates": 25,
+      "railServed": 5,
+      "acres": 1063.3
+    },
+    "sites": [
+      {
+        "id": "01-kenco-mcs-jeffersonville-i",
+        "name": "Kenco MCS Jeffersonville I - Jeffersonville IN",
+        "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "trailersVisible",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 38.38585,
+          "lng": -85.6776
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.3838,
+            "west": -85.6802,
+            "north": 38.3885,
+            "east": -85.6753
+          },
+          "truckGate": {
+            "south": 38.38735,
+            "west": -85.67885,
+            "north": 38.38775,
+            "east": -85.67835
+          },
+          "dropYards": [
+            {
+              "south": 38.3842,
+              "west": -85.67935,
+              "north": 38.3877,
+              "east": -85.67835
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 38.3842,
+              "west": -85.6791,
+              "north": 38.3877,
+              "east": -85.67845
+            },
+            {
+              "south": 38.3847,
+              "west": -85.6772,
+              "north": 38.3869,
+              "east": -85.6764
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 113,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 55.3,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster pin (38.387587, -85.676299) lands on the NE corner of a large\nrectangular warehouse inside River Ridge Commerce Center. Wide z16/z17\nsatellite shows a multi-building greenfield industrial park; the building\nunder the pin is the largest in the immediate cluster. Web research confirms\nKenco operates 201 River Ridge Parkway as its largest AutoStore installation\n(49,000 bins, 130 grid robots) — a ~664,800 SF e-commerce fulfillment DC.\nStreet View from River Ridge Parkway (2026-03) shows the Kenco logo on the\nNE-end office block, positively confirming the building. Locked center at the\nwarehouse centroid, ~38.38585 / -85.67760.",
+        "mapsUrl": "https://www.google.com/maps/@38.38585,-85.67760,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Sliding chain-link gate across the NW dock-yard truck driveway, confirmed in Street View (2026-03). Gate opening set in continuous perimeter fence.",
+          "guardShack": "No booth of any kind beside the gate; entrance is a fence opening only.",
+          "remoteGs": "Gated entry with no guard shack implies kiosk/app/remote check-in.",
+          "shipRcvSeparate": "Two distinct dock banks: a long bank on the NW (back) face plus a separate dock bank mid-way along the SE face.",
+          "fastLaneOpportunity": "Very wide paved gate apron on the NW driveway with room for an express bypass lane.",
+          "dockDoors": "Roster source cites 113 dock doors for this 664,800 SF AutoStore site; NW face long bank plus SE-face bank are consistent with 50+.",
+          "dropArea": "Deep paved drop yard along the NW dock apron holds many parked trailers; estimate 25-50 stalls.",
+          "urbanRural": "River Ridge Commerce Center is an edge-of-town greenfield industrial park surrounded by farmland; judged Rural.",
+          "trailersVisible": "~35 trailers counted in NW dock apron z19/z20 imagery; approximate.",
+          "trailerParkingCapacity": "Estimated 90 from drop-yard depth; low confidence."
+        }
+      },
+      {
+        "id": "02-kenco-mcs-mississippi",
+        "name": "Kenco MCS Mississippi - Olive Branch MS",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 34.9889,
+          "lng": -89.7829
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.9862,
+            "west": -89.785,
+            "north": 34.9915,
+            "east": -89.7805
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 34.9866,
+              "west": -89.7848,
+              "north": 34.9912,
+              "east": -89.7838
+            },
+            {
+              "south": 34.9866,
+              "west": -89.7822,
+              "north": 34.9912,
+              "east": -89.7808
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.9866,
+              "west": -89.7842,
+              "north": 34.9912,
+              "east": -89.7838
+            },
+            {
+              "south": 34.9866,
+              "west": -89.7822,
+              "north": 34.9912,
+              "east": -89.7818
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 59.8,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster pin (34.988452, -89.782908) lands squarely on a very large N-S\noriented warehouse inside an Olive Branch logistics park adjacent to an\nairport runway. Web research (LoopNet, Colliers, CommercialCafe) confirms\n11244 S Distribution Cove = \"Olive Branch Distribution Center II,\" a large\ndistribution building; the Kenco warehousing map lists this Mississippi MCS\nsite at ~800,000 SF. The pinned building's scale, cross-dock layout and\ntrailer yards are consistent. Locked center at the warehouse centroid,\n~34.98890 / -89.78290.",
+        "mapsUrl": "https://www.google.com/maps/@34.98890,-89.78290,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No controlled truck entrance. Truck courts on both long faces are open and connect freely to S Distribution Cove; no barrier arm, sliding gate, or checkpoint visible in z18-z20 satellite or Street View. Property is an open multi-tenant logistics-park building.",
+          "guardShack": "No booth anywhere on the property; S end has only an office and a paved truck turnaround/roundabout.",
+          "shipRcvSeparate": "Cross-dock building: a long dock bank on the W face and a separate long dock bank on the E face — physically distinct clusters.",
+          "dropArea": "Extensive striped trailer-parking drop yards on both the W and E sides, dozens of stalls each — banded 50+.",
+          "dockDoors": "Long continuous dock banks on both long faces of an ~800,000 SF cross-dock; banded 50+. Door count is an overhead estimate.",
+          "urbanRural": "Edge-of-town greenfield logistics park beside an airport runway, surrounded by farmland; judged Rural.",
+          "trailersVisible": "~90 trailers counted across both drop yards / dock aprons; approximate.",
+          "trailerParkingCapacity": "Estimated 200 from the two large striped drop yards; low confidence."
+        }
+      },
+      {
+        "id": "03-kenco-mcs-allentown",
+        "name": "Kenco MCS Allentown - Northampton PA",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "dockDoors",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 40.5982,
+          "lng": -75.6165
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.5969,
+            "west": -75.6182,
+            "north": 40.5992,
+            "east": -75.6151
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 40.5984,
+              "west": -75.6175,
+              "north": 40.5991,
+              "east": -75.6158
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 16.6,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster pin (40.598247, -75.616265) lands on a dark-roofed warehouse in a\nsuburban industrial park (Iron Run / Trexlertown area, Lehigh County). Web\nresearch (BBB, Chamber of Commerce, LogiCore) confirms Kenco Logistics\noperates at 6975 Ambassador Drive/Rd, Allentown PA 18106. **Decisive\nconfirmation:** 2025-05 Street View shows the address number \"6975\" on the\nbuilding's SE wall facing Ambassador Drive. Locked center at the building\ncentroid, ~40.59820 / -75.61650.\n\nSize discrepancy noted: the roster source cites 601,836 SF and 92 dock\ndoors for the Kenco Allentown MCS site. The physical building at the\nROOFTOP-geocoded address is a mid-size warehouse of roughly 150,000-250,000 SF\nwith a single, modest dock bank — far smaller than 92 doors. The roster figure\nmost likely aggregates Kenco's total Allentown space (multiple suites or",
+        "mapsUrl": "https://www.google.com/maps/@40.59820,-75.61650,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "siteDiscrepancy": "Roster source cites 601,836 SF / 92 dock doors for the Kenco Allentown MCS site, but the building at the ROOFTOP-geocoded 6975 Ambassador Drive is a mid-size warehouse of roughly 150,000-250,000 SF with a modest single-face dock bank. The roster figure likely aggregates Kenco's total Allentown footprint or is mislabeled. Audited the physical building at the confirmed address; the '6975' address number is visible on the building wall in 2025-05 Street View.",
+          "truckGate": "No controlled entrance. The site driveway connects to Ambassador Drive as an open driveway with no barrier arm, gate, or checkpoint (2025-05 Street View + z19/z20 satellite).",
+          "guardShack": "No booth anywhere on the property.",
+          "remoteGs": "No gate, so no remote check-in implied.",
+          "dockDoors": "Single dock bank on the NW (back) face; estimated 10-25 doors from z19/z20 imagery — well short of the 92 the roster source cites.",
+          "dropArea": "Small open truck court along the NW dock apron; only a few trailers, no striped drop-yard stalls — banded 0-10.",
+          "urbanRural": "Suburban industrial park (Iron Run / Trexlertown) at the edge of a residential area with farmland alongside; judged Rural per the small-town-industrial tiebreak.",
+          "shipRcvSeparate": "Only one dock face observed; ship/receive separation not confirmed.",
+          "trailersVisible": "~6 trailers/equipment counted at the NW dock apron; approximate.",
+          "trailerParkingCapacity": "Estimated 12; small open court, low confidence."
+        }
+      },
+      {
+        "id": "04-kenco-mcs-dallas-i",
+        "name": "Kenco MCS Dallas I - DeSoto TX",
+        "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 32.632,
+          "lng": -96.8296
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.63,
+            "west": -96.8316,
+            "north": 32.6336,
+            "east": -96.8278
+          },
+          "truckGate": {
+            "south": 32.63035,
+            "west": -96.83025,
+            "north": 32.63075,
+            "east": -96.8296
+          },
+          "dropYards": [
+            {
+              "south": 32.6304,
+              "west": -96.8316,
+              "north": 32.6328,
+              "east": -96.8305
+            },
+            {
+              "south": 32.6304,
+              "west": -96.8305,
+              "north": 32.6312,
+              "east": -96.8281
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.6311,
+              "west": -96.8307,
+              "north": 32.6314,
+              "east": -96.8281
+            },
+            {
+              "south": 32.6329,
+              "west": -96.8307,
+              "north": 32.6332,
+              "east": -96.8281
+            }
+          ],
+          "staging": {
+            "south": 32.62985,
+            "west": -96.8307,
+            "north": 32.6303,
+            "east": -96.8281
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 80,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 35.3,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster pin (32.631712, -96.82947) lands on the northernmost of three\nlarge warehouses along the I-35E service road in DeSoto, TX. Web research\n(LogiCore, DeSoto Chamber of Commerce, Kenco/BusinessWire releases) confirms\nKenco operates the Walker Edison e-commerce DC at 2119 N Interstate 35 East\nService Rd, DeSoto; Gordon Highlander built it (~490,000 SF). The pinned\nbuilding's scale and dual-face dock layout are consistent. Locked center at\nthe building centroid, ~32.63200 / -96.82960.",
+        "mapsUrl": "https://www.google.com/maps/@32.63200,-96.82960,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Fully fenced perimeter with a controlled truck gate on the S/SW driveway off the I-35E service road. Confirmed in 2025-02 Street View and z20 satellite — chain-link perimeter fence, gated truck driveway with gate arms.",
+          "guardShack": "A small 1-vehicle-footprint guard booth sits beside the gate driveway, visible in both z20 satellite and 2025-02 Street View.",
+          "preGateStaging": "Paved apron between the I-35E service road and the gate gives trucks room to wait outside the gate.",
+          "postGateStaging": "Large paved truck court inside the gate before the dock doors.",
+          "fastLaneOpportunity": "Wide gate apron with twin landscaped islands and room for an express bypass lane.",
+          "shipRcvSeparate": "Cross-dock building: dock banks on both the N face and the S face — physically separate clusters.",
+          "dockDoors": "Long dock banks on both long faces of a ~458,000-490,000 SF e-commerce DC; banded 50+. Door count ~80 is an overhead estimate.",
+          "dropArea": "Extensive striped trailer-parking drop yards on the W end and along the S side, well over 50 stalls.",
+          "urbanRural": "Within the Dallas metro fabric along I-35E, immediately adjacent to dense residential; judged Urban.",
+          "trailersVisible": "~25 trailers counted in dock aprons / drop yards; drop yards largely empty in this imagery, approximate.",
+          "trailerParkingCapacity": "~160 estimated from the large striped W and S drop yards; low confidence."
+        }
+      },
+      {
+        "id": "05-kenco-mcs-perris-i",
+        "name": "Kenco MCS Perris I - Perris CA",
+        "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 33.842,
+          "lng": -117.2289
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.8404,
+            "west": -117.231,
+            "north": 33.8434,
+            "east": -117.227
+          },
+          "truckGate": {
+            "south": 33.8426,
+            "west": -117.2311,
+            "north": 33.84305,
+            "east": -117.2305
+          },
+          "dropYards": [
+            {
+              "south": 33.8425,
+              "west": -117.2303,
+              "north": 33.8434,
+              "east": -117.2271
+            },
+            {
+              "south": 33.8404,
+              "west": -117.2308,
+              "north": 33.8411,
+              "east": -117.2271
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.8424,
+              "west": -117.2305,
+              "north": 33.8428,
+              "east": -117.2273
+            },
+            {
+              "south": 33.841,
+              "west": -117.2305,
+              "north": 33.8413,
+              "east": -117.2273
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 170,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 30.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster pin (33.841558, -117.228703) lands on a very large white-roofed\nwarehouse in the Perris (Inland Empire) logistics corridor. Web research\n(LogiCore, Connect CRE, Commercial Observer, Commercial Property Executive)\nconfirms Kenco Logistics leased 579,708 SF at \"Perris Logistics Center,\"\n3900 Indian Avenue, built 2014 on ~28 acres at the SW corner of N Perris Blvd\nand Ramona Expressway. The pinned building's scale, build era, and dual-face\ncross-dock layout are consistent. A second large building immediately to the\nsouth is Kenco's Perris II (roster idx 6). Locked center at the Perris I\nbuilding centroid, ~33.84200 / -117.22890.",
+        "mapsUrl": "https://www.google.com/maps/@33.84200,-117.22890,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "The N and S truck courts are bounded by chain-link fencing (fence line visible in z20 satellite and 2018 Street View along the entrance driveway). Truck access is a single private driveway off Indian Avenue into the fenced court. No barrier-arm hardware could be positively resolved at the road in available imagery, but the fenced court with a single controlled driveway reads as a truck gate. Medium confidence on the exact gate hardware.",
+          "guardShack": "No guard booth visible at the driveway entrance or anywhere on the property in z20/z21 satellite or Street View.",
+          "remoteGs": "Gated/fenced truck court with no guard shack implies kiosk / app / remote check-in.",
+          "shipRcvSeparate": "Cross-dock building: dock banks on BOTH the N face and the S face — physically separate clusters.",
+          "dockDoors": "Long dock banks on both long faces of a 579,708 SF DC; banded 50+. ~90 doors is an overhead estimate.",
+          "dropArea": "Large striped trailer drop yards on the N side and the shared S yard, packed with trailers — well over 50 stalls.",
+          "fastLaneOpportunity": "Wide truck-court entrance with room to add an express bypass lane.",
+          "postGateStaging": "Large paved truck courts inside the fenced area before the dock doors.",
+          "urbanRural": "Dense Inland Empire logistics corridor in Perris, surrounded by warehouses and residential tracts; judged Urban.",
+          "trailersVisible": "~75 trailers counted across the N and S drop yards / dock aprons; approximate.",
+          "trailerParkingCapacity": "~170 estimated from the striped N and S drop yards; low confidence."
+        }
+      },
+      {
+        "id": "06-kenco-mcs-perris-ii",
+        "name": "Kenco MCS Perris II - Perris CA",
+        "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "truckGate"
+        ],
+        "center": {
+          "lat": 33.83915,
+          "lng": -117.23035
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.83795,
+            "west": -117.2328,
+            "north": 33.84035,
+            "east": -117.2279
+          },
+          "truckGate": {
+            "south": 33.8415,
+            "west": -117.2317,
+            "north": 33.8421,
+            "east": -117.2308
+          },
+          "dropYards": [
+            {
+              "south": 33.84035,
+              "west": -117.2321,
+              "north": 33.8413,
+              "east": -117.2279
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.8398,
+              "west": -117.2328,
+              "north": 33.84035,
+              "east": -117.2279
+            },
+            {
+              "south": 33.83795,
+              "west": -117.2328,
+              "north": 33.8385,
+              "east": -117.2279
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 29.9,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster places Perris II near the Indian Avenue / Ramona Expressway area with\na GEOMETRIC_CENTER geocode that fell on a vacant intersection lot. Web research\n(Commercial Property Executive, Inland Empire Business Journal, LogiCore, Connect\nCRE) ties the Kenco Perris campus to the **Perris Logistics Center, 3900 Indian\nAvenue**, a 579,708 SF building on ~28 acres at the SE corner of Ramona Expressway\nand Indian Avenue, built 2014, C-TPAT certified.\n\nPublic sources describe one 579,708 SF building, but the campus on the ground\nholds two large cross-dock warehouses. The Perris I roster entry (idx 5)\ngeocodes to the north building. Perris II (idx 6) was therefore audited as the\nsouth building — the larger of the two cross-dock warehouses — centered at\n~33.8392, -117.2303. Note: idx 5 and idx 6 are two buildings of the same Kenco",
+        "mapsUrl": "https://www.google.com/maps/@33.83915,-117.23035,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Perris I (idx 5) and Perris II (idx 6) both resolve to the Kenco Perris Logistics Center campus, 3900 Indian Avenue, SE corner of Ramona Expressway / Indian Avenue. Public sources list one 579,708 SF building; the campus actually holds two large cross-dock warehouses. idx 5 point landed on the north building, so Perris II was audited as the SOUTH building (the larger of the two), centered ~33.8392, -117.2303.",
+          "truckGate": "Truck yard is fully enclosed by black metal perimeter fence (confirmed in 5+ Street View headings off Indian Avenue and the west perimeter road). Facility is C-TPAT certified per LogiCore listing, which mandates a controlled, secured yard. A gate exists; exact arm/slide-gate not crisply resolvable from imagery.",
+          "guardShack": "No staffed guard booth visible in any Street View of the perimeter or truck-drive entrances. Modern Class-A Inland Empire spec building; access is consistent with a sliding gate plus kiosk/intercom (remote check-in).",
+          "shipRcvSeparate": "Cross-dock building - distinct dock banks on the north face and the south face.",
+          "dockDoors": "Cross-dock: ~55 doors on the south face and ~55 on the north face; total estimated ~110 (50+ band).",
+          "dropYard": "Large shared trailer drop yard between the two campus buildings, packed with parked trailers; also trailer parking along south apron.",
+          "multipleFacilities": "Two large warehouse buildings (Perris I and Perris II) on the same fenced campus.",
+          "fastLaneOpportunity": "Wide truck-yard drives and a deep apron at the NW entrance provide room for an express/bypass lane.",
+          "siteAreaAcres": "~30 acres for the south building parcel; matches reported 28-30 acre Perris Logistics Center site."
+        }
+      },
+      {
+        "id": "07-kenco-mcs-chino",
+        "name": "Kenco MCS Chino - Chino CA",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 33.967,
+          "lng": -117.6615
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.96465,
+            "west": -117.6629,
+            "north": 33.96875,
+            "east": -117.66045
+          },
+          "truckGate": {
+            "south": 33.9681,
+            "west": -117.66095,
+            "north": 33.96865,
+            "east": -117.6603
+          },
+          "dropYards": [
+            {
+              "south": 33.965,
+              "west": -117.6629,
+              "north": 33.9672,
+              "east": -117.662
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.965,
+              "west": -117.6629,
+              "north": 33.9681,
+              "east": -117.6622
+            },
+            {
+              "south": 33.965,
+              "west": -117.661,
+              "north": 33.9681,
+              "east": -117.66045
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 105,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 25.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster gives 6509 Kimball Avenue, Chino CA 91708 with a ROOFTOP geocode\nmoved 217 m. Probing the roster point landed on a large white-roof warehouse in\nthe Chino logistics district south of Kimball Avenue. Step 0 confirmation: a\nz20 satellite probe of the building's roof shows the painted address number\n\"6509\" clearly legible (appears mirrored/rotated in overhead view). This is\nthe Kenco MCS Chino building. The Kimball Avenue intersection street sign and\nblock-number plates (6400 / 6500) corroborate the address.\n\nNote: a neighboring building to the east carries a solar-paneled roof and the\nbuilding west carries roof number \"15122\" — these are separate properties. The\nKenco facility is the central white-roof cross-dock building.",
+        "mapsUrl": "https://www.google.com/maps/@33.96700,-117.66150,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Positively identified as 6509 Kimball Avenue, Chino CA - the roof number '6509' is legible on the west building's roof in z20 satellite imagery. Cross-dock Class-A Inland Empire warehouse in the dense Chino logistics district south of Kimball Avenue.",
+          "truckGate": "Truck yards on both the west and east faces are enclosed by chain-link fencing (visible in Street View off Kimball Avenue and around the perimeter). Two truck entrances: the east truck corridor off Kimball Avenue (shared drive between this building and the solar-roofed building east) and a SW perimeter-road drive into the west drop yard.",
+          "guardShack": "No staffed guard-booth structure visible at any entrance in Street View. Modern multi-tenant IE spec building - access consistent with sliding/cantilever gate plus kiosk/intercom (remote check-in).",
+          "shipRcvSeparate": "Cross-dock building - distinct dock banks on the west face and the east face.",
+          "dockDoors": "Cross-dock: roughly 50-55 doors on the west face and 50-55 on the east face; estimated total ~105 (50+ band).",
+          "dropArea": "Trailers parked without tractors in the west drop yard alongside stacked materials; estimated 25-50 band.",
+          "fastLaneOpportunity": "Wide truck corridor and deep aprons on both faces leave room for an express/bypass lane.",
+          "truckGateCount": "Two truck access points - east corridor and SW drive.",
+          "siteAreaAcres": "~25.5 acres for the 6509 parcel including building, west drop yard and east corridor."
+        }
+      },
+      {
+        "id": "10-kenco-mcs-jeffersonville-ii",
+        "name": "Kenco MCS Jeffersonville II - Jeffersonville IN",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "dropArea",
+          "multipleFacilities",
+          "truckGateCount"
+        ],
+        "center": {
+          "lat": 38.39105,
+          "lng": -85.679
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.389,
+            "west": -85.68085,
+            "north": 38.3931,
+            "east": -85.6767
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 38.3898,
+              "west": -85.6788,
+              "north": 38.3925,
+              "east": -85.6769
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 22,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 39.4,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplies \"River Ridge Commerce Center, Jeffersonville IN 47130\" with a\nROOFTOP geocode at 38.356949, -85.66387. Step 0 probing showed that point\nlands on an unrelated corporate visitor building with a landscaped pond several\nkm south — not a 468,635 SF distribution center. The geocode is wrong.\n\nWeb research confirms Kenco operates two logistics buildings on the\nJeffersonville side of River Ridge Commerce Center. idx 1 (Jeffersonville I) is\ndocumented at 201 River Ridge Parkway, 664,800 SF, with AutoStore robotics —\nthe central NE-SW-oriented building that the idx 1 roster geocode\n(38.387587, -85.676299) lands on. idx 10 (Jeffersonville II, 468,635 SF, food\ngrade) was therefore audited as the adjacent large warehouse to the NW —\nKenco's second River Ridge building — centered at ~38.3911, -85.6790.",
+        "mapsUrl": "https://www.google.com/maps/@38.39105,-85.67900,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Kenco has two logistics buildings on the Jeffersonville side of River Ridge Commerce Center. idx 1 (Jeffersonville I) is documented at 201 River Ridge Parkway, 664,800 SF, AutoStore robotics - it is the central NE-SW building at the idx 1 roster geocode. idx 10 (Jeffersonville II, 468,635 SF, food grade) was audited as the adjacent large warehouse to the NW (the second Kenco building), centered ~38.3911, -85.6790. The roster's idx 10 geocode (38.356949, -85.66387) is wrong - it lands on an unrelated corporate visitor building several km south.",
+          "truckGate": "No controlled truck gate. The truck yard along the SE dock face is open to River Ridge Parkway with only a grassed setback - no perimeter fence, barrier arm, sliding gate or guard booth visible in any Street View. Typical open-layout River Ridge spec building.",
+          "guardShack": "No guard booth - open site.",
+          "dockDoors": "Docks on the SE face only (single-load building, not cross-dock). Long ~456 m dock wall; estimated ~90 dock doors (50+ band). Count is approximate from overhead imagery - flagged.",
+          "dropArea": "Some trailers parked on the wide SE dock apron without tractors; estimated 10-25.",
+          "shipRcvSeparate": "Single dock bank on the SE face only - no separate ship/receive clusters.",
+          "drivewayLong": "Deep SE-face truck apron easily holds a 3+ truck queue.",
+          "urbanRural": "River Ridge Commerce Center sits on the rural edge of Jeffersonville - the building's NW and NE sides back directly onto open farmland; classified Rural.",
+          "multipleFacilities": "Two Kenco buildings (Jeffersonville I and II) on the River Ridge campus.",
+          "railServed": "No rail spur runs into the property; River Ridge has rail elsewhere but not to this building.",
+          "siteAreaAcres": "~39 acres for the building parcel including the SE truck yard."
+        }
+      },
+      {
+        "id": "11-kenco-mcs-jeffersonville-iii",
+        "name": "Kenco MCS Jeffersonville III - Sellersburg IN",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoors",
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 38.3782,
+          "lng": -85.753
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.3738,
+            "west": -85.7572,
+            "north": 38.3806,
+            "east": -85.7478
+          },
+          "truckGate": {
+            "south": 38.3765,
+            "west": -85.748,
+            "north": 38.3773,
+            "east": -85.747
+          },
+          "dropYards": [
+            {
+              "south": 38.3756,
+              "west": -85.7525,
+              "north": 38.3784,
+              "east": -85.7495
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 38.376,
+              "west": -85.7545,
+              "north": 38.379,
+              "east": -85.7505
+            },
+            {
+              "south": 38.3742,
+              "west": -85.7565,
+              "north": 38.3776,
+              "east": -85.752
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 96,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Facility type: Multi-Client Distribution Center\nResolved location: Silver Creek Logistics Center, Building B — 7803 Highway 31 E, Sellersburg, IN 47172\nLocked center coordinate: 38.37820, -85.75300 (Building B center)\nGate verdict: NO truck gate (open access)\nGuard-shack verdict: NO guard shack\nConfidence: High\n\n---\n\n### Step 0 — Locating the facility\n\nThe roster coordinate (38.398626, -85.776916, geocode precision `APPROXIMATE`) landed on\nopen farmland roughly 2 km northwest of any industrial building — confirmed wrong by a\nzoom-17 satellite probe.\n\nWeb research resolved the facility. Kenco's \"MCS — Jeffersonville III\" carries 417,270 SF\nin the roster. Commercial real estate listings (LoopNet, PropertyShark, Cambridge builder\npage) identify **Silver Creek Logistics Center Building B at 7803 Highway 31 E,",
+        "mapsUrl": "https://www.google.com/maps/@38.37820,-85.75300,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (38.398626,-85.776916, APPROXIMATE) landed on farmland 2km NW. Resolved via web research to Silver Creek Logistics Center Building B, 7803 Highway 31 E, Sellersburg IN 47172 - the 417,270 SF Class A building (built 2019) exactly matches roster SF. Confirmed on satellite + Street View.",
+          "truckGate": "Open access driveway off Highway 31 E - no barrier arm, no gate, no guard booth. Confirmed via Street View (capture 2026-03): wide unobstructed paved entrance drive with only a monument sign. Modern logistics park, property is unfenced.",
+          "guardShack": "No guard booth anywhere at the entrance or on the access road.",
+          "remoteGs": "False - there is no truck gate at all, so remote guard-shack does not apply.",
+          "multipleFacilities": "Two large Class A buildings on one shared property: Building B (~417,270 SF, north/smaller, the roster facility) and Building A (~660,450 SF, south/larger). Shared access road and drop yard.",
+          "dockDoors": "Building B is ~350m long; dock bank faces SW toward the central drive aisle with many trailers backed in. 25-50 band is a conservative estimate from a single visible dock face; full-site count higher.",
+          "dropYard": "Large paved trailer drop area in the central aisle between the two buildings, full of parked trailers without tractors.",
+          "fastLaneOpportunity": "Wide entrance apron and generous paved drive width with room to add an express/bypass lane.",
+          "urbanRural": "Edge of Sellersburg IN, a small town; adjacent residential subdivision but broader setting is small-town/rural per rubric.",
+          "railServed": "A rail line runs parallel to Highway 31 E along the east property edge but no spur enters the property.",
+          "trailersVisible": "~55 trailers counted across the central drop yard and dock aprons in zoom-19 imagery; approximate."
+        }
+      },
+      {
+        "id": "12-kenco-mcs-dallas-iii",
+        "name": "Kenco MCS Dallas III - Lancaster TX",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoors",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "entryExitSeparate",
+          "multipleFacilities"
+        ],
+        "center": {
+          "lat": 32.6375,
+          "lng": -96.8013
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.6327,
+            "west": -96.8036,
+            "north": 32.6418,
+            "east": -96.799
+          },
+          "truckGate": {
+            "south": 32.6329,
+            "west": -96.8026,
+            "north": 32.6337,
+            "east": -96.8014
+          },
+          "dropYards": [
+            {
+              "south": 32.6327,
+              "west": -96.803,
+              "north": 32.635,
+              "east": -96.7995
+            },
+            {
+              "south": 32.636,
+              "west": -96.8033,
+              "north": 32.641,
+              "east": -96.8023
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.6335,
+              "west": -96.803,
+              "north": 32.6408,
+              "east": -96.8023
+            },
+            {
+              "south": 32.6335,
+              "west": -96.7998,
+              "north": 32.6408,
+              "east": -96.799
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 78,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Facility type: Multi-Client Distribution Center (temperature-controlled, food grade, 589,362 SF)\nResolved location: Danieldale Road logistics corridor, Lancaster, TX 75134\nLocked center coordinate: 32.63750, -96.80130 (large cross-dock building at the roster coord)\nGate verdict: NO truck gate (open speculative-park access)\nGuard-shack verdict: NO guard shack\nConfidence: Medium\n\n---\n\n### Step 0 — Locating the facility\n\nThe roster supplies identical `APPROXIMATE` coordinates (32.635612, -96.802949) for THREE\ndistinct Kenco Lancaster facilities — MCS Dallas III (589,362 SF), Dallas IV (560,000 SF)\nand Dallas II (200,000 SF). They all sit in the dense **Danieldale Road multi-tenant\nlogistics corridor** in Lancaster, TX 75134.\n\nResearch confirmed the Kenco anchor address as 2821 Danieldale Rd, Lancaster, TX 75134",
+        "mapsUrl": "https://www.google.com/maps/@32.63750,-96.80130,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster gives identical APPROXIMATE coords (32.635612,-96.802949) for three Kenco Lancaster facilities (Dallas III/IV/II = 589,362 / 560,000 / 200,000 SF). They sit in the dense Danieldale Road multi-tenant logistics corridor in Lancaster TX 75134; confirmed Kenco anchor address 2821 Danieldale Rd (Indeed job posting + Bandana company directory). Per-building Kenco leasing is not publicly disambiguated, so idx 12 (largest, 589,362 SF = Dallas III) was assigned to the large cross-dock building whose west dock face the roster coordinate falls on (center ~32.6375,-96.8013).",
+          "truckGate": "Open speculative-park access drives - no barrier arm, no gate, no guard booth. Street View (2021-02) shows wide open paved entrance drives with only fire-lane striping.",
+          "guardShack": "No guard booth observed at any property entrance.",
+          "remoteGs": "False - no truck gate present, so remote check-in does not apply.",
+          "shipRcvSeparate": "Cross-dock building with continuous dock banks on BOTH long faces (east and west) - shipping and receiving run from physically separate dock clusters.",
+          "dropYard": "Large dedicated trailer drop yards south of the building and along the dock aprons, with 100+ trailers parked in dense rows.",
+          "dockDoors": "Cross-dock building ~330 m long with dock doors along both long faces; combined count well into the 50+ band. dockDoorCount ~110 is an overhead estimate.",
+          "multipleFacilities": "The Danieldale Road corridor is a large multi-building logistics park; Kenco itself occupies three buildings here. Marked true at the campus level.",
+          "fastLaneOpportunity": "Wide paved aprons and drives provide ample room to add an express/bypass lane.",
+          "entryExitSeparate": "Multiple separate drive connections serve the property; estimated separate in/out points. Listed uncertain.",
+          "urbanRural": "Lancaster TX is a southern suburb within the Dallas-Fort Worth metro - dense industrial fabric. Urban.",
+          "railServed": "No rail spur enters this building's property; rail lines in the wider corridor do not serve it.",
+          "confidence": "Medium - building-level identity within the three same-coord Kenco Lancaster facilities could not be confirmed from public data; audit reflects the large cross-dock building at the roster coordinate."
+        }
+      },
+      {
+        "id": "13-kenco-mcs-dallas-iv",
+        "name": "Kenco MCS Dallas IV - Lancaster TX",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoors",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "entryExitSeparate",
+          "truckGate"
+        ],
+        "center": {
+          "lat": 32.639,
+          "lng": -96.799
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.6355,
+            "west": -96.8005,
+            "north": 32.642,
+            "east": -96.7968
+          },
+          "truckGate": {
+            "south": 32.6356,
+            "west": -96.7998,
+            "north": 32.6364,
+            "east": -96.7988
+          },
+          "dropYards": [
+            {
+              "south": 32.6362,
+              "west": -96.7982,
+              "north": 32.6408,
+              "east": -96.797
+            },
+            {
+              "south": 32.6362,
+              "west": -96.8005,
+              "north": 32.6408,
+              "east": -96.7996
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.6362,
+              "west": -96.7998,
+              "north": 32.6409,
+              "east": -96.799
+            },
+            {
+              "south": 32.6362,
+              "west": -96.7988,
+              "north": 32.6409,
+              "east": -96.798
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 95,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 170,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 62,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Facility type: Multi-Client Distribution Center (temperature-controlled, food grade, 560,000 SF)\nResolved location: Danieldale Road logistics corridor, Lancaster, TX 75134\nLocked center coordinate: 32.63900, -96.79900 (large solar-roof cross-dock building)\nGate verdict: NO confirmed truck gate (open building access; dock yards fenced)\nGuard-shack verdict: NO guard shack\nConfidence: Medium\n\n---\n\n### Step 0 — Locating the facility\n\nAs with idx 12, the roster supplies identical `APPROXIMATE` coordinates\n(32.635612, -96.802949) for three Kenco Lancaster facilities — Dallas III (589,362 SF),\nDallas IV (560,000 SF, this entry) and Dallas II (200,000 SF). They sit in the\nDanieldale Road multi-tenant logistics corridor, Lancaster, TX 75134, anchored by the\nconfirmed Kenco address 2821 Danieldale Rd.",
+        "mapsUrl": "https://www.google.com/maps/@32.63900,-96.79900,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster gives identical APPROXIMATE coords for three Kenco Lancaster facilities (Dallas III/IV/II = 589,362 / 560,000 / 200,000 SF) in the Danieldale Road multi-tenant logistics corridor, Lancaster TX 75134. Per-building Kenco leasing is not publicly disambiguated. idx 13 (Dallas IV, 560,000 SF) was assigned to the large cross-dock building with a full rooftop solar array, center ~32.6390,-96.7990 - the second-largest building in the immediate cluster.",
+          "truckGate": "Building/office access drives off the corridor street are open with no barrier or guard booth. The trailer dock yards along both faces appear to have perimeter security fencing typical of DFW logistics parks, but no manned/gated truck checkpoint was confirmed - marked false and listed uncertain.",
+          "guardShack": "No guard booth observed at any property entrance.",
+          "remoteGs": "False - no confirmed truck gate, so remote check-in does not apply.",
+          "shipRcvSeparate": "Cross-dock building with dock banks on BOTH long faces (east and west), trailers backed in on both - shipping and receiving from separate clusters.",
+          "dropYard": "Dedicated fenced trailer drop yards run along both dock faces with 80+ trailers parked.",
+          "dockDoors": "Cross-dock building with continuous dock banks on two long faces; combined count in the 50+ band. dockDoorCount ~95 is an overhead estimate.",
+          "multipleFacilities": "Large multi-building logistics park; Kenco occupies three buildings in the corridor. True at campus level.",
+          "fastLaneOpportunity": "Wide aprons and drives leave room for an express/bypass lane.",
+          "urbanRural": "Lancaster TX, a southern Dallas-Fort Worth metro suburb in dense industrial fabric. Urban.",
+          "railServed": "No rail spur enters the property.",
+          "confidence": "Medium - the corridor and Kenco presence are confirmed, but the three same-coord Kenco Lancaster facilities cannot be individually pinned from public data; idx 13 reflects the solar-roof cross-dock building."
+        }
+      },
+      {
+        "id": "14-kenco-mcs-dallas-ii",
+        "name": "Kenco MCS Dallas II - Lancaster TX",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoors",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 32.6325,
+          "lng": -96.8038
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.6306,
+            "west": -96.8052,
+            "north": 32.6342,
+            "east": -96.802
+          },
+          "truckGate": {
+            "south": 32.6335,
+            "west": -96.8045,
+            "north": 32.6342,
+            "east": -96.8036
+          },
+          "dropYards": [
+            {
+              "south": 32.631,
+              "west": -96.803,
+              "north": 32.6338,
+              "east": -96.8021
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.631,
+              "west": -96.8036,
+              "north": 32.6338,
+              "east": -96.8028
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 26,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Facility type: Multi-Client Distribution Center (food grade, 200,000 SF)\nResolved location: Danieldale Road logistics corridor, Lancaster, TX 75134\nLocked center coordinate: 32.63250, -96.80380 (smaller rear-load building)\nGate verdict: NO truck gate (open speculative-park access)\nGuard-shack verdict: NO guard shack\nConfidence: Medium\n\n---\n\n### Step 0 — Locating the facility\n\nAs with idx 12 and 13, the roster supplies identical `APPROXIMATE` coordinates\n(32.635612, -96.802949) for three Kenco Lancaster facilities — Dallas III (589,362 SF),\nDallas IV (560,000 SF) and Dallas II (200,000 SF, this entry). They sit in the\nDanieldale Road multi-tenant logistics corridor, Lancaster, TX 75134, anchored by the\nconfirmed Kenco address 2821 Danieldale Rd. Kenco's own location page for \"MCS – Dallas",
+        "mapsUrl": "https://www.google.com/maps/@32.63250,-96.80380,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster gives identical APPROXIMATE coords for three Kenco Lancaster facilities (Dallas III/IV/II = 589,362 / 560,000 / 200,000 SF) in the Danieldale Road multi-tenant logistics corridor, Lancaster TX 75134. Per-building Kenco leasing is not publicly disambiguated. idx 14 (Dallas II, 200,000 SF - the smallest of the three) was assigned to the notably smaller rear-load building in the corridor, center ~32.6325,-96.8038.",
+          "truckGate": "Open speculative-park access drives off the corridor street - no barrier arm, no gate, no guard booth. Street View shows wide open paved entrance drives with only fire-lane striping.",
+          "guardShack": "No guard booth observed.",
+          "remoteGs": "False - no truck gate present.",
+          "shipRcvSeparate": "Rear-load building with a single dock bank along its east face only - shipping and receiving share one dock cluster.",
+          "dropYard": "Trailer drop / parking area along the east dock apron with ~25 trailers parked.",
+          "dockDoors": "Single east-face dock bank on a ~200,000 SF rear-load building; estimated 25-50 band (~38 doors). Overhead estimate, flagged uncertain.",
+          "multipleFacilities": "Large multi-building logistics park; Kenco occupies three buildings in the corridor. True at campus level.",
+          "fastLaneOpportunity": "Wide aprons and drives leave room for an express lane.",
+          "urbanRural": "Lancaster TX, a southern Dallas-Fort Worth metro suburb in dense industrial fabric. Urban.",
+          "railServed": "No rail spur enters the property.",
+          "confidence": "Medium - corridor and Kenco presence confirmed; the three same-coord Kenco Lancaster facilities cannot be individually pinned from public data. idx 14 reflects the smallest (rear-load) building in the cluster."
+        }
+      },
+      {
+        "id": "15-kenco-lixil-americas-dc",
+        "name": "Kenco LIXIL Americas DC - Groveport OH",
+        "type": "Dedicated Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 39.8395,
+          "lng": -82.9182
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.8366,
+            "west": -82.9212,
+            "north": 39.842,
+            "east": -82.9162
+          },
+          "truckGate": {
+            "south": 39.841,
+            "west": -82.9179,
+            "north": 39.8418,
+            "east": -82.9168
+          },
+          "dropYards": [
+            {
+              "south": 39.8372,
+              "west": -82.9195,
+              "north": 39.8408,
+              "east": -82.9183
+            },
+            {
+              "south": 39.8372,
+              "west": -82.9172,
+              "north": 39.8408,
+              "east": -82.9162
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.837,
+              "west": -82.9203,
+              "north": 39.8411,
+              "east": -82.9193
+            },
+            {
+              "south": 39.837,
+              "west": -82.9174,
+              "north": 39.8411,
+              "east": -82.9164
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 70,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Facility type: Dedicated Distribution Center (~906,000 SF, LIXIL Americas)\nResolved location: 3099 Rohr Road, Groveport, OH 43125\nLocked center coordinate: 39.83950, -82.91820 (west building of the two-building DC)\nGate verdict: NO truck gate (open access)\nGuard-shack verdict: NO guard shack\nConfidence: High\n\n---\n\n### Step 0 — Locating the facility\n\nThe roster supplies `ROOFTOP`-precision coordinates (39.841255, -82.919529) for the\nKenco LIXIL Americas DC at 3099 Rohr Road, Groveport, OH 43125. Web research confirmed\nthis is the ~906,000 SF LIXIL Americas distribution center managed by Kenco, per the\nBusinessWire / Kenco announcement (May 2024) and BBB/Waze Groveport listings.\n\nA zoom-18 probe at the exact roster coordinate showed it pins the NW corner of a",
+        "mapsUrl": "https://www.google.com/maps/@39.83950,-82.91820,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed: 3099 Rohr Road, Groveport OH 43125 - the ~906,000 SF LIXIL Americas distribution center managed by Kenco (BusinessWire/Kenco announcement May 2024). Roster ROOFTOP coords pin the NW corner of the building; verified on satellite + Street View. The DC is a two-building tan-roofed complex in the Rickenbacker/Groveport logistics hub; the roster coordinate sits on the west building.",
+          "truckGate": "Open access driveways off Rohr Road - no barrier arm, no gate, no guard booth. Street View (capture 2024-08) shows wide open paved entrance drives. Drive aisles between the two buildings are open as well.",
+          "guardShack": "No guard booth observed at any property entrance.",
+          "remoteGs": "False - no truck gate present, so remote check-in does not apply.",
+          "shipRcvSeparate": "Cross-dock building - continuous dock banks on BOTH long faces (SW and NE), trailers backed in on both. Shipping and receiving from physically separate dock clusters.",
+          "dropYard": "Large trailer drop yards along both dock faces and in the central aisle between the two buildings, with 70+ trailers parked.",
+          "dockDoors": "Cross-dock building ~370 m long with dock doors on both long faces; combined count well into the 50+ band. dockDoorCount ~90 is an overhead estimate.",
+          "multipleFacilities": "The LIXIL Americas DC is a two-building tan-roofed complex; both buildings form the ~906,000 SF facility. Marked true at campus level.",
+          "fastLaneOpportunity": "Wide aprons and drives leave ample room to add an express/bypass lane.",
+          "urbanRural": "Groveport is a southeast Columbus suburb inside the Columbus OH metro / Rickenbacker logistics hub - dense industrial fabric. Urban.",
+          "connectivityIssue": "False - a cellular tower stands adjacent to the site on Rohr Road; coverage is strong.",
+          "railServed": "No rail spur enters the property.",
+          "confidence": "High - facility positively confirmed by address and the May 2024 LIXIL/Kenco announcement; ROOFTOP-accurate coords verified on current imagery."
+        }
+      },
+      {
+        "id": "16-kenco-mcs-chattanooga-ch29",
+        "name": "Kenco MCS Chattanooga CH29 - Chattanooga TN",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dockDoors",
+          "dropArea",
+          "entryLanes",
+          "exitLanes",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 35.07155,
+          "lng": -85.17815
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.07015,
+            "west": -85.17955,
+            "north": 35.0729,
+            "east": -85.17675
+          },
+          "truckGate": {
+            "south": 35.0702,
+            "west": -85.17945,
+            "north": 35.07055,
+            "east": -85.179
+          },
+          "dropYards": [
+            {
+              "south": 35.0706,
+              "west": -85.179,
+              "north": 35.0721,
+              "east": -85.1783
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.0706,
+              "west": -85.179,
+              "north": 35.07215,
+              "east": -85.1784
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 16.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied only \"Chattanooga, TN 37406\" with an APPROXIMATE geocode\n(35.067592, -85.261899). Step 0 satellite probing showed that point landed on\nthe CSX DeButts rail classification yard — a sea of rail tracks, not a\nwarehouse. The roster itself notes \"exact street address not publicly\nconfirmed.\"\n\nWeb research resolved Kenco's Chattanooga warehousing:\n- Kenco Group HQ is 2001 Riverside Drive, Chattanooga, TN 37406 (an office).\n- Kenco Logistic Services operates warehouses on Enterprise Park Drive\n  (zip 37416, the Enterprise Park / Enterprise South industrial corridor).\n  6170 Enterprise Park Dr is a confirmed Kenco building (ROOFTOP geocode\n  35.0696387, -85.1823609; Yelp/CoStar \"Kenco Logistics Services-Stryker\").\n- A Kenco affiliate sold a **7-warehouse Chattanooga portfolio for $67.1M in",
+        "mapsUrl": "https://www.google.com/maps/@35.07155,-85.17815,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster gave an APPROXIMATE geocode for 'Chattanooga, TN 37406' that landed on the CSX DeButts rail classification yard ~5 km west of any Kenco warehouse. Web research resolved Kenco's Chattanooga MCS operations to the Enterprise Park Drive industrial cluster (zip 37416). Kenco Logistic Services has a confirmed building at 6170 Enterprise Park Dr (ROOFTOP geocode 35.0696,-85.1824) and a Kenco affiliate sold a 7-warehouse Chattanooga portfolio in 2022 including a 210,000 SF building near Enterprise South. CH29/CH7B/BP2 are internal Kenco building codes with no public address-to-code mapping, so the specific building for CH29 cannot be verified with certainty.",
+          "buildingChoice": "Audited the large ~200x130 m warehouse at 35.0716,-85.1782 in the Enterprise Park Dr cluster as the best fit for CH29 (284,720 SF bulk space) - it is the largest single-tenant warehouse in the immediate cluster with a single dominant dock bank consistent with bulk distribution.",
+          "truckGate": "No barrier arm, sliding gate, or guard booth visible at the property driveway off Enterprise Park Drive. Open paved loop driveway typical of a leased multi-tenant industrial-park warehouse. Medium confidence - the SW dock yard is not fully fenced/controlled in imagery.",
+          "dockDoors": "Counted ~38 dock doors along the SW building face from z18/z19 imagery (regular bay rhythm, several trailers backed in). Band 25-50; low-confidence exact count.",
+          "dropArea": "10-25 trailers staged in the SW apron/yard, including bobtail trailers without tractors; estimate from z18.",
+          "fastLaneOpportunity": "Wide SW apron with substantial unused paved width - room to add a bypass lane if a gate were installed.",
+          "dropYard": "Shared SW yard holds parked trailers used for drop storage adjacent to the dock apron.",
+          "railServed": "A rail line runs through the broader Enterprise Park area but no spur enters this building's parcel.",
+          "urbanRural": "Inside the Chattanooga metro within the Enterprise Park / Enterprise South industrial fabric - Urban."
+        }
+      },
+      {
+        "id": "17-kenco-mcs-chattanooga-ch7b",
+        "name": "Kenco MCS Chattanooga CH7B - Chattanooga TN",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dockDoors",
+          "dropArea",
+          "entryLanes",
+          "exitLanes",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 35.06912,
+          "lng": -85.18225
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.0679,
+            "west": -85.1837,
+            "north": 35.0701,
+            "east": -85.1809
+          },
+          "truckGate": {
+            "south": 35.0697,
+            "west": -85.1813,
+            "north": 35.07005,
+            "east": -85.18085
+          },
+          "dropYards": [
+            {
+              "south": 35.0684,
+              "west": -85.1832,
+              "north": 35.069,
+              "east": -85.1813
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.0685,
+              "west": -85.1833,
+              "north": 35.06905,
+              "east": -85.1812
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 34,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 13.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied only \"Chattanooga, TN 37406\" with an APPROXIMATE geocode\n(35.067592, -85.261899) — the same generic point used for idx 16/17/18. Step 0\nshowed it on the CSX DeButts rail classification yard, not a warehouse.\n\nWeb research resolved Kenco's Chattanooga warehousing to the **Enterprise Park\nDrive industrial cluster (zip 37416). Critically, 6170 Enterprise Park Dr\nis a confirmed Kenco building** — geocoded ROOFTOP at 35.0696387, -85.1823609,\nand listed as \"Kenco Logistics Services-Stryker\" on Yelp / CoStar. A Kenco\naffiliate also sold a 7-warehouse Chattanooga portfolio for $67.1M in 2022,\nconfirming Kenco's MCS footprint sits in this cluster.\n\nBecause 6170 Enterprise Park Dr is the confirmed Kenco address, CH7B was\naudited on that building (center ~35.0691, -85.1822). The CH-code-to-building",
+        "mapsUrl": "https://www.google.com/maps/@35.06912,-85.18225,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster gave an APPROXIMATE geocode for 'Chattanooga, TN 37406' that landed on the CSX DeButts rail yard. Web research resolved Kenco's Chattanooga MCS operations to the Enterprise Park Drive industrial cluster. 6170 Enterprise Park Dr is a CONFIRMED Kenco building (ROOFTOP geocode 35.0696387,-85.1823609; Yelp/CoStar 'Kenco Logistics Services-Stryker').",
+          "buildingChoice": "Audited the warehouse at the confirmed Kenco address 6170 Enterprise Park Dr (building center ~35.0691,-85.1822) as CH7B. CH7B is described as 242,000 SF temperature-controlled/food-grade; the audited building is a large single-tenant warehouse with a long dock bank consistent with a food-grade DC. Public sources cite ~162,500 SF for the 6170 building (a 1990 listing) which may understate the current footprint, so the CH-code-to-building match is best-effort - medium confidence.",
+          "truckGate": "No barrier arm, gate, or guard booth at the property driveway off Enterprise Park Drive. Open paved access typical of a leased industrial-park warehouse. Street View (Feb 2026) of the NE wall shows plain metal cladding with a small entry vestibule and no gate. Medium confidence.",
+          "guardShack": "No booth structure visible at any entrance.",
+          "dockDoors": "Counted ~34 dock doors along the south/SW building face from z19 imagery (regular bay rhythm, dock levelers, a few trailers and one truck backed in). Band 25-50; low-confidence exact count.",
+          "dropArea": "Roughly 6 trailers visible in the deep south apron in current imagery; the wide paved yard could hold ~20. Band 10-25.",
+          "fastLaneOpportunity": "Very deep, wide south truck apron with large unused paved area - ample room to add a bypass/express lane.",
+          "dropYard": "South apron doubles as trailer drop storage; trailers parked without tractors.",
+          "railServed": "A rail line runs immediately along the south property boundary but no spur enters the parcel - the building is not rail-served.",
+          "urbanRural": "Within the Chattanooga metro Enterprise Park industrial fabric - Urban."
+        }
+      },
+      {
+        "id": "18-kenco-mcs-chattanooga-bp2",
+        "name": "Kenco MCS Chattanooga BP2 - Chattanooga TN",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dockDoors",
+          "dropArea",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 35.06929,
+          "lng": -85.17642
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.068,
+            "west": -85.1778,
+            "north": 35.07045,
+            "east": -85.1751
+          },
+          "truckGate": {
+            "south": 35.068,
+            "west": -85.17745,
+            "north": 35.0684,
+            "east": -85.17695
+          },
+          "dropYards": [
+            {
+              "south": 35.0696,
+              "west": -85.177,
+              "north": 35.0703,
+              "east": -85.1754
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.06955,
+              "west": -85.1771,
+              "north": 35.07025,
+              "east": -85.1753
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 26,
+          "trailersVisible": 15,
+          "trailerParkingCapacity": 22,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 12.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied only \"Chattanooga, TN 37406\" with an APPROXIMATE geocode\n(35.067592, -85.261899) — Step 0 showed it on the CSX DeButts rail yard.\n\nThis facility was positively resolved by web research. Chattanoogan.com\nand the Chattanooga Times Free Press reported that a **210,000 SF industrial\nwarehouse on over 12 acres at 6301 Enterprise Park Dr** (built 1995) sold for\n$67.09M in 2022 as part of a 7-warehouse Chattanooga portfolio sold by a\nKenco affiliate. The **210,000 SF and 12+ acre figures are an exact match for\nBP2** (210,000 SF on the Kenco warehousing map). 6301 Enterprise Park Dr\ngeocodes ROOFTOP at 35.069286, -85.1764238 — this is a confident building\nidentification.",
+        "mapsUrl": "https://www.google.com/maps/@35.06929,-85.17642,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster gave an APPROXIMATE geocode for 'Chattanooga, TN 37406' that landed on the CSX DeButts rail yard. Web research positively resolved BP2 to 6301 Enterprise Park Dr, Chattanooga TN 37416: Chattanoogan.com/Times Free Press reported a 210,000 SF industrial warehouse on over 12 acres at 6301 Enterprise Park Dr (built 1995) sold for $67.09M in 2022 as part of a Kenco-affiliate 7-warehouse Chattanooga portfolio. 210,000 SF and 12+ acres are an EXACT match for BP2 (210,000 SF on the Kenco warehousing map). 6301 Enterprise Park Dr geocodes ROOFTOP at 35.069286,-85.1764238.",
+          "buildingChoice": "High confidence on building identity (210,000 SF / 12+ acres / 6301 Enterprise Park Dr matches BP2 exactly). Overall confidence held to medium because the gate/guard determination relies on imagery interpretation and Street View only reached one building face.",
+          "truckGate": "No barrier arm, sliding/swing gate, or guard booth at the property driveway off Enterprise Park Drive. Open paved loop entrance at the SE corner; Street View (Feb 2026) of the SW wall shows a plain warehouse facade with no gate. Typical leased industrial-park warehouse. Medium confidence.",
+          "guardShack": "No booth structure visible at the entrance.",
+          "dockDoors": "Counted ~26 dock doors along the NE building face from z18/z19 imagery (regular bay rhythm, ~12-15 trailers backed in). Band 25-50; low-confidence exact count.",
+          "dropArea": "~15 trailers staged on the NE apron including drop trailers without tractors; estimated ~22-trailer capacity. Band 10-25.",
+          "shipRcvSeparate": "All dock activity is on a single NE-face dock bank - shipping and receiving are not on physically separate clusters.",
+          "fastLaneOpportunity": "Wide NE truck apron with unused paved width and a deep approach - room to add a bypass lane.",
+          "dropYard": "NE apron holds parked drop trailers adjacent to the dock bank.",
+          "railServed": "A rail line runs along the south side of the broader Enterprise Park area; no spur enters this parcel.",
+          "urbanRural": "Within the Chattanooga metro Enterprise Park industrial fabric - Urban."
+        }
+      },
+      {
+        "id": "19-kenco-mcs-ogden-i",
+        "name": "Kenco MCS Ogden I - Ogden UT",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 41.24828,
+          "lng": -111.99625
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.24655,
+            "west": -111.9978,
+            "north": 41.25,
+            "east": -111.9949
+          },
+          "truckGate": {
+            "south": 41.24905,
+            "west": -111.9972,
+            "north": 41.24945,
+            "east": -111.9966
+          },
+          "dropYards": [
+            {
+              "south": 41.2477,
+              "west": -111.9976,
+              "north": 41.2496,
+              "east": -111.9967
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.247,
+              "west": -111.997,
+              "north": 41.24955,
+              "east": -111.99645
+            }
+          ],
+          "staging": {
+            "south": 41.2477,
+            "west": -111.99775,
+            "north": 41.249,
+            "east": -111.99715
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 46,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 18,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied a ROOFTOP geocode (41.247999, -111.995675) with the\naddress 1025 Depot Drive, Ogden UT 84404. Step 0 confirmed the point lands\ndirectly on a large distribution warehouse in the **Business Depot Ogden\n(BDO)** industrial park.\n\nWeb research confirmed 1025 Depot Dr is the Kenco Oatly Warehouse — a\nfinished-goods DC that Kenco built, staffs, and operates for Oatly (the\nSwedish oat-milk maker), serving Oatly's Ogden production plant (listed as\n1025 Depot Dr, Suite 5). This is a positive identification.",
+        "mapsUrl": "https://www.google.com/maps/@41.24828,-111.99625,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "1025 Depot Dr, Ogden UT 84404 - confirmed as the Kenco Oatly Warehouse (Kenco-built/operated finished-goods DC serving Oatly's Ogden oat-milk plant; listed as 1025 Depot Dr Suite 5). Roster ROOFTOP geocode (41.247999,-111.995675) lands directly on the building in the Business Depot Ogden (BDO) industrial park. Audited coordinate is the building footprint center.",
+          "truckGate": "No barrier arm, sliding/swing gate, or guard booth at the truck apron entrance. The west-side truck apron is reached by open driveways off the BDO industrial-park roads. Medium-confidence FALSE - flagged.",
+          "guardShack": "No staffed booth structure visible at the entrance.",
+          "dockDoors": "Long dock bank along the WEST building face - counted ~46 doors from z18/z19 imagery, consistent with the roster's '44+ dock doors'. Band 25-50.",
+          "dropArea": "~12 trailers staged in the west apron / gravel storage area; estimated ~30-trailer capacity. Band 10-25.",
+          "staging": "A graded gravel area immediately west of the paved dock apron functions as overflow trailer staging.",
+          "fastLaneOpportunity": "Very deep, wide west truck apron plus an adjacent gravel staging strip - ample unused width to add a bypass/express lane.",
+          "dropYard": "West apron and gravel area hold parked drop trailers separate from active dock spotting.",
+          "shipRcvSeparate": "All dock doors are on the single west face - shipping and receiving are not on physically separate dock clusters.",
+          "railServed": "No rail spur enters the parcel.",
+          "urbanRural": "Inside the Ogden metro within the dense Business Depot Ogden industrial fabric - Urban.",
+          "refrigeration": "Roof-mounted refrigeration/HVAC units near the south end are consistent with a food-grade / temperature-controlled DC for Oatly product."
+        }
+      },
+      {
+        "id": "20-kenco-mcs-clearfield",
+        "name": "Kenco MCS Clearfield - Clearfield UT",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "dropArea",
+          "shipRcvSeparate",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 41.1009,
+          "lng": -112.0346
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.10005,
+            "west": -112.0357,
+            "north": 41.1018,
+            "east": -112.0336
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 41.10025,
+              "west": -112.03555,
+              "north": 41.10165,
+              "east": -112.03445
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 7,
+          "trailerParkingCapacity": 10,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 5.5,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "0-10",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied a ROOFTOP geocode (41.100339, -112.035023) for \"Building\nG8, 7th Street, Freeport Center.\" Step 0 confirmed it definitively:\n- Google geocoding of \"Building G8, 7th Street, Freeport Center\" returns\n  \"G-8, 7th St, Clearfield, UT\" at 41.1003393, -112.0350228 — matching the\n  roster coordinate exactly.\n- **Street View (Nov 2022) shows a \"G-8 / 7th Street\" sign directly on the\n  building** at the street corner — a positive, unambiguous identification.\n\nFreeport Center is a 680-acre former WWII military depot, now a warehousing\nand distribution park of 78 long warehouse buildings on an internal street\ngrid. Kenco Logistic Services occupies building G8 (~90,000 SF, food-grade\ncertified per directory listings).",
+        "mapsUrl": "https://www.google.com/maps/@41.10090,-112.03460,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Building G8, 7th Street, Freeport Center, Clearfield UT 84016 - positively confirmed. Roster ROOFTOP geocode (41.100339,-112.035023) matches the Google geocode for 'G-8, 7th St' exactly, and Street View shows a 'G-8 7th Street' sign on the building. Freeport Center is a 680-acre former WWII military depot with 78 long warehouse buildings on an internal street grid; Kenco occupies building G8 (~90,000 SF, food grade).",
+          "buildingLayout": "G8 is one long, narrow Freeport Center warehouse (~230 m x 35 m) running NW-SE. Per Freeport Center's published description, most buildings have a railroad loading dock on one side and a truck loading dock on the other.",
+          "truckGate": "FALSE. Individual Freeport buildings have no truck gate of their own - trucks pull directly off the internal Freeport streets and back into the comb-shaped dock canopy. No barrier arm, gate, or guard booth at building G8. (Note: the overall Freeport Center complex may have perimeter control, but G8 itself has none.)",
+          "guardShack": "FALSE. No staffed booth at the building.",
+          "remoteGs": "FALSE - no building-level gate.",
+          "dockDoors": "Truck docks are under a comb-shaped canopy along one long side; estimated ~16 truck dock doors for a building this size. Band 10-25. Low-confidence count - the canopy obscures exact door count from overhead.",
+          "shipRcvSeparate": "TRUE (Freeport-pattern) - rail dock on one long side, truck dock on the opposite long side, so inbound rail receiving and outbound truck shipping run from physically separate building faces. Flagged - inferred from the Freeport Center standard layout rather than directly counted.",
+          "dropArea": "Only a few trailers park along the street frontage; no dedicated per-building drop lot. Band 0-10.",
+          "drivewayShort": "Trucks back into the comb dock directly from the narrow internal street - the approach holds only 1-2 trucks.",
+          "backupSensitive": "TRUE - a backing truck occupies the narrow internal Freeport street; a queue would block the shared street and adjacent buildings' access.",
+          "multipleFacilities": "TRUE - G8 sits within the 78-building Freeport Center campus; many large building clusters share the property.",
+          "railServed": "TRUE - rail spurs run through the Freeport Center streets and along the building rows; G8 has a rail dock per the Freeport standard layout.",
+          "urbanRural": "Within the Clearfield/Ogden metro and the dense Freeport Center industrial complex - Urban."
+        }
+      },
+      {
+        "id": "21-kenco-mead-johnson-dc-mount-vernon-in",
+        "name": "Kenco Mead Johnson DC - Mount Vernon IN",
+        "type": "Dedicated Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "postGateStaging",
+          "drivewayLong",
+          "entryLanes",
+          "exitLanes",
+          "fastLaneOpportunity",
+          "dockDoors",
+          "dropArea",
+          "dropYard",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 37.9355,
+          "lng": -87.87
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 37.933,
+            "west": -87.872,
+            "north": 37.9396,
+            "east": -87.8679
+          },
+          "truckGate": {
+            "south": 37.9376,
+            "west": -87.8697,
+            "north": 37.9381,
+            "east": -87.869
+          },
+          "dropYards": [
+            {
+              "south": 37.9382,
+              "west": -87.8705,
+              "north": 37.9396,
+              "east": -87.8681
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 37.9378,
+              "west": -87.871,
+              "north": 37.9384,
+              "east": -87.8681
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 53,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Address: 3101 Highway 62 East, Mount Vernon, IN 47620\n- Locked center: 37.93550, -87.87000 (center of the demolished warehouse slab)\n- Roster coordinate (37.937193, -87.870498, ROOFTOP) lands on the north edge of\n  the warehouse footprint; confirmed correct parcel via satellite + web search.",
+        "mapsUrl": "https://www.google.com/maps/@37.93550,-87.87000,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "SITE_STATUS": "FACILITY DESTROYED AND DEMOLISHED. An EF-3 tornado struck the Mead Johnson / Kenco DC on 9 Jul 2024, collapsing the roof and multiple walls. Current 2026 Maxar imagery and 2025-09 Street View show the warehouse fully razed to a bare concrete slab with exposed foundation footings and demolition debris. The site is non-operational. All operational classification fields are inferred from the surviving slab footprint and access roads, not a working yard.",
+          "truckGate": "No barrier arm or guard structure visible at the NE entrance off the loop road; classified false but the pre-tornado state is unknowable from current imagery.",
+          "dockDoors": "Estimated 25-50 band from the slab footprint and a dock-apron strip along the west/south face; the actual building no longer exists to count doors.",
+          "dropYard": "Large paved loop-yard area north and east of the slab could function as trailer storage; marked true tentatively but no trailers present.",
+          "urbanRural": "Edge-of-town along Highway 62 E surrounded by farmland; classified Rural.",
+          "multipleFacilities": "The racetrack-shaped tank/manufacturing complex to the SW is the separate Mead Johnson Mount Vernon manufacturing plant, not part of this DC parcel."
+        }
+      },
+      {
+        "id": "22-kenco-kerry-group-dc-calhoun-ga",
+        "name": "Kenco Kerry Group DC - Calhoun GA",
+        "type": "Dedicated Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 34.4337,
+          "lng": -84.9252
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.4314,
+            "west": -84.9272,
+            "north": 34.4365,
+            "east": -84.9225
+          },
+          "truckGate": {
+            "south": 34.43175,
+            "west": -84.9271,
+            "north": 34.43215,
+            "east": -84.9264
+          },
+          "dropYards": [
+            {
+              "south": 34.4348,
+              "west": -84.9256,
+              "north": 34.4362,
+              "east": -84.9232
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.432,
+              "west": -84.9268,
+              "north": 34.4356,
+              "east": -84.9262
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 60,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Address: 315 Clarence King Drive, Calhoun, GA 30701\n- Building: \"Union Grove Logistics Center, Building 1\" — a ~720,000 SF\n  warehouse completed 2022; Kenco operates a ~468,000 SF dedicated DC for\n  Kerry Group inside it (opened Jan 2023, ribbon cutting per Gordon County\n  Chamber of Commerce).\n- Locked center: 34.43370, -84.92520 (center of the west warehouse).\n- Roster coordinate (34.430206, -84.927789, ROOFTOP) landed ~350m SW in woods\n  along Clarence King Drive; corrected NE to the actual building via satellite\n  + web search (CommercialCafe / PropertyShark / CompStak listings).",
+        "mapsUrl": "https://www.google.com/maps/@34.43370,-84.92520,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Open-access campus. The south driveway off Clarence King Drive is an unrestricted paved intersection with no barrier arm or gate; 2024-02 Street View shows only traffic cones. No perimeter fence anywhere along Clarence King Drive.",
+          "guardShack": "No booth structure at any entrance.",
+          "dockDoors": "West building (315 Clarence King Dr / Union Grove Logistics Center Bldg 1, 720k SF) has a long dock bank along its west face facing the road; Street View shows ~50+ doors with trailers backed in. Combined with the adjacent east building's dock bank the campus exceeds 50.",
+          "dropArea": "Large angled-row trailer drop yard at the north end of the campus holds 50+ trailers, separate from the dock aprons.",
+          "multipleFacilities": "Union Grove Logistics Center is a two-building campus (Bldg 1 west + a larger building to the east) plus additional warehouses to the NW; classified as a campus.",
+          "postGateStaging": "Wide dock apron between Clarence King Drive and the dock doors plus the north yard provide internal queue/staging room.",
+          "urbanRural": "Edge-of-Calhoun industrial park along I-75, surrounded by woods and scattered rural residential; classified Rural.",
+          "railServed": "No rail spur runs into the property; the I-75 corridor is adjacent but no siding."
+        }
+      },
+      {
+        "id": "23-kenco-the-shippers-group-hutchins-tx-hq-campus",
+        "name": "Kenco / The Shippers Group - Hutchins TX (HQ campus)",
+        "type": "Distribution Center / 3PL Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 32.6262,
+          "lng": -96.716
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.624,
+            "west": -96.7179,
+            "north": 32.6281,
+            "east": -96.714
+          },
+          "truckGate": {
+            "south": 32.626,
+            "west": -96.7157,
+            "north": 32.6265,
+            "east": -96.7149
+          },
+          "dropYards": [
+            {
+              "south": 32.625,
+              "west": -96.7156,
+              "north": 32.6279,
+              "east": -96.7144
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.6248,
+              "west": -96.716,
+              "north": 32.6279,
+              "east": -96.7152
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 89,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 39,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Address: 1015 W Wintergreen Road, Hutchins, TX 75141 (TSG \"WG-2\" facility)\n- Locked center: 32.62620, -96.71600 (center of the main warehouse)\n- Roster coordinate (32.625775, -96.716523, ROOFTOP) landed on the south edge\n  of the warehouse; confirmed correct building via satellite + web search.\n- This is the former corporate HQ and a 560,000 SF distribution warehouse of\n  The Shippers Group; TSG was acquired by Kenco Logistics in January 2024.",
+        "mapsUrl": "https://www.google.com/maps/@32.62620,-96.71600,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Fully fenced/secured yard (corroborated by The Shippers Group's own facility page describing a 'secured yard'). 2026-02 Street View shows a chain-link perimeter all the way around the dock/yard area with a sliding gate across the SE truck entrance driveway.",
+          "guardShack": "No clear dedicated 1-3-car guard booth. There IS a long metal building beside the entrance, but it reads as an office/annex/maintenance building rather than a gatehouse. With a controlled gate but no obvious booth, classified remoteGs (kiosk / app / call-box check-in likely).",
+          "remoteGs": "True because there is a truck gate but no identifiable guard shack.",
+          "dockDoors": "The Shippers Group facility page states 89 dock doors plus 5 rail doors; Street View / satellite confirm a long dock bank on the east face with trailers backed in. Band 50+.",
+          "dropArea": "Drop / trailer parking along the east and NE yard holds 25-50 unhitched trailers within the secured yard.",
+          "railServed": "TRUE - facility page states served by Union Pacific Railroad with 5 rail doors; a rail line runs along the NW edge of the property with a spur into the site.",
+          "multipleFacilities": "Counted the main 560k SF warehouse plus the adjacent long metal annex/office building as 2 buildings, but this is a single facility/parcel, not a multi-cluster campus - multipleFacilities false.",
+          "urbanRural": "Hutchins is an edge-of-metro DFW industrial-park setting south of Dallas off I-45, surrounded by farmland and scattered warehouses; classified Rural per the small-town-industrial tie-breaker.",
+          "facts": "1015 W Wintergreen Rd / WG-2: 560,000 SF, built 2018, 109,000 SF cooler, multi-client food-grade BRC-certified. Former TSG corporate HQ; The Shippers Group acquired by Kenco Jan 2024."
+        }
+      },
+      {
+        "id": "24-kenco-american-standard-dc-hutchins-tx",
+        "name": "Kenco American Standard DC - Hutchins TX",
+        "type": "Dedicated Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 32.6356,
+          "lng": -96.6964
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.6336,
+            "west": -96.699,
+            "north": 32.6378,
+            "east": -96.694
+          },
+          "truckGate": {
+            "south": 32.6339,
+            "west": -96.6972,
+            "north": 32.6344,
+            "east": -96.6964
+          },
+          "dropYards": [
+            {
+              "south": 32.636,
+              "west": -96.6985,
+              "north": 32.6378,
+              "east": -96.696
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.6338,
+              "west": -96.6982,
+              "north": 32.6344,
+              "east": -96.6944
+            },
+            {
+              "south": 32.6344,
+              "west": -96.6985,
+              "north": 32.6376,
+              "east": -96.6979
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 54,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Address: 801 E Wintergreen Road, Hutchins, TX 75141\n- Locked center: 32.63560, -96.69640 (center of the warehouse)\n- Roster coordinate (32.635388, -96.69556, ROOFTOP) landed on the building;\n  confirmed correct via satellite + web search.\n- A ~625,000 SF Dallas-area distribution center for American Standard Brands\n  (kitchen/bath products); Kenco Logistics manages and operates it.",
+        "mapsUrl": "https://www.google.com/maps/@32.63560,-96.69640,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "The entire dock yard is enclosed by a continuous chain-link perimeter fence on all four sides (confirmed in 2026 Street View on the S, W, and E faces). Truck access is through sliding gates in that fence. Kenco's published scope for this site explicitly includes 'spotter and yard management' and 'contract security', confirming a controlled, access-managed yard.",
+          "guardShack": "No dedicated 1-3-car guard booth is visible at any gate in the available imagery. Classified false; flagged uncertain because 'contract security' is contracted - a guard may be posted at a gate not clearly resolved.",
+          "remoteGs": "True - controlled truck gate but no identifiable guard booth (kiosk / app / posted-security check-in).",
+          "dockDoors": "Very large ~625,000 SF building with dock doors on all four faces and trailers backed in around the entire perimeter; well into the 50+ band (estimated ~130 doors).",
+          "dropArea": "Extensive trailer drop yard - long rows of unhitched trailers parked at the north end and around the building; 50+ band, large capacity (~200).",
+          "drivewayLong": "Deep paved dock aprons (~50-60m) on every face provide ample internal truck stacking.",
+          "multipleFacilities": "Single very large warehouse on its own parcel; adjacent warehouses to the west are separate properties - multipleFacilities false.",
+          "urbanRural": "Hutchins industrial park south of Dallas off I-45, edge-of-metro with farmland nearby; classified Rural per the small-town-industrial tie-breaker.",
+          "railServed": "No rail spur enters the property.",
+          "facts": "801 E Wintergreen Rd: ~625,000 SF Dallas-area DC for American Standard Brands (kitchen/bath products); Kenco runs finished-goods distribution, repackaging, toilet-kit packaging, spotter & yard management, contract security, MHE."
+        }
+      },
+      {
+        "id": "25-kenco-the-shippers-group-wilmer-tx",
+        "name": "Kenco / The Shippers Group - Wilmer TX",
+        "type": "Distribution Center / 3PL Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 32.5858,
+          "lng": -96.6807
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.5835,
+            "west": -96.6835,
+            "north": 32.588,
+            "east": -96.678
+          },
+          "truckGate": {
+            "south": 32.5868,
+            "west": -96.683,
+            "north": 32.5873,
+            "east": -96.6821
+          },
+          "dropYards": [
+            {
+              "south": 32.587,
+              "west": -96.6821,
+              "north": 32.588,
+              "east": -96.6785
+            },
+            {
+              "south": 32.584,
+              "west": -96.6821,
+              "north": 32.585,
+              "east": -96.6785
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.587,
+              "west": -96.6824,
+              "north": 32.5878,
+              "east": -96.6785
+            },
+            {
+              "south": 32.5842,
+              "west": -96.6823,
+              "north": 32.5849,
+              "east": -96.6785
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 60,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Address: 500 S Millers Ferry Road, Wilmer, TX 75172\n- Locked center: 32.58580, -96.68070 (center of the warehouse)\n- Roster coordinate (32.586422, -96.683656, RANGE_INTERPOLATED) landed ~250m\n  WNW in the employee-parking / road frontage; corrected onto the building via\n  satellite + web search.\n- 500 S Millers Ferry Rd is the Whirlpool Regional Distribution Center — a\n  ~1,020,000 SF building on ~57 acres (Kimley-Horn / WilmerEDC). The Shippers\n  Group / Kenco operates the Whirlpool finished-goods warehouse here\n  (~822,000 SF dedicated space cited for the Kenco-Wilmer operation).",
+        "mapsUrl": "https://www.google.com/maps/@32.58580,-96.68070,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "500 S Millers Ferry Rd is the Whirlpool Regional Distribution Center - a ~1,020,000 SF building on ~57 acres. The Shippers Group / Kenco operates the Whirlpool finished-goods warehouse here (~822,000 SF dedicated space cited for the Kenco-Wilmer operation).",
+          "truckGate": "The dock yard is enclosed by a continuous chain-link perimeter fence. 2026-02 Street View shows a wide gated opening (sliding chain-link gate) at the north-end truck entrance off S Millers Ferry Road; the dock yards on the N and S faces are inside the fence.",
+          "guardShack": "No dedicated 1-3-car guard booth is visible at the truck gate in available imagery. The white cylindrical structure at the SW corner is a water tank, not a gatehouse. Classified false; flagged uncertain.",
+          "remoteGs": "True - controlled truck gate but no identifiable guard booth (kiosk / app / call-box check-in likely).",
+          "dockDoors": "Very large 1M+ SF building with long dock banks on both the north and south faces, trailers backed in; well into the 50+ band (estimated ~110 doors).",
+          "dropArea": "Marked trailer-parking drop stalls on both the north and south truck courts hold 50+ unhitched trailers.",
+          "shipRcvSeparate": "Two physically separate dock clusters on opposite (north and south) building faces, consistent with split shipping vs receiving flows.",
+          "multipleFacilities": "Single very large warehouse on its own parcel; the other warehouses along S Millers Ferry Road are separate properties - multipleFacilities false.",
+          "railServed": "No rail spur enters this property; a rail corridor runs through the broader Wilmer logistics district but does not serve this building.",
+          "urbanRural": "Wilmer is a small town SE of Dallas off I-45; the site sits in an edge-of-town logistics district bordered by farmland - classified Rural.",
+          "siteAreaAcres": "Published figure is ~57 acres; the perimeter box yields ~60 - consistent within estimate tolerance."
+        }
+      },
+      {
+        "id": "26-kenco-the-shippers-group-orlando-fl",
+        "name": "Kenco / The Shippers Group - Orlando FL",
+        "type": "Distribution Center / 3PL Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "entryExitTogether",
+          "entryExitSeparate",
+          "dropYard",
+          "dockDoors"
+        ],
+        "center": {
+          "lat": 28.43655,
+          "lng": -81.41865
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 28.43505,
+            "west": -81.42035,
+            "north": 28.43815,
+            "east": -81.41685
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 28.4356,
+              "west": -81.4183,
+              "north": 28.4369,
+              "east": -81.41685
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 28.4356,
+              "west": -81.4187,
+              "north": 28.437,
+              "east": -81.41805
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 44,
+          "trailersVisible": 18,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 11.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Distribution Center / 3PL Warehouse\nResolved coordinates: 28.43655, -81.41865\nArchetype: #3 — No Gate / No GS\nConfidence: medium",
+        "mapsUrl": "https://www.google.com/maps/@28.43655,-81.41865,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (28.3756,-81.3619) pointed to a residential subdivision and were wrong. The Shippers Group / Kenco Orlando is a ~58,000 SF dedicated suite (Suite 800) inside Building 600 at 2612 Consulate Drive, Infinity Park, Orlando FL 32819. Confirmed via The Shippers Group locations page and CRE listings (LoopNet APN 33-2329-9463-10-000). Locked center on the Building 600 footprint at 28.43655,-81.41865.",
+          "truckGate": "No barrier arm, sliding gate, or guard booth anywhere along Consulate Drive frontage or at the truck-court driveways. Street View (Jan 2026) shows open landscaped frontage and open truck-court drive aisles - classic open-access Class A speculative industrial park. truckGate=false.",
+          "guardShack": "No staffed booth visible. guardShack=false, remoteGs=false (no gate).",
+          "dockDoors": "Building 600 is a rear-load DC; z20 imagery shows a long bank of dock doors with trailers backed in along the building's truck-court face. Counted ~44 doors on the single building face; banded 25-50. The Shippers Group occupies only one suite, so its share is a subset, but the audited building's total is reported. Low-confidence on exact count.",
+          "dropArea": "Marked trailer-parking stalls in the shared truck court hold ~18 trailers in current imagery; ~10-25 band.",
+          "drivewayLong": "Truck court is a deep shared drive aisle between buildings - easily holds 3+ trucks queued.",
+          "entryExitTogether": "Truck court is open with multiple drive-aisle connections to Consulate Drive; entry/exit pattern not constrained to a single controlled point - left null/false as uncertain.",
+          "multipleFacilities": "Infinity Park is a multi-building park but each building is a separate parcel/address; the audited facility is one building, so multipleFacilities=false for this site.",
+          "urbanRural": "Within Orlando metro dense industrial fabric near John Young Pkwy / Beachline Expwy - Urban."
+        }
+      },
+      {
+        "id": "27-kenco-the-shippers-group-jonesboro-ga",
+        "name": "Kenco / The Shippers Group - Jonesboro GA",
+        "type": "Distribution Center / 3PL Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "railServed",
+          "dockDoors",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 33.5056,
+          "lng": -84.3481
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.5032,
+            "west": -84.3501,
+            "north": 33.5079,
+            "east": -84.3468
+          },
+          "truckGate": {
+            "south": 33.503,
+            "west": -84.3506,
+            "north": 33.5036,
+            "east": -84.3498
+          },
+          "dropYards": [
+            {
+              "south": 33.5042,
+              "west": -84.3487,
+              "north": 33.5064,
+              "east": -84.3474
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.5042,
+              "west": -84.3491,
+              "north": 33.5065,
+              "east": -84.3479
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 32,
+          "trailersVisible": 26,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 24,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Distribution Center / 3PL Warehouse\nResolved coordinates: 33.50560, -84.34810\nArchetype: #3 — No Gate / No GS\nConfidence: medium",
+        "mapsUrl": "https://www.google.com/maps/@33.50560,-84.34810,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (33.5215,-84.3538, APPROXIMATE, moved 834m) pointed to downtown Jonesboro retail strip - wrong. The Shippers Group / Kenco Jonesboro is at 9250 S Main Street, Jonesboro GA 30236 (~499,960 SF ambient warehouse, food-grade per CRE listing 'Jonesboro Commerce Center'). Confirmed via The Shippers Group locations page, Waze/TruckMap listings, and a Street View pano (Aug 2025) showing the blue 'TSG' logo on the building wall. Locked center on the building footprint at 33.50560,-84.34810.",
+          "truckGate": "A chain-link perimeter fence is visible along the property line (Sep 2025 Street View). No barrier arm or sliding/swing gate structure was visible at the driveway connecting the site to S Main Street, and the road frontage is a heavily wooded buffer that obscures the exact entrance in Street View. truckGate marked false (fence present but no controlled checkpoint structure confirmed); flagged uncertain. The truckGate geofence box is the probable driveway-to-road junction at the SW.",
+          "guardShack": "No staffed booth visible at any entrance in available imagery. guardShack=false, remoteGs=false. Flagged uncertain due to wooded entrance buffer.",
+          "dockDoors": "Long dock-door banks visible along the SW and SE faces of the building with ~26 trailers backed in / parked. Counted roughly 32 doors across the truck-court faces; banded 25-50. The CRE listing cites 28 dock doors which corroborates the 25-50 band. Low-confidence exact count.",
+          "shipRcvSeparate": "Dock doors appear on two adjacent building faces (SW and SE) sharing one continuous truck court rather than two physically separate clusters. Treated as a single dock operation; shipRcvSeparate=false but flagged uncertain.",
+          "dropYard": "A large paved truck court runs the length of the building's SW/SE faces holding ~26 parked trailers - a dedicated trailer-storage / drop area. dropYard=true, dropArea 25-50.",
+          "railServed": "A rail line runs immediately along the NE side of the building, buffered by a tree strip; no clearly visible active spur entering the footprint in imagery, but the CRE listing explicitly cites '4 rail doors'. railServed=true on the strength of the listing; flagged uncertain since the spur connection is not confirmable from overhead imagery.",
+          "drivewayLong": "Internal access road and truck court are long and deep - easily holds 3+ trucks queued. postGateStaging=true (open court inside the property before docks).",
+          "urbanRural": "South-metro-Atlanta industrial corridor along S Main St / GA-54 with continuous development - Urban.",
+          "siteArea": "Perimeter box ~24 acres covering the building, truck courts, trailer parking and car parking. Approximate."
+        }
+      },
+      {
+        "id": "28-kenco-the-shippers-group-grand-prairie-tx",
+        "name": "Kenco / The Shippers Group - Grand Prairie TX",
+        "type": "Distribution Center / 3PL Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "shipRcvSeparate",
+          "dockDoorCount",
+          "entryExitTogether",
+          "entryExitSeparate"
+        ],
+        "center": {
+          "lat": 32.7905,
+          "lng": -97.013
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.7887,
+            "west": -97.0151,
+            "north": 32.7928,
+            "east": -97.0104
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 32.789,
+              "west": -97.0123,
+              "north": 32.7923,
+              "east": -97.0106
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.789,
+              "west": -97.0148,
+              "north": 32.7923,
+              "east": -97.0139
+            },
+            {
+              "south": 32.789,
+              "west": -97.0129,
+              "north": 32.7923,
+              "east": -97.0121
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 42,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Distribution Center / 3PL Warehouse\nResolved coordinates: 32.79050, -97.01300\nArchetype: #3 — No Gate / No GS\nConfidence: medium",
+        "mapsUrl": "https://www.google.com/maps/@32.79050,-97.01300,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (32.781145,-97.017588, APPROXIMATE) and the cited 3845 Grand Lakes Way address were both off-target: 3845 Grand Lakes Way is the Inmar Rx Solutions building. Dallas County tax records (city-data) list 'WAREHOUSE SHIPPERS' (Shippers Warehouse / TSG) as a tenant at 3953 Grand Lakes Way - the correct facility. Confirmed via TruckMap/Waze listings ('Shippers Warehouse, 3953 Grand Lakes Way') and a Street View pano showing a 'TENNANT' tenant sign on the building (Tennant is a co-tenant at 3953). 3953 Grand Lakes Way is a ~1,060,075 SF Duke Realty/Prologis distribution building (Grand Lakes Industrial Park) in which TSG occupies a ~281,206 SF dedicated suite. Locked center on the building footprint at 32.79050,-97.01300.",
+          "truckGate": "No barrier arm, sliding/swing gate, or guard booth visible at the driveway connections off Grand Lakes Way or at the truck-court drive aisles. Street View (Dec 2024) shows open landscaped frontage and open drive aisles into the truck courts - typical Class A Duke Realty open-access spec building. truckGate=false.",
+          "guardShack": "No staffed booth. guardShack=false, remoteGs=false (no gate).",
+          "dockDoors": "Massive 1.06M SF building with continuous dock-door banks along BOTH long faces (west and east). Counted ~130 doors total across the two faces; banded 50+. Exact count low-confidence due to scale.",
+          "shipRcvSeparate": "Dock doors run along two opposite (west and east) building faces, each with its own truck court - consistent with separate shipping vs receiving operations in a building this size. shipRcvSeparate=true, flagged uncertain (could also be one tenant using both sides).",
+          "dropArea": "Very large east-side drop yard packed with rows of parked trailers (~90 trailers visible across both courts); 50+ band. dropYard=true.",
+          "drivewayLong": "Truck courts are deep (~185 ft per Duke Realty park spec) - easily holds 3+ trucks queued. postGateStaging=true.",
+          "multipleFacilities": "3953 Grand Lakes Way is a single (very large) multi-tenant building; not a multi-building campus. multipleFacilities=false. TSG occupies one suite within it.",
+          "urbanRural": "Great Southwest / Grand Lakes industrial district between Dallas and Fort Worth on I-30 - dense metro industrial fabric, Urban.",
+          "yardMetrics": "Counts (dockDoorCount ~130, trailersVisible ~90, capacity ~160, siteAreaAcres ~42) are honest estimates for the whole 3953 building; TSG's 281k SF suite is a fraction of this. Reported at building level per audit convention."
+        }
+      },
+      {
+        "id": "29-kenco-devens-dc",
+        "name": "Kenco Devens DC - Devens MA",
+        "type": "Distribution Center / Northeast Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "railServed",
+          "dockDoorCount",
+          "dropArea"
+        ],
+        "center": {
+          "lat": 42.5462,
+          "lng": -71.5945
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.5447,
+            "west": -71.5968,
+            "north": 42.5479,
+            "east": -71.5925
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 42.5452,
+              "west": -71.5944,
+              "north": 42.547,
+              "east": -71.593
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 42.545,
+              "west": -71.5962,
+              "north": 42.5462,
+              "east": -71.5947
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 13.5,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Distribution Center / Northeast Warehouse\nResolved coordinates: 42.54620, -71.59450\nArchetype: #3 — No Gate / No GS\nConfidence: medium",
+        "mapsUrl": "https://www.google.com/maps/@42.54620,-71.59450,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (42.546746,-71.594485, geocode ROOFTOP) landed on a long warehouse building at 50 Independence Drive, Devens MA - confirmed correct. The facility is also branded 'Kenco's USG Boston' (a Kenco distribution operation for USG / United States Gypsum building products), per multiple business listings. Audit locked on the building footprint at 42.54620,-71.59450.",
+          "truckGate": "A chain-link perimeter fence rings the property (visible in Aug 2023 Street View). No barrier arm or sliding/swing gate structure was observed at the driveway off Independence Drive; the Devens commerce-park roads are open public roads and the property entrances appear open. truckGate marked false (fence present, no controlled checkpoint structure confirmed); flagged uncertain.",
+          "guardShack": "No staffed booth visible at any entrance. guardShack=false, remoteGs=false. Flagged uncertain - frontage trees partly obscure the entrance.",
+          "dockDoors": "A continuous bank of dock doors with trailers backed in runs along the building's SW face; counted ~22 doors, banded 10-25. The wide SE-end apron has additional dock/loading positions. Low-confidence exact count.",
+          "dropArea": "Trailers backed in along the SW dock face plus a paved truck apron at the SE end holding parked trailers (~14 visible); 10-25 band. dropYard=true.",
+          "shipRcvSeparate": "Dock activity concentrated on the SW face with a single shared truck court; no clearly separate second dock cluster. shipRcvSeparate=false.",
+          "railServed": "A rail line and rail yard run immediately along the NE/E side of the building; rail cars (boxcars) and what appears to be a spur are present adjacent to the building's SE-end apron. USG building-products distribution is a heavy rail user. railServed=true on this basis; flagged uncertain since a spur directly entering the footprint is not unambiguously confirmable from imagery.",
+          "drivewayLong": "The SW truck court and SE apron are deep and open - can hold 3+ trucks queued. postGateStaging=true.",
+          "urbanRural": "Devens is a small redeveloped former-army-base commerce park in semi-rural north-central Massachusetts, set among woods - Rural per the rubric (small-town / edge-of-town industrial).",
+          "connectivityIssue": "Devens has an established commerce park with surrounding development and good infrastructure; not isolated. connectivityIssue=false.",
+          "siteArea": "Perimeter box ~13.5 acres covering the building, SW dock court, SE apron and car parking. Approximate."
+        }
+      },
+      {
+        "id": "30-kenco-memphis-dc",
+        "name": "Kenco Memphis DC - Memphis TN",
+        "type": "Distribution Center / Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dockDoors",
+          "dropArea",
+          "railServed",
+          "buildingCount",
+          "shipRcvSeparate",
+          "entryExitTogether"
+        ],
+        "center": {
+          "lat": 35.0706,
+          "lng": -89.9529
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.069,
+            "west": -89.9547,
+            "north": 35.0721,
+            "east": -89.9513
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 35.0696,
+              "west": -89.954,
+              "north": 35.0715,
+              "east": -89.9525
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.0696,
+              "west": -89.9542,
+              "north": 35.0715,
+              "east": -89.9528
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 0,
+          "buildingCount": 2,
+          "siteAreaAcres": 16,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Distribution Center / Warehouse\nResolved coordinates: 35.07060, -89.95290\nArchetype: #3 — No Gate / No GS\nConfidence: low — identity mismatch, flagged for human review",
+        "mapsUrl": "https://www.google.com/maps/@35.07060,-89.95290,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "IDENTITY_MISMATCH": "CRITICAL: The address 3346 Democrat Drive, Memphis TN 38118 belongs to 'KenCo Distributors Inc' - an unrelated Nashville-based building-materials wholesaler (drywall, insulation, steel framing, flooring; ~7:30am-4:30pm operation). This is NOT 'Kenco Logistics Services' / Kenco Group, the 3PL being audited in this roster. Kenco Group's official warehousing map (kencogroup.com/warehousing-map) lists NO Memphis facility - only Chattanooga TN (already covered as roster idx 16-18). The roster's idx 30 was derived from a Manta/Yellow Pages 'Kenco Logistic Service Memphis' listing that conflated the two companies by name similarity. This roster entry is most likely a name-collision error; Kenco Logistics Services probably has no Memphis DC. The classification below describes the physical building actually at the locked coordinates (the KenCo Distributors warehouse) so the audit is still complete, but it should NOT be treated as a Kenco Logistics Services site. confidence=low.",
+          "location": "Roster coords (35.070065,-89.952907, geocode ROOFTOP) land on a long multi-tenant warehouse at 3346 Democrat Drive, Memphis TN. The building is real and is a distribution warehouse, but its occupant is KenCo Distributors (building materials), not the 3PL. Audited the physical building at 35.07060,-89.95290.",
+          "truckGate": "No barrier arm, sliding/swing gate, or guard booth visible at the driveways off Democrat Rd or at the truck-court drive aisles. Street View (Nov 2025) shows open driveways and an open paved dock court. truckGate=false.",
+          "guardShack": "No staffed booth. guardShack=false, remoteGs=false (no gate).",
+          "dockDoors": "Continuous dock-door bank with dock canopies/levelers along the SW face of the long multi-tenant warehouse; ~12 trucks/trailers backed in. Counted ~40 doors across the building face; banded 25-50. Multi-tenant building - KenCo Distributors occupies only a portion. Low-confidence.",
+          "dropArea": "Open paved truck court along the SW face holds ~12 trailers; 10-25 band. dropYard=true.",
+          "buildingCount": "The locked site comprises the long primary warehouse plus a separate large building immediately to the SW that shares the truck court; counted 2. multipleFacilities left false since these are separate parcels/tenancies rather than one campus.",
+          "railServed": "A rail line runs immediately along the NE side of the long warehouse; no clearly visible active spur into the footprint, but rail is adjacent. railServed=true tentatively; flagged uncertain.",
+          "drivewayLong": "Truck court along the SW dock face is long and open - holds 3+ trucks. postGateStaging=true.",
+          "backupSensitive": "The site sits at a busy multi-lane intersection (Democrat Rd), but the dock court is set well back with ample internal stacking room, so backupSensitive=false.",
+          "urbanRural": "Dense Memphis industrial district near Lamar Ave / Democrat Rd - Urban."
+        }
+      }
+    ]
+  }
+}

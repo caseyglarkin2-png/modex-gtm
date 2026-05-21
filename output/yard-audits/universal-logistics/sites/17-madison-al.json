@@ -1,0 +1,69 @@
+{
+  "name": "Universal Logistics - Polaris Madison Plant Contract Logistics - Madison AL",
+  "type": "Contract Logistics / inbound logistics inside manufacturing plant",
+  "coords": { "lat": 34.65205, "lng": -86.85300 },
+  "geofences": {
+    "perimeter": { "south": 34.64880, "west": -86.85800, "north": 34.65650, "east": -86.84800 },
+    "truckGate": { "south": 34.65400, "west": -86.85320, "north": 34.65460, "east": -86.85240 },
+    "dropYards": [
+      { "south": 34.64950, "west": -86.85700, "north": 34.65420, "east": -86.85500 },
+      { "south": 34.65450, "west": -86.85350, "north": 34.65620, "east": -86.85100 }
+    ],
+    "dockAprons": [
+      { "south": 34.64980, "west": -86.85450, "north": 34.65300, "east": -86.85360 }
+    ],
+    "staging": { "south": 34.65380, "west": -86.85450, "north": 34.65470, "east": -86.85200 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 400,
+    "trailerParkingCapacity": 600,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 194.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.65205,-86.85300,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "locate": "Resolved to 7049 Greenbrier Pkwy NW, Madison AL 35756 — the Polaris Industries off-road-vehicle manufacturing plant in the Limestone County / Huntsville-area Greenbrier corridor. Universal Logistics runs inbound contract logistics (sequencing/value-added warehousing) INSIDE the Polaris plant; the audited yard is the Polaris plant's captive freight yard. Confirmed NOT the Mazda-Toyota plant at 9000 Greenbrier Pkwy (a separate, larger facility ~1.5 mi NE). Google geocode returned a ROOFTOP match at 34.6521957,-86.8525792.",
+    "truckGate": "The main plant entrance on the north access loop has a clear controlled checkpoint: a guard house structure in the road median with multiple barrier-arm-controlled lanes (visible as striped barrier marks across the lanes), with vehicles queued. truckGate = true.",
+    "guardShack": "A guard house / gatehouse sits in the median of the entrance checkpoint with controlled lanes on each side — a staffed booth. guardShack = true; remoteGs = false.",
+    "entryLanes": "The checkpoint shows roughly 2 inbound and 2 outbound controlled lanes split around the central guard house — wide multi-lane gate.",
+    "fastLaneOpportunity": "The multi-lane checkpoint and very wide gate apron leave clear physical room for an express/bypass lane.",
+    "multipleFacilities": "A manufacturing campus: a large main plant building plus a separate large distribution/warehouse building on the north end and ancillary structures — multiple large building clusters on one property.",
+    "drop": "Extensive trailer drop yards — the west side of the plant holds many hundreds of trailers in long rows (inbound parts/components staging for the contract-logistics operation); a second staging/drop area sits at the north warehouse. dropArea 50+, dropYard true.",
+    "dockDoorCount": "The plant has extensive dock banks (a long dock face on the building's west side plus the north warehouse dock bank) — 50+ band; ~70 estimated. Flagged uncertain given plant scale.",
+    "shipRcvSeparate": "Inbound parts docks/yards on the west face are physically separate from finished-vehicle outbound staging — separate clusters.",
+    "scale": "No distinct truck scale observed in the truck path; scale = false.",
+    "railServed": "No rail spur into the plant property observed — railServed = false.",
+    "urbanRural": "The plant sits in open farmland on the edge of the Greenbrier/Huntsville logistics corridor, surrounded by fields — Rural.",
+    "geofences": "Perimeter captures the developed plant footprint — buildings, west drop yards, north warehouse, and employee parking: ~857 m N-S x ~916 m E-W ≈ 194 acres (the overall parcel is larger; the box is the operational/developed area). truckGate box is the north checkpoint."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,51 @@
+{
+  "name": "Anheuser-Busch Brewery - Houston TX",
+  "type": "Brewery",
+  "coords": { "lat": 29.77150, "lng": -95.26900 },
+  "geofences": {
+    "perimeter": { "south": 29.7695, "west": -95.2745, "north": 29.7760, "east": -95.2640 },
+    "truckGate": { "south": 29.76960, "west": -95.26780, "north": 29.77020, "east": -95.26680 },
+    "dropYards": [
+      { "south": 29.76980, "west": -95.26750, "north": 29.77380, "east": -95.26450 }
+    ],
+    "dockAprons": [
+      { "south": 29.77040, "west": -95.27200, "north": 29.77110, "east": -95.26880 }
+    ],
+    "staging": { "south": 29.77020, "west": -95.27000, "north": 29.77130, "east": -95.26800 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35,
+    "trailersVisible": 230,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 2,
+    "buildingCount": 8,
+    "siteAreaAcres": 181.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.77150,-95.26900,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "scale", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "site": "Houston A-B brewery (opened 1966) at 775 Gellhorn Dr. Large brewery building with adjacent very large trailer drop yard to the east, bounded by I-610 on the east and Gellhorn Dr on the south.",
+    "truckGate": "Perimeter fully fenced (wrought-iron and chain-link) confirmed in multiple Street Views. Brewery building has sliding gates in the fence line at its west entrance. Controlled access to the secured site - truckGate TRUE.",
+    "guardShack": "No guard booth observed at the trailer-yard entrance off Gellhorn Dr (wide open driveway with only a stop sign) nor a distinct booth at the brewery building gates in Street View. Classified guardShack FALSE, remoteGs TRUE - flagged uncertain since a booth may be obscured.",
+    "dropYard": "Very large organized trailer drop yard east of the brewery, ~200+ trailers in rows; capacity ~320.",
+    "dockDoors": "Long dock bank along the south face of the brewery building with trailers backed in; estimated 35 doors (band 25-50).",
+    "railServed": "Rail spurs run into the property between the brewery and the trailer yard.",
+    "fastLaneOpportunity": "Wide trailer-yard entrance apron with ample paved width to add lanes.",
+    "scale": "No truck scale resolved in imagery.",
+    "siteAreaAcres": "Perimeter box ~724 x 1015 m covers brewery core plus trailer yard ~181 acres."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,66 @@
+{
+  "name": "Pactiv Evergreen - Bridgeview IL",
+  "type": "Manufacturing Plant (Foodservice; ISCC PLUS certified)",
+  "coords": { "lat": 41.746000, "lng": -87.810400 },
+  "geofences": {
+    "perimeter": { "south": 41.744500, "west": -87.811800, "north": 41.747300, "east": -87.809400 },
+    "truckGate": { "south": 41.744900, "west": -87.811500, "north": 41.745300, "east": -87.811000 },
+    "dropYards": [
+      { "south": 41.744600, "west": -87.810400, "north": 41.745400, "east": -87.809500 }
+    ],
+    "dockAprons": [
+      { "south": 41.745200, "west": -87.811500, "north": 41.746400, "east": -87.810900 }
+    ],
+    "staging": { "south": 41.744600, "west": -87.810900, "north": 41.745300, "east": -87.809500 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 28,
+    "trailersVisible": 14,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 16.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.746000,-87.810400,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "railServed"],
+  "fieldNotes": {
+    "truckGate": "Property fully enclosed in chain-link fencing with privacy-screened sliding gates across the truck-yard drives — confirmed in 2018 and 2025 Street View (sv-gate, sv-79th-e). At least two gated vehicle entrances along the south/southwest perimeter.",
+    "guardShack": "No guard booth structure at any gate in any Street View heading probed.",
+    "remoteGs": "Gates present, no guard shack -> remote / manual check-in.",
+    "entryExitSeparate": "Two gated entrances on the perimeter (SW and a second along the south) — modeled as separate in/out gates.",
+    "postGateStaging": "Open paved/gravel yard inside the fence on the south and southeast functions as a holding/staging area before the docks.",
+    "drivewayLong": "The west dock apron and the SE yard give ample depth for a 3+ truck queue inside the fence.",
+    "fastLaneOpportunity": "Large open paved/gravel yard area to the southeast leaves significant unused width to add a bypass / express lane.",
+    "dockDoors": "Extensive canopied dock bays along the building's west face plus additional doors on the south face — banded 25-50; count is an estimate from overhead imagery of the dock canopies.",
+    "railServed": "A rail line runs immediately along the building's east edge, but no dedicated spur is clearly visible breaking into the Pactiv property — classified false, flagged uncertain.",
+    "scale": "No truck scale visible.",
+    "trailerParkingCapacity": "West dock apron plus the SE open yard could hold ~30 trailers; estimate."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,51 @@
+{
+  "name": "GP Savannah River Mill - Rincon GA",
+  "type": "Tissue/Towel Mill",
+  "coords": { "lat": 32.3315, "lng": -81.2025 },
+  "geofences": {
+    "perimeter": { "south": 32.326559, "west": -81.209410, "north": 32.336441, "east": -81.195590 },
+    "truckGate": { "south": 32.327100, "west": -81.205800, "north": 32.328200, "east": -81.204200 },
+    "dropYards": [
+      { "south": 32.327000, "west": -81.204500, "north": 32.331500, "east": -81.200000 },
+      { "south": 32.327200, "west": -81.201500, "north": 32.330000, "east": -81.199000 }
+    ],
+    "dockAprons": [
+      { "south": 32.331000, "west": -81.205500, "north": 32.333500, "east": -81.202500 }
+    ],
+    "staging": { "south": 32.328000, "west": -81.205000, "north": 32.330000, "east": -81.203000 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 280,
+    "trailerParkingCapacity": 350,
+    "truckGateCount": 1,
+    "buildingCount": 12,
+    "siteAreaAcres": 353.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.3315,-81.2025,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "exitLanes", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Street View on the private entrance road shows a multi-lane checkpoint canopy ~200m inside the property line with trucks staged; chain-link perimeter fencing runs along the access road; GP entrance sign at the public-road junction.",
+    "guardShack": "Checkpoint canopy spans the entry lanes with an adjacent booth structure visible in Street View; consistent with a staffed gatehouse at a 1000-employee mill.",
+    "dropArea": "Extensive multi-row diagonal trailer drop yard immediately inside the gate; hundreds of trailers counted across z18-z19 crops, clearly 50+.",
+    "dockDoors": "Banks of dock doors along the central process/converting buildings; estimate 45 in the 25-50 band, partially obscured by buildings and trailers.",
+    "railServed": "Active rail spur with rail cars runs into the SE side of the property; mill historically built by Fort Howard with rail service.",
+    "multipleFacilities": "Large multi-building campus: pulp/process buildings, converting, warehouse, power plant, plus a separate large DC building to the SW along Fort Howard Rd.",
+    "fastLaneOpportunity": "Wide gate apron with multiple lanes and ample paved width inside the gate to add an express/bypass lane.",
+    "scale": "No truck scale clearly identifiable in available imagery near the gate; flagged uncertain."
+  },
+  "method": "deep-audit"
+}

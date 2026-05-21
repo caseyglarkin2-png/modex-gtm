@@ -1,0 +1,61 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+Coca-Cola Atlanta Syrup Plant - Atlanta GA,Concentrate / Syrup Plant,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@33.65735,-84.39335,400m/data=!3m1!1e3"
+Coca-Cola Atlanta Beverage Base Plant - Atlanta GA,Concentrate / Beverage Base Plant,#1,Gate + GS (not BU sens.),,,,,,,,,,,YES,YES,,,,YES,,,YES,,2,1,,,YES,,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@33.73430,-84.56900,400m/data=!3m1!1e3"
+"Coca-Cola Consolidated - Charlotte (Snyder) Production Center, NC",Bottling / Manufacturing Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@35.28450,-80.88300,400m/data=!3m1!1e3"
+"Coca-Cola Consolidated - Nashville Production Center, TN",Bottling / Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@36.12400,-86.76930,400m/data=!3m1!1e3"
+"Coca-Cola Consolidated - Mobile Production Center, AL",Bottling / Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,YES,,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@30.58700,-88.16800,400m/data=!3m1!1e3"
+"Coca-Cola Consolidated - Roanoke Production Center, VA",Bottling / Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@37.27550,-79.94830,400m/data=!3m1!1e3"
+"Coca-Cola Consolidated - Bishopville Production Center, SC",Bottling / Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,YES,,,YES,,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@34.2231,-80.2337,400m/data=!3m1!1e3"
+"Coca-Cola Consolidated - Indianapolis Production Facility, IN",Bottling / Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@39.8039,-86.2455,400m/data=!3m1!1e3"
+"Coca-Cola Consolidated - Whitestown Distribution & Warehouse, IN",Distribution Center / Automated Warehouse,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,,,YES,,,YES,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@39.952,-86.372,400m/data=!3m1!1e3"
+"Coca-Cola Consolidated - Columbus Distribution Center, OH",Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@39.8425,-82.9625,400m/data=!3m1!1e3"
+"Coca-Cola Consolidated - Cincinnati Sales & Distribution Center, OH",Sales / Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,,YES,,,YES,,,,,Urban,,,,YES,"https://www.google.com/maps/@39.2947,-84.5363,400m/data=!3m1!1e3"
+"Coca-Cola Consolidated - Twinsburg Sales & Distribution Center, OH",Sales / Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,1,YES,,,YES,,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@41.2963,-81.4554,400m/data=!3m1!1e3"
+"Coca-Cola Consolidated - Sandston Sales & Distribution Center, VA",Sales / Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@37.5325,-77.3372,400m/data=!3m1!1e3"
+"Coca-Cola Consolidated - Erlanger Distribution & Sales Center, KY",Distribution / Sales Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@39.0368,-84.6098,400m/data=!3m1!1e3"
+"Coca-Cola Consolidated - Louisville Distribution Center, KY",Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@38.1378,-85.8906,400m/data=!3m1!1e3"
+"Coca-Cola UNITED - Birmingham Production Plant, AL",Bottling / Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,1,1,,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@33.561277,-86.768222,400m/data=!3m1!1e3"
+"Coca-Cola UNITED - Montgomery Production Plant, AL",Bottling / Manufacturing Plant,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,YES,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@32.293,-86.3428,400m/data=!3m1!1e3"
+"Coca-Cola UNITED - College Park Production Plant, GA",Bottling / Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@33.6268,-84.468,400m/data=!3m1!1e3"
+"Coca-Cola UNITED - Marietta Production Plant, GA",Bottling / Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@33.97480,-84.54320,400m/data=!3m1!1e3"
+"Coca-Cola UNITED - Baton Rouge Production Plant, LA",Bottling / Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@30.53650,-91.13500,400m/data=!3m1!1e3"
+"Coca-Cola UNITED - New Orleans Production Plant, LA",Bottling / Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,,,,,YES,,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@29.94680,-90.19150,400m/data=!3m1!1e3"
+"Coca-Cola UNITED - Chattanooga Production Plant, TN",Bottling / Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,,Urban,,YES,,YES,"https://www.google.com/maps/@35.09230,-85.25300,400m/data=!3m1!1e3"
+"Reyes Coca-Cola Bottling - Niles Production Plant, IL",Bottling / Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,,,,YES,,,,YES,,,Urban,,YES,,YES,"https://www.google.com/maps/@42.01620,-87.79500,400m/data=!3m1!1e3"
+"Reyes Coca-Cola Bottling - Downey Production Plant, CA",Bottling / Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,1,1,,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@33.93400,-118.12880,400m/data=!3m1!1e3"
+"Reyes Coca-Cola Bottling - San Leandro Production Plant, CA",Bottling / Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,YES,,,YES,YES,YES,,1,1,,,,YES,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@37.69910,-122.16835,400m/data=!3m1!1e3"
+"Reyes Coca-Cola Bottling - Rancho Cucamonga Bottling & Distribution Center, CA",Bottling / Manufacturing + Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@34.08240,-117.55300,400m/data=!3m1!1e3"
+"Liberty Coca-Cola Beverages - Philadelphia Production Plant, PA",Bottling / Manufacturing Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,YES,,YES,1,1,,,,,YES,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@40.00700,-75.11150,400m/data=!3m1!1e3"
+"Liberty Coca-Cola Beverages - Maspeth Production Plant, NY",Bottling / Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@40.72120,-73.91450,400m/data=!3m1!1e3"
+"Swire Coca-Cola USA - Salt Lake City Production Plant, UT",Bottling / Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@40.72870,-111.97120,400m/data=!3m1!1e3"
+"Swire Coca-Cola USA - Denver Production Plant, CO",Bottling / Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,1,1,,,,,YES,,,YES,,,Urban,,YES,,YES,"https://www.google.com/maps/@39.77010,-104.96180,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,1,3%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,13,43%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,2,7%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,1,3%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,12,40%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,1,3%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,9,30%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,2,7%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,5,17%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,25,83%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

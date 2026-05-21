@@ -1,0 +1,53 @@
+{
+  "name": "Papillion Foods - Papillion NE",
+  "type": "Production Facility",
+  "coords": { "lat": 41.15200, "lng": -96.12400 },
+  "geofences": {
+    "perimeter": { "south": 41.149485, "west": -96.127698, "north": 41.154515, "east": -96.120302 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 41.150471, "west": -96.123374, "north": 41.151729, "east": -96.121226 }
+    ],
+    "dockAprons": [
+      { "south": 41.150031, "west": -96.126051, "north": 41.150569, "east": -96.122949 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40,
+    "trailersVisible": 25,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 85.8,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.15200,-96.12400,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "trailerParkingCapacity", "dropArea"],
+  "fieldNotes": {
+    "location": "Roster geocode (11840 Standing Stone Dr / 41.1544,-96.0430) landed in downtown Papillion — wrong. Hormel's own page and CRE reporting confirm Papillion Foods is the former Shopko distribution center at 10808 S 132nd St, Papillion NE 68138 (built 2000, +2004 addition, 535,000 sq ft, 80-acre site, converted by Hormel and opened 2020 for Columbus dry sausage/salami). Resolved to the large converted DC at ~41.1518,-96.1245 in the Sarpy West industrial submarket: footprint and ~86-acre parcel match the 535k sq ft / 80-acre figures, the roof shows a two-phase (2000/2004) addition seam, large ammonia-refrigeration condenser arrays and rooftop solar, a south-facing dock bank with trailers, employee parking, and a formal flagpole-circle entrance. Confidence medium because the corridor has several large warehouses and recent on-site Street View was unavailable to read current signage.",
+    "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point seen in satellite imagery; truck access road runs openly from the public road into the dock yard. A small utility building sits in a landscaped grass island near the access road but is NOT a guard booth (not astride the lane). Flagged uncertain — only older (2007-2010) interior Street View was available.",
+    "guardShack": "No staffed guard booth straddling the truck lane visible. Uncertain due to imagery age.",
+    "postGateStaging": "Large paved truck yard inside the property between the access road and the dock face provides ample queue/holding room.",
+    "drivewayLong": "Deep paved approach from the public road through the yard to the dock face — easily holds 3+ trucks.",
+    "fastLaneOpportunity": "Very large open paved truck yard with unused width — abundant room for an express/bypass lane.",
+    "dockDoors": "South building face carries a long dock bank; estimated ~40 doors (25-50 band) from z17-z19 imagery.",
+    "dropArea": "Trailers parked across the south/east paved yard; estimated ~25 visible, capacity ~80.",
+    "buildingCount": "Main plant building plus a smaller attached/adjacent office structure on the east side.",
+    "urbanRural": "Within the Omaha metro's Sarpy West industrial submarket, surrounded by other large warehouses and suburban development — Urban.",
+    "railServed": "No rail spur into the property visible."
+  },
+  "method": "deep-audit"
+}

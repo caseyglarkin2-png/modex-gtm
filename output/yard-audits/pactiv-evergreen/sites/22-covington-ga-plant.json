@@ -1,0 +1,67 @@
+{
+  "name": "Pactiv Evergreen - Covington GA Plant",
+  "type": "Manufacturing Plant (Foodservice)",
+  "coords": { "lat": 33.61225, "lng": -83.84620 },
+  "geofences": {
+    "perimeter": { "south": 33.60960, "west": -83.84830, "north": 33.61480, "east": -83.84300 },
+    "truckGate": { "south": 33.61430, "west": -83.84580, "north": 33.61475, "east": -83.84520 },
+    "dropYards": [
+      { "south": 33.61050, "west": -83.84480, "north": 33.61320, "east": -83.84360 }
+    ],
+    "dockAprons": [
+      { "south": 33.61080, "west": -83.84560, "north": 33.61340, "east": -83.84440 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 75,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 52.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.61225,-83.84620,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "shipRcvSeparate", "multiStep"],
+  "fieldNotes": {
+    "truckGate": "Very large foam-manufacturing complex enclosed by a continuous chain-link perimeter fence (privacy slats visible on the SW and NW sides in 2026-02 Street View). A facility of this scale and 24/7 operation with full perimeter fencing has a controlled truck entrance.",
+    "guardShack": "Could not be visually confirmed - the internal plant entry road off the Alcovy Rd signalized intersection has no Street View coverage and z20/z21 satellite over the entry/office is overexposed. No booth positively identified. Flagged uncertain.",
+    "remoteGs": "Set true on the basis that a gate exists but no guard booth was visible; this is uncertain because the gatehouse could not be inspected.",
+    "dockDoors": "Sprawling multi-section plant; dock doors and backed-in trailers are distributed along the SE/east faces. Estimated ~40-50 doors -> 25-50 band. Count is a rough estimate over a very large footprint.",
+    "dropArea": "Large trailer drop yard on the SE between the plant and the eastern neighbor; dozens of trailers parked in rows plus more along the south edge -> 50+ band.",
+    "dropYard": "Extensive dedicated trailer-storage areas on the SE/south aprons -> true.",
+    "shipRcvSeparate": "Plant is large enough that shipping and receiving almost certainly run from separate dock clusters on different faces; inferred from scale, flagged uncertain.",
+    "urbanRural": "Covington GA - the Alcovy Rd / I-20 industrial corridor is small-town/edge-of-town industrial bordered by woods. Per rubric, small-town industrial -> Rural.",
+    "railServed": "No rail spur enters the property; foam thermoforming plant served entirely by truck.",
+    "multipleFacilities": "Reads as one large interconnected manufacturing complex (single building cluster) -> false. The separate large building to the east is a different facility.",
+    "fastLaneOpportunity": "Generous paved width at the entry and large internal aprons leave physical room for a bypass/express lane.",
+    "siteAreaAcres": "~52 acres, derived from the perimeter box; large flagship foam plant."
+  },
+  "method": "deep-audit"
+}

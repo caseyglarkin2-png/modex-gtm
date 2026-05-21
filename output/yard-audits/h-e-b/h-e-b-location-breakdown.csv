@@ -1,0 +1,47 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+H-E-B San Antonio RSC (Fratt Road) - San Antonio TX,Retail Support Center / Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@29.486200,-98.389900,400m/data=!3m1!1e3"
+H-E-B East Side Super Regional Grocery Warehouse - San Antonio TX,Super Regional Grocery Distribution Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@29.406300,-98.367000,400m/data=!3m1!1e3"
+H-E-B Houston RSC (Windfern Road) - Houston TX,Retail Support Center / Distribution Center,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@29.837000,-95.539000,400m/data=!3m1!1e3"
+H-E-B Temple RSC - Temple TX,Retail Support Center / Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,YES,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@31.152500,-97.361700,400m/data=!3m1!1e3"
+H-E-B Weslaco RSC - Weslaco TX,Retail Support Center / Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@26.162800,-98.002200,400m/data=!3m1!1e3"
+H-E-B San Marcos RSC - San Marcos TX,Retail Support Center / Distribution Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@29.857237,-97.963000,400m/data=!3m1!1e3"
+H-E-B Manufacturing - San Antonio Snack Plant - San Antonio TX,Manufacturing Plant (Snacks / Chips),#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,YES,,,,,,YES,,,Urban,,YES,,YES,"https://www.google.com/maps/@29.485000,-98.389300,400m/data=!3m1!1e3"
+H-E-B Manufacturing - Houston Snack Plant (Genard Road) - Houston TX,Manufacturing Plant (Snacks / Tortilla Chips),#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,,YES,,,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@29.843800,-95.541300,400m/data=!3m1!1e3"
+H-E-B Manufacturing - Houston Milk & Bread Plant - Houston TX,Manufacturing Plant (Dairy / Bakery),#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,,,YES,,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@29.843200,-95.538400,400m/data=!3m1!1e3"
+H-E-B eCommerce Fulfillment Center - Houston (Holmes Road) - Houston TX,E-commerce Fulfillment Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,YES,,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@29.682200,-95.354800,400m/data=!3m1!1e3"
+H-E-B eCommerce Fulfillment Center - Katy - Katy TX,E-commerce Fulfillment Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,YES,,YES,,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@29.803050,-95.760550,400m/data=!3m1!1e3"
+H-E-B eCommerce Fulfillment Center - Plano - Plano TX,E-commerce Fulfillment Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,YES,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@33.054800,-96.796800,400m/data=!3m1!1e3"
+H-E-B eCommerce Fulfillment Center - Cibolo - Cibolo TX,E-commerce Fulfillment Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,YES,,,,,,,,,Rural,,,,,"https://www.google.com/maps/@29.568700,-98.230100,400m/data=!3m1!1e3"
+H-E-B eCommerce Fulfillment Center - San Antonio - San Antonio TX,E-commerce Fulfillment Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@29.42519,-98.494592,400m/data=!3m1!1e3"
+H-E-B Frisco Electronic Fulfillment Center (in development) - Frisco TX,"E-commerce Fulfillment Center (planned, construction 2026-2027)",#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@33.221200,-96.878100,400m/data=!3m1!1e3"
+H-E-B Hempstead Distribution Campus (in development) - Hempstead TX,"Distribution Campus (multi-phase, Phase 1 under construction)",#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Rural,,YES,,,"https://www.google.com/maps/@30.105200,-96.064000,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,9,56%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,1,6%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,4,25%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,2,13%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,16,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,7,44%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,4,25%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,3,19%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,13,81%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,16,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,16,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

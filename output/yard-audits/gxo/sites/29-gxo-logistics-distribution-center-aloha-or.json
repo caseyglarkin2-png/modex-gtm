@@ -1,0 +1,50 @@
+{
+  "name": "GXO Logistics Distribution Center - Aloha OR",
+  "type": "Distribution Center",
+  "coords": { "lat": 45.49332, "lng": -122.8834 },
+  "geofences": {
+    "perimeter": { "south": 45.49050, "west": -122.88950, "north": 45.49600, "east": -122.88200 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 1,
+    "buildingCount": 5,
+    "siteAreaAcres": 88.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@45.49332,-122.8834,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "multipleFacilities", "scale",
+    "dropYard", "multiStep", "dockDoorCount", "buildingCount", "siteAreaAcres"
+  ],
+  "fieldNotes": {
+    "facilityMismatch": "Roster address '3585 SW 198th Ave, Aloha OR 97007' resolves (correctly) to the Intel Aloha Campus - a semiconductor fabrication campus, NOT a standalone GXO distribution center. Multiple Waze/web sources confirm 3585 SW 198th Ave is Intel's Aloha Campus. GXO Logistics provides on-site contract logistics services for Intel at this campus, but there is no separable, auditable GXO distribution-center yard (dock bank, trailer drop yard, distribution truck gate) - it is an Intel fab campus.",
+    "satelliteFindings": "z16-z18 imagery shows large semiconductor fab buildings with extensive rooftop cleanroom mechanical equipment, employee parking, construction-laydown yards, and a stormwater pond, surrounded by Aloha residential neighborhoods. No conventional warehouse dock bank or trailer drop yard is visible.",
+    "truckGate": "Intel campuses are security-controlled; campus entrances have guard/security structures (visible at the east campus entrance). Recorded truckGate/guardShack true at low confidence as campus security gates - this reflects Intel campus access control, not a GXO distribution-center truck gate.",
+    "dockDoors": "No distribution-style dock bank visible; fab material handling is internal/controlled - banded NONE.",
+    "multipleFacilities": "Multiple large fab buildings form a campus.",
+    "recommendation": "This roster entry should be flagged for human review - it is an Intel fab campus serviced by GXO, not a GXO distribution center with an auditable truck yard."
+  },
+  "method": "deep-audit"
+}

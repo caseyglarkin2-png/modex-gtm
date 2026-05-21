@@ -1,0 +1,48 @@
+{
+  "name": "Hormel Knoxville Plant - Knoxville IA",
+  "type": "Production Facility",
+  "coords": { "lat": 41.31730, "lng": -93.06100 },
+  "geofences": {
+    "perimeter": { "south": 41.31550, "west": -93.06350, "north": 41.31920, "east": -93.05850 },
+    "truckGate": { "south": 41.31680, "west": -93.06270, "north": 41.31720, "east": -93.06200 },
+    "dropYards": [
+      { "south": 41.31570, "west": -93.06250, "north": 41.31640, "east": -93.06000 }
+    ],
+    "dockAprons": [
+      { "south": 41.31700, "west": -93.06150, "north": 41.31760, "east": -93.06010 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14, "trailersVisible": 28, "trailerParkingCapacity": 35,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 42.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.3173,-93.061,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount"],
+  "fieldNotes": {
+    "location": "Roster address '703 E Robinson St' and coordinates were wrong (RANGE_INTERPOLATED, landed in residential Knoxville). Web research found the real address: 209 N Godfrey Ln, Knoxville IA 50138, on the east edge of town. Locked center 41.3173,-93.0610 — a single dry-sausage plant (pepperoni/salami, ~150 employees, ~1M lbs/week). The adjacent heavy industrial complex with tanks/cooling towers immediately west of Godfrey Ln is a separate (non-Hormel) facility.",
+    "truckGate": "The plant property has a continuous chain-link perimeter fence (confirmed in multiple Street Views, 2026-04). A single gate opening in the fence controls the entrance driveway off Godfrey Lane. No barrier arm clearly resolved, but the fenced perimeter with one defined gated driveway is a controlled entrance. Classified true; flagged uncertain.",
+    "guardShack": "No staffed guard booth visible at the entrance.",
+    "remoteGs": "Gate present but no guard booth — implies kiosk/badge/app check-in. Flagged uncertain.",
+    "drivewayLong": "Long open driveway from Godfrey Lane into the parking/dock area holds a 3+ truck queue.",
+    "dockDoors": "10-25 band — dock face along the south building wall with ~8-12 trailers backed in (Street View ent2). Overhead estimate.",
+    "dropArea": "10-25 band — a dedicated trailer drop yard with ~15-20 angled trailer stalls sits south of the plant between the property and the rail line.",
+    "dropYard": "Separate trailer-storage lot south of the plant, distinct from the active dock apron.",
+    "railServed": "A rail line runs parallel to the road along the south edge but no spur enters the plant property; classified false.",
+    "urbanRural": "Plant sits on the east edge of Knoxville (pop ~7,300) surrounded by farmland and scattered industrial — Rural."
+  },
+  "method": "deep-audit"
+}

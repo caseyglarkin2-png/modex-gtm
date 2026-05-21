@@ -1,0 +1,53 @@
+{
+  "name": "Reyes Coca-Cola Bottling - Rancho Cucamonga Bottling & Distribution Center, CA",
+  "type": "Bottling / Manufacturing + Distribution Center",
+  "coords": { "lat": 34.08240, "lng": -117.55300 },
+  "geofences": {
+    "perimeter": { "south": 34.08120, "west": -117.55450, "north": 34.08340, "east": -117.55150 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 14.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.08240,-117.55300,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "multipleFacilities", "scale",
+    "dropYard", "multiStep", "dockDoorCount", "trailersVisible",
+    "trailerParkingCapacity", "siteAreaAcres", "railServed", "coords",
+    "perimeter"
+  ],
+  "fieldNotes": {
+    "status": "FACILITY UNDER ACTIVE DEMOLITION AND RECONSTRUCTION. Multiple 2026 news sources (Reyes Coca-Cola newsroom, IE Business Daily, PRNewswire, BeverageDaily) confirm Reyes Coca-Cola broke ground in February 2026 on a full demolition-and-rebuild of the existing 125,000 sq ft 1984 distribution building at 10670 6th St, replacing it with a 620,000+ sq ft production+distribution campus occupying about one city block. Construction runs through 2027; operations are temporarily relocated to Fontana, CA during construction. The auditable, stable operating yard does not currently exist.",
+    "location": "Roster supplied 11251 6th St and coords 34.084,-117.559; the correct address per the Rancho Cucamonga Chamber, Waze and multiple directories is 10670 6th St, Rancho Cucamonga, CA 91730. 6th St was confirmed via Street View as a 4-lane divided arterial running E-W through the industrial district north of Ontario Mills, ~lat 34.0845. 10670 is east of Milliken Ave (-117.5555). The exact parcel could not be unambiguously identified within the dense 6th St warehouse corridor - no Coca-Cola signage or a clearly-imaged demolition site was resolvable, and current 2026 satellite imagery still shows intact warehouses (likely captured before demolition).",
+    "coords": "Best-estimate parcel center 34.0824,-117.5530 (6th St corridor, ~1 block east of Milliken Ave) - NOT confirmed. Low confidence.",
+    "perimeter": "Estimated one-city-block footprint per news ('takes up about one city block', 620,000+ sq ft) - dimensions are an estimate, not measured from a confirmed parcel.",
+    "classification": "All physical-layout flags left false/null because the facility is mid-demolition - no stable docks, gate, guard booth, or yard exist to classify. The new campus design (per news) will include 4 production lines, a parking garage, EV charging, and a recycling center - but as-built layout is unknown.",
+    "urbanRural": "Urban - dense Inland Empire industrial fabric of Rancho Cucamonga, adjacent to I-15 and Ontario Mills.",
+    "recommendation": "Re-audit after facility completion (expected 2027) when the new 620,000 sq ft campus is operational."
+  },
+  "method": "deep-audit"
+}

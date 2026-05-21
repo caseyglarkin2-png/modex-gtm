@@ -1,0 +1,65 @@
+{
+  "name": "Nestlé Prepared Foods - Solon OH",
+  "type": "Frozen food manufacturing plant",
+  "coords": { "lat": 41.404568, "lng": -81.469555 },
+  "geofences": {
+    "perimeter": { "south": 41.40280, "west": -81.47230, "north": 41.40720, "east": -81.46720 },
+    "truckGate": { "south": 41.40430, "west": -81.46840, "north": 41.40470, "east": -81.46780 },
+    "dropYards": [
+      { "south": 41.40540, "west": -81.47280, "north": 41.40650, "east": -81.47120 },
+      { "south": 41.40560, "west": -81.47120, "north": 41.40660, "east": -81.46980 }
+    ],
+    "dockAprons": [
+      { "south": 41.40470, "west": -81.47230, "north": 41.40560, "east": -81.47090 }
+    ],
+    "staging": { "south": 41.40500, "west": -81.47100, "north": 41.40620, "east": -81.46980 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30,
+    "trailersVisible": 35,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 51.5,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.404568,-81.469555,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "scale"],
+  "fieldNotes": {
+    "truckGate": "Continuous chain-link perimeter fence runs the full Harper Rd frontage (confirmed in multiple Street View panos). A single controlled main drive leaves Harper Rd into the property. A driver review explicitly states 'when coming in through the gate ... go to Dock A and check in.' Gate is positively present.",
+    "guardShack": "No distinct guard booth resolved in overhead or Street View imagery; the office building sits immediately at the front circle. Check-in appears to be at 'Dock A' inside the plant. Classified guardShack false / remoteGs true, but flagged uncertain - a booth may be obscured by trees at the drive entrance.",
+    "drivewayLong": "Main drive runs ~150m+ from Harper Rd to the truck/dock area on the west side; ample queue depth for 3+ trucks.",
+    "dropArea": "Large open paved truck yard on the W/NW holds 30-40 parked trailers in rows (westyard/nwcorner imagery).",
+    "fastLaneOpportunity": "Wide paved drive apron and large open yard provide room to add a bypass/express lane.",
+    "dockDoorCount": "~30 estimated from rhythmic dock bays along the west building face; partly obscured by building shadow - low-confidence count.",
+    "railServed": "A rail spur runs along the SW/W property edge with rail cars present in imagery (truckaccess/swdocks/westedge views).",
+    "urbanRural": "Solon OH is a dense industrial/office suburb in the Cleveland metro, adjacent to the I-422/Harper Rd interchange.",
+    "scale": "No truck scale clearly visible; flagged uncertain."
+  },
+  "method": "deep-audit"
+}

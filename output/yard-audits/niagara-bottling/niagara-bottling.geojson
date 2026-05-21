@@ -1,0 +1,6049 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.53285,
+              34.0735
+            ],
+            [
+              -117.5312,
+              34.0735
+            ],
+            [
+              -117.5312,
+              34.07585
+            ],
+            [
+              -117.53285,
+              34.07585
+            ],
+            [
+              -117.53285,
+              34.0735
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Ontario CA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 12,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 8,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 9.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5327,
+              34.0743
+            ],
+            [
+              -117.53235,
+              34.0743
+            ],
+            [
+              -117.53235,
+              34.07475
+            ],
+            [
+              -117.5327,
+              34.07475
+            ],
+            [
+              -117.5327,
+              34.0743
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Ontario CA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.53265,
+              34.07435
+            ],
+            [
+              -117.53225,
+              34.07435
+            ],
+            [
+              -117.53225,
+              34.07555
+            ],
+            [
+              -117.53265,
+              34.07555
+            ],
+            [
+              -117.53265,
+              34.07435
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Ontario CA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.4185,
+              34.128
+            ],
+            [
+              -117.4143,
+              34.128
+            ],
+            [
+              -117.4143,
+              34.13085
+            ],
+            [
+              -117.4185,
+              34.13085
+            ],
+            [
+              -117.4185,
+              34.128
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Rialto CA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 30,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.4176,
+              34.13045
+            ],
+            [
+              -117.417,
+              34.13045
+            ],
+            [
+              -117.417,
+              34.13085
+            ],
+            [
+              -117.4176,
+              34.13085
+            ],
+            [
+              -117.4176,
+              34.13045
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Rialto CA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.4184,
+              34.1301
+            ],
+            [
+              -117.4146,
+              34.1301
+            ],
+            [
+              -117.4146,
+              34.13075
+            ],
+            [
+              -117.4184,
+              34.13075
+            ],
+            [
+              -117.4184,
+              34.1301
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Rialto CA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.4184,
+              34.1299
+            ],
+            [
+              -117.4146,
+              34.1299
+            ],
+            [
+              -117.4146,
+              34.13015
+            ],
+            [
+              -117.4184,
+              34.13015
+            ],
+            [
+              -117.4184,
+              34.1299
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Rialto CA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.4177,
+              34.13015
+            ],
+            [
+              -117.4156,
+              34.13015
+            ],
+            [
+              -117.4156,
+              34.13075
+            ],
+            [
+              -117.4177,
+              34.13075
+            ],
+            [
+              -117.4177,
+              34.13015
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Rialto CA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.1995,
+              37.905
+            ],
+            [
+              -121.1938,
+              37.905
+            ],
+            [
+              -121.1938,
+              37.908
+            ],
+            [
+              -121.1995,
+              37.908
+            ],
+            [
+              -121.1995,
+              37.905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Stockton CA (Arch Rd)",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 41,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.1949,
+              37.906
+            ],
+            [
+              -121.1943,
+              37.906
+            ],
+            [
+              -121.1943,
+              37.9065
+            ],
+            [
+              -121.1949,
+              37.9065
+            ],
+            [
+              -121.1949,
+              37.906
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Stockton CA (Arch Rd)",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.199,
+              37.9068
+            ],
+            [
+              -121.1948,
+              37.9068
+            ],
+            [
+              -121.1948,
+              37.90785
+            ],
+            [
+              -121.199,
+              37.90785
+            ],
+            [
+              -121.199,
+              37.9068
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Stockton CA (Arch Rd)",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.199,
+              37.90665
+            ],
+            [
+              -121.1948,
+              37.90665
+            ],
+            [
+              -121.1948,
+              37.907
+            ],
+            [
+              -121.199,
+              37.907
+            ],
+            [
+              -121.199,
+              37.90665
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Stockton CA (Arch Rd)",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.1955,
+              37.90655
+            ],
+            [
+              -121.1943,
+              37.90655
+            ],
+            [
+              -121.1943,
+              37.90785
+            ],
+            [
+              -121.1955,
+              37.90785
+            ],
+            [
+              -121.1955,
+              37.90655
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Stockton CA (Arch Rd)",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.6275,
+              33.3515
+            ],
+            [
+              -111.6235,
+              33.3515
+            ],
+            [
+              -111.6235,
+              33.3542
+            ],
+            [
+              -111.6275,
+              33.3542
+            ],
+            [
+              -111.6275,
+              33.3515
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Mesa AZ",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 65,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 28,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.6268,
+              33.35345
+            ],
+            [
+              -111.6262,
+              33.35345
+            ],
+            [
+              -111.6262,
+              33.35385
+            ],
+            [
+              -111.6268,
+              33.35385
+            ],
+            [
+              -111.6268,
+              33.35345
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Mesa AZ",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.6268,
+              33.3533
+            ],
+            [
+              -111.6236,
+              33.3533
+            ],
+            [
+              -111.6236,
+              33.3539
+            ],
+            [
+              -111.6268,
+              33.3539
+            ],
+            [
+              -111.6268,
+              33.3533
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Mesa AZ",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.6268,
+              33.35305
+            ],
+            [
+              -111.6236,
+              33.35305
+            ],
+            [
+              -111.6236,
+              33.35335
+            ],
+            [
+              -111.6268,
+              33.35335
+            ],
+            [
+              -111.6268,
+              33.35305
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Mesa AZ",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.6268,
+              33.35335
+            ],
+            [
+              -111.6255,
+              33.35335
+            ],
+            [
+              -111.6255,
+              33.3539
+            ],
+            [
+              -111.6268,
+              33.3539
+            ],
+            [
+              -111.6268,
+              33.35335
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Mesa AZ",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.2033,
+              33.4452
+            ],
+            [
+              -112.2002,
+              33.4452
+            ],
+            [
+              -112.2002,
+              33.4487
+            ],
+            [
+              -112.2033,
+              33.4487
+            ],
+            [
+              -112.2033,
+              33.4452
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Phoenix AZ",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 28,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.2032,
+              33.448
+            ],
+            [
+              -112.2025,
+              33.448
+            ],
+            [
+              -112.2025,
+              33.4485
+            ],
+            [
+              -112.2032,
+              33.4485
+            ],
+            [
+              -112.2032,
+              33.448
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Phoenix AZ",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.2031,
+              33.4468
+            ],
+            [
+              -112.2004,
+              33.4468
+            ],
+            [
+              -112.2004,
+              33.4474
+            ],
+            [
+              -112.2031,
+              33.4474
+            ],
+            [
+              -112.2031,
+              33.4468
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Phoenix AZ",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.203,
+              33.4479
+            ],
+            [
+              -112.2004,
+              33.4479
+            ],
+            [
+              -112.2004,
+              33.4485
+            ],
+            [
+              -112.203,
+              33.4485
+            ],
+            [
+              -112.203,
+              33.4479
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Phoenix AZ",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.2031,
+              33.44665
+            ],
+            [
+              -112.2004,
+              33.44665
+            ],
+            [
+              -112.2004,
+              33.44695
+            ],
+            [
+              -112.2031,
+              33.44695
+            ],
+            [
+              -112.2031,
+              33.44665
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Phoenix AZ",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.2031,
+              33.4474
+            ],
+            [
+              -112.2004,
+              33.4474
+            ],
+            [
+              -112.2004,
+              33.4477
+            ],
+            [
+              -112.2031,
+              33.4477
+            ],
+            [
+              -112.2031,
+              33.4474
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Phoenix AZ",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -106.7627,
+              34.8261
+            ],
+            [
+              -106.7596,
+              34.8261
+            ],
+            [
+              -106.7596,
+              34.8295
+            ],
+            [
+              -106.7627,
+              34.8295
+            ],
+            [
+              -106.7627,
+              34.8261
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Los Lunas NM",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 24,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 25,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -106.7623,
+              34.82815
+            ],
+            [
+              -106.76185,
+              34.82815
+            ],
+            [
+              -106.76185,
+              34.8285
+            ],
+            [
+              -106.7623,
+              34.8285
+            ],
+            [
+              -106.7623,
+              34.82815
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Los Lunas NM",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -106.7625,
+              34.8268
+            ],
+            [
+              -106.7618,
+              34.8268
+            ],
+            [
+              -106.7618,
+              34.8282
+            ],
+            [
+              -106.7625,
+              34.8282
+            ],
+            [
+              -106.7625,
+              34.8268
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Los Lunas NM",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -106.762,
+              34.8285
+            ],
+            [
+              -106.7598,
+              34.8285
+            ],
+            [
+              -106.7598,
+              34.829
+            ],
+            [
+              -106.762,
+              34.829
+            ],
+            [
+              -106.762,
+              34.8285
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Los Lunas NM",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -106.762,
+              34.8268
+            ],
+            [
+              -106.7615,
+              34.8268
+            ],
+            [
+              -106.7615,
+              34.8282
+            ],
+            [
+              -106.762,
+              34.8282
+            ],
+            [
+              -106.762,
+              34.8268
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Los Lunas NM",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -115.032,
+              36.2615
+            ],
+            [
+              -115.0296,
+              36.2615
+            ],
+            [
+              -115.0296,
+              36.2658
+            ],
+            [
+              -115.032,
+              36.2658
+            ],
+            [
+              -115.032,
+              36.2615
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - North Las Vegas NV",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 50,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 28,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -115.0304,
+              36.2652
+            ],
+            [
+              -115.0298,
+              36.2652
+            ],
+            [
+              -115.0298,
+              36.26565
+            ],
+            [
+              -115.0304,
+              36.26565
+            ],
+            [
+              -115.0304,
+              36.2652
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - North Las Vegas NV",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -115.0301,
+              36.2618
+            ],
+            [
+              -115.0297,
+              36.2618
+            ],
+            [
+              -115.0297,
+              36.265
+            ],
+            [
+              -115.0301,
+              36.265
+            ],
+            [
+              -115.0301,
+              36.2618
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - North Las Vegas NV",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -115.0303,
+              36.2618
+            ],
+            [
+              -115.0299,
+              36.2618
+            ],
+            [
+              -115.0299,
+              36.265
+            ],
+            [
+              -115.0303,
+              36.265
+            ],
+            [
+              -115.0303,
+              36.2618
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - North Las Vegas NV",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -115.0301,
+              36.265
+            ],
+            [
+              -115.02975,
+              36.265
+            ],
+            [
+              -115.02975,
+              36.2656
+            ],
+            [
+              -115.0301,
+              36.2656
+            ],
+            [
+              -115.0301,
+              36.265
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - North Las Vegas NV",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.7105,
+              39.7436
+            ],
+            [
+              -104.7064,
+              39.7436
+            ],
+            [
+              -104.7064,
+              39.7466
+            ],
+            [
+              -104.7105,
+              39.7466
+            ],
+            [
+              -104.7105,
+              39.7436
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Aurora CO",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 36,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 26,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.7078,
+              39.7443
+            ],
+            [
+              -104.7071,
+              39.7443
+            ],
+            [
+              -104.7071,
+              39.7448
+            ],
+            [
+              -104.7078,
+              39.7448
+            ],
+            [
+              -104.7078,
+              39.7443
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Aurora CO",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.7102,
+              39.744
+            ],
+            [
+              -104.7072,
+              39.744
+            ],
+            [
+              -104.7072,
+              39.7446
+            ],
+            [
+              -104.7102,
+              39.7446
+            ],
+            [
+              -104.7102,
+              39.744
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Aurora CO",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.7102,
+              39.7444
+            ],
+            [
+              -104.7072,
+              39.7444
+            ],
+            [
+              -104.7072,
+              39.7449
+            ],
+            [
+              -104.7102,
+              39.7449
+            ],
+            [
+              -104.7102,
+              39.7444
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Aurora CO",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.0447,
+              41.5108
+            ],
+            [
+              -112.0405,
+              41.5108
+            ],
+            [
+              -112.0405,
+              41.5135
+            ],
+            [
+              -112.0447,
+              41.5135
+            ],
+            [
+              -112.0447,
+              41.5108
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Brigham City UT",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 34,
+          "trailersVisible": 32,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 30,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.0436,
+              41.51075
+            ],
+            [
+              -112.043,
+              41.51075
+            ],
+            [
+              -112.043,
+              41.5111
+            ],
+            [
+              -112.0436,
+              41.5111
+            ],
+            [
+              -112.0436,
+              41.51075
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Brigham City UT",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.044,
+              41.5125
+            ],
+            [
+              -112.0408,
+              41.5125
+            ],
+            [
+              -112.0408,
+              41.5133
+            ],
+            [
+              -112.044,
+              41.5133
+            ],
+            [
+              -112.044,
+              41.5125
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Brigham City UT",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.0439,
+              41.5121
+            ],
+            [
+              -112.0409,
+              41.5121
+            ],
+            [
+              -112.0409,
+              41.5127
+            ],
+            [
+              -112.0439,
+              41.5127
+            ],
+            [
+              -112.0439,
+              41.5121
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Brigham City UT",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.3576,
+              47.0744
+            ],
+            [
+              -122.354,
+              47.0744
+            ],
+            [
+              -122.354,
+              47.0777
+            ],
+            [
+              -122.3576,
+              47.0777
+            ],
+            [
+              -122.3576,
+              47.0744
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Puyallup (Frederickson) WA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 42,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 32,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.3549,
+              47.0767
+            ],
+            [
+              -122.3543,
+              47.0767
+            ],
+            [
+              -122.3543,
+              47.0772
+            ],
+            [
+              -122.3549,
+              47.0772
+            ],
+            [
+              -122.3549,
+              47.0767
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Puyallup (Frederickson) WA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.3574,
+              47.0768
+            ],
+            [
+              -122.3543,
+              47.0768
+            ],
+            [
+              -122.3543,
+              47.0776
+            ],
+            [
+              -122.3574,
+              47.0776
+            ],
+            [
+              -122.3574,
+              47.0768
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Puyallup (Frederickson) WA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.3574,
+              47.0763
+            ],
+            [
+              -122.3543,
+              47.0763
+            ],
+            [
+              -122.3543,
+              47.0768
+            ],
+            [
+              -122.3574,
+              47.0768
+            ],
+            [
+              -122.3574,
+              47.0763
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Puyallup (Frederickson) WA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.3574,
+              47.0746
+            ],
+            [
+              -122.3548,
+              47.0746
+            ],
+            [
+              -122.3548,
+              47.075
+            ],
+            [
+              -122.3574,
+              47.075
+            ],
+            [
+              -122.3574,
+              47.0746
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Puyallup (Frederickson) WA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.3549,
+              47.0772
+            ],
+            [
+              -122.3542,
+              47.0772
+            ],
+            [
+              -122.3542,
+              47.0776
+            ],
+            [
+              -122.3549,
+              47.0776
+            ],
+            [
+              -122.3549,
+              47.0772
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Puyallup (Frederickson) WA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.55537,
+              38.85151
+            ],
+            [
+              -94.55203,
+              38.85151
+            ],
+            [
+              -94.55203,
+              38.85429
+            ],
+            [
+              -94.55537,
+              38.85429
+            ],
+            [
+              -94.55537,
+              38.85151
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Kansas City MO (149th St)",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 28,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 22,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.55537,
+              38.8517
+            ],
+            [
+              -94.5547,
+              38.8517
+            ],
+            [
+              -94.5547,
+              38.8536
+            ],
+            [
+              -94.55537,
+              38.8536
+            ],
+            [
+              -94.55537,
+              38.8517
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Kansas City MO (149th St)",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.5552,
+              38.8532
+            ],
+            [
+              -94.554,
+              38.8532
+            ],
+            [
+              -94.554,
+              38.8542
+            ],
+            [
+              -94.5552,
+              38.8542
+            ],
+            [
+              -94.5552,
+              38.8532
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Kansas City MO (149th St)",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.555,
+              38.8518
+            ],
+            [
+              -94.5544,
+              38.8518
+            ],
+            [
+              -94.5544,
+              38.8532
+            ],
+            [
+              -94.555,
+              38.8532
+            ],
+            [
+              -94.555,
+              38.8518
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Kansas City MO (149th St)",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.6772,
+              39.2982
+            ],
+            [
+              -94.6735,
+              39.2982
+            ],
+            [
+              -94.6735,
+              39.3026
+            ],
+            [
+              -94.6772,
+              39.3026
+            ],
+            [
+              -94.6772,
+              39.2982
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Kansas City MO (Airworld Dr)",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 95,
+          "trailersVisible": 62,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 31,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.6756,
+              39.2979
+            ],
+            [
+              -94.6748,
+              39.2979
+            ],
+            [
+              -94.6748,
+              39.2985
+            ],
+            [
+              -94.6756,
+              39.2985
+            ],
+            [
+              -94.6756,
+              39.2979
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Kansas City MO (Airworld Dr)",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.6769,
+              39.299
+            ],
+            [
+              -94.6756,
+              39.299
+            ],
+            [
+              -94.6756,
+              39.3023
+            ],
+            [
+              -94.6769,
+              39.3023
+            ],
+            [
+              -94.6769,
+              39.299
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Kansas City MO (Airworld Dr)",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.6767,
+              39.299
+            ],
+            [
+              -94.6758,
+              39.299
+            ],
+            [
+              -94.6758,
+              39.3023
+            ],
+            [
+              -94.6767,
+              39.3023
+            ],
+            [
+              -94.6767,
+              39.299
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Kansas City MO (Airworld Dr)",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.6778,
+              38.3786
+            ],
+            [
+              -85.6726,
+              38.3786
+            ],
+            [
+              -85.6726,
+              38.3814
+            ],
+            [
+              -85.6778,
+              38.3814
+            ],
+            [
+              -85.6778,
+              38.3786
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Jeffersonville IN",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 100,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 34,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.6754,
+              38.3788
+            ],
+            [
+              -85.6746,
+              38.3788
+            ],
+            [
+              -85.6746,
+              38.3792
+            ],
+            [
+              -85.6754,
+              38.3792
+            ],
+            [
+              -85.6754,
+              38.3788
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Jeffersonville IN",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.6776,
+              38.3788
+            ],
+            [
+              -85.674,
+              38.3788
+            ],
+            [
+              -85.674,
+              38.3799
+            ],
+            [
+              -85.6776,
+              38.3799
+            ],
+            [
+              -85.6776,
+              38.3788
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Jeffersonville IN",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.6774,
+              38.3792
+            ],
+            [
+              -85.6742,
+              38.3792
+            ],
+            [
+              -85.6742,
+              38.3801
+            ],
+            [
+              -85.6774,
+              38.3801
+            ],
+            [
+              -85.6774,
+              38.3792
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Jeffersonville IN",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.351,
+              39.6828
+            ],
+            [
+              -86.348,
+              39.6828
+            ],
+            [
+              -86.348,
+              39.6873
+            ],
+            [
+              -86.351,
+              39.6873
+            ],
+            [
+              -86.351,
+              39.6828
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Plainfield IN",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 58,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 30,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3499,
+              39.683
+            ],
+            [
+              -86.3493,
+              39.683
+            ],
+            [
+              -86.3493,
+              39.6836
+            ],
+            [
+              -86.3499,
+              39.6836
+            ],
+            [
+              -86.3499,
+              39.683
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Plainfield IN",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3508,
+              39.684
+            ],
+            [
+              -86.3496,
+              39.684
+            ],
+            [
+              -86.3496,
+              39.687
+            ],
+            [
+              -86.3508,
+              39.687
+            ],
+            [
+              -86.3508,
+              39.684
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Plainfield IN",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3502,
+              39.6842
+            ],
+            [
+              -86.3493,
+              39.6842
+            ],
+            [
+              -86.3493,
+              39.687
+            ],
+            [
+              -86.3502,
+              39.687
+            ],
+            [
+              -86.3502,
+              39.6842
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Plainfield IN",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.6088,
+              34.9755
+            ],
+            [
+              -89.6048,
+              34.9755
+            ],
+            [
+              -89.6048,
+              34.9806
+            ],
+            [
+              -89.6088,
+              34.9806
+            ],
+            [
+              -89.6088,
+              34.9755
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Byhalia MS",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 72,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 48,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.6057,
+              34.9755
+            ],
+            [
+              -89.6048,
+              34.9755
+            ],
+            [
+              -89.6048,
+              34.9764
+            ],
+            [
+              -89.6057,
+              34.9764
+            ],
+            [
+              -89.6057,
+              34.9755
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Byhalia MS",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.6085,
+              34.976
+            ],
+            [
+              -89.6076,
+              34.976
+            ],
+            [
+              -89.6076,
+              34.98
+            ],
+            [
+              -89.6085,
+              34.98
+            ],
+            [
+              -89.6085,
+              34.976
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Byhalia MS",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.6054,
+              34.9765
+            ],
+            [
+              -89.6048,
+              34.9765
+            ],
+            [
+              -89.6048,
+              34.98
+            ],
+            [
+              -89.6054,
+              34.98
+            ],
+            [
+              -89.6054,
+              34.9765
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Byhalia MS",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.6079,
+              34.976
+            ],
+            [
+              -89.6072,
+              34.976
+            ],
+            [
+              -89.6072,
+              34.98
+            ],
+            [
+              -89.6079,
+              34.98
+            ],
+            [
+              -89.6079,
+              34.976
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Byhalia MS",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.606,
+              34.9765
+            ],
+            [
+              -89.6054,
+              34.9765
+            ],
+            [
+              -89.6054,
+              34.98
+            ],
+            [
+              -89.606,
+              34.98
+            ],
+            [
+              -89.606,
+              34.9765
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Byhalia MS",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.8248,
+              39.9952
+            ],
+            [
+              -82.8211,
+              39.9952
+            ],
+            [
+              -82.8211,
+              39.9973
+            ],
+            [
+              -82.8248,
+              39.9973
+            ],
+            [
+              -82.8248,
+              39.9952
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Gahanna OH",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 11,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.8221,
+              39.9963
+            ],
+            [
+              -82.8215,
+              39.9963
+            ],
+            [
+              -82.8215,
+              39.99685
+            ],
+            [
+              -82.8221,
+              39.99685
+            ],
+            [
+              -82.8221,
+              39.9963
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Gahanna OH",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.8246,
+              39.9965
+            ],
+            [
+              -82.8228,
+              39.9965
+            ],
+            [
+              -82.8228,
+              39.9972
+            ],
+            [
+              -82.8246,
+              39.9972
+            ],
+            [
+              -82.8246,
+              39.9965
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Gahanna OH",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.8246,
+              39.9966
+            ],
+            [
+              -82.8212,
+              39.9966
+            ],
+            [
+              -82.8212,
+              39.997
+            ],
+            [
+              -82.8246,
+              39.997
+            ],
+            [
+              -82.8246,
+              39.9966
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Gahanna OH",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.7876,
+              35.6264
+            ],
+            [
+              -80.7834,
+              35.6264
+            ],
+            [
+              -80.7834,
+              35.631
+            ],
+            [
+              -80.7876,
+              35.631
+            ],
+            [
+              -80.7876,
+              35.6264
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Mooresville NC",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 22,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.7876,
+              35.6299
+            ],
+            [
+              -80.7868,
+              35.6299
+            ],
+            [
+              -80.7868,
+              35.6305
+            ],
+            [
+              -80.7876,
+              35.6305
+            ],
+            [
+              -80.7876,
+              35.6299
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Mooresville NC",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.7872,
+              35.6276
+            ],
+            [
+              -80.7856,
+              35.6276
+            ],
+            [
+              -80.7856,
+              35.6296
+            ],
+            [
+              -80.7872,
+              35.6296
+            ],
+            [
+              -80.7872,
+              35.6276
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Mooresville NC",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.7864,
+              35.6276
+            ],
+            [
+              -80.7848,
+              35.6276
+            ],
+            [
+              -80.7848,
+              35.6298
+            ],
+            [
+              -80.7864,
+              35.6298
+            ],
+            [
+              -80.7864,
+              35.6276
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Mooresville NC",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.7607,
+              33.4036
+            ],
+            [
+              -84.7566,
+              33.4036
+            ],
+            [
+              -84.7566,
+              33.4081
+            ],
+            [
+              -84.7607,
+              33.4081
+            ],
+            [
+              -84.7607,
+              33.4036
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Newnan GA (Coweta County)",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 32,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.7574,
+              33.4073
+            ],
+            [
+              -84.7567,
+              33.4073
+            ],
+            [
+              -84.7567,
+              33.408
+            ],
+            [
+              -84.7574,
+              33.408
+            ],
+            [
+              -84.7574,
+              33.4073
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Newnan GA (Coweta County)",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.7598,
+              33.4062
+            ],
+            [
+              -84.757,
+              33.4062
+            ],
+            [
+              -84.757,
+              33.4076
+            ],
+            [
+              -84.7598,
+              33.4076
+            ],
+            [
+              -84.7598,
+              33.4062
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Newnan GA (Coweta County)",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.7599,
+              33.406
+            ],
+            [
+              -84.7569,
+              33.406
+            ],
+            [
+              -84.7569,
+              33.4073
+            ],
+            [
+              -84.7599,
+              33.4073
+            ],
+            [
+              -84.7599,
+              33.406
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Newnan GA (Coweta County)",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3319,
+              37.3519
+            ],
+            [
+              -77.3284,
+              37.3519
+            ],
+            [
+              -77.3284,
+              37.3571
+            ],
+            [
+              -77.3319,
+              37.3571
+            ],
+            [
+              -77.3319,
+              37.3519
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Chester VA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 50,
+          "trailersVisible": 65,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 35,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3301,
+              37.3561
+            ],
+            [
+              -77.3294,
+              37.3561
+            ],
+            [
+              -77.3294,
+              37.3568
+            ],
+            [
+              -77.3301,
+              37.3568
+            ],
+            [
+              -77.3301,
+              37.3561
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Chester VA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3315,
+              37.3526
+            ],
+            [
+              -77.3301,
+              37.3526
+            ],
+            [
+              -77.3301,
+              37.3556
+            ],
+            [
+              -77.3315,
+              37.3556
+            ],
+            [
+              -77.3315,
+              37.3526
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Chester VA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3309,
+              37.3526
+            ],
+            [
+              -77.3296,
+              37.3526
+            ],
+            [
+              -77.3296,
+              37.3556
+            ],
+            [
+              -77.3309,
+              37.3556
+            ],
+            [
+              -77.3309,
+              37.3526
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Chester VA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.7256,
+              41.8594
+            ],
+            [
+              -72.7219,
+              41.8594
+            ],
+            [
+              -72.7219,
+              41.8623
+            ],
+            [
+              -72.7256,
+              41.8623
+            ],
+            [
+              -72.7256,
+              41.8594
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Bloomfield CT",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 24,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.7256,
+              41.8601
+            ],
+            [
+              -72.7248,
+              41.8601
+            ],
+            [
+              -72.7248,
+              41.8609
+            ],
+            [
+              -72.7256,
+              41.8609
+            ],
+            [
+              -72.7256,
+              41.8601
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Bloomfield CT",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.7249,
+              41.8612
+            ],
+            [
+              -72.7224,
+              41.8612
+            ],
+            [
+              -72.7224,
+              41.8621
+            ],
+            [
+              -72.7249,
+              41.8621
+            ],
+            [
+              -72.7249,
+              41.8612
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Bloomfield CT",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.7248,
+              41.8611
+            ],
+            [
+              -72.7223,
+              41.8611
+            ],
+            [
+              -72.7223,
+              41.8617
+            ],
+            [
+              -72.7248,
+              41.8617
+            ],
+            [
+              -72.7248,
+              41.8611
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Bloomfield CT",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.7247,
+              41.8596
+            ],
+            [
+              -72.7225,
+              41.8596
+            ],
+            [
+              -72.7225,
+              41.86
+            ],
+            [
+              -72.7247,
+              41.86
+            ],
+            [
+              -72.7247,
+              41.8596
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Bloomfield CT",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.8296,
+              30.1328
+            ],
+            [
+              -81.8252,
+              30.1328
+            ],
+            [
+              -81.8252,
+              30.13905
+            ],
+            [
+              -81.8296,
+              30.13905
+            ],
+            [
+              -81.8296,
+              30.1328
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Middleburg FL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 65,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 56,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.82665,
+              30.1342
+            ],
+            [
+              -81.8261,
+              30.1342
+            ],
+            [
+              -81.8261,
+              30.13455
+            ],
+            [
+              -81.82665,
+              30.13455
+            ],
+            [
+              -81.82665,
+              30.1342
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Middleburg FL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.8265,
+              30.1342
+            ],
+            [
+              -81.8253,
+              30.1342
+            ],
+            [
+              -81.8253,
+              30.1383
+            ],
+            [
+              -81.8265,
+              30.1383
+            ],
+            [
+              -81.8265,
+              30.1342
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Middleburg FL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.82625,
+              30.1343
+            ],
+            [
+              -81.82545,
+              30.1343
+            ],
+            [
+              -81.82545,
+              30.1386
+            ],
+            [
+              -81.82625,
+              30.1386
+            ],
+            [
+              -81.82625,
+              30.1343
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Middleburg FL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.82665,
+              30.1332
+            ],
+            [
+              -81.82595,
+              30.1332
+            ],
+            [
+              -81.82595,
+              30.1342
+            ],
+            [
+              -81.82665,
+              30.1342
+            ],
+            [
+              -81.82665,
+              30.1332
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Middleburg FL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.8296,
+              28.6377
+            ],
+            [
+              -81.8261,
+              28.6377
+            ],
+            [
+              -81.8261,
+              28.64085
+            ],
+            [
+              -81.8296,
+              28.64085
+            ],
+            [
+              -81.8296,
+              28.6377
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Groveland FL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 42,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.8285,
+              28.6379
+            ],
+            [
+              -81.828,
+              28.6379
+            ],
+            [
+              -81.828,
+              28.6382
+            ],
+            [
+              -81.8285,
+              28.6382
+            ],
+            [
+              -81.8285,
+              28.6379
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Groveland FL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.8292,
+              28.638
+            ],
+            [
+              -81.8283,
+              28.638
+            ],
+            [
+              -81.8283,
+              28.6406
+            ],
+            [
+              -81.8292,
+              28.6406
+            ],
+            [
+              -81.8292,
+              28.638
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Groveland FL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.8289,
+              28.638
+            ],
+            [
+              -81.8282,
+              28.638
+            ],
+            [
+              -81.8282,
+              28.6406
+            ],
+            [
+              -81.8289,
+              28.6406
+            ],
+            [
+              -81.8289,
+              28.638
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Groveland FL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.8285,
+              28.6376
+            ],
+            [
+              -81.828,
+              28.6376
+            ],
+            [
+              -81.828,
+              28.638
+            ],
+            [
+              -81.8285,
+              28.638
+            ],
+            [
+              -81.8285,
+              28.6376
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Groveland FL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.2856,
+              26.9028
+            ],
+            [
+              -80.2825,
+              26.9028
+            ],
+            [
+              -80.2825,
+              26.906
+            ],
+            [
+              -80.2856,
+              26.906
+            ],
+            [
+              -80.2856,
+              26.9028
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Jupiter FL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 75,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 60,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.2849,
+              26.90545
+            ],
+            [
+              -80.2845,
+              26.90545
+            ],
+            [
+              -80.2845,
+              26.9058
+            ],
+            [
+              -80.2849,
+              26.9058
+            ],
+            [
+              -80.2849,
+              26.90545
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Jupiter FL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.2843,
+              26.9029
+            ],
+            [
+              -80.2825,
+              26.9029
+            ],
+            [
+              -80.2825,
+              26.9038
+            ],
+            [
+              -80.2843,
+              26.9038
+            ],
+            [
+              -80.2843,
+              26.9029
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Jupiter FL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.2842,
+              26.9032
+            ],
+            [
+              -80.2827,
+              26.9032
+            ],
+            [
+              -80.2827,
+              26.904
+            ],
+            [
+              -80.2842,
+              26.904
+            ],
+            [
+              -80.2842,
+              26.9032
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Jupiter FL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.2851,
+              26.9056
+            ],
+            [
+              -80.2846,
+              26.9056
+            ],
+            [
+              -80.2846,
+              26.9062
+            ],
+            [
+              -80.2851,
+              26.9062
+            ],
+            [
+              -80.2851,
+              26.9056
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Jupiter FL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.068,
+              40.9295
+            ],
+            [
+              -76.059,
+              40.9295
+            ],
+            [
+              -76.059,
+              40.9355
+            ],
+            [
+              -76.068,
+              40.9355
+            ],
+            [
+              -76.068,
+              40.9295
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Hazle Township PA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 110,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.0672,
+              40.9288
+            ],
+            [
+              -76.0662,
+              40.9288
+            ],
+            [
+              -76.0662,
+              40.9296
+            ],
+            [
+              -76.0672,
+              40.9296
+            ],
+            [
+              -76.0672,
+              40.9288
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Hazle Township PA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.0665,
+              40.9325
+            ],
+            [
+              -76.0608,
+              40.9325
+            ],
+            [
+              -76.0608,
+              40.9348
+            ],
+            [
+              -76.0665,
+              40.9348
+            ],
+            [
+              -76.0665,
+              40.9325
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Hazle Township PA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.0665,
+              40.9299
+            ],
+            [
+              -76.06,
+              40.9299
+            ],
+            [
+              -76.06,
+              40.9318
+            ],
+            [
+              -76.0665,
+              40.9318
+            ],
+            [
+              -76.0665,
+              40.9299
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Hazle Township PA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.0662,
+              40.9328
+            ],
+            [
+              -76.0612,
+              40.9328
+            ],
+            [
+              -76.0612,
+              40.9347
+            ],
+            [
+              -76.0662,
+              40.9347
+            ],
+            [
+              -76.0662,
+              40.9328
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Hazle Township PA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.0662,
+              40.9301
+            ],
+            [
+              -76.0608,
+              40.9301
+            ],
+            [
+              -76.0608,
+              40.9317
+            ],
+            [
+              -76.0662,
+              40.9317
+            ],
+            [
+              -76.0662,
+              40.9301
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Hazle Township PA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.2985,
+              40.4402
+            ],
+            [
+              -80.2945,
+              40.4402
+            ],
+            [
+              -80.2945,
+              40.4442
+            ],
+            [
+              -80.2985,
+              40.4442
+            ],
+            [
+              -80.2985,
+              40.4402
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Imperial PA (Findlay Township)",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 65,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 95,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 50,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.2987,
+              40.4424
+            ],
+            [
+              -80.298,
+              40.4424
+            ],
+            [
+              -80.298,
+              40.4429
+            ],
+            [
+              -80.2987,
+              40.4429
+            ],
+            [
+              -80.2987,
+              40.4424
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Imperial PA (Findlay Township)",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.2956,
+              40.4412
+            ],
+            [
+              -80.2946,
+              40.4412
+            ],
+            [
+              -80.2946,
+              40.4438
+            ],
+            [
+              -80.2956,
+              40.4438
+            ],
+            [
+              -80.2956,
+              40.4412
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Imperial PA (Findlay Township)",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.296,
+              40.4414
+            ],
+            [
+              -80.295,
+              40.4414
+            ],
+            [
+              -80.295,
+              40.4436
+            ],
+            [
+              -80.296,
+              40.4436
+            ],
+            [
+              -80.296,
+              40.4414
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Imperial PA (Findlay Township)",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.6169,
+              40.5687
+            ],
+            [
+              -75.6124,
+              40.5687
+            ],
+            [
+              -75.6124,
+              40.5733
+            ],
+            [
+              -75.6169,
+              40.5733
+            ],
+            [
+              -75.6169,
+              40.5687
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Upper Macungie (Allentown) PA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 38,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.6157,
+              40.572
+            ],
+            [
+              -75.615,
+              40.572
+            ],
+            [
+              -75.615,
+              40.5726
+            ],
+            [
+              -75.6157,
+              40.5726
+            ],
+            [
+              -75.6157,
+              40.572
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Upper Macungie (Allentown) PA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.6171,
+              40.5719
+            ],
+            [
+              -75.6153,
+              40.5719
+            ],
+            [
+              -75.6153,
+              40.5732
+            ],
+            [
+              -75.6171,
+              40.5732
+            ],
+            [
+              -75.6171,
+              40.5719
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Upper Macungie (Allentown) PA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.6136,
+              40.5689
+            ],
+            [
+              -75.6124,
+              40.5689
+            ],
+            [
+              -75.6124,
+              40.5704
+            ],
+            [
+              -75.6136,
+              40.5704
+            ],
+            [
+              -75.6136,
+              40.5689
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Upper Macungie (Allentown) PA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.6163,
+              40.5696
+            ],
+            [
+              -75.6146,
+              40.5696
+            ],
+            [
+              -75.6146,
+              40.5724
+            ],
+            [
+              -75.6163,
+              40.5724
+            ],
+            [
+              -75.6163,
+              40.5696
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Upper Macungie (Allentown) PA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.614,
+              40.5689
+            ],
+            [
+              -75.6127,
+              40.5689
+            ],
+            [
+              -75.6127,
+              40.5706
+            ],
+            [
+              -75.614,
+              40.5706
+            ],
+            [
+              -75.614,
+              40.5689
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Upper Macungie (Allentown) PA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.6975,
+              34.2635
+            ],
+            [
+              -79.691,
+              34.2635
+            ],
+            [
+              -79.691,
+              34.266
+            ],
+            [
+              -79.6975,
+              34.266
+            ],
+            [
+              -79.6975,
+              34.2635
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Florence SC",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 65,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 42,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.697,
+              34.2638
+            ],
+            [
+              -79.6963,
+              34.2638
+            ],
+            [
+              -79.6963,
+              34.2644
+            ],
+            [
+              -79.697,
+              34.2644
+            ],
+            [
+              -79.697,
+              34.2638
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Florence SC",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.697,
+              34.2638
+            ],
+            [
+              -79.6915,
+              34.2638
+            ],
+            [
+              -79.6915,
+              34.2645
+            ],
+            [
+              -79.697,
+              34.2645
+            ],
+            [
+              -79.697,
+              34.2638
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Florence SC",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.697,
+              34.2641
+            ],
+            [
+              -79.6913,
+              34.2641
+            ],
+            [
+              -79.6913,
+              34.2648
+            ],
+            [
+              -79.697,
+              34.2648
+            ],
+            [
+              -79.697,
+              34.2641
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Florence SC",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3559,
+              31.1512
+            ],
+            [
+              -97.3504,
+              31.1512
+            ],
+            [
+              -97.3504,
+              31.1586
+            ],
+            [
+              -97.3559,
+              31.1586
+            ],
+            [
+              -97.3559,
+              31.1512
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Temple TX",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 85,
+          "trailerParkingCapacity": 140,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 78,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3559,
+              31.1545
+            ],
+            [
+              -97.3551,
+              31.1545
+            ],
+            [
+              -97.3551,
+              31.1552
+            ],
+            [
+              -97.3559,
+              31.1552
+            ],
+            [
+              -97.3559,
+              31.1545
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Temple TX",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3526,
+              31.1558
+            ],
+            [
+              -97.3512,
+              31.1558
+            ],
+            [
+              -97.3512,
+              31.1581
+            ],
+            [
+              -97.3526,
+              31.1581
+            ],
+            [
+              -97.3526,
+              31.1558
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Temple TX",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.3556,
+              31.1515
+            ],
+            [
+              -97.3518,
+              31.1515
+            ],
+            [
+              -97.3518,
+              31.1531
+            ],
+            [
+              -97.3556,
+              31.1531
+            ],
+            [
+              -97.3556,
+              31.1515
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Temple TX",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.353,
+              31.1555
+            ],
+            [
+              -97.3516,
+              31.1555
+            ],
+            [
+              -97.3516,
+              31.1582
+            ],
+            [
+              -97.353,
+              31.1582
+            ],
+            [
+              -97.353,
+              31.1555
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Temple TX",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.355,
+              31.1515
+            ],
+            [
+              -97.351,
+              31.1515
+            ],
+            [
+              -97.351,
+              31.1531
+            ],
+            [
+              -97.355,
+              31.1531
+            ],
+            [
+              -97.355,
+              31.1515
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Temple TX",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.9822,
+              29.586
+            ],
+            [
+              -97.9763,
+              29.586
+            ],
+            [
+              -97.9763,
+              29.5897
+            ],
+            [
+              -97.9822,
+              29.5897
+            ],
+            [
+              -97.9822,
+              29.586
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Seguin TX",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 65,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 100,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 32,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.9772,
+              29.5889
+            ],
+            [
+              -97.9765,
+              29.5889
+            ],
+            [
+              -97.9765,
+              29.5895
+            ],
+            [
+              -97.9772,
+              29.5895
+            ],
+            [
+              -97.9772,
+              29.5889
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Seguin TX",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.9818,
+              29.5868
+            ],
+            [
+              -97.9767,
+              29.5868
+            ],
+            [
+              -97.9767,
+              29.5876
+            ],
+            [
+              -97.9818,
+              29.5876
+            ],
+            [
+              -97.9818,
+              29.5868
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Seguin TX",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.9818,
+              29.5871
+            ],
+            [
+              -97.9767,
+              29.5871
+            ],
+            [
+              -97.9767,
+              29.5879
+            ],
+            [
+              -97.9818,
+              29.5879
+            ],
+            [
+              -97.9818,
+              29.5871
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Seguin TX",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -93.2945,
+              44.5648
+            ],
+            [
+              -93.2875,
+              44.5648
+            ],
+            [
+              -93.2875,
+              44.5697
+            ],
+            [
+              -93.2945,
+              44.5697
+            ],
+            [
+              -93.2945,
+              44.5648
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "niagara-bottling",
+        "name": "Niagara Bottling - Elko New Market MN",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "NONE",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 36,
+          "railServed": false
+        }
+      }
+    }
+  ]
+}

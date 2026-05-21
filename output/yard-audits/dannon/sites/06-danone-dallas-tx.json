@@ -1,0 +1,52 @@
+{
+  "name": "Danone - Dallas TX",
+  "type": "Multi-category beverage plant (refrigerated)",
+  "coords": { "lat": 32.704900, "lng": -96.921000 },
+  "geofences": {
+    "perimeter": { "south": 32.702800, "west": -96.924300, "north": 32.706200, "east": -96.917000 },
+    "truckGate": { "south": 32.706000, "west": -96.923900, "north": 32.706400, "east": -96.923400 },
+    "dropYards": [
+      { "south": 32.704300, "west": -96.923700, "north": 32.705700, "east": -96.922600 }
+    ],
+    "dockAprons": [
+      { "south": 32.705100, "west": -96.923000, "north": 32.705700, "east": -96.919200 },
+      { "south": 32.705100, "west": -96.918900, "north": 32.705700, "east": -96.917300 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 38,
+    "trailerParkingCapacity": 55,
+    "truckGateCount": 2,
+    "buildingCount": 2,
+    "siteAreaAcres": 39.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.704900,-96.921000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Both road entrances off Dan Morton Drive are wide, open driveways with no barrier arm or sliding gate. Street View (Jan 2025) shows a tractor freely turning into the west driveway with no checkpoint pinch-point. Perimeter is fenced but road access is uncontrolled.",
+    "guardShack": "No staffed booth at either entrance in Street View or satellite imagery. Web research confirms drivers 'check in at the office' for door assignment - check-in is at the building, not a gate booth.",
+    "remoteGs": "False because there is no controlled truck gate at all (remoteGs requires a gate).",
+    "multipleFacilities": "Campus of two large buildings: 357,000 sq ft main plant (west/center) and 252,000 sq ft toppers building (east), separated by an internal driveway.",
+    "shipRcvSeparate": "Dock banks on the north faces of both the main building and the east toppers building - two physically distinct dock clusters.",
+    "dropYard": "Dedicated trailer drop lot on the west side of the property with ~30+ trailers parked in marked rows, separate from active dock staging.",
+    "dockDoorCount": "Estimate ~60 across both north dock faces; partly obscured by parked trailers in imagery - low confidence, banded 50+.",
+    "fastLaneOpportunity": "Wide gate aprons at both entrances with ample unused paved width for an express bypass lane.",
+    "postGateStaging": "Large paved yard areas inside the property between road and dock faces give trucks room to queue/stage."
+  },
+  "method": "deep-audit"
+}

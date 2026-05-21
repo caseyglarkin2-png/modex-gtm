@@ -1,0 +1,46 @@
+{
+  "name": "H-E-B eCommerce Fulfillment Center - Cibolo - Cibolo TX",
+  "type": "E-commerce Fulfillment Center",
+  "coords": { "lat": 29.568700, "lng": -98.230100 },
+  "geofences": {
+    "perimeter": { "south": 29.567000, "west": -98.231500, "north": 29.570000, "east": -98.228500 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 29.568200, "west": -98.229600, "north": 29.569300, "east": -98.229100 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 4, "trailersVisible": 1, "trailerParkingCapacity": 4,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 24.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.568700,-98.230100,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "dockAprons", "entryLanes", "exitLanes", "dropArea"],
+  "fieldNotes": {
+    "facility": "Cibolo eFC (~55,000 sq ft, opened May 2024) is integrated with the H-E-B Cibolo retail grocery store at 850 FM 1103 (store opened Jan 2023). Same model as the Plano eFC - not a stand-alone freight building.",
+    "imagery": "Google satellite tiles for this site are STALE - they show the site mid-construction (early foundation/grading), pre-2023. Audit relies on 2026-02 Street View (which confirms the store and eFC are built and operational, with H-E-B delivery vans and a curbside area on the SW face) plus the H-E-B store-attached-eFC pattern. Rear dock not directly visible.",
+    "truckGate": "No controlled freight gate expected or visible. Truck access is a back-of-house service drive from the shopping-center parking-lot circulation - consistent with all H-E-B retail stores; no barrier arm, gate, or checkpoint seen.",
+    "guardShack": "No guard booth - none visible and not part of the H-E-B store format.",
+    "remoteGs": "False - no truck gate.",
+    "dockDoors": "Estimated ~4 dock positions at the rear-of-store dock (slightly larger than a plain store dock because of the attached eFC). Banded 0-10. Estimate - not directly observed.",
+    "dropArea": "No trailer drop lot - NONE.",
+    "urbanRural": "Cibolo is a small city on the NE edge of the San Antonio metro; the site sits at a town-edge intersection (FM 1103 & Main St) with adjacent farmland and open land - judged Rural per the small-town-industrial tie-break rule.",
+    "drivewayShort": "Back-of-house service drive holds only 1-2 trucks at the dock.",
+    "trailersVisible": "1 box trailer glimpsed near the building in 2026-02 Street View; full count not observable."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,53 @@
+{
+  "name": "K-C New Milford Mill - New Milford CT",
+  "type": "Diaper & tissue manufacturing plant (Huggies, Kleenex, Scott)",
+  "coords": { "lat": 41.55833, "lng": -73.41361 },
+  "geofences": {
+    "perimeter": { "south": 41.55500, "west": -73.41750, "north": 41.56150, "east": -73.40850 },
+    "truckGate": { "south": 41.55820, "west": -73.41600, "north": 41.55920, "east": -73.41480 },
+    "dropYards": [
+      { "south": 41.55870, "west": -73.41520, "north": 41.56050, "east": -73.41200 },
+      { "south": 41.55560, "west": -73.41300, "north": 41.55720, "east": -73.41050 }
+    ],
+    "dockAprons": [
+      { "south": 41.55880, "west": -73.41500, "north": 41.55980, "east": -73.41300 }
+    ],
+    "staging": { "south": 41.55840, "west": -73.41560, "north": 41.55960, "east": -73.41380 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 25,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 5,
+    "siteAreaAcres": 75.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.55833,-73.41361,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "railServed", "dockDoorCount", "scale"],
+  "fieldNotes": {
+    "truckGate": "No barrier arm or staffed checkpoint clearly visible from satellite. The complex shares a dense industrial park and the only Street View coverage (2019-2022) is of the office/commercial frontage on Pickett District Rd, where there is no gate. A controlled truck gate on the internal yard road cannot be confirmed or ruled out - set false, flagged uncertain.",
+    "guardShack": "No guard booth visible at any imaged entrance. Set false.",
+    "remoteGs": "False - no controlled gate identified.",
+    "railServed": "A rail line runs along the Housatonic River on the east edge of the property with rail cars (boxcars/hoppers) parked on it - consistent with a rail siding serving the mill. Marked true with medium confidence; flagged uncertain because the spur connection into the property is partly tree-obscured.",
+    "shipRcvSeparate": "Multiple dock faces and drop yards on different building faces (north drop yard near the main mill, plus a separate yard with trailers to the SE) - physically separate clusters.",
+    "multipleFacilities": "Campus: main diaper/tissue mill, an attached utility/boiler plant, office buildings, and a wastewater treatment area.",
+    "dropArea": "Trailer drop yards with ~60 trailers visible in angled rows; banded 25-50 for marked drop stalls.",
+    "dockDoorCount": "~25 doors estimated; much of the building face is obscured by process equipment and roof structures - honest estimate, banded 25-50.",
+    "scale": "No truck scale clearly visible from overhead; flagged uncertain.",
+    "urbanRural": "Urban - the mill sits inside a dense industrial/commercial corridor of New Milford CT (Pickett District Rd)."
+  },
+  "method": "deep-audit"
+}

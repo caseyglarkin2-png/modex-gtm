@@ -1,0 +1,44 @@
+{
+  "name": "H-E-B eCommerce Fulfillment Center - San Antonio - San Antonio TX",
+  "type": "E-commerce Fulfillment Center",
+  "coords": { "lat": 29.42519, "lng": -98.494592 },
+  "geofences": {
+    "perimeter": null,
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0, "trailersVisible": 0, "trailerParkingCapacity": 0,
+    "truckGateCount": 0, "buildingCount": 0, "siteAreaAcres": 0.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.42519,-98.494592,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural",
+    "connectivityIssue", "multipleFacilities", "scale", "dropYard", "multiStep"
+  ],
+  "fieldNotes": {
+    "locationStatus": "COULD NOT RESOLVE. No distinct stand-alone H-E-B eCommerce Fulfillment Center located within the city of San Antonio could be found in any public source. The roster's own source note states the San Antonio standalone eFC street address is 'not publicly confirmed'.",
+    "research": "Extensive web research (H-E-B Newsroom, Grocery Dive, Supply Chain Dive, Supermarket News, Progressive Grocer, Swisslog) was performed. H-E-B's publicly documented eFCs are: ~3 in Houston (incl. the Holmes Rd standalone, Feb 2025), Katy (2023, first stand-alone), Plano (2023), Cibolo (2024, 8th), Leander (5th, 651 N US Hwy 183), and Frisco (planned 2026-27). None is a separately identified San Antonio-proper standalone eFC. H-E-B's San Antonio-area Curbside/Home-Delivery demand is served by the Cibolo eFC (roster idx 13) and by earlier store-integrated micro-fulfillment.",
+    "coordinates": "The roster coordinates (29.42519, -98.494592, geocode precision APPROXIMATE, moved 6794 m) are a city-center placeholder - they point to downtown San Antonio civic buildings/parking garages, not an industrial facility. They are identical to the placeholder used for roster idx 7, confirming they are a city centroid, not a real geocode.",
+    "conclusion": "This roster entry appears to be a speculative / placeholder line item derived from H-E-B's general 'nine eFCs since 2018' statement and is not a verifiable distinct facility. Recommend human review: either merge into idx 13 (Cibolo) or remove. All classification fields are unverifiable and listed in uncertainFields."
+  },
+  "method": "deep-audit"
+}

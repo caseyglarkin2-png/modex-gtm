@@ -1,0 +1,280 @@
+{
+  "account": "Hyundai Motor America",
+  "generatedAt": "2026-05-18",
+  "facilityCount": 17,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Hyundai Motor Manufacturing Alabama (HMMA) - Montgomery AL",
+      "city": "Montgomery",
+      "state": "AL",
+      "type": "Auto Assembly Plant",
+      "address": "700 Hyundai Blvd, Montgomery, AL 36105",
+      "lat": 32.280312,
+      "lng": -86.324154,
+      "source": "HMMA official site (hmmausa.com factory-location); Wikipedia. Dossier-named ICE/hybrid plant building Santa Fe, Tucson, Elantra, Santa Cruz; on-site stamping, weld, paint, assembly + three engine shops.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 6427
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Hyundai Motor Group Metaplant America (HMGMA) - Ellabell GA",
+      "city": "Ellabell",
+      "state": "GA",
+      "type": "Auto Assembly Plant (EV)",
+      "address": "1500 Genesis Dr, Ellabell, GA 31308",
+      "lat": 32.165371,
+      "lng": -81.444937,
+      "source": "HMGMA official site (hmgma.com); Wikipedia. Dossier-named $7.6B EV plant in Bryan County, opened Oct 2024, 500K vehicles/yr capacity, IONIQ 5 / IONIQ 9 / Kia.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 2313
+      }
+    },
+    {
+      "idx": 3,
+      "name": "HMMA Cylinder Head Machining Plant - Montgomery AL",
+      "city": "Montgomery",
+      "state": "AL",
+      "type": "Engine / Component Plant",
+      "address": "700 Hyundai Blvd, Montgomery, AL 36105",
+      "lat": 32.280312,
+      "lng": -86.324154,
+      "source": "HMMA press release (2019 cylinder head machining plant grand opening, $388M). 260,000 sqft engine-component plant on the HMMA campus; HMMA runs three engine shops, 650K+ engines/yr. Same campus address as HMMA assembly.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 6427
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Mobis Parts America PDC - Ontario CA",
+      "city": "Ontario",
+      "state": "CA",
+      "type": "Parts Distribution Center",
+      "address": "1900 S Rochester Ave, Ontario, CA 91761",
+      "lat": 34.040044,
+      "lng": -117.552921,
+      "source": "Mobis Parts America (Hyundai Motor Group parts/service arm) - West Coast source PDC opened 2013, single-sourced Hyundai/Genesis. Address from BBB / business directories.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 219
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Mobis Parts America PDC - Aurora IL",
+      "city": "Aurora",
+      "state": "IL",
+      "type": "Parts Distribution Center",
+      "address": "1705 Sequoia Dr, Aurora, IL 60506",
+      "lat": 41.793528,
+      "lng": -88.357668,
+      "source": "Mobis Parts America Central Region PDC (Chicago metro). Address from business directories / Panjiva import records.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1385
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Mobis Parts America PDC - Lawrenceville GA",
+      "city": "Lawrenceville",
+      "state": "GA",
+      "type": "Parts Distribution Center",
+      "address": "2155 Breckinridge Blvd NW, Lawrenceville, GA 30043",
+      "lat": 33.967918,
+      "lng": -84.086433,
+      "source": "Mobis Parts America Southeast PDC (Atlanta metro), serves Hyundai/Kia dealer network. Address from Panjiva import records / business directories.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 45
+      }
+    },
+    {
+      "idx": 7,
+      "name": "Mobis Parts America PDC - Lancaster TX",
+      "city": "Lancaster",
+      "state": "TX",
+      "type": "Parts Distribution Center",
+      "address": "2301 S Pointe Dr, Lancaster, TX 75134",
+      "lat": 32.639632,
+      "lng": -96.810297,
+      "source": "Mobis Parts America 'Dallas PDC' serving the south-central region. Address from Dun & Bradstreet / Panjiva import records.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 8399
+      }
+    },
+    {
+      "idx": 8,
+      "name": "Mobis Parts America PDC - Jamesburg NJ",
+      "city": "Jamesburg",
+      "state": "NJ",
+      "type": "Parts Distribution Center",
+      "address": "1122 Cranbury South River Rd, Jamesburg, NJ 08831",
+      "lat": 40.352265,
+      "lng": -74.478843,
+      "source": "Mobis Parts America Eastern Region PDC; also Hyundai eastern regional office. Address from Panjiva import records.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 2503
+      }
+    },
+    {
+      "idx": 9,
+      "name": "Mobis Parts America PDC - South Windsor CT",
+      "city": "South Windsor",
+      "state": "CT",
+      "type": "Parts Distribution Center",
+      "address": "135 Sullivan Ave, South Windsor, CT 06074",
+      "lat": 41.856464,
+      "lng": -72.598294,
+      "source": "Mobis Parts America Northeast PDC (Hartford-area). Address from Panjiva import records / business directories.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 35
+      }
+    },
+    {
+      "idx": 10,
+      "name": "Mobis Parts America PDC - Sumner WA",
+      "city": "Sumner",
+      "state": "WA",
+      "type": "Parts Distribution Center",
+      "address": "14000 24th St E, Sumner, WA 98390",
+      "lat": 47.234447,
+      "lng": -122.242583,
+      "source": "Mobis Parts America Pacific Northwest PDC (Sumner Corporate Park), recently expanded to 181,000 sqft. Address from Panjiva import records / The Registry PS.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 117
+      }
+    },
+    {
+      "idx": 11,
+      "name": "Glovis America Vehicle Processing Center - West Point GA",
+      "city": "West Point",
+      "state": "GA",
+      "type": "Vehicle Processing Center",
+      "address": "2000 Webb Rd, West Point, GA 31833",
+      "lat": 32.911036,
+      "lng": -85.137392,
+      "source": "Glovis America locations page (glovisusa.com). Dossier-named VPC; Glovis is HMA's captive finished-vehicle 3PL. Co-located near Kia Georgia / serves regional vehicle distribution.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 11
+      }
+    },
+    {
+      "idx": 12,
+      "name": "Glovis America Vehicle Processing Center - Shreveport LA",
+      "city": "Shreveport",
+      "state": "LA",
+      "type": "Vehicle Processing Center",
+      "address": "7600 Antoine Blvd, Shreveport, LA 71130",
+      "lat": 32.426875,
+      "lng": -93.920747,
+      "source": "Glovis America locations page (glovisusa.com). Dossier-named VPC at the former-GM Shreveport plant; central/western vehicle distribution hub.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 10038
+      }
+    },
+    {
+      "idx": 13,
+      "name": "Glovis America Port Vehicle Processing - Brunswick GA",
+      "city": "Brunswick",
+      "state": "GA",
+      "type": "Port / Vehicle Import Processing Center",
+      "address": "1 Joe Frank Harris Blvd, Brunswick, GA 31523",
+      "lat": 31.123497,
+      "lng": -81.542576,
+      "source": "Glovis America locations page (glovisusa.com). Dossier-named primary Atlantic gateway for Glovis import vehicle processing (Colonel's Island terminal).",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 4495
+      }
+    },
+    {
+      "idx": 14,
+      "name": "Glovis America Port Vehicle Processing - Newark/Elizabeth NJ",
+      "city": "Elizabeth",
+      "state": "NJ",
+      "type": "Port / Vehicle Import Processing Center",
+      "address": "E Bay Ave, Elizabeth, NJ 07201",
+      "lat": 40.672346,
+      "lng": -74.149854,
+      "source": "Glovis America locations page (glovisusa.com). Dossier-named Northeast import port operation for Korea-built vehicles.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 1198
+      }
+    },
+    {
+      "idx": 15,
+      "name": "Glovis America Vehicle Processing Center - Tacoma WA (Hyundai)",
+      "city": "Tacoma",
+      "state": "WA",
+      "type": "Port / Vehicle Import Processing Center",
+      "address": "3400 Taylor Way, Tacoma, WA 98421",
+      "lat": 47.261326,
+      "lng": -122.368374,
+      "source": "Glovis America locations page (glovisusa.com) - dedicated Hyundai VPC at Port of Tacoma. Dossier-named Pacific Northwest import gateway.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 3090
+      }
+    },
+    {
+      "idx": 16,
+      "name": "Glovis America Port Vehicle Processing - Jacksonville FL",
+      "city": "Jacksonville",
+      "state": "FL",
+      "type": "Port / Vehicle Import Processing Center",
+      "address": "2064 E 11th St, Jacksonville, FL 32206",
+      "lat": 30.349676,
+      "lng": -81.626996,
+      "source": "Glovis America locations page (glovisusa.com). Dossier-named Glovis port operation (Jacksonville/Blount Island) for Southeast import vehicle processing.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 14
+      }
+    },
+    {
+      "idx": 17,
+      "name": "Glovis EV Logistics America - Savannah Integrated Warehouse (Pooler GA)",
+      "city": "Pooler",
+      "state": "GA",
+      "type": "Distribution Warehouse / Logistics Hub",
+      "address": "Pooler, GA 31322 (exact street address not publicly disclosed; near Savannah-Ogeechee Canal logistics corridor)",
+      "lat": 32.088338,
+      "lng": -81.262896,
+      "source": "Seoul Economic Daily / Glovis press (April 2026 opening). Dossier-named 69,000 sqm integrated warehouse built to absorb HMGMA outbound volume. Street address could not be pinned down - city/ZIP only.",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 7
+      }
+    }
+  ],
+  "geocodedAt": "2026-05-18"
+}

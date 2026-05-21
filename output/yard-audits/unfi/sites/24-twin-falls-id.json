@@ -1,0 +1,49 @@
+{
+  "name": "UNFI - Twin Falls ID DC",
+  "type": "Distribution Center",
+  "coords": { "lat": 42.555838, "lng": -114.470052 },
+  "geofences": {
+    "perimeter": null,
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 0,
+    "buildingCount": 0,
+    "siteAreaAcres": 0.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.555838,-114.470052,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural", "connectivityIssue",
+    "multipleFacilities", "scale", "dropYard", "multiStep"
+  ],
+  "fieldNotes": {
+    "resolution": "FACILITY NOT POSITIVELY LOCATED. The roster supplied a city-level entry ('Twin Falls, ID', source: supplyve / Indeed locations list) with APPROXIMATE coordinates 42.555838, -114.470052 and no street address. The roster's own geocode metadata records movedMeters: 3492 — i.e., a known ~3.5 km geocode error. The supplied coordinates land in downtown Twin Falls (commercial/retail core), where there is no distribution center.",
+    "investigation": "Twin Falls' industrial / warehouse districts were probed by satellite — the NW area (College of Southern Idaho vicinity, no DCs), the SW industrial cluster along the Snake River canyon, and the larger SE/east-central industrial corridor (mostly medium-size buildings and agricultural-processing plants, consistent with Twin Falls' food-processing economy). No building could be positively identified as a UNFI grocery distribution center, and no distinguishing UNFI signage was visible.",
+    "assessment": "Multiple web searches (UNFI corporate locations, warehouse directories, real-estate listings, job postings) confirmed that UNFI lists 'Twin Falls' as a location but produced no specific street address. Twin Falls is a relatively small market and UNFI's West/Mountain region is anchored by larger DCs elsewhere (Centralia WA, Ridgefield WA, Moreno Valley CA, Rocklin CA); the Twin Falls entry is most plausibly a smaller West/Mountain-region branch or cross-dock rather than a mega-DC, or the roster entry is imprecise. All 22 classification fields are left at conservative defaults and flagged uncertain; geofences and yardMetrics are null/zero.",
+    "recommendation": "Human verification of the exact UNFI Twin Falls street address is required before this site can be geofenced or used for outreach. If a confirmed address is supplied, a full re-audit can be completed quickly.",
+    "urbanRural": "Twin Falls is a small Idaho city; if a UNFI facility exists it is in a small-city industrial setting — Rural per the rubric. Low confidence."
+  },
+  "method": "deep-audit"
+}

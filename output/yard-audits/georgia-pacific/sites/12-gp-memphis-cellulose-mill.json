@@ -1,0 +1,54 @@
+{
+  "name": "GP Memphis Cellulose Mill - Memphis TN",
+  "type": "Cellulose Mill",
+  "coords": { "lat": 35.1565, "lng": -89.9620 },
+  "geofences": {
+    "perimeter": { "south": 35.1505, "west": -89.9678, "north": 35.1612, "east": -89.9592 },
+    "truckGate": { "south": 35.1568, "west": -89.9610, "north": 35.1580, "east": -89.9598 },
+    "dropYards": [
+      { "south": 35.1548, "west": -89.9638, "north": 35.1562, "east": -89.9618 }
+    ],
+    "dockAprons": [
+      { "south": 35.1556, "west": -89.9632, "north": 35.1566, "east": -89.9618 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 16,
+    "trailersVisible": 8,
+    "trailerParkingCapacity": 35,
+    "truckGateCount": 1,
+    "buildingCount": 14,
+    "siteAreaAcres": 78.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.1565,-89.9620,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": true, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "scale", "dockDoors", "dropArea", "entryLanes", "exitLanes", "truckGate"],
+  "fieldNotes": {
+    "location": "Roster geocode (35.1486,-90.0519) landed in downtown Memphis, ~5 km off (APPROXIMATE, 1952 m flagged). Web research resolved the mill to 920 Scott Rd in the Binghampton neighborhood; the 1001 Tillman St address is the separate GP Cellulose Technology & Innovation Center office. Mill complex located via satellite at ~35.1565,-89.9620.",
+    "facility": "Large multi-building urban industrial cellulose mill - the former Buckeye Cellulose / Buckeye Technologies cotton-linter pulp plant, acquired by GP in 2013. GP announced permanent closure of the Memphis Cellulose mill in October 2025 (~130 layoffs).",
+    "truckGate": "Complex is fully enclosed by chain-link perimeter fencing (verified along multiple street frontages in Street View). Controlled vehicle gates observed at the fenced parking/office entrance. Treated as a controlled truck gate; exact dedicated truck lane not isolated - flagged uncertain.",
+    "guardShack": "No distinct standalone guard booth confirmed at a truck lane; office/admin building sits at the main entry. Classified remoteGs true - flagged uncertain.",
+    "backupSensitive": "Urban site - mill fronts onto city streets with residential blocks directly across; a truck queue at the gate would spill onto a public street.",
+    "shipRcvSeparate": "Distinct dock clusters on different building faces plus rail-served receiving area; shipping and receiving physically separate.",
+    "multipleFacilities": "Campus of 14+ distinct buildings - processing, warehouses, pole-barn storage, office, plus a large rail/tank-car yard.",
+    "railServed": "Active rail line runs the full length of the west side; rail tank cars and rail equipment visible in the on-site yard.",
+    "scale": "A truck scale is operationally expected at a pulp mill of this type and era; not pinpointed in imagery - flagged low-confidence.",
+    "dropYard": "Large paved yard along the rail holds trailers and rail cars - functions as a drop/storage yard.",
+    "urbanRural": "Dense urban Memphis - surrounded on the east and south by residential blocks; clearly Urban.",
+    "dockDoors": "Multiple dock banks across aging buildings; ~8 trailers visible plus additional doors - banded 10-25, medium confidence."
+  },
+  "method": "deep-audit"
+}

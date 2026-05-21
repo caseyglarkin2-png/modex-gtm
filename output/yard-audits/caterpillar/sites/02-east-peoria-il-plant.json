@@ -1,0 +1,49 @@
+{
+  "name": "Caterpillar - East Peoria IL Plant",
+  "type": "Manufacturing plant (track-type tractors, components)",
+  "coords": { "lat": 40.6730, "lng": -89.5955 },
+  "geofences": {
+    "perimeter": { "south": 40.6670, "west": -89.6025, "north": 40.6775, "east": -89.5880 },
+    "truckGate": { "south": 40.6730, "west": -89.5920, "north": 40.6740, "east": -89.5905 },
+    "dropYards": [
+      { "south": 40.6745, "west": -89.5985, "north": 40.6765, "east": -89.5895 }
+    ],
+    "dockAprons": [
+      { "south": 40.6735, "west": -89.5925, "north": 40.6755, "east": -89.5905 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 20, "trailersVisible": 12, "trailerParkingCapacity": 30,
+    "truckGateCount": 2, "buildingCount": 6, "siteAreaAcres": 230.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.6730,-89.5955,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "truckGate", "entryLanes", "exitLanes", "dockDoors", "scale", "shipRcvSeparate"],
+  "fieldNotes": {
+    "location": "Roster geocode (40.6733,-89.5990) moved 2.4 km (GEOMETRIC_CENTER) but landed inside the historic Caterpillar East Peoria works on the east bank of the Illinois River. Confirmed: large old multi-building industrial plant with rooftop monitor skylights, Cat component (undercarriage/casting) laydown yards, and an adjacent rail yard with spurs. Address 100 NE Adams St is actually the Caterpillar downtown HQ/Visitors Center across the river; the East Peoria works is the manufacturing campus.",
+    "truckGate": "Whole campus enclosed by black metal and chain-link perimeter fencing (confirmed in multiple Street View panos). Truck access is via the east access road through fenced openings into the building/laydown areas; no open uncontrolled driveway. Building face entrance E1 visible from the road.",
+    "guardShack": "No standalone guard booth visible from public roads - gates are at building/fence openings typical of an old urban works. Classified remoteGs (controlled gate, no road-visible booth); low confidence.",
+    "drivewayShort": "Old urban plant - building faces sit close to the access road; short approach, little internal stacking.",
+    "backupSensitive": "Plant fronts public city streets with residential homes directly opposite on the south; a truck queue at a gate would sit on a public street.",
+    "dropArea": "Trailers and a large component/casting laydown yard north of the historic building; trailer drop capacity ~30.",
+    "railServed": "Large rail yard immediately south/east of the plant with spurs running into the property; the plant is historically rail-served.",
+    "multipleFacilities": "Continuous campus of 6+ large connected/adjacent manufacturing buildings (historic East Peoria works).",
+    "dockDoors": "~20 dock doors estimated; many obscured by the old building's continuous wall faces - low confidence.",
+    "urbanRural": "Dense urban riverfront industrial setting in East Peoria with residential streets abutting the plant.",
+    "siteAreaAcres": "~230 acres for the fenced East Peoria works including laydown yards - approximate."
+  },
+  "method": "deep-audit"
+}

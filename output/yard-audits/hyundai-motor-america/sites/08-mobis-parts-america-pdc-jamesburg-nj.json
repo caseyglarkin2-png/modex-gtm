@@ -1,0 +1,49 @@
+{
+  "name": "Mobis Parts America PDC - Jamesburg NJ",
+  "type": "Parts Distribution Center",
+  "coords": { "lat": 40.35270, "lng": -74.47820 },
+  "geofences": {
+    "perimeter": { "south": 40.35130, "west": -74.47990, "north": 40.35480, "east": -74.47650 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 40.35370, "west": -74.47830, "north": 40.35470, "east": -74.47680 }
+    ],
+    "dockAprons": [
+      { "south": 40.35300, "west": -74.47900, "north": 40.35450, "east": -74.47720 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 32,
+    "trailersVisible": 34,
+    "trailerParkingCapacity": 45,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 27.8,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.35270,-74.47820,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "No barrier arm, sliding gate, or checkpoint. The NE truck court is open paved area; the access road from Cranbury South River Rd connects directly into the court with no perimeter fence (confirmed z20/z21 satellite).",
+    "guardShack": "No booth structure anywhere at the building or court entrance.",
+    "dropYard": "Separate row of drop trailers (no tractors) along the NE edge of the court, beyond the active dock-door staging.",
+    "dockDoors": "~32 dock doors along the single NE building face (band 25-50).",
+    "dropArea": "Drop trailers parked in the NE court plus trailers staged at dock doors; estimate 25-50 band.",
+    "drivewayLong": "The dock court approach is long and wide enough to hold 3+ trucks.",
+    "trailerParkingCapacity": "Honest overhead estimate of court trailer capacity."
+  },
+  "method": "deep-audit"
+}

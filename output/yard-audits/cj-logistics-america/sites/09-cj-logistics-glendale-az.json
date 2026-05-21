@@ -1,0 +1,49 @@
+{
+  "name": "CJ Logistics - Glendale AZ",
+  "type": "Distribution Center",
+  "coords": { "lat": 33.509600, "lng": -112.399200 },
+  "geofences": {
+    "perimeter": { "south": 33.508300, "west": -112.402000, "north": 33.511200, "east": -112.396500 },
+    "truckGate": { "south": 33.508300, "west": -112.401500, "north": 33.508900, "east": -112.400700 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 33.508500, "west": -112.401200, "north": 33.509200, "east": -112.397300 }
+    ],
+    "staging": { "south": 33.508500, "west": -112.401200, "north": 33.509200, "east": -112.397300 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70, "trailersVisible": 12, "trailerParkingCapacity": 90,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 32.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.509600,-112.399200,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "entryLanes", "exitLanes", "dropArea"],
+  "fieldNotes": {
+    "truckGate": "Single truck entrance is an open driveway off the E-W public road (N Alsup Rd / industrial collector) at the SW corner of the property. No barrier arm, sliding/swing gate, guard booth, or checkpoint pinch-point visible in z20 satellite (2026) or 2024 Street View. The dock apron is not enclosed by perimeter fence - open desert site. Open driveway = no controlled truck gate.",
+    "guardShack": "No guard booth structure at the entrance in any view.",
+    "remoteGs": "False because there is no truck gate.",
+    "dockDoors": "Single south-facing dock bank running the length of the building; ~70 doors estimated from regular bay rhythm, low confidence as imagery resolution limited the count.",
+    "dropArea": "Building dock apron held only a few trailers in 2026 imagery; no marked drop-trailer stalls. CJ occupies only half the ~663k sq ft building (~331,686 SF) so the yard is lightly used.",
+    "dropYard": "No dedicated trailer-storage lot - the large dirt lot east of the building is undeveloped vacant land, not a trailer yard.",
+    "drivewayLong": "Wide deep concrete apron between the road entrance and the dock doors; ample queuing room for 3+ trucks.",
+    "fastLaneOpportunity": "Very wide entrance apron and abundant unused paved/dirt width to add an express lane.",
+    "shipRcvSeparate": "All dock doors on a single (south) building face; no separate ship/receive dock clusters.",
+    "urbanRural": "Building sits amid irrigated farmland and open desert on the far western fringe of the Phoenix metro (Glendale/Litchfield Park boundary); judged Rural per the broader open-country setting.",
+    "connectivityIssue": "Site is on the metro fringe but not deeply isolated - within an emerging industrial corridor near Glendale Municipal Airport; cellular coverage likely adequate, marked false (medium confidence).",
+    "siteAreaAcres": "Estimated from the developed parcel (building + south apron + parking, ~320m x ~510m); the large vacant lot to the east is excluded.",
+    "railServed": "No rail spur into the property; no rail line adjacent."
+  },
+  "method": "deep-audit"
+}

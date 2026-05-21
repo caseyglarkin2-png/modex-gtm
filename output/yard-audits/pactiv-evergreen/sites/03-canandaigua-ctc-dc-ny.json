@@ -1,0 +1,59 @@
+{
+  "name": "Pactiv Evergreen - Canandaigua CTC Distribution Center NY",
+  "type": "Distribution Center",
+  "coords": { "lat": 42.905300, "lng": -77.303500 },
+  "geofences": {
+    "perimeter": { "south": 42.90200, "west": -77.30720, "north": 42.90820, "east": -77.29720 },
+    "truckGate": { "south": 42.90250, "west": -77.30330, "north": 42.90305, "east": -77.30255 },
+    "dropYards": [
+      { "south": 42.90490, "west": -77.30700, "north": 42.90700, "east": -77.30420 },
+      { "south": 42.90420, "west": -77.30480, "north": 42.90560, "east": -77.30280 }
+    ],
+    "dockAprons": [
+      { "south": 42.90540, "west": -77.30440, "north": 42.90650, "east": -77.30330 },
+      { "south": 42.90450, "west": -77.30360, "north": 42.90560, "east": -77.30260 }
+    ],
+    "staging": { "south": 42.90290, "west": -77.30330, "north": 42.90460, "east": -77.30180 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 280,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 145.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.9053,-77.3035,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Confirmed in Street View (2016-09) at the shared campus south entrance ~42.9028,-77.3030: a black-and-white striped barrier arm spans the truck lane, flanked by two sliding chain-link gates and STOP signs, with perimeter chain-link fencing. The CTC Distribution Center (2480 Sommers Drive) sits on the same gated Pactiv campus as the Canandaigua plant and shares this single truck gate.",
+    "guardShack": "Small flat-roof staffed booth (windowed multiple sides, ~1-2 vehicle footprint, 'Adecco' sign, US flag pole) sits immediately beside the gate lane — the staffed check-in booth.",
+    "remoteGs": "False — a guard booth is present. A 'Pick Up Phone For Directions' call-box kiosk is a secondary aid only.",
+    "postGateStaging": "Internal paved access roads and aprons inside the gate give ample queue room before the DC dock banks.",
+    "drivewayLong": "Long internal approach from the shared gate to the DC dock faces (several hundred metres up the campus road).",
+    "fastLaneOpportunity": "Wide multi-bay gate apron with room to add a dedicated express/bypass lane.",
+    "dockDoors": "DC warehouse buildings on the west campus show dock faces with trailers backed in along the long building faces; estimate ~35 doors across the DC buildings. Low-confidence overhead count.",
+    "dropArea": "Very large marked trailer drop yards surround the DC buildings — well over 100 parked trailers in long rows; clearly 50+ band.",
+    "shipRcvSeparate": "DC dock activity appears to run from common warehouse faces; no clearly separate dedicated ship vs. receive dock clusters identifiable from imagery — set false, flagged uncertain.",
+    "multipleFacilities": "True — the DC is part of a multi-building Pactiv campus (manufacturing plant complex plus multiple warehouse/distribution buildings).",
+    "dropYard": "Dedicated trailer-storage lots full of parked trailers ring the DC warehouses, separate from active dock staging.",
+    "railServed": "A rail spur enters the campus from the NE and curves down the east edge; the campus is rail-served (spur primarily reaches the plant side).",
+    "urbanRural": "North Street industrial corridor on the NW edge of Canandaigua, a small NY town; bordered by woods, fields and a retention pond. Edge-of-town / rural setting.",
+    "trailersVisible": "~180 trailers counted in the DC drop-yard rows; honest overhead estimate.",
+    "siteAreaAcres": "Shared campus perimeter ~145 acres; the DC occupies the western portion."
+  },
+  "method": "deep-audit"
+}

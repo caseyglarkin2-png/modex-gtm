@@ -1,0 +1,49 @@
+{
+  "name": "Mondelez/Nabisco Tatamy Sales Distribution Center - Tatamy PA",
+  "type": "Distribution center / sales warehouse",
+  "coords": { "lat": 40.73510, "lng": -75.26120 },
+  "geofences": {
+    "perimeter": { "south": 40.73370, "west": -75.26340, "north": 40.73620, "east": -75.25960 },
+    "truckGate": { "south": 40.73490, "west": -75.26340, "north": 40.73580, "east": -75.26270 },
+    "dropYards": [
+      { "south": 40.73460, "west": -75.26330, "north": 40.73600, "east": -75.26240 }
+    ],
+    "dockAprons": [
+      { "south": 40.73440, "west": -75.26240, "north": 40.73560, "east": -75.26060 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 24, "trailersVisible": 32, "trailerParkingCapacity": 45,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 12.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.73510,-75.26120,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["truckGate", "dockDoorCount"],
+  "fieldNotes": {
+    "location": "Resolved to 120 Commerce Lane, Tatamy PA 18085 (Northampton County, Lehigh Valley) — a Becknell Industrial build-to-suit warehouse in the Tatamy/Palmer Township industrial park. Roster city-centroid (40.7401,-75.2557) was ~1km NE; corrected via web research (Becknell property page, Foursquare, Mondelez hourly-jobs portal all list 120 Commerce Lane) plus Nominatim geocode and satellite. The modern grey warehouse with purple accent striping and a fenced truck/drop yard matches the ~100,300 sq ft build-to-suit Nabisco DC.",
+    "truckGate": "TRUE — Street View (Jul 2024) of the Commerce Lane frontage shows chain-link perimeter fencing enclosing the truck/drop yard with branded trailers parked inside; the yard is accessed through a fenced gate off the loop road. A controlled, fenced industrial entrance.",
+    "guardShack": "FALSE — no staffed guard-booth structure visible at the yard entrance or building in Street View or satellite.",
+    "remoteGs": "TRUE — fenced/controlled truck gate present but no guard shack, implying kiosk / app / dock-office check-in.",
+    "dockDoors": "10-25 — dock doors line the south building face; ~20-24 estimated with many trailers backed in. Banded 10-25.",
+    "dropArea": "25-50 — a long row of drop trailers parked in the yard alongside the docked trailers; counts in the 30-40 range.",
+    "shipRcvSeparate": "FALSE — all dock doors are on a single (south) building face.",
+    "fastLaneOpportunity": "TRUE — wide paved truck yard with substantial unused apron width.",
+    "drivewayLong": "Deep truck yard / loop road can hold a 3+ truck queue.",
+    "urbanRural": "Edge-of-town build-to-suit industrial park bordered by other warehouses and single-family residential; judged Rural per the small-town-industrial tie-break.",
+    "buildingCount": "One warehouse on the Mondelez parcel; neighboring buildings in the Becknell park are separate tenants."
+  },
+  "method": "deep-audit"
+}

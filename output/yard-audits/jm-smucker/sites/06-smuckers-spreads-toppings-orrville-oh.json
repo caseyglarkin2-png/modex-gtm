@@ -1,0 +1,54 @@
+{
+  "name": "Smucker's Spreads/Toppings - Orrville OH",
+  "type": "Manufacturing - Fruit spreads, syrups, ice cream toppings",
+  "coords": { "lat": 40.84780, "lng": -81.76050 },
+  "geofences": {
+    "perimeter": { "south": 40.84370, "west": -81.76480, "north": 40.85250, "east": -81.75600 },
+    "truckGate": { "south": 40.84395, "west": -81.76010, "north": 40.84455, "east": -81.75900 },
+    "dropYards": [
+      { "south": 40.84430, "west": -81.76130, "north": 40.84650, "east": -81.75880 },
+      { "south": 40.84690, "west": -81.76130, "north": 40.84810, "east": -81.75980 }
+    ],
+    "dockAprons": [
+      { "south": 40.84720, "west": -81.76070, "north": 40.84900, "east": -81.75980 }
+    ],
+    "staging": { "south": 40.84660, "west": -81.76070, "north": 40.84740, "east": -81.75960 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 38,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 8,
+    "siteAreaAcres": 64.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.84780,-81.76050,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "scale"],
+  "fieldNotes": {
+    "truckGate": "South truck driveway opens directly onto the public road with no barrier arm, sliding gate, or checkpoint pinch-point (Street View Apr-2023, Jan-2025). Open uncontrolled entrance into the drop yard / dock area.",
+    "guardShack": "No staffed booth at the south entrance; only a small free-standing yard sign. No booth structure visible at any campus truck access.",
+    "remoteGs": "False because there is no controlled truck gate at all.",
+    "drivewayLong": "Large internal yard between the open entrance and the dock bank can hold a deep queue of 3+ trucks.",
+    "fastLaneOpportunity": "Wide unmarked paved entrance apron and ample yard width — physical room to add an express lane.",
+    "dockDoors": "Main dock bank on the east face shows ~14 trailers backed in; additional dock faces on other building sides bring the site total into the 25-50 band. Count is an overhead estimate.",
+    "dropArea": "Multiple dedicated trailer-storage rows south and southeast of the dock bank, 70+ trailers visible, capacity well above 50.",
+    "multipleFacilities": "Campus of 8+ large buildings: corporate HQ, the main manufacturing/distribution complex, original Orrville plant buildings to the north, and SE warehouse/storage structures.",
+    "railServed": "An active rail line runs north-south through the campus with at least one spur toward the buildings.",
+    "scale": "No truck scale clearly visible in overhead imagery; flagged as uncertain.",
+    "urbanRural": "Orrville is a small Ohio town (~8,300 pop); the campus sits at the edge of town with farmland directly east and south."
+  },
+  "method": "deep-audit"
+}

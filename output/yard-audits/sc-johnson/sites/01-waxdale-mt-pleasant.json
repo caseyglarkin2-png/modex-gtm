@@ -1,0 +1,57 @@
+{
+  "name": "Waxdale Plant - Mt. Pleasant WI",
+  "type": "Manufacturing Plant (Aerosol / Liquid / Gel)",
+  "coords": { "lat": 42.70750, "lng": -87.88500 },
+  "geofences": {
+    "perimeter": { "south": 42.70180, "west": -87.89050, "north": 42.71280, "east": -87.88100 },
+    "truckGate": { "south": 42.71160, "west": -87.88660, "north": 42.71300, "east": -87.88520 },
+    "dropYards": [
+      { "south": 42.70980, "west": -87.88780, "north": 42.71150, "east": -87.88560 },
+      { "south": 42.70700, "west": -87.88780, "north": 42.70880, "east": -87.88560 },
+      { "south": 42.70560, "west": -87.88560, "north": 42.70900, "east": -87.88420 }
+    ],
+    "dockAprons": [
+      { "south": 42.70820, "west": -87.88560, "north": 42.70920, "east": -87.88380 },
+      { "south": 42.70560, "west": -87.88420, "north": 42.70680, "east": -87.88250 }
+    ],
+    "staging": { "south": 42.70950, "west": -87.88660, "north": 42.71160, "east": -87.88520 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 1,
+    "buildingCount": 9,
+    "siteAreaAcres": 218.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.7075,-87.885,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "scale"],
+  "fieldNotes": {
+    "truckGate": "Engineered multi-lane controlled entry at the head of the private north boulevard (~42.7121, -87.8860); white directional lane arrows split inbound/outbound around a central guard building.",
+    "guardShack": "Substantial central guardhouse with hipped roof, ~3-4 vehicle footprint, set in the median of the entry boulevard with traffic lanes routed around both sides. Larger than a typical booth but functions as the manned gate house.",
+    "fastLaneOpportunity": "Wide gate apron with multiple paved lanes and a deep boulevard approach; ample paved width to add an express/bypass lane.",
+    "drivewayLong": "Private boulevard from public road to gate and on to the docks is several hundred metres; easily holds 3+ trucks queued.",
+    "dropArea": "Multiple large trailer-storage lots in the north and mid-west of the campus, rows of nose-out parked trailers (white/blue/orange fleet) plus dock-adjacent banks; 50+ easily.",
+    "dockDoors": "2.2M sq ft, 15 production lines; multiple dock banks visible on separate building faces (NW bank and S/SE bank). Door count is an overhead-imagery estimate, banded 50+.",
+    "shipRcvSeparate": "Distinct dock banks on different building faces (north-west building face vs south/south-east face) consistent with separated shipping and receiving.",
+    "multipleFacilities": "Campus of ~9 distinct large buildings (manufacturing halls, warehouse, components plant, tank farm/dome) on one fenced property.",
+    "railServed": "Active rail spur curves into the property from the south-west with multiple sidings holding boxcars / covered hoppers.",
+    "scale": "No truck scale positively identified in the gate path; left false but listed uncertain — a scale could exist within the unmapped interior.",
+    "urbanRural": "Edge-of-town industrial setting in Mt. Pleasant; large natural buffer (woods/wetland) on the west and open land around; broader setting judged Rural per rubric.",
+    "siteAreaAcres": "Perimeter box ~1.22 km N-S x 0.78 km E-W of fenced developed property; ~218 acres is an estimate of the active fenced footprint (SC Johnson land holding here is larger)."
+  },
+  "method": "deep-audit"
+}

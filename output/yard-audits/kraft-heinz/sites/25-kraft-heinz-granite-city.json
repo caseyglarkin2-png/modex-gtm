@@ -1,0 +1,22 @@
+{
+  "name": "Kraft Heinz - Granite City",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs"],
+  "fieldNotes": {
+    "truckGate": "Street View shows the truck entrance squarely: an open driveway leading to a dock bank, flanked by chain-link fence but with no barrier arm or guard booth at the road. Marked no gate.",
+    "dropYard": "Very large dedicated trailer-storage lot to the south and west, full of parked trailers.",
+    "dockDoors": "Long dock bank with many bays along the front face.",
+    "urbanRural": "Rail-served plant within the St. Louis metro industrial fabric."
+  }
+}

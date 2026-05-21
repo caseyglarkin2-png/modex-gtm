@@ -1,0 +1,47 @@
+{
+  "name": "Performance Foodservice - New Orleans (Harahan LA)",
+  "type": "Broadline Foodservice Distribution Center",
+  "coords": { "lat": 29.95390, "lng": -90.19510 },
+  "geofences": {
+    "perimeter": { "south": 29.95280, "west": -90.19620, "north": 29.95480, "east": -90.19380 },
+    "truckGate": { "south": 29.95320, "west": -90.19580, "north": 29.95360, "east": -90.19520 },
+    "dropYards": [
+      { "south": 29.95300, "west": -90.19470, "north": 29.95380, "east": -90.19380 }
+    ],
+    "dockAprons": [
+      { "south": 29.95330, "west": -90.19580, "north": 29.95380, "east": -90.19420 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30, "trailersVisible": 35, "trailerParkingCapacity": 55,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 9.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.9539,-90.1951,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "remoteGs", "dockDoorCount", "trailerParkingCapacity", "buildingCount", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Roster coord (29.95459,-90.193853, movedMeters 1000) lands on a small tan metal warehouse on a side street — not the PFG DC. PFG's own location page geocodes the New Orleans facility to ~29.95N,-90.19W in the Elmwood/Harahan industrial district. Resolved to the substantial distribution building ~150m SW at ~29.9539,-90.1951 — the only nearby structure with the dock count, blue-banded dock face and trailer drop yard consistent with a broadline foodservice DC. Address 918 Edwards Ave, Harahan LA 70123 (operating entity Reinhart Foodservice Louisiana LLC). Specific PFG signage could not be confirmed in Street View, so confidence is medium.",
+    "truckGate": "Street View of the building's south/SW frontage shows chain-link fencing and a fenced truck-yard entrance with tractors and trailers inside. A gate spans the truck drive. Classed truckGate true; obscured angles leave it uncertain.",
+    "guardShack": "No staffed booth structure visible at the entrance.",
+    "remoteGs": "Gate present, no shack — kiosk / call-box check-in implied. true.",
+    "dockDoors": "Long dock bank along the south face of the building (painted blue dock wall) with trailers backed in; ~25-50 doors, banded 25-50.",
+    "dropArea": "Trailer drop rows in the lot SE of the building; ~25-50 trailers, banded 25-50.",
+    "backupSensitive": "Tightly built-out Elmwood industrial parcel — narrow internal streets and little stacking room; a truck queue at the gate would choke the internal street. true.",
+    "urbanRural": "Dense Elmwood/Harahan metro New Orleans industrial fabric — Urban.",
+    "buildingCount": "Reads as one large DC building; the dense multi-tenant context makes a precise count low-confidence."
+  },
+  "method": "deep-audit"
+}

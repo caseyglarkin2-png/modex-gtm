@@ -1,0 +1,54 @@
+{
+  "name": "Frito-Lay - San Antonio TX",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 29.472769, "lng": -98.396782 },
+  "geofences": {
+    "perimeter": { "south": 29.47055, "west": -98.39960, "north": 29.47435, "east": -98.39540 },
+    "truckGate": { "south": 29.47200, "west": -98.39885, "north": 29.47265, "east": -98.39800 },
+    "dropYards": [
+      { "south": 29.47140, "west": -98.39690, "north": 29.47340, "east": -98.39555 },
+      { "south": 29.47280, "west": -98.39810, "north": 29.47400, "east": -98.39700 }
+    ],
+    "dockAprons": [
+      { "south": 29.47150, "west": -98.39700, "north": 29.47230, "east": -98.39560 },
+      { "south": 29.47060, "west": -98.39870, "north": 29.47110, "east": -98.39740 }
+    ],
+    "staging": { "south": 29.47230, "west": -98.39820, "north": 29.47300, "east": -98.39690 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 75,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 33.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.472769,-98.396782,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "scale", "multiStep"],
+  "fieldNotes": {
+    "location": "Confirmed via web search (4855 Greatland Dr, coords 29.472769,-98.396782) and satellite: large multi-building manufacturing campus with rooftop process equipment (silos, ducting, exhaust stacks), dock banks on multiple faces, and large trailer drop yard. Roster point landed on the building corner; locked center on the rooftop equipment cluster.",
+    "truckGate": "Plant is chain-link fenced (visible in 2024 Street View along the west/Greatland frontage). Truck/employee access funnels through a controlled fenced opening off the internal driveway; classified as a truck gate.",
+    "guardShack": "Street View shows a small structure beside the entrance fence opening near the plant facade; consistent with a guard booth but partly obscured by parked trailers and distance — medium confidence, flagged.",
+    "dockDoors": "Dock banks visible on the south building face (orange-cab Frito-Lay tractors backed in) and along the east face with many trailers backed in; aggregate clearly 50+.",
+    "dropArea": "60-75+ trailers parked in rows on the east and southeast yard plus along internal drives; large dedicated drop yard.",
+    "shipRcvSeparate": "Distinct dock clusters on different building faces (south face and east face) indicate physically separated shipping/receiving.",
+    "multipleFacilities": "Campus of ~4 interconnected large buildings (manufacturing, warehouse, support).",
+    "railServed": "A rail line runs along the SE perimeter in the adjacent corridor but no spur enters the property.",
+    "urbanRural": "Dense Northeast San Antonio industrial park near I-35 — Urban.",
+    "entryLanes": "Single combined in/out driveway estimated; lane count not clearly resolvable from imagery."
+  },
+  "method": "deep-audit"
+}

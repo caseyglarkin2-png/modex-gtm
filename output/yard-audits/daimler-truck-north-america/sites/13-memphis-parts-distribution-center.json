@@ -1,0 +1,56 @@
+{
+  "name": "Memphis Parts Distribution Center - Memphis TN",
+  "type": "Parts distribution center",
+  "coords": { "lat": 35.037650, "lng": -89.874050 },
+  "geofences": {
+    "perimeter": { "south": 35.035550, "west": -89.875700, "north": 35.039750, "east": -89.873400 },
+    "truckGate": { "south": 35.039400, "west": -89.874100, "north": 35.039750, "east": -89.873500 },
+    "dropYards": [
+      { "south": 35.036000, "west": -89.873650, "north": 35.039300, "east": -89.873400 }
+    ],
+    "dockAprons": [
+      { "south": 35.036000, "west": -89.874000, "north": 35.039300, "east": -89.873500 },
+      { "south": 35.039300, "west": -89.875600, "north": 35.039750, "east": -89.873500 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 24.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.037650,-89.874050,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "shipRcvSeparate", "buildingCount", "siteAreaAcres"],
+  "fieldNotes": {
+    "location": "Address 5745 Challenge Drive in the MDC (Memphis Distribution Center) industrial park, Hickory Hill, Memphis TN 38115 — confirmed via web (Daimler careers page, LoopNet parcel APN 09-3400-0-0603). Roster geocode moved 3,427 m; the corrected pin landed on a large warehouse in the MDC park. Center locked at 35.037650, -89.874050 on that building. Note: MDC is a multi-tenant park (5625 = Bldg K, 5750 = Bldg J, Cummins at 5800); DTNA leases the 5745 suite. The exact tenant footprint and dock allocation cannot be isolated from imagery alone — medium confidence on the precise building/zone boundaries.",
+    "truckGate": "No barrier arm, sliding/swing gate, or guarded checkpoint on the truck side. Dock corridors are internal MDC park roads, open. A chain-link fence around the south-end CAR parking lot has an open vehicle gate — that is car-park perimeter security, not a truck gate.",
+    "guardShack": "No guard booth observed at any truck driveway or dock corridor. A green box near the SW corner is a utility transformer cabinet.",
+    "dockDoors": "Long warehouse with a continuous dock-door rhythm along the entire east long face plus the north end; well over 50 doors total — 50+ band. Count is an honest estimate from overhead imagery (~60), flagged uncertain because the building is multi-tenant.",
+    "dropArea": "Truck courts on the east and north are densely packed with parked trailers (50+) plus trailers backed into docks. dropYard true; 50+ band.",
+    "trailersVisible": "Roughly 70 trailers counted across the east and north truck courts in captured imagery — estimate, flagged uncertain.",
+    "shipRcvSeparate": "Dock banks on two separate building faces (east long face and north end) could function as separate ship/receive clusters; inferred, flagged uncertain.",
+    "drivewayLong": "Wide internal dock corridors easily stage 3+ trucks before the docks.",
+    "fastLaneOpportunity": "Ample paved truck-court width in the internal corridors — room for a bypass lane.",
+    "buildingCount": "The DTNA PDC occupies one warehouse, but the MDC park has many adjacent buildings; counted as 1 for the audited building, flagged uncertain given the campus context.",
+    "siteAreaAcres": "~24 acres for the single audited building plus its truck courts; approximate, flagged uncertain due to multi-tenant boundaries.",
+    "urbanRural": "Dense industrial fabric within the City of Memphis (Hickory Hill); Urban.",
+    "railServed": "No rail spur enters the audited building's property."
+  },
+  "method": "deep-audit"
+}

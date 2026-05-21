@@ -1,0 +1,65 @@
+{
+  "name": "Home Depot RDC - Westfield MA",
+  "type": "Rapid Deployment Center",
+  "coords": { "lat": 42.17030, "lng": -72.73620 },
+  "geofences": {
+    "perimeter": { "south": 42.16850, "west": -72.73850, "north": 42.17280, "east": -72.73330 },
+    "truckGate": { "south": 42.16910, "west": -72.73490, "north": 42.16965, "east": -72.73410 },
+    "dropYards": [
+      { "south": 42.16830, "west": -72.73620, "north": 42.16980, "east": -72.73470 }
+    ],
+    "dockAprons": [
+      { "south": 42.16980, "west": -72.73790, "north": 42.17280, "east": -72.73620 },
+      { "south": 42.16980, "west": -72.73600, "north": 42.17280, "east": -72.73420 }
+    ],
+    "staging": { "south": 42.16965, "west": -72.73560, "north": 42.17030, "east": -72.73470 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 95,
+    "trailerParkingCapacity": 130,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 50.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.17030,-72.73620,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "dropArea"],
+  "fieldNotes": {
+    "truckGate": "Clear checkpoint with painted striped lane markings (pinch-point) on the SE access drive; a vehicle is stopped at it in z21 imagery.",
+    "guardShack": "A small light-coloured booth sits right at the striped checkpoint with a car parked beside it — a staffed guard booth, not the main building.",
+    "shipRcvSeparate": "Cross-dock RDC: dock doors run along both long faces of the building.",
+    "drivewayLong": "Long wooded approach from Campanelli Drive to the gate; deep internal yard gives 3+ truck stacking room.",
+    "backupSensitive": "Gate set far back from the public road behind a long wooded drive — a queue would not reach Campanelli Drive.",
+    "urbanRural": "Edge-of-town industrial park surrounded by woodland on the outskirts of Westfield; judged Rural.",
+    "dropArea": "Trailer drop yard at the SW end holds ~95 trailers visible; band estimated from overhead imagery.",
+    "dropYard": "Dedicated trailer-storage rows at the SW corner of the property, separate from the dock aprons.",
+    "entryLanes": "Single inbound lane at the checkpoint; exit shares the same gate group."
+  },
+  "method": "deep-audit"
+}

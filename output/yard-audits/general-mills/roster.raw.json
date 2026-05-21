@@ -1,0 +1,293 @@
+{
+  "account": "General Mills",
+  "generatedAt": "2026-05-17",
+  "facilityCount": 26,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "General Mills - Cedar Rapids IA (Wenig Rd)",
+      "city": "Cedar Rapids",
+      "state": "IA",
+      "type": "Manufacturing Plant",
+      "address": "1000 Wenig Rd NE, Cedar Rapids, IA 52402",
+      "lat": 42.0339,
+      "lng": -91.6451,
+      "source": "Dossier-named flagship cereal plant; address from Hyster GM plant locations list"
+    },
+    {
+      "idx": 2,
+      "name": "General Mills - Cedar Rapids IA (Edgewood Rd)",
+      "city": "Cedar Rapids",
+      "state": "IA",
+      "type": "Manufacturing Plant",
+      "address": "4800 Edgewood Rd SW, Cedar Rapids, IA 52404",
+      "lat": 41.9258,
+      "lng": -91.7211,
+      "source": "Second Cedar Rapids GM site (cereal/frosting/fruit snacks); Hyster GM plant list, confirmed active 2025"
+    },
+    {
+      "idx": 3,
+      "name": "General Mills - Buffalo NY",
+      "city": "Buffalo",
+      "state": "NY",
+      "type": "Manufacturing Plant",
+      "address": "54 South Michigan Avenue, Buffalo, NY 14203",
+      "lat": 42.8772,
+      "lng": -78.8639,
+      "source": "Dossier-named flagship Cheerios cereal plant; address from Hyster GM plant list"
+    },
+    {
+      "idx": 4,
+      "name": "General Mills - Wellston OH",
+      "city": "Wellston",
+      "state": "OH",
+      "type": "Manufacturing Plant",
+      "address": "2403 South Pennsylvania Avenue, Wellston, OH 45692",
+      "lat": 39.1014,
+      "lng": -82.5621,
+      "source": "Dossier-named key plant; address from Hyster GM plant list"
+    },
+    {
+      "idx": 5,
+      "name": "General Mills - Murfreesboro TN",
+      "city": "Murfreesboro",
+      "state": "TN",
+      "type": "Manufacturing Plant",
+      "address": "2695 Stevenson Drive, Murfreesboro, TN 37127",
+      "lat": 35.8088,
+      "lng": -86.4264,
+      "source": "Dossier-named key plant; address from Hyster GM plant list"
+    },
+    {
+      "idx": 6,
+      "name": "General Mills - Covington GA",
+      "city": "Covington",
+      "state": "GA",
+      "type": "Manufacturing Plant",
+      "address": "15200 Industrial Park Blvd NE, Covington, GA 30014",
+      "lat": 33.6363,
+      "lng": -83.803,
+      "source": "Dossier-named key cereal plant serving Southeast; address from Hyster GM plant list"
+    },
+    {
+      "idx": 7,
+      "name": "General Mills - Hannibal MO",
+      "city": "Hannibal",
+      "state": "MO",
+      "type": "Manufacturing Plant",
+      "address": "1 Red Devil Rd, Hannibal, MO 63401",
+      "lat": 39.7084,
+      "lng": -91.3585,
+      "source": "Dossier-named key plant; address from Hyster GM plant list (not affected by 2025 MO closures)"
+    },
+    {
+      "idx": 8,
+      "name": "General Mills - Belvidere IL Distribution Center",
+      "city": "Belvidere",
+      "state": "IL",
+      "type": "Distribution Center",
+      "address": "Belvidere, IL 61008",
+      "lat": 42.2639,
+      "lng": -88.8443,
+      "source": "Dossier + WIFR news: state-of-the-art 1.3M sq ft Midwest DC hub opened April 2024"
+    },
+    {
+      "idx": 9,
+      "name": "General Mills (Blue Buffalo) - Richmond IN",
+      "city": "Richmond",
+      "state": "IN",
+      "type": "Manufacturing Plant",
+      "address": "Richmond, IN 47374",
+      "lat": 39.8289,
+      "lng": -84.8902,
+      "source": "$200M Blue Buffalo natural pet food plant opened 2019; PetFoodIndustry / GM news release"
+    },
+    {
+      "idx": 10,
+      "name": "General Mills - Vineland NJ",
+      "city": "Vineland",
+      "state": "NJ",
+      "type": "Manufacturing Plant",
+      "address": "500 Elmer Road, Vineland, NJ 08360",
+      "lat": 39.4862,
+      "lng": -75.026,
+      "source": "Hyster GM plant locations list"
+    },
+    {
+      "idx": 11,
+      "name": "General Mills - Cincinnati OH",
+      "city": "Cincinnati",
+      "state": "OH",
+      "type": "Manufacturing Plant",
+      "address": "11301 Mosteller Road, Cincinnati, OH 45241",
+      "lat": 39.2842,
+      "lng": -84.4039,
+      "source": "Hyster GM plant locations list"
+    },
+    {
+      "idx": 12,
+      "name": "General Mills - Milwaukee WI",
+      "city": "Milwaukee",
+      "state": "WI",
+      "type": "Manufacturing Plant",
+      "address": "4625 S 6th St, Milwaukee, WI 53221",
+      "lat": 42.9573,
+      "lng": -87.93,
+      "source": "Hyster GM plant locations list"
+    },
+    {
+      "idx": 13,
+      "name": "General Mills - New Albany IN",
+      "city": "New Albany",
+      "state": "IN",
+      "type": "Manufacturing Plant",
+      "address": "707 Pillsbury Lane, New Albany, IN 47150",
+      "lat": 38.3091,
+      "lng": -85.8241,
+      "source": "Hyster GM plant locations list (Pillsbury site)"
+    },
+    {
+      "idx": 14,
+      "name": "General Mills - Reed City MI",
+      "city": "Reed City",
+      "state": "MI",
+      "type": "Manufacturing Plant",
+      "address": "128 East Slosson Avenue, Reed City, MI 49677",
+      "lat": 43.8717,
+      "lng": -85.5103,
+      "source": "Hyster GM plant locations list"
+    },
+    {
+      "idx": 15,
+      "name": "General Mills - Martel OH",
+      "city": "Martel",
+      "state": "OH",
+      "type": "Manufacturing Plant",
+      "address": "4136 Main Street, Martel, OH 43335",
+      "lat": 40.7081,
+      "lng": -83.1741,
+      "source": "Hyster GM plant locations list"
+    },
+    {
+      "idx": 16,
+      "name": "General Mills - Carson CA",
+      "city": "Carson",
+      "state": "CA",
+      "type": "Manufacturing Plant",
+      "address": "1375 Beachey Place, Carson, CA 90746",
+      "lat": 33.8517,
+      "lng": -118.241,
+      "source": "Hyster GM plant locations list"
+    },
+    {
+      "idx": 17,
+      "name": "General Mills - Lodi CA",
+      "city": "Lodi",
+      "state": "CA",
+      "type": "Manufacturing Plant",
+      "address": "2000 W Turner Rd, Lodi, CA 95242",
+      "lat": 38.1502,
+      "lng": -121.3216,
+      "source": "Hyster GM plant locations list"
+    },
+    {
+      "idx": 18,
+      "name": "General Mills - Albuquerque NM",
+      "city": "Albuquerque",
+      "state": "NM",
+      "type": "Manufacturing Plant",
+      "address": "3501 Paseo Del Norte NE, Albuquerque, NM 87113",
+      "lat": 35.185,
+      "lng": -106.584,
+      "source": "Hyster GM plant locations list"
+    },
+    {
+      "idx": 19,
+      "name": "General Mills - Hazleton PA",
+      "city": "Hazleton",
+      "state": "PA",
+      "type": "Manufacturing Plant",
+      "address": "2 Chestnut Hill Drive, Hazleton, PA 18201",
+      "lat": 40.942,
+      "lng": -75.981,
+      "source": "Hyster GM plant locations list"
+    },
+    {
+      "idx": 20,
+      "name": "General Mills - Allentown PA",
+      "city": "Allentown",
+      "state": "PA",
+      "type": "Manufacturing Plant",
+      "address": "2132 Downyflake Ln, Allentown, PA 18103",
+      "lat": 40.568,
+      "lng": -75.469,
+      "source": "Hyster GM plant locations list"
+    },
+    {
+      "idx": 21,
+      "name": "General Mills - Federalsburg MD",
+      "city": "Federalsburg",
+      "state": "MD",
+      "type": "Manufacturing Plant",
+      "address": "300 Reliance Ave, Federalsburg, MD 21632",
+      "lat": 38.694,
+      "lng": -75.771,
+      "source": "Hyster GM plant locations list"
+    },
+    {
+      "idx": 22,
+      "name": "General Mills - Vinita OK",
+      "city": "Vinita",
+      "state": "OK",
+      "type": "Manufacturing Plant",
+      "address": "1157 Doughboy Drive, Vinita, OK 74301",
+      "lat": 36.6386,
+      "lng": -95.1541,
+      "source": "Hyster GM plant locations list"
+    },
+    {
+      "idx": 23,
+      "name": "General Mills - Great Falls MT (Flour Mill)",
+      "city": "Great Falls",
+      "state": "MT",
+      "type": "Flour Mill",
+      "address": "2500 9th Avenue North, Great Falls, MT 59401",
+      "lat": 47.5089,
+      "lng": -111.271,
+      "source": "Hyster GM plant locations list (General Mills milling operations)"
+    },
+    {
+      "idx": 24,
+      "name": "General Mills - Fridley MN (Flour Mill)",
+      "city": "Fridley",
+      "state": "MN",
+      "type": "Flour Mill",
+      "address": "25 44th Avenue NE, Fridley, MN 55421",
+      "lat": 45.0322,
+      "lng": -93.254,
+      "source": "Hyster GM plant locations list (General Mills milling operations)"
+    },
+    {
+      "idx": 25,
+      "name": "General Mills - Chattanooga TN Distribution Center",
+      "city": "Chattanooga",
+      "state": "TN",
+      "type": "Distribution Center",
+      "address": "650 Wauhatchie Pike, Chattanooga, TN 37419",
+      "lat": 35.0237,
+      "lng": -85.347,
+      "source": "Hyster GM plant locations list (General Mills DC)"
+    },
+    {
+      "idx": 26,
+      "name": "General Mills - Fontana CA Distribution Center",
+      "city": "Fontana",
+      "state": "CA",
+      "type": "Distribution Center",
+      "address": "11618 Mulberry Ave, Fontana, CA 92337",
+      "lat": 34.061,
+      "lng": -117.479,
+      "source": "Hyster GM plant locations list (General Mills DC)"
+    }
+  ]
+}

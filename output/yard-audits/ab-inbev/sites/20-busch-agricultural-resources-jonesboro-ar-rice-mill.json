@@ -1,0 +1,63 @@
+{
+  "name": "Busch Agricultural Resources - Jonesboro AR Rice Mill",
+  "type": "Agricultural Processing - Rice Mill",
+  "coords": { "lat": 35.8748, "lng": -90.6005 },
+  "geofences": {
+    "perimeter": { "south": 35.87320, "west": -90.60280, "north": 35.87680, "east": -90.59880 },
+    "truckGate": { "south": 35.87420, "west": -90.59930, "north": 35.87460, "east": -90.59870 },
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": { "south": 35.87370, "west": -90.60100, "north": 35.87450, "east": -90.59980 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 4,
+    "trailersVisible": 4,
+    "trailerParkingCapacity": 15,
+    "truckGateCount": 2,
+    "buildingCount": 6,
+    "siteAreaAcres": 36.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.8748,-90.6005,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Two open driveways connect the mill yard to County Road 905 on the east side - both are wide gravel/paved entrances with no barrier arm, sliding gate, or checkpoint structure. Street View Dec 2024 shows the truck entrance has only loose orange jersey barriers placed near the apron (likely traffic-channeling), not an access-control gate, and no guard booth. The west side is bounded by US-49/Hwy 49 and a rail corridor.",
+    "guardShack": "No staffed guard booth at either CR 905 entrance in satellite or Street View Dec 2024.",
+    "remoteGs": "No gate exists, so no remote check-in.",
+    "entryExitSeparate": "Two separate driveways onto CR 905 - a south entrance into the mill/loadout yard and a north entrance to the office area - functioning as distinct access points.",
+    "scale": "Rice mills receive inbound grain by truck and a truck scale is operationally expected; a small structure and a rectangular pad near the truck loadout area are consistent with a scale/scale house but could not be confirmed unambiguously from overhead imagery - flagged uncertain.",
+    "railServed": "Confirmed - a rail siding runs along the west/SW side of the property parallel to Hwy 49, with a string of covered hopper rail cars parked on it adjacent to the mill silos. Federal grain warehouse records list 1,066,000-bushel storage capacity.",
+    "dockDoors": "Not a dock-door distribution facility. Grain/rice moves via bulk loadout - truck loadout spouts and a few enclosed-building doors; estimated ~4 truck/material doors. Open-top hopper grain trucks observed being loaded.",
+    "dropArea": "Some trailers/grain trucks park in the yard but there is no dedicated marked trailer-storage drop lot; ~4 trailers visible.",
+    "multipleFacilities": "Multiple distinct structures on the campus - the main mill/processing building, a large grain silo/bin bank, additional storage buildings, a separate office building, and outbuildings.",
+    "drivewayLong": "The yard between the CR 905 entrances and the mill loadout/processing area is large and open with ample room to queue 3+ trucks.",
+    "urbanRural": "Facility sits in open Arkansas farmland (rice country) along Hwy 49 well outside the Jonesboro urban core - clearly Rural.",
+    "connectivityIssue": "Rural farmland setting but along a US highway with nearby development - cellular coverage likely adequate; set false."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,66 @@
+{
+  "name": "Coca-Cola Consolidated - Cincinnati Sales & Distribution Center, OH",
+  "type": "Sales / Distribution Center",
+  "coords": { "lat": 39.29470, "lng": -84.53630 },
+  "geofences": {
+    "perimeter": { "south": 39.29360, "west": -84.53740, "north": 39.29570, "east": -84.53520 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 39.29490, "west": -84.53720, "north": 39.29560, "east": -84.53650 }
+    ],
+    "dockAprons": [
+      { "south": 39.29470, "west": -84.53710, "north": 39.29560, "east": -84.53650 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14,
+    "trailersVisible": 12,
+    "trailerParkingCapacity": 20,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 11.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.2947,-84.5363,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "dockDoors", "dropArea", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "facility": "Coca-Cola Consolidated Cincinnati Sales & Distribution Center. The roster address (1547 Kemper Meadow Dr, Cincinnati OH 45240) is in the Kemper Meadow / Forest Park business park. The roster lat/lng (39.292889,-84.53697, RANGE_INTERPOLATED) landed at the Kemper Meadow Dr intersection ~250m southwest of the building; corrected to the large flex/warehouse building at 39.29470,-84.53630.",
+    "identification": "MEDIUM confidence on building identity. The candidate is a large flex/warehouse building with an attached office wing on Kemper Meadow Dr; satellite shows white trailers and red-cab (Red Classic, Coca-Cola Consolidated's logistics fleet) tractors backed into a dock row on its NW face plus a small trailer drop yard - consistent with a Coca-Cola sales/distribution center. No road-level Coca-Cola signage was confirmable: Street View on Kemper Meadow Dr is from 2019 and the dock side is screened by mature trees.",
+    "truckGate": "No barrier arm or guard booth visible. The building is a typical open business-park flex property; truck access is via an open internal driveway off Kemper Meadow Dr. Listed uncertain because the dock side is tree-screened from Street View.",
+    "guardShack": "No booth seen; listed uncertain.",
+    "dockDoors": "Dock-door row on the NW face with ~10-15 trailers backed in; banded 10-25. Estimated from overhead imagery.",
+    "dropArea": "Small trailer drop yard on the NW with a handful of trailers; banded 0-10.",
+    "dropYard": "True - a small dedicated trailer-parking area adjacent to the dock row.",
+    "drivewayShort": "Modest paved apron between the road and docks; stacking room for only 1-2 trucks.",
+    "buildingCount": "Single warehouse building with an attached office wing.",
+    "urbanRural": "Within the Cincinnati metro (Forest Park, 45240), in an established business park beside the Ronald Reagan Cross County Hwy; classified Urban.",
+    "railServed": "No rail spur."
+  },
+  "method": "deep-audit"
+}

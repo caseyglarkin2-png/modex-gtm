@@ -1,0 +1,56 @@
+{
+  "name": "Honda Manufacturing of Indiana (HMIN) - Greensburg IN",
+  "type": "Auto Assembly Plant",
+  "coords": { "lat": 39.36800, "lng": -85.54100 },
+  "geofences": {
+    "perimeter": { "south": 39.35550, "west": -85.55750, "north": 39.37850, "east": -85.52600 },
+    "truckGate": { "south": 39.36640, "west": -85.54700, "north": 39.36760, "east": -85.54550 },
+    "dropYards": [
+      { "south": 39.37150, "west": -85.54450, "north": 39.37500, "east": -85.53550 },
+      { "south": 39.36880, "west": -85.54480, "north": 39.37130, "east": -85.53600 },
+      { "south": 39.36950, "west": -85.53550, "north": 39.37550, "east": -85.52950 }
+    ],
+    "dockAprons": [
+      { "south": 39.36930, "west": -85.54480, "north": 39.37020, "east": -85.53550 },
+      { "south": 39.36980, "west": -85.54250, "north": 39.37100, "east": -85.53600 }
+    ],
+    "staging": { "south": 39.36400, "west": -85.54250, "north": 39.36750, "east": -85.53850 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 380,
+    "trailerParkingCapacity": 600,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 1480.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.368,-85.541,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "multiStep", "scale", "truckGateCount"],
+  "fieldNotes": {
+    "truckGate": "Waze records a distinct 'Truck entrance' at 2755 N Michigan Ave separate from the visitor 'Main entrance'. Entire campus is fenced and set ~400m back from public roads with a single managed industrial access corridor. truckGate=true is high confidence; the specific gate structure could not be directly imaged.",
+    "guardShack": "Not directly visible in available satellite crops and Street View pano coverage stops at the employee lot. A 24/7 auto assembly plant of this scale (Civic + CR-V, 250k vehicles/yr) effectively always has a staffed guarded truck gate; classified true on facility-class basis, flagged uncertain.",
+    "multipleFacilities": "Campus has the main dark-roofed assembly building, a large adjacent bright-roofed building (likely logistics/welding), support buildings (water treatment, paint ancillary), and a separate vehicle test track oval - true.",
+    "shipRcvSeparate": "Inbound parts docks line the north faces of both main buildings; finished-vehicle outbound staging and rail loadout are on the south/southeast - physically separate clusters.",
+    "dropArea": "Hundreds of trailers parked in organized rows across multiple large drop lots north and east of the buildings, plus covered trailer stalls - well into the 50+ band.",
+    "railServed": "A rail spur with a line of rail cars runs into the property along the southeast side of the assembly building (visible in z18 crop).",
+    "dockDoorCount": "~70 is an estimate aggregated across the long dock lines on the north faces of both main buildings; flagged approximate.",
+    "trailersVisible": "~380 trailers counted across the captured drop lots and dock lines; approximate.",
+    "siteAreaAcres": "Perimeter box covers the full fenced property including the vehicle test track; ~1480 acres is derived from the box and is a rough figure.",
+    "fastLaneOpportunity": "Wide internal access corridors and ample paved apron width provide room to add an express/bypass lane.",
+    "scale": "No truck scale identified in imagery; flagged uncertain."
+  },
+  "method": "deep-audit"
+}

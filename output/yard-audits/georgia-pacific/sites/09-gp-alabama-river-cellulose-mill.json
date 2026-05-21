@@ -1,0 +1,52 @@
+{
+  "name": "GP Alabama River Cellulose Mill - Perdue Hill AL",
+  "type": "Cellulose/Pulp Mill",
+  "coords": { "lat": 31.5800, "lng": -87.4830 },
+  "geofences": {
+    "perimeter": { "south": 31.574161, "west": -87.493017, "north": 31.585839, "east": -87.472983 },
+    "truckGate": { "south": 31.580600, "west": -87.478000, "north": 31.581600, "east": -87.476500 },
+    "dropYards": [
+      { "south": 31.580800, "west": -87.482500, "north": 31.583000, "east": -87.478000 }
+    ],
+    "dockAprons": [
+      { "south": 31.578500, "west": -87.486000, "north": 31.580500, "east": -87.483000 }
+    ],
+    "staging": { "south": 31.580500, "west": -87.480000, "north": 31.581500, "east": -87.478000 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18,
+    "trailersVisible": 220,
+    "trailerParkingCapacity": 350,
+    "truckGateCount": 1,
+    "buildingCount": 20,
+    "siteAreaAcres": 610.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@31.58,-87.483,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": true, "multipleFacilities": true,
+    "scale": true, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "scale", "dockDoorCount", "entryLanes", "exitLanes", "connectivityIssue", "shipRcvSeparate", "multiStep"],
+  "fieldNotes": {
+    "truckGate": "Single controlled access road off Highway 84 / Lena Landegger Hwy entering an isolated industrial mill; the long forest-buffered private road forms a controlled approach.",
+    "guardShack": "No Street View available (mill too remote, ZERO_RESULTS) - guard booth not directly confirmed; a 3,000-job pulp mill, one of the largest in North America, runs a staffed gatehouse by standard. Flagged uncertain.",
+    "scale": "Pulp mills weigh inbound wood loads on truck scales; structures consistent with a scale/check area appear near the woodyard entrance. Inferred true; flagged uncertain.",
+    "dropArea": "Very large trailer drop yard NE of the process buildings - hundreds of semi-trailers in colorful rows confirmed at z20; clearly 50+.",
+    "dockDoors": "Pulp/market-pulp mill ships baled pulp; dock banks present on the warehouse/baleline building but limited - 10-25 band, estimated ~18. Flagged uncertain.",
+    "railServed": "Large rail yard with dozens of rail cars runs along the NE edge into the mill; rail is a primary mode for this cellulose mill.",
+    "connectivityIssue": "Mill is extremely isolated - surrounded by forest, no town nearby (Perdue Hill / Claiborne are small), cellular coverage likely weak. Medium confidence.",
+    "multipleFacilities": "Large multi-building campus: pulp process buildings, woodyard, recovery, power, baleline/warehouse, plus extensive settling ponds and landfill.",
+    "drivewayLong": "Long forest-buffered private access road provides ample queue depth before the gate.",
+    "perimeter": "Box covers the developed footprint - process buildings, woodyard, and trailer drop yard; excludes outlying landfill and pond areas to the S/SW."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,49 @@
+{
+  "name": "Pactiv Evergreen - Cedar Rapids IA",
+  "type": "Manufacturing Plant (Filling Equipment / carton filling machinery)",
+  "coords": { "lat": 41.95460, "lng": -91.67890 },
+  "geofences": {
+    "perimeter": { "south": 41.95230, "west": -91.68080, "north": 41.95620, "east": -91.67700 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 41.95330, "west": -91.67900, "north": 41.95440, "east": -91.67760 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 8,
+    "trailersVisible": 1,
+    "trailerParkingCapacity": 6,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 17.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.95460,-91.67890,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoorCount", "siteAreaAcres"],
+  "fieldNotes": {
+    "location": "Roster geocode (ROOFTOP, 41.95494,-91.678837, movedMeters 111) lands on a large industrial building at the SW corner of 6th St SW and Wilson Ave SW, Cedar Rapids — confirmed at satellite z16-z19. This is the Pactiv Evergreen / Evergreen Packaging Equipment facility (gable-top carton filling-equipment manufacture and 24/7 parts/service). The building appears to be multi-tenant — a Street View sign at the south parking lot reads 'ALTORFER' (a Caterpillar dealer), indicating shared occupancy of the industrial block.",
+    "truckGate": "Open site — no perimeter fence enclosing a controlled truck entrance. The building fronts directly on public streets with open parking lots and driveways; no barrier arm, gate, or checkpoint pinch-point. truckGate = false.",
+    "guardShack": "No staffed booth anywhere on the site.",
+    "dockDoors": "A modest dock/loading area is on the south/southeast face (visible z18-z19) — roughly 6-10 doors serving an equipment-manufacturing operation. Low-confidence count; banded 0-10.",
+    "dropArea": "No dedicated trailer-parking stalls and effectively no trailers in the imagery — dropArea = NONE. This is an equipment plant, not a high-throughput freight facility.",
+    "drivewayShort": "Dock approach is a short paved apron off the building's parking lots — holds only 1-2 trucks.",
+    "urbanRural": "Inside the Cedar Rapids urban fabric — the site sits at a signalized 4-way intersection with residential neighborhoods on three sides and a city park to the northeast. Urban.",
+    "railServed": "No rail spur enters the property (a former rail alignment runs near the west side but does not serve the building).",
+    "siteAreaAcres": "Estimated ~17 acres for the parcel; the Pactiv operation may occupy only part of a shared multi-tenant block, so usable yard area is smaller. Flagged uncertain."
+  },
+  "method": "deep-audit"
+}

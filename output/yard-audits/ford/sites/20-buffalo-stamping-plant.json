@@ -1,0 +1,47 @@
+{
+  "name": "Ford - Buffalo Stamping Plant, Hamburg NY",
+  "type": "Stamping Plant",
+  "coords": { "lat": 42.78650, "lng": -78.84280 },
+  "geofences": {
+    "perimeter": { "south": 42.78250, "west": -78.84720, "north": 42.79000, "east": -78.83850 },
+    "truckGate": { "south": 42.78820, "west": -78.84680, "north": 42.78880, "east": -78.84600 },
+    "dropYards": [
+      { "south": 42.78900, "west": -78.84300, "north": 42.78990, "east": -78.84080 }
+    ],
+    "dockAprons": [
+      { "south": 42.78540, "west": -78.84260, "north": 42.78720, "east": -78.84150 }
+    ],
+    "staging": { "south": 42.78840, "west": -78.84580, "north": 42.78970, "east": -78.84380 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 25, "trailersVisible": 8, "trailerParkingCapacity": 30,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 165.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.78650,-78.84280,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "truckGateCount"],
+  "fieldNotes": {
+    "truckGate": "Continuous chain-link perimeter fence rings the property (confirmed in Street View along the Route 5 service road). Main controlled entrance off the NW service road into the front parking/staging lot.",
+    "guardShack": "A small structure sits at the building base beside the entrance gate; from highway-distance Street View it could be a guard booth or a utility/electrical structure - cannot confirm staffing, flagged uncertain.",
+    "remoteGs": "Set to true on the basis that a gate exists but no booth is clearly confirmed; low confidence.",
+    "railServed": "Multi-track rail yard runs into the property along the entire east/SE side - clearly rail-served (typical for a stamping plant: inbound steel coil, outbound panels).",
+    "dropArea": "South and SE yards are full of steel-coil / material storage racks, not parked trailers; only a handful of trailers visible. Not a trailer drop yard.",
+    "dockDoorCount": "Dock canopies visible along the east building face near the rail yard; count is an overhead estimate.",
+    "urbanRural": "Site is inside the Buffalo metro fabric (Blasdell/Lackawanna), bordered by Route 5 and dense industrial/residential development -> Urban.",
+    "fastLaneOpportunity": "Large open paved frontage between Route 5 and the building leaves ample room for additional lanes.",
+    "entryLanes": "Lane count not resolvable from highway-distance Street View."
+  },
+  "method": "deep-audit"
+}

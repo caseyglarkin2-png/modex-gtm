@@ -1,0 +1,625 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:50:26.428Z",
+  "account": {
+    "slug": "westrock-coffee",
+    "displayName": "Westrock Coffee",
+    "archetype": "cpg",
+    "siteCount": 6,
+    "coverageNote": {
+      "auditedCount": 6,
+      "estimatedFootprint": null,
+      "droppedStubCount": 0,
+      "capHit": false,
+      "note": "Audited all 6 identifiable facilities."
+    }
+  },
+  "research": {
+    "facility_count": 6,
+    "audited_facilities": 6,
+    "source": "yard-audit",
+    "confidence": "verified",
+    "caveats": [
+      "Westrock Coffee - Conway AR Distribution Center: audit note mentions 'closed'",
+      "Westrock Coffee - Conway AR Single-Serve \"Clark\" Plant: audit note mentions 'closed'"
+    ]
+  },
+  "network": {
+    "bbox": [
+      -92.4223,
+      34.82879,
+      -80.6131,
+      35.3981
+    ],
+    "archetypeMix": {
+      "#9": 3,
+      "#3": 3
+    },
+    "totals": {
+      "dockDoors": 211,
+      "trailerCapacity": 339,
+      "gates": 5,
+      "railServed": 1,
+      "acres": 138.5
+    },
+    "sites": [
+      {
+        "id": "01-conway-ar-rtd-plant",
+        "name": "Westrock Coffee - Conway AR Roast-to-RTD Plant",
+        "type": "Manufacturing Plant (roast-to-ready-to-drink)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "dockDoorCount",
+          "scale",
+          "multiStep",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 35.0721,
+          "lng": -92.4188
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.0696,
+            "west": -92.4223,
+            "north": 35.0764,
+            "east": -92.4163
+          },
+          "truckGate": {
+            "south": 35.0759,
+            "west": -92.4191,
+            "north": 35.0764,
+            "east": -92.4184
+          },
+          "dropYards": [
+            {
+              "south": 35.0731,
+              "west": -92.4188,
+              "north": 35.0744,
+              "east": -92.4173
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.073,
+              "west": -92.4191,
+              "north": 35.0737,
+              "east": -92.4171
+            },
+            {
+              "south": 35.0706,
+              "west": -92.4184,
+              "north": 35.0714,
+              "east": -92.4173
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 85,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 47,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied 35.073662, -92.416857 (ROOFTOP geocode, but the pin landed\non the NE construction/laydown corner of the property). Web research confirmed\nthis is the **former Kimberly-Clark Conway paper-products plant at 480 Exchange\nAvenue**, which Westrock Coffee purchased and converted into North America's\nlargest roast-to-RTD beverage manufacturing facility — a $315M project, ~570,000\nsq ft on a ~45-acre campus, grand opening June 2024 (Arkansas Business, Dairy\nFoods, Westrock Coffee press release). Satellite probing confirmed a large\nsprawling multi-section industrial complex consistent with a converted paper\nmill. The center was locked to the main building mass at 35.0721, -92.4188.",
+        "mapsUrl": "https://www.google.com/maps/@35.072100,-92.418800,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed as the former Kimberly-Clark Conway paper-products plant at 480 Exchange Avenue, now Westrock Coffee's roast-to-RTD facility ($315M, 570K sq ft, ~45 acres, opened June 2024). The roster pin sat at the NE construction/laydown corner; locked center moved SW to the main building mass at 35.0721,-92.4188.",
+          "truckGate": "A sliding chain-link gate across a truck driveway is clearly visible in 2024-08 Street View on the NE side of the property (near 35.0760,-92.4188), with continuous chain-link perimeter fencing running along the warehouse face. The truck/yard side of the campus is access-controlled.",
+          "guardShack": "No staffed guard booth was positively identified at the truck gate in available imagery. The NE truck gate is a rolling chain-link gate with no adjacent booth visible — implying remote/kiosk check-in. A large former-paper-mill campus of this scale may have a manned gate elsewhere; marked uncertain.",
+          "remoteGs": "Truck gate present, no guard shack seen — remote check-in inferred.",
+          "dropYard": "Large dedicated trailer drop yard on the NE flank of the plant (wc-rtd-dropyard-z19) holding ~60-85 trailers parked in rows, separate from active dock staging.",
+          "dropArea": "Drop yard rows visibly hold well over 50 trailers — banded 50+.",
+          "dockDoors": "Dock doors distributed across multiple building faces (NE drop-yard side and the SE face along I-40). ~30-45 doors estimated across the sprawling complex; exact count limited by roof complexity and scale — banded 25-50.",
+          "multipleFacilities": "Campus-scale site: a sprawling main manufacturing building plus several distinct ancillary/warehouse structures (NE warehouse, NW building, support buildings) within one fenced property.",
+          "railServed": "A rail line runs along the south edge of the property (visible in wc-rtd-sw); former Kimberly-Clark paper mills were rail-served and a spur appears to enter the site.",
+          "fastLaneOpportunity": "Very wide paved aprons and multiple driveways/access points give ample room to add an express/bypass lane.",
+          "urbanRural": "Inside the Conway industrial fabric directly along Interstate I-40 with dense surrounding commercial/retail development — judged Urban.",
+          "postGateStaging": "Extensive paved internal yard provides holding/queue room inside the fence before the docks.",
+          "drivewayLong": "The internal gate-to-dock approach is long and can stack 3+ trucks.",
+          "scale": "No truck scale positively identified; marked uncertain given site scale."
+        }
+      },
+      {
+        "id": "02-conway-ar-dc",
+        "name": "Westrock Coffee - Conway AR Distribution Center",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 35.0607,
+          "lng": -92.4067
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.0589,
+            "west": -92.4085,
+            "north": 35.0621,
+            "east": -92.4049
+          },
+          "truckGate": {
+            "south": 35.059,
+            "west": -92.4083,
+            "north": 35.0594,
+            "east": -92.4077
+          },
+          "dropYards": [
+            {
+              "south": 35.0595,
+              "west": -92.4084,
+              "north": 35.0614,
+              "east": -92.4078
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.0594,
+              "west": -92.408,
+              "north": 35.0617,
+              "east": -92.4073
+            },
+            {
+              "south": 35.0593,
+              "west": -92.4073,
+              "north": 35.0598,
+              "east": -92.4054
+            }
+          ],
+          "staging": {
+            "south": 35.059,
+            "west": -92.4078,
+            "north": 35.0595,
+            "east": -92.4064
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 72,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 30,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied 35.058793, -92.405415. Field-checking the William J. Clark\nDrive corridor in Street View revealed the address number directly:\n**Street View (2024-07) looking NE from William J. Clark Drive shows \"1430\" on\nthe building's office-entry facade.** The \"1430\" building is the large\nwhite-roof warehouse north of the road. Center locked to its footprint at\n35.0607, -92.4067. This is the Westrock Coffee DC — $70M, 530,000 sq ft on a\n~30-acre site, 36-ft clear, ~72 dock doors, ESFR; developed by Tempus Realty\nPartners with Clark Contractors; completed late 2023 (Talk Business & Politics,\nArkansas Business, PR Newswire).\n\nNote on the roster: idx 2 and idx 3 pins are imprecise. The DC (\"1430\") is the\nNORTH white-roof building; the Clark single-serve plant (idx 3) is the gray-roof",
+        "mapsUrl": "https://www.google.com/maps/@35.060700,-92.406700,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed as 1430 William J. Clark Drive. Street View (2024-07) from William J. Clark Dr looking NE shows '1430' clearly on the building's office-entry facade. This is the Westrock Coffee DC: $70M, 530,000 sq ft, ~30-acre site, 36-ft clear, ~72 dock doors, ESFR, developed by Tempus Realty Partners, completed late 2023.",
+          "truckGate": "Chain-link perimeter fencing runs across the property frontage along William J. Clark Drive (visible in 2024-07 Street View and z19/z20 satellite). A truck driveway enters at the SW with a gate in the fence line; the truck yard is fully enclosed.",
+          "guardShack": "No staffed guard booth identified at the gate. The SW truck entrance reads as a gate in the perimeter fence with no adjacent booth — implying kiosk/remote check-in. Small structures near the building are utility/electrical, not a gatehouse. Flagged uncertain.",
+          "remoteGs": "Truck gate present, no guard shack seen — remote check-in inferred.",
+          "dockDoors": "Published spec is ~72 dock doors. Satellite confirms long banks of dock doors with trailers backed in along the building's west face and additional doors on the north/south ends — banded 50+.",
+          "dropYard": "Marked trailer-parking stalls and drop lanes line the west yard with ~30-55 trailers present (dropArea banded 25-50); a dedicated drop lot is present.",
+          "dropArea": "25-50 trailers parked in marked stalls/lanes in the west yard.",
+          "fastLaneOpportunity": "Wide paved perimeter aprons and a deep yard give room to add an express/bypass lane.",
+          "drivewayLong": "Deep gate-to-dock approach down the west yard easily stacks 3+ trucks.",
+          "postGateStaging": "Large paved yard between the gate and the dock faces serves as inside-the-fence staging.",
+          "urbanRural": "Located in the Conway industrial corridor near I-40 with surrounding commercial/industrial development — Urban.",
+          "shipRcvSeparate": "Single large DC dock operation; no clearly separate ship vs. receive dock clusters — false.",
+          "scale": "No truck scale identified."
+        }
+      },
+      {
+        "id": "03-conway-ar-clark-plant",
+        "name": "Westrock Coffee - Conway AR Single-Serve \"Clark\" Plant",
+        "type": "Manufacturing Plant (single-serve / K-cup pods)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "dockDoorCount",
+          "shipRcvSeparate",
+          "entryLanes",
+          "exitLanes",
+          "scale"
+        ],
+        "center": {
+          "lat": 35.0579,
+          "lng": -92.405
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.0561,
+            "west": -92.407,
+            "north": 35.059,
+            "east": -92.403
+          },
+          "truckGate": {
+            "south": 35.0585,
+            "west": -92.4076,
+            "north": 35.0589,
+            "east": -92.407
+          },
+          "dropYards": [
+            {
+              "south": 35.0572,
+              "west": -92.4067,
+              "north": 35.0577,
+              "east": -92.4033
+            },
+            {
+              "south": 35.0582,
+              "west": -92.4067,
+              "north": 35.0587,
+              "east": -92.4033
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.058,
+              "west": -92.4067,
+              "north": 35.0585,
+              "east": -92.4033
+            },
+            {
+              "south": 35.0573,
+              "west": -92.4067,
+              "north": 35.0578,
+              "east": -92.4033
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 95,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 28,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied 35.058779, -92.409215 — that pin landed ~350m too far west,\non an older orange-roofed trucking/logistics yard unrelated to Westrock. Web\nresearch established the \"Clark\" facility is a 525,000 sq ft single-serve\n(K-cup pod) plant on William J. Clark Drive — 130,000 sq ft of manufacturing\nplus fulfillment/distribution — that Westrock opened in July 2025 (Westrock\nCoffee press release, Talk Business & Politics, Food Processing).\n\nWorking the William J. Clark Drive corridor: the DC (\"1430\") is the\nnorth white-roof building (confirmed by the \"1430\" facade in Street View); the\nlarge gray-roof warehouse/manufacturing building immediately SOUTH of the DC\nis the Clark plant. Its footprint and trailer activity match a 525K sq ft\nplant. The shell is already present in 2024 imagery — consistent with a",
+        "mapsUrl": "https://www.google.com/maps/@35.057900,-92.405000,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Identified as the large gray-roof warehouse/manufacturing building on William J. Clark Drive immediately SOUTH of the Westrock DC. This is the 525,000 sq ft 'Clark' single-serve (K-cup pod) facility — 130,000 sq ft manufacturing plus fulfillment/distribution — that Westrock opened July 2025. The shell appears in 2024 imagery (likely a Tempus-developed spec building that Westrock fitted out and occupied in 2025). The roster pin (-92.409215) sat ~350m too far west on an unrelated older trucking yard; center re-locked to the gray building at 35.0578,-92.4050.",
+          "truckGate": "Continuous chain-link perimeter fencing surrounds the property (clearly visible in 2024-07 Street View along the south frontage and around the yard). A sliding chain-link gate across the truck driveway is visible at the NW/SW corner where the yard connects to William J. Clark Drive. The truck yard is fully enclosed.",
+          "guardShack": "No staffed guard booth positively identified. The truck entrance reads as a sliding chain-link gate with no adjacent booth — implying kiosk/remote check-in. Flagged uncertain.",
+          "remoteGs": "Truck gate present, no guard shack seen — remote check-in inferred.",
+          "dockDoors": "Long banks of dock doors with trailers backed in along BOTH the north and south long faces of the building; ~50-70 doors estimated across the two faces — banded 50+. Exact count limited by imagery scale.",
+          "dropYard": "Trailer-parking lanes line both long faces with ~60-80 trailers present; a dedicated drop/storage function is clear (dropArea banded 50+).",
+          "dropArea": "Well over 50 trailers parked along the building's two dock faces.",
+          "shipRcvSeparate": "Dock banks run on two physically separate building faces (north face and south face) — consistent with separate ship/receive flows; marked true but uncertain since both faces could serve mixed traffic.",
+          "fastLaneOpportunity": "Wide perimeter loop road and deep aprons give room to add an express/bypass lane.",
+          "drivewayLong": "Deep gate-to-dock approach along the perimeter loop stacks 3+ trucks.",
+          "postGateStaging": "Paved yard inside the fence provides holding/queue room before the docks.",
+          "urbanRural": "Conway industrial corridor near I-40 with surrounding industrial development — Urban.",
+          "scale": "No truck scale identified.",
+          "imagery": "Building opened operationally July 2025; available satellite/Street View predates full Westrock occupancy. Structure is fully built in imagery, so layout audit is reliable; operational specifics carry medium confidence."
+        }
+      },
+      {
+        "id": "04-north-little-rock-ar",
+        "name": "Westrock Coffee - North Little Rock AR Roasting & Manufacturing",
+        "type": "Roasting Plant / Private-Label Manufacturing",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoors",
+          "dropArea",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 34.829921,
+          "lng": -92.388925
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.82879,
+            "west": -92.39031,
+            "north": 34.83105,
+            "east": -92.38854
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 34.82923,
+              "west": -92.39005,
+              "north": 34.82956,
+              "east": -92.38956
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 6,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 4.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode (ROOFTOP, moved 95 m) lands on the correct building. Web\nsearch confirms \"Westrock Coffee Company — Roasting & Manufacturing\" at 30\nCollins Industrial Pl, North Little Rock (Little Rock Chamber listing, Yelp,\nWaze, joe.coffee, NAICS). This is Westrock's original/legacy private-label\nroasting plant predating the new Conway campus.\n\nThe building is the white-roofed, L-shaped industrial structure on the south\nside of Collins Industrial Place, inside the Collins Industrial Place\nlight-industrial subdivision. It is positively distinguished from neighbors by\nits L footprint, its own front (north) employee/visitor parking apron, and the\nroasting-plant dock arm on the southwest leg.",
+        "mapsUrl": "https://www.google.com/maps/@34.829921,-92.388925,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No controlled truck entrance. The facility sits inside the multi-tenant Collins Industrial Place industrial park; satellite and 2024 Street View show open, unmarked driveways and shared paved aprons connecting buildings — no barrier arm, sliding gate, or pinch-point checkpoint at the property line.",
+          "guardShack": "No staffed booth anywhere on the site or at the park access.",
+          "dockDoors": "Dock doors are on the building's southwest arm; ~6-8 bays estimated with 3-4 trailers backed in (wc-04-sat-n imagery). Resolution and roof glare limit an exact count.",
+          "dropArea": "A few trailers stand near the SW dock arm; no large marked drop-stall lot belonging to Westrock. The big dirt lot full of trucks/RVs/salvage east of the building is a SEPARATE adjacent salvage/towing operation, not Westrock's yard.",
+          "urbanRural": "Edge-of-town light-industrial subdivision in North Little Rock — judged Rural per the small-town-industrial rubric tiebreak.",
+          "drivewayShort": "Approach from the park drive to the dock arm is short (1-2 trucks)."
+        }
+      },
+      {
+        "id": "05-concord-nc-roasting",
+        "name": "Westrock Coffee - Concord NC Roasting & Extract Campus (S&D legacy)",
+        "type": "Roasting Plant / Extract Manufacturing",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 35.396271,
+          "lng": -80.614895
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.3947,
+            "west": -80.61675,
+            "north": 35.3981,
+            "east": -80.6131
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 35.39725,
+              "west": -80.61645,
+              "north": 35.39795,
+              "east": -80.61555
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.39675,
+              "west": -80.6161,
+              "north": 35.3976,
+              "east": -80.61515
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 24,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 23,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode (ROOFTOP, moved 90 m) lands on the correct building cluster.\nWeb search confirms S&D Coffee & Tea / Westrock Coffee at 300 Concord Parkway\nSouth, Concord NC — the legacy S&D headquarters and primary custom-roasting and\niced-tea/extract complex, in operation since 1927 and acquired by Westrock\nCoffee. CoPack Connect, Dun & Bradstreet, Encyclopedia.com and Panjiva buyer\nrecords all tie 300 Concord Parkway South to S&D Coffee roasting operations.\n\nThe site is the large multi-building industrial campus on the NW side of\nConcord Parkway South. It is distinguished from the unrelated big-box retail\nand car dealership on the opposite (SE) side of the parkway, and from idx 6\n(101 Commercial Park Dr SW, ~0.4 mi SW — a separate building).",
+        "mapsUrl": "https://www.google.com/maps/@35.396271,-80.614895,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No barrier arm or sliding gate found at the truck entrance off the campus drive. The truck yard is reached by a curved private campus drive from Concord Parkway South; satellite shows wide open paved aprons and no checkpoint pinch-point. Some campus drives off Concord Pkwy could not be Street-Viewed at the actual yard entrance (2017/2026 panos cover the highway frontage and the across-road dealership side), so this is marked uncertain — but no gate structure is visible in overhead imagery.",
+          "guardShack": "No staffed booth visible at the yard entrance or along the campus drive.",
+          "dockDoorCount": "Long dock apron on the NE face of the north building shows ~14 trailer/dock positions in the close-up, plus additional bays around the building cluster — ~22 estimated site-wide. Multi-building campus makes an exact total hard to confirm.",
+          "multipleFacilities": "Campus of ~4 connected/adjacent large buildings — the legacy S&D Coffee & Tea main roasting-and-extract complex.",
+          "dropYard": "Trailers parked in a yard area NW of the dock apron, separate from active dock staging.",
+          "fastLaneOpportunity": "Wide paved yard aprons and ample maneuvering width — physical room to add a bypass/express lane.",
+          "urbanRural": "Located on Concord Parkway South, a busy multi-lane signalized arterial within the Charlotte-metro fabric (apartments, big-box retail, dealerships adjacent) — Urban.",
+          "postGateStaging": "Large paved yard between the campus entrance and the dock doors gives interior holding room."
+        }
+      },
+      {
+        "id": "06-concord-nc-commercial-park",
+        "name": "Westrock Coffee - Concord NC Commercial Park Extract & Tea Facility",
+        "type": "Extract & Tea Manufacturing",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 35.392817,
+          "lng": -80.616512
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.39165,
+            "west": -80.6179,
+            "north": 35.3939,
+            "east": -80.6157
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 35.39205,
+              "west": -80.61735,
+              "north": 35.3925,
+              "east": -80.61675
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 9,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 8,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 6,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode for this address (ROOFTOP) moved 1693 m, so the building was\nverified independently rather than trusting the pin. Web search confirms S&D\nCoffee & Tea at 101 Commercial Park Dr SW, Concord NC (Waze, BusinessYab,\nManta). Panjiva buyer records list an \"S&D Tea Annex\" at 101 Commercial Park\nDrive SW — corroborating that this is a separate S&D/Westrock facility (an\nextract/tea node), not the main campus.\n\nThe building is the large warehouse on Commercial Park Drive SW, inside the\nCommercial Park Drive industrial subdivision, against a wooded edge to the south\nand east. It is ~0.4 mi southwest of idx 5 (300 Concord Parkway South). The two\nare confirmed distinct buildings: idx 5 is the multi-building roasting campus on\nthe parkway; idx 6 is a single warehouse on the Commercial Park loop. They were",
+        "mapsUrl": "https://www.google.com/maps/@35.392817,-80.616512,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No controlled truck entrance. Multiple Street View captures (2019, 2020, 2023, 2026) of Commercial Park Drive SW and the building's dock side show open driveways, no barrier arm, no sliding gate, and no checkpoint pinch-point. The only fencing seen is a small chain-link enclosure around process/utility equipment on the building flank — not a perimeter or gate.",
+          "guardShack": "No staffed booth visible at the entrance or anywhere on the parcel.",
+          "dockDoorCount": "The dock bank on the SW face has roughly 6-9 doors; 2019 Street View shows ~6 doors with 2 trailers backed in plus more bays around the corner. Exact count limited by tree screening and oblique angles (uncertain).",
+          "dropArea": "A few trailers/box bodies park near the dock bank and along the SW lot; no large dedicated drop-stall yard.",
+          "urbanRural": "Sits in the Commercial Park Drive SW industrial subdivision within the Charlotte-metro / Concord fabric, near big-box retail and a signalized arterial — Urban.",
+          "drivewayShort": "Short approach from the Commercial Park loop road to the dock bank (1-2 trucks).",
+          "locationDisambiguation": "Roster geocode for this address moved 1693 m. The building was independently verified at 101 Commercial Park Drive SW (Waze, BusinessYab, Panjiva 'S&D Tea Annex' buyer records) — a distinct facility ~0.4 mi SW of idx 5 (300 Concord Pkwy S). Confirmed as the correct, separate building; not confused with idx 5."
+        }
+      }
+    ]
+  }
+}

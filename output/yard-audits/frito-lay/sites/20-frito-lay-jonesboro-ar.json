@@ -1,0 +1,48 @@
+{
+  "name": "Frito-Lay - Jonesboro AR",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 35.81450, "lng": -90.56050 },
+  "geofences": {
+    "perimeter": { "south": 35.81100, "west": -90.56400, "north": 35.81680, "east": -90.55800 },
+    "truckGate": { "south": 35.81530, "west": -90.56280, "north": 35.81600, "east": -90.56180 },
+    "dropYards": [
+      { "south": 35.81560, "west": -90.56230, "north": 35.81700, "east": -90.55850 },
+      { "south": 35.81480, "west": -90.56400, "north": 35.81620, "east": -90.56260 }
+    ],
+    "dockAprons": [
+      { "south": 35.81530, "west": -90.56240, "north": 35.81620, "east": -90.55850 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60, "trailersVisible": 220, "trailerParkingCapacity": 280,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 87.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.8145,-90.5605,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "scale", "fastLaneOpportunity"],
+  "fieldNotes": {
+    "location": "Roster geocode flagged ROOFTOP but moved 8439 m - the supplied lat/lng (35.814768,-90.56181) nonetheless landed directly on the Frito-Lay plant. Web research confirmed 2810 Quality Way, Jonesboro AR 72401 - a large Frito-Lay manufacturing plant producing Lay's, Ruffles, and Doritos. Street View from the surrounding farm roads confirmed the plant with silos and a Frito-Lay sign in the field.",
+    "truckGate": "Large modern manufacturing plant set well back from public roads across open farmland, reached by a single private access road from the west. A controlled truck gate is standard for a plant of this scale, but Street View does not cover the private drive so a barrier arm could not be directly imaged. Classified truckGate true; flagged uncertain.",
+    "guardShack": "No guard booth resolvable in available imagery; the gate would sit on the unviewable private access road. Classified remoteGs (gate, no visible shack); flagged uncertain.",
+    "dockDoors": "Extensive dock doors with trailers backed in along the building's north face; door count well into the 50+ band (~60 estimated).",
+    "dropArea": "Very large trailer drop yard on the north side - hundreds of trailers parked in long rows; easily 50+ (200+ trailers visible).",
+    "fastLaneOpportunity": "Wide paved aprons and abundant yard space around the access road suggest physical room to add a bypass/express lane; flagged uncertain.",
+    "railServed": "A rail spur curves into the property at the SW corner reaching the process/tank area - confirmed rail-served.",
+    "urbanRural": "The plant is surrounded by open agricultural fields on the edge of Jonesboro - clearly Rural.",
+    "connectivityIssue": "Rural but on the developed edge of Jonesboro (a mid-size city) with neighboring industrial parcels; cellular coverage likely adequate - set false."
+  },
+  "method": "deep-audit"
+}

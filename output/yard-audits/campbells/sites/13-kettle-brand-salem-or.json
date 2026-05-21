@@ -1,0 +1,52 @@
+{
+  "name": "Kettle Brand - Salem OR",
+  "type": "Manufacturing - kettle potato chips",
+  "coords": { "lat": 44.92530, "lng": -122.99850 },
+  "geofences": {
+    "perimeter": { "south": 44.92420, "west": -123.00010, "north": 44.92680, "east": -122.99650 },
+    "truckGate": { "south": 44.92500, "west": -122.99720, "north": 44.92535, "east": -122.99670 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 44.92520, "west": -122.99800, "north": 44.92580, "east": -122.99720 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 12,
+    "trailersVisible": 7,
+    "trailerParkingCapacity": 12,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 16.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@44.92530,-122.99850,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "dropArea"],
+  "fieldNotes": {
+    "truckGate": "Open-access site. Kettle Court SE ends in a wide open paved cul-de-sac/apron directly in front of the plant's dock face. 2025-06 Street View shows no barrier arm, sliding gate, or checkpoint - and no perimeter fence on the truck side. A Campbell's sign confirms the facility identity.",
+    "guardShack": "No guard booth at the entrance - only the plant building and a Campbell's identity sign.",
+    "drivewayShort": "Kettle Court SE is a short dead-end street; the approach from the road to the dock area is shallow (1-2 truck depth).",
+    "entryExitTogether": "Single open approach via Kettle Court SE serves both inbound and outbound.",
+    "dockDoors": "Dock bank on the building's east face with ~4-7 trailers backed in under dock canopies; estimated ~10-15 doors - band 10-25. Counted from zoom-20 imagery, flagged uncertain.",
+    "dropArea": "Few trailers parked without tractors near the dock apron; 0-10 band - no dedicated drop yard.",
+    "dropYard": "No dedicated trailer-storage lot; trailer parking is limited to the dock-apron area.",
+    "urbanRural": "Salem OR (state capital, mid-size metro) - the plant sits in an established SE-Salem industrial park surrounded by other industrial buildings; classified Urban. Mill Creek and a wetland border the west/south.",
+    "siteAreaAcres": "~16 acres from perimeter box (~290m N-S x ~285m E-W of the developed parcel).",
+    "railServed": "No rail spur serves the property.",
+    "solar": "Large rooftop solar array (one of the larger PNW installations, installed 2001) - confirms identity but not operationally relevant to the yard classification.",
+    "confidence": "High - facility positively confirmed by Campbell's signage in Street View; open no-gate/no-guard determination is clear. Dock and trailer counts are honest overhead estimates (flagged)."
+  },
+  "method": "deep-audit"
+}

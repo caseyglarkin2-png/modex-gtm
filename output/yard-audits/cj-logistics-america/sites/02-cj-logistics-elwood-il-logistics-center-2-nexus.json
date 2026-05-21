@@ -1,0 +1,47 @@
+{
+  "name": "CJ Logistics - Elwood IL (Logistics Center 2 / NEXUS)",
+  "type": "Distribution Center",
+  "coords": { "lat": 41.391443, "lng": -88.153535 },
+  "geofences": {
+    "perimeter": { "south": 41.388443, "west": -88.157534, "north": 41.394443, "east": -88.149536 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 130, "trailersVisible": 0, "trailerParkingCapacity": 200,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 110.2,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.391443,-88.153535,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dropArea", "shipRcvSeparate", "scale", "dropYard", "trailersVisible",
+    "trailerParkingCapacity", "siteAreaAcres", "perimeter", "coords"
+  ],
+  "fieldNotes": {
+    "location": "EXACT BUILDING NOT POSITIVELY IDENTIFIED. Address confirmed via CJ Logistics' own open-space page: 21012 W. Mississippi Street, Elwood, IL (Elwood 2 / NEXUS). The roster geocode (GEOMETRIC_CENTER of CenterPoint Intermodal Center) landed inside the BNSF intermodal rail yard. This is a brand-new build-to-suit (ARCO/Murray, groundbreaking 10 Oct 2024, full ops H1 2026); current Maxar imagery of the CenterPoint corridor shows only established buildings - no distinct bare-earth construction pad could be matched to 21012 W Mississippi St, and the new building cannot be told apart from the dozens of similar CenterPoint warehouses. Coordinates and perimeter retained from the roster geocode are APPROXIMATE / UNRELIABLE.",
+    "dockDoorCount": "Published spec (CJ open-space sheet / Business Wire): 130 dock positions, 120 fully equipped. 1,105,500 SF, 40 ft clear height, 6,500 SF office with driver area.",
+    "truckGate": "Inferred from CenterPoint Intermodal Center norm - all CJ/CenterPoint DCs in this park have fenced, guarded truck yards (confirmed at CJ Elwood LC1). Not verified for this specific building.",
+    "guardShack": "Inferred from CenterPoint norm; not verified.",
+    "railServed": "Marketed as adjacent to BNSF and Union Pacific rail lines; CenterPoint Intermodal Center is rail-served. Whether a spur enters the building parcel is unverified.",
+    "urbanRural": "CenterPoint Intermodal Center, Elwood - edge-of-town industrial park surrounded by farmland; rural setting.",
+    "review": "Flagged for human review - re-audit once newer satellite imagery resolves the completed building, or once a precise parcel/coordinate is published."
+  },
+  "method": "deep-audit"
+}

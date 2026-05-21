@@ -1,0 +1,53 @@
+{
+  "name": "General Mills - Cedar Rapids IA (Edgewood Rd)",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 41.93220, "lng": -91.72020 },
+  "geofences": {
+    "perimeter": { "south": 41.92850, "west": -91.72700, "north": 41.93580, "east": -91.71350 },
+    "truckGate": { "south": 41.93390, "west": -91.71830, "north": 41.93470, "east": -91.71720 },
+    "dropYards": [
+      { "south": 41.93280, "west": -91.72620, "north": 41.93450, "east": -91.72330 },
+      { "south": 41.93100, "west": -91.72540, "north": 41.93280, "east": -91.72350 }
+    ],
+    "dockAprons": [
+      { "south": 41.93120, "west": -91.72440, "north": 41.93220, "east": -91.72210 },
+      { "south": 41.93250, "west": -91.71920, "north": 41.93340, "east": -91.71700 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55, "trailersVisible": 170, "trailerParkingCapacity": 200,
+    "truckGateCount": 1, "buildingCount": 6, "siteAreaAcres": 224.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.93220,-91.72020,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale"],
+  "fieldNotes": {
+    "location": "Confirmed General Mills cereal manufacturing complex at 4800 Edgewood Rd SW, Cedar Rapids IA. Geocode pin landed accurately on the process building; locked center 41.9322,-91.7202. This is the ONLY General Mills facility in Cedar Rapids (confirmed via Cedar Rapids Metro Economic Alliance directory).",
+    "truckGate": "Property is fully enclosed by black ornamental metal perimeter fence (clearly visible in 2019/2024 Street View along the access road off Edgewood Rd SW). A single private access road serves the campus; GM directional signage reads 'Frontage Road' and 'South Entrance'. Treated as a controlled truck entrance though Street View coverage stops at the property line.",
+    "guardShack": "No guard booth identifiable from Street View - the public road panos do not extend onto the private entry drive, so a booth could exist beyond the fence but none seen. Flagged uncertain.",
+    "remoteGs": "Set true on assumption of a gate without a confirmed staffed booth; low confidence - flagged.",
+    "railServed": "Extensive multi-track rail yard runs along the entire south edge of the property with many covered hopper cars (grain/cereal ingredient). Rail spurs penetrate into rail-served loading canopies on the SE side. Definitively rail-served.",
+    "dockDoors": "SW distribution warehouse has a continuous dock bank on its SE face (~20+ trailers backed in). Additional dock banks on the central process complex and rail-served loading area. Estimated 50+ total.",
+    "dropArea": "Large organized trailer drop yard at the NW corner (~120-150 trailers in marked rows) plus additional staged trailers near the SW warehouse and process complex. Well over 50.",
+    "multipleFacilities": "Campus comprises the central process/manufacturing complex, a large SW distribution warehouse, two NW warehouse buildings, and rail-served structures - multiple distinct building clusters.",
+    "shipRcvSeparate": "Dock activity is spread across physically separate building faces - the SW warehouse dock bank and the central/rail-served docks - supporting separate ship/receive clusters.",
+    "fastLaneOpportunity": "Wide paved access road and large aprons inside the property line provide room for a bypass/express lane.",
+    "scale": "No truck scale positively identified in imagery; flagged uncertain.",
+    "siteAreaAcres": "Perimeter box ~224 acres including the rail yard and some undeveloped/retention land; the paved industrial core is roughly 90-110 acres.",
+    "urbanRural": "Edge-of-town industrial setting on the SW fringe of Cedar Rapids surrounded by farmland and a quarry; classified Rural per the small-town-vs-Urban tiebreak rule."
+  },
+  "method": "deep-audit"
+}

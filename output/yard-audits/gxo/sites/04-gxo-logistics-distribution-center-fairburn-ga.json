@@ -1,0 +1,50 @@
+{
+  "name": "GXO Logistics Distribution Center - Fairburn GA",
+  "type": "Distribution Center",
+  "coords": { "lat": 33.552411, "lng": -84.537454 },
+  "geofences": {
+    "perimeter": { "south": 33.550500, "west": -84.540000, "north": 33.554600, "east": -84.535000 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 33.550800, "west": -84.539600, "north": 33.553400, "east": -84.536400 }
+    ],
+    "dockAprons": [
+      { "south": 33.551000, "west": -84.539400, "north": 33.553600, "east": -84.536600 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 115,
+    "trailersVisible": 25,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 52.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.552411,-84.537454,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "buildingIdentity": "Confirmed via web research: 907,665 sq ft speculative building (Red Rock Developments / LXP Industrial Trust), dimensions 650' x 1,400', in Shugart Farms Lake Industrial Park along I-85, leased to GXO. Satellite shows the matching large NW-SE-oriented building at the geocoded point.",
+    "truckGate": "Open site. Street View (2025-11) shows the SW dock face and truck court with NO perimeter fence, NO gate barrier, and NO guard booth - a pickup truck drives freely past the dock apron. Access roads run open to the docks. truckGate / guardShack / remoteGs all false.",
+    "dockDoors": "Dock doors run the full ~1,400-ft SW building face with trailers backed in (FedEx and others visible in Street View). Solidly 50+; dockDoorCount ~115 estimated.",
+    "shipRcvSeparate": "Single dock bank on the SW face only; the NE long face is employee parking against a tree line with no docks. Not separate.",
+    "dropArea": "Trailers parked in the SW truck court without tractors - a modest 10-25 band; trailerParkingCapacity ~60.",
+    "drivewayLong": "Very deep SW truck court (185-ft+ truck court typical of this build class) easily holds 3+ trucks.",
+    "urbanRural": "Shugart Farms Lake Industrial Park, surrounded by other large DCs and a residential subdivision to the SE, 12 miles south of Hartsfield-Jackson Atlanta International Airport - dense metro-Atlanta industrial fabric. Urban.",
+    "siteAreaAcres": "Estimated from perimeter box ~456m N-S x ~464m E-W ≈ 52 acres."
+  },
+  "method": "deep-audit"
+}

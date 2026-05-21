@@ -1,0 +1,84 @@
+{
+  "account": "Bob Evans Farms",
+  "generatedAt": "2026-05-18",
+  "facilityCount": 7,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Bob Evans Farms - Xenia OH Plant",
+      "city": "Xenia",
+      "state": "OH",
+      "type": "Manufacturing plant (fresh pork sausage rolls & links)",
+      "address": "640 Birch Rd, Xenia, OH 45385",
+      "lat": null,
+      "lng": null,
+      "source": "Dossier-named plant; address from Bob Evans Grocery 'About Us' facility list and Dayton Daily News coverage of the $6.15M Birch Road sausage facility expansion (confirmed as the plant, not the restaurant)."
+    },
+    {
+      "idx": 2,
+      "name": "Bob Evans Farms - Lima OH Plant",
+      "city": "Lima",
+      "state": "OH",
+      "type": "Manufacturing plant (refrigerated sides - mashed potatoes & macaroni & cheese; former Kettle Creations facility)",
+      "address": "651 Commerce Pkwy, Lima, OH 45804",
+      "lat": null,
+      "lng": null,
+      "source": "Dossier-named plant; address from Bob Evans Grocery 'About Us' facility list and Lima/Allen County Chamber of Commerce manufacturing-division directory listing."
+    },
+    {
+      "idx": 3,
+      "name": "Bob Evans Farms - Hillsdale MI Plant",
+      "city": "Hillsdale",
+      "state": "MI",
+      "type": "Manufacturing plant (fresh pork sausage rolls & patties; USDA FSIS inspected)",
+      "address": "200 N Wolcott St, Hillsdale, MI 49242",
+      "lat": null,
+      "lng": null,
+      "source": "Dossier-named plant; address from Bob Evans Grocery 'About Us' facility list, corroborated by Hillsdale chamber/Yelp business listings."
+    },
+    {
+      "idx": 4,
+      "name": "Bob Evans Farms - Sulphur Springs TX Plant",
+      "city": "Sulphur Springs",
+      "state": "TX",
+      "type": "Manufacturing plant (refrigerated sides, including Bob Evans Macaroni & Cheese)",
+      "address": "1109 Industrial Dr E, Sulphur Springs, TX 75482",
+      "lat": null,
+      "lng": null,
+      "source": "Dossier-named plant; address from Bob Evans Grocery 'About Us' facility list and Hopkins County Chamber / Superpages business listings."
+    },
+    {
+      "idx": 5,
+      "name": "Bob Evans Farms - Rigby ID Plant",
+      "city": "Rigby",
+      "state": "ID",
+      "type": "Manufacturing plant (refrigerated and frozen potato products; Potato Products of Idaho facility absorbed under Post Holdings)",
+      "address": "398 N Yellowstone Hwy, Rigby, ID 83442",
+      "lat": null,
+      "lng": null,
+      "source": "Not in original 4-plant dossier list; now listed on the current Bob Evans Grocery 'About Us' facility page. Dossier section 2/3 confirms Post acquired Potato Products of Idaho (March 2025) and folded it into the Refrigerated Retail network."
+    },
+    {
+      "idx": 6,
+      "name": "Bob Evans Farms - Springfield OH Transportation Hub",
+      "city": "Springfield",
+      "state": "OH",
+      "type": "Distribution / transportation hub (private fleet terminal - Bob Evans Transportation Company LLC, USDOT 911163; ~100 tractor-trailers)",
+      "address": "6088 Green-Field Dr, Springfield, OH 45502",
+      "lat": null,
+      "lng": null,
+      "source": "Bob Evans Grocery 'About Us' page names Springfield, OH as the company's main transportation facility; address from FMCSA SAFER / Bob Evans Transportation Company LLC carrier registration (USDOT 911163)."
+    },
+    {
+      "idx": 7,
+      "name": "Bob Evans Farms - Forney TX Transportation Outpost",
+      "city": "Forney",
+      "state": "TX",
+      "type": "Distribution / transportation outpost (small driver terminal supporting the private fleet)",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Bob Evans Grocery 'About Us' page names Forney, TX as a 'small outpost' of the transportation operation; corroborated by an active Bob Evans Foods CDL driver job posting in Forney, TX. No public street address disclosed - COULD NOT PIN DOWN exact address."
+    }
+  ]
+}

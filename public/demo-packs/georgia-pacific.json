@@ -1,0 +1,3184 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:40:06.414Z",
+  "account": {
+    "slug": "georgia-pacific",
+    "displayName": "Georgia-Pacific",
+    "archetype": "manufacturer",
+    "siteCount": 30,
+    "coverageNote": {
+      "auditedCount": 30,
+      "estimatedFootprint": null,
+      "droppedStubCount": 0,
+      "capHit": true,
+      "note": "We audited the 30 largest facilities by throughput. The wider network follows the same archetype distribution."
+    }
+  },
+  "research": {
+    "facility_count": 150,
+    "audited_facilities": 30,
+    "source": "yard-audit",
+    "confidence": "third-party",
+    "caveats": [
+      "GP Leaf River Cellulose Mill - New Augusta MS: audit note mentions 'closed'",
+      "GP Memphis Cellulose Mill - Memphis TN: audit note mentions 'closed'",
+      "GP Toledo Mill - Toledo OR: audit note mentions 'closed'",
+      "GP Dixie Cup Plant - Lexington KY: audit note mentions 'closed'"
+    ]
+  },
+  "network": {
+    "bbox": [
+      -123.952,
+      29.679263,
+      -73.448202,
+      46.1605
+    ],
+    "archetypeMix": {
+      "#6": 13,
+      "#9": 7,
+      "#8": 1,
+      "#3": 6,
+      "#10": 3
+    },
+    "totals": {
+      "dockDoors": 721,
+      "trailerCapacity": 3402,
+      "gates": 36,
+      "railServed": 25,
+      "acres": 6744
+    },
+    "sites": [
+      {
+        "id": "01-gp-wauna-mill-clatskanie-or",
+        "name": "GP Wauna Mill - Clatskanie OR",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "scale",
+          "multiStep",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 46.1552,
+          "lng": -123.4078
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 46.1485,
+            "west": -123.4135,
+            "north": 46.1605,
+            "east": -123.4015
+          },
+          "truckGate": {
+            "south": 46.15,
+            "west": -123.4078,
+            "north": 46.1512,
+            "east": -123.406
+          },
+          "dropYards": [
+            {
+              "south": 46.1571,
+              "west": -123.4098,
+              "north": 46.1581,
+              "east": -123.4082
+            },
+            {
+              "south": 46.15,
+              "west": -123.4078,
+              "north": 46.1512,
+              "east": -123.4055
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 46.1568,
+              "west": -123.4098,
+              "north": 46.1576,
+              "east": -123.4088
+            }
+          ],
+          "staging": {
+            "south": 46.1497,
+            "west": -123.408,
+            "north": 46.151,
+            "east": -123.4062
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 23,
+          "trailerParkingCapacity": 50,
+          "truckGateCount": 1,
+          "buildingCount": 12,
+          "siteAreaAcres": 165,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster coords were wrong. Supplied `46.10414, -123.203936` landed in downtown Clatskanie, ~17 km southeast of the mill.\n- Web research (Oregon Forest Industry Directory, gridinfo, topozone) places the GP Wauna Mill on ~1,200 acres adjacent to the Columbia River near Westport, OR (~92326 Taylorville Rd / 92929 Wauna Mill Rd, Clatskanie 97016).\n- Satellite probing confirmed a very large integrated pulp/paper/tissue mill complex. Locked mill core center: 46.1552, -123.4078.\n- Facility profile: fully integrated pulp, papermaking and tissue/towel conversion; ~1,100 employees; ~1,200 tons/day finished product. Consumer Products division; recent $150M paper-machine rebuild.",
+        "mapsUrl": "https://www.google.com/maps/@46.1552,-123.4078,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (46.10414,-123.203936) landed in downtown Clatskanie, ~17 km SE of the actual mill. The Wauna Mill is on the Columbia River near Westport OR, ~92326 Taylorville Rd; mill core relocated to 46.1552,-123.4078.",
+          "truckGate": "Single ~1 km dedicated access road runs from US-30 through forest to the mill; integrated 1200-acre, 1100-employee mill universally has a controlled security entrance. Gate is internal/deep on the access road, not reachable by Street View panos which only cover US-30.",
+          "guardShack": "Inferred from facility scale (major integrated GP mill); a manned security booth at a 1100-employee mill is standard, but the booth itself is not positively resolved in overhead imagery — flagged uncertain.",
+          "scale": "Inbound wood-chip and finished-goods truck traffic at a mill of this scale uses a truck scale near the chip yard; small structures observed near the chip-yard access road are consistent with a scale house but not definitively resolved.",
+          "dropArea": "Clear diagonal row of ~13-14 parked trailers plus a ~6-7 trailer cluster in an open lot NE of the warehouse (46.1576,-123.409); a second large gravel staging lot near the access-road junction holds additional trailers.",
+          "dockDoors": "Finished-goods shipping/receiving doors are spread across multiple integrated buildings; ~16 dock positions estimated, low confidence due to process equipment obscuring building faces.",
+          "shipRcvSeparate": "Inbound wood chips delivered to chip yard on the south/east; finished tissue/towel ships from warehouse docks on the north — physically separate operations.",
+          "multipleFacilities": "Large multi-building integrated campus: pulping, paper machines, converting, power/recovery, water treatment, warehouse.",
+          "fastLaneOpportunity": "Wide gravel staging lots at the access-road junction and near the chip yard provide ample unused paved/graded width for bypass lanes.",
+          "urbanRural": "Isolated mill surrounded by forest and the Columbia River; nearest community (Westport) is small. Rural."
+        }
+      },
+      {
+        "id": "02-gp-halsey-mill-halsey-or",
+        "name": "GP Halsey Mill - Halsey OR",
+        "type": "Tissue/Pulp Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "scale",
+          "multiStep",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 44.3792,
+          "lng": -123.1605
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 44.3735,
+            "west": -123.1675,
+            "north": 44.3925,
+            "east": -123.1525
+          },
+          "truckGate": {
+            "south": 44.38,
+            "west": -123.1648,
+            "north": 44.3812,
+            "east": -123.1632
+          },
+          "dropYards": [
+            {
+              "south": 44.376,
+              "west": -123.1635,
+              "north": 44.3792,
+              "east": -123.1588
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 44.3782,
+              "west": -123.1602,
+              "north": 44.3792,
+              "east": -123.1582
+            }
+          ],
+          "staging": {
+            "south": 44.3792,
+            "west": -123.1648,
+            "north": 44.3805,
+            "east": -123.1632
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 10,
+          "siteAreaAcres": 180,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster coords were wrong. Supplied `44.316671, -123.107215` (geocoded from \"31831 Cartney Dr\") landed in open farmland ~8 km southeast of the mill.\n- Web research: the GP Halsey tissue mill is at 30470 American Drive, Halsey OR 97348, co-located with the Cascade Pacific Pulp kraft market-pulp mill (30480 American Dr). EPA FRS facility detail gave a bounding box centered ~44.382, -123.16.\n- Satellite probing confirmed a large integrated pulp/paper mill complex NW of Halsey town. Locked mill core center: 44.3792, -123.1605.\n- Facility profile: integrated kraft pulp + consumer tissue/towel mill; ~250-550 employees; Quilted Northern Ultra Plush; GP has invested $200M+ in paper-machine/converting assets since 2022 ($150M announced 2023).",
+        "mapsUrl": "https://www.google.com/maps/@44.3792,-123.1605,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (44.316671,-123.107215 / 31831 Cartney Dr) landed in farmland ~8 km SE of the mill. The GP Halsey / Cascade Pacific Pulp mill is at 30470-30480 American Drive, NW of Halsey town. Located via EPA FRS bounding box; mill core locked at 44.3792,-123.1605.",
+          "truckGate": "Single dedicated access road off American Drive is the only land route into the operational yard. Integrated pulp+tissue mill (~250-550 employees) is a controlled-access site. The security checkpoint is internal on the access road; Street View covers only public roads and did not reach it.",
+          "guardShack": "Inferred from facility scale and shared dual-operator campus (Cascade Pacific Pulp kraft mill + GP tissue mill); a manned booth is standard. Booth not positively resolved overhead — flagged uncertain.",
+          "multipleFacilities": "Co-located dual operation: Cascade Pacific Pulp kraft market-pulp mill (30480 American Dr) and Georgia-Pacific tissue/towel mill (30470 American Dr) share the campus, plus large recovery boiler / power buildings and converting plant.",
+          "railServed": "Rail line runs along the west side through the property; tank cars observed parked on the spur in Street View (May 2024).",
+          "dropArea": "Large multi-row drop yard south of the converting building — clear rows totaling ~50+ parked trailers (green, white, orange dry-vans), with room for ~90.",
+          "scale": "Inbound wood-chip / log truck traffic at a mill of this scale uses a truck scale; consistent with the access-road layout but not definitively resolved overhead.",
+          "shipRcvSeparate": "Inbound wood chips to the chip yard (NE); finished tissue/pulp ships from warehouse/converting docks (S/SW) — physically separate.",
+          "dockDoors": "~20 estimated across the converting/warehouse south face; partly obscured by trailers and process equipment; low confidence.",
+          "fastLaneOpportunity": "Wide paved aprons at the drop yard and access road provide ample unused width for a bypass lane.",
+          "urbanRural": "Mill sits in open Willamette Valley farmland NW of the small town of Halsey. Rural."
+        }
+      },
+      {
+        "id": "03-gp-crossett-mill-crossett-ar",
+        "name": "GP Crossett Mill - Crossett AR",
+        "type": "Pulp/Paper/Tissue Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "scale",
+          "multiStep",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "truckGateCount"
+        ],
+        "center": {
+          "lat": 33.1395,
+          "lng": -91.9725
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.1345,
+            "west": -91.981,
+            "north": 33.15,
+            "east": -91.9595
+          },
+          "truckGate": {
+            "south": 33.1353,
+            "west": -91.9728,
+            "north": 33.1362,
+            "east": -91.9716
+          },
+          "dropYards": [
+            {
+              "south": 33.136,
+              "west": -91.9742,
+              "north": 33.1378,
+              "east": -91.9718
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.1362,
+              "west": -91.9722,
+              "north": 33.1382,
+              "east": -91.97
+            }
+          ],
+          "staging": {
+            "south": 33.1356,
+            "west": -91.9728,
+            "north": 33.1366,
+            "east": -91.9716
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 2,
+          "buildingCount": 14,
+          "siteAreaAcres": 320,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster coords `33.135284, -91.968356` (geocode movedMeters 3) landed at the south edge of the mill complex, near the active finished-goods warehouse and drop yard.\n- Satellite confirmed a very large integrated pulp/paper/tissue mill — the dominant industrial complex above the town of Crossett. Address 100 Georgia-Pacific Dr, Crossett AR 71635 confirmed.\n- Mill core re-centered to 33.1395, -91.9725.\n- Facility profile: one of GP's flagship Southern mills — pulp, paper and Angel Soft tissue; recent ~$90M tissue expansion. The mill is the economic anchor of the town.",
+        "mapsUrl": "https://www.google.com/maps/@33.1395,-91.9725,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (33.135284,-91.968356, geocode movedMeters 3) landed at the south edge of the mill complex near the active warehouse/drop yard. Mill core re-centered to 33.1395,-91.9725. Address 100 Georgia-Pacific Dr, Crossett AR confirmed.",
+          "truckGate": "Property is fully fenced — continuous chain-link perimeter fence clearly visible in Street View (Oct 2024) along the south side. The warehouse drop yard is entered via a driveway that crosses the rail line into the fenced yard with a checkpoint structure; large GP mill is controlled-access.",
+          "guardShack": "Small structure observed at the warehouse-yard gate driveway; consistent with a guard booth but resolution at z20 too low to confirm definitively. Inferred from facility scale.",
+          "multipleFacilities": "Large multi-section campus: pulp mill, paper machines, tissue/converting, finished-goods warehouse, power/recovery, and a former chemical-plant section. Parts of the historic east complex appear decommissioned (cleared concrete pads).",
+          "railServed": "Active rail spurs run through the property; rail line and tank cars visible along the south boundary and east section.",
+          "dropArea": "Very large multi-row drop yard adjacent to the finished-goods warehouse — well over 100 trailers in clearly marked rows.",
+          "dockDoors": "Extensive dock-door banks along the warehouse south/east faces with trailers backed in; ~45 estimated, low confidence due to building scale.",
+          "scale": "Truck scale expected at a mill of this scale handling inbound chips and outbound finished goods; not definitively resolved overhead.",
+          "shipRcvSeparate": "Inbound chips/raw material handled on the north; finished tissue/paper ships from the SW warehouse docks — physically separate.",
+          "truckGateCount": "At least one main warehouse gate; the large campus likely has a separate main mill/personnel gate — counted 2 as estimate, flagged uncertain.",
+          "fastLaneOpportunity": "Wide paved aprons at the drop yard and warehouse driveway offer ample unused width for a bypass lane.",
+          "urbanRural": "Crossett is a small mill town built around this facility; open country and forest beyond. Rural."
+        }
+      },
+      {
+        "id": "04-gp-broadway-mill-green-bay-wi",
+        "name": "GP Broadway Mill - Green Bay WI",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "scale",
+          "multiStep",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "truckGateCount"
+        ],
+        "center": {
+          "lat": 44.49271,
+          "lng": -88.034475
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 44.4855,
+            "west": -88.0445,
+            "north": 44.4985,
+            "east": -88.028
+          },
+          "truckGate": {
+            "south": 44.4948,
+            "west": -88.0438,
+            "north": 44.496,
+            "east": -88.0418
+          },
+          "dropYards": [
+            {
+              "south": 44.4938,
+              "west": -88.0428,
+              "north": 44.4972,
+              "east": -88.0388
+            },
+            {
+              "south": 44.4885,
+              "west": -88.0388,
+              "north": 44.491,
+              "east": -88.0355
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 44.4912,
+              "west": -88.042,
+              "north": 44.4945,
+              "east": -88.0392
+            },
+            {
+              "south": 44.4938,
+              "west": -88.0398,
+              "north": 44.4958,
+              "east": -88.0372
+            }
+          ],
+          "staging": {
+            "south": 44.4948,
+            "west": -88.0428,
+            "north": 44.4962,
+            "east": -88.0408
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 240,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 2,
+          "buildingCount": 16,
+          "siteAreaAcres": 240,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster coords `44.49271, -88.034475` (geocode ROOFTOP, movedMeters 222) sit within the mill core on a peninsula along the Fox River. Address 1919 S Broadway, Green Bay WI 54304 confirmed.\n- Satellite confirmed a very large tissue/towel mill complex filling the peninsula between S Broadway / a rail line (west) and the Fox River (east). Mill core retained at the given coords.\n- Facility profile: GP Consumer Products tissue/towel mill; one of the company's major converting/distribution sites.",
+        "mapsUrl": "https://www.google.com/maps/@44.49271,-88.034475,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (44.49271,-88.034475, ROOFTOP, movedMeters 222) sit within the mill core on a peninsula along the Fox River. Address 1919 S Broadway, Green Bay WI confirmed. Mill core retained at the given coords.",
+          "truckGate": "Large urban tissue mill bounded by S Broadway / a rail line (W) and the Fox River (E). Main truck entrance is off S Broadway near an admin/office building at the NW intersection; the property is a controlled industrial campus. Internal roads have Street View coverage but the public-road perimeter entry is gated/checkpointed.",
+          "guardShack": "An admin/office building sits at the main Broadway entrance intersection serving as the entry checkpoint; a dedicated guard booth is consistent with a mill of this trucking volume but not separately resolved — flagged uncertain.",
+          "multipleFacilities": "Very large multi-building campus: pulp/paper machines, multiple converting plants, multiple finished-goods warehouses, water-treatment clarifiers, office buildings.",
+          "railServed": "Active rail line runs along the W boundary beside S Broadway with spurs into the property.",
+          "dropArea": "Massive trailer operation — multiple drop yards with dozens of rows; 200+ trailers visible across the site.",
+          "dockDoors": "Multiple warehouse buildings with extensive dock-door banks and trailers backed in on multiple faces; ~70 estimated, 50+ band confident, exact count low confidence.",
+          "scale": "Truck scale expected at this trucking volume; not definitively resolved overhead.",
+          "shipRcvSeparate": "Inbound raw material and outbound finished tissue handled from distinct warehouse/dock clusters on different building faces.",
+          "truckGateCount": "At least one main Broadway gate; the large campus likely has a second gate (counted 2, flagged uncertain).",
+          "fastLaneOpportunity": "Very wide paved aprons and multi-lane internal roads provide ample room for express/bypass lanes.",
+          "urbanRural": "Mill is within the dense urban fabric of Green Bay, surrounded by residential neighborhoods and other industry. Urban."
+        }
+      },
+      {
+        "id": "05-gp-muskogee-mill-muskogee-ok",
+        "name": "GP Muskogee Mill - Muskogee OK",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "multiStep",
+          "dockDoorCount",
+          "truckGateCount"
+        ],
+        "center": {
+          "lat": 35.7345,
+          "lng": -95.2985
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.725,
+            "west": -95.3085,
+            "north": 35.744,
+            "east": -95.286
+          },
+          "truckGate": {
+            "south": 35.7344,
+            "west": -95.3018,
+            "north": 35.7356,
+            "east": -95.3004
+          },
+          "dropYards": [
+            {
+              "south": 35.7358,
+              "west": -95.3015,
+              "north": 35.7392,
+              "east": -95.2978
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.7355,
+              "west": -95.306,
+              "north": 35.7378,
+              "east": -95.3035
+            },
+            {
+              "south": 35.7335,
+              "west": -95.301,
+              "north": 35.736,
+              "east": -95.298
+            }
+          ],
+          "staging": {
+            "south": 35.7344,
+            "west": -95.3018,
+            "north": 35.736,
+            "east": -95.3
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 140,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 15,
+          "siteAreaAcres": 380,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster coords were wrong. Supplied `35.762459, -95.403211` (geocoded from \"801 N 32nd St\") landed in central Muskogee, ~9 km NW of the mill.\n- Web research: the GP Muskogee bath-tissue/towel/napkin mill is a 640-acre complex along the McClellan-Kerr Arkansas River Navigation System, SE of the city; 700+ employees; largest private employer in Muskogee; produces Sparkle and away-from-home tissue.\n- Satellite probing confirmed the large mill complex along the Arkansas River. Locked mill core: 35.7345, -95.2985.",
+        "mapsUrl": "https://www.google.com/maps/@35.7345,-95.2985,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (35.762459,-95.403211 / 801 N 32nd St) landed in central Muskogee ~9 km NW of the mill. The GP Muskogee tissue mill is a 640-acre complex along the McClellan-Kerr Arkansas River Navigation System, SE of the city. Mill core located via web research + satellite; locked at 35.7345,-95.2985.",
+          "truckGate": "POSITIVELY CONFIRMED in Street View (Oct 2024): main entrance driveway off the public road with a 'Georgia-Pacific Muskogee Mill' sign and a chain-link perimeter fence. Controlled entry.",
+          "guardShack": "POSITIVELY CONFIRMED in Street View: a small gate-house / guard booth structure straddles the entrance road at the main gate.",
+          "remoteGs": "false — a manned guard booth is present.",
+          "multipleFacilities": "Very large 640-acre campus: pulp/paper machines, recovery boilers, multiple converting plants, multiple finished-goods warehouses, ash landfill, wastewater treatment ponds.",
+          "railServed": "Rail spurs run into the property; rail line visible alongside internal roads and the mill core.",
+          "dropArea": "Large curved drop yard with many rows of parked trailers (100+ visible).",
+          "dockDoors": "Multiple warehouse buildings with extensive dock-door banks and trailers backed in on several faces; ~55 estimated, 50+ band confident, exact count low confidence.",
+          "scale": "Truck scale expected at this trucking volume; not separately resolved overhead — flagged uncertain.",
+          "shipRcvSeparate": "Inbound raw material/chemicals and outbound finished tissue handled from distinct warehouse/dock clusters on different building faces.",
+          "truckGateCount": "One main confirmed entrance gate; the 640-acre campus may have a secondary gate (counted 1, flagged uncertain).",
+          "fastLaneOpportunity": "Wide entrance apron and ample paved/graded space at the gate and drop yard provide room for a bypass/express lane.",
+          "urbanRural": "Mill sits on the edge of Muskogee along the Arkansas River with large open-field buffers and farmland/river beyond. Rural (small-city industrial edge)."
+        }
+      },
+      {
+        "id": "06-gp-savannah-river-mill",
+        "name": "GP Savannah River Mill - Rincon GA",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "exitLanes",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 32.3315,
+          "lng": -81.2025
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.326559,
+            "west": -81.20941,
+            "north": 32.336441,
+            "east": -81.19559
+          },
+          "truckGate": {
+            "south": 32.3271,
+            "west": -81.2058,
+            "north": 32.3282,
+            "east": -81.2042
+          },
+          "dropYards": [
+            {
+              "south": 32.327,
+              "west": -81.2045,
+              "north": 32.3315,
+              "east": -81.2
+            },
+            {
+              "south": 32.3272,
+              "west": -81.2015,
+              "north": 32.33,
+              "east": -81.199
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.331,
+              "west": -81.2055,
+              "north": 32.3335,
+              "east": -81.2025
+            }
+          ],
+          "staging": {
+            "south": 32.328,
+            "west": -81.205,
+            "north": 32.33,
+            "east": -81.203
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 280,
+          "trailerParkingCapacity": 350,
+          "truckGateCount": 1,
+          "buildingCount": 12,
+          "siteAreaAcres": 353,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Locked center: 32.3315, -81.2025\n- Address: 393 Fort Howard Rd, Rincon, GA 31326 (roster lists 115 Fort Howard Rd; mill office is 393)\n- The roster point (32.333323, -81.21165) sat in farmland/woods ~1 km WNW of the mill.\n  Probing satellite east from the roster point revealed a large industrial complex.\n  Confirmed as the GP Savannah River Mill — a major tissue/towel manufacturing\n  campus built in 1986 by Fort Howard Paper, acquired by GP in 2002, ~1,000\n  employees, producing toilet paper, paper towels and napkins largely from\n  recycled fiber.",
+        "mapsUrl": "https://www.google.com/maps/@32.3315,-81.2025,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Street View on the private entrance road shows a multi-lane checkpoint canopy ~200m inside the property line with trucks staged; chain-link perimeter fencing runs along the access road; GP entrance sign at the public-road junction.",
+          "guardShack": "Checkpoint canopy spans the entry lanes with an adjacent booth structure visible in Street View; consistent with a staffed gatehouse at a 1000-employee mill.",
+          "dropArea": "Extensive multi-row diagonal trailer drop yard immediately inside the gate; hundreds of trailers counted across z18-z19 crops, clearly 50+.",
+          "dockDoors": "Banks of dock doors along the central process/converting buildings; estimate 45 in the 25-50 band, partially obscured by buildings and trailers.",
+          "railServed": "Active rail spur with rail cars runs into the SE side of the property; mill historically built by Fort Howard with rail service.",
+          "multipleFacilities": "Large multi-building campus: pulp/process buildings, converting, warehouse, power plant, plus a separate large DC building to the SW along Fort Howard Rd.",
+          "fastLaneOpportunity": "Wide gate apron with multiple lanes and ample paved width inside the gate to add an express/bypass lane.",
+          "scale": "No truck scale clearly identifiable in available imagery near the gate; flagged uncertain."
+        }
+      },
+      {
+        "id": "07-gp-naheola-mill",
+        "name": "GP Naheola Mill - Pennington AL",
+        "type": "Pulp/Tissue/Paperboard Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "scale",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 32.2235,
+          "lng": -88.029
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.216314,
+            "west": -88.035371,
+            "north": 32.230686,
+            "east": -88.022629
+          },
+          "truckGate": {
+            "south": 32.2247,
+            "west": -88.0307,
+            "north": 32.2257,
+            "east": -88.0295
+          },
+          "dropYards": [
+            {
+              "south": 32.219,
+              "west": -88.0345,
+              "north": 32.2228,
+              "east": -88.03
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.2188,
+              "west": -88.0348,
+              "north": 32.2225,
+              "east": -88.0295
+            },
+            {
+              "south": 32.2245,
+              "west": -88.029,
+              "north": 32.2265,
+              "east": -88.0265
+            }
+          ],
+          "staging": {
+            "south": 32.223,
+            "west": -88.0315,
+            "north": 32.225,
+            "east": -88.0295
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 25,
+          "siteAreaAcres": 474,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Locked center: 32.2235, -88.0290\n- Address: 7530 Highway 114, Pennington, AL 36916\n- The roster point (32.223373, -88.029265, ROOFTOP) landed directly on the mill\n  complex. Step-0 satellite confirmed a large pulp/paper/paperboard mill on the\n  Tombigbee River — process buildings, paper machines, a ~750 m distribution\n  warehouse, power plant, rail yard, and an extensive settling-pond complex.",
+        "mapsUrl": "https://www.google.com/maps/@32.2235,-88.029,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single controlled access road off Highway 114; chain-link perimeter fencing visible all around the campus in Street View (Oct 2025); GP welcome monument sign at the road junction; rail crossing en route to the gate.",
+          "guardShack": "No frontal booth view obtained in Street View, but a fully-fenced 1000+ employee mill with a single controlled access road runs a staffed gatehouse by standard; flagged uncertain.",
+          "dockDoors": "Very large distribution warehouse with continuous dock-door banks along both ~750m long faces, plus dock banks on process/converting buildings; clearly 50+, estimated ~70.",
+          "dropArea": "Trailers parked along the warehouse aprons and adjacent lots; bounded by ponds and rail so dedicated stalls are moderate, 10-25 band, ~90 trailers visible total.",
+          "shipRcvSeparate": "Dock banks run on both long faces of the warehouse and on separate process-side buildings, implying physically separate ship/receive clusters.",
+          "railServed": "Active rail spur and rail yard run through the property; box cars and tank cars visible in Street View and satellite.",
+          "multipleFacilities": "Large multi-building campus: pulp/paper process buildings, paper machines, converting, a ~750m distribution warehouse, power plant, plus extensive settling-pond complex to the SE.",
+          "scale": "No truck scale clearly identifiable near the gate; flagged uncertain.",
+          "perimeter": "Box covers the fenced developed industrial footprint; excludes the large SE settling-pond complex which is not truck yard."
+        }
+      },
+      {
+        "id": "08-gp-plattsburgh-mill",
+        "name": "GP Plattsburgh Mill - Plattsburgh NY",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 44.7112,
+          "lng": -73.4525
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 44.707786,
+            "west": -73.456798,
+            "north": 44.714614,
+            "east": -73.448202
+          },
+          "truckGate": {
+            "south": 44.7097,
+            "west": -73.4548,
+            "north": 44.7104,
+            "east": -73.4539
+          },
+          "dropYards": [
+            {
+              "south": 44.7095,
+              "west": -73.4545,
+              "north": 44.711,
+              "east": -73.4528
+            },
+            {
+              "south": 44.7125,
+              "west": -73.4558,
+              "north": 44.7133,
+              "east": -73.4545
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 44.7128,
+              "west": -73.4532,
+              "north": 44.7143,
+              "east": -73.4515
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 2,
+          "buildingCount": 14,
+          "siteAreaAcres": 128,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Locked center: 44.7112, -73.4525\n- Address: Mill on Margaret Street, City of Plattsburgh, NY 12901 (roster\n  lists 1 Georgia-Pacific Rd; web sources give 327 Margaret St)\n- The roster point (44.710302, -73.451029, ROOFTOP) landed on the mill. Step-0\n  satellite confirmed a large (~1 million sq ft) tissue mill on the west shore\n  of Lake Champlain — the former Vanity Fair Paper Mill, GP-owned since 1963,\n  producing Quilted Northern bath tissue.",
+        "mapsUrl": "https://www.google.com/maps/@44.7112,-73.4525,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Street View (Oct 2022) shows a chain-link gate with green privacy slats labeled 'GATE 1' on a swing/sliding gate on the SW side of the property; trailers staged immediately inside the fence.",
+          "guardShack": "No staffed guard booth visible at GATE 1 — it is an unattended labeled swing gate; access appears to be remote/badge-based, so remoteGs is true.",
+          "remoteGs": "Labeled 'GATE 1' swing gate with no booth = remote check-in / badge access.",
+          "truckGateCount": "Gate signage reads 'GATE 1', implying at least one more numbered gate on the perimeter.",
+          "backupSensitive": "Tight urban-edge site: the SW truck gate opens directly onto a narrow plant road with little stacking room; a queue would back onto the road.",
+          "dockDoors": "Dock banks along the large NW warehouse and process buildings; ~28 estimated, partly obscured by roof structures - flagged uncertain.",
+          "dropArea": "Multiple trailer-parking rows inside the SW fence and along the warehouse; 25-50 band.",
+          "shipRcvSeparate": "Distinct dock clusters on the warehouse and on separate process-side buildings.",
+          "railServed": "Active rail line runs along the west edge and into the mill; rail car at a mill dock visible in Street View.",
+          "urbanRural": "Site sits inside the City of Plattsburgh, surrounded by residential streets and commercial development - clearly Urban.",
+          "multipleFacilities": "Multi-building campus: process mill, large converting/warehouse, office building, plus ancillary structures."
+        }
+      },
+      {
+        "id": "09-gp-alabama-river-cellulose-mill",
+        "name": "GP Alabama River Cellulose Mill - Perdue Hill AL",
+        "type": "Cellulose/Pulp Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "scale",
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes",
+          "connectivityIssue",
+          "shipRcvSeparate",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 31.58,
+          "lng": -87.483
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 31.574161,
+            "west": -87.493017,
+            "north": 31.585839,
+            "east": -87.472983
+          },
+          "truckGate": {
+            "south": 31.5806,
+            "west": -87.478,
+            "north": 31.5816,
+            "east": -87.4765
+          },
+          "dropYards": [
+            {
+              "south": 31.5808,
+              "west": -87.4825,
+              "north": 31.583,
+              "east": -87.478
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 31.5785,
+              "west": -87.486,
+              "north": 31.5805,
+              "east": -87.483
+            }
+          ],
+          "staging": {
+            "south": 31.5805,
+            "west": -87.48,
+            "north": 31.5815,
+            "east": -87.478
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 350,
+          "truckGateCount": 1,
+          "buildingCount": 20,
+          "siteAreaAcres": 610,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": true,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Locked center: 31.5800, -87.4830\n- Address: 2830 Hornady Drive, Monroeville, AL 36460 — at Claiborne in\n  Monroe County, on the east bank of the Alabama River, off Highway 84 /\n  Lena Landegger Hwy.\n- The roster point (31.515011, -87.494842, GEOMETRIC_CENTER) was ~7 km SSW of\n  the actual mill, landing in rural farmland/forest near Perdue Hill town.\n  Step-0 satellite + web research (the mill is at Claiborne, not Perdue Hill\n  proper) located the large pulp mill complex on the river. Confirmed as the\n  Alabama River Cellulose mill — operating since 1978, ~1 million tons/yr of\n  fluff and market pulp, ~3,000 direct/indirect jobs, subject of GP's $800M\n  modernization (2025-2027) to become the largest softwood pulp mill in the US.",
+        "mapsUrl": "https://www.google.com/maps/@31.58,-87.483,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single controlled access road off Highway 84 / Lena Landegger Hwy entering an isolated industrial mill; the long forest-buffered private road forms a controlled approach.",
+          "guardShack": "No Street View available (mill too remote, ZERO_RESULTS) - guard booth not directly confirmed; a 3,000-job pulp mill, one of the largest in North America, runs a staffed gatehouse by standard. Flagged uncertain.",
+          "scale": "Pulp mills weigh inbound wood loads on truck scales; structures consistent with a scale/check area appear near the woodyard entrance. Inferred true; flagged uncertain.",
+          "dropArea": "Very large trailer drop yard NE of the process buildings - hundreds of semi-trailers in colorful rows confirmed at z20; clearly 50+.",
+          "dockDoors": "Pulp/market-pulp mill ships baled pulp; dock banks present on the warehouse/baleline building but limited - 10-25 band, estimated ~18. Flagged uncertain.",
+          "railServed": "Large rail yard with dozens of rail cars runs along the NE edge into the mill; rail is a primary mode for this cellulose mill.",
+          "connectivityIssue": "Mill is extremely isolated - surrounded by forest, no town nearby (Perdue Hill / Claiborne are small), cellular coverage likely weak. Medium confidence.",
+          "multipleFacilities": "Large multi-building campus: pulp process buildings, woodyard, recovery, power, baleline/warehouse, plus extensive settling ponds and landfill.",
+          "drivewayLong": "Long forest-buffered private access road provides ample queue depth before the gate.",
+          "perimeter": "Box covers the developed footprint - process buildings, woodyard, and trailer drop yard; excludes outlying landfill and pond areas to the S/SW."
+        }
+      },
+      {
+        "id": "10-gp-brunswick-cellulose-mill",
+        "name": "GP Brunswick Cellulose Mill - Brunswick GA",
+        "type": "Cellulose/Pulp Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "scale",
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes",
+          "shipRcvSeparate",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 31.176,
+          "lng": -81.512
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 31.169263,
+            "west": -81.521974,
+            "north": 31.182737,
+            "east": -81.502026
+          },
+          "truckGate": {
+            "south": 31.1805,
+            "west": -81.5098,
+            "north": 31.1814,
+            "east": -81.5084
+          },
+          "dropYards": [
+            {
+              "south": 31.18,
+              "west": -81.509,
+              "north": 31.1825,
+              "east": -81.5048
+            },
+            {
+              "south": 31.1752,
+              "west": -81.5155,
+              "north": 31.177,
+              "east": -81.5125
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 31.1725,
+              "west": -81.5185,
+              "north": 31.1745,
+              "east": -81.516
+            }
+          ],
+          "staging": {
+            "south": 31.1795,
+            "west": -81.51,
+            "north": 31.1805,
+            "east": -81.5085
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 450,
+          "truckGateCount": 1,
+          "buildingCount": 22,
+          "siteAreaAcres": 704,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Locked center: 31.1760, -81.5120\n- Address: Mill on the Turtle River, 9th Street West area, Brunswick, GA\n  31521 (roster lists 100 Pulp Plant Rd).\n- The roster point (31.229422, -81.512762, GEOMETRIC_CENTER) was ~6 km N of the\n  actual mill, in a residential/commercial part of Brunswick. Step-0 satellite\n  + web research (mill is on the Turtle River) located the large pulp mill\n  complex on the riverfront SW of downtown Brunswick. Confirmed as the Brunswick\n  Cellulose mill — operating since 1937 (the Southeast's first pulp mill, as\n  Brunswick Pulp & Paper); integrated bleached-kraft pulp mill making fluff pulp\n  for diapers and hygiene products; ~600-650 employees; processes ~1,000\n  truckloads of yellow pine per day; subject of a $200M bio-refinery upgrade.",
+        "mapsUrl": "https://www.google.com/maps/@31.176,-81.512,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Large bleached-kraft pulp mill receiving ~1,000 truckloads of pine logs per day; single controlled access road off the city street network; container/trailer yard is fenced with chain-link and privacy screening (Street View, Nov 2024).",
+          "guardShack": "No frontal booth view obtained (no Street View on the private mill road), but a 600-employee pulp mill handling ~1,000 trucks/day operates a staffed gatehouse by standard. Flagged uncertain.",
+          "scale": "Pulp mills weigh inbound wood loads on truck scales; inferred true for a mill receiving 1,000 truckloads/day. Flagged uncertain.",
+          "dropArea": "Very large container/trailer drop yard NE of the process buildings - hundreds of intermodal containers on chassis (UASC, Hapag-Lloyd visible in Street View) plus trailers; clearly 50+.",
+          "dockDoors": "Bleached-kraft mill ships baled/containerized fluff pulp; finished-goods dock banks are limited - 10-25 band, ~20 estimated. Flagged uncertain.",
+          "railServed": "Active rail yard with rail cars along the NW edge of the woodyard; rail serves the mill.",
+          "fastLaneOpportunity": "Extensive paved width at the container-yard entrance allows an express/bypass lane.",
+          "multipleFacilities": "Large multi-building campus: kraft process buildings, recovery, woodyard, baleline, container yard, plus extensive settling-pond/clarifier complex.",
+          "urbanRural": "Mill is on the Turtle River at the edge of Brunswick, bordered by residential neighborhoods and a cemetery, but the broader setting is a small coastal city / edge-of-town - judged Rural per rubric (small-town industrial).",
+          "drivewayLong": "Ample paved approach from the access road to the container yard provides deep truck queuing.",
+          "perimeter": "Box covers the developed footprint - process buildings, woodyard, and the NE container/trailer drop yard; excludes outlying settling ponds and sludge fields."
+        }
+      },
+      {
+        "id": "11-gp-leaf-river-cellulose-mill",
+        "name": "GP Leaf River Cellulose Mill - New Augusta MS",
+        "type": "Cellulose/Pulp Mill",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "scale",
+          "dockDoors",
+          "entryLanes",
+          "exitLanes",
+          "connectivityIssue"
+        ],
+        "center": {
+          "lat": 31.2432,
+          "lng": -89.0455
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 31.236,
+            "west": -89.0512,
+            "north": 31.2505,
+            "east": -89.0388
+          },
+          "truckGate": {
+            "south": 31.2434,
+            "west": -89.0478,
+            "north": 31.2444,
+            "east": -89.0466
+          },
+          "dropYards": [
+            {
+              "south": 31.2386,
+              "west": -89.047,
+              "north": 31.2402,
+              "east": -89.0451
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 31.2388,
+              "west": -89.0467,
+              "north": 31.2399,
+              "east": -89.045
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 9,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 12,
+          "siteAreaAcres": 285,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "0-10",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster point: 31.218882, -89.052055 (\"358 Leaf River Rd\") — geocoded GEOMETRIC_CENTER.\n- Problem: The roster coordinate landed on a small rural residential property (single house, gravel drive) ~2.7 km south of the mill. The \"358 Leaf River Rd\" address is the mailing/entrance-road address, not the building footprint.\n- Resolution: Web search (Georgia-Pacific news, EPA ENERGY STAR, Forest Products Locator) confirmed the Leaf River Cellulose mill sits north of New Augusta. Satellite probing from z14 down located the sprawling mill complex.\n- Locked center: ~31.2432, -89.0455 (pulp-processing core). The developed mill runs roughly 31.236–31.250 N/S along a north–south access road off Leaf River Rd.\n- Street View (captured 2025-03) along the west boundary road positively confirmed the facility: green-clad pulp mill buildings, recovery boiler stacks with steam plumes, digesters, chemical tank farm, cooling towers, and a finished-goods warehouse — fully consistent with a wood-cellulose/dissolving-pulp mill (~300 employees per GP).",
+        "mapsUrl": "https://www.google.com/maps/@31.2432,-89.0455,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Geocoded roster point (31.2189,-89.0521) was a rural residential property ~2.7 km south of the mill; mill core relocated via satellite + web research to ~31.2432,-89.0455.",
+          "truckGate": "Mill is fully enclosed by chain-link perimeter fencing (clearly visible in Street View along the west boundary road). Main controlled access road enters the fenced property from the intersection near the admin/control building at ~31.2438,-89.0473.",
+          "guardShack": "No distinct standalone guard booth observed at the truck lane; the green admin/control building sits at the entry and serves the access-control function. Treated as remote/admin-managed gate.",
+          "scale": "Pulp mills of this type require a truck scale for chip/log van weigh-in; a scale is highly likely in the woodyard but not pinpointed in imagery - flagged low-confidence.",
+          "dockDoors": "Finished-goods warehouse south face shows ~6-9 trailers backed in plus additional doors; counted band 10-25, medium confidence.",
+          "shipRcvSeparate": "Receiving (woodchip/log yard and chemical tank farm) is physically separate from finished-cellulose shipping at the warehouse - distinct clusters on the site.",
+          "multipleFacilities": "Campus: pulp processing core, woodchip storage yard, chemical tank farm, finished-goods warehouse, and wastewater treatment ponds are distinct building/area clusters.",
+          "railServed": "Multiple rail spurs run through the site alongside the warehouse and woodyard; rail cars visible.",
+          "urbanRural": "Deep pine forest, far from any town; New Augusta is a very small community well south. Rural.",
+          "fastLaneOpportunity": "Wide paved entry apron at the gate with ample unused width to add a bypass lane."
+        }
+      },
+      {
+        "id": "12-gp-memphis-cellulose-mill",
+        "name": "GP Memphis Cellulose Mill - Memphis TN",
+        "type": "Cellulose Mill",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "scale",
+          "dockDoors",
+          "dropArea",
+          "entryLanes",
+          "exitLanes",
+          "truckGate"
+        ],
+        "center": {
+          "lat": 35.1565,
+          "lng": -89.962
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.1505,
+            "west": -89.9678,
+            "north": 35.1612,
+            "east": -89.9592
+          },
+          "truckGate": {
+            "south": 35.1568,
+            "west": -89.961,
+            "north": 35.158,
+            "east": -89.9598
+          },
+          "dropYards": [
+            {
+              "south": 35.1548,
+              "west": -89.9638,
+              "north": 35.1562,
+              "east": -89.9618
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.1556,
+              "west": -89.9632,
+              "north": 35.1566,
+              "east": -89.9618
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 14,
+          "siteAreaAcres": 78,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster point: 35.148581, -90.051896 (\"100 N B St\") — geocoded APPROXIMATE, flagged 1952 m moved. It landed in downtown Memphis — clearly wrong.\n- Resolution: Web research (Greater Memphis Chamber, Waze, GP closure announcements, Tennessee Encyclopedia) established:\n  - The cellulose mill is at 920 Scott Road, in the Binghampton neighborhood.\n  - The 1001 Tillman St address is a separate facility — the GP Cellulose Technology & Innovation Center (an office building, ~22 staff).\n  - The site is the former Buckeye Cellulose / Buckeye Technologies cotton-linter pulp plant, acquired by GP in 2013.\n- Satellite probing located the large fenced multi-building mill complex at ~35.1565, -89.9620, bounded by a rail corridor (west) and city streets/residential (east, south).",
+        "mapsUrl": "https://www.google.com/maps/@35.1565,-89.9620,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster geocode (35.1486,-90.0519) landed in downtown Memphis, ~5 km off (APPROXIMATE, 1952 m flagged). Web research resolved the mill to 920 Scott Rd in the Binghampton neighborhood; the 1001 Tillman St address is the separate GP Cellulose Technology & Innovation Center office. Mill complex located via satellite at ~35.1565,-89.9620.",
+          "facility": "Large multi-building urban industrial cellulose mill - the former Buckeye Cellulose / Buckeye Technologies cotton-linter pulp plant, acquired by GP in 2013. GP announced permanent closure of the Memphis Cellulose mill in October 2025 (~130 layoffs).",
+          "truckGate": "Complex is fully enclosed by chain-link perimeter fencing (verified along multiple street frontages in Street View). Controlled vehicle gates observed at the fenced parking/office entrance. Treated as a controlled truck gate; exact dedicated truck lane not isolated - flagged uncertain.",
+          "guardShack": "No distinct standalone guard booth confirmed at a truck lane; office/admin building sits at the main entry. Classified remoteGs true - flagged uncertain.",
+          "backupSensitive": "Urban site - mill fronts onto city streets with residential blocks directly across; a truck queue at the gate would spill onto a public street.",
+          "shipRcvSeparate": "Distinct dock clusters on different building faces plus rail-served receiving area; shipping and receiving physically separate.",
+          "multipleFacilities": "Campus of 14+ distinct buildings - processing, warehouses, pole-barn storage, office, plus a large rail/tank-car yard.",
+          "railServed": "Active rail line runs the full length of the west side; rail tank cars and rail equipment visible in the on-site yard.",
+          "scale": "A truck scale is operationally expected at a pulp mill of this type and era; not pinpointed in imagery - flagged low-confidence.",
+          "dropYard": "Large paved yard along the rail holds trailers and rail cars - functions as a drop/storage yard.",
+          "urbanRural": "Dense urban Memphis - surrounded on the east and south by residential blocks; clearly Urban.",
+          "dockDoors": "Multiple dock banks across aging buildings; ~8 trailers visible plus additional doors - banded 10-25, medium confidence."
+        }
+      },
+      {
+        "id": "13-gp-brewton-mill",
+        "name": "GP Brewton Mill - Brewton AL",
+        "type": "Containerboard/Bleached Board Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "dockDoors",
+          "dropArea",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 31.1068,
+          "lng": -87.0658
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 31.1018,
+            "west": -87.0698,
+            "north": 31.1118,
+            "east": -87.0588
+          },
+          "truckGate": {
+            "south": 31.1038,
+            "west": -87.0686,
+            "north": 31.1048,
+            "east": -87.0674
+          },
+          "dropYards": [
+            {
+              "south": 31.1044,
+              "west": -87.0672,
+              "north": 31.1062,
+              "east": -87.065
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 31.1045,
+              "west": -87.0668,
+              "north": 31.1057,
+              "east": -87.0644
+            }
+          ],
+          "staging": {
+            "south": 31.104,
+            "west": -87.0688,
+            "north": 31.105,
+            "east": -87.0678
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 16,
+          "siteAreaAcres": 95,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Roster point: 31.105178, -87.072192 (\"200 Hwy 41 N\") — geocoded APPROXIMATE (19 m flagged, but the point actually sat near the Brewton town center, ~1 km west of the mill).\n- Resolution: Wide satellite (z15) immediately showed the large industrial mill complex east of the town center. Web research (GP Bleached Board, Project Phoenix, Smurfit-Stone acquisition coverage) confirmed the Brewton containerboard/bleached-board mill.\n- Locked center: ~31.1068, -87.0658 (mill processing/warehouse core). The mill complex runs roughly 31.102–31.112 N along a rail corridor, bounded by residential/town to the west, forest to the north and east, and a pond/river to the south.\n- Street View (captured 2023-05 and 2025-10) along the western mill roads positively confirmed the facility: paper-roll outdoor storage stacks, large shipping warehouses with rail cars backed in, woodyard, and the guarded mill entrance.",
+        "mapsUrl": "https://www.google.com/maps/@31.1068,-87.0658,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster geocode (31.1052,-87.0722) sat near the Brewton town center, ~1 km west of the mill (APPROXIMATE, 19 m flagged but actually mislocated to downtown). Mill core relocated via satellite to ~31.1068,-87.0658.",
+          "facility": "Integrated white-top linerboard and solid-bleached-sulfate (SBS) paperboard mill. Former Smurfit-Stone mill, acquired by GP in 2007; ~400+ employees; underwent the $400M 'Project Phoenix' modernization; first U.S. integrated paper mill to earn EPA ENERGY STAR (2021).",
+          "truckGate": "TRUE - confirmed. Street View (2023-05) shows a controlled mill entrance with a clear stop sign and checkpoint.",
+          "guardShack": "TRUE - confirmed. Street View clearly shows a small staffed guard booth (single-vehicle footprint, windows on multiple sides, door, posted signs) beside the entrance lane at ~31.1043,-87.0681.",
+          "preGateStaging": "Paved/gravel apron and yard space outside the gate booth where trucks can wait.",
+          "shipRcvSeparate": "Receiving (woodyard, chip/log piles, chemical receiving) is physically separate from finished paperboard shipping at the warehouse dock banks - distinct clusters.",
+          "dockDoors": "Long shipping warehouses show banks of dock doors with multiple trailers backed in; counted band 10-25 (likely toward the upper end), medium confidence.",
+          "dropArea": "Paved yard near the warehouses holds parked trailers; band 10-25, medium confidence.",
+          "multipleFacilities": "Campus: pulp/paper processing core, woodyard with chip/log storage, multiple shipping/storage warehouses, paper-roll outdoor storage yards, plus support buildings - 16+ distinct structures.",
+          "railServed": "Multiple rail spurs run directly into the mill warehouses; rail cars visible at the buildings.",
+          "scale": "A truck scale is operationally expected for chip/log van weigh-in at an integrated paper mill; not pinpointed in imagery - flagged low-confidence.",
+          "urbanRural": "Brewton is a small Alabama town; the mill sits on the edge of town with forest on the north/east. Rural."
+        }
+      },
+      {
+        "id": "14-gp-monticello-mill",
+        "name": "GP Monticello Mill - Monticello MS",
+        "type": "Containerboard Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "scale",
+          "dockDoors",
+          "entryLanes",
+          "exitLanes",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 31.6282,
+          "lng": -90.0815
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 31.6195,
+            "west": -90.096,
+            "north": 31.636,
+            "east": -90.072
+          },
+          "truckGate": {
+            "south": 31.6228,
+            "west": -90.085,
+            "north": 31.6244,
+            "east": -90.0826
+          },
+          "dropYards": [
+            {
+              "south": 31.628,
+              "west": -90.0875,
+              "north": 31.631,
+              "east": -90.084
+            },
+            {
+              "south": 31.6224,
+              "west": -90.082,
+              "north": 31.6256,
+              "east": -90.0795
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 31.6288,
+              "west": -90.0862,
+              "north": 31.6312,
+              "east": -90.0838
+            }
+          ],
+          "staging": {
+            "south": 31.6212,
+            "west": -90.0815,
+            "north": 31.6238,
+            "east": -90.0792
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 22,
+          "siteAreaAcres": 320,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode (31.5795, -90.0394; address \"1715 Highway 84 E\") placed the\nfacility on Highway 84 in open pine forest roughly 5.6 km SSE of the real mill —\na city-level geocode error, not a usable pin. Web research (Global Energy Monitor\n\"Monticello Paper power station\", CLUI Land Use Database) returned exact\ncoordinates 31.6282, -90.0815. Satellite imagery there shows an unmistakable\nlarge integrated paper mill on Na Sandifer Hwy (Old Highway 84), on the Pearl\nRiver about one mile east of Monticello in Lawrence County, MS. Center locked\nthere.\n\nThe facility is Georgia-Pacific's Monticello Mill, an integrated kraft pulp and\nlinerboard (containerboard) mill. In 2024 it became one of few North American\nfacilities to exceed 1 million tons of annual product. A $91M upgrade was\nannounced in 2023 (Infor Phase 2 per the account dossier).",
+        "mapsUrl": "https://www.google.com/maps/@31.6282,-90.0815,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster geocode (31.5795,-90.0394, address 1715 Highway 84 E) sat on Highway 84 in open forest ~5.6 km SSE of the actual mill - a city-level geocode error. Mill core relocated via CLUI/Global Energy Monitor coordinates and satellite to ~31.6282,-90.0815, on Na Sandifer Hwy (Old Highway 84) along the Pearl River, ~1 mile east of Monticello, Lawrence County MS.",
+          "facility": "Georgia-Pacific Monticello Mill - an integrated kraft pulp and linerboard (containerboard) mill. In 2024 it became one of few North American facilities to produce over 1 million tons of product. Subject of a $91M upgrade announced 2023 (Infor Phase 2 per dossier). Large campus: paper machine buildings, woodyard with two radial log/chip storage piles, wastewater treatment clarifiers and ponds, finished-goods shipping warehouse, rail yard, support structures.",
+          "truckGate": "TRUE - controlled mill entrance. The single mill access road branches NE off Na Sandifer Hwy (~31.6213,-90.0805) and runs ~400 m into the property; Street View (2024-03) shows signage, a posted entrance and an industrial checkpoint approach. A controlled, gated/scaled entrance is universal for an integrated paper mill receiving log/chip vans; gate structures sit at the property line beyond Street View coverage.",
+          "guardShack": "TRUE (medium confidence) - a small structure is visible at the entrance/scale area near 31.6236,-90.0838; consistent with a guard/scale house. Not pinpointed at high resolution - flagged.",
+          "preGateStaging": "Long access road and wide gravel aprons outside the gate; satellite shows trailers/trucks queued bumper-to-bumper along the entrance road - ample pre-gate waiting room.",
+          "postGateStaging": "Large paved/gravel yard areas inside the gate before the docks and woodyard scales.",
+          "drivewayLong": "The gate-to-dock approach is a long internal road (hundreds of meters) that easily holds a queue of 3+ trucks; a substantial truck queue was visible in imagery.",
+          "fastLaneOpportunity": "Very wide gravel entrance aprons and unused paved/graded width near the gate provide physical room for a bypass/express lane.",
+          "shipRcvSeparate": "Receiving (woodyard log/chip vans, chemical and rail receiving) is physically separate from finished linerboard shipping at the warehouse dock bank on the NW side - distinct clusters.",
+          "dockDoors": "Finished-goods shipping warehouse on the NW side shows a dock face with banks of doors and trailers backed in; counted band 10-25, medium confidence (roof shadow obscures exact count).",
+          "dropArea": "Extensive trailer drop yards: rows of dozens of parked trailers in the warehouse drop yard and additional trailers staged along the entrance road - well over 50 trailers visible, band 50+.",
+          "multipleFacilities": "Campus: pulp/paper machine core, woodyard with two radial chip/log piles, wastewater treatment plant (clarifiers + multiple ponds), shipping warehouse, rail yard, plus numerous support buildings - 20+ distinct structures.",
+          "railServed": "TRUE - multiple rail spurs run directly into the property, serving the warehouse and woodyard; covered rail loading sheds and rail cars visible.",
+          "scale": "TRUE (medium confidence) - truck scales for chip/log van weigh-in are operationally required at an integrated paper mill of this scale; a scale-house-sized structure sits in the truck path near the entrance. Not resolved precisely - flagged.",
+          "multiStep": "Possible second checkpoint (gate then woodyard scale) but not clearly confirmed in imagery - left false, flagged.",
+          "urbanRural": "Monticello is a small Mississippi town; the mill sits on the edge of town surrounded by forest and the Pearl River. Rural.",
+          "siteAreaAcres": "~320 acres for the full fenced industrial property including warehouse, mill core, woodyard and treatment ponds; honest estimate from the perimeter box."
+        }
+      },
+      {
+        "id": "15-gp-toledo-mill",
+        "name": "GP Toledo Mill - Toledo OR",
+        "type": "Containerboard/Linerboard Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "scale",
+          "dockDoors",
+          "entryLanes",
+          "exitLanes",
+          "fastLaneOpportunity",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 44.6145,
+          "lng": -123.937
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 44.609,
+            "west": -123.952,
+            "north": 44.6215,
+            "east": -123.932
+          },
+          "truckGate": {
+            "south": 44.616,
+            "west": -123.9382,
+            "north": 44.6172,
+            "east": -123.9362
+          },
+          "dropYards": [
+            {
+              "south": 44.6155,
+              "west": -123.9375,
+              "north": 44.6195,
+              "east": -123.9335
+            },
+            {
+              "south": 44.6135,
+              "west": -123.9355,
+              "north": 44.616,
+              "east": -123.9335
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 44.6115,
+              "west": -123.9385,
+              "north": 44.614,
+              "east": -123.936
+            }
+          ],
+          "staging": {
+            "south": 44.615,
+            "west": -123.9372,
+            "north": 44.617,
+            "east": -123.9345
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 18,
+          "siteAreaAcres": 230,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode (44.60417, -123.935516; address \"1 Butler Bridge Rd\") landed\nin the Yaquina River and wastewater-treatment-pond area south of the real mill —\nimprecise, not on a building. Probing wider (z15) immediately revealed the\nunmistakable Georgia-Pacific Toledo Mill complex on a peninsula on the east bank\nof the Yaquina River, on the west side of the town of Toledo, Oregon. Web\nresearch confirmed the address as 1400 SE Butler Bridge Rd, Toledo, OR 97391 and\nthe facility as GP's integrated kraft pulp and linerboard mill, operating since\n1957. Center locked at ~44.6145, -123.9370.\n\nThe mill makes linerboard for corrugated boxes from virgin wood chips and\nrecycled fiber; GP also runs its Juno recycling-technology facility on-site. It\nis the Infor Phase 2 dossier facility.",
+        "mapsUrl": "https://www.google.com/maps/@44.6145,-123.9370,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster geocode (44.60417,-123.935516, address 1 Butler Bridge Rd) sat in the Yaquina River / treatment-pond area south of the actual mill - imprecise. Mill relocated via satellite and web research to the GP Toledo Mill complex on a peninsula on the east bank of the Yaquina River, ~44.6145,-123.9370. Confirmed address: 1400 SE Butler Bridge Rd, Toledo, OR 97391.",
+          "facility": "Georgia-Pacific Toledo Mill - an integrated kraft pulp and linerboard (containerboard) mill operating since 1957; makes linerboard for corrugated boxes from virgin wood chips and recycled fiber. GP also operates the Juno recycling technology facility on-site. Subject of the Infor Phase 2 dossier item. Compact, water-bound campus: paper-machine and process buildings, chemical recovery, large chip pile, woodyard with conveyors, finished-goods warehouses along the riverfront, trailer drop yards, rail yard, and a private Butler Bridge linking to west-bank facilities (additional warehouses / log storage).",
+          "truckGate": "TRUE - controlled mill entrance. The site is fully enclosed by perimeter chain-link/mesh fencing (visible in Street View, 2024-07, all along SE Butler Bridge Rd) with a rail spur separating the public road from the yard. All truck traffic funnels through one controlled entrance; a guarded/scaled checkpoint is universal for an integrated kraft pulp/linerboard mill receiving chip and recycled-fiber vans.",
+          "guardShack": "TRUE (medium confidence) - a small building cluster sits at the yard entrance area near 44.6165,-123.9372, consistent with a guard/scale house. Not pinpointed at high resolution - flagged. (Note: a separate white shed on the road shoulder with a 'City of Toledo' sign is a city utility building, not the mill gate.)",
+          "preGateStaging": "Paved staging/parking areas along SE Butler Bridge Rd hold queued semis (Street View shows trucks staged there).",
+          "postGateStaging": "Large paved yard inside the gate before the docks; trailers staged on the entrance loop road.",
+          "drivewayLong": "Internal roads (the curved entrance loop plus the access road past the chip pile) easily hold a queue of 3+ trucks.",
+          "fastLaneOpportunity": "Site is constrained between the river and the rail line; limited unused paved width for a dedicated bypass lane - left true at low confidence given the wide entrance loop, flagged.",
+          "shipRcvSeparate": "Receiving (chip/recycled-fiber vans to the woodyard, rail receiving) is physically separate from finished-linerboard shipping at the riverfront warehouses - distinct clusters.",
+          "dockDoors": "Finished-goods warehouses along the SW riverfront show dock-door banks; counted band 10-25 (~14 estimated), medium confidence (roof shadow / resolution).",
+          "dropArea": "Extensive trailer drop yards: rows of dozens of parked trailers along the curved entrance loop and the eastern yard - well over 50 trailers visible, band 50+.",
+          "multipleFacilities": "Campus: pulp/paper process core, chemical recovery, chip pile and woodyard, multiple riverfront warehouses, rail yard, the Juno recycling facility, plus west-bank facilities across the private Butler Bridge - 18+ distinct structures.",
+          "railServed": "TRUE - rail spurs run directly along and into the property; rail cars (boxcars) visible parked at the yard frontage in both satellite and Street View.",
+          "scale": "TRUE (medium confidence) - truck scales for chip/fiber van weigh-in are operationally required at an integrated kraft mill; a scale-house-sized structure sits in the truck path near the gate. Not resolved precisely - flagged.",
+          "multiStep": "Possible gate-then-scale sequence but not clearly confirmed - left false, flagged.",
+          "urbanRural": "Toledo is a small Oregon town (~3,500 people) on the central Oregon coast; the mill is on a peninsula at the edge of town surrounded by the Yaquina River and forest. Rural.",
+          "siteAreaAcres": "~230 acres for the full fenced industrial property including east-bank mill core, warehouses, woodyard, drop yards and west-bank facilities; honest estimate from the perimeter box."
+        }
+      },
+      {
+        "id": "16-gp-big-island-mill",
+        "name": "GP Big Island Mill - Big Island VA",
+        "type": "Containerboard Mill",
+        "archetype": "#8",
+        "archetypeName": "Gate + GS (not BU sens.) + scale",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "scale",
+          "entryLanes",
+          "exitLanes",
+          "dockDoors"
+        ],
+        "center": {
+          "lat": 37.5283,
+          "lng": -79.354
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 37.52291,
+            "west": -79.355992,
+            "north": 37.532971,
+            "east": -79.350328
+          },
+          "truckGate": {
+            "south": 37.527761,
+            "west": -79.354906,
+            "north": 37.528839,
+            "east": -79.353094
+          },
+          "dropYards": [
+            {
+              "south": 37.525032,
+              "west": -79.35168,
+              "north": 37.527368,
+              "east": -79.35032
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 37.528481,
+              "west": -79.354066,
+              "north": 37.529919,
+              "east": -79.352934
+            }
+          ],
+          "staging": {
+            "south": 37.527692,
+            "west": -79.353493,
+            "north": 37.529308,
+            "east": -79.351907
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 8,
+          "siteAreaAcres": 138,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Coordinates: 37.5283, -79.3540 (mill core)\n- Address: 10097 / 9909 Lee Jackson Hwy (US-501), Big Island, VA 24526\n- Type: Containerboard pulp/paper mill (Georgia-Pacific Packaging & Cellulose)\n- Roster coordinates (37.52707, -79.35375) landed inside the complex; confirmed and refined via satellite. The mill is a ~1 km-long integrated facility on the west bank of the James River, east of the Norfolk Southern rail line and US-501.\n- Web research corroborates: Big Island Paper Mill is Virginia's oldest continuously operating business (125+ years), a containerboard mill, EPA Energy Star certified 2024. CLUI and Forest Products Locator both list it as the Georgia-Pacific Big Island Mill.",
+        "mapsUrl": "https://www.google.com/maps/@37.5283,-79.3540,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facility": "Integrated containerboard pulp/paper mill on the west bank of the James River, Big Island VA — Virginia's oldest continuously operating business (125+ years). Confirmed via address (10097/9909 Lee Jackson Hwy), GP locations page, and satellite (mill building, woodyard with chip piles, clarifiers, wastewater treatment ponds, chemical storage tanks).",
+          "truckGate": "Mill is a fully fenced, self-contained complex; access road crosses the Norfolk Southern rail line off Lee Jackson Hwy. A controlled gated entrance is standard for a mill of this scale and age; not directly resolvable in Street View due to roadside tree cover and the rail buffer — medium confidence.",
+          "guardShack": "Inferred from facility scale and security profile; a staffed booth could not be positively imaged. Listed uncertain.",
+          "dropArea": "Large trailer drop yard runs along the riverbank south of the mill core — 60-80 trailers visible parked in angled rows; banded 50+.",
+          "dockDoors": "Loading docks along the east face of the mill and at warehouse/converting buildings; trailers visible backed in. Count ~14 estimated from overhead imagery, low confidence.",
+          "scale": "A truck scale is typical at a mill receiving wood fiber by truck; not positively imaged — listed uncertain.",
+          "railServed": "Rail spur clearly curves into the property alongside the main mill building.",
+          "urbanRural": "Unincorporated village of Big Island, rural setting 12 mi NW of Lynchburg, surrounded by forest and farmland."
+        }
+      },
+      {
+        "id": "17-gp-palatka-mill",
+        "name": "GP Palatka Mill - Palatka FL",
+        "type": "Kraft/Tissue Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "scale",
+          "entryLanes",
+          "exitLanes",
+          "dockDoors",
+          "fastLaneOpportunity"
+        ],
+        "center": {
+          "lat": 29.686,
+          "lng": -81.6575
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 29.679263,
+            "west": -81.661843,
+            "north": 29.693636,
+            "east": -81.653571
+          },
+          "truckGate": {
+            "south": 29.684371,
+            "west": -81.661931,
+            "north": 29.685629,
+            "east": -81.660069
+          },
+          "dropYards": [
+            {
+              "south": 29.685661,
+              "west": -81.658914,
+              "north": 29.686739,
+              "east": -81.658086
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 29.681212,
+              "west": -81.655414,
+              "north": 29.683188,
+              "east": -81.654586
+            }
+          ],
+          "staging": {
+            "south": 29.683281,
+            "west": -81.656724,
+            "north": 29.684719,
+            "east": -81.655276
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 18,
+          "siteAreaAcres": 316,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Coordinates: 29.6860, -81.6575 (mill core)\n- Address: 215 County Road 216 / US-17 corridor, ~4 mi NE of downtown Palatka, FL 32177\n- Type: Integrated kraft pulp/paper mill (also produces tissue and paper; GP Packaging & Cellulose Kraft division)\n- The roster coordinate (29.650032, -81.647668) landed in residential downtown Palatka — ~4 km off. Web research placed the mill 4 mi NE of downtown on the St. Johns River. Satellite at 29.685, -81.658 revealed the large industrial complex on the west bank of the St. Johns River.\n- Web corroboration: CLUI lists \"Palatka Paper Mill\"; Forest Products Locator lists \"Georgia-Pacific Palatka Mill\"; GP announced an $83M expansion (Apr 2025) and a $400M tissue machine project at this site.",
+        "mapsUrl": "https://www.google.com/maps/@29.6860,-81.6575,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facility": "Large integrated kraft pulp/paper mill on the west bank of the St. Johns River, ~4 mi NE of downtown Palatka FL. Roster coordinate (29.650032, -81.647668) was in downtown Palatka, ~4 km off. Relocated via web research (215 County Road 216 / US-17 corridor, NE of Palatka) and satellite to the actual mill complex. Confirmed: kraft mill with woodyard, wood storage sheds, paper machines, rail yard, large distribution warehouse.",
+          "truckGate": "Mill is a fully fenced ~316-acre kraft mill complex; access road branches off US-17 with a railroad crossing into the property. A controlled, guarded truck entrance is standard for a paper mill of this scale (700+ employees, $400M tissue machine + $83M expansion). The gate structure is set behind a tree buffer and not directly resolvable in Street View — medium confidence.",
+          "guardShack": "Inferred present from facility scale and security profile; not positively imaged. Listed uncertain.",
+          "multipleFacilities": "Campus with multiple distinct building clusters: the kraft mill processing core, a large modern distribution warehouse to the south, woodyard storage sheds, and warehouse/converting buildings.",
+          "dockDoors": "Loading docks at the distribution warehouse (east face) and converting/warehouse buildings; ~30 doors estimated from overhead imagery — low confidence band 25-50.",
+          "dropArea": "Trailers parked in rows in the mill yard and near the warehouses; ~45 visible, banded 25-50.",
+          "shipRcvSeparate": "Inbound wood fiber received by rail and truck at the woodyard (north); finished-product shipping runs from the distribution warehouse docks (south) — physically separate clusters.",
+          "scale": "A truck scale is standard at a mill receiving wood fiber by truck; not positively imaged — listed uncertain.",
+          "fastLaneOpportunity": "The access road and yard have ample paved width; inferred room for a bypass lane — low confidence.",
+          "railServed": "Extensive multi-track rail yard runs through the complex alongside the woodyard.",
+          "urbanRural": "Rural — mill is in forested/agricultural country NE of small-town Palatka, buffered by woods."
+        }
+      },
+      {
+        "id": "18-gp-dixie-tableware-plant",
+        "name": "GP Dixie Tableware Plant - Jackson TN",
+        "type": "Tableware/Converting Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "dockDoors",
+          "dropArea",
+          "trailersVisible",
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "fastLaneOpportunity"
+        ],
+        "center": {
+          "lat": 35.6276,
+          "lng": -88.9168
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.623378,
+            "west": -88.922547,
+            "north": 35.632271,
+            "east": -88.911385
+          },
+          "truckGate": {
+            "south": 35.629351,
+            "west": -88.920274,
+            "north": 35.630249,
+            "east": -88.918726
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 35.626832,
+              "west": -88.913832,
+              "north": 35.629168,
+              "east": -88.913168
+            }
+          ],
+          "staging": {
+            "south": 35.626602,
+            "west": -88.915663,
+            "north": 35.628398,
+            "east": -88.914337
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 247,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Coordinates: 35.6276, -88.9168 (building center)\n- Address: 65 Cardinal Drive, Jackson, TN 38301 (west Jackson, near I-40 and TN-223 / Christmasville Road)\n- Type: Dixie tableware manufacturing/converting plant (premium paper plates, bowls, platters, deep dishes)\n- The roster coordinate (35.551418, -89.184861) landed ~13 km SE of the plant in farmland — wrong. Web research (GP press releases, dixiejackson.com) gave the address 65 Cardinal Drive, \"on 241 acres in west Jackson near I-40 and state Highway 223.\" Satellite probing of west Jackson found the very large new building; Feb-2026 Street View confirmed it carries the Georgia-Pacific logo on its wall.\n- Web corroboration: $425M greenfield investment, GP's first new Dixie greenfield plant since Bowling Green KY (1991); 900,000 sq ft; site clearing Nov 2022, production June 2024, ribbon-cut Oct 2024; ~220 jobs.",
+        "mapsUrl": "https://www.google.com/maps/@35.6276,-88.9168,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facility": "New $425M greenfield Dixie tableware manufacturing plant (paper plates/bowls/platters), 900,000 sq ft on 241 acres at 65 Cardinal Drive, west Jackson TN, near I-40 and TN-223. Production started June 2024; ribbon-cut Oct 2024. Roster coordinate (35.551418, -89.184861) was ~13 km SE in farmland; relocated via web research (65 Cardinal Drive, near I-40/Hwy 223) and confirmed in satellite + Feb-2026 Street View showing the building with the Georgia-Pacific logo.",
+          "imagery": "Maxar satellite of this area is from the construction era (~2023) — the building roof is visible but the truck dock yard not fully built. Feb-2026 Street View confirms the operational plant: large single building, full perimeter chain-link fence, dock apron with trailers on the east side, employee parking on the west.",
+          "truckGate": "Fully fenced ~247-acre site (continuous chain-link perimeter confirmed in Street View). The truck driveway enters off Cardinal Drive; a controlled gate is standard for a modern greenfield manufacturing plant. Called true.",
+          "guardShack": "No staffed guard booth imaged; a modern cost-efficient greenfield plant with ~220 employees typically uses kiosk / app / call-box check-in rather than a 24/7 manned booth — set guardShack false, remoteGs true. Both flagged uncertain.",
+          "dockDoors": "Single 900,000 sq ft building with a long dock apron on the east side; ~40 doors estimated — low confidence band 25-50.",
+          "dropArea": "Trailers parked at the dock apron in Street View; no dedicated separate drop lot visible — dropArea 0-10, dropYard false.",
+          "railServed": "No rail spur into the property — site is near I-40, served by truck.",
+          "fastLaneOpportunity": "New site with ample paved width and a long driveway approach; inferred room to add a bypass lane — low confidence.",
+          "urbanRural": "Rural — greenfield site on former farmland on the western edge of Jackson, surrounded by open fields."
+        }
+      },
+      {
+        "id": "19-gp-dixie-cup-plant",
+        "name": "GP Dixie Cup Plant - Lexington KY",
+        "type": "Cup/Converting Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "dockDoors",
+          "trailersVisible",
+          "entryLanes",
+          "exitLanes",
+          "scale"
+        ],
+        "center": {
+          "lat": 38.0807,
+          "lng": -84.5258
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.078095,
+            "west": -84.528995,
+            "north": 38.083215,
+            "east": -84.523175
+          },
+          "truckGate": {
+            "south": 38.079641,
+            "west": -84.525485,
+            "north": 38.080359,
+            "east": -84.524115
+          },
+          "dropYards": [
+            {
+              "south": 38.080981,
+              "west": -84.524628,
+              "north": 38.082419,
+              "east": -84.523372
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 38.079992,
+              "west": -84.524942,
+              "north": 38.081608,
+              "east": -84.524258
+            }
+          ],
+          "staging": {
+            "south": 38.079651,
+            "west": -84.525771,
+            "north": 38.080549,
+            "east": -84.524629
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 50,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 72,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Coordinates: 38.0807, -84.5258 (plant complex center)\n- Address: 451 Harbison Road, Lexington, KY 40511 (NW Lexington industrial district)\n- Type: Dixie cup manufacturing / converting plant\n- The roster coordinate (38.104086, -84.506349) landed ~3 km NE in a residential subdivision — wrong. The roster address \"1900 Spurr Road\" appears imprecise; Spurr Road is a nearby NW-Lexington industrial street but the Dixie Cup plant proper is at 451 Harbison Road. Relocated via the iconic Dixie Cup water tower (38.080038, -84.526746) and confirmed by Georgia-Pacific signage visible in Street View at the plant entrance.\n- Web corroboration: Dixie Cup Corporation moved to Lexington in 1958; now Georgia-Pacific. After GP closed the Easton PA plant in 2021, this became the consolidated sole Dixie cup production site; ~50 jobs added in the expansion.",
+        "mapsUrl": "https://www.google.com/maps/@38.0807,-84.5258,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facility": "Georgia-Pacific Dixie Cup manufacturing plant, Lexington KY — the consolidated sole Dixie cup production site after the Easton PA plant closed (2021). Iconic Dixie Cup water tower on the property. Located in the NW Lexington industrial district. Roster coordinate (38.104086, -84.506349) was ~3 km NE in a residential subdivision; the roster address '1900 Spurr Road' appears imprecise — the plant is at 451 Harbison Road (38.080038, -84.526746). Relocated and confirmed via the water tower, the Georgia-Pacific signage seen in Street View, and the large converting-plant complex.",
+          "truckGate": "Property is fully fenced — black ornamental metal fence along the office/parking frontage and chain-link around the dock yard, with a sliding gate visible at one fence opening (Street View). The truck driveway enters off Harbison Road into the fenced dock yard. Controlled access — called true.",
+          "guardShack": "No staffed guard booth positively imaged at the truck entrance; the truck driveway reads as a fenced but largely open entry. An older urban converting plant of this type typically uses badge/kiosk/intercom access rather than a 24/7 manned booth — guardShack false, remoteGs true. Both flagged uncertain.",
+          "dropArea": "Large trailer drop yard on the NE side of the plant — ~50 trailers parked in regular rows; banded 25-50.",
+          "dockDoors": "Loading docks along the NE/E face of the plant; trailers visible backed in. ~22 doors estimated — low confidence band 10-25.",
+          "railServed": "A rail line runs along the north edge of the property with a spur reaching the plant.",
+          "urbanRural": "Urban — the plant sits within Lexington's dense NW industrial fabric, surrounded by other industrial buildings and adjacent residential subdivisions.",
+          "multipleFacilities": "Treated as a single facility — one main long manufacturing complex plus an office building and small ancillary structures on the same parcel."
+        }
+      },
+      {
+        "id": "20-gp-anchor-packaging-plant",
+        "name": "GP Anchor Packaging Plant - Jonesboro AR",
+        "type": "Thermoformed Packaging Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoors",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 35.8122,
+          "lng": -90.639
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.810853,
+            "west": -90.641437,
+            "north": 35.813727,
+            "east": -90.635455
+          },
+          "truckGate": {
+            "south": 35.813031,
+            "west": -90.640743,
+            "north": 35.813569,
+            "east": -90.639857
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 35.812071,
+              "west": -90.641132,
+              "north": 35.813329,
+              "east": -90.640468
+            }
+          ],
+          "staging": {
+            "south": 35.812351,
+            "west": -90.640443,
+            "north": 35.813249,
+            "east": -90.639557
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 43,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Coordinates: 35.8122, -90.6390 (building center)\n- Address: 4708 Krueger Drive, Jonesboro, AR 72401 (Jonesboro Industrial Park, near the municipal airport)\n- Type: Thermoformed packaging manufacturing / converting plant\n- The roster coordinate (35.891617, -90.658333) landed ~9 km NW of the plant in farmland — wrong. Web research gave the address 4708 Krueger Drive and a GPS reference of 35.8135 / -90.6392. Satellite probing of the Krueger Drive industrial corridor found the plant; Jan-2026 Street View confirmed it — an \"Anchor Packaging - NOW HIRING\" sign with the Anchor logo on the Krueger Drive frontage, plus the blue Anchor plant sign at the east entrance.\n- Web corroboration: Anchor Packaging (formerly St. Louis-based) operates this Jonesboro plant; acquired by Georgia-Pacific in October 2025 — a net-new facility for GP yard operations.",
+        "mapsUrl": "https://www.google.com/maps/@35.8122,-90.6390,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facility": "Anchor Packaging thermoformed-packaging manufacturing plant at 4708 Krueger Drive, Jonesboro AR — acquired by Georgia-Pacific in Oct 2025 (net-new yard ops). Roster coordinate (35.891617, -90.658333) was ~9 km NW in farmland; relocated via web research (4708 Krueger Drive, GPS 35.8135/-90.6392) and confirmed by the 'Anchor Packaging - NOW HIRING' sign with the Anchor logo and the blue Anchor plant sign, both visible in Jan-2026 Street View.",
+          "truckGate": "No controlled truck entrance. The truck driveway enters directly off Krueger Drive as an open driveway — no barrier arm, no sliding/swing gate, no perimeter gate, no guard booth. The plant frontage (employee parking, office) is openly accessible from the public road. Typical light-industrial converting plant in the Jonesboro Industrial Park. truckGate false, guardShack false, remoteGs false.",
+          "drivewayShort": "Short open approach from Krueger Drive to the dock apron — holds only 1-2 trucks.",
+          "dockDoors": "Loading docks along the W/NW face of the building; a trailer (XPRESS) seen backed in at a dock in Street View. ~18 doors estimated from overhead imagery — low confidence band 10-25.",
+          "dropArea": "Paved apron/yard on the west side; small number of trailers — no dedicated separate trailer drop lot. dropArea 0-10, dropYard false.",
+          "railServed": "A rail line runs along the SW edge of the area but no spur reaches the Anchor plant — truck-served.",
+          "urbanRural": "Rural — the plant sits in the Jonesboro Industrial Park on the edge of town near the municipal airport, surrounded by farm fields and scattered industrial buildings.",
+          "scale": "No truck scale imaged — not expected for a thermoformed-packaging converting plant."
+        }
+      },
+      {
+        "id": "21-gp-anchor-packaging-plant-paragould-ar",
+        "name": "GP Anchor Packaging Plant - Paragould AR",
+        "type": "Thermoformed/Cling Film Packaging Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 36.084,
+          "lng": -90.4665
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 36.082,
+            "west": -90.469,
+            "north": 36.0862,
+            "east": -90.4645
+          },
+          "truckGate": {
+            "south": 36.082,
+            "west": -90.4674,
+            "north": 36.0826,
+            "east": -90.4664
+          },
+          "dropYards": [
+            {
+              "south": 36.0828,
+              "west": -90.4679,
+              "north": 36.0839,
+              "east": -90.467
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 36.0829,
+              "west": -90.4679,
+              "north": 36.0837,
+              "east": -90.4668
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 9,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 46.8,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Thermoformed / Cling Film Packaging Plant\nResolved coordinates: 36.08400, -90.46650 (building centroid)\nConfidence: High\n\n### Location resolution\nThe roster's geocoded point (36.052562, -90.48868, \"APPROXIMATE\") landed in\ndowntown Paragould, ~4 km SW of the actual plant — wrong. Web research\nidentified Anchor Packaging's Paragould manufacturing plant at **2211 N 12th\nAve** (a separate distribution office exists at 1600 Jones Rd). Geocoding the\nstreet address put the building near 36.0857,-90.4671. Satellite probes\nconfirmed a large (~310,000+ sq ft, expanded with a 90,000 sq ft addition in\n2022) sheet-extrusion/thermoforming plant on the NE edge of Paragould.\nBuilding centroid locked at 36.0840,-90.4665.\n\n### Key views\n- Wide z16/z17: Single dominant manufacturing building with a separate",
+        "mapsUrl": "https://www.google.com/maps/@36.08400,-90.46650,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Resolved to Anchor Packaging plant at 2211 N 12th Ave, Paragould AR (~36.0857,-90.4671 per geocode of street address); the roster's geocoded point (36.0526,-90.4887) was ~4 km SW in downtown Paragould and wrong. Building centroid locked at 36.0840,-90.4665.",
+          "truckGate": "No barrier arm, sliding gate, or checkpoint where the access driveway meets the public road (Greene County Rd / N 12th Ave extension). Street View 2025-05 shows an open private drive with only a 'Speed Limit 15' sign; site has no perimeter fence along the road. False.",
+          "guardShack": "No staffed booth anywhere at the entrance or along the driveway. A small structure exists deep inside the NW employee parking lot but it is not a road-gate guard booth. False.",
+          "remoteGs": "False because there is no truck gate at all.",
+          "drivewayLong": "Access drive runs ~250 m from the public road up to the SW dock apron with ample room to stack 3+ trucks.",
+          "dockDoorCount": "~16 dock doors estimated on the SW building face; counted from z19/z20 imagery with ~9 trailers backed in. Low-confidence count.",
+          "dropArea": "Trailers park on the dock apron and a graded dirt yard; no marked dedicated trailer-storage stalls. Banded 0-10.",
+          "buildingCount": "Main plant building plus a separate large warehouse/storage building immediately NE on the same property.",
+          "railServed": "A rail line runs NE-SW ~120 m east of the building but is separated by a wooded buffer with no spur entering the property.",
+          "urbanRural": "Edge of Paragould, surrounded by farmland and scattered light industry; clearly Rural."
+        }
+      },
+      {
+        "id": "22-gp-anchor-packaging-plant-janesville-wi",
+        "name": "GP Anchor Packaging Plant - Janesville WI",
+        "type": "Packaging/Film Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "urbanRural"
+        ],
+        "center": {
+          "lat": 42.71205,
+          "lng": -89.00955
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.7108,
+            "west": -89.0107,
+            "north": 42.713,
+            "east": -89.0083
+          },
+          "truckGate": {
+            "south": 42.7121,
+            "west": -89.0093,
+            "north": 42.7126,
+            "east": -89.0087
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 42.712,
+              "west": -89.0091,
+              "north": 42.7127,
+              "east": -89.0085
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 12,
+          "trailersVisible": 9,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 11.9,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Packaging / Film Plant\nResolved coordinates: 42.71205, -89.00955 (building centroid)\nConfidence: High\n\n### Location resolution\nThe roster's geocoded point (42.644223, -88.960536, \"APPROXIMATE\",\nmovedMeters 565) landed in open farmland ~9 km SSE of the real plant — wrong.\nWeb research established that the Janesville facility is the former\nPanoramic Inc. plant — acquired by Anchor Packaging, which Georgia-Pacific\nin turn acquired (completed Oct 2025). Address: 1500 N Parker Drive, in\nthe Arrow Park industrial complex (the historic Parker Pen \"Arrow Park\"\nsite) on the north edge of Janesville off Highway 51. Satellite and Street\nView confirmed a brick 2-story office with attached warehouse wings.\nBuilding centroid locked at 42.71205,-89.00955.\n\n### Key views\n- Wide z15/z17: Arrow Park industrial park with several buildings; the",
+        "mapsUrl": "https://www.google.com/maps/@42.71205,-89.00955,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Resolved to the former Panoramic Inc. plant (acquired by Anchor Packaging, which Georgia-Pacific acquired Oct 2025) at 1500 N Parker Dr, Janesville WI, in the Arrow Park industrial complex (former Parker Pen site). The roster's geocoded point (42.6442,-88.9605) was ~9 km SSE in open farmland and wrong. Building centroid locked at 42.71205,-89.00955.",
+          "truckGate": "Open industrial-park facility. North Parker Drive has no gate or fence; the building's parking lots and dock-side driveways are open with no barrier arm, sliding gate, or checkpoint. Confirmed in Street View 2019-08 from multiple headings. False.",
+          "guardShack": "No staffed booth at any driveway. False.",
+          "remoteGs": "False because there is no truck gate.",
+          "drivewayShort": "Dock apron is accessed by a short driveway directly off North Parker Drive; only room for 1-2 trucks to stack before the apron.",
+          "dockDoorCount": "~12 dock doors estimated along the NE face of the building, with ~9 trailers/box trucks backed in (z20 imagery). Low-confidence count.",
+          "dropArea": "Trailers stand on the NE dock apron; no marked dedicated trailer-storage lot. Banded 0-10.",
+          "buildingCount": "Single contiguous building (brick 2-story office plus white and green warehouse wings); other buildings nearby belong to separate tenants in the Arrow Park park.",
+          "railServed": "No rail spur into the property.",
+          "urbanRural": "On the north edge of Janesville (mid-size city) inside the Arrow Park industrial park, with open farmland directly NW. Judged Rural per the rubric's edge-of-town / abutting-farmland guidance; flagged uncertain."
+        }
+      },
+      {
+        "id": "23-gp-wood-products-talladega-lumber-mill-talladega-al",
+        "name": "GP Wood Products - Talladega Lumber Mill - Talladega AL",
+        "type": "Lumber Mill",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "guardShack",
+          "connectivityIssue",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 33.444,
+          "lng": -86.06
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.4408,
+            "west": -86.064,
+            "north": 33.4472,
+            "east": -86.057
+          },
+          "truckGate": {
+            "south": 33.4454,
+            "west": -86.0582,
+            "north": 33.446,
+            "east": -86.0574
+          },
+          "dropYards": [
+            {
+              "south": 33.4428,
+              "west": -86.0615,
+              "north": 33.4448,
+              "east": -86.059
+            }
+          ],
+          "dockAprons": [],
+          "staging": {
+            "south": 33.4444,
+            "west": -86.0587,
+            "north": 33.4456,
+            "east": -86.0579
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 4,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 114.5,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "0-10",
+          "dropArea": "NONE",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": true,
+          "dropYard": false,
+          "multiStep": true
+        },
+        "dossierExcerpt": "Type: Lumber Mill\nResolved coordinates: 33.44400, -86.06000 (mill complex centroid)\nConfidence: High\n\n### Location resolution\nThe roster's geocoded point (33.435942, -86.105805, \"APPROXIMATE\",\nmovedMeters 11764) landed in downtown Talladega — ~4.6 km W of the real\nmill, badly wrong. Web research identified GP's Talladega lumber facility at\n400 Ironaton Cutoff Rd (~33.44459, -86.059685). The $100M, 300,000 sq ft\nstate-of-the-art lumber plant started production in late 2018; it receives\n~150 log trucks/day and produces ~230M board feet/year. Satellite confirmed\na sawmill complex with log yard and lumber storage. Mill centroid locked at\n33.44400, -86.06000.\n\n### Key views\n- Wide z15/z16: Sawmill complex — connected mill buildings, kilns, large\n  log yard (stacked logs visible) to the SE, lumber storage yard to the W,",
+        "mapsUrl": "https://www.google.com/maps/@33.44400,-86.06000,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Resolved to GP's Talladega lumber facility at 400 Ironaton Cutoff Rd, Talladega AL (~33.44459,-86.059685). The roster's geocoded point (33.4359,-86.1058, APPROXIMATE, movedMeters 11764) was ~4.6 km W in downtown Talladega and wrong. Mill complex centroid locked at 33.44400,-86.06000.",
+          "truckGate": "Site has a continuous chain-link perimeter fence (confirmed all around in Street View 2025-11) with a single controlled entrance driveway off Ironaton Cutoff Rd. Loaded log trucks queue internally at a check-in. A barrier arm was not clearly resolved but the fenced perimeter with one defined truck entrance qualifies as a controlled truck gate.",
+          "guardShack": "A small red-roofed structure sits beside the inbound truck check-in lane, consistent with a scale house / gate office for a mill that takes ~150 log trucks/day. Flagged uncertain because the booth function is inferred.",
+          "remoteGs": "False — a guard/scale house is present.",
+          "scale": "Lumber mill receiving ~150 log trucks/day; log trucks must be weighed in and out. A truck scale sits on the inbound truck path near the red-roofed scale house.",
+          "multiStep": "Log trucks pass an entrance gate then a scale/check-in before proceeding to the log yard — a two-stage process. Flagged uncertain.",
+          "drivewayLong": "Long internal truck approach from the gate to the log yard; loaded log trucks observed queued single-file.",
+          "fastLaneOpportunity": "Wide gravel/paved truck yard with ample unused width to add a bypass or express lane.",
+          "shipRcvSeparate": "Receiving (log yard, SE) and shipping (lumber load-out / rail near the kilns on the W side) are physically separate operations.",
+          "dockDoors": "Sawmills load finished lumber bundles by forklift from open sheds rather than truck-height dock doors; a few shipping bays may exist. Banded 0-10; low confidence.",
+          "dropArea": "No marked trailer-parking stalls; the yards hold logs and stacked lumber, not parked trailers.",
+          "railServed": "A rail line runs along the SW edge of the property with a spur curving into the mill near the kiln / lumber load-out area.",
+          "buildingCount": "Multiple connected mill structures (sawmill, planer, kilns, storage sheds) — counted ~6 distinct buildings; treated as one facility.",
+          "connectivityIssue": "Rural and wooded but only ~5 km from Talladega with other industry nearby; cellular coverage likely adequate. Marked false, flagged uncertain.",
+          "urbanRural": "Isolated mill surrounded by woods, a lake, and farmland — clearly Rural."
+        }
+      },
+      {
+        "id": "24-gp-madison-plywood-plant-madison-ga",
+        "name": "GP Madison Plywood Plant - Madison GA",
+        "type": "Plywood Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "scale"
+        ],
+        "center": {
+          "lat": 33.6165,
+          "lng": -83.422
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.6125,
+            "west": -83.4275,
+            "north": 33.62,
+            "east": -83.415
+          },
+          "truckGate": {
+            "south": 33.6139,
+            "west": -83.4253,
+            "north": 33.6145,
+            "east": -83.4245
+          },
+          "dropYards": [
+            {
+              "south": 33.6165,
+              "west": -83.421,
+              "north": 33.6185,
+              "east": -83.4175
+            }
+          ],
+          "dockAprons": [],
+          "staging": {
+            "south": 33.614,
+            "west": -83.4247,
+            "north": 33.6156,
+            "east": -83.4233
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 239.1,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "NONE",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Plywood Plant\nResolved coordinates: 33.61650, -83.42200 (plant building centroid)\nConfidence: High\n\n### Location resolution\nThe roster's geocoded point (33.577493, -83.476782, RANGE_INTERPOLATED of\n\"1310 Eatonton Rd\") landed in downtown Madison — ~5 km SW of the real plant,\nwrong. Web research established the plant address as 1400 Woodkraft Rd\n(off Hwy 278 NE of Madison). Coordinates were cross-checked against ejmap.org\nand the Forest Products Locator (both ~33.611,-83.431, adjacent to the\nplant). Satellite probing located the large plywood plant with its log yard\nat ~33.6165,-83.4220, where the building centroid is locked.\n\n### Key views\n- Wide z16/z17: A single very large plant building, a big log yard\n  (stacked logs) on the NE/E side, plywood-bundle storage and a rail",
+        "mapsUrl": "https://www.google.com/maps/@33.61650,-83.42200,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Resolved to GP's Madison Plywood plant at 1400 Woodkraft Rd, Madison GA, off Hwy 278 NE of town (~33.6165,-83.4220). The roster's geocoded point (33.5775,-83.4768, address '1310 Eatonton Rd') landed ~5 km SW in downtown Madison and was wrong. Coordinates cross-checked against ejmap.org and the Forest Products Locator (both ~33.611,-83.431, near the plant). Plant building centroid locked at 33.61650,-83.42200.",
+          "truckGate": "Street View (2013-04) at the entrance off Woodkraft Rd clearly shows a red-and-white barrier arm across the truck lane plus a controlled checkpoint with 'Welcome to Georgia-Pacific Madison / All visitors report to security' signage. True.",
+          "guardShack": "A small staffed guard booth — windows on multiple sides, ~1-vehicle footprint, set beside the entrance lane next to the barrier arm — is clearly visible in Street View. True.",
+          "remoteGs": "False — a staffed guard booth is present.",
+          "postGateStaging": "Wide paved truck approach inside the gate before reaching the plant / log yard provides queue room.",
+          "drivewayLong": "Long internal truck approach from the guarded gate to the plant and log yard; ample stacking for 3+ trucks.",
+          "shipRcvSeparate": "Log receiving (NE log yard) and plywood shipping (W/SW yard and rail load-out) are physically separate operations on opposite ends of the plant.",
+          "dockDoors": "Plywood plants load finished panels by forklift from open shipping bays rather than truck-height dock doors; a few bays exist. Banded 0-10, low confidence.",
+          "dropArea": "Yards hold logs and stacked plywood bundles, not parked trailers; no marked trailer stalls.",
+          "scale": "A truck scale is operationally expected for a plywood plant with log-truck receiving, but a distinct scale pad could not be confirmed in the available imagery. Marked false, flagged uncertain.",
+          "railServed": "An active rail siding runs along the NW side of the plant with railcars present (gondolas / boxcars).",
+          "buildingCount": "One dominant plant building plus ~3 ancillary structures (gatehouse, log-yard sheds, shipping/storage); counted 4.",
+          "urbanRural": "Plant sits in open woods/farmland NE of small-town Madison, well away from dense development. Rural.",
+          "connectivityIssue": "Rural but within ~5 km of Madison; coverage likely adequate. False."
+        }
+      },
+      {
+        "id": "25-gp-prosperity-plywood-plant-prosperity-sc",
+        "name": "GP Prosperity Plywood Plant - Prosperity SC",
+        "type": "Plywood Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "scale",
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 34.216,
+          "lng": -81.494
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.2118,
+            "west": -81.4995,
+            "north": 34.2195,
+            "east": -81.487
+          },
+          "truckGate": {
+            "south": 34.2194,
+            "west": -81.4956,
+            "north": 34.2199,
+            "east": -81.4948
+          },
+          "dropYards": [
+            {
+              "south": 34.2138,
+              "west": -81.4935,
+              "north": 34.216,
+              "east": -81.49
+            },
+            {
+              "south": 34.2155,
+              "west": -81.499,
+              "north": 34.2172,
+              "east": -81.4955
+            }
+          ],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 16,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 8,
+          "siteAreaAcres": 243.7,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "0-10",
+          "dropArea": "NONE",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Plywood Plant\nResolved coordinates: 34.21600, -81.49400 (site centroid)\nConfidence: Medium\n\n### Location resolution\nThe roster's geocoded point (34.209308, -81.53316, APPROXIMATE — address was\nonly \"Prosperity, SC 29127\") landed in downtown Prosperity, ~3 km W of the\nreal plant — wrong. Web research established the plant address as **191\nGeorgia Pacific Blvd**, off Hwy 76 east of Prosperity; the Forest Products\nLocator places it at ~34.2169,-81.4954. Satellite probing located the\nplywood/sawmill operations with their log yard there. Site centroid locked\nat 34.21600,-81.49400.\n\n### Key views\n- Wide z15/z16: A campus with two distinct large building clusters — a\n  SE main plywood plant with a big log yard, and a NW lumber-storage /\n  processing cluster — connected by internal roads, with an active rail line",
+        "mapsUrl": "https://www.google.com/maps/@34.21600,-81.49400,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Resolved to GP's Prosperity plywood/sawmill operations at 191 Georgia Pacific Blvd, off Hwy 76 E of Prosperity SC (~34.2169,-81.4954, cross-checked against the Forest Products Locator). The roster's geocoded point (34.2093,-81.5332) was ~3 km W in downtown Prosperity and wrong. Site centroid locked at 34.21600,-81.49400.",
+          "truckGate": "The plant access road (Georgia Pacific Blvd) connects to the public road as an open, wide entrance with only a GP sign — no barrier arm, gate, or checkpoint at the public-road junction (Street View 2026-02). No gate structure was resolved further in along the entrance road either. Marked false; flagged uncertain because Street View does not cover the interior of the access road.",
+          "guardShack": "No guard booth found at the entrance or along the access road in available imagery. Marked false, flagged uncertain.",
+          "remoteGs": "False — no truck gate identified.",
+          "drivewayLong": "A long internal access road runs deep into the property from the public road, with ample room to queue 3+ trucks.",
+          "fastLaneOpportunity": "Wide open access road and yards with abundant unused paved/graded width.",
+          "shipRcvSeparate": "Log receiving (log yard at the SE plant cluster) and plywood/lumber shipping (NW lumber-storage cluster and rail load-out) are physically separate operations on different parts of the campus.",
+          "multipleFacilities": "Two distinct large building clusters on one property — a SE main plywood plant with log yard and a NW lumber-storage/processing cluster — a campus.",
+          "dockDoors": "Plywood/lumber plants load panels and bundles by forklift from open shipping bays rather than truck-height dock doors; banded 0-10, low confidence.",
+          "dropArea": "Yards hold logs and stacked lumber/plywood bundles, not parked trailers.",
+          "scale": "A truck scale is operationally expected for a log-receiving mill, but no distinct scale pad could be confirmed in imagery. Marked false, flagged uncertain.",
+          "railServed": "An active rail siding runs through the property with railcars present at both the NW and SE clusters.",
+          "buildingCount": "Numerous structures across two clusters (mill buildings, kilns, storage sheds, office) — counted ~8.",
+          "urbanRural": "Isolated mill complex surrounded by woods and farmland E of small-town Prosperity. Rural."
+        }
+      },
+      {
+        "id": "26-gp-brookneal-osb-plant",
+        "name": "GP Brookneal OSB Plant - Brookneal VA",
+        "type": "OSB Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoors",
+          "dropArea",
+          "trailerParkingCapacity",
+          "trailersVisible",
+          "scale",
+          "connectivityIssue",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 37.1232,
+          "lng": -79.032
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 37.12,
+            "west": -79.036,
+            "north": 37.1285,
+            "east": -79.0285
+          },
+          "truckGate": {
+            "south": 37.1262,
+            "west": -79.0338,
+            "north": 37.1274,
+            "east": -79.0324
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 37.122,
+              "west": -79.0313,
+              "north": 37.1232,
+              "east": -79.03
+            }
+          ],
+          "staging": {
+            "south": 37.1222,
+            "west": -79.0304,
+            "north": 37.1236,
+            "east": -79.0294
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 156,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": true,
+          "multipleFacilities": false,
+          "scale": true,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates were wrong. The roster placed the facility at\n37.050142, -78.94418 — that is the town center of Brookneal, VA, where\nsatellite imagery shows only small-town residential/commercial buildings,\nno industrial mill.\n\nWeb research (Forest Products Locator, multiple business directories,\nAPA Wood) established that the actual GP Brookneal OSB mill is at\n11795 Brookneal Highway (US-501 South), Gladys, VA 24554 — Campbell\nCounty, roughly 9 km north of the town of Brookneal. Listed coordinates\n~37.1306, -79.0259 pointed at open farmland; probing southwest located\nthe mill. Locked center: 37.1232, -79.0320 — a large industrial\nwood-products complex consistent with an OSB plant (process buildings,\nsteam plume, log yard, finished-goods warehouse).\n\nGP built the Brookneal OSB mill in 1996; ~130 employees; produces",
+        "mapsUrl": "https://www.google.com/maps/@37.1232,-79.0320,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords pointed at downtown Brookneal town center (wrong). Actual GP Brookneal OSB mill is at 11795 Brookneal Hwy (Hwy 501S), Gladys VA 24554 — confirmed via Forest Products Locator and multiple business listings; precise rooftop center ~37.1232,-79.0320.",
+          "truckGate": "Street View along the plant access road shows a divided entrance with a structure, flags and signage ~150m in from the road bend — a controlled mill entrance typical of OSB plants.",
+          "guardShack": "A small booth-footprint structure is visible beside the divided entrance lanes in Street View; consistent with a staffed guard booth at a wood-products mill.",
+          "scale": "OSB mills weigh inbound logging trucks; a truck scale near the log-yard entrance is highly likely but not crisply resolved in imagery — medium confidence.",
+          "entryExitSeparate": "The entrance road has a center median splitting inbound and outbound lanes at the gate.",
+          "dockDoors": "Limited true dock doors; OSB ships mostly on flatbeds forklift-loaded from the finished-goods warehouse. Estimated 0-10 doors on the warehouse SW/S face.",
+          "dropYard": "No marked trailer drop lot visible; product is staged as banded OSB units in paved yards, not parked trailers.",
+          "railServed": "Active rail spur with a road-crossing gate confirmed in Street View at the access road; spur runs into the property log-handling area.",
+          "connectivityIssue": "Rural Campbell County VA, plant set in heavily wooded terrain well away from any town — cellular coverage likely marginal."
+        }
+      },
+      {
+        "id": "27-gp-gypsum-plant-savannah",
+        "name": "GP Gypsum Plant - Savannah GA",
+        "type": "Gypsum Wallboard Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "truckGate",
+          "dockDoors",
+          "dropArea",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "scale",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 32.077,
+          "lng": -81.0525
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.0735,
+            "west": -81.0565,
+            "north": 32.0805,
+            "east": -81.047
+          },
+          "truckGate": {
+            "south": 32.073,
+            "west": -81.0542,
+            "north": 32.0742,
+            "east": -81.0528
+          },
+          "dropYards": [
+            {
+              "south": 32.0758,
+              "west": -81.0544,
+              "north": 32.0772,
+              "east": -81.0528
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.077,
+              "west": -81.0526,
+              "north": 32.079,
+              "east": -81.0512
+            }
+          ],
+          "staging": {
+            "south": 32.0744,
+            "west": -81.0534,
+            "north": 32.0756,
+            "east": -81.052
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 10,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 50,
+          "truckGateCount": 1,
+          "buildingCount": 9,
+          "siteAreaAcres": 172,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "0-10",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates were wrong. The roster gave 2861 Tremont Rd\n(32.058166, -81.13432), which lands in a mixed light-industrial /\nscrap-yard area roughly 2.5 km southwest of the river — no gypsum\nwallboard plant there.\n\nWeb research (Georgia EPD Title V permit narrative, Coastal GA DNR\noutfall notice, multiple business directories) established the real\nplant address as 151 Wahlstrom Road, Savannah, GA 31404, on the\nsouth bank of the Savannah River about 1.13 miles downstream of the\nTalmadge Bridge. Locked center: 32.0770, -81.0525 — a large\nriverfront gypsum complex, formerly Domtar Gypsum, acquired by GP in\n1996.",
+        "mapsUrl": "https://www.google.com/maps/@32.0770,-81.0525,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (2861 Tremont Rd) pointed at a mixed industrial area ~2.5 km away with no gypsum plant. Actual GP Gypsum Savannah is at 151 Wahlstrom Road, Savannah GA 31404 on the Savannah River, ~1.13 mi downstream of the Talmadge Bridge. Confirmed via Georgia EPD permit narrative and business listings; locked center ~32.0770,-81.0525.",
+          "truckGate": "Plant approached by a long private industrial access road (Wahlstrom Rd) off the public network; controlled-access industrial site. Street View shows perimeter fencing with brick gate pillars at the road. A gatehouse/checkpoint exists but is not crisply resolved.",
+          "guardShack": "No clearly identifiable staffed guard booth resolved in available imagery; large industrial gypsum plants often run gate/scale-house check-in. Marked remoteGs as the likelier read but both flagged uncertain.",
+          "scale": "Truck scale near the plant entrance is expected (inbound/outbound weighing of gypsum and board loads); not crisply confirmed in imagery.",
+          "shipRcvSeparate": "Gypsum rock received by ship at the river wharf on the N edge; finished wallboard ships by truck/rail from the S/SW board-line building and storage yard — physically separate operations.",
+          "dropYard": "Extensive trailer parking visible in the plant interior near the board lines; flatbed and dry-van trailers staged across the yard.",
+          "multipleFacilities": "Large multi-building campus: board-line plant, calcining/process buildings, river wharf, finished-goods storage yard, and ancillary buildings.",
+          "dockDoors": "Truck loading is largely flatbed forklift-loading from storage rows; limited true dock-door bank. Estimated 0-10 doors.",
+          "railServed": "Rail spurs run into the property along the SW edge (confirmed in satellite); plant ships and receives by rail.",
+          "urbanRural": "Within the Savannah, GA metro industrial corridor on the river — Urban."
+        }
+      },
+      {
+        "id": "28-gp-gypsum-plant-sweetwater",
+        "name": "GP Gypsum Plant - Sweetwater TX",
+        "type": "Gypsum Wallboard Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "dockDoors",
+          "dropArea",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "scale",
+          "truckGateCount",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 32.483,
+          "lng": -100.3345
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.4775,
+            "west": -100.34,
+            "north": 32.4865,
+            "east": -100.329
+          },
+          "truckGate": {
+            "south": 32.481,
+            "west": -100.3372,
+            "north": 32.4822,
+            "east": -100.3358
+          },
+          "dropYards": [
+            {
+              "south": 32.4844,
+              "west": -100.3345,
+              "north": 32.486,
+              "east": -100.3322
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.4836,
+              "west": -100.3344,
+              "north": 32.4844,
+              "east": -100.3322
+            }
+          ],
+          "staging": {
+            "south": 32.4818,
+            "west": -100.336,
+            "north": 32.4834,
+            "east": -100.3342
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 2,
+          "buildingCount": 8,
+          "siteAreaAcres": 256,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coordinates were wrong. The roster gave 32.470952,\n-100.405938 (geocode flagged APPROXIMATE, moved 4088 m), which lands in\ndowntown Sweetwater, TX — no gypsum plant there.\n\nWeb research established the GP Gypsum complex sits on **FM 1856 off\nI-20, east of Sweetwater** in Nolan County. The legacy plant (310 FM\n1856, operating since 1957) and the new **$325M wallboard plant (311 FM\n1856, opened October 2023)** are adjacent on the same campus. Locked\ncenter: 32.4830, -100.3345 — confirmed by GP-branded blue\nprivacy-screen fencing along the perimeter in Street View.",
+        "mapsUrl": "https://www.google.com/maps/@32.4830,-100.3345,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords pointed at downtown Sweetwater (4 km off). Actual GP Gypsum complex is on FM 1856 off I-20 east of Sweetwater (310/311 FM 1856): the legacy plant (Nolan County since 1957) plus the new $325M plant opened Oct 2023. Confirmed by GP-branded blue perimeter fencing in Street View; locked center ~32.4830,-100.3345.",
+          "truckGate": "Plant reached via FM 1856, a county road dead-ending into the GP complex; GP-logo privacy-screened perimeter fence confirmed in Street View. Controlled-access industrial site with a clear entrance driveway and flags. No public-road pass-through.",
+          "guardShack": "No staffed booth crisply resolved; modern GP plants typically use scale-house / kiosk check-in. Marked remoteGs true as the likelier read; both flagged uncertain.",
+          "scale": "A truck scale is expected at a gypsum plant (inbound aggregate, outbound board); not crisply confirmed in imagery.",
+          "dropArea": "The new-plant truck yard shows dozens of trailers staged in marked rows north of the building — substantial drop/staging capacity.",
+          "dockDoors": "A regular rhythm of dock doors is visible along the new plant's N building face; estimated 10-25.",
+          "shipRcvSeparate": "Raw gypsum received from the adjacent quarry/mine via internal haul roads (SW); finished wallboard ships by truck and rail from the N/E truck yard — separate operations.",
+          "multipleFacilities": "Two distinct wallboard plants on one campus (legacy plant + 2023 plant) plus process and material-handling buildings.",
+          "truckGateCount": "Likely 2 — a main office entrance off FM 1856 plus a truck-yard entrance serving the new plant; counted as 2 with medium confidence.",
+          "railServed": "A new rail crossing and spur were installed on FM 1856 to serve the new plant; rail line confirmed in satellite imagery.",
+          "urbanRural": "Rural Nolan County, TX — open ranchland along I-20 east of the small city of Sweetwater."
+        }
+      },
+      {
+        "id": "29-gp-corrugated-box-plant-kansas-city",
+        "name": "GP Corrugated Box Plant - Kansas City MO",
+        "type": "Corrugated Box Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dockDoors",
+          "dropArea",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "truckGateCount",
+          "scale",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 39.1635,
+          "lng": -94.4825
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.1608,
+            "west": -94.4848,
+            "north": 39.1652,
+            "east": -94.4805
+          },
+          "truckGate": {
+            "south": 39.1648,
+            "west": -94.4816,
+            "north": 39.1652,
+            "east": -94.4808
+          },
+          "dropYards": [
+            {
+              "south": 39.1625,
+              "west": -94.4846,
+              "north": 39.1648,
+              "east": -94.4834
+            },
+            {
+              "south": 39.1618,
+              "west": -94.4816,
+              "north": 39.1644,
+              "east": -94.4805
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.163,
+              "west": -94.4834,
+              "north": 39.1646,
+              "east": -94.4824
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 45,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster had no street address and the geocoded coordinates\n(39.134715, -94.51604, APPROXIMATE, moved 2159 m) pointed at the East\nBottoms industrial district south of the Missouri River — not the\nplant.\n\nWeb research established the GP Corrugated box plant address as\n8600 NE 38th St, Kansas City, MO 64161 (GP Corrugated LLC, also\nlisted as \"Kansas City Container\"). This is in the Northland industrial\ndistrict south of Worlds of Fun. OSM geocoding of the address returned\n39.16229, -94.48137 (on NE 38th St); the plant is the large\nmanufacturing building immediately south. Locked center:\n39.1635, -94.4825.",
+        "mapsUrl": "https://www.google.com/maps/@39.1635,-94.4825,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster had no street address and coords pointed at the East Bottoms industrial district south of the Missouri River (~2 km off). Actual GP Corrugated box plant is at 8600 NE 38th St, Kansas City MO 64161, in the Northland industrial district south of Worlds of Fun. Confirmed via business listings (GP Corrugated LLC / 'Kansas City Container') and OSM geocode; locked center ~39.1635,-94.4825.",
+          "truckGate": "Open driveway access from NE 38th St — no barrier arm, sliding gate or guard booth resolved at the road. Typical urban box-plant entry. Flagged uncertain (perimeter chain-link fencing exists; a gate may be set back from the street).",
+          "guardShack": "No staffed booth visible at the driveways. Box plants in urban industrial parks generally run un-gated.",
+          "dropYard": "Large dedicated trailer-storage lots: angled marked rows of trailers along the building's W/SW side near the rail line, plus extensive trailer parking on the E side. Substantial drop-yard operation typical of a corrugated box plant.",
+          "dropArea": "50+ trailers parked across the W and E yards in the captured imagery.",
+          "dockDoors": "A dock apron with a regular rhythm of dock doors runs along the building face; estimated 10-25 truck-height doors. Boxes ship out by van trailer; roll stock arrives by truck and rail.",
+          "entryExitSeparate": "The property has driveways at separate points off NE 38th St — an office/parking entrance and a truck-yard entrance.",
+          "railServed": "An active rail line runs along the W edge with a spur serving the plant (visible in satellite).",
+          "urbanRural": "Kansas City, MO metropolitan industrial district — Urban.",
+          "buildingCount": "One large monolithic manufacturing building under one roof; counted as 1."
+        }
+      },
+      {
+        "id": "30-gp-corrugated-box-plant-waxahachie",
+        "name": "GP Corrugated Box Plant - Waxahachie TX",
+        "type": "Corrugated Box Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "dockDoors",
+          "dropArea",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "truckGateCount",
+          "scale",
+          "entryLanes",
+          "exitLanes",
+          "urbanRural"
+        ],
+        "center": {
+          "lat": 32.442,
+          "lng": -96.848
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.4395,
+            "west": -96.8503,
+            "north": 32.4465,
+            "east": -96.8458
+          },
+          "truckGate": {
+            "south": 32.4408,
+            "west": -96.8503,
+            "north": 32.4416,
+            "east": -96.8495
+          },
+          "dropYards": [
+            {
+              "south": 32.4432,
+              "west": -96.8503,
+              "north": 32.4465,
+              "east": -96.8486
+            },
+            {
+              "south": 32.4434,
+              "west": -96.8472,
+              "north": 32.4454,
+              "east": -96.846
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.4432,
+              "west": -96.8482,
+              "north": 32.4452,
+              "east": -96.8468
+            }
+          ],
+          "staging": {
+            "south": 32.4416,
+            "west": -96.8496,
+            "north": 32.4432,
+            "east": -96.8482
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 80,
+          "trailerParkingCapacity": 140,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 81,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster had no street address and the geocoded coordinates\n(32.378277, -96.770814, APPROXIMATE, moved 7299 m) landed in open\nfarmland southeast of Waxahachie.\n\nWeb research (Waxahachie Chamber of Commerce, business directories,\nTruckMap) established the GP Corrugated box plant address as **5800 N\nInterstate Hwy 35E, Waxahachie, TX 75165**, on the west side of I-35E\nnorth of Waxahachie between FM-387 and FM-406. Locked center:\n32.4420, -96.8480 — a large corrugated-packaging manufacturing\ncomplex directly fronting I-35E.",
+        "mapsUrl": "https://www.google.com/maps/@32.4420,-96.8480,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster had no street address; coords pointed at open farmland ~7 km off (geocode moved 7299 m). Actual GP Corrugated box plant is at 5800 N Interstate Hwy 35E, Waxahachie TX 75165, on the west side of I-35E north of Waxahachie between FM-387 and FM-406. Confirmed via Waxahachie Chamber of Commerce and business listings; locked center ~32.4420,-96.8480.",
+          "truckGate": "Open driveway access from the I-35E frontage road; chain-link perimeter fencing present but no barrier arm, sliding gate or guard booth resolved at the road in Street View. Typical un-gated Texas industrial-plant entry. Flagged uncertain.",
+          "guardShack": "No staffed booth visible at the driveways.",
+          "dropYard": "Large dedicated trailer-storage yards: dozens of trailers parked in marked angled rows along the building's NW and W sides; substantial drop-yard operation for a corrugated box plant.",
+          "dropArea": "80+ trailers staged across the drop yards in the captured imagery.",
+          "dockDoors": "Trailers backed into a long dock bank along the building's NE face plus additional dock activity; estimated 25-50 dock doors for this large box plant.",
+          "scale": "No truck scale clearly resolved; box plants generally do not weigh — left false.",
+          "shipRcvSeparate": "Shipping and receiving appear to run from the same general dock complex; not clearly two separate banks.",
+          "railServed": "An active rail line runs along the E edge of the property with a spur (visible in satellite).",
+          "urbanRural": "On the edge of Waxahachie along I-35E in an industrial corridor with adjacent distribution warehouses but surrounded by farmland; judged Rural per the small-town tie-breaker, flagged uncertain.",
+          "buildingCount": "One large monolithic manufacturing building (with attached process/utility structures at the SW); counted as 1."
+        }
+      }
+    ]
+  }
+}

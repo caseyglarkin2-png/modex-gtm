@@ -1,0 +1,48 @@
+{
+  "name": "SalSon Logistics - Conley GA (Atlanta)",
+  "type": "Warehouse / Dedicated Fleet Terminal",
+  "coords": { "lat": 33.635450, "lng": -84.317050 },
+  "geofences": {
+    "perimeter": { "south": 33.634750, "west": -84.318100, "north": 33.636450, "east": -84.316350 },
+    "truckGate": { "south": 33.634950, "west": -84.318000, "north": 33.635250, "east": -84.317650 },
+    "dropYards": [
+      { "south": 33.635900, "west": -84.317650, "north": 33.636450, "east": -84.316700 }
+    ],
+    "dockAprons": [
+      { "south": 33.635250, "west": -84.317250, "north": 33.635600, "east": -84.316700 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 40,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 2,
+    "buildingCount": 2,
+    "siteAreaAcres": 4.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.635450,-84.317050,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount"],
+  "fieldNotes": {
+    "truckGate": "Property is fully enclosed by chain-link fence along the Moreland Ave (US-23) frontage; truck traffic enters/exits through gated driveway gaps in the fence line.",
+    "guardShack": "No staffed booth visible at any driveway gap in 2025-02 Street View or satellite — entry is through a fence-gap gate with no checkpoint structure, so remoteGs is true.",
+    "entryExitSeparate": "A red 'Do Not Enter' / one-way sign is visible at the southern driveway gap in Street View, indicating that gap is exit-only while a separate gap is the entrance.",
+    "backupSensitive": "Gate gaps sit directly on Moreland Ave, a busy 4-lane arterial with minimal stacking room between the fence and the road.",
+    "dropArea": "Large open paved yard north of the buildings holds rows of parked trailers; classified 25-50.",
+    "dockDoorCount": "Estimated ~22 across the south/east faces of the east building plus dock activity on the west building — Maxar resolution limits an exact count."
+  },
+  "method": "deep-audit"
+}

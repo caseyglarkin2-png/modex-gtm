@@ -1,0 +1,296 @@
+{
+  "account": "Honda",
+  "generatedAt": "2026-05-17",
+  "facilityCount": 18,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Honda - Marysville Auto Plant (MAP) - Marysville OH",
+      "city": "Marysville",
+      "state": "OH",
+      "type": "Auto Assembly Plant",
+      "address": "24000 Honda Parkway, Marysville, OH 43040",
+      "lat": 40.274666,
+      "lng": -83.503609,
+      "source": "Dossier (HLNA-served plant); americanautoworker.com facility record; Honda manufacturing.honda.com",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 13930
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Honda - East Liberty Auto Plant (ELP) - East Liberty OH",
+      "city": "East Liberty",
+      "state": "OH",
+      "type": "Auto Assembly Plant",
+      "address": "11000 State Route 347, East Liberty, OH 43319",
+      "lat": 40.329087,
+      "lng": -83.549523,
+      "source": "Dossier (HLNA-served plant); americanautoworker.com facility record; Honda East Liberty crossdock named in dossier",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1383
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Honda - Performance Manufacturing Center (PMC) - Marysville OH",
+      "city": "Marysville",
+      "state": "OH",
+      "type": "Auto Assembly Plant (low-volume)",
+      "address": "25000 Honda Parkway, Marysville, OH 43040",
+      "lat": 40.27761,
+      "lng": -83.525972,
+      "source": "Dossier (HLNA-served plant); chamberofcommerce.com listing; Honda hondanews PMC channel",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 26
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Honda - Anna Engine Plant (AEP) - Anna OH",
+      "city": "Anna",
+      "state": "OH",
+      "type": "Engine Plant / EV Battery Pack (IPU) Assembly",
+      "address": "12500 Meranda Road, Anna, OH 45302",
+      "lat": 40.37761,
+      "lng": -84.191785,
+      "source": "Dossier (HLNA-served plant); americanautoworker.com facility record",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 3867
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Honda Manufacturing of Alabama (HMA) - Lincoln AL",
+      "city": "Lincoln",
+      "state": "AL",
+      "type": "Auto Assembly Plant + Engine Plant",
+      "address": "1800 Honda Drive, Lincoln, AL 35096",
+      "lat": 33.616074,
+      "lng": -86.145538,
+      "source": "Dossier (HLNA-served plant, NSE territory); americanautoworker.com facility record; Wikipedia",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 5925
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Honda Manufacturing of Indiana (HMIN) - Greensburg IN",
+      "city": "Greensburg",
+      "state": "IN",
+      "type": "Auto Assembly Plant",
+      "address": "2755 North Michigan Avenue, Greensburg, IN 47240",
+      "lat": 39.370161,
+      "lng": -85.543533,
+      "source": "Dossier (HLNA-served plant, OSL territory); americanautoworker.com facility record; Wikipedia",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 4968
+      }
+    },
+    {
+      "idx": 7,
+      "name": "LG Energy Solution-Honda EV Battery Plant (L-H Battery Co.) - Jeffersonville OH",
+      "city": "Jeffersonville",
+      "state": "OH",
+      "type": "EV Battery Cell Plant (JV)",
+      "address": "Jefferson Township, Fayette County, near Ohio SR 729 south of I-71, Jeffersonville, OH 43128",
+      "lat": 39.653047,
+      "lng": -83.562103,
+      "source": "Dossier (named EV inbound flow); lgeshonda.com; Honda/LGES groundbreaking release; Dayton Daily News - no precise street number published",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 2
+      }
+    },
+    {
+      "idx": 8,
+      "name": "Honda Transmission Mfg. of America - Russells Point OH",
+      "city": "Russells Point",
+      "state": "OH",
+      "type": "Transmission Plant",
+      "address": "6964 State Route 235 N, Russells Point, OH 43348",
+      "lat": 40.447438,
+      "lng": -83.90246,
+      "source": "Web research; truckmap.com / htm.honda.com / Yelp facility records; supports Ohio EV Hub plants",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 2739
+      }
+    },
+    {
+      "idx": 9,
+      "name": "Honda Precision Parts of Georgia (Transmission Plant) - Tallapoosa GA",
+      "city": "Tallapoosa",
+      "state": "GA",
+      "type": "Transmission Plant",
+      "address": "550 Honda Parkway, Tallapoosa, GA 30176",
+      "lat": 33.691229,
+      "lng": -85.283853,
+      "source": "Web research; americanautoworker.com facility record; Yelp/Waze listings",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 8602
+      }
+    },
+    {
+      "idx": 10,
+      "name": "Honda of South Carolina Mfg. (ATV/UTV Plant) - Timmonsville SC",
+      "city": "Timmonsville",
+      "state": "SC",
+      "type": "ATV / UTV / Side-by-Side Plant",
+      "address": "1111 Honda Way, Timmonsville, SC 29161",
+      "lat": 34.110581,
+      "lng": -79.917171,
+      "source": "Web research; Florence SC Chamber directory; Honda hondanews SC Manufacturing channel",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 8060
+      }
+    },
+    {
+      "idx": 11,
+      "name": "Honda Power Equipment Mfg. - Swepsonville NC",
+      "city": "Swepsonville",
+      "state": "NC",
+      "type": "Power Equipment / General-Purpose Engine Plant",
+      "address": "3721 S NC Highway 119, Swepsonville, NC 27359",
+      "lat": 36.033436,
+      "lng": -79.344443,
+      "source": "Web research; americanautoworker.com facility record; Honda operations page",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 323
+      }
+    },
+    {
+      "idx": 12,
+      "name": "Honda - Marysville Motorcycle Plant (MMP) - Marysville OH",
+      "city": "Marysville",
+      "state": "OH",
+      "type": "Motorcycle / Powersports Assembly Plant",
+      "address": "24000 Honda Parkway area, Marysville, OH 43040 (co-located on Marysville complex)",
+      "lat": 40.274666,
+      "lng": -83.503609,
+      "source": "Web research; Wikipedia List of Honda facilities; dossier notes Marysville Motorcycle Plant as Honda's original US footprint",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 13593
+      }
+    },
+    {
+      "idx": 13,
+      "name": "Honda Aircraft Company (HondaJet) - Greensboro NC",
+      "city": "Greensboro",
+      "state": "NC",
+      "type": "Aircraft Assembly Plant",
+      "address": "6430 Ballinger Road, Greensboro, NC 27410 (Piedmont Triad Int'l Airport)",
+      "lat": 36.102948,
+      "lng": -79.933522,
+      "source": "Web research; Greensboro Chamber listing; Waze facility record",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 462
+      }
+    },
+    {
+      "idx": 14,
+      "name": "Honda Aero, Inc. (GE Honda HF120 engines) - Burlington NC",
+      "city": "Burlington",
+      "state": "NC",
+      "type": "Aircraft Engine Plant",
+      "address": "Burlington-Alamance Regional Airport area, Burlington, NC 27215",
+      "lat": 36.04951,
+      "lng": -79.478225,
+      "source": "Web research; Wikipedia List of Honda facilities - precise street number not published",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 36
+      }
+    },
+    {
+      "idx": 15,
+      "name": "American Honda - Troy Parts Distribution Center - Troy OH",
+      "city": "Troy",
+      "state": "OH",
+      "type": "Parts Distribution Center",
+      "address": "Commerce Center Boulevard area off I-75, Troy, OH 45373",
+      "lat": 40.039178,
+      "lng": -84.231458,
+      "source": "Web research; Dayton Daily News Honda parts network feature - parts DC operating in Troy since 1986; precise street number not published",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 2
+      }
+    },
+    {
+      "idx": 16,
+      "name": "American Honda - Midwest Consolidation Center (MCC) - Troy OH",
+      "city": "Troy",
+      "state": "OH",
+      "type": "Parts Consolidation Center",
+      "address": "Commerce Center Boulevard, Troy, OH 45373",
+      "lat": 40.042289,
+      "lng": -84.238128,
+      "source": "Web research; Honda 2007 MCC opening release; ohiobiz.com warehouse listing; 549,000 sq ft on 58 acres",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 1
+      }
+    },
+    {
+      "idx": 17,
+      "name": "American Honda - Chino Parts Distribution Center (NA Hub West) - Chino CA",
+      "city": "Chino",
+      "state": "CA",
+      "type": "Parts / Accessories Distribution Center",
+      "address": "Chino, CA 91710 (30-acre, 500,000 sq ft facility)",
+      "lat": 34.012023,
+      "lng": -117.678685,
+      "source": "Web research; Honda hondanews 'New Chino Facility' grand-opening release - precise street number not published",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 5
+      }
+    },
+    {
+      "idx": 18,
+      "name": "American Honda - Irving Parts Distribution Center - Irving TX",
+      "city": "Irving",
+      "state": "TX",
+      "type": "Parts Distribution Center",
+      "address": "Irving, TX 75063",
+      "lat": 32.911717,
+      "lng": -96.99072,
+      "source": "Web research; JQ Engineering mezzanine-addition project record for American Honda Irving PDC - precise street number not published",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 8
+      }
+    }
+  ],
+  "geocodedAt": "2026-05-18"
+}

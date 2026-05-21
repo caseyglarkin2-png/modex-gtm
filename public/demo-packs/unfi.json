@@ -1,0 +1,2824 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:49:22.002Z",
+  "account": {
+    "slug": "unfi",
+    "displayName": "UNFI",
+    "archetype": "grocer-distributor",
+    "siteCount": 27,
+    "coverageNote": {
+      "auditedCount": 27,
+      "estimatedFootprint": 56,
+      "droppedStubCount": 3,
+      "capHit": false,
+      "note": "UNFI operates ~56 NA distribution centers. We audited the 30 highest-throughput; smaller facilities share gate/dock archetypes with the audited cohort."
+    }
+  },
+  "research": {
+    "facility_count": 5,
+    "source": "size_heuristic",
+    "confidence": "inferred",
+    "freightValue": {
+      "company": "United Natural Foods (UNFI)",
+      "truckloads": 420000,
+      "fleet_size": "Dedicated reefer/dry fleet (hundreds) supporting 22 facility network",
+      "freight_type": "Reefer + dry van",
+      "facilities": "",
+      "intent_signals": "📰 Distribution Strategy Group: robotics-heavy Sarasota DC pushes faster dock/yard sequencing, signaling a need for smart gate automation.",
+      "source": "tam_csv"
+    }
+  },
+  "network": {
+    "bbox": [
+      -123.0143,
+      0.1479,
+      -71.9046,
+      47.3279
+    ],
+    "archetypeMix": {
+      "#9": 5,
+      "#10": 1,
+      "#7": 4,
+      "#6": 4,
+      "#3": 13
+    },
+    "totals": {
+      "dockDoors": 2362,
+      "trailerCapacity": 3874,
+      "gates": 27,
+      "railServed": 2,
+      "acres": 1353.9
+    },
+    "sites": [
+      {
+        "id": "01-sarasota-north",
+        "name": "UNFI - Sarasota North DC, Sarasota FL",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "preGateStaging",
+          "postGateStaging",
+          "drivewayLong",
+          "drivewayShort",
+          "entryExitTogether",
+          "entryLanes",
+          "exitLanes",
+          "fastLaneOpportunity",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "scale",
+          "dropYard",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 27.3935,
+          "lng": -82.5418
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 27.39,
+            "west": -82.5445,
+            "north": 27.3972,
+            "east": -82.5385
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 27.391,
+              "west": -82.543,
+              "north": 27.396,
+              "east": -82.5415
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 300,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 95,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied lat/lng `27.264831, -82.484075` and address `6272 McIntosh Rd,\nSarasota FL 34238`. Web research (Yellow Pages, Business Observer, Sarasota Magazine,\nUNFI press) shows 6272 McIntosh Rd is UNFI's OLD ~734,000 sq ft Sarasota DC — the\naging facility being replaced. Satellite confirms a large but visibly older complex\nat that point.\n\nThe roster facility name is \"Sarasota North DC\" and the source line explicitly\ndescribes the \"new 1M sq ft automated DC opened FY26 (KNAPP robotics)\". That new\nfacility is at 8380 21st Street East, inside the SRQ Logistics Center — a\n300-acre master-planned business park east of Sarasota-Bradenton International Airport\n(KSRQ), on the north side of the University Parkway / US-301 intersection, near I-75.\nThe address is technically in Manatee County. UNFI broke ground Aug 2023 and opened",
+        "mapsUrl": "https://www.google.com/maps/@27.39350,-82.54180,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster geocoded the WRONG building. roster lat/lng 27.264831,-82.484075 / address 6272 McIntosh Rd is UNFI's OLD ~734k sq ft Sarasota DC (Sarasota County). The roster facility NAME explicitly is the new 'Sarasota North DC' / '1M sq ft automated DC opened FY26 (KNAPP robotics)'. That facility is at 8380 21st Street East, in the SRQ Logistics Center on the Manatee-Sarasota county line, east of Sarasota-Bradenton International Airport (KSRQ), near University Pkwy/US-301 and I-75. Resolved coordinates ~27.3935,-82.5418.",
+          "imageryState": "Best available Maxar satellite imagery of the SRQ Logistics Center parcel shows the UNFI building MID-CONSTRUCTION: shell roofed, but surrounding yard is bare earth, parking unstriped, dock doors and gate not yet installed/visible. Facility opened Sept 2025. Street View on 21st St E is 2019/2022, pre-build. Yard-configuration fields therefore could not be observed and are estimated from the building footprint plus UNFI's published spec for comparable new-build DCs.",
+          "dockDoors": "Estimated 50+ band. 1M sq ft modern cross-dock-style food DC; comparable UNFI new build (Manchester PA) has 214 dock positions. Not directly counted — imagery pre-dates dock installation.",
+          "dropArea": "Estimated. Comparable UNFI Manchester new build has 492 trailer parking spaces; Sarasota North footprint supports a large trailer yard. Not directly counted.",
+          "truckGate": "Assumed true — modern 1M sq ft automated grocery DC with KNAPP robotics, on a master-planned logistics-park parcel; perimeter control is standard. Not observed in imagery.",
+          "guardShack": "Assumed false / remoteGs true — current-generation new builds typically use kiosk/app gate check-in rather than a staffed booth. Low confidence; not observed.",
+          "railServed": "A rail line runs N-S immediately along the WEST side of the parcel. No spur observed entering the property in construction-era imagery; the DC is a truck-served grocery DC. Marked false but flagged — verify if a spur is added.",
+          "siteAreaAcres": "~95 acres estimated for the UNFI parcel within the 300-acre SRQ Logistics Center master plan; the perimeter box is approximate."
+        }
+      },
+      {
+        "id": "02-manchester-pa",
+        "name": "UNFI - Manchester PA DC",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "truckGate",
+          "entryLanes",
+          "exitLanes",
+          "preGateStaging",
+          "scale",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 40.07043,
+          "lng": -76.74648
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.064,
+            "west": -76.7525,
+            "north": 40.0765,
+            "east": -76.7395
+          },
+          "truckGate": {
+            "south": 40.0662,
+            "west": -76.7456,
+            "north": 40.0674,
+            "east": -76.7438
+          },
+          "dropYards": [
+            {
+              "south": 40.0655,
+              "west": -76.743,
+              "north": 40.0735,
+              "east": -76.7405
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.068,
+              "west": -76.751,
+              "north": 40.0755,
+              "east": -76.747
+            },
+            {
+              "south": 40.065,
+              "west": -76.747,
+              "north": 40.0725,
+              "east": -76.7435
+            }
+          ],
+          "staging": {
+            "south": 40.0655,
+            "west": -76.746,
+            "north": 40.068,
+            "east": -76.743
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 214,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 492,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 129,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster ROOFTOP geocode (40.070433, -76.746475) for 1025 Locust Point Rd\nlands squarely on a single very large (~1.3M sq ft) distribution building on a\n129-acre parcel in York County, PA, along the I-83 corridor. Web corroboration\n(BusinessWire, Modern Distribution Management) confirms this as UNFI's Manchester\nPA DC — a Class-A tri-temp (ambient + refrigerated + frozen) build-to-suit\nconsolidation receiving DC that opened in Q1 FY25. This is one of the new-build\n\"third generation\" UNFI facilities named in the Bushway dossier's \"fewer,\nlarger, more automated\" thesis. Identity and location are not in doubt.",
+        "mapsUrl": "https://www.google.com/maps/@40.07043,-76.74648,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed: 1025 Locust Point Rd, Manchester PA. Roster ROOFTOP geocode 40.070433,-76.746475 lands squarely on the building. A single very large (~1.3M sq ft) DC building, oriented NE-SW, on a 129-acre parcel along the I-83 corridor in York County. Web-corroborated as UNFI's Class-A tri-temp build-to-suit, opened Q1 FY25.",
+          "imageryState": "Best available Maxar satellite shows the site MID-CONSTRUCTION: the building shell is complete (NE half with a finished dark roof, SW half with a lighter still-being-finished roof), but perimeter paving, parking striping, and yard buildout are incomplete; only ~40 trailers were visible. The facility is operational per public reporting (opened Q1 FY25); counts below rely on the published developer spec, not on a count of finished imagery.",
+          "dockDoorCount": "Published spec: 214 dock positions. Dock doors are visible lining BOTH long faces of the building (NW and SE) -> dockDoors band 50+.",
+          "trailerParkingCapacity": "Published spec: 492 trailer parking spaces -> dropArea band 50+, dropYard true.",
+          "shipRcvSeparate": "Two distinct dock banks on the two opposite long faces of the building -> shipping and receiving run from physically separate dock clusters.",
+          "truckGate": "A single truck entrance from the SW via a dedicated access road off Locust Point Rd; a guard-booth-scale structure and gated checkpoint are at the campus entry (~40.0668,-76.7448). Modern build-to-suit grocery DC -> assume staffed guard booth (guardShack true). Gate/booth not fully resolved in construction-era imagery -> flagged.",
+          "drivewayLong": "Long dedicated access road from the public road to the gate; deep approach -> drivewayLong true, ample queue room.",
+          "fastLaneOpportunity": "Wide access road and large open apron at the gate -> physical room for an express/bypass lane.",
+          "urbanRural": "Parcel is surrounded by farmland, woods, and scattered rural residences in York County, off the I-83 corridor -> Rural.",
+          "railServed": "No rail spur observed entering the property; truck-served grocery DC.",
+          "entryLanes/exitLanes": "Estimated 2/2 for a 214-dock facility; not precisely counted in construction-era imagery."
+        }
+      },
+      {
+        "id": "03-carlisle-pa",
+        "name": "UNFI - Carlisle PA DC",
+        "type": "Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "preGateStaging",
+          "postGateStaging",
+          "scale",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 40.2288,
+          "lng": -77.0876
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.2262,
+            "west": -77.0918,
+            "north": 40.2308,
+            "east": -77.0835
+          },
+          "truckGate": {
+            "south": 40.2264,
+            "west": -77.0915,
+            "north": 40.2273,
+            "east": -77.09
+          },
+          "dropYards": [
+            {
+              "south": 40.2292,
+              "west": -77.089,
+              "north": 40.2306,
+              "east": -77.0842
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.2273,
+              "west": -77.0914,
+              "north": 40.2296,
+              "east": -77.0856
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 95,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 52,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster ROOFTOP geocode (40.22871, -77.088179) for 192 Kost Rd lands squarely\non a large rectangular cross-dock distribution building on the NE/upper side of\nthe Kost Rd industrial cluster, ~3 mi southeast of Carlisle, PA. Web search\n(TruckMap, UNFI locations directory, OpenGovUS \"Unfi Distribution Company LLC,\n192 Kost Rd, Carlisle PA 17015\") confirms this as the UNFI Carlisle DC — a\nlegacy-SuperValu mid-Atlantic conventional grocery distribution center.\n\nAddress-ambiguity note: 192 Kost Rd is a multi-tenant industrial address.\nThe SW/lower building in the same cluster — a separate ~450 ft x 1,100 ft\ncross-dock facility with its own long office wing and a large employee parking\nlot — is an SC Johnson regional logistics facility, audited separately under the\n`sc-johnson` account (idx 9). The UNFI building is the **distinct NE/upper",
+        "mapsUrl": "https://www.google.com/maps/@40.22880,-77.08760,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed UNFI Carlisle DC, 192 Kost Rd, Carlisle PA 17015. Roster ROOFTOP geocode 40.22871,-77.088179 lands squarely on the large rectangular DC building on the NE/upper side of the Kost Rd industrial cluster. The building is a cross-dock-style food DC oriented WSW-ENE, ~1100 ft long. Web-corroborated via TruckMap / UNFI locations / OpenGovUS (Unfi Distribution Company LLC, 192 Kost Rd) - a legacy-SuperValu mid-Atlantic conventional grocery DC.",
+          "addressAmbiguity": "192 Kost Rd is a multi-tenant industrial address - SC Johnson also has a separate large cross-dock RDC (~450x1100 ft) at this address cluster, the SW/lower building, which is audited separately under the sc-johnson account (idx 9). The UNFI building is the distinct NE/upper building on the ROOFTOP geocode; the two are separate parcels in the same business park off Kost Rd.",
+          "truckGate": "Single private access road serves the property from Kost Rd; the truck drive wraps the WSW corner into the dock apron and drop yard. Street View on Kost Rd does not reach the property entrance (coverage stops at the public road). A controlled truck checkpoint is assumed for a legacy-SuperValu conventional grocery DC of this scale; guardShack assumed true (these SuperValu-generation DCs typically ran staffed gatehouses). Gate/booth not directly visible in imagery -> flagged medium confidence.",
+          "dockDoors": "Long continuous dock door rhythm visible along the NW long face of the building with ~70 trailers backed in (z20 imagery). Estimated 90-100 dock positions total -> band 50+.",
+          "dropYard": "Large marked trailer-parking lot at the NE end of the building (z19 NW-face probe) holding parked trailers without tractors -> dropYard true, dropArea band 50+ (estimated ~110 stall capacity).",
+          "shipRcvSeparate": "Dock activity concentrated on the NW face plus the NE-end drop yard; not two clearly separate ship/rcv dock banks on opposite faces -> false.",
+          "fastLaneOpportunity": "Wide access road and large open paved apron at the WSW corner -> physical room for an express/bypass lane.",
+          "urbanRural": "Edge-of-town Carlisle PA: parcel is bordered by active farmland on the N, W, and S, with a residential subdivision adjacent to the E. Per rubric (small-town industrial defaults to Rural) -> Rural.",
+          "railServed": "A rail line runs along the SE/south boundary of the property (visible in z19 SE probe) but no spur enters the property; the DC is truck-served -> railServed false.",
+          "siteAreaAcres": "~52 acres derived from the perimeter box around the UNFI building, drop yard, dock aprons, and employee parking.",
+          "entryLanes/exitLanes": "Estimated 2/2 for a DC of this scale; not precisely counted - gate not visible in imagery."
+        }
+      },
+      {
+        "id": "04-allentown-schnecksville-pa",
+        "name": "UNFI - Allentown PA DC",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "preGateStaging",
+          "scale",
+          "multiStep",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 40.6638,
+          "lng": -75.5947
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.6595,
+            "west": -75.5985,
+            "north": 40.6678,
+            "east": -75.593
+          },
+          "truckGate": {
+            "south": 40.6602,
+            "west": -75.5972,
+            "north": 40.6613,
+            "east": -75.5956
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 40.6605,
+              "west": -75.598,
+              "north": 40.667,
+              "east": -75.596
+            },
+            {
+              "south": 40.661,
+              "west": -75.5955,
+              "north": 40.6672,
+              "east": -75.594
+            }
+          ],
+          "staging": {
+            "south": 40.6605,
+            "west": -75.597,
+            "north": 40.6665,
+            "east": -75.5955
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 180,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 107,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied 8550 Willard Dr, Breinigsville PA (40.554158, -75.632566)\nwith an explicit note to \"verify exact site.\" Probing those coordinates landed\non the Lehigh Valley industrial complex near Breinigsville — an unrelated\nmulti-warehouse park, not a UNFI facility.\n\nWeb research (WFMZ Lehigh Valley News, Modern Distribution Management, TruckMap,\nShowcase/LoopNet commercial listings, LehighValleyNews.com) firmly places UNFI's\n\"Allentown\" DC at the **North Valley Trade Center on Independence Drive /\nNorth Valley Drive in Schnecksville, PA 18078** — ~10 mi NW of the roster point.\nIt is two warehouses totaling ~1.3M sq ft on a 107-acre parcel, held by UNFI on\na 15-year lease (one building ~812k sq ft). Satellite imagery of the resolved\nsite shows \"UNFI\" painted on the SW yard pavement, confirming identity. This",
+        "mapsUrl": "https://www.google.com/maps/@40.66380,-75.59470,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "CORRECTED LOCATION. The roster address (8550 Willard Dr, Breinigsville PA) and coords (40.554158,-75.632566) are WRONG - they land at the Lehigh Valley industrial complex near Breinigsville, an unrelated site. The roster note itself flagged 'verify exact site.' Web research (WFMZ, Modern Distribution Management, TruckMap, Showcase/LoopNet, Lehigh Valley News) confirms UNFI's Allentown DC is the North Valley Trade Center at ~4255 North Valley Dr / 4105 Independence Dr, Schnecksville PA 18078 - two warehouses totaling 1.3M sq ft on 107 acres, leased by UNFI on a 15-year lease. Resolved center 40.66380,-75.59470 on the large main DC building, with 'UNFI' painted on the SW yard pavement (visible in z18 imagery) confirming identity.",
+          "closureStatus": "UNFI announced closure of this Schnecksville DC in FY26 following loss of the Key Food customer agreement; ~716 jobs affected, layoffs Aug-Oct 2025. The facility is on the public DC-closure cadence in the Bushway dossier. Audited as the physical yard as it stands; operational status winding down.",
+          "buildingCount": "The North Valley Trade Center comprises two large warehouses (UNFI's lease covers both, ~1.3M sq ft combined; one building is ~812k sq ft). Two distinct large buildings on the same trade-center parcel -> buildingCount 2, multipleFacilities true.",
+          "dockDoors": "The main building has continuous dock-door rhythm along BOTH long faces (E face toward the road and W face), with ~90 trailers backed in across both sides in z18/z19 imagery -> band 50+ (estimated ~180 positions across the main building).",
+          "shipRcvSeparate": "Docks on two opposite long faces of the main building (E and W) function as physically separate dock banks -> shipRcvSeparate true (medium confidence).",
+          "dropYard": "Large paved trailer yards flank both dock faces with parked trailers; the W-side apron is very deep with extensive trailer parking -> dropYard true, dropArea band 50+.",
+          "truckGate": "Single controlled truck entrance at the SW corner: a dedicated truck driveway with painted lane arrows leads from the trade-center road into the property through a checkpoint/roundabout area. A small structure is visible beside the entry near the site water tower -> guardShack assumed true (medium confidence; building elevated on a berm above the public road so Street View, 2025-07, cannot see the gate directly). remoteGs false given the apparent booth.",
+          "drivewayLong": "Long dedicated approach from the trade-center road through the gate into the deep dock aprons -> drivewayLong true; ample queue room.",
+          "fastLaneOpportunity": "Wide gate apron and multi-lane painted entry -> physical room for an express/bypass lane.",
+          "urbanRural": "Schnecksville PA is a small unincorporated community NW of Allentown; the parcel is bordered by active farmland on the E and S with scattered rural residences -> per rubric, Rural.",
+          "railServed": "No rail spur enters the property; truck-served grocery DC.",
+          "siteAreaAcres": "107 acres per the published North Valley Trade Center parcel figure.",
+          "entryLanes/exitLanes": "Estimated 2/2; gate not directly visible in Street View (berm blocks view)."
+        }
+      },
+      {
+        "id": "05-chesterfield-nh",
+        "name": "UNFI - Chesterfield NH DC",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "connectivityIssue",
+          "dropArea"
+        ],
+        "center": {
+          "lat": 42.89139,
+          "lng": -72.490558
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.890222,
+            "west": -72.492275,
+            "north": 42.892648,
+            "east": -72.488106
+          },
+          "truckGate": {
+            "south": 42.891031,
+            "west": -72.491662,
+            "north": 42.891749,
+            "east": -72.49019
+          },
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 42.890671,
+              "west": -72.491907,
+              "north": 42.891929,
+              "east": -72.49019
+            }
+          ],
+          "staging": {
+            "south": 42.8913,
+            "west": -72.491048,
+            "north": 42.892019,
+            "east": -72.490068
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 36,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 22.7,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The supplied roster coordinates landed directly on the correct building — a large\nsingle-story distribution warehouse off Stow Drive in West Chesterfield. Web search\nconfirmed the address (71 Stow Dr, West Chesterfield NH 03466) and that this is an\noperating UNFI warehouse/distribution center; listings cite \"entrance security\" and\n~4-hour average load/unload. The dossier names this DC explicitly as the facility\nMark Bushway ran as GM from 2003-2006, and warehouse directories list it as a\n~319,000 sq ft New England regional hub. Street View (captured 2023-06 and 2023-08)\nalong the access road shows UNFI/Albert's Organics branded equipment (an \"Alberts\"\nbox truck and 53-ft UNFI dry vans), positively confirming the operator.",
+        "mapsUrl": "https://www.google.com/maps/@42.89139,-72.490558,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No barrier arm, sliding gate, perimeter fence, or pinch-point checkpoint at the property entrance. The site is reached by a long open access drive (Stow Dr) off NH Route 9; Street View (2023-06) shows the Google car drove the access road unobstructed straight into the truck court. Open site.",
+          "guardShack": "No booth structure anywhere along the access drive or at the truck court entrance.",
+          "remoteGs": "False because there is no truck gate at all.",
+          "postGateStaging": "Wide open paved truck court on the NE/E side of the building serves as an interior holding/queue area before trucks reach the dock face; ample room.",
+          "drivewayLong": "Access drive from Route 9 to the truck court is roughly 250m of open paved road — easily holds a 3+ truck queue.",
+          "dockDoors": "Single continuous dock bank on the west building face; ~30-36 trailers backed in nose-out in z18/z19 imagery. 319,000 sq ft DC. 25-50 band.",
+          "dropArea": "No dedicated marked drop-yard; trailers without tractors appear parked in the open truck court and along the access road. Estimate 10-25; flagged uncertain — no striped trailer stalls visible.",
+          "connectivityIssue": "Rural wooded setting in West Chesterfield NH but adjacent to NH Route 9 (a state highway) with a small industrial cluster nearby — cellular coverage likely adequate; set false, flagged uncertain.",
+          "buildingCount": "Main DC plus an attached/adjacent office wing on the NW corner; counted as 2.",
+          "railServed": "No rail spur into the property; nearest rail is well away from the site."
+        }
+      },
+      {
+        "id": "06-montgomery-ny",
+        "name": "UNFI - Montgomery NY DC (Hudson Valley)",
+        "type": "Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "preGateStaging",
+          "postGateStaging",
+          "multipleFacilities",
+          "scale",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 41.49355,
+          "lng": -74.237
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.4908,
+            "west": -74.2415,
+            "north": 41.4962,
+            "east": -74.2325
+          },
+          "truckGate": {
+            "south": 41.4915,
+            "west": -74.239,
+            "north": 41.4925,
+            "east": -74.2375
+          },
+          "dropYards": [
+            {
+              "south": 41.4942,
+              "west": -74.2408,
+              "north": 41.496,
+              "east": -74.237
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.4915,
+              "west": -74.2409,
+              "north": 41.4956,
+              "east": -74.2385
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 48,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster ROOFTOP geocode (41.493552, -74.235922) for 525 Neelytown Rd lands\nsquarely on a large L-shaped distribution building off Neelytown Rd in the Town\nof Montgomery, Orange County NY, in the Hudson Valley. Web corroboration (UNFI\npress release, Yellow Pages): this is UNFI's Hudson Valley DC, opened 2014\nand built to LEED Gold standard, serving the NYC-metro Whole Foods customer\nbase. Identity and location are not in doubt.",
+        "mapsUrl": "https://www.google.com/maps/@41.49355,-74.23700,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed UNFI Montgomery NY DC (Hudson Valley DC), 525 Neelytown Rd, Montgomery NY 12549. Roster ROOFTOP geocode 41.493552,-74.235922 lands squarely on a large L-shaped distribution building off Neelytown Rd in the Orange County / Hudson Valley region. Web-corroborated: UNFI press release - Hudson Valley DC opened 2014, LEED Gold, built to serve the NYC-metro Whole Foods customer base.",
+          "buildingShape": "Large L-shaped DC building. Continuous dock-door rhythm along the W and NW long faces with ~75 trailers backed in and parked across the imagery. A small separate ancillary building sits SE of the main DC (likely a fleet/maintenance shop) -> buildingCount 2; multipleFacilities left false because the second building is small and ancillary, not a co-equal large cluster (flagged).",
+          "dockDoors": "Continuous bands of dock doors on the W and NW faces; ~75 trailers backed/parked -> band 50+ (estimated ~90 positions).",
+          "dropYard": "A large marked trailer-parking lot occupies the NW corner of the property holding many trailers without tractors -> dropYard true, dropArea band 50+.",
+          "truckGate": "Single private access road serves the property from Neelytown Rd; the truck drive wraps the W side of the building into the dock aprons and NW drop yard. Street View on Neelytown Rd (2025-03) shows the building set well back behind employee parking; the truck gate is not directly resolved in the road-level imagery. A controlled gate with a staffed booth is assumed for a modern (2014) LEED Gold UNFI DC serving NYC-metro Whole Foods -> truckGate true, guardShack true, remoteGs false; all flagged medium-confidence.",
+          "shipRcvSeparate": "Docks concentrated on the W/NW faces of the L-shaped building as one continuous dock system, not two clearly separated ship/rcv banks on opposing faces -> false.",
+          "drivewayLong": "Long approach from Neelytown Rd through the property to the deep dock aprons -> drivewayLong true.",
+          "fastLaneOpportunity": "Wide access road and large open paved apron -> physical room for an express/bypass lane.",
+          "urbanRural": "The Town of Montgomery, Orange County NY is a small Hudson Valley community; the parcel is bordered by woods and open land with scattered rural/industrial development -> per rubric, Rural.",
+          "railServed": "No rail spur enters the property; truck-served grocery DC.",
+          "siteAreaAcres": "~48 acres derived from the perimeter box around the building, dock aprons, drop yard, and employee parking.",
+          "entryLanes/exitLanes": "Estimated 2/2; gate not directly resolved in Street View."
+        }
+      },
+      {
+        "id": "07-howell-nj",
+        "name": "UNFI - Howell NJ DC",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "preGateStaging",
+          "postGateStaging",
+          "fastLaneOpportunity",
+          "dropArea",
+          "urbanRural",
+          "scale",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 40.1397,
+          "lng": -74.1879
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.1365,
+            "west": -74.1915,
+            "north": 40.1425,
+            "east": -74.1855
+          },
+          "truckGate": {
+            "south": 40.1375,
+            "west": -74.19,
+            "north": 40.1385,
+            "east": -74.1885
+          },
+          "dropYards": [
+            {
+              "south": 40.139,
+              "west": -74.19,
+              "north": 40.1415,
+              "east": -74.1882
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.1378,
+              "west": -74.1898,
+              "north": 40.141,
+              "east": -74.188
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 50,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 42,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster ROOFTOP geocode (40.139697, -74.187949) for 433 Oak Glen Rd lands\nsquarely on a large distribution building with near-full **rooftop solar\ncoverage** in a heavily wooded parcel off Oak Glen Rd, Howell Township, Monmouth\nCounty NJ. Web corroboration (BBB, Panjiva, NJ Board of Public Utilities filing,\nYellow Pages) confirms this as UNFI's Howell DC — a ~385,000 sq ft natural/\norganic specialty distribution center. The NJ BPU filing documents two rooftop\nsolar arrays (1.575 MW \"Project A\" + 1.652 MW \"Project B\"), matching the\nsolar-covered roof visible in satellite imagery. Identity is not in doubt.",
+        "mapsUrl": "https://www.google.com/maps/@40.13970,-74.18790,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed UNFI Howell NJ DC, 433 Oak Glen Rd, Howell NJ 07731. Roster ROOFTOP geocode 40.139697,-74.187949 lands squarely on a large distribution building with near-full rooftop solar coverage in a heavily wooded parcel off Oak Glen Rd, Monmouth County NJ. Web-corroborated: BBB / Panjiva / NJ BPU filing / Yellow Pages - a 385,000 sq ft UNFI natural/organic specialty DC; the NJ BPU filing documents two rooftop solar arrays (1.575 MW Project A + 1.652 MW Project B), matching the solar-covered roof in imagery.",
+          "buildingShape": "Main DC building has near-full rooftop solar; a separate older building cluster (a red-roofed structure plus a long warehouse) sits immediately N of the main building, and an office building is near the S employee parking lot -> buildingCount 3, multipleFacilities true (multiple distinct buildings on the campus parcel).",
+          "dockDoors": "Dock-door rhythm along the W face of the main building with ~50 trailers backed in/parked across the W apron and the N building's docks -> band 50+ (estimated ~55 positions; legacy-UNFI natural/organic DC of modest 385k sq ft footprint).",
+          "dropYard": "A modest trailer-parking area sits along the W side / NW of the main building holding parked trailers -> dropYard true, dropArea band 10-25 (smaller drop capacity than UNFI's large conventional-grocery DCs).",
+          "truckGate": "A single private access driveway serves the property from Oak Glen Rd; the truck circulation wraps to the W dock apron and N building. Street View on Oak Glen Rd (2025-09) shows only dense woods - the property is heavily tree-screened and set well back, so the gate is not visible at road level. A controlled gated entrance with a staffed booth is assumed for a UNFI specialty DC -> truckGate true, guardShack true, remoteGs false; all flagged medium-confidence.",
+          "shipRcvSeparate": "Dock activity is concentrated on the W face of the main building as one continuous system; the N building's docks are an ancillary cluster rather than a distinct ship-vs-rcv split -> false.",
+          "drivewayLong": "Long wooded approach driveway from Oak Glen Rd into the property -> drivewayLong true.",
+          "fastLaneOpportunity": "Modest-scale specialty DC with a single access drive and limited gate apron width -> fastLaneOpportunity false (flagged, gate not directly observed).",
+          "urbanRural": "Howell Township, Monmouth County NJ sits within the dense NYC/NJ metropolitan corridor -> Urban per the 'broader setting' rule. The immediate parcel is unusually isolated in pine-barren woods, so the call is flagged; cellular coverage in metro NJ is good -> connectivityIssue false.",
+          "railServed": "A rail line runs along the E edge of the property but no spur enters; the building's E face carries solar panels, not a rail dock -> railServed false.",
+          "siteAreaAcres": "~42 acres derived from the perimeter box around the three buildings, W dock apron, drop yard, parking, and the on-site stormwater ponds.",
+          "entryLanes/exitLanes": "Estimated 1/1 for a modest single-drive specialty DC; gate not directly observed."
+        }
+      },
+      {
+        "id": "08-dayville-ct",
+        "name": "UNFI - Dayville CT DC",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "guardShack"
+        ],
+        "center": {
+          "lat": 41.8631,
+          "lng": -71.9072
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.8612,
+            "west": -71.9096,
+            "north": 41.8656,
+            "east": -71.9046
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 41.8633,
+              "west": -71.9064,
+              "north": 41.8647,
+              "east": -71.9042
+            },
+            {
+              "south": 41.8645,
+              "west": -71.9082,
+              "north": 41.8656,
+              "east": -71.9052
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.8614,
+              "west": -71.9083,
+              "north": 41.8623,
+              "east": -71.9056
+            },
+            {
+              "south": 41.8623,
+              "west": -71.9091,
+              "north": 41.8638,
+              "east": -71.9084
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 30.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate (41.863086, -71.906995) landed directly on the facility.\nWeb search corroborated the address — \"UNFI Dayville Warehouse / Distribution\nCenter, 260 Lake Rd, Dayville CT 06241,\" a Teamsters-represented food-wholesale\nDC. Satellite at z16–z20 positively identified a large distribution building\n(brown roof with extensive rooftop solar) set in an edge-of-town industrial\npark beside a reservoir, with two trailer drop yards and dock banks. A separate\nolder warehouse with its own trailer parking sits immediately north on the same\nparcel cluster.",
+        "mapsUrl": "https://www.google.com/maps/@41.86310,-71.90720,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No barrier arm or sliding gate at the public road (Lake Rd) or anywhere on the long internal access driveway. Street View 2009/2019 confirms an open campus driveway running from Lake Rd, past a pond, with only a monument sign at the road entrance. Open-campus archetype.",
+          "guardShack": "No small staffed booth visible at the building, the trailer-yard mouth, or the driveway. The DC operates from a wholly internal driveway with no checkpoint structure. Listed uncertain because z20 winter imagery is mid-resolution; no booth-footprint structure found in any view.",
+          "multipleFacilities": "Two distinct large buildings on the same parcel cluster: the main UNFI DC (brown roof with rooftop solar) and a separate older warehouse to the north (white/teal roof with its own trailer parking).",
+          "postGateStaging": "Large paved area inside the property between the driveway and the trailer drop yards / dock aprons gives ample internal queuing room.",
+          "dropYard": "Dedicated trailer-storage lots: a large fan of parked trailers SE of the building and additional rows north of the building.",
+          "shipRcvSeparate": "Dock doors run along the south face and wrap to the west face; appears to be one operational dock complex, not physically separate ship/rcv banks.",
+          "dockDoorCount": "Estimated ~60 across the south and west building faces from the rhythm of dock bays and backed-in trailers; mid-resolution winter imagery makes an exact count uncertain.",
+          "urbanRural": "Edge-of-town industrial park in Dayville/Killingly CT, surrounded by woods, fields, a reservoir, and a few other industrial buildings - rural setting."
+        }
+      },
+      {
+        "id": "09-new-stanton",
+        "name": "UNFI - New Stanton PA DC (Hunker)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "scale",
+          "multiStep",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 40.2125,
+          "lng": -79.613
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.2085,
+            "west": -79.6165,
+            "north": 40.2162,
+            "east": -79.6102
+          },
+          "truckGate": {
+            "south": 40.213,
+            "west": -79.6147,
+            "north": 40.2138,
+            "east": -79.6137
+          },
+          "dropYards": [
+            {
+              "south": 40.2121,
+              "west": -79.6162,
+              "north": 40.2147,
+              "east": -79.6149
+            },
+            {
+              "south": 40.2135,
+              "west": -79.6132,
+              "north": 40.2147,
+              "east": -79.6112
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.2118,
+              "west": -79.6156,
+              "north": 40.2138,
+              "east": -79.6148
+            },
+            {
+              "south": 40.2117,
+              "west": -79.6146,
+              "north": 40.2125,
+              "east": -79.611
+            }
+          ],
+          "staging": {
+            "south": 40.213,
+            "west": -79.615,
+            "north": 40.2142,
+            "east": -79.6137
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 95,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 52,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied a city-level address (\"100 UNFI Way, Hunker, PA\") flagged as\napproximate. Web research resolved the facility to the legacy SuperValu / UNFI\nPittsburgh-division distribution center at **400 Paintersville Rd, New Stanton,\nPA 15672. Sources note the Paintersville Rd address is the auto entrance\nonly and that the truck entrance is signed off 1769 New Stanton Ruffsdale\nRd, Ruffs Dale, PA** — i.e., a single shared access corridor approaches the\nsite, with trucks routed within it.\n\nThe roster coordinates (40.212001, -79.611695) landed directly on the building\nroof, confirming the right property without a move. Satellite at zoom 16-18\nshows an unambiguous large multi-temperature grocery distribution complex\nimmediately south of the I-70 / Pennsylvania Turnpike New Stanton interchange.",
+        "mapsUrl": "https://www.google.com/maps/@40.21250,-79.61300,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single controlled access road off the I-70 / PA Turnpike New Stanton interchange roundabout, crossing a bridge over Sewickley Creek; Street View shows 'ALL TRUCK TRAFFIC KEEP RIGHT' and 'SPEED LIMIT 15' signage directing trucks into the property — a controlled industrial entrance.",
+          "guardShack": "No guard booth resolvable at the property line; Street View coverage stops at the public bridge and the gate point sits inside the property. The only small structure visible is mid-yard. Marked remoteGs / no shack at medium confidence.",
+          "shipRcvSeparate": "Long dock bank on the west building face plus a separate dock bank along the south/north faces of the main building — two distinct dock clusters.",
+          "dropYard": "Large trailer staging lot on the NW (50+ trailer stalls) plus angled trailer drop along the north building edge.",
+          "railServed": "Active rail line runs along the east/north property edge with a spur reaching the building.",
+          "buildingCount": "Main DC building plus a long separate dock building on the west side.",
+          "fastLaneOpportunity": "Wide paved apron at the entrance and ample yard width to add an express/bypass lane.",
+          "scale": "No truck scale clearly visible; left uncertain."
+        }
+      },
+      {
+        "id": "10-york-pa",
+        "name": "UNFI - York PA DC (Harrisburg area)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 40.0686,
+          "lng": -76.7747
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.0654,
+            "west": -76.7764,
+            "north": 40.0723,
+            "east": -76.7729
+          },
+          "truckGate": {
+            "south": 40.0682,
+            "west": -76.7743,
+            "north": 40.0691,
+            "east": -76.7733
+          },
+          "dropYards": [
+            {
+              "south": 40.0712,
+              "west": -76.775,
+              "north": 40.0723,
+              "east": -76.7729
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.0664,
+              "west": -76.7762,
+              "north": 40.0709,
+              "east": -76.7754
+            },
+            {
+              "south": 40.0706,
+              "west": -76.7754,
+              "north": 40.0715,
+              "east": -76.7732
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 41,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster carried only city-level coordinates (39.961066, -76.72696) — these\nlanded in downtown York, dense urban fabric with no DC, and the roster note\nitself flagged \"street address not pinned down — city-level only\" (movedMeters\n673). The roster also mislabeled it \"legacy SuperValu mid-Atlantic DC.\"\n\nResearch corrected both points. The UNFI York Distribution Center is at\n225 Cross Farm Lane, York PA 17406, in Greenspring Industrial Park\n(Conewago Township, York County, NE of York city). Confirmed by warehouse.ninja\n(\"UNFI York Distribution Center\"), a LoopNet / JLL property listing\n(\"225 Cross Farm Lane — UNFI York, PA Distribution Center\"), TruckMap, and the\n2008 UNFI investor-relations press release announcing a new 675,000 sq ft\nfacility in Greenspring Industrial Park with \"Pick-to-Voice\" fulfillment,",
+        "mapsUrl": "https://www.google.com/maps/@40.06860,-76.77470,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "resolution": "Roster gave only city-level coords (downtown York, wrong site). Resolved to UNFI York DC, 225 Cross Farm Lane, York PA 17406, Greenspring Industrial Park - a 675,000 sq ft legacy-UNFI DC opened 2008. Confirmed via warehouse.ninja, LoopNet/JLL listing, TruckMap and the 2008 UNFI IR press release.",
+          "truckGate": "No barrier arm or sliding/swing gate at the public road (Cross Farm Lane) or on the internal access driveway. Street View 2012/2023 shows an open-campus driveway with a turnaround near the office; trucks reach the dock yard via a wide internal driveway with no checkpoint structure. Open-campus archetype.",
+          "guardShack": "No small staffed booth identified at the property entrance, the office turnaround, or the truck-yard mouth. The internal driveway opens directly onto the dock apron. Listed uncertain - a booth could exist inside the truck yard out of clear view, but none is visible in z19-z20 imagery.",
+          "drivewayLong": "Long internal access driveway from Cross Farm Lane wraps the building to the truck-yard side - easily holds 3+ trucks.",
+          "postGateStaging": "Wide paved dock aprons and a large trailer drop yard north of the building provide ample internal queuing room.",
+          "fastLaneOpportunity": "The internal truck driveway and dock apron are very wide with unused paved width - room to stripe an express bypass lane.",
+          "dropYard": "Dedicated trailer-storage lot at the north end of the building, full of parked trailers in marked rows (`dropArea` well over 50).",
+          "dockDoors": "Estimated ~110 dock doors total across the north, east and west building faces from the continuous rhythm of bays and backed-in trailers. High count appropriate for a 675k sq ft DC; exact number uncertain from overhead imagery.",
+          "shipRcvSeparate": "Docks wrap continuously around the north, east and west faces as one operational complex - not two physically separate ship/rcv banks.",
+          "entryLanes": "Wide truck driveway; lane count estimated at ~2 in / 2 out, uncertain from imagery.",
+          "urbanRural": "Greenspring Industrial Park is set among farmland and woods NE of York city, with a residential subdivision to the SE - edge-of-town / rural setting.",
+          "connectivityIssue": "Within an industrial park near York metro, not isolated - cellular coverage adequate."
+        }
+      },
+      {
+        "id": "11-iowa-city-ia",
+        "name": "UNFI - Iowa City IA DC",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 41.6349,
+          "lng": -91.4863
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.633,
+            "west": -91.4885,
+            "north": 41.6366,
+            "east": -91.4843
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 41.6336,
+              "west": -91.487,
+              "north": 41.6343,
+              "east": -91.4848
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.634,
+              "west": -91.4872,
+              "north": 41.6346,
+              "east": -91.4845
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 32,
+          "trailersVisible": 26,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 33,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate (41.635358, -91.486512, ROOFTOP precision) landed directly\non the facility. Web search confirmed the address — \"UNFI Distribution Center,\n2340 Heinz Rd, Iowa City IA 52240\" (Yahoo Local, hub.biz, OpenGovUS,\nYellowPages). The 2003 UNFI investor-relations press release documents this as a\nlegacy-UNFI DC: UNFI acquired it with the Blooming Prairie Cooperative\npurchase (Oct 2002) and then expanded it from ~120,000 sq ft to ~260,000 sq ft.\nIt serves UNFI's Central/Midwest region.",
+        "mapsUrl": "https://www.google.com/maps/@41.63490,-91.48630,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "resolution": "Roster coord (41.635358, -91.486512, ROOFTOP) landed on the facility. Confirmed UNFI DC, 2340 Heinz Rd, Iowa City IA 52240 via Yahoo Local, hub.biz, OpenGovUS and the 2003 UNFI IR press release. Legacy-UNFI DC acquired with Blooming Prairie Cooperative (Oct 2002); expanded from ~120,000 to ~260,000 sq ft after 2003.",
+          "truckGate": "No barrier arm or sliding/swing gate at any property edge. The DC sits in an industrial park; the truck driveway runs from the park road around the building to the south dock apron with no checkpoint structure. Open-campus archetype.",
+          "guardShack": "No small staffed booth identified at the building, the dock-apron mouth, or the access driveway in z18-z20 imagery. A short chain-link fence segment exists near the west office, but no guard booth. Listed uncertain - none visible.",
+          "drivewayLong": "Internal driveway wraps the building from the park road to the south dock apron; holds 3+ trucks.",
+          "postGateStaging": "South dock apron plus the trailer drop row gives internal queuing room.",
+          "dockDoors": "Estimated ~32 dock doors along the single continuous south face from the rhythm of bays and backed-in trailers; moderate ~260k sq ft DC. Exact count uncertain from overhead imagery.",
+          "dropArea": "A single row of ~20-25 trailers parked nose-out in the drop yard south of the building (`dropYard: true`).",
+          "shipRcvSeparate": "One continuous dock bank on the south face - not two physically separate ship/rcv banks.",
+          "multipleFacilities": "Single L-shaped building (main rectangle + a NW section); one facility, not a campus.",
+          "urbanRural": "Located in an Iowa City industrial park (Scott-Six / Heinz Rd area) on the SE edge of town, bordered by woods and a creek - edge-of-town / rural setting per the rubric tie-breaker.",
+          "railServed": "No rail spur enters the property."
+        }
+      },
+      {
+        "id": "12-hopkins-mn",
+        "name": "UNFI - Hopkins MN DC",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes",
+          "scale"
+        ],
+        "center": {
+          "lat": 44.919,
+          "lng": -93.4055
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 44.9154,
+            "west": -93.4145,
+            "north": 44.9212,
+            "east": -93.4018
+          },
+          "truckGate": {
+            "south": 44.9195,
+            "west": -93.4038,
+            "north": 44.9203,
+            "east": -93.4028
+          },
+          "dropYards": [
+            {
+              "south": 44.9196,
+              "west": -93.4062,
+              "north": 44.9207,
+              "east": -93.4032
+            },
+            {
+              "south": 44.9161,
+              "west": -93.414,
+              "north": 44.9186,
+              "east": -93.4105
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 44.9195,
+              "west": -93.4064,
+              "north": 44.92,
+              "east": -93.403
+            },
+            {
+              "south": 44.9164,
+              "west": -93.4132,
+              "north": 44.9179,
+              "east": -93.4105
+            }
+          ],
+          "staging": {
+            "south": 44.9192,
+            "west": -93.4036,
+            "north": 44.9201,
+            "east": -93.4025
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 150,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 150,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate (44.91914, -93.40308, ROOFTOP) landed on the east edge of\nthe main DC building. Web search confirmed the address — \"UNFI / SUPERVALU\nDistribution Center, 300 2nd Ave S, Hopkins MN 55343\" (Waze, dcontrol, TruckMap,\nbusinessyab). An NLRB case (18-RC-284875) names the operator as **\"UNFI\nWholesale, Inc., formerly known as Supervalu Wholesale Operations, Inc.\"** —\nconfirming this is a legacy-SuperValu conventional-grocery DC, the\nMinneapolis-metro hub UNFI inherited in the 2018 acquisition. The roster note's\nmention of a related grocery DC at 201 3rd St S resolves to the second\n(west) building on this same campus.",
+        "mapsUrl": "https://www.google.com/maps/@44.91900,-93.40550,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "resolution": "Roster coord (44.91914, -93.40308, ROOFTOP) landed on the east edge of the main DC building. Confirmed UNFI/SUPERVALU Distribution Center, 300 2nd Ave S, Hopkins MN 55343 via Waze, dcontrol, TruckMap, businessyab and an NLRB case (UNFI Wholesale Inc, formerly SuperValu Wholesale Operations Inc). Legacy-SuperValu conventional-grocery DC - the Minneapolis-metro hub.",
+          "truckGate": "Truck checkpoint confirmed. z19-z20 imagery shows a distinct red-roofed guard booth straddling the inbound truck lane on the NE side of the main building, with a long covered canopy/awning over the lane. The property is perimeter-fenced (chain-link visible in 2025 Street View).",
+          "guardShack": "The red-roofed structure between the truck lanes is a classic staffed guard booth (~1-3 vehicle footprint, set beside/in the lane with a canopy). This is a guarded entry - the SuperValu conventional-grocery DC profile.",
+          "remoteGs": "False - a staffed guard shack is present.",
+          "postGateStaging": "Large paved truck court and trailer drop yard inside the gate, before the dock doors - ample internal queuing (`staging` boxed at the gate apron).",
+          "drivewayLong": "Long internal truck approach from the guard booth to the north-face docks; holds well over 3 trucks.",
+          "fastLaneOpportunity": "Very wide truck court and gate apron with unused paved width - clear room to stripe an express bypass lane.",
+          "dockDoors": "Estimated ~130 dock doors across the campus - the main DC north face is a long continuous bank, and the separate west building has its own dock bank. Large legacy-SuperValu DC; exact count uncertain from overhead imagery.",
+          "dropArea": "Multiple large trailer drop yards (one north of the main building, one at the west building) holding well over 50 trailers (`dropYard: true`).",
+          "shipRcvSeparate": "Two physically separate dock clusters on different buildings/faces (main DC north face plus the separate west building's SW face) - ship and receive operations run from distinct dock banks.",
+          "multipleFacilities": "Campus of 3 buildings: the main DC, a separate large west warehouse with its own docks, and a smaller building plus offices.",
+          "railServed": "No freight rail spur enters the property. The tracks running alongside the adjacent highway are the Metro Green Line LRT extension, not a freight spur.",
+          "scale": "No truck scale clearly identified; left false, flagged uncertain.",
+          "urbanRural": "Hopkins is an inner-ring suburb in the dense Minneapolis-St. Paul metro; the campus is surrounded by residential streets, commercial development and a light-rail line - Urban.",
+          "entryLanes": "Truck lanes split around the guard booth; lane count estimated ~2 in / 2 out, uncertain from imagery."
+        }
+      },
+      {
+        "id": "13-champaign-il",
+        "name": "UNFI - Champaign IL DC (Newell)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 40.151009,
+          "lng": -88.232322
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 0.1479,
+            "west": -88.2356,
+            "north": 0.153,
+            "east": -88.2287
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 0.1482,
+              "west": -88.2348,
+              "north": 0.1501,
+              "east": -88.2338
+            },
+            {
+              "south": 0.149,
+              "west": -88.2309,
+              "north": 0.1524,
+              "east": -88.2298
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 0.1492,
+              "west": -88.234,
+              "north": 0.1524,
+              "east": -88.233
+            },
+            {
+              "south": 0.1492,
+              "west": -88.2326,
+              "north": 0.1525,
+              "east": -88.2315
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 0,
+          "buildingCount": 2,
+          "siteAreaAcres": 36,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinates landed directly on a long rectangular distribution\nwarehouse in the Apollo Dr industrial park on the northwest edge of Champaign.\nWeb search confirms 3001 Apollo Dr as the UNFI / W. Newell & Co. distribution\ncenter (legacy SuperValu / W. Newell conventional-grocery DC, UNFI Central\nregion), with a posted driver receiving window of roughly 1 AM–noon. Street\nView from the access road shows a building-mounted \"UNFI\" sign and a \"UNFI\nDistribution / Office / Visitor\" directional marker, positively identifying\nthe site.",
+        "mapsUrl": "https://www.google.com/maps/@40.151009,-88.232322,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Open campus. No barrier arm, sliding/swing gate, or checkpoint pinch-point at any entry. Truck driveways run unobstructed off the shared industrial-park access road (Apollo Dr area) directly onto the truck pavement.",
+          "guardShack": "No guard booth at any entrance. Only a UNFI directional sign at the access-road junction.",
+          "shipRcvSeparate": "Dock doors run along both the SW/west building face and the east building face — two distinct dock banks consistent with separate shipping and receiving clusters.",
+          "dropArea": "Diagonal trailer-parking stalls on the far east edge of the property plus a trailer block at the SW corner; many trailers parked without tractors.",
+          "postGateStaging": "Wide paved truck yards on both the west and east faces provide interior queueing room ahead of the docks.",
+          "urbanRural": "Edge-of-town Champaign industrial park; the property abuts open farm fields to the west and south. Judged Rural per the small-town-industrial tie-break rule, though it sits in a metro of ~230k.",
+          "entryLanes": "Truck driveways are uncontrolled, so 'lanes' are nominal single-lane drive widths; not separately marked.",
+          "buildingCount": "Main long warehouse plus an attached/adjacent front office structure counted as 2."
+        }
+      },
+      {
+        "id": "14-aurora-co",
+        "name": "UNFI - Aurora CO DC (Denver)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 39.774031,
+          "lng": -104.776628
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.7708,
+            "west": -104.7795,
+            "north": 39.7772,
+            "east": -104.7733
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 39.774,
+              "west": -104.7752,
+              "north": 39.7764,
+              "east": -104.7735
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.7709,
+              "west": -104.779,
+              "north": 39.7762,
+              "east": -104.7747
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 32,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinates landed on a very large white-roofed distribution\nwarehouse in Aurora's Gateway Park. Web search confirms 17901 E 40th Ave as\nthe UNFI distribution center serving the Denver metro / Rocky Mountain region;\npress records describe a ~535,000 sq ft DC built in far-north Aurora's Gateway\nPark that consolidated four metro-area UNFI facilities into one (opened ~2013).\nThe building footprint and dock layout match a single large modern DC, not the\nolder smaller 238k sq ft figure that some directories carry as a stale listing.",
+        "mapsUrl": "https://www.google.com/maps/@39.774031,-104.776628,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Open campus. The large white-roof DC is set well back from E 40th Ave behind open lawn and employee parking; truck driveways run unobstructed onto the dock yard. No barrier arm, sliding/swing gate, or checkpoint pinch-point observed at any entry across multiple satellite passes and Street View headings.",
+          "guardShack": "No guard booth at any entrance. Modern set-back industrial-park design with no checkpoint structure.",
+          "shipRcvSeparate": "All dock doors run along one continuous bank on the SE long face — a single dock cluster, not physically split shipping/receiving.",
+          "dropArea": "Extensive trailer-parking rows at the NE corner of the property, plus trailers staged along the SE dock apron; many parked without tractors.",
+          "dropYard": "Dedicated trailer-storage rows fill the NE corner lot, distinct from active dock staging.",
+          "postGateStaging": "Very deep paved dock yard on the SE side gives generous interior queueing room ahead of the doors.",
+          "urbanRural": "Aurora / Gateway Park, Denver metro. A residential subdivision abuts the site directly to the north and other large warehouses surround it — dense developed metro fabric, classified Urban.",
+          "buildingCount": "One large warehouse (~535,000 sq ft Gateway Park DC). The smaller buildings to the south are separate tenants, not part of this site.",
+          "entryLanes": "Truck driveways are uncontrolled; lane counts are nominal single-lane drive widths."
+        }
+      },
+      {
+        "id": "15-prescott-wi",
+        "name": "UNFI - Prescott WI DC (Twin Cities)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 44.76235,
+          "lng": -92.78495
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 44.76075,
+            "west": -92.7878,
+            "north": 44.76445,
+            "east": -92.7834
+          },
+          "truckGate": {
+            "south": 44.7611,
+            "west": -92.7872,
+            "north": 44.7617,
+            "east": -92.7864
+          },
+          "dropYards": [
+            {
+              "south": 44.76155,
+              "west": -92.7864,
+              "north": 44.7633,
+              "east": -92.7856
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 44.76155,
+              "west": -92.7858,
+              "north": 44.7642,
+              "east": -92.7849
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 44,
+          "trailersVisible": 38,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 36,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate (44.762586, -92.784517) landed directly on the roof of a\nlarge white distribution building in an edge-of-town industrial park on the\nnorthwest side of Prescott, WI. Web search corroborated the address\n(TruckMap, Yahoo Local, UNFI locations page) and the facility profile: a LEED\nGold food-distribution warehouse, originally ~300,000 sq ft and expandable to\n600,000 sq ft, with dry storage, cold storage, a main office, an Albert's\nOrganics office, shipping, and a remote truck-maintenance facility — all\nvisible on the site. The DC serves the Minneapolis-St. Paul metro (~24 mi\nsoutheast of St. Paul). Identification is unambiguous; building locked.",
+        "mapsUrl": "https://www.google.com/maps/@44.76235,-92.78495,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point where the truck driveway leaves Eagle Ridge Dr. The entrance from the public road is an open paved driveway directly into the lot; satellite at z19 and three Street-View headings along Eagle Ridge Dr show no gate structure and no perimeter fence line.",
+          "guardShack": "No staffed booth at the entrance. No 1-3-vehicle-footprint structure beside the truck lane in any imagery.",
+          "remoteGs": "False because there is no truck gate at all (remoteGs requires a gate present).",
+          "postGateStaging": "Wide paved truck court on the west side between the drop yard and the dock apron gives ample interior holding room before the dock doors.",
+          "drivewayLong": "The internal truck approach from Eagle Ridge Dr loops several hundred feet to the west-side docks; easily holds a 3+ truck queue.",
+          "dropYard": "Long bank of drop trailers parked without tractors along the west yard, north of the dock apron, distinct from active dock staging.",
+          "dockDoorCount": "~44 estimate; doors run nearly the full length of the west building face, partly shadowed/occluded by backed-in trailers in overhead imagery.",
+          "buildingCount": "Main DC plus a separate smaller building at the SW corner (the remote truck-maintenance facility named in UNFI/ESI project descriptions).",
+          "railServed": "No rail spur runs into the property; no track visible adjacent.",
+          "urbanRural": "Edge-of-town industrial park in Prescott WI (Pierce County), open farm fields on the north and east property lines; rural per rubric."
+        }
+      },
+      {
+        "id": "16-racine-sturtevant-wi",
+        "name": "UNFI - Racine WI DC (Sturtevant)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "trailerParkingCapacity",
+          "buildingCount"
+        ],
+        "center": {
+          "lat": 42.6945,
+          "lng": -87.9187
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.6895,
+            "west": -87.922,
+            "north": 42.6976,
+            "east": -87.9144
+          },
+          "truckGate": {
+            "south": 42.6962,
+            "west": -87.9154,
+            "north": 42.6972,
+            "east": -87.9144
+          },
+          "dropYards": [
+            {
+              "south": 42.692,
+              "west": -87.9168,
+              "north": 42.697,
+              "east": -87.915
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 42.6915,
+              "west": -87.9172,
+              "north": 42.6972,
+              "east": -87.9162
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 54,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 55,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster entry was city-level only (\"Racine, WI\", geocode displaced ~1,264 m).\nWeb search resolved the actual facility: UNFI's southeast-Wisconsin LEED Gold\nDC is 3138 County Highway H, Sturtevant, WI 53177 (Waze, the Village of\nSturtevant business directory, USGBC project page). It is the facility the\nroster labels \"Racine WI DC\" — Sturtevant is in Racine County, adjacent to the\ncity of Racine. Press describes it as built in 2014, ~425,000-450,000 sq ft,\n54 dock doors, \"southeast of Durand Avenue and 105th Street.\"\n\nCounty Highway H = 105th Street; Durand Avenue = WI-11. The intersection of\nthose two roads is the NE anchor. Probing south/southwest of it located a\nlarge white-roofed DC on the west side of Highway H, with docks facing the\nroad, drop trailers in a wide truck court, and the on-site storm-water",
+        "mapsUrl": "https://www.google.com/maps/@42.69450,-87.91870,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Truck driveway curves off County Highway H (105th St) into the truck court as an open paved entrance. z20 satellite of the road entrance and three Street-View headings along Highway H show no barrier arm, no sliding gate, and no checkpoint pinch-point. No perimeter fence at the road.",
+          "guardShack": "No staffed booth at the entrance. No 1-3-vehicle-footprint structure beside the truck lane in any view.",
+          "remoteGs": "False — requires a gate; there is none.",
+          "postGateStaging": "Very wide paved truck court on the east side of the building between the dock face and Highway H gives ample interior holding before the docks.",
+          "drivewayLong": "The truck court easily holds a long (3+) truck queue; the curved approach runs several hundred feet.",
+          "dockDoors": "Docks run nearly the full length of the long east building face; UNFI/USGBC materials cite 54 dock doors for semis at this 425,000-450,000 sq ft facility — `dockDoors` 50+.",
+          "dropArea": "Large bank of drop trailers parked without tractors fills the east-side truck court — `dropArea` 50+; `dropYard: true`.",
+          "buildingCount": "Main DC plus a separate smaller building at the SW corner of the property; the second structure's exact ownership/use is not confirmed from imagery — could be a related shop/annex or a separate parcel.",
+          "railServed": "No rail spur enters the property.",
+          "urbanRural": "Edge-of-town industrial corridor in Sturtevant/Mount Pleasant WI, with open farm fields on the west and south property lines; rural per rubric.",
+          "status": "UNFI announced (March 2026) the permanent closure of this Sturtevant facility, eliminating 443 jobs; consolidation absorbs volume into surviving Midwest DCs. Audit reflects the yard's physical state from current imagery."
+        }
+      },
+      {
+        "id": "17-greenwood-in",
+        "name": "UNFI - Greenwood IN DC (Indianapolis)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible"
+        ],
+        "center": {
+          "lat": 39.61015,
+          "lng": -86.05775
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.60855,
+            "west": -86.0592,
+            "north": 39.6119,
+            "east": -86.056
+          },
+          "truckGate": {
+            "south": 39.61105,
+            "west": -86.05945,
+            "north": 39.6115,
+            "east": -86.0588
+          },
+          "dropYards": [
+            {
+              "south": 39.6096,
+              "west": -86.057,
+              "north": 39.61175,
+              "east": -86.056
+            },
+            {
+              "south": 39.609,
+              "west": -86.0592,
+              "north": 39.61175,
+              "east": -86.0584
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.609,
+              "west": -86.0572,
+              "north": 39.61175,
+              "east": -86.0566
+            },
+            {
+              "south": 39.609,
+              "west": -86.0587,
+              "north": 39.61175,
+              "east": -86.0581
+            },
+            {
+              "south": 39.6115,
+              "west": -86.0587,
+              "north": 39.61195,
+              "east": -86.0566
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 95,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 23.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate (39.61008, -86.057658) lands directly on a large\nsingle-story distribution building in a Greenwood (Indianapolis-metro)\nindustrial park. Street View along the west road (Commerce Pkwy E Dr) shows a\nclear \"unfi\" wall sign on the building, confirming identity. Imagery is\n2025-vintage Street View and 2026 Maxar satellite.\n\nActive-status note: the roster flagged that some directories list Greenwood\nas closed (one Yellow Pages listing reads \"CLOSED\"). However, the May-2025\nStreet View shows the UNFI sign in place, tractors and trailers actively parked\nin the yard, and the lot in use; a Yelp listing was \"Updated March 2026.\" The\nfacility presents as operational in current imagery. The closed-listing is\ntreated as stale directory data, but worth a one-line verification in discovery.",
+        "mapsUrl": "https://www.google.com/maps/@39.61015,-86.05775,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Main truck entrance is mid-west side off Commerce Pkwy E Dr. Street View shows a wide paved curb-cut with yellow bollards opening directly onto the truck yard — no barrier arm and no swing/sliding gate across the truck lane. Open driveway = truckGate false.",
+          "guardShack": "No staffed booth at or beside the truck entrance in any Street View pass; uncontrolled open driveway.",
+          "remoteGs": "False — no truck gate, so no remote check-in implied.",
+          "postGateStaging": "Large paved yard between the entrance and the dock faces gives ample internal holding room.",
+          "dockDoors": "Dense dock-door banks with trailers backed in along the west, east, and north faces — well over 50 doors total (estimate ~95).",
+          "dropArea": "Long rows of unhitched trailers in drop position on west, east, and north yards — 50+ band.",
+          "urbanRural": "Inside the Indianapolis metro fabric (Greenwood) — industrial park abutting a dense residential subdivision to the east; Urban.",
+          "dropYard": "Dedicated trailer-storage rows separate from active dock staging on all three truck faces.",
+          "scale": "No truck scale / weigh pad visible in the truck path.",
+          "railServed": "No rail spur enters the property."
+        }
+      },
+      {
+        "id": "18-gilroy-ca",
+        "name": "UNFI - Gilroy CA DC",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 36.99605,
+          "lng": -121.545
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 36.9942,
+            "west": -121.5476,
+            "north": 36.999,
+            "east": -121.543
+          },
+          "truckGate": {
+            "south": 36.9978,
+            "west": -121.5448,
+            "north": 36.9986,
+            "east": -121.5439
+          },
+          "dropYards": [
+            {
+              "south": 36.9964,
+              "west": -121.5462,
+              "north": 36.9985,
+              "east": -121.5442
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 36.9966,
+              "west": -121.5464,
+              "north": 36.9986,
+              "east": -121.5452
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 32,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 33,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate (36.995984, -121.54485) landed on a large\nrooftop-solar-clad distribution building in the Gilroy industrial fringe.\nWeb search confirmed the address (Yelp, BBB, UNFI press release): a ~425,000\nsq ft DC at 6351 Cameron Blvd that opened in 2016, built to LEED Gold, serving\nNorthern California natural/organic/specialty distribution. A 2026-04 Street\nView along Cameron Blvd shows the UNFI sign and logo with flagpoles at the\nproperty front — positive identification. The large building immediately to\nthe NW is a separate, unrelated facility on its own parcel. Building locked.",
+        "mapsUrl": "https://www.google.com/maps/@36.99605,-121.54500,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "The truck court connects to Cameron Blvd by open paved driveways. z19 satellite of both the NE and SW connections and 2026-04 Street-View along Cameron Blvd show no barrier arm, no sliding gate, no checkpoint pinch-point and no perimeter fence at the road. UNFI sign and flagpoles sit at the front, but the truck entrances are open.",
+          "guardShack": "No staffed booth at the truck entrance. No 1-3-vehicle-footprint structure beside the truck lane in any imagery.",
+          "remoteGs": "False — requires a gate; there is none.",
+          "postGateStaging": "Wide paved truck court on the NW side between the dock face and the perimeter road gives ample interior holding before the docks.",
+          "drivewayLong": "The truck court runs the full NW length of the building; easily holds a 3+ truck queue.",
+          "dockDoors": "~40 estimate; docks run the full NW building face, partly shadowed/occluded by backed-in trailers in overhead imagery. Facility is a ~425,000 sq ft DC opened 2016.",
+          "dropArea": "Bank of drop trailers parked without tractors in the NW truck court — `dropArea` 25-50; `dropYard: true`.",
+          "buildingCount": "Single DC building (rooftop solar). The large building immediately NW is a separate, unrelated facility on its own parcel.",
+          "railServed": "No rail spur enters the property.",
+          "urbanRural": "Edge-of-town in the Gilroy industrial fringe (south Santa Clara County), bordered by active row-crop farmland on the south and west; rural per rubric.",
+          "siteAreaAcres": "~33 acres for the developed footprint; additional undeveloped farmland lies on the SE of the parcel and is excluded from the active-yard perimeter."
+        }
+      },
+      {
+        "id": "19-rocklin-ca",
+        "name": "UNFI - Rocklin CA DC (Western Region)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 38.8137,
+          "lng": -121.2832
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.8113,
+            "west": -121.2856,
+            "north": 38.8161,
+            "east": -121.281
+          },
+          "truckGate": {
+            "south": 38.8146,
+            "west": -121.2848,
+            "north": 38.8156,
+            "east": -121.2838
+          },
+          "dropYards": [
+            {
+              "south": 38.8147,
+              "west": -121.2843,
+              "north": 38.8156,
+              "east": -121.2823
+            },
+            {
+              "south": 38.812,
+              "west": -121.2822,
+              "north": 38.8152,
+              "east": -121.2815
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 38.813,
+              "west": -121.2844,
+              "north": 38.8154,
+              "east": -121.2836
+            },
+            {
+              "south": 38.8147,
+              "west": -121.2838,
+              "north": 38.8156,
+              "east": -121.2822
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 65,
+          "trailerParkingCapacity": 100,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 38,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate (38.81344, -121.282819) landed on a large gray-roofed\ndistribution building with extensive rooftop solar in Rocklin (Sacramento\nmetro). Web search confirmed the address (Yelp, Waze, ChamberOfCommerce,\nPanjiva): UNFI Western Region Division, 1101 Sunset Blvd, Rocklin CA 95765 —\nthe legacy-UNFI West region DC, accessed from I-65 via Blue Oaks Blvd / Sunset\nBlvd. Panjiva trade records confirm Whole Foods inbound through this site.\nBuilding positively identified and locked.",
+        "mapsUrl": "https://www.google.com/maps/@38.81370,-121.28320,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No controlled truck entrance. The truck court wraps the W, N and E faces and connects to the surrounding street network by open paved driveways. z19 satellite of every entry point and 2020-era Street-View on Sunset Blvd and the SE service road show no barrier arm, no sliding gate, no guard booth and no perimeter fence. Open-access urban infill DC.",
+          "guardShack": "No staffed booth anywhere on the truck circulation.",
+          "remoteGs": "False — requires a gate; there is none.",
+          "postGateStaging": "Wide paved truck courts on the W and N sides give ample interior holding before the docks.",
+          "drivewayLong": "The truck courts run the full building length; easily hold 3+ truck queues.",
+          "entryExitSeparate": "Truck circulation enters and leaves the wrap-around court at more than one point on different building faces (W dock court, N drop yard) rather than through a single shared gate group.",
+          "dockDoors": "Large facility with dock banks on the W/SW face and the N face; combined door count estimated ~70 — `dockDoors` 50+.",
+          "dropArea": "Two distinct drop-trailer concentrations — a N-face drop yard and a long E-face trailer row — both full of trailers without tractors; `dropArea` 50+, `dropYard: true`.",
+          "shipRcvSeparate": "Two physically separate dock clusters on different building faces (W/SW and N) suggest split shipping/receiving; medium confidence from overhead imagery only.",
+          "buildingCount": "Main DC plus a separate 2-story glass office building at the W end of the property.",
+          "railServed": "No rail spur enters the property.",
+          "urbanRural": "Dense Rocklin (Sacramento metro) setting — apartments to the north, single-family residential to the east, retail/industrial to the south and west; Urban per rubric.",
+          "truckGateCount": "Two open truck-court access points (no gate structures); counted as truck entrances per the metric definition."
+        }
+      },
+      {
+        "id": "20-moreno-valley-ca",
+        "name": "UNFI - Moreno Valley CA DC",
+        "type": "Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 33.9124,
+          "lng": -117.2762
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.9114,
+            "west": -117.27895,
+            "north": 33.9136,
+            "east": -117.27355
+          },
+          "truckGate": {
+            "south": 33.9129,
+            "west": -117.27875,
+            "north": 33.9134,
+            "east": -117.2779
+          },
+          "dropYards": [
+            {
+              "south": 33.9132,
+              "west": -117.27885,
+              "north": 33.9136,
+              "east": -117.2736
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.91305,
+              "west": -117.2788,
+              "north": 33.91325,
+              "east": -117.2736
+            }
+          ],
+          "staging": {
+            "south": 33.91305,
+            "west": -117.2779,
+            "north": 33.9134,
+            "east": -117.2762
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 95,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 30.2,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied \"22450 Day St, Moreno Valley CA 92553\" with approximate\ncoordinates 33.911201, -117.2788. Probing satellite around that point and\nworking outward identified a single very large distribution building one block\nNE of the supplied point. Web research confirms UNFI operates a **613,200 sq ft\ndistribution center** in Moreno Valley — its largest Western-region facility,\nopened summer 2008 (Progressive Grocer, UNFI investor relations, Supermarket\nNews). 2025-12 Street View along Day St shows the building's office front with\nan address marker reading 14160 Day St. The roster's \"22450 Day St\" appears\nto be a stale/incorrect address; site identity is nonetheless confirmed by the\nmatching building size, the multi-temperature DC layout, and the UNFI office\nsignage. Locked center: 33.91240, -117.27620.",
+        "mapsUrl": "https://www.google.com/maps/@33.91240,-117.27620,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single controlled entrance off Day St at the NW corner of the property. 2025-12 Street View shows a wide entrance driveway with a perimeter wall/fence and a defined checkpoint where the drive enters the truck yard.",
+          "guardShack": "A small tan/beige guard booth (~1-vehicle footprint, windows on multiple sides) sits beside the inbound lane just inside the entrance. Clearly visible in 2025-12 Street View from two angles. Staffed guarded entry.",
+          "remoteGs": "False — a physical guard booth is present, so check-in is staffed rather than kiosk/app.",
+          "drivewayLong": "The entrance drive runs a long, deep uphill approach from the Day St gate to the dock yard along the north face — comfortably holds a 3+ truck queue inside the property.",
+          "postGateStaging": "Wide paved internal truck drive between the gate and the north dock apron provides inside-the-gate holding room.",
+          "fastLaneOpportunity": "Wide gate apron and generous internal paved width along the north truck drive; physical room exists to add an express/bypass lane.",
+          "dockDoors": "613,200 sq ft DC (UNFI's largest Western-region facility, opened 2008). Long single dock bank runs the full north face of the building with trailers backed in across it; comfortably 50+, estimated ~95.",
+          "dropArea": "Striped/unstriped trailer parking along the north truck yard holds parked trailers without tractors; 25-50 band on UNFI's own yard. (Note: a much larger trailer lot NW across the road belongs to a separate adjacent tenant and is excluded.)",
+          "dropYard": "Dedicated trailer-storage rows along the north side of the property, separate from active dock staging.",
+          "urbanRural": "Inside the dense Moreno Valley / Inland Empire industrial fabric — surrounded by other large DCs and industrial buildings. Urban.",
+          "scale": "No truck scale identified in imagery.",
+          "railServed": "No rail spur enters the property.",
+          "siteAreaAcres": "Perimeter box (~245m x ~499m) yields ~30 acres for the UNFI parcel.",
+          "address": "Roster lists 22450 Day St; the on-site office address marker reads 14160 Day St and the building is the correct 613,200 sq ft UNFI Western-region DC. The 22450 figure appears to be a stale/incorrect roster address — site identity is confirmed by building size, layout and the UNFI office signage."
+        }
+      },
+      {
+        "id": "21-centralia-wa",
+        "name": "UNFI - Centralia WA DC (Pacific Northwest)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "multiStep",
+          "scale"
+        ],
+        "center": {
+          "lat": 46.7328,
+          "lng": -123.0098
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 46.73005,
+            "west": -123.0143,
+            "north": 46.73615,
+            "east": -123.0064
+          },
+          "truckGate": {
+            "south": 46.73255,
+            "west": -123.0081,
+            "north": 46.7333,
+            "east": -123.0071
+          },
+          "dropYards": [
+            {
+              "south": 46.7305,
+              "west": -123.0143,
+              "north": 46.7359,
+              "east": -123.0126
+            },
+            {
+              "south": 46.7326,
+              "west": -123.0081,
+              "north": 46.7341,
+              "east": -123.0056
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 46.7305,
+              "west": -123.0127,
+              "north": 46.736,
+              "east": -123.0119
+            },
+            {
+              "south": 46.7301,
+              "west": -123.011,
+              "north": 46.731,
+              "east": -123.0087
+            }
+          ],
+          "staging": {
+            "south": 46.7324,
+            "west": -123.0087,
+            "north": 46.7332,
+            "east": -123.0079
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 79,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinates (46.732214, -123.009518, ROOFTOP geocode) landed\ndirectly on the DC building. Web research confirms the site: UNFI's Pacific\nNorthwest Distribution Center at 4002 Galvin Rd is a **1.15 million sq ft,\nstate-of-the-art DC built on a ~77-acre site**, centrally located between\nSeattle and Portland, leased long-term and built exclusively for UNFI\n(Benaroya / UNFI press materials). It became operational H2 2019 and absorbed\nthe closing Tacoma, Auburn and Portland warehouses. The dossier confirms\nCentralia received automation upgrades. Located in the Port of Centralia\nindustrial park; adjacent buildings to the NE are separate tenants.\n\n---",
+        "mapsUrl": "https://www.google.com/maps/@46.732800,-123.009800,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Whole dock yard is chain-link fenced; the access road off the public loop road enters the truck yard through a controlled vehicular gate (SPEED LIMIT 15 sign at the fence line). Confirmed in 2026-03 Street View.",
+          "guardShack": "No staffed guard booth visible in the truck lane in current satellite or Street View. Small covered structures near the entry are employee break/transit amenities, not a checkpoint. UNFI corporate procedure elsewhere uses guard houses, so a booth may exist but is not visually confirmed here — flagged uncertain.",
+          "remoteGs": "Set true because there is a controlled gate but no visually-confirmed staffed booth; check-in likely via kiosk/intercom. Verify in discovery.",
+          "multipleFacilities": "Two large connected DC buildings on the UNFI parcel (a north building and a stepped south building). Note: adjacent buildings further NE belong to separate Port of Centralia industrial-park tenants, not UNFI, and are excluded from the perimeter.",
+          "dockDoors": "1.15M sq ft DC; long dock banks run the full west face of both buildings plus the south face. 50+ band easily met; ~130 estimated.",
+          "dropArea": "Very large striped trailer drop yard along the west property edge (rows of parked trailers) plus a second drop/staging lot on the NE side. 50+ band.",
+          "drivewayLong": "Deep paved internal yard between the gate and the dock face — comfortably holds a 3+ truck queue.",
+          "fastLaneOpportunity": "Wide paved gate apron and generous internal yard width; physical room to add a bypass/express lane exists.",
+          "scale": "No truck scale identified in imagery.",
+          "siteAreaAcres": "Benaroya/UNFI public materials cite a 77-acre site; perimeter box yields ~79 acres including the fenced west yard."
+        }
+      },
+      {
+        "id": "22-ridgefield-wa",
+        "name": "UNFI - Ridgefield WA DC",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "shipRcvSeparate",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 45.8066,
+          "lng": -122.66585
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 45.8042,
+            "west": -122.668,
+            "north": 45.8087,
+            "east": -122.6628
+          },
+          "truckGate": {
+            "south": 45.8079,
+            "west": -122.66445,
+            "north": 45.8086,
+            "east": -122.6638
+          },
+          "dropYards": [
+            {
+              "south": 45.8056,
+              "west": -122.6644,
+              "north": 45.8082,
+              "east": -122.663
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 45.8054,
+              "west": -122.66445,
+              "north": 45.8082,
+              "east": -122.66415
+            },
+            {
+              "south": 45.8054,
+              "west": -122.6679,
+              "north": 45.808,
+              "east": -122.6676
+            }
+          ],
+          "staging": {
+            "south": 45.8079,
+            "west": -122.66445,
+            "north": 45.8085,
+            "east": -122.6636
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 150,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 50,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied \"7909 S Union Ridge Pkwy, Ridgefield WA 98642\" with\ncoordinates 45.805563, -122.66348. Probing satellite at the supplied point\nlanded directly on a very large distribution building. Waze and TruckMap both\nlist 7909 S Union Ridge Pkwy as the UNFI Ridgefield Distribution Center, and\n2025-09 Street View confirms a posted \"TRUCK ENTRANCE\" sign at the property\nfrontage. Web research confirms UNFI's Ridgefield DC was a 232,000 sq ft\nfacility expanded by 541,000 sq ft (to ~800,000 sq ft total) as part of UNFI's\n2019 Pacific Northwest distribution-network optimization. Locked center:\n45.80660, -122.66585.\n\nA separate large logistics facility with a distinctive colorful (orange/green)\ntrailer fleet sits immediately NW across the road — a different operator,\nexcluded from the UNFI perimeter.",
+        "mapsUrl": "https://www.google.com/maps/@45.80660,-122.66585,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Dedicated controlled truck entrance off S Union Ridge Pkwy at the NE corner — a posted 'TRUCK ENTRANCE' sign at the parkway (confirmed in 2025-09 Street View), a structured entrance island and painted directional lane arrows where the drive meets the truck yard.",
+          "guardShack": "No staffed guard booth could be visually confirmed. The truck entrance is heavily screened by a landscaped berm and conifer trees, and no Street View pano penetrates past the parkway frontage. A booth may exist but is not imaging-confirmed — flagged uncertain.",
+          "remoteGs": "Set true because a controlled truck gate exists but no booth is visually confirmed; check-in is likely kiosk/intercom. Verify in discovery.",
+          "drivewayLong": "Long entrance drive from the parkway gate into a very large open truck yard along the east face — comfortably holds a 3+ truck queue inside the property.",
+          "postGateStaging": "Large paved truck yard inside the gate before the dock apron offers ample inside-the-gate holding room.",
+          "fastLaneOpportunity": "Wide gate apron and a very large internal truck yard; clear physical room to add an express/bypass lane.",
+          "dockDoors": "~800,000 sq ft DC (232,000 sq ft original + 541,000 sq ft 2019 expansion per UNFI Pacific Northwest optimization announcement). Long dock banks run BOTH the east and west faces of the building with trailers backed in; 50+ band, ~150 doors estimated.",
+          "shipRcvSeparate": "Two physically separate dock clusters on different building faces (a west-face dock bank and an east-face dock bank), consistent with separate shipping vs. receiving operations. Medium confidence — flagged.",
+          "dropArea": "Large striped trailer drop yard on the east side holds many rows of parked trailers without tractors, plus a covered canopy structure among the rows; 50+ band.",
+          "dropYard": "Dedicated trailer-storage drop yard on the east side, separate from active dock staging.",
+          "urbanRural": "Ridgefield WA — edge-of-town location surrounded by farmland, woods and low-density rural residential; part of a small industrial park (Discovery Ridge area). Rural per the rubric (small-town/edge-of-town setting).",
+          "scale": "No truck scale identified in imagery.",
+          "railServed": "No rail spur enters the property.",
+          "siteAreaAcres": "Perimeter box (~501m x ~404m) yields ~50 acres.",
+          "address": "Confirmed 7909 S Union Ridge Pkwy, Ridgefield WA via Waze/TruckMap listings; given coordinates landed directly on the building. A separate large logistics facility (with a colorful orange/green trailer fleet) sits just NW and is a different operator — excluded."
+        }
+      },
+      {
+        "id": "25-vernon-ca",
+        "name": "UNFI - Vernon CA DC (Los Angeles / Albert's Organics West)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "dropArea",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 33.9994,
+          "lng": -118.2217
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.99875,
+            "west": -118.2227,
+            "north": 33.99985,
+            "east": -118.22075
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 33.99905,
+              "west": -118.2212,
+              "north": 33.99975,
+              "east": -118.22075
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 4,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied only city-level, APPROXIMATE coordinates (34.003903,\n-118.230073) — these landed ~1km NW in the generic Vernon industrial grid, on\nno UNFI property. Web research identified the UNFI presence in Vernon as\nAlbert's Organics West Division, the UNFI Fresh certified-organic produce\ndistributor, at 2724 Leonis Blvd. That address geocoded ROOFTOP to\n33.99958, -118.22139. Street View along Leonis Blvd (heading 180° from the road\npano) shows the building's street number \"2724\" on the office facade —\na positive identity confirmation. The locked building center is ~33.99940,\n-118.22170, the warehouse immediately south of Leonis Blvd.\n\n---",
+        "mapsUrl": "https://www.google.com/maps/@33.99940,-118.22170,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed. Albert's Organics West Division (UNFI Fresh produce/specialty distributor) at 2724 Leonis Blvd, Vernon, CA 90058. Address geocoded ROOFTOP to 33.99958,-118.22139; Street View at heading 180 from the road pano shows the building street number '2724' on the office facade, positively confirming identity. Locked building center ~33.99940,-118.22170 (a single warehouse south of Leonis Blvd).",
+          "truckGate": "No controlled truck entrance. This is a dense Vernon (LA industrial core) infill parcel; the warehouse meets the street with an open driveway and dock apron. No barrier arm, sliding gate, or checkpoint pinch-point visible at z19-z20 satellite or in Street View along Leonis Blvd.",
+          "guardShack": "None. No booth structure at any driveway. remoteGs=false because there is no gate.",
+          "railServed": "TRUE - an active rail spur curves along the building's south and west edges, a legacy Vernon industrial siding running right against the warehouse wall.",
+          "dockDoors": "~22 dock doors estimated along the east face of the building facing a small paved court; band 10-25. Refrigerated produce DC - large rooftop refrigeration condenser units (banks of circular evaporator fans) confirm a reefer facility.",
+          "drivewayShort": "Tight urban site - dock apron holds only 1-2 trucks deep; no room for a 3-truck queue.",
+          "backupSensitive": "Leonis Blvd is a busy Vernon arterial; any truck queue at the dock apron would back directly onto the public road / sidewalk with negligible stacking room.",
+          "dropArea": "Minimal - a small east-side yard fits a handful of parked trailers; no dedicated drop lot. Estimate 0-10.",
+          "siteAreaAcres": "~4 acres - compact single-building parcel; the perimeter box is an estimate, this is a tightly-built infill lot with no fenced setback."
+        }
+      },
+      {
+        "id": "26-auburn-wa",
+        "name": "UNFI - Auburn WA DC (Seattle)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 47.32655,
+          "lng": -122.24905
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 47.3253,
+            "west": -122.2504,
+            "north": 47.3279,
+            "east": -122.247
+          },
+          "truckGate": {
+            "south": 47.326,
+            "west": -122.2504,
+            "north": 47.3264,
+            "east": -122.2499
+          },
+          "dropYards": [
+            {
+              "south": 47.32555,
+              "west": -122.2496,
+              "north": 47.32625,
+              "east": -122.2472
+            },
+            {
+              "south": 47.327,
+              "west": -122.2496,
+              "north": 47.3277,
+              "east": -122.2473
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 47.32635,
+              "west": -122.2496,
+              "north": 47.32695,
+              "east": -122.247
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 18,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster gave only city-level coordinates (47.307323, -122.228453, ~1.5 km\nmove) that landed in downtown Auburn — retail, no DC. Research resolved the\nactual site:\n\n- UNFI operated a 323,000 sq ft DC in Auburn, WA as one of five PNW\n  facilities. UNFI's Feb 2019 press release announced closing the Auburn,\n  Tacoma and Portland warehouses once the new Centralia DC (roster idx 21)\n  and expanded Ridgefield DC (idx 22) came online; customer transition\n  completed early 2020.\n- LoopNet lists \"United Natural Foods - Valley Centre Bldg 3\" at\n  2530 B St NW, Auburn, WA 98001, APN/Parcel 000460-0043 — 181,300 sq ft\n  on 8.13 acres, M1 zoning. A CoStar headline (\"United Natural Foods Renews,\n  Expands in Auburn\") confirms a long-term UNFI lease here.\n- UNFI's operational footprint (323k sq ft) spanned Bldg 3 plus expansion",
+        "mapsUrl": "https://www.google.com/maps/@47.32655,-122.24905,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "UNFI's 323,000 sq ft Auburn WA DC. Resolved to the Valley Centre industrial complex on B St NW, Auburn 98001 - LoopNet/CoStar tie the 'United Natural Foods - Valley Centre Bldg 3' name and APN 000460-0043 to 2530 B St NW (181,300 sq ft on 8.1 acres). UNFI occupied Bldg 3 plus expansion space; campus center locked at 47.32655,-122.24905.",
+          "status": "UNFI publicly announced (2019) closure of the Auburn DC, consolidating PNW volume into the new Centralia DC (idx 21) and expanded Ridgefield DC (idx 22); customer transition completed early 2020. Imagery still shows an intensely active reefer/dry-van DC operation with yard hostlers - whether UNFI or a successor tenant, the physical yard is a working large-scale grocery DC.",
+          "truckGate": "Chain-link perimeter fence runs the full B St NW frontage; truck driveways are open gaps in the fence with no barrier arm or booth visible from 2025-04 Street View. Classed truckGate true on the controlled-checkpoint pinch-point of a fenced commercial yard, but flagged uncertain - no hard barrier confirmed.",
+          "guardShack": "No guard booth visible at any driveway along B St NW; remoteGs marked true on that basis (gate with no shack implies kiosk/call-box check-in).",
+          "multipleFacilities": "Valley Centre is a multi-building campus - 4+ large warehouse buildings share the truck court and trailer rows.",
+          "dropYard": "Extensive trailer storage rows on the south and north sides of the truck court, full of reefers - clear dedicated drop-yard, 50+ band.",
+          "yardMetrics": "Counts are honest estimates from z19-z20 imagery over a multi-building campus; dock door count spans several building faces and is approximate."
+        }
+      },
+      {
+        "id": "28-joliet-il",
+        "name": "UNFI - Joliet IL DC (Chicago)",
+        "type": "Distribution Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "siteAreaAcres",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 41.5062,
+          "lng": -88.0187
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.5036,
+            "west": -88.0203,
+            "north": 41.5088,
+            "east": -88.017
+          },
+          "truckGate": {
+            "south": 41.5043,
+            "west": -88.0188,
+            "north": 41.50475,
+            "east": -88.018
+          },
+          "dropYards": [
+            {
+              "south": 41.5042,
+              "west": -88.0201,
+              "north": 41.5056,
+              "east": -88.019
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.5045,
+              "west": -88.0176,
+              "north": 41.5084,
+              "east": -88.017
+            }
+          ],
+          "staging": {
+            "south": 41.50455,
+            "west": -88.0189,
+            "north": 41.5064,
+            "east": -88.0179
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 38,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied only city-level, APPROXIMATE coordinates (41.524951,\n-88.082970) — ~8km off the actual site. Web research resolved the UNFI Joliet\nDC to 2601 Ellis Rd, Joliet, IL 60433: TruckMap lists \"UNFI JOLIET 2601\nEllis Dr\" and Waze names a dedicated \"UNFI - Truck Entrance\" at 2601 Ellis Rd.\n(A related billing address, 2600 Haven Ave, sits across the road.) The Ellis Rd\naddress geocoded ROOFTOP to 41.50567, -88.01851, landing directly on a large\nmodern warehouse. Locked building center ~41.50620, -88.01870. Grocery Dive /\ntrade press: this is the Chicago-metro DC that absorbed Sturtevant WI volume,\nand UNFI is investing here in full-case automation and an advanced WMS.\n\n---",
+        "mapsUrl": "https://www.google.com/maps/@41.50620,-88.01870,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed. UNFI Joliet DC at 2601 Ellis Rd, Joliet, IL 60433 (street address geocoded ROOFTOP to 41.50567,-88.01851; Waze and TruckMap both name a 'UNFI - Truck Entrance' at 2601 Ellis Rd). The roster's city-level coords (41.5250,-88.0830) were ~8km off; corrected to the resolved Ellis Rd building. A modern logistics-park warehouse running N-S in the Joliet/CenterPoint-area industrial corridor; trade press notes UNFI is investing in full-case automation here. Absorbed Sturtevant WI volume per roster.",
+          "truckGate": "TRUE - the truck driveway from Ellis Rd runs north into the property to a checkpoint. At z20 a clear guard-booth structure sits in the lane with a circular landscaped island, lane control and a concrete checkpoint apron; perimeter chain-link/metal fencing runs the property line (visible behind the Ellis Rd treeline in Street View).",
+          "guardShack": "TRUE - small staffed booth (~1-vehicle footprint, beside the lane on the landscaped island) at the truck entrance. remoteGs=false accordingly.",
+          "drivewayLong": "TRUE - the gate sits well back from Ellis Rd behind a wide landscaped buffer; the gate-to-dock approach and internal yard easily hold a 3+ truck queue.",
+          "postGateStaging": "TRUE - large paved yard inside the gate before the dock faces, with marked trailer rows used as staging/holding.",
+          "fastLaneOpportunity": "TRUE - wide gate apron with substantial unused paved width; room to add an express/bypass lane.",
+          "dockDoors": "50+ - long dock bank runs the east face of the warehouse with many trailers backed in; band 50+.",
+          "dropArea": "50+ - extensive trailer drop/staging yard on the south and west sides, dozens of trailers parked without tractors (orange and blue trailers visible).",
+          "dropYard": "TRUE - dedicated trailer-storage lot separate from active dock staging.",
+          "urbanRural": "Rural - edge-of-Joliet logistics park surrounded by farmland and other big-box warehouses, not dense metro fabric.",
+          "siteAreaAcres": "~38 acres estimated from the perimeter box; honest estimate from overhead imagery."
+        }
+      },
+      {
+        "id": "29-richburg-sc",
+        "name": "UNFI - Richburg SC DC (Charlotte area)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "dropArea",
+          "trailerParkingCapacity",
+          "siteAreaAcres",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 34.7098,
+          "lng": -81.0042
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.7083,
+            "west": -81.0056,
+            "north": 34.7109,
+            "east": -81.0028
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 34.7085,
+              "west": -81.0056,
+              "north": 34.7106,
+              "east": -81.0049
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 9,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied only city-level, APPROXIMATE coordinates (34.715975,\n-81.019526), which landed in rural residential Richburg town center — no\nindustrial property. Web research confirms a UNFI DC in the **L&C Distribution\nPark, Richburg SC 29729**: directories give the UNFI address as 578 / 578B L&C\nDistribution Park, and a separate LoopNet listing for the adjacent building\n546 L&C Distribution Park describes a ±109,938 sq ft industrial warehouse —\ni.e. UNFI occupies one building in a multi-building distribution park off Old\nRichburg Rd E.\n\nThe L&C Distribution Park industrial cluster sits ~1.7km SE of the roster point,\nalong a highway. Within that cluster, the audited building (locked ~34.70980,\n-81.00420) is the warehouse whose physical layout — a dock bank with dock\ncanopies and a trailer-parking apron — is most consistent with a UNFI",
+        "mapsUrl": "https://www.google.com/maps/@34.70980,-81.00420,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Resolved with medium confidence. UNFI Richburg DC sits in the L&C Distribution Park, Richburg SC 29729 (directories give 578 / 578B L&C Distribution Park; the adjacent building 546 L&C Distribution Park is a separately-listed ~110,000 sq ft warehouse). The roster's APPROXIMATE geocode landed in the rural town center ~1.7km NW; the L&C Distribution Park industrial cluster is off Old Richburg Rd E near a highway. The audited building (locked ~34.70980,-81.00420) is the warehouse in this park whose layout - a dock bank with canopies and a trailer-parking apron - is most consistent with a UNFI conventional-grocery satellite DC. Could not get UNFI signage in Street View (panos snap to the highway, not the park access road), so building identity within the multi-tenant park is not 100% certain.",
+          "truckGate": "Uncertain - no controlled gate visible at the audited building; the truck yard and dock apron appear open to the L&C Distribution Park internal road. No barrier arm or booth seen at z19. Listed uncertain because Street View could not corroborate the property line.",
+          "guardShack": "None visible. remoteGs left false (no confirmed gate).",
+          "dockDoors": "~20 doors estimated - a dock bank with a row of dark dock canopies on the building's west face, several trailers backed in; band 10-25.",
+          "dropArea": "10-25 - paved trailer apron alongside the dock bank holds parked trailers; modest drop capacity for a regional satellite DC.",
+          "dropYard": "TRUE - parked trailers staged on the apron separate from active dock positions.",
+          "drivewayLong": "Internal park road and yard give a deep approach; a multi-truck queue could form inside the park without spilling to a public road.",
+          "urbanRural": "Rural - small-town SC industrial park (Richburg) ringed by woodland; an exurban Charlotte-region DC.",
+          "siteAreaAcres": "~9 acres estimated for the audited building's parcel; the L&C park as a whole is larger."
+        }
+      },
+      {
+        "id": "30-mechanicsville-va",
+        "name": "UNFI - Mechanicsville VA DC (Richmond)",
+        "type": "Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "siteAreaAcres",
+          "scale"
+        ],
+        "center": {
+          "lat": 37.63407,
+          "lng": -77.40284
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 37.6293,
+            "west": -77.4072,
+            "north": 37.6378,
+            "east": -77.3983
+          },
+          "truckGate": {
+            "south": 37.6308,
+            "west": -77.4034,
+            "north": 37.6314,
+            "east": -77.4025
+          },
+          "dropYards": [
+            {
+              "south": 37.6307,
+              "west": -77.4066,
+              "north": 37.6334,
+              "east": -77.4048
+            },
+            {
+              "south": 37.6342,
+              "west": -77.4032,
+              "north": 37.6362,
+              "east": -77.4
+            },
+            {
+              "south": 37.6325,
+              "west": -77.3997,
+              "north": 37.6352,
+              "east": -77.3984
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 37.6343,
+              "west": -77.4072,
+              "north": 37.6362,
+              "east": -77.4043
+            },
+            {
+              "south": 37.6326,
+              "west": -77.3999,
+              "north": 37.6352,
+              "east": -77.3986
+            }
+          ],
+          "staging": {
+            "south": 37.631,
+            "west": -77.4046,
+            "north": 37.6327,
+            "east": -77.403
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 240,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 70,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster supplied city-level, APPROXIMATE coordinates (37.608756,\n-77.373314). Web research resolved the precise address to **8258 Richfood Rd,\nMechanicsville, VA 23116** (Yellow Pages, Superpages, warehouse.ninja, a UNFI\nhiring flyer). That address geocoded ROOFTOP to 37.63407, -77.40284 — landing\ndirectly on a large multi-building distribution complex. The road name\n\"Richfood Rd\" is itself the heritage tell: this is the legacy **Richfood /\nSuperValu** conventional-grocery DC that came to UNFI through the SuperValu\nacquisition. Locked center 37.63407, -77.40284.\n\n---",
+        "mapsUrl": "https://www.google.com/maps/@37.63407,-77.40284,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed. UNFI Mechanicsville DC at 8258 Richfood Rd, Mechanicsville, VA 23116 (geocoded ROOFTOP to 37.63407,-77.40284, matching the roster coords almost exactly). Legacy Richfood / SuperValu conventional-grocery distribution complex serving the Richmond mid-Atlantic region; the road name 'Richfood Rd' is itself the heritage tell.",
+          "truckGate": "TRUE - the main truck entrance off Richfood Rd / the south access road has a guard checkpoint: at z19-z20 a booth structure with a lane canopy/island, queue lanes and a checkpoint apron is visible where the truck road enters the property.",
+          "guardShack": "TRUE - small staffed booth at the entry checkpoint beside the inbound lanes. remoteGs=false accordingly.",
+          "multipleFacilities": "TRUE - a campus: the main multi-section warehouse plus a separate building cluster to the south (fleet maintenance / fuel island) and additional adjoining structures - 4+ distinct buildings.",
+          "shipRcvSeparate": "TRUE - distinct dock banks on different building faces; trailer drop yards on the west, north and east sides indicate physically separated shipping and receiving clusters typical of a large conventional-grocery DC.",
+          "dockDoors": "50+ - very large multi-section warehouse with dock banks on multiple faces; estimate ~110 doors total.",
+          "dropArea": "50+ - extensive trailer drop yards on three sides of the complex, well over 100 trailers parked in the captured imagery.",
+          "dropYard": "TRUE - multiple dedicated trailer-storage lots distinct from active dock staging.",
+          "preGateStaging": "TRUE - paved areas and staged trailers along the access road outside the checkpoint give pre-gate waiting room.",
+          "postGateStaging": "TRUE - large paved holding areas inside the gate before the dock faces.",
+          "fastLaneOpportunity": "TRUE - wide entry apron with multiple lanes and unused paved width; room for an express bypass lane.",
+          "urbanRural": "Rural - the DC sits on a wooded exurban parcel north of Richmond off a divided highway; broader setting is edge-of-metro/rural rather than dense urban fabric.",
+          "scale": "Not clearly confirmed - a weigh platform may exist near the maintenance/fuel cluster but is not unambiguous in imagery; left false and flagged uncertain.",
+          "siteAreaAcres": "~70 acres estimated from the perimeter box covering the campus and its trailer yards."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,998 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:37:32.641Z",
+  "account": {
+    "slug": "diageo",
+    "displayName": "Diageo",
+    "archetype": "beverage",
+    "siteCount": 10,
+    "coverageNote": {
+      "auditedCount": 10,
+      "estimatedFootprint": null,
+      "droppedStubCount": 0,
+      "capHit": false,
+      "note": "Audited all 10 identifiable facilities."
+    }
+  },
+  "research": {
+    "facility_count": 30,
+    "audited_facilities": 10,
+    "source": "yard-audit",
+    "confidence": "third-party",
+    "caveats": [
+      "Diageo Montgomery Manufacturing & Warehousing - Hope Hull AL: audit note mentions 'under construction'",
+      "Diageo Lebanon Distillery - Lebanon KY: audit note mentions 'under construction'"
+    ]
+  },
+  "network": {
+    "bbox": [
+      -97.13625,
+      17.7034,
+      -64.8405,
+      41.6285
+    ],
+    "archetypeMix": {
+      "#3": 7,
+      "#6": 2,
+      "#9": 1
+    },
+    "totals": {
+      "dockDoors": 295,
+      "trailerCapacity": 567,
+      "gates": 12,
+      "railServed": 1,
+      "acres": 581.8000000000001
+    },
+    "sites": [
+      {
+        "id": "01-diageo-lincolnway-rtd-canning",
+        "name": "Diageo Lincolnway RTD Canning - Plainfield IL",
+        "type": "Manufacturing - RTD Canning Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "entryExitTogether",
+          "entryExitSeparate"
+        ],
+        "center": {
+          "lat": 41.6241,
+          "lng": -88.2155
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.621,
+            "west": -88.2192,
+            "north": 41.6272,
+            "east": -88.2135
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 41.6228,
+              "west": -88.2192,
+              "north": 41.6253,
+              "east": -88.217
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.624,
+              "west": -88.2168,
+              "north": 41.6248,
+              "east": -88.216
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 2,
+          "buildingCount": 3,
+          "siteAreaAcres": 80.9,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode (41.622577, -88.215458, ROOFTOP, moved 22 m) landed on the\nsouth-central portion of a large industrial campus on the north side of W 143rd\nSt in Plainfield. Web research (Diageo 2022 press release; ProFood World;\nBrewbound) confirms Diageo's ~225,000 sq ft, ~$110M RTD canning facility\n(\"Lincolnway\") sits on the Diageo Plainfield campus, which also includes the\n1966-era bottling/warehouse operations (600+ total employees). Satellite probes\nat z16-z20 confirmed a large multi-building manufacturing complex with a major\nprocess tank farm — consistent with a beverage canning plant, not an office.\nLocked center at 41.6241, -88.2155.",
+        "mapsUrl": "https://www.google.com/maps/@41.6241,-88.2155,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Two driveways off W 143rd St (a divided campus boulevard near -88.2174 and an office drive near -88.2154). Street View at both, captured 2023-05 and 2024-07, shows open ungated entries with no barrier arm, sliding gate, or checkpoint pinch-point at the public road. Internal road junctions also show no checkpoint.",
+          "guardShack": "No staffed booth at any entrance. The small orange/red structure at the trailer-yard road junction (41.6245,-88.2173) sits at the drop-yard edge, not on the truck entry path, and is not a multi-window guard booth.",
+          "multipleFacilities": "Large connected Diageo Plainfield campus: the RTD canning plant, an attached bottling/manufacturing wing with a major tank farm to the north, plus a large detached trailer drop yard on the west. Three distinct building masses.",
+          "dropYard": "Large dedicated trailer storage lot west of the buildings, ~70 trailers visible in rows, capacity ~110.",
+          "dockDoorCount": "East dock bank of the canning building shows a bank of trailers backed in (~15-20 doors visible); additional dock positions on the north building face. Estimate 30 total, moderate confidence given roof glare.",
+          "fastLaneOpportunity": "Wide ungated campus boulevard with ample paved apron width; physical room for express/bypass lane exists.",
+          "drivewayLong": "Long internal approach from 143rd St entrances to docks/drop yard easily holds 3+ trucks.",
+          "urbanRural": "Edge-of-town Plainfield IL industrial park; farmland abuts the west side. Rural per rubric tie-break."
+        }
+      },
+      {
+        "id": "02-diageo-plainfield-distribution-warehouse",
+        "name": "Diageo Plainfield Distribution Warehouse - Plainfield IL",
+        "type": "Distribution Center / Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "guardShack",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 41.625,
+          "lng": -88.2487
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.622,
+            "west": -88.251,
+            "north": 41.6285,
+            "east": -88.2455
+          },
+          "truckGate": {
+            "south": 41.6235,
+            "west": -88.2473,
+            "north": 41.6246,
+            "east": -88.2463
+          },
+          "dropYards": [
+            {
+              "south": 41.6235,
+              "west": -88.2473,
+              "north": 41.6283,
+              "east": -88.2457
+            },
+            {
+              "south": 41.6235,
+              "west": -88.2508,
+              "north": 41.6283,
+              "east": -88.25
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.6235,
+              "west": -88.25,
+              "north": 41.6283,
+              "east": -88.2491
+            },
+            {
+              "south": 41.6235,
+              "west": -88.2474,
+              "north": 41.6283,
+              "east": -88.2466
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 160,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 81.8,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode (41.622512, -88.24745) had a 5,222 m correction flag, so it\nwas not trusted blindly. Web research confirms 25820 W 143rd St is the Diageo\nPlainfield Warehouse, operated in conjunction with Midwest Warehouse (the\nImportYeti shipment records list \"Diageo Plainfield Warehouse, 25820 W 143rd\nStreet\"; Loc8NearMe / Chamber of Commerce list \"Midwest Warehouse\" at the same\naddress). Satellite probes around the geocode point revealed one very large\ndistribution warehouse on the north side of the W 143rd St corridor, ~2.5 km\nwest of the Lincolnway canning campus. Locked center at 41.6250, -88.2487.",
+        "mapsUrl": "https://www.google.com/maps/@41.6250,-88.2487,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Large cross-dock distribution warehouse. The truck path runs from an open access road along the south side, through a gap in the employee parking, into the east dock yard. No barrier arm or sliding gate at the public road; Street View (2024-07) at the SE/SW corners shows open driveways. A small orange structure sits at the east dock-yard pinch point (41.6243,-88.2468) but reads as a yard office among trailers, not a multi-window guard booth at a gate.",
+          "guardShack": "No clearly identifiable staffed guard booth at a controlled gate. Two small structures near the east dock-yard entrance are ambiguous from overhead; flagged uncertain. No barrier arm to guard.",
+          "shipRcvSeparate": "True (moderate confidence) - the building is a true cross-dock with continuous dock doors on BOTH the east and west long faces, each face fronted by its own drop yard.",
+          "dockDoorCount": "Continuous dock doors run nearly the full length of both the ~700m east and west building faces. Estimate ~130 total doors (band 50+). Moderate confidence - count is from overhead rhythm of bays and backed-in trailers.",
+          "dropArea": "Large drop yards on both faces full of parked trailers (many without tractors); ~160 trailers visible, capacity ~220.",
+          "fastLaneOpportunity": "Wide paved access road and dock-yard aprons with ample unused width for an express/bypass lane.",
+          "multipleFacilities": "Single very large building (one mass). The separate gravel trucking lots to the SE are unrelated third-party operations, not part of this property.",
+          "urbanRural": "Edge of Plainfield IL surrounded by active farmland; Rural per rubric.",
+          "railServed": "No rail spur enters the property."
+        }
+      },
+      {
+        "id": "03-diageo-plainfield-bottling-plant",
+        "name": "Diageo Plainfield Bottling Plant - Plainfield IL",
+        "type": "Manufacturing - Bottling Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "entryLanes"
+        ],
+        "center": {
+          "lat": 41.6245,
+          "lng": -88.214
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.6222,
+            "west": -88.2168,
+            "north": 41.6276,
+            "east": -88.2118
+          },
+          "truckGate": {
+            "south": 41.6238,
+            "west": -88.2134,
+            "north": 41.6244,
+            "east": -88.2128
+          },
+          "dropYards": [
+            {
+              "south": 41.6224,
+              "west": -88.2138,
+              "north": 41.627,
+              "east": -88.2122
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.6224,
+              "west": -88.2138,
+              "north": 41.627,
+              "east": -88.213
+            }
+          ],
+          "staging": {
+            "south": 41.6235,
+            "west": -88.213,
+            "north": 41.6244,
+            "east": -88.212
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 61.8,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode (41.624158, -88.213886) carried a 4,526 m correction flag.\nWeb research confirms 24440 W 143rd St is Diageo's legacy Plainfield bottling\nplant: opened 1966 as a gin distiller/bottler, expanded with a $120M project in\n2013, now Diageo's largest North American bottling operation — five\nbottling/packaging lines, ~600 employees, on a 62-acre site (Patch; Diageo\npress; D&B). Satellite probing showed the plant occupies the eastern core of\nthe large connected Diageo Plainfield campus that also includes the Lincolnway\nRTD canning facility (roster idx 1) and a process tank farm. Locked center at\n41.6245, -88.2140.",
+        "mapsUrl": "https://www.google.com/maps/@41.6245,-88.2140,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "TRUE. Street View (2024-07) of the east dock yard shows a sliding gate across the truck driveway with a STOP sign and a numbered gate sign ('GATE 6'), set in a continuous chain-link perimeter fence. The legacy bottling plant runs a secured, fenced dock yard - distinct from the open canning campus next door.",
+          "guardShack": "TRUE. A small red-roofed guard booth (~1-vehicle footprint, windows) sits beside the truck lane on the east side of the gate, visible in Street View at 41.6241,-88.2130.",
+          "remoteGs": "False - a staffed booth is present, so this is not a remote/kiosk check-in.",
+          "multipleFacilities": "True - the bottling plant is part of the larger connected Diageo Plainfield campus shared with the Lincolnway RTD canning facility and a process tank farm; multiple large building masses on one campus.",
+          "dropYard": "Fenced east dock yard holds parked trailers alongside the dock bank.",
+          "dockDoorCount": "Long bank of dock doors on the east building face with trailers backed in; ~45 doors estimated (band 25-50), moderate confidence from Street View and overhead.",
+          "dropArea": "~35 trailers visible in the fenced dock yard, capacity ~60 (band 10-25 for tractorless drop trailers specifically; flagged uncertain).",
+          "truckGateCount": "At least two numbered gates referenced on signage ('GATE 6'); estimated 2 active truck gates into the fenced yard.",
+          "urbanRural": "Edge-of-town Plainfield IL industrial corridor with adjacent farmland; Rural per rubric.",
+          "railServed": "A rail line runs east of the campus but no spur enters the bottling-plant property.",
+          "fastLaneOpportunity": "Gate apron is modest; no obvious unused width for an express bypass lane."
+        }
+      },
+      {
+        "id": "04-diageo-montgomery-manufacturing-warehousing",
+        "name": "Diageo Montgomery Manufacturing & Warehousing - Hope Hull AL",
+        "type": "Manufacturing & Warehousing Facility",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "preGateStaging",
+          "postGateStaging",
+          "drivewayLong",
+          "drivewayShort",
+          "backupSensitive",
+          "entryExitTogether",
+          "entryExitSeparate",
+          "entryLanes",
+          "exitLanes",
+          "fastLaneOpportunity",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "scale",
+          "dropYard",
+          "multiStep",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "truckGateCount"
+        ],
+        "center": {
+          "lat": 32.2785,
+          "lng": -86.3645
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.2748,
+            "west": -86.3672,
+            "north": 32.282,
+            "east": -86.3622
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 32.279,
+              "west": -86.3658,
+              "north": 32.2808,
+              "east": -86.364
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 93.2,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode (32.279069, -86.36396) carried an 8,043 m correction flag.\nWeb research confirms 7000 Celebration Way, Hope Hull AL is Diageo's new\nMontgomery manufacturing & warehousing facility — a $415M, 360,000 sq ft plant\nthat officially opened April 21, 2026 (Diageo press releases 2025/2026; WSFA;\nThe Bama Buzz). Satellite probing around the geocode point revealed two large\nbuildings under construction in a logistics park south of Montgomery, off I-65,\nconsistent with the press descriptions. Location is confirmed with high\nconfidence; locked center at 32.2785, -86.3645.",
+        "mapsUrl": "https://www.google.com/maps/@32.2785,-86.3645,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "_general": "Brand-new $415M facility, officially opened April 21, 2026. The latest available satellite imagery (Maxar) is from the construction phase: roofs partially installed, yards graded but unpaved, no finished gates/fences/docks/trailer lots visible. Location is confirmed with HIGH confidence, but most yard-classification fields cannot be reliably determined from construction-era imagery and are flagged uncertain.",
+          "location": "Positively identified: 7000 Celebration Way, Hope Hull AL. Two large buildings under construction in a logistics park ~south of Montgomery off I-65, matching Diageo press releases and WSFA coverage of the 360,000 sq ft manufacturing + warehousing site.",
+          "multipleFacilities": "Confirmed - two distinct large buildings on one campus: a manufacturing building (north) and a warehouse building (south).",
+          "buildingCount": "2 (manufacturing + warehouse).",
+          "dockDoors": "Estimated band 25-50 - a 360K sq ft warehousing operation typically has a substantial dock bank; the warehouse building's south/west face is the likely dock location, but doors are not yet built/visible. Low confidence.",
+          "truckGate": "Cannot confirm - no finished gate visible in construction imagery. Defaulted false but flagged uncertain; a new automated $415M plant may well install a controlled gate.",
+          "guardShack": "Cannot confirm from imagery - flagged uncertain.",
+          "trailersVisible": "0 - no operational trailers in construction-era imagery (only construction equipment and material laydown).",
+          "railServed": "No rail spur visible entering the property; the site sits in a road-served logistics park.",
+          "urbanRural": "Hope Hull AL - rural/edge-of-metro south of Montgomery, surrounded by farmland and woods. Rural.",
+          "highlyAutomated": "Press notes the facility uses robotics, automated blending, and five on-site AGVs - relevant operational context though not a classification field."
+        }
+      },
+      {
+        "id": "05-diageo-lebanon-distillery",
+        "name": "Diageo Lebanon Distillery - Lebanon KY",
+        "type": "Distillery (Carbon-Neutral)",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "truckGate",
+          "dockDoorCount",
+          "dropArea",
+          "scale",
+          "connectivityIssue"
+        ],
+        "center": {
+          "lat": 37.5453,
+          "lng": -85.279
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 37.541,
+            "west": -85.2848,
+            "north": 37.5478,
+            "east": -85.2762
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 37.5452,
+              "west": -85.2796,
+              "north": 37.546,
+              "east": -85.279
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 1,
+          "buildingCount": 11,
+          "siteAreaAcres": 142,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode (37.544187, -85.282906) carried a 3,808 m correction flag.\nWeb research confirms 100 Bourbon Drive, Lebanon KY is Diageo's carbon-neutral\nBulleit distillery: a 144-acre property with a 72,000 sq ft distillery and dry\nhouse plus 12 barrel-aging warehouses, opened 2021, capacity ~10M proof gal/yr\n(Diageo press; MarionCountyKY.com; Distillery Trail). Satellite probing around\nthe geocode point revealed exactly this layout — a modern distillery/dry-house\nbuilding with process tanks plus rows of long barrel warehouses on rolling rural\nland. Locked center on the distillery building at 37.5453, -85.2790.",
+        "mapsUrl": "https://www.google.com/maps/@37.5453,-85.2790,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Open campus access - the facility access road branches off the public road (Bourbon Drive / KY-208) with no barrier arm or sliding gate at the public-road junction. A chain-link perimeter fence wraps the distillery building itself (visible in Street View 2024-04), but no controlled checkpoint at the road. Defaulted false; flagged uncertain because a gate could exist deeper on the unmapped internal road.",
+          "guardShack": "No staffed guard booth visible at any entrance.",
+          "multipleFacilities": "True - a campus: one 72,000 sq ft distillery/dry house building plus ~9-12 long barrel-aging warehouses (rickhouses) spread across the 144-acre property.",
+          "buildingCount": "~11 - the distillery/dry house plus roughly 10 visible barrel warehouses (press states 12 total; some still under construction in the imagery).",
+          "dockDoors": "Distillery loading is modest: a covered loading area on the distillery building's west side with a few loading positions for grain receiving and product/DDGS shipping. Band 0-10. Distilleries are low-dock-count operations.",
+          "dropArea": "Small SW laydown/equipment yard with a few trailers; not a true trailer drop lot. Band 0-10.",
+          "scale": "A truck scale is plausible for grain receiving at a distillery but not clearly identified in imagery; flagged uncertain.",
+          "connectivityIssue": "Rural Marion County KY location; the site sits in a small industrial cluster off KY-208, not deeply isolated, so cellular coverage is likely adequate - set false but flagged medium-confidence.",
+          "railServed": "No rail spur enters the property.",
+          "urbanRural": "Rural - Lebanon KY, rolling farmland in Marion County.",
+          "drivewayLong": "Long internal campus roads from the public road to the distillery and rickhouses easily hold a queue of 3+ trucks."
+        }
+      },
+      {
+        "id": "06-bulleit-distilling-co-shelbyville",
+        "name": "Bulleit Distilling Co. (Shelbyville) - Shelbyville KY",
+        "type": "Distillery",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoors",
+          "scale",
+          "connectivityIssue"
+        ],
+        "center": {
+          "lat": 38.2228,
+          "lng": -85.1432
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.2155,
+            "west": -85.1495,
+            "north": 38.2276,
+            "east": -85.14
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 38.2225,
+              "west": -85.144,
+              "north": 38.2236,
+              "east": -85.1426
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 4,
+          "trailersVisible": 1,
+          "trailerParkingCapacity": 8,
+          "truckGateCount": 1,
+          "buildingCount": 14,
+          "siteAreaAcres": 38,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "0-10",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": true,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate (38.22032, -85.145372, geocoded ROOFTOP, moved 25 m)\npinned the visitor / tasting center at the south end of the campus, not the\nfreight-relevant buildings. Satellite probes at z15-z17 revealed the full\ncampus: a fan of ~10 large two-story rickhouses to the north, a\nproduction/still-house complex in the center, and the visitor center to the\nsouth, all served by a single private drive off Benson Pike. Street View at the\nentrance shows a Bulleit Distilling Co. branded tour shuttle, confirming\nidentity. The freight center of gravity is the production complex, so the locked\ncenter was moved north to 38.22280, -85.14320.",
+        "mapsUrl": "https://www.google.com/maps/@38.22280,-85.14320,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Campus access drive off Benson Pike is open: a wide landscaped two-lane drive into a roundabout with a visitor center; no barrier arm, sliding gate, or checkpoint visible at the road junction in 2024-11 Street View.",
+          "guardShack": "No staffed booth at the entrance. The first structure inside the drive is the public visitor/tasting center, not a guard booth.",
+          "scale": "Web research (The Whiskey Wash / Distillery Trail) states grain arrives by tractor-trailer and is weighed and quality-tested on receipt, so a truck scale exists at the grain-receiving area; exact weigh pad not resolvable at z20 imagery — medium confidence.",
+          "dockDoors": "No conventional dock-door bank visible. Freight is process-style: tanker loading racks at the still house and barrel/forklift handling at the four large rickhouses. Estimated ~4 functional truck loading positions; band 0-10 with low confidence.",
+          "multipleFacilities": "Campus: production/still-house complex plus ~10 large two-story palletized rickhouses (each ~55,000 barrels) plus a separate visitor center.",
+          "drivewayLong": "Long internal private drive (>800 m) from Benson Pike through woods to the production area gives ample queuing depth.",
+          "fastLaneOpportunity": "Wide landscaped entrance apron and roundabout offer abundant unused paved width to add a dedicated truck lane.",
+          "siteAreaAcres": "Property is ~300 acres total but mostly wooded; perimeter box covers the ~38-acre developed operational footprint.",
+          "connectivityIssue": "Rural Shelby County KY but on a sizeable industrial campus near Shelbyville; coverage likely adequate - flagged as inferred."
+        }
+      },
+      {
+        "id": "07-stitzel-weller-distillery",
+        "name": "Stitzel-Weller Distillery - Louisville KY",
+        "type": "Distillery / Aging Warehouse",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "scale"
+        ],
+        "center": {
+          "lat": 38.2095,
+          "lng": -85.809
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.2065,
+            "west": -85.8115,
+            "north": 38.213,
+            "east": -85.8055
+          },
+          "truckGate": {
+            "south": 38.2085,
+            "west": -85.8112,
+            "north": 38.2091,
+            "east": -85.8104
+          },
+          "dropYards": [
+            {
+              "south": 38.21,
+              "west": -85.8112,
+              "north": 38.2109,
+              "east": -85.8105
+            },
+            {
+              "south": 38.2076,
+              "west": -85.8113,
+              "north": 38.2083,
+              "east": -85.8108
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 38.2092,
+              "west": -85.8111,
+              "north": 38.2099,
+              "east": -85.8103
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 28,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 24,
+          "siteAreaAcres": 33,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate (38.209594, -85.808741, geocoded ROOFTOP, moved 12 m)\nlanded squarely on the Stitzel-Weller campus. Satellite probes at z16-z17\nconfirmed the historic distillery footprint: a fan of ~18 multi-story brick\nrickhouses, a production/bottling building cluster, and the historic distillery\nbuilding now serving as the Bulleit Frontier Whiskey Experience visitor center.\nStreet View confirmed the brick distillery building and the gated freight\nentrance. Locked center placed on the production complex (the freight center of\ngravity).",
+        "mapsUrl": "https://www.google.com/maps/@38.20950,-85.80900,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Confirmed gated truck entrance off Fitzgerald Road: 2019-06 Street View shows a swing/cantilever gate across the drive with ENTRANCE and warning signage; the entrance lane crosses a rail spur.",
+          "guardShack": "A small light-colored guard-booth structure sits beside the entrance lane just inside the gate (visible left of the lane in multiple Street View headings). Workers in safety vests present at the gate.",
+          "scale": "No truck scale clearly identified in imagery; left false (low confidence) - distilleries often weigh inbound grain but no weigh pad resolved here.",
+          "dockDoors": "Loading docks on the production/bottling building - z19/z20 imagery shows tankers and trailers backed into a dock bank; estimated ~14 doors, band 10-25, medium confidence.",
+          "dropArea": "Long row of ~20+ parked trailers in the central lot plus additional trailers staged along Fitzgerald Road; band 25-50.",
+          "dropYard": "Dedicated trailer-storage rows present both in the central campus lot and along the Fitzgerald Road frontage.",
+          "railServed": "An active rail spur runs into the property and past the truck gate, visible in z19-z21 satellite and Street View.",
+          "multipleFacilities": "Campus: historic distillery / visitor center, production-bottling building, and ~18 multi-story brick rickhouses.",
+          "postGateStaging": "Wide paved internal yard between the gate and the production docks provides interior queuing room.",
+          "urbanRural": "Inside the Louisville metro (Shively), surrounded by dense industrial fabric - Urban.",
+          "drivewayLong": "Internal yard depth from the gate to the production docks easily holds 3+ trucks."
+        }
+      },
+      {
+        "id": "08-cascade-hollow-distilling-co-george-dickel",
+        "name": "Cascade Hollow Distilling Co. (George Dickel) - Tullahoma TN",
+        "type": "Distillery",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "scale",
+          "connectivityIssue"
+        ],
+        "center": {
+          "lat": 35.4385,
+          "lng": -86.244
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.434,
+            "west": -86.248,
+            "north": 35.441,
+            "east": -86.239
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 35.4385,
+              "west": -86.244,
+              "north": 35.4392,
+              "east": -86.243
+            }
+          ],
+          "staging": {
+            "south": 35.4388,
+            "west": -86.2434,
+            "north": 35.4395,
+            "east": -86.2425
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 1,
+          "buildingCount": 8,
+          "siteAreaAcres": 18,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": true,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate (35.438419, -86.246097, geocoded ROOFTOP, moved 53 m)\nlanded on the George Dickel campus. Satellite probes at z16-z18 confirmed the\ndistillery layout: two main production buildings, a visitor center, and ~2\nsingle-story sheet-metal rickhouses set in the woods to the southeast. Street\nView showed the \"Cascade Hollow Distilling Co.\" welcome sign at the entrance,\npositively confirming identity. The campus sits in a deep wooded hollow.",
+        "mapsUrl": "https://www.google.com/maps/@35.43850,-86.24400,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No controlled truck entrance. The campus is reached by a single private drive off Cascade Hollow Road; the only barrier is a decorative split-rail fence and a branded welcome sign at the visitor entrance (2024-11 Street View). No barrier arm, sliding gate, or checkpoint structure on the truck approach.",
+          "guardShack": "No staffed guard booth. The buildings near the entrance are the public visitor center.",
+          "scale": "No truck scale resolved in imagery; left false (low confidence).",
+          "dockDoors": "Loading area on the north face of the production complex - z20 imagery shows ~6 trailers/trucks parked with a gravel staging/turnaround apron. Estimated ~6 doors, band 0-10, medium confidence.",
+          "dropArea": "No marked trailer-parking stalls; trailers present are at the active loading apron, not a drop lot.",
+          "dropYard": "No dedicated trailer-storage lot observed.",
+          "multipleFacilities": "Campus: production/distillery complex, visitor center, and ~2 single-story sheet-metal rickhouses set in the woods to the southeast.",
+          "drivewayLong": "Long wooded private drive (>500 m) from Cascade Hollow Road plus an open internal yard - ample queuing depth.",
+          "staging": "Gravel turnaround/staging area on the north side of the production buildings, used by inbound/outbound trucks.",
+          "urbanRural": "Deep in a wooded hollow in rural Coffee County TN, well outside Tullahoma's developed fabric - Rural.",
+          "connectivityIssue": "Rural and isolated in a forested hollow surrounded by woods; cellular coverage likely weak - inferred, medium confidence.",
+          "railServed": "No rail spur into the property.",
+          "general": "Per The Spirits Business, production was paused September 2025; the site continues operating for warehousing/maturation, so freight activity is reduced."
+        }
+      },
+      {
+        "id": "09-balcones-distilling",
+        "name": "Balcones Distilling - Waco TX",
+        "type": "Distillery",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 31.550293,
+          "lng": -97.135725
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 31.54985,
+            "west": -97.13625,
+            "north": 31.55075,
+            "east": -97.13525
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [
+            {
+              "south": 31.55,
+              "west": -97.1362,
+              "north": 31.5506,
+              "east": -97.1359
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 2,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 1.1,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate (31.550293, -97.135725, geocoded ROOFTOP, moved 19 m)\nlanded on the Balcones building. Satellite probes at z19-z20 and Street View\nconfirmed it: a long multi-story historic brick warehouse — the century-old\nTexas Fireproof Storage Company building — in downtown Waco, with a distinctive\nround rooftop feature. Web research confirms Balcones distills all of its whisky\ninside this building. Location confirmed.",
+        "mapsUrl": "https://www.google.com/maps/@31.550293,-97.135725,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No controlled truck entrance. Balcones occupies the historic multi-story Texas Fireproof Storage Company building, which fronts directly onto the downtown Waco street grid (S 11th St). No barrier arm, sliding gate, or checkpoint - trucks load from the public street / alley.",
+          "guardShack": "No guard booth - this is a downtown urban building with no yard.",
+          "dockDoors": "Multi-story historic warehouse with overhead/roll-up service doors on the alley (west) side; ~2 truck-usable loading points estimated, band 0-10, medium confidence. No conventional dock-leveler bank.",
+          "dropArea": "No trailer parking on site; no yard space.",
+          "drivewayShort": "No driveway/approach of meaningful length - the loading face meets the public alley/street directly.",
+          "backupSensitive": "Tight downtown geometry: any truck servicing the building backs in directly from a public street/alley with no off-street stacking room.",
+          "siteAreaAcres": "Single building on a roughly 1.1-acre downtown parcel.",
+          "buildingCount": "One historic building houses all distilling operations.",
+          "urbanRural": "Downtown Waco, inside the dense urban industrial fabric - Urban.",
+          "railServed": "No rail spur into the property.",
+          "general": "Per The Spirits Business, production was paused September 2025; the site continues with tasting room / visitor operations, so truck activity is minimal."
+        }
+      },
+      {
+        "id": "10-diageo-usvi-captain-morgan-distillery",
+        "name": "Diageo USVI Captain Morgan Distillery - Frederiksted USVI",
+        "type": "Distillery & Barrel Aging Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "scale",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 17.7048,
+          "lng": -64.8428
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 17.7034,
+            "west": -64.8465,
+            "north": 17.7095,
+            "east": -64.8405
+          },
+          "truckGate": {
+            "south": 17.7074,
+            "west": -64.8428,
+            "north": 17.708,
+            "east": -64.8418
+          },
+          "dropYards": [
+            {
+              "south": 17.7045,
+              "west": -64.8438,
+              "north": 17.7056,
+              "east": -64.8423
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 17.7047,
+              "west": -64.844,
+              "north": 17.7056,
+              "east": -64.8428
+            }
+          ],
+          "staging": {
+            "south": 17.706,
+            "west": -64.8435,
+            "north": 17.7072,
+            "east": -64.842
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 7,
+          "siteAreaAcres": 32,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate (17.69168, -64.84829, geocoded GEOMETRIC_CENTER, moved\n4 m) landed on a residential coastal area south of Melvin Evans Highway — NOT\nthe distillery. Web research (PR Newswire, St. Croix Source) places the facility\non property bordering Melvin Evans Highway in Estate Diamond, near Henry E.\nRohlsen Airport. A satellite search along the highway found the large\nindustrial complex at ~17.7048, -64.8428: a cluster of big white-roofed\ndistillery/warehouse buildings plus a separate row of long barrel-aging\nwarehouses to the northwest — consistent with the Captain Morgan rum distillery\nand its two ~100K sq ft barrel warehouses. The locked center was moved ~1.6 km\nNNE of the roster point.",
+        "mapsUrl": "https://www.google.com/maps/@17.70480,-64.84280,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "locationResolution": "Roster coordinate (17.69168, -64.84829, GEOMETRIC_CENTER) landed on a residential coastal area, NOT the distillery. Web research placed the facility on property bordering Melvin Evans Highway in Estate Diamond, near Henry E. Rohlsen Airport. Located the large industrial complex at ~17.7048, -64.8428 by satellite search along the highway - large white-roofed distillery/warehouse buildings, consistent with the Captain Morgan rum distillery. Locked center moved ~1.6 km NNE of the roster point.",
+          "truckGate": "2016 Street View shows chain-link perimeter fencing around the complex with controlled vehicle access; a large secured industrial rum distillery of this scale is access-controlled. A discrete barrier arm/gate is not crisply resolvable - medium confidence; flagged.",
+          "guardShack": "No guard booth crisply confirmed from imagery; a small structure is visible in the central yard but cannot be positively identified as a staffed gate booth. Left false, with remoteGs true as the more likely pattern - flagged as uncertain.",
+          "remoteGs": "Set true on the assumption of a gate without a confirmed staffed booth; both this and guardShack are uncertain given limited imagery.",
+          "dockDoors": "South/southeast building face shows a regular rhythm of dock bays with an apron; ~18 doors estimated, band 10-25, medium confidence.",
+          "dropArea": "Trailers and containers parked along the south yard edge; extensive paved yard could hold many more - band 10-25 for currently-occupied stalls.",
+          "dropYard": "Large paved yard areas around the buildings function as trailer storage / staging.",
+          "scale": "No truck scale resolved in imagery.",
+          "multipleFacilities": "Campus: main distillery/production building, attached warehouse blocks, and a separate cluster of long barrel-aging warehouses to the northwest (the two ~100K sq ft Captain Morgan barrel warehouses).",
+          "drivewayLong": "Long internal access road from Melvin Evans Highway plus large internal yards give ample queuing depth.",
+          "fastLaneOpportunity": "Extensive unused paved width across the complex yards offers abundant room to add a dedicated truck lane.",
+          "urbanRural": "On St. Croix outside Frederiksted, bordered by woods and a residential subdivision but well outside any dense urban core - Rural.",
+          "railServed": "No rail on St. Croix; not rail-served.",
+          "general": "Per Virgin Islands Daily News, Diageo announced moving Captain Morgan aging/warehousing to Maryland while rum production stays on St. Croix - barrel-warehouse activity at this site may be winding down.",
+          "confidence": "Medium overall: the facility was positively located and its layout is clear, but truck-gate/guard-shack specifics rely on dated (2016) and partial Street View plus inference; flagged accordingly."
+        }
+      }
+    ]
+  }
+}

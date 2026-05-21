@@ -1,0 +1,55 @@
+{
+  "name": "Bob Evans Farms - Hillsdale MI Plant",
+  "type": "Manufacturing plant (fresh pork sausage rolls & patties; USDA FSIS inspected)",
+  "coords": { "lat": 41.921600, "lng": -84.615300 },
+  "geofences": {
+    "perimeter": { "south": 41.919900, "west": -84.616900, "north": 41.923100, "east": -84.613700 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 41.921700, "west": -84.614900, "north": 41.922500, "east": -84.613900 }
+    ],
+    "dockAprons": [
+      { "south": 41.921250, "west": -84.615450, "north": 41.921600, "east": -84.614700 },
+      { "south": 41.921750, "west": -84.615800, "north": 41.922050, "east": -84.615200 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 16,
+    "trailersVisible": 14,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 1,
+    "buildingCount": 5,
+    "siteAreaAcres": 18.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.921600,-84.615300,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Plant set well back from public roads on a long private access drive that connects to a residential side street SW of the site. The entrance has a Bob Evans Farms sign and decorative split-rail fence along the road, but the driveway is an open curb cut with no barrier arm, gate, or pinch-point. Confirmed in Street View (2024-09).",
+    "guardShack": "No booth structure at the entrance drive or anywhere on the access path; confirmed in Street View and satellite.",
+    "remoteGs": "No gate, so no remote check-in implied.",
+    "drivewayLong": "Long private access drive from the public road to the plant; ample queue depth (3+ trucks).",
+    "postGateStaging": "Large internal paved courtyard and yard between the access drive and the dock buildings provides ample staging room.",
+    "dockDoors": "Docks distributed across multiple building faces (central dock buildings + east building); ~16 doors estimated. Older multi-building campus; exact count uncertain from overhead angles.",
+    "dropArea": "Trailer drop yard on the NE of the property with ~10-14 trailers parked without tractors.",
+    "dropYard": "Dedicated trailer-storage area on the NE corner, separate from the dock aprons.",
+    "multipleFacilities": "Campus of 5 distinct buildings: main west plant, connected processing building, central dock buildings, and a separate east building.",
+    "urbanRural": "Small-town Hillsdale, MI; the plant is on the edge of town surrounded by residential streets, farm fields, and woodland. Classified Rural.",
+    "trailerParkingCapacity": "NE drop yard plus internal yard could hold ~25 trailers; estimate.",
+    "buildingCount": "Counted ~5 distinct structures on the campus."
+  },
+  "method": "deep-audit"
+}

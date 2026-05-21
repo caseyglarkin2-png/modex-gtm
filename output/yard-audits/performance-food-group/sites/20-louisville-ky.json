@@ -1,0 +1,63 @@
+{
+  "name": "Performance Foodservice - Louisville KY",
+  "type": "Broadline Foodservice Distribution Center",
+  "coords": { "lat": 38.21080, "lng": -85.54900 },
+  "geofences": {
+    "perimeter": { "south": 38.209632, "west": -85.550944, "north": 38.211968, "east": -85.547056 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 38.210191, "west": -85.548629, "north": 38.210909, "east": -85.547371 }
+    ],
+    "dockAprons": [
+      { "south": 38.209896, "west": -85.550315, "north": 38.210704, "east": -85.546885 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 28,
+    "trailersVisible": 14,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 21.8,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.21080,-85.54900,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoorCount", "dockDoors", "trailersVisible", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "No barrier arm, sliding gate, or checkpoint. The dock-side truck apron is reached by open driveways within the Bluegrass Industrial Park; no perimeter fence around the building. Open multi-tenant industrial-park layout.",
+    "guardShack": "No guard booth anywhere along the building approach. The street-facing side seen in Nov-2024 Street View is a flush office/flex frontage with employee parking — no booth.",
+    "buildingCount": "PFG occupies a unit in a single long multi-tenant industrial building; the parcel/perimeter box is scoped to the PFG portion and its south apron.",
+    "dockDoors": "A continuous bank of dock doors lines the south face at z19; ~28 estimated for the PFG-occupied section, but the building is multi-tenant so some doors may belong to neighbors — flagged.",
+    "dropArea": "Modest truck apron on the south side holds roughly a dozen trailers; no dedicated large trailer-storage lot, so dropYard=false and dropArea kept at 10-25.",
+    "drivewayShort": "Compact apron between the dock face and the bordering tree line / road — holds only 1-2 trucks deep on approach.",
+    "urbanRural": "Site is in the Bluegrass Industrial Park (Jeffersontown / Louisville metro), inside the Louisville urban fabric — Urban.",
+    "railServed": "No rail spur enters the property."
+  },
+  "method": "deep-audit"
+}

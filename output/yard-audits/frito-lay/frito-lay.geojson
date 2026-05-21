@@ -1,0 +1,6866 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -120.923,
+              37.6294
+            ],
+            [
+              -120.915,
+              37.6294
+            ],
+            [
+              -120.915,
+              37.6336
+            ],
+            [
+              -120.923,
+              37.6336
+            ],
+            [
+              -120.923,
+              37.6294
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Modesto CA",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 160,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 81,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -120.91745,
+              37.62935
+            ],
+            [
+              -120.9167,
+              37.62935
+            ],
+            [
+              -120.9167,
+              37.6303
+            ],
+            [
+              -120.91745,
+              37.6303
+            ],
+            [
+              -120.91745,
+              37.62935
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Modesto CA",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -120.917,
+              37.6296
+            ],
+            [
+              -120.915,
+              37.6296
+            ],
+            [
+              -120.915,
+              37.6332
+            ],
+            [
+              -120.917,
+              37.6332
+            ],
+            [
+              -120.917,
+              37.6296
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Modesto CA",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -120.9229,
+              37.6295
+            ],
+            [
+              -120.9207,
+              37.6295
+            ],
+            [
+              -120.9207,
+              37.6306
+            ],
+            [
+              -120.9229,
+              37.6306
+            ],
+            [
+              -120.9229,
+              37.6295
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Modesto CA",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -120.9218,
+              37.6298
+            ],
+            [
+              -120.9186,
+              37.6298
+            ],
+            [
+              -120.9186,
+              37.6303
+            ],
+            [
+              -120.9218,
+              37.6303
+            ],
+            [
+              -120.9218,
+              37.6298
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Modesto CA",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -120.9179,
+              37.6303
+            ],
+            [
+              -120.9172,
+              37.6303
+            ],
+            [
+              -120.9172,
+              37.6332
+            ],
+            [
+              -120.9179,
+              37.6332
+            ],
+            [
+              -120.9179,
+              37.6303
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Modesto CA",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -120.91745,
+              37.6295
+            ],
+            [
+              -120.9165,
+              37.6295
+            ],
+            [
+              -120.9165,
+              37.6303
+            ],
+            [
+              -120.91745,
+              37.6303
+            ],
+            [
+              -120.91745,
+              37.6295
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Modesto CA",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5935,
+              34.0775
+            ],
+            [
+              -117.5885,
+              34.0775
+            ],
+            [
+              -117.5885,
+              34.0813
+            ],
+            [
+              -117.5935,
+              34.0813
+            ],
+            [
+              -117.5935,
+              34.0775
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Rancho Cucamonga CA (DC)",
+        "type": "Distribution Center",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 150,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 48,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5907,
+              34.07755
+            ],
+            [
+              -117.5902,
+              34.07755
+            ],
+            [
+              -117.5902,
+              34.0785
+            ],
+            [
+              -117.5907,
+              34.0785
+            ],
+            [
+              -117.5907,
+              34.07755
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Rancho Cucamonga CA (DC)",
+        "type": "Distribution Center",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5926,
+              34.0779
+            ],
+            [
+              -117.589,
+              34.0779
+            ],
+            [
+              -117.589,
+              34.0794
+            ],
+            [
+              -117.5926,
+              34.0794
+            ],
+            [
+              -117.5926,
+              34.0779
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Rancho Cucamonga CA (DC)",
+        "type": "Distribution Center",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5926,
+              34.0792
+            ],
+            [
+              -117.5888,
+              34.0792
+            ],
+            [
+              -117.5888,
+              34.0797
+            ],
+            [
+              -117.5926,
+              34.0797
+            ],
+            [
+              -117.5926,
+              34.0792
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Rancho Cucamonga CA (DC)",
+        "type": "Distribution Center",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5908,
+              34.0783
+            ],
+            [
+              -117.59,
+              34.0783
+            ],
+            [
+              -117.59,
+              34.0792
+            ],
+            [
+              -117.5908,
+              34.0792
+            ],
+            [
+              -117.5908,
+              34.0783
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Rancho Cucamonga CA (DC)",
+        "type": "Distribution Center",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.8952,
+              35.0294
+            ],
+            [
+              -89.886,
+              35.0294
+            ],
+            [
+              -89.886,
+              35.035
+            ],
+            [
+              -89.8952,
+              35.035
+            ],
+            [
+              -89.8952,
+              35.0294
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Memphis TN",
+        "type": "Manufacturing Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 240,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 78,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.8896,
+              35.0343
+            ],
+            [
+              -89.889,
+              35.0343
+            ],
+            [
+              -89.889,
+              35.0348
+            ],
+            [
+              -89.8896,
+              35.0348
+            ],
+            [
+              -89.8896,
+              35.0343
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Memphis TN",
+        "type": "Manufacturing Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.8905,
+              35.0297
+            ],
+            [
+              -89.8875,
+              35.0297
+            ],
+            [
+              -89.8875,
+              35.034
+            ],
+            [
+              -89.8905,
+              35.034
+            ],
+            [
+              -89.8905,
+              35.0297
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Memphis TN",
+        "type": "Manufacturing Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.8869,
+              35.0302
+            ],
+            [
+              -89.884,
+              35.0302
+            ],
+            [
+              -89.884,
+              35.0345
+            ],
+            [
+              -89.8869,
+              35.0345
+            ],
+            [
+              -89.8869,
+              35.0302
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Memphis TN",
+        "type": "Manufacturing Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.8909,
+              35.03
+            ],
+            [
+              -89.8902,
+              35.03
+            ],
+            [
+              -89.8902,
+              35.0332
+            ],
+            [
+              -89.8909,
+              35.0332
+            ],
+            [
+              -89.8909,
+              35.03
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Memphis TN",
+        "type": "Manufacturing Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.893,
+              35.0297
+            ],
+            [
+              -89.8905,
+              35.0297
+            ],
+            [
+              -89.8905,
+              35.0302
+            ],
+            [
+              -89.893,
+              35.0302
+            ],
+            [
+              -89.893,
+              35.0297
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Memphis TN",
+        "type": "Manufacturing Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.8897,
+              35.0336
+            ],
+            [
+              -89.8889,
+              35.0336
+            ],
+            [
+              -89.8889,
+              35.0345
+            ],
+            [
+              -89.8897,
+              35.0345
+            ],
+            [
+              -89.8897,
+              35.0336
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Memphis TN",
+        "type": "Manufacturing Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.6135,
+              32.4795
+            ],
+            [
+              -83.6042,
+              32.4795
+            ],
+            [
+              -83.6042,
+              32.4872
+            ],
+            [
+              -83.6135,
+              32.4872
+            ],
+            [
+              -83.6135,
+              32.4795
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Perry GA (Kathleen)",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 420,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 130,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.6114,
+              32.4854
+            ],
+            [
+              -83.6106,
+              32.4854
+            ],
+            [
+              -83.6106,
+              32.4859
+            ],
+            [
+              -83.6114,
+              32.4859
+            ],
+            [
+              -83.6114,
+              32.4854
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Perry GA (Kathleen)",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.6082,
+              32.4818
+            ],
+            [
+              -83.6048,
+              32.4818
+            ],
+            [
+              -83.6048,
+              32.4848
+            ],
+            [
+              -83.6082,
+              32.4848
+            ],
+            [
+              -83.6082,
+              32.4818
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Perry GA (Kathleen)",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.6124,
+              32.4802
+            ],
+            [
+              -83.61,
+              32.4802
+            ],
+            [
+              -83.61,
+              32.4814
+            ],
+            [
+              -83.6124,
+              32.4814
+            ],
+            [
+              -83.6124,
+              32.4802
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Perry GA (Kathleen)",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.6063,
+              32.4835
+            ],
+            [
+              -83.6053,
+              32.4835
+            ],
+            [
+              -83.6053,
+              32.4852
+            ],
+            [
+              -83.6063,
+              32.4852
+            ],
+            [
+              -83.6063,
+              32.4835
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Perry GA (Kathleen)",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.6106,
+              32.4854
+            ],
+            [
+              -83.6086,
+              32.4854
+            ],
+            [
+              -83.6086,
+              32.4864
+            ],
+            [
+              -83.6106,
+              32.4864
+            ],
+            [
+              -83.6106,
+              32.4854
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Perry GA (Kathleen)",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.6125,
+              32.4801
+            ],
+            [
+              -83.6106,
+              32.4801
+            ],
+            [
+              -83.6106,
+              32.4814
+            ],
+            [
+              -83.6125,
+              32.4814
+            ],
+            [
+              -83.6125,
+              32.4801
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Perry GA (Kathleen)",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.795,
+              32.8994
+            ],
+            [
+              -111.7915,
+              32.8994
+            ],
+            [
+              -111.7915,
+              32.9047
+            ],
+            [
+              -111.795,
+              32.9047
+            ],
+            [
+              -111.795,
+              32.8994
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Casa Grande AZ",
+        "type": "Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 95,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.792,
+              32.9017
+            ],
+            [
+              -111.7915,
+              32.9017
+            ],
+            [
+              -111.7915,
+              32.9023
+            ],
+            [
+              -111.792,
+              32.9023
+            ],
+            [
+              -111.792,
+              32.9017
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Casa Grande AZ",
+        "type": "Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.793,
+              32.9024
+            ],
+            [
+              -111.7916,
+              32.9024
+            ],
+            [
+              -111.7916,
+              32.9043
+            ],
+            [
+              -111.793,
+              32.9043
+            ],
+            [
+              -111.793,
+              32.9024
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Casa Grande AZ",
+        "type": "Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.795,
+              32.9015
+            ],
+            [
+              -111.7936,
+              32.9015
+            ],
+            [
+              -111.7936,
+              32.9034
+            ],
+            [
+              -111.795,
+              32.9034
+            ],
+            [
+              -111.795,
+              32.9015
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Casa Grande AZ",
+        "type": "Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.7936,
+              32.9013
+            ],
+            [
+              -111.7924,
+              32.9013
+            ],
+            [
+              -111.7924,
+              32.9026
+            ],
+            [
+              -111.7936,
+              32.9026
+            ],
+            [
+              -111.7936,
+              32.9013
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Casa Grande AZ",
+        "type": "Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.7942,
+              32.8998
+            ],
+            [
+              -111.7926,
+              32.8998
+            ],
+            [
+              -111.7926,
+              32.9006
+            ],
+            [
+              -111.7942,
+              32.9006
+            ],
+            [
+              -111.7942,
+              32.8998
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Casa Grande AZ",
+        "type": "Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.7926,
+              32.9017
+            ],
+            [
+              -111.7918,
+              32.9017
+            ],
+            [
+              -111.7918,
+              32.9026
+            ],
+            [
+              -111.7926,
+              32.9026
+            ],
+            [
+              -111.7926,
+              32.9017
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Casa Grande AZ",
+        "type": "Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.3242,
+              35.39185
+            ],
+            [
+              -119.3176,
+              35.39185
+            ],
+            [
+              -119.3176,
+              35.3987
+            ],
+            [
+              -119.3242,
+              35.3987
+            ],
+            [
+              -119.3242,
+              35.39185
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Kern Plant Bakersfield CA",
+        "type": "Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 110,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.319,
+              35.3973
+            ],
+            [
+              -119.3179,
+              35.3973
+            ],
+            [
+              -119.3179,
+              35.39845
+            ],
+            [
+              -119.319,
+              35.39845
+            ],
+            [
+              -119.319,
+              35.3973
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Kern Plant Bakersfield CA",
+        "type": "Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.3213,
+              35.3932
+            ],
+            [
+              -119.3183,
+              35.3932
+            ],
+            [
+              -119.3183,
+              35.3966
+            ],
+            [
+              -119.3213,
+              35.3966
+            ],
+            [
+              -119.3213,
+              35.3932
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Kern Plant Bakersfield CA",
+        "type": "Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.321,
+              35.392
+            ],
+            [
+              -119.3182,
+              35.392
+            ],
+            [
+              -119.3182,
+              35.394
+            ],
+            [
+              -119.321,
+              35.394
+            ],
+            [
+              -119.321,
+              35.392
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Kern Plant Bakersfield CA",
+        "type": "Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.3215,
+              35.3956
+            ],
+            [
+              -119.319,
+              35.3956
+            ],
+            [
+              -119.319,
+              35.3968
+            ],
+            [
+              -119.3215,
+              35.3968
+            ],
+            [
+              -119.3215,
+              35.3956
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Kern Plant Bakersfield CA",
+        "type": "Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.8932,
+              41.8555
+            ],
+            [
+              -71.8875,
+              41.8555
+            ],
+            [
+              -71.8875,
+              41.8658
+            ],
+            [
+              -71.8932,
+              41.8658
+            ],
+            [
+              -71.8932,
+              41.8555
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Killingly CT",
+        "type": "Manufacturing Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 50,
+          "trailersVisible": 350,
+          "trailerParkingCapacity": 450,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 90,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.8932,
+              41.8624
+            ],
+            [
+              -71.8926,
+              41.8624
+            ],
+            [
+              -71.8926,
+              41.863
+            ],
+            [
+              -71.8932,
+              41.863
+            ],
+            [
+              -71.8932,
+              41.8624
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Killingly CT",
+        "type": "Manufacturing Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.8922,
+              41.8625
+            ],
+            [
+              -71.8885,
+              41.8625
+            ],
+            [
+              -71.8885,
+              41.8655
+            ],
+            [
+              -71.8922,
+              41.8655
+            ],
+            [
+              -71.8922,
+              41.8625
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Killingly CT",
+        "type": "Manufacturing Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.8926,
+              41.8556
+            ],
+            [
+              -71.8895,
+              41.8556
+            ],
+            [
+              -71.8895,
+              41.8595
+            ],
+            [
+              -71.8926,
+              41.8595
+            ],
+            [
+              -71.8926,
+              41.8556
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Killingly CT",
+        "type": "Manufacturing Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.8918,
+              41.8605
+            ],
+            [
+              -71.8906,
+              41.8605
+            ],
+            [
+              -71.8906,
+              41.8628
+            ],
+            [
+              -71.8918,
+              41.8628
+            ],
+            [
+              -71.8918,
+              41.8605
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Killingly CT",
+        "type": "Manufacturing Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.8904,
+              41.8595
+            ],
+            [
+              -71.8888,
+              41.8595
+            ],
+            [
+              -71.8888,
+              41.8615
+            ],
+            [
+              -71.8904,
+              41.8615
+            ],
+            [
+              -71.8904,
+              41.8595
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Killingly CT",
+        "type": "Manufacturing Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.8926,
+              41.862
+            ],
+            [
+              -71.8918,
+              41.862
+            ],
+            [
+              -71.8918,
+              41.863
+            ],
+            [
+              -71.8926,
+              41.863
+            ],
+            [
+              -71.8926,
+              41.862
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Killingly CT",
+        "type": "Manufacturing Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.6945,
+              38.9835
+            ],
+            [
+              -95.6885,
+              38.9835
+            ],
+            [
+              -95.6885,
+              38.9905
+            ],
+            [
+              -95.6945,
+              38.9905
+            ],
+            [
+              -95.6945,
+              38.9835
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Topeka KS",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 300,
+          "trailerParkingCapacity": 380,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 105,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.6926,
+              38.9889
+            ],
+            [
+              -95.692,
+              38.9889
+            ],
+            [
+              -95.692,
+              38.9896
+            ],
+            [
+              -95.6926,
+              38.9896
+            ],
+            [
+              -95.6926,
+              38.9889
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Topeka KS",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.6905,
+              38.9878
+            ],
+            [
+              -95.6887,
+              38.9878
+            ],
+            [
+              -95.6887,
+              38.9902
+            ],
+            [
+              -95.6905,
+              38.9902
+            ],
+            [
+              -95.6905,
+              38.9878
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Topeka KS",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.6932,
+              38.9838
+            ],
+            [
+              -95.69,
+              38.9838
+            ],
+            [
+              -95.69,
+              38.9865
+            ],
+            [
+              -95.6932,
+              38.9865
+            ],
+            [
+              -95.6932,
+              38.9838
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Topeka KS",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.6923,
+              38.9868
+            ],
+            [
+              -95.6908,
+              38.9868
+            ],
+            [
+              -95.6908,
+              38.989
+            ],
+            [
+              -95.6923,
+              38.989
+            ],
+            [
+              -95.6923,
+              38.9868
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Topeka KS",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.6908,
+              38.9858
+            ],
+            [
+              -95.6892,
+              38.9858
+            ],
+            [
+              -95.6892,
+              38.9878
+            ],
+            [
+              -95.6908,
+              38.9878
+            ],
+            [
+              -95.6908,
+              38.9858
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Topeka KS",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.6926,
+              38.9888
+            ],
+            [
+              -95.6916,
+              38.9888
+            ],
+            [
+              -95.6916,
+              38.9895
+            ],
+            [
+              -95.6926,
+              38.9895
+            ],
+            [
+              -95.6926,
+              38.9888
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Topeka KS",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.3996,
+              29.47055
+            ],
+            [
+              -98.3954,
+              29.47055
+            ],
+            [
+              -98.3954,
+              29.47435
+            ],
+            [
+              -98.3996,
+              29.47435
+            ],
+            [
+              -98.3996,
+              29.47055
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - San Antonio TX",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 33,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.39885,
+              29.472
+            ],
+            [
+              -98.398,
+              29.472
+            ],
+            [
+              -98.398,
+              29.47265
+            ],
+            [
+              -98.39885,
+              29.47265
+            ],
+            [
+              -98.39885,
+              29.472
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - San Antonio TX",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.3969,
+              29.4714
+            ],
+            [
+              -98.39555,
+              29.4714
+            ],
+            [
+              -98.39555,
+              29.4734
+            ],
+            [
+              -98.3969,
+              29.4734
+            ],
+            [
+              -98.3969,
+              29.4714
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - San Antonio TX",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.3981,
+              29.4728
+            ],
+            [
+              -98.397,
+              29.4728
+            ],
+            [
+              -98.397,
+              29.474
+            ],
+            [
+              -98.3981,
+              29.474
+            ],
+            [
+              -98.3981,
+              29.4728
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - San Antonio TX",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.397,
+              29.4715
+            ],
+            [
+              -98.3956,
+              29.4715
+            ],
+            [
+              -98.3956,
+              29.4723
+            ],
+            [
+              -98.397,
+              29.4723
+            ],
+            [
+              -98.397,
+              29.4715
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - San Antonio TX",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.3987,
+              29.4706
+            ],
+            [
+              -98.3974,
+              29.4706
+            ],
+            [
+              -98.3974,
+              29.4711
+            ],
+            [
+              -98.3987,
+              29.4711
+            ],
+            [
+              -98.3987,
+              29.4706
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - San Antonio TX",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.3982,
+              29.4723
+            ],
+            [
+              -98.3969,
+              29.4723
+            ],
+            [
+              -98.3969,
+              29.473
+            ],
+            [
+              -98.3982,
+              29.473
+            ],
+            [
+              -98.3982,
+              29.4723
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - San Antonio TX",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8863,
+              32.8286
+            ],
+            [
+              -96.8845,
+              32.8286
+            ],
+            [
+              -96.8845,
+              32.8299
+            ],
+            [
+              -96.8863,
+              32.8299
+            ],
+            [
+              -96.8863,
+              32.8286
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Brookhollow Plant Dallas TX",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 6,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.88475,
+              32.8293
+            ],
+            [
+              -96.8845,
+              32.8293
+            ],
+            [
+              -96.8845,
+              32.8296
+            ],
+            [
+              -96.88475,
+              32.8296
+            ],
+            [
+              -96.88475,
+              32.8293
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Brookhollow Plant Dallas TX",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8851,
+              32.8295
+            ],
+            [
+              -96.8846,
+              32.8295
+            ],
+            [
+              -96.8846,
+              32.82985
+            ],
+            [
+              -96.8851,
+              32.82985
+            ],
+            [
+              -96.8851,
+              32.8295
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Brookhollow Plant Dallas TX",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.9878,
+              42.5131
+            ],
+            [
+              -88.9818,
+              42.5131
+            ],
+            [
+              -88.9818,
+              42.5193
+            ],
+            [
+              -88.9878,
+              42.5193
+            ],
+            [
+              -88.9878,
+              42.5131
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Beloit WI",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 170,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 68,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.9856,
+              42.5164
+            ],
+            [
+              -88.9847,
+              42.5164
+            ],
+            [
+              -88.9847,
+              42.517
+            ],
+            [
+              -88.9856,
+              42.517
+            ],
+            [
+              -88.9856,
+              42.5164
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Beloit WI",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.9852,
+              42.5131
+            ],
+            [
+              -88.9827,
+              42.5131
+            ],
+            [
+              -88.9827,
+              42.5149
+            ],
+            [
+              -88.9852,
+              42.5149
+            ],
+            [
+              -88.9852,
+              42.5131
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Beloit WI",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.9864,
+              42.5178
+            ],
+            [
+              -88.9848,
+              42.5178
+            ],
+            [
+              -88.9848,
+              42.519
+            ],
+            [
+              -88.9864,
+              42.519
+            ],
+            [
+              -88.9864,
+              42.5178
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Beloit WI",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.9862,
+              42.518
+            ],
+            [
+              -88.9833,
+              42.518
+            ],
+            [
+              -88.9833,
+              42.5187
+            ],
+            [
+              -88.9862,
+              42.5187
+            ],
+            [
+              -88.9862,
+              42.518
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Beloit WI",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.9862,
+              42.5154
+            ],
+            [
+              -88.9856,
+              42.5154
+            ],
+            [
+              -88.9856,
+              42.5172
+            ],
+            [
+              -88.9862,
+              42.5172
+            ],
+            [
+              -88.9862,
+              42.5154
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Beloit WI",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.9866,
+              42.5154
+            ],
+            [
+              -88.9856,
+              42.5154
+            ],
+            [
+              -88.9856,
+              42.5179
+            ],
+            [
+              -88.9866,
+              42.5179
+            ],
+            [
+              -88.9866,
+              42.5154
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Beloit WI",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4252,
+              40.78175
+            ],
+            [
+              -81.4205,
+              40.78175
+            ],
+            [
+              -81.4205,
+              40.7848
+            ],
+            [
+              -81.4252,
+              40.7848
+            ],
+            [
+              -81.4252,
+              40.78175
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Canton OH",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 33,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4218,
+              40.78305
+            ],
+            [
+              -81.4211,
+              40.78305
+            ],
+            [
+              -81.4211,
+              40.7835
+            ],
+            [
+              -81.4218,
+              40.7835
+            ],
+            [
+              -81.4218,
+              40.78305
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Canton OH",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4247,
+              40.7825
+            ],
+            [
+              -81.4233,
+              40.7825
+            ],
+            [
+              -81.4233,
+              40.784
+            ],
+            [
+              -81.4247,
+              40.784
+            ],
+            [
+              -81.4247,
+              40.7825
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Canton OH",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4233,
+              40.7829
+            ],
+            [
+              -81.4226,
+              40.7829
+            ],
+            [
+              -81.4226,
+              40.7838
+            ],
+            [
+              -81.4233,
+              40.7838
+            ],
+            [
+              -81.4233,
+              40.7829
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Canton OH",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4229,
+              40.78215
+            ],
+            [
+              -81.4219,
+              40.78215
+            ],
+            [
+              -81.4219,
+              40.7828
+            ],
+            [
+              -81.4229,
+              40.7828
+            ],
+            [
+              -81.4229,
+              40.78215
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Canton OH",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.5625,
+              40.281
+            ],
+            [
+              -86.551,
+              40.281
+            ],
+            [
+              -86.551,
+              40.2868
+            ],
+            [
+              -86.5625,
+              40.2868
+            ],
+            [
+              -86.5625,
+              40.281
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Frankfort IN (Core & East Plants)",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 75,
+          "trailersVisible": 160,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 155,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.5618,
+              40.2823
+            ],
+            [
+              -86.5608,
+              40.2823
+            ],
+            [
+              -86.5608,
+              40.283
+            ],
+            [
+              -86.5618,
+              40.283
+            ],
+            [
+              -86.5618,
+              40.2823
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Frankfort IN (Core & East Plants)",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.5612,
+              40.2848
+            ],
+            [
+              -86.559,
+              40.2848
+            ],
+            [
+              -86.559,
+              40.2862
+            ],
+            [
+              -86.5612,
+              40.2862
+            ],
+            [
+              -86.5612,
+              40.2848
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Frankfort IN (Core & East Plants)",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.557,
+              40.2825
+            ],
+            [
+              -86.5535,
+              40.2825
+            ],
+            [
+              -86.5535,
+              40.2843
+            ],
+            [
+              -86.557,
+              40.2843
+            ],
+            [
+              -86.557,
+              40.2825
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Frankfort IN (Core & East Plants)",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.5605,
+              40.2812
+            ],
+            [
+              -86.5585,
+              40.2812
+            ],
+            [
+              -86.5585,
+              40.2826
+            ],
+            [
+              -86.5605,
+              40.2826
+            ],
+            [
+              -86.5605,
+              40.2812
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Frankfort IN (Core & East Plants)",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.557,
+              40.2856
+            ],
+            [
+              -86.5536,
+              40.2856
+            ],
+            [
+              -86.5536,
+              40.2864
+            ],
+            [
+              -86.557,
+              40.2864
+            ],
+            [
+              -86.557,
+              40.2856
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Frankfort IN (Core & East Plants)",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.561,
+              40.2828
+            ],
+            [
+              -86.5585,
+              40.2828
+            ],
+            [
+              -86.5585,
+              40.2836
+            ],
+            [
+              -86.561,
+              40.2836
+            ],
+            [
+              -86.561,
+              40.2828
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Frankfort IN (Core & East Plants)",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.5608,
+              40.2823
+            ],
+            [
+              -86.5592,
+              40.2823
+            ],
+            [
+              -86.5592,
+              40.2833
+            ],
+            [
+              -86.5608,
+              40.2833
+            ],
+            [
+              -86.5608,
+              40.2823
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Frankfort IN (Core & East Plants)",
+        "type": "Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.842,
+              42.0952
+            ],
+            [
+              -75.837,
+              42.0952
+            ],
+            [
+              -75.837,
+              42.1003
+            ],
+            [
+              -75.842,
+              42.1003
+            ],
+            [
+              -75.842,
+              42.0952
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Kirkwood Plant Binghamton NY",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 61,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.8382,
+              42.0993
+            ],
+            [
+              -75.8372,
+              42.0993
+            ],
+            [
+              -75.8372,
+              42.1001
+            ],
+            [
+              -75.8382,
+              42.1001
+            ],
+            [
+              -75.8382,
+              42.0993
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Kirkwood Plant Binghamton NY",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.8415,
+              42.096
+            ],
+            [
+              -75.839,
+              42.096
+            ],
+            [
+              -75.839,
+              42.0987
+            ],
+            [
+              -75.8415,
+              42.0987
+            ],
+            [
+              -75.8415,
+              42.096
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Kirkwood Plant Binghamton NY",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.841,
+              42.0955
+            ],
+            [
+              -75.8387,
+              42.0955
+            ],
+            [
+              -75.8387,
+              42.097
+            ],
+            [
+              -75.841,
+              42.097
+            ],
+            [
+              -75.841,
+              42.0955
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Kirkwood Plant Binghamton NY",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.8398,
+              42.0965
+            ],
+            [
+              -75.8387,
+              42.0965
+            ],
+            [
+              -75.8387,
+              42.0979
+            ],
+            [
+              -75.8398,
+              42.0979
+            ],
+            [
+              -75.8398,
+              42.0965
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Kirkwood Plant Binghamton NY",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.2405,
+              37.3982
+            ],
+            [
+              -79.236,
+              37.3982
+            ],
+            [
+              -79.236,
+              37.403
+            ],
+            [
+              -79.2405,
+              37.403
+            ],
+            [
+              -79.2405,
+              37.3982
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Lynchburg VA",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 140,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 45,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.2368,
+              37.4022
+            ],
+            [
+              -79.2359,
+              37.4022
+            ],
+            [
+              -79.2359,
+              37.4029
+            ],
+            [
+              -79.2368,
+              37.4029
+            ],
+            [
+              -79.2368,
+              37.4022
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Lynchburg VA",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.2374,
+              37.4011
+            ],
+            [
+              -79.2362,
+              37.4011
+            ],
+            [
+              -79.2362,
+              37.4025
+            ],
+            [
+              -79.2374,
+              37.4025
+            ],
+            [
+              -79.2374,
+              37.4011
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Lynchburg VA",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.239,
+              37.3994
+            ],
+            [
+              -79.2363,
+              37.3994
+            ],
+            [
+              -79.2363,
+              37.4011
+            ],
+            [
+              -79.239,
+              37.4011
+            ],
+            [
+              -79.239,
+              37.3994
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Lynchburg VA",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.2382,
+              37.3995
+            ],
+            [
+              -79.2373,
+              37.3995
+            ],
+            [
+              -79.2373,
+              37.4012
+            ],
+            [
+              -79.2382,
+              37.4012
+            ],
+            [
+              -79.2382,
+              37.3995
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Lynchburg VA",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.2397,
+              37.3984
+            ],
+            [
+              -79.2378,
+              37.3984
+            ],
+            [
+              -79.2378,
+              37.3992
+            ],
+            [
+              -79.2397,
+              37.3992
+            ],
+            [
+              -79.2397,
+              37.3984
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Lynchburg VA",
+        "type": "Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.9446,
+              35.1135
+            ],
+            [
+              -80.9405,
+              35.1135
+            ],
+            [
+              -80.9405,
+              35.1182
+            ],
+            [
+              -80.9446,
+              35.1182
+            ],
+            [
+              -80.9446,
+              35.1135
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Charlotte NC",
+        "type": "Manufacturing Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 80,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 42,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.9412,
+              35.116
+            ],
+            [
+              -80.9404,
+              35.116
+            ],
+            [
+              -80.9404,
+              35.1168
+            ],
+            [
+              -80.9412,
+              35.1168
+            ],
+            [
+              -80.9412,
+              35.116
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Charlotte NC",
+        "type": "Manufacturing Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.9445,
+              35.1162
+            ],
+            [
+              -80.942,
+              35.1162
+            ],
+            [
+              -80.942,
+              35.118
+            ],
+            [
+              -80.9445,
+              35.118
+            ],
+            [
+              -80.9445,
+              35.1162
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Charlotte NC",
+        "type": "Manufacturing Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.9425,
+              35.1135
+            ],
+            [
+              -80.9405,
+              35.1135
+            ],
+            [
+              -80.9405,
+              35.1148
+            ],
+            [
+              -80.9425,
+              35.1148
+            ],
+            [
+              -80.9425,
+              35.1135
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Charlotte NC",
+        "type": "Manufacturing Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.9432,
+              35.115
+            ],
+            [
+              -80.9422,
+              35.115
+            ],
+            [
+              -80.9422,
+              35.117
+            ],
+            [
+              -80.9432,
+              35.117
+            ],
+            [
+              -80.9432,
+              35.115
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Charlotte NC",
+        "type": "Manufacturing Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.9416,
+              35.1158
+            ],
+            [
+              -80.9408,
+              35.1158
+            ],
+            [
+              -80.9408,
+              35.1168
+            ],
+            [
+              -80.9416,
+              35.1168
+            ],
+            [
+              -80.9416,
+              35.1158
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Charlotte NC",
+        "type": "Manufacturing Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.1925,
+              39.4958
+            ],
+            [
+              -76.1864,
+              39.4958
+            ],
+            [
+              -76.1864,
+              39.5005
+            ],
+            [
+              -76.1925,
+              39.5005
+            ],
+            [
+              -76.1925,
+              39.4958
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Aberdeen MD",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 58,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.1879,
+              39.4983
+            ],
+            [
+              -76.1872,
+              39.4983
+            ],
+            [
+              -76.1872,
+              39.4989
+            ],
+            [
+              -76.1879,
+              39.4989
+            ],
+            [
+              -76.1879,
+              39.4983
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Aberdeen MD",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.1918,
+              39.496
+            ],
+            [
+              -76.1895,
+              39.496
+            ],
+            [
+              -76.1895,
+              39.4982
+            ],
+            [
+              -76.1918,
+              39.4982
+            ],
+            [
+              -76.1918,
+              39.496
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Aberdeen MD",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.1912,
+              39.4967
+            ],
+            [
+              -76.1885,
+              39.4967
+            ],
+            [
+              -76.1885,
+              39.499
+            ],
+            [
+              -76.1912,
+              39.499
+            ],
+            [
+              -76.1912,
+              39.4967
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Aberdeen MD",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.1925,
+              39.4986
+            ],
+            [
+              -76.189,
+              39.4986
+            ],
+            [
+              -76.189,
+              39.5
+            ],
+            [
+              -76.1925,
+              39.5
+            ],
+            [
+              -76.1925,
+              39.4986
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Aberdeen MD",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.6947,
+              45.6535
+            ],
+            [
+              -122.6901,
+              45.6535
+            ],
+            [
+              -122.6901,
+              45.66
+            ],
+            [
+              -122.6947,
+              45.66
+            ],
+            [
+              -122.6947,
+              45.6535
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Vancouver WA",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 56,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.6916,
+              45.655
+            ],
+            [
+              -122.6908,
+              45.655
+            ],
+            [
+              -122.6908,
+              45.656
+            ],
+            [
+              -122.6916,
+              45.656
+            ],
+            [
+              -122.6916,
+              45.655
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Vancouver WA",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.6944,
+              45.6556
+            ],
+            [
+              -122.6923,
+              45.6556
+            ],
+            [
+              -122.6923,
+              45.659
+            ],
+            [
+              -122.6944,
+              45.659
+            ],
+            [
+              -122.6944,
+              45.6556
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Vancouver WA",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.6913,
+              45.6548
+            ],
+            [
+              -122.6906,
+              45.6548
+            ],
+            [
+              -122.6906,
+              45.6582
+            ],
+            [
+              -122.6913,
+              45.6582
+            ],
+            [
+              -122.6913,
+              45.6548
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Vancouver WA",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.564,
+              35.811
+            ],
+            [
+              -90.558,
+              35.811
+            ],
+            [
+              -90.558,
+              35.8168
+            ],
+            [
+              -90.564,
+              35.8168
+            ],
+            [
+              -90.564,
+              35.811
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Jonesboro AR",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 280,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 87,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.5628,
+              35.8153
+            ],
+            [
+              -90.5618,
+              35.8153
+            ],
+            [
+              -90.5618,
+              35.816
+            ],
+            [
+              -90.5628,
+              35.816
+            ],
+            [
+              -90.5628,
+              35.8153
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Jonesboro AR",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.5623,
+              35.8156
+            ],
+            [
+              -90.5585,
+              35.8156
+            ],
+            [
+              -90.5585,
+              35.817
+            ],
+            [
+              -90.5623,
+              35.817
+            ],
+            [
+              -90.5623,
+              35.8156
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Jonesboro AR",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.564,
+              35.8148
+            ],
+            [
+              -90.5626,
+              35.8148
+            ],
+            [
+              -90.5626,
+              35.8162
+            ],
+            [
+              -90.564,
+              35.8162
+            ],
+            [
+              -90.564,
+              35.8148
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Jonesboro AR",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.5624,
+              35.8153
+            ],
+            [
+              -90.5585,
+              35.8153
+            ],
+            [
+              -90.5585,
+              35.8162
+            ],
+            [
+              -90.5624,
+              35.8162
+            ],
+            [
+              -90.5624,
+              35.8153
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Jonesboro AR",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.0636,
+              35.2122
+            ],
+            [
+              -87.0576,
+              35.2122
+            ],
+            [
+              -87.0576,
+              35.219
+            ],
+            [
+              -87.0636,
+              35.219
+            ],
+            [
+              -87.0636,
+              35.2122
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Pulaski TN",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 52,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.0634,
+              35.2177
+            ],
+            [
+              -87.0628,
+              35.2177
+            ],
+            [
+              -87.0628,
+              35.2183
+            ],
+            [
+              -87.0634,
+              35.2183
+            ],
+            [
+              -87.0634,
+              35.2177
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Pulaski TN",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.064,
+              35.2172
+            ],
+            [
+              -87.0628,
+              35.2172
+            ],
+            [
+              -87.0628,
+              35.2196
+            ],
+            [
+              -87.064,
+              35.2196
+            ],
+            [
+              -87.064,
+              35.2172
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Pulaski TN",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.0605,
+              35.216
+            ],
+            [
+              -87.059,
+              35.216
+            ],
+            [
+              -87.059,
+              35.2172
+            ],
+            [
+              -87.0605,
+              35.2172
+            ],
+            [
+              -87.0605,
+              35.216
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Pulaski TN",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.0598,
+              35.213
+            ],
+            [
+              -87.0585,
+              35.213
+            ],
+            [
+              -87.0585,
+              35.2142
+            ],
+            [
+              -87.0598,
+              35.2142
+            ],
+            [
+              -87.0598,
+              35.213
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Pulaski TN",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.5127,
+              35.1533
+            ],
+            [
+              -86.5078,
+              35.1533
+            ],
+            [
+              -86.5078,
+              35.1585
+            ],
+            [
+              -86.5127,
+              35.1585
+            ],
+            [
+              -86.5127,
+              35.1533
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Fayetteville TN",
+        "type": "Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 140,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 71,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.5095,
+              35.157
+            ],
+            [
+              -86.5085,
+              35.157
+            ],
+            [
+              -86.5085,
+              35.1578
+            ],
+            [
+              -86.5095,
+              35.1578
+            ],
+            [
+              -86.5095,
+              35.157
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Fayetteville TN",
+        "type": "Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.5094,
+              35.156
+            ],
+            [
+              -86.5078,
+              35.156
+            ],
+            [
+              -86.5078,
+              35.1582
+            ],
+            [
+              -86.5094,
+              35.1582
+            ],
+            [
+              -86.5094,
+              35.156
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Fayetteville TN",
+        "type": "Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.5127,
+              35.154
+            ],
+            [
+              -86.5115,
+              35.154
+            ],
+            [
+              -86.5115,
+              35.1568
+            ],
+            [
+              -86.5127,
+              35.1568
+            ],
+            [
+              -86.5127,
+              35.154
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Fayetteville TN",
+        "type": "Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.511,
+              35.1544
+            ],
+            [
+              -86.5088,
+              35.1544
+            ],
+            [
+              -86.5088,
+              35.1556
+            ],
+            [
+              -86.511,
+              35.1556
+            ],
+            [
+              -86.511,
+              35.1544
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Fayetteville TN",
+        "type": "Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.5108,
+              35.157
+            ],
+            [
+              -86.5095,
+              35.157
+            ],
+            [
+              -86.5095,
+              35.1582
+            ],
+            [
+              -86.5108,
+              35.1582
+            ],
+            [
+              -86.5108,
+              35.157
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Fayetteville TN",
+        "type": "Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.8732,
+              29.574
+            ],
+            [
+              -95.8648,
+              29.574
+            ],
+            [
+              -95.8648,
+              29.5811
+            ],
+            [
+              -95.8732,
+              29.5811
+            ],
+            [
+              -95.8732,
+              29.574
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Rosenberg TX",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 95,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.8702,
+              29.574
+            ],
+            [
+              -95.8695,
+              29.574
+            ],
+            [
+              -95.8695,
+              29.5748
+            ],
+            [
+              -95.8702,
+              29.5748
+            ],
+            [
+              -95.8702,
+              29.574
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Rosenberg TX",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.8732,
+              29.5744
+            ],
+            [
+              -95.87,
+              29.5744
+            ],
+            [
+              -95.87,
+              29.58
+            ],
+            [
+              -95.8732,
+              29.58
+            ],
+            [
+              -95.8732,
+              29.5744
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Rosenberg TX",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.8706,
+              29.5765
+            ],
+            [
+              -95.8696,
+              29.5765
+            ],
+            [
+              -95.8696,
+              29.5802
+            ],
+            [
+              -95.8706,
+              29.5802
+            ],
+            [
+              -95.8706,
+              29.5765
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Rosenberg TX",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.0705,
+              41.2264
+            ],
+            [
+              -77.067,
+              41.2264
+            ],
+            [
+              -77.067,
+              41.2292
+            ],
+            [
+              -77.0705,
+              41.2292
+            ],
+            [
+              -77.0705,
+              41.2264
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Williamsport PA (DC)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 11,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.0687,
+              41.2276
+            ],
+            [
+              -77.0672,
+              41.2276
+            ],
+            [
+              -77.0672,
+              41.229
+            ],
+            [
+              -77.0687,
+              41.229
+            ],
+            [
+              -77.0687,
+              41.2276
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Williamsport PA (DC)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.068,
+              41.2279
+            ],
+            [
+              -77.067,
+              41.2279
+            ],
+            [
+              -77.067,
+              41.2287
+            ],
+            [
+              -77.068,
+              41.2287
+            ],
+            [
+              -77.068,
+              41.2279
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Williamsport PA (DC)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.069,
+              41.227
+            ],
+            [
+              -77.0678,
+              41.227
+            ],
+            [
+              -77.0678,
+              41.2276
+            ],
+            [
+              -77.069,
+              41.2276
+            ],
+            [
+              -77.069,
+              41.227
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Williamsport PA (DC)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.8562,
+              39.7684
+            ],
+            [
+              -104.849,
+              39.7684
+            ],
+            [
+              -104.849,
+              39.7747
+            ],
+            [
+              -104.8562,
+              39.7747
+            ],
+            [
+              -104.8562,
+              39.7684
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Denver CO",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 260,
+          "truckGateCount": 2,
+          "buildingCount": 3,
+          "siteAreaAcres": 38,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.8558,
+              39.7684
+            ],
+            [
+              -104.855,
+              39.7684
+            ],
+            [
+              -104.855,
+              39.7689
+            ],
+            [
+              -104.8558,
+              39.7689
+            ],
+            [
+              -104.8558,
+              39.7684
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Denver CO",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.8562,
+              39.77
+            ],
+            [
+              -104.8542,
+              39.77
+            ],
+            [
+              -104.8542,
+              39.7747
+            ],
+            [
+              -104.8562,
+              39.7747
+            ],
+            [
+              -104.8562,
+              39.77
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Denver CO",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.8506,
+              39.7687
+            ],
+            [
+              -104.8494,
+              39.7687
+            ],
+            [
+              -104.8494,
+              39.773
+            ],
+            [
+              -104.8506,
+              39.773
+            ],
+            [
+              -104.8506,
+              39.7687
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Denver CO",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.8542,
+              39.769
+            ],
+            [
+              -104.8506,
+              39.769
+            ],
+            [
+              -104.8506,
+              39.7697
+            ],
+            [
+              -104.8542,
+              39.7697
+            ],
+            [
+              -104.8542,
+              39.769
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Denver CO",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4203,
+              28.5757
+            ],
+            [
+              -81.4166,
+              28.5757
+            ],
+            [
+              -81.4166,
+              28.5786
+            ],
+            [
+              -81.4203,
+              28.5786
+            ],
+            [
+              -81.4203,
+              28.5757
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Orlando FL",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 25,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.41935,
+              28.57795
+            ],
+            [
+              -81.4188,
+              28.57795
+            ],
+            [
+              -81.4188,
+              28.57825
+            ],
+            [
+              -81.41935,
+              28.57825
+            ],
+            [
+              -81.41935,
+              28.57795
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Orlando FL",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4203,
+              28.5764
+            ],
+            [
+              -81.4193,
+              28.5764
+            ],
+            [
+              -81.4193,
+              28.5778
+            ],
+            [
+              -81.4203,
+              28.5778
+            ],
+            [
+              -81.4203,
+              28.5764
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Orlando FL",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.41935,
+              28.57755
+            ],
+            [
+              -81.41855,
+              28.57755
+            ],
+            [
+              -81.41855,
+              28.57825
+            ],
+            [
+              -81.41935,
+              28.57825
+            ],
+            [
+              -81.41935,
+              28.57755
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Orlando FL",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.41955,
+              28.5765
+            ],
+            [
+              -81.4189,
+              28.5765
+            ],
+            [
+              -81.4189,
+              28.5777
+            ],
+            [
+              -81.41955,
+              28.5777
+            ],
+            [
+              -81.41955,
+              28.5765
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Orlando FL",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4178,
+              28.5766
+            ],
+            [
+              -81.417,
+              28.5766
+            ],
+            [
+              -81.417,
+              28.5775
+            ],
+            [
+              -81.4178,
+              28.5775
+            ],
+            [
+              -81.4178,
+              28.5766
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Orlando FL",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4193,
+              28.5777
+            ],
+            [
+              -81.418,
+              28.5777
+            ],
+            [
+              -81.418,
+              28.5784
+            ],
+            [
+              -81.4193,
+              28.5784
+            ],
+            [
+              -81.4193,
+              28.5777
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Orlando FL",
+        "type": "Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.0425,
+              40.6645
+            ],
+            [
+              -112.0368,
+              40.6645
+            ],
+            [
+              -112.0368,
+              40.668
+            ],
+            [
+              -112.0425,
+              40.668
+            ],
+            [
+              -112.0425,
+              40.6645
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - West Valley City UT (DC)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 140,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 43,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.0409,
+              40.667
+            ],
+            [
+              -112.04055,
+              40.667
+            ],
+            [
+              -112.04055,
+              40.6676
+            ],
+            [
+              -112.0409,
+              40.6676
+            ],
+            [
+              -112.0409,
+              40.667
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - West Valley City UT (DC)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.0388,
+              40.6655
+            ],
+            [
+              -112.0368,
+              40.6655
+            ],
+            [
+              -112.0368,
+              40.6678
+            ],
+            [
+              -112.0388,
+              40.6678
+            ],
+            [
+              -112.0388,
+              40.6655
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - West Valley City UT (DC)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.0425,
+              40.6663
+            ],
+            [
+              -112.0412,
+              40.6663
+            ],
+            [
+              -112.0412,
+              40.6678
+            ],
+            [
+              -112.0425,
+              40.6678
+            ],
+            [
+              -112.0425,
+              40.6663
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - West Valley City UT (DC)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.0408,
+              40.6648
+            ],
+            [
+              -112.0392,
+              40.6648
+            ],
+            [
+              -112.0392,
+              40.6658
+            ],
+            [
+              -112.0408,
+              40.6658
+            ],
+            [
+              -112.0408,
+              40.6648
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - West Valley City UT (DC)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.0425,
+              40.6658
+            ],
+            [
+              -112.0415,
+              40.6658
+            ],
+            [
+              -112.0415,
+              40.6672
+            ],
+            [
+              -112.0425,
+              40.6672
+            ],
+            [
+              -112.0425,
+              40.6658
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - West Valley City UT (DC)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.0412,
+              40.6664
+            ],
+            [
+              -112.0398,
+              40.6664
+            ],
+            [
+              -112.0398,
+              40.6678
+            ],
+            [
+              -112.0412,
+              40.6678
+            ],
+            [
+              -112.0412,
+              40.6664
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - West Valley City UT (DC)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.8874,
+              35.3376
+            ],
+            [
+              -81.8854,
+              35.3376
+            ],
+            [
+              -81.8854,
+              35.3396
+            ],
+            [
+              -81.8874,
+              35.3396
+            ],
+            [
+              -81.8874,
+              35.3376
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Forest City NC (DC)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 9,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 14,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.887,
+              35.3379
+            ],
+            [
+              -81.8866,
+              35.3379
+            ],
+            [
+              -81.8866,
+              35.3382
+            ],
+            [
+              -81.887,
+              35.3382
+            ],
+            [
+              -81.887,
+              35.3379
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Forest City NC (DC)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.8866,
+              35.3378
+            ],
+            [
+              -81.8856,
+              35.3378
+            ],
+            [
+              -81.8856,
+              35.3385
+            ],
+            [
+              -81.8866,
+              35.3385
+            ],
+            [
+              -81.8866,
+              35.3378
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Forest City NC (DC)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.8864,
+              35.3378
+            ],
+            [
+              -81.8856,
+              35.3378
+            ],
+            [
+              -81.8856,
+              35.3384
+            ],
+            [
+              -81.8864,
+              35.3384
+            ],
+            [
+              -81.8864,
+              35.3378
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Forest City NC (DC)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1212,
+              30.7393
+            ],
+            [
+              -88.1188,
+              30.7393
+            ],
+            [
+              -88.1188,
+              30.7411
+            ],
+            [
+              -88.1212,
+              30.7411
+            ],
+            [
+              -88.1212,
+              30.7393
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Prichard AL (DC)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 16,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1211,
+              30.7405
+            ],
+            [
+              -88.1198,
+              30.7405
+            ],
+            [
+              -88.1198,
+              30.741
+            ],
+            [
+              -88.1211,
+              30.741
+            ],
+            [
+              -88.1211,
+              30.7405
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Prichard AL (DC)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.017,
+              46.205
+            ],
+            [
+              -119.0135,
+              46.205
+            ],
+            [
+              -119.0135,
+              46.2085
+            ],
+            [
+              -119.017,
+              46.2085
+            ],
+            [
+              -119.017,
+              46.205
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "frito-lay",
+        "name": "Frito-Lay - Burbank WA (DC)",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "NONE",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 0,
+          "railServed": false
+        }
+      }
+    }
+  ]
+}

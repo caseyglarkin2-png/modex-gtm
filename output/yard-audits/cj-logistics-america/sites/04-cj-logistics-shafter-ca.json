@@ -1,0 +1,49 @@
+{
+  "name": "CJ Logistics - Shafter CA",
+  "type": "Distribution Center",
+  "coords": { "lat": 35.45210, "lng": -119.19850 },
+  "geofences": {
+    "perimeter": { "south": 35.4502, "west": -119.2000, "north": 35.4540, "east": -119.1962 },
+    "truckGate": { "south": 35.4504, "west": -119.1978, "north": 35.4510, "east": -119.1968 },
+    "dropYards": [
+      { "south": 35.4505, "west": -119.1975, "north": 35.4537, "east": -119.1962 }
+    ],
+    "dockAprons": [
+      { "south": 35.4505, "west": -119.1980, "north": 35.4537, "east": -119.1975 },
+      { "south": 35.4505, "west": -119.2000, "north": 35.4537, "east": -119.1995 }
+    ],
+    "staging": { "south": 35.4504, "west": -119.1972, "north": 35.4512, "east": -119.1965 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110, "trailersVisible": 130, "trailerParkingCapacity": 200,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 36.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.45210,-119.19850,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "scale"],
+  "fieldNotes": {
+    "truckGate": "Controlled truck entrance at the SE corner of the property - the entry driveway funnels through a checkpoint with gate arms/fencing across the truck lane (visible in zoom-20 satellite).",
+    "guardShack": "A distinct guard-booth structure sits in the middle of the entry driveway (zoom-19/20 satellite at ~35.4507,-119.1972), with a tractor-trailer stopped beside it being processed - clear staffed booth.",
+    "dockDoors": "Large white-roofed warehouse (~420 m long, solar panels on roof) with continuous dock-door banks and trailers backed in on BOTH the west and east long faces - well into the 50+ band (1,063,337 sq ft per Racklify).",
+    "shipRcvSeparate": "Dock banks on two separate building faces (east and west).",
+    "dropYard": "Large trailer drop yard along the east side of the building with 100+ parked trailers.",
+    "fastLaneOpportunity": "Very wide concrete entrance apron / truck court at the gate provides ample room for a bypass/express lane.",
+    "urbanRural": "Wonderful Industrial Park area on the edge of Shafter, CA - surrounded by bare lots and farmland; rural setting despite the industrial cluster.",
+    "railServed": "No rail spur visible entering the property.",
+    "entryLanes": "Single shared entry/exit driveway through the guard booth; lane split not resolvable from imagery.",
+    "scale": "No truck scale clearly visible; left in uncertainFields."
+  },
+  "method": "deep-audit"
+}

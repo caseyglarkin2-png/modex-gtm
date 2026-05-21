@@ -1,0 +1,66 @@
+{
+  "name": "UNFI - Gilroy CA DC",
+  "type": "Distribution Center",
+  "coords": { "lat": 36.99605, "lng": -121.54500 },
+  "geofences": {
+    "perimeter": { "south": 36.99420, "west": -121.54760, "north": 36.99900, "east": -121.54300 },
+    "truckGate": { "south": 36.99780, "west": -121.54480, "north": 36.99860, "east": -121.54390 },
+    "dropYards": [
+      { "south": 36.99640, "west": -121.54620, "north": 36.99850, "east": -121.54420 }
+    ],
+    "dockAprons": [
+      { "south": 36.99660, "west": -121.54640, "north": 36.99860, "east": -121.54520 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40,
+    "trailersVisible": 32,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 33.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.99605,-121.54500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "The truck court connects to Cameron Blvd by open paved driveways. z19 satellite of both the NE and SW connections and 2026-04 Street-View along Cameron Blvd show no barrier arm, no sliding gate, no checkpoint pinch-point and no perimeter fence at the road. UNFI sign and flagpoles sit at the front, but the truck entrances are open.",
+    "guardShack": "No staffed booth at the truck entrance. No 1-3-vehicle-footprint structure beside the truck lane in any imagery.",
+    "remoteGs": "False — requires a gate; there is none.",
+    "postGateStaging": "Wide paved truck court on the NW side between the dock face and the perimeter road gives ample interior holding before the docks.",
+    "drivewayLong": "The truck court runs the full NW length of the building; easily holds a 3+ truck queue.",
+    "dockDoors": "~40 estimate; docks run the full NW building face, partly shadowed/occluded by backed-in trailers in overhead imagery. Facility is a ~425,000 sq ft DC opened 2016.",
+    "dropArea": "Bank of drop trailers parked without tractors in the NW truck court — `dropArea` 25-50; `dropYard: true`.",
+    "buildingCount": "Single DC building (rooftop solar). The large building immediately NW is a separate, unrelated facility on its own parcel.",
+    "railServed": "No rail spur enters the property.",
+    "urbanRural": "Edge-of-town in the Gilroy industrial fringe (south Santa Clara County), bordered by active row-crop farmland on the south and west; rural per rubric.",
+    "siteAreaAcres": "~33 acres for the developed footprint; additional undeveloped farmland lies on the SE of the parcel and is excluded from the active-yard perimeter."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,46 @@
+{
+  "name": "Pepperidge Farm - Richmond UT",
+  "type": "Manufacturing - bakery (Goldfish crackers, +50% capacity 2024)",
+  "coords": { "lat": 41.939600, "lng": -111.816300 },
+  "geofences": {
+    "perimeter": { "south": 41.93620, "west": -111.81850, "north": 41.94300, "east": -111.81400 },
+    "truckGate": { "south": 41.93950, "west": -111.81490, "north": 41.94020, "east": -111.81400 },
+    "dropYards": [
+      { "south": 41.93720, "west": -111.81720, "north": 41.93810, "east": -111.81530 }
+    ],
+    "dockAprons": [
+      { "south": 41.93730, "west": -111.81720, "north": 41.93800, "east": -111.81450 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35, "trailersVisible": 25, "trailerParkingCapacity": 50,
+    "truckGateCount": 1, "buildingCount": 3, "siteAreaAcres": 80.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.939600,-111.816300,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "truckGate", "entryLanes", "exitLanes", "scale", "dockDoorCount"],
+  "fieldNotes": {
+    "truckGate": "Plant set back from 200 West behind grass buffers; access road off 200 West into the yard. No barrier/booth visible from Street View - controlled gate inferred at low-medium confidence.",
+    "guardShack": "No guard booth visible from public-road Street View. Marked false / remoteGs true at low-medium confidence.",
+    "railServed": "Rail spur runs along the west side of the plant; rail cars/tankers visible in the north yard.",
+    "dropYard": "Trailer drop yard and dock apron along the south face of the bakery building; ~25 trailers visible.",
+    "dockDoorCount": "Dock banks along the south building face; ~35 estimate banded 25-50, low confidence.",
+    "multipleFacilities": "Single large bakery building (N-S) with attached process structures; not a multi-cluster campus.",
+    "siteAreaAcres": "Derived from perimeter box ~755m N-S x ~370m E-W.",
+    "locationResolution": "Roster coordinates (RANGE_INTERPOLATED) landed in central/south Richmond; web search located plant at 901 N 200 W. Confirmed by satellite ~41.9388,-111.8165."
+  },
+  "method": "deep-audit"
+}

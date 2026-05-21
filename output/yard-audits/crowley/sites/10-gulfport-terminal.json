@@ -1,0 +1,53 @@
+{
+  "name": "Crowley Gulfport Terminal - Gulfport MS",
+  "type": "Marine terminal / port facility",
+  "coords": { "lat": 30.36000, "lng": -89.09500 },
+  "geofences": {
+    "perimeter": { "south": 30.35500, "west": -89.09700, "north": 30.36450, "east": -89.09050 },
+    "truckGate": { "south": 30.36280, "west": -89.09520, "north": 30.36420, "east": -89.09420 },
+    "dropYards": [
+      { "south": 30.35550, "west": -89.09600, "north": 30.36100, "east": -89.09250 },
+      { "south": 30.36100, "west": -89.09650, "north": 30.36400, "east": -89.09400 }
+    ],
+    "dockAprons": [
+      { "south": 30.35550, "west": -89.09650, "north": 30.36000, "east": -89.09480 }
+    ],
+    "staging": { "south": 30.36280, "west": -89.09600, "north": 30.36420, "east": -89.09450 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 10,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 450,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 163.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@30.36000,-89.09500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "0-10", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "scale", "dockDoorCount"],
+  "fieldNotes": {
+    "location": "Roster coords (30.363167,-89.096963, RANGE_INTERPOLATED) landed near the Gulfport small-craft harbor / port edge. 692 30th Avenue / 692 West Pier is the West Pier Terminal of the Port of Gulfport (MS State Port Authority), where Crowley leases space alongside Dole and Chiquita. The operational marine terminal is the pier complex extending into the Gulf — locked center ~30.3600,-89.0950.",
+    "truckGate": "Confirmed — the entire Port of Gulfport is enclosed by a tall ornamental steel security fence (visible in multiple Street View frames). The truck access road runs into the secured terminal through a controlled checkpoint; a 'GULFPORT' port-entrance sign and CROWLEY-branded containers are visible at the entrance. Marine terminal under MTSA security.",
+    "guardShack": "Inferred — MTSA-regulated secured port; access road has a controlled entrance. Street View coverage ended at the gate so the gate booth itself was not directly imaged; flagged uncertain. remoteGs = false.",
+    "dockDoors": "Marine terminal — cargo is handled vessel-side via gantry cranes; warehouses (Shed 16, West Pier Terminal Warehouse) carry limited dock doors. Band 0-10, low confidence.",
+    "dropArea": "Extensive container/chassis marshalling across the West Pier and adjacent laydown yards — large stacks and chassis rows visible.",
+    "railServed": "Multiple rail lines run into and along the terminal (visible in satellite); on-dock rail. railServed = true.",
+    "multipleFacilities": "Port campus: West Pier Terminal, warehouses, container yard, berths/gantry cranes, plus the Port of Gulfport marine building.",
+    "fastLaneOpportunity": "Wide port entrance road and apron with ample paved width and multiple lanes.",
+    "scale": "No truck scale clearly identified; flagged uncertain.",
+    "entryLanes": "Approximately 2 in / 2 out — estimate, flagged uncertain (gate not directly imaged in Street View)."
+  },
+  "method": "deep-audit"
+}

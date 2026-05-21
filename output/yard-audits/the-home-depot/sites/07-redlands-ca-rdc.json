@@ -1,0 +1,54 @@
+{
+  "name": "Home Depot RDC - Redlands CA",
+  "type": "Rapid Deployment Center",
+  "coords": { "lat": 34.08820, "lng": -117.20440 },
+  "geofences": {
+    "perimeter": { "south": 34.08560, "west": -117.20850, "north": 34.09100, "east": -117.20020 },
+    "truckGate": { "south": 34.08640, "west": -117.20780, "north": 34.08720, "east": -117.20680 },
+    "dropYards": [
+      { "south": 34.08920, "west": -117.20680, "north": 34.09060, "east": -117.20100 }
+    ],
+    "dockAprons": [
+      { "south": 34.08660, "west": -117.20680, "north": 34.08720, "east": -117.20080 },
+      { "south": 34.08900, "west": -117.20680, "north": 34.08960, "east": -117.20080 },
+      { "south": 34.08700, "west": -117.20080, "north": 34.08920, "east": -117.20020 }
+    ],
+    "staging": { "south": 34.08720, "west": -117.20780, "north": 34.08900, "east": -117.20700 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 200,
+    "trailersVisible": 280,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 57.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.08820,-117.20440,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale"],
+  "fieldNotes": {
+    "truckGate": "Street View confirms a continuous black metal perimeter security fence enclosing the entire truck yard along River Bluff Avenue, with gate sections in the fence line. Driver reviews report a check-in process ('easy and quick check in and out'), confirming a controlled gated entrance.",
+    "guardShack": "Inferred TRUE — fully fenced/gated truck yard with a driver check-in process; a guard booth is the HD-RDC norm and the dense SoCal logistics-park standard. Booth not isolated in a clean view (palms/landscaping screen the fence line) — flagged uncertain.",
+    "shipRcvSeparate": "Continuous loading-dock doors with trailers backed in on all four building faces (N, S, E, W) — inbound and outbound run from separate dock banks.",
+    "dropArea": "Large trailer drop area along the north side plus a second parallel trailer row in the south apron; well over 50 trailers visible site-wide.",
+    "drivewayLong": "Large site with a deep ring-road / yard approach able to hold a 3+ truck queue inside the gate.",
+    "fastLaneOpportunity": "Wide divided entrance driveway and generous paved yard width leave room to add an express/bypass lane.",
+    "urbanRural": "Dense San Bernardino / Redlands logistics corridor — wall-to-wall distribution buildings, immediately adjacent to I-10. Urban.",
+    "railServed": "No rail spur enters the property; the east boundary is the I-10 freeway.",
+    "siteAreaAcres": "Derived from the perimeter box (~700 m x ~330 m developed footprint).",
+    "buildingCount": "Single very large RDC building; neighboring DC buildings are separate properties and excluded."
+  },
+  "method": "deep-audit"
+}

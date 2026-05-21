@@ -1,0 +1,52 @@
+{
+  "name": "Caterpillar - Mossville IL Engine & Research Campus",
+  "type": "Manufacturing & research campus (engines, components)",
+  "coords": { "lat": 40.8445, "lng": -89.5565 },
+  "geofences": {
+    "perimeter": { "south": 40.8385, "west": -89.5635, "north": 40.8500, "east": -89.5495 },
+    "truckGate": { "south": 40.8424, "west": -89.5605, "north": 40.8432, "east": -89.5592 },
+    "dropYards": [
+      { "south": 40.8455, "west": -89.5615, "north": 40.8470, "east": -89.5595 },
+      { "south": 40.8398, "west": -89.5600, "north": 40.8410, "east": -89.5585 }
+    ],
+    "dockAprons": [
+      { "south": 40.8400, "west": -89.5585, "north": 40.8415, "east": -89.5565 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 16, "trailersVisible": 18, "trailerParkingCapacity": 40,
+    "truckGateCount": 2, "buildingCount": 8, "siteAreaAcres": 320.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.8445,-89.5565,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "truckGate", "entryLanes", "exitLanes", "scale", "dockDoors", "shipRcvSeparate", "multiStep"],
+  "fieldNotes": {
+    "location": "Roster geocode (40.8429,-89.5632) is GEOMETRIC_CENTER with movedMeters 5 - lands on the western edge of the Caterpillar Mossville Engine & Research Campus (Caterpillar Technical Center). Locked campus center at 40.8445,-89.5565. Confirmed: large multi-building campus with a paved test/proving area and perimeter test track, a cogeneration plant (AES Medina Valley), trailer/material laydown yards, and 7+ large R&D/manufacturing buildings - consistent with the Tech Center (~900k sq ft, ~2,000 scientists/engineers, 24/7).",
+    "truckGate": "The campus is access-controlled - Street View covers only the perimeter roads and does not penetrate the interior. An internal entrance road off the perimeter road carries a checkpoint structure; a pipe/conveyor bridge crosses the road near the entrance. Controlled campus entry.",
+    "guardShack": "No standalone road-edge guard booth resolvable - the checkpoint sits on the internal entrance road inside the campus. Classified remoteGs (controlled campus, internal checkpoint, no road-visible booth); low confidence.",
+    "drivewayLong": "Internal entrance roads run long distances across the campus to the building/dock areas - ample queue depth.",
+    "fastLaneOpportunity": "Wide internal roads and paved aprons with abundant unused width - room for a bypass/express lane.",
+    "dockDoors": "~16 dock doors estimated across the building faces - this is an R&D-heavy campus so freight/dock operations are modest; many faces obscured by roof overhang - low confidence.",
+    "dropArea": "Trailer laydown yards near the north building and south of the manufacturing building, plus material laydown - drop capacity ~40.",
+    "shipRcvSeparate": "Dock/trailer activity is split between separate building clusters (north R&D/logistics buildings and the south manufacturing building) - likely separate ship/receive; medium confidence.",
+    "multipleFacilities": "Campus of 8+ large buildings (Tech Center R&D buildings plus manufacturing) - explicitly a campus.",
+    "railServed": "No rail spur into the property identified.",
+    "scale": "No truck scale clearly identified.",
+    "urbanRural": "Rural - the campus sits among farmland near Mossville/the Illinois River, outside any dense metro fabric.",
+    "siteAreaAcres": "~320 acres for the campus including the test track, cogen plant, buildings and laydown - approximate."
+  },
+  "method": "deep-audit"
+}

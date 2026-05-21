@@ -1,0 +1,55 @@
+{
+  "name": "Kenco MCS Perris I - Perris CA",
+  "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+  "coords": { "lat": 33.84200, "lng": -117.22890 },
+  "geofences": {
+    "perimeter": { "south": 33.8404, "west": -117.2310, "north": 33.8434, "east": -117.2270 },
+    "truckGate": { "south": 33.84260, "west": -117.23110, "north": 33.84305, "east": -117.23050 },
+    "dropYards": [
+      { "south": 33.8425, "west": -117.2303, "north": 33.8434, "east": -117.2271 },
+      { "south": 33.8404, "west": -117.2308, "north": 33.8411, "east": -117.2271 }
+    ],
+    "dockAprons": [
+      { "south": 33.8424, "west": -117.2305, "north": 33.8428, "east": -117.2273 },
+      { "south": 33.8410, "west": -117.2305, "north": 33.8413, "east": -117.2273 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 75,
+    "trailerParkingCapacity": 170,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 30.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.84200,-117.22890,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "trailersVisible", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "The N and S truck courts are bounded by chain-link fencing (fence line visible in z20 satellite and 2018 Street View along the entrance driveway). Truck access is a single private driveway off Indian Avenue into the fenced court. No barrier-arm hardware could be positively resolved at the road in available imagery, but the fenced court with a single controlled driveway reads as a truck gate. Medium confidence on the exact gate hardware.",
+    "guardShack": "No guard booth visible at the driveway entrance or anywhere on the property in z20/z21 satellite or Street View.",
+    "remoteGs": "Gated/fenced truck court with no guard shack implies kiosk / app / remote check-in.",
+    "shipRcvSeparate": "Cross-dock building: dock banks on BOTH the N face and the S face — physically separate clusters.",
+    "dockDoors": "Long dock banks on both long faces of a 579,708 SF DC; banded 50+. ~90 doors is an overhead estimate.",
+    "dropArea": "Large striped trailer drop yards on the N side and the shared S yard, packed with trailers — well over 50 stalls.",
+    "fastLaneOpportunity": "Wide truck-court entrance with room to add an express bypass lane.",
+    "postGateStaging": "Large paved truck courts inside the fenced area before the dock doors.",
+    "urbanRural": "Dense Inland Empire logistics corridor in Perris, surrounded by warehouses and residential tracts; judged Urban.",
+    "trailersVisible": "~75 trailers counted across the N and S drop yards / dock aprons; approximate.",
+    "trailerParkingCapacity": "~170 estimated from the striped N and S drop yards; low confidence."
+  },
+  "method": "deep-audit"
+}

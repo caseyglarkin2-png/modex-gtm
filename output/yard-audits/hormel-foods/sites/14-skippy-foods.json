@@ -1,0 +1,54 @@
+{
+  "name": "Skippy Foods - Little Rock AR",
+  "type": "Production Facility",
+  "coords": { "lat": 34.70790, "lng": -92.18430 },
+  "geofences": {
+    "perimeter": { "south": 34.705924, "west": -92.187032, "north": 34.709876, "east": -92.181568 },
+    "truckGate": { "south": 34.707041, "west": -92.182037, "north": 34.707759, "east": -92.181163 },
+    "dropYards": [
+      { "south": 34.708896, "west": -92.185839, "north": 34.709704, "east": -92.182561 },
+      { "south": 34.706992, "west": -92.183292, "north": 34.708608, "east": -92.182308 }
+    ],
+    "dockAprons": [
+      { "south": 34.708341, "west": -92.186321, "north": 34.709059, "east": -92.183479 }
+    ],
+    "staging": { "south": 34.706961, "west": -92.183456, "north": 34.708039, "east": -92.182144 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 45,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 54.4,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.70790,-92.18430,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "dockDoorCount"],
+  "fieldNotes": {
+    "location": "Roster address (5111 Fairway Ave) and geocode landed in a residential neighborhood — wrong. Skippy Foods is at 8201 Frazier Pike, at the Port of Little Rock (confirmed by Hormel/Little Rock Chamber/ADEQ). Resolved to 34.7079,-92.1843 — the 'Skippy' logo is visible on the building tower in 2026 Street View.",
+    "truckGate": "Property is fully enclosed by chain-link perimeter fence. The truck entrance off Frazier Pike (a long paved/gravel driveway on the SE) passes through a chain-link sliding gate at the fence opening near the building yard (gate rail visible in z21 satellite; chain-link gate visible in 2026 Street View). truckGate = true.",
+    "guardShack": "No staffed guard booth straddling the truck lane was identified — the slide gate appears unstaffed (motorized / badge or remote check-in). Flagged uncertain. remoteGs set true accordingly.",
+    "postGateStaging": "Loop driveway and large paved yard inside the gate give ample holding room before the docks.",
+    "drivewayLong": "Long approach driveway from Frazier Pike into the fenced yard easily holds 3+ trucks.",
+    "fastLaneOpportunity": "Wide gate apron and broad open yard — physical room for a bypass/express lane.",
+    "dockDoors": "Dock bank along the NW building face with a dock canopy and trailers backed in; estimated ~22 doors (10-25 band).",
+    "dropArea": "Many trailers parked in rows around the building loop and along the N and E yard — estimated ~45 visible (25-50 band).",
+    "dropYard": "Dedicated trailer parking rows around the loop drive separate from the active dock face.",
+    "railServed": "No rail spur into the property visible despite the port setting.",
+    "note": "The plant suffered a fire in September 2025 and returned to operation by December 2025; 2026 Street View shows it intact and operating."
+  },
+  "method": "deep-audit"
+}

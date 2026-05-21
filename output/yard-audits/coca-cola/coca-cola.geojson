@@ -1,0 +1,5654 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3945,
+              33.6548
+            ],
+            [
+              -84.3912,
+              33.6548
+            ],
+            [
+              -84.3912,
+              33.6597
+            ],
+            [
+              -84.3945,
+              33.6597
+            ],
+            [
+              -84.3945,
+              33.6548
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Atlanta Syrup Plant - Atlanta GA",
+        "type": "Concentrate / Syrup Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 33,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3925,
+              33.6558
+            ],
+            [
+              -84.392,
+              33.6558
+            ],
+            [
+              -84.392,
+              33.6564
+            ],
+            [
+              -84.3925,
+              33.6564
+            ],
+            [
+              -84.3925,
+              33.6558
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Atlanta Syrup Plant - Atlanta GA",
+        "type": "Concentrate / Syrup Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.393,
+              33.6549
+            ],
+            [
+              -84.3917,
+              33.6549
+            ],
+            [
+              -84.3917,
+              33.6564
+            ],
+            [
+              -84.393,
+              33.6564
+            ],
+            [
+              -84.393,
+              33.6549
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Atlanta Syrup Plant - Atlanta GA",
+        "type": "Concentrate / Syrup Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3928,
+              33.657
+            ],
+            [
+              -84.3916,
+              33.657
+            ],
+            [
+              -84.3916,
+              33.6584
+            ],
+            [
+              -84.3928,
+              33.6584
+            ],
+            [
+              -84.3928,
+              33.657
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Atlanta Syrup Plant - Atlanta GA",
+        "type": "Concentrate / Syrup Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.394,
+              33.6582
+            ],
+            [
+              -84.393,
+              33.6582
+            ],
+            [
+              -84.393,
+              33.659
+            ],
+            [
+              -84.394,
+              33.659
+            ],
+            [
+              -84.394,
+              33.6582
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Atlanta Syrup Plant - Atlanta GA",
+        "type": "Concentrate / Syrup Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3945,
+              33.6564
+            ],
+            [
+              -84.394,
+              33.6564
+            ],
+            [
+              -84.394,
+              33.6578
+            ],
+            [
+              -84.3945,
+              33.6578
+            ],
+            [
+              -84.3945,
+              33.6564
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Atlanta Syrup Plant - Atlanta GA",
+        "type": "Concentrate / Syrup Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3926,
+              33.6556
+            ],
+            [
+              -84.3918,
+              33.6556
+            ],
+            [
+              -84.3918,
+              33.6562
+            ],
+            [
+              -84.3926,
+              33.6562
+            ],
+            [
+              -84.3926,
+              33.6556
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Atlanta Syrup Plant - Atlanta GA",
+        "type": "Concentrate / Syrup Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5705,
+              33.732
+            ],
+            [
+              -84.5679,
+              33.732
+            ],
+            [
+              -84.5679,
+              33.736
+            ],
+            [
+              -84.5705,
+              33.736
+            ],
+            [
+              -84.5705,
+              33.732
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Atlanta Beverage Base Plant - Atlanta GA",
+        "type": "Concentrate / Beverage Base Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 18,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 24,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5699,
+              33.7332
+            ],
+            [
+              -84.5693,
+              33.7332
+            ],
+            [
+              -84.5693,
+              33.7336
+            ],
+            [
+              -84.5699,
+              33.7336
+            ],
+            [
+              -84.5699,
+              33.7332
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Atlanta Beverage Base Plant - Atlanta GA",
+        "type": "Concentrate / Beverage Base Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.57,
+              33.7345
+            ],
+            [
+              -84.5692,
+              33.7345
+            ],
+            [
+              -84.5692,
+              33.7355
+            ],
+            [
+              -84.57,
+              33.7355
+            ],
+            [
+              -84.57,
+              33.7345
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Atlanta Beverage Base Plant - Atlanta GA",
+        "type": "Concentrate / Beverage Base Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5699,
+              33.7342
+            ],
+            [
+              -84.5693,
+              33.7342
+            ],
+            [
+              -84.5693,
+              33.7351
+            ],
+            [
+              -84.5699,
+              33.7351
+            ],
+            [
+              -84.5699,
+              33.7342
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Atlanta Beverage Base Plant - Atlanta GA",
+        "type": "Concentrate / Beverage Base Plant",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.885,
+              35.2825
+            ],
+            [
+              -80.881,
+              35.2825
+            ],
+            [
+              -80.881,
+              35.2868
+            ],
+            [
+              -80.885,
+              35.2868
+            ],
+            [
+              -80.885,
+              35.2825
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Charlotte (Snyder) Production Center, NC",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 38,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.883,
+              35.2861
+            ],
+            [
+              -80.8823,
+              35.2861
+            ],
+            [
+              -80.8823,
+              35.2866
+            ],
+            [
+              -80.883,
+              35.2866
+            ],
+            [
+              -80.883,
+              35.2861
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Charlotte (Snyder) Production Center, NC",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.8846,
+              35.2828
+            ],
+            [
+              -80.8834,
+              35.2828
+            ],
+            [
+              -80.8834,
+              35.2856
+            ],
+            [
+              -80.8846,
+              35.2856
+            ],
+            [
+              -80.8846,
+              35.2828
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Charlotte (Snyder) Production Center, NC",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.8834,
+              35.285
+            ],
+            [
+              -80.8823,
+              35.285
+            ],
+            [
+              -80.8823,
+              35.2864
+            ],
+            [
+              -80.8834,
+              35.2864
+            ],
+            [
+              -80.8834,
+              35.285
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Charlotte (Snyder) Production Center, NC",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.8833,
+              35.2856
+            ],
+            [
+              -80.8822,
+              35.2856
+            ],
+            [
+              -80.8822,
+              35.2865
+            ],
+            [
+              -80.8833,
+              35.2865
+            ],
+            [
+              -80.8833,
+              35.2856
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Charlotte (Snyder) Production Center, NC",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.884,
+              35.283
+            ],
+            [
+              -80.883,
+              35.283
+            ],
+            [
+              -80.883,
+              35.2842
+            ],
+            [
+              -80.884,
+              35.2842
+            ],
+            [
+              -80.884,
+              35.283
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Charlotte (Snyder) Production Center, NC",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.883,
+              35.2856
+            ],
+            [
+              -80.8823,
+              35.2856
+            ],
+            [
+              -80.8823,
+              35.2862
+            ],
+            [
+              -80.883,
+              35.2862
+            ],
+            [
+              -80.883,
+              35.2856
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Charlotte (Snyder) Production Center, NC",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.771,
+              36.1225
+            ],
+            [
+              -86.7682,
+              36.1225
+            ],
+            [
+              -86.7682,
+              36.1258
+            ],
+            [
+              -86.771,
+              36.1258
+            ],
+            [
+              -86.771,
+              36.1225
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Nashville Production Center, TN",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 22,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.7699,
+              36.1253
+            ],
+            [
+              -86.7693,
+              36.1253
+            ],
+            [
+              -86.7693,
+              36.1257
+            ],
+            [
+              -86.7699,
+              36.1257
+            ],
+            [
+              -86.7699,
+              36.1253
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Nashville Production Center, TN",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.7708,
+              36.1227
+            ],
+            [
+              -86.7695,
+              36.1227
+            ],
+            [
+              -86.7695,
+              36.1248
+            ],
+            [
+              -86.7708,
+              36.1248
+            ],
+            [
+              -86.7708,
+              36.1227
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Nashville Production Center, TN",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.7697,
+              36.123
+            ],
+            [
+              -86.769,
+              36.123
+            ],
+            [
+              -86.769,
+              36.1245
+            ],
+            [
+              -86.7697,
+              36.1245
+            ],
+            [
+              -86.7697,
+              36.123
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Nashville Production Center, TN",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.17,
+              30.5854
+            ],
+            [
+              -88.1659,
+              30.5854
+            ],
+            [
+              -88.1659,
+              30.5891
+            ],
+            [
+              -88.17,
+              30.5891
+            ],
+            [
+              -88.17,
+              30.5854
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Mobile Production Center, AL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 15,
+          "trailerParkingCapacity": 50,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 38,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1693,
+              30.586
+            ],
+            [
+              -88.1687,
+              30.586
+            ],
+            [
+              -88.1687,
+              30.5865
+            ],
+            [
+              -88.1693,
+              30.5865
+            ],
+            [
+              -88.1693,
+              30.586
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Mobile Production Center, AL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1676,
+              30.5862
+            ],
+            [
+              -88.1664,
+              30.5862
+            ],
+            [
+              -88.1664,
+              30.588
+            ],
+            [
+              -88.1676,
+              30.588
+            ],
+            [
+              -88.1676,
+              30.5862
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Mobile Production Center, AL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.1676,
+              30.587
+            ],
+            [
+              -88.1666,
+              30.587
+            ],
+            [
+              -88.1666,
+              30.5885
+            ],
+            [
+              -88.1676,
+              30.5885
+            ],
+            [
+              -88.1676,
+              30.587
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Mobile Production Center, AL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.95,
+              37.2735
+            ],
+            [
+              -79.946,
+              37.2735
+            ],
+            [
+              -79.946,
+              37.2775
+            ],
+            [
+              -79.95,
+              37.2775
+            ],
+            [
+              -79.95,
+              37.2735
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Roanoke Production Center, VA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 28,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.949,
+              37.2758
+            ],
+            [
+              -79.9484,
+              37.2758
+            ],
+            [
+              -79.9484,
+              37.2764
+            ],
+            [
+              -79.949,
+              37.2764
+            ],
+            [
+              -79.949,
+              37.2758
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Roanoke Production Center, VA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.949,
+              37.2743
+            ],
+            [
+              -79.9476,
+              37.2743
+            ],
+            [
+              -79.9476,
+              37.2768
+            ],
+            [
+              -79.949,
+              37.2768
+            ],
+            [
+              -79.949,
+              37.2743
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Roanoke Production Center, VA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.9476,
+              37.275
+            ],
+            [
+              -79.9464,
+              37.275
+            ],
+            [
+              -79.9464,
+              37.2768
+            ],
+            [
+              -79.9476,
+              37.2768
+            ],
+            [
+              -79.9476,
+              37.275
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Roanoke Production Center, VA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.2364,
+              34.2216
+            ],
+            [
+              -80.2306,
+              34.2216
+            ],
+            [
+              -80.2306,
+              34.2252
+            ],
+            [
+              -80.2364,
+              34.2252
+            ],
+            [
+              -80.2364,
+              34.2216
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Bishopville Production Center, SC",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 48,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 44,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.2358,
+              34.2215
+            ],
+            [
+              -80.2349,
+              34.2215
+            ],
+            [
+              -80.2349,
+              34.222
+            ],
+            [
+              -80.2358,
+              34.222
+            ],
+            [
+              -80.2358,
+              34.2215
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Bishopville Production Center, SC",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.2362,
+              34.2218
+            ],
+            [
+              -80.2353,
+              34.2218
+            ],
+            [
+              -80.2353,
+              34.2236
+            ],
+            [
+              -80.2362,
+              34.2236
+            ],
+            [
+              -80.2362,
+              34.2218
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Bishopville Production Center, SC",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.233,
+              34.223
+            ],
+            [
+              -80.2316,
+              34.223
+            ],
+            [
+              -80.2316,
+              34.2244
+            ],
+            [
+              -80.233,
+              34.2244
+            ],
+            [
+              -80.233,
+              34.223
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Bishopville Production Center, SC",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.235,
+              34.2216
+            ],
+            [
+              -80.232,
+              34.2216
+            ],
+            [
+              -80.232,
+              34.2222
+            ],
+            [
+              -80.235,
+              34.2222
+            ],
+            [
+              -80.235,
+              34.2216
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Bishopville Production Center, SC",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.2362,
+              34.2222
+            ],
+            [
+              -80.2356,
+              34.2222
+            ],
+            [
+              -80.2356,
+              34.224
+            ],
+            [
+              -80.2362,
+              34.224
+            ],
+            [
+              -80.2362,
+              34.2222
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Bishopville Production Center, SC",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.2497,
+              39.8024
+            ],
+            [
+              -86.2434,
+              39.8024
+            ],
+            [
+              -86.2434,
+              39.805
+            ],
+            [
+              -86.2497,
+              39.805
+            ],
+            [
+              -86.2497,
+              39.8024
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Indianapolis Production Facility, IN",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 50,
+          "trailersVisible": 65,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 38,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.2477,
+              39.8028
+            ],
+            [
+              -86.2471,
+              39.8028
+            ],
+            [
+              -86.2471,
+              39.8032
+            ],
+            [
+              -86.2477,
+              39.8032
+            ],
+            [
+              -86.2477,
+              39.8028
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Indianapolis Production Facility, IN",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.2483,
+              39.803
+            ],
+            [
+              -86.2468,
+              39.803
+            ],
+            [
+              -86.2468,
+              39.8047
+            ],
+            [
+              -86.2483,
+              39.8047
+            ],
+            [
+              -86.2483,
+              39.803
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Indianapolis Production Facility, IN",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.2464,
+              39.8045
+            ],
+            [
+              -86.2442,
+              39.8045
+            ],
+            [
+              -86.2442,
+              39.805
+            ],
+            [
+              -86.2464,
+              39.805
+            ],
+            [
+              -86.2464,
+              39.8045
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Indianapolis Production Facility, IN",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.2442,
+              39.8028
+            ],
+            [
+              -86.2434,
+              39.8028
+            ],
+            [
+              -86.2434,
+              39.8047
+            ],
+            [
+              -86.2442,
+              39.8047
+            ],
+            [
+              -86.2442,
+              39.8028
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Indianapolis Production Facility, IN",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3728,
+              39.9492
+            ],
+            [
+              -86.3705,
+              39.9492
+            ],
+            [
+              -86.3705,
+              39.954
+            ],
+            [
+              -86.3728,
+              39.954
+            ],
+            [
+              -86.3728,
+              39.9492
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Whitestown Distribution & Warehouse, IN",
+        "type": "Distribution Center / Automated Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 50,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 17,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3728,
+              39.95
+            ],
+            [
+              -86.3723,
+              39.95
+            ],
+            [
+              -86.3723,
+              39.9535
+            ],
+            [
+              -86.3728,
+              39.9535
+            ],
+            [
+              -86.3728,
+              39.95
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Whitestown Distribution & Warehouse, IN",
+        "type": "Distribution Center / Automated Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3725,
+              39.95
+            ],
+            [
+              -86.372,
+              39.95
+            ],
+            [
+              -86.372,
+              39.9535
+            ],
+            [
+              -86.3725,
+              39.9535
+            ],
+            [
+              -86.3725,
+              39.95
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Whitestown Distribution & Warehouse, IN",
+        "type": "Distribution Center / Automated Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.965,
+              39.84
+            ],
+            [
+              -82.9605,
+              39.84
+            ],
+            [
+              -82.9605,
+              39.8458
+            ],
+            [
+              -82.965,
+              39.8458
+            ],
+            [
+              -82.965,
+              39.84
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Columbus Distribution Center, OH",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 170,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 60,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.9608,
+              39.8444
+            ],
+            [
+              -82.96,
+              39.8444
+            ],
+            [
+              -82.96,
+              39.845
+            ],
+            [
+              -82.9608,
+              39.845
+            ],
+            [
+              -82.9608,
+              39.8444
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Columbus Distribution Center, OH",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.962,
+              39.8405
+            ],
+            [
+              -82.9608,
+              39.8405
+            ],
+            [
+              -82.9608,
+              39.844
+            ],
+            [
+              -82.962,
+              39.844
+            ],
+            [
+              -82.962,
+              39.8405
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Columbus Distribution Center, OH",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.9645,
+              39.8432
+            ],
+            [
+              -82.9628,
+              39.8432
+            ],
+            [
+              -82.9628,
+              39.8448
+            ],
+            [
+              -82.9645,
+              39.8448
+            ],
+            [
+              -82.9645,
+              39.8432
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Columbus Distribution Center, OH",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.9627,
+              39.8405
+            ],
+            [
+              -82.9618,
+              39.8405
+            ],
+            [
+              -82.9618,
+              39.8443
+            ],
+            [
+              -82.9627,
+              39.8443
+            ],
+            [
+              -82.9627,
+              39.8405
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Columbus Distribution Center, OH",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.9652,
+              39.8408
+            ],
+            [
+              -82.9644,
+              39.8408
+            ],
+            [
+              -82.9644,
+              39.8442
+            ],
+            [
+              -82.9652,
+              39.8442
+            ],
+            [
+              -82.9652,
+              39.8408
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Columbus Distribution Center, OH",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5374,
+              39.2936
+            ],
+            [
+              -84.5352,
+              39.2936
+            ],
+            [
+              -84.5352,
+              39.2957
+            ],
+            [
+              -84.5374,
+              39.2957
+            ],
+            [
+              -84.5374,
+              39.2936
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Cincinnati Sales & Distribution Center, OH",
+        "type": "Sales / Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 11,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5372,
+              39.2949
+            ],
+            [
+              -84.5365,
+              39.2949
+            ],
+            [
+              -84.5365,
+              39.2956
+            ],
+            [
+              -84.5372,
+              39.2956
+            ],
+            [
+              -84.5372,
+              39.2949
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Cincinnati Sales & Distribution Center, OH",
+        "type": "Sales / Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5371,
+              39.2947
+            ],
+            [
+              -84.5365,
+              39.2947
+            ],
+            [
+              -84.5365,
+              39.2956
+            ],
+            [
+              -84.5371,
+              39.2956
+            ],
+            [
+              -84.5371,
+              39.2947
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Cincinnati Sales & Distribution Center, OH",
+        "type": "Sales / Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4576,
+              41.2941
+            ],
+            [
+              -81.453,
+              41.2941
+            ],
+            [
+              -81.453,
+              41.298
+            ],
+            [
+              -81.4576,
+              41.298
+            ],
+            [
+              -81.4576,
+              41.2941
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Twinsburg Sales & Distribution Center, OH",
+        "type": "Sales / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 160,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 40,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4547,
+              41.2968
+            ],
+            [
+              -81.4539,
+              41.2968
+            ],
+            [
+              -81.4539,
+              41.2979
+            ],
+            [
+              -81.4547,
+              41.2979
+            ],
+            [
+              -81.4547,
+              41.2968
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Twinsburg Sales & Distribution Center, OH",
+        "type": "Sales / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4552,
+              41.295
+            ],
+            [
+              -81.4535,
+              41.295
+            ],
+            [
+              -81.4535,
+              41.297
+            ],
+            [
+              -81.4552,
+              41.297
+            ],
+            [
+              -81.4552,
+              41.295
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Twinsburg Sales & Distribution Center, OH",
+        "type": "Sales / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4562,
+              41.2941
+            ],
+            [
+              -81.4543,
+              41.2941
+            ],
+            [
+              -81.4543,
+              41.2956
+            ],
+            [
+              -81.4562,
+              41.2956
+            ],
+            [
+              -81.4562,
+              41.2941
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Twinsburg Sales & Distribution Center, OH",
+        "type": "Sales / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4561,
+              41.2961
+            ],
+            [
+              -81.4552,
+              41.2961
+            ],
+            [
+              -81.4552,
+              41.2972
+            ],
+            [
+              -81.4561,
+              41.2972
+            ],
+            [
+              -81.4561,
+              41.2961
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Twinsburg Sales & Distribution Center, OH",
+        "type": "Sales / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3408,
+              37.5306
+            ],
+            [
+              -77.3345,
+              37.5306
+            ],
+            [
+              -77.3345,
+              37.5347
+            ],
+            [
+              -77.3408,
+              37.5347
+            ],
+            [
+              -77.3408,
+              37.5306
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Sandston Sales & Distribution Center, VA",
+        "type": "Sales / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 62.6,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3372,
+              37.5337
+            ],
+            [
+              -77.3363,
+              37.5337
+            ],
+            [
+              -77.3363,
+              37.5343
+            ],
+            [
+              -77.3372,
+              37.5343
+            ],
+            [
+              -77.3372,
+              37.5337
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Sandston Sales & Distribution Center, VA",
+        "type": "Sales / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3407,
+              37.5331
+            ],
+            [
+              -77.3392,
+              37.5331
+            ],
+            [
+              -77.3392,
+              37.534
+            ],
+            [
+              -77.3407,
+              37.534
+            ],
+            [
+              -77.3407,
+              37.5331
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Sandston Sales & Distribution Center, VA",
+        "type": "Sales / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3358,
+              37.5333
+            ],
+            [
+              -77.3347,
+              37.5333
+            ],
+            [
+              -77.3347,
+              37.5341
+            ],
+            [
+              -77.3358,
+              37.5341
+            ],
+            [
+              -77.3358,
+              37.5333
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Sandston Sales & Distribution Center, VA",
+        "type": "Sales / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.3402,
+              37.5324
+            ],
+            [
+              -77.3388,
+              37.5324
+            ],
+            [
+              -77.3388,
+              37.5331
+            ],
+            [
+              -77.3402,
+              37.5331
+            ],
+            [
+              -77.3402,
+              37.5324
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Sandston Sales & Distribution Center, VA",
+        "type": "Sales / Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.612,
+              39.0345
+            ],
+            [
+              -84.608,
+              39.0345
+            ],
+            [
+              -84.608,
+              39.0384
+            ],
+            [
+              -84.612,
+              39.0384
+            ],
+            [
+              -84.612,
+              39.0345
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Erlanger Distribution & Sales Center, KY",
+        "type": "Distribution / Sales Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 31.6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.6118,
+              39.0349
+            ],
+            [
+              -84.611,
+              39.0349
+            ],
+            [
+              -84.611,
+              39.0355
+            ],
+            [
+              -84.6118,
+              39.0355
+            ],
+            [
+              -84.6118,
+              39.0349
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Erlanger Distribution & Sales Center, KY",
+        "type": "Distribution / Sales Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.6116,
+              39.037
+            ],
+            [
+              -84.6101,
+              39.037
+            ],
+            [
+              -84.6101,
+              39.0382
+            ],
+            [
+              -84.6116,
+              39.0382
+            ],
+            [
+              -84.6116,
+              39.037
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Erlanger Distribution & Sales Center, KY",
+        "type": "Distribution / Sales Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.6116,
+              39.0354
+            ],
+            [
+              -84.6098,
+              39.0354
+            ],
+            [
+              -84.6098,
+              39.0372
+            ],
+            [
+              -84.6116,
+              39.0372
+            ],
+            [
+              -84.6116,
+              39.0354
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Erlanger Distribution & Sales Center, KY",
+        "type": "Distribution / Sales Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.8918,
+              38.1343
+            ],
+            [
+              -85.8895,
+              38.1343
+            ],
+            [
+              -85.8895,
+              38.1392
+            ],
+            [
+              -85.8918,
+              38.1392
+            ],
+            [
+              -85.8918,
+              38.1343
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Louisville Distribution Center, KY",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 80,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 27,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.8915,
+              38.1385
+            ],
+            [
+              -85.8908,
+              38.1385
+            ],
+            [
+              -85.8908,
+              38.1391
+            ],
+            [
+              -85.8915,
+              38.1391
+            ],
+            [
+              -85.8915,
+              38.1385
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Louisville Distribution Center, KY",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.8915,
+              38.1345
+            ],
+            [
+              -85.8895,
+              38.1345
+            ],
+            [
+              -85.8895,
+              38.1368
+            ],
+            [
+              -85.8915,
+              38.1368
+            ],
+            [
+              -85.8915,
+              38.1345
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Louisville Distribution Center, KY",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.8918,
+              38.136
+            ],
+            [
+              -85.891,
+              38.136
+            ],
+            [
+              -85.891,
+              38.1388
+            ],
+            [
+              -85.8918,
+              38.1388
+            ],
+            [
+              -85.8918,
+              38.136
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola Consolidated - Louisville Distribution Center, KY",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.7705,
+              33.56
+            ],
+            [
+              -86.7655,
+              33.56
+            ],
+            [
+              -86.7655,
+              33.5635
+            ],
+            [
+              -86.7705,
+              33.5635
+            ],
+            [
+              -86.7705,
+              33.56
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - Birmingham Production Plant, AL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 50,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 140,
+          "truckGateCount": 2,
+          "buildingCount": 3,
+          "siteAreaAcres": 44.7,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.7698,
+              33.5601
+            ],
+            [
+              -86.769,
+              33.5601
+            ],
+            [
+              -86.769,
+              33.5607
+            ],
+            [
+              -86.7698,
+              33.5607
+            ],
+            [
+              -86.7698,
+              33.5601
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - Birmingham Production Plant, AL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.7702,
+              33.5618
+            ],
+            [
+              -86.7682,
+              33.5618
+            ],
+            [
+              -86.7682,
+              33.5628
+            ],
+            [
+              -86.7702,
+              33.5628
+            ],
+            [
+              -86.7702,
+              33.5618
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - Birmingham Production Plant, AL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.7672,
+              33.562
+            ],
+            [
+              -86.7656,
+              33.562
+            ],
+            [
+              -86.7656,
+              33.563
+            ],
+            [
+              -86.7672,
+              33.563
+            ],
+            [
+              -86.7672,
+              33.562
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - Birmingham Production Plant, AL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.7702,
+              33.5605
+            ],
+            [
+              -86.7688,
+              33.5605
+            ],
+            [
+              -86.7688,
+              33.5618
+            ],
+            [
+              -86.7702,
+              33.5618
+            ],
+            [
+              -86.7702,
+              33.5605
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - Birmingham Production Plant, AL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.345,
+              32.2915
+            ],
+            [
+              -86.3415,
+              32.2915
+            ],
+            [
+              -86.3415,
+              32.295
+            ],
+            [
+              -86.345,
+              32.295
+            ],
+            [
+              -86.345,
+              32.2915
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - Montgomery Production Plant, AL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 85,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 31.7,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.344,
+              32.2939
+            ],
+            [
+              -86.3432,
+              32.2939
+            ],
+            [
+              -86.3432,
+              32.2944
+            ],
+            [
+              -86.344,
+              32.2944
+            ],
+            [
+              -86.344,
+              32.2939
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - Montgomery Production Plant, AL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3438,
+              32.2942
+            ],
+            [
+              -86.3418,
+              32.2942
+            ],
+            [
+              -86.3418,
+              32.2952
+            ],
+            [
+              -86.3438,
+              32.2952
+            ],
+            [
+              -86.3438,
+              32.2942
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - Montgomery Production Plant, AL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3434,
+              32.2924
+            ],
+            [
+              -86.3418,
+              32.2924
+            ],
+            [
+              -86.3418,
+              32.293
+            ],
+            [
+              -86.3434,
+              32.293
+            ],
+            [
+              -86.3434,
+              32.2924
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - Montgomery Production Plant, AL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.3434,
+              32.294
+            ],
+            [
+              -86.3425,
+              32.294
+            ],
+            [
+              -86.3425,
+              32.2944
+            ],
+            [
+              -86.3434,
+              32.2944
+            ],
+            [
+              -86.3434,
+              32.294
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - Montgomery Production Plant, AL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.4698,
+              33.6244
+            ],
+            [
+              -84.4662,
+              33.6244
+            ],
+            [
+              -84.4662,
+              33.6288
+            ],
+            [
+              -84.4698,
+              33.6288
+            ],
+            [
+              -84.4698,
+              33.6244
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - College Park Production Plant, GA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 40.4,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.4694,
+              33.6245
+            ],
+            [
+              -84.4688,
+              33.6245
+            ],
+            [
+              -84.4688,
+              33.625
+            ],
+            [
+              -84.4694,
+              33.625
+            ],
+            [
+              -84.4694,
+              33.6245
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - College Park Production Plant, GA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.4698,
+              33.6258
+            ],
+            [
+              -84.4682,
+              33.6258
+            ],
+            [
+              -84.4682,
+              33.6285
+            ],
+            [
+              -84.4698,
+              33.6285
+            ],
+            [
+              -84.4698,
+              33.6258
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - College Park Production Plant, GA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.4678,
+              33.6252
+            ],
+            [
+              -84.467,
+              33.6252
+            ],
+            [
+              -84.467,
+              33.6282
+            ],
+            [
+              -84.4678,
+              33.6282
+            ],
+            [
+              -84.4678,
+              33.6252
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - College Park Production Plant, GA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.469,
+              33.6248
+            ],
+            [
+              -84.468,
+              33.6248
+            ],
+            [
+              -84.468,
+              33.6256
+            ],
+            [
+              -84.469,
+              33.6256
+            ],
+            [
+              -84.469,
+              33.6248
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - College Park Production Plant, GA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5447,
+              33.9738
+            ],
+            [
+              -84.54165,
+              33.9738
+            ],
+            [
+              -84.54165,
+              33.97625
+            ],
+            [
+              -84.5447,
+              33.97625
+            ],
+            [
+              -84.5447,
+              33.9738
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - Marietta Production Plant, GA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 38,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 16.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5449,
+              33.97555
+            ],
+            [
+              -84.5444,
+              33.97555
+            ],
+            [
+              -84.5444,
+              33.97585
+            ],
+            [
+              -84.5449,
+              33.97585
+            ],
+            [
+              -84.5449,
+              33.97555
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - Marietta Production Plant, GA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5435,
+              33.9756
+            ],
+            [
+              -84.5418,
+              33.9756
+            ],
+            [
+              -84.5418,
+              33.9762
+            ],
+            [
+              -84.5435,
+              33.9762
+            ],
+            [
+              -84.5435,
+              33.9756
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - Marietta Production Plant, GA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.5438,
+              33.9752
+            ],
+            [
+              -84.5418,
+              33.9752
+            ],
+            [
+              -84.5418,
+              33.97565
+            ],
+            [
+              -84.5438,
+              33.97565
+            ],
+            [
+              -84.5438,
+              33.9752
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - Marietta Production Plant, GA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.1405,
+              30.5325
+            ],
+            [
+              -91.1325,
+              30.5325
+            ],
+            [
+              -91.1325,
+              30.5395
+            ],
+            [
+              -91.1405,
+              30.5395
+            ],
+            [
+              -91.1405,
+              30.5325
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - Baton Rouge Production Plant, LA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 112,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.1399,
+              30.534
+            ],
+            [
+              -91.1388,
+              30.534
+            ],
+            [
+              -91.1388,
+              30.5352
+            ],
+            [
+              -91.1399,
+              30.5352
+            ],
+            [
+              -91.1399,
+              30.534
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - Baton Rouge Production Plant, LA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.1356,
+              30.537
+            ],
+            [
+              -91.1332,
+              30.537
+            ],
+            [
+              -91.1332,
+              30.5383
+            ],
+            [
+              -91.1356,
+              30.5383
+            ],
+            [
+              -91.1356,
+              30.537
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - Baton Rouge Production Plant, LA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.1368,
+              30.5356
+            ],
+            [
+              -91.133,
+              30.5356
+            ],
+            [
+              -91.133,
+              30.5364
+            ],
+            [
+              -91.1368,
+              30.5364
+            ],
+            [
+              -91.1368,
+              30.5356
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - Baton Rouge Production Plant, LA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.1378,
+              30.5342
+            ],
+            [
+              -91.1365,
+              30.5342
+            ],
+            [
+              -91.1365,
+              30.535
+            ],
+            [
+              -91.1378,
+              30.535
+            ],
+            [
+              -91.1378,
+              30.5342
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - Baton Rouge Production Plant, LA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.1932,
+              29.945
+            ],
+            [
+              -90.1895,
+              29.945
+            ],
+            [
+              -90.1895,
+              29.9485
+            ],
+            [
+              -90.1932,
+              29.9485
+            ],
+            [
+              -90.1932,
+              29.945
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - New Orleans Production Plant, LA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 12,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.1931,
+              29.9456
+            ],
+            [
+              -90.1923,
+              29.9456
+            ],
+            [
+              -90.1923,
+              29.9462
+            ],
+            [
+              -90.1931,
+              29.9462
+            ],
+            [
+              -90.1931,
+              29.9456
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - New Orleans Production Plant, LA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.1918,
+              29.945
+            ],
+            [
+              -90.1905,
+              29.945
+            ],
+            [
+              -90.1905,
+              29.946
+            ],
+            [
+              -90.1918,
+              29.946
+            ],
+            [
+              -90.1918,
+              29.945
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - New Orleans Production Plant, LA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.2554,
+              35.0905
+            ],
+            [
+              -85.2508,
+              35.0905
+            ],
+            [
+              -85.2508,
+              35.0945
+            ],
+            [
+              -85.2554,
+              35.0945
+            ],
+            [
+              -85.2554,
+              35.0905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - Chattanooga Production Plant, TN",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 50,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 19,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.2553,
+              35.091
+            ],
+            [
+              -85.2544,
+              35.091
+            ],
+            [
+              -85.2544,
+              35.0918
+            ],
+            [
+              -85.2553,
+              35.0918
+            ],
+            [
+              -85.2553,
+              35.091
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - Chattanooga Production Plant, TN",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.2542,
+              35.0906
+            ],
+            [
+              -85.2524,
+              35.0906
+            ],
+            [
+              -85.2524,
+              35.0916
+            ],
+            [
+              -85.2542,
+              35.0916
+            ],
+            [
+              -85.2542,
+              35.0906
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - Chattanooga Production Plant, TN",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.2543,
+              35.0912
+            ],
+            [
+              -85.2532,
+              35.0912
+            ],
+            [
+              -85.2532,
+              35.0923
+            ],
+            [
+              -85.2543,
+              35.0923
+            ],
+            [
+              -85.2543,
+              35.0912
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - Chattanooga Production Plant, TN",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.255,
+              35.0908
+            ],
+            [
+              -85.2542,
+              35.0908
+            ],
+            [
+              -85.2542,
+              35.0916
+            ],
+            [
+              -85.255,
+              35.0916
+            ],
+            [
+              -85.255,
+              35.0908
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Coca-Cola UNITED - Chattanooga Production Plant, TN",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.7972,
+              42.0143
+            ],
+            [
+              -87.7935,
+              42.0143
+            ],
+            [
+              -87.7935,
+              42.0182
+            ],
+            [
+              -87.7972,
+              42.0182
+            ],
+            [
+              -87.7972,
+              42.0143
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Reyes Coca-Cola Bottling - Niles Production Plant, IL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 2,
+          "buildingCount": 3,
+          "siteAreaAcres": 28,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.7944,
+              42.0168
+            ],
+            [
+              -87.7938,
+              42.0168
+            ],
+            [
+              -87.7938,
+              42.0176
+            ],
+            [
+              -87.7944,
+              42.0176
+            ],
+            [
+              -87.7944,
+              42.0168
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Reyes Coca-Cola Bottling - Niles Production Plant, IL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.7956,
+              42.0166
+            ],
+            [
+              -87.7939,
+              42.0166
+            ],
+            [
+              -87.7939,
+              42.018
+            ],
+            [
+              -87.7956,
+              42.018
+            ],
+            [
+              -87.7956,
+              42.0166
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Reyes Coca-Cola Bottling - Niles Production Plant, IL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.796,
+              42.0162
+            ],
+            [
+              -87.7942,
+              42.0162
+            ],
+            [
+              -87.7942,
+              42.0178
+            ],
+            [
+              -87.796,
+              42.0178
+            ],
+            [
+              -87.796,
+              42.0162
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Reyes Coca-Cola Bottling - Niles Production Plant, IL",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.1315,
+              33.9318
+            ],
+            [
+              -118.1256,
+              33.9318
+            ],
+            [
+              -118.1256,
+              33.9358
+            ],
+            [
+              -118.1315,
+              33.9358
+            ],
+            [
+              -118.1315,
+              33.9318
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Reyes Coca-Cola Bottling - Downey Production Plant, CA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 80,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 40,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.1298,
+              33.9317
+            ],
+            [
+              -118.1288,
+              33.9317
+            ],
+            [
+              -118.1288,
+              33.9323
+            ],
+            [
+              -118.1298,
+              33.9323
+            ],
+            [
+              -118.1298,
+              33.9317
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Reyes Coca-Cola Bottling - Downey Production Plant, CA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.1313,
+              33.9321
+            ],
+            [
+              -118.129,
+              33.9321
+            ],
+            [
+              -118.129,
+              33.9332
+            ],
+            [
+              -118.1313,
+              33.9332
+            ],
+            [
+              -118.1313,
+              33.9321
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Reyes Coca-Cola Bottling - Downey Production Plant, CA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.1278,
+              33.9342
+            ],
+            [
+              -118.1256,
+              33.9342
+            ],
+            [
+              -118.1256,
+              33.9356
+            ],
+            [
+              -118.1278,
+              33.9356
+            ],
+            [
+              -118.1278,
+              33.9342
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Reyes Coca-Cola Bottling - Downey Production Plant, CA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.1295,
+              33.9323
+            ],
+            [
+              -118.127,
+              33.9323
+            ],
+            [
+              -118.127,
+              33.9333
+            ],
+            [
+              -118.1295,
+              33.9333
+            ],
+            [
+              -118.1295,
+              33.9323
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Reyes Coca-Cola Bottling - Downey Production Plant, CA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.1699,
+              37.6973
+            ],
+            [
+              -122.1664,
+              37.6973
+            ],
+            [
+              -122.1664,
+              37.7006
+            ],
+            [
+              -122.1699,
+              37.7006
+            ],
+            [
+              -122.1699,
+              37.6973
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Reyes Coca-Cola Bottling - San Leandro Production Plant, CA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 22,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 9,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.168,
+              37.6976
+            ],
+            [
+              -122.16745,
+              37.6976
+            ],
+            [
+              -122.16745,
+              37.698
+            ],
+            [
+              -122.168,
+              37.698
+            ],
+            [
+              -122.168,
+              37.6976
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Reyes Coca-Cola Bottling - San Leandro Production Plant, CA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.16985,
+              37.6976
+            ],
+            [
+              -122.167,
+              37.6976
+            ],
+            [
+              -122.167,
+              37.6982
+            ],
+            [
+              -122.16985,
+              37.6982
+            ],
+            [
+              -122.16985,
+              37.6976
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Reyes Coca-Cola Bottling - San Leandro Production Plant, CA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.16985,
+              37.6977
+            ],
+            [
+              -122.167,
+              37.6977
+            ],
+            [
+              -122.167,
+              37.6983
+            ],
+            [
+              -122.16985,
+              37.6983
+            ],
+            [
+              -122.16985,
+              37.6977
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Reyes Coca-Cola Bottling - San Leandro Production Plant, CA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.5545,
+              34.0812
+            ],
+            [
+              -117.5515,
+              34.0812
+            ],
+            [
+              -117.5515,
+              34.0834
+            ],
+            [
+              -117.5545,
+              34.0834
+            ],
+            [
+              -117.5545,
+              34.0812
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Reyes Coca-Cola Bottling - Rancho Cucamonga Bottling & Distribution Center, CA",
+        "type": "Bottling / Manufacturing + Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "NONE",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 14,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.1138,
+              40.0054
+            ],
+            [
+              -75.1092,
+              40.0054
+            ],
+            [
+              -75.1092,
+              40.0092
+            ],
+            [
+              -75.1138,
+              40.0092
+            ],
+            [
+              -75.1138,
+              40.0054
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Liberty Coca-Cola Beverages - Philadelphia Production Plant, PA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 2,
+          "buildingCount": 3,
+          "siteAreaAcres": 14,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.1101,
+              40.00825
+            ],
+            [
+              -75.10955,
+              40.00825
+            ],
+            [
+              -75.10955,
+              40.00865
+            ],
+            [
+              -75.1101,
+              40.00865
+            ],
+            [
+              -75.1101,
+              40.00825
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Liberty Coca-Cola Beverages - Philadelphia Production Plant, PA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.1115,
+              40.0064
+            ],
+            [
+              -75.1096,
+              40.0064
+            ],
+            [
+              -75.1096,
+              40.009
+            ],
+            [
+              -75.1115,
+              40.009
+            ],
+            [
+              -75.1115,
+              40.0064
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Liberty Coca-Cola Beverages - Philadelphia Production Plant, PA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.1128,
+              40.006
+            ],
+            [
+              -75.1115,
+              40.006
+            ],
+            [
+              -75.1115,
+              40.008
+            ],
+            [
+              -75.1128,
+              40.008
+            ],
+            [
+              -75.1128,
+              40.006
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Liberty Coca-Cola Beverages - Philadelphia Production Plant, PA",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.9162,
+              40.7198
+            ],
+            [
+              -73.9132,
+              40.7198
+            ],
+            [
+              -73.9132,
+              40.7226
+            ],
+            [
+              -73.9162,
+              40.7226
+            ],
+            [
+              -73.9162,
+              40.7198
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Liberty Coca-Cola Beverages - Maspeth Production Plant, NY",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "NONE",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 7.3,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.9725,
+              40.7276
+            ],
+            [
+              -111.969,
+              40.7276
+            ],
+            [
+              -111.969,
+              40.73
+            ],
+            [
+              -111.9725,
+              40.73
+            ],
+            [
+              -111.9725,
+              40.7276
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Swire Coca-Cola USA - Salt Lake City Production Plant, UT",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "NONE",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 12,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.9645,
+              39.7687
+            ],
+            [
+              -104.9595,
+              39.7687
+            ],
+            [
+              -104.9595,
+              39.7719
+            ],
+            [
+              -104.9645,
+              39.7719
+            ],
+            [
+              -104.9645,
+              39.7687
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Swire Coca-Cola USA - Denver Production Plant, CO",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 85,
+          "truckGateCount": 2,
+          "buildingCount": 3,
+          "siteAreaAcres": 16,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.9639,
+              39.77
+            ],
+            [
+              -104.9632,
+              39.77
+            ],
+            [
+              -104.9632,
+              39.77075
+            ],
+            [
+              -104.9639,
+              39.77075
+            ],
+            [
+              -104.9639,
+              39.77
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Swire Coca-Cola USA - Denver Production Plant, CO",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.9638,
+              39.7702
+            ],
+            [
+              -104.961,
+              39.7702
+            ],
+            [
+              -104.961,
+              39.7717
+            ],
+            [
+              -104.9638,
+              39.7717
+            ],
+            [
+              -104.9638,
+              39.7702
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Swire Coca-Cola USA - Denver Production Plant, CO",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -104.9632,
+              39.7696
+            ],
+            [
+              -104.961,
+              39.7696
+            ],
+            [
+              -104.961,
+              39.7711
+            ],
+            [
+              -104.9632,
+              39.7711
+            ],
+            [
+              -104.9632,
+              39.7696
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "coca-cola",
+        "name": "Swire Coca-Cola USA - Denver Production Plant, CO",
+        "type": "Bottling / Manufacturing Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    }
+  ]
+}

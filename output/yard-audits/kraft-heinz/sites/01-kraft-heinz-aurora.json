@@ -1,0 +1,22 @@
+{
+  "name": "Kraft Heinz - Aurora",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "streetview": "Street View faces a blank side wall set back behind a landscaped berm and trees - no gate visible. Gate fields read from satellite only.",
+    "truckGate": "Satellite shows a single controlled entry from the road on the south/southeast corner into the dock yard; gate hardware not resolvable.",
+    "dropYard": "Large dedicated trailer-storage lots north of the building and along the south face, full of parked trailers.",
+    "guardShack": "No booth resolved at the entry; marked remoteGs as the more likely case for a modern DC."
+  }
+}

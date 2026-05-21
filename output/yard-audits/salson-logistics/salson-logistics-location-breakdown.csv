@@ -1,0 +1,45 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+SalSon Logistics - Newark NJ (Flagship Campus),Warehouse / Container Yard,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,YES,YES,,2,1,YES,,,,YES,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@40.701641,-74.131704,400m/data=!3m1!1e3"
+SalSon Logistics - Newark NJ (481 Doremus Warehouse),Food-Grade Warehouse / Container Storage,#4,Gate + GS (BU sens.),,,,,,,,,,,YES,YES,,,YES,YES,,YES,YES,,1,1,,,,YES,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@40.716800,-74.130000,400m/data=!3m1!1e3"
+SalSon Logistics - Florence NJ,Warehouse / Transload Hub,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,YES,,,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@40.097016,-74.808053,400m/data=!3m1!1e3"
+SalSon Logistics - Compton CA,Intermodal / Transload Warehouse + Secured Yard,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,YES,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@33.860150,-118.229800,400m/data=!3m1!1e3"
+SalSon Logistics - Conley GA (Atlanta),Warehouse / Dedicated Fleet Terminal,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,YES,,YES,1,1,,,YES,,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@33.635450,-84.317050,400m/data=!3m1!1e3"
+SalSon Logistics - North Charleston SC,Drayage Terminal / Food-Grade Warehouse,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,YES,,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@32.919050,-80.066800,400m/data=!3m1!1e3"
+SalSon Logistics - Chesapeake VA (Norfolk),Drayage Terminal / Container & Trailer Yard,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,YES,,,,,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@36.770500,-76.376100,400m/data=!3m1!1e3"
+SalSon Logistics - Houston TX,Drayage Terminal / Truck & Trailer Parking Yard,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,,YES,,,YES,,1,1,YES,,,,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@29.806200,-95.275000,400m/data=!3m1!1e3"
+SalSon Logistics - Savannah GA,Drayage Terminal / Crossdock Warehouse + Container Yard,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,,YES,,1,1,,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@32.089450,-81.134250,400m/data=!3m1!1e3"
+SalSon Logistics - Smithton PA (Dick's Sporting Goods DC),Dedicated-Fleet Terminal at Retail Distribution Center,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@40.178800,-79.748000,400m/data=!3m1!1e3"
+SalSon Logistics - Dick's Sporting Goods Conklin DC (Dedicated Fleet) - Conklin NY,E-commerce distribution center (SalSon dedicated-fleet operation),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@42.04280,-75.81000,400m/data=!3m1!1e3"
+SalSon Logistics - Tacoma WA (TriPak Inc),Port Drayage / Rail Transload Warehouse,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,,YES,,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@47.258525,-122.392010,400m/data=!3m1!1e3"
+SalSon Logistics - Oakland CA,Port Drayage Terminal,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Urban,,,,,
+SalSon Logistics - Bakersfield CA,Intermodal / Fleet Location,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@35.239200,-119.109300,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,6,43%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,1,7%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,2,14%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,5,36%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,14,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,7,50%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,4,29%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,3,21%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,11,79%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,14,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,14,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

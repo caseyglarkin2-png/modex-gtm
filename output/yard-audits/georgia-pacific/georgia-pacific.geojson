@@ -1,0 +1,6512 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.4135,
+              46.1485
+            ],
+            [
+              -123.4015,
+              46.1485
+            ],
+            [
+              -123.4015,
+              46.1605
+            ],
+            [
+              -123.4135,
+              46.1605
+            ],
+            [
+              -123.4135,
+              46.1485
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Wauna Mill - Clatskanie OR",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 23,
+          "trailerParkingCapacity": 50,
+          "truckGateCount": 1,
+          "buildingCount": 12,
+          "siteAreaAcres": 165,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.4078,
+              46.15
+            ],
+            [
+              -123.406,
+              46.15
+            ],
+            [
+              -123.406,
+              46.1512
+            ],
+            [
+              -123.4078,
+              46.1512
+            ],
+            [
+              -123.4078,
+              46.15
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Wauna Mill - Clatskanie OR",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.4098,
+              46.1571
+            ],
+            [
+              -123.4082,
+              46.1571
+            ],
+            [
+              -123.4082,
+              46.1581
+            ],
+            [
+              -123.4098,
+              46.1581
+            ],
+            [
+              -123.4098,
+              46.1571
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Wauna Mill - Clatskanie OR",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.4078,
+              46.15
+            ],
+            [
+              -123.4055,
+              46.15
+            ],
+            [
+              -123.4055,
+              46.1512
+            ],
+            [
+              -123.4078,
+              46.1512
+            ],
+            [
+              -123.4078,
+              46.15
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Wauna Mill - Clatskanie OR",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.4098,
+              46.1568
+            ],
+            [
+              -123.4088,
+              46.1568
+            ],
+            [
+              -123.4088,
+              46.1576
+            ],
+            [
+              -123.4098,
+              46.1576
+            ],
+            [
+              -123.4098,
+              46.1568
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Wauna Mill - Clatskanie OR",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.408,
+              46.1497
+            ],
+            [
+              -123.4062,
+              46.1497
+            ],
+            [
+              -123.4062,
+              46.151
+            ],
+            [
+              -123.408,
+              46.151
+            ],
+            [
+              -123.408,
+              46.1497
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Wauna Mill - Clatskanie OR",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.1675,
+              44.3735
+            ],
+            [
+              -123.1525,
+              44.3735
+            ],
+            [
+              -123.1525,
+              44.3925
+            ],
+            [
+              -123.1675,
+              44.3925
+            ],
+            [
+              -123.1675,
+              44.3735
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Halsey Mill - Halsey OR",
+        "type": "Tissue/Pulp Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 10,
+          "siteAreaAcres": 180,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.1648,
+              44.38
+            ],
+            [
+              -123.1632,
+              44.38
+            ],
+            [
+              -123.1632,
+              44.3812
+            ],
+            [
+              -123.1648,
+              44.3812
+            ],
+            [
+              -123.1648,
+              44.38
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Halsey Mill - Halsey OR",
+        "type": "Tissue/Pulp Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.1635,
+              44.376
+            ],
+            [
+              -123.1588,
+              44.376
+            ],
+            [
+              -123.1588,
+              44.3792
+            ],
+            [
+              -123.1635,
+              44.3792
+            ],
+            [
+              -123.1635,
+              44.376
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Halsey Mill - Halsey OR",
+        "type": "Tissue/Pulp Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.1602,
+              44.3782
+            ],
+            [
+              -123.1582,
+              44.3782
+            ],
+            [
+              -123.1582,
+              44.3792
+            ],
+            [
+              -123.1602,
+              44.3792
+            ],
+            [
+              -123.1602,
+              44.3782
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Halsey Mill - Halsey OR",
+        "type": "Tissue/Pulp Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.1648,
+              44.3792
+            ],
+            [
+              -123.1632,
+              44.3792
+            ],
+            [
+              -123.1632,
+              44.3805
+            ],
+            [
+              -123.1648,
+              44.3805
+            ],
+            [
+              -123.1648,
+              44.3792
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Halsey Mill - Halsey OR",
+        "type": "Tissue/Pulp Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.981,
+              33.1345
+            ],
+            [
+              -91.9595,
+              33.1345
+            ],
+            [
+              -91.9595,
+              33.15
+            ],
+            [
+              -91.981,
+              33.15
+            ],
+            [
+              -91.981,
+              33.1345
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Crossett Mill - Crossett AR",
+        "type": "Pulp/Paper/Tissue Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 2,
+          "buildingCount": 14,
+          "siteAreaAcres": 320,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.9728,
+              33.1353
+            ],
+            [
+              -91.9716,
+              33.1353
+            ],
+            [
+              -91.9716,
+              33.1362
+            ],
+            [
+              -91.9728,
+              33.1362
+            ],
+            [
+              -91.9728,
+              33.1353
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Crossett Mill - Crossett AR",
+        "type": "Pulp/Paper/Tissue Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.9742,
+              33.136
+            ],
+            [
+              -91.9718,
+              33.136
+            ],
+            [
+              -91.9718,
+              33.1378
+            ],
+            [
+              -91.9742,
+              33.1378
+            ],
+            [
+              -91.9742,
+              33.136
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Crossett Mill - Crossett AR",
+        "type": "Pulp/Paper/Tissue Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.9722,
+              33.1362
+            ],
+            [
+              -91.97,
+              33.1362
+            ],
+            [
+              -91.97,
+              33.1382
+            ],
+            [
+              -91.9722,
+              33.1382
+            ],
+            [
+              -91.9722,
+              33.1362
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Crossett Mill - Crossett AR",
+        "type": "Pulp/Paper/Tissue Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -91.9728,
+              33.1356
+            ],
+            [
+              -91.9716,
+              33.1356
+            ],
+            [
+              -91.9716,
+              33.1366
+            ],
+            [
+              -91.9728,
+              33.1366
+            ],
+            [
+              -91.9728,
+              33.1356
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Crossett Mill - Crossett AR",
+        "type": "Pulp/Paper/Tissue Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.0445,
+              44.4855
+            ],
+            [
+              -88.028,
+              44.4855
+            ],
+            [
+              -88.028,
+              44.4985
+            ],
+            [
+              -88.0445,
+              44.4985
+            ],
+            [
+              -88.0445,
+              44.4855
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Broadway Mill - Green Bay WI",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 240,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 2,
+          "buildingCount": 16,
+          "siteAreaAcres": 240,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.0438,
+              44.4948
+            ],
+            [
+              -88.0418,
+              44.4948
+            ],
+            [
+              -88.0418,
+              44.496
+            ],
+            [
+              -88.0438,
+              44.496
+            ],
+            [
+              -88.0438,
+              44.4948
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Broadway Mill - Green Bay WI",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.0428,
+              44.4938
+            ],
+            [
+              -88.0388,
+              44.4938
+            ],
+            [
+              -88.0388,
+              44.4972
+            ],
+            [
+              -88.0428,
+              44.4972
+            ],
+            [
+              -88.0428,
+              44.4938
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Broadway Mill - Green Bay WI",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.0388,
+              44.4885
+            ],
+            [
+              -88.0355,
+              44.4885
+            ],
+            [
+              -88.0355,
+              44.491
+            ],
+            [
+              -88.0388,
+              44.491
+            ],
+            [
+              -88.0388,
+              44.4885
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Broadway Mill - Green Bay WI",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.042,
+              44.4912
+            ],
+            [
+              -88.0392,
+              44.4912
+            ],
+            [
+              -88.0392,
+              44.4945
+            ],
+            [
+              -88.042,
+              44.4945
+            ],
+            [
+              -88.042,
+              44.4912
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Broadway Mill - Green Bay WI",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.0398,
+              44.4938
+            ],
+            [
+              -88.0372,
+              44.4938
+            ],
+            [
+              -88.0372,
+              44.4958
+            ],
+            [
+              -88.0398,
+              44.4958
+            ],
+            [
+              -88.0398,
+              44.4938
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Broadway Mill - Green Bay WI",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.0428,
+              44.4948
+            ],
+            [
+              -88.0408,
+              44.4948
+            ],
+            [
+              -88.0408,
+              44.4962
+            ],
+            [
+              -88.0428,
+              44.4962
+            ],
+            [
+              -88.0428,
+              44.4948
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Broadway Mill - Green Bay WI",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.3085,
+              35.725
+            ],
+            [
+              -95.286,
+              35.725
+            ],
+            [
+              -95.286,
+              35.744
+            ],
+            [
+              -95.3085,
+              35.744
+            ],
+            [
+              -95.3085,
+              35.725
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Muskogee Mill - Muskogee OK",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 140,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 15,
+          "siteAreaAcres": 380,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.3018,
+              35.7344
+            ],
+            [
+              -95.3004,
+              35.7344
+            ],
+            [
+              -95.3004,
+              35.7356
+            ],
+            [
+              -95.3018,
+              35.7356
+            ],
+            [
+              -95.3018,
+              35.7344
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Muskogee Mill - Muskogee OK",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.3015,
+              35.7358
+            ],
+            [
+              -95.2978,
+              35.7358
+            ],
+            [
+              -95.2978,
+              35.7392
+            ],
+            [
+              -95.3015,
+              35.7392
+            ],
+            [
+              -95.3015,
+              35.7358
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Muskogee Mill - Muskogee OK",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.306,
+              35.7355
+            ],
+            [
+              -95.3035,
+              35.7355
+            ],
+            [
+              -95.3035,
+              35.7378
+            ],
+            [
+              -95.306,
+              35.7378
+            ],
+            [
+              -95.306,
+              35.7355
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Muskogee Mill - Muskogee OK",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.301,
+              35.7335
+            ],
+            [
+              -95.298,
+              35.7335
+            ],
+            [
+              -95.298,
+              35.736
+            ],
+            [
+              -95.301,
+              35.736
+            ],
+            [
+              -95.301,
+              35.7335
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Muskogee Mill - Muskogee OK",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.3018,
+              35.7344
+            ],
+            [
+              -95.3,
+              35.7344
+            ],
+            [
+              -95.3,
+              35.736
+            ],
+            [
+              -95.3018,
+              35.736
+            ],
+            [
+              -95.3018,
+              35.7344
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Muskogee Mill - Muskogee OK",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.20941,
+              32.326559
+            ],
+            [
+              -81.19559,
+              32.326559
+            ],
+            [
+              -81.19559,
+              32.336441
+            ],
+            [
+              -81.20941,
+              32.336441
+            ],
+            [
+              -81.20941,
+              32.326559
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Savannah River Mill - Rincon GA",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 280,
+          "trailerParkingCapacity": 350,
+          "truckGateCount": 1,
+          "buildingCount": 12,
+          "siteAreaAcres": 353,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.2058,
+              32.3271
+            ],
+            [
+              -81.2042,
+              32.3271
+            ],
+            [
+              -81.2042,
+              32.3282
+            ],
+            [
+              -81.2058,
+              32.3282
+            ],
+            [
+              -81.2058,
+              32.3271
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Savannah River Mill - Rincon GA",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.2045,
+              32.327
+            ],
+            [
+              -81.2,
+              32.327
+            ],
+            [
+              -81.2,
+              32.3315
+            ],
+            [
+              -81.2045,
+              32.3315
+            ],
+            [
+              -81.2045,
+              32.327
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Savannah River Mill - Rincon GA",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.2015,
+              32.3272
+            ],
+            [
+              -81.199,
+              32.3272
+            ],
+            [
+              -81.199,
+              32.33
+            ],
+            [
+              -81.2015,
+              32.33
+            ],
+            [
+              -81.2015,
+              32.3272
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Savannah River Mill - Rincon GA",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.2055,
+              32.331
+            ],
+            [
+              -81.2025,
+              32.331
+            ],
+            [
+              -81.2025,
+              32.3335
+            ],
+            [
+              -81.2055,
+              32.3335
+            ],
+            [
+              -81.2055,
+              32.331
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Savannah River Mill - Rincon GA",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.205,
+              32.328
+            ],
+            [
+              -81.203,
+              32.328
+            ],
+            [
+              -81.203,
+              32.33
+            ],
+            [
+              -81.205,
+              32.33
+            ],
+            [
+              -81.205,
+              32.328
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Savannah River Mill - Rincon GA",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.035371,
+              32.216314
+            ],
+            [
+              -88.022629,
+              32.216314
+            ],
+            [
+              -88.022629,
+              32.230686
+            ],
+            [
+              -88.035371,
+              32.230686
+            ],
+            [
+              -88.035371,
+              32.216314
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Naheola Mill - Pennington AL",
+        "type": "Pulp/Tissue/Paperboard Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 25,
+          "siteAreaAcres": 474,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.0307,
+              32.2247
+            ],
+            [
+              -88.0295,
+              32.2247
+            ],
+            [
+              -88.0295,
+              32.2257
+            ],
+            [
+              -88.0307,
+              32.2257
+            ],
+            [
+              -88.0307,
+              32.2247
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Naheola Mill - Pennington AL",
+        "type": "Pulp/Tissue/Paperboard Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.0345,
+              32.219
+            ],
+            [
+              -88.03,
+              32.219
+            ],
+            [
+              -88.03,
+              32.2228
+            ],
+            [
+              -88.0345,
+              32.2228
+            ],
+            [
+              -88.0345,
+              32.219
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Naheola Mill - Pennington AL",
+        "type": "Pulp/Tissue/Paperboard Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.0348,
+              32.2188
+            ],
+            [
+              -88.0295,
+              32.2188
+            ],
+            [
+              -88.0295,
+              32.2225
+            ],
+            [
+              -88.0348,
+              32.2225
+            ],
+            [
+              -88.0348,
+              32.2188
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Naheola Mill - Pennington AL",
+        "type": "Pulp/Tissue/Paperboard Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.029,
+              32.2245
+            ],
+            [
+              -88.0265,
+              32.2245
+            ],
+            [
+              -88.0265,
+              32.2265
+            ],
+            [
+              -88.029,
+              32.2265
+            ],
+            [
+              -88.029,
+              32.2245
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Naheola Mill - Pennington AL",
+        "type": "Pulp/Tissue/Paperboard Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.0315,
+              32.223
+            ],
+            [
+              -88.0295,
+              32.223
+            ],
+            [
+              -88.0295,
+              32.225
+            ],
+            [
+              -88.0315,
+              32.225
+            ],
+            [
+              -88.0315,
+              32.223
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Naheola Mill - Pennington AL",
+        "type": "Pulp/Tissue/Paperboard Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.456798,
+              44.707786
+            ],
+            [
+              -73.448202,
+              44.707786
+            ],
+            [
+              -73.448202,
+              44.714614
+            ],
+            [
+              -73.456798,
+              44.714614
+            ],
+            [
+              -73.456798,
+              44.707786
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Plattsburgh Mill - Plattsburgh NY",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 2,
+          "buildingCount": 14,
+          "siteAreaAcres": 128,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.4548,
+              44.7097
+            ],
+            [
+              -73.4539,
+              44.7097
+            ],
+            [
+              -73.4539,
+              44.7104
+            ],
+            [
+              -73.4548,
+              44.7104
+            ],
+            [
+              -73.4548,
+              44.7097
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Plattsburgh Mill - Plattsburgh NY",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.4545,
+              44.7095
+            ],
+            [
+              -73.4528,
+              44.7095
+            ],
+            [
+              -73.4528,
+              44.711
+            ],
+            [
+              -73.4545,
+              44.711
+            ],
+            [
+              -73.4545,
+              44.7095
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Plattsburgh Mill - Plattsburgh NY",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.4558,
+              44.7125
+            ],
+            [
+              -73.4545,
+              44.7125
+            ],
+            [
+              -73.4545,
+              44.7133
+            ],
+            [
+              -73.4558,
+              44.7133
+            ],
+            [
+              -73.4558,
+              44.7125
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Plattsburgh Mill - Plattsburgh NY",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.4532,
+              44.7128
+            ],
+            [
+              -73.4515,
+              44.7128
+            ],
+            [
+              -73.4515,
+              44.7143
+            ],
+            [
+              -73.4532,
+              44.7143
+            ],
+            [
+              -73.4532,
+              44.7128
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Plattsburgh Mill - Plattsburgh NY",
+        "type": "Tissue/Towel Mill",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.493017,
+              31.574161
+            ],
+            [
+              -87.472983,
+              31.574161
+            ],
+            [
+              -87.472983,
+              31.585839
+            ],
+            [
+              -87.493017,
+              31.585839
+            ],
+            [
+              -87.493017,
+              31.574161
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Alabama River Cellulose Mill - Perdue Hill AL",
+        "type": "Cellulose/Pulp Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 350,
+          "truckGateCount": 1,
+          "buildingCount": 20,
+          "siteAreaAcres": 610,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.478,
+              31.5806
+            ],
+            [
+              -87.4765,
+              31.5806
+            ],
+            [
+              -87.4765,
+              31.5816
+            ],
+            [
+              -87.478,
+              31.5816
+            ],
+            [
+              -87.478,
+              31.5806
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Alabama River Cellulose Mill - Perdue Hill AL",
+        "type": "Cellulose/Pulp Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.4825,
+              31.5808
+            ],
+            [
+              -87.478,
+              31.5808
+            ],
+            [
+              -87.478,
+              31.583
+            ],
+            [
+              -87.4825,
+              31.583
+            ],
+            [
+              -87.4825,
+              31.5808
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Alabama River Cellulose Mill - Perdue Hill AL",
+        "type": "Cellulose/Pulp Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.486,
+              31.5785
+            ],
+            [
+              -87.483,
+              31.5785
+            ],
+            [
+              -87.483,
+              31.5805
+            ],
+            [
+              -87.486,
+              31.5805
+            ],
+            [
+              -87.486,
+              31.5785
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Alabama River Cellulose Mill - Perdue Hill AL",
+        "type": "Cellulose/Pulp Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.48,
+              31.5805
+            ],
+            [
+              -87.478,
+              31.5805
+            ],
+            [
+              -87.478,
+              31.5815
+            ],
+            [
+              -87.48,
+              31.5815
+            ],
+            [
+              -87.48,
+              31.5805
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Alabama River Cellulose Mill - Perdue Hill AL",
+        "type": "Cellulose/Pulp Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.521974,
+              31.169263
+            ],
+            [
+              -81.502026,
+              31.169263
+            ],
+            [
+              -81.502026,
+              31.182737
+            ],
+            [
+              -81.521974,
+              31.182737
+            ],
+            [
+              -81.521974,
+              31.169263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Brunswick Cellulose Mill - Brunswick GA",
+        "type": "Cellulose/Pulp Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 20,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 450,
+          "truckGateCount": 1,
+          "buildingCount": 22,
+          "siteAreaAcres": 704,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.5098,
+              31.1805
+            ],
+            [
+              -81.5084,
+              31.1805
+            ],
+            [
+              -81.5084,
+              31.1814
+            ],
+            [
+              -81.5098,
+              31.1814
+            ],
+            [
+              -81.5098,
+              31.1805
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Brunswick Cellulose Mill - Brunswick GA",
+        "type": "Cellulose/Pulp Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.509,
+              31.18
+            ],
+            [
+              -81.5048,
+              31.18
+            ],
+            [
+              -81.5048,
+              31.1825
+            ],
+            [
+              -81.509,
+              31.1825
+            ],
+            [
+              -81.509,
+              31.18
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Brunswick Cellulose Mill - Brunswick GA",
+        "type": "Cellulose/Pulp Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.5155,
+              31.1752
+            ],
+            [
+              -81.5125,
+              31.1752
+            ],
+            [
+              -81.5125,
+              31.177
+            ],
+            [
+              -81.5155,
+              31.177
+            ],
+            [
+              -81.5155,
+              31.1752
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Brunswick Cellulose Mill - Brunswick GA",
+        "type": "Cellulose/Pulp Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.5185,
+              31.1725
+            ],
+            [
+              -81.516,
+              31.1725
+            ],
+            [
+              -81.516,
+              31.1745
+            ],
+            [
+              -81.5185,
+              31.1745
+            ],
+            [
+              -81.5185,
+              31.1725
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Brunswick Cellulose Mill - Brunswick GA",
+        "type": "Cellulose/Pulp Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.51,
+              31.1795
+            ],
+            [
+              -81.5085,
+              31.1795
+            ],
+            [
+              -81.5085,
+              31.1805
+            ],
+            [
+              -81.51,
+              31.1805
+            ],
+            [
+              -81.51,
+              31.1795
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Brunswick Cellulose Mill - Brunswick GA",
+        "type": "Cellulose/Pulp Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.0512,
+              31.236
+            ],
+            [
+              -89.0388,
+              31.236
+            ],
+            [
+              -89.0388,
+              31.2505
+            ],
+            [
+              -89.0512,
+              31.2505
+            ],
+            [
+              -89.0512,
+              31.236
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Leaf River Cellulose Mill - New Augusta MS",
+        "type": "Cellulose/Pulp Mill",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 9,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 12,
+          "siteAreaAcres": 285,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.0478,
+              31.2434
+            ],
+            [
+              -89.0466,
+              31.2434
+            ],
+            [
+              -89.0466,
+              31.2444
+            ],
+            [
+              -89.0478,
+              31.2444
+            ],
+            [
+              -89.0478,
+              31.2434
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Leaf River Cellulose Mill - New Augusta MS",
+        "type": "Cellulose/Pulp Mill",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.047,
+              31.2386
+            ],
+            [
+              -89.0451,
+              31.2386
+            ],
+            [
+              -89.0451,
+              31.2402
+            ],
+            [
+              -89.047,
+              31.2402
+            ],
+            [
+              -89.047,
+              31.2386
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Leaf River Cellulose Mill - New Augusta MS",
+        "type": "Cellulose/Pulp Mill",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.0467,
+              31.2388
+            ],
+            [
+              -89.045,
+              31.2388
+            ],
+            [
+              -89.045,
+              31.2399
+            ],
+            [
+              -89.0467,
+              31.2399
+            ],
+            [
+              -89.0467,
+              31.2388
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Leaf River Cellulose Mill - New Augusta MS",
+        "type": "Cellulose/Pulp Mill",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.9678,
+              35.1505
+            ],
+            [
+              -89.9592,
+              35.1505
+            ],
+            [
+              -89.9592,
+              35.1612
+            ],
+            [
+              -89.9678,
+              35.1612
+            ],
+            [
+              -89.9678,
+              35.1505
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Memphis Cellulose Mill - Memphis TN",
+        "type": "Cellulose Mill",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 14,
+          "siteAreaAcres": 78,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.961,
+              35.1568
+            ],
+            [
+              -89.9598,
+              35.1568
+            ],
+            [
+              -89.9598,
+              35.158
+            ],
+            [
+              -89.961,
+              35.158
+            ],
+            [
+              -89.961,
+              35.1568
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Memphis Cellulose Mill - Memphis TN",
+        "type": "Cellulose Mill",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.9638,
+              35.1548
+            ],
+            [
+              -89.9618,
+              35.1548
+            ],
+            [
+              -89.9618,
+              35.1562
+            ],
+            [
+              -89.9638,
+              35.1562
+            ],
+            [
+              -89.9638,
+              35.1548
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Memphis Cellulose Mill - Memphis TN",
+        "type": "Cellulose Mill",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.9632,
+              35.1556
+            ],
+            [
+              -89.9618,
+              35.1556
+            ],
+            [
+              -89.9618,
+              35.1566
+            ],
+            [
+              -89.9632,
+              35.1566
+            ],
+            [
+              -89.9632,
+              35.1556
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Memphis Cellulose Mill - Memphis TN",
+        "type": "Cellulose Mill",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.0698,
+              31.1018
+            ],
+            [
+              -87.0588,
+              31.1018
+            ],
+            [
+              -87.0588,
+              31.1118
+            ],
+            [
+              -87.0698,
+              31.1118
+            ],
+            [
+              -87.0698,
+              31.1018
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Brewton Mill - Brewton AL",
+        "type": "Containerboard/Bleached Board Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 16,
+          "siteAreaAcres": 95,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.0686,
+              31.1038
+            ],
+            [
+              -87.0674,
+              31.1038
+            ],
+            [
+              -87.0674,
+              31.1048
+            ],
+            [
+              -87.0686,
+              31.1048
+            ],
+            [
+              -87.0686,
+              31.1038
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Brewton Mill - Brewton AL",
+        "type": "Containerboard/Bleached Board Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.0672,
+              31.1044
+            ],
+            [
+              -87.065,
+              31.1044
+            ],
+            [
+              -87.065,
+              31.1062
+            ],
+            [
+              -87.0672,
+              31.1062
+            ],
+            [
+              -87.0672,
+              31.1044
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Brewton Mill - Brewton AL",
+        "type": "Containerboard/Bleached Board Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.0668,
+              31.1045
+            ],
+            [
+              -87.0644,
+              31.1045
+            ],
+            [
+              -87.0644,
+              31.1057
+            ],
+            [
+              -87.0668,
+              31.1057
+            ],
+            [
+              -87.0668,
+              31.1045
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Brewton Mill - Brewton AL",
+        "type": "Containerboard/Bleached Board Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.0688,
+              31.104
+            ],
+            [
+              -87.0678,
+              31.104
+            ],
+            [
+              -87.0678,
+              31.105
+            ],
+            [
+              -87.0688,
+              31.105
+            ],
+            [
+              -87.0688,
+              31.104
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Brewton Mill - Brewton AL",
+        "type": "Containerboard/Bleached Board Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.096,
+              31.6195
+            ],
+            [
+              -90.072,
+              31.6195
+            ],
+            [
+              -90.072,
+              31.636
+            ],
+            [
+              -90.096,
+              31.636
+            ],
+            [
+              -90.096,
+              31.6195
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Monticello Mill - Monticello MS",
+        "type": "Containerboard Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 22,
+          "siteAreaAcres": 320,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.085,
+              31.6228
+            ],
+            [
+              -90.0826,
+              31.6228
+            ],
+            [
+              -90.0826,
+              31.6244
+            ],
+            [
+              -90.085,
+              31.6244
+            ],
+            [
+              -90.085,
+              31.6228
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Monticello Mill - Monticello MS",
+        "type": "Containerboard Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.0875,
+              31.628
+            ],
+            [
+              -90.084,
+              31.628
+            ],
+            [
+              -90.084,
+              31.631
+            ],
+            [
+              -90.0875,
+              31.631
+            ],
+            [
+              -90.0875,
+              31.628
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Monticello Mill - Monticello MS",
+        "type": "Containerboard Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.082,
+              31.6224
+            ],
+            [
+              -90.0795,
+              31.6224
+            ],
+            [
+              -90.0795,
+              31.6256
+            ],
+            [
+              -90.082,
+              31.6256
+            ],
+            [
+              -90.082,
+              31.6224
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Monticello Mill - Monticello MS",
+        "type": "Containerboard Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.0862,
+              31.6288
+            ],
+            [
+              -90.0838,
+              31.6288
+            ],
+            [
+              -90.0838,
+              31.6312
+            ],
+            [
+              -90.0862,
+              31.6312
+            ],
+            [
+              -90.0862,
+              31.6288
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Monticello Mill - Monticello MS",
+        "type": "Containerboard Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.0815,
+              31.6212
+            ],
+            [
+              -90.0792,
+              31.6212
+            ],
+            [
+              -90.0792,
+              31.6238
+            ],
+            [
+              -90.0815,
+              31.6238
+            ],
+            [
+              -90.0815,
+              31.6212
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Monticello Mill - Monticello MS",
+        "type": "Containerboard Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.952,
+              44.609
+            ],
+            [
+              -123.932,
+              44.609
+            ],
+            [
+              -123.932,
+              44.6215
+            ],
+            [
+              -123.952,
+              44.6215
+            ],
+            [
+              -123.952,
+              44.609
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Toledo Mill - Toledo OR",
+        "type": "Containerboard/Linerboard Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 18,
+          "siteAreaAcres": 230,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.9382,
+              44.616
+            ],
+            [
+              -123.9362,
+              44.616
+            ],
+            [
+              -123.9362,
+              44.6172
+            ],
+            [
+              -123.9382,
+              44.6172
+            ],
+            [
+              -123.9382,
+              44.616
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Toledo Mill - Toledo OR",
+        "type": "Containerboard/Linerboard Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.9375,
+              44.6155
+            ],
+            [
+              -123.9335,
+              44.6155
+            ],
+            [
+              -123.9335,
+              44.6195
+            ],
+            [
+              -123.9375,
+              44.6195
+            ],
+            [
+              -123.9375,
+              44.6155
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Toledo Mill - Toledo OR",
+        "type": "Containerboard/Linerboard Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.9355,
+              44.6135
+            ],
+            [
+              -123.9335,
+              44.6135
+            ],
+            [
+              -123.9335,
+              44.616
+            ],
+            [
+              -123.9355,
+              44.616
+            ],
+            [
+              -123.9355,
+              44.6135
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Toledo Mill - Toledo OR",
+        "type": "Containerboard/Linerboard Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.9385,
+              44.6115
+            ],
+            [
+              -123.936,
+              44.6115
+            ],
+            [
+              -123.936,
+              44.614
+            ],
+            [
+              -123.9385,
+              44.614
+            ],
+            [
+              -123.9385,
+              44.6115
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Toledo Mill - Toledo OR",
+        "type": "Containerboard/Linerboard Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.9372,
+              44.615
+            ],
+            [
+              -123.9345,
+              44.615
+            ],
+            [
+              -123.9345,
+              44.617
+            ],
+            [
+              -123.9372,
+              44.617
+            ],
+            [
+              -123.9372,
+              44.615
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Toledo Mill - Toledo OR",
+        "type": "Containerboard/Linerboard Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.355992,
+              37.52291
+            ],
+            [
+              -79.350328,
+              37.52291
+            ],
+            [
+              -79.350328,
+              37.532971
+            ],
+            [
+              -79.355992,
+              37.532971
+            ],
+            [
+              -79.355992,
+              37.52291
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Big Island Mill - Big Island VA",
+        "type": "Containerboard Mill",
+        "archetype": "#8",
+        "archetypeName": "Gate + GS (not BU sens.) + scale",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": true,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 8,
+          "siteAreaAcres": 138,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.354906,
+              37.527761
+            ],
+            [
+              -79.353094,
+              37.527761
+            ],
+            [
+              -79.353094,
+              37.528839
+            ],
+            [
+              -79.354906,
+              37.528839
+            ],
+            [
+              -79.354906,
+              37.527761
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Big Island Mill - Big Island VA",
+        "type": "Containerboard Mill",
+        "archetype": "#8",
+        "archetypeName": "Gate + GS (not BU sens.) + scale",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.35168,
+              37.525032
+            ],
+            [
+              -79.35032,
+              37.525032
+            ],
+            [
+              -79.35032,
+              37.527368
+            ],
+            [
+              -79.35168,
+              37.527368
+            ],
+            [
+              -79.35168,
+              37.525032
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Big Island Mill - Big Island VA",
+        "type": "Containerboard Mill",
+        "archetype": "#8",
+        "archetypeName": "Gate + GS (not BU sens.) + scale",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.354066,
+              37.528481
+            ],
+            [
+              -79.352934,
+              37.528481
+            ],
+            [
+              -79.352934,
+              37.529919
+            ],
+            [
+              -79.354066,
+              37.529919
+            ],
+            [
+              -79.354066,
+              37.528481
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Big Island Mill - Big Island VA",
+        "type": "Containerboard Mill",
+        "archetype": "#8",
+        "archetypeName": "Gate + GS (not BU sens.) + scale",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.353493,
+              37.527692
+            ],
+            [
+              -79.351907,
+              37.527692
+            ],
+            [
+              -79.351907,
+              37.529308
+            ],
+            [
+              -79.353493,
+              37.529308
+            ],
+            [
+              -79.353493,
+              37.527692
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Big Island Mill - Big Island VA",
+        "type": "Containerboard Mill",
+        "archetype": "#8",
+        "archetypeName": "Gate + GS (not BU sens.) + scale",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.661843,
+              29.679263
+            ],
+            [
+              -81.653571,
+              29.679263
+            ],
+            [
+              -81.653571,
+              29.693636
+            ],
+            [
+              -81.661843,
+              29.693636
+            ],
+            [
+              -81.661843,
+              29.679263
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Palatka Mill - Palatka FL",
+        "type": "Kraft/Tissue Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 18,
+          "siteAreaAcres": 316,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.661931,
+              29.684371
+            ],
+            [
+              -81.660069,
+              29.684371
+            ],
+            [
+              -81.660069,
+              29.685629
+            ],
+            [
+              -81.661931,
+              29.685629
+            ],
+            [
+              -81.661931,
+              29.684371
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Palatka Mill - Palatka FL",
+        "type": "Kraft/Tissue Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.658914,
+              29.685661
+            ],
+            [
+              -81.658086,
+              29.685661
+            ],
+            [
+              -81.658086,
+              29.686739
+            ],
+            [
+              -81.658914,
+              29.686739
+            ],
+            [
+              -81.658914,
+              29.685661
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Palatka Mill - Palatka FL",
+        "type": "Kraft/Tissue Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.655414,
+              29.681212
+            ],
+            [
+              -81.654586,
+              29.681212
+            ],
+            [
+              -81.654586,
+              29.683188
+            ],
+            [
+              -81.655414,
+              29.683188
+            ],
+            [
+              -81.655414,
+              29.681212
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Palatka Mill - Palatka FL",
+        "type": "Kraft/Tissue Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.656724,
+              29.683281
+            ],
+            [
+              -81.655276,
+              29.683281
+            ],
+            [
+              -81.655276,
+              29.684719
+            ],
+            [
+              -81.656724,
+              29.684719
+            ],
+            [
+              -81.656724,
+              29.683281
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Palatka Mill - Palatka FL",
+        "type": "Kraft/Tissue Mill",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.922547,
+              35.623378
+            ],
+            [
+              -88.911385,
+              35.623378
+            ],
+            [
+              -88.911385,
+              35.632271
+            ],
+            [
+              -88.922547,
+              35.632271
+            ],
+            [
+              -88.922547,
+              35.623378
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Dixie Tableware Plant - Jackson TN",
+        "type": "Tableware/Converting Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 247,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.920274,
+              35.629351
+            ],
+            [
+              -88.918726,
+              35.629351
+            ],
+            [
+              -88.918726,
+              35.630249
+            ],
+            [
+              -88.920274,
+              35.630249
+            ],
+            [
+              -88.920274,
+              35.629351
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Dixie Tableware Plant - Jackson TN",
+        "type": "Tableware/Converting Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.913832,
+              35.626832
+            ],
+            [
+              -88.913168,
+              35.626832
+            ],
+            [
+              -88.913168,
+              35.629168
+            ],
+            [
+              -88.913832,
+              35.629168
+            ],
+            [
+              -88.913832,
+              35.626832
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Dixie Tableware Plant - Jackson TN",
+        "type": "Tableware/Converting Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -88.915663,
+              35.626602
+            ],
+            [
+              -88.914337,
+              35.626602
+            ],
+            [
+              -88.914337,
+              35.628398
+            ],
+            [
+              -88.915663,
+              35.628398
+            ],
+            [
+              -88.915663,
+              35.626602
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Dixie Tableware Plant - Jackson TN",
+        "type": "Tableware/Converting Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.528995,
+              38.078095
+            ],
+            [
+              -84.523175,
+              38.078095
+            ],
+            [
+              -84.523175,
+              38.083215
+            ],
+            [
+              -84.528995,
+              38.083215
+            ],
+            [
+              -84.528995,
+              38.078095
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Dixie Cup Plant - Lexington KY",
+        "type": "Cup/Converting Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 50,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 1,
+          "buildingCount": 5,
+          "siteAreaAcres": 72,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.525485,
+              38.079641
+            ],
+            [
+              -84.524115,
+              38.079641
+            ],
+            [
+              -84.524115,
+              38.080359
+            ],
+            [
+              -84.525485,
+              38.080359
+            ],
+            [
+              -84.525485,
+              38.079641
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Dixie Cup Plant - Lexington KY",
+        "type": "Cup/Converting Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.524628,
+              38.080981
+            ],
+            [
+              -84.523372,
+              38.080981
+            ],
+            [
+              -84.523372,
+              38.082419
+            ],
+            [
+              -84.524628,
+              38.082419
+            ],
+            [
+              -84.524628,
+              38.080981
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Dixie Cup Plant - Lexington KY",
+        "type": "Cup/Converting Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.524942,
+              38.079992
+            ],
+            [
+              -84.524258,
+              38.079992
+            ],
+            [
+              -84.524258,
+              38.081608
+            ],
+            [
+              -84.524942,
+              38.081608
+            ],
+            [
+              -84.524942,
+              38.079992
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Dixie Cup Plant - Lexington KY",
+        "type": "Cup/Converting Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.525771,
+              38.079651
+            ],
+            [
+              -84.524629,
+              38.079651
+            ],
+            [
+              -84.524629,
+              38.080549
+            ],
+            [
+              -84.525771,
+              38.080549
+            ],
+            [
+              -84.525771,
+              38.079651
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Dixie Cup Plant - Lexington KY",
+        "type": "Cup/Converting Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.641437,
+              35.810853
+            ],
+            [
+              -90.635455,
+              35.810853
+            ],
+            [
+              -90.635455,
+              35.813727
+            ],
+            [
+              -90.641437,
+              35.813727
+            ],
+            [
+              -90.641437,
+              35.810853
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Anchor Packaging Plant - Jonesboro AR",
+        "type": "Thermoformed Packaging Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 43,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.640743,
+              35.813031
+            ],
+            [
+              -90.639857,
+              35.813031
+            ],
+            [
+              -90.639857,
+              35.813569
+            ],
+            [
+              -90.640743,
+              35.813569
+            ],
+            [
+              -90.640743,
+              35.813031
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Anchor Packaging Plant - Jonesboro AR",
+        "type": "Thermoformed Packaging Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.641132,
+              35.812071
+            ],
+            [
+              -90.640468,
+              35.812071
+            ],
+            [
+              -90.640468,
+              35.813329
+            ],
+            [
+              -90.641132,
+              35.813329
+            ],
+            [
+              -90.641132,
+              35.812071
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Anchor Packaging Plant - Jonesboro AR",
+        "type": "Thermoformed Packaging Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.640443,
+              35.812351
+            ],
+            [
+              -90.639557,
+              35.812351
+            ],
+            [
+              -90.639557,
+              35.813249
+            ],
+            [
+              -90.640443,
+              35.813249
+            ],
+            [
+              -90.640443,
+              35.812351
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Anchor Packaging Plant - Jonesboro AR",
+        "type": "Thermoformed Packaging Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.469,
+              36.082
+            ],
+            [
+              -90.4645,
+              36.082
+            ],
+            [
+              -90.4645,
+              36.0862
+            ],
+            [
+              -90.469,
+              36.0862
+            ],
+            [
+              -90.469,
+              36.082
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Anchor Packaging Plant - Paragould AR",
+        "type": "Thermoformed/Cling Film Packaging Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 9,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 46.8,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.4674,
+              36.082
+            ],
+            [
+              -90.4664,
+              36.082
+            ],
+            [
+              -90.4664,
+              36.0826
+            ],
+            [
+              -90.4674,
+              36.0826
+            ],
+            [
+              -90.4674,
+              36.082
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Anchor Packaging Plant - Paragould AR",
+        "type": "Thermoformed/Cling Film Packaging Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.4679,
+              36.0828
+            ],
+            [
+              -90.467,
+              36.0828
+            ],
+            [
+              -90.467,
+              36.0839
+            ],
+            [
+              -90.4679,
+              36.0839
+            ],
+            [
+              -90.4679,
+              36.0828
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Anchor Packaging Plant - Paragould AR",
+        "type": "Thermoformed/Cling Film Packaging Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.4679,
+              36.0829
+            ],
+            [
+              -90.4668,
+              36.0829
+            ],
+            [
+              -90.4668,
+              36.0837
+            ],
+            [
+              -90.4679,
+              36.0837
+            ],
+            [
+              -90.4679,
+              36.0829
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Anchor Packaging Plant - Paragould AR",
+        "type": "Thermoformed/Cling Film Packaging Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.0107,
+              42.7108
+            ],
+            [
+              -89.0083,
+              42.7108
+            ],
+            [
+              -89.0083,
+              42.713
+            ],
+            [
+              -89.0107,
+              42.713
+            ],
+            [
+              -89.0107,
+              42.7108
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Anchor Packaging Plant - Janesville WI",
+        "type": "Packaging/Film Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 12,
+          "trailersVisible": 9,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 11.9,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.0093,
+              42.7121
+            ],
+            [
+              -89.0087,
+              42.7121
+            ],
+            [
+              -89.0087,
+              42.7126
+            ],
+            [
+              -89.0093,
+              42.7126
+            ],
+            [
+              -89.0093,
+              42.7121
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Anchor Packaging Plant - Janesville WI",
+        "type": "Packaging/Film Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.0091,
+              42.712
+            ],
+            [
+              -89.0085,
+              42.712
+            ],
+            [
+              -89.0085,
+              42.7127
+            ],
+            [
+              -89.0091,
+              42.7127
+            ],
+            [
+              -89.0091,
+              42.712
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Anchor Packaging Plant - Janesville WI",
+        "type": "Packaging/Film Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.064,
+              33.4408
+            ],
+            [
+              -86.057,
+              33.4408
+            ],
+            [
+              -86.057,
+              33.4472
+            ],
+            [
+              -86.064,
+              33.4472
+            ],
+            [
+              -86.064,
+              33.4408
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Wood Products - Talladega Lumber Mill - Talladega AL",
+        "type": "Lumber Mill",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": true,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 4,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 114.5,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.0582,
+              33.4454
+            ],
+            [
+              -86.0574,
+              33.4454
+            ],
+            [
+              -86.0574,
+              33.446
+            ],
+            [
+              -86.0582,
+              33.446
+            ],
+            [
+              -86.0582,
+              33.4454
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Wood Products - Talladega Lumber Mill - Talladega AL",
+        "type": "Lumber Mill",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.0615,
+              33.4428
+            ],
+            [
+              -86.059,
+              33.4428
+            ],
+            [
+              -86.059,
+              33.4448
+            ],
+            [
+              -86.0615,
+              33.4448
+            ],
+            [
+              -86.0615,
+              33.4428
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Wood Products - Talladega Lumber Mill - Talladega AL",
+        "type": "Lumber Mill",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.0587,
+              33.4444
+            ],
+            [
+              -86.0579,
+              33.4444
+            ],
+            [
+              -86.0579,
+              33.4456
+            ],
+            [
+              -86.0587,
+              33.4456
+            ],
+            [
+              -86.0587,
+              33.4444
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Wood Products - Talladega Lumber Mill - Talladega AL",
+        "type": "Lumber Mill",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.4275,
+              33.6125
+            ],
+            [
+              -83.415,
+              33.6125
+            ],
+            [
+              -83.415,
+              33.62
+            ],
+            [
+              -83.4275,
+              33.62
+            ],
+            [
+              -83.4275,
+              33.6125
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Madison Plywood Plant - Madison GA",
+        "type": "Plywood Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 239.1,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.4253,
+              33.6139
+            ],
+            [
+              -83.4245,
+              33.6139
+            ],
+            [
+              -83.4245,
+              33.6145
+            ],
+            [
+              -83.4253,
+              33.6145
+            ],
+            [
+              -83.4253,
+              33.6139
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Madison Plywood Plant - Madison GA",
+        "type": "Plywood Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.421,
+              33.6165
+            ],
+            [
+              -83.4175,
+              33.6165
+            ],
+            [
+              -83.4175,
+              33.6185
+            ],
+            [
+              -83.421,
+              33.6185
+            ],
+            [
+              -83.421,
+              33.6165
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Madison Plywood Plant - Madison GA",
+        "type": "Plywood Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.4247,
+              33.614
+            ],
+            [
+              -83.4233,
+              33.614
+            ],
+            [
+              -83.4233,
+              33.6156
+            ],
+            [
+              -83.4247,
+              33.6156
+            ],
+            [
+              -83.4247,
+              33.614
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Madison Plywood Plant - Madison GA",
+        "type": "Plywood Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4995,
+              34.2118
+            ],
+            [
+              -81.487,
+              34.2118
+            ],
+            [
+              -81.487,
+              34.2195
+            ],
+            [
+              -81.4995,
+              34.2195
+            ],
+            [
+              -81.4995,
+              34.2118
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Prosperity Plywood Plant - Prosperity SC",
+        "type": "Plywood Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 6,
+          "trailersVisible": 16,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 8,
+          "siteAreaAcres": 243.7,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4956,
+              34.2194
+            ],
+            [
+              -81.4948,
+              34.2194
+            ],
+            [
+              -81.4948,
+              34.2199
+            ],
+            [
+              -81.4956,
+              34.2199
+            ],
+            [
+              -81.4956,
+              34.2194
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Prosperity Plywood Plant - Prosperity SC",
+        "type": "Plywood Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4935,
+              34.2138
+            ],
+            [
+              -81.49,
+              34.2138
+            ],
+            [
+              -81.49,
+              34.216
+            ],
+            [
+              -81.4935,
+              34.216
+            ],
+            [
+              -81.4935,
+              34.2138
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Prosperity Plywood Plant - Prosperity SC",
+        "type": "Plywood Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.499,
+              34.2155
+            ],
+            [
+              -81.4955,
+              34.2155
+            ],
+            [
+              -81.4955,
+              34.2172
+            ],
+            [
+              -81.499,
+              34.2172
+            ],
+            [
+              -81.499,
+              34.2155
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Prosperity Plywood Plant - Prosperity SC",
+        "type": "Plywood Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.036,
+              37.12
+            ],
+            [
+              -79.0285,
+              37.12
+            ],
+            [
+              -79.0285,
+              37.1285
+            ],
+            [
+              -79.036,
+              37.1285
+            ],
+            [
+              -79.036,
+              37.12
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Brookneal OSB Plant - Brookneal VA",
+        "type": "OSB Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": true,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 156,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.0338,
+              37.1262
+            ],
+            [
+              -79.0324,
+              37.1262
+            ],
+            [
+              -79.0324,
+              37.1274
+            ],
+            [
+              -79.0338,
+              37.1274
+            ],
+            [
+              -79.0338,
+              37.1262
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Brookneal OSB Plant - Brookneal VA",
+        "type": "OSB Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.0313,
+              37.122
+            ],
+            [
+              -79.03,
+              37.122
+            ],
+            [
+              -79.03,
+              37.1232
+            ],
+            [
+              -79.0313,
+              37.1232
+            ],
+            [
+              -79.0313,
+              37.122
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Brookneal OSB Plant - Brookneal VA",
+        "type": "OSB Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.0304,
+              37.1222
+            ],
+            [
+              -79.0294,
+              37.1222
+            ],
+            [
+              -79.0294,
+              37.1236
+            ],
+            [
+              -79.0304,
+              37.1236
+            ],
+            [
+              -79.0304,
+              37.1222
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Brookneal OSB Plant - Brookneal VA",
+        "type": "OSB Plant",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.0565,
+              32.0735
+            ],
+            [
+              -81.047,
+              32.0735
+            ],
+            [
+              -81.047,
+              32.0805
+            ],
+            [
+              -81.0565,
+              32.0805
+            ],
+            [
+              -81.0565,
+              32.0735
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Gypsum Plant - Savannah GA",
+        "type": "Gypsum Wallboard Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 10,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 50,
+          "truckGateCount": 1,
+          "buildingCount": 9,
+          "siteAreaAcres": 172,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.0542,
+              32.073
+            ],
+            [
+              -81.0528,
+              32.073
+            ],
+            [
+              -81.0528,
+              32.0742
+            ],
+            [
+              -81.0542,
+              32.0742
+            ],
+            [
+              -81.0542,
+              32.073
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Gypsum Plant - Savannah GA",
+        "type": "Gypsum Wallboard Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.0544,
+              32.0758
+            ],
+            [
+              -81.0528,
+              32.0758
+            ],
+            [
+              -81.0528,
+              32.0772
+            ],
+            [
+              -81.0544,
+              32.0772
+            ],
+            [
+              -81.0544,
+              32.0758
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Gypsum Plant - Savannah GA",
+        "type": "Gypsum Wallboard Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.0526,
+              32.077
+            ],
+            [
+              -81.0512,
+              32.077
+            ],
+            [
+              -81.0512,
+              32.079
+            ],
+            [
+              -81.0526,
+              32.079
+            ],
+            [
+              -81.0526,
+              32.077
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Gypsum Plant - Savannah GA",
+        "type": "Gypsum Wallboard Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.0534,
+              32.0744
+            ],
+            [
+              -81.052,
+              32.0744
+            ],
+            [
+              -81.052,
+              32.0756
+            ],
+            [
+              -81.0534,
+              32.0756
+            ],
+            [
+              -81.0534,
+              32.0744
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Gypsum Plant - Savannah GA",
+        "type": "Gypsum Wallboard Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -100.34,
+              32.4775
+            ],
+            [
+              -100.329,
+              32.4775
+            ],
+            [
+              -100.329,
+              32.4865
+            ],
+            [
+              -100.34,
+              32.4865
+            ],
+            [
+              -100.34,
+              32.4775
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Gypsum Plant - Sweetwater TX",
+        "type": "Gypsum Wallboard Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": true,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 2,
+          "buildingCount": 8,
+          "siteAreaAcres": 256,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -100.3372,
+              32.481
+            ],
+            [
+              -100.3358,
+              32.481
+            ],
+            [
+              -100.3358,
+              32.4822
+            ],
+            [
+              -100.3372,
+              32.4822
+            ],
+            [
+              -100.3372,
+              32.481
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Gypsum Plant - Sweetwater TX",
+        "type": "Gypsum Wallboard Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -100.3345,
+              32.4844
+            ],
+            [
+              -100.3322,
+              32.4844
+            ],
+            [
+              -100.3322,
+              32.486
+            ],
+            [
+              -100.3345,
+              32.486
+            ],
+            [
+              -100.3345,
+              32.4844
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Gypsum Plant - Sweetwater TX",
+        "type": "Gypsum Wallboard Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -100.3344,
+              32.4836
+            ],
+            [
+              -100.3322,
+              32.4836
+            ],
+            [
+              -100.3322,
+              32.4844
+            ],
+            [
+              -100.3344,
+              32.4844
+            ],
+            [
+              -100.3344,
+              32.4836
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Gypsum Plant - Sweetwater TX",
+        "type": "Gypsum Wallboard Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -100.336,
+              32.4818
+            ],
+            [
+              -100.3342,
+              32.4818
+            ],
+            [
+              -100.3342,
+              32.4834
+            ],
+            [
+              -100.336,
+              32.4834
+            ],
+            [
+              -100.336,
+              32.4818
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Gypsum Plant - Sweetwater TX",
+        "type": "Gypsum Wallboard Plant",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.4848,
+              39.1608
+            ],
+            [
+              -94.4805,
+              39.1608
+            ],
+            [
+              -94.4805,
+              39.1652
+            ],
+            [
+              -94.4848,
+              39.1652
+            ],
+            [
+              -94.4848,
+              39.1608
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Corrugated Box Plant - Kansas City MO",
+        "type": "Corrugated Box Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 45,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.4816,
+              39.1648
+            ],
+            [
+              -94.4808,
+              39.1648
+            ],
+            [
+              -94.4808,
+              39.1652
+            ],
+            [
+              -94.4816,
+              39.1652
+            ],
+            [
+              -94.4816,
+              39.1648
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Corrugated Box Plant - Kansas City MO",
+        "type": "Corrugated Box Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.4846,
+              39.1625
+            ],
+            [
+              -94.4834,
+              39.1625
+            ],
+            [
+              -94.4834,
+              39.1648
+            ],
+            [
+              -94.4846,
+              39.1648
+            ],
+            [
+              -94.4846,
+              39.1625
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Corrugated Box Plant - Kansas City MO",
+        "type": "Corrugated Box Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.4816,
+              39.1618
+            ],
+            [
+              -94.4805,
+              39.1618
+            ],
+            [
+              -94.4805,
+              39.1644
+            ],
+            [
+              -94.4816,
+              39.1644
+            ],
+            [
+              -94.4816,
+              39.1618
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Corrugated Box Plant - Kansas City MO",
+        "type": "Corrugated Box Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -94.4834,
+              39.163
+            ],
+            [
+              -94.4824,
+              39.163
+            ],
+            [
+              -94.4824,
+              39.1646
+            ],
+            [
+              -94.4834,
+              39.1646
+            ],
+            [
+              -94.4834,
+              39.163
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Corrugated Box Plant - Kansas City MO",
+        "type": "Corrugated Box Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8503,
+              32.4395
+            ],
+            [
+              -96.8458,
+              32.4395
+            ],
+            [
+              -96.8458,
+              32.4465
+            ],
+            [
+              -96.8503,
+              32.4465
+            ],
+            [
+              -96.8503,
+              32.4395
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Corrugated Box Plant - Waxahachie TX",
+        "type": "Corrugated Box Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 80,
+          "trailerParkingCapacity": 140,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 81,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8503,
+              32.4408
+            ],
+            [
+              -96.8495,
+              32.4408
+            ],
+            [
+              -96.8495,
+              32.4416
+            ],
+            [
+              -96.8503,
+              32.4416
+            ],
+            [
+              -96.8503,
+              32.4408
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Corrugated Box Plant - Waxahachie TX",
+        "type": "Corrugated Box Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8503,
+              32.4432
+            ],
+            [
+              -96.8486,
+              32.4432
+            ],
+            [
+              -96.8486,
+              32.4465
+            ],
+            [
+              -96.8503,
+              32.4465
+            ],
+            [
+              -96.8503,
+              32.4432
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Corrugated Box Plant - Waxahachie TX",
+        "type": "Corrugated Box Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8472,
+              32.4434
+            ],
+            [
+              -96.846,
+              32.4434
+            ],
+            [
+              -96.846,
+              32.4454
+            ],
+            [
+              -96.8472,
+              32.4454
+            ],
+            [
+              -96.8472,
+              32.4434
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Corrugated Box Plant - Waxahachie TX",
+        "type": "Corrugated Box Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8482,
+              32.4432
+            ],
+            [
+              -96.8468,
+              32.4432
+            ],
+            [
+              -96.8468,
+              32.4452
+            ],
+            [
+              -96.8482,
+              32.4452
+            ],
+            [
+              -96.8482,
+              32.4432
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Corrugated Box Plant - Waxahachie TX",
+        "type": "Corrugated Box Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8496,
+              32.4416
+            ],
+            [
+              -96.8482,
+              32.4416
+            ],
+            [
+              -96.8482,
+              32.4432
+            ],
+            [
+              -96.8496,
+              32.4432
+            ],
+            [
+              -96.8496,
+              32.4416
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "georgia-pacific",
+        "name": "GP Corrugated Box Plant - Waxahachie TX",
+        "type": "Corrugated Box Plant",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    }
+  ]
+}

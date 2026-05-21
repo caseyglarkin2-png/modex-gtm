@@ -1,0 +1,54 @@
+{
+  "name": "Ford - Lima Engine Plant, Lima OH",
+  "type": "Engine Plant",
+  "coords": { "lat": 40.77750, "lng": -84.08600 },
+  "geofences": {
+    "perimeter": { "south": 40.77350, "west": -84.09100, "north": 40.78250, "east": -84.08050 },
+    "truckGate": { "south": 40.77380, "west": -84.08280, "north": 40.77480, "east": -84.08120 },
+    "dropYards": [
+      { "south": 40.78000, "west": -84.08620, "north": 40.78130, "east": -84.08280 }
+    ],
+    "dockAprons": [
+      { "south": 40.77930, "west": -84.08620, "north": 40.78010, "east": -84.08350 }
+    ],
+    "staging": { "south": 40.77410, "west": -84.08250, "north": 40.77530, "east": -84.08100 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 20,
+    "trailersVisible": 30,
+    "trailerParkingCapacity": 50,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 219.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.7775,-84.086,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "dockDoors", "shipRcvSeparate"],
+  "fieldNotes": {
+    "site": "Ford Lima Engine Plant, 1155 Bible Rd, Lima (Allen County) OH - active Ford powertrain plant (produces V6/V8 engines, ~1,500+ employees). Roster geocode (40.7775,-84.0866) lands directly on the large multi-roof plant building - confirmed correct. The plant sits on the semi-rural edge of Lima, surrounded by farmland and woods, with rail lines on the west and east sides and Bible Rd along the south.",
+    "truckGate": "Confirmed - Street View (2024-08) along Bible Rd shows a marked 'TRUCK ENTRANCE' sign on the chain-link perimeter fence at a wide paved entry apron (~40.7743,-84.0820 area). Chain-link fence encircles the property; the truck entrance opens off Bible Rd into a deep paved staging apron before the internal gate.",
+    "guardShack": "Marked true at medium confidence - a fenced ~1,500-employee active Ford engine plant of this scale conventionally operates a staffed gatehouse, and the truck entrance has a controlled fenced checkpoint. A booth structure could not be positively resolved at Street-View distance; flagged uncertain. remoteGs false as a consequence.",
+    "preGateStaging": "True - the truck entrance off Bible Rd opens onto a large, deep paved apron well outside the building, providing clear pre-gate truck staging room.",
+    "drivewayLong": "True - the approach from the Bible Rd truck entrance to the dock yard is long and deep with ample room to queue 3+ trucks.",
+    "dropArea": "The north-side drop yard holds an estimated 25-40 parked trailers in rows (z18/z19 imagery); banded 25-50. dropYard true. trailersVisible ~30.",
+    "dockDoors": "Estimated 10-25 dock doors along the north building face serving the truck yard; exact count partly obscured by roof angle - flagged uncertain.",
+    "shipRcvSeparate": "Marked false (medium confidence) - the main freight operation (docks + drop yard) is concentrated on the north side; no clearly separate second dock cluster confirmed. Flagged uncertain.",
+    "railServed": "Rail lines run along both the west and east sides of the property with spurs connecting toward the plant - rail-served.",
+    "fastLaneOpportunity": "True - the Bible Rd truck entrance apron is very wide with substantial unused paved width; physical room exists for an express/bypass lane.",
+    "multipleFacilities": "False - a single large interconnected plant building (multi-roof but one structure); buildingCount 1.",
+    "urbanRural": "The plant is on the semi-rural northeast edge of Lima, surrounded by farmland and woodland - Rural."
+  },
+  "method": "deep-audit"
+}

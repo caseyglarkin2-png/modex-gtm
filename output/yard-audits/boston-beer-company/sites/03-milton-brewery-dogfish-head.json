@@ -1,0 +1,50 @@
+{
+  "name": "Milton Brewery (Dogfish Head) - Milton DE",
+  "type": "Brewery / production facility (Dogfish Head main production; acquired by Boston Beer 2019)",
+  "coords": { "lat": 38.7705, "lng": -75.3100 },
+  "geofences": {
+    "perimeter": { "south": 38.7692, "west": -75.3120, "north": 38.7714, "east": -75.3082 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 38.7703, "west": -75.3094, "north": 38.7711, "east": -75.3083 }
+    ],
+    "dockAprons": [
+      { "south": 38.7706, "west": -75.3110, "north": 38.7712, "east": -75.3100 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 12, "trailersVisible": 3, "trailerParkingCapacity": 15,
+    "truckGateCount": 0, "buildingCount": 2, "siteAreaAcres": 20.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.7705,-75.31,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "dropArea", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "No controlled truck gate. The brewery is set within the Cannery Village mixed-use development; trucks reach the operational yard directly from public development roads. Street View (2024) shows open road frontage with employee parking and no barrier arm or sliding gate.",
+    "guardShack": "No guard booth visible at any approach in Street View or satellite.",
+    "shipRcvSeparate": "Confirmed by web research: 'The south side of the building receives the beer line and deliveries of bottles, labels, boxes, and kegs, while packaged products load into trucks along the north' — receiving and shipping run from physically separate building faces.",
+    "dockDoors": "~12 dock doors estimated; the brewery integrates loading into the building and the NE/north operational yard. Exact count is hard from overhead because docks are partly recessed. Approximate, flagged.",
+    "dropArea": "Small NE operational yard handles trucks/tankers; no large marked trailer-drop lot. Few trailers seen — dropArea band 0-10, dropYard FALSE.",
+    "backupSensitive": "Operational yard on the NE side is open paved/gravel with room to maneuver; truck approach is not pinched against a busy public road.",
+    "drivewayShort": "Trucks come off development roads into a short approach to the dock/yard area; no deep multi-truck queue lane.",
+    "multipleFacilities": "Primarily one large brewery building. A separate Dogfish Head shipping/distribution site exists at 25740 Cave Neck Rd, but that is a different facility off-site; this audit is of the production brewery only. multipleFacilities FALSE for this parcel.",
+    "railServed": "No rail spur into the property; site borders residential subdivisions and woods.",
+    "urbanRural": "Edge of the small town of Milton DE, surrounded by residential subdivisions, woods and ponds -> Rural.",
+    "scale": "No truck scale visible.",
+    "trailersVisible": "Only ~3 trailers/trucks visible in captured imagery; this brewery runs lighter on-site trailer staging than the larger network sites."
+  },
+  "method": "deep-audit"
+}

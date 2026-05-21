@@ -1,0 +1,53 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+Nabisco Richmond Biscuit Bakery - Richmond VA,Manufacturing - biscuit/cookie bakery,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@37.49600,-77.35400,400m/data=!3m1!1e3"
+Nabisco Chicago Bakery - Chicago IL,Manufacturing - biscuit/cracker bakery,#4,Gate + GS (BU sens.),,,,,,,,,,,YES,YES,,,YES,,YES,YES,YES,,1,1,,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@41.75880,-87.70650,400m/data=!3m1!1e3"
+Nabisco Portland Bakery - Portland OR,Manufacturing - biscuit/cookie bakery,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,,YES,,YES,,1,1,,,YES,,,,YES,,,YES,Urban,,YES,,YES,"https://www.google.com/maps/@45.58110,-122.66520,400m/data=!3m1!1e3"
+Nabisco Naperville Bakery - Naperville IL,Manufacturing - cracker bakery,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@41.77140,-88.18800,400m/data=!3m1!1e3"
+Clif Bar Baking Co. of Indianapolis - Indianapolis IN,Manufacturing - energy/nutrition bar bakery,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,,YES,,YES,,1,1,,,YES,,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@39.88865,-86.24100,400m/data=!3m1!1e3"
+Tate's Bake Shop Factory - East Moriches NY,Manufacturing - cookie bakery,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,YES,YES,,1,1,,YES,,,,YES,,,,,Rural,,,,,"https://www.google.com/maps/@40.81055,-72.76535,400m/data=!3m1!1e3"
+Mondelez Richmond Distribution Center - Sandston VA,"Distribution center (3PL-operated, Kenco)",#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@37.47980,-77.33820,400m/data=!3m1!1e3"
+Mondelez Montgomery Sales Distribution Center - Montgomery NY,Distribution center / sales warehouse,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,YES,,YES,,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@41.49400,-74.22360,400m/data=!3m1!1e3"
+Nabisco Norcross Distribution Center - Norcross GA,Distribution center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,,YES,,YES,,1,1,,,YES,,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@33.92175,-84.21810,400m/data=!3m1!1e3"
+Nabisco Aurora Sales & Distribution Center - Aurora CO,Sales / distribution center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,,,YES,,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@39.75895,-104.78150,400m/data=!3m1!1e3"
+Clif Bar Baking Co. of Twin Falls - Twin Falls ID,Manufacturing - energy/nutrition bar bakery,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,YES,,,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@42.53985,-114.40805,400m/data=!3m1!1e3"
+Tate's Bake Shop Production & Distribution Facility - Shirley NY,Manufacturing / warehouse - cookie bakery + distribution,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,YES,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@40.84720,-72.87170,400m/data=!3m1!1e3"
+Mondelez Toledo Flour Mill - Toledo OH,Manufacturing - flour mill (input/ingredient),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,YES,,,,,,,,,Urban,,YES,YES,,"https://www.google.com/maps/@41.66510,-83.49930,400m/data=!3m1!1e3"
+Mondelez/Nabisco Tatamy Sales Distribution Center - Tatamy PA,Distribution center / sales warehouse,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,YES,,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@40.73510,-75.26120,400m/data=!3m1!1e3"
+Mondelez Aurora Distribution Center (DHL/Exel-operated) - Aurora IL,"Distribution center (3PL-operated, DHL/Exel Logistics)",#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,YES,,YES,,1,1,YES,,,YES,,YES,,,,,Rural,,,,YES,"https://www.google.com/maps/@41.73550,-88.34700,400m/data=!3m1!1e3"
+Mondelez North America Headquarters / East Hanover Bakery Campus - East Hanover NJ,Corporate HQ + active manufacturing/distribution campus (Nabisco bakery),#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,,YES,1,1,YES,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@40.812,-74.3738,400m/data=!3m1!1e3"
+Mondelez Global R&D Innovation Center - Whippany NJ,"R&D / global innovation center (office + lab, pilot & scale-up lines)",#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@40.82,-74.4097,400m/data=!3m1!1e3"
+Mondelez Global Headquarters - Chicago IL,Corporate HQ (global) - downtown office building,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,YES,,,,,,,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@41.8866,-87.6513,400m/data=!3m1!1e3"
+Nabisco Memphis Sales Distribution Center - Memphis TN,Distribution center / sales warehouse,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,,YES,,1,1,,,YES,,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@35.0184,-89.8695,400m/data=!3m1!1e3"
+Mondelez Fort Worth Distribution Center - Fort Worth TX,Distribution center / cross-dock warehouse,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@33.03158,-97.30073,400m/data=!3m1!1e3"
+Mondelez Houston Distribution Center - Houston TX,Distribution center / multi-tenant warehouse (tenant),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,YES,,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@29.87074,-95.56503,400m/data=!3m1!1e3"
+Mondelez Ontario Distribution Center - Ontario CA,Distribution center / sales warehouse,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,YES,,,YES,Urban,,,,,"https://www.google.com/maps/@34.04500,-117.52555,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,11,50%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,1,5%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,3,14%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,7,32%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,22,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,10,45%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,8,36%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,4,18%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,18,82%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,22,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,22,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

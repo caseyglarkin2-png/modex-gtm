@@ -1,0 +1,52 @@
+{
+  "name": "FedEx Express World Hub - Memphis TN",
+  "type": "Express national/global superhub (air-to-ground sort)",
+  "coords": { "lat": 35.061887, "lng": -89.960429 },
+  "geofences": {
+    "perimeter": { "south": 35.0510, "west": -89.9760, "north": 35.0690, "east": -89.9500 },
+    "truckGate": { "south": 35.06400, "west": -89.95440, "north": 35.06500, "east": -89.95340 },
+    "dropYards": [
+      { "south": 35.06520, "west": -89.96310, "north": 35.06640, "east": -89.96080 },
+      { "south": 35.06000, "west": -89.95350, "north": 35.06250, "east": -89.95050 }
+    ],
+    "dockAprons": [
+      { "south": 35.05950, "west": -89.96550, "north": 35.06250, "east": -89.95900 }
+    ],
+    "staging": { "south": 35.06440, "west": -89.95560, "north": 35.06560, "east": -89.95360 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 120,
+    "trailerParkingCapacity": 300,
+    "truckGateCount": 2,
+    "buildingCount": 8,
+    "siteAreaAcres": 940.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.061887,-89.960429,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 3, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": true
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "siteConfirmation": "Roster point lands on the main sort building of the FedEx Express World Hub on the west side of Memphis International Airport. Confirmed via satellite (multiple sort buildings, 100+ parked freighter aircraft positions, ULD/container staging acres) and web research (FedEx newsroom: largest sort facility in the global network, ~940 acres, 171 aircraft gates, 13,000 team members, 84 miles of conveyor).",
+    "truckGate": "Hardened secured campus. FedEx Main Screening Facility (Flintco-built, 44,000 SF) is the main controlled point of entry. Street View shows steel anti-ram palisade fencing with outriggers, chain-link with coiled razor wire, Jersey-barrier lane channelization on internal roads, and a canopied vehicle checkpoint with multiple lanes.",
+    "guardShack": "Dedicated 44,000 SF Main Screening Facility staffed checkpoint = staffed guard facility (well beyond a simple booth). Multiple manned checkpoints exist for the 5-mile perimeter.",
+    "multiStep": "Vehicle screening checkpoint at perimeter, then secondary controlled access into airside operations areas — multi-stage controlled access.",
+    "dockDoorCount": "This is an air-to-ground hub; primary cargo transfer is aircraft-side. Landside truck docks for road feeder vehicles exist but are dispersed across sort buildings; door count is an estimate from imagery (50+ band).",
+    "dropArea": "Extensive road feeder vehicle / trailer staging visible between sort buildings and in landside lots; well into 50+ band. Counts approximate.",
+    "multipleFacilities": "Campus of 8+ large buildings: original superhub sort building, new 1.3M sq ft automated sort facility (2024), maintenance hangars, screening facility, support/office buildings.",
+    "siteAreaAcres": "940 acres per FedEx newsroom; perimeter box is an approximation of the core landside operations footprint and the published campus figure was used.",
+    "railServed": "No rail spur into the property; airside facility."
+  },
+  "method": "deep-audit"
+}

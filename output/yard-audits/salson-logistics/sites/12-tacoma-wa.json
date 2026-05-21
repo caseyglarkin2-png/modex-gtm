@@ -1,0 +1,46 @@
+{
+  "name": "SalSon Logistics - Tacoma WA (TriPak Inc)",
+  "type": "Port Drayage / Rail Transload Warehouse",
+  "coords": { "lat": 47.258525, "lng": -122.392010 },
+  "geofences": {
+    "perimeter": { "south": 47.257450, "west": -122.393100, "north": 47.259500, "east": -122.390700 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 47.257500, "west": -122.392900, "north": 47.258300, "east": -122.391500 }
+    ],
+    "dockAprons": [
+      { "south": 47.258200, "west": -122.392800, "north": 47.259200, "east": -122.391100 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22, "trailersVisible": 30, "trailerParkingCapacity": 60,
+    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 6.5,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@47.258525,-122.392010,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "dockDoorCount", "entryLanes", "exitLanes", "siteAreaAcres"],
+  "fieldNotes": {
+    "location": "2330 Port of Tacoma Rd, Tacoma WA 98421. SalSon's Tacoma market is operated by TriPak Inc — one of the seven companies merged into SalSon in Aug 2024 (the dossier's 'TriPack Logistics'); TriPak was earlier a TTSI division. Confirmed via loadmatch ('SalSon Logistics (Tri Pak, Inc. div. of TTSI) / Tacoma, WA') and Commtrex/LoopNet listings for 2330 Port of Tacoma Rd. The building is a ~94,590 SF transload warehouse built 1966, rail-served, with a ~3-acre paved fenced yard per the LoopNet lease listing.",
+    "truckGate": "No barrier arm or gate seen across the truck approach in Street View — the transload warehouse fronts a public port-industrial street and trucks pull straight onto the yard apron. Some lease copy describes the yard as 'fenced'; no controlled checkpoint structure is visible. Left FALSE, flagged uncertain.",
+    "railServed": "TRUE — a rail spur / classification yard runs directly along the NE side of the warehouse; TriPak advertises 80+ rail car spots and is a rail transload specialist (bulk grains, aggregates, food-grade, lumber, steel).",
+    "dockDoors": "Street View (west face) shows containers and a row of dock doors with intermodal boxes backed in; overhead imagery supports a 10-25 band — estimate ~22.",
+    "dropArea": "Open paved yard holds drayage chassis, tractors and parked containers/trailers — a 25-50 drop area.",
+    "buildingCount": "Main long transload warehouse plus a smaller attached/adjacent annex structure.",
+    "urbanRural": "Inside the dense Port of Tacoma industrial core — Urban.",
+    "siteAreaAcres": "~6.5 acres for the warehouse footprint plus its yard, estimated from the perimeter box; the LoopNet listing cites ~3 acres of paved yard alone (the leasable parcel may be smaller than the audited operational footprint)."
+  },
+  "method": "deep-audit"
+}

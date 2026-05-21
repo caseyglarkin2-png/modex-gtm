@@ -1,0 +1,55 @@
+{
+  "name": "Bob Evans Farms - Rigby ID Plant",
+  "type": "Manufacturing plant (refrigerated and frozen potato products; Potato Products of Idaho facility absorbed under Post Holdings)",
+  "coords": { "lat": 43.683900, "lng": -111.900400 },
+  "geofences": {
+    "perimeter": { "south": 43.682100, "west": -111.902100, "north": 43.684550, "east": -111.898000 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 43.683500, "west": -111.901600, "north": 43.684000, "east": -111.900900 }
+    ],
+    "dockAprons": [
+      { "south": 43.683600, "west": -111.901300, "north": 43.683950, "east": -111.900600 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 10,
+    "trailersVisible": 3,
+    "trailerParkingCapacity": 20,
+    "truckGateCount": 2,
+    "buildingCount": 4,
+    "siteAreaAcres": 22.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@43.683900,-111.900400,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Plant accessed via open gravel/paved yards off N Yellowstone Hwy frontage; multiple open driveways with no barrier arm, gate, or checkpoint pinch-point. No perimeter fence around the property. Confirmed in satellite z19-z20.",
+    "guardShack": "No booth structure at any driveway or on the access yards.",
+    "remoteGs": "No gate, so no remote check-in implied.",
+    "drivewayLong": "Large open gravel/paved truck yards give deep approach room (3+ trucks).",
+    "postGateStaging": "Extensive open paved/gravel yard between the highway and the plant buildings provides ample internal staging.",
+    "dockDoors": "Dock activity concentrated at the building's west end where trucks load; few discrete dock doors visible (~10). Potato processors often load via fewer high-throughput doors and bulk infeed; exact count uncertain.",
+    "dropArea": "A small number of trailers in the west-end yard without tractors; no large striped drop lot. 0-10 band.",
+    "dropYard": "An informal trailer-staging area exists at the building's west end, treated as a small drop yard.",
+    "multipleFacilities": "Campus of ~4 distinct structures: main processing plant, attached/adjacent buildings, and separate potato-storage cellar buildings to the south.",
+    "railServed": "A rail line runs parallel to N Yellowstone Hwy along the north of the property, but it does NOT spur into the plant -- a drainage canal separates the property from the rail corridor. railServed false.",
+    "urbanRural": "Rural Rigby, ID; the plant is surrounded by farm fields with a highway interchange nearby. Classified Rural.",
+    "trailersVisible": "Few trailers visible in 2021/2026 imagery (~3); count uncertain.",
+    "trailerParkingCapacity": "Open yards could hold ~20 trailers informally; estimate."
+  },
+  "method": "deep-audit"
+}

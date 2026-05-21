@@ -1,0 +1,70 @@
+{
+  "name": "K-C Marinette Mill - Marinette WI",
+  "type": "Tissue / wipers manufacturing mill (Scott Shop Towels, Wypall, Viva paper towels; ~230 employees)",
+  "coords": { "lat": 45.10375, "lng": -87.65205 },
+  "geofences": {
+    "perimeter": { "south": 45.10095, "west": -87.65560, "north": 45.10650, "east": -87.64870 },
+    "truckGate": { "south": 45.10145, "west": -87.65120, "north": 45.10205, "east": -87.65010 },
+    "dropYards": [
+      { "south": 45.10130, "west": -87.65320, "north": 45.10280, "east": -87.65060 }
+    ],
+    "dockAprons": [
+      { "south": 45.10250, "west": -87.65340, "north": 45.10320, "east": -87.65040 },
+      { "south": 45.10380, "west": -87.65060, "north": 45.10480, "east": -87.64960 }
+    ],
+    "staging": { "south": 45.10135, "west": -87.65060, "north": 45.10210, "east": -87.64950 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 28,
+    "trailersVisible": 52,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 31.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@45.10375,-87.65205,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "shipRcvSeparate"],
+  "fieldNotes": {
+    "location": "Roster lat/lng (45.099985,-87.630662, APPROXIMATE, moved 3554m) landed in downtown Marinette - wrong. Web research (Wisconsin DNR Green Tier, Waze, Yelp) gave 3120 Riverside Ave; satellite confirmed the K-C tissue/wipers mill complex on the south bank of the Menominee River. Locked center 45.10375,-87.65205.",
+    "truckGate": "Guard booth + chain-link sliding gate sits inside the SE yard controlling access to the trailer drop yard / dock area; entrance off Riverside Ave is a wide open paved apron with truck-routing signage ('ALL TRUCKS') - control point is the interior booth.",
+    "guardShack": "Small tan peaked-roof booth (1-2 vehicle footprint) standing alone in the open yard adjacent to the drop yard, confirmed in Street View (2025-08).",
+    "preGateStaging": "Large open paved apron between Riverside Ave and the interior guard booth provides ample truck waiting room before the checkpoint.",
+    "postGateStaging": "Open paved yard between the guard booth and the dock faces / drop yard rows allows post-gate queueing.",
+    "drivewayLong": "Deep open yard from road apron to docks easily holds 3+ trucks queued.",
+    "fastLaneOpportunity": "Very wide unmarked paved apron at the entrance - abundant room to add a bypass/express lane.",
+    "dockDoors": "Estimated ~28 doors: a long dock face along the south/SW of the main warehouse plus a dock bank on the SE manufacturing building. Roof clutter and shadow make exact count uncertain - banded 25-50.",
+    "dropArea": "Dedicated gravel drop yard south of the warehouse with two long rows of parked trailers (~52 trailers counted in imagery, capacity ~70); banded 50+.",
+    "dropYard": "Clear dedicated trailer-storage lot separate from active dock staging.",
+    "urbanRural": "Marinette WI is a small river town (~10k pop); the mill is edge-of-town industrial bounded by river and woods - Rural per rubric.",
+    "shipRcvSeparate": "Dock activity appears split between the SW warehouse face and the SE manufacturing building, but not clearly two distinct shipping vs receiving clusters - low confidence, called false.",
+    "railServed": "No rail spur visible entering the property.",
+    "buildingCount": "Main manufacturing complex (river side), large central warehouse, SE manufacturing/dock building, and the front brick office building - counted as 4 distinct structures; some are interconnected."
+  },
+  "method": "deep-audit"
+}

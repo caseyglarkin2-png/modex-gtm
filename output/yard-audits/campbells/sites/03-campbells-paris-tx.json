@@ -1,0 +1,46 @@
+{
+  "name": "Campbell's - Paris TX",
+  "type": "Manufacturing - sauces (flagship sauce facility)",
+  "coords": { "lat": 33.690500, "lng": -95.561000 },
+  "geofences": {
+    "perimeter": { "south": 33.68550, "west": -95.56400, "north": 33.69600, "east": -95.55850 },
+    "truckGate": { "south": 33.68620, "west": -95.56250, "north": 33.68690, "east": -95.56170 },
+    "dropYards": [
+      { "south": 33.69180, "west": -95.56380, "north": 33.69560, "east": -95.56020 }
+    ],
+    "dockAprons": [
+      { "south": 33.69050, "west": -95.56050, "north": 33.69300, "east": -95.55880 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 50, "trailersVisible": 110, "trailerParkingCapacity": 170,
+    "truckGateCount": 1, "buildingCount": 6, "siteAreaAcres": 110.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.690500,-95.561000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "dockDoorCount", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Main entrance road off NW Loop 286 (~33.6865,-95.5622) with a Campbell's sign; perimeter fence around the plant. Gate is inside, set back from the public road.",
+    "guardShack": "No guard booth visible from public-road Street View (plant sits far back behind grass buffer and fence). Marked false / remoteGs true at medium confidence.",
+    "railServed": "Active rail line / spur runs along the east side of the plant; rail cars visible in imagery.",
+    "dropYard": "Very large trailer drop yard on the NW with many rows of parked trailers (100+).",
+    "dockDoorCount": "Multiple dock banks; trailers backed into dock face on the NW warehouse and main plant. ~50 estimate banded 50+, low confidence.",
+    "multipleFacilities": "Large multi-building manufacturing complex plus separate NW warehouse blocks.",
+    "fastLaneOpportunity": "Wide entrance road and ample paved internal yard.",
+    "siteAreaAcres": "Derived from perimeter box ~1170m N-S x ~510m E-W."
+  },
+  "method": "deep-audit"
+}

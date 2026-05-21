@@ -1,0 +1,55 @@
+{
+  "name": "GXO Logistics Distribution Center - McDonough GA",
+  "type": "Distribution Center",
+  "coords": { "lat": 33.41128, "lng": -84.19269 },
+  "geofences": {
+    "perimeter": { "south": 33.40950, "west": -84.19550, "north": 33.41280, "east": -84.18950 },
+    "truckGate": { "south": 33.40990, "west": -84.19500, "north": 33.41060, "east": -84.19400 },
+    "dropYards": [
+      { "south": 33.40970, "west": -84.19540, "north": 33.41130, "east": -84.19370 },
+      { "south": 33.41170, "west": -84.19440, "north": 33.41280, "east": -84.18990 }
+    ],
+    "dockAprons": [
+      { "south": 33.41010, "west": -84.19420, "north": 33.41200, "east": -84.18970 },
+      { "south": 33.41150, "west": -84.19490, "north": 33.41280, "east": -84.19030 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 130,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 50.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.41128,-84.19269,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "The Westridge Logistics Center fronts Westridge Parkway with open paved truck-court driveways. z18/z19 satellite and Street View (2022/2025) show no barrier arm, sliding gate, or checkpoint pinch-point at any property-line connection, and no perimeter fence around the operational yard. Classed false.",
+    "guardShack": "No 1-3-vehicle staffed booth at any entrance in z18/z19 satellite or Street View. The office is a multi-bay structure built into the SE building face, not a gate booth.",
+    "remoteGs": "No gate, so no remote check-in inference.",
+    "dockDoors": "Large cross-dock distribution building (Westridge Logistics Center) with continuous dock-door banks on both the NW and SE long faces, both lined with trailers; counted ~120 doors total - solidly in the 50+ band. Exact count approximate. GXO leases 204,000 SF within this larger building.",
+    "shipRcvSeparate": "Dock doors run from two physically separate banks on opposite (NW and SE) building faces, so shipping and receiving operate from separate clusters.",
+    "dropArea": "Large trailer drop yard on the SW side plus trailer rows along both dock faces; well over 50 trailers parked away from active docks - 50+ band.",
+    "drivewayLong": "Wide truck courts on both dock faces hold queues well over 3 trucks.",
+    "urbanRural": "McDonough GA is part of metro Atlanta's exurban fabric (Henry County); the site sits in an established industrial park within a mile of I-75, with residential subdivisions immediately east - Urban.",
+    "railServed": "No rail spur enters the property; truck-served only.",
+    "fastLaneOpportunity": "Wide multi-lane truck-court entrances and large paved aprons give ample room to add an express/bypass lane.",
+    "buildingCount": "Treated as a single large multi-tenant distribution building; GXO occupies a 204,000 SF portion. Separate neighboring warehouses in the park are off-property and not counted."
+  },
+  "method": "deep-audit"
+}

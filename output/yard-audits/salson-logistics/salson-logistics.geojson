@@ -1,0 +1,2173 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1356,
+              40.69905
+            ],
+            [
+              -74.1283,
+              40.69905
+            ],
+            [
+              -74.1283,
+              40.7047
+            ],
+            [
+              -74.1356,
+              40.7047
+            ],
+            [
+              -74.1356,
+              40.69905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Newark NJ (Flagship Campus)",
+        "type": "Warehouse / Container Yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 600,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 53,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1331,
+              40.70075
+            ],
+            [
+              -74.1323,
+              40.70075
+            ],
+            [
+              -74.1323,
+              40.7013
+            ],
+            [
+              -74.1331,
+              40.7013
+            ],
+            [
+              -74.1331,
+              40.70075
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Newark NJ (Flagship Campus)",
+        "type": "Warehouse / Container Yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1328,
+              40.6996
+            ],
+            [
+              -74.1307,
+              40.6996
+            ],
+            [
+              -74.1307,
+              40.701
+            ],
+            [
+              -74.1328,
+              40.701
+            ],
+            [
+              -74.1328,
+              40.6996
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Newark NJ (Flagship Campus)",
+        "type": "Warehouse / Container Yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1317,
+              40.7015
+            ],
+            [
+              -74.1285,
+              40.7015
+            ],
+            [
+              -74.1285,
+              40.7046
+            ],
+            [
+              -74.1317,
+              40.7046
+            ],
+            [
+              -74.1317,
+              40.7015
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Newark NJ (Flagship Campus)",
+        "type": "Warehouse / Container Yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1323,
+              40.7008
+            ],
+            [
+              -74.1295,
+              40.7008
+            ],
+            [
+              -74.1295,
+              40.7015
+            ],
+            [
+              -74.1323,
+              40.7015
+            ],
+            [
+              -74.1323,
+              40.7008
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Newark NJ (Flagship Campus)",
+        "type": "Warehouse / Container Yard",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1323,
+              40.7146
+            ],
+            [
+              -74.128,
+              40.7146
+            ],
+            [
+              -74.128,
+              40.7185
+            ],
+            [
+              -74.1323,
+              40.7185
+            ],
+            [
+              -74.1323,
+              40.7146
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Newark NJ (481 Doremus Warehouse)",
+        "type": "Food-Grade Warehouse / Container Storage",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 16.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1293,
+              40.716
+            ],
+            [
+              -74.1286,
+              40.716
+            ],
+            [
+              -74.1286,
+              40.7165
+            ],
+            [
+              -74.1293,
+              40.7165
+            ],
+            [
+              -74.1293,
+              40.716
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Newark NJ (481 Doremus Warehouse)",
+        "type": "Food-Grade Warehouse / Container Storage",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1303,
+              40.715
+            ],
+            [
+              -74.1286,
+              40.715
+            ],
+            [
+              -74.1286,
+              40.7164
+            ],
+            [
+              -74.1303,
+              40.7164
+            ],
+            [
+              -74.1303,
+              40.715
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Newark NJ (481 Doremus Warehouse)",
+        "type": "Food-Grade Warehouse / Container Storage",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1319,
+              40.7155
+            ],
+            [
+              -74.1296,
+              40.7155
+            ],
+            [
+              -74.1296,
+              40.717
+            ],
+            [
+              -74.1319,
+              40.717
+            ],
+            [
+              -74.1319,
+              40.7155
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Newark NJ (481 Doremus Warehouse)",
+        "type": "Food-Grade Warehouse / Container Storage",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.81,
+              40.0956
+            ],
+            [
+              -74.8056,
+              40.0956
+            ],
+            [
+              -74.8056,
+              40.0987
+            ],
+            [
+              -74.81,
+              40.0987
+            ],
+            [
+              -74.81,
+              40.0956
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Florence NJ",
+        "type": "Warehouse / Transload Hub",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 4,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 9.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.8079,
+              40.0968
+            ],
+            [
+              -74.8058,
+              40.0968
+            ],
+            [
+              -74.8058,
+              40.0985
+            ],
+            [
+              -74.8079,
+              40.0985
+            ],
+            [
+              -74.8079,
+              40.0968
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Florence NJ",
+        "type": "Warehouse / Transload Hub",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.2312,
+              33.8592
+            ],
+            [
+              -118.2284,
+              33.8592
+            ],
+            [
+              -118.2284,
+              33.8615
+            ],
+            [
+              -118.2312,
+              33.8615
+            ],
+            [
+              -118.2312,
+              33.8592
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Compton CA",
+        "type": "Intermodal / Transload Warehouse + Secured Yard",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 8.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.2309,
+              33.8601
+            ],
+            [
+              -118.2296,
+              33.8601
+            ],
+            [
+              -118.2296,
+              33.8611
+            ],
+            [
+              -118.2309,
+              33.8611
+            ],
+            [
+              -118.2309,
+              33.8601
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Compton CA",
+        "type": "Intermodal / Transload Warehouse + Secured Yard",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.2309,
+              33.8604
+            ],
+            [
+              -118.2292,
+              33.8604
+            ],
+            [
+              -118.2292,
+              33.8611
+            ],
+            [
+              -118.2309,
+              33.8611
+            ],
+            [
+              -118.2309,
+              33.8604
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Compton CA",
+        "type": "Intermodal / Transload Warehouse + Secured Yard",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3181,
+              33.63475
+            ],
+            [
+              -84.31635,
+              33.63475
+            ],
+            [
+              -84.31635,
+              33.63645
+            ],
+            [
+              -84.3181,
+              33.63645
+            ],
+            [
+              -84.3181,
+              33.63475
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Conley GA (Atlanta)",
+        "type": "Warehouse / Dedicated Fleet Terminal",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 4.6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.318,
+              33.63495
+            ],
+            [
+              -84.31765,
+              33.63495
+            ],
+            [
+              -84.31765,
+              33.63525
+            ],
+            [
+              -84.318,
+              33.63525
+            ],
+            [
+              -84.318,
+              33.63495
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Conley GA (Atlanta)",
+        "type": "Warehouse / Dedicated Fleet Terminal",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.31765,
+              33.6359
+            ],
+            [
+              -84.3167,
+              33.6359
+            ],
+            [
+              -84.3167,
+              33.63645
+            ],
+            [
+              -84.31765,
+              33.63645
+            ],
+            [
+              -84.31765,
+              33.6359
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Conley GA (Atlanta)",
+        "type": "Warehouse / Dedicated Fleet Terminal",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.31725,
+              33.63525
+            ],
+            [
+              -84.3167,
+              33.63525
+            ],
+            [
+              -84.3167,
+              33.6356
+            ],
+            [
+              -84.31725,
+              33.6356
+            ],
+            [
+              -84.31725,
+              33.63525
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Conley GA (Atlanta)",
+        "type": "Warehouse / Dedicated Fleet Terminal",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.068,
+              32.9181
+            ],
+            [
+              -80.0659,
+              32.9181
+            ],
+            [
+              -80.0659,
+              32.91965
+            ],
+            [
+              -80.068,
+              32.91965
+            ],
+            [
+              -80.068,
+              32.9181
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - North Charleston SC",
+        "type": "Drayage Terminal / Food-Grade Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 28,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 4.3,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.06805,
+              32.91915
+            ],
+            [
+              -80.0677,
+              32.91915
+            ],
+            [
+              -80.0677,
+              32.9194
+            ],
+            [
+              -80.06805,
+              32.9194
+            ],
+            [
+              -80.06805,
+              32.91915
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - North Charleston SC",
+        "type": "Drayage Terminal / Food-Grade Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.06735,
+              32.91815
+            ],
+            [
+              -80.06605,
+              32.91815
+            ],
+            [
+              -80.06605,
+              32.9189
+            ],
+            [
+              -80.06735,
+              32.9189
+            ],
+            [
+              -80.06735,
+              32.91815
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - North Charleston SC",
+        "type": "Drayage Terminal / Food-Grade Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.06735,
+              32.91885
+            ],
+            [
+              -80.06685,
+              32.91885
+            ],
+            [
+              -80.06685,
+              32.91925
+            ],
+            [
+              -80.06735,
+              32.91925
+            ],
+            [
+              -80.06735,
+              32.91885
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - North Charleston SC",
+        "type": "Drayage Terminal / Food-Grade Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.3776,
+              36.7689
+            ],
+            [
+              -76.374,
+              36.7689
+            ],
+            [
+              -76.374,
+              36.7724
+            ],
+            [
+              -76.3776,
+              36.7724
+            ],
+            [
+              -76.3776,
+              36.7689
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Chesapeake VA (Norfolk)",
+        "type": "Drayage Terminal / Container & Trailer Yard",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "NONE",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 400,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 16,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.3757,
+              36.77205
+            ],
+            [
+              -76.3753,
+              36.77205
+            ],
+            [
+              -76.3753,
+              36.77235
+            ],
+            [
+              -76.3757,
+              36.77235
+            ],
+            [
+              -76.3757,
+              36.77205
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Chesapeake VA (Norfolk)",
+        "type": "Drayage Terminal / Container & Trailer Yard",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -76.3771,
+              36.7692
+            ],
+            [
+              -76.3746,
+              36.7692
+            ],
+            [
+              -76.3746,
+              36.7714
+            ],
+            [
+              -76.3771,
+              36.7714
+            ],
+            [
+              -76.3771,
+              36.7692
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Chesapeake VA (Norfolk)",
+        "type": "Drayage Terminal / Container & Trailer Yard",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.2769,
+              29.8045
+            ],
+            [
+              -95.2726,
+              29.8045
+            ],
+            [
+              -95.2726,
+              29.8074
+            ],
+            [
+              -95.2769,
+              29.8074
+            ],
+            [
+              -95.2769,
+              29.8045
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Houston TX",
+        "type": "Drayage Terminal / Truck & Trailer Parking Yard",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "NONE",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 160,
+          "trailerParkingCapacity": 500,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 16,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.2747,
+              29.80535
+            ],
+            [
+              -95.2742,
+              29.80535
+            ],
+            [
+              -95.2742,
+              29.80565
+            ],
+            [
+              -95.2747,
+              29.80565
+            ],
+            [
+              -95.2747,
+              29.80535
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Houston TX",
+        "type": "Drayage Terminal / Truck & Trailer Parking Yard",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.2767,
+              29.8049
+            ],
+            [
+              -95.2728,
+              29.8049
+            ],
+            [
+              -95.2728,
+              29.8073
+            ],
+            [
+              -95.2767,
+              29.8073
+            ],
+            [
+              -95.2767,
+              29.8049
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Houston TX",
+        "type": "Drayage Terminal / Truck & Trailer Parking Yard",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.13515,
+              32.0886
+            ],
+            [
+              -81.1333,
+              32.0886
+            ],
+            [
+              -81.1333,
+              32.0903
+            ],
+            [
+              -81.13515,
+              32.0903
+            ],
+            [
+              -81.13515,
+              32.0886
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Savannah GA",
+        "type": "Drayage Terminal / Crossdock Warehouse + Container Yard",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 3.8,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.1347,
+              32.08906
+            ],
+            [
+              -81.13445,
+              32.08906
+            ],
+            [
+              -81.13445,
+              32.0892
+            ],
+            [
+              -81.1347,
+              32.0892
+            ],
+            [
+              -81.1347,
+              32.08906
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Savannah GA",
+        "type": "Drayage Terminal / Crossdock Warehouse + Container Yard",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.1344,
+              32.08865
+            ],
+            [
+              -81.13335,
+              32.08865
+            ],
+            [
+              -81.13335,
+              32.08935
+            ],
+            [
+              -81.1344,
+              32.08935
+            ],
+            [
+              -81.1344,
+              32.08865
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Savannah GA",
+        "type": "Drayage Terminal / Crossdock Warehouse + Container Yard",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.13455,
+              32.08925
+            ],
+            [
+              -81.1339,
+              32.08925
+            ],
+            [
+              -81.1339,
+              32.08965
+            ],
+            [
+              -81.13455,
+              32.08965
+            ],
+            [
+              -81.13455,
+              32.08925
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Savannah GA",
+        "type": "Drayage Terminal / Crossdock Warehouse + Container Yard",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.7522,
+              40.1758
+            ],
+            [
+              -79.7452,
+              40.1758
+            ],
+            [
+              -79.7452,
+              40.1824
+            ],
+            [
+              -79.7522,
+              40.1824
+            ],
+            [
+              -79.7522,
+              40.1758
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Smithton PA (Dick's Sporting Goods DC)",
+        "type": "Dedicated-Fleet Terminal at Retail Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 320,
+          "trailerParkingCapacity": 450,
+          "truckGateCount": 1,
+          "buildingCount": 3,
+          "siteAreaAcres": 95,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.7502,
+              40.1811
+            ],
+            [
+              -79.7497,
+              40.1811
+            ],
+            [
+              -79.7497,
+              40.1814
+            ],
+            [
+              -79.7502,
+              40.1814
+            ],
+            [
+              -79.7502,
+              40.1811
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Smithton PA (Dick's Sporting Goods DC)",
+        "type": "Dedicated-Fleet Terminal at Retail Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.7519,
+              40.1799
+            ],
+            [
+              -79.7486,
+              40.1799
+            ],
+            [
+              -79.7486,
+              40.1822
+            ],
+            [
+              -79.7519,
+              40.1822
+            ],
+            [
+              -79.7519,
+              40.1799
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Smithton PA (Dick's Sporting Goods DC)",
+        "type": "Dedicated-Fleet Terminal at Retail Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.7499,
+              40.1769
+            ],
+            [
+              -79.7458,
+              40.1769
+            ],
+            [
+              -79.7458,
+              40.1801
+            ],
+            [
+              -79.7499,
+              40.1801
+            ],
+            [
+              -79.7499,
+              40.1769
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Smithton PA (Dick's Sporting Goods DC)",
+        "type": "Dedicated-Fleet Terminal at Retail Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -79.7504,
+              40.1806
+            ],
+            [
+              -79.7492,
+              40.1806
+            ],
+            [
+              -79.7492,
+              40.181
+            ],
+            [
+              -79.7504,
+              40.181
+            ],
+            [
+              -79.7504,
+              40.1806
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Smithton PA (Dick's Sporting Goods DC)",
+        "type": "Dedicated-Fleet Terminal at Retail Distribution Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.8125,
+              42.0395
+            ],
+            [
+              -75.807,
+              42.0395
+            ],
+            [
+              -75.807,
+              42.0455
+            ],
+            [
+              -75.8125,
+              42.0455
+            ],
+            [
+              -75.8125,
+              42.0395
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Dick's Sporting Goods Conklin DC (Dedicated Fleet) - Conklin NY",
+        "type": "E-commerce distribution center (SalSon dedicated-fleet operation)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 350,
+          "trailerParkingCapacity": 550,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 68,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.8102,
+              42.0414
+            ],
+            [
+              -75.8094,
+              42.0414
+            ],
+            [
+              -75.8094,
+              42.0419
+            ],
+            [
+              -75.8102,
+              42.0419
+            ],
+            [
+              -75.8102,
+              42.0414
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Dick's Sporting Goods Conklin DC (Dedicated Fleet) - Conklin NY",
+        "type": "E-commerce distribution center (SalSon dedicated-fleet operation)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.8095,
+              42.0413
+            ],
+            [
+              -75.807,
+              42.0413
+            ],
+            [
+              -75.807,
+              42.045
+            ],
+            [
+              -75.8095,
+              42.045
+            ],
+            [
+              -75.8095,
+              42.0413
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Dick's Sporting Goods Conklin DC (Dedicated Fleet) - Conklin NY",
+        "type": "E-commerce distribution center (SalSon dedicated-fleet operation)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.8112,
+              42.0406
+            ],
+            [
+              -75.8098,
+              42.0406
+            ],
+            [
+              -75.8098,
+              42.0447
+            ],
+            [
+              -75.8112,
+              42.0447
+            ],
+            [
+              -75.8112,
+              42.0406
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Dick's Sporting Goods Conklin DC (Dedicated Fleet) - Conklin NY",
+        "type": "E-commerce distribution center (SalSon dedicated-fleet operation)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.8098,
+              42.0415
+            ],
+            [
+              -75.8085,
+              42.0415
+            ],
+            [
+              -75.8085,
+              42.0428
+            ],
+            [
+              -75.8098,
+              42.0428
+            ],
+            [
+              -75.8098,
+              42.0415
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Dick's Sporting Goods Conklin DC (Dedicated Fleet) - Conklin NY",
+        "type": "E-commerce distribution center (SalSon dedicated-fleet operation)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.3931,
+              47.25745
+            ],
+            [
+              -122.3907,
+              47.25745
+            ],
+            [
+              -122.3907,
+              47.2595
+            ],
+            [
+              -122.3931,
+              47.2595
+            ],
+            [
+              -122.3931,
+              47.25745
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Tacoma WA (TriPak Inc)",
+        "type": "Port Drayage / Rail Transload Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 6.5,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.3929,
+              47.2575
+            ],
+            [
+              -122.3915,
+              47.2575
+            ],
+            [
+              -122.3915,
+              47.2583
+            ],
+            [
+              -122.3929,
+              47.2583
+            ],
+            [
+              -122.3929,
+              47.2575
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Tacoma WA (TriPak Inc)",
+        "type": "Port Drayage / Rail Transload Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.3928,
+              47.2582
+            ],
+            [
+              -122.3911,
+              47.2582
+            ],
+            [
+              -122.3911,
+              47.2592
+            ],
+            [
+              -122.3928,
+              47.2592
+            ],
+            [
+              -122.3928,
+              47.2582
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Tacoma WA (TriPak Inc)",
+        "type": "Port Drayage / Rail Transload Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.110455,
+              35.237987
+            ],
+            [
+              -119.108145,
+              35.237987
+            ],
+            [
+              -119.108145,
+              35.240413
+            ],
+            [
+              -119.110455,
+              35.240413
+            ],
+            [
+              -119.110455,
+              35.237987
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Bakersfield CA",
+        "type": "Intermodal / Fleet Location",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "NONE",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 22,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 14,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.109852,
+              35.237803
+            ],
+            [
+              -119.109248,
+              35.237803
+            ],
+            [
+              -119.109248,
+              35.238297
+            ],
+            [
+              -119.109852,
+              35.238297
+            ],
+            [
+              -119.109852,
+              35.237803
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Bakersfield CA",
+        "type": "Intermodal / Fleet Location",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -119.110595,
+              35.239611
+            ],
+            [
+              -119.109605,
+              35.239611
+            ],
+            [
+              -119.109605,
+              35.240689
+            ],
+            [
+              -119.110595,
+              35.240689
+            ],
+            [
+              -119.110595,
+              35.239611
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "salson-logistics",
+        "name": "SalSon Logistics - Bakersfield CA",
+        "type": "Intermodal / Fleet Location",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "dropYard",
+        "index": 1
+      }
+    }
+  ]
+}

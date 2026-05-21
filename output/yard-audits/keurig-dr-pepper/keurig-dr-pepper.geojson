@@ -1,0 +1,4099 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.034,
+              34.8688
+            ],
+            [
+              -82.03,
+              34.8688
+            ],
+            [
+              -82.03,
+              34.872
+            ],
+            [
+              -82.034,
+              34.872
+            ],
+            [
+              -82.034,
+              34.8688
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Coffee Roasting & K-Cup Plant - Spartanburg (Moore) SC",
+        "type": "Manufacturing - Coffee/K-Cup",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 32,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 27,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.0319,
+              34.87165
+            ],
+            [
+              -82.0312,
+              34.87165
+            ],
+            [
+              -82.0312,
+              34.8721
+            ],
+            [
+              -82.0319,
+              34.8721
+            ],
+            [
+              -82.0319,
+              34.87165
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Coffee Roasting & K-Cup Plant - Spartanburg (Moore) SC",
+        "type": "Manufacturing - Coffee/K-Cup",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.0321,
+              34.8695
+            ],
+            [
+              -82.0306,
+              34.8695
+            ],
+            [
+              -82.0306,
+              34.8717
+            ],
+            [
+              -82.0321,
+              34.8717
+            ],
+            [
+              -82.0321,
+              34.8695
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Coffee Roasting & K-Cup Plant - Spartanburg (Moore) SC",
+        "type": "Manufacturing - Coffee/K-Cup",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.032,
+              34.8695
+            ],
+            [
+              -82.0309,
+              34.8695
+            ],
+            [
+              -82.0309,
+              34.8716
+            ],
+            [
+              -82.032,
+              34.8716
+            ],
+            [
+              -82.032,
+              34.8695
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Coffee Roasting & K-Cup Plant - Spartanburg (Moore) SC",
+        "type": "Manufacturing - Coffee/K-Cup",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.1395,
+              44.5118
+            ],
+            [
+              -73.133,
+              44.5118
+            ],
+            [
+              -73.133,
+              44.5164
+            ],
+            [
+              -73.1395,
+              44.5164
+            ],
+            [
+              -73.1395,
+              44.5118
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP K-Cup Plant - Essex Junction VT",
+        "type": "Manufacturing - Coffee/K-Cup",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 55,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.1382,
+              44.514
+            ],
+            [
+              -73.1374,
+              44.514
+            ],
+            [
+              -73.1374,
+              44.5146
+            ],
+            [
+              -73.1382,
+              44.5146
+            ],
+            [
+              -73.1382,
+              44.514
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP K-Cup Plant - Essex Junction VT",
+        "type": "Manufacturing - Coffee/K-Cup",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.1362,
+              44.5148
+            ],
+            [
+              -73.1338,
+              44.5148
+            ],
+            [
+              -73.1338,
+              44.5162
+            ],
+            [
+              -73.1362,
+              44.5162
+            ],
+            [
+              -73.1362,
+              44.5148
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP K-Cup Plant - Essex Junction VT",
+        "type": "Manufacturing - Coffee/K-Cup",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.1354,
+              44.5122
+            ],
+            [
+              -73.1338,
+              44.5122
+            ],
+            [
+              -73.1338,
+              44.5132
+            ],
+            [
+              -73.1354,
+              44.5132
+            ],
+            [
+              -73.1354,
+              44.5122
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP K-Cup Plant - Essex Junction VT",
+        "type": "Manufacturing - Coffee/K-Cup",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.138,
+              44.5138
+            ],
+            [
+              -73.137,
+              44.5138
+            ],
+            [
+              -73.137,
+              44.5148
+            ],
+            [
+              -73.138,
+              44.5148
+            ],
+            [
+              -73.138,
+              44.5138
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP K-Cup Plant - Essex Junction VT",
+        "type": "Manufacturing - Coffee/K-Cup",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -73.1372,
+              44.5148
+            ],
+            [
+              -73.1356,
+              44.5148
+            ],
+            [
+              -73.1356,
+              44.5156
+            ],
+            [
+              -73.1372,
+              44.5156
+            ],
+            [
+              -73.1372,
+              44.5148
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP K-Cup Plant - Essex Junction VT",
+        "type": "Manufacturing - Coffee/K-Cup",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -72.7525,
+              44.3343
+            ],
+            [
+              -72.7488,
+              44.3343
+            ],
+            [
+              -72.7488,
+              44.3372
+            ],
+            [
+              -72.7525,
+              44.3372
+            ],
+            [
+              -72.7525,
+              44.3343
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Coffee Plant - Waterbury VT",
+        "type": "Manufacturing - Coffee",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 2,
+          "trailersVisible": 3,
+          "trailerParkingCapacity": 5,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 18,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.6085,
+              40.5688
+            ],
+            [
+              -75.6033,
+              40.5688
+            ],
+            [
+              -75.6033,
+              40.5762
+            ],
+            [
+              -75.6085,
+              40.5762
+            ],
+            [
+              -75.6085,
+              40.5688
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Beverage Manufacturing & Distribution - Allentown PA",
+        "type": "Manufacturing & Distribution - Beverage",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 92,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.6079,
+              40.5721
+            ],
+            [
+              -75.6069,
+              40.5721
+            ],
+            [
+              -75.6069,
+              40.5729
+            ],
+            [
+              -75.6079,
+              40.5729
+            ],
+            [
+              -75.6079,
+              40.5721
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Beverage Manufacturing & Distribution - Allentown PA",
+        "type": "Manufacturing & Distribution - Beverage",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.6072,
+              40.5719
+            ],
+            [
+              -75.6039,
+              40.5719
+            ],
+            [
+              -75.6039,
+              40.5732
+            ],
+            [
+              -75.6072,
+              40.5732
+            ],
+            [
+              -75.6072,
+              40.5719
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Beverage Manufacturing & Distribution - Allentown PA",
+        "type": "Manufacturing & Distribution - Beverage",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.607,
+              40.5728
+            ],
+            [
+              -75.6038,
+              40.5728
+            ],
+            [
+              -75.6038,
+              40.5742
+            ],
+            [
+              -75.607,
+              40.5742
+            ],
+            [
+              -75.607,
+              40.5728
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Beverage Manufacturing & Distribution - Allentown PA",
+        "type": "Manufacturing & Distribution - Beverage",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.607,
+              40.5705
+            ],
+            [
+              -75.6038,
+              40.5705
+            ],
+            [
+              -75.6038,
+              40.5718
+            ],
+            [
+              -75.607,
+              40.5718
+            ],
+            [
+              -75.607,
+              40.5705
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Beverage Manufacturing & Distribution - Allentown PA",
+        "type": "Manufacturing & Distribution - Beverage",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.3985,
+              34.58
+            ],
+            [
+              -117.3935,
+              34.58
+            ],
+            [
+              -117.3935,
+              34.5888
+            ],
+            [
+              -117.3985,
+              34.5888
+            ],
+            [
+              -117.3985,
+              34.58
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Beverage Plant - Victorville CA",
+        "type": "Manufacturing - Beverage",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 57,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.3974,
+              34.5805
+            ],
+            [
+              -117.3964,
+              34.5805
+            ],
+            [
+              -117.3964,
+              34.5813
+            ],
+            [
+              -117.3974,
+              34.5813
+            ],
+            [
+              -117.3974,
+              34.5805
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Beverage Plant - Victorville CA",
+        "type": "Manufacturing - Beverage",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.398,
+              34.5852
+            ],
+            [
+              -117.3956,
+              34.5852
+            ],
+            [
+              -117.3956,
+              34.5887
+            ],
+            [
+              -117.398,
+              34.5887
+            ],
+            [
+              -117.398,
+              34.5852
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Beverage Plant - Victorville CA",
+        "type": "Manufacturing - Beverage",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.3977,
+              34.5828
+            ],
+            [
+              -117.3968,
+              34.5828
+            ],
+            [
+              -117.3968,
+              34.5862
+            ],
+            [
+              -117.3977,
+              34.5862
+            ],
+            [
+              -117.3977,
+              34.5828
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Beverage Plant - Victorville CA",
+        "type": "Manufacturing - Beverage",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.3968,
+              34.5856
+            ],
+            [
+              -117.394,
+              34.5856
+            ],
+            [
+              -117.394,
+              34.5868
+            ],
+            [
+              -117.3968,
+              34.5868
+            ],
+            [
+              -117.3968,
+              34.5856
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Beverage Plant - Victorville CA",
+        "type": "Manufacturing - Beverage",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.1815,
+              43.2339
+            ],
+            [
+              -77.17,
+              43.2339
+            ],
+            [
+              -77.17,
+              43.241
+            ],
+            [
+              -77.1815,
+              43.241
+            ],
+            [
+              -77.1815,
+              43.2339
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Mott's Plant - Williamson NY",
+        "type": "Manufacturing - Juice/Applesauce",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 36,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 140,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 105,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.1738,
+              43.2373
+            ],
+            [
+              -77.1728,
+              43.2373
+            ],
+            [
+              -77.1728,
+              43.2381
+            ],
+            [
+              -77.1738,
+              43.2381
+            ],
+            [
+              -77.1738,
+              43.2373
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Mott's Plant - Williamson NY",
+        "type": "Manufacturing - Juice/Applesauce",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.1746,
+              43.2376
+            ],
+            [
+              -77.1726,
+              43.2376
+            ],
+            [
+              -77.1726,
+              43.2394
+            ],
+            [
+              -77.1746,
+              43.2394
+            ],
+            [
+              -77.1746,
+              43.2376
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Mott's Plant - Williamson NY",
+        "type": "Manufacturing - Juice/Applesauce",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.1768,
+              43.2353
+            ],
+            [
+              -77.1748,
+              43.2353
+            ],
+            [
+              -77.1748,
+              43.2364
+            ],
+            [
+              -77.1768,
+              43.2364
+            ],
+            [
+              -77.1768,
+              43.2353
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Mott's Plant - Williamson NY",
+        "type": "Manufacturing - Juice/Applesauce",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.176,
+              43.2376
+            ],
+            [
+              -77.1738,
+              43.2376
+            ],
+            [
+              -77.1738,
+              43.2385
+            ],
+            [
+              -77.176,
+              43.2385
+            ],
+            [
+              -77.176,
+              43.2376
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Mott's Plant - Williamson NY",
+        "type": "Manufacturing - Juice/Applesauce",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.1784,
+              43.2347
+            ],
+            [
+              -77.1768,
+              43.2347
+            ],
+            [
+              -77.1768,
+              43.2353
+            ],
+            [
+              -77.1784,
+              43.2353
+            ],
+            [
+              -77.1784,
+              43.2347
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Mott's Plant - Williamson NY",
+        "type": "Manufacturing - Juice/Applesauce",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.2245,
+              39.9722
+            ],
+            [
+              -77.2155,
+              39.9722
+            ],
+            [
+              -77.2155,
+              39.9795
+            ],
+            [
+              -77.2245,
+              39.9795
+            ],
+            [
+              -77.2245,
+              39.9722
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Mott's Plant - Aspers PA",
+        "type": "Manufacturing - Juice/Applesauce",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 160,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 110,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.2226,
+              39.9731
+            ],
+            [
+              -77.2217,
+              39.9731
+            ],
+            [
+              -77.2217,
+              39.9737
+            ],
+            [
+              -77.2226,
+              39.9737
+            ],
+            [
+              -77.2226,
+              39.9731
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Mott's Plant - Aspers PA",
+        "type": "Manufacturing - Juice/Applesauce",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.2195,
+              39.9726
+            ],
+            [
+              -77.2168,
+              39.9726
+            ],
+            [
+              -77.2168,
+              39.9745
+            ],
+            [
+              -77.2195,
+              39.9745
+            ],
+            [
+              -77.2195,
+              39.9726
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Mott's Plant - Aspers PA",
+        "type": "Manufacturing - Juice/Applesauce",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.2214,
+              39.9732
+            ],
+            [
+              -77.2195,
+              39.9732
+            ],
+            [
+              -77.2195,
+              39.9744
+            ],
+            [
+              -77.2214,
+              39.9744
+            ],
+            [
+              -77.2214,
+              39.9732
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Mott's Plant - Aspers PA",
+        "type": "Manufacturing - Juice/Applesauce",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.22,
+              39.9739
+            ],
+            [
+              -77.2178,
+              39.9739
+            ],
+            [
+              -77.2178,
+              39.9751
+            ],
+            [
+              -77.22,
+              39.9751
+            ],
+            [
+              -77.22,
+              39.9739
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Mott's Plant - Aspers PA",
+        "type": "Manufacturing - Juice/Applesauce",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.2198,
+              39.9736
+            ],
+            [
+              -77.2184,
+              39.9736
+            ],
+            [
+              -77.2184,
+              39.9744
+            ],
+            [
+              -77.2198,
+              39.9744
+            ],
+            [
+              -77.2198,
+              39.9736
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Mott's Plant - Aspers PA",
+        "type": "Manufacturing - Juice/Applesauce",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.3956,
+              29.6819
+            ],
+            [
+              -95.3922,
+              29.6819
+            ],
+            [
+              -95.3922,
+              29.6853
+            ],
+            [
+              -95.3956,
+              29.6853
+            ],
+            [
+              -95.3956,
+              29.6819
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Beverage Plant - Houston TX",
+        "type": "Manufacturing - Beverage",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 23,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.3955,
+              29.6847
+            ],
+            [
+              -95.395,
+              29.6847
+            ],
+            [
+              -95.395,
+              29.6851
+            ],
+            [
+              -95.3955,
+              29.6851
+            ],
+            [
+              -95.3955,
+              29.6847
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Beverage Plant - Houston TX",
+        "type": "Manufacturing - Beverage",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.3948,
+              29.6825
+            ],
+            [
+              -95.3931,
+              29.6825
+            ],
+            [
+              -95.3931,
+              29.6835
+            ],
+            [
+              -95.3948,
+              29.6835
+            ],
+            [
+              -95.3948,
+              29.6825
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Beverage Plant - Houston TX",
+        "type": "Manufacturing - Beverage",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.3932,
+              29.6828
+            ],
+            [
+              -95.3923,
+              29.6828
+            ],
+            [
+              -95.3923,
+              29.684
+            ],
+            [
+              -95.3932,
+              29.684
+            ],
+            [
+              -95.3932,
+              29.6828
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Beverage Plant - Houston TX",
+        "type": "Manufacturing - Beverage",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.3949,
+              29.6831
+            ],
+            [
+              -95.3926,
+              29.6831
+            ],
+            [
+              -95.3926,
+              29.6836
+            ],
+            [
+              -95.3949,
+              29.6836
+            ],
+            [
+              -95.3949,
+              29.6831
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Beverage Plant - Houston TX",
+        "type": "Manufacturing - Beverage",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0675,
+              31.6234
+            ],
+            [
+              -97.0605,
+              31.6234
+            ],
+            [
+              -97.0605,
+              31.6288
+            ],
+            [
+              -97.0675,
+              31.6288
+            ],
+            [
+              -97.0675,
+              31.6234
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Beverage Plant - Waco TX",
+        "type": "Manufacturing - Beverage",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 92,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0666,
+              31.6267
+            ],
+            [
+              -97.066,
+              31.6267
+            ],
+            [
+              -97.066,
+              31.6273
+            ],
+            [
+              -97.0666,
+              31.6273
+            ],
+            [
+              -97.0666,
+              31.6267
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Beverage Plant - Waco TX",
+        "type": "Manufacturing - Beverage",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0636,
+              31.6248
+            ],
+            [
+              -97.0609,
+              31.6248
+            ],
+            [
+              -97.0609,
+              31.6258
+            ],
+            [
+              -97.0636,
+              31.6258
+            ],
+            [
+              -97.0636,
+              31.6248
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Beverage Plant - Waco TX",
+        "type": "Manufacturing - Beverage",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0638,
+              31.6249
+            ],
+            [
+              -97.0608,
+              31.6249
+            ],
+            [
+              -97.0608,
+              31.6256
+            ],
+            [
+              -97.0638,
+              31.6256
+            ],
+            [
+              -97.0638,
+              31.6249
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Beverage Plant - Waco TX",
+        "type": "Manufacturing - Beverage",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.066,
+              31.6264
+            ],
+            [
+              -97.0646,
+              31.6264
+            ],
+            [
+              -97.0646,
+              31.6274
+            ],
+            [
+              -97.066,
+              31.6274
+            ],
+            [
+              -97.066,
+              31.6264
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Beverage Plant - Waco TX",
+        "type": "Manufacturing - Beverage",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.35735,
+              38.6839
+            ],
+            [
+              -90.35475,
+              38.6839
+            ],
+            [
+              -90.35475,
+              38.68735
+            ],
+            [
+              -90.35735,
+              38.68735
+            ],
+            [
+              -90.35735,
+              38.6839
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Beverage Concentrates Plant - St. Louis MO",
+        "type": "Manufacturing - Concentrates/Syrups",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 32,
+          "trailersVisible": 18,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 22,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.35705,
+              38.68635
+            ],
+            [
+              -90.35655,
+              38.68635
+            ],
+            [
+              -90.35655,
+              38.68685
+            ],
+            [
+              -90.35705,
+              38.68685
+            ],
+            [
+              -90.35705,
+              38.68635
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Beverage Concentrates Plant - St. Louis MO",
+        "type": "Manufacturing - Concentrates/Syrups",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.35735,
+              38.685
+            ],
+            [
+              -90.3569,
+              38.685
+            ],
+            [
+              -90.3569,
+              38.6866
+            ],
+            [
+              -90.35735,
+              38.6866
+            ],
+            [
+              -90.35735,
+              38.685
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Beverage Concentrates Plant - St. Louis MO",
+        "type": "Manufacturing - Concentrates/Syrups",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.35705,
+              38.6849
+            ],
+            [
+              -90.3567,
+              38.6849
+            ],
+            [
+              -90.3567,
+              38.6861
+            ],
+            [
+              -90.35705,
+              38.6861
+            ],
+            [
+              -90.35705,
+              38.6849
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Beverage Concentrates Plant - St. Louis MO",
+        "type": "Manufacturing - Concentrates/Syrups",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.3556,
+              38.6845
+            ],
+            [
+              -90.3549,
+              38.6845
+            ],
+            [
+              -90.3549,
+              38.6851
+            ],
+            [
+              -90.3556,
+              38.6851
+            ],
+            [
+              -90.3556,
+              38.6845
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Beverage Concentrates Plant - St. Louis MO",
+        "type": "Manufacturing - Concentrates/Syrups",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.3566,
+              38.6841
+            ],
+            [
+              -90.3556,
+              38.6841
+            ],
+            [
+              -90.3556,
+              38.68445
+            ],
+            [
+              -90.3566,
+              38.68445
+            ],
+            [
+              -90.3566,
+              38.6841
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Beverage Concentrates Plant - St. Louis MO",
+        "type": "Manufacturing - Concentrates/Syrups",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -90.3569,
+              38.6844
+            ],
+            [
+              -90.3556,
+              38.6844
+            ],
+            [
+              -90.3556,
+              38.685
+            ],
+            [
+              -90.3569,
+              38.685
+            ],
+            [
+              -90.3569,
+              38.6844
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Beverage Concentrates Plant - St. Louis MO",
+        "type": "Manufacturing - Concentrates/Syrups",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.7409,
+              36.7563
+            ],
+            [
+              -121.7394,
+              36.7563
+            ],
+            [
+              -121.7394,
+              36.7581
+            ],
+            [
+              -121.7409,
+              36.7581
+            ],
+            [
+              -121.7409,
+              36.7563
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Coffee Roasting Plant - Castroville CA",
+        "type": "Manufacturing - Coffee",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 4.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.7409,
+              36.7575
+            ],
+            [
+              -121.7406,
+              36.7575
+            ],
+            [
+              -121.7406,
+              36.7578
+            ],
+            [
+              -121.7409,
+              36.7578
+            ],
+            [
+              -121.7409,
+              36.7575
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Coffee Roasting Plant - Castroville CA",
+        "type": "Manufacturing - Coffee",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.7403,
+              36.7566
+            ],
+            [
+              -121.7396,
+              36.7566
+            ],
+            [
+              -121.7396,
+              36.7575
+            ],
+            [
+              -121.7403,
+              36.7575
+            ],
+            [
+              -121.7403,
+              36.7566
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Coffee Roasting Plant - Castroville CA",
+        "type": "Manufacturing - Coffee",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -121.7401,
+              36.7566
+            ],
+            [
+              -121.7395,
+              36.7566
+            ],
+            [
+              -121.7395,
+              36.7569
+            ],
+            [
+              -121.7401,
+              36.7569
+            ],
+            [
+              -121.7401,
+              36.7566
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Coffee Roasting Plant - Castroville CA",
+        "type": "Manufacturing - Coffee",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2446,
+              47.2234
+            ],
+            [
+              -122.2409,
+              47.2234
+            ],
+            [
+              -122.2409,
+              47.2278
+            ],
+            [
+              -122.2446,
+              47.2278
+            ],
+            [
+              -122.2446,
+              47.2234
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Coffee Roasting / K-Cup Plant - Sumner WA",
+        "type": "Manufacturing - Coffee/K-Cup",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 64,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 26,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2412,
+              47.2264
+            ],
+            [
+              -122.2409,
+              47.2264
+            ],
+            [
+              -122.2409,
+              47.2269
+            ],
+            [
+              -122.2412,
+              47.2269
+            ],
+            [
+              -122.2412,
+              47.2264
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Coffee Roasting / K-Cup Plant - Sumner WA",
+        "type": "Manufacturing - Coffee/K-Cup",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2446,
+              47.2262
+            ],
+            [
+              -122.2409,
+              47.2262
+            ],
+            [
+              -122.2409,
+              47.2278
+            ],
+            [
+              -122.2446,
+              47.2278
+            ],
+            [
+              -122.2446,
+              47.2262
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Coffee Roasting / K-Cup Plant - Sumner WA",
+        "type": "Manufacturing - Coffee/K-Cup",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2444,
+              47.2234
+            ],
+            [
+              -122.241,
+              47.2234
+            ],
+            [
+              -122.241,
+              47.2241
+            ],
+            [
+              -122.2444,
+              47.2241
+            ],
+            [
+              -122.2444,
+              47.2234
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Coffee Roasting / K-Cup Plant - Sumner WA",
+        "type": "Manufacturing - Coffee/K-Cup",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2444,
+              47.2261
+            ],
+            [
+              -122.2412,
+              47.2261
+            ],
+            [
+              -122.2412,
+              47.2265
+            ],
+            [
+              -122.2444,
+              47.2265
+            ],
+            [
+              -122.2444,
+              47.2261
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Coffee Roasting / K-Cup Plant - Sumner WA",
+        "type": "Manufacturing - Coffee/K-Cup",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.2444,
+              47.2241
+            ],
+            [
+              -122.2412,
+              47.2241
+            ],
+            [
+              -122.2412,
+              47.2245
+            ],
+            [
+              -122.2444,
+              47.2245
+            ],
+            [
+              -122.2444,
+              47.2241
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Coffee Roasting / K-Cup Plant - Sumner WA",
+        "type": "Manufacturing - Coffee/K-Cup",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.243,
+              47.2245
+            ],
+            [
+              -122.2424,
+              47.2245
+            ],
+            [
+              -122.2424,
+              47.2261
+            ],
+            [
+              -122.243,
+              47.2261
+            ],
+            [
+              -122.243,
+              47.2245
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Coffee Roasting / K-Cup Plant - Sumner WA",
+        "type": "Manufacturing - Coffee/K-Cup",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8262,
+              35.9418
+            ],
+            [
+              -83.8224,
+              35.9418
+            ],
+            [
+              -83.8224,
+              35.9455
+            ],
+            [
+              -83.8262,
+              35.9455
+            ],
+            [
+              -83.8262,
+              35.9418
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Coffee Roasting / Distribution - Knoxville TN",
+        "type": "Manufacturing & Distribution - Coffee",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 34,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 31,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8229,
+              35.9443
+            ],
+            [
+              -83.8224,
+              35.9443
+            ],
+            [
+              -83.8224,
+              35.9447
+            ],
+            [
+              -83.8229,
+              35.9447
+            ],
+            [
+              -83.8229,
+              35.9443
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Coffee Roasting / Distribution - Knoxville TN",
+        "type": "Manufacturing & Distribution - Coffee",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8259,
+              35.9418
+            ],
+            [
+              -83.8232,
+              35.9418
+            ],
+            [
+              -83.8232,
+              35.9432
+            ],
+            [
+              -83.8259,
+              35.9432
+            ],
+            [
+              -83.8259,
+              35.9418
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Coffee Roasting / Distribution - Knoxville TN",
+        "type": "Manufacturing & Distribution - Coffee",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8251,
+              35.9432
+            ],
+            [
+              -83.8227,
+              35.9432
+            ],
+            [
+              -83.8227,
+              35.9446
+            ],
+            [
+              -83.8251,
+              35.9446
+            ],
+            [
+              -83.8251,
+              35.9432
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Coffee Roasting / Distribution - Knoxville TN",
+        "type": "Manufacturing & Distribution - Coffee",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -83.8242,
+              35.9434
+            ],
+            [
+              -83.8231,
+              35.9434
+            ],
+            [
+              -83.8231,
+              35.9444
+            ],
+            [
+              -83.8242,
+              35.9444
+            ],
+            [
+              -83.8242,
+              35.9434
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Coffee Roasting / Distribution - Knoxville TN",
+        "type": "Manufacturing & Distribution - Coffee",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -110.9525,
+              32.2098
+            ],
+            [
+              -110.9505,
+              32.2098
+            ],
+            [
+              -110.9505,
+              32.212
+            ],
+            [
+              -110.9525,
+              32.212
+            ],
+            [
+              -110.9525,
+              32.2098
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Production / DSD Operations - Tucson AZ",
+        "type": "Manufacturing & Distribution - Beverage/DSD",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 2,
+          "buildingCount": 5,
+          "siteAreaAcres": 7.7,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -110.9514,
+              32.2115
+            ],
+            [
+              -110.951,
+              32.2115
+            ],
+            [
+              -110.951,
+              32.2119
+            ],
+            [
+              -110.9514,
+              32.2119
+            ],
+            [
+              -110.9514,
+              32.2115
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Production / DSD Operations - Tucson AZ",
+        "type": "Manufacturing & Distribution - Beverage/DSD",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -110.9525,
+              32.21
+            ],
+            [
+              -110.9519,
+              32.21
+            ],
+            [
+              -110.9519,
+              32.211
+            ],
+            [
+              -110.9525,
+              32.211
+            ],
+            [
+              -110.9525,
+              32.21
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Production / DSD Operations - Tucson AZ",
+        "type": "Manufacturing & Distribution - Beverage/DSD",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -110.9516,
+              32.2103
+            ],
+            [
+              -110.951,
+              32.2103
+            ],
+            [
+              -110.951,
+              32.2114
+            ],
+            [
+              -110.9516,
+              32.2114
+            ],
+            [
+              -110.9516,
+              32.2103
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Production / DSD Operations - Tucson AZ",
+        "type": "Manufacturing & Distribution - Beverage/DSD",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -110.9517,
+              32.2108
+            ],
+            [
+              -110.951,
+              32.2108
+            ],
+            [
+              -110.951,
+              32.2117
+            ],
+            [
+              -110.9517,
+              32.2117
+            ],
+            [
+              -110.9517,
+              32.2108
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Production / DSD Operations - Tucson AZ",
+        "type": "Manufacturing & Distribution - Beverage/DSD",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.956475,
+              33.404403
+            ],
+            [
+              -111.951525,
+              33.404403
+            ],
+            [
+              -111.951525,
+              33.407997
+            ],
+            [
+              -111.956475,
+              33.407997
+            ],
+            [
+              -111.956475,
+              33.404403
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP DSD Distribution Center - Tempe AZ",
+        "type": "Distribution Center - DSD",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 45.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.955823,
+              33.406731
+            ],
+            [
+              -111.955177,
+              33.406731
+            ],
+            [
+              -111.955177,
+              33.407269
+            ],
+            [
+              -111.955823,
+              33.407269
+            ],
+            [
+              -111.955823,
+              33.406731
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP DSD Distribution Center - Tempe AZ",
+        "type": "Distribution Center - DSD",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.955415,
+              33.406026
+            ],
+            [
+              -111.953585,
+              33.406026
+            ],
+            [
+              -111.953585,
+              33.407374
+            ],
+            [
+              -111.955415,
+              33.407374
+            ],
+            [
+              -111.955415,
+              33.406026
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP DSD Distribution Center - Tempe AZ",
+        "type": "Distribution Center - DSD",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.954753,
+              33.40482
+            ],
+            [
+              -111.953247,
+              33.40482
+            ],
+            [
+              -111.953247,
+              33.40518
+            ],
+            [
+              -111.954753,
+              33.40518
+            ],
+            [
+              -111.954753,
+              33.40482
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP DSD Distribution Center - Tempe AZ",
+        "type": "Distribution Center - DSD",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.766611,
+              30.34946
+            ],
+            [
+              -81.763489,
+              30.34946
+            ],
+            [
+              -81.763489,
+              30.35494
+            ],
+            [
+              -81.766611,
+              30.35494
+            ],
+            [
+              -81.766611,
+              30.34946
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Distribution Center - Jacksonville FL",
+        "type": "Distribution Center - Beverage",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 128,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 118,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 45.2,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.764386,
+              30.351053
+            ],
+            [
+              -81.763814,
+              30.351053
+            ],
+            [
+              -81.763814,
+              30.351547
+            ],
+            [
+              -81.764386,
+              30.351547
+            ],
+            [
+              -81.764386,
+              30.351053
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Distribution Center - Jacksonville FL",
+        "type": "Distribution Center - Beverage",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.764981,
+              30.353992
+            ],
+            [
+              -81.763419,
+              30.353992
+            ],
+            [
+              -81.763419,
+              30.355608
+            ],
+            [
+              -81.764981,
+              30.355608
+            ],
+            [
+              -81.764981,
+              30.353992
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Distribution Center - Jacksonville FL",
+        "type": "Distribution Center - Beverage",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.764208,
+              30.349685
+            ],
+            [
+              -81.763792,
+              30.349685
+            ],
+            [
+              -81.763792,
+              30.354715
+            ],
+            [
+              -81.764208,
+              30.354715
+            ],
+            [
+              -81.764208,
+              30.349685
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Distribution Center - Jacksonville FL",
+        "type": "Distribution Center - Beverage",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.766408,
+              30.349685
+            ],
+            [
+              -81.765992,
+              30.349685
+            ],
+            [
+              -81.765992,
+              30.354715
+            ],
+            [
+              -81.766408,
+              30.354715
+            ],
+            [
+              -81.766408,
+              30.349685
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Distribution Center - Jacksonville FL",
+        "type": "Distribution Center - Beverage",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.765268,
+              30.350896
+            ],
+            [
+              -81.764332,
+              30.350896
+            ],
+            [
+              -81.764332,
+              30.351704
+            ],
+            [
+              -81.765268,
+              30.351704
+            ],
+            [
+              -81.765268,
+              30.350896
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Distribution Center - Jacksonville FL",
+        "type": "Distribution Center - Beverage",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.898278,
+              32.839566
+            ],
+            [
+              -96.891222,
+              32.839566
+            ],
+            [
+              -96.891222,
+              32.846034
+            ],
+            [
+              -96.898278,
+              32.846034
+            ],
+            [
+              -96.898278,
+              32.839566
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Distribution Center - Irving TX",
+        "type": "Distribution Center - Beverage/DSD",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 240,
+          "truckGateCount": 2,
+          "buildingCount": 6,
+          "siteAreaAcres": 117.4,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.897521,
+              32.842853
+            ],
+            [
+              -96.896879,
+              32.842853
+            ],
+            [
+              -96.896879,
+              32.843347
+            ],
+            [
+              -96.897521,
+              32.843347
+            ],
+            [
+              -96.897521,
+              32.842853
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Distribution Center - Irving TX",
+        "type": "Distribution Center - Beverage/DSD",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.89389,
+              32.841132
+            ],
+            [
+              -96.89111,
+              32.841132
+            ],
+            [
+              -96.89111,
+              32.843468
+            ],
+            [
+              -96.89389,
+              32.843468
+            ],
+            [
+              -96.89389,
+              32.841132
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Distribution Center - Irving TX",
+        "type": "Distribution Center - Beverage/DSD",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.896069,
+              32.84182
+            ],
+            [
+              -96.893931,
+              32.84182
+            ],
+            [
+              -96.893931,
+              32.84218
+            ],
+            [
+              -96.896069,
+              32.84218
+            ],
+            [
+              -96.896069,
+              32.84182
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Distribution Center - Irving TX",
+        "type": "Distribution Center - Beverage/DSD",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.896481,
+              32.841961
+            ],
+            [
+              -96.895519,
+              32.841961
+            ],
+            [
+              -96.895519,
+              32.843039
+            ],
+            [
+              -96.896481,
+              32.843039
+            ],
+            [
+              -96.896481,
+              32.841961
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Distribution Center - Irving TX",
+        "type": "Distribution Center - Beverage/DSD",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.805238,
+              35.0161
+            ],
+            [
+              -81.803044,
+              35.0161
+            ],
+            [
+              -81.803044,
+              35.017896
+            ],
+            [
+              -81.805238,
+              35.017896
+            ],
+            [
+              -81.805238,
+              35.0161
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Cowpens K-Cup Packaging - Cowpens SC",
+        "type": "Manufacturing - Coffee/K-Cup Packaging",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "NONE",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 0,
+          "buildingCount": 0,
+          "siteAreaAcres": 0,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.244,
+              39.9008
+            ],
+            [
+              -86.2401,
+              39.9008
+            ],
+            [
+              -86.2401,
+              39.9047
+            ],
+            [
+              -86.244,
+              39.9047
+            ],
+            [
+              -86.244,
+              39.9008
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Distribution Center - Indianapolis IN",
+        "type": "Distribution Center - Beverage/DSD",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 28,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 35.7,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.2418,
+              39.9051
+            ],
+            [
+              -86.2409,
+              39.9051
+            ],
+            [
+              -86.2409,
+              39.9057
+            ],
+            [
+              -86.2418,
+              39.9057
+            ],
+            [
+              -86.2418,
+              39.9051
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Distribution Center - Indianapolis IN",
+        "type": "Distribution Center - Beverage/DSD",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.2435,
+              39.9015
+            ],
+            [
+              -86.2426,
+              39.9015
+            ],
+            [
+              -86.2426,
+              39.9037
+            ],
+            [
+              -86.2435,
+              39.9037
+            ],
+            [
+              -86.2435,
+              39.9015
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Distribution Center - Indianapolis IN",
+        "type": "Distribution Center - Beverage/DSD",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.2429,
+              39.9023
+            ],
+            [
+              -86.2421,
+              39.9023
+            ],
+            [
+              -86.2421,
+              39.9036
+            ],
+            [
+              -86.2429,
+              39.9036
+            ],
+            [
+              -86.2429,
+              39.9023
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Distribution Center - Indianapolis IN",
+        "type": "Distribution Center - Beverage/DSD",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -86.2429,
+              39.904
+            ],
+            [
+              -86.2415,
+              39.904
+            ],
+            [
+              -86.2415,
+              39.9047
+            ],
+            [
+              -86.2429,
+              39.9047
+            ],
+            [
+              -86.2429,
+              39.904
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Distribution Center - Indianapolis IN",
+        "type": "Distribution Center - Beverage/DSD",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.5479,
+              37.9433
+            ],
+            [
+              -87.5462,
+              37.9433
+            ],
+            [
+              -87.5462,
+              37.9451
+            ],
+            [
+              -87.5479,
+              37.9451
+            ],
+            [
+              -87.5479,
+              37.9433
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "keurig-dr-pepper",
+        "name": "KDP Distribution Center - Evansville IN",
+        "type": "Distribution Center - DSD",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "NONE",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 3,
+          "railServed": false
+        }
+      }
+    }
+  ]
+}

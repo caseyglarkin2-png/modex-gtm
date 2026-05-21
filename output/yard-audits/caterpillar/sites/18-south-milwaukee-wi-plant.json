@@ -1,0 +1,52 @@
+{
+  "name": "Caterpillar Global Mining - South Milwaukee WI Plant",
+  "type": "Manufacturing plant (large mining equipment - electric rope shovels, draglines)",
+  "coords": { "lat": 42.91270, "lng": -87.86150 },
+  "geofences": {
+    "perimeter": { "south": 42.90850, "west": -87.86420, "north": 42.91650, "east": -87.86010 },
+    "truckGate": { "south": 42.91400, "west": -87.86140, "north": 42.91470, "east": -87.86040 },
+    "dropYards": [
+      { "south": 42.91300, "west": -87.86250, "north": 42.91450, "east": -87.86120 }
+    ],
+    "dockAprons": [],
+    "staging": { "south": 42.91350, "west": -87.86200, "north": 42.91450, "east": -87.86080 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 8,
+    "trailersVisible": 6,
+    "trailerParkingCapacity": 20,
+    "truckGateCount": 2,
+    "buildingCount": 8,
+    "siteAreaAcres": 72.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.91270,-87.86150,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "dockDoors", "dropArea", "truckGateCount", "entryLanes", "exitLanes", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "location": "Roster lat/lng (GEOMETRIC_CENTER, movedMeters 234) sits on the campus. Confirmed: the historic former Bucyrus heavy-equipment works in South Milwaukee, operated by Caterpillar Global Mining since 2011; produces massive Cat electric rope shovels (7495 series) and draglines. Address 1100 Milwaukee Ave. Locked center on the main building corridor at 42.9127,-87.8615.",
+    "type": "Heavy-manufacturing / fabrication complex, NOT a distribution facility. The site assembles room-sized mining-shovel components; it has large open paved assembly/staging yards rather than a conventional bank of loading-dock doors.",
+    "truckGate": "The entire complex is enclosed by a perimeter wall/fence (concrete wall visible along Milwaukee Ave in Street View). Vehicles enter via controlled gated openings in the wall. Set true.",
+    "guardShack": "A small structure with signage sits at the main entrance gate on the W/N side; consistent with a security/guard checkpoint for a fenced industrial works. Marked true at medium confidence - flagged.",
+    "truckGateCount": "At least two gated openings in the perimeter wall (W/N side near the parking lots, and another along the street) - estimated 2, flagged.",
+    "dockDoors": "Heavy-fabrication plant - large oversized bay/shop doors, not a regular dock-door rhythm. Estimated 0-10 conventional dock equivalents, flagged.",
+    "dropArea": "Large open paved yards for staging oversized components, not marked trailer-parking stalls; few standard trailers visible. dropArea 0-10, dropYard false.",
+    "railServed": "TRUE - multiple rail spurs run directly into the property along the W side; oversized shovel components ship by rail. Clearly visible in z17-z18 imagery.",
+    "multipleFacilities": "Campus of ~8 large connected/adjacent heavy-industrial buildings spanning a long N-S corridor.",
+    "urbanRural": "Urban - the works is embedded in the dense South Milwaukee residential street grid, houses directly across the street on all sides.",
+    "backupSensitive": "The complex fronts directly onto public city streets with minimal setback; a truck queue at a gate would spill onto a public road - backupSensitive true.",
+    "entryExitSeparate": "Multiple separate gated openings in the perimeter wall on different street frontages - treated as separate entry/exit."
+  },
+  "method": "deep-audit"
+}

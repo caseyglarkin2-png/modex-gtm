@@ -1,0 +1,53 @@
+{
+  "name": "Home Depot RDC - Tolleson AZ",
+  "type": "Rapid Deployment Center",
+  "coords": { "lat": 33.44480, "lng": -112.25300 },
+  "geofences": {
+    "perimeter": { "south": 33.44260, "west": -112.25620, "north": 33.44640, "east": -112.24900 },
+    "truckGate": { "south": 33.44480, "west": -112.25600, "north": 33.44560, "east": -112.25490 },
+    "dropYards": [
+      { "south": 33.44320, "west": -112.25500, "north": 33.44460, "east": -112.24950 }
+    ],
+    "dockAprons": [
+      { "south": 33.44440, "west": -112.25500, "north": 33.44510, "east": -112.24950 }
+    ],
+    "staging": { "south": 33.44480, "west": -112.25560, "north": 33.44560, "east": -112.25400 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 130,
+    "trailersVisible": 240,
+    "trailerParkingCapacity": 330,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 55.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.44480,-112.25300,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "RDC #5643. Truck yard entrance at the SW/W corner off the road; driver reviews explicitly mention a guard shack and a gate where trucks check in.",
+    "guardShack": "Confirmed by web reviews: drivers describe 'friendly staff at the guard shack' and report waiting 'over an hour to enter' at the gate — a staffed guard booth with significant check-in queuing.",
+    "backupSensitive": "Driver reviews report 1+ hour gate waits; the gate is close to public roads with limited stacking room, so a truck queue spills toward the road — backup-sensitive.",
+    "preGateStaging": "Long gate waits imply trucks stage outside/before the gate; paved apron and road shoulder available for waiting.",
+    "dockDoors": "Dense dock-door rhythm with trailers backed in along the long south face (and north) of the RDC building — well over 100 doors.",
+    "dropYard": "Large dedicated trailer drop yard with many rows of parked trailers on the south side of the building.",
+    "railServed": "A rail line runs E-W through the property, immediately south of the main trailer drop yard — the site is rail-adjacent/rail-served.",
+    "shipRcvSeparate": "Most dock activity concentrated on the south face; whether shipping and receiving use physically separate banks is not clearly resolved — flagged uncertain.",
+    "urbanRural": "Tolleson is inside the Phoenix metro's continuous urban fabric — residential subdivisions directly north of the RDC, dense industrial all around — judged Urban.",
+    "entryLanes": "Estimated; exact lane count at the gate not fully resolved.",
+    "trailersVisible": "Approximate count from z16-z19 imagery across dock face and drop yard."
+  },
+  "method": "deep-audit"
+}

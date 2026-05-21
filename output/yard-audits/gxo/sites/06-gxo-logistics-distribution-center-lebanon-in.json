@@ -1,0 +1,51 @@
+{
+  "name": "GXO Logistics Distribution Center - Lebanon IN",
+  "type": "Distribution Center",
+  "coords": { "lat": 40.0413, "lng": -86.4853 },
+  "geofences": {
+    "perimeter": { "south": 40.0382, "west": -86.48697, "north": 40.0445, "east": -86.48363 },
+    "truckGate": { "south": 40.03855, "west": -86.48655, "north": 40.03895, "east": -86.48595 },
+    "dropYards": [
+      { "south": 40.04205, "west": -86.48745, "north": 40.04305, "east": -86.48645 }
+    ],
+    "dockAprons": [
+      { "south": 40.03955, "west": -86.48655, "north": 40.04265, "east": -86.48545 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 28,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 49.2,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.0413,-86.4853,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["truckGate", "dockDoorCount", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Confirmed white-roofed DC building (Building 7, ~589,616 SF, 49.19-acre parcel per LoopNet) at 135 S Mount Zion Rd, in the Lebanon/Boone County logistics corridor immediately SW of I-65. Building runs NW-SE parallel to the interstate.",
+    "truckGate": "No barrier arm, sliding gate or checkpoint pinch-point visible at the SW truck driveway or the SE car entrance in current Maxar satellite imagery. Driveways are open paved approaches. Street View is 2013 (pre-construction) so cannot corroborate; marked false at high-confidence-from-satellite, listed uncertain.",
+    "guardShack": "No small staffed booth structure visible at either the SW truck entrance or the SE entrance.",
+    "drivewayLong": "Wide SW yard drive runs the full length of the dock face; ample room to stack 3+ trucks between the public road and the dock apron.",
+    "fastLaneOpportunity": "Wide open paved truck yard apron on the SW side with unused width; room to add a bypass/express lane.",
+    "dockDoors": "Counted ~50-60 dock positions along the SW face with trailers backed in across multiple sections; banded 50+. Roof HVAC clutter and shadow reduce precision.",
+    "dropYard": "Row of ~10+ parked trailers along the NW end plus trailers staged along the SW yard drive constitute a dedicated drop/storage area.",
+    "railServed": "No rail spur enters the property; the nearest rail is unrelated.",
+    "expansion": "GXO announced an $11M expansion (spring 2025 start, Q4 2027 completion); a graded/cleared pad is visible at the SW corner consistent with planned expansion."
+  },
+  "method": "deep-audit"
+}

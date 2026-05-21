@@ -1,0 +1,51 @@
+{
+  "name": "Coca-Cola UNITED - Montgomery Production Plant, AL",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 32.293000, "lng": -86.342800 },
+  "geofences": {
+    "perimeter": { "south": 32.2915, "west": -86.3450, "north": 32.2950, "east": -86.3415 },
+    "truckGate": { "south": 32.2939, "west": -86.3440, "north": 32.2944, "east": -86.3432 },
+    "dropYards": [
+      { "south": 32.2942, "west": -86.3438, "north": 32.2952, "east": -86.3418 }
+    ],
+    "dockAprons": [
+      { "south": 32.2924, "west": -86.3434, "north": 32.2930, "east": -86.3418 }
+    ],
+    "staging": { "south": 32.2940, "west": -86.3434, "north": 32.2944, "east": -86.3425 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30, "trailersVisible": 55, "trailerParkingCapacity": 85,
+    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 31.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.293,-86.3428,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Roster lat/lng (32.294107,-86.347673, GEOMETRIC_CENTER) and roster address (2000 Coca Cola Rd) geocoded to a street centerline on empty land. The real facility is the Coca-Cola UNITED Montgomery Production Plant, 300 Coca-Cola Road, Montgomery AL 36105 - a $35M Dasani/beverage production facility opened 2016, ~120 associates, ~25M cases/year. Building positively identified ~32.2930,-86.3428; Street View shows the red 'Coca-Cola' logo and a branded canopied truck gate.",
+    "truckGate": "STRONG positive. Street View shows a large canopied gatehouse spanning multiple lanes off Coca-Cola Road, with the red Coca-Cola script logo on the canopy, gate barrier arms across the lanes, and a 'Do Not Enter' sign on an outbound lane. Fully controlled truck entrance.",
+    "guardShack": "STRONG positive. A staffed guard booth structure sits beneath the gate canopy between the lanes - clearly visible in Street View. guardShack=true.",
+    "remoteGs": "false - a guard shack is present, so this is not a remote/kiosk gate.",
+    "entryLanes/exitLanes": "The canopied gate spans multiple lanes (~2 in, ~2 out) with the booth in the middle; counts approximate from Street View, flagged uncertain.",
+    "fastLaneOpportunity": "Wide multi-lane canopied gate apron with room for an express/bypass lane. fastLaneOpportunity=true.",
+    "dockDoors": "~30 dock doors with trailers backed in along the production building's south face plus the NW warehouse - band 25-50, approximate.",
+    "dropArea": "25-50 trailers parked without tractors in the north trailer yard inside the gate.",
+    "postGateStaging": "Paved holding area between the gate canopy and the trailer yard/docks - inside the gate, before the docks.",
+    "shipRcvSeparate": "Docks read as a single cluster along the building's south face; no clearly separate ship/receive bank. shipRcvSeparate=false.",
+    "railServed": "No rail spur enters the property; I-65 borders the SE side. railServed=false.",
+    "buildingCount": "Main production building (with attached office) plus a separate NW warehouse = 2.",
+    "urbanRural": "Within the Montgomery metro on the I-65 corridor with adjacent residential subdivisions - Urban."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,54 @@
+{
+  "name": "Caterpillar - Morton IL Global Parts Distribution Center",
+  "type": "Parts distribution center (anchor depot, 3M+ sq ft)",
+  "coords": { "lat": 40.61850, "lng": -89.45850 },
+  "geofences": {
+    "perimeter": { "south": 40.61400, "west": -89.46500, "north": 40.62300, "east": -89.45200 },
+    "truckGate": { "south": 40.61650, "west": -89.45800, "north": 40.61780, "east": -89.45600 },
+    "dropYards": [
+      { "south": 40.61450, "west": -89.46200, "north": 40.61750, "east": -89.45500 },
+      { "south": 40.61900, "west": -89.45600, "north": 40.62150, "east": -89.45250 }
+    ],
+    "dockAprons": [
+      { "south": 40.61880, "west": -89.45550, "north": 40.62020, "east": -89.45300 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 45,
+    "trailerParkingCapacity": 100,
+    "truckGateCount": 2,
+    "buildingCount": 5,
+    "siteAreaAcres": 272.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.6185,-89.4585,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "scale"],
+  "fieldNotes": {
+    "site": "Caterpillar Morton Global Parts Distribution Center - the company's anchor depot (~3M+ sq ft, original Cat Logistics HQ). Geocoded point lands inside the complex; confirmed by scale, layout and adjacency to I-74 in Morton IL.",
+    "truckGate": "Whole campus is continuously fenced (ornamental steel on the west along Detroit Ave, chain-link/green-screen on the south along the rail line, chain-link on the highway-frontage east). Truck operations and storage yards sit behind that fence, implying controlled truck access. No barrier arm or booth could be cleanly imaged - SE/SW frontages are residential, W/E frontages are screened by employee parking. Flagged uncertain.",
+    "guardShack": "No guard booth positively identified in available satellite/Street View - flagged uncertain. remoteGs set true on the assumption of kiosk/badge access at a fenced depot, also flagged.",
+    "dockDoors": "Anchor parts depot with multiple very large buildings; dock-door banks confirmed on the east building (trailers backed in - 2022 Street View) and along internal faces. Estimated 50+ total; low confidence on exact count.",
+    "dropArea": "Large interior trailer/material storage yards on the SE and rows of stored equipment - 25-50+ band.",
+    "shipRcvSeparate": "Dock activity on the east building is physically separate from material yards and dock faces on the south/SW side.",
+    "railServed": "Rail line runs immediately along the south edge of the property with spur access into the storage yards.",
+    "multipleFacilities": "Multiple distinct very large buildings on one campus (anchor parts depot complex).",
+    "urbanRural": "Edge-of-town Morton IL, bordered by I-74 and a rail corridor with residential and small commercial nearby - small-town industrial, classed Rural per rubric.",
+    "scale": "No truck scale identified; left false.",
+    "metrics": "Counts are honest estimates from overhead imagery of a very large multi-building depot; flagged."
+  },
+  "method": "deep-audit"
+}

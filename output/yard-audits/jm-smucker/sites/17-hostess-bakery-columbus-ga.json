@@ -1,0 +1,51 @@
+{
+  "name": "Hostess Bakery - Columbus GA",
+  "type": "Manufacturing - Sweet baked snacks (Hostess), $120M expansion underway",
+  "coords": { "lat": 32.4442, "lng": -84.9676 },
+  "geofences": {
+    "perimeter": { "south": 32.4422, "west": -84.9698, "north": 32.4460, "east": -84.9663 },
+    "truckGate": { "south": 32.44390, "west": -84.96710, "north": 32.44420, "east": -84.96675 },
+    "dropYards": [
+      { "south": 32.4438, "west": -84.9676, "north": 32.4458, "east": -84.9664 }
+    ],
+    "dockAprons": [
+      { "south": 32.4435, "west": -84.9682, "north": 32.4447, "east": -84.9670 }
+    ],
+    "staging": { "south": 32.4434, "west": -84.9666, "north": 32.4452, "east": -84.9662 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 34.4,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.4442,-84.9676,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "backupSensitive"],
+  "fieldNotes": {
+    "truckGate": "Property has a confirmed chain-link perimeter fence (visible in 2024-12 Street View along the E side). The truck driveway necessarily passes through a fence opening = a controlled pinch-point, so truckGate set true. No barrier arm directly resolved in imagery - medium confidence.",
+    "guardShack": "No staffed guard booth observed at the truck driveway or any entrance. The small blue-roof structure in the NE yard is an ancillary building, not a gate booth.",
+    "remoteGs": "Fenced perimeter + controlled truck drive but no guard booth implies kiosk / call-box / app check-in - set true; flagged uncertain.",
+    "preGateStaging": "Trucks observed parked along the public E perimeter-road curb (Swift, Denson Freight tractors) - de facto pre-gate staging on the street.",
+    "backupSensitive": "Trucks staging on the public curb indicates limited on-street stacking; a queue could spill along the perimeter road - flagged uncertain.",
+    "dropArea": "Large trailer drop yard on the NE/E side, packed with 50+ trailers in rows.",
+    "dockDoorCount": "Estimate ~35 doors along the SE building face with trailers backed in - overhead estimate.",
+    "urbanRural": "Inside Columbus GA metro along the Victory Drive arterial corridor - Urban.",
+    "method": "Active $120M Smucker expansion underway (completing early 2027); rooftop construction activity visible in satellite imagery."
+  },
+  "method": "deep-audit"
+}

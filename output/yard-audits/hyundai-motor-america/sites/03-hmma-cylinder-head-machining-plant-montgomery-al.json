@@ -1,0 +1,51 @@
+{
+  "name": "HMMA Cylinder Head Machining Plant - Montgomery AL",
+  "type": "Engine / Component Plant",
+  "coords": { "lat": 32.282800, "lng": -86.332000 },
+  "geofences": {
+    "perimeter": { "south": 32.27550, "west": -86.33300, "north": 32.29150, "east": -86.31000 },
+    "truckGate": { "south": 32.27680, "west": -86.32620, "north": 32.27820, "east": -86.32440 },
+    "dropYards": [
+      { "south": 32.28150, "west": -86.33430, "north": 32.28330, "east": -86.33250 }
+    ],
+    "dockAprons": [
+      { "south": 32.28150, "west": -86.33340, "north": 32.28400, "east": -86.33180 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14, "trailersVisible": 22, "trailerParkingCapacity": 40,
+    "truckGateCount": 2, "buildingCount": 12, "siteAreaAcres": 620.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.282800,-86.332000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoors", "dropArea", "trailersVisible", "trailerParkingCapacity", "scale", "exitLanes"],
+  "fieldNotes": {
+    "site": "260,000 sq ft cylinder-head machining plant ($388M, opened May 2019) — the 'third engine shop' on the HMMA campus, part of HMMA's 650K+ engines/yr operation. It is a component building INSIDE the larger 1,744-acre HMMA campus (same campus as idx 1), not a standalone site.",
+    "buildingId": "The exact building could not be uniquely distinguished from the other HMMA engine shops without floor-plan documentation. It is positively within the HMMA western engine-shop / component-plant cluster (centered ~32.2828,-86.3320). Center placed on that cluster.",
+    "truckGate": "Inherits HMMA campus access — controlled, numbered, guarded gates (web research confirms numbered gates, e.g. 'Gate 2'). The cylinder-head plant has no independent truck gate; inbound castings / outbound machined heads route through the shared campus gates.",
+    "guardShack": "Inferred true — shares the guarded HMMA campus perimeter (see idx 1).",
+    "perimeter": "Perimeter box = the full HMMA developed campus footprint (shared with idx 1), since this plant is a building within that campus.",
+    "dockDoors": "West engine-shop building face shows a dock bank with trailers backed in (~14 doors estimated for this building); the cylinder-head plant proper is a machining operation with modest dock needs. 10-25 band, low confidence.",
+    "dropArea": "A small trailer staging lot sits along the west engine-shop building face (~32.2825,-86.3330) holding ~20 trailers; modest drop activity. dropArea 0-10 for this building's own apron; campus-wide drop is much larger.",
+    "multipleFacilities": "true — building sits within the multi-building HMMA campus.",
+    "dropYard": "true at campus level (large HMMA SE drop yard); the cylinder-head plant itself has only a small adjacent trailer lot.",
+    "urbanRural": "Rural-edge Montgomery (see idx 1).",
+    "scale": "No truck scale identified; flagged uncertain.",
+    "railServed": "No rail spur into the developed campus footprint.",
+    "note": "This audit treats the cylinder-head plant as a campus-resident component building; its truck-yard profile is effectively the HMMA campus profile (idx 1) scoped to the western engine-shop cluster."
+  },
+  "method": "deep-audit"
+}

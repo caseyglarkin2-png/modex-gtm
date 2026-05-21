@@ -1,0 +1,57 @@
+{
+  "name": "Freightliner Custom Chassis Manufacturing Plant - Gaffney SC",
+  "type": "Custom chassis assembly plant",
+  "coords": { "lat": 35.075000, "lng": -81.681000 },
+  "geofences": {
+    "perimeter": { "south": 35.071500, "west": -81.684500, "north": 35.079000, "east": -81.676000 },
+    "truckGate": { "south": 35.075500, "west": -81.679800, "north": 35.075900, "east": -81.679100 },
+    "dropYards": [
+      { "south": 35.074800, "west": -81.679400, "north": 35.077400, "east": -81.676200 },
+      { "south": 35.075600, "west": -81.683800, "north": 35.077800, "east": -81.680700 }
+    ],
+    "dockAprons": [
+      { "south": 35.076100, "west": -81.682200, "north": 35.077100, "east": -81.680200 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 250,
+    "truckGateCount": 1,
+    "buildingCount": 5,
+    "siteAreaAcres": 120.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.075000,-81.681000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "scale", "multiStep"],
+  "fieldNotes": {
+    "location": "Roster coords (ROOFTOP, moved 2489m) landed near the FCCC plant. Confirmed via FCCC contact page and SC Commerce / SC Governor releases - 552 Hyatt Street, Gaffney SC, ~289,000 sq ft, three production lines, building RV/motorhome and walk-in-van custom chassis. Working center set on the main plant building.",
+    "truckGate": "Campus is fenced (chain-link along the road frontage and around the east storage yard). A small white ~1-vehicle-footprint structure sits at a gated internal road junction between the main plant and the east chassis-storage building, controlling truck movement - treated as a controlled truck gate.",
+    "guardShack": "The small white structure at the gated internal junction has the footprint and position of a guard/check booth; called guardShack true at medium confidence (could be an equipment shed) - flagged uncertain.",
+    "dockDoors": "Trailers backed at dock doors on the N face of the main plant building; estimate 10-25 doors, flagged uncertain.",
+    "dropArea": "Very large finished-chassis storage yard to the east plus extensive chassis/trailer staging around the main plant - clearly 50+.",
+    "dropYard": "Dedicated standalone chassis/trailer storage lot east of the main plant, full of completed chassis.",
+    "trailerParkingCapacity": "High capacity because the east lot and surrounding aprons hold hundreds of completed chassis/RVs; ~250 estimate.",
+    "railServed": "Rail line runs along the SW edge with spurs toward the plant.",
+    "multipleFacilities": "Main plant building plus a separate east chassis-storage building, connected by an internal road = multi-building campus.",
+    "shipRcvSeparate": "Inbound parts docks on the N face are separate from the east finished-chassis storage / outbound flow.",
+    "drivewayLong": "The internal approach from the gated junction to the dock/yard areas is long, holding 3+ vehicles.",
+    "urbanRural": "Gaffney is a small South Carolina town; the plant sits in an edge-of-town industrial area among woods and scattered residential - Rural.",
+    "scale": "No truck scale identified - flagged uncertain.",
+    "entryLanes": "Lane count at the internal gate not clearly resolvable - flagged uncertain."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,61 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+GP Wauna Mill - Clatskanie OR,Tissue/Towel Mill,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,,YES,,,,YES,,,YES,Rural,,YES,YES,YES,"https://www.google.com/maps/@46.1552,-123.4078,400m/data=!3m1!1e3"
+GP Halsey Mill - Halsey OR,Tissue/Pulp Mill,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,,YES,,,,,,YES,YES,Rural,,YES,YES,YES,"https://www.google.com/maps/@44.3792,-123.1605,400m/data=!3m1!1e3"
+GP Crossett Mill - Crossett AR,Pulp/Paper/Tissue Mill,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,YES,Rural,,YES,YES,YES,"https://www.google.com/maps/@33.1395,-91.9725,400m/data=!3m1!1e3"
+GP Broadway Mill - Green Bay WI,Tissue/Towel Mill,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Urban,,YES,YES,YES,"https://www.google.com/maps/@44.49271,-88.034475,400m/data=!3m1!1e3"
+GP Muskogee Mill - Muskogee OK,Tissue/Towel Mill,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,YES,YES,YES,"https://www.google.com/maps/@35.7345,-95.2985,400m/data=!3m1!1e3"
+GP Savannah River Mill - Rincon GA,Tissue/Towel Mill,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,2,YES,,,YES,,,,,YES,,Rural,,YES,,YES,"https://www.google.com/maps/@32.3315,-81.2025,400m/data=!3m1!1e3"
+GP Naheola Mill - Pennington AL,Pulp/Tissue/Paperboard Mill,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,,,,,YES,,YES,,,YES,Rural,,YES,,YES,"https://www.google.com/maps/@32.2235,-88.029,400m/data=!3m1!1e3"
+GP Plattsburgh Mill - Plattsburgh NY,Tissue/Towel Mill,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,YES,YES,,1,1,,,,YES,,,,YES,,YES,Urban,,YES,,YES,"https://www.google.com/maps/@44.7112,-73.4525,400m/data=!3m1!1e3"
+GP Alabama River Cellulose Mill - Perdue Hill AL,Cellulose/Pulp Mill,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,YES,,,,,,YES,,Rural,YES,YES,YES,YES,"https://www.google.com/maps/@31.58,-87.483,400m/data=!3m1!1e3"
+GP Brunswick Cellulose Mill - Brunswick GA,Cellulose/Pulp Mill,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,YES,,,,,,YES,,Rural,,YES,YES,YES,"https://www.google.com/maps/@31.176,-81.512,400m/data=!3m1!1e3"
+GP Leaf River Cellulose Mill - New Augusta MS,Cellulose/Pulp Mill,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,YES,,,YES,,,,YES,Rural,,YES,YES,YES,"https://www.google.com/maps/@31.2432,-89.0455,400m/data=!3m1!1e3"
+GP Memphis Cellulose Mill - Memphis TN,Cellulose Mill,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,YES,YES,,1,1,,,YES,,,,YES,,,YES,Urban,,YES,YES,YES,"https://www.google.com/maps/@35.1565,-89.9620,400m/data=!3m1!1e3"
+GP Brewton Mill - Brewton AL,Containerboard/Bleached Board Mill,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,,,YES,,,,YES,,,YES,Rural,,YES,YES,YES,"https://www.google.com/maps/@31.1068,-87.0658,400m/data=!3m1!1e3"
+GP Monticello Mill - Monticello MS,Containerboard Mill,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,,YES,,,,,,YES,YES,Rural,,YES,YES,YES,"https://www.google.com/maps/@31.6282,-90.0815,400m/data=!3m1!1e3"
+GP Toledo Mill - Toledo OR,Containerboard/Linerboard Mill,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,,,YES,,,,,,YES,YES,Rural,,YES,YES,YES,"https://www.google.com/maps/@44.6145,-123.9370,400m/data=!3m1!1e3"
+GP Big Island Mill - Big Island VA,Containerboard Mill,#8,Gate + GS (not BU sens.) + scale,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,YES,,,,,,YES,,Rural,,,YES,YES,"https://www.google.com/maps/@37.5283,-79.3540,400m/data=!3m1!1e3"
+GP Palatka Mill - Palatka FL,Kraft/Tissue Mill,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,YES,,YES,Rural,,YES,YES,YES,"https://www.google.com/maps/@29.6860,-81.6575,400m/data=!3m1!1e3"
+GP Dixie Tableware Plant - Jackson TN,Tableware/Converting Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,YES,,YES,,,,,Rural,,,,,"https://www.google.com/maps/@35.6276,-88.9168,400m/data=!3m1!1e3"
+GP Dixie Cup Plant - Lexington KY,Cup/Converting Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,YES,,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@38.0807,-84.5258,400m/data=!3m1!1e3"
+GP Anchor Packaging Plant - Jonesboro AR,Thermoformed Packaging Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,,YES,,,YES,,,,,Rural,,,,,"https://www.google.com/maps/@35.8122,-90.6390,400m/data=!3m1!1e3"
+GP Anchor Packaging Plant - Paragould AR,Thermoformed/Cling Film Packaging Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,,YES,,,YES,,,,,Rural,,,,,"https://www.google.com/maps/@36.08400,-90.46650,400m/data=!3m1!1e3"
+GP Anchor Packaging Plant - Janesville WI,Packaging/Film Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,1,1,,,YES,,,YES,,,,,Rural,,,,,"https://www.google.com/maps/@42.71205,-89.00955,400m/data=!3m1!1e3"
+GP Wood Products - Talladega Lumber Mill - Talladega AL,Lumber Mill,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,YES,,,,,,,,YES,Rural,,,YES,,"https://www.google.com/maps/@33.44400,-86.06000,400m/data=!3m1!1e3"
+GP Madison Plywood Plant - Madison GA,Plywood Plant,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,YES,,,,,,,,YES,Rural,,,,,"https://www.google.com/maps/@33.61650,-83.42200,400m/data=!3m1!1e3"
+GP Prosperity Plywood Plant - Prosperity SC,Plywood Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,YES,YES,,,,,,,,YES,Rural,,YES,,,"https://www.google.com/maps/@34.21600,-81.49400,400m/data=!3m1!1e3"
+GP Brookneal OSB Plant - Brookneal VA,OSB Plant,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,,YES,1,1,,YES,,,,YES,,,,YES,Rural,YES,,YES,,"https://www.google.com/maps/@37.1232,-79.0320,400m/data=!3m1!1e3"
+GP Gypsum Plant - Savannah GA,Gypsum Wallboard Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,YES,,,,,YES,,,YES,Urban,,YES,YES,YES,"https://www.google.com/maps/@32.0770,-81.0525,400m/data=!3m1!1e3"
+GP Gypsum Plant - Sweetwater TX,Gypsum Wallboard Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,YES,YES,YES,,,YES,,1,1,YES,,YES,,,,,YES,,YES,Rural,,YES,YES,YES,"https://www.google.com/maps/@32.4830,-100.3345,400m/data=!3m1!1e3"
+GP Corrugated Box Plant - Kansas City MO,Corrugated Box Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,,,YES,,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@39.1635,-94.4825,400m/data=!3m1!1e3"
+GP Corrugated Box Plant - Waxahachie TX,Corrugated Box Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,1,1,,,,YES,,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@32.4420,-96.8480,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,6,20%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,13,43%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,1,3%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,7,23%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,3,10%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,15,50%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,24,80%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,17,57%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,13,43%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

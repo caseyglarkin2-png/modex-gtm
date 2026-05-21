@@ -1,0 +1,51 @@
+{
+  "name": "GXO Logistics Distribution Center - Fontana CA",
+  "type": "Distribution Center",
+  "coords": { "lat": 34.058587, "lng": -117.513810 },
+  "geofences": {
+    "perimeter": { "south": 34.055200, "west": -117.515100, "north": 34.062500, "east": -117.513200 },
+    "truckGate": { "south": 34.062200, "west": -117.514900, "north": 34.062800, "east": -117.514400 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 34.055400, "west": -117.514900, "north": 34.062200, "east": -117.514200 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 38,
+    "trailersVisible": 24,
+    "trailerParkingCapacity": 35,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 16.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.058587,-117.513810,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "trailersVisible", "dropArea"],
+  "fieldNotes": {
+    "location": "10746 Commerce Way, Fontana CA = the 'Sierra Gateway Center' (addresses 10746-10788 Commerce Way), a ~253,000 SF multi-tenant industrial / distribution building built 1989, ~253 auto parking spaces. GXO Warehouse Company operates here (Buzzfile, Waze). Roster ROOFTOP geocode (54 m) landed correctly on the long N-S building. Located in a dense Inland Empire logistics corridor in Fontana.",
+    "truckGate": "The truck yard / dock apron is on the building's west (rail-adjacent) side. A driveway from the public road at the north connects into the dock apron; chain-link fence runs along the rail corridor but the driveway entrance shows no barrier arm and no guard booth in 2025 Street View. Classified false; flagged uncertain - the driveway is partly tree-screened.",
+    "guardShack": "No staffed booth observed at the yard driveway or building frontage.",
+    "remoteGs": "No gate present.",
+    "dockDoors": "Dock doors line the building's west face along the rail-side apron; estimated ~38 doors from overhead imagery for a 253,000 SF multi-tenant building - 25-50 band. Flagged uncertain (count from overhead only).",
+    "dropArea": "Trailers parked in the west dock apron - estimated ~24 trailers visible, capacity ~35. No separate dedicated drop lot; trailers occupy the dock apron. 10-25 band.",
+    "postGateStaging": "The west dock apron provides internal staging room along the rail side before the dock doors.",
+    "drivewayLong": "The west apron runs the full building length and can hold a long truck queue.",
+    "railServed": "A rail line runs immediately west of the property, but no rail spur enters the building - the apron sits between the building and the rail. Recorded false.",
+    "urbanRural": "Dense Inland Empire industrial fabric in Fontana, surrounded on all sides by warehouses.",
+    "siteAreaAcres": "Estimated ~16 acres for the Sierra Gateway Center parcel (253k SF building footprint plus dock apron and auto parking)."
+  },
+  "method": "deep-audit"
+}

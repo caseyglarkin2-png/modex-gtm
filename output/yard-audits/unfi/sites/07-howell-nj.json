@@ -1,0 +1,58 @@
+{
+  "name": "UNFI - Howell NJ DC",
+  "type": "Distribution Center",
+  "coords": { "lat": 40.13970, "lng": -74.18790 },
+  "geofences": {
+    "perimeter": { "south": 40.13650, "west": -74.19150, "north": 40.14250, "east": -74.18550 },
+    "truckGate": { "south": 40.13750, "west": -74.19000, "north": 40.13850, "east": -74.18850 },
+    "dropYards": [
+      { "south": 40.13900, "west": -74.19000, "north": 40.14150, "east": -74.18820 }
+    ],
+    "dockAprons": [
+      { "south": 40.13780, "west": -74.18980, "north": 40.14100, "east": -74.18800 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 50,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 42.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.13970,-74.18790,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes",
+    "preGateStaging", "postGateStaging", "fastLaneOpportunity", "dropArea",
+    "urbanRural", "scale", "multiStep"
+  ],
+  "fieldNotes": {
+    "location": "Confirmed UNFI Howell NJ DC, 433 Oak Glen Rd, Howell NJ 07731. Roster ROOFTOP geocode 40.139697,-74.187949 lands squarely on a large distribution building with near-full rooftop solar coverage in a heavily wooded parcel off Oak Glen Rd, Monmouth County NJ. Web-corroborated: BBB / Panjiva / NJ BPU filing / Yellow Pages - a 385,000 sq ft UNFI natural/organic specialty DC; the NJ BPU filing documents two rooftop solar arrays (1.575 MW Project A + 1.652 MW Project B), matching the solar-covered roof in imagery.",
+    "buildingShape": "Main DC building has near-full rooftop solar; a separate older building cluster (a red-roofed structure plus a long warehouse) sits immediately N of the main building, and an office building is near the S employee parking lot -> buildingCount 3, multipleFacilities true (multiple distinct buildings on the campus parcel).",
+    "dockDoors": "Dock-door rhythm along the W face of the main building with ~50 trailers backed in/parked across the W apron and the N building's docks -> band 50+ (estimated ~55 positions; legacy-UNFI natural/organic DC of modest 385k sq ft footprint).",
+    "dropYard": "A modest trailer-parking area sits along the W side / NW of the main building holding parked trailers -> dropYard true, dropArea band 10-25 (smaller drop capacity than UNFI's large conventional-grocery DCs).",
+    "truckGate": "A single private access driveway serves the property from Oak Glen Rd; the truck circulation wraps to the W dock apron and N building. Street View on Oak Glen Rd (2025-09) shows only dense woods - the property is heavily tree-screened and set well back, so the gate is not visible at road level. A controlled gated entrance with a staffed booth is assumed for a UNFI specialty DC -> truckGate true, guardShack true, remoteGs false; all flagged medium-confidence.",
+    "shipRcvSeparate": "Dock activity is concentrated on the W face of the main building as one continuous system; the N building's docks are an ancillary cluster rather than a distinct ship-vs-rcv split -> false.",
+    "drivewayLong": "Long wooded approach driveway from Oak Glen Rd into the property -> drivewayLong true.",
+    "fastLaneOpportunity": "Modest-scale specialty DC with a single access drive and limited gate apron width -> fastLaneOpportunity false (flagged, gate not directly observed).",
+    "urbanRural": "Howell Township, Monmouth County NJ sits within the dense NYC/NJ metropolitan corridor -> Urban per the 'broader setting' rule. The immediate parcel is unusually isolated in pine-barren woods, so the call is flagged; cellular coverage in metro NJ is good -> connectivityIssue false.",
+    "railServed": "A rail line runs along the E edge of the property but no spur enters; the building's E face carries solar panels, not a rail dock -> railServed false.",
+    "siteAreaAcres": "~42 acres derived from the perimeter box around the three buildings, W dock apron, drop yard, parking, and the on-site stormwater ponds.",
+    "entryLanes/exitLanes": "Estimated 1/1 for a modest single-drive specialty DC; gate not directly observed."
+  },
+  "method": "deep-audit"
+}

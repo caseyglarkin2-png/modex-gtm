@@ -1,0 +1,52 @@
+{
+  "name": "Niagara Bottling - Florence SC",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 34.265200, "lng": -79.694000 },
+  "geofences": {
+    "perimeter": { "south": 34.263500, "west": -79.697500, "north": 34.266000, "east": -79.691000 },
+    "truckGate": { "south": 34.263800, "west": -79.697000, "north": 34.264400, "east": -79.696300 },
+    "dropYards": [
+      { "south": 34.263800, "west": -79.697000, "north": 34.264500, "east": -79.691500 }
+    ],
+    "dockAprons": [
+      { "south": 34.264100, "west": -79.697000, "north": 34.264800, "east": -79.691300 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 65,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 42.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.265200,-79.694000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "No controlled checkpoint found. The property has only a low post-and-cable boundary marker along the road (clear in Street View 2024-02) — no security fence, no barrier arm and no guard booth across the truck driveway. The access road off Florence Harllee Blvd reads as an uncontrolled industrial driveway. Classified false; medium confidence.",
+    "guardShack": "No staffed-booth structure anywhere at the entrance in satellite or Street View.",
+    "dockDoors": "A single very long dock bank runs the full ~500ft south face of the 502,320 sq ft building, with trailers backed in along its whole length. Estimate ~70 doors from z18 imagery — 50+ band confident.",
+    "dropArea": "A long row of marked trailer-parking stalls south of the dock apron holds many trailers without tractors; combined with the dock-backed trailers, the yard reads 50+. Dedicated drop area present.",
+    "shipRcvSeparate": "All dock doors are on one continuous face; ship and receive appear to share the same dock bank — not separate.",
+    "fastLaneOpportunity": "Wide access road and broad apron with substantial unused paved width leave clear room for a bypass/express lane.",
+    "postGateStaging": "Deep paved yard between the access road and the dock doors provides internal post-gate staging room.",
+    "urbanRural": "Located in the Pee Dee Touchstone Energy Commerce Park on the edge of Florence, surrounded by woods, fields and retention ponds — Rural setting.",
+    "siteAreaAcres": "~42 acres derived from the perimeter box covering the full building footprint, dock apron and trailer-stall rows.",
+    "railServed": "No rail spur enters the property in any imagery."
+  },
+  "method": "deep-audit"
+}

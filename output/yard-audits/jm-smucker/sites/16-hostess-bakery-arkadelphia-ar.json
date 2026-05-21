@@ -1,0 +1,53 @@
+{
+  "name": "Hostess Bakery - Arkadelphia AR",
+  "type": "Manufacturing - Sweet baked snacks (Hostess Donettes)",
+  "coords": { "lat": 34.0535, "lng": -93.0935 },
+  "geofences": {
+    "perimeter": { "south": 34.0518, "west": -93.0958, "north": 34.0560, "east": -93.0915 },
+    "truckGate": { "south": 34.04995, "west": -93.09480, "north": 34.05025, "east": -93.09440 },
+    "dropYards": [
+      { "south": 34.0530, "west": -93.0928, "north": 34.0556, "east": -93.0913 }
+    ],
+    "dockAprons": [
+      { "south": 34.0524, "west": -93.0933, "north": 34.0540, "east": -93.0925 },
+      { "south": 34.0518, "west": -93.0950, "north": 34.0524, "east": -93.0928 }
+    ],
+    "staging": { "south": 34.0502, "west": -93.0948, "north": 34.0530, "east": -93.0943 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 20,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 45.8,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.0535,-93.0935,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "connectivityIssue"],
+  "fieldNotes": {
+    "truckGate": "Long private access drive (1 Hostess Way) runs ~250 m from the rural public road to the plant. Street View at the road entrance (2024-02) shows only a Hostess monument sign - no barrier arm, gate, or checkpoint. No checkpoint structure on the drive in z20 satellite.",
+    "guardShack": "No staffed booth at the road entrance or anywhere on the access drive.",
+    "drivewayLong": "The ~250 m access drive plus large internal aprons easily hold a 3+ truck queue.",
+    "dropArea": "Trailer drop yard on the E side; ~15-25 drop trailers in marked rows.",
+    "dockDoorCount": "Estimate ~22 doors across the S building face and E dock bank; overhead estimate, satellite imagery may slightly predate full Hostess retrofit.",
+    "shipRcvSeparate": "Separate dock clusters - S face apron and E-face dock bank.",
+    "fastLaneOpportunity": "Long approach drive and wide aprons leave abundant room for a bypass lane.",
+    "buildingCount": "Main 330,000 sq ft production building plus one ancillary utility structure in the NE yard.",
+    "connectivityIssue": "Rural site but only ~3 km from Arkadelphia; cellular coverage likely adequate - flagged as low confidence.",
+    "urbanRural": "Edge-of-town / rural setting, building surrounded by fields and woods."
+  },
+  "method": "deep-audit"
+}

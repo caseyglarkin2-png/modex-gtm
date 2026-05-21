@@ -1,0 +1,68 @@
+{
+  "name": "Nestlé Prepared Foods - Mount Sterling KY",
+  "type": "Frozen food manufacturing plant (Hot Pockets)",
+  "coords": { "lat": 38.09700, "lng": -83.90650 },
+  "geofences": {
+    "perimeter": { "south": 38.09380, "west": -83.90950, "north": 38.09870, "east": -83.90380 },
+    "truckGate": { "south": 38.09450, "west": -83.90500, "north": 38.09500, "east": -83.90430 },
+    "dropYards": [
+      { "south": 38.09650, "west": -83.90880, "north": 38.09790, "east": -83.90720 },
+      { "south": 38.09530, "west": -83.90620, "north": 38.09600, "east": -83.90480 }
+    ],
+    "dockAprons": [
+      { "south": 38.09790, "west": -83.90720, "north": 38.09850, "east": -83.90480 },
+      { "south": 38.09580, "west": -83.90680, "north": 38.09640, "east": -83.90480 }
+    ],
+    "staging": { "south": 38.09500, "west": -83.90680, "north": 38.09600, "east": -83.90500 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 45,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 67.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.097,-83.9065,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount", "scale"],
+  "fieldNotes": {
+    "truckGate": "Definitive - a single guarded entry off Oak Grove Dr on the SE. The campus is fully ringed by chain-link perimeter fence (confirmed in Street View 2025-06).",
+    "guardShack": "Definitive - a blue-roofed guard booth sits on a raised median island in the entry road with traffic lanes on both sides and directional arrows painted on the pavement; a barrier-arm structure is visible. Clear in z20-z21 imagery and Street View 2025-06.",
+    "drivewayLong": "From the guarded gate, trucks route along a long perimeter drive to the warehouse docks (N) and drop yard (W) - ample queue depth.",
+    "dropArea": "Large drop yard on the W side of the warehouse holds ~30+ trailers in two rows; additional trailers backed at docks. dropArea 50+.",
+    "shipRcvSeparate": "Dock banks on two distinct buildings/faces - the N warehouse face and the SE manufacturing-building face - shipping and receiving physically separated.",
+    "fastLaneOpportunity": "Wide entry road with a median island and large open yards provide room for a bypass/express lane.",
+    "dockDoorCount": "~45 estimated across the warehouse N face and the manufacturing-building docks; partly obscured - low-confidence count.",
+    "multipleFacilities": "Campus with two large building clusters - a warehouse/DC building (N) and a manufacturing plant building (central/S) - plus an on-site wastewater facility.",
+    "railServed": "No rail line runs anywhere near the industrial park; not rail-served.",
+    "urbanRural": "Mount Sterling is a small Kentucky town; the plant sits in an edge-of-town industrial park surrounded by farmland - rural.",
+    "scale": "No truck scale clearly visible; flagged uncertain."
+  },
+  "method": "deep-audit"
+}

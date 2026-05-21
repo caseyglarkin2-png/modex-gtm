@@ -1,0 +1,51 @@
+{
+  "name": "Home Depot RDC - Topeka KS",
+  "type": "Rapid Deployment Center",
+  "coords": { "lat": 38.97299, "lng": -95.69715 },
+  "geofences": {
+    "perimeter": { "south": 38.96930, "west": -95.70000, "north": 38.97520, "east": -95.69430 },
+    "truckGate": { "south": 38.97090, "west": -95.69870, "north": 38.97160, "east": -95.69770 },
+    "dropYards": [
+      { "south": 38.96960, "west": -95.69850, "north": 38.97230, "east": -95.69470 }
+    ],
+    "dockAprons": [
+      { "south": 38.97240, "west": -95.69840, "north": 38.97470, "east": -95.69440 }
+    ],
+    "staging": { "south": 38.97070, "west": -95.69900, "north": 38.97180, "east": -95.69720 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 230,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 60.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.97299,-95.69715,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "dockDoorCount"],
+  "fieldNotes": {
+    "location": "Resolved with high confidence. Roster geocode (movedMeters 5133) lands directly on the long cross-dock RDC building at 5200 SW Wenger Drive, Topeka KS 66609. Confirmed as HD RDC #5024 via SupplierWiki and Waze (\"The Home Depot Rapid Deployment Center\").",
+    "truckGate": "truckGate true with high confidence. A single curved truck access road runs up from SW Wenger Drive to the trailer yard; it is the only vehicle entry and pinches into a controlled gate where it meets the fenced yard. Trucks observed staged along the access road in Street View. Perimeter chain-link fencing encloses the trailer yard.",
+    "guardShack": "Gate is confirmed present; a discrete guard booth was not unambiguously isolated from imagery — guardShack set true per the HD-RDC norm of staffed gate check-in, but listed uncertain.",
+    "shipRcvSeparate": "Cross-dock RDC: dock doors run along both long faces; receiving and shipping operate from separate dock banks.",
+    "dropArea": "Very large trailer drop yard south of the building — long rows holding 200+ trailers without tractors. dropArea 50+.",
+    "urbanRural": "Rural — the site is on the southern edge of Topeka, with active farmland immediately north of the building and open country around; an industrial park sits adjacent but the broader setting is edge-of-town.",
+    "railServed": "false — no rail spur enters the property; nearest rail is not connected.",
+    "dockDoorCount": "~120 estimate across both long elevations of a ~550K sq ft RDC; backed-in trailers obscure exact count.",
+    "extra": "A Plug Power hydrogen fuel station for fuel-cell forklifts sits at the building's office/SW side — a hallmark of HD RDC operations, corroborating HD tenancy."
+  },
+  "method": "deep-audit"
+}

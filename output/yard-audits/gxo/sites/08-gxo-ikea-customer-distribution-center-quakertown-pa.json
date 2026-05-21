@@ -1,0 +1,53 @@
+{
+  "name": "GXO IKEA Customer Distribution Center - Quakertown PA",
+  "type": "Fulfillment Center",
+  "coords": { "lat": 40.46075, "lng": -75.3475 },
+  "geofences": {
+    "perimeter": { "south": 40.45830, "west": -75.35005, "north": 40.46320, "east": -75.34500 },
+    "truckGate": { "south": 40.45850, "west": -75.34660, "north": 40.45905, "east": -75.34580 },
+    "dropYards": [
+      { "south": 40.45855, "west": -75.34730, "north": 40.46010, "east": -75.34520 }
+    ],
+    "dockAprons": [
+      { "south": 40.45895, "west": -75.34720, "north": 40.46245, "east": -75.34530 },
+      { "south": 40.46095, "west": -75.34965, "north": 40.46285, "east": -75.34730 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 57.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.46075,-75.3475,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount"],
+  "fieldNotes": {
+    "location": "Roster address (150 N West End Blvd) is approximate. Web research established the true address as 3000 AM Drive #200, Quakertown PA 18951 — a large multi-tenant DC (anchor Continental Tire DC / DHL Supply Chain; GXO occupies Suite 200, ~195,000 SF for IKEA ecommerce parcel fulfillment). Racklify lists the whole building at 935,540 SF. Locked center 40.46075,-75.3475 — the large white-roofed warehouse in the AM Drive industrial park (Milford Township, NE of Quakertown borough). Neighboring building numbered '1020' visible in Street View confirms the AM Drive park.",
+    "suiteCaveat": "GXO operates only Suite 200 of this multi-tenant building; the geofence and dock/trailer counts cover the whole shared building and yard, which cannot be split out from overhead imagery.",
+    "truckGate": "No barrier arm or sliding gate visible at the truck-yard entrance off the SE road; appears to be an open paved approach. Marked false; listed uncertain — current Street View panos along the frontage are partly screened by a vegetated buffer and a utility easement.",
+    "guardShack": "No clear guard booth at the road entrance. A small structure exists inside the SE truck yard near the docks/water tank, but it reads as a maintenance/utility shed rather than an entrance gatehouse. Uncertain.",
+    "shipRcvSeparate": "Cross-dock building with separate dock banks on the NW face and the SE face, each with its own yard.",
+    "dockDoors": "Two long dock banks (NW and SE faces) with many trailers backed in; estimated ~70 total, banded 50+ (count low-confidence).",
+    "dropArea": "Very large trailer drop yard along the S/SE of the building with dozens of trailers in herringbone parking — well into the 50+ band.",
+    "urbanRural": "Quakertown is a small Bucks County borough; the AM Drive industrial park sits on the rural edge in Milford Township surrounded by farmland and woods. Per rubric, classified Rural.",
+    "railServed": "A rail line passes through the woods SW of the property but does NOT spur into the building; not rail-served.",
+    "fastLaneOpportunity": "Wide truck yards and aprons on both faces with unused paved width."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,62 @@
+{
+  "name": "Booker Vineyard / My Favorite Neighbor - Paso Robles CA",
+  "type": "Winery / Production Facility",
+  "coords": { "lat": 35.578650, "lng": -120.740150 },
+  "geofences": {
+    "perimeter": { "south": 35.577900, "west": -120.741200, "north": 35.579600, "east": -120.738800 },
+    "truckGate": { "south": 35.578120, "west": -120.740300, "north": 35.578320, "east": -120.740000 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 35.578400, "west": -120.740350, "north": 35.578800, "east": -120.739900 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 2,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 3,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 14.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.578650,-120.740150,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoors", "connectivityIssue"],
+  "fieldNotes": {
+    "truckGate": "Driveway entrance off Anderson Road has a low decorative metal arch / cattle-grate gate frame, not a barrier arm or a controlled checkpoint that closes the truck lane. Wire stock fencing along the property line. Treated as open estate access — truckGate false.",
+    "guardShack": "No staffed booth at the entrance. Estate-style entry with decorative metalwork only.",
+    "drivewayLong": "Long winding driveway from Anderson Road through olive trees and vineyard up to the production buildings — easily holds a 3+ vehicle queue.",
+    "dockDoors": "Small estate winery — production complex of a long solar-roofed winery building plus a red-roof building, with clustered white wine tanks. No bank of dedicated freight dock doors; ~2 at-grade roll-up/service doors estimated. Low confidence on exact count.",
+    "dropArea": "No marked trailer-parking stalls with parked trailers. A row of staged white tanks/bins sits along the upper driveway, but that is production storage, not a trailer drop area.",
+    "buildingCount": "Three distinct structures: the main winery/barrel building, an adjacent red-roof production building, and the hospitality/tasting building to the east.",
+    "urbanRural": "Paso Robles westside wine country — winery surrounded by estate vineyards and olive groves, far from any dense urban fabric.",
+    "connectivityIssue": "Rural but within the well-developed Paso Robles wine region; cellular coverage likely adequate. Marked uncertain.",
+    "railServed": "No rail anywhere near the property."
+  },
+  "method": "deep-audit"
+}

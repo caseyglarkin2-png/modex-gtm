@@ -1,0 +1,64 @@
+{
+  "name": "FedEx Ground Hub - Grove City OH",
+  "type": "Ground regional sortation hub (Columbus market)",
+  "coords": { "lat": 39.90360, "lng": -83.09660 },
+  "geofences": {
+    "perimeter": { "south": 39.90150, "west": -83.09730, "north": 39.90580, "east": -83.09480 },
+    "truckGate": { "south": 39.90490, "west": -83.09560, "north": 39.90550, "east": -83.09500 },
+    "dropYards": [
+      { "south": 39.90200, "west": -83.09730, "north": 39.90520, "east": -83.09660 }
+    ],
+    "dockAprons": [
+      { "south": 39.90180, "west": -83.09700, "north": 39.90540, "east": -83.09640 },
+      { "south": 39.90180, "west": -83.09600, "north": 39.90540, "east": -83.09530 }
+    ],
+    "staging": { "south": 39.90470, "west": -83.09640, "north": 39.90560, "east": -83.09520 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 22.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.90360,-83.09660,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes", "dropArea"],
+  "fieldNotes": {
+    "truckGate": "Chain-link perimeter fence around the truck yard with a gate across the W-side truck driveway, visible in 2025 Street View (sv6/sv8).",
+    "guardShack": "No staffed booth observed at the yard entrance - gated but unmanned, so remoteGs = true (kiosk / app check-in implied).",
+    "dockDoors": "Long N-S cross-dock building with continuous dock doors on BOTH long faces; estimated ~90 total - count approximate, flagged uncertain.",
+    "dropArea": "Trailers parked in rows along the W dock apron / drop yard; ~25-50 stalls, hard to separate active staging from storage.",
+    "drivewayLong": "Curved internal driveway from Lewis Centre Way into the yard has room to stack 3+ trucks before the dock apron.",
+    "urbanRural": "Grove City is part of the Columbus OH metro; site sits in a built-up multi-tenant industrial park flanked by other big-box warehouses and suburban residential - Urban.",
+    "multipleFacilities": "FedEx occupies one long building; adjacent big-box warehouses are separate tenants, not part of the FedEx campus.",
+    "buildingCount": "Single FedEx cross-dock building; FedEx branding confirmed on the building face in 2025 Street View."
+  },
+  "method": "deep-audit"
+}

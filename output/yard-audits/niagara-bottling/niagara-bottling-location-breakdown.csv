@@ -1,0 +1,61 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+Niagara Bottling - Ontario CA,Bottling / Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,,,YES,,YES,,1,1,,,YES,,,,,,,,Urban,,,,,"https://www.google.com/maps/@34.07480,-117.53200,400m/data=!3m1!1e3"
+Niagara Bottling - Rialto CA,Bottling / Manufacturing Plant,#1,Gate + GS (not BU sens.),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@34.12940,-117.41630,400m/data=!3m1!1e3"
+Niagara Bottling - Stockton CA (Arch Rd),Bottling / Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@37.90620,-121.19720,400m/data=!3m1!1e3"
+Niagara Bottling - Mesa AZ,Bottling / Manufacturing Plant,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@33.35260,-111.62580,400m/data=!3m1!1e3"
+Niagara Bottling - Phoenix AZ,Bottling / Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@33.44700,-112.20170,400m/data=!3m1!1e3"
+Niagara Bottling - Los Lunas NM,Bottling / Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,YES,,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@34.827861,-106.760900,400m/data=!3m1!1e3"
+Niagara Bottling - North Las Vegas NV,Bottling / Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,1,3,YES,,,YES,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@36.263400,-115.030700,400m/data=!3m1!1e3"
+Niagara Bottling - Aurora CO,Bottling / Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,YES,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@39.745400,-104.708550,400m/data=!3m1!1e3"
+Niagara Bottling - Brigham City UT,Bottling / Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,YES,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@41.511870,-112.042220,400m/data=!3m1!1e3"
+Niagara Bottling - Puyallup (Frederickson) WA,Bottling / Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,YES,,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@47.076030,-122.355800,400m/data=!3m1!1e3"
+Niagara Bottling - Kansas City MO (149th St),Bottling / Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@38.85290,-94.55370,400m/data=!3m1!1e3"
+Niagara Bottling - Kansas City MO (Airworld Dr),Bottling / Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@39.30040,-94.67520,400m/data=!3m1!1e3"
+Niagara Bottling - Jeffersonville IN,Bottling / Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@38.37990,-85.67500,400m/data=!3m1!1e3"
+Niagara Bottling - Plainfield IN,Bottling / Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@39.68500,-86.34900,400m/data=!3m1!1e3"
+Niagara Bottling - Byhalia MS,Bottling / Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@34.97800,-89.60680,400m/data=!3m1!1e3"
+Niagara Bottling - Gahanna OH,Bottling / Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,YES,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@39.99610,-82.82290,400m/data=!3m1!1e3"
+Niagara Bottling - Mooresville NC,Bottling / Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,YES,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@35.62870,-80.78540,400m/data=!3m1!1e3"
+Niagara Bottling - Newnan GA (Coweta County),Bottling / Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,YES,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@33.40570,-84.75880,400m/data=!3m1!1e3"
+Niagara Bottling - Chester VA,Bottling / Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@37.35420,-77.32990,400m/data=!3m1!1e3"
+Niagara Bottling - Bloomfield CT,Bottling / Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,YES,,,YES,,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@41.86070,-72.72370,400m/data=!3m1!1e3"
+Niagara Bottling - Middleburg FL,Bottling / Manufacturing Plant,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,,,,YES,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@30.13565,-81.82680,400m/data=!3m1!1e3"
+Niagara Bottling - Groveland FL,Bottling / Manufacturing Plant,#1,Gate + GS (not BU sens.),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,,YES,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@28.63920,-81.82750,400m/data=!3m1!1e3"
+Niagara Bottling - Jupiter FL,Bottling / Manufacturing Plant,#1,Gate + GS (not BU sens.),,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@26.90430,-80.28400,400m/data=!3m1!1e3"
+Niagara Bottling - Hazle Township PA,Bottling / Manufacturing Plant,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@40.93250,-76.06350,400m/data=!3m1!1e3"
+Niagara Bottling - Imperial PA (Findlay Township),Bottling / Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@40.44190,-80.29597,400m/data=!3m1!1e3"
+Niagara Bottling - Upper Macungie (Allentown) PA,Bottling / Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@40.571100,-75.614900,400m/data=!3m1!1e3"
+Niagara Bottling - Florence SC,Bottling / Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@34.265200,-79.694000,400m/data=!3m1!1e3"
+Niagara Bottling - Temple TX,Bottling / Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@31.156095,-97.354586,400m/data=!3m1!1e3"
+Niagara Bottling - Seguin TX,Bottling / Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@29.588439,-97.979524,400m/data=!3m1!1e3"
+Niagara Bottling - Elko New Market MN,Bottling / Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Rural,,,,,"https://www.google.com/maps/@44.567600,-93.290000,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,3,10%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,14,47%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,2,7%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,10,33%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,1,3%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,23,77%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,16,53%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,6,20%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,24,80%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

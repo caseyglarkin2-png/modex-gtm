@@ -1,0 +1,2108 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:44:27.668Z",
+  "account": {
+    "slug": "keurig-dr-pepper",
+    "displayName": "Keurig Dr Pepper",
+    "archetype": "beverage",
+    "siteCount": 20,
+    "coverageNote": {
+      "auditedCount": 20,
+      "estimatedFootprint": null,
+      "droppedStubCount": 2,
+      "capHit": false,
+      "note": "Audited all 20 identifiable facilities (2 additional were unresolvable from public sources)."
+    }
+  },
+  "research": {
+    "facility_count": 22,
+    "audited_facilities": 22,
+    "source": "yard-audit",
+    "confidence": "verified",
+    "caveats": [
+      "KDP Beverage Plant - Victorville CA: audit note mentions 'closed'",
+      "KDP Beverage Plant - Houston TX: audit note mentions 'closed'",
+      "KDP Beverage Plant - Waco TX: audit note mentions 'closed'",
+      "KDP Coffee Roasting Plant - Castroville CA: audit note mentions 'closed'",
+      "KDP Production / DSD Operations - Tucson AZ: audit note mentions 'closed'"
+    ]
+  },
+  "network": {
+    "bbox": [
+      -122.2446,
+      29.6819,
+      -72.7488,
+      47.2278
+    ],
+    "archetypeMix": {
+      "#3": 13,
+      "#10": 1,
+      "#9": 5,
+      "#6": 1
+    },
+    "totals": {
+      "dockDoors": 851,
+      "trailerCapacity": 1838,
+      "gates": 27,
+      "railServed": 3,
+      "acres": 917.0000000000001
+    },
+    "sites": [
+      {
+        "id": "01-kdp-coffee-roasting-k-cup-plant-spartanburg-moore-sc",
+        "name": "KDP Coffee Roasting & K-Cup Plant - Spartanburg (Moore) SC",
+        "type": "Manufacturing - Coffee/K-Cup",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoors",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 34.8701,
+          "lng": -82.0321
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.8688,
+            "west": -82.034,
+            "north": 34.872,
+            "east": -82.03
+          },
+          "truckGate": {
+            "south": 34.87165,
+            "west": -82.0319,
+            "north": 34.8721,
+            "east": -82.0312
+          },
+          "dropYards": [
+            {
+              "south": 34.8695,
+              "west": -82.0321,
+              "north": 34.8717,
+              "east": -82.0306
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.8695,
+              "west": -82.032,
+              "north": 34.8716,
+              "east": -82.0309
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 32,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 27,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster pin (34.870596, -82.032427, ROOFTOP) landed on a large white-roof\ntilt-up warehouse along Moore Duncan Hwy (SC-290). Web research confirms this is\nBuilding 500 at Tyger River Industrial Park (TRIP), the spec building where\nKeurig Dr Pepper leased ~203,000 sq ft in September 2024 for next-generation\nK-Rounds (plastic-free coffee pod) production as part of a $141M Spartanburg\nCounty expansion (SC Dept of Commerce / SC Governor / Colliers releases). June\n2025 Street View shows the completed building still carrying a Colliers\n\"for lease\" leasing sign at the highway frontage, consistent with a recently\noccupied spec building. The building runs NW-SE, roughly 600 ft long.\n\nA separate large building with heavy dock/trailer activity sits to the SE on a\ndifferent parcel within the same park — it is NOT this facility and was excluded.",
+        "mapsUrl": "https://www.google.com/maps/@34.870100,-82.032100,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Building 500, Tyger River Industrial Park (TRIP), 3220 Moore Duncan Hwy, Moore SC. KDP leased ~203,000 sq ft here Sept 2024 for next-gen K-Rounds production ($141M expansion). Confirmed via SC Commerce / Colliers releases and June 2025 Street View showing the spec building with a Colliers leasing sign.",
+          "truckGate": "Open driveways at both NW and SE ends of the NE truck court connecting to the internal park road. No barrier arm, sliding/swing gate or checkpoint pinch-point visible in z20 satellite or June 2025 Street View. No perimeter fence around the property.",
+          "guardShack": "No booth structure at either truck-court access point in satellite or Street View.",
+          "dockDoors": "Long single bank of dock doors along the NE face; counted ~12-18 visible bays/trailers in z19 probes, full wall longer - banded 25-50 as a medium-confidence estimate.",
+          "dropArea": "NE truck court has marked trailer stalls but only a handful of trailers parked in available imagery (newly occupied building).",
+          "fastLaneOpportunity": "Wide open truck court and two access points give ample room for a bypass/express lane.",
+          "urbanRural": "Industrial park on the rural edge of Moore SC, surrounded by woods and farmland; broader setting is small-town/rural.",
+          "buildingCount": "Single KDP building. Two other large buildings sit in the same park (one to the SE with heavy trailer activity) but are separate facilities on separate parcels - not counted."
+        }
+      },
+      {
+        "id": "02-kdp-k-cup-plant-essex-junction-vt",
+        "name": "KDP K-Cup Plant - Essex Junction VT",
+        "type": "Manufacturing - Coffee/K-Cup",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "buildingCount"
+        ],
+        "center": {
+          "lat": 44.513632,
+          "lng": -73.136469
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 44.5118,
+            "west": -73.1395,
+            "north": 44.5164,
+            "east": -73.133
+          },
+          "truckGate": {
+            "south": 44.514,
+            "west": -73.1382,
+            "north": 44.5146,
+            "east": -73.1374
+          },
+          "dropYards": [
+            {
+              "south": 44.5148,
+              "west": -73.1362,
+              "north": 44.5162,
+              "east": -73.1338
+            },
+            {
+              "south": 44.5122,
+              "west": -73.1354,
+              "north": 44.5132,
+              "east": -73.1338
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 44.5138,
+              "west": -73.138,
+              "north": 44.5148,
+              "east": -73.137
+            },
+            {
+              "south": 44.5148,
+              "west": -73.1372,
+              "north": 44.5156,
+              "east": -73.1356
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 70,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 55,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster pin (44.503824, -73.180386, RANGE_INTERPOLATED) was ~3.6 km off,\nlanding in Essex Junction's commercial sprawl among small office/apartment\nbuildings — no industrial plant present. Web research corrected this:\n- Vermont Business Magazine and Food Processing confirm KDP's Vermont K-Cup\n  manufacturing is at the Essex Junction plant (Williston operations\n  consolidated here in 2024).\n- The GMCR 2011 expansion press release describes a 350,000 sq ft addition at\n  5 New England Drive connecting to the existing operation at 30 Gauthier Drive.\n- warehouserating.com lists 30 Gauthier Dr at 44.513632, -73.136469.\n\nSatellite at that coordinate shows a large connected multi-building industrial\ncomplex with dock banks and trailer drop yards — consistent with a coffee\nroasting / K-Cup manufacturing plant. Location locked here.",
+        "mapsUrl": "https://www.google.com/maps/@44.513632,-73.136469,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address '63 South Park Dr' and pin (44.503824,-73.180386) were wrong - ~3.6 km off, landing in Essex Junction commercial sprawl. Correct facility is the Keurig Green Mountain / KDP coffee roasting and K-Cup complex at 30 Gauthier Dr / 5 New England Dr, Essex Junction VT 05452 (44.513632,-73.136469). Confirmed via Vermont Business Magazine, GMCR 2011 expansion press release (350,000 sq ft addition connecting 30 Gauthier Dr and 5 New England Dr), and warehouserating.com listing. Williston VT operations consolidated here in 2024.",
+          "truckGate": "Open driveways from the internal industrial-park road into the W truck court and N dock area. No barrier arm, sliding gate, or checkpoint pinch-point visible in z19-z20 satellite or 2011 Street View. No perimeter fence on the publicly visible sides.",
+          "guardShack": "No booth-footprint structure at any of the truck-court entrances in satellite or Street View.",
+          "multipleFacilities": "Connected multi-building campus - main K-Cup/roasting plant plus additional connected/adjacent buildings, with separate trailer drop yards to the N/NE and S.",
+          "dropArea": "Two dedicated trailer drop yards: a row-parked lot on the N/NE side (~25-30 trailers) and another on the S side (~15-20 trailers). Banded 25-50.",
+          "dockDoors": "Dock banks on the W building face (~10-12 trailers backed in) and the N building face (additional dock bank). Total estimated 25-50, medium confidence.",
+          "shipRcvSeparate": "Dock activity split across at least two distinct building faces (W and N) suggesting separate shipping/receiving clusters.",
+          "urbanRural": "Suburban industrial park within the greater Burlington VT metro fabric (Essex Junction); dense surrounding industrial/commercial development - Urban.",
+          "buildingCount": "4 is an estimate for the connected/adjacent building cluster; the complex is multi-building and hard to count distinct structures from overhead.",
+          "imageryNote": "Street View is 2011-vintage; satellite is recent. Gate/guard-shack determination relies primarily on recent satellite plus older SV - both show open access."
+        }
+      },
+      {
+        "id": "03-kdp-coffee-plant-waterbury-vt",
+        "name": "KDP Coffee Plant - Waterbury VT",
+        "type": "Manufacturing - Coffee",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoors",
+          "trailersVisible",
+          "buildingCount"
+        ],
+        "center": {
+          "lat": 44.3358,
+          "lng": -72.7505
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 44.3343,
+            "west": -72.7525,
+            "north": 44.3372,
+            "east": -72.7488
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 2,
+          "trailersVisible": 3,
+          "trailerParkingCapacity": 5,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 18,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster pin (44.336491, -72.755118, APPROXIMATE) landed in downtown\nWaterbury. Web research (VT Farm to Plate, Yelp, Waze) all place Keurig Green\nMountain at 33 Coffee Lane, Waterbury VT — the Pilgrim Park office campus\n~430 m SE of the roster pin. 2023 Street View confirms a multi-building office\ncampus with a landscaped entrance sign. Location locked at the Pilgrim Park\ncomplex.",
+        "mapsUrl": "https://www.google.com/maps/@44.335800,-72.750500,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "33 Coffee Lane, Waterbury VT 05676 - the Pilgrim Park office campus, Keurig Green Mountain's original/legacy Waterbury site. Roster pin (44.336491,-72.755118, APPROXIMATE) landed in downtown Waterbury; corrected ~430 m SE to the Pilgrim Park complex. Confirmed via web (VT Farm to Plate, Yelp, Waze all list 33 Coffee Lane) and 2023 Street View showing a multi-building office campus with an entrance sign.",
+          "facilityCharacter": "This is predominantly a CORPORATE OFFICE / R&D campus, not a freight/distribution truck yard. The original Green Mountain Coffee roasting operations were historically here, but KDP coffee production is now consolidated at Essex Junction. Street View and satellite show multi-story office buildings surrounded by large employee car parking lots - no loading-dock banks, no trailer drop yards, no truck gate or guard shack.",
+          "truckGate": "No controlled truck entrance - the campus has open driveways off Pilgrim Park Rd / Coffee Lane serving car parking lots. No barrier arm, gate or checkpoint.",
+          "guardShack": "No guard booth anywhere on the campus.",
+          "dockDoors": "Essentially none of consequence - at most a couple of small service/loading doors at a building rear; banded 0-10. A handful of box trucks/vans seen near one building (counted as ~3 trailersVisible) appear to be service/parcel vehicles, not freight trailers.",
+          "railServed": "An active rail line (Amtrak/NECR Waterbury station corridor) runs alongside the W edge of the campus, but there is NO rail spur into the property.",
+          "urbanRural": "Small-town Vermont setting on the edge of Waterbury village; per the rubric's small-town guidance, classified Rural.",
+          "multipleFacilities": "Multi-building office campus (~4 buildings).",
+          "yardRelevance": "Low YardFlow relevance - office site, minimal freight operations. confidence set to medium because the site is unambiguous but does not present a meaningful truck yard to audit."
+        }
+      },
+      {
+        "id": "04-kdp-beverage-manufacturing-distribution-allentown-pa",
+        "name": "KDP Beverage Manufacturing & Distribution - Allentown PA",
+        "type": "Manufacturing & Distribution - Beverage",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "truckGate",
+          "guardShack"
+        ],
+        "center": {
+          "lat": 40.572414,
+          "lng": -75.605843
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.5688,
+            "west": -75.6085,
+            "north": 40.5762,
+            "east": -75.6033
+          },
+          "truckGate": {
+            "south": 40.5721,
+            "west": -75.6079,
+            "north": 40.5729,
+            "east": -75.6069
+          },
+          "dropYards": [
+            {
+              "south": 40.5719,
+              "west": -75.6072,
+              "north": 40.5732,
+              "east": -75.6039
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.5728,
+              "west": -75.607,
+              "north": 40.5742,
+              "east": -75.6038
+            },
+            {
+              "south": 40.5705,
+              "west": -75.607,
+              "north": 40.5718,
+              "east": -75.6038
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 92,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster carried a geocode flag (movedMeters 3237), but the roster pin\n(40.572414, -75.605843) in fact sits correctly between the two large buildings\nof KDP's Allentown campus. Web research confirms this is \"Park 100\", a\ntwo-building logistics site in Upper Macungie Township: 7350 Industrial Blvd\n(warehouse/DC) and 7356 Industrial Blvd (manufacturing), combined ~1,541,280 sq\nft on 92 acres, built out on a former Kraft-Heinz site. KDP invested ~$220M;\nthe facility was Food Engineering's 2021 Plant of the Year (Lehigh Valley EDC,\nLVB, WFMZ, Food Business News). Location locked.",
+        "mapsUrl": "https://www.google.com/maps/@40.572414,-75.605843,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "KDP 'Park 100' campus, 7350 Industrial Blvd (warehouse) + 7356 Industrial Blvd (manufacturing), Upper Macungie Township near Allentown PA. Combined ~1.54M sq ft beverage manufacturing + warehouse/DC on 92 acres; former Kraft-Heinz site; 2021 Food Engineering Plant of the Year. Confirmed via Lehigh Valley EDC, LVB, WFMZ and Food Business News. Despite the roster geocode flag (movedMeters 3237), the roster pin (40.572414,-75.605843) sits correctly on this two-building site.",
+          "truckGate": "Truck access from Industrial Blvd is via open driveways with a monument sign at the W frontage (May 2025 Street View) and internal roads into the truck court. No barrier arm or sliding gate visible at the road or at the truck-court entry in z19-z20 satellite. Marked uncertain - a large beverage plant of this scale plausibly operates manned check-in, but no booth or barrier is visible in available imagery.",
+          "guardShack": "No guard-booth-footprint structure visible at any truck entrance in z20 satellite or 2025 Street View. Marked uncertain for the same scale-related reason.",
+          "shipRcvSeparate": "Two separate buildings - a manufacturing building (rooftop process equipment / HVAC arrays) and a warehouse/DC building - each with its own long dock bank, on opposite sides of the shared central truck court. Distinct shipping/receiving clusters.",
+          "dockDoors": "Both buildings carry very long dock banks; dozens of trailers backed in across both faces. Total estimated well into 50+ band (~100+ doors); exact count uncertain from overhead.",
+          "dropArea": "The central truck court / strip between the two buildings holds long rows of parked trailers - a large shared drop yard, 50+ band.",
+          "entryExitSeparate": "The two-building campus has multiple driveways off Industrial Blvd (W frontage) plus internal circulation - inbound and outbound truck movements use distinct access points.",
+          "railServed": "No rail spur enters the property despite the Lehigh Valley rail corridor in the region.",
+          "urbanRural": "Major Lehigh Valley logistics park (Upper Macungie/Allentown metro), surrounded by other large warehouses - Urban.",
+          "fastLaneOpportunity": "Very wide central truck court and multiple driveways provide ample room for express/bypass lanes."
+        }
+      },
+      {
+        "id": "05-kdp-beverage-plant-victorville-ca",
+        "name": "KDP Beverage Plant - Victorville CA",
+        "type": "Manufacturing - Beverage",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "urbanRural"
+        ],
+        "center": {
+          "lat": 34.584,
+          "lng": -117.3955
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.58,
+            "west": -117.3985,
+            "north": 34.5888,
+            "east": -117.3935
+          },
+          "truckGate": {
+            "south": 34.5805,
+            "west": -117.3974,
+            "north": 34.5813,
+            "east": -117.3964
+          },
+          "dropYards": [
+            {
+              "south": 34.5852,
+              "west": -117.398,
+              "north": 34.5887,
+              "east": -117.3956
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.5828,
+              "west": -117.3977,
+              "north": 34.5862,
+              "east": -117.3968
+            },
+            {
+              "south": 34.5856,
+              "west": -117.3968,
+              "north": 34.5868,
+              "east": -117.394
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 57,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster pin (34.485332, -117.310196, RANGE_INTERPOLATED) landed in a\nVictorville residential neighborhood with a school — clearly not a beverage\nplant. Web research corrected this: the KDP (former Dr Pepper Snapple) West\nCoast production and distribution plant is at 18180 Gateway Drive, inside\nthe Southern California Logistics Airport (SCLA, the former George Air Force\nBase) NE of Victorville. Confirmed via Beverage Industry, ReliablePlant, ARCO\nNational Construction, and Yelp/CalStateDir/Waze listings. The plant is ~850,000\nsq ft (≈300k sq ft production + ≈550k sq ft warehouse) on 57 acres, opened\n~2010-2011 on a ~$150M investment; it produces Snapple, Mott's, Hawaiian Punch,\nClamato, ReaLemon and other KDP brands. Location locked at the SCLA building.",
+        "mapsUrl": "https://www.google.com/maps/@34.584000,-117.395500,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address '16200 Nisqualli Rd' and pin (34.485332,-117.310196) were wrong - landed in a Victorville residential neighborhood. Correct facility is the KDP (former Dr Pepper Snapple) West Coast beverage plant at 18180 Gateway Dr, Victorville CA 92394, inside the Southern California Logistics Airport (SCLA, former George AFB). Confirmed via Beverage Industry, ReliablePlant, ARCO National Construction and Yelp/CalStateDir/Waze listings. ~850,000 sq ft building (300k production + 550k warehouse) on 57 acres; opened ~2010-2011, ~$150M investment.",
+          "truckGate": "The plant is fully enclosed by a chain-link perimeter fence with privacy screening (confirmed in multiple May 2025 Street View frames). A fenced production plant of this scale has controlled truck access. Truck gate classified TRUE on the strength of the continuous perimeter fence and entrance infrastructure visible in Street View, but flagged uncertain - no crisp close-up of the gate barrier was obtainable.",
+          "guardShack": "Classified TRUE - a large fenced beverage manufacturing plant (200+ employees) of this type typically staffs the truck entrance; structures consistent with an entrance check-in are visible near the SW entrance in May 2025 Street View. Flagged uncertain - the booth could not be definitively resolved in overhead imagery.",
+          "shipRcvSeparate": "Dock activity is split across two distinct building faces - a long W dock bank (production/warehouse shipping) and a long N dock bank fronting the large drop yard - functioning as separate clusters.",
+          "dockDoors": "Long dock banks on both the W face and the N face; ~50+ band, exact total (~60-80) estimated from overhead.",
+          "dropArea": "Very large trailer drop yard on the N side - dozens of trailers parked in rows on an unpaved/graded lot (~100+ trailers visible), well into the 50+ band.",
+          "buildingCount": "Single large building (~850k sq ft combined production + warehouse). A small round-tank process/storage farm sits at the SW corner (part of the plant, not counted as a separate building).",
+          "railServed": "SCLA is a multimodal hub with rail in the broader area, but no rail spur was observed entering this property.",
+          "urbanRural": "The plant sits inside the SCLA logistics park on the isolated NE desert edge of Victorville, away from the dense town fabric. Classified Rural per the rubric's edge-of-town guidance; flagged uncertain because Victorville is a sizable city and SCLA is a developed logistics park.",
+          "connectivityIssue": "Set false - SCLA is a major built-up logistics/airport hub with infrastructure despite the desert edge location."
+        }
+      },
+      {
+        "id": "06-kdp-motts-plant-williamson-ny",
+        "name": "KDP Mott's Plant - Williamson NY",
+        "type": "Manufacturing - Juice/Applesauce",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "scale"
+        ],
+        "center": {
+          "lat": 43.2366,
+          "lng": -77.1755
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 43.2339,
+            "west": -77.1815,
+            "north": 43.241,
+            "east": -77.17
+          },
+          "truckGate": {
+            "south": 43.2373,
+            "west": -77.1738,
+            "north": 43.2381,
+            "east": -77.1728
+          },
+          "dropYards": [
+            {
+              "south": 43.2376,
+              "west": -77.1746,
+              "north": 43.2394,
+              "east": -77.1726
+            },
+            {
+              "south": 43.2353,
+              "west": -77.1768,
+              "north": 43.2364,
+              "east": -77.1748
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 43.2376,
+              "west": -77.176,
+              "north": 43.2385,
+              "east": -77.1738
+            },
+            {
+              "south": 43.2347,
+              "west": -77.1784,
+              "north": 43.2353,
+              "east": -77.1768
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 36,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 140,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 105,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: KDP Mott's Plant - Williamson NY\n- Type: Manufacturing - Juice/Applesauce\n- Address: 4363 State Route 104, Williamson, NY 14589\n- Resolved center: 43.236600, -77.175500",
+        "mapsUrl": "https://www.google.com/maps/@43.236600,-77.175500,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Truck yard, docks and trailer drop lots are wide open directly off the public access road on the east side of the property. Multiple Street View headings (2024-08) along that road show no barrier arm, no sliding/swing gate, and no pinch-point checkpoint where the yard meets the road - the paved truck apron simply abuts the road.",
+          "guardShack": "No staffed booth at any truck approach. A metal gantry frame stands in the yard but is a lighting/sign structure, not a guard booth.",
+          "remoteGs": "False because there is no truck gate at all (remoteGs requires a gate without a shack).",
+          "multipleFacilities": "Large interconnected manufacturing complex plus a separate building cluster to the NE and on-site wastewater treatment ponds to the west - a campus.",
+          "shipRcvSeparate": "Dock banks appear on at least two distinct building faces (the north/NE face fronting the main trailer drop yard, and a SW face) - consistent with separate shipping/receiving clusters.",
+          "dockDoors": "Roughly 30-40 doors estimated across the multiple building faces from z18-z20 imagery; counted indirectly via trailers backed in and dock-bay rhythm - flagged as estimate.",
+          "dropArea": "Very large drop yards: rows of dozens of parked trailers (white and orange) on the NE lot plus additional rows near the SW dock apron - well over 50.",
+          "scale": "No truck scale clearly visible; flagged as uncertain due to the size and openness of the yard.",
+          "railServed": "An active rail line runs along the south edge of the property (parallels Route 104); spur access into the plant is plausible but the line clearly serves/borders the site.",
+          "siteAreaAcres": "Roster cites ~217 acres for the full parcel including orchard/woods; the developed industrial perimeter measured here is roughly 105 acres.",
+          "fastLaneOpportunity": "The truck approach apron is extremely wide and open with abundant unused paved width - ample room for express/bypass lanes."
+        }
+      },
+      {
+        "id": "07-kdp-motts-plant-aspers-pa",
+        "name": "KDP Mott's Plant - Aspers PA",
+        "type": "Manufacturing - Juice/Applesauce",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "shipRcvSeparate",
+          "scale"
+        ],
+        "center": {
+          "lat": 39.975785,
+          "lng": -77.220423
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.9722,
+            "west": -77.2245,
+            "north": 39.9795,
+            "east": -77.2155
+          },
+          "truckGate": {
+            "south": 39.9731,
+            "west": -77.2226,
+            "north": 39.9737,
+            "east": -77.2217
+          },
+          "dropYards": [
+            {
+              "south": 39.9726,
+              "west": -77.2195,
+              "north": 39.9745,
+              "east": -77.2168
+            },
+            {
+              "south": 39.9732,
+              "west": -77.2214,
+              "north": 39.9744,
+              "east": -77.2195
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.9739,
+              "west": -77.22,
+              "north": 39.9751,
+              "east": -77.2178
+            }
+          ],
+          "staging": {
+            "south": 39.9736,
+            "west": -77.2198,
+            "north": 39.9744,
+            "east": -77.2184
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 45,
+          "trailersVisible": 160,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 110,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: KDP Mott's Plant - Aspers PA\n- Type: Manufacturing - Juice/Applesauce\n- Address: 45 Aspers North Rd, Aspers, PA 17304\n- Resolved center: 39.975785, -77.220423",
+        "mapsUrl": "https://www.google.com/maps/@39.975785,-77.220423,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Main entrance off the public road on the SW side splits into two open driveways - a left lane to the plant offices and a wider right lane into the truck yard/docks. Street View (2024-08) shows directional/regulatory signage but NO barrier arm, NO sliding/swing gate, and NO checkpoint pinch-point at the property line. Truck driveway is fully open.",
+          "guardShack": "No staffed guard booth at the truck entrance. A small free-standing building sits near the entrance but is set off to the side as an office/maintenance structure, not a booth straddling the truck lane.",
+          "remoteGs": "False - there is no truck gate, so remote check-in does not apply.",
+          "multipleFacilities": "Sprawling campus: a large interconnected main manufacturing complex, a big dark-roof DC/warehouse building, on-site wastewater treatment ponds to the north, and ancillary buildings - clearly a multi-building campus.",
+          "dockDoors": "Estimated ~40-50 doors from z19-z20 imagery - a long dock bank along the main building's south face with many trailers backed in, plus additional dock positions. Counted indirectly; flagged as estimate.",
+          "dropArea": "Very large trailer drop yard on the SE side with rows holding well over 100 parked trailers - one of the largest drop yards in this batch.",
+          "shipRcvSeparate": "Docks appear concentrated along one main building face with the drop yard adjacent; could not clearly confirm a physically separate second shipping cluster - flagged uncertain.",
+          "scale": "No truck scale clearly identified in overhead imagery; flagged uncertain.",
+          "railServed": "No rail spur visible entering the property.",
+          "entryLanes": "The entrance driveway is wide and effectively two-laned; same for exit (shared open entrance). Estimate.",
+          "fastLaneOpportunity": "Entrance apron is very wide and uncontrolled with abundant unused paved width - clear room to add express/bypass lanes.",
+          "siteAreaAcres": "Developed industrial perimeter measured at roughly 110 acres."
+        }
+      },
+      {
+        "id": "08-kdp-beverage-plant-houston-tx",
+        "name": "KDP Beverage Plant - Houston TX",
+        "type": "Manufacturing - Beverage",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "shipRcvSeparate",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 29.6838,
+          "lng": -95.394
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 29.6819,
+            "west": -95.3956,
+            "north": 29.6853,
+            "east": -95.3922
+          },
+          "truckGate": {
+            "south": 29.6847,
+            "west": -95.3955,
+            "north": 29.6851,
+            "east": -95.395
+          },
+          "dropYards": [
+            {
+              "south": 29.6825,
+              "west": -95.3948,
+              "north": 29.6835,
+              "east": -95.3931
+            },
+            {
+              "south": 29.6828,
+              "west": -95.3932,
+              "north": 29.684,
+              "east": -95.3923
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 29.6831,
+              "west": -95.3949,
+              "north": 29.6836,
+              "east": -95.3926
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 23,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: KDP Beverage Plant - Houston TX\n- Type: Manufacturing - Beverage\n- Roster address (approximate / wrong): 5301 Polk St, Houston, TX 77023\n- Resolved address: 2400 Holly Hall St, Houston, TX 77054\n- Resolved center: 29.683800, -95.394000",
+        "mapsUrl": "https://www.google.com/maps/@29.683800,-95.394000,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address (5301 Polk St) was wrong/approximate. Web research (TruckMap, iBegin, Kompass, Waze) places KDP/Dr Pepper Bottling Co of Houston at 2400 Holly Hall St, Houston TX 77054 (Almeda Rd & Holly Hall). Satellite confirms a large beverage warehouse/plant with silos and an extensive trailer yard at 29.6838,-95.3940.",
+          "truckGate": "The truck yard, docks and trailers are entirely inside a fully-enclosed chain-link perimeter topped with barbed wire (clearly visible on the west building wall and around the NW corner). The truck entrance is a gated driveway at the NW corner off Holly Hall St. An enclosed barbed-wire urban compound of this type operates a controlled gate.",
+          "guardShack": "No clearly identifiable multi-sided guard booth straddling the truck lane could be confirmed from Street View (2024-06) or satellite. A small structure sits near the NW driveway but its function (booth vs. utility) is not certain - flagged uncertain.",
+          "remoteGs": "Set true on the basis that a controlled gate exists but no staffed booth was confirmed; if a manned booth is present this should flip. Flagged uncertain.",
+          "backupSensitive": "Tractor-trailers were observed queued/parked along the Holly Hall St curb in multiple Street View captures, and the gate driveway is short - a truck queue at the gate spills directly onto the public street.",
+          "drivewayShort": "The NW gate-to-dock approach is short; the building footprint occupies most of the parcel leaving little internal stacking depth.",
+          "dockDoors": "Estimated ~25-40 doors from z18-z19 imagery across the south and east building faces - many trailers backed in. Indirect overhead count.",
+          "dropArea": "Large trailer drop yard wrapping the south and east of the building - dozens of parked trailers (blue/white), well over 50.",
+          "shipRcvSeparate": "Docks appear on the south and east faces; could not confirm whether these are functionally separate shipping vs. receiving clusters - flagged uncertain.",
+          "scale": "No truck scale identified in overhead imagery.",
+          "railServed": "A rail line runs in the SH-288 corridor immediately east of the property but no spur enters the site.",
+          "urbanRural": "Dense urban Houston (Medical Center / Astrodome area) - surrounded by apartment complexes and other industrial buildings.",
+          "siteAreaAcres": "Compact urban parcel - perimeter measured at roughly 23 acres."
+        }
+      },
+      {
+        "id": "10-kdp-beverage-plant-waco-tx",
+        "name": "KDP Beverage Plant - Waco TX",
+        "type": "Manufacturing - Beverage",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "scale",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 31.626,
+          "lng": -97.0635
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 31.6234,
+            "west": -97.0675,
+            "north": 31.6288,
+            "east": -97.0605
+          },
+          "truckGate": {
+            "south": 31.6267,
+            "west": -97.0666,
+            "north": 31.6273,
+            "east": -97.066
+          },
+          "dropYards": [
+            {
+              "south": 31.6248,
+              "west": -97.0636,
+              "north": 31.6258,
+              "east": -97.0609
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 31.6249,
+              "west": -97.0638,
+              "north": 31.6256,
+              "east": -97.0608
+            }
+          ],
+          "staging": {
+            "south": 31.6264,
+            "west": -97.066,
+            "north": 31.6274,
+            "east": -97.0646
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 92,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Name: KDP Beverage Plant - Waco TX\n- Type: Manufacturing - Beverage\n- Roster address (wrong / approximate): 5301 Bagby Ave, Waco, TX 76711\n- Resolved address: 100 Aviation Pkwy, Waco, TX 76705\n  (Waco International Aviation Park, beside TSTC Waco Airport)\n- Resolved center: 31.626000, -97.063500",
+        "mapsUrl": "https://www.google.com/maps/@31.626000,-97.063500,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address (5301 Bagby Ave) was wrong/approximate - the pin landed on a golf course / apartments in south Waco. Web research (Greater Waco Chamber directory, Yelp, Dennis Group, Quandel) resolved the facility to 100 Aviation Pkwy, Waco TX 76705, in the Waco International Aviation Park beside TSTC Waco Airport. KDP bought a 92-acre former Kraft-Heinz campus (730,000 SF distribution center) and added a new ~811,000 SF manufacturing & warehouse building connected to the DC by tram. Satellite confirms a large fenced industrial campus at ~31.626,-97.0635.",
+          "truckGate": "The campus is fully enclosed by a continuous chain-link perimeter fence (visible on all sides in Street View 2023-05 and 2025-11). The main entrance off the NW access road has fencing, signage and a portable/modular office building. A 92-acre flagship KDP manufacturing + DC campus of this scale operates a controlled, gated truck entrance.",
+          "guardShack": "No multi-sided staffed guard booth could be definitively confirmed in Street View; a portable/modular office building sits near the entrance but its function (gatehouse vs. site office) is not certain - flagged uncertain.",
+          "remoteGs": "Set true on the basis that a controlled gate exists but a staffed booth could not be confirmed. Would flip to guardShack if a manned gatehouse is verified. Flagged uncertain.",
+          "multipleFacilities": "Two large building masses on the campus - the original Kraft-Heinz distribution center and the new KDP manufacturing/warehouse building, connected by a tram - a true campus.",
+          "shipRcvSeparate": "The DC and the manufacturing building are functionally distinct clusters with their own dock faces, connected by tram - shipping and receiving operate from separate dock banks.",
+          "dockDoors": "Estimated 60-80+ doors from z17-z19 imagery - a very long dock bank along the south face of the DC with dozens of trailers backed in, plus the new manufacturing building's docks. Indirect overhead count; flagged as estimate.",
+          "dropArea": "Large trailer drop/staging yard along the south face with well over 50 trailers; ample paved trailer storage.",
+          "drivewayLong": "Large internal yard depth between the perimeter and the dock face - easily holds a 3+ truck queue.",
+          "fastLaneOpportunity": "Wide entrance apron and a large internal yard with abundant unused paved width - clear room for express/bypass lanes.",
+          "scale": "No truck scale clearly identified in overhead imagery; flagged uncertain.",
+          "railServed": "No rail spur into the campus; rail in the area serves the airport/aviation park only.",
+          "urbanRural": "Rural / edge-of-metro - the campus sits in the Waco International Aviation Park surrounded by farmland, the TSTC airport, and open land NE of Waco proper.",
+          "siteAreaAcres": "~92 acres per the Kraft-Heinz campus acquisition figure cited in Dennis Group / Quandel project descriptions.",
+          "imagery": "Satellite tiles for this area span multiple dates including active construction of the new manufacturing building; counts taken from the clearest available crops."
+        }
+      },
+      {
+        "id": "11-kdp-beverage-concentrates-plant-st-louis-mo",
+        "name": "KDP Beverage Concentrates Plant - St. Louis MO",
+        "type": "Manufacturing - Concentrates/Syrups",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "guardShack"
+        ],
+        "center": {
+          "lat": 38.6853,
+          "lng": -90.3559
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.6839,
+            "west": -90.35735,
+            "north": 38.68735,
+            "east": -90.35475
+          },
+          "truckGate": {
+            "south": 38.68635,
+            "west": -90.35705,
+            "north": 38.68685,
+            "east": -90.35655
+          },
+          "dropYards": [
+            {
+              "south": 38.685,
+              "west": -90.35735,
+              "north": 38.6866,
+              "east": -90.3569
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 38.6849,
+              "west": -90.35705,
+              "north": 38.6861,
+              "east": -90.3567
+            },
+            {
+              "south": 38.6845,
+              "west": -90.3556,
+              "north": 38.6851,
+              "east": -90.3549
+            },
+            {
+              "south": 38.6841,
+              "west": -90.3566,
+              "north": 38.68445,
+              "east": -90.3556
+            }
+          ],
+          "staging": {
+            "south": 38.6844,
+            "west": -90.3569,
+            "north": 38.685,
+            "east": -90.3556
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 32,
+          "trailersVisible": 18,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 22,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Manufacturing - Concentrates/Syrups\nResolved location: 8900 Page Ave, Overland, MO 63114 — `38.685300, -90.355900`\nGate verdict: No controlled truck gate · Guard shack: None · Confidence: High",
+        "mapsUrl": "https://www.google.com/maps/@38.685300,-90.355900,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (8400 N Broadway, 38.7153/-90.2296) were wrong - that point is a residential/mixed area in north St. Louis city. Web research (Yelp, Manta, D&B, IndustryNet) confirms the real plant is Dr Pepper/Seven Up Manufacturing at 8900 Page Ave, Overland, MO 63114 - KDP's beverage concentrate/syrup plant, ~165 employees. Locked center at 38.6853/-90.3559.",
+          "truckGate": "Truck access is a private industrial drive off Page Ave on the NW; satellite z21 at the Page Ave junction shows only painted lane arrows, no barrier arm and no guard booth - open access drive shared with the adjacent property. Classified as no controlled gate.",
+          "guardShack": "No guard booth visible at the entrance or anywhere along the access drive. Listed uncertain because Street View does not cover the private drive interior, but overhead imagery shows no booth structure.",
+          "dockDoorCount": "Estimate ~32 across three faces: SE/east apron ~10-12 doors (rail-served, trailers backed in), west face ~10-12, south face ~8. Low confidence on exact total - flagged.",
+          "shipRcvSeparate": "Distinct dock banks on physically separate building faces (west apron vs SE/rail apron vs south face), consistent with separate shipping/receiving operations.",
+          "railServed": "A rail line runs along the south property boundary; rail cars observed at the SW corner adjacent to the building. Plant has rail siding access for inbound bulk ingredients.",
+          "urbanRural": "Site sits inside dense St. Louis County (Overland) industrial/retail fabric - bordered by Page Ave commercial corridor, I-170, and neighboring warehouses. Urban.",
+          "drivewayLong": "The internal access drive down the west side of the plant is long and can stack multiple trucks before reaching the dock aprons.",
+          "buildingCount": "Main plant building plus a secondary process/tank wing on the east; a separate small office building sits at the NW corner near Page Ave but is treated as ancillary, not a second facility cluster."
+        }
+      },
+      {
+        "id": "12-kdp-coffee-roasting-plant-castroville-ca",
+        "name": "KDP Coffee Roasting Plant - Castroville CA",
+        "type": "Manufacturing - Coffee",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "preGateStaging",
+          "postGateStaging",
+          "drivewayLong",
+          "drivewayShort",
+          "entryLanes",
+          "exitLanes",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "dropYard",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "buildingCount",
+          "siteAreaAcres",
+          "multipleFacilities"
+        ],
+        "center": {
+          "lat": 36.7573,
+          "lng": -121.7401
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 36.7563,
+            "west": -121.7409,
+            "north": 36.7581,
+            "east": -121.7394
+          },
+          "truckGate": {
+            "south": 36.7575,
+            "west": -121.7409,
+            "north": 36.7578,
+            "east": -121.7406
+          },
+          "dropYards": [
+            {
+              "south": 36.7566,
+              "west": -121.7403,
+              "north": 36.7575,
+              "east": -121.7396
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 36.7566,
+              "west": -121.7401,
+              "north": 36.7569,
+              "east": -121.7395
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 4.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Manufacturing - Coffee\nResolved location (best effort): 11480 Commercial Pkwy, Castroville, CA 95012 — `36.757300, -121.740100`\nGate verdict: No controlled truck gate (low confidence) · Guard shack: None · Confidence: Low",
+        "mapsUrl": "https://www.google.com/maps/@36.757300,-121.740100,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "FACILITY_STATUS": "DEFUNCT - The Keurig Green Mountain Castroville, CA manufacturing/distribution center CLOSED on July 3, 2017 (183 employees laid off; plant contents auctioned September 2017, per CoffeeTalk, Vending Market Watch, Center for Jobs). This is NOT an active KDP facility. The roster source ('one of six KDP US coffee roasting facilities') is outdated. KDP has no current operations here.",
+          "location": "Roster coords (10711 Cara Mia Pkwy, 36.7593/-121.7436) point into the Castroville industrial park but not a confirmed building. Best-documented former Keurig address is 11480 Commercial Pkwy, Castroville CA 95012 (geocoded 36.7570/-121.7385). Audit centered on the 11480 Commercial Pkwy building cluster - a mid-size warehouse with rooftop markings and an adjacent leased warehouse east of it. The former Keurig DC has since been subdivided/re-tenanted; exact original footprint cannot be confirmed.",
+          "truckGate": "No controlled truck gate visible; open warehouse forecourt off Commercial Pkwy. Building shows lease/sale signage in 2024 Street View. All gate-related fields uncertain due to facility closure and re-tenanting.",
+          "guardShack": "No guard booth visible.",
+          "dockDoors": "Estimate ~14 dock doors on the warehouse east face / apron; counts approximate, low confidence given the site is no longer the original single-tenant Keurig facility.",
+          "urbanRural": "Castroville is a small unincorporated agricultural town in Monterey County, surrounded by farmland (the 'Artichoke Capital'). The industrial park sits at the edge of town next to fields - classified Rural.",
+          "railServed": "A rail line runs through the broader Castroville industrial park but does not spur into this specific building parcel.",
+          "buildingCount": "The 11480 cluster comprises the marked warehouse plus an adjacent leased warehouse; treated as 2 buildings.",
+          "OVERALL": "Confidence LOW: facility is closed/defunct, the precise original building footprint is unconfirmed, and the site has been re-tenanted. All classification fields are best-effort estimates from current overhead imagery of the most credible building - flagged for human review."
+        }
+      },
+      {
+        "id": "13-kdp-coffee-roasting-k-cup-plant-sumner-wa",
+        "name": "KDP Coffee Roasting / K-Cup Plant - Sumner WA",
+        "type": "Manufacturing - Coffee/K-Cup",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 47.2253,
+          "lng": -122.2425
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 47.2234,
+            "west": -122.2446,
+            "north": 47.2278,
+            "east": -122.2409
+          },
+          "truckGate": {
+            "south": 47.2264,
+            "west": -122.2412,
+            "north": 47.2269,
+            "east": -122.2409
+          },
+          "dropYards": [
+            {
+              "south": 47.2262,
+              "west": -122.2446,
+              "north": 47.2278,
+              "east": -122.2409
+            },
+            {
+              "south": 47.2234,
+              "west": -122.2444,
+              "north": 47.2241,
+              "east": -122.241
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 47.2261,
+              "west": -122.2444,
+              "north": 47.2265,
+              "east": -122.2412
+            },
+            {
+              "south": 47.2241,
+              "west": -122.2444,
+              "north": 47.2245,
+              "east": -122.2412
+            }
+          ],
+          "staging": {
+            "south": 47.2245,
+            "west": -122.243,
+            "north": 47.2261,
+            "east": -122.2424
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 64,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 26,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Manufacturing - Coffee/K-Cup\nResolved location: 3418 142nd Ave E, Sumner, WA 98390 — `47.225300, -122.242500`\nGate verdict: No controlled truck gate · Guard shack: None · Confidence: High",
+        "mapsUrl": "https://www.google.com/maps/@47.225300,-122.242500,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Positively confirmed by Street View: the building front on 142nd Ave E carries the 'Keurig Dr Pepper' logo and name, with building number '3418' (roster gave 3424; some listings 3324 - the on-site marked number is 3418 142nd Ave E, Sumner WA 98390). Roster coords were ~140 m south of the building front; locked center at 47.2253/-122.2425.",
+          "truckGate": "No controlled truck gate. The building's truck yard and the large trailer/container drop yards open directly onto 142nd Ave E via wide unbarred driveways. Street View north of the building shows the tractor yard fully open to the road - no barrier arm, no booth.",
+          "guardShack": "No guard booth visible at any driveway. Open multi-tenant industrial park access.",
+          "remoteGs": "No gate, so no remote check-in inferred.",
+          "dockDoors": "50+ band. This is a large cross-dock warehouse with long dock-door rows on both the north and south building faces; estimate ~64 doors total. Exact count approximate - flagged.",
+          "dropArea": "50+ band. Extensive trailer/container drop yards north of the building and along the south - many dozens of parked trailers and intermodal containers in organized rows.",
+          "shipRcvSeparate": "Cross-dock layout - dock banks on physically separate north and south building faces, consistent with separated shipping vs receiving flow.",
+          "entryExitSeparate": "Multiple separate driveway access points off 142nd Ave E serve the north and south yards - inbound and outbound use different points.",
+          "fastLaneOpportunity": "Very wide unbarred yard aprons and multiple lanes of paved width off 142nd Ave E - ample room for an express/bypass lane.",
+          "urbanRural": "Site is inside the dense Sumner/Puyallup Valley distribution district - wall-to-wall large warehouses and intermodal yards. Urban.",
+          "drivewayLong": "Deep internal cross-drives and large yard aprons easily stack 3+ trucks before the docks.",
+          "railServed": "No rail spur enters this building parcel (rail lines exist elsewhere in the valley but not into this site).",
+          "trailersVisible": "~110 trailers/containers estimated across the captured imagery; the drop yards are partly shared multi-tenant so the figure is approximate - flagged."
+        }
+      },
+      {
+        "id": "14-kdp-coffee-roasting-distribution-knoxville-tn",
+        "name": "KDP Coffee Roasting / Distribution - Knoxville TN",
+        "type": "Manufacturing & Distribution - Coffee",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 35.9436,
+          "lng": -83.8242
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.9418,
+            "west": -83.8262,
+            "north": 35.9455,
+            "east": -83.8224
+          },
+          "truckGate": {
+            "south": 35.9443,
+            "west": -83.8229,
+            "north": 35.9447,
+            "east": -83.8224
+          },
+          "dropYards": [
+            {
+              "south": 35.9418,
+              "west": -83.8259,
+              "north": 35.9432,
+              "east": -83.8232
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 35.9432,
+              "west": -83.8251,
+              "north": 35.9446,
+              "east": -83.8227
+            }
+          ],
+          "staging": {
+            "south": 35.9434,
+            "west": -83.8242,
+            "north": 35.9444,
+            "east": -83.8231
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 34,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 31,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Manufacturing & Distribution - Coffee\nResolved location: 3109 Water Plant Rd, Knoxville, TN 37914 — `35.943600, -83.824200`\nGate verdict: No controlled truck gate · Guard shack: None · Confidence: High",
+        "mapsUrl": "https://www.google.com/maps/@35.943600,-83.824200,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster coords (5000 Western Ave, 35.9727/-84.0032) were wrong - that point is residential NW Knoxville (geocode itself flagged movedMeters 1701). Web research (Waze, Manta, D&B, Green Mountain press releases) confirms the actual facility is the former Green Mountain Coffee / Keurig Knox County plant at 3109 Water Plant Rd, Knoxville TN 37914, in the Forks of the River Industrial Park - a 334,000 sq ft building on ~31 acres, K-Cup manufacturing + coffee roasting/distribution. Positively confirmed by Street View: building front carries the 'Keurig Dr Pepper' logo and address '3109'. Locked center 35.9436/-83.8242.",
+          "truckGate": "No controlled truck gate. The dock apron and truck yard are open directly to Water Plant Rd via wide unbarred driveways; Street View shows no barrier arm and no guard booth - employee parking and the dock bank front the road.",
+          "guardShack": "No guard booth visible at any driveway.",
+          "remoteGs": "No gate, so no remote check-in inferred.",
+          "dockDoors": "25-50 band. A long dock-door row runs along the building's SE/south face with many trailers backed in; ~34 doors estimated (approximate - flagged).",
+          "dropArea": "50+ band. A large trailer drop yard SW of the building holds rows of dozens of parked trailers, separate from the active dock apron.",
+          "shipRcvSeparate": "Docks appear concentrated on a single (SE/south) building face - shipping and receiving not on physically separate banks. False.",
+          "railServed": "A rail spur/siding runs along the SE side of the building with rail/hopper cars parked on it - the plant is rail-served (consistent with green-coffee inbound by rail).",
+          "fastLaneOpportunity": "Wide unbarred dock apron and yard with ample paved width off Water Plant Rd - room for an express/bypass lane.",
+          "entryExitSeparate": "Multiple separate driveway access points off Water Plant Rd serve the dock yard and the drop yard.",
+          "urbanRural": "Forks of the River Industrial Park is a dedicated large-warehouse industrial district within the Knoxville metro area (SE edge of the city). Classified Urban as part of the metro industrial fabric.",
+          "drivewayLong": "Deep dock apron and yard easily stack 3+ trucks before the docks.",
+          "trailersVisible": "~70 trailers estimated across dock apron + drop yard; counts approximate - flagged.",
+          "HISTORY": "KDP completed a $65M sale-leaseback of this Tennessee distribution center in January 2023 (CoStar) - KDP continues to lease and operate the facility."
+        }
+      },
+      {
+        "id": "15-kdp-production-dsd-operations-tucson-az",
+        "name": "KDP Production / DSD Operations - Tucson AZ",
+        "type": "Manufacturing & Distribution - Beverage/DSD",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "remoteGs",
+          "guardShack",
+          "dockDoorCount",
+          "trailersVisible",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 32.2108,
+          "lng": -110.9514
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.2098,
+            "west": -110.9525,
+            "north": 32.212,
+            "east": -110.9505
+          },
+          "truckGate": {
+            "south": 32.2115,
+            "west": -110.9514,
+            "north": 32.2119,
+            "east": -110.951
+          },
+          "dropYards": [
+            {
+              "south": 32.21,
+              "west": -110.9525,
+              "north": 32.211,
+              "east": -110.9519
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.2103,
+              "west": -110.9516,
+              "north": 32.2114,
+              "east": -110.951
+            }
+          ],
+          "staging": {
+            "south": 32.2108,
+            "west": -110.9517,
+            "north": 32.2117,
+            "east": -110.951
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 2,
+          "buildingCount": 5,
+          "siteAreaAcres": 7.7,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Manufacturing & Distribution - Beverage/DSD\nResolved location: 931 S Highland Ave / 1201-1262 E 19th St, Tucson, AZ 85719 — `32.210800, -110.951400`\nGate verdict: Controlled fenced/gated perimeter (no booth) · Guard shack: None · Confidence: Medium",
+        "mapsUrl": "https://www.google.com/maps/@32.210800,-110.951400,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster gave 3401 E Columbia St (32.1727/-110.9171) - that point is a different industrial area ~3 km SE and not the facility. Web research confirms the actual KDP/Kalil site: KDP acquired Kalil Bottling Co.'s Tucson real estate (May/2024 announcement, deal closed Q3 2024) for $8.55M - seven buildings totaling 161,835 sq ft on 7.71 acres at 931 S Highland Ave and 1201-1262 E 19th Street, Tucson AZ 85719 (Real Estate Daily News; Waze lists Kalil Bottling at 931 S Highland Ave). Locked center 32.2108/-110.9514.",
+          "truckGate": "The whole complex is enclosed by chain-link perimeter fencing with gated openings off E 19th St / S Highland Ave. This is a controlled fenced perimeter (counts as a truck gate). However no barrier-arm across a single truck lane was clearly resolved in imagery - flagged uncertain.",
+          "guardShack": "No guard booth structure observed at any gate opening - the fenced openings appear to be unstaffed.",
+          "remoteGs": "True - there is a controlled fenced/gated perimeter but no guard shack, implying badge/keypad/remote check-in. Flagged uncertain.",
+          "dockDoors": "10-25 band. Dock doors visible on the production/warehouse building faces; ~16 estimated. Older compact plant - exact count approximate, flagged.",
+          "dropArea": "10-25 band. Trailers staged in the central yard plus pallet/crate storage; ~14 trailers visible.",
+          "dropYard": "A dedicated trailer/pallet staging yard exists within the fenced complex (SW area also holds DSD fleet vehicles).",
+          "multipleFacilities": "True - the site is a multi-building campus: per the real-estate record it comprises seven buildings (production plant, warehouse, fleet/DSD operations buildings) on one contiguous fenced parcel.",
+          "backupSensitive": "Tight older-urban site - compact yard, short driveways, and a chain-link gate close to E 19th St; a truck queue would have little internal stacking room and could spill onto the street.",
+          "drivewayShort": "Compact plant - gate-to-dock approach holds only 1-2 trucks.",
+          "shipRcvSeparate": "Docks are not on clearly separate ship vs receive banks - single compact dock area.",
+          "urbanRural": "Site is inside Tucson's dense south-side industrial district, immediately adjacent to Interstate 10. Urban.",
+          "railServed": "No rail spur enters the parcel (a rail corridor runs nearby through the district but not into this site).",
+          "OVERALL": "Confidence MEDIUM: facility positively re-located via the KDP-Kalil real-estate transaction record, but the roster address was wrong, the site is an older compact multi-building complex that is harder to read from overhead, and gate-detail (barrier arm vs open fenced gate, lane counts) could not be fully resolved."
+        }
+      },
+      {
+        "id": "16-kdp-dsd-distribution-center-tempe-az",
+        "name": "KDP DSD Distribution Center - Tempe AZ",
+        "type": "Distribution Center - DSD",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "guardShack",
+          "remoteGs",
+          "truckGate",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 33.4062,
+          "lng": -111.954
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.404403,
+            "west": -111.956475,
+            "north": 33.407997,
+            "east": -111.951525
+          },
+          "truckGate": {
+            "south": 33.406731,
+            "west": -111.955823,
+            "north": 33.407269,
+            "east": -111.955177
+          },
+          "dropYards": [
+            {
+              "south": 33.406026,
+              "west": -111.955415,
+              "north": 33.407374,
+              "east": -111.953585
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.40482,
+              "west": -111.954753,
+              "north": 33.40518,
+              "east": -111.953247
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 45.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster address: 1850 W University Dr, Tempe, AZ 85281 (flagged \"Address approximate\")\nResolved facility: Former Kalil Bottling Co. plant, 2777 S Hardy Dr, Tempe, AZ 85282\nResolved center: 33.4062, -111.9540\nType: Distribution Center — DSD (beverage bottling + direct-store-delivery)\nConfidence: Medium\n\n---",
+        "mapsUrl": "https://www.google.com/maps/@33.4062,-111.954,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address (1850 W University Dr) is explicitly approximate and geocoded to an office building. Resolved actual KDP Tempe DSD facility to the former Kalil Bottling Co. plant at 2777 S Hardy Dr, Tempe AZ 85282 (Kalil acquired by KDP May 2024). Facility is the beverage bottling + DSD distribution complex on S Hardy Dr immediately south of the Broadway Rd / S Hardy Dr intersection.",
+          "campus": "multipleFacilities true — connected building cluster with a central tank/silo farm (bottling), warehouse with dock doors, and an open DSD fleet yard. A portion fronting S Hardy Dr carries a small 'Schreiber' sign (Schreiber Foods, 2122 S Hardy Dr, occupies adjacent space in the same industrial complex); precise parcel boundary between the KDP/Kalil and Schreiber footprints is ambiguous from overhead imagery.",
+          "dropYard": "Large open paved yard holds two long diagonal rows of DSD route delivery trucks (bay/box beverage trucks) plus a row of 53' trailers — classic DSD fleet staging.",
+          "truckGate": "Perimeter has chain-link fencing with oleander hedge along the S Hardy Dr frontage; driveway openings break the fence at the NW yard and along Hardy Dr. No staffed guard booth visible in Street View or satellite — controlled but unmanned access, so remoteGs true.",
+          "dockDoorCount": "~18 dock doors estimated across the south warehouse face and plant building; partly obscured by trailers and roof structures — low confidence.",
+          "railServed": "No rail spur enters the property.",
+          "urbanRural": "Dense Tempe industrial corridor inside the Phoenix metro — Urban."
+        }
+      },
+      {
+        "id": "17-kdp-distribution-center-jacksonville-fl",
+        "name": "KDP Distribution Center - Jacksonville FL",
+        "type": "Distribution Center - Beverage",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs"
+        ],
+        "center": {
+          "lat": 30.3522,
+          "lng": -81.76505
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 30.34946,
+            "west": -81.766611,
+            "north": 30.35494,
+            "east": -81.763489
+          },
+          "truckGate": {
+            "south": 30.351053,
+            "west": -81.764386,
+            "north": 30.351547,
+            "east": -81.763814
+          },
+          "dropYards": [
+            {
+              "south": 30.353992,
+              "west": -81.764981,
+              "north": 30.355608,
+              "east": -81.763419
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 30.349685,
+              "west": -81.764208,
+              "north": 30.354715,
+              "east": -81.763792
+            },
+            {
+              "south": 30.349685,
+              "west": -81.766408,
+              "north": 30.354715,
+              "east": -81.765992
+            }
+          ],
+          "staging": {
+            "south": 30.350896,
+            "west": -81.765268,
+            "north": 30.351704,
+            "east": -81.764332
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 128,
+          "trailersVisible": 110,
+          "trailerParkingCapacity": 118,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 45.2,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster address: 3800 Fairchild St, Jacksonville, FL 32254 (\"Verified street address\" — INCORRECT)\nResolved facility: 2300 Pickettville Rd, Jacksonville, FL 32220\nResolved center: 30.3522, -81.76505\nType: Distribution Center — Beverage\nConfidence: High\n\n---",
+        "mapsUrl": "https://www.google.com/maps/@30.3522,-81.76505,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster address (3800 Fairchild St) is incorrect — that parcel (0839720000R, owned by First Global Import & Export) is a 5.95-acre junk yard / open-storage lot, confirmed by Florida Parcels land-use record and Street View. The actual KDP Jacksonville Distribution Center is at 2300 Pickettville Rd, Jacksonville FL 32220, coords 30.3522,-81.76505. Confirmed by KDP brand mural (A&W, RC, Snapple) on the building wall and a 'Keurig Dr Pepper Visitor & Vendor Entrance' sign at the gate.",
+          "facility": "598,587 sq ft cross-dock distribution warehouse built 2009 (former Hillwood spec building); KDP southeast distribution hub; 32' clear height. Per leasing records: 128 dock doors, 326 car spaces, 118 trailer parking spaces.",
+          "truckGate": "Controlled entry — driveway painted 'GATE 2' with a sliding chain-link gate across the truck lane; KDP visitor/vendor sign. Numbered gates imply at least 2 truck gates (truckGateCount 2).",
+          "guardShack": "No clearly staffed multi-window guard booth visible at the Gate 2 entrance in 2025 Street View; a small gate-control kiosk/structure sits beside the lane. Treated as remote/kiosk check-in (remoteGs true) — flagged uncertain.",
+          "dockDoors": "50+ band — leasing records cite 128 dock doors; trailers backed in along BOTH long building faces, confirmed in z18/z20 satellite.",
+          "shipRcvSeparate": "true — distinct dock banks on the east and west building faces (cross-dock layout).",
+          "dropYard": "Trailer staging along both dock aprons plus a large trailer storage/parking yard off the north end (~118 trailer capacity).",
+          "fastLaneOpportunity": "Very wide entry apron and deep dock aprons (3+ truck stacking) — room to add an express/bypass lane.",
+          "railServed": "A rail line runs west of the property but is separated by a drainage canal; no spur enters the site.",
+          "urbanRural": "West Jacksonville industrial corridor inside the metro, near I-10 — Urban."
+        }
+      },
+      {
+        "id": "18-kdp-distribution-center-irving-tx",
+        "name": "KDP Distribution Center - Irving TX",
+        "type": "Distribution Center - Beverage/DSD",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "guardShack",
+          "entryExitSeparate"
+        ],
+        "center": {
+          "lat": 32.8428,
+          "lng": -96.89475
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.839566,
+            "west": -96.898278,
+            "north": 32.846034,
+            "east": -96.891222
+          },
+          "truckGate": {
+            "south": 32.842853,
+            "west": -96.897521,
+            "north": 32.843347,
+            "east": -96.896879
+          },
+          "dropYards": [
+            {
+              "south": 32.841132,
+              "west": -96.89389,
+              "north": 32.843468,
+              "east": -96.89111
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.84182,
+              "west": -96.896069,
+              "north": 32.84218,
+              "east": -96.893931
+            }
+          ],
+          "staging": {
+            "south": 32.841961,
+            "west": -96.896481,
+            "north": 32.843039,
+            "east": -96.895519
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 240,
+          "truckGateCount": 2,
+          "buildingCount": 6,
+          "siteAreaAcres": 117.4,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster address: 2304 Century Center Blvd, Irving, TX 75062 (\"Verified street address\")\nResolved facility: Dr Pepper / Dallas-Fort Worth Bottling Company campus, 2304 Century Center Blvd\nResolved center: 32.8428, -96.89475\nType: Distribution Center — Beverage/DSD\nConfidence: High\n\n---",
+        "mapsUrl": "https://www.google.com/maps/@32.8428,-96.89475,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Roster geocode (GEOMETRIC_CENTER, moved 6209m) landed directly on the correct facility. Confirmed by a 'Keurig Dr Pepper' monument sign reading '2304' at the main entrance off Century Center Blvd. This is the Dr Pepper / Dallas-Fort Worth Bottling Company campus (The American Bottling Company, a KDP subsidiary).",
+          "facility": "Very large beverage manufacturing + distribution campus. One massive main warehouse/bottling building (with rooftop processing tanks/silos visible) plus several separate office, dock and shop buildings — campus → multipleFacilities true.",
+          "truckGate": "Main entrance off Century Center Blvd has a KDP monument sign and a small booth-footprint structure beside the entrance lane (guard booth). Truck circulation uses dedicated dock-side gates; multiple entry/exit driveways around the campus → truckGateCount 2, entryExitSeparate true.",
+          "guardShack": "A small structure consistent with a guard booth sits beside the main entrance lane; medium confidence — flagged uncertain.",
+          "dropYard": "Very large dedicated trailer storage/drop yard on the SE side of the campus — dozens of rows of 53' trailers plus pallet/material storage, capacity well into the 200+ range.",
+          "dockDoors": "50+ band — extensive dock banks along the main building's south/southeast faces with trailers backed in; ~70 doors estimated, partly obscured — flagged uncertain.",
+          "shipRcvSeparate": "true — distinct dock clusters on different building faces (DSD van docks on the SW, large-trailer docks toward the trailer yard).",
+          "fastLaneOpportunity": "Wide entry drives and large paved circulation aprons — room for an express/bypass lane.",
+          "railServed": "No rail spur enters the property; a CSX/freight line and the Trinity River floodway run nearby but do not serve the site.",
+          "urbanRural": "Las Colinas / Valley Ranch industrial district of Irving inside the Dallas-Fort Worth metro — Urban."
+        }
+      },
+      {
+        "id": "19-kdp-cowpens-k-cup-packaging",
+        "name": "KDP Cowpens K-Cup Packaging - Cowpens SC",
+        "type": "Manufacturing - Coffee/K-Cup Packaging",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "preGateStaging",
+          "postGateStaging",
+          "drivewayLong",
+          "drivewayShort",
+          "backupSensitive",
+          "entryExitTogether",
+          "entryExitSeparate",
+          "entryLanes",
+          "exitLanes",
+          "fastLaneOpportunity",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "urbanRural",
+          "connectivityIssue",
+          "multipleFacilities",
+          "scale",
+          "dropYard",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 35.016998,
+          "lng": -81.804141
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 35.0161,
+            "west": -81.805238,
+            "north": 35.017896,
+            "east": -81.803044
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 0,
+          "buildingCount": 0,
+          "siteAreaAcres": 0,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "NONE",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster address: \"Cowpens, SC 29330\" (no street address — flagged for deep-audit)\nResolved facility: UNRESOLVED — no KDP facility found in Cowpens\nSupplied geocode: 35.016998, -81.804141 (Cowpens town center)\nType: Manufacturing — Coffee/K-Cup Packaging\nConfidence: Low — facility could not be located\n\n---",
+        "mapsUrl": "https://www.google.com/maps/@35.016998,-81.804141,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "UNRESOLVED": "Could not locate a KDP K-Cup packaging facility in Cowpens, SC. The roster entry is 'dossier-named' with no street address ('Specific street address not located - flag for deep-audit'). The supplied geocode (35.016998,-81.804141) is the Cowpens town center — a small commercial downtown with no industrial facility.",
+          "research": "Extensive web research found NO documented KDP / Keurig K-Cup or coffee facility in Cowpens. Every KDP coffee-roasting / K-Cup-packaging operation in South Carolina is consistently attributed to the MOORE facility in Spartanburg County (6135 Anderson Mill Rd / Tyger River Industrial Park, Moore SC) — which is roster idx 1, itself described in its source note as the 'dossier-named major K-Cup hub.' SC Governor, SC Dept of Commerce, Food Manufacturing, and KDP careers all place K-Cup roasting/packaging in Moore, not Cowpens.",
+          "likelyMisattribution": "This entry (idx 19) appears to be a duplicate / misattribution of the Moore K-Cup hub (idx 1). Cowpens is a very small town (total manufacturing employment ~222 across all employers per Data USA) — implausible for a significant standalone KDP K-Cup packaging plant. No KDP signage or branding found on any Cowpens industrial building.",
+          "cowpensIndustry": "Cowpens does host industrial sites (Upstate Corporate Park / Spartanburg East Logistics Park on Mt Olive Rd; Bericap closures plant at 1300 Mt Olive Rd; a Dollar Tree SE distribution center) but none is a KDP facility.",
+          "recommendation": "Treat idx 19 as a roster error / unresolved. If KDP does lease undocumented packaging space inside a Cowpens warehouse, it could not be confirmed from imagery or public sources — human verification required.",
+          "geofence": "perimeter is a nominal placeholder box around the Cowpens town-center geocode; it does NOT represent an identified facility. yardMetrics are zeroed and all classification fields are uncertain.",
+          "urbanRural": "Cowpens is a small rural town in upstate SC — Rural — but this is moot given the facility is unresolved."
+        }
+      },
+      {
+        "id": "20-kdp-distribution-center-indianapolis-in",
+        "name": "KDP Distribution Center - Indianapolis IN",
+        "type": "Distribution Center - Beverage/DSD",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 39.9027,
+          "lng": -86.2419
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.9008,
+            "west": -86.244,
+            "north": 39.9047,
+            "east": -86.2401
+          },
+          "truckGate": {
+            "south": 39.9051,
+            "west": -86.2418,
+            "north": 39.9057,
+            "east": -86.2409
+          },
+          "dropYards": [
+            {
+              "south": 39.9015,
+              "west": -86.2435,
+              "north": 39.9037,
+              "east": -86.2426
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 39.9023,
+              "west": -86.2429,
+              "north": 39.9036,
+              "east": -86.2421
+            }
+          ],
+          "staging": {
+            "south": 39.904,
+            "west": -86.2429,
+            "north": 39.9047,
+            "east": -86.2415
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 28,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 35.7,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Facility: KDP Distribution Center — Indianapolis, IN (Beverage/DSD)\n- Address: 8150 Georgetown Rd, Indianapolis, IN 46268 (Park 100 industrial area, NW side of metro)\n- Locked center: 39.90270, -86.24190\n\nThe roster supplied only an \"APPROXIMATE\" geocode at the Indianapolis city\ncenter (39.76909, -86.158018) — the geocoder reported it moved 12.8 km, i.e.\nit never resolved a real building. Web research (Yahoo Local, Superpages,\nYellowpages, Foursquare \"Park 100\") identified the Dr Pepper Snapple Group /\nKDP beverage distribution site at **8150 Georgetown Rd, Indianapolis, IN\n46268**. Nominatim geocoded that address to a building footprint at\n39.9029, -86.2419. Satellite probing found a large single-story warehouse\nthere, and a Street View frame on Georgetown Rd shows the building front",
+        "mapsUrl": "https://www.google.com/maps/@39.90270,-86.24190,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "Confirmed via Street View — building bears 'DR PEPPER SNAPPLE' signage and '8150' address numerals on the east (office) face. Address 8150 Georgetown Rd, Indianapolis, IN 46268, in the Park 100 industrial area. Roster lat/lng were Indianapolis city-center (geocode moved 12.8 km); resolved correct site by web research.",
+          "truckGate": "Open paved driveways connect the public road (Georgetown Rd) to the property's loop driveway and yard. Street View of the NE entrance shows no barrier arm, sliding gate, or pinch-point — free-flowing curb cut. A chain-link property-line fence runs along part of the east boundary but no controlled gate across the truck lane was observed. truckGate = false.",
+          "guardShack": "No guard booth observed at any entrance in satellite or Street View. guardShack = false.",
+          "remoteGs": "remoteGs is false because there is no truck gate.",
+          "dockDoors": "Dock doors are on the NW long face of the building (trailers backed in, several with tractors visible in z20 imagery). Estimated ~22 doors — band 10-25. Count is approximate from overhead imagery.",
+          "dropArea": "A dedicated trailer drop row of ~30-40 marked stalls runs along the west side of the property between the building and the retention pond; many trailers parked nose-out without tractors. Band 25-50.",
+          "dropYard": "true — dedicated trailer storage row west of the building, separate from active dock apron.",
+          "postGateStaging": "Large open paved yard area on the NW side of the building (with a circular landscaped island) provides substantial internal queue/maneuvering space before the docks.",
+          "fastLaneOpportunity": "Wide open paved entrance aprons and a large internal paved yard provide ample room to add an express/bypass lane.",
+          "urbanRural": "Park 100 industrial park within the Indianapolis metro (NW side) — Urban.",
+          "buildingCount": "Single KDP building. Adjacent large buildings (gray-roof facility to the NW, buildings to the south) are separate properties, not part of this campus.",
+          "railServed": "No rail spur enters the property."
+        }
+      },
+      {
+        "id": "21-kdp-distribution-center-evansville-in",
+        "name": "KDP Distribution Center - Evansville IN",
+        "type": "Distribution Center - DSD",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "preGateStaging",
+          "postGateStaging",
+          "drivewayLong",
+          "drivewayShort",
+          "backupSensitive",
+          "entryExitTogether",
+          "entryExitSeparate",
+          "entryLanes",
+          "exitLanes",
+          "fastLaneOpportunity",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "connectivityIssue",
+          "multipleFacilities",
+          "scale",
+          "dropYard",
+          "multiStep",
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "truckGateCount",
+          "buildingCount",
+          "siteAreaAcres",
+          "railServed"
+        ],
+        "center": {
+          "lat": 37.9442,
+          "lng": -87.547
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 37.9433,
+            "west": -87.5479,
+            "north": 37.9451,
+            "east": -87.5462
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 3,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "NONE",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "mapsUrl": "https://www.google.com/maps/@37.94420,-87.54700,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "location": "COULD NOT POSITIVELY LOCATE. Roster lat/lng (37.971559, -87.57109) point to downtown Evansville's civic/office core — not an industrial site; clearly wrong for a DSD depot. The only consistently-cited address across business directories (Cortera, Indeed) is '2600 S Kentucky Ave, Evansville, IN 47714-4513' for 'Keurig Dr Pepper Inc'. That address geocodes (Nominatim) to 37.9440, -87.5481; satellite imagery there shows a large empty parking lot and a generic white-roof industrial building with NO beverage-distribution signage, NO visible loading docks with trailers, and NO recognizable truck yard. Street View (2019/2023) of S Kentucky Ave shows generic light-industrial buildings and a green-fenced vehicle/equipment lot. The address is most likely an administrative/registered address rather than an active beverage-distribution warehouse, or the depot has minimal footprint / has relocated. Note: historically the Dr Pepper / RC distribution in Evansville was tied to Royal Crown Bottling Corp (1100 Independence Ave), which was renamed 'Vision Beverage' in 2020 and stopped distributing KDP brands.",
+          "coords": "Best-effort placeholder centered on the white-roof building near 2600 S Kentucky Ave; NOT a confirmed KDP facility.",
+          "classification": "All classification flags are unverified and default to false/null. The site could not be confirmed, so no truck-yard evidence could be assessed.",
+          "yardMetrics": "All metrics are unverified placeholders. The perimeter box and 3-acre area are a rough estimate around the candidate building only.",
+          "recommendation": "Flag for human review. Suggested next steps: contact KDP directly for the Evansville DSD depot address, check Vanderburgh County GIS / property records for KDP or American Bottling Company parcels, or pull a current KDP careers posting for Evansville which may list the worksite address."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "name": "Uncrustables - McCalla AL",
+  "type": "Manufacturing - Frozen handhelds (Uncrustables)",
+  "coords": { "lat": 33.29920, "lng": -87.05950 },
+  "geofences": {
+    "perimeter": { "south": 33.29690, "west": -87.06320, "north": 33.30240, "east": -87.05680 },
+    "truckGate": { "south": 33.29840, "west": -87.05800, "north": 33.29900, "east": -87.05730 },
+    "dropYards": [
+      { "south": 33.29720, "west": -87.06150, "north": 33.29850, "east": -87.06030 }
+    ],
+    "dockAprons": [
+      { "south": 33.29760, "west": -87.06250, "north": 33.30060, "east": -87.06080 }
+    ],
+    "staging": { "south": 33.29760, "west": -87.05880, "north": 33.29890, "east": -87.05740 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 22,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 90.1,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.2992,-87.0595,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity", "scale"],
+  "fieldNotes": {
+    "location": "J.M. Smucker Uncrustables plant, 7351 Old Tuscaloosa Highway, JeffMet McCalla industrial park, Jefferson County AL. $1.1B, ~900,000 sq ft, opened Nov 2024 — the largest single-line bakery in the US, third Uncrustables plant. The roster pin was 5963m off (geocode flagged APPROXIMATE); resolved by web research (JeffMet McCalla park bordered by Old Tuscaloosa Hwy/US-11 NW, Norfolk Southern rail SE) and satellite — a single very large modern food-plant building with a complex roof, rooftop refrigeration banks (frozen-product plant), dock banks and a controlled gated entrance.",
+    "truckGate": "TRUE — satellite (z20-z22) shows a divided entrance road at the building's SE corner with separate marked IN and OUT lanes (directional arrows), lane striping, and a barrier-arm gate structure spanning the lanes. Clear controlled truck checkpoint.",
+    "guardShack": "TRUE (inferred) — a small structure sits beside the gate lanes; a brand-new $1.1B food plant of this scale standardly runs a manned guard booth at the truck entrance. Not perfectly resolved in imagery — flagged uncertain.",
+    "dockDoors": "50+ — extensive dock banks along the SW/west building face with ~22 trailers visible backed in or parked; a building of ~1,000,000 sq ft footprint of this type carries well over 50 doors. ~55 estimate; flagged low confidence.",
+    "dropArea": "25-50 — a dedicated trailer-parking/drop lot adjacent to the SW dock apron; ~22 trailers visible, capacity ~70 across the apron + drop lot.",
+    "drivewayLong": "Long, deep gate-to-dock approach with ample stacking room — 3+ truck queue capacity.",
+    "fastLaneOpportunity": "Wide divided entrance apron with separated in/out lanes and substantial unused paved width; clear room to add a bypass/express lane.",
+    "postGateStaging": "Paved holding area inside the gate before the dock aprons.",
+    "railServed": "FALSE — Norfolk Southern rail borders the JeffMet park to the SE, but no rail spur runs into the Smucker plant property itself; the plant ships by truck.",
+    "urbanRural": "Rural — McCalla is an edge-of-metro small community; the plant sits in an industrial park surrounded by woodland and farmland off US-11, ~24 miles from Birmingham.",
+    "buildingCount": "1 — a single very large integrated manufacturing/distribution building.",
+    "siteAreaAcres": "90.1 acres for the developed/fenced operational footprint (building + truck yards + drop lot + employee parking + retention). The full Smucker parcel is ~225 acres.",
+    "confidence": "Medium — facility identified by location, scale and frozen-plant roof signature with high confidence, but the available satellite imagery appears to be from the construction/just-opened period and the gate/guard-booth details are partly inferred; no Street View reaches the gate itself."
+  },
+  "method": "deep-audit"
+}

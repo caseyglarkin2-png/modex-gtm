@@ -1,0 +1,52 @@
+{
+  "name": "Kenco / The Shippers Group - Jonesboro GA",
+  "type": "Distribution Center / 3PL Warehouse",
+  "coords": { "lat": 33.50560, "lng": -84.34810 },
+  "geofences": {
+    "perimeter": { "south": 33.50320, "west": -84.35010, "north": 33.50790, "east": -84.34680 },
+    "truckGate": { "south": 33.50300, "west": -84.35060, "north": 33.50360, "east": -84.34980 },
+    "dropYards": [
+      { "south": 33.50420, "west": -84.34870, "north": 33.50640, "east": -84.34740 }
+    ],
+    "dockAprons": [
+      { "south": 33.50420, "west": -84.34910, "north": 33.50650, "east": -84.34790 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 32,
+    "trailersVisible": 26,
+    "trailerParkingCapacity": 45,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 24.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.50560,-84.34810,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "railServed", "dockDoors", "shipRcvSeparate"],
+  "fieldNotes": {
+    "location": "Roster coords (33.5215,-84.3538, APPROXIMATE, moved 834m) pointed to downtown Jonesboro retail strip - wrong. The Shippers Group / Kenco Jonesboro is at 9250 S Main Street, Jonesboro GA 30236 (~499,960 SF ambient warehouse, food-grade per CRE listing 'Jonesboro Commerce Center'). Confirmed via The Shippers Group locations page, Waze/TruckMap listings, and a Street View pano (Aug 2025) showing the blue 'TSG' logo on the building wall. Locked center on the building footprint at 33.50560,-84.34810.",
+    "truckGate": "A chain-link perimeter fence is visible along the property line (Sep 2025 Street View). No barrier arm or sliding/swing gate structure was visible at the driveway connecting the site to S Main Street, and the road frontage is a heavily wooded buffer that obscures the exact entrance in Street View. truckGate marked false (fence present but no controlled checkpoint structure confirmed); flagged uncertain. The truckGate geofence box is the probable driveway-to-road junction at the SW.",
+    "guardShack": "No staffed booth visible at any entrance in available imagery. guardShack=false, remoteGs=false. Flagged uncertain due to wooded entrance buffer.",
+    "dockDoors": "Long dock-door banks visible along the SW and SE faces of the building with ~26 trailers backed in / parked. Counted roughly 32 doors across the truck-court faces; banded 25-50. The CRE listing cites 28 dock doors which corroborates the 25-50 band. Low-confidence exact count.",
+    "shipRcvSeparate": "Dock doors appear on two adjacent building faces (SW and SE) sharing one continuous truck court rather than two physically separate clusters. Treated as a single dock operation; shipRcvSeparate=false but flagged uncertain.",
+    "dropYard": "A large paved truck court runs the length of the building's SW/SE faces holding ~26 parked trailers - a dedicated trailer-storage / drop area. dropYard=true, dropArea 25-50.",
+    "railServed": "A rail line runs immediately along the NE side of the building, buffered by a tree strip; no clearly visible active spur entering the footprint in imagery, but the CRE listing explicitly cites '4 rail doors'. railServed=true on the strength of the listing; flagged uncertain since the spur connection is not confirmable from overhead imagery.",
+    "drivewayLong": "Internal access road and truck court are long and deep - easily holds 3+ trucks queued. postGateStaging=true (open court inside the property before docks).",
+    "urbanRural": "South-metro-Atlanta industrial corridor along S Main St / GA-54 with continuous development - Urban.",
+    "siteArea": "Perimeter box ~24 acres covering the building, truck courts, trailer parking and car parking. Approximate."
+  },
+  "method": "deep-audit"
+}

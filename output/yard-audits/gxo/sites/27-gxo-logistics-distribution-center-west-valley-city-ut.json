@@ -1,0 +1,49 @@
+{
+  "name": "GXO Logistics Distribution Center - West Valley City UT",
+  "type": "Distribution Center",
+  "coords": { "lat": 40.723419, "lng": -111.992864 },
+  "geofences": {
+    "perimeter": { "south": 40.72040, "west": -111.99370, "north": 40.72615, "east": -111.99150 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 40.72080, "west": -111.99250, "north": 40.72280, "east": -111.99155 }
+    ],
+    "dockAprons": [
+      { "south": 40.72060, "west": -111.99360, "north": 40.72600, "east": -111.99330 },
+      { "south": 40.72060, "west": -111.99230, "north": 40.72600, "east": -111.99200 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 27.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.723419,-111.992864,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Open site - no perimeter fence or gate on either the west (Commerce Center Dr) or east dock side. Dock aprons and parking are directly accessible from public roads (confirmed in 2025-07 Street View).",
+    "shipRcvSeparate": "Cross-dock building - dock doors run along both the west and east long faces; trailers backed in on both sides.",
+    "dockDoors": "Long cross-dock building with continuous dock bands on west and east faces; combined doors estimated 100+.",
+    "dropYard": "Row of trailers parked without tractors in the open paved yard off the SE corner.",
+    "drivewayShort": "Dock aprons open straight off the public road - minimal stacking depth, no controlled approach.",
+    "siteAreaAcres": "Perimeter derived from building footprint plus the east trailer yard."
+  },
+  "method": "deep-audit"
+}

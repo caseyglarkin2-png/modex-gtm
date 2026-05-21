@@ -1,0 +1,52 @@
+{
+  "name": "UNFI - New Stanton PA DC (Hunker)",
+  "type": "Distribution Center",
+  "coords": { "lat": 40.21250, "lng": -79.61300 },
+  "geofences": {
+    "perimeter": { "south": 40.20850, "west": -79.61650, "north": 40.21620, "east": -79.61020 },
+    "truckGate": { "south": 40.21300, "west": -79.61470, "north": 40.21380, "east": -79.61370 },
+    "dropYards": [
+      { "south": 40.21210, "west": -79.61620, "north": 40.21470, "east": -79.61490 },
+      { "south": 40.21350, "west": -79.61320, "north": 40.21470, "east": -79.61120 }
+    ],
+    "dockAprons": [
+      { "south": 40.21180, "west": -79.61560, "north": 40.21380, "east": -79.61480 },
+      { "south": 40.21170, "west": -79.61460, "north": 40.21250, "east": -79.61100 }
+    ],
+    "staging": { "south": 40.21300, "west": -79.61500, "north": 40.21420, "east": -79.61370 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 95,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 130,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 52.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.21250,-79.61300,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "scale", "multiStep", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Single controlled access road off the I-70 / PA Turnpike New Stanton interchange roundabout, crossing a bridge over Sewickley Creek; Street View shows 'ALL TRUCK TRAFFIC KEEP RIGHT' and 'SPEED LIMIT 15' signage directing trucks into the property — a controlled industrial entrance.",
+    "guardShack": "No guard booth resolvable at the property line; Street View coverage stops at the public bridge and the gate point sits inside the property. The only small structure visible is mid-yard. Marked remoteGs / no shack at medium confidence.",
+    "shipRcvSeparate": "Long dock bank on the west building face plus a separate dock bank along the south/north faces of the main building — two distinct dock clusters.",
+    "dropYard": "Large trailer staging lot on the NW (50+ trailer stalls) plus angled trailer drop along the north building edge.",
+    "railServed": "Active rail line runs along the east/north property edge with a spur reaching the building.",
+    "buildingCount": "Main DC building plus a long separate dock building on the west side.",
+    "fastLaneOpportunity": "Wide paved apron at the entrance and ample yard width to add an express/bypass lane.",
+    "scale": "No truck scale clearly visible; left uncertain."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,46 @@
+{
+  "name": "H-E-B eCommerce Fulfillment Center - Katy - Katy TX",
+  "type": "E-commerce Fulfillment Center",
+  "coords": { "lat": 29.803050, "lng": -95.760550 },
+  "geofences": {
+    "perimeter": { "south": 29.801750, "west": -95.761350, "north": 29.804000, "east": -95.759600 },
+    "truckGate": { "south": 29.803280, "west": -95.761200, "north": 29.803560, "east": -95.760950 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 29.802550, "west": -95.761150, "north": 29.804000, "east": -95.760700 }
+    ],
+    "staging": { "south": 29.802550, "west": -95.760950, "north": 29.804000, "east": -95.760450 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14, "trailersVisible": 7, "trailerParkingCapacity": 12,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 10.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.803050,-95.760550,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dropArea", "trailersVisible"],
+  "fieldNotes": {
+    "truckGate": "Truck entrance is a wide open curb-cut off Elrod Rd at the NW of the property; green ornamental security fence runs along the road frontage but terminates open at the driveway - no barrier arm, sliding gate, or pinch-point checkpoint. Confirmed in 2023-07 Street View.",
+    "guardShack": "No guard booth at the truck entrance; only a tall H-E-B monument sign at the corner.",
+    "remoteGs": "False because there is no truck gate at all.",
+    "postGateStaging": "Wide paved dock apron inside the property line provides ample internal queue space before the dock doors.",
+    "drivewayLong": "Dock apron is deep enough to stack 3+ trucks between the road and the dock face.",
+    "dockDoors": "~12-15 dock doors with awnings along the entire west building face, confirmed in Street View; banded 10-25.",
+    "dropArea": "A few trailers parked on the apron without tractors; not a formal striped drop lot. Low confidence.",
+    "fastLaneOpportunity": "Very wide driveway apron and unused paved width could support an express/bypass lane.",
+    "urbanRural": "Within the dense Katy suburban fabric of metro Houston, surrounded by residential subdivisions.",
+    "trailersVisible": "Approx 7 trailers/trucks counted in captured imagery at docks and on apron; imagery dates vary."
+  },
+  "method": "deep-audit"
+}

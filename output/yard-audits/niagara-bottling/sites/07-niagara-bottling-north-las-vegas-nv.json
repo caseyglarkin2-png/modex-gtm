@@ -1,0 +1,53 @@
+{
+  "name": "Niagara Bottling - North Las Vegas NV",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 36.263400, "lng": -115.030700 },
+  "geofences": {
+    "perimeter": { "south": 36.26150, "west": -115.03200, "north": 36.26580, "east": -115.02960 },
+    "truckGate": { "south": 36.26520, "west": -115.03040, "north": 36.26565, "east": -115.02980 },
+    "dropYards": [
+      { "south": 36.26180, "west": -115.03010, "north": 36.26500, "east": -115.02970 }
+    ],
+    "dockAprons": [
+      { "south": 36.26180, "west": -115.03030, "north": 36.26500, "east": -115.02990 }
+    ],
+    "staging": { "south": 36.26500, "west": -115.03010, "north": 36.26560, "east": -115.02975 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40,
+    "trailersVisible": 30,
+    "trailerParkingCapacity": 50,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 28.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.263400,-115.030700,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 3, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "entryLanes"],
+  "fieldNotes": {
+    "facility": "Niagara Bottling North Las Vegas, 6445 E El Campo Grande Ave. Confirmed by red 'niagara' logo on the building front and a blue 'niagara EXIT GATE' sign in Street View (2026-02). Modern build-to-suit in a dense industrial park.",
+    "truckGate": "Z20 satellite shows a controlled truck gate at the NE corner where the truck drive meets the road - barrier-arm elements across the drive, chain-link perimeter fence, and a tractor staged at the gate.",
+    "guardShack": "No clearly staffed multi-window guard booth at the lane; the gate uses barrier arms. Treated as automated / remote check-in.",
+    "remoteGs": "Controlled gate (barrier arms, signed EXIT GATE) with no manned booth implies kiosk / app / remote check-in.",
+    "entryExitSeparate": "Z21 satellite shows three lanes painted 'EXIT' with out-pointing arrows near the NE corner, separate from the inbound truck lane - distinct in/out gates.",
+    "exitLanes": "Three painted EXIT lanes visible. entryLanes estimated at 1 (inbound), low-confidence.",
+    "dockDoors": "Long row of dock doors along the full east face with multiple trailers backed in; estimated ~40 doors. Counted from z19 imagery, flagged approximate.",
+    "dropArea": "Large dock apron / trailer yard along the east face shared with the neighboring building, full of parked trailers.",
+    "fastLaneOpportunity": "Open desert and unused paved width on the west side and at the gate apron; room to add an express bypass lane.",
+    "urbanRural": "Dense North Las Vegas industrial/warehouse park - Urban.",
+    "buildingCount": "Single large Niagara building; the building immediately east is a separate tenant sharing the dock-yard drive aisle."
+  },
+  "method": "deep-audit"
+}

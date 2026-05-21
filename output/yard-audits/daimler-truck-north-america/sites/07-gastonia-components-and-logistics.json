@@ -1,0 +1,57 @@
+{
+  "name": "Gastonia Components and Logistics - Gastonia NC",
+  "type": "Component / parts subassembly and logistics plant",
+  "coords": { "lat": 35.288, "lng": -81.2052 },
+  "geofences": {
+    "perimeter": { "south": 35.2858, "west": -81.2082, "north": 35.2902, "east": -81.2010 },
+    "truckGate": { "south": 35.28785, "west": -81.20325, "north": 35.28825, "east": -81.20275 },
+    "dropYards": [
+      { "south": 35.2884, "west": -81.2072, "north": 35.2900, "east": -81.2050 }
+    ],
+    "dockAprons": [
+      { "south": 35.2884, "west": -81.2068, "north": 35.2890, "east": -81.2045 },
+      { "south": 35.2868, "west": -81.2074, "north": 35.2884, "east": -81.2068 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 95,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 73.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.288,-81.2052,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "shipRcvSeparate"],
+  "fieldNotes": {
+    "location": "Geocoded point (GEOMETRIC_CENTER, moved only 44m) landed accurately on the campus. Confirmed: a large white-roofed components/logistics plant plus a separate gray-roofed building to the east, on a wooded campus off Tulip Drive south of I-85. DTNA / Waze listings confirm 'Daimler Truck North America Components & Logistics, 1400 Tulip Dr.'",
+    "truckGate": "Controlled vehicle entrance on the SE: Street View (captured 2026-02) shows a checkpoint canopy/gatehouse with orange bollards lining the lane and chain-link fencing; satellite shows a small white-canopy structure spanning the entry drive with a trailer passing through.",
+    "guardShack": "A small canopied gatehouse structure sits over the SE entry lane. Functions as the staffed check-in point. Discrete booth form not perfectly resolvable; a 24/7 logistics plant of this scale runs manned security -> guardShack=true, remoteGs=false. Flagged uncertain.",
+    "postGateStaging": "Wide paved aprons and the north drop yard provide internal holding before the docks.",
+    "drivewayLong": "Internal drives from the SE gate run a long way around the plant to the north drop yard and docks; easily 3+ trucks.",
+    "dockDoors": "Estimated 25-50: dock doors with trailers backed in along the north face, plus banks on the west and SW faces.",
+    "dropArea": "25-50 trailers parked in angled stalls in the dedicated north drop yard.",
+    "shipRcvSeparate": "Dock activity on multiple distinct building faces (north, west, SW) consistent with separate shipping/receiving clusters; medium confidence.",
+    "multipleFacilities": "Campus has two distinct large buildings -- the main white components plant and a separate gray-roofed building to the east -- linked by an internal road.",
+    "dropYard": "Dedicated trailer-storage lot on the north side, full of parked trailers in marked angled stalls, separate from active dock staging.",
+    "railServed": "No rail spur observed entering the property.",
+    "urbanRural": "Edge-of-town site heavily ringed by woods, fronting I-85 on the south edge of Gastonia (a small city in the Charlotte metro). Per rubric tie-breaker -> Rural.",
+    "scale": "No truck scale visible in the entry path.",
+    "entryLanes": "Single entry lane through the SE gate canopy as best resolved; flagged uncertain."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,64 @@
+{
+  "name": "High West Distillery - Wanship UT",
+  "type": "Distillery / Production Facility",
+  "coords": { "lat": 40.808264, "lng": -111.444419 },
+  "geofences": {
+    "perimeter": { "south": 40.806600, "west": -111.445800, "north": 40.809400, "east": -111.443200 },
+    "truckGate": { "south": 40.798100, "west": -111.447400, "north": 40.798500, "east": -111.446900 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 40.808500, "west": -111.444950, "north": 40.808850, "east": -111.444550 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 4,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 3,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 11.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.808264,-111.444419,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": true,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "connectivityIssue", "multiStep", "buildingCount"],
+  "fieldNotes": {
+    "truckGate": "High West's official distillery directions state visitors and deliveries follow Old Lincoln Highway ~2 miles to the 'Blue Sky Ranch gatehouse', after which they are directed to the distillery. The entire Blue Sky Ranch is gated private property reached by one access road — so a controlled property gate exists. Marked uncertain because the gatehouse structure could not be pinpointed in satellite imagery (no Street View on the private road) and it controls the whole ranch resort, not the distillery dock specifically. The truckGate geofence is an approximate box near the base parking area.",
+    "guardShack": "A 'gatehouse' is explicitly described in High West's official directions, implying a staffed booth at the ranch entrance. Could not be visually confirmed in imagery; marked uncertain.",
+    "remoteGs": "False because a staffed gatehouse is described rather than a kiosk/call-box.",
+    "drivewayLong": "Access to the distillery is a long winding private mountain road from the base parking area up to the building cluster; ample queue depth.",
+    "dockDoors": "Craft distillery. The NW face of the main distillery building has a covered/canopy loading apron with a few tanks and equipment; ~3-5 service/loading doors estimated. No large freight-dock bank. Low confidence on exact count.",
+    "dropArea": "No marked trailer-parking stalls with parked trailers. Lots near the distillery are visitor/employee car parking.",
+    "buildingCount": "The distillery complex is several connected/adjacent red-roof structures (distillery, refectory/restaurant, general store). Treated as one campus; multipleFacilities left false as it is a single integrated complex. buildingCount ~3 distinct roof sections — marked uncertain.",
+    "urbanRural": "Remote hillside in the mountains near Wanship/Park City, surrounded by open rangeland on the private Blue Sky Ranch; clearly Rural.",
+    "connectivityIssue": "Isolated mountain location far from any town, on a large private ranch — cellular coverage likely weak. Medium confidence.",
+    "multiStep": "Possible second checkpoint (ranch gatehouse, then distillery arrival) but no clear evidence of a separate dock-side checkpoint; left false, flagged uncertain.",
+    "railServed": "No rail spur into the property."
+  },
+  "method": "deep-audit"
+}

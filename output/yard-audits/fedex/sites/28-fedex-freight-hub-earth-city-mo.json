@@ -1,0 +1,51 @@
+{
+  "name": "FedEx Freight Hub - Earth City MO (St. Louis, STL)",
+  "type": "Freight LTL hub service center (~240 doors)",
+  "coords": { "lat": 38.8350, "lng": -90.5210 },
+  "geofences": {
+    "perimeter": { "south": 38.8330, "west": -90.5240, "north": 38.8378, "east": -90.5165 },
+    "truckGate": { "south": 38.8334, "west": -90.5228, "north": 38.8340, "east": -90.5218 },
+    "dropYards": [
+      { "south": 38.8345, "west": -90.5200, "north": 38.8375, "east": -90.5168 },
+      { "south": 38.8358, "west": -90.5240, "north": 38.8375, "east": -90.5215 }
+    ],
+    "dockAprons": [
+      { "south": 38.8344, "west": -90.5240, "north": 38.8354, "east": -90.5180 }
+    ],
+    "staging": { "south": 38.8340, "west": -90.5232, "north": 38.8346, "east": -90.5210 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 240, "trailersVisible": 320, "trailerParkingCapacity": 600,
+    "truckGateCount": 1, "buildingCount": 3, "siteAreaAcres": 86.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.8350,-90.5210,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "dockDoorCount", "truckGate"],
+  "fieldNotes": {
+    "location": "Roster address '3300 Rider Trl S, Earth City MO' and coordinates (38.761891, -90.455962, ROOFTOP) resolve to a multi-story glass OFFICE building in the Earth City office park - NOT a freight hub. The correct FedEx Freight STL break-bulk hub is at 3951 New Town Blvd, St Charles, MO 63301, centered approximately 38.8350, -90.5210 (across the Missouri River, ~9 km NW of the roster point). Confirmed by satellite showing a classic LTL break-bulk cross-dock building with hundreds of trailers, and by the FedEx Freight STL service-center locator page (local.fedex.com/mo/saint-charles/freight-STL).",
+    "truckGate": "Large dedicated LTL hub property; truck yard access controlled via the New Town Blvd access road on the south/SW side. Perimeter is defined; exact gate position inferred from the access corridor (Street View coverage near the gate is limited). FedEx Freight break-bulk hubs are universally gated.",
+    "guardShack": "Not directly resolved in available imagery. A ~240-door break-bulk hub is staffed-guard-controlled at the truck gate as a FedEx Freight network standard; classified true with medium confidence.",
+    "dockDoors": "Long E-W cross-dock break-bulk building with a dense regular rhythm of dock doors on both long faces plus a perpendicular north wing; trailers backed in along both faces. Cited in trucking forums as a ~240-door hub - firmly 50+ band.",
+    "dropArea": "Vast paved trailer drop yard north and east of the cross-dock holds hundreds of parked trailers/pups without tractors, including organized rows; firmly 50+.",
+    "dropYard": "Dedicated trailer-storage lots flank the cross-dock on the north and east sides.",
+    "drivewayLong": "Large paved yard between the gate and the docks provides ample room for a 3+ truck queue.",
+    "fastLaneOpportunity": "Wide paved approach and large yard near the gate give physical room to add a dedicated bypass/express lane.",
+    "entryLanes": "Estimated 2 inbound / 2 outbound lanes at the controlled gate; exact count not resolvable from overhead imagery.",
+    "buildingCount": "Main cross-dock break-bulk building (with north wing), an office/dispatch building at the south face, and a separate maintenance/shop building on the east side = 3.",
+    "railServed": "No rail spur enters the property; classified false.",
+    "siteAreaAcres": "Derived from the perimeter box (~534m x ~650m), ~86 acres."
+  },
+  "method": "deep-audit"
+}

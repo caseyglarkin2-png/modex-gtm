@@ -1,0 +1,50 @@
+{
+  "name": "CJ Logistics - Romeoville IL (Pinnacle Drive)",
+  "type": "Distribution Center",
+  "coords": { "lat": 41.6042, "lng": -88.1158 },
+  "geofences": {
+    "perimeter": { "south": 41.6028, "west": -88.1172, "north": 41.6052, "east": -88.1140 },
+    "truckGate": { "south": 41.6033, "west": -88.1145, "north": 41.6038, "east": -88.1138 },
+    "dropYards": [
+      { "south": 41.6029, "west": -88.1168, "north": 41.6034, "east": -88.1144 }
+    ],
+    "dockAprons": [
+      { "south": 41.6033, "west": -88.1168, "north": 41.6037, "east": -88.1144 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 30,
+    "trailerParkingCapacity": 45,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 17.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.6042,-88.1158,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount"],
+  "fieldNotes": {
+    "location": "Confirmed 500 S Pinnacle Dr, Romeoville IL - CJ Logistics America DC, a modern speculative-build warehouse in a Will County industrial park, occupied/operated by CJ Logistics (TruckMap, FDA inspection records, Birdeye reviews all cite this address).",
+    "truckGate": "Truck court on the south side is enclosed by a chain-link perimeter fence; the truck driveway enters from Pinnacle Dr through a fence gap with a sliding gate (visible in 2025 Street View). Controlled truck entrance.",
+    "guardShack": "No guard booth structure visible at the truck-court driveway in 2025 Street View - entry is via fenced gate only, hence remoteGs true.",
+    "dockDoors": "Single dock bank along the south face only; north face is car parking with no docks. Estimated ~55 doors - rear-load layout.",
+    "shipRcvSeparate": "False - all docks on one face (south); no second dock bank.",
+    "dropYard": "Row of trailers in marked drop stalls on the south side of the truck court, separate from the dock apron.",
+    "urbanRural": "Romeoville is a dense Chicago-area logistics corridor - Urban.",
+    "railServed": "No rail spur visible."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,5463 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.6802,
+              38.3838
+            ],
+            [
+              -85.6753,
+              38.3838
+            ],
+            [
+              -85.6753,
+              38.3885
+            ],
+            [
+              -85.6802,
+              38.3885
+            ],
+            [
+              -85.6802,
+              38.3838
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Jeffersonville I - Jeffersonville IN",
+        "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 113,
+          "trailersVisible": 35,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 55.3,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.67885,
+              38.38735
+            ],
+            [
+              -85.67835,
+              38.38735
+            ],
+            [
+              -85.67835,
+              38.38775
+            ],
+            [
+              -85.67885,
+              38.38775
+            ],
+            [
+              -85.67885,
+              38.38735
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Jeffersonville I - Jeffersonville IN",
+        "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.67935,
+              38.3842
+            ],
+            [
+              -85.67835,
+              38.3842
+            ],
+            [
+              -85.67835,
+              38.3877
+            ],
+            [
+              -85.67935,
+              38.3877
+            ],
+            [
+              -85.67935,
+              38.3842
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Jeffersonville I - Jeffersonville IN",
+        "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.6791,
+              38.3842
+            ],
+            [
+              -85.67845,
+              38.3842
+            ],
+            [
+              -85.67845,
+              38.3877
+            ],
+            [
+              -85.6791,
+              38.3877
+            ],
+            [
+              -85.6791,
+              38.3842
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Jeffersonville I - Jeffersonville IN",
+        "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.6772,
+              38.3847
+            ],
+            [
+              -85.6764,
+              38.3847
+            ],
+            [
+              -85.6764,
+              38.3869
+            ],
+            [
+              -85.6772,
+              38.3869
+            ],
+            [
+              -85.6772,
+              38.3847
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Jeffersonville I - Jeffersonville IN",
+        "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.785,
+              34.9862
+            ],
+            [
+              -89.7805,
+              34.9862
+            ],
+            [
+              -89.7805,
+              34.9915
+            ],
+            [
+              -89.785,
+              34.9915
+            ],
+            [
+              -89.785,
+              34.9862
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Mississippi - Olive Branch MS",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 59.8,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.7848,
+              34.9866
+            ],
+            [
+              -89.7838,
+              34.9866
+            ],
+            [
+              -89.7838,
+              34.9912
+            ],
+            [
+              -89.7848,
+              34.9912
+            ],
+            [
+              -89.7848,
+              34.9866
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Mississippi - Olive Branch MS",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.7822,
+              34.9866
+            ],
+            [
+              -89.7808,
+              34.9866
+            ],
+            [
+              -89.7808,
+              34.9912
+            ],
+            [
+              -89.7822,
+              34.9912
+            ],
+            [
+              -89.7822,
+              34.9866
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Mississippi - Olive Branch MS",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.7842,
+              34.9866
+            ],
+            [
+              -89.7838,
+              34.9866
+            ],
+            [
+              -89.7838,
+              34.9912
+            ],
+            [
+              -89.7842,
+              34.9912
+            ],
+            [
+              -89.7842,
+              34.9866
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Mississippi - Olive Branch MS",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.7822,
+              34.9866
+            ],
+            [
+              -89.7818,
+              34.9866
+            ],
+            [
+              -89.7818,
+              34.9912
+            ],
+            [
+              -89.7822,
+              34.9912
+            ],
+            [
+              -89.7822,
+              34.9866
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Mississippi - Olive Branch MS",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.6182,
+              40.5969
+            ],
+            [
+              -75.6151,
+              40.5969
+            ],
+            [
+              -75.6151,
+              40.5992
+            ],
+            [
+              -75.6182,
+              40.5992
+            ],
+            [
+              -75.6182,
+              40.5969
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Allentown - Northampton PA",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 16.6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.6175,
+              40.5984
+            ],
+            [
+              -75.6158,
+              40.5984
+            ],
+            [
+              -75.6158,
+              40.5991
+            ],
+            [
+              -75.6175,
+              40.5991
+            ],
+            [
+              -75.6175,
+              40.5984
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Allentown - Northampton PA",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8316,
+              32.63
+            ],
+            [
+              -96.8278,
+              32.63
+            ],
+            [
+              -96.8278,
+              32.6336
+            ],
+            [
+              -96.8316,
+              32.6336
+            ],
+            [
+              -96.8316,
+              32.63
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Dallas I - DeSoto TX",
+        "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": true,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 80,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 35.3,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.83025,
+              32.63035
+            ],
+            [
+              -96.8296,
+              32.63035
+            ],
+            [
+              -96.8296,
+              32.63075
+            ],
+            [
+              -96.83025,
+              32.63075
+            ],
+            [
+              -96.83025,
+              32.63035
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Dallas I - DeSoto TX",
+        "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8316,
+              32.6304
+            ],
+            [
+              -96.8305,
+              32.6304
+            ],
+            [
+              -96.8305,
+              32.6328
+            ],
+            [
+              -96.8316,
+              32.6328
+            ],
+            [
+              -96.8316,
+              32.6304
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Dallas I - DeSoto TX",
+        "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8305,
+              32.6304
+            ],
+            [
+              -96.8281,
+              32.6304
+            ],
+            [
+              -96.8281,
+              32.6312
+            ],
+            [
+              -96.8305,
+              32.6312
+            ],
+            [
+              -96.8305,
+              32.6304
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Dallas I - DeSoto TX",
+        "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8307,
+              32.6311
+            ],
+            [
+              -96.8281,
+              32.6311
+            ],
+            [
+              -96.8281,
+              32.6314
+            ],
+            [
+              -96.8307,
+              32.6314
+            ],
+            [
+              -96.8307,
+              32.6311
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Dallas I - DeSoto TX",
+        "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8307,
+              32.6329
+            ],
+            [
+              -96.8281,
+              32.6329
+            ],
+            [
+              -96.8281,
+              32.6332
+            ],
+            [
+              -96.8307,
+              32.6332
+            ],
+            [
+              -96.8307,
+              32.6329
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Dallas I - DeSoto TX",
+        "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8307,
+              32.62985
+            ],
+            [
+              -96.8281,
+              32.62985
+            ],
+            [
+              -96.8281,
+              32.6303
+            ],
+            [
+              -96.8307,
+              32.6303
+            ],
+            [
+              -96.8307,
+              32.62985
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Dallas I - DeSoto TX",
+        "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.231,
+              33.8404
+            ],
+            [
+              -117.227,
+              33.8404
+            ],
+            [
+              -117.227,
+              33.8434
+            ],
+            [
+              -117.231,
+              33.8434
+            ],
+            [
+              -117.231,
+              33.8404
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Perris I - Perris CA",
+        "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 170,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 30.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2311,
+              33.8426
+            ],
+            [
+              -117.2305,
+              33.8426
+            ],
+            [
+              -117.2305,
+              33.84305
+            ],
+            [
+              -117.2311,
+              33.84305
+            ],
+            [
+              -117.2311,
+              33.8426
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Perris I - Perris CA",
+        "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2303,
+              33.8425
+            ],
+            [
+              -117.2271,
+              33.8425
+            ],
+            [
+              -117.2271,
+              33.8434
+            ],
+            [
+              -117.2303,
+              33.8434
+            ],
+            [
+              -117.2303,
+              33.8425
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Perris I - Perris CA",
+        "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2308,
+              33.8404
+            ],
+            [
+              -117.2271,
+              33.8404
+            ],
+            [
+              -117.2271,
+              33.8411
+            ],
+            [
+              -117.2308,
+              33.8411
+            ],
+            [
+              -117.2308,
+              33.8404
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Perris I - Perris CA",
+        "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2305,
+              33.8424
+            ],
+            [
+              -117.2273,
+              33.8424
+            ],
+            [
+              -117.2273,
+              33.8428
+            ],
+            [
+              -117.2305,
+              33.8428
+            ],
+            [
+              -117.2305,
+              33.8424
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Perris I - Perris CA",
+        "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2305,
+              33.841
+            ],
+            [
+              -117.2273,
+              33.841
+            ],
+            [
+              -117.2273,
+              33.8413
+            ],
+            [
+              -117.2305,
+              33.8413
+            ],
+            [
+              -117.2305,
+              33.841
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Perris I - Perris CA",
+        "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2328,
+              33.83795
+            ],
+            [
+              -117.2279,
+              33.83795
+            ],
+            [
+              -117.2279,
+              33.84035
+            ],
+            [
+              -117.2328,
+              33.84035
+            ],
+            [
+              -117.2328,
+              33.83795
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Perris II - Perris CA",
+        "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 29.9,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2317,
+              33.8415
+            ],
+            [
+              -117.2308,
+              33.8415
+            ],
+            [
+              -117.2308,
+              33.8421
+            ],
+            [
+              -117.2317,
+              33.8421
+            ],
+            [
+              -117.2317,
+              33.8415
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Perris II - Perris CA",
+        "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2321,
+              33.84035
+            ],
+            [
+              -117.2279,
+              33.84035
+            ],
+            [
+              -117.2279,
+              33.8413
+            ],
+            [
+              -117.2321,
+              33.8413
+            ],
+            [
+              -117.2321,
+              33.84035
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Perris II - Perris CA",
+        "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2328,
+              33.8398
+            ],
+            [
+              -117.2279,
+              33.8398
+            ],
+            [
+              -117.2279,
+              33.84035
+            ],
+            [
+              -117.2328,
+              33.84035
+            ],
+            [
+              -117.2328,
+              33.8398
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Perris II - Perris CA",
+        "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2328,
+              33.83795
+            ],
+            [
+              -117.2279,
+              33.83795
+            ],
+            [
+              -117.2279,
+              33.8385
+            ],
+            [
+              -117.2328,
+              33.8385
+            ],
+            [
+              -117.2328,
+              33.83795
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Perris II - Perris CA",
+        "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.6629,
+              33.96465
+            ],
+            [
+              -117.66045,
+              33.96465
+            ],
+            [
+              -117.66045,
+              33.96875
+            ],
+            [
+              -117.6629,
+              33.96875
+            ],
+            [
+              -117.6629,
+              33.96465
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Chino - Chino CA",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 105,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 80,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 25.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.66095,
+              33.9681
+            ],
+            [
+              -117.6603,
+              33.9681
+            ],
+            [
+              -117.6603,
+              33.96865
+            ],
+            [
+              -117.66095,
+              33.96865
+            ],
+            [
+              -117.66095,
+              33.9681
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Chino - Chino CA",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.6629,
+              33.965
+            ],
+            [
+              -117.662,
+              33.965
+            ],
+            [
+              -117.662,
+              33.9672
+            ],
+            [
+              -117.6629,
+              33.9672
+            ],
+            [
+              -117.6629,
+              33.965
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Chino - Chino CA",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.6629,
+              33.965
+            ],
+            [
+              -117.6622,
+              33.965
+            ],
+            [
+              -117.6622,
+              33.9681
+            ],
+            [
+              -117.6629,
+              33.9681
+            ],
+            [
+              -117.6629,
+              33.965
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Chino - Chino CA",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.661,
+              33.965
+            ],
+            [
+              -117.66045,
+              33.965
+            ],
+            [
+              -117.66045,
+              33.9681
+            ],
+            [
+              -117.661,
+              33.9681
+            ],
+            [
+              -117.661,
+              33.965
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Chino - Chino CA",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.68085,
+              38.389
+            ],
+            [
+              -85.6767,
+              38.389
+            ],
+            [
+              -85.6767,
+              38.3931
+            ],
+            [
+              -85.68085,
+              38.3931
+            ],
+            [
+              -85.68085,
+              38.389
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Jeffersonville II - Jeffersonville IN",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 22,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 39.4,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.6788,
+              38.3898
+            ],
+            [
+              -85.6769,
+              38.3898
+            ],
+            [
+              -85.6769,
+              38.3925
+            ],
+            [
+              -85.6788,
+              38.3925
+            ],
+            [
+              -85.6788,
+              38.3898
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Jeffersonville II - Jeffersonville IN",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.7572,
+              38.3738
+            ],
+            [
+              -85.7478,
+              38.3738
+            ],
+            [
+              -85.7478,
+              38.3806
+            ],
+            [
+              -85.7572,
+              38.3806
+            ],
+            [
+              -85.7572,
+              38.3738
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Jeffersonville III - Sellersburg IN",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 96,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.748,
+              38.3765
+            ],
+            [
+              -85.747,
+              38.3765
+            ],
+            [
+              -85.747,
+              38.3773
+            ],
+            [
+              -85.748,
+              38.3773
+            ],
+            [
+              -85.748,
+              38.3765
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Jeffersonville III - Sellersburg IN",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.7525,
+              38.3756
+            ],
+            [
+              -85.7495,
+              38.3756
+            ],
+            [
+              -85.7495,
+              38.3784
+            ],
+            [
+              -85.7525,
+              38.3784
+            ],
+            [
+              -85.7525,
+              38.3756
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Jeffersonville III - Sellersburg IN",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.7545,
+              38.376
+            ],
+            [
+              -85.7505,
+              38.376
+            ],
+            [
+              -85.7505,
+              38.379
+            ],
+            [
+              -85.7545,
+              38.379
+            ],
+            [
+              -85.7545,
+              38.376
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Jeffersonville III - Sellersburg IN",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.7565,
+              38.3742
+            ],
+            [
+              -85.752,
+              38.3742
+            ],
+            [
+              -85.752,
+              38.3776
+            ],
+            [
+              -85.7565,
+              38.3776
+            ],
+            [
+              -85.7565,
+              38.3742
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Jeffersonville III - Sellersburg IN",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8036,
+              32.6327
+            ],
+            [
+              -96.799,
+              32.6327
+            ],
+            [
+              -96.799,
+              32.6418
+            ],
+            [
+              -96.8036,
+              32.6418
+            ],
+            [
+              -96.8036,
+              32.6327
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Dallas III - Lancaster TX",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 78,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8026,
+              32.6329
+            ],
+            [
+              -96.8014,
+              32.6329
+            ],
+            [
+              -96.8014,
+              32.6337
+            ],
+            [
+              -96.8026,
+              32.6337
+            ],
+            [
+              -96.8026,
+              32.6329
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Dallas III - Lancaster TX",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.803,
+              32.6327
+            ],
+            [
+              -96.7995,
+              32.6327
+            ],
+            [
+              -96.7995,
+              32.635
+            ],
+            [
+              -96.803,
+              32.635
+            ],
+            [
+              -96.803,
+              32.6327
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Dallas III - Lancaster TX",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8033,
+              32.636
+            ],
+            [
+              -96.8023,
+              32.636
+            ],
+            [
+              -96.8023,
+              32.641
+            ],
+            [
+              -96.8033,
+              32.641
+            ],
+            [
+              -96.8033,
+              32.636
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Dallas III - Lancaster TX",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.803,
+              32.6335
+            ],
+            [
+              -96.8023,
+              32.6335
+            ],
+            [
+              -96.8023,
+              32.6408
+            ],
+            [
+              -96.803,
+              32.6408
+            ],
+            [
+              -96.803,
+              32.6335
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Dallas III - Lancaster TX",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.7998,
+              32.6335
+            ],
+            [
+              -96.799,
+              32.6335
+            ],
+            [
+              -96.799,
+              32.6408
+            ],
+            [
+              -96.7998,
+              32.6408
+            ],
+            [
+              -96.7998,
+              32.6335
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Dallas III - Lancaster TX",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8005,
+              32.6355
+            ],
+            [
+              -96.7968,
+              32.6355
+            ],
+            [
+              -96.7968,
+              32.642
+            ],
+            [
+              -96.8005,
+              32.642
+            ],
+            [
+              -96.8005,
+              32.6355
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Dallas IV - Lancaster TX",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 95,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 170,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 62,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.7998,
+              32.6356
+            ],
+            [
+              -96.7988,
+              32.6356
+            ],
+            [
+              -96.7988,
+              32.6364
+            ],
+            [
+              -96.7998,
+              32.6364
+            ],
+            [
+              -96.7998,
+              32.6356
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Dallas IV - Lancaster TX",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.7982,
+              32.6362
+            ],
+            [
+              -96.797,
+              32.6362
+            ],
+            [
+              -96.797,
+              32.6408
+            ],
+            [
+              -96.7982,
+              32.6408
+            ],
+            [
+              -96.7982,
+              32.6362
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Dallas IV - Lancaster TX",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8005,
+              32.6362
+            ],
+            [
+              -96.7996,
+              32.6362
+            ],
+            [
+              -96.7996,
+              32.6408
+            ],
+            [
+              -96.8005,
+              32.6408
+            ],
+            [
+              -96.8005,
+              32.6362
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Dallas IV - Lancaster TX",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.7998,
+              32.6362
+            ],
+            [
+              -96.799,
+              32.6362
+            ],
+            [
+              -96.799,
+              32.6409
+            ],
+            [
+              -96.7998,
+              32.6409
+            ],
+            [
+              -96.7998,
+              32.6362
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Dallas IV - Lancaster TX",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.7988,
+              32.6362
+            ],
+            [
+              -96.798,
+              32.6362
+            ],
+            [
+              -96.798,
+              32.6409
+            ],
+            [
+              -96.7988,
+              32.6409
+            ],
+            [
+              -96.7988,
+              32.6362
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Dallas IV - Lancaster TX",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8052,
+              32.6306
+            ],
+            [
+              -96.802,
+              32.6306
+            ],
+            [
+              -96.802,
+              32.6342
+            ],
+            [
+              -96.8052,
+              32.6342
+            ],
+            [
+              -96.8052,
+              32.6306
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Dallas II - Lancaster TX",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 26,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8045,
+              32.6335
+            ],
+            [
+              -96.8036,
+              32.6335
+            ],
+            [
+              -96.8036,
+              32.6342
+            ],
+            [
+              -96.8045,
+              32.6342
+            ],
+            [
+              -96.8045,
+              32.6335
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Dallas II - Lancaster TX",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.803,
+              32.631
+            ],
+            [
+              -96.8021,
+              32.631
+            ],
+            [
+              -96.8021,
+              32.6338
+            ],
+            [
+              -96.803,
+              32.6338
+            ],
+            [
+              -96.803,
+              32.631
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Dallas II - Lancaster TX",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.8036,
+              32.631
+            ],
+            [
+              -96.8028,
+              32.631
+            ],
+            [
+              -96.8028,
+              32.6338
+            ],
+            [
+              -96.8036,
+              32.6338
+            ],
+            [
+              -96.8036,
+              32.631
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Dallas II - Lancaster TX",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.9212,
+              39.8366
+            ],
+            [
+              -82.9162,
+              39.8366
+            ],
+            [
+              -82.9162,
+              39.842
+            ],
+            [
+              -82.9212,
+              39.842
+            ],
+            [
+              -82.9212,
+              39.8366
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco LIXIL Americas DC - Groveport OH",
+        "type": "Dedicated Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 2,
+          "buildingCount": 2,
+          "siteAreaAcres": 70,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.9179,
+              39.841
+            ],
+            [
+              -82.9168,
+              39.841
+            ],
+            [
+              -82.9168,
+              39.8418
+            ],
+            [
+              -82.9179,
+              39.8418
+            ],
+            [
+              -82.9179,
+              39.841
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco LIXIL Americas DC - Groveport OH",
+        "type": "Dedicated Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.9195,
+              39.8372
+            ],
+            [
+              -82.9183,
+              39.8372
+            ],
+            [
+              -82.9183,
+              39.8408
+            ],
+            [
+              -82.9195,
+              39.8408
+            ],
+            [
+              -82.9195,
+              39.8372
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco LIXIL Americas DC - Groveport OH",
+        "type": "Dedicated Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.9172,
+              39.8372
+            ],
+            [
+              -82.9162,
+              39.8372
+            ],
+            [
+              -82.9162,
+              39.8408
+            ],
+            [
+              -82.9172,
+              39.8408
+            ],
+            [
+              -82.9172,
+              39.8372
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco LIXIL Americas DC - Groveport OH",
+        "type": "Dedicated Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.9203,
+              39.837
+            ],
+            [
+              -82.9193,
+              39.837
+            ],
+            [
+              -82.9193,
+              39.8411
+            ],
+            [
+              -82.9203,
+              39.8411
+            ],
+            [
+              -82.9203,
+              39.837
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco LIXIL Americas DC - Groveport OH",
+        "type": "Dedicated Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.9174,
+              39.837
+            ],
+            [
+              -82.9164,
+              39.837
+            ],
+            [
+              -82.9164,
+              39.8411
+            ],
+            [
+              -82.9174,
+              39.8411
+            ],
+            [
+              -82.9174,
+              39.837
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco LIXIL Americas DC - Groveport OH",
+        "type": "Dedicated Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.17955,
+              35.07015
+            ],
+            [
+              -85.17675,
+              35.07015
+            ],
+            [
+              -85.17675,
+              35.0729
+            ],
+            [
+              -85.17955,
+              35.0729
+            ],
+            [
+              -85.17955,
+              35.07015
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Chattanooga CH29 - Chattanooga TN",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 16.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.17945,
+              35.0702
+            ],
+            [
+              -85.179,
+              35.0702
+            ],
+            [
+              -85.179,
+              35.07055
+            ],
+            [
+              -85.17945,
+              35.07055
+            ],
+            [
+              -85.17945,
+              35.0702
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Chattanooga CH29 - Chattanooga TN",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.179,
+              35.0706
+            ],
+            [
+              -85.1783,
+              35.0706
+            ],
+            [
+              -85.1783,
+              35.0721
+            ],
+            [
+              -85.179,
+              35.0721
+            ],
+            [
+              -85.179,
+              35.0706
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Chattanooga CH29 - Chattanooga TN",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.179,
+              35.0706
+            ],
+            [
+              -85.1784,
+              35.0706
+            ],
+            [
+              -85.1784,
+              35.07215
+            ],
+            [
+              -85.179,
+              35.07215
+            ],
+            [
+              -85.179,
+              35.0706
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Chattanooga CH29 - Chattanooga TN",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.1837,
+              35.0679
+            ],
+            [
+              -85.1809,
+              35.0679
+            ],
+            [
+              -85.1809,
+              35.0701
+            ],
+            [
+              -85.1837,
+              35.0701
+            ],
+            [
+              -85.1837,
+              35.0679
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Chattanooga CH7B - Chattanooga TN",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 34,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 20,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 13.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.1813,
+              35.0697
+            ],
+            [
+              -85.18085,
+              35.0697
+            ],
+            [
+              -85.18085,
+              35.07005
+            ],
+            [
+              -85.1813,
+              35.07005
+            ],
+            [
+              -85.1813,
+              35.0697
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Chattanooga CH7B - Chattanooga TN",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.1832,
+              35.0684
+            ],
+            [
+              -85.1813,
+              35.0684
+            ],
+            [
+              -85.1813,
+              35.069
+            ],
+            [
+              -85.1832,
+              35.069
+            ],
+            [
+              -85.1832,
+              35.0684
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Chattanooga CH7B - Chattanooga TN",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.1833,
+              35.0685
+            ],
+            [
+              -85.1812,
+              35.0685
+            ],
+            [
+              -85.1812,
+              35.06905
+            ],
+            [
+              -85.1833,
+              35.06905
+            ],
+            [
+              -85.1833,
+              35.0685
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Chattanooga CH7B - Chattanooga TN",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.1778,
+              35.068
+            ],
+            [
+              -85.1751,
+              35.068
+            ],
+            [
+              -85.1751,
+              35.07045
+            ],
+            [
+              -85.1778,
+              35.07045
+            ],
+            [
+              -85.1778,
+              35.068
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Chattanooga BP2 - Chattanooga TN",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 26,
+          "trailersVisible": 15,
+          "trailerParkingCapacity": 22,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 12.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.17745,
+              35.068
+            ],
+            [
+              -85.17695,
+              35.068
+            ],
+            [
+              -85.17695,
+              35.0684
+            ],
+            [
+              -85.17745,
+              35.0684
+            ],
+            [
+              -85.17745,
+              35.068
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Chattanooga BP2 - Chattanooga TN",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.177,
+              35.0696
+            ],
+            [
+              -85.1754,
+              35.0696
+            ],
+            [
+              -85.1754,
+              35.0703
+            ],
+            [
+              -85.177,
+              35.0703
+            ],
+            [
+              -85.177,
+              35.0696
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Chattanooga BP2 - Chattanooga TN",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.1771,
+              35.06955
+            ],
+            [
+              -85.1753,
+              35.06955
+            ],
+            [
+              -85.1753,
+              35.07025
+            ],
+            [
+              -85.1771,
+              35.07025
+            ],
+            [
+              -85.1771,
+              35.06955
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Chattanooga BP2 - Chattanooga TN",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.9978,
+              41.24655
+            ],
+            [
+              -111.9949,
+              41.24655
+            ],
+            [
+              -111.9949,
+              41.25
+            ],
+            [
+              -111.9978,
+              41.25
+            ],
+            [
+              -111.9978,
+              41.24655
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Ogden I - Ogden UT",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 46,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 18,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.9972,
+              41.24905
+            ],
+            [
+              -111.9966,
+              41.24905
+            ],
+            [
+              -111.9966,
+              41.24945
+            ],
+            [
+              -111.9972,
+              41.24945
+            ],
+            [
+              -111.9972,
+              41.24905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Ogden I - Ogden UT",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.9976,
+              41.2477
+            ],
+            [
+              -111.9967,
+              41.2477
+            ],
+            [
+              -111.9967,
+              41.2496
+            ],
+            [
+              -111.9976,
+              41.2496
+            ],
+            [
+              -111.9976,
+              41.2477
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Ogden I - Ogden UT",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.997,
+              41.247
+            ],
+            [
+              -111.99645,
+              41.247
+            ],
+            [
+              -111.99645,
+              41.24955
+            ],
+            [
+              -111.997,
+              41.24955
+            ],
+            [
+              -111.997,
+              41.247
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Ogden I - Ogden UT",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -111.99775,
+              41.2477
+            ],
+            [
+              -111.99715,
+              41.2477
+            ],
+            [
+              -111.99715,
+              41.249
+            ],
+            [
+              -111.99775,
+              41.249
+            ],
+            [
+              -111.99775,
+              41.2477
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Ogden I - Ogden UT",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.0357,
+              41.10005
+            ],
+            [
+              -112.0336,
+              41.10005
+            ],
+            [
+              -112.0336,
+              41.1018
+            ],
+            [
+              -112.0357,
+              41.1018
+            ],
+            [
+              -112.0357,
+              41.10005
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Clearfield - Clearfield UT",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": true,
+        "dropYard": false,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 7,
+          "trailerParkingCapacity": 10,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 5.5,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.03555,
+              41.10025
+            ],
+            [
+              -112.03445,
+              41.10025
+            ],
+            [
+              -112.03445,
+              41.10165
+            ],
+            [
+              -112.03555,
+              41.10165
+            ],
+            [
+              -112.03555,
+              41.10025
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco MCS Clearfield - Clearfield UT",
+        "type": "Multi-Client Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.872,
+              37.933
+            ],
+            [
+              -87.8679,
+              37.933
+            ],
+            [
+              -87.8679,
+              37.9396
+            ],
+            [
+              -87.872,
+              37.9396
+            ],
+            [
+              -87.872,
+              37.933
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco Mead Johnson DC - Mount Vernon IN",
+        "type": "Dedicated Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "25-50",
+        "dropArea": "NONE",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 60,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 53,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8697,
+              37.9376
+            ],
+            [
+              -87.869,
+              37.9376
+            ],
+            [
+              -87.869,
+              37.9381
+            ],
+            [
+              -87.8697,
+              37.9381
+            ],
+            [
+              -87.8697,
+              37.9376
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco Mead Johnson DC - Mount Vernon IN",
+        "type": "Dedicated Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.8705,
+              37.9382
+            ],
+            [
+              -87.8681,
+              37.9382
+            ],
+            [
+              -87.8681,
+              37.9396
+            ],
+            [
+              -87.8705,
+              37.9396
+            ],
+            [
+              -87.8705,
+              37.9382
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco Mead Johnson DC - Mount Vernon IN",
+        "type": "Dedicated Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.871,
+              37.9378
+            ],
+            [
+              -87.8681,
+              37.9378
+            ],
+            [
+              -87.8681,
+              37.9384
+            ],
+            [
+              -87.871,
+              37.9384
+            ],
+            [
+              -87.871,
+              37.9378
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco Mead Johnson DC - Mount Vernon IN",
+        "type": "Dedicated Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.9272,
+              34.4314
+            ],
+            [
+              -84.9225,
+              34.4314
+            ],
+            [
+              -84.9225,
+              34.4365
+            ],
+            [
+              -84.9272,
+              34.4365
+            ],
+            [
+              -84.9272,
+              34.4314
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco Kerry Group DC - Calhoun GA",
+        "type": "Dedicated Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 60,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.9271,
+              34.43175
+            ],
+            [
+              -84.9264,
+              34.43175
+            ],
+            [
+              -84.9264,
+              34.43215
+            ],
+            [
+              -84.9271,
+              34.43215
+            ],
+            [
+              -84.9271,
+              34.43175
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco Kerry Group DC - Calhoun GA",
+        "type": "Dedicated Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.9256,
+              34.4348
+            ],
+            [
+              -84.9232,
+              34.4348
+            ],
+            [
+              -84.9232,
+              34.4362
+            ],
+            [
+              -84.9256,
+              34.4362
+            ],
+            [
+              -84.9256,
+              34.4348
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco Kerry Group DC - Calhoun GA",
+        "type": "Dedicated Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.9268,
+              34.432
+            ],
+            [
+              -84.9262,
+              34.432
+            ],
+            [
+              -84.9262,
+              34.4356
+            ],
+            [
+              -84.9268,
+              34.4356
+            ],
+            [
+              -84.9268,
+              34.432
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco Kerry Group DC - Calhoun GA",
+        "type": "Dedicated Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.7179,
+              32.624
+            ],
+            [
+              -96.714,
+              32.624
+            ],
+            [
+              -96.714,
+              32.6281
+            ],
+            [
+              -96.7179,
+              32.6281
+            ],
+            [
+              -96.7179,
+              32.624
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco / The Shippers Group - Hutchins TX (HQ campus)",
+        "type": "Distribution Center / 3PL Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 89,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 39,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.7157,
+              32.626
+            ],
+            [
+              -96.7149,
+              32.626
+            ],
+            [
+              -96.7149,
+              32.6265
+            ],
+            [
+              -96.7157,
+              32.6265
+            ],
+            [
+              -96.7157,
+              32.626
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco / The Shippers Group - Hutchins TX (HQ campus)",
+        "type": "Distribution Center / 3PL Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.7156,
+              32.625
+            ],
+            [
+              -96.7144,
+              32.625
+            ],
+            [
+              -96.7144,
+              32.6279
+            ],
+            [
+              -96.7156,
+              32.6279
+            ],
+            [
+              -96.7156,
+              32.625
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco / The Shippers Group - Hutchins TX (HQ campus)",
+        "type": "Distribution Center / 3PL Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.716,
+              32.6248
+            ],
+            [
+              -96.7152,
+              32.6248
+            ],
+            [
+              -96.7152,
+              32.6279
+            ],
+            [
+              -96.716,
+              32.6279
+            ],
+            [
+              -96.716,
+              32.6248
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco / The Shippers Group - Hutchins TX (HQ campus)",
+        "type": "Distribution Center / 3PL Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.699,
+              32.6336
+            ],
+            [
+              -96.694,
+              32.6336
+            ],
+            [
+              -96.694,
+              32.6378
+            ],
+            [
+              -96.699,
+              32.6378
+            ],
+            [
+              -96.699,
+              32.6336
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco American Standard DC - Hutchins TX",
+        "type": "Dedicated Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 54,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.6972,
+              32.6339
+            ],
+            [
+              -96.6964,
+              32.6339
+            ],
+            [
+              -96.6964,
+              32.6344
+            ],
+            [
+              -96.6972,
+              32.6344
+            ],
+            [
+              -96.6972,
+              32.6339
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco American Standard DC - Hutchins TX",
+        "type": "Dedicated Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.6985,
+              32.636
+            ],
+            [
+              -96.696,
+              32.636
+            ],
+            [
+              -96.696,
+              32.6378
+            ],
+            [
+              -96.6985,
+              32.6378
+            ],
+            [
+              -96.6985,
+              32.636
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco American Standard DC - Hutchins TX",
+        "type": "Dedicated Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.6982,
+              32.6338
+            ],
+            [
+              -96.6944,
+              32.6338
+            ],
+            [
+              -96.6944,
+              32.6344
+            ],
+            [
+              -96.6982,
+              32.6344
+            ],
+            [
+              -96.6982,
+              32.6338
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco American Standard DC - Hutchins TX",
+        "type": "Dedicated Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.6985,
+              32.6344
+            ],
+            [
+              -96.6979,
+              32.6344
+            ],
+            [
+              -96.6979,
+              32.6376
+            ],
+            [
+              -96.6985,
+              32.6376
+            ],
+            [
+              -96.6985,
+              32.6344
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco American Standard DC - Hutchins TX",
+        "type": "Dedicated Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.6835,
+              32.5835
+            ],
+            [
+              -96.678,
+              32.5835
+            ],
+            [
+              -96.678,
+              32.588
+            ],
+            [
+              -96.6835,
+              32.588
+            ],
+            [
+              -96.6835,
+              32.5835
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco / The Shippers Group - Wilmer TX",
+        "type": "Distribution Center / 3PL Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Rural",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 60,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.683,
+              32.5868
+            ],
+            [
+              -96.6821,
+              32.5868
+            ],
+            [
+              -96.6821,
+              32.5873
+            ],
+            [
+              -96.683,
+              32.5873
+            ],
+            [
+              -96.683,
+              32.5868
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco / The Shippers Group - Wilmer TX",
+        "type": "Distribution Center / 3PL Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.6821,
+              32.587
+            ],
+            [
+              -96.6785,
+              32.587
+            ],
+            [
+              -96.6785,
+              32.588
+            ],
+            [
+              -96.6821,
+              32.588
+            ],
+            [
+              -96.6821,
+              32.587
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco / The Shippers Group - Wilmer TX",
+        "type": "Distribution Center / 3PL Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.6821,
+              32.584
+            ],
+            [
+              -96.6785,
+              32.584
+            ],
+            [
+              -96.6785,
+              32.585
+            ],
+            [
+              -96.6821,
+              32.585
+            ],
+            [
+              -96.6821,
+              32.584
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco / The Shippers Group - Wilmer TX",
+        "type": "Distribution Center / 3PL Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.6824,
+              32.587
+            ],
+            [
+              -96.6785,
+              32.587
+            ],
+            [
+              -96.6785,
+              32.5878
+            ],
+            [
+              -96.6824,
+              32.5878
+            ],
+            [
+              -96.6824,
+              32.587
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco / The Shippers Group - Wilmer TX",
+        "type": "Distribution Center / 3PL Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.6823,
+              32.5842
+            ],
+            [
+              -96.6785,
+              32.5842
+            ],
+            [
+              -96.6785,
+              32.5849
+            ],
+            [
+              -96.6823,
+              32.5849
+            ],
+            [
+              -96.6823,
+              32.5842
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco / The Shippers Group - Wilmer TX",
+        "type": "Distribution Center / 3PL Warehouse",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.42035,
+              28.43505
+            ],
+            [
+              -81.41685,
+              28.43505
+            ],
+            [
+              -81.41685,
+              28.43815
+            ],
+            [
+              -81.42035,
+              28.43815
+            ],
+            [
+              -81.42035,
+              28.43505
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco / The Shippers Group - Orlando FL",
+        "type": "Distribution Center / 3PL Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 44,
+          "trailersVisible": 18,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 11.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4183,
+              28.4356
+            ],
+            [
+              -81.41685,
+              28.4356
+            ],
+            [
+              -81.41685,
+              28.4369
+            ],
+            [
+              -81.4183,
+              28.4369
+            ],
+            [
+              -81.4183,
+              28.4356
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco / The Shippers Group - Orlando FL",
+        "type": "Distribution Center / 3PL Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -81.4187,
+              28.4356
+            ],
+            [
+              -81.41805,
+              28.4356
+            ],
+            [
+              -81.41805,
+              28.437
+            ],
+            [
+              -81.4187,
+              28.437
+            ],
+            [
+              -81.4187,
+              28.4356
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco / The Shippers Group - Orlando FL",
+        "type": "Distribution Center / 3PL Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3501,
+              33.5032
+            ],
+            [
+              -84.3468,
+              33.5032
+            ],
+            [
+              -84.3468,
+              33.5079
+            ],
+            [
+              -84.3501,
+              33.5079
+            ],
+            [
+              -84.3501,
+              33.5032
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco / The Shippers Group - Jonesboro GA",
+        "type": "Distribution Center / 3PL Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 32,
+          "trailersVisible": 26,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 24,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3506,
+              33.503
+            ],
+            [
+              -84.3498,
+              33.503
+            ],
+            [
+              -84.3498,
+              33.5036
+            ],
+            [
+              -84.3506,
+              33.5036
+            ],
+            [
+              -84.3506,
+              33.503
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco / The Shippers Group - Jonesboro GA",
+        "type": "Distribution Center / 3PL Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3487,
+              33.5042
+            ],
+            [
+              -84.3474,
+              33.5042
+            ],
+            [
+              -84.3474,
+              33.5064
+            ],
+            [
+              -84.3487,
+              33.5064
+            ],
+            [
+              -84.3487,
+              33.5042
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco / The Shippers Group - Jonesboro GA",
+        "type": "Distribution Center / 3PL Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.3491,
+              33.5042
+            ],
+            [
+              -84.3479,
+              33.5042
+            ],
+            [
+              -84.3479,
+              33.5065
+            ],
+            [
+              -84.3491,
+              33.5065
+            ],
+            [
+              -84.3491,
+              33.5042
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco / The Shippers Group - Jonesboro GA",
+        "type": "Distribution Center / 3PL Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0151,
+              32.7887
+            ],
+            [
+              -97.0104,
+              32.7887
+            ],
+            [
+              -97.0104,
+              32.7928
+            ],
+            [
+              -97.0151,
+              32.7928
+            ],
+            [
+              -97.0151,
+              32.7887
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco / The Shippers Group - Grand Prairie TX",
+        "type": "Distribution Center / 3PL Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 90,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 42,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0123,
+              32.789
+            ],
+            [
+              -97.0106,
+              32.789
+            ],
+            [
+              -97.0106,
+              32.7923
+            ],
+            [
+              -97.0123,
+              32.7923
+            ],
+            [
+              -97.0123,
+              32.789
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco / The Shippers Group - Grand Prairie TX",
+        "type": "Distribution Center / 3PL Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0148,
+              32.789
+            ],
+            [
+              -97.0139,
+              32.789
+            ],
+            [
+              -97.0139,
+              32.7923
+            ],
+            [
+              -97.0148,
+              32.7923
+            ],
+            [
+              -97.0148,
+              32.789
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco / The Shippers Group - Grand Prairie TX",
+        "type": "Distribution Center / 3PL Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -97.0129,
+              32.789
+            ],
+            [
+              -97.0121,
+              32.789
+            ],
+            [
+              -97.0121,
+              32.7923
+            ],
+            [
+              -97.0129,
+              32.7923
+            ],
+            [
+              -97.0129,
+              32.789
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco / The Shippers Group - Grand Prairie TX",
+        "type": "Distribution Center / 3PL Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.5968,
+              42.5447
+            ],
+            [
+              -71.5925,
+              42.5447
+            ],
+            [
+              -71.5925,
+              42.5479
+            ],
+            [
+              -71.5968,
+              42.5479
+            ],
+            [
+              -71.5968,
+              42.5447
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco Devens DC - Devens MA",
+        "type": "Distribution Center / Northeast Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 13.5,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.5944,
+              42.5452
+            ],
+            [
+              -71.593,
+              42.5452
+            ],
+            [
+              -71.593,
+              42.547
+            ],
+            [
+              -71.5944,
+              42.547
+            ],
+            [
+              -71.5944,
+              42.5452
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco Devens DC - Devens MA",
+        "type": "Distribution Center / Northeast Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -71.5962,
+              42.545
+            ],
+            [
+              -71.5947,
+              42.545
+            ],
+            [
+              -71.5947,
+              42.5462
+            ],
+            [
+              -71.5962,
+              42.5462
+            ],
+            [
+              -71.5962,
+              42.545
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco Devens DC - Devens MA",
+        "type": "Distribution Center / Northeast Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.9547,
+              35.069
+            ],
+            [
+              -89.9513,
+              35.069
+            ],
+            [
+              -89.9513,
+              35.0721
+            ],
+            [
+              -89.9547,
+              35.0721
+            ],
+            [
+              -89.9547,
+              35.069
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco Memphis DC - Memphis TN",
+        "type": "Distribution Center / Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 12,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 0,
+          "buildingCount": 2,
+          "siteAreaAcres": 16,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.954,
+              35.0696
+            ],
+            [
+              -89.9525,
+              35.0696
+            ],
+            [
+              -89.9525,
+              35.0715
+            ],
+            [
+              -89.954,
+              35.0715
+            ],
+            [
+              -89.954,
+              35.0696
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco Memphis DC - Memphis TN",
+        "type": "Distribution Center / Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -89.9542,
+              35.0696
+            ],
+            [
+              -89.9528,
+              35.0696
+            ],
+            [
+              -89.9528,
+              35.0715
+            ],
+            [
+              -89.9542,
+              35.0715
+            ],
+            [
+              -89.9542,
+              35.0696
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "kenco-logistics",
+        "name": "Kenco Memphis DC - Memphis TN",
+        "type": "Distribution Center / Warehouse",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "zone": "dockApron",
+        "index": 1
+      }
+    }
+  ]
+}

@@ -1,0 +1,1715 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-21T04:42:40.251Z",
+  "account": {
+    "slug": "hyundai-motor-america",
+    "displayName": "Hyundai Motor America",
+    "archetype": "oem-automotive",
+    "siteCount": 17,
+    "coverageNote": {
+      "auditedCount": 17,
+      "estimatedFootprint": null,
+      "droppedStubCount": 0,
+      "capHit": false,
+      "note": "Audited all 17 identifiable facilities."
+    }
+  },
+  "research": {
+    "facility_count": 17,
+    "audited_facilities": 17,
+    "source": "yard-audit",
+    "confidence": "verified",
+    "caveats": [
+      "Mobis Parts America PDC - Lancaster TX: audit note mentions 'closed'",
+      "Glovis EV Logistics America - Savannah Integrated Warehouse (Pooler GA): audit note mentions 'closed'"
+    ]
+  },
+  "network": {
+    "bbox": [
+      -122.3742,
+      30.3428,
+      -72.5965,
+      47.2656
+    ],
+    "archetypeMix": {
+      "#6": 5,
+      "#3": 7,
+      "#9": 3,
+      "#7": 2
+    },
+    "totals": {
+      "dockDoors": 548,
+      "trailerCapacity": 15118,
+      "gates": 18,
+      "railServed": 6,
+      "acres": 7461
+    },
+    "sites": [
+      {
+        "id": "01-hyundai-motor-manufacturing-alabama-hmma-montgomery-al",
+        "name": "Hyundai Motor Manufacturing Alabama (HMMA) - Montgomery AL",
+        "type": "Auto Assembly Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "exitLanes",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 32.2812,
+          "lng": -86.3235
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.2755,
+            "west": -86.333,
+            "north": 32.2915,
+            "east": -86.31
+          },
+          "truckGate": {
+            "south": 32.2768,
+            "west": -86.3262,
+            "north": 32.2782,
+            "east": -86.3244
+          },
+          "dropYards": [
+            {
+              "south": 32.2777,
+              "west": -86.3153,
+              "north": 32.2798,
+              "east": -86.3123
+            },
+            {
+              "south": 32.28,
+              "west": -86.319,
+              "north": 32.2822,
+              "east": -86.3155
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.2803,
+              "west": -86.3185,
+              "north": 32.2823,
+              "east": -86.315
+            },
+            {
+              "south": 32.2815,
+              "west": -86.3283,
+              "north": 32.2835,
+              "east": -86.326
+            }
+          ],
+          "staging": {
+            "south": 32.2785,
+            "west": -86.3148,
+            "north": 32.2799,
+            "east": -86.3123
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 2,
+          "buildingCount": 12,
+          "siteAreaAcres": 620,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coords (32.280312, -86.324154, ROOFTOP) landed directly on the HMMA\nmain assembly building — confirmed by satellite: a giant white building\ncarrying the \"HYUNDAI\" wordmark and logo on its roof. Web research\n(hmmausa.com, Wikipedia) confirms HMMA is a 1,744-acre campus, 3.4M sq ft of\nbuildings, producing Santa Fe / Tucson / Elantra / Santa Cruz. No relocation\nneeded; center nudged slightly to the assembly hall.",
+        "mapsUrl": "https://www.google.com/maps/@32.281200,-86.323500,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "1,744-acre HMMA campus (per hmmausa.com / Wikipedia). Operational developed footprint geofenced here is ~620 acres; full owned land much larger. 3.4M sq ft of buildings: stamping, weld, paint, assembly, three engine shops, plus an east logistics/parts warehouse complex and a 2-mile test track at the north edge.",
+          "truckGate": "HMMA uses controlled, numbered gates (web research confirms 'Gate 2' as the visitor entrance). Main multi-lane entry off Hyundai Blvd at 32.2769,-86.3253; access control is set back inside the property, standard for a large guarded automotive campus.",
+          "guardShack": "Inferred true — large captive-OEM assembly plant with numbered, staffed security gates is industry-standard. A security/check-in structure is visible inside the entry road near the dock-side at ~32.2799,-86.3252. Booth not crisply resolvable at road edge, hence medium-confidence on exact footprint.",
+          "dropArea": "Large dedicated trailer drop yard on the SE/east side off Hyundai Blvd (~32.2788,-86.3145) holding ~80-100 trailers, plus extensive trailer rows along the logistics warehouse faces. dropArea 50+.",
+          "dockDoors": "East logistics/parts warehouse complex shows long banks of dock doors with trailers backed in on multiple faces; assembly building has additional truck docks. Total across the site comfortably 50+; 90 is an honest overhead estimate.",
+          "multipleFacilities": "Campus with 12+ distinct large buildings (assembly hall, stamping, paint, three engine shops, multiple logistics warehouses) — clear multi-facility campus.",
+          "shipRcvSeparate": "Inbound parts logistics warehouses (east complex) are physically separate from the assembly-building shipping docks — distinct dock clusters on different parts of the campus.",
+          "fastLaneOpportunity": "Main entry is a wide multi-lane apron with abundant paved width — physical room for an express/bypass lane.",
+          "urbanRural": "Surrounded by farmland and woods on the south edge of Montgomery; rural-edge setting.",
+          "scale": "No truck scale positively identified in imagery; flagged uncertain.",
+          "railServed": "No rail spur observed running into the developed campus footprint.",
+          "trailersVisible": "Honest overhead estimate (~220) across drop yard and warehouse dock faces; counts approximate.",
+          "geofence": "Center 32.2812,-86.3235. Perimeter box covers the developed operational footprint (buildings, lots, test track) — the YardFlow-relevant geofence — not the full 1,744-acre land parcel."
+        }
+      },
+      {
+        "id": "02-hyundai-motor-group-metaplant-america-hmgma-ellabell-ga",
+        "name": "Hyundai Motor Group Metaplant America (HMGMA) - Ellabell GA",
+        "type": "Auto Assembly Plant (EV)",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoors",
+          "dropArea",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "scale",
+          "entryLanes",
+          "exitLanes",
+          "multiStep",
+          "dropYard",
+          "guardShack"
+        ],
+        "center": {
+          "lat": 32.162,
+          "lng": -81.448
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.147,
+            "west": -81.463,
+            "north": 32.176,
+            "east": -81.432
+          },
+          "truckGate": {
+            "south": 32.171,
+            "west": -81.4538,
+            "north": 32.1728,
+            "east": -81.4512
+          },
+          "dropYards": [
+            {
+              "south": 32.155,
+              "west": -81.455,
+              "north": 32.1595,
+              "east": -81.45
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.161,
+              "west": -81.452,
+              "north": 32.1645,
+              "east": -81.4485
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 40,
+          "trailerParkingCapacity": 300,
+          "truckGateCount": 3,
+          "buildingCount": 15,
+          "siteAreaAcres": 2900,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": true
+        },
+        "dossierExcerpt": "Roster coords (32.165371, -81.444937, ROOFTOP) landed on the HMGMA Metaplant\nmanufacturing complex — confirmed by satellite: an enormous multi-building\nmanufacturing campus along I-16 in rural Bryan County. Web research\n(hmgma.com, Wikipedia) confirms the $7.6B EV plant, 16M+ sq ft of factory\nfloor, ~25 mi west of Savannah, opened Oct 2024. Center adjusted slightly to\nthe central manufacturing halls.",
+        "mapsUrl": "https://www.google.com/maps/@32.162000,-81.448000,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "imagery": "Available satellite imagery is from the construction phase (extensive bare earth, partly-finished buildings). HMGMA opened Oct 2024 with 16M+ sq ft of factory floor; the operational dock/trailer layout is not yet fully visible. Counts are best-effort estimates with low confidence — flagged accordingly.",
+          "site": "$7.6B EV manufacturing campus in Bryan County GA along I-16, ~25 mi west of Savannah. 16M+ sq ft factory floor across many connected/standalone buildings; 500K vehicles/yr capacity (IONIQ 5 / IONIQ 9 / Kia). The full HMGMA land parcel is ~2,900 acres; perimeter box covers the developed campus.",
+          "truckGate": "Facility of this scale and security profile has controlled, guarded gates. Street View (2025-11) along I-16 shows continuous perimeter fencing around the campus. Main entry road off Genesis Dr / the supplier corridor on the NW edge. truckGate = true (high confidence on existence).",
+          "guardShack": "Inferred true — a $7.6B OEM EV plant with fenced perimeter universally uses staffed security gates. Booth footprint not crisply resolvable in construction-phase imagery; flagged uncertain on exact structure.",
+          "multipleFacilities": "Large campus with 15+ distinct large buildings (multiple assembly/manufacturing halls, battery/SK On adjacent operations, admin/office buildings, supplier buildings on-campus). Clear multi-facility campus.",
+          "railServed": "A rail spur/yard feature runs into the south part of the campus (visible at ~32.151,-81.452) — consistent with HMGMA's known rail-served finished-vehicle and inbound logistics design. railServed = true.",
+          "shipRcvSeparate": "Inbound parts/component receiving and outbound finished-vehicle / shipping operate from separate parts of the campus on different building faces.",
+          "dropArea": "Large paved areas designated for trailer and finished-vehicle staging; in construction-phase imagery only partially occupied. Estimated 25-50 band, low confidence.",
+          "entryExitSeparate": "A campus this large uses separate in/out gates and a multi-gate truck routing system; entryExitSeparate = true (inferred).",
+          "multiStep": "Large secured OEM campuses typically run a perimeter gate plus a secondary internal checkpoint before docks; inferred true at low confidence.",
+          "fastLaneOpportunity": "Abundant paved width and undeveloped land at the entry corridors — physical room for express/bypass lanes.",
+          "urbanRural": "Rural Bryan County — surrounded by pine woods and farmland.",
+          "scale": "No truck scale positively identified; flagged uncertain.",
+          "geofence": "Center 32.1620,-81.4480. Perimeter box covers the developed campus footprint."
+        }
+      },
+      {
+        "id": "03-hmma-cylinder-head-machining-plant-montgomery-al",
+        "name": "HMMA Cylinder Head Machining Plant - Montgomery AL",
+        "type": "Engine / Component Plant",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoors",
+          "dropArea",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "scale",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 32.2828,
+          "lng": -86.332
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.2755,
+            "west": -86.333,
+            "north": 32.2915,
+            "east": -86.31
+          },
+          "truckGate": {
+            "south": 32.2768,
+            "west": -86.3262,
+            "north": 32.2782,
+            "east": -86.3244
+          },
+          "dropYards": [
+            {
+              "south": 32.2815,
+              "west": -86.3343,
+              "north": 32.2833,
+              "east": -86.3325
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.2815,
+              "west": -86.3334,
+              "north": 32.284,
+              "east": -86.3318
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 14,
+          "trailersVisible": 22,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 2,
+          "buildingCount": 12,
+          "siteAreaAcres": 620,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster gives the HMMA campus address (700 Hyundai Blvd) — same campus as\nidx 1. Web research (Montgomery Chamber, hmmausa.com, Made in Alabama)\nconfirms the cylinder-head machining plant is a 260,000 sq ft building, a\n$388M investment opened May 2019, and the third engine shop on the\nHMMA campus supporting 650,000+ engines/yr.\n\nIt is a component building inside the larger HMMA campus, not a standalone\nsite. The exact building could not be uniquely distinguished from the other\nHMMA engine shops in satellite imagery without floor-plan documentation; it is\npositively within the campus's western engine-shop / component-plant cluster,\non which the center is placed.",
+        "mapsUrl": "https://www.google.com/maps/@32.282800,-86.332000,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "260,000 sq ft cylinder-head machining plant ($388M, opened May 2019) — the 'third engine shop' on the HMMA campus, part of HMMA's 650K+ engines/yr operation. It is a component building INSIDE the larger 1,744-acre HMMA campus (same campus as idx 1), not a standalone site.",
+          "buildingId": "The exact building could not be uniquely distinguished from the other HMMA engine shops without floor-plan documentation. It is positively within the HMMA western engine-shop / component-plant cluster (centered ~32.2828,-86.3320). Center placed on that cluster.",
+          "truckGate": "Inherits HMMA campus access — controlled, numbered, guarded gates (web research confirms numbered gates, e.g. 'Gate 2'). The cylinder-head plant has no independent truck gate; inbound castings / outbound machined heads route through the shared campus gates.",
+          "guardShack": "Inferred true — shares the guarded HMMA campus perimeter (see idx 1).",
+          "perimeter": "Perimeter box = the full HMMA developed campus footprint (shared with idx 1), since this plant is a building within that campus.",
+          "dockDoors": "West engine-shop building face shows a dock bank with trailers backed in (~14 doors estimated for this building); the cylinder-head plant proper is a machining operation with modest dock needs. 10-25 band, low confidence.",
+          "dropArea": "A small trailer staging lot sits along the west engine-shop building face (~32.2825,-86.3330) holding ~20 trailers; modest drop activity. dropArea 0-10 for this building's own apron; campus-wide drop is much larger.",
+          "multipleFacilities": "true — building sits within the multi-building HMMA campus.",
+          "dropYard": "true at campus level (large HMMA SE drop yard); the cylinder-head plant itself has only a small adjacent trailer lot.",
+          "urbanRural": "Rural-edge Montgomery (see idx 1).",
+          "scale": "No truck scale identified; flagged uncertain.",
+          "railServed": "No rail spur into the developed campus footprint.",
+          "note": "This audit treats the cylinder-head plant as a campus-resident component building; its truck-yard profile is effectively the HMMA campus profile (idx 1) scoped to the western engine-shop cluster."
+        }
+      },
+      {
+        "id": "04-mobis-parts-america-pdc-ontario-ca",
+        "name": "Mobis Parts America PDC - Ontario CA",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 34.0402,
+          "lng": -117.5531
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 34.0379,
+            "west": -117.5562,
+            "north": 34.0422,
+            "east": -117.5517
+          },
+          "truckGate": {
+            "south": 34.0385,
+            "west": -117.5529,
+            "north": 34.0393,
+            "east": -117.5521
+          },
+          "dropYards": [
+            {
+              "south": 34.0385,
+              "west": -117.5552,
+              "north": 34.0396,
+              "east": -117.5523
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 34.0388,
+              "west": -117.5552,
+              "north": 34.0397,
+              "east": -117.5523
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 46,
+          "trailersVisible": 38,
+          "trailerParkingCapacity": 55,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 14.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coords (34.040044, -117.552921, ROOFTOP, moved only 219 m) landed on a\nlarge warehouse building. Web research (BBB, D&B, Panjiva, US Port Examiner)\nconfirms 1900 S Rochester Ave, Ontario CA 91761 as the Mobis Parts America\nWest Coast PDC — the Hyundai/Kia/Genesis after-sales parts distribution arm.\nCenter placed on the Mobis building roof.",
+        "mapsUrl": "https://www.google.com/maps/@34.040200,-117.553100,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Mobis Parts America West Coast PDC at 1900 S Rochester Ave, Ontario CA — confirmed by web research (BBB, D&B, Panjiva). Large single warehouse building in a multi-tenant Inland Empire industrial park bordered by a freeway on the east; other tenants share the complex (e.g. 'Spartan' signage on the building).",
+          "truckGate": "false — the truck court / dock yard runs off S Rochester Ave via an OPEN driveway. Street View (2021-02, 2025-01) shows no barrier arm, no sliding gate, and no checkpoint pinch-point at the road. Standard open multi-tenant business-park access.",
+          "guardShack": "false — no staffed booth at the truck court entrance. A small structure mid-yard reads as an office/storage cabin, not a gate guard booth.",
+          "remoteGs": "false — no gate at all, so no remote check-in implied.",
+          "dockDoors": "South dock face of the Mobis building carries a long bank of dock doors with trailers backed in; counted ~46, placing it in the 25-50 band. Door count flagged as an honest overhead estimate.",
+          "dropArea": "Row of parked trailers in the truck court between buildings — modest drop activity, 10-25 stalls. Not a dedicated drop yard, so dropYard = false.",
+          "drivewayLong": "The shared truck court drive is long enough to stack 3+ trucks between the buildings.",
+          "urbanRural": "Urban — dense Ontario/Inland Empire logistics corridor, wall-to-wall warehouses and a freeway alongside.",
+          "multipleFacilities": "false — Mobis occupies one building; the surrounding warehouses are separate properties/tenants, not one campus.",
+          "shipRcvSeparate": "false — a single south dock bank serves both ship and receive.",
+          "railServed": "false — no rail spur into the property.",
+          "scale": "false — no truck scale observed.",
+          "geofence": "Center 34.0402,-117.5531 on the Mobis building; perimeter box encloses the building and its shared south truck court."
+        }
+      },
+      {
+        "id": "05-mobis-parts-america-pdc-aurora-il",
+        "name": "Mobis Parts America PDC - Aurora IL",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 41.7935,
+          "lng": -88.3573
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.7914,
+            "west": -88.3587,
+            "north": 41.7952,
+            "east": -88.3553
+          },
+          "truckGate": {
+            "south": 41.7919,
+            "west": -88.3566,
+            "north": 41.7925,
+            "east": -88.3558
+          },
+          "dropYards": [
+            {
+              "south": 41.7923,
+              "west": -88.3564,
+              "north": 41.7948,
+              "east": -88.3556
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.7924,
+              "west": -88.3566,
+              "north": 41.7948,
+              "east": -88.3558
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 34,
+          "trailersVisible": 24,
+          "trailerParkingCapacity": 38,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 11.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Roster coords (41.793528, -88.357668, ROOFTOP, moved 1385 m) landed on a large\nwarehouse building. Confirmation was needed because of the 1385 m geocode\nmove. Street View shows a \"MOBIS\" sign on the building face, and web research\n(Yellow Pages, Loc8NearMe, Chamber of Commerce) confirms 1705 Sequoia Dr,\nAurora IL 60506 as the Mobis Parts America Central Region PDC. Identity\npositively re-confirmed; center placed on the Mobis building roof.",
+        "mapsUrl": "https://www.google.com/maps/@41.793500,-88.357300,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Mobis Parts America Central Region PDC at 1705 Sequoia Dr, Aurora IL — confirmed by web research (Yellow Pages, Loc8NearMe, Chamber of Commerce) and by a 'MOBIS' sign visible on the building face in Street View. Standalone warehouse in a suburban Chicago-metro business park along I-88. Roster geocode moved 1385 m; the building was positively re-confirmed.",
+          "truckGate": "false — the property is entered from Sequoia Dr via an OPEN, ungated driveway (Street View 2024-04 shows no barrier arm, no sliding gate, no checkpoint). The dock yard wraps around to the building's east face via this open drive.",
+          "guardShack": "false — no staffed booth anywhere at the entrance or in the yard.",
+          "remoteGs": "false — no gate exists.",
+          "dockDoors": "East face of the Mobis building carries a dock-door bank with trailers backed in; counted ~34, placing it in the 25-50 band. Honest overhead estimate.",
+          "dropArea": "Trailers parked along the east dock yard — modest drop activity, 10-25 stalls. Not a dedicated separate drop-yard lot, so dropYard = false.",
+          "drivewayLong": "The wrap-around dock-yard drive on the east side has room to stack 3+ trucks.",
+          "urbanRural": "Urban — built-up suburban Chicago-metro business park (Aurora) along I-88, wall-to-wall warehouses and office buildings; not farmland or open country.",
+          "multipleFacilities": "false — single standalone Mobis building; neighboring warehouses are separate properties.",
+          "shipRcvSeparate": "false — a single east dock bank handles ship and receive.",
+          "railServed": "false — no rail spur into the property.",
+          "scale": "false — no truck scale observed.",
+          "geofence": "Center 41.7935,-88.3573 on the Mobis building; perimeter box encloses the building, its east dock yard and front parking."
+        }
+      },
+      {
+        "id": "06-mobis-parts-america-pdc-lawrenceville-ga",
+        "name": "Mobis Parts America PDC - Lawrenceville GA",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 33.96768,
+          "lng": -84.08648
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 33.966,
+            "west": -84.0874,
+            "north": 33.9694,
+            "east": -84.0856
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 33.9665,
+              "west": -84.0876,
+              "north": 33.969,
+              "east": -84.0869
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 33.9665,
+              "west": -84.0872,
+              "north": 33.9691,
+              "east": -84.0867
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 16,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 15.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Address: 2155 Breckinridge Blvd NW, Lawrenceville, GA 30043\n- Locked center: 33.96768, -84.08648\n- Confirmation: Roster geocode (ROOFTOP, moved only 45 m) landed on a large white-roofed\n  industrial building inside Breckinridge Industrial Park. Web search confirms Mobis Parts\n  America LLC operates a \"massive parts distribution center\" at 2155 Breckinridge Blvd\n  (also serves Kia per Panjiva import records). The white building matches a multi-tenant\n  bulk warehouse consistent with a PDC.",
+        "mapsUrl": "https://www.google.com/maps/@33.96768,-84.08648,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Open multi-tenant industrial park (Breckinridge Industrial Park). Street View drove freely into the shared dock court; no barrier arm, sliding gate, or checkpoint at any property/road interface.",
+          "guardShack": "No booth structure anywhere at the building or court entrance.",
+          "dropYard": "Trailers parked without tractors along the dock face and in the shared central yard area between buildings.",
+          "dockDoorCount": "~38 estimated along the NW dock face of the Mobis building; multi-tenant building so exact Mobis-allocated count uncertain.",
+          "entryExitTogether": "Open park road network — no defined gate, so entry/exit lane flags left false; trucks circulate freely.",
+          "dropArea": "Central park yard and dock-face trailer storage; estimate 10-25 drop trailers attributable to this building."
+        }
+      },
+      {
+        "id": "07-mobis-parts-america-pdc-lancaster-tx",
+        "name": "Mobis Parts America PDC - Lancaster TX",
+        "type": "Parts Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 32.6403,
+          "lng": -96.8097
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.6387,
+            "west": -96.8114,
+            "north": 32.6418,
+            "east": -96.8082
+          },
+          "truckGate": {
+            "south": 32.63868,
+            "west": -96.81095,
+            "north": 32.63915,
+            "east": -96.81055
+          },
+          "dropYards": [
+            {
+              "south": 32.6392,
+              "west": -96.8114,
+              "north": 32.6416,
+              "east": -96.8102
+            },
+            {
+              "south": 32.6392,
+              "west": -96.8091,
+              "north": 32.6416,
+              "east": -96.8082
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.6393,
+              "west": -96.8103,
+              "north": 32.6415,
+              "east": -96.8099
+            },
+            {
+              "south": 32.6393,
+              "west": -96.8094,
+              "north": 32.6415,
+              "east": -96.80905
+            }
+          ],
+          "staging": {
+            "south": 32.63868,
+            "west": -96.811,
+            "north": 32.63915,
+            "east": -96.8105
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 25.6,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Address: 2301 S Pointe Dr, Lancaster, TX 75134 (South Pointe Corporate Center,\n  Building 1)\n- Locked center: 32.64030, -96.80970\n- Confirmation: Roster geocode was imprecise (moved 8,399 m and landed mid-park).\n  Street View along S Pointe Dr (Feb 2025) shows the large warehouse east of the\n  geocode point bearing a clear \"HYUNDAI MOBIS\" sign on its SW corner. Web search\n  confirms 2301 S Pointe Dr = South Pointe Corporate Center Building 1 (444,465 SF,\n  built 2009, ~24-acre lot), tenanted by Mobis Parts America and Kia Motors America.",
+        "mapsUrl": "https://www.google.com/maps/@32.64030,-96.80970,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Black steel cantilever sliding gate across the truck driveway, confirmed in Feb-2025 Street View and z21 satellite. Property is fully enclosed by an ornamental black steel perimeter fence.",
+          "guardShack": "No staffed booth at the gate. The only small structure beside the gate (z21 satellite) is a utility/electrical pad, not a guard booth.",
+          "remoteGs": "Gated entry with no guard shack implies kiosk/call-box/app check-in.",
+          "preGateStaging": "Wide paved apron between S Pointe Dr and the sliding gate, large enough to hold queued trucks outside the gate.",
+          "shipRcvSeparate": "Two physically separate dock banks on opposite (west and east) building faces, each fully loaded with trailers.",
+          "fastLaneOpportunity": "Very wide gate apron with unused paved width; room to add a bypass/express lane.",
+          "dockDoors": "Both long faces are lined with dock doors; combined estimate ~90 doors across the building (band 50+). Multi-tenant building so Mobis-allocated share uncertain.",
+          "dropArea": "Heavy drop-trailer storage on both the west lot and the east dock court; 50+ band.",
+          "trailersVisible": "~75 trailers counted across west and east courts in captured imagery; honest overhead estimate."
+        }
+      },
+      {
+        "id": "08-mobis-parts-america-pdc-jamesburg-nj",
+        "name": "Mobis Parts America PDC - Jamesburg NJ",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 40.3527,
+          "lng": -74.4782
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.3513,
+            "west": -74.4799,
+            "north": 40.3548,
+            "east": -74.4765
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 40.3537,
+              "west": -74.4783,
+              "north": 40.3547,
+              "east": -74.4768
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.353,
+              "west": -74.479,
+              "north": 40.3545,
+              "east": -74.4772
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 32,
+          "trailersVisible": 34,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 27.8,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Address: 1122 Cranbury South River Rd, Jamesburg, NJ 08831 (Monroe Township)\n- Locked center: 40.35270, -74.47820\n- Confirmation: Roster geocode (moved 2,503 m) landed directly on a large\n  dark-roofed warehouse fronting Cranbury South River Rd. Web search confirms Mobis\n  Parts America operates a Hyundai/Kia parts distribution center at 1122 Cranbury\n  South River Rd (the Eastern Region PDC; per Panjiva import records the site receives\n  vehicle-parts/accessory shipments from Hyundai Mobis Korea). Street View along the\n  road shows a red-brick warehouse matching the building footprint at the geocode point.",
+        "mapsUrl": "https://www.google.com/maps/@40.35270,-74.47820,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No barrier arm, sliding gate, or checkpoint. The NE truck court is open paved area; the access road from Cranbury South River Rd connects directly into the court with no perimeter fence (confirmed z20/z21 satellite).",
+          "guardShack": "No booth structure anywhere at the building or court entrance.",
+          "dropYard": "Separate row of drop trailers (no tractors) along the NE edge of the court, beyond the active dock-door staging.",
+          "dockDoors": "~32 dock doors along the single NE building face (band 25-50).",
+          "dropArea": "Drop trailers parked in the NE court plus trailers staged at dock doors; estimate 25-50 band.",
+          "drivewayLong": "The dock court approach is long and wide enough to hold 3+ trucks.",
+          "trailerParkingCapacity": "Honest overhead estimate of court trailer capacity."
+        }
+      },
+      {
+        "id": "09-mobis-parts-america-pdc-south-windsor-ct",
+        "name": "Mobis Parts America PDC - South Windsor CT",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 41.8553,
+          "lng": -72.598
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.8538,
+            "west": -72.5992,
+            "north": 41.8567,
+            "east": -72.5965
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 41.8542,
+              "west": -72.5977,
+              "north": 41.856,
+              "east": -72.597
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.8542,
+              "west": -72.5975,
+              "north": 41.8562,
+              "east": -72.5968
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 36,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 17.9,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Address: 135 Sullivan Ave, South Windsor, CT 06074\n- Locked center: 41.85530, -72.59800\n- Confirmation: Roster geocode was rooftop-accurate (moved only 35 m) and landed on\n  a large white-roofed warehouse. Street View at the Sullivan Ave driveway shows a blue\n  \"HYUNDAI MOBIS\" monument sign — positive identification. Web search confirms 135\n  Sullivan Ave is a 292,000 SF auto-parts warehouse built 2015, leased to Mobis Parts\n  America (Hyundai Mobis subsidiary); acquired by Winstanley Enterprises in 2020 as one\n  of a pair of warehouses on the site.",
+        "mapsUrl": "https://www.google.com/maps/@41.85530,-72.59800,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No barrier arm, sliding/swing gate, guard booth, or perimeter fence is visible at the Sullivan Ave driveway or the truck-court entrance in z19/z20 satellite, nor from Street View of the public road. A driver-info listing (warehouserating.com) states 'the location has a gate' with first-come-first-served check-in - this may refer to an interior control point not resolvable from imagery, or be outdated. Classified false on the rubric (open driveway with no visible control), flagged medium-confidence.",
+          "guardShack": "No booth structure visible anywhere; flagged given the imagery/web discrepancy.",
+          "entryExitTogether": "Single shared driveway off Sullivan Ave serves entry and exit; the Mobis monument sign marks this driveway.",
+          "dropYard": "A separate row of drop trailers (no tractors) sits beyond the active dock staging along the SE court.",
+          "dockDoors": "~36 dock doors along the single SE building face (band 25-50).",
+          "dropArea": "Drop trailers parked in the shared SE court; estimate 10-25 band.",
+          "drivewayLong": "Long, wide dock-court approach holding 3+ trucks."
+        }
+      },
+      {
+        "id": "10-mobis-parts-america-pdc-sumner-wa",
+        "name": "Mobis Parts America PDC - Sumner WA",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 47.2344,
+          "lng": -122.2426
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 47.233,
+            "west": -122.2443,
+            "north": 47.2356,
+            "east": -122.2413
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 47.2336,
+              "west": -122.2443,
+              "north": 47.235,
+              "east": -122.2438
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 47.2349,
+              "west": -122.2437,
+              "north": 47.23545,
+              "east": -122.2415
+            },
+            {
+              "south": 47.2333,
+              "west": -122.2437,
+              "north": 47.2339,
+              "east": -122.2415
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 28,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 16.2,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "- Address: 14000 24th St E, Sumner, WA 98390\n- Locked center: 47.23440, -122.24260\n- Confirmation: Roster geocode was accurate (moved only 117 m) and landed on a\n  large white-roofed warehouse. Web search confirms 14000 24th St E = \"The Cascade\n  Building,\" a 385,468 SF distribution center built December 2015 within Sumner\n  Corporate Park (a 150-acre, 3M SF distribution park). Mobis Parts America leases\n  space here (~181,000 SF per the roster) as the Pacific Northwest PDC; Panjiva import\n  records show inbound Hyundai/Mobis parts shipments. The building is multi-tenant\n  (a \"For Lease\" sign is visible in Street View).",
+        "mapsUrl": "https://www.google.com/maps/@47.23440,-122.24260,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Open multi-tenant distribution building (the Cascade Building, Sumner Corporate Park). North dock court fronts 24th St E directly via open curb cuts with only a landscape strip; no barrier, fence, or checkpoint. South court connects to the open park road network. Confirmed in z19 satellite and Mar-2025 Street View.",
+          "guardShack": "No booth structure at any court entrance.",
+          "shipRcvSeparate": "Cross-dock building with two distinct dock banks on opposite (north and south) faces, both holding backed-in trailers.",
+          "backupSensitive": "North dock doors face directly onto 24th St E across only a narrow landscape strip; trucks back in from the street-side apron with minimal stacking depth, so a queue would spill toward the road.",
+          "drivewayShort": "Shallow street-side dock apron on the north face; only 1-2 trucks of approach depth before docking.",
+          "dropYard": "Drop trailers (no tractors) parked along the building's west side and within the dock courts.",
+          "dockDoors": "~70 doors combined across the north and south faces of the Cascade Building (band 50+); multi-tenant building (Mobis occupies ~181,000 of 385,468 SF) so Mobis-allocated share uncertain.",
+          "dropArea": "Drop trailers along the west strip and courts; estimate 10-25 band."
+        }
+      },
+      {
+        "id": "11-glovis-america-vehicle-processing-center-west-point-ga",
+        "name": "Glovis America Vehicle Processing Center - West Point GA",
+        "type": "Vehicle Processing Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 32.913,
+          "lng": -85.1315
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.9078,
+            "west": -85.1385,
+            "north": 32.9185,
+            "east": -85.1245
+          },
+          "truckGate": {
+            "south": 32.9103,
+            "west": -85.1381,
+            "north": 32.9113,
+            "east": -85.1368
+          },
+          "dropYards": [
+            {
+              "south": 32.9079,
+              "west": -85.1355,
+              "north": 32.9132,
+              "east": -85.127
+            },
+            {
+              "south": 32.9133,
+              "west": -85.137,
+              "north": 32.9165,
+              "east": -85.13
+            }
+          ],
+          "dockAprons": [],
+          "staging": {
+            "south": 32.9103,
+            "west": -85.1375,
+            "north": 32.912,
+            "east": -85.1345
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 385,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "NONE",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster coordinate (32.911036, -85.137392 / 2000 Webb Rd) lands at the\nsouthwest tip of the Kia Georgia (KaGA) automotive campus. A z20 satellite probe\nat that exact point shows only an open paved parking-lot apron off Webb Rd — not\na building. Web research (glovisusa.com locations; CMac.ws / YellowPages\ndirectory listings; Automotive Logistics feature) confirms Glovis America\noperates a Vehicle Processing Center co-located on the KaGA campus where Kia\nopened its assembly plant in late 2009. Glovis is Hyundai Motor Group's captive\nfinished-vehicle 3PL. The auditable \"facility\" is the VPC vehicle-marshaling and\nprocessing operation on the campus — not the empty roster pixel — so the center\nwas locked on the core vehicle-storage lots at 32.9130, -85.1315.",
+        "mapsUrl": "https://www.google.com/maps/@32.9130,-85.1315,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "siteSelection": "Roster point (2000 Webb Rd) lands at an open paved parking-lot entrance off Webb Rd at the SW tip of the Kia Georgia (KaGA) / Glovis campus. The Glovis Vehicle Processing Center is the finished-vehicle marshaling/processing operation co-located on the KaGA campus; audited the VPC vehicle-storage yards and rail facility rather than the empty roster pixel. Locked center on the core vehicle lots at 32.9130,-85.1315.",
+          "facilityType": "Finished-vehicle Processing Center: no traditional loading docks. Vehicles move by car-carrier truck and rail. dockDoorCount=0 and dockDoors=NONE reflect VPC layout, not a missing count.",
+          "railServed": "Confirmed - multiple parallel auto-rack rail spurs run directly into the vehicle yards on the NW side (probe rail.png), classic VPC rail receiving/shipping.",
+          "dropArea": "50+ - tens of thousands of finished-vehicle stalls in marked rows fill the southern and western lots; this is the dominant feature of the site. Counted as vehicle storage, not box-trailer drop, but dropArea band reflects massive vehicle marshaling capacity.",
+          "truckGate": "Medium confidence. The KaGA/Glovis campus is a secured private facility with controlled access; no Street View inside. Internal guard/checkpoint structure visible near campus interior roads (gate2.png). Public-road Street View at Webb Rd shows only an open employee-lot apron. Car-carrier trucks enter through a controlled campus gate - treated as truckGate true / remoteGs not certain.",
+          "guardShack": "Could not positively confirm a staffed booth at the car-carrier gate from imagery; small internal structures present. Left guardShack false, remoteGs true as best estimate; flagged uncertain.",
+          "multipleFacilities": "True - the property is a large campus with the Kia assembly plant building cluster plus separate Glovis VPC processing buildings and rail yard.",
+          "urbanRural": "Rural - West Point GA, small town; campus surrounded by forest and farmland with an I-85 interchange nearby.",
+          "siteAreaAcres": "~385 acres for the audited VPC vehicle-yard perimeter; the full KaGA campus including the assembly plant is far larger (~2000+ acres)."
+        }
+      },
+      {
+        "id": "12-glovis-america-vehicle-processing-center-shreveport-la",
+        "name": "Glovis America Vehicle Processing Center - Shreveport LA",
+        "type": "Vehicle Processing Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoors",
+          "dropArea",
+          "scale",
+          "postGateStaging",
+          "fastLaneOpportunity"
+        ],
+        "center": {
+          "lat": 32.426875,
+          "lng": -93.920747
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.4215,
+            "west": -93.9285,
+            "north": 32.4355,
+            "east": -93.91
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 32.4315,
+              "west": -93.9255,
+              "north": 32.4365,
+              "east": -93.9205
+            }
+          ],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 12,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 8,
+          "siteAreaAcres": 730,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The roster geocode flagged a 10,038 m move, so location was verified carefully.\nA z16 satellite probe at the roster point lands directly on the former General\nMotors Shreveport Operations assembly plant — a sprawling industrial building\ncomplex. Web research (KTBS, KSLA, Louisiana Economic Development,\nopportunitylouisiana.gov) confirms Glovis America announced a vehicle processing\nand distribution hub at the former GM plant in Caddo Parish, occupying a\n125,000-sqft facility plus ~90 adjoining acres of the much larger former-GM\ncampus. Glovis outfits imported vehicles with dealer-requested equipment. This is\na positive ID; center kept on the main building at 32.426875, -93.920747.",
+        "mapsUrl": "https://www.google.com/maps/@32.4269,-93.9207,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "siteSelection": "Roster point (7600 Antoine Blvd) lands directly on the former GM Shreveport Operations plant - a confirmed positive ID via web research (KTBS, KSLA, Louisiana Economic Development): Glovis America operates a vehicle processing and distribution hub here, occupying a 125,000 sqft facility plus ~90 adjoining acres within the much larger ~730-acre former-GM complex. Center kept on the main building.",
+          "facilityType": "Vehicle Processing Center inside a repurposed former auto-assembly plant. Glovis outfits imported vehicles with dealer-requested equipment and exterior upgrades. dockDoorCount/dockDoors reflect legacy plant truck docks; vehicle movement is mainly by car-carrier and rail.",
+          "railServed": "Confirmed - active rail yard on the east side with auto-rack and boxcar railcars parked on multiple tracks (Street View 2024-10), plus rail spurs into the property.",
+          "occupancyState": "The former-GM complex is largely vacant / partly disused; perimeter roads are wide but empty and decaying (Street View shows weed-grown disused roads). A February 2024 fire was reported at the former GM plant. Glovis occupies only an operational fraction of the site.",
+          "dropYard": "Active vehicle-storage marshaling lot in the NW portion of the property holding several hundred finished vehicles in marked rows (probe vstore.png), with adjacent rail.",
+          "truckGate": "Medium-to-low confidence. Could not positively confirm a controlled, staffed truck gate from public Street View - the perimeter access roads are open and disused. Glovis operates a secured processing operation so a controlled gate is assumed (truckGate true, remoteGs true as best estimate). truckGate area could not be boxed.",
+          "guardShack": "Not confirmed - no staffed booth identified in available imagery. Left false; flagged uncertain.",
+          "dockDoors": "Legacy GM-plant truck docks exist on the building faces; exact active count uncertain given partial disuse. Estimated 10-25 band, flagged uncertain.",
+          "multipleFacilities": "True - large multi-building former auto-plant campus with interconnected and separate structures plus a newer standalone building.",
+          "urbanRural": "Rural - edge of Shreffeport in a semi-rural/industrial area surrounded by forest and cleared land.",
+          "siteAreaAcres": "~730 acres for the full former-GM complex perimeter; Glovis's contracted footprint is ~90 acres + 125k sqft building."
+        }
+      },
+      {
+        "id": "13-glovis-america-port-vehicle-processing-brunswick-ga",
+        "name": "Glovis America Port Vehicle Processing - Brunswick GA",
+        "type": "Port / Vehicle Import Processing Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "multiStep",
+          "preGateStaging"
+        ],
+        "center": {
+          "lat": 31.127,
+          "lng": -81.539
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 31.108,
+            "west": -81.553,
+            "north": 31.1355,
+            "east": -81.53
+          },
+          "truckGate": {
+            "south": 31.123,
+            "west": -81.5439,
+            "north": 31.1246,
+            "east": -81.5424
+          },
+          "dropYards": [
+            {
+              "south": 31.1085,
+              "west": -81.5525,
+              "north": 31.122,
+              "east": -81.54
+            },
+            {
+              "south": 31.124,
+              "west": -81.546,
+              "north": 31.133,
+              "east": -81.534
+            }
+          ],
+          "dockAprons": [],
+          "staging": {
+            "south": 31.1215,
+            "west": -81.545,
+            "north": 31.124,
+            "east": -81.5425
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 8,
+          "siteAreaAcres": 1627,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "NONE",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": true
+        },
+        "dossierExcerpt": "A z15 satellite probe at the roster point lands inside the Georgia Ports\nAuthority (GPA) Colonel's Island Terminal at the Port of Brunswick. Web research\n(GPA facilities page, glovisusa.com locations, Automotive Logistics) confirms\nColonel's Island is a ~1,700-acre roll-on/roll-off auto terminal with multiple\non-terminal vehicle processors; Glovis America operates as one of those\nprocessors and Brunswick is the nation's busiest RoRo port. The on-terminal\nprocessors share the secured terminal's gate, fence line and storage, so the\naudit treats the GPA secured terminal as the facility. Center placed on the\nterminal core at 31.1270, -81.5390.",
+        "mapsUrl": "https://www.google.com/maps/@31.1270,-81.5390,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "siteSelection": "Roster point (1 Joe Frank Harris Blvd) lands inside the Georgia Ports Authority Colonel's Island Terminal at the Port of Brunswick - confirmed via web research (GPA facilities page, glovisusa.com, Automotive Logistics). Colonel's Island is a ~1,700-acre RoRo auto terminal with multiple on-terminal vehicle processors; Glovis America operates as one of those processors. The audited facility is the GPA secured terminal as a whole, since the on-terminal processors share the gate, fence line and storage. Center placed on the terminal core at 31.1270,-81.5390.",
+          "facilityType": "Port / RoRo vehicle import-export processing terminal. No traditional loading docks - vehicles roll on/off ships at the RoRo berths and move within the terminal by drive-away and by rail. dockDoorCount=0 / dockDoors=NONE reflect this.",
+          "railServed": "Confirmed - a curved auto-rack rail loop runs into the terminal on the west side (probe rail.png), used for rail receiving/shipping of finished vehicles.",
+          "truckGate": "TRUE. The terminal is a fully secured GPA port facility (TWIC-controlled). All vehicular traffic funnels across a single 4-lane divided causeway and through a controlled main gate complex before reaching the storage and processing areas.",
+          "guardShack": "TRUE (medium confidence). A secured GPA port terminal of this class operates a staffed main gate complex; small gate-area structures are visible. Exact booth identification flagged uncertain.",
+          "backupSensitive": "TRUE - the entire terminal is served by ONE causeway access road; any queue at the gate would back up along the single causeway with no alternate route. High chokepoint sensitivity.",
+          "multiStep": "TRUE (best estimate, flagged uncertain) - secured port terminals typically run a multi-stage check (port gate, then processor/yard checkpoints). Marked truck-staging grids are visible inside the terminal.",
+          "dropArea": "50+ - GPA states 637+ acres of paved open vehicle storage; tens of thousands of finished vehicles in marked rows fill the terminal.",
+          "multipleFacilities": "True - multiple processing buildings and several on-terminal processors plus RoRo berth infrastructure on a single large campus.",
+          "urbanRural": "Rural - the terminal sits on a marsh peninsula isolated from Brunswick's urban fabric, reached only by the causeway.",
+          "siteAreaAcres": "~1627 acres from the perimeter box, consistent with the GPA-stated ~1,700-acre terminal."
+        }
+      },
+      {
+        "id": "14-glovis-america-port-vehicle-processing-newark-elizabeth-nj",
+        "name": "Glovis America Port Vehicle Processing - Newark/Elizabeth NJ",
+        "type": "Port / Vehicle Import Processing Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "multiStep",
+          "preGateStaging"
+        ],
+        "center": {
+          "lat": 40.694,
+          "lng": -74.134
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.6885,
+            "west": -74.1405,
+            "north": 40.701,
+            "east": -74.127
+          },
+          "truckGate": {
+            "south": 40.6982,
+            "west": -74.1384,
+            "north": 40.6989,
+            "east": -74.1372
+          },
+          "dropYards": [
+            {
+              "south": 40.689,
+              "west": -74.1395,
+              "north": 40.697,
+              "east": -74.1285
+            },
+            {
+              "south": 40.697,
+              "west": -74.139,
+              "north": 40.701,
+              "east": -74.131
+            }
+          ],
+          "dockAprons": [],
+          "staging": {
+            "south": 40.6978,
+            "west": -74.139,
+            "north": 40.6992,
+            "east": -74.137
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 35,
+          "truckGateCount": 1,
+          "buildingCount": 7,
+          "siteAreaAcres": 270,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "NONE",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": true
+        },
+        "dossierExcerpt": "The roster geocode was flagged GEOMETRIC_CENTER (lower precision). A z15 probe at\nthe roster point (40.672346, -74.149854 / \"E Bay Ave, Elizabeth\") landed inside\nthe APM/Maher CONTAINER terminal on the Elizabeth side — a container terminal,\nnot an auto-processing facility, so the roster point is wrong for this facility.\nWeb research resolved the correct site: Glovis America's listed Newark\nvehicle-processing operation corresponds to the Port Newark Auto Terminal. Moran\nShipping and Ports America sources confirm Port Newark's RoRo/auto terminal\nserves Hyundai Glovis and that FAPS Inc. processes Hyundai/Kia vehicles there.\nDecisive evidence: Street View at the terminal entrance shows a \"PORTS AMERICA —\nPort Newark Auto Terminal, 325 Distribution St, Newark, New Jersey 07114\" sign.\nThe locked center was relocated to the Port Newark Auto Terminal core at",
+        "mapsUrl": "https://www.google.com/maps/@40.6940,-74.1340,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "siteSelection": "Roster address 'E Bay Ave, Elizabeth NJ' geocoded to GEOMETRIC_CENTER and landed inside the APM/Maher CONTAINER terminal on the Elizabeth side - wrong building. Web research (Glovis America locations; Moran Shipping; Ports America) shows the Glovis Newark vehicle-processing operation is at the Port Newark Auto Terminal. Street View at the entrance carries a clear 'PORTS AMERICA - Port Newark Auto Terminal, 325 Distribution St, Newark, NJ 07114' sign. FAPS Inc. and Glovis process Hyundai/Kia vehicles at Port Newark's auto terminals. Relocated the locked center to the Port Newark Auto Terminal core at 40.6940,-74.1340.",
+          "facilityType": "Port RoRo vehicle import/export processing terminal on the Port Newark peninsula tip. No traditional loading docks - vehicles roll on/off ships at the wharf and move within the terminal by drive-away and rail. dockDoorCount=0 / dockDoors=NONE reflect this.",
+          "truckGate": "TRUE - confirmed in Street View (2019-07): a sliding chain-link gate (with reflective markers) spans the truck entrance off Distribution St.",
+          "guardShack": "TRUE - confirmed in Street View: a low windowed guard/terminal-office building sits immediately beside the gate at 325 Distribution St under the Ports America sign.",
+          "railServed": "TRUE - rail tracks cross the access road at the gate ('DO NOT STOP ON TRACKS' sign) and multiple parallel tracks run along the terminal's north edge in satellite imagery; auto-rack rail service.",
+          "backupSensitive": "TRUE - dense urban port environment; the gate sits at a rail-crossed intersection on Distribution St with limited stacking room, so a truck queue would foul the rail crossing / port road.",
+          "multiStep": "TRUE (best estimate, flagged uncertain) - secured port auto terminals typically run a gate check plus internal yard/processor checkpoints.",
+          "dropArea": "50+ - the terminal is filled with tens of thousands of finished vehicles in densely packed marked rows across the peninsula.",
+          "multipleFacilities": "True - multiple large PDI/processing buildings plus terminal-office and wharf infrastructure on one terminal campus.",
+          "urbanRural": "Urban - the facility is inside the dense Port Newark/Elizabeth marine-terminal complex in the Newark metro core.",
+          "shipRcvSeparate": "False - this is a RoRo import/export terminal; vehicles flow through shared wharf and storage rather than separate shipping/receiving dock banks.",
+          "siteAreaAcres": "~270 acres for the secured auto-terminal perimeter (irregular peninsula footprint within the ~390-acre bounding box)."
+        }
+      },
+      {
+        "id": "15-glovis-america-vehicle-processing-center-tacoma-wa-hyundai",
+        "name": "Glovis America Vehicle Processing Center - Tacoma WA (Hyundai)",
+        "type": "Port / Vehicle Import Processing Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "trailerParkingCapacity",
+          "siteAreaAcres",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 47.2613,
+          "lng": -122.37
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 47.2572,
+            "west": -122.3742,
+            "north": 47.2656,
+            "east": -122.3656
+          },
+          "truckGate": {
+            "south": 47.2628,
+            "west": -122.3734,
+            "north": 47.2634,
+            "east": -122.3725
+          },
+          "dropYards": [
+            {
+              "south": 47.2576,
+              "west": -122.374,
+              "north": 47.265,
+              "east": -122.369
+            }
+          ],
+          "dockAprons": [],
+          "staging": {
+            "south": 47.263,
+            "west": -122.3725,
+            "north": 47.2638,
+            "east": -122.3705
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 30,
+          "trailerParkingCapacity": 8000,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 110,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "NONE",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Glovis America Vehicle Processing Center - Tacoma WA (Hyundai)\nType: Port / Vehicle Import Processing Center\nAddress: 3400 Taylor Way, Tacoma, WA 98421",
+        "mapsUrl": "https://www.google.com/maps/@47.261300,-122.370000,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facility": "Port of Tacoma vehicle processing center operated by Glovis America / WWS for Hyundai-Kia auto imports. Confirmed via Glovis locations page + NWSA press release naming 3400 Taylor Way, Tacoma. Massive finished-vehicle marshalling yard, not a freight warehouse.",
+          "truckGate": "Double-leaf chain-link swing gate across the gravel driveway entering the NW corner of the vehicle yard, confirmed in two Street View headings (2024-04). Rail crossing immediately in front of the gate on the access road.",
+          "guardShack": "Small white booth / kiosk structure visible just inside the gate, left of the lane, in Street View. Footprint is small; possible it functions as remote check-in rather than a continuously staffed shack -- flagged uncertain.",
+          "dockDoors": "NONE -- this is a vehicle processing center; vehicles drive on/off car-carriers and ships. The on-site PDI/processing building has roll-up service doors but no freight loading docks.",
+          "dropArea": "50+ -- the yard is overwhelmingly finished-vehicle storage (thousands of cars in marked rows); also stages car-carrier trailers. dropYard true.",
+          "postGateStaging": "Paved staging/queue area with KEEP CLEAR markings just inside the gate where car-carriers and processing trucks stage.",
+          "railServed": "Rail spurs run alongside the access road and into the property -- inbound vehicles arrive by both rail and RoRo ship.",
+          "trailerParkingCapacity": "Estimate expressed as vehicle-storage capacity (~8,000 cars across the marshalling rows); not trailer stalls. Low confidence on exact figure.",
+          "siteAreaAcres": "~110 acres derived from the perimeter box covering the core marshalling yard; the broader Glovis/WWS port footprint is larger.",
+          "fastLaneOpportunity": "Wide gravel apron at the gate and broad internal roadways leave ample room to add a bypass / express lane.",
+          "urbanRural": "Urban -- inside the Port of Tacoma industrial tideflats, dense industrial fabric of the Tacoma metro."
+        }
+      },
+      {
+        "id": "16-glovis-america-port-vehicle-processing-jacksonville-fl",
+        "name": "Glovis America Port Vehicle Processing - Jacksonville FL",
+        "type": "Port / Vehicle Import Processing Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoors",
+          "railServed",
+          "entryLanes",
+          "exitLanes",
+          "trailerParkingCapacity",
+          "siteAreaAcres",
+          "multipleFacilities"
+        ],
+        "center": {
+          "lat": 30.346,
+          "lng": -81.625
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 30.3428,
+            "west": -81.6287,
+            "north": 30.3496,
+            "east": -81.6212
+          },
+          "truckGate": {
+            "south": 30.3451,
+            "west": -81.6276,
+            "north": 30.3456,
+            "east": -81.6271
+          },
+          "dropYards": [
+            {
+              "south": 30.3433,
+              "west": -81.6283,
+              "north": 30.3492,
+              "east": -81.623
+            }
+          ],
+          "dockAprons": [],
+          "staging": {
+            "south": 30.3453,
+            "west": -81.6272,
+            "north": 30.346,
+            "east": -81.6262
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 16,
+          "trailersVisible": 25,
+          "trailerParkingCapacity": 6000,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 70,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Glovis America Port Vehicle Processing - Jacksonville FL\nType: Port / Vehicle Import Processing Center\nRoster address: 2064 E 11th St, Jacksonville, FL 32206",
+        "mapsUrl": "https://www.google.com/maps/@30.346000,-81.625000,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facility": "Roster address 2064 E 11th St is a small office building in a residential block, not the operational yard. The Glovis Jacksonville port vehicle-processing operation runs out of the JAXPORT Talleyrand Marine Terminal auto-import complex ~0.4 mi south. Talleyrand handles auto imports for multiple processors; the audited yard is the auto-import vehicle processing area at ~30.346,-81.625.",
+          "truckGate": "Confirmed truck gate in Street View (2022 + 2025): a sliding chain-link gate across the truck lane with a check-in lane, STOP sign and overhead message board. Gate signage references 'Talleyrand' / 'Southeast Toyota'.",
+          "guardShack": "Definitive -- a white/red multi-window guard booth (single-vehicle footprint) sits in the entry lane beside the sliding gate, visible clearly in Street View and as a dark rooftop box in z21 satellite.",
+          "dockDoors": "10-25 estimate -- the elongated central processing/PDI buildings show a regular rhythm of roll-up service-bay doors. These are vehicle processing/wash/PDI bays, not classic freight docks; banded with low confidence.",
+          "dropArea": "50+ -- the yard is dominated by finished-vehicle storage, thousands of cars in marked rows. dropYard true.",
+          "railServed": "false (uncertain) -- the broader Talleyrand terminal is rail-served (Talleyrand ICTF), but no rail spur is visible running into the vehicle storage yard itself; vehicle import is primarily RoRo ship + car-carrier truck.",
+          "multipleFacilities": "Talleyrand hosts several auto-import operators in adjacent yards; the audited footprint is one large yard cluster -- left false, flagged.",
+          "fastLaneOpportunity": "Wide paved apron at the gate and broad internal roadways leave room for an express/bypass lane.",
+          "urbanRural": "Urban -- JAXPORT Talleyrand industrial district within the Jacksonville metro along the St. Johns River.",
+          "siteAreaAcres": "~70 acres for the audited yard cluster derived from the perimeter box; the full Talleyrand auto complex is larger."
+        }
+      },
+      {
+        "id": "17-glovis-ev-logistics-america-savannah-integrated-warehouse-pooler-ga",
+        "name": "Glovis EV Logistics America - Savannah Integrated Warehouse (Pooler GA)",
+        "type": "Distribution Warehouse / Logistics Hub",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "preGateStaging",
+          "postGateStaging",
+          "drivewayLong",
+          "drivewayShort",
+          "backupSensitive",
+          "entryExitTogether",
+          "entryExitSeparate",
+          "entryLanes",
+          "exitLanes",
+          "fastLaneOpportunity",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "urbanRural",
+          "connectivityIssue",
+          "multipleFacilities",
+          "scale",
+          "dropYard",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 32.088338,
+          "lng": -81.262896
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.08654,
+            "west": -81.26502,
+            "north": 32.09014,
+            "east": -81.26077
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 0,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "NONE",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Glovis EV Logistics America - Savannah Integrated Warehouse (Pooler GA)\nType: Distribution Warehouse / Logistics Hub\nRoster address: Pooler, GA 31322 (street address not publicly disclosed)",
+        "mapsUrl": "https://www.google.com/maps/@32.088338,-81.262896,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "UNRESOLVED": "Facility could not be located. The Glovis EV Logistics America 'Savannah integrated warehouse' opened only in Q1 2026; the two primary sources (Seoul Economic Daily 2026-04-15, Korea Herald) place it only in 'Savannah, Georgia' with no street address, industrial park, or highway named. The roster itself records 'exact street address not publicly disclosed - city/ZIP only' and the geocode precision is APPROXIMATE (Pooler ZIP 31322 centroid).",
+          "geocode": "The roster coordinate 32.088338,-81.262896 lands inside a residential subdivision in eastern Pooler -- definitely not the warehouse. It is a ZIP centroid, not the building.",
+          "research": "FMCSA registers GLOVIS EV LOGISTICS AMERICA LLC at 600 Kona Drive, Ellabell GA 31308 -- that is the HMGMA Metaplant campus support address, not the new 69,000 sqm (~742,000 sqft) integrated warehouse. The Pooler / I-16 corridor contains many large speculative logistics warehouses; none is publicly attributable to Glovis from available sources.",
+          "perimeter": "PLACEHOLDER ONLY -- the perimeter box is a nominal ~0.2 mi square centered on the unverified ZIP-centroid coordinate. It does NOT represent a confirmed building footprint and must not be used as a real geofence.",
+          "classification": "All 22 classification fields are defaults (no facility imagery available) and are listed in uncertainFields. As a Glovis HMGMA-linked integrated distribution warehouse, the facility would most plausibly be a dock-door cross-dock building with a truck gate, but this is unverified.",
+          "urbanRural": "Tentatively Rural -- the Pooler / I-16 logistics corridor is edge-of-town / interchange industrial; unverified."
+        }
+      }
+    ]
+  }
+}

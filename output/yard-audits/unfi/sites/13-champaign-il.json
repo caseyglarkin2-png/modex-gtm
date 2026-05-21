@@ -1,0 +1,52 @@
+{
+  "name": "UNFI - Champaign IL DC (Newell)",
+  "type": "Distribution Center",
+  "coords": { "lat": 40.151009, "lng": -88.232322 },
+  "geofences": {
+    "perimeter": { "south": 0.14790, "west": -88.23560, "north": 0.15300, "east": -88.22870 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 0.14820, "west": -88.23480, "north": 0.15010, "east": -88.23380 },
+      { "south": 0.14900, "west": -88.23090, "north": 0.15240, "east": -88.22980 }
+    ],
+    "dockAprons": [
+      { "south": 0.14920, "west": -88.23400, "north": 0.15240, "east": -88.23300 },
+      { "south": 0.14920, "west": -88.23260, "north": 0.15250, "east": -88.23150 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 130,
+    "truckGateCount": 0,
+    "buildingCount": 2,
+    "siteAreaAcres": 36.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.151009,-88.232322,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "multiStep"],
+  "fieldNotes": {
+    "truckGate": "Open campus. No barrier arm, sliding/swing gate, or checkpoint pinch-point at any entry. Truck driveways run unobstructed off the shared industrial-park access road (Apollo Dr area) directly onto the truck pavement.",
+    "guardShack": "No guard booth at any entrance. Only a UNFI directional sign at the access-road junction.",
+    "shipRcvSeparate": "Dock doors run along both the SW/west building face and the east building face — two distinct dock banks consistent with separate shipping and receiving clusters.",
+    "dropArea": "Diagonal trailer-parking stalls on the far east edge of the property plus a trailer block at the SW corner; many trailers parked without tractors.",
+    "postGateStaging": "Wide paved truck yards on both the west and east faces provide interior queueing room ahead of the docks.",
+    "urbanRural": "Edge-of-town Champaign industrial park; the property abuts open farm fields to the west and south. Judged Rural per the small-town-industrial tie-break rule, though it sits in a metro of ~230k.",
+    "entryLanes": "Truck driveways are uncontrolled, so 'lanes' are nominal single-lane drive widths; not separately marked.",
+    "buildingCount": "Main long warehouse plus an attached/adjacent front office structure counted as 2."
+  },
+  "method": "deep-audit"
+}

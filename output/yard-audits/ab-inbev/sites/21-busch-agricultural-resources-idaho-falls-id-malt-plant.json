@@ -1,0 +1,63 @@
+{
+  "name": "Busch Agricultural Resources - Idaho Falls ID Malt Plant",
+  "type": "Agricultural Processing - Malt Plant",
+  "coords": { "lat": 43.4444, "lng": -112.0685 },
+  "geofences": {
+    "perimeter": { "south": 43.44240, "west": -112.07150, "north": 43.44650, "east": -112.06550 },
+    "truckGate": { "south": 43.44540, "west": -112.07140, "north": 43.44600, "east": -112.07060 },
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": { "south": 43.44300, "west": -112.06900, "north": 43.44400, "east": -112.06700 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 6,
+    "trailersVisible": 2,
+    "trailerParkingCapacity": 20,
+    "truckGateCount": 1,
+    "buildingCount": 7,
+    "siteAreaAcres": 54.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@43.4444,-112.0685,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "The main entrance off Yellowstone Hwy (S Yellowstone Hwy) is a long open access road that crosses the rail spur and branches into landscaped driveways with a monument sign on the median - no barrier arm, sliding gate, or checkpoint structure visible in satellite at zoom 20. No Street View coverage exists on the access road itself (highway-level panos only), but every satellite probe of the entrance shows open, uncontrolled driveways.",
+    "guardShack": "No staffed guard booth visible at the entrance or anywhere along the access road in satellite imagery.",
+    "remoteGs": "No gate exists, so no remote check-in.",
+    "drivewayLong": "The access road runs a long distance (300+ m) from Yellowstone Hwy across the rail and into the plant, opening into a very large paved truck-circulation yard - ample room to queue many trucks.",
+    "scale": "Malt plants receive inbound barley and ship finished malt by truck; a truck scale is operationally expected and a small structure consistent with a scale house is present in the truck yard, but it could not be confirmed unambiguously from overhead imagery - flagged uncertain.",
+    "railServed": "Confirmed - a rail spur curves off the mainline (parallel to Yellowstone Hwy) into the property; a long string of covered hopper rail cars is parked on the siding alongside the malt plant and grain storage buildings. Rail is a primary mode for both inbound barley and outbound malt.",
+    "dockDoors": "Not a dock-door distribution facility. Malt/barley moves via bulk loadout spouts and conveyors; estimated ~6 truck/material loading points/doors at the process and storage buildings (low-confidence estimate).",
+    "dropArea": "No dedicated marked trailer-storage drop lot; trucks circulate through a large open yard. Set NONE.",
+    "multipleFacilities": "Multiple distinct structures on the campus - the tall malting/process buildings (~250 ft), a large segmented-roof grain storage building, grain silo/germination drum clusters, an office, wastewater treatment ponds, and outbuildings.",
+    "urbanRural": "Facility sits in open Idaho farmland (barley country) south of Idaho Falls along Yellowstone Hwy, surrounded by cropland - clearly Rural.",
+    "connectivityIssue": "Rural farmland setting but directly along a state highway with a neighboring industrial facility - cellular coverage likely adequate; set false.",
+    "buildingCount": "Approximately 7 distinct structures: tall malting/process buildings, large grain storage building, silo/drum clusters, office, plus outbuildings."
+  },
+  "method": "deep-audit"
+}

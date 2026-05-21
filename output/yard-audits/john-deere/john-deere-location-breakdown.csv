@@ -1,0 +1,53 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+John Deere Waterloo Works - Tractor Operations - Waterloo IA,Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,,YES,2,2,YES,,,YES,,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@42.5210,-92.2695,400m/data=!3m1!1e3"
+John Deere Waterloo Works - Engine Works - Waterloo IA,Engine Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,YES,,,YES,,,,,Rural,,,,,"https://www.google.com/maps/@42.4678,-92.4330,400m/data=!3m1!1e3"
+John Deere Waterloo Works - Drivetrain Operations - Waterloo IA,Component Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,,YES,,1,1,,,YES,,,,YES,,,,Urban,,YES,,,"https://www.google.com/maps/@42.5025,-92.3535,400m/data=!3m1!1e3"
+John Deere Waterloo Foundry - Waterloo IA,Foundry,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,YES,,,YES,,,,,Urban,,YES,,YES,"https://www.google.com/maps/@42.5072,-92.3650,400m/data=!3m1!1e3"
+John Deere Harvester Works - East Moline IL,Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,,YES,2,2,YES,,,YES,,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@41.5240,-90.4360,400m/data=!3m1!1e3"
+John Deere Cylinder Works - Moline IL,Component Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,,,,,YES,,YES,,,,YES,,,,Urban,,YES,,YES,"https://www.google.com/maps/@41.508049,-90.52593,400m/data=!3m1!1e3"
+John Deere Seeding Group / Planter Works - Moline IL,Assembly Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,,,,YES,,YES,,,,YES,,,,Urban,,YES,,YES,"https://www.google.com/maps/@41.50849,-90.531986,400m/data=!3m1!1e3"
+John Deere Davenport Works - Davenport IA,Assembly Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,2,YES,,YES,,,,,YES,,,Rural,,YES,,YES,"https://www.google.com/maps/@41.601800,-90.551500,400m/data=!3m1!1e3"
+John Deere Dubuque Works - Dubuque IA,Assembly Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,2,2,YES,,,YES,,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@42.566837,-90.690881,400m/data=!3m1!1e3"
+John Deere Des Moines Works - Ankeny IA,Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,,YES,2,2,YES,,,YES,,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@41.720916,-93.62938,400m/data=!3m1!1e3"
+John Deere Ottumwa Works - Ottumwa IA,Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,,,YES,,,,YES,,YES,Rural,,YES,,YES,"https://www.google.com/maps/@41.003824,-92.4103,400m/data=!3m1!1e3"
+John Deere Augusta Works (Commercial Products) - Grovetown GA,Assembly Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,YES,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@33.463818,-82.185545,400m/data=!3m1!1e3"
+John Deere Coffeyville Works - Coffeyville KS,Component Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,,,,,,,YES,,,YES,,,,,Rural,,YES,,,"https://www.google.com/maps/@37.09708,-95.584703,400m/data=!3m1!1e3"
+John Deere Thibodaux - Thibodaux LA,Assembly Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,,,,,,,YES,,,,YES,,,,Rural,,YES,,YES,"https://www.google.com/maps/@29.805705,-90.829764,400m/data=!3m1!1e3"
+John Deere Reman - Springfield MO,Remanufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,,,,,,,YES,,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@37.243981,-93.200702,400m/data=!3m1!1e3"
+John Deere Horicon Works - Horicon WI,Assembly Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,,,,YES,,,,YES,,YES,Rural,,YES,,YES,"https://www.google.com/maps/@43.4540,-88.6336,400m/data=!3m1!1e3"
+John Deere Power Products - Greeneville TN,Assembly Plant,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,,YES,,,YES,,YES,Rural,,,,YES,"https://www.google.com/maps/@36.15268,-82.88965,400m/data=!3m1!1e3"
+John Deere Kernersville (Deere-Hitachi Construction) - Kernersville NC,Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,YES,,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@36.13670,-80.09250,400m/data=!3m1!1e3"
+John Deere North American Parts Distribution Center - Milan IL,Parts Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@41.44750,-90.54550,400m/data=!3m1!1e3"
+John Deere Distribution Center - Hebron IN,Parts Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Rural,,,,,"https://www.google.com/maps/@41.2820,-87.3020,400m/data=!3m1!1e3"
+John Deere Parts Distribution Center - Waterloo IA,Parts Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,,Rural,,YES,,YES,"https://www.google.com/maps/@42.50990,-92.28540,400m/data=!3m1!1e3"
+John Deere All-Makes Parts Distribution Center - Rock Valley IA,Parts Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,YES,,,YES,,,,,Rural,,YES,,,"https://www.google.com/maps/@43.19680,-96.31370,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,10,45%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,6,27%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,5,23%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,1,5%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,22,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,13,59%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,15,68%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,7,32%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,15,68%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,22,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,22,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

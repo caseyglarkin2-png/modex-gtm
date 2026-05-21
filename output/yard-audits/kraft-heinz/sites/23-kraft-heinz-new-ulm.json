@@ -1,0 +1,22 @@
+{
+  "name": "Kraft Heinz - New Ulm",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoors"],
+  "fieldNotes": {
+    "truckGate": "Street View clearly shows a chain-link perimeter fence with a wheeled sliding gate across an entrance, confirming a controlled truck gate.",
+    "guardShack": "No booth visible at the gate in the Street View frame; marked remoteGs.",
+    "dropYard": "Extensive rows of parked trailers along the northwest side of the very large plant.",
+    "urbanRural": "Plant on the edge of New Ulm, a small Minnesota town."
+  }
+}

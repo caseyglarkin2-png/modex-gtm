@@ -1,0 +1,46 @@
+{
+  "name": "Westrock Coffee - North Little Rock AR Roasting & Manufacturing",
+  "type": "Roasting Plant / Private-Label Manufacturing",
+  "coords": { "lat": 34.829921, "lng": -92.388925 },
+  "geofences": {
+    "perimeter": { "south": 34.828790, "west": -92.390310, "north": 34.831050, "east": -92.388540 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 34.829230, "west": -92.390050, "north": 34.829560, "east": -92.389560 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 8,
+    "trailersVisible": 4,
+    "trailerParkingCapacity": 6,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 4.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.829921,-92.388925,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoors", "dropArea", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "No controlled truck entrance. The facility sits inside the multi-tenant Collins Industrial Place industrial park; satellite and 2024 Street View show open, unmarked driveways and shared paved aprons connecting buildings — no barrier arm, sliding gate, or pinch-point checkpoint at the property line.",
+    "guardShack": "No staffed booth anywhere on the site or at the park access.",
+    "dockDoors": "Dock doors are on the building's southwest arm; ~6-8 bays estimated with 3-4 trailers backed in (wc-04-sat-n imagery). Resolution and roof glare limit an exact count.",
+    "dropArea": "A few trailers stand near the SW dock arm; no large marked drop-stall lot belonging to Westrock. The big dirt lot full of trucks/RVs/salvage east of the building is a SEPARATE adjacent salvage/towing operation, not Westrock's yard.",
+    "urbanRural": "Edge-of-town light-industrial subdivision in North Little Rock — judged Rural per the small-town-industrial rubric tiebreak.",
+    "drivewayShort": "Approach from the park drive to the dock arm is short (1-2 trucks)."
+  },
+  "method": "deep-audit"
+}

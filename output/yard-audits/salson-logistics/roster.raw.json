@@ -1,0 +1,172 @@
+{
+  "account": "SalSon Logistics",
+  "generatedAt": "2026-05-18",
+  "facilityCount": 15,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "SalSon Logistics - Newark NJ (Flagship Campus)",
+      "city": "Newark",
+      "state": "NJ",
+      "type": "Warehouse / Container Yard",
+      "address": "888 Doremus Avenue, Newark, NJ 07114",
+      "lat": null,
+      "lng": null,
+      "source": "FMCSA SAFER carrier snapshot (USDOT 707789) and salson.com Newark warehouse/container-yard pages; dossier-named flagship 55-acre campus with three yards and ~1M sq ft warehouse"
+    },
+    {
+      "idx": 2,
+      "name": "SalSon Logistics - Newark NJ (481 Doremus Warehouse)",
+      "city": "Newark",
+      "state": "NJ",
+      "type": "Food-Grade Warehouse / Container Storage",
+      "address": "481 Doremus Avenue, Newark, NJ 07105",
+      "lat": null,
+      "lng": null,
+      "source": "LogiCore warehouse directory listing (logicoreapp.com/warehouse/salson-warehouse) - second Port Newark food-grade/liquor/container-storage building, distinct from 888 Doremus"
+    },
+    {
+      "idx": 3,
+      "name": "SalSon Logistics - Florence NJ",
+      "city": "Florence",
+      "state": "NJ",
+      "type": "Warehouse / Transload Hub",
+      "address": "2013 US Highway 130 N, Florence, NJ 08518",
+      "lat": null,
+      "lng": null,
+      "source": "Yelp business listing and Manta; dossier-named transload hub (25 tractors, 80 trailers, maintenance shop) added 2024-2025"
+    },
+    {
+      "idx": 4,
+      "name": "SalSon Logistics - Compton CA",
+      "city": "Compton",
+      "state": "CA",
+      "type": "Intermodal / Transload Warehouse + Secured Yard",
+      "address": "18735 S Ferris Pl, Compton, CA 90220",
+      "lat": null,
+      "lng": null,
+      "source": "FMCSA SAFER carrier snapshot (SalSon Logistics Services LLC, USDOT 3968944); dossier-named 260,000 sq ft warehouse, 66 dock doors, 20-acre secured yard (under construction)"
+    },
+    {
+      "idx": 5,
+      "name": "SalSon Logistics - Conley GA (Atlanta)",
+      "city": "Conley",
+      "state": "GA",
+      "type": "Warehouse / Dedicated Fleet Terminal",
+      "address": "4382 Moreland Avenue, Conley, GA 30288",
+      "lat": null,
+      "lng": null,
+      "source": "Racklify and Dun & Bradstreet business directory listings; dossier-named Atlanta-area Southeast dedicated-fleet hub (~213,000 sq ft)"
+    },
+    {
+      "idx": 6,
+      "name": "SalSon Logistics - North Charleston SC",
+      "city": "North Charleston",
+      "state": "SC",
+      "type": "Drayage Terminal / Food-Grade Warehouse",
+      "address": "7225 Cross County Road, North Charleston, SC 29418",
+      "lat": null,
+      "lng": null,
+      "source": "LogiCore warehouse directory (logicoreapp.com/warehouse/salson-logistics-charleston); dossier-named Charleston port market, located off the North Charleston Terminal"
+    },
+    {
+      "idx": 7,
+      "name": "SalSon Logistics - Chesapeake VA (Norfolk)",
+      "city": "Chesapeake",
+      "state": "VA",
+      "type": "Drayage Terminal / Food-Grade Warehouse",
+      "address": "3832 South Military Hwy, Chesapeake, VA 23321",
+      "lat": null,
+      "lng": null,
+      "source": "LogiCore warehouse directory (logicoreapp.com/warehouse/salson-logistics-norfolk); dossier-named Norfolk VA port market"
+    },
+    {
+      "idx": 8,
+      "name": "SalSon Logistics - Houston TX",
+      "city": "Houston",
+      "state": "TX",
+      "type": "Drayage Terminal / Food-Grade Warehouse",
+      "address": "8357 Liberty Rd, Houston, TX 77028",
+      "lat": null,
+      "lng": null,
+      "source": "LogiCore warehouse directory (logicoreapp.com/warehouse/salson-logistics-houston); dossier-named Houston port market"
+    },
+    {
+      "idx": 9,
+      "name": "SalSon Logistics - Savannah GA",
+      "city": "Savannah",
+      "state": "GA",
+      "type": "Drayage Terminal / Food-Grade Warehouse",
+      "address": "1501 Lissner Avenue, Savannah, GA 31408",
+      "lat": null,
+      "lng": null,
+      "source": "LogiCore warehouse directory (logicoreapp.com/warehouse/salson-logistics-savannah); dossier-named Savannah GA port market"
+    },
+    {
+      "idx": 10,
+      "name": "SalSon Logistics - Smithton PA",
+      "city": "Smithton",
+      "state": "PA",
+      "type": "Transportation Terminal",
+      "address": "159 Painter Rd, Smithton, PA 15479",
+      "lat": null,
+      "lng": null,
+      "source": "Dun & Bradstreet and MerchantCircle business directory listings; SalSon Logistics Inc truck-transport terminal in southwestern PA"
+    },
+    {
+      "idx": 11,
+      "name": "SalSon Logistics - Fishkill NY",
+      "city": "Fishkill",
+      "state": "NY",
+      "type": "Fleet / Distribution Location",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed company locations page lists a Fishkill NY operating location; specific street address could not be confirmed from public sources"
+    },
+    {
+      "idx": 12,
+      "name": "SalSon Logistics - Tacoma WA",
+      "city": "Tacoma",
+      "state": "WA",
+      "type": "Port Drayage Terminal",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Dossier and Transport Topics merger/expansion coverage name Tacoma as a SalSon port-drayage market; specific street address not surfaced in public sources"
+    },
+    {
+      "idx": 13,
+      "name": "SalSon Logistics - Oakland CA",
+      "city": "Oakland",
+      "state": "CA",
+      "type": "Port Drayage Terminal",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Dossier and Transport Topics merger coverage name Oakland as a SalSon port-drayage market; specific street address not surfaced in public sources"
+    },
+    {
+      "idx": 14,
+      "name": "SalSon Logistics - Bakersfield CA",
+      "city": "Bakersfield",
+      "state": "CA",
+      "type": "Intermodal / Fleet Location",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Dossier and Transport Topics merger coverage name Bakersfield as a SalSon intermodal/fleet market; specific street address not surfaced in public sources"
+    },
+    {
+      "idx": 15,
+      "name": "SalSon Logistics - Inland Empire CA",
+      "city": "Inland Empire (Riverside/San Bernardino area)",
+      "state": "CA",
+      "type": "Intermodal / Warehouse Market",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Dossier and Transport Topics merger coverage name the Inland Empire as a SalSon intermodal/warehouse market; no specific city or street address surfaced in public sources"
+    }
+  ]
+}

@@ -1,0 +1,488 @@
+{
+  "account": "FedEx",
+  "generatedAt": "2026-05-18",
+  "facilityCount": 30,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "FedEx Express World Hub - Memphis TN",
+      "city": "Memphis",
+      "state": "TN",
+      "type": "Express national/global superhub (air-to-ground sort)",
+      "address": "2903 Sprankle Ave, Memphis, TN 38118",
+      "lat": 35.061887,
+      "lng": -89.960429,
+      "source": "FedEx aviation pages; Waze listing for FedEx World Hub - the company's largest sort facility, 1.3M sq ft automated sort added 2024",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 2234
+      }
+    },
+    {
+      "idx": 2,
+      "name": "FedEx Express National Hub - Indianapolis IN",
+      "city": "Indianapolis",
+      "state": "IN",
+      "type": "Express national hub (2.4M sq ft, second-largest cargo facility)",
+      "address": "6648 S Perimeter Rd, Indianapolis, IN 46241",
+      "lat": 39.715335,
+      "lng": -86.277815,
+      "source": "FedEx aviation pages; Indianapolis Encyclopedia - FedEx Express National Hub at Indianapolis International Airport",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1805
+      }
+    },
+    {
+      "idx": 3,
+      "name": "FedEx Express Regional Hub - Fort Worth TX",
+      "city": "Fort Worth",
+      "state": "TX",
+      "type": "Express regional hub (Fort Worth Alliance Airport)",
+      "address": "2851 Alliance Gateway Fwy, Fort Worth, TX 76177",
+      "lat": 32.965384,
+      "lng": -97.297344,
+      "source": "Wikipedia FedEx Express - regional hub at Fort Worth Alliance Airport",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 5
+      }
+    },
+    {
+      "idx": 4,
+      "name": "FedEx Express Regional Hub - Newark NJ",
+      "city": "Newark",
+      "state": "NJ",
+      "type": "Express regional hub (Newark Liberty International Airport)",
+      "address": "350 Brewster Rd, Newark, NJ 07114",
+      "lat": 40.707912,
+      "lng": -74.171912,
+      "source": "Wikipedia FedEx Express - regional hub at Newark Liberty International Airport",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 2
+      }
+    },
+    {
+      "idx": 5,
+      "name": "FedEx Express Regional Hub - Oakland CA",
+      "city": "Oakland",
+      "state": "CA",
+      "type": "Express regional hub (Oakland International Airport)",
+      "address": "8455 Pardee Dr, Oakland, CA 94621",
+      "lat": 37.731192,
+      "lng": -122.204713,
+      "source": "Wikipedia FedEx Express - West Coast regional hub at Oakland International Airport",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 64
+      }
+    },
+    {
+      "idx": 6,
+      "name": "FedEx Express Regional Hub - Greensboro NC",
+      "city": "Greensboro",
+      "state": "NC",
+      "type": "Express regional hub (Piedmont Triad / Mid-Atlantic)",
+      "address": "1100 Pleasant Ridge Rd, Greensboro, NC 27409",
+      "lat": 36.104268,
+      "lng": -79.983761,
+      "source": "Wikipedia FedEx Express - Mid-Atlantic regional hub at Piedmont Triad International Airport",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 1
+      }
+    },
+    {
+      "idx": 7,
+      "name": "FedEx Express Regional Hub - Ontario CA",
+      "city": "Ontario",
+      "state": "CA",
+      "type": "Express regional hub (Ontario International Airport, So. California)",
+      "address": "2710 E Airport Dr, Ontario, CA 91761",
+      "lat": 34.062813,
+      "lng": -117.592922,
+      "source": "Wikipedia FedEx Express - Southern California regional hub at Ontario International Airport",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 19
+      }
+    },
+    {
+      "idx": 8,
+      "name": "FedEx Express Regional Hub - Miami FL",
+      "city": "Miami",
+      "state": "FL",
+      "type": "Express regional hub (Latin America gateway)",
+      "address": "7150 NW 25th St, Miami, FL 33122",
+      "lat": 25.797016,
+      "lng": -80.312857,
+      "source": "Wikipedia FedEx Express - regional hub at Miami International Airport",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 1
+      }
+    },
+    {
+      "idx": 9,
+      "name": "FedEx Ground Hub - Kernersville NC",
+      "city": "Kernersville",
+      "state": "NC",
+      "type": "Ground regional sortation hub",
+      "address": "1544 Old Greensboro Rd, Kernersville, NC 27284",
+      "lat": 36.106996,
+      "lng": -80.035813,
+      "source": "Kernersville Chamber of Commerce; Waze - FedEx Ground hub",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 9103
+      }
+    },
+    {
+      "idx": 10,
+      "name": "FedEx Ground Hub - Hagerstown MD",
+      "city": "Hagerstown",
+      "state": "MD",
+      "type": "Ground regional sortation hub",
+      "address": "11825 Newgate Blvd, Hagerstown, MD 21740",
+      "lat": 39.639503,
+      "lng": -77.792408,
+      "source": "Web search - FedEx Ground Hub, 11825 Newgate Boulevard",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 8365
+      }
+    },
+    {
+      "idx": 11,
+      "name": "FedEx Ground Hub - Lewisberry PA",
+      "city": "Lewisberry",
+      "state": "PA",
+      "type": "Ground regional sortation hub (Harrisburg market)",
+      "address": "510 Industrial Dr, Lewisberry, PA 17339",
+      "lat": 40.16478,
+      "lng": -76.840081,
+      "source": "Yelp / Loc8NearMe - FedEx Ground, 510 Industrial Dr",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1111
+      }
+    },
+    {
+      "idx": 12,
+      "name": "FedEx Ground Hub - Grove City OH",
+      "city": "Grove City",
+      "state": "OH",
+      "type": "Ground regional sortation hub (Columbus market)",
+      "address": "2969 Lewis Centre Way, Grove City, OH 43123",
+      "lat": 39.904117,
+      "lng": -83.095111,
+      "source": "Web search - FedEx Ground, 2969 Lewis Centre Way",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 239
+      }
+    },
+    {
+      "idx": 13,
+      "name": "FedEx Ground Dallas Hub - Hutchins TX",
+      "city": "Hutchins",
+      "state": "TX",
+      "type": "Ground regional distribution hub",
+      "address": "1101 E Cleveland St, Hutchins, TX 75141",
+      "lat": 32.656667,
+      "lng": -96.706918,
+      "source": "Wikimapia / Waze - FedEx Ground Dallas Hub; Flintco hub-expansion project page",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 1435
+      }
+    },
+    {
+      "idx": 14,
+      "name": "FedEx Ground Hub - Keasbey NJ",
+      "city": "Keasbey",
+      "state": "NJ",
+      "type": "Ground regional sortation hub (NY/NJ metro)",
+      "address": "6000 Riverside Dr, Keasbey, NJ 08832",
+      "lat": 40.50662,
+      "lng": -74.325741,
+      "source": "TruckMap - FedEx Ground, 6000 Riverside Dr",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 1178
+      }
+    },
+    {
+      "idx": 15,
+      "name": "FedEx Ground Hub - Charlotte NC",
+      "city": "Charlotte",
+      "state": "NC",
+      "type": "Ground regional sortation hub",
+      "address": "6604 CSX Way, Charlotte, NC 28269",
+      "lat": 35.27311,
+      "lng": -80.918347,
+      "source": "Loc8NearMe / Waze - FedEx Ground, 6604 Csx Way",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 12482
+      }
+    },
+    {
+      "idx": 16,
+      "name": "FedEx Ground Hub - Independence KY (Northern Kentucky / Cincinnati)",
+      "city": "Independence",
+      "state": "KY",
+      "type": "Ground regional sortation hub",
+      "address": "11000 Toebben Dr, Independence, KY 41051",
+      "lat": 38.940144,
+      "lng": -84.61537,
+      "source": "Waze - FedEx Ground, Northern Kentucky 0406/NOKY, 11000 Toebben Dr",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 13167
+      }
+    },
+    {
+      "idx": 17,
+      "name": "FedEx Ground Hub - Nashville TN",
+      "city": "Nashville",
+      "state": "TN",
+      "type": "Ground regional sortation hub",
+      "address": "3301 Knight Dr, Nashville, TN 37207",
+      "lat": 36.237023,
+      "lng": -86.797035,
+      "source": "Yelp / Waze - FedEx Ground Nashville, 3301 Knight Dr",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 5219
+      }
+    },
+    {
+      "idx": 18,
+      "name": "FedEx Ground Hub - Goodyear AZ (Phoenix)",
+      "city": "Goodyear",
+      "state": "AZ",
+      "type": "Ground regional distribution hub (~800K sq ft, with adjacent regional sort)",
+      "address": "890 S 143rd Ave, Goodyear, AZ 85338",
+      "lat": 33.437941,
+      "lng": -112.370658,
+      "source": "Commercial Search - FedEx Phoenix-area facility / Hub at Goodyear, 890 S 143rd Ave",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1434
+      }
+    },
+    {
+      "idx": 19,
+      "name": "FedEx Ground Package Distribution Hub - Olive Branch MS (Memphis metro)",
+      "city": "Olive Branch",
+      "state": "MS",
+      "type": "Ground regional package distribution hub",
+      "address": "9181 Polk Ln, Olive Branch, MS 38654",
+      "lat": 34.990431,
+      "lng": -89.777793,
+      "source": "Flintco project page - FedEx Package Distribution Hub, Olive Branch MS; Action News 5",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 4
+      }
+    },
+    {
+      "idx": 20,
+      "name": "FedEx Ground Hub - Richfield OH (Cleveland/Akron mini-hub)",
+      "city": "Richfield",
+      "state": "OH",
+      "type": "Ground automated regional facility (229K sq ft mini-hub)",
+      "address": "4500 Renaissance Pkwy, Cleveland, OH 44128",
+      "lat": 41.437354,
+      "lng": -81.493674,
+      "source": "Truckinginfo / FleetOwner / FreightWaves - FedEx Ground automated Cleveland-area facility (Richfield, between Cleveland and Akron)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 105
+      }
+    },
+    {
+      "idx": 21,
+      "name": "FedEx Ground Hub - Middletown PA (Harrisburg)",
+      "city": "Middletown",
+      "state": "PA",
+      "type": "Ground regional sortation hub",
+      "address": "111 Fulling Mill Rd, Middletown, PA 17057",
+      "lat": 40.232571,
+      "lng": -76.730393,
+      "source": "Loc8NearMe / D&B - FedEx Ground, 111 Fulling Mill Rd, Middletown PA",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 4478
+      }
+    },
+    {
+      "idx": 22,
+      "name": "FedEx Freight Hub - West Jefferson OH (Columbus, CMH)",
+      "city": "West Jefferson",
+      "state": "OH",
+      "type": "Freight LTL hub service center (~278 doors)",
+      "address": "10 Commerce Pkwy, West Jefferson, OH 43162",
+      "lat": 39.956197,
+      "lng": -83.343704,
+      "source": "FedEx Freight service center page (ccid=CMH) - 10 Commerce Parkway, West Jefferson OH",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 5969
+      }
+    },
+    {
+      "idx": 23,
+      "name": "FedEx Freight Hub - Hagerstown MD (HGR)",
+      "city": "Hagerstown",
+      "state": "MD",
+      "type": "Freight LTL hub service center",
+      "address": "16114 Transportation Cir, Hagerstown, MD 21740",
+      "lat": 39.624991,
+      "lng": -77.803108,
+      "source": "FedEx Freight service center page (ccid=HGR) - 16114 Transportation Circle, Hagerstown MD",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 12595
+      }
+    },
+    {
+      "idx": 24,
+      "name": "FedEx Freight Hub - Conley GA (Atlanta, ATL)",
+      "city": "Conley",
+      "state": "GA",
+      "type": "Freight LTL hub service center (~304 doors, one of the largest)",
+      "address": "4900 Welcome All Rd, Conley, GA 30288",
+      "lat": 33.620745,
+      "lng": -84.525293,
+      "source": "FedEx Freight service center page (ccid=ATL, Conley GA 30288); Truckingboards forum cites ATL as ~304-door hub",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 35
+      }
+    },
+    {
+      "idx": 25,
+      "name": "FedEx Freight Hub - Harrison AR (HRO)",
+      "city": "Harrison",
+      "state": "AR",
+      "type": "Freight LTL hub / former American Freightways HQ campus",
+      "address": "2200 Forward Dr, Harrison, AR 72601",
+      "lat": 36.256793,
+      "lng": -93.132174,
+      "source": "Waze - FedEx Freight HRO, 2200 Forward Dr; heritage American Freightways East operations campus",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 5662
+      }
+    },
+    {
+      "idx": 26,
+      "name": "FedEx Freight Hub - Memphis TN",
+      "city": "Memphis",
+      "state": "TN",
+      "type": "Freight LTL hub service center (FedEx Freight national HQ market)",
+      "address": "2851 Bartlett Rd, Memphis, TN 38134",
+      "lat": 35.203323,
+      "lng": -89.868928,
+      "source": "FedEx Freight locator - Memphis service center; FedEx Freight HQ market (LTL hub for mid-South)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 35
+      }
+    },
+    {
+      "idx": 27,
+      "name": "FedEx Freight Hub - Hodgkins IL (Chicago)",
+      "city": "Hodgkins",
+      "state": "IL",
+      "type": "Freight LTL hub service center (Chicago metro)",
+      "address": "9501 W 55th St, Hodgkins, IL 60525",
+      "lat": 41.791181,
+      "lng": -87.856685,
+      "source": "FedEx Freight locator - Chicago-area LTL hub at Hodgkins IL",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 43
+      }
+    },
+    {
+      "idx": 28,
+      "name": "FedEx Freight Hub - Earth City MO (St. Louis, STL)",
+      "city": "Earth City",
+      "state": "MO",
+      "type": "Freight LTL hub service center (~240 doors)",
+      "address": "3300 Rider Trl S, Earth City, MO 63045",
+      "lat": 38.761891,
+      "lng": -90.455962,
+      "source": "FedEx Freight locator - St. Louis-area LTL hub at Earth City MO; Truckingboards forum cites STL as ~240-door hub",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 30
+      }
+    },
+    {
+      "idx": 29,
+      "name": "FedEx Freight Hub - Dallas/Fort Worth TX",
+      "city": "Fort Worth",
+      "state": "TX",
+      "type": "Freight LTL hub service center (DFW metro)",
+      "address": "3600 Reeves Pl, Fort Worth, TX 76119",
+      "lat": 32.790629,
+      "lng": -97.223508,
+      "source": "FedEx Freight locator - Dallas/Fort Worth LTL hub service center",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 65
+      }
+    },
+    {
+      "idx": 30,
+      "name": "FedEx Freight Hub - Stockton CA",
+      "city": "Stockton",
+      "state": "CA",
+      "type": "Freight LTL hub service center (Northern California)",
+      "address": "4444 S B St, Stockton, CA 95206",
+      "lat": 37.908392,
+      "lng": -121.244053,
+      "source": "FedEx Freight locator - Northern California LTL hub at Stockton CA",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 77
+      }
+    }
+  ],
+  "geocodedAt": "2026-05-18"
+}

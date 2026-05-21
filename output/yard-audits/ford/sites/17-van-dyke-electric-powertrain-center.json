@@ -1,0 +1,54 @@
+{
+  "name": "Ford - Van Dyke Electric Powertrain Center, Sterling Heights MI",
+  "type": "Powertrain / Transmission Plant",
+  "coords": { "lat": 42.59780, "lng": -83.03550 },
+  "geofences": {
+    "perimeter": { "south": 42.59450, "west": -83.04000, "north": 42.60150, "east": -83.02950 },
+    "truckGate": { "south": 42.60080, "west": -83.03900, "north": 42.60160, "east": -83.03780 },
+    "dropYards": [
+      { "south": 42.59650, "west": -83.03950, "north": 42.59850, "east": -83.03750 }
+    ],
+    "dockAprons": [
+      { "south": 42.59600, "west": -83.03900, "north": 42.59780, "east": -83.03700 }
+    ],
+    "staging": { "south": 42.59950, "west": -83.03900, "north": 42.60100, "east": -83.03650 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 20,
+    "trailersVisible": 12,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 2,
+    "buildingCount": 2,
+    "siteAreaAcres": 166.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.5978,-83.0355,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "truckGateCount", "entryLanes", "exitLanes", "dockDoors", "dropArea", "shipRcvSeparate"],
+  "fieldNotes": {
+    "site": "Ford Van Dyke Electric Powertrain Center, 41111 Van Dyke Ave, Sterling Heights (Macomb County) MI - a ~2M sq ft Ford powertrain plant operating since 1968, renamed in 2021 from the Van Dyke Transmission Plant as it shifted to producing electric motors and transaxles for hybrid/EV vehicles (incl. the F-150 Lightning). LOCATION CORRECTION: the roster address (8000 Van Dyke Ave) and geocode (42.3892,-83.0222, RANGE_INTERPOLATED) are WRONG - they point at a residential Detroit neighborhood ~23 km south. Web research (Detroit News, Ford Authority, AmericanAutoWorker, Yelp) confirms the correct address 41111 Van Dyke Ave, Sterling Heights MI 48314, just north of 18 Mile Rd. Corrected center to ~42.5978,-83.0355 - confirmed by satellite as the large multi-roof Ford plant building.",
+    "truckGate": "Confirmed - Street View (2025-03) on the north road shows a chain-link sliding truck/vehicle gate (closed, with a gate-number sign) across a wide driveway leading down an internal access drive to the west-side material/dock yard. The property is fully encircled by chain-link perimeter fencing. truckGateCount estimated 2 (a separate north employee/vehicle entrance plus the gated truck drive) - flagged uncertain.",
+    "guardShack": "Marked true at medium confidence - a fenced ~2M sq ft active Ford powertrain plant of this scale conventionally operates a staffed gatehouse at the main entry. No booth was positively resolved at the NW truck gate (which appears badge/remote-style); flagged uncertain along with remoteGs.",
+    "preGateStaging": "True - the NW truck gate opens onto a long, wide internal access drive with ample paved staging room before reaching the dock yard.",
+    "drivewayLong": "True - the access drive from the NW gate to the west dock yard is long and deep, with room for 3+ trucks to queue.",
+    "dockDoors": "Estimated 10-25 dock doors along the west building face; a dock bank with trailers backed in is visible in Street View and z19 imagery. Exact count obscured by roof angle - flagged uncertain.",
+    "dropArea": "West-side material/dock yard holds an estimated 10-20 trailers amid a large laydown area of stacked steel racks / returnable containers; banded 10-25. dropYard true.",
+    "shipRcvSeparate": "Marked false (medium confidence) - the main freight operation (docks + drop yard) is concentrated on the west side; no clearly separate second dock cluster confirmed. Flagged uncertain.",
+    "railServed": "Rail lines run along the west property edge with spurs serving the west material yard - rail-served.",
+    "fastLaneOpportunity": "True - the NW truck gate apron and internal access drive are very wide with substantial unused paved width; physical room exists for an express/bypass lane.",
+    "multipleFacilities": "False - a single large interconnected plant building (multi-roof but one structure) plus a detached SE office; buildingCount 2.",
+    "urbanRural": "Sterling Heights is a dense Detroit-metro suburb; the plant is surrounded by continuous suburban/industrial development - Urban."
+  },
+  "method": "deep-audit"
+}

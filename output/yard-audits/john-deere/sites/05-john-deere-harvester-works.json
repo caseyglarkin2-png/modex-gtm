@@ -1,0 +1,55 @@
+{
+  "name": "John Deere Harvester Works - East Moline IL",
+  "type": "Assembly Plant",
+  "coords": { "lat": 41.5240, "lng": -90.4360 },
+  "geofences": {
+    "perimeter": { "south": 41.5175, "west": -90.4430, "north": 41.5320, "east": -90.4300 },
+    "truckGate": { "south": 41.5234, "west": -90.4340, "north": 41.5246, "east": -90.4325 },
+    "dropYards": [
+      { "south": 41.5260, "west": -90.4400, "north": 41.5310, "east": -90.4340 },
+      { "south": 41.5225, "west": -90.4345, "north": 41.5255, "east": -90.4300 }
+    ],
+    "dockAprons": [
+      { "south": 41.5235, "west": -90.4385, "north": 41.5270, "east": -90.4335 }
+    ],
+    "staging": { "south": 41.5215, "west": -90.4345, "north": 41.5245, "east": -90.4305 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40, "trailersVisible": 70, "trailerParkingCapacity": 180,
+    "truckGateCount": 3, "buildingCount": 8, "siteAreaAcres": 410.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.5240,-90.4360,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "shipRcvSeparate", "multiStep"],
+  "fieldNotes": {
+    "location": "Confirmed John Deere Harvester Works at 1100 13th Ave, East Moline IL — the world's largest combine manufacturing facility (~4M sq ft, ~90 acres under roof). Roster GEOMETRIC_CENTER coords (moved 2007m) landed on the complex; Google Maps place (41.5234,-90.4355) corroborates. Locked center placed on the main building mass at 41.5240,-90.4360.",
+    "truckGate": "Inferred true, medium confidence. Street View shows a 'John Deere Harvester Works Gate 12' sign at a private access drive — the plant uses a formal numbered-gate security system, with a continuous chain-link perimeter fence visible along 13th Ave. The actual gate barrier sits at the end of the private drive beyond Street View coverage.",
+    "guardShack": "Inferred true, medium confidence. A flagship secured assembly plant with a numbered-gate system (Gate 12+) almost always staffs its gates; a guard booth could not be directly imaged because SV does not reach the gate itself.",
+    "railServed": "TRUE. Multiple rail tracks run through and alongside the plant buildings (z20 at 41.5245,-90.434 and 41.5243,-90.4338); rail tank/freight cars visible nearby. Harvester Works has long been rail-served.",
+    "dropArea": "Extensive trailer drop yards — rows of trailers on the NW side plus trailer staging near the docks; 50+ band. Dozens of finished green combine harvesters also staged in the SE finished-goods yard.",
+    "dropYard": "Multiple dedicated trailer-storage lots (NW side rows of trailers) — set true.",
+    "dockDoorCount": "~40 dock doors across multiple building faces with trailers backed in (z18-z20). Approximate.",
+    "shipRcvSeparate": "Receiving docks (NW side, raw material / components by truck and rail) physically separate from the SE finished-goods staging/shipping yard — medium confidence.",
+    "multipleFacilities": "Campus of 8+ distinct large building masses plus a visitor center.",
+    "drivewayLong": "Long private access drives (e.g. the Gate 12 drive) hold a 3+ truck queue.",
+    "fastLaneOpportunity": "Wide gate aprons and multi-lane drives give room for an express/bypass lane.",
+    "entryExitSeparate": "Multiple numbered gates serve the campus — separate in/out points likely.",
+    "urbanRural": "Within the urban fabric of East Moline IL — dense residential neighborhoods directly adjacent on the SE; Quad Cities metro — Urban.",
+    "siteAreaAcres": "~410 acres bounded by the Mississippi River (NW) and 13th Ave / urban East Moline (SE).",
+    "scale": "No truck scale positively identified; left false, flagged uncertain.",
+    "entryLanes": "Estimated; exact gate lane counts not visible (SV does not reach the gates)."
+  },
+  "method": "deep-audit"
+}

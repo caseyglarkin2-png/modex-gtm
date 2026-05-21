@@ -1,0 +1,52 @@
+{
+  "name": "Caterpillar - Sanford NC Plant",
+  "type": "Manufacturing plant (BCP - skid-steer, multi-terrain, compact track loaders)",
+  "coords": { "lat": 35.5455, "lng": -79.1722 },
+  "geofences": {
+    "perimeter": { "south": 35.5408, "west": -79.1772, "north": 35.5512, "east": -79.1682 },
+    "truckGate": { "south": 35.5448, "west": -79.1760, "north": 35.5458, "east": -79.1748 },
+    "dropYards": [
+      { "south": 35.5448, "west": -79.1748, "north": 35.5462, "east": -79.1725 },
+      { "south": 35.5468, "west": -79.1712, "north": 35.5482, "east": -79.1692 }
+    ],
+    "dockAprons": [
+      { "south": 35.5448, "west": -79.1745, "north": 35.5468, "east": -79.1730 }
+    ],
+    "staging": { "south": 35.5440, "west": -79.1755, "north": 35.5450, "east": -79.1742 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 32, "trailersVisible": 30, "trailerParkingCapacity": 55,
+    "truckGateCount": 2, "buildingCount": 6, "siteAreaAcres": 220.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.5455,-79.1722,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "truckGate", "entryLanes", "exitLanes", "scale", "railServed", "multiStep"],
+  "fieldNotes": {
+    "location": "Roster geocode (35.5443,-79.1713) is ROOFTOP and - despite the 6 km movedMeters figure - lands directly on the Caterpillar Sanford manufacturing campus in Central Carolina Enterprise Park. Confirmed: large multi-building manufacturing complex with a long row of dock doors, trailer parking, material laydown yards, employee parking and a slatted perimeter fence. Consistent with the BCP skid-steer / multi-terrain / compact track loader plant (5000 Womack Rd; ~25 years in Sanford, 600 jobs being added).",
+    "truckGate": "Whole campus enclosed by a slatted privacy/chain-link perimeter fence (confirmed in Street View on the SW road). Truck access via internal entrance roads off the enterprise-park roads; controlled gates set inside the property.",
+    "guardShack": "No standalone guard booth resolvable from public roads - the gates sit inside the fenced campus. Classified remoteGs (controlled fenced campus, internal checkpoint, no road-visible booth); low confidence.",
+    "drivewayLong": "Internal entrance roads run a long distance from the public road to the dock/yard areas - ample queue depth.",
+    "fastLaneOpportunity": "Wide paved truck aprons along the west dock face with unused width - room for a bypass/express lane.",
+    "dockDoors": "~32 dock doors counted along the long west face of the main building (regular dock rhythm with trailers backed in); band 25-50.",
+    "dropArea": "Trailer parking along the west dock apron plus a second trailer/material staging area on the NE - capacity ~55.",
+    "shipRcvSeparate": "Dock activity is split between the long west-face dock bank and a separate NE building/laydown area, suggesting separate ship/receive clusters.",
+    "railServed": "A rail line runs through/alongside the campus (visible on the west and at the conveyor-bridge crossing); likely a serving spur - rail-served at medium confidence.",
+    "multipleFacilities": "Campus of 6+ large connected/adjacent manufacturing and logistics buildings; Caterpillar has grown to 5 buildings in Lee County.",
+    "scale": "No truck scale clearly identified.",
+    "urbanRural": "Rural - Central Carolina Enterprise Park sits among woods and farmland north of Sanford, well outside any dense metro fabric.",
+    "siteAreaAcres": "~220 acres for the fenced campus including parking, dock yards and laydown - approximate."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,49 @@
+{
+  "name": "FedEx Freight Hub - Hodgkins IL (Chicago)",
+  "type": "Freight LTL hub service center (Chicago metro)",
+  "coords": { "lat": 41.791181, "lng": -87.856685 },
+  "geofences": {
+    "perimeter": { "south": 41.7900, "west": -87.8595, "north": 41.7935, "east": -87.8540 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 41.7905, "west": -87.8580, "north": 41.7922, "east": -87.8562 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0, "trailersVisible": 25, "trailerParkingCapacity": 60,
+    "truckGateCount": 0, "buildingCount": 4, "siteAreaAcres": 30.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.791181,-87.856685,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "multipleFacilities", "scale",
+    "dropYard", "multiStep", "dockDoorCount", "trailersVisible",
+    "trailerParkingCapacity", "buildingCount", "siteAreaAcres"
+  ],
+  "fieldNotes": {
+    "location": "FACILITY NOT POSITIVELY IDENTIFIED. The roster address '9501 W 55th St, Hodgkins IL' (RANGE_INTERPOLATED geocode) resolves to a generic multi-tenant big-box industrial/warehouse park in the Hodgkins/McCook IL corridor. Satellite probes (z15-z19) and Street View (2022-2025) across the area found wide-footprint distribution warehouses but NO dedicated FedEx Freight LTL cross-dock hub (no characteristic long-narrow break-bulk building with a large trailer drop yard) and NO FedEx Freight signage. Web research confirms the historical Chicago FedEx Freight terminal (CGO, Lyons/Summit area) was reported closed years ago and the active FedEx Freight Chicago-area service center is BOL at 310 E Crossroads Pkwy, Bolingbrook IL. The Hodgkins roster entry appears to be based on a stale or incorrect locator listing; FedEx Freight may lease cross-dock space within this industrial park, but it could not be visually confirmed.",
+    "classification": "All classification fields are best-effort estimates of what is physically visible at the roster address (an open, unfenced multi-tenant industrial park with big-box warehouse dock faces and some trailers backed in). They do NOT represent a confirmed FedEx Freight facility. All fields flagged uncertain.",
+    "truckGate": "No perimeter fencing or controlled gate observed; the industrial park has open road access. Set false (uncertain).",
+    "dockDoors": "Big-box warehouse buildings in the park have dock doors and some trailers backed in along the central drive aisle; banded 10-25 as a rough best-effort estimate for any single tenant, not a confirmed FedEx count.",
+    "urbanRural": "Hodgkins/McCook is within the dense Chicago metro industrial fabric; classified Urban.",
+    "recommendation": "Flag for human review. The correct active FedEx Freight Chicago-area facility is most likely the Bolingbrook (BOL) service center at 310 E Crossroads Pkwy, Bolingbrook IL 60440 — the roster entry/address should be verified and possibly re-pointed there."
+  },
+  "method": "deep-audit"
+}

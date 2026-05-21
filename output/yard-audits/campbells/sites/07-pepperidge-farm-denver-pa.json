@@ -1,0 +1,48 @@
+{
+  "name": "Pepperidge Farm - Denver PA",
+  "type": "Manufacturing - bakery (baked goods and cookies)",
+  "coords": { "lat": 40.222800, "lng": -76.085500 },
+  "geofences": {
+    "perimeter": { "south": 40.21920, "west": -76.09050, "north": 40.22700, "east": -76.08200 },
+    "truckGate": { "south": 40.22250, "west": -76.08900, "north": 40.22320, "east": -76.08800 },
+    "dropYards": [
+      { "south": 40.22020, "west": -76.08470, "north": 40.22210, "east": -76.08250 }
+    ],
+    "dockAprons": [
+      { "south": 40.22070, "west": -76.08560, "north": 40.22220, "east": -76.08330 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45, "trailersVisible": 70, "trailerParkingCapacity": 110,
+    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 95.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.222800,-76.085500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "dockDoorCount", "entryExitSeparate"],
+  "fieldNotes": {
+    "truckGate": "Single private entrance road (Pepperidge Farm Drive) off the public road; entrance has a monument sign and a posted 'TRUCKS' directional sign separating truck and car routes. Controlled gate inferred inside.",
+    "guardShack": "No guard booth visible at the public-road junction; plant set back. Marked false / remoteGs true at medium confidence.",
+    "entryExitSeparate": "Entrance road splits with a posted 'TRUCKS' sign directing trucks along a separate route from cars/visitors - suggests separated entry/exit handling.",
+    "dropYard": "Large trailer drop yard and dock apron along the SE building face with many rows of parked trailers (60-70+).",
+    "dockDoorCount": "Dock banks along the SE face; trailers backed in. ~45 estimate banded 25-50, low confidence.",
+    "multipleFacilities": "Single large bakery building (separate small industrial buildings to the NW are not part of this property).",
+    "fastLaneOpportunity": "Long entrance approach with a wide apron and truck/car lane separation - room for an express lane.",
+    "drivewayLong": "Long private entrance drive from the public road to the plant yard.",
+    "siteAreaAcres": "Derived from perimeter box ~870m N-S x ~720m E-W.",
+    "locationResolution": "Roster coordinates landed inside the plant footprint; confirmed by satellite and Street View (Pepperidge Farm monument sign at the entrance)."
+  },
+  "method": "deep-audit"
+}

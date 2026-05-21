@@ -1,0 +1,71 @@
+{
+  "name": "Coca-Cola Consolidated - Columbus Distribution Center, OH",
+  "type": "Distribution Center",
+  "coords": { "lat": 39.84250, "lng": -82.96250 },
+  "geofences": {
+    "perimeter": { "south": 39.84000, "west": -82.96500, "north": 39.84580, "east": -82.96050 },
+    "truckGate": { "south": 39.84440, "west": -82.96080, "north": 39.84500, "east": -82.96000 },
+    "dropYards": [
+      { "south": 39.84050, "west": -82.96200, "north": 39.84400, "east": -82.96080 },
+      { "south": 39.84320, "west": -82.96450, "north": 39.84480, "east": -82.96280 }
+    ],
+    "dockAprons": [
+      { "south": 39.84050, "west": -82.96270, "north": 39.84430, "east": -82.96180 },
+      { "south": 39.84080, "west": -82.96520, "north": 39.84420, "east": -82.96440 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 120,
+    "trailerParkingCapacity": 170,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 60.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.8425,-82.9625,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "dockDoorCount", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "facility": "Coca-Cola Consolidated Columbus Distribution Center - a $90M, 60-acre campus in the Rickenbacker Industrial Center on Rohr Road, opened/unveiled May 2025 (groundbreaking Oct 2023). 400,000 sq ft distribution & warehouse building plus two 15,000 sq ft buildings for equipment repair and fleet maintenance; ~350 employees; 16M+ cases/year. Confirmed visually by the fleet of red Coca-Cola Consolidated / Red Classic tractors parked on site.",
+    "location": "Roster lat/lng (39.845821,-82.956124, GEOMETRIC_CENTER on Rohr Rd) landed ~700m east of the campus on undeveloped land. Corrected to the campus center at 39.84250,-82.96250 via satellite identification (fleet shop buildings + red Coke tractors).",
+    "truckGate": "No barrier arm, sliding gate, or guard booth. Street View (2024-08) of the campus driveway off Rohr Rd shows an open entrance leading to the office and parking; no checkpoint structure.",
+    "guardShack": "No staffed booth at the property line. Listed uncertain (campus interior not fully street-viewable).",
+    "remoteGs": "False - no truck gate.",
+    "multipleFacilities": "True - distinct multi-building campus: one large 400K sq ft DC plus two separate 15K sq ft fleet/equipment buildings.",
+    "dockDoors": "Long dock-door row on the main building's east face (~40 doors, with trailers + red tractors) plus a secondary dock row on the west face (~20). Total estimated ~60; banded 50+.",
+    "shipRcvSeparate": "Cross-dock building - dock banks on two opposite faces (east and west), consistent with separate shipping/receiving flows.",
+    "dropArea": "Extensive herringbone trailer drop yard along the east apron and around the fleet buildings; well over 50 trailers.",
+    "drivewayLong": "Deep open paved campus interior gives ample truck stacking room.",
+    "fastLaneOpportunity": "Wide open campus entrance and large paved aprons; room for an express lane.",
+    "railServed": "No rail spur into the property (Rickenbacker has rail nearby but not into this campus).",
+    "urbanRural": "Within the Columbus OH metro, inside the Rickenbacker Industrial Center; classified Urban.",
+    "scale": "No truck scale identified."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,50 @@
+{
+  "name": "CJ Logistics - Romeoville IL (Normantown)",
+  "type": "Distribution Center",
+  "coords": { "lat": 41.6510, "lng": -88.1310 },
+  "geofences": {
+    "perimeter": { "south": 41.6498, "west": -88.1338, "north": 41.6524, "east": -88.1282 },
+    "truckGate": { "south": 41.6516, "west": -88.1328, "north": 41.6521, "east": -88.1320 },
+    "dropYards": [
+      { "south": 41.6500, "west": -88.1295, "north": 41.6516, "east": -88.1284 }
+    ],
+    "dockAprons": [
+      { "south": 41.6515, "west": -88.1332, "north": 41.6521, "east": -88.1286 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 75,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 33.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.6510,-88.1310,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "truckGateCount"],
+  "fieldNotes": {
+    "location": "Confirmed 1401 W Normantown Rd, Romeoville IL - CJ Logistics America (former DSC Logistics) DC. Single large warehouse off I-55 / Weber Rd, between Normantown Rd (north) and a retention pond (south).",
+    "truckGate": "Property truck court is enclosed by a continuous black ornamental (wrought-iron-style) perimeter fence visible in 2018-2025 Street View. The truck driveway breaks through the fence with a gate opening - classified as a controlled truck entrance.",
+    "guardShack": "No guard booth structure visible at the truck-court driveway opening in any Street View probe; entry appears uncontrolled-by-personnel - hence remoteGs true.",
+    "dockDoors": "Extensive dock doors along the north face facing Normantown Rd, with trailers backed in continuously; estimated ~90 doors - low-confidence overhead count.",
+    "dropYard": "Trailer drop yard with marked stalls on the east side of the building; additional trailers in the truck court.",
+    "truckGateCount": "Likely two driveway openings off Normantown Rd (one near the NW office, one for the truck court / east) - count is approximate.",
+    "urbanRural": "Romeoville is a dense Chicago-area logistics corridor (Will County warehouse cluster) - Urban.",
+    "railServed": "No rail spur into the property visible."
+  },
+  "method": "deep-audit"
+}

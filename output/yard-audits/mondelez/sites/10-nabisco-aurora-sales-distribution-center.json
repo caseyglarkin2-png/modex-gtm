@@ -1,0 +1,68 @@
+{
+  "name": "Nabisco Aurora Sales & Distribution Center - Aurora CO",
+  "type": "Sales / distribution center",
+  "coords": { "lat": 39.75895, "lng": -104.78150 },
+  "geofences": {
+    "perimeter": { "south": 39.75810, "west": -104.78210, "north": 39.75985, "east": -104.78060 },
+    "truckGate": { "south": 39.75950, "west": -104.78095, "north": 39.75990, "east": -104.78055 },
+    "dropYards": [
+      { "south": 39.75835, "west": -104.78130, "north": 39.75970, "east": -104.78075 }
+    ],
+    "dockAprons": [
+      { "south": 39.75835, "west": -104.78145, "north": 39.75975, "east": -104.78095 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 20,
+    "trailersVisible": 12,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 6.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.75895,-104.78150,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "dropArea", "shipRcvSeparate"],
+  "fieldNotes": {
+    "locate": "Roster gave APPROXIMATE ZIP-level (80011) coordinates. Resolved via web research (Superpages, Chamber of Commerce, Yellowpages, Bandana) to 17689 E 30th Ave, Aurora CO 80011, then geocoded via Google Geocoding API to a ROOFTOP point at 39.7588784, -104.7818061. Locked to the tan-roof warehouse there.",
+    "truckGate": "Truck court and dock face are on the EAST side of the building. Driveways into the court are open paved curb cuts; no barrier arm or guard booth identified in satellite or Street View. Street View shows a black metal perimeter fence along the SOUTH frontage (car-parking side), so a sliding gate at the truck court entrance is possible but not resolvable - flagged uncertain.",
+    "guardShack": "No gate-side booth identified at either truck-court driveway. Flagged uncertain (entrance partly tree-obscured in Street View).",
+    "remoteGs": "No gate confirmed, so no remote check-in inferred; flagged uncertain.",
+    "dockDoors": "East face is the dock face; ~8-12 trailers/rigs backed in with empty positions between, implying roughly 15-25 doors. Band 10-25, count ~20 - flagged uncertain.",
+    "dropArea": "East truck court holds a mix of tractor-trailer rigs being loaded (DSD/sales operation) and some dropped trailers; band 10-25 - flagged uncertain.",
+    "dropYard": "The east truck court functions as both dock staging and trailer parking and is reasonably full of trailers; dropYard set true.",
+    "entryExitSeparate": "Two open driveways serve the east truck court (one toward the NE, one toward the SE), allowing distinct in/out points.",
+    "drivewayLong": "Long open east truck court gives deep stacking room for 3+ trucks before the dock doors.",
+    "shipRcvSeparate": "Dock doors observed only on the east face; no second distinct dock bank - shipRcvSeparate false, flagged uncertain.",
+    "urbanRural": "Facility is in a dense Aurora/Denver-metro industrial park (Stapleton/Northfield area), surrounded by large warehouses - Urban.",
+    "postGateStaging": "Open east truck court inside the property functions as a holding/queue area before the docks.",
+    "truckGateCount": "Two driveway entrances to the east truck court observed."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,69 @@
+{
+  "name": "Pactiv Evergreen - Covington GA Distribution Center",
+  "type": "Distribution Center / Regional Mixing Center",
+  "coords": { "lat": 33.60620, "lng": -83.81260 },
+  "geofences": {
+    "perimeter": { "south": 33.60440, "west": -83.81480, "north": 33.60825, "east": -83.81040 },
+    "truckGate": { "south": 33.60490, "west": -83.81400, "north": 33.60525, "east": -83.81340 },
+    "dropYards": [
+      { "south": 33.60460, "west": -83.81330, "north": 33.60560, "east": -83.81150 },
+      { "south": 33.60700, "west": -83.81230, "north": 33.60820, "east": -83.81080 }
+    ],
+    "dockAprons": [
+      { "south": 33.60480, "west": -83.81360, "north": 33.60790, "east": -83.81230 },
+      { "south": 33.60540, "west": -83.81220, "north": 33.60830, "east": -83.81060 }
+    ],
+    "staging": { "south": 33.60470, "west": -83.81410, "north": 33.60530, "east": -83.81350 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 140,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 30.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.60620,-83.81260,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "shipRcvSeparate", "multiStep"],
+  "fieldNotes": {
+    "truckGate": "Barrier-arm gate clearly visible across the truck lane on the entry drive, with a tractor-trailer queued behind it (2020-01 Street View, multiple headings). Bollards and a 'TRUCKS' directional sign confirm a controlled truck checkpoint.",
+    "guardShack": "A small structure beside the barrier arm at the entry checkpoint, consistent with a guard booth (z19 satellite). The site is a branded 24/7 Pactiv Regional Mixing Center; barrier-arm gates of this kind are normally booth-operated.",
+    "remoteGs": "False - a guard booth is present at the gate.",
+    "preGateStaging": "Paved approach area outside the barrier arm where a truck can wait (a trailer was observed queued there).",
+    "dockDoors": "Large cross-dock DC warehouse with dock doors along BOTH long faces (NE and SW), trailers backed in on both sides -> 50+ band. ~70 doors estimated; count is approximate over a very long building.",
+    "dropArea": "Extensive trailer parking on both sides of the building and at the NE end - dozens of trailers parked without tractors -> 50+ band.",
+    "shipRcvSeparate": "Cross-dock layout with docks on two opposite long faces - shipping and receiving almost certainly run from the separate dock banks. Inferred from layout, flagged uncertain.",
+    "dropYard": "Dedicated trailer-storage / drop areas on both sides of the building - true. This is a regional mixing center, trailer-staging-heavy by nature.",
+    "buildingCount": "Two buildings on the property: the large dark-roofed cross-dock DC warehouse and the red-brick office/support building at the SW. Counted as 2 buildings but a single facility (not a multi-facility campus).",
+    "urbanRural": "Covington GA - the Lake Forest Court industrial park is an edge-of-town/small-town setting bordered by woods. Per rubric -> Rural.",
+    "railServed": "No rail spur enters the property; truck-served distribution / mixing center.",
+    "drivewayLong": "Deep entry drive from the barrier arm to the dock aprons holds a 3+ truck queue."
+  },
+  "method": "deep-audit"
+}

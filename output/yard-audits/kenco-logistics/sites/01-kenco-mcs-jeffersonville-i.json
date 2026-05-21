@@ -1,0 +1,53 @@
+{
+  "name": "Kenco MCS Jeffersonville I - Jeffersonville IN",
+  "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
+  "coords": { "lat": 38.38585, "lng": -85.67760 },
+  "geofences": {
+    "perimeter": { "south": 38.3838, "west": -85.6802, "north": 38.3885, "east": -85.6753 },
+    "truckGate": { "south": 38.38735, "west": -85.67885, "north": 38.38775, "east": -85.67835 },
+    "dropYards": [
+      { "south": 38.38420, "west": -85.67935, "north": 38.38770, "east": -85.67835 }
+    ],
+    "dockAprons": [
+      { "south": 38.38420, "west": -85.67910, "north": 38.38770, "east": -85.67845 },
+      { "south": 38.38470, "west": -85.67720, "north": 38.38690, "east": -85.67640 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 113,
+    "trailersVisible": 35,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 55.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.38585,-85.67760,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["trailersVisible", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Sliding chain-link gate across the NW dock-yard truck driveway, confirmed in Street View (2026-03). Gate opening set in continuous perimeter fence.",
+    "guardShack": "No booth of any kind beside the gate; entrance is a fence opening only.",
+    "remoteGs": "Gated entry with no guard shack implies kiosk/app/remote check-in.",
+    "shipRcvSeparate": "Two distinct dock banks: a long bank on the NW (back) face plus a separate dock bank mid-way along the SE face.",
+    "fastLaneOpportunity": "Very wide paved gate apron on the NW driveway with room for an express bypass lane.",
+    "dockDoors": "Roster source cites 113 dock doors for this 664,800 SF AutoStore site; NW face long bank plus SE-face bank are consistent with 50+.",
+    "dropArea": "Deep paved drop yard along the NW dock apron holds many parked trailers; estimate 25-50 stalls.",
+    "urbanRural": "River Ridge Commerce Center is an edge-of-town greenfield industrial park surrounded by farmland; judged Rural.",
+    "trailersVisible": "~35 trailers counted in NW dock apron z19/z20 imagery; approximate.",
+    "trailerParkingCapacity": "Estimated 90 from drop-yard depth; low confidence."
+  },
+  "method": "deep-audit"
+}

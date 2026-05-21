@@ -1,0 +1,38 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+Bob Evans Farms - Xenia OH Plant,Manufacturing plant (fresh pork sausage rolls & links),#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,,,,,,YES,,,,,,,,,Rural,,,,,"https://www.google.com/maps/@39.680050,-83.911100,400m/data=!3m1!1e3"
+Bob Evans Farms - Lima OH Plant,Manufacturing plant (refrigerated sides - mashed potatoes & macaroni & cheese; former Kettle Creations facility),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@40.696800,-84.095300,400m/data=!3m1!1e3"
+Bob Evans Farms - Hillsdale MI Plant,Manufacturing plant (fresh pork sausage rolls & patties; USDA FSIS inspected),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,YES,,,,YES,,,,Rural,,YES,,YES,"https://www.google.com/maps/@41.921600,-84.615300,400m/data=!3m1!1e3"
+Bob Evans Farms - Sulphur Springs TX Plant,"Manufacturing plant (refrigerated sides, including Bob Evans Macaroni & Cheese)",#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,YES,,,YES,,,,,Rural,,,,,"https://www.google.com/maps/@33.129500,-95.580600,400m/data=!3m1!1e3"
+Bob Evans Farms - Rigby ID Plant,Manufacturing plant (refrigerated and frozen potato products; Potato Products of Idaho facility absorbed under Post Holdings),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,YES,,,,YES,,,,,Rural,,YES,,YES,"https://www.google.com/maps/@43.683900,-111.900400,400m/data=!3m1!1e3"
+Bob Evans Farms - Springfield OH Transportation Hub,"Distribution / transportation hub (private fleet terminal - Bob Evans Transportation Company LLC, USDOT 911163; ~100 tractor-trailers)",#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,YES,,,,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@39.838000,-83.857200,400m/data=!3m1!1e3"
+Bob Evans Farms - Forney TX Transportation Outpost,Distribution / transportation outpost (small driver terminal supporting the private fleet),#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Rural,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,5,71%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,2,29%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,7,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,7,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,7,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,7,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,7,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

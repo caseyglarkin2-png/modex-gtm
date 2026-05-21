@@ -1,0 +1,66 @@
+{
+  "name": "UNFI - Iowa City IA DC",
+  "type": "Distribution Center",
+  "coords": { "lat": 41.63490, "lng": -91.48630 },
+  "geofences": {
+    "perimeter": { "south": 41.63300, "west": -91.48850, "north": 41.63660, "east": -91.48430 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 41.63360, "west": -91.48700, "north": 41.63430, "east": -91.48480 }
+    ],
+    "dockAprons": [
+      { "south": 41.63400, "west": -91.48720, "north": 41.63460, "east": -91.48450 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 32,
+    "trailersVisible": 26,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 33.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.63490,-91.48630,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "dockDoorCount"],
+  "fieldNotes": {
+    "resolution": "Roster coord (41.635358, -91.486512, ROOFTOP) landed on the facility. Confirmed UNFI DC, 2340 Heinz Rd, Iowa City IA 52240 via Yahoo Local, hub.biz, OpenGovUS and the 2003 UNFI IR press release. Legacy-UNFI DC acquired with Blooming Prairie Cooperative (Oct 2002); expanded from ~120,000 to ~260,000 sq ft after 2003.",
+    "truckGate": "No barrier arm or sliding/swing gate at any property edge. The DC sits in an industrial park; the truck driveway runs from the park road around the building to the south dock apron with no checkpoint structure. Open-campus archetype.",
+    "guardShack": "No small staffed booth identified at the building, the dock-apron mouth, or the access driveway in z18-z20 imagery. A short chain-link fence segment exists near the west office, but no guard booth. Listed uncertain - none visible.",
+    "drivewayLong": "Internal driveway wraps the building from the park road to the south dock apron; holds 3+ trucks.",
+    "postGateStaging": "South dock apron plus the trailer drop row gives internal queuing room.",
+    "dockDoors": "Estimated ~32 dock doors along the single continuous south face from the rhythm of bays and backed-in trailers; moderate ~260k sq ft DC. Exact count uncertain from overhead imagery.",
+    "dropArea": "A single row of ~20-25 trailers parked nose-out in the drop yard south of the building (`dropYard: true`).",
+    "shipRcvSeparate": "One continuous dock bank on the south face - not two physically separate ship/rcv banks.",
+    "multipleFacilities": "Single L-shaped building (main rectangle + a NW section); one facility, not a campus.",
+    "urbanRural": "Located in an Iowa City industrial park (Scott-Six / Heinz Rd area) on the SE edge of town, bordered by woods and a creek - edge-of-town / rural setting per the rubric tie-breaker.",
+    "railServed": "No rail spur enters the property."
+  },
+  "method": "deep-audit"
+}

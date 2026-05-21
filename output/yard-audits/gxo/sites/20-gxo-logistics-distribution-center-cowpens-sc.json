@@ -1,0 +1,57 @@
+{
+  "name": "GXO Logistics Distribution Center - Cowpens SC",
+  "type": "Distribution Center",
+  "coords": { "lat": 35.060500, "lng": -81.812000 },
+  "geofences": {
+    "perimeter": { "south": 35.056500, "west": -81.814800, "north": 35.063500, "east": -81.810500 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 35.057000, "west": -81.814600, "north": 35.062300, "east": -81.813000 },
+      { "south": 35.057500, "west": -81.811500, "north": 35.062500, "east": -81.810500 }
+    ],
+    "dockAprons": [
+      { "south": 35.057300, "west": -81.814200, "north": 35.062200, "east": -81.812900 },
+      { "south": 35.057800, "west": -81.811800, "north": 35.062300, "east": -81.810800 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 75.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.060500,-81.812000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "1120 E Mountain Olive Rd, Cowpens SC = 'Upstate Corporate Park Building 1', a ~1,189,440 SF cross-dock distribution building, ~1 mile from I-85 in Spartanburg County. Confirmed via roster ROOFTOP geocode (12 m) landing on the building, GXO jobs site (active Cowpens hiring for this 'new distribution center'), and LoopNet (Upstate Corporate Park listing).",
+    "truckGate": "No barrier arm, sliding gate, or guard booth visible at the access-road entry or at either truck-court entrance in available satellite imagery. The building sits at the end of a private access road in a brand-new corporate park; the access-road / truck-court junctions read as open roadway. Classified false; flagged uncertain - no Street View reaches the building entrance and the park is still under development, so a perimeter gate may yet be installed.",
+    "guardShack": "No staffed booth (no 1-3 vehicle-footprint structure) visible at any entry point.",
+    "remoteGs": "No gate observed, so remote check-in not applicable; recorded false.",
+    "dockDoors": "Massive cross-dock building with dock doors lining both the SW and NE long faces; estimated ~120 doors total for this ~1.19M SF building - 50+ band. Flagged uncertain (overhead estimate).",
+    "dropArea": "Marked trailer-parking stalls run the full length of both truck courts; ~70 trailers visible parked without tractors, capacity well over 50 - 50+ band.",
+    "dropYard": "Dedicated striped trailer-parking stalls in both truck courts, heavily occupied.",
+    "shipRcvSeparate": "Cross-dock building with dock banks on two opposite long faces (SW truck court and NE truck court) - shipping and receiving run from physically separate dock clusters.",
+    "postGateStaging": "Very wide, deep truck courts on both faces provide ample internal staging before the dock doors.",
+    "drivewayLong": "Truck courts run the full ~700 m building length - hold far more than 3 trucks in queue.",
+    "urbanRural": "Rural - the building sits behind open fields and undeveloped land in a new corporate park outside the small town of Cowpens SC; 2024 Street View shows it set far back behind farmland.",
+    "connectivityIssue": "Rural but adjacent to the I-85 corridor and other corporate-park buildings - cellular coverage likely adequate; recorded false.",
+    "siteAreaAcres": "Estimated ~75 acres for the building plus its two deep truck courts and auto parking; the broader corporate-park parcel with ponds and undeveloped land is larger."
+  },
+  "method": "deep-audit"
+}

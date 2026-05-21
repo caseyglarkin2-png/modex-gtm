@@ -1,0 +1,49 @@
+{
+  "name": "Ford - Dearborn Engine Plant, Dearborn MI",
+  "type": "Engine Plant",
+  "coords": { "lat": 42.31280, "lng": -83.15880 },
+  "geofences": {
+    "perimeter": { "south": 42.31090, "west": -83.16080, "north": 42.31470, "east": -83.15700 },
+    "truckGate": { "south": 42.30940, "west": -83.16010, "north": 42.31000, "east": -83.15900 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 42.31180, "west": -83.16000, "north": 42.31330, "east": -83.15920 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 7,
+    "trailersVisible": 3,
+    "trailerParkingCapacity": 12,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 31.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.3128,-83.1588,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoors", "entryLanes", "exitLanes", "postGateStaging", "shipRcvSeparate"],
+  "fieldNotes": {
+    "site": "Dearborn Engine Plant (DEP / Dearborn Engine and Fuel Tank Plant) is an interior building of Ford's Rouge Center campus. Roster geocode (42.3145,-83.1621) landed on the north edge of the green-roofed Dearborn Truck Plant. Satellite identification (z16-z19) located the engine plant as the long large NW-SE building immediately east of the Truck Plant, flanked by rail spurs on its NE face; center relocated to ~42.3128,-83.1588.",
+    "truckGate": "The Rouge Center is a fully fenced, guarded campus. Street View along the internal access road shows chain-link perimeter fence with privacy slats around the engine plant; the plant is served by the Rouge gate/guard system rather than its own street-facing gate.",
+    "guardShack": "Rouge Center operates manned security gates with guard booths (confirmed at the SW Rouge gate in idx-11 imagery). The engine plant shares this campus gate system.",
+    "dockDoors": "Low confidence - engine plant interior to the Rouge with material flow largely internal and by rail; few external truck docks visible. Estimated 0-10 on the SW building face.",
+    "multipleFacilities": "DEP is one of ~93 Rouge Center buildings; Dearborn Truck Plant and the Rouge Electric Vehicle Center are immediately adjacent on the same secured campus.",
+    "railServed": "Multiple rail spurs run directly alongside the engine plant building's NE face - clearly rail-served.",
+    "dropArea": "No dedicated trailer drop yard for this interior building. The finished-vehicle staging lots seen nearby belong to the adjacent Truck Plant. dropYard false.",
+    "perimeter": "Box approximates the engine plant building footprint (~31 acres) within the larger Rouge campus.",
+    "urbanRural": "Dense Detroit/Dearborn metro industrial fabric - Urban."
+  },
+  "method": "deep-audit"
+}

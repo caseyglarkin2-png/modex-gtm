@@ -1,0 +1,53 @@
+{
+  "name": "General Mills - Belvidere IL Distribution Center",
+  "type": "Distribution Center",
+  "coords": { "lat": 42.24400, "lng": -88.89750 },
+  "geofences": {
+    "perimeter": { "south": 42.24150, "west": -88.90150, "north": 42.24650, "east": -88.89150 },
+    "truckGate": { "south": 42.24440, "west": -88.90020, "north": 42.24500, "east": -88.89940 },
+    "dropYards": [
+      { "south": 42.24470, "west": -88.89880, "north": 42.24560, "east": -88.89540 }
+    ],
+    "dockAprons": [
+      { "south": 42.24440, "west": -88.89920, "north": 42.24540, "east": -88.89400 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60, "trailersVisible": 45, "trailerParkingCapacity": 70,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 113.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.24400,-88.89750,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dropArea", "scale", "trailersVisible"],
+  "fieldNotes": {
+    "location": "Roster coordinates (42.26391,-88.844267, APPROXIMATE) pointed at a residential neighborhood in central Belvidere - wrong. Web research (WIFR, Belvidere Chamber, Growth Dimensions) identified the actual DC at 1210 Irene Rd, on 111 acres at the realigned Irene Rd / US-20 intersection. Locked center 42.2440,-88.8975 by satellite - a single ~1.3M sq ft warehouse confirmed by 2025-08 Street View.",
+    "truckGate": "Single private access road leaves US-20 at a signalized intersection and curves NE into the property at its NW corner. Property is a controlled industrial site; satellite imagery is mid-construction (bare-dirt yard) so a gate structure is not yet visible, but a new state-of-the-art automated DC of this scale is treated as a controlled truck entrance.",
+    "guardShack": "No guard booth identifiable. Satellite is construction-era; 2025-08 Street View covers the public road only and does not extend onto the private driveway, so a booth could exist but none seen. Flagged uncertain.",
+    "remoteGs": "Set true on the assumption of a gate without a confirmed staffed booth - this is a brand-new highly automated facility, consistent with kiosk/app check-in. Low confidence - flagged.",
+    "drivewayLong": "The access road from US-20 to the building is long (curving ~250m+ from the public-road intersection), with ample room to stack 3+ trucks.",
+    "fastLaneOpportunity": "Wide curved entry apron and large undeveloped paved/graded width near the NW corner give clear room to add a bypass/express lane.",
+    "dockDoors": "Long dock bank runs the full NE-facing wall; z18 imagery shows roughly 50-70 dock positions with many trailers backed in. Banded 50+.",
+    "dropArea": "A row of perpendicular-parked trailers sits in the NE-side yard apart from the active dock face - a drop/parking row of roughly 15-25 stalls. Banded 10-25; flagged.",
+    "shipRcvSeparate": "All dock doors are on a single building face (NE side); the SW face is blank wall. Ship and receive run from one dock cluster - not separate.",
+    "dropYard": "Dedicated trailer parking row present in the NE yard separate from active dock staging.",
+    "urbanRural": "Edge-of-town site surrounded by farmland on the SW industrial fringe of Belvidere - Rural.",
+    "railServed": "No rail spur enters the property; the parallel cleared strip NE of the building is a utility/road corridor, not rail.",
+    "siteAreaAcres": "Perimeter box ~113 acres, consistent with the reported 111-acre parcel.",
+    "buildingCount": "Single distribution building; smaller structures NW and SW are separate, unrelated properties.",
+    "trailersVisible": "Mid-construction imagery; ~40-50 trailers visible at docks and in the drop row. Approximate - flagged."
+  },
+  "method": "deep-audit"
+}

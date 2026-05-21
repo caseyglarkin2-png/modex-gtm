@@ -1,0 +1,1081 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.4223,
+              35.0696
+            ],
+            [
+              -92.4163,
+              35.0696
+            ],
+            [
+              -92.4163,
+              35.0764
+            ],
+            [
+              -92.4223,
+              35.0764
+            ],
+            [
+              -92.4223,
+              35.0696
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "westrock-coffee",
+        "name": "Westrock Coffee - Conway AR Roast-to-RTD Plant",
+        "type": "Manufacturing Plant (roast-to-ready-to-drink)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "25-50",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 40,
+          "trailersVisible": 85,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 47,
+          "railServed": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.4191,
+              35.0759
+            ],
+            [
+              -92.4184,
+              35.0759
+            ],
+            [
+              -92.4184,
+              35.0764
+            ],
+            [
+              -92.4191,
+              35.0764
+            ],
+            [
+              -92.4191,
+              35.0759
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "westrock-coffee",
+        "name": "Westrock Coffee - Conway AR Roast-to-RTD Plant",
+        "type": "Manufacturing Plant (roast-to-ready-to-drink)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.4188,
+              35.0731
+            ],
+            [
+              -92.4173,
+              35.0731
+            ],
+            [
+              -92.4173,
+              35.0744
+            ],
+            [
+              -92.4188,
+              35.0744
+            ],
+            [
+              -92.4188,
+              35.0731
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "westrock-coffee",
+        "name": "Westrock Coffee - Conway AR Roast-to-RTD Plant",
+        "type": "Manufacturing Plant (roast-to-ready-to-drink)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.4191,
+              35.073
+            ],
+            [
+              -92.4171,
+              35.073
+            ],
+            [
+              -92.4171,
+              35.0737
+            ],
+            [
+              -92.4191,
+              35.0737
+            ],
+            [
+              -92.4191,
+              35.073
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "westrock-coffee",
+        "name": "Westrock Coffee - Conway AR Roast-to-RTD Plant",
+        "type": "Manufacturing Plant (roast-to-ready-to-drink)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.4184,
+              35.0706
+            ],
+            [
+              -92.4173,
+              35.0706
+            ],
+            [
+              -92.4173,
+              35.0714
+            ],
+            [
+              -92.4184,
+              35.0714
+            ],
+            [
+              -92.4184,
+              35.0706
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "westrock-coffee",
+        "name": "Westrock Coffee - Conway AR Roast-to-RTD Plant",
+        "type": "Manufacturing Plant (roast-to-ready-to-drink)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.4085,
+              35.0589
+            ],
+            [
+              -92.4049,
+              35.0589
+            ],
+            [
+              -92.4049,
+              35.0621
+            ],
+            [
+              -92.4085,
+              35.0621
+            ],
+            [
+              -92.4085,
+              35.0589
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "westrock-coffee",
+        "name": "Westrock Coffee - Conway AR Distribution Center",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "25-50",
+        "yardMetrics": {
+          "dockDoorCount": 72,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 30,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.4083,
+              35.059
+            ],
+            [
+              -92.4077,
+              35.059
+            ],
+            [
+              -92.4077,
+              35.0594
+            ],
+            [
+              -92.4083,
+              35.0594
+            ],
+            [
+              -92.4083,
+              35.059
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "westrock-coffee",
+        "name": "Westrock Coffee - Conway AR Distribution Center",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.4084,
+              35.0595
+            ],
+            [
+              -92.4078,
+              35.0595
+            ],
+            [
+              -92.4078,
+              35.0614
+            ],
+            [
+              -92.4084,
+              35.0614
+            ],
+            [
+              -92.4084,
+              35.0595
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "westrock-coffee",
+        "name": "Westrock Coffee - Conway AR Distribution Center",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.408,
+              35.0594
+            ],
+            [
+              -92.4073,
+              35.0594
+            ],
+            [
+              -92.4073,
+              35.0617
+            ],
+            [
+              -92.408,
+              35.0617
+            ],
+            [
+              -92.408,
+              35.0594
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "westrock-coffee",
+        "name": "Westrock Coffee - Conway AR Distribution Center",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.4073,
+              35.0593
+            ],
+            [
+              -92.4054,
+              35.0593
+            ],
+            [
+              -92.4054,
+              35.0598
+            ],
+            [
+              -92.4073,
+              35.0598
+            ],
+            [
+              -92.4073,
+              35.0593
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "westrock-coffee",
+        "name": "Westrock Coffee - Conway AR Distribution Center",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.4078,
+              35.059
+            ],
+            [
+              -92.4064,
+              35.059
+            ],
+            [
+              -92.4064,
+              35.0595
+            ],
+            [
+              -92.4078,
+              35.0595
+            ],
+            [
+              -92.4078,
+              35.059
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "westrock-coffee",
+        "name": "Westrock Coffee - Conway AR Distribution Center",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "zone": "staging"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.407,
+              35.0561
+            ],
+            [
+              -92.403,
+              35.0561
+            ],
+            [
+              -92.403,
+              35.059
+            ],
+            [
+              -92.407,
+              35.059
+            ],
+            [
+              -92.407,
+              35.0561
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "westrock-coffee",
+        "name": "Westrock Coffee - Conway AR Single-Serve \"Clark\" Plant",
+        "type": "Manufacturing Plant (single-serve / K-cup pods)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": true,
+        "guardShack": false,
+        "remoteGs": true,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": true,
+        "urbanRural": "Urban",
+        "dockDoors": "50+",
+        "dropArea": "50+",
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 95,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 28,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.4076,
+              35.0585
+            ],
+            [
+              -92.407,
+              35.0585
+            ],
+            [
+              -92.407,
+              35.0589
+            ],
+            [
+              -92.4076,
+              35.0589
+            ],
+            [
+              -92.4076,
+              35.0585
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "westrock-coffee",
+        "name": "Westrock Coffee - Conway AR Single-Serve \"Clark\" Plant",
+        "type": "Manufacturing Plant (single-serve / K-cup pods)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "truckGate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.4067,
+              35.0572
+            ],
+            [
+              -92.4033,
+              35.0572
+            ],
+            [
+              -92.4033,
+              35.0577
+            ],
+            [
+              -92.4067,
+              35.0577
+            ],
+            [
+              -92.4067,
+              35.0572
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "westrock-coffee",
+        "name": "Westrock Coffee - Conway AR Single-Serve \"Clark\" Plant",
+        "type": "Manufacturing Plant (single-serve / K-cup pods)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.4067,
+              35.0582
+            ],
+            [
+              -92.4033,
+              35.0582
+            ],
+            [
+              -92.4033,
+              35.0587
+            ],
+            [
+              -92.4067,
+              35.0587
+            ],
+            [
+              -92.4067,
+              35.0582
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "westrock-coffee",
+        "name": "Westrock Coffee - Conway AR Single-Serve \"Clark\" Plant",
+        "type": "Manufacturing Plant (single-serve / K-cup pods)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.4067,
+              35.058
+            ],
+            [
+              -92.4033,
+              35.058
+            ],
+            [
+              -92.4033,
+              35.0585
+            ],
+            [
+              -92.4067,
+              35.0585
+            ],
+            [
+              -92.4067,
+              35.058
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "westrock-coffee",
+        "name": "Westrock Coffee - Conway AR Single-Serve \"Clark\" Plant",
+        "type": "Manufacturing Plant (single-serve / K-cup pods)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.4067,
+              35.0573
+            ],
+            [
+              -92.4033,
+              35.0573
+            ],
+            [
+              -92.4033,
+              35.0578
+            ],
+            [
+              -92.4067,
+              35.0578
+            ],
+            [
+              -92.4067,
+              35.0573
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "westrock-coffee",
+        "name": "Westrock Coffee - Conway AR Single-Serve \"Clark\" Plant",
+        "type": "Manufacturing Plant (single-serve / K-cup pods)",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.39031,
+              34.82879
+            ],
+            [
+              -92.38854,
+              34.82879
+            ],
+            [
+              -92.38854,
+              34.83105
+            ],
+            [
+              -92.39031,
+              34.83105
+            ],
+            [
+              -92.39031,
+              34.82879
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "westrock-coffee",
+        "name": "Westrock Coffee - North Little Rock AR Roasting & Manufacturing",
+        "type": "Roasting Plant / Private-Label Manufacturing",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Rural",
+        "dockDoors": "0-10",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 4,
+          "trailerParkingCapacity": 6,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 4.5,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -92.39005,
+              34.82923
+            ],
+            [
+              -92.38956,
+              34.82923
+            ],
+            [
+              -92.38956,
+              34.82956
+            ],
+            [
+              -92.39005,
+              34.82956
+            ],
+            [
+              -92.39005,
+              34.82923
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "westrock-coffee",
+        "name": "Westrock Coffee - North Little Rock AR Roasting & Manufacturing",
+        "type": "Roasting Plant / Private-Label Manufacturing",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.61675,
+              35.3947
+            ],
+            [
+              -80.6131,
+              35.3947
+            ],
+            [
+              -80.6131,
+              35.3981
+            ],
+            [
+              -80.61675,
+              35.3981
+            ],
+            [
+              -80.61675,
+              35.3947
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "westrock-coffee",
+        "name": "Westrock Coffee - Concord NC Roasting & Extract Campus (S&D legacy)",
+        "type": "Roasting Plant / Extract Manufacturing",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": true,
+        "backupSensitive": false,
+        "dropYard": true,
+        "multipleFacilities": true,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "10-25",
+        "dropArea": "10-25",
+        "yardMetrics": {
+          "dockDoorCount": 22,
+          "trailersVisible": 24,
+          "trailerParkingCapacity": 30,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 23,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.61645,
+              35.39725
+            ],
+            [
+              -80.61555,
+              35.39725
+            ],
+            [
+              -80.61555,
+              35.39795
+            ],
+            [
+              -80.61645,
+              35.39795
+            ],
+            [
+              -80.61645,
+              35.39725
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "westrock-coffee",
+        "name": "Westrock Coffee - Concord NC Roasting & Extract Campus (S&D legacy)",
+        "type": "Roasting Plant / Extract Manufacturing",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dropYard",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.6161,
+              35.39675
+            ],
+            [
+              -80.61515,
+              35.39675
+            ],
+            [
+              -80.61515,
+              35.3976
+            ],
+            [
+              -80.6161,
+              35.3976
+            ],
+            [
+              -80.6161,
+              35.39675
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "westrock-coffee",
+        "name": "Westrock Coffee - Concord NC Roasting & Extract Campus (S&D legacy)",
+        "type": "Roasting Plant / Extract Manufacturing",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.6179,
+              35.39165
+            ],
+            [
+              -80.6157,
+              35.39165
+            ],
+            [
+              -80.6157,
+              35.3939
+            ],
+            [
+              -80.6179,
+              35.3939
+            ],
+            [
+              -80.6179,
+              35.39165
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "westrock-coffee",
+        "name": "Westrock Coffee - Concord NC Commercial Park Extract & Tea Facility",
+        "type": "Extract & Tea Manufacturing",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "perimeter",
+        "truckGate": false,
+        "guardShack": false,
+        "remoteGs": false,
+        "fastLaneOpportunity": false,
+        "backupSensitive": false,
+        "dropYard": false,
+        "multipleFacilities": false,
+        "scale": false,
+        "shipRcvSeparate": false,
+        "urbanRural": "Urban",
+        "dockDoors": "0-10",
+        "dropArea": "0-10",
+        "yardMetrics": {
+          "dockDoorCount": 9,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 8,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 6,
+          "railServed": false
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.61735,
+              35.39205
+            ],
+            [
+              -80.61675,
+              35.39205
+            ],
+            [
+              -80.61675,
+              35.3925
+            ],
+            [
+              -80.61735,
+              35.3925
+            ],
+            [
+              -80.61735,
+              35.39205
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "account": "westrock-coffee",
+        "name": "Westrock Coffee - Concord NC Commercial Park Extract & Tea Facility",
+        "type": "Extract & Tea Manufacturing",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "zone": "dockApron",
+        "index": 1
+      }
+    }
+  ]
+}

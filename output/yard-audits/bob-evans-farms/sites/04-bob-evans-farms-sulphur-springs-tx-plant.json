@@ -1,0 +1,50 @@
+{
+  "name": "Bob Evans Farms - Sulphur Springs TX Plant",
+  "type": "Manufacturing plant (refrigerated sides, including Bob Evans Macaroni & Cheese)",
+  "coords": { "lat": 33.129500, "lng": -95.580600 },
+  "geofences": {
+    "perimeter": { "south": 33.127800, "west": -95.582100, "north": 33.130900, "east": -95.579100 },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 33.128900, "west": -95.581300, "north": 33.129300, "east": -95.580300 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 12,
+    "trailersVisible": 6,
+    "trailerParkingCapacity": 15,
+    "truckGateCount": 2,
+    "buildingCount": 2,
+    "siteAreaAcres": 14.2,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.129500,-95.580600,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Two open driveways off Industrial Dr E (front employee/visitor drive and a west truck drive). Both are open curb cuts with no barrier arm, gate, or pinch-point. Confirmed in Street View (2025-06) — no perimeter fence around the property.",
+    "guardShack": "No booth at either driveway. A covered shelter near the parking lot is a carport/break shelter, not a guard booth.",
+    "remoteGs": "No gate, so no remote check-in implied.",
+    "drivewayLong": "Large open paved yard between Industrial Dr E and the south dock face gives deep approach room (3+ trucks).",
+    "postGateStaging": "Wide open paved truck yard on the south/west of the building provides ample internal staging.",
+    "dockDoors": "South-facing dock bank with ~5-6 angled dock bays with trailers backed in, plus additional doors along the building face; ~12 doors estimated. 10-25 band; exact count uncertain.",
+    "dropArea": "A few trailers parked near the dock apron without tractors; no dedicated striped drop lot. 0-10 band.",
+    "urbanRural": "Edge-of-town industrial area along I-30 near Sulphur Springs, TX, bordered by farm fields and scattered industrial buildings; classified Rural.",
+    "trailerParkingCapacity": "Open paved yard could hold ~15 trailers informally; estimate.",
+    "buildingCount": "One large connected plant building plus an attached/adjacent processing wing — counted as ~2 structures."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,183 @@
+{
+  "account": "H-E-B",
+  "generatedAt": "2026-05-17",
+  "facilityCount": 16,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "H-E-B San Antonio RSC (Fratt Road) - San Antonio TX",
+      "city": "San Antonio",
+      "state": "TX",
+      "type": "Retail Support Center / Distribution Center",
+      "address": "6520 Fratt Rd, San Antonio, TX 78218",
+      "lat": 29.5142,
+      "lng": -98.3702,
+      "source": "Dossier flagship RSC; Waze/TruckMap listings for H-E-B Distribution Center at 6520 Fratt Rd. Campus includes milk plant, bakery, dry/frozen warehouse and truck facility."
+    },
+    {
+      "idx": 2,
+      "name": "H-E-B East Side Super Regional Grocery Warehouse - San Antonio TX",
+      "city": "San Antonio",
+      "state": "TX",
+      "type": "Super Regional Grocery Distribution Center",
+      "address": "Interstate 10 at Foster Road, San Antonio, TX 78222",
+      "lat": 29.4231,
+      "lng": -98.3398,
+      "source": "Dossier (1.6M sq ft, 200 dock doors, ~180 outbound trailers/day, opened 2020 on 871-acre East Side campus); H-E-B Newsroom groundbreaking release (I-10 / Foster Rd, across from China Grove)."
+    },
+    {
+      "idx": 3,
+      "name": "H-E-B Houston RSC (Windfern Road) - Houston TX",
+      "city": "Houston",
+      "state": "TX",
+      "type": "Retail Support Center / Distribution Center",
+      "address": "4625 Windfern Rd, Houston, TX 77041",
+      "lat": 29.8617,
+      "lng": -95.5536,
+      "source": "Dossier names Houston RSC (Windfern Rd / Holmes Rd footprint); TruckMap and hub.biz listings for H-E-B Warehouse Retail Support Center at 4625 Windfern Rd."
+    },
+    {
+      "idx": 4,
+      "name": "H-E-B Temple RSC - Temple TX",
+      "city": "Temple",
+      "state": "TX",
+      "type": "Retail Support Center / Distribution Center",
+      "address": "4750 Wendland Rd, Temple, TX 76504",
+      "lat": 31.1457,
+      "lng": -97.3209,
+      "source": "Dossier (Temple RSC, Central Texas hub); Temple Chamber + TruckMap listings; tdtnews coverage of $200M expansion adding automated frozen line."
+    },
+    {
+      "idx": 5,
+      "name": "H-E-B Weslaco RSC - Weslaco TX",
+      "city": "Weslaco",
+      "state": "TX",
+      "type": "Retail Support Center / Distribution Center",
+      "address": "1100 Panther Dr, Weslaco, TX 78596",
+      "lat": 26.1872,
+      "lng": -97.9745,
+      "source": "Dossier (Weslaco RGV terminal + dry grocery warehouse); OpenGovUS Texas taxpayer record + Waze listing for H-E-B Weslaco Retail Support Center."
+    },
+    {
+      "idx": 6,
+      "name": "H-E-B San Marcos RSC - San Marcos TX",
+      "city": "San Marcos",
+      "state": "TX",
+      "type": "Retail Support Center / Distribution Center",
+      "address": "2301 Hunter Rd, San Marcos, TX 78666",
+      "lat": 29.8447,
+      "lng": -97.965,
+      "source": "Dossier (San Marcos area RSC); San Marcos Chamber + Chamber of Commerce business directory listings for H-E-B San Marcos Retail Support Center."
+    },
+    {
+      "idx": 7,
+      "name": "H-E-B Manufacturing - San Antonio Snack Plant - San Antonio TX",
+      "city": "San Antonio",
+      "state": "TX",
+      "type": "Manufacturing Plant (Snacks / Chips)",
+      "address": "San Antonio, TX",
+      "lat": 29.4241,
+      "lng": -98.4936,
+      "source": "Web research: 40,000 sq ft San Antonio plant producing private-label potato, corn and tortilla chips, operating 24/7 (HEB.com Quest for Texas Best / Local Products). Exact street address not publicly pinned."
+    },
+    {
+      "idx": 8,
+      "name": "H-E-B Manufacturing - Houston Snack Plant (Genard Road) - Houston TX",
+      "city": "Houston",
+      "state": "TX",
+      "type": "Manufacturing Plant (Snacks / Tortilla Chips)",
+      "address": "10000 Genard Rd, Houston, TX 77041",
+      "lat": 29.8639,
+      "lng": -95.553,
+      "source": "Store Brands / Food Business News / Brandt: 46,000 sq ft Houston snack plant producing plain and flavored tortilla chips, opened mid-2019 at 10000 1/2 Genard Rd."
+    },
+    {
+      "idx": 9,
+      "name": "H-E-B Manufacturing - Houston Milk & Bread Plant - Houston TX",
+      "city": "Houston",
+      "state": "TX",
+      "type": "Manufacturing Plant (Dairy / Bakery)",
+      "address": "Windfern Rd area, Houston, TX 77041",
+      "lat": 29.8617,
+      "lng": -95.5536,
+      "source": "Web research: H-E-B operates a milk plant, bread plant and distribution center in northwest Houston (Windfern corridor). Exact street address not separately confirmed from the RSC."
+    },
+    {
+      "idx": 10,
+      "name": "H-E-B eCommerce Fulfillment Center - Houston (Holmes Road) - Houston TX",
+      "city": "Houston",
+      "state": "TX",
+      "type": "E-commerce Fulfillment Center",
+      "address": "4520 Holmes Rd, Houston, TX 77033",
+      "lat": 29.6741,
+      "lng": -95.3527,
+      "source": "Dossier (Houston eFC #3, opened Feb 2025, Swisslog AutoStore + SynQ); Connect CRE / CRENews: 100,000 sq ft stand-alone facility at 4520 Holmes Road."
+    },
+    {
+      "idx": 11,
+      "name": "H-E-B eCommerce Fulfillment Center - Katy - Katy TX",
+      "city": "Katy",
+      "state": "TX",
+      "type": "E-commerce Fulfillment Center",
+      "address": "2102 Elrod Rd, Katy, TX 77449",
+      "lat": 29.8089,
+      "lng": -95.771,
+      "source": "H-E-B Newsroom + Community Impact: Katy eFC, H-E-B's first stand-alone eFC, 100,000+ sq ft, at 2102 Elrod Rd."
+    },
+    {
+      "idx": 12,
+      "name": "H-E-B eCommerce Fulfillment Center - Plano - Plano TX",
+      "city": "Plano",
+      "state": "TX",
+      "type": "E-commerce Fulfillment Center",
+      "address": "6001 Preston Rd, Plano, TX 75024",
+      "lat": 33.0962,
+      "lng": -96.8027,
+      "source": "Dossier (Plano eFC, 55,000 sq ft, opened 2023); Community Impact / Local Profile: facility attached to Plano H-E-B at 6001 Preston Road."
+    },
+    {
+      "idx": 13,
+      "name": "H-E-B eCommerce Fulfillment Center - Cibolo - Cibolo TX",
+      "city": "Cibolo",
+      "state": "TX",
+      "type": "E-commerce Fulfillment Center",
+      "address": "850 FM 1103, Cibolo, TX 78108",
+      "lat": 29.5733,
+      "lng": -98.228,
+      "source": "H-E-B Newsroom + Grocery Dive: Cibolo eFC, 55,000 sq ft, 8th eFC, connected to H-E-B Cibolo store at 850 FM 1103, serving San Antonio area."
+    },
+    {
+      "idx": 14,
+      "name": "H-E-B eCommerce Fulfillment Center - San Antonio - San Antonio TX",
+      "city": "San Antonio",
+      "state": "TX",
+      "type": "E-commerce Fulfillment Center",
+      "address": "San Antonio, TX",
+      "lat": 29.4252,
+      "lng": -98.4946,
+      "source": "Dossier + H-E-B Newsroom: H-E-B has opened 9 eFCs in Texas since 2018 including San Antonio-area sites; specific San Antonio standalone eFC street address not publicly confirmed."
+    },
+    {
+      "idx": 15,
+      "name": "H-E-B Frisco Electronic Fulfillment Center (in development) - Frisco TX",
+      "city": "Frisco",
+      "state": "TX",
+      "type": "E-commerce Fulfillment Center (planned, construction 2026-2027)",
+      "address": "FM 423 at US 380, Frisco, TX 75033",
+      "lat": 33.2089,
+      "lng": -96.8916,
+      "source": "Dossier (Frisco EFC announced Dec 2025, 51,599 sq ft); Community Impact: located at FM 423 and US 380, construction July 2026, completion June 2027."
+    },
+    {
+      "idx": 16,
+      "name": "H-E-B Hempstead Distribution Campus (in development) - Hempstead TX",
+      "city": "Hempstead",
+      "state": "TX",
+      "type": "Distribution Campus (multi-phase, Phase 1 under construction)",
+      "address": "Waller County, near Hempstead, TX 77445",
+      "lat": 30.0977,
+      "lng": -96.078,
+      "source": "Dossier + Supply Chain Dive / Connect CRE / Wolff Companies: ~500 acres purchased 2024 in Waller County, multi-phase distribution campus, first phase under construction. Precise street address not yet public."
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "name": "Bob Evans Farms - Forney TX Transportation Outpost",
+  "type": "Distribution / transportation outpost (small driver terminal supporting the private fleet)",
+  "coords": { "lat": null, "lng": null },
+  "geofences": {
+    "perimeter": null,
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": null,
+    "trailersVisible": null,
+    "trailerParkingCapacity": null,
+    "truckGateCount": null,
+    "buildingCount": null,
+    "siteAreaAcres": null,
+    "railServed": null
+  },
+  "mapsUrl": null,
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural", "connectivityIssue",
+    "multipleFacilities", "scale", "dropYard", "multiStep"
+  ],
+  "fieldNotes": {
+    "location": "COULD NOT PIN DOWN. The Bob Evans Grocery 'About Us' page names Forney, TX as a 'small outpost' of the transportation operation, and an active Bob Evans Foods CDL-driver job posting confirms a Forney, TX driver position. CDL recruiting copy for the Texas operation also references a terminal in adjacent Sunnyvale, TX (zip 75182) where trucks are based. No public street address or coordinates are disclosed for either the Forney outpost or the Sunnyvale terminal. FMCSA registration for Bob Evans Transportation Company LLC (USDOT 911163) lists only the Springfield, OH address. The carrier shows a Dallas-area phone (972-203-6459) but no Texas street address. Web searches across company pages, FMCSA/SAFER, carrier directories, and business listings did not yield a mappable location.",
+    "classification": "All 22 classification fields are unverified placeholders -- no imagery could be audited because the facility location is unknown. Every field is listed in uncertainFields. urbanRural defaulted to 'Rural' as a placeholder only (Forney/Sunnyvale are exurban-to-edge Dallas metro -- could be Urban or Rural; unknown without a confirmed site).",
+    "characterization": "Described in company materials as a 'small outpost' / driver terminal supporting the private fleet -- likely a modest driver-domicile / trailer-staging yard rather than a dock/DC operation, but this cannot be confirmed."
+  },
+  "method": "deep-audit"
+}

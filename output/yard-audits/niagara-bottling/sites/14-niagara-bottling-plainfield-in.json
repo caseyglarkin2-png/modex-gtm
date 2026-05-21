@@ -1,0 +1,52 @@
+{
+  "name": "Niagara Bottling - Plainfield IN",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 39.68500, "lng": -86.34900 },
+  "geofences": {
+    "perimeter": { "south": 39.68280, "west": -86.35100, "north": 39.68730, "east": -86.34800 },
+    "truckGate": { "south": 39.68300, "west": -86.34990, "north": 39.68360, "east": -86.34930 },
+    "dropYards": [
+      { "south": 39.68400, "west": -86.35080, "north": 39.68700, "east": -86.34960 }
+    ],
+    "dockAprons": [
+      { "south": 39.68420, "west": -86.35020, "north": 39.68700, "east": -86.34930 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 58,
+    "trailersVisible": 35,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 30.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.68500,-86.34900,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "trailerParkingCapacity", "buildingId"],
+  "fieldNotes": {
+    "buildingId": "Address 1250 Whitaker Rd geocoded onto an intersection inside a dense Plainfield logistics park (AllPoints area near Indianapolis airport). Neighbouring buildings carry other addresses (a FedEx building reads '1399 South Perry Rd'). The audited building is the long N-S grey-roofed warehouse on the W side of the pin whose office and check-in driveway front Whitaker Rd at the pin. Web research confirms Niagara Plainfield is 442,215 sq ft at 1250 Whitaker Rd. No on-building Niagara signage was readable in available panos, so building ID is medium-confidence.",
+    "truckGate": "The entrance driveway off Whitaker Rd has a controlled-entry setup: a small blue kiosk/booth structure beside the drive, a digital sign monument, a fence/gate across the lane, and traffic cones in the entry lane. truckGate = true.",
+    "guardShack": "The structure at the gate is small (roughly one parking-space footprint) - more consistent with an unmanned check-in kiosk / call-box than a multi-window staffed guard booth. Classed as remote check-in (remoteGs true, guardShack false), but the kiosk-vs-booth distinction is low-confidence from Street View.",
+    "drivewayLong": "Deep entry drive plus a large W-side dock apron give 3+ truck post-gate stacking room.",
+    "dockDoors": "A long dock face runs the W side of the building with many trailers backed in - estimated ~50-70 doors, band 50+. Exact count low-confidence.",
+    "dropArea": "Marked trailer-parking stalls along the W edge beyond the dock apron hold ~35 trailers; capacity ~80, band 25-50.",
+    "dropYard": "Dedicated on-site trailer storage rows on the W side of the building.",
+    "shipRcvSeparate": "Docks are concentrated on one (W) building face; shipping and receiving are not on physically separate banks.",
+    "fastLaneOpportunity": "Wide entrance apron leaves room to add an express bypass lane alongside the kiosk.",
+    "urbanRural": "Plainfield logistics park on the edge of the Indianapolis metro, bordered by open ground - classed Rural (edge-of-town industrial)."
+  },
+  "method": "deep-audit"
+}

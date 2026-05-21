@@ -1,0 +1,67 @@
+{
+  "name": "Coca-Cola Consolidated - Bishopville Production Center, SC",
+  "type": "Bottling / Manufacturing Plant",
+  "coords": { "lat": 34.2231, "lng": -80.2337 },
+  "geofences": {
+    "perimeter": { "south": 34.2216, "west": -80.2364, "north": 34.2252, "east": -80.2306 },
+    "truckGate": { "south": 34.2215, "west": -80.2358, "north": 34.2220, "east": -80.2349 },
+    "dropYards": [
+      { "south": 34.2218, "west": -80.2362, "north": 34.2236, "east": -80.2353 },
+      { "south": 34.2230, "west": -80.2330, "north": 34.2244, "east": -80.2316 }
+    ],
+    "dockAprons": [
+      { "south": 34.2216, "west": -80.2350, "north": 34.2222, "east": -80.2320 },
+      { "south": 34.2222, "west": -80.2362, "north": 34.2240, "east": -80.2356 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 48,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 44.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.2231,-80.2337,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "dockDoorCount"],
+  "fieldNotes": {
+    "facility": "South Atlantic Canners, Inc. at 601 Cousar St, Bishopville SC - a Coca-Cola production cooperative managed by Coca-Cola Consolidated. Confirmed via Street View signage ('Coca-Cola' building branding and 'RED CLASSIC' trailers, Coke Consolidated's logistics arm). Roster lat/lng (245 Cale Yarborough Hwy) landed in downtown Bishopville ~1.4km off; corrected to the industrial complex.",
+    "truckGate": "No barrier arm, sliding/swing gate, or guard checkpoint observed at any access point. Multiple Street View headings (2024-05) show the south/southwest dock face opening directly onto Cousar St with open paved access; trucks back off the road into docks. Chain-link perimeter fencing rings the trailer yard but the truck-access driveways are ungated open curb cuts.",
+    "guardShack": "No guard booth found. A small red-roofed structure sits in the southwest yard but appears to be a fuel/canopy structure within the yard interior, not a staffed gate booth at the property line. Listed uncertain.",
+    "dockDoors": "Long dock-door row on the south building face with ~20+ trailers backed in, plus additional dock doors on the west face. Total estimated ~40-50 across the complex; banded 25-50.",
+    "dropArea": "Dense trailer/material storage yard on the southwest and a second trailer cluster on the northeast; well over 50 trailers/parking spots visible.",
+    "shipRcvSeparate": "Dock banks on physically separate building faces (south face row vs. west face row), consistent with separate shipping/receiving clusters.",
+    "drivewayLong": "Large open paved yard between the road frontage and the dock doors provides deep stacking room for 3+ trucks.",
+    "fastLaneOpportunity": "Wide unused paved apron at the southwest access; ample room to add an express/bypass lane.",
+    "railServed": "A rail line runs along the north/northeast property edge but no spur appears to enter the property; classified railServed false.",
+    "urbanRural": "Edge-of-town industrial setting in small-town Bishopville (Lee County), surrounded by woods and farmland; classified Rural."
+  },
+  "method": "deep-audit"
+}

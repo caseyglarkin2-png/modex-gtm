@@ -1,0 +1,43 @@
+{
+  "name": "Danone - Jacksonville FL (distribution center)",
+  "type": "Regional distribution center (Southeast hub)",
+  "coords": { "lat": null, "lng": null },
+  "geofences": {
+    "perimeter": null,
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0, "trailersVisible": 0, "trailerParkingCapacity": 0,
+    "truckGateCount": 0, "buildingCount": 0, "siteAreaAcres": 0.0,
+    "railServed": false
+  },
+  "mapsUrl": "",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "NONE", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
+    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
+    "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural", "connectivityIssue",
+    "multipleFacilities", "scale", "dropYard", "multiStep"
+  ],
+  "fieldNotes": {
+    "location": "UNRESOLVED. Danone announced a new Jacksonville-area regional distribution center in June 2025 alongside the $65M plant expansion at 2198 W. Beaver Street, but no street address, business park, or building has been publicly disclosed as of the audit date (May 2026). Searched Danone newsroom/PRNewswire releases, Jax Daily Record, Jacksonville Today, and trade press (Food Dive, ProFood World, Supply Chain Digital) - all describe the DC only in general terms ('a new regional distribution center in the Jacksonville area, rooted in regional infrastructure'). The facility appears to be under construction / ramp-up with no findable location.",
+    "classification": "All 22 classification fields default to false/NONE/null because no facility could be located or imaged. Every field is listed in uncertainFields. urbanRural defaulted to 'Urban' as a placeholder (Jacksonville metro) but is itself uncertain.",
+    "recommendation": "Re-audit once Danone or the City of Jacksonville publishes the DC address (likely via a building permit, lease announcement, or the Danone careers 'Our Locations' page once the site is operational)."
+  },
+  "method": "deep-audit"
+}

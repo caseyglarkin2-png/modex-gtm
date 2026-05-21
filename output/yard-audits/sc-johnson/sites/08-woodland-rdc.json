@@ -1,0 +1,52 @@
+{
+  "name": "Woodland Regional Distribution Center - Woodland CA",
+  "type": "Regional Distribution Center (aerosol storage)",
+  "coords": { "lat": 38.67840, "lng": -121.72730 },
+  "geofences": {
+    "perimeter": { "south": 38.67740, "west": -121.72850, "north": 38.67930, "east": -121.72620 },
+    "truckGate": { "south": 38.67760, "west": -121.72670, "north": 38.67800, "east": -121.72620 },
+    "dropYards": [
+      { "south": 38.67760, "west": -121.72820, "north": 38.67800, "east": -121.72640 },
+      { "south": 38.67890, "west": -121.72820, "north": 38.67925, "east": -121.72640 }
+    ],
+    "dockAprons": [
+      { "south": 38.67772, "west": -121.72810, "north": 38.67795, "east": -121.72650 },
+      { "south": 38.67875, "west": -121.72810, "north": 38.67898, "east": -121.72650 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 42, "trailersVisible": 25, "trailerParkingCapacity": 70,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 14.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.67840,-121.72730,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "trailersVisible"],
+  "fieldNotes": {
+    "location": "Confirmed via EPA RMP record (Woodland Regional Distribution Center, 2030 Hanson Way) + Panjiva buyer record + LoopNet 'Hanson Way Distribution Center'. JournalTimes reported SCJ leasing a ~200,000 sq ft Woodland facility. Building (built 2002, ~200,000 sq ft, 30-ft clear, 40 docks + 1 drive-in) is the lone mid-size white-roof warehouse; surrounding much larger buildings are separate tenants. Roster coords (geocode moved 103 m) land correctly on the building.",
+    "truckGate": "The truck-side parking/yard areas on the north and south faces are bounded by chain-link fencing; the west-side office parking is also chain-link fenced (Street View Jan/Mar 2026). Controlled-access fenced parcel with gate openings where the perimeter drive enters the truck yards.",
+    "guardShack": "No staffed guard booth observed at the entrance or yard gates in Street View along both fronting roads.",
+    "remoteGs": "Gate/fence present, no guard shack -> remote check-in (kiosk/badge) implied.",
+    "shipRcvSeparate": "Dock banks on BOTH the north and south long faces (z18/z19 satellite) with trailers backed in -> shipping and receiving on physically separate faces. Consistent with a ~200k sq ft DC with 40 docks split across faces.",
+    "dockDoors": "Web research confirms 40 docks + 1 drive-in; banks split across the north and south faces -> 25-50 band.",
+    "dropArea": "Moderate paved truck yards on both faces with a smaller set of parked trailers without tractors than the larger SCJ RDCs -> 10-25.",
+    "trailersVisible": "Imagery (winter/dry-season captures) shows a modest number of trailers parked; count approximate.",
+    "fastLaneOpportunity": "Truck yards are functional but not notably oversized; no clear unused width for an express lane -> false.",
+    "urbanRural": "Edge-of-town industrial area on the NW side of Woodland CA (small Yolo County city) with open farmland immediately to the west -> Rural per rubric tie-break.",
+    "siteAreaAcres": "Estimate from perimeter box; ~200,000 sq ft building plus truck yards on a compact ~14-acre parcel.",
+    "entryLanes": "Single open access drive; lane count approximate."
+  },
+  "method": "deep-audit"
+}

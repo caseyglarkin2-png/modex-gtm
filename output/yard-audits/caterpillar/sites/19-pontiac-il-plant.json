@@ -1,0 +1,51 @@
+{
+  "name": "Caterpillar - Pontiac IL Plant",
+  "type": "Manufacturing plant (fuel injectors / fuel systems)",
+  "coords": { "lat": 40.88670, "lng": -88.65180 },
+  "geofences": {
+    "perimeter": { "south": 40.88400, "west": -88.65550, "north": 40.88880, "east": -88.64900 },
+    "truckGate": { "south": 40.88720, "west": -88.65090, "north": 40.88790, "east": -88.64990 },
+    "dropYards": [
+      { "south": 40.88680, "west": -88.65120, "north": 40.88780, "east": -88.65000 }
+    ],
+    "dockAprons": [
+      { "south": 40.88650, "west": -88.65160, "north": 40.88720, "east": -88.65040 }
+    ],
+    "staging": { "south": 40.88700, "west": -88.65120, "north": 40.88770, "east": -88.65020 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 10,
+    "trailersVisible": 8,
+    "trailerParkingCapacity": 20,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 68.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.88670,-88.65180,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "dockDoors", "dropArea", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "location": "Roster lat/lng (ROOFTOP, movedMeters 71) landed directly on the plant building - accurate. Confirmed via Panjiva / Illinois State Fire Marshal records (Caterpillar Engine Systems Inc., 1300 4H Park Rd). The plant has operated since 1978, assembling/testing fuel injectors and fuel pumps for Cat products.",
+    "truckGate": "Fenced manufacturing facility - chain-link perimeter fence visible around the property in multiple Street Views, with Caterpillar signage and a Caterpillar water tower. A controlled entrance road runs from 4H Park Rd into the property. Set true.",
+    "guardShack": "No guard booth positively imaged at the gate. Marked guardShack false / remoteGs true on a remote-check-in assumption - low confidence, flagged.",
+    "dockDoors": "Modest dock activity on the E/NE side: a dock canopy structure with material storage and a few trailers. Estimated ~10 doors, 0-10 band - flagged.",
+    "dropArea": "A small trailer/material yard near the E dock area; no large dedicated drop lot - dropArea 0-10, dropYard false.",
+    "multipleFacilities": "Main plant building plus an attached/adjacent cluster of process and utility structures on the SW side (water treatment, support buildings); counted as 2.",
+    "urbanRural": "Rural - Pontiac IL is a small town; the plant sits on the edge of town surrounded by farmland with a small residential subdivision adjacent to the N.",
+    "railServed": "No rail spur runs into the property.",
+    "siteAreaAcres": "~68 acres for the fenced campus including parking, from the perimeter box."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,61 @@
+{
+  "name": "Pactiv Evergreen - Raleigh NC",
+  "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
+  "coords": { "lat": 35.750876, "lng": -78.640973 },
+  "geofences": {
+    "perimeter": { "south": 35.749900, "west": -78.642300, "north": 35.751750, "east": -78.639400 },
+    "truckGate": { "south": 35.750350, "west": -78.642250, "north": 35.750650, "east": -78.641900 },
+    "dropYards": [],
+    "dockAprons": [
+      { "south": 35.750250, "west": -78.641700, "north": 35.750600, "east": -78.640900 },
+      { "south": 35.750150, "west": -78.640900, "north": 35.750420, "east": -78.640200 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 12,
+    "trailersVisible": 6,
+    "trailerParkingCapacity": 10,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 11.5,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.750876,-78.640973,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Chain-link sliding/swing gate across the truck-yard drive on the south side, confirmed in 2022-09 Street View. Open driveway from Wilmington St leads to a yard gate before the dock apron.",
+    "guardShack": "No guard booth structure at the gate in any Street View heading; gate is unstaffed chain-link.",
+    "remoteGs": "Gate present but no guard shack -> remote / manual check-in.",
+    "backupSensitive": "Dock apron opens onto a tight shared parking/maneuvering lot; a truck queue at the gate has very little stacking depth before reaching Wilmington St.",
+    "dockDoorCount": "5-8 dock doors visible on the south/west face with trailers backed in; additional doors likely on the SE face — banded 10-25, count is an estimate.",
+    "railServed": "Active rail spur runs along the south edge of the property and into the site adjacent to the silos (confirmed in z19 satellite).",
+    "scale": "No truck scale visible in the yard."
+  },
+  "method": "deep-audit"
+}

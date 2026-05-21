@@ -1,0 +1,68 @@
+{
+  "name": "Mondelez Richmond Distribution Center - Sandston VA",
+  "type": "Distribution center (3PL-operated, Kenco)",
+  "coords": { "lat": 37.47980, "lng": -77.33820 },
+  "geofences": {
+    "perimeter": { "south": 37.47770, "west": -77.34000, "north": 37.48250, "east": -77.33580 },
+    "truckGate": { "south": 37.48130, "west": -77.33970, "north": 37.48200, "east": -77.33900 },
+    "dropYards": [
+      { "south": 37.47880, "west": -77.33780, "north": 37.48070, "east": -77.33600 }
+    ],
+    "dockAprons": [
+      { "south": 37.47820, "west": -77.33830, "north": 37.48100, "east": -77.33640 },
+      { "south": 37.47880, "west": -77.33970, "north": 37.48170, "east": -77.33870 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 45.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.47980,-77.33820,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "shipRcvSeparate"],
+  "fieldNotes": {
+    "locate": "Roster lat/lng was a GEOMETRIC_CENTER landing on open farmland 1.5 km from the actual building. Resolved via web research: the DC is at 953 S. Airport Drive in the Sauer Industrial Center, a Becknell build-to-suit just south of Richmond International Airport at the SR-895 / Airport Drive interchange. Locked to the southern of two large warehouses in the park (37.4798, -77.3382).",
+    "truckGate": "No clearly visible barrier arm, sliding gate, or staffed checkpoint at the property entrance in the available satellite imagery. The private access road off the SR-895 interchange feeds an open driveway/apron at the building's NW corner. Modern build-to-suit DCs commonly have a gate that may simply not be resolvable here, so this is flagged uncertain.",
+    "guardShack": "No guard booth identified at the entrance. The only small structure near the NW corner is a covered employee-entrance canopy on the building, not a gate-side booth.",
+    "remoteGs": "No gate confirmed, so no remote check-in inferred; flagged uncertain.",
+    "dockDoors": "Large cross-dock warehouse (~447,000 sq ft) with dock doors on the west, south and east faces; aggregate clearly 50+. Count of ~90 is an honest estimate from z18-z20 imagery.",
+    "dropArea": "Extensive trailer drop yard on the SE side near the stormwater pond with multiple rows of marked stalls full of untethered trailers; 50+ band, ~90 capacity estimate.",
+    "shipRcvSeparate": "Dock doors run on multiple distinct building faces (west bank vs east/south bank), consistent with separated ship/receive flows on a cross-dock layout; flagged uncertain since face roles cannot be confirmed from imagery.",
+    "drivewayLong": "Access road plus large open yard apron gives ample deep stacking for 3+ trucks before the docks.",
+    "fastLaneOpportunity": "Wide private access road and large paved yard apron leave abundant unused width to add an express/bypass lane.",
+    "postGateStaging": "Large paved yard apron inside the property before the dock faces functions as a holding/queue area.",
+    "urbanRural": "Edge-of-metro location: industrial park amid woods and farmland south of the airport, bordered by rural residential. Judged Rural per the small-town/edge-of-town rule.",
+    "yardMetrics": "Imagery is recent and clear; trailer and dock counts are honest overhead estimates and may vary."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,53 @@
+{
+  "name": "Crowley Isla Grande Terminal - San Juan PR",
+  "type": "Marine terminal / container port (LNG-fueled microgrid, ConRo)",
+  "coords": { "lat": 18.45400, "lng": -66.10050 },
+  "geofences": {
+    "perimeter": { "south": 18.45000, "west": -66.10450, "north": 18.45650, "east": -66.09600 },
+    "truckGate": { "south": 18.45420, "west": -66.10210, "north": 18.45480, "east": -66.10130 },
+    "dropYards": [
+      { "south": 18.45250, "west": -66.10180, "north": 18.45470, "east": -66.09650 },
+      { "south": 18.45050, "west": -66.10080, "north": 18.45300, "east": -66.09700 }
+    ],
+    "dockAprons": [
+      { "south": 18.45380, "west": -66.10420, "north": 18.45520, "east": -66.10250 }
+    ],
+    "staging": { "south": 18.45470, "west": -66.10250, "north": 18.45530, "east": -66.09850 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 12,
+    "trailersVisible": 220,
+    "trailerParkingCapacity": 600,
+    "truckGateCount": 1,
+    "buildingCount": 9,
+    "siteAreaAcres": 160.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@18.45400,-66.10050,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": true,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 3, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "exitLanes", "scale"],
+  "fieldNotes": {
+    "location": "Roster coords (18.45679,-66.093211) landed on the Isla Grande airport runway ~1km NE of the terminal. True terminal located SW of the runway via satellite + Street View; access road is Calle Lindbergh running along the airport's south edge.",
+    "truckGate": "Multi-lane gate complex with a long overhead steel canopy spanning the inbound/outbound lanes, visible in Street View (sv12/sv14) at ~18.4546,-66.1015. Controlled marine-terminal gate.",
+    "guardShack": "Gate booth structures sit beneath the canopy at the gate lanes; an additional red/pink kiosk-style booth is present. Staffed marine-terminal gate per port operating practice.",
+    "entryExitSeparate": "Multiple parallel lanes under the canopy; inbound and outbound separated within the gate complex.",
+    "dockDoors": "Marine terminal — primary cargo handling is vessel-side at the ConRo pier, not building dock doors. Counted ~12 warehouse/maintenance-building dock positions; low-confidence band 10-25.",
+    "dropArea": "Very large chassis/trailer/container marshalling yard with hundreds of trailers and container stacks visible in tight imagery.",
+    "scale": "No truck scale clearly identified in imagery; flagged uncertain.",
+    "backupSensitive": "Gate sits directly on Calle Lindbergh; trailer staging already lines the road, so a queue can spill onto the public road.",
+    "railServed": "No rail spur entering the terminal property.",
+    "multipleFacilities": "Campus: ConRo pier, multiple warehouse and maintenance buildings, large open container/chassis yard."
+  },
+  "method": "deep-audit"
+}

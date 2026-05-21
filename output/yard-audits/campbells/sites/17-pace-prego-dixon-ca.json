@@ -1,0 +1,51 @@
+{
+  "name": "Pace / Prego - Dixon CA",
+  "type": "Manufacturing - tomato processing for sauces (Prego / Pace), Campbell Soup Supply Co.",
+  "coords": { "lat": 38.4745, "lng": -121.8025 },
+  "geofences": {
+    "perimeter": { "south": 38.4722, "west": -121.8042, "north": 38.4770, "east": -121.8008 },
+    "truckGate": { "south": 38.47550, "west": -121.80405, "north": 38.47585, "east": -121.80365 },
+    "dropYards": [
+      { "south": 38.47305, "west": -121.80300, "north": 38.47420, "east": -121.80140 }
+    ],
+    "dockAprons": [
+      { "south": 38.47390, "west": -121.80290, "north": 38.47430, "east": -121.80210 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 12, "trailersVisible": 55, "trailerParkingCapacity": 90,
+    "truckGateCount": 2, "buildingCount": 8, "siteAreaAcres": 39.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.4745,-121.8025,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoors", "dockDoorCount", "scale", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "identity": "Roster address (1606 Pedrick Road) is incorrect. The Campbell's Dixon facility is the Campbell Soup Supply Co. tomato-processing plant at 8380 Pedrick Road, Dixon CA 95620 - it processes ~660,000 tons of tomatoes/year into Prego spaghetti sauce and Pace picante sauce base. OSM places 8380 Pedrick Rd at 38.4743,-121.8038. Satellite confirms a large multi-building agricultural processing campus surrounded by farmland. Locked center 38.4745,-121.8025.",
+    "truckGate": "Main entrance off Pedrick Road has a fenced driveway with a sliding/rolling chain-link gate (visible parked open in 2024 Street View) and white jersey-barrier lane chicane creating a checkpoint pinch-point. truckGate=true.",
+    "guardShack": "No proper staffed guard booth visible at the gate - only a small portable structure (appears to be a portable toilet). guardShack=false; medium confidence (a booth could be obscured).",
+    "remoteGs": "Gate present but no guard booth -> remote/kiosk/call-box check-in implied. remoteGs=true.",
+    "postGateStaging": "Large paved interior holding/queue areas inside the gate before the docks and drop yard.",
+    "dropArea": "Extensive on-site drop yard with 50+ parked trailers across the central/southern yard. dropArea 50+, dropYard true.",
+    "dockDoors": "Loading docks distributed across warehouses in the trailer-yard area; tomato intake is largely bulk (gondola/tanker), not dock-door. Estimated 10-20 dock doors total -> 10-25 band; low confidence.",
+    "shipRcvSeparate": "Bulk tomato receiving at the N processing plant is physically separate from the warehouse/drop-yard shipping operations to the south.",
+    "multipleFacilities": "Campus of 8+ distinct buildings: processing plant, warehouses, outbuildings, plus settling ponds.",
+    "urbanRural": "Surrounded by open farmland east of Dixon - clearly Rural.",
+    "connectivityIssue": "Rural but adjacent to a developed industrial strip and not deeply isolated; cellular coverage likely adequate. Marked false, low confidence.",
+    "railServed": "A rail corridor runs in the broader area but no spur enters the property; tomato intake is by truck. railServed=false.",
+    "scale": "Truck scales are likely present at an agricultural intake plant of this scale but not clearly resolved in imagery - left false, flagged uncertain."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,54 @@
+{
+  "name": "GP Plattsburgh Mill - Plattsburgh NY",
+  "type": "Tissue/Towel Mill",
+  "coords": { "lat": 44.7112, "lng": -73.4525 },
+  "geofences": {
+    "perimeter": { "south": 44.707786, "west": -73.456798, "north": 44.714614, "east": -73.448202 },
+    "truckGate": { "south": 44.709700, "west": -73.454800, "north": 44.710400, "east": -73.453900 },
+    "dropYards": [
+      { "south": 44.709500, "west": -73.454500, "north": 44.711000, "east": -73.452800 },
+      { "south": 44.712500, "west": -73.455800, "north": 44.713300, "east": -73.454500 }
+    ],
+    "dockAprons": [
+      { "south": 44.712800, "west": -73.453200, "north": 44.714300, "east": -73.451500 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 28,
+    "trailersVisible": 45,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 2,
+    "buildingCount": 14,
+    "siteAreaAcres": 128.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@44.7112,-73.4525,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "dockDoorCount", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Street View (Oct 2022) shows a chain-link gate with green privacy slats labeled 'GATE 1' on a swing/sliding gate on the SW side of the property; trailers staged immediately inside the fence.",
+    "guardShack": "No staffed guard booth visible at GATE 1 — it is an unattended labeled swing gate; access appears to be remote/badge-based, so remoteGs is true.",
+    "remoteGs": "Labeled 'GATE 1' swing gate with no booth = remote check-in / badge access.",
+    "truckGateCount": "Gate signage reads 'GATE 1', implying at least one more numbered gate on the perimeter.",
+    "backupSensitive": "Tight urban-edge site: the SW truck gate opens directly onto a narrow plant road with little stacking room; a queue would back onto the road.",
+    "dockDoors": "Dock banks along the large NW warehouse and process buildings; ~28 estimated, partly obscured by roof structures - flagged uncertain.",
+    "dropArea": "Multiple trailer-parking rows inside the SW fence and along the warehouse; 25-50 band.",
+    "shipRcvSeparate": "Distinct dock clusters on the warehouse and on separate process-side buildings.",
+    "railServed": "Active rail line runs along the west edge and into the mill; rail car at a mill dock visible in Street View.",
+    "urbanRural": "Site sits inside the City of Plattsburgh, surrounded by residential streets and commercial development - clearly Urban.",
+    "multipleFacilities": "Multi-building campus: process mill, large converting/warehouse, office building, plus ancillary structures."
+  },
+  "method": "deep-audit"
+}

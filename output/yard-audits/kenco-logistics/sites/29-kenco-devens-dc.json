@@ -1,0 +1,53 @@
+{
+  "name": "Kenco Devens DC - Devens MA",
+  "type": "Distribution Center / Northeast Warehouse",
+  "coords": { "lat": 42.54620, "lng": -71.59450 },
+  "geofences": {
+    "perimeter": { "south": 42.54470, "west": -71.59680, "north": 42.54790, "east": -71.59250 },
+    "truckGate": null,
+    "dropYards": [
+      { "south": 42.54520, "west": -71.59440, "north": 42.54700, "east": -71.59300 }
+    ],
+    "dockAprons": [
+      { "south": 42.54500, "west": -71.59620, "north": 42.54620, "east": -71.59470 }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 14,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 13.5,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.54620,-71.59450,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "railServed", "dockDoorCount", "dropArea"],
+  "fieldNotes": {
+    "location": "Roster coords (42.546746,-71.594485, geocode ROOFTOP) landed on a long warehouse building at 50 Independence Drive, Devens MA - confirmed correct. The facility is also branded 'Kenco's USG Boston' (a Kenco distribution operation for USG / United States Gypsum building products), per multiple business listings. Audit locked on the building footprint at 42.54620,-71.59450.",
+    "truckGate": "A chain-link perimeter fence rings the property (visible in Aug 2023 Street View). No barrier arm or sliding/swing gate structure was observed at the driveway off Independence Drive; the Devens commerce-park roads are open public roads and the property entrances appear open. truckGate marked false (fence present, no controlled checkpoint structure confirmed); flagged uncertain.",
+    "guardShack": "No staffed booth visible at any entrance. guardShack=false, remoteGs=false. Flagged uncertain - frontage trees partly obscure the entrance.",
+    "dockDoors": "A continuous bank of dock doors with trailers backed in runs along the building's SW face; counted ~22 doors, banded 10-25. The wide SE-end apron has additional dock/loading positions. Low-confidence exact count.",
+    "dropArea": "Trailers backed in along the SW dock face plus a paved truck apron at the SE end holding parked trailers (~14 visible); 10-25 band. dropYard=true.",
+    "shipRcvSeparate": "Dock activity concentrated on the SW face with a single shared truck court; no clearly separate second dock cluster. shipRcvSeparate=false.",
+    "railServed": "A rail line and rail yard run immediately along the NE/E side of the building; rail cars (boxcars) and what appears to be a spur are present adjacent to the building's SE-end apron. USG building-products distribution is a heavy rail user. railServed=true on this basis; flagged uncertain since a spur directly entering the footprint is not unambiguously confirmable from imagery.",
+    "drivewayLong": "The SW truck court and SE apron are deep and open - can hold 3+ trucks queued. postGateStaging=true.",
+    "urbanRural": "Devens is a small redeveloped former-army-base commerce park in semi-rural north-central Massachusetts, set among woods - Rural per the rubric (small-town / edge-of-town industrial).",
+    "connectivityIssue": "Devens has an established commerce park with surrounding development and good infrastructure; not isolated. connectivityIssue=false.",
+    "siteArea": "Perimeter box ~13.5 acres covering the building, SW dock court, SE apron and car parking. Approximate."
+  },
+  "method": "deep-audit"
+}
