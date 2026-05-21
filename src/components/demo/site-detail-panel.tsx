@@ -1,8 +1,10 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import { useState } from 'react';
 import type { Site } from '@/lib/demo/pack-schema';
 import { GEOFENCE_COLORS } from './archetype-palette';
+import { DriverJourneyReplay } from './driver-journey-replay';
 
 const SiteDetailMap = dynamic(() => import('./site-detail-map-inner'), {
   ssr: false,
@@ -16,6 +18,8 @@ const SiteDetailMap = dynamic(() => import('./site-detail-map-inner'), {
 interface Props {
   site: Site;
   onClose: () => void;
+  /** When true, open directly in replay mode (D3.4 deep-link). */
+  autoPlay?: boolean;
 }
 
 function metric(label: string, value: string | number | null | undefined): React.ReactNode {
@@ -29,7 +33,16 @@ function metric(label: string, value: string | number | null | undefined): React
 
 const LAYER_LEGEND: { color: string; label: string; count?: number }[] = [];
 
-export function SiteDetailPanel({ site, onClose }: Props) {
+export function SiteDetailPanel({ site, onClose, autoPlay = false }: Props) {
+  // Replay mode toggle. Default to autoPlay when the URL deep-link said so
+  // (D3.4) AND we actually have a scenario to play; otherwise start on the
+  // static detail view and let the user opt in via the Watch button.
+  const [replayMode, setReplayMode] = useState<boolean>(autoPlay && !!site.scenario);
+
+  if (replayMode && site.scenario) {
+    return <DriverJourneyReplay site={site} scenario={site.scenario} onClose={() => setReplayMode(false)} />;
+  }
+
   const gf = site.geofences;
   const legend = [
     { color: GEOFENCE_COLORS.perimeter, label: 'Property line', count: 1 },
@@ -84,6 +97,16 @@ export function SiteDetailPanel({ site, onClose }: Props) {
             ))}
           </ul>
         </div>
+        {/* Watch-replay CTA — only when we have a scenario for this site */}
+        {site.scenario && (
+          <button
+            type="button"
+            onClick={() => setReplayMode(true)}
+            className="absolute right-2 top-2 rounded-md bg-stone-900 px-3 py-1.5 text-[11px] font-medium text-white shadow-md transition hover:bg-stone-700"
+          >
+            ▶ Watch a truck run this
+          </button>
+        )}
       </div>
 
       {/* Scrollable detail */}

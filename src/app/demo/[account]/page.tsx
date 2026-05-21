@@ -21,6 +21,13 @@ interface Params {
   account: string;
 }
 
+interface SearchParams {
+  /** D3.4 — deep-link to a specific facility detail view. */
+  site?: string;
+  /** D3.4 — auto-open the driver journey replay on load when `play=1`. */
+  play?: string;
+}
+
 async function loadPack(slug: string): Promise<DemoPack | null> {
   try {
     const file = path.join(process.cwd(), 'public', 'demo-packs', `${slug}.json`);
@@ -51,10 +58,29 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   };
 }
 
-export default async function DemoAccountPage({ params }: { params: Promise<Params> }) {
-  const { account } = await params;
+export default async function DemoAccountPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<Params>;
+  searchParams: Promise<SearchParams>;
+}) {
+  const [{ account }, sp] = await Promise.all([params, searchParams]);
   const pack = await loadPack(account);
   if (!pack) notFound();
 
-  return <DemoSurface pack={pack} mode="standalone" />;
+  // Resolve the initial site: explicit ?site= wins, else the pack's
+  // featured site (largest archetype cluster), else nothing selected.
+  const requestedSiteId = sp.site && pack.network.sites.find((s) => s.id === sp.site) ? sp.site : null;
+  const initialSiteId = requestedSiteId ?? pack.account.featuredSiteId ?? null;
+  const autoPlay = sp.play === '1';
+
+  return (
+    <DemoSurface
+      pack={pack}
+      mode="standalone"
+      initialSiteId={initialSiteId}
+      autoPlay={autoPlay}
+    />
+  );
 }

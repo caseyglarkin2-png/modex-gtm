@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T04:46:36.111Z",
+  "builtAt": "2026-05-21T14:21:51.496Z",
   "account": {
     "slug": "pactiv-evergreen",
     "displayName": "Pactiv Evergreen",
@@ -12,7 +12,8 @@
       "droppedStubCount": 0,
       "capHit": true,
       "note": "We audited the 30 largest facilities by throughput. The wider network follows the same archetype distribution."
-    }
+    },
+    "featuredSiteId": "19-romeoville"
   },
   "research": {
     "facility_count": 50,
@@ -127,8 +128,66 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Roster coordinates (35.138989, -79.437773, geocoded ROOFTOP) placed me directly\non the roof of a large industrial building on the north side of NC Hwy 5.\nSatellite (z16-18) confirmed a single large light-colored manufacturing building\nset back behind a rail line. Web search confirmed the site as Pactiv Corporation\n(formerly International Tray Pads), an absorbent products / foam tray-pad\nconverting plant, phone (910) 944-1800 — consistent with the roster facility type.\nLocked center on the building footprint at 35.138550, -79.437750.",
         "mapsUrl": "https://www.google.com/maps/@35.138550,-79.437750,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/01-aberdeen-nc-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 35.13855,
+              "lng": -79.43775
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/01-aberdeen-nc-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 35.13855,
+              "lng": -79.43775
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Driveway runs directly from NC Hwy 5 across a CSX-type rail spur into the property with no barrier arm, sliding gate, or checkpoint. Confirmed via 2024-05 Street View at the driveway entrance.",
           "guardShack": "No booth or staffed structure at the entrance in any Street View heading.",
@@ -238,8 +297,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "The roster coordinate (42.903839, -77.301317) lands on the south end of a very\nlarge Pactiv industrial campus on North Street, NW of Canandaigua, NY. Web\nsearch confirmed Pactiv LLC operates a plastics/foam food-packaging plant at\n5250 North Street (the campus has been in continuous operation since 1966 and\nis Ontario County's largest private employer, >700 employees). Satellite probes\nfrom z15 down to z19 mapped the full campus: a cluster of dark-roof\nmanufacturing buildings on the east side (the plant — idx 2) plus several\ntan-roof warehouse/distribution buildings to the west, all inside one\ncontiguous fenced and gated property. Note: the idx 3 CTC Distribution Center\n(2480 Sommers Drive) carries the ZIP+4 14424-5250 — it is the warehouse/DC\nhalf of this same campus.",
         "mapsUrl": "https://www.google.com/maps/@42.9055,-77.2998,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/02-canandaigua-ny-plant-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 42.9055,
+              "lng": -77.2998
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/02-canandaigua-ny-plant-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 42.9055,
+              "lng": -77.2998
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Confirmed in Street View (2016-09) at the campus south entrance ~42.9028,-77.3030: a black-and-white striped barrier arm spans the truck lane, flanked by two sliding chain-link gates and STOP signs. Perimeter chain-link fencing rings the whole property. This is the single shared gate for the whole Pactiv Canandaigua campus.",
           "guardShack": "A small flat-roof booth sits immediately left of the gate (windowed on multiple sides, ~1-2 vehicle footprint, set beside the gate lane). It carries an 'Adecco' staffing-agency sign and a US flag pole — it is the staffed check-in booth at the gate.",
@@ -356,8 +483,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "The roster coordinate (42.909565, -77.304568) landed on a large retention\npond / open water at the north edge of the Pactiv Canandaigua campus — the\ngeocode was off the building. Web search (Panjiva buyer reports, TruckMap, Dun\n& Bradstreet) confirms \"Pactiv Corp / Pactiv Canandaigua Corp\" at 2480 Sommers\nDrive, Canandaigua NY 14424, ZIP+4 14424-5250 — the same +4 as the 5250\nNorth Street plant. The CTC Distribution Center is the warehouse/distribution\nhalf of the single contiguous Pactiv Canandaigua campus: the cluster of large\nwarehouse buildings on the west side of the campus, surrounded by extensive\ntrailer drop yards. Satellite probes z15-z19 confirmed the building footprints\nand the campus is one fenced, gated property.",
         "mapsUrl": "https://www.google.com/maps/@42.9053,-77.3035,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/03-canandaigua-ctc-dc-ny-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 42.9053,
+              "lng": -77.3035
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/03-canandaigua-ctc-dc-ny-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 42.9053,
+              "lng": -77.3035
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Confirmed in Street View (2016-09) at the shared campus south entrance ~42.9028,-77.3030: a black-and-white striped barrier arm spans the truck lane, flanked by two sliding chain-link gates and STOP signs, with perimeter chain-link fencing. The CTC Distribution Center (2480 Sommers Drive) sits on the same gated Pactiv campus as the Canandaigua plant and shares this single truck gate.",
           "guardShack": "Small flat-roof staffed booth (windowed multiple sides, ~1-2 vehicle footprint, 'Adecco' sign, US flag pole) sits immediately beside the gate lane — the staffed check-in booth.",
@@ -471,8 +666,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "The roster coordinate (31.12963, -97.337975) lands on the SE part of a very\nlarge Pactiv manufacturing complex on Pegasus Drive in Temple, TX. Web search\n(Temple Chamber of Commerce directory, Yelp, D&B) confirms Pactiv Corporation /\nPactiv Evergreen at 3000-3002 Pegasus Drive — a foodservice packaging\nmanufacturing plant. The account GTM dossier names Temple as Pactiv Evergreen's\npublicly profiled hub-and-spoke regional mixing-center hub. A KDH News article\nreports a $1.3M plant remodel (new pallet racking) — confirms active operations.\nSatellite probes z16-z20 mapped the campus: a large warehouse building on the\nNE, several connected manufacturing buildings, employee parking on the south,\nand a rail spur along the west edge.",
         "mapsUrl": "https://www.google.com/maps/@31.131,-97.339,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/04-temple-tx-plant-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 31.131,
+              "lng": -97.339
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/04-temple-tx-plant-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 31.131,
+              "lng": -97.339
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "The plant is fully ringed by chain-link perimeter fencing (some with green privacy slats), confirmed in Street View (2026-04) on multiple road frontages. The SW-corner driveway off Pegasus Drive is a wide controlled access point: a fenced pinch-point with on-post signage where the property driveway meets the public road. Marked true on the fenced controlled-entry evidence; the exact barrier-arm hardware is screened by mature trees and not fully verifiable — flagged uncertain.",
           "guardShack": "No staffed guard booth could be positively confirmed from Street View. A small blue-roof structure sits near the SW entrance in z20 satellite that may be a gatehouse, but it could not be confirmed as a staffed multi-window booth — marked false, flagged uncertain.",
@@ -584,8 +845,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "The roster coordinate (31.133837, -97.336759) lands on the NE corner of a very\nlarge white-roof distribution warehouse on Pegasus Drive in north Temple, TX,\n~400 m north of the Pactiv Temple plant (idx 4). Web search (KDH News, Waze)\nconfirms Pactiv Evergreen operates a warehouse facility at 3776 Pegasus Drive\n(\"38,835 sq ft\" cited in the KDH article, though the building footprint on\nimagery is far larger — the cited figure likely refers to a remodel scope);\nWaze lists \"Pactiv Corp, 3778 Pegasus Dr\". Street View (2026-04) confirmed the\nlocation: a black \"3776\" address sign stands at the entrance driveway off\nPegasus Drive. The account GTM dossier names Temple as Pactiv Evergreen's\npublicly profiled regional mixing-center hub in its hub-and-spoke distribution\nmodel — this DC building is that mixing center.",
         "mapsUrl": "https://www.google.com/maps/@31.1333,-97.3376,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/05-temple-tx-dc-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 31.1333,
+              "lng": -97.3376
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/05-temple-tx-dc-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 31.1333,
+              "lng": -97.3376
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "The DC has full chain-link perimeter fencing (with dark privacy mesh) confirmed in Street View (2026-04). The entrance driveway off Pegasus Drive (marked with a '3776' address sign on the road) reads as an open / uncontrolled driveway opening in the fence — no barrier arm, sliding gate, or pinch-point checkpoint structure was visible in Street View or z20 satellite. Marked false; flagged uncertain (the fence may carry a swing gate that is normally open).",
           "guardShack": "No staffed guard booth visible at the entrance. The small structure at the building's NE corner is an office/maintenance building set against the warehouse, not a gate booth.",
@@ -684,8 +1003,66 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "The roster geocode (32.459931, -99.81015, `ROOFTOP`) is accurate. It lands on\nthe Pactiv Evergreen Food Merchandising plant in the Five Points industrial\npark on the northwest edge of Abilene. Confirmed by satellite z16-z18 and\nStreet View (captured 2025-01): a large light-roof manufacturing building with\na white-roof wing, employee parking with a landscaped circular drive, and\nloading aprons — consistent with the named Pactiv Evergreen site.",
         "mapsUrl": "https://www.google.com/maps/@32.459931,-99.81015,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/06-pactiv-evergreen-abilene-tx-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.459931,
+              "lng": -99.81015
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/06-pactiv-evergreen-abilene-tx-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.459931,
+              "lng": -99.81015
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Open site. The truck driveway off Five Points Pkwy enters the property as an uncontrolled loop road with no barrier arm, gate, or pinch-point checkpoint at any point along the property line (confirmed in Street View 2025-01 from multiple headings).",
           "guardShack": "No staffed booth anywhere along the entrance road or dock aprons.",
@@ -777,8 +1154,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "The roster geocode (32.075885, -96.397359) was wrong. It carried\n`RANGE_INTERPOLATED` precision and landed ~5 km southeast of the city in open\nwoodland/farmland along the SH-31 bypass. Satellite probes at z14-z17 and a\nStreet View pull (captured 2024-02) of that point show nothing but rural\ndivided highway — no building of any kind.\n\nThe plant address is 4501 E. Business State Highway 31 — the Business\nroute through Corsicana, not the bypass. Working the SH-31 corridor on the\neast side of town, the Pactiv plant was positively identified at\n32.0987, -96.4206, on the north side of the E State Highway 31 service\nroad. Identification basis:\n\n- A long L-shaped white metal manufacturing building with a row of\n  resin storage silos along the highway frontage — silos are diagnostic of",
         "mapsUrl": "https://www.google.com/maps/@32.09865,-96.42055,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/07-pactiv-evergreen-corsicana-tx-plant-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.09865,
+              "lng": -96.42055
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/07-pactiv-evergreen-corsicana-tx-plant-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.09865,
+              "lng": -96.42055
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster geocode (32.075885,-96.397359, RANGE_INTERPOLATED) was wrong — it placed the point ~5 km SE in open woodland/farmland on the SH-31 bypass (confirmed empty by satellite z14-z17 and Street View, captured 2024-02). Address is '4501 E. Business State Highway 31' (Business 31, not the bypass). The Pactiv plant was positively re-located at 32.0987,-96.4206 on the north side of the E State Highway 31 service road: a fully fenced plastics manufacturing complex with a long L-shaped white metal manufacturing building, a row of resin storage silos along the frontage (diagnostic of a plastics/thermoforming plant — confirmed in Street View 2024-02), a brick office building, and an extensive trailer drop yard. Plant built ~1999, ~500 employees, makes cups/lids/to-go containers/breakfast trays (corsicanadailysun, Corsicana Chamber).",
           "truckGate": "Property is fully enclosed by chain-link perimeter fence (visible in satellite and behind the highway hedge in Street View). A single access driveway connects the yard to the E SH-31 service road at the NE corner — a controlled pinch-point. truckGate = true.",
@@ -873,8 +1316,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "The roster geocode (32.075124, -96.457637, `ROOFTOP`) was accurate — it lands\ndirectly on a very large modern single-block distribution warehouse on the\nsouthwest side of Corsicana along S. Business 45. Confirmed by satellite at\nz16-z19. The building is roughly 1,150 ft x 400 ft (≈460,000+ sq ft footprint),\nthe largest structure on this side of town.",
         "mapsUrl": "https://www.google.com/maps/@32.07520,-96.45745,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/08-pactiv-evergreen-corsicana-tx-warehouse-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.0752,
+              "lng": -96.45745
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/08-pactiv-evergreen-corsicana-tx-warehouse-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.0752,
+              "lng": -96.45745
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster geocode (ROOFTOP, 32.075124,-96.457637) lands directly on a very large modern single-block distribution warehouse — confirmed in satellite z16-z19. Address 2200 S. Business 45, Corsicana. Building is ~1,150 ft x ~400 ft.",
           "truckGate": "Property is fully fenced; the building sits ~250 m back from S. Business 45 behind a deep landscaped buffer. A single entrance driveway off Business 45 at the SE corner reaches the yard through a perimeter-fence gate (pinch-point). truckGate = true.",
@@ -971,8 +1480,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "The roster geocode (33.979548, -83.389046, `ROOFTOP`) was accurate — it lands\non the main plant building of a multi-building industrial campus off Dairy Pak\nRoad, Athens GA. Confirmed at satellite z16-z19. This is the legacy Evergreen\nPackaging / Pactiv Evergreen Athens carton-converting plant (Beverage\nMerchandising). The street name \"Dairy Pak Road\" is itself a tell — the plant\nhistorically produced gable-top dairy/juice carton stock.",
         "mapsUrl": "https://www.google.com/maps/@33.97990,-83.38900,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/09-pactiv-evergreen-athens-ga-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 33.9799,
+              "lng": -83.389
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/09-pactiv-evergreen-athens-ga-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 33.9799,
+              "lng": -83.389
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster geocode (ROOFTOP, 33.979548,-83.389046) lands on the main plant building of a multi-building industrial campus off Dairy Pak Road, Athens GA — confirmed at satellite z16-z19. This is the legacy Evergreen Packaging / Pactiv Athens carton-converting plant (Beverage Merchandising; gable-top carton stock).",
           "truckGate": "The campus is bounded by fencing; the access roads (Dairy Pak Rd and the internal loop) reach the dock/yard area through controlled openings. A fenced compound with a chain-link gate and access-controlled entry is visible in Street View 2025-02 near the southwest entrance. truckGate = true.",
@@ -1054,8 +1629,66 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "The roster geocode (41.95494, -91.678837, `ROOFTOP`, movedMeters 111) was\naccurate — it lands on a large industrial building at the southwest corner of\n6th Street SW and Wilson Avenue SW, Cedar Rapids. Confirmed at satellite\nz16-z19 and Street View. This is the Pactiv Evergreen / Evergreen Packaging\nEquipment facility — it manufactures gable-top carton filling equipment\nand provides 24/7 parts and service for dairy/juice carton filling machines.\n\nThe building appears to be a shared / multi-tenant industrial block: a\nStreet View sign in the south parking lot reads \"ALTORFER\" (a Caterpillar\nequipment dealer), indicating the structure houses more than the Pactiv\noperation.",
         "mapsUrl": "https://www.google.com/maps/@41.95460,-91.67890,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/10-pactiv-evergreen-cedar-rapids-ia-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 41.9546,
+              "lng": -91.6789
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/10-pactiv-evergreen-cedar-rapids-ia-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 41.9546,
+              "lng": -91.6789
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster geocode (ROOFTOP, 41.95494,-91.678837, movedMeters 111) lands on a large industrial building at the SW corner of 6th St SW and Wilson Ave SW, Cedar Rapids — confirmed at satellite z16-z19. This is the Pactiv Evergreen / Evergreen Packaging Equipment facility (gable-top carton filling-equipment manufacture and 24/7 parts/service). The building appears to be multi-tenant — a Street View sign at the south parking lot reads 'ALTORFER' (a Caterpillar dealer), indicating shared occupancy of the industrial block.",
           "truckGate": "Open site — no perimeter fence enclosing a controlled truck entrance. The building fronts directly on public streets with open parking lots and driveways; no barrier arm, gate, or checkpoint pinch-point. truckGate = false.",
@@ -1139,8 +1772,66 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Name: Pactiv Evergreen - Plant City FL\n- Type: Manufacturing Plant (Beverage Merchandising; carton converting)\n- Address: 2104 Henderson Way, Plant City, FL 33563\n- Resolved coordinates: 28.01800, -82.10030 (building/apron center)",
         "mapsUrl": "https://www.google.com/maps/@28.01800,-82.10030,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/11-plant-city-fl-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 28.018,
+              "lng": -82.1003
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/11-plant-city-fl-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 28.018,
+              "lng": -82.1003
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "2025 Street View at the dock-apron entrance shows an open paved apron directly off the public road (Henderson Way internal road) with only a 'SHIPPING' directional sign - no barrier arm, sliding gate, or pinch-point lane control.",
           "guardShack": "No booth structure anywhere at the apron entrance or office entrance; both are open.",
@@ -1232,6 +1923,28 @@
         },
         "dossierExcerpt": "The roster coordinates landed on the rooftop of a mid-sized industrial building\nimmediately south of a large unrelated warehouse. Confirmed positively as the\nPactiv facility by \"pactiv evergreen\" branding visible on the building wall\nin 2026-02 Street View (driveN / drive2 panos from Wilmington Street). Web\nsearch corroborates 2215 S Wilmington St as the Pactiv Evergreen Raleigh plant\n(loc8nearme, ImportYeti, active job postings). The rows of structures to the\nsouthwest are a self-storage facility — NOT part of the Pactiv property.",
         "mapsUrl": "https://www.google.com/maps/@35.750876,-78.640973,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/12-raleigh-nc-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 35.750876,
+              "lng": -78.640973
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/12-raleigh-nc-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 35.750876,
+              "lng": -78.640973
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Chain-link sliding/swing gate across the truck-yard drive on the south side, confirmed in 2022-09 Street View. Open driveway from Wilmington St leads to a yard gate before the dock apron.",
           "guardShack": "No guard booth structure at the gate in any Street View heading; gate is unstaffed chain-link.",
@@ -1321,6 +2034,28 @@
         },
         "dossierExcerpt": "The roster coordinates landed squarely on the large grey-roofed industrial\nbuilding fronting West Main Street. Web research confirms 1500 W. Main St as\nthe Pactiv Evergreen (legacy Evergreen Packaging) Turlock beverage-carton\nplant — open since 1957, cutting ~30,000 tons of cardboard a year for\nfiber-based liquid packaging (milk and juice cartons) serving 14 western\nstates, western Canada, Hawaii, and parts of Latin America. Now part of\nNovolex. The red-roofed brick structure to the NE is an older\nattached/adjacent section of the same complex.",
         "mapsUrl": "https://www.google.com/maps/@37.491536,-120.866032,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/13-turlock-ca-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 37.491536,
+              "lng": -120.866032
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/13-turlock-ca-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 37.491536,
+              "lng": -120.866032
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Chain-link sliding gate across the dock-apron drive on the south side, confirmed in 2026-03 Street View (sv-gate2). The whole property is chain-link fenced.",
           "guardShack": "No guard booth structure beside the gate in any heading; gate is an unstaffed chain-link slider.",
@@ -1408,8 +2143,66 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "The roster coordinates landed within a large multi-building industrial cluster\non S. Mason Avenue, just south of the Belt Railway of Chicago / Clearing rail\nyard. Positively confirmed as the Pactiv Evergreen Bedford Park foodservice\nmanufacturing campus — a **Pactiv Evergreen blue branded sign is visible at\nthe office entrance** in 2025-04 Street View, and web research (loc8nearme,\nManta, Indeed reviews) confirms 7200 S. Mason Ave as the Pactiv foodservice\nplant. The roster note (\"multiple buildings on S. Mason Ave\") matches what is\non the ground.",
         "mapsUrl": "https://www.google.com/maps/@41.761600,-87.769100,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/14-bedford-park-il-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 41.7616,
+              "lng": -87.7691
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/14-bedford-park-il-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 41.7616,
+              "lng": -87.7691
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "No controlled truck gate. The campus access road off S. Mason Avenue is an open, unbarriered private drive — confirmed in 2018-10 and 2025-04 Street View. No barrier arm or gate at the property line.",
           "guardShack": "No guard booth at the campus entrance in any Street View heading.",
@@ -1507,8 +2300,74 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "The roster coordinates landed on a large single industrial building running\nNW-SE alongside a rail line, just south of the W. 79th Street / Harlem Avenue\nbridge. Confirmed as the Pactiv Evergreen Bridgeview foodservice manufacturing\nplant via web research (Waze, Chamber of Commerce, Manta, D&B, Indeed\nreviews — all citing 7701 W. 79th St). The plant runs 24/7. It is ISCC PLUS\ncertified per the certification announcement referenced in the roster. Now\npart of Novolex.",
         "mapsUrl": "https://www.google.com/maps/@41.746000,-87.810400,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/15-bridgeview-il-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 41.746,
+              "lng": -87.8104
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/15-bridgeview-il-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 41.746,
+              "lng": -87.8104
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Property fully enclosed in chain-link fencing with privacy-screened sliding gates across the truck-yard drives — confirmed in 2018 and 2025 Street View (sv-gate, sv-79th-e). At least two gated vehicle entrances along the south/southwest perimeter.",
           "guardShack": "No guard booth structure at any gate in any Street View heading probed.",
@@ -1609,8 +2468,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "The roster supplied ROOFTOP-precision coordinates. Satellite probes at z17–z20\nconfirmed a large multi-building industrial complex occupying the block between\nN. 25th Ave (west) and the rail corridor / Mannheim-area industrial belt\n(east), with single-family residential directly across 25th Ave to the west.\nWeb research corroborates the site: Pactiv's Franklin Park plant is a ~250,000\nsq ft Food Merchandising facility running 26 production lines, 180 SKUs and\n~245 employees (Pactiv Evergreen Franklin Park Facility Fact Sheet, 2024-08).\nPublic listings also reference a \"2607 Rose St\" address — Rose St is the\ninternal/east street the dock building fronts, consistent with the same\ncampus. A 2025-03 Street View confirmed the company presence (XPO trailer at\nthe curb, bulk silos visible on the plant).",
         "mapsUrl": "https://www.google.com/maps/@41.926483,-87.864226,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/16-franklin-park-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 41.926483,
+              "lng": -87.864226
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/16-franklin-park-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 41.926483,
+              "lng": -87.864226
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Open industrial driveways off N. 25th Ave / Rose St lead directly into the complex; no barrier arm, sliding gate or pinch-point checkpoint visible at the property line on either entrance. Classified false.",
           "guardShack": "No guard booth structure at any entrance — confirmed in 2025-03 Street View along 25th Ave; entrances are open paved drives flanked by parking.",
@@ -1705,8 +2622,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Roster supplied ROOFTOP-precision coordinates. Satellite probes at z17–z20\nconfirmed a single large white-roofed manufacturing building in an industrial\npocket on the NE edge of Manteno, surrounded by farm fields, with a canal and\na separate large warehouse complex to the NE. A 2024-07 Street View from\nSycamore St shows the plant with prominent bulk silos/tanks on its west face\nand an open paved entrance apron — consistent with a Food Merchandising\n(foam/plastic converting) plant. The pin is centered on the correct building.",
         "mapsUrl": "https://www.google.com/maps/@41.237499,-87.817748,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/17-manteno-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 41.237499,
+              "lng": -87.817748
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/17-manteno-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 41.237499,
+              "lng": -87.817748
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "The plant is reached by a paved access driveway from Sycamore St; the entrance is an open drive with a wide paved apron and no barrier arm, sliding gate or checkpoint structure at the property line. Classified false.",
           "guardShack": "No guard booth visible at the entrance in 2024-07 Street View or in z18-z20 satellite — the entrance apron is open paved area with no 1-3-vehicle structure beside the lane.",
@@ -1808,8 +2783,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Roster supplied GEOMETRIC_CENTER-precision coordinates (less precise than\nROOFTOP). Satellite probes at z16–z19 confirmed a large industrial / logistics\ncampus on the SE edge of Frankfort: a Foodservice manufacturing plant on the\nwest, a large co-located warehouse to the south, and additional warehouse/dock\nbuildings to the east, all bordered by farm fields to the south and east and\na rail line along the NW edge. The campus is consistent with the roster's\n\"Foodservice; co-located warehouse\" description. I nudged the working center\nslightly NE of the supplied point to the centroid of the building cluster.",
         "mapsUrl": "https://www.google.com/maps/@41.490600,-87.846800,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/18-frankfort-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 41.4906,
+              "lng": -87.8468
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/18-frankfort-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 41.4906,
+              "lng": -87.8468
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "No barrier arm, sliding gate or checkpoint pinch-point is visible at the property-line entrances off Center Rd / the south road in available satellite imagery. The only Street View panos on Center Rd are indoor office shots so a road-level verification was not possible — classified false, flagged as uncertain.",
           "guardShack": "No guard-booth structure visible at the entrances in z17-z19 satellite imagery; flagged uncertain because Street View at the entrance was unavailable (office-interior panos only).",
@@ -1917,8 +2950,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Roster supplied ROOFTOP-precision coordinates that land at the SE office\ncorner of the building. Satellite probes at z16–z20 plus web research\npositively identified the facility. The Pizzuti Companies developed a\nbuild-to-suit distribution facility for Pactiv at 1100 W. Taylor Road,\nRomeoville: 898,000 sq ft, completed 2013, designed expandable to\n1.3 million sq ft, with a **concrete dock area, heavy-duty drive lanes,\n152 employee/visitor parking spaces, 91 dock openings, and two 12 ft x 15 ft\ndrive-through doors**. Foursquare/Yelp/CMac listings confirm \"Pactiv Romeoville\nRMC, 1100 Taylor Rd.\" The large rectangular warehouse north of Taylor Rd —\nrunning roughly N-S with dock banks on both long faces — is the RMC. I set the\nworking center to the building centroid.",
         "mapsUrl": "https://www.google.com/maps/@41.627000,-88.116500,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/19-romeoville-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 41.627,
+              "lng": -88.1165
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/19-romeoville-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 41.627,
+              "lng": -88.1165
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "The RMC is reached by an open access drive off Taylor Rd; no barrier arm, sliding gate or checkpoint pinch-point is visible at the property line. A perimeter fence is visible around the dock yard edges, but the road entrance itself reads as an open drive. Classified false, flagged uncertain (entrance Street View panos placed the camera inside the yard rather than at the road gate).",
           "guardShack": "No clear guard-booth structure resolved at the road entrance; a small white structure sits near the entrance drive but could not be confirmed as a staffed booth versus a utility/water structure. Classified false, flagged uncertain.",
@@ -2012,8 +3103,74 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "The roster coordinate (39.996034, -83.122424, ROOFTOP, 55 m off) landed on the\ncorrect building. Web search confirms Pactiv operates at 2120 Westbelt Drive,\nColumbus OH 43228 (Yelp, Buzzfile, D&B; ~73 employees at this branch). The site\nis a large single white-roofed industrial building in the Westbelt Drive\nindustrial park on the far west side of Columbus, immediately east of the\nNorfolk Southern Discovery Park intermodal rail terminal. Satellite at zoom\n17-21 and Street View (2019 and 2023 panos) positively identify the building:\noffice front with flagpole on the northwest, employee parking on the west off\nWestbelt Drive, and a truck dock yard on the south face.",
         "mapsUrl": "https://www.google.com/maps/@39.99585,-83.12255,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/20-columbus-oh-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 39.99585,
+              "lng": -83.12255
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/20-columbus-oh-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 39.99585,
+              "lng": -83.12255
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Fenced truck yard south of the building; gated driveway off the internal loop road with chain-link fence and a row of bollards/posts across the lane (2023-07 Street View).",
           "guardShack": "No staffed booth visible at the entrance in any Street View heading (2019 & 2023 panos). Gate controlled by fence/bollards only.",
@@ -2106,8 +3263,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "The roster coordinate (33.676785, -84.037382, ROOFTOP, flagged 286 m off)\nlanded in a wooded/empty parcel. Stepping out to zoom 16 and tracing Rockdale\nIndustrial Blvd, the correct building resolves ~280 m south-southeast at\nroughly 33.6770, -84.0368 — a large L-shaped industrial building with resin\nsilos, a long dock face, and a fanned trailer yard. Web search confirms Pactiv\nEvergreen operates at 1501 Rockdale Industrial Blvd NW, Conyers GA 30012\n(YellowPages, CMac, Conyers-Rockdale Chamber; 24-hour operation, 250-499\nemployees, foodservice/plastic packaging). The resin silos and thermoforming\nlayout are consistent with a Pactiv foodservice converting plant.",
         "mapsUrl": "https://www.google.com/maps/@33.67700,-84.03680,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/21-conyers-ga-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 33.677,
+              "lng": -84.0368
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/21-conyers-ga-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 33.677,
+              "lng": -84.0368
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Compound fully enclosed by chain-link fence; single access road off Rockdale Industrial Blvd terminates in a chain-link gate across the truck lane (2026-02 Street View).",
           "guardShack": "No staffed booth visible at the fence gate or building front in any Street View heading (2026-02 imagery). Gate is chain-link only.",
@@ -2205,8 +3428,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "The roster coordinate (33.612211, -83.846698, ROOFTOP, flagged 251 m off)\nlanded on the correct industrial complex. Web search confirms Pactiv Evergreen\noperates a \"Foam Plant/Warehouse\" at 8170 Alcovy Rd NE, Covington GA 30014\n(Macrae's Blue Book, Chamber of Commerce directory, Yelp; 24/7 operation).\nStreet View at the Alcovy Rd frontage shows a building with a clearly legible\n\"Pactiv Evergreen\" sign on the office front, with a flagpole — a positive ID.\nThis is a very large foam-manufacturing complex on the Alcovy Rd / I-20\ncorridor on the edge of Covington.",
         "mapsUrl": "https://www.google.com/maps/@33.61225,-83.84620,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/22-covington-ga-plant-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 33.61225,
+              "lng": -83.8462
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/22-covington-ga-plant-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 33.61225,
+              "lng": -83.8462
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Very large foam-manufacturing complex enclosed by a continuous chain-link perimeter fence (privacy slats visible on the SW and NW sides in 2026-02 Street View). A facility of this scale and 24/7 operation with full perimeter fencing has a controlled truck entrance.",
           "guardShack": "Could not be visually confirmed - the internal plant entry road off the Alcovy Rd signalized intersection has no Street View coverage and z20/z21 satellite over the entry/office is overexposed. No booth positively identified. Flagged uncertain.",
@@ -2319,8 +3608,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#10",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct (shipping vs receiving) drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 120000,
+              "narrationKey": "shiprcv.split",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron on correct side",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1320000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
+        },
         "dossierExcerpt": "The roster coordinate (33.605447, -83.813271, ROOFTOP, 0 m flagged) landed at\nthe SW corner of a large dark-blue-roofed warehouse in the Lake Forest Court\nindustrial park. Web search confirms Pactiv Evergreen operates a **Regional\nMixing Center** at 15101 Lake Forest Ct NE, Covington GA 30014 (Chamber of\nCommerce directory, Yelp; 24 hours / 7 days, ~20+ employees). Street View\n(2020-01) shows a monument sign reading \"Pactiv — Regional Mixing Center\"\nand a \"Pactiv\" branded red-brick office building — a positive ID. This site is\nnotable: per the account dossier, regional mixing centers (multi-destination\noutbound trailers) are the highest-leverage yard type for YardFlow.",
         "mapsUrl": "https://www.google.com/maps/@33.60620,-83.81260,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/23-covington-ga-dc-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 33.6062,
+              "lng": -83.8126
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/23-covington-ga-dc-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 33.6062,
+              "lng": -83.8126
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Barrier-arm gate clearly visible across the truck lane on the entry drive, with a tractor-trailer queued behind it (2020-01 Street View, multiple headings). Bollards and a 'TRUCKS' directional sign confirm a controlled truck checkpoint.",
           "guardShack": "A small structure beside the barrier arm at the entry checkpoint, consistent with a guard booth (z19 satellite). The site is a branded 24/7 Pactiv Regional Mixing Center; barrier-arm gates of this kind are normally booth-operated.",
@@ -2422,8 +3779,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "The roster geocode (32.705501, -83.649254, ROOFTOP, moved 61 m) lands inside the\nlarge airport-area industrial complex on Airport Drive, ~1 km from Middle\nGeorgia Regional Airport. The complex contains two very large industrial\nbuildings. Street View from the south road (2023-07) shows the **\"Pactiv\nEvergreen\" blue-logo sign on the south face of the center/east building** —\nthat is the plant. The geocode point sits on the western half of this building.\nWeb search corroborates: Yelp, paper-world.com, and local news (a 2024 fire in\n\"egg-crate-type product\") all place the Pactiv molded-fibre plant at 7670\nAirport Drive. The upper-left building of the complex is a separate occupant and\nwas not audited.",
         "mapsUrl": "https://www.google.com/maps/@32.705850,-83.647600,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/24-macon-ga-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.70585,
+              "lng": -83.6476
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/24-macon-ga-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.70585,
+              "lng": -83.6476
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Confirmed via 2023-07 Street View showing 'Pactiv Evergreen' blue-logo signage on the south face of the central building of the Airport Drive industrial complex near Middle Georgia Regional Airport. The roster geocode point lands on the western half of this building. Two large buildings sit in the complex; the Pactiv plant is the center/east one with the company sign, NOT the upper-left building.",
           "truckGate": "Perimeter chain-link fencing rings the plant (confirmed on the south and west faces in 2022-03 and 2023-07 Street View), but the vehicle openings are plain swing gates / parking openings with no barrier arm, no controlled checkpoint pinch-point, and no lane markings. Truck access to the north dock yard is via open driveways. Classified truckGate false - fenced but uncontrolled.",
@@ -2524,8 +3939,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "The roster geocode (34.379129, -92.820078, ROOFTOP, moved 290 m) lands on the\nwestern edge of a large multi-building industrial complex in Hot Spring County,\nMalvern AR. Street View on Industrial Lane (2023-01) shows a blue \"PACTIV\"\nsilo/tank and the plant's office frontage, plus a company sign post at the\ndriveway — positive ID. Web search confirms the polystyrene-foam-tray plant at\n1105 Industrial Lane (~160 employees; plant manager Bruce Deer). Locked center\nmoved to the centroid of the main plant building cluster.",
         "mapsUrl": "https://www.google.com/maps/@34.378750,-92.819200,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/25-malvern-ar-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 34.37875,
+              "lng": -92.8192
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/25-malvern-ar-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 34.37875,
+              "lng": -92.8192
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Confirmed via 2023-01 Street View showing a blue 'PACTIV' silo/tank and the plant's office front on Industrial Lane, plus the company sign post at the driveway. Web search corroborates the polystyrene-foam-tray plant at 1105 Industrial Lane, Malvern AR (~160 employees, plant manager Bruce Deer). The roster geocode (moved 290 m) lands on the western half of the main plant building; locked center moved to the building cluster centroid.",
           "truckGate": "Continuous chain-link perimeter fence rings the property along Industrial Lane (confirmed in three 2023 Street View headings). The SE driveway entrance has a rolling/sliding gate panel in the fence line with the Pactiv sign beside it - a controlled truck gate. truckGate true.",
@@ -2617,8 +4098,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "The roster geocode (35.631521, -80.786753, ROOFTOP) lands directly on a large\ngray-roofed industrial building in the south-Iredell industrial park. Fresh\n2026-01 Street View on Mooresville Blvd shows the long plant building with an\noffice front and Pactiv signage. Web search confirms the foodservice/grocery\npackaging plant at 314 Mooresville Blvd (~250 employees, 24/7 operation, $53.7M\nannual sales). Positive ID — locked center moved slightly to the building\ncentroid.",
         "mapsUrl": "https://www.google.com/maps/@35.631400,-80.786700,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/26-mooresville-nc-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 35.6314,
+              "lng": -80.7867
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/26-mooresville-nc-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 35.6314,
+              "lng": -80.7867
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Confirmed via 2026-01 Street View on Mooresville Blvd showing the long industrial building with office front and Pactiv signage, in the south-Iredell industrial park. Web search corroborates the foodservice/grocery packaging plant at 314 Mooresville Blvd (~250 employees, 24/7 operation, $53.7M sales). Roster geocode (ROOFTOP) lands on the plant building - confirmed.",
           "truckGate": "Open campus. Fresh 2026-01 Street View shows NO perimeter fence along the Mooresville Blvd frontage and NO gate - the lawn runs open from the public road to the parking lots and building. Driveways are uncontrolled open entrances. truckGate false.",
@@ -2710,8 +4249,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "The roster geocode (35.262664, -77.581635, APPROXIMATE, moved 2103 m) landed\nin downtown Kinston — the wrong place. The roster address also reads\n\"Enterprise Rd\"; the correct street is Enterprise Blvd, in the Lenoir County\nindustrial park west of Kinston, near West Pharmaceutical Services (1028\nEnterprise Blvd) and Sanderson Farms.\n\nResolution path:\n- Web search established Enterprise Blvd is in the Lenoir/Kinston industrial\n  park; property listings (LoopNet, Reonomy) give 1447 Enterprise Blvd as a\n  ~400,000 SF industrial building, built 1994, on a 23.02-acre site.\n- clustrmaps lists a prior occupant \"Dopaco Inc\" — a paper / foodservice\n  packaging company absorbed into the Pactiv / Reynolds Group family, confirming\n  this is the right packaging plant.\n- A property listing cited ~35.271813, -77.667863; satellite there shows a large",
         "mapsUrl": "https://www.google.com/maps/@35.271813,-77.667863,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/27-kinston-nc-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 35.271813,
+              "lng": -77.667863
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/27-kinston-nc-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 35.271813,
+              "lng": -77.667863
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "RESOLVED. The roster geocode (35.262664, -77.581635, APPROXIMATE, moved 2103 m) landed in downtown Kinston - wrong. The facility is actually in the Lenoir County industrial park WEST of Kinston, off Enterprise Blvd near West Pharmaceutical Services and Sanderson Farms. Confirmed via property listings (LoopNet/Reonomy/clustrmaps: 1447 Enterprise Blvd, ~400,000 SF, built 1994, 23.02-acre site; clustrmaps also lists prior occupant 'Dopaco Inc' - a paper/foodservice packaging firm absorbed into the Pactiv/Reynolds family) and fresh 2026-03 Street View showing the plant on Enterprise Blvd. Locked center 35.271813, -77.667863 on the large white-roofed building.",
           "truckGate": "Open campus. Fresh 2026-03 Street View along Enterprise Blvd shows NO perimeter fence and NO gate - the road runs open up to the east dock apron and the front employee parking. Driveways are uncontrolled. truckGate false.",
@@ -2805,8 +4402,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Address: 3010 42nd Street S, Moorhead, MN 56560\n- Locked center: 46.84175, -96.70685\n- Confirmation: The roster ROOFTOP coordinate (46.841842, -96.706159) landed on the\n  correct building. A corner monument sign reading \"pactiv evergreen\" is plainly\n  visible in Aug-2025 Street View at the 42nd Street entrance, positively\n  identifying the facility. Web research (Fargo INC!, Yelp, Yellow Pages) confirms\n  the Moorhead Pactiv Evergreen plant: built 1993, ~150,000 sq ft, ~175 employees,\n  24/7 operation producing molded-fiber egg cartons and hinged-lid containers/\n  plates. Acquired by Novolex 4/1/2025. The plant is the single building with the\n  blue-grey + light roof; a separate, unrelated industrial building sits to the\n  north across a fence line.",
         "mapsUrl": "https://www.google.com/maps/@46.84175,-96.70685,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/28-moorhead-mn-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 46.84175,
+              "lng": -96.70685
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/28-moorhead-mn-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 46.84175,
+              "lng": -96.70685
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Aug-2025 Street View from 42nd Street S shows the entrance driveway and the entire west-face dock apron open directly to the public road. A chain-link perimeter fence exists between Pactiv and the neighbor to the north, but there is NO barrier arm, sliding gate, or pinch-point lane control across either the visitor driveway or the truck apron. The corner monument sign reading 'pactiv evergreen' positively confirms the facility.",
           "guardShack": "No staffed booth anywhere at the entrance. The only protruding structure on the dock face is a dock office/penthouse flush against the building, not a free-standing 1-3-space guard booth beside a gate.",
@@ -2900,8 +4555,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Address: 1110 Performance Drive, Stockton, CA 95206\n- Locked center: 37.89400, -121.26035\n- Confirmation: The roster ROOFTOP coordinate (37.894422, -121.260196) lands on a\n  large rectangular distribution/warehouse building inside the Performance Drive\n  logistics park on the south side of Stockton (near I-5/Hwy 99). Web research\n  (Waze, Chamber of Commerce, IndustryNet) confirms Pactiv Corporation / Pactiv\n  Evergreen at 1110 Performance Dr, Stockton CA 95206, a 24-hour foodservice\n  packaging operation (paper cups & plates) with a co-located warehouse. The\n  building has an office front and visitor parking on its NE face along\n  Performance Drive and a long dock court along its SW face.\n- Confidence note: This is a multi-building logistics park; the exact tenant\n  footprint of 1110 was inferred from the ROOFTOP geocode and the office frontage",
         "mapsUrl": "https://www.google.com/maps/@37.89400,-121.26035,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/29-stockton-ca-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 37.894,
+              "lng": -121.26035
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/29-stockton-ca-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 37.894,
+              "lng": -121.26035
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "The truck dock court runs along the SW face of the building - a long fenced corridor shared with the rail spur. Mar-2026 Street View at the SE corridor mouth (where it meets the public street and crosses the rail) shows a chain-link perimeter fence with a sliding gate across the truck corridor entrance. The NE office/visitor frontage on Performance Drive is open (no barrier, no booth) but the truck/dock side is fence-and-gate controlled. Verdict: gated truck side.",
           "guardShack": "No staffed guard booth visible at either the SE corridor gate or the NE office entrance. The corridor gate is an unmanned chain-link sliding gate.",
@@ -3006,8 +4727,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Address: 74 Weed Street, Plattsburgh, NY 12901\n- Roster coordinate (incorrect): 44.708769, -73.453892 (geocode\n  RANGE_INTERPOLATED) — this landed on a small orange-roofed building in a\n  residential block, not an industrial facility.\n- Corrected locked center: ~44.71100, -73.45250\n- How confirmed: Web research (Yelp, CMac, Breakroom plant-manager and packer\n  job postings) all list the facility at 74 Weed Street. Satellite survey around\n  the roster point found exactly one industrial campus matching: a large\n  multi-building complex ~0.3 km NE of the roster point. The campus is the legacy\n  Plattsburgh molded-fiber plant — built ~1902, ~150 employees, producing\n  sustainable molded fiber products (cup carriers, school lunch trays, plates,\n  bowls). Pactiv Evergreen is now part of Novolex.",
         "mapsUrl": "https://www.google.com/maps/@44.71100,-73.45250,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/30-plattsburgh-ny-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 44.711,
+              "lng": -73.4525
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/pactiv-evergreen/30-plattsburgh-ny-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 44.711,
+              "lng": -73.4525
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "coords": "ROSTER COORDS WERE WRONG. The roster point (44.708769, -73.453892, geocode RANGE_INTERPOLATED) landed on a small orange-roofed building in a residential block ~0.35 km SW of the plant. The actual Pactiv Evergreen plant is the large multi-building industrial campus at 74 Weed Street, centered ~44.7110, -73.4525, ~0.3 km NE of the roster point. Corrected via web research (Yelp, CMac, Breakroom job posts all list 74 Weed Street) and satellite identification of the only industrial campus matching the address.",
           "truckGate": "The entire campus is enclosed by continuous chain-link perimeter fencing - visible in every 2023/2025 Street View pass along Weed Street. Truck and dock yards (north and NW of the legacy mill buildings) are reached through gated openings in that fence. Verdict: gated. Flagged uncertain because the specific gate openings/arms could not be crisply resolved - the fence-line itself is unambiguous but no single barrier-arm checkpoint was clearly imaged.",

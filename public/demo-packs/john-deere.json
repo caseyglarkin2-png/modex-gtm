@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T04:43:25.235Z",
+  "builtAt": "2026-05-21T14:21:33.619Z",
   "account": {
     "slug": "john-deere",
     "displayName": "John Deere",
@@ -12,7 +12,8 @@
       "droppedStubCount": 1,
       "capHit": false,
       "note": "Audited all 21 identifiable facilities (1 additional were unresolvable from public sources)."
-    }
+    },
+    "featuredSiteId": "19-john-deere-north-american-parts-distribution-center"
   },
   "research": {
     "facility_count": 60,
@@ -143,8 +144,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "Roster supplied geometric-center coordinates (42.522441, -92.269194) flagged as moved\n2958 m. Satellite probe at z15-z16 landed directly on a massive industrial complex\nsurrounded entirely by farmland — unmistakably the John Deere Waterloo Works Tractor\nOperations site (the largest Deere assembly complex in the world, building 7/8/9 Series\ntractors). Web search confirmed 3500 E Donald St, Waterloo IA, with public 90-minute\nriding factory tours. Center refined slightly SW to 42.5210, -92.2695 to sit on the\nbuilding mass.",
         "mapsUrl": "https://www.google.com/maps/@42.5210,-92.2695,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/john-deere/01-john-deere-waterloo-works-tractor-operations-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 42.521,
+              "lng": -92.2695
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/john-deere/01-john-deere-waterloo-works-tractor-operations-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 42.521,
+              "lng": -92.2695
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Confirmed flagship John Deere Waterloo Works Tractor Operations complex at 3500 E Donald St, Waterloo IA. Largest Deere assembly complex globally (7/8/9 Series tractors). Roster geometric-center coords (moved 2958m) landed on the building mass; locked center refined to 42.5210,-92.2695.",
           "truckGate": "Inferred true with medium confidence. This is a Fortune-500 flagship assembly campus set far back from public roads behind long private internal drives; such plants are universally fenced and gate-controlled. Street View coverage stops at public rural roads (E Donald St / 41st St) and never reaches the actual truck gate, so the barrier arm could not be directly confirmed.",
@@ -245,8 +314,74 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "Roster supplied ROOFTOP coordinates (42.468191, -92.433528) moved 351 m — these landed\ndirectly on a long (~900 m) single-mass industrial building. Confirmed as the John Deere\nWaterloo Works Engine Works at 3801 W Ridgeway Ave. Locked center refined slightly to\n42.4678, -92.4330 on the building centroid.",
         "mapsUrl": "https://www.google.com/maps/@42.4678,-92.4330,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/john-deere/02-john-deere-waterloo-works-engine-works-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 42.4678,
+              "lng": -92.433
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/john-deere/02-john-deere-waterloo-works-engine-works-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 42.4678,
+              "lng": -92.433
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Confirmed John Deere Waterloo Works Engine Works at 3801 W Ridgeway Ave, Waterloo IA. Roster ROOFTOP coords (moved 351m) landed on the long industrial building; locked center refined to 42.4678,-92.4330.",
           "truckGate": "Inferred true, medium confidence. The whole property is clearly fenced (continuous fence line visible at z19-z20). The truck yard sits at the SE corner of the building accessed by a private driveway loop set well back from the road. Street View only reaches the surrounding public roads (W Ridgeway Ave north, side road east) and never reaches the truck-yard entrance, so a barrier arm could not be directly confirmed.",
@@ -350,8 +485,74 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "Roster supplied ROOFTOP coordinates (42.501899, -92.355419) moved only 53 m — accurate.\nSatellite confirmed a large multi-building industrial complex along the Cedar River.\nStreet View confirmed the campus directly: a \"JOHN DEERE TRACTOR & ENGINE MUSEUM\" sign on\nthe south building and \"TechWorks Campus\" signage inside. The active John Deere Drivetrain\nOperations (formerly Drive Train) production buildings are the large fenced cluster along\nthe river to the north. Locked center placed on that production cluster at 42.5025,-92.3535.",
         "mapsUrl": "https://www.google.com/maps/@42.5025,-92.3535,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/john-deere/03-john-deere-waterloo-works-drivetrain-operations-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 42.5025,
+              "lng": -92.3535
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/john-deere/03-john-deere-waterloo-works-drivetrain-operations-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 42.5025,
+              "lng": -92.3535
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Confirmed John Deere Drivetrain Operations (formerly Drive Train) at 400 Westfield Ave, Waterloo IA. Roster ROOFTOP coords (moved only 53m) landed correctly. Street View confirmed the John Deere Tractor & Engine Museum sign and TechWorks Campus signage on the southern part of the campus; the active production buildings are the large fenced cluster along the Cedar River to the north.",
           "truckGate": "Inferred true, medium confidence. The active production complex is enclosed by a continuous chain-link perimeter fence — clearly visible along the north road on multiple Street View headings (2026 imagery). Truck gate is a driveway break in this fence; a barrier arm could not be individually resolved.",
@@ -456,8 +657,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "Roster supplied ROOFTOP coordinates (42.507619, -92.365938) moved 180 m — landed on a\nlarge multi-building industrial complex on the Cedar River. Confirmed as the John Deere\nWaterloo Foundry at 2000 Westfield Ave. Locked center refined to 42.5072, -92.3650 on the\nfoundry building mass.",
         "mapsUrl": "https://www.google.com/maps/@42.5072,-92.3650,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/john-deere/04-john-deere-waterloo-foundry-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 42.5072,
+              "lng": -92.365
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/john-deere/04-john-deere-waterloo-foundry-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 42.5072,
+              "lng": -92.365
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Confirmed John Deere Waterloo Foundry at 2000 Westfield Ave, Waterloo IA. Roster ROOFTOP coords (moved 180m) landed on the large foundry building mass along the Cedar River; locked center refined to 42.5072,-92.3650.",
           "truckGate": "CONFIRMED via Street View (2026 imagery, 42.5049,-92.3648). Multiple yellow barrier arms span the truck lanes, with a chain-link perimeter fence and gates. Definitive controlled truck entrance.",
@@ -571,8 +840,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "Roster supplied GEOMETRIC_CENTER coordinates (41.526702, -90.434909) flagged as moved\n2007 m. Satellite probe landed directly on a massive industrial complex on the Mississippi\nRiver. Web search confirmed the John Deere Harvester Works at 1100 13th Ave, East Moline\nIL — the world's largest combine manufacturing facility (~4M sq ft, ~90 acres under roof),\nproducing combines since 1913. Google Maps place coordinates (41.5234, -90.4355)\ncorroborate. Locked center placed on the main building mass at 41.5240, -90.4360.",
         "mapsUrl": "https://www.google.com/maps/@41.5240,-90.4360,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/john-deere/05-john-deere-harvester-works-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 41.524,
+              "lng": -90.436
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/john-deere/05-john-deere-harvester-works-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 41.524,
+              "lng": -90.436
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Confirmed John Deere Harvester Works at 1100 13th Ave, East Moline IL — the world's largest combine manufacturing facility (~4M sq ft, ~90 acres under roof). Roster GEOMETRIC_CENTER coords (moved 2007m) landed on the complex; Google Maps place (41.5234,-90.4355) corroborates. Locked center placed on the main building mass at 41.5240,-90.4360.",
           "truckGate": "Inferred true, medium confidence. Street View shows a 'John Deere Harvester Works Gate 12' sign at a private access drive — the plant uses a formal numbered-gate security system, with a continuous chain-link perimeter fence visible along 13th Ave. The actual gate barrier sits at the end of the private drive beyond Street View coverage.",
@@ -669,8 +1006,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Address: 909 River Dr, Moline, IL 61265\n- Locked center: 41.508049, -90.52593 (on the main building roof)\n- Confirmation: Roster coords were ROOFTOP-precise (moved 146 m). Satellite at\n  z16-z19 placed the pin squarely on a long industrial building running ENE-WSW\n  along the Mississippi River. Web search (Waze, Panjiva, Aramark/Catertrax cafe\n  page) confirms John Deere Cylinder Works at 909 River Drive — Panjiva buyer\n  records show \"909 River Drive Gate 24 Dept 129\". Building form (large\n  multi-mass manufacturing plant on the riverfront) is consistent with a\n  hydraulic-cylinder component plant. Correct site confirmed.",
         "mapsUrl": "https://www.google.com/maps/@41.508049,-90.52593,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/john-deere/06-john-deere-cylinder-works-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 41.508049,
+              "lng": -90.52593
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/john-deere/06-john-deere-cylinder-works-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 41.508049,
+              "lng": -90.52593
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Building fronts River Drive directly with no controlled perimeter checkpoint visible in 2023-2025 Street View; drive-in dock doors face the road with no fence or barrier arm. 'Gate 24' in shipping records is an internal Deere dock/department number, not a guarded perimeter gate.",
           "multipleFacilities": "Four distinct building masses on the riverfront campus, shares the corridor with adjacent Deere Planter Works (idx 7).",
@@ -757,8 +1152,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Address: 501 River Dr, Moline, IL 61265\n- Locked center: 41.50849, -90.531986 (on the main building roof)\n- Confirmation: Roster coords were ROOFTOP-precise (moved 129 m). Satellite\n  z16-19 placed the pin on a very large multi-mass riverfront manufacturing\n  plant. Web search (Waze, deere.com \"Seeding Moline\" story, Visit Quad Cities,\n  Panjiva) confirms John Deere Seeding Group at 501 River Drive — Deere's oldest\n  factory (roots to 1879), the business center for planters, box drills, and air\n  seeders. Street View shows the John Deere Seeding office entrance with display\n  equipment (tractors, planters). Correct site confirmed.",
         "mapsUrl": "https://www.google.com/maps/@41.50849,-90.531986,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/john-deere/07-john-deere-seeding-group-planter-works-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 41.50849,
+              "lng": -90.531986
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/john-deere/07-john-deere-seeding-group-planter-works-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 41.50849,
+              "lng": -90.531986
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Open campus. River Drive fronts the property directly with a John Deere logo monument and open driveways into the lots; no barrier arm, sliding gate, or guard booth visible in 2023-2025 Street View. Truck access to docks and drop yard is via uncontrolled internal driveways from River Drive.",
           "multipleFacilities": "Three large building masses on the riverfront campus (Deere's oldest factory, est. 1879); contiguous with the broader Moline Deere riverfront corridor.",
@@ -864,8 +1317,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Address: 1175 E 90th St, Davenport, IA 52807\n- Locked center: 41.601800, -90.551500 (centroid of the giant main\n  assembly hall)\n- Confirmation: Roster geocode moved 2959 m (GEOMETRIC_CENTER quality), so\n  the location was verified independently. Satellite z15-17 around the supplied\n  point shows one enormous manufacturing complex standing alone in open\n  farmland NE of Davenport. Web search (about.deere.com Davenport Works, Iowa\n  DNR Facility Explorer, Quad Cities Chamber) confirms John Deere Davenport\n  Works — a Construction & Forestry division plant producing articulated dump\n  trucks, four-wheel-drive loaders, motor graders, and log skidders since 1974.\n  Finished construction equipment (graders, ADTs, wheel loaders) staged in rows\n  on the yards confirms the site. Correct location confirmed; locked center",
         "mapsUrl": "https://www.google.com/maps/@41.601800,-90.551500,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/john-deere/08-john-deere-davenport-works-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 41.6018,
+              "lng": -90.5515
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/john-deere/08-john-deere-davenport-works-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 41.6018,
+              "lng": -90.5515
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Site is set ~600 m back from the public road across landscaped grounds, reached by a wide private internal access road off a controlled intersection on E 90th St. Multi-lane markings at the road junction indicate a controlled private entry. No Street View coverage on the internal road and no booth resolved in satellite, so a perimeter control point is inferred from the campus layout.",
           "guardShack": "No guard booth resolved at the public-road entry or along the access road in available imagery; large Deere assembly campuses of this era typically use a check-in point near the building rather than a road booth.",
@@ -975,8 +1494,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Address: 18600 S John Deere Rd, Dubuque, IA 52001\n- Locked center: 42.566837, -90.690881 (centroid of the mile-long main\n  building)\n- Confirmation: Roster geocode flagged `movedMeters: 14294`, so the supplied\n  point was verified independently. Satellite z14-16 around the supplied\n  coordinate shows one enormous mile-long industrial complex on a riverbottom\n  tract SW of Dubuque — exactly the John Deere Dubuque Works. Web search\n  (about.deere.com Dubuque Works, Iowa DNR Facility Explorer, Panjiva) confirms\n  the plant: a Construction & Forestry facility making backhoes, crawler dozers,\n  and skid-steer loaders, in operation since 1946, \"in excess of one mile long\n  on 1,465 acres.\" The supplied coordinate is in fact correct and on the\n  building — locked as the center.",
         "mapsUrl": "https://www.google.com/maps/@42.566837,-90.690881,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/john-deere/09-john-deere-dubuque-works-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 42.566837,
+              "lng": -90.690881
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/john-deere/09-john-deere-dubuque-works-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 42.566837,
+              "lng": -90.690881
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Mile-long plant on a 1,465-acre tract; reached by a long internal access road with multiple roundabouts off S John Deere Rd. Multi-lane managed entries at the building edge are inferred from the campus scale and layout; exact gate hardware not resolved (no Street View past the property edge).",
           "guardShack": "No guard booth resolved at entries in available satellite imagery.",
@@ -1093,8 +1678,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "- Address: 825 SW Irvinedale Dr, Ankeny, IA 50023\n- Locked center: 41.720916, -93.62938 (centroid of the main building\n  cluster)\n- Confirmation: Roster geocode quality GEOMETRIC_CENTER (moved 617 m).\n  Satellite z15-17 around the supplied point shows one very large industrial\n  campus ringed by Ankeny suburban development — exactly the John Deere Des\n  Moines Works. Web search (Greater Des Moines Partnership, Ankeny Chamber,\n  Yelp, US EPA fact sheet) confirms the plant at 825 SW Irvinedale Dr, an\n  agricultural-equipment assembly plant building cotton harvesters, sprayers,\n  tillage tools, and See & Spray equipment. Rows of green John Deere finished\n  equipment staged in the yards corroborate the site. Correct location\n  confirmed.",
         "mapsUrl": "https://www.google.com/maps/@41.720916,-93.62938,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/john-deere/10-john-deere-des-moines-works-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 41.720916,
+              "lng": -93.62938
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/john-deere/10-john-deere-des-moines-works-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 41.720916,
+              "lng": -93.62938
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Very large campus fully enclosed by a chain-link perimeter fence (confirmed on the west side in 2024 Street View) with a landscaped berm. Access is through controlled gates on the internal perimeter ring road off SW State St and other public roads; gate hardware itself is not reachable by Street View. A controlled truck gate is inferred from the fenced campus layout.",
           "guardShack": "Set true: a fully fenced assembly campus of this scale (one of Deere's largest plants) is operated with staffed entry points; specific booth structures were not resolved in satellite imagery (medium confidence).",
@@ -1199,8 +1852,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "The roster geocode (ROOFTOP, moved 2034 m) landed directly on a large multi-building\nindustrial complex on the east edge of Ottumwa, bounded by the Des Moines River and\nUS-63 to the east and a residential street grid to the west and south. The scale and\nlayout — many connected long-span manufacturing buildings, material storage yards,\nand a fenced perimeter — are fully consistent with a legacy John Deere assembly plant.\nWeb search confirmed the address (928 E Vine St) and the facility identity. Coordinates\nlocked at the supplied point.",
         "mapsUrl": "https://www.google.com/maps/@41.003824,-92.4103,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/john-deere/11-ottumwa-works-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 41.003824,
+              "lng": -92.4103
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/john-deere/11-ottumwa-works-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 41.003824,
+              "lng": -92.4103
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Controlled truck entrance off the south access road from E Vine St; satellite z21 shows a gatehouse structure sitting in the drive with an apron in front and a perimeter fence line running off both sides.",
           "guardShack": "Small standalone gatehouse booth at the entrance (~1-2 vehicle footprint). Corroborated by driver reviews referencing 'friendly staff from the gate house to the docks' and on-site security.",
@@ -1318,8 +2039,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "The roster geocode (ROOFTOP, moved 2334 m) landed directly on a large white-roofed\nmanufacturing building with extensive paved trailer yards in an industrial park on the\nwest edge of Grovetown, GA. Web research confirms this is John Deere Augusta Works /\nCommercial Products — a ~400,000+ sq ft plant on ~175 acres, ~470 employees, John\nDeere's highest-volume tractor facility, producing 27 models of compact/utility\ntractors. Coordinates locked at the supplied point.",
         "mapsUrl": "https://www.google.com/maps/@33.463818,-82.185545,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/john-deere/12-augusta-works-commercial-products-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 33.463818,
+              "lng": -82.185545
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/john-deere/12-augusta-works-commercial-products-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 33.463818,
+              "lng": -82.185545
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Truck operations are on a large fenced parcel; trucks enter off the John Deere Pkwy / Horizon South Pkwy access loop and pass into a perimeter-fenced operational yard with tree-buffer screening. Controlled truck entrance inferred from the continuous fence line and single internal truck route; barrier hardware not directly resolvable in imagery.",
           "guardShack": "No guard booth positively confirmed at a barrier-arm gate in available satellite/Street View imagery; the entrance is set deep behind tree buffers and Street View only covers the office/employee loop. A staffed entrance is plausible for a major Deere plant but unverified - flagged uncertain.",
@@ -1410,8 +2197,66 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "The roster geocode (GEOMETRIC_CENTER, moved 71 m) landed directly on a large white-\nroofed manufacturing complex on the north edge of Coffeyville, KS, off US-169. Web\nresearch confirms John Deere Coffeyville Works is a power transmission equipment\nmanufacturer at this address. The building scale, attached office, detached warehouse,\nand material yards are consistent with a Deere component plant. Coordinates locked at\nthe supplied point.",
         "mapsUrl": "https://www.google.com/maps/@37.09708,-95.584703,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/john-deere/13-coffeyville-works-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 37.09708,
+              "lng": -95.584703
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/john-deere/13-coffeyville-works-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 37.09708,
+              "lng": -95.584703
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Open campus - no controlled truck entrance. Buildings sit on a large open parcel; access roads from US-169 lead directly onto the property and to the office entrance and material yards with no barrier arm, gate, or checkpoint pinch-point. Street View (2025-10) confirms an open lawn frontage with no perimeter fence.",
           "guardShack": "No guard booth present anywhere on the site.",
@@ -1513,8 +2358,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "The roster coordinates (29.803849, -90.82531; RANGE_INTERPOLATED for 1000 Coulon Rd)\nlanded in a residential neighborhood — not the plant. The roster explicitly flagged\n\"multiple addresses exist, verify in deep-audit.\" Web research (Yelp, Waze, Panjiva,\nDeere factory page) identified the real facility at 244 Highway 3266 (Plant 1) with a\nco-located Plant 2 at 234 Highway 3266, founded 1965 as CAMECO Industries, now a Deere\nsubsidiary and the world's largest sugarcane-equipment manufacturer. Resolved\ncoordinates 29.805705, -90.829764 were confirmed by satellite — a large multi-building\nmanufacturing campus bordered by sugarcane fields to the west and north and a\nresidential pocket to the SE. Coordinates re-locked to the resolved point.",
         "mapsUrl": "https://www.google.com/maps/@29.805705,-90.829764,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/john-deere/14-thibodaux-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 29.805705,
+              "lng": -90.829764
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/john-deere/14-thibodaux-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 29.805705,
+              "lng": -90.829764
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "resolvedLocation": "Roster coords (1000 Coulon Rd) landed in a residential neighborhood. Correct facility is at 244 Highway 3266 (Plant 1) / 234 Highway 3266 (Plant 2), resolved to 29.805705,-90.829764 via web research and confirmed by satellite - a large multi-building manufacturing campus (sugarcane harvesters, CAMECO heritage) bordered by sugarcane fields.",
           "truckGate": "Open campus - no controlled truck entrance at the road frontage. The access road off Highway 3266 runs directly between the office building and the manufacturing buildings; Street View (2025-10) shows an open frontage with parking and no barrier arm, gate, or guard booth. An interior fence/drainage line runs along the east edge but no gate confirmed.",
@@ -1602,8 +2505,66 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "The roster geocode (ROOFTOP, moved 2955 m) landed on a large single industrial\nbuilding in the Partnership Industrial Center on the northeast side of Springfield.\nStreet View (2026-03) confirms this is the John Deere Reman building — the building\nfront has an entrance canopy on Mustard Way and the \"4500 E Mustard Way\" address sign\nis posted at the property. Web research confirms John Deere Reman-Springfield at 4500\nMustard Way, a Deere subsidiary remanufacturing engines and fuel/electronics\ncomponents, ~500 employees. Coordinates locked at the supplied point.",
         "mapsUrl": "https://www.google.com/maps/@37.243981,-93.200702,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/john-deere/15-reman-springfield-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 37.243981,
+              "lng": -93.200702
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/john-deere/15-reman-springfield-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 37.243981,
+              "lng": -93.200702
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "resolvedLocation": "Geocode (4500 E Mustard Way, Partnership Industrial Center) landed on the correct John Deere Reman building - confirmed by Street View (2026-03) showing the building front with entrance canopy on Mustard Way and the 4500 E Mustard Way address sign at the property.",
           "truckGate": "Open campus - no controlled truck entrance. Employee parking lots front Mustard Way with an open driveway; a single internal driveway loops around the building's SW corner to the south dock yard. No barrier arm, gate, guard booth, or perimeter fence observed in satellite or Street View.",
@@ -1710,8 +2671,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Type: Assembly Plant (lawn/garden equipment, Gator utility vehicles)\nRoster address: 300 N Vine St, Horicon, WI 53032\nResolved center: 43.4540, -88.6336\nConfidence: medium",
         "mapsUrl": "https://www.google.com/maps/@43.4540,-88.6336,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/john-deere/16-john-deere-horicon-works-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 43.454,
+              "lng": -88.6336
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/john-deere/16-john-deere-horicon-works-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 43.454,
+              "lng": -88.6336
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Old-style urban factory campus straddling the public street grid (W Lake St, N Vine St, E Walnut St run THROUGH the campus). No barrier arm or gate observed at any public-road / property-line interface in 2024-2025 Street View. Truck access into the north trailer yard is via an internal private campus drive; classified false because no controlled checkpoint exists where the property meets the public road.",
           "guardShack": "No guard booth observed at any street-level entrance. One small ~1-vehicle structure seen on an internal campus road near E Walnut St may be a watchman post, but it does not control a property-line truck gate, so guardShack=false.",
@@ -1826,8 +2845,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#10",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct (shipping vs receiving) drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 120000,
+              "narrationKey": "shiprcv.split",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron on correct side",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1320000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
+        },
         "dossierExcerpt": "Type: Assembly Plant (100 Series lawn tractors, EZTrak/ZTrak zero-turn mowers)\nRoster address: 1630 Hal Henard Rd, Greeneville, TN 37743\nResolved center: 36.15268, -82.88965\nConfidence: high",
         "mapsUrl": "https://www.google.com/maps/@36.15268,-82.88965,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/john-deere/17-john-deere-power-products-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 36.15268,
+              "lng": -82.88965
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/john-deere/17-john-deere-power-products-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 36.15268,
+              "lng": -82.88965
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Confirmed in 2023-11 Street View: a controlled, fully fenced truck entrance on the NE access drive (~36.1552, -82.8882). Chain-link perimeter fence with sliding gate sections; entrance lane pinch-point.",
           "guardShack": "Confirmed: a small white guard booth (~1-vehicle footprint) set beside the entrance lane, visible in Street View and z20 satellite. Staffed checkpoint controlling truck access into the plant.",
@@ -1944,8 +3031,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "Type: Assembly Plant (John Deere-branded hydraulic excavators)\nRoster address: 1000 John Deere Rd, Kernersville, NC 27284\nResolved center: 36.13670, -80.09250\nConfidence: high",
         "mapsUrl": "https://www.google.com/maps/@36.13670,-80.09250,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/john-deere/18-john-deere-kernersville-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 36.1367,
+              "lng": -80.0925
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/john-deere/18-john-deere-kernersville-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 36.1367,
+              "lng": -80.0925
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Confirmed in 2026-03 Street View on John Deere Rd: a controlled truck entrance to the Main Campus - chain-link perimeter fence with sliding gate sections across the drive, entrance lane pinch-point. The East Campus has its own gated access on a separate internal/access road; truckGateCount set to 2.",
           "guardShack": "Confirmed: a white guard booth (~1-vehicle footprint) sits beside the Main Campus entrance lane, clearly visible in 2026-03 Street View and z19 satellite. Staffed checkpoint.",
@@ -2067,8 +3222,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Type: Parts Distribution Center\nRoster address: 1600 1st Ave E, Milan, IL 61264\nResolved center: 41.44750, -90.54550\nConfidence: medium",
         "mapsUrl": "https://www.google.com/maps/@41.44750,-90.54550,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/john-deere/19-john-deere-north-american-parts-distribution-center-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 41.4475,
+              "lng": -90.5455
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/john-deere/19-john-deere-north-american-parts-distribution-center-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 41.4475,
+              "lng": -90.5455
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "No barrier arm, gate, or controlled checkpoint observed at the property-line entrance. The DC is accessed via a wide private entrance drive off the north arterial road; the drive is open at the street (z20 satellite and 2019/2025 Street View). The office entrance at the NE is a circular drive with no control. A facility this large likely has internal gates at the dock yard, but no street-level controlled gate was visible - classified false on visible evidence.",
           "guardShack": "No guard booth observed at the property-line entrance or office entrance. Web tips mention drivers referencing 'gate' numbers (e.g. Gate 4), suggesting internal gate stations exist, but none was confirmed as a staffed booth at a property-line truck entrance.",
@@ -2179,8 +3392,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Type: Parts Distribution Center\nAddress: 2280 Northeast Dr, Waterloo, IA 50703\nResolved coords: 42.50990, -92.28540 (center of the main gray DC building)\nGate verdict: No truck gate — open, uncontrolled entrance\nGuard-shack verdict: No guard shack\nConfidence: HIGH\n\n---",
         "mapsUrl": "https://www.google.com/maps/@42.50990,-92.28540,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/john-deere/21-john-deere-parts-distribution-center-waterloo-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 42.5099,
+              "lng": -92.2854
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/john-deere/21-john-deere-parts-distribution-center-waterloo-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 42.5099,
+              "lng": -92.2854
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "site": "Confirmed John Deere Parts Distribution Center at 2280 Northeast Dr, Waterloo IA, NE of the city in an edge-of-town industrial area. Panjiva buyer report and Waze list this address; Ryder Integrated Logistics operates 3PL logistics on site (typical for a Deere parts DC). A blue 'JOHN DEERE' monument sign at the entrance was visible in Street View, positively identifying the property.",
           "buildings": "Two buildings on one campus: a large gray-roofed distribution warehouse running N-S (the main DC) and a separate blue-roofed building to its north (offices / secondary warehouse). multipleFacilities = true.",
@@ -2284,8 +3555,66 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Type: Parts Distribution Center\nAddress (roster): 1300 16th Ave, Rock Valley, IA 51247 — unverified / likely incorrect\nResolved facility: John Deere A&I Products complex, SW Rock Valley industrial park (10th St / 22nd Ave)\nResolved coords: 43.19680, -96.31370 (center of the A&I warehouse/manufacturing complex)\nGate verdict: No truck gate — open, ungated access road\nGuard-shack verdict: No guard shack\nConfidence: MEDIUM\n\n---",
         "mapsUrl": "https://www.google.com/maps/@43.19680,-96.31370,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/john-deere/22-john-deere-all-makes-parts-distribution-center-rock-valley-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 43.1968,
+              "lng": -96.3137
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/john-deere/22-john-deere-all-makes-parts-distribution-center-rock-valley-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 43.1968,
+              "lng": -96.3137
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "site": "Resolved to the John Deere A&I Products complex in Rock Valley IA. A&I Products is John Deere's all-makes aftermarket-parts subsidiary (Deere acquired A&I in Dec 2010); Rock Valley is its corporate HQ, main manufacturing facility and central distribution hub - 750,000+ sq ft of warehouse space across roughly three connected/adjacent buildings. The roster address (1300 16th Ave) could not be confirmed; Waze lists 'John Deere A&I Products, 2200-2298 10th St' and Yelp lists 1020 22nd Ave for A&I HQ - both point to the same industrial-park complex SW of downtown Rock Valley, which is what was audited.",
           "coords": "Locked center (43.19680, -96.31370) on the A&I warehouse/manufacturing complex. Roster coords (43.203456, -96.294498) plotted in downtown Rock Valley among small-town commercial/residential blocks and grain elevators - not the DC - and were not used.",

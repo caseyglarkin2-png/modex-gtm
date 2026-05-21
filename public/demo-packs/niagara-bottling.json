@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T04:45:59.656Z",
+  "builtAt": "2026-05-21T14:21:48.868Z",
   "account": {
     "slug": "niagara-bottling",
     "displayName": "Niagara Bottling",
@@ -12,7 +12,8 @@
       "droppedStubCount": 0,
       "capHit": true,
       "note": "We audited the 30 largest facilities by throughput. The wider network follows the same archetype distribution."
-    }
+    },
+    "featuredSiteId": "13-niagara-bottling-jeffersonville-in"
   },
   "research": {
     "facility_count": 30,
@@ -125,6 +126,28 @@
         },
         "dossierExcerpt": "- Address: 5675 E Concours St, Ontario, CA 91764\n- Locked center: 34.07480, -117.53200\n- Confirmation: Roster coordinates landed at the building's SE corner. Satellite\n  probes (z17-21) identified a white-roofed industrial building inside the dense\n  Ontario industrial park. Street View of the building's south face shows the\n  \"niagara\" company logo, positively confirming the building. Driver instructions\n  from facility listings (\"check in on foot at the south-side shipping office on\n  Concours St\") corroborate the building orientation.",
         "mapsUrl": "https://www.google.com/maps/@34.07480,-117.53200,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/01-niagara-bottling-ontario-ca-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 34.0748,
+              "lng": -117.532
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/01-niagara-bottling-ontario-ca-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 34.0748,
+              "lng": -117.532
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "No barrier arm or guard booth at the public road. The truck dock apron on the building's west face IS fenced off from the adjacent employee parking lot, with a gate at the apron mouth - so the working truck yard is access-controlled, but the gate is an internal apron gate, not a road-edge checkpoint. Classified truckGate true on the basis of the fenced apron entry; medium confidence.",
           "remoteGs": "No guard shack anywhere on site; if the apron gate is controlled it would be via keypad/call-box/driver check-in at the shipping office (driver instructions say check in on foot at the south-side shipping office).",
@@ -223,8 +246,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#1",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard scan",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Pass through gate to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls trailer to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Driver exits through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4440000,
+          "totalYnsMs": 2790000
+        },
         "dossierExcerpt": "- Address: 1401 N Alder Ave, Rialto, CA 92376\n- Locked center: 34.12940, -117.41630\n- Confirmation: Roster coordinates landed at the Alder Ave intersection\n  north of the building. Probing the surrounding warehouses, the Niagara plant\n  was positively identified by its distinctive rooftop solar array — Niagara\n  Bottling Rialto runs a documented on-site solar farm (Global Energy Monitor /\n  gridinfo records). The 598,750 sq ft building sits with its west face on\n  N Alder Ave. Street View of the SW corner shows the \"1401\" office address and\n  the company's blue-glass office entrance.",
         "mapsUrl": "https://www.google.com/maps/@34.12940,-117.41630,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/02-niagara-bottling-rialto-ca-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 34.1294,
+              "lng": -117.4163
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/02-niagara-bottling-rialto-ca-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 34.1294,
+              "lng": -117.4163
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "buildingId": "Confirmed Niagara via the distinctive rooftop solar array - Niagara Rialto operates an on-site solar farm (independently documented). 598,750 sq ft single building, 1401 N Alder Ave.",
           "truckGate": "Entire property is enclosed by a solid masonry perimeter wall - a fully secured site. The truck entrance is a gated opening in the wall on the north side serving the dock yard. No Street View pano sits directly on the gate (interior roads have no coverage), so the exact gate location and any barrier hardware are inferred; medium confidence.",
@@ -322,8 +411,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Address: 5959 Arch Rd, Stockton, CA 95215\n- Locked center: 37.90620, -121.19720\n- Confirmation: Roster coordinates landed directly on a large white-roofed\n  building. Street View (captured 2026-03) of the east face shows the \"niagara\"\n  wordmark on the building and a Niagara monument sign at the entrance —\n  positively confirmed. This is Niagara's newest Stockton plant (~600,000 sq ft,\n  concrete tilt-up, operational 2023).",
         "mapsUrl": "https://www.google.com/maps/@37.90620,-121.19720,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/03-niagara-bottling-stockton-ca-arch-rd-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 37.9062,
+              "lng": -121.1972
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/03-niagara-bottling-stockton-ca-arch-rd-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 37.9062,
+              "lng": -121.1972
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "buildingId": "Confirmed Niagara via the 'niagara' wordmark on the east building face and a Niagara monument sign at the east entrance (Street View, captured 2026-03). ~600,000 sq ft single-story concrete tilt-up plant, operational 2023, 5959 Arch Rd.",
           "truckGate": "Fully fenced site (black metal perimeter fence). The SE truck/yard entrance has a wide rolling chain-link gate across the driveway - clearly visible in 2026-03 Street View. A second gated driveway exists at the NE corner.",
@@ -425,8 +580,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#7",
+          "steps": [
+            {
+              "step": "Arrive at gate (fast-lane bypass possible)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter dispatch (fast-lane priority for live loads)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch.fastlane",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4440000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Address: 3453 S 96th St, Mesa, AZ 85212\n- Locked center: 33.35260, -111.62580\n- Confirmation: Roster coordinates landed on a large white-roofed building.\n  Street View (captured 2024-12) of the building's west/NW face shows the\n  \"niagara\" wordmark — positively confirmed. Niagara established this Mesa plant\n  in 2018; ~450,183 sq ft of water-manufacturing space.",
         "mapsUrl": "https://www.google.com/maps/@33.35260,-111.62580,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/04-niagara-bottling-mesa-az-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 33.3526,
+              "lng": -111.6258
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/04-niagara-bottling-mesa-az-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 33.3526,
+              "lng": -111.6258
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "buildingId": "Confirmed Niagara via the 'niagara' wordmark on the building's west/NW face (Street View, captured 2024-12). 450,183 sq ft single-story water-manufacturing plant, established 2018, 3453 S 96th St.",
           "truckGate": "Fenced truck dock yard along the building's north face. Truck access is a driveway off S 96th St on the NW; a small standalone structure sits at the road edge by the entrance.",
@@ -539,8 +760,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Address: 275 S 67th Ave, Phoenix, AZ 85043\n- Locked center: 33.44700, -112.20170\n- How resolved: The roster supplied no address and no coordinates for this\n  facility. Web research returned a consistent address — \"275 S 67th Ave,\n  Phoenix, AZ 85043\" — across TruckMap, Yahoo Local, Yellowpages, Dun &\n  Bradstreet, and chamber-of-commerce listings, all for Niagara Bottling\n  Phoenix. Geocoding that address lands on a two-building warehouse/distribution\n  complex on the east side of S 67th Ave, just south of Washington St.",
         "mapsUrl": "https://www.google.com/maps/@33.44700,-112.20170,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/05-niagara-bottling-phoenix-az-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 33.447,
+              "lng": -112.2017
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/05-niagara-bottling-phoenix-az-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 33.447,
+              "lng": -112.2017
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "locating": "Roster had no address/coords. Resolved via web research: Niagara Bottling Phoenix is consistently listed at 275 S 67th Ave, Phoenix, AZ 85043 (TruckMap, Yahoo Local, Yellowpages, D&B, chamber listings). Geocoded that address to a two-building warehouse/distribution complex on the east side of S 67th Ave just south of Washington St.",
           "buildingId": "MEDIUM confidence on identity. The 275 S 67th Ave address is solidly Niagara's, but source data on building size conflicts: Wikipedia cites a 252,000 sq ft Phoenix plant, while a real-estate listing for 275 S 67th Ave describes a 626,970 sq ft warehouse + 3,030 sq ft office + 32 dock doors. The geocoded site is a two-building complex larger than either figure. Could not read a 'Niagara' sign in Street View (heavy tree screening of both office fronts). Audited the complex as the Niagara Phoenix facility per the confirmed address; flagged.",
@@ -642,8 +929,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Address: 1300 Desert Willow Rd NW, Los Lunas, NM 87031\n- Locked center: 34.827861, -106.760900\n- Confirmation: Roster coordinates landed on the correct building. Street View\n  (2026-03) at the NW corner shows a \"niagara bottling LLC\" monument sign at the\n  entrance drive. Web research confirms a ~160,000 sq ft Niagara bottled-water\n  plant opened in 2016 in the Los Morros Business Park, NW of NM-6 / I-25, next\n  to the Meta (Facebook) data center and a Walmart distribution center. The\n  \"Walmart\" lettering visible on the building face is product/customer branding —\n  Niagara is the largest private-label bottled-water supplier (Walmart, Costco).",
         "mapsUrl": "https://www.google.com/maps/@34.827861,-106.760900,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/06-niagara-bottling-los-lunas-nm-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 34.827861,
+              "lng": -106.7609
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/06-niagara-bottling-los-lunas-nm-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 34.827861,
+              "lng": -106.7609
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "facility": "Niagara Bottling Los Lunas, ~160,000 sq ft bottled-water plant opened 2016 in Los Morros Business Park, NW of NM-6 / I-25. Confirmed by 'niagara bottling LLC' monument sign at the truck gate in Street View (2026-03).",
           "truckGate": "Chain-link perimeter fence with sliding gate; a striped barrier arm is visible lowered across the entry drive in Street View, with yellow bollards channeling traffic.",
@@ -742,8 +1095,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Address: 6445 E El Campo Grande Ave, North Las Vegas, NV 89115\n- Locked center: 36.263400, -115.030700\n- Confirmation: Roster coordinates landed on the public road (E El Campo\n  Grande Ave) directly north of the facility. Street View (2026-02) facing south\n  shows the building with a red \"niagara\" logo on the office front and a blue\n  \"niagara EXIT GATE\" wayfinding sign. The facility is the large N-S-oriented\n  building immediately south of the road in a dense North Las Vegas industrial\n  park.",
         "mapsUrl": "https://www.google.com/maps/@36.263400,-115.030700,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/07-niagara-bottling-north-las-vegas-nv-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 36.2634,
+              "lng": -115.0307
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/07-niagara-bottling-north-las-vegas-nv-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 36.2634,
+              "lng": -115.0307
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "facility": "Niagara Bottling North Las Vegas, 6445 E El Campo Grande Ave. Confirmed by red 'niagara' logo on the building front and a blue 'niagara EXIT GATE' sign in Street View (2026-02). Modern build-to-suit in a dense industrial park.",
           "truckGate": "Z20 satellite shows a controlled truck gate at the NE corner where the truck drive meets the road - barrier-arm elements across the drive, chain-link perimeter fence, and a tractor staged at the gate.",
@@ -840,8 +1259,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Address: 1933 N Gun Club Rd, Aurora, CO 80019\n- Locked center: 39.745400, -104.708550\n- Confirmation: Roster coordinates landed on the correct building. The\n  facility is the central E-W-oriented warehouse in a cluster of large\n  build-to-suit warehouses along the Gun Club Rd / I-70 industrial corridor.\n  Street View (2026-04) shows water-treatment silos at the building's east end\n  and a Niagara monument/logo at the SE — the silo cluster is the unambiguous\n  signature of a Niagara bottled-water plant. Web research confirms Niagara\n  Bottling LLC at 1933 N Gun Club Rd, operating 24/7.",
         "mapsUrl": "https://www.google.com/maps/@39.745400,-104.708550,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/08-niagara-bottling-aurora-co-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 39.7454,
+              "lng": -104.70855
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/08-niagara-bottling-aurora-co-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 39.7454,
+              "lng": -104.70855
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "facility": "Niagara Bottling Aurora, 1933 N Gun Club Rd. Confirmed by water-treatment silos at the building's east end and a Niagara monument/logo visible in Street View (2026-04). Modern build-to-suit bottling plant in the Aurora/I-70 industrial corridor.",
           "truckGate": "Truck yard is fully enclosed by chain-link fence. The truck drive enters the fenced yard from the east/SE perimeter drive. A controlled gate is implied by the continuous perimeter fence; the exact barrier could not be resolved at max zoom (trees and shadow), so flagged.",
@@ -936,8 +1421,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Address: 77 N Industrial Way, Brigham City, UT 84302\n- Locked center: 41.511870, -112.042220\n- Confirmation: Roster coordinates landed accurately on the building. Street\n  View (2023-08) along the east and SW faces shows the red \"niagara\" logo on the\n  office and water-treatment silos along the building's east side — the\n  unambiguous signature of a Niagara bottled-water plant. Web research confirms a\n  ~257,000 sq ft Niagara Bottling plant at 77 N Industrial Way, opened 2017.",
         "mapsUrl": "https://www.google.com/maps/@41.511870,-112.042220,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/09-niagara-bottling-brigham-city-ut-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 41.51187,
+              "lng": -112.04222
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/09-niagara-bottling-brigham-city-ut-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 41.51187,
+              "lng": -112.04222
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "facility": "Niagara Bottling Brigham City, 77 N Industrial Way, ~257,000 sq ft plant opened 2017. Confirmed by the red 'niagara' logo on the east office face and water-treatment silos along the building's east side in Street View (2023-08).",
           "truckGate": "Truck yard is fully enclosed by a continuous chain-link perimeter fence (clearly visible in Street View). The truck drive enters the fenced yard at the SW corner where the perimeter loop meets W Forest St. A controlled gate is present where the drive crosses the fence; the exact barrier element is obscured by landscaping at max zoom.",
@@ -1043,8 +1594,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Address: 19820 57th Ave E, Puyallup, WA 98375 (Frederickson)\n- Locked center: 47.076030, -122.355800\n- Confirmation: Roster coordinates landed accurately on the building. Street\n  View (2024-05) of the east face shows three large cylindrical water-treatment\n  silos — the unambiguous signature of a Niagara bottled-water plant — plus the\n  office and employee parking. Web research confirms a ~311,000 sq ft Niagara\n  Bottling plant at 19820 57th Ave E, opened February 2014, expanded multiple\n  times (most recent a $35M line addition).",
         "mapsUrl": "https://www.google.com/maps/@47.076030,-122.355800,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/10-niagara-bottling-puyallup-frederickson-wa-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 47.07603,
+              "lng": -122.3558
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/10-niagara-bottling-puyallup-frederickson-wa-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 47.07603,
+              "lng": -122.3558
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "facility": "Niagara Bottling Frederickson plant, 19820 57th Ave E, Puyallup WA. ~311,000 sq ft plant opened 2014, expanded multiple times. Confirmed by three large water-treatment silos on the building's east face in Street View (2024-05).",
           "truckGate": "Truck yard is enclosed by a black chain-link perimeter fence with a sliding gate across the truck entry drive on the NE side (clearly visible in Street View 2024-05); a truck is shown passing through the gate, with yellow bollards channeling the lane.",
@@ -1141,8 +1758,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Type: Bottling / Manufacturing Plant\n- Roster address: 4000 E 149th St, Kansas City, MO 64147\n- Roster coords: 38.853841, -94.549338 (geocode ROOFTOP, moved 14 m)\n- Locked coords: 38.85290, -94.55370\n- Confidence: medium",
         "mapsUrl": "https://www.google.com/maps/@38.85290,-94.55370,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/11-niagara-bottling-kansas-city-mo-149th-st-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 38.8529,
+              "lng": -94.5537
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/11-niagara-bottling-kansas-city-mo-149th-st-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 38.8529,
+              "lng": -94.5537
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "buildingId": "Address 4000 E 149th St geocoded ROOFTOP to a road intersection inside the Three Trails / EastLink logistics park. The NE building in the cluster carries Walmart branding (confirmed via Street View) and is NOT Niagara. The audited building is the SW structure (~38.8529,-94.5537): a large warehouse/manufacturing building with a complex roofline, two rooftop solar arrays and visible process/utility roof equipment - the bottling-plant signature. No Niagara signage was readable in available Street View panos, so building identification is medium-confidence.",
           "truckGate": "No barrier arm, sliding gate, or guard booth visible at any driveway from the public road. Driveways are open. Classed false.",
@@ -1236,8 +1911,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Type: Bottling / Manufacturing Plant\n- Roster address: 11400 N Airworld Dr, Kansas City, MO 64153\n- Roster coords: 39.299633, -94.675074 (geocode ROOFTOP, moved 103 m)\n- Locked coords: 39.30040, -94.67520\n- Confidence: medium",
         "mapsUrl": "https://www.google.com/maps/@39.30040,-94.67520,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/12-niagara-bottling-kansas-city-mo-airworld-dr-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 39.3004,
+              "lng": -94.6752
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/12-niagara-bottling-kansas-city-mo-airworld-dr-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 39.3004,
+              "lng": -94.6752
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "buildingId": "Address 11400 N Airworld Dr geocoded ROOFTOP onto a single large ~634,000 sq ft warehouse/manufacturing building in the Congress Corporate Centre near Kansas City International Airport (KCI). Web research confirms this is Niagara's second KC plant (Congress Commerce Building B, opened 2021). Street View on Airworld Dr predates construction (2014/2019 panos), so the gate call rests on current satellite imagery.",
           "truckGate": "The truck driveway off N Airworld Dr curves up to the SW dock apron with no barrier arm, sliding gate, or guard booth visible at the property line or along the approach. Open access - truckGate false.",
@@ -1329,8 +2062,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Type: Bottling / Manufacturing Plant\n- Roster address: 350 Logistics Ave, Jeffersonville, IN 47130\n- Roster coords: 38.379939, -85.674977 (geocode ROOFTOP, moved 161 m)\n- Locked coords: 38.37990, -85.67500\n- Confidence: high",
         "mapsUrl": "https://www.google.com/maps/@38.37990,-85.67500,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/13-niagara-bottling-jeffersonville-in-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 38.3799,
+              "lng": -85.675
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/13-niagara-bottling-jeffersonville-in-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 38.3799,
+              "lng": -85.675
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "buildingId": "Address 350 Logistics Ave geocoded ROOFTOP onto a single large warehouse/manufacturing building in River Ridge Commerce Center. Confirmed Niagara via a red 'Niagara' wall sign visible on the building's office front in a March 2026 Street View pano, and via web research (469,000 sq ft plant, opened 2019, expanded ~2020/2023).",
           "truckGate": "No barrier arm, sliding/swing gate, or guard booth visible anywhere along the property line. The S frontage on Logistics Avenue is open behind a grass berm; the truck driveway into the dock yard is uncontrolled. truckGate false.",
@@ -1426,8 +2217,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Type: Bottling / Manufacturing Plant\n- Roster address: 1250 Whitaker Rd, Plainfield, IN 46168\n- Roster coords: 39.683721, -86.349861 (geocode ROOFTOP, movedMeters unknown)\n- Locked coords: 39.68500, -86.34900\n- Confidence: medium",
         "mapsUrl": "https://www.google.com/maps/@39.68500,-86.34900,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/14-niagara-bottling-plainfield-in-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 39.685,
+              "lng": -86.349
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/14-niagara-bottling-plainfield-in-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 39.685,
+              "lng": -86.349
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "buildingId": "Address 1250 Whitaker Rd geocoded onto an intersection inside a dense Plainfield logistics park (AllPoints area near Indianapolis airport). Neighbouring buildings carry other addresses (a FedEx building reads '1399 South Perry Rd'). The audited building is the long N-S grey-roofed warehouse on the W side of the pin whose office and check-in driveway front Whitaker Rd at the pin. Web research confirms Niagara Plainfield is 442,215 sq ft at 1250 Whitaker Rd. No on-building Niagara signage was readable in available panos, so building ID is medium-confidence.",
           "truckGate": "The entrance driveway off Whitaker Rd has a controlled-entry setup: a small blue kiosk/booth structure beside the drive, a digital sign monument, a fence/gate across the lane, and traffic cones in the entry lane. truckGate = true.",
@@ -1535,8 +2392,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Type: Bottling / Manufacturing Plant\n- Roster address: 168 E Wingo Rd, Byhalia, MS 38611\n- Roster coords: 34.976643, -89.607243 (geocode ROOFTOP, moved 68 m)\n- Locked coords: 34.97800, -89.60680\n- Confidence: high",
         "mapsUrl": "https://www.google.com/maps/@34.97800,-89.60680,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/15-niagara-bottling-byhalia-ms-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 34.978,
+              "lng": -89.6068
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/15-niagara-bottling-byhalia-ms-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 34.978,
+              "lng": -89.6068
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "buildingId": "Address 168 E Wingo Rd geocoded ROOFTOP onto a large warehouse/manufacturing building in a Byhalia MS logistics park outside Memphis. Confirmed Niagara: a cluster of tall white process silos and water-treatment tanks lines the S/SE building face - the classic bottling-plant signature - matching a web facility note describing the delivery entrance 'adjacent to the large silos'. The plant opened 2018.",
           "truckGate": "The site has a continuous chain-link perimeter fence along E Wingo Rd. The truck entrance at the SE corner is a controlled gated drive with a digital driver check-in sign board. truckGate = true.",
@@ -1631,8 +2554,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Address: 1700 Eastgate Pkwy, Gahanna, OH 43230\n- Locked center: 39.99610, -82.82290\n- Confirmation: Roster coords (39.995966, -82.822263, ROOFTOP) landed on the\n  building. Satellite probes z16-z20 confirmed a single large grey-roof\n  industrial building (~307,000 sq ft per web listings) consistent with a\n  bottling/manufacturing plant. Web search corroborated Niagara Bottling LLC at\n  1700 Eastgate Pkwy, Gahanna OH 43230. NE-entrance Street View (2024-06)\n  shows a \"TRUCKS ONLY / VISITORS\" sign and the plant's process silos,\n  positively identifying the site.",
         "mapsUrl": "https://www.google.com/maps/@39.99610,-82.82290,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/16-niagara-bottling-gahanna-oh-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 39.9961,
+              "lng": -82.8229
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/16-niagara-bottling-gahanna-oh-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 39.9961,
+              "lng": -82.8229
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point at either road connection. NE driveway off Eastgate Pkwy has only a directional 'TRUCKS ONLY / VISITORS' sign at the road (confirmed in 2024-06 Street View) - an open uncontrolled drive.",
           "guardShack": "No small staffed booth visible at any entrance in satellite or Street View.",
@@ -1728,8 +2709,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Address: 178 Mooresville Blvd, Mooresville, NC 28115 (Iredell County,\n  Charlotte-Concord-Gastonia metro)\n- Locked center: 35.62870, -80.78540\n- Confirmation: Roster coords (35.628494, -80.785517) landed on a large\n  white-roof industrial building. Satellite probes z16-z20 confirmed a single\n  large NW-SE building with a SW drop yard of nose-out trailers and a SW dock\n  face - consistent with a bottling/manufacturing plant. Web search confirmed\n  Niagara Bottling LLC at 178 Mooresville Blvd; the company is \"heavily\n  investing in expansion of the Mooresville plant,\" which the imagery shows.",
         "mapsUrl": "https://www.google.com/maps/@35.62870,-80.78540,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/17-niagara-bottling-mooresville-nc-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 35.6287,
+              "lng": -80.7854
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/17-niagara-bottling-mooresville-nc-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 35.6287,
+              "lng": -80.7854
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Truck driveway connects to Mooresville Blvd as an open, uncontrolled drive. No barrier arm, sliding gate, or checkpoint pinch-point visible in satellite imagery; Street View (2026-01) does not reach the entrance. Site is mid-expansion which adds uncertainty.",
           "guardShack": "No staffed booth resolvable at the entrance. A small standalone office-type building sits near the road frontage but is the plant office, not an entrance guard shack.",
@@ -1826,8 +2865,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Address: 47 Niagara Way, Newnan, GA 30265 (Shenandoah Industrial Park,\n  Coweta County, Atlanta metro south side)\n- Locked center: 33.40570, -84.75880\n- Confirmation: Roster coords (33.407005, -84.757017, GEOMETRIC_CENTER) were\n  imprecise and landed in woods between buildings. Satellite probes z16-z20\n  identified the large white-roof building SW of the roster point as the\n  Niagara plant: a single ~452,000 sq ft building with a NE dock face, drop\n  yard of nose-out trailers, and NE-corner employee parking - consistent with a\n  bottling/manufacturing plant. Web search confirmed Niagara Bottling LLC,\n  452,128 sq ft, on ~49 acres in Shenandoah Industrial Park; the company's\n  Atlanta-area (\"ATL\") plant. Center relocated ~250 m SW of the roster point.",
         "mapsUrl": "https://www.google.com/maps/@33.40570,-84.75880,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/18-niagara-bottling-newnan-ga-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 33.4057,
+              "lng": -84.7588
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/18-niagara-bottling-newnan-ga-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 33.4057,
+              "lng": -84.7588
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "The plant's access drive connects to Niagara Way as a single open, uncontrolled driveway. No barrier arm, sliding gate, or checkpoint pinch-point visible in satellite imagery. The plant is set deep behind a tree screen so Street View (2025-05) cannot reach the entrance - hence medium confidence.",
           "guardShack": "No staffed booth resolvable at the access drive. A small dark structure sits along the NE dock face but reads as a dock-side utility/canopy structure, not an entrance guard shack.",
@@ -1920,8 +3017,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Address: 1700 Digital Dr, Chester, VA 23836 (Meadowville Technology Park,\n  Chesterfield County, Richmond VA metro)\n- Locked center: 37.35420, -77.32990\n- Confirmation: Roster coords (37.35562, -77.329897, ROOFTOP) landed on the\n  north end of a large white-roof building. Satellite probes z16-z20 confirmed\n  a single large NNW-SSE building with a full-length west dock face, west drop\n  yard, north-end employee parking, and process silos at the NE - consistent\n  with a bottling/manufacturing plant. Web search confirmed Niagara Bottling\n  LLC, ~557,000 sq ft, on a 48-acre parcel at 1700 Digital Dr in Meadowville\n  Technology Park; $95M facility inaugurated November 2017.",
         "mapsUrl": "https://www.google.com/maps/@37.35420,-77.32990,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/19-niagara-bottling-chester-va-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 37.3542,
+              "lng": -77.3299
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/19-niagara-bottling-chester-va-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 37.3542,
+              "lng": -77.3299
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "The access drive connects to Digital Drive as an open, uncontrolled driveway. Street View (2025-02) of the Digital Drive frontage shows no barrier arm, sliding gate, or checkpoint pinch-point - just a landscaped open entrance. The perimeter access road wrapping the building is likewise ungated.",
           "guardShack": "No staffed booth visible at the entrance or anywhere on the perimeter drive in satellite or Street View imagery.",
@@ -2024,8 +3179,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Address: 380 Woodland Ave, Bloomfield, CT 06002 (Hartford CT metro)\n- Locked center: 41.86070, -72.72370\n- Confirmation: Roster coords (41.860483, -72.723738, ROOFTOP) landed on a\n  large rectangular building with a full rooftop solar array. Satellite probes\n  z16-z20 confirmed a single large building with a north drop yard of nose-out\n  trailers, dock faces on the north and south, and W/NW employee parking -\n  consistent with a bottling/manufacturing plant. Web search confirmed Niagara\n  Bottling LLC, ~432,000 sq ft, established Bloomfield 2016, $115M+ investment,\n  three production lines; the rooftop solar array is registered as the\n  \"Niagara Bottling - Bloomfield\" solar installation. The brick \"360/380\"\n  office building on Woodland Ave is a separate structure to the west.",
         "mapsUrl": "https://www.google.com/maps/@41.86070,-72.72370,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/20-niagara-bottling-bloomfield-ct-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 41.8607,
+              "lng": -72.7237
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/20-niagara-bottling-bloomfield-ct-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 41.8607,
+              "lng": -72.7237
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "The plant's perimeter access road connects to the industrial-park internal road network as an open, uncontrolled drive; no barrier arm, sliding gate, or checkpoint pinch-point visible in satellite imagery. Street View (2021-06) only reaches Woodland Ave at the separate brick office building - it does not reach the plant's truck entrance, hence medium confidence.",
           "guardShack": "No staffed booth resolvable at the access road. Small structures along the dock faces read as dock-side utility buildings, not an entrance guard shack.",
@@ -2124,8 +3337,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#7",
+          "steps": [
+            {
+              "step": "Arrive at gate (fast-lane bypass possible)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter dispatch (fast-lane priority for live loads)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch.fastlane",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4440000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Name: Niagara Bottling - Middleburg FL\n- Type: Bottling / Manufacturing Plant\n- Address: 565 Atlantis Dr, Middleburg, FL 32068\n- Resolved coords: 30.13565, -81.82680 (building/yard center)\n- Archetype: #7 — Gate + GS + Fast Lane Opportunity\n- Confidence: high",
         "mapsUrl": "https://www.google.com/maps/@30.13565,-81.82680,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/21-niagara-bottling-middleburg-fl-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 30.13565,
+              "lng": -81.8268
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/21-niagara-bottling-middleburg-fl-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 30.13565,
+              "lng": -81.8268
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "facility": "Niagara Bottling Middleburg plant, ~$70M facility opened 2022 near Jacksonville. Confirmed via Street View showing blue 'Niagara' branded building facade at 565 Atlantis Dr.",
           "truckGate": "Street View up the truck driveway shows a checkpoint structure spanning the lanes mid-driveway with perimeter chain-link fencing along the property line; modern controlled entry.",
@@ -2222,8 +3501,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#1",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard scan",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Pass through gate to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls trailer to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Driver exits through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4440000,
+          "totalYnsMs": 2790000
+        },
         "dossierExcerpt": "- Name: Niagara Bottling - Groveland FL\n- Type: Bottling / Manufacturing Plant\n- Address: 7633 American Way, Groveland, FL 34736\n- Resolved coords: 28.63920, -81.82750 (Niagara building/yard center)\n- Archetype: #1 — Gate + GS (no other distinguishing flag)\n- Confidence: high",
         "mapsUrl": "https://www.google.com/maps/@28.63920,-81.82750,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/22-niagara-bottling-groveland-fl-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 28.6392,
+              "lng": -81.8275
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/22-niagara-bottling-groveland-fl-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 28.6392,
+              "lng": -81.8275
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "facility": "Niagara Bottling Groveland plant, 7633 American Way, operating since 2007. Confirmed via Street View: building with bulk silos/storage tanks (bottling water tanks), gated entry. Located in a multi-tenant industrial park; the Niagara building is the standalone large building, distinct from neighboring warehouses.",
           "truckGate": "Street View up the entry driveway shows a controlled checkpoint: a gate with a stop sign, perimeter chain-link fencing across the property line, and a guard booth with a canopy beside the lane.",
@@ -2319,8 +3664,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#1",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard scan",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Pass through gate to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls trailer to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Driver exits through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4440000,
+          "totalYnsMs": 2790000
+        },
         "dossierExcerpt": "- Name: Niagara Bottling - Jupiter FL\n- Type: Bottling / Manufacturing Plant\n- Address: 15832 Corporate Rd N, Jupiter, FL 33478\n- Resolved coords: 26.90430, -80.28400 (building/yard center)\n- Archetype: #1 — Gate + GS (no other distinguishing flag)\n- Confidence: high",
         "mapsUrl": "https://www.google.com/maps/@26.90430,-80.28400,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/23-niagara-bottling-jupiter-fl-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 26.9043,
+              "lng": -80.284
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/23-niagara-bottling-jupiter-fl-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 26.9043,
+              "lng": -80.284
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "facility": "Niagara Bottling Jupiter, 15832 Corporate Rd N, in the Palm Beach Park of Commerce. ~409,486 sq ft, operates 24/7, produces private-label bottled water. Confirmed via web search and satellite/Street View.",
           "truckGate": "A canopied gatehouse / checkpoint structure is visible at the NW access road where it enters the secured yard (satellite z20). The entire property is enclosed by continuous chain-link perimeter fencing, clearly visible in Street View.",
@@ -2430,8 +3841,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#10",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct (shipping vs receiving) drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 120000,
+              "narrationKey": "shiprcv.split",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron on correct side",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1320000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
+        },
         "dossierExcerpt": "- Name: Niagara Bottling - Hazle Township PA\n- Type: Bottling / Manufacturing Plant\n- Address: 100 Timberline Dr, Hazle Township, PA 18202\n- Resolved coords: 40.93250, -76.06350 (building/yard center)\n- Archetype: #10 — Ship/Rcv Separate (Gate + GS) — see caveat below\n- Confidence: medium",
         "mapsUrl": "https://www.google.com/maps/@40.93250,-76.06350,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/24-niagara-bottling-hazle-township-pa-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 40.9325,
+              "lng": -76.0635
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/24-niagara-bottling-hazle-township-pa-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 40.9325,
+              "lng": -76.0635
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "facility": "Niagara Bottling Hazle Township, 100 Timberline Dr, Humboldt Industrial Park. ~1.19M sq ft, $440M investment, opened March 2022 - one of Niagara's largest plants (purified water + aseptic beverages). Confirmed via web search and satellite imagery.",
           "truckGate": "Could not positively confirm a barrier/gate structure - the truck driveway is private and not covered by Street View, and satellite resolution at the SW approach is insufficient to resolve a barrier. Set true as a strong inference: a 1.19M sq ft / $440M secured manufacturing campus with a long private set-back approach is invariably gated. Flagged uncertain.",
@@ -2524,8 +4003,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Name: Niagara Bottling - Imperial PA (Findlay Township)\n- Type: Bottling / Manufacturing Plant\n- Address: 201 Solar Dr, Imperial, PA 15126\n- Resolved coords: 40.44190, -80.29597 (building/yard center)\n- Archetype: #3 — No Gate / No GS\n- Confidence: high",
         "mapsUrl": "https://www.google.com/maps/@40.44190,-80.29597,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/25-niagara-bottling-imperial-pa-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 40.4419,
+              "lng": -80.29597
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/25-niagara-bottling-imperial-pa-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 40.4419,
+              "lng": -80.29597
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "facility": "Niagara Bottling Imperial PA, 201 Solar Dr, Findlay Industrial Park near Pittsburgh International Airport. ~$64M plant. Confirmed via web search and Street View: building with blue Niagara branding and bulk water silos.",
           "truckGate": "No controlled truck gate. Street View (2025-05) at the entrance shows the driveway running straight from the public road into the property with only directional signs and a speed-limit sign - no barrier arm, no sliding gate, no guard booth at the road or along the approach.",
@@ -2635,8 +4172,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Roster coordinates (40.570886, -75.614395, ROOFTOP) land on a large white-roofed\nindustrial building. Web search confirmed Niagara Bottling's Allentown plant at\n7561 Industrial Blvd, Allentown/Upper Macungie PA 18106 (Waze, TruckMap,\nBandana, Yellowpages listings). Satellite imagery shows a single large\nmanufacturing/distribution building with two dock banks, a fenced trailer drop\nyard, and a silo/tanker process area — fully consistent with a bottling plant.\nLocked the center at the building centroid (~40.5711, -75.6149).",
         "mapsUrl": "https://www.google.com/maps/@40.571100,-75.614900,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/26-niagara-bottling-upper-macungie-allentown-pa-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 40.5711,
+              "lng": -75.6149
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/26-niagara-bottling-upper-macungie-allentown-pa-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 40.5711,
+              "lng": -75.6149
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Property is fenced (chain-link around the dock and trailer yards, visible in Street View 2023-08), but the truck access road off Industrial Blvd shows no barrier arm and no guard booth across the lane in any Street View heading walked along the road. Classified as open driveway / no controlled gate, medium confidence — a sliding yard gate could exist closer to the building, out of Street View reach.",
           "guardShack": "No staffed booth structure visible at the entrance in satellite or Street View.",
@@ -2733,8 +4328,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Roster coordinates (34.265035, -79.695251, ROOFTOP) land on a large\nwhite-roofed manufacturing/distribution building. Web search confirmed Niagara\nBottling's Florence plant — a 502,320 sq ft, $70M facility in the Pee Dee\nTouchstone Energy Commerce Park at 2222 Florence Harllee Blvd, operational\nsince Q1 2021 (SC Dept of Commerce, Florence Chamber, TruckMap). Street View\n(2024-02) shows the Niagara logo on the building's west end and Niagara-branded\ntrailers backed into the docks — positive identification. Locked center at the\nbuilding centroid (~34.2652, -79.6940).",
         "mapsUrl": "https://www.google.com/maps/@34.265200,-79.694000,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/27-niagara-bottling-florence-sc-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 34.2652,
+              "lng": -79.694
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/27-niagara-bottling-florence-sc-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 34.2652,
+              "lng": -79.694
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "No controlled checkpoint found. The property has only a low post-and-cable boundary marker along the road (clear in Street View 2024-02) — no security fence, no barrier arm and no guard booth across the truck driveway. The access road off Florence Harllee Blvd reads as an uncontrolled industrial driveway. Classified false; medium confidence.",
           "guardShack": "No staffed-booth structure anywhere at the entrance in satellite or Street View.",
@@ -2845,8 +4498,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Roster coordinates (31.156095, -97.354586, ROOFTOP) land on a large\nwhite-roofed manufacturing building. Web search confirmed Niagara Bottling's\nTemple plant — a $90M, ~728,000 sq ft purified-water facility at 5419 Wendland\nRd in the Temple Industrial Park, opened 2019, with a subsequent $48M expansion\nadding a logistics/distribution center (Temple Chamber, niagarawater.com,\nKDH/TDT News). Street View (2026-04) shows the Niagara monument sign at the\nWendland Rd driveway and the branded plant — positive identification. Imagery\nshows two large buildings: the original plant (north) and the logistics-center\nexpansion (south).",
         "mapsUrl": "https://www.google.com/maps/@31.156095,-97.354586,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/28-niagara-bottling-temple-tx-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 31.156095,
+              "lng": -97.354586
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/28-niagara-bottling-temple-tx-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 31.156095,
+              "lng": -97.354586
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "No controlled checkpoint found. The campus has only a landscaped grass buffer along Wendland Rd with a Niagara monument sign at the entrance driveway (Street View 2026-04) — no perimeter security fence, no barrier arm and no guard booth across any driveway. Classified false, medium confidence.",
           "guardShack": "No staffed-booth structure visible at any entrance. A small white structure near the main plant NE corner appears to be a process/utility building, not a gatehouse.",
@@ -2948,8 +4659,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Roster coordinates (29.588439, -97.979524, ROOFTOP) land on a large building\nwith a fully solar-panelled roof. Web search confirmed Niagara Bottling's\nSeguin plant — a 557,533 sq ft facility built 2016 on ~30 acres at the\nintersection of Rio Nogales Dr and 8th St, running multiple production lines\nwith a $21M fourth-line expansion (Seguin EDC, Waze, GridInfo solar-farm\nlisting, The Keith Corp). The distinctive rooftop solar array matches the\nGridInfo \"Niagara Bottling - Seguin\" solar-farm record — positive\nidentification. Locked center at the building centroid.",
         "mapsUrl": "https://www.google.com/maps/@29.588439,-97.979524,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/29-niagara-bottling-seguin-tx-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 29.588439,
+              "lng": -97.979524
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/29-niagara-bottling-seguin-tx-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 29.588439,
+              "lng": -97.979524
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "No controlled checkpoint found. The site sits in open farm fields with no perimeter security fence; the access road off the E-side public road shows no barrier arm and no guard booth. Classified false, medium confidence. Note: Street View coverage of the immediate plant driveway is sparse (ZERO_RESULTS at several nearby points); call relies mainly on satellite.",
           "guardShack": "No staffed-booth structure visible at the entrance in satellite imagery.",
@@ -3049,6 +4818,28 @@
         },
         "dossierExcerpt": "The roster coordinates (46.732498, -92.201007, GEOMETRIC_CENTER) were **badly\nwrong** — they land on a forested highway interchange near Duluth, roughly\n250 km north of Elko New Market. Elko New Market is in Scott County, ~35 miles\nsouth of Minneapolis (~44.57 N, -93.29 W).\n\nCorrected via web research: Niagara Bottling is building a 425,000 sq ft,\n$125M beverage-manufacturing facility in the **southeast quadrant of the\nInterstate 35 / Scott County Road 2 interchange**, in the City of Elko New\nMarket's Park I-35 Industrial Park (City of Elko New Market FAQ, Minnesota\nReformer, Star Tribune, KARE 11, niagarawater.com). Probing satellite imagery\nalong I-35 located the matching interchange and a large new building shell in\nthe SE quadrant — positively identified as the Niagara plant. Locked center at",
         "mapsUrl": "https://www.google.com/maps/@44.567600,-93.290000,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/niagara-bottling/30-niagara-bottling-elko-new-market-mn-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 44.5676,
+              "lng": -93.29
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/niagara-bottling/30-niagara-bottling-elko-new-market-mn-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 44.5676,
+              "lng": -93.29
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "_location": "Roster coordinates (46.732498, -92.201007) were badly wrong — they pointed to a forested highway interchange near Duluth, ~250 km north of Elko New Market. Corrected via web research: the plant is the 425,000 sq ft, $125M Niagara facility in the SE quadrant of the I-35 / Scott County Road 2 interchange in Elko New Market's Park I-35 Industrial Park. Building shell positively identified in satellite imagery at ~44.5676, -93.2900.",
           "_constructionState": "Facility is UNDER CONSTRUCTION in all available imagery (Phase 1 targeted operational 2025). The building shell/roof is complete, but the truck yard — dock face, aprons, trailer parking, perimeter road, and any gate/guard booth — is still graded dirt and not yet built or captured. Operational classification fields cannot be observed; all are listed in uncertainFields and the classification values are placeholder defaults, not observed evidence.",

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T04:33:09.366Z",
+  "builtAt": "2026-05-21T14:20:34.001Z",
   "account": {
     "slug": "barnes-noble",
     "displayName": "Barnes & Noble",
@@ -12,7 +12,8 @@
       "droppedStubCount": 0,
       "capHit": false,
       "note": "Audited all 2 identifiable facilities."
-    }
+    },
+    "featuredSiteId": "01-barnes-noble-monroe-township-nj-dc"
   },
   "research": {
     "facility_count": 8,
@@ -126,8 +127,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "The roster pin (40.358049, -74.464912, geocoded ROOFTOP) landed directly on the\nroof of a very large single-building distribution center in the Docks Corner /\nCranbury-Monroe industrial submarket, alongside the NJ Turnpike and Route 33.\nWeb search confirmed \"Barnes & Noble Distribution, 1 Barnes & Noble Way, Monroe\nTownship NJ 08831\" at this location (Yellowpages, Chamber of Commerce, Waze,\nLoc8NearMe). The building footprint derived from the perimeter geofence works\nout to ~73.5 acres, matching the dossier's stated 73-acre footprint and ~1.15M\nsq ft building — a strong independent corroboration. Location locked at the\nbuilding centroid 40.35820, -74.46510.",
         "mapsUrl": "https://www.google.com/maps/@40.35820,-74.46510,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/barnes-noble/01-barnes-noble-monroe-township-nj-dc-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 40.3582,
+              "lng": -74.4651
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/barnes-noble/01-barnes-noble-monroe-township-nj-dc-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 40.3582,
+              "lng": -74.4651
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Confirmed 1 Barnes & Noble Way, Monroe Township NJ. Single ~1.15M sq ft DC building; derived site area 73.5 acres matches dossier's stated 73 acres, strongly corroborating the building identification.",
           "truckGate": "Property is fully chain-link fenced (fence confirmed via Street View on the west side and visible in satellite along the south). The dock yard is a secured enclosure and the truck route necessarily passes a fence line, implying a controlled gate. No barrier-arm or sliding-gate STRUCTURE was directly captured in available imagery (Street View covers only public roads and the east perimeter loop, not the truck-yard entrance), so this is a medium-confidence inference from the fenced perimeter.",
@@ -230,8 +297,74 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "The roster pin (39.418826, -119.750481, geocoded ROOFTOP) landed directly on a\nlarge white-roofed distribution warehouse in the Damonte Ranch industrial park\nin south Reno, alongside Interstate 580 / US-395. Web search confirmed \"Barnes\n& Noble Distribution Center, 12660 Old Virginia Rd, Reno NV 89521\" at this\nlocation — the West Coast replenishment / e-commerce hub (Panjiva buyer report,\nReno-Sparks Chamber of Commerce, Barnes & Noble Reno Distribution Center\nFacebook page; lease renewed Nov 2025 per the roster source). Single ~601K sq\nft building. Location locked at the building centroid 39.41870, -119.75050.",
         "mapsUrl": "https://www.google.com/maps/@39.41870,-119.75050,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/barnes-noble/02-barnes-noble-reno-nv-dc-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 39.4187,
+              "lng": -119.7505
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/barnes-noble/02-barnes-noble-reno-nv-dc-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 39.4187,
+              "lng": -119.7505
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Confirmed 12660 Old Virginia Rd, Reno NV 89521 in the Damonte Ranch industrial park, alongside I-580/US-395. Single ~601K sq ft DC building. Address verified via Panjiva, Chamber of Commerce, and Facebook (Barnes & Noble Reno Distribution Center).",
           "truckGate": "CONFIRMED via Street View (2022 and 2025 panos): a yellow-and-white striped barrier arm spans the entrance driveway lane, flanked by yellow protective bollards, with a STOP sign. The 2015 pano shows the same driveway WITHOUT the arm, so the barrier was installed after 2015. High confidence.",

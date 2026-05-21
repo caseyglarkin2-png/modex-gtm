@@ -263,6 +263,14 @@ export const DemoPackSchema = z.object({
     archetype: AccountArchetype,
     siteCount: z.number().int().positive(),
     coverageNote: CoverageNote.nullable(),
+    /**
+     * The site we want a prospect to land on first when they hit
+     * /demo/<slug> with no `?site=` param, or when a microsite CTA
+     * deep-links into the simulator. Picked at build time as the
+     * largest-archetype-cluster representative. Optional for
+     * backward compat — older packs may not have it.
+     */
+    featuredSiteId: z.string().regex(/^\d{2}-[a-z0-9-]+$/).optional(),
   }),
   research: AccountResearch,
   network: Network,

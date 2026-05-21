@@ -31,6 +31,7 @@ import {
   type ArchetypeId,
   type Confidence,
 } from '../../src/lib/demo/pack-schema';
+import { buildScenario } from '../../src/lib/demo/scenarios';
 import { resolveByAuditSlug } from './slug-map';
 
 // ── Paths ───────────────────────────────────────────────────────────────────
@@ -298,6 +299,11 @@ async function buildSite(
     ...(cleanedFieldNotes && Object.keys(cleanedFieldNotes).length > 0 ? { fieldNotes: cleanedFieldNotes } : {}),
   };
 
+  // D3.1 — attach the driver-journey replay template, gracefully omitted
+  // when the site's geofences don't fit the archetype's required layers.
+  const scenario = buildScenario(site);
+  if (scenario) site.scenario = scenario;
+
   return site;
 }
 
@@ -356,6 +362,18 @@ async function main() {
   const auditedCount = sites.length;
   const capHit = auditedCount === 30;
 
+  // Pick the featured site for the demo's first impression. Heuristic:
+  // the site whose archetype is the biggest cluster in the network (so
+  // the replay represents the most common reality), with the highest
+  // `dockDoorCount` tie-breaker (visual proof of scale).
+  const archetypeRanks = Object.entries(archetypeMix).sort(([, a], [, b]) => (b ?? 0) - (a ?? 0));
+  const topArchetype = archetypeRanks[0]?.[0] as ArchetypeId | undefined;
+  const featuredSiteId = topArchetype
+    ? sites
+        .filter((s) => s.archetype === topArchetype)
+        .sort((a, b) => (b.yardMetrics.dockDoorCount ?? 0) - (a.yardMetrics.dockDoorCount ?? 0))[0]?.id
+    : undefined;
+
   const pack: DemoPack = {
     schemaVersion: '1',
     builtAt: new Date().toISOString(),
@@ -364,6 +382,7 @@ async function main() {
       displayName,
       archetype,
       siteCount: auditedCount,
+      ...(featuredSiteId ? { featuredSiteId } : {}),
       coverageNote: {
         auditedCount,
         estimatedFootprint: estimatedFootprint ?? null,

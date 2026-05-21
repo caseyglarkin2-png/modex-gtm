@@ -20,11 +20,19 @@ import { CoverageHonesty } from './coverage-honesty';
 interface Props {
   pack: DemoPack;
   mode: 'standalone' | 'embed';
+  /** Initial selected site — populated from `?site=` search param. */
+  initialSiteId?: string | null;
+  /** When true, auto-open the selected site in replay mode (D3.4 `?play=1`). */
+  autoPlay?: boolean;
 }
 
-export function DemoSurface({ pack, mode }: Props) {
-  const [selectedSiteId, setSelectedSiteId] = useState<string | null>(null);
+export function DemoSurface({ pack, mode, initialSiteId = null, autoPlay = false }: Props) {
+  const [selectedSiteId, setSelectedSiteId] = useState<string | null>(initialSiteId);
   const [archetypeFilter, setArchetypeFilter] = useState<Set<ArchetypeId> | null>(null);
+  // Once a user manually closes the auto-play, we should not re-open it on
+  // the next click — track whether the autoPlay flag has been consumed.
+  const [autoPlayConsumed, setAutoPlayConsumed] = useState(false);
+  const shouldAutoPlay = autoPlay && !autoPlayConsumed && selectedSiteId === initialSiteId;
 
   const toggleArchetype = (archetype: ArchetypeId) => {
     setArchetypeFilter((prev) => {
@@ -89,7 +97,14 @@ export function DemoSurface({ pack, mode }: Props) {
         </div>
         <aside className="flex w-full shrink-0 flex-col overflow-hidden border-t border-stone-200 bg-white md:w-[400px] md:border-l md:border-t-0">
           {selectedSite ? (
-            <SiteDetailPanel site={selectedSite} onClose={() => setSelectedSiteId(null)} />
+            <SiteDetailPanel
+              site={selectedSite}
+              onClose={() => {
+                setSelectedSiteId(null);
+                setAutoPlayConsumed(true);
+              }}
+              autoPlay={shouldAutoPlay}
+            />
           ) : (
             <ArchetypeMixChart pack={pack} archetypeFilter={archetypeFilter} onToggleArchetype={toggleArchetype} />
           )}

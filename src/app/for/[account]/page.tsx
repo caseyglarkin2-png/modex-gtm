@@ -115,6 +115,7 @@ export default async function AccountMicrositePage({
         <MemoSectionList sections={memoSections} accentColor={data.theme?.accentColor} />
         <MemoSoftAction
           accountName={data.accountName}
+          accountSlug={account}
           href={buildROIDeepLink(data, { personSlug: reader?.personSlug })}
         />
         <MemoFootnotes sections={memoSections} />

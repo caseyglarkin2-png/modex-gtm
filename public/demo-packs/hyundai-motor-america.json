@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T04:42:40.251Z",
+  "builtAt": "2026-05-21T14:21:28.688Z",
   "account": {
     "slug": "hyundai-motor-america",
     "displayName": "Hyundai Motor America",
@@ -12,7 +12,8 @@
       "droppedStubCount": 0,
       "capHit": false,
       "note": "Audited all 17 identifiable facilities."
-    }
+    },
+    "featuredSiteId": "10-mobis-parts-america-pdc-sumner-wa"
   },
   "research": {
     "facility_count": 17,
@@ -142,8 +143,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "Roster coords (32.280312, -86.324154, ROOFTOP) landed directly on the HMMA\nmain assembly building — confirmed by satellite: a giant white building\ncarrying the \"HYUNDAI\" wordmark and logo on its roof. Web research\n(hmmausa.com, Wikipedia) confirms HMMA is a 1,744-acre campus, 3.4M sq ft of\nbuildings, producing Santa Fe / Tucson / Elantra / Santa Cruz. No relocation\nneeded; center nudged slightly to the assembly hall.",
         "mapsUrl": "https://www.google.com/maps/@32.281200,-86.323500,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/01-hyundai-motor-manufacturing-alabama-hmma-montgomery-al-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.2812,
+              "lng": -86.3235
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/01-hyundai-motor-manufacturing-alabama-hmma-montgomery-al-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.2812,
+              "lng": -86.3235
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "site": "1,744-acre HMMA campus (per hmmausa.com / Wikipedia). Operational developed footprint geofenced here is ~620 acres; full owned land much larger. 3.4M sq ft of buildings: stamping, weld, paint, assembly, three engine shops, plus an east logistics/parts warehouse complex and a 2-mile test track at the north edge.",
           "truckGate": "HMMA uses controlled, numbered gates (web research confirms 'Gate 2' as the visitor entrance). Main multi-lane entry off Hyundai Blvd at 32.2769,-86.3253; access control is set back inside the property, standard for a large guarded automotive campus.",
@@ -247,8 +316,76 @@
           "dropYard": true,
           "multiStep": true
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "Roster coords (32.165371, -81.444937, ROOFTOP) landed on the HMGMA Metaplant\nmanufacturing complex — confirmed by satellite: an enormous multi-building\nmanufacturing campus along I-16 in rural Bryan County. Web research\n(hmgma.com, Wikipedia) confirms the $7.6B EV plant, 16M+ sq ft of factory\nfloor, ~25 mi west of Savannah, opened Oct 2024. Center adjusted slightly to\nthe central manufacturing halls.",
         "mapsUrl": "https://www.google.com/maps/@32.162000,-81.448000,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/02-hyundai-motor-group-metaplant-america-hmgma-ellabell-ga-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.162,
+              "lng": -81.448
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/02-hyundai-motor-group-metaplant-america-hmgma-ellabell-ga-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.162,
+              "lng": -81.448
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "imagery": "Available satellite imagery is from the construction phase (extensive bare earth, partly-finished buildings). HMGMA opened Oct 2024 with 16M+ sq ft of factory floor; the operational dock/trailer layout is not yet fully visible. Counts are best-effort estimates with low confidence — flagged accordingly.",
           "site": "$7.6B EV manufacturing campus in Bryan County GA along I-16, ~25 mi west of Savannah. 16M+ sq ft factory floor across many connected/standalone buildings; 500K vehicles/yr capacity (IONIQ 5 / IONIQ 9 / Kia). The full HMGMA land parcel is ~2,900 acres; perimeter box covers the developed campus.",
@@ -349,8 +486,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "The roster gives the HMMA campus address (700 Hyundai Blvd) — same campus as\nidx 1. Web research (Montgomery Chamber, hmmausa.com, Made in Alabama)\nconfirms the cylinder-head machining plant is a 260,000 sq ft building, a\n$388M investment opened May 2019, and the third engine shop on the\nHMMA campus supporting 650,000+ engines/yr.\n\nIt is a component building inside the larger HMMA campus, not a standalone\nsite. The exact building could not be uniquely distinguished from the other\nHMMA engine shops in satellite imagery without floor-plan documentation; it is\npositively within the campus's western engine-shop / component-plant cluster,\non which the center is placed.",
         "mapsUrl": "https://www.google.com/maps/@32.282800,-86.332000,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/03-hmma-cylinder-head-machining-plant-montgomery-al-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.2828,
+              "lng": -86.332
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/03-hmma-cylinder-head-machining-plant-montgomery-al-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.2828,
+              "lng": -86.332
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "site": "260,000 sq ft cylinder-head machining plant ($388M, opened May 2019) — the 'third engine shop' on the HMMA campus, part of HMMA's 650K+ engines/yr operation. It is a component building INSIDE the larger 1,744-acre HMMA campus (same campus as idx 1), not a standalone site.",
           "buildingId": "The exact building could not be uniquely distinguished from the other HMMA engine shops without floor-plan documentation. It is positively within the HMMA western engine-shop / component-plant cluster (centered ~32.2828,-86.3320). Center placed on that cluster.",
@@ -446,8 +651,66 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Roster coords (34.040044, -117.552921, ROOFTOP, moved only 219 m) landed on a\nlarge warehouse building. Web research (BBB, D&B, Panjiva, US Port Examiner)\nconfirms 1900 S Rochester Ave, Ontario CA 91761 as the Mobis Parts America\nWest Coast PDC — the Hyundai/Kia/Genesis after-sales parts distribution arm.\nCenter placed on the Mobis building roof.",
         "mapsUrl": "https://www.google.com/maps/@34.040200,-117.553100,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/04-mobis-parts-america-pdc-ontario-ca-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 34.0402,
+              "lng": -117.5531
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/04-mobis-parts-america-pdc-ontario-ca-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 34.0402,
+              "lng": -117.5531
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "site": "Mobis Parts America West Coast PDC at 1900 S Rochester Ave, Ontario CA — confirmed by web research (BBB, D&B, Panjiva). Large single warehouse building in a multi-tenant Inland Empire industrial park bordered by a freeway on the east; other tenants share the complex (e.g. 'Spartan' signage on the building).",
           "truckGate": "false — the truck court / dock yard runs off S Rochester Ave via an OPEN driveway. Street View (2021-02, 2025-01) shows no barrier arm, no sliding gate, and no checkpoint pinch-point at the road. Standard open multi-tenant business-park access.",
@@ -543,8 +806,66 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Roster coords (41.793528, -88.357668, ROOFTOP, moved 1385 m) landed on a large\nwarehouse building. Confirmation was needed because of the 1385 m geocode\nmove. Street View shows a \"MOBIS\" sign on the building face, and web research\n(Yellow Pages, Loc8NearMe, Chamber of Commerce) confirms 1705 Sequoia Dr,\nAurora IL 60506 as the Mobis Parts America Central Region PDC. Identity\npositively re-confirmed; center placed on the Mobis building roof.",
         "mapsUrl": "https://www.google.com/maps/@41.793500,-88.357300,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/05-mobis-parts-america-pdc-aurora-il-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 41.7935,
+              "lng": -88.3573
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/05-mobis-parts-america-pdc-aurora-il-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 41.7935,
+              "lng": -88.3573
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "site": "Mobis Parts America Central Region PDC at 1705 Sequoia Dr, Aurora IL — confirmed by web research (Yellow Pages, Loc8NearMe, Chamber of Commerce) and by a 'MOBIS' sign visible on the building face in Street View. Standalone warehouse in a suburban Chicago-metro business park along I-88. Roster geocode moved 1385 m; the building was positively re-confirmed.",
           "truckGate": "false — the property is entered from Sequoia Dr via an OPEN, ungated driveway (Street View 2024-04 shows no barrier arm, no sliding gate, no checkpoint). The dock yard wraps around to the building's east face via this open drive.",
@@ -635,8 +956,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Address: 2155 Breckinridge Blvd NW, Lawrenceville, GA 30043\n- Locked center: 33.96768, -84.08648\n- Confirmation: Roster geocode (ROOFTOP, moved only 45 m) landed on a large white-roofed\n  industrial building inside Breckinridge Industrial Park. Web search confirms Mobis Parts\n  America LLC operates a \"massive parts distribution center\" at 2155 Breckinridge Blvd\n  (also serves Kia per Panjiva import records). The white building matches a multi-tenant\n  bulk warehouse consistent with a PDC.",
         "mapsUrl": "https://www.google.com/maps/@33.96768,-84.08648,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/06-mobis-parts-america-pdc-lawrenceville-ga-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 33.96768,
+              "lng": -84.08648
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/06-mobis-parts-america-pdc-lawrenceville-ga-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 33.96768,
+              "lng": -84.08648
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Open multi-tenant industrial park (Breckinridge Industrial Park). Street View drove freely into the shared dock court; no barrier arm, sliding gate, or checkpoint at any property/road interface.",
           "guardShack": "No booth structure anywhere at the building or court entrance.",
@@ -743,8 +1122,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Address: 2301 S Pointe Dr, Lancaster, TX 75134 (South Pointe Corporate Center,\n  Building 1)\n- Locked center: 32.64030, -96.80970\n- Confirmation: Roster geocode was imprecise (moved 8,399 m and landed mid-park).\n  Street View along S Pointe Dr (Feb 2025) shows the large warehouse east of the\n  geocode point bearing a clear \"HYUNDAI MOBIS\" sign on its SW corner. Web search\n  confirms 2301 S Pointe Dr = South Pointe Corporate Center Building 1 (444,465 SF,\n  built 2009, ~24-acre lot), tenanted by Mobis Parts America and Kia Motors America.",
         "mapsUrl": "https://www.google.com/maps/@32.64030,-96.80970,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/07-mobis-parts-america-pdc-lancaster-tx-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.6403,
+              "lng": -96.8097
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/07-mobis-parts-america-pdc-lancaster-tx-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.6403,
+              "lng": -96.8097
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Black steel cantilever sliding gate across the truck driveway, confirmed in Feb-2025 Street View and z21 satellite. Property is fully enclosed by an ornamental black steel perimeter fence.",
           "guardShack": "No staffed booth at the gate. The only small structure beside the gate (z21 satellite) is a utility/electrical pad, not a guard booth.",
@@ -831,8 +1276,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Address: 1122 Cranbury South River Rd, Jamesburg, NJ 08831 (Monroe Township)\n- Locked center: 40.35270, -74.47820\n- Confirmation: Roster geocode (moved 2,503 m) landed directly on a large\n  dark-roofed warehouse fronting Cranbury South River Rd. Web search confirms Mobis\n  Parts America operates a Hyundai/Kia parts distribution center at 1122 Cranbury\n  South River Rd (the Eastern Region PDC; per Panjiva import records the site receives\n  vehicle-parts/accessory shipments from Hyundai Mobis Korea). Street View along the\n  road shows a red-brick warehouse matching the building footprint at the geocode point.",
         "mapsUrl": "https://www.google.com/maps/@40.35270,-74.47820,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/08-mobis-parts-america-pdc-jamesburg-nj-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 40.3527,
+              "lng": -74.4782
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/08-mobis-parts-america-pdc-jamesburg-nj-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 40.3527,
+              "lng": -74.4782
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "No barrier arm, sliding gate, or checkpoint. The NE truck court is open paved area; the access road from Cranbury South River Rd connects directly into the court with no perimeter fence (confirmed z20/z21 satellite).",
           "guardShack": "No booth structure anywhere at the building or court entrance.",
@@ -920,8 +1423,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Address: 135 Sullivan Ave, South Windsor, CT 06074\n- Locked center: 41.85530, -72.59800\n- Confirmation: Roster geocode was rooftop-accurate (moved only 35 m) and landed on\n  a large white-roofed warehouse. Street View at the Sullivan Ave driveway shows a blue\n  \"HYUNDAI MOBIS\" monument sign — positive identification. Web search confirms 135\n  Sullivan Ave is a 292,000 SF auto-parts warehouse built 2015, leased to Mobis Parts\n  America (Hyundai Mobis subsidiary); acquired by Winstanley Enterprises in 2020 as one\n  of a pair of warehouses on the site.",
         "mapsUrl": "https://www.google.com/maps/@41.85530,-72.59800,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/09-mobis-parts-america-pdc-south-windsor-ct-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 41.8553,
+              "lng": -72.598
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/09-mobis-parts-america-pdc-south-windsor-ct-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 41.8553,
+              "lng": -72.598
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "No barrier arm, sliding/swing gate, guard booth, or perimeter fence is visible at the Sullivan Ave driveway or the truck-court entrance in z19/z20 satellite, nor from Street View of the public road. A driver-info listing (warehouserating.com) states 'the location has a gate' with first-come-first-served check-in - this may refer to an interior control point not resolvable from imagery, or be outdated. Classified false on the rubric (open driveway with no visible control), flagged medium-confidence.",
           "guardShack": "No booth structure visible anywhere; flagged given the imagery/web discrepancy.",
@@ -1012,8 +1573,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Address: 14000 24th St E, Sumner, WA 98390\n- Locked center: 47.23440, -122.24260\n- Confirmation: Roster geocode was accurate (moved only 117 m) and landed on a\n  large white-roofed warehouse. Web search confirms 14000 24th St E = \"The Cascade\n  Building,\" a 385,468 SF distribution center built December 2015 within Sumner\n  Corporate Park (a 150-acre, 3M SF distribution park). Mobis Parts America leases\n  space here (~181,000 SF per the roster) as the Pacific Northwest PDC; Panjiva import\n  records show inbound Hyundai/Mobis parts shipments. The building is multi-tenant\n  (a \"For Lease\" sign is visible in Street View).",
         "mapsUrl": "https://www.google.com/maps/@47.23440,-122.24260,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/10-mobis-parts-america-pdc-sumner-wa-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 47.2344,
+              "lng": -122.2426
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/10-mobis-parts-america-pdc-sumner-wa-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 47.2344,
+              "lng": -122.2426
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Open multi-tenant distribution building (the Cascade Building, Sumner Corporate Park). North dock court fronts 24th St E directly via open curb cuts with only a landscape strip; no barrier, fence, or checkpoint. South court connects to the open park road network. Confirmed in z19 satellite and Mar-2025 Street View.",
           "guardShack": "No booth structure at any court entrance.",
@@ -1115,6 +1734,28 @@
         },
         "dossierExcerpt": "The roster coordinate (32.911036, -85.137392 / 2000 Webb Rd) lands at the\nsouthwest tip of the Kia Georgia (KaGA) automotive campus. A z20 satellite probe\nat that exact point shows only an open paved parking-lot apron off Webb Rd — not\na building. Web research (glovisusa.com locations; CMac.ws / YellowPages\ndirectory listings; Automotive Logistics feature) confirms Glovis America\noperates a Vehicle Processing Center co-located on the KaGA campus where Kia\nopened its assembly plant in late 2009. Glovis is Hyundai Motor Group's captive\nfinished-vehicle 3PL. The auditable \"facility\" is the VPC vehicle-marshaling and\nprocessing operation on the campus — not the empty roster pixel — so the center\nwas locked on the core vehicle-storage lots at 32.9130, -85.1315.",
         "mapsUrl": "https://www.google.com/maps/@32.9130,-85.1315,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/11-glovis-america-vehicle-processing-center-west-point-ga-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.913,
+              "lng": -85.1315
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/11-glovis-america-vehicle-processing-center-west-point-ga-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.913,
+              "lng": -85.1315
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "siteSelection": "Roster point (2000 Webb Rd) lands at an open paved parking-lot entrance off Webb Rd at the SW tip of the Kia Georgia (KaGA) / Glovis campus. The Glovis Vehicle Processing Center is the finished-vehicle marshaling/processing operation co-located on the KaGA campus; audited the VPC vehicle-storage yards and rail facility rather than the empty roster pixel. Locked center on the core vehicle lots at 32.9130,-85.1315.",
           "facilityType": "Finished-vehicle Processing Center: no traditional loading docks. Vehicles move by car-carrier truck and rail. dockDoorCount=0 and dockDoors=NONE reflect VPC layout, not a missing count.",
@@ -1204,6 +1845,28 @@
         },
         "dossierExcerpt": "The roster geocode flagged a 10,038 m move, so location was verified carefully.\nA z16 satellite probe at the roster point lands directly on the former General\nMotors Shreveport Operations assembly plant — a sprawling industrial building\ncomplex. Web research (KTBS, KSLA, Louisiana Economic Development,\nopportunitylouisiana.gov) confirms Glovis America announced a vehicle processing\nand distribution hub at the former GM plant in Caddo Parish, occupying a\n125,000-sqft facility plus ~90 adjoining acres of the much larger former-GM\ncampus. Glovis outfits imported vehicles with dealer-requested equipment. This is\na positive ID; center kept on the main building at 32.426875, -93.920747.",
         "mapsUrl": "https://www.google.com/maps/@32.4269,-93.9207,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/12-glovis-america-vehicle-processing-center-shreveport-la-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.426875,
+              "lng": -93.920747
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/12-glovis-america-vehicle-processing-center-shreveport-la-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.426875,
+              "lng": -93.920747
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "siteSelection": "Roster point (7600 Antoine Blvd) lands directly on the former GM Shreveport Operations plant - a confirmed positive ID via web research (KTBS, KSLA, Louisiana Economic Development): Glovis America operates a vehicle processing and distribution hub here, occupying a 125,000 sqft facility plus ~90 adjoining acres within the much larger ~730-acre former-GM complex. Center kept on the main building.",
           "facilityType": "Vehicle Processing Center inside a repurposed former auto-assembly plant. Glovis outfits imported vehicles with dealer-requested equipment and exterior upgrades. dockDoorCount/dockDoors reflect legacy plant truck docks; vehicle movement is mainly by car-carrier and rail.",
@@ -1307,6 +1970,28 @@
         },
         "dossierExcerpt": "A z15 satellite probe at the roster point lands inside the Georgia Ports\nAuthority (GPA) Colonel's Island Terminal at the Port of Brunswick. Web research\n(GPA facilities page, glovisusa.com locations, Automotive Logistics) confirms\nColonel's Island is a ~1,700-acre roll-on/roll-off auto terminal with multiple\non-terminal vehicle processors; Glovis America operates as one of those\nprocessors and Brunswick is the nation's busiest RoRo port. The on-terminal\nprocessors share the secured terminal's gate, fence line and storage, so the\naudit treats the GPA secured terminal as the facility. Center placed on the\nterminal core at 31.1270, -81.5390.",
         "mapsUrl": "https://www.google.com/maps/@31.1270,-81.5390,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/13-glovis-america-port-vehicle-processing-brunswick-ga-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 31.127,
+              "lng": -81.539
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/13-glovis-america-port-vehicle-processing-brunswick-ga-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 31.127,
+              "lng": -81.539
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "siteSelection": "Roster point (1 Joe Frank Harris Blvd) lands inside the Georgia Ports Authority Colonel's Island Terminal at the Port of Brunswick - confirmed via web research (GPA facilities page, glovisusa.com, Automotive Logistics). Colonel's Island is a ~1,700-acre RoRo auto terminal with multiple on-terminal vehicle processors; Glovis America operates as one of those processors. The audited facility is the GPA secured terminal as a whole, since the on-terminal processors share the gate, fence line and storage. Center placed on the terminal core at 31.1270,-81.5390.",
           "facilityType": "Port / RoRo vehicle import-export processing terminal. No traditional loading docks - vehicles roll on/off ships at the RoRo berths and move within the terminal by drive-away and by rail. dockDoorCount=0 / dockDoors=NONE reflect this.",
@@ -1409,6 +2094,28 @@
         },
         "dossierExcerpt": "The roster geocode was flagged GEOMETRIC_CENTER (lower precision). A z15 probe at\nthe roster point (40.672346, -74.149854 / \"E Bay Ave, Elizabeth\") landed inside\nthe APM/Maher CONTAINER terminal on the Elizabeth side — a container terminal,\nnot an auto-processing facility, so the roster point is wrong for this facility.\nWeb research resolved the correct site: Glovis America's listed Newark\nvehicle-processing operation corresponds to the Port Newark Auto Terminal. Moran\nShipping and Ports America sources confirm Port Newark's RoRo/auto terminal\nserves Hyundai Glovis and that FAPS Inc. processes Hyundai/Kia vehicles there.\nDecisive evidence: Street View at the terminal entrance shows a \"PORTS AMERICA —\nPort Newark Auto Terminal, 325 Distribution St, Newark, New Jersey 07114\" sign.\nThe locked center was relocated to the Port Newark Auto Terminal core at",
         "mapsUrl": "https://www.google.com/maps/@40.6940,-74.1340,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/14-glovis-america-port-vehicle-processing-newark-elizabeth-nj-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 40.694,
+              "lng": -74.134
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/14-glovis-america-port-vehicle-processing-newark-elizabeth-nj-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 40.694,
+              "lng": -74.134
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "siteSelection": "Roster address 'E Bay Ave, Elizabeth NJ' geocoded to GEOMETRIC_CENTER and landed inside the APM/Maher CONTAINER terminal on the Elizabeth side - wrong building. Web research (Glovis America locations; Moran Shipping; Ports America) shows the Glovis Newark vehicle-processing operation is at the Port Newark Auto Terminal. Street View at the entrance carries a clear 'PORTS AMERICA - Port Newark Auto Terminal, 325 Distribution St, Newark, NJ 07114' sign. FAPS Inc. and Glovis process Hyundai/Kia vehicles at Port Newark's auto terminals. Relocated the locked center to the Port Newark Auto Terminal core at 40.6940,-74.1340.",
           "facilityType": "Port RoRo vehicle import/export processing terminal on the Port Newark peninsula tip. No traditional loading docks - vehicles roll on/off ships at the wharf and move within the terminal by drive-away and rail. dockDoorCount=0 / dockDoors=NONE reflect this.",
@@ -1508,6 +2215,28 @@
         },
         "dossierExcerpt": "Glovis America Vehicle Processing Center - Tacoma WA (Hyundai)\nType: Port / Vehicle Import Processing Center\nAddress: 3400 Taylor Way, Tacoma, WA 98421",
         "mapsUrl": "https://www.google.com/maps/@47.261300,-122.370000,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/15-glovis-america-vehicle-processing-center-tacoma-wa-hyundai-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 47.2613,
+              "lng": -122.37
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/15-glovis-america-vehicle-processing-center-tacoma-wa-hyundai-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 47.2613,
+              "lng": -122.37
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "facility": "Port of Tacoma vehicle processing center operated by Glovis America / WWS for Hyundai-Kia auto imports. Confirmed via Glovis locations page + NWSA press release naming 3400 Taylor Way, Tacoma. Massive finished-vehicle marshalling yard, not a freight warehouse.",
           "truckGate": "Double-leaf chain-link swing gate across the gravel driveway entering the NW corner of the vehicle yard, confirmed in two Street View headings (2024-04). Rail crossing immediately in front of the gate on the access road.",
@@ -1606,6 +2335,28 @@
         },
         "dossierExcerpt": "Glovis America Port Vehicle Processing - Jacksonville FL\nType: Port / Vehicle Import Processing Center\nRoster address: 2064 E 11th St, Jacksonville, FL 32206",
         "mapsUrl": "https://www.google.com/maps/@30.346000,-81.625000,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/16-glovis-america-port-vehicle-processing-jacksonville-fl-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 30.346,
+              "lng": -81.625
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/16-glovis-america-port-vehicle-processing-jacksonville-fl-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 30.346,
+              "lng": -81.625
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "facility": "Roster address 2064 E 11th St is a small office building in a residential block, not the operational yard. The Glovis Jacksonville port vehicle-processing operation runs out of the JAXPORT Talleyrand Marine Terminal auto-import complex ~0.4 mi south. Talleyrand handles auto imports for multiple processors; the audited yard is the auto-import vehicle processing area at ~30.346,-81.625.",
           "truckGate": "Confirmed truck gate in Street View (2022 + 2025): a sliding chain-link gate across the truck lane with a check-in lane, STOP sign and overhead message board. Gate signage references 'Talleyrand' / 'Southeast Toyota'.",
@@ -1701,6 +2452,28 @@
         },
         "dossierExcerpt": "Glovis EV Logistics America - Savannah Integrated Warehouse (Pooler GA)\nType: Distribution Warehouse / Logistics Hub\nRoster address: Pooler, GA 31322 (street address not publicly disclosed)",
         "mapsUrl": "https://www.google.com/maps/@32.088338,-81.262896,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/17-glovis-ev-logistics-america-savannah-integrated-warehouse-pooler-ga-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.088338,
+              "lng": -81.262896
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/hyundai-motor-america/17-glovis-ev-logistics-america-savannah-integrated-warehouse-pooler-ga-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.088338,
+              "lng": -81.262896
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "UNRESOLVED": "Facility could not be located. The Glovis EV Logistics America 'Savannah integrated warehouse' opened only in Q1 2026; the two primary sources (Seoul Economic Daily 2026-04-15, Korea Herald) place it only in 'Savannah, Georgia' with no street address, industrial park, or highway named. The roster itself records 'exact street address not publicly disclosed - city/ZIP only' and the geocode precision is APPROXIMATE (Pooler ZIP 31322 centroid).",
           "geocode": "The roster coordinate 32.088338,-81.262896 lands inside a residential subdivision in eastern Pooler -- definitely not the warehouse. It is a ZIP centroid, not the building.",

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T04:45:16.476Z",
+  "builtAt": "2026-05-21T14:21:44.077Z",
   "account": {
     "slug": "mondelez-international",
     "displayName": "Mondelez International",
@@ -12,7 +12,8 @@
       "droppedStubCount": 0,
       "capHit": false,
       "note": "We audited 22 of an estimated 26 Mondelez NA manufacturing and DC facilities. The 4 not shown are co-manufacturer / contract sites that operate inside other companies’ footprints."
-    }
+    },
+    "featuredSiteId": "07-mondelez-richmond-distribution-center"
   },
   "research": {
     "facility_count": 22,
@@ -131,6 +132,52 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "Roster coordinates (37.495999, -77.352959) landed on/near S Laburnum Ave just\neast of the building. Satellite probes (z16-z18) around that point revealed a\nlarge industrial complex on the west side of S Laburnum Ave. Street View at\n37.49334,-77.35344 (capture 2019-05) shows the entrance driveway with a\n\"Mondelez International\" monument sign and the distinctive dark-clad bakery\nbuilding — positively confirming the facility. Web research corroborates: this\nis Mondelez's Richmond biscuit bakery, ~1 million sq ft, ~650 employees, making\nOreo, Ritz, Nilla, Wheat Thins, Chips Ahoy. Locked center moved ~120m WNW of\nthe roster point to the true building-complex centroid.",
         "mapsUrl": "https://www.google.com/maps/@37.49600,-77.35400,400m/data=!3m1!1e3",
         "tiles": {
@@ -246,6 +293,50 @@
           "scale": false,
           "dropYard": true,
           "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#4",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue spills into traffic",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive.backup",
+              "baselineWaitMs": 1500000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Pass through gate",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
         },
         "dossierExcerpt": "Roster coordinate (41.760327, -87.703165) landed at the residential edge just\nNE of the plant. Satellite probes (z16-17) revealed a very large multi-building\nindustrial complex bordered by dense residential housing on the N/W and a major\nrail corridor on the S. Street View along S Kedzie Ave (panos 2024-2025) shows\nthe multi-story bakery with a red NABISCO sign and a Mondelez monument\nsign at the main entrance — positively confirming the facility. Locked center\nmoved ~330m SW to the building-complex centroid.",
         "mapsUrl": "https://www.google.com/maps/@41.75880,-87.70650,400m/data=!3m1!1e3",
@@ -366,6 +457,42 @@
           "scale": false,
           "dropYard": true,
           "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
         },
         "dossierExcerpt": "Roster coordinate (45.581046, -122.664875) landed on the bakery property.\nSatellite probes (z16-18) revealed a large legacy industrial bakery complex\nbordered by NE Columbia Blvd on the NE and a multi-track rail corridor on the\nSW/S. Web research (OPB, Panjiva, Yelp, Waze) confirms 100 NE Columbia Blvd as\nthe Mondelez/Nabisco Portland bakery producing Oreo, Ritz, and Chips Ahoy. Locked\ncenter on the main building-complex centroid.",
         "mapsUrl": "https://www.google.com/maps/@45.58110,-122.66520,400m/data=!3m1!1e3",
@@ -488,6 +615,52 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "Roster coordinate (41.771784, -88.187766) landed on the bakery property.\nSatellite probes (z16-18) revealed a large multi-building industrial bakery\ncampus with a U-shaped trailer drop yard on the west and flour silos. Web\nresearch (Yelp, Waze, Baking Business) confirms 1555 W Ogden Ave as the\nMondelez/Nabisco Naperville bakery — the sole North America Triscuit plant.\nStreet View confirms a fenced industrial facility with flour silos. Locked\ncenter on the building-complex centroid.",
         "mapsUrl": "https://www.google.com/maps/@41.77140,-88.18800,400m/data=!3m1!1e3",
         "tiles": {
@@ -601,6 +774,42 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Roster coordinate (39.888649, -86.241363) landed directly on the bakery\nbuilding complex. Satellite probes (z16-20) confirmed a single large industrial\nbakery building with an associated trailer drop yard and employee parking, in a\nNW-Indianapolis industrial park. Web research (IBJ, Pepper Construction, Baking\nBusiness) confirms 7575 Georgetown Rd as the Clif Bar Baking Co. of\nIndianapolis — a 185,000 sq ft plant (plus a 24,000 sq ft expansion), ~430\nemployees, opened 2012, fully owned by Clif Bar since 2016. Locked center on the\nbuilding centroid.",
         "mapsUrl": "https://www.google.com/maps/@39.88865,-86.24100,400m/data=!3m1!1e3",
         "tiles": {
@@ -708,6 +917,42 @@
           "scale": false,
           "dropYard": false,
           "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
         },
         "dossierExcerpt": "- Name: Tate's Bake Shop Factory - East Moriches NY\n- Type: Manufacturing - cookie bakery (Mondelez-owned, acquired 2018)\n- Address: 62 Pine St, East Moriches, NY 11940\n- Locked coordinates: 40.81055, -72.76535",
         "mapsUrl": "https://www.google.com/maps/@40.81055,-72.76535,400m/data=!3m1!1e3",
@@ -831,6 +1076,42 @@
           "scale": false,
           "dropYard": true,
           "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
         },
         "dossierExcerpt": "- Name: Mondelez Richmond Distribution Center - Sandston VA\n- Type: Distribution center (3PL-operated, Kenco)\n- Roster address: Airport Drive at SR-895 Interchange, Henrico County (Sandston), VA\n- Resolved address: 953 S. Airport Drive, Sauer Industrial Center, Sandston VA\n- Locked coordinates: 37.47980, -77.33820",
         "mapsUrl": "https://www.google.com/maps/@37.47980,-77.33820,400m/data=!3m1!1e3",
@@ -956,6 +1237,42 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Name: Mondelez Montgomery Sales Distribution Center - Montgomery NY\n- Type: Distribution center / sales warehouse\n- Address: 272 Neelytown Rd, Montgomery, NY 12549\n- Locked coordinates: 41.49400, -74.22360",
         "mapsUrl": "https://www.google.com/maps/@41.49400,-74.22360,400m/data=!3m1!1e3",
         "tiles": {
@@ -1074,6 +1391,42 @@
           "scale": false,
           "dropYard": false,
           "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
         },
         "dossierExcerpt": "- Name: Nabisco Norcross Distribution Center - Norcross GA\n- Type: Distribution center\n- Roster address: Norcross, GA (city-level only)\n- Resolved address: 6300 Brook Hollow Pkwy, Norcross, GA 30071\n- Locked coordinates: 33.92175, -84.21810",
         "mapsUrl": "https://www.google.com/maps/@33.92175,-84.21810,400m/data=!3m1!1e3",
@@ -1196,6 +1549,42 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Name: Nabisco Aurora Sales & Distribution Center - Aurora CO\n- Type: Sales / distribution center\n- Roster address: Aurora, CO 80011 (ZIP-level only)\n- Resolved address: 17689 E 30th Ave, Aurora, CO 80011\n- Locked coordinates: 39.75895, -104.78150",
         "mapsUrl": "https://www.google.com/maps/@39.75895,-104.78150,400m/data=!3m1!1e3",
         "tiles": {
@@ -1309,6 +1698,42 @@
           "scale": false,
           "dropYard": true,
           "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
         },
         "dossierExcerpt": "The roster supplied city-centroid coordinates (42.5826, -114.4286) which fell in\na residential / farm area roughly 5 km northwest of the actual plant. Web\nresearch (Idaho Commerce ground-breaking release, BoiseDev, Magic Valley /\nTimes-News, Twin Falls Chamber) places the Clif Bar bakery on a ~90-acre parcel\nin the Jayco Industrial Park, in the area of **Champlin Road and Eldridge\nAvenue in southeast Twin Falls — street address commonly listed as 3438\nEldridge Ave** (ZIP 83341). The Chobani plant (3450 Kimberly Rd) is the large\n1M+ sq ft white facility immediately to the northwest, consistent with the\nroster note \"near the Chobani plant.\"\n\nSatellite confirmation: the building is the distinctive ~275,000 sq ft Clif Bar\nbakery — an L-shaped plant with a covered dock on its west face, an extensive",
         "mapsUrl": "https://www.google.com/maps/@42.53985,-114.40805,400m/data=!3m1!1e3",
@@ -1425,6 +1850,42 @@
           "scale": false,
           "dropYard": true,
           "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
         },
         "dossierExcerpt": "The roster supplied city-centroid coordinates (40.8015, -72.8743) with no\nstreet address. Web research established that in December 2023 Mondelez moved\nTate's into a newly-constructed warehouse and distribution development in\nShirley; the Precision Innovation Park — a two-building, ~400,000 sq ft\nClass-A logistics park delivered 2023 directly off the Long Island Expressway\n(I-495) in the Brookhaven research/technology park — is the matching\ndevelopment.\n\nPositive confirmation came from Street View (June 2024): a monument sign at the\npark entrance reads **\"TATE'S — PICK UP AND DELIVERIES — 111 Precision Drive —\nENTRANCE.\"** The corrected coordinates point to the large Class-A warehouse on\nthe south side of the LIE service road. (Notably, the roster's supplied\nlongitude, -72.8743, already matched Precision Drive almost exactly — only the",
         "mapsUrl": "https://www.google.com/maps/@40.84720,-72.87170,400m/data=!3m1!1e3",
@@ -1646,6 +2107,50 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "The roster supplied city-centroid coordinates (40.7401, -75.2557) with no street\naddress — ~1 km northeast of the actual facility. Web research resolved the\naddress: Becknell Industrial built a ~100,300 sq ft build-to-suit Nabisco /\nMondelez food-and-beverage distribution warehouse in Tatamy, and the Becknell\nproperty listing, a Foursquare DC listing, and the Mondelez hourly-jobs portal\nall give the branch address as 120 Commerce Lane, Tatamy PA 18085\n(Northampton County, Lehigh Valley; the Becknell page also shows the\nPalmer-Township ZIP 18045).\n\nA Nominatim geocode (40.7362, -75.2619) put the search in the Becknell\nindustrial park; satellite then identified the modern grey warehouse with purple\naccent striping — a build-to-suit DC with a fenced truck/drop yard on its south\nface, matching the documented ~100,300 sq ft Nabisco facility.",
         "mapsUrl": "https://www.google.com/maps/@40.73510,-75.26120,400m/data=!3m1!1e3",
         "tiles": {
@@ -1762,6 +2267,50 @@
           "scale": false,
           "dropYard": true,
           "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
         },
         "dossierExcerpt": "The roster supplied coordinates (41.7405, -88.3506) and the street address\n2380 Sullivan Rd, Aurora IL 60506. The roster coords were ~0.6 km northwest of\nthe building. Web research (Waze \"DHL Mondelez,\" LoopNet, businessyab,\nIllinois-pages) all corroborate 2380 Sullivan Rd as the DHL Supply Chain /\nExel Logistics distribution center serving Mondelez / Kraft Foods — a ~533,232\nsq ft warehouse (~144,112 sq ft of it temperature-controlled) with immediate\nI-88 access. Satellite and Street View confirmed the large warehouse on the\ncorrected coordinates.\n\nOperational note: one real-estate listing flags the building as possibly\navailable / for lease, while other 2025 sources still reference it as\noperational. The current satellite shows a vast but nearly empty truck yard,\nconsistent with reduced operations or a transitional state.",
         "mapsUrl": "https://www.google.com/maps/@41.73550,-88.34700,400m/data=!3m1!1e3",
@@ -1896,6 +2445,52 @@
           "scale": false,
           "dropYard": true,
           "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
         },
         "dossierExcerpt": "### Resolved location\n- Roster supplied: 40.8126, -74.3676 — a city-level centroid that landed\n  in cemetery / open green space roughly 600 m east of the real campus.\n- Resolved: ~40.8120, -74.3738 (100 DeForest Avenue, East Hanover, NJ\n  07936). Confirmed via web research (Mondelez US site, East Hanover\n  Partnership directory, Morris Chamber) plus satellite — the only\n  large-scale industrial complex matching the address corridor.\n- Confidence in location: high.\n\n### Facility type — office vs freight\nThis is both. The East Hanover address is officially Mondelez's North\nAmerica headquarters, but the campus is a large multi-building **industrial\ncomplex** — it houses the Nabisco East Hanover bakery and a major\ndistribution operation. This is a genuine, high-relevance freight facility,",
         "mapsUrl": "https://www.google.com/maps/@40.812,-74.3738,400m/data=!3m1!1e3",
@@ -2201,6 +2796,50 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "### Resolved location\n- Roster supplied: 35.1175, -89.9711 — a downtown-Memphis centroid\n  roughly 16 km NW of the real site.\n- Resolved: ~35.0184, -89.8695 — **5812 Distribution Drive, Memphis, TN\n  38141**, in the SE Memphis (Lamar / Getwell) industrial corridor.\n- How confirmed: Superpages/Yellowpages list \"Nabisco, 5812 Distribution\n  Dr, Memphis TN 38141\"; Shelby County tax-assessor records (via city-data)\n  list the 5812 Distribution Drive parcel owner as MONDELEZ GLOBAL LLC —\n  a strong, independent confirmation. Satellite then matched a fenced\n  distribution warehouse at that point.\n- Confidence in location: high.\n\n### Facility type — office vs freight\nThis is a genuine freight facility — a single-story Nabisco/Mondelez\nsales-distribution warehouse with an office front. Freight relevance is HIGH.",
         "mapsUrl": "https://www.google.com/maps/@35.0184,-89.8695,400m/data=!3m1!1e3",
         "tiles": {
@@ -2321,6 +2960,50 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "Status: RESOLVED — confidence HIGH (re-audit of an earlier low-confidence stub)\n\n### Step 0 — Location\nConfirmed address: 16200 Three Wide Dr, Ste 172, Fort Worth TX 76177 — the\nIDI / Speedway Distribution Center Building C (a ~316,128 SF Class-A\ndistribution building delivered 2018) in the AllianceTexas logistics corridor\nadjacent to Texas Motor Speedway. Google geocode returned a ROOFTOP match at\n`33.0315793, -97.3007312`; satellite confirmed a large completed cross-dock\ndistribution building consistent with the listing. Locked center:\n`33.03158, -97.30073`.\n\n> The earlier stub mislabeled this site \"Garland, TX\" and could not resolve it.\n> It is in Fort Worth — corrected here.\n\n### Steps 1-5 — Audit\n\nBuilding & layout. A long single cross-dock warehouse running roughly\neast-west. Dock banks on both the north and south faces — the north face",
         "mapsUrl": "https://www.google.com/maps/@33.03158,-97.30073,400m/data=!3m1!1e3",
         "tiles": {
@@ -2435,6 +3118,50 @@
           "scale": false,
           "dropYard": true,
           "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
         },
         "dossierExcerpt": "Status: RESOLVED — confidence HIGH (re-audit of an earlier low-confidence stub)\n\n### Step 0 — Location\nConfirmed address: 6903 W Sam Houston Pkwy N, Houston TX 77041 — a\n~105,594 SF industrial distribution building in a corporate park fronting\nBeltway 8 (W Sam Houston Pkwy N) in NW Houston, near the US-290 interchange.\nGoogle geocode returned a ROOFTOP match at `29.870738, -95.565030`. This is a\nmulti-tenant warehouse — Mondelez is one tenant of the building (other\nindustrial tenants / FMCSA-registered carriers are also tied to the address).\nLocked center: `29.87074, -95.56503`.\n\n### Steps 1-5 — Audit\n\nBuilding & layout. A single rectangular warehouse. Dock doors run along\nthe north face under a dock canopy; the south face is a two-story\noffice with landscaped employee/visitor parking and an open, uncontrolled car",
         "mapsUrl": "https://www.google.com/maps/@29.87074,-95.56503,400m/data=!3m1!1e3",

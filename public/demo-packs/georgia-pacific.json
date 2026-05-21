@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T04:40:06.414Z",
+  "builtAt": "2026-05-21T14:21:16.695Z",
   "account": {
     "slug": "georgia-pacific",
     "displayName": "Georgia-Pacific",
@@ -12,7 +12,8 @@
       "droppedStubCount": 0,
       "capHit": true,
       "note": "We audited the 30 largest facilities by throughput. The wider network follows the same archetype distribution."
-    }
+    },
+    "featuredSiteId": "04-gp-broadway-mill-green-bay-wi"
   },
   "research": {
     "facility_count": 150,
@@ -143,8 +144,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "- Roster coords were wrong. Supplied `46.10414, -123.203936` landed in downtown Clatskanie, ~17 km southeast of the mill.\n- Web research (Oregon Forest Industry Directory, gridinfo, topozone) places the GP Wauna Mill on ~1,200 acres adjacent to the Columbia River near Westport, OR (~92326 Taylorville Rd / 92929 Wauna Mill Rd, Clatskanie 97016).\n- Satellite probing confirmed a very large integrated pulp/paper/tissue mill complex. Locked mill core center: 46.1552, -123.4078.\n- Facility profile: fully integrated pulp, papermaking and tissue/towel conversion; ~1,100 employees; ~1,200 tons/day finished product. Consumer Products division; recent $150M paper-machine rebuild.",
         "mapsUrl": "https://www.google.com/maps/@46.1552,-123.4078,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/01-gp-wauna-mill-clatskanie-or-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 46.1552,
+              "lng": -123.4078
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/01-gp-wauna-mill-clatskanie-or-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 46.1552,
+              "lng": -123.4078
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster coords (46.10414,-123.203936) landed in downtown Clatskanie, ~17 km SE of the actual mill. The Wauna Mill is on the Columbia River near Westport OR, ~92326 Taylorville Rd; mill core relocated to 46.1552,-123.4078.",
           "truckGate": "Single ~1 km dedicated access road runs from US-30 through forest to the mill; integrated 1200-acre, 1100-employee mill universally has a controlled security entrance. Gate is internal/deep on the access road, not reachable by Street View panos which only cover US-30.",
@@ -247,8 +316,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "- Roster coords were wrong. Supplied `44.316671, -123.107215` (geocoded from \"31831 Cartney Dr\") landed in open farmland ~8 km southeast of the mill.\n- Web research: the GP Halsey tissue mill is at 30470 American Drive, Halsey OR 97348, co-located with the Cascade Pacific Pulp kraft market-pulp mill (30480 American Dr). EPA FRS facility detail gave a bounding box centered ~44.382, -123.16.\n- Satellite probing confirmed a large integrated pulp/paper mill complex NW of Halsey town. Locked mill core center: 44.3792, -123.1605.\n- Facility profile: integrated kraft pulp + consumer tissue/towel mill; ~250-550 employees; Quilted Northern Ultra Plush; GP has invested $200M+ in paper-machine/converting assets since 2022 ($150M announced 2023).",
         "mapsUrl": "https://www.google.com/maps/@44.3792,-123.1605,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/02-gp-halsey-mill-halsey-or-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 44.3792,
+              "lng": -123.1605
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/02-gp-halsey-mill-halsey-or-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 44.3792,
+              "lng": -123.1605
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster coords (44.316671,-123.107215 / 31831 Cartney Dr) landed in farmland ~8 km SE of the mill. The GP Halsey / Cascade Pacific Pulp mill is at 30470-30480 American Drive, NW of Halsey town. Located via EPA FRS bounding box; mill core locked at 44.3792,-123.1605.",
           "truckGate": "Single dedicated access road off American Drive is the only land route into the operational yard. Integrated pulp+tissue mill (~250-550 employees) is a controlled-access site. The security checkpoint is internal on the access road; Street View covers only public roads and did not reach it.",
@@ -353,8 +490,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "- Roster coords `33.135284, -91.968356` (geocode movedMeters 3) landed at the south edge of the mill complex, near the active finished-goods warehouse and drop yard.\n- Satellite confirmed a very large integrated pulp/paper/tissue mill — the dominant industrial complex above the town of Crossett. Address 100 Georgia-Pacific Dr, Crossett AR 71635 confirmed.\n- Mill core re-centered to 33.1395, -91.9725.\n- Facility profile: one of GP's flagship Southern mills — pulp, paper and Angel Soft tissue; recent ~$90M tissue expansion. The mill is the economic anchor of the town.",
         "mapsUrl": "https://www.google.com/maps/@33.1395,-91.9725,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/03-gp-crossett-mill-crossett-ar-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 33.1395,
+              "lng": -91.9725
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/03-gp-crossett-mill-crossett-ar-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 33.1395,
+              "lng": -91.9725
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster coords (33.135284,-91.968356, geocode movedMeters 3) landed at the south edge of the mill complex near the active warehouse/drop yard. Mill core re-centered to 33.1395,-91.9725. Address 100 Georgia-Pacific Dr, Crossett AR confirmed.",
           "truckGate": "Property is fully fenced — continuous chain-link perimeter fence clearly visible in Street View (Oct 2024) along the south side. The warehouse drop yard is entered via a driveway that crosses the rail line into the fenced yard with a checkpoint structure; large GP mill is controlled-access.",
@@ -472,8 +677,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "- Roster coords `44.49271, -88.034475` (geocode ROOFTOP, movedMeters 222) sit within the mill core on a peninsula along the Fox River. Address 1919 S Broadway, Green Bay WI 54304 confirmed.\n- Satellite confirmed a very large tissue/towel mill complex filling the peninsula between S Broadway / a rail line (west) and the Fox River (east). Mill core retained at the given coords.\n- Facility profile: GP Consumer Products tissue/towel mill; one of the company's major converting/distribution sites.",
         "mapsUrl": "https://www.google.com/maps/@44.49271,-88.034475,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/04-gp-broadway-mill-green-bay-wi-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 44.49271,
+              "lng": -88.034475
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/04-gp-broadway-mill-green-bay-wi-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 44.49271,
+              "lng": -88.034475
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster coords (44.49271,-88.034475, ROOFTOP, movedMeters 222) sit within the mill core on a peninsula along the Fox River. Address 1919 S Broadway, Green Bay WI confirmed. Mill core retained at the given coords.",
           "truckGate": "Large urban tissue mill bounded by S Broadway / a rail line (W) and the Fox River (E). Main truck entrance is off S Broadway near an admin/office building at the NW intersection; the property is a controlled industrial campus. Internal roads have Street View coverage but the public-road perimeter entry is gated/checkpointed.",
@@ -581,8 +854,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "- Roster coords were wrong. Supplied `35.762459, -95.403211` (geocoded from \"801 N 32nd St\") landed in central Muskogee, ~9 km NW of the mill.\n- Web research: the GP Muskogee bath-tissue/towel/napkin mill is a 640-acre complex along the McClellan-Kerr Arkansas River Navigation System, SE of the city; 700+ employees; largest private employer in Muskogee; produces Sparkle and away-from-home tissue.\n- Satellite probing confirmed the large mill complex along the Arkansas River. Locked mill core: 35.7345, -95.2985.",
         "mapsUrl": "https://www.google.com/maps/@35.7345,-95.2985,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/05-gp-muskogee-mill-muskogee-ok-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 35.7345,
+              "lng": -95.2985
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/05-gp-muskogee-mill-muskogee-ok-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 35.7345,
+              "lng": -95.2985
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster coords (35.762459,-95.403211 / 801 N 32nd St) landed in central Muskogee ~9 km NW of the mill. The GP Muskogee tissue mill is a 640-acre complex along the McClellan-Kerr Arkansas River Navigation System, SE of the city. Mill core located via web research + satellite; locked at 35.7345,-95.2985.",
           "truckGate": "POSITIVELY CONFIRMED in Street View (Oct 2024): main entrance driveway off the public road with a 'Georgia-Pacific Muskogee Mill' sign and a chain-link perimeter fence. Controlled entry.",
@@ -690,8 +1031,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "- Locked center: 32.3315, -81.2025\n- Address: 393 Fort Howard Rd, Rincon, GA 31326 (roster lists 115 Fort Howard Rd; mill office is 393)\n- The roster point (32.333323, -81.21165) sat in farmland/woods ~1 km WNW of the mill.\n  Probing satellite east from the roster point revealed a large industrial complex.\n  Confirmed as the GP Savannah River Mill — a major tissue/towel manufacturing\n  campus built in 1986 by Fort Howard Paper, acquired by GP in 2002, ~1,000\n  employees, producing toilet paper, paper towels and napkins largely from\n  recycled fiber.",
         "mapsUrl": "https://www.google.com/maps/@32.3315,-81.2025,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/06-gp-savannah-river-mill-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.3315,
+              "lng": -81.2025
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/06-gp-savannah-river-mill-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.3315,
+              "lng": -81.2025
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Street View on the private entrance road shows a multi-lane checkpoint canopy ~200m inside the property line with trucks staged; chain-link perimeter fencing runs along the access road; GP entrance sign at the public-road junction.",
           "guardShack": "Checkpoint canopy spans the entry lanes with an adjacent booth structure visible in Street View; consistent with a staffed gatehouse at a 1000-employee mill.",
@@ -795,8 +1204,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "- Locked center: 32.2235, -88.0290\n- Address: 7530 Highway 114, Pennington, AL 36916\n- The roster point (32.223373, -88.029265, ROOFTOP) landed directly on the mill\n  complex. Step-0 satellite confirmed a large pulp/paper/paperboard mill on the\n  Tombigbee River — process buildings, paper machines, a ~750 m distribution\n  warehouse, power plant, rail yard, and an extensive settling-pond complex.",
         "mapsUrl": "https://www.google.com/maps/@32.2235,-88.029,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/07-gp-naheola-mill-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.2235,
+              "lng": -88.029
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/07-gp-naheola-mill-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.2235,
+              "lng": -88.029
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Single controlled access road off Highway 114; chain-link perimeter fencing visible all around the campus in Street View (Oct 2025); GP welcome monument sign at the road junction; rail crossing en route to the gate.",
           "guardShack": "No frontal booth view obtained in Street View, but a fully-fenced 1000+ employee mill with a single controlled access road runs a staffed gatehouse by standard; flagged uncertain.",
@@ -896,8 +1373,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Locked center: 44.7112, -73.4525\n- Address: Mill on Margaret Street, City of Plattsburgh, NY 12901 (roster\n  lists 1 Georgia-Pacific Rd; web sources give 327 Margaret St)\n- The roster point (44.710302, -73.451029, ROOFTOP) landed on the mill. Step-0\n  satellite confirmed a large (~1 million sq ft) tissue mill on the west shore\n  of Lake Champlain — the former Vanity Fair Paper Mill, GP-owned since 1963,\n  producing Quilted Northern bath tissue.",
         "mapsUrl": "https://www.google.com/maps/@44.7112,-73.4525,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/08-gp-plattsburgh-mill-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 44.7112,
+              "lng": -73.4525
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/08-gp-plattsburgh-mill-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 44.7112,
+              "lng": -73.4525
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Street View (Oct 2022) shows a chain-link gate with green privacy slats labeled 'GATE 1' on a swing/sliding gate on the SW side of the property; trailers staged immediately inside the fence.",
           "guardShack": "No staffed guard booth visible at GATE 1 — it is an unattended labeled swing gate; access appears to be remote/badge-based, so remoteGs is true.",
@@ -1002,8 +1545,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "- Locked center: 31.5800, -87.4830\n- Address: 2830 Hornady Drive, Monroeville, AL 36460 — at Claiborne in\n  Monroe County, on the east bank of the Alabama River, off Highway 84 /\n  Lena Landegger Hwy.\n- The roster point (31.515011, -87.494842, GEOMETRIC_CENTER) was ~7 km SSW of\n  the actual mill, landing in rural farmland/forest near Perdue Hill town.\n  Step-0 satellite + web research (the mill is at Claiborne, not Perdue Hill\n  proper) located the large pulp mill complex on the river. Confirmed as the\n  Alabama River Cellulose mill — operating since 1978, ~1 million tons/yr of\n  fluff and market pulp, ~3,000 direct/indirect jobs, subject of GP's $800M\n  modernization (2025-2027) to become the largest softwood pulp mill in the US.",
         "mapsUrl": "https://www.google.com/maps/@31.58,-87.483,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/09-gp-alabama-river-cellulose-mill-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 31.58,
+              "lng": -87.483
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/09-gp-alabama-river-cellulose-mill-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 31.58,
+              "lng": -87.483
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Single controlled access road off Highway 84 / Lena Landegger Hwy entering an isolated industrial mill; the long forest-buffered private road forms a controlled approach.",
           "guardShack": "No Street View available (mill too remote, ZERO_RESULTS) - guard booth not directly confirmed; a 3,000-job pulp mill, one of the largest in North America, runs a staffed gatehouse by standard. Flagged uncertain.",
@@ -1112,8 +1723,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "- Locked center: 31.1760, -81.5120\n- Address: Mill on the Turtle River, 9th Street West area, Brunswick, GA\n  31521 (roster lists 100 Pulp Plant Rd).\n- The roster point (31.229422, -81.512762, GEOMETRIC_CENTER) was ~6 km N of the\n  actual mill, in a residential/commercial part of Brunswick. Step-0 satellite\n  + web research (mill is on the Turtle River) located the large pulp mill\n  complex on the riverfront SW of downtown Brunswick. Confirmed as the Brunswick\n  Cellulose mill — operating since 1937 (the Southeast's first pulp mill, as\n  Brunswick Pulp & Paper); integrated bleached-kraft pulp mill making fluff pulp\n  for diapers and hygiene products; ~600-650 employees; processes ~1,000\n  truckloads of yellow pine per day; subject of a $200M bio-refinery upgrade.",
         "mapsUrl": "https://www.google.com/maps/@31.176,-81.512,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/10-gp-brunswick-cellulose-mill-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 31.176,
+              "lng": -81.512
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/10-gp-brunswick-cellulose-mill-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 31.176,
+              "lng": -81.512
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Large bleached-kraft pulp mill receiving ~1,000 truckloads of pine logs per day; single controlled access road off the city street network; container/trailer yard is fenced with chain-link and privacy screening (Street View, Nov 2024).",
           "guardShack": "No frontal booth view obtained (no Street View on the private mill road), but a 600-employee pulp mill handling ~1,000 trucks/day operates a staffed gatehouse by standard. Flagged uncertain.",
@@ -1212,8 +1891,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Roster point: 31.218882, -89.052055 (\"358 Leaf River Rd\") — geocoded GEOMETRIC_CENTER.\n- Problem: The roster coordinate landed on a small rural residential property (single house, gravel drive) ~2.7 km south of the mill. The \"358 Leaf River Rd\" address is the mailing/entrance-road address, not the building footprint.\n- Resolution: Web search (Georgia-Pacific news, EPA ENERGY STAR, Forest Products Locator) confirmed the Leaf River Cellulose mill sits north of New Augusta. Satellite probing from z14 down located the sprawling mill complex.\n- Locked center: ~31.2432, -89.0455 (pulp-processing core). The developed mill runs roughly 31.236–31.250 N/S along a north–south access road off Leaf River Rd.\n- Street View (captured 2025-03) along the west boundary road positively confirmed the facility: green-clad pulp mill buildings, recovery boiler stacks with steam plumes, digesters, chemical tank farm, cooling towers, and a finished-goods warehouse — fully consistent with a wood-cellulose/dissolving-pulp mill (~300 employees per GP).",
         "mapsUrl": "https://www.google.com/maps/@31.2432,-89.0455,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/11-gp-leaf-river-cellulose-mill-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 31.2432,
+              "lng": -89.0455
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/11-gp-leaf-river-cellulose-mill-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 31.2432,
+              "lng": -89.0455
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Geocoded roster point (31.2189,-89.0521) was a rural residential property ~2.7 km south of the mill; mill core relocated via satellite + web research to ~31.2432,-89.0455.",
           "truckGate": "Mill is fully enclosed by chain-link perimeter fencing (clearly visible in Street View along the west boundary road). Main controlled access road enters the fenced property from the intersection near the admin/control building at ~31.2438,-89.0473.",
@@ -1312,8 +2057,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Roster point: 35.148581, -90.051896 (\"100 N B St\") — geocoded APPROXIMATE, flagged 1952 m moved. It landed in downtown Memphis — clearly wrong.\n- Resolution: Web research (Greater Memphis Chamber, Waze, GP closure announcements, Tennessee Encyclopedia) established:\n  - The cellulose mill is at 920 Scott Road, in the Binghampton neighborhood.\n  - The 1001 Tillman St address is a separate facility — the GP Cellulose Technology & Innovation Center (an office building, ~22 staff).\n  - The site is the former Buckeye Cellulose / Buckeye Technologies cotton-linter pulp plant, acquired by GP in 2013.\n- Satellite probing located the large fenced multi-building mill complex at ~35.1565, -89.9620, bounded by a rail corridor (west) and city streets/residential (east, south).",
         "mapsUrl": "https://www.google.com/maps/@35.1565,-89.9620,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/12-gp-memphis-cellulose-mill-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 35.1565,
+              "lng": -89.962
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/12-gp-memphis-cellulose-mill-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 35.1565,
+              "lng": -89.962
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster geocode (35.1486,-90.0519) landed in downtown Memphis, ~5 km off (APPROXIMATE, 1952 m flagged). Web research resolved the mill to 920 Scott Rd in the Binghampton neighborhood; the 1001 Tillman St address is the separate GP Cellulose Technology & Innovation Center office. Mill complex located via satellite at ~35.1565,-89.9620.",
           "facility": "Large multi-building urban industrial cellulose mill - the former Buckeye Cellulose / Buckeye Technologies cotton-linter pulp plant, acquired by GP in 2013. GP announced permanent closure of the Memphis Cellulose mill in October 2025 (~130 layoffs).",
@@ -1416,8 +2227,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "- Roster point: 31.105178, -87.072192 (\"200 Hwy 41 N\") — geocoded APPROXIMATE (19 m flagged, but the point actually sat near the Brewton town center, ~1 km west of the mill).\n- Resolution: Wide satellite (z15) immediately showed the large industrial mill complex east of the town center. Web research (GP Bleached Board, Project Phoenix, Smurfit-Stone acquisition coverage) confirmed the Brewton containerboard/bleached-board mill.\n- Locked center: ~31.1068, -87.0658 (mill processing/warehouse core). The mill complex runs roughly 31.102–31.112 N along a rail corridor, bounded by residential/town to the west, forest to the north and east, and a pond/river to the south.\n- Street View (captured 2023-05 and 2025-10) along the western mill roads positively confirmed the facility: paper-roll outdoor storage stacks, large shipping warehouses with rail cars backed in, woodyard, and the guarded mill entrance.",
         "mapsUrl": "https://www.google.com/maps/@31.1068,-87.0658,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/13-gp-brewton-mill-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 31.1068,
+              "lng": -87.0658
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/13-gp-brewton-mill-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 31.1068,
+              "lng": -87.0658
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster geocode (31.1052,-87.0722) sat near the Brewton town center, ~1 km west of the mill (APPROXIMATE, 19 m flagged but actually mislocated to downtown). Mill core relocated via satellite to ~31.1068,-87.0658.",
           "facility": "Integrated white-top linerboard and solid-bleached-sulfate (SBS) paperboard mill. Former Smurfit-Stone mill, acquired by GP in 2007; ~400+ employees; underwent the $400M 'Project Phoenix' modernization; first U.S. integrated paper mill to earn EPA ENERGY STAR (2021).",
@@ -1527,8 +2406,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "The roster geocode (31.5795, -90.0394; address \"1715 Highway 84 E\") placed the\nfacility on Highway 84 in open pine forest roughly 5.6 km SSE of the real mill —\na city-level geocode error, not a usable pin. Web research (Global Energy Monitor\n\"Monticello Paper power station\", CLUI Land Use Database) returned exact\ncoordinates 31.6282, -90.0815. Satellite imagery there shows an unmistakable\nlarge integrated paper mill on Na Sandifer Hwy (Old Highway 84), on the Pearl\nRiver about one mile east of Monticello in Lawrence County, MS. Center locked\nthere.\n\nThe facility is Georgia-Pacific's Monticello Mill, an integrated kraft pulp and\nlinerboard (containerboard) mill. In 2024 it became one of few North American\nfacilities to exceed 1 million tons of annual product. A $91M upgrade was\nannounced in 2023 (Infor Phase 2 per the account dossier).",
         "mapsUrl": "https://www.google.com/maps/@31.6282,-90.0815,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/14-gp-monticello-mill-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 31.6282,
+              "lng": -90.0815
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/14-gp-monticello-mill-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 31.6282,
+              "lng": -90.0815
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster geocode (31.5795,-90.0394, address 1715 Highway 84 E) sat on Highway 84 in open forest ~5.6 km SSE of the actual mill - a city-level geocode error. Mill core relocated via CLUI/Global Energy Monitor coordinates and satellite to ~31.6282,-90.0815, on Na Sandifer Hwy (Old Highway 84) along the Pearl River, ~1 mile east of Monticello, Lawrence County MS.",
           "facility": "Georgia-Pacific Monticello Mill - an integrated kraft pulp and linerboard (containerboard) mill. In 2024 it became one of few North American facilities to produce over 1 million tons of product. Subject of a $91M upgrade announced 2023 (Infor Phase 2 per dossier). Large campus: paper machine buildings, woodyard with two radial log/chip storage piles, wastewater treatment clarifiers and ponds, finished-goods shipping warehouse, rail yard, support structures.",
@@ -1644,8 +2591,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "The roster geocode (44.60417, -123.935516; address \"1 Butler Bridge Rd\") landed\nin the Yaquina River and wastewater-treatment-pond area south of the real mill —\nimprecise, not on a building. Probing wider (z15) immediately revealed the\nunmistakable Georgia-Pacific Toledo Mill complex on a peninsula on the east bank\nof the Yaquina River, on the west side of the town of Toledo, Oregon. Web\nresearch confirmed the address as 1400 SE Butler Bridge Rd, Toledo, OR 97391 and\nthe facility as GP's integrated kraft pulp and linerboard mill, operating since\n1957. Center locked at ~44.6145, -123.9370.\n\nThe mill makes linerboard for corrugated boxes from virgin wood chips and\nrecycled fiber; GP also runs its Juno recycling-technology facility on-site. It\nis the Infor Phase 2 dossier facility.",
         "mapsUrl": "https://www.google.com/maps/@44.6145,-123.9370,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/15-gp-toledo-mill-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 44.6145,
+              "lng": -123.937
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/15-gp-toledo-mill-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 44.6145,
+              "lng": -123.937
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster geocode (44.60417,-123.935516, address 1 Butler Bridge Rd) sat in the Yaquina River / treatment-pond area south of the actual mill - imprecise. Mill relocated via satellite and web research to the GP Toledo Mill complex on a peninsula on the east bank of the Yaquina River, ~44.6145,-123.9370. Confirmed address: 1400 SE Butler Bridge Rd, Toledo, OR 97391.",
           "facility": "Georgia-Pacific Toledo Mill - an integrated kraft pulp and linerboard (containerboard) mill operating since 1957; makes linerboard for corrugated boxes from virgin wood chips and recycled fiber. GP also operates the Juno recycling technology facility on-site. Subject of the Infor Phase 2 dossier item. Compact, water-bound campus: paper-machine and process buildings, chemical recovery, large chip pile, woodyard with conveyors, finished-goods warehouses along the riverfront, trailer drop yards, rail yard, and a private Butler Bridge linking to west-bank facilities (additional warehouses / log storage).",
@@ -1754,8 +2769,75 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#8",
+          "steps": [
+            {
+              "step": "Arrive at gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Stop at scale house",
+              "geofenceTarget": "staging",
+              "durationMs": 90000,
+              "narrationKey": "gate.scale",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4950000,
+          "totalYnsMs": 2820000
+        },
         "dossierExcerpt": "- Coordinates: 37.5283, -79.3540 (mill core)\n- Address: 10097 / 9909 Lee Jackson Hwy (US-501), Big Island, VA 24526\n- Type: Containerboard pulp/paper mill (Georgia-Pacific Packaging & Cellulose)\n- Roster coordinates (37.52707, -79.35375) landed inside the complex; confirmed and refined via satellite. The mill is a ~1 km-long integrated facility on the west bank of the James River, east of the Norfolk Southern rail line and US-501.\n- Web research corroborates: Big Island Paper Mill is Virginia's oldest continuously operating business (125+ years), a containerboard mill, EPA Energy Star certified 2024. CLUI and Forest Products Locator both list it as the Georgia-Pacific Big Island Mill.",
         "mapsUrl": "https://www.google.com/maps/@37.5283,-79.3540,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/16-gp-big-island-mill-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 37.5283,
+              "lng": -79.354
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/16-gp-big-island-mill-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 37.5283,
+              "lng": -79.354
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "facility": "Integrated containerboard pulp/paper mill on the west bank of the James River, Big Island VA — Virginia's oldest continuously operating business (125+ years). Confirmed via address (10097/9909 Lee Jackson Hwy), GP locations page, and satellite (mill building, woodyard with chip piles, clarifiers, wastewater treatment ponds, chemical storage tanks).",
           "truckGate": "Mill is a fully fenced, self-contained complex; access road crosses the Norfolk Southern rail line off Lee Jackson Hwy. A controlled gated entrance is standard for a mill of this scale and age; not directly resolvable in Street View due to roadside tree cover and the rail buffer — medium confidence.",
@@ -1856,8 +2938,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
         "dossierExcerpt": "- Coordinates: 29.6860, -81.6575 (mill core)\n- Address: 215 County Road 216 / US-17 corridor, ~4 mi NE of downtown Palatka, FL 32177\n- Type: Integrated kraft pulp/paper mill (also produces tissue and paper; GP Packaging & Cellulose Kraft division)\n- The roster coordinate (29.650032, -81.647668) landed in residential downtown Palatka — ~4 km off. Web research placed the mill 4 mi NE of downtown on the St. Johns River. Satellite at 29.685, -81.658 revealed the large industrial complex on the west bank of the St. Johns River.\n- Web corroboration: CLUI lists \"Palatka Paper Mill\"; Forest Products Locator lists \"Georgia-Pacific Palatka Mill\"; GP announced an $83M expansion (Apr 2025) and a $400M tissue machine project at this site.",
         "mapsUrl": "https://www.google.com/maps/@29.6860,-81.6575,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/17-gp-palatka-mill-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 29.686,
+              "lng": -81.6575
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/17-gp-palatka-mill-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 29.686,
+              "lng": -81.6575
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "facility": "Large integrated kraft pulp/paper mill on the west bank of the St. Johns River, ~4 mi NE of downtown Palatka FL. Roster coordinate (29.650032, -81.647668) was in downtown Palatka, ~4 km off. Relocated via web research (215 County Road 216 / US-17 corridor, NE of Palatka) and satellite to the actual mill complex. Confirmed: kraft mill with woodyard, wood storage sheds, paper machines, rail yard, large distribution warehouse.",
           "truckGate": "Mill is a fully fenced ~316-acre kraft mill complex; access road branches off US-17 with a railroad crossing into the property. A controlled, guarded truck entrance is standard for a paper mill of this scale (700+ employees, $400M tissue machine + $83M expansion). The gate structure is set behind a tree buffer and not directly resolvable in Street View — medium confidence.",
@@ -1958,6 +3108,28 @@
         },
         "dossierExcerpt": "- Coordinates: 35.6276, -88.9168 (building center)\n- Address: 65 Cardinal Drive, Jackson, TN 38301 (west Jackson, near I-40 and TN-223 / Christmasville Road)\n- Type: Dixie tableware manufacturing/converting plant (premium paper plates, bowls, platters, deep dishes)\n- The roster coordinate (35.551418, -89.184861) landed ~13 km SE of the plant in farmland — wrong. Web research (GP press releases, dixiejackson.com) gave the address 65 Cardinal Drive, \"on 241 acres in west Jackson near I-40 and state Highway 223.\" Satellite probing of west Jackson found the very large new building; Feb-2026 Street View confirmed it carries the Georgia-Pacific logo on its wall.\n- Web corroboration: $425M greenfield investment, GP's first new Dixie greenfield plant since Bowling Green KY (1991); 900,000 sq ft; site clearing Nov 2022, production June 2024, ribbon-cut Oct 2024; ~220 jobs.",
         "mapsUrl": "https://www.google.com/maps/@35.6276,-88.9168,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/18-gp-dixie-tableware-plant-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 35.6276,
+              "lng": -88.9168
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/18-gp-dixie-tableware-plant-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 35.6276,
+              "lng": -88.9168
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "facility": "New $425M greenfield Dixie tableware manufacturing plant (paper plates/bowls/platters), 900,000 sq ft on 241 acres at 65 Cardinal Drive, west Jackson TN, near I-40 and TN-223. Production started June 2024; ribbon-cut Oct 2024. Roster coordinate (35.551418, -89.184861) was ~13 km SE in farmland; relocated via web research (65 Cardinal Drive, near I-40/Hwy 223) and confirmed in satellite + Feb-2026 Street View showing the building with the Georgia-Pacific logo.",
           "imagery": "Maxar satellite of this area is from the construction era (~2023) — the building roof is visible but the truck dock yard not fully built. Feb-2026 Street View confirms the operational plant: large single building, full perimeter chain-link fence, dock apron with trailers on the east side, employee parking on the west.",
@@ -2059,8 +3231,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Coordinates: 38.0807, -84.5258 (plant complex center)\n- Address: 451 Harbison Road, Lexington, KY 40511 (NW Lexington industrial district)\n- Type: Dixie cup manufacturing / converting plant\n- The roster coordinate (38.104086, -84.506349) landed ~3 km NE in a residential subdivision — wrong. The roster address \"1900 Spurr Road\" appears imprecise; Spurr Road is a nearby NW-Lexington industrial street but the Dixie Cup plant proper is at 451 Harbison Road. Relocated via the iconic Dixie Cup water tower (38.080038, -84.526746) and confirmed by Georgia-Pacific signage visible in Street View at the plant entrance.\n- Web corroboration: Dixie Cup Corporation moved to Lexington in 1958; now Georgia-Pacific. After GP closed the Easton PA plant in 2021, this became the consolidated sole Dixie cup production site; ~50 jobs added in the expansion.",
         "mapsUrl": "https://www.google.com/maps/@38.0807,-84.5258,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/19-gp-dixie-cup-plant-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 38.0807,
+              "lng": -84.5258
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/19-gp-dixie-cup-plant-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 38.0807,
+              "lng": -84.5258
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "facility": "Georgia-Pacific Dixie Cup manufacturing plant, Lexington KY — the consolidated sole Dixie cup production site after the Easton PA plant closed (2021). Iconic Dixie Cup water tower on the property. Located in the NW Lexington industrial district. Roster coordinate (38.104086, -84.506349) was ~3 km NE in a residential subdivision; the roster address '1900 Spurr Road' appears imprecise — the plant is at 451 Harbison Road (38.080038, -84.526746). Relocated and confirmed via the water tower, the Georgia-Pacific signage seen in Street View, and the large converting-plant complex.",
           "truckGate": "Property is fully fenced — black ornamental metal fence along the office/parking frontage and chain-link around the dock yard, with a sliding gate visible at one fence opening (Street View). The truck driveway enters off Harbison Road into the fenced dock yard. Controlled access — called true.",
@@ -2152,8 +3390,66 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Coordinates: 35.8122, -90.6390 (building center)\n- Address: 4708 Krueger Drive, Jonesboro, AR 72401 (Jonesboro Industrial Park, near the municipal airport)\n- Type: Thermoformed packaging manufacturing / converting plant\n- The roster coordinate (35.891617, -90.658333) landed ~9 km NW of the plant in farmland — wrong. Web research gave the address 4708 Krueger Drive and a GPS reference of 35.8135 / -90.6392. Satellite probing of the Krueger Drive industrial corridor found the plant; Jan-2026 Street View confirmed it — an \"Anchor Packaging - NOW HIRING\" sign with the Anchor logo on the Krueger Drive frontage, plus the blue Anchor plant sign at the east entrance.\n- Web corroboration: Anchor Packaging (formerly St. Louis-based) operates this Jonesboro plant; acquired by Georgia-Pacific in October 2025 — a net-new facility for GP yard operations.",
         "mapsUrl": "https://www.google.com/maps/@35.8122,-90.6390,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/20-gp-anchor-packaging-plant-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 35.8122,
+              "lng": -90.639
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/20-gp-anchor-packaging-plant-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 35.8122,
+              "lng": -90.639
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "facility": "Anchor Packaging thermoformed-packaging manufacturing plant at 4708 Krueger Drive, Jonesboro AR — acquired by Georgia-Pacific in Oct 2025 (net-new yard ops). Roster coordinate (35.891617, -90.658333) was ~9 km NW in farmland; relocated via web research (4708 Krueger Drive, GPS 35.8135/-90.6392) and confirmed by the 'Anchor Packaging - NOW HIRING' sign with the Anchor logo and the blue Anchor plant sign, both visible in Jan-2026 Street View.",
           "truckGate": "No controlled truck entrance. The truck driveway enters directly off Krueger Drive as an open driveway — no barrier arm, no sliding/swing gate, no perimeter gate, no guard booth. The plant frontage (employee parking, office) is openly accessible from the public road. Typical light-industrial converting plant in the Jonesboro Industrial Park. truckGate false, guardShack false, remoteGs false.",
@@ -2244,8 +3540,66 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Type: Thermoformed / Cling Film Packaging Plant\nResolved coordinates: 36.08400, -90.46650 (building centroid)\nConfidence: High\n\n### Location resolution\nThe roster's geocoded point (36.052562, -90.48868, \"APPROXIMATE\") landed in\ndowntown Paragould, ~4 km SW of the actual plant — wrong. Web research\nidentified Anchor Packaging's Paragould manufacturing plant at **2211 N 12th\nAve** (a separate distribution office exists at 1600 Jones Rd). Geocoding the\nstreet address put the building near 36.0857,-90.4671. Satellite probes\nconfirmed a large (~310,000+ sq ft, expanded with a 90,000 sq ft addition in\n2022) sheet-extrusion/thermoforming plant on the NE edge of Paragould.\nBuilding centroid locked at 36.0840,-90.4665.\n\n### Key views\n- Wide z16/z17: Single dominant manufacturing building with a separate",
         "mapsUrl": "https://www.google.com/maps/@36.08400,-90.46650,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/21-gp-anchor-packaging-plant-paragould-ar-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 36.084,
+              "lng": -90.4665
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/21-gp-anchor-packaging-plant-paragould-ar-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 36.084,
+              "lng": -90.4665
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Resolved to Anchor Packaging plant at 2211 N 12th Ave, Paragould AR (~36.0857,-90.4671 per geocode of street address); the roster's geocoded point (36.0526,-90.4887) was ~4 km SW in downtown Paragould and wrong. Building centroid locked at 36.0840,-90.4665.",
           "truckGate": "No barrier arm, sliding gate, or checkpoint where the access driveway meets the public road (Greene County Rd / N 12th Ave extension). Street View 2025-05 shows an open private drive with only a 'Speed Limit 15' sign; site has no perimeter fence along the road. False.",
@@ -2332,8 +3686,66 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Type: Packaging / Film Plant\nResolved coordinates: 42.71205, -89.00955 (building centroid)\nConfidence: High\n\n### Location resolution\nThe roster's geocoded point (42.644223, -88.960536, \"APPROXIMATE\",\nmovedMeters 565) landed in open farmland ~9 km SSE of the real plant — wrong.\nWeb research established that the Janesville facility is the former\nPanoramic Inc. plant — acquired by Anchor Packaging, which Georgia-Pacific\nin turn acquired (completed Oct 2025). Address: 1500 N Parker Drive, in\nthe Arrow Park industrial complex (the historic Parker Pen \"Arrow Park\"\nsite) on the north edge of Janesville off Highway 51. Satellite and Street\nView confirmed a brick 2-story office with attached warehouse wings.\nBuilding centroid locked at 42.71205,-89.00955.\n\n### Key views\n- Wide z15/z17: Arrow Park industrial park with several buildings; the",
         "mapsUrl": "https://www.google.com/maps/@42.71205,-89.00955,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/22-gp-anchor-packaging-plant-janesville-wi-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 42.71205,
+              "lng": -89.00955
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/22-gp-anchor-packaging-plant-janesville-wi-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 42.71205,
+              "lng": -89.00955
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Resolved to the former Panoramic Inc. plant (acquired by Anchor Packaging, which Georgia-Pacific acquired Oct 2025) at 1500 N Parker Dr, Janesville WI, in the Arrow Park industrial complex (former Parker Pen site). The roster's geocoded point (42.6442,-88.9605) was ~9 km SSE in open farmland and wrong. Building centroid locked at 42.71205,-89.00955.",
           "truckGate": "Open industrial-park facility. North Parker Drive has no gate or fence; the building's parking lots and dock-side driveways are open with no barrier arm, sliding gate, or checkpoint. Confirmed in Street View 2019-08 from multiple headings. False.",
@@ -2429,6 +3841,28 @@
         },
         "dossierExcerpt": "Type: Lumber Mill\nResolved coordinates: 33.44400, -86.06000 (mill complex centroid)\nConfidence: High\n\n### Location resolution\nThe roster's geocoded point (33.435942, -86.105805, \"APPROXIMATE\",\nmovedMeters 11764) landed in downtown Talladega — ~4.6 km W of the real\nmill, badly wrong. Web research identified GP's Talladega lumber facility at\n400 Ironaton Cutoff Rd (~33.44459, -86.059685). The $100M, 300,000 sq ft\nstate-of-the-art lumber plant started production in late 2018; it receives\n~150 log trucks/day and produces ~230M board feet/year. Satellite confirmed\na sawmill complex with log yard and lumber storage. Mill centroid locked at\n33.44400, -86.06000.\n\n### Key views\n- Wide z15/z16: Sawmill complex — connected mill buildings, kilns, large\n  log yard (stacked logs visible) to the SE, lumber storage yard to the W,",
         "mapsUrl": "https://www.google.com/maps/@33.44400,-86.06000,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/23-gp-wood-products-talladega-lumber-mill-talladega-al-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 33.444,
+              "lng": -86.06
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/23-gp-wood-products-talladega-lumber-mill-talladega-al-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 33.444,
+              "lng": -86.06
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Resolved to GP's Talladega lumber facility at 400 Ironaton Cutoff Rd, Talladega AL (~33.44459,-86.059685). The roster's geocoded point (33.4359,-86.1058, APPROXIMATE, movedMeters 11764) was ~4.6 km W in downtown Talladega and wrong. Mill complex centroid locked at 33.44400,-86.06000.",
           "truckGate": "Site has a continuous chain-link perimeter fence (confirmed all around in Street View 2025-11) with a single controlled entrance driveway off Ironaton Cutoff Rd. Loaded log trucks queue internally at a check-in. A barrier arm was not clearly resolved but the fenced perimeter with one defined truck entrance qualifies as a controlled truck gate.",
@@ -2527,6 +3961,28 @@
         },
         "dossierExcerpt": "Type: Plywood Plant\nResolved coordinates: 33.61650, -83.42200 (plant building centroid)\nConfidence: High\n\n### Location resolution\nThe roster's geocoded point (33.577493, -83.476782, RANGE_INTERPOLATED of\n\"1310 Eatonton Rd\") landed in downtown Madison — ~5 km SW of the real plant,\nwrong. Web research established the plant address as 1400 Woodkraft Rd\n(off Hwy 278 NE of Madison). Coordinates were cross-checked against ejmap.org\nand the Forest Products Locator (both ~33.611,-83.431, adjacent to the\nplant). Satellite probing located the large plywood plant with its log yard\nat ~33.6165,-83.4220, where the building centroid is locked.\n\n### Key views\n- Wide z16/z17: A single very large plant building, a big log yard\n  (stacked logs) on the NE/E side, plywood-bundle storage and a rail",
         "mapsUrl": "https://www.google.com/maps/@33.61650,-83.42200,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/24-gp-madison-plywood-plant-madison-ga-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 33.6165,
+              "lng": -83.422
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/24-gp-madison-plywood-plant-madison-ga-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 33.6165,
+              "lng": -83.422
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Resolved to GP's Madison Plywood plant at 1400 Woodkraft Rd, Madison GA, off Hwy 278 NE of town (~33.6165,-83.4220). The roster's geocoded point (33.5775,-83.4768, address '1310 Eatonton Rd') landed ~5 km SW in downtown Madison and was wrong. Coordinates cross-checked against ejmap.org and the Forest Products Locator (both ~33.611,-83.431, near the plant). Plant building centroid locked at 33.61650,-83.42200.",
           "truckGate": "Street View (2013-04) at the entrance off Woodkraft Rd clearly shows a red-and-white barrier arm across the truck lane plus a controlled checkpoint with 'Welcome to Georgia-Pacific Madison / All visitors report to security' signage. True.",
@@ -2627,6 +4083,28 @@
         },
         "dossierExcerpt": "Type: Plywood Plant\nResolved coordinates: 34.21600, -81.49400 (site centroid)\nConfidence: Medium\n\n### Location resolution\nThe roster's geocoded point (34.209308, -81.53316, APPROXIMATE — address was\nonly \"Prosperity, SC 29127\") landed in downtown Prosperity, ~3 km W of the\nreal plant — wrong. Web research established the plant address as **191\nGeorgia Pacific Blvd**, off Hwy 76 east of Prosperity; the Forest Products\nLocator places it at ~34.2169,-81.4954. Satellite probing located the\nplywood/sawmill operations with their log yard there. Site centroid locked\nat 34.21600,-81.49400.\n\n### Key views\n- Wide z15/z16: A campus with two distinct large building clusters — a\n  SE main plywood plant with a big log yard, and a NW lumber-storage /\n  processing cluster — connected by internal roads, with an active rail line",
         "mapsUrl": "https://www.google.com/maps/@34.21600,-81.49400,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/25-gp-prosperity-plywood-plant-prosperity-sc-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 34.216,
+              "lng": -81.494
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/25-gp-prosperity-plywood-plant-prosperity-sc-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 34.216,
+              "lng": -81.494
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Resolved to GP's Prosperity plywood/sawmill operations at 191 Georgia Pacific Blvd, off Hwy 76 E of Prosperity SC (~34.2169,-81.4954, cross-checked against the Forest Products Locator). The roster's geocoded point (34.2093,-81.5332) was ~3 km W in downtown Prosperity and wrong. Site centroid locked at 34.21600,-81.49400.",
           "truckGate": "The plant access road (Georgia Pacific Blvd) connects to the public road as an open, wide entrance with only a GP sign — no barrier arm, gate, or checkpoint at the public-road junction (Street View 2026-02). No gate structure was resolved further in along the entrance road either. Marked false; flagged uncertain because Street View does not cover the interior of the access road.",
@@ -2729,6 +4207,28 @@
         },
         "dossierExcerpt": "Roster coordinates were wrong. The roster placed the facility at\n37.050142, -78.94418 — that is the town center of Brookneal, VA, where\nsatellite imagery shows only small-town residential/commercial buildings,\nno industrial mill.\n\nWeb research (Forest Products Locator, multiple business directories,\nAPA Wood) established that the actual GP Brookneal OSB mill is at\n11795 Brookneal Highway (US-501 South), Gladys, VA 24554 — Campbell\nCounty, roughly 9 km north of the town of Brookneal. Listed coordinates\n~37.1306, -79.0259 pointed at open farmland; probing southwest located\nthe mill. Locked center: 37.1232, -79.0320 — a large industrial\nwood-products complex consistent with an OSB plant (process buildings,\nsteam plume, log yard, finished-goods warehouse).\n\nGP built the Brookneal OSB mill in 1996; ~130 employees; produces",
         "mapsUrl": "https://www.google.com/maps/@37.1232,-79.0320,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/26-gp-brookneal-osb-plant-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 37.1232,
+              "lng": -79.032
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/26-gp-brookneal-osb-plant-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 37.1232,
+              "lng": -79.032
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster coords pointed at downtown Brookneal town center (wrong). Actual GP Brookneal OSB mill is at 11795 Brookneal Hwy (Hwy 501S), Gladys VA 24554 — confirmed via Forest Products Locator and multiple business listings; precise rooftop center ~37.1232,-79.0320.",
           "truckGate": "Street View along the plant access road shows a divided entrance with a structure, flags and signage ~150m in from the road bend — a controlled mill entrance typical of OSB plants.",
@@ -2833,8 +4333,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "Roster coordinates were wrong. The roster gave 2861 Tremont Rd\n(32.058166, -81.13432), which lands in a mixed light-industrial /\nscrap-yard area roughly 2.5 km southwest of the river — no gypsum\nwallboard plant there.\n\nWeb research (Georgia EPD Title V permit narrative, Coastal GA DNR\noutfall notice, multiple business directories) established the real\nplant address as 151 Wahlstrom Road, Savannah, GA 31404, on the\nsouth bank of the Savannah River about 1.13 miles downstream of the\nTalmadge Bridge. Locked center: 32.0770, -81.0525 — a large\nriverfront gypsum complex, formerly Domtar Gypsum, acquired by GP in\n1996.",
         "mapsUrl": "https://www.google.com/maps/@32.0770,-81.0525,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/27-gp-gypsum-plant-savannah-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.077,
+              "lng": -81.0525
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/27-gp-gypsum-plant-savannah-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.077,
+              "lng": -81.0525
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster coords (2861 Tremont Rd) pointed at a mixed industrial area ~2.5 km away with no gypsum plant. Actual GP Gypsum Savannah is at 151 Wahlstrom Road, Savannah GA 31404 on the Savannah River, ~1.13 mi downstream of the Talmadge Bridge. Confirmed via Georgia EPD permit narrative and business listings; locked center ~32.0770,-81.0525.",
           "truckGate": "Plant approached by a long private industrial access road (Wahlstrom Rd) off the public network; controlled-access industrial site. Street View shows perimeter fencing with brick gate pillars at the road. A gatehouse/checkpoint exists but is not crisply resolved.",
@@ -2940,8 +4506,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "Roster coordinates were wrong. The roster gave 32.470952,\n-100.405938 (geocode flagged APPROXIMATE, moved 4088 m), which lands in\ndowntown Sweetwater, TX — no gypsum plant there.\n\nWeb research established the GP Gypsum complex sits on **FM 1856 off\nI-20, east of Sweetwater** in Nolan County. The legacy plant (310 FM\n1856, operating since 1957) and the new **$325M wallboard plant (311 FM\n1856, opened October 2023)** are adjacent on the same campus. Locked\ncenter: 32.4830, -100.3345 — confirmed by GP-branded blue\nprivacy-screen fencing along the perimeter in Street View.",
         "mapsUrl": "https://www.google.com/maps/@32.4830,-100.3345,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/28-gp-gypsum-plant-sweetwater-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.483,
+              "lng": -100.3345
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/28-gp-gypsum-plant-sweetwater-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.483,
+              "lng": -100.3345
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster coords pointed at downtown Sweetwater (4 km off). Actual GP Gypsum complex is on FM 1856 off I-20 east of Sweetwater (310/311 FM 1856): the legacy plant (Nolan County since 1957) plus the new $325M plant opened Oct 2023. Confirmed by GP-branded blue perimeter fencing in Street View; locked center ~32.4830,-100.3345.",
           "truckGate": "Plant reached via FM 1856, a county road dead-ending into the GP complex; GP-logo privacy-screened perimeter fence confirmed in Street View. Controlled-access industrial site with a clear entrance driveway and flags. No public-road pass-through.",
@@ -3049,8 +4681,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Roster had no street address and the geocoded coordinates\n(39.134715, -94.51604, APPROXIMATE, moved 2159 m) pointed at the East\nBottoms industrial district south of the Missouri River — not the\nplant.\n\nWeb research established the GP Corrugated box plant address as\n8600 NE 38th St, Kansas City, MO 64161 (GP Corrugated LLC, also\nlisted as \"Kansas City Container\"). This is in the Northland industrial\ndistrict south of Worlds of Fun. OSM geocoding of the address returned\n39.16229, -94.48137 (on NE 38th St); the plant is the large\nmanufacturing building immediately south. Locked center:\n39.1635, -94.4825.",
         "mapsUrl": "https://www.google.com/maps/@39.1635,-94.4825,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/29-gp-corrugated-box-plant-kansas-city-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 39.1635,
+              "lng": -94.4825
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/29-gp-corrugated-box-plant-kansas-city-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 39.1635,
+              "lng": -94.4825
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster had no street address and coords pointed at the East Bottoms industrial district south of the Missouri River (~2 km off). Actual GP Corrugated box plant is at 8600 NE 38th St, Kansas City MO 64161, in the Northland industrial district south of Worlds of Fun. Confirmed via business listings (GP Corrugated LLC / 'Kansas City Container') and OSM geocode; locked center ~39.1635,-94.4825.",
           "truckGate": "Open driveway access from NE 38th St — no barrier arm, sliding gate or guard booth resolved at the road. Typical urban box-plant entry. Flagged uncertain (perimeter chain-link fencing exists; a gate may be set back from the street).",
@@ -3163,8 +4853,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "Roster had no street address and the geocoded coordinates\n(32.378277, -96.770814, APPROXIMATE, moved 7299 m) landed in open\nfarmland southeast of Waxahachie.\n\nWeb research (Waxahachie Chamber of Commerce, business directories,\nTruckMap) established the GP Corrugated box plant address as **5800 N\nInterstate Hwy 35E, Waxahachie, TX 75165**, on the west side of I-35E\nnorth of Waxahachie between FM-387 and FM-406. Locked center:\n32.4420, -96.8480 — a large corrugated-packaging manufacturing\ncomplex directly fronting I-35E.",
         "mapsUrl": "https://www.google.com/maps/@32.4420,-96.8480,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/georgia-pacific/30-gp-corrugated-box-plant-waxahachie-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.442,
+              "lng": -96.848
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/georgia-pacific/30-gp-corrugated-box-plant-waxahachie-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.442,
+              "lng": -96.848
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster had no street address; coords pointed at open farmland ~7 km off (geocode moved 7299 m). Actual GP Corrugated box plant is at 5800 N Interstate Hwy 35E, Waxahachie TX 75165, on the west side of I-35E north of Waxahachie between FM-387 and FM-406. Confirmed via Waxahachie Chamber of Commerce and business listings; locked center ~32.4420,-96.8480.",
           "truckGate": "Open driveway access from the I-35E frontage road; chain-link perimeter fencing present but no barrier arm, sliding gate or guard booth resolved at the road in Street View. Typical un-gated Texas industrial-plant entry. Flagged uncertain.",

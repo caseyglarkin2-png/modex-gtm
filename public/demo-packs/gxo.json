@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T04:40:43.113Z",
+  "builtAt": "2026-05-21T14:21:19.361Z",
   "account": {
     "slug": "gxo",
     "displayName": "GXO Logistics",
@@ -12,7 +12,8 @@
       "droppedStubCount": 0,
       "capHit": true,
       "note": "GXO operates ~970 sites globally (~400 in NA). We audited 30 representative NA facilities; the rest follow the same gate/dock archetypes."
-    }
+    },
+    "featuredSiteId": "12-palmyra-pa"
   },
   "research": {
     "facility_count": 1000,
@@ -152,8 +153,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#10",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct (shipping vs receiving) drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 120000,
+              "narrationKey": "shiprcv.split",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron on correct side",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1320000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
+        },
         "dossierExcerpt": "- Address: 10440 Downsville Pike, Hagerstown, MD 21740\n- Locked center: 39.604697, -77.760602 (geocode-supplied ROOFTOP point; confirmed correct)\n- The geocoded coordinates land squarely on the building slab. Web research\n  confirms this is the GXO/Conair DC — 2.1M sq ft, the largest single\n  distribution center in Maryland and the largest in the U.S. for small\n  appliances. GXO began operations March 2024.",
         "mapsUrl": "https://www.google.com/maps/@39.604697,-77.760602,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/01-gxo-conair-distribution-center-hagerstown-md-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 39.604697,
+              "lng": -77.760602
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/01-gxo-conair-distribution-center-hagerstown-md-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 39.604697,
+              "lng": -77.760602
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "imagery": "Maxar satellite imagery (2026 capture cited, but content is mid-construction: slab + structural footings, only the north building wall partially erected). Facility is confirmed operational since March 2024. Gate/yard hardware not yet placed in the imagery, so entry-control fields are inferred from facility class, not observed.",
           "dockDoors": "Web research confirms 378 dock positions across the building (GXO/Conair press materials). Solidly 50+.",
@@ -261,8 +330,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#10",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct (shipping vs receiving) drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 120000,
+              "narrationKey": "shiprcv.split",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron on correct side",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1320000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
+        },
         "dossierExcerpt": "- Address: 16920 W Commerce Dr, Goodyear, AZ 85338 (PV303 industrial park)\n- Locked center: 33.412000, -112.421800\n- The geocoded point (33.411968, -112.422068) sits on the building; recentered\n  slightly to the visual building centroid.\n- Web research confirms: 715,000 sq ft GXO/A&F West Coast operations hub, NE\n  corner of Thomas & Citrus Roads, master-planned PV303 park. Announced Oct\n  2021, operational since.",
         "mapsUrl": "https://www.google.com/maps/@33.412000,-112.421800,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/02-gxo-abercrombie-fitch-distribution-center-goodyear-az-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 33.412,
+              "lng": -112.4218
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/02-gxo-abercrombie-fitch-distribution-center-goodyear-az-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 33.412,
+              "lng": -112.4218
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Confirmed at z21: a cantilever/rolling gate spans the truck driveway at the NE corner where the entrance road meets the truck court; clear pinch-point with lane markings.",
           "guardShack": "Confirmed at z21: a small dark booth structure sits beside the gate lane, separate from the main building (≈1-2 vehicle footprint). Street View 2024-09 shows the gate and screening wall.",
@@ -365,8 +502,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Address: Tradeport East Business Center, Midway, GA 31320 (Liberty County)\n  — no public street number disclosed.\n- Locked center: 31.770300, -81.347400 (recentered from the geometric-\n  center geocode 31.771467, -81.345576 onto the identified building).\n- Web research confirms: 600,000 sq ft GXO/Hasbro flagship U.S. DC, grand\n  opening March 19, 2026; Hasbro's first U.S. warehouse fully developed,\n  leased and branded by Hasbro; powered by GXO IQ (AI operating system);\n  ~70 full-time / up to 125 seasonal jobs.",
         "mapsUrl": "https://www.google.com/maps/@31.770300,-81.347400,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/03-gxo-hasbro-flagship-distribution-center-midway-ga-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 31.7703,
+              "lng": -81.3474
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/03-gxo-hasbro-flagship-distribution-center-midway-ga-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 31.7703,
+              "lng": -81.3474
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "buildingIdentity": "Address geocoded GEOMETRIC_CENTER of Tradeport East Business Center, a multi-building park. The Hasbro/GXO DC (600,000 sq ft, opened March 2026) is identified as the large NE-SW-oriented building closest to the geocoded point; its ~330m x ~165m footprint matches 600,000 sq ft. Street View (2024-12) shows this building with a blue/white striped band, a monument sign, dock doors with trailers, and a fenced truck court. Identity is medium-confidence because several near-identical DC buildings exist in the park.",
           "truckGate": "The truck court is enclosed by continuous perimeter fencing (visible in Street View 2024-12 and z20 satellite). The truck driveway crosses the fence at the SW end — a controlled fenced entry. Gate barrier not crisply resolved.",
@@ -452,8 +655,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Address: 7300 Oakley Industrial Blvd, Fairburn, GA 30213\n- Locked center: 33.552411, -84.537454 (geocode ROOFTOP, confirmed on the\n  matching building).\n- Web research confirms: 907,665 sq ft speculative industrial building,\n  building dimensions 650' x 1,400', developed by Red Rock Developments /\n  Burke Holding / Saben with LXP Industrial Trust, leased to GXO Logistics;\n  in Shugart Farms Lake Industrial Park along I-85.",
         "mapsUrl": "https://www.google.com/maps/@33.552411,-84.537454,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/04-gxo-logistics-distribution-center-fairburn-ga-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 33.552411,
+              "lng": -84.537454
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/04-gxo-logistics-distribution-center-fairburn-ga-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 33.552411,
+              "lng": -84.537454
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "buildingIdentity": "Confirmed via web research: 907,665 sq ft speculative building (Red Rock Developments / LXP Industrial Trust), dimensions 650' x 1,400', in Shugart Farms Lake Industrial Park along I-85, leased to GXO. Satellite shows the matching large NW-SE-oriented building at the geocoded point.",
           "truckGate": "Open site. Street View (2025-11) shows the SW dock face and truck court with NO perimeter fence, NO gate barrier, and NO guard booth - a pickup truck drives freely past the dock apron. Access roads run open to the docks. truckGate / guardShack / remoteGs all false.",
@@ -563,8 +824,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Address: 2121 Gateway Pt, Clayton, IN 46118\n- Locked center: 39.605400, -86.483484 (recentered slightly south from the\n  ROOFTOP geocode onto the building centroid).\n- Web research confirms: \"GXO Super Hub\" (GDI Construction project) at this\n  address; GXO operates 24/7 and is hiring 2,000+ jobs across central Indiana.\n  Mechatronics Maintenance roles advertised — a highly automated facility.",
         "mapsUrl": "https://www.google.com/maps/@39.605400,-86.483484,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/05-gxo-super-hub-clayton-in-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 39.6054,
+              "lng": -86.483484
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/05-gxo-super-hub-clayton-in-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 39.6054,
+              "lng": -86.483484
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "buildingIdentity": "Confirmed via web research: 'GXO Super Hub' (GDI Construction project) at 2121 Gateway Pt, Clayton IN; GXO operates 24/7 and is hiring 2,000+ jobs in central Indiana. Satellite shows one enormous DC building (~520m x ~210m footprint, ~1.1M+ sq ft) at the geocoded point in an I-70 corridor industrial park.",
           "truckGate": "The truck courts on the north and south faces are enclosed by continuous perimeter fencing plus retention ponds. Access is via the NE industrial-park road. A controlled gate is inferred from the fully fenced truck yard; an exact barrier arm could not be crisply resolved - imagery shows the facility newly completed and nearly empty of trailers.",
@@ -659,8 +986,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Address: 135 S Mount Zion Rd, Lebanon, IN 46052\n- Locked center: 40.0413, -86.4853\n- Roster geocode (40.039161, -86.483804, ROOFTOP) landed in the SE employee parking lot of the\n  correct building; locked center moved ~270 m NW to the building centroid.\n- Confirmed via web research: LoopNet lists 135 S Mount Zion Rd as \"Building 7,\" a warehouse\n  of 589,616 SF on a 49.19-acre parcel. GXO/City of Lebanon press release confirms GXO\n  operates a returns center here with a planned $11M expansion (spring 2025 start).\n- Building identity: a white-roofed distribution building running NW-SE, parallel to and\n  immediately SW of I-65, in the Boone County logistics corridor. Footprint and dock layout\n  are consistent with a ~590k SF DC. (A much larger 1M+ SF gray-roofed building lies to the",
         "mapsUrl": "https://www.google.com/maps/@40.0413,-86.4853,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/06-gxo-logistics-distribution-center-lebanon-in-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 40.0413,
+              "lng": -86.4853
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/06-gxo-logistics-distribution-center-lebanon-in-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 40.0413,
+              "lng": -86.4853
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Confirmed white-roofed DC building (Building 7, ~589,616 SF, 49.19-acre parcel per LoopNet) at 135 S Mount Zion Rd, in the Lebanon/Boone County logistics corridor immediately SW of I-65. Building runs NW-SE parallel to the interstate.",
           "truckGate": "No barrier arm, sliding gate or checkpoint pinch-point visible at the SW truck driveway or the SE car entrance in current Maxar satellite imagery. Driveways are open paved approaches. Street View is 2013 (pre-construction) so cannot corroborate; marked false at high-confidence-from-satellite, listed uncertain.",
@@ -766,8 +1151,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Address: 5490 Industrial Ct, Ste 300, Whitestown, IN 46075\n- Locked center: 39.96345, -86.38215\n- Roster geocode (39.962504, -86.383939, ROOFTOP) landed on the SW corner of the correct\n  building; locked center moved to the building centroid.\n- Confirmed via web research: LoopNet lists 5490 Industrial Ct as a 628,206 SF warehouse,\n  36-ft clear height, 257 parking spaces, 76 dock doors, single warehouse block. GXO jobs\n  site confirms an active GXO operation here (\"Lebanon and Whitestown\" — gxo.jobs/Boone).\n- Building identity: a large cross-dock distribution building in the AllPoints at Anson\n  logistics park, NW of Indianapolis, immediately west of I-65. Surrounded by other mega-DCs.",
         "mapsUrl": "https://www.google.com/maps/@39.96345,-86.38215,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/07-gxo-logistics-distribution-center-whitestown-in-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 39.96345,
+              "lng": -86.38215
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/07-gxo-logistics-distribution-center-whitestown-in-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 39.96345,
+              "lng": -86.38215
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Confirmed the large cross-dock DC building at 5490 Industrial Ct, Whitestown (AllPoints at Anson logistics park, NW of Indianapolis just W of I-65). LoopNet lists 628,206 SF, 36-ft clear, 257 parking spaces, 76 dock doors. Roster ROOFTOP geocode landed on the building's SW corner; locked center moved to the building centroid (~39.96345, -86.38215).",
           "truckGate": "No barrier arm, sliding gate, or checkpoint structure visible at the NW or SE truck-yard driveway entrances; both are open paved approaches off the perimeter park road. Marked false; listed uncertain.",
@@ -870,8 +1313,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Roster address: 150 N West End Blvd, Quakertown, PA 18951 — approximate (the roster\n  source flagged it \"approximate to Quakertown industrial area\"; geocode RANGE_INTERPOLATED\n  along Route 309).\n- True address: 3000 AM Drive #200, Quakertown, PA 18951 — established via web research\n  (Racklify 3PL directory and multiple commercial-property listings).\n- Locked center: 40.46075, -75.3475\n- The facility is a large multi-tenant distribution building in the AM Drive industrial park\n  (Milford Township, NE of Quakertown borough). The building is anchored by **Continental\n  Tire DC / DHL Supply Chain; GXO occupies Suite 200 (~195,000 SF)** running IKEA\n  ecommerce parcel fulfillment. Racklify lists the whole building at 935,540 SF.\n- Confirmation: the largest warehouse in the AM Drive park; cross-dock layout with a major",
         "mapsUrl": "https://www.google.com/maps/@40.46075,-75.3475,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/08-gxo-ikea-customer-distribution-center-quakertown-pa-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 40.46075,
+              "lng": -75.3475
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/08-gxo-ikea-customer-distribution-center-quakertown-pa-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 40.46075,
+              "lng": -75.3475
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster address (150 N West End Blvd) is approximate. Web research established the true address as 3000 AM Drive #200, Quakertown PA 18951 — a large multi-tenant DC (anchor Continental Tire DC / DHL Supply Chain; GXO occupies Suite 200, ~195,000 SF for IKEA ecommerce parcel fulfillment). Racklify lists the whole building at 935,540 SF. Locked center 40.46075,-75.3475 — the large white-roofed warehouse in the AM Drive industrial park (Milford Township, NE of Quakertown borough). Neighboring building numbered '1020' visible in Street View confirms the AM Drive park.",
           "suiteCaveat": "GXO operates only Suite 200 of this multi-tenant building; the geofence and dock/trailer counts cover the whole shared building and yard, which cannot be split out from overhead imagery.",
@@ -976,8 +1477,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Address: 1200 Distribution Dr, Carlisle, PA 17013\n- Locked center: 40.20490, -77.23330\n- Roster ROOFTOP geocode (40.204958, -77.234885) landed on the roof of the SOUTHERN of two\n  adjacent GXO buildings. GXO operates both 1200 Distribution Dr and 1301 Distribution Dr\n  (the roster itself notes the adjacent 1301 building); idx 9 is the southern building =\n  1200 Distribution Dr.\n- Confirmed via web research: GXO operates distribution centers at 1200 and 1301 Distribution\n  Drive, Carlisle PA 17013 (GXO jobs site, BBB profile, Buzzfile).\n- Setting: a large I-81 logistics park in Cumberland County, surrounded by farmland and other\n  big-box DCs.",
         "mapsUrl": "https://www.google.com/maps/@40.2049,-77.2333,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/09-gxo-logistics-distribution-center-carlisle-pa-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 40.2049,
+              "lng": -77.2333
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/09-gxo-logistics-distribution-center-carlisle-pa-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 40.2049,
+              "lng": -77.2333
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Confirmed the large cross-dock DC at 1200 Distribution Dr, Carlisle PA (I-81 logistics park, Cumberland County). Roster ROOFTOP geocode landed on the roof of the SOUTHERN of two adjacent GXO buildings; the northern building is GXO's 1301 Distribution Dr (a separate roster-noted facility). Locked center on the southern building (1200).",
           "truckGate": "Street View (2021) at the SW driveway clearly shows a controlled entrance: chain-link sliding gates across the lanes with a center island, plus a 'NO TRUCKS' sign segregating a car lane from the truck lane. The whole truck yard is enclosed by continuous chain-link perimeter fencing. truckGate = true.",
@@ -1091,8 +1658,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#10",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct (shipping vs receiving) drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 120000,
+              "narrationKey": "shiprcv.split",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron on correct side",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1320000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
+        },
         "dossierExcerpt": "The roster supplied ROOFTOP-precision coordinates (40.609939, -75.315452). A\nsatellite probe at those coordinates landed directly on the roof of a very\nlarge industrial building inside the Majestic Bethlehem Center — a\n441-acre master-planned business park at the I-78 / PA-412 interchange in\nBethlehem, Lehigh County, PA.\n\nWeb research confirmed the facility: **3633 Commerce Center Blvd is a\n1,041,600 sq ft distribution building, built 2022, on a ~45.04-acre parcel**,\nleased to **Nike for East-Coast e-commerce fulfillment and operated by GXO\nLogistics**. The address numbering along Commerce Center Blvd runs 3051\n(Building 1B) at one end to 3905 (Building 6) at the other; 3633 sits mid-range\nand the ROOFTOP geocode lands squarely on a ~1M sq ft building consistent with\nthat size — the correct building. The roster coordinates fall on the building's",
         "mapsUrl": "https://www.google.com/maps/@40.61090,-75.31565,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/10-gxo-logistics-distribution-center-bethlehem-pa-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 40.6109,
+              "lng": -75.31565
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/10-gxo-logistics-distribution-center-bethlehem-pa-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 40.6109,
+              "lng": -75.31565
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Controlled truck entrance at the SW corner of the building: a gatehouse/canopy structure sits squarely in the truck lane at the entry to the SW dock court, with channeled lanes (a separate down-arrow lane left of the booth, truck lane past it). A truck with a blue trailer is stopped at the booth in the 2026 Maxar imagery.",
           "guardShack": "Built gatehouse structure (flat-roofed canopy booth, ~2-3 vehicle footprint) positioned in the truck driveway median at the gate; truck actively stopped at it confirms a staffed check-in point.",
@@ -1186,8 +1821,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Name: GXO Logistics Distribution Center - Middletown PA\n- Type: Fulfillment Center\n- Address: 200 Capital Lane, Middletown, PA 17057\n- Resolved coordinates: 40.20785, -76.74640\n- Maps: https://www.google.com/maps/@40.20785,-76.74640,400m/data=!3m1!1e3",
         "mapsUrl": "https://www.google.com/maps/@40.20785,-76.74640,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/11-middletown-pa-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 40.20785,
+              "lng": -76.7464
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/11-middletown-pa-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 40.20785,
+              "lng": -76.7464
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Truck court is accessed from the internal east road at the NE corner of the property; the access is an open paved connection with no barrier arm or sliding gate visible in z20 satellite. Chain-link truck-court fencing is present along the dock face (seen in Street View) but the road entrance itself is uncontrolled. Classed false.",
           "guardShack": "No guard booth visible at any entrance in z20 satellite or Street View. Capital Logistics Center monument-sign entrance is wide and open.",
@@ -1309,8 +2002,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Name: GXO Logistics Distribution Center - Palmyra PA\n- Type: Distribution Center\n- Address: 500 N Lingle Ave, Palmyra, PA 17078\n- Resolved coordinates: 40.31050, -76.61450\n- Maps: https://www.google.com/maps/@40.31050,-76.61450,400m/data=!3m1!1e3",
         "mapsUrl": "https://www.google.com/maps/@40.31050,-76.61450,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/12-palmyra-pa-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 40.3105,
+              "lng": -76.6145
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/12-palmyra-pa-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 40.3105,
+              "lng": -76.6145
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Access road runs from a signalized public intersection at the SW and wraps around the building; no barrier arm, sliding gate or checkpoint pinch-point visible at the property line in z19/z20 satellite. No perimeter fence around the operational yard. Classed false.",
           "guardShack": "No 1-3-vehicle booth at the entrance or anywhere along the access road in z19 satellite or Street View. Site is open.",
@@ -1416,8 +2167,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Name: GXO IKEA Distribution Center - Westampton NJ\n- Type: Distribution Center\n- Address: 100 Ikea Dr, Westampton, NJ 08060\n- Resolved coordinates: 40.01400, -74.85340\n- Maps: https://www.google.com/maps/@40.01400,-74.85340,400m/data=!3m1!1e3",
         "mapsUrl": "https://www.google.com/maps/@40.01400,-74.85340,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/13-westampton-nj-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 40.014,
+              "lng": -74.8534
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/13-westampton-nj-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 40.014,
+              "lng": -74.8534
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "The building is ringed by an open perimeter loop road fed from the surrounding Westampton industrial-park street network. No barrier arm, sliding gate, or checkpoint pinch-point appears at any property-line connection in z18/z19 satellite or Street View; no perimeter fence. Classed false.",
           "guardShack": "No 1-3-vehicle booth at any entrance in z19 satellite or Street View along the perimeter road. Site is open.",
@@ -1522,8 +2331,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Name: GXO Logistics Distribution Center - West Jefferson OH\n- Type: Distribution Center\n- Address: 202 Park West Dr, West Jefferson, OH 43162\n- Resolved coordinates: 39.94550, -83.33280\n- Maps: https://www.google.com/maps/@39.94550,-83.33280,400m/data=!3m1!1e3",
         "mapsUrl": "https://www.google.com/maps/@39.94550,-83.33280,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/14-west-jefferson-oh-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 39.9455,
+              "lng": -83.3328
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/14-west-jefferson-oh-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 39.9455,
+              "lng": -83.3328
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Building I sits on an open Park West Drive frontage with a perimeter loop road. z18/z19 satellite and Street View (2024) show no barrier arm, sliding gate, or checkpoint pinch-point at any property-line connection, and no perimeter fence around the operational yard. Classed false.",
           "guardShack": "No 1-3-vehicle booth at any entrance in z19/z20 satellite or Street View. A small box-shaped structure at the NW edge of the employee parking lot is a utility cabinet/transformer, not a staffed guard booth at a truck lane.",
@@ -1629,8 +2496,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Name: GXO Logistics Distribution Center - McDonough GA\n- Type: Distribution Center\n- Address: 159 Westridge Pkwy, McDonough, GA 30253\n- Resolved coordinates: 33.41128, -84.19269\n- Maps: https://www.google.com/maps/@33.41128,-84.19269,400m/data=!3m1!1e3",
         "mapsUrl": "https://www.google.com/maps/@33.41128,-84.19269,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/15-mcdonough-ga-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 33.41128,
+              "lng": -84.19269
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/15-mcdonough-ga-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 33.41128,
+              "lng": -84.19269
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "The Westridge Logistics Center fronts Westridge Parkway with open paved truck-court driveways. z18/z19 satellite and Street View (2022/2025) show no barrier arm, sliding gate, or checkpoint pinch-point at any property-line connection, and no perimeter fence around the operational yard. Classed false.",
           "guardShack": "No 1-3-vehicle staffed booth at any entrance in z18/z19 satellite or Street View. The office is a multi-bay structure built into the SE building face, not a gate booth.",
@@ -1729,8 +2654,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Facility: GXO Logistics Distribution Center — 2145 Anvil Block Rd, Bldg 900, Forest Park, GA 30297\n- Locked center: 33.620500, -84.314800 (Building 900, Gillem Logistics Center Phase II)\n- Confirmation: Roster coordinates (33.621768, -84.316149) landed on Building 900's roof. Web research confirmed GXO Logistics Supply Chain, Inc. operates from \"Bldg 900 Ste 100\" at this address. Building 900 is a 1,043,418 SF cross-dock building completed Feb 2020 (208 dock-high doors, 4 drive-in doors, 70' speed bays, 356 auto parking spots, 280 trailer parking spots, 185' truck court depth — per Gillem Logistics Center developer spec). It sits inside the 1,168-acre Gillem master-planned logistics park on former Fort Gillem land.",
         "mapsUrl": "https://www.google.com/maps/@33.620500,-84.314800,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/16-gxo-logistics-distribution-center-forest-park-ga-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 33.6205,
+              "lng": -84.3148
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/16-gxo-logistics-distribution-center-forest-park-ga-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 33.6205,
+              "lng": -84.3148
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "GXO leases part of Building 900 at Gillem Logistics Center Phase II, 2145 Anvil Block Rd, Forest Park GA. Building 900 is a 1,043,418 SF cross-dock (208 dock doors, 280 trailer spots per developer spec sheet). Confirmed via satellite + Street View; building carries an 'Amazon' wall sign as the lead tenant of the cross-dock space.",
           "truckGate": "No barrier arm or guard booth visible at any public-road entry. The west/NW auto-parking frontage on the access road is fully open and unfenced (2025 Street View). A black metal perimeter fence runs along part of the east access road, but the truck court entry itself shows no gate structure in available imagery. Classified false; flagged uncertain since the truck court is on the building's NE/east side with no Street View coverage.",
@@ -1818,8 +2801,66 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Facility: GXO Logistics Distribution Center — 1700 E Pescadero Ave, Tracy, CA 95304\n- Locked center: 37.762200, -121.411800\n- Confirmation: Web research identified 1700 E Pescadero Ave as the \"Tracy Pescadero Distribution Center,\" a 381,600 SF Class A regional distribution facility on a 19.46-acre site, completed 2016 by Ridgeline Property Group with investment partner LaSalle. Developer spec: 57 dock-high doors, 2 drive-in doors, 185 ft truck court, 92 trailer parking spaces, 317 auto parking spaces, 32 ft clear height. Historically split-leased to Pactra (184,350 SF) and DHL (197,250 SF); GXO Logistics now operates at this address per Racklify and Bandana 3PL directories. The roster GEOMETRIC_CENTER geocode (5 m) landed correctly on this L-shaped building just south of I-205. (Note: an early probe hit a nearby retail strip center; the correct DC is the L-shaped building with the large interior auto-parking lot directly south of the I-205 freeway.)",
         "mapsUrl": "https://www.google.com/maps/@37.762200,-121.411800,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/17-gxo-logistics-distribution-center-tracy-ca-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 37.7622,
+              "lng": -121.4118
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/17-gxo-logistics-distribution-center-tracy-ca-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 37.7622,
+              "lng": -121.4118
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "1700 E Pescadero Ave, Tracy CA = Tracy Pescadero Distribution Center, a 381,600 SF Class A regional DC on a 19.46-acre site, completed 2016 by Ridgeline Property Group / LaSalle. Spec: 57 dock-high doors, 2 drive-in doors, 185 ft truck court, 92 trailer parking spaces, 317 auto parking spaces. Historically split-leased to Pactra and DHL; GXO Logistics now operates here per Racklify and Bandana 3PL directories. Building is an L-shaped multi-tenant distribution building just south of I-205 with a large interior auto-parking lot. Roster GEOMETRIC_CENTER geocode (5 m) landed correctly on this parcel.",
           "truckGate": "No barrier arm, sliding gate, or checkpoint visible at the E Pescadero Ave driveway entrances. The west and interior auto-parking areas are fully open and unfenced (2023 Street View). Two drive entrances serve the site off E Pescadero. Classified false; flagged uncertain since the truck-side dock area is partly tree-screened from the road.",
@@ -1909,8 +2950,66 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Facility: GXO Logistics Distribution Center — 10746 Commerce Way, Fontana, CA 92337\n- Locked center: 34.058587, -117.513810\n- Confirmation: Web research identified 10746 Commerce Way as the \"Sierra Gateway Center\" (address range 10746-10788 Commerce Way), a ~253,000 SF multi-tenant industrial/distribution building completed 1989 with ~253 auto parking spaces. GXO Warehouse Company operates at this address (Buzzfile company profile, Waze driving directions). The roster ROOFTOP geocode (54 m offset) landed correctly on the long N-S building in a dense Fontana Inland Empire logistics corridor.",
         "mapsUrl": "https://www.google.com/maps/@34.058587,-117.513810,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/18-gxo-logistics-distribution-center-fontana-ca-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 34.058587,
+              "lng": -117.51381
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/18-gxo-logistics-distribution-center-fontana-ca-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 34.058587,
+              "lng": -117.51381
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "10746 Commerce Way, Fontana CA = the 'Sierra Gateway Center' (addresses 10746-10788 Commerce Way), a ~253,000 SF multi-tenant industrial / distribution building built 1989, ~253 auto parking spaces. GXO Warehouse Company operates here (Buzzfile, Waze). Roster ROOFTOP geocode (54 m) landed correctly on the long N-S building. Located in a dense Inland Empire logistics corridor in Fontana.",
           "truckGate": "The truck yard / dock apron is on the building's west (rail-adjacent) side. A driveway from the public road at the north connects into the dock apron; chain-link fence runs along the rail corridor but the driveway entrance shows no barrier arm and no guard booth in 2025 Street View. Classified false; flagged uncertain - the driveway is partly tree-screened.",
@@ -2024,8 +3123,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Facility: GXO Logistics Distribution Center — 2203 Sherrill Dr, Statesville, NC 28625\n- Locked center: 35.770854, -80.841310\n- Confirmation: Roster ROOFTOP geocode landed directly on a large distribution building. Web research confirmed GXO Logistics Supply Chain, Inc. operates here (Dun & Bradstreet Statesville profile), Panjiva import records list \"Gxo USA DC, 2203 Sherrill Drive, Statesville NC,\" and GXO's jobs site shows active Statesville hiring. The building is a large cross-dock DC in a wooded, edge-of-town Iredell County industrial area; an employee review notes the building is non-temperature-controlled.",
         "mapsUrl": "https://www.google.com/maps/@35.770854,-80.841310,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/19-gxo-logistics-distribution-center-statesville-nc-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 35.770854,
+              "lng": -80.84131
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/19-gxo-logistics-distribution-center-statesville-nc-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 35.770854,
+              "lng": -80.84131
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "2203 Sherrill Dr, Statesville NC - confirmed via roster ROOFTOP geocode landing on the large distribution building, plus Dun & Bradstreet, Panjiva ('Gxo USA DC, 2203 Sherrill Drive') and GXO jobs site (active Statesville hiring). A large cross-dock DC in a wooded edge-of-town Iredell County industrial area; employee review notes the building is non-temperature-controlled.",
           "truckGate": "A sliding/swing chain-link gate spans the truck lane entering the fenced dock/truck yard, visible in 2019/2022 Street View along the south dock face. The dock yard is fully chain-link-fenced. Classified true.",
@@ -2135,8 +3300,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Facility: GXO Logistics Distribution Center — 1120 E Mountain Olive Rd, Cowpens, SC 29330\n- Locked center: 35.060500, -81.812000\n- Confirmation: Roster ROOFTOP geocode (12 m offset) landed on a massive distribution building. Web research identified it as \"Upstate Corporate Park Building 1,\" a ~1,189,440 SF cross-dock supply-chain distribution building roughly 1 mile from I-85 in Spartanburg County. GXO's jobs site shows active Cowpens hiring for this \"new distribution center\"; LoopNet lists the Upstate Corporate Park building at 1120 E Mount Olive Rd.",
         "mapsUrl": "https://www.google.com/maps/@35.060500,-81.812000,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/20-gxo-logistics-distribution-center-cowpens-sc-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 35.0605,
+              "lng": -81.812
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/20-gxo-logistics-distribution-center-cowpens-sc-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 35.0605,
+              "lng": -81.812
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "1120 E Mountain Olive Rd, Cowpens SC = 'Upstate Corporate Park Building 1', a ~1,189,440 SF cross-dock distribution building, ~1 mile from I-85 in Spartanburg County. Confirmed via roster ROOFTOP geocode (12 m) landing on the building, GXO jobs site (active Cowpens hiring for this 'new distribution center'), and LoopNet (Upstate Corporate Park listing).",
           "truckGate": "No barrier arm, sliding gate, or guard booth visible at the access-road entry or at either truck-court entrance in available satellite imagery. The building sits at the end of a private access road in a brand-new corporate park; the access-road / truck-court junctions read as open roadway. Classified false; flagged uncertain - no Street View reaches the building entrance and the park is still under development, so a perimeter gate may yet be installed.",
@@ -2225,8 +3448,66 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "The geocoded point (32.819094, -97.307487, ROOFTOP, moved 39 m) lands on a large\nwarehouse in the North Fort Worth industrial park along N Sylvania Ave. Web\nresearch (Dun & Bradstreet, Waze) confirms GXO Logistics Supply Chain, Inc.\noperates from 4320 N Sylvania Ave Ste 100 — a suite within a multi-tenant\nbuilding (XPO Logistics also historically listed at the same address).\n\nStreet View positively confirms the site: a GXO-branded straight box truck\n(\"GXO — Logistics at full potential\") is parked at the curb directly outside the\nbuilding, and GXO signage is visible on the building face. The pin building is\nthe northern of the park's warehouses; the building runs roughly NW–SE with\noffice frontage on the west (N Sylvania Ave) side and the dock/truck court on\nthe east side.",
         "mapsUrl": "https://www.google.com/maps/@32.81880,-97.30715,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/21-gxo-logistics-distribution-center-fort-worth-tx-sylvania-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.8188,
+              "lng": -97.30715
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/21-gxo-logistics-distribution-center-fort-worth-tx-sylvania-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.8188,
+              "lng": -97.30715
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "site": "GXO occupies Suite 100 of a large multi-tenant flex/industrial building in the North Fort Worth (N Sylvania Ave) industrial park. The pin and address resolve to the northern building; Street View confirms GXO branding (GXO box truck parked at curb, GXO signage visible).",
           "truckGate": "No barrier arm, sliding gate, or guard booth. The truck court is entered via a fully open driveway off N Sylvania Ave. Only a low (~4 ft) decorative ornamental metal fence with hedge runs along the road frontage — purely cosmetic, not a security checkpoint.",
@@ -2329,8 +3610,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "The geocoded point (32.628941, -97.30685, ROOFTOP, moved 154 m) lands on a large\nmodern warehouse in south Fort Worth. Web research confirms GXO Logistics signed\na 644,318 SF industrial lease at Everman Crossroads — a 954,611 SF, two-\nbuilding development owned by MDH Partners. GXO occupies \"Building Two\" at\n1401 Everman Pkwy on a ~31.5-acre site (40-ft clear height, 241 parking spaces).\nSources: GlobeSt, REBusinessOnline, Texas Real Estate Research Center,\nRealgraph, Connect CRE.\n\nThe pin building is the southern of the two campus warehouses; it runs east–west\nwith truck courts on the south and north faces.",
         "mapsUrl": "https://www.google.com/maps/@32.62890,-97.30680,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/22-gxo-logistics-distribution-center-fort-worth-tx-everman-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.6289,
+              "lng": -97.3068
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/22-gxo-logistics-distribution-center-fort-worth-tx-everman-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.6289,
+              "lng": -97.3068
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "site": "GXO leases the 644,318 SF 'Building Two' of the Everman Crossroads campus (developer MDH Partners) on a ~31.5-acre site at 1401 Everman Pkwy. Pin lands on this southern bulk distribution building; address and lease confirmed via GlobeSt / REBusinessOnline / Realgraph. 40-ft clear height, 241 car spaces.",
           "truckGate": "No barrier arm, sliding/swing gate, or guard booth at any driveway. Driveways from Everman Pkwy and the campus interior drive are wide and fully open. Modern speculative Class-A bulk building with no perimeter security gate.",
@@ -2434,8 +3773,76 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#10",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct (shipping vs receiving) drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 120000,
+              "narrationKey": "shiprcv.split",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron on correct side",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1320000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
+        },
         "dossierExcerpt": "The geocoded point (29.829072, -95.252448, GEOMETRIC_CENTER — lower precision)\nfalls in the Railwood industrial corridor of northeast Houston. Web research\n(Evopra, Racklify, AWCO warehouse directories) confirms GXO Logistics operates a\n3PL warehouse at 9255 Railwood Dr.\n\nThe Railwood corridor contains many industrial buildings, so the GXO building\nwas disambiguated by inspection: the building directly east is \"Majestic Steel\nUSA\" (logo confirmed in Street View) — ruled out. The GXO facility is the large\neast–west bulk-distribution warehouse on the south side of Railwood Dr, with\ndocks on its north and south faces and a very large trailer drop yard on the\nsouth side.",
         "mapsUrl": "https://www.google.com/maps/@29.82900,-95.25250,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/23-gxo-logistics-distribution-center-houston-tx-railwood-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 29.829,
+              "lng": -95.2525
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/23-gxo-logistics-distribution-center-houston-tx-railwood-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 29.829,
+              "lng": -95.2525
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "site": "GXO Logistics warehouse at 9255 Railwood Dr in the Railwood industrial corridor, NE Houston. Geocode was GEOMETRIC_CENTER; the GXO building was located as the large E-W bulk-distribution warehouse south of Railwood Dr (the Majestic Steel USA plant is the neighboring building to the east, ruled out). Confirmed via warehouse directories (Evopra, Racklify, AWCO) listing GXO at this address.",
           "truckGate": "TRUE — a chain-link perimeter fence wraps the building (confirmed in multiple Street View frames along Railwood Dr). A small standalone gatehouse structure with a hipped roof sits in the truck path at a pinch point on the south truck-court drive, between landscaped islands — a controlled, guarded entry to the south drop yard.",
@@ -2530,8 +3937,66 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "The geocoded point (29.944117, -95.490924, ROOFTOP) lands on a very large\nbulk-distribution warehouse in northwest Houston. Web research (Evopra, Racklify,\nAWCO warehouse directories) confirms GXO Logistics operates a 3PL warehouse at\n4800 W Greens Rd, 77066.\n\nThe building is a single very large warehouse oriented NW–SE, set back from\nW Greens Rd behind a fenced grass buffer, with truck courts on the NE long face\nand the SW face.",
         "mapsUrl": "https://www.google.com/maps/@29.94470,-95.49050,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/24-gxo-logistics-distribution-center-houston-tx-west-greens-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 29.9447,
+              "lng": -95.4905
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/24-gxo-logistics-distribution-center-houston-tx-west-greens-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 29.9447,
+              "lng": -95.4905
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "site": "GXO Logistics warehouse at 4800 W Greens Rd, NW Houston. Pin (ROOFTOP geocode) lands on a very large bulk-distribution warehouse oriented NW-SE; address confirmed via warehouse directories (Evopra, Racklify, AWCO). Building set back from W Greens Rd behind a fenced lawn.",
           "truckGate": "FALSE — the property has a perimeter fence (black ornamental metal along the W Greens Rd frontage, chain-link along side property lines), but no guard booth and no barrier arm/sliding gate across any truck lane was found. The truck courts on the NE and SW building faces are entered via open driveways. The frontage fence is a property-line/decorative fence around the office and lawn, not a controlled truck checkpoint.",
@@ -2627,8 +4092,66 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "The roster's address (4220 Diplomacy Rd) was explicitly flagged as approximate.\nWeb research (Racklify and multiple warehouse directories) confirms GXO\nLogistics' Grapevine operation is at 2425 Esters Blvd, Grapevine, TX 76051,\nknown as DFW Trade Center VII — a multi-tenant cross-dock distribution\nbuilding that GXO shares with ShipBob and Tornado Transport.\n\nEsters Boulevard was geocoded via OpenStreetMap/Nominatim to ~32.9346, -97.0331,\nin the International Commerce Park / LINK Logistics business park on DFW Airport\nland, beside a major highway interchange. The roster's original pin (32.825,\n-97.041) was ~1.2 km away in a different Grapevine industrial park and was\ndiscarded.\n\nDFW Trade Center VII's published profile — cross-dock, ~276,000–298,000 SF,\n350-ft building depth, 32-ft clear, ~2,500 SF office — matches the cross-dock",
         "mapsUrl": "https://www.google.com/maps/@32.93180,-97.03200,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/25-gxo-logistics-distribution-center-grapevine-tx-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.9318,
+              "lng": -97.032
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/25-gxo-logistics-distribution-center-grapevine-tx-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.9318,
+              "lng": -97.032
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "site": "Roster address (4220 Diplomacy Rd) was flagged approximate. Web research (Racklify, multiple directories) confirms GXO Logistics' Grapevine operation is at 2425 Esters Blvd, Grapevine TX 76051 — 'DFW Trade Center VII', a multi-tenant cross-dock distribution building (GXO shares the building with ShipBob and Tornado Transport). Esters Blvd geocoded via Nominatim to ~32.9346,-97.0331, in the International Commerce Park / LINK Logistics business park on DFW Airport land, near a major highway interchange. The audited building is the cross-dock warehouse located at the locked coordinates within that park; the exact unit could not be confirmed from imagery alone but the building type matches DFW Trade Center VII's published profile (~276-298K SF, 350' depth, 32' clear, cross-dock).",
           "truckGate": "FALSE — modern speculative multi-tenant cross-dock building. Truck courts on both long faces are open, ungated paved areas; no guard booth and no barrier arm observed at any driveway, consistent with the rest of this uniform spec-industrial park.",
@@ -2719,8 +4242,74 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
         "dossierExcerpt": "- Name: GXO Logistics Distribution Center - Arlington TX\n- Type: Distribution Center\n- Address: 3996 Scientific Dr, Arlington, TX 76014\n- Resolved coords: 32.678848, -97.07711",
         "mapsUrl": "https://www.google.com/maps/@32.678848,-97.07711,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/26-gxo-logistics-distribution-center-arlington-tx-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.678848,
+              "lng": -97.07711
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/26-gxo-logistics-distribution-center-arlington-tx-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.678848,
+              "lng": -97.07711
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Chain-link fence encloses the north dock yard; a sliding/cantilever gate spans the truck drive entrance off the internal park road (visible in 2026-03 Street View).",
           "remoteGs": "Gated entry but no guard booth visible at the gate - kiosk/app check-in implied.",
@@ -2810,8 +4399,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Name: GXO Logistics Distribution Center - West Valley City UT\n- Type: Distribution Center\n- Address: 2179 S Commerce Center Dr, West Valley City, UT 84120\n- Resolved coords: 40.723419, -111.992864",
         "mapsUrl": "https://www.google.com/maps/@40.723419,-111.992864,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/27-gxo-logistics-distribution-center-west-valley-city-ut-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 40.723419,
+              "lng": -111.992864
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/27-gxo-logistics-distribution-center-west-valley-city-ut-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 40.723419,
+              "lng": -111.992864
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Open site - no perimeter fence or gate on either the west (Commerce Center Dr) or east dock side. Dock aprons and parking are directly accessible from public roads (confirmed in 2025-07 Street View).",
           "shipRcvSeparate": "Cross-dock building - dock doors run along both the west and east long faces; trailers backed in on both sides.",
@@ -2898,8 +4545,66 @@
           "dropYard": true,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Name: GXO Logistics Distribution Center - Hillsboro OR\n- Type: Distribution Center\n- Roster address: 2501 NE Century Blvd, Hillsboro, OR 97124 (incorrect)\n- Actual address: 4800 NE 30th Ave, Hillsboro, OR 97124\n- Resolved coords: 45.555200, -122.943800",
         "mapsUrl": "https://www.google.com/maps/@45.555200,-122.943800,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/28-gxo-logistics-distribution-center-hillsboro-or-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 45.5552,
+              "lng": -122.9438
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/28-gxo-logistics-distribution-center-hillsboro-or-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 45.5552,
+              "lng": -122.9438
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "location": "Roster address '2501 NE Century Blvd' geocoded (GEOMETRIC_CENTER) to an Intel-campus parking lot - wrong. Washington County tax record + OSHA inspection confirm GXO at 4800 NE 30th Ave, Hillsboro OR 97124 (parcel R2227009). A GXO monument sign at the development entrance off NE 30th Ave positively confirms the site in 2024-08 Street View. Coordinates relocated to the GXO building.",
           "truckGate": "Open development entrance drive off NE 30th Ave - no gate or guard booth at the property entrance. Individual dock yards have low chain-link separators but no controlled truck checkpoint was observed; entrance is essentially open. Counted as no gate.",
@@ -2993,6 +4698,28 @@
         },
         "dossierExcerpt": "- Name: GXO Logistics Distribution Center - Aloha OR\n- Type: Distribution Center (per roster)\n- Roster address: 3585 SW 198th Ave, Aloha, OR 97007\n- Resolved coords: 45.49332, -122.8834 (Intel Aloha Campus)",
         "mapsUrl": "https://www.google.com/maps/@45.49332,-122.8834,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/29-gxo-logistics-distribution-center-aloha-or-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 45.49332,
+              "lng": -122.8834
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/29-gxo-logistics-distribution-center-aloha-or-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 45.49332,
+              "lng": -122.8834
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "facilityMismatch": "Roster address '3585 SW 198th Ave, Aloha OR 97007' resolves (correctly) to the Intel Aloha Campus - a semiconductor fabrication campus, NOT a standalone GXO distribution center. Multiple Waze/web sources confirm 3585 SW 198th Ave is Intel's Aloha Campus. GXO Logistics provides on-site contract logistics services for Intel at this campus, but there is no separable, auditable GXO distribution-center yard (dock bank, trailer drop yard, distribution truck gate) - it is an Intel fab campus.",
           "satelliteFindings": "z16-z18 imagery shows large semiconductor fab buildings with extensive rooftop cleanroom mechanical equipment, employee parking, construction-laydown yards, and a stormwater pond, surrounded by Aloha residential neighborhoods. No conventional warehouse dock bank or trailer drop yard is visible.",
@@ -3070,8 +4797,66 @@
           "dropYard": false,
           "multiStep": false
         },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
         "dossierExcerpt": "- Name: GXO Logistics Distribution Center - Carrollton TX\n- Type: Distribution Center\n- Address: 2816 Commodore Dr, Carrollton, TX 75007\n- Resolved coords: 32.989435, -96.928073",
         "mapsUrl": "https://www.google.com/maps/@32.989435,-96.928073,400m/data=!3m1!1e3",
+        "tiles": {
+          "17": {
+            "url": "/demo-packs/tiles/gxo/30-gxo-logistics-distribution-center-carrollton-tx-z17.jpg",
+            "zoom": 17,
+            "center": {
+              "lat": 32.989435,
+              "lng": -96.928073
+            },
+            "width": 1280,
+            "height": 1280
+          },
+          "18": {
+            "url": "/demo-packs/tiles/gxo/30-gxo-logistics-distribution-center-carrollton-tx-z18.jpg",
+            "zoom": 18,
+            "center": {
+              "lat": 32.989435,
+              "lng": -96.928073
+            },
+            "width": 1280,
+            "height": 1280
+          }
+        },
         "fieldNotes": {
           "truckGate": "Open site - no perimeter fence, gate, or guard booth. Driveways open directly from the internal industrial-park roads; the front entrance is an open drive (confirmed in 2024-02 and 2025-02 Street View).",
           "dockDoors": "Older tilt-up industrial building (~1980s-90s). Dock band with loading canopies along the NE face and SE end; estimated ~20 doors - banded 10-25.",
