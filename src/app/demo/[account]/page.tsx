@@ -26,6 +26,8 @@ interface SearchParams {
   site?: string;
   /** D3.4 — auto-open the driver journey replay on load when `play=1`. */
   play?: string;
+  /** D4.5 — deep-link directly to the network simulator tab. */
+  view?: string;
 }
 
 async function loadPack(slug: string): Promise<DemoPack | null> {
@@ -74,6 +76,7 @@ export default async function DemoAccountPage({
   const requestedSiteId = sp.site && pack.network.sites.find((s) => s.id === sp.site) ? sp.site : null;
   const initialSiteId = requestedSiteId ?? pack.account.featuredSiteId ?? null;
   const autoPlay = sp.play === '1';
+  const initialView: 'atlas' | 'sim' = sp.view === 'sim' ? 'sim' : 'atlas';
 
   return (
     <DemoSurface
@@ -81,6 +84,7 @@ export default async function DemoAccountPage({
       mode="standalone"
       initialSiteId={initialSiteId}
       autoPlay={autoPlay}
+      initialView={initialView}
     />
   );
 }

@@ -7,6 +7,7 @@ import { NetworkAtlas } from './network-atlas';
 import { SiteDetailPanel } from './site-detail-panel';
 import { ArchetypeMixChart } from './archetype-mix-chart';
 import { CoverageHonesty } from './coverage-honesty';
+import { NetworkSimulator } from './network-simulator';
 
 /**
  * Top-level client surface for /demo/[account]. Manages cross-component
@@ -17,6 +18,8 @@ import { CoverageHonesty } from './coverage-honesty';
  * is purely the atlas + click-to-detail; the microsite owns the chrome.
  */
 
+type View = 'atlas' | 'sim';
+
 interface Props {
   pack: DemoPack;
   mode: 'standalone' | 'embed';
@@ -24,9 +27,12 @@ interface Props {
   initialSiteId?: string | null;
   /** When true, auto-open the selected site in replay mode (D3.4 `?play=1`). */
   autoPlay?: boolean;
+  /** Initial view — populated from `?view=` search param. */
+  initialView?: View;
 }
 
-export function DemoSurface({ pack, mode, initialSiteId = null, autoPlay = false }: Props) {
+export function DemoSurface({ pack, mode, initialSiteId = null, autoPlay = false, initialView = 'atlas' }: Props) {
+  const [view, setView] = useState<View>(initialView);
   const [selectedSiteId, setSelectedSiteId] = useState<string | null>(initialSiteId);
   const [archetypeFilter, setArchetypeFilter] = useState<Set<ArchetypeId> | null>(null);
   // Once a user manually closes the auto-play, we should not re-open it on
@@ -81,35 +87,66 @@ export function DemoSurface({ pack, mode, initialSiteId = null, autoPlay = false
               ← Read the full memo
             </Link>
           </div>
+          {/* View tab toggle */}
+          <div className="mx-auto flex max-w-5xl gap-1 px-5">
+            {(
+              [
+                { id: 'atlas', label: 'Network atlas' },
+                { id: 'sim', label: 'Network simulator' },
+              ] as const
+            ).map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setView(tab.id)}
+                className={`border-b-2 px-3 py-2 text-[12px] uppercase tracking-widest transition ${
+                  view === tab.id
+                    ? 'border-stone-900 text-stone-900'
+                    : 'border-transparent text-stone-500 hover:text-stone-900'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
           <CoverageHonesty pack={pack} />
         </header>
       )}
 
-      {/* Main: split view — map left, panel right */}
-      <main className="flex flex-1 flex-col overflow-hidden md:flex-row">
-        <div className="relative h-[400px] flex-1 md:h-auto">
-          <NetworkAtlas
-            pack={pack}
-            selectedSiteId={selectedSiteId}
-            archetypeFilter={archetypeFilter}
-            onSelectSite={setSelectedSiteId}
-          />
-        </div>
-        <aside className="flex w-full shrink-0 flex-col overflow-hidden border-t border-stone-200 bg-white md:w-[400px] md:border-l md:border-t-0">
-          {selectedSite ? (
-            <SiteDetailPanel
-              site={selectedSite}
-              onClose={() => {
-                setSelectedSiteId(null);
-                setAutoPlayConsumed(true);
-              }}
-              autoPlay={shouldAutoPlay}
+      {/* Atlas view: split — map + donut/site-panel */}
+      {view === 'atlas' && (
+        <main className="flex flex-1 flex-col overflow-hidden md:flex-row">
+          <div className="relative h-[400px] flex-1 md:h-auto">
+            <NetworkAtlas
+              pack={pack}
+              selectedSiteId={selectedSiteId}
+              archetypeFilter={archetypeFilter}
+              onSelectSite={setSelectedSiteId}
             />
-          ) : (
-            <ArchetypeMixChart pack={pack} archetypeFilter={archetypeFilter} onToggleArchetype={toggleArchetype} />
-          )}
-        </aside>
-      </main>
+          </div>
+          <aside className="flex w-full shrink-0 flex-col overflow-hidden border-t border-stone-200 bg-white md:w-[400px] md:border-l md:border-t-0">
+            {selectedSite ? (
+              <SiteDetailPanel
+                site={selectedSite}
+                onClose={() => {
+                  setSelectedSiteId(null);
+                  setAutoPlayConsumed(true);
+                }}
+                autoPlay={shouldAutoPlay}
+              />
+            ) : (
+              <ArchetypeMixChart pack={pack} archetypeFilter={archetypeFilter} onToggleArchetype={toggleArchetype} />
+            )}
+          </aside>
+        </main>
+      )}
+
+      {/* Simulator view: full-width map + controls */}
+      {view === 'sim' && (
+        <main className="flex flex-1 overflow-hidden">
+          <NetworkSimulator pack={pack} />
+        </main>
+      )}
 
       {/* Footer — only in standalone mode */}
       {mode === 'standalone' && (
