@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { buildAbsoluteUrl } from '@/lib/site-url';
+import { buildMicrositeAbsoluteUrl } from '@/lib/site-url';
 
 export const SOCIAL_IMAGE_WIDTH = 1200;
 export const SOCIAL_IMAGE_HEIGHT = 630;
@@ -21,8 +21,11 @@ export function buildPublicShareMetadata({
   imageAlt,
   noIndex = true,
 }: PublicShareMetadataInput): Metadata {
-  const url = buildAbsoluteUrl(pathname);
-  const imageUrl = buildAbsoluteUrl(imagePath);
+  // Public share / OG / canonical URLs always point at the canonical
+  // microsite domain (yardflow.ai), not the modex-gtm Vercel preview.
+  // Same-origin matters for D8.1 (localStorage hand-off to /roi).
+  const url = buildMicrositeAbsoluteUrl(pathname);
+  const imageUrl = buildMicrositeAbsoluteUrl(imagePath);
 
   return {
     title,
