@@ -146,12 +146,17 @@ export function NetworkSimulator({ pack }: Props) {
   const toggleYns = () => setConfig((c) => ({ ...c, ynsMode: !c.ynsMode }));
 
   const activePreset = PRESETS.find((p) => p.id === activePresetId);
-  const { kpis, countsByRisk } = state;
+  const { countsByRisk } = state;
 
-  // Tone the turnaround tile by current utilization — visual answer to
-  // "is YNS helping right now?" even before reading the number.
-  const turnaroundTone: 'neutral' | 'warn' | 'critical' | 'good' =
-    kpis.truckTurnaroundMin <= 24 ? 'good' : kpis.truckTurnaroundMin <= 36 ? 'neutral' : kpis.truckTurnaroundMin <= 48 ? 'warn' : 'critical';
+  // Audit-derived facts (real, not modeled). These are the only numbers
+  // we surface on the demo's KPI strip — operational dollar/time values
+  // live exclusively at yardflow.ai/roi (the only approved model).
+  const dropYardSites = pack.network.sites.filter((s) => s.classification.dropYard).length;
+  const archetypeCounts: Record<string, number> = {};
+  pack.network.sites.forEach((s) => {
+    archetypeCounts[s.archetype] = (archetypeCounts[s.archetype] ?? 0) + 1;
+  });
+  const topArchetype = Object.entries(archetypeCounts).sort((a, b) => b[1] - a[1])[0];
 
   return (
     <div className="flex h-full w-full flex-col bg-stone-50">
@@ -184,15 +189,54 @@ export function NetworkSimulator({ pack }: Props) {
         </div>
       </div>
 
-      {/* KPI grid — 7 modeled operational tiles */}
-      <div className="grid shrink-0 grid-cols-2 divide-x divide-y divide-stone-200 border-b border-stone-200 bg-white sm:grid-cols-4 lg:grid-cols-7">
-        <Kpi icon="⏱" label="Truck turnaround" value={`${kpis.truckTurnaroundMin} min`} tone={turnaroundTone} />
-        <Kpi icon="📦" label="Empty dwell" value={`${kpis.emptyDwellDays} days`} />
-        <Kpi icon="✓" label="Pool compliance" value={`${kpis.poolCompliancePct}%`} tone={kpis.poolCompliancePct >= 100 ? 'good' : 'neutral'} />
-        <Kpi icon="🚛" label="Drivers waiting" value={kpis.driversAwaitingService} tone={kpis.driversAwaitingService > 0 ? 'warn' : 'neutral'} />
-        <Kpi icon="↓" label="Inbound age" value={`${kpis.inboundAgeDays} days`} />
-        <Kpi icon="↑" label="Outbound age" value={`${kpis.outboundAgeDays} days`} />
-        <Kpi icon="⚠" label="OOS trailers" value={`${kpis.oosTrailersPct}%`} />
+      {/* Audit-derived facts. NO modeled operational metrics here — the
+          ONLY approved value model is at yardflow.ai/roi, which the CTA
+          below routes to. Every number on this strip is a count or sum
+          straight off the audit JSON. */}
+      <div className="grid shrink-0 grid-cols-2 divide-x divide-y divide-stone-200 border-b border-stone-200 bg-white sm:grid-cols-3 lg:grid-cols-6">
+        <Kpi icon="🏭" label="Facilities audited" value={pack.account.siteCount} />
+        <Kpi icon="🚪" label="Dock doors" value={pack.network.totals.dockDoors.toLocaleString()} />
+        <Kpi icon="🚛" label="Trailer spots" value={pack.network.totals.trailerCapacity.toLocaleString()} />
+        <Kpi icon="🚉" label="Rail-served" value={pack.network.totals.railServed} />
+        <Kpi icon="📦" label="Drop-yard sites" value={`${dropYardSites} / ${pack.account.siteCount}`} />
+        <Kpi icon="🏷" label="Top archetype" value={topArchetype ? `${topArchetype[0]} · ${topArchetype[1]}×` : '—'} />
+      </div>
+
+      {/* ROI / Sales-deck CTA strip — the ONLY place dollar values live.
+          Routes prospects to yardflow.ai/roi (the approved value model)
+          and yardflow.ai/YNS (the sales deck hub). The demo itself never
+          surfaces modeled dollar/time metrics — every operational number
+          a prospect should care about lives at /roi. */}
+      <div className="shrink-0 border-b border-stone-200 bg-gradient-to-r from-stone-900 to-stone-800 px-4 py-3 text-white sm:px-6">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="min-w-0">
+            <div className="text-[10px] uppercase tracking-widest text-stone-400">Model the dollar value of this network</div>
+            <div className="mt-0.5 text-sm">
+              <span className="font-semibold text-white">Approved ROI model</span>
+              <span className="text-stone-400"> · 11.5× legacy YMS · $87.4M model across 50 sites</span>
+            </div>
+          </div>
+          <div className="flex shrink-0 gap-2 text-xs">
+            <a
+              href="https://yardflow.ai/roi/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-md bg-white px-3 py-1.5 font-medium text-stone-900 transition hover:bg-stone-200"
+              data-ms-cta-id="demo-sim-to-roi"
+            >
+              ROI Calculator →
+            </a>
+            <a
+              href="https://yardflow.ai/YNS/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-md border border-stone-600 px-3 py-1.5 text-stone-200 transition hover:border-stone-400 hover:text-white"
+              data-ms-cta-id="demo-sim-to-yns"
+            >
+              Sales deck →
+            </a>
+          </div>
+        </div>
       </div>
 
       {/* Map wrapper.
@@ -346,9 +390,12 @@ export function NetworkSimulator({ pack }: Props) {
 
       {/* Disclaimer */}
       <div className="shrink-0 border-t border-stone-200 bg-stone-50 px-4 py-2.5 text-[11px] leading-relaxed text-stone-500 sm:px-6">
-        Throughput, turnaround, dwell, and queue depth are modeled from public yard geometry — dock doors × shifts × per-archetype
-        turns/door, with archetype-specific YNS uplift when toggled on. Weather events are geographic capacity reductions on
-        affected regions. These are ranges, not point estimates; your actual numbers will tell us where we&rsquo;re wrong.
+        Per-site capacity is modeled from public yard geometry — dock doors × shifts × per-archetype turns/door, with
+        archetype-specific YNS uplift when toggled on. Weather events are geographic capacity reductions on affected
+        regions. <strong className="font-semibold text-stone-700">All dollar and operational metrics live at{' '}
+        <a href="https://yardflow.ai/roi/" target="_blank" rel="noopener noreferrer" className="underline hover:text-stone-900">
+          yardflow.ai/roi
+        </a>{' '}— the approved YardFlow ROI model.</strong>
       </div>
     </div>
   );
