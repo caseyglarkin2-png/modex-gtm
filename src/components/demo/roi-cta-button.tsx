@@ -51,18 +51,40 @@ interface ArchetypeAssumptions {
 }
 
 /**
+ * Vertical-based heuristic for legacy-YMS adoption — used as a fallback
+ * when the pack's `coverageNote.legacyYmsFacilityCount` is null. These
+ * are reasonable industry estimates for what fraction of an account's
+ * facilities currently run on SOME legacy YMS (CHEP, SAP, Manhattan,
+ * in-house). NOT a YardFlow deployment count — that's always 0 on a
+ * demo. Override per-account in the pack via the patch script when
+ * better data exists.
+ */
+const LEGACY_YMS_ADOPTION_BY_VERTICAL: Record<string, number> = {
+  cpg: 0.35,
+  'grocer-distributor': 0.45,
+  '3pl': 0.55,
+  retailer: 0.4,
+  manufacturer: 0.3,
+  'oem-automotive': 0.4,
+  beverage: 0.4,
+  'logistics-carrier': 0.5,
+};
+
+/**
  * Map a DemoPack to the V2 calculator's input shape. Keeps the
  * `assumptions` block at its industry-prior defaults (matching what the
  * calculator ships with) and only overrides `asks` — the inputs we can
  * derive honestly from the audit.
  */
 function buildRoiV2State(pack: DemoPack): RoiV2State {
+  const cov = pack.account.coverageNote;
+
   // Prefer total footprint (global where available) over just the
   // audited count, so the ROI we model is the prospect's full network,
   // not just the slice we mapped.
   const total =
-    pack.account.coverageNote?.totalGlobalFootprint ??
-    pack.account.coverageNote?.estimatedFootprint ??
+    cov?.totalGlobalFootprint ??
+    cov?.estimatedFootprint ??
     pack.account.siteCount;
 
   // Drop-yard ratio from the AUDIT sample; assume it's representative
@@ -73,12 +95,27 @@ function buildRoiV2State(pack: DemoPack): RoiV2State {
   const dropRatio = auditedSites > 0 ? auditedDrops / auditedSites : 0;
   const facilitiesWithDropTrailers = Math.round(total * dropRatio);
 
+  // Legacy-YMS count — prefer manually-curated value, fall back to a
+  // vertical-based heuristic. Mondelez et al. have a meaningful chunk
+  // of facilities on legacy YMS today; defaulting to 0 understates the
+  // ROI of REPLACING those systems with YardFlow.
+  let facilitiesWithYms: number;
+  if (typeof cov?.legacyYmsFacilityCount === 'number') {
+    facilitiesWithYms = cov.legacyYmsFacilityCount;
+  } else {
+    const rate = LEGACY_YMS_ADOPTION_BY_VERTICAL[pack.account.archetype] ?? 0.3;
+    facilitiesWithYms = Math.round(total * rate);
+  }
+  // Clamp: cannot exceed total, and the V2 calculator's
+  // facilitiesWithYms can include sites that also have drops, but
+  // shouldn't exceed the drop-yard count + a small fudge (the
+  // calculator treats them as the "with YMS" tier exclusively).
+  facilitiesWithYms = Math.max(0, Math.min(facilitiesWithYms, total));
+
   return {
     asks: {
       totalFacilities: total,
-      // We don't audit YMS deployment from satellite imagery — leave at
-      // 0 (prospect overrides on the calculator if they have one).
-      facilitiesWithYms: 0,
+      facilitiesWithYms,
       facilitiesWithDropTrailers,
       averageMarginPerShipment: 1000,
     },

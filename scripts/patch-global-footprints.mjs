@@ -21,12 +21,17 @@
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 
 /**
- * For each account: [scope, inScopeEstimate, totalGlobal | null, note]
+ * For each account: { scope, inScope, global, legacyYms, note }
  *
- *   scope = the geography we mapped (US | NA | global)
- *   inScopeEstimate = approx total facilities within that scope
- *   totalGlobal = approx worldwide total; null if US/NA-only company
- *   note = string appended to coverageNote.note, or null to keep existing
+ *   scope        = the geography we mapped (US | NA | global)
+ *   inScope      = approx total facilities within that scope
+ *   global       = approx worldwide total; null if US/NA-only company
+ *   legacyYms    = approx facilities running a LEGACY YMS today (CHEP, SAP,
+ *                  Manhattan, in-house). NOT YardFlow YNS — these accounts
+ *                  are prospects, so YNS deployments = 0. This is what
+ *                  YardFlow REPLACES. Omit (null) to fall back to the
+ *                  vertical heuristic in roi-cta-button.tsx.
+ *   note         = appended to coverageNote.note
  */
 const PATCHES = {
   'ab-inbev': {
@@ -213,6 +218,10 @@ const PATCHES = {
     scope: 'NA',
     inScope: 26,
     global: 160,
+    // Mondelez runs SAP yard tooling at a meaningful chunk of NA + EU
+    // plants (anchored by their broader SAP S/4 program); call it ~60
+    // of 160 globally. Adjust if you have insider data.
+    legacyYms: 60,
     note: 'We audited 22 of an estimated 26 Mondelez NA manufacturing and DC facilities. Mondelez operates ~160 plants globally; international scope (130+ sites across 80 countries) is available on request. The 4 NA sites not shown are co-manufacturer / contract sites that operate inside other companies’ footprints.',
   },
   'nestle-usa': {
@@ -317,13 +326,17 @@ for (const file of files) {
   if (patch.global !== null) {
     pack.account.coverageNote.totalGlobalFootprint = patch.global;
   } else {
-    // Explicitly remove the field for US-only accounts
     delete pack.account.coverageNote.totalGlobalFootprint;
+  }
+  if (typeof patch.legacyYms === 'number') {
+    pack.account.coverageNote.legacyYmsFacilityCount = patch.legacyYms;
+  } else {
+    delete pack.account.coverageNote.legacyYmsFacilityCount;
   }
 
   writeFileSync(path, JSON.stringify(pack, null, 2));
   console.log(
-    `  ${slug.padEnd(32)} audited=${String(pack.account.siteCount).padStart(3)} | scope=${patch.scope.padEnd(7)} | inscope=${String(patch.inScope).padStart(4)} | global=${patch.global ?? 'n/a'}`,
+    `  ${slug.padEnd(32)} audited=${String(pack.account.siteCount).padStart(3)} | scope=${patch.scope.padEnd(7)} | inscope=${String(patch.inScope).padStart(4)} | global=${patch.global ?? 'n/a'} | legacyYms=${patch.legacyYms ?? '(heuristic)'}`,
   );
   updated++;
 }
