@@ -8,10 +8,12 @@
     "siteCount": 21,
     "coverageNote": {
       "auditedCount": 21,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 30,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 21 identifiable facilities."
+      "note": "Caterpillar operates ~110 manufacturing facilities across 23 countries; we audited 21 NA plants. International scope on request.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 110
     },
     "featuredSiteId": "11-waco-tx-distribution-center"
   },

@@ -8,10 +8,12 @@
     "siteCount": 17,
     "coverageNote": {
       "auditedCount": 17,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 22,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 17 identifiable facilities."
+      "note": "Toyota Motor Corporation operates ~50 production plants globally; ~22 in NA (TMMK Kentucky, TMMI Indiana, TMMTX Texas, TMMMS Mississippi, TMMAL Alabama, TMMWV West Virginia, TMMC Cambridge ON, TMMBC Tijuana, TMMGT Guanajuato, parts DCs, R&D, NAMC HQ). We audited 17. International scope on request.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 50
     },
     "featuredSiteId": "08-huntsville-al-engine"
   },

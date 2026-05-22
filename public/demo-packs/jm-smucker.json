@@ -8,10 +8,12 @@
     "siteCount": 17,
     "coverageNote": {
       "auditedCount": 17,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 30,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 17 identifiable facilities."
+      "note": "J.M. Smucker operates ~30 NA plants (Jif, Folgers, Smucker, Milk-Bone, etc.). We audited 17 representative sites.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 30
     },
     "featuredSiteId": "04-uncrustables-longmont-co"
   },

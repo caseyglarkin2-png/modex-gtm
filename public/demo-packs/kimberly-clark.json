@@ -8,10 +8,12 @@
     "siteCount": 18,
     "coverageNote": {
       "auditedCount": 18,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 30,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 18 identifiable facilities."
+      "note": "Kimberly-Clark operates ~150 manufacturing facilities across 35 countries; we audited 18 NA sites. International scope on request.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 150
     },
     "featuredSiteId": "06-kc-owensboro-plant"
   },

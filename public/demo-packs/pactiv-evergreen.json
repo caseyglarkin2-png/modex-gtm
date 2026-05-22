@@ -8,10 +8,12 @@
     "siteCount": 30,
     "coverageNote": {
       "auditedCount": 30,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 80,
       "droppedStubCount": 0,
       "capHit": true,
-      "note": "We audited the 30 largest facilities by throughput. The wider network follows the same archetype distribution."
+      "note": "Pactiv Evergreen operates ~80 NA manufacturing facilities (foodservice packaging, fresh-foods, dairy cartons). We audited 30 representative sites.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 80
     },
     "featuredSiteId": "19-romeoville"
   },

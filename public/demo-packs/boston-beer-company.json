@@ -8,10 +8,12 @@
     "siteCount": 5,
     "coverageNote": {
       "auditedCount": 5,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 5,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 5 identifiable facilities."
+      "note": "Boston Beer (Sam Adams, Truly, Twisted Tea) operates ~5 NA breweries + 1 UK; we audited the NA breweries.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 6
     },
     "featuredSiteId": "02-cincinnati-brewery"
   },

@@ -8,10 +8,12 @@
     "siteCount": 11,
     "coverageNote": {
       "auditedCount": 11,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 12,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 11 identifiable facilities."
+      "note": "Constellation Brands operates ~12 NA production facilities (US + Mexico) + a few in Italy / NZ. We audited 11 NA sites; the international count is small enough to call.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 12
     },
     "featuredSiteId": "02-constellation-beer-dc-wilmer-tx-dallas-i-45"
   },

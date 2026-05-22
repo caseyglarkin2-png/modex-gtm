@@ -8,10 +8,12 @@
     "siteCount": 21,
     "coverageNote": {
       "auditedCount": 21,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 30,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 21 identifiable facilities."
+      "note": "AB InBev operates ~200 breweries across 50+ countries; we audited 21 NA breweries + DCs (US/Mexico/Canada). International scope on request.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 200
     },
     "featuredSiteId": "13-metal-container-corporation-arnold-mo-can-plant"
   },

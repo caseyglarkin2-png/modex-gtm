@@ -8,10 +8,12 @@
     "siteCount": 27,
     "coverageNote": {
       "auditedCount": 27,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 50,
       "droppedStubCount": 1,
       "capHit": false,
-      "note": "Audited all 27 identifiable facilities (1 additional were unresolvable from public sources)."
+      "note": "CJ Logistics America is the NA subsidiary of CJ Logistics (Korea, ~250 sites globally). We audited the NA DC/transload network.",
+      "auditedScope": "US",
+      "totalGlobalFootprint": 250
     },
     "featuredSiteId": "08-cj-logistics-champaign-il"
   },

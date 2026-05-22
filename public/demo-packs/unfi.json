@@ -11,7 +11,8 @@
       "estimatedFootprint": 56,
       "droppedStubCount": 3,
       "capHit": false,
-      "note": "UNFI operates ~56 NA distribution centers. We audited the 30 highest-throughput; smaller facilities share gate/dock archetypes with the audited cohort."
+      "note": "United Natural Foods Inc. operates ~56 US distribution centers (UNFI, SUPERVALU acquired 2018). We audited 27.",
+      "auditedScope": "US"
     },
     "featuredSiteId": "10-york-pa"
   },

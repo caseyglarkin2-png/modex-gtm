@@ -8,10 +8,12 @@
     "siteCount": 24,
     "coverageNote": {
       "auditedCount": 24,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 30,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 24 identifiable facilities."
+      "note": "Ford operates ~65 assembly and stamping plants globally; ~30 are in North America. We audited 24 NA plants. International scope on request.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 65
     },
     "featuredSiteId": "02-kentucky-truck-plant"
   },

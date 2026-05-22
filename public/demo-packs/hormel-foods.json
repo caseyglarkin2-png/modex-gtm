@@ -8,10 +8,12 @@
     "siteCount": 27,
     "coverageNote": {
       "auditedCount": 27,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 50,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 27 identifiable facilities."
+      "note": "Hormel Foods operates ~50 manufacturing facilities, almost entirely in NA. We audited 27 representative sites.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 50
     },
     "featuredSiteId": "15-hormel-fort-smith-plant"
   },

@@ -8,10 +8,11 @@
     "siteCount": 13,
     "coverageNote": {
       "auditedCount": 13,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 40,
       "droppedStubCount": 1,
       "capHit": false,
-      "note": "Audited all 13 identifiable facilities (1 additional were unresolvable from public sources)."
+      "note": "Salson Logistics operates ~40 US warehouse + transload + drayage sites. We audited 13.",
+      "auditedScope": "US"
     },
     "featuredSiteId": "04-compton-ca"
   },

@@ -11,7 +11,8 @@
       "estimatedFootprint": 200,
       "droppedStubCount": 1,
       "capHit": false,
-      "note": "Frito-Lay runs ~200 NA DSD warehouses and plants; we audited the 30 largest. Smaller DSD branches share gate/dock archetypes with the audited cohort."
+      "note": "Frito-Lay (PepsiCo NA subsidiary) operates ~200 US manufacturing + DC sites. We audited 29 representative sites.",
+      "auditedScope": "US"
     },
     "featuredSiteId": "18-frito-lay-aberdeen-md"
   },

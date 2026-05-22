@@ -8,10 +8,11 @@
     "siteCount": 6,
     "coverageNote": {
       "auditedCount": 6,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 6,
       "droppedStubCount": 1,
       "capHit": false,
-      "note": "Audited all 6 identifiable facilities (1 additional were unresolvable from public sources)."
+      "note": "Bob Evans Farms operates ~6 US food-manufacturing plants supplying the retail brand + restaurant chain.",
+      "auditedScope": "US"
     },
     "featuredSiteId": "03-bob-evans-farms-hillsdale-mi-plant"
   },

@@ -8,10 +8,12 @@
     "siteCount": 21,
     "coverageNote": {
       "auditedCount": 21,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 30,
       "droppedStubCount": 1,
       "capHit": false,
-      "note": "Audited all 21 identifiable facilities (1 additional were unresolvable from public sources)."
+      "note": "John Deere operates ~60 manufacturing/parts facilities globally; ~30 are in NA. We audited 21 NA sites. International scope on request.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 60
     },
     "featuredSiteId": "19-john-deere-north-american-parts-distribution-center"
   },

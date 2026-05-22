@@ -8,10 +8,12 @@
     "siteCount": 24,
     "coverageNote": {
       "auditedCount": 24,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 100,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 24 identifiable facilities."
+      "note": "DHL Supply Chain operates ~1,500 sites in 50+ countries; we audited 24 US sites in the audit window. International scope on request.",
+      "auditedScope": "US",
+      "totalGlobalFootprint": 1500
     },
     "featuredSiteId": "20-dc-north-las-vegas-nv"
   },

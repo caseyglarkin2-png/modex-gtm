@@ -8,10 +8,12 @@
     "siteCount": 18,
     "coverageNote": {
       "auditedCount": 18,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 22,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 18 identifiable facilities."
+      "note": "Honda operates ~100 manufacturing plants in 30+ countries; ~22 are in North America (US + Canada + Mexico, incl. Alliston, Celaya, Marysville, East Liberty, Lincoln, Greensburg, parts/engine plants). We audited 18 NA sites. International scope on request.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 100
     },
     "featuredSiteId": "05-honda-manufacturing-of-alabama"
   },

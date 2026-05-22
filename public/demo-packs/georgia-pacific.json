@@ -8,10 +8,12 @@
     "siteCount": 30,
     "coverageNote": {
       "auditedCount": 30,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 150,
       "droppedStubCount": 0,
       "capHit": true,
-      "note": "We audited the 30 largest facilities by throughput. The wider network follows the same archetype distribution."
+      "note": "Georgia-Pacific operates ~150 NA manufacturing facilities (paper, packaging, pulp, building products). We audited 30 representative sites.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 150
     },
     "featuredSiteId": "04-gp-broadway-mill-green-bay-wi"
   },

@@ -8,10 +8,12 @@
     "siteCount": 13,
     "coverageNote": {
       "auditedCount": 13,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 15,
       "droppedStubCount": 1,
       "capHit": false,
-      "note": "Audited all 13 identifiable facilities (1 additional were unresolvable from public sources)."
+      "note": "Dannon (US subsidiary of Danone) operates ~15 US plants. Parent Danone operates ~190 plants globally; international scope on request.",
+      "auditedScope": "US",
+      "totalGlobalFootprint": 190
     },
     "featuredSiteId": "02-danone-minster-oh"
   },
