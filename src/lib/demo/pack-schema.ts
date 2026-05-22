@@ -222,6 +222,15 @@ const CoverageNote = z.object({
   totalGlobalFootprint: z.number().int().positive().nullable().optional(),
   /** Geographic scope of the audit (e.g. "NA", "global"). Optional. */
   auditedScope: z.string().optional(),
+  /**
+   * Number of facilities estimated to be running on a LEGACY YMS today
+   * (CHEP, SAP, Manhattan, in-house, etc.). This is the bucket YardFlow
+   * displaces — NOT a count of YardFlow deployments (which is always 0
+   * on a demo, since these are prospects). Pre-fills the V2 ROI
+   * calculator's `facilitiesWithYms` ask. Optional; when null, the
+   * RoiCtaButton uses a vertical-based heuristic.
+   */
+  legacyYmsFacilityCount: z.number().int().nonnegative().nullable().optional(),
   droppedStubCount: z.number().int().nonnegative().default(0),
   capHit: z.boolean(),
   note: z.string(),

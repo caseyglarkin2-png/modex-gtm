@@ -13,7 +13,8 @@
       "capHit": false,
       "note": "We audited 22 of an estimated 26 Mondelez NA manufacturing and DC facilities. Mondelez operates ~160 plants globally; international scope (130+ sites across 80 countries) is available on request. The 4 NA sites not shown are co-manufacturer / contract sites that operate inside other companies’ footprints.",
       "totalGlobalFootprint": 160,
-      "auditedScope": "NA"
+      "auditedScope": "NA",
+      "legacyYmsFacilityCount": 60
     },
     "featuredSiteId": "07-mondelez-richmond-distribution-center"
   },
