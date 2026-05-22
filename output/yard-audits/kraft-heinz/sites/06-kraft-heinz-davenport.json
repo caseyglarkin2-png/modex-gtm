@@ -1,24 +1,74 @@
 {
   "name": "Kraft Heinz - Davenport",
-  "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+  "type": "Food Processing Company",
+  "coords": { "lat": 41.6160, "lng": -90.6105 },
+  "geofences": {
+    "perimeter": { "south": 41.6125, "west": -90.6135, "north": 41.6182, "east": -90.6080 },
+    "truckGate": { "south": 41.61795, "west": -90.6098, "north": 41.61835, "east": -90.6088 },
+    "dropYards": [
+      { "south": 41.6155, "west": -90.6095, "north": 41.6170, "east": -90.6082 },
+      { "south": 41.6140, "west": -90.6118, "north": 41.6150, "east": -90.6098 }
+    ],
+    "dockAprons": [
+      { "south": 41.6148, "west": -90.6130, "north": 41.6157, "east": -90.6098 },
+      { "south": 41.6155, "west": -90.6098, "north": 41.6170, "east": -90.6088 }
+    ],
+    "staging": { "south": 41.6172, "west": -90.6118, "north": 41.6182, "east": -90.6090 }
   },
-  "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "connectivityIssue"],
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 80,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 72.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.6160,-90.6105,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "scale", "multiStep", "connectivityIssue"],
   "fieldNotes": {
-    "streetview": "Street View shows a perimeter chain-link fence in front of a blank building wall - confirms the site is fenced, but the truck entrance is not in this frame.",
-    "truckGate": "Satellite shows a controlled entry drive at the south corner with a small structure beside it; fenced perimeter supports a gated entry.",
-    "guardShack": "Small structure visible near the south entry road on satellite, consistent with a guard booth.",
-    "dropYard": "Large trailer-storage lots on the southeast side of the plant.",
-    "urbanRural": "Modern plant surrounded by open farm fields; clearly Rural.",
-    "connectivityIssue": "Rural but near the Davenport metro edge - low likelihood of coverage gap; flagged uncertain."
-  }
+    "siteIdentification": "Confirmed via web search: 9401 Granite Way, Davenport IA 52806, Eastern Iowa Industrial Center, 382,000 sq ft Oscar Mayer Deli Fresh / Lunchables meat-processing plant on 70 acres (Gray Construction, 2017). The given lat/lng (41.6154, -90.6125) was ~300 m WSW of the building center; locked center to ~41.6160, -90.6105.",
+    "truckGate": "Single controlled entry off Slopertown Road at NW corner of employee parking. Property is fully enclosed by chain-link perimeter fence (confirmed on west, north, and east faces via Street View 2025-06). No barrier-arm visible from satellite but the fenced single-entrance pinch-point qualifies as a truck gate per rubric.",
+    "guardShack": "No standalone staffed guard booth visible at the road entry or anywhere along the truck route in z19-z21 satellite imagery. Small structure at SW corner of parking lot is HVAC/equipment, not a guard booth.",
+    "remoteGs": "Modern 2017 greenfield Kraft Heinz plant; absence of visible guard booth in satellite imagery strongly implies remote kiosk / driver app check-in. Marked uncertain since the device itself is below satellite resolution.",
+    "postGateStaging": "Truck route passes through a wide paved apron south of parking before reaching dock face — provides queue/staging room (postGateStaging true).",
+    "drivewayLong": "Driveway from public road entry to dock face is roughly 350 m (~1100 ft) of paved internal route — easily holds 3+ trucks in queue.",
+    "dockDoors": "Counted ~40 dock doors along south face (split into west and east sub-banks) plus ~15-20 doors along east face facing the east drop yard. Total ~55-60. Band: 50+.",
+    "dropArea": "East-side drop yard holds ~50 parked trailers in marked stalls; south-side drop yard holds ~25 trailers. 75+ trailers visible, parking capacity ~110. Band: 50+.",
+    "shipRcvSeparate": "Two physically distinct dock clusters on different building faces: south-facing dock bank (long bank of ~40 doors) and east-facing dock bank (~20 doors with separate east drop yard) — consistent with separate shipping and receiving.",
+    "fastLaneOpportunity": "The driveway from Slopertown to the property has wide paved apron width and unused grass median on either side — physical room for a bypass/express lane addition.",
+    "railServed": "Rail mainline (3 tracks) runs N-S between Kraft Heinz and east-DC neighbor, with rail crossing on Slopertown. NO rail spur visible curving into Kraft Heinz property. Rail spur serves the east-DC, not Kraft Heinz.",
+    "buildingCount": "Main 382,000 sq ft manufacturing building (single complex). Secondary structure: wastewater treatment building at south of property (small). Counted as 2.",
+    "urbanRural": "Surrounded by cornfields on north, west, and south; in the Eastern Iowa Industrial Center far north of Davenport's urban fabric. Clearly Rural.",
+    "connectivityIssue": "Rural but located within an active industrial park with multiple modern tenants and ~15 km from downtown Davenport — cellular coverage almost certainly good. Marked false with low concern.",
+    "scale": "No truck scale platform identified in satellite imagery along the inbound route or dock aprons — meat processing facilities can have a scale but I do not see one clearly. Marked uncertain.",
+    "multiStep": "Single gate/entry; no visible second checkpoint or scale house after entry. Marked false.",
+    "approachUsed": "Street View captured 2025-06 from Slopertown Road (north), Hillandale Drive (west), and the east intersection at the rail crossing; satellite at z17-z21 from Maxar 2026 imagery."
+  },
+  "method": "deep-audit"
 }

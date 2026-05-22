@@ -1,22 +1,74 @@
 {
   "name": "Kraft Heinz - Aurora",
-  "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+  "type": "Cold Storage Facility",
+  "coords": { "lat": 41.78305, "lng": -88.37315 },
+  "geofences": {
+    "perimeter": { "south": 41.78175, "west": -88.37427, "north": 41.78360, "east": -88.37205 },
+    "truckGate": { "south": 41.78195, "west": -88.37260, "north": 41.78225, "east": -88.37230 },
+    "dropYards": [
+      { "south": 41.78175, "west": -88.37427, "north": 41.78240, "east": -88.37230 }
+    ],
+    "dockAprons": [
+      { "south": 41.78240, "west": -88.37427, "north": 41.78290, "east": -88.37245 }
+    ],
+    "staging": { "south": 41.78195, "west": -88.37235, "north": 41.78230, "east": -88.37205 }
   },
-  "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes"],
+  "yardMetrics": {
+    "dockDoorCount": 30,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 9.4,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.78305,-88.37315,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes"],
   "fieldNotes": {
-    "streetview": "Street View faces a blank side wall set back behind a landscaped berm and trees - no gate visible. Gate fields read from satellite only.",
-    "truckGate": "Satellite shows a single controlled entry from the road on the south/southeast corner into the dock yard; gate hardware not resolvable.",
-    "dropYard": "Large dedicated trailer-storage lots north of the building and along the south face, full of parked trailers.",
-    "guardShack": "No booth resolved at the entry; marked remoteGs as the more likely case for a modern DC."
-  }
+    "facility": "1203 Bilter Rd, Aurora, IL - Kraft Foods/Heinz cold-storage portion of the multi-tenant Aurora Distribution Center. Confirmed via web research (HSA Commercial, Manta, Yellow Pages) plus visual lock on industrial building at supplied coords.",
+    "truckGate": "Z21 satellite shows a small dark rectangular structure (guard-shack footprint) sitting in the middle of the truck entry apron at the SE corner where the drive opens onto Bilter Rd. Single controlled pinch-point for both inbound and outbound trucks.",
+    "guardShack": "Distinct ~3-4m booth-sized structure visible at z21 on the truck pad, separated from the main building - characteristic small staffed shack. Consistent with Jake's calibration baseline that pegs this site as the #1 Gate+GS archetype.",
+    "remoteGs": "False because guardShack is true.",
+    "preGateStaging": "Wide paved apron between Bilter Rd setback and the gate booth - trucks can pull off the road and stage before checking in.",
+    "postGateStaging": "Large open paved area immediately inside the gate before drop-yard rows / dock apron.",
+    "drivewayLong": "From gate to dock face is ~150m of straight paved drive that can easily queue 5+ tractors.",
+    "dockDoors": "Counted approximately 30 dock doors along the long south face of the building from z18/z19 imagery - mid-band 25-50.",
+    "dropArea": "South drop yard shows ~70+ visible parked trailers in dense rows; capacity ~90 stalls.",
+    "entryExitTogether": "Single SE-corner gate handles both directions.",
+    "entryLanes": "Visible single inbound lane at the booth; counted from z21 satellite but lane striping faint.",
+    "exitLanes": "Single outbound lane assumed - symmetric to entry.",
+    "fastLaneOpportunity": "Gate apron is wide but already configured as a single-lane controlled pinch-point with the guard booth in the middle - retrofitting an express bypass would require relocating the booth.",
+    "urbanRural": "Set inside the Aurora/Naperville metro fabric - dense suburban development on all sides (offices, parking, retail) along the I-88/Bilter corridor.",
+    "shipRcvSeparate": "Single south-facing dock cluster handles all truck traffic; no separate ship/rcv face.",
+    "multipleFacilities": "False for Kraft footprint specifically. The neighboring large building to the NW across the pond is a separate parcel/tenant in the same multi-tenant Aurora Distribution Center campus, not part of the Kraft yard.",
+    "scale": "No truck scale visible in the gate path or drop-yard.",
+    "rail": "No rail spur enters the Kraft parcel. Rail line visible north of the campus but does not serve this building.",
+    "streetView": "Bilter Rd Street View from the public ROW shows a landscaped berm with trees screening the dock face; the on-site pano (2018) sits on the truck pad and confirms the entry point's geometry. Public-road view is consistent with a single set-back industrial driveway."
+  },
+  "method": "deep-audit"
 }

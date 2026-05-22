@@ -214,6 +214,17 @@ const PATCHES = {
     global: 150,
     note: 'Kimberly-Clark operates ~150 manufacturing facilities across 35 countries; we audited 18 NA sites. International scope on request.',
   },
+  'kraft-heinz': {
+    scope: 'NA',
+    inScope: 40,
+    global: 50,
+    // Kraft Heinz runs SAP S/4 with yard tooling at most NA plants; the
+    // 2023 IT modernization push covered ~30 manufacturing sites. Set
+    // higher than Mondelez (60/160=38%) because Kraft's footprint is
+    // smaller and more NA-concentrated.
+    legacyYms: 25,
+    note: 'We audited 10 of an estimated ~40 NA Kraft Heinz manufacturing + DC facilities (Aurora cold storage, Holland Lunchables, Davenport Oscar Mayer, Garland TX Oscar Mayer, Massillon, Fremont ketchup, Mason City Jell-O, Fort Myers Bagel Bites, Jacksonville warehouse + portion control). Kraft Heinz operates ~50 plants globally (~80% NA-concentrated). The remaining 17 NA sites are stubs from the calibration set; backfill in progress on the highest-volume plants first.',
+  },
   'mondelez-international': {
     scope: 'NA',
     inScope: 26,

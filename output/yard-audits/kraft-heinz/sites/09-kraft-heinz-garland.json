@@ -1,24 +1,117 @@
 {
   "name": "Kraft Heinz - Garland",
-  "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 3, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+  "type": "Manufacturer",
+  "coords": {
+    "lat": 32.90785,
+    "lng": -96.6633
   },
-  "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "fastLaneOpportunity"],
+  "geofences": {
+    "perimeter": {
+      "south": 32.9059,
+      "west": -96.6657,
+      "north": 32.9091,
+      "east": -96.6608
+    },
+    "truckGate": {
+      "south": 32.90855,
+      "west": -96.66235,
+      "north": 32.90895,
+      "east": -96.66185
+    },
+    "dropYards": [
+      {
+        "south": 32.90865,
+        "west": -96.66515,
+        "north": 32.90905,
+        "east": -96.66415
+      },
+      {
+        "south": 32.9073,
+        "west": -96.6616,
+        "north": 32.90825,
+        "east": -96.66105
+      }
+    ],
+    "dockAprons": [
+      {
+        "south": 32.9082,
+        "west": -96.665,
+        "north": 32.9088,
+        "east": -96.66305
+      },
+      {
+        "south": 32.9072,
+        "west": -96.6626,
+        "north": 32.9081,
+        "east": -96.6618
+      }
+    ],
+    "staging": {
+      "south": 32.9083,
+      "west": -96.6646,
+      "north": 32.9088,
+      "east": -96.6634
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 75,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 40.2,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.90785,-96.6633,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 3,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
-    "streetview": "Street View shows a fenced perimeter (chain-link) with the facility set behind trees - confirms gated/fenced site, but the truck entrance itself is screened by foliage.",
-    "truckGate": "Satellite shows a controlled entry apron on the north side with wide paved width and multiple lanes.",
-    "fastLaneOpportunity": "Wide gate apron with ~3 inbound lanes and unused paved width for an express bypass.",
-    "multipleFacilities": "Large multi-building plant campus with several connected processing and warehouse structures.",
-    "dropYard": "Trailer-storage rows along the north and west perimeter.",
-    "urbanRural": "Dense Dallas-metro industrial fabric; Urban."
-  }
+    "truckGate": "Controlled entrance at NE corner off Forest Lane (intersection with Hilltop Dr). Satellite z20-21 shows painted lane labels on pavement: 'VISITORS', 'TRUCKS', 'TRUCKS', 'CARS / EMPLOYEE' with discrete inbound lanes and a separate outbound 'TRUCKS' lane. Street View (2025-06) confirms a signalized entrance with painted lane markings and a guard structure.",
+    "guardShack": "Z21 satellite shows a small dark rectangular checkpoint structure (~1-2 vehicle footprint) at the throat of the inbound lanes, set between the inbound and outbound flows. Street View from Forest Ln confirms a small booth at the entrance throat.",
+    "remoteGs": "False because guardShack is true.",
+    "fastLaneOpportunity": "Matches the reference #7 archetype: 3+ inbound lanes already painted with role labels (visitors/trucks/cars), wide gate apron with substantial unused paved width south of the booth where an express bypass lane could be added.",
+    "entryLanes": "Three painted inbound lanes visible in z21 (VISITORS, TRUCKS, TRUCKS/CARS), counted as 3 truck-relevant inbound lanes. A bus lane is also present but excluded from the truck count.",
+    "exitLanes": "Single 'TRUCKS' outbound lane visible on the east side of the entrance throat.",
+    "entryExitTogether": "Inbound and outbound share the same gate complex on the north property line at Forest Ln; separate lanes within a single gate group, not separate gates.",
+    "postGateStaging": "Large paved apron immediately south of the gate, north of the dock face, provides queue/staging space for inbound trucks (~150m deep before reaching dock doors).",
+    "drivewayLong": "Approach apron from the gate to the dock doors is ~120m and 4-5 lanes wide; clearly holds 3+ trucks in queue.",
+    "dockDoors": "North-face dock bank shows ~30 trailers backed in across z20 image; east-face dock bank ~15 doors; additional doors on south and west faces. Estimated total 50+, conservatively in the '50+' band.",
+    "dropArea": "Two distinct trailer drop yards: (1) north drop yard along Forest Ln with ~25-30 trailer stalls; (2) east drop yard near Hilltop Dr with ~20-25 trailers. Plus on-site staging. 50+ band.",
+    "shipRcvSeparate": "Two distinct dock clusters on different building faces (north face large bank + east face bank), consistent with separate shipping/receiving operations at a 635k sq ft multi-product plant (Lunchables, Velveeta Skillets, BBQ sauce).",
+    "urbanRural": "2340 Forest Ln, Garland TX - dense Dallas metro industrial fabric. Residential subdivisions immediately south, dense industrial north/east/west. Decidedly Urban.",
+    "multipleFacilities": "Single connected plant complex - all wings/buildings are physically interconnected as one Oscar Mayer manufacturing campus per Kraft Heinz disclosures (~635,000 sq ft total).",
+    "scale": "No discrete truck-scale pad visible in the gate throat or on the apron.",
+    "dropYard": "Yes - two dedicated trailer-storage lots separate from active dock staging (north and east).",
+    "railServed": "Rail spur clearly visible entering from the north (across Forest Ln) and running south along the west property line. The plant's heritage as a 1949 Oscar Mayer facility is consistent with rail-served meat processing.",
+    "multiStep": "Single gate/booth complex - no evidence of a second downstream checkpoint or scale house before the docks."
+  },
+  "method": "deep-audit"
 }

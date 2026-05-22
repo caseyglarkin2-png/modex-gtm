@@ -1,22 +1,67 @@
 {
   "name": "Kraft Heinz - Ft Myers",
-  "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+  "type": "Manufacturer",
+  "coords": { "lat": 26.66568, "lng": -81.80265 },
+  "geofences": {
+    "perimeter": { "south": 26.66470, "west": -81.80330, "north": 26.66665, "east": -81.80200 },
+    "truckGate": { "south": 26.66631, "west": -81.80330, "north": 26.66645, "east": -81.80306 },
+    "dropYards": [
+      { "south": 26.66585, "west": -81.80285, "north": 26.66620, "east": -81.80220 }
+    ],
+    "dockAprons": [
+      { "south": 26.66572, "west": -81.80285, "north": 26.66600, "east": -81.80210 }
+    ],
+    "staging": null
   },
-  "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoors"],
+  "yardMetrics": {
+    "dockDoorCount": 8,
+    "trailersVisible": 6,
+    "trailerParkingCapacity": 12,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 6.9,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@26.66568,-81.80265,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "shipRcvSeparate"],
   "fieldNotes": {
-    "truckGate": "Street View shows a continuous chain-link perimeter fence around the property; the truck side is fenced, implying a controlled gate, but the entrance itself is screened by mature trees so a barrier could not be confirmed.",
-    "guardShack": "No staffed booth resolved; marked remoteGs given the fenced perimeter without a visible shack.",
-    "urbanRural": "Dense Lee County industrial park, multiple warehouses and an interstate alongside.",
-    "dropArea": "A few unhitched trailers near the north dock area."
-  }
+    "truckGate": "Street View (Dec-2024) at 26.66640,-81.80320 heading 90° shows a closed double-leaf chain-link swing gate across the access driveway off Division Dr, with chain-link perimeter fence on both sides and gate posts clearly visible.",
+    "guardShack": "No staffed booth at the gate. The nearest structure beyond the gate is the octagonal Kraft Heinz visitor reception/admin building set back ~30m from the gate — not a guard booth (multi-room, not lane-side).",
+    "remoteGs": "Gate is access-controlled (closed in Street View) but unstaffed; a small pole-mounted device on the right side of the gate appears to be a call-box / kiosk consistent with remote check-in.",
+    "drivewayShort": "Gate sits ~3-5 m off the Division Dr fence line — only 1-2 truck lengths of apron between the public road and the gate before trucks reach the interior parking/yard.",
+    "backupSensitive": "Tight gate apron; an inbound truck queue at the gate would back up onto Division Dr (a cul-de-sac terminating ~150 m south of the gate).",
+    "entryExitTogether": "Single gate on Division Dr serves both directions; no second truck access on any other side of the property (lake on south, canal on east, no road on the east side at all).",
+    "dockDoors": "Counted ~6-8 dock positions on the north face between the silos and the east end, plus 2-3 on the east-facing wing where 3 trailers are visibly backed in. Manufacturing plant, not a DC — comfortably in the 0-10 band.",
+    "dropYard": "Paved trailer staging strip between the silos and the dock apron with ~6 trailers visible in imagery and room for ~12; functions as a small on-site trailer drop area.",
+    "buildingCount": "Two visually distinct connected buildings — the northern white-roof production building with cooling/process units and the southern square process building with extensive rooftop equipment, joined by a narrow corridor. Counted as 2.",
+    "urbanRural": "Inside the Treeline Industrial Park in eastern Fort Myers, with continuous warehouse/manufacturing development on all sides and I-75 immediately east — Urban industrial fabric, not edge-of-town.",
+    "siteAreaAcres": "Perimeter bbox ≈ 217 m N-S × 129 m E-W ≈ 6.9 acres. Honest overhead estimate; flagged as fieldNote only because the exact fence-line on the south (lake bank) is screened by trees.",
+    "shipRcvSeparate": "Could not positively distinguish a dedicated receiving dock from the shipping dock in overhead imagery — all visible dock activity is on the north face. Conservatively marked false."
+  },
+  "method": "deep-audit"
 }

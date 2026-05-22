@@ -1,23 +1,73 @@
 {
   "name": "Kraft Heinz - Mason City",
-  "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": false, "multiStep": false
+  "type": "Food Manufacturer",
+  "coords": { "lat": 43.1641, "lng": -93.21620 },
+  "geofences": {
+    "perimeter": { "south": 43.16275, "west": -93.21825, "north": 43.16560, "east": -93.21430 },
+    "truckGate": { "south": 43.16275, "west": -93.21680, "north": 43.16310, "east": -93.21625 },
+    "dropYards": [
+      { "south": 43.16465, "west": -93.21525, "north": 43.16555, "east": -93.21430 },
+      { "south": 43.16410, "west": -93.21800, "north": 43.16465, "east": -93.21680 }
+    ],
+    "dockAprons": [
+      { "south": 43.16440, "west": -93.21560, "north": 43.16500, "east": -93.21430 },
+      { "south": 43.16320, "west": -93.21810, "north": 43.16470, "east": -93.21770 }
+    ],
+    "staging": { "south": 43.16310, "west": -93.21680, "north": 43.16410, "east": -93.21560 }
   },
-  "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "dropArea"],
+  "yardMetrics": {
+    "dockDoorCount": 18,
+    "trailersVisible": 14,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 25.1,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@43.1641,-93.21620,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "exitLanes", "shipRcvSeparate"],
   "fieldNotes": {
-    "truckGate": "Street View faces the front office face and employee parking; chain-link perimeter fence is visible, but the truck entrance itself is not squarely shown. Gate inferred from fenced perimeter.",
-    "guardShack": "No booth visible in Street View; entrance not clearly shown.",
-    "urbanRural": "Plant adjoins a small-town residential neighborhood to the south, surrounded otherwise by farmland - small-town industrial, judged Rural.",
-    "multipleFacilities": "Multiple connected/adjacent building structures.",
-    "dropArea": "Trailers staged along the west side of the plant."
-  }
+    "truckGate": "Single fenced entry from 12th St NW at ~43.16285,-93.21655. Chain-link perimeter fence funnels all traffic through one driveway opening; clear pinch point with monument-sign island and internal lane markings. No barrier arm/swing gate visible in 2024-09 Street View.",
+    "guardShack": "No staffed booth at the entry in 2024-09 Street View. The two structures flanking the entry are landscaping monument signs (blue Kraft Heinz marker + 'Information' visitor sign), not occupied booths.",
+    "remoteGs": "Inferred: gate but no shack — driver check-in is via kiosk/app/portal or at the warehouse face inside.",
+    "drivewayLong": "Long approach: the entry drive runs ~150 m north from 12th St NW to the dock apron — easily holds 3+ trucks queued.",
+    "postGateStaging": "Wide paved courtyard between main plant (west) and warehouse (east) provides post-gate holding before backing into the dock face.",
+    "dockDoors": "Counted at least 8-10 dock doors along the north face of the white warehouse with trailers backed in; additional doors on the west face of the main plant (rail-side receiving + tanker bays). Estimated 15-20 total → '10-25' band.",
+    "dropArea": "Marked drop-trailer parking visible north of the warehouse (~6-10 stalls) plus secondary NE staging strip alongside the rail yard. ~12-18 stalls capacity → '10-25' band.",
+    "shipRcvSeparate": "Ingredient receiving (rail-served silos + tankers) is on the WEST face of the plant; finished-goods outbound shipping is at the NORTH face of the large warehouse — physically distinct dock clusters on different building faces.",
+    "urbanRural": "Plant sits at the NW edge of Mason City, IA (pop ~27k). Farmland directly to the north and west; small-town residential to the south. Per rubric, small-town industrial = Rural.",
+    "connectivityIssue": "Inside Mason City limits; cell coverage adequate. Set false.",
+    "multipleFacilities": "On-property cluster: (1) main multi-section processing plant on west, (2) large finished-goods warehouse on east, (3) rail-served ingredient silo / tanker yard on far east, (4) maintenance / rail-shed near NE. Single ownership, single campus, but distinct building footprints.",
+    "scale": "No truck scale / weigh pad identified in tight (z19-20) satellite. Possible but not visible — flagged uncertain.",
+    "dropYard": "Distinct drop-trailer parking strip north of the warehouse, separate from active dock apron.",
+    "railServed": "Rail spur clearly enters the property along the east edge, with a track running into the warehouse for inbound ingredient cars. Mason City has long been Kraft's rail-receiving dessert-mix plant.",
+    "siteAreaAcres": "Perimeter box: 285m N-S x 320m E-W ≈ 91,200 m² ≈ 22.5 acres of fenced operating yard; including peripheral silo/rail land call it ~25 acres.",
+    "facility": "1022 12th St NW, Mason City, IA 50401 — the nation's Jell-O gelatin + pudding plant (~200 employees; $62.8M expansion announced; receiving $9M DOE clean-energy upgrade; producing nearly all US Jell-O gelatin and pudding cups). This is a single building complex on a single parcel — there is NO second Mason City plant in Iowa. Roster idx 15 (also labeled 'Kraft Heinz - Mason City') resolves to Mason, OH (39.33,-84.33), a different facility 700+ miles away."
+  },
+  "method": "deep-audit"
 }

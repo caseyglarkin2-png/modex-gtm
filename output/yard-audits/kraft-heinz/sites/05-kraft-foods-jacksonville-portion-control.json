@@ -1,23 +1,74 @@
 {
-  "name": "Kraft Foods - Jacksonville Portion Control",
-  "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+  "name": "Kraft Foods - Jacksonville - Portion Control",
+  "type": "Packaging Supply",
+  "coords": { "lat": 30.38142, "lng": -81.77445 },
+  "geofences": {
+    "perimeter": { "south": 30.38055, "west": -81.77580, "north": 30.38260, "east": -81.77310 },
+    "truckGate": { "south": 30.38210, "west": -81.77555, "north": 30.38260, "east": -81.77525 },
+    "dropYards": [
+      { "south": 30.38080, "west": -81.77500, "north": 30.38115, "east": -81.77430 }
+    ],
+    "dockAprons": [
+      { "south": 30.38080, "west": -81.77405, "north": 30.38200, "east": -81.77345 },
+      { "south": 30.38085, "west": -81.77485, "north": 30.38115, "east": -81.77405 }
+    ],
+    "staging": null
   },
-  "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "entryLanes", "exitLanes", "connectivityIssue"],
+  "yardMetrics": {
+    "dockDoorCount": 38,
+    "trailersVisible": 32,
+    "trailerParkingCapacity": 45,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 14.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@30.38142,-81.77445,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "shipRcvSeparate", "connectivityIssue"],
   "fieldNotes": {
-    "streetview": "Street View shows the Kraft Heinz brick building set back behind trees with an open driveway from the public road - no gate or guard booth.",
-    "truckGate": "Open driveway approach; no checkpoint structure resolved.",
-    "urbanRural": "Single plant surrounded by dense woods on an edge-of-town parcel; judged Rural.",
-    "connectivityIssue": "Heavily wooded, isolated parcel - inferred possible weak coverage; medium confidence at best.",
-    "dockDoors": "Dock bank along the east face with trailers backed in."
-  }
+    "truckGate": "Driveway from Forshee Dr is open with no barrier arm, sliding gate, or pinch checkpoint. Two yellow bollards visible in the centerline (Street View 2025-03) appear to be lane-channelizing, not a vehicle barrier.",
+    "guardShack": "No occupied staffed guard booth visible at the gate apron in z20-z21 satellite. Small structure at entry appears to be a sign monument or utility cabinet, not a guard shack with multi-side windows.",
+    "remoteGs": "No truck gate present, so by rubric this is false even though no shack exists either. Site reads as Archetype #3 (No Gate / No GS).",
+    "postGateStaging": "Wide paved truck loop south and east of building provides ample queueing once trucks turn off Forshee Dr.",
+    "drivewayLong": "Internal loop drive from Forshee entry to the east dock face is ~250m of paved travel — easily holds 3+ trucks in queue.",
+    "entryExitTogether": "Single property connection to public road network via Forshee Dr; trucks and cars share the entrance, then split inside.",
+    "entryLanes": "Single inbound lane at entry from Forshee.",
+    "exitLanes": "Single outbound lane.",
+    "fastLaneOpportunity": "No gate, no apron, no extra lanes — concept does not apply; flagged false.",
+    "dockDoors": "Counted ~30 trailer-occupied or visible bays along east face plus ~6-8 along south face. Total estimated 35-40 doors → 25-50 band.",
+    "dropArea": "SW-corner drop yard holds 10-13 trailers in marked stalls plus additional bobtail/trailer parking along south face; banded 10-25.",
+    "shipRcvSeparate": "Two distinct dock clusters on different faces (east face large dock bank with ~30 trailers; south face smaller dock bank with ~6-8). Likely raw-material receiving vs. finished-goods shipping. Tagging true but flagging as uncertain.",
+    "urbanRural": "Edge-of-Jacksonville industrial fringe in heavy woods; only adjacent built parcels are other large industrial buildings (Walmart DC to south, etc.). Per rubric guidance, borderline industrial-with-woods → Rural.",
+    "connectivityIssue": "Despite Rural classification, this is Jacksonville metro fringe with continuous I-295 / industrial corridor coverage — LTE/5G should be solid. Flagged uncertain but defaulted false.",
+    "multipleFacilities": "Single building on the Kraft parcel. Neighboring large DC south of property is a separate company.",
+    "scale": "No truck scale pad visible anywhere on property.",
+    "dropYard": "SW-corner trailer-storage area is a clear dedicated drop yard (10-15 stalls) separate from the active dock apron.",
+    "multiStep": "No second checkpoint stage — no gate at all."
+  },
+  "method": "deep-audit"
 }

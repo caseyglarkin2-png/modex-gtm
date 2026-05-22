@@ -1,23 +1,76 @@
 {
   "name": "Kraft Heinz - Massillon",
+  "type": "Manufacturer",
+  "coords": { "lat": 40.7790, "lng": -81.5395 },
+  "geofences": {
+    "perimeter": { "south": 40.7765, "west": -81.5430, "north": 40.7805, "east": -81.5375 },
+    "truckGate": { "south": 40.7799, "west": -81.5397, "north": 40.7803, "east": -81.5388 },
+    "dropYards": [
+      { "south": 40.7780, "west": -81.5408, "north": 40.7785, "east": -81.5395 }
+    ],
+    "dockAprons": [
+      { "south": 40.7779, "west": -81.5415, "north": 40.7784, "east": -81.5398 },
+      { "south": 40.7775, "west": -81.5398, "north": 40.7780, "east": -81.5380 }
+    ],
+    "staging": { "south": 40.7785, "west": -81.5395, "north": 40.7798, "east": -81.5380 }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 28,
+    "trailersVisible": 16,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 2,
+    "buildingCount": 6,
+    "siteAreaAcres": 51.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.779,-81.5395,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "dropArea", "entryLanes", "exitLanes"],
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale"],
   "fieldNotes": {
-    "streetview": "Street View shows a blank building wall behind a chain-link fence - site is fenced, but no truck gate entrance is in this frame.",
-    "truckGate": "Fenced perimeter visible but no controlled truck checkpoint resolved on satellite; access drive reads open.",
-    "multipleFacilities": "Sprawling multi-building manufacturing complex with many connected processing structures.",
-    "urbanRural": "Plant in a wooded semi-rural setting alongside a highway; judged Rural.",
-    "dockDoors": "Dock bank on the south face with trailers; partly obscured by shadow/resolution."
-  }
+    "truckGate": "Two access points off Oberlin Ave SW funnel into the property: a wide open driveway at ~40.7805,-81.5395 leading south through the campus, and a fenced/gated south-side entry at ~40.7800,-81.5388 with chain-link sliding gate visible in Street View (May 2024). Both serve truck traffic; the south-side fenced entry is clearly the controlled commercial gate.",
+    "guardShack": "No clear staffed guard booth resolved in either satellite or Street View. The fenced south entry has bollards and signage but no obvious staffed shack at the lane. Marked uncertain — could be an unmanned kiosk/remote check-in.",
+    "remoteGs": "Inferred: gate exists but no shack visible; large frozen-food plant of this scale (~400-700 employees, Smart Ones / Bagel Bites manufacturing) likely uses remote check-in via guard at the main reception or app-based.",
+    "preGateStaging": "No clear truck-stall apron outside the gate on Oberlin; tree buffer + grass strip between road and fence.",
+    "postGateStaging": "Large paved open area between the gate and dock faces, particularly the wide central yard between buildings — easily holds 5+ trucks waiting for a dock.",
+    "drivewayLong": "Both access driveways have ~150-200m of internal road before reaching dock faces — plenty of stacking room for 3+ trucks.",
+    "entryExitTogether": "Each gate appears to be bidirectional, no separate in/out gates resolved.",
+    "entryLanes": "Single bidirectional lane at each entry per overhead. Marked uncertain — could be 2 with painted division not resolved.",
+    "fastLaneOpportunity": "Wide paved gate aprons and unused width at both entries — clear room to add bypass / express lane if appointment system bypassed regular check-in.",
+    "dockDoors": "Counted across multiple faces: south face of main building ~10-12 doors, SE building face ~10-12 doors, west warehouse south face ~6-8 doors. Total band 25-50 (estimated ~28 visible).",
+    "dropArea": "10-25 trailers visible across the various paved yards. Multiple parked trailers without tractors in the SW dock apron (drop trailers) and a small clustered area east of the docks.",
+    "shipRcvSeparate": "Distinct dock banks on south face (likely shipping outbound) and west/SW face (likely receiving) — physical separation typical of frozen food plants where outbound frozen and inbound packaging/raw goods are handled separately.",
+    "urbanRural": "Wooded semi-rural setting; small-town industrial fringe of Massillon. Houses to north, fields to south. Per rubric tiebreaker, judged Rural.",
+    "connectivityIssue": "Near edge of Massillon city — cellular coverage likely fine; no connectivity issue inferred.",
+    "multipleFacilities": "Sprawling campus with 5-6 distinct connected/separate buildings: main processing block, west warehouse (large purple-roof building), SE auxiliary warehouse, and ancillary structures. Multi-building manufacturing campus.",
+    "scale": "No truck scale resolved on satellite. Could exist near south gate but not visible at zoom 19. Marked uncertain.",
+    "dropYard": "Dedicated trailer parking area on SW dock apron (between west warehouse and main complex) with trailers parked without tractors. Functions as drop yard.",
+    "multiStep": "No second checkpoint resolved after the gate — single-stage entry only.",
+    "rail": "No rail spur into property. Major rail yard exists ~500m east beyond treeline but no spur connection visible to Kraft Heinz parcel.",
+    "siteAreaAcres": "Perimeter ~445m N-S × ~463m E-W = ~206,000 m² = ~51 acres for the main Kraft Heinz parcel (excluding adjacent third-party buildings)."
+  },
+  "method": "deep-audit"
 }

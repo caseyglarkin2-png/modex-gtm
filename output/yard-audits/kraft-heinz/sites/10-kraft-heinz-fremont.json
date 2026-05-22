@@ -1,23 +1,71 @@
 {
   "name": "Kraft Heinz - Fremont",
-  "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+  "type": "Food Products Supplier",
+  "coords": { "lat": 41.3614, "lng": -83.0920 },
+  "geofences": {
+    "perimeter": { "south": 41.3578, "west": -83.0945, "north": 41.3650, "east": -83.0892 },
+    "truckGate": { "south": 41.3615, "west": -83.0912, "north": 41.3622, "east": -83.0902 },
+    "dropYards": [
+      { "south": 41.3618, "west": -83.0908, "north": 41.3640, "east": -83.0895 },
+      { "south": 41.3595, "west": -83.0908, "north": 41.3612, "east": -83.0895 }
+    ],
+    "dockAprons": [
+      { "south": 41.3608, "west": -83.0918, "north": 41.3640, "east": -83.0908 },
+      { "south": 41.3590, "west": -83.0925, "north": 41.3600, "east": -83.0908 }
+    ],
+    "staging": { "south": 41.3618, "west": -83.0908, "north": 41.3628, "east": -83.0898 }
   },
-  "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "scale"],
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 80,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 1,
+    "buildingCount": 7,
+    "siteAreaAcres": 88.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.3614,-83.0920,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "scale", "buildingCount"],
   "fieldNotes": {
-    "truckGate": "Street View faces rail cars behind a chain-link fence, not the truck entrance; perimeter fencing present. Gate inferred from satellite checkpoint area but not clearly resolved.",
-    "guardShack": "No clear booth visible; Street View does not cover the entrance.",
-    "multipleFacilities": "Large multi-building industrial campus with several large structures.",
-    "dropYard": "Extensive trailer storage lots north and east, separate from active dock staging.",
-    "shipRcvSeparate": "Dock banks on multiple distinct building faces."
-  }
+    "truckGate": "Confirmed at 1301 Heinz Dr off N 5th St (~41.3618, -83.0905). Street View 2024-05 shows sliding metal gates pulled open at a wide truck-only driveway, lined with orange bollards, with a tall Heinz 57 logo sign on a pole and a freestanding 'Kraft Heinz Distribution Center / Shipping & Receiving / No Trespassing — 1301 Heinz Drive' sign. Lane markings and curb cut are clearly truck-scaled.",
+    "guardShack": "No classic 1-3-bay guard booth positively identified at the Heinz Drive truck gate. Ancillary small flat-roofed structures sit near the warehouse SE corner inside the gate but their function is unclear from imagery; gate operation appears remote/automated.",
+    "remoteGs": "Set true given truckGate=true and no resolved guard booth at the inbound lane — implies kiosk / call-box / scheduled-appointment check-in.",
+    "fastLaneOpportunity": "Wide unused paved width at the Heinz Drive apron — easy room to add a bypass / express lane parallel to the inbound lane.",
+    "postGateStaging": "Large paved trailer-staging zone immediately inside the Heinz Drive gate, between the gate and the warehouse dock face.",
+    "dockDoors": "Counted from satellite z18-z19 along east face of the distribution warehouse: continuous orange-strip dock line ~700 ft long with roughly 40+ doors; main historic plant adds additional ~10-15 dock positions on its south and east faces. Total well over 50.",
+    "dropArea": "Two major drop yards: primary east of warehouse (~6 rows x ~12 stalls = ~70 trailers) plus secondary near main plant east apron (~20 trailers). Many empty stalls visible at imagery time.",
+    "shipRcvSeparate": "Main historic plant (south brick building, 1937-era, with smokestack) runs its own shipping docks separate from the modern distribution warehouse (north) which handles outbound finished-goods distribution.",
+    "multipleFacilities": "Clear campus: historic main production plant + adjacent secondary processing buildings + large modern distribution warehouse + admin/welcome center (mansard terra-cotta roof) + tomato/paste storage silos + water-treatment ponds.",
+    "railServed": "Active rail spur runs north-south through the property between main plant and warehouse; Street View shows tank cars parked on the spur. Plant has historic tomato/paste rail-receiving capability.",
+    "scale": "No truck scale positively identified from satellite imagery. Many large food plants of this scale have one; cannot confirm absence with high confidence.",
+    "urbanRural": "Fremont OH is a small town (~16k population). The campus sits at the edge of town with farmland to the north and east across US-20.",
+    "buildingCount": "Approximate — at least 7 distinct structures (main plant + warehouse + admin/welcome + 2 secondary processing buildings + silos cluster + water-treatment building); some adjacent structures may share roofs and be undercounted from above.",
+    "siteAreaAcres": "Derived from perimeter bbox: ~801 m N-S x ~443 m E-W ≈ 88 acres. Property line approximated from satellite (rail spur is internal; west edge at treeline before river; north edge at US-20 ROW grass strip; south edge before residential)."
+  },
+  "method": "deep-audit"
 }

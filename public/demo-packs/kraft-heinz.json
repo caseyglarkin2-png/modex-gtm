@@ -1,0 +1,1561 @@
+{
+  "schemaVersion": "1",
+  "builtAt": "2026-05-22T05:43:05.494Z",
+  "account": {
+    "slug": "kraft-heinz",
+    "displayName": "Kraft Heinz",
+    "archetype": "cpg",
+    "siteCount": 10,
+    "coverageNote": {
+      "auditedCount": 10,
+      "estimatedFootprint": 40,
+      "droppedStubCount": 17,
+      "capHit": false,
+      "note": "We audited 10 of an estimated ~40 NA Kraft Heinz manufacturing + DC facilities (Aurora cold storage, Holland Lunchables, Davenport Oscar Mayer, Garland TX Oscar Mayer, Massillon, Fremont ketchup, Mason City Jell-O, Fort Myers Bagel Bites, Jacksonville warehouse + portion control). Kraft Heinz operates ~50 plants globally (~80% NA-concentrated). The remaining 17 NA sites are stubs from the calibration set; backfill in progress on the highest-volume plants first.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 50,
+      "legacyYmsFacilityCount": 25
+    },
+    "featuredSiteId": "05-kraft-foods-jacksonville-portion-control"
+  },
+  "research": null,
+  "network": {
+    "bbox": [
+      -96.6657,
+      26.6647,
+      -81.5375,
+      43.1656
+    ],
+    "archetypeMix": {
+      "#1": 2,
+      "#3": 3,
+      "#4": 1,
+      "#6": 2,
+      "#7": 1,
+      "#9": 1
+    },
+    "totals": {
+      "dockDoors": 525,
+      "trailerCapacity": 722,
+      "gates": 11,
+      "railServed": 4,
+      "acres": 357.9
+    },
+    "sites": [
+      {
+        "id": "01-kraft-heinz-aurora",
+        "name": "Kraft Heinz - Aurora",
+        "type": "Cold Storage Facility",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 41.78305,
+          "lng": -88.37315
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.78175,
+            "west": -88.37427,
+            "north": 41.7836,
+            "east": -88.37205
+          },
+          "truckGate": {
+            "south": 41.78195,
+            "west": -88.3726,
+            "north": 41.78225,
+            "east": -88.3723
+          },
+          "dropYards": [
+            {
+              "south": 41.78175,
+              "west": -88.37427,
+              "north": 41.7824,
+              "east": -88.3723
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.7824,
+              "west": -88.37427,
+              "north": 41.7829,
+              "east": -88.37245
+            }
+          ],
+          "staging": {
+            "south": 41.78195,
+            "west": -88.37235,
+            "north": 41.7823,
+            "east": -88.37205
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 30,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 9.4,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#1",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard scan",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Pass through gate to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls trailer to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Driver exits through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4440000,
+          "totalYnsMs": 2790000
+        },
+        "dossierExcerpt": "The supplied coordinates (41.7831644, -88.3732467) sit on a large white\nindustrial building immediately north of Bilter Rd in Aurora, IL. Web research\n(HSA Commercial case study, Manta business listing, Yellow Pages, Edan,\nKrusinski Construction project page) confirms this is the Kraft Foods /\nHeinz cold-storage portion of the larger Aurora Distribution Center campus\non the north side of Bilter Rd between Church Rd and IL-59. The wider\ncampus also includes a separate, larger industrial building further north\n(across a man-made retention pond) which appears to be a different\ntenant/parcel of the multi-tenant DC. The Kraft yard audited here is the\nsouth building only.\n\nA second, separate Kraft cold-storage facility exists in Aurora at 1700 N\nEdgelawn Dr - that is not this site. The Bilter Rd address is the one",
+        "mapsUrl": "https://www.google.com/maps/@41.78305,-88.37315,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "facility": "1203 Bilter Rd, Aurora, IL - Kraft Foods/Heinz cold-storage portion of the multi-tenant Aurora Distribution Center. Confirmed via web research (HSA Commercial, Manta, Yellow Pages) plus visual lock on industrial building at supplied coords.",
+          "truckGate": "Z21 satellite shows a small dark rectangular structure (guard-shack footprint) sitting in the middle of the truck entry apron at the SE corner where the drive opens onto Bilter Rd. Single controlled pinch-point for both inbound and outbound trucks.",
+          "guardShack": "Distinct ~3-4m booth-sized structure visible at z21 on the truck pad, separated from the main building - characteristic small staffed shack. Consistent with Jake's calibration baseline that pegs this site as the #1 Gate+GS archetype.",
+          "remoteGs": "False because guardShack is true.",
+          "preGateStaging": "Wide paved apron between Bilter Rd setback and the gate booth - trucks can pull off the road and stage before checking in.",
+          "postGateStaging": "Large open paved area immediately inside the gate before drop-yard rows / dock apron.",
+          "drivewayLong": "From gate to dock face is ~150m of straight paved drive that can easily queue 5+ tractors.",
+          "dockDoors": "Counted approximately 30 dock doors along the long south face of the building from z18/z19 imagery - mid-band 25-50.",
+          "dropArea": "South drop yard shows ~70+ visible parked trailers in dense rows; capacity ~90 stalls.",
+          "entryExitTogether": "Single SE-corner gate handles both directions.",
+          "entryLanes": "Visible single inbound lane at the booth; counted from z21 satellite but lane striping faint.",
+          "exitLanes": "Single outbound lane assumed - symmetric to entry.",
+          "fastLaneOpportunity": "Gate apron is wide but already configured as a single-lane controlled pinch-point with the guard booth in the middle - retrofitting an express bypass would require relocating the booth.",
+          "urbanRural": "Set inside the Aurora/Naperville metro fabric - dense suburban development on all sides (offices, parking, retail) along the I-88/Bilter corridor.",
+          "shipRcvSeparate": "Single south-facing dock cluster handles all truck traffic; no separate ship/rcv face.",
+          "multipleFacilities": "False for Kraft footprint specifically. The neighboring large building to the NW across the pond is a separate parcel/tenant in the same multi-tenant Aurora Distribution Center campus, not part of the Kraft yard.",
+          "scale": "No truck scale visible in the gate path or drop-yard.",
+          "rail": "No rail spur enters the Kraft parcel. Rail line visible north of the campus but does not serve this building.",
+          "streetView": "Bilter Rd Street View from the public ROW shows a landscaped berm with trees screening the dock face; the on-site pano (2018) sits on the truck pad and confirms the entry point's geometry. Public-road view is consistent with a single set-back industrial driveway."
+        }
+      },
+      {
+        "id": "03-kraft-heinz-holland",
+        "name": "Kraft Heinz - Holland",
+        "type": "Food Manufacturer",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "truckGateCount",
+          "shipRcvSeparate",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 42.7836,
+          "lng": -86.1283
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.7826,
+            "west": -86.1308,
+            "north": 42.7848,
+            "east": -86.12585
+          },
+          "truckGate": {
+            "south": 42.78258,
+            "west": -86.127,
+            "north": 42.7828,
+            "east": -86.1262
+          },
+          "dropYards": [
+            {
+              "south": 42.783,
+              "west": -86.1267,
+              "north": 42.7843,
+              "east": -86.1259
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 42.783,
+              "west": -86.13,
+              "north": 42.7833,
+              "east": -86.1287
+            },
+            {
+              "south": 42.7831,
+              "west": -86.1273,
+              "north": 42.7837,
+              "east": -86.1267
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 35,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 2,
+          "buildingCount": 4,
+          "siteAreaAcres": 24.5,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
+        "dossierExcerpt": "The Holland Kraft Heinz plant sits on the south shore of Lake Macatawa, just\ninside the City of Holland. Public records (West Coast Chamber of Commerce,\nHolland Museum, Crain's Grand Rapids) confirm the address as 431 W 16th St\nand identify the plant as historically Heinz's Holland pickle & vinegar works\n— widely cited as the world's largest pickle plant. Kraft Heinz announced a\n$17M expansion (50 jobs) for the site and a more recent $13M clean-energy\nupgrade. The product mix today still centers on pickles, relish, and vinegar,\nwith Lunchables / specialty-meal lines pulled in via Kraft Heinz's broader\nnetwork.\n\nProbed satellite (z16–z21) around 42.7835, -86.1282 confirms the correct\nbuilding: a lakeside industrial complex with the distinctive **rows of round\npickle/brine tanks** on the north side, multiple connected production blocks,",
+        "mapsUrl": "https://www.google.com/maps/@42.7836,-86.1283,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No barrier arm, sliding gate, or fence-line gate across any truck driveway. Multiple curb-cuts from W 16th St lead directly into yard / dock aprons. Confirmed in Street View along the entire south frontage (2024-06 capture).",
+          "guardShack": "No small staffed booth visible at any truck entrance. Office facade on 16th St (red 'Heinz 57' sign building) is a normal admin entry, not a guard checkpoint.",
+          "remoteGs": "False because there is no truck gate at all (not because there is a gate with kiosk).",
+          "drivewayShort": "Truck driveways from 16th St are short — less than two truck lengths from curb to either the dock apron or the east drop-yard. A queue of 3+ trucks would not fit inside.",
+          "backupSensitive": "Yard is hard up against 16th St with very little stacking room — a truck queue on a busy day would spill onto a public street. An XTRA-Lease trailer was already observed staged on the curb in the 2024-06 Street View.",
+          "entryExitTogether": "With no formal gate, in/out flow uses the same handful of curb-cut driveways.",
+          "entryLanes": "Each curb-cut is roughly one truck-width inbound, one outbound; estimated single-lane each way per driveway.",
+          "dockDoors": "Counted from satellite: ~12 trailers backed against west dock face of NW building, ~9 trailers along south face of central building, ~12-15 doors on east face serving east drop yard. Banded 25-50.",
+          "dropArea": "Large eastern drop yard holds 50-65 trailers in 5-6 visible rows in the captured imagery; band 50+.",
+          "shipRcvSeparate": "Distinct dock banks on different building faces (west dock vs south dock vs east dock) consistent with separated ship/rcv operations in a multi-line food plant; some uncertainty without internal floor map.",
+          "urbanRural": "Inside the City of Holland's dense urban fabric: immediately south across 16th St are dense residential blocks, marina, retail. Classified Urban.",
+          "scale": "No truck scale identified on the property in any probed imagery.",
+          "dropYard": "Dedicated trailer-storage lot east of the plant, physically separated from active dock aprons.",
+          "railServed": "Rail spur visible in NE corner imagery curving in from the east-side ROW into the north tank-field — site is rail-served.",
+          "buildingCount": "Four distinguishable building masses: (1) NW building west of the central road-corridor, (2) central main process building (Heinz 57 facade), (3) southeast / south dock building, (4) north tank-process structure along the shoreline.",
+          "siteAreaAcres": "Computed from perimeter bbox: ~245 m N-S x ~405 m E-W ≈ 24.5 acres.",
+          "truckGateCount": "Counted as 2 main truck curb-cuts off W 16th St (one west near the Heinz 57 office facade, one east near the drop yard); no actual gates, but 2 dominant truck-flow access points.",
+          "multipleFacilities": "All four building masses are tightly contiguous on one parcel — read as a single integrated facility rather than a multi-building campus."
+        }
+      },
+      {
+        "id": "04-kraft-foods-jacksonville",
+        "name": "Kraft Foods - Jacksonville",
+        "type": "Warehouse",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "truckGateCount"
+        ],
+        "center": {
+          "lat": 30.37692,
+          "lng": -81.78521
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 30.37535,
+            "west": -81.78735,
+            "north": 30.37865,
+            "east": -81.7831
+          },
+          "truckGate": null,
+          "dropYards": [
+            {
+              "south": 30.37635,
+              "west": -81.78705,
+              "north": 30.3771,
+              "east": -81.7832
+            },
+            {
+              "south": 30.3776,
+              "west": -81.78705,
+              "north": 30.3783,
+              "east": -81.7832
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 30.37635,
+              "west": -81.78705,
+              "north": 30.37665,
+              "east": -81.7832
+            },
+            {
+              "south": 30.3769,
+              "west": -81.78705,
+              "north": 30.3772,
+              "east": -81.7832
+            },
+            {
+              "south": 30.3776,
+              "west": -81.78705,
+              "north": 30.3779,
+              "east": -81.7832
+            },
+            {
+              "south": 30.37815,
+              "west": -81.78705,
+              "north": 30.37845,
+              "east": -81.7832
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 198,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 0,
+          "buildingCount": 3,
+          "siteAreaAcres": 26.2,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "dossierExcerpt": "The supplied coords `30.3846241, -81.789257` plotted ~1.1 km north of the\nKraft site (Westside Industrial Park spreads several km north-south along\nBulls Bay Hwy). A web search for \"Kraft Foods Jacksonville FL distribution\ncenter\" surfaced the canonical address **4601 Bulls Bay Hwy, Jacksonville FL\n32219** (Yellow Pages, Waze, Manta, Buzzfile). A geocoding lookup gave\n~`30.3768, -81.7829` for that street number. CommercialSearch / JLL listings\nconfirm 4601 Bulls Bay = \"Westside Industrial Park, Buildings 100 / 200 / 300\"\n— 1,165,658 SF across 26.155 acres, built 1997, three multi-tenant\ncross-dock warehouses on one campus. Bandana lists Kraft Heinz at suite\n4601-300 Bulls Bay Hwy (one of the three buildings). A separate page lists\nthe campus tenants as Johnstone Supply, Wasserstrom, and Kraft Heinz.",
+        "mapsUrl": "https://www.google.com/maps/@30.37692,-81.78521,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Open multi-tenant industrial park (Westside Industrial Park Bldgs 100/200/300). No barrier arm, no sliding/swing gate, no checkpoint pinch-point across any truck driveway. Multiple uncontrolled entry/exit points off Westside Industrial Drive and from the internal park road network. Street View pano (2019-10) inside the truck court between buildings (30.37591, -81.78683) shows the truck court continuous with the public road network with no gate structure.",
+          "guardShack": "No guard booth observed at any approach to the campus or at any truck-court entrance. Office-face Street View shows landscaped employee parking with no booth.",
+          "remoteGs": "False because there is no truck gate at all — kiosk/remote check-in only counts when a gate exists.",
+          "multipleFacilities": "Three distinct large rectangular cross-dock warehouses (Westside Industrial Park Buildings 100, 200, 300) on one 26.155-acre campus = a campus with multiple buildings. Kraft Heinz occupies suite 4601-300 (one of the three).",
+          "dockDoors": "Per JLL listing for Bldg 100: 66 dock-high doors + 3 drive-in. Three identical-format buildings on the campus -> ~198 dock-high doors campus-wide. Z19 satellite confirms continuous dock rhythm along both long faces of each building. Solidly in 50+ band.",
+          "dropArea": "Trailer rows visible in truck courts between buildings and along south yard. Z19 imagery shows 30-50 trailers per court face; total campus trailer parking easily 50+. Many trailers are unattended drop trailers (no tractor).",
+          "shipRcvSeparate": "Each building has dock doors on both long faces (north + south) so shipping and receiving run from physically separated dock clusters. Layout consistent with cross-dock operations.",
+          "drivewayLong": "Truck courts between buildings are roughly 70-80 m wide and several hundred metres long — easily holds queues of 5+ trucks per lane.",
+          "dropYard": "Trailer-parking rows in the truck courts and along the south perimeter act as drop-trailer storage; multi-tenant 3PL tenants stage drop trailers between moves.",
+          "scale": "No truck scale / weigh platform visible anywhere on the campus.",
+          "rail": "Strip of cleared dirt east of the campus (between Westside park and the larger eastern DC) is a private access / utility corridor, not a rail spur. No rail ties or sidings present on the Kraft Heinz property.",
+          "urbanRural": "Northwest Jacksonville industrial fabric — inside the I-295/I-10 metro area, adjacent to dense industrial park clusters. Urban.",
+          "kraftFootprint": "Kraft Heinz leases approximately 250,000-300,000 SF inside Building 300 (suite 4601-300) — a portion of the campus, not the whole site. Audit is therefore of the SHARED campus that Kraft is part of; classification flags apply to the campus that Kraft trucks navigate.",
+          "siteAreaAcres": "From the JLL/CommercialSearch listing: 26.155 acres for the full 4601 Bulls Bay campus (Buildings 100+200+300, 1,165,658 SF total).",
+          "approxCoordsCorrection": "Brief: supplied coords (30.3846, -81.7893) were about 1.1 km north of the actual building. Resolved address 4601 Bulls Bay Hwy via web search; correct center 30.37692, -81.78521 confirmed by satellite probe + cross-referenced CommercialSearch listing.",
+          "entryLanes": "Multiple uncontrolled driveways feed the campus; not a single counted lane group, so left null.",
+          "exitLanes": "Same — uncontrolled multi-driveway egress.",
+          "truckGateCount": "Zero physical gate structures observed; reported as 0 but flagged uncertain because multi-tenant park layout means trucks enter from multiple uncontrolled points."
+        }
+      },
+      {
+        "id": "05-kraft-foods-jacksonville-portion-control",
+        "name": "Kraft Foods - Jacksonville - Portion Control",
+        "type": "Packaging Supply",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "shipRcvSeparate",
+          "connectivityIssue"
+        ],
+        "center": {
+          "lat": 30.38142,
+          "lng": -81.77445
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 30.38055,
+            "west": -81.7758,
+            "north": 30.3826,
+            "east": -81.7731
+          },
+          "truckGate": {
+            "south": 30.3821,
+            "west": -81.77555,
+            "north": 30.3826,
+            "east": -81.77525
+          },
+          "dropYards": [
+            {
+              "south": 30.3808,
+              "west": -81.775,
+              "north": 30.38115,
+              "east": -81.7743
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 30.3808,
+              "west": -81.77405,
+              "north": 30.382,
+              "east": -81.77345
+            },
+            {
+              "south": 30.38085,
+              "west": -81.77485,
+              "north": 30.38115,
+              "east": -81.77405
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 38,
+          "trailersVisible": 32,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 14.6,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
+        "dossierExcerpt": "The supplied approximate coordinate (30.3826522, -81.7738688) placed the pin in the woods just north of the actual building. A satellite probe at zoom 16-17 around the pin showed one obvious large industrial building immediately south of Forshee Dr. Web search confirmed Kraft Heinz Foods Co. (Portion Control Division, dba Portion Pac) sits at 7500 Forshee Dr — built 1996, 307,849 sqft on a 676,307 sqft (~15.5 acre) lot, owned by H J Heinz Company L P (Jaxdailyrecord, Yellow Pages, Buzzfile, ClustrMaps). The building footprint, parcel boundary, and adjacency to Forshee Dr all match. Building center locked at lat 30.38142 / lng -81.77445.",
+        "mapsUrl": "https://www.google.com/maps/@30.38142,-81.77445,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Driveway from Forshee Dr is open with no barrier arm, sliding gate, or pinch checkpoint. Two yellow bollards visible in the centerline (Street View 2025-03) appear to be lane-channelizing, not a vehicle barrier.",
+          "guardShack": "No occupied staffed guard booth visible at the gate apron in z20-z21 satellite. Small structure at entry appears to be a sign monument or utility cabinet, not a guard shack with multi-side windows.",
+          "remoteGs": "No truck gate present, so by rubric this is false even though no shack exists either. Site reads as Archetype #3 (No Gate / No GS).",
+          "postGateStaging": "Wide paved truck loop south and east of building provides ample queueing once trucks turn off Forshee Dr.",
+          "drivewayLong": "Internal loop drive from Forshee entry to the east dock face is ~250m of paved travel — easily holds 3+ trucks in queue.",
+          "entryExitTogether": "Single property connection to public road network via Forshee Dr; trucks and cars share the entrance, then split inside.",
+          "entryLanes": "Single inbound lane at entry from Forshee.",
+          "exitLanes": "Single outbound lane.",
+          "fastLaneOpportunity": "No gate, no apron, no extra lanes — concept does not apply; flagged false.",
+          "dockDoors": "Counted ~30 trailer-occupied or visible bays along east face plus ~6-8 along south face. Total estimated 35-40 doors → 25-50 band.",
+          "dropArea": "SW-corner drop yard holds 10-13 trailers in marked stalls plus additional bobtail/trailer parking along south face; banded 10-25.",
+          "shipRcvSeparate": "Two distinct dock clusters on different faces (east face large dock bank with ~30 trailers; south face smaller dock bank with ~6-8). Likely raw-material receiving vs. finished-goods shipping. Tagging true but flagging as uncertain.",
+          "urbanRural": "Edge-of-Jacksonville industrial fringe in heavy woods; only adjacent built parcels are other large industrial buildings (Walmart DC to south, etc.). Per rubric guidance, borderline industrial-with-woods → Rural.",
+          "connectivityIssue": "Despite Rural classification, this is Jacksonville metro fringe with continuous I-295 / industrial corridor coverage — LTE/5G should be solid. Flagged uncertain but defaulted false.",
+          "multipleFacilities": "Single building on the Kraft parcel. Neighboring large DC south of property is a separate company.",
+          "scale": "No truck scale pad visible anywhere on property.",
+          "dropYard": "SW-corner trailer-storage area is a clear dedicated drop yard (10-15 stalls) separate from the active dock apron.",
+          "multiStep": "No second checkpoint stage — no gate at all."
+        }
+      },
+      {
+        "id": "06-kraft-heinz-davenport",
+        "name": "Kraft Heinz - Davenport",
+        "type": "Food Processing Company",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "scale",
+          "multiStep",
+          "connectivityIssue"
+        ],
+        "center": {
+          "lat": 41.616,
+          "lng": -90.6105
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.6125,
+            "west": -90.6135,
+            "north": 41.6182,
+            "east": -90.608
+          },
+          "truckGate": {
+            "south": 41.61795,
+            "west": -90.6098,
+            "north": 41.61835,
+            "east": -90.6088
+          },
+          "dropYards": [
+            {
+              "south": 41.6155,
+              "west": -90.6095,
+              "north": 41.617,
+              "east": -90.6082
+            },
+            {
+              "south": 41.614,
+              "west": -90.6118,
+              "north": 41.615,
+              "east": -90.6098
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.6148,
+              "west": -90.613,
+              "north": 41.6157,
+              "east": -90.6098
+            },
+            {
+              "south": 41.6155,
+              "west": -90.6098,
+              "north": 41.617,
+              "east": -90.6088
+            }
+          ],
+          "staging": {
+            "south": 41.6172,
+            "west": -90.6118,
+            "north": 41.6182,
+            "east": -90.609
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 80,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 72,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#1",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard scan",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Pass through gate to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls trailer to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Driver exits through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4440000,
+          "totalYnsMs": 2790000
+        },
+        "dossierExcerpt": "The brief gave approximate coordinates 41.6154, -90.6125, an \"industrial park\" hint\nand a Velveeta archetype guess. A web search resolved the actual facility to the\nKraft Heinz meat-processing plant at 9401 Granite Way, Davenport IA, in the\nEastern Iowa Industrial Center, ~12 km north of downtown Davenport. The plant is\na 382,000 sq ft greenfield facility built by Gray Construction, commissioned\n2017, on a 70-acre site. It produces Oscar Mayer Deli Fresh and Lunchables\n(not Velveeta cheese — that's a separate KHC line).\n\nSatellite probes at z16-z21 around the given lat/lng resolved the building center\nto ~41.6160, -90.6105 (the approximate coords were ~300 m WSW of the true center).\nOnce locked, the building footprint is the large white industrial block centered\nin the wide z16 frame, with Slopertown Road on the north, a rail mainline + east-",
+        "mapsUrl": "https://www.google.com/maps/@41.6160,-90.6105,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "siteIdentification": "Confirmed via web search: 9401 Granite Way, Davenport IA 52806, Eastern Iowa Industrial Center, 382,000 sq ft Oscar Mayer Deli Fresh / Lunchables meat-processing plant on 70 acres (Gray Construction, 2017). The given lat/lng (41.6154, -90.6125) was ~300 m WSW of the building center; locked center to ~41.6160, -90.6105.",
+          "truckGate": "Single controlled entry off Slopertown Road at NW corner of employee parking. Property is fully enclosed by chain-link perimeter fence (confirmed on west, north, and east faces via Street View 2025-06). No barrier-arm visible from satellite but the fenced single-entrance pinch-point qualifies as a truck gate per rubric.",
+          "guardShack": "No standalone staffed guard booth visible at the road entry or anywhere along the truck route in z19-z21 satellite imagery. Small structure at SW corner of parking lot is HVAC/equipment, not a guard booth.",
+          "remoteGs": "Modern 2017 greenfield Kraft Heinz plant; absence of visible guard booth in satellite imagery strongly implies remote kiosk / driver app check-in. Marked uncertain since the device itself is below satellite resolution.",
+          "postGateStaging": "Truck route passes through a wide paved apron south of parking before reaching dock face — provides queue/staging room (postGateStaging true).",
+          "drivewayLong": "Driveway from public road entry to dock face is roughly 350 m (~1100 ft) of paved internal route — easily holds 3+ trucks in queue.",
+          "dockDoors": "Counted ~40 dock doors along south face (split into west and east sub-banks) plus ~15-20 doors along east face facing the east drop yard. Total ~55-60. Band: 50+.",
+          "dropArea": "East-side drop yard holds ~50 parked trailers in marked stalls; south-side drop yard holds ~25 trailers. 75+ trailers visible, parking capacity ~110. Band: 50+.",
+          "shipRcvSeparate": "Two physically distinct dock clusters on different building faces: south-facing dock bank (long bank of ~40 doors) and east-facing dock bank (~20 doors with separate east drop yard) — consistent with separate shipping and receiving.",
+          "fastLaneOpportunity": "The driveway from Slopertown to the property has wide paved apron width and unused grass median on either side — physical room for a bypass/express lane addition.",
+          "railServed": "Rail mainline (3 tracks) runs N-S between Kraft Heinz and east-DC neighbor, with rail crossing on Slopertown. NO rail spur visible curving into Kraft Heinz property. Rail spur serves the east-DC, not Kraft Heinz.",
+          "buildingCount": "Main 382,000 sq ft manufacturing building (single complex). Secondary structure: wastewater treatment building at south of property (small). Counted as 2.",
+          "urbanRural": "Surrounded by cornfields on north, west, and south; in the Eastern Iowa Industrial Center far north of Davenport's urban fabric. Clearly Rural.",
+          "connectivityIssue": "Rural but located within an active industrial park with multiple modern tenants and ~15 km from downtown Davenport — cellular coverage almost certainly good. Marked false with low concern.",
+          "scale": "No truck scale platform identified in satellite imagery along the inbound route or dock aprons — meat processing facilities can have a scale but I do not see one clearly. Marked uncertain.",
+          "multiStep": "Single gate/entry; no visible second checkpoint or scale house after entry. Marked false.",
+          "approachUsed": "Street View captured 2025-06 from Slopertown Road (north), Hillandale Drive (west), and the east intersection at the rail crossing; satellite at z17-z21 from Maxar 2026 imagery."
+        }
+      },
+      {
+        "id": "08-kraft-heinz-massillon",
+        "name": "Kraft Heinz - Massillon",
+        "type": "Manufacturer",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "scale"
+        ],
+        "center": {
+          "lat": 40.779,
+          "lng": -81.5395
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.7765,
+            "west": -81.543,
+            "north": 40.7805,
+            "east": -81.5375
+          },
+          "truckGate": {
+            "south": 40.7799,
+            "west": -81.5397,
+            "north": 40.7803,
+            "east": -81.5388
+          },
+          "dropYards": [
+            {
+              "south": 40.778,
+              "west": -81.5408,
+              "north": 40.7785,
+              "east": -81.5395
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 40.7779,
+              "west": -81.5415,
+              "north": 40.7784,
+              "east": -81.5398
+            },
+            {
+              "south": 40.7775,
+              "west": -81.5398,
+              "north": 40.778,
+              "east": -81.538
+            }
+          ],
+          "staging": {
+            "south": 40.7785,
+            "west": -81.5395,
+            "north": 40.7798,
+            "east": -81.538
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 28,
+          "trailersVisible": 16,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 2,
+          "buildingCount": 6,
+          "siteAreaAcres": 51,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "25-50",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
+        "dossierExcerpt": "The hint coordinates (40.7812, -81.5455) landed in a residential neighborhood\nin northwest Massillon. Web research confirmed the actual address as **1301\nOberlin Ave SW** (chamber of commerce listing, FSIS USDA inspection database,\nfoodnavigator-usa, Indeed, Buzzfile). The real plant sits ~700m southeast of\nthe supplied point, on the south side of Oberlin Ave SW.\n\nIdentified the correct building via satellite probes at z15–z19: a large\nmulti-building food-manufacturing campus with heavy rooftop refrigeration\n(consistent with a frozen-food plant). Street View on the south side\n(40.7798, -81.5388, captured May 2024) shows the plant building wall with\nindustrial refrigeration on the roof and a chain-link perimeter fence —\nconfirming the right facility. Plant produces Weight Watchers Smart Ones and",
+        "mapsUrl": "https://www.google.com/maps/@40.779,-81.5395,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Two access points off Oberlin Ave SW funnel into the property: a wide open driveway at ~40.7805,-81.5395 leading south through the campus, and a fenced/gated south-side entry at ~40.7800,-81.5388 with chain-link sliding gate visible in Street View (May 2024). Both serve truck traffic; the south-side fenced entry is clearly the controlled commercial gate.",
+          "guardShack": "No clear staffed guard booth resolved in either satellite or Street View. The fenced south entry has bollards and signage but no obvious staffed shack at the lane. Marked uncertain — could be an unmanned kiosk/remote check-in.",
+          "remoteGs": "Inferred: gate exists but no shack visible; large frozen-food plant of this scale (~400-700 employees, Smart Ones / Bagel Bites manufacturing) likely uses remote check-in via guard at the main reception or app-based.",
+          "preGateStaging": "No clear truck-stall apron outside the gate on Oberlin; tree buffer + grass strip between road and fence.",
+          "postGateStaging": "Large paved open area between the gate and dock faces, particularly the wide central yard between buildings — easily holds 5+ trucks waiting for a dock.",
+          "drivewayLong": "Both access driveways have ~150-200m of internal road before reaching dock faces — plenty of stacking room for 3+ trucks.",
+          "entryExitTogether": "Each gate appears to be bidirectional, no separate in/out gates resolved.",
+          "entryLanes": "Single bidirectional lane at each entry per overhead. Marked uncertain — could be 2 with painted division not resolved.",
+          "fastLaneOpportunity": "Wide paved gate aprons and unused width at both entries — clear room to add bypass / express lane if appointment system bypassed regular check-in.",
+          "dockDoors": "Counted across multiple faces: south face of main building ~10-12 doors, SE building face ~10-12 doors, west warehouse south face ~6-8 doors. Total band 25-50 (estimated ~28 visible).",
+          "dropArea": "10-25 trailers visible across the various paved yards. Multiple parked trailers without tractors in the SW dock apron (drop trailers) and a small clustered area east of the docks.",
+          "shipRcvSeparate": "Distinct dock banks on south face (likely shipping outbound) and west/SW face (likely receiving) — physical separation typical of frozen food plants where outbound frozen and inbound packaging/raw goods are handled separately.",
+          "urbanRural": "Wooded semi-rural setting; small-town industrial fringe of Massillon. Houses to north, fields to south. Per rubric tiebreaker, judged Rural.",
+          "connectivityIssue": "Near edge of Massillon city — cellular coverage likely fine; no connectivity issue inferred.",
+          "multipleFacilities": "Sprawling campus with 5-6 distinct connected/separate buildings: main processing block, west warehouse (large purple-roof building), SE auxiliary warehouse, and ancillary structures. Multi-building manufacturing campus.",
+          "scale": "No truck scale resolved on satellite. Could exist near south gate but not visible at zoom 19. Marked uncertain.",
+          "dropYard": "Dedicated trailer parking area on SW dock apron (between west warehouse and main complex) with trailers parked without tractors. Functions as drop yard.",
+          "multiStep": "No second checkpoint resolved after the gate — single-stage entry only.",
+          "rail": "No rail spur into property. Major rail yard exists ~500m east beyond treeline but no spur connection visible to Kraft Heinz parcel.",
+          "siteAreaAcres": "Perimeter ~445m N-S × ~463m E-W = ~206,000 m² = ~51 acres for the main Kraft Heinz parcel (excluding adjacent third-party buildings)."
+        }
+      },
+      {
+        "id": "09-kraft-heinz-garland",
+        "name": "Kraft Heinz - Garland",
+        "type": "Manufacturer",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 32.90785,
+          "lng": -96.6633
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 32.9059,
+            "west": -96.6657,
+            "north": 32.9091,
+            "east": -96.6608
+          },
+          "truckGate": {
+            "south": 32.90855,
+            "west": -96.66235,
+            "north": 32.90895,
+            "east": -96.66185
+          },
+          "dropYards": [
+            {
+              "south": 32.90865,
+              "west": -96.66515,
+              "north": 32.90905,
+              "east": -96.66415
+            },
+            {
+              "south": 32.9073,
+              "west": -96.6616,
+              "north": 32.90825,
+              "east": -96.66105
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 32.9082,
+              "west": -96.665,
+              "north": 32.9088,
+              "east": -96.66305
+            },
+            {
+              "south": 32.9072,
+              "west": -96.6626,
+              "north": 32.9081,
+              "east": -96.6618
+            }
+          ],
+          "staging": {
+            "south": 32.9083,
+            "west": -96.6646,
+            "north": 32.9088,
+            "east": -96.6634
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 55,
+          "trailersVisible": 60,
+          "trailerParkingCapacity": 75,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 40.2,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 3,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#7",
+          "steps": [
+            {
+              "step": "Arrive at gate (fast-lane bypass possible)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter dispatch (fast-lane priority for live loads)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch.fastlane",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4440000,
+          "totalYnsMs": 2730000
+        },
+        "dossierExcerpt": "The supplied coordinates (32.9082635, -96.6622296 from the maps URL) sit on the\nNE quadrant of the property at the truck-gate area. Web research and satellite\nprobes around the point at z16-z21 confirm the correct facility: the Kraft\nHeinz / Oscar Mayer plant at 2340 Forest Lane, Garland. Identifying signals:\n\n- Garland city council records and Connect CRE / Food Processing / Area\n  Development articles confirm the 635,000 sq ft Oscar Mayer plant on Forest\n  Lane (originally opened 1949; recent $143M expansion adding 250 jobs to an\n  843-worker base).\n- Yelp / wikimapia entries put \"Kraft\" at 2340 Forest Ln.\n- The Street View pano on Forest Ln captures a \"Forest\" street sign (5400\n  block) and the plant facade with painted lane labels at the gate.\n- The plant is the company's largest producer of Lunchables, Oscar Mayer",
+        "mapsUrl": "https://www.google.com/maps/@32.90785,-96.6633,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Controlled entrance at NE corner off Forest Lane (intersection with Hilltop Dr). Satellite z20-21 shows painted lane labels on pavement: 'VISITORS', 'TRUCKS', 'TRUCKS', 'CARS / EMPLOYEE' with discrete inbound lanes and a separate outbound 'TRUCKS' lane. Street View (2025-06) confirms a signalized entrance with painted lane markings and a guard structure.",
+          "guardShack": "Z21 satellite shows a small dark rectangular checkpoint structure (~1-2 vehicle footprint) at the throat of the inbound lanes, set between the inbound and outbound flows. Street View from Forest Ln confirms a small booth at the entrance throat.",
+          "remoteGs": "False because guardShack is true.",
+          "fastLaneOpportunity": "Matches the reference #7 archetype: 3+ inbound lanes already painted with role labels (visitors/trucks/cars), wide gate apron with substantial unused paved width south of the booth where an express bypass lane could be added.",
+          "entryLanes": "Three painted inbound lanes visible in z21 (VISITORS, TRUCKS, TRUCKS/CARS), counted as 3 truck-relevant inbound lanes. A bus lane is also present but excluded from the truck count.",
+          "exitLanes": "Single 'TRUCKS' outbound lane visible on the east side of the entrance throat.",
+          "entryExitTogether": "Inbound and outbound share the same gate complex on the north property line at Forest Ln; separate lanes within a single gate group, not separate gates.",
+          "postGateStaging": "Large paved apron immediately south of the gate, north of the dock face, provides queue/staging space for inbound trucks (~150m deep before reaching dock doors).",
+          "drivewayLong": "Approach apron from the gate to the dock doors is ~120m and 4-5 lanes wide; clearly holds 3+ trucks in queue.",
+          "dockDoors": "North-face dock bank shows ~30 trailers backed in across z20 image; east-face dock bank ~15 doors; additional doors on south and west faces. Estimated total 50+, conservatively in the '50+' band.",
+          "dropArea": "Two distinct trailer drop yards: (1) north drop yard along Forest Ln with ~25-30 trailer stalls; (2) east drop yard near Hilltop Dr with ~20-25 trailers. Plus on-site staging. 50+ band.",
+          "shipRcvSeparate": "Two distinct dock clusters on different building faces (north face large bank + east face bank), consistent with separate shipping/receiving operations at a 635k sq ft multi-product plant (Lunchables, Velveeta Skillets, BBQ sauce).",
+          "urbanRural": "2340 Forest Ln, Garland TX - dense Dallas metro industrial fabric. Residential subdivisions immediately south, dense industrial north/east/west. Decidedly Urban.",
+          "multipleFacilities": "Single connected plant complex - all wings/buildings are physically interconnected as one Oscar Mayer manufacturing campus per Kraft Heinz disclosures (~635,000 sq ft total).",
+          "scale": "No discrete truck-scale pad visible in the gate throat or on the apron.",
+          "dropYard": "Yes - two dedicated trailer-storage lots separate from active dock staging (north and east).",
+          "railServed": "Rail spur clearly visible entering from the north (across Forest Ln) and running south along the west property line. The plant's heritage as a 1949 Oscar Mayer facility is consistent with rail-served meat processing.",
+          "multiStep": "Single gate/booth complex - no evidence of a second downstream checkpoint or scale house before the docks."
+        }
+      },
+      {
+        "id": "10-kraft-heinz-fremont",
+        "name": "Kraft Heinz - Fremont",
+        "type": "Food Products Supplier",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "scale",
+          "buildingCount"
+        ],
+        "center": {
+          "lat": 41.3614,
+          "lng": -83.092
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.3578,
+            "west": -83.0945,
+            "north": 41.365,
+            "east": -83.0892
+          },
+          "truckGate": {
+            "south": 41.3615,
+            "west": -83.0912,
+            "north": 41.3622,
+            "east": -83.0902
+          },
+          "dropYards": [
+            {
+              "south": 41.3618,
+              "west": -83.0908,
+              "north": 41.364,
+              "east": -83.0895
+            },
+            {
+              "south": 41.3595,
+              "west": -83.0908,
+              "north": 41.3612,
+              "east": -83.0895
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 41.3608,
+              "west": -83.0918,
+              "north": 41.364,
+              "east": -83.0908
+            },
+            {
+              "south": 41.359,
+              "west": -83.0925,
+              "north": 41.36,
+              "east": -83.0908
+            }
+          ],
+          "staging": {
+            "south": 41.3618,
+            "west": -83.0908,
+            "north": 41.3628,
+            "east": -83.0898
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 80,
+          "trailerParkingCapacity": 120,
+          "truckGateCount": 1,
+          "buildingCount": 7,
+          "siteAreaAcres": 88,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
+        "dossierExcerpt": "The approximate point provided (41.3605, -83.0933) sat near the middle of the\ncampus; web search confirmed the historic Heinz / Kraft Heinz ketchup plant at\n1200 N 5th St, Fremont OH. The Fremont plant opened in 1937 and is documented\nas producing ~80% of US Heinz ketchup supply.\n\nSatellite probes (z15 → z21) and Street View 2024-05 panoramas along the east\naccess roads confirmed:\n\n- the historic red-brick main plant with smokestack and \"Heinz\" lettering on\n  the south end (visible from N 5th St);\n- the very large modern distribution warehouse on the north end of the campus\n  (single roof span ~700 ft x ~250 ft, abutting the US-20 / SR-53 highway);\n- the rail spur running north-south through the property between the plant\n  and the warehouse (rail tank cars parked on it, visible in Street View);",
+        "mapsUrl": "https://www.google.com/maps/@41.3614,-83.0920,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Confirmed at 1301 Heinz Dr off N 5th St (~41.3618, -83.0905). Street View 2024-05 shows sliding metal gates pulled open at a wide truck-only driveway, lined with orange bollards, with a tall Heinz 57 logo sign on a pole and a freestanding 'Kraft Heinz Distribution Center / Shipping & Receiving / No Trespassing — 1301 Heinz Drive' sign. Lane markings and curb cut are clearly truck-scaled.",
+          "guardShack": "No classic 1-3-bay guard booth positively identified at the Heinz Drive truck gate. Ancillary small flat-roofed structures sit near the warehouse SE corner inside the gate but their function is unclear from imagery; gate operation appears remote/automated.",
+          "remoteGs": "Set true given truckGate=true and no resolved guard booth at the inbound lane — implies kiosk / call-box / scheduled-appointment check-in.",
+          "fastLaneOpportunity": "Wide unused paved width at the Heinz Drive apron — easy room to add a bypass / express lane parallel to the inbound lane.",
+          "postGateStaging": "Large paved trailer-staging zone immediately inside the Heinz Drive gate, between the gate and the warehouse dock face.",
+          "dockDoors": "Counted from satellite z18-z19 along east face of the distribution warehouse: continuous orange-strip dock line ~700 ft long with roughly 40+ doors; main historic plant adds additional ~10-15 dock positions on its south and east faces. Total well over 50.",
+          "dropArea": "Two major drop yards: primary east of warehouse (~6 rows x ~12 stalls = ~70 trailers) plus secondary near main plant east apron (~20 trailers). Many empty stalls visible at imagery time.",
+          "shipRcvSeparate": "Main historic plant (south brick building, 1937-era, with smokestack) runs its own shipping docks separate from the modern distribution warehouse (north) which handles outbound finished-goods distribution.",
+          "multipleFacilities": "Clear campus: historic main production plant + adjacent secondary processing buildings + large modern distribution warehouse + admin/welcome center (mansard terra-cotta roof) + tomato/paste storage silos + water-treatment ponds.",
+          "railServed": "Active rail spur runs north-south through the property between main plant and warehouse; Street View shows tank cars parked on the spur. Plant has historic tomato/paste rail-receiving capability.",
+          "scale": "No truck scale positively identified from satellite imagery. Many large food plants of this scale have one; cannot confirm absence with high confidence.",
+          "urbanRural": "Fremont OH is a small town (~16k population). The campus sits at the edge of town with farmland to the north and east across US-20.",
+          "buildingCount": "Approximate — at least 7 distinct structures (main plant + warehouse + admin/welcome + 2 secondary processing buildings + silos cluster + water-treatment building); some adjacent structures may share roofs and be undercounted from above.",
+          "siteAreaAcres": "Derived from perimeter bbox: ~801 m N-S x ~443 m E-W ≈ 88 acres. Property line approximated from satellite (rail spur is internal; west edge at treeline before river; north edge at US-20 ROW grass strip; south edge before residential)."
+        }
+      },
+      {
+        "id": "13-kraft-heinz-mason-city",
+        "name": "Kraft Heinz - Mason City",
+        "type": "Food Manufacturer",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "scale",
+          "exitLanes",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 43.1641,
+          "lng": -93.2162
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 43.16275,
+            "west": -93.21825,
+            "north": 43.1656,
+            "east": -93.2143
+          },
+          "truckGate": {
+            "south": 43.16275,
+            "west": -93.2168,
+            "north": 43.1631,
+            "east": -93.21625
+          },
+          "dropYards": [
+            {
+              "south": 43.16465,
+              "west": -93.21525,
+              "north": 43.16555,
+              "east": -93.2143
+            },
+            {
+              "south": 43.1641,
+              "west": -93.218,
+              "north": 43.16465,
+              "east": -93.2168
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 43.1644,
+              "west": -93.2156,
+              "north": 43.165,
+              "east": -93.2143
+            },
+            {
+              "south": 43.1632,
+              "west": -93.2181,
+              "north": 43.1647,
+              "east": -93.2177
+            }
+          ],
+          "staging": {
+            "south": 43.1631,
+            "west": -93.2168,
+            "north": 43.1641,
+            "east": -93.2156
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 18,
+          "trailersVisible": 14,
+          "trailerParkingCapacity": 25,
+          "truckGateCount": 1,
+          "buildingCount": 4,
+          "siteAreaAcres": 25.1,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
+        "dossierExcerpt": "The roster's approximate coordinates (43.1627479, -93.2164507) sit just south\nof the property line, in the residential block facing the plant across\n12th Street NW. Probing satellite at z16-17 around that point immediately\nrevealed the large industrial complex to the north of 12th St NW. A web\nsearch confirmed Kraft Heinz's Mason City address as 1022 12th St NW —\nlocking the building.\n\nThis is the US Jell-O / pudding plant: nearly 200 employees, currently\nrunning a $62.8M expansion (Dean Snyder Construction) and slated for\n~$9M in DOE clean-energy upgrades including an ammonia-free refrigeration\nsystem. The plant manufactures essentially all US-market ready-to-eat Jell-O\ngelatin cups and pudding cups. Confirmed by Food Logistics and Food Dive\ncoverage and the on-site \"JELL-O\" landscaped sign visible directly south",
+        "mapsUrl": "https://www.google.com/maps/@43.1641,-93.21620,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single fenced entry from 12th St NW at ~43.16285,-93.21655. Chain-link perimeter fence funnels all traffic through one driveway opening; clear pinch point with monument-sign island and internal lane markings. No barrier arm/swing gate visible in 2024-09 Street View.",
+          "guardShack": "No staffed booth at the entry in 2024-09 Street View. The two structures flanking the entry are landscaping monument signs (blue Kraft Heinz marker + 'Information' visitor sign), not occupied booths.",
+          "remoteGs": "Inferred: gate but no shack — driver check-in is via kiosk/app/portal or at the warehouse face inside.",
+          "drivewayLong": "Long approach: the entry drive runs ~150 m north from 12th St NW to the dock apron — easily holds 3+ trucks queued.",
+          "postGateStaging": "Wide paved courtyard between main plant (west) and warehouse (east) provides post-gate holding before backing into the dock face.",
+          "dockDoors": "Counted at least 8-10 dock doors along the north face of the white warehouse with trailers backed in; additional doors on the west face of the main plant (rail-side receiving + tanker bays). Estimated 15-20 total → '10-25' band.",
+          "dropArea": "Marked drop-trailer parking visible north of the warehouse (~6-10 stalls) plus secondary NE staging strip alongside the rail yard. ~12-18 stalls capacity → '10-25' band.",
+          "shipRcvSeparate": "Ingredient receiving (rail-served silos + tankers) is on the WEST face of the plant; finished-goods outbound shipping is at the NORTH face of the large warehouse — physically distinct dock clusters on different building faces.",
+          "urbanRural": "Plant sits at the NW edge of Mason City, IA (pop ~27k). Farmland directly to the north and west; small-town residential to the south. Per rubric, small-town industrial = Rural.",
+          "connectivityIssue": "Inside Mason City limits; cell coverage adequate. Set false.",
+          "multipleFacilities": "On-property cluster: (1) main multi-section processing plant on west, (2) large finished-goods warehouse on east, (3) rail-served ingredient silo / tanker yard on far east, (4) maintenance / rail-shed near NE. Single ownership, single campus, but distinct building footprints.",
+          "scale": "No truck scale / weigh pad identified in tight (z19-20) satellite. Possible but not visible — flagged uncertain.",
+          "dropYard": "Distinct drop-trailer parking strip north of the warehouse, separate from active dock apron.",
+          "railServed": "Rail spur clearly enters the property along the east edge, with a track running into the warehouse for inbound ingredient cars. Mason City has long been Kraft's rail-receiving dessert-mix plant.",
+          "siteAreaAcres": "Perimeter box: 285m N-S x 320m E-W ≈ 91,200 m² ≈ 22.5 acres of fenced operating yard; including peripheral silo/rail land call it ~25 acres.",
+          "facility": "1022 12th St NW, Mason City, IA 50401 — the nation's Jell-O gelatin + pudding plant (~200 employees; $62.8M expansion announced; receiving $9M DOE clean-energy upgrade; producing nearly all US Jell-O gelatin and pudding cups). This is a single building complex on a single parcel — there is NO second Mason City plant in Iowa. Roster idx 15 (also labeled 'Kraft Heinz - Mason City') resolves to Mason, OH (39.33,-84.33), a different facility 700+ miles away."
+        }
+      },
+      {
+        "id": "20-kraft-heinz-ft-myers",
+        "name": "Kraft Heinz - Ft Myers",
+        "type": "Manufacturer",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 26.66568,
+          "lng": -81.80265
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 26.6647,
+            "west": -81.8033,
+            "north": 26.66665,
+            "east": -81.802
+          },
+          "truckGate": {
+            "south": 26.66631,
+            "west": -81.8033,
+            "north": 26.66645,
+            "east": -81.80306
+          },
+          "dropYards": [
+            {
+              "south": 26.66585,
+              "west": -81.80285,
+              "north": 26.6662,
+              "east": -81.8022
+            }
+          ],
+          "dockAprons": [
+            {
+              "south": 26.66572,
+              "west": -81.80285,
+              "north": 26.666,
+              "east": -81.8021
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 8,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 12,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 6.9,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
+        "dossierExcerpt": "The supplied approximate point (26.665613, -81.8031436) was within ~30 m of the\ntrue facility center — already on the property. Web search confirmed the\naddress (`5521 Division Dr, Fort Myers, FL 33905`, Bagel Bites production\nplant; ~58 employees per Buzzfile/Chamber of Commerce listings). The\ndistinctive blue-roof octagonal Kraft visitor-reception building visible in\nStreet View matches the satellite footprint exactly.\n\nThe site sits inside the Treeline Industrial Park east of Fort Myers, with\nI-75 ~600 m to the east. Division Drive is the N-S access road forming the\nwest property line; it ends in a cul-de-sac ~150 m south of the truck\ngate. A canal / wetland forms the east line and a stormwater lake\nforms the south line — neither offers a vehicle approach, so the only",
+        "mapsUrl": "https://www.google.com/maps/@26.66568,-81.80265,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Street View (Dec-2024) at 26.66640,-81.80320 heading 90° shows a closed double-leaf chain-link swing gate across the access driveway off Division Dr, with chain-link perimeter fence on both sides and gate posts clearly visible.",
+          "guardShack": "No staffed booth at the gate. The nearest structure beyond the gate is the octagonal Kraft Heinz visitor reception/admin building set back ~30m from the gate — not a guard booth (multi-room, not lane-side).",
+          "remoteGs": "Gate is access-controlled (closed in Street View) but unstaffed; a small pole-mounted device on the right side of the gate appears to be a call-box / kiosk consistent with remote check-in.",
+          "drivewayShort": "Gate sits ~3-5 m off the Division Dr fence line — only 1-2 truck lengths of apron between the public road and the gate before trucks reach the interior parking/yard.",
+          "backupSensitive": "Tight gate apron; an inbound truck queue at the gate would back up onto Division Dr (a cul-de-sac terminating ~150 m south of the gate).",
+          "entryExitTogether": "Single gate on Division Dr serves both directions; no second truck access on any other side of the property (lake on south, canal on east, no road on the east side at all).",
+          "dockDoors": "Counted ~6-8 dock positions on the north face between the silos and the east end, plus 2-3 on the east-facing wing where 3 trailers are visibly backed in. Manufacturing plant, not a DC — comfortably in the 0-10 band.",
+          "dropYard": "Paved trailer staging strip between the silos and the dock apron with ~6 trailers visible in imagery and room for ~12; functions as a small on-site trailer drop area.",
+          "buildingCount": "Two visually distinct connected buildings — the northern white-roof production building with cooling/process units and the southern square process building with extensive rooftop equipment, joined by a narrow corridor. Counted as 2.",
+          "urbanRural": "Inside the Treeline Industrial Park in eastern Fort Myers, with continuous warehouse/manufacturing development on all sides and I-75 immediately east — Urban industrial fabric, not edge-of-town.",
+          "siteAreaAcres": "Perimeter bbox ≈ 217 m N-S × 129 m E-W ≈ 6.9 acres. Honest overhead estimate; flagged as fieldNote only because the exact fence-line on the south (lake bank) is screened by trees.",
+          "shipRcvSeparate": "Could not positively distinguish a dedicated receiving dock from the shipping dock in overhead imagery — all visible dock activity is on the north face. Conservatively marked false."
+        }
+      }
+    ]
+  }
+}

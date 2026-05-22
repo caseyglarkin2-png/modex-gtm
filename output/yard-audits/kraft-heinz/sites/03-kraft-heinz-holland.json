@@ -1,23 +1,107 @@
 {
   "name": "Kraft Heinz - Holland",
-  "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+  "type": "Food Manufacturer",
+  "coords": {
+    "lat": 42.7836,
+    "lng": -86.1283
   },
-  "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "entryLanes", "exitLanes"],
+  "geofences": {
+    "perimeter": {
+      "south": 42.7826,
+      "west": -86.1308,
+      "north": 42.7848,
+      "east": -86.12585
+    },
+    "truckGate": {
+      "south": 42.78258,
+      "west": -86.127,
+      "north": 42.7828,
+      "east": -86.1262
+    },
+    "dropYards": [
+      {
+        "south": 42.783,
+        "west": -86.1267,
+        "north": 42.7843,
+        "east": -86.1259
+      }
+    ],
+    "dockAprons": [
+      {
+        "south": 42.783,
+        "west": -86.13,
+        "north": 42.7833,
+        "east": -86.1287
+      },
+      {
+        "south": 42.7831,
+        "west": -86.1273,
+        "north": 42.7837,
+        "east": -86.1267
+      }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 2,
+    "buildingCount": 4,
+    "siteAreaAcres": 24.5,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.7836,-86.1283,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "truckGateCount",
+    "shipRcvSeparate",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
-    "streetview": "Street View shows the H.J. Heinz building with chain-link fencing along the lot, but no truck gate/checkpoint in this frame.",
-    "truckGate": "Open driveway from the public road to the dock area with no checkpoint structure - matches the no-gate archetype.",
-    "multipleFacilities": "Large lakeside manufacturing campus with multiple connected and separate plant/warehouse buildings and tank farms.",
-    "dropYard": "Trailer rows parked along the east side of the campus.",
-    "urbanRural": "Small-town (Holland MI) waterfront industrial setting; judged Rural."
-  }
+    "truckGate": "No barrier arm, sliding gate, or fence-line gate across any truck driveway. Multiple curb-cuts from W 16th St lead directly into yard / dock aprons. Confirmed in Street View along the entire south frontage (2024-06 capture).",
+    "guardShack": "No small staffed booth visible at any truck entrance. Office facade on 16th St (red 'Heinz 57' sign building) is a normal admin entry, not a guard checkpoint.",
+    "remoteGs": "False because there is no truck gate at all (not because there is a gate with kiosk).",
+    "drivewayShort": "Truck driveways from 16th St are short — less than two truck lengths from curb to either the dock apron or the east drop-yard. A queue of 3+ trucks would not fit inside.",
+    "backupSensitive": "Yard is hard up against 16th St with very little stacking room — a truck queue on a busy day would spill onto a public street. An XTRA-Lease trailer was already observed staged on the curb in the 2024-06 Street View.",
+    "entryExitTogether": "With no formal gate, in/out flow uses the same handful of curb-cut driveways.",
+    "entryLanes": "Each curb-cut is roughly one truck-width inbound, one outbound; estimated single-lane each way per driveway.",
+    "dockDoors": "Counted from satellite: ~12 trailers backed against west dock face of NW building, ~9 trailers along south face of central building, ~12-15 doors on east face serving east drop yard. Banded 25-50.",
+    "dropArea": "Large eastern drop yard holds 50-65 trailers in 5-6 visible rows in the captured imagery; band 50+.",
+    "shipRcvSeparate": "Distinct dock banks on different building faces (west dock vs south dock vs east dock) consistent with separated ship/rcv operations in a multi-line food plant; some uncertainty without internal floor map.",
+    "urbanRural": "Inside the City of Holland's dense urban fabric: immediately south across 16th St are dense residential blocks, marina, retail. Classified Urban.",
+    "scale": "No truck scale identified on the property in any probed imagery.",
+    "dropYard": "Dedicated trailer-storage lot east of the plant, physically separated from active dock aprons.",
+    "railServed": "Rail spur visible in NE corner imagery curving in from the east-side ROW into the north tank-field — site is rail-served.",
+    "buildingCount": "Four distinguishable building masses: (1) NW building west of the central road-corridor, (2) central main process building (Heinz 57 facade), (3) southeast / south dock building, (4) north tank-process structure along the shoreline.",
+    "siteAreaAcres": "Computed from perimeter bbox: ~245 m N-S x ~405 m E-W ≈ 24.5 acres.",
+    "truckGateCount": "Counted as 2 main truck curb-cuts off W 16th St (one west near the Heinz 57 office facade, one east near the drop yard); no actual gates, but 2 dominant truck-flow access points.",
+    "multipleFacilities": "All four building masses are tightly contiguous on one parcel — read as a single integrated facility rather than a multi-building campus."
+  },
+  "method": "deep-audit"
 }
