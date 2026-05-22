@@ -8,10 +8,12 @@
     "siteCount": 6,
     "coverageNote": {
       "auditedCount": 6,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 10,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 6 identifiable facilities."
+      "note": "Westrock Coffee operates ~10 facilities (US + Rwanda + Tanzania for green-coffee sourcing). We audited 6 US sites.",
+      "auditedScope": "US",
+      "totalGlobalFootprint": 10
     },
     "featuredSiteId": "02-conway-ar-dc"
   },

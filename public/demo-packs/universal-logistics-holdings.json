@@ -8,10 +8,11 @@
     "siteCount": 22,
     "coverageNote": {
       "auditedCount": 22,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 80,
       "droppedStubCount": 4,
       "capHit": false,
-      "note": "Audited all 22 identifiable facilities (4 additional were unresolvable from public sources)."
+      "note": "Universal Logistics Holdings operates ~80 US sites across truckload, intermodal, contract logistics, and value-added services. We audited 22.",
+      "auditedScope": "US"
     },
     "featuredSiteId": "05-grand-prairie-gm-arlington-logistics"
   },

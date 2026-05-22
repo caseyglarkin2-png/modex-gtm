@@ -8,10 +8,11 @@
     "siteCount": 2,
     "coverageNote": {
       "auditedCount": 2,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 4,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 2 identifiable facilities."
+      "note": "World Market (Cost Plus) operates ~250 US retail stores fed by a handful of DCs; we mapped the DC sites where yard ops matter.",
+      "auditedScope": "US"
     },
     "featuredSiteId": "01-cost-plus-world-market-stockton-ca-distribution-center"
   },

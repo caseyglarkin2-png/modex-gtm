@@ -8,10 +8,12 @@
     "siteCount": 26,
     "coverageNote": {
       "auditedCount": 26,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 30,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 26 identifiable facilities."
+      "note": "General Mills operates ~35 plants globally (~30 in NA). We audited 26 NA sites.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 35
     },
     "featuredSiteId": "05-general-mills-murfreesboro-tn"
   },

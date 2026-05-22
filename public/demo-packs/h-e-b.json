@@ -8,10 +8,11 @@
     "siteCount": 15,
     "coverageNote": {
       "auditedCount": 15,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 15,
       "droppedStubCount": 1,
       "capHit": false,
-      "note": "Audited all 15 identifiable facilities (1 additional were unresolvable from public sources)."
+      "note": "H-E-B operates ~430 stores fed by ~15 DC + production facilities, primarily in Texas + Mexico. We audited the DC/manufacturing network.",
+      "auditedScope": "US"
     },
     "featuredSiteId": "09-h-e-b-manufacturing-houston-milk-bread-plant"
   },

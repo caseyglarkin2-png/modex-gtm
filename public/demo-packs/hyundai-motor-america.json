@@ -8,10 +8,12 @@
     "siteCount": 17,
     "coverageNote": {
       "auditedCount": 17,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 22,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 17 identifiable facilities."
+      "note": "Hyundai Motor Company operates ~30 plants globally; Hyundai Motor America (the NA arm) operates ~22 NA facilities (HMMA Montgomery, HMMC Cibolo TX, HMG Metaplant America in Georgia, Kia Georgia, Genesis suppliers, parts DCs). We audited 17. International scope on request.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 30
     },
     "featuredSiteId": "10-mobis-parts-america-pdc-sumner-wa"
   },

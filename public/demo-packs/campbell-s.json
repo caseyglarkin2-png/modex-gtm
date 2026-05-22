@@ -8,10 +8,12 @@
     "siteCount": 21,
     "coverageNote": {
       "auditedCount": 21,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 25,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 21 identifiable facilities."
+      "note": "Campbell's Soup Company operates ~25 NA plants (mostly US + 2 Canada). Network is NA-only post-2019 Asia divestiture.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 25
     },
     "featuredSiteId": "04-snyders-of-hanover-hanover-pa"
   },

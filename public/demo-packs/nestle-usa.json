@@ -8,10 +8,12 @@
     "siteCount": 12,
     "coverageNote": {
       "auditedCount": 12,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 80,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 12 identifiable facilities."
+      "note": "Nestlé USA operates ~80 US sites; parent Nestlé S.A. operates ~340 factories worldwide across 77 countries. We audited 12 US sites.",
+      "auditedScope": "US",
+      "totalGlobalFootprint": 340
     },
     "featuredSiteId": "08-nestle-beverage-anderson-in"
   },

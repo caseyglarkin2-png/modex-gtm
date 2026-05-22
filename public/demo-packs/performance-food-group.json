@@ -8,10 +8,11 @@
     "siteCount": 30,
     "coverageNote": {
       "auditedCount": 30,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 150,
       "droppedStubCount": 0,
       "capHit": true,
-      "note": "We audited the 30 largest facilities by throughput. The wider network follows the same archetype distribution."
+      "note": "Performance Food Group operates ~150 US distribution centers (Vistar, PFG Foodservice, Reinhart). We audited 30 representative sites.",
+      "auditedScope": "US"
     },
     "featuredSiteId": "18-lebanon-tn"
   },

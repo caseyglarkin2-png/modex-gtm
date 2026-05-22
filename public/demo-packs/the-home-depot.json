@@ -11,7 +11,9 @@
       "estimatedFootprint": 70,
       "droppedStubCount": 0,
       "capHit": true,
-      "note": "Home Depot operates ~70 RDC/SDC/FDC/DFC/BDC facilities supporting ~2,300 stores. We audited 30 representative supply-chain facilities; the audited cohort spans every facility type."
+      "note": "The Home Depot operates ~70 distribution centers across the US + Mexico + Canada (serving ~2,300 stores). We audited 30 representative DCs.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 70
     },
     "featuredSiteId": "05-monroe-oh-rdc"
   },

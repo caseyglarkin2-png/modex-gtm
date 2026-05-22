@@ -8,10 +8,11 @@
     "siteCount": 28,
     "coverageNote": {
       "auditedCount": 28,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 100,
       "droppedStubCount": 2,
       "capHit": false,
-      "note": "Audited all 28 identifiable facilities (2 additional were unresolvable from public sources)."
+      "note": "Kenco Logistics operates ~100 US warehouse + transload sites. We audited 28 representative locations.",
+      "auditedScope": "US"
     },
     "featuredSiteId": "02-kenco-mcs-mississippi"
   },

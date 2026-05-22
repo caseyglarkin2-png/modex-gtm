@@ -8,10 +8,12 @@
     "siteCount": 30,
     "coverageNote": {
       "auditedCount": 30,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 35,
       "droppedStubCount": 0,
       "capHit": true,
-      "note": "We audited the 30 largest facilities by throughput. The wider network follows the same archetype distribution."
+      "note": "Niagara Bottling operates ~35 US bottling plants (private-label water). We audited 30.",
+      "auditedScope": "US",
+      "totalGlobalFootprint": 35
     },
     "featuredSiteId": "13-niagara-bottling-jeffersonville-in"
   },

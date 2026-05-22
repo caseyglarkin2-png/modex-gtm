@@ -8,10 +8,12 @@
     "siteCount": 10,
     "coverageNote": {
       "auditedCount": 10,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 12,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 10 identifiable facilities."
+      "note": "Diageo operates ~150 production sites across 30+ countries (Johnnie Walker, Smirnoff, Guinness, Tanqueray, Captain Morgan). We audited 10 NA sites; international scope on request.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 150
     },
     "featuredSiteId": "02-diageo-plainfield-distribution-warehouse"
   },

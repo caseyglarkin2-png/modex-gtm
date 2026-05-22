@@ -8,10 +8,12 @@
     "siteCount": 30,
     "coverageNote": {
       "auditedCount": 30,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 80,
       "droppedStubCount": 0,
       "capHit": true,
-      "note": "We audited the 30 largest facilities by throughput. The wider network follows the same archetype distribution."
+      "note": "The Coca-Cola Company operates ~270 bottling plants worldwide (including independent licensed bottlers) and ~80 across the US bottler system. We audited 30 US sites in the audit window.",
+      "auditedScope": "US",
+      "totalGlobalFootprint": 270
     },
     "featuredSiteId": "10-coca-cola-consolidated-columbus-distribution-center-oh"
   },

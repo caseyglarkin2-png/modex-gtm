@@ -8,10 +8,12 @@
     "siteCount": 16,
     "coverageNote": {
       "auditedCount": 16,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 20,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 16 identifiable facilities."
+      "note": "Daimler Truck North America (Freightliner / Western Star / Detroit) operates ~20 NA plants + parts/DC sites. Global Daimler Truck operates ~40 production sites.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 40
     },
     "featuredSiteId": "13-memphis-parts-distribution-center"
   },

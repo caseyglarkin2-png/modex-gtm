@@ -11,7 +11,9 @@
       "estimatedFootprint": 1800,
       "droppedStubCount": 0,
       "capHit": true,
-      "note": "FedEx operates ~1,800 freight/parcel terminals in North America; we audited 30 of the largest by throughput. The other facilities follow the same archetype distribution and are addressable on the same protocol."
+      "note": "FedEx operates ~5,000 facilities globally (Express + Ground + Freight + Office); the US network is ~1,800 sites. We audited 30 representative US hubs/terminals.",
+      "auditedScope": "US",
+      "totalGlobalFootprint": 5000
     },
     "featuredSiteId": "24-fedex-freight-hub-conley-ga"
   },

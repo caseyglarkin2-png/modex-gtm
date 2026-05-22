@@ -8,10 +8,12 @@
     "siteCount": 20,
     "coverageNote": {
       "auditedCount": 20,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 35,
       "droppedStubCount": 2,
       "capHit": false,
-      "note": "Audited all 20 identifiable facilities (2 additional were unresolvable from public sources)."
+      "note": "Keurig Dr Pepper operates ~35 manufacturing + DC sites, almost entirely NA. We audited 20 representative sites.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 35
     },
     "featuredSiteId": "04-kdp-beverage-manufacturing-distribution-allentown-pa"
   },

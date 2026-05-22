@@ -8,10 +8,12 @@
     "siteCount": 14,
     "coverageNote": {
       "auditedCount": 14,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 40,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 14 identifiable facilities."
+      "note": "Crowley Maritime operates ~270 terminals/ports globally across container, fuel, marine services; we audited 14 US trailer-relevant sites.",
+      "auditedScope": "US",
+      "totalGlobalFootprint": 270
     },
     "featuredSiteId": "08-holt-terminals-gloucester-terminal"
   },
