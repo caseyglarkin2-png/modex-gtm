@@ -151,6 +151,19 @@ export function DriverJourneyReplay({ site, scenario, onClose }: Props) {
           </div>
         </div>
 
+        {/* Conversion CTA — fires right after the prospect sees the YNS-saves
+            delta on their own yard. The 30-min audit is the canonical next
+            step on yardflow.ai; this just makes it one click away. */}
+        <a
+          href={`https://yardflow.ai/contact/?intent=audit&utm_source=demo&utm_medium=demo-replay&utm_campaign=${site.id}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-ms-cta-id="demo-replay-book-audit"
+          className="mb-3 block rounded-lg bg-stone-900 px-4 py-2.5 text-center text-sm font-semibold text-white shadow-sm transition hover:bg-stone-700"
+        >
+          See your real numbers — book a 30-min audit →
+        </a>
+
         {/* Caveat */}
         <p className="text-[11px] leading-relaxed text-stone-500">
           Movement durations are honest floors set by yard geometry; YNS uplift lands on the wait fields

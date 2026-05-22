@@ -238,9 +238,18 @@ export function NetworkSimulator({ pack }: Props) {
               <span className="text-stone-400"> · 11.5× legacy YMS · $87.4M model across 50 sites</span>
             </div>
           </div>
-          <div className="flex shrink-0 gap-2 text-xs">
+          <div className="flex shrink-0 flex-wrap gap-2 text-xs">
             <a
-              href="https://yardflow.ai/roi/"
+              href={`https://yardflow.ai/contact/?intent=audit&utm_source=demo&utm_medium=demo-sim&utm_campaign=${pack.account.slug}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-md bg-emerald-500 px-3 py-1.5 font-semibold text-stone-900 shadow-sm transition hover:bg-emerald-400"
+              data-ms-cta-id="demo-sim-book-audit"
+            >
+              Book a 30-min audit →
+            </a>
+            <a
+              href={`https://yardflow.ai/roi/?utm_source=demo&utm_medium=demo-sim&utm_campaign=${pack.account.slug}`}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-md bg-white px-3 py-1.5 font-medium text-stone-900 transition hover:bg-stone-200"
@@ -249,7 +258,7 @@ export function NetworkSimulator({ pack }: Props) {
               ROI Calculator →
             </a>
             <a
-              href="https://yardflow.ai/YNS/"
+              href={`https://yardflow.ai/YNS/?utm_source=demo&utm_medium=demo-sim&utm_campaign=${pack.account.slug}`}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-md border border-stone-600 px-3 py-1.5 text-stone-200 transition hover:border-stone-400 hover:text-white"

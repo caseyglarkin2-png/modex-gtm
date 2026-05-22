@@ -93,13 +93,24 @@ export function DemoSurface({ pack, mode, initialSiteId = null, autoPlay = false
                 <span className="tabular-nums">{railServed}</span> rail-served
               </p>
             </div>
-            <Link
-              href={`/for/${pack.account.slug}`}
-              data-ms-cta-id="demo-back-to-memo"
-              className="hidden text-xs uppercase tracking-widest text-stone-500 transition hover:text-stone-900 md:inline"
-            >
-              ← Read the full memo
-            </Link>
+            <div className="flex shrink-0 items-center gap-4">
+              <Link
+                href={`/for/${pack.account.slug}`}
+                data-ms-cta-id="demo-back-to-memo"
+                className="hidden text-xs uppercase tracking-widest text-stone-500 transition hover:text-stone-900 md:inline"
+              >
+                ← Read the full memo
+              </Link>
+              <a
+                href={`https://yardflow.ai/contact/?intent=audit&utm_source=demo&utm_medium=demo-header&utm_campaign=${pack.account.slug}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-ms-cta-id="demo-book-audit"
+                className="rounded-md bg-stone-900 px-3 py-1.5 text-xs font-medium text-white shadow-sm transition hover:bg-stone-700"
+              >
+                Book a network audit →
+              </a>
+            </div>
           </div>
           {/* View tab toggle */}
           <div className="mx-auto flex max-w-5xl gap-1 px-5">
