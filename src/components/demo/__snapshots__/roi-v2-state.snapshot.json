@@ -1,0 +1,37 @@
+{
+  "asks": {
+    "totalFacilities": 50,
+    "facilitiesWithYms": 25,
+    "facilitiesWithDropTrailers": 35,
+    "averageMarginPerShipment": 1000
+  },
+  "assumptions": {
+    "withYms": {
+      "dcFtesPerShift": 2,
+      "dcShifts": 3,
+      "spotterFtesPerShift": 2,
+      "spotterShifts": 3,
+      "shipmentsPerDay": 200,
+      "avgCycleTimeMinutes": 60,
+      "annualFteCost": 60000
+    },
+    "dropsNoYms": {
+      "dcFtesPerShift": 1,
+      "dcShifts": 2,
+      "spotterFtesPerShift": 2,
+      "spotterShifts": 2,
+      "shipmentsPerDay": 125,
+      "avgCycleTimeMinutes": 60,
+      "annualFteCost": 60000
+    },
+    "withoutDrops": {
+      "dcFtesPerShift": 1,
+      "dcShifts": 1,
+      "spotterFtesPerShift": 0,
+      "spotterShifts": 0,
+      "shipmentsPerDay": 40,
+      "avgCycleTimeMinutes": 60,
+      "annualFteCost": 60000
+    }
+  }
+}

@@ -6,6 +6,7 @@ import { DemoPackSchema, type DemoPack } from '@/lib/demo/pack-schema';
 import { DemoSurface } from '@/components/demo/demo-surface';
 import { MicrositeTracker } from '@/components/microsites/microsite-tracker';
 import { getAccountMicrositeData } from '@/lib/microsites/accounts';
+import { buildPublicShareMetadata } from '@/lib/microsites/share';
 
 /**
  * D2.1 — The canonical demo route: `/demo/<account>`.
@@ -54,12 +55,16 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const title = `${displayName} · yard network · YardFlow`;
   const description = `${siteCount} ${displayName} facilities, mapped from public satellite imagery. Real geofences, real archetype mix — see your yard the way YardFlow sees it.`;
 
-  return {
+  // Canonical / OG URLs route to yardflow.ai/demo/<slug>, not modex-gtm,
+  // so prospects who share a link land on the canonical domain and
+  // the browser origin matches /roi for the D8.1 localStorage handoff.
+  return buildPublicShareMetadata({
     title,
     description,
-    openGraph: { title, description, type: 'website' },
-    twitter: { card: 'summary_large_image', title, description },
-  };
+    pathname: `/demo/${account}`,
+    imagePath: `/for/${account}/opengraph-image`,
+    imageAlt: `${displayName} yard network — YardFlow YNS analysis`,
+  });
 }
 
 export default async function DemoAccountPage({

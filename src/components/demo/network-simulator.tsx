@@ -3,6 +3,7 @@
 import dynamic from 'next/dynamic';
 import { Component, type ReactNode, useMemo, useState } from 'react';
 import type { DemoPack } from '@/lib/demo/pack-schema';
+import { RoiCtaButton } from './roi-cta-button';
 import {
   PRESETS,
   RISK_COLORS,
@@ -248,15 +249,14 @@ export function NetworkSimulator({ pack }: Props) {
             >
               Book a 30-min audit →
             </a>
-            <a
-              href={`https://yardflow.ai/roi/?utm_source=demo&utm_medium=demo-sim&utm_campaign=${pack.account.slug}`}
-              target="_blank"
-              rel="noopener noreferrer"
+            <RoiCtaButton
+              pack={pack}
+              ctaId="demo-sim-to-roi"
+              utmMedium="demo-sim"
               className="rounded-md bg-white px-3 py-1.5 font-medium text-stone-900 transition hover:bg-stone-200"
-              data-ms-cta-id="demo-sim-to-roi"
             >
               ROI Calculator →
-            </a>
+            </RoiCtaButton>
             <a
               href={`https://yardflow.ai/YNS/?utm_source=demo&utm_medium=demo-sim&utm_campaign=${pack.account.slug}`}
               target="_blank"
