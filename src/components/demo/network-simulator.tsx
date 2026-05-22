@@ -158,6 +158,24 @@ export function NetworkSimulator({ pack }: Props) {
   });
   const topArchetype = Object.entries(archetypeCounts).sort((a, b) => b[1] - a[1])[0];
 
+  // Scope blurb — mirror the header in demo-surface.tsx so the sim's
+  // "Network state" line doesn't read as a claim about the entire
+  // network when we only audited a subset.
+  const cov = pack.account.coverageNote;
+  const globalCount = cov?.totalGlobalFootprint;
+  const networkScopeBlurb =
+    globalCount && globalCount > pack.account.siteCount
+      ? `${pack.account.siteCount} of ~${globalCount} facilities${cov?.auditedScope ? ` (${cov.auditedScope})` : ''}`
+      : cov?.estimatedFootprint && cov.estimatedFootprint > pack.account.siteCount
+        ? `${pack.account.siteCount} of ~${cov.estimatedFootprint} facilities${cov?.auditedScope ? ` (${cov.auditedScope})` : ''}`
+        : `${pack.account.siteCount} facilities`;
+  const facilitiesTileValue =
+    globalCount && globalCount > pack.account.siteCount
+      ? `${pack.account.siteCount} / ${globalCount}`
+      : cov?.estimatedFootprint && cov.estimatedFootprint > pack.account.siteCount
+        ? `${pack.account.siteCount} / ${cov.estimatedFootprint}`
+        : `${pack.account.siteCount}`;
+
   return (
     <div className="flex h-full w-full flex-col bg-stone-50">
       {/* Status header — "Operational / Warning / Critical" pill bar */}
@@ -166,7 +184,7 @@ export function NetworkSimulator({ pack }: Props) {
           <div>
             <div className="text-[10px] uppercase tracking-widest text-stone-500">Network state</div>
             <div className="mt-0.5 text-sm font-semibold text-stone-900">
-              {pack.account.displayName} · {pack.account.siteCount} facilities
+              {pack.account.displayName} · {networkScopeBlurb}
             </div>
           </div>
           <div className="flex items-center gap-3 text-[11px]">
@@ -194,7 +212,11 @@ export function NetworkSimulator({ pack }: Props) {
           below routes to. Every number on this strip is a count or sum
           straight off the audit JSON. */}
       <div className="grid shrink-0 grid-cols-2 divide-x divide-y divide-stone-200 border-b border-stone-200 bg-white sm:grid-cols-3 lg:grid-cols-6">
-        <Kpi icon="🏭" label="Facilities audited" value={pack.account.siteCount} />
+        <Kpi
+          icon="🏭"
+          label={cov?.auditedScope ? `Facilities (${cov.auditedScope}/total)` : 'Facilities audited'}
+          value={facilitiesTileValue}
+        />
         <Kpi icon="🚪" label="Dock doors" value={pack.network.totals.dockDoors.toLocaleString()} />
         <Kpi icon="🚛" label="Trailer spots" value={pack.network.totals.trailerCapacity.toLocaleString()} />
         <Kpi icon="🚉" label="Rail-served" value={pack.network.totals.railServed} />

@@ -23,9 +23,11 @@ import type { DemoPack } from '@/lib/demo/pack-schema';
 export function CoverageHonesty({ pack }: { pack: DemoPack }) {
   const note = pack.account.coverageNote;
   if (!note) return null;
-  const hasGap =
+  const hasNaGap =
     note.estimatedFootprint !== null && note.auditedCount < note.estimatedFootprint;
-  if (!note.capHit && note.droppedStubCount === 0 && !hasGap) return null;
+  const hasGlobalGap =
+    note.totalGlobalFootprint != null && note.auditedCount < note.totalGlobalFootprint;
+  if (!note.capHit && note.droppedStubCount === 0 && !hasNaGap && !hasGlobalGap) return null;
 
   return (
     <div className="border-b border-amber-200 bg-amber-50/60 px-5 py-2.5 text-xs text-amber-900">
