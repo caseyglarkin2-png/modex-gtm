@@ -61,8 +61,21 @@ export function DemoSurface({ pack, mode, initialSiteId = null, autoPlay = false
 
   const selectedSite = selectedSiteId ? pack.network.sites.find((s) => s.id === selectedSiteId) ?? null : null;
 
-  const { displayName, siteCount } = pack.account;
+  const { displayName, siteCount, coverageNote } = pack.account;
   const { dockDoors, trailerCapacity, railServed } = pack.network.totals;
+
+  // Scope blurb for the header — be honest when our audit covers a
+  // subset of the prospect's full network. For Mondelez we audit 22 NA
+  // sites; the global footprint is ~160. Saying just "22 facilities"
+  // reads to a Mondelez exec as "you mapped 14% of our network and are
+  // pretending it's the whole thing." The audit IS NA-scoped and the
+  // banner explains why; this header now matches the banner's framing.
+  const scopeBlurb =
+    coverageNote?.totalGlobalFootprint && coverageNote.totalGlobalFootprint > siteCount
+      ? `${siteCount} of ~${coverageNote.totalGlobalFootprint} facilities${coverageNote.auditedScope ? ` (${coverageNote.auditedScope} scope)` : ''}`
+      : coverageNote?.estimatedFootprint && coverageNote.estimatedFootprint > siteCount
+        ? `${siteCount} of ~${coverageNote.estimatedFootprint} facilities${coverageNote.auditedScope ? ` (${coverageNote.auditedScope} scope)` : ''}`
+        : `${siteCount} facilities audited`;
 
   return (
     <div className={mode === 'standalone' ? 'flex min-h-screen flex-col' : 'flex h-[600px] flex-col rounded-lg border border-stone-200 bg-white shadow-sm'}>
@@ -74,7 +87,7 @@ export function DemoSurface({ pack, mode, initialSiteId = null, autoPlay = false
               <div className="text-[10px] uppercase tracking-widest text-stone-500">YardFlow · YNS network audit</div>
               <h1 className="mt-1 text-xl font-semibold text-stone-900">{displayName}</h1>
               <p className="mt-1 text-sm text-stone-600">
-                <span className="tabular-nums">{siteCount}</span> facilities ·{' '}
+                <span className="tabular-nums">{scopeBlurb}</span> ·{' '}
                 <span className="tabular-nums">{dockDoors.toLocaleString()}</span> dock doors ·{' '}
                 <span className="tabular-nums">{trailerCapacity.toLocaleString()}</span> trailer spots ·{' '}
                 <span className="tabular-nums">{railServed}</span> rail-served

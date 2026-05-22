@@ -210,7 +210,18 @@ export type AccountArchetype = z.infer<typeof AccountArchetype>;
  */
 const CoverageNote = z.object({
   auditedCount: z.number().int().positive(),
+  /** Best estimate of the account's in-scope footprint (e.g. "26 NA plants"). */
   estimatedFootprint: z.number().int().positive().nullable(),
+  /**
+   * Estimated total facility count worldwide. Often much larger than
+   * `estimatedFootprint` for multinationals (Mondelez ~160 globally vs.
+   * 26 NA; Coca-Cola ~250 bottlers globally vs. ~80 NA). Used by the
+   * demo header to be honest about scope. Optional — accounts that are
+   * NA-only (e.g. regional 3PLs, US-only retailers) won't have this.
+   */
+  totalGlobalFootprint: z.number().int().positive().nullable().optional(),
+  /** Geographic scope of the audit (e.g. "NA", "global"). Optional. */
+  auditedScope: z.string().optional(),
   droppedStubCount: z.number().int().nonnegative().default(0),
   capHit: z.boolean(),
   note: z.string(),
