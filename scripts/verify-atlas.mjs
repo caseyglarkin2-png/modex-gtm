@@ -75,13 +75,24 @@ const shotPath = 'tmp/atlas-verify.png';
 await page.screenshot({ path: shotPath, fullPage: false });
 console.log(`screenshot: ${shotPath}`);
 
-// Mondelez has 22 sites — the atlas should render all of them.
+// Marker count = pack site count. Pull from the URL's pack so the
+// check is account-aware (Mondelez=22, Kraft=10, B&N=2, etc.).
+const slugMatch = BASE.match(/\/demo\/([a-z0-9-]+)/);
+const slug = slugMatch?.[1] ?? 'mondelez-international';
+let expectedMarkers = 1;
+try {
+  const fs = await import('node:fs');
+  const pack = JSON.parse(fs.readFileSync(`public/demo-packs/${slug}.json`, 'utf8'));
+  expectedMarkers = pack.account.siteCount;
+} catch {
+  // pack not locally available — fall back to a permissive lower bound
+}
 const ok =
   mapBox &&
   mapBox.height > 100 &&
   mapBox.width > 100 &&
   tileImgs > 0 &&
-  markerCount >= 22 &&
+  markerCount >= expectedMarkers &&
   (sitePanelHeading !== null || archetypeMixVisible);
 
 console.log('');

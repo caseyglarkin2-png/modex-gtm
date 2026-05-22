@@ -79,14 +79,24 @@ const shotPath = 'tmp/sim-verify.png';
 await page.screenshot({ path: shotPath, fullPage: false });
 console.log(`screenshot: ${shotPath}`);
 
-// Verdict
+// Marker count = pack site count (some accounts have 2 sites, some 30).
+const slugMatch = BASE.match(/\/demo\/([a-z0-9-]+)/);
+const slug = slugMatch?.[1] ?? 'mondelez-international';
+let expectedMarkers = 1;
+try {
+  const fs = await import('node:fs');
+  const pack = JSON.parse(fs.readFileSync(`public/demo-packs/${slug}.json`, 'utf8'));
+  expectedMarkers = pack.account.siteCount;
+} catch {
+  // pack not locally available — fall back permissively
+}
 const ok =
   simMapBox &&
   simMapBox.height > 100 &&
   simMapBox.width > 100 &&
   !errorBoundaryVisible &&
   tileImgs > 0 &&
-  markerPaths >= 22;
+  markerPaths >= expectedMarkers;
 
 console.log('');
 console.log(ok ? '✅ PASS — sim map renders with tiles + markers' : '❌ FAIL — see diagnostics above');
