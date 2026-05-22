@@ -15,6 +15,7 @@ import {
   decideIntentNotification,
   sendSlackNotification,
 } from '@/lib/microsites/intent-notifications';
+import { logIntentToHubSpot } from '@/lib/microsites/hubspot-intent';
 
 async function parseRequestBody(req: NextRequest): Promise<unknown> {
   const contentType = req.headers.get('content-type') ?? '';
@@ -182,6 +183,14 @@ export async function POST(req: NextRequest) {
         );
       } catch (notifyError) {
         console.error('Failed to send intent notification', notifyError);
+      }
+      // D7.2 — also post a Note to the HubSpot contact timeline so sales
+      // sees demo/microsite engagement inline on the contact record.
+      // Fail-open: HubSpot failure must not block the request.
+      try {
+        await logIntentToHubSpot(snapshot, mergedSession, intentDecision.reason);
+      } catch (hubspotError) {
+        console.error('Failed to log demo engagement to HubSpot', hubspotError);
       }
     }
 
