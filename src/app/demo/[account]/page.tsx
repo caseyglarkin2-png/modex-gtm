@@ -4,6 +4,8 @@ import path from 'node:path';
 import type { Metadata } from 'next';
 import { DemoPackSchema, type DemoPack } from '@/lib/demo/pack-schema';
 import { DemoSurface } from '@/components/demo/demo-surface';
+import { MicrositeTracker } from '@/components/microsites/microsite-tracker';
+import { getAccountMicrositeData } from '@/lib/microsites/accounts';
 
 /**
  * D2.1 — The canonical demo route: `/demo/<account>`.
@@ -78,13 +80,28 @@ export default async function DemoAccountPage({
   const autoPlay = sp.play === '1';
   const initialView: 'atlas' | 'sim' = sp.view === 'sim' ? 'sim' : 'atlas';
 
+  // Resolve the Account.name for engagement tracking (FK on
+  // MicrositeEngagement.account_name → Account.name). The microsite
+  // account registry is the source of truth; if there's no microsite
+  // entry for this slug we fall back to the pack's display name (will
+  // 404 the FK silently — that's a backfill task, not a render block).
+  const micrositeData = getAccountMicrositeData(account);
+  const accountName = micrositeData?.accountName ?? pack.account.displayName;
+
   return (
-    <DemoSurface
-      pack={pack}
-      mode="standalone"
-      initialSiteId={initialSiteId}
-      autoPlay={autoPlay}
-      initialView={initialView}
-    />
+    <>
+      <MicrositeTracker
+        accountName={accountName}
+        accountSlug={account}
+        path={`/demo/${account}`}
+      />
+      <DemoSurface
+        pack={pack}
+        mode="standalone"
+        initialSiteId={initialSiteId}
+        autoPlay={autoPlay}
+        initialView={initialView}
+      />
+    </>
   );
 }

@@ -102,6 +102,7 @@ export function SiteDetailPanel({ site, onClose, autoPlay = false }: Props) {
           <button
             type="button"
             onClick={() => setReplayMode(true)}
+            data-ms-cta-id="demo-watch-replay"
             className="absolute right-2 top-2 rounded-md bg-stone-900 px-3 py-1.5 text-[11px] font-medium text-white shadow-md transition hover:bg-stone-700"
           >
             ▶ Watch a truck run this

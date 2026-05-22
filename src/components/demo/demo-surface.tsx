@@ -95,6 +95,7 @@ export function DemoSurface({ pack, mode, initialSiteId = null, autoPlay = false
             </div>
             <Link
               href={`/for/${pack.account.slug}`}
+              data-ms-cta-id="demo-back-to-memo"
               className="hidden text-xs uppercase tracking-widest text-stone-500 transition hover:text-stone-900 md:inline"
             >
               ← Read the full memo
