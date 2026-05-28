@@ -225,7 +225,7 @@ function Footer() {
           YardFlow). Your demo would reflect <strong>your</strong> facilities,
           your archetype mix, and your network shape.
         </p>
-        <p className="mt-2 text-[10px] uppercase tracking-widest text-stone-400">
+        <p className="mt-2 text-[10px] uppercase tracking-widest text-stone-500">
           * audited slice — full network footprint quoted where global counts are
           available. YardFlow YNS · industry templates.
         </p>
