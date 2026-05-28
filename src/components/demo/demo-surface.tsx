@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import type { ArchetypeId, DemoPack } from '@/lib/demo/pack-schema';
+import { getIndustryFromSlug } from '@/lib/demo/industry-tags';
 import { NetworkAtlas } from './network-atlas';
 import { SiteDetailPanel } from './site-detail-panel';
 import { ArchetypeMixChart } from './archetype-mix-chart';
@@ -29,9 +30,24 @@ interface Props {
   autoPlay?: boolean;
   /** Initial view — populated from `?view=` search param. */
   initialView?: View;
+  /**
+   * Sprint 2.5 — set when the prospect arrived via the /demo industry
+   * gallery (?from=gallery). Renders a template-framing strip and
+   * softens the account-specific brand chrome, so a casual gallery
+   * visitor sees "this is a sample for [Industry] operators" instead
+   * of mistaking the pack for their own demo.
+   */
+  fromGallery?: boolean;
 }
 
-export function DemoSurface({ pack, mode, initialSiteId = null, autoPlay = false, initialView = 'atlas' }: Props) {
+export function DemoSurface({
+  pack,
+  mode,
+  initialSiteId = null,
+  autoPlay = false,
+  initialView = 'atlas',
+  fromGallery = false,
+}: Props) {
   const [view, setView] = useState<View>(initialView);
   const [selectedSiteId, setSelectedSiteId] = useState<string | null>(initialSiteId);
   const [archetypeFilter, setArchetypeFilter] = useState<Set<ArchetypeId> | null>(null);
@@ -64,6 +80,15 @@ export function DemoSurface({ pack, mode, initialSiteId = null, autoPlay = false
   const { displayName, siteCount, coverageNote } = pack.account;
   const { dockDoors, trailerCapacity, railServed } = pack.network.totals;
 
+  // Sprint 2.5 — resolve the industry label for the template strip
+  // when the prospect arrived from the gallery. Fall back to the
+  // pack's archetype if the slug isn't in the anchor list (shouldn't
+  // happen for the 11 anchors, but handles edge cases like an email
+  // CTA that picks a non-anchor pack and still passes ?from=gallery).
+  const galleryIndustry = fromGallery ? getIndustryFromSlug(pack.account.slug) : null;
+  const galleryIndustryLabel = galleryIndustry?.label ?? pack.account.archetype;
+  const galleryHeadline = `Sample ${galleryIndustryLabel} Template`;
+
   // Scope blurb for the header — be honest when our audit covers a
   // subset of the prospect's full network. For Mondelez we audit 22 NA
   // sites; the global footprint is ~160. Saying just "22 facilities"
@@ -79,33 +104,72 @@ export function DemoSurface({ pack, mode, initialSiteId = null, autoPlay = false
 
   return (
     <div className={mode === 'standalone' ? 'flex min-h-screen flex-col' : 'flex h-[600px] flex-col rounded-lg border border-stone-200 bg-white shadow-sm'}>
+      {/*
+       * Sprint 2.5 — template framing strip. Only shows when the prospect
+       * arrived from the /demo industry gallery. Sets the expectation that
+       * this view is a sample rendered from another company's data, not
+       * the visitor's own demo.
+       */}
+      {mode === 'standalone' && fromGallery && (
+        <div
+          className="shrink-0 border-b border-amber-200 bg-amber-50 px-5 py-2 text-center text-xs text-amber-900"
+          role="note"
+          data-ms-section-id="gallery-template-strip"
+        >
+          <strong>Industry template.</strong> Sample demo for {galleryIndustryLabel} operators. Your demo will reflect your actual facilities.{' '}
+          <Link
+            href="/demo"
+            data-ms-cta-id="gallery-back-to-gallery"
+            className="underline-offset-2 hover:underline"
+          >
+            ← Back to gallery
+          </Link>
+        </div>
+      )}
       {/* Header — only in standalone mode */}
       {mode === 'standalone' && (
         <header className="shrink-0 border-b border-stone-200 bg-white">
           <div className="mx-auto flex max-w-5xl items-end justify-between gap-6 px-5 py-4">
             <div>
-              <div className="text-[10px] uppercase tracking-widest text-stone-500">YardFlow · YNS network audit</div>
-              <h1 className="mt-1 text-xl font-semibold text-stone-900">{displayName}</h1>
+              <div className="text-[10px] uppercase tracking-widest text-stone-500">
+                {fromGallery ? `YardFlow · ${galleryIndustryLabel} template` : 'YardFlow · YNS network audit'}
+              </div>
+              <h1 className="mt-1 text-xl font-semibold text-stone-900">
+                {fromGallery ? galleryHeadline : displayName}
+              </h1>
               <p className="mt-1 text-sm text-stone-600">
                 <span className="tabular-nums">{scopeBlurb}</span> ·{' '}
                 <span className="tabular-nums">{dockDoors.toLocaleString()}</span> dock doors ·{' '}
                 <span className="tabular-nums">{trailerCapacity.toLocaleString()}</span> trailer spots ·{' '}
                 <span className="tabular-nums">{railServed}</span> rail-served
               </p>
+              {fromGallery && (
+                <p className="mt-1 text-[11px] text-stone-500">
+                  Modeled from a real <span className="italic">{displayName}</span> network audit.
+                </p>
+              )}
             </div>
             <div className="flex shrink-0 items-center gap-4">
-              <Link
-                href={`/for/${pack.account.slug}`}
-                data-ms-cta-id="demo-back-to-memo"
-                className="hidden text-xs uppercase tracking-widest text-stone-500 transition hover:text-stone-900 md:inline"
-              >
-                ← Read the full memo
-              </Link>
+              {/*
+               * Hide the "back to memo" link when the prospect is on a
+               * gallery template — the /for/<slug> memo is account-
+               * specific copy that doesn't make sense for a gallery
+               * visitor who isn't that prospect.
+               */}
+              {!fromGallery && (
+                <Link
+                  href={`/for/${pack.account.slug}`}
+                  data-ms-cta-id="demo-back-to-memo"
+                  className="hidden text-xs uppercase tracking-widest text-stone-500 transition hover:text-stone-900 md:inline"
+                >
+                  ← Read the full memo
+                </Link>
+              )}
               <a
-                href={`https://yardflow.ai/contact/?intent=audit&utm_source=demo&utm_medium=demo-header&utm_campaign=${pack.account.slug}`}
+                href={`https://yardflow.ai/contact/?intent=audit&utm_source=demo&utm_medium=${fromGallery ? 'gallery-header' : 'demo-header'}&utm_campaign=${pack.account.slug}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                data-ms-cta-id="demo-book-audit"
+                data-ms-cta-id={fromGallery ? 'gallery-pack-book-audit' : 'demo-book-audit'}
                 className="rounded-md bg-stone-900 px-3 py-1.5 text-xs font-medium text-white shadow-sm transition hover:bg-stone-700"
               >
                 Book a network audit →

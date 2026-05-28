@@ -30,3 +30,5 @@ public/demo-packs/tiles/
 # emit malformed CSS (e.g. error responses containing __next_f streaming
 # buffers parsed as arbitrary-value classes). Keep out of source scan.
 tmp/
+
+.vercel

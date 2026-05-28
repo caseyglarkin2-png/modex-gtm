@@ -31,6 +31,12 @@ interface SearchParams {
   play?: string;
   /** D4.5 — deep-link directly to the network simulator tab. */
   view?: string;
+  /**
+   * Sprint 2.5 — set to `gallery` when the prospect arrived from
+   * the /demo industry-template gallery (vs a personalized email link).
+   * Triggers anonymized template framing in DemoSurface.
+   */
+  from?: string;
 }
 
 async function loadPack(slug: string): Promise<DemoPack | null> {
@@ -84,6 +90,10 @@ export default async function DemoAccountPage({
   const initialSiteId = requestedSiteId ?? pack.account.featuredSiteId ?? null;
   const autoPlay = sp.play === '1';
   const initialView: 'atlas' | 'sim' = sp.view === 'sim' ? 'sim' : 'atlas';
+  // Sprint 2.5 — anonymized template framing flag. When set, the
+  // DemoSurface renders the page as a "sample template for [Industry]"
+  // rather than as the prospect's personalized memo extension.
+  const fromGallery = sp.from === 'gallery';
 
   // Resolve the Account.name for engagement tracking (FK on
   // MicrositeEngagement.account_name → Account.name). The microsite
@@ -99,6 +109,7 @@ export default async function DemoAccountPage({
         accountName={accountName}
         accountSlug={account}
         path={`/demo/${account}`}
+        variantSlug={fromGallery ? 'gallery-pack-view' : undefined}
       />
       <DemoSurface
         pack={pack}
@@ -106,6 +117,7 @@ export default async function DemoAccountPage({
         initialSiteId={initialSiteId}
         autoPlay={autoPlay}
         initialView={initialView}
+        fromGallery={fromGallery}
       />
     </>
   );
