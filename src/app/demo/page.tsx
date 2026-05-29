@@ -192,6 +192,12 @@ function readArchetypeFilter(value: string | string[] | undefined): Archetype | 
   return (VALID_ARCHETYPES as readonly string[]).includes(v) ? (v as Archetype) : null;
 }
 
+function readDemoFlag(value: string | string[] | undefined): boolean {
+  if (!value) return false;
+  const v = (Array.isArray(value) ? value[0] : value).toLowerCase().trim();
+  return ['1', 'true', 'yes'].includes(v);
+}
+
 export default async function DemoGalleryPage({
   searchParams,
 }: {
@@ -203,6 +209,11 @@ export default async function DemoGalleryPage({
    * Gallery via the `activeArchetype` prop for chip-state rendering. */
   const params = searchParams ? await searchParams : {};
   const activeArchetype = readArchetypeFilter(params.archetype);
+  /* Read demo flag server-side so the initial HTML carries the correct
+   * filter-chip URLs (with &demo=1 preserved) and the credibility-vs-
+   * presenting badge state. Without this the user sees a hydration
+   * flash and any chip click before hydration drops demo mode. */
+  const initialDemo = readDemoFlag(params.demo);
   const visibleAnchors = activeArchetype
     ? INDUSTRY_ANCHORS.filter((a) => a.archetype === activeArchetype)
     : INDUSTRY_ANCHORS;
@@ -225,7 +236,12 @@ export default async function DemoGalleryPage({
         path="/demo"
         variantSlug="gallery-pageview"
       />
-      <Gallery tiles={tiles} activeArchetype={activeArchetype} totalTiles={INDUSTRY_ANCHORS.length} />
+      <Gallery
+        tiles={tiles}
+        activeArchetype={activeArchetype}
+        totalTiles={INDUSTRY_ANCHORS.length}
+        initialDemo={initialDemo}
+      />
     </>
   );
 }

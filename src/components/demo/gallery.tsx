@@ -84,6 +84,10 @@ interface GalleryProps {
   activeArchetype?: Archetype | null;
   /** Total tile count across all archetypes (for "showing N of M" caption). (G5) */
   totalTiles?: number;
+  /** Server-read ?demo=1 flag. Threaded so the first paint carries demo state
+   *  (filter-chip URLs, credibility badge swap, demo pill) without a
+   *  hydration flash. (G5+G6+G9 fix.) */
+  initialDemo?: boolean;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -96,17 +100,17 @@ interface GalleryProps {
  * Read `?demo=1` from the current URL. When a sales rep bookmarks
  * `yardflow.ai/demo?demo=1` (or `&demo=1` on a deep link), we want the
  * demo-mode flag to follow them through every CTA on this surface
- * — Run [Industry] ROI, View Template, hero "Run a Sample ROI" — so
- * trackers stay silenced for the entire demo session instead of just
- * the landing.
+ * — Open the calculator, Run [Industry] ROI, View Template, filter
+ * chips — so trackers stay silenced for the entire demo session.
  *
- * Read via window.location (deferred to after mount) instead of
- * useSearchParams() so the gallery does not require a Suspense
- * boundary in the page tree. Returns the suffix to append
- * (`&demo=1` or `''`). Inert for plain prospect traffic.
+ * Initializes from a server-supplied prop so the very first paint of
+ * the gallery (filter-chip hrefs, credibility-vs-presenting badge,
+ * demo pill) is correct. Re-reads from `window.location.search` on
+ * mount as a defensive fallback if the server pass was missed or the
+ * URL changed via SPA routing.
  */
-function useDemoSuffix(): string {
-  const [suffix, setSuffix] = useState('');
+function useDemoSuffix(initialDemo: boolean): string {
+  const [suffix, setSuffix] = useState<string>(initialDemo ? '&demo=1' : '');
   useEffect(() => {
     try {
       const v = new URLSearchParams(window.location.search).get('demo');
@@ -114,14 +118,14 @@ function useDemoSuffix(): string {
       const t = v.trim().toLowerCase();
       if (['1', 'true', 'yes'].includes(t)) setSuffix('&demo=1');
     } catch {
-      // location/search unavailable — leave suffix empty.
+      // location/search unavailable — leave suffix as initial.
     }
   }, []);
   return suffix;
 }
 
-export function Gallery({ tiles, activeArchetype = null, totalTiles }: GalleryProps) {
-  const demoSuffix = useDemoSuffix();
+export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo = false }: GalleryProps) {
+  const demoSuffix = useDemoSuffix(initialDemo);
   return (
     <div
       className="relative flex min-h-screen flex-col bg-[#050505] text-white"
