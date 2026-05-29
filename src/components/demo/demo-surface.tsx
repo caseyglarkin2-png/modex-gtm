@@ -38,6 +38,14 @@ interface Props {
    * of mistaking the pack for their own demo.
    */
   fromGallery?: boolean;
+  /**
+   * Path to a satellite zoom of the pack's featured audited site (e.g.
+   * `/gallery-thumbs/coca-cola.png`). When present, renders a hero
+   * section between the header and the atlas/sim view. The parent
+   * page resolves this server-side so non-anchor packs (no thumb yet)
+   * fall through without a hero — no client-side flash, no 404 image.
+   */
+  featuredSiteThumbSrc?: string;
 }
 
 export function DemoSurface({
@@ -47,6 +55,7 @@ export function DemoSurface({
   autoPlay = false,
   initialView = 'atlas',
   fromGallery = false,
+  featuredSiteThumbSrc,
 }: Props) {
   const [view, setView] = useState<View>(initialView);
   const [selectedSiteId, setSelectedSiteId] = useState<string | null>(initialSiteId);
@@ -213,6 +222,87 @@ export function DemoSurface({
           <CoverageHonesty pack={pack} />
         </header>
       )}
+
+      {/* Satellite zoom hero — the opening visual moment. Replaces the
+          North America map as the prospect's first impression with a
+          tight satellite shot of the featured audited site, brand
+          attribution, and quick scale stats. Only renders in standalone
+          mode and only when the server-resolved thumb exists. The
+          network map stays one tap away in the existing Atlas tab. */}
+      {mode === 'standalone' && featuredSiteThumbSrc && (() => {
+        const featuredSite = pack.account.featuredSiteId
+          ? pack.network.sites.find((s) => s.id === pack.account.featuredSiteId) ?? pack.network.sites[0]
+          : pack.network.sites[0];
+        if (!featuredSite) return null;
+        const ym = featuredSite.yardMetrics;
+        return (
+          <section
+            data-ms-section-id="featured-site-hero"
+            className="relative h-72 w-full shrink-0 overflow-hidden border-b border-[#00B4FF]/[0.16] md:h-80"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={featuredSiteThumbSrc}
+              alt={`Audited facility: ${featuredSite.name}`}
+              className="absolute inset-0 h-full w-full object-cover"
+              loading="eager"
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0"
+              style={{
+                background:
+                  'linear-gradient(180deg, rgba(5,5,5,0.05) 0%, rgba(5,5,5,0.15) 40%, rgba(5,5,5,0.85) 100%)',
+              }}
+            />
+            <div className="absolute inset-0 flex items-end">
+              <div className="mx-auto flex w-full max-w-5xl flex-col gap-2 px-5 pb-5">
+                <div className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-[#00B4FF]">
+                  <span className="mr-1.5 inline-block h-[6px] w-[6px] translate-y-[-1px] rounded-full bg-[#00B4FF] align-middle shadow-[0_0_8px_rgba(0,180,255,0.7)]" />
+                  Featured audit · {displayName}
+                </div>
+                <div className="flex items-end justify-between gap-4">
+                  <h2 className="text-2xl font-semibold tracking-[-0.01em] text-white max-[480px]:text-xl">
+                    {featuredSite.name}
+                  </h2>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedSiteId(featuredSite.id)}
+                    data-ms-cta-id="hero-open-featured-site"
+                    className="hidden shrink-0 items-center gap-1.5 rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.12] px-3 py-1.5 font-mono text-[10.5px] uppercase tracking-[0.18em] text-white transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22] hover:shadow-[0_0_22px_rgba(0,180,255,0.32)] md:inline-flex"
+                  >
+                    Open site detail
+                    <span aria-hidden>→</span>
+                  </button>
+                </div>
+                <div className="flex flex-wrap gap-x-3 gap-y-1 font-mono text-[11.5px] text-white/75">
+                  <span className="text-white/55">{featuredSite.archetypeName}</span>
+                  {ym.dockDoorCount !== null && (
+                    <span>
+                      <span className="text-white/50">·</span> {ym.dockDoorCount.toLocaleString()} dock doors
+                    </span>
+                  )}
+                  {ym.trailerParkingCapacity !== null && (
+                    <span>
+                      <span className="text-white/50">·</span> {ym.trailerParkingCapacity.toLocaleString()} trailer spots
+                    </span>
+                  )}
+                  {ym.siteAreaAcres !== null && (
+                    <span>
+                      <span className="text-white/50">·</span> {ym.siteAreaAcres.toLocaleString()} acres
+                    </span>
+                  )}
+                  {ym.railServed === true && (
+                    <span>
+                      <span className="text-white/50">·</span> rail-served
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      })()}
 
       {/* Atlas view: split — map + donut/site-panel */}
       {view === 'atlas' && (

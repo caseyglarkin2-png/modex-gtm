@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { promises as fs } from 'node:fs';
+import { promises as fs, existsSync } from 'node:fs';
 import path from 'node:path';
 import type { Metadata } from 'next';
 import { DemoPackSchema, type DemoPack } from '@/lib/demo/pack-schema';
@@ -104,6 +104,15 @@ export default async function DemoAccountPage({
   const micrositeData = getAccountMicrositeData(account);
   const accountName = micrositeData?.accountName ?? pack.account.displayName;
 
+  // Satellite-zoom hero: use the gallery thumb for the account if it
+  // exists (the 11 industry anchors have these at zoom 17; the other
+  // ~32 accounts don't yet). Falls back to undefined so DemoSurface
+  // skips the hero section gracefully.
+  const thumbDiskPath = path.join(process.cwd(), 'public', 'gallery-thumbs', `${account}.png`);
+  const featuredSiteThumbSrc = existsSync(thumbDiskPath)
+    ? `/gallery-thumbs/${account}.png`
+    : undefined;
+
   return (
     <>
       <MicrositeTracker
@@ -119,6 +128,7 @@ export default async function DemoAccountPage({
         autoPlay={autoPlay}
         initialView={initialView}
         fromGallery={fromGallery}
+        featuredSiteThumbSrc={featuredSiteThumbSrc}
       />
       {/* G7 — Industry flick bar. Self-suppresses if the slug isn't
           one of the 11 gallery anchors. */}
