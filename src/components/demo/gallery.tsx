@@ -76,6 +76,14 @@ export interface GalleryTileData {
   railServed: number;
   /** RoiV2State pre-fill, computed server-side from the pack. */
   roiPrefill: RoiV2State;
+  /** G3 — Optional satellite thumbnail path under /gallery-thumbs/<slug>.png.
+   *  Server-supplied when the manifest at public/gallery-thumbs/manifest.json
+   *  lists the slug AND the PNG exists. Tile renders the thumb when set,
+   *  otherwise falls back to the neon-grid placeholder. */
+  thumbSrc?: string;
+  /** G3 — Alt text composer for the satellite thumb. Format:
+   *  "Audited facility — {brand} in {city}, {state}". */
+  thumbAlt?: string;
 }
 
 interface GalleryProps {
@@ -317,11 +325,12 @@ function Tile({
   total: number;
   demoSuffix: string;
 }) {
-  const { anchor, brand, facilityCount, facilityCountIsGlobal, dockDoors, trailerCapacity, railServed, roiPrefill } = tile;
+  const { anchor, brand, facilityCount, facilityCountIsGlobal, dockDoors, trailerCapacity, railServed, roiPrefill, thumbSrc, thumbAlt } = tile;
 
   const roiHref = `${MICROSITE_BASE}/roi?source=demo-gallery&industry=${encodeURIComponent(anchor.id)}&pack=${encodeURIComponent(anchor.slug)}${demoSuffix}`;
   const templateHref = `/demo/${anchor.slug}?from=gallery${demoSuffix}`;
   const counter = `${String(index).padStart(2, '0')}/${String(total).padStart(2, '0')}`;
+  const isFirstTile = index === 1;
 
   function handleRoiClick() {
     // D8.1-pattern hand-off: write to same-origin localStorage on
@@ -346,6 +355,53 @@ function Tile({
           'linear-gradient(180deg, rgba(17, 19, 24, 0.92), rgba(10, 12, 16, 0.92))',
       }}
     >
+      {/* G3 — Satellite anchor thumbnail. 16:10 above the brand. Fallback
+          to a neon-grid placeholder when the thumb is missing. First tile
+          gets priority + decoding=sync per LCP rule (G3.T7). */}
+      {thumbSrc ? (
+        <div className="-mx-5 -mt-5 mb-4 relative aspect-[16/10] overflow-hidden border-b border-[#00B4FF]/[0.16]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={thumbSrc}
+            alt={thumbAlt ?? `Audited facility for ${brand}`}
+            width={640}
+            height={400}
+            loading={isFirstTile ? 'eager' : 'lazy'}
+            decoding={isFirstTile ? 'sync' : 'async'}
+            fetchPriority={isFirstTile ? 'high' : 'auto'}
+            className="h-full w-full object-cover"
+          />
+          {/* Bottom-gradient overlay for caption legibility. */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-16"
+            style={{
+              background: 'linear-gradient(180deg, transparent, rgba(5, 5, 5, 0.85))',
+            }}
+          />
+          <span className="absolute bottom-2 left-3 font-mono text-[9.5px] font-semibold uppercase tracking-[0.20em] text-white/90">
+            Audited facility
+          </span>
+        </div>
+      ) : (
+        <div
+          aria-hidden
+          className="-mx-5 -mt-5 mb-4 relative aspect-[16/10] overflow-hidden border-b border-[#00B4FF]/[0.16]"
+          style={{
+            background: [
+              'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0, 180, 255, 0.10), transparent 70%)',
+              'linear-gradient(rgba(0, 180, 255, 0.06) 1px, transparent 1px) 0 0/24px 24px',
+              'linear-gradient(90deg, rgba(0, 180, 255, 0.06) 1px, transparent 1px) 0 0/24px 24px',
+              'linear-gradient(180deg, #0a0c10, #050505)',
+            ].join(','),
+          }}
+        >
+          <span className="absolute bottom-2 left-3 font-mono text-[9.5px] font-semibold uppercase tracking-[0.20em] text-white/55">
+            Audit imagery pending
+          </span>
+        </div>
+      )}
+
       {/* Top divider — terminal-thin gradient line, just a hairline of neon. */}
       <div
         aria-hidden

@@ -1,0 +1,79 @@
+[
+  {
+    "slug": "coca-cola",
+    "anchorId": "10-coca-cola-consolidated-columbus-distribution-center-oh",
+    "name": "Coca-Cola Consolidated - Columbus Distribution Center, OH",
+    "lat": 39.8425,
+    "lng": -82.9625
+  },
+  {
+    "slug": "mondelez-international",
+    "anchorId": "07-mondelez-richmond-distribution-center",
+    "name": "Mondelez Richmond Distribution Center - Sandston VA",
+    "lat": 37.4798,
+    "lng": -77.3382
+  },
+  {
+    "slug": "frito-lay",
+    "anchorId": "18-frito-lay-aberdeen-md",
+    "name": "Frito-Lay - Aberdeen MD",
+    "lat": 39.49876,
+    "lng": -76.18868
+  },
+  {
+    "slug": "kimberly-clark",
+    "anchorId": "06-kc-owensboro-plant",
+    "name": "K-C Owensboro Plant - Owensboro KY",
+    "lat": 37.8194,
+    "lng": -87.3032
+  },
+  {
+    "slug": "gxo",
+    "anchorId": "12-palmyra-pa",
+    "name": "GXO Logistics Distribution Center - Palmyra PA",
+    "lat": 40.3105,
+    "lng": -76.6145
+  },
+  {
+    "slug": "ford",
+    "anchorId": "02-kentucky-truck-plant",
+    "name": "Ford - Kentucky Truck Plant, Louisville KY",
+    "lat": 38.294,
+    "lng": -85.5335
+  },
+  {
+    "slug": "caterpillar",
+    "anchorId": "11-waco-tx-distribution-center",
+    "name": "Caterpillar - Waco TX Distribution Center",
+    "lat": 31.4783,
+    "lng": -97.1799
+  },
+  {
+    "slug": "georgia-pacific",
+    "anchorId": "04-gp-broadway-mill-green-bay-wi",
+    "name": "GP Broadway Mill - Green Bay WI",
+    "lat": 44.49271,
+    "lng": -88.034475
+  },
+  {
+    "slug": "the-home-depot",
+    "anchorId": "05-monroe-oh-rdc",
+    "name": "Home Depot RDC - Monroe OH",
+    "lat": 39.4346,
+    "lng": -84.3213
+  },
+  {
+    "slug": "performance-food-group",
+    "anchorId": "18-lebanon-tn",
+    "name": "Performance Foodservice - Nashville (Lebanon TN)",
+    "lat": 36.1754,
+    "lng": -86.2881
+  },
+  {
+    "slug": "fedex",
+    "anchorId": "24-fedex-freight-hub-conley-ga",
+    "name": "FedEx Freight Hub - Conley GA (Atlanta, ATL)",
+    "lat": 33.651,
+    "lng": -84.3388
+  }
+]

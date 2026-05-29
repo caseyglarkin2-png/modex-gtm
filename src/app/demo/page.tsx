@@ -1,4 +1,4 @@
-import { promises as fs } from 'node:fs';
+import { promises as fs, readFileSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import type { Metadata } from 'next';
 import { DemoPackSchema, type DemoPack } from '@/lib/demo/pack-schema';
@@ -147,6 +147,35 @@ async function loadPack(slug: string): Promise<DemoPack | null> {
   }
 }
 
+/* G3 — Gallery thumbnail manifest. Static JSON committed at
+ *   public/gallery-thumbs/manifest.json
+ * Entries: { slug, anchorId, name, lat, lng }. The PNGs are generated
+ * by scripts/generate-gallery-thumbs.mjs (server-side, one-shot).
+ * Read once at module load; if missing, Tile renders the placeholder. */
+type ThumbManifestEntry = { slug: string; anchorId: string; name: string; lat: number; lng: number };
+let THUMB_MANIFEST: ThumbManifestEntry[] = [];
+try {
+  const manifestRaw = readFileSync(
+    path.join(process.cwd(), 'public', 'gallery-thumbs', 'manifest.json'),
+    'utf8',
+  );
+  THUMB_MANIFEST = JSON.parse(manifestRaw) as ThumbManifestEntry[];
+} catch {
+  // Manifest missing → no thumbs → fallback placeholder. Acceptable.
+}
+const THUMB_BY_SLUG = new Map(THUMB_MANIFEST.map((m) => [m.slug, m]));
+
+function thumbAvailable(slug: string): boolean {
+  if (!THUMB_BY_SLUG.has(slug)) return false;
+  try {
+    return existsSync(
+      path.join(process.cwd(), 'public', 'gallery-thumbs', `${slug}.png`),
+    );
+  } catch {
+    return false;
+  }
+}
+
 async function loadTile(anchor: IndustryAnchor): Promise<GalleryTileData | null> {
   const pack = await loadPack(anchor.slug);
   if (!pack) return null;
@@ -155,6 +184,14 @@ async function loadTile(anchor: IndustryAnchor): Promise<GalleryTileData | null>
   const global = cov?.totalGlobalFootprint ?? cov?.estimatedFootprint ?? null;
   const facilityCount = global ?? pack.account.siteCount;
   const facilityCountIsGlobal = global !== null;
+
+  // G3 thumb wiring.
+  const hasThumb = thumbAvailable(anchor.slug);
+  const thumbEntry = THUMB_BY_SLUG.get(anchor.slug);
+  const thumbSrc = hasThumb ? `/gallery-thumbs/${anchor.slug}.png` : undefined;
+  const thumbAlt = hasThumb && thumbEntry
+    ? `Audited facility — ${pack.account.displayName}: ${thumbEntry.name}`
+    : undefined;
 
   return {
     anchor,
@@ -165,6 +202,8 @@ async function loadTile(anchor: IndustryAnchor): Promise<GalleryTileData | null>
     trailerCapacity: pack.network.totals.trailerCapacity,
     railServed: pack.network.totals.railServed,
     roiPrefill: buildRoiV2State(pack),
+    thumbSrc,
+    thumbAlt,
   };
 }
 
