@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T14:20:56.408Z",
+  "builtAt": "2026-05-29T18:39:44.187Z",
   "account": {
     "slug": "daimler-truck-north-america",
     "displayName": "Daimler Truck North America",
@@ -15,7 +15,13 @@
       "auditedScope": "NA",
       "totalGlobalFootprint": 40
     },
-    "featuredSiteId": "13-memphis-parts-distribution-center"
+    "featuredSiteId": "13-memphis-parts-distribution-center",
+    "dossierIntro": "Daimler Truck NA builds the heavy trucks that move the rest of CPG. 40 facilities; we audited 16. Memphis Parts Distribution runs 60 dock doors. Cleveland NC truck manufacturing is 200 acres. Truck plants run on supplier inbound (rail-heavy) and finished-vehicle outbound (drive-away). YardFlow runs both inside the same gate-controlled protocol.",
+    "surprisingFindings": [
+      "Cleveland NC truck manufacturing is 200 acres. Daimler builds Freightliners here.",
+      "6 of 16 audited sites are rail-served. Heavy truck inbound runs on railcars.",
+      "1,944 trailer spots across 16 audited sites. Finished trucks stage drive-away, not van-load."
+    ]
   },
   "research": {
     "facility_count": 16,

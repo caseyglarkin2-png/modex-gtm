@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T14:22:08.621Z",
+  "builtAt": "2026-05-29T18:39:44.226Z",
   "account": {
     "slug": "universal-logistics-holdings",
     "displayName": "Universal Logistics Holdings",
@@ -14,7 +14,13 @@
       "note": "Universal Logistics Holdings operates ~80 US sites across truckload, intermodal, contract logistics, and value-added services. We audited 22.",
       "auditedScope": "US"
     },
-    "featuredSiteId": "05-grand-prairie-gm-arlington-logistics"
+    "featuredSiteId": "05-grand-prairie-gm-arlington-logistics",
+    "dossierIntro": "Universal Logistics Holdings runs contract logistics inside the OEM plants we audit separately. 80 facilities; we audited 22. GM Arlington Logistics Center runs 130 dock doors. Polaris Madison AL is 194 acres. 5,260 trailer spots. YardFlow runs contract value-added operations as a sub-protocol inside the OEM's primary yard protocol.",
+    "surprisingFindings": [
+      "5,260 trailer spots across 22 audited sites. Universal parks more trailers per facility than any pure-contract 3PL.",
+      "Polaris Madison AL is 194 acres of Polaris-dedicated contract logistics. Single-shipper at scale.",
+      "GM Arlington runs 130 docks. Universal handles GM's Arlington Logistics inside the plant footprint."
+    ]
   },
   "research": {
     "facility_count": 26,

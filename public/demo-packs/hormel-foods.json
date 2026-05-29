@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T14:21:26.471Z",
+  "builtAt": "2026-05-29T18:39:44.200Z",
   "account": {
     "slug": "hormel-foods",
     "displayName": "Hormel Foods",
@@ -15,7 +15,13 @@
       "auditedScope": "NA",
       "totalGlobalFootprint": 50
     },
-    "featuredSiteId": "15-hormel-fort-smith-plant"
+    "featuredSiteId": "15-hormel-fort-smith-plant",
+    "dossierIntro": "Hormel Foods runs the Spam, Skippy, and Planters network. 50 facilities; we audited 27. Fort Smith AR has 45 dock doors on 58 acres. Austin MN is 120 acres (the flagship Spam plant has been there since 1937). 5 of 27 audited sites are rail-served. 766 dock doors. YardFlow runs the shelf-stable, refrigerated, and frozen-meat flows as distinct protocols on one yard graph.",
+    "surprisingFindings": [
+      "Austin MN is 120 acres of Spam. Hormel has been making the same SKU on the same site since 1937.",
+      "5 of 27 audited sites are rail-served. Inbound pork moves on rail; outbound canned meat ships on trucks.",
+      "1,609 trailer spots across 27 audited sites. Hormel runs heavy trailer density for shelf-stable CPG."
+    ]
   },
   "research": {
     "facility_count": 40,

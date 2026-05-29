@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T14:21:46.209Z",
+  "builtAt": "2026-05-29T18:39:44.213Z",
   "account": {
     "slug": "nestle-usa",
     "displayName": "Nestlé USA",
@@ -15,7 +15,13 @@
       "auditedScope": "US",
       "totalGlobalFootprint": 340
     },
-    "featuredSiteId": "08-nestle-beverage-anderson-in"
+    "featuredSiteId": "08-nestle-beverage-anderson-in",
+    "dossierIntro": "Nestlé USA runs the broadest CPG portfolio audited: pet food, coffee, water, frozen, and candy. 340 global facilities; we audited 12 NA sites. Anderson IN covers 80 acres with 70 docks (beverage manufacturing). Glendale AZ is 110 acres. 7 of 12 sites are rail-served. YardFlow runs Nestlé's portfolio breadth as distinct trailer pools on one yard protocol.",
+    "surprisingFindings": [
+      "7 of 12 audited sites are rail-served. Nestlé moves coffee and pet food on rail.",
+      "Anderson IN is 80 acres of beverage manufacturing. Nestlé Waters runs heavy here.",
+      "1,180 trailer spots across 12 audited sites. Nestlé parks more trailers per site than other multi-platform CPGs."
+    ]
   },
   "research": {
     "facility_count": 12,

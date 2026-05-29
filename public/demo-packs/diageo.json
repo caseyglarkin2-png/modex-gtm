@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T14:21:03.301Z",
+  "builtAt": "2026-05-29T18:39:44.191Z",
   "account": {
     "slug": "diageo",
     "displayName": "Diageo",
@@ -15,7 +15,13 @@
       "auditedScope": "NA",
       "totalGlobalFootprint": 150
     },
-    "featuredSiteId": "02-diageo-plainfield-distribution-warehouse"
+    "featuredSiteId": "02-diageo-plainfield-distribution-warehouse",
+    "dossierIntro": "Diageo runs the Johnnie Walker, Guinness, and Smirnoff distribution backbone. 150 facilities; we audited 10. Plainfield IL has 130 dock doors on 81.8 acres. Lebanon KY is 142 acres of distillery (bourbon ages here for 4 to 8 years). Mixed manufacturing and distribution. YardFlow runs the federal-bonded spirits trailer and the retail truckload trailer on the same protocol with different audit chains.",
+    "surprisingFindings": [
+      "Plainfield IL runs 130 dock doors. Diageo's flagship US distribution warehouse.",
+      "Lebanon KY is 142 acres of distillery. Bourbon ages here for 4 to 8 years before truckload outbound.",
+      "1 of 10 audited sites is rail-served. Spirits move on truckload almost exclusively."
+    ]
   },
   "research": {
     "facility_count": 30,

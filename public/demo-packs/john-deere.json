@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T14:21:33.619Z",
+  "builtAt": "2026-05-29T18:39:44.205Z",
   "account": {
     "slug": "john-deere",
     "displayName": "John Deere",
@@ -15,7 +15,13 @@
       "auditedScope": "NA",
       "totalGlobalFootprint": 60
     },
-    "featuredSiteId": "19-john-deere-north-american-parts-distribution-center"
+    "featuredSiteId": "19-john-deere-north-american-parts-distribution-center",
+    "dossierIntro": "John Deere runs the largest heavy-equipment manufacturing network in the dataset. 60 facilities; we audited 21. Milan IL Parts Distribution covers 215 acres. Waterloo IA Tractor Operations is 620 acres. 3,914 total audited acres. YardFlow runs aftermarket parts logistics and whole-goods manufacturing as two distinct queues.",
+    "surprisingFindings": [
+      "Waterloo IA is 620 acres of tractor manufacturing. Deere has been building Iowa-made tractors here since 1918.",
+      "Milan IL PDC is 215 acres with 90 dock doors. The largest aftermarket parts DC in agriculture.",
+      "3 of 21 audited sites are rail-served. Whole goods leave on flatbed; parts move on truckload."
+    ]
   },
   "research": {
     "facility_count": 60,

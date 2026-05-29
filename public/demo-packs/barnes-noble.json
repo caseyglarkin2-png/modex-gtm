@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T14:20:34.001Z",
+  "builtAt": "2026-05-29T18:39:44.176Z",
   "account": {
     "slug": "barnes-noble",
     "displayName": "Barnes & Noble",
@@ -14,7 +14,13 @@
       "note": "Barnes & Noble has ~600 US stores fed by ~6 regional DCs; we mapped the DC network (the only sites where trailer ops matter).",
       "auditedScope": "US"
     },
-    "featuredSiteId": "01-barnes-noble-monroe-township-nj-dc"
+    "featuredSiteId": "01-barnes-noble-monroe-township-nj-dc",
+    "dossierIntro": "Book retail runs slow-moving SKUs through high-throughput RDCs. Barnes & Noble runs 6 distribution centers. We audited 2. Monroe NJ alone has 110 dock doors on 73.5 acres. YardFlow turns the trickle-flow seasonal staffing into a steady-state schedule even when volume swings 5x peak to trough.",
+    "surprisingFindings": [
+      "110 dock doors at Monroe NJ. Most Barnes & Noble inbound moves in a tight 4-month holiday window.",
+      "148 total dock doors across 2 audited sites. Density per facility is higher than most retailers.",
+      "0 of 2 audited sites are rail-served. Print product moves on truckload."
+    ]
   },
   "research": {
     "facility_count": 8,

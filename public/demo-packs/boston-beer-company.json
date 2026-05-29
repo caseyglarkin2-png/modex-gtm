@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T14:20:37.886Z",
+  "builtAt": "2026-05-29T18:39:44.178Z",
   "account": {
     "slug": "boston-beer-company",
     "displayName": "The Boston Beer Company",
@@ -15,7 +15,13 @@
       "auditedScope": "NA",
       "totalGlobalFootprint": 6
     },
-    "featuredSiteId": "02-cincinnati-brewery"
+    "featuredSiteId": "02-cincinnati-brewery",
+    "dossierIntro": "Boston Beer Company runs Sam Adams plus the cidery and seltzer brands. 6 production sites; we audited 5. The Cincinnati Brewery runs the largest dock-door count in the network. Angry Orchard Walden NY is 75.6 acres of apple-cider innovation. Multi-brand brewing means the yard handles 4 distinct SKU velocities. YardFlow runs them as 4 parallel queues on one protocol.",
+    "surprisingFindings": [
+      "Angry Orchard Walden NY is 75.6 acres of cider innovation. Different yard rhythm than the beer plants.",
+      "5 of 5 audited sites run their own dock-handling. Boston Beer never outsourced shipping.",
+      "71 dock doors across 5 audited sites. Premium craft means slow turn, high margin."
+    ]
   },
   "research": {
     "facility_count": 5,

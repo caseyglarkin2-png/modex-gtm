@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T14:21:38.792Z",
+  "builtAt": "2026-05-29T18:39:44.210Z",
   "account": {
     "slug": "keurig-dr-pepper",
     "displayName": "Keurig Dr Pepper",
@@ -15,7 +15,13 @@
       "auditedScope": "NA",
       "totalGlobalFootprint": 35
     },
-    "featuredSiteId": "04-kdp-beverage-manufacturing-distribution-allentown-pa"
+    "featuredSiteId": "04-kdp-beverage-manufacturing-distribution-allentown-pa",
+    "dossierIntro": "Keurig Dr Pepper runs the K-Cup, soda, and tea distribution network. 35 facilities; we audited 20. Allentown PA covers 92 acres with 130 dock doors. Irving TX is 117.4 acres. 851 dock doors total. YardFlow runs the single-serve (K-Cup) and case-pack (soda) flows on different protocols inside one gate.",
+    "surprisingFindings": [
+      "Allentown PA runs 130 dock doors. KDP's largest manufacturing-and-distribution combo facility.",
+      "Irving TX is 117.4 acres of beverage distribution. Dr Pepper's headquarters market.",
+      "3 of 20 audited sites are rail-served. Inbound coffee and sugar move on rail."
+    ]
   },
   "research": {
     "facility_count": 22,

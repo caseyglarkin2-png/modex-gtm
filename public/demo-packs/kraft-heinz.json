@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-29T16:04:37.191Z",
+  "builtAt": "2026-05-29T18:39:44.212Z",
   "account": {
     "slug": "kraft-heinz",
     "displayName": "Kraft Heinz",
@@ -16,7 +16,13 @@
       "totalGlobalFootprint": 50,
       "legacyYmsFacilityCount": 25
     },
-    "featuredSiteId": "05-kraft-foods-jacksonville-portion-control"
+    "featuredSiteId": "05-kraft-foods-jacksonville-portion-control",
+    "dossierIntro": "Kraft Heinz is the first network we used as the audit rubric. 50+ facilities; we audited 27. Davenport IA covers 72 acres with 55 docks. Fremont OH is 88 acres. 525 dock doors and 722 trailer spots. The 22-field classification framework was calibrated here. YardFlow runs the network the rubric was built for.",
+    "surprisingFindings": [
+      "27 audited sites span 10 distinct yard archetypes. Kraft is the calibration rubric for the entire dataset.",
+      "Mason City IA has 2 distinct Kraft Heinz facilities, one with a guard shack and one without. Same brand, different yard.",
+      "4 of 27 audited sites are rail-served. CPG inbound increasingly moves on truckload, not rail."
+    ]
   },
   "research": null,
   "network": {

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T14:21:23.835Z",
+  "builtAt": "2026-05-29T18:39:44.197Z",
   "account": {
     "slug": "honda",
     "displayName": "Honda",
@@ -15,7 +15,13 @@
       "auditedScope": "NA",
       "totalGlobalFootprint": 100
     },
-    "featuredSiteId": "05-honda-manufacturing-of-alabama"
+    "featuredSiteId": "05-honda-manufacturing-of-alabama",
+    "dossierIntro": "Honda runs the largest greenfield auto manufacturing footprint we audited. 100 facilities; we audited 18. HMA Lincoln AL covers 900 acres. HMIN Greensburg IN is 1,480 acres. 5,675 total acres of audited footprint. YardFlow runs supplier inbound and finished-vehicle outbound on the same protocol regardless of plant size.",
+    "surprisingFindings": [
+      "HMIN Greensburg IN is 1,480 acres. Honda built a city to make Civics here.",
+      "HMA Lincoln AL is 900 acres with 120 dock doors. Largest single Honda plant in the US by dock count.",
+      "4 of 18 audited sites are rail-served. Auto parts move on rail; finished vehicles drive away."
+    ]
   },
   "research": {
     "facility_count": 18,

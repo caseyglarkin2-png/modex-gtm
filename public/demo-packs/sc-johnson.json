@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T14:21:58.356Z",
+  "builtAt": "2026-05-29T18:39:44.220Z",
   "account": {
     "slug": "sc-johnson",
     "displayName": "SC Johnson",
@@ -15,7 +15,13 @@
       "auditedScope": "US",
       "totalGlobalFootprint": 70
     },
-    "featuredSiteId": "06-fort-worth-regional-distribution-center"
+    "featuredSiteId": "06-fort-worth-regional-distribution-center",
+    "dossierIntro": "SC Johnson runs the home cleaning, air care, and Ziploc network. 70 facilities; we audited 10. Fort Worth Regional DC runs 120 dock doors. Bay City MI is 400 acres of Ziploc manufacturing. 808 acres total. 3 of 10 sites are rail-served. YardFlow runs flammable-classified household trailers and standard CPG trailers on the same protocol with separate audit chains.",
+    "surprisingFindings": [
+      "Bay City MI is 400 acres of Ziploc manufacturing. SC Johnson built the bag at scale.",
+      "Fort Worth runs 120 dock doors. SC Johnson's largest single-site distribution operation.",
+      "3 of 10 audited sites are rail-served. Home cleaning supplies ship primarily on truckload."
+    ]
   },
   "research": {
     "facility_count": 10,

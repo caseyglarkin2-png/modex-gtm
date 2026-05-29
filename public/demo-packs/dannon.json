@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T14:20:58.614Z",
+  "builtAt": "2026-05-29T18:39:44.188Z",
   "account": {
     "slug": "dannon",
     "displayName": "Danone / Dannon",
@@ -15,7 +15,13 @@
       "auditedScope": "US",
       "totalGlobalFootprint": 190
     },
-    "featuredSiteId": "02-danone-minster-oh"
+    "featuredSiteId": "02-danone-minster-oh",
+    "dossierIntro": "Danone / Dannon runs the yogurt and plant-based dairy network across 190 sites globally. We audited 13. Minster OH covers 58 acres with 38 dock doors. Mount Crawford VA is 93 acres. 0 of 13 audited sites are rail-served (yogurt doesn't ride rail). YardFlow runs cold-chain trailer staging without forcing the yard to manage temperature itself.",
+    "surprisingFindings": [
+      "Mount Crawford VA is 93 acres of yogurt manufacturing. Dannon's flagship US plant.",
+      "0 of 13 audited sites are rail-served. Cold chain runs entirely on truckload.",
+      "300 total dock doors across 13 sites. Yogurt is high-velocity, low-mass."
+    ]
   },
   "research": {
     "facility_count": 14,
