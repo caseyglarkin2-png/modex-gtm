@@ -191,6 +191,22 @@ export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo
           WebkitMaskImage: 'radial-gradient(ellipse 80% 60% at 50% 40%, #000 30%, transparent 80%)',
         }}
       />
+      {/*
+        Subtle operator-grade grain. SVG fractalNoise rendered into a
+        200×200 data URI, tiled. ~0.6KB total payload, no extra
+        request. Opacity capped at 0.04 so it sits *under* perception
+        on a calm scene but lights up the eye when the prospect leans
+        in — the difference between "render" and "scope."
+      */}
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 z-0"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.04 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>\")",
+          backgroundSize: '200px 200px',
+        }}
+      />
 
       {/* G6 — Demo Mode pill + Reset button, only when ?demo=1. */}
       {demoSuffix.length > 0 ? <DemoPill /> : null}
