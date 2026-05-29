@@ -712,10 +712,10 @@ function ArchetypeFilterRail({
               tabIndex={isActive ? 0 : -1}
               aria-current={isActive ? 'true' : undefined}
               onClick={() => onClickAnalytics(chip.id)}
-              className={`shrink-0 snap-start rounded-full border px-3.5 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors max-[480px]:text-[10.5px] mr-2 last:mr-0 ${
+              className={`shrink-0 snap-start rounded-full border px-4 py-2 font-mono text-[13px] font-semibold uppercase tracking-[0.16em] transition-colors max-[480px]:text-[12px] mr-2 last:mr-0 ${
                 isActive
-                  ? 'border-[#00B4FF]/55 bg-[#00B4FF]/[0.18] text-white shadow-[0_0_22px_rgba(0,180,255,0.18)]'
-                  : 'border-white/15 bg-transparent text-white/65 hover:border-[#00B4FF]/40 hover:text-white'
+                  ? 'border-[#00B4FF]/65 bg-[#00B4FF]/[0.20] text-white shadow-[0_0_24px_rgba(0,180,255,0.22)]'
+                  : 'border-white/30 bg-transparent text-white/85 hover:border-[#00B4FF]/60 hover:text-white'
               }`}
             >
               {chip.label}
