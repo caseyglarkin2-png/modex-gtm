@@ -12,11 +12,11 @@ Pin one or more industry tiles to the top of `yardflow.ai/demo` without a code c
 
 The modex-gtm Vercel project needs to be connected to the same Edge Config store Flow-State- already uses, OR a new dedicated store.
 
-Recommended: connect to the existing `yardflow-feature-flags` store so all YardFlow runtime flags live in one place.
+Connect to **`YardFlow-Feature-Flags-final` (store ID `ecfg_m6qgrvot96umnc9sv1qk89xzcs8b`)** — this is the store flow-state-klbt is wired to. (An earlier store named `yardflow-feature-flags` exists but is linked to an unrelated project; do not use it.)
 
 1. Vercel Dashboard → `modex-gtm` project → **Storage** tab
 2. **Connect Database** → **Edge Config**
-3. Select **`yardflow-feature-flags`** (the existing store from the cutover, ID `ecfg_4fsnq0fy4raxkqtyqacoje81jvhl`)
+3. Select **`YardFlow-Feature-Flags-final` (store ID `ecfg_m6qgrvot96umnc9sv1qk89xzcs8b`)** (the store flow-state-klbt uses — confirm by checking flow-state-klbt's Storage tab; both projects must point at the same store ID)
 4. Environment variable name: leave as `EDGE_CONFIG` (default)
 5. Environments: check **Production**, **Preview**, **Development**
 6. **Connect**
@@ -25,7 +25,7 @@ Vercel auto-injects `EDGE_CONFIG` connection string into all three environments.
 
 ## Per-campaign flip (do this whenever)
 
-1. Vercel Dashboard → **Storage** → **`yardflow-feature-flags`** → **Items**
+1. Vercel Dashboard → **Storage** → **`YardFlow-Feature-Flags-final` (store ID `ecfg_m6qgrvot96umnc9sv1qk89xzcs8b`)** → **Items**
 2. **+ Add Item** (or edit if it already exists)
 3. **Key**: `gallery_pinned_slugs`
 4. **Value**: a JSON array of anchor slugs in priority order. Examples:

@@ -146,6 +146,20 @@ export function DemoSurface({
                 <span className="tabular-nums">{trailerCapacity.toLocaleString()}</span> trailer spots ·{' '}
                 <span className="tabular-nums">{railServed}</span> rail-served
               </p>
+              {/* A.T5 — brand attribution strip. Sits below the scope/metrics
+                  subhead, above any gallery-framing line. Clarifies that we
+                  are not the prospect's vendor + names where the data came
+                  from. Quiets the rare "wait, are you Coke's vendor?" beat
+                  during cold prospect meetings, and provides trademark
+                  nominative-fair-use cover. */}
+              <p
+                data-attribution-strip
+                className="mt-1 text-[11px] leading-relaxed text-stone-500"
+              >
+                Public audit. Not affiliated with{' '}
+                <span className="text-stone-400">{displayName}</span>. Data from
+                satellite imagery + public records.
+              </p>
               {fromGallery && (
                 <p className="mt-1 text-[11px] text-white/55">
                   Modeled from a real <span className="italic">{displayName}</span> network audit.

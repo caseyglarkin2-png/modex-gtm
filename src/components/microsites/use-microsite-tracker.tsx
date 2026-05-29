@@ -178,14 +178,17 @@ export function useMicrositeTracker({
       const ctaTarget = target?.closest<HTMLElement>(CTA_SELECTOR);
       if (ctaTarget?.dataset.msCtaId) {
         ctaIds.current.add(ctaTarget.dataset.msCtaId);
-        flush('fetch', true);
+        // A.T4: clicks frequently trigger navigation; use sendBeacon so the
+        // POST gets queued in the user agent and survives the unload
+        // intact, instead of appearing as an aborted request in DevTools.
+        flush('beacon', true);
         return;
       }
 
       const variantTarget = target?.closest<HTMLElement>(VARIANT_SELECTOR);
       if (variantTarget?.dataset.msVariantSlug) {
         variantHistory.current.add(variantTarget.dataset.msVariantSlug);
-        flush('fetch', true);
+        flush('beacon', true);
       }
     };
 

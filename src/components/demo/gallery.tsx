@@ -728,9 +728,20 @@ function ArchetypeFilterRail({
     }
   }
 
-  const allChips: Array<{ id: Archetype | null; label: string }> = [
-    { id: null, label: 'All' },
-    ...FILTER_ORDER.map((id) => ({ id, label: ARCHETYPE_LABELS_TOP[id] })),
+  // A.T2 — chip count badges. Counts derive from the canonical anchor
+  // list so adding a 12th anchor in industry-tags.ts auto-updates the
+  // chip badges. Server-side stable — no hydration flash.
+  const counts: Record<Archetype, number> = useMemo(() => {
+    const out: Record<Archetype, number> = { cpg: 0, logistics: 0, manufacturing: 0, retail: 0, '3pl': 0 };
+    for (const a of INDUSTRY_ANCHORS) {
+      if (a.archetype && a.archetype in out) out[a.archetype as Archetype] += 1;
+    }
+    return out;
+  }, []);
+
+  const allChips: Array<{ id: Archetype | null; label: string; count: number }> = [
+    { id: null, label: 'All', count: INDUSTRY_ANCHORS.length },
+    ...FILTER_ORDER.map((id) => ({ id, label: ARCHETYPE_LABELS_TOP[id], count: counts[id] })),
   ];
 
   return (
@@ -759,6 +770,13 @@ function ArchetypeFilterRail({
               }`}
             >
               {chip.label}
+              <span
+                className={`ml-1.5 font-normal ${isActive ? 'text-white/60' : 'text-white/40'}`}
+                aria-hidden
+              >
+                ({chip.count})
+              </span>
+              <span className="sr-only">{`, ${chip.count} ${chip.count === 1 ? 'template' : 'templates'}`}</span>
             </Link>
           );
         })}
