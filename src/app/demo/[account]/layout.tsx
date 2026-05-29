@@ -6,7 +6,7 @@ import type { ReactNode } from 'react';
  */
 export default function DemoLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-screen bg-stone-50 text-stone-900 antialiased">
+    <div className="min-h-screen bg-[#050505] text-white antialiased">
       {children}
     </div>
   );
