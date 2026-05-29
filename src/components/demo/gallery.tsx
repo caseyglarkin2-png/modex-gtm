@@ -23,6 +23,17 @@ import type { IndustryAnchor } from '@/lib/demo/industry-tags';
 const ROI_STATE_KEY = 'roi-v2-state';
 const MICROSITE_BASE = process.env.NEXT_PUBLIC_MICROSITE_BASE_URL || 'https://yardflow.ai';
 
+/* Sprint G9 — Audit-grade disclosure constant. Used twice:
+ *   - Gallery hero badge below the H1 (replaces footer-burying the
+ *     credibility line; visible above the fold so it lands before the
+ *     prospect parses tiles)
+ *   - Footer (abbreviated version)
+ * When ?demo=1 is on the URL, the hero badge is swapped for a
+ * "PRESENTING TO PROSPECT" tag so the rep doesn't see legalese during
+ * a meeting. */
+const AUDIT_GRADE_DISCLOSURE =
+  'Templates render from real prospect audit data — public satellite imagery, modeled geofences, 22-field rubric.';
+
 // ── Pre-fill shape — kept in lockstep with src/components/demo/roi-cta-button.tsx ──
 interface ArchetypeAssumptions {
   dcFtesPerShift: number;
@@ -143,6 +154,9 @@ export function Gallery({ tiles }: GalleryProps) {
         }}
       />
 
+      {/* G6 — Demo Mode pill + Reset button, only when ?demo=1. */}
+      {demoSuffix.length > 0 ? <DemoPill /> : null}
+
       <div className="relative z-[1] flex flex-1 flex-col">
         <Hero count={tiles.length} demoSuffix={demoSuffix} />
         <main
@@ -178,16 +192,19 @@ export function Gallery({ tiles }: GalleryProps) {
    ═══════════════════════════════════════════════════════════════ */
 
 function Hero({ count, demoSuffix }: { count: number; demoSuffix: string }) {
+  const isDemo = demoSuffix.length > 0;
   return (
     <header
       className="border-b border-[#00B4FF]/[0.10] backdrop-blur-[2px]"
       data-ms-section-id="gallery-hero"
     >
       <div className="mx-auto w-full max-w-[1280px] px-6 pb-12 pt-20 max-[480px]:px-[18px] max-[480px]:pt-14 md:pt-24">
-        {/* Eyebrow: pulsing neon dot + mono caps, tracked-out. */}
+        {/* Eyebrow: pulsing neon dot + mono caps, tracked-out.
+            G6.T1b — animate-ping wrapped in motion-safe per the
+            reduced-motion guard. */}
         <div className="flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.30em] text-[#00B4FF]/85 max-[480px]:text-[10px] max-[480px]:tracking-[0.22em]">
           <span className="relative inline-flex h-1.5 w-1.5">
-            <span className="absolute inset-0 animate-ping rounded-full bg-[#00C878] opacity-75" />
+            <span className="motion-safe:animate-ping absolute inset-0 rounded-full bg-[#00C878] opacity-75" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#00C878]" />
           </span>
           <span>One Network · {count} Industry Archetypes · Live</span>
@@ -203,6 +220,33 @@ function Hero({ count, demoSuffix }: { count: number; demoSuffix: string }) {
           </span>
         </h1>
 
+        {/* G9 — Audit-grade credibility badge. Lives above the fold so
+            the prospect knows the data is real before they parse any
+            tile. Swapped for a rep-facing tag when ?demo=1. */}
+        {isDemo ? (
+          <div
+            className="mt-5 inline-flex items-center gap-2 rounded-full border border-[#FF2A00]/[0.40] bg-[#FF2A00]/[0.08] px-3 py-1.5 font-mono text-[10.5px] font-semibold uppercase tracking-[0.20em] text-[#FF2A00]"
+            data-credibility-signal=""
+          >
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#FF2A00]" />
+            Presenting to prospect
+          </div>
+        ) : (
+          <div
+            className="mt-5 inline-flex max-w-[640px] items-start gap-2 rounded-[10px] border border-[#00B4FF]/[0.20] bg-[#00B4FF]/[0.04] px-3 py-2 text-[12.5px] leading-[1.45] text-white/75"
+            data-credibility-signal=""
+          >
+            <svg width={14} height={14} viewBox="0 0 24 24" fill="none" aria-hidden className="mt-[2px] shrink-0 text-[#00B4FF]">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+              <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              <circle cx="12" cy="7.5" r="1.2" fill="currentColor" />
+            </svg>
+            <span>
+              <span className="text-white/90">{AUDIT_GRADE_DISCLOSURE}</span>
+            </span>
+          </div>
+        )}
+
         {/* Body — single line, steel, no fluff. */}
         <p className="mt-5 max-w-[660px] text-[16px] leading-[1.55] text-white/[0.72] max-[480px]:text-[15px]">
           Each template runs the YardFlow protocol against an audited prospect&apos;s
@@ -216,18 +260,18 @@ function Hero({ count, demoSuffix }: { count: number; demoSuffix: string }) {
             href={`${MICROSITE_BASE}/roi?source=demo-gallery${demoSuffix}`}
             target="_blank"
             rel="noopener noreferrer"
-            data-ms-cta-id="gallery-hero-run-roi"
+            data-ms-cta-id="gallery-hero-open-calculator"
             className="group inline-flex min-h-[52px] items-center gap-2 rounded-[12px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.12] px-5 text-[14px] font-bold tracking-[0.01em] text-white outline-none transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22] hover:shadow-[0_0_28px_rgba(0,180,255,0.35)] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#00B4FF]"
             style={{
               boxShadow:
                 '0 0 0 1px rgba(0, 180, 255, 0.18) inset, 0 10px 28px rgba(0, 0, 0, 0.40), 0 0 22px rgba(0, 180, 255, 0.18)',
             }}
           >
-            Run a Sample ROI
+            Open the calculator
             <ArrowRight className="transition-transform group-hover:translate-x-[3px]" />
           </a>
           <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/55">
-            or pick an industry below
+            or jump to your industry
           </span>
         </div>
       </div>
@@ -394,13 +438,14 @@ function Metric({ label, value, sliced = false }: { label: string; value: string
    ═══════════════════════════════════════════════════════════════ */
 
 function Footer() {
+  /* G9 — abbreviated. Hero badge carries the full audit-grade
+     disclosure; this footer just confirms your demo reflects your
+     network plus the legal caveat on the asterisk. */
   return (
     <footer className="border-t border-[#00B4FF]/[0.10] px-6 py-8 max-[480px]:px-[18px]">
       <div className="mx-auto w-full max-w-[1280px] space-y-3">
         <p className="text-[12.5px] leading-[1.6] text-white/[0.55]">
-          Templates render from actual prospect audit data — public satellite
-          imagery, Street-View probes, geofences modeled by YardFlow. Your
-          demo would reflect <span className="text-white">your</span> facilities,
+          Your demo would reflect <span className="text-white">your</span> facilities,
           your archetype mix, and your network shape.
         </p>
         <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/35">
@@ -411,6 +456,91 @@ function Footer() {
         </p>
       </div>
     </footer>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DemoPill — G6. Floating "DEMO · LIVE" badge top-right + "Reset
+   Demo" button bottom-left. Mounted only when ?demo=1 is on URL.
+   Reset strips ?demo= + ?pack= from the URL and reloads.
+   ═══════════════════════════════════════════════════════════════ */
+
+function DemoPill() {
+  function onReset() {
+    try {
+      const url = new URL(window.location.href);
+      ['demo', 'pack'].forEach((k) => url.searchParams.delete(k));
+      // G6.T6 — fire the demo-mode-shown event via internal sink, NOT
+      // HubSpot. Same pattern as DemoBanner on the hub.
+      window.dispatchEvent(
+        new CustomEvent('yf:event', {
+          detail: {
+            name: 'gallery_demo_mode_reset',
+            props: {},
+            sink: 'internal',
+          },
+        }),
+      );
+      window.location.href = url.pathname + (url.search || '');
+    } catch {
+      window.location.href = '/demo';
+    }
+  }
+
+  // Fire the impression event once on mount.
+  useEffect(() => {
+    try {
+      window.dispatchEvent(
+        new CustomEvent('yf:event', {
+          detail: {
+            name: 'gallery_demo_mode_shown',
+            props: {},
+            sink: 'internal',
+          },
+        }),
+      );
+    } catch {
+      // swallow
+    }
+  }, []);
+
+  return (
+    <>
+      {/* Top-right LIVE pill. */}
+      <div
+        data-demo-pill=""
+        role="status"
+        aria-label="Demo mode active"
+        style={{
+          paddingTop: 'env(safe-area-inset-top, 0px)',
+          paddingRight: 'env(safe-area-inset-right, 0px)',
+        }}
+        className="fixed top-2 right-2 z-[60] flex items-center gap-2 rounded-full border border-[#00B4FF]/40 bg-[#050505]/80 px-3 py-1.5 font-mono text-[10.5px] font-semibold uppercase tracking-[0.18em] text-white shadow-[0_8px_24px_rgba(0,0,0,0.4)] backdrop-blur-md max-[480px]:text-[9.5px] max-[480px]:tracking-[0.15em] max-[480px]:px-2.5 max-[480px]:py-1"
+      >
+        <span className="relative inline-flex h-2 w-2">
+          <span className="motion-safe:animate-ping absolute inset-0 rounded-full bg-[#00C878] opacity-75" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-[#00C878]" />
+        </span>
+        <span className="text-[#00B4FF]">Demo</span>
+        <span>·</span>
+        <span>Live</span>
+      </div>
+
+      {/* Bottom-left Reset button. */}
+      <button
+        type="button"
+        onClick={onReset}
+        aria-label="Reset demo mode"
+        style={{
+          bottom: 'calc(env(safe-area-inset-bottom, 0px) + 14px)',
+          left: 'calc(env(safe-area-inset-left, 0px) + 14px)',
+        }}
+        className="fixed z-[60] inline-flex h-10 items-center gap-1.5 rounded-full border border-white/15 bg-black/70 px-3 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-white/85 shadow-[0_6px_18px_rgba(0,0,0,0.5)] backdrop-blur-md hover:border-[#00B4FF]/40 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-[2px] focus-visible:outline-[#00B4FF]"
+      >
+        <span aria-hidden>×</span>
+        <span>Reset Demo</span>
+      </button>
+    </>
   );
 }
 
