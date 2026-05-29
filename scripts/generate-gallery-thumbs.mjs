@@ -62,8 +62,9 @@ async function fetchOne({ slug, lat, lng }) {
       `?center=${lat},${lng}` +
       `&zoom=17` +
       `&size=640x400` +
-      `&scale=2` +
+      `&scale=1` +
       `&maptype=satellite` +
+      `&format=png8` +
       `&key=${apiKey}`;
     const out = path.join(outDir, `${slug}.png`);
     https
