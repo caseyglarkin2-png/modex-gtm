@@ -9,6 +9,8 @@ import { SiteDetailPanel } from './site-detail-panel';
 import { ArchetypeMixChart } from './archetype-mix-chart';
 import { CoverageHonesty } from './coverage-honesty';
 import { NetworkSimulator } from './network-simulator';
+import { DossierIntro } from './dossier-intro';
+import { SurprisingFindings } from './surprising-findings';
 
 /**
  * Top-level client surface for /demo/[account]. Manages cross-component
@@ -303,6 +305,17 @@ export function DemoSurface({
           </section>
         );
       })()}
+
+      {/* B.T3 + B.T7 — DossierIntro and SurprisingFindings sit between
+          the header / featured-site hero and the atlas. Both components
+          self-suppress on packs without the optional schema fields, so
+          legacy packs render unchanged. */}
+      {mode === 'standalone' && (
+        <>
+          <DossierIntro pack={pack} />
+          <SurprisingFindings pack={pack} />
+        </>
+      )}
 
       {/* Atlas view: split — map + donut/site-panel */}
       {view === 'atlas' && (

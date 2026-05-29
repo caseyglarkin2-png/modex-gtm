@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T14:21:06.080Z",
+  "builtAt": "2026-05-29T18:26:10.461Z",
   "account": {
     "slug": "fedex",
     "displayName": "FedEx",
@@ -15,7 +15,13 @@
       "auditedScope": "US",
       "totalGlobalFootprint": 5000
     },
-    "featuredSiteId": "24-fedex-freight-hub-conley-ga"
+    "featuredSiteId": "24-fedex-freight-hub-conley-ga",
+    "dossierIntro": "Parcel and LTL hubs run the largest yards in the dataset. FedEx operates 5,000+ facilities. We audited 30. Conley GA runs 304 dock doors and 750 trailer spots on 121 acres. Memphis Express World Hub is 940 acres. LTL hub throughput is trailer-position visibility: the right trailer at the right door when the right shipment needs to load, within 4 hours. YardFlow keeps positions current at every door, every minute.",
+    "surprisingFindings": [
+      "Memphis Express World Hub is 940 acres. More parcels sort here per night than land at most international airports.",
+      "9,810 trailer spots across 30 sites. FedEx parks more trailers than any other audited network.",
+      "0 of 30 audited sites are rail-served. LTL is highway-to-highway."
+    ]
   },
   "research": {
     "facility_count": 30,

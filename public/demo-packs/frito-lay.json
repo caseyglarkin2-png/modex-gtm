@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T14:21:11.247Z",
+  "builtAt": "2026-05-29T18:26:10.431Z",
   "account": {
     "slug": "frito-lay",
     "displayName": "Frito-Lay",
@@ -14,7 +14,13 @@
       "note": "Frito-Lay (PepsiCo NA subsidiary) operates ~200 US manufacturing + DC sites. We audited 29 representative sites.",
       "auditedScope": "US"
     },
-    "featuredSiteId": "18-frito-lay-aberdeen-md"
+    "featuredSiteId": "18-frito-lay-aberdeen-md",
+    "dossierIntro": "Frito-Lay runs the most dock-heavy CPG network we've audited. 1,301 dock doors and 5,027 trailer spots across 29 sites. 17 of them rail-served. Aberdeen MD alone has 70 docks and 160 trailer spots on 58 acres. Snack DSD lives in the dock door sequencing, not the dock door count. YardFlow runs the schedule as a deterministic queue.",
+    "surprisingFindings": [
+      "5,027 trailer spots across 29 sites. Frito-Lay parks more trailers per site than any CPG network we've measured.",
+      "Frankfort IN is 155 acres of snack manufacturing. Same footprint as a small auto plant.",
+      "17 of 29 sites are rail-served. Cheapest inbound corn in the network."
+    ]
   },
   "research": {
     "facility_count": 230,

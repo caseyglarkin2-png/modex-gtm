@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T14:21:54.310Z",
+  "builtAt": "2026-05-29T18:26:10.457Z",
   "account": {
     "slug": "performance-food-group",
     "displayName": "Performance Food Group",
@@ -14,7 +14,13 @@
       "note": "Performance Food Group operates ~150 US distribution centers (Vistar, PFG Foodservice, Reinhart). We audited 30 representative sites.",
       "auditedScope": "US"
     },
-    "featuredSiteId": "18-lebanon-tn"
+    "featuredSiteId": "18-lebanon-tn",
+    "dossierIntro": "Foodservice distribution runs multi-temp networks where the trailer is the production unit. Performance Food Group runs 150 facilities. Nashville Lebanon TN covers 52 acres with 70 dock doors and 150 trailer spots. The yard isn't staging trailers, it's staging routes. YardFlow makes routes addressable: drivers find their assigned pre-loaded trailer without circling or radioing dispatch.",
+    "surprisingFindings": [
+      "1,324 dock doors across 30 sites. Foodservice runs on density.",
+      "Multi-temp trailers turn the yard into a routing problem. Frozen, refrigerated, ambient all park separately.",
+      "150 trailer spots at Lebanon means 50 routes can stage at once. Driver pickup is the cycle bottleneck."
+    ]
   },
   "research": {
     "facility_count": 30,

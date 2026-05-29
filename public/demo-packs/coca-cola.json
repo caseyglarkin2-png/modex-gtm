@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T14:20:47.877Z",
+  "builtAt": "2026-05-29T18:26:10.419Z",
   "account": {
     "slug": "coca-cola",
     "displayName": "The Coca-Cola Company",
@@ -15,7 +15,13 @@
       "auditedScope": "US",
       "totalGlobalFootprint": 270
     },
-    "featuredSiteId": "10-coca-cola-consolidated-columbus-distribution-center-oh"
+    "featuredSiteId": "10-coca-cola-consolidated-columbus-distribution-center-oh",
+    "dossierIntro": "Beverage distribution runs on tight delivery windows and high SKU velocity. Every minute lost at the dock cascades into a missed route. We audited 30 of Coca-Cola Consolidated's 270 US bottling sites. The Columbus DC alone runs 60 dock doors and 170 trailer spots on 60 acres. YardFlow's drop-trailer protocol turns dwell into yield.",
+    "surprisingFindings": [
+      "60 dock doors but only 1 truck gate at Columbus. The choke point isn't the building, it's the gate.",
+      "5 of 30 audited sites use rail. The other 25 burn dray on every inbound shipment.",
+      "Charlotte (Snyder) ties Columbus at 60 docks each. Beverage runs on rebottling cycle, not pure throughput."
+    ]
   },
   "research": {
     "facility_count": 70,

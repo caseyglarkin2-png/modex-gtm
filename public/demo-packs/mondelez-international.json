@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T14:21:44.077Z",
+  "builtAt": "2026-05-29T18:26:10.427Z",
   "account": {
     "slug": "mondelez-international",
     "displayName": "Mondelez International",
@@ -16,7 +16,13 @@
       "auditedScope": "NA",
       "legacyYmsFacilityCount": 60
     },
-    "featuredSiteId": "07-mondelez-richmond-distribution-center"
+    "featuredSiteId": "07-mondelez-richmond-distribution-center",
+    "dossierIntro": "CPG food networks live or die on the drop yard. Mondelez runs 160 plants and DCs feeding retail, grocery, and foodservice. We audited 22 NA sites. Richmond VA runs 90 dock doors on 45 acres with CSX rail spurring in. Fort Worth runs 115 docks. YardFlow makes the yard a deterministic queue for inbound rail and outbound truckload.",
+    "surprisingFindings": [
+      "Fort Worth DC runs 115 dock doors. That's 14 trucks staged per minute at peak.",
+      "6 of 22 audited sites are rail-served. Outbound truckload still dominates inbound rail.",
+      "Nabisco Chicago Bakery is 100 acres of vertical CPG manufacturing. Different yard problem than a DC."
+    ]
   },
   "research": {
     "facility_count": 22,

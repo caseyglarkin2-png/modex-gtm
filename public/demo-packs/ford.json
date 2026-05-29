@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T14:21:08.606Z",
+  "builtAt": "2026-05-29T18:26:10.442Z",
   "account": {
     "slug": "ford",
     "displayName": "Ford Motor Company",
@@ -15,7 +15,13 @@
       "auditedScope": "NA",
       "totalGlobalFootprint": 65
     },
-    "featuredSiteId": "02-kentucky-truck-plant"
+    "featuredSiteId": "02-kentucky-truck-plant",
+    "dossierIntro": "Auto OEMs run two yards inside every plant: parts in, vehicles out. Ford runs 65 facilities. Kentucky Truck Plant covers 343 acres with 55 docks and 150 trailer spots. BlueOval City in Tennessee is 950 acres of greenfield EV manufacturing. 20 of 24 audited sites are rail-served. YardFlow runs the supplier inbound and finished-vehicle outbound as two distinct queues on one protocol.",
+    "surprisingFindings": [
+      "BlueOval City is 950 acres of greenfield. Ford's EV bet is the size of 720 NFL fields.",
+      "20 of 24 audited sites are rail-served. Auto inbound runs on railcars, not trucks.",
+      "907 dock doors across 24 plants. The auto OEM dock count is parts pacing, not throughput."
+    ]
   },
   "research": {
     "facility_count": 24,

@@ -144,18 +144,41 @@ export function SiteDetailPanel({ site, onClose, autoPlay = false }: Props) {
           </dl>
         </div>
 
-        {/* Dossier excerpt */}
+        {/* B.T4 — Dossier excerpt collapsed behind details/summary. The
+            raw per-site auditor notes (lat/lng, field codes, internal
+            jargon) read as a debug dump when always-on. Hiding by
+            default preserves their provenance value while keeping the
+            site detail panel calm on first read. Toggle expands inline. */}
         {site.dossierExcerpt && (
-          <div className="mb-4">
-            <div className="mb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-white/55">From our dossier</div>
-            <p className="whitespace-pre-line text-sm leading-relaxed text-white/85">{site.dossierExcerpt}</p>
-          </div>
+          <details className="group mb-4 rounded-md border border-[#00B4FF]/[0.12] bg-white/[0.02]">
+            <summary className="cursor-pointer list-none px-3 py-2 font-mono text-[10.5px] uppercase tracking-[0.18em] text-white/65 transition hover:text-white">
+              <span className="mr-2 inline-block transition-transform group-open:rotate-90">▸</span>
+              Show audit field notes
+            </summary>
+            <p className="whitespace-pre-line border-t border-[#00B4FF]/[0.12] px-3 py-3 font-mono text-[11.5px] leading-relaxed text-white/65">
+              {site.dossierExcerpt}
+            </p>
+          </details>
         )}
 
-        {/* Uncertain fields footer */}
+        {/* B.T9 — Low-confidence fields with sales@freightroll.com mailto.
+            "Happy to be corrected" wrapped in a mailto link so prospects
+            can fire a templated email with the brand + uncertain fields
+            already filled in. (Casey 2026-05-29: use sales@freightroll
+            for now; swap to audits@yardflow.ai when the sending domain
+            is rebuilt.) */}
         {site.uncertainFields.length > 0 && (
           <p className="border-t border-[#00B4FF]/[0.16] pt-3 text-[11px] text-white/55">
-            Low-confidence fields: {site.uncertainFields.join(', ')}. Imagery couldn't resolve these — happy to be corrected.
+            Low-confidence fields: {site.uncertainFields.join(', ')}. Imagery couldn't resolve these.{' '}
+            <a
+              href={`mailto:sales@freightroll.com?subject=Audit correction: ${encodeURIComponent(site.name)}&body=${encodeURIComponent(
+                `Site: ${site.name}\nField: \nCorrection: \n\n`,
+              )}`}
+              data-ms-cta-id="site-audit-correction-mailto"
+              className="text-white/75 underline underline-offset-2 transition-colors hover:text-[#00B4FF]"
+            >
+              Happy to be corrected.
+            </a>
           </p>
         )}
 

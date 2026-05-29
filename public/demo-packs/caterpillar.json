@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-21T14:20:42.593Z",
+  "builtAt": "2026-05-29T18:26:10.445Z",
   "account": {
     "slug": "caterpillar",
     "displayName": "Caterpillar",
@@ -15,7 +15,13 @@
       "auditedScope": "NA",
       "totalGlobalFootprint": 110
     },
-    "featuredSiteId": "11-waco-tx-distribution-center"
+    "featuredSiteId": "11-waco-tx-distribution-center",
+    "dossierIntro": "Heavy equipment manufacturing is the remote-check-in archetype. Caterpillar runs 110 facilities. Waco TX has 70 doors and 90 trailer spots on 66 acres. Decatur IL is 360 acres of heavy-equipment final assembly. 10 of 21 audited sites are rail-served. YardFlow's classifier separates heavy-equipment moves from standard loads at the gate.",
+    "surprisingFindings": [
+      "Decatur IL is 360 acres of heavy-equipment final assembly. The pieces leaving don't fit a 53-foot van.",
+      "10 of 21 audited sites are rail-served. Heavy steel components arrive by rail; finished machines leave by flatbed.",
+      "Clayton OH DC runs 80 dock doors. Aftermarket parts move differently from whole goods."
+    ]
   },
   "research": {
     "facility_count": 20,

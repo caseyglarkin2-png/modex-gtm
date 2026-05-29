@@ -291,6 +291,22 @@ export const DemoPackSchema = z.object({
      * backward compat — older packs may not have it.
      */
     featuredSiteId: z.string().regex(/^\d{2}-[a-z0-9-]+$/).optional(),
+    /**
+     * B.T1 — Editorial intro for the network, rendered at the top of
+     * the microsite. 2-3 sentences. Names the industry, cites at least
+     * one specific number, ends with a forward statement about what
+     * YardFlow changes for this industry. Authored in voice-CI-clean
+     * prose: no em dashes, no filler phrases. Optional for backward
+     * compatibility; the microsite renders nothing if absent.
+     */
+    dossierIntro: z.string().max(800).optional(),
+    /**
+     * B.T6 — Three surprising findings derived from the actual audit
+     * data, each a single quantified sentence. Rendered as a card row
+     * above the network atlas tabs. Optional; the SurprisingFindings
+     * component returns null if missing or fewer than 3 items.
+     */
+    surprisingFindings: z.array(z.string().max(160)).max(3).optional(),
   }),
   research: AccountResearch,
   network: Network,
