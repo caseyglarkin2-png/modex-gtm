@@ -1,13 +1,13 @@
 {
   "schemaVersion": "1",
-  "builtAt": "2026-05-22T05:43:05.494Z",
+  "builtAt": "2026-05-29T16:04:37.191Z",
   "account": {
     "slug": "kraft-heinz",
     "displayName": "Kraft Heinz",
     "archetype": "cpg",
-    "siteCount": 10,
+    "siteCount": 27,
     "coverageNote": {
-      "auditedCount": 10,
+      "auditedCount": 27,
       "estimatedFootprint": 40,
       "droppedStubCount": 17,
       "capHit": false,
@@ -21,18 +21,22 @@
   "research": null,
   "network": {
     "bbox": [
-      -96.6657,
-      26.6647,
-      -81.5375,
-      43.1656
+      -121.2851431,
+      26.66568,
+      -75.4830318,
+      44.2987287
     ],
     "archetypeMix": {
-      "#1": 2,
-      "#3": 3,
-      "#4": 1,
-      "#6": 2,
-      "#7": 1,
-      "#9": 1
+      "#1": 3,
+      "#2": 2,
+      "#3": 10,
+      "#4": 2,
+      "#5": 1,
+      "#6": 3,
+      "#7": 2,
+      "#8": 1,
+      "#9": 2,
+      "#10": 1
     },
     "totals": {
       "dockDoors": 525,
@@ -193,6 +197,71 @@
           "rail": "No rail spur enters the Kraft parcel. Rail line visible north of the campus but does not serve this building.",
           "streetView": "Bilter Rd Street View from the public ROW shows a landscaped berm with trees screening the dock face; the on-site pano (2018) sits on the truck pad and confirms the entry point's geometry. Public-road view is consistent with a single set-back industrial driveway."
         }
+      },
+      {
+        "id": "02-kh-muscatine",
+        "name": "Kraft Heinz - Muscatine",
+        "type": "Food Products Supplier",
+        "archetype": "#2",
+        "archetypeName": "Gate + GS (not BU sens.)+separate",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "truckGateCount",
+          "buildingCount",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 41.4372813,
+          "lng": -91.0430826
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.434781300000004,
+            "north": 41.4397813,
+            "west": -91.0455826,
+            "east": -91.04058260000001
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": null,
+          "trailersVisible": null,
+          "trailerParkingCapacity": null,
+          "truckGateCount": null,
+          "buildingCount": null,
+          "siteAreaAcres": null,
+          "railServed": null
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "mapsUrl": "https://www.google.com/maps/@41.4372813,-91.0430826,581m/data=!3m1!1e3?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
       },
       {
         "id": "03-kraft-heinz-holland",
@@ -611,8 +680,8 @@
         "id": "06-kraft-heinz-davenport",
         "name": "Kraft Heinz - Davenport",
         "type": "Food Processing Company",
-        "archetype": "#1",
-        "archetypeName": "Gate + GS (not BU sens.)",
+        "archetype": "#5",
+        "archetypeName": "Gate + GS (not BU sens.) + multi-step",
         "confidence": "high",
         "uncertainFields": [
           "guardShack",
@@ -771,6 +840,71 @@
           "multiStep": "Single gate/entry; no visible second checkpoint or scale house after entry. Marked false.",
           "approachUsed": "Street View captured 2025-06 from Slopertown Road (north), Hillandale Drive (west), and the east intersection at the rail crossing; satellite at z17-z21 from Maxar 2026 imagery."
         }
+      },
+      {
+        "id": "07-kh-winchester",
+        "name": "Kraft Heinz - Winchester",
+        "type": "Food Proccessing Company",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "truckGateCount",
+          "buildingCount",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 39.2076604,
+          "lng": -78.147096
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.205160400000004,
+            "north": 39.2101604,
+            "west": -78.149596,
+            "east": -78.144596
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": null,
+          "trailersVisible": null,
+          "trailerParkingCapacity": null,
+          "truckGateCount": null,
+          "buildingCount": null,
+          "siteAreaAcres": null,
+          "railServed": null
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "mapsUrl": "https://www.google.com/maps/place/Kraft+Heinz-Winchester/@39.2076604,-78.147096,939m/data=!3m1!1e3!4m6!3m5!1s0x89b5efd71a1feb5f:0x89dc6bd73b1b15a8!8m2!3d39.2074209!4d-78.1471792!16s%2Fg%2F1tjbt15p?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
       },
       {
         "id": "08-kraft-heinz-massillon",
@@ -1263,6 +1397,136 @@
         }
       },
       {
+        "id": "11-kh-springfield",
+        "name": "Kraft Foods - Springfield",
+        "type": "Manufacturer",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "truckGateCount",
+          "buildingCount",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 37.2353356,
+          "lng": -93.2186898
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 37.2328356,
+            "north": 37.2378356,
+            "west": -93.2211898,
+            "east": -93.21618980000001
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": null,
+          "trailersVisible": null,
+          "trailerParkingCapacity": null,
+          "truckGateCount": null,
+          "buildingCount": null,
+          "siteAreaAcres": null,
+          "railServed": null
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "mapsUrl": "https://www.google.com/maps/place/Kraft+Foods+Distribution/@37.2353356,-93.2186898,2181m/data=!3m1!1e3!4m10!1m2!2m1!1skraft+heinz+springfield+mo!3m6!1s0x87cf7d74255f62d3:0x9abeaa8a7b1f5dda!8m2!3d37.2309646!4d-93.2134017!15sChprcmFmdCBoZWlueiBzcHJpbmdmaWVsZCBtbyIDiAEBkgEMbWFudWZhY3R1cmVy4AEA!16s%2Fg%2F11c48mqdkg?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "id": "12-kh-dover",
+        "name": "Kraft Heinz - Dover",
+        "type": "Food Manufacturer",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "truckGateCount",
+          "buildingCount",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 39.149205,
+          "lng": -75.5443487
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.146705000000004,
+            "north": 39.151705,
+            "west": -75.5468487,
+            "east": -75.5418487
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": null,
+          "trailersVisible": null,
+          "trailerParkingCapacity": null,
+          "truckGateCount": null,
+          "buildingCount": null,
+          "siteAreaAcres": null,
+          "railServed": null
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "mapsUrl": "https://www.google.com/maps/place/Kraft+Heinz-Dover/@39.149205,-75.5443487,1524m/data=!3m1!1e3!4m6!3m5!1s0x89c77d0ec971296b:0xf9dc50ad0e2932a7!8m2!3d39.1487688!4d-75.5432442!16s%2Fg%2F11fmq0x8zf?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
         "id": "13-kraft-heinz-mason-city",
         "name": "Kraft Heinz - Mason City",
         "type": "Food Manufacturer",
@@ -1417,6 +1681,396 @@
         }
       },
       {
+        "id": "14-kh-mason-city",
+        "name": "Kraft Heinz - Mason City",
+        "type": "Food Manufacturer",
+        "archetype": "#8",
+        "archetypeName": "Gate + GS (not BU sens.) + scale",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "truckGateCount",
+          "buildingCount",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 43.1627479,
+          "lng": -93.2164507
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 43.1602479,
+            "north": 43.1652479,
+            "west": -93.2189507,
+            "east": -93.2139507
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": null,
+          "trailersVisible": null,
+          "trailerParkingCapacity": null,
+          "truckGateCount": null,
+          "buildingCount": null,
+          "siteAreaAcres": null,
+          "railServed": null
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": true,
+          "multipleFacilities": false,
+          "scale": true,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "mapsUrl": "https://www.google.com/maps/place/Kraft+Heinz-Mason+City/@43.1627479,-93.2164507,500m/data=!3m1!1e3!4m6!3m5!1s0x87f107aa0ed70c1b:0x34076eae1343f74d!8m2!3d43.1639539!4d-93.2176109!16s%2Fg%2F1thl5_5q?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "id": "15-kh-cedar-rapids",
+        "name": "Kraft Heinz - Cedar Rapids",
+        "type": "Food Manufacturer",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "truckGateCount",
+          "buildingCount",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 41.9354082,
+          "lng": -91.636307
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.9329082,
+            "north": 41.937908199999995,
+            "west": -91.638807,
+            "east": -91.633807
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": null,
+          "trailersVisible": null,
+          "trailerParkingCapacity": null,
+          "truckGateCount": null,
+          "buildingCount": null,
+          "siteAreaAcres": null,
+          "railServed": null
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "mapsUrl": "https://www.google.com/maps/place/Kraft+Heinz-Cedar+Rapids/@41.9354082,-91.636307,2588m/data=!3m1!1e3!4m6!3m5!1s0x87e4f64ac353a299:0x65bacfc16da321d2!8m2!3d41.932207!4d-91.6361763!16s%2Fg%2F1tnpf_5z?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "id": "16-kh-beaver-dam",
+        "name": "Kraft Heinz - Beaver Dam",
+        "type": "Food Products Supplier",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "truckGateCount",
+          "buildingCount",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 43.4531347,
+          "lng": -88.8351231
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 43.4506347,
+            "north": 43.4556347,
+            "west": -88.8376231,
+            "east": -88.8326231
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": null,
+          "trailersVisible": null,
+          "trailerParkingCapacity": null,
+          "truckGateCount": null,
+          "buildingCount": null,
+          "siteAreaAcres": null,
+          "railServed": null
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": true,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "mapsUrl": "https://www.google.com/maps/place/Kraft+Heinz-Beaver+Dam/@43.4531347,-88.8351231,3299m/data=!3m1!1e3!4m14!1m7!3m6!1s0x88069f1103b70f25:0xb1afe36d1395e6ef!2sKraft+Heinz-Beaver+Dam!8m2!3d43.4518323!4d-88.8387536!16s%2Fg%2F12hqqqp_d!3m5!1s0x88069f1103b70f25:0xb1afe36d1395e6ef!8m2!3d43.4518323!4d-88.8387536!16s%2Fg%2F12hqqqp_d?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "id": "17-kh-coshocton",
+        "name": "Kraft Heinz - Coshocton",
+        "type": "Manufacturer",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "truckGateCount",
+          "buildingCount",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 40.2498672,
+          "lng": -81.8695447
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.2473672,
+            "north": 40.252367199999995,
+            "west": -81.8720447,
+            "east": -81.86704470000001
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": null,
+          "trailersVisible": null,
+          "trailerParkingCapacity": null,
+          "truckGateCount": null,
+          "buildingCount": null,
+          "siteAreaAcres": null,
+          "railServed": null
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "10-25",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": true,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "mapsUrl": "https://www.google.com/maps/place/Kraft+Foods/@40.2498672,-81.8695447,332m/data=!3m1!1e3!4m6!3m5!1s0x883798a19b04d9a3:0x7dff8c73abd2d20!8m2!3d40.2497856!4d-81.8697284!16s%2Fg%2F1v76_b0f?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "id": "18-kh-champaign",
+        "name": "Kraft Heinz - Champaign",
+        "type": "Food Manufacturer",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "truckGateCount",
+          "buildingCount",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 40.1206549,
+          "lng": -88.2691814
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 40.1181549,
+            "north": 40.123154899999996,
+            "west": -88.27168139999999,
+            "east": -88.2666814
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": null,
+          "trailersVisible": null,
+          "trailerParkingCapacity": null,
+          "truckGateCount": null,
+          "buildingCount": null,
+          "siteAreaAcres": null,
+          "railServed": null
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "25-50",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "mapsUrl": "https://www.google.com/maps/place/Kraft+Heinz-Champaign/@40.1206549,-88.2691814,2387m/data=!3m1!1e3!4m6!3m5!1s0x880cd09c9dfe8a83:0x560a91cb4c58ff81!8m2!3d40.1259519!4d-88.2717434!16s%2Fg%2F1wl4r5gm?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "id": "19-kh-woodstock",
+        "name": "Kraft Heinz - Woodstock",
+        "type": "Manufacturer",
+        "archetype": "#2",
+        "archetypeName": "Gate + GS (not BU sens.)+separate",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "truckGateCount",
+          "buildingCount",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 42.3200967,
+          "lng": -88.4692426
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.3175967,
+            "north": 42.3225967,
+            "west": -88.4717426,
+            "east": -88.4667426
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": null,
+          "trailersVisible": null,
+          "trailerParkingCapacity": null,
+          "truckGateCount": null,
+          "buildingCount": null,
+          "siteAreaAcres": null,
+          "railServed": null
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": true,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "mapsUrl": "https://www.google.com/maps/place/Kraft+Heinz-Woodstock/@42.3200967,-88.4692426,507m/data=!3m1!1e3!4m6!3m5!1s0x880f69e8cfb5217b:0x16b31c053d9a03d!8m2!3d42.3209369!4d-88.4714377!16s%2Fg%2F11dztqgxpw?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
         "id": "20-kraft-heinz-ft-myers",
         "name": "Kraft Heinz - Ft Myers",
         "type": "Manufacturer",
@@ -1555,6 +2209,461 @@
           "siteAreaAcres": "Perimeter bbox ≈ 217 m N-S × 129 m E-W ≈ 6.9 acres. Honest overhead estimate; flagged as fieldNote only because the exact fence-line on the south (lake bank) is screened by trees.",
           "shipRcvSeparate": "Could not positively distinguish a dedicated receiving dock from the shipping dock in overhead imagery — all visible dock activity is on the north face. Conservatively marked false."
         }
+      },
+      {
+        "id": "21-kh-kendallville",
+        "name": "Kraft Heinz - Kendallville",
+        "type": "Manufacturer",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "truckGateCount",
+          "buildingCount",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 41.4313632,
+          "lng": -85.2652943
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 41.4288632,
+            "north": 41.4338632,
+            "west": -85.26779429999999,
+            "east": -85.2627943
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": null,
+          "trailersVisible": null,
+          "trailerParkingCapacity": null,
+          "truckGateCount": null,
+          "buildingCount": null,
+          "siteAreaAcres": null,
+          "railServed": null
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": true,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "mapsUrl": "https://www.google.com/maps/place/Kraft+Heinz-Kendallville/@41.4313632,-85.2652943,514m/data=!3m1!1e3!4m6!3m5!1s0x881614ac243f78d9:0x81253beb1ab62fe5!8m2!3d41.4323654!4d-85.2673645!16s%2Fg%2F1tk1zn87?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "id": "22-kh-lowville",
+        "name": "Kraft Heinz - Lowville",
+        "type": "Cheese Manufacturer",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "truckGateCount",
+          "buildingCount",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 43.7796387,
+          "lng": -75.4830318
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 43.7771387,
+            "north": 43.7821387,
+            "west": -75.4855318,
+            "east": -75.48053180000001
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": null,
+          "trailersVisible": null,
+          "trailerParkingCapacity": null,
+          "truckGateCount": null,
+          "buildingCount": null,
+          "siteAreaAcres": null,
+          "railServed": null
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "10-25",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": true,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "mapsUrl": "https://www.google.com/maps/place/Kraft+Heinz-Lowville/@43.7796387,-75.4830318,2222m/data=!3m1!1e3!4m6!3m5!1s0x89d892d726fd28c5:0x1ac5377ca0e961b9!8m2!3d43.777538!4d-75.4803505!16s%2Fg%2F1tks7979?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "id": "23-kh-new-ulm",
+        "name": "Kraft Heinz - New Ulm",
+        "type": "Food",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "truckGateCount",
+          "buildingCount",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 44.2987287,
+          "lng": -94.4352836
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 44.2962287,
+            "north": 44.301228699999996,
+            "west": -94.4377836,
+            "east": -94.43278360000001
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": null,
+          "trailersVisible": null,
+          "trailerParkingCapacity": null,
+          "truckGateCount": null,
+          "buildingCount": null,
+          "siteAreaAcres": null,
+          "railServed": null
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 2,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": true,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "mapsUrl": "https://www.google.com/maps/place/Kraft+Foods/@44.2987287,-94.4352836,5126m/data=!3m1!1e3!4m6!3m5!1s0x87f4ffb17c91cf33:0x90274f47ee473c7b!8m2!3d44.2894712!4d-94.4336481!16s%2Fg%2F1tczfg5z?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "id": "24-kh-avon",
+        "name": "Kraft Heinz - Avon",
+        "type": "Food Products Supplier",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "truckGateCount",
+          "buildingCount",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 42.9061295,
+          "lng": -77.75834
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 42.9036295,
+            "north": 42.908629499999996,
+            "west": -77.76084,
+            "east": -77.75584
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": null,
+          "trailersVisible": null,
+          "trailerParkingCapacity": null,
+          "truckGateCount": null,
+          "buildingCount": null,
+          "siteAreaAcres": null,
+          "railServed": null
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": true,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "mapsUrl": "https://www.google.com/maps/place/KraftHeinz/@42.9061295,-77.75834,1776m/data=!3m1!1e3!4m6!3m5!1s0x89d15b579bf7a8cd:0x1d2c595299f09848!8m2!3d42.9050843!4d-77.755732!16s%2Fg%2F1td4fjl6?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "id": "25-kh-granite-city",
+        "name": "Kraft Heinz - Granite City",
+        "type": "Food Manufacturer",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "truckGateCount",
+          "buildingCount",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 38.7210163,
+          "lng": -90.1226516
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 38.718516300000005,
+            "north": 38.7235163,
+            "west": -90.1251516,
+            "east": -90.1201516
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": null,
+          "trailersVisible": null,
+          "trailerParkingCapacity": null,
+          "truckGateCount": null,
+          "buildingCount": null,
+          "siteAreaAcres": null,
+          "railServed": null
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "10-25",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": true,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "mapsUrl": "https://www.google.com/maps/place/Kraft+Heinz-Granite+City/@38.7210163,-90.1226516,9956m/data=!3m1!1e3!4m6!3m5!1s0x87df520b1c7a7ccb:0x9eee6d5101a5f011!8m2!3d38.720034!4d-90.1468659!16s%2Fg%2F1tmqgrn2?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "id": "26-kh-columbia",
+        "name": "Kraft Heinz - Columbia",
+        "type": "Manufacturer",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "truckGateCount",
+          "buildingCount",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 39.0123455,
+          "lng": -92.2664494
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 39.009845500000004,
+            "north": 39.0148455,
+            "west": -92.2689494,
+            "east": -92.2639494
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": null,
+          "trailersVisible": null,
+          "trailerParkingCapacity": null,
+          "truckGateCount": null,
+          "buildingCount": null,
+          "siteAreaAcres": null,
+          "railServed": null
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": true,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "0-10",
+          "dropArea": "0-10",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": true,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "mapsUrl": "https://www.google.com/maps/place/Kraft+Heinz-Columbia/@39.0123455,-92.2664494,1619m/data=!3m1!1e3!4m6!3m5!1s0x87dcc6548ac4d44f:0xe2514f2375afdccf!8m2!3d39.0100596!4d-92.2675202!16s%2Fg%2F1tf9tchh?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
+      },
+      {
+        "id": "27-kh-ryder-lathrop",
+        "name": "Kraft Heinz/Ryder - Lathrop",
+        "type": "Distribution Service",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "medium",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "truckGateCount",
+          "buildingCount",
+          "siteAreaAcres"
+        ],
+        "center": {
+          "lat": 37.8091942,
+          "lng": -121.2851431
+        },
+        "geofences": {
+          "perimeter": {
+            "south": 37.8066942,
+            "north": 37.8116942,
+            "west": -121.2876431,
+            "east": -121.2826431
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": null,
+          "trailersVisible": null,
+          "trailerParkingCapacity": null,
+          "truckGateCount": null,
+          "buildingCount": null,
+          "siteAreaAcres": null,
+          "railServed": null
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 2,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": true,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "mapsUrl": "https://www.google.com/maps/place/Ryder%2F+KRAFT/@37.8091942,-121.2851431,1083m/data=!3m1!1e3!4m6!3m5!1s0x8090157f8cdc83a5:0x41147353c268eb43!8m2!3d37.8096478!4d-121.2817099!16s%2Fg%2F11g_x43fzq?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
       }
     ]
   }
