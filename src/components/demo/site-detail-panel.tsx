@@ -83,7 +83,7 @@ export function SiteDetailPanel({ site, onClose, autoPlay = false }: Props) {
       <div className="relative h-72 w-full shrink-0 overflow-hidden border-b border-[#00B4FF]/[0.16]">
         <SiteDetailMap site={site} />
         {/* Legend overlay */}
-        <div className="pointer-events-none absolute bottom-2 left-2 max-w-[180px] rounded-md border border-[#00B4FF]/[0.16] bg-[#0a0c10]/90 px-3 py-2 text-[11px] backdrop-blur">
+        <div className="pointer-events-none absolute bottom-2 left-2 z-[1000] max-w-[180px] rounded-md border border-[#00B4FF]/[0.16] bg-[#0a0c10]/90 px-3 py-2 text-[11px] backdrop-blur">
           <div className="mb-1 font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-white/55">Geofence layers</div>
           <ul className="space-y-1">
             {legend.map(({ color, label, count }) => (
