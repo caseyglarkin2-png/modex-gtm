@@ -2,7 +2,7 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import type { Metadata } from 'next';
 import { DemoPackSchema, type DemoPack } from '@/lib/demo/pack-schema';
-import { INDUSTRY_ANCHORS, type IndustryAnchor } from '@/lib/demo/industry-tags';
+import { INDUSTRY_ANCHORS, type IndustryAnchor, type Archetype } from '@/lib/demo/industry-tags';
 import { Gallery, type GalleryTileData } from '@/components/demo/gallery';
 import { MicrositeTracker } from '@/components/microsites/microsite-tracker';
 import { buildPublicShareMetadata } from '@/lib/microsites/share';
@@ -184,9 +184,31 @@ export async function generateMetadata(): Promise<Metadata> {
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
-export default async function DemoGalleryPage() {
+const VALID_ARCHETYPES: ReadonlyArray<Archetype> = ['cpg', 'logistics', 'manufacturing', 'retail', '3pl'];
+
+function readArchetypeFilter(value: string | string[] | undefined): Archetype | null {
+  if (!value) return null;
+  const v = (Array.isArray(value) ? value[0] : value).toLowerCase().trim();
+  return (VALID_ARCHETYPES as readonly string[]).includes(v) ? (v as Archetype) : null;
+}
+
+export default async function DemoGalleryPage({
+  searchParams,
+}: {
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  /* G5 — Server-side archetype filter. Reads ?archetype=<id>, narrows
+   * INDUSTRY_ANCHORS before loadTile fan-out so we don't waste pack
+   * reads on filtered-out anchors. Filter passes through to the client
+   * Gallery via the `activeArchetype` prop for chip-state rendering. */
+  const params = searchParams ? await searchParams : {};
+  const activeArchetype = readArchetypeFilter(params.archetype);
+  const visibleAnchors = activeArchetype
+    ? INDUSTRY_ANCHORS.filter((a) => a.archetype === activeArchetype)
+    : INDUSTRY_ANCHORS;
+
   const tiles = (
-    await Promise.all(INDUSTRY_ANCHORS.map((anchor) => loadTile(anchor)))
+    await Promise.all(visibleAnchors.map((anchor) => loadTile(anchor)))
   ).filter((t): t is GalleryTileData => t !== null);
 
   return (
@@ -203,7 +225,7 @@ export default async function DemoGalleryPage() {
         path="/demo"
         variantSlug="gallery-pageview"
       />
-      <Gallery tiles={tiles} />
+      <Gallery tiles={tiles} activeArchetype={activeArchetype} totalTiles={INDUSTRY_ANCHORS.length} />
     </>
   );
 }

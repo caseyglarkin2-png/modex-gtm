@@ -4,6 +4,7 @@ import path from 'node:path';
 import type { Metadata } from 'next';
 import { DemoPackSchema, type DemoPack } from '@/lib/demo/pack-schema';
 import { DemoSurface } from '@/components/demo/demo-surface';
+import IndustryFlickBar from '@/components/demo/industry-flick-bar';
 import { MicrositeTracker } from '@/components/microsites/microsite-tracker';
 import { getAccountMicrositeData } from '@/lib/microsites/accounts';
 import { buildPublicShareMetadata } from '@/lib/microsites/share';
@@ -119,6 +120,9 @@ export default async function DemoAccountPage({
         initialView={initialView}
         fromGallery={fromGallery}
       />
+      {/* G7 — Industry flick bar. Self-suppresses if the slug isn't
+          one of the 11 gallery anchors. */}
+      <IndustryFlickBar currentSlug={account} />
     </>
   );
 }

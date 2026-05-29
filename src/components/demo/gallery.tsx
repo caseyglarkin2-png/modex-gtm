@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import type { IndustryAnchor } from '@/lib/demo/industry-tags';
+import type { Archetype, IndustryAnchor } from '@/lib/demo/industry-tags';
+import { ARCHETYPE_LABELS_TOP } from '@/lib/demo/industry-tags';
 
 /**
  * Sprint 2.5 — Industry-template gallery surface.
@@ -79,6 +80,10 @@ export interface GalleryTileData {
 
 interface GalleryProps {
   tiles: GalleryTileData[];
+  /** Active archetype filter from ?archetype=<id> URL param. Null = "All". (G5) */
+  activeArchetype?: Archetype | null;
+  /** Total tile count across all archetypes (for "showing N of M" caption). (G5) */
+  totalTiles?: number;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -115,7 +120,7 @@ function useDemoSuffix(): string {
   return suffix;
 }
 
-export function Gallery({ tiles }: GalleryProps) {
+export function Gallery({ tiles, activeArchetype = null, totalTiles }: GalleryProps) {
   const demoSuffix = useDemoSuffix();
   return (
     <div
@@ -158,26 +163,38 @@ export function Gallery({ tiles }: GalleryProps) {
       {demoSuffix.length > 0 ? <DemoPill /> : null}
 
       <div className="relative z-[1] flex flex-1 flex-col">
-        <Hero count={tiles.length} demoSuffix={demoSuffix} />
+        <Hero count={totalTiles ?? tiles.length} demoSuffix={demoSuffix} />
         <main
           className="mx-auto w-full max-w-[1280px] flex-1 px-6 pb-24 max-[480px]:px-[18px]"
           data-ms-section-id="gallery-grid"
         >
-          <div
-            className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3"
-            role="list"
-            aria-label="Industry templates"
-          >
-            {tiles.map((tile, i) => (
-              <Tile
-                key={tile.anchor.id}
-                tile={tile}
-                index={i + 1}
-                total={tiles.length}
-                demoSuffix={demoSuffix}
-              />
-            ))}
-          </div>
+          {/* G5 — Archetype filter rail. WAI-ARIA toolbar with roving
+              focus. Each chip is a Link that preserves &demo=1. */}
+          <ArchetypeFilterRail
+            active={activeArchetype}
+            demoSuffix={demoSuffix}
+            visibleCount={tiles.length}
+            totalCount={totalTiles ?? tiles.length}
+          />
+          {tiles.length > 0 ? (
+            <div
+              className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3"
+              role="list"
+              aria-label="Industry templates"
+            >
+              {tiles.map((tile, i) => (
+                <Tile
+                  key={tile.anchor.id}
+                  tile={tile}
+                  index={i + 1}
+                  total={tiles.length}
+                  demoSuffix={demoSuffix}
+                />
+              ))}
+            </div>
+          ) : (
+            <EmptyFilterState demoSuffix={demoSuffix} />
+          )}
         </main>
         <Footer />
       </div>
@@ -541,6 +558,142 @@ function DemoPill() {
         <span>Reset Demo</span>
       </button>
     </>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ArchetypeFilterRail — G5.
+   WAI-ARIA toolbar with roving tabindex. Renders 6 chips:
+   All / CPG / Logistics / Manufacturing / Retail / 3PL.
+   Each chip is a Link that preserves &demo=1 + &source= +
+   &pack= via passthrough on the active URL.
+   Active chip uses neon-filled state, inactive uses neon-outlined.
+   ═══════════════════════════════════════════════════════════════ */
+
+const FILTER_ORDER: ReadonlyArray<Archetype> = ['cpg', 'logistics', 'manufacturing', 'retail', '3pl'];
+
+function ArchetypeFilterRail({
+  active,
+  demoSuffix,
+  visibleCount,
+  totalCount,
+}: {
+  active: Archetype | null;
+  demoSuffix: string;
+  visibleCount: number;
+  totalCount: number;
+}) {
+  const [otherParams, setOtherParams] = useState<string>('');
+
+  // Read source / pack / industry from URL once after mount so chip
+  // links preserve attribution. demoSuffix is already factored in.
+  useEffect(() => {
+    try {
+      const url = new URLSearchParams(window.location.search);
+      const passthrough: string[] = [];
+      for (const k of ['source', 'pack', 'industry']) {
+        const v = url.get(k);
+        if (v) passthrough.push(`${k}=${encodeURIComponent(v)}`);
+      }
+      setOtherParams(passthrough.length ? '&' + passthrough.join('&') : '');
+    } catch {
+      // swallow
+    }
+  }, []);
+
+  // demoSuffix starts with '&' when active; ensure URL builder reads
+  // it as a query-string continuation only after the archetype param.
+  const demoForUrl = demoSuffix; // already '&demo=1' or '';
+  const buildHref = (id: Archetype | null) => {
+    if (id === null) {
+      // "All" chip: strip archetype but keep demo + passthrough.
+      const stripped = demoForUrl.replace(/^&/, '?') + otherParams;
+      return `/demo${stripped.length > 0 ? stripped : ''}`;
+    }
+    return `/demo?archetype=${encodeURIComponent(id)}${demoForUrl}${otherParams}`;
+  };
+
+  function onClickAnalytics(id: Archetype | null) {
+    try {
+      window.dispatchEvent(
+        new CustomEvent('yf:event', {
+          detail: {
+            name: 'gallery_filter_change',
+            props: { archetype: id ?? 'all' },
+          },
+        }),
+      );
+    } catch {
+      // swallow
+    }
+  }
+
+  const allChips: Array<{ id: Archetype | null; label: string }> = [
+    { id: null, label: 'All' },
+    ...FILTER_ORDER.map((id) => ({ id, label: ARCHETYPE_LABELS_TOP[id] })),
+  ];
+
+  return (
+    <div className="mb-6 flex flex-col gap-3" data-ms-section-id="gallery-filter">
+      <div
+        role="toolbar"
+        aria-label="Filter templates by archetype"
+        aria-orientation="horizontal"
+        className="-mx-1 flex snap-x snap-mandatory overflow-x-auto px-1 py-1"
+      >
+        {allChips.map((chip) => {
+          const isActive = chip.id === active;
+          return (
+            <Link
+              key={chip.id ?? 'all'}
+              href={buildHref(chip.id)}
+              data-ms-cta-id={`gallery-filter-${chip.id ?? 'all'}`}
+              prefetch={false}
+              tabIndex={isActive ? 0 : -1}
+              aria-current={isActive ? 'true' : undefined}
+              onClick={() => onClickAnalytics(chip.id)}
+              className={`shrink-0 snap-start rounded-full border px-3.5 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors max-[480px]:text-[10.5px] mr-2 last:mr-0 ${
+                isActive
+                  ? 'border-[#00B4FF]/55 bg-[#00B4FF]/[0.18] text-white shadow-[0_0_22px_rgba(0,180,255,0.18)]'
+                  : 'border-white/15 bg-transparent text-white/65 hover:border-[#00B4FF]/40 hover:text-white'
+              }`}
+            >
+              {chip.label}
+            </Link>
+          );
+        })}
+      </div>
+      {/* Tile count caption — updates per filter. */}
+      <div className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-white/45">
+        showing {visibleCount} of {totalCount} templates
+      </div>
+    </div>
+  );
+}
+
+function EmptyFilterState({ demoSuffix }: { demoSuffix: string }) {
+  return (
+    <div
+      role="status"
+      className="mx-auto flex max-w-[640px] flex-col items-center gap-3 rounded-[18px] border border-[#00B4FF]/[0.16] py-12 text-center"
+      style={{ background: 'linear-gradient(180deg, rgba(17, 19, 24, 0.92), rgba(10, 12, 16, 0.92))' }}
+    >
+      <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/45">
+        Nothing yet for that archetype
+      </p>
+      <p className="max-w-[420px] text-[14px] leading-[1.55] text-white/[0.72]">
+        We have not modeled a representative template in this archetype yet. Browse all 11 templates instead.
+      </p>
+      <Link
+        href={`/demo${demoSuffix.replace(/^&/, '?')}`}
+        prefetch={false}
+        className="mt-2 inline-flex items-center gap-1.5 rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.10] px-4 py-2 text-[13px] font-bold text-white transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22]"
+        style={{ boxShadow: '0 0 0 1px rgba(0, 180, 255, 0.16) inset, 0 6px 18px rgba(0, 0, 0, 0.35)' }}
+      >
+        View all templates
+        <ArrowRight className="" />
+      </Link>
+    </div>
   );
 }
 
