@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import type { IndustryAnchor } from '@/lib/demo/industry-tags';
 
@@ -75,7 +76,36 @@ interface GalleryProps {
    over void, plus a dual-axis grid masked to a radial center.
    ═══════════════════════════════════════════════════════════════ */
 
+/**
+ * Read `?demo=1` from the current URL. When a sales rep bookmarks
+ * `yardflow.ai/demo?demo=1` (or `&demo=1` on a deep link), we want the
+ * demo-mode flag to follow them through every CTA on this surface
+ * — Run [Industry] ROI, View Template, hero "Run a Sample ROI" — so
+ * trackers stay silenced for the entire demo session instead of just
+ * the landing.
+ *
+ * Read via window.location (deferred to after mount) instead of
+ * useSearchParams() so the gallery does not require a Suspense
+ * boundary in the page tree. Returns the suffix to append
+ * (`&demo=1` or `''`). Inert for plain prospect traffic.
+ */
+function useDemoSuffix(): string {
+  const [suffix, setSuffix] = useState('');
+  useEffect(() => {
+    try {
+      const v = new URLSearchParams(window.location.search).get('demo');
+      if (!v) return;
+      const t = v.trim().toLowerCase();
+      if (['1', 'true', 'yes'].includes(t)) setSuffix('&demo=1');
+    } catch {
+      // location/search unavailable — leave suffix empty.
+    }
+  }, []);
+  return suffix;
+}
+
 export function Gallery({ tiles }: GalleryProps) {
+  const demoSuffix = useDemoSuffix();
   return (
     <div
       className="relative flex min-h-screen flex-col bg-[#050505] text-white"
@@ -114,7 +144,7 @@ export function Gallery({ tiles }: GalleryProps) {
       />
 
       <div className="relative z-[1] flex flex-1 flex-col">
-        <Hero count={tiles.length} />
+        <Hero count={tiles.length} demoSuffix={demoSuffix} />
         <main
           className="mx-auto w-full max-w-[1280px] flex-1 px-6 pb-24 max-[480px]:px-[18px]"
           data-ms-section-id="gallery-grid"
@@ -130,6 +160,7 @@ export function Gallery({ tiles }: GalleryProps) {
                 tile={tile}
                 index={i + 1}
                 total={tiles.length}
+                demoSuffix={demoSuffix}
               />
             ))}
           </div>
@@ -146,7 +177,7 @@ export function Gallery({ tiles }: GalleryProps) {
    with neon span, single supporting line, one CTA.
    ═══════════════════════════════════════════════════════════════ */
 
-function Hero({ count }: { count: number }) {
+function Hero({ count, demoSuffix }: { count: number; demoSuffix: string }) {
   return (
     <header
       className="border-b border-[#00B4FF]/[0.10] backdrop-blur-[2px]"
@@ -182,7 +213,7 @@ function Hero({ count }: { count: number }) {
         {/* Single CTA. The per-tile CTAs do the heavy lifting. */}
         <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-3">
           <a
-            href={`${MICROSITE_BASE}/roi?source=demo-gallery`}
+            href={`${MICROSITE_BASE}/roi?source=demo-gallery${demoSuffix}`}
             target="_blank"
             rel="noopener noreferrer"
             data-ms-cta-id="gallery-hero-run-roi"
@@ -214,15 +245,17 @@ function Tile({
   tile,
   index,
   total,
+  demoSuffix,
 }: {
   tile: GalleryTileData;
   index: number;
   total: number;
+  demoSuffix: string;
 }) {
   const { anchor, brand, facilityCount, facilityCountIsGlobal, dockDoors, trailerCapacity, railServed, roiPrefill } = tile;
 
-  const roiHref = `${MICROSITE_BASE}/roi?source=demo-gallery&industry=${encodeURIComponent(anchor.id)}&pack=${encodeURIComponent(anchor.slug)}`;
-  const templateHref = `/demo/${anchor.slug}?from=gallery`;
+  const roiHref = `${MICROSITE_BASE}/roi?source=demo-gallery&industry=${encodeURIComponent(anchor.id)}&pack=${encodeURIComponent(anchor.slug)}${demoSuffix}`;
+  const templateHref = `/demo/${anchor.slug}?from=gallery${demoSuffix}`;
   const counter = `${String(index).padStart(2, '0')}/${String(total).padStart(2, '0')}`;
 
   function handleRoiClick() {
