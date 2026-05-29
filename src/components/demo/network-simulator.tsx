@@ -103,19 +103,19 @@ function Kpi({
   tone?: 'neutral' | 'warn' | 'critical' | 'good';
 }) {
   const toneColor: Record<typeof tone, string> = {
-    neutral: 'text-stone-900',
+    neutral: 'text-white',
     good: 'text-emerald-700',
     warn: 'text-amber-700',
     critical: 'text-red-700',
   };
   return (
     <div className="min-w-0 px-3 py-2.5">
-      <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-widest text-stone-500">
+      <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-[0.18em] text-white/55">
         <span aria-hidden>{icon}</span>
         <span className="truncate">{label}</span>
       </div>
       <div className={`mt-0.5 text-base font-semibold tabular-nums ${toneColor[tone]}`}>{value}</div>
-      {sub && <div className="text-[10px] uppercase tracking-widest text-stone-400">{sub}</div>}
+      {sub && <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-white/40">{sub}</div>}
     </div>
   );
 }
@@ -178,13 +178,13 @@ export function NetworkSimulator({ pack }: Props) {
         : `${pack.account.siteCount}`;
 
   return (
-    <div className="flex h-full w-full flex-col bg-stone-50">
+    <div className="flex h-full w-full flex-col bg-[#0a0c10]">
       {/* Status header — "Operational / Warning / Critical" pill bar */}
-      <div className="shrink-0 border-b border-stone-200 bg-white px-4 py-3 sm:px-6">
+      <div className="shrink-0 border-b border-[#00B4FF]/[0.16] bg-transparent px-4 py-3 sm:px-6">
         <div className="flex flex-wrap items-baseline justify-between gap-3">
           <div>
-            <div className="text-[10px] uppercase tracking-widest text-stone-500">Network state</div>
-            <div className="mt-0.5 text-sm font-semibold text-stone-900">
+            <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-white/55">Network state</div>
+            <div className="mt-0.5 text-sm font-semibold text-white">
               {pack.account.displayName} · {networkScopeBlurb}
             </div>
           </div>
@@ -192,17 +192,17 @@ export function NetworkSimulator({ pack }: Props) {
             <span className="flex items-center gap-1.5">
               <span className="inline-block h-2 w-2 rounded-full" style={{ background: RISK_COLORS.ok }} />
               <span className="tabular-nums">{countsByRisk.ok}</span>
-              <span className="uppercase tracking-widest text-stone-500">Operational</span>
+              <span className="font-mono uppercase tracking-[0.18em] text-white/55">Operational</span>
             </span>
             <span className="flex items-center gap-1.5">
               <span className="inline-block h-2 w-2 rounded-full" style={{ background: RISK_COLORS.tight }} />
               <span className="tabular-nums">{countsByRisk.tight + countsByRisk.overloaded}</span>
-              <span className="uppercase tracking-widest text-stone-500">Warning</span>
+              <span className="font-mono uppercase tracking-[0.18em] text-white/55">Warning</span>
             </span>
             <span className="flex items-center gap-1.5">
               <span className="inline-block h-2 w-2 rounded-full" style={{ background: RISK_COLORS.critical }} />
               <span className="tabular-nums">{countsByRisk.critical}</span>
-              <span className="uppercase tracking-widest text-stone-500">Critical</span>
+              <span className="font-mono uppercase tracking-[0.18em] text-white/55">Critical</span>
             </span>
           </div>
         </div>
@@ -212,7 +212,7 @@ export function NetworkSimulator({ pack }: Props) {
           ONLY approved value model is at yardflow.ai/roi, which the CTA
           below routes to. Every number on this strip is a count or sum
           straight off the audit JSON. */}
-      <div className="grid shrink-0 grid-cols-2 divide-x divide-y divide-stone-200 border-b border-stone-200 bg-white sm:grid-cols-3 lg:grid-cols-6">
+      <div className="grid shrink-0 grid-cols-2 divide-x divide-y divide-[#00B4FF]/[0.16] border-b border-[#00B4FF]/[0.16] bg-transparent sm:grid-cols-3 lg:grid-cols-6">
         <Kpi
           icon="🏭"
           label={cov?.auditedScope ? `Facilities (${cov.auditedScope}/total)` : 'Facilities audited'}
@@ -230,13 +230,13 @@ export function NetworkSimulator({ pack }: Props) {
           and yardflow.ai/YNS (the sales deck hub). The demo itself never
           surfaces modeled dollar/time metrics — every operational number
           a prospect should care about lives at /roi. */}
-      <div className="shrink-0 border-b border-stone-200 bg-gradient-to-r from-stone-900 to-stone-800 px-4 py-3 text-white sm:px-6">
+      <div className="shrink-0 border-b border-[#00B4FF]/[0.16] bg-[#101218] px-4 py-3 text-white sm:px-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="min-w-0">
-            <div className="text-[10px] uppercase tracking-widest text-stone-400">Model the dollar value of this network</div>
+            <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-white/55">Model the dollar value of this network</div>
             <div className="mt-0.5 text-sm">
               <span className="font-semibold text-white">Approved ROI model</span>
-              <span className="text-stone-400"> · 11.5× legacy YMS · $87.4M model across 50 sites</span>
+              <span className="text-white/55"> · 11.5× legacy YMS · $87.4M model across 50 sites</span>
             </div>
           </div>
           <div className="flex shrink-0 flex-wrap gap-2 text-xs">
@@ -244,7 +244,8 @@ export function NetworkSimulator({ pack }: Props) {
               href={`https://yardflow.ai/contact/?intent=audit&utm_source=demo&utm_medium=demo-sim&utm_campaign=${pack.account.slug}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-md bg-emerald-500 px-3 py-1.5 font-semibold text-stone-900 shadow-sm transition hover:bg-emerald-400"
+              className="inline-flex min-h-[36px] items-center gap-1.5 rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.12] px-3 py-1.5 text-xs font-bold text-white transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22] hover:shadow-[0_0_22px_rgba(0,180,255,0.32)]"
+              style={{ boxShadow: '0 0 0 1px rgba(0, 180, 255, 0.18) inset, 0 6px 18px rgba(0, 0, 0, 0.35)' }}
               data-ms-cta-id="demo-sim-book-audit"
             >
               Book a 30-min audit →
@@ -253,7 +254,7 @@ export function NetworkSimulator({ pack }: Props) {
               pack={pack}
               ctaId="demo-sim-to-roi"
               utmMedium="demo-sim"
-              className="rounded-md bg-white px-3 py-1.5 font-medium text-stone-900 transition hover:bg-stone-200"
+              className="inline-flex min-h-[36px] items-center gap-1.5 rounded-[10px] border border-[#00B4FF]/[0.20] bg-transparent px-3 py-1.5 text-xs font-medium text-white transition-all hover:border-[#00B4FF]/55 hover:bg-[#00B4FF]/[0.08]"
             >
               ROI Calculator →
             </RoiCtaButton>
@@ -261,7 +262,7 @@ export function NetworkSimulator({ pack }: Props) {
               href={`https://yardflow.ai/YNS/?utm_source=demo&utm_medium=demo-sim&utm_campaign=${pack.account.slug}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-md border border-stone-600 px-3 py-1.5 text-stone-200 transition hover:border-stone-400 hover:text-white"
+              className="rounded-md border border-[#00B4FF]/[0.20] px-3 py-1.5 text-white/85 transition hover:border-[#00B4FF]/55 hover:text-white"
               data-ms-cta-id="demo-sim-to-yns"
             >
               Sales deck →
@@ -294,32 +295,32 @@ export function NetworkSimulator({ pack }: Props) {
         </MapBoundary>
         {/* Floating active-scenario banner */}
         {activePreset && (
-          <div className="pointer-events-none absolute left-3 top-3 max-w-[360px] rounded-md bg-white/95 px-3 py-2 text-[11px] shadow-md backdrop-blur">
-            <div className="text-[9px] font-semibold uppercase tracking-widest text-stone-500">Simulating</div>
-            <div className="mt-0.5 text-xs font-medium text-stone-900">{activePreset.label}</div>
-            <div className="mt-1 text-[11px] leading-snug text-stone-600">{activePreset.caption}</div>
+          <div className="pointer-events-none absolute left-3 top-3 max-w-[360px] rounded-md border border-[#00B4FF]/[0.16] bg-[#101218]/95 px-3 py-2 text-[11px] shadow-md backdrop-blur">
+            <div className="text-[9px] font-mono font-semibold uppercase tracking-[0.18em] text-white/55">Simulating</div>
+            <div className="mt-0.5 text-xs font-medium text-white">{activePreset.label}</div>
+            <div className="mt-1 text-[11px] leading-snug text-white/70">{activePreset.caption}</div>
           </div>
         )}
         {/* Floating YNS toggle */}
-        <div className="absolute right-3 top-3 flex overflow-hidden rounded-md border border-stone-300 bg-white/95 text-[11px] shadow-md backdrop-blur">
+        <div className="absolute right-3 top-3 flex overflow-hidden rounded-md border border-[#00B4FF]/[0.20] bg-[#101218]/95 text-[11px] shadow-md backdrop-blur">
           <button
             type="button"
             onClick={toggleYns}
-            className={`px-3 py-1.5 transition ${!config.ynsMode ? 'bg-stone-900 text-white' : 'text-stone-700 hover:bg-stone-100'}`}
+            className={`px-3 py-1.5 transition ${!config.ynsMode ? 'bg-[#00B4FF]/[0.22] text-white' : 'text-white/85 hover:bg-[#00B4FF]/[0.08]'}`}
           >
             Without YNS
           </button>
           <button
             type="button"
             onClick={toggleYns}
-            className={`px-3 py-1.5 transition ${config.ynsMode ? 'bg-stone-900 text-white' : 'text-stone-700 hover:bg-stone-100'}`}
+            className={`px-3 py-1.5 transition ${config.ynsMode ? 'bg-[#00B4FF]/[0.22] text-white' : 'text-white/85 hover:bg-[#00B4FF]/[0.08]'}`}
           >
             With YNS
           </button>
         </div>
         {/* Floating utilization readout */}
-        <div className="pointer-events-none absolute bottom-3 left-3 rounded-md bg-white/95 px-3 py-2 text-[11px] tabular-nums shadow-md backdrop-blur">
-          <div className="text-[9px] font-semibold uppercase tracking-widest text-stone-500">Network utilization</div>
+        <div className="pointer-events-none absolute bottom-3 left-3 rounded-md border border-[#00B4FF]/[0.16] bg-[#101218]/95 px-3 py-2 text-[11px] tabular-nums shadow-md backdrop-blur">
+          <div className="text-[9px] font-mono font-semibold uppercase tracking-[0.18em] text-white/55">Network utilization</div>
           <div
             className="mt-0.5 text-base font-semibold"
             style={{
@@ -333,7 +334,7 @@ export function NetworkSimulator({ pack }: Props) {
           >
             {formatPct(state.totals.utilization)}
           </div>
-          <div className="mt-0.5 text-[10px] text-stone-500">
+          <div className="mt-0.5 text-[10px] text-white/55">
             {formatMoves(Math.round(state.totals.demand))} demand · {formatMoves(Math.round(state.totals.effectiveCapacity))} capacity
           </div>
         </div>
@@ -341,22 +342,22 @@ export function NetworkSimulator({ pack }: Props) {
 
       {/* Selected-site detail row */}
       {selectedSiteState && (
-        <div className="shrink-0 border-t border-stone-200 bg-stone-50 px-4 py-2.5 text-xs sm:px-6">
+        <div className="shrink-0 border-t border-[#00B4FF]/[0.16] bg-[#0a0c10] px-4 py-2.5 text-xs sm:px-6">
           <div className="flex items-baseline justify-between gap-3">
             <div className="min-w-0">
-              <span className="font-medium text-stone-900">{selectedSiteState.name}</span>{' '}
-              <span className="text-[10px] uppercase tracking-widest text-stone-500">{selectedSiteState.archetype}</span>
+              <span className="font-medium text-white">{selectedSiteState.name}</span>{' '}
+              <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-white/55">{selectedSiteState.archetype}</span>
               {selectedSiteState.weatherAffected && <span className="ml-2 text-[10px] font-medium text-amber-700">⚠ weather-affected</span>}
             </div>
             <button
               type="button"
               onClick={() => setSelectedSiteId(null)}
-              className="shrink-0 text-[10px] uppercase tracking-widest text-stone-400 transition hover:text-stone-700"
+              className="shrink-0 text-[10px] font-mono uppercase tracking-[0.18em] text-white/40 transition hover:text-white/85"
             >
               clear
             </button>
           </div>
-          <div className="mt-1 tabular-nums text-stone-600">
+          <div className="mt-1 tabular-nums text-white/70">
             {Math.round(selectedSiteState.demand)} demand · {Math.round(selectedSiteState.effectiveCapacity)} capacity ·{' '}
             <span className="font-medium" style={{ color: RISK_COLORS[selectedSiteState.riskLevel as RiskLevel] }}>
               {RISK_LABELS[selectedSiteState.riskLevel as RiskLevel]} ({formatPct(selectedSiteState.utilization)})
@@ -366,9 +367,9 @@ export function NetworkSimulator({ pack }: Props) {
       )}
 
       {/* Simulations row — preset chips + slider */}
-      <div className="shrink-0 border-t border-stone-200 bg-white px-4 py-3 sm:px-6">
+      <div className="shrink-0 border-t border-[#00B4FF]/[0.16] bg-transparent px-4 py-3 sm:px-6">
         <div className="mb-2 flex flex-wrap items-baseline justify-between gap-3 text-[11px]">
-          <span className="font-semibold uppercase tracking-widest text-stone-500">Simulations</span>
+          <span className="font-mono font-semibold uppercase tracking-[0.18em] text-white/55">Simulations</span>
           {config.weather.type !== 'none' && (
             <span className="rounded bg-amber-100 px-2 py-0.5 text-[10px] font-medium text-amber-800">{weatherChipLabel(config.weather)}</span>
           )}
@@ -381,8 +382,8 @@ export function NetworkSimulator({ pack }: Props) {
               onClick={() => applyPreset(p)}
               className={`rounded-full border px-3 py-1 text-[11px] transition ${
                 activePresetId === p.id
-                  ? 'border-stone-900 bg-stone-900 text-white'
-                  : 'border-stone-300 bg-white text-stone-700 hover:border-stone-500'
+                  ? 'border-[#00B4FF]/55 bg-[#00B4FF]/[0.22] text-white'
+                  : 'border-[#00B4FF]/[0.20] bg-transparent text-white/85 hover:border-[#00B4FF]/55 hover:bg-[#00B4FF]/[0.08]'
               }`}
               title={p.caption}
             >
@@ -395,8 +396,8 @@ export function NetworkSimulator({ pack }: Props) {
             Clamped to ±10% — anything larger is theatrical for a daily-ops
             sim. Use the preset chips for named events; this slider is for
             poking the model in the realistic range. */}
-        <details className="mt-3 text-[11px] text-stone-600">
-          <summary className="cursor-pointer select-none text-stone-500 transition hover:text-stone-900">
+        <details className="mt-3 text-[11px] text-white/70">
+          <summary className="cursor-pointer select-none text-white/55 transition hover:text-white">
             Fine-tune demand factor ({formatPct(config.demandFactor)} of baseline)
           </summary>
           <div className="mt-2 px-1">
@@ -407,10 +408,10 @@ export function NetworkSimulator({ pack }: Props) {
               step={1}
               value={Math.round(config.demandFactor * 100)}
               onChange={(e) => setDemandFactor(Number(e.target.value) / 100)}
-              className="w-full accent-stone-900"
+              className="w-full accent-[#00B4FF]"
               aria-label="Network inbound demand as a percentage of baseline (±10%)"
             />
-            <div className="mt-1 flex justify-between text-[10px] uppercase tracking-widest text-stone-400">
+            <div className="mt-1 flex justify-between text-[10px] font-mono uppercase tracking-[0.18em] text-white/40">
               <span>−10%</span>
               <span>baseline</span>
               <span>+10%</span>
@@ -420,11 +421,11 @@ export function NetworkSimulator({ pack }: Props) {
       </div>
 
       {/* Disclaimer */}
-      <div className="shrink-0 border-t border-stone-200 bg-stone-50 px-4 py-2.5 text-[11px] leading-relaxed text-stone-500 sm:px-6">
+      <div className="shrink-0 border-t border-[#00B4FF]/[0.16] bg-[#0a0c10] px-4 py-2.5 text-[11px] leading-relaxed text-white/55 sm:px-6">
         Per-site capacity is modeled from public yard geometry — dock doors × shifts × per-archetype turns/door, with
         archetype-specific YNS uplift when toggled on. Weather events are geographic capacity reductions on affected
-        regions. <strong className="font-semibold text-stone-700">All dollar and operational metrics live at{' '}
-        <a href="https://yardflow.ai/roi/" target="_blank" rel="noopener noreferrer" className="underline hover:text-stone-900">
+        regions. <strong className="font-semibold text-white/85">All dollar and operational metrics live at{' '}
+        <a href="https://yardflow.ai/roi/" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">
           yardflow.ai/roi
         </a>{' '}— the approved YardFlow ROI model.</strong>
       </div>

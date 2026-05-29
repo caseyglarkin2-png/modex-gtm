@@ -45,7 +45,7 @@ export function DemoEmbed({ accountSlug }: Props) {
 
   if (error) {
     return (
-      <div className="rounded-lg border border-stone-200 bg-stone-50 px-5 py-4 text-xs text-stone-600">
+      <div className="rounded-lg border border-[#00B4FF]/[0.16] bg-[#0a0c10] px-5 py-4 text-xs text-white/70">
         Live network atlas is being generated. The static map below reflects the same composition.
       </div>
     );
@@ -53,7 +53,7 @@ export function DemoEmbed({ accountSlug }: Props) {
 
   if (!pack) {
     return (
-      <div className="flex h-[600px] items-center justify-center rounded-lg border border-stone-200 bg-stone-50 text-xs uppercase tracking-widest text-stone-400">
+      <div className="flex h-[600px] items-center justify-center rounded-lg border border-[#00B4FF]/[0.16] bg-[#0a0c10] font-mono text-xs uppercase tracking-[0.18em] text-white/40">
         Loading your network…
       </div>
     );

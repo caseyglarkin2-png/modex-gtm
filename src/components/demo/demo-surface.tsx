@@ -103,7 +103,10 @@ export function DemoSurface({
         : `${siteCount} facilities audited`;
 
   return (
-    <div className={mode === 'standalone' ? 'flex min-h-screen flex-col' : 'flex h-[600px] flex-col rounded-lg border border-stone-200 bg-white shadow-sm'}>
+    <div
+      className={mode === 'standalone' ? 'flex min-h-screen flex-col bg-[#050505] text-white' : 'flex h-[600px] flex-col rounded-lg border border-[#00B4FF]/[0.16] shadow-[0_24px_64px_rgba(0,0,0,0.40)]'}
+      style={mode === 'embed' ? { background: 'linear-gradient(180deg, rgba(17, 19, 24, 0.92), rgba(10, 12, 16, 0.92))' } : undefined}
+    >
       {/*
        * Sprint 2.5 — template framing strip. Only shows when the prospect
        * arrived from the /demo industry gallery. Sets the expectation that
@@ -112,15 +115,15 @@ export function DemoSurface({
        */}
       {mode === 'standalone' && fromGallery && (
         <div
-          className="shrink-0 border-b border-amber-200 bg-amber-50 px-5 py-2 text-center text-xs text-amber-900"
+          className="shrink-0 border-b border-[#00B4FF]/[0.20] bg-[#00B4FF]/[0.08] px-5 py-2 text-center text-xs text-[#00B4FF]"
           role="note"
           data-ms-section-id="gallery-template-strip"
         >
-          <strong>Industry template.</strong> Sample demo for {galleryIndustryLabel} operators. Your demo will reflect your actual facilities.{' '}
+          <strong className="text-white">Industry template.</strong> Sample demo for {galleryIndustryLabel} operators. Your demo will reflect your actual facilities.{' '}
           <Link
             href="/demo"
             data-ms-cta-id="gallery-back-to-gallery"
-            className="underline-offset-2 hover:underline"
+            className="text-white underline underline-offset-2 hover:text-[#00B4FF]"
           >
             ← Back to gallery
           </Link>
@@ -128,39 +131,33 @@ export function DemoSurface({
       )}
       {/* Header — only in standalone mode */}
       {mode === 'standalone' && (
-        <header className="shrink-0 border-b border-stone-200 bg-white">
+        <header className="shrink-0 border-b border-[#00B4FF]/[0.10] backdrop-blur-[2px]">
           <div className="mx-auto flex max-w-5xl items-end justify-between gap-6 px-5 py-4">
             <div>
-              <div className="text-[10px] uppercase tracking-widest text-stone-500">
+              <div className="font-mono text-[10px] uppercase tracking-[0.20em] text-[#00B4FF]/85">
                 {fromGallery ? `YardFlow · ${galleryIndustryLabel} template` : 'YardFlow · YNS network audit'}
               </div>
-              <h1 className="mt-1 text-xl font-semibold text-stone-900">
+              <h1 className="mt-1 text-xl font-semibold tracking-[-0.01em] text-white">
                 {fromGallery ? galleryHeadline : displayName}
               </h1>
-              <p className="mt-1 text-sm text-stone-600">
+              <p className="mt-1 text-sm text-white/70">
                 <span className="tabular-nums">{scopeBlurb}</span> ·{' '}
                 <span className="tabular-nums">{dockDoors.toLocaleString()}</span> dock doors ·{' '}
                 <span className="tabular-nums">{trailerCapacity.toLocaleString()}</span> trailer spots ·{' '}
                 <span className="tabular-nums">{railServed}</span> rail-served
               </p>
               {fromGallery && (
-                <p className="mt-1 text-[11px] text-stone-500">
+                <p className="mt-1 text-[11px] text-white/55">
                   Modeled from a real <span className="italic">{displayName}</span> network audit.
                 </p>
               )}
             </div>
             <div className="flex shrink-0 items-center gap-4">
-              {/*
-               * Hide the "back to memo" link when the prospect is on a
-               * gallery template — the /for/<slug> memo is account-
-               * specific copy that doesn't make sense for a gallery
-               * visitor who isn't that prospect.
-               */}
               {!fromGallery && (
                 <Link
                   href={`/for/${pack.account.slug}`}
                   data-ms-cta-id="demo-back-to-memo"
-                  className="hidden text-xs uppercase tracking-widest text-stone-500 transition hover:text-stone-900 md:inline"
+                  className="hidden font-mono text-[10px] uppercase tracking-[0.18em] text-white/55 transition-colors hover:text-[#00B4FF] md:inline"
                 >
                   ← Read the full memo
                 </Link>
@@ -170,7 +167,8 @@ export function DemoSurface({
                 target="_blank"
                 rel="noopener noreferrer"
                 data-ms-cta-id={fromGallery ? 'gallery-pack-book-audit' : 'demo-book-audit'}
-                className="rounded-md bg-stone-900 px-3 py-1.5 text-xs font-medium text-white shadow-sm transition hover:bg-stone-700"
+                className="inline-flex min-h-[36px] items-center gap-1.5 rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.12] px-3 py-1.5 text-xs font-bold text-white transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22] hover:shadow-[0_0_22px_rgba(0,180,255,0.32)]"
+                style={{ boxShadow: '0 0 0 1px rgba(0, 180, 255, 0.18) inset, 0 6px 18px rgba(0, 0, 0, 0.35)' }}
               >
                 Book a network audit →
               </a>
@@ -188,10 +186,10 @@ export function DemoSurface({
                 key={tab.id}
                 type="button"
                 onClick={() => setView(tab.id)}
-                className={`border-b-2 px-3 py-2 text-[12px] uppercase tracking-widest transition ${
+                className={`border-b-2 px-3 py-2 font-mono text-[11px] uppercase tracking-[0.18em] transition-colors ${
                   view === tab.id
-                    ? 'border-stone-900 text-stone-900'
-                    : 'border-transparent text-stone-500 hover:text-stone-900'
+                    ? 'border-[#00B4FF] text-[#00B4FF]'
+                    : 'border-transparent text-white/55 hover:text-white'
                 }`}
               >
                 {tab.label}
@@ -213,7 +211,10 @@ export function DemoSurface({
               onSelectSite={setSelectedSiteId}
             />
           </div>
-          <aside className="flex w-full shrink-0 flex-col overflow-hidden border-t border-stone-200 bg-white md:w-[400px] md:border-l md:border-t-0">
+          <aside
+            className="flex w-full shrink-0 flex-col overflow-hidden border-t border-[#00B4FF]/[0.10] md:w-[400px] md:border-l md:border-t-0"
+            style={{ background: 'linear-gradient(180deg, rgba(17, 19, 24, 0.92), rgba(10, 12, 16, 0.92))' }}
+          >
             {selectedSite ? (
               <SiteDetailPanel
                 site={selectedSite}
@@ -239,15 +240,18 @@ export function DemoSurface({
 
       {/* Footer — only in standalone mode */}
       {mode === 'standalone' && (
-        <footer className="shrink-0 border-t border-stone-200 bg-stone-50 px-5 py-4">
-          <div className="mx-auto flex max-w-5xl flex-col items-start justify-between gap-2 text-xs text-stone-600 md:flex-row md:items-center">
+        <footer
+          className="shrink-0 border-t border-[#00B4FF]/[0.10] px-5 py-4"
+          style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 1rem)' }}
+        >
+          <div className="mx-auto flex max-w-5xl flex-col items-start justify-between gap-2 text-xs text-white/55 md:flex-row md:items-center">
             <span>
               Sourced from public satellite + Street View imagery. Geofences modeled by YardFlow.{' '}
-              <Link href={`/for/${pack.account.slug}`} className="underline-offset-2 hover:underline">
+              <Link href={`/for/${pack.account.slug}`} className="text-white underline underline-offset-2 hover:text-[#00B4FF]">
                 See the full network memo →
               </Link>
             </span>
-            <span className="text-[10px] uppercase tracking-widest text-stone-400">YardFlow YNS · {pack.builtAt.slice(0, 10)}</span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/35">YardFlow YNS · {pack.builtAt.slice(0, 10)}</span>
           </div>
         </footer>
       )}

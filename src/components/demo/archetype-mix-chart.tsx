@@ -58,8 +58,8 @@ export function ArchetypeMixChart({ pack, archetypeFilter, onToggleArchetype }: 
   return (
     <div className="px-5 py-4">
       <div className="mb-3 flex items-baseline justify-between">
-        <h3 className="text-sm font-semibold text-stone-900">Archetype mix</h3>
-        <span className="text-[10px] uppercase tracking-widest text-stone-500">{pack.account.siteCount} sites</span>
+        <h3 className="text-sm font-semibold text-white">Archetype mix</h3>
+        <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/55">{pack.account.siteCount} sites</span>
       </div>
 
       <div className="flex gap-4">
@@ -72,7 +72,7 @@ export function ArchetypeMixChart({ pack, archetypeFilter, onToggleArchetype }: 
                 d={d}
                 fill={ARCHETYPE_COLORS[archetype]}
                 opacity={active ? 1 : 0.25}
-                stroke="white"
+                stroke="#050505"
                 strokeWidth={1}
                 className="cursor-pointer transition-opacity"
                 onClick={() => onToggleArchetype(archetype)}
@@ -83,10 +83,10 @@ export function ArchetypeMixChart({ pack, archetypeFilter, onToggleArchetype }: 
               </path>
             );
           })}
-          <text x="100" y="96" textAnchor="middle" className="fill-stone-900 text-[18px] font-semibold tabular-nums">
+          <text x="100" y="96" textAnchor="middle" className="fill-white text-[18px] font-semibold tabular-nums">
             {pack.account.siteCount}
           </text>
-          <text x="100" y="112" textAnchor="middle" className="fill-stone-500 text-[8px] uppercase tracking-widest">
+          <text x="100" y="112" textAnchor="middle" className="fill-[#8A8A8A] text-[8px] uppercase tracking-widest">
             facilities
           </text>
         </svg>
@@ -99,15 +99,15 @@ export function ArchetypeMixChart({ pack, archetypeFilter, onToggleArchetype }: 
                 <button
                   type="button"
                   onClick={() => onToggleArchetype(archetype)}
-                  className={`flex w-full items-center gap-2 rounded px-1 py-0.5 text-left transition ${
+                  className={`flex w-full items-center gap-2 rounded px-1 py-0.5 text-left transition-colors ${
                     active ? 'opacity-100' : 'opacity-40'
-                  } hover:bg-stone-100`}
+                  } hover:bg-[#00B4FF]/[0.08]`}
                 >
                   <span className="inline-block h-2.5 w-2.5 shrink-0 rounded-sm" style={{ backgroundColor: ARCHETYPE_COLORS[archetype] }} />
-                  <span className="truncate text-stone-800">
+                  <span className="truncate text-white/85">
                     {archetype} · {ARCHETYPE_LABELS[archetype]}
                   </span>
-                  <span className="ml-auto shrink-0 tabular-nums text-stone-500">
+                  <span className="ml-auto shrink-0 tabular-nums text-white/55">
                     {count} · {pct.toFixed(0)}%
                   </span>
                 </button>

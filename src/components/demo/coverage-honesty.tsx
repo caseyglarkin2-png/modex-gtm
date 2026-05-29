@@ -30,9 +30,9 @@ export function CoverageHonesty({ pack }: { pack: DemoPack }) {
   if (!note.capHit && note.droppedStubCount === 0 && !hasNaGap && !hasGlobalGap) return null;
 
   return (
-    <div className="border-b border-amber-200 bg-amber-50/60 px-5 py-2.5 text-xs text-amber-900">
+    <div className="border-b border-[#FF2A00]/[0.20] bg-[#FF2A00]/[0.06] px-5 py-2.5 text-xs text-white/85">
       <div className="mx-auto max-w-5xl">
-        <span className="mr-1.5 text-[10px] font-semibold uppercase tracking-widest text-amber-700">Coverage note ·</span>
+        <span className="mr-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.20em] text-[#FF2A00]">Coverage note ·</span>
         {note.note}
       </div>
     </div>

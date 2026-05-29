@@ -109,7 +109,7 @@ export default function NetworkSimulatorInner({ state, bbox, selectedSiteId, onS
       scrollWheelZoom
     >
       <TileLayer
-        url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+        url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}"
         attribution="Tiles &copy; Esri"
         maxZoom={19}
       />
@@ -137,16 +137,18 @@ export default function NetworkSimulatorInner({ state, bbox, selectedSiteId, onS
               }}
             >
               <Popup>
-                <div className="text-xs font-medium">{s.name}</div>
-                <div className="text-[11px] text-stone-600">
-                  {RISK_LABELS[s.riskLevel]} · utilization {Math.round(s.utilization * 100)}%
+                <div className="bg-[#101218] text-white -m-[14px] -mb-[15px] rounded-[4px] px-3 py-2">
+                  <div className="text-xs font-medium text-white">{s.name}</div>
+                  <div className="text-[11px] text-white/70">
+                    {RISK_LABELS[s.riskLevel]} · utilization {Math.round(s.utilization * 100)}%
+                  </div>
+                  <div className="mt-1 text-[11px] text-white/55 tabular-nums">
+                    {Math.round(s.demand)} demand / {Math.round(s.effectiveCapacity)} capacity moves·day
+                  </div>
+                  {s.weatherAffected && (
+                    <div className="mt-1 text-[11px] font-medium text-amber-400">⚠ Weather-affected region</div>
+                  )}
                 </div>
-                <div className="mt-1 text-[11px] text-stone-500 tabular-nums">
-                  {Math.round(s.demand)} demand / {Math.round(s.effectiveCapacity)} capacity moves·day
-                </div>
-                {s.weatherAffected && (
-                  <div className="mt-1 text-[11px] font-medium text-amber-700">⚠ Weather-affected region</div>
-                )}
               </Popup>
             </CircleMarker>
           </Fragment>
