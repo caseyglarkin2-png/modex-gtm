@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import type { Archetype, IndustryAnchor } from '@/lib/demo/industry-tags';
-import { ARCHETYPE_LABELS_TOP } from '@/lib/demo/industry-tags';
+import { ARCHETYPE_LABELS_TOP, INDUSTRY_ANCHORS } from '@/lib/demo/industry-tags';
 
 /**
  * Sprint 2.5 — Industry-template gallery surface.
@@ -86,6 +86,23 @@ export interface GalleryTileData {
   thumbAlt?: string;
 }
 
+/** Lightweight account summary for the "All audited accounts" directory
+ *  below the curated industry tiles. Shape mirrors AccountSummary from
+ *  app/demo/page.tsx — kept duplicated here to avoid coupling a client
+ *  component to a server-component module. If the shape drifts, update
+ *  both. */
+export interface AccountSummary {
+  slug: string;
+  displayName: string;
+  archetype: string;
+  siteCount: number;
+  totalGlobalFootprint: number | null;
+  dockDoors: number;
+  trailerCapacity: number;
+  railServed: number;
+  hasThumb: boolean;
+}
+
 interface GalleryProps {
   tiles: GalleryTileData[];
   /** Active archetype filter from ?archetype=<id> URL param. Null = "All". (G5) */
@@ -96,6 +113,10 @@ interface GalleryProps {
    *  (filter-chip URLs, credibility badge swap, demo pill) without a
    *  hydration flash. (G5+G6+G9 fix.) */
   initialDemo?: boolean;
+  /** Every audited account in public/demo-packs (loaded dynamically in
+   *  page.tsx). Powers the "All audited accounts" directory below the
+   *  curated 11-tile grid. */
+  allAccounts?: AccountSummary[];
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -132,7 +153,7 @@ function useDemoSuffix(initialDemo: boolean): string {
   return suffix;
 }
 
-export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo = false }: GalleryProps) {
+export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo = false, allAccounts = [] }: GalleryProps) {
   const demoSuffix = useDemoSuffix(initialDemo);
   return (
     <div
@@ -208,6 +229,9 @@ export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo
             <EmptyFilterState demoSuffix={demoSuffix} />
           )}
         </main>
+        {allAccounts.length > 0 ? (
+          <AllAuditedDirectory accounts={allAccounts} demoSuffix={demoSuffix} />
+        ) : null}
         <Footer />
       </div>
     </div>
@@ -781,5 +805,143 @@ function ArrowRight({ className = '' }: { className?: string }) {
       />
       <circle cx="4" cy="12" r="2" fill="currentColor" opacity="0.4" />
     </svg>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   AllAuditedDirectory — the long-tail index of every audited
+   account beyond the curated 11-industry hero shelf above.
+
+   Reads `allAccounts` from the gallery page, which auto-discovers
+   every .json in public/demo-packs. New packs picked up on next
+   deploy with zero code change.
+
+   Per-row UI is intentionally compact: brand name + archetype
+   chip + 3 numbers + optional "Anchor" marker for accounts that
+   also appear in the curated grid above. Click navigates to
+   /demo/<slug>, preserving &demo=1 if active.
+   ═══════════════════════════════════════════════════════════════ */
+
+function humanArchetype(a: string): string {
+  // Pack-level archetype is lowercase-hyphen ("oem-automotive",
+  // "logistics-carrier", etc.). Render with title case + spaces.
+  return a
+    .split('-')
+    .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+    .join(' ');
+}
+
+function AllAuditedDirectory({
+  accounts,
+  demoSuffix,
+}: {
+  accounts: AccountSummary[];
+  demoSuffix: string;
+}) {
+  const anchorSlugs = useMemo(
+    () => new Set(INDUSTRY_ANCHORS.map((a) => a.slug)),
+    [],
+  );
+
+  // Quick-fire analytics on row click. Demo-mode suppression handled
+  // by the global tracker contract — events are still dispatched but
+  // the silent sink absorbs them.
+  function onRowClick(slug: string) {
+    try {
+      window.dispatchEvent(
+        new CustomEvent('yf:event', {
+          detail: {
+            name: 'directory_account_click',
+            props: { account_slug: slug },
+          },
+        }),
+      );
+    } catch {
+      // swallow
+    }
+  }
+
+  return (
+    <section
+      data-ms-section-id="all-audited-directory"
+      className="relative z-[1] mx-auto w-full max-w-[1280px] px-6 pt-4 pb-16 max-[480px]:px-[18px]"
+    >
+      <header className="mb-7 mt-6 border-t border-white/[0.08] pt-10">
+        <div className="mb-2 font-mono text-[10.5px] uppercase tracking-[0.22em] text-[#00B4FF]/85">
+          Full index
+        </div>
+        <h2 className="text-[28px] font-bold tracking-tight text-white max-[480px]:text-[22px]">
+          All <span className="text-[#00B4FF]">{accounts.length}</span> audited accounts.
+        </h2>
+        <p className="mt-2 max-w-[640px] text-[14px] leading-[1.55] text-white/65 max-[480px]:text-[13px]">
+          Every name links to its live microsite. Same audit rubric, same satellite imagery, same modeled geofences as the industry templates above. Alphabetical.
+        </p>
+      </header>
+      <ul
+        role="list"
+        className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+        aria-label={`Directory of ${accounts.length} audited accounts`}
+      >
+        {accounts.map((a) => {
+          const isAnchor = anchorSlugs.has(a.slug);
+          const siteDisplay = a.totalGlobalFootprint ?? a.siteCount;
+          const href = `/demo/${a.slug}${demoSuffix ? '?demo=1' : ''}`;
+          return (
+            <li key={a.slug}>
+              <Link
+                href={href}
+                data-ms-cta-id={`directory-${a.slug}`}
+                prefetch={false}
+                onClick={() => onRowClick(a.slug)}
+                className="group flex h-full flex-col gap-2 rounded-[12px] border border-white/10 bg-white/[0.025] p-[14px] transition-all hover:border-[#00B4FF]/45 hover:bg-white/[0.05] hover:shadow-[0_0_24px_rgba(0,180,255,0.18)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00B4FF]"
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <span className="truncate text-[14.5px] font-semibold text-white transition-colors group-hover:text-[#00B4FF]">
+                    {a.displayName}
+                  </span>
+                  {isAnchor && (
+                    <span
+                      className="shrink-0 rounded-full border border-[#00B4FF]/35 bg-[#00B4FF]/[0.06] px-1.5 py-px font-mono text-[8.5px] uppercase tracking-[0.18em] text-[#00B4FF]/90"
+                      title="Featured in the industry-template shelf above"
+                    >
+                      Anchor
+                    </span>
+                  )}
+                </div>
+                <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/45">
+                  {humanArchetype(a.archetype)}
+                </div>
+                <div className="mt-auto grid grid-cols-3 gap-2 pt-2">
+                  <div>
+                    <div className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-white/40">
+                      Sites
+                    </div>
+                    <div className="font-mono text-[12px] text-white/85">
+                      {siteDisplay.toLocaleString()}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-white/40">
+                      Docks
+                    </div>
+                    <div className="font-mono text-[12px] text-white/85">
+                      {a.dockDoors.toLocaleString()}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-white/40">
+                      Trailers
+                    </div>
+                    <div className="font-mono text-[12px] text-white/85">
+                      {a.trailerCapacity.toLocaleString()}
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
   );
 }

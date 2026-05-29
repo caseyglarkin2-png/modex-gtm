@@ -177,6 +177,72 @@ function thumbAvailable(slug: string): boolean {
   }
 }
 
+/* ── Account directory summary (post-G8 expansion) ──────────────────────────
+ *
+ * The 11 industry anchors above are the curated hero shelf. Beyond them,
+ * every other audited account in public/demo-packs/*.json has a live
+ * microsite at /demo/<slug> already — the gallery just never surfaced
+ * them. This summary feeds an "All audited accounts" directory below
+ * the curated tiles so every audited account becomes browseable.
+ *
+ * Lightweight by design: we never need full pack data for the directory
+ * row (no ROI prefill, no scenario steps, no site-level audit). Load
+ * just enough metadata for a name + 3 numbers + an archetype label.
+ */
+export interface AccountSummary {
+  slug: string;
+  displayName: string;
+  archetype: string;
+  siteCount: number;
+  totalGlobalFootprint: number | null;
+  dockDoors: number;
+  trailerCapacity: number;
+  railServed: number;
+  hasThumb: boolean;
+}
+
+async function loadAccountSummary(slug: string): Promise<AccountSummary | null> {
+  try {
+    const file = path.join(process.cwd(), 'public', 'demo-packs', `${slug}.json`);
+    const raw = await fs.readFile(file, 'utf8');
+    const result = DemoPackSchema.safeParse(JSON.parse(raw));
+    if (!result.success) return null;
+    const pack = result.data;
+    const cov = pack.account.coverageNote;
+    return {
+      slug: pack.account.slug,
+      displayName: pack.account.displayName,
+      archetype: pack.account.archetype,
+      siteCount: pack.account.siteCount,
+      totalGlobalFootprint: cov?.totalGlobalFootprint ?? cov?.estimatedFootprint ?? null,
+      dockDoors: pack.network.totals.dockDoors,
+      trailerCapacity: pack.network.totals.trailerCapacity,
+      railServed: pack.network.totals.railServed,
+      hasThumb: thumbAvailable(pack.account.slug),
+    };
+  } catch {
+    return null;
+  }
+}
+
+async function loadAllAccountSummaries(): Promise<AccountSummary[]> {
+  // Auto-discover: scan demo-packs dynamically so any new pack
+  // committed to public/demo-packs/<slug>.json picks up automatically
+  // on next deploy. No hardcoded list to forget to update.
+  const packDir = path.join(process.cwd(), 'public', 'demo-packs');
+  let entries: string[] = [];
+  try {
+    entries = await fs.readdir(packDir);
+  } catch {
+    return [];
+  }
+  const slugs = entries.filter((f) => f.endsWith('.json')).map((f) => f.replace(/\.json$/, ''));
+  const summaries = await Promise.all(slugs.map(loadAccountSummary));
+  return summaries
+    .filter((s): s is AccountSummary => s !== null)
+    .sort((a, b) => a.displayName.localeCompare(b.displayName));
+}
+
 async function loadTile(anchor: IndustryAnchor): Promise<GalleryTileData | null> {
   const pack = await loadPack(anchor.slug);
   if (!pack) return null;
@@ -266,9 +332,15 @@ export default async function DemoGalleryPage({
     ? orderedAnchors.filter((a) => a.archetype === activeArchetype)
     : orderedAnchors;
 
-  const tiles = (
-    await Promise.all(visibleAnchors.map((anchor) => loadTile(anchor)))
-  ).filter((t): t is GalleryTileData => t !== null);
+  /* Load curated tiles (11 industry anchors) and full account directory
+   * (every audited pack) in parallel. The directory feeds the "All
+   * audited accounts" section that lives below the curated grid. */
+  const [tiles, allAccounts] = await Promise.all([
+    Promise.all(visibleAnchors.map((anchor) => loadTile(anchor))).then((arr) =>
+      arr.filter((t): t is GalleryTileData => t !== null),
+    ),
+    loadAllAccountSummaries(),
+  ]);
 
   return (
     <>
@@ -289,6 +361,7 @@ export default async function DemoGalleryPage({
         activeArchetype={activeArchetype}
         totalTiles={INDUSTRY_ANCHORS.length}
         initialDemo={initialDemo}
+        allAccounts={allAccounts}
       />
     </>
   );
