@@ -21,7 +21,10 @@
       "Warren OH is 560 acres of advanced manufacturing. The walk from gate to dock is longer than most networks' entire site.",
       "DuPont WA DC runs 130 dock doors. K-C ships consumer staples at scale.",
       "Inbound pulp and outbound finished paper both move on the same yard. Two flows, one queue."
-    ]
+    ],
+    "roiDefaults": {
+      "averageMarginPerShipment": 1100
+    }
   },
   "research": {
     "facility_count": 18,

@@ -1,3 +1,4 @@
+import './print.css';
 import { notFound } from 'next/navigation';
 import { promises as fs, existsSync } from 'node:fs';
 import path from 'node:path';
@@ -5,6 +6,9 @@ import type { Metadata } from 'next';
 import { DemoPackSchema, type DemoPack } from '@/lib/demo/pack-schema';
 import { DemoSurface } from '@/components/demo/demo-surface';
 import IndustryFlickBar from '@/components/demo/industry-flick-bar';
+import { MicrositeViewEvent } from '@/components/demo/microsite-view-event';
+import { RelatedIndustries } from '@/components/demo/related-industries';
+import { getIndustryFromSlug } from '@/lib/demo/industry-tags';
 import { MicrositeTracker } from '@/components/microsites/microsite-tracker';
 import { getAccountMicrositeData } from '@/lib/microsites/accounts';
 import { buildPublicShareMetadata } from '@/lib/microsites/share';
@@ -38,6 +42,8 @@ interface SearchParams {
    * Triggers anonymized template framing in DemoSurface.
    */
   from?: string;
+  /** Demo-mode flag, preserved through cross-microsite links. */
+  demo?: string;
 }
 
 async function loadPack(slug: string): Promise<DemoPack | null> {
@@ -53,6 +59,13 @@ async function loadPack(slug: string): Promise<DemoPack | null> {
   }
 }
 
+/** First sentence of a blob, for social descriptions (I.T1). */
+function firstSentence(s?: string): string | null {
+  if (!s) return null;
+  const m = s.match(/^[\s\S]*?[.!?](\s|$)/);
+  return (m ? m[0] : s).trim();
+}
+
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { account } = await params;
   const pack = await loadPack(account);
@@ -60,7 +73,13 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
   const { displayName, siteCount } = pack.account;
   const title = `${displayName} · yard network · YardFlow`;
-  const description = `${siteCount} ${displayName} facilities, mapped from public satellite imagery. Real geofences, real archetype mix — see your yard the way YardFlow sees it.`;
+  // I.T1 — lead the social description with the dossier intro's first
+  // sentence when present (richer than the generic line); fall back
+  // otherwise.
+  const lead = firstSentence(pack.account.dossierIntro);
+  const description = lead
+    ? `${lead} ${siteCount} facilities audited from public satellite imagery.`
+    : `${siteCount} ${displayName} facilities, mapped from public satellite imagery. Real geofences, real archetype mix — see your yard the way YardFlow sees it.`;
 
   // Canonical / OG URLs route to yardflow.ai/demo/<slug>, not modex-gtm,
   // so prospects who share a link land on the canonical domain and
@@ -69,7 +88,10 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     title,
     description,
     pathname: `/demo/${account}`,
-    imagePath: `/for/${account}/opengraph-image`,
+    // E.T6 — use the microsite's own neon/satellite OG card rather than
+    // borrowing the /for memo card, so shared /demo links preview with
+    // the audited-network treatment.
+    imagePath: `/demo/${account}/opengraph-image`,
     imageAlt: `${displayName} yard network — YardFlow YNS analysis`,
   });
 }
@@ -113,14 +135,34 @@ export default async function DemoAccountPage({
     ? `/gallery-thumbs/${account}.png`
     : undefined;
 
+  // I.T5 — JSON-LD Dataset schema for the audited network.
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Dataset',
+    name: `${pack.account.displayName} yard network audit`,
+    description:
+      firstSentence(pack.account.dossierIntro) ??
+      `${pack.account.siteCount} ${pack.account.displayName} facilities modeled from public satellite imagery.`,
+    creator: { '@type': 'Organization', name: 'YardFlow by FreightRoll' },
+    datePublished: pack.builtAt,
+    spatialCoverage: 'United States',
+    isAccessibleForFree: true,
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        // Server-rendered static object; safe to inline.
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <MicrositeTracker
         accountName={accountName}
         accountSlug={account}
         path={`/demo/${account}`}
         variantSlug={fromGallery ? 'gallery-pack-view' : undefined}
       />
+      <MicrositeViewEvent anchorSlug={account} archetype={getIndustryFromSlug(account)?.archetype ?? null} />
       <DemoSurface
         pack={pack}
         mode="standalone"
@@ -129,6 +171,13 @@ export default async function DemoAccountPage({
         initialView={initialView}
         fromGallery={fromGallery}
         featuredSiteThumbSrc={featuredSiteThumbSrc}
+      />
+      {/* L.T2 — related-industries rail (server component). */}
+      <RelatedIndustries
+        currentSlug={account}
+        currentArchetype={pack.account.archetype}
+        currentDockDoors={pack.network.totals.dockDoors}
+        demoSuffix={sp.demo && ['1', 'true', 'yes'].includes(String(sp.demo).toLowerCase()) ? '&demo=1' : ''}
       />
       {/* G7 — Industry flick bar. Self-suppresses if the slug isn't
           one of the 11 gallery anchors. */}

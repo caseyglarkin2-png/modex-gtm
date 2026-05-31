@@ -21,7 +21,10 @@
       "60 dock doors but only 1 truck gate at Columbus. The choke point isn't the building, it's the gate.",
       "5 of 30 audited sites use rail. The other 25 burn dray on every inbound shipment.",
       "Charlotte (Snyder) ties Columbus at 60 docks each. Beverage runs on rebottling cycle, not pure throughput."
-    ]
+    ],
+    "roiDefaults": {
+      "averageMarginPerShipment": 850
+    }
   },
   "research": {
     "facility_count": 70,

@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { DemoPackSchema, type DemoPack } from '@/lib/demo/pack-schema';
 import { INDUSTRY_ANCHORS, type IndustryAnchor, type Archetype } from '@/lib/demo/industry-tags';
 import { applyPinOrder, readPinnedSlugs } from '@/lib/demo/gallery-pin';
+import { readAuditsThisQuarter } from '@/lib/demo/gallery-flags';
 import { Gallery, type GalleryTileData } from '@/components/demo/gallery';
 import { MicrositeTracker } from '@/components/microsites/microsite-tracker';
 import { buildPublicShareMetadata } from '@/lib/microsites/share';
@@ -102,7 +103,9 @@ function buildRoiV2State(pack: DemoPack): RoiV2State {
       totalFacilities: total,
       facilitiesWithYms,
       facilitiesWithDropTrailers,
-      averageMarginPerShipment: 1000,
+      // D.T5 — seed from the per-industry margin default, falling back to
+      // the generic 1000 when a pack has no roiDefaults authored.
+      averageMarginPerShipment: pack.account.roiDefaults?.averageMarginPerShipment ?? 1000,
     },
     assumptions: {
       withYms: {
@@ -194,10 +197,16 @@ export interface AccountSummary {
   displayName: string;
   archetype: string;
   siteCount: number;
+  /** C.T1 — number of audited sites (pack.network.sites.length). Summed
+   *  across all accounts for the hero "facilities audited" subhead. */
+  auditedSites: number;
   totalGlobalFootprint: number | null;
   dockDoors: number;
   trailerCapacity: number;
   railServed: number;
+  /** F.T5 — surveyed acreage (network.totals.acres), summed for the hero
+   *  "acres surveyed" subtotal. */
+  acres: number;
   hasThumb: boolean;
 }
 
@@ -214,10 +223,12 @@ async function loadAccountSummary(slug: string): Promise<AccountSummary | null> 
       displayName: pack.account.displayName,
       archetype: pack.account.archetype,
       siteCount: pack.account.siteCount,
+      auditedSites: pack.network.sites.length,
       totalGlobalFootprint: cov?.totalGlobalFootprint ?? cov?.estimatedFootprint ?? null,
       dockDoors: pack.network.totals.dockDoors,
       trailerCapacity: pack.network.totals.trailerCapacity,
       railServed: pack.network.totals.railServed,
+      acres: pack.network.totals.acres,
       hasThumb: thumbAvailable(pack.account.slug),
     };
   } catch {
@@ -271,6 +282,8 @@ async function loadTile(anchor: IndustryAnchor): Promise<GalleryTileData | null>
     roiPrefill: buildRoiV2State(pack),
     thumbSrc,
     thumbAlt,
+    surprisingFindings: pack.account.surprisingFindings ?? [],
+    builtAt: pack.builtAt,
   };
 }
 
@@ -327,6 +340,7 @@ export default async function DemoGalleryPage({
    * Fully optional + graceful: returns the unchanged order when not
    * configured. */
   const pinnedSlugs = await readPinnedSlugs();
+  const pinnedCohort = pinnedSlugs !== null && pinnedSlugs.length > 0; // J.T3
   const orderedAnchors = applyPinOrder(INDUSTRY_ANCHORS, pinnedSlugs);
   const visibleAnchors = activeArchetype
     ? orderedAnchors.filter((a) => a.archetype === activeArchetype)
@@ -341,6 +355,17 @@ export default async function DemoGalleryPage({
     ),
     loadAllAccountSummaries(),
   ]);
+
+  /* C.T1 / F.T5 — network-wide subtotals across every audited account,
+   * computed from allAccounts (already loaded) so they are
+   * filter-independent: narrowing by archetype never changes them. */
+  const facilitiesAudited = allAccounts.reduce((sum, a) => sum + a.auditedSites, 0);
+  const totalDockDoors = allAccounts.reduce((sum, a) => sum + a.dockDoors, 0);
+  const totalAcres = allAccounts.reduce((sum, a) => sum + a.acres, 0);
+
+  /* F.T8 — optional "audits this quarter" counter from Edge Config.
+   * Null (and the hero line is omitted) when unset or unreachable. */
+  const auditsThisQuarter = await readAuditsThisQuarter();
 
   return (
     <>
@@ -362,6 +387,11 @@ export default async function DemoGalleryPage({
         totalTiles={INDUSTRY_ANCHORS.length}
         initialDemo={initialDemo}
         allAccounts={allAccounts}
+        facilitiesAudited={facilitiesAudited}
+        totalDockDoors={totalDockDoors}
+        totalAcres={totalAcres}
+        auditsThisQuarter={auditsThisQuarter}
+        pinnedCohort={pinnedCohort}
       />
     </>
   );

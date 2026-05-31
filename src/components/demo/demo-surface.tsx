@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import type { ArchetypeId, DemoPack } from '@/lib/demo/pack-schema';
-import { getIndustryFromSlug } from '@/lib/demo/industry-tags';
+import { getIndustryFromSlug, ARCHETYPE_LABELS_TOP } from '@/lib/demo/industry-tags';
 import { NetworkAtlas } from './network-atlas';
 import { SiteDetailPanel } from './site-detail-panel';
 import { ArchetypeMixChart } from './archetype-mix-chart';
@@ -11,6 +11,9 @@ import { CoverageHonesty } from './coverage-honesty';
 import { NetworkSimulator } from './network-simulator';
 import { DossierIntro } from './dossier-intro';
 import { SurprisingFindings } from './surprising-findings';
+import { AnchorTeardownVideo } from './anchor-teardown-video';
+import { RoiCtaButton } from './roi-cta-button';
+import { ShareMicrosite } from './share-microsite';
 
 /**
  * Top-level client surface for /demo/[account]. Manages cross-component
@@ -100,6 +103,52 @@ export function DemoSurface({
   const galleryIndustryLabel = galleryIndustry?.label ?? pack.account.archetype;
   const galleryHeadline = `Sample ${galleryIndustryLabel} Template`;
 
+  // E.T4 — persistent breadcrumb. Resolve the anchor (for the 11 gallery
+  // industries) so the middle crumb links to that archetype's filtered
+  // gallery. Non-anchor packs show "All industries · {brand}" only.
+  const anchor = getIndustryFromSlug(pack.account.slug);
+  const anchorArchetype = anchor?.archetype ?? null;
+  const archetypeTopLabel = anchorArchetype ? ARCHETYPE_LABELS_TOP[anchorArchetype] : null;
+
+  // F.T3 — audit-confidence stamp. Plurality vote across site confidence
+  // (ties favor the higher rating) so the stamp reflects the network's
+  // dominant audit quality. (Note: the plan's literal "any low -> Low"
+  // would render almost every multi-site pack Low and defeat the trust
+  // signal, so we use the dominant rating instead.) Field resolution is
+  // the average count of non-null Classification fields across sites,
+  // out of the fixed 22-field rubric.
+  const confidenceStamp = (() => {
+    const sites = pack.network.sites;
+    if (sites.length === 0) return null;
+    const counts = { high: 0, medium: 0, low: 0 };
+    let resolvedTotal = 0;
+    for (const s of sites) {
+      const c = String(s.confidence).toLowerCase();
+      if (c === 'high' || c === 'medium' || c === 'low') counts[c] += 1;
+      resolvedTotal += Object.values(s.classification).filter(
+        (v) => v !== null && v !== undefined,
+      ).length;
+    }
+    const level =
+      counts.high >= counts.medium && counts.high >= counts.low
+        ? 'High'
+        : counts.medium >= counts.low
+          ? 'Medium'
+          : 'Low';
+    const avgResolved = Math.round(resolvedTotal / sites.length);
+    return { level, avgResolved };
+  })();
+
+  // H.T5 — per-anchor booking link. When a HubSpot Scheduling slug is
+  // configured, the CTA opens the meetings embed with the anchor name as
+  // a prefilled prospect_site field (the rep sees it on the booking
+  // notification). Falls back to the contact form until Casey sets the
+  // slug (out-of-band item) via NEXT_PUBLIC_HUBSPOT_MEETINGS_SLUG.
+  const meetingsSlug = process.env.NEXT_PUBLIC_HUBSPOT_MEETINGS_SLUG;
+  const bookAuditHref = meetingsSlug
+    ? `https://meetings.hubspot.com/${meetingsSlug}?prospect_site=${encodeURIComponent(displayName)}`
+    : `https://yardflow.ai/contact/?intent=audit&utm_source=demo&utm_medium=${fromGallery ? 'gallery-header' : 'demo-header'}&utm_campaign=${pack.account.slug}`;
+
   // Scope blurb for the header — be honest when our audit covers a
   // subset of the prospect's full network. For Mondelez we audit 22 NA
   // sites; the global footprint is ~160. Saying just "22 facilities"
@@ -115,7 +164,7 @@ export function DemoSurface({
 
   return (
     <div
-      className={mode === 'standalone' ? 'flex min-h-screen flex-col bg-[#050505] text-white' : 'flex h-[600px] flex-col rounded-lg border border-[#00B4FF]/[0.16] shadow-[0_24px_64px_rgba(0,0,0,0.40)]'}
+      className={mode === 'standalone' ? 'flex min-h-screen flex-col bg-[#050505] pb-24 text-white md:pb-0' : 'flex h-[600px] flex-col rounded-lg border border-[#00B4FF]/[0.16] shadow-[0_24px_64px_rgba(0,0,0,0.40)]'}
       style={mode === 'embed' ? { background: 'linear-gradient(180deg, rgba(17, 19, 24, 0.92), rgba(10, 12, 16, 0.92))' } : undefined}
     >
       {/*
@@ -145,6 +194,58 @@ export function DemoSurface({
         <header className="shrink-0 border-b border-[#00B4FF]/[0.10] backdrop-blur-[2px]">
           <div className="mx-auto flex max-w-5xl items-end justify-between gap-6 px-5 py-4">
             <div>
+              {/* E.T4 — persistent breadcrumb. Keeps every microsite one
+                  click from the gallery and its archetype, so no microsite
+                  is a dead-end. */}
+              <nav
+                aria-label="Breadcrumb"
+                data-microsite-breadcrumb
+                className="mb-1.5 flex flex-wrap items-center gap-x-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-white/60"
+              >
+                <Link
+                  href="/demo"
+                  data-ms-cta-id="breadcrumb-all-industries"
+                  className="inline-flex items-center gap-1 transition-colors hover:text-[#00B4FF]"
+                >
+                  <span aria-hidden>←</span> All industries
+                </Link>
+                {anchorArchetype && archetypeTopLabel ? (
+                  <>
+                    <span className="text-white/25" aria-hidden>·</span>
+                    <Link
+                      href={`/demo?archetype=${anchorArchetype}`}
+                      data-ms-cta-id="breadcrumb-archetype"
+                      className="transition-colors hover:text-[#00B4FF]"
+                    >
+                      {archetypeTopLabel}
+                    </Link>
+                  </>
+                ) : null}
+                <span className="text-white/25" aria-hidden>·</span>
+                <span className="text-white/70" aria-current="page">{displayName}</span>
+              </nav>
+              {/* F.T3 — audit-confidence stamp. */}
+              {confidenceStamp ? (
+                <div
+                  data-confidence-stamp
+                  title="Confidence is the dominant per-site audit rating across the network. Fields resolved is the average count of the 22-field rubric we could read from imagery per site."
+                  className="mb-1.5 inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-white/55"
+                >
+                  <span
+                    className={
+                      confidenceStamp.level === 'High'
+                        ? 'text-[#00C878]'
+                        : confidenceStamp.level === 'Medium'
+                          ? 'text-[#00B4FF]'
+                          : 'text-[#FF2A00]/80'
+                    }
+                  >
+                    ● Audit confidence: {confidenceStamp.level}
+                  </span>
+                  <span className="text-white/30" aria-hidden>·</span>
+                  <span className="tabular-nums text-white/70">{confidenceStamp.avgResolved}/22</span> fields resolved
+                </div>
+              ) : null}
               <div className="font-mono text-[10px] uppercase tracking-[0.20em] text-[#00B4FF]/85">
                 {fromGallery ? `YardFlow · ${galleryIndustryLabel} template` : 'YardFlow · YNS network audit'}
               </div>
@@ -165,7 +266,7 @@ export function DemoSurface({
                   nominative-fair-use cover. */}
               <p
                 data-attribution-strip
-                className="mt-1 text-[11px] leading-relaxed text-stone-500"
+                className="mt-1 text-[11px] leading-relaxed text-stone-400"
               >
                 Public audit. Not affiliated with{' '}
                 <span className="text-stone-400">{displayName}</span>. Data from
@@ -177,7 +278,9 @@ export function DemoSurface({
                 </p>
               )}
             </div>
-            <div className="flex shrink-0 items-center gap-4">
+            {/* L.T3 + L.T5 — next-action cluster: primary Run ROI, secondary
+                Book audit, plus the outbound Share link. */}
+            <div className="flex shrink-0 flex-wrap items-center justify-end gap-2">
               {!fromGallery && (
                 <Link
                   href={`/for/${pack.account.slug}`}
@@ -187,16 +290,25 @@ export function DemoSurface({
                   ← Read the full memo
                 </Link>
               )}
+              <ShareMicrosite slug={pack.account.slug} brand={displayName} />
               <a
-                href={`https://yardflow.ai/contact/?intent=audit&utm_source=demo&utm_medium=${fromGallery ? 'gallery-header' : 'demo-header'}&utm_campaign=${pack.account.slug}`}
+                href={bookAuditHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-ms-cta-id={fromGallery ? 'gallery-pack-book-audit' : 'demo-book-audit'}
-                className="inline-flex min-h-[36px] items-center gap-1.5 rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.12] px-3 py-1.5 text-xs font-bold text-white transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22] hover:shadow-[0_0_22px_rgba(0,180,255,0.32)]"
-                style={{ boxShadow: '0 0 0 1px rgba(0, 180, 255, 0.18) inset, 0 6px 18px rgba(0, 0, 0, 0.35)' }}
+                className="inline-flex min-h-[36px] items-center gap-1.5 rounded-[10px] border border-white/15 bg-transparent px-3 py-1.5 text-xs font-semibold text-white/85 transition-all hover:border-[#00B4FF]/55 hover:text-white"
               >
                 Book a network audit →
               </a>
+              <RoiCtaButton
+                pack={pack}
+                ctaId="microsite-run-roi"
+                utmMedium={fromGallery ? 'gallery-header' : 'demo-header'}
+                source="microsite"
+                className="inline-flex min-h-[36px] items-center gap-1.5 rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.12] px-3 py-1.5 text-xs font-bold text-white transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22] hover:shadow-[0_0_22px_rgba(0,180,255,0.32)]"
+              >
+                Run ROI →
+              </RoiCtaButton>
             </div>
           </div>
           {/* View tab toggle */}
@@ -223,6 +335,37 @@ export function DemoSurface({
           </div>
           <CoverageHonesty pack={pack} />
         </header>
+      )}
+
+      {/* L.T5 — mobile sticky next-action bar. The header CTAs scroll away
+          on a long microsite; this keeps the primary action one tap away.
+          Mobile only (md:hidden); the flick bar floats above its right
+          edge. Page has pb-24 to clear it. */}
+      {mode === 'standalone' && (
+        <div
+          data-microsite-action-bar
+          className="fixed inset-x-0 bottom-0 z-40 flex items-center gap-2 border-t border-[#00B4FF]/20 bg-[#050505]/95 px-4 py-3 backdrop-blur-md md:hidden"
+          style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 12px)' }}
+        >
+          <a
+            href={bookAuditHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-ms-cta-id="microsite-sticky-book-audit"
+            className="inline-flex min-h-[40px] flex-1 items-center justify-center rounded-[10px] border border-white/15 px-3 text-[13px] font-semibold text-white/85"
+          >
+            Book audit
+          </a>
+          <RoiCtaButton
+            pack={pack}
+            ctaId="microsite-sticky-run-roi"
+            utmMedium="demo-sticky"
+            source="microsite"
+            className="inline-flex min-h-[40px] flex-1 items-center justify-center rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.14] px-3 text-[13px] font-bold text-white"
+          >
+            Run ROI →
+          </RoiCtaButton>
+        </div>
       )}
 
       {/* Satellite zoom hero — the opening visual moment. Replaces the
@@ -314,6 +457,12 @@ export function DemoSurface({
         <>
           <DossierIntro pack={pack} />
           <SurprisingFindings pack={pack} />
+          {/* I.T6 — teardown video (renders only when the pack has a src). */}
+          <AnchorTeardownVideo
+            src={pack.account.teardownVideoSrc}
+            brand={displayName}
+            poster={featuredSiteThumbSrc}
+          />
         </>
       )}
 

@@ -1,9 +1,11 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
+import { getSavedTemplates, toggleSavedTemplate, clearSavedTemplates } from '@/lib/demo/saved-templates';
 import type { Archetype, IndustryAnchor } from '@/lib/demo/industry-tags';
 import { ARCHETYPE_LABELS_TOP, INDUSTRY_ANCHORS } from '@/lib/demo/industry-tags';
+import { ProvenanceLink } from './provenance-modal';
 
 /**
  * Sprint 2.5 — Industry-template gallery surface.
@@ -23,6 +25,27 @@ import { ARCHETYPE_LABELS_TOP, INDUSTRY_ANCHORS } from '@/lib/demo/industry-tags
 
 const ROI_STATE_KEY = 'roi-v2-state';
 const MICROSITE_BASE = process.env.NEXT_PUBLIC_MICROSITE_BASE_URL || 'https://yardflow.ai';
+const AUDIT_REQUEST_ENDPOINT = '/api/microsites/audit-request';
+
+/** H.T3 — module-level dedup so each tile fires its dwell event at most
+ *  once per page session (survives re-renders, resets on reload). */
+const dwellFired = new Set<string>();
+
+const MONTHS_ABBR = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] as const;
+
+/**
+ * F.T4 — format a pack `builtAt` ISO datetime as "Mon YYYY". Parses the
+ * ISO date parts directly (not new Date()) so server and client render
+ * the same string regardless of timezone.
+ */
+function formatAuditMonth(iso?: string): string | null {
+  if (!iso) return null;
+  const m = /^(\d{4})-(\d{2})/.exec(iso);
+  if (!m) return null;
+  const monthIdx = Number(m[2]) - 1;
+  if (monthIdx < 0 || monthIdx > 11) return null;
+  return `${MONTHS_ABBR[monthIdx]} ${m[1]}`;
+}
 
 /* Sprint G9 — Audit-grade disclosure constant. Used twice:
  *   - Gallery hero badge below the H1 (replaces footer-burying the
@@ -84,6 +107,12 @@ export interface GalleryTileData {
   /** G3 — Alt text composer for the satellite thumb. Format:
    *  "Audited facility — {brand} in {city}, {state}". */
   thumbAlt?: string;
+  /** C.T4 — Up to 3 quantified audit findings (Phase B authoring).
+   *  The first is revealed on tile hover over the satellite thumb. */
+  surprisingFindings?: string[];
+  /** F.T4 — ISO datetime the pack was built; renders an "Audited {Mon
+   *  YYYY}" badge on the tile. */
+  builtAt?: string;
 }
 
 /** Lightweight account summary for the "All audited accounts" directory
@@ -96,10 +125,14 @@ export interface AccountSummary {
   displayName: string;
   archetype: string;
   siteCount: number;
+  /** C.T1 — audited site count (pack.network.sites.length). */
+  auditedSites: number;
   totalGlobalFootprint: number | null;
   dockDoors: number;
   trailerCapacity: number;
   railServed: number;
+  /** F.T5 — surveyed acreage. */
+  acres: number;
   hasThumb: boolean;
 }
 
@@ -117,6 +150,18 @@ interface GalleryProps {
    *  page.tsx). Powers the "All audited accounts" directory below the
    *  curated 11-tile grid. */
   allAccounts?: AccountSummary[];
+  /** C.T1 — Total audited facilities across all packs, computed
+   *  server-side. Rendered in the hero subhead. Filter-independent so
+   *  the number never changes when the prospect narrows by archetype. */
+  facilitiesAudited?: number;
+  /** F.T5 — network-wide subtotals for the hero. */
+  totalDockDoors?: number;
+  totalAcres?: number;
+  /** F.T8 — optional Edge Config counter; line omitted when null. */
+  auditsThisQuarter?: number | null;
+  /** J.T3 — true when a campaign pin (gallery_pinned_slugs) is active;
+   *  stamps tile + filter events with pinned_cohort. */
+  pinnedCohort?: boolean;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -153,8 +198,95 @@ function useDemoSuffix(initialDemo: boolean): string {
   return suffix;
 }
 
-export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo = false, allAccounts = [] }: GalleryProps) {
+/**
+ * C.T9 — Subtle background-grid parallax.
+ *
+ * Returns a ref to attach to the fixed grid layer. On scroll, translates
+ * the grid by a small fraction of scrollY (capped at 24px total drift)
+ * so the void reads as having depth without inducing motion sickness.
+ *
+ * Reduced-motion: the listener never attaches, so the grid stays static
+ * and the transform is never set. Throttled via requestAnimationFrame to
+ * stay on the compositor thread (transform only, no layout/paint).
+ */
+function useParallaxGrid() {
+  const ref = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    let prefersReduced = false;
+    try {
+      prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    } catch {
+      // matchMedia unavailable — treat as no-preference.
+    }
+    if (prefersReduced) return;
+
+    const MAX_DRIFT = 24; // px — keep the shift gentle.
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = window.requestAnimationFrame(() => {
+        raf = 0;
+        const drift = Math.min(window.scrollY * 0.03, MAX_DRIFT);
+        el.style.transform = `translate3d(0, ${drift}px, 0)`;
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (raf) window.cancelAnimationFrame(raf);
+    };
+  }, []);
+  return ref;
+}
+
+/**
+ * E.T8 — dependency-free fuzzy match for the "find your industry" search.
+ * Token-AND over brand, industry label, top archetype, and blurb. Covers
+ * "fed" -> FedEx, "beverage" -> Coca-Cola, "snacks" -> Frito-Lay. (City
+ * search would need site-level data threaded into the tile; noted as a
+ * follow-up since the tile payload does not carry cities today.)
+ */
+function tileMatchesQuery(tile: GalleryTileData, q: string): boolean {
+  const tokens = q.split(/\s+/).filter(Boolean);
+  if (tokens.length === 0) return true;
+  const haystack = [
+    tile.brand,
+    tile.anchor.label,
+    tile.anchor.archetype ?? '',
+    tile.anchor.blurb,
+  ]
+    .join(' ')
+    .toLowerCase();
+  return tokens.every((t) => haystack.includes(t));
+}
+
+export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo = false, allAccounts = [], facilitiesAudited = 0, totalDockDoors = 0, totalAcres = 0, auditsThisQuarter = null, pinnedCohort = false }: GalleryProps) {
   const demoSuffix = useDemoSuffix(initialDemo);
+  // E.T8 — client-side search query, filters the (already archetype-
+  // filtered) tiles live.
+  const [query, setQuery] = useState('');
+  const trimmedQuery = query.trim().toLowerCase();
+  const displayedTiles = useMemo(
+    () => (trimmedQuery ? tiles.filter((t) => tileMatchesQuery(t, trimmedQuery)) : tiles),
+    [tiles, trimmedQuery],
+  );
+  // H.T4 — saved-template bookmarks (localStorage, read after mount).
+  const [saved, setSaved] = useState<string[]>([]);
+  useEffect(() => setSaved(getSavedTemplates()), []);
+  const onToggleSave = useCallback((slug: string) => setSaved(toggleSavedTemplate(slug)), []);
+  const onClearSaved = useCallback(() => {
+    clearSavedTemplates();
+    setSaved([]);
+  }, []);
+  const isDemo = demoSuffix.length > 0;
+  const savedSet = useMemo(() => new Set(saved), [saved]);
+  // C.T9 — subtle background-grid parallax. Sets a transform on the
+  // grid layer keyed off scroll, capped at 24px drift, only when the
+  // visitor has no reduced-motion preference. Static otherwise.
+  const gridRef = useParallaxGrid();
   return (
     <div
       className="relative flex min-h-screen flex-col bg-[#050505] text-white"
@@ -179,8 +311,9 @@ export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo
         }}
       />
       <div
+        ref={gridRef}
         aria-hidden
-        className="pointer-events-none fixed inset-0 z-0 hidden md:block"
+        className="pointer-events-none fixed inset-0 z-0 hidden will-change-transform md:block"
         style={{
           backgroundImage: [
             'linear-gradient(rgba(0, 180, 255, 0.06) 1px, transparent 1px)',
@@ -212,38 +345,57 @@ export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo
       {demoSuffix.length > 0 ? <DemoPill /> : null}
 
       <div className="relative z-[1] flex flex-1 flex-col">
-        <Hero count={totalTiles ?? tiles.length} demoSuffix={demoSuffix} />
+        <Hero
+          count={totalTiles ?? tiles.length}
+          facilitiesAudited={facilitiesAudited}
+          totalDockDoors={totalDockDoors}
+          totalAcres={totalAcres}
+          auditsThisQuarter={auditsThisQuarter}
+          demoSuffix={demoSuffix}
+        />
         <main
           className="mx-auto w-full max-w-[1280px] flex-1 px-6 pb-24 max-[480px]:px-[18px]"
           data-ms-section-id="gallery-grid"
         >
           {/* G5 — Archetype filter rail. WAI-ARIA toolbar with roving
               focus. Each chip is a Link that preserves &demo=1. */}
+          {saved.length > 0 ? (
+            <SavedTemplatesBanner saved={saved} tiles={tiles} demoSuffix={demoSuffix} onClear={onClearSaved} />
+          ) : null}
+          <IndustrySearch query={query} onChange={setQuery} resultCount={displayedTiles.length} />
           <ArchetypeFilterRail
             active={activeArchetype}
             demoSuffix={demoSuffix}
-            visibleCount={tiles.length}
+            visibleCount={displayedTiles.length}
             totalCount={totalTiles ?? tiles.length}
+            pinnedCohort={pinnedCohort}
           />
-          {tiles.length > 0 ? (
+          {displayedTiles.length > 0 ? (
             <div
               className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3"
               role="list"
               aria-label="Industry templates"
             >
-              {tiles.map((tile, i) => (
+              {displayedTiles.map((tile, i) => (
                 <Tile
                   key={tile.anchor.id}
                   tile={tile}
                   index={i + 1}
-                  total={tiles.length}
+                  total={displayedTiles.length}
                   demoSuffix={demoSuffix}
+                  filterActive={activeArchetype !== null}
+                  isSaved={savedSet.has(tile.anchor.slug)}
+                  onToggleSave={onToggleSave}
+                  isDemo={isDemo}
+                  pinnedCohort={pinnedCohort}
                 />
               ))}
             </div>
           ) : (
-            <EmptyFilterState demoSuffix={demoSuffix} />
+            <EmptyFilterState demoSuffix={demoSuffix} query={trimmedQuery} onClearQuery={() => setQuery('')} isDemo={isDemo} />
           )}
+          {/* H.T2 — latent-demand capture below the grid. */}
+          <DontSeeYourBrand isDemo={isDemo} />
         </main>
         {allAccounts.length > 0 ? (
           <AllAuditedDirectory accounts={allAccounts} demoSuffix={demoSuffix} />
@@ -260,8 +412,36 @@ export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo
    with neon span, single supporting line, one CTA.
    ═══════════════════════════════════════════════════════════════ */
 
-function Hero({ count, demoSuffix }: { count: number; demoSuffix: string }) {
+function Hero({
+  count,
+  facilitiesAudited,
+  totalDockDoors,
+  totalAcres,
+  auditsThisQuarter,
+  demoSuffix,
+}: {
+  count: number;
+  facilitiesAudited: number;
+  totalDockDoors: number;
+  totalAcres: number;
+  auditsThisQuarter: number | null;
+  demoSuffix: string;
+}) {
   const isDemo = demoSuffix.length > 0;
+
+  // C.T2 — secondary CTA scrolls to the tile grid. Uses the existing
+  // [data-ms-section-id="gallery-grid"] anchor on <main>. Smooth scroll;
+  // browsers honor prefers-reduced-motion for this automatically.
+  function scrollToGrid(e: React.MouseEvent<HTMLAnchorElement>) {
+    e.preventDefault();
+    try {
+      document
+        .querySelector('[data-ms-section-id="gallery-grid"]')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } catch {
+      // querySelector/scrollIntoView unavailable — anchor href fallback.
+    }
+  }
   return (
     <header
       className="border-b border-[#00B4FF]/[0.10] backdrop-blur-[2px]"
@@ -278,6 +458,25 @@ function Hero({ count, demoSuffix }: { count: number; demoSuffix: string }) {
           </span>
           <span>One Network · {count} Industry Archetypes · Live</span>
         </div>
+
+        {/* C.T1 — live audit subhead. Filter-independent numbers, server
+            rendered so there is no hydration shift. Reads as the receipt
+            behind the "See your numbers" promise in the H1 below. */}
+        <p className="mt-3 text-[14px] font-medium tracking-[0.01em] text-white/70 max-[480px]:text-[13px]">
+          <span className="font-bold text-white">{count}</span> industries
+          {' · '}
+          <span className="font-bold text-white">{facilitiesAudited.toLocaleString()}</span> facilities audited
+          {' · '}
+          <span className="text-[#00B4FF]">ROI in 30 seconds</span>
+        </p>
+
+        {/* F.T5 — network-wide audit subtotal. Reinforces the scale of the
+            modeled data behind the templates. */}
+        <p className="mt-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-white/45">
+          <span className="tabular-nums text-white/70">{totalDockDoors.toLocaleString()}</span> dock doors modeled
+          {' · '}
+          <span className="tabular-nums text-white/70">{Math.round(totalAcres).toLocaleString()}</span> acres surveyed
+        </p>
 
         {/* H1 — wins the page. Black weight, tight tracking, neon span. */}
         <h1 className="mt-5 max-w-[920px] font-black leading-[1.04] tracking-[-0.04em] text-[clamp(40px,6vw,72px)] [text-wrap:balance] max-[480px]:mt-4 max-[480px]:text-[clamp(36px,9vw,52px)]">
@@ -316,6 +515,20 @@ function Hero({ count, demoSuffix }: { count: number; demoSuffix: string }) {
           </div>
         )}
 
+        {/* F.T7 — category line + F.T1 provenance trigger + F.T8 counter. */}
+        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+          <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-white/55">
+            Built for the yard. Not a module of your TMS.
+          </span>
+          <ProvenanceLink />
+          {auditsThisQuarter ? (
+            <span className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-white/55">
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#00C878]" />
+              <span className="tabular-nums text-white/80">{auditsThisQuarter}</span> new audits this quarter
+            </span>
+          ) : null}
+        </div>
+
         {/* Body — single line, steel, no fluff. */}
         <p className="mt-5 max-w-[660px] text-[16px] leading-[1.55] text-white/[0.72] max-[480px]:text-[15px]">
           Each template runs the YardFlow protocol against an audited prospect&apos;s
@@ -323,14 +536,16 @@ function Hero({ count, demoSuffix }: { count: number; demoSuffix: string }) {
           modeled geofences, classification rubric.
         </p>
 
-        {/* Single CTA. The per-tile CTAs do the heavy lifting. */}
-        <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-3">
+        {/* C.T2 — two distinct CTAs. Primary (neon-filled) opens the
+            calculator; secondary (neon-outlined) scrolls to the tile grid.
+            Stack vertically on mobile. */}
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3">
           <a
             href={`${MICROSITE_BASE}/roi?source=demo-gallery${demoSuffix}`}
             target="_blank"
             rel="noopener noreferrer"
             data-ms-cta-id="gallery-hero-open-calculator"
-            className="group inline-flex min-h-[52px] items-center gap-2 rounded-[12px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.12] px-5 text-[14px] font-bold tracking-[0.01em] text-white outline-none transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22] hover:shadow-[0_0_28px_rgba(0,180,255,0.35)] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#00B4FF]"
+            className="group inline-flex min-h-[52px] items-center justify-center gap-2 rounded-[12px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.12] px-5 text-[14px] font-bold tracking-[0.01em] text-white outline-none transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22] hover:shadow-[0_0_28px_rgba(0,180,255,0.35)] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#00B4FF]"
             style={{
               boxShadow:
                 '0 0 0 1px rgba(0, 180, 255, 0.18) inset, 0 10px 28px rgba(0, 0, 0, 0.40), 0 0 22px rgba(0, 180, 255, 0.18)',
@@ -339,9 +554,15 @@ function Hero({ count, demoSuffix }: { count: number; demoSuffix: string }) {
             Open the calculator
             <ArrowRight className="transition-transform group-hover:translate-x-[3px]" />
           </a>
-          <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/55">
-            or jump to your industry
-          </span>
+          <a
+            href="#gallery-grid"
+            onClick={scrollToGrid}
+            data-ms-cta-id="gallery-hero-browse-industries"
+            className="group inline-flex min-h-[52px] items-center justify-center gap-2 rounded-[12px] border border-white/20 bg-transparent px-5 text-[14px] font-semibold tracking-[0.01em] text-white/85 outline-none transition-all hover:border-[#00B4FF]/55 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#00B4FF]"
+          >
+            Browse industries below
+            <span className="transition-transform group-hover:translate-y-[2px]" aria-hidden>↓</span>
+          </a>
         </div>
       </div>
     </header>
@@ -359,13 +580,56 @@ function Tile({
   index,
   total,
   demoSuffix,
+  filterActive = false,
+  isSaved = false,
+  onToggleSave,
+  isDemo = false,
+  pinnedCohort = false,
 }: {
   tile: GalleryTileData;
   index: number;
   total: number;
   demoSuffix: string;
+  filterActive?: boolean;
+  isSaved?: boolean;
+  onToggleSave?: (slug: string) => void;
+  isDemo?: boolean;
+  pinnedCohort?: boolean;
 }) {
-  const { anchor, brand, facilityCount, facilityCountIsGlobal, dockDoors, trailerCapacity, railServed, roiPrefill, thumbSrc, thumbAlt } = tile;
+  // H.T3 — debounced tile-dwell event, once per tile per session.
+  const dwellTimerRef = useRef<number | null>(null);
+  const onDwellEnter = () => {
+    if (isDemo || dwellFired.has(tile.anchor.slug)) return;
+    dwellTimerRef.current = window.setTimeout(() => {
+      dwellFired.add(tile.anchor.slug);
+      try {
+        window.dispatchEvent(
+          new CustomEvent('yf:event', {
+            detail: {
+              name: 'gallery_tile_dwell',
+              props: {
+                anchor_slug: tile.anchor.slug,
+                anchor_archetype: tile.anchor.archetype,
+                dwell_ms: 800,
+                ...(pinnedCohort ? { pinned_cohort: true } : {}),
+              },
+            },
+          }),
+        );
+      } catch {
+        // swallow
+      }
+    }, 800);
+  };
+  const onDwellLeave = () => {
+    if (dwellTimerRef.current) {
+      window.clearTimeout(dwellTimerRef.current);
+      dwellTimerRef.current = null;
+    }
+  };
+  const { anchor, brand, facilityCount, facilityCountIsGlobal, dockDoors, trailerCapacity, railServed, roiPrefill, thumbSrc, thumbAlt, surprisingFindings, builtAt } = tile;
+  const firstFinding = surprisingFindings?.[0];
+  const auditedMonth = formatAuditMonth(builtAt);
 
   const roiHref = `${MICROSITE_BASE}/roi?source=demo-gallery&industry=${encodeURIComponent(anchor.id)}&pack=${encodeURIComponent(anchor.slug)}${demoSuffix}`;
   const templateHref = `/demo/${anchor.slug}?from=gallery${demoSuffix}`;
@@ -387,12 +651,20 @@ function Tile({
 
   return (
     <article
-      className="group relative flex flex-col overflow-hidden rounded-[16px] border border-[#00B4FF]/[0.16] p-5 transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-[3px] hover:border-[#00B4FF]/[0.50] hover:shadow-[0_24px_64px_rgba(0,0,0,0.40),0_0_40px_rgba(0,180,255,0.18)]"
+      className={`tile-rise group relative flex flex-col overflow-hidden rounded-[16px] border border-[#00B4FF]/[0.16] p-5 transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-[3px] hover:border-[#00B4FF]/[0.50] hover:shadow-[0_24px_64px_rgba(0,0,0,0.40),0_0_40px_rgba(0,180,255,0.18)]${filterActive ? ' tile-pulse' : ''}`}
       role="listitem"
+      onMouseEnter={onDwellEnter}
+      onMouseLeave={onDwellLeave}
       data-ms-section-id={`gallery-tile-${anchor.id}`}
+      data-archetype={anchor.archetype}
       style={{
         background:
           'linear-gradient(180deg, rgba(17, 19, 24, 0.92), rgba(10, 12, 16, 0.92))',
+        // C.T3 — staggered entrance. The animation itself only exists
+        // inside the prefers-reduced-motion: no-preference media query
+        // (globals.css .tile-rise), so this delay is inert under reduced
+        // motion and tiles render at full opacity immediately.
+        animationDelay: `${index * 60}ms`,
       }}
     >
       {/* G3 — Satellite anchor thumbnail. 16:10 above the brand. Fallback
@@ -400,6 +672,8 @@ function Tile({
           gets priority + decoding=sync per LCP rule (G3.T7). */}
       {thumbSrc ? (
         <div className="-mx-5 -mt-5 mb-4 relative aspect-[16/10] overflow-hidden border-b border-[#00B4FF]/[0.16]">
+          {/* C.T5 — subtle satellite pan on hover. 1.02x over 600ms,
+              centered origin. motion-safe: gates out reduced-motion. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={thumbSrc}
@@ -409,7 +683,7 @@ function Tile({
             loading={isFirstTile ? 'eager' : 'lazy'}
             decoding={isFirstTile ? 'sync' : 'async'}
             fetchPriority={isFirstTile ? 'high' : 'auto'}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover transition-transform duration-[600ms] ease-out motion-safe:group-hover:scale-[1.02]"
           />
           {/* Bottom-gradient overlay for caption legibility. */}
           <div
@@ -422,6 +696,24 @@ function Tile({
           <span className="absolute bottom-2 left-3 font-mono text-[9.5px] font-semibold uppercase tracking-[0.20em] text-white/90">
             Audited facility
           </span>
+          {/* C.T4 — hover-reveal first surprising finding. Gated to
+              hover-capable devices via @media (hover: hover) so touch
+              screens never trigger it. pointer-events-none keeps the
+              tile link fully clickable. */}
+          {firstFinding ? (
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-x-0 bottom-0 flex flex-col justify-end p-3 opacity-0 transition-opacity duration-200 [@media(hover:hover)]:group-hover:opacity-100"
+              style={{
+                minHeight: '66%',
+                background: 'linear-gradient(180deg, transparent, rgba(5, 5, 5, 0.92) 55%)',
+              }}
+            >
+              <span className="line-clamp-3 text-[14px] font-semibold leading-snug text-white">
+                {firstFinding}
+              </span>
+            </div>
+          ) : null}
         </div>
       ) : (
         <div
@@ -442,6 +734,32 @@ function Tile({
         </div>
       )}
 
+      {/* F.T4 — audit-date badge. Provenance signal: when this network was
+          last modeled. */}
+      {auditedMonth ? (
+        <span className="absolute right-3 top-3 z-[2] rounded-full border border-[#00B4FF]/35 bg-[#050505]/80 px-2 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-white/80 backdrop-blur-sm">
+          Audited {auditedMonth}
+        </span>
+      ) : null}
+
+      {/* H.T4 — save-this-template bookmark. */}
+      {onToggleSave ? (
+        <button
+          type="button"
+          onClick={() => onToggleSave(anchor.slug)}
+          aria-pressed={isSaved}
+          aria-label={isSaved ? `Remove ${brand} from saved templates` : `Save ${brand} template`}
+          data-ms-cta-id={`gallery-bookmark-${anchor.id}`}
+          className={`absolute left-3 top-3 z-[2] inline-flex h-7 w-7 items-center justify-center rounded-full border bg-[#050505]/80 text-[13px] backdrop-blur-sm transition-colors ${
+            isSaved
+              ? 'border-[#00B4FF]/70 text-[#00B4FF]'
+              : 'border-white/20 text-white/60 hover:border-[#00B4FF]/60 hover:text-white'
+          }`}
+        >
+          <span aria-hidden>{isSaved ? '★' : '☆'}</span>
+        </button>
+      ) : null}
+
       {/* Top divider — terminal-thin gradient line, just a hairline of neon. */}
       <div
         aria-hidden
@@ -454,7 +772,7 @@ function Tile({
 
       {/* Header row: counter (left) + industry chip with status dot (right). */}
       <div className="flex items-start justify-between gap-3">
-        <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-white/40">
+        <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-white/55">
           {counter}
         </span>
         <span className="inline-flex items-center gap-[6px] font-mono text-[10px] font-semibold uppercase tracking-[0.20em] text-[#00B4FF]/80">
@@ -508,6 +826,9 @@ function Tile({
         </a>
         <Link
           href={templateHref}
+          /* E.T5 — warm only the first 3 microsite routes. Beyond the
+             fold the prefetch cost outweighs the hit rate. */
+          prefetch={index <= 3}
           data-ms-cta-id={`gallery-view-template-${anchor.id}`}
           data-ms-cta-industry={anchor.id}
           data-ms-cta-pack={anchor.slug}
@@ -565,11 +886,17 @@ function Footer() {
           Your demo would reflect <span className="text-white">your</span> facilities,
           your archetype mix, and your network shape.
         </p>
-        <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/35">
+        <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/55">
           <span className="text-[#FF2A00]/70">*</span> audited slice — full
           network footprint quoted where global counts are available.
           {' · '}
           <span className="text-white/55">YardFlow YNS · industry templates</span>
+        </p>
+        {/* F.T6 — provenance attribution + modal trigger (same modal as
+            the hero F.T1 trigger). */}
+        <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-white/60">
+          <span>Public audit data. Not affiliated with featured brands.</span>
+          <ProvenanceLink />
         </p>
       </div>
     </footer>
@@ -677,11 +1004,13 @@ function ArchetypeFilterRail({
   demoSuffix,
   visibleCount,
   totalCount,
+  pinnedCohort = false,
 }: {
   active: Archetype | null;
   demoSuffix: string;
   visibleCount: number;
   totalCount: number;
+  pinnedCohort?: boolean;
 }) {
   const [otherParams, setOtherParams] = useState<string>('');
 
@@ -713,20 +1042,27 @@ function ArchetypeFilterRail({
     return `/demo?archetype=${encodeURIComponent(id)}${demoForUrl}${otherParams}`;
   };
 
-  function onClickAnalytics(id: Archetype | null) {
+  // J.T2 — standardized filter event with visible_count + source.
+  // J.T3 — pinned_cohort flag included only when a campaign pin is active.
+  function fireFilterApplied(id: Archetype | null, source: 'click' | 'url') {
     try {
-      window.dispatchEvent(
-        new CustomEvent('yf:event', {
-          detail: {
-            name: 'gallery_filter_change',
-            props: { archetype: id ?? 'all' },
-          },
-        }),
-      );
+      const props: Record<string, unknown> = {
+        archetype: id ?? 'all',
+        visible_count: visibleCount,
+        source,
+      };
+      if (pinnedCohort) props.pinned_cohort = true;
+      window.dispatchEvent(new CustomEvent('yf:event', { detail: { name: 'gallery_filter_applied', props } }));
     } catch {
       // swallow
     }
   }
+
+  // J.T2 — URL-driven initial filter emits one event with source 'url'.
+  useEffect(() => {
+    if (active !== null) fireFilterApplied(active, 'url');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // A.T2 — chip count badges. Counts derive from the canonical anchor
   // list so adding a 12th anchor in industry-tags.ts auto-updates the
@@ -762,7 +1098,7 @@ function ArchetypeFilterRail({
               prefetch={false}
               tabIndex={isActive ? 0 : -1}
               aria-current={isActive ? 'true' : undefined}
-              onClick={() => onClickAnalytics(chip.id)}
+              onClick={() => fireFilterApplied(chip.id, 'click')}
               className={`shrink-0 snap-start rounded-full border px-4 py-2 font-mono text-[13px] font-semibold uppercase tracking-[0.16em] transition-colors max-[480px]:text-[12px] mr-2 last:mr-0 ${
                 isActive
                   ? 'border-[#00B4FF]/65 bg-[#00B4FF]/[0.20] text-white shadow-[0_0_24px_rgba(0,180,255,0.22)]'
@@ -771,7 +1107,7 @@ function ArchetypeFilterRail({
             >
               {chip.label}
               <span
-                className={`ml-1.5 font-normal ${isActive ? 'text-white/60' : 'text-white/40'}`}
+                className={`ml-1.5 font-normal ${isActive ? 'text-white/70' : 'text-white/55'}`}
                 aria-hidden
               >
                 ({chip.count})
@@ -789,7 +1125,63 @@ function ArchetypeFilterRail({
   );
 }
 
-function EmptyFilterState({ demoSuffix }: { demoSuffix: string }) {
+/* ═══════════════════════════════════════════════════════════════
+   IndustrySearch — E.T8. Client-side "find your industry" box.
+   Filters the tile grid live (token-AND over brand / industry label /
+   archetype / blurb). Type=search for native clear affordance.
+   ═══════════════════════════════════════════════════════════════ */
+
+function IndustrySearch({
+  query,
+  onChange,
+  resultCount,
+}: {
+  query: string;
+  onChange: (v: string) => void;
+  resultCount: number;
+}) {
+  return (
+    <div className="mb-4" data-ms-section-id="gallery-search">
+      <label className="relative block">
+        <span className="sr-only">Find your industry</span>
+        <span aria-hidden className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-white/40">
+          <svg width={15} height={15} viewBox="0 0 24 24" fill="none">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="2" />
+            <path d="M20 20l-3.5-3.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          </svg>
+        </span>
+        <input
+          type="search"
+          inputMode="search"
+          value={query}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder="Type a brand or vertical. Try fedex, beverage, snacks."
+          aria-label="Find your industry"
+          data-gallery-search-input
+          className="w-full rounded-[12px] border border-white/15 bg-white/[0.03] py-2.5 pl-10 pr-4 text-[14px] text-white placeholder:text-white/35 outline-none transition-colors focus:border-[#00B4FF]/60 focus-visible:outline-2 focus-visible:outline-offset-[2px] focus-visible:outline-[#00B4FF]"
+        />
+      </label>
+      {query.trim().length > 0 ? (
+        <div className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-white/45" role="status">
+          {resultCount} {resultCount === 1 ? 'match' : 'matches'}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+function EmptyFilterState({
+  demoSuffix,
+  query = '',
+  onClearQuery,
+  isDemo = false,
+}: {
+  demoSuffix: string;
+  query?: string;
+  onClearQuery?: () => void;
+  isDemo?: boolean;
+}) {
+  const isSearch = query.length > 0;
   return (
     <div
       role="status"
@@ -797,20 +1189,301 @@ function EmptyFilterState({ demoSuffix }: { demoSuffix: string }) {
       style={{ background: 'linear-gradient(180deg, rgba(17, 19, 24, 0.92), rgba(10, 12, 16, 0.92))' }}
     >
       <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/45">
-        Nothing yet for that archetype
+        {isSearch ? 'No template matches that search' : 'Nothing yet for that archetype'}
       </p>
       <p className="max-w-[420px] text-[14px] leading-[1.55] text-white/[0.72]">
-        We have not modeled a representative template in this archetype yet. Browse all 11 templates instead.
+        {isSearch
+          ? `Nothing matched "${query}". Clear the search to see every template, or request an audit for your industry.`
+          : 'We have not modeled a representative template in this archetype yet. Browse all 11 templates instead.'}
       </p>
-      <Link
-        href={`/demo${demoSuffix.replace(/^&/, '?')}`}
-        prefetch={false}
-        className="mt-2 inline-flex items-center gap-1.5 rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.10] px-4 py-2 text-[13px] font-bold text-white transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22]"
+      {isSearch && onClearQuery ? (
+        <button
+          type="button"
+          onClick={onClearQuery}
+          className="mt-2 inline-flex items-center gap-1.5 rounded-[10px] border border-white/20 bg-transparent px-4 py-2 text-[13px] font-semibold text-white/85 transition-all hover:border-[#00B4FF]/55 hover:text-white"
+        >
+          Clear search
+        </button>
+      ) : (
+        <Link
+          href={`/demo${demoSuffix.replace(/^&/, '?')}`}
+          prefetch={false}
+          className="mt-2 inline-flex items-center gap-1.5 rounded-[10px] border border-white/20 bg-transparent px-4 py-2 text-[13px] font-semibold text-white/85 transition-all hover:border-[#00B4FF]/55 hover:text-white"
+        >
+          View all templates
+          <ArrowRight className="" />
+        </Link>
+      )}
+      {/* C.T6 — capture latent demand for un-modeled archetypes. */}
+      <a
+        href={`${MICROSITE_BASE}/contact?intent=custom-audit&source=gallery-empty-filter`}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-ms-cta-id="gallery-empty-filter-audit-request"
+        className="inline-flex items-center gap-1.5 rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.10] px-4 py-2 text-[13px] font-bold text-white transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22]"
         style={{ boxShadow: '0 0 0 1px rgba(0, 180, 255, 0.16) inset, 0 6px 18px rgba(0, 0, 0, 0.35)' }}
       >
-        View all templates
+        Want this in your industry? Book a 30-min audit
         <ArrowRight className="" />
-      </Link>
+      </a>
+      {/* H.T1 — inline 2-field audit-request form. */}
+      <AuditRequestForm variant="industry" source="gallery-empty-filter" isDemo={isDemo} />
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   AuditRequestForm — H.T1 / H.T2 shared lead-capture form.
+   variant "industry": industry + email. variant "brand": company +
+   role + email. Posts to /api/microsites/audit-request; the endpoint
+   no-ops under demo so a rep's presentation never creates a real lead.
+   ═══════════════════════════════════════════════════════════════ */
+
+function AuditRequestForm({
+  variant,
+  source,
+  isDemo,
+  onSubmitted,
+}: {
+  variant: 'industry' | 'brand';
+  source: string;
+  isDemo: boolean;
+  onSubmitted?: () => void;
+}) {
+  const [email, setEmail] = useState('');
+  const [industry, setIndustry] = useState('');
+  const [company, setCompany] = useState('');
+  const [role, setRole] = useState('');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'done' | 'error'>('idle');
+
+  async function submit() {
+    if (status === 'submitting') return;
+    setStatus('submitting');
+    try {
+      const res = await fetch(AUDIT_REQUEST_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          industry: variant === 'industry' ? industry : undefined,
+          company: variant === 'brand' ? company : undefined,
+          role: variant === 'brand' ? role : undefined,
+          source,
+          demo: isDemo,
+        }),
+      });
+      if (!res.ok) throw new Error('request failed');
+      setStatus('done');
+      onSubmitted?.();
+    } catch {
+      setStatus('error');
+    }
+  }
+
+  const inputClass =
+    'w-full rounded-[10px] border border-white/15 bg-white/[0.03] px-3 py-2 text-[13px] text-white placeholder:text-white/35 outline-none transition-colors focus:border-[#00B4FF]/60';
+
+  if (status === 'done') {
+    return (
+      <p role="status" className="mt-4 text-[13px] text-[#00C878]">
+        Thanks. We will be in touch about auditing your network.
+      </p>
+    );
+  }
+
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        void submit();
+      }}
+      className="mt-4 flex w-full max-w-[420px] flex-col gap-2"
+    >
+      {variant === 'industry' ? (
+        <input
+          value={industry}
+          onChange={(e) => setIndustry(e.target.value)}
+          placeholder="Your industry"
+          required
+          className={inputClass}
+        />
+      ) : (
+        <>
+          <input
+            value={company}
+            onChange={(e) => setCompany(e.target.value)}
+            placeholder="Company"
+            required
+            className={inputClass}
+          />
+          <input
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            placeholder="Your role"
+            className={inputClass}
+          />
+        </>
+      )}
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Work email"
+        required
+        className={inputClass}
+      />
+      <button
+        type="submit"
+        disabled={status === 'submitting'}
+        data-ms-cta-id={`audit-request-submit-${variant}`}
+        className="inline-flex items-center justify-center gap-1.5 rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.12] px-4 py-2 text-[13px] font-bold text-white transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22] disabled:opacity-60"
+      >
+        {status === 'submitting' ? 'Sending…' : 'Request an audit'}
+      </button>
+      {status === 'error' ? (
+        <p role="status" className="text-[12px] text-[#FF2A00]/80">
+          Something went wrong. Please try again.
+        </p>
+      ) : null}
+    </form>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SavedTemplatesBanner — H.T4. Lists bookmarked templates above the
+   grid with quick links and a clear-all.
+   ═══════════════════════════════════════════════════════════════ */
+
+function SavedTemplatesBanner({
+  saved,
+  tiles,
+  demoSuffix,
+  onClear,
+}: {
+  saved: string[];
+  tiles: GalleryTileData[];
+  demoSuffix: string;
+  onClear: () => void;
+}) {
+  const bySlug = useMemo(() => new Map(tiles.map((t) => [t.anchor.slug, t])), [tiles]);
+  return (
+    <div
+      data-saved-templates-banner
+      className="mb-4 flex flex-wrap items-center gap-x-2 gap-y-1 rounded-[12px] border border-[#00B4FF]/25 bg-[#00B4FF]/[0.05] px-4 py-2.5 text-[12.5px] text-white/75"
+    >
+      <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#00B4FF]/85">You saved</span>
+      {saved.map((slug, i) => (
+        <span key={slug}>
+          <Link
+            href={`/demo/${slug}?from=gallery${demoSuffix}`}
+            prefetch={false}
+            className="text-white transition-colors hover:text-[#00B4FF]"
+          >
+            {bySlug.get(slug)?.brand ?? slug}
+          </Link>
+          {i < saved.length - 1 ? <span className="text-white/30">,</span> : null}
+        </span>
+      ))}
+      <button
+        type="button"
+        onClick={onClear}
+        className="ml-auto font-mono text-[10px] uppercase tracking-[0.16em] text-white/50 transition-colors hover:text-white"
+      >
+        Clear all
+      </button>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DontSeeYourBrand — H.T2. Latent-demand CTA below the tile grid; opens
+   a modal with the brand-variant audit-request form.
+   ═══════════════════════════════════════════════════════════════ */
+
+function DontSeeYourBrand({ isDemo }: { isDemo: boolean }) {
+  const [open, setOpen] = useState(false);
+
+  function openModal() {
+    if (!isDemo) {
+      try {
+        window.dispatchEvent(
+          new CustomEvent('yf:event', {
+            detail: { name: 'gallery_custom_audit_requested', props: { source: 'gallery-dont-see-brand' } },
+          }),
+        );
+      } catch {
+        // swallow
+      }
+    }
+    setOpen(true);
+  }
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    document.addEventListener('keydown', onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
+  return (
+    <div className="mt-12 flex flex-col items-center gap-3 border-t border-white/[0.08] pt-10 text-center">
+      <p className="text-[15px] text-white/75">
+        Don&apos;t see your brand? We can audit your network in 5 business days.
+      </p>
+      <button
+        type="button"
+        onClick={openModal}
+        data-ms-cta-id="gallery-dont-see-brand"
+        className="inline-flex items-center gap-1.5 rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.10] px-4 py-2 text-[13px] font-bold text-white transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22]"
+        style={{ boxShadow: '0 0 0 1px rgba(0, 180, 255, 0.16) inset, 0 6px 18px rgba(0, 0, 0, 0.35)' }}
+      >
+        Request a custom audit
+        <ArrowRight className="" />
+      </button>
+
+      {open ? (
+        <div
+          role="presentation"
+          onMouseDown={(e) => {
+            if (e.target === e.currentTarget) setOpen(false);
+          }}
+          className="fixed inset-0 z-[80] flex items-end justify-center bg-black/70 p-4 backdrop-blur-sm sm:items-center"
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Request a custom audit"
+            className="relative w-full max-w-[460px] rounded-[16px] border border-[#00B4FF]/[0.30] p-6 text-left text-white"
+            style={{
+              background: 'linear-gradient(180deg, rgba(17, 19, 24, 0.98), rgba(10, 12, 16, 0.98))',
+              boxShadow: '0 0 0 1px rgba(0,180,255,0.12) inset, 0 24px 80px rgba(0,0,0,0.6)',
+            }}
+          >
+            <div className="flex items-start justify-between gap-4">
+              <h2 className="text-[18px] font-bold text-white">Request a custom audit</h2>
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                aria-label="Close"
+                className="rounded-full border border-white/15 px-2.5 py-1 font-mono text-[12px] text-white/70 transition-colors hover:border-[#00B4FF]/55 hover:text-white"
+              >
+                ✕
+              </button>
+            </div>
+            <p className="mt-2 text-[13px] leading-[1.5] text-white/65">
+              Tell us where to send your network audit. Same rubric, same satellite imagery as the templates here.
+            </p>
+            <AuditRequestForm variant="brand" source="gallery-dont-see-brand" isDemo={isDemo} />
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -947,7 +1620,7 @@ function AllAuditedDirectory({
                 </div>
                 <div className="mt-auto grid grid-cols-3 gap-2 pt-2">
                   <div>
-                    <div className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-white/40">
+                    <div className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-white/60">
                       Sites
                     </div>
                     <div className="font-mono text-[12px] text-white/85">
@@ -955,7 +1628,7 @@ function AllAuditedDirectory({
                     </div>
                   </div>
                   <div>
-                    <div className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-white/40">
+                    <div className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-white/60">
                       Docks
                     </div>
                     <div className="font-mono text-[12px] text-white/85">
@@ -963,7 +1636,7 @@ function AllAuditedDirectory({
                     </div>
                   </div>
                   <div>
-                    <div className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-white/40">
+                    <div className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-white/60">
                       Trailers
                     </div>
                     <div className="font-mono text-[12px] text-white/85">

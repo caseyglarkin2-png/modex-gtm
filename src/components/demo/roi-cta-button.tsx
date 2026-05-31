@@ -117,7 +117,9 @@ function buildRoiV2State(pack: DemoPack): RoiV2State {
       totalFacilities: total,
       facilitiesWithYms,
       facilitiesWithDropTrailers,
-      averageMarginPerShipment: 1000,
+      // D.T5 — seed from the per-industry margin default (lockstep with
+      // src/app/demo/page.tsx buildRoiV2State); fall back to 1000.
+      averageMarginPerShipment: pack.account.roiDefaults?.averageMarginPerShipment ?? 1000,
     },
     assumptions: {
       withYms: {
@@ -160,10 +162,18 @@ interface Props {
   /** Button class — varies by surface (primary on sim, secondary in header). */
   className: string;
   children: React.ReactNode;
+  /** L.T5 — optional `source` param appended to the ROI URL (e.g.
+   *  "microsite") so the calculator + funnel can attribute the hand-off. */
+  source?: string;
 }
 
-export function RoiCtaButton({ pack, ctaId, utmMedium, className, children }: Props) {
-  const url = `${ROI_URL}?utm_source=demo&utm_medium=${utmMedium}&utm_campaign=${pack.account.slug}`;
+export function RoiCtaButton({ pack, ctaId, utmMedium, className, children, source }: Props) {
+  // Always carry pack so the ROI page's PackPrefillBanner brands correctly;
+  // add source when provided (L.T5).
+  const url =
+    `${ROI_URL}?utm_source=demo&utm_medium=${utmMedium}&utm_campaign=${pack.account.slug}` +
+    `&pack=${encodeURIComponent(pack.account.slug)}` +
+    (source ? `&source=${encodeURIComponent(source)}` : '');
 
   function handleClick(e: React.MouseEvent<HTMLAnchorElement>) {
     // Same-origin localStorage hand-off only works when the prospect
