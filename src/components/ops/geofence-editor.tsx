@@ -86,6 +86,33 @@ export function GeofenceEditor({
   const [selectedKey, setSelectedKey] = useState<string | null>('perimeter');
   const [mode, setMode] = useState<Mode>('move');
   const [copied, setCopied] = useState(false);
+  const [saveState, setSaveState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
+  const [saveMsg, setSaveMsg] = useState('');
+
+  async function saveToRepo() {
+    if (!account || !site || saveState === 'saving') return;
+    setSaveState('saving');
+    setSaveMsg('');
+    try {
+      const res = await fetch('/api/ops/geofence-save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ account, siteId: site.id, geofences: layersToGeofences(layers) }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.ok) {
+        setSaveState('error');
+        setSaveMsg(data.error ?? `HTTP ${res.status}`);
+        return;
+      }
+      setSaveState('saved');
+      setSaveMsg(`committed to ${data.branch}${data.commit ? ` (${String(data.commit).slice(0, 7)})` : ''}`);
+      setTimeout(() => setSaveState('idle'), 4000);
+    } catch (e) {
+      setSaveState('error');
+      setSaveMsg(String(e).slice(0, 80));
+    }
+  }
 
   function update(next: EditorLayer[]) {
     if (!site) return;
@@ -200,9 +227,19 @@ export function GeofenceEditor({
           >
             {copied ? 'Copied ✓' : `Copy ${site?.id ?? ''} geofences`}
           </button>
+          <button
+            onClick={saveToRepo}
+            disabled={saveState === 'saving'}
+            className="mt-2 rounded border border-[#00C878]/55 bg-[#00C878]/[0.12] px-3 py-2 text-[13px] font-bold text-white hover:bg-[#00C878]/[0.22] disabled:opacity-60"
+          >
+            {saveState === 'saving' ? 'Saving…' : saveState === 'saved' ? 'Saved ✓' : 'Save to repo'}
+          </button>
+          {saveMsg ? (
+            <p className={`mt-1 text-[11px] ${saveState === 'error' ? 'text-[#FF2A00]/80' : 'text-[#00C878]'}`}>{saveMsg}</p>
+          ) : null}
           <p className="mt-2 text-[11px] leading-relaxed text-white/45">
-            Paste into <code>public/demo-packs/{account}.json</code> → the matching site&apos;s{' '}
-            <code>geofences</code>. (Auto-commit-to-repo is the next increment.)
+            Save commits this site&apos;s <code>geofences</code> into{' '}
+            <code>public/demo-packs/{account}.json</code> (validated server-side). Or copy + paste manually.
           </p>
         </aside>
       </div>
