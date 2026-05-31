@@ -107,6 +107,35 @@ export function DemoSurface({
   const anchorArchetype = anchor?.archetype ?? null;
   const archetypeTopLabel = anchorArchetype ? ARCHETYPE_LABELS_TOP[anchorArchetype] : null;
 
+  // F.T3 — audit-confidence stamp. Plurality vote across site confidence
+  // (ties favor the higher rating) so the stamp reflects the network's
+  // dominant audit quality. (Note: the plan's literal "any low -> Low"
+  // would render almost every multi-site pack Low and defeat the trust
+  // signal, so we use the dominant rating instead.) Field resolution is
+  // the average count of non-null Classification fields across sites,
+  // out of the fixed 22-field rubric.
+  const confidenceStamp = (() => {
+    const sites = pack.network.sites;
+    if (sites.length === 0) return null;
+    const counts = { high: 0, medium: 0, low: 0 };
+    let resolvedTotal = 0;
+    for (const s of sites) {
+      const c = String(s.confidence).toLowerCase();
+      if (c === 'high' || c === 'medium' || c === 'low') counts[c] += 1;
+      resolvedTotal += Object.values(s.classification).filter(
+        (v) => v !== null && v !== undefined,
+      ).length;
+    }
+    const level =
+      counts.high >= counts.medium && counts.high >= counts.low
+        ? 'High'
+        : counts.medium >= counts.low
+          ? 'Medium'
+          : 'Low';
+    const avgResolved = Math.round(resolvedTotal / sites.length);
+    return { level, avgResolved };
+  })();
+
   // Scope blurb for the header — be honest when our audit covers a
   // subset of the prospect's full network. For Mondelez we audit 22 NA
   // sites; the global footprint is ~160. Saying just "22 facilities"
@@ -182,6 +211,28 @@ export function DemoSurface({
                 <span className="text-white/25" aria-hidden>·</span>
                 <span className="text-white/70" aria-current="page">{displayName}</span>
               </nav>
+              {/* F.T3 — audit-confidence stamp. */}
+              {confidenceStamp ? (
+                <div
+                  data-confidence-stamp
+                  title="Confidence is the dominant per-site audit rating across the network. Fields resolved is the average count of the 22-field rubric we could read from imagery per site."
+                  className="mb-1.5 inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-white/55"
+                >
+                  <span
+                    className={
+                      confidenceStamp.level === 'High'
+                        ? 'text-[#00C878]'
+                        : confidenceStamp.level === 'Medium'
+                          ? 'text-[#00B4FF]'
+                          : 'text-[#FF2A00]/80'
+                    }
+                  >
+                    ● Audit confidence: {confidenceStamp.level}
+                  </span>
+                  <span className="text-white/30" aria-hidden>·</span>
+                  <span className="tabular-nums text-white/70">{confidenceStamp.avgResolved}/22</span> fields resolved
+                </div>
+              ) : null}
               <div className="font-mono text-[10px] uppercase tracking-[0.20em] text-[#00B4FF]/85">
                 {fromGallery ? `YardFlow · ${galleryIndustryLabel} template` : 'YardFlow · YNS network audit'}
               </div>

@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { DemoPackSchema, type DemoPack } from '@/lib/demo/pack-schema';
 import { INDUSTRY_ANCHORS, type IndustryAnchor, type Archetype } from '@/lib/demo/industry-tags';
 import { applyPinOrder, readPinnedSlugs } from '@/lib/demo/gallery-pin';
+import { readAuditsThisQuarter } from '@/lib/demo/gallery-flags';
 import { Gallery, type GalleryTileData } from '@/components/demo/gallery';
 import { MicrositeTracker } from '@/components/microsites/microsite-tracker';
 import { buildPublicShareMetadata } from '@/lib/microsites/share';
@@ -203,6 +204,9 @@ export interface AccountSummary {
   dockDoors: number;
   trailerCapacity: number;
   railServed: number;
+  /** F.T5 — surveyed acreage (network.totals.acres), summed for the hero
+   *  "acres surveyed" subtotal. */
+  acres: number;
   hasThumb: boolean;
 }
 
@@ -224,6 +228,7 @@ async function loadAccountSummary(slug: string): Promise<AccountSummary | null> 
       dockDoors: pack.network.totals.dockDoors,
       trailerCapacity: pack.network.totals.trailerCapacity,
       railServed: pack.network.totals.railServed,
+      acres: pack.network.totals.acres,
       hasThumb: thumbAvailable(pack.account.slug),
     };
   } catch {
@@ -278,6 +283,7 @@ async function loadTile(anchor: IndustryAnchor): Promise<GalleryTileData | null>
     thumbSrc,
     thumbAlt,
     surprisingFindings: pack.account.surprisingFindings ?? [],
+    builtAt: pack.builtAt,
   };
 }
 
@@ -349,10 +355,16 @@ export default async function DemoGalleryPage({
     loadAllAccountSummaries(),
   ]);
 
-  /* C.T1 — total audited facilities across every audited account.
-   * Computed from allAccounts (already loaded) so it is filter-independent:
-   * narrowing by archetype never changes the headline number. */
+  /* C.T1 / F.T5 — network-wide subtotals across every audited account,
+   * computed from allAccounts (already loaded) so they are
+   * filter-independent: narrowing by archetype never changes them. */
   const facilitiesAudited = allAccounts.reduce((sum, a) => sum + a.auditedSites, 0);
+  const totalDockDoors = allAccounts.reduce((sum, a) => sum + a.dockDoors, 0);
+  const totalAcres = allAccounts.reduce((sum, a) => sum + a.acres, 0);
+
+  /* F.T8 — optional "audits this quarter" counter from Edge Config.
+   * Null (and the hero line is omitted) when unset or unreachable. */
+  const auditsThisQuarter = await readAuditsThisQuarter();
 
   return (
     <>
@@ -375,6 +387,9 @@ export default async function DemoGalleryPage({
         initialDemo={initialDemo}
         allAccounts={allAccounts}
         facilitiesAudited={facilitiesAudited}
+        totalDockDoors={totalDockDoors}
+        totalAcres={totalAcres}
+        auditsThisQuarter={auditsThisQuarter}
       />
     </>
   );

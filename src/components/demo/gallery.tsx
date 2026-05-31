@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import type { Archetype, IndustryAnchor } from '@/lib/demo/industry-tags';
 import { ARCHETYPE_LABELS_TOP, INDUSTRY_ANCHORS } from '@/lib/demo/industry-tags';
+import { ProvenanceLink } from './provenance-modal';
 
 /**
  * Sprint 2.5 — Industry-template gallery surface.
@@ -23,6 +24,22 @@ import { ARCHETYPE_LABELS_TOP, INDUSTRY_ANCHORS } from '@/lib/demo/industry-tags
 
 const ROI_STATE_KEY = 'roi-v2-state';
 const MICROSITE_BASE = process.env.NEXT_PUBLIC_MICROSITE_BASE_URL || 'https://yardflow.ai';
+
+const MONTHS_ABBR = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] as const;
+
+/**
+ * F.T4 — format a pack `builtAt` ISO datetime as "Mon YYYY". Parses the
+ * ISO date parts directly (not new Date()) so server and client render
+ * the same string regardless of timezone.
+ */
+function formatAuditMonth(iso?: string): string | null {
+  if (!iso) return null;
+  const m = /^(\d{4})-(\d{2})/.exec(iso);
+  if (!m) return null;
+  const monthIdx = Number(m[2]) - 1;
+  if (monthIdx < 0 || monthIdx > 11) return null;
+  return `${MONTHS_ABBR[monthIdx]} ${m[1]}`;
+}
 
 /* Sprint G9 — Audit-grade disclosure constant. Used twice:
  *   - Gallery hero badge below the H1 (replaces footer-burying the
@@ -87,6 +104,9 @@ export interface GalleryTileData {
   /** C.T4 — Up to 3 quantified audit findings (Phase B authoring).
    *  The first is revealed on tile hover over the satellite thumb. */
   surprisingFindings?: string[];
+  /** F.T4 — ISO datetime the pack was built; renders an "Audited {Mon
+   *  YYYY}" badge on the tile. */
+  builtAt?: string;
 }
 
 /** Lightweight account summary for the "All audited accounts" directory
@@ -105,6 +125,8 @@ export interface AccountSummary {
   dockDoors: number;
   trailerCapacity: number;
   railServed: number;
+  /** F.T5 — surveyed acreage. */
+  acres: number;
   hasThumb: boolean;
 }
 
@@ -126,6 +148,11 @@ interface GalleryProps {
    *  server-side. Rendered in the hero subhead. Filter-independent so
    *  the number never changes when the prospect narrows by archetype. */
   facilitiesAudited?: number;
+  /** F.T5 — network-wide subtotals for the hero. */
+  totalDockDoors?: number;
+  totalAcres?: number;
+  /** F.T8 — optional Edge Config counter; line omitted when null. */
+  auditsThisQuarter?: number | null;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -227,7 +254,7 @@ function tileMatchesQuery(tile: GalleryTileData, q: string): boolean {
   return tokens.every((t) => haystack.includes(t));
 }
 
-export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo = false, allAccounts = [], facilitiesAudited = 0 }: GalleryProps) {
+export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo = false, allAccounts = [], facilitiesAudited = 0, totalDockDoors = 0, totalAcres = 0, auditsThisQuarter = null }: GalleryProps) {
   const demoSuffix = useDemoSuffix(initialDemo);
   // E.T8 — client-side search query, filters the (already archetype-
   // filtered) tiles live.
@@ -299,7 +326,14 @@ export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo
       {demoSuffix.length > 0 ? <DemoPill /> : null}
 
       <div className="relative z-[1] flex flex-1 flex-col">
-        <Hero count={totalTiles ?? tiles.length} facilitiesAudited={facilitiesAudited} demoSuffix={demoSuffix} />
+        <Hero
+          count={totalTiles ?? tiles.length}
+          facilitiesAudited={facilitiesAudited}
+          totalDockDoors={totalDockDoors}
+          totalAcres={totalAcres}
+          auditsThisQuarter={auditsThisQuarter}
+          demoSuffix={demoSuffix}
+        />
         <main
           className="mx-auto w-full max-w-[1280px] flex-1 px-6 pb-24 max-[480px]:px-[18px]"
           data-ms-section-id="gallery-grid"
@@ -348,7 +382,21 @@ export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo
    with neon span, single supporting line, one CTA.
    ═══════════════════════════════════════════════════════════════ */
 
-function Hero({ count, facilitiesAudited, demoSuffix }: { count: number; facilitiesAudited: number; demoSuffix: string }) {
+function Hero({
+  count,
+  facilitiesAudited,
+  totalDockDoors,
+  totalAcres,
+  auditsThisQuarter,
+  demoSuffix,
+}: {
+  count: number;
+  facilitiesAudited: number;
+  totalDockDoors: number;
+  totalAcres: number;
+  auditsThisQuarter: number | null;
+  demoSuffix: string;
+}) {
   const isDemo = demoSuffix.length > 0;
 
   // C.T2 — secondary CTA scrolls to the tile grid. Uses the existing
@@ -392,6 +440,14 @@ function Hero({ count, facilitiesAudited, demoSuffix }: { count: number; facilit
           <span className="text-[#00B4FF]">ROI in 30 seconds</span>
         </p>
 
+        {/* F.T5 — network-wide audit subtotal. Reinforces the scale of the
+            modeled data behind the templates. */}
+        <p className="mt-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-white/45">
+          <span className="tabular-nums text-white/70">{totalDockDoors.toLocaleString()}</span> dock doors modeled
+          {' · '}
+          <span className="tabular-nums text-white/70">{Math.round(totalAcres).toLocaleString()}</span> acres surveyed
+        </p>
+
         {/* H1 — wins the page. Black weight, tight tracking, neon span. */}
         <h1 className="mt-5 max-w-[920px] font-black leading-[1.04] tracking-[-0.04em] text-[clamp(40px,6vw,72px)] [text-wrap:balance] max-[480px]:mt-4 max-[480px]:text-[clamp(36px,9vw,52px)]">
           Pick your industry.
@@ -428,6 +484,20 @@ function Hero({ count, facilitiesAudited, demoSuffix }: { count: number; facilit
             </span>
           </div>
         )}
+
+        {/* F.T7 — category line + F.T1 provenance trigger + F.T8 counter. */}
+        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+          <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-white/55">
+            Built for the yard. Not a module of your TMS.
+          </span>
+          <ProvenanceLink />
+          {auditsThisQuarter ? (
+            <span className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-white/55">
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#00C878]" />
+              <span className="tabular-nums text-white/80">{auditsThisQuarter}</span> new audits this quarter
+            </span>
+          ) : null}
+        </div>
 
         {/* Body — single line, steel, no fluff. */}
         <p className="mt-5 max-w-[660px] text-[16px] leading-[1.55] text-white/[0.72] max-[480px]:text-[15px]">
@@ -486,8 +556,9 @@ function Tile({
   total: number;
   demoSuffix: string;
 }) {
-  const { anchor, brand, facilityCount, facilityCountIsGlobal, dockDoors, trailerCapacity, railServed, roiPrefill, thumbSrc, thumbAlt, surprisingFindings } = tile;
+  const { anchor, brand, facilityCount, facilityCountIsGlobal, dockDoors, trailerCapacity, railServed, roiPrefill, thumbSrc, thumbAlt, surprisingFindings, builtAt } = tile;
   const firstFinding = surprisingFindings?.[0];
+  const auditedMonth = formatAuditMonth(builtAt);
 
   const roiHref = `${MICROSITE_BASE}/roi?source=demo-gallery&industry=${encodeURIComponent(anchor.id)}&pack=${encodeURIComponent(anchor.slug)}${demoSuffix}`;
   const templateHref = `/demo/${anchor.slug}?from=gallery${demoSuffix}`;
@@ -589,6 +660,14 @@ function Tile({
           </span>
         </div>
       )}
+
+      {/* F.T4 — audit-date badge. Provenance signal: when this network was
+          last modeled. */}
+      {auditedMonth ? (
+        <span className="absolute right-3 top-3 z-[2] rounded-full border border-[#00B4FF]/35 bg-[#050505]/80 px-2 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-white/80 backdrop-blur-sm">
+          Audited {auditedMonth}
+        </span>
+      ) : null}
 
       {/* Top divider — terminal-thin gradient line, just a hairline of neon. */}
       <div
@@ -721,6 +800,12 @@ function Footer() {
           network footprint quoted where global counts are available.
           {' · '}
           <span className="text-white/55">YardFlow YNS · industry templates</span>
+        </p>
+        {/* F.T6 — provenance attribution + modal trigger (same modal as
+            the hero F.T1 trigger). */}
+        <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-white/45">
+          <span>Public audit data. Not affiliated with featured brands.</span>
+          <ProvenanceLink />
         </p>
       </div>
     </footer>
