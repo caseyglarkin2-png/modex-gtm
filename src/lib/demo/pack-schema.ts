@@ -38,6 +38,29 @@ export type Bbox = z.infer<typeof Bbox>;
 const BboxTuple = z.tuple([z.number(), z.number(), z.number(), z.number()]);
 export type BboxTuple = z.infer<typeof BboxTuple>;
 
+/**
+ * Schema v2 — oriented geofence polygon. An ordered ring of lat/lng
+ * vertices (>= 3) that traces the *real* shape of a feature at its true
+ * orientation, instead of a north-aligned bounding box. The ring need
+ * not repeat the first point as the last (renderers close it). This is
+ * how the geofence annotation tool will store property lines, gates,
+ * drop yards, dock aprons, and staging once a site is migrated.
+ */
+const GeoPolygon = z.object({
+  ring: z.array(LatLng).min(3),
+});
+export type GeoPolygon = z.infer<typeof GeoPolygon>;
+
+/**
+ * A geofence shape is EITHER a legacy axis-aligned `Bbox` (north-square
+ * approximation, the pre-v2 data) OR an oriented `GeoPolygon` (v2). The
+ * union keeps every existing pack valid while migrated sites carry true
+ * polygons. Use the helpers in `lib/demo/geofence-geometry.ts` to read
+ * either shape uniformly (ring / bounds / centroid).
+ */
+const GeoShape = z.union([Bbox, GeoPolygon]);
+export type GeoShape = z.infer<typeof GeoShape>;
+
 const Confidence = z.enum(['high', 'medium', 'low']);
 export type Confidence = z.infer<typeof Confidence>;
 
@@ -63,11 +86,11 @@ const DropBand = z.enum(['NONE', '0-10', '10-25', '25-50', '50+']);
  * `staging` and `dropYards` may be absent on open sites (#3 No Gate / No GS).
  */
 const SiteGeofences = z.object({
-  perimeter: Bbox,
-  truckGate: Bbox.nullable(),
-  dropYards: z.array(Bbox),
-  dockAprons: z.array(Bbox),
-  staging: Bbox.nullable(),
+  perimeter: GeoShape,
+  truckGate: GeoShape.nullable(),
+  dropYards: z.array(GeoShape),
+  dockAprons: z.array(GeoShape),
+  staging: GeoShape.nullable(),
 });
 export type SiteGeofences = z.infer<typeof SiteGeofences>;
 

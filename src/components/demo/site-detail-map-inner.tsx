@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect } from 'react';
-import { MapContainer, TileLayer, Rectangle, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Polygon, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import type { Bbox, Site } from '@/lib/demo/pack-schema';
+import type { GeoShape, Site } from '@/lib/demo/pack-schema';
+import { shapeBounds, shapePositions } from '@/lib/demo/geofence-geometry';
 import { GEOFENCE_COLORS } from './archetype-palette';
 
 /**
@@ -20,18 +21,10 @@ interface Props {
   site: Site;
 }
 
-/** Convert our Bbox shape to Leaflet's [[south, west], [north, east]] tuple. */
-function toBounds(b: Bbox): [[number, number], [number, number]] {
-  return [
-    [b.south, b.west],
-    [b.north, b.east],
-  ];
-}
-
-function FitToPerimeter({ perimeter }: { perimeter: Bbox }) {
+function FitToPerimeter({ perimeter }: { perimeter: GeoShape }) {
   const map = useMap();
   useEffect(() => {
-    map.fitBounds(toBounds(perimeter), { padding: [20, 20], animate: false });
+    map.fitBounds(shapeBounds(perimeter), { padding: [20, 20], animate: false });
   }, [map, perimeter]);
   return null;
 }
@@ -53,34 +46,34 @@ export default function SiteDetailMapInner({ site }: Props) {
       />
       <FitToPerimeter perimeter={site.geofences.perimeter} />
 
-      <Rectangle
-        bounds={toBounds(site.geofences.perimeter)}
+      <Polygon
+        positions={shapePositions(site.geofences.perimeter)}
         pathOptions={{ color: GEOFENCE_COLORS.perimeter, weight: 2, fillOpacity: 0.05, dashArray: '4 4' }}
       />
       {site.geofences.dropYards.map((b, i) => (
-        <Rectangle
+        <Polygon
           key={`drop-${i}`}
-          bounds={toBounds(b)}
+          positions={shapePositions(b)}
           pathOptions={{ color: GEOFENCE_COLORS.dropYard, weight: 3, fillOpacity: 0.2 }}
         />
       ))}
       {site.geofences.dockAprons.map((b, i) => (
-        <Rectangle
+        <Polygon
           key={`dock-${i}`}
-          bounds={toBounds(b)}
+          positions={shapePositions(b)}
           pathOptions={{ color: GEOFENCE_COLORS.dockApron, weight: 3, fillOpacity: 0.22 }}
         />
       ))}
       {site.geofences.staging && (
-        <Rectangle
-          bounds={toBounds(site.geofences.staging)}
+        <Polygon
+          positions={shapePositions(site.geofences.staging)}
           pathOptions={{ color: GEOFENCE_COLORS.staging, weight: 3, fillOpacity: 0.22 }}
         />
       )}
       {/* Truck gate on top so it remains the most obvious feature */}
       {site.geofences.truckGate && (
-        <Rectangle
-          bounds={toBounds(site.geofences.truckGate)}
+        <Polygon
+          positions={shapePositions(site.geofences.truckGate)}
           pathOptions={{ color: GEOFENCE_COLORS.truckGate, weight: 3, fillOpacity: 0.3 }}
         />
       )}
