@@ -7,6 +7,7 @@ import { DemoPackSchema, type DemoPack } from '@/lib/demo/pack-schema';
 import { DemoSurface } from '@/components/demo/demo-surface';
 import IndustryFlickBar from '@/components/demo/industry-flick-bar';
 import { MicrositeViewEvent } from '@/components/demo/microsite-view-event';
+import { RelatedIndustries } from '@/components/demo/related-industries';
 import { getIndustryFromSlug } from '@/lib/demo/industry-tags';
 import { MicrositeTracker } from '@/components/microsites/microsite-tracker';
 import { getAccountMicrositeData } from '@/lib/microsites/accounts';
@@ -41,6 +42,8 @@ interface SearchParams {
    * Triggers anonymized template framing in DemoSurface.
    */
   from?: string;
+  /** Demo-mode flag, preserved through cross-microsite links. */
+  demo?: string;
 }
 
 async function loadPack(slug: string): Promise<DemoPack | null> {
@@ -168,6 +171,13 @@ export default async function DemoAccountPage({
         initialView={initialView}
         fromGallery={fromGallery}
         featuredSiteThumbSrc={featuredSiteThumbSrc}
+      />
+      {/* L.T2 — related-industries rail (server component). */}
+      <RelatedIndustries
+        currentSlug={account}
+        currentArchetype={pack.account.archetype}
+        currentDockDoors={pack.network.totals.dockDoors}
+        demoSuffix={sp.demo && ['1', 'true', 'yes'].includes(String(sp.demo).toLowerCase()) ? '&demo=1' : ''}
       />
       {/* G7 — Industry flick bar. Self-suppresses if the slug isn't
           one of the 11 gallery anchors. */}

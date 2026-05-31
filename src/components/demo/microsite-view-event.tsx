@@ -31,6 +31,21 @@ export function MicrositeViewEvent({
           },
         }),
       );
+      // L.T4 — high-signal target-account view when a rep's share link
+      // carries ?to=<hubspot-company-token>. The server tracker forwards
+      // the token; stamping the company timeline awaits the token->company
+      // mapping scheme (out-of-band).
+      const targetToken = params.get('to');
+      if (targetToken) {
+        window.dispatchEvent(
+          new CustomEvent('yf:event', {
+            detail: {
+              name: 'microsite_target_account_viewed',
+              props: { anchor_slug: anchorSlug, target_company_token: targetToken },
+            },
+          }),
+        );
+      }
     } catch {
       // analytics bridge unavailable — ignore.
     }

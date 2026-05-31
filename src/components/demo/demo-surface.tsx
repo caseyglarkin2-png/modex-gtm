@@ -12,6 +12,8 @@ import { NetworkSimulator } from './network-simulator';
 import { DossierIntro } from './dossier-intro';
 import { SurprisingFindings } from './surprising-findings';
 import { AnchorTeardownVideo } from './anchor-teardown-video';
+import { RoiCtaButton } from './roi-cta-button';
+import { ShareMicrosite } from './share-microsite';
 
 /**
  * Top-level client surface for /demo/[account]. Manages cross-component
@@ -162,7 +164,7 @@ export function DemoSurface({
 
   return (
     <div
-      className={mode === 'standalone' ? 'flex min-h-screen flex-col bg-[#050505] text-white' : 'flex h-[600px] flex-col rounded-lg border border-[#00B4FF]/[0.16] shadow-[0_24px_64px_rgba(0,0,0,0.40)]'}
+      className={mode === 'standalone' ? 'flex min-h-screen flex-col bg-[#050505] pb-24 text-white md:pb-0' : 'flex h-[600px] flex-col rounded-lg border border-[#00B4FF]/[0.16] shadow-[0_24px_64px_rgba(0,0,0,0.40)]'}
       style={mode === 'embed' ? { background: 'linear-gradient(180deg, rgba(17, 19, 24, 0.92), rgba(10, 12, 16, 0.92))' } : undefined}
     >
       {/*
@@ -276,7 +278,9 @@ export function DemoSurface({
                 </p>
               )}
             </div>
-            <div className="flex shrink-0 items-center gap-4">
+            {/* L.T3 + L.T5 — next-action cluster: primary Run ROI, secondary
+                Book audit, plus the outbound Share link. */}
+            <div className="flex shrink-0 flex-wrap items-center justify-end gap-2">
               {!fromGallery && (
                 <Link
                   href={`/for/${pack.account.slug}`}
@@ -286,16 +290,25 @@ export function DemoSurface({
                   ← Read the full memo
                 </Link>
               )}
+              <ShareMicrosite slug={pack.account.slug} brand={displayName} />
               <a
                 href={bookAuditHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-ms-cta-id={fromGallery ? 'gallery-pack-book-audit' : 'demo-book-audit'}
-                className="inline-flex min-h-[36px] items-center gap-1.5 rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.12] px-3 py-1.5 text-xs font-bold text-white transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22] hover:shadow-[0_0_22px_rgba(0,180,255,0.32)]"
-                style={{ boxShadow: '0 0 0 1px rgba(0, 180, 255, 0.18) inset, 0 6px 18px rgba(0, 0, 0, 0.35)' }}
+                className="inline-flex min-h-[36px] items-center gap-1.5 rounded-[10px] border border-white/15 bg-transparent px-3 py-1.5 text-xs font-semibold text-white/85 transition-all hover:border-[#00B4FF]/55 hover:text-white"
               >
                 Book a network audit →
               </a>
+              <RoiCtaButton
+                pack={pack}
+                ctaId="microsite-run-roi"
+                utmMedium={fromGallery ? 'gallery-header' : 'demo-header'}
+                source="microsite"
+                className="inline-flex min-h-[36px] items-center gap-1.5 rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.12] px-3 py-1.5 text-xs font-bold text-white transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22] hover:shadow-[0_0_22px_rgba(0,180,255,0.32)]"
+              >
+                Run ROI →
+              </RoiCtaButton>
             </div>
           </div>
           {/* View tab toggle */}
@@ -322,6 +335,37 @@ export function DemoSurface({
           </div>
           <CoverageHonesty pack={pack} />
         </header>
+      )}
+
+      {/* L.T5 — mobile sticky next-action bar. The header CTAs scroll away
+          on a long microsite; this keeps the primary action one tap away.
+          Mobile only (md:hidden); the flick bar floats above its right
+          edge. Page has pb-24 to clear it. */}
+      {mode === 'standalone' && (
+        <div
+          data-microsite-action-bar
+          className="fixed inset-x-0 bottom-0 z-40 flex items-center gap-2 border-t border-[#00B4FF]/20 bg-[#050505]/95 px-4 py-3 backdrop-blur-md md:hidden"
+          style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 12px)' }}
+        >
+          <a
+            href={bookAuditHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-ms-cta-id="microsite-sticky-book-audit"
+            className="inline-flex min-h-[40px] flex-1 items-center justify-center rounded-[10px] border border-white/15 px-3 text-[13px] font-semibold text-white/85"
+          >
+            Book audit
+          </a>
+          <RoiCtaButton
+            pack={pack}
+            ctaId="microsite-sticky-run-roi"
+            utmMedium="demo-sticky"
+            source="microsite"
+            className="inline-flex min-h-[40px] flex-1 items-center justify-center rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.14] px-3 text-[13px] font-bold text-white"
+          >
+            Run ROI →
+          </RoiCtaButton>
+        </div>
       )}
 
       {/* Satellite zoom hero — the opening visual moment. Replaces the
