@@ -206,8 +206,37 @@ function useParallaxGrid() {
   return ref;
 }
 
+/**
+ * E.T8 — dependency-free fuzzy match for the "find your industry" search.
+ * Token-AND over brand, industry label, top archetype, and blurb. Covers
+ * "fed" -> FedEx, "beverage" -> Coca-Cola, "snacks" -> Frito-Lay. (City
+ * search would need site-level data threaded into the tile; noted as a
+ * follow-up since the tile payload does not carry cities today.)
+ */
+function tileMatchesQuery(tile: GalleryTileData, q: string): boolean {
+  const tokens = q.split(/\s+/).filter(Boolean);
+  if (tokens.length === 0) return true;
+  const haystack = [
+    tile.brand,
+    tile.anchor.label,
+    tile.anchor.archetype ?? '',
+    tile.anchor.blurb,
+  ]
+    .join(' ')
+    .toLowerCase();
+  return tokens.every((t) => haystack.includes(t));
+}
+
 export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo = false, allAccounts = [], facilitiesAudited = 0 }: GalleryProps) {
   const demoSuffix = useDemoSuffix(initialDemo);
+  // E.T8 — client-side search query, filters the (already archetype-
+  // filtered) tiles live.
+  const [query, setQuery] = useState('');
+  const trimmedQuery = query.trim().toLowerCase();
+  const displayedTiles = useMemo(
+    () => (trimmedQuery ? tiles.filter((t) => tileMatchesQuery(t, trimmedQuery)) : tiles),
+    [tiles, trimmedQuery],
+  );
   // C.T9 — subtle background-grid parallax. Sets a transform on the
   // grid layer keyed off scroll, capped at 24px drift, only when the
   // visitor has no reduced-motion preference. Static otherwise.
@@ -277,30 +306,31 @@ export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo
         >
           {/* G5 — Archetype filter rail. WAI-ARIA toolbar with roving
               focus. Each chip is a Link that preserves &demo=1. */}
+          <IndustrySearch query={query} onChange={setQuery} resultCount={displayedTiles.length} />
           <ArchetypeFilterRail
             active={activeArchetype}
             demoSuffix={demoSuffix}
-            visibleCount={tiles.length}
+            visibleCount={displayedTiles.length}
             totalCount={totalTiles ?? tiles.length}
           />
-          {tiles.length > 0 ? (
+          {displayedTiles.length > 0 ? (
             <div
               className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3"
               role="list"
               aria-label="Industry templates"
             >
-              {tiles.map((tile, i) => (
+              {displayedTiles.map((tile, i) => (
                 <Tile
                   key={tile.anchor.id}
                   tile={tile}
                   index={i + 1}
-                  total={tiles.length}
+                  total={displayedTiles.length}
                   demoSuffix={demoSuffix}
                 />
               ))}
             </div>
           ) : (
-            <EmptyFilterState demoSuffix={demoSuffix} />
+            <EmptyFilterState demoSuffix={demoSuffix} query={trimmedQuery} onClearQuery={() => setQuery('')} />
           )}
         </main>
         {allAccounts.length > 0 ? (
@@ -910,7 +940,61 @@ function ArchetypeFilterRail({
   );
 }
 
-function EmptyFilterState({ demoSuffix }: { demoSuffix: string }) {
+/* ═══════════════════════════════════════════════════════════════
+   IndustrySearch — E.T8. Client-side "find your industry" box.
+   Filters the tile grid live (token-AND over brand / industry label /
+   archetype / blurb). Type=search for native clear affordance.
+   ═══════════════════════════════════════════════════════════════ */
+
+function IndustrySearch({
+  query,
+  onChange,
+  resultCount,
+}: {
+  query: string;
+  onChange: (v: string) => void;
+  resultCount: number;
+}) {
+  return (
+    <div className="mb-4" data-ms-section-id="gallery-search">
+      <label className="relative block">
+        <span className="sr-only">Find your industry</span>
+        <span aria-hidden className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-white/40">
+          <svg width={15} height={15} viewBox="0 0 24 24" fill="none">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="2" />
+            <path d="M20 20l-3.5-3.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          </svg>
+        </span>
+        <input
+          type="search"
+          inputMode="search"
+          value={query}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder="Type a brand or vertical. Try fedex, beverage, snacks."
+          aria-label="Find your industry"
+          data-gallery-search-input
+          className="w-full rounded-[12px] border border-white/15 bg-white/[0.03] py-2.5 pl-10 pr-4 text-[14px] text-white placeholder:text-white/35 outline-none transition-colors focus:border-[#00B4FF]/60 focus-visible:outline-2 focus-visible:outline-offset-[2px] focus-visible:outline-[#00B4FF]"
+        />
+      </label>
+      {query.trim().length > 0 ? (
+        <div className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-white/45" role="status">
+          {resultCount} {resultCount === 1 ? 'match' : 'matches'}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+function EmptyFilterState({
+  demoSuffix,
+  query = '',
+  onClearQuery,
+}: {
+  demoSuffix: string;
+  query?: string;
+  onClearQuery?: () => void;
+}) {
+  const isSearch = query.length > 0;
   return (
     <div
       role="status"
@@ -918,19 +1002,31 @@ function EmptyFilterState({ demoSuffix }: { demoSuffix: string }) {
       style={{ background: 'linear-gradient(180deg, rgba(17, 19, 24, 0.92), rgba(10, 12, 16, 0.92))' }}
     >
       <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/45">
-        Nothing yet for that archetype
+        {isSearch ? 'No template matches that search' : 'Nothing yet for that archetype'}
       </p>
       <p className="max-w-[420px] text-[14px] leading-[1.55] text-white/[0.72]">
-        We have not modeled a representative template in this archetype yet. Browse all 11 templates instead.
+        {isSearch
+          ? `Nothing matched "${query}". Clear the search to see every template, or request an audit for your industry.`
+          : 'We have not modeled a representative template in this archetype yet. Browse all 11 templates instead.'}
       </p>
-      <Link
-        href={`/demo${demoSuffix.replace(/^&/, '?')}`}
-        prefetch={false}
-        className="mt-2 inline-flex items-center gap-1.5 rounded-[10px] border border-white/20 bg-transparent px-4 py-2 text-[13px] font-semibold text-white/85 transition-all hover:border-[#00B4FF]/55 hover:text-white"
-      >
-        View all templates
-        <ArrowRight className="" />
-      </Link>
+      {isSearch && onClearQuery ? (
+        <button
+          type="button"
+          onClick={onClearQuery}
+          className="mt-2 inline-flex items-center gap-1.5 rounded-[10px] border border-white/20 bg-transparent px-4 py-2 text-[13px] font-semibold text-white/85 transition-all hover:border-[#00B4FF]/55 hover:text-white"
+        >
+          Clear search
+        </button>
+      ) : (
+        <Link
+          href={`/demo${demoSuffix.replace(/^&/, '?')}`}
+          prefetch={false}
+          className="mt-2 inline-flex items-center gap-1.5 rounded-[10px] border border-white/20 bg-transparent px-4 py-2 text-[13px] font-semibold text-white/85 transition-all hover:border-[#00B4FF]/55 hover:text-white"
+        >
+          View all templates
+          <ArrowRight className="" />
+        </Link>
+      )}
       {/* C.T6 — capture latent demand for un-modeled archetypes. */}
       <a
         href={`${MICROSITE_BASE}/contact?intent=custom-audit&source=gallery-empty-filter`}
