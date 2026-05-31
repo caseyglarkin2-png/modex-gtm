@@ -78,6 +78,37 @@ body {
   }
 }
 
+/* G.T3 — universal CTA press microinteraction. Scoped to tracked CTAs
+   ([data-ms-cta-id]) so it covers the neon buttons + links across the
+   demo surfaces without touching every component. Reduced-motion users
+   get an opacity dip instead of a scale. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-ms-cta-id]:active {
+    transform: scale(0.97);
+    transition: transform 100ms ease-out;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-ms-cta-id]:active {
+    opacity: 0.85;
+  }
+}
+
+/* G.T5 — active-filter pulse ring on gallery tiles. Applied only when an
+   archetype filter is active. Uses outline (not box-shadow) so it never
+   fights the tile's hover shadow. Motion-safe only. */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes tile-pulse-ring {
+    0%, 100% { outline-color: rgba(0, 180, 255, 0.30); }
+    50% { outline-color: rgba(0, 180, 255, 0.80); }
+  }
+  .tile-pulse {
+    outline: 1px solid rgba(0, 180, 255, 0.30);
+    outline-offset: 2px;
+    animation: tile-pulse-ring 3s ease-in-out infinite;
+  }
+}
+
 /* YNS Network Simulator — pulsing halo on critical-utilization sites.
    Lives in the global stylesheet (not inside the dynamic-imported
    network-simulator-inner) because an inline <style> tag inside the

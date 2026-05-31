@@ -360,6 +360,7 @@ export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo
                   index={i + 1}
                   total={displayedTiles.length}
                   demoSuffix={demoSuffix}
+                  filterActive={activeArchetype !== null}
                 />
               ))}
             </div>
@@ -550,11 +551,13 @@ function Tile({
   index,
   total,
   demoSuffix,
+  filterActive = false,
 }: {
   tile: GalleryTileData;
   index: number;
   total: number;
   demoSuffix: string;
+  filterActive?: boolean;
 }) {
   const { anchor, brand, facilityCount, facilityCountIsGlobal, dockDoors, trailerCapacity, railServed, roiPrefill, thumbSrc, thumbAlt, surprisingFindings, builtAt } = tile;
   const firstFinding = surprisingFindings?.[0];
@@ -580,7 +583,7 @@ function Tile({
 
   return (
     <article
-      className="tile-rise group relative flex flex-col overflow-hidden rounded-[16px] border border-[#00B4FF]/[0.16] p-5 transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-[3px] hover:border-[#00B4FF]/[0.50] hover:shadow-[0_24px_64px_rgba(0,0,0,0.40),0_0_40px_rgba(0,180,255,0.18)]"
+      className={`tile-rise group relative flex flex-col overflow-hidden rounded-[16px] border border-[#00B4FF]/[0.16] p-5 transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-[3px] hover:border-[#00B4FF]/[0.50] hover:shadow-[0_24px_64px_rgba(0,0,0,0.40),0_0_40px_rgba(0,180,255,0.18)]${filterActive ? ' tile-pulse' : ''}`}
       role="listitem"
       data-ms-section-id={`gallery-tile-${anchor.id}`}
       data-archetype={anchor.archetype}

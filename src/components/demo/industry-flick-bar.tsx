@@ -51,6 +51,16 @@ function isDemoActive(): boolean {
 }
 
 function trackFlick(direction: 'prev' | 'next', toSlug: string): void {
+  // G.T2 — haptic pulse on supported devices (mobile). iframe-safe and
+  // no-throw in restricted contexts. Fires regardless of demo mode so a
+  // rep gets the same tactile feedback in a meeting; no-op on desktop.
+  try {
+    if (typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function') {
+      navigator.vibrate(10);
+    }
+  } catch {
+    // vibrate unavailable / blocked — ignore.
+  }
   if (isDemoActive()) return; // analytics events spec — suppressed under demo
   try {
     window.dispatchEvent(

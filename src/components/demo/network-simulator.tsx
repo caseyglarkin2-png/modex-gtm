@@ -55,8 +55,20 @@ class MapBoundary extends Component<{ children: ReactNode }, { error: Error | nu
 const Inner = dynamic(() => import('./network-simulator-inner'), {
   ssr: false,
   loading: () => (
-    <div className="flex h-full w-full items-center justify-center bg-slate-900 text-xs uppercase tracking-widest text-slate-400">
-      Loading simulator…
+    // G.T4 — CLS-free skeleton. Fills the parent's reserved height
+    // (h-[420px]/md:h-[520px]) so there is zero layout shift on hydrate.
+    <div
+      className="motion-safe:animate-pulse flex h-full w-full items-center justify-center"
+      style={{
+        background:
+          'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,180,255,0.08), transparent 70%), linear-gradient(180deg, #0a0c10, #050505)',
+      }}
+      aria-busy="true"
+      aria-label="Loading network simulator"
+    >
+      <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/35">
+        Loading network simulator…
+      </span>
     </div>
   ),
 });
