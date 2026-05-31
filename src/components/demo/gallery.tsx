@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import type { Archetype, IndustryAnchor } from '@/lib/demo/industry-tags';
 import { ARCHETYPE_LABELS_TOP, INDUSTRY_ANCHORS } from '@/lib/demo/industry-tags';
@@ -84,6 +84,9 @@ export interface GalleryTileData {
   /** G3 — Alt text composer for the satellite thumb. Format:
    *  "Audited facility — {brand} in {city}, {state}". */
   thumbAlt?: string;
+  /** C.T4 — Up to 3 quantified audit findings (Phase B authoring).
+   *  The first is revealed on tile hover over the satellite thumb. */
+  surprisingFindings?: string[];
 }
 
 /** Lightweight account summary for the "All audited accounts" directory
@@ -96,6 +99,8 @@ export interface AccountSummary {
   displayName: string;
   archetype: string;
   siteCount: number;
+  /** C.T1 — audited site count (pack.network.sites.length). */
+  auditedSites: number;
   totalGlobalFootprint: number | null;
   dockDoors: number;
   trailerCapacity: number;
@@ -117,6 +122,10 @@ interface GalleryProps {
    *  page.tsx). Powers the "All audited accounts" directory below the
    *  curated 11-tile grid. */
   allAccounts?: AccountSummary[];
+  /** C.T1 — Total audited facilities across all packs, computed
+   *  server-side. Rendered in the hero subhead. Filter-independent so
+   *  the number never changes when the prospect narrows by archetype. */
+  facilitiesAudited?: number;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -153,8 +162,56 @@ function useDemoSuffix(initialDemo: boolean): string {
   return suffix;
 }
 
-export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo = false, allAccounts = [] }: GalleryProps) {
+/**
+ * C.T9 — Subtle background-grid parallax.
+ *
+ * Returns a ref to attach to the fixed grid layer. On scroll, translates
+ * the grid by a small fraction of scrollY (capped at 24px total drift)
+ * so the void reads as having depth without inducing motion sickness.
+ *
+ * Reduced-motion: the listener never attaches, so the grid stays static
+ * and the transform is never set. Throttled via requestAnimationFrame to
+ * stay on the compositor thread (transform only, no layout/paint).
+ */
+function useParallaxGrid() {
+  const ref = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    let prefersReduced = false;
+    try {
+      prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    } catch {
+      // matchMedia unavailable — treat as no-preference.
+    }
+    if (prefersReduced) return;
+
+    const MAX_DRIFT = 24; // px — keep the shift gentle.
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = window.requestAnimationFrame(() => {
+        raf = 0;
+        const drift = Math.min(window.scrollY * 0.03, MAX_DRIFT);
+        el.style.transform = `translate3d(0, ${drift}px, 0)`;
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (raf) window.cancelAnimationFrame(raf);
+    };
+  }, []);
+  return ref;
+}
+
+export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo = false, allAccounts = [], facilitiesAudited = 0 }: GalleryProps) {
   const demoSuffix = useDemoSuffix(initialDemo);
+  // C.T9 — subtle background-grid parallax. Sets a transform on the
+  // grid layer keyed off scroll, capped at 24px drift, only when the
+  // visitor has no reduced-motion preference. Static otherwise.
+  const gridRef = useParallaxGrid();
   return (
     <div
       className="relative flex min-h-screen flex-col bg-[#050505] text-white"
@@ -179,8 +236,9 @@ export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo
         }}
       />
       <div
+        ref={gridRef}
         aria-hidden
-        className="pointer-events-none fixed inset-0 z-0 hidden md:block"
+        className="pointer-events-none fixed inset-0 z-0 hidden will-change-transform md:block"
         style={{
           backgroundImage: [
             'linear-gradient(rgba(0, 180, 255, 0.06) 1px, transparent 1px)',
@@ -212,7 +270,7 @@ export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo
       {demoSuffix.length > 0 ? <DemoPill /> : null}
 
       <div className="relative z-[1] flex flex-1 flex-col">
-        <Hero count={totalTiles ?? tiles.length} demoSuffix={demoSuffix} />
+        <Hero count={totalTiles ?? tiles.length} facilitiesAudited={facilitiesAudited} demoSuffix={demoSuffix} />
         <main
           className="mx-auto w-full max-w-[1280px] flex-1 px-6 pb-24 max-[480px]:px-[18px]"
           data-ms-section-id="gallery-grid"
@@ -260,8 +318,22 @@ export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo
    with neon span, single supporting line, one CTA.
    ═══════════════════════════════════════════════════════════════ */
 
-function Hero({ count, demoSuffix }: { count: number; demoSuffix: string }) {
+function Hero({ count, facilitiesAudited, demoSuffix }: { count: number; facilitiesAudited: number; demoSuffix: string }) {
   const isDemo = demoSuffix.length > 0;
+
+  // C.T2 — secondary CTA scrolls to the tile grid. Uses the existing
+  // [data-ms-section-id="gallery-grid"] anchor on <main>. Smooth scroll;
+  // browsers honor prefers-reduced-motion for this automatically.
+  function scrollToGrid(e: React.MouseEvent<HTMLAnchorElement>) {
+    e.preventDefault();
+    try {
+      document
+        .querySelector('[data-ms-section-id="gallery-grid"]')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } catch {
+      // querySelector/scrollIntoView unavailable — anchor href fallback.
+    }
+  }
   return (
     <header
       className="border-b border-[#00B4FF]/[0.10] backdrop-blur-[2px]"
@@ -278,6 +350,17 @@ function Hero({ count, demoSuffix }: { count: number; demoSuffix: string }) {
           </span>
           <span>One Network · {count} Industry Archetypes · Live</span>
         </div>
+
+        {/* C.T1 — live audit subhead. Filter-independent numbers, server
+            rendered so there is no hydration shift. Reads as the receipt
+            behind the "See your numbers" promise in the H1 below. */}
+        <p className="mt-3 text-[14px] font-medium tracking-[0.01em] text-white/70 max-[480px]:text-[13px]">
+          <span className="font-bold text-white">{count}</span> industries
+          {' · '}
+          <span className="font-bold text-white">{facilitiesAudited.toLocaleString()}</span> facilities audited
+          {' · '}
+          <span className="text-[#00B4FF]">ROI in 30 seconds</span>
+        </p>
 
         {/* H1 — wins the page. Black weight, tight tracking, neon span. */}
         <h1 className="mt-5 max-w-[920px] font-black leading-[1.04] tracking-[-0.04em] text-[clamp(40px,6vw,72px)] [text-wrap:balance] max-[480px]:mt-4 max-[480px]:text-[clamp(36px,9vw,52px)]">
@@ -323,14 +406,16 @@ function Hero({ count, demoSuffix }: { count: number; demoSuffix: string }) {
           modeled geofences, classification rubric.
         </p>
 
-        {/* Single CTA. The per-tile CTAs do the heavy lifting. */}
-        <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-3">
+        {/* C.T2 — two distinct CTAs. Primary (neon-filled) opens the
+            calculator; secondary (neon-outlined) scrolls to the tile grid.
+            Stack vertically on mobile. */}
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3">
           <a
             href={`${MICROSITE_BASE}/roi?source=demo-gallery${demoSuffix}`}
             target="_blank"
             rel="noopener noreferrer"
             data-ms-cta-id="gallery-hero-open-calculator"
-            className="group inline-flex min-h-[52px] items-center gap-2 rounded-[12px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.12] px-5 text-[14px] font-bold tracking-[0.01em] text-white outline-none transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22] hover:shadow-[0_0_28px_rgba(0,180,255,0.35)] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#00B4FF]"
+            className="group inline-flex min-h-[52px] items-center justify-center gap-2 rounded-[12px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.12] px-5 text-[14px] font-bold tracking-[0.01em] text-white outline-none transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22] hover:shadow-[0_0_28px_rgba(0,180,255,0.35)] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#00B4FF]"
             style={{
               boxShadow:
                 '0 0 0 1px rgba(0, 180, 255, 0.18) inset, 0 10px 28px rgba(0, 0, 0, 0.40), 0 0 22px rgba(0, 180, 255, 0.18)',
@@ -339,9 +424,15 @@ function Hero({ count, demoSuffix }: { count: number; demoSuffix: string }) {
             Open the calculator
             <ArrowRight className="transition-transform group-hover:translate-x-[3px]" />
           </a>
-          <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/55">
-            or jump to your industry
-          </span>
+          <a
+            href="#gallery-grid"
+            onClick={scrollToGrid}
+            data-ms-cta-id="gallery-hero-browse-industries"
+            className="group inline-flex min-h-[52px] items-center justify-center gap-2 rounded-[12px] border border-white/20 bg-transparent px-5 text-[14px] font-semibold tracking-[0.01em] text-white/85 outline-none transition-all hover:border-[#00B4FF]/55 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#00B4FF]"
+          >
+            Browse industries below
+            <span className="transition-transform group-hover:translate-y-[2px]" aria-hidden>↓</span>
+          </a>
         </div>
       </div>
     </header>
@@ -365,7 +456,8 @@ function Tile({
   total: number;
   demoSuffix: string;
 }) {
-  const { anchor, brand, facilityCount, facilityCountIsGlobal, dockDoors, trailerCapacity, railServed, roiPrefill, thumbSrc, thumbAlt } = tile;
+  const { anchor, brand, facilityCount, facilityCountIsGlobal, dockDoors, trailerCapacity, railServed, roiPrefill, thumbSrc, thumbAlt, surprisingFindings } = tile;
+  const firstFinding = surprisingFindings?.[0];
 
   const roiHref = `${MICROSITE_BASE}/roi?source=demo-gallery&industry=${encodeURIComponent(anchor.id)}&pack=${encodeURIComponent(anchor.slug)}${demoSuffix}`;
   const templateHref = `/demo/${anchor.slug}?from=gallery${demoSuffix}`;
@@ -387,12 +479,18 @@ function Tile({
 
   return (
     <article
-      className="group relative flex flex-col overflow-hidden rounded-[16px] border border-[#00B4FF]/[0.16] p-5 transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-[3px] hover:border-[#00B4FF]/[0.50] hover:shadow-[0_24px_64px_rgba(0,0,0,0.40),0_0_40px_rgba(0,180,255,0.18)]"
+      className="tile-rise group relative flex flex-col overflow-hidden rounded-[16px] border border-[#00B4FF]/[0.16] p-5 transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-[3px] hover:border-[#00B4FF]/[0.50] hover:shadow-[0_24px_64px_rgba(0,0,0,0.40),0_0_40px_rgba(0,180,255,0.18)]"
       role="listitem"
       data-ms-section-id={`gallery-tile-${anchor.id}`}
+      data-archetype={anchor.archetype}
       style={{
         background:
           'linear-gradient(180deg, rgba(17, 19, 24, 0.92), rgba(10, 12, 16, 0.92))',
+        // C.T3 — staggered entrance. The animation itself only exists
+        // inside the prefers-reduced-motion: no-preference media query
+        // (globals.css .tile-rise), so this delay is inert under reduced
+        // motion and tiles render at full opacity immediately.
+        animationDelay: `${index * 60}ms`,
       }}
     >
       {/* G3 — Satellite anchor thumbnail. 16:10 above the brand. Fallback
@@ -400,6 +498,8 @@ function Tile({
           gets priority + decoding=sync per LCP rule (G3.T7). */}
       {thumbSrc ? (
         <div className="-mx-5 -mt-5 mb-4 relative aspect-[16/10] overflow-hidden border-b border-[#00B4FF]/[0.16]">
+          {/* C.T5 — subtle satellite pan on hover. 1.02x over 600ms,
+              centered origin. motion-safe: gates out reduced-motion. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={thumbSrc}
@@ -409,7 +509,7 @@ function Tile({
             loading={isFirstTile ? 'eager' : 'lazy'}
             decoding={isFirstTile ? 'sync' : 'async'}
             fetchPriority={isFirstTile ? 'high' : 'auto'}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover transition-transform duration-[600ms] ease-out motion-safe:group-hover:scale-[1.02]"
           />
           {/* Bottom-gradient overlay for caption legibility. */}
           <div
@@ -422,6 +522,24 @@ function Tile({
           <span className="absolute bottom-2 left-3 font-mono text-[9.5px] font-semibold uppercase tracking-[0.20em] text-white/90">
             Audited facility
           </span>
+          {/* C.T4 — hover-reveal first surprising finding. Gated to
+              hover-capable devices via @media (hover: hover) so touch
+              screens never trigger it. pointer-events-none keeps the
+              tile link fully clickable. */}
+          {firstFinding ? (
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-x-0 bottom-0 flex flex-col justify-end p-3 opacity-0 transition-opacity duration-200 [@media(hover:hover)]:group-hover:opacity-100"
+              style={{
+                minHeight: '66%',
+                background: 'linear-gradient(180deg, transparent, rgba(5, 5, 5, 0.92) 55%)',
+              }}
+            >
+              <span className="line-clamp-3 text-[14px] font-semibold leading-snug text-white">
+                {firstFinding}
+              </span>
+            </div>
+          ) : null}
         </div>
       ) : (
         <div
@@ -805,12 +923,23 @@ function EmptyFilterState({ demoSuffix }: { demoSuffix: string }) {
       <Link
         href={`/demo${demoSuffix.replace(/^&/, '?')}`}
         prefetch={false}
-        className="mt-2 inline-flex items-center gap-1.5 rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.10] px-4 py-2 text-[13px] font-bold text-white transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22]"
-        style={{ boxShadow: '0 0 0 1px rgba(0, 180, 255, 0.16) inset, 0 6px 18px rgba(0, 0, 0, 0.35)' }}
+        className="mt-2 inline-flex items-center gap-1.5 rounded-[10px] border border-white/20 bg-transparent px-4 py-2 text-[13px] font-semibold text-white/85 transition-all hover:border-[#00B4FF]/55 hover:text-white"
       >
         View all templates
         <ArrowRight className="" />
       </Link>
+      {/* C.T6 — capture latent demand for un-modeled archetypes. */}
+      <a
+        href={`${MICROSITE_BASE}/contact?intent=custom-audit&source=gallery-empty-filter`}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-ms-cta-id="gallery-empty-filter-audit-request"
+        className="inline-flex items-center gap-1.5 rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.10] px-4 py-2 text-[13px] font-bold text-white transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22]"
+        style={{ boxShadow: '0 0 0 1px rgba(0, 180, 255, 0.16) inset, 0 6px 18px rgba(0, 0, 0, 0.35)' }}
+      >
+        Want this in your industry? Book a 30-min audit
+        <ArrowRight className="" />
+      </a>
     </div>
   );
 }

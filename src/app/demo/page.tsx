@@ -194,6 +194,9 @@ export interface AccountSummary {
   displayName: string;
   archetype: string;
   siteCount: number;
+  /** C.T1 — number of audited sites (pack.network.sites.length). Summed
+   *  across all accounts for the hero "facilities audited" subhead. */
+  auditedSites: number;
   totalGlobalFootprint: number | null;
   dockDoors: number;
   trailerCapacity: number;
@@ -214,6 +217,7 @@ async function loadAccountSummary(slug: string): Promise<AccountSummary | null> 
       displayName: pack.account.displayName,
       archetype: pack.account.archetype,
       siteCount: pack.account.siteCount,
+      auditedSites: pack.network.sites.length,
       totalGlobalFootprint: cov?.totalGlobalFootprint ?? cov?.estimatedFootprint ?? null,
       dockDoors: pack.network.totals.dockDoors,
       trailerCapacity: pack.network.totals.trailerCapacity,
@@ -271,6 +275,7 @@ async function loadTile(anchor: IndustryAnchor): Promise<GalleryTileData | null>
     roiPrefill: buildRoiV2State(pack),
     thumbSrc,
     thumbAlt,
+    surprisingFindings: pack.account.surprisingFindings ?? [],
   };
 }
 
@@ -342,6 +347,11 @@ export default async function DemoGalleryPage({
     loadAllAccountSummaries(),
   ]);
 
+  /* C.T1 — total audited facilities across every audited account.
+   * Computed from allAccounts (already loaded) so it is filter-independent:
+   * narrowing by archetype never changes the headline number. */
+  const facilitiesAudited = allAccounts.reduce((sum, a) => sum + a.auditedSites, 0);
+
   return (
     <>
       {/*
@@ -362,6 +372,7 @@ export default async function DemoGalleryPage({
         totalTiles={INDUSTRY_ANCHORS.length}
         initialDemo={initialDemo}
         allAccounts={allAccounts}
+        facilitiesAudited={facilitiesAudited}
       />
     </>
   );
