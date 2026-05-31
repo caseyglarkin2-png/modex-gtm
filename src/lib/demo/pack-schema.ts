@@ -307,6 +307,18 @@ export const DemoPackSchema = z.object({
      * component returns null if missing or fewer than 3 items.
      */
     surprisingFindings: z.array(z.string().max(160)).max(3).optional(),
+    /**
+     * D.T3 — Per-industry ROI defaults. Seeds the V2 calculator's
+     * "average margin per shipment" ask with an industry-representative
+     * value so a prefilled run lands on a realistic number instead of
+     * the generic $1,000 fallback. Optional for backward compat; the
+     * calculator falls back to 1000 when absent.
+     */
+    roiDefaults: z
+      .object({
+        averageMarginPerShipment: z.number().positive(),
+      })
+      .optional(),
   }),
   research: AccountResearch,
   network: Network,

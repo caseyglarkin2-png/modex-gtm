@@ -21,7 +21,10 @@
       "Mira Loma CA runs 360 dock doors. That's more docks than three NFL stadiums have parking gates combined.",
       "2 of 30 audited sites are rail-served. Retail RDCs are truckload pipelines, not multimodal.",
       "4,456 total dock doors across 30 sites. Retail runs the most dock minutes per site in the dataset."
-    ]
+    ],
+    "roiDefaults": {
+      "averageMarginPerShipment": 640
+    }
   },
   "research": {
     "facility_count": 200,

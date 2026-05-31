@@ -21,7 +21,10 @@
       "BlueOval City is 950 acres of greenfield. Ford's EV bet is the size of 720 NFL fields.",
       "20 of 24 audited sites are rail-served. Auto inbound runs on railcars, not trucks.",
       "907 dock doors across 24 plants. The auto OEM dock count is parts pacing, not throughput."
-    ]
+    ],
+    "roiDefaults": {
+      "averageMarginPerShipment": 2200
+    }
   },
   "research": {
     "facility_count": 24,

@@ -20,7 +20,10 @@
       "5,027 trailer spots across 29 sites. Frito-Lay parks more trailers per site than any CPG network we've measured.",
       "Frankfort IN is 155 acres of snack manufacturing. Same footprint as a small auto plant.",
       "17 of 29 sites are rail-served. Cheapest inbound corn in the network."
-    ]
+    ],
+    "roiDefaults": {
+      "averageMarginPerShipment": 640
+    }
   },
   "research": {
     "facility_count": 230,

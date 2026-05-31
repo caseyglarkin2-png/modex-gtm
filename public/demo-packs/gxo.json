@@ -21,7 +21,10 @@
       "Conair Hagerstown runs 378 dock doors. A single building moves more freight than most carriers' annual flow.",
       "3,107 dock doors across 30 sites. GXO routes more dock minutes than any non-parcel network in the dataset.",
       "1 of 30 sites is rail-served. 3PL warehousing is overwhelmingly truckload to truckload."
-    ]
+    ],
+    "roiDefaults": {
+      "averageMarginPerShipment": 480
+    }
   },
   "research": {
     "facility_count": 1000,

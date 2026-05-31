@@ -20,7 +20,10 @@
       "1,324 dock doors across 30 sites. Foodservice runs on density.",
       "Multi-temp trailers turn the yard into a routing problem. Frozen, refrigerated, ambient all park separately.",
       "150 trailer spots at Lebanon means 50 routes can stage at once. Driver pickup is the cycle bottleneck."
-    ]
+    ],
+    "roiDefaults": {
+      "averageMarginPerShipment": 580
+    }
   },
   "research": {
     "facility_count": 30,

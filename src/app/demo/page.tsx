@@ -102,7 +102,9 @@ function buildRoiV2State(pack: DemoPack): RoiV2State {
       totalFacilities: total,
       facilitiesWithYms,
       facilitiesWithDropTrailers,
-      averageMarginPerShipment: 1000,
+      // D.T5 — seed from the per-industry margin default, falling back to
+      // the generic 1000 when a pack has no roiDefaults authored.
+      averageMarginPerShipment: pack.account.roiDefaults?.averageMarginPerShipment ?? 1000,
     },
     assumptions: {
       withYms: {

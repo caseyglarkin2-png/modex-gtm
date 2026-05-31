@@ -21,7 +21,10 @@
       "Memphis Express World Hub is 940 acres. More parcels sort here per night than land at most international airports.",
       "9,810 trailer spots across 30 sites. FedEx parks more trailers than any other audited network.",
       "0 of 30 audited sites are rail-served. LTL is highway-to-highway."
-    ]
+    ],
+    "roiDefaults": {
+      "averageMarginPerShipment": 380
+    }
   },
   "research": {
     "facility_count": 30,
