@@ -886,7 +886,7 @@ function Footer() {
           Your demo would reflect <span className="text-white">your</span> facilities,
           your archetype mix, and your network shape.
         </p>
-        <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/35">
+        <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/55">
           <span className="text-[#FF2A00]/70">*</span> audited slice — full
           network footprint quoted where global counts are available.
           {' · '}
@@ -894,7 +894,7 @@ function Footer() {
         </p>
         {/* F.T6 — provenance attribution + modal trigger (same modal as
             the hero F.T1 trigger). */}
-        <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-white/45">
+        <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-white/60">
           <span>Public audit data. Not affiliated with featured brands.</span>
           <ProvenanceLink />
         </p>

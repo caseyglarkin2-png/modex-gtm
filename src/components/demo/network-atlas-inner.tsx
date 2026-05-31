@@ -90,6 +90,10 @@ export default function NetworkAtlasInner({ pack, selectedSiteId, archetypeFilte
           key={site.id}
           position={[site.center.lat, site.center.lng]}
           icon={makeIcon(ARCHETYPE_COLORS[site.archetype], site.id === selectedSiteId)}
+          // K.T4 — accessible name for the role=button marker (axe
+          // aria-command-name). Title + alt resolve to the site name.
+          title={site.name}
+          alt={`${site.name} site marker`}
           eventHandlers={{
             click: () => onSelectSite(site.id === selectedSiteId ? null : site.id),
           }}

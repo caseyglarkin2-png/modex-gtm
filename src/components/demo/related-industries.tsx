@@ -119,7 +119,7 @@ export async function RelatedIndustries({
             <span className="text-[14px] font-semibold text-white transition-colors group-hover:text-[#00B4FF]">
               {r.displayName}
             </span>
-            <span className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-white/45">
+            <span className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-white/60">
               {r.dockDoors.toLocaleString()} dock doors · {r.siteCount.toLocaleString()} sites
             </span>
           </Link>

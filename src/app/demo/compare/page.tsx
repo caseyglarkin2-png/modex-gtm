@@ -71,7 +71,7 @@ export default async function ComparePage({ searchParams }: { searchParams: Prom
         </h1>
         <p className="mt-3 max-w-[640px] text-[15px] leading-[1.55] text-white/65">
           Same rubric, same satellite imagery, same modeled geofences.{' '}
-          <Link href="/demo" className="text-[#00B4FF] underline-offset-4 hover:underline">
+          <Link href="/demo" className="text-[#00B4FF] underline underline-offset-4">
             Back to all industries
           </Link>
         </p>

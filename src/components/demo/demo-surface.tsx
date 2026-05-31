@@ -200,7 +200,7 @@ export function DemoSurface({
               <nav
                 aria-label="Breadcrumb"
                 data-microsite-breadcrumb
-                className="mb-1.5 flex flex-wrap items-center gap-x-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-white/45"
+                className="mb-1.5 flex flex-wrap items-center gap-x-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-white/60"
               >
                 <Link
                   href="/demo"
@@ -266,7 +266,7 @@ export function DemoSurface({
                   nominative-fair-use cover. */}
               <p
                 data-attribution-strip
-                className="mt-1 text-[11px] leading-relaxed text-stone-500"
+                className="mt-1 text-[11px] leading-relaxed text-stone-400"
               >
                 Public audit. Not affiliated with{' '}
                 <span className="text-stone-400">{displayName}</span>. Data from
