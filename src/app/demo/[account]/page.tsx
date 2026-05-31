@@ -6,6 +6,8 @@ import type { Metadata } from 'next';
 import { DemoPackSchema, type DemoPack } from '@/lib/demo/pack-schema';
 import { DemoSurface } from '@/components/demo/demo-surface';
 import IndustryFlickBar from '@/components/demo/industry-flick-bar';
+import { MicrositeViewEvent } from '@/components/demo/microsite-view-event';
+import { getIndustryFromSlug } from '@/lib/demo/industry-tags';
 import { MicrositeTracker } from '@/components/microsites/microsite-tracker';
 import { getAccountMicrositeData } from '@/lib/microsites/accounts';
 import { buildPublicShareMetadata } from '@/lib/microsites/share';
@@ -157,6 +159,7 @@ export default async function DemoAccountPage({
         path={`/demo/${account}`}
         variantSlug={fromGallery ? 'gallery-pack-view' : undefined}
       />
+      <MicrositeViewEvent anchorSlug={account} archetype={getIndustryFromSlug(account)?.archetype ?? null} />
       <DemoSurface
         pack={pack}
         mode="standalone"

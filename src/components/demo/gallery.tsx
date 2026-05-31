@@ -159,6 +159,9 @@ interface GalleryProps {
   totalAcres?: number;
   /** F.T8 — optional Edge Config counter; line omitted when null. */
   auditsThisQuarter?: number | null;
+  /** J.T3 — true when a campaign pin (gallery_pinned_slugs) is active;
+   *  stamps tile + filter events with pinned_cohort. */
+  pinnedCohort?: boolean;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -260,7 +263,7 @@ function tileMatchesQuery(tile: GalleryTileData, q: string): boolean {
   return tokens.every((t) => haystack.includes(t));
 }
 
-export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo = false, allAccounts = [], facilitiesAudited = 0, totalDockDoors = 0, totalAcres = 0, auditsThisQuarter = null }: GalleryProps) {
+export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo = false, allAccounts = [], facilitiesAudited = 0, totalDockDoors = 0, totalAcres = 0, auditsThisQuarter = null, pinnedCohort = false }: GalleryProps) {
   const demoSuffix = useDemoSuffix(initialDemo);
   // E.T8 — client-side search query, filters the (already archetype-
   // filtered) tiles live.
@@ -365,6 +368,7 @@ export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo
             demoSuffix={demoSuffix}
             visibleCount={displayedTiles.length}
             totalCount={totalTiles ?? tiles.length}
+            pinnedCohort={pinnedCohort}
           />
           {displayedTiles.length > 0 ? (
             <div
@@ -383,6 +387,7 @@ export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo
                   isSaved={savedSet.has(tile.anchor.slug)}
                   onToggleSave={onToggleSave}
                   isDemo={isDemo}
+                  pinnedCohort={pinnedCohort}
                 />
               ))}
             </div>
@@ -579,6 +584,7 @@ function Tile({
   isSaved = false,
   onToggleSave,
   isDemo = false,
+  pinnedCohort = false,
 }: {
   tile: GalleryTileData;
   index: number;
@@ -588,6 +594,7 @@ function Tile({
   isSaved?: boolean;
   onToggleSave?: (slug: string) => void;
   isDemo?: boolean;
+  pinnedCohort?: boolean;
 }) {
   // H.T3 — debounced tile-dwell event, once per tile per session.
   const dwellTimerRef = useRef<number | null>(null);
@@ -600,7 +607,12 @@ function Tile({
           new CustomEvent('yf:event', {
             detail: {
               name: 'gallery_tile_dwell',
-              props: { anchor_slug: tile.anchor.slug, anchor_archetype: tile.anchor.archetype, dwell_ms: 800 },
+              props: {
+                anchor_slug: tile.anchor.slug,
+                anchor_archetype: tile.anchor.archetype,
+                dwell_ms: 800,
+                ...(pinnedCohort ? { pinned_cohort: true } : {}),
+              },
             },
           }),
         );
@@ -992,11 +1004,13 @@ function ArchetypeFilterRail({
   demoSuffix,
   visibleCount,
   totalCount,
+  pinnedCohort = false,
 }: {
   active: Archetype | null;
   demoSuffix: string;
   visibleCount: number;
   totalCount: number;
+  pinnedCohort?: boolean;
 }) {
   const [otherParams, setOtherParams] = useState<string>('');
 
@@ -1028,20 +1042,27 @@ function ArchetypeFilterRail({
     return `/demo?archetype=${encodeURIComponent(id)}${demoForUrl}${otherParams}`;
   };
 
-  function onClickAnalytics(id: Archetype | null) {
+  // J.T2 — standardized filter event with visible_count + source.
+  // J.T3 — pinned_cohort flag included only when a campaign pin is active.
+  function fireFilterApplied(id: Archetype | null, source: 'click' | 'url') {
     try {
-      window.dispatchEvent(
-        new CustomEvent('yf:event', {
-          detail: {
-            name: 'gallery_filter_change',
-            props: { archetype: id ?? 'all' },
-          },
-        }),
-      );
+      const props: Record<string, unknown> = {
+        archetype: id ?? 'all',
+        visible_count: visibleCount,
+        source,
+      };
+      if (pinnedCohort) props.pinned_cohort = true;
+      window.dispatchEvent(new CustomEvent('yf:event', { detail: { name: 'gallery_filter_applied', props } }));
     } catch {
       // swallow
     }
   }
+
+  // J.T2 — URL-driven initial filter emits one event with source 'url'.
+  useEffect(() => {
+    if (active !== null) fireFilterApplied(active, 'url');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // A.T2 — chip count badges. Counts derive from the canonical anchor
   // list so adding a 12th anchor in industry-tags.ts auto-updates the
@@ -1077,7 +1098,7 @@ function ArchetypeFilterRail({
               prefetch={false}
               tabIndex={isActive ? 0 : -1}
               aria-current={isActive ? 'true' : undefined}
-              onClick={() => onClickAnalytics(chip.id)}
+              onClick={() => fireFilterApplied(chip.id, 'click')}
               className={`shrink-0 snap-start rounded-full border px-4 py-2 font-mono text-[13px] font-semibold uppercase tracking-[0.16em] transition-colors max-[480px]:text-[12px] mr-2 last:mr-0 ${
                 isActive
                   ? 'border-[#00B4FF]/65 bg-[#00B4FF]/[0.20] text-white shadow-[0_0_24px_rgba(0,180,255,0.22)]'

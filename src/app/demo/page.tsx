@@ -340,6 +340,7 @@ export default async function DemoGalleryPage({
    * Fully optional + graceful: returns the unchanged order when not
    * configured. */
   const pinnedSlugs = await readPinnedSlugs();
+  const pinnedCohort = pinnedSlugs !== null && pinnedSlugs.length > 0; // J.T3
   const orderedAnchors = applyPinOrder(INDUSTRY_ANCHORS, pinnedSlugs);
   const visibleAnchors = activeArchetype
     ? orderedAnchors.filter((a) => a.archetype === activeArchetype)
@@ -390,6 +391,7 @@ export default async function DemoGalleryPage({
         totalDockDoors={totalDockDoors}
         totalAcres={totalAcres}
         auditsThisQuarter={auditsThisQuarter}
+        pinnedCohort={pinnedCohort}
       />
     </>
   );
