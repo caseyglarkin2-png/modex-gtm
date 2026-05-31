@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
+import { getSavedTemplates, toggleSavedTemplate, clearSavedTemplates } from '@/lib/demo/saved-templates';
 import type { Archetype, IndustryAnchor } from '@/lib/demo/industry-tags';
 import { ARCHETYPE_LABELS_TOP, INDUSTRY_ANCHORS } from '@/lib/demo/industry-tags';
 import { ProvenanceLink } from './provenance-modal';
@@ -24,6 +25,11 @@ import { ProvenanceLink } from './provenance-modal';
 
 const ROI_STATE_KEY = 'roi-v2-state';
 const MICROSITE_BASE = process.env.NEXT_PUBLIC_MICROSITE_BASE_URL || 'https://yardflow.ai';
+const AUDIT_REQUEST_ENDPOINT = '/api/microsites/audit-request';
+
+/** H.T3 — module-level dedup so each tile fires its dwell event at most
+ *  once per page session (survives re-renders, resets on reload). */
+const dwellFired = new Set<string>();
 
 const MONTHS_ABBR = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] as const;
 
@@ -264,6 +270,16 @@ export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo
     () => (trimmedQuery ? tiles.filter((t) => tileMatchesQuery(t, trimmedQuery)) : tiles),
     [tiles, trimmedQuery],
   );
+  // H.T4 — saved-template bookmarks (localStorage, read after mount).
+  const [saved, setSaved] = useState<string[]>([]);
+  useEffect(() => setSaved(getSavedTemplates()), []);
+  const onToggleSave = useCallback((slug: string) => setSaved(toggleSavedTemplate(slug)), []);
+  const onClearSaved = useCallback(() => {
+    clearSavedTemplates();
+    setSaved([]);
+  }, []);
+  const isDemo = demoSuffix.length > 0;
+  const savedSet = useMemo(() => new Set(saved), [saved]);
   // C.T9 — subtle background-grid parallax. Sets a transform on the
   // grid layer keyed off scroll, capped at 24px drift, only when the
   // visitor has no reduced-motion preference. Static otherwise.
@@ -340,6 +356,9 @@ export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo
         >
           {/* G5 — Archetype filter rail. WAI-ARIA toolbar with roving
               focus. Each chip is a Link that preserves &demo=1. */}
+          {saved.length > 0 ? (
+            <SavedTemplatesBanner saved={saved} tiles={tiles} demoSuffix={demoSuffix} onClear={onClearSaved} />
+          ) : null}
           <IndustrySearch query={query} onChange={setQuery} resultCount={displayedTiles.length} />
           <ArchetypeFilterRail
             active={activeArchetype}
@@ -361,12 +380,17 @@ export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo
                   total={displayedTiles.length}
                   demoSuffix={demoSuffix}
                   filterActive={activeArchetype !== null}
+                  isSaved={savedSet.has(tile.anchor.slug)}
+                  onToggleSave={onToggleSave}
+                  isDemo={isDemo}
                 />
               ))}
             </div>
           ) : (
-            <EmptyFilterState demoSuffix={demoSuffix} query={trimmedQuery} onClearQuery={() => setQuery('')} />
+            <EmptyFilterState demoSuffix={demoSuffix} query={trimmedQuery} onClearQuery={() => setQuery('')} isDemo={isDemo} />
           )}
+          {/* H.T2 — latent-demand capture below the grid. */}
+          <DontSeeYourBrand isDemo={isDemo} />
         </main>
         {allAccounts.length > 0 ? (
           <AllAuditedDirectory accounts={allAccounts} demoSuffix={demoSuffix} />
@@ -552,13 +576,45 @@ function Tile({
   total,
   demoSuffix,
   filterActive = false,
+  isSaved = false,
+  onToggleSave,
+  isDemo = false,
 }: {
   tile: GalleryTileData;
   index: number;
   total: number;
   demoSuffix: string;
   filterActive?: boolean;
+  isSaved?: boolean;
+  onToggleSave?: (slug: string) => void;
+  isDemo?: boolean;
 }) {
+  // H.T3 — debounced tile-dwell event, once per tile per session.
+  const dwellTimerRef = useRef<number | null>(null);
+  const onDwellEnter = () => {
+    if (isDemo || dwellFired.has(tile.anchor.slug)) return;
+    dwellTimerRef.current = window.setTimeout(() => {
+      dwellFired.add(tile.anchor.slug);
+      try {
+        window.dispatchEvent(
+          new CustomEvent('yf:event', {
+            detail: {
+              name: 'gallery_tile_dwell',
+              props: { anchor_slug: tile.anchor.slug, anchor_archetype: tile.anchor.archetype, dwell_ms: 800 },
+            },
+          }),
+        );
+      } catch {
+        // swallow
+      }
+    }, 800);
+  };
+  const onDwellLeave = () => {
+    if (dwellTimerRef.current) {
+      window.clearTimeout(dwellTimerRef.current);
+      dwellTimerRef.current = null;
+    }
+  };
   const { anchor, brand, facilityCount, facilityCountIsGlobal, dockDoors, trailerCapacity, railServed, roiPrefill, thumbSrc, thumbAlt, surprisingFindings, builtAt } = tile;
   const firstFinding = surprisingFindings?.[0];
   const auditedMonth = formatAuditMonth(builtAt);
@@ -585,6 +641,8 @@ function Tile({
     <article
       className={`tile-rise group relative flex flex-col overflow-hidden rounded-[16px] border border-[#00B4FF]/[0.16] p-5 transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-[3px] hover:border-[#00B4FF]/[0.50] hover:shadow-[0_24px_64px_rgba(0,0,0,0.40),0_0_40px_rgba(0,180,255,0.18)]${filterActive ? ' tile-pulse' : ''}`}
       role="listitem"
+      onMouseEnter={onDwellEnter}
+      onMouseLeave={onDwellLeave}
       data-ms-section-id={`gallery-tile-${anchor.id}`}
       data-archetype={anchor.archetype}
       style={{
@@ -670,6 +728,24 @@ function Tile({
         <span className="absolute right-3 top-3 z-[2] rounded-full border border-[#00B4FF]/35 bg-[#050505]/80 px-2 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-white/80 backdrop-blur-sm">
           Audited {auditedMonth}
         </span>
+      ) : null}
+
+      {/* H.T4 — save-this-template bookmark. */}
+      {onToggleSave ? (
+        <button
+          type="button"
+          onClick={() => onToggleSave(anchor.slug)}
+          aria-pressed={isSaved}
+          aria-label={isSaved ? `Remove ${brand} from saved templates` : `Save ${brand} template`}
+          data-ms-cta-id={`gallery-bookmark-${anchor.id}`}
+          className={`absolute left-3 top-3 z-[2] inline-flex h-7 w-7 items-center justify-center rounded-full border bg-[#050505]/80 text-[13px] backdrop-blur-sm transition-colors ${
+            isSaved
+              ? 'border-[#00B4FF]/70 text-[#00B4FF]'
+              : 'border-white/20 text-white/60 hover:border-[#00B4FF]/60 hover:text-white'
+          }`}
+        >
+          <span aria-hidden>{isSaved ? '★' : '☆'}</span>
+        </button>
       ) : null}
 
       {/* Top divider — terminal-thin gradient line, just a hairline of neon. */}
@@ -1077,10 +1153,12 @@ function EmptyFilterState({
   demoSuffix,
   query = '',
   onClearQuery,
+  isDemo = false,
 }: {
   demoSuffix: string;
   query?: string;
   onClearQuery?: () => void;
+  isDemo?: boolean;
 }) {
   const isSearch = query.length > 0;
   return (
@@ -1127,6 +1205,264 @@ function EmptyFilterState({
         Want this in your industry? Book a 30-min audit
         <ArrowRight className="" />
       </a>
+      {/* H.T1 — inline 2-field audit-request form. */}
+      <AuditRequestForm variant="industry" source="gallery-empty-filter" isDemo={isDemo} />
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   AuditRequestForm — H.T1 / H.T2 shared lead-capture form.
+   variant "industry": industry + email. variant "brand": company +
+   role + email. Posts to /api/microsites/audit-request; the endpoint
+   no-ops under demo so a rep's presentation never creates a real lead.
+   ═══════════════════════════════════════════════════════════════ */
+
+function AuditRequestForm({
+  variant,
+  source,
+  isDemo,
+  onSubmitted,
+}: {
+  variant: 'industry' | 'brand';
+  source: string;
+  isDemo: boolean;
+  onSubmitted?: () => void;
+}) {
+  const [email, setEmail] = useState('');
+  const [industry, setIndustry] = useState('');
+  const [company, setCompany] = useState('');
+  const [role, setRole] = useState('');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'done' | 'error'>('idle');
+
+  async function submit() {
+    if (status === 'submitting') return;
+    setStatus('submitting');
+    try {
+      const res = await fetch(AUDIT_REQUEST_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          industry: variant === 'industry' ? industry : undefined,
+          company: variant === 'brand' ? company : undefined,
+          role: variant === 'brand' ? role : undefined,
+          source,
+          demo: isDemo,
+        }),
+      });
+      if (!res.ok) throw new Error('request failed');
+      setStatus('done');
+      onSubmitted?.();
+    } catch {
+      setStatus('error');
+    }
+  }
+
+  const inputClass =
+    'w-full rounded-[10px] border border-white/15 bg-white/[0.03] px-3 py-2 text-[13px] text-white placeholder:text-white/35 outline-none transition-colors focus:border-[#00B4FF]/60';
+
+  if (status === 'done') {
+    return (
+      <p role="status" className="mt-4 text-[13px] text-[#00C878]">
+        Thanks. We will be in touch about auditing your network.
+      </p>
+    );
+  }
+
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        void submit();
+      }}
+      className="mt-4 flex w-full max-w-[420px] flex-col gap-2"
+    >
+      {variant === 'industry' ? (
+        <input
+          value={industry}
+          onChange={(e) => setIndustry(e.target.value)}
+          placeholder="Your industry"
+          required
+          className={inputClass}
+        />
+      ) : (
+        <>
+          <input
+            value={company}
+            onChange={(e) => setCompany(e.target.value)}
+            placeholder="Company"
+            required
+            className={inputClass}
+          />
+          <input
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            placeholder="Your role"
+            className={inputClass}
+          />
+        </>
+      )}
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Work email"
+        required
+        className={inputClass}
+      />
+      <button
+        type="submit"
+        disabled={status === 'submitting'}
+        data-ms-cta-id={`audit-request-submit-${variant}`}
+        className="inline-flex items-center justify-center gap-1.5 rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.12] px-4 py-2 text-[13px] font-bold text-white transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22] disabled:opacity-60"
+      >
+        {status === 'submitting' ? 'Sending…' : 'Request an audit'}
+      </button>
+      {status === 'error' ? (
+        <p role="status" className="text-[12px] text-[#FF2A00]/80">
+          Something went wrong. Please try again.
+        </p>
+      ) : null}
+    </form>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SavedTemplatesBanner — H.T4. Lists bookmarked templates above the
+   grid with quick links and a clear-all.
+   ═══════════════════════════════════════════════════════════════ */
+
+function SavedTemplatesBanner({
+  saved,
+  tiles,
+  demoSuffix,
+  onClear,
+}: {
+  saved: string[];
+  tiles: GalleryTileData[];
+  demoSuffix: string;
+  onClear: () => void;
+}) {
+  const bySlug = useMemo(() => new Map(tiles.map((t) => [t.anchor.slug, t])), [tiles]);
+  return (
+    <div
+      data-saved-templates-banner
+      className="mb-4 flex flex-wrap items-center gap-x-2 gap-y-1 rounded-[12px] border border-[#00B4FF]/25 bg-[#00B4FF]/[0.05] px-4 py-2.5 text-[12.5px] text-white/75"
+    >
+      <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#00B4FF]/85">You saved</span>
+      {saved.map((slug, i) => (
+        <span key={slug}>
+          <Link
+            href={`/demo/${slug}?from=gallery${demoSuffix}`}
+            prefetch={false}
+            className="text-white transition-colors hover:text-[#00B4FF]"
+          >
+            {bySlug.get(slug)?.brand ?? slug}
+          </Link>
+          {i < saved.length - 1 ? <span className="text-white/30">,</span> : null}
+        </span>
+      ))}
+      <button
+        type="button"
+        onClick={onClear}
+        className="ml-auto font-mono text-[10px] uppercase tracking-[0.16em] text-white/50 transition-colors hover:text-white"
+      >
+        Clear all
+      </button>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DontSeeYourBrand — H.T2. Latent-demand CTA below the tile grid; opens
+   a modal with the brand-variant audit-request form.
+   ═══════════════════════════════════════════════════════════════ */
+
+function DontSeeYourBrand({ isDemo }: { isDemo: boolean }) {
+  const [open, setOpen] = useState(false);
+
+  function openModal() {
+    if (!isDemo) {
+      try {
+        window.dispatchEvent(
+          new CustomEvent('yf:event', {
+            detail: { name: 'gallery_custom_audit_requested', props: { source: 'gallery-dont-see-brand' } },
+          }),
+        );
+      } catch {
+        // swallow
+      }
+    }
+    setOpen(true);
+  }
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    document.addEventListener('keydown', onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
+  return (
+    <div className="mt-12 flex flex-col items-center gap-3 border-t border-white/[0.08] pt-10 text-center">
+      <p className="text-[15px] text-white/75">
+        Don&apos;t see your brand? We can audit your network in 5 business days.
+      </p>
+      <button
+        type="button"
+        onClick={openModal}
+        data-ms-cta-id="gallery-dont-see-brand"
+        className="inline-flex items-center gap-1.5 rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.10] px-4 py-2 text-[13px] font-bold text-white transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22]"
+        style={{ boxShadow: '0 0 0 1px rgba(0, 180, 255, 0.16) inset, 0 6px 18px rgba(0, 0, 0, 0.35)' }}
+      >
+        Request a custom audit
+        <ArrowRight className="" />
+      </button>
+
+      {open ? (
+        <div
+          role="presentation"
+          onMouseDown={(e) => {
+            if (e.target === e.currentTarget) setOpen(false);
+          }}
+          className="fixed inset-0 z-[80] flex items-end justify-center bg-black/70 p-4 backdrop-blur-sm sm:items-center"
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Request a custom audit"
+            className="relative w-full max-w-[460px] rounded-[16px] border border-[#00B4FF]/[0.30] p-6 text-left text-white"
+            style={{
+              background: 'linear-gradient(180deg, rgba(17, 19, 24, 0.98), rgba(10, 12, 16, 0.98))',
+              boxShadow: '0 0 0 1px rgba(0,180,255,0.12) inset, 0 24px 80px rgba(0,0,0,0.6)',
+            }}
+          >
+            <div className="flex items-start justify-between gap-4">
+              <h2 className="text-[18px] font-bold text-white">Request a custom audit</h2>
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                aria-label="Close"
+                className="rounded-full border border-white/15 px-2.5 py-1 font-mono text-[12px] text-white/70 transition-colors hover:border-[#00B4FF]/55 hover:text-white"
+              >
+                ✕
+              </button>
+            </div>
+            <p className="mt-2 text-[13px] leading-[1.5] text-white/65">
+              Tell us where to send your network audit. Same rubric, same satellite imagery as the templates here.
+            </p>
+            <AuditRequestForm variant="brand" source="gallery-dont-see-brand" isDemo={isDemo} />
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

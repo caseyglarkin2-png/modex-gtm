@@ -136,6 +136,16 @@ export function DemoSurface({
     return { level, avgResolved };
   })();
 
+  // H.T5 — per-anchor booking link. When a HubSpot Scheduling slug is
+  // configured, the CTA opens the meetings embed with the anchor name as
+  // a prefilled prospect_site field (the rep sees it on the booking
+  // notification). Falls back to the contact form until Casey sets the
+  // slug (out-of-band item) via NEXT_PUBLIC_HUBSPOT_MEETINGS_SLUG.
+  const meetingsSlug = process.env.NEXT_PUBLIC_HUBSPOT_MEETINGS_SLUG;
+  const bookAuditHref = meetingsSlug
+    ? `https://meetings.hubspot.com/${meetingsSlug}?prospect_site=${encodeURIComponent(displayName)}`
+    : `https://yardflow.ai/contact/?intent=audit&utm_source=demo&utm_medium=${fromGallery ? 'gallery-header' : 'demo-header'}&utm_campaign=${pack.account.slug}`;
+
   // Scope blurb for the header — be honest when our audit covers a
   // subset of the prospect's full network. For Mondelez we audit 22 NA
   // sites; the global footprint is ~160. Saying just "22 facilities"
@@ -276,7 +286,7 @@ export function DemoSurface({
                 </Link>
               )}
               <a
-                href={`https://yardflow.ai/contact/?intent=audit&utm_source=demo&utm_medium=${fromGallery ? 'gallery-header' : 'demo-header'}&utm_campaign=${pack.account.slug}`}
+                href={bookAuditHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-ms-cta-id={fromGallery ? 'gallery-pack-book-audit' : 'demo-book-audit'}
