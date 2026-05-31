@@ -11,6 +11,7 @@ import { CoverageHonesty } from './coverage-honesty';
 import { NetworkSimulator } from './network-simulator';
 import { DossierIntro } from './dossier-intro';
 import { SurprisingFindings } from './surprising-findings';
+import { AnchorTeardownVideo } from './anchor-teardown-video';
 
 /**
  * Top-level client surface for /demo/[account]. Manages cross-component
@@ -412,6 +413,12 @@ export function DemoSurface({
         <>
           <DossierIntro pack={pack} />
           <SurprisingFindings pack={pack} />
+          {/* I.T6 — teardown video (renders only when the pack has a src). */}
+          <AnchorTeardownVideo
+            src={pack.account.teardownVideoSrc}
+            brand={displayName}
+            poster={featuredSiteThumbSrc}
+          />
         </>
       )}
 

@@ -1,0 +1,51 @@
+/*
+ * I.T4 — Board-ready print stylesheet for /demo/[account] microsites.
+ *
+ * Print to PDF should yield a clean summary: brand name, audited
+ * footprint + network totals, dossier intro, and the surprising findings.
+ * Hides the interactive chrome (flick bar, hint, CTAs, buttons, the
+ * Leaflet map / simulator which do not print). Scoped to @media print so
+ * the on-screen experience is untouched.
+ */
+@media print {
+  @page {
+    size: letter;
+    margin: 0.75in;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-family: Georgia, "Times New Roman", serif !important;
+  }
+
+  /* Interactive chrome that should not appear on paper. */
+  [data-flick-bar],
+  [data-flick-hint],
+  [data-demo-pill],
+  button,
+  nav,
+  footer,
+  .leaflet-container {
+    display: none !important;
+  }
+
+  /* Neutralize the dark theme + effects for paper. */
+  *,
+  *::before,
+  *::after {
+    color: #000 !important;
+    animation: none !important;
+    transition: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    background-image: none !important;
+  }
+
+  /* Keep result blocks from splitting awkwardly across pages. */
+  section,
+  article {
+    break-inside: avoid;
+  }
+}

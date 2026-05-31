@@ -319,6 +319,12 @@ export const DemoPackSchema = z.object({
         averageMarginPerShipment: z.number().positive(),
       })
       .optional(),
+    /**
+     * I.T6 — optional 60-second teardown video (path under /public or an
+     * absolute URL). When present, the microsite renders a lazy player;
+     * absent packs render nothing. Videos are produced out-of-band.
+     */
+    teardownVideoSrc: z.string().optional(),
   }),
   research: AccountResearch,
   network: Network,

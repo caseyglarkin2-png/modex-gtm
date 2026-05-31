@@ -1,3 +1,4 @@
+import './print.css';
 import { notFound } from 'next/navigation';
 import { promises as fs, existsSync } from 'node:fs';
 import path from 'node:path';
@@ -53,6 +54,13 @@ async function loadPack(slug: string): Promise<DemoPack | null> {
   }
 }
 
+/** First sentence of a blob, for social descriptions (I.T1). */
+function firstSentence(s?: string): string | null {
+  if (!s) return null;
+  const m = s.match(/^[\s\S]*?[.!?](\s|$)/);
+  return (m ? m[0] : s).trim();
+}
+
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { account } = await params;
   const pack = await loadPack(account);
@@ -60,7 +68,13 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
   const { displayName, siteCount } = pack.account;
   const title = `${displayName} · yard network · YardFlow`;
-  const description = `${siteCount} ${displayName} facilities, mapped from public satellite imagery. Real geofences, real archetype mix — see your yard the way YardFlow sees it.`;
+  // I.T1 — lead the social description with the dossier intro's first
+  // sentence when present (richer than the generic line); fall back
+  // otherwise.
+  const lead = firstSentence(pack.account.dossierIntro);
+  const description = lead
+    ? `${lead} ${siteCount} facilities audited from public satellite imagery.`
+    : `${siteCount} ${displayName} facilities, mapped from public satellite imagery. Real geofences, real archetype mix — see your yard the way YardFlow sees it.`;
 
   // Canonical / OG URLs route to yardflow.ai/demo/<slug>, not modex-gtm,
   // so prospects who share a link land on the canonical domain and
@@ -116,8 +130,27 @@ export default async function DemoAccountPage({
     ? `/gallery-thumbs/${account}.png`
     : undefined;
 
+  // I.T5 — JSON-LD Dataset schema for the audited network.
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Dataset',
+    name: `${pack.account.displayName} yard network audit`,
+    description:
+      firstSentence(pack.account.dossierIntro) ??
+      `${pack.account.siteCount} ${pack.account.displayName} facilities modeled from public satellite imagery.`,
+    creator: { '@type': 'Organization', name: 'YardFlow by FreightRoll' },
+    datePublished: pack.builtAt,
+    spatialCoverage: 'United States',
+    isAccessibleForFree: true,
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        // Server-rendered static object; safe to inline.
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <MicrositeTracker
         accountName={accountName}
         accountSlug={account}
