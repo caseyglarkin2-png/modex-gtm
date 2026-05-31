@@ -69,7 +69,10 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     title,
     description,
     pathname: `/demo/${account}`,
-    imagePath: `/for/${account}/opengraph-image`,
+    // E.T6 — use the microsite's own neon/satellite OG card rather than
+    // borrowing the /for memo card, so shared /demo links preview with
+    // the audited-network treatment.
+    imagePath: `/demo/${account}/opengraph-image`,
     imageAlt: `${displayName} yard network — YardFlow YNS analysis`,
   });
 }
