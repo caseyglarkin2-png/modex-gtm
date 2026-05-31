@@ -772,7 +772,7 @@ function Tile({
 
       {/* Header row: counter (left) + industry chip with status dot (right). */}
       <div className="flex items-start justify-between gap-3">
-        <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-white/40">
+        <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-white/55">
           {counter}
         </span>
         <span className="inline-flex items-center gap-[6px] font-mono text-[10px] font-semibold uppercase tracking-[0.20em] text-[#00B4FF]/80">
@@ -1107,7 +1107,7 @@ function ArchetypeFilterRail({
             >
               {chip.label}
               <span
-                className={`ml-1.5 font-normal ${isActive ? 'text-white/60' : 'text-white/40'}`}
+                className={`ml-1.5 font-normal ${isActive ? 'text-white/70' : 'text-white/55'}`}
                 aria-hidden
               >
                 ({chip.count})
@@ -1620,7 +1620,7 @@ function AllAuditedDirectory({
                 </div>
                 <div className="mt-auto grid grid-cols-3 gap-2 pt-2">
                   <div>
-                    <div className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-white/40">
+                    <div className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-white/60">
                       Sites
                     </div>
                     <div className="font-mono text-[12px] text-white/85">
@@ -1628,7 +1628,7 @@ function AllAuditedDirectory({
                     </div>
                   </div>
                   <div>
-                    <div className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-white/40">
+                    <div className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-white/60">
                       Docks
                     </div>
                     <div className="font-mono text-[12px] text-white/85">
@@ -1636,7 +1636,7 @@ function AllAuditedDirectory({
                     </div>
                   </div>
                   <div>
-                    <div className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-white/40">
+                    <div className="font-mono text-[8.5px] uppercase tracking-[0.14em] text-white/60">
                       Trailers
                     </div>
                     <div className="font-mono text-[12px] text-white/85">
