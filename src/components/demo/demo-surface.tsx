@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import type { ArchetypeId, DemoPack } from '@/lib/demo/pack-schema';
-import { getIndustryFromSlug } from '@/lib/demo/industry-tags';
+import { getIndustryFromSlug, ARCHETYPE_LABELS_TOP } from '@/lib/demo/industry-tags';
 import { NetworkAtlas } from './network-atlas';
 import { SiteDetailPanel } from './site-detail-panel';
 import { ArchetypeMixChart } from './archetype-mix-chart';
@@ -100,6 +100,13 @@ export function DemoSurface({
   const galleryIndustryLabel = galleryIndustry?.label ?? pack.account.archetype;
   const galleryHeadline = `Sample ${galleryIndustryLabel} Template`;
 
+  // E.T4 — persistent breadcrumb. Resolve the anchor (for the 11 gallery
+  // industries) so the middle crumb links to that archetype's filtered
+  // gallery. Non-anchor packs show "All industries · {brand}" only.
+  const anchor = getIndustryFromSlug(pack.account.slug);
+  const anchorArchetype = anchor?.archetype ?? null;
+  const archetypeTopLabel = anchorArchetype ? ARCHETYPE_LABELS_TOP[anchorArchetype] : null;
+
   // Scope blurb for the header — be honest when our audit covers a
   // subset of the prospect's full network. For Mondelez we audit 22 NA
   // sites; the global footprint is ~160. Saying just "22 facilities"
@@ -145,6 +152,36 @@ export function DemoSurface({
         <header className="shrink-0 border-b border-[#00B4FF]/[0.10] backdrop-blur-[2px]">
           <div className="mx-auto flex max-w-5xl items-end justify-between gap-6 px-5 py-4">
             <div>
+              {/* E.T4 — persistent breadcrumb. Keeps every microsite one
+                  click from the gallery and its archetype, so no microsite
+                  is a dead-end. */}
+              <nav
+                aria-label="Breadcrumb"
+                data-microsite-breadcrumb
+                className="mb-1.5 flex flex-wrap items-center gap-x-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-white/45"
+              >
+                <Link
+                  href="/demo"
+                  data-ms-cta-id="breadcrumb-all-industries"
+                  className="inline-flex items-center gap-1 transition-colors hover:text-[#00B4FF]"
+                >
+                  <span aria-hidden>←</span> All industries
+                </Link>
+                {anchorArchetype && archetypeTopLabel ? (
+                  <>
+                    <span className="text-white/25" aria-hidden>·</span>
+                    <Link
+                      href={`/demo?archetype=${anchorArchetype}`}
+                      data-ms-cta-id="breadcrumb-archetype"
+                      className="transition-colors hover:text-[#00B4FF]"
+                    >
+                      {archetypeTopLabel}
+                    </Link>
+                  </>
+                ) : null}
+                <span className="text-white/25" aria-hidden>·</span>
+                <span className="text-white/70" aria-current="page">{displayName}</span>
+              </nav>
               <div className="font-mono text-[10px] uppercase tracking-[0.20em] text-[#00B4FF]/85">
                 {fromGallery ? `YardFlow · ${galleryIndustryLabel} template` : 'YardFlow · YNS network audit'}
               </div>

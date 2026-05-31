@@ -626,6 +626,9 @@ function Tile({
         </a>
         <Link
           href={templateHref}
+          /* E.T5 — warm only the first 3 microsite routes. Beyond the
+             fold the prefetch cost outweighs the hit rate. */
+          prefetch={index <= 3}
           data-ms-cta-id={`gallery-view-template-${anchor.id}`}
           data-ms-cta-industry={anchor.id}
           data-ms-cta-pack={anchor.slug}

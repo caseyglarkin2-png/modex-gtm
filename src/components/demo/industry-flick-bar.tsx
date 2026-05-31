@@ -81,6 +81,7 @@ export default function IndustryFlickBar({ currentSlug }: Props) {
 
   const [collapsed, setCollapsed] = useState(false);
   const [demoSuffix, setDemoSuffix] = useState('');
+  const [showHint, setShowHint] = useState(false);
   const lastScrollYRef = useRef(0);
   const announceRef = useRef<HTMLDivElement | null>(null);
 
@@ -88,6 +89,42 @@ export default function IndustryFlickBar({ currentSlug }: Props) {
   useEffect(() => {
     setDemoSuffix(readDemoSuffix());
   }, []);
+
+  // E.T1 — first-visit discovery hint. Shows a chip above the bar for
+  // 5 seconds on the first microsite view in this browser profile, then
+  // sets a localStorage flag so it never reappears. Dismisses early on
+  // any key press or click.
+  useEffect(() => {
+    if (!isVisible) return undefined;
+    try {
+      if (window.localStorage.getItem('yf-flickbar-hint-seen')) return undefined;
+    } catch {
+      return undefined; // storage blocked — skip the hint entirely.
+    }
+    setShowHint(true);
+    let done = false;
+    const dismiss = () => {
+      if (done) return;
+      done = true;
+      setShowHint(false);
+      try {
+        window.localStorage.setItem('yf-flickbar-hint-seen', '1');
+      } catch {
+        // ignore
+      }
+      window.removeEventListener('keydown', dismiss);
+      window.removeEventListener('click', dismiss);
+      window.clearTimeout(timer);
+    };
+    const timer = window.setTimeout(dismiss, 5000);
+    window.addEventListener('keydown', dismiss);
+    window.addEventListener('click', dismiss);
+    return () => {
+      window.removeEventListener('keydown', dismiss);
+      window.removeEventListener('click', dismiss);
+      window.clearTimeout(timer);
+    };
+  }, [isVisible]);
 
   // Direction-aware scroll hide.
   useEffect(() => {
@@ -163,6 +200,22 @@ export default function IndustryFlickBar({ currentSlug }: Props) {
         aria-atomic="true"
         className="sr-only"
       />
+
+      {/* E.T1 — first-visit discovery hint, sits just above the bar. */}
+      {showHint && !collapsed ? (
+        <div
+          data-flick-hint=""
+          role="status"
+          style={{
+            bottom: 'calc(env(safe-area-inset-bottom, 0px) + 64px)',
+            right: 'calc(env(safe-area-inset-right, 0px) + 14px)',
+          }}
+          className="motion-safe:animate-slide-up fixed z-[56] max-w-[260px] rounded-[10px] border border-[#00B4FF]/[0.32] bg-[#050505]/90 px-3 py-2 font-mono text-[10.5px] font-medium tracking-[0.04em] text-white/85 shadow-[0_12px_40px_rgba(0,0,0,0.55)] backdrop-blur-md"
+        >
+          Flick between industries: press <span className="text-[#00B4FF]">[</span> or{' '}
+          <span className="text-[#00B4FF]">]</span>
+        </div>
+      ) : null}
 
       <nav
         data-flick-bar=""
