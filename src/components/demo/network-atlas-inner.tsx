@@ -6,7 +6,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { ArchetypeId, DemoPack } from '@/lib/demo/pack-schema';
 import { ARCHETYPE_COLORS } from './archetype-palette';
-import { networkIntensities, type ComplexityFactor } from '@/lib/demo/yard-complexity';
+import { networkIntensities } from '@/lib/demo/yard-complexity';
 
 /** Brand cyan used for the complexity glow — signal, not alarm. */
 const GLOW = '#00B4FF';
@@ -126,7 +126,6 @@ export default function NetworkAtlasInner({ pack, selectedSiteId, archetypeFilte
         {visibleSites.map((site) => {
           const ci = intensities.get(site.id);
           const intensity = site.id === selectedSiteId ? Math.max(ci?.intensity ?? 0, 0.12) : ci?.intensity ?? 0;
-          const factors = ci?.factors ?? [];
           return (
             <Marker
               key={site.id}
@@ -147,23 +146,6 @@ export default function NetworkAtlasInner({ pack, selectedSiteId, archetypeFilte
                   <div className="mt-1 text-[11px] text-white/70">
                     Archetype {site.archetype} · {site.archetypeName}
                   </div>
-                  {factors.length > 0 && (
-                    <div className="mt-2 border-t border-white/10 pt-1.5">
-                      <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-[#00B4FF]/85">
-                        Audit read
-                      </div>
-                      <div className="mt-1 flex flex-wrap gap-1">
-                        {factors.slice(0, 4).map((fct: ComplexityFactor) => (
-                          <span
-                            key={fct.key}
-                            className="rounded border border-[#00B4FF]/25 bg-[#00B4FF]/[0.08] px-1.5 py-0.5 text-[10px] text-white/85"
-                          >
-                            {fct.label}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
                 </div>
               </Popup>
             </Marker>

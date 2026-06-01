@@ -1,7 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Site, SiteScenario, ZoneStreetView } from '@/lib/demo/pack-schema';
 import { NARRATIONS } from '@/lib/demo/scenarios';
 import { GEOFENCE_COLORS } from './archetype-palette';
@@ -127,8 +127,24 @@ function resolveFrame(
   }
 
   if (!frame) {
-    frame = ok(m.truckGate) ?? ok(m.perimeter) ?? ok(m.staging) ?? ok(m.dockAprons?.[0]) ?? ok(m.dropYards?.[0]);
-    if (frame && !label) label = "Driver’s-eye";
+    // No ground-level pano for this zone (audit reality: most yard interiors
+    // have no public Street View, only the gate/road). Fall back to a covered
+    // frame and RELABEL honestly so we never show the gate while claiming it's
+    // the dock apron.
+    const gate = ok(m.truckGate);
+    const peri = ok(m.perimeter);
+    if (gate) {
+      frame = gate;
+      label = 'Truck gate';
+      color = GEOFENCE_COLORS.truckGate;
+    } else if (peri) {
+      frame = peri;
+      label = 'The approach';
+      color = GEOFENCE_COLORS.perimeter;
+    } else {
+      frame = ok(m.staging) ?? ok(m.dockAprons?.[0]) ?? ok(m.dropYards?.[0]);
+      label = "Driver’s-eye";
+    }
   }
 
   return frame ? { pano: frame.pano, heading: frame.heading, label, color } : null;
@@ -137,22 +153,37 @@ function resolveFrame(
 /** The synced ground-level pane. Cross-fades on each frame change. */
 function SyncedStreetView({ frame }: { frame: SyncedFrame }) {
   const src = svSrc(frame.pano, frame.heading);
-  const [loaded, setLoaded] = useState(false);
-  // Re-arm the fade whenever the underlying pano/heading changes.
+  const imgRef = useRef<HTMLImageElement>(null);
+  const [status, setStatus] = useState<'loading' | 'loaded' | 'error'>('loading');
+  // Re-arm on src change. CRITICAL: these panos are small and often already
+  // cached, so the load event can fire before React attaches onLoad — in which
+  // case onLoad never runs and the pane stays at opacity-0 (a black box). Check
+  // .complete here as well. (Found in live browser QA, 2026-06-01.)
   useEffect(() => {
-    setLoaded(false);
+    const img = imgRef.current;
+    if (img && img.complete && img.naturalWidth > 0) setStatus('loaded');
+    else setStatus('loading');
   }, [src]);
 
   return (
-    <div className="relative h-72 w-full shrink-0 overflow-hidden border-t border-[#00B4FF]/[0.16] bg-black md:h-80 md:w-[44%] md:border-l md:border-t-0">
+    <div className="relative h-72 w-full shrink-0 overflow-hidden border-t border-[#00B4FF]/[0.16] bg-[#070809] md:h-80 md:w-[44%] md:border-l md:border-t-0">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         key={src}
+        ref={imgRef}
         src={src}
         alt={`Driver's-eye view at ${frame.label}`}
-        onLoad={() => setLoaded(true)}
-        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+        onLoad={() => setStatus('loaded')}
+        onError={() => setStatus('error')}
+        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${status === 'loaded' ? 'opacity-100' : 'opacity-0'}`}
       />
+      {status === 'error' && (
+        <div className="absolute inset-0 flex items-center justify-center px-4 text-center">
+          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/40">
+            Ground-level view unavailable here
+          </span>
+        </div>
+      )}
       <div aria-hidden className="absolute inset-x-0 top-0 h-14 bg-gradient-to-b from-black/65 to-transparent" />
       <div className="absolute left-2 top-2 flex items-center gap-1.5 rounded-md bg-black/55 px-2 py-1 backdrop-blur">
         <span className="inline-block h-2.5 w-2.5 shrink-0 rounded-sm" style={{ background: frame.color }} />
