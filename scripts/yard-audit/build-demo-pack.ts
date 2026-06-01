@@ -26,11 +26,12 @@ import {
   type DemoPack,
   type Site,
   type SiteGeofences,
-  type Bbox,
+  type GeoShape,
   type Tile,
   type ArchetypeId,
   type Confidence,
 } from '../../src/lib/demo/pack-schema';
+import { shapeBounds } from '../../src/lib/demo/geofence-geometry';
 import { buildScenario } from '../../src/lib/demo/scenarios';
 import { resolveByAuditSlug } from './slug-map';
 
@@ -84,14 +85,19 @@ function dossierExcerpt(md: string, maxChars = 800): string {
     .trim();
 }
 
-function expandBbox(into: [number, number, number, number] | null, b: Bbox): [number, number, number, number] {
-  if (!into) return [b.west, b.south, b.east, b.north];
-  return [
-    Math.min(into[0], b.west),
-    Math.min(into[1], b.south),
-    Math.max(into[2], b.east),
-    Math.max(into[3], b.north),
-  ];
+/**
+ * Grow the network bbox tuple [west, south, east, north] to include a geofence
+ * shape — bbox OR oriented polygon. Uses `shapeBounds` (which returns Leaflet
+ * [[s,w],[n,e]]) so a `{ring}` perimeter no longer yields NaN. Replaces the old
+ * bbox-only `expandBbox`, which read `.west/.south/...` off the shape directly.
+ */
+function expandShape(
+  into: [number, number, number, number] | null,
+  shape: GeoShape,
+): [number, number, number, number] {
+  const [[s, w], [n, e]] = shapeBounds(shape);
+  if (!into) return [w, s, e, n];
+  return [Math.min(into[0], w), Math.min(into[1], s), Math.max(into[2], e), Math.max(into[3], n)];
 }
 
 /** Compute archetypeMix from the sites — counts per archetype id. */
@@ -127,11 +133,12 @@ interface RawSiteJson {
   type: string;
   coords: { lat: number; lng: number };
   geofences: {
-    perimeter?: Bbox; // stub sites are missing this
-    truckGate?: Bbox | null;
-    dropYards?: Bbox[];
-    dockAprons?: Bbox[];
-    staging?: Bbox | null;
+    perimeter?: GeoShape; // stub sites are missing this; bbox OR oriented polygon
+    truckGate?: GeoShape | null;
+    dropYards?: GeoShape[];
+    dockAprons?: GeoShape[];
+    staging?: GeoShape | null;
+    streetViewMeta?: SiteGeofences['streetViewMeta']; // per-zone ground-level camera info
   };
   yardMetrics: Site['yardMetrics']; // nullable fields
   classification: Site['classification'];
@@ -268,6 +275,7 @@ async function buildSite(
     dropYards: raw.geofences.dropYards ?? [],
     dockAprons: raw.geofences.dockAprons ?? [],
     staging: raw.geofences.staging ?? null,
+    ...(raw.geofences.streetViewMeta ? { streetViewMeta: raw.geofences.streetViewMeta } : {}),
   };
 
   const tiles = await loadTiles(micrositeSlug, id);
@@ -352,7 +360,7 @@ async function main() {
   // Network bbox: union of all per-site perimeters
   let networkBbox: [number, number, number, number] | null = null;
   for (const s of sites) {
-    networkBbox = expandBbox(networkBbox, s.geofences.perimeter);
+    networkBbox = expandShape(networkBbox, s.geofences.perimeter);
   }
   if (!networkBbox) throw new Error('No sites produced — cannot compute bbox');
 
@@ -375,7 +383,7 @@ async function main() {
     : undefined;
 
   const pack: DemoPack = {
-    schemaVersion: '1',
+    schemaVersion: '2',
     builtAt: new Date().toISOString(),
     account: {
       slug: micrositeSlug,

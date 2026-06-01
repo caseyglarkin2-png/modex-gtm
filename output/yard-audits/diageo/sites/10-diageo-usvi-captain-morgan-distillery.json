@@ -1,37 +1,115 @@
 {
   "name": "Diageo USVI Captain Morgan Distillery - Frederiksted USVI",
   "type": "Distillery & Barrel Aging Warehouse",
-  "coords": { "lat": 17.70480, "lng": -64.84280 },
+  "coords": {
+    "lat": 17.7048,
+    "lng": -64.8428
+  },
   "geofences": {
-    "perimeter": { "south": 17.70340, "west": -64.84650, "north": 17.70950, "east": -64.84050 },
-    "truckGate": { "south": 17.70740, "west": -64.84280, "north": 17.70800, "east": -64.84180 },
-    "dropYards": [
-      { "south": 17.70450, "west": -64.84380, "north": 17.70560, "east": -64.84230 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 17.707809,
+          "lng": -64.844997
+        },
+        {
+          "lat": 17.707809,
+          "lng": -64.841701
+        },
+        {
+          "lat": 17.705454,
+          "lng": -64.841427
+        },
+        {
+          "lat": 17.7048,
+          "lng": -64.842113
+        },
+        {
+          "lat": 17.7048,
+          "lng": -64.844723
+        },
+        {
+          "lat": 17.70637,
+          "lng": -64.845272
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 17.70470, "west": -64.84400, "north": 17.70560, "east": -64.84280 }
+      {
+        "ring": [
+          {
+            "lat": 17.705716,
+            "lng": -64.844723
+          },
+          {
+            "lat": 17.705716,
+            "lng": -64.842113
+          },
+          {
+            "lat": 17.705062,
+            "lng": -64.842113
+          },
+          {
+            "lat": 17.705062,
+            "lng": -64.844723
+          }
+        ]
+      }
     ],
-    "staging": { "south": 17.70600, "west": -64.84350, "north": 17.70720, "east": -64.84200 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 87,
+        "pano": "ibd0PwEkjxU48_IGhLUd-g",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 18, "trailersVisible": 4, "trailerParkingCapacity": 40,
-    "truckGateCount": 1, "buildingCount": 7, "siteAreaAcres": 32.0,
+    "dockDoorCount": 18,
+    "trailersVisible": 4,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 1,
+    "buildingCount": 7,
+    "siteAreaAcres": 32,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@17.70480,-64.84280,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "scale", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "scale",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "locationResolution": "Roster coordinate (17.69168, -64.84829, GEOMETRIC_CENTER) landed on a residential coastal area, NOT the distillery. Web research placed the facility on property bordering Melvin Evans Highway in Estate Diamond, near Henry E. Rohlsen Airport. Located the large industrial complex at ~17.7048, -64.8428 by satellite search along the highway - large white-roofed distillery/warehouse buildings, consistent with the Captain Morgan rum distillery. Locked center moved ~1.6 km NNE of the roster point.",
     "truckGate": "2016 Street View shows chain-link perimeter fencing around the complex with controlled vehicle access; a large secured industrial rum distillery of this scale is access-controlled. A discrete barrier arm/gate is not crisply resolvable - medium confidence; flagged.",

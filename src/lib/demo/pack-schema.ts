@@ -82,8 +82,25 @@ const DropBand = z.enum(['NONE', '0-10', '10-25', '25-50', '50+']);
 // ── Site-level shapes ───────────────────────────────────────────────────────
 
 /**
+ * Per-zone Street View metadata captured by the audit. `heading` points the
+ * camera at the feature; `pano` is Google's pano_id (stable, so the proxy can
+ * request it directly); `hasCoverage` gates the driver's-eye walkthrough so we
+ * never render a broken image where Street View has no usable pano (common at
+ * rural DCs). Stored alongside — not inside — the geometry so `GeoShape` stays
+ * a pure geometry primitive.
+ */
+const ZoneStreetView = z.object({
+  heading: z.number().gte(0).lt(360),
+  pano: z.string().min(1),
+  hasCoverage: z.boolean(),
+});
+export type ZoneStreetView = z.infer<typeof ZoneStreetView>;
+
+/**
  * The five geofence layers per site, mirroring the yard-audit JSON output.
  * `staging` and `dropYards` may be absent on open sites (#3 No Gate / No GS).
+ * `streetViewMeta` (optional) carries the per-zone ground-level camera info for
+ * the driver's-eye walkthrough; absent on pre-v2 packs, which stay valid.
  */
 const SiteGeofences = z.object({
   perimeter: GeoShape,
@@ -91,6 +108,15 @@ const SiteGeofences = z.object({
   dropYards: z.array(GeoShape),
   dockAprons: z.array(GeoShape),
   staging: GeoShape.nullable(),
+  streetViewMeta: z
+    .object({
+      perimeter: ZoneStreetView.optional(),
+      truckGate: ZoneStreetView.optional(),
+      dropYards: z.array(ZoneStreetView).optional(),
+      dockAprons: z.array(ZoneStreetView).optional(),
+      staging: ZoneStreetView.optional(),
+    })
+    .optional(),
 });
 export type SiteGeofences = z.infer<typeof SiteGeofences>;
 
@@ -296,8 +322,12 @@ export type Network = z.infer<typeof Network>;
 // ── Pack root ───────────────────────────────────────────────────────────────
 
 export const DemoPackSchema = z.object({
-  /** Schema version. Bump when the contract changes. */
-  schemaVersion: z.literal('1'),
+  /**
+   * Schema version. `'1'` = legacy bbox-only packs; `'2'` = oriented polygons +
+   * per-zone `streetViewMeta`. Both accepted so existing packs validate while
+   * accounts migrate; `build-demo-pack.ts` emits `'2'` for freshly built packs.
+   */
+  schemaVersion: z.union([z.literal('1'), z.literal('2')]),
   /** ISO date the pack was built. */
   builtAt: z.string().datetime(),
   account: z.object({

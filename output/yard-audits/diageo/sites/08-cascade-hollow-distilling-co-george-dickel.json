@@ -1,35 +1,84 @@
 {
   "name": "Cascade Hollow Distilling Co. (George Dickel) - Tullahoma TN",
   "type": "Distillery",
-  "coords": { "lat": 35.43850, "lng": -86.24400 },
+  "coords": {
+    "lat": 35.4385,
+    "lng": -86.244
+  },
   "geofences": {
-    "perimeter": { "south": 35.43400, "west": -86.24800, "north": 35.44100, "east": -86.23900 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.439059,
+          "lng": -86.246747
+        },
+        {
+          "lat": 35.439283,
+          "lng": -86.243313
+        },
+        {
+          "lat": 35.438276,
+          "lng": -86.242352
+        },
+        {
+          "lat": 35.437605,
+          "lng": -86.243176
+        },
+        {
+          "lat": 35.437605,
+          "lng": -86.246335
+        },
+        {
+          "lat": 35.438276,
+          "lng": -86.247021
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
-    "dockAprons": [
-      { "south": 35.43850, "west": -86.24400, "north": 35.43920, "east": -86.24300 }
-    ],
-    "staging": { "south": 35.43880, "west": -86.24340, "north": 35.43950, "east": -86.24250 }
+    "dockAprons": [],
+    "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 6, "trailersVisible": 6, "trailerParkingCapacity": 12,
-    "truckGateCount": 1, "buildingCount": 8, "siteAreaAcres": 18.0,
+    "dockDoorCount": 6,
+    "trailersVisible": 6,
+    "trailerParkingCapacity": 12,
+    "truckGateCount": 1,
+    "buildingCount": 8,
+    "siteAreaAcres": 18,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.43850,-86.24400,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "0-10", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": true, "multipleFacilities": true,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": true,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "scale", "connectivityIssue"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "scale",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "truckGate": "No controlled truck entrance. The campus is reached by a single private drive off Cascade Hollow Road; the only barrier is a decorative split-rail fence and a branded welcome sign at the visitor entrance (2024-11 Street View). No barrier arm, sliding gate, or checkpoint structure on the truck approach.",
     "guardShack": "No staffed guard booth. The buildings near the entrance are the public visitor center.",

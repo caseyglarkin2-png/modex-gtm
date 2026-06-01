@@ -1,38 +1,90 @@
 {
   "name": "Stitzel-Weller Distillery - Louisville KY",
   "type": "Distillery / Aging Warehouse",
-  "coords": { "lat": 38.20950, "lng": -85.80900 },
+  "coords": {
+    "lat": 38.2095,
+    "lng": -85.809
+  },
   "geofences": {
-    "perimeter": { "south": 38.20650, "west": -85.81150, "north": 38.21300, "east": -85.80550 },
-    "truckGate": { "south": 38.20850, "west": -85.81120, "north": 38.20910, "east": -85.81040 },
-    "dropYards": [
-      { "south": 38.21000, "west": -85.81120, "north": 38.21090, "east": -85.81050 },
-      { "south": 38.20760, "west": -85.81130, "north": 38.20830, "east": -85.81080 }
-    ],
-    "dockAprons": [
-      { "south": 38.20920, "west": -85.81110, "north": 38.20990, "east": -85.81030 }
-    ],
-    "staging": null
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.211982,
+          "lng": -85.814081
+        },
+        {
+          "lat": 38.211658,
+          "lng": -85.809275
+        },
+        {
+          "lat": 38.20896,
+          "lng": -85.808725
+        },
+        {
+          "lat": 38.207126,
+          "lng": -85.809687
+        },
+        {
+          "lat": 38.207558,
+          "lng": -85.813395
+        },
+        {
+          "lat": 38.21004,
+          "lng": -85.814493
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 23,
+        "pano": "TzEHSVTQlJVkRwJgbygHkA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 14, "trailersVisible": 28, "trailerParkingCapacity": 45,
-    "truckGateCount": 1, "buildingCount": 24, "siteAreaAcres": 33.0,
+    "dockDoorCount": 14,
+    "trailersVisible": 28,
+    "trailerParkingCapacity": 45,
+    "truckGateCount": 1,
+    "buildingCount": 24,
+    "siteAreaAcres": 33,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@38.20950,-85.80900,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "scale"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "Confirmed gated truck entrance off Fitzgerald Road: 2019-06 Street View shows a swing/cantilever gate across the drive with ENTRANCE and warning signage; the entrance lane crosses a rail spur.",
     "guardShack": "A small light-colored guard-booth structure sits beside the entrance lane just inside the gate (visible left of the lane in multiple Street View headings). Workers in safety vests present at the gate.",

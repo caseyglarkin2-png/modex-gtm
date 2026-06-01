@@ -1,13 +1,70 @@
 {
   "name": "Diageo Montgomery Manufacturing & Warehousing - Hope Hull AL",
   "type": "Manufacturing & Warehousing Facility",
-  "coords": { "lat": 32.2785, "lng": -86.3645 },
+  "coords": {
+    "lat": 32.2785,
+    "lng": -86.3645
+  },
   "geofences": {
-    "perimeter": { "south": 32.2748, "west": -86.3672, "north": 32.2820, "east": -86.3622 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.28117,
+          "lng": -86.366423
+        },
+        {
+          "lat": 32.280822,
+          "lng": -86.363127
+        },
+        {
+          "lat": 32.277107,
+          "lng": -86.362852
+        },
+        {
+          "lat": 32.276642,
+          "lng": -86.363813
+        },
+        {
+          "lat": 32.275249,
+          "lng": -86.368345
+        },
+        {
+          "lat": 32.274785,
+          "lng": -86.36862
+        },
+        {
+          "lat": 32.275017,
+          "lng": -86.369169
+        },
+        {
+          "lat": 32.279661,
+          "lng": -86.367247
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 32.2790, "west": -86.3658, "north": 32.2808, "east": -86.3640 }
+      {
+        "ring": [
+          {
+            "lat": 32.280822,
+            "lng": -86.365873
+          },
+          {
+            "lat": 32.280706,
+            "lng": -86.363401
+          },
+          {
+            "lat": 32.280125,
+            "lng": -86.363401
+          },
+          {
+            "lat": 32.280242,
+            "lng": -86.365873
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -22,23 +79,54 @@
   },
   "mapsUrl": "https://www.google.com/maps/@32.2785,-86.3645,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "scale", "dropYard", "multiStep",
-    "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "truckGateCount"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "scale",
+    "dropYard",
+    "multiStep",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "truckGateCount"
   ],
   "fieldNotes": {
     "_general": "Brand-new $415M facility, officially opened April 21, 2026. The latest available satellite imagery (Maxar) is from the construction phase: roofs partially installed, yards graded but unpaved, no finished gates/fences/docks/trailer lots visible. Location is confirmed with HIGH confidence, but most yard-classification fields cannot be reliably determined from construction-era imagery and are flagged uncertain.",

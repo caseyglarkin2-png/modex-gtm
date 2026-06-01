@@ -1,37 +1,119 @@
 {
   "name": "Cincinnati Brewery - Cincinnati OH",
   "type": "Brewery / canning production facility (Over-the-Rhine; $85M canning expansion 2020 quadrupled canning capacity)",
-  "coords": { "lat": 39.1140, "lng": -84.5226 },
+  "coords": {
+    "lat": 39.114,
+    "lng": -84.5226
+  },
   "geofences": {
-    "perimeter": { "south": 39.1131, "west": -84.5242, "north": 39.1153, "east": -84.5212 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.115438,
+          "lng": -84.523081
+        },
+        {
+          "lat": 39.115172,
+          "lng": -84.521501
+        },
+        {
+          "lat": 39.114266,
+          "lng": -84.521433
+        },
+        {
+          "lat": 39.113893,
+          "lng": -84.521776
+        },
+        {
+          "lat": 39.113893,
+          "lng": -84.5226
+        },
+        {
+          "lat": 39.114266,
+          "lng": -84.522943
+        },
+        {
+          "lat": 39.114906,
+          "lng": -84.523012
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [
-      { "south": 39.1142, "west": -84.5240, "north": 39.1149, "east": -84.5228 }
+      {
+        "ring": [
+          {
+            "lat": 39.115066,
+            "lng": -84.524523
+          },
+          {
+            "lat": 39.114906,
+            "lng": -84.523424
+          },
+          {
+            "lat": 39.114,
+            "lng": -84.523493
+          },
+          {
+            "lat": 39.11416,
+            "lng": -84.524523
+          }
+        ]
+      }
     ],
-    "dockAprons": [
-      { "south": 39.1141, "west": -84.5232, "north": 39.1147, "east": -84.5222 }
-    ],
-    "staging": null
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 29,
+        "pano": "0UkHYeCBPb5tL7e_NAPJKQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 16, "trailersVisible": 22, "trailerParkingCapacity": 35,
-    "truckGateCount": 0, "buildingCount": 5, "siteAreaAcres": 15.7,
+    "dockDoorCount": 16,
+    "trailersVisible": 22,
+    "trailerParkingCapacity": 35,
+    "truckGateCount": 0,
+    "buildingCount": 5,
+    "siteAreaAcres": 15.7,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.114,-84.5226,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "trailersVisible", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoorCount",
+    "trailersVisible",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "No controlled truck gate found. Street View (2024) along Logan St and the side streets shows the brewery's trailer/dock yards as open paved lots that meet the public city streets directly with no barrier arm or sliding gate. One distant red barrier was seen far down a side street, but the brewery's own dock yards are open.",
     "guardShack": "No guard booth visible at any yard entrance in 2024 Street View; access is via Over-the-Rhine city streets.",
