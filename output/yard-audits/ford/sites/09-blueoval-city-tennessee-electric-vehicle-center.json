@@ -1,38 +1,85 @@
 {
   "name": "Ford - BlueOval City / Tennessee Electric Vehicle Center, Stanton TN",
   "type": "Vehicle Assembly Plant (greenfield, ramp-up)",
-  "coords": { "lat": 35.42000, "lng": -89.41800 },
+  "coords": {
+    "lat": 35.42,
+    "lng": -89.418
+  },
   "geofences": {
-    "perimeter": { "south": 35.40500, "west": -89.43500, "north": 35.43800, "east": -89.40200 },
-    "truckGate": { "south": 35.42000, "west": -89.41250, "north": 35.42150, "east": -89.41050 },
-    "dropYards": [
-      { "south": 35.42050, "west": -89.41100, "north": 35.42250, "east": -89.40700 },
-      { "south": 35.41850, "west": -89.42700, "north": 35.42050, "east": -89.42300 }
-    ],
-    "dockAprons": [
-      { "south": 35.41900, "west": -89.42400, "north": 35.42050, "east": -89.41200 }
-    ],
-    "staging": { "south": 35.41950, "west": -89.41200, "north": 35.42100, "east": -89.41000 }
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.423581,
+          "lng": -89.433381
+        },
+        {
+          "lat": 35.423581,
+          "lng": -89.408112
+        },
+        {
+          "lat": 35.413733,
+          "lng": -89.408112
+        },
+        {
+          "lat": 35.413733,
+          "lng": -89.433381
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 35, "trailersVisible": 60, "trailerParkingCapacity": 200,
-    "truckGateCount": 2, "buildingCount": 12, "siteAreaAcres": 950.0,
+    "dockDoorCount": 35,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 2,
+    "buildingCount": 12,
+    "siteAreaAcres": 950,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@35.42000,-89.41800,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": true
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": true
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "scale", "entryLanes", "exitLanes", "dockDoorCount", "dropArea", "trailerParkingCapacity", "siteAreaAcres", "railServed", "multiStep"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "dropArea",
+    "trailerParkingCapacity",
+    "siteAreaAcres",
+    "railServed",
+    "multiStep"
+  ],
   "fieldNotes": {
     "facility": "BlueOval City / Tennessee Electric Vehicle Center, Stanton TN - Ford's $5.6B greenfield EV truck + battery campus on the 4,100-acre Memphis Regional Megasite in SW Haywood County. IMPORTANT - the roster geocode (35.457145, -89.405212) landed on the town of Stanton itself, ~4 km NE of the actual campus. The real campus was located ~2.5 miles south of Stanton via web research (Haywood County / TN Megasite Authority sources) and confirmed by satellite at approximately 35.420, -89.418.",
     "locationCorrection": "Roster lat/lng were wrong (pointed at Stanton town). Corrected center is 35.42000, -89.41800 - the center of the large industrial campus visible at z14-z17.",

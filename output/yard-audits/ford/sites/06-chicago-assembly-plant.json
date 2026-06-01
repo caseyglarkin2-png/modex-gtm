@@ -1,18 +1,56 @@
 {
   "name": "Ford - Chicago Assembly Plant, Chicago IL",
   "type": "Vehicle Assembly Plant",
-  "coords": { "lat": 41.66662, "lng": -87.559702 },
+  "coords": {
+    "lat": 41.66662,
+    "lng": -87.559702
+  },
   "geofences": {
-    "perimeter": { "south": 41.65930, "west": -87.56450, "north": 41.66880, "east": -87.55925 },
-    "truckGate": { "south": 41.66120, "west": -87.55965, "north": 41.66200, "east": -87.55905 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.66662,
+          "lng": -87.567392
+        },
+        {
+          "lat": 41.66662,
+          "lng": -87.558329
+        },
+        {
+          "lat": 41.658002,
+          "lng": -87.557505
+        },
+        {
+          "lat": 41.658412,
+          "lng": -87.567942
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 41.65955, "west": -87.56080, "north": 41.66130, "east": -87.55935 },
-      { "south": 41.66020, "west": -87.56260, "north": 41.66180, "east": -87.56075 }
+      {
+        "ring": [
+          {
+            "lat": 41.66662,
+            "lng": -87.564646
+          },
+          {
+            "lat": 41.66662,
+            "lng": -87.560801
+          },
+          {
+            "lat": 41.663337,
+            "lng": -87.560801
+          },
+          {
+            "lat": 41.663337,
+            "lng": -87.564646
+          }
+        ]
+      }
     ],
-    "dockAprons": [
-      { "south": 41.66020, "west": -87.56110, "north": 41.66110, "east": -87.55980 }
-    ],
-    "staging": { "south": 41.66110, "west": -87.55960, "north": 41.66230, "east": -87.55905 }
+    "dockAprons": [],
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 45,
@@ -20,7 +58,7 @@
     "trailerParkingCapacity": 110,
     "truckGateCount": 1,
     "buildingCount": 6,
-    "siteAreaAcres": 130.0,
+    "siteAreaAcres": 130,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@41.66662,-87.559702,400m/data=!3m1!1e3",
@@ -50,7 +88,11 @@
     "entryLanesNote": "two inbound lanes at the Torrence Ave guarded gate"
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "scale", "exitLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "scale",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Guarded truck gate confirmed mid-property on Torrence Ave (~41.6615, -87.5593). 2024 Street View shows a tan single-story guard house with multi-side windows at the perimeter fence line, bollards/lane-control structures, directional signage ('ALL INBOUND TRAFFIC', 'VISITOR PARKING'), and trucks staged in the apron.",
     "guardShack": "Confirmed - small staffed booth (1-2 vehicle footprint, Ford-branded) set beside the gate lane, distinct from the main building.",

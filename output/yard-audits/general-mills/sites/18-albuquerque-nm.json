@@ -1,19 +1,84 @@
 {
   "name": "General Mills - Albuquerque NM",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 35.177200, "lng": -106.608000 },
+  "coords": {
+    "lat": 35.1772,
+    "lng": -106.608
+  },
   "geofences": {
-    "perimeter": { "south": 35.175000, "west": -106.611200, "north": 35.180000, "east": -106.605500 },
-    "truckGate": { "south": 35.175900, "west": -106.610250, "north": 35.176500, "east": -106.609700 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.178996,
+          "lng": -106.610747
+        },
+        {
+          "lat": 35.178771,
+          "lng": -106.605803
+        },
+        {
+          "lat": 35.175404,
+          "lng": -106.606077
+        },
+        {
+          "lat": 35.175628,
+          "lng": -106.611021
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 35.176700, "west": -106.611100, "north": 35.179100, "east": -106.609400 },
-      { "south": 35.177900, "west": -106.609000, "north": 35.179100, "east": -106.607500 }
+      {
+        "ring": [
+          {
+            "lat": 35.178322,
+            "lng": -106.610747
+          },
+          {
+            "lat": 35.17821,
+            "lng": -106.608549
+          },
+          {
+            "lat": 35.176976,
+            "lng": -106.608549
+          },
+          {
+            "lat": 35.177088,
+            "lng": -106.610747
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.176400, "west": -106.609400, "north": 35.177900, "east": -106.609000 },
-      { "south": 35.177900, "west": -106.608400, "north": 35.178400, "east": -106.607400 }
+      {
+        "ring": [
+          {
+            "lat": 35.177873,
+            "lng": -106.610197
+          },
+          {
+            "lat": 35.177761,
+            "lng": -106.606901
+          },
+          {
+            "lat": 35.1772,
+            "lng": -106.606901
+          },
+          {
+            "lat": 35.177312,
+            "lng": -106.610197
+          }
+        ]
+      }
     ],
-    "staging": { "south": 35.175500, "west": -106.610200, "north": 35.176000, "east": -106.609600 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 63,
+        "pano": "u11A_1iQ7qb7APNET9t6xg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 38,
@@ -21,23 +86,41 @@
     "trailerParkingCapacity": 140,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 65.0,
+    "siteAreaAcres": 65,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@35.177200,-106.608000,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "shipRcvSeparate", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "shipRcvSeparate",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Confirmed at 3501 Paseo del Norte NE, Albuquerque - a General Mills cereal manufacturing plant. Roster geocode moved 2,485m and resolved correctly onto the plant; verified by web search (Rio Rancho/Bernalillo Chamber, D&B - grain & oilseed milling / breakfast cereal).",
     "truckGate": "Controlled entrance off the SE access road from Paseo del Norte. A guard-booth island sits in the center of the entry roadway; the road splits around it. Gate / barrier crosshatch markings visible at the road entry into the trailer yard.",

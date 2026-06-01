@@ -1,17 +1,116 @@
 {
   "name": "Nabisco Chicago Bakery - Chicago IL",
   "type": "Manufacturing - biscuit/cracker bakery",
-  "coords": { "lat": 41.75880, "lng": -87.70650 },
+  "coords": {
+    "lat": 41.7588,
+    "lng": -87.7065
+  },
   "geofences": {
-    "perimeter": { "south": 41.75660, "west": -87.71230, "north": 41.76150, "east": -87.70250 },
-    "truckGate": { "south": 41.75990, "west": -87.70330, "north": 41.76045, "east": -87.70270 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.760541,
+          "lng": -87.707599
+        },
+        {
+          "lat": 41.760541,
+          "lng": -87.703204
+        },
+        {
+          "lat": 41.757571,
+          "lng": -87.703479
+        },
+        {
+          "lat": 41.757263,
+          "lng": -87.705127
+        },
+        {
+          "lat": 41.757571,
+          "lng": -87.709521
+        },
+        {
+          "lat": 41.758595,
+          "lng": -87.709247
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.757776,
+          "lng": -87.709247
+        },
+        {
+          "lat": 41.757776,
+          "lng": -87.708148
+        },
+        {
+          "lat": 41.757161,
+          "lng": -87.708148
+        },
+        {
+          "lat": 41.757161,
+          "lng": -87.709247
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 41.75700, "west": -87.71200, "north": 41.75880, "east": -87.70850 }
+      {
+        "ring": [
+          {
+            "lat": 41.758288,
+            "lng": -87.71213
+          },
+          {
+            "lat": 41.758288,
+            "lng": -87.709247
+          },
+          {
+            "lat": 41.757366,
+            "lng": -87.709247
+          },
+          {
+            "lat": 41.757366,
+            "lng": -87.71213
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.75700, "west": -87.70750, "north": 41.75790, "east": -87.70350 }
+      {
+        "ring": [
+          {
+            "lat": 41.758185,
+            "lng": -87.709247
+          },
+          {
+            "lat": 41.758083,
+            "lng": -87.705813
+          },
+          {
+            "lat": 41.757571,
+            "lng": -87.705813
+          },
+          {
+            "lat": 41.757673,
+            "lng": -87.709247
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 49,
+        "pano": "jAHU3MbsNfBkxmrX7a9fjQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 49,
+        "pano": "jAHU3MbsNfBkxmrX7a9fjQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 50,
@@ -19,7 +118,7 @@
     "trailerParkingCapacity": 200,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 100.0,
+    "siteAreaAcres": 100,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@41.75880,-87.70650,400m/data=!3m1!1e3",
@@ -48,7 +147,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "multiStep", "buildingCount"],
+  "uncertainFields": [
+    "scale",
+    "multiStep",
+    "buildingCount"
+  ],
   "fieldNotes": {
     "truckGate": "Fully fenced legacy urban plant. Main vehicle entrance off S Kedzie Ave (~41.7602,-87.7030) crosses the perimeter fence; satellite z21 shows split in/out lanes with directional arrows; Street View shows a guard booth in the entry lot.",
     "guardShack": "Small white guard-booth structure visible in Street View (2024-07 / 2025-06 panos) standing in the entry parking lot just inside the Kedzie gate.",

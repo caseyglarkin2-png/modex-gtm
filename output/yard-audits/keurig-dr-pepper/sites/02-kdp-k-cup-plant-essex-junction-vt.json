@@ -1,17 +1,62 @@
 {
   "name": "KDP K-Cup Plant - Essex Junction VT",
   "type": "Manufacturing - Coffee/K-Cup",
-  "coords": { "lat": 44.513632, "lng": -73.136469 },
+  "coords": {
+    "lat": 44.513632,
+    "lng": -73.136469
+  },
   "geofences": {
-    "perimeter": { "south": 44.51180, "west": -73.13950, "north": 44.51640, "east": -73.13300 },
-    "truckGate": { "south": 44.51400, "west": -73.13820, "north": 44.51460, "east": -73.13740 },
-    "dropYards": [
-      { "south": 44.51480, "west": -73.13620, "north": 44.51620, "east": -73.13380 },
-      { "south": 44.51220, "west": -73.13540, "north": 44.51320, "east": -73.13380 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 44.516766,
+          "lng": -73.139216
+        },
+        {
+          "lat": 44.516961,
+          "lng": -73.134821
+        },
+        {
+          "lat": 44.514415,
+          "lng": -73.133448
+        },
+        {
+          "lat": 44.512163,
+          "lng": -73.134272
+        },
+        {
+          "lat": 44.511869,
+          "lng": -73.138529
+        },
+        {
+          "lat": 44.514611,
+          "lng": -73.140314
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 44.51380, "west": -73.13800, "north": 44.51480, "east": -73.13700 },
-      { "south": 44.51480, "west": -73.13720, "north": 44.51560, "east": -73.13560 }
+      {
+        "ring": [
+          {
+            "lat": 44.514317,
+            "lng": -73.138117
+          },
+          {
+            "lat": 44.514415,
+            "lng": -73.135645
+          },
+          {
+            "lat": 44.513632,
+            "lng": -73.135508
+          },
+          {
+            "lat": 44.513534,
+            "lng": -73.13798
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -21,23 +66,40 @@
     "trailerParkingCapacity": 70,
     "truckGateCount": 2,
     "buildingCount": 4,
-    "siteAreaAcres": 55.0,
+    "siteAreaAcres": 55,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@44.513632,-73.136469,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "buildingCount"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "buildingCount"
+  ],
   "fieldNotes": {
     "location": "Roster address '63 South Park Dr' and pin (44.503824,-73.180386) were wrong - ~3.6 km off, landing in Essex Junction commercial sprawl. Correct facility is the Keurig Green Mountain / KDP coffee roasting and K-Cup complex at 30 Gauthier Dr / 5 New England Dr, Essex Junction VT 05452 (44.513632,-73.136469). Confirmed via Vermont Business Magazine, GMCR 2011 expansion press release (350,000 sq ft addition connecting 30 Gauthier Dr and 5 New England Dr), and warehouserating.com listing. Williston VT operations consolidated here in 2024.",
     "truckGate": "Open driveways from the internal industrial-park road into the W truck court and N dock area. No barrier arm, sliding gate, or checkpoint pinch-point visible in z19-z20 satellite or 2011 Street View. No perimeter fence on the publicly visible sides.",

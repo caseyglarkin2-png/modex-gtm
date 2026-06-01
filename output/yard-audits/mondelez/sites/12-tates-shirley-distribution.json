@@ -1,37 +1,152 @@
 {
   "name": "Tate's Bake Shop Production & Distribution Facility - Shirley NY",
   "type": "Manufacturing / warehouse - cookie bakery + distribution",
-  "coords": { "lat": 40.84720, "lng": -72.87170 },
+  "coords": {
+    "lat": 40.8472,
+    "lng": -72.8717
+  },
   "geofences": {
-    "perimeter": { "south": 40.84610, "west": -72.87290, "north": 40.84850, "east": -72.87020 },
-    "truckGate": { "south": 40.84810, "west": -72.87200, "north": 40.84860, "east": -72.87120 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.848239,
+          "lng": -72.872661
+        },
+        {
+          "lat": 40.848343,
+          "lng": -72.871013
+        },
+        {
+          "lat": 40.846577,
+          "lng": -72.870876
+        },
+        {
+          "lat": 40.846421,
+          "lng": -72.872387
+        },
+        {
+          "lat": 40.847616,
+          "lng": -72.872799
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.848239,
+          "lng": -72.872799
+        },
+        {
+          "lat": 40.848291,
+          "lng": -72.872387
+        },
+        {
+          "lat": 40.847927,
+          "lng": -72.872318
+        },
+        {
+          "lat": 40.847875,
+          "lng": -72.87273
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.84680, "west": -72.87110, "north": 40.84830, "east": -72.87040 }
+      {
+        "ring": [
+          {
+            "lat": 40.848135,
+            "lng": -72.871357
+          },
+          {
+            "lat": 40.848031,
+            "lng": -72.870876
+          },
+          {
+            "lat": 40.846784,
+            "lng": -72.871082
+          },
+          {
+            "lat": 40.846888,
+            "lng": -72.871563
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.84660, "west": -72.87130, "north": 40.84840, "east": -72.87060 }
+      {
+        "ring": [
+          {
+            "lat": 40.848031,
+            "lng": -72.871494
+          },
+          {
+            "lat": 40.847979,
+            "lng": -72.871151
+          },
+          {
+            "lat": 40.846836,
+            "lng": -72.871357
+          },
+          {
+            "lat": 40.846888,
+            "lng": -72.8717
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 143,
+        "pano": "_MXnOQakNVwKppB8yIr0qg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 143,
+        "pano": "_MXnOQakNVwKppB8yIr0qg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 28, "trailersVisible": 12, "trailerParkingCapacity": 35,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 14.5,
+    "dockDoorCount": 28,
+    "trailersVisible": 12,
+    "trailerParkingCapacity": 35,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 14.5,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.84720,-72.87170,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "truckGate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "truckGate"
+  ],
   "fieldNotes": {
     "location": "Positively resolved to 111 Precision Drive, Shirley NY 11967 — a monument sign at the entrance reads 'TATE'S — PICK UP AND DELIVERIES — 111 Precision Drive — ENTRANCE' (Street View, Jun 2024). This is a building in the Precision Innovation Park, a Class-A logistics development directly off the Long Island Expressway delivered 2023; Mondelez moved Tate's into this newly-built warehouse/distribution facility in December 2023. Roster city-centroid coords (40.8015,-72.8743) were ~5km south; corrected — note the roster longitude already matched Precision Drive.",
     "truckGate": "The truck court runs the full east face of the warehouse and connects to the Precision Innovation Park internal loop road at the NE corner. No barrier arm, sliding gate or checkpoint pinch-point is visible at the truck-court entry or at the 111 Precision Drive driveway. Classified false.",

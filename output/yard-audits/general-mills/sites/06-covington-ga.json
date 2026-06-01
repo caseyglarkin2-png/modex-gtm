@@ -1,41 +1,99 @@
 {
   "name": "General Mills - Covington GA",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 33.62280, "lng": -83.82400 },
+  "coords": {
+    "lat": 33.6228,
+    "lng": -83.824
+  },
   "geofences": {
-    "perimeter": { "south": 33.61930, "west": -83.82780, "north": 33.62620, "east": -83.81950 },
-    "truckGate": { "south": 33.62290, "west": -83.82690, "north": 33.62360, "east": -83.82600 },
-    "dropYards": [
-      { "south": 33.62470, "west": -83.82680, "north": 33.62560, "east": -83.82540 },
-      { "south": 33.62450, "west": -83.82490, "north": 33.62560, "east": -83.82380 },
-      { "south": 33.62180, "west": -83.82200, "north": 33.62300, "east": -83.82020 },
-      { "south": 33.62040, "west": -83.82200, "north": 33.62140, "east": -83.82020 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.625087,
+          "lng": -83.825373
+        },
+        {
+          "lat": 33.62463,
+          "lng": -83.820704
+        },
+        {
+          "lat": 33.621428,
+          "lng": -83.821253
+        },
+        {
+          "lat": 33.621428,
+          "lng": -83.825648
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 33.62200, "west": -83.82200, "north": 33.62290, "east": -83.82060 },
-      { "south": 33.62300, "west": -83.82320, "north": 33.62380, "east": -83.82220 }
+      {
+        "ring": [
+          {
+            "lat": 33.624401,
+            "lng": -83.824275
+          },
+          {
+            "lat": 33.624172,
+            "lng": -83.821528
+          },
+          {
+            "lat": 33.6236,
+            "lng": -83.821665
+          },
+          {
+            "lat": 33.623829,
+            "lng": -83.824412
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 55, "trailersVisible": 95, "trailerParkingCapacity": 140,
-    "truckGateCount": 1, "buildingCount": 5, "siteAreaAcres": 146.0,
+    "dockDoorCount": 55,
+    "trailersVisible": 95,
+    "trailerParkingCapacity": 140,
+    "truckGateCount": 1,
+    "buildingCount": 5,
+    "siteAreaAcres": 146,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.62280,-83.82400,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "scale"
+  ],
   "fieldNotes": {
     "location": "Confirmed large cereal manufacturing complex (Cinnamon Toast Crunch) at 15200 Industrial Park Blvd NE, Covington GA. Geocode pin was ~2.5km of city-level offset corrected by satellite + web search; locked center 33.6228,-83.8240.",
     "truckGate": "Property is fully perimeter-fenced (black ornamental metal fence visible in Street View along Industrial Park Blvd NE). Single private access road serves the campus from the SW corner near a road intersection. Treated as a controlled truck entrance.",

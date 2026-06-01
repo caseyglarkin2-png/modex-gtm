@@ -1,39 +1,99 @@
 {
   "name": "Ford - Kentucky Truck Plant, Louisville KY",
   "type": "Vehicle Assembly Plant",
-  "coords": { "lat": 38.29400, "lng": -85.53350 },
+  "coords": {
+    "lat": 38.294,
+    "lng": -85.5335
+  },
   "geofences": {
-    "perimeter": { "south": 38.2900, "west": -85.5420, "north": 38.3010, "east": -85.5290 },
-    "truckGate": { "south": 38.29480, "west": -85.53980, "north": 38.29600, "east": -85.53820 },
-    "dropYards": [
-      { "south": 38.29280, "west": -85.54100, "north": 38.29440, "east": -85.53880 },
-      { "south": 38.29900, "west": -85.53000, "north": 38.30050, "east": -85.52800 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.298742,
+          "lng": -85.54119
+        },
+        {
+          "lat": 38.29788,
+          "lng": -85.52581
+        },
+        {
+          "lat": 38.287102,
+          "lng": -85.527458
+        },
+        {
+          "lat": 38.289257,
+          "lng": -85.538993
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 38.29200, "west": -85.53800, "north": 38.29380, "east": -85.53520 },
-      { "south": 38.29500, "west": -85.53500, "north": 38.29680, "east": -85.53250 }
+      {
+        "ring": [
+          {
+            "lat": 38.291413,
+            "lng": -85.537895
+          },
+          {
+            "lat": 38.290551,
+            "lng": -85.532127
+          },
+          {
+            "lat": 38.289257,
+            "lng": -85.532401
+          },
+          {
+            "lat": 38.29012,
+            "lng": -85.538169
+          }
+        ]
+      }
     ],
-    "staging": { "south": 38.29440, "west": -85.53900, "north": 38.29560, "east": -85.53700 }
+    "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 55, "trailersVisible": 70, "trailerParkingCapacity": 150,
-    "truckGateCount": 2, "buildingCount": 8, "siteAreaAcres": 343.7,
+    "dockDoorCount": 55,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 150,
+    "truckGateCount": 2,
+    "buildingCount": 8,
+    "siteAreaAcres": 343.7,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@38.29400,-85.53350,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": true
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": true
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "entryLanes", "exitLanes", "dockDoorCount", "guardShack"],
+  "uncertainFields": [
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "guardShack"
+  ],
   "fieldNotes": {
     "facility": "Kentucky Truck Plant (Super Duty, Expedition, Navigator); the geocode point lands on the south edge of the plant - the building cluster is unmistakable: one of Ford's largest assembly sites on Chamberlain Ln near I-71.",
     "truckGate": "Secured Ford assembly campus - perimeter fencing, controlled access roads from Chamberlain Ln, distinct truck route to the SW drop yard / dock banks. Truck gate confirmed.",

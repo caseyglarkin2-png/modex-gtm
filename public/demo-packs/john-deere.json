@@ -1,51 +1,32 @@
 {
-  "schemaVersion": "1",
-  "builtAt": "2026-05-29T18:39:44.205Z",
+  "schemaVersion": "2",
+  "builtAt": "2026-06-01T01:21:32.129Z",
   "account": {
     "slug": "john-deere",
     "displayName": "John Deere",
     "archetype": "manufacturer",
-    "siteCount": 21,
+    "siteCount": 22,
     "coverageNote": {
-      "auditedCount": 21,
-      "estimatedFootprint": 30,
-      "droppedStubCount": 1,
+      "auditedCount": 22,
+      "estimatedFootprint": null,
+      "droppedStubCount": 0,
       "capHit": false,
-      "note": "John Deere operates ~60 manufacturing/parts facilities globally; ~30 are in NA. We audited 21 NA sites. International scope on request.",
-      "auditedScope": "NA",
-      "totalGlobalFootprint": 60
+      "note": "Audited all 22 identifiable facilities."
     },
-    "featuredSiteId": "19-john-deere-north-american-parts-distribution-center",
-    "dossierIntro": "John Deere runs the largest heavy-equipment manufacturing network in the dataset. 60 facilities; we audited 21. Milan IL Parts Distribution covers 215 acres. Waterloo IA Tractor Operations is 620 acres. 3,914 total audited acres. YardFlow runs aftermarket parts logistics and whole-goods manufacturing as two distinct queues.",
-    "surprisingFindings": [
-      "Waterloo IA is 620 acres of tractor manufacturing. Deere has been building Iowa-made tractors here since 1918.",
-      "Milan IL PDC is 215 acres with 90 dock doors. The largest aftermarket parts DC in agriculture.",
-      "3 of 21 audited sites are rail-served. Whole goods leave on flatbed; parts move on truckload."
-    ]
+    "featuredSiteId": "19-john-deere-north-american-parts-distribution-center"
   },
-  "research": {
-    "facility_count": 60,
-    "audited_facilities": 22,
-    "source": "yard-audit",
-    "confidence": "third-party",
-    "caveats": [
-      "John Deere Waterloo Works - Drivetrain Operations - Waterloo IA: audit note mentions 'closed'",
-      "John Deere Des Moines Works - Ankeny IA: audit note mentions 'closed'",
-      "John Deere Horicon Works - Horicon WI: audit note mentions 'closed'",
-      "John Deere Kernersville (Deere-Hitachi Construction) - Kernersville NC: audit note mentions 'under construction'"
-    ]
-  },
+  "research": null,
   "network": {
     "bbox": [
-      -96.3152,
-      29.8038,
-      -80.0825,
-      43.4578
+      -96.314661,
+      29.804275,
+      -80.089204,
+      43.457988
     ],
     "archetypeMix": {
       "#6": 6,
       "#9": 5,
-      "#3": 9,
+      "#3": 10,
       "#10": 1
     },
     "totals": {
@@ -53,7 +34,7 @@
       "trailerCapacity": 1999,
       "gates": 24,
       "railServed": 3,
-      "acres": 3914
+      "acres": 4148
     },
     "sites": [
       {
@@ -79,45 +60,54 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 42.5095,
-            "west": -92.281,
-            "north": 42.53,
-            "east": -92.2555
+            "ring": [
+              {
+                "lat": 42.525858,
+                "lng": -92.27719
+              },
+              {
+                "lat": 42.524644,
+                "lng": -92.264556
+              },
+              {
+                "lat": 42.514927,
+                "lng": -92.266204
+              },
+              {
+                "lat": 42.515737,
+                "lng": -92.273895
+              },
+              {
+                "lat": 42.521,
+                "lng": -92.27719
+              }
+            ]
           },
-          "truckGate": {
-            "south": 42.5118,
-            "west": -92.2615,
-            "north": 42.5135,
-            "east": -92.2595
-          },
-          "dropYards": [
-            {
-              "south": 42.518,
-              "west": -92.2715,
-              "north": 42.523,
-              "east": -92.265
-            },
-            {
-              "south": 42.5145,
-              "west": -92.2665,
-              "north": 42.517,
-              "east": -92.2615
-            }
-          ],
+          "truckGate": null,
+          "dropYards": [],
           "dockAprons": [
             {
-              "south": 42.5195,
-              "west": -92.272,
-              "north": 42.524,
-              "east": -92.266
+              "ring": [
+                {
+                  "lat": 42.518976,
+                  "lng": -92.273345
+                },
+                {
+                  "lat": 42.518166,
+                  "lng": -92.266753
+                },
+                {
+                  "lat": 42.516951,
+                  "lng": -92.267028
+                },
+                {
+                  "lat": 42.517761,
+                  "lng": -92.27362
+                }
+              ]
             }
           ],
-          "staging": {
-            "south": 42.5108,
-            "west": -92.262,
-            "north": 42.5128,
-            "east": -92.2585
-          }
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 45,
@@ -151,52 +141,6 @@
           "scale": false,
           "dropYard": true,
           "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#6",
-          "steps": [
-            {
-              "step": "Arrive at outer campus gate",
-              "geofenceTarget": "truckGate",
-              "durationMs": 30000,
-              "narrationKey": "gate.arrive",
-              "baselineWaitMs": 600000,
-              "ynsWaitMs": 30000
-            },
-            {
-              "step": "Route to correct building / drop yard",
-              "geofenceTarget": "dropYard",
-              "targetIndex": 0,
-              "durationMs": 180000,
-              "narrationKey": "campus.route",
-              "baselineWaitMs": 900000,
-              "ynsWaitMs": 0
-            },
-            {
-              "step": "Spotter pulls to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 90000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 1200000,
-              "ynsWaitMs": 120000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit through gate",
-              "geofenceTarget": "exit",
-              "durationMs": 60000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 5460000,
-          "totalYnsMs": 2910000
         },
         "dossierExcerpt": "Roster supplied geometric-center coordinates (42.522441, -92.269194) flagged as moved\n2958 m. Satellite probe at z15-z16 landed directly on a massive industrial complex\nsurrounded entirely by farmland — unmistakably the John Deere Waterloo Works Tractor\nOperations site (the largest Deere assembly complex in the world, building 7/8/9 Series\ntractors). Web search confirmed 3500 E Donald St, Waterloo IA, with public 90-minute\nriding factory tours. Center refined slightly SW to 42.5210, -92.2695 to sit on the\nbuilding mass.",
         "mapsUrl": "https://www.google.com/maps/@42.5210,-92.2695,400m/data=!3m1!1e3",
@@ -260,34 +204,57 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 42.462,
-            "west": -92.44,
-            "north": 42.471,
-            "east": -92.429
+            "ring": [
+              {
+                "lat": 42.468813,
+                "lng": -92.440141
+              },
+              {
+                "lat": 42.468813,
+                "lng": -92.428331
+              },
+              {
+                "lat": 42.466787,
+                "lng": -92.428331
+              },
+              {
+                "lat": 42.466787,
+                "lng": -92.440141
+              }
+            ]
           },
-          "truckGate": {
-            "south": 42.4664,
-            "west": -92.4305,
-            "north": 42.4674,
-            "east": -92.4292
-          },
-          "dropYards": [
-            {
-              "south": 42.4665,
-              "west": -92.4312,
-              "north": 42.468,
-              "east": -92.429
-            }
-          ],
+          "truckGate": null,
+          "dropYards": [],
           "dockAprons": [
             {
-              "south": 42.467,
-              "west": -92.4322,
-              "north": 42.468,
-              "east": -92.4305
+              "ring": [
+                {
+                  "lat": 42.468408,
+                  "lng": -92.436571
+                },
+                {
+                  "lat": 42.468408,
+                  "lng": -92.428605
+                },
+                {
+                  "lat": 42.4678,
+                  "lng": -92.428605
+                },
+                {
+                  "lat": 42.4678,
+                  "lng": -92.436571
+                }
+              ]
             }
           ],
-          "staging": null
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 208,
+              "pano": "6zFvu7Igws02685MEFkBiQ",
+              "hasCoverage": true
+            }
+          }
         },
         "yardMetrics": {
           "dockDoorCount": 16,
@@ -321,50 +288,6 @@
           "scale": false,
           "dropYard": false,
           "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#9",
-          "steps": [
-            {
-              "step": "Arrive at gate (no guard, kiosk or call box)",
-              "geofenceTarget": "truckGate",
-              "durationMs": 60000,
-              "narrationKey": "gate.through.kiosk",
-              "baselineWaitMs": 720000,
-              "ynsWaitMs": 0
-            },
-            {
-              "step": "Pass through to drop yard",
-              "geofenceTarget": "dropYard",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Spotter pulls to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 90000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 1200000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit through gate",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 4560000,
-          "totalYnsMs": 2730000
         },
         "dossierExcerpt": "Roster supplied ROOFTOP coordinates (42.468191, -92.433528) moved 351 m — these landed\ndirectly on a long (~900 m) single-mass industrial building. Confirmed as the John Deere\nWaterloo Works Engine Works at 3801 W Ridgeway Ave. Locked center refined slightly to\n42.4678, -92.4330 on the building centroid.",
         "mapsUrl": "https://www.google.com/maps/@42.4678,-92.4330,400m/data=!3m1!1e3",
@@ -431,31 +354,51 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 42.4975,
-            "west": -92.359,
-            "north": 42.506,
-            "east": -92.346
+            "ring": [
+              {
+                "lat": 42.503917,
+                "lng": -92.364486
+              },
+              {
+                "lat": 42.504727,
+                "lng": -92.350204
+              },
+              {
+                "lat": 42.49845,
+                "lng": -92.349105
+              },
+              {
+                "lat": 42.49683,
+                "lng": -92.354873
+              },
+              {
+                "lat": 42.50007,
+                "lng": -92.363662
+              }
+            ]
           },
-          "truckGate": {
-            "south": 42.5043,
-            "west": -92.3545,
-            "north": 42.5053,
-            "east": -92.353
-          },
-          "dropYards": [
-            {
-              "south": 42.502,
-              "west": -92.35,
-              "north": 42.5045,
-              "east": -92.347
-            }
-          ],
+          "truckGate": null,
+          "dropYards": [],
           "dockAprons": [
             {
-              "south": 42.5045,
-              "west": -92.355,
-              "north": 42.5055,
-              "east": -92.352
+              "ring": [
+                {
+                  "lat": 42.501488,
+                  "lng": -92.357071
+                },
+                {
+                  "lat": 42.5025,
+                  "lng": -92.351028
+                },
+                {
+                  "lat": 42.501285,
+                  "lng": -92.350479
+                },
+                {
+                  "lat": 42.500273,
+                  "lng": -92.356521
+                }
+              ]
             }
           ],
           "staging": null
@@ -492,50 +435,6 @@
           "scale": false,
           "dropYard": false,
           "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#9",
-          "steps": [
-            {
-              "step": "Arrive at gate (no guard, kiosk or call box)",
-              "geofenceTarget": "truckGate",
-              "durationMs": 60000,
-              "narrationKey": "gate.through.kiosk",
-              "baselineWaitMs": 720000,
-              "ynsWaitMs": 0
-            },
-            {
-              "step": "Pass through to drop yard",
-              "geofenceTarget": "dropYard",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Spotter pulls to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 90000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 1200000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit through gate",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 4560000,
-          "totalYnsMs": 2730000
         },
         "dossierExcerpt": "Roster supplied ROOFTOP coordinates (42.501899, -92.355419) moved only 53 m — accurate.\nSatellite confirmed a large multi-building industrial complex along the Cedar River.\nStreet View confirmed the campus directly: a \"JOHN DEERE TRACTOR & ENGINE MUSEUM\" sign on\nthe south building and \"TechWorks Campus\" signage inside. The active John Deere Drivetrain\nOperations (formerly Drive Train) production buildings are the large fenced cluster along\nthe river to the north. Locked center placed on that production cluster at 42.5025,-92.3535.",
         "mapsUrl": "https://www.google.com/maps/@42.5025,-92.3535,400m/data=!3m1!1e3",
@@ -598,39 +497,54 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 42.503,
-            "west": -92.37,
-            "north": 42.5105,
-            "east": -92.359
+            "ring": [
+              {
+                "lat": 42.509022,
+                "lng": -92.369944
+              },
+              {
+                "lat": 42.508212,
+                "lng": -92.36088
+              },
+              {
+                "lat": 42.50153,
+                "lng": -92.359507
+              },
+              {
+                "lat": 42.50072,
+                "lng": -92.363627
+              },
+              {
+                "lat": 42.5072,
+                "lng": -92.371042
+              }
+            ]
           },
-          "truckGate": {
-            "south": 42.5044,
-            "west": -92.3655,
-            "north": 42.5053,
-            "east": -92.364
-          },
-          "dropYards": [
-            {
-              "south": 42.5045,
-              "west": -92.3645,
-              "north": 42.506,
-              "east": -92.3615
-            }
-          ],
+          "truckGate": null,
+          "dropYards": [],
           "dockAprons": [
             {
-              "south": 42.505,
-              "west": -92.364,
-              "north": 42.5062,
-              "east": -92.362
+              "ring": [
+                {
+                  "lat": 42.506188,
+                  "lng": -92.368296
+                },
+                {
+                  "lat": 42.50558,
+                  "lng": -92.361704
+                },
+                {
+                  "lat": 42.50477,
+                  "lng": -92.361979
+                },
+                {
+                  "lat": 42.505378,
+                  "lng": -92.368571
+                }
+              ]
             }
           ],
-          "staging": {
-            "south": 42.5044,
-            "west": -92.3648,
-            "north": 42.5055,
-            "east": -92.3635
-          }
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 20,
@@ -664,52 +578,6 @@
           "scale": false,
           "dropYard": true,
           "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#6",
-          "steps": [
-            {
-              "step": "Arrive at outer campus gate",
-              "geofenceTarget": "truckGate",
-              "durationMs": 30000,
-              "narrationKey": "gate.arrive",
-              "baselineWaitMs": 600000,
-              "ynsWaitMs": 30000
-            },
-            {
-              "step": "Route to correct building / drop yard",
-              "geofenceTarget": "dropYard",
-              "targetIndex": 0,
-              "durationMs": 180000,
-              "narrationKey": "campus.route",
-              "baselineWaitMs": 900000,
-              "ynsWaitMs": 0
-            },
-            {
-              "step": "Spotter pulls to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 90000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 1200000,
-              "ynsWaitMs": 120000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit through gate",
-              "geofenceTarget": "exit",
-              "durationMs": 60000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 5460000,
-          "totalYnsMs": 2910000
         },
         "dossierExcerpt": "Roster supplied ROOFTOP coordinates (42.507619, -92.365938) moved 180 m — landed on a\nlarge multi-building industrial complex on the Cedar River. Confirmed as the John Deere\nWaterloo Foundry at 2000 Westfield Ave. Locked center refined to 42.5072, -92.3650 on the\nfoundry building mass.",
         "mapsUrl": "https://www.google.com/maps/@42.5072,-92.3650,400m/data=!3m1!1e3",
@@ -775,45 +643,75 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 41.5175,
-            "west": -90.443,
-            "north": 41.532,
-            "east": -90.43
+            "ring": [
+              {
+                "lat": 41.53058,
+                "lng": -90.442317
+              },
+              {
+                "lat": 41.531608,
+                "lng": -90.431605
+              },
+              {
+                "lat": 41.522972,
+                "lng": -90.429408
+              },
+              {
+                "lat": 41.52071,
+                "lng": -90.434627
+              },
+              {
+                "lat": 41.524823,
+                "lng": -90.442592
+              }
+            ]
           },
-          "truckGate": {
-            "south": 41.5234,
-            "west": -90.434,
-            "north": 41.5246,
-            "east": -90.4325
-          },
+          "truckGate": null,
           "dropYards": [
             {
-              "south": 41.526,
-              "west": -90.44,
-              "north": 41.531,
-              "east": -90.434
-            },
-            {
-              "south": 41.5225,
-              "west": -90.4345,
-              "north": 41.5255,
-              "east": -90.43
+              "ring": [
+                {
+                  "lat": 41.524,
+                  "lng": -90.437099
+                },
+                {
+                  "lat": 41.524617,
+                  "lng": -90.431605
+                },
+                {
+                  "lat": 41.522972,
+                  "lng": -90.431331
+                },
+                {
+                  "lat": 41.522355,
+                  "lng": -90.436824
+                }
+              ]
             }
           ],
           "dockAprons": [
             {
-              "south": 41.5235,
-              "west": -90.4385,
-              "north": 41.527,
-              "east": -90.4335
+              "ring": [
+                {
+                  "lat": 41.528524,
+                  "lng": -90.438747
+                },
+                {
+                  "lat": 41.529141,
+                  "lng": -90.432704
+                },
+                {
+                  "lat": 41.528112,
+                  "lng": -90.432429
+                },
+                {
+                  "lat": 41.527496,
+                  "lng": -90.438472
+                }
+              ]
             }
           ],
-          "staging": {
-            "south": 41.5215,
-            "west": -90.4345,
-            "north": 41.5245,
-            "east": -90.4305
-          }
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 40,
@@ -847,52 +745,6 @@
           "scale": false,
           "dropYard": true,
           "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#6",
-          "steps": [
-            {
-              "step": "Arrive at outer campus gate",
-              "geofenceTarget": "truckGate",
-              "durationMs": 30000,
-              "narrationKey": "gate.arrive",
-              "baselineWaitMs": 600000,
-              "ynsWaitMs": 30000
-            },
-            {
-              "step": "Route to correct building / drop yard",
-              "geofenceTarget": "dropYard",
-              "targetIndex": 0,
-              "durationMs": 180000,
-              "narrationKey": "campus.route",
-              "baselineWaitMs": 900000,
-              "ynsWaitMs": 0
-            },
-            {
-              "step": "Spotter pulls to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 90000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 1200000,
-              "ynsWaitMs": 120000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit through gate",
-              "geofenceTarget": "exit",
-              "durationMs": 60000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 5460000,
-          "totalYnsMs": 2910000
         },
         "dossierExcerpt": "Roster supplied GEOMETRIC_CENTER coordinates (41.526702, -90.434909) flagged as moved\n2007 m. Satellite probe landed directly on a massive industrial complex on the Mississippi\nRiver. Web search confirmed the John Deere Harvester Works at 1100 13th Ave, East Moline\nIL — the world's largest combine manufacturing facility (~4M sq ft, ~90 acres under roof),\nproducing combines since 1913. Google Maps place coordinates (41.5234, -90.4355)\ncorroborate. Locked center placed on the main building mass at 41.5240, -90.4360.",
         "mapsUrl": "https://www.google.com/maps/@41.5240,-90.4360,400m/data=!3m1!1e3",
@@ -957,26 +809,47 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 41.5065,
-            "west": -90.5296,
-            "north": 41.5097,
-            "east": -90.5238
+            "ring": [
+              {
+                "lat": 41.50918,
+                "lng": -90.530187
+              },
+              {
+                "lat": 41.509077,
+                "lng": -90.524557
+              },
+              {
+                "lat": 41.506815,
+                "lng": -90.524282
+              },
+              {
+                "lat": 41.506815,
+                "lng": -90.529913
+              }
+            ]
           },
           "truckGate": null,
-          "dropYards": [
-            {
-              "south": 41.50855,
-              "west": -90.529,
-              "north": 41.50935,
-              "east": -90.5276
-            }
-          ],
+          "dropYards": [],
           "dockAprons": [
             {
-              "south": 41.5087,
-              "west": -90.5278,
-              "north": 41.5096,
-              "east": -90.5248
+              "ring": [
+                {
+                  "lat": 41.508769,
+                  "lng": -90.529089
+                },
+                {
+                  "lat": 41.508769,
+                  "lng": -90.524694
+                },
+                {
+                  "lat": 41.508358,
+                  "lng": -90.524694
+                },
+                {
+                  "lat": 41.508358,
+                  "lng": -90.529089
+                }
+              ]
             }
           ],
           "staging": null
@@ -1103,29 +976,57 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 41.5073,
-            "west": -90.5345,
-            "north": 41.5101,
-            "east": -90.5278
+            "ring": [
+              {
+                "lat": 41.50921,
+                "lng": -90.537067
+              },
+              {
+                "lat": 41.509518,
+                "lng": -90.530338
+              },
+              {
+                "lat": 41.507256,
+                "lng": -90.530063
+              },
+              {
+                "lat": 41.507153,
+                "lng": -90.536793
+              }
+            ]
           },
           "truckGate": null,
-          "dropYards": [
-            {
-              "south": 41.5088,
-              "west": -90.5299,
-              "north": 41.50985,
-              "east": -90.5283
-            }
-          ],
+          "dropYards": [],
           "dockAprons": [
             {
-              "south": 41.5091,
-              "west": -90.533,
-              "north": 41.50985,
-              "east": -90.5295
+              "ring": [
+                {
+                  "lat": 41.509004,
+                  "lng": -90.535557
+                },
+                {
+                  "lat": 41.509107,
+                  "lng": -90.530613
+                },
+                {
+                  "lat": 41.508593,
+                  "lng": -90.530544
+                },
+                {
+                  "lat": 41.50849,
+                  "lng": -90.535488
+                }
+              ]
             }
           ],
-          "staging": null
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 325,
+              "pano": "EIXc1dFdZobzj1EQAx3xxQ",
+              "hasCoverage": true
+            }
+          }
         },
         "yardMetrics": {
           "dockDoorCount": 22,
@@ -1252,45 +1153,75 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 41.597,
-            "west": -90.5585,
-            "north": 41.6075,
-            "east": -90.5455
+            "ring": [
+              {
+                "lat": 41.604675,
+                "lng": -90.556993
+              },
+              {
+                "lat": 41.604675,
+                "lng": -90.548204
+              },
+              {
+                "lat": 41.598719,
+                "lng": -90.547105
+              },
+              {
+                "lat": 41.598719,
+                "lng": -90.555895
+              },
+              {
+                "lat": 41.602622,
+                "lng": -90.557268
+              }
+            ]
           },
-          "truckGate": {
-            "south": 41.6102,
-            "west": -90.558,
-            "north": 41.6112,
-            "east": -90.556
-          },
+          "truckGate": null,
           "dropYards": [
             {
-              "south": 41.601,
-              "west": -90.549,
-              "north": 41.6028,
-              "east": -90.546
-            },
-            {
-              "south": 41.6033,
-              "west": -90.556,
-              "north": 41.605,
-              "east": -90.5485
+              "ring": [
+                {
+                  "lat": 41.600773,
+                  "lng": -90.555895
+                },
+                {
+                  "lat": 41.600773,
+                  "lng": -90.548204
+                },
+                {
+                  "lat": 41.599335,
+                  "lng": -90.548204
+                },
+                {
+                  "lat": 41.599335,
+                  "lng": -90.555895
+                }
+              ]
             }
           ],
           "dockAprons": [
             {
-              "south": 41.6026,
-              "west": -90.556,
-              "north": 41.6036,
-              "east": -90.5485
+              "ring": [
+                {
+                  "lat": 41.603854,
+                  "lng": -90.555895
+                },
+                {
+                  "lat": 41.603854,
+                  "lng": -90.548753
+                },
+                {
+                  "lat": 41.603032,
+                  "lng": -90.548753
+                },
+                {
+                  "lat": 41.603032,
+                  "lng": -90.555895
+                }
+              ]
             }
           ],
-          "staging": {
-            "south": 41.6028,
-            "west": -90.554,
-            "north": 41.6052,
-            "east": -90.5495
-          }
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 20,
@@ -1324,50 +1255,6 @@
           "scale": false,
           "dropYard": true,
           "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#9",
-          "steps": [
-            {
-              "step": "Arrive at gate (no guard, kiosk or call box)",
-              "geofenceTarget": "truckGate",
-              "durationMs": 60000,
-              "narrationKey": "gate.through.kiosk",
-              "baselineWaitMs": 720000,
-              "ynsWaitMs": 0
-            },
-            {
-              "step": "Pass through to drop yard",
-              "geofenceTarget": "dropYard",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Spotter pulls to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 90000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 1200000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit through gate",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 4560000,
-          "totalYnsMs": 2730000
         },
         "dossierExcerpt": "- Address: 1175 E 90th St, Davenport, IA 52807\n- Locked center: 41.601800, -90.551500 (centroid of the giant main\n  assembly hall)\n- Confirmation: Roster geocode moved 2959 m (GEOMETRIC_CENTER quality), so\n  the location was verified independently. Satellite z15-17 around the supplied\n  point shows one enormous manufacturing complex standing alone in open\n  farmland NE of Davenport. Web search (about.deere.com Davenport Works, Iowa\n  DNR Facility Explorer, Quad Cities Chamber) confirms John Deere Davenport\n  Works — a Construction & Forestry division plant producing articulated dump\n  trucks, four-wheel-drive loaders, motor graders, and log skidders since 1974.\n  Finished construction equipment (graders, ADTs, wheel loaders) staged in rows\n  on the yards confirms the site. Correct location confirmed; locked center",
         "mapsUrl": "https://www.google.com/maps/@41.601800,-90.551500,400m/data=!3m1!1e3",
@@ -1429,45 +1316,75 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 42.5565,
-            "west": -90.699,
-            "north": 42.574,
-            "east": -90.6815
+            "ring": [
+              {
+                "lat": 42.570073,
+                "lng": -90.696374
+              },
+              {
+                "lat": 42.567242,
+                "lng": -90.682092
+              },
+              {
+                "lat": 42.55915,
+                "lng": -90.678796
+              },
+              {
+                "lat": 42.556722,
+                "lng": -90.684289
+              },
+              {
+                "lat": 42.566837,
+                "lng": -90.698571
+              }
+            ]
           },
-          "truckGate": {
-            "south": 42.5625,
-            "west": -90.694,
-            "north": 42.564,
-            "east": -90.6915
-          },
+          "truckGate": null,
           "dropYards": [
             {
-              "south": 42.5656,
-              "west": -90.6865,
-              "north": 42.5695,
-              "east": -90.6835
-            },
-            {
-              "south": 42.5628,
-              "west": -90.688,
-              "north": 42.5656,
-              "east": -90.6845
+              "ring": [
+                {
+                  "lat": 42.562387,
+                  "lng": -90.690881
+                },
+                {
+                  "lat": 42.561173,
+                  "lng": -90.682092
+                },
+                {
+                  "lat": 42.558745,
+                  "lng": -90.682641
+                },
+                {
+                  "lat": 42.560364,
+                  "lng": -90.69143
+                }
+              ]
             }
           ],
           "dockAprons": [
             {
-              "south": 42.565,
-              "west": -90.6875,
-              "north": 42.5695,
-              "east": -90.6855
+              "ring": [
+                {
+                  "lat": 42.565623,
+                  "lng": -90.693078
+                },
+                {
+                  "lat": 42.564005,
+                  "lng": -90.68374
+                },
+                {
+                  "lat": 42.562387,
+                  "lng": -90.684289
+                },
+                {
+                  "lat": 42.564005,
+                  "lng": -90.693628
+                }
+              ]
             }
           ],
-          "staging": {
-            "south": 42.5605,
-            "west": -90.693,
-            "north": 42.5645,
-            "east": -90.689
-          }
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 30,
@@ -1501,50 +1418,6 @@
           "scale": false,
           "dropYard": true,
           "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#9",
-          "steps": [
-            {
-              "step": "Arrive at gate (no guard, kiosk or call box)",
-              "geofenceTarget": "truckGate",
-              "durationMs": 60000,
-              "narrationKey": "gate.through.kiosk",
-              "baselineWaitMs": 720000,
-              "ynsWaitMs": 0
-            },
-            {
-              "step": "Pass through to drop yard",
-              "geofenceTarget": "dropYard",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Spotter pulls to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 90000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 1200000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit through gate",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 4560000,
-          "totalYnsMs": 2730000
         },
         "dossierExcerpt": "- Address: 18600 S John Deere Rd, Dubuque, IA 52001\n- Locked center: 42.566837, -90.690881 (centroid of the mile-long main\n  building)\n- Confirmation: Roster geocode flagged `movedMeters: 14294`, so the supplied\n  point was verified independently. Satellite z14-16 around the supplied\n  coordinate shows one enormous mile-long industrial complex on a riverbottom\n  tract SW of Dubuque — exactly the John Deere Dubuque Works. Web search\n  (about.deere.com Dubuque Works, Iowa DNR Facility Explorer, Panjiva) confirms\n  the plant: a Construction & Forestry facility making backhoes, crawler dozers,\n  and skid-steer loaders, in operation since 1946, \"in excess of one mile long\n  on 1,465 acres.\" The supplied coordinate is in fact correct and on the\n  building — locked as the center.",
         "mapsUrl": "https://www.google.com/maps/@42.566837,-90.690881,400m/data=!3m1!1e3",
@@ -1607,51 +1480,54 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 41.7125,
-            "west": -93.6375,
-            "north": 41.7285,
-            "east": -93.6225
+            "ring": [
+              {
+                "lat": 41.729116,
+                "lng": -93.63707
+              },
+              {
+                "lat": 41.729116,
+                "lng": -93.623887
+              },
+              {
+                "lat": 41.717636,
+                "lng": -93.622788
+              },
+              {
+                "lat": 41.716816,
+                "lng": -93.634873
+              },
+              {
+                "lat": 41.724196,
+                "lng": -93.638169
+              }
+            ]
           },
-          "truckGate": {
-            "south": 41.7233,
-            "west": -93.6245,
-            "north": 41.7244,
-            "east": -93.6228
-          },
-          "dropYards": [
-            {
-              "south": 41.7228,
-              "west": -93.6285,
-              "north": 41.725,
-              "east": -93.6245
-            },
-            {
-              "south": 41.7175,
-              "west": -93.6305,
-              "north": 41.72,
-              "east": -93.6255
-            }
-          ],
+          "truckGate": null,
+          "dropYards": [],
           "dockAprons": [
             {
-              "south": 41.7228,
-              "west": -93.629,
-              "north": 41.7242,
-              "east": -93.6255
-            },
-            {
-              "south": 41.719,
-              "west": -93.635,
-              "north": 41.7205,
-              "east": -93.632
+              "ring": [
+                {
+                  "lat": 41.725016,
+                  "lng": -93.634873
+                },
+                {
+                  "lat": 41.725016,
+                  "lng": -93.624985
+                },
+                {
+                  "lat": 41.722966,
+                  "lng": -93.624985
+                },
+                {
+                  "lat": 41.722966,
+                  "lng": -93.634873
+                }
+              ]
             }
           ],
-          "staging": {
-            "south": 41.719,
-            "west": -93.631,
-            "north": 41.722,
-            "east": -93.6265
-          }
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 45,
@@ -1685,52 +1561,6 @@
           "scale": false,
           "dropYard": true,
           "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#6",
-          "steps": [
-            {
-              "step": "Arrive at outer campus gate",
-              "geofenceTarget": "truckGate",
-              "durationMs": 30000,
-              "narrationKey": "gate.arrive",
-              "baselineWaitMs": 600000,
-              "ynsWaitMs": 30000
-            },
-            {
-              "step": "Route to correct building / drop yard",
-              "geofenceTarget": "dropYard",
-              "targetIndex": 0,
-              "durationMs": 180000,
-              "narrationKey": "campus.route",
-              "baselineWaitMs": 900000,
-              "ynsWaitMs": 0
-            },
-            {
-              "step": "Spotter pulls to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 90000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 1200000,
-              "ynsWaitMs": 120000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit through gate",
-              "geofenceTarget": "exit",
-              "durationMs": 60000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 5460000,
-          "totalYnsMs": 2910000
         },
         "dossierExcerpt": "- Address: 825 SW Irvinedale Dr, Ankeny, IA 50023\n- Locked center: 41.720916, -93.62938 (centroid of the main building\n  cluster)\n- Confirmation: Roster geocode quality GEOMETRIC_CENTER (moved 617 m).\n  Satellite z15-17 around the supplied point shows one very large industrial\n  campus ringed by Ankeny suburban development — exactly the John Deere Des\n  Moines Works. Web search (Greater Des Moines Partnership, Ankeny Chamber,\n  Yelp, US EPA fact sheet) confirms the plant at 825 SW Irvinedale Dr, an\n  agricultural-equipment assembly plant building cotton harvesters, sprayers,\n  tillage tools, and See & Spray equipment. Rows of green John Deere finished\n  equipment staged in the yards corroborate the site. Correct location\n  confirmed.",
         "mapsUrl": "https://www.google.com/maps/@41.720916,-93.62938,400m/data=!3m1!1e3",
@@ -1787,45 +1617,75 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 40.9998,
-            "west": -92.4128,
-            "north": 41.0068,
-            "east": -92.4062
+            "ring": [
+              {
+                "lat": 41.006104,
+                "lng": -92.413321
+              },
+              {
+                "lat": 41.006208,
+                "lng": -92.407004
+              },
+              {
+                "lat": 41.000922,
+                "lng": -92.406455
+              },
+              {
+                "lat": 41.000197,
+                "lng": -92.411399
+              },
+              {
+                "lat": 41.003306,
+                "lng": -92.413733
+              }
+            ]
           },
-          "truckGate": {
-            "south": 41.0003,
-            "west": -92.4109,
-            "north": 41.00075,
-            "east": -92.4102
-          },
+          "truckGate": null,
           "dropYards": [
             {
-              "south": 40.9997,
-              "west": -92.4082,
-              "north": 41.0013,
-              "east": -92.4056
-            },
-            {
-              "south": 41.0037,
-              "west": -92.4115,
-              "north": 41.0056,
-              "east": -92.4088
+              "ring": [
+                {
+                  "lat": 41.000922,
+                  "lng": -92.413047
+                },
+                {
+                  "lat": 41.001129,
+                  "lng": -92.408103
+                },
+                {
+                  "lat": 41.000508,
+                  "lng": -92.407965
+                },
+                {
+                  "lat": 41.0003,
+                  "lng": -92.412909
+                }
+              ]
             }
           ],
           "dockAprons": [
             {
-              "south": 41.001,
-              "west": -92.4105,
-              "north": 41.0021,
-              "east": -92.4088
+              "ring": [
+                {
+                  "lat": 41.005482,
+                  "lng": -92.412497
+                },
+                {
+                  "lat": 41.005586,
+                  "lng": -92.408103
+                },
+                {
+                  "lat": 41.005068,
+                  "lng": -92.408034
+                },
+                {
+                  "lat": 41.004964,
+                  "lng": -92.412429
+                }
+              ]
             }
           ],
-          "staging": {
-            "south": 41.002,
-            "west": -92.4092,
-            "north": 41.004,
-            "east": -92.407
-          }
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 30,
@@ -1859,52 +1719,6 @@
           "scale": false,
           "dropYard": true,
           "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#6",
-          "steps": [
-            {
-              "step": "Arrive at outer campus gate",
-              "geofenceTarget": "truckGate",
-              "durationMs": 30000,
-              "narrationKey": "gate.arrive",
-              "baselineWaitMs": 600000,
-              "ynsWaitMs": 30000
-            },
-            {
-              "step": "Route to correct building / drop yard",
-              "geofenceTarget": "dropYard",
-              "targetIndex": 0,
-              "durationMs": 180000,
-              "narrationKey": "campus.route",
-              "baselineWaitMs": 900000,
-              "ynsWaitMs": 0
-            },
-            {
-              "step": "Spotter pulls to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 90000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 1200000,
-              "ynsWaitMs": 120000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit through gate",
-              "geofenceTarget": "exit",
-              "durationMs": 60000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 5460000,
-          "totalYnsMs": 2910000
         },
         "dossierExcerpt": "The roster geocode (ROOFTOP, moved 2034 m) landed directly on a large multi-building\nindustrial complex on the east edge of Ottumwa, bounded by the Des Moines River and\nUS-63 to the east and a residential street grid to the west and south. The scale and\nlayout — many connected long-span manufacturing buildings, material storage yards,\nand a fenced perimeter — are fully consistent with a legacy John Deere assembly plant.\nWeb search confirmed the address (928 E Vine St) and the facility identity. Coordinates\nlocked at the supplied point.",
         "mapsUrl": "https://www.google.com/maps/@41.003824,-92.4103,400m/data=!3m1!1e3",
@@ -1968,51 +1782,54 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 33.4606,
-            "west": -82.1882,
-            "north": 33.4656,
-            "east": -82.1828
+            "ring": [
+              {
+                "lat": 33.464735,
+                "lng": -82.189116
+              },
+              {
+                "lat": 33.465193,
+                "lng": -82.184446
+              },
+              {
+                "lat": 33.461298,
+                "lng": -82.183897
+              },
+              {
+                "lat": 33.461068,
+                "lng": -82.188292
+              },
+              {
+                "lat": 33.463245,
+                "lng": -82.18939
+              }
+            ]
           },
-          "truckGate": {
-            "south": 33.463,
-            "west": -82.1852,
-            "north": 33.4636,
-            "east": -82.1844
-          },
-          "dropYards": [
-            {
-              "south": 33.461,
-              "west": -82.1872,
-              "north": 33.4643,
-              "east": -82.1848
-            },
-            {
-              "south": 33.4618,
-              "west": -82.1882,
-              "north": 33.4647,
-              "east": -82.187
-            }
-          ],
+          "truckGate": null,
+          "dropYards": [],
           "dockAprons": [
             {
-              "south": 33.4625,
-              "west": -82.1865,
-              "north": 33.4649,
-              "east": -82.1856
-            },
-            {
-              "south": 33.4618,
-              "west": -82.1856,
-              "north": 33.4626,
-              "east": -82.1838
+              "ring": [
+                {
+                  "lat": 33.464276,
+                  "lng": -82.186369
+                },
+                {
+                  "lat": 33.464505,
+                  "lng": -82.184446
+                },
+                {
+                  "lat": 33.462443,
+                  "lng": -82.184378
+                },
+                {
+                  "lat": 33.462214,
+                  "lng": -82.1863
+                }
+              ]
             }
           ],
-          "staging": {
-            "south": 33.462,
-            "west": -82.1862,
-            "north": 33.4638,
-            "east": -82.1848
-          }
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 45,
@@ -2046,50 +1863,6 @@
           "scale": false,
           "dropYard": true,
           "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#9",
-          "steps": [
-            {
-              "step": "Arrive at gate (no guard, kiosk or call box)",
-              "geofenceTarget": "truckGate",
-              "durationMs": 60000,
-              "narrationKey": "gate.through.kiosk",
-              "baselineWaitMs": 720000,
-              "ynsWaitMs": 0
-            },
-            {
-              "step": "Pass through to drop yard",
-              "geofenceTarget": "dropYard",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Spotter pulls to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 90000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 1200000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit through gate",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 4560000,
-          "totalYnsMs": 2730000
         },
         "dossierExcerpt": "The roster geocode (ROOFTOP, moved 2334 m) landed directly on a large white-roofed\nmanufacturing building with extensive paved trailer yards in an industrial park on the\nwest edge of Grovetown, GA. Web research confirms this is John Deere Augusta Works /\nCommercial Products — a ~400,000+ sq ft plant on ~175 acres, ~470 employees, John\nDeere's highest-volume tractor facility, producing 27 models of compact/utility\ntractors. Coordinates locked at the supplied point.",
         "mapsUrl": "https://www.google.com/maps/@33.463818,-82.185545,400m/data=!3m1!1e3",
@@ -2150,27 +1923,75 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 37.0953,
-            "west": -95.5868,
-            "north": 37.1008,
-            "east": -95.5813
+            "ring": [
+              {
+                "lat": 37.099271,
+                "lng": -95.586076
+              },
+              {
+                "lat": 37.099271,
+                "lng": -95.582506
+              },
+              {
+                "lat": 37.095766,
+                "lng": -95.582231
+              },
+              {
+                "lat": 37.095766,
+                "lng": -95.585802
+              },
+              {
+                "lat": 37.097628,
+                "lng": -95.586351
+              }
+            ]
           },
           "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [
+          "dropYards": [
             {
-              "south": 37.098,
-              "west": -95.5837,
-              "north": 37.0993,
-              "east": -95.5818
+              "ring": [
+                {
+                  "lat": 37.100366,
+                  "lng": -95.588823
+                },
+                {
+                  "lat": 37.100366,
+                  "lng": -95.586626
+                },
+                {
+                  "lat": 37.097956,
+                  "lng": -95.586626
+                },
+                {
+                  "lat": 37.097956,
+                  "lng": -95.588823
+                }
+              ]
             }
           ],
-          "staging": {
-            "south": 37.0982,
-            "west": -95.5836,
-            "north": 37.0998,
-            "east": -95.582
-          }
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 37.098723,
+                  "lng": -95.585527
+                },
+                {
+                  "lat": 37.098723,
+                  "lng": -95.58278
+                },
+                {
+                  "lat": 37.098175,
+                  "lng": -95.58278
+                },
+                {
+                  "lat": 37.098175,
+                  "lng": -95.585527
+                }
+              ]
+            }
+          ],
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 14,
@@ -2298,40 +2119,54 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 29.8038,
-            "west": -90.8302,
-            "north": 29.8095,
-            "east": -90.825
+            "ring": [
+              {
+                "lat": 29.808922,
+                "lng": -90.830176
+              },
+              {
+                "lat": 29.808565,
+                "lng": -90.826468
+              },
+              {
+                "lat": 29.804275,
+                "lng": -90.826743
+              },
+              {
+                "lat": 29.804513,
+                "lng": -90.830451
+              },
+              {
+                "lat": 29.806658,
+                "lng": -90.830725
+              }
+            ]
           },
           "truckGate": null,
-          "dropYards": [
-            {
-              "south": 29.8045,
-              "west": -90.8282,
-              "north": 29.8062,
-              "east": -90.8265
-            }
-          ],
+          "dropYards": [],
           "dockAprons": [
             {
-              "south": 29.8043,
-              "west": -90.828,
-              "north": 29.8056,
-              "east": -90.8264
-            },
-            {
-              "south": 29.8076,
-              "west": -90.8285,
-              "north": 29.809,
-              "east": -90.8265
+              "ring": [
+                {
+                  "lat": 29.808088,
+                  "lng": -90.830039
+                },
+                {
+                  "lat": 29.80785,
+                  "lng": -90.826743
+                },
+                {
+                  "lat": 29.807254,
+                  "lng": -90.826811
+                },
+                {
+                  "lat": 29.807492,
+                  "lng": -90.830107
+                }
+              ]
             }
           ],
-          "staging": {
-            "south": 29.806,
-            "west": -90.829,
-            "north": 29.808,
-            "east": -90.8268
-          }
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 16,
@@ -2458,26 +2293,56 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 37.2427,
-            "west": -93.2029,
-            "north": 37.2448,
-            "east": -93.1992
+            "ring": [
+              {
+                "lat": 37.2442,
+                "lng": -93.202281
+              },
+              {
+                "lat": 37.244364,
+                "lng": -93.199878
+              },
+              {
+                "lat": 37.243106,
+                "lng": -93.199741
+              },
+              {
+                "lat": 37.242997,
+                "lng": -93.202144
+              }
+            ]
           },
           "truckGate": null,
           "dropYards": [],
           "dockAprons": [
             {
-              "south": 37.2432,
-              "west": -93.2021,
-              "north": 37.244,
-              "east": -93.2003
+              "ring": [
+                {
+                  "lat": 37.244036,
+                  "lng": -93.202075
+                },
+                {
+                  "lat": 37.244145,
+                  "lng": -93.200015
+                },
+                {
+                  "lat": 37.243872,
+                  "lng": -93.199981
+                },
+                {
+                  "lat": 37.243762,
+                  "lng": -93.202041
+                }
+              ]
             }
           ],
-          "staging": {
-            "south": 37.2431,
-            "west": -93.202,
-            "north": 37.2439,
-            "east": -93.1999
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 191,
+              "pano": "kcKPDG9tQ9exYH4_kPMAlA",
+              "hasCoverage": true
+            }
           }
         },
         "yardMetrics": {
@@ -2612,39 +2477,54 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 43.4485,
-            "west": -88.6362,
-            "north": 43.4578,
-            "east": -88.6314
+            "ring": [
+              {
+                "lat": 43.457988,
+                "lng": -88.636347
+              },
+              {
+                "lat": 43.457589,
+                "lng": -88.631952
+              },
+              {
+                "lat": 43.450012,
+                "lng": -88.632501
+              },
+              {
+                "lat": 43.449613,
+                "lng": -88.634699
+              },
+              {
+                "lat": 43.454,
+                "lng": -88.636347
+              }
+            ]
           },
-          "truckGate": {
-            "south": 43.4538,
-            "west": -88.6332,
-            "north": 43.4546,
-            "east": -88.6322
-          },
-          "dropYards": [
-            {
-              "south": 43.4556,
-              "west": -88.635,
-              "north": 43.4577,
-              "east": -88.6328
-            }
-          ],
+          "truckGate": null,
+          "dropYards": [],
           "dockAprons": [
             {
-              "south": 43.4547,
-              "west": -88.6344,
-              "north": 43.4562,
-              "east": -88.633
+              "ring": [
+                {
+                  "lat": 43.454997,
+                  "lng": -88.635523
+                },
+                {
+                  "lat": 43.454798,
+                  "lng": -88.632776
+                },
+                {
+                  "lat": 43.451607,
+                  "lng": -88.632913
+                },
+                {
+                  "lat": 43.451807,
+                  "lng": -88.63566
+                }
+              ]
             }
           ],
-          "staging": {
-            "south": 43.452,
-            "west": -88.6332,
-            "north": 43.4538,
-            "east": -88.632
-          }
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 35,
@@ -2774,51 +2654,75 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 36.1492,
-            "west": -82.894,
-            "north": 36.1566,
-            "east": -82.8856
+            "ring": [
+              {
+                "lat": 36.154676,
+                "lng": -82.895692
+              },
+              {
+                "lat": 36.155119,
+                "lng": -82.887453
+              },
+              {
+                "lat": 36.151349,
+                "lng": -82.886903
+              },
+              {
+                "lat": 36.15024,
+                "lng": -82.891847
+              },
+              {
+                "lat": 36.153234,
+                "lng": -82.895555
+              }
+            ]
           },
-          "truckGate": {
-            "south": 36.155,
-            "west": -82.8888,
-            "north": 36.1557,
-            "east": -82.8879
-          },
+          "truckGate": null,
           "dropYards": [
             {
-              "south": 36.1528,
-              "west": -82.8923,
-              "north": 36.1547,
-              "east": -82.8902
-            },
-            {
-              "south": 36.1508,
-              "west": -82.8938,
-              "north": 36.1528,
-              "east": -82.8912
+              "ring": [
+                {
+                  "lat": 36.154454,
+                  "lng": -82.895418
+                },
+                {
+                  "lat": 36.154676,
+                  "lng": -82.891023
+                },
+                {
+                  "lat": 36.15268,
+                  "lng": -82.890886
+                },
+                {
+                  "lat": 36.152458,
+                  "lng": -82.89528
+                }
+              ]
             }
           ],
           "dockAprons": [
             {
-              "south": 36.1528,
-              "west": -82.8896,
-              "north": 36.1542,
-              "east": -82.8878
-            },
-            {
-              "south": 36.1508,
-              "west": -82.8906,
-              "north": 36.1523,
-              "east": -82.8888
+              "ring": [
+                {
+                  "lat": 36.153789,
+                  "lng": -82.890474
+                },
+                {
+                  "lat": 36.154011,
+                  "lng": -82.887453
+                },
+                {
+                  "lat": 36.153456,
+                  "lng": -82.887384
+                },
+                {
+                  "lat": 36.153234,
+                  "lng": -82.890405
+                }
+              ]
             }
           ],
-          "staging": {
-            "south": 36.1545,
-            "west": -82.8882,
-            "north": 36.1554,
-            "east": -82.8868
-          }
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 60,
@@ -2852,52 +2756,6 @@
           "scale": false,
           "dropYard": true,
           "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#10",
-          "steps": [
-            {
-              "step": "Arrive at gate, queue for guard",
-              "geofenceTarget": "truckGate",
-              "durationMs": 30000,
-              "narrationKey": "gate.arrive",
-              "baselineWaitMs": 600000,
-              "ynsWaitMs": 30000
-            },
-            {
-              "step": "Route to correct (shipping vs receiving) drop yard",
-              "geofenceTarget": "dropYard",
-              "targetIndex": 0,
-              "durationMs": 120000,
-              "narrationKey": "shiprcv.split",
-              "baselineWaitMs": 720000,
-              "ynsWaitMs": 0
-            },
-            {
-              "step": "Spotter pulls to dock apron on correct side",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 90000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 1320000,
-              "ynsWaitMs": 120000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit through gate",
-              "geofenceTarget": "exit",
-              "durationMs": 60000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 5340000,
-          "totalYnsMs": 2850000
         },
         "dossierExcerpt": "Type: Assembly Plant (100 Series lawn tractors, EZTrak/ZTrak zero-turn mowers)\nRoster address: 1630 Hal Henard Rd, Greeneville, TN 37743\nResolved center: 36.15268, -82.88965\nConfidence: high",
         "mapsUrl": "https://www.google.com/maps/@36.15268,-82.88965,400m/data=!3m1!1e3",
@@ -2960,50 +2818,56 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 36.1295,
-            "west": -80.0972,
-            "north": 36.1405,
-            "east": -80.0825
+            "ring": [
+              {
+                "lat": 36.137809,
+                "lng": -80.095247
+              },
+              {
+                "lat": 36.137809,
+                "lng": -80.089204
+              },
+              {
+                "lat": 36.133373,
+                "lng": -80.089204
+              },
+              {
+                "lat": 36.133373,
+                "lng": -80.095247
+              }
+            ]
           },
-          "truckGate": {
-            "south": 36.1345,
-            "west": -80.0916,
-            "north": 36.1353,
-            "east": -80.0906
-          },
-          "dropYards": [
-            {
-              "south": 36.1342,
-              "west": -80.0908,
-              "north": 36.1368,
-              "east": -80.0882
-            },
-            {
-              "south": 36.1318,
-              "west": -80.0856,
-              "north": 36.1342,
-              "east": -80.0834
-            }
-          ],
+          "truckGate": null,
+          "dropYards": [],
           "dockAprons": [
             {
-              "south": 36.1356,
-              "west": -80.0938,
-              "north": 36.1372,
-              "east": -80.0918
-            },
-            {
-              "south": 36.1332,
-              "west": -80.088,
-              "north": 36.1346,
-              "east": -80.0866
+              "ring": [
+                {
+                  "lat": 36.137144,
+                  "lng": -80.094697
+                },
+                {
+                  "lat": 36.137144,
+                  "lng": -80.089753
+                },
+                {
+                  "lat": 36.136256,
+                  "lng": -80.089753
+                },
+                {
+                  "lat": 36.136256,
+                  "lng": -80.094697
+                }
+              ]
             }
           ],
-          "staging": {
-            "south": 36.1338,
-            "west": -80.0912,
-            "north": 36.1347,
-            "east": -80.0898
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 60,
+              "pano": "yXQ8J8wyEIlNNNOklaKMTQ",
+              "hasCoverage": true
+            }
           }
         },
         "yardMetrics": {
@@ -3038,52 +2902,6 @@
           "scale": false,
           "dropYard": true,
           "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#6",
-          "steps": [
-            {
-              "step": "Arrive at outer campus gate",
-              "geofenceTarget": "truckGate",
-              "durationMs": 30000,
-              "narrationKey": "gate.arrive",
-              "baselineWaitMs": 600000,
-              "ynsWaitMs": 30000
-            },
-            {
-              "step": "Route to correct building / drop yard",
-              "geofenceTarget": "dropYard",
-              "targetIndex": 0,
-              "durationMs": 180000,
-              "narrationKey": "campus.route",
-              "baselineWaitMs": 900000,
-              "ynsWaitMs": 0
-            },
-            {
-              "step": "Spotter pulls to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 90000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 1200000,
-              "ynsWaitMs": 120000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit through gate",
-              "geofenceTarget": "exit",
-              "durationMs": 60000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 5460000,
-          "totalYnsMs": 2910000
         },
         "dossierExcerpt": "Type: Assembly Plant (John Deere-branded hydraulic excavators)\nRoster address: 1000 John Deere Rd, Kernersville, NC 27284\nResolved center: 36.13670, -80.09250\nConfidence: high",
         "mapsUrl": "https://www.google.com/maps/@36.13670,-80.09250,400m/data=!3m1!1e3",
@@ -3151,51 +2969,75 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 41.4423,
-            "west": -90.5498,
-            "north": 41.4523,
-            "east": -90.5395
+            "ring": [
+              {
+                "lat": 41.450794,
+                "lng": -90.550993
+              },
+              {
+                "lat": 41.451411,
+                "lng": -90.543852
+              },
+              {
+                "lat": 41.445029,
+                "lng": -90.542753
+              },
+              {
+                "lat": 41.444412,
+                "lng": -90.549895
+              },
+              {
+                "lat": 41.447912,
+                "lng": -90.551542
+              }
+            ]
           },
-          "truckGate": {
-            "south": 41.451,
-            "west": -90.5448,
-            "north": 41.4518,
-            "east": -90.5438
-          },
+          "truckGate": null,
           "dropYards": [
             {
-              "south": 41.4464,
-              "west": -90.5432,
-              "north": 41.45,
-              "east": -90.5398
-            },
-            {
-              "south": 41.4432,
-              "west": -90.5482,
-              "north": 41.4468,
-              "east": -90.5432
-            },
-            {
-              "south": 41.4468,
-              "west": -90.5442,
-              "north": 41.4498,
-              "east": -90.5418
+              "ring": [
+                {
+                  "lat": 41.449559,
+                  "lng": -90.544127
+                },
+                {
+                  "lat": 41.449765,
+                  "lng": -90.541105
+                },
+                {
+                  "lat": 41.445853,
+                  "lng": -90.540831
+                },
+                {
+                  "lat": 41.445647,
+                  "lng": -90.543852
+                }
+              ]
             }
           ],
           "dockAprons": [
             {
-              "south": 41.4462,
-              "west": -90.5458,
-              "north": 41.4502,
-              "east": -90.5436
+              "ring": [
+                {
+                  "lat": 41.44997,
+                  "lng": -90.549895
+                },
+                {
+                  "lat": 41.450382,
+                  "lng": -90.544127
+                },
+                {
+                  "lat": 41.449353,
+                  "lng": -90.543989
+                },
+                {
+                  "lat": 41.448941,
+                  "lng": -90.549757
+                }
+              ]
             }
           ],
-          "staging": {
-            "south": 41.45,
-            "west": -90.5442,
-            "north": 41.4512,
-            "east": -90.5426
-          }
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 90,
@@ -3311,6 +3153,110 @@
         }
       },
       {
+        "id": "20-john-deere-distribution-center-hebron",
+        "name": "John Deere Distribution Center - Hebron IN",
+        "type": "Parts Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "preGateStaging",
+          "postGateStaging",
+          "drivewayLong",
+          "drivewayShort",
+          "backupSensitive",
+          "entryExitTogether",
+          "entryExitSeparate",
+          "entryLanes",
+          "exitLanes",
+          "fastLaneOpportunity",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "connectivityIssue",
+          "multipleFacilities",
+          "scale",
+          "dropYard",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 41.282,
+          "lng": -87.302
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 41.283651,
+                "lng": -87.304747
+              },
+              {
+                "lat": 41.282826,
+                "lng": -87.302
+              },
+              {
+                "lat": 41.280762,
+                "lng": -87.303099
+              },
+              {
+                "lat": 41.281484,
+                "lng": -87.305571
+              }
+            ]
+          },
+          "truckGate": null,
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 0,
+          "buildingCount": 0,
+          "siteAreaAcres": 234,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "NONE",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Type: Parts Distribution Center\nAddress: 2105 W 181st Ave, Hebron, IN 46341\nResolved coords: 41.2820, -87.3020 (parcel estimate — SW quadrant of the I-65 / SR-2 interchange)\nGate verdict: Cannot determine — facility not yet built\nConfidence: LOW (cannot locate a building — greenfield site under construction)\n\n---",
+        "mapsUrl": "https://www.google.com/maps/@41.2820,-87.3020,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Greenfield site. John Deere purchased the 234-acre parcel SW of the I-65 / SR-2 (181st Ave) interchange near Hebron/Lowell IN in July 2024 for $7M and broke ground on the $125M, 1.2M-sq-ft warehouse/distribution center in late January 2026. As of the available ©2026 Airbus satellite imagery, the SW quadrant of the interchange is entirely undeveloped farmland (with a small pond / borrow area) - no graded building pad, no foundation, no truck infrastructure is visible. Nothing to audit yet.",
+          "coords": "Center estimate (41.2820, -87.3020) is the SW quadrant of the I-65 / SR-2 interchange where the 234-acre parcel sits per the address 2105 W 181st Ave. Roster-supplied coords (41.288631, -87.358717) plot ~5 km west of the interchange in unrelated farmland and were not used. Coordinates are approximate to the parcel, not a confirmed building.",
+          "urbanRural": "Rural - open agricultural land at the edge of the small towns of Hebron and Lowell, away from any dense metro fabric.",
+          "siteAreaAcres": "234 acres is the publicly reported parcel size; the eventual fenced perimeter / building footprint cannot be measured until construction is imaged.",
+          "railServed": "No rail spur visible at the site; not expected for this DC (located for I-65 highway access). Low confidence.",
+          "classificationFlags": "All physical-layout flags defaulted to false / NONE / null because the facility does not yet exist in imagery. Re-audit once post-construction satellite imagery becomes available (facility expected to open within ~12 months of the Jan 2026 groundbreaking)."
+        }
+      },
+      {
         "id": "21-john-deere-parts-distribution-center-waterloo",
         "name": "John Deere Parts Distribution Center - Waterloo IA",
         "type": "Parts Distribution Center",
@@ -3327,44 +3273,60 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 42.5077,
-            "west": -92.2872,
-            "north": 42.5129,
-            "east": -92.2832
+            "ring": [
+              {
+                "lat": 42.51233,
+                "lng": -92.286499
+              },
+              {
+                "lat": 42.512127,
+                "lng": -92.284027
+              },
+              {
+                "lat": 42.507673,
+                "lng": -92.284301
+              },
+              {
+                "lat": 42.507875,
+                "lng": -92.286773
+              },
+              {
+                "lat": 42.510912,
+                "lng": -92.286773
+              }
+            ]
           },
-          "truckGate": {
-            "south": 42.5119,
-            "west": -92.2868,
-            "north": 42.5125,
-            "east": -92.2861
-          },
-          "dropYards": [
-            {
-              "south": 42.5079,
-              "west": -92.2843,
-              "north": 42.5117,
-              "east": -92.2833
-            }
-          ],
+          "truckGate": null,
+          "dropYards": [],
           "dockAprons": [
             {
-              "south": 42.508,
-              "west": -92.2848,
-              "north": 42.5114,
-              "east": -92.2843
-            },
-            {
-              "south": 42.5115,
-              "west": -92.2846,
-              "north": 42.5123,
-              "east": -92.284
+              "ring": [
+                {
+                  "lat": 42.510912,
+                  "lng": -92.286361
+                },
+                {
+                  "lat": 42.51071,
+                  "lng": -92.284439
+                },
+                {
+                  "lat": 42.50828,
+                  "lng": -92.284507
+                },
+                {
+                  "lat": 42.508483,
+                  "lng": -92.28643
+                }
+              ]
             }
           ],
-          "staging": {
-            "south": 42.5119,
-            "west": -92.2847,
-            "north": 42.5128,
-            "east": -92.2837
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 184,
+              "pano": "E280w-6L_MshYV2TtHtR3Q",
+              "hasCoverage": true
+            }
           }
         },
         "yardMetrics": {
@@ -3503,32 +3465,50 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 43.1952,
-            "west": -96.3152,
-            "north": 43.1985,
-            "east": -96.3122
+            "ring": [
+              {
+                "lat": 43.1972,
+                "lng": -96.314661
+              },
+              {
+                "lat": 43.19715,
+                "lng": -96.312876
+              },
+              {
+                "lat": 43.195799,
+                "lng": -96.312876
+              },
+              {
+                "lat": 43.195799,
+                "lng": -96.314661
+              }
+            ]
           },
-          "truckGate": {
-            "south": 43.1969,
-            "west": -96.3151,
-            "north": 43.1974,
-            "east": -96.3146
-          },
+          "truckGate": null,
           "dropYards": [],
           "dockAprons": [
             {
-              "south": 43.1964,
-              "west": -96.3146,
-              "north": 43.1971,
-              "east": -96.3137
+              "ring": [
+                {
+                  "lat": 43.197,
+                  "lng": -96.314524
+                },
+                {
+                  "lat": 43.19695,
+                  "lng": -96.313013
+                },
+                {
+                  "lat": 43.19675,
+                  "lng": -96.313013
+                },
+                {
+                  "lat": 43.1968,
+                  "lng": -96.314524
+                }
+              ]
             }
           ],
-          "staging": {
-            "south": 43.1964,
-            "west": -96.3147,
-            "north": 43.1972,
-            "east": -96.3135
-          }
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 16,

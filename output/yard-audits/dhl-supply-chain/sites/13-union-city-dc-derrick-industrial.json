@@ -1,15 +1,54 @@
 {
   "name": "DHL Supply Chain - Union City DC (Derrick Industrial) - Union City GA",
   "type": "Distribution Center",
-  "coords": { "lat": 33.631700, "lng": -84.571800 },
+  "coords": {
+    "lat": 33.6317,
+    "lng": -84.5718
+  },
   "geofences": {
-    "perimeter": { "south": 33.629800, "west": -84.575200, "north": 33.634000, "east": -84.569200 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.633301,
+          "lng": -84.574959
+        },
+        {
+          "lat": 33.632958,
+          "lng": -84.570152
+        },
+        {
+          "lat": 33.628956,
+          "lng": -84.570701
+        },
+        {
+          "lat": 33.629299,
+          "lng": -84.575508
+        }
+      ]
+    },
     "truckGate": null,
-    "dropYards": [
-      { "south": 33.631100, "west": -84.574000, "north": 33.631600, "east": -84.573300 }
-    ],
+    "dropYards": [],
     "dockAprons": [
-      { "south": 33.632000, "west": -84.573200, "north": 33.633400, "east": -84.570400 }
+      {
+        "ring": [
+          {
+            "lat": 33.632843,
+            "lng": -84.575096
+          },
+          {
+            "lat": 33.6325,
+            "lng": -84.570289
+          },
+          {
+            "lat": 33.631814,
+            "lng": -84.570427
+          },
+          {
+            "lat": 33.632157,
+            "lng": -84.575233
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -19,7 +58,7 @@
     "trailerParkingCapacity": 50,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 64.0,
+    "siteAreaAcres": 64,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.631700,-84.571800,400m/data=!3m1!1e3",
@@ -48,7 +87,12 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "remoteGs", "dockDoorCount", "trailersVisible"],
+  "uncertainFields": [
+    "truckGate",
+    "remoteGs",
+    "dockDoorCount",
+    "trailersVisible"
+  ],
   "fieldNotes": {
     "operatingStatus": "This is the DHL Supply Chain ASOS fulfillment center on Derrick Industrial Parkway. DHL filed a WARN/state layoff notice in Feb 2025 to CLOSE this facility (600+ employees), with layoffs effective ~April 6, 2025 (AJC, Newnan CEO). The building is physically intact in current (2026) imagery, but operational status as an active DHL site is uncertain/likely wound down. Audited as the physical facility.",
     "truckGate": "No barrier arm, sliding gate, or guard-booth checkpoint identified in satellite or Street View. The site is accessed by a single SW entry road off Derrick Industrial Parkway leading to the dock yard and employee parking. A perimeter access road with painted lane chevrons rings the building but shows no controlled pinch-point. Flagged uncertain - imagery resolution and tree cover limit confidence.",

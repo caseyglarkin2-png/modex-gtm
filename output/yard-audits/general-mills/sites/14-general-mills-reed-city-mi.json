@@ -1,37 +1,108 @@
 {
   "name": "General Mills - Reed City MI",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 43.87560, "lng": -85.50870 },
+  "coords": {
+    "lat": 43.8756,
+    "lng": -85.5087
+  },
   "geofences": {
-    "perimeter": { "south": 43.87420, "west": -85.51000, "north": 43.87800, "east": -85.50600 },
-    "truckGate": { "south": 43.87600, "west": -85.50940, "north": 43.87660, "east": -85.50860 },
-    "dropYards": [
-      { "south": 43.87680, "west": -85.50850, "north": 43.87780, "east": -85.50700 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 43.875996,
+          "lng": -85.510073
+        },
+        {
+          "lat": 43.875798,
+          "lng": -85.507327
+        },
+        {
+          "lat": 43.874016,
+          "lng": -85.507601
+        },
+        {
+          "lat": 43.874214,
+          "lng": -85.510348
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 43.87560, "west": -85.50920, "north": 43.87620, "east": -85.50760 }
+      {
+        "ring": [
+          {
+            "lat": 43.875204,
+            "lng": -85.509936
+          },
+          {
+            "lat": 43.875006,
+            "lng": -85.507739
+          },
+          {
+            "lat": 43.874511,
+            "lng": -85.507876
+          },
+          {
+            "lat": 43.874709,
+            "lng": -85.510073
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 20,
+        "pano": "SEEu8b5nDbS_Xma5408RUg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 14, "trailersVisible": 50, "trailerParkingCapacity": 55,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 34.0,
+    "dockDoorCount": 14,
+    "trailersVisible": 50,
+    "trailerParkingCapacity": 55,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 34,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@43.87560,-85.50870,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "dockDoors"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "dockDoors"
+  ],
   "fieldNotes": {
     "location": "Roster coordinates (43.87584,-85.509751, ROOFTOP, moved only 16m) correctly landed on the General Mills Yoplait yogurt plant at 128 E Slosson Ave, Reed City MI. Locked center 43.8756,-85.5087.",
     "facility": "Active General Mills facility - the Yoplait yogurt manufacturing plant in downtown Reed City. A dense process plant (visible silos, tanks, pipe racks) plus a separate NE cooler/warehouse and drop yard.",

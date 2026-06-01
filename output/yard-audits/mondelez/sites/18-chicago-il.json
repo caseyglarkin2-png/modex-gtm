@@ -1,13 +1,42 @@
 {
   "name": "Mondelez Global Headquarters - Chicago IL",
   "type": "Corporate HQ (global) - downtown office building",
-  "coords": { "lat": 41.8866, "lng": -87.6513 },
+  "coords": {
+    "lat": 41.8866,
+    "lng": -87.6513
+  },
   "geofences": {
-    "perimeter": { "south": 41.8862, "west": -87.6517, "north": 41.8870, "east": -87.6509 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.886651,
+          "lng": -87.651643
+        },
+        {
+          "lat": 41.886651,
+          "lng": -87.651094
+        },
+        {
+          "lat": 41.886025,
+          "lng": -87.651094
+        },
+        {
+          "lat": 41.886025,
+          "lng": -87.651643
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 192,
+        "pano": "CAoSFkNJSE0wb2dLRUlDQWdJRFgxTmE5Qmc.",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 1,
@@ -20,18 +49,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@41.8866,-87.6513,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": false, "backupSensitive": true,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "NONE", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": true,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoors", "dockDoorCount"],
+  "uncertainFields": [
+    "dockDoors",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "location": "Roster coords (41.8866,-87.6513) were already accurate to the building. Confirmed as 905 W Fulton Market, Chicago IL 60607 - a 5-story office building. Mondelez leases all office floors (~77,100 sq ft office + ~6,150 sq ft retail) as its global HQ, relocated from Deerfield IL in 2020.",
     "facilityType": "This is a downtown corporate office building, NOT a freight facility. Zero freight relevance for yard management - it has no truck yard, no dock bank, no trailer parking, no gate.",

@@ -1,40 +1,104 @@
 {
   "name": "DHL Supply Chain - Whitestown DC - Whitestown IN",
   "type": "Distribution Center",
-  "coords": { "lat": 39.96780, "lng": -86.37660 },
+  "coords": {
+    "lat": 39.9678,
+    "lng": -86.3766
+  },
   "geofences": {
-    "perimeter": { "south": 39.96650, "west": -86.37800, "north": 39.96930, "east": -86.37540 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.968747,
+          "lng": -86.378042
+        },
+        {
+          "lat": 39.9688,
+          "lng": -86.376325
+        },
+        {
+          "lat": 39.966958,
+          "lng": -86.376257
+        },
+        {
+          "lat": 39.966905,
+          "lng": -86.377973
+        }
+      ]
+    },
     "truckGate": null,
-    "dropYards": [
-      { "south": 39.96820, "west": -86.37700, "north": 39.96910, "east": -86.37580 }
-    ],
+    "dropYards": [],
     "dockAprons": [
-      { "south": 39.96720, "west": -86.37760, "north": 39.96900, "east": -86.37640 }
+      {
+        "ring": [
+          {
+            "lat": 39.967537,
+            "lng": -86.377973
+          },
+          {
+            "lat": 39.96759,
+            "lng": -86.376325
+          },
+          {
+            "lat": 39.967274,
+            "lng": -86.376325
+          },
+          {
+            "lat": 39.967221,
+            "lng": -86.377973
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 35, "trailersVisible": 42, "trailerParkingCapacity": 70,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 15.0,
+    "dockDoorCount": 35,
+    "trailersVisible": 42,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 15,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.96780,-86.37660,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "dockDoors", "dropArea",
-    "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "siteAreaAcres",
-    "drivewayLong", "drivewayShort"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoors",
+    "dropArea",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "siteAreaAcres",
+    "drivewayLong",
+    "drivewayShort"
   ],
   "fieldNotes": {
     "location": "IDENTIFICATION UNCERTAIN. Roster lat/lng was geocoded from '5000 Anson Blvd, Whitestown IN' but moved 2755m - a large displacement indicating low geocoding precision. The Anson logistics park (Whitestown, off I-65) contains dozens of near-identical speculative warehouses, several vacant in current imagery; no DHL signage could be confirmed in available Street View (most park-interior panos are June-2019 pre-construction). Audited the building AT the geocoded coordinate (39.9678,-86.3766) as the best-available candidate - it is a front-load warehouse with operational dock activity (trailers backed in), consistent with DHL having occupied 5000 Anson Blvd since Q1 2020.",

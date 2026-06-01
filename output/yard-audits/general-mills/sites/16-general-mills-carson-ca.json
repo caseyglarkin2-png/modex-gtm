@@ -1,17 +1,75 @@
 {
   "name": "General Mills - Carson CA",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 33.86340, "lng": -118.24560 },
+  "coords": {
+    "lat": 33.8634,
+    "lng": -118.2456
+  },
   "geofences": {
-    "perimeter": { "south": 33.86215, "west": -118.24685, "north": 33.86485, "east": -118.24470 },
-    "truckGate": { "south": 33.86215, "west": -118.24585, "north": 33.86255, "east": -118.24530 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.864483,
+          "lng": -118.246561
+        },
+        {
+          "lat": 33.864483,
+          "lng": -118.244776
+        },
+        {
+          "lat": 33.862488,
+          "lng": -118.244776
+        },
+        {
+          "lat": 33.862488,
+          "lng": -118.246561
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 33.86250, "west": -118.24500, "north": 33.86445, "east": -118.24470 },
-      { "south": 33.86270, "west": -118.24685, "north": 33.86440, "east": -118.24640 }
+      {
+        "ring": [
+          {
+            "lat": 33.86397,
+            "lng": -118.246424
+          },
+          {
+            "lat": 33.86397,
+            "lng": -118.244913
+          },
+          {
+            "lat": 33.863628,
+            "lng": -118.244913
+          },
+          {
+            "lat": 33.863628,
+            "lng": -118.246424
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.86250, "west": -118.24505, "north": 33.86445, "east": -118.24485 },
-      { "south": 33.86270, "west": -118.24655, "north": 33.86440, "east": -118.24635 }
+      {
+        "ring": [
+          {
+            "lat": 33.864312,
+            "lng": -118.246424
+          },
+          {
+            "lat": 33.864312,
+            "lng": -118.244913
+          },
+          {
+            "lat": 33.864027,
+            "lng": -118.244913
+          },
+          {
+            "lat": 33.864027,
+            "lng": -118.246424
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -26,18 +84,35 @@
   },
   "mapsUrl": "https://www.google.com/maps/@33.86340,-118.24560,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "truckGate": "Two black sliding gates with continuous wrought-iron perimeter fencing across the wide truck driveway off Beachey Place, confirmed in 2025-03 Street View.",
     "guardShack": "No standalone guard booth structure beside the gate in satellite z20 or Street View; entrance has only a monument sign and a blue check-in/kiosk post inside the gate.",

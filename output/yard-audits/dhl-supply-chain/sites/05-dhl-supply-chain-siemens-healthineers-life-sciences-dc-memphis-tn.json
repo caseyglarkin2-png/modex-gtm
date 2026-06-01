@@ -1,13 +1,54 @@
 {
   "name": "DHL Supply Chain - Siemens Healthineers Life Sciences DC - Memphis TN",
   "type": "Life Sciences & Healthcare Distribution Center",
-  "coords": { "lat": 34.997800, "lng": -89.859500 },
+  "coords": {
+    "lat": 34.9978,
+    "lng": -89.8595
+  },
   "geofences": {
-    "perimeter": { "south": 34.99680, "west": -89.86090, "north": 34.99885, "east": -89.85820 },
-    "truckGate": { "south": 34.99815, "west": -89.86065, "north": 34.99855, "east": -89.86025 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.998531,
+          "lng": -89.860255
+        },
+        {
+          "lat": 34.998419,
+          "lng": -89.85847
+        },
+        {
+          "lat": 34.997294,
+          "lng": -89.858539
+        },
+        {
+          "lat": 34.997406,
+          "lng": -89.860324
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 34.99745, "west": -89.86040, "north": 34.99845, "east": -89.85950 }
+      {
+        "ring": [
+          {
+            "lat": 34.99825,
+            "lng": -89.860187
+          },
+          {
+            "lat": 34.998137,
+            "lng": -89.858676
+          },
+          {
+            "lat": 34.9978,
+            "lng": -89.858745
+          },
+          {
+            "lat": 34.997912,
+            "lng": -89.860255
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -17,23 +58,39 @@
     "trailerParkingCapacity": 12,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 24.0,
+    "siteAreaAcres": 24,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.997800,-89.859500,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Controlled truck entrance on the west side off Global Drive: a black metal cantilever sliding gate set in the property's ornamental perimeter fence (confirmed in Street View 2025-04). The entire ~24-acre parcel is fenced.",
     "guardShack": "No guard booth at the gate. Street View shows only the sliding gate plus a control pedestal / card-reader on a yellow bollard — no staffed booth structure.",

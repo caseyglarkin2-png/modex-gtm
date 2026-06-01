@@ -1,18 +1,77 @@
 {
   "name": "General Mills - Chattanooga TN Distribution Center",
   "type": "Distribution Center",
-  "coords": { "lat": 34.99430, "lng": -85.38350 },
+  "coords": {
+    "lat": 34.9943,
+    "lng": -85.3835
+  },
   "geofences": {
-    "perimeter": { "south": 34.99240, "west": -85.38520, "north": 34.99620, "east": -85.38170 },
-    "truckGate": { "south": 34.99630, "west": -85.38420, "north": 34.99700, "east": -85.38330 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.995875,
+          "lng": -85.385423
+        },
+        {
+          "lat": 34.996325,
+          "lng": -85.382401
+        },
+        {
+          "lat": 34.9943,
+          "lng": -85.381852
+        },
+        {
+          "lat": 34.99385,
+          "lng": -85.384873
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 34.99260, "west": -85.38510, "north": 34.99570, "east": -85.38400 }
+      {
+        "ring": [
+          {
+            "lat": 34.995425,
+            "lng": -85.385697
+          },
+          {
+            "lat": 34.99565,
+            "lng": -85.384187
+          },
+          {
+            "lat": 34.994863,
+            "lng": -85.384049
+          },
+          {
+            "lat": 34.994638,
+            "lng": -85.38556
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 34.99280, "west": -85.38460, "north": 34.99590, "east": -85.38360 },
-      { "south": 34.99300, "west": -85.38290, "north": 34.99500, "east": -85.38210 }
+      {
+        "ring": [
+          {
+            "lat": 34.995538,
+            "lng": -85.385148
+          },
+          {
+            "lat": 34.995931,
+            "lng": -85.382676
+          },
+          {
+            "lat": 34.99565,
+            "lng": -85.382607
+          },
+          {
+            "lat": 34.995256,
+            "lng": -85.385079
+          }
+        ]
+      }
     ],
-    "staging": { "south": 34.99580, "west": -85.38420, "north": 34.99660, "east": -85.38300 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 60,
@@ -20,7 +79,7 @@
     "trailerParkingCapacity": 110,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 28.0,
+    "siteAreaAcres": 28,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@34.99430,-85.38350,400m/data=!3m1!1e3",
@@ -49,7 +108,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "remoteGs"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "remoteGs"
+  ],
   "fieldNotes": {
     "siteIdentity": "Confirmed General Mills Chattanooga distribution center, 650 Wauhatchie Pike, Chattanooga TN 37419 (verified via Yelp, Manta, Hyster GM plant locations list). Large two-building DC complex on the west bank of the rail corridor; the roster address (650) is the southern of the two long warehouse buildings. A second General Mills address (960 Wauhatchie Pike) is the northern building - both are part of the same fenced industrial complex.",
     "truckGate": "Property is enclosed by a continuous chain-link perimeter fence. The main truck entrance is a wide paved driveway off Wauhatchie Pike in the gap between the two buildings; Street View (2025-10) shows a fence-line gate opening signed 'Gate 3' with a sliding gate panel and yellow concrete jersey barriers channelizing the lane. truckGate = true.",

@@ -1,15 +1,56 @@
 {
   "name": "General Mills - Fridley MN (Flour Mill)",
   "type": "Flour Mill",
-  "coords": { "lat": 45.04830, "lng": -93.27080 },
+  "coords": {
+    "lat": 45.0483,
+    "lng": -93.2708
+  },
   "geofences": {
-    "perimeter": { "south": 45.04550, "west": -93.27200, "north": 45.05080, "east": -93.26960 },
-    "truckGate": { "south": 45.04720, "west": -93.27010, "north": 45.04770, "east": -93.26960 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 45.050434,
+          "lng": -93.272997
+        },
+        {
+          "lat": 45.050046,
+          "lng": -93.268603
+        },
+        {
+          "lat": 45.045971,
+          "lng": -93.270113
+        },
+        {
+          "lat": 45.046359,
+          "lng": -93.274508
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 45.04760, "west": -93.27130, "north": 45.04810, "east": -93.27060 }
+      {
+        "ring": [
+          {
+            "lat": 45.04927,
+            "lng": -93.272173
+          },
+          {
+            "lat": 45.049076,
+            "lng": -93.269701
+          },
+          {
+            "lat": 45.048494,
+            "lng": -93.269839
+          },
+          {
+            "lat": 45.048688,
+            "lng": -93.272311
+          }
+        ]
+      }
     ],
-    "staging": { "south": 45.04780, "west": -93.27060, "north": 45.04870, "east": -93.26980 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 6,
@@ -46,7 +87,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoors", "trailerParkingCapacity", "scale"],
+  "uncertainFields": [
+    "dockDoors",
+    "trailerParkingCapacity",
+    "scale"
+  ],
   "fieldNotes": {
     "siteIdentity": "Confirmed General Mills Fridley plant ('Mill O'), 25 44th Avenue NE, Fridley MN - an oat-milling / flour-mill facility that cleans and mills oats for Cheerios and Lucky Charms. Multi-story concrete mill tower, large concrete grain elevator silos to the north, a long row of low metal grain-storage silos along the rail yard to the west, conveyor bridges, and bulk-handling structures. Located between the BNSF Northtown rail yard (west) and a residential neighborhood (east).",
     "truckGate": "Truck entrance is a single wide open paved driveway off the public access road at the SE corner of the property. Street View (2022-06 and 2021-08) shows no barrier arm, no slide/swing gate, and no checkpoint pinch-point at the property line - the driveway opens directly onto the road. truckGate = false.",

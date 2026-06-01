@@ -1,37 +1,152 @@
 {
   "name": "Mondelez Aurora Distribution Center (DHL/Exel-operated) - Aurora IL",
   "type": "Distribution center (3PL-operated, DHL/Exel Logistics)",
-  "coords": { "lat": 41.73550, "lng": -88.34700 },
+  "coords": {
+    "lat": 41.7355,
+    "lng": -88.347
+  },
   "geofences": {
-    "perimeter": { "south": 41.73300, "west": -88.34960, "north": 41.73850, "east": -88.34420 },
-    "truckGate": { "south": 41.73350, "west": -88.34900, "north": 41.73420, "east": -88.34810 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.73755,
+          "lng": -88.349472
+        },
+        {
+          "lat": 41.73755,
+          "lng": -88.343979
+        },
+        {
+          "lat": 41.734065,
+          "lng": -88.343979
+        },
+        {
+          "lat": 41.73386,
+          "lng": -88.349197
+        },
+        {
+          "lat": 41.736012,
+          "lng": -88.349747
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.73427,
+          "lng": -88.349747
+        },
+        {
+          "lat": 41.73427,
+          "lng": -88.348785
+        },
+        {
+          "lat": 41.733655,
+          "lng": -88.348785
+        },
+        {
+          "lat": 41.733655,
+          "lng": -88.349747
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 41.73330, "west": -88.34780, "north": 41.73480, "east": -88.34450 }
+      {
+        "ring": [
+          {
+            "lat": 41.736012,
+            "lng": -88.352493
+          },
+          {
+            "lat": 41.73591,
+            "lng": -88.350021
+          },
+          {
+            "lat": 41.73427,
+            "lng": -88.350159
+          },
+          {
+            "lat": 41.734373,
+            "lng": -88.35263
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.73430, "west": -88.34900, "north": 41.73490, "east": -88.34470 }
+      {
+        "ring": [
+          {
+            "lat": 41.736525,
+            "lng": -88.349197
+          },
+          {
+            "lat": 41.736525,
+            "lng": -88.344528
+          },
+          {
+            "lat": 41.735807,
+            "lng": -88.344528
+          },
+          {
+            "lat": 41.735807,
+            "lng": -88.349197
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 37,
+        "pano": "Opd31AtvjgHy-eUa5LRAdA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 37,
+        "pano": "Opd31AtvjgHy-eUa5LRAdA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 45, "trailersVisible": 7, "trailerParkingCapacity": 150,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 38.0,
+    "dockDoorCount": 45,
+    "trailersVisible": 7,
+    "trailerParkingCapacity": 150,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 38,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@41.73550,-88.34700,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "railServed"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "railServed"
+  ],
   "fieldNotes": {
     "location": "Resolved to 2380 Sullivan Rd, Aurora IL 60506 — a ~533,232 sq ft warehouse with immediate I-88 access, long operated as the DHL Supply Chain / Exel Logistics distribution center for Mondelez/Kraft Foods. Roster city-centroid (41.7405,-88.3506) was ~0.6km NW; corrected via web research (Waze 'DHL Mondelez', LoopNet, businessyab all confirm 2380 Sullivan Rd) plus satellite and Street View. Note one real-estate listing flags the building as possibly available/underutilized — the very large but near-empty truck yard in current imagery is consistent with reduced operations.",
     "truckGate": "TRUE — Street View (Apr 2024) of the Sullivan Rd entrance clearly shows a black ornamental metal perimeter fence with a sliding/swing gate across the truck driveway. A controlled truck entrance.",

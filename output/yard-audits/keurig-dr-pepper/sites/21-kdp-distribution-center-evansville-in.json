@@ -1,40 +1,152 @@
 {
   "name": "KDP Distribution Center - Evansville IN",
   "type": "Distribution Center - DSD",
-  "coords": { "lat": 37.94420, "lng": -87.54700 },
+  "coords": {
+    "lat": 37.9442,
+    "lng": -87.547
+  },
   "geofences": {
-    "perimeter": { "south": 37.94330, "west": -87.54790, "north": 37.94510, "east": -87.54620 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.944633,
+          "lng": -87.546931
+        },
+        {
+          "lat": 37.944741,
+          "lng": -87.545455
+        },
+        {
+          "lat": 37.943929,
+          "lng": -87.545386
+        },
+        {
+          "lat": 37.943821,
+          "lng": -87.546828
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 37.944471,
+          "lng": -87.546931
+        },
+        {
+          "lat": 37.944498,
+          "lng": -87.546725
+        },
+        {
+          "lat": 37.944308,
+          "lng": -87.546725
+        },
+        {
+          "lat": 37.944281,
+          "lng": -87.546897
+        }
+      ]
+    },
     "dropYards": [],
-    "dockAprons": [],
-    "staging": null
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 37.944579,
+            "lng": -87.546863
+          },
+          {
+            "lat": 37.944606,
+            "lng": -87.546588
+          },
+          {
+            "lat": 37.943875,
+            "lng": -87.546554
+          },
+          {
+            "lat": 37.943848,
+            "lng": -87.546828
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 127,
+        "pano": "ishLYDP-4omjGpFukrjJkg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 127,
+        "pano": "ishLYDP-4omjGpFukrjJkg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 0, "trailersVisible": 0, "trailerParkingCapacity": 0,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 3.0,
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 3,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@37.94420,-87.54700,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "NONE", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "connectivityIssue",
-    "multipleFacilities", "scale", "dropYard", "multiStep",
-    "dockDoorCount", "trailersVisible", "trailerParkingCapacity",
-    "truckGateCount", "buildingCount", "siteAreaAcres", "railServed"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "connectivityIssue",
+    "multipleFacilities",
+    "scale",
+    "dropYard",
+    "multiStep",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "truckGateCount",
+    "buildingCount",
+    "siteAreaAcres",
+    "railServed"
   ],
   "fieldNotes": {
     "location": "COULD NOT POSITIVELY LOCATE. Roster lat/lng (37.971559, -87.57109) point to downtown Evansville's civic/office core — not an industrial site; clearly wrong for a DSD depot. The only consistently-cited address across business directories (Cortera, Indeed) is '2600 S Kentucky Ave, Evansville, IN 47714-4513' for 'Keurig Dr Pepper Inc'. That address geocodes (Nominatim) to 37.9440, -87.5481; satellite imagery there shows a large empty parking lot and a generic white-roof industrial building with NO beverage-distribution signage, NO visible loading docks with trailers, and NO recognizable truck yard. Street View (2019/2023) of S Kentucky Ave shows generic light-industrial buildings and a green-fenced vehicle/equipment lot. The address is most likely an administrative/registered address rather than an active beverage-distribution warehouse, or the depot has minimal footprint / has relocated. Note: historically the Dr Pepper / RC distribution in Evansville was tied to Royal Crown Bottling Corp (1100 Independence Ave), which was renamed 'Vision Beverage' in 2020 and stopped distributing KDP brands.",

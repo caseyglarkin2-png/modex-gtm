@@ -1,37 +1,103 @@
 {
   "name": "John Deere Waterloo Foundry - Waterloo IA",
   "type": "Foundry",
-  "coords": { "lat": 42.5072, "lng": -92.3650 },
+  "coords": {
+    "lat": 42.5072,
+    "lng": -92.365
+  },
   "geofences": {
-    "perimeter": { "south": 42.5030, "west": -92.3700, "north": 42.5105, "east": -92.3590 },
-    "truckGate": { "south": 42.5044, "west": -92.3655, "north": 42.5053, "east": -92.3640 },
-    "dropYards": [
-      { "south": 42.5045, "west": -92.3645, "north": 42.5060, "east": -92.3615 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.509022,
+          "lng": -92.369944
+        },
+        {
+          "lat": 42.508212,
+          "lng": -92.36088
+        },
+        {
+          "lat": 42.50153,
+          "lng": -92.359507
+        },
+        {
+          "lat": 42.50072,
+          "lng": -92.363627
+        },
+        {
+          "lat": 42.5072,
+          "lng": -92.371042
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 42.5050, "west": -92.3640, "north": 42.5062, "east": -92.3620 }
+      {
+        "ring": [
+          {
+            "lat": 42.506188,
+            "lng": -92.368296
+          },
+          {
+            "lat": 42.50558,
+            "lng": -92.361704
+          },
+          {
+            "lat": 42.50477,
+            "lng": -92.361979
+          },
+          {
+            "lat": 42.505378,
+            "lng": -92.368571
+          }
+        ]
+      }
     ],
-    "staging": { "south": 42.5044, "west": -92.3648, "north": 42.5055, "east": -92.3635 }
+    "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 20, "trailersVisible": 8, "trailerParkingCapacity": 50,
-    "truckGateCount": 1, "buildingCount": 4, "siteAreaAcres": 130.0,
+    "dockDoorCount": 20,
+    "trailersVisible": 8,
+    "trailerParkingCapacity": 50,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 130,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@42.5072,-92.3650,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "scale", "dropArea", "shipRcvSeparate"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "dropArea",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "location": "Confirmed John Deere Waterloo Foundry at 2000 Westfield Ave, Waterloo IA. Roster ROOFTOP coords (moved 180m) landed on the large foundry building mass along the Cedar River; locked center refined to 42.5072,-92.3650.",
     "truckGate": "CONFIRMED via Street View (2026 imagery, 42.5049,-92.3648). Multiple yellow barrier arms span the truck lanes, with a chain-link perimeter fence and gates. Definitive controlled truck entrance.",

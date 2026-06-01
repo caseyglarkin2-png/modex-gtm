@@ -1,39 +1,119 @@
 {
   "name": "DHL Supply Chain - East Coast Center of Excellence (Project Empire) - Jacksonville FL",
   "type": "Distribution Center",
-  "coords": { "lat": 30.43930, "lng": -81.57100 },
+  "coords": {
+    "lat": 30.4393,
+    "lng": -81.571
+  },
   "geofences": {
-    "perimeter": { "south": 30.43600, "west": -81.57270, "north": 30.44220, "east": -81.56980 },
-    "truckGate": { "south": 30.43560, "west": -81.57160, "north": 30.43640, "east": -81.57080 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 30.440721,
+          "lng": -81.574708
+        },
+        {
+          "lat": 30.440958,
+          "lng": -81.569215
+        },
+        {
+          "lat": 30.435985,
+          "lng": -81.569215
+        },
+        {
+          "lat": 30.435985,
+          "lng": -81.574571
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 30.43720, "west": -81.57255, "north": 30.44150, "east": -81.57190 },
-      { "south": 30.43680, "west": -81.57050, "north": 30.44170, "east": -81.56990 }
+      {
+        "ring": [
+          {
+            "lat": 30.440484,
+            "lng": -81.572373
+          },
+          {
+            "lat": 30.440602,
+            "lng": -81.569352
+          },
+          {
+            "lat": 30.4393,
+            "lng": -81.569352
+          },
+          {
+            "lat": 30.439182,
+            "lng": -81.572373
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 30.43680, "west": -81.57195, "north": 30.44180, "east": -81.57150 },
-      { "south": 30.43680, "west": -81.57100, "north": 30.44180, "east": -81.57050 }
+      {
+        "ring": [
+          {
+            "lat": 30.440366,
+            "lng": -81.572373
+          },
+          {
+            "lat": 30.440484,
+            "lng": -81.569489
+          },
+          {
+            "lat": 30.439892,
+            "lng": -81.569489
+          },
+          {
+            "lat": 30.439774,
+            "lng": -81.572373
+          }
+        ]
+      }
     ],
-    "staging": { "south": 30.43620, "west": -81.57120, "north": 30.43720, "east": -81.57000 }
+    "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 110, "trailersVisible": 115, "trailerParkingCapacity": 210,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 49.0,
+    "dockDoorCount": 110,
+    "trailersVisible": 115,
+    "trailerParkingCapacity": 210,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 49,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@30.43930,-81.57100,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "shipRcvSeparate"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "location": "Roster lat/lng (30.4189,-81.5988) pointed at the JEA Northside power-plant tank farm on the Broward River, ~1.4 km W of the true site. Corrected via web research: Project Empire is at 10030/10300 Eastport Road, SW corner of Kraft & Eastport Rds, south of San Mateo Little League. Confirmed the large central N-S cross-dock warehouse at 30.4393,-81.5710 by Feb-2025 Street View showing the DHL building, office and entrance.",
     "truckGate": "Single divided main entrance off Eastport Road at the SW corner (SV Feb-2025 shows a median-split in/out drive with site signage). Fenced perimeter (chain-link visible in Street View). No public-road conflict.",

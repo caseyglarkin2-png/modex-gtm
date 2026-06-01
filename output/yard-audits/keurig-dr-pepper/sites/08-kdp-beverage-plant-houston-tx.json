@@ -1,38 +1,178 @@
 {
   "name": "KDP Beverage Plant - Houston TX",
   "type": "Manufacturing - Beverage",
-  "coords": { "lat": 29.683800, "lng": -95.394000 },
+  "coords": {
+    "lat": 29.6838,
+    "lng": -95.394
+  },
   "geofences": {
-    "perimeter": { "south": 29.681900, "west": -95.395600, "north": 29.685300, "east": -95.392200 },
-    "truckGate": { "south": 29.684700, "west": -95.395500, "north": 29.685100, "east": -95.395000 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.684874,
+          "lng": -95.395373
+        },
+        {
+          "lat": 29.685112,
+          "lng": -95.393657
+        },
+        {
+          "lat": 29.683084,
+          "lng": -95.392489
+        },
+        {
+          "lat": 29.682368,
+          "lng": -95.394
+        },
+        {
+          "lat": 29.684039,
+          "lng": -95.395579
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 29.684397,
+          "lng": -95.395511
+        },
+        {
+          "lat": 29.684516,
+          "lng": -95.395167
+        },
+        {
+          "lat": 29.684218,
+          "lng": -95.39503
+        },
+        {
+          "lat": 29.684098,
+          "lng": -95.395373
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 29.682500, "west": -95.394800, "north": 29.683500, "east": -95.393100 },
-      { "south": 29.682800, "west": -95.393200, "north": 29.684000, "east": -95.392300 }
+      {
+        "ring": [
+          {
+            "lat": 29.684277,
+            "lng": -95.393863
+          },
+          {
+            "lat": 29.684397,
+            "lng": -95.393176
+          },
+          {
+            "lat": 29.683323,
+            "lng": -95.392901
+          },
+          {
+            "lat": 29.683203,
+            "lng": -95.393588
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 29.682965,
+            "lng": -95.395373
+          },
+          {
+            "lat": 29.683084,
+            "lng": -95.394
+          },
+          {
+            "lat": 29.682726,
+            "lng": -95.393931
+          },
+          {
+            "lat": 29.682607,
+            "lng": -95.395305
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 29.683100, "west": -95.394900, "north": 29.683600, "east": -95.392600 }
+      {
+        "ring": [
+          {
+            "lat": 29.684158,
+            "lng": -95.394961
+          },
+          {
+            "lat": 29.684337,
+            "lng": -95.393863
+          },
+          {
+            "lat": 29.683919,
+            "lng": -95.393725
+          },
+          {
+            "lat": 29.68374,
+            "lng": -95.394824
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 169,
+        "pano": "0AnQA0J6nmPgkf1ML5hSDw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 169,
+        "pano": "0AnQA0J6nmPgkf1ML5hSDw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 30, "trailersVisible": 90, "trailerParkingCapacity": 130,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 23.0,
+    "dockDoorCount": 30,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 130,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 23,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@29.683800,-95.394000,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "shipRcvSeparate", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "shipRcvSeparate",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Roster address (5301 Polk St) was wrong/approximate. Web research (TruckMap, iBegin, Kompass, Waze) places KDP/Dr Pepper Bottling Co of Houston at 2400 Holly Hall St, Houston TX 77054 (Almeda Rd & Holly Hall). Satellite confirms a large beverage warehouse/plant with silos and an extensive trailer yard at 29.6838,-95.3940.",
     "truckGate": "The truck yard, docks and trailers are entirely inside a fully-enclosed chain-link perimeter topped with barbed wire (clearly visible on the west building wall and around the NW corner). The truck entrance is a gated driveway at the NW corner off Holly Hall St. An enclosed barbed-wire urban compound of this type operates a controlled gate.",

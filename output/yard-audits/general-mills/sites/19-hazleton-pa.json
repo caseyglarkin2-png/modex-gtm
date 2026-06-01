@@ -1,17 +1,84 @@
 {
   "name": "General Mills - Hazleton PA",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 40.927400, "lng": -76.065200 },
+  "coords": {
+    "lat": 40.9274,
+    "lng": -76.0652
+  },
   "geofences": {
-    "perimeter": { "south": 40.925900, "west": -76.066700, "north": 40.929000, "east": -76.063900 },
-    "truckGate": { "south": 40.927200, "west": -76.066400, "north": 40.927700, "east": -76.065900 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.927919,
+          "lng": -76.066161
+        },
+        {
+          "lat": 40.927919,
+          "lng": -76.064101
+        },
+        {
+          "lat": 40.926155,
+          "lng": -76.064101
+        },
+        {
+          "lat": 40.926155,
+          "lng": -76.066161
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 40.927900, "west": -76.066300, "north": 40.928600, "east": -76.064900 }
+      {
+        "ring": [
+          {
+            "lat": 40.928126,
+            "lng": -76.066436
+          },
+          {
+            "lat": 40.928074,
+            "lng": -76.064376
+          },
+          {
+            "lat": 40.927815,
+            "lng": -76.064376
+          },
+          {
+            "lat": 40.927867,
+            "lng": -76.066436
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.927600, "west": -76.065500, "north": 40.928300, "east": -76.064900 }
+      {
+        "ring": [
+          {
+            "lat": 40.927608,
+            "lng": -76.065749
+          },
+          {
+            "lat": 40.927608,
+            "lng": -76.064376
+          },
+          {
+            "lat": 40.927296,
+            "lng": -76.064376
+          },
+          {
+            "lat": 40.927296,
+            "lng": -76.065749
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 134,
+        "pano": "WL4d3bhtoD187gXwgAdmyA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 18,
@@ -19,23 +86,41 @@
     "trailerParkingCapacity": 40,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 22.0,
+    "siteAreaAcres": 22,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.927400,-76.065200,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "connectivityIssue"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoorCount",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "location": "Roster geocode (40.952909, -75.974562) landed in downtown Hazleton, ~3km off the real plant. The actual facility is at 2 Chestnut Hill Drive in the Humboldt Industrial Park, Hazle Township (40.9275, -76.0652) - confirmed via web search; a Google Maps directions URL embedded the precise coords. The plant is a bread/bakery products facility.",
     "ownership": "Roster sourced this from the Hyster GM plant list. The Hazleton plant was part of GM's frozen-dough/bakeries business that was divested (Pennant Foods, later Fresh Start Bakeries / Aspire Bakeries). Web directories list both 'General Mills' and 'Fresh Start Bakeries North America' at 2 Chestnut Hill Dr. The physical building audited is the correct site for the roster entry.",

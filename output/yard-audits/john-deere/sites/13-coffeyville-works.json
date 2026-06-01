@@ -1,15 +1,81 @@
 {
   "name": "John Deere Coffeyville Works - Coffeyville KS",
   "type": "Component Plant",
-  "coords": { "lat": 37.09708, "lng": -95.584703 },
+  "coords": {
+    "lat": 37.09708,
+    "lng": -95.584703
+  },
   "geofences": {
-    "perimeter": { "south": 37.09530, "west": -95.58680, "north": 37.10080, "east": -95.58130 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.099271,
+          "lng": -95.586076
+        },
+        {
+          "lat": 37.099271,
+          "lng": -95.582506
+        },
+        {
+          "lat": 37.095766,
+          "lng": -95.582231
+        },
+        {
+          "lat": 37.095766,
+          "lng": -95.585802
+        },
+        {
+          "lat": 37.097628,
+          "lng": -95.586351
+        }
+      ]
+    },
     "truckGate": null,
-    "dropYards": [],
-    "dockAprons": [
-      { "south": 37.09800, "west": -95.58370, "north": 37.09930, "east": -95.58180 }
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 37.100366,
+            "lng": -95.588823
+          },
+          {
+            "lat": 37.100366,
+            "lng": -95.586626
+          },
+          {
+            "lat": 37.097956,
+            "lng": -95.586626
+          },
+          {
+            "lat": 37.097956,
+            "lng": -95.588823
+          }
+        ]
+      }
     ],
-    "staging": { "south": 37.09820, "west": -95.58360, "north": 37.09980, "east": -95.58200 }
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 37.098723,
+            "lng": -95.585527
+          },
+          {
+            "lat": 37.098723,
+            "lng": -95.58278
+          },
+          {
+            "lat": 37.098175,
+            "lng": -95.58278
+          },
+          {
+            "lat": 37.098175,
+            "lng": -95.585527
+          }
+        ]
+      }
+    ],
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 14,
@@ -17,23 +83,39 @@
     "trailerParkingCapacity": 12,
     "truckGateCount": 0,
     "buildingCount": 4,
-    "siteAreaAcres": 74.0,
+    "siteAreaAcres": 74,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@37.09708,-95.584703,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "dropArea"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "dropArea"
+  ],
   "fieldNotes": {
     "truckGate": "Open campus - no controlled truck entrance. Buildings sit on a large open parcel; access roads from US-169 lead directly onto the property and to the office entrance and material yards with no barrier arm, gate, or checkpoint pinch-point. Street View (2025-10) confirms an open lawn frontage with no perimeter fence.",
     "guardShack": "No guard booth present anywhere on the site.",

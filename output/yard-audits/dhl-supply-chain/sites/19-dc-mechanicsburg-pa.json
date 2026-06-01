@@ -1,13 +1,54 @@
 {
   "name": "DHL Supply Chain - DC - Mechanicsburg PA",
   "type": "Distribution Center",
-  "coords": { "lat": 40.23720, "lng": -76.99850 },
+  "coords": {
+    "lat": 40.2372,
+    "lng": -76.9985
+  },
   "geofences": {
-    "perimeter": { "south": 40.23605, "west": -76.99985, "north": 40.23800, "east": -76.99715 },
-    "truckGate": { "south": 40.23605, "west": -77.00000, "north": 40.23640, "east": -76.99940 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.237777,
+          "lng": -76.999805
+        },
+        {
+          "lat": 40.237724,
+          "lng": -76.997676
+        },
+        {
+          "lat": 40.236361,
+          "lng": -76.997745
+        },
+        {
+          "lat": 40.236414,
+          "lng": -76.999873
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 40.23645, "west": -76.99790, "north": 40.23745, "east": -76.99720 }
+      {
+        "ring": [
+          {
+            "lat": 40.237619,
+            "lng": -76.999805
+          },
+          {
+            "lat": 40.237567,
+            "lng": -76.997745
+          },
+          {
+            "lat": 40.237305,
+            "lng": -76.997745
+          },
+          {
+            "lat": 40.237357,
+            "lng": -76.999805
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -22,18 +63,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@40.2372,-76.9985,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "dropArea"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "dropArea"
+  ],
   "fieldNotes": {
     "location": "Roster had no address/coords. Resolved via web research + Google Geocoding API: DHL Supply Chain (legal entity Exel Inc.) operates a distribution facility at 260 Salem Church Rd, Mechanicsburg PA 17050 - a 174,921 sq ft distribution building on 11.32 acres (built ~1985), owned by LBA Logistics (sold Sept 2024). DHL also holds nearby Salem Church Rd addresses (245/300/350) - the roster's 'leased multi-building presence'; 260 is the primary operating DC. Confirmed by a DHL Supply Chain monument sign at the south entrance (Street View 2023).",
     "truckGate": "false - both the south and north driveway entrances off Salem Church Rd are open paved drives with no barrier arm, gate, or checkpoint. Street View (2023) confirms open access at both.",

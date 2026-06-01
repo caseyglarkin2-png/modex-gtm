@@ -1,39 +1,125 @@
 {
   "name": "KDP Coffee Roasting / K-Cup Plant - Sumner WA",
   "type": "Manufacturing - Coffee/K-Cup",
-  "coords": { "lat": 47.225300, "lng": -122.242500 },
+  "coords": {
+    "lat": 47.2253,
+    "lng": -122.2425
+  },
   "geofences": {
-    "perimeter": { "south": 47.223400, "west": -122.244600, "north": 47.227800, "east": -122.240900 },
-    "truckGate": { "south": 47.226400, "west": -122.241200, "north": 47.226900, "east": -122.240900 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 47.228098,
+          "lng": -122.245659
+        },
+        {
+          "lat": 47.228098,
+          "lng": -122.240303
+        },
+        {
+          "lat": 47.223435,
+          "lng": -122.240303
+        },
+        {
+          "lat": 47.223435,
+          "lng": -122.245659
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 47.226200, "west": -122.244600, "north": 47.227800, "east": -122.240900 },
-      { "south": 47.223400, "west": -122.244400, "north": 47.224100, "east": -122.241000 }
+      {
+        "ring": [
+          {
+            "lat": 47.228098,
+            "lng": -122.245521
+          },
+          {
+            "lat": 47.228098,
+            "lng": -122.24044
+          },
+          {
+            "lat": 47.226606,
+            "lng": -122.24044
+          },
+          {
+            "lat": 47.226606,
+            "lng": -122.245521
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 47.226100, "west": -122.244400, "north": 47.226500, "east": -122.241200 },
-      { "south": 47.224100, "west": -122.244400, "north": 47.224500, "east": -122.241200 }
+      {
+        "ring": [
+          {
+            "lat": 47.226233,
+            "lng": -122.245521
+          },
+          {
+            "lat": 47.226233,
+            "lng": -122.243049
+          },
+          {
+            "lat": 47.223808,
+            "lng": -122.243049
+          },
+          {
+            "lat": 47.223808,
+            "lng": -122.245521
+          }
+        ]
+      }
     ],
-    "staging": { "south": 47.224500, "west": -122.243000, "north": 47.226100, "east": -122.242400 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 175,
+        "pano": "QPUgBRYF8ImJWdw4wQSrAQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 64, "trailersVisible": 110, "trailerParkingCapacity": 180,
-    "truckGateCount": 2, "buildingCount": 1, "siteAreaAcres": 26.0,
+    "dockDoorCount": 64,
+    "trailersVisible": 110,
+    "trailerParkingCapacity": 180,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 26,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@47.225300,-122.242500,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "Positively confirmed by Street View: the building front on 142nd Ave E carries the 'Keurig Dr Pepper' logo and name, with building number '3418' (roster gave 3424; some listings 3324 - the on-site marked number is 3418 142nd Ave E, Sumner WA 98390). Roster coords were ~140 m south of the building front; locked center at 47.2253/-122.2425.",
     "truckGate": "No controlled truck gate. The building's truck yard and the large trailer/container drop yards open directly onto 142nd Ave E via wide unbarred driveways. Street View north of the building shows the tractor yard fully open to the road - no barrier arm, no booth.",

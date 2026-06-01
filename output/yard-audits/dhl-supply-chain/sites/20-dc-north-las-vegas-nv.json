@@ -1,18 +1,75 @@
 {
   "name": "DHL Supply Chain - DC - North Las Vegas NV",
   "type": "Distribution Center",
-  "coords": { "lat": 36.34540, "lng": -114.93450 },
+  "coords": {
+    "lat": 36.3454,
+    "lng": -114.9345
+  },
   "geofences": {
-    "perimeter": { "south": 36.34180, "west": -114.93620, "north": 36.34900, "east": -114.93250 },
-    "truckGate": { "south": 36.34470, "west": -114.93220, "north": 36.34520, "east": -114.93150 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.349493,
+          "lng": -114.936423
+        },
+        {
+          "lat": 36.349603,
+          "lng": -114.930655
+        },
+        {
+          "lat": 36.341418,
+          "lng": -114.929556
+        },
+        {
+          "lat": 36.341197,
+          "lng": -114.937109
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 36.34740, "west": -114.93600, "north": 36.34900, "east": -114.93280 },
-      { "south": 36.34440, "west": -114.93540, "north": 36.34560, "east": -114.93280 }
+      {
+        "ring": [
+          {
+            "lat": 36.349493,
+            "lng": -114.933813
+          },
+          {
+            "lat": 36.349493,
+            "lng": -114.931204
+          },
+          {
+            "lat": 36.34717,
+            "lng": -114.931341
+          },
+          {
+            "lat": 36.34717,
+            "lng": -114.933951
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 36.34780, "west": -114.93570, "north": 36.34870, "east": -114.93300 },
-      { "south": 36.34560, "west": -114.93560, "north": 36.34620, "east": -114.93290 },
-      { "south": 36.34400, "west": -114.93580, "north": 36.34460, "east": -114.93280 }
+      {
+        "ring": [
+          {
+            "lat": 36.34363,
+            "lng": -114.936285
+          },
+          {
+            "lat": 36.343409,
+            "lng": -114.929693
+          },
+          {
+            "lat": 36.342856,
+            "lng": -114.929693
+          },
+          {
+            "lat": 36.343077,
+            "lng": -114.936285
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -22,23 +79,47 @@
     "trailerParkingCapacity": 174,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 58.0,
+    "siteAreaAcres": 58,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@36.3454,-114.9345,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": true, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": true,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging", "entryExitSeparate", "entryLanes", "exitLanes", "connectivityIssue", "siteAreaAcres"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "connectivityIssue",
+    "siteAreaAcres"
+  ],
   "fieldNotes": {
     "location": "Roster had no address/coords. Resolved via web research: DHL Supply Chain's North Las Vegas project is a two-building, ~800,000 sq ft logistics complex in the Wesley D. Adams Innovation Park, Apex Industrial Park, City of North Las Vegas, on a ~50-acre tract (~$180M investment, 494+ jobs). No street address has been published. Satellite imagery (Maxar/Vexcel) at ~36.3454,-114.9345 shows a matching two-building complex - structurally complete; June 2024 user-contributed interior photos confirm finished empty warehouse shells. Construction completion was projected late 2025/2026.",
     "buildingSpecs": "Per the project structural engineer (Wright Engineers): Building 1 = 450,241 SF, 40-ft clear, 84 overhead (dock) doors, 4 drive-in doors, 112 trailer stalls. Building 2 = 343,373 SF, 36-ft clear, 43 overhead doors, 2 drive-in doors, 62 trailer stalls. Totals: 127 dock doors, 174 trailer stalls.",

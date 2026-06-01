@@ -1,16 +1,108 @@
 {
   "name": "Mondelez Ontario Distribution Center - Ontario CA",
   "type": "Distribution center / sales warehouse",
-  "coords": { "lat": 34.04500, "lng": -117.52555 },
+  "coords": {
+    "lat": 34.045,
+    "lng": -117.52555
+  },
   "geofences": {
-    "perimeter": { "south": 34.04420, "west": -117.52685, "north": 34.04575, "east": -117.52450 },
-    "truckGate": { "south": 34.04425, "west": -117.52640, "north": 34.04455, "east": -117.52595 },
-    "dropYards": [],
-    "dockAprons": [
-      { "south": 34.04440, "west": -117.52670, "north": 34.04480, "east": -117.52545 },
-      { "south": 34.04475, "west": -117.52680, "north": 34.04545, "east": -117.52645 }
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.045569,
+          "lng": -117.526237
+        },
+        {
+          "lat": 34.045569,
+          "lng": -117.525207
+        },
+        {
+          "lat": 34.044488,
+          "lng": -117.525207
+        },
+        {
+          "lat": 34.044488,
+          "lng": -117.526237
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.044829,
+          "lng": -117.526237
+        },
+        {
+          "lat": 34.044829,
+          "lng": -117.526031
+        },
+        {
+          "lat": 34.04463,
+          "lng": -117.526031
+        },
+        {
+          "lat": 34.04463,
+          "lng": -117.526237
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 34.045512,
+            "lng": -117.526649
+          },
+          {
+            "lat": 34.045512,
+            "lng": -117.526237
+          },
+          {
+            "lat": 34.044829,
+            "lng": -117.526237
+          },
+          {
+            "lat": 34.044829,
+            "lng": -117.526649
+          }
+        ]
+      }
     ],
-    "staging": null
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 34.044858,
+            "lng": -117.526237
+          },
+          {
+            "lat": 34.044858,
+            "lng": -117.525207
+          },
+          {
+            "lat": 34.044659,
+            "lng": -117.525207
+          },
+          {
+            "lat": 34.044659,
+            "lng": -117.526237
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 359,
+        "pano": "sBvQ1SkI79ESJZsCPSMi7Q",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 359,
+        "pano": "sBvQ1SkI79ESJZsCPSMi7Q",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 38,
@@ -47,7 +139,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "guardShack"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "guardShack"
+  ],
   "fieldNotes": {
     "locate": "Resolved to 5815 Clark St, Ontario CA 91761 — a single-tenant distribution warehouse in the dense Inland Empire industrial fabric of Ontario, San Bernardino County. Google geocode returned a ROOFTOP hit at 34.0451114,-117.524735. The old stub mislabeled this site 'Los Angeles CA' — corrected to Ontario, CA (Inland Empire).",
     "truckGate": "The truck court is screened by a tilt-up concrete screen wall along the public street. Street View (Jan 2025) at the truck-court driveway shows a wheeled SLIDING CHAIN-LINK GATE across the entrance, set between the screen-wall sections. truckGate = true.",

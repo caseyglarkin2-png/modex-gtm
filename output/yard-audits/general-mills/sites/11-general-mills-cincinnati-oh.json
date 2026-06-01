@@ -1,15 +1,54 @@
 {
   "name": "General Mills - Cincinnati OH",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 39.27900, "lng": -84.43170 },
+  "coords": {
+    "lat": 39.279,
+    "lng": -84.4317
+  },
   "geofences": {
-    "perimeter": { "south": 39.27700, "west": -84.43320, "north": 39.28100, "east": -84.43020 },
-    "truckGate": { "south": 39.27680, "west": -84.43075, "north": 39.27730, "east": -84.43010 },
-    "dropYards": [
-      { "south": 39.27760, "west": -84.43320, "north": 39.28030, "east": -84.43250 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.279425,
+          "lng": -84.432524
+        },
+        {
+          "lat": 39.279425,
+          "lng": -84.430052
+        },
+        {
+          "lat": 39.277087,
+          "lng": -84.430052
+        },
+        {
+          "lat": 39.277087,
+          "lng": -84.432524
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 39.27770, "west": -84.43270, "north": 39.28050, "east": -84.43225 }
+      {
+        "ring": [
+          {
+            "lat": 39.277724,
+            "lng": -84.432387
+          },
+          {
+            "lat": 39.277724,
+            "lng": -84.430189
+          },
+          {
+            "lat": 39.277193,
+            "lng": -84.430189
+          },
+          {
+            "lat": 39.277193,
+            "lng": -84.432387
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -19,7 +58,7 @@
     "trailerParkingCapacity": 45,
     "truckGateCount": 1,
     "buildingCount": 4,
-    "siteAreaAcres": 23.0,
+    "siteAreaAcres": 23,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.27900,-84.43170,400m/data=!3m1!1e3",
@@ -48,7 +87,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["truckGate", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "No barrier arm, sliding gate, or guard booth visible at the Mosteller Rd frontage in any Street View pass (2025-06 imagery). The property is open to the road; employee parking fronts the street directly. Truck driveway enters at the SE and is uncontrolled.",
     "multipleFacilities": "Older multi-building manufacturing campus: main warehouse/production block plus a dense south process area with silos, tanks, and several smaller process buildings.",

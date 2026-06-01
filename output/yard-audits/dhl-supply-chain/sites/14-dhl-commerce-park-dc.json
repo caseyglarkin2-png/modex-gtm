@@ -1,16 +1,75 @@
 {
   "name": "DHL Supply Chain - DHL Commerce Park DC - St. George SC",
   "type": "Distribution Center (Charleston port-adjacent campus)",
-  "coords": { "lat": 33.177800, "lng": -80.535000 },
+  "coords": {
+    "lat": 33.1778,
+    "lng": -80.535
+  },
   "geofences": {
-    "perimeter": { "south": 33.174500, "west": -80.537800, "north": 33.179800, "east": -80.533200 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.179639,
+          "lng": -80.539669
+        },
+        {
+          "lat": 33.179294,
+          "lng": -80.532803
+        },
+        {
+          "lat": 33.175961,
+          "lng": -80.533352
+        },
+        {
+          "lat": 33.176421,
+          "lng": -80.540081
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [
-      { "south": 33.175900, "west": -80.536400, "north": 33.177100, "east": -80.534400 }
+      {
+        "ring": [
+          {
+            "lat": 33.177225,
+            "lng": -80.539669
+          },
+          {
+            "lat": 33.17688,
+            "lng": -80.534313
+          },
+          {
+            "lat": 33.175961,
+            "lng": -80.534451
+          },
+          {
+            "lat": 33.176421,
+            "lng": -80.539807
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.175800, "west": -80.536500, "north": 33.177300, "east": -80.534200 },
-      { "south": 33.178400, "west": -80.535400, "north": 33.179300, "east": -80.533800 }
+      {
+        "ring": [
+          {
+            "lat": 33.178949,
+            "lng": -80.539395
+          },
+          {
+            "lat": 33.17872,
+            "lng": -80.53294
+          },
+          {
+            "lat": 33.17803,
+            "lng": -80.533077
+          },
+          {
+            "lat": 33.17826,
+            "lng": -80.539532
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -20,7 +79,7 @@
     "trailerParkingCapacity": 90,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 75.0,
+    "siteAreaAcres": 75,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.177800,-80.535000,400m/data=!3m1!1e3",
@@ -49,7 +108,13 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "remoteGs", "dockDoorCount", "trailersVisible", "connectivityIssue"],
+  "uncertainFields": [
+    "truckGate",
+    "remoteGs",
+    "dockDoorCount",
+    "trailersVisible",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "siteIdentity": "DHL Commerce Park is a planned 125-acre, three-building, 1.7M sq ft campus near St. George SC serving the Port of Charleston. As of current (2026) imagery only ONE building is built - DHL Commerce Park Building A, 4826 Hwy 78 (~978,805 sq ft, ~74.91-acre parcel per LoopNet/CommercialCafe). The roster's GEOMETRIC_CENTER coord (33.183087,-80.52853) landed ~700 m NE on an unrelated industrial/aggregate yard; corrected to Building A at 33.177800,-80.535000.",
     "buildingStatus": "Building A appears built but largely vacant - the SW dock face shows a long row of EMPTY marked trailer-parking stalls and almost no trailers across the site. LoopNet lists 4826 Hwy 78 as available for lease, consistent with an empty/marketed building. multipleFacilities set false (only one building exists on the developed parcel).",

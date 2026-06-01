@@ -1,17 +1,116 @@
 {
   "name": "Clif Bar Baking Co. of Indianapolis - Indianapolis IN",
   "type": "Manufacturing - energy/nutrition bar bakery",
-  "coords": { "lat": 39.88865, "lng": -86.24100 },
+  "coords": {
+    "lat": 39.88865,
+    "lng": -86.241
+  },
   "geofences": {
-    "perimeter": { "south": 39.88680, "west": -86.24320, "north": 39.89000, "east": -86.23950 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.890336,
+          "lng": -86.242236
+        },
+        {
+          "lat": 39.890231,
+          "lng": -86.239489
+        },
+        {
+          "lat": 39.888018,
+          "lng": -86.239352
+        },
+        {
+          "lat": 39.887702,
+          "lng": -86.240657
+        },
+        {
+          "lat": 39.888387,
+          "lng": -86.242579
+        },
+        {
+          "lat": 39.889704,
+          "lng": -86.242511
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.889704,
+          "lng": -86.24306
+        },
+        {
+          "lat": 39.889704,
+          "lng": -86.242579
+        },
+        {
+          "lat": 39.889335,
+          "lng": -86.242579
+        },
+        {
+          "lat": 39.889335,
+          "lng": -86.24306
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 39.88740, "west": -86.24250, "north": 39.88820, "east": -86.24130 }
+      {
+        "ring": [
+          {
+            "lat": 39.888755,
+            "lng": -86.242511
+          },
+          {
+            "lat": 39.888545,
+            "lng": -86.241549
+          },
+          {
+            "lat": 39.887965,
+            "lng": -86.241687
+          },
+          {
+            "lat": 39.888176,
+            "lng": -86.242648
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.88800, "west": -86.24130, "north": 39.88920, "east": -86.24010 }
+      {
+        "ring": [
+          {
+            "lat": 39.888387,
+            "lng": -86.241549
+          },
+          {
+            "lat": 39.888123,
+            "lng": -86.240176
+          },
+          {
+            "lat": 39.887807,
+            "lng": -86.240245
+          },
+          {
+            "lat": 39.88807,
+            "lng": -86.241618
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 104,
+        "pano": "ZsGPUFOLCyvciy-mGA8fwQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 104,
+        "pano": "ZsGPUFOLCyvciy-mGA8fwQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 14,
@@ -19,7 +118,7 @@
     "trailerParkingCapacity": 25,
     "truckGateCount": 0,
     "buildingCount": 1,
-    "siteAreaAcres": 28.0,
+    "siteAreaAcres": 28,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.88865,-86.24100,400m/data=!3m1!1e3",
@@ -48,7 +147,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "dockDoorCount", "exitLanes"],
+  "uncertainFields": [
+    "scale",
+    "dockDoorCount",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Open industrial-park facility. Street View (2024-07) shows the building set back behind an open grass lawn with no perimeter fence at the road and open driveway entrances - no barrier arm, gate, or checkpoint. Open driveway with no control = truckGate false. truckGateCount set to 0.",
     "guardShack": "No truck gate and no booth structure at any entrance - false.",

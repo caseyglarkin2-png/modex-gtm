@@ -1,39 +1,106 @@
 {
   "name": "Ford - Michigan Assembly Plant, Wayne MI",
   "type": "Vehicle Assembly Plant",
-  "coords": { "lat": 42.27640, "lng": -83.41360 },
+  "coords": {
+    "lat": 42.2764,
+    "lng": -83.4136
+  },
   "geofences": {
-    "perimeter": { "south": 42.26900, "west": -83.42150, "north": 42.28100, "east": -83.40550 },
-    "truckGate": { "south": 42.27780, "west": -83.41850, "north": 42.27860, "east": -83.41700 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.278432,
+          "lng": -83.42129
+        },
+        {
+          "lat": 42.279245,
+          "lng": -83.403712
+        },
+        {
+          "lat": 42.273961,
+          "lng": -83.403163
+        },
+        {
+          "lat": 42.273148,
+          "lng": -83.420192
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 42.27180, "west": -83.41750, "north": 42.27380, "east": -83.41350 },
-      { "south": 42.27200, "west": -83.41250, "north": 42.27420, "east": -83.40850 }
+      {
+        "ring": [
+          {
+            "lat": 42.279245,
+            "lng": -83.40591
+          },
+          {
+            "lat": 42.279448,
+            "lng": -83.402064
+          },
+          {
+            "lat": 42.277213,
+            "lng": -83.40179
+          },
+          {
+            "lat": 42.27701,
+            "lng": -83.405635
+          }
+        ]
+      }
     ],
-    "dockAprons": [
-      { "south": 42.27200, "west": -83.41100, "north": 42.27340, "east": -83.40700 },
-      { "south": 42.27520, "west": -83.41200, "north": 42.27640, "east": -83.40800 }
-    ],
-    "staging": { "south": 42.27700, "west": -83.41850, "north": 42.27800, "east": -83.41650 }
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 116,
+        "pano": "E2V4sst__bqaA52Cpl5sxw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 40, "trailersVisible": 75, "trailerParkingCapacity": 150,
-    "truckGateCount": 2, "buildingCount": 5, "siteAreaAcres": 369.0,
+    "dockDoorCount": 40,
+    "trailersVisible": 75,
+    "trailerParkingCapacity": 150,
+    "truckGateCount": 2,
+    "buildingCount": 5,
+    "siteAreaAcres": 369,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@42.27640,-83.41360,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": true
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": true
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "scale", "entryLanes", "exitLanes", "dockDoorCount"],
+  "uncertainFields": [
+    "guardShack",
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "facility": "Michigan Assembly Plant (Ford Ranger, Bronco), 38303 Michigan Ave, Wayne MI. Geocode landed on the rooftop (moved 170m); confirmed as the large assembly complex on the south side of Michigan Ave - ~5M sq ft of building on a 369-acre site (web-confirmed). Two large connected building clusters split by an active rail corridor.",
     "truckGate": "Secured Ford assembly campus with perimeter fencing and wooded buffer along Michigan Ave. Controlled truck access driveways into the dock/yard areas; an internal vehicle-control gate (small canopy/booth structure with markings) controls movement between the plant and employee/finished-vehicle areas on the SW side.",

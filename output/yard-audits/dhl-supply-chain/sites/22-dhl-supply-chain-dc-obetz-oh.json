@@ -1,13 +1,54 @@
 {
   "name": "DHL Supply Chain - DC - Obetz OH",
   "type": "Distribution Center",
-  "coords": { "lat": 39.86725, "lng": -82.94000 },
+  "coords": {
+    "lat": 39.86725,
+    "lng": -82.94
+  },
   "geofences": {
-    "perimeter": { "south": 39.8657, "west": -82.9414, "north": 39.8688, "east": -82.9386 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.868093,
+          "lng": -82.941167
+        },
+        {
+          "lat": 39.867777,
+          "lng": -82.939039
+        },
+        {
+          "lat": 39.866618,
+          "lng": -82.939451
+        },
+        {
+          "lat": 39.866934,
+          "lng": -82.941579
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 39.8675, "west": -82.9408, "north": 39.8687, "east": -82.9390 }
+      {
+        "ring": [
+          {
+            "lat": 39.867988,
+            "lng": -82.941236
+          },
+          {
+            "lat": 39.867672,
+            "lng": -82.939107
+          },
+          {
+            "lat": 39.867408,
+            "lng": -82.939176
+          },
+          {
+            "lat": 39.867724,
+            "lng": -82.941305
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -22,18 +63,37 @@
   },
   "mapsUrl": "https://www.google.com/maps/@39.86725,-82.94000,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "dockDoors", "entryLanes", "exitLanes", "truckGate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "dockDoors",
+    "entryLanes",
+    "exitLanes",
+    "truckGate"
+  ],
   "fieldNotes": {
     "location": "Resolved to 2160 McGaw Road, Obetz OH 43207 (at the McGaw Rd / Frusta Dr intersection), the historic 'Exel Logistics Columbus Public Warehouse' — Exel Inc. is DHL Supply Chain's legal/legacy brand. Roster gave no address; web research surfaced the Yelp/CMac listing 'Exel Logistics Columbus Public Warehouse, 2160 McGaw Rd, Obetz OH 43207' and a CBRE industrial lease listing for the same address. Google Geocoding API would not resolve the McGaw Rd house number (returned ZIP centroid); located the building via OpenStreetMap centerlines for McGaw Rd and Frusta Dr, then satellite/Street View confirmation.",
     "truckGate": "No gate, barrier arm, or guard booth visible at any approach. The NE dock court is open and accessed directly from the public service road; confirmed in 2019 and 2025 Street View. Flagged as uncertain because the imagery is partly dated.",

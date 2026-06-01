@@ -1,15 +1,75 @@
 {
   "name": "DHL Supply Chain - IDS Fulfillment DC - Indianapolis IN",
   "type": "Multi-Customer E-Commerce Fulfillment Center",
-  "coords": { "lat": 39.68545, "lng": -86.31017 },
+  "coords": {
+    "lat": 39.68545,
+    "lng": -86.31017
+  },
   "geofences": {
-    "perimeter": { "south": 39.68340, "west": -86.31350, "north": 39.68720, "east": -86.30870 },
-    "truckGate": { "south": 39.68480, "west": -86.31345, "north": 39.68530, "east": -86.31280 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.687247,
+          "lng": -86.311543
+        },
+        {
+          "lat": 39.687035,
+          "lng": -86.308522
+        },
+        {
+          "lat": 39.683442,
+          "lng": -86.308797
+        },
+        {
+          "lat": 39.683653,
+          "lng": -86.311818
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 39.68360, "west": -86.31300, "north": 39.68660, "east": -86.31160 }
+      {
+        "ring": [
+          {
+            "lat": 39.687035,
+            "lng": -86.311406
+          },
+          {
+            "lat": 39.686982,
+            "lng": -86.310719
+          },
+          {
+            "lat": 39.683601,
+            "lng": -86.310857
+          },
+          {
+            "lat": 39.683653,
+            "lng": -86.311543
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.68360, "west": -86.31160, "north": 39.68660, "east": -86.31050 }
+      {
+        "ring": [
+          {
+            "lat": 39.68693,
+            "lng": -86.311406
+          },
+          {
+            "lat": 39.686877,
+            "lng": -86.310651
+          },
+          {
+            "lat": 39.683865,
+            "lng": -86.310719
+          },
+          {
+            "lat": 39.683918,
+            "lng": -86.311475
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -24,18 +84,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@39.68545,-86.31017,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible"
+  ],
   "fieldNotes": {
     "location": "Roster had no address/coords. Resolved via web research: IDS Fulfillment's Indianapolis DC (distinct from the Plainfield IN HQ at idx 2) is at 5425 Exploration Drive, Indianapolis IN 46241 - 'World Connect @ Ameriplex - Building 3', a ~620,935-661,324 sq ft LEED-certified distribution building on ~47 acres, built 2018, in the Ameriplex business park across I-70 from Indianapolis International Airport. IDS opened it in 2018 as its second fulfillment center; now part of DHL Supply Chain after the May 2025 acquisition.",
     "truckGate": "The property is fully perimeter-fenced (chain-link). The truck court is accessed by a driveway from Exploration Drive that enters through a gate in the fence line - confirmed in Street View (2019 + 2024 panos showing fence with a gate opening at the truck driveway). Controlled truck entry.",

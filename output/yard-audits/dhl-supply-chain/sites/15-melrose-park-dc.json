@@ -1,15 +1,75 @@
 {
   "name": "DHL Supply Chain - Melrose Park DC - Melrose Park IL",
   "type": "Distribution / E-Commerce Sortation Center",
-  "coords": { "lat": 41.913400, "lng": -87.847700 },
+  "coords": {
+    "lat": 41.9134,
+    "lng": -87.8477
+  },
   "geofences": {
-    "perimeter": { "south": 41.912300, "west": -87.850000, "north": 41.914500, "east": -87.845500 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.913962,
+          "lng": -87.849897
+        },
+        {
+          "lat": 41.91386,
+          "lng": -87.84564
+        },
+        {
+          "lat": 41.912787,
+          "lng": -87.845709
+        },
+        {
+          "lat": 41.912889,
+          "lng": -87.849966
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [
-      { "south": 41.912200, "west": -87.849400, "north": 41.912800, "east": -87.845800 }
+      {
+        "ring": [
+          {
+            "lat": 41.912582,
+            "lng": -87.849897
+          },
+          {
+            "lat": 41.91248,
+            "lng": -87.847357
+          },
+          {
+            "lat": 41.911663,
+            "lng": -87.847425
+          },
+          {
+            "lat": 41.911765,
+            "lng": -87.849966
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.912700, "west": -87.849400, "north": 41.913400, "east": -87.845800 }
+      {
+        "ring": [
+          {
+            "lat": 41.912838,
+            "lng": -87.849897
+          },
+          {
+            "lat": 41.912736,
+            "lng": -87.845709
+          },
+          {
+            "lat": 41.912582,
+            "lng": -87.845709
+          },
+          {
+            "lat": 41.912685,
+            "lng": -87.849897
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -19,7 +79,7 @@
     "trailerParkingCapacity": 45,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 22.0,
+    "siteAreaAcres": 22,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.913400,-87.847700,400m/data=!3m1!1e3",
@@ -48,7 +108,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["truckGate", "dockDoorCount"],
+  "uncertainFields": [
+    "truckGate",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "siteIdentity": "DHL eCommerce sortation center at 2065 George Street, Melrose Park IL - 352,000 sq ft, LEED Silver, opened June 2023, houses a Honeywell IntelliSort cross-belt loop sorter (40,000 parcels/hr). Confirmed via Street View showing the DHL logo on the building face (2024-09 capture). One building in a dense suburban-Chicago industrial park.",
     "truckGate": "No barrier arm, sliding gate, or guard-booth checkpoint at the truck-apron entrance. A black ornamental/perimeter fence runs along the George Street frontage (green setback strip), but the truck apron itself opens directly to the access road with no controlled pinch-point. Flagged uncertain - the frontage fence indicates some security intent and a low-profile gate cannot be fully ruled out from imagery.",

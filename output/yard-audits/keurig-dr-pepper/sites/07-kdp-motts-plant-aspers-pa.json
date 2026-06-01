@@ -1,38 +1,151 @@
 {
   "name": "KDP Mott's Plant - Aspers PA",
   "type": "Manufacturing - Juice/Applesauce",
-  "coords": { "lat": 39.975785, "lng": -77.220423 },
+  "coords": {
+    "lat": 39.975785,
+    "lng": -77.220423
+  },
   "geofences": {
-    "perimeter": { "south": 39.972200, "west": -77.224500, "north": 39.979500, "east": -77.215500 },
-    "truckGate": { "south": 39.973100, "west": -77.222600, "north": 39.973700, "east": -77.221700 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.974522,
+          "lng": -77.223582
+        },
+        {
+          "lat": 39.976837,
+          "lng": -77.222346
+        },
+        {
+          "lat": 39.977574,
+          "lng": -77.220423
+        },
+        {
+          "lat": 39.976627,
+          "lng": -77.218775
+        },
+        {
+          "lat": 39.975259,
+          "lng": -77.218226
+        },
+        {
+          "lat": 39.972838,
+          "lng": -77.220148
+        },
+        {
+          "lat": 39.973259,
+          "lng": -77.222071
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.976837,
+          "lng": -77.219736
+        },
+        {
+          "lat": 39.977258,
+          "lng": -77.218775
+        },
+        {
+          "lat": 39.976732,
+          "lng": -77.218363
+        },
+        {
+          "lat": 39.976311,
+          "lng": -77.219324
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 39.972600, "west": -77.219500, "north": 39.974500, "east": -77.216800 },
-      { "south": 39.973200, "west": -77.221400, "north": 39.974400, "east": -77.219500 }
+      {
+        "ring": [
+          {
+            "lat": 39.974101,
+            "lng": -77.218775
+          },
+          {
+            "lat": 39.97368,
+            "lng": -77.217127
+          },
+          {
+            "lat": 39.972733,
+            "lng": -77.217539
+          },
+          {
+            "lat": 39.973154,
+            "lng": -77.219187
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.973900, "west": -77.220000, "north": 39.975100, "east": -77.217800 }
+      {
+        "ring": [
+          {
+            "lat": 39.975259,
+            "lng": -77.221796
+          },
+          {
+            "lat": 39.974522,
+            "lng": -77.219599
+          },
+          {
+            "lat": 39.973785,
+            "lng": -77.220011
+          },
+          {
+            "lat": 39.974522,
+            "lng": -77.222208
+          }
+        ]
+      }
     ],
-    "staging": { "south": 39.973600, "west": -77.219800, "north": 39.974400, "east": -77.218400 }
+    "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 45, "trailersVisible": 160, "trailerParkingCapacity": 220,
-    "truckGateCount": 1, "buildingCount": 6, "siteAreaAcres": 110.0,
+    "dockDoorCount": 45,
+    "trailersVisible": 160,
+    "trailerParkingCapacity": 220,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 110,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.975785,-77.220423,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "shipRcvSeparate", "scale"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "shipRcvSeparate",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "Main entrance off the public road on the SW side splits into two open driveways - a left lane to the plant offices and a wider right lane into the truck yard/docks. Street View (2024-08) shows directional/regulatory signage but NO barrier arm, NO sliding/swing gate, and NO checkpoint pinch-point at the property line. Truck driveway is fully open.",
     "guardShack": "No staffed guard booth at the truck entrance. A small free-standing building sits near the entrance but is set off to the side as an office/maintenance structure, not a booth straddling the truck lane.",

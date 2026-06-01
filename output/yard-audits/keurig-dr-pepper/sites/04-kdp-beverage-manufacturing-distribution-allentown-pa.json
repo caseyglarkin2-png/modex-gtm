@@ -1,16 +1,114 @@
 {
   "name": "KDP Beverage Manufacturing & Distribution - Allentown PA",
   "type": "Manufacturing & Distribution - Beverage",
-  "coords": { "lat": 40.572414, "lng": -75.605843 },
+  "coords": {
+    "lat": 40.572414,
+    "lng": -75.605843
+  },
   "geofences": {
-    "perimeter": { "south": 40.56880, "west": -75.60850, "north": 40.57620, "east": -75.60330 },
-    "truckGate": { "south": 40.57210, "west": -75.60790, "north": 40.57290, "east": -75.60690 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.574709,
+          "lng": -75.608452
+        },
+        {
+          "lat": 40.575961,
+          "lng": -75.602547
+        },
+        {
+          "lat": 40.57377,
+          "lng": -75.601586
+        },
+        {
+          "lat": 40.572518,
+          "lng": -75.607216
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.574083,
+          "lng": -75.602547
+        },
+        {
+          "lat": 40.574292,
+          "lng": -75.601723
+        },
+        {
+          "lat": 40.573666,
+          "lng": -75.601586
+        },
+        {
+          "lat": 40.573457,
+          "lng": -75.60241
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.57190, "west": -75.60720, "north": 40.57320, "east": -75.60390 }
+      {
+        "ring": [
+          {
+            "lat": 40.575022,
+            "lng": -75.608178
+          },
+          {
+            "lat": 40.576273,
+            "lng": -75.602547
+          },
+          {
+            "lat": 40.575752,
+            "lng": -75.60241
+          },
+          {
+            "lat": 40.5745,
+            "lng": -75.60804
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.57280, "west": -75.60700, "north": 40.57420, "east": -75.60380 },
-      { "south": 40.57050, "west": -75.60700, "north": 40.57180, "east": -75.60380 }
+      {
+        "ring": [
+          {
+            "lat": 40.5745,
+            "lng": -75.607766
+          },
+          {
+            "lat": 40.575752,
+            "lng": -75.602135
+          },
+          {
+            "lat": 40.575126,
+            "lng": -75.601998
+          },
+          {
+            "lat": 40.573874,
+            "lng": -75.607628
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.573144,
+            "lng": -75.607216
+          },
+          {
+            "lat": 40.574396,
+            "lng": -75.60186
+          },
+          {
+            "lat": 40.57377,
+            "lng": -75.601723
+          },
+          {
+            "lat": 40.572518,
+            "lng": -75.607079
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -20,23 +118,41 @@
     "trailerParkingCapacity": 110,
     "truckGateCount": 2,
     "buildingCount": 2,
-    "siteAreaAcres": 92.0,
+    "siteAreaAcres": 92,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.572414,-75.605843,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "truckGate", "guardShack"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "truckGate",
+    "guardShack"
+  ],
   "fieldNotes": {
     "location": "KDP 'Park 100' campus, 7350 Industrial Blvd (warehouse) + 7356 Industrial Blvd (manufacturing), Upper Macungie Township near Allentown PA. Combined ~1.54M sq ft beverage manufacturing + warehouse/DC on 92 acres; former Kraft-Heinz site; 2021 Food Engineering Plant of the Year. Confirmed via Lehigh Valley EDC, LVB, WFMZ and Food Business News. Despite the roster geocode flag (movedMeters 3237), the roster pin (40.572414,-75.605843) sits correctly on this two-building site.",
     "truckGate": "Truck access from Industrial Blvd is via open driveways with a monument sign at the W frontage (May 2025 Street View) and internal roads into the truck court. No barrier arm or sliding gate visible at the road or at the truck-court entry in z19-z20 satellite. Marked uncertain - a large beverage plant of this scale plausibly operates manned check-in, but no booth or barrier is visible in available imagery.",

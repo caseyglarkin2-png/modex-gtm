@@ -1,39 +1,126 @@
 {
   "name": "Ford - Kansas City Assembly Plant, Claycomo MO",
   "type": "Vehicle Assembly Plant",
-  "coords": { "lat": 39.20250, "lng": -94.47700 },
+  "coords": {
+    "lat": 39.2025,
+    "lng": -94.477
+  },
   "geofences": {
-    "perimeter": { "south": 39.1955, "west": -94.4865, "north": 39.2095, "east": -94.4695 },
-    "truckGate": { "south": 39.20000, "west": -94.47280, "north": 39.20110, "east": -94.47120 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.207395,
+          "lng": -94.487986
+        },
+        {
+          "lat": 39.207395,
+          "lng": -94.474803
+        },
+        {
+          "lat": 39.19654,
+          "lng": -94.473704
+        },
+        {
+          "lat": 39.19654,
+          "lng": -94.482493
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 39.20320, "west": -94.47280, "north": 39.20480, "east": -94.47020 },
-      { "south": 39.19550, "west": -94.47550, "north": 39.19850, "east": -94.47100 }
+      {
+        "ring": [
+          {
+            "lat": 39.20548,
+            "lng": -94.489085
+          },
+          {
+            "lat": 39.205905,
+            "lng": -94.486613
+          },
+          {
+            "lat": 39.203351,
+            "lng": -94.485789
+          },
+          {
+            "lat": 39.202926,
+            "lng": -94.488261
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.20200, "west": -94.48150, "north": 39.20420, "east": -94.47900 },
-      { "south": 39.20250, "west": -94.47350, "north": 39.20460, "east": -94.47100 }
+      {
+        "ring": [
+          {
+            "lat": 39.2025,
+            "lng": -94.482493
+          },
+          {
+            "lat": 39.2025,
+            "lng": -94.475627
+          },
+          {
+            "lat": 39.20101,
+            "lng": -94.475627
+          },
+          {
+            "lat": 39.20101,
+            "lng": -94.482493
+          }
+        ]
+      }
     ],
-    "staging": { "south": 39.19980, "west": -94.47280, "north": 39.20100, "east": -94.47080 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 150,
+        "pano": "iJJ3Z9vfFXFHeqA7HxGguQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 50, "trailersVisible": 60, "trailerParkingCapacity": 130,
-    "truckGateCount": 2, "buildingCount": 6, "siteAreaAcres": 564.8,
+    "dockDoorCount": 50,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 130,
+    "truckGateCount": 2,
+    "buildingCount": 6,
+    "siteAreaAcres": 564.8,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@39.20250,-94.47700,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": true
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": true
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "entryLanes", "exitLanes", "dockDoorCount"],
+  "uncertainFields": [
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "facility": "Kansas City Assembly Plant (F-150 + Transit, two high-volume lines) in Claycomo MO; geocode point lands directly on the plant - identity unambiguous.",
     "truckGate": "Street View of the SE plant access road shows a clear truck gate: a guard booth, kiosk/card-reader pedestal, stop sign, concrete median separating in/out lanes, and trailers backed into docks beyond. Confirmed controlled truck entrance.",

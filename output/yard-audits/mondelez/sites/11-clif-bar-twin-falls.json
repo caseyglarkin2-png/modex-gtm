@@ -1,37 +1,119 @@
 {
   "name": "Clif Bar Baking Co. of Twin Falls - Twin Falls ID",
   "type": "Manufacturing - energy/nutrition bar bakery",
-  "coords": { "lat": 42.53985, "lng": -114.40805 },
+  "coords": {
+    "lat": 42.53985,
+    "lng": -114.40805
+  },
   "geofences": {
-    "perimeter": { "south": 42.53780, "west": -114.41060, "north": 42.54180, "east": -114.40560 },
-    "truckGate": null,
-    "dropYards": [
-      { "south": 42.54050, "west": -114.40790, "north": 42.54110, "east": -114.40620 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.540659,
+          "lng": -114.409973
+        },
+        {
+          "lat": 42.540862,
+          "lng": -114.403243
+        },
+        {
+          "lat": 42.538332,
+          "lng": -114.403106
+        },
+        {
+          "lat": 42.538029,
+          "lng": -114.407363
+        },
+        {
+          "lat": 42.538636,
+          "lng": -114.410247
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.538332,
+          "lng": -114.407363
+        },
+        {
+          "lat": 42.538231,
+          "lng": -114.406402
+        },
+        {
+          "lat": 42.537624,
+          "lng": -114.406539
+        },
+        {
+          "lat": 42.537725,
+          "lng": -114.407501
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 42.53960, "west": -114.40895, "north": 42.54035, "east": -114.40840 }
+      {
+        "ring": [
+          {
+            "lat": 42.540052,
+            "lng": -114.409423
+          },
+          {
+            "lat": 42.540255,
+            "lng": -114.404205
+          },
+          {
+            "lat": 42.539546,
+            "lng": -114.404205
+          },
+          {
+            "lat": 42.539344,
+            "lng": -114.409423
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 10, "trailersVisible": 9, "trailerParkingCapacity": 20,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 88.0,
+    "dockDoorCount": 10,
+    "trailersVisible": 9,
+    "trailerParkingCapacity": 20,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 88,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@42.53985,-114.40805,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "0-10", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "0-10",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "truckGate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "truckGate"
+  ],
   "fieldNotes": {
     "location": "Resolved to the Clif Bar bakery in the Jayco Industrial Park, area of Champlin Rd & Eldridge Ave, southeast Twin Falls (street address 3438 Eldridge Ave, ZIP 83341 per Waze listing). Roster city-centroid coords (42.5826,-114.4286) were ~5km NW in a residential/farm area; corrected via web research (Idaho Commerce, BoiseDev, Magic Valley) plus satellite confirmation of the distinctive ~275,000 sq ft biophilic-design plant with on-site solar arrays.",
     "truckGate": "No barrier arm, sliding gate or checkpoint pinch-point visible at any driveway. The site sits on a ~90-acre standalone parcel with wide-open undeveloped buffer land; access roads are part of the industrial-park network and run open into the property. Classified false.",

@@ -1,18 +1,112 @@
 {
   "name": "Mondelez Montgomery Sales Distribution Center - Montgomery NY",
   "type": "Distribution center / sales warehouse",
-  "coords": { "lat": 41.49400, "lng": -74.22360 },
+  "coords": {
+    "lat": 41.494,
+    "lng": -74.2236
+  },
   "geofences": {
-    "perimeter": { "south": 41.49255, "west": -74.22455, "north": 41.49490, "east": -74.22215 },
-    "truckGate": { "south": 41.49405, "west": -74.22420, "north": 41.49445, "east": -74.22375 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.494411,
+          "lng": -74.224287
+        },
+        {
+          "lat": 41.494103,
+          "lng": -74.222639
+        },
+        {
+          "lat": 41.492766,
+          "lng": -74.222913
+        },
+        {
+          "lat": 41.492868,
+          "lng": -74.224836
+        },
+        {
+          "lat": 41.494,
+          "lng": -74.224561
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.494514,
+          "lng": -74.224287
+        },
+        {
+          "lat": 41.494411,
+          "lng": -74.223806
+        },
+        {
+          "lat": 41.494103,
+          "lng": -74.223943
+        },
+        {
+          "lat": 41.494206,
+          "lng": -74.224424
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 41.49255, "west": -74.22420, "north": 41.49385, "east": -74.22300 },
-      { "south": 41.49320, "west": -74.22310, "north": 41.49420, "east": -74.22215 }
+      {
+        "ring": [
+          {
+            "lat": 41.493743,
+            "lng": -74.224699
+          },
+          {
+            "lat": 41.493486,
+            "lng": -74.223257
+          },
+          {
+            "lat": 41.49292,
+            "lng": -74.223394
+          },
+          {
+            "lat": 41.493177,
+            "lng": -74.224836
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.49360, "west": -74.22400, "north": 41.49420, "east": -74.22320 }
+      {
+        "ring": [
+          {
+            "lat": 41.494103,
+            "lng": -74.224012
+          },
+          {
+            "lat": 41.493949,
+            "lng": -74.223051
+          },
+          {
+            "lat": 41.493691,
+            "lng": -74.223119
+          },
+          {
+            "lat": 41.493846,
+            "lng": -74.224081
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 181,
+        "pano": "hFNQIHkAaOwbXpEe9TN9Xg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 181,
+        "pano": "hFNQIHkAaOwbXpEe9TN9Xg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 14,
@@ -49,7 +143,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "shipRcvSeparate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Two open paved curb cuts off Neelytown Rd into the yard. No barrier arm, sliding gate, or checkpoint pinch-point; no perimeter fence along the road frontage in Street View (2025-08). Open-access facility.",
     "guardShack": "No staffed booth at either driveway. The only secondary structure is a small office annex attached to the warehouse front, not a gate-side booth.",

@@ -1,37 +1,107 @@
 {
   "name": "John Deere Waterloo Works - Drivetrain Operations - Waterloo IA",
   "type": "Component Plant",
-  "coords": { "lat": 42.5025, "lng": -92.3535 },
+  "coords": {
+    "lat": 42.5025,
+    "lng": -92.3535
+  },
   "geofences": {
-    "perimeter": { "south": 42.4975, "west": -92.3590, "north": 42.5060, "east": -92.3460 },
-    "truckGate": { "south": 42.5043, "west": -92.3545, "north": 42.5053, "east": -92.3530 },
-    "dropYards": [
-      { "south": 42.5020, "west": -92.3500, "north": 42.5045, "east": -92.3470 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.503917,
+          "lng": -92.364486
+        },
+        {
+          "lat": 42.504727,
+          "lng": -92.350204
+        },
+        {
+          "lat": 42.49845,
+          "lng": -92.349105
+        },
+        {
+          "lat": 42.49683,
+          "lng": -92.354873
+        },
+        {
+          "lat": 42.50007,
+          "lng": -92.363662
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 42.5045, "west": -92.3550, "north": 42.5055, "east": -92.3520 }
+      {
+        "ring": [
+          {
+            "lat": 42.501488,
+            "lng": -92.357071
+          },
+          {
+            "lat": 42.5025,
+            "lng": -92.351028
+          },
+          {
+            "lat": 42.501285,
+            "lng": -92.350479
+          },
+          {
+            "lat": 42.500273,
+            "lng": -92.356521
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 22, "trailersVisible": 12, "trailerParkingCapacity": 35,
-    "truckGateCount": 2, "buildingCount": 5, "siteAreaAcres": 110.0,
+    "dockDoorCount": 22,
+    "trailersVisible": 12,
+    "trailerParkingCapacity": 35,
+    "truckGateCount": 2,
+    "buildingCount": 5,
+    "siteAreaAcres": 110,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@42.5025,-92.3535,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "postGateStaging", "drivewayShort", "dropArea", "shipRcvSeparate"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "postGateStaging",
+    "drivewayShort",
+    "dropArea",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "location": "Confirmed John Deere Drivetrain Operations (formerly Drive Train) at 400 Westfield Ave, Waterloo IA. Roster ROOFTOP coords (moved only 53m) landed correctly. Street View confirmed the John Deere Tractor & Engine Museum sign and TechWorks Campus signage on the southern part of the campus; the active production buildings are the large fenced cluster along the Cedar River to the north.",
     "truckGate": "Inferred true, medium confidence. The active production complex is enclosed by a continuous chain-link perimeter fence — clearly visible along the north road on multiple Street View headings (2026 imagery). Truck gate is a driveway break in this fence; a barrier arm could not be individually resolved.",

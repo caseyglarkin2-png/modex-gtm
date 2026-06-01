@@ -1,38 +1,107 @@
 {
   "name": "Ford - National Parts Distribution Center, Livonia MI",
   "type": "Parts Distribution Center",
-  "coords": { "lat": 42.37280, "lng": -83.33600 },
+  "coords": {
+    "lat": 42.3728,
+    "lng": -83.336
+  },
   "geofences": {
-    "perimeter": { "south": 42.36900, "west": -83.33850, "north": 42.37800, "east": -83.33340 },
-    "truckGate": { "south": 42.37170, "west": -83.33420, "north": 42.37230, "east": -83.33350 },
-    "dropYards": [
-      { "south": 42.37570, "west": -83.33800, "north": 42.37720, "east": -83.33420 },
-      { "south": 42.37200, "west": -83.33550, "north": 42.37500, "east": -83.33400 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.375235,
+          "lng": -83.338747
+        },
+        {
+          "lat": 42.375235,
+          "lng": -83.333253
+        },
+        {
+          "lat": 42.369148,
+          "lng": -83.333253
+        },
+        {
+          "lat": 42.369148,
+          "lng": -83.338747
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 42.36980, "west": -83.33560, "north": 42.37560, "east": -83.33440 }
+      {
+        "ring": [
+          {
+            "lat": 42.374423,
+            "lng": -83.338747
+          },
+          {
+            "lat": 42.374423,
+            "lng": -83.337099
+          },
+          {
+            "lat": 42.369959,
+            "lng": -83.337099
+          },
+          {
+            "lat": 42.369959,
+            "lng": -83.338747
+          }
+        ]
+      }
     ],
-    "staging": { "south": 42.37000, "west": -83.33440, "north": 42.37550, "east": -83.33350 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 208,
+        "pano": "UHzr1s5z6Rvi1cmhyMlxAg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 70, "trailersVisible": 90, "trailerParkingCapacity": 160,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 100.0,
+    "dockDoorCount": 70,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 100,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@42.37280,-83.33600,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "railServed"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "railServed"
+  ],
   "fieldNotes": {
     "truckGate": "Continuous chain-link perimeter fence rings the property along Middlebelt Rd (confirmed in 2025 Street View). Controlled driveway entrances through the fence into the dock yard.",
     "guardShack": "No clearly identifiable staffed booth at the entrances in Street View; small structures present but not confirmable as guard booths - flagged uncertain.",

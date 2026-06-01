@@ -1,15 +1,63 @@
 {
   "name": "General Mills - Allentown PA",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 40.570800, "lng": -75.477900 },
+  "coords": {
+    "lat": 40.5708,
+    "lng": -75.4779
+  },
   "geofences": {
-    "perimeter": { "south": 40.569700, "west": -75.479600, "north": 40.572000, "east": -75.476200 },
-    "truckGate": { "south": 40.571500, "west": -75.477700, "north": 40.571900, "east": -75.477000 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.57153,
+          "lng": -75.478861
+        },
+        {
+          "lat": 40.571217,
+          "lng": -75.476389
+        },
+        {
+          "lat": 40.569548,
+          "lng": -75.476801
+        },
+        {
+          "lat": 40.569757,
+          "lng": -75.478999
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 40.569900, "west": -75.479000, "north": 40.570800, "east": -75.478300 }
+      {
+        "ring": [
+          {
+            "lat": 40.571322,
+            "lng": -75.478724
+          },
+          {
+            "lat": 40.571165,
+            "lng": -75.477488
+          },
+          {
+            "lat": 40.570904,
+            "lng": -75.477557
+          },
+          {
+            "lat": 40.571061,
+            "lng": -75.478793
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 140,
+        "pano": "O9jYOvtcgfhswClHoj2rMA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 12,
@@ -17,23 +65,39 @@
     "trailerParkingCapacity": 15,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 19.0,
+    "siteAreaAcres": 19,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.570800,-75.477900,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "truckGate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "truckGate"
+  ],
   "fieldNotes": {
     "location": "Confirmed at 2132 Downyflake Lane, Allentown, PA 18103. Roster geocode moved 88m and resolved correctly onto the large industrial building. Verified via web search (D&B - cereal breakfast foods manufacturing).",
     "ownership": "Roster source (Hyster GM plant list) is stale. The building now carries 'AAi' signage - American Atelier Inc., a hospitality/institutional furniture manufacturer - and web directories list American Atelier at 2132 Downyflake Ln alongside the historical General Mills cereal listing. The physical building audited is the correct site for the roster entry.",

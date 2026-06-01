@@ -1,17 +1,77 @@
 {
   "name": "DHL Supply Chain - DC - Etna OH",
   "type": "Distribution Center",
-  "coords": { "lat": 39.96055, "lng": -82.71735 },
+  "coords": {
+    "lat": 39.96055,
+    "lng": -82.71735
+  },
   "geofences": {
-    "perimeter": { "south": 39.9582, "west": -82.7195, "north": 39.9625, "east": -82.7158 },
-    "truckGate": { "south": 39.95845, "west": -82.71905, "north": 39.95895, "east": -82.71855 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.961603,
+          "lng": -82.721745
+        },
+        {
+          "lat": 39.961603,
+          "lng": -82.716251
+        },
+        {
+          "lat": 39.958024,
+          "lng": -82.716389
+        },
+        {
+          "lat": 39.958129,
+          "lng": -82.721745
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 39.9590, "west": -82.7194, "north": 39.9620, "east": -82.7184 }
+      {
+        "ring": [
+          {
+            "lat": 39.961497,
+            "lng": -82.718723
+          },
+          {
+            "lat": 39.961497,
+            "lng": -82.716251
+          },
+          {
+            "lat": 39.958129,
+            "lng": -82.716389
+          },
+          {
+            "lat": 39.958129,
+            "lng": -82.718586
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.9589, "west": -82.7186, "north": 39.9621, "east": -82.7180 }
+      {
+        "ring": [
+          {
+            "lat": 39.961497,
+            "lng": -82.719273
+          },
+          {
+            "lat": 39.961497,
+            "lng": -82.718586
+          },
+          {
+            "lat": 39.958129,
+            "lng": -82.718586
+          },
+          {
+            "lat": 39.958129,
+            "lng": -82.719273
+          }
+        ]
+      }
     ],
-    "staging": { "south": 39.9583, "west": -82.7193, "north": 39.9588, "east": -82.7186 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 70,
@@ -24,18 +84,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@39.96055,-82.71735,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "dropArea"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "dropArea"
+  ],
   "fieldNotes": {
     "location": "Resolved to the DHL Supply Chain (Exel/Coty) building at 127-143 Heritage Drive, Pataskala OH 43062 (Etna Township, Licking County). Roster gave no address; web research surfaced 'COTY/EXEL (DHL), 131 Heritage Dr' and Panjiva shipping records 'Dc Etna, 127-143 Heritage Dr'. Google Geocoding API returned ROOFTOP precision for 131 Heritage Dr; Street View confirmed office unit '138' on the south face within the 127-143 range.",
     "truckGate": "Black cantilever sliding gate across the truck driveway on the west side off Heritage Drive, confirmed in multiple Street View frames (2024-08).",

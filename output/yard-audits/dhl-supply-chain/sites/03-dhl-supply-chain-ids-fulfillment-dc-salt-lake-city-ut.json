@@ -1,13 +1,75 @@
 {
   "name": "DHL Supply Chain - IDS Fulfillment DC - Salt Lake City UT",
   "type": "Multi-Customer E-Commerce Fulfillment Center",
-  "coords": { "lat": 40.734188, "lng": -112.001148 },
+  "coords": {
+    "lat": 40.734188,
+    "lng": -112.001148
+  },
   "geofences": {
-    "perimeter": { "south": 40.73250, "west": -112.00250, "north": 40.73600, "east": -112.00000 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.736269,
+          "lng": -112.002109
+        },
+        {
+          "lat": 40.736113,
+          "lng": -112.000255
+        },
+        {
+          "lat": 40.732939,
+          "lng": -112.000461
+        },
+        {
+          "lat": 40.733095,
+          "lng": -112.002315
+        }
+      ]
+    },
     "truckGate": null,
-    "dropYards": [],
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 40.736061,
+            "lng": -112.002041
+          },
+          {
+            "lat": 40.735957,
+            "lng": -112.000805
+          },
+          {
+            "lat": 40.733564,
+            "lng": -112.000942
+          },
+          {
+            "lat": 40.733668,
+            "lng": -112.002178
+          }
+        ]
+      }
+    ],
     "dockAprons": [
-      { "south": 40.73280, "west": -112.00250, "north": 40.73580, "east": -112.00180 }
+      {
+        "ring": [
+          {
+            "lat": 40.736113,
+            "lng": -112.000805
+          },
+          {
+            "lat": 40.736113,
+            "lng": -112.000393
+          },
+          {
+            "lat": 40.733095,
+            "lng": -112.00053
+          },
+          {
+            "lat": 40.733095,
+            "lng": -112.000942
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -17,23 +79,38 @@
     "trailerParkingCapacity": 10,
     "truckGateCount": 0,
     "buildingCount": 1,
-    "siteAreaAcres": 13.0,
+    "siteAreaAcres": 13,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.734188,-112.001148,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount"],
+  "uncertainFields": [
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "truckGate": "No controlled truck entrance. The building's west dock face fronts directly onto the public street (4650 West) — trucks back off the road into the docks. Street View (2021-05 and 2025-07) shows no barrier arm, no sliding gate, no perimeter fence. South-end driveway also open.",
     "guardShack": "No guard booth at any entrance.",

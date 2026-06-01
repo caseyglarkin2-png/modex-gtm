@@ -1,17 +1,108 @@
 {
   "name": "Nabisco Aurora Sales & Distribution Center - Aurora CO",
   "type": "Sales / distribution center",
-  "coords": { "lat": 39.75895, "lng": -104.78150 },
+  "coords": {
+    "lat": 39.75895,
+    "lng": -104.7815
+  },
   "geofences": {
-    "perimeter": { "south": 39.75810, "west": -104.78210, "north": 39.75985, "east": -104.78060 },
-    "truckGate": { "south": 39.75950, "west": -104.78095, "north": 39.75990, "east": -104.78055 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.759478,
+          "lng": -104.782461
+        },
+        {
+          "lat": 39.759531,
+          "lng": -104.781328
+        },
+        {
+          "lat": 39.758528,
+          "lng": -104.781225
+        },
+        {
+          "lat": 39.758475,
+          "lng": -104.782393
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.758818,
+          "lng": -104.782461
+        },
+        {
+          "lat": 39.758818,
+          "lng": -104.782255
+        },
+        {
+          "lat": 39.758633,
+          "lng": -104.782255
+        },
+        {
+          "lat": 39.758633,
+          "lng": -104.782461
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 39.75835, "west": -104.78130, "north": 39.75970, "east": -104.78075 }
+      {
+        "ring": [
+          {
+            "lat": 39.759689,
+            "lng": -104.781294
+          },
+          {
+            "lat": 39.759689,
+            "lng": -104.780882
+          },
+          {
+            "lat": 39.75895,
+            "lng": -104.780882
+          },
+          {
+            "lat": 39.75895,
+            "lng": -104.781294
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.75835, "west": -104.78145, "north": 39.75975, "east": -104.78095 }
+      {
+        "ring": [
+          {
+            "lat": 39.759478,
+            "lng": -104.781328
+          },
+          {
+            "lat": 39.759478,
+            "lng": -104.781088
+          },
+          {
+            "lat": 39.758686,
+            "lng": -104.781088
+          },
+          {
+            "lat": 39.758686,
+            "lng": -104.781328
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 94,
+        "pano": "IMiyU_NOZnwZOfNqrCL7dQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 94,
+        "pano": "IMiyU_NOZnwZOfNqrCL7dQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 20,
@@ -19,7 +110,7 @@
     "trailerParkingCapacity": 25,
     "truckGateCount": 2,
     "buildingCount": 1,
-    "siteAreaAcres": 6.0,
+    "siteAreaAcres": 6,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.75895,-104.78150,400m/data=!3m1!1e3",
@@ -48,7 +139,14 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "dropArea", "shipRcvSeparate"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "dropArea",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "locate": "Roster gave APPROXIMATE ZIP-level (80011) coordinates. Resolved via web research (Superpages, Chamber of Commerce, Yellowpages, Bandana) to 17689 E 30th Ave, Aurora CO 80011, then geocoded via Google Geocoding API to a ROOFTOP point at 39.7588784, -104.7818061. Locked to the tan-roof warehouse there.",
     "truckGate": "Truck court and dock face are on the EAST side of the building. Driveways into the court are open paved curb cuts; no barrier arm or guard booth identified in satellite or Street View. Street View shows a black metal perimeter fence along the SOUTH frontage (car-parking side), so a sliding gate at the truck court entrance is possible but not resolvable - flagged uncertain.",

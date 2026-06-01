@@ -1,17 +1,84 @@
 {
   "name": "General Mills - Vinita OK",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 36.65830, "lng": -95.13520 },
+  "coords": {
+    "lat": 36.6583,
+    "lng": -95.1352
+  },
   "geofences": {
-    "perimeter": { "south": 36.65700, "west": -95.13680, "north": 36.65950, "east": -95.13420 },
-    "truckGate": { "south": 36.65865, "west": -95.13690, "north": 36.65895, "east": -95.13640 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.6583,
+          "lng": -95.137397
+        },
+        {
+          "lat": 36.65852,
+          "lng": -95.134788
+        },
+        {
+          "lat": 36.656758,
+          "lng": -95.134513
+        },
+        {
+          "lat": 36.656537,
+          "lng": -95.137123
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 36.65730, "west": -95.13620, "north": 36.65800, "east": -95.13510 }
+      {
+        "ring": [
+          {
+            "lat": 36.657198,
+            "lng": -95.136573
+          },
+          {
+            "lat": 36.657308,
+            "lng": -95.134925
+          },
+          {
+            "lat": 36.656758,
+            "lng": -95.134857
+          },
+          {
+            "lat": 36.656647,
+            "lng": -95.136505
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 36.65790, "west": -95.13620, "north": 36.65840, "east": -95.13580 }
+      {
+        "ring": [
+          {
+            "lat": 36.65808,
+            "lng": -95.136299
+          },
+          {
+            "lat": 36.65819,
+            "lng": -95.134925
+          },
+          {
+            "lat": 36.657859,
+            "lng": -95.134857
+          },
+          {
+            "lat": 36.657749,
+            "lng": -95.13623
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 16,
+        "pano": "jeJIZf3GOJQt74OV-Bzf0Q",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 8,
@@ -48,7 +115,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dropArea", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dropArea",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "siteIdentity": "Confirmed General Mills Bakeries & Foodservice frozen-dough plant, 1157 Doughboy Drive, ~110,000 sq ft on ~9.7 acres, built 1995, 8 dock doors, 5 spiral freezers, ammonia refrigeration. Listed for sale on Showcase.com/LoopNet (frozen dough operation, now a separate-tenant property).",
     "truckGate": "Truck entrance is an open driveway at the north end through a gap in the perimeter chain-link fence - no barrier arm, slide gate or checkpoint visible in Street View (2025-04). truckGate = false.",

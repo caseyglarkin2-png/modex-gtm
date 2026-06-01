@@ -1,17 +1,63 @@
 {
   "name": "John Deere Seeding Group / Planter Works - Moline IL",
   "type": "Assembly Plant",
-  "coords": { "lat": 41.50849, "lng": -90.531986 },
+  "coords": {
+    "lat": 41.50849,
+    "lng": -90.531986
+  },
   "geofences": {
-    "perimeter": { "south": 41.50730, "west": -90.53450, "north": 41.51010, "east": -90.52780 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.50921,
+          "lng": -90.537067
+        },
+        {
+          "lat": 41.509518,
+          "lng": -90.530338
+        },
+        {
+          "lat": 41.507256,
+          "lng": -90.530063
+        },
+        {
+          "lat": 41.507153,
+          "lng": -90.536793
+        }
+      ]
+    },
     "truckGate": null,
-    "dropYards": [
-      { "south": 41.50880, "west": -90.52990, "north": 41.50985, "east": -90.52830 }
-    ],
+    "dropYards": [],
     "dockAprons": [
-      { "south": 41.50910, "west": -90.53300, "north": 41.50985, "east": -90.52950 }
+      {
+        "ring": [
+          {
+            "lat": 41.509004,
+            "lng": -90.535557
+          },
+          {
+            "lat": 41.509107,
+            "lng": -90.530613
+          },
+          {
+            "lat": 41.508593,
+            "lng": -90.530544
+          },
+          {
+            "lat": 41.50849,
+            "lng": -90.535488
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 325,
+        "pano": "EIXc1dFdZobzj1EQAx3xxQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 22,
@@ -19,23 +65,42 @@
     "trailerParkingCapacity": 35,
     "truckGateCount": 0,
     "buildingCount": 3,
-    "siteAreaAcres": 38.0,
+    "siteAreaAcres": 38,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.50849,-90.531986,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoors", "truckGate", "entryLanes", "exitLanes", "shipRcvSeparate"],
+  "uncertainFields": [
+    "dockDoors",
+    "truckGate",
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Open campus. River Drive fronts the property directly with a John Deere logo monument and open driveways into the lots; no barrier arm, sliding gate, or guard booth visible in 2023-2025 Street View. Truck access to docks and drop yard is via uncontrolled internal driveways from River Drive.",
     "multipleFacilities": "Three large building masses on the riverfront campus (Deere's oldest factory, est. 1879); contiguous with the broader Moline Deere riverfront corridor.",

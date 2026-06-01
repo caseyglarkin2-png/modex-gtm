@@ -1,18 +1,95 @@
 {
   "name": "Mondelez Richmond Distribution Center - Sandston VA",
   "type": "Distribution center (3PL-operated, Kenco)",
-  "coords": { "lat": 37.47980, "lng": -77.33820 },
+  "coords": {
+    "lat": 37.4798,
+    "lng": -77.3382
+  },
   "geofences": {
-    "perimeter": { "south": 37.47770, "west": -77.34000, "north": 37.48250, "east": -77.33580 },
-    "truckGate": { "south": 37.48130, "west": -77.33970, "north": 37.48200, "east": -77.33900 },
-    "dropYards": [
-      { "south": 37.47880, "west": -77.33780, "north": 37.48070, "east": -77.33600 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.483832,
+          "lng": -77.339848
+        },
+        {
+          "lat": 37.483069,
+          "lng": -77.336003
+        },
+        {
+          "lat": 37.479255,
+          "lng": -77.336827
+        },
+        {
+          "lat": 37.478928,
+          "lng": -77.338475
+        },
+        {
+          "lat": 37.48089,
+          "lng": -77.340947
+        },
+        {
+          "lat": 37.483069,
+          "lng": -77.340397
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 37.480672,
+          "lng": -77.340397
+        },
+        {
+          "lat": 37.480454,
+          "lng": -77.339299
+        },
+        {
+          "lat": 37.479582,
+          "lng": -77.339573
+        },
+        {
+          "lat": 37.4798,
+          "lng": -77.340672
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 37.47820, "west": -77.33830, "north": 37.48100, "east": -77.33640 },
-      { "south": 37.47880, "west": -77.33970, "north": 37.48170, "east": -77.33870 }
+      {
+        "ring": [
+          {
+            "lat": 37.48089,
+            "lng": -77.3382
+          },
+          {
+            "lat": 37.480563,
+            "lng": -77.336827
+          },
+          {
+            "lat": 37.479582,
+            "lng": -77.337101
+          },
+          {
+            "lat": 37.479909,
+            "lng": -77.338475
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 32,
+        "pano": "SCt4Ag-LZcsURftIJw9rJg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 32,
+        "pano": "SCt4Ag-LZcsURftIJw9rJg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 90,
@@ -20,7 +97,7 @@
     "trailerParkingCapacity": 90,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 45.0,
+    "siteAreaAcres": 45,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@37.47980,-77.33820,400m/data=!3m1!1e3",
@@ -49,7 +126,14 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "shipRcvSeparate"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "locate": "Roster lat/lng was a GEOMETRIC_CENTER landing on open farmland 1.5 km from the actual building. Resolved via web research: the DC is at 953 S. Airport Drive in the Sauer Industrial Center, a Becknell build-to-suit just south of Richmond International Airport at the SR-895 / Airport Drive interchange. Locked to the southern of two large warehouses in the park (37.4798, -77.3382).",
     "truckGate": "No clearly visible barrier arm, sliding gate, or staffed checkpoint at the property entrance in the available satellite imagery. The private access road off the SR-895 interchange feeds an open driveway/apron at the building's NW corner. Modern build-to-suit DCs commonly have a gate that may simply not be resolvable here, so this is flagged uncertain.",

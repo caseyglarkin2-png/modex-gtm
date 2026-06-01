@@ -1,13 +1,54 @@
 {
   "name": "General Mills - Great Falls MT (Flour Mill)",
   "type": "Flour Mill",
-  "coords": { "lat": 47.515200, "lng": -111.261600 },
+  "coords": {
+    "lat": 47.5152,
+    "lng": -111.2616
+  },
   "geofences": {
-    "perimeter": { "south": 47.514700, "west": -111.264000, "north": 47.515900, "east": -111.259500 },
-    "truckGate": { "south": 47.515400, "west": -111.262000, "north": 47.515700, "east": -111.261400 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 47.515478,
+          "lng": -111.264072
+        },
+        {
+          "lat": 47.515571,
+          "lng": -111.259952
+        },
+        {
+          "lat": 47.515014,
+          "lng": -111.259883
+        },
+        {
+          "lat": 47.514922,
+          "lng": -111.264003
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 47.514900, "west": -111.260800, "north": 47.515300, "east": -111.259900 }
+      {
+        "ring": [
+          {
+            "lat": 47.515478,
+            "lng": -111.26366
+          },
+          {
+            "lat": 47.515525,
+            "lng": -111.2616
+          },
+          {
+            "lat": 47.515293,
+            "lng": -111.2616
+          },
+          {
+            "lat": 47.515246,
+            "lng": -111.26366
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -17,23 +58,42 @@
     "trailerParkingCapacity": 8,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 12.0,
+    "siteAreaAcres": 12,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@47.515200,-111.261600,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "0-10", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": true, "dropYard": false, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": true,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "truckGate", "scale", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "truckGate",
+    "scale",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Confirmed at 2500 9th Ave N, Great Falls, MT 59401 - an active General Mills flour mill / grain elevator. Roster geocode moved 49m and resolved correctly onto the mill. Verified by web search (Montana Chamber grain-elevator listing, CMac grain-elevator directory) and a 'General Mills' sign visible on the building in Street View.",
     "facilityCharacter": "This is a grain-milling / flour-mill operation, not a truck-yard distribution site. The complex runs E-W along a rail corridor: tall grain-elevator silos on the W, processing/mill buildings in the center, a long warehouse on the E. Freight is predominantly RAIL - covered hopper railcars sit on multiple sidings against the mill and warehouse in both satellite and Street View imagery.",

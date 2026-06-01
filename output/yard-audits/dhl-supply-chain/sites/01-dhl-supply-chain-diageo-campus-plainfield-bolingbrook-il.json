@@ -1,18 +1,84 @@
 {
   "name": "DHL Supply Chain - Diageo Campus - Plainfield/Bolingbrook IL",
   "type": "Dedicated Customer Distribution Center (spirits)",
-  "coords": { "lat": 41.649974, "lng": -88.143696 },
+  "coords": {
+    "lat": 41.649974,
+    "lng": -88.143696
+  },
   "geofences": {
-    "perimeter": { "south": 41.64700, "west": -88.14650, "north": 41.65400, "east": -88.14000 },
-    "truckGate": { "south": 41.65195, "west": -88.14290, "north": 41.65285, "east": -88.14200 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.652847,
+          "lng": -88.144932
+        },
+        {
+          "lat": 41.652026,
+          "lng": -88.141499
+        },
+        {
+          "lat": 41.647511,
+          "lng": -88.143833
+        },
+        {
+          "lat": 41.648332,
+          "lng": -88.147129
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 41.65000, "west": -88.14620, "north": 41.65340, "east": -88.14490 }
+      {
+        "ring": [
+          {
+            "lat": 41.650487,
+            "lng": -88.146031
+          },
+          {
+            "lat": 41.650179,
+            "lng": -88.144795
+          },
+          {
+            "lat": 41.648332,
+            "lng": -88.145893
+          },
+          {
+            "lat": 41.64864,
+            "lng": -88.147129
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.64790, "west": -88.14520, "north": 41.65340, "east": -88.14410 },
-      { "south": 41.64850, "west": -88.14290, "north": 41.65250, "east": -88.14150 }
+      {
+        "ring": [
+          {
+            "lat": 41.651,
+            "lng": -88.146443
+          },
+          {
+            "lat": 41.649871,
+            "lng": -88.142048
+          },
+          {
+            "lat": 41.649358,
+            "lng": -88.142323
+          },
+          {
+            "lat": 41.650487,
+            "lng": -88.146717
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 3,
+        "pano": "CAoSF0NJSE0wb2dLRUlDQWdJQ0UtUF9BMkFF",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 90,
@@ -20,23 +86,39 @@
     "trailerParkingCapacity": 60,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 47.0,
+    "siteAreaAcres": 47,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.649974,-88.143696,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Chain-link cantilever sliding gate across the truck driveway at the NW corner of the property (confirmed in Street View 2019-07). Property fully fenced with chain-link.",
     "guardShack": "No guard booth visible at the gate. A driver-instruction sign reads 'Form single line on right side of driveway / Wait in truck until you reach front of line / Pull up to fence to check in' — indicating remote/kiosk check-in, not a manned booth.",

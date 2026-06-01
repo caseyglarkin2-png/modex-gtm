@@ -1,37 +1,153 @@
 {
   "name": "General Mills - Belvidere IL Distribution Center",
   "type": "Distribution Center",
-  "coords": { "lat": 42.24400, "lng": -88.89750 },
+  "coords": {
+    "lat": 42.244,
+    "lng": -88.8975
+  },
   "geofences": {
-    "perimeter": { "south": 42.24150, "west": -88.90150, "north": 42.24650, "east": -88.89150 },
-    "truckGate": { "south": 42.24440, "west": -88.90020, "north": 42.24500, "east": -88.89940 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.246338,
+          "lng": -88.902581
+        },
+        {
+          "lat": 42.24705,
+          "lng": -88.891732
+        },
+        {
+          "lat": 42.244407,
+          "lng": -88.891046
+        },
+        {
+          "lat": 42.241153,
+          "lng": -88.90162
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.244407,
+          "lng": -88.901895
+        },
+        {
+          "lat": 42.244712,
+          "lng": -88.900659
+        },
+        {
+          "lat": 42.244,
+          "lng": -88.900521
+        },
+        {
+          "lat": 42.243695,
+          "lng": -88.901757
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 42.24470, "west": -88.89880, "north": 42.24560, "east": -88.89540 }
+      {
+        "ring": [
+          {
+            "lat": 42.245525,
+            "lng": -88.898873
+          },
+          {
+            "lat": 42.246338,
+            "lng": -88.892556
+          },
+          {
+            "lat": 42.245627,
+            "lng": -88.892419
+          },
+          {
+            "lat": 42.244813,
+            "lng": -88.898736
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 42.24440, "west": -88.89920, "north": 42.24540, "east": -88.89400 }
+      {
+        "ring": [
+          {
+            "lat": 42.244,
+            "lng": -88.90162
+          },
+          {
+            "lat": 42.244813,
+            "lng": -88.895303
+          },
+          {
+            "lat": 42.244305,
+            "lng": -88.895165
+          },
+          {
+            "lat": 42.243492,
+            "lng": -88.901483
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 39,
+        "pano": "iZ2TRWUdHAdBJblsewyKjA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 39,
+        "pano": "iZ2TRWUdHAdBJblsewyKjA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 60, "trailersVisible": 45, "trailerParkingCapacity": 70,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 113.0,
+    "dockDoorCount": 60,
+    "trailersVisible": 45,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 113,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@42.24400,-88.89750,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dropArea", "scale", "trailersVisible"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dropArea",
+    "scale",
+    "trailersVisible"
+  ],
   "fieldNotes": {
     "location": "Roster coordinates (42.26391,-88.844267, APPROXIMATE) pointed at a residential neighborhood in central Belvidere - wrong. Web research (WIFR, Belvidere Chamber, Growth Dimensions) identified the actual DC at 1210 Irene Rd, on 111 acres at the realigned Irene Rd / US-20 intersection. Locked center 42.2440,-88.8975 by satellite - a single ~1.3M sq ft warehouse confirmed by 2025-08 Street View.",
     "truckGate": "Single private access road leaves US-20 at a signalized intersection and curves NE into the property at its NW corner. Property is a controlled industrial site; satellite imagery is mid-construction (bare-dirt yard) so a gate structure is not yet visible, but a new state-of-the-art automated DC of this scale is treated as a controlled truck entrance.",

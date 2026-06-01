@@ -1,17 +1,115 @@
 {
   "name": "KDP Coffee Roasting & K-Cup Plant - Spartanburg (Moore) SC",
   "type": "Manufacturing - Coffee/K-Cup",
-  "coords": { "lat": 34.870100, "lng": -82.032100 },
+  "coords": {
+    "lat": 34.8701,
+    "lng": -82.0321
+  },
   "geofences": {
-    "perimeter": { "south": 34.86880, "west": -82.03400, "north": 34.87200, "east": -82.03000 },
-    "truckGate": { "south": 34.87165, "west": -82.03190, "north": 34.87210, "east": -82.03120 },
-    "dropYards": [
-      { "south": 34.86950, "west": -82.03210, "north": 34.87170, "east": -82.03060 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.871227,
+          "lng": -82.033542
+        },
+        {
+          "lat": 34.872015,
+          "lng": -82.031757
+        },
+        {
+          "lat": 34.870663,
+          "lng": -82.02901
+        },
+        {
+          "lat": 34.869818,
+          "lng": -82.030795
+        },
+        {
+          "lat": 34.868692,
+          "lng": -82.031757
+        },
+        {
+          "lat": 34.869593,
+          "lng": -82.033473
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.87117,
+          "lng": -82.033611
+        },
+        {
+          "lat": 34.871339,
+          "lng": -82.033267
+        },
+        {
+          "lat": 34.871058,
+          "lng": -82.033061
+        },
+        {
+          "lat": 34.870889,
+          "lng": -82.033405
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 34.86950, "west": -82.03200, "north": 34.87160, "east": -82.03090 }
+      {
+        "ring": [
+          {
+            "lat": 34.871114,
+            "lng": -82.033336
+          },
+          {
+            "lat": 34.871903,
+            "lng": -82.031619
+          },
+          {
+            "lat": 34.871508,
+            "lng": -82.031276
+          },
+          {
+            "lat": 34.87072,
+            "lng": -82.032993
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 34.869199,
+            "lng": -82.0321
+          },
+          {
+            "lat": 34.870325,
+            "lng": -82.03004
+          },
+          {
+            "lat": 34.869987,
+            "lng": -82.029697
+          },
+          {
+            "lat": 34.868861,
+            "lng": -82.031757
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 115,
+        "pano": "ef7C6AEjxd7aP0sPqFqJYw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 115,
+        "pano": "ef7C6AEjxd7aP0sPqFqJYw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 32,
@@ -19,23 +117,39 @@
     "trailerParkingCapacity": 30,
     "truckGateCount": 2,
     "buildingCount": 1,
-    "siteAreaAcres": 27.0,
+    "siteAreaAcres": 27,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.870100,-82.032100,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoors", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoors",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "Building 500, Tyger River Industrial Park (TRIP), 3220 Moore Duncan Hwy, Moore SC. KDP leased ~203,000 sq ft here Sept 2024 for next-gen K-Rounds production ($141M expansion). Confirmed via SC Commerce / Colliers releases and June 2025 Street View showing the spec building with a Colliers leasing sign.",
     "truckGate": "Open driveways at both NW and SE ends of the NE truck court connecting to the internal park road. No barrier arm, sliding/swing gate or checkpoint pinch-point visible in z20 satellite or June 2025 Street View. No perimeter fence around the property.",

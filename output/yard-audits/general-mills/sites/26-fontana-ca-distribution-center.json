@@ -1,17 +1,63 @@
 {
   "name": "General Mills - Fontana CA Distribution Center",
   "type": "Distribution Center",
-  "coords": { "lat": 34.04330, "lng": -117.50810 },
+  "coords": {
+    "lat": 34.0433,
+    "lng": -117.5081
+  },
   "geofences": {
-    "perimeter": { "south": 34.04080, "west": -117.51000, "north": 34.04550, "east": -117.50700 },
-    "truckGate": { "south": 34.04220, "west": -117.50740, "north": 34.04270, "east": -117.50680 },
-    "dropYards": [
-      { "south": 34.04130, "west": -117.50750, "north": 34.04520, "east": -117.50680 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.045803,
+          "lng": -117.511121
+        },
+        {
+          "lat": 34.045803,
+          "lng": -117.507276
+        },
+        {
+          "lat": 34.043755,
+          "lng": -117.507276
+        },
+        {
+          "lat": 34.043755,
+          "lng": -117.511121
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 34.04130, "west": -117.50790, "north": 34.04520, "east": -117.50720 }
+      {
+        "ring": [
+          {
+            "lat": 34.045576,
+            "lng": -117.508649
+          },
+          {
+            "lat": 34.045576,
+            "lng": -117.507276
+          },
+          {
+            "lat": 34.043869,
+            "lng": -117.507276
+          },
+          {
+            "lat": 34.043869,
+            "lng": -117.508649
+          }
+        ]
+      }
     ],
-    "staging": { "south": 34.04200, "west": -117.50940, "north": 34.04500, "east": -117.50820 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 295,
+        "pano": "UfqWCGUZho1XaWJFbyDigw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 55,
@@ -19,7 +65,7 @@
     "trailerParkingCapacity": 80,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 36.0,
+    "siteAreaAcres": 36,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.04330,-117.50810,400m/data=!3m1!1e3",
@@ -48,7 +94,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "remoteGs"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "remoteGs"
+  ],
   "fieldNotes": {
     "siteIdentity": "Confirmed General Mills Fontana distribution center, 11618 Mulberry Ave, Fontana CA 92337 (verified via Yelp, YellowPages, Superpages, Hyster GM plant locations list; red 'General Mills' sign visible at the entrance in Street View). A single very large rectangular DC warehouse (well over 1M sq ft) in the Southwest Industrial Park, running roughly N-S between Mulberry Ave (east) and a row of neighboring warehouses (west).",
     "truckGate": "Truck entrance is a controlled driveway off Mulberry Ave on the building's east side, leading into the dock yard. Satellite (z20/z21) shows a chain-link gate panel across the truck lane plus painted STOP and directional lane arrows on the driveway pavement; Street View (2023-12) confirms a sliding chain-link gate at the property line. The entire Mulberry Ave frontage is otherwise enclosed by a perimeter wall/fence. truckGate = true.",

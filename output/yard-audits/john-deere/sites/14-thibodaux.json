@@ -1,18 +1,60 @@
 {
   "name": "John Deere Thibodaux - Thibodaux LA",
   "type": "Assembly Plant",
-  "coords": { "lat": 29.805705, "lng": -90.829764 },
+  "coords": {
+    "lat": 29.805705,
+    "lng": -90.829764
+  },
   "geofences": {
-    "perimeter": { "south": 29.80380, "west": -90.83020, "north": 29.80950, "east": -90.82500 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.808922,
+          "lng": -90.830176
+        },
+        {
+          "lat": 29.808565,
+          "lng": -90.826468
+        },
+        {
+          "lat": 29.804275,
+          "lng": -90.826743
+        },
+        {
+          "lat": 29.804513,
+          "lng": -90.830451
+        },
+        {
+          "lat": 29.806658,
+          "lng": -90.830725
+        }
+      ]
+    },
     "truckGate": null,
-    "dropYards": [
-      { "south": 29.80450, "west": -90.82820, "north": 29.80620, "east": -90.82650 }
-    ],
+    "dropYards": [],
     "dockAprons": [
-      { "south": 29.80430, "west": -90.82800, "north": 29.80560, "east": -90.82640 },
-      { "south": 29.80760, "west": -90.82850, "north": 29.80900, "east": -90.82650 }
+      {
+        "ring": [
+          {
+            "lat": 29.808088,
+            "lng": -90.830039
+          },
+          {
+            "lat": 29.80785,
+            "lng": -90.826743
+          },
+          {
+            "lat": 29.807254,
+            "lng": -90.826811
+          },
+          {
+            "lat": 29.807492,
+            "lng": -90.830107
+          }
+        ]
+      }
     ],
-    "staging": { "south": 29.80600, "west": -90.82900, "north": 29.80800, "east": -90.82680 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 16,
@@ -20,23 +62,40 @@
     "trailerParkingCapacity": 25,
     "truckGateCount": 0,
     "buildingCount": 8,
-    "siteAreaAcres": 95.0,
+    "siteAreaAcres": 95,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@29.805705,-90.829764,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "guardShack", "dropArea"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "guardShack",
+    "dropArea"
+  ],
   "fieldNotes": {
     "resolvedLocation": "Roster coords (1000 Coulon Rd) landed in a residential neighborhood. Correct facility is at 244 Highway 3266 (Plant 1) / 234 Highway 3266 (Plant 2), resolved to 29.805705,-90.829764 via web research and confirmed by satellite - a large multi-building manufacturing campus (sugarcane harvesters, CAMECO heritage) bordered by sugarcane fields.",
     "truckGate": "Open campus - no controlled truck entrance at the road frontage. The access road off Highway 3266 runs directly between the office building and the manufacturing buildings; Street View (2025-10) shows an open frontage with parking and no barrier arm, gate, or guard booth. An interior fence/drainage line runs along the east edge but no gate confirmed.",

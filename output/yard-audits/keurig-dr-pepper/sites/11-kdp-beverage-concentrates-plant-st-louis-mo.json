@@ -1,39 +1,127 @@
 {
   "name": "KDP Beverage Concentrates Plant - St. Louis MO",
   "type": "Manufacturing - Concentrates/Syrups",
-  "coords": { "lat": 38.685300, "lng": -90.355900 },
+  "coords": {
+    "lat": 38.6853,
+    "lng": -90.3559
+  },
   "geofences": {
-    "perimeter": { "south": 38.683900, "west": -90.357350, "north": 38.687350, "east": -90.354750 },
-    "truckGate": { "south": 38.686350, "west": -90.357050, "north": 38.686850, "east": -90.356550 },
-    "dropYards": [
-      { "south": 38.685000, "west": -90.357350, "north": 38.686600, "east": -90.356900 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.686265,
+          "lng": -90.357273
+        },
+        {
+          "lat": 38.686265,
+          "lng": -90.355557
+        },
+        {
+          "lat": 38.684657,
+          "lng": -90.355076
+        },
+        {
+          "lat": 38.684442,
+          "lng": -90.357273
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 38.685032,
+          "lng": -90.357273
+        },
+        {
+          "lat": 38.685032,
+          "lng": -90.35693
+        },
+        {
+          "lat": 38.68471,
+          "lng": -90.35693
+        },
+        {
+          "lat": 38.68471,
+          "lng": -90.357273
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 38.684900, "west": -90.357050, "north": 38.686100, "east": -90.356700 },
-      { "south": 38.684500, "west": -90.355600, "north": 38.685100, "east": -90.354900 },
-      { "south": 38.684100, "west": -90.356600, "north": 38.684450, "east": -90.355600 }
+      {
+        "ring": [
+          {
+            "lat": 38.686104,
+            "lng": -90.357136
+          },
+          {
+            "lat": 38.686104,
+            "lng": -90.355625
+          },
+          {
+            "lat": 38.685729,
+            "lng": -90.355625
+          },
+          {
+            "lat": 38.685729,
+            "lng": -90.357136
+          }
+        ]
+      }
     ],
-    "staging": { "south": 38.684400, "west": -90.356900, "north": 38.685000, "east": -90.355600 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 151,
+        "pano": "xBxPR2ZGqHYdlAwO7j_-JQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 151,
+        "pano": "xBxPR2ZGqHYdlAwO7j_-JQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 32, "trailersVisible": 18, "trailerParkingCapacity": 30,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 22.0,
+    "dockDoorCount": 32,
+    "trailersVisible": 18,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 22,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@38.685300,-90.355900,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "guardShack"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "guardShack"
+  ],
   "fieldNotes": {
     "location": "Roster coords (8400 N Broadway, 38.7153/-90.2296) were wrong - that point is a residential/mixed area in north St. Louis city. Web research (Yelp, Manta, D&B, IndustryNet) confirms the real plant is Dr Pepper/Seven Up Manufacturing at 8900 Page Ave, Overland, MO 63114 - KDP's beverage concentrate/syrup plant, ~165 employees. Locked center at 38.6853/-90.3559.",
     "truckGate": "Truck access is a private industrial drive off Page Ave on the NW; satellite z21 at the Page Ave junction shows only painted lane arrows, no barrier arm and no guard booth - open access drive shared with the adjacent property. Classified as no controlled gate.",

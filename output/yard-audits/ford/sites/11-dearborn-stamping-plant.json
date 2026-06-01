@@ -1,13 +1,54 @@
 {
   "name": "Ford - Dearborn Stamping Plant, Dearborn MI",
   "type": "Stamping Plant",
-  "coords": { "lat": 42.30680, "lng": -83.16050 },
+  "coords": {
+    "lat": 42.3068,
+    "lng": -83.1605
+  },
   "geofences": {
-    "perimeter": { "south": 42.30420, "west": -83.16330, "north": 42.30920, "east": -83.15780 },
-    "truckGate": { "south": 42.30150, "west": -83.16960, "north": 42.30210, "east": -83.16850 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.311472,
+          "lng": -83.166268
+        },
+        {
+          "lat": 42.311472,
+          "lng": -83.157753
+        },
+        {
+          "lat": 42.305581,
+          "lng": -83.158852
+        },
+        {
+          "lat": 42.306292,
+          "lng": -83.166817
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 42.30620, "west": -83.16280, "north": 42.30740, "east": -83.16200 }
+      {
+        "ring": [
+          {
+            "lat": 42.310253,
+            "lng": -83.165719
+          },
+          {
+            "lat": 42.31005,
+            "lng": -83.161599
+          },
+          {
+            "lat": 42.308831,
+            "lng": -83.161873
+          },
+          {
+            "lat": 42.309034,
+            "lng": -83.165993
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -17,23 +58,42 @@
     "trailerParkingCapacity": 15,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 35.0,
+    "siteAreaAcres": 35,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@42.3068,-83.1605,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": false,
-    "dockDoors": "0-10", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoors", "entryLanes", "exitLanes", "postGateStaging", "shipRcvSeparate"],
+  "uncertainFields": [
+    "dockDoors",
+    "entryLanes",
+    "exitLanes",
+    "postGateStaging",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "site": "Dearborn Stamping Plant (DSP) is an interior building of Ford's 93-building Rouge Center campus. 2.7M sq ft on a ~35-acre footprint; stamps F-150 doors and hoods. Generic geocode (42.3083,-83.1563) lands on the Rouge central road/parking spine, not the building; building center relocated to ~42.3068,-83.1605 via satellite identification of the large single flat-roofed press structure with skylight rows and flanking rail spurs.",
     "truckGate": "The Rouge Center is a fully fenced and guarded campus; the stamping plant is served by the complex's controlled gate system rather than its own street-facing gate. Z19 satellite of the SW Rouge gate (~42.3017,-83.169) shows a canopied checkpoint with guard booth and lane markings; Street View on the Rouge access road shows perimeter fence and a controlled pinch-point.",

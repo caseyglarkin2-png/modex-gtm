@@ -1,40 +1,99 @@
 {
   "name": "DHL Supply Chain - Violet Township DC - Pickerington OH",
   "type": "Distribution Center",
-  "coords": { "lat": 39.846447, "lng": -82.704257 },
+  "coords": {
+    "lat": 39.846447,
+    "lng": -82.704257
+  },
   "geofences": {
-    "perimeter": { "south": 39.84300, "west": -82.70850, "north": 39.84990, "east": -82.70000 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.84729,
+          "lng": -82.70563
+        },
+        {
+          "lat": 39.84729,
+          "lng": -82.703158
+        },
+        {
+          "lat": 39.845604,
+          "lng": -82.703158
+        },
+        {
+          "lat": 39.845604,
+          "lng": -82.70563
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 0, "trailersVisible": 0, "trailerParkingCapacity": 0,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 0.0,
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 0,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.846447,-82.704257,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "NONE", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": true, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": true,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "connectivityIssue",
-    "multipleFacilities", "scale", "dropYard", "multiStep",
-    "dockDoorCount", "trailersVisible", "trailerParkingCapacity",
-    "buildingCount", "siteAreaAcres", "railServed"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "connectivityIssue",
+    "multipleFacilities",
+    "scale",
+    "dropYard",
+    "multiStep",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "buildingCount",
+    "siteAreaAcres",
+    "railServed"
   ],
   "fieldNotes": {
     "location": "Address resolved (8695 Basil Western Road NW, Violet Township / NW Fairfield County, OH; geocode ROOFTOP, moved 20m) but the BUILDING IS NOT VISIBLE in any available imagery. Google satellite for the whole area is pre-development USDA/FPAC farmland tiles, and the latest Street View (Aug 2024) along Basil Western Road shows only cornfields - no construction.",

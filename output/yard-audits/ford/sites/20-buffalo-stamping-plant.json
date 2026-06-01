@@ -1,37 +1,86 @@
 {
   "name": "Ford - Buffalo Stamping Plant, Hamburg NY",
   "type": "Stamping Plant",
-  "coords": { "lat": 42.78650, "lng": -78.84280 },
+  "coords": {
+    "lat": 42.7865,
+    "lng": -78.8428
+  },
   "geofences": {
-    "perimeter": { "south": 42.78250, "west": -78.84720, "north": 42.79000, "east": -78.83850 },
-    "truckGate": { "south": 42.78820, "west": -78.84680, "north": 42.78880, "east": -78.84600 },
-    "dropYards": [
-      { "south": 42.78900, "west": -78.84300, "north": 42.78990, "east": -78.84080 }
-    ],
-    "dockAprons": [
-      { "south": 42.78540, "west": -78.84260, "north": 42.78720, "east": -78.84150 }
-    ],
-    "staging": { "south": 42.78840, "west": -78.84580, "north": 42.78970, "east": -78.84380 }
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.789322,
+          "lng": -78.848842
+        },
+        {
+          "lat": 42.789322,
+          "lng": -78.840053
+        },
+        {
+          "lat": 42.783678,
+          "lng": -78.840603
+        },
+        {
+          "lat": 42.783678,
+          "lng": -78.849392
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 169,
+        "pano": "hxSjV84JQtkXX2eSsh6qdA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 25, "trailersVisible": 8, "trailerParkingCapacity": 30,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 165.0,
+    "dockDoorCount": 25,
+    "trailersVisible": 8,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 165,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@42.78650,-78.84280,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "truckGateCount"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "truckGateCount"
+  ],
   "fieldNotes": {
     "truckGate": "Continuous chain-link perimeter fence rings the property (confirmed in Street View along the Route 5 service road). Main controlled entrance off the NW service road into the front parking/staging lot.",
     "guardShack": "A small structure sits at the building base beside the entrance gate; from highway-distance Street View it could be a guard booth or a utility/electrical structure - cannot confirm staffing, flagged uncertain.",
