@@ -1,17 +1,83 @@
 {
   "name": "North American Parts Center Kentucky - Hebron KY",
   "type": "Parts Procurement & Distribution Hub",
-  "coords": { "lat": 39.05330, "lng": -84.70900 },
+  "coords": {
+    "lat": 39.0533,
+    "lng": -84.709
+  },
   "geofences": {
-    "perimeter": { "south": 39.0500, "west": -84.7115, "north": 39.0560, "east": -84.7050 },
-    "truckGate": { "south": 39.05320, "west": -84.70530, "north": 39.05400, "east": -84.70460 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.055433,
+          "lng": -84.709549
+        },
+        {
+          "lat": 39.05522,
+          "lng": -84.705979
+        },
+        {
+          "lat": 39.054366,
+          "lng": -84.705704
+        },
+        {
+          "lat": 39.051807,
+          "lng": -84.706803
+        },
+        {
+          "lat": 39.050314,
+          "lng": -84.709549
+        },
+        {
+          "lat": 39.052767,
+          "lng": -84.710373
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 39.05060, "west": -84.71080, "north": 39.05280, "east": -84.70780 },
-      { "south": 39.05180, "west": -84.70780, "north": 39.05430, "east": -84.70600 }
+      {
+        "ring": [
+          {
+            "lat": 39.053727,
+            "lng": -84.710099
+          },
+          {
+            "lat": 39.053833,
+            "lng": -84.709
+          },
+          {
+            "lat": 39.050954,
+            "lng": -84.708313
+          },
+          {
+            "lat": 39.05074,
+            "lng": -84.709412
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.05130, "west": -84.71010, "north": 39.05450, "east": -84.70830 },
-      { "south": 39.05230, "west": -84.70720, "north": 39.05480, "east": -84.70620 }
+      {
+        "ring": [
+          {
+            "lat": 39.055006,
+            "lng": -84.709
+          },
+          {
+            "lat": 39.054793,
+            "lng": -84.706253
+          },
+          {
+            "lat": 39.054153,
+            "lng": -84.706391
+          },
+          {
+            "lat": 39.054366,
+            "lng": -84.709137
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -50,7 +116,14 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "shipRcvSeparate"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Large fenced Toyota parts-distribution hub set back from the public road (Aero Pkwy); a controlled access road funnels traffic onto the property. Truck access is gated.",
     "guardShack": "Set true on the strong prior that NAPCK — a critical national Toyota parts hub feeding 12 US PDCs — runs a staffed truck-gate checkpoint. A standalone booth could not be positively isolated in imagery (truck-side access is tree-screened from the public road); flagged uncertain.",

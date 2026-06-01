@@ -1,40 +1,158 @@
 {
   "name": "Honda Manufacturing of Alabama (HMA) - Lincoln AL",
   "type": "Auto Assembly Plant + Engine Plant",
-  "coords": { "lat": 33.61550, "lng": -86.14400 },
+  "coords": {
+    "lat": 33.6155,
+    "lng": -86.144
+  },
   "geofences": {
-    "perimeter": { "south": 33.60950, "west": -86.15300, "north": 33.62350, "east": -86.13450 },
-    "truckGate": { "south": 33.61150, "west": -86.15250, "north": 33.61280, "east": -86.15050 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.620074,
+          "lng": -86.150042
+        },
+        {
+          "lat": 33.620074,
+          "lng": -86.13631
+        },
+        {
+          "lat": 33.610468,
+          "lng": -86.13631
+        },
+        {
+          "lat": 33.610468,
+          "lng": -86.150042
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.61184,
+          "lng": -86.150042
+        },
+        {
+          "lat": 33.61184,
+          "lng": -86.148669
+        },
+        {
+          "lat": 33.610925,
+          "lng": -86.148669
+        },
+        {
+          "lat": 33.610925,
+          "lng": -86.150042
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 33.61250, "west": -86.14600, "north": 33.61500, "east": -86.13900 },
-      { "south": 33.61550, "west": -86.14150, "north": 33.61850, "east": -86.13550 },
-      { "south": 33.61050, "west": -86.14750, "north": 33.61320, "east": -86.14250 }
+      {
+        "ring": [
+          {
+            "lat": 33.620074,
+            "lng": -86.139605
+          },
+          {
+            "lat": 33.619846,
+            "lng": -86.13631
+          },
+          {
+            "lat": 33.61367,
+            "lng": -86.13631
+          },
+          {
+            "lat": 33.613899,
+            "lng": -86.139605
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.61300, "west": -86.14600, "north": 33.61480, "east": -86.14150 },
-      { "south": 33.61600, "west": -86.14250, "north": 33.61780, "east": -86.13800 }
+      {
+        "ring": [
+          {
+            "lat": 33.6155,
+            "lng": -86.149493
+          },
+          {
+            "lat": 33.6155,
+            "lng": -86.145099
+          },
+          {
+            "lat": 33.614356,
+            "lng": -86.145099
+          },
+          {
+            "lat": 33.614356,
+            "lng": -86.149493
+          }
+        ]
+      }
     ],
-    "staging": { "south": 33.61240, "west": -86.14900, "north": 33.61380, "east": -86.14650 }
+    "staging": {
+      "ring": [
+        {
+          "lat": 33.61001,
+          "lng": -86.150042
+        },
+        {
+          "lat": 33.61001,
+          "lng": -86.143451
+        },
+        {
+          "lat": 33.60818,
+          "lng": -86.143451
+        },
+        {
+          "lat": 33.60818,
+          "lng": -86.150042
+        }
+      ]
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 120, "trailersVisible": 280, "trailerParkingCapacity": 380,
-    "truckGateCount": 3, "buildingCount": 10, "siteAreaAcres": 900.0,
+    "dockDoorCount": 120,
+    "trailersVisible": 280,
+    "trailerParkingCapacity": 380,
+    "truckGateCount": 3,
+    "buildingCount": 10,
+    "siteAreaAcres": 900,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.6155,-86.144,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "guardShack", "scale", "multiStep"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "guardShack",
+    "scale",
+    "multiStep"
+  ],
   "fieldNotes": {
     "location": "HMA confirmed via satellite + roster address 1800 Honda Drive. Roster point landed near plant center; the auto+engine campus is the massive multi-building complex centered ~33.6155,-86.1440, with an on-site vehicle test track to the north, SW of Lincoln AL.",
     "scale_of_facility": "HMA is ~4.9 million sq ft on a 1,350-acre property in Talladega County (web research) - the first Honda facility with engine and vehicle assembly in the same complex. Builds Odyssey, Pilot, Passport, Ridgeline plus V6 engines.",

@@ -1,39 +1,139 @@
 {
   "name": "Honda - East Liberty Auto Plant (ELP) - East Liberty OH",
   "type": "Auto Assembly Plant",
-  "coords": { "lat": 40.32850, "lng": -83.54750 },
+  "coords": {
+    "lat": 40.3285,
+    "lng": -83.5475
+  },
   "geofences": {
-    "perimeter": { "south": 40.32300, "west": -83.55350, "north": 40.33450, "east": -83.54050 },
-    "truckGate": { "south": 40.32420, "west": -83.54940, "north": 40.32540, "east": -83.54800 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.334781,
+          "lng": -83.55519
+        },
+        {
+          "lat": 40.331431,
+          "lng": -83.540908
+        },
+        {
+          "lat": 40.325987,
+          "lng": -83.543105
+        },
+        {
+          "lat": 40.325987,
+          "lng": -83.55574
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.329338,
+          "lng": -83.542281
+        },
+        {
+          "lat": 40.329128,
+          "lng": -83.540908
+        },
+        {
+          "lat": 40.328081,
+          "lng": -83.541183
+        },
+        {
+          "lat": 40.328291,
+          "lng": -83.542556
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.32480, "west": -83.54900, "north": 40.32760, "east": -83.54450 },
-      { "south": 40.33000, "west": -83.55180, "north": 40.33280, "east": -83.54720 }
+      {
+        "ring": [
+          {
+            "lat": 40.330594,
+            "lng": -83.544204
+          },
+          {
+            "lat": 40.329966,
+            "lng": -83.541183
+          },
+          {
+            "lat": 40.327453,
+            "lng": -83.541732
+          },
+          {
+            "lat": 40.328081,
+            "lng": -83.544753
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.32980, "west": -83.55150, "north": 40.33150, "east": -83.54820 },
-      { "south": 40.32600, "west": -83.54750, "north": 40.32780, "east": -83.54480 }
+      {
+        "ring": [
+          {
+            "lat": 40.33185,
+            "lng": -83.552993
+          },
+          {
+            "lat": 40.330594,
+            "lng": -83.546127
+          },
+          {
+            "lat": 40.329547,
+            "lng": -83.546401
+          },
+          {
+            "lat": 40.330803,
+            "lng": -83.553268
+          }
+        ]
+      }
     ],
-    "staging": { "south": 40.32440, "west": -83.54820, "north": 40.32580, "east": -83.54600 }
+    "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 70, "trailersVisible": 180, "trailerParkingCapacity": 260,
-    "truckGateCount": 2, "buildingCount": 5, "siteAreaAcres": 560.0,
+    "dockDoorCount": 70,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 260,
+    "truckGateCount": 2,
+    "buildingCount": 5,
+    "siteAreaAcres": 560,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@40.3285,-83.5475,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "guardShack", "scale", "multiStep"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "guardShack",
+    "scale",
+    "multiStep"
+  ],
   "fieldNotes": {
     "location": "East Liberty Auto Plant confirmed via satellite + roster address 11000 SR-347. Roster point landed near plant center; assembly campus centered ~40.3285,-83.5475 with test track to the SW.",
     "truckGate": "Major OEM auto assembly plant on a fully secured private campus - no public Street View reaches the gates (multiple ZERO_RESULTS probes). Controlled truck gates standard; treated true.",

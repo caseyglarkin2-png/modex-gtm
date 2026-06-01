@@ -1,40 +1,151 @@
 {
   "name": "Honda - Anna Engine Plant (AEP) - Anna OH",
   "type": "Engine Plant / EV Battery Pack (IPU) Assembly",
-  "coords": { "lat": 40.37600, "lng": -84.19250 },
+  "coords": {
+    "lat": 40.376,
+    "lng": -84.1925
+  },
   "geofences": {
-    "perimeter": { "south": 40.37050, "west": -84.19980, "north": 40.38100, "east": -84.18650 },
-    "truckGate": { "south": 40.37550, "west": -84.19620, "north": 40.37650, "east": -84.19480 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.379766,
+          "lng": -84.198542
+        },
+        {
+          "lat": 40.379766,
+          "lng": -84.186458
+        },
+        {
+          "lat": 40.371815,
+          "lng": -84.186458
+        },
+        {
+          "lat": 40.371815,
+          "lng": -84.198542
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.379975,
+          "lng": -84.1925
+        },
+        {
+          "lat": 40.379975,
+          "lng": -84.191127
+        },
+        {
+          "lat": 40.379348,
+          "lng": -84.191127
+        },
+        {
+          "lat": 40.379348,
+          "lng": -84.1925
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.37450, "west": -84.19850, "north": 40.37820, "east": -84.19500 },
-      { "south": 40.37250, "west": -84.19450, "north": 40.37550, "east": -84.18900 },
-      { "south": 40.37200, "west": -84.20030, "north": 40.37420, "east": -84.19620 }
+      {
+        "ring": [
+          {
+            "lat": 40.378092,
+            "lng": -84.197993
+          },
+          {
+            "lat": 40.378092,
+            "lng": -84.195247
+          },
+          {
+            "lat": 40.374954,
+            "lng": -84.195247
+          },
+          {
+            "lat": 40.374954,
+            "lng": -84.197993
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.37500, "west": -84.19620, "north": 40.37720, "east": -84.19380 },
-      { "south": 40.37320, "west": -84.19350, "north": 40.37520, "east": -84.18950 }
+      {
+        "ring": [
+          {
+            "lat": 40.374954,
+            "lng": -84.194697
+          },
+          {
+            "lat": 40.374954,
+            "lng": -84.189204
+          },
+          {
+            "lat": 40.373908,
+            "lng": -84.189204
+          },
+          {
+            "lat": 40.373908,
+            "lng": -84.194697
+          }
+        ]
+      }
     ],
-    "staging": { "south": 40.37520, "west": -84.19500, "north": 40.37650, "east": -84.19300 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 185,
+        "pano": "lxvYxxLMWNRJhjdgJBE9kA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 185,
+        "pano": "lxvYxxLMWNRJhjdgJBE9kA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 110, "trailersVisible": 320, "trailerParkingCapacity": 420,
-    "truckGateCount": 3, "buildingCount": 9, "siteAreaAcres": 690.0,
+    "dockDoorCount": 110,
+    "trailersVisible": 320,
+    "trailerParkingCapacity": 420,
+    "truckGateCount": 3,
+    "buildingCount": 9,
+    "siteAreaAcres": 690,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.376,-84.1925,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "guardShack", "scale", "multiStep"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "guardShack",
+    "scale",
+    "multiStep"
+  ],
   "fieldNotes": {
     "location": "Anna Engine Plant confirmed via satellite + roster address 12500 Meranda Road. Roster point landed near plant center; the engine-plant campus is the massive multi-building complex centered ~40.3760,-84.1925, amid farmland N of Anna OH.",
     "scale_of_facility": "AEP is ~2.8 million sq ft - Honda's largest auto engine plant in the world (web research). Now also building EV battery packs (IPU).",

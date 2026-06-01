@@ -1,16 +1,56 @@
 {
   "name": "Glovis America Vehicle Processing Center - West Point GA",
   "type": "Vehicle Processing Center",
-  "coords": { "lat": 32.913000, "lng": -85.131500 },
+  "coords": {
+    "lat": 32.913,
+    "lng": -85.1315
+  },
   "geofences": {
-    "perimeter": { "south": 32.907800, "west": -85.138500, "north": 32.918500, "east": -85.124500 },
-    "truckGate": { "south": 32.910300, "west": -85.138100, "north": 32.911300, "east": -85.136800 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.919917,
+          "lng": -85.137542
+        },
+        {
+          "lat": 32.923375,
+          "lng": -85.121887
+        },
+        {
+          "lat": 32.908388,
+          "lng": -85.11914
+        },
+        {
+          "lat": 32.90493,
+          "lng": -85.134247
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 32.907900, "west": -85.135500, "north": 32.913200, "east": -85.127000 },
-      { "south": 32.913300, "west": -85.137000, "north": 32.916500, "east": -85.130000 }
+      {
+        "ring": [
+          {
+            "lat": 32.917611,
+            "lng": -85.136993
+          },
+          {
+            "lat": 32.918995,
+            "lng": -85.130127
+          },
+          {
+            "lat": 32.908388,
+            "lng": -85.128204
+          },
+          {
+            "lat": 32.906544,
+            "lng": -85.135071
+          }
+        ]
+      }
     ],
     "dockAprons": [],
-    "staging": { "south": 32.910300, "west": -85.137500, "north": 32.912000, "east": -85.134500 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 0,
@@ -18,23 +58,44 @@
     "trailerParkingCapacity": 0,
     "truckGateCount": 1,
     "buildingCount": 6,
-    "siteAreaAcres": 385.0,
+    "siteAreaAcres": 385,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@32.9130,-85.1315,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "NONE", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "NONE",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "multiStep"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "multiStep"
+  ],
   "fieldNotes": {
     "siteSelection": "Roster point (2000 Webb Rd) lands at an open paved parking-lot entrance off Webb Rd at the SW tip of the Kia Georgia (KaGA) / Glovis campus. The Glovis Vehicle Processing Center is the finished-vehicle marshaling/processing operation co-located on the KaGA campus; audited the VPC vehicle-storage yards and rail facility rather than the empty roster pixel. Locked center on the core vehicle lots at 32.9130,-85.1315.",
     "facilityType": "Finished-vehicle Processing Center: no traditional loading docks. Vehicles move by car-carrier truck and rail. dockDoorCount=0 and dockDoors=NONE reflect VPC layout, not a missing count.",

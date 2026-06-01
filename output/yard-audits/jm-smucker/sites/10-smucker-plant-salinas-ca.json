@@ -1,17 +1,84 @@
 {
   "name": "Smucker Plant - Salinas CA",
   "type": "Manufacturing - Fruit/produce processing",
-  "coords": { "lat": 36.65760, "lng": -121.62480 },
+  "coords": {
+    "lat": 36.6576,
+    "lng": -121.6248
+  },
   "geofences": {
-    "perimeter": { "south": 36.65520, "west": -121.62680, "north": 36.65900, "east": -121.62240 },
-    "truckGate": { "south": 36.65700, "west": -121.62620, "north": 36.65760, "east": -121.62540 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.659803,
+          "lng": -121.6248
+        },
+        {
+          "lat": 36.659803,
+          "lng": -121.622328
+        },
+        {
+          "lat": 36.656939,
+          "lng": -121.622328
+        },
+        {
+          "lat": 36.656939,
+          "lng": -121.6248
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 36.65620, "west": -121.62560, "north": 36.65730, "east": -121.62420 }
+      {
+        "ring": [
+          {
+            "lat": 36.658812,
+            "lng": -121.623152
+          },
+          {
+            "lat": 36.658812,
+            "lng": -121.622328
+          },
+          {
+            "lat": 36.657325,
+            "lng": -121.622328
+          },
+          {
+            "lat": 36.657325,
+            "lng": -121.623152
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 36.65640, "west": -121.62540, "north": 36.65760, "east": -121.62460 }
+      {
+        "ring": [
+          {
+            "lat": 36.658426,
+            "lng": -121.624251
+          },
+          {
+            "lat": 36.658426,
+            "lng": -121.623289
+          },
+          {
+            "lat": 36.658041,
+            "lng": -121.623289
+          },
+          {
+            "lat": 36.658041,
+            "lng": -121.624251
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 149,
+        "pano": "kmPYIFGZukPPSGZsW0Sj7g",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 30,
@@ -19,23 +86,42 @@
     "trailerParkingCapacity": 35,
     "truckGateCount": 1,
     "buildingCount": 5,
-    "siteAreaAcres": 22.0,
+    "siteAreaAcres": 22,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@36.65760,-121.62480,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "dropArea", "scale"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoorCount",
+    "dropArea",
+    "scale"
+  ],
   "fieldNotes": {
     "CLOSURE": "IMPORTANT — this is a FORMER J.M. Smucker facility, no longer Smucker-operated. Smucker's Salinas preserves/jelly/ice-cream-topping plant operated 1960/61 and was closed by end of 2005, with production moved to Orrville OH and Memphis TN. The building at 1275 Hansen St is now occupied by Taylor Farms Retail (a fresh-produce company), per the EPA FRS facility registry. The yard audit below describes the current physical site.",
     "location": "Roster gave only city-level 'Salinas, CA 93901' (APPROXIMATE geocode landed in a residential neighborhood ~4 km from the plant). The historic Smucker plant address was resolved to 1275 Hansen St, Salinas via Macrae's Blue Book and confirmed by the EPA FRS registry (now Taylor Farms Retail). Center relocated to that industrial complex.",

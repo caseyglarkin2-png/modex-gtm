@@ -1,12 +1,53 @@
 {
   "name": "Glovis America Vehicle Processing Center - Shreveport LA",
   "type": "Vehicle Processing Center",
-  "coords": { "lat": 32.426875, "lng": -93.920747 },
+  "coords": {
+    "lat": 32.426875,
+    "lng": -93.920747
+  },
   "geofences": {
-    "perimeter": { "south": 32.421500, "west": -93.928500, "north": 32.435500, "east": -93.910000 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.432671,
+          "lng": -93.92624
+        },
+        {
+          "lat": 32.433366,
+          "lng": -93.912507
+        },
+        {
+          "lat": 32.41992,
+          "lng": -93.911958
+        },
+        {
+          "lat": 32.419224,
+          "lng": -93.925691
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [
-      { "south": 32.431500, "west": -93.925500, "north": 32.436500, "east": -93.920500 }
+      {
+        "ring": [
+          {
+            "lat": 32.431512,
+            "lng": -93.919374
+          },
+          {
+            "lat": 32.431975,
+            "lng": -93.912507
+          },
+          {
+            "lat": 32.428034,
+            "lng": -93.912233
+          },
+          {
+            "lat": 32.42757,
+            "lng": -93.919099
+          }
+        ]
+      }
     ],
     "dockAprons": [],
     "staging": null
@@ -17,23 +58,47 @@
     "trailerParkingCapacity": 30,
     "truckGateCount": 1,
     "buildingCount": 8,
-    "siteAreaAcres": 730.0,
+    "siteAreaAcres": 730,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@32.4269,-93.9207,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoors", "dropArea", "scale", "postGateStaging", "fastLaneOpportunity"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoors",
+    "dropArea",
+    "scale",
+    "postGateStaging",
+    "fastLaneOpportunity"
+  ],
   "fieldNotes": {
     "siteSelection": "Roster point (7600 Antoine Blvd) lands directly on the former GM Shreveport Operations plant - a confirmed positive ID via web research (KTBS, KSLA, Louisiana Economic Development): Glovis America operates a vehicle processing and distribution hub here, occupying a 125,000 sqft facility plus ~90 adjoining acres within the much larger ~730-acre former-GM complex. Center kept on the main building.",
     "facilityType": "Vehicle Processing Center inside a repurposed former auto-assembly plant. Glovis outfits imported vehicles with dealer-requested equipment and exterior upgrades. dockDoorCount/dockDoors reflect legacy plant truck docks; vehicle movement is mainly by car-carrier and rail.",

@@ -1,19 +1,81 @@
 {
   "name": "Toyota Motor Manufacturing Mississippi - Blue Springs MS",
   "type": "Vehicle Assembly Plant",
-  "coords": { "lat": 34.3805, "lng": -88.8950 },
+  "coords": {
+    "lat": 34.3805,
+    "lng": -88.895
+  },
   "geofences": {
-    "perimeter": { "south": 34.3760, "west": -88.9010, "north": 34.3870, "east": -88.8840 },
-    "truckGate": { "south": 34.37820, "west": -88.89080, "north": 34.37920, "east": -88.88920 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.386847,
+          "lng": -88.90324
+        },
+        {
+          "lat": 34.388887,
+          "lng": -88.893627
+        },
+        {
+          "lat": 34.379367,
+          "lng": -88.88731
+        },
+        {
+          "lat": 34.374153,
+          "lng": -88.893627
+        },
+        {
+          "lat": 34.378687,
+          "lng": -88.90324
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 34.37700, "west": -88.89150, "north": 34.37980, "east": -88.88800 },
-      { "south": 34.37850, "west": -88.89500, "north": 34.38100, "east": -88.89180 }
+      {
+        "ring": [
+          {
+            "lat": 34.382767,
+            "lng": -88.900493
+          },
+          {
+            "lat": 34.383447,
+            "lng": -88.897747
+          },
+          {
+            "lat": 34.381407,
+            "lng": -88.897197
+          },
+          {
+            "lat": 34.380727,
+            "lng": -88.899944
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 34.37900, "west": -88.89550, "north": 34.38200, "east": -88.89150 },
-      { "south": 34.38050, "west": -88.89850, "north": 34.38300, "east": -88.89550 }
+      {
+        "ring": [
+          {
+            "lat": 34.383673,
+            "lng": -88.897747
+          },
+          {
+            "lat": 34.385033,
+            "lng": -88.892803
+          },
+          {
+            "lat": 34.383673,
+            "lng": -88.892253
+          },
+          {
+            "lat": 34.382313,
+            "lng": -88.897197
+          }
+        ]
+      }
     ],
-    "staging": { "south": 34.37800, "west": -88.89180, "north": 34.38050, "east": -88.88950 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 90,
@@ -21,23 +83,44 @@
     "trailerParkingCapacity": 400,
     "truckGateCount": 2,
     "buildingCount": 5,
-    "siteAreaAcres": 470.0,
+    "siteAreaAcres": 470,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@34.3805,-88.895,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "entryLanes", "exitLanes", "dockDoorCount", "dropArea", "connectivityIssue", "multiStep"],
+  "uncertainFields": [
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "dropArea",
+    "connectivityIssue",
+    "multiStep"
+  ],
   "fieldNotes": {
     "site": "TMMMS — Toyota's Mississippi assembly plant (Corolla, Corolla Cross). Single large central assembly building (one contiguous footprint) plus a few small ancillary structures, set in heavily forested rural NE Mississippi between Tupelo and Pontotoc.",
     "truckGate": "Fully fenced, security-controlled automotive assembly plant with a perimeter loop road. Wide multi-lane internal approach roads with roundabouts lead from the public highway into the campus; truck entrances are controlled checkpoints. truckGate true, high confidence.",

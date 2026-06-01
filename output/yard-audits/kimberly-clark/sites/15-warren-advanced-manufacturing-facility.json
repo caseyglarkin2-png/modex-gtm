@@ -1,38 +1,96 @@
 {
   "name": "K-C Warren Advanced Manufacturing Facility - Warren OH",
   "type": "New advanced manufacturing facility (Huggies, Pull-Ups, Kleenex, Scott, Viva, Kotex, Poise, Depend; ~1.2M sq ft, $800M, under construction)",
-  "coords": { "lat": 41.2235, "lng": -80.8115 },
+  "coords": {
+    "lat": 41.2235,
+    "lng": -80.8115
+  },
   "geofences": {
-    "perimeter": { "south": 41.2120, "west": -80.8175, "north": 41.2330, "east": -80.8055 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.21441,
+          "lng": -80.816993
+        },
+        {
+          "lat": 41.21441,
+          "lng": -80.808204
+        },
+        {
+          "lat": 41.210277,
+          "lng": -80.807105
+        },
+        {
+          "lat": 41.208624,
+          "lng": -80.8115
+        },
+        {
+          "lat": 41.209451,
+          "lng": -80.816993
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 0, "trailersVisible": 0, "trailerParkingCapacity": 0,
-    "truckGateCount": 0, "buildingCount": 0, "siteAreaAcres": 560.0,
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 0,
+    "buildingCount": 0,
+    "siteAreaAcres": 560,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@41.2235,-80.8115,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "NONE", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "multipleFacilities", "scale",
-    "dropYard", "multiStep"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "multipleFacilities",
+    "scale",
+    "dropYard",
+    "multiStep"
   ],
   "fieldNotes": {
     "site": "Facility under construction. Located on the 560-acre former Republic Steel / BDM Steel brownfield off Pine Avenue (Niles River Road), spanning Howland Twp, Warren Twp and the City of Warren. Mahoning River bounds the property on the west; a NE-SW rail line runs through the site.",

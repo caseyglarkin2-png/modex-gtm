@@ -1,17 +1,63 @@
 {
   "name": "Mobis Parts America PDC - Jamesburg NJ",
   "type": "Parts Distribution Center",
-  "coords": { "lat": 40.35270, "lng": -74.47820 },
+  "coords": {
+    "lat": 40.3527,
+    "lng": -74.4782
+  },
   "geofences": {
-    "perimeter": { "south": 40.35130, "west": -74.47990, "north": 40.35480, "east": -74.47650 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.354165,
+          "lng": -74.479573
+        },
+        {
+          "lat": 40.354374,
+          "lng": -74.476964
+        },
+        {
+          "lat": 40.351758,
+          "lng": -74.476689
+        },
+        {
+          "lat": 40.351549,
+          "lng": -74.479299
+        }
+      ]
+    },
     "truckGate": null,
-    "dropYards": [
-      { "south": 40.35370, "west": -74.47830, "north": 40.35470, "east": -74.47680 }
-    ],
+    "dropYards": [],
     "dockAprons": [
-      { "south": 40.35300, "west": -74.47900, "north": 40.35450, "east": -74.47720 }
+      {
+        "ring": [
+          {
+            "lat": 40.354165,
+            "lng": -74.477857
+          },
+          {
+            "lat": 40.354217,
+            "lng": -74.476895
+          },
+          {
+            "lat": 40.352438,
+            "lng": -74.476758
+          },
+          {
+            "lat": 40.352386,
+            "lng": -74.477719
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 80,
+        "pano": "b1-66AS0fWB15IYBN5MdBA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 32,
@@ -24,18 +70,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@40.35270,-74.47820,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "No barrier arm, sliding gate, or checkpoint. The NE truck court is open paved area; the access road from Cranbury South River Rd connects directly into the court with no perimeter fence (confirmed z20/z21 satellite).",
     "guardShack": "No booth structure anywhere at the building or court entrance.",

@@ -1,17 +1,104 @@
 {
   "name": "K-C Paris Plant - Paris TX",
   "type": "Diaper / personal care manufacturing plant (Huggies, Pull-Ups, Little Swimmers, Goodnites)",
-  "coords": { "lat": 33.638900, "lng": -95.591200 },
+  "coords": {
+    "lat": 33.6389,
+    "lng": -95.5912
+  },
   "geofences": {
-    "perimeter": { "south": 33.633500, "west": -95.596500, "north": 33.642500, "east": -95.585500 },
-    "truckGate": { "south": 33.639300, "west": -95.590700, "north": 33.639900, "east": -95.589900 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.643016,
+          "lng": -95.596693
+        },
+        {
+          "lat": 33.643016,
+          "lng": -95.5912
+        },
+        {
+          "lat": 33.640043,
+          "lng": -95.589552
+        },
+        {
+          "lat": 33.636613,
+          "lng": -95.5912
+        },
+        {
+          "lat": 33.636613,
+          "lng": -95.596144
+        },
+        {
+          "lat": 33.640043,
+          "lng": -95.597242
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.637071,
+          "lng": -95.592848
+        },
+        {
+          "lat": 33.637071,
+          "lng": -95.5912
+        },
+        {
+          "lat": 33.635927,
+          "lng": -95.5912
+        },
+        {
+          "lat": 33.635927,
+          "lng": -95.592848
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 33.636500, "west": -95.593800, "north": 33.638600, "east": -95.591200 }
+      {
+        "ring": [
+          {
+            "lat": 33.637757,
+            "lng": -95.597517
+          },
+          {
+            "lat": 33.637757,
+            "lng": -95.592299
+          },
+          {
+            "lat": 33.636156,
+            "lng": -95.592299
+          },
+          {
+            "lat": 33.636156,
+            "lng": -95.597517
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.638000, "west": -95.593200, "north": 33.639400, "east": -95.591400 }
+      {
+        "ring": [
+          {
+            "lat": 33.641187,
+            "lng": -95.596144
+          },
+          {
+            "lat": 33.641187,
+            "lng": -95.5912
+          },
+          {
+            "lat": 33.640043,
+            "lng": -95.5912
+          },
+          {
+            "lat": 33.640043,
+            "lng": -95.596144
+          }
+        ]
+      }
     ],
-    "staging": { "south": 33.638900, "west": -95.591200, "north": 33.639600, "east": -95.589900 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 40,
@@ -19,23 +106,44 @@
     "trailerParkingCapacity": 110,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 200.0,
+    "siteAreaAcres": 200,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.638900,-95.591200,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "truckGate", "scale", "dockDoorCount", "entryExitSeparate", "multiStep"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "truckGate",
+    "scale",
+    "dockDoorCount",
+    "entryExitSeparate",
+    "multiStep"
+  ],
   "fieldNotes": {
     "location": "Roster supplied only a city-level address and a coordinate that landed in downtown Paris (~5 km off). Web research (Paris TX Chamber, Texas TDLR project record, Yelp) confirmed the address as 2466 Farm Road 137 (FM 137), Paris, TX 75460 — K-C's 238-acre Huggies diaper/personal-care plant off SW Loop 286. Identified the building by scanning SW Paris industrial sites: the matching facility is a large enclosed manufacturing complex with employee parking, a circular entrance drive, and a large trailer drop yard at ~33.6389,-95.5912. Several other unrelated industrial sites (a lumber/scrap yard, slab/construction site) were ruled out.",
     "truckGate": "The access road from SW Loop 286 splits into separate inbound/outbound lanes at a pinch-point near the building (~33.6396,-95.5904). The site is perimeter-fenced (chain-link visible in Street View). Small structures/posts cross the lanes at the pinch-point — classed truckGate true, but a hard barrier could not be fully resolved; listed uncertain.",

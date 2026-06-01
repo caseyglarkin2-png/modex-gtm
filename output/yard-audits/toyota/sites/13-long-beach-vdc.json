@@ -1,18 +1,56 @@
 {
   "name": "Toyota Logistics Services Vehicle Distribution Center - Long Beach CA",
   "type": "Vehicle Distribution Center (port processing)",
-  "coords": { "lat": 33.778, "lng": -118.2185 },
+  "coords": {
+    "lat": 33.778,
+    "lng": -118.2185
+  },
   "geofences": {
-    "perimeter": { "south": 33.77330, "west": -118.22330, "north": 33.78230, "east": -118.21470 },
-    "truckGate": { "south": 33.78010, "west": -118.21950, "north": 33.78090, "east": -118.21850 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.780283,
+          "lng": -118.228937
+        },
+        {
+          "lat": 33.780283,
+          "lng": -118.217951
+        },
+        {
+          "lat": 33.771607,
+          "lng": -118.2185
+        },
+        {
+          "lat": 33.771607,
+          "lng": -118.228937
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 33.77700, "west": -118.22330, "north": 33.78200, "east": -118.21850 },
-      { "south": 33.77400, "west": -118.22000, "north": 33.77700, "east": -118.21650 }
+      {
+        "ring": [
+          {
+            "lat": 33.77937,
+            "lng": -118.228388
+          },
+          {
+            "lat": 33.77937,
+            "lng": -118.219049
+          },
+          {
+            "lat": 33.772977,
+            "lng": -118.219049
+          },
+          {
+            "lat": 33.772977,
+            "lng": -118.228388
+          }
+        ]
+      }
     ],
-    "dockAprons": [
-      { "south": 33.77480, "west": -118.21800, "north": 33.77620, "east": -118.21650 }
-    ],
-    "staging": { "south": 33.77620, "west": -118.21800, "north": 33.77780, "east": -118.21620 }
+    "dockAprons": [],
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 14,
@@ -20,23 +58,43 @@
     "trailerParkingCapacity": 60,
     "truckGateCount": 2,
     "buildingCount": 4,
-    "siteAreaAcres": 62.0,
+    "siteAreaAcres": 62,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@33.778,-118.2185,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "dockDoors", "entryLanes", "exitLanes", "truckGateCount", "scale"],
+  "uncertainFields": [
+    "guardShack",
+    "dockDoors",
+    "entryLanes",
+    "exitLanes",
+    "truckGateCount",
+    "scale"
+  ],
   "fieldNotes": {
     "facilityType": "Port of Long Beach vehicle processing & distribution center (TLS, ~180,000-200,000 vehicles/yr). Not a conventional dock warehouse — vehicles arrive by ro/ro ship at the Pier B wharf and by unit train on the rail spurs along the NE edge, are processed (accessory install, car wash, fuel) at the 155,000 sf processing building, and leave on auto-hauler trucks.",
     "truckGate": "Whole property is inside a port-secure fenced perimeter (chain-link fence visible in Street View on every public-road edge; z20 sat shows a continuous fence line with marked lane crossings). Port of Long Beach maritime-security site (TWIC required, USCG oversight, random checks per construction-phase reporting) — controlled gated entry is certain.",

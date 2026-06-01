@@ -1,16 +1,95 @@
 {
   "name": "Pet Food Plant - Topeka KS",
   "type": "Manufacturing/Distribution - Pet food plant + distribution center",
-  "coords": { "lat": 39.087119, "lng": -95.722563 },
+  "coords": {
+    "lat": 39.087119,
+    "lng": -95.722563
+  },
   "geofences": {
-    "perimeter": { "south": 39.08380, "west": -95.72550, "north": 39.09000, "east": -95.71600 },
-    "truckGate": { "south": 39.08400, "west": -95.72450, "north": 39.08440, "east": -95.72360 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.088398,
+          "lng": -95.724898
+        },
+        {
+          "lat": 39.087972,
+          "lng": -95.717894
+        },
+        {
+          "lat": 39.084774,
+          "lng": -95.718168
+        },
+        {
+          "lat": 39.0852,
+          "lng": -95.72531
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 39.08470, "west": -95.71950, "north": 39.08760, "east": -95.71640 },
-      { "south": 39.08680, "west": -95.72330, "north": 39.08830, "east": -95.72050 }
+      {
+        "ring": [
+          {
+            "lat": 39.087865,
+            "lng": -95.720366
+          },
+          {
+            "lat": 39.087759,
+            "lng": -95.717894
+          },
+          {
+            "lat": 39.085413,
+            "lng": -95.718031
+          },
+          {
+            "lat": 39.08552,
+            "lng": -95.720503
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 39.085413,
+            "lng": -95.724486
+          },
+          {
+            "lat": 39.084987,
+            "lng": -95.718718
+          },
+          {
+            "lat": 39.084134,
+            "lng": -95.718855
+          },
+          {
+            "lat": 39.084561,
+            "lng": -95.724623
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.08560, "west": -95.72120, "north": 39.08640, "east": -95.71850 }
+      {
+        "ring": [
+          {
+            "lat": 39.086053,
+            "lng": -95.722563
+          },
+          {
+            "lat": 39.085946,
+            "lng": -95.720366
+          },
+          {
+            "lat": 39.085307,
+            "lng": -95.720503
+          },
+          {
+            "lat": 39.085413,
+            "lng": -95.7227
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -20,23 +99,44 @@
     "trailerParkingCapacity": 180,
     "truckGateCount": 2,
     "buildingCount": 4,
-    "siteAreaAcres": 140.0,
+    "siteAreaAcres": 140,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@39.087119,-95.722563,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": true, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "scale", "truckGate", "dockDoorCount", "entryLanes", "exitLanes", "multiStep"],
+  "uncertainFields": [
+    "guardShack",
+    "scale",
+    "truckGate",
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes",
+    "multiStep"
+  ],
   "fieldNotes": {
     "location": "Roster address was only 'Topeka, KS 66619' with an APPROXIMATE geocode (moved 2646m) landing on south-central Topeka - WRONG location. Web search resolved the real plant to 2200 NW Brickyard Rd, Topeka KS 66618 (Big Heart Pet Brands / J.M. Smucker pet food plant + distribution center, formerly Del Monte). Confirmed coords 39.087119, -95.722563. NOTE: distinct from the nearby Goodyear tire plant at 2000 NW US-24 (the very large multi-section plant ~2km ENE). Building positively identified: large multi-section manufacturing plant joined to a large distribution center, extensive trailer drop yards, ingredient silos along the rail.",
     "truckGate": "Large fenced industrial campus. Internal truck roads and yards are enclosed; truck access comes from the SW via internal roads off NW Brickyard Rd. Street View coverage does not reach the actual truck gate (panos only reach the corporate office building and surrounding rural roads), so the gate type (arm vs sliding gate) is inferred from a fenced campus of this scale - classified true but flagged uncertain. truckGateCount estimated 2.",

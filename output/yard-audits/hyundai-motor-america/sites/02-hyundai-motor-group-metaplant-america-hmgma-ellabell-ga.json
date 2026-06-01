@@ -1,37 +1,111 @@
 {
   "name": "Hyundai Motor Group Metaplant America (HMGMA) - Ellabell GA",
   "type": "Auto Assembly Plant (EV)",
-  "coords": { "lat": 32.162000, "lng": -81.448000 },
+  "coords": {
+    "lat": 32.162,
+    "lng": -81.448
+  },
   "geofences": {
-    "perimeter": { "south": 32.14700, "west": -81.46300, "north": 32.17600, "east": -81.43200 },
-    "truckGate": { "south": 32.17100, "west": -81.45380, "north": 32.17280, "east": -81.45120 },
-    "dropYards": [
-      { "south": 32.15500, "west": -81.45500, "north": 32.15950, "east": -81.45000 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.1713,
+          "lng": -81.461733
+        },
+        {
+          "lat": 32.172695,
+          "lng": -81.445253
+        },
+        {
+          "lat": 32.150839,
+          "lng": -81.441408
+        },
+        {
+          "lat": 32.148978,
+          "lng": -81.458986
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 32.16100, "west": -81.45200, "north": 32.16450, "east": -81.44850 }
+      {
+        "ring": [
+          {
+            "lat": 32.165255,
+            "lng": -81.460634
+          },
+          {
+            "lat": 32.166185,
+            "lng": -81.448
+          },
+          {
+            "lat": 32.16293,
+            "lng": -81.447451
+          },
+          {
+            "lat": 32.162,
+            "lng": -81.460085
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 138,
+        "pano": "Hoi8w6sC-rX_Y1vW-DbE5A",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 70, "trailersVisible": 40, "trailerParkingCapacity": 300,
-    "truckGateCount": 3, "buildingCount": 15, "siteAreaAcres": 2900.0,
+    "dockDoorCount": 70,
+    "trailersVisible": 40,
+    "trailerParkingCapacity": 300,
+    "truckGateCount": 3,
+    "buildingCount": 15,
+    "siteAreaAcres": 2900,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@32.162000,-81.448000,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": true
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": true
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoors", "dropArea", "trailersVisible", "trailerParkingCapacity", "scale", "entryLanes", "exitLanes", "multiStep", "dropYard", "guardShack"],
+  "uncertainFields": [
+    "dockDoors",
+    "dropArea",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "multiStep",
+    "dropYard",
+    "guardShack"
+  ],
   "fieldNotes": {
     "imagery": "Available satellite imagery is from the construction phase (extensive bare earth, partly-finished buildings). HMGMA opened Oct 2024 with 16M+ sq ft of factory floor; the operational dock/trailer layout is not yet fully visible. Counts are best-effort estimates with low confidence — flagged accordingly.",
     "site": "$7.6B EV manufacturing campus in Bryan County GA along I-16, ~25 mi west of Savannah. 16M+ sq ft factory floor across many connected/standalone buildings; 500K vehicles/yr capacity (IONIQ 5 / IONIQ 9 / Kia). The full HMGMA land parcel is ~2,900 acres; perimeter box covers the developed campus.",

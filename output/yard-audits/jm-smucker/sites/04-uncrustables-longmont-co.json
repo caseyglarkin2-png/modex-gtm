@@ -1,17 +1,63 @@
 {
   "name": "Uncrustables - Longmont CO",
   "type": "Manufacturing - Frozen handhelds (Uncrustables)",
-  "coords": { "lat": 40.16400, "lng": -105.05250 },
+  "coords": {
+    "lat": 40.164,
+    "lng": -105.0525
+  },
   "geofences": {
-    "perimeter": { "south": 40.16080, "west": -105.05550, "north": 40.16680, "east": -105.04900 },
-    "truckGate": { "south": 40.16170, "west": -105.05500, "north": 40.16215, "east": -105.05445 },
-    "dropYards": [
-      { "south": 40.16380, "west": -105.05100, "north": 40.16580, "east": -105.04920 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.164735,
+          "lng": -105.054835
+        },
+        {
+          "lat": 40.16442,
+          "lng": -105.050303
+        },
+        {
+          "lat": 40.161691,
+          "lng": -105.050577
+        },
+        {
+          "lat": 40.162006,
+          "lng": -105.055109
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 40.16250, "west": -105.05230, "north": 40.16560, "east": -105.05080 }
+      {
+        "ring": [
+          {
+            "lat": 40.164525,
+            "lng": -105.052912
+          },
+          {
+            "lat": 40.16442,
+            "lng": -105.050303
+          },
+          {
+            "lat": 40.16337,
+            "lng": -105.05044
+          },
+          {
+            "lat": 40.163475,
+            "lng": -105.053049
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 35,
+        "pano": "YEpYuJlLP5xowW3kf3sntQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 45,
@@ -24,18 +70,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@40.164,-105.0525,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "J.M. Smucker Uncrustables plant, Concepts Industrial Park, NW corner of Colorado Highway 119 (the Diagonal) and Fairview Street, east Longmont CO (Weld County). Opened July 2019 ($340-350M, originally 430,000 sq ft; ~240,000 sq ft expansion since brings total to ~674,000 sq ft). The roster address (11555 N 75th St) geocoded to rural land NW of the actual plant; resolved via web research (Concepts Industrial Park, Hwy 119 & Fairview) and satellite — a large white food-plant building with rooftop solar, extensive dock banks and a large trailer drop yard. Confirmed by Street View 2024 showing the building and the Smucker entrance sign on Fairview St.",
     "truckGate": "FALSE — the main entrance off Fairview St is a wide OPEN paved driveway with no barrier arm, sliding gate or checkpoint pinch-point at the road (confirmed in Street View 2024). The truck route runs in from this open driveway and loops around the south side of the building to the dock yard. No controlled gate observed at the property line.",

@@ -1,18 +1,39 @@
 {
   "name": "K-C Mobile Mill - Mobile AL",
   "type": "Tissue / paper manufacturing mill",
-  "coords": { "lat": 30.73530, "lng": -88.05080 },
+  "coords": {
+    "lat": 30.7353,
+    "lng": -88.0508
+  },
   "geofences": {
-    "perimeter": { "south": 30.73000, "west": -88.05650, "north": 30.74100, "east": -88.04650 },
-    "truckGate": { "south": 30.73460, "west": -88.05360, "north": 30.73540, "east": -88.05250 },
-    "dropYards": [
-      { "south": 30.73680, "west": -88.05320, "north": 30.73900, "east": -88.05000 },
-      { "south": 30.73080, "west": -88.05300, "north": 30.73420, "east": -88.05000 }
-    ],
-    "dockAprons": [
-      { "south": 30.73380, "west": -88.05100, "north": 30.73450, "east": -88.04950 }
-    ],
-    "staging": { "south": 30.73400, "west": -88.05300, "north": 30.73520, "east": -88.05050 }
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 30.742854,
+          "lng": -88.053547
+        },
+        {
+          "lat": 30.740494,
+          "lng": -88.046405
+        },
+        {
+          "lat": 30.732467,
+          "lng": -88.046405
+        },
+        {
+          "lat": 30.731523,
+          "lng": -88.052997
+        },
+        {
+          "lat": 30.737661,
+          "lng": -88.054645
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 14,
@@ -20,23 +41,42 @@
     "trailerParkingCapacity": 120,
     "truckGateCount": 2,
     "buildingCount": 6,
-    "siteAreaAcres": 95.0,
+    "siteAreaAcres": 95,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@30.73530,-88.05080,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "scale", "truckGateCount"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "scale",
+    "truckGateCount"
+  ],
   "fieldNotes": {
     "truckGate": "Chain-link perimeter fencing with sliding/rolling gates across the truck access road into the fenced mill yard - confirmed in Street View (2023). Controlled but no staffed booth seen.",
     "guardShack": "No distinct staffed guard booth visible in satellite or Street View; flagged uncertain. Set false.",

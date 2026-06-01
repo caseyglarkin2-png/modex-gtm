@@ -1,17 +1,63 @@
 {
   "name": "Mobis Parts America PDC - South Windsor CT",
   "type": "Parts Distribution Center",
-  "coords": { "lat": 41.85530, "lng": -72.59800 },
+  "coords": {
+    "lat": 41.8553,
+    "lng": -72.598
+  },
   "geofences": {
-    "perimeter": { "south": 41.85380, "west": -72.59920, "north": 41.85670, "east": -72.59650 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.856579,
+          "lng": -72.599579
+        },
+        {
+          "lat": 41.856834,
+          "lng": -72.595116
+        },
+        {
+          "lat": 41.853868,
+          "lng": -72.59491
+        },
+        {
+          "lat": 41.853612,
+          "lng": -72.599373
+        }
+      ]
+    },
     "truckGate": null,
-    "dropYards": [
-      { "south": 41.85420, "west": -72.59770, "north": 41.85600, "east": -72.59700 }
-    ],
+    "dropYards": [],
     "dockAprons": [
-      { "south": 41.85420, "west": -72.59750, "north": 41.85620, "east": -72.59680 }
+      {
+        "ring": [
+          {
+            "lat": 41.855811,
+            "lng": -72.598
+          },
+          {
+            "lat": 41.855863,
+            "lng": -72.597176
+          },
+          {
+            "lat": 41.854686,
+            "lng": -72.597039
+          },
+          {
+            "lat": 41.854635,
+            "lng": -72.597863
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 141,
+        "pano": "HBzIDTiUZ3sdU8L6Qhr6Fg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 36,
@@ -24,18 +70,37 @@
   },
   "mapsUrl": "https://www.google.com/maps/@41.85530,-72.59800,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "No barrier arm, sliding/swing gate, guard booth, or perimeter fence is visible at the Sullivan Ave driveway or the truck-court entrance in z19/z20 satellite, nor from Street View of the public road. A driver-info listing (warehouserating.com) states 'the location has a gate' with first-come-first-served check-in - this may refer to an interior control point not resolvable from imagery, or be outdated. Classified false on the rubric (open driveway with no visible control), flagged medium-confidence.",
     "guardShack": "No booth structure visible anywhere; flagged given the imagery/web discrepancy.",

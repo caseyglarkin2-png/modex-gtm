@@ -1,16 +1,55 @@
 {
   "name": "Coffee Silo Operations - New Orleans LA",
   "type": "Distribution/Processing - Green coffee bean silo operations",
-  "coords": { "lat": 29.9139, "lng": -90.1122 },
+  "coords": {
+    "lat": 29.9139,
+    "lng": -90.1122
+  },
   "geofences": {
-    "perimeter": { "south": 29.91320, "west": -90.11305, "north": 29.91460, "east": -90.11140 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.914852,
+          "lng": -90.113299
+        },
+        {
+          "lat": 29.914852,
+          "lng": -90.111788
+        },
+        {
+          "lat": 29.913662,
+          "lng": -90.111788
+        },
+        {
+          "lat": 29.913662,
+          "lng": -90.113299
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [
-      { "south": 29.91370, "west": -90.11300, "north": 29.91440, "east": -90.11250 }
+      {
+        "ring": [
+          {
+            "lat": 29.914674,
+            "lng": -90.113882
+          },
+          {
+            "lat": 29.914674,
+            "lng": -90.113367
+          },
+          {
+            "lat": 29.91396,
+            "lng": -90.113367
+          },
+          {
+            "lat": 29.91396,
+            "lng": -90.113882
+          }
+        ]
+      }
     ],
-    "dockAprons": [
-      { "south": 29.91345, "west": -90.11260, "north": 29.91385, "east": -90.11175 }
-    ],
+    "dockAprons": [],
     "staging": null
   },
   "yardMetrics": {
@@ -24,18 +63,40 @@
   },
   "mapsUrl": "https://www.google.com/maps/@29.9139,-90.1122,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
-    "dockDoors": "0-10", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": true
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": true,
+    "dockDoors": "0-10",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": true
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "entryLanes", "exitLanes", "scale", "multiStep", "dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "multiStep",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "Silocaf / Smucker Coffee Silo Operations, the world's largest automated green-coffee silo plant, 5240-5242 Coffee Dr. Built ~1992 on the cleared site of the former Public Grain Elevator. Confirmed via satellite: a compact vertical processing building with a row of cylindrical bulk-storage silos along its south edge, conveyors and a blue-roofed annex, sitting inside the Port of New Orleans Napoleon Avenue Container Terminal.",
     "truckGate": "TRUE but indirect — the Silocaf building has no separate fenced perimeter or its own gate. It sits deep inside the secured Port of New Orleans Napoleon Avenue Container Terminal; all truck access is controlled at the port terminal's manned gate. Classified as a controlled (gated) truck entrance at the terminal level. Flagged uncertain because the gate is the port's, not the facility's own.",

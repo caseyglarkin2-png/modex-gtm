@@ -1,18 +1,116 @@
 {
   "name": "K-C Marinette Mill - Marinette WI",
   "type": "Tissue / wipers manufacturing mill (Scott Shop Towels, Wypall, Viva paper towels; ~230 employees)",
-  "coords": { "lat": 45.10375, "lng": -87.65205 },
+  "coords": {
+    "lat": 45.10375,
+    "lng": -87.65205
+  },
   "geofences": {
-    "perimeter": { "south": 45.10095, "west": -87.65560, "north": 45.10650, "east": -87.64870 },
-    "truckGate": { "south": 45.10145, "west": -87.65120, "north": 45.10205, "east": -87.65010 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 45.105882,
+          "lng": -87.655071
+        },
+        {
+          "lat": 45.105689,
+          "lng": -87.650402
+        },
+        {
+          "lat": 45.103265,
+          "lng": -87.649853
+        },
+        {
+          "lat": 45.101036,
+          "lng": -87.650951
+        },
+        {
+          "lat": 45.101036,
+          "lng": -87.654247
+        },
+        {
+          "lat": 45.10375,
+          "lng": -87.654797
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 45.104719,
+          "lng": -87.654797
+        },
+        {
+          "lat": 45.104719,
+          "lng": -87.653973
+        },
+        {
+          "lat": 45.104235,
+          "lng": -87.653973
+        },
+        {
+          "lat": 45.104235,
+          "lng": -87.654797
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 45.10130, "west": -87.65320, "north": 45.10280, "east": -87.65060 }
+      {
+        "ring": [
+          {
+            "lat": 45.102199,
+            "lng": -87.654247
+          },
+          {
+            "lat": 45.102199,
+            "lng": -87.651226
+          },
+          {
+            "lat": 45.101036,
+            "lng": -87.651226
+          },
+          {
+            "lat": 45.101036,
+            "lng": -87.654247
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 45.10250, "west": -87.65340, "north": 45.10320, "east": -87.65040 },
-      { "south": 45.10380, "west": -87.65060, "north": 45.10480, "east": -87.64960 }
+      {
+        "ring": [
+          {
+            "lat": 45.10375,
+            "lng": -87.654247
+          },
+          {
+            "lat": 45.103653,
+            "lng": -87.651226
+          },
+          {
+            "lat": 45.103071,
+            "lng": -87.651226
+          },
+          {
+            "lat": 45.103168,
+            "lng": -87.654247
+          }
+        ]
+      }
     ],
-    "staging": { "south": 45.10135, "west": -87.65060, "north": 45.10210, "east": -87.64950 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 237,
+        "pano": "9K8Yt9YthW8uAdV6uTx2bw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 237,
+        "pano": "9K8Yt9YthW8uAdV6uTx2bw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 28,
@@ -20,7 +118,7 @@
     "trailerParkingCapacity": 70,
     "truckGateCount": 1,
     "buildingCount": 4,
-    "siteAreaAcres": 31.0,
+    "siteAreaAcres": 31,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@45.10375,-87.65205,400m/data=!3m1!1e3",
@@ -49,7 +147,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "shipRcvSeparate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "location": "Roster lat/lng (45.099985,-87.630662, APPROXIMATE, moved 3554m) landed in downtown Marinette - wrong. Web research (Wisconsin DNR Green Tier, Waze, Yelp) gave 3120 Riverside Ave; satellite confirmed the K-C tissue/wipers mill complex on the south bank of the Menominee River. Locked center 45.10375,-87.65205.",
     "truckGate": "Guard booth + chain-link sliding gate sits inside the SE yard controlling access to the trailer drop yard / dock area; entrance off Riverside Ave is a wide open paved apron with truck-routing signage ('ALL TRUCKS') - control point is the interior booth.",

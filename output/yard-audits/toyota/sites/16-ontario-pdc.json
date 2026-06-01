@@ -1,17 +1,84 @@
 {
   "name": "Toyota Parts Distribution Center - Ontario CA",
   "type": "Parts Distribution Center",
-  "coords": { "lat": 34.0330, "lng": -117.5818 },
+  "coords": {
+    "lat": 34.033,
+    "lng": -117.5818
+  },
   "geofences": {
-    "perimeter": { "south": 34.03050, "west": -117.58520, "north": 34.03470, "east": -117.57680 },
-    "truckGate": { "south": 34.03090, "west": -117.58000, "north": 34.03160, "east": -117.57900 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.033,
+          "lng": -117.584547
+        },
+        {
+          "lat": 34.033,
+          "lng": -117.578779
+        },
+        {
+          "lat": 34.030269,
+          "lng": -117.578779
+        },
+        {
+          "lat": 34.030269,
+          "lng": -117.584547
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 34.03060, "west": -117.58420, "north": 34.03200, "east": -117.57800 }
+      {
+        "ring": [
+          {
+            "lat": 34.030269,
+            "lng": -117.584272
+          },
+          {
+            "lat": 34.030269,
+            "lng": -117.579053
+          },
+          {
+            "lat": 34.029358,
+            "lng": -117.579053
+          },
+          {
+            "lat": 34.029358,
+            "lng": -117.584272
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 34.03180, "west": -117.58450, "north": 34.03250, "east": -117.57780 }
+      {
+        "ring": [
+          {
+            "lat": 34.030269,
+            "lng": -117.584272
+          },
+          {
+            "lat": 34.030269,
+            "lng": -117.579053
+          },
+          {
+            "lat": 34.029586,
+            "lng": -117.579053
+          },
+          {
+            "lat": 34.029586,
+            "lng": -117.584272
+          }
+        ]
+      }
     ],
-    "staging": { "south": 34.03090, "west": -117.58000, "north": 34.03180, "east": -117.57850 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 126,
+        "pano": "NdkdjoVqsTnukg8fdsxQrA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 70,
@@ -19,23 +86,43 @@
     "trailerParkingCapacity": 110,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 42.0,
+    "siteAreaAcres": 42,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.033,-117.5818,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "truckGateCount", "siteAreaAcres"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "truckGateCount",
+    "siteAreaAcres"
+  ],
   "fieldNotes": {
     "facilityType": "Toyota North American Parts Center (NAPDC), Toyota's largest US parts distribution facility — ~817,000 sf Class A warehouse at 1425 Toyota Way, Ontario CA (Inland Empire). Stocks 185,000-260,000+ unique service parts; ships ~65,000 order lines/day; an FTZ site.",
     "buildingIdentification": "Resolved to the large white-roof tilt-up warehouse running E-W between Toyota Way (north frontage / employee parking) and the CA-60 freeway (south). The building's scale (~800K sf single mass), modern construction, and the Toyota Way street name match the NAPDC. The roster's APPROXIMATE city-level point sits at this building. Cannot 100% confirm this exact footprint is parcel 1425 vs an immediate neighbor — flagged.",

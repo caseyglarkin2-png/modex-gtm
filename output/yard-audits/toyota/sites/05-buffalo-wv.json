@@ -1,16 +1,79 @@
 {
   "name": "Toyota Motor Manufacturing West Virginia - Buffalo WV",
   "type": "Powertrain Plant (engines/transmissions)",
-  "coords": { "lat": 38.598, "lng": -81.992 },
+  "coords": {
+    "lat": 38.598,
+    "lng": -81.992
+  },
   "geofences": {
-    "perimeter": { "south": 38.591712, "west": -81.997172, "north": 38.604288, "east": -81.986828 },
-    "truckGate": { "south": 38.59475, "west": -81.99560, "north": 38.59585, "east": -81.99420 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.601864,
+          "lng": -81.996395
+        },
+        {
+          "lat": 38.601434,
+          "lng": -81.989253
+        },
+        {
+          "lat": 38.59156,
+          "lng": -81.992
+        },
+        {
+          "lat": 38.591989,
+          "lng": -81.996395
+        },
+        {
+          "lat": 38.598,
+          "lng": -81.997493
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 38.60010, "west": -81.99180, "north": 38.60430, "east": -81.98780 }
+      {
+        "ring": [
+          {
+            "lat": 38.598,
+            "lng": -81.995296
+          },
+          {
+            "lat": 38.597571,
+            "lng": -81.992
+          },
+          {
+            "lat": 38.595424,
+            "lng": -81.992549
+          },
+          {
+            "lat": 38.595853,
+            "lng": -81.995845
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 38.59700, "west": -81.99110, "north": 38.60020, "east": -81.98990 },
-      { "south": 38.59420, "west": -81.99320, "north": 38.59630, "east": -81.99150 }
+      {
+        "ring": [
+          {
+            "lat": 38.598859,
+            "lng": -81.995845
+          },
+          {
+            "lat": 38.598429,
+            "lng": -81.990901
+          },
+          {
+            "lat": 38.597356,
+            "lng": -81.991176
+          },
+          {
+            "lat": 38.597785,
+            "lng": -81.99612
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -20,23 +83,43 @@
     "trailerParkingCapacity": 200,
     "truckGateCount": 1,
     "buildingCount": 6,
-    "siteAreaAcres": 311.0,
+    "siteAreaAcres": 311,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@38.598,-81.992,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "scale", "multiStep", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "scale",
+    "multiStep",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Site is fully chain-link perimeter-fenced (visible in 2024-10 Street View along the public road). Truck/dock operations are inside a controlled fenced perimeter; truck access is gated. Plant-property gate not directly visible in Street View (coverage stops at the public road) so the gate structure type is inferred.",
     "guardShack": "No guard booth could be positively identified in imagery; main employee/visitor entrance from the public road is an open unguarded driveway opening into employee parking. Marked false / remoteGs true as a medium-confidence call - a TPS plant of this scale very likely has controlled truck check-in but the structure is not confirmable from overhead.",

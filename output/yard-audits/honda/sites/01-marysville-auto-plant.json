@@ -1,40 +1,151 @@
 {
   "name": "Honda - Marysville Auto Plant (MAP) - Marysville OH",
   "type": "Auto Assembly Plant",
-  "coords": { "lat": 40.27780, "lng": -83.50600 },
+  "coords": {
+    "lat": 40.2778,
+    "lng": -83.506
+  },
   "geofences": {
-    "perimeter": { "south": 40.26950, "west": -83.51500, "north": 40.28650, "east": -83.49650 },
-    "truckGate": { "south": 40.27520, "west": -83.50620, "north": 40.27620, "east": -83.50480 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.286181,
+          "lng": -83.526325
+        },
+        {
+          "lat": 40.281153,
+          "lng": -83.499408
+        },
+        {
+          "lat": 40.271094,
+          "lng": -83.500507
+        },
+        {
+          "lat": 40.275705,
+          "lng": -83.527973
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.2778,
+          "lng": -83.501056
+        },
+        {
+          "lat": 40.2778,
+          "lng": -83.499408
+        },
+        {
+          "lat": 40.276124,
+          "lng": -83.499408
+        },
+        {
+          "lat": 40.276124,
+          "lng": -83.501056
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.27950, "west": -83.50330, "north": 40.28250, "east": -83.49750 },
-      { "south": 40.27620, "west": -83.50230, "north": 40.27880, "east": -83.49780 },
-      { "south": 40.27300, "west": -83.50320, "north": 40.27520, "east": -83.49850 }
+      {
+        "ring": [
+          {
+            "lat": 40.28241,
+            "lng": -83.526325
+          },
+          {
+            "lat": 40.281991,
+            "lng": -83.522479
+          },
+          {
+            "lat": 40.275705,
+            "lng": -83.523029
+          },
+          {
+            "lat": 40.276124,
+            "lng": -83.526874
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.27680, "west": -83.50420, "north": 40.27880, "east": -83.50100 },
-      { "south": 40.28000, "west": -83.50480, "north": 40.28180, "east": -83.50150 }
+      {
+        "ring": [
+          {
+            "lat": 40.281153,
+            "lng": -83.51369
+          },
+          {
+            "lat": 40.279476,
+            "lng": -83.503253
+          },
+          {
+            "lat": 40.2778,
+            "lng": -83.503803
+          },
+          {
+            "lat": 40.279476,
+            "lng": -83.51424
+          }
+        ]
+      }
     ],
-    "staging": { "south": 40.27500, "west": -83.50350, "north": 40.27640, "east": -83.50100 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 308,
+        "pano": "rkoEBmzMz6gHjpYP3VtZHg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 308,
+        "pano": "rkoEBmzMz6gHjpYP3VtZHg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 90, "trailersVisible": 240, "trailerParkingCapacity": 320,
-    "truckGateCount": 3, "buildingCount": 8, "siteAreaAcres": 720.0,
+    "dockDoorCount": 90,
+    "trailersVisible": 240,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 3,
+    "buildingCount": 8,
+    "siteAreaAcres": 720,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@40.2778,-83.506,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "guardShack", "scale", "multiStep"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "guardShack",
+    "scale",
+    "multiStep"
+  ],
   "fieldNotes": {
     "location": "Marysville Auto Plant confirmed via satellite + roster address 24000 Honda Parkway. Roster point landed on the SE office cluster; the assembly campus proper is the massive multi-building complex centered ~40.2778,-83.5060.",
     "truckGate": "Major OEM auto assembly plant on a fully secured private campus (Honda Parkway is an internal private road). Controlled truck gates are standard and consistent with the gated road network observed; treated as true with medium confidence on exact lane geometry.",

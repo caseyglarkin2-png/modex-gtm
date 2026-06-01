@@ -1,12 +1,78 @@
 {
   "name": "K-C Beech Island Regional Distribution Center - Beech Island SC",
   "type": "Automated regional distribution center (new ~1.1M sq ft, $200M, announced 2025)",
-  "coords": { "lat": 33.42099, "lng": -81.89067 },
+  "coords": {
+    "lat": 33.42099,
+    "lng": -81.89067
+  },
   "geofences": {
-    "perimeter": { "south": 33.41900, "west": -81.89600, "north": 33.42450, "east": -81.88900 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.420417,
+          "lng": -81.897536
+        },
+        {
+          "lat": 33.420417,
+          "lng": -81.894515
+        },
+        {
+          "lat": 33.417322,
+          "lng": -81.893417
+        },
+        {
+          "lat": 33.415259,
+          "lng": -81.893417
+        },
+        {
+          "lat": 33.415259,
+          "lng": -81.897536
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.419615,
+          "lng": -81.895339
+        },
+        {
+          "lat": 33.419615,
+          "lng": -81.894515
+        },
+        {
+          "lat": 33.418927,
+          "lng": -81.894515
+        },
+        {
+          "lat": 33.418927,
+          "lng": -81.895339
+        }
+      ]
+    },
     "dropYards": [],
-    "dockAprons": [],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 33.417781,
+            "lng": -81.897262
+          },
+          {
+            "lat": 33.417781,
+            "lng": -81.89479
+          },
+          {
+            "lat": 33.416978,
+            "lng": -81.89479
+          },
+          {
+            "lat": 33.416978,
+            "lng": -81.897262
+          }
+        ]
+      }
+    ],
     "staging": null
   },
   "yardMetrics": {
@@ -15,28 +81,57 @@
     "trailerParkingCapacity": 0,
     "truckGateCount": 1,
     "buildingCount": 0,
-    "siteAreaAcres": 0.0,
+    "siteAreaAcres": 0,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.42099,-81.89067,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "NONE", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "connectivityIssue",
-    "multipleFacilities", "scale", "dropYard", "multiStep"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "connectivityIssue",
+    "multipleFacilities",
+    "scale",
+    "dropYard",
+    "multiStep"
   ],
   "fieldNotes": {
     "status": "NOT YET BUILT. This is a $200M, ~1.1M sq ft automated regional distribution center announced May 2025 as an expansion of the existing K-C Beech Island plant at 246 Old Jackson Hwy. Per SC Governor's office and Manufacturing Dive, it is projected to be completed and operational in Q2 2027 and will add ~150 jobs.",

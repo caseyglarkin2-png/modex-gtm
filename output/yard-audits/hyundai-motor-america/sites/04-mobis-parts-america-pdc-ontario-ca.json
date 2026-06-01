@@ -1,37 +1,136 @@
 {
   "name": "Mobis Parts America PDC - Ontario CA",
   "type": "Parts Distribution Center",
-  "coords": { "lat": 34.040200, "lng": -117.553100 },
+  "coords": {
+    "lat": 34.0402,
+    "lng": -117.5531
+  },
   "geofences": {
-    "perimeter": { "south": 34.03790, "west": -117.55620, "north": 34.04220, "east": -117.55170 },
-    "truckGate": { "south": 34.03850, "west": -117.55290, "north": 34.03930, "east": -117.55210 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.040769,
+          "lng": -117.55516
+        },
+        {
+          "lat": 34.040769,
+          "lng": -117.55104
+        },
+        {
+          "lat": 34.037014,
+          "lng": -117.55104
+        },
+        {
+          "lat": 34.037014,
+          "lng": -117.55516
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.038834,
+          "lng": -117.555297
+        },
+        {
+          "lat": 34.038834,
+          "lng": -117.554748
+        },
+        {
+          "lat": 34.038379,
+          "lng": -117.554748
+        },
+        {
+          "lat": 34.038379,
+          "lng": -117.555297
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 34.03850, "west": -117.55520, "north": 34.03960, "east": -117.55230 }
+      {
+        "ring": [
+          {
+            "lat": 34.038493,
+            "lng": -117.555023
+          },
+          {
+            "lat": 34.038493,
+            "lng": -117.551177
+          },
+          {
+            "lat": 34.037696,
+            "lng": -117.551177
+          },
+          {
+            "lat": 34.037696,
+            "lng": -117.555023
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 34.03880, "west": -117.55520, "north": 34.03970, "east": -117.55230 }
+      {
+        "ring": [
+          {
+            "lat": 34.038948,
+            "lng": -117.555023
+          },
+          {
+            "lat": 34.038948,
+            "lng": -117.551177
+          },
+          {
+            "lat": 34.038607,
+            "lng": -117.551177
+          },
+          {
+            "lat": 34.038607,
+            "lng": -117.555023
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 46, "trailersVisible": 38, "trailerParkingCapacity": 55,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 14.5,
+    "dockDoorCount": 46,
+    "trailersVisible": 38,
+    "trailerParkingCapacity": 55,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 14.5,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.040200,-117.553100,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "site": "Mobis Parts America West Coast PDC at 1900 S Rochester Ave, Ontario CA — confirmed by web research (BBB, D&B, Panjiva). Large single warehouse building in a multi-tenant Inland Empire industrial park bordered by a freeway on the east; other tenants share the complex (e.g. 'Spartan' signage on the building).",
     "truckGate": "false — the truck court / dock yard runs off S Rochester Ave via an OPEN driveway. Street View (2021-02, 2025-01) shows no barrier arm, no sliding gate, and no checkpoint pinch-point at the road. Standard open multi-tenant business-park access.",

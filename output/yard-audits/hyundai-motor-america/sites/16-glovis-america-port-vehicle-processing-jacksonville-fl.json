@@ -1,15 +1,63 @@
 {
   "name": "Glovis America Port Vehicle Processing - Jacksonville FL",
   "type": "Port / Vehicle Import Processing Center",
-  "coords": { "lat": 30.346000, "lng": -81.625000 },
+  "coords": {
+    "lat": 30.346,
+    "lng": -81.625
+  },
   "geofences": {
-    "perimeter": { "south": 30.34280, "west": -81.62870, "north": 30.34960, "east": -81.62120 },
-    "truckGate": { "south": 30.34510, "west": -81.62760, "north": 30.34560, "east": -81.62710 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 30.349792,
+          "lng": -81.629395
+        },
+        {
+          "lat": 30.35074,
+          "lng": -81.621979
+        },
+        {
+          "lat": 30.344222,
+          "lng": -81.621979
+        },
+        {
+          "lat": 30.34363,
+          "lng": -81.62912
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 30.34330, "west": -81.62830, "north": 30.34920, "east": -81.62300 }
+      {
+        "ring": [
+          {
+            "lat": 30.348607,
+            "lng": -81.628845
+          },
+          {
+            "lat": 30.349081,
+            "lng": -81.625687
+          },
+          {
+            "lat": 30.346593,
+            "lng": -81.625412
+          },
+          {
+            "lat": 30.346119,
+            "lng": -81.628571
+          }
+        ]
+      }
     ],
     "dockAprons": [],
-    "staging": { "south": 30.34530, "west": -81.62720, "north": 30.34600, "east": -81.62620 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 155,
+        "pano": "cos-MVJ7dKR649h3UsTaEA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 16,
@@ -17,23 +65,44 @@
     "trailerParkingCapacity": 6000,
     "truckGateCount": 1,
     "buildingCount": 6,
-    "siteAreaAcres": 70.0,
+    "siteAreaAcres": 70,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@30.346000,-81.625000,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoors", "railServed", "entryLanes", "exitLanes", "trailerParkingCapacity", "siteAreaAcres", "multipleFacilities"],
+  "uncertainFields": [
+    "dockDoors",
+    "railServed",
+    "entryLanes",
+    "exitLanes",
+    "trailerParkingCapacity",
+    "siteAreaAcres",
+    "multipleFacilities"
+  ],
   "fieldNotes": {
     "facility": "Roster address 2064 E 11th St is a small office building in a residential block, not the operational yard. The Glovis Jacksonville port vehicle-processing operation runs out of the JAXPORT Talleyrand Marine Terminal auto-import complex ~0.4 mi south. Talleyrand handles auto imports for multiple processors; the audited yard is the auto-import vehicle processing area at ~30.346,-81.625.",
     "truckGate": "Confirmed truck gate in Street View (2022 + 2025): a sliding chain-link gate across the truck lane with a check-in lane, STOP sign and overhead message board. Gate signage references 'Talleyrand' / 'Southeast Toyota'.",

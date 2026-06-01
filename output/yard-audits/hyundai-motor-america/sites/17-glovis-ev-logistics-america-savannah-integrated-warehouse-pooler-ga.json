@@ -1,9 +1,31 @@
 {
   "name": "Glovis EV Logistics America - Savannah Integrated Warehouse (Pooler GA)",
   "type": "Distribution Warehouse / Logistics Hub",
-  "coords": { "lat": 32.088338, "lng": -81.262896 },
+  "coords": {
+    "lat": 32.088338,
+    "lng": -81.262896
+  },
   "geofences": {
-    "perimeter": { "south": 32.08654, "west": -81.26502, "north": 32.09014, "east": -81.26077 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.088687,
+          "lng": -81.263308
+        },
+        {
+          "lat": 32.088687,
+          "lng": -81.262484
+        },
+        {
+          "lat": 32.087989,
+          "lng": -81.262484
+        },
+        {
+          "lat": 32.087989,
+          "lng": -81.263308
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [],
@@ -15,28 +37,58 @@
     "trailerParkingCapacity": 0,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 0.0,
+    "siteAreaAcres": 0,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.088338,-81.262896,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "NONE", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural", "connectivityIssue",
-    "multipleFacilities", "scale", "dropYard", "multiStep"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "urbanRural",
+    "connectivityIssue",
+    "multipleFacilities",
+    "scale",
+    "dropYard",
+    "multiStep"
   ],
   "fieldNotes": {
     "UNRESOLVED": "Facility could not be located. The Glovis EV Logistics America 'Savannah integrated warehouse' opened only in Q1 2026; the two primary sources (Seoul Economic Daily 2026-04-15, Korea Herald) place it only in 'Savannah, Georgia' with no street address, industrial park, or highway named. The roster itself records 'exact street address not publicly disclosed - city/ZIP only' and the geocode precision is APPROXIMATE (Pooler ZIP 31322 centroid).",

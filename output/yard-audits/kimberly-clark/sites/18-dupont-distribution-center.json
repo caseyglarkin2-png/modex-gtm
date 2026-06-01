@@ -1,38 +1,151 @@
 {
   "name": "K-C DuPont Distribution Center (KCDC) - DuPont WA",
   "type": "Distribution center",
-  "coords": { "lat": 47.11280, "lng": -122.63800 },
+  "coords": {
+    "lat": 47.1128,
+    "lng": -122.638
+  },
   "geofences": {
-    "perimeter": { "south": 47.10930, "west": -122.64000, "north": 47.11520, "east": -122.63560 },
-    "truckGate": { "south": 47.10960, "west": -122.63800, "north": 47.11010, "east": -122.63680 },
-    "dropYards": [
-      { "south": 47.11080, "west": -122.63660, "north": 47.11440, "east": -122.63560 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 47.115043,
+          "lng": -122.641571
+        },
+        {
+          "lat": 47.115043,
+          "lng": -122.636901
+        },
+        {
+          "lat": 47.109248,
+          "lng": -122.636901
+        },
+        {
+          "lat": 47.109248,
+          "lng": -122.641571
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 47.110183,
+          "lng": -122.641571
+        },
+        {
+          "lat": 47.110183,
+          "lng": -122.640747
+        },
+        {
+          "lat": 47.109716,
+          "lng": -122.640747
+        },
+        {
+          "lat": 47.109716,
+          "lng": -122.641571
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 47.11080, "west": -122.63700, "north": 47.11460, "east": -122.63630 },
-      { "south": 47.11080, "west": -122.63960, "north": 47.11460, "east": -122.63890 }
+      {
+        "ring": [
+          {
+            "lat": 47.114669,
+            "lng": -122.641296
+          },
+          {
+            "lat": 47.114669,
+            "lng": -122.640472
+          },
+          {
+            "lat": 47.109435,
+            "lng": -122.640472
+          },
+          {
+            "lat": 47.109435,
+            "lng": -122.641296
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 47.114669,
+            "lng": -122.638
+          },
+          {
+            "lat": 47.114669,
+            "lng": -122.637176
+          },
+          {
+            "lat": 47.109435,
+            "lng": -122.637176
+          },
+          {
+            "lat": 47.109435,
+            "lng": -122.638
+          }
+        ]
+      }
     ],
-    "staging": { "south": 47.10960, "west": -122.63840, "north": 47.11080, "east": -122.63700 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 3,
+        "pano": "9UlqqaStsJ1fbYSbAYBsGw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 3,
+        "pano": "9UlqqaStsJ1fbYSbAYBsGw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 130, "trailersVisible": 90, "trailerParkingCapacity": 130,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 54.0,
+    "dockDoorCount": 130,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 130,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 54,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@47.11280,-122.63800,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes", "urbanRural"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes",
+    "urbanRural"
+  ],
   "fieldNotes": {
     "location": "Confirmed: 1205 Wharf Rd, DuPont WA - 'Building 1' of The Cubes at DuPont, a 747,488 sq ft Class-A distribution facility 100% leased to Kimberly-Clark (CRG / The Registry). The Cubes is a 1.6M sq ft, 3-building park on the former Intel campus / DuPont Corporate Center in the Northwest Landing community. Building 1 is the largest of the three buildings - the big N-S cross-dock structure at ~47.1128,-122.6380. Roster ROOFTOP coords moved 1879 m and landed near the cluster center; corrected to Building 1.",
     "truckGate": "TRUE - current (2026 Maxar) z20 satellite of the south truck-court entrance clearly shows a guard booth standing in the middle of the truck driveway with traffic lanes splitting around it (inbound lanes marked with arrows) and yellow-hatched median islands. Facility directory listings independently state 'Check in is required at the security guard for appointments only.'",

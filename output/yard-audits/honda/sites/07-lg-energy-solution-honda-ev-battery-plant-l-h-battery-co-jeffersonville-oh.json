@@ -1,17 +1,116 @@
 {
   "name": "LG Energy Solution-Honda EV Battery Plant (L-H Battery Co.) - Jeffersonville OH",
   "type": "EV Battery Cell Plant (JV)",
-  "coords": { "lat": 39.62480, "lng": -83.57000 },
+  "coords": {
+    "lat": 39.6248,
+    "lng": -83.57
+  },
   "geofences": {
-    "perimeter": { "south": 39.61650, "west": -83.58200, "north": 39.63050, "east": -83.56300 },
-    "truckGate": { "south": 39.62200, "west": -83.56720, "north": 39.62320, "east": -83.56560 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.627762,
+          "lng": -83.57824
+        },
+        {
+          "lat": 39.627762,
+          "lng": -83.563958
+        },
+        {
+          "lat": 39.61803,
+          "lng": -83.563958
+        },
+        {
+          "lat": 39.61803,
+          "lng": -83.57824
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.625646,
+          "lng": -83.57824
+        },
+        {
+          "lat": 39.625646,
+          "lng": -83.577141
+        },
+        {
+          "lat": 39.6248,
+          "lng": -83.577141
+        },
+        {
+          "lat": 39.6248,
+          "lng": -83.57824
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 39.62300, "west": -83.56700, "north": 39.62650, "east": -83.56350 }
+      {
+        "ring": [
+          {
+            "lat": 39.623108,
+            "lng": -83.57769
+          },
+          {
+            "lat": 39.623108,
+            "lng": -83.565605
+          },
+          {
+            "lat": 39.620992,
+            "lng": -83.565605
+          },
+          {
+            "lat": 39.620992,
+            "lng": -83.57769
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 39.620146,
+            "lng": -83.57769
+          },
+          {
+            "lat": 39.620146,
+            "lng": -83.567253
+          },
+          {
+            "lat": 39.618453,
+            "lng": -83.567253
+          },
+          {
+            "lat": 39.618453,
+            "lng": -83.57769
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.62280, "west": -83.56800, "north": 39.62680, "east": -83.56620 }
+      {
+        "ring": [
+          {
+            "lat": 39.624377,
+            "lng": -83.577141
+          },
+          {
+            "lat": 39.624377,
+            "lng": -83.565605
+          },
+          {
+            "lat": 39.623319,
+            "lng": -83.565605
+          },
+          {
+            "lat": 39.623319,
+            "lng": -83.577141
+          }
+        ]
+      }
     ],
-    "staging": { "south": 39.61850, "west": -83.57500, "north": 39.62150, "east": -83.56900 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 35,
@@ -19,23 +118,55 @@
     "trailerParkingCapacity": 120,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 290.0,
+    "siteAreaAcres": 290,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.6248,-83.57,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "low",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging", "drivewayLong", "entryLanes", "exitLanes", "fastLaneOpportunity", "dockDoors", "dropArea", "shipRcvSeparate", "dropYard", "multiStep", "scale", "dockDoorCount", "trailersVisible", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "dropYard",
+    "multiStep",
+    "scale",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "_status": "Facility is a brand-new EV battery cell plant still under construction in available satellite imagery (winter/snowy Maxar capture). Per news the plant was 'nearly complete' as of Feb 2026; final truck-yard infrastructure - gates, guard booth, dock build-out, trailer lots - is not yet fully formed or is obscured by snow and construction laydown. Most operational fields are best-effort inference and flagged uncertain.",
     "truckGate": "A $3.5B EV cell plant with controlled-access security; the property is set behind a roundabout main entrance off the access road and ringed by buffer land. A controlled truck gate is expected but the specific structure is not resolvable in construction-phase imagery.",

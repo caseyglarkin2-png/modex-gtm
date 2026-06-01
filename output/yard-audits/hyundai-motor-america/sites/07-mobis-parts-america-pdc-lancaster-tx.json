@@ -1,19 +1,84 @@
 {
   "name": "Mobis Parts America PDC - Lancaster TX",
   "type": "Parts Distribution Center",
-  "coords": { "lat": 32.64030, "lng": -96.80970 },
+  "coords": {
+    "lat": 32.6403,
+    "lng": -96.8097
+  },
   "geofences": {
-    "perimeter": { "south": 32.63870, "west": -96.81140, "north": 32.64180, "east": -96.80820 },
-    "truckGate": { "south": 32.63868, "west": -96.81095, "north": 32.63915, "east": -96.81055 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.641456,
+          "lng": -96.810387
+        },
+        {
+          "lat": 32.641456,
+          "lng": -96.808121
+        },
+        {
+          "lat": 32.638681,
+          "lng": -96.808121
+        },
+        {
+          "lat": 32.638681,
+          "lng": -96.810387
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 32.63920, "west": -96.81140, "north": 32.64160, "east": -96.81020 },
-      { "south": 32.63920, "west": -96.80910, "north": 32.64160, "east": -96.80820 }
+      {
+        "ring": [
+          {
+            "lat": 32.641341,
+            "lng": -96.808876
+          },
+          {
+            "lat": 32.641341,
+            "lng": -96.808121
+          },
+          {
+            "lat": 32.638854,
+            "lng": -96.808121
+          },
+          {
+            "lat": 32.638854,
+            "lng": -96.808876
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 32.63930, "west": -96.81030, "north": 32.64150, "east": -96.80990 },
-      { "south": 32.63930, "west": -96.80940, "north": 32.64150, "east": -96.80905 }
+      {
+        "ring": [
+          {
+            "lat": 32.641283,
+            "lng": -96.810318
+          },
+          {
+            "lat": 32.641283,
+            "lng": -96.809975
+          },
+          {
+            "lat": 32.638912,
+            "lng": -96.809975
+          },
+          {
+            "lat": 32.638912,
+            "lng": -96.810318
+          }
+        ]
+      }
     ],
-    "staging": { "south": 32.63868, "west": -96.81100, "north": 32.63915, "east": -96.81050 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 131,
+        "pano": "UB7-WZaj7tFYQFwT6Y3Gew",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 90,
@@ -26,18 +91,35 @@
   },
   "mapsUrl": "https://www.google.com/maps/@32.64030,-96.80970,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Black steel cantilever sliding gate across the truck driveway, confirmed in Feb-2025 Street View and z21 satellite. Property is fully enclosed by an ornamental black steel perimeter fence.",
     "guardShack": "No staffed booth at the gate. The only small structure beside the gate (z21 satellite) is a utility/electrical pad, not a guard booth.",

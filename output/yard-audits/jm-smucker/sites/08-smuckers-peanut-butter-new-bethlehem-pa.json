@@ -1,17 +1,42 @@
 {
   "name": "Smucker's Peanut Butter - New Bethlehem PA",
   "type": "Manufacturing - Peanut butter / spreads",
-  "coords": { "lat": 41.00290, "lng": -79.32600 },
+  "coords": {
+    "lat": 41.0029,
+    "lng": -79.326
+  },
   "geofences": {
-    "perimeter": { "south": 41.00240, "west": -79.32690, "north": 41.00375, "east": -79.32505 },
-    "truckGate": { "south": 41.00320, "west": -79.32580, "north": 41.00355, "east": -79.32525 },
-    "dropYards": [
-      { "south": 41.00300, "west": -79.32575, "north": 41.00345, "east": -79.32520 }
-    ],
-    "dockAprons": [
-      { "south": 41.00295, "west": -79.32600, "north": 41.00330, "east": -79.32545 }
-    ],
-    "staging": null
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.003055,
+          "lng": -79.326755
+        },
+        {
+          "lat": 41.003004,
+          "lng": -79.325657
+        },
+        {
+          "lat": 41.002589,
+          "lng": -79.325691
+        },
+        {
+          "lat": 41.002641,
+          "lng": -79.32679
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 13,
+        "pano": "PsSgbcDif_mINJxziESKrA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 6,
@@ -19,23 +44,39 @@
     "trailerParkingCapacity": 10,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 3.0,
+    "siteAreaAcres": 3,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.00290,-79.32600,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "0-10", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "multipleFacilities"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "multipleFacilities"
+  ],
   "fieldNotes": {
     "truckGate": "Small old plant integrated into a residential neighborhood. Truck/dock yard reached by an open driveway off the residential street with no barrier arm, gate, or checkpoint. Orange fencing seen in Street View is temporary construction fencing, not a controlled perimeter.",
     "guardShack": "No guard booth at any plant access point; only a small free-standing Smucker monument sign at the driveway.",

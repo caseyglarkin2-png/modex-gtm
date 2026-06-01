@@ -1,18 +1,67 @@
 {
   "name": "R.W. Knudsen Juices - Chico CA",
   "type": "Manufacturing - Juices/beverages (Knudsen)",
-  "coords": { "lat": 39.70670, "lng": -121.80250 },
+  "coords": {
+    "lat": 39.7067,
+    "lng": -121.8025
+  },
   "geofences": {
-    "perimeter": { "south": 39.70470, "west": -121.80560, "north": 39.70850, "east": -121.80020 },
-    "truckGate": { "south": 39.70475, "west": -121.80450, "north": 39.70520, "east": -121.80390 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.707334,
+          "lng": -121.804148
+        },
+        {
+          "lat": 39.707123,
+          "lng": -121.800303
+        },
+        {
+          "lat": 39.70501,
+          "lng": -121.800577
+        },
+        {
+          "lat": 39.70501,
+          "lng": -121.803873
+        },
+        {
+          "lat": 39.706277,
+          "lng": -121.804697
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 39.70740, "west": -121.80600, "north": 39.70850, "east": -121.80420 }
+      {
+        "ring": [
+          {
+            "lat": 39.706911,
+            "lng": -121.803873
+          },
+          {
+            "lat": 39.706806,
+            "lng": -121.8025
+          },
+          {
+            "lat": 39.705432,
+            "lng": -121.802637
+          },
+          {
+            "lat": 39.705538,
+            "lng": -121.804011
+          }
+        ]
+      }
     ],
-    "dockAprons": [
-      { "south": 39.70590, "west": -121.80360, "north": 39.70680, "east": -121.80270 },
-      { "south": 39.70680, "west": -121.80200, "north": 39.70740, "east": -121.80120 }
-    ],
-    "staging": { "south": 39.70560, "west": -121.80420, "north": 39.70620, "east": -121.80340 }
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 73,
+        "pano": "68AkpctmBbADCqyljmxJSg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 18,
@@ -20,23 +69,42 @@
     "trailerParkingCapacity": 90,
     "truckGateCount": 1,
     "buildingCount": 6,
-    "siteAreaAcres": 38.0,
+    "siteAreaAcres": 38,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.70670,-121.80250,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "scale"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "scale"
+  ],
   "fieldNotes": {
     "DIVESTITURE": "IMPORTANT — this facility is NO LONGER a J.M. Smucker site. Smucker sold its natural/organic beverage and grains businesses (incl. R.W. Knudsen and the Chico plant) to Nexus Capital Management for $110M; the deal closed Jan 31, 2022. The plant now operates under the TruRoots Company / R.W. Knudsen Family. The entrance sign in Street View reads TruRoots Shipping/Receiving, 29 Speedway.",
     "truckGate": "Truck entrance is a long open driveway off Speedway Ave with a TruRoots Shipping/Receiving sign. No barrier arm or sliding gate is clearly visible at the entrance; trees partly obscure the driveway end. Some internal fenced enclosures exist on the property. Classified false (open) but flagged uncertain.",

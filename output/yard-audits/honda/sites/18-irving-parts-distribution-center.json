@@ -1,17 +1,108 @@
 {
   "name": "American Honda - Irving Parts Distribution Center - Irving TX",
   "type": "Parts Distribution Center",
-  "coords": { "lat": 32.92215, "lng": -97.00910 },
+  "coords": {
+    "lat": 32.92215,
+    "lng": -97.0091
+  },
   "geofences": {
-    "perimeter": { "south": 32.92065, "west": -97.01010, "north": 32.92410, "east": -97.00790 },
-    "truckGate": { "south": 32.92160, "west": -97.00845, "north": 32.92195, "east": -97.00805 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.923303,
+          "lng": -97.010199
+        },
+        {
+          "lat": 32.923303,
+          "lng": -97.008276
+        },
+        {
+          "lat": 32.921228,
+          "lng": -97.008276
+        },
+        {
+          "lat": 32.921228,
+          "lng": -97.010199
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.921689,
+          "lng": -97.010199
+        },
+        {
+          "lat": 32.921689,
+          "lng": -97.009787
+        },
+        {
+          "lat": 32.921401,
+          "lng": -97.009787
+        },
+        {
+          "lat": 32.921401,
+          "lng": -97.010199
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 32.92300, "west": -97.00900, "north": 32.92375, "east": -97.00820 }
+      {
+        "ring": [
+          {
+            "lat": 32.923303,
+            "lng": -97.010061
+          },
+          {
+            "lat": 32.923303,
+            "lng": -97.008551
+          },
+          {
+            "lat": 32.922957,
+            "lng": -97.008551
+          },
+          {
+            "lat": 32.922957,
+            "lng": -97.010061
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 32.92140, "west": -97.00880, "north": 32.92340, "east": -97.00815 }
+      {
+        "ring": [
+          {
+            "lat": 32.921689,
+            "lng": -97.010061
+          },
+          {
+            "lat": 32.921689,
+            "lng": -97.008413
+          },
+          {
+            "lat": 32.921401,
+            "lng": -97.008413
+          },
+          {
+            "lat": 32.921401,
+            "lng": -97.010061
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 336,
+        "pano": "hGsj9LR1nV9P-hQnYN5XJA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 336,
+        "pano": "hGsj9LR1nV9P-hQnYN5XJA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 30,
@@ -19,23 +110,42 @@
     "trailerParkingCapacity": 45,
     "truckGateCount": 2,
     "buildingCount": 2,
-    "siteAreaAcres": 19.0,
+    "siteAreaAcres": 19,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.92215,-97.00910,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "trailerParkingCapacity", "siteAreaAcres"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "siteAreaAcres"
+  ],
   "fieldNotes": {
     "truckGate": "Two controlled truck gates confirmed in Street View 2025-05: a south driveway signed 'HONDA - TRUCK ENTRANCE ONLY' and a NE driveway signed 'NO ENTRY / EXIT ONLY'. Both have sliding chain-link gates and perimeter fencing.",
     "guardShack": "No staffed guard booth visible at either truck gate in Street View - the gates read as remote/badge-operated sliding gates. A small set-back utility/pump structure near the entry is not a gate booth. Flagged uncertain.",

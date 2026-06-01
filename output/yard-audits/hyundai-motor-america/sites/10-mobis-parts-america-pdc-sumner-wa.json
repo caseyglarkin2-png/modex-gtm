@@ -1,18 +1,63 @@
 {
   "name": "Mobis Parts America PDC - Sumner WA",
   "type": "Parts Distribution Center",
-  "coords": { "lat": 47.23440, "lng": -122.24260 },
+  "coords": {
+    "lat": 47.2344,
+    "lng": -122.2426
+  },
   "geofences": {
-    "perimeter": { "south": 47.23300, "west": -122.24430, "north": 47.23560, "east": -122.24130 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 47.235099,
+          "lng": -122.244797
+        },
+        {
+          "lat": 47.235099,
+          "lng": -122.240403
+        },
+        {
+          "lat": 47.232302,
+          "lng": -122.240403
+        },
+        {
+          "lat": 47.232302,
+          "lng": -122.244797
+        }
+      ]
+    },
     "truckGate": null,
-    "dropYards": [
-      { "south": 47.23360, "west": -122.24430, "north": 47.23500, "east": -122.24380 }
-    ],
+    "dropYards": [],
     "dockAprons": [
-      { "south": 47.23490, "west": -122.24370, "north": 47.23545, "east": -122.24150 },
-      { "south": 47.23330, "west": -122.24370, "north": 47.23390, "east": -122.24150 }
+      {
+        "ring": [
+          {
+            "lat": 47.233841,
+            "lng": -122.24466
+          },
+          {
+            "lat": 47.233841,
+            "lng": -122.240677
+          },
+          {
+            "lat": 47.233654,
+            "lng": -122.240677
+          },
+          {
+            "lat": 47.233654,
+            "lng": -122.24466
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 181,
+        "pano": "FreTNU2bZFgcjE-lBVcbhQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 70,
@@ -25,18 +70,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@47.23440,-122.24260,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "10-25",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Open multi-tenant distribution building (the Cascade Building, Sumner Corporate Park). North dock court fronts 24th St E directly via open curb cuts with only a landscape strip; no barrier, fence, or checkpoint. South court connects to the open park road network. Confirmed in z19 satellite and Mar-2025 Street View.",
     "guardShack": "No booth structure at any court entrance.",
