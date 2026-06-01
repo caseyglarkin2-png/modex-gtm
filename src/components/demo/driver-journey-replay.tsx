@@ -164,7 +164,8 @@ export function DriverJourneyReplay({ site, scenario, onClose }: Props) {
             <span className="font-semibold text-emerald-300">~24 min</span>, measured in pilot.
           </p>
           <p className="mt-1 text-[11px] leading-relaxed text-white/55">
-            Live loads stay driver- and shipper-paced — the protocol&apos;s gains land on drop-and-hook.
+            Live loads are driver- and shipper-paced — but with the right planning, YNS turns more of
+            them into drop-and-hook, where the time is won.
           </p>
         </div>
 
