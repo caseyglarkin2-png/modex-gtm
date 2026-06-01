@@ -1,16 +1,95 @@
 {
   "name": "Kenco / The Shippers Group - Grand Prairie TX",
   "type": "Distribution Center / 3PL Warehouse",
-  "coords": { "lat": 32.79050, "lng": -97.01300 },
+  "coords": {
+    "lat": 32.7905,
+    "lng": -97.013
+  },
   "geofences": {
-    "perimeter": { "south": 32.78870, "west": -97.01510, "north": 32.79280, "east": -97.01040 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.792059,
+          "lng": -97.014579
+        },
+        {
+          "lat": 32.792059,
+          "lng": -97.012176
+        },
+        {
+          "lat": 32.789576,
+          "lng": -97.012176
+        },
+        {
+          "lat": 32.789576,
+          "lng": -97.014579
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [
-      { "south": 32.78900, "west": -97.01230, "north": 32.79230, "east": -97.01060 }
+      {
+        "ring": [
+          {
+            "lat": 32.791828,
+            "lng": -97.014511
+          },
+          {
+            "lat": 32.791828,
+            "lng": -97.013687
+          },
+          {
+            "lat": 32.789923,
+            "lng": -97.013687
+          },
+          {
+            "lat": 32.789923,
+            "lng": -97.014511
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 32.78900, "west": -97.01480, "north": 32.79230, "east": -97.01390 },
-      { "south": 32.78900, "west": -97.01290, "north": 32.79230, "east": -97.01210 }
+      {
+        "ring": [
+          {
+            "lat": 32.792001,
+            "lng": -97.014373
+          },
+          {
+            "lat": 32.792001,
+            "lng": -97.012176
+          },
+          {
+            "lat": 32.79177,
+            "lng": -97.012176
+          },
+          {
+            "lat": 32.79177,
+            "lng": -97.014373
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 32.789923,
+            "lng": -97.014511
+          },
+          {
+            "lat": 32.789923,
+            "lng": -97.012176
+          },
+          {
+            "lat": 32.789692,
+            "lng": -97.012176
+          },
+          {
+            "lat": 32.789692,
+            "lng": -97.014511
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -20,23 +99,41 @@
     "trailerParkingCapacity": 160,
     "truckGateCount": 0,
     "buildingCount": 1,
-    "siteAreaAcres": 42.0,
+    "siteAreaAcres": 42,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.79050,-97.01300,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["shipRcvSeparate", "dockDoorCount", "entryExitTogether", "entryExitSeparate"],
+  "uncertainFields": [
+    "shipRcvSeparate",
+    "dockDoorCount",
+    "entryExitTogether",
+    "entryExitSeparate"
+  ],
   "fieldNotes": {
     "location": "Roster coords (32.781145,-97.017588, APPROXIMATE) and the cited 3845 Grand Lakes Way address were both off-target: 3845 Grand Lakes Way is the Inmar Rx Solutions building. Dallas County tax records (city-data) list 'WAREHOUSE SHIPPERS' (Shippers Warehouse / TSG) as a tenant at 3953 Grand Lakes Way - the correct facility. Confirmed via TruckMap/Waze listings ('Shippers Warehouse, 3953 Grand Lakes Way') and a Street View pano showing a 'TENNANT' tenant sign on the building (Tennant is a co-tenant at 3953). 3953 Grand Lakes Way is a ~1,060,075 SF Duke Realty/Prologis distribution building (Grand Lakes Industrial Park) in which TSG occupies a ~281,206 SF dedicated suite. Locked center on the building footprint at 32.79050,-97.01300.",
     "truckGate": "No barrier arm, sliding/swing gate, or guard booth visible at the driveway connections off Grand Lakes Way or at the truck-court drive aisles. Street View (Dec 2024) shows open landscaped frontage and open drive aisles into the truck courts - typical Class A Duke Realty open-access spec building. truckGate=false.",

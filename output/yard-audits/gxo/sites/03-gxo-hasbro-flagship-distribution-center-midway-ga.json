@@ -1,16 +1,54 @@
 {
   "name": "GXO Hasbro Flagship Distribution Center - Midway GA",
   "type": "Distribution Center",
-  "coords": { "lat": 31.770300, "lng": -81.347400 },
+  "coords": {
+    "lat": 31.7703,
+    "lng": -81.3474
+  },
   "geofences": {
-    "perimeter": { "south": 31.768500, "west": -81.349300, "north": 31.772100, "east": -81.345700 },
-    "truckGate": { "south": 31.769200, "west": -81.348700, "north": 31.769550, "east": -81.348100 },
-    "dropYards": [
-      { "south": 31.769300, "west": -81.347900, "north": 31.771500, "east": -81.346000 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 31.770534,
+          "lng": -81.34946
+        },
+        {
+          "lat": 31.77246,
+          "lng": -81.346576
+        },
+        {
+          "lat": 31.771234,
+          "lng": -81.345477
+        },
+        {
+          "lat": 31.769308,
+          "lng": -81.348361
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 31.769300, "west": -81.348100, "north": 31.771600, "east": -81.346200 },
-      { "south": 31.769000, "west": -81.349100, "north": 31.771300, "east": -81.347600 }
+      {
+        "ring": [
+          {
+            "lat": 31.770825,
+            "lng": -81.349391
+          },
+          {
+            "lat": 31.77246,
+            "lng": -81.346713
+          },
+          {
+            "lat": 31.772168,
+            "lng": -81.346439
+          },
+          {
+            "lat": 31.770534,
+            "lng": -81.349117
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -20,23 +58,44 @@
     "trailerParkingCapacity": 70,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 38.0,
+    "siteAreaAcres": 38,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@31.770300,-81.347400,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "buildingIdentity": "Address geocoded GEOMETRIC_CENTER of Tradeport East Business Center, a multi-building park. The Hasbro/GXO DC (600,000 sq ft, opened March 2026) is identified as the large NE-SW-oriented building closest to the geocoded point; its ~330m x ~165m footprint matches 600,000 sq ft. Street View (2024-12) shows this building with a blue/white striped band, a monument sign, dock doors with trailers, and a fenced truck court. Identity is medium-confidence because several near-identical DC buildings exist in the park.",
     "truckGate": "The truck court is enclosed by continuous perimeter fencing (visible in Street View 2024-12 and z20 satellite). The truck driveway crosses the fence at the SW end — a controlled fenced entry. Gate barrier not crisply resolved.",

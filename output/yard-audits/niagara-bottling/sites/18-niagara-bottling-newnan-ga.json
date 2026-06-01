@@ -1,37 +1,118 @@
 {
   "name": "Niagara Bottling - Newnan GA (Coweta County)",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 33.40570, "lng": -84.75880 },
+  "coords": {
+    "lat": 33.4057,
+    "lng": -84.7588
+  },
   "geofences": {
-    "perimeter": { "south": 33.40360, "west": -84.76070, "north": 33.40810, "east": -84.75660 },
-    "truckGate": { "south": 33.40730, "west": -84.75740, "north": 33.40800, "east": -84.75670 },
-    "dropYards": [
-      { "south": 33.40620, "west": -84.75980, "north": 33.40760, "east": -84.75700 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.407764,
+          "lng": -84.760723
+        },
+        {
+          "lat": 33.40719,
+          "lng": -84.756053
+        },
+        {
+          "lat": 33.405127,
+          "lng": -84.756603
+        },
+        {
+          "lat": 33.4057,
+          "lng": -84.761272
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.407305,
+          "lng": -84.757152
+        },
+        {
+          "lat": 33.40719,
+          "lng": -84.755916
+        },
+        {
+          "lat": 33.406617,
+          "lng": -84.756053
+        },
+        {
+          "lat": 33.406732,
+          "lng": -84.757289
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 33.40600, "west": -84.75990, "north": 33.40730, "east": -84.75690 }
+      {
+        "ring": [
+          {
+            "lat": 33.406502,
+            "lng": -84.760997
+          },
+          {
+            "lat": 33.405929,
+            "lng": -84.756465
+          },
+          {
+            "lat": 33.405471,
+            "lng": -84.756603
+          },
+          {
+            "lat": 33.406044,
+            "lng": -84.761135
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 45, "trailersVisible": 70, "trailerParkingCapacity": 90,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 32.0,
+    "dockDoorCount": 45,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 32,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.40570,-84.75880,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "The plant's access drive connects to Niagara Way as a single open, uncontrolled driveway. No barrier arm, sliding gate, or checkpoint pinch-point visible in satellite imagery. The plant is set deep behind a tree screen so Street View (2025-05) cannot reach the entrance - hence medium confidence.",
     "guardShack": "No staffed booth resolvable at the access drive. A small dark structure sits along the NE dock face but reads as a dock-side utility/canopy structure, not an entrance guard shack.",

@@ -1,17 +1,87 @@
 {
   "name": "Niagara Bottling - Jupiter FL",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 26.90430, "lng": -80.28400 },
+  "coords": {
+    "lat": 26.9043,
+    "lng": -80.284
+  },
   "geofences": {
-    "perimeter": { "south": 26.90280, "west": -80.28560, "north": 26.90600, "east": -80.28250 },
-    "truckGate": { "south": 26.90545, "west": -80.28490, "north": 26.90580, "east": -80.28450 },
-    "dropYards": [
-      { "south": 26.90290, "west": -80.28430, "north": 26.90380, "east": -80.28250 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 26.905708,
+          "lng": -80.285511
+        },
+        {
+          "lat": 26.905586,
+          "lng": -80.282627
+        },
+        {
+          "lat": 26.90332,
+          "lng": -80.282901
+        },
+        {
+          "lat": 26.903443,
+          "lng": -80.285785
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 26.904606,
+          "lng": -80.285785
+        },
+        {
+          "lat": 26.904606,
+          "lng": -80.285373
+        },
+        {
+          "lat": 26.9043,
+          "lng": -80.285373
+        },
+        {
+          "lat": 26.9043,
+          "lng": -80.285785
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 26.90320, "west": -80.28420, "north": 26.90400, "east": -80.28270 }
+      {
+        "ring": [
+          {
+            "lat": 26.903994,
+            "lng": -80.285579
+          },
+          {
+            "lat": 26.903871,
+            "lng": -80.282764
+          },
+          {
+            "lat": 26.903565,
+            "lng": -80.282833
+          },
+          {
+            "lat": 26.903688,
+            "lng": -80.285648
+          }
+        ]
+      }
     ],
-    "staging": { "south": 26.90560, "west": -80.28510, "north": 26.90620, "east": -80.28460 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 36,
+        "pano": "5bUyq3rGxUeCUDDNEWZltw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 36,
+        "pano": "5bUyq3rGxUeCUDDNEWZltw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 75,
@@ -19,23 +89,39 @@
     "trailerParkingCapacity": 110,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 60.0,
+    "siteAreaAcres": 60,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@26.90430,-80.28400,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "connectivityIssue"],
+  "uncertainFields": [
+    "scale",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "facility": "Niagara Bottling Jupiter, 15832 Corporate Rd N, in the Palm Beach Park of Commerce. ~409,486 sq ft, operates 24/7, produces private-label bottled water. Confirmed via web search and satellite/Street View.",
     "truckGate": "A canopied gatehouse / checkpoint structure is visible at the NW access road where it enters the secured yard (satellite z20). The entire property is enclosed by continuous chain-link perimeter fencing, clearly visible in Street View.",

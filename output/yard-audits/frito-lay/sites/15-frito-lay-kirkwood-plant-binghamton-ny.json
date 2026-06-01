@@ -1,38 +1,153 @@
 {
   "name": "Frito-Lay - Kirkwood Plant Binghamton NY",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 42.09780, "lng": -75.83880 },
+  "coords": {
+    "lat": 42.0978,
+    "lng": -75.8388
+  },
   "geofences": {
-    "perimeter": { "south": 42.09520, "west": -75.84200, "north": 42.10030, "east": -75.83700 },
-    "truckGate": { "south": 42.09930, "west": -75.83820, "north": 42.10010, "east": -75.83720 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.100347,
+          "lng": -75.84292
+        },
+        {
+          "lat": 42.099634,
+          "lng": -75.837701
+        },
+        {
+          "lat": 42.095966,
+          "lng": -75.8388
+        },
+        {
+          "lat": 42.096679,
+          "lng": -75.843881
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.099838,
+          "lng": -75.8388
+        },
+        {
+          "lat": 42.099838,
+          "lng": -75.837976
+        },
+        {
+          "lat": 42.099328,
+          "lng": -75.838113
+        },
+        {
+          "lat": 42.09943,
+          "lng": -75.838937
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 42.09600, "west": -75.84150, "north": 42.09870, "east": -75.83900 },
-      { "south": 42.09550, "west": -75.84100, "north": 42.09700, "east": -75.83870 }
+      {
+        "ring": [
+          {
+            "lat": 42.098615,
+            "lng": -75.843469
+          },
+          {
+            "lat": 42.098208,
+            "lng": -75.840173
+          },
+          {
+            "lat": 42.096985,
+            "lng": -75.840448
+          },
+          {
+            "lat": 42.097392,
+            "lng": -75.843744
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 42.09650, "west": -75.83980, "north": 42.09790, "east": -75.83870 }
+      {
+        "ring": [
+          {
+            "lat": 42.099023,
+            "lng": -75.841547
+          },
+          {
+            "lat": 42.098615,
+            "lng": -75.838251
+          },
+          {
+            "lat": 42.098106,
+            "lng": -75.838388
+          },
+          {
+            "lat": 42.098513,
+            "lng": -75.841684
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 197,
+        "pano": "zHpJKWTZ7sa4Ve8h9Iyitg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 197,
+        "pano": "zHpJKWTZ7sa4Ve8h9Iyitg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 40, "trailersVisible": 120, "trailerParkingCapacity": 200,
-    "truckGateCount": 1, "buildingCount": 3, "siteAreaAcres": 61.0,
+    "dockDoorCount": 40,
+    "trailersVisible": 120,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 61,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@42.0978,-75.8388,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "scale", "multiStep"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "scale",
+    "multiStep"
+  ],
   "fieldNotes": {
     "location": "Roster point (42.039983,-75.79687, geocode precision APPROXIMATE) fell in a residential area of Kirkwood ~6 km SE of the plant. Web research resolved the true address to 10 Spud Ln, Binghamton/Kirkwood NY 13795/13904; Nominatim placed Spud Lane at 42.0982,-75.8403. Satellite there shows the Frito-Lay snack plant on the Susquehanna River; Street View confirmed silos, a steam plume from the fryers, and a blue Frito-Lay sign.",
     "truckGate": "Single dedicated plant access road runs from a signalized public-road intersection (~42.0997,-75.8374) across a rail line into the property. Controlled-access industrial campus; no Street View available on the private drive so a barrier arm could not be directly imaged, but a controlled checkpoint is standard for a major Frito-Lay manufacturing plant. Medium confidence.",

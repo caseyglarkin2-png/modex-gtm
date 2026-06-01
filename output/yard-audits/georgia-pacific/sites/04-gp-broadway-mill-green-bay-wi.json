@@ -1,39 +1,146 @@
 {
   "name": "GP Broadway Mill - Green Bay WI",
   "type": "Tissue/Towel Mill",
-  "coords": { "lat": 44.49271, "lng": -88.034475 },
+  "coords": {
+    "lat": 44.49271,
+    "lng": -88.034475
+  },
   "geofences": {
-    "perimeter": { "south": 44.4855, "west": -88.0445, "north": 44.4985, "east": -88.0280 },
-    "truckGate": { "south": 44.4948, "west": -88.0438, "north": 44.4960, "east": -88.0418 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 44.500546,
+          "lng": -88.039968
+        },
+        {
+          "lat": 44.500155,
+          "lng": -88.029531
+        },
+        {
+          "lat": 44.487812,
+          "lng": -88.033102
+        },
+        {
+          "lat": 44.488791,
+          "lng": -88.039968
+        },
+        {
+          "lat": 44.494669,
+          "lng": -88.042715
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 44.495845,
+          "lng": -88.039968
+        },
+        {
+          "lat": 44.495845,
+          "lng": -88.03832
+        },
+        {
+          "lat": 44.494865,
+          "lng": -88.03832
+        },
+        {
+          "lat": 44.494865,
+          "lng": -88.039968
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 44.4938, "west": -88.0428, "north": 44.4972, "east": -88.0388 },
-      { "south": 44.4885, "west": -88.0388, "north": 44.4910, "east": -88.0355 }
+      {
+        "ring": [
+          {
+            "lat": 44.494669,
+            "lng": -88.033102
+          },
+          {
+            "lat": 44.494669,
+            "lng": -88.029531
+          },
+          {
+            "lat": 44.493102,
+            "lng": -88.029806
+          },
+          {
+            "lat": 44.493102,
+            "lng": -88.033376
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 44.4912, "west": -88.0420, "north": 44.4945, "east": -88.0392 },
-      { "south": 44.4938, "west": -88.0398, "north": 44.4958, "east": -88.0372 }
+      {
+        "ring": [
+          {
+            "lat": 44.49369,
+            "lng": -88.039419
+          },
+          {
+            "lat": 44.493494,
+            "lng": -88.033926
+          },
+          {
+            "lat": 44.492514,
+            "lng": -88.0342
+          },
+          {
+            "lat": 44.49271,
+            "lng": -88.039694
+          }
+        ]
+      }
     ],
-    "staging": { "south": 44.4948, "west": -88.0428, "north": 44.4962, "east": -88.0408 }
+    "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 70, "trailersVisible": 240, "trailerParkingCapacity": 320,
-    "truckGateCount": 2, "buildingCount": 16, "siteAreaAcres": 240.0,
+    "dockDoorCount": 70,
+    "trailersVisible": 240,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 2,
+    "buildingCount": 16,
+    "siteAreaAcres": 240,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@44.49271,-88.034475,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": true, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "scale", "multiStep", "entryLanes", "exitLanes", "dockDoorCount", "truckGateCount"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "scale",
+    "multiStep",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "truckGateCount"
+  ],
   "fieldNotes": {
     "location": "Roster coords (44.49271,-88.034475, ROOFTOP, movedMeters 222) sit within the mill core on a peninsula along the Fox River. Address 1919 S Broadway, Green Bay WI confirmed. Mill core retained at the given coords.",
     "truckGate": "Large urban tissue mill bounded by S Broadway / a rail line (W) and the Fox River (E). Main truck entrance is off S Broadway near an admin/office building at the NW intersection; the property is a controlled industrial campus. Internal roads have Street View coverage but the public-road perimeter entry is gated/checkpointed.",

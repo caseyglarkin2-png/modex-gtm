@@ -1,19 +1,108 @@
 {
   "name": "Frito-Lay - Orlando FL",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 28.5772, "lng": -81.4182 },
+  "coords": {
+    "lat": 28.5772,
+    "lng": -81.4182
+  },
   "geofences": {
-    "perimeter": { "south": 28.5757, "west": -81.4203, "north": 28.5786, "east": -81.4166 },
-    "truckGate": { "south": 28.57795, "west": -81.41935, "north": 28.57825, "east": -81.41880 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 28.577803,
+          "lng": -81.419779
+        },
+        {
+          "lat": 28.577803,
+          "lng": -81.417376
+        },
+        {
+          "lat": 28.576235,
+          "lng": -81.417376
+        },
+        {
+          "lat": 28.576235,
+          "lng": -81.419779
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 28.577501,
+          "lng": -81.419779
+        },
+        {
+          "lat": 28.577501,
+          "lng": -81.419367
+        },
+        {
+          "lat": 28.5772,
+          "lng": -81.419367
+        },
+        {
+          "lat": 28.5772,
+          "lng": -81.419779
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 28.5764, "west": -81.4203, "north": 28.5778, "east": -81.4193 },
-      { "south": 28.57755, "west": -81.41935, "north": 28.57825, "east": -81.41855 }
+      {
+        "ring": [
+          {
+            "lat": 28.575512,
+            "lng": -81.419573
+          },
+          {
+            "lat": 28.575512,
+            "lng": -81.417376
+          },
+          {
+            "lat": 28.574667,
+            "lng": -81.417376
+          },
+          {
+            "lat": 28.574667,
+            "lng": -81.419573
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 28.5765, "west": -81.41955, "north": 28.5777, "east": -81.4189 },
-      { "south": 28.5766, "west": -81.4178, "north": 28.5775, "east": -81.4170 }
+      {
+        "ring": [
+          {
+            "lat": 28.577682,
+            "lng": -81.419573
+          },
+          {
+            "lat": 28.577682,
+            "lng": -81.4182
+          },
+          {
+            "lat": 28.577321,
+            "lng": -81.4182
+          },
+          {
+            "lat": 28.577321,
+            "lng": -81.419573
+          }
+        ]
+      }
     ],
-    "staging": { "south": 28.5777, "west": -81.4193, "north": 28.5784, "east": -81.4180 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 229,
+        "pano": "vQAlHjK5PjefIhwtBkApUw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 229,
+        "pano": "vQAlHjK5PjefIhwtBkApUw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 28,
@@ -21,7 +110,7 @@
     "trailerParkingCapacity": 55,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 25.0,
+    "siteAreaAcres": 25,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@28.5772,-81.4182,400m/data=!3m1!1e3",
@@ -50,7 +139,12 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "shipRcvSeparate", "remoteGs", "railServed"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "shipRcvSeparate",
+    "remoteGs",
+    "railServed"
+  ],
   "fieldNotes": {
     "location": "Roster address 8000 S Orange Ave is wrong (a divisional/distribution listing). Resolved to the actual Frito-Lay manufacturing plant at 2800 Silver Star Rd, Orlando FL 32808 (operating since 1965). Confirmed via web research and satellite: large industrial complex with rooftop snack-food processing equipment, silos, and steam plume.",
     "closure": "PepsiCo/Frito-Lay announced closure of its Orlando facilities Nov 2025; the Silver Star Rd plant ceased operations by May 9, 2026 and per news was being demolished in spring 2026. Maxar imagery and 2025-04 Street View show it operational; audit reflects the physical yard as imaged.",

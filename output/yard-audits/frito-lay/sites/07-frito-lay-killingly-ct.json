@@ -1,19 +1,96 @@
 {
   "name": "Frito-Lay - Killingly CT",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 41.860500, "lng": -71.890500 },
+  "coords": {
+    "lat": 41.8605,
+    "lng": -71.8905
+  },
   "geofences": {
-    "perimeter": { "south": 41.855500, "west": -71.893200, "north": 41.865800, "east": -71.887500 },
-    "truckGate": { "south": 41.862400, "west": -71.893200, "north": 41.863000, "east": -71.892600 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.866023,
+          "lng": -71.893247
+        },
+        {
+          "lat": 41.865205,
+          "lng": -71.888303
+        },
+        {
+          "lat": 41.857227,
+          "lng": -71.8905
+        },
+        {
+          "lat": 41.858045,
+          "lng": -71.895169
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.866227,
+          "lng": -71.892697
+        },
+        {
+          "lat": 41.866227,
+          "lng": -71.891049
+        },
+        {
+          "lat": 41.865409,
+          "lng": -71.891049
+        },
+        {
+          "lat": 41.865409,
+          "lng": -71.892697
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 41.862500, "west": -71.892200, "north": 41.865500, "east": -71.888500 },
-      { "south": 41.855600, "west": -71.892600, "north": 41.859500, "east": -71.889500 }
+      {
+        "ring": [
+          {
+            "lat": 41.8605,
+            "lng": -71.894345
+          },
+          {
+            "lat": 41.859886,
+            "lng": -71.8905
+          },
+          {
+            "lat": 41.857227,
+            "lng": -71.891599
+          },
+          {
+            "lat": 41.857841,
+            "lng": -71.895444
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.860500, "west": -71.891800, "north": 41.862800, "east": -71.890600 },
-      { "south": 41.859500, "west": -71.890400, "north": 41.861500, "east": -71.888800 }
+      {
+        "ring": [
+          {
+            "lat": 41.863364,
+            "lng": -71.893247
+          },
+          {
+            "lat": 41.86275,
+            "lng": -71.889401
+          },
+          {
+            "lat": 41.861727,
+            "lng": -71.889676
+          },
+          {
+            "lat": 41.862341,
+            "lng": -71.893521
+          }
+        ]
+      }
     ],
-    "staging": { "south": 41.862000, "west": -71.892600, "north": 41.863000, "east": -71.891800 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 50,
@@ -21,23 +98,44 @@
     "trailerParkingCapacity": 450,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 90.0,
+    "siteAreaAcres": 90,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@41.860500,-71.890500,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "entryLanes", "exitLanes", "fastLaneOpportunity", "scale", "dockDoorCount"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "scale",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "truckGate": "ROSTER COORDINATE CORRECTION: the supplied coords landed on the Killingly Commons retail shopping center, not the plant. The real Frito-Lay Killingly plant is at 1886 Upper Maple St, ~2.3 km NW (center ~41.8605, -71.8905). A single access road off Upper Maple St crosses the New England Central rail line at a grade crossing and runs into the secured plant property; the truck entrance is a controlled gate on this access road. The wooded approach obscures the exact gate from satellite and Street View - medium confidence, flagged.",
     "guardShack": "A guard booth is likely at this 700-employee plant given the single controlled access road, but it could not be visually confirmed - the entrance road runs under heavy tree canopy. Marked true at medium confidence and flagged.",

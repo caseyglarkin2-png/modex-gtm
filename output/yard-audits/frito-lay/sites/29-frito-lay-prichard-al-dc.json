@@ -1,35 +1,133 @@
 {
   "name": "Frito-Lay - Prichard AL (DC)",
   "type": "Distribution Center",
-  "coords": { "lat": 30.74010, "lng": -88.12010 },
+  "coords": {
+    "lat": 30.7401,
+    "lng": -88.1201
+  },
   "geofences": {
-    "perimeter": { "south": 30.73930, "west": -88.12120, "north": 30.74110, "east": -88.11880 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 30.740926,
+          "lng": -88.120443
+        },
+        {
+          "lat": 30.740926,
+          "lng": -88.119551
+        },
+        {
+          "lat": 30.739864,
+          "lng": -88.119551
+        },
+        {
+          "lat": 30.739864,
+          "lng": -88.120443
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 30.74069,
+          "lng": -88.120581
+        },
+        {
+          "lat": 30.74069,
+          "lng": -88.120443
+        },
+        {
+          "lat": 30.740543,
+          "lng": -88.120443
+        },
+        {
+          "lat": 30.740543,
+          "lng": -88.120581
+        }
+      ]
+    },
     "dropYards": [],
     "dockAprons": [
-      { "south": 30.74050, "west": -88.12110, "north": 30.74100, "east": -88.11980 }
+      {
+        "ring": [
+          {
+            "lat": 30.7401,
+            "lng": -88.120787
+          },
+          {
+            "lat": 30.7401,
+            "lng": -88.120306
+          },
+          {
+            "lat": 30.739923,
+            "lng": -88.120306
+          },
+          {
+            "lat": 30.739923,
+            "lng": -88.120787
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 207,
+        "pano": "wCrw-0buyeI-bffv6SnxkQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 207,
+        "pano": "wCrw-0buyeI-bffv6SnxkQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 8, "trailersVisible": 6, "trailerParkingCapacity": 16,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 6.0,
+    "dockDoorCount": 8,
+    "trailersVisible": 6,
+    "trailerParkingCapacity": 16,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 6,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@30.74010,-88.12010,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "0-10", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "low",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "siteAreaAcres", "buildingCount"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "siteAreaAcres",
+    "buildingCount"
+  ],
   "fieldNotes": {
     "buildingIdentification": "Roster gave no street address and the geocode (APPROXIMATE) was ~5 km off. News sources place the new Frito-Lay DSD distribution center at 3221 Anton St, Prichard AL 36612 — ~25,000 sq ft, broke ground June 2024, operational June 2025, $8M. OSM places Anton St at ~30.7408,-88.1194. The best-candidate building is a large white metal warehouse with a yellow horizontal stripe on the west side of Anton St (~30.74010,-88.12010), visible in April-2026 Street View. The yellow stripe matches Frito-Lay brand color, but no Frito-Lay logo/sign is visible to positively confirm, and the building looks larger and older than a brand-new 25k sq ft build — identification is NOT certain.",
     "truckGate": "No barrier arm, gate, or checkpoint visible. The building fronts an open industrial street (Anton St) with no perimeter fence — open-access layout.",

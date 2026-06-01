@@ -1,19 +1,63 @@
 {
   "name": "GXO IKEA Distribution Center - Westampton NJ",
   "type": "Distribution Center",
-  "coords": { "lat": 40.01400, "lng": -74.85340 },
+  "coords": {
+    "lat": 40.014,
+    "lng": -74.8534
+  },
   "geofences": {
-    "perimeter": { "south": 40.01080, "west": -74.85620, "north": 40.01700, "east": -74.85070 },
-    "truckGate": { "south": 40.01230, "west": -74.85560, "north": 40.01300, "east": -74.85460 },
-    "dropYards": [
-      { "south": 40.01100, "west": -74.85600, "north": 40.01680, "east": -74.85440 },
-      { "south": 40.01100, "west": -74.85220, "north": 40.01680, "east": -74.85090 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.016629,
+          "lng": -74.854911
+        },
+        {
+          "lat": 40.016419,
+          "lng": -74.851477
+        },
+        {
+          "lat": 40.011055,
+          "lng": -74.852027
+        },
+        {
+          "lat": 40.011265,
+          "lng": -74.85546
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 40.01100, "west": -74.85580, "north": 40.01680, "east": -74.85500 },
-      { "south": 40.01100, "west": -74.85320, "north": 40.01680, "east": -74.85230 }
+      {
+        "ring": [
+          {
+            "lat": 40.012738,
+            "lng": -74.854636
+          },
+          {
+            "lat": 40.012527,
+            "lng": -74.851615
+          },
+          {
+            "lat": 40.012002,
+            "lng": -74.851752
+          },
+          {
+            "lat": 40.012212,
+            "lng": -74.854773
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 351,
+        "pano": "4bEPTs_u60T6fFNff5r4cQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 130,
@@ -26,18 +70,35 @@
   },
   "mapsUrl": "https://www.google.com/maps/@40.01400,-74.85340,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "The building is ringed by an open perimeter loop road fed from the surrounding Westampton industrial-park street network. No barrier arm, sliding gate, or checkpoint pinch-point appears at any property-line connection in z18/z19 satellite or Street View; no perimeter fence. Classed false.",
     "guardShack": "No 1-3-vehicle booth at any entrance in z19 satellite or Street View along the perimeter road. Site is open.",

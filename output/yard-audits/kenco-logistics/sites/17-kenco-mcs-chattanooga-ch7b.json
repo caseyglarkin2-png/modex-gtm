@@ -1,15 +1,54 @@
 {
   "name": "Kenco MCS Chattanooga CH7B - Chattanooga TN",
   "type": "Multi-Client Distribution Center",
-  "coords": { "lat": 35.06912, "lng": -85.18225 },
+  "coords": {
+    "lat": 35.06912,
+    "lng": -85.18225
+  },
   "geofences": {
-    "perimeter": { "south": 35.06790, "west": -85.18370, "north": 35.07010, "east": -85.18090 },
-    "truckGate": { "south": 35.06970, "west": -85.18130, "north": 35.07005, "east": -85.18085 },
-    "dropYards": [
-      { "south": 35.06840, "west": -85.18320, "north": 35.06900, "east": -85.18130 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.070132,
+          "lng": -85.183623
+        },
+        {
+          "lat": 35.070019,
+          "lng": -85.181151
+        },
+        {
+          "lat": 35.06867,
+          "lng": -85.181289
+        },
+        {
+          "lat": 35.068783,
+          "lng": -85.183761
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 35.06850, "west": -85.18330, "north": 35.06905, "east": -85.18120 }
+      {
+        "ring": [
+          {
+            "lat": 35.069232,
+            "lng": -85.183692
+          },
+          {
+            "lat": 35.069064,
+            "lng": -85.181289
+          },
+          {
+            "lat": 35.068727,
+            "lng": -85.181357
+          },
+          {
+            "lat": 35.068895,
+            "lng": -85.183761
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -24,18 +63,39 @@
   },
   "mapsUrl": "https://www.google.com/maps/@35.06912,-85.18225,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "dropArea", "entryLanes", "exitLanes", "siteAreaAcres"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoors",
+    "dropArea",
+    "entryLanes",
+    "exitLanes",
+    "siteAreaAcres"
+  ],
   "fieldNotes": {
     "location": "Roster gave an APPROXIMATE geocode for 'Chattanooga, TN 37406' that landed on the CSX DeButts rail yard. Web research resolved Kenco's Chattanooga MCS operations to the Enterprise Park Drive industrial cluster. 6170 Enterprise Park Dr is a CONFIRMED Kenco building (ROOFTOP geocode 35.0696387,-85.1823609; Yelp/CoStar 'Kenco Logistics Services-Stryker').",
     "buildingChoice": "Audited the warehouse at the confirmed Kenco address 6170 Enterprise Park Dr (building center ~35.0691,-85.1822) as CH7B. CH7B is described as 242,000 SF temperature-controlled/food-grade; the audited building is a large single-tenant warehouse with a long dock bank consistent with a food-grade DC. Public sources cite ~162,500 SF for the 6170 building (a 1990 listing) which may understate the current footprint, so the CH-code-to-building match is best-effort - medium confidence.",

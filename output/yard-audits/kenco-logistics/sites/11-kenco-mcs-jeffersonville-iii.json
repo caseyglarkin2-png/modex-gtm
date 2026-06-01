@@ -1,16 +1,94 @@
 {
   "name": "Kenco MCS Jeffersonville III - Sellersburg IN",
   "type": "Multi-Client Distribution Center",
-  "coords": { "lat": 38.37820, "lng": -85.75300 },
+  "coords": {
+    "lat": 38.3782,
+    "lng": -85.753
+  },
   "geofences": {
-    "perimeter": { "south": 38.37380, "west": -85.75720, "north": 38.38060, "east": -85.74780 },
-    "truckGate": { "south": 38.37650, "west": -85.74800, "north": 38.37730, "east": -85.74700 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.3782,
+          "lng": -85.755197
+        },
+        {
+          "lat": 38.380676,
+          "lng": -85.750116
+        },
+        {
+          "lat": 38.379061,
+          "lng": -85.74888
+        },
+        {
+          "lat": 38.376585,
+          "lng": -85.753961
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 38.380245,
+          "lng": -85.750803
+        },
+        {
+          "lat": 38.379922,
+          "lng": -85.749979
+        },
+        {
+          "lat": 38.379492,
+          "lng": -85.750391
+        },
+        {
+          "lat": 38.379815,
+          "lng": -85.751215
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 38.37560, "west": -85.75250, "north": 38.37840, "east": -85.74950 }
+      {
+        "ring": [
+          {
+            "lat": 38.3782,
+            "lng": -85.754373
+          },
+          {
+            "lat": 38.380245,
+            "lng": -85.750253
+          },
+          {
+            "lat": 38.379707,
+            "lng": -85.749841
+          },
+          {
+            "lat": 38.377662,
+            "lng": -85.753961
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 38.37600, "west": -85.75450, "north": 38.37900, "east": -85.75050 },
-      { "south": 38.37420, "west": -85.75650, "north": 38.37760, "east": -85.75200 }
+      {
+        "ring": [
+          {
+            "lat": 38.377769,
+            "lng": -85.754785
+          },
+          {
+            "lat": 38.379815,
+            "lng": -85.750665
+          },
+          {
+            "lat": 38.379384,
+            "lng": -85.750391
+          },
+          {
+            "lat": 38.377339,
+            "lng": -85.754511
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -20,23 +98,40 @@
     "trailerParkingCapacity": 120,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 96.0,
+    "siteAreaAcres": 96,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@38.37820,-85.75300,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoors", "dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoors",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "Roster coords (38.398626,-85.776916, APPROXIMATE) landed on farmland 2km NW. Resolved via web research to Silver Creek Logistics Center Building B, 7803 Highway 31 E, Sellersburg IN 47172 - the 417,270 SF Class A building (built 2019) exactly matches roster SF. Confirmed on satellite + Street View.",
     "truckGate": "Open access driveway off Highway 31 E - no barrier arm, no gate, no guard booth. Confirmed via Street View (capture 2026-03): wide unobstructed paved entrance drive with only a monument sign. Modern logistics park, property is unfenced.",

@@ -1,18 +1,108 @@
 {
   "name": "Frito-Lay - Kern Plant Bakersfield CA",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 35.39575, "lng": -119.32045 },
+  "coords": {
+    "lat": 35.39575,
+    "lng": -119.32045
+  },
   "geofences": {
-    "perimeter": { "south": 35.39185, "west": -119.32420, "north": 35.39870, "east": -119.31760 },
-    "truckGate": { "south": 35.39730, "west": -119.31900, "north": 35.39845, "east": -119.31790 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.398325,
+          "lng": -119.322785
+        },
+        {
+          "lat": 35.398325,
+          "lng": -119.318802
+        },
+        {
+          "lat": 35.392168,
+          "lng": -119.318802
+        },
+        {
+          "lat": 35.392168,
+          "lng": -119.322785
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.398325,
+          "lng": -119.32251
+        },
+        {
+          "lat": 35.398325,
+          "lng": -119.321549
+        },
+        {
+          "lat": 35.397877,
+          "lng": -119.321549
+        },
+        {
+          "lat": 35.397877,
+          "lng": -119.32251
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 35.39320, "west": -119.32130, "north": 35.39660, "east": -119.31830 },
-      { "south": 35.39200, "west": -119.32100, "north": 35.39400, "east": -119.31820 }
+      {
+        "ring": [
+          {
+            "lat": 35.395414,
+            "lng": -119.321823
+          },
+          {
+            "lat": 35.395414,
+            "lng": -119.319626
+          },
+          {
+            "lat": 35.392168,
+            "lng": -119.319626
+          },
+          {
+            "lat": 35.392168,
+            "lng": -119.321823
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.39560, "west": -119.32150, "north": 35.39680, "east": -119.31900 }
+      {
+        "ring": [
+          {
+            "lat": 35.396534,
+            "lng": -119.320999
+          },
+          {
+            "lat": 35.396534,
+            "lng": -119.319351
+          },
+          {
+            "lat": 35.39575,
+            "lng": -119.319351
+          },
+          {
+            "lat": 35.39575,
+            "lng": -119.320999
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 165,
+        "pano": "eMSkybT6vhVgIZ-R0NPGPg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 165,
+        "pano": "eMSkybT6vhVgIZ-R0NPGPg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 35,
@@ -20,7 +110,7 @@
     "trailerParkingCapacity": 160,
     "truckGateCount": 1,
     "buildingCount": 4,
-    "siteAreaAcres": 110.0,
+    "siteAreaAcres": 110,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@35.39575,-119.32045,400m/data=!3m1!1e3",
@@ -49,7 +139,13 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "dockDoors", "scale", "multiStep", "postGateStaging"],
+  "uncertainFields": [
+    "guardShack",
+    "dockDoors",
+    "scale",
+    "multiStep",
+    "postGateStaging"
+  ],
   "fieldNotes": {
     "location": "Roster coords (35.367588,-119.07772) were ~25 km off, landing on an oil tank farm. Resolved the real Kern Plant via web search (CLUI, PotatoPro, TruckMap) to 28801 Hwy 58, Bakersfield CA 93314 — an isolated industrial complex NW of Bakersfield surrounded by pivot-irrigated farmland. Locked center at 35.39575,-119.32045.",
     "truckGate": "Single truck entrance: a wide paved driveway off the north public road (Hwy 58 / Rosedale Hwy frontage) that crosses a BNSF rail spur and curves into the property. Street View (captured 2026-04) shows a continuous chain-link perimeter fence with a single driveway gap, orange lane delineators in the drive, and a small structure beside the lane. A LEED-Gold flagship food-manufacturing plant of this scale on an isolated site is gated as a matter of course.",

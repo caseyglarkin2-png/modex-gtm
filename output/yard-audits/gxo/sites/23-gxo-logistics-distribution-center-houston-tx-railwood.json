@@ -1,38 +1,121 @@
 {
   "name": "GXO Logistics Distribution Center - Houston TX (Railwood)",
   "type": "Distribution Center",
-  "coords": { "lat": 29.82900, "lng": -95.25250 },
+  "coords": {
+    "lat": 29.829,
+    "lng": -95.2525
+  },
   "geofences": {
-    "perimeter": { "south": 29.82680, "west": -95.25470, "north": 29.83040, "east": -95.25030 },
-    "truckGate": { "south": 29.82835, "west": -95.25385, "north": 29.82870, "east": -95.25335 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.829357,
+          "lng": -95.254079
+        },
+        {
+          "lat": 29.829,
+          "lng": -95.250577
+        },
+        {
+          "lat": 29.828047,
+          "lng": -95.250715
+        },
+        {
+          "lat": 29.828404,
+          "lng": -95.254217
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 29.82690, "west": -95.25430, "north": 29.82835, "east": -95.25060 }
+      {
+        "ring": [
+          {
+            "lat": 29.827868,
+            "lng": -95.253873
+          },
+          {
+            "lat": 29.82757,
+            "lng": -95.250303
+          },
+          {
+            "lat": 29.826498,
+            "lng": -95.250371
+          },
+          {
+            "lat": 29.826796,
+            "lng": -95.253942
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 29.82840, "west": -95.25450, "north": 29.82870, "east": -95.25060 },
-      { "south": 29.83000, "west": -95.25450, "north": 29.83035, "east": -95.25060 }
+      {
+        "ring": [
+          {
+            "lat": 29.828702,
+            "lng": -95.254148
+          },
+          {
+            "lat": 29.828345,
+            "lng": -95.250646
+          },
+          {
+            "lat": 29.828106,
+            "lng": -95.250715
+          },
+          {
+            "lat": 29.828464,
+            "lng": -95.254217
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 130, "trailersVisible": 60, "trailerParkingCapacity": 120,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 42.1,
+    "dockDoorCount": 130,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 42.1,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@29.82900,-95.25250,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes", "scale"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes",
+    "scale"
+  ],
   "fieldNotes": {
     "site": "GXO Logistics warehouse at 9255 Railwood Dr in the Railwood industrial corridor, NE Houston. Geocode was GEOMETRIC_CENTER; the GXO building was located as the large E-W bulk-distribution warehouse south of Railwood Dr (the Majestic Steel USA plant is the neighboring building to the east, ruled out). Confirmed via warehouse directories (Evopra, Racklify, AWCO) listing GXO at this address.",
     "truckGate": "TRUE — a chain-link perimeter fence wraps the building (confirmed in multiple Street View frames along Railwood Dr). A small standalone gatehouse structure with a hipped roof sits in the truck path at a pinch point on the south truck-court drive, between landscaped islands — a controlled, guarded entry to the south drop yard.",

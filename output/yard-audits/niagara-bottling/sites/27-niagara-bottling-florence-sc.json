@@ -1,17 +1,108 @@
 {
   "name": "Niagara Bottling - Florence SC",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 34.265200, "lng": -79.694000 },
+  "coords": {
+    "lat": 34.2652,
+    "lng": -79.694
+  },
   "geofences": {
-    "perimeter": { "south": 34.263500, "west": -79.697500, "north": 34.266000, "east": -79.691000 },
-    "truckGate": { "south": 34.263800, "west": -79.697000, "north": 34.264400, "east": -79.696300 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.266221,
+          "lng": -79.696197
+        },
+        {
+          "lat": 34.266221,
+          "lng": -79.690704
+        },
+        {
+          "lat": 34.264519,
+          "lng": -79.690704
+        },
+        {
+          "lat": 34.264519,
+          "lng": -79.696197
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.265994,
+          "lng": -79.696747
+        },
+        {
+          "lat": 34.265994,
+          "lng": -79.695923
+        },
+        {
+          "lat": 34.265427,
+          "lng": -79.695923
+        },
+        {
+          "lat": 34.265427,
+          "lng": -79.696747
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 34.263800, "west": -79.697000, "north": 34.264500, "east": -79.691500 }
+      {
+        "ring": [
+          {
+            "lat": 34.26486,
+            "lng": -79.695923
+          },
+          {
+            "lat": 34.26486,
+            "lng": -79.692352
+          },
+          {
+            "lat": 34.264065,
+            "lng": -79.692352
+          },
+          {
+            "lat": 34.264065,
+            "lng": -79.695923
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 34.264100, "west": -79.697000, "north": 34.264800, "east": -79.691300 }
+      {
+        "ring": [
+          {
+            "lat": 34.265087,
+            "lng": -79.695923
+          },
+          {
+            "lat": 34.265087,
+            "lng": -79.690979
+          },
+          {
+            "lat": 34.264746,
+            "lng": -79.690979
+          },
+          {
+            "lat": 34.264746,
+            "lng": -79.695923
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 78,
+        "pano": "veiq0uxLKrqDq9XdGp4muA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 78,
+        "pano": "veiq0uxLKrqDq9XdGp4muA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 70,
@@ -19,23 +110,44 @@
     "trailerParkingCapacity": 110,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 42.0,
+    "siteAreaAcres": 42,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.265200,-79.694000,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "No controlled checkpoint found. The property has only a low post-and-cable boundary marker along the road (clear in Street View 2024-02) — no security fence, no barrier arm and no guard booth across the truck driveway. The access road off Florence Harllee Blvd reads as an uncontrolled industrial driveway. Classified false; medium confidence.",
     "guardShack": "No staffed-booth structure anywhere at the entrance in satellite or Street View.",

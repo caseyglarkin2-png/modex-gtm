@@ -1,15 +1,100 @@
 {
   "name": "GP Wood Products - Talladega Lumber Mill - Talladega AL",
   "type": "Lumber Mill",
-  "coords": { "lat": 33.44400, "lng": -86.06000 },
+  "coords": {
+    "lat": 33.444,
+    "lng": -86.06
+  },
   "geofences": {
-    "perimeter": { "south": 33.4408, "west": -86.0640, "north": 33.4472, "east": -86.0570 },
-    "truckGate": { "south": 33.44540, "west": -86.05820, "north": 33.44600, "east": -86.05740 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.447208,
+          "lng": -86.061373
+        },
+        {
+          "lat": 33.446979,
+          "lng": -86.058901
+        },
+        {
+          "lat": 33.443083,
+          "lng": -86.058352
+        },
+        {
+          "lat": 33.442854,
+          "lng": -86.061099
+        },
+        {
+          "lat": 33.445146,
+          "lng": -86.061923
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.444,
+          "lng": -86.061099
+        },
+        {
+          "lat": 33.444,
+          "lng": -86.060275
+        },
+        {
+          "lat": 33.443427,
+          "lng": -86.060275
+        },
+        {
+          "lat": 33.443427,
+          "lng": -86.061099
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 33.44280, "west": -86.06150, "north": 33.44480, "east": -86.05900 }
+      {
+        "ring": [
+          {
+            "lat": 33.444,
+            "lng": -86.061099
+          },
+          {
+            "lat": 33.443885,
+            "lng": -86.058901
+          },
+          {
+            "lat": 33.442625,
+            "lng": -86.059039
+          },
+          {
+            "lat": 33.442739,
+            "lng": -86.061236
+          }
+        ]
+      }
     ],
-    "dockAprons": [],
-    "staging": { "south": 33.44440, "west": -86.05870, "north": 33.44560, "east": -86.05790 }
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 33.446063,
+            "lng": -86.061373
+          },
+          {
+            "lat": 33.445948,
+            "lng": -86.06
+          },
+          {
+            "lat": 33.444573,
+            "lng": -86.060137
+          },
+          {
+            "lat": 33.444688,
+            "lng": -86.061511
+          }
+        ]
+      }
+    ],
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 4,
@@ -22,18 +107,37 @@
   },
   "mapsUrl": "https://www.google.com/maps/@33.44400,-86.06000,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "0-10", "dropArea": "NONE",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": true, "dropYard": false, "multiStep": true
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "0-10",
+    "dropArea": "NONE",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": true,
+    "dropYard": false,
+    "multiStep": true
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "guardShack", "connectivityIssue", "multiStep"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "guardShack",
+    "connectivityIssue",
+    "multiStep"
+  ],
   "fieldNotes": {
     "location": "Resolved to GP's Talladega lumber facility at 400 Ironaton Cutoff Rd, Talladega AL (~33.44459,-86.059685). The roster's geocoded point (33.4359,-86.1058, APPROXIMATE, movedMeters 11764) was ~4.6 km W in downtown Talladega and wrong. Mill complex centroid locked at 33.44400,-86.06000.",
     "truckGate": "Site has a continuous chain-link perimeter fence (confirmed all around in Street View 2025-11) with a single controlled entrance driveway off Ironaton Cutoff Rd. Loaded log trucks queue internally at a check-in. A barrier arm was not clearly resolved but the fenced perimeter with one defined truck entrance qualifies as a controlled truck gate.",

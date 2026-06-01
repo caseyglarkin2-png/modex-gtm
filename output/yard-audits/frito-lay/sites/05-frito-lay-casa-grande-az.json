@@ -1,19 +1,96 @@
 {
   "name": "Frito-Lay - Casa Grande AZ",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 32.901500, "lng": -111.792000 },
+  "coords": {
+    "lat": 32.9015,
+    "lng": -111.792
+  },
   "geofences": {
-    "perimeter": { "south": 32.899400, "west": -111.795000, "north": 32.904700, "east": -111.791500 },
-    "truckGate": { "south": 32.901700, "west": -111.792000, "north": 32.902300, "east": -111.791500 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.904498,
+          "lng": -111.794747
+        },
+        {
+          "lat": 32.904498,
+          "lng": -111.791863
+        },
+        {
+          "lat": 32.900116,
+          "lng": -111.791863
+        },
+        {
+          "lat": 32.900116,
+          "lng": -111.794747
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.903575,
+          "lng": -111.795159
+        },
+        {
+          "lat": 32.903575,
+          "lng": -111.794609
+        },
+        {
+          "lat": 32.902999,
+          "lng": -111.794609
+        },
+        {
+          "lat": 32.902999,
+          "lng": -111.795159
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 32.902400, "west": -111.793000, "north": 32.904300, "east": -111.791600 },
-      { "south": 32.901500, "west": -111.795000, "north": 32.903400, "east": -111.793600 }
+      {
+        "ring": [
+          {
+            "lat": 32.901385,
+            "lng": -111.794197
+          },
+          {
+            "lat": 32.901385,
+            "lng": -111.792137
+          },
+          {
+            "lat": 32.900347,
+            "lng": -111.792137
+          },
+          {
+            "lat": 32.900347,
+            "lng": -111.794197
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 32.901300, "west": -111.793600, "north": 32.902600, "east": -111.792400 },
-      { "south": 32.899800, "west": -111.794200, "north": 32.900600, "east": -111.792600 }
+      {
+        "ring": [
+          {
+            "lat": 32.901731,
+            "lng": -111.794197
+          },
+          {
+            "lat": 32.901731,
+            "lng": -111.792137
+          },
+          {
+            "lat": 32.901269,
+            "lng": -111.792137
+          },
+          {
+            "lat": 32.901269,
+            "lng": -111.794197
+          }
+        ]
+      }
     ],
-    "staging": { "south": 32.901700, "west": -111.792600, "north": 32.902600, "east": -111.791800 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 35,
@@ -21,23 +98,44 @@
     "trailerParkingCapacity": 160,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 95.0,
+    "siteAreaAcres": 95,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@32.901500,-111.792000,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "scale", "dockDoors", "dockDoorCount", "shipRcvSeparate"],
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "dockDoors",
+    "dockDoorCount",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "The entire plant perimeter is enclosed by chain-link fencing (confirmed in multiple Street View captures from the east access road). A single internal access road runs along the east side from the public road network in the N; the truck entrance is a controlled gate where a driveway crosses the fence line onto this access road.",
     "guardShack": "A guard booth is likely at this flagship 'near net zero' secured plant, but could not be visually confirmed - z21 satellite at the gate zone is washed out and Street View of the entrance is heavily sun-glared. Marked true at medium confidence and flagged.",

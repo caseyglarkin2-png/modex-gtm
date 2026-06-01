@@ -1,38 +1,157 @@
 {
   "name": "Frito-Lay - Williamsport PA (DC)",
   "type": "Distribution Center",
-  "coords": { "lat": 41.227785, "lng": -77.068961 },
+  "coords": {
+    "lat": 41.227785,
+    "lng": -77.068961
+  },
   "geofences": {
-    "perimeter": { "south": 41.22640, "west": -77.07050, "north": 41.22920, "east": -77.06700 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.229438,
+          "lng": -77.070609
+        },
+        {
+          "lat": 41.229438,
+          "lng": -77.068137
+        },
+        {
+          "lat": 41.226132,
+          "lng": -77.068137
+        },
+        {
+          "lat": 41.226132,
+          "lng": -77.070609
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.228301,
+          "lng": -77.070609
+        },
+        {
+          "lat": 41.228301,
+          "lng": -77.070197
+        },
+        {
+          "lat": 41.228043,
+          "lng": -77.070197
+        },
+        {
+          "lat": 41.228043,
+          "lng": -77.070609
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 41.22760, "west": -77.06870, "north": 41.22900, "east": -77.06720 },
-      { "south": 41.22790, "west": -77.06800, "north": 41.22870, "east": -77.06700 }
+      {
+        "ring": [
+          {
+            "lat": 41.228301,
+            "lng": -77.070334
+          },
+          {
+            "lat": 41.228301,
+            "lng": -77.069236
+          },
+          {
+            "lat": 41.227527,
+            "lng": -77.069236
+          },
+          {
+            "lat": 41.227527,
+            "lng": -77.070334
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 41.227165,
+            "lng": -77.070334
+          },
+          {
+            "lat": 41.227165,
+            "lng": -77.068412
+          },
+          {
+            "lat": 41.226649,
+            "lng": -77.068412
+          },
+          {
+            "lat": 41.226649,
+            "lng": -77.070334
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.22700, "west": -77.06900, "north": 41.22760, "east": -77.06780 }
+      {
+        "ring": [
+          {
+            "lat": 41.227475,
+            "lng": -77.070197
+          },
+          {
+            "lat": 41.227475,
+            "lng": -77.068549
+          },
+          {
+            "lat": 41.227217,
+            "lng": -77.068549
+          },
+          {
+            "lat": 41.227217,
+            "lng": -77.070197
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 22, "trailersVisible": 55, "trailerParkingCapacity": 80,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 11.0,
+    "dockDoorCount": 22,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 11,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@41.227785,-77.068961,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "truckGate", "truckGateCount"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "truckGate",
+    "truckGateCount"
+  ],
   "fieldNotes": {
     "truckGate": "Open industrial-park setting. The facility fronts directly onto N Reach Rd / internal industrial-park streets with no barrier arm, sliding gate, or checkpoint pinch-point at any approach. Trucks drive straight into the drop yards from the public road.",
     "guardShack": "No guard booth visible. A small fenced/landscaped structure on the north side appears to be a site utility/break building, not a gate booth.",

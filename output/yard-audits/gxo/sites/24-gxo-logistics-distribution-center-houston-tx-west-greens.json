@@ -1,36 +1,100 @@
 {
   "name": "GXO Logistics Distribution Center - Houston TX (West Greens)",
   "type": "Distribution Center",
-  "coords": { "lat": 29.94470, "lng": -95.49050 },
+  "coords": {
+    "lat": 29.9447,
+    "lng": -95.4905
+  },
   "geofences": {
-    "perimeter": { "south": 29.94230, "west": -95.49250, "north": 29.94680, "east": -95.48830 },
-    "truckGate": { "south": 29.94380, "west": -95.49050, "north": 29.94420, "east": -95.48990 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.946723,
+          "lng": -95.491736
+        },
+        {
+          "lat": 29.946961,
+          "lng": -95.489676
+        },
+        {
+          "lat": 29.94351,
+          "lng": -95.488303
+        },
+        {
+          "lat": 29.943272,
+          "lng": -95.490363
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 29.94310, "west": -95.49040, "north": 29.94640, "east": -95.48870 },
-      { "south": 29.94250, "west": -95.49210, "north": 29.94440, "east": -95.49080 }
+      {
+        "ring": [
+          {
+            "lat": 29.946604,
+            "lng": -95.491599
+          },
+          {
+            "lat": 29.946842,
+            "lng": -95.489813
+          },
+          {
+            "lat": 29.946128,
+            "lng": -95.489539
+          },
+          {
+            "lat": 29.94589,
+            "lng": -95.491324
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 90, "trailersVisible": 8, "trailerParkingCapacity": 25,
-    "truckGateCount": 2, "buildingCount": 1, "siteAreaAcres": 50.3,
+    "dockDoorCount": 90,
+    "trailersVisible": 8,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 50.3,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@29.94470,-95.49050,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "0-10",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "0-10",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes", "dropArea"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes",
+    "dropArea"
+  ],
   "fieldNotes": {
     "site": "GXO Logistics warehouse at 4800 W Greens Rd, NW Houston. Pin (ROOFTOP geocode) lands on a very large bulk-distribution warehouse oriented NW-SE; address confirmed via warehouse directories (Evopra, Racklify, AWCO). Building set back from W Greens Rd behind a fenced lawn.",
     "truckGate": "FALSE — the property has a perimeter fence (black ornamental metal along the W Greens Rd frontage, chain-link along side property lines), but no guard booth and no barrier arm/sliding gate across any truck lane was found. The truck courts on the NE and SW building faces are entered via open driveways. The frontage fence is a property-line/decorative fence around the office and lawn, not a controlled truck checkpoint.",

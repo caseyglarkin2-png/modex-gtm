@@ -1,38 +1,119 @@
 {
   "name": "Niagara Bottling - Bloomfield CT",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 41.86070, "lng": -72.72370 },
+  "coords": {
+    "lat": 41.8607,
+    "lng": -72.7237
+  },
   "geofences": {
-    "perimeter": { "south": 41.85940, "west": -72.72560, "north": 41.86230, "east": -72.72190 },
-    "truckGate": { "south": 41.86010, "west": -72.72560, "north": 41.86090, "east": -72.72480 },
-    "dropYards": [
-      { "south": 41.86120, "west": -72.72490, "north": 41.86210, "east": -72.72240 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.861109,
+          "lng": -72.725279
+        },
+        {
+          "lat": 41.861672,
+          "lng": -72.721777
+        },
+        {
+          "lat": 41.860086,
+          "lng": -72.721228
+        },
+        {
+          "lat": 41.859524,
+          "lng": -72.72473
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.861416,
+          "lng": -72.726035
+        },
+        {
+          "lat": 41.861518,
+          "lng": -72.725485
+        },
+        {
+          "lat": 41.861263,
+          "lng": -72.725417
+        },
+        {
+          "lat": 41.86116,
+          "lng": -72.725966
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 41.86110, "west": -72.72480, "north": 41.86170, "east": -72.72230 },
-      { "south": 41.85960, "west": -72.72470, "north": 41.86000, "east": -72.72250 }
+      {
+        "ring": [
+          {
+            "lat": 41.861211,
+            "lng": -72.725348
+          },
+          {
+            "lat": 41.861723,
+            "lng": -72.721915
+          },
+          {
+            "lat": 41.861467,
+            "lng": -72.721846
+          },
+          {
+            "lat": 41.860956,
+            "lng": -72.725279
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 45, "trailersVisible": 60, "trailerParkingCapacity": 80,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 24.0,
+    "dockDoorCount": 45,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 24,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.86070,-72.72370,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "trailerParkingCapacity", "shipRcvSeparate"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "The plant's perimeter access road connects to the industrial-park internal road network as an open, uncontrolled drive; no barrier arm, sliding gate, or checkpoint pinch-point visible in satellite imagery. Street View (2021-06) only reaches Woodland Ave at the separate brick office building - it does not reach the plant's truck entrance, hence medium confidence.",
     "guardShack": "No staffed booth resolvable at the access road. Small structures along the dock faces read as dock-side utility buildings, not an entrance guard shack.",

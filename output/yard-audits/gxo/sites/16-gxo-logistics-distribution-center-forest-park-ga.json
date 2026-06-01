@@ -1,16 +1,54 @@
 {
   "name": "GXO Logistics Distribution Center - Forest Park GA",
   "type": "Distribution Center",
-  "coords": { "lat": 33.620500, "lng": -84.314800 },
+  "coords": {
+    "lat": 33.6205,
+    "lng": -84.3148
+  },
   "geofences": {
-    "perimeter": { "south": 33.616400, "west": -84.317600, "north": 33.624200, "east": -84.312900 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.620614,
+          "lng": -84.317959
+        },
+        {
+          "lat": 33.621644,
+          "lng": -84.315075
+        },
+        {
+          "lat": 33.617184,
+          "lng": -84.312603
+        },
+        {
+          "lat": 33.616154,
+          "lng": -84.315487
+        }
+      ]
+    },
     "truckGate": null,
-    "dropYards": [
-      { "south": 33.616600, "west": -84.314200, "north": 33.623000, "east": -84.312900 }
-    ],
+    "dropYards": [],
     "dockAprons": [
-      { "south": 33.616600, "west": -84.314800, "north": 33.623000, "east": -84.313600 },
-      { "south": 33.621800, "west": -84.316900, "north": 33.623600, "east": -84.315200 }
+      {
+        "ring": [
+          {
+            "lat": 33.6205,
+            "lng": -84.317959
+          },
+          {
+            "lat": 33.621529,
+            "lng": -84.315349
+          },
+          {
+            "lat": 33.620843,
+            "lng": -84.314937
+          },
+          {
+            "lat": 33.619814,
+            "lng": -84.317547
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -20,23 +58,43 @@
     "trailerParkingCapacity": 280,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 48.0,
+    "siteAreaAcres": 48,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.620500,-84.314800,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "trailersVisible", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "trailersVisible",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "GXO leases part of Building 900 at Gillem Logistics Center Phase II, 2145 Anvil Block Rd, Forest Park GA. Building 900 is a 1,043,418 SF cross-dock (208 dock doors, 280 trailer spots per developer spec sheet). Confirmed via satellite + Street View; building carries an 'Amazon' wall sign as the lead tenant of the cross-dock space.",
     "truckGate": "No barrier arm or guard booth visible at any public-road entry. The west/NW auto-parking frontage on the access road is fully open and unfenced (2025 Street View). A black metal perimeter fence runs along part of the east access road, but the truck court entry itself shows no gate structure in available imagery. Classified false; flagged uncertain since the truck court is on the building's NE/east side with no Street View coverage.",

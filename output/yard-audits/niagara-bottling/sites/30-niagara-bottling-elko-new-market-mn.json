@@ -1,13 +1,87 @@
 {
   "name": "Niagara Bottling - Elko New Market MN",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 44.567600, "lng": -93.290000 },
+  "coords": {
+    "lat": 44.5676,
+    "lng": -93.29
+  },
   "geofences": {
-    "perimeter": { "south": 44.564800, "west": -93.294500, "north": 44.569700, "east": -93.287500 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 44.568676,
+          "lng": -93.291373
+        },
+        {
+          "lat": 44.569263,
+          "lng": -93.287803
+        },
+        {
+          "lat": 44.566817,
+          "lng": -93.286704
+        },
+        {
+          "lat": 44.56623,
+          "lng": -93.290275
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 44.567111,
+          "lng": -93.291099
+        },
+        {
+          "lat": 44.567306,
+          "lng": -93.29
+        },
+        {
+          "lat": 44.566817,
+          "lng": -93.289863
+        },
+        {
+          "lat": 44.566622,
+          "lng": -93.290961
+        }
+      ]
+    },
     "dropYards": [],
-    "dockAprons": [],
-    "staging": null
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 44.567796,
+            "lng": -93.290549
+          },
+          {
+            "lat": 44.568383,
+            "lng": -93.287116
+          },
+          {
+            "lat": 44.567894,
+            "lng": -93.286979
+          },
+          {
+            "lat": 44.567306,
+            "lng": -93.290412
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 233,
+        "pano": "Vi06mg-3jindkgg6HOnplw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 233,
+        "pano": "Vi06mg-3jindkgg6HOnplw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 0,
@@ -15,29 +89,60 @@
     "trailerParkingCapacity": 0,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 36.0,
+    "siteAreaAcres": 36,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@44.567600,-93.290000,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "NONE", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "connectivityIssue",
-    "scale", "dropYard", "multiStep", "dockDoorCount", "trailersVisible",
-    "trailerParkingCapacity", "railServed"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "connectivityIssue",
+    "scale",
+    "dropYard",
+    "multiStep",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "railServed"
   ],
   "fieldNotes": {
     "_location": "Roster coordinates (46.732498, -92.201007) were badly wrong — they pointed to a forested highway interchange near Duluth, ~250 km north of Elko New Market. Corrected via web research: the plant is the 425,000 sq ft, $125M Niagara facility in the SE quadrant of the I-35 / Scott County Road 2 interchange in Elko New Market's Park I-35 Industrial Park. Building shell positively identified in satellite imagery at ~44.5676, -93.2900.",

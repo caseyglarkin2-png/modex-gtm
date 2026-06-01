@@ -1,15 +1,54 @@
 {
   "name": "GXO Logistics Distribution Center - Fairburn GA",
   "type": "Distribution Center",
-  "coords": { "lat": 33.552411, "lng": -84.537454 },
+  "coords": {
+    "lat": 33.552411,
+    "lng": -84.537454
+  },
   "geofences": {
-    "perimeter": { "south": 33.550500, "west": -84.540000, "north": 33.554600, "east": -84.535000 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.552869,
+          "lng": -84.53972
+        },
+        {
+          "lat": 33.554528,
+          "lng": -84.53663
+        },
+        {
+          "lat": 33.553212,
+          "lng": -84.535531
+        },
+        {
+          "lat": 33.551553,
+          "lng": -84.538621
+        }
+      ]
+    },
     "truckGate": null,
-    "dropYards": [
-      { "south": 33.550800, "west": -84.539600, "north": 33.553400, "east": -84.536400 }
-    ],
+    "dropYards": [],
     "dockAprons": [
-      { "south": 33.551000, "west": -84.539400, "north": 33.553600, "east": -84.536600 }
+      {
+        "ring": [
+          {
+            "lat": 33.553555,
+            "lng": -84.53972
+          },
+          {
+            "lat": 33.554585,
+            "lng": -84.537111
+          },
+          {
+            "lat": 33.554242,
+            "lng": -84.536905
+          },
+          {
+            "lat": 33.553212,
+            "lng": -84.539514
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -19,23 +58,39 @@
     "trailerParkingCapacity": 60,
     "truckGateCount": 0,
     "buildingCount": 1,
-    "siteAreaAcres": 52.0,
+    "siteAreaAcres": 52,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.552411,-84.537454,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "buildingIdentity": "Confirmed via web research: 907,665 sq ft speculative building (Red Rock Developments / LXP Industrial Trust), dimensions 650' x 1,400', in Shugart Farms Lake Industrial Park along I-85, leased to GXO. Satellite shows the matching large NW-SE-oriented building at the geocoded point.",
     "truckGate": "Open site. Street View (2025-11) shows the SW dock face and truck court with NO perimeter fence, NO gate barrier, and NO guard booth - a pickup truck drives freely past the dock apron. Access roads run open to the docks. truckGate / guardShack / remoteGs all false.",

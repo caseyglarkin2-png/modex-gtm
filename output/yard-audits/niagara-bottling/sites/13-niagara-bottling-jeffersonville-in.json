@@ -1,15 +1,94 @@
 {
   "name": "Niagara Bottling - Jeffersonville IN",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 38.37990, "lng": -85.67500 },
+  "coords": {
+    "lat": 38.3799,
+    "lng": -85.675
+  },
   "geofences": {
-    "perimeter": { "south": 38.37860, "west": -85.67780, "north": 38.38140, "east": -85.67260 },
-    "truckGate": { "south": 38.37880, "west": -85.67540, "north": 38.37920, "east": -85.67460 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.381084,
+          "lng": -85.677335
+        },
+        {
+          "lat": 38.381084,
+          "lng": -85.673352
+        },
+        {
+          "lat": 38.378608,
+          "lng": -85.673352
+        },
+        {
+          "lat": 38.378608,
+          "lng": -85.677335
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 38.379685,
+          "lng": -85.678845
+        },
+        {
+          "lat": 38.379685,
+          "lng": -85.677747
+        },
+        {
+          "lat": 38.379146,
+          "lng": -85.677747
+        },
+        {
+          "lat": 38.379146,
+          "lng": -85.678845
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 38.37880, "west": -85.67760, "north": 38.37990, "east": -85.67400 }
+      {
+        "ring": [
+          {
+            "lat": 38.379685,
+            "lng": -85.677747
+          },
+          {
+            "lat": 38.379685,
+            "lng": -85.673627
+          },
+          {
+            "lat": 38.378608,
+            "lng": -85.673627
+          },
+          {
+            "lat": 38.378608,
+            "lng": -85.677747
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 38.37920, "west": -85.67740, "north": 38.38010, "east": -85.67420 }
+      {
+        "ring": [
+          {
+            "lat": 38.379792,
+            "lng": -85.677609
+          },
+          {
+            "lat": 38.379792,
+            "lng": -85.673489
+          },
+          {
+            "lat": 38.379362,
+            "lng": -85.673489
+          },
+          {
+            "lat": 38.379362,
+            "lng": -85.677609
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -19,23 +98,39 @@
     "trailerParkingCapacity": 150,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 34.0,
+    "siteAreaAcres": 34,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@38.37990,-85.67500,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "buildingId": "Address 350 Logistics Ave geocoded ROOFTOP onto a single large warehouse/manufacturing building in River Ridge Commerce Center. Confirmed Niagara via a red 'Niagara' wall sign visible on the building's office front in a March 2026 Street View pano, and via web research (469,000 sq ft plant, opened 2019, expanded ~2020/2023).",
     "truckGate": "No barrier arm, sliding/swing gate, or guard booth visible anywhere along the property line. The S frontage on Logistics Avenue is open behind a grass berm; the truck driveway into the dock yard is uncontrolled. truckGate false.",

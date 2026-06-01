@@ -1,38 +1,138 @@
 {
   "name": "Frito-Lay - Aberdeen MD",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 39.49876, "lng": -76.18868 },
+  "coords": {
+    "lat": 39.49876,
+    "lng": -76.18868
+  },
   "geofences": {
-    "perimeter": { "south": 39.49580, "west": -76.19250, "north": 39.50050, "east": -76.18640 },
-    "truckGate": { "south": 39.49830, "west": -76.18790, "north": 39.49890, "east": -76.18720 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.49982,
+          "lng": -76.192113
+        },
+        {
+          "lat": 39.501197,
+          "lng": -76.187032
+        },
+        {
+          "lat": 39.499184,
+          "lng": -76.185933
+        },
+        {
+          "lat": 39.4977,
+          "lng": -76.191015
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.501091,
+          "lng": -76.187856
+        },
+        {
+          "lat": 39.501303,
+          "lng": -76.187032
+        },
+        {
+          "lat": 39.500773,
+          "lng": -76.186757
+        },
+        {
+          "lat": 39.500561,
+          "lng": -76.187581
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 39.49600, "west": -76.19180, "north": 39.49820, "east": -76.18950 }
+      {
+        "ring": [
+          {
+            "lat": 39.49823,
+            "lng": -76.191839
+          },
+          {
+            "lat": 39.498866,
+            "lng": -76.189779
+          },
+          {
+            "lat": 39.498018,
+            "lng": -76.189367
+          },
+          {
+            "lat": 39.497382,
+            "lng": -76.191427
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.49670, "west": -76.19120, "north": 39.49900, "east": -76.18850 },
-      { "south": 39.49860, "west": -76.19250, "north": 39.50000, "east": -76.18900 }
+      {
+        "ring": [
+          {
+            "lat": 39.49982,
+            "lng": -76.190053
+          },
+          {
+            "lat": 39.500667,
+            "lng": -76.187307
+          },
+          {
+            "lat": 39.500138,
+            "lng": -76.187032
+          },
+          {
+            "lat": 39.49929,
+            "lng": -76.189779
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 70, "trailersVisible": 130, "trailerParkingCapacity": 160,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 58.0,
+    "dockDoorCount": 70,
+    "trailersVisible": 130,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 58,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@39.49876,-76.18868,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "scale", "railServed"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "scale",
+    "railServed"
+  ],
   "fieldNotes": {
     "location": "Roster address (1080 Old Philadelphia Rd) was approximate (geocode RANGE_INTERPOLATED). Web research and OpenStreetMap resolved the operating address to 800 Hickory Dr, Aberdeen MD 21001; OSM tags the Frito-Lay building at 39.49876,-76.188679. Street View confirmed the 'Frito-Lay, Inc.' monument sign and Cheetos-branded trailers at the dock.",
     "truckGate": "Street View (2024 pano on Hickory Dr) clearly shows a barrier arm across the single truck driveway with continuous chain-link perimeter fencing - controlled truck gate confirmed.",

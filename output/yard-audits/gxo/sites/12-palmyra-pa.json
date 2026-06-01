@@ -1,22 +1,128 @@
 {
   "name": "GXO Logistics Distribution Center - Palmyra PA",
   "type": "Distribution Center",
-  "coords": { "lat": 40.31050, "lng": -76.61450 },
+  "coords": {
+    "lat": 40.3105,
+    "lng": -76.6145
+  },
   "geofences": {
-    "perimeter": { "south": 40.30720, "west": -76.61820, "north": 40.31320, "east": -76.60980 },
-    "truckGate": { "south": 40.30740, "west": -76.61790, "north": 40.30810, "east": -76.61680 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.312594,
+          "lng": -76.61862
+        },
+        {
+          "lat": 40.312594,
+          "lng": -76.610655
+        },
+        {
+          "lat": 40.309243,
+          "lng": -76.610655
+        },
+        {
+          "lat": 40.309243,
+          "lng": -76.61862
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.309243,
+          "lng": -76.618071
+        },
+        {
+          "lat": 40.309243,
+          "lng": -76.616972
+        },
+        {
+          "lat": 40.308615,
+          "lng": -76.616972
+        },
+        {
+          "lat": 40.308615,
+          "lng": -76.618071
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.31230, "west": -76.61820, "north": 40.31320, "east": -76.61350 },
-      { "south": 40.31230, "west": -76.61350, "north": 40.31320, "east": -76.60980 },
-      { "south": 40.30960, "west": -76.61150, "north": 40.31100, "east": -76.60980 },
-      { "south": 40.30900, "west": -76.61820, "north": 40.30980, "east": -76.61550 }
+      {
+        "ring": [
+          {
+            "lat": 40.312385,
+            "lng": -76.610655
+          },
+          {
+            "lat": 40.312385,
+            "lng": -76.609556
+          },
+          {
+            "lat": 40.310919,
+            "lng": -76.609556
+          },
+          {
+            "lat": 40.310919,
+            "lng": -76.610655
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.31180, "west": -76.61820, "north": 40.31250, "east": -76.60990 },
-      { "south": 40.30930, "west": -76.61550, "north": 40.31000, "east": -76.61150 },
-      { "south": 40.30950, "west": -76.61860, "north": 40.31200, "east": -76.61810 }
+      {
+        "ring": [
+          {
+            "lat": 40.31249,
+            "lng": -76.618345
+          },
+          {
+            "lat": 40.31249,
+            "lng": -76.610929
+          },
+          {
+            "lat": 40.311966,
+            "lng": -76.610929
+          },
+          {
+            "lat": 40.311966,
+            "lng": -76.618345
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.309976,
+            "lng": -76.618071
+          },
+          {
+            "lat": 40.309976,
+            "lng": -76.611479
+          },
+          {
+            "lat": 40.309453,
+            "lng": -76.611479
+          },
+          {
+            "lat": 40.309453,
+            "lng": -76.618071
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 46,
+        "pano": "8Mp1B5BSUIBpY5dHua80hQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 46,
+        "pano": "8Mp1B5BSUIBpY5dHua80hQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 220,
@@ -29,18 +135,35 @@
   },
   "mapsUrl": "https://www.google.com/maps/@40.31050,-76.61450,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Access road runs from a signalized public intersection at the SW and wraps around the building; no barrier arm, sliding gate or checkpoint pinch-point visible at the property line in z19/z20 satellite. No perimeter fence around the operational yard. Classed false.",
     "guardShack": "No 1-3-vehicle booth at the entrance or anywhere along the access road in z19 satellite or Street View. Site is open.",

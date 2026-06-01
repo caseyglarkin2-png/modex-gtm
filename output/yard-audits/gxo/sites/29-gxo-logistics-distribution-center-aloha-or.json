@@ -1,13 +1,42 @@
 {
   "name": "GXO Logistics Distribution Center - Aloha OR",
   "type": "Distribution Center",
-  "coords": { "lat": 45.49332, "lng": -122.8834 },
+  "coords": {
+    "lat": 45.49332,
+    "lng": -122.8834
+  },
   "geofences": {
-    "perimeter": { "south": 45.49050, "west": -122.88950, "north": 45.49600, "east": -122.88200 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 45.495053,
+          "lng": -122.88752
+        },
+        {
+          "lat": 45.495053,
+          "lng": -122.8834
+        },
+        {
+          "lat": 45.492165,
+          "lng": -122.8834
+        },
+        {
+          "lat": 45.492165,
+          "lng": -122.88752
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 164,
+        "pano": "gTyKyNbGHyjKlMRiK4i-Rw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 0,
@@ -15,28 +44,59 @@
     "trailerParkingCapacity": 0,
     "truckGateCount": 1,
     "buildingCount": 5,
-    "siteAreaAcres": 88.0,
+    "siteAreaAcres": 88,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@45.49332,-122.8834,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "NONE", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "multipleFacilities", "scale",
-    "dropYard", "multiStep", "dockDoorCount", "buildingCount", "siteAreaAcres"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "multipleFacilities",
+    "scale",
+    "dropYard",
+    "multiStep",
+    "dockDoorCount",
+    "buildingCount",
+    "siteAreaAcres"
   ],
   "fieldNotes": {
     "facilityMismatch": "Roster address '3585 SW 198th Ave, Aloha OR 97007' resolves (correctly) to the Intel Aloha Campus - a semiconductor fabrication campus, NOT a standalone GXO distribution center. Multiple Waze/web sources confirm 3585 SW 198th Ave is Intel's Aloha Campus. GXO Logistics provides on-site contract logistics services for Intel at this campus, but there is no separable, auditable GXO distribution-center yard (dock bank, trailer drop yard, distribution truck gate) - it is an Intel fab campus.",

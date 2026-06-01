@@ -1,17 +1,87 @@
 {
   "name": "Niagara Bottling - Rialto CA",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 34.12940, "lng": -117.41630 },
+  "coords": {
+    "lat": 34.1294,
+    "lng": -117.4163
+  },
   "geofences": {
-    "perimeter": { "south": 34.12800, "west": -117.41850, "north": 34.13085, "east": -117.41430 },
-    "truckGate": { "south": 34.13045, "west": -117.41760, "north": 34.13085, "east": -117.41700 },
-    "dropYards": [
-      { "south": 34.13010, "west": -117.41840, "north": 34.13075, "east": -117.41460 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.130082,
+          "lng": -117.418291
+        },
+        {
+          "lat": 34.130082,
+          "lng": -117.414377
+        },
+        {
+          "lat": 34.128661,
+          "lng": -117.414377
+        },
+        {
+          "lat": 34.128661,
+          "lng": -117.418291
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.128718,
+          "lng": -117.418497
+        },
+        {
+          "lat": 34.128718,
+          "lng": -117.418085
+        },
+        {
+          "lat": 34.128434,
+          "lng": -117.418085
+        },
+        {
+          "lat": 34.128434,
+          "lng": -117.418497
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 34.12990, "west": -117.41840, "north": 34.13015, "east": -117.41460 }
+      {
+        "ring": [
+          {
+            "lat": 34.128945,
+            "lng": -117.418291
+          },
+          {
+            "lat": 34.128945,
+            "lng": -117.414377
+          },
+          {
+            "lat": 34.128718,
+            "lng": -117.414377
+          },
+          {
+            "lat": 34.128718,
+            "lng": -117.418291
+          }
+        ]
+      }
     ],
-    "staging": { "south": 34.13015, "west": -117.41770, "north": 34.13075, "east": -117.41560 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 89,
+        "pano": "wGTTODObKaYikU42X2PuVg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 89,
+        "pano": "wGTTODObKaYikU42X2PuVg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 40,
@@ -19,7 +89,7 @@
     "trailerParkingCapacity": 80,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 30.0,
+    "siteAreaAcres": 30,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.12940,-117.41630,400m/data=!3m1!1e3",
@@ -48,7 +118,14 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "trailerParkingCapacity", "dropArea", "truckGate-geofence"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "dropArea",
+    "truckGate-geofence"
+  ],
   "fieldNotes": {
     "buildingId": "Confirmed Niagara via the distinctive rooftop solar array - Niagara Rialto operates an on-site solar farm (independently documented). 598,750 sq ft single building, 1401 N Alder Ave.",
     "truckGate": "Entire property is enclosed by a solid masonry perimeter wall - a fully secured site. The truck entrance is a gated opening in the wall on the north side serving the dock yard. No Street View pano sits directly on the gate (interior roads have no coverage), so the exact gate location and any barrier hardware are inferred; medium confidence.",

@@ -1,37 +1,146 @@
 {
   "name": "Frito-Lay - Forest City NC (DC)",
   "type": "Distribution Center",
-  "coords": { "lat": 35.33855, "lng": -81.88640 },
+  "coords": {
+    "lat": 35.33855,
+    "lng": -81.8864
+  },
   "geofences": {
-    "perimeter": { "south": 35.33760, "west": -81.88740, "north": 35.33960, "east": -81.88540 },
-    "truckGate": { "south": 35.33790, "west": -81.88700, "north": 35.33820, "east": -81.88660 },
-    "dropYards": [
-      { "south": 35.33780, "west": -81.88660, "north": 35.33850, "east": -81.88560 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.33911,
+          "lng": -81.886881
+        },
+        {
+          "lat": 35.338942,
+          "lng": -81.885713
+        },
+        {
+          "lat": 35.33827,
+          "lng": -81.885851
+        },
+        {
+          "lat": 35.338438,
+          "lng": -81.887018
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.33911,
+          "lng": -81.886743
+        },
+        {
+          "lat": 35.339082,
+          "lng": -81.886537
+        },
+        {
+          "lat": 35.338942,
+          "lng": -81.886572
+        },
+        {
+          "lat": 35.33897,
+          "lng": -81.886778
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 35.33780, "west": -81.88640, "north": 35.33840, "east": -81.88560 }
+      {
+        "ring": [
+          {
+            "lat": 35.338774,
+            "lng": -81.886812
+          },
+          {
+            "lat": 35.33869,
+            "lng": -81.886125
+          },
+          {
+            "lat": 35.33855,
+            "lng": -81.88616
+          },
+          {
+            "lat": 35.338634,
+            "lng": -81.886846
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": {
+      "ring": [
+        {
+          "lat": 35.33911,
+          "lng": -81.886743
+        },
+        {
+          "lat": 35.339026,
+          "lng": -81.885988
+        },
+        {
+          "lat": 35.33883,
+          "lng": -81.886022
+        },
+        {
+          "lat": 35.338914,
+          "lng": -81.886778
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 157,
+        "pano": "hz7mRTb6Z9FNQi_fJRgpJg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 157,
+        "pano": "hz7mRTb6Z9FNQi_fJRgpJg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 9, "trailersVisible": 6, "trailerParkingCapacity": 14,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 5.0,
+    "dockDoorCount": 9,
+    "trailersVisible": 6,
+    "trailerParkingCapacity": 14,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 5,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.33855,-81.88640,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "0-10", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "dockDoorCount"],
+  "uncertainFields": [
+    "guardShack",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "truckGate": "April-2025 Street View shows the whole truck yard enclosed by a chain-link perimeter fence with box trucks/trailers parked inside; the access driveway passes through a gate opening in the fence. Controlled entry confirmed.",
     "guardShack": "No guard-booth structure visible at the gate. As a small ~115k sq ft product-exchange DC (built 2023, leased Nov 2023), the gate is a remote/badge-controlled sliding gate.",

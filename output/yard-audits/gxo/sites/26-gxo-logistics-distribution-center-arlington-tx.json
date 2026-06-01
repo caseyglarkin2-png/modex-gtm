@@ -1,17 +1,63 @@
 {
   "name": "GXO Logistics Distribution Center - Arlington TX",
   "type": "Distribution Center",
-  "coords": { "lat": 32.678848, "lng": -97.07711 },
+  "coords": {
+    "lat": 32.678848,
+    "lng": -97.07711
+  },
   "geofences": {
-    "perimeter": { "south": 32.67820, "west": -97.07880, "north": 32.67980, "east": -97.07560 },
-    "truckGate": { "south": 32.67970, "west": -97.07720, "north": 32.67995, "east": -97.07650 },
-    "dropYards": [
-      { "south": 32.67930, "west": -97.07820, "north": 32.67980, "east": -97.07580 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.67931,
+          "lng": -97.078277
+        },
+        {
+          "lat": 32.679195,
+          "lng": -97.076217
+        },
+        {
+          "lat": 32.678154,
+          "lng": -97.076355
+        },
+        {
+          "lat": 32.67827,
+          "lng": -97.078415
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 32.67910, "west": -97.07830, "north": 32.67945, "east": -97.07590 }
+      {
+        "ring": [
+          {
+            "lat": 32.679195,
+            "lng": -97.078209
+          },
+          {
+            "lat": 32.679079,
+            "lng": -97.076286
+          },
+          {
+            "lat": 32.678848,
+            "lng": -97.076355
+          },
+          {
+            "lat": 32.678964,
+            "lng": -97.078277
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 49,
+        "pano": "FNYfxdfUlJ-klW_Lmu-UnQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 40,
@@ -24,18 +70,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@32.678848,-97.07711,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Chain-link fence encloses the north dock yard; a sliding/cantilever gate spans the truck drive entrance off the internal park road (visible in 2026-03 Street View).",
     "remoteGs": "Gated entry but no guard booth visible at the gate - kiosk/app check-in implied.",

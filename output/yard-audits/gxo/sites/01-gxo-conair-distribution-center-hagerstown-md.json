@@ -1,18 +1,42 @@
 {
   "name": "GXO Conair Distribution Center - Hagerstown MD",
   "type": "Distribution Center",
-  "coords": { "lat": 39.604697, "lng": -77.760602 },
+  "coords": {
+    "lat": 39.604697,
+    "lng": -77.760602
+  },
   "geofences": {
-    "perimeter": { "south": 39.601400, "west": -77.765800, "north": 39.607400, "east": -77.755600 },
-    "truckGate": { "south": 39.602550, "west": -77.758450, "north": 39.602950, "east": -77.757850 },
-    "dropYards": [
-      { "south": 39.603100, "west": -77.760900, "north": 39.604200, "east": -77.756600 }
-    ],
-    "dockAprons": [
-      { "south": 39.603700, "west": -77.762400, "north": 39.605200, "east": -77.761800 },
-      { "south": 39.605400, "west": -77.762000, "north": 39.605900, "east": -77.756000 }
-    ],
-    "staging": { "south": 39.602900, "west": -77.759400, "north": 39.603300, "east": -77.758000 }
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.605543,
+          "lng": -77.763349
+        },
+        {
+          "lat": 39.605967,
+          "lng": -77.758954
+        },
+        {
+          "lat": 39.603427,
+          "lng": -77.75813
+        },
+        {
+          "lat": 39.603004,
+          "lng": -77.762525
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 343,
+        "pano": "CAJlsi_5twzi4JiqfD8ntA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 378,
@@ -20,23 +44,46 @@
     "trailerParkingCapacity": 250,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 144.0,
+    "siteAreaAcres": 144,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.604697,-77.760602,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging", "entryLanes", "exitLanes", "trailersVisible", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "entryLanes",
+    "exitLanes",
+    "trailersVisible",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "imagery": "Maxar satellite imagery (2026 capture cited, but content is mid-construction: slab + structural footings, only the north building wall partially erected). Facility is confirmed operational since March 2024. Gate/yard hardware not yet placed in the imagery, so entry-control fields are inferred from facility class, not observed.",
     "dockDoors": "Web research confirms 378 dock positions across the building (GXO/Conair press materials). Solidly 50+.",

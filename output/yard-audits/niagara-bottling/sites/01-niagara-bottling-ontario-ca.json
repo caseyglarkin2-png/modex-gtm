@@ -1,15 +1,63 @@
 {
   "name": "Niagara Bottling - Ontario CA",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 34.07480, "lng": -117.53200 },
+  "coords": {
+    "lat": 34.0748,
+    "lng": -117.532
+  },
   "geofences": {
-    "perimeter": { "south": 34.07350, "west": -117.53285, "north": 34.07585, "east": -117.53120 },
-    "truckGate": { "south": 34.07430, "west": -117.53270, "north": 34.07475, "east": -117.53235 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.075312,
+          "lng": -117.532412
+        },
+        {
+          "lat": 34.075312,
+          "lng": -117.531245
+        },
+        {
+          "lat": 34.073435,
+          "lng": -117.531245
+        },
+        {
+          "lat": 34.073435,
+          "lng": -117.532412
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 34.07435, "west": -117.53265, "north": 34.07555, "east": -117.53225 }
+      {
+        "ring": [
+          {
+            "lat": 34.075028,
+            "lng": -117.532412
+          },
+          {
+            "lat": 34.075028,
+            "lng": -117.531245
+          },
+          {
+            "lat": 34.0748,
+            "lng": -117.531245
+          },
+          {
+            "lat": 34.0748,
+            "lng": -117.532412
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 210,
+        "pano": "ZGIBSf_bwrnwUFDTrdldpw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 12,
@@ -46,7 +94,12 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "remoteGs", "dockDoors", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "truckGate",
+    "remoteGs",
+    "dockDoors",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "No barrier arm or guard booth at the public road. The truck dock apron on the building's west face IS fenced off from the adjacent employee parking lot, with a gate at the apron mouth - so the working truck yard is access-controlled, but the gate is an internal apron gate, not a road-edge checkpoint. Classified truckGate true on the basis of the fenced apron entry; medium confidence.",
     "remoteGs": "No guard shack anywhere on site; if the apron gate is controlled it would be via keypad/call-box/driver check-in at the shipping office (driver instructions say check in on foot at the south-side shipping office).",

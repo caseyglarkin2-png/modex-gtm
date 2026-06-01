@@ -1,17 +1,112 @@
 {
   "name": "GP Palatka Mill - Palatka FL",
   "type": "Kraft/Tissue Mill",
-  "coords": { "lat": 29.6860, "lng": -81.6575 },
+  "coords": {
+    "lat": 29.686,
+    "lng": -81.6575
+  },
   "geofences": {
-    "perimeter": { "south": 29.679263, "west": -81.661843, "north": 29.693636, "east": -81.653571 },
-    "truckGate": { "south": 29.684371, "west": -81.661931, "north": 29.685629, "east": -81.660069 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.695544,
+          "lng": -81.661895
+        },
+        {
+          "lat": 29.694112,
+          "lng": -81.653105
+        },
+        {
+          "lat": 29.679319,
+          "lng": -81.654204
+        },
+        {
+          "lat": 29.678364,
+          "lng": -81.660247
+        },
+        {
+          "lat": 29.688386,
+          "lng": -81.662444
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 29.690772,
+          "lng": -81.661345
+        },
+        {
+          "lat": 29.690772,
+          "lng": -81.659697
+        },
+        {
+          "lat": 29.689579,
+          "lng": -81.659697
+        },
+        {
+          "lat": 29.689579,
+          "lng": -81.661345
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 29.685661, "west": -81.658914, "north": 29.686739, "east": -81.658086 }
+      {
+        "ring": [
+          {
+            "lat": 29.693158,
+            "lng": -81.6575
+          },
+          {
+            "lat": 29.692681,
+            "lng": -81.653105
+          },
+          {
+            "lat": 29.68934,
+            "lng": -81.65338
+          },
+          {
+            "lat": 29.689818,
+            "lng": -81.657775
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 29.681212, "west": -81.655414, "north": 29.683188, "east": -81.654586 }
+      {
+        "ring": [
+          {
+            "lat": 29.688386,
+            "lng": -81.660247
+          },
+          {
+            "lat": 29.687909,
+            "lng": -81.655303
+          },
+          {
+            "lat": 29.686716,
+            "lng": -81.655577
+          },
+          {
+            "lat": 29.687193,
+            "lng": -81.660521
+          }
+        ]
+      }
     ],
-    "staging": { "south": 29.683281, "west": -81.656724, "north": 29.684719, "east": -81.655276 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 106,
+        "pano": "GeIeWpbq4FwC6KADtP06ew",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 106,
+        "pano": "GeIeWpbq4FwC6KADtP06ew",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 30,
@@ -19,7 +114,7 @@
     "trailerParkingCapacity": 90,
     "truckGateCount": 1,
     "buildingCount": 18,
-    "siteAreaAcres": 316.0,
+    "siteAreaAcres": 316,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@29.6860,-81.6575,400m/data=!3m1!1e3",
@@ -48,7 +143,15 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "scale", "entryLanes", "exitLanes", "dockDoors", "fastLaneOpportunity"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoors",
+    "fastLaneOpportunity"
+  ],
   "fieldNotes": {
     "facility": "Large integrated kraft pulp/paper mill on the west bank of the St. Johns River, ~4 mi NE of downtown Palatka FL. Roster coordinate (29.650032, -81.647668) was in downtown Palatka, ~4 km off. Relocated via web research (215 County Road 216 / US-17 corridor, NE of Palatka) and satellite to the actual mill complex. Confirmed: kraft mill with woodyard, wood storage sheds, paper machines, rail yard, large distribution warehouse.",
     "truckGate": "Mill is a fully fenced ~316-acre kraft mill complex; access road branches off US-17 with a railroad crossing into the property. A controlled, guarded truck entrance is standard for a paper mill of this scale (700+ employees, $400M tissue machine + $83M expansion). The gate structure is set behind a tree buffer and not directly resolvable in Street View — medium confidence.",

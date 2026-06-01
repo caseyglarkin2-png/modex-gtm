@@ -1,19 +1,108 @@
 {
   "name": "GXO Abercrombie & Fitch Distribution Center - Goodyear AZ",
   "type": "Distribution Center",
-  "coords": { "lat": 33.412000, "lng": -112.421800 },
+  "coords": {
+    "lat": 33.412,
+    "lng": -112.4218
+  },
   "geofences": {
-    "perimeter": { "south": 33.410600, "west": -112.426200, "north": 33.414000, "east": -112.418000 },
-    "truckGate": { "south": 33.413200, "west": -112.421600, "north": 33.413550, "east": -112.421000 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.413261,
+          "lng": -112.426607
+        },
+        {
+          "lat": 33.413146,
+          "lng": -112.418641
+        },
+        {
+          "lat": 33.41028,
+          "lng": -112.418779
+        },
+        {
+          "lat": 33.410395,
+          "lng": -112.426744
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.411427,
+          "lng": -112.426469
+        },
+        {
+          "lat": 33.411427,
+          "lng": -112.425645
+        },
+        {
+          "lat": 33.410624,
+          "lng": -112.425645
+        },
+        {
+          "lat": 33.410624,
+          "lng": -112.426469
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 33.413350, "west": -112.425800, "north": 33.413950, "east": -112.418200 },
-      { "south": 33.412700, "west": -112.419000, "north": 33.413300, "east": -112.418200 }
+      {
+        "ring": [
+          {
+            "lat": 33.413032,
+            "lng": -112.426195
+          },
+          {
+            "lat": 33.412917,
+            "lng": -112.419603
+          },
+          {
+            "lat": 33.412459,
+            "lng": -112.419603
+          },
+          {
+            "lat": 33.412573,
+            "lng": -112.426195
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.413100, "west": -112.425800, "north": 33.413400, "east": -112.418400 },
-      { "south": 33.410900, "west": -112.425800, "north": 33.411250, "east": -112.418400 }
+      {
+        "ring": [
+          {
+            "lat": 33.411198,
+            "lng": -112.426195
+          },
+          {
+            "lat": 33.411083,
+            "lng": -112.419053
+          },
+          {
+            "lat": 33.410624,
+            "lng": -112.419053
+          },
+          {
+            "lat": 33.410739,
+            "lng": -112.426195
+          }
+        ]
+      }
     ],
-    "staging": { "south": 33.413200, "west": -112.422200, "north": 33.413350, "east": -112.420800 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 117,
+        "pano": "FBU0a3Vy4WVNybQAMTa6Bg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 117,
+        "pano": "FBU0a3Vy4WVNybQAMTa6Bg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 130,
@@ -21,23 +110,39 @@
     "trailerParkingCapacity": 110,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 71.0,
+    "siteAreaAcres": 71,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.412000,-112.421800,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Confirmed at z21: a cantilever/rolling gate spans the truck driveway at the NE corner where the entrance road meets the truck court; clear pinch-point with lane markings.",
     "guardShack": "Confirmed at z21: a small dark booth structure sits beside the gate lane, separate from the main building (≈1-2 vehicle footprint). Street View 2024-09 shows the gate and screening wall.",

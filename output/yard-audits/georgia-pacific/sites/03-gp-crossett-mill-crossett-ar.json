@@ -1,37 +1,158 @@
 {
   "name": "GP Crossett Mill - Crossett AR",
   "type": "Pulp/Paper/Tissue Mill",
-  "coords": { "lat": 33.1395, "lng": -91.9725 },
+  "coords": {
+    "lat": 33.1395,
+    "lng": -91.9725
+  },
   "geofences": {
-    "perimeter": { "south": 33.1345, "west": -91.9810, "north": 33.1500, "east": -91.9595 },
-    "truckGate": { "south": 33.1353, "west": -91.9728, "north": 33.1362, "east": -91.9716 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.148699,
+          "lng": -91.98074
+        },
+        {
+          "lat": 33.148699,
+          "lng": -91.965908
+        },
+        {
+          "lat": 33.1372,
+          "lng": -91.963711
+        },
+        {
+          "lat": 33.1349,
+          "lng": -91.979092
+        },
+        {
+          "lat": 33.1418,
+          "lng": -91.981838
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.1372,
+          "lng": -91.981289
+        },
+        {
+          "lat": 33.1372,
+          "lng": -91.977993
+        },
+        {
+          "lat": 33.1349,
+          "lng": -91.977993
+        },
+        {
+          "lat": 33.1349,
+          "lng": -91.981289
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 33.1360, "west": -91.9742, "north": 33.1378, "east": -91.9718 }
+      {
+        "ring": [
+          {
+            "lat": 33.1395,
+            "lng": -91.977993
+          },
+          {
+            "lat": 33.13904,
+            "lng": -91.968655
+          },
+          {
+            "lat": 33.13582,
+            "lng": -91.969204
+          },
+          {
+            "lat": 33.13628,
+            "lng": -91.978542
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.1362, "west": -91.9722, "north": 33.1382, "east": -91.9700 }
+      {
+        "ring": [
+          {
+            "lat": 33.13904,
+            "lng": -91.979641
+          },
+          {
+            "lat": 33.13858,
+            "lng": -91.969753
+          },
+          {
+            "lat": 33.13674,
+            "lng": -91.970303
+          },
+          {
+            "lat": 33.1372,
+            "lng": -91.98019
+          }
+        ]
+      }
     ],
-    "staging": { "south": 33.1356, "west": -91.9728, "north": 33.1366, "east": -91.9716 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 24,
+        "pano": "Ic8IHTE_UMHNN7Y3lwvzww",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 24,
+        "pano": "Ic8IHTE_UMHNN7Y3lwvzww",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 45, "trailersVisible": 130, "trailerParkingCapacity": 180,
-    "truckGateCount": 2, "buildingCount": 14, "siteAreaAcres": 320.0,
+    "dockDoorCount": 45,
+    "trailersVisible": 130,
+    "trailerParkingCapacity": 180,
+    "truckGateCount": 2,
+    "buildingCount": 14,
+    "siteAreaAcres": 320,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@33.1395,-91.9725,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": true, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "scale", "multiStep", "entryLanes", "exitLanes", "dockDoorCount", "truckGateCount"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "scale",
+    "multiStep",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "truckGateCount"
+  ],
   "fieldNotes": {
     "location": "Roster coords (33.135284,-91.968356, geocode movedMeters 3) landed at the south edge of the mill complex near the active warehouse/drop yard. Mill core re-centered to 33.1395,-91.9725. Address 100 Georgia-Pacific Dr, Crossett AR confirmed.",
     "truckGate": "Property is fully fenced — continuous chain-link perimeter fence clearly visible in Street View (Oct 2024) along the south side. The warehouse drop yard is entered via a driveway that crosses the rail line into the fenced yard with a checkpoint structure; large GP mill is controlled-access.",

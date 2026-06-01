@@ -1,37 +1,131 @@
 {
   "name": "Niagara Bottling - Mooresville NC",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 35.62870, "lng": -80.78540 },
+  "coords": {
+    "lat": 35.6287,
+    "lng": -80.7854
+  },
   "geofences": {
-    "perimeter": { "south": 35.62640, "west": -80.78760, "north": 35.63100, "east": -80.78340 },
-    "truckGate": { "south": 35.62990, "west": -80.78760, "north": 35.63050, "east": -80.78680 },
-    "dropYards": [
-      { "south": 35.62760, "west": -80.78720, "north": 35.62960, "east": -80.78560 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.630039,
+          "lng": -80.788147
+        },
+        {
+          "lat": 35.629705,
+          "lng": -80.784713
+        },
+        {
+          "lat": 35.625463,
+          "lng": -80.786087
+        },
+        {
+          "lat": 35.625798,
+          "lng": -80.78952
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.626356,
+          "lng": -80.788559
+        },
+        {
+          "lat": 35.626133,
+          "lng": -80.787185
+        },
+        {
+          "lat": 35.625463,
+          "lng": -80.787323
+        },
+        {
+          "lat": 35.625686,
+          "lng": -80.788696
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 35.62760, "west": -80.78640, "north": 35.62980, "east": -80.78480 }
+      {
+        "ring": [
+          {
+            "lat": 35.628254,
+            "lng": -80.788833
+          },
+          {
+            "lat": 35.627919,
+            "lng": -80.7854
+          },
+          {
+            "lat": 35.627249,
+            "lng": -80.785537
+          },
+          {
+            "lat": 35.627584,
+            "lng": -80.788971
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 25,
+        "pano": "ngcy4huR7UelQytiywh6lw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 25,
+        "pano": "ngcy4huR7UelQytiywh6lw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 35, "trailersVisible": 60, "trailerParkingCapacity": 80,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 22.0,
+    "dockDoorCount": 35,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 22,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.62870,-80.78540,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "trailerParkingCapacity", "siteAreaAcres"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "siteAreaAcres"
+  ],
   "fieldNotes": {
     "truckGate": "Truck driveway connects to Mooresville Blvd as an open, uncontrolled drive. No barrier arm, sliding gate, or checkpoint pinch-point visible in satellite imagery; Street View (2026-01) does not reach the entrance. Site is mid-expansion which adds uncertainty.",
     "guardShack": "No staffed booth resolvable at the entrance. A small standalone office-type building sits near the road frontage but is the plant office, not an entrance guard shack.",

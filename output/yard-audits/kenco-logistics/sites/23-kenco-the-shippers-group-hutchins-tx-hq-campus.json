@@ -1,17 +1,128 @@
 {
   "name": "Kenco / The Shippers Group - Hutchins TX (HQ campus)",
   "type": "Distribution Center / 3PL Warehouse",
-  "coords": { "lat": 32.62620, "lng": -96.71600 },
+  "coords": {
+    "lat": 32.6262,
+    "lng": -96.716
+  },
   "geofences": {
-    "perimeter": { "south": 32.62400, "west": -96.71790, "north": 32.62810, "east": -96.71400 },
-    "truckGate": { "south": 32.62600, "west": -96.71570, "north": 32.62650, "east": -96.71490 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.627819,
+          "lng": -96.718953
+        },
+        {
+          "lat": 32.627819,
+          "lng": -96.715451
+        },
+        {
+          "lat": 32.624581,
+          "lng": -96.715451
+        },
+        {
+          "lat": 32.624581,
+          "lng": -96.718953
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.626778,
+          "lng": -96.718953
+        },
+        {
+          "lat": 32.626778,
+          "lng": -96.718472
+        },
+        {
+          "lat": 32.6262,
+          "lng": -96.718472
+        },
+        {
+          "lat": 32.6262,
+          "lng": -96.718953
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 32.62500, "west": -96.71560, "north": 32.62790, "east": -96.71440 }
+      {
+        "ring": [
+          {
+            "lat": 32.627588,
+            "lng": -96.718747
+          },
+          {
+            "lat": 32.627588,
+            "lng": -96.715657
+          },
+          {
+            "lat": 32.627357,
+            "lng": -96.715657
+          },
+          {
+            "lat": 32.627357,
+            "lng": -96.718747
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 32.625043,
+            "lng": -96.718747
+          },
+          {
+            "lat": 32.625043,
+            "lng": -96.715657
+          },
+          {
+            "lat": 32.624812,
+            "lng": -96.715657
+          },
+          {
+            "lat": 32.624812,
+            "lng": -96.718747
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 32.62480, "west": -96.71600, "north": 32.62790, "east": -96.71520 }
+      {
+        "ring": [
+          {
+            "lat": 32.627357,
+            "lng": -96.718747
+          },
+          {
+            "lat": 32.627357,
+            "lng": -96.715657
+          },
+          {
+            "lat": 32.627125,
+            "lng": -96.715657
+          },
+          {
+            "lat": 32.627125,
+            "lng": -96.718747
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 4,
+        "pano": "aupDocJYVAUjhRGKMOgGdg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 4,
+        "pano": "aupDocJYVAUjhRGKMOgGdg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 89,
@@ -19,23 +130,41 @@
     "trailerParkingCapacity": 90,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 39.0,
+    "siteAreaAcres": 39,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@32.62620,-96.71600,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Fully fenced/secured yard (corroborated by The Shippers Group's own facility page describing a 'secured yard'). 2026-02 Street View shows a chain-link perimeter all the way around the dock/yard area with a sliding gate across the SE truck entrance driveway.",
     "guardShack": "No clear dedicated 1-3-car guard booth. There IS a long metal building beside the entrance, but it reads as an office/annex/maintenance building rather than a gatehouse. With a controlled gate but no obvious booth, classified remoteGs (kiosk / app / call-box check-in likely).",

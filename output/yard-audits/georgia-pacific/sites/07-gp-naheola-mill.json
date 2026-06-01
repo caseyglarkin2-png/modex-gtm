@@ -1,18 +1,100 @@
 {
   "name": "GP Naheola Mill - Pennington AL",
   "type": "Pulp/Tissue/Paperboard Mill",
-  "coords": { "lat": 32.2235, "lng": -88.0290 },
+  "coords": {
+    "lat": 32.2235,
+    "lng": -88.029
+  },
   "geofences": {
-    "perimeter": { "south": 32.216314, "west": -88.035371, "north": 32.230686, "east": -88.022629 },
-    "truckGate": { "south": 32.224700, "west": -88.030700, "north": 32.225700, "east": -88.029500 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.230935,
+          "lng": -88.035042
+        },
+        {
+          "lat": 32.233723,
+          "lng": -88.024056
+        },
+        {
+          "lat": 32.226753,
+          "lng": -88.022408
+        },
+        {
+          "lat": 32.220712,
+          "lng": -88.031747
+        },
+        {
+          "lat": 32.225359,
+          "lng": -88.034493
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.222338,
+          "lng": -88.034493
+        },
+        {
+          "lat": 32.222803,
+          "lng": -88.032845
+        },
+        {
+          "lat": 32.221409,
+          "lng": -88.032296
+        },
+        {
+          "lat": 32.220944,
+          "lng": -88.033944
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 32.219000, "west": -88.034500, "north": 32.222800, "east": -88.030000 }
+      {
+        "ring": [
+          {
+            "lat": 32.2235,
+            "lng": -88.034493
+          },
+          {
+            "lat": 32.225359,
+            "lng": -88.030373
+          },
+          {
+            "lat": 32.2235,
+            "lng": -88.029275
+          },
+          {
+            "lat": 32.221641,
+            "lng": -88.033395
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 32.218800, "west": -88.034800, "north": 32.222500, "east": -88.029500 },
-      { "south": 32.224500, "west": -88.029000, "north": 32.226500, "east": -88.026500 }
+      {
+        "ring": [
+          {
+            "lat": 32.228147,
+            "lng": -88.03312
+          },
+          {
+            "lat": 32.230006,
+            "lng": -88.026803
+          },
+          {
+            "lat": 32.228844,
+            "lng": -88.026253
+          },
+          {
+            "lat": 32.226985,
+            "lng": -88.032571
+          }
+        ]
+      }
     ],
-    "staging": { "south": 32.223000, "west": -88.031500, "north": 32.225000, "east": -88.029500 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 70,
@@ -20,23 +102,41 @@
     "trailerParkingCapacity": 130,
     "truckGateCount": 1,
     "buildingCount": 25,
-    "siteAreaAcres": 474.0,
+    "siteAreaAcres": 474,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@32.2235,-88.029,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "10-25",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "scale", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "scale",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Single controlled access road off Highway 114; chain-link perimeter fencing visible all around the campus in Street View (Oct 2025); GP welcome monument sign at the road junction; rail crossing en route to the gate.",
     "guardShack": "No frontal booth view obtained in Street View, but a fully-fenced 1000+ employee mill with a single controlled access road runs a staffed gatehouse by standard; flagged uncertain.",

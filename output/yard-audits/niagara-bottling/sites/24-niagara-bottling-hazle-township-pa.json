@@ -1,19 +1,63 @@
 {
   "name": "Niagara Bottling - Hazle Township PA",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 40.93250, "lng": -76.06350 },
+  "coords": {
+    "lat": 40.9325,
+    "lng": -76.0635
+  },
   "geofences": {
-    "perimeter": { "south": 40.92950, "west": -76.06800, "north": 40.93550, "east": -76.05900 },
-    "truckGate": { "south": 40.92880, "west": -76.06720, "north": 40.92960, "east": -76.06620 },
-    "dropYards": [
-      { "south": 40.93250, "west": -76.06650, "north": 40.93480, "east": -76.06080 },
-      { "south": 40.92990, "west": -76.06650, "north": 40.93180, "east": -76.06000 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.93333,
+          "lng": -76.068444
+        },
+        {
+          "lat": 40.934367,
+          "lng": -76.060479
+        },
+        {
+          "lat": 40.931255,
+          "lng": -76.059655
+        },
+        {
+          "lat": 40.930217,
+          "lng": -76.06762
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 40.93280, "west": -76.06620, "north": 40.93470, "east": -76.06120 },
-      { "south": 40.93010, "west": -76.06620, "north": 40.93170, "east": -76.06080 }
+      {
+        "ring": [
+          {
+            "lat": 40.933019,
+            "lng": -76.068307
+          },
+          {
+            "lat": 40.934056,
+            "lng": -76.060479
+          },
+          {
+            "lat": 40.933537,
+            "lng": -76.060341
+          },
+          {
+            "lat": 40.9325,
+            "lng": -76.068169
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 40,
+        "pano": "s173aCbkJn2-3NTj8QBg6A",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 120,
@@ -21,23 +65,45 @@
     "trailerParkingCapacity": 160,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 110.0,
+    "siteAreaAcres": 110,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.93250,-76.06350,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "shipRcvSeparate", "scale", "entryLanes", "exitLanes", "fastLaneOpportunity"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "shipRcvSeparate",
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity"
+  ],
   "fieldNotes": {
     "facility": "Niagara Bottling Hazle Township, 100 Timberline Dr, Humboldt Industrial Park. ~1.19M sq ft, $440M investment, opened March 2022 - one of Niagara's largest plants (purified water + aseptic beverages). Confirmed via web search and satellite imagery.",
     "truckGate": "Could not positively confirm a barrier/gate structure - the truck driveway is private and not covered by Street View, and satellite resolution at the SW approach is insufficient to resolve a barrier. Set true as a strong inference: a 1.19M sq ft / $440M secured manufacturing campus with a long private set-back approach is invariably gated. Flagged uncertain.",

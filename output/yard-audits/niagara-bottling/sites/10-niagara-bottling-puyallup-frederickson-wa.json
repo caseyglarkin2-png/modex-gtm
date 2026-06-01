@@ -1,18 +1,87 @@
 {
   "name": "Niagara Bottling - Puyallup (Frederickson) WA",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 47.076030, "lng": -122.355800 },
+  "coords": {
+    "lat": 47.07603,
+    "lng": -122.3558
+  },
   "geofences": {
-    "perimeter": { "south": 47.07440, "west": -122.35760, "north": 47.07770, "east": -122.35400 },
-    "truckGate": { "south": 47.07670, "west": -122.35490, "north": 47.07720, "east": -122.35430 },
-    "dropYards": [
-      { "south": 47.07680, "west": -122.35740, "north": 47.07760, "east": -122.35430 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 47.077106,
+          "lng": -122.357585
+        },
+        {
+          "lat": 47.077106,
+          "lng": -122.354701
+        },
+        {
+          "lat": 47.075001,
+          "lng": -122.354701
+        },
+        {
+          "lat": 47.075001,
+          "lng": -122.357585
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 47.076264,
+          "lng": -122.35786
+        },
+        {
+          "lat": 47.076264,
+          "lng": -122.357448
+        },
+        {
+          "lat": 47.07603,
+          "lng": -122.357448
+        },
+        {
+          "lat": 47.07603,
+          "lng": -122.35786
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 47.07630, "west": -122.35740, "north": 47.07680, "east": -122.35430 },
-      { "south": 47.07460, "west": -122.35740, "north": 47.07500, "east": -122.35480 }
+      {
+        "ring": [
+          {
+            "lat": 47.076872,
+            "lng": -122.357448
+          },
+          {
+            "lat": 47.076872,
+            "lng": -122.354839
+          },
+          {
+            "lat": 47.076591,
+            "lng": -122.354839
+          },
+          {
+            "lat": 47.076591,
+            "lng": -122.357448
+          }
+        ]
+      }
     ],
-    "staging": { "south": 47.07720, "west": -122.35490, "north": 47.07760, "east": -122.35420 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 50,
+        "pano": "CAoSF0NJSE0wb2dLRUlDQWdJRGY3cXFQdWdF",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 50,
+        "pano": "CAoSF0NJSE0wb2dLRUlDQWdJRGY3cXFQdWdF",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 42,
@@ -20,23 +89,41 @@
     "trailerParkingCapacity": 55,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 32.0,
+    "siteAreaAcres": 32,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@47.076030,-122.355800,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "shipRcvSeparate"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "facility": "Niagara Bottling Frederickson plant, 19820 57th Ave E, Puyallup WA. ~311,000 sq ft plant opened 2014, expanded multiple times. Confirmed by three large water-treatment silos on the building's east face in Street View (2024-05).",
     "truckGate": "Truck yard is enclosed by a black chain-link perimeter fence with a sliding gate across the truck entry drive on the NE side (clearly visible in Street View 2024-05); a truck is shown passing through the gate, with yellow bollards channeling the lane.",

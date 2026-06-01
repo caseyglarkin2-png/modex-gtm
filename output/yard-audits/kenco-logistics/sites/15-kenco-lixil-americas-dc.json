@@ -1,19 +1,87 @@
 {
   "name": "Kenco LIXIL Americas DC - Groveport OH",
   "type": "Dedicated Distribution Center",
-  "coords": { "lat": 39.83950, "lng": -82.91820 },
+  "coords": {
+    "lat": 39.8395,
+    "lng": -82.9182
+  },
   "geofences": {
-    "perimeter": { "south": 39.83660, "west": -82.92120, "north": 39.84200, "east": -82.91620 },
-    "truckGate": { "south": 39.84100, "west": -82.91790, "north": 39.84180, "east": -82.91680 },
-    "dropYards": [
-      { "south": 39.83720, "west": -82.91950, "north": 39.84080, "east": -82.91830 },
-      { "south": 39.83720, "west": -82.91720, "north": 39.84080, "east": -82.91620 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.841187,
+          "lng": -82.919573
+        },
+        {
+          "lat": 39.841187,
+          "lng": -82.916003
+        },
+        {
+          "lat": 39.836969,
+          "lng": -82.916003
+        },
+        {
+          "lat": 39.836969,
+          "lng": -82.919573
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.838235,
+          "lng": -82.919573
+        },
+        {
+          "lat": 39.838235,
+          "lng": -82.918749
+        },
+        {
+          "lat": 39.837391,
+          "lng": -82.918749
+        },
+        {
+          "lat": 39.837391,
+          "lng": -82.919573
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 39.83700, "west": -82.92030, "north": 39.84110, "east": -82.91930 },
-      { "south": 39.83700, "west": -82.91740, "north": 39.84110, "east": -82.91640 }
+      {
+        "ring": [
+          {
+            "lat": 39.841082,
+            "lng": -82.919573
+          },
+          {
+            "lat": 39.841082,
+            "lng": -82.916003
+          },
+          {
+            "lat": 39.840554,
+            "lng": -82.916003
+          },
+          {
+            "lat": 39.840554,
+            "lng": -82.919573
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 140,
+        "pano": "_wmiGz4fRI99_ji1q6g1Ww",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 140,
+        "pano": "_wmiGz4fRI99_ji1q6g1Ww",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 90,
@@ -21,23 +89,40 @@
     "trailerParkingCapacity": 160,
     "truckGateCount": 2,
     "buildingCount": 2,
-    "siteAreaAcres": 70.0,
+    "siteAreaAcres": 70,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.83950,-82.91820,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "Confirmed: 3099 Rohr Road, Groveport OH 43125 - the ~906,000 SF LIXIL Americas distribution center managed by Kenco (BusinessWire/Kenco announcement May 2024). Roster ROOFTOP coords pin the NW corner of the building; verified on satellite + Street View. The DC is a two-building tan-roofed complex in the Rickenbacker/Groveport logistics hub; the roster coordinate sits on the west building.",
     "truckGate": "Open access driveways off Rohr Road - no barrier arm, no gate, no guard booth. Street View (capture 2024-08) shows wide open paved entrance drives. Drive aisles between the two buildings are open as well.",

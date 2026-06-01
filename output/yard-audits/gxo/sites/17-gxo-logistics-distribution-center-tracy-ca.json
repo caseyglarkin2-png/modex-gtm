@@ -1,15 +1,63 @@
 {
   "name": "GXO Logistics Distribution Center - Tracy CA",
   "type": "Distribution Center",
-  "coords": { "lat": 37.762200, "lng": -121.411800 },
+  "coords": {
+    "lat": 37.7622,
+    "lng": -121.4118
+  },
   "geofences": {
-    "perimeter": { "south": 37.761400, "west": -121.414300, "north": 37.763300, "east": -121.410200 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.763557,
+          "lng": -121.413997
+        },
+        {
+          "lat": 37.763828,
+          "lng": -121.410633
+        },
+        {
+          "lat": 37.761766,
+          "lng": -121.410427
+        },
+        {
+          "lat": 37.761494,
+          "lng": -121.413791
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 37.761500, "west": -121.413300, "north": 37.761900, "east": -121.410800 }
+      {
+        "ring": [
+          {
+            "lat": 37.762037,
+            "lng": -121.413929
+          },
+          {
+            "lat": 37.762309,
+            "lng": -121.41077
+          },
+          {
+            "lat": 37.761929,
+            "lng": -121.410701
+          },
+          {
+            "lat": 37.761657,
+            "lng": -121.41386
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 94,
+        "pano": "83RN0Ai9MxXfP1Zn59pXMw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 57,
@@ -22,18 +70,40 @@
   },
   "mapsUrl": "https://www.google.com/maps/@37.762200,-121.411800,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "trailersVisible", "dropArea", "entryLanes", "exitLanes", "shipRcvSeparate"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "trailersVisible",
+    "dropArea",
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "location": "1700 E Pescadero Ave, Tracy CA = Tracy Pescadero Distribution Center, a 381,600 SF Class A regional DC on a 19.46-acre site, completed 2016 by Ridgeline Property Group / LaSalle. Spec: 57 dock-high doors, 2 drive-in doors, 185 ft truck court, 92 trailer parking spaces, 317 auto parking spaces. Historically split-leased to Pactra and DHL; GXO Logistics now operates here per Racklify and Bandana 3PL directories. Building is an L-shaped multi-tenant distribution building just south of I-205 with a large interior auto-parking lot. Roster GEOMETRIC_CENTER geocode (5 m) landed correctly on this parcel.",
     "truckGate": "No barrier arm, sliding gate, or checkpoint visible at the E Pescadero Ave driveway entrances. The west and interior auto-parking areas are fully open and unfenced (2023 Street View). Two drive entrances serve the site off E Pescadero. Classified false; flagged uncertain since the truck-side dock area is partly tree-screened from the road.",

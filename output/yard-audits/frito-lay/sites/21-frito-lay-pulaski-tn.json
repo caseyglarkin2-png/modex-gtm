@@ -1,16 +1,94 @@
 {
   "name": "Frito-Lay - Pulaski TN",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 35.21580, "lng": -87.06050 },
+  "coords": {
+    "lat": 35.2158,
+    "lng": -87.0605
+  },
   "geofences": {
-    "perimeter": { "south": 35.21220, "west": -87.06360, "north": 35.21900, "east": -87.05760 },
-    "truckGate": { "south": 35.21770, "west": -87.06340, "north": 35.21830, "east": -87.06280 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.21782,
+          "lng": -87.064071
+        },
+        {
+          "lat": 35.21782,
+          "lng": -87.057479
+        },
+        {
+          "lat": 35.211761,
+          "lng": -87.057479
+        },
+        {
+          "lat": 35.211761,
+          "lng": -87.064071
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.218044,
+          "lng": -87.061873
+        },
+        {
+          "lat": 35.218044,
+          "lng": -87.060912
+        },
+        {
+          "lat": 35.217595,
+          "lng": -87.060912
+        },
+        {
+          "lat": 35.217595,
+          "lng": -87.061873
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 35.21720, "west": -87.06400, "north": 35.21960, "east": -87.06280 }
+      {
+        "ring": [
+          {
+            "lat": 35.220736,
+            "lng": -87.066954
+          },
+          {
+            "lat": 35.220736,
+            "lng": -87.062972
+          },
+          {
+            "lat": 35.21782,
+            "lng": -87.063247
+          },
+          {
+            "lat": 35.218044,
+            "lng": -87.067229
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.21600, "west": -87.06050, "north": 35.21720, "east": -87.05900 },
-      { "south": 35.21300, "west": -87.05980, "north": 35.21420, "east": -87.05850 }
+      {
+        "ring": [
+          {
+            "lat": 35.216698,
+            "lng": -87.063521
+          },
+          {
+            "lat": 35.216698,
+            "lng": -87.061049
+          },
+          {
+            "lat": 35.216024,
+            "lng": -87.061049
+          },
+          {
+            "lat": 35.216024,
+            "lng": -87.063521
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -20,23 +98,44 @@
     "trailerParkingCapacity": 70,
     "truckGateCount": 1,
     "buildingCount": 6,
-    "siteAreaAcres": 52.0,
+    "siteAreaAcres": 52,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@35.21580,-87.06050,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "dockDoorCount", "shipRcvSeparate"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "dockDoorCount",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "facility": "Confirmed via Street View — Frito-Lay logo visible on the office building (sv19, 2023-07 capture). Large multi-building manufacturing campus at 298 Industrial Blvd, Pulaski TN. Geocoded coords accurate.",
     "truckGate": "Whole campus is enclosed by black metal/chain-link fence (confirmed in 5+ Street Views). Trucks reach the active dock yards and the NW drop yard via internal driveways from the public road; the drop-yard entrance is a fenced, controlled opening. Treated as a controlled truck entrance.",

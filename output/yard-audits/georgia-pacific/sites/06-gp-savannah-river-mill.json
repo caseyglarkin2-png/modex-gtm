@@ -1,18 +1,100 @@
 {
   "name": "GP Savannah River Mill - Rincon GA",
   "type": "Tissue/Towel Mill",
-  "coords": { "lat": 32.3315, "lng": -81.2025 },
+  "coords": {
+    "lat": 32.3315,
+    "lng": -81.2025
+  },
   "geofences": {
-    "perimeter": { "south": 32.326559, "west": -81.209410, "north": 32.336441, "east": -81.195590 },
-    "truckGate": { "south": 32.327100, "west": -81.205800, "north": 32.328200, "east": -81.204200 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.335909,
+          "lng": -81.207169
+        },
+        {
+          "lat": 32.335909,
+          "lng": -81.199753
+        },
+        {
+          "lat": 32.328715,
+          "lng": -81.198105
+        },
+        {
+          "lat": 32.326394,
+          "lng": -81.204697
+        },
+        {
+          "lat": 32.33034,
+          "lng": -81.207169
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.32709,
+          "lng": -81.204697
+        },
+        {
+          "lat": 32.32709,
+          "lng": -81.203049
+        },
+        {
+          "lat": 32.32593,
+          "lng": -81.203049
+        },
+        {
+          "lat": 32.32593,
+          "lng": -81.204697
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 32.327000, "west": -81.204500, "north": 32.331500, "east": -81.200000 },
-      { "south": 32.327200, "west": -81.201500, "north": 32.330000, "east": -81.199000 }
+      {
+        "ring": [
+          {
+            "lat": 32.331964,
+            "lng": -81.206345
+          },
+          {
+            "lat": 32.331732,
+            "lng": -81.200303
+          },
+          {
+            "lat": 32.329643,
+            "lng": -81.200577
+          },
+          {
+            "lat": 32.329875,
+            "lng": -81.20662
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 32.331000, "west": -81.205500, "north": 32.333500, "east": -81.202500 }
+      {
+        "ring": [
+          {
+            "lat": 32.333821,
+            "lng": -81.206345
+          },
+          {
+            "lat": 32.333589,
+            "lng": -81.201127
+          },
+          {
+            "lat": 32.332428,
+            "lng": -81.201401
+          },
+          {
+            "lat": 32.33266,
+            "lng": -81.20662
+          }
+        ]
+      }
     ],
-    "staging": { "south": 32.328000, "west": -81.205000, "north": 32.330000, "east": -81.203000 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 45,
@@ -20,23 +102,40 @@
     "trailerParkingCapacity": 350,
     "truckGateCount": 1,
     "buildingCount": 12,
-    "siteAreaAcres": 353.0,
+    "siteAreaAcres": 353,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@32.3315,-81.2025,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "exitLanes", "shipRcvSeparate"],
+  "uncertainFields": [
+    "scale",
+    "exitLanes",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Street View on the private entrance road shows a multi-lane checkpoint canopy ~200m inside the property line with trucks staged; chain-link perimeter fencing runs along the access road; GP entrance sign at the public-road junction.",
     "guardShack": "Checkpoint canopy spans the entry lanes with an adjacent booth structure visible in Street View; consistent with a staffed gatehouse at a 1000-employee mill.",

@@ -1,17 +1,93 @@
 {
   "name": "GXO Super Hub - Clayton IN",
   "type": "Distribution Center",
-  "coords": { "lat": 39.605400, "lng": -86.483484 },
+  "coords": {
+    "lat": 39.6054,
+    "lng": -86.483484
+  },
   "geofences": {
-    "perimeter": { "south": 39.603700, "west": -86.487000, "north": 39.607600, "east": -86.480500 },
-    "truckGate": { "south": 39.606300, "west": -86.481600, "north": 39.606700, "east": -86.481000 },
-    "dropYards": [
-      { "south": 39.606200, "west": -86.486500, "north": 39.606900, "east": -86.481000 },
-      { "south": 39.603900, "west": -86.486500, "north": 39.604600, "east": -86.481000 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.606881,
+          "lng": -86.489114
+        },
+        {
+          "lat": 39.606881,
+          "lng": -86.481424
+        },
+        {
+          "lat": 39.603707,
+          "lng": -86.481424
+        },
+        {
+          "lat": 39.603707,
+          "lng": -86.489114
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.60741,
+          "lng": -86.481836
+        },
+        {
+          "lat": 39.60741,
+          "lng": -86.481012
+        },
+        {
+          "lat": 39.606881,
+          "lng": -86.481012
+        },
+        {
+          "lat": 39.606881,
+          "lng": -86.481836
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 39.606000, "west": -86.486400, "north": 39.606350, "east": -86.481200 },
-      { "south": 39.604400, "west": -86.486400, "north": 39.604750, "east": -86.481200 }
+      {
+        "ring": [
+          {
+            "lat": 39.60667,
+            "lng": -86.48884
+          },
+          {
+            "lat": 39.60667,
+            "lng": -86.481836
+          },
+          {
+            "lat": 39.606246,
+            "lng": -86.481836
+          },
+          {
+            "lat": 39.606246,
+            "lng": -86.48884
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 39.604448,
+            "lng": -86.48884
+          },
+          {
+            "lat": 39.604448,
+            "lng": -86.481836
+          },
+          {
+            "lat": 39.604025,
+            "lng": -86.481836
+          },
+          {
+            "lat": 39.604025,
+            "lng": -86.48884
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -21,23 +97,46 @@
     "trailerParkingCapacity": 320,
     "truckGateCount": 2,
     "buildingCount": 1,
-    "siteAreaAcres": 60.0,
+    "siteAreaAcres": 60,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.605400,-86.483484,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "truckGateCount", "entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity", "trailersVisible"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "truckGateCount",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "trailersVisible"
+  ],
   "fieldNotes": {
     "buildingIdentity": "Confirmed via web research: 'GXO Super Hub' (GDI Construction project) at 2121 Gateway Pt, Clayton IN; GXO operates 24/7 and is hiring 2,000+ jobs in central Indiana. Satellite shows one enormous DC building (~520m x ~210m footprint, ~1.1M+ sq ft) at the geocoded point in an I-70 corridor industrial park.",
     "truckGate": "The truck courts on the north and south faces are enclosed by continuous perimeter fencing plus retention ponds. Access is via the NE industrial-park road. A controlled gate is inferred from the fully fenced truck yard; an exact barrier arm could not be crisply resolved - imagery shows the facility newly completed and nearly empty of trailers.",

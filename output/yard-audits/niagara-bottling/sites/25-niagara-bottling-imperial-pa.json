@@ -1,15 +1,73 @@
 {
   "name": "Niagara Bottling - Imperial PA (Findlay Township)",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 40.44190, "lng": -80.29597 },
+  "coords": {
+    "lat": 40.4419,
+    "lng": -80.29597
+  },
   "geofences": {
-    "perimeter": { "south": 40.44020, "west": -80.29850, "north": 40.44420, "east": -80.29450 },
-    "truckGate": { "south": 40.44240, "west": -80.29870, "north": 40.44290, "east": -80.29800 },
-    "dropYards": [
-      { "south": 40.44120, "west": -80.29560, "north": 40.44380, "east": -80.29460 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.442841,
+          "lng": -80.297893
+        },
+        {
+          "lat": 40.443572,
+          "lng": -80.294322
+        },
+        {
+          "lat": 40.440646,
+          "lng": -80.293086
+        },
+        {
+          "lat": 40.439914,
+          "lng": -80.296657
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.443363,
+          "lng": -80.297618
+        },
+        {
+          "lat": 40.443572,
+          "lng": -80.296657
+        },
+        {
+          "lat": 40.44305,
+          "lng": -80.296519
+        },
+        {
+          "lat": 40.442841,
+          "lng": -80.297481
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 40.44140, "west": -80.29600, "north": 40.44360, "east": -80.29500 }
+      {
+        "ring": [
+          {
+            "lat": 40.441691,
+            "lng": -80.296794
+          },
+          {
+            "lat": 40.442318,
+            "lng": -80.293498
+          },
+          {
+            "lat": 40.441795,
+            "lng": -80.293361
+          },
+          {
+            "lat": 40.441168,
+            "lng": -80.296657
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -19,23 +77,39 @@
     "trailerParkingCapacity": 95,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 50.0,
+    "siteAreaAcres": 50,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.44190,-80.29597,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "scale"],
+  "uncertainFields": [
+    "guardShack",
+    "scale"
+  ],
   "fieldNotes": {
     "facility": "Niagara Bottling Imperial PA, 201 Solar Dr, Findlay Industrial Park near Pittsburgh International Airport. ~$64M plant. Confirmed via web search and Street View: building with blue Niagara branding and bulk water silos.",
     "truckGate": "No controlled truck gate. Street View (2025-05) at the entrance shows the driveway running straight from the public road into the property with only directional signs and a speed-limit sign - no barrier arm, no sliding gate, no guard booth at the road or along the approach.",

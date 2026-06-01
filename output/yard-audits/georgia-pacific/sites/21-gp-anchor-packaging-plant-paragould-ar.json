@@ -1,17 +1,112 @@
 {
   "name": "GP Anchor Packaging Plant - Paragould AR",
   "type": "Thermoformed/Cling Film Packaging Plant",
-  "coords": { "lat": 36.08400, "lng": -90.46650 },
+  "coords": {
+    "lat": 36.084,
+    "lng": -90.4665
+  },
   "geofences": {
-    "perimeter": { "south": 36.0820, "west": -90.4690, "north": 36.0862, "east": -90.4645 },
-    "truckGate": { "south": 36.08200, "west": -90.46740, "north": 36.08260, "east": -90.46640 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.085998,
+          "lng": -90.469247
+        },
+        {
+          "lat": 36.085776,
+          "lng": -90.465401
+        },
+        {
+          "lat": 36.083112,
+          "lng": -90.465401
+        },
+        {
+          "lat": 36.08289,
+          "lng": -90.468972
+        },
+        {
+          "lat": 36.084555,
+          "lng": -90.469521
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 36.083778,
+          "lng": -90.469247
+        },
+        {
+          "lat": 36.083778,
+          "lng": -90.468423
+        },
+        {
+          "lat": 36.083223,
+          "lng": -90.468423
+        },
+        {
+          "lat": 36.083223,
+          "lng": -90.469247
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 36.08280, "west": -90.46790, "north": 36.08390, "east": -90.46700 }
+      {
+        "ring": [
+          {
+            "lat": 36.085554,
+            "lng": -90.467599
+          },
+          {
+            "lat": 36.085443,
+            "lng": -90.465539
+          },
+          {
+            "lat": 36.084555,
+            "lng": -90.465676
+          },
+          {
+            "lat": 36.084666,
+            "lng": -90.467736
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 36.08290, "west": -90.46790, "north": 36.08370, "east": -90.46680 }
+      {
+        "ring": [
+          {
+            "lat": 36.084444,
+            "lng": -90.468697
+          },
+          {
+            "lat": 36.084333,
+            "lng": -90.4665
+          },
+          {
+            "lat": 36.083778,
+            "lng": -90.466637
+          },
+          {
+            "lat": 36.083889,
+            "lng": -90.468835
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 2,
+        "pano": "UWGWvtVuW8OHjhsO543jHA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 2,
+        "pano": "UWGWvtVuW8OHjhsO543jHA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 16,
@@ -24,18 +119,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@36.08400,-90.46650,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "Resolved to Anchor Packaging plant at 2211 N 12th Ave, Paragould AR (~36.0857,-90.4671 per geocode of street address); the roster's geocoded point (36.0526,-90.4887) was ~4 km SW in downtown Paragould and wrong. Building centroid locked at 36.0840,-90.4665.",
     "truckGate": "No barrier arm, sliding gate, or checkpoint where the access driveway meets the public road (Greene County Rd / N 12th Ave extension). Street View 2025-05 shows an open private drive with only a 'Speed Limit 15' sign; site has no perimeter fence along the road. False.",

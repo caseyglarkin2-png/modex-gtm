@@ -1,17 +1,87 @@
 {
   "name": "Niagara Bottling - Middleburg FL",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 30.13565, "lng": -81.82680 },
+  "coords": {
+    "lat": 30.13565,
+    "lng": -81.8268
+  },
   "geofences": {
-    "perimeter": { "south": 30.13280, "west": -81.82960, "north": 30.13905, "east": -81.82520 },
-    "truckGate": { "south": 30.13420, "west": -81.82665, "north": 30.13455, "east": -81.82610 },
-    "dropYards": [
-      { "south": 30.13420, "west": -81.82650, "north": 30.13830, "east": -81.82530 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 30.138382,
+          "lng": -81.828997
+        },
+        {
+          "lat": 30.138025,
+          "lng": -81.825839
+        },
+        {
+          "lat": 30.133275,
+          "lng": -81.8268
+        },
+        {
+          "lat": 30.133631,
+          "lng": -81.829959
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 30.133987,
+          "lng": -81.828723
+        },
+        {
+          "lat": 30.13375,
+          "lng": -81.827075
+        },
+        {
+          "lat": 30.133156,
+          "lng": -81.827212
+        },
+        {
+          "lat": 30.133393,
+          "lng": -81.82886
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 30.13430, "west": -81.82625, "north": 30.13860, "east": -81.82545 }
+      {
+        "ring": [
+          {
+            "lat": 30.135056,
+            "lng": -81.829272
+          },
+          {
+            "lat": 30.1347,
+            "lng": -81.826113
+          },
+          {
+            "lat": 30.134225,
+            "lng": -81.826251
+          },
+          {
+            "lat": 30.134581,
+            "lng": -81.829409
+          }
+        ]
+      }
     ],
-    "staging": { "south": 30.13320, "west": -81.82665, "north": 30.13420, "east": -81.82595 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 42,
+        "pano": "nviYKZlqkL60NQC7R4HjGw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 42,
+        "pano": "nviYKZlqkL60NQC7R4HjGw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 65,
@@ -19,23 +89,39 @@
     "trailerParkingCapacity": 90,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 56.0,
+    "siteAreaAcres": 56,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@30.13565,-81.82680,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "scale"],
+  "uncertainFields": [
+    "guardShack",
+    "scale"
+  ],
   "fieldNotes": {
     "facility": "Niagara Bottling Middleburg plant, ~$70M facility opened 2022 near Jacksonville. Confirmed via Street View showing blue 'Niagara' branded building facade at 565 Atlantis Dr.",
     "truckGate": "Street View up the truck driveway shows a checkpoint structure spanning the lanes mid-driveway with perimeter chain-link fencing along the property line; modern controlled entry.",

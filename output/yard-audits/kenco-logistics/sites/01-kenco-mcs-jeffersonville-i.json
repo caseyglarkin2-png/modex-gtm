@@ -1,16 +1,94 @@
 {
   "name": "Kenco MCS Jeffersonville I - Jeffersonville IN",
   "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
-  "coords": { "lat": 38.38585, "lng": -85.67760 },
+  "coords": {
+    "lat": 38.38585,
+    "lng": -85.6776
+  },
   "geofences": {
-    "perimeter": { "south": 38.3838, "west": -85.6802, "north": 38.3885, "east": -85.6753 },
-    "truckGate": { "south": 38.38735, "west": -85.67885, "north": 38.38775, "east": -85.67835 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.388326,
+          "lng": -85.679111
+        },
+        {
+          "lat": 38.38768,
+          "lng": -85.675952
+        },
+        {
+          "lat": 38.384558,
+          "lng": -85.678973
+        },
+        {
+          "lat": 38.385312,
+          "lng": -85.681995
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 38.387357,
+          "lng": -85.676913
+        },
+        {
+          "lat": 38.387142,
+          "lng": -85.675952
+        },
+        {
+          "lat": 38.386604,
+          "lng": -85.676227
+        },
+        {
+          "lat": 38.386819,
+          "lng": -85.677188
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 38.38420, "west": -85.67935, "north": 38.38770, "east": -85.67835 }
+      {
+        "ring": [
+          {
+            "lat": 38.387572,
+            "lng": -85.676501
+          },
+          {
+            "lat": 38.387357,
+            "lng": -85.675403
+          },
+          {
+            "lat": 38.386604,
+            "lng": -85.675952
+          },
+          {
+            "lat": 38.386819,
+            "lng": -85.676913
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 38.38420, "west": -85.67910, "north": 38.38770, "east": -85.67845 },
-      { "south": 38.38470, "west": -85.67720, "north": 38.38690, "east": -85.67640 }
+      {
+        "ring": [
+          {
+            "lat": 38.385527,
+            "lng": -85.681583
+          },
+          {
+            "lat": 38.384881,
+            "lng": -85.678699
+          },
+          {
+            "lat": 38.384558,
+            "lng": -85.678836
+          },
+          {
+            "lat": 38.385204,
+            "lng": -85.68172
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -25,18 +103,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@38.38585,-85.67760,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["trailersVisible", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "trailersVisible",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Sliding chain-link gate across the NW dock-yard truck driveway, confirmed in Street View (2026-03). Gate opening set in continuous perimeter fence.",
     "guardShack": "No booth of any kind beside the gate; entrance is a fence opening only.",

@@ -1,18 +1,108 @@
 {
   "name": "Niagara Bottling - Los Lunas NM",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 34.827861, "lng": -106.760900 },
+  "coords": {
+    "lat": 34.827861,
+    "lng": -106.7609
+  },
   "geofences": {
-    "perimeter": { "south": 34.82610, "west": -106.76270, "north": 34.82950, "east": -106.75960 },
-    "truckGate": { "south": 34.82815, "west": -106.76230, "north": 34.82850, "east": -106.76185 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.828312,
+          "lng": -106.762273
+        },
+        {
+          "lat": 34.828312,
+          "lng": -106.758977
+        },
+        {
+          "lat": 34.826057,
+          "lng": -106.758977
+        },
+        {
+          "lat": 34.826057,
+          "lng": -106.762273
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.828199,
+          "lng": -106.762411
+        },
+        {
+          "lat": 34.828199,
+          "lng": -106.761587
+        },
+        {
+          "lat": 34.827974,
+          "lng": -106.761587
+        },
+        {
+          "lat": 34.827974,
+          "lng": -106.762411
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 34.82680, "west": -106.76250, "north": 34.82820, "east": -106.76180 },
-      { "south": 34.82850, "west": -106.76200, "north": 34.82900, "east": -106.75980 }
+      {
+        "ring": [
+          {
+            "lat": 34.827805,
+            "lng": -106.762273
+          },
+          {
+            "lat": 34.827805,
+            "lng": -106.761587
+          },
+          {
+            "lat": 34.82617,
+            "lng": -106.761587
+          },
+          {
+            "lat": 34.82617,
+            "lng": -106.762273
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 34.82680, "west": -106.76200, "north": 34.82820, "east": -106.76150 }
+      {
+        "ring": [
+          {
+            "lat": 34.827917,
+            "lng": -106.761655
+          },
+          {
+            "lat": 34.827917,
+            "lng": -106.761449
+          },
+          {
+            "lat": 34.826114,
+            "lng": -106.761449
+          },
+          {
+            "lat": 34.826114,
+            "lng": -106.761655
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 33,
+        "pano": "kRKk9eXHk89vaxGRVx3oBg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 33,
+        "pano": "kRKk9eXHk89vaxGRVx3oBg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 16,
@@ -20,23 +110,40 @@
     "trailerParkingCapacity": 45,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 25.0,
+    "siteAreaAcres": 25,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.827861,-106.760900,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "facility": "Niagara Bottling Los Lunas, ~160,000 sq ft bottled-water plant opened 2016 in Los Morros Business Park, NW of NM-6 / I-25. Confirmed by 'niagara bottling LLC' monument sign at the truck gate in Street View (2026-03).",
     "truckGate": "Chain-link perimeter fence with sliding gate; a striped barrier arm is visible lowered across the entry drive in Street View, with yellow bollards channeling traffic.",

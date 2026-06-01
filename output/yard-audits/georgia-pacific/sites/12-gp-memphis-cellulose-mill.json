@@ -1,15 +1,98 @@
 {
   "name": "GP Memphis Cellulose Mill - Memphis TN",
   "type": "Cellulose Mill",
-  "coords": { "lat": 35.1565, "lng": -89.9620 },
+  "coords": {
+    "lat": 35.1565,
+    "lng": -89.962
+  },
   "geofences": {
-    "perimeter": { "south": 35.1505, "west": -89.9678, "north": 35.1612, "east": -89.9592 },
-    "truckGate": { "south": 35.1568, "west": -89.9610, "north": 35.1580, "east": -89.9598 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.16144,
+          "lng": -89.967493
+        },
+        {
+          "lat": 35.160991,
+          "lng": -89.960627
+        },
+        {
+          "lat": 35.156051,
+          "lng": -89.960352
+        },
+        {
+          "lat": 35.155377,
+          "lng": -89.966395
+        },
+        {
+          "lat": 35.158746,
+          "lng": -89.967493
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.158296,
+          "lng": -89.966944
+        },
+        {
+          "lat": 35.158296,
+          "lng": -89.965296
+        },
+        {
+          "lat": 35.157174,
+          "lng": -89.965296
+        },
+        {
+          "lat": 35.157174,
+          "lng": -89.966944
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 35.1548, "west": -89.9638, "north": 35.1562, "east": -89.9618 }
+      {
+        "ring": [
+          {
+            "lat": 35.158746,
+            "lng": -89.96612
+          },
+          {
+            "lat": 35.158521,
+            "lng": -89.961176
+          },
+          {
+            "lat": 35.156949,
+            "lng": -89.961451
+          },
+          {
+            "lat": 35.157174,
+            "lng": -89.966395
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.1556, "west": -89.9632, "north": 35.1566, "east": -89.9618 }
+      {
+        "ring": [
+          {
+            "lat": 35.160093,
+            "lng": -89.965845
+          },
+          {
+            "lat": 35.159868,
+            "lng": -89.961451
+          },
+          {
+            "lat": 35.15897,
+            "lng": -89.961725
+          },
+          {
+            "lat": 35.159195,
+            "lng": -89.96612
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -19,23 +102,45 @@
     "trailerParkingCapacity": 35,
     "truckGateCount": 1,
     "buildingCount": 14,
-    "siteAreaAcres": 78.0,
+    "siteAreaAcres": 78,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@35.1565,-89.9620,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": true, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "scale", "dockDoors", "dropArea", "entryLanes", "exitLanes", "truckGate"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "scale",
+    "dockDoors",
+    "dropArea",
+    "entryLanes",
+    "exitLanes",
+    "truckGate"
+  ],
   "fieldNotes": {
     "location": "Roster geocode (35.1486,-90.0519) landed in downtown Memphis, ~5 km off (APPROXIMATE, 1952 m flagged). Web research resolved the mill to 920 Scott Rd in the Binghampton neighborhood; the 1001 Tillman St address is the separate GP Cellulose Technology & Innovation Center office. Mill complex located via satellite at ~35.1565,-89.9620.",
     "facility": "Large multi-building urban industrial cellulose mill - the former Buckeye Cellulose / Buckeye Technologies cotton-linter pulp plant, acquired by GP in 2013. GP announced permanent closure of the Memphis Cellulose mill in October 2025 (~130 layoffs).",

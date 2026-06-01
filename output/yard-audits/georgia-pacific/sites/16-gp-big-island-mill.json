@@ -1,17 +1,100 @@
 {
   "name": "GP Big Island Mill - Big Island VA",
   "type": "Containerboard Mill",
-  "coords": { "lat": 37.5283, "lng": -79.3540 },
+  "coords": {
+    "lat": 37.5283,
+    "lng": -79.354
+  },
   "geofences": {
-    "perimeter": { "south": 37.52291, "west": -79.355992, "north": 37.532971, "east": -79.350328 },
-    "truckGate": { "south": 37.527761, "west": -79.354906, "north": 37.528839, "east": -79.353094 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.536141,
+          "lng": -79.359493
+        },
+        {
+          "lat": 37.537012,
+          "lng": -79.355099
+        },
+        {
+          "lat": 37.523508,
+          "lng": -79.350704
+        },
+        {
+          "lat": 37.522201,
+          "lng": -79.354549
+        },
+        {
+          "lat": 37.530478,
+          "lng": -79.358395
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 37.525686,
+          "lng": -79.355099
+        },
+        {
+          "lat": 37.526122,
+          "lng": -79.353451
+        },
+        {
+          "lat": 37.524815,
+          "lng": -79.352901
+        },
+        {
+          "lat": 37.524379,
+          "lng": -79.354549
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 37.525032, "west": -79.35168, "north": 37.527368, "east": -79.35032 }
+      {
+        "ring": [
+          {
+            "lat": 37.527211,
+            "lng": -79.355648
+          },
+          {
+            "lat": 37.527864,
+            "lng": -79.352352
+          },
+          {
+            "lat": 37.52525,
+            "lng": -79.351528
+          },
+          {
+            "lat": 37.524597,
+            "lng": -79.354824
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 37.528481, "west": -79.354066, "north": 37.529919, "east": -79.352934 }
+      {
+        "ring": [
+          {
+            "lat": 37.532656,
+            "lng": -79.357845
+          },
+          {
+            "lat": 37.53331,
+            "lng": -79.355099
+          },
+          {
+            "lat": 37.530478,
+            "lng": -79.354275
+          },
+          {
+            "lat": 37.529825,
+            "lng": -79.357021
+          }
+        ]
+      }
     ],
-    "staging": { "south": 37.527692, "west": -79.353493, "north": 37.529308, "east": -79.351907 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 14,
@@ -19,7 +102,7 @@
     "trailerParkingCapacity": 110,
     "truckGateCount": 1,
     "buildingCount": 8,
-    "siteAreaAcres": 138.0,
+    "siteAreaAcres": 138,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@37.5283,-79.3540,400m/data=!3m1!1e3",
@@ -48,7 +131,14 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "scale", "entryLanes", "exitLanes", "dockDoors"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoors"
+  ],
   "fieldNotes": {
     "facility": "Integrated containerboard pulp/paper mill on the west bank of the James River, Big Island VA — Virginia's oldest continuously operating business (125+ years). Confirmed via address (10097/9909 Lee Jackson Hwy), GP locations page, and satellite (mill building, woodyard with chip piles, clarifiers, wastewater treatment ponds, chemical storage tanks).",
     "truckGate": "Mill is a fully fenced, self-contained complex; access road crosses the Norfolk Southern rail line off Lee Jackson Hwy. A controlled gated entrance is standard for a mill of this scale and age; not directly resolvable in Street View due to roadside tree cover and the rail buffer — medium confidence.",

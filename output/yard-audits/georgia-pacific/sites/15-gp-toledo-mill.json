@@ -1,18 +1,100 @@
 {
   "name": "GP Toledo Mill - Toledo OR",
   "type": "Containerboard/Linerboard Mill",
-  "coords": { "lat": 44.6145, "lng": -123.9370 },
+  "coords": {
+    "lat": 44.6145,
+    "lng": -123.937
+  },
   "geofences": {
-    "perimeter": { "south": 44.6090, "west": -123.9520, "north": 44.6215, "east": -123.9320 },
-    "truckGate": { "south": 44.6160, "west": -123.9382, "north": 44.6172, "east": -123.9362 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 44.616064,
+          "lng": -123.937
+        },
+        {
+          "lat": 44.615673,
+          "lng": -123.932056
+        },
+        {
+          "lat": 44.608243,
+          "lng": -123.931507
+        },
+        {
+          "lat": 44.607852,
+          "lng": -123.936451
+        },
+        {
+          "lat": 44.613522,
+          "lng": -123.937549
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 44.6145,
+          "lng": -123.937
+        },
+        {
+          "lat": 44.6145,
+          "lng": -123.935352
+        },
+        {
+          "lat": 44.613522,
+          "lng": -123.935352
+        },
+        {
+          "lat": 44.613522,
+          "lng": -123.937
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 44.6155, "west": -123.9375, "north": 44.6195, "east": -123.9335 },
-      { "south": 44.6135, "west": -123.9355, "north": 44.6160, "east": -123.9335 }
+      {
+        "ring": [
+          {
+            "lat": 44.613522,
+            "lng": -123.935901
+          },
+          {
+            "lat": 44.613327,
+            "lng": -123.932056
+          },
+          {
+            "lat": 44.61059,
+            "lng": -123.932331
+          },
+          {
+            "lat": 44.610785,
+            "lng": -123.936176
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 44.6115, "west": -123.9385, "north": 44.6140, "east": -123.9360 }
+      {
+        "ring": [
+          {
+            "lat": 44.6145,
+            "lng": -123.936451
+          },
+          {
+            "lat": 44.614304,
+            "lng": -123.93288
+          },
+          {
+            "lat": 44.613327,
+            "lng": -123.933155
+          },
+          {
+            "lat": 44.613522,
+            "lng": -123.936725
+          }
+        ]
+      }
     ],
-    "staging": { "south": 44.6150, "west": -123.9372, "north": 44.6170, "east": -123.9345 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 14,
@@ -20,23 +102,44 @@
     "trailerParkingCapacity": 90,
     "truckGateCount": 1,
     "buildingCount": 18,
-    "siteAreaAcres": 230.0,
+    "siteAreaAcres": 230,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@44.6145,-123.9370,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": true, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "scale", "dockDoors", "entryLanes", "exitLanes", "fastLaneOpportunity", "multiStep"],
+  "uncertainFields": [
+    "guardShack",
+    "scale",
+    "dockDoors",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "multiStep"
+  ],
   "fieldNotes": {
     "location": "Roster geocode (44.60417,-123.935516, address 1 Butler Bridge Rd) sat in the Yaquina River / treatment-pond area south of the actual mill - imprecise. Mill relocated via satellite and web research to the GP Toledo Mill complex on a peninsula on the east bank of the Yaquina River, ~44.6145,-123.9370. Confirmed address: 1400 SE Butler Bridge Rd, Toledo, OR 97391.",
     "facility": "Georgia-Pacific Toledo Mill - an integrated kraft pulp and linerboard (containerboard) mill operating since 1957; makes linerboard for corrugated boxes from virgin wood chips and recycled fiber. GP also operates the Juno recycling technology facility on-site. Subject of the Infor Phase 2 dossier item. Compact, water-bound campus: paper-machine and process buildings, chemical recovery, large chip pile, woodyard with conveyors, finished-goods warehouses along the riverfront, trailer drop yards, rail yard, and a private Butler Bridge linking to west-bank facilities (additional warehouses / log storage).",

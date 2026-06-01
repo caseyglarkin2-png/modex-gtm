@@ -1,38 +1,142 @@
 {
   "name": "GP Muskogee Mill - Muskogee OK",
   "type": "Tissue/Towel Mill",
-  "coords": { "lat": 35.7345, "lng": -95.2985 },
+  "coords": {
+    "lat": 35.7345,
+    "lng": -95.2985
+  },
   "geofences": {
-    "perimeter": { "south": 35.7250, "west": -95.3085, "north": 35.7440, "east": -95.2860 },
-    "truckGate": { "south": 35.7344, "west": -95.3018, "north": 35.7356, "east": -95.3004 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.742526,
+          "lng": -95.301247
+        },
+        {
+          "lat": 35.742526,
+          "lng": -95.286415
+        },
+        {
+          "lat": 35.727365,
+          "lng": -95.285316
+        },
+        {
+          "lat": 35.726473,
+          "lng": -95.300697
+        },
+        {
+          "lat": 35.736729,
+          "lng": -95.301796
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.735392,
+          "lng": -95.301796
+        },
+        {
+          "lat": 35.735392,
+          "lng": -95.299049
+        },
+        {
+          "lat": 35.733162,
+          "lng": -95.299049
+        },
+        {
+          "lat": 35.733162,
+          "lng": -95.301796
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 35.7358, "west": -95.3015, "north": 35.7392, "east": -95.2978 }
+      {
+        "ring": [
+          {
+            "lat": 35.738067,
+            "lng": -95.297401
+          },
+          {
+            "lat": 35.738067,
+            "lng": -95.29081
+          },
+          {
+            "lat": 35.7345,
+            "lng": -95.291359
+          },
+          {
+            "lat": 35.7345,
+            "lng": -95.297951
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.7355, "west": -95.3060, "north": 35.7378, "east": -95.3035 },
-      { "south": 35.7335, "west": -95.3010, "north": 35.7360, "east": -95.2980 }
+      {
+        "ring": [
+          {
+            "lat": 35.736284,
+            "lng": -95.299599
+          },
+          {
+            "lat": 35.735838,
+            "lng": -95.289711
+          },
+          {
+            "lat": 35.733608,
+            "lng": -95.29026
+          },
+          {
+            "lat": 35.734054,
+            "lng": -95.300148
+          }
+        ]
+      }
     ],
-    "staging": { "south": 35.7344, "west": -95.3018, "north": 35.7360, "east": -95.3000 }
+    "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 55, "trailersVisible": 140, "trailerParkingCapacity": 200,
-    "truckGateCount": 1, "buildingCount": 15, "siteAreaAcres": 380.0,
+    "dockDoorCount": 55,
+    "trailersVisible": 140,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 1,
+    "buildingCount": 15,
+    "siteAreaAcres": 380,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@35.7345,-95.2985,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": true, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "multiStep", "dockDoorCount", "truckGateCount"],
+  "uncertainFields": [
+    "scale",
+    "multiStep",
+    "dockDoorCount",
+    "truckGateCount"
+  ],
   "fieldNotes": {
     "location": "Roster coords (35.762459,-95.403211 / 801 N 32nd St) landed in central Muskogee ~9 km NW of the mill. The GP Muskogee tissue mill is a 640-acre complex along the McClellan-Kerr Arkansas River Navigation System, SE of the city. Mill core located via web research + satellite; locked at 35.7345,-95.2985.",
     "truckGate": "POSITIVELY CONFIRMED in Street View (Oct 2024): main entrance driveway off the public road with a 'Georgia-Pacific Muskogee Mill' sign and a chain-link perimeter fence. Controlled entry.",

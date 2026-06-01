@@ -1,17 +1,112 @@
 {
   "name": "GP Dixie Cup Plant - Lexington KY",
   "type": "Cup/Converting Plant",
-  "coords": { "lat": 38.0807, "lng": -84.5258 },
+  "coords": {
+    "lat": 38.0807,
+    "lng": -84.5258
+  },
   "geofences": {
-    "perimeter": { "south": 38.078095, "west": -84.528995, "north": 38.083215, "east": -84.523175 },
-    "truckGate": { "south": 38.079641, "west": -84.525485, "north": 38.080359, "east": -84.524115 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.081997,
+          "lng": -84.527173
+        },
+        {
+          "lat": 38.081781,
+          "lng": -84.524152
+        },
+        {
+          "lat": 38.076808,
+          "lng": -84.524152
+        },
+        {
+          "lat": 38.076808,
+          "lng": -84.526899
+        },
+        {
+          "lat": 38.0807,
+          "lng": -84.527173
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 38.077673,
+          "lng": -84.525113
+        },
+        {
+          "lat": 38.077673,
+          "lng": -84.524152
+        },
+        {
+          "lat": 38.077025,
+          "lng": -84.524152
+        },
+        {
+          "lat": 38.077025,
+          "lng": -84.525113
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 38.080981, "west": -84.524628, "north": 38.082419, "east": -84.523372 }
+      {
+        "ring": [
+          {
+            "lat": 38.081565,
+            "lng": -84.524152
+          },
+          {
+            "lat": 38.081457,
+            "lng": -84.522779
+          },
+          {
+            "lat": 38.080484,
+            "lng": -84.522916
+          },
+          {
+            "lat": 38.080592,
+            "lng": -84.524289
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 38.079992, "west": -84.524942, "north": 38.081608, "east": -84.524258 }
+      {
+        "ring": [
+          {
+            "lat": 38.0807,
+            "lng": -84.526761
+          },
+          {
+            "lat": 38.080592,
+            "lng": -84.524564
+          },
+          {
+            "lat": 38.080051,
+            "lng": -84.524701
+          },
+          {
+            "lat": 38.08016,
+            "lng": -84.526899
+          }
+        ]
+      }
     ],
-    "staging": { "south": 38.079651, "west": -84.525771, "north": 38.080549, "east": -84.524629 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 0,
+        "pano": "b1p5oP7KazrucFC8gUC0YQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 0,
+        "pano": "b1p5oP7KazrucFC8gUC0YQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 22,
@@ -19,7 +114,7 @@
     "trailerParkingCapacity": 80,
     "truckGateCount": 1,
     "buildingCount": 5,
-    "siteAreaAcres": 72.0,
+    "siteAreaAcres": 72,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@38.0807,-84.5258,400m/data=!3m1!1e3",
@@ -48,7 +143,15 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoors", "trailersVisible", "entryLanes", "exitLanes", "scale"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoors",
+    "trailersVisible",
+    "entryLanes",
+    "exitLanes",
+    "scale"
+  ],
   "fieldNotes": {
     "facility": "Georgia-Pacific Dixie Cup manufacturing plant, Lexington KY — the consolidated sole Dixie cup production site after the Easton PA plant closed (2021). Iconic Dixie Cup water tower on the property. Located in the NW Lexington industrial district. Roster coordinate (38.104086, -84.506349) was ~3 km NE in a residential subdivision; the roster address '1900 Spurr Road' appears imprecise — the plant is at 451 Harbison Road (38.080038, -84.526746). Relocated and confirmed via the water tower, the Georgia-Pacific signage seen in Street View, and the large converting-plant complex.",
     "truckGate": "Property is fully fenced — black ornamental metal fence along the office/parking frontage and chain-link around the dock yard, with a sliding gate visible at one fence opening (Street View). The truck driveway enters off Harbison Road into the fenced dock yard. Controlled access — called true.",

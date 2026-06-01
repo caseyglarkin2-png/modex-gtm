@@ -1,17 +1,87 @@
 {
   "name": "Kenco MCS Dallas II - Lancaster TX",
   "type": "Multi-Client Distribution Center",
-  "coords": { "lat": 32.63250, "lng": -96.80380 },
+  "coords": {
+    "lat": 32.6325,
+    "lng": -96.8038
+  },
   "geofences": {
-    "perimeter": { "south": 32.63060, "west": -96.80520, "north": 32.63420, "east": -96.80200 },
-    "truckGate": { "south": 32.63350, "west": -96.80450, "north": 32.63420, "east": -96.80360 },
-    "dropYards": [
-      { "south": 32.63100, "west": -96.80300, "north": 32.63380, "east": -96.80210 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.633078,
+          "lng": -96.805173
+        },
+        {
+          "lat": 32.633078,
+          "lng": -96.802976
+        },
+        {
+          "lat": 32.630765,
+          "lng": -96.802976
+        },
+        {
+          "lat": 32.630765,
+          "lng": -96.805173
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.632905,
+          "lng": -96.805173
+        },
+        {
+          "lat": 32.632905,
+          "lng": -96.804761
+        },
+        {
+          "lat": 32.6325,
+          "lng": -96.804761
+        },
+        {
+          "lat": 32.6325,
+          "lng": -96.805173
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 32.63100, "west": -96.80360, "north": 32.63380, "east": -96.80280 }
+      {
+        "ring": [
+          {
+            "lat": 32.632789,
+            "lng": -96.803457
+          },
+          {
+            "lat": 32.632789,
+            "lng": -96.802976
+          },
+          {
+            "lat": 32.630881,
+            "lng": -96.802976
+          },
+          {
+            "lat": 32.630881,
+            "lng": -96.803457
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 124,
+        "pano": "Cd2deTPP0TE6anrN_oxigg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 124,
+        "pano": "Cd2deTPP0TE6anrN_oxigg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 38,
@@ -19,23 +89,41 @@
     "trailerParkingCapacity": 55,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 26.0,
+    "siteAreaAcres": 26,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.63250,-96.80380,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoors", "dockDoorCount", "trailersVisible", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoors",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "Roster gives identical APPROXIMATE coords for three Kenco Lancaster facilities (Dallas III/IV/II = 589,362 / 560,000 / 200,000 SF) in the Danieldale Road multi-tenant logistics corridor, Lancaster TX 75134. Per-building Kenco leasing is not publicly disambiguated. idx 14 (Dallas II, 200,000 SF - the smallest of the three) was assigned to the notably smaller rear-load building in the corridor, center ~32.6325,-96.8038.",
     "truckGate": "Open speculative-park access drives off the corridor street - no barrier arm, no gate, no guard booth. Street View shows wide open paved entrance drives with only fire-lane striping.",

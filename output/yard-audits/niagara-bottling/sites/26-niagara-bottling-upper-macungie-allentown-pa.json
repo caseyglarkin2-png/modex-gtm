@@ -1,19 +1,87 @@
 {
   "name": "Niagara Bottling - Upper Macungie (Allentown) PA",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 40.571100, "lng": -75.614900 },
+  "coords": {
+    "lat": 40.5711,
+    "lng": -75.6149
+  },
   "geofences": {
-    "perimeter": { "south": 40.568700, "west": -75.616900, "north": 40.573300, "east": -75.612400 },
-    "truckGate": { "south": 40.572000, "west": -75.615700, "north": 40.572600, "east": -75.615000 },
-    "dropYards": [
-      { "south": 40.571900, "west": -75.617100, "north": 40.573200, "east": -75.615300 },
-      { "south": 40.568900, "west": -75.613600, "north": 40.570400, "east": -75.612400 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.571622,
+          "lng": -75.615861
+        },
+        {
+          "lat": 40.571622,
+          "lng": -75.612977
+        },
+        {
+          "lat": 40.569118,
+          "lng": -75.612977
+        },
+        {
+          "lat": 40.569118,
+          "lng": -75.615861
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.569848,
+          "lng": -75.615999
+        },
+        {
+          "lat": 40.569848,
+          "lng": -75.615175
+        },
+        {
+          "lat": 40.569327,
+          "lng": -75.615175
+        },
+        {
+          "lat": 40.569327,
+          "lng": -75.615999
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 40.569600, "west": -75.616300, "north": 40.572400, "east": -75.614600 },
-      { "south": 40.568900, "west": -75.614000, "north": 40.570600, "east": -75.612700 }
+      {
+        "ring": [
+          {
+            "lat": 40.571517,
+            "lng": -75.615724
+          },
+          {
+            "lat": 40.571517,
+            "lng": -75.613115
+          },
+          {
+            "lat": 40.5711,
+            "lng": -75.613115
+          },
+          {
+            "lat": 40.5711,
+            "lng": -75.615724
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 21,
+        "pano": "uIEM9QjTB9S8TxIXIs-HDw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 21,
+        "pano": "uIEM9QjTB9S8TxIXIs-HDw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 55,
@@ -21,23 +89,44 @@
     "trailerParkingCapacity": 90,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 38.0,
+    "siteAreaAcres": 38,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.571100,-75.614900,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Property is fenced (chain-link around the dock and trailer yards, visible in Street View 2023-08), but the truck access road off Industrial Blvd shows no barrier arm and no guard booth across the lane in any Street View heading walked along the road. Classified as open driveway / no controlled gate, medium confidence — a sliding yard gate could exist closer to the building, out of Street View reach.",
     "guardShack": "No staffed booth structure visible at the entrance in satellite or Street View.",

@@ -1,17 +1,100 @@
 {
   "name": "GP Alabama River Cellulose Mill - Perdue Hill AL",
   "type": "Cellulose/Pulp Mill",
-  "coords": { "lat": 31.5800, "lng": -87.4830 },
+  "coords": {
+    "lat": 31.58,
+    "lng": -87.483
+  },
   "geofences": {
-    "perimeter": { "south": 31.574161, "west": -87.493017, "north": 31.585839, "east": -87.472983 },
-    "truckGate": { "south": 31.580600, "west": -87.478000, "north": 31.581600, "east": -87.476500 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 31.586551,
+          "lng": -87.496184
+        },
+        {
+          "lat": 31.58468,
+          "lng": -87.485197
+        },
+        {
+          "lat": 31.57883,
+          "lng": -87.485747
+        },
+        {
+          "lat": 31.578128,
+          "lng": -87.493986
+        },
+        {
+          "lat": 31.581872,
+          "lng": -87.496184
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 31.58,
+          "lng": -87.489866
+        },
+        {
+          "lat": 31.58,
+          "lng": -87.488219
+        },
+        {
+          "lat": 31.57883,
+          "lng": -87.488219
+        },
+        {
+          "lat": 31.57883,
+          "lng": -87.489866
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 31.580800, "west": -87.482500, "north": 31.583000, "east": -87.478000 }
+      {
+        "ring": [
+          {
+            "lat": 31.581872,
+            "lng": -87.493986
+          },
+          {
+            "lat": 31.581872,
+            "lng": -87.486845
+          },
+          {
+            "lat": 31.580234,
+            "lng": -87.48712
+          },
+          {
+            "lat": 31.580234,
+            "lng": -87.493986
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 31.578500, "west": -87.486000, "north": 31.580500, "east": -87.483000 }
+      {
+        "ring": [
+          {
+            "lat": 31.58351,
+            "lng": -87.493437
+          },
+          {
+            "lat": 31.582808,
+            "lng": -87.487395
+          },
+          {
+            "lat": 31.581638,
+            "lng": -87.487669
+          },
+          {
+            "lat": 31.58234,
+            "lng": -87.493712
+          }
+        ]
+      }
     ],
-    "staging": { "south": 31.580500, "west": -87.480000, "north": 31.581500, "east": -87.478000 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 18,
@@ -19,23 +102,45 @@
     "trailerParkingCapacity": 350,
     "truckGateCount": 1,
     "buildingCount": 20,
-    "siteAreaAcres": 610.0,
+    "siteAreaAcres": 610,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@31.58,-87.483,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": true, "multipleFacilities": true,
-    "scale": true, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": true,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "scale", "dockDoorCount", "entryLanes", "exitLanes", "connectivityIssue", "shipRcvSeparate", "multiStep"],
+  "uncertainFields": [
+    "guardShack",
+    "scale",
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes",
+    "connectivityIssue",
+    "shipRcvSeparate",
+    "multiStep"
+  ],
   "fieldNotes": {
     "truckGate": "Single controlled access road off Highway 84 / Lena Landegger Hwy entering an isolated industrial mill; the long forest-buffered private road forms a controlled approach.",
     "guardShack": "No Street View available (mill too remote, ZERO_RESULTS) - guard booth not directly confirmed; a 3,000-job pulp mill, one of the largest in North America, runs a staffed gatehouse by standard. Flagged uncertain.",

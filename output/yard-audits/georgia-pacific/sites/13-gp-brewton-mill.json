@@ -1,17 +1,112 @@
 {
   "name": "GP Brewton Mill - Brewton AL",
   "type": "Containerboard/Bleached Board Mill",
-  "coords": { "lat": 31.1068, "lng": -87.0658 },
+  "coords": {
+    "lat": 31.1068,
+    "lng": -87.0658
+  },
   "geofences": {
-    "perimeter": { "south": 31.1018, "west": -87.0698, "north": 31.1118, "east": -87.0588 },
-    "truckGate": { "south": 31.1038, "west": -87.0686, "north": 31.1048, "east": -87.0674 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 31.108681,
+          "lng": -87.069096
+        },
+        {
+          "lat": 31.107976,
+          "lng": -87.061405
+        },
+        {
+          "lat": 31.103037,
+          "lng": -87.061405
+        },
+        {
+          "lat": 31.102567,
+          "lng": -87.068547
+        },
+        {
+          "lat": 31.105624,
+          "lng": -87.069371
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 31.105624,
+          "lng": -87.069371
+        },
+        {
+          "lat": 31.105624,
+          "lng": -87.067723
+        },
+        {
+          "lat": 31.104448,
+          "lng": -87.067723
+        },
+        {
+          "lat": 31.104448,
+          "lng": -87.069371
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 31.1044, "west": -87.0672, "north": 31.1062, "east": -87.0650 }
+      {
+        "ring": [
+          {
+            "lat": 31.10727,
+            "lng": -87.067997
+          },
+          {
+            "lat": 31.107035,
+            "lng": -87.062504
+          },
+          {
+            "lat": 31.105389,
+            "lng": -87.062779
+          },
+          {
+            "lat": 31.105624,
+            "lng": -87.068272
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 31.1045, "west": -87.0668, "north": 31.1057, "east": -87.0644 }
+      {
+        "ring": [
+          {
+            "lat": 31.105389,
+            "lng": -87.067997
+          },
+          {
+            "lat": 31.105154,
+            "lng": -87.063053
+          },
+          {
+            "lat": 31.103978,
+            "lng": -87.063328
+          },
+          {
+            "lat": 31.104213,
+            "lng": -87.068272
+          }
+        ]
+      }
     ],
-    "staging": { "south": 31.1040, "west": -87.0688, "north": 31.1050, "east": -87.0678 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 89,
+        "pano": "_juGpUwW-voksAGhVjB9Ww",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 89,
+        "pano": "_juGpUwW-voksAGhVjB9Ww",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 22,
@@ -19,23 +114,42 @@
     "trailerParkingCapacity": 40,
     "truckGateCount": 1,
     "buildingCount": 16,
-    "siteAreaAcres": 95.0,
+    "siteAreaAcres": 95,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@31.1068,-87.0658,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": true, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "dockDoors", "dropArea", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "scale",
+    "dockDoors",
+    "dropArea",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Roster geocode (31.1052,-87.0722) sat near the Brewton town center, ~1 km west of the mill (APPROXIMATE, 19 m flagged but actually mislocated to downtown). Mill core relocated via satellite to ~31.1068,-87.0658.",
     "facility": "Integrated white-top linerboard and solid-bleached-sulfate (SBS) paperboard mill. Former Smurfit-Stone mill, acquired by GP in 2007; ~400+ employees; underwent the $400M 'Project Phoenix' modernization; first U.S. integrated paper mill to earn EPA ENERGY STAR (2021).",

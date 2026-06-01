@@ -37,7 +37,8 @@ function bearing(lat1, lng1, lat2, lng2) {
   const y = Math.sin(Δλ) * Math.cos(φ2);
   const x = Math.cos(φ1) * Math.sin(φ2) - Math.sin(φ1) * Math.cos(φ2) * Math.cos(Δλ);
   const θ = (Math.atan2(y, x) * 180) / Math.PI;
-  return Math.round((θ + 360) % 360);
+  // round THEN wrap, so 359.6 -> 360 -> 0 (never lands on the invalid 360)
+  return Math.round((θ + 360) % 360) % 360;
 }
 
 const key = loadKey();

@@ -1,36 +1,100 @@
 {
   "name": "GXO Logistics Distribution Center - Grapevine TX",
   "type": "Distribution Center",
-  "coords": { "lat": 32.93180, "lng": -97.03200 },
+  "coords": {
+    "lat": 32.9318,
+    "lng": -97.032
+  },
   "geofences": {
-    "perimeter": { "south": 32.93060, "west": -97.03360, "north": 32.93310, "east": -97.03050 },
-    "truckGate": { "south": 32.93230, "west": -97.03340, "north": 32.93270, "east": -97.03290 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.932203,
+          "lng": -97.033236
+        },
+        {
+          "lat": 32.932319,
+          "lng": -97.030489
+        },
+        {
+          "lat": 32.930186,
+          "lng": -97.030283
+        },
+        {
+          "lat": 32.930071,
+          "lng": -97.03303
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 32.93180, "west": -97.03340, "north": 32.93310, "east": -97.03200 },
-      { "south": 32.93090, "west": -97.03250, "north": 32.93210, "east": -97.03100 }
+      {
+        "ring": [
+          {
+            "lat": 32.932088,
+            "lng": -97.033167
+          },
+          {
+            "lat": 32.932203,
+            "lng": -97.030558
+          },
+          {
+            "lat": 32.931915,
+            "lng": -97.030558
+          },
+          {
+            "lat": 32.9318,
+            "lng": -97.033167
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 70, "trailersVisible": 12, "trailerParkingCapacity": 30,
-    "truckGateCount": 2, "buildingCount": 1, "siteAreaAcres": 19.9,
+    "dockDoorCount": 70,
+    "trailersVisible": 12,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 19.9,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.93180,-97.03200,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "10-25",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "dropArea", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "dropArea",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "site": "Roster address (4220 Diplomacy Rd) was flagged approximate. Web research (Racklify, multiple directories) confirms GXO Logistics' Grapevine operation is at 2425 Esters Blvd, Grapevine TX 76051 — 'DFW Trade Center VII', a multi-tenant cross-dock distribution building (GXO shares the building with ShipBob and Tornado Transport). Esters Blvd geocoded via Nominatim to ~32.9346,-97.0331, in the International Commerce Park / LINK Logistics business park on DFW Airport land, near a major highway interchange. The audited building is the cross-dock warehouse located at the locked coordinates within that park; the exact unit could not be confirmed from imagery alone but the building type matches DFW Trade Center VII's published profile (~276-298K SF, 350' depth, 32' clear, cross-dock).",
     "truckGate": "FALSE — modern speculative multi-tenant cross-dock building. Truck courts on both long faces are open, ungated paved areas; no guard booth and no barrier arm observed at any driveway, consistent with the rest of this uniform spec-industrial park.",

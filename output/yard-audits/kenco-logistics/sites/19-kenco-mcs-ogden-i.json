@@ -1,17 +1,56 @@
 {
   "name": "Kenco MCS Ogden I - Ogden UT",
   "type": "Multi-Client Distribution Center",
-  "coords": { "lat": 41.24828, "lng": -111.99625 },
+  "coords": {
+    "lat": 41.24828,
+    "lng": -111.99625
+  },
   "geofences": {
-    "perimeter": { "south": 41.24655, "west": -111.99780, "north": 41.25000, "east": -111.99490 },
-    "truckGate": { "south": 41.24905, "west": -111.99720, "north": 41.24945, "east": -111.99660 },
-    "dropYards": [
-      { "south": 41.24770, "west": -111.99760, "north": 41.24960, "east": -111.99670 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.249158,
+          "lng": -111.996525
+        },
+        {
+          "lat": 41.249003,
+          "lng": -111.995014
+        },
+        {
+          "lat": 41.246783,
+          "lng": -111.995426
+        },
+        {
+          "lat": 41.246938,
+          "lng": -111.996937
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 41.24700, "west": -111.99700, "north": 41.24955, "east": -111.99645 }
+      {
+        "ring": [
+          {
+            "lat": 41.249106,
+            "lng": -111.996525
+          },
+          {
+            "lat": 41.248951,
+            "lng": -111.995151
+          },
+          {
+            "lat": 41.248693,
+            "lng": -111.99522
+          },
+          {
+            "lat": 41.248848,
+            "lng": -111.996593
+          }
+        ]
+      }
     ],
-    "staging": { "south": 41.24770, "west": -111.99775, "north": 41.24900, "east": -111.99715 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 46,
@@ -19,23 +58,41 @@
     "trailerParkingCapacity": 30,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 18.0,
+    "siteAreaAcres": 18,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.24828,-111.99625,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["truckGate", "guardShack", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "1025 Depot Dr, Ogden UT 84404 - confirmed as the Kenco Oatly Warehouse (Kenco-built/operated finished-goods DC serving Oatly's Ogden oat-milk plant; listed as 1025 Depot Dr Suite 5). Roster ROOFTOP geocode (41.247999,-111.995675) lands directly on the building in the Business Depot Ogden (BDO) industrial park. Audited coordinate is the building footprint center.",
     "truckGate": "No barrier arm, sliding/swing gate, or guard booth at the truck apron entrance. The west-side truck apron is reached by open driveways off the BDO industrial-park roads. Medium-confidence FALSE - flagged.",

@@ -1,17 +1,75 @@
 {
   "name": "GXO Logistics Distribution Center - Whitestown IN",
   "type": "Distribution Center",
-  "coords": { "lat": 39.96345, "lng": -86.38215 },
+  "coords": {
+    "lat": 39.96345,
+    "lng": -86.38215
+  },
   "geofences": {
-    "perimeter": { "south": 39.96135, "west": -86.38505, "north": 39.96565, "east": -86.37965 },
-    "truckGate": { "south": 39.96235, "west": -86.38475, "north": 39.96285, "east": -86.38405 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.964924,
+          "lng": -86.385995
+        },
+        {
+          "lat": 39.965555,
+          "lng": -86.380502
+        },
+        {
+          "lat": 39.961766,
+          "lng": -86.379678
+        },
+        {
+          "lat": 39.961134,
+          "lng": -86.385171
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 39.96255, "west": -86.38465, "north": 39.96545, "east": -86.38205 },
-      { "south": 39.96155, "west": -86.38215, "north": 39.96445, "east": -86.37985 }
+      {
+        "ring": [
+          {
+            "lat": 39.965239,
+            "lng": -86.384897
+          },
+          {
+            "lat": 39.965555,
+            "lng": -86.381051
+          },
+          {
+            "lat": 39.964292,
+            "lng": -86.380914
+          },
+          {
+            "lat": 39.963976,
+            "lng": -86.384759
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.96305, "west": -86.38445, "north": 39.96535, "east": -86.38215 },
-      { "south": 39.96165, "west": -86.38235, "north": 39.96395, "east": -86.38015 }
+      {
+        "ring": [
+          {
+            "lat": 39.962924,
+            "lng": -86.385309
+          },
+          {
+            "lat": 39.96345,
+            "lng": -86.380365
+          },
+          {
+            "lat": 39.962924,
+            "lng": -86.380227
+          },
+          {
+            "lat": 39.962397,
+            "lng": -86.385171
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -21,23 +79,41 @@
     "trailerParkingCapacity": 140,
     "truckGateCount": 2,
     "buildingCount": 1,
-    "siteAreaAcres": 55.0,
+    "siteAreaAcres": 55,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.96345,-86.38215,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["truckGate", "entryLanes", "exitLanes", "truckGateCount"],
+  "uncertainFields": [
+    "truckGate",
+    "entryLanes",
+    "exitLanes",
+    "truckGateCount"
+  ],
   "fieldNotes": {
     "location": "Confirmed the large cross-dock DC building at 5490 Industrial Ct, Whitestown (AllPoints at Anson logistics park, NW of Indianapolis just W of I-65). LoopNet lists 628,206 SF, 36-ft clear, 257 parking spaces, 76 dock doors. Roster ROOFTOP geocode landed on the building's SW corner; locked center moved to the building centroid (~39.96345, -86.38215).",
     "truckGate": "No barrier arm, sliding gate, or checkpoint structure visible at the NW or SE truck-yard driveway entrances; both are open paved approaches off the perimeter park road. Marked false; listed uncertain.",

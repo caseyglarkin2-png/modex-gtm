@@ -1,16 +1,73 @@
 {
   "name": "Niagara Bottling - Kansas City MO (149th St)",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 38.85290, "lng": -94.55370 },
+  "coords": {
+    "lat": 38.8529,
+    "lng": -94.5537
+  },
   "geofences": {
-    "perimeter": { "south": 38.85151, "west": -94.55537, "north": 38.85429, "east": -94.55203 },
-    "truckGate": null,
-    "dropYards": [
-      { "south": 38.85170, "west": -94.55537, "north": 38.85360, "east": -94.55470 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.854718,
+          "lng": -94.555897
+        },
+        {
+          "lat": 38.854718,
+          "lng": -94.552876
+        },
+        {
+          "lat": 38.851403,
+          "lng": -94.552876
+        },
+        {
+          "lat": 38.851403,
+          "lng": -94.555897
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 38.851831,
+          "lng": -94.556035
+        },
+        {
+          "lat": 38.851831,
+          "lng": -94.555485
+        },
+        {
+          "lat": 38.851563,
+          "lng": -94.555485
+        },
+        {
+          "lat": 38.851563,
+          "lng": -94.556035
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 38.85320, "west": -94.55520, "north": 38.85420, "east": -94.55400 },
-      { "south": 38.85180, "west": -94.55500, "north": 38.85320, "east": -94.55440 }
+      {
+        "ring": [
+          {
+            "lat": 38.853649,
+            "lng": -94.555897
+          },
+          {
+            "lat": 38.853649,
+            "lng": -94.555623
+          },
+          {
+            "lat": 38.851617,
+            "lng": -94.555623
+          },
+          {
+            "lat": 38.851617,
+            "lng": -94.555897
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -20,23 +77,42 @@
     "trailerParkingCapacity": 70,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 22.0,
+    "siteAreaAcres": 22,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@38.85290,-94.55370,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "shipRcvSeparate", "buildingCount"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoorCount",
+    "shipRcvSeparate",
+    "buildingCount"
+  ],
   "fieldNotes": {
     "buildingId": "Address 4000 E 149th St geocoded ROOFTOP to a road intersection inside the Three Trails / EastLink logistics park. The NE building in the cluster carries Walmart branding (confirmed via Street View) and is NOT Niagara. The audited building is the SW structure (~38.8529,-94.5537): a large warehouse/manufacturing building with a complex roofline, two rooftop solar arrays and visible process/utility roof equipment - the bottling-plant signature. No Niagara signage was readable in available Street View panos, so building identification is medium-confidence.",
     "truckGate": "No barrier arm, sliding gate, or guard booth visible at any driveway from the public road. Driveways are open. Classed false.",

@@ -1,18 +1,112 @@
 {
   "name": "GP Corrugated Box Plant - Kansas City MO",
   "type": "Corrugated Box Plant",
-  "coords": { "lat": 39.163500, "lng": -94.482500 },
+  "coords": {
+    "lat": 39.1635,
+    "lng": -94.4825
+  },
   "geofences": {
-    "perimeter": { "south": 39.160800, "west": -94.484800, "north": 39.165200, "east": -94.480500 },
-    "truckGate": { "south": 39.164800, "west": -94.481600, "north": 39.165200, "east": -94.480800 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.164565,
+          "lng": -94.486071
+        },
+        {
+          "lat": 39.164352,
+          "lng": -94.479753
+        },
+        {
+          "lat": 39.160519,
+          "lng": -94.479753
+        },
+        {
+          "lat": 39.160093,
+          "lng": -94.485796
+        },
+        {
+          "lat": 39.162968,
+          "lng": -94.486345
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.162968,
+          "lng": -94.486071
+        },
+        {
+          "lat": 39.162968,
+          "lng": -94.485247
+        },
+        {
+          "lat": 39.162435,
+          "lng": -94.485247
+        },
+        {
+          "lat": 39.162435,
+          "lng": -94.486071
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 39.162500, "west": -94.484600, "north": 39.164800, "east": -94.483400 },
-      { "south": 39.161800, "west": -94.481600, "north": 39.164400, "east": -94.480500 }
+      {
+        "ring": [
+          {
+            "lat": 39.164139,
+            "lng": -94.4825
+          },
+          {
+            "lat": 39.164032,
+            "lng": -94.480303
+          },
+          {
+            "lat": 39.162968,
+            "lng": -94.48044
+          },
+          {
+            "lat": 39.163074,
+            "lng": -94.482637
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.163000, "west": -94.483400, "north": 39.164600, "east": -94.482400 }
+      {
+        "ring": [
+          {
+            "lat": 39.163926,
+            "lng": -94.483873
+          },
+          {
+            "lat": 39.163819,
+            "lng": -94.481401
+          },
+          {
+            "lat": 39.163287,
+            "lng": -94.481539
+          },
+          {
+            "lat": 39.163394,
+            "lng": -94.484011
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 113,
+        "pano": "pLqeg_nnz_UGrFNbVgZAdw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 113,
+        "pano": "pLqeg_nnz_UGrFNbVgZAdw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 22,
@@ -20,7 +114,7 @@
     "trailerParkingCapacity": 110,
     "truckGateCount": 2,
     "buildingCount": 1,
-    "siteAreaAcres": 45.0,
+    "siteAreaAcres": 45,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@39.1635,-94.4825,400m/data=!3m1!1e3",
@@ -49,7 +143,18 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "dropArea", "trailersVisible", "trailerParkingCapacity", "truckGateCount", "scale", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoors",
+    "dropArea",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "truckGateCount",
+    "scale",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Roster had no street address and coords pointed at the East Bottoms industrial district south of the Missouri River (~2 km off). Actual GP Corrugated box plant is at 8600 NE 38th St, Kansas City MO 64161, in the Northland industrial district south of Worlds of Fun. Confirmed via business listings (GP Corrugated LLC / 'Kansas City Container') and OSM geocode; locked center ~39.1635,-94.4825.",
     "truckGate": "Open driveway access from NE 38th St — no barrier arm, sliding gate or guard booth resolved at the road. Typical urban box-plant entry. Flagged uncertain (perimeter chain-link fencing exists; a gate may be set back from the street).",

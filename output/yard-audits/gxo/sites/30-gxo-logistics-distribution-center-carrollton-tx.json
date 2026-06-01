@@ -1,13 +1,54 @@
 {
   "name": "GXO Logistics Distribution Center - Carrollton TX",
   "type": "Distribution Center",
-  "coords": { "lat": 32.989435, "lng": -96.928073 },
+  "coords": {
+    "lat": 32.989435,
+    "lng": -96.928073
+  },
   "geofences": {
-    "perimeter": { "south": 32.98850, "west": -96.92950, "north": 32.99080, "east": -96.92700 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.990356,
+          "lng": -96.928622
+        },
+        {
+          "lat": 32.991105,
+          "lng": -96.927524
+        },
+        {
+          "lat": 32.990529,
+          "lng": -96.926974
+        },
+        {
+          "lat": 32.989781,
+          "lng": -96.928073
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 32.98860, "west": -96.92810, "north": 32.99010, "east": -96.92710 }
+      {
+        "ring": [
+          {
+            "lat": 32.990299,
+            "lng": -96.928554
+          },
+          {
+            "lat": 32.99099,
+            "lng": -96.927592
+          },
+          {
+            "lat": 32.99076,
+            "lng": -96.927386
+          },
+          {
+            "lat": 32.990069,
+            "lng": -96.928348
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -17,23 +58,40 @@
     "trailerParkingCapacity": 12,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 11.0,
+    "siteAreaAcres": 11,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.989435,-96.928073,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "dropArea", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "dropArea",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Open site - no perimeter fence, gate, or guard booth. Driveways open directly from the internal industrial-park roads; the front entrance is an open drive (confirmed in 2024-02 and 2025-02 Street View).",
     "dockDoors": "Older tilt-up industrial building (~1980s-90s). Dock band with loading canopies along the NE face and SE end; estimated ~20 doors - banded 10-25.",

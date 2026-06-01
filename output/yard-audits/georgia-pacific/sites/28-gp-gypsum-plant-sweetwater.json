@@ -1,17 +1,112 @@
 {
   "name": "GP Gypsum Plant - Sweetwater TX",
   "type": "Gypsum Wallboard Plant",
-  "coords": { "lat": 32.483000, "lng": -100.334500 },
+  "coords": {
+    "lat": 32.483,
+    "lng": -100.3345
+  },
   "geofences": {
-    "perimeter": { "south": 32.477500, "west": -100.340000, "north": 32.486500, "east": -100.329000 },
-    "truckGate": { "south": 32.481000, "west": -100.337200, "north": 32.482200, "east": -100.335800 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.48578,
+          "lng": -100.339993
+        },
+        {
+          "lat": 32.485317,
+          "lng": -100.332303
+        },
+        {
+          "lat": 32.479293,
+          "lng": -100.331204
+        },
+        {
+          "lat": 32.478366,
+          "lng": -100.337247
+        },
+        {
+          "lat": 32.482537,
+          "lng": -100.340542
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.485317,
+          "lng": -100.335599
+        },
+        {
+          "lat": 32.485085,
+          "lng": -100.333951
+        },
+        {
+          "lat": 32.483927,
+          "lng": -100.334225
+        },
+        {
+          "lat": 32.484158,
+          "lng": -100.335873
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 32.484400, "west": -100.334500, "north": 32.486000, "east": -100.332200 }
+      {
+        "ring": [
+          {
+            "lat": 32.484853,
+            "lng": -100.336148
+          },
+          {
+            "lat": 32.484622,
+            "lng": -100.332303
+          },
+          {
+            "lat": 32.483,
+            "lng": -100.332577
+          },
+          {
+            "lat": 32.483232,
+            "lng": -100.336423
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 32.483600, "west": -100.334400, "north": 32.484400, "east": -100.332200 }
+      {
+        "ring": [
+          {
+            "lat": 32.483,
+            "lng": -100.337796
+          },
+          {
+            "lat": 32.482537,
+            "lng": -100.333401
+          },
+          {
+            "lat": 32.481378,
+            "lng": -100.333676
+          },
+          {
+            "lat": 32.481842,
+            "lng": -100.338071
+          }
+        ]
+      }
     ],
-    "staging": { "south": 32.481800, "west": -100.336000, "north": 32.483400, "east": -100.334200 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 172,
+        "pano": "TtPdv9WUrCCzb7QwUIvMrw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 172,
+        "pano": "TtPdv9WUrCCzb7QwUIvMrw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 14,
@@ -19,7 +114,7 @@
     "trailerParkingCapacity": 70,
     "truckGateCount": 2,
     "buildingCount": 8,
-    "siteAreaAcres": 256.0,
+    "siteAreaAcres": 256,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@32.4830,-100.3345,400m/data=!3m1!1e3",
@@ -48,7 +143,18 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoors", "dropArea", "trailersVisible", "trailerParkingCapacity", "scale", "truckGateCount", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoors",
+    "dropArea",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "scale",
+    "truckGateCount",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Roster coords pointed at downtown Sweetwater (4 km off). Actual GP Gypsum complex is on FM 1856 off I-20 east of Sweetwater (310/311 FM 1856): the legacy plant (Nolan County since 1957) plus the new $325M plant opened Oct 2023. Confirmed by GP-branded blue perimeter fencing in Street View; locked center ~32.4830,-100.3345.",
     "truckGate": "Plant reached via FM 1856, a county road dead-ending into the GP complex; GP-logo privacy-screened perimeter fence confirmed in Street View. Controlled-access industrial site with a clear entrance driveway and flags. No public-road pass-through.",

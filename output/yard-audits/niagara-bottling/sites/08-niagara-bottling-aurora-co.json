@@ -1,17 +1,87 @@
 {
   "name": "Niagara Bottling - Aurora CO",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 39.745400, "lng": -104.708550 },
+  "coords": {
+    "lat": 39.7454,
+    "lng": -104.70855
+  },
   "geofences": {
-    "perimeter": { "south": 39.74360, "west": -104.71050, "north": 39.74660, "east": -104.70640 },
-    "truckGate": { "south": 39.74430, "west": -104.70780, "north": 39.74480, "east": -104.70710 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.745453,
+          "lng": -104.710129
+        },
+        {
+          "lat": 39.745453,
+          "lng": -104.707726
+        },
+        {
+          "lat": 39.743922,
+          "lng": -104.707726
+        },
+        {
+          "lat": 39.743922,
+          "lng": -104.710129
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.745347,
+          "lng": -104.710335
+        },
+        {
+          "lat": 39.745347,
+          "lng": -104.709923
+        },
+        {
+          "lat": 39.745136,
+          "lng": -104.709923
+        },
+        {
+          "lat": 39.745136,
+          "lng": -104.710335
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 39.74400, "west": -104.71020, "north": 39.74460, "east": -104.70720 }
+      {
+        "ring": [
+          {
+            "lat": 39.744344,
+            "lng": -104.710061
+          },
+          {
+            "lat": 39.744344,
+            "lng": -104.707726
+          },
+          {
+            "lat": 39.743922,
+            "lng": -104.707726
+          },
+          {
+            "lat": 39.743922,
+            "lng": -104.710061
+          }
+        ]
+      }
     ],
-    "dockAprons": [
-      { "south": 39.74440, "west": -104.71020, "north": 39.74490, "east": -104.70720 }
-    ],
-    "staging": null
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 49,
+        "pano": "_ZzlQtkqqQP1r_8bBPsjrw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 49,
+        "pano": "_ZzlQtkqqQP1r_8bBPsjrw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 36,
@@ -19,23 +89,42 @@
     "trailerParkingCapacity": 45,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 26.0,
+    "siteAreaAcres": 26,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.745400,-104.708550,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "entryLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "entryLanes"
+  ],
   "fieldNotes": {
     "facility": "Niagara Bottling Aurora, 1933 N Gun Club Rd. Confirmed by water-treatment silos at the building's east end and a Niagara monument/logo visible in Street View (2026-04). Modern build-to-suit bottling plant in the Aurora/I-70 industrial corridor.",
     "truckGate": "Truck yard is fully enclosed by chain-link fence. The truck drive enters the fenced yard from the east/SE perimeter drive. A controlled gate is implied by the continuous perimeter fence; the exact barrier could not be resolved at max zoom (trees and shadow), so flagged.",

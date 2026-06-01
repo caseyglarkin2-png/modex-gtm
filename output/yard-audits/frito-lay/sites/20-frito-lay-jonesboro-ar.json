@@ -1,38 +1,162 @@
 {
   "name": "Frito-Lay - Jonesboro AR",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 35.81450, "lng": -90.56050 },
+  "coords": {
+    "lat": 35.8145,
+    "lng": -90.5605
+  },
   "geofences": {
-    "perimeter": { "south": 35.81100, "west": -90.56400, "north": 35.81680, "east": -90.55800 },
-    "truckGate": { "south": 35.81530, "west": -90.56280, "north": 35.81600, "east": -90.56180 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.817395,
+          "lng": -90.563247
+        },
+        {
+          "lat": 35.817395,
+          "lng": -90.557753
+        },
+        {
+          "lat": 35.811827,
+          "lng": -90.557753
+        },
+        {
+          "lat": 35.811827,
+          "lng": -90.563247
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.811827,
+          "lng": -90.561873
+        },
+        {
+          "lat": 35.811827,
+          "lng": -90.560912
+        },
+        {
+          "lat": 35.811382,
+          "lng": -90.560912
+        },
+        {
+          "lat": 35.811382,
+          "lng": -90.561873
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 35.81560, "west": -90.56230, "north": 35.81700, "east": -90.55850 },
-      { "south": 35.81480, "west": -90.56400, "north": 35.81620, "east": -90.56260 }
+      {
+        "ring": [
+          {
+            "lat": 35.815391,
+            "lng": -90.562972
+          },
+          {
+            "lat": 35.815391,
+            "lng": -90.561873
+          },
+          {
+            "lat": 35.813164,
+            "lng": -90.561873
+          },
+          {
+            "lat": 35.813164,
+            "lng": -90.562972
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 35.817061,
+            "lng": -90.561599
+          },
+          {
+            "lat": 35.817061,
+            "lng": -90.558303
+          },
+          {
+            "lat": 35.816059,
+            "lng": -90.558303
+          },
+          {
+            "lat": 35.816059,
+            "lng": -90.561599
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.81530, "west": -90.56240, "north": 35.81620, "east": -90.55850 }
+      {
+        "ring": [
+          {
+            "lat": 35.814945,
+            "lng": -90.561873
+          },
+          {
+            "lat": 35.814945,
+            "lng": -90.558303
+          },
+          {
+            "lat": 35.814277,
+            "lng": -90.558303
+          },
+          {
+            "lat": 35.814277,
+            "lng": -90.561873
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 60, "trailersVisible": 220, "trailerParkingCapacity": 280,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 87.0,
+    "dockDoorCount": 60,
+    "trailersVisible": 220,
+    "trailerParkingCapacity": 280,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 87,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@35.8145,-90.5605,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "scale", "fastLaneOpportunity"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "scale",
+    "fastLaneOpportunity"
+  ],
   "fieldNotes": {
     "location": "Roster geocode flagged ROOFTOP but moved 8439 m - the supplied lat/lng (35.814768,-90.56181) nonetheless landed directly on the Frito-Lay plant. Web research confirmed 2810 Quality Way, Jonesboro AR 72401 - a large Frito-Lay manufacturing plant producing Lay's, Ruffles, and Doritos. Street View from the surrounding farm roads confirmed the plant with silos and a Frito-Lay sign in the field.",
     "truckGate": "Large modern manufacturing plant set well back from public roads across open farmland, reached by a single private access road from the west. A controlled truck gate is standard for a plant of this scale, but Street View does not cover the private drive so a barrier arm could not be directly imaged. Classified truckGate true; flagged uncertain.",
