@@ -1,17 +1,108 @@
 {
   "name": "UNFI - Montgomery NY DC (Hudson Valley)",
   "type": "Distribution Center",
-  "coords": { "lat": 41.49355, "lng": -74.23700 },
+  "coords": {
+    "lat": 41.49355,
+    "lng": -74.237
+  },
   "geofences": {
-    "perimeter": { "south": 41.49080, "west": -74.24150, "north": 41.49620, "east": -74.23250 },
-    "truckGate": { "south": 41.49150, "west": -74.23900, "north": 41.49250, "east": -74.23750 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.49499,
+          "lng": -74.238373
+        },
+        {
+          "lat": 41.494579,
+          "lng": -74.233979
+        },
+        {
+          "lat": 41.492316,
+          "lng": -74.234253
+        },
+        {
+          "lat": 41.492727,
+          "lng": -74.238648
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.493447,
+          "lng": -74.238923
+        },
+        {
+          "lat": 41.493344,
+          "lng": -74.238099
+        },
+        {
+          "lat": 41.492727,
+          "lng": -74.238236
+        },
+        {
+          "lat": 41.49283,
+          "lng": -74.23906
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 41.49420, "west": -74.24080, "north": 41.49600, "east": -74.23700 }
+      {
+        "ring": [
+          {
+            "lat": 41.494579,
+            "lng": -74.238373
+          },
+          {
+            "lat": 41.494476,
+            "lng": -74.237549
+          },
+          {
+            "lat": 41.49283,
+            "lng": -74.237687
+          },
+          {
+            "lat": 41.492933,
+            "lng": -74.238511
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.49150, "west": -74.24090, "north": 41.49560, "east": -74.23850 }
+      {
+        "ring": [
+          {
+            "lat": 41.494476,
+            "lng": -74.237549
+          },
+          {
+            "lat": 41.494476,
+            "lng": -74.237137
+          },
+          {
+            "lat": 41.49283,
+            "lng": -74.237275
+          },
+          {
+            "lat": 41.49283,
+            "lng": -74.237687
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 59,
+        "pano": "I6Qff8pFwk-kjRm5eyjRPQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 59,
+        "pano": "I6Qff8pFwk-kjRm5eyjRPQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 90,
@@ -19,25 +110,46 @@
     "trailerParkingCapacity": 120,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 48.0,
+    "siteAreaAcres": 48,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.49355,-74.23700,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes",
-    "preGateStaging", "postGateStaging", "multipleFacilities", "scale", "multiStep"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "preGateStaging",
+    "postGateStaging",
+    "multipleFacilities",
+    "scale",
+    "multiStep"
   ],
   "fieldNotes": {
     "location": "Confirmed UNFI Montgomery NY DC (Hudson Valley DC), 525 Neelytown Rd, Montgomery NY 12549. Roster ROOFTOP geocode 41.493552,-74.235922 lands squarely on a large L-shaped distribution building off Neelytown Rd in the Orange County / Hudson Valley region. Web-corroborated: UNFI press release - Hudson Valley DC opened 2014, LEED Gold, built to serve the NYC-metro Whole Foods customer base.",

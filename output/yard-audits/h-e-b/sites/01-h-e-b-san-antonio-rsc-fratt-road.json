@@ -1,18 +1,128 @@
 {
   "name": "H-E-B San Antonio RSC (Fratt Road) - San Antonio TX",
   "type": "Retail Support Center / Distribution Center",
-  "coords": { "lat": 29.486200, "lng": -98.389900 },
+  "coords": {
+    "lat": 29.4862,
+    "lng": -98.3899
+  },
   "geofences": {
-    "perimeter": { "south": 29.483700, "west": -98.393100, "north": 29.489400, "east": -98.386500 },
-    "truckGate": { "south": 29.485350, "west": -98.392650, "north": 29.485900, "east": -98.392150 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.487156,
+          "lng": -98.395942
+        },
+        {
+          "lat": 29.487037,
+          "lng": -98.387428
+        },
+        {
+          "lat": 29.484287,
+          "lng": -98.387291
+        },
+        {
+          "lat": 29.484168,
+          "lng": -98.395805
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 29.484168,
+          "lng": -98.39402
+        },
+        {
+          "lat": 29.484168,
+          "lng": -98.393196
+        },
+        {
+          "lat": 29.483809,
+          "lng": -98.393196
+        },
+        {
+          "lat": 29.483809,
+          "lng": -98.39402
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 29.484900, "west": -98.392400, "north": 29.485650, "east": -98.387800 },
-      { "south": 29.485600, "west": -98.392300, "north": 29.486000, "east": -98.388300 }
+      {
+        "ring": [
+          {
+            "lat": 29.486798,
+            "lng": -98.395805
+          },
+          {
+            "lat": 29.486678,
+            "lng": -98.393059
+          },
+          {
+            "lat": 29.485602,
+            "lng": -98.393059
+          },
+          {
+            "lat": 29.485722,
+            "lng": -98.395805
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 29.485602,
+            "lng": -98.391411
+          },
+          {
+            "lat": 29.485483,
+            "lng": -98.387703
+          },
+          {
+            "lat": 29.484885,
+            "lng": -98.387703
+          },
+          {
+            "lat": 29.485005,
+            "lng": -98.391411
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 29.485650, "west": -98.391900, "north": 29.486050, "east": -98.387900 }
+      {
+        "ring": [
+          {
+            "lat": 29.487156,
+            "lng": -98.391823
+          },
+          {
+            "lat": 29.487037,
+            "lng": -98.387428
+          },
+          {
+            "lat": 29.486798,
+            "lng": -98.387428
+          },
+          {
+            "lat": 29.486917,
+            "lng": -98.391823
+          }
+        ]
+      }
     ],
-    "staging": { "south": 29.483800, "west": -98.389300, "north": 29.484400, "east": -98.387900 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 50,
+        "pano": "bhzYb59W3ckiJqowtZ7NYw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 50,
+        "pano": "bhzYb59W3ckiJqowtZ7NYw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 90,
@@ -20,23 +130,44 @@
     "trailerParkingCapacity": 220,
     "truckGateCount": 2,
     "buildingCount": 6,
-    "siteAreaAcres": 88.0,
+    "siteAreaAcres": 88,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@29.486200,-98.389900,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "shipRcvSeparate", "scale", "multiStep"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate",
+    "scale",
+    "multiStep"
+  ],
   "fieldNotes": {
     "facility": "Large H-E-B corporate distribution campus on Fratt Rd / O'Connor Rd, NE San Antonio. Solar-roofed RSC warehouse plus a print plant and multiple secondary buildings. Roster source notes the campus also includes milk plant / bakery functions; classified here as the integrated RSC campus.",
     "truckGate": "Chain-link perimeter fence around the campus confirmed in Street View (2024-12). Truck entrance on the west road is a wide paved driveway with sliding fence-panel gates and yellow bollards; a tractor was captured mid-driveway. Counted as controlled gate.",

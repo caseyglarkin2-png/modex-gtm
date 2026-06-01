@@ -1,17 +1,91 @@
 {
   "name": "Nabisco Norcross Distribution Center - Norcross GA",
   "type": "Distribution center",
-  "coords": { "lat": 33.92175, "lng": -84.21810 },
+  "coords": {
+    "lat": 33.92175,
+    "lng": -84.2181
+  },
   "geofences": {
-    "perimeter": { "south": 33.92105, "west": -84.21900, "north": 33.92260, "east": -84.21730 },
-    "truckGate": { "south": 33.92210, "west": -84.21895, "north": 33.92245, "east": -84.21850 },
-    "dropYards": [
-      { "south": 33.92160, "west": -84.21805, "north": 33.92240, "east": -84.21735 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.921978,
+          "lng": -84.218649
+        },
+        {
+          "lat": 33.921978,
+          "lng": -84.217688
+        },
+        {
+          "lat": 33.92118,
+          "lng": -84.217551
+        },
+        {
+          "lat": 33.921066,
+          "lng": -84.218443
+        },
+        {
+          "lat": 33.92175,
+          "lng": -84.218787
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.921864,
+          "lng": -84.218787
+        },
+        {
+          "lat": 33.921864,
+          "lng": -84.218546
+        },
+        {
+          "lat": 33.921665,
+          "lng": -84.218546
+        },
+        {
+          "lat": 33.921665,
+          "lng": -84.218787
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 33.92150, "west": -84.21810, "north": 33.92215, "east": -84.21755 }
+      {
+        "ring": [
+          {
+            "lat": 33.921807,
+            "lng": -84.218752
+          },
+          {
+            "lat": 33.921864,
+            "lng": -84.218375
+          },
+          {
+            "lat": 33.921693,
+            "lng": -84.218306
+          },
+          {
+            "lat": 33.921636,
+            "lng": -84.218684
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 149,
+        "pano": "nUUySnBnSAodILD14ybJiQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 149,
+        "pano": "nUUySnBnSAodILD14ybJiQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 13,
@@ -48,7 +122,11 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "dropArea", "shipRcvSeparate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "dropArea",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "locate": "Roster gave APPROXIMATE (city-level) coordinates. Resolved via web research (Businessyab, Chamber of Commerce, Becknell Industrial listing) to 6300 Brook Hollow Pkwy, Norcross GA 30071, then geocoded via Google Geocoding API to a ROOFTOP point at 33.9214824, -84.2181224. Locked to the warehouse there.",
     "truckGate": "Open paved driveway off Brook Hollow Parkway into a front car-parking lot and on to the NE truck court. No barrier arm, sliding gate, or checkpoint pinch-point visible in satellite or Street View (2025-12).",

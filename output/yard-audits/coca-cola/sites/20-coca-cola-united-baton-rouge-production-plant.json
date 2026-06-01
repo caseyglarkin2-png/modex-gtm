@@ -1,37 +1,126 @@
 {
   "name": "Coca-Cola UNITED - Baton Rouge Production Plant, LA",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 30.53650, "lng": -91.13500 },
+  "coords": {
+    "lat": 30.5365,
+    "lng": -91.135
+  },
   "geofences": {
-    "perimeter": { "south": 30.53250, "west": -91.14050, "north": 30.53950, "east": -91.13250 },
-    "truckGate": { "south": 30.53400, "west": -91.13990, "north": 30.53520, "east": -91.13880 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 30.538156,
+          "lng": -91.138296
+        },
+        {
+          "lat": 30.537919,
+          "lng": -91.131704
+        },
+        {
+          "lat": 30.533898,
+          "lng": -91.131704
+        },
+        {
+          "lat": 30.534134,
+          "lng": -91.138296
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 30.53700, "west": -91.13560, "north": 30.53830, "east": -91.13320 }
+      {
+        "ring": [
+          {
+            "lat": 30.536263,
+            "lng": -91.138021
+          },
+          {
+            "lat": 30.536263,
+            "lng": -91.136373
+          },
+          {
+            "lat": 30.534134,
+            "lng": -91.136373
+          },
+          {
+            "lat": 30.534134,
+            "lng": -91.138021
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 30.53560, "west": -91.13680, "north": 30.53640, "east": -91.13300 }
+      {
+        "ring": [
+          {
+            "lat": 30.537683,
+            "lng": -91.137747
+          },
+          {
+            "lat": 30.537565,
+            "lng": -91.132253
+          },
+          {
+            "lat": 30.536973,
+            "lng": -91.132253
+          },
+          {
+            "lat": 30.537091,
+            "lng": -91.137747
+          }
+        ]
+      }
     ],
-    "staging": { "south": 30.53420, "west": -91.13780, "north": 30.53500, "east": -91.13650 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 79,
+        "pano": "NSv-2RkLRNwsLCtE0x5Rjw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 60, "trailersVisible": 55, "trailerParkingCapacity": 90,
-    "truckGateCount": 1, "buildingCount": 4, "siteAreaAcres": 112.0,
+    "dockDoorCount": 60,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 112,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@30.53650,-91.13500,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "scale"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "scale"
+  ],
   "fieldNotes": {
     "location": "Roster address (8484 Airline Hwy) is an obsolete historical Coca-Cola location. The current Coca-Cola UNITED Baton Rouge production plant is at 9696 Plank Rd, Baton Rouge LA 70811, confirmed by the Coca-Cola UNITED Baton Rouge location page and Waze. Roster coords (30.4558,-91.0991) were ~10km southeast of the real plant. Identified the large white-roofed bottling complex beside Baton Rouge Metro Airport with red Coca-Cola fleet trucks at the docks.",
     "campus": "112-acre LEED-certified campus per Coca-Cola UNITED / Louisiana Economic Development: ~750,000 sq ft bottling facility, 56,000 sq ft corporate office, 50,000 sq ft fleet-maintenance building, plus support buildings. $42M expansion broke ground 2021.",

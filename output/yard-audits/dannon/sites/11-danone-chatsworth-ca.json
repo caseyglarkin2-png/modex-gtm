@@ -1,35 +1,106 @@
 {
   "name": "Danone - Chatsworth CA",
   "type": "Plant-based products plant",
-  "coords": { "lat": 34.23785, "lng": -118.60255 },
+  "coords": {
+    "lat": 34.23785,
+    "lng": -118.60255
+  },
   "geofences": {
-    "perimeter": { "south": 34.23700, "west": -118.60310, "north": 34.23865, "east": -118.60215 },
-    "truckGate": { "south": 34.23730, "west": -118.60250, "north": 34.23748, "east": -118.60230 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.238503,
+          "lng": -118.602962
+        },
+        {
+          "lat": 34.238503,
+          "lng": -118.602104
+        },
+        {
+          "lat": 34.23714,
+          "lng": -118.602104
+        },
+        {
+          "lat": 34.23714,
+          "lng": -118.602962
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.237282,
+          "lng": -118.602893
+        },
+        {
+          "lat": 34.237282,
+          "lng": -118.602687
+        },
+        {
+          "lat": 34.23714,
+          "lng": -118.602687
+        },
+        {
+          "lat": 34.23714,
+          "lng": -118.602893
+        }
+      ]
+    },
     "dropYards": [],
-    "dockAprons": [
-      { "south": 34.23735, "west": -118.60250, "north": 34.23800, "east": -118.60225 }
-    ],
-    "staging": { "south": 34.23735, "west": -118.60248, "north": 34.23780, "east": -118.60228 }
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 266,
+        "pano": "-3KhRb7in9MJSWbT1kM27A",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 266,
+        "pano": "-3KhRb7in9MJSWbT1kM27A",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 6, "trailersVisible": 2, "trailerParkingCapacity": 4,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 4.6,
+    "dockDoorCount": 6,
+    "trailersVisible": 2,
+    "trailerParkingCapacity": 4,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 4.6,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.23785,-118.60255,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "0-10", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Sliding/swing metal gate across the truck driveway through a tall wrought-iron perimeter fence on the Owensmouth Ave (east) frontage, seen in Jan-2026 Street View at ~34.2373,-118.6024.",
     "guardShack": "No staffed booth structure beside the gate - the entrance is just a gate in the fence line.",

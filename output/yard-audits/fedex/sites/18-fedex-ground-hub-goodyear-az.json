@@ -1,19 +1,77 @@
 {
   "name": "FedEx Ground Hub - Goodyear AZ (Phoenix)",
   "type": "Ground regional distribution hub (~425K sq ft regional sortation, with package center)",
-  "coords": { "lat": 33.43900, "lng": -112.37120 },
+  "coords": {
+    "lat": 33.439,
+    "lng": -112.3712
+  },
   "geofences": {
-    "perimeter": { "south": 33.43560, "west": -112.37320, "north": 33.44060, "east": -112.36960 },
-    "truckGate": { "south": 33.43950, "west": -112.37010, "north": 33.44030, "east": -112.36960 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.442667,
+          "lng": -112.375595
+        },
+        {
+          "lat": 33.442667,
+          "lng": -112.372573
+        },
+        {
+          "lat": 33.439458,
+          "lng": -112.372299
+        },
+        {
+          "lat": 33.439458,
+          "lng": -112.37532
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 33.43960, "west": -112.37320, "north": 33.44060, "east": -112.36980 },
-      { "south": 33.43560, "west": -112.37320, "north": 33.43770, "east": -112.36980 }
+      {
+        "ring": [
+          {
+            "lat": 33.441521,
+            "lng": -112.375457
+          },
+          {
+            "lat": 33.441521,
+            "lng": -112.373123
+          },
+          {
+            "lat": 33.439917,
+            "lng": -112.373123
+          },
+          {
+            "lat": 33.439917,
+            "lng": -112.375457
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.43900, "west": -112.37320, "north": 33.43990, "east": -112.36980 },
-      { "south": 33.43760, "west": -112.37320, "north": 33.43830, "east": -112.36980 }
+      {
+        "ring": [
+          {
+            "lat": 33.442438,
+            "lng": -112.37532
+          },
+          {
+            "lat": 33.442438,
+            "lng": -112.372573
+          },
+          {
+            "lat": 33.441636,
+            "lng": -112.372573
+          },
+          {
+            "lat": 33.441636,
+            "lng": -112.37532
+          }
+        ]
+      }
     ],
-    "staging": { "south": 33.43960, "west": -112.37010, "north": 33.44060, "east": -112.36960 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 130,
@@ -21,7 +79,7 @@
     "trailerParkingCapacity": 280,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 38.0,
+    "siteAreaAcres": 38,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.43900,-112.37120,400m/data=!3m1!1e3",
@@ -50,7 +108,14 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes", "shipRcvSeparate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Single truck entrance is on the NE corner off 143rd Ave - a very wide open paved apron/driveway with NO barrier arm or sliding gate across the truck lane (2024/2025 Street View sv13/sv15). The yard interior carries an ornamental steel security fence (visible W side, sv7-sv10) but the truck driveway opening is left open and uncontrolled - truckGate false.",
     "guardShack": "No staffed guard booth at the NE entrance - only a small free-standing sign post. No checkpoint structure observed. guardShack false; remoteGs false because there is no controlled gate.",

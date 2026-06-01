@@ -1,39 +1,129 @@
 {
   "name": "FedEx Ground Hub - Independence KY (Northern Kentucky / Cincinnati)",
   "type": "Ground regional sortation hub",
-  "coords": { "lat": 38.94100, "lng": -84.61700 },
+  "coords": {
+    "lat": 38.941,
+    "lng": -84.617
+  },
   "geofences": {
-    "perimeter": { "south": 38.93850, "west": -84.62100, "north": 38.94400, "east": -84.60750 },
-    "truckGate": { "south": 38.94235, "west": -84.61200, "north": 38.94300, "east": -84.61130 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.944418,
+          "lng": -84.621944
+        },
+        {
+          "lat": 38.944845,
+          "lng": -84.615352
+        },
+        {
+          "lat": 38.939932,
+          "lng": -84.613704
+        },
+        {
+          "lat": 38.938436,
+          "lng": -84.617
+        },
+        {
+          "lat": 38.939718,
+          "lng": -84.622493
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 38.94100, "west": -84.62050, "north": 38.94380, "east": -84.61700 },
-      { "south": 38.94000, "west": -84.61000, "north": 38.94250, "east": -84.60780 }
+      {
+        "ring": [
+          {
+            "lat": 38.943991,
+            "lng": -84.621395
+          },
+          {
+            "lat": 38.943991,
+            "lng": -84.619747
+          },
+          {
+            "lat": 38.939718,
+            "lng": -84.619197
+          },
+          {
+            "lat": 38.939718,
+            "lng": -84.620845
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 38.94150, "west": -84.61980, "north": 38.94370, "east": -84.61480 },
-      { "south": 38.94050, "west": -84.61750, "north": 38.94350, "east": -84.61450 }
+      {
+        "ring": [
+          {
+            "lat": 38.943136,
+            "lng": -84.619197
+          },
+          {
+            "lat": 38.943136,
+            "lng": -84.614803
+          },
+          {
+            "lat": 38.940573,
+            "lng": -84.615352
+          },
+          {
+            "lat": 38.940573,
+            "lng": -84.619747
+          }
+        ]
+      }
     ],
-    "staging": { "south": 38.93850, "west": -84.61480, "north": 38.94020, "east": -84.61250 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 147,
+        "pano": "MjR9yPHw8pv8R5SCmM9O6A",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 160, "trailersVisible": 220, "trailerParkingCapacity": 320,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 110.0,
+    "dockDoorCount": 160,
+    "trailersVisible": 220,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 110,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@38.941,-84.617,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "z20/z21 satellite shows a cantilever sliding gate spanning the inbound truck lane where the access road meets the property, with chain-link + barbed-wire perimeter fencing on both sides; vehicles visible queued at the gate.",
     "guardShack": "Small white ~1-vehicle-footprint booth set beside the lane just inside the gate (z21). Footprint is small enough it could be an unstaffed check-in kiosk; classified as guard shack given major sortation hub, but flagged uncertain.",

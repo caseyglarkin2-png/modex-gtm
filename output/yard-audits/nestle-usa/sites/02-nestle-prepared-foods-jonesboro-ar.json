@@ -1,19 +1,112 @@
 {
   "name": "Nestlé Prepared Foods - Jonesboro AR",
   "type": "Frozen food manufacturing plant",
-  "coords": { "lat": 35.81930, "lng": -90.57950 },
+  "coords": {
+    "lat": 35.8193,
+    "lng": -90.5795
+  },
   "geofences": {
-    "perimeter": { "south": 35.81650, "west": -90.58200, "north": 35.82120, "east": -90.57530 },
-    "truckGate": { "south": 35.82020, "west": -90.57600, "north": 35.82060, "east": -90.57540 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.821082,
+          "lng": -90.582796
+        },
+        {
+          "lat": 35.820748,
+          "lng": -90.576479
+        },
+        {
+          "lat": 35.817518,
+          "lng": -90.576616
+        },
+        {
+          "lat": 35.817073,
+          "lng": -90.580873
+        },
+        {
+          "lat": 35.818409,
+          "lng": -90.582659
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.821416,
+          "lng": -90.578539
+        },
+        {
+          "lat": 35.821416,
+          "lng": -90.577715
+        },
+        {
+          "lat": 35.820859,
+          "lng": -90.577715
+        },
+        {
+          "lat": 35.820859,
+          "lng": -90.578539
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 35.81680, "west": -90.57820, "north": 35.81870, "east": -90.57600 },
-      { "south": 35.81880, "west": -90.57680, "north": 35.82030, "east": -90.57530 }
+      {
+        "ring": [
+          {
+            "lat": 35.819745,
+            "lng": -90.58362
+          },
+          {
+            "lat": 35.819634,
+            "lng": -90.581697
+          },
+          {
+            "lat": 35.818409,
+            "lng": -90.581766
+          },
+          {
+            "lat": 35.818521,
+            "lng": -90.583689
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.81720, "west": -90.57950, "north": 35.81800, "east": -90.57750 },
-      { "south": 35.81850, "west": -90.57680, "north": 35.82010, "east": -90.57600 }
+      {
+        "ring": [
+          {
+            "lat": 35.820414,
+            "lng": -90.577852
+          },
+          {
+            "lat": 35.820302,
+            "lng": -90.576616
+          },
+          {
+            "lat": 35.818632,
+            "lng": -90.576685
+          },
+          {
+            "lat": 35.818743,
+            "lng": -90.577921
+          }
+        ]
+      }
     ],
-    "staging": { "south": 35.82030, "west": -90.58100, "north": 35.82110, "east": -90.57700 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 208,
+        "pano": "nk_7YJ4Ayp_qGCPZUUFHvg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 208,
+        "pano": "nk_7YJ4Ayp_qGCPZUUFHvg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 40,
@@ -50,7 +143,13 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount", "scale", "connectivityIssue"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "scale",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "truckGate": "Controlled truck entrance on the east access road. A small booth-footprint structure with a vehicle parked beside it sits at the pinch-point where the access road meets the paved truck yard (~35.8203, -90.5757).",
     "guardShack": "A small white structure (~1-2 vehicle footprint) with a parked car beside it controls the truck-yard entrance - reads as a staffed guard booth in z20 imagery.",

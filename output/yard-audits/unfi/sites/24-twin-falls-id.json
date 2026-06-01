@@ -1,9 +1,31 @@
 {
   "name": "UNFI - Twin Falls ID DC",
   "type": "Distribution Center",
-  "coords": { "lat": 42.555838, "lng": -114.470052 },
+  "coords": {
+    "lat": 42.555838,
+    "lng": -114.470052
+  },
   "geofences": {
-    "perimeter": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.55685,
+          "lng": -114.471425
+        },
+        {
+          "lat": 42.556647,
+          "lng": -114.468953
+        },
+        {
+          "lat": 42.554826,
+          "lng": -114.469228
+        },
+        {
+          "lat": 42.555029,
+          "lng": -114.4717
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [],
@@ -15,28 +37,58 @@
     "trailerParkingCapacity": 0,
     "truckGateCount": 0,
     "buildingCount": 0,
-    "siteAreaAcres": 0.0,
+    "siteAreaAcres": 0,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@42.555838,-114.470052,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "NONE", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural", "connectivityIssue",
-    "multipleFacilities", "scale", "dropYard", "multiStep"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "urbanRural",
+    "connectivityIssue",
+    "multipleFacilities",
+    "scale",
+    "dropYard",
+    "multiStep"
   ],
   "fieldNotes": {
     "resolution": "FACILITY NOT POSITIVELY LOCATED. The roster supplied a city-level entry ('Twin Falls, ID', source: supplyve / Indeed locations list) with APPROXIMATE coordinates 42.555838, -114.470052 and no street address. The roster's own geocode metadata records movedMeters: 3492 — i.e., a known ~3.5 km geocode error. The supplied coordinates land in downtown Twin Falls (commercial/retail core), where there is no distribution center.",

@@ -1,17 +1,63 @@
 {
   "name": "CJ Logistics - Middletown PA",
   "type": "Distribution Center",
-  "coords": { "lat": 40.2082, "lng": -76.7455 },
+  "coords": {
+    "lat": 40.2082,
+    "lng": -76.7455
+  },
   "geofences": {
-    "perimeter": { "south": 40.20705, "west": -76.74780, "north": 40.20935, "east": -76.74330 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.208934,
+          "lng": -76.748247
+        },
+        {
+          "lat": 40.209039,
+          "lng": -76.743921
+        },
+        {
+          "lat": 40.207571,
+          "lng": -76.743852
+        },
+        {
+          "lat": 40.207466,
+          "lng": -76.748178
+        }
+      ]
+    },
     "truckGate": null,
-    "dropYards": [
-      { "south": 40.20990, "west": -76.74520, "north": 40.21055, "east": -76.74300 }
-    ],
+    "dropYards": [],
     "dockAprons": [
-      { "south": 40.20875, "west": -76.74780, "north": 40.20935, "east": -76.74330 }
+      {
+        "ring": [
+          {
+            "lat": 40.208934,
+            "lng": -76.748178
+          },
+          {
+            "lat": 40.209013,
+            "lng": -76.743921
+          },
+          {
+            "lat": 40.208724,
+            "lng": -76.743886
+          },
+          {
+            "lat": 40.208646,
+            "lng": -76.748144
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 140,
+        "pano": "aYuM03T9Z6-SBhY8W91qTA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 55,
@@ -24,18 +70,40 @@
   },
   "mapsUrl": "https://www.google.com/maps/@40.2082,-76.7455,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "low",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "dropArea", "trailerParkingCapacity", "shipRcvSeparate", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoors",
+    "dropArea",
+    "trailerParkingCapacity",
+    "shipRcvSeparate",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "No published street address. CJ Logistics is confirmed (Indeed/web) to operate a Middletown PA facility. The only large industrial cluster in Middletown 17057 is the Capital Logistics Center (CLC) off Eisenhower Blvd / Capital Lane in Lower Swatara Township, a ~1.3M sqft, 5-building multi-tenant logistics park next to Penn State Harrisburg. Public records do not identify which CLC building CJ leases. Audited Building C, the largest single building in the park, as the best-fit representative; building-level identity is UNCERTAIN.",
     "truckGate": "CLC is an open business-park layout: buildings front directly on internal roads, no perimeter fence and no controlled gate observed at the complex or building level (satellite z17-z20 + 2021 Street View on Eisenhower Blvd). truckGate=false.",

@@ -1,15 +1,87 @@
 {
   "name": "Frito-Lay - Brookhollow Plant Dallas TX",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 32.829250, "lng": -96.885400 },
+  "coords": {
+    "lat": 32.82925,
+    "lng": -96.8854
+  },
   "geofences": {
-    "perimeter": { "south": 32.8286, "west": -96.8863, "north": 32.8299, "east": -96.8845 },
-    "truckGate": { "south": 32.82930, "west": -96.88475, "north": 32.82960, "east": -96.88450 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.829827,
+          "lng": -96.886361
+        },
+        {
+          "lat": 32.829827,
+          "lng": -96.884851
+        },
+        {
+          "lat": 32.828442,
+          "lng": -96.884851
+        },
+        {
+          "lat": 32.828442,
+          "lng": -96.886361
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.829914,
+          "lng": -96.885743
+        },
+        {
+          "lat": 32.829914,
+          "lng": -96.885503
+        },
+        {
+          "lat": 32.829798,
+          "lng": -96.885503
+        },
+        {
+          "lat": 32.829798,
+          "lng": -96.885743
+        }
+      ]
+    },
     "dropYards": [],
     "dockAprons": [
-      { "south": 32.82950, "west": -96.88510, "north": 32.82985, "east": -96.88460 }
+      {
+        "ring": [
+          {
+            "lat": 32.829712,
+            "lng": -96.885881
+          },
+          {
+            "lat": 32.829712,
+            "lng": -96.8854
+          },
+          {
+            "lat": 32.829538,
+            "lng": -96.8854
+          },
+          {
+            "lat": 32.829538,
+            "lng": -96.885881
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 339,
+        "pano": "47ej2YSj20gh3YF3GNPmlw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 339,
+        "pano": "47ej2YSj20gh3YF3GNPmlw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 16,
@@ -17,23 +89,43 @@
     "trailerParkingCapacity": 12,
     "truckGateCount": 2,
     "buildingCount": 1,
-    "siteAreaAcres": 6.0,
+    "siteAreaAcres": 6,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@32.829250,-96.885400,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "dropArea", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "dropArea",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Roster address (1500 N Cockrell Hill Rd) was WRONG. Correct address is 1141 Regal Row, Dallas TX 75247 (PotatoPro + Waze + Yellowpages confirm). Building positively identified by red Frito-Lay wall sign visible in 2024/2025 Street View on the east building face.",
     "truckGate": "Entire property enclosed by chain-link / iron fence; sliding gates control vehicle access at the east office/parking entrance and the dock-yard entrance. No open uncontrolled driveway.",

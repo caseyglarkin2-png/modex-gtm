@@ -1,15 +1,75 @@
 {
   "name": "Kenco MCS Chattanooga BP2 - Chattanooga TN",
   "type": "Multi-Client Distribution Center",
-  "coords": { "lat": 35.06929, "lng": -85.17642 },
+  "coords": {
+    "lat": 35.06929,
+    "lng": -85.17642
+  },
   "geofences": {
-    "perimeter": { "south": 35.06800, "west": -85.17780, "north": 35.07045, "east": -85.17510 },
-    "truckGate": { "south": 35.06800, "west": -85.17745, "north": 35.06840, "east": -85.17695 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.070526,
+          "lng": -85.177656
+        },
+        {
+          "lat": 35.070414,
+          "lng": -85.174909
+        },
+        {
+          "lat": 35.068616,
+          "lng": -85.175047
+        },
+        {
+          "lat": 35.068728,
+          "lng": -85.177793
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 35.06960, "west": -85.17700, "north": 35.07030, "east": -85.17540 }
+      {
+        "ring": [
+          {
+            "lat": 35.070414,
+            "lng": -85.177107
+          },
+          {
+            "lat": 35.070358,
+            "lng": -85.175596
+          },
+          {
+            "lat": 35.069571,
+            "lng": -85.175665
+          },
+          {
+            "lat": 35.069627,
+            "lng": -85.177175
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.06955, "west": -85.17710, "north": 35.07025, "east": -85.17530 }
+      {
+        "ring": [
+          {
+            "lat": 35.070414,
+            "lng": -85.177587
+          },
+          {
+            "lat": 35.070414,
+            "lng": -85.177107
+          },
+          {
+            "lat": 35.06884,
+            "lng": -85.177244
+          },
+          {
+            "lat": 35.06884,
+            "lng": -85.177725
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -24,18 +84,38 @@
   },
   "mapsUrl": "https://www.google.com/maps/@35.06929,-85.17642,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "dropArea", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoors",
+    "dropArea",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Roster gave an APPROXIMATE geocode for 'Chattanooga, TN 37406' that landed on the CSX DeButts rail yard. Web research positively resolved BP2 to 6301 Enterprise Park Dr, Chattanooga TN 37416: Chattanoogan.com/Times Free Press reported a 210,000 SF industrial warehouse on over 12 acres at 6301 Enterprise Park Dr (built 1995) sold for $67.09M in 2022 as part of a Kenco-affiliate 7-warehouse Chattanooga portfolio. 210,000 SF and 12+ acres are an EXACT match for BP2 (210,000 SF on the Kenco warehousing map). 6301 Enterprise Park Dr geocodes ROOFTOP at 35.069286,-85.1764238.",
     "buildingChoice": "High confidence on building identity (210,000 SF / 12+ acres / 6301 Enterprise Park Dr matches BP2 exactly). Overall confidence held to medium because the gate/guard determination relies on imagery interpretation and Street View only reached one building face.",

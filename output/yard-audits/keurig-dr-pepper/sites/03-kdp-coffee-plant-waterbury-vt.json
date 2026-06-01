@@ -1,9 +1,39 @@
 {
   "name": "KDP Coffee Plant - Waterbury VT",
   "type": "Manufacturing - Coffee",
-  "coords": { "lat": 44.335800, "lng": -72.750500 },
+  "coords": {
+    "lat": 44.3358,
+    "lng": -72.7505
+  },
   "geofences": {
-    "perimeter": { "south": 44.33430, "west": -72.75250, "north": 44.33720, "east": -72.74880 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 44.336733,
+          "lng": -72.751667
+        },
+        {
+          "lat": 44.336586,
+          "lng": -72.750363
+        },
+        {
+          "lat": 44.335554,
+          "lng": -72.749676
+        },
+        {
+          "lat": 44.33472,
+          "lng": -72.7505
+        },
+        {
+          "lat": 44.335211,
+          "lng": -72.751667
+        },
+        {
+          "lat": 44.336046,
+          "lng": -72.751873
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [],
@@ -15,23 +45,40 @@
     "trailerParkingCapacity": 5,
     "truckGateCount": 1,
     "buildingCount": 4,
-    "siteAreaAcres": 18.0,
+    "siteAreaAcres": 18,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@44.335800,-72.750500,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "0-10", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoors", "trailersVisible", "buildingCount"],
+  "uncertainFields": [
+    "dockDoors",
+    "trailersVisible",
+    "buildingCount"
+  ],
   "fieldNotes": {
     "location": "33 Coffee Lane, Waterbury VT 05676 - the Pilgrim Park office campus, Keurig Green Mountain's original/legacy Waterbury site. Roster pin (44.336491,-72.755118, APPROXIMATE) landed in downtown Waterbury; corrected ~430 m SE to the Pilgrim Park complex. Confirmed via web (VT Farm to Plate, Yelp, Waze all list 33 Coffee Lane) and 2023 Street View showing a multi-building office campus with an entrance sign.",
     "facilityCharacter": "This is predominantly a CORPORATE OFFICE / R&D campus, not a freight/distribution truck yard. The original Green Mountain Coffee roasting operations were historically here, but KDP coffee production is now consolidated at Essex Junction. Street View and satellite show multi-story office buildings surrounded by large employee car parking lots - no loading-dock banks, no trailer drop yards, no truck gate or guard shack.",

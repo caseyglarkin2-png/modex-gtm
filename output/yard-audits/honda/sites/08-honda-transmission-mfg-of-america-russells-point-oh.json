@@ -1,19 +1,96 @@
 {
   "name": "Honda Transmission Mfg. of America - Russells Point OH",
   "type": "Transmission Plant",
-  "coords": { "lat": 40.44750, "lng": -83.89950 },
+  "coords": {
+    "lat": 40.4475,
+    "lng": -83.8995
+  },
   "geofences": {
-    "perimeter": { "south": 40.44350, "west": -83.90420, "north": 40.45150, "east": -83.89400 },
-    "truckGate": { "south": 40.44780, "west": -83.90400, "north": 40.44870, "east": -83.90300 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.450426,
+          "lng": -83.905542
+        },
+        {
+          "lat": 40.450008,
+          "lng": -83.897303
+        },
+        {
+          "lat": 40.444992,
+          "lng": -83.897577
+        },
+        {
+          "lat": 40.44541,
+          "lng": -83.905817
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.449172,
+          "lng": -83.898401
+        },
+        {
+          "lat": 40.448963,
+          "lng": -83.897303
+        },
+        {
+          "lat": 40.448127,
+          "lng": -83.897577
+        },
+        {
+          "lat": 40.448336,
+          "lng": -83.898676
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.44760, "west": -83.89720, "north": 40.45010, "east": -83.89480 },
-      { "south": 40.44550, "west": -83.89700, "north": 40.44760, "east": -83.89500 }
+      {
+        "ring": [
+          {
+            "lat": 40.447082,
+            "lng": -83.905268
+          },
+          {
+            "lat": 40.446873,
+            "lng": -83.901697
+          },
+          {
+            "lat": 40.444992,
+            "lng": -83.901972
+          },
+          {
+            "lat": 40.44541,
+            "lng": -83.905542
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.44830, "west": -83.89800, "north": 40.45000, "east": -83.89600 },
-      { "south": 40.44760, "west": -83.90050, "north": 40.44900, "east": -83.89850 }
+      {
+        "ring": [
+          {
+            "lat": 40.449172,
+            "lng": -83.904993
+          },
+          {
+            "lat": 40.448963,
+            "lng": -83.8995
+          },
+          {
+            "lat": 40.448127,
+            "lng": -83.899775
+          },
+          {
+            "lat": 40.448336,
+            "lng": -83.905268
+          }
+        ]
+      }
     ],
-    "staging": { "south": 40.44850, "west": -83.89980, "north": 40.45030, "east": -83.89720 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 40,
@@ -21,23 +98,43 @@
     "trailerParkingCapacity": 160,
     "truckGateCount": 1,
     "buildingCount": 4,
-    "siteAreaAcres": 80.0,
+    "siteAreaAcres": 80,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.4475,-83.8995,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "dockDoorCount", "trailersVisible", "shipRcvSeparate"],
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "trailersVisible",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Plant property is fully enclosed by chain-link fence with green privacy slats (confirmed in Street View from multiple headings along SR 235). A single managed driveway crosses the fence line from SR 235; entrance has lane markings and a covered island/canopy - controlled truck gate.",
     "guardShack": "A small white booth-sized structure with an adjacent canopy island sits in the entrance driveway just inside the property line (z20 satellite). Consistent with a staffed guard booth at a Honda powertrain plant; classified true, flagged uncertain because Street View pano coverage stays on the public road and does not directly image the booth.",

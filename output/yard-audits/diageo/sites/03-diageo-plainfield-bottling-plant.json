@@ -1,17 +1,108 @@
 {
   "name": "Diageo Plainfield Bottling Plant - Plainfield IL",
   "type": "Manufacturing - Bottling Plant",
-  "coords": { "lat": 41.6245, "lng": -88.2140 },
+  "coords": {
+    "lat": 41.6245,
+    "lng": -88.214
+  },
   "geofences": {
-    "perimeter": { "south": 41.6222, "west": -88.2168, "north": 41.6276, "east": -88.2118 },
-    "truckGate": { "south": 41.6238, "west": -88.2134, "north": 41.6244, "east": -88.2128 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.625527,
+          "lng": -88.216747
+        },
+        {
+          "lat": 41.625219,
+          "lng": -88.212352
+        },
+        {
+          "lat": 41.622242,
+          "lng": -88.212764
+        },
+        {
+          "lat": 41.62255,
+          "lng": -88.217159
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.622652,
+          "lng": -88.216609
+        },
+        {
+          "lat": 41.622652,
+          "lng": -88.215648
+        },
+        {
+          "lat": 41.622242,
+          "lng": -88.215648
+        },
+        {
+          "lat": 41.622242,
+          "lng": -88.216609
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 41.6224, "west": -88.2138, "north": 41.6270, "east": -88.2122 }
+      {
+        "ring": [
+          {
+            "lat": 41.624295,
+            "lng": -88.219081
+          },
+          {
+            "lat": 41.623987,
+            "lng": -88.216747
+          },
+          {
+            "lat": 41.622857,
+            "lng": -88.216884
+          },
+          {
+            "lat": 41.623165,
+            "lng": -88.219219
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.6224, "west": -88.2138, "north": 41.6270, "east": -88.2130 }
+      {
+        "ring": [
+          {
+            "lat": 41.624911,
+            "lng": -88.216335
+          },
+          {
+            "lat": 41.624603,
+            "lng": -88.213313
+          },
+          {
+            "lat": 41.624192,
+            "lng": -88.213451
+          },
+          {
+            "lat": 41.6245,
+            "lng": -88.216472
+          }
+        ]
+      }
     ],
-    "staging": { "south": 41.6235, "west": -88.2130, "north": 41.6244, "east": -88.2120 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 44,
+        "pano": "TS7EKeehAD4hBzmTYaLEQw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 44,
+        "pano": "TS7EKeehAD4hBzmTYaLEQw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 45,
@@ -24,18 +115,35 @@
   },
   "mapsUrl": "https://www.google.com/maps/@41.6245,-88.2140,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "entryLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "entryLanes"
+  ],
   "fieldNotes": {
     "truckGate": "TRUE. Street View (2024-07) of the east dock yard shows a sliding gate across the truck driveway with a STOP sign and a numbered gate sign ('GATE 6'), set in a continuous chain-link perimeter fence. The legacy bottling plant runs a secured, fenced dock yard - distinct from the open canning campus next door.",
     "guardShack": "TRUE. A small red-roofed guard booth (~1-vehicle footprint, windows) sits beside the truck lane on the east side of the gate, visible in Street View at 41.6241,-88.2130.",

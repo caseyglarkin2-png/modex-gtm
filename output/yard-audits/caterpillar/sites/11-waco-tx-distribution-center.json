@@ -1,18 +1,108 @@
 {
   "name": "Caterpillar - Waco TX Distribution Center",
   "type": "Parts distribution center (opened 2009)",
-  "coords": { "lat": 31.47830, "lng": -97.17990 },
+  "coords": {
+    "lat": 31.4783,
+    "lng": -97.1799
+  },
   "geofences": {
-    "perimeter": { "south": 31.47620, "west": -97.18300, "north": 31.48030, "east": -97.17680 },
-    "truckGate": { "south": 31.47840, "west": -97.17900, "north": 31.47940, "east": -97.17780 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 31.479471,
+          "lng": -97.184569
+        },
+        {
+          "lat": 31.479237,
+          "lng": -97.178801
+        },
+        {
+          "lat": 31.475489,
+          "lng": -97.179213
+        },
+        {
+          "lat": 31.475723,
+          "lng": -97.184844
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 31.475958,
+          "lng": -97.181273
+        },
+        {
+          "lat": 31.47584,
+          "lng": -97.180175
+        },
+        {
+          "lat": 31.475255,
+          "lng": -97.180312
+        },
+        {
+          "lat": 31.475372,
+          "lng": -97.181411
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 31.47640, "west": -97.18200, "north": 31.47850, "east": -97.17800 }
+      {
+        "ring": [
+          {
+            "lat": 31.47912,
+            "lng": -97.184295
+          },
+          {
+            "lat": 31.479003,
+            "lng": -97.181273
+          },
+          {
+            "lat": 31.478066,
+            "lng": -97.181411
+          },
+          {
+            "lat": 31.478183,
+            "lng": -97.184432
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 31.47780, "west": -97.18280, "north": 31.48000, "east": -97.18120 },
-      { "south": 31.47640, "west": -97.18120, "north": 31.47800, "east": -97.17850 }
+      {
+        "ring": [
+          {
+            "lat": 31.477714,
+            "lng": -97.184295
+          },
+          {
+            "lat": 31.47748,
+            "lng": -97.180999
+          },
+          {
+            "lat": 31.477012,
+            "lng": -97.181136
+          },
+          {
+            "lat": 31.477246,
+            "lng": -97.184432
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 224,
+        "pano": "_7awXV6FCS9162bpCb-59Q",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 224,
+        "pano": "_7awXV6FCS9162bpCb-59Q",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 70,
@@ -20,23 +110,44 @@
     "trailerParkingCapacity": 90,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 66.0,
+    "siteAreaAcres": 66,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@31.4783,-97.1799,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "scale"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "scale"
+  ],
   "fieldNotes": {
     "site": "Confirmed via Street View - 'CATERPILLAR' wall signage on the building. This is the Caterpillar Waco Distribution Center (2901 Gateway Blvd), a ~750k sq ft parts DC opened 2009. Roster geocode (31.478258, -97.180998, ROOFTOP, moved 14552m) landed correctly on the L-shaped building.",
     "truckGate": "The truck/dock yards are enclosed by green-screened chain-link perimeter fencing (confirmed at the NW and SE corners). The truck route circulates inside that fence from the Gateway Blvd access road. No barrier arm or guard booth could be cleanly imaged - employee parking on the NE screens the entrance. truckGate set true on the fenced truck yard; flagged uncertain.",

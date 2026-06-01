@@ -1,17 +1,63 @@
 {
   "name": "Pactiv Evergreen - Aberdeen NC",
   "type": "Manufacturing Plant (Food Merchandising; foam tray/pad converting)",
-  "coords": { "lat": 35.138550, "lng": -79.437750 },
+  "coords": {
+    "lat": 35.13855,
+    "lng": -79.43775
+  },
   "geofences": {
-    "perimeter": { "south": 35.137650, "west": -79.439150, "north": 35.139450, "east": -79.436450 },
-    "truckGate": { "south": 35.138050, "west": -79.438850, "north": 35.138400, "east": -79.438450 },
-    "dropYards": [
-      { "south": 35.138350, "west": -79.437300, "north": 35.139100, "east": -79.436500 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.139617,
+          "lng": -79.438437
+        },
+        {
+          "lat": 35.139448,
+          "lng": -79.436651
+        },
+        {
+          "lat": 35.138269,
+          "lng": -79.436926
+        },
+        {
+          "lat": 35.138494,
+          "lng": -79.438711
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 35.138300, "west": -79.438300, "north": 35.138550, "east": -79.437100 }
+      {
+        "ring": [
+          {
+            "lat": 35.138606,
+            "lng": -79.438299
+          },
+          {
+            "lat": 35.138438,
+            "lng": -79.436926
+          },
+          {
+            "lat": 35.138269,
+            "lng": -79.436995
+          },
+          {
+            "lat": 35.138438,
+            "lng": -79.438368
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 8,
+        "pano": "9eTB6LM4tM2T47J2-RU2Rw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 8,
@@ -48,7 +94,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoors", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoors",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Driveway runs directly from NC Hwy 5 across a CSX-type rail spur into the property with no barrier arm, sliding gate, or checkpoint. Confirmed via 2024-05 Street View at the driveway entrance.",
     "guardShack": "No booth or staffed structure at the entrance in any Street View heading.",

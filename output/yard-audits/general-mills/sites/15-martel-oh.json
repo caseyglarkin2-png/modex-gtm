@@ -1,17 +1,63 @@
 {
   "name": "General Mills - Martel OH",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 40.671600, "lng": -82.908600 },
+  "coords": {
+    "lat": 40.6716,
+    "lng": -82.9086
+  },
   "geofences": {
-    "perimeter": { "south": 40.669300, "west": -82.910400, "north": 40.673900, "east": -82.906900 },
-    "truckGate": { "south": 40.671300, "west": -82.910450, "north": 40.671650, "east": -82.910000 },
-    "dropYards": [
-      { "south": 40.672300, "west": -82.908300, "north": 40.672900, "east": -82.907400 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.673475,
+          "lng": -82.909561
+        },
+        {
+          "lat": 40.672642,
+          "lng": -82.906677
+        },
+        {
+          "lat": 40.669933,
+          "lng": -82.908325
+        },
+        {
+          "lat": 40.670767,
+          "lng": -82.911209
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 40.671700, "west": -82.908900, "north": 40.672500, "east": -82.908100 }
+      {
+        "ring": [
+          {
+            "lat": 40.6716,
+            "lng": -82.909973
+          },
+          {
+            "lat": 40.670975,
+            "lng": -82.907913
+          },
+          {
+            "lat": 40.670454,
+            "lng": -82.908188
+          },
+          {
+            "lat": 40.671079,
+            "lng": -82.910248
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 13,
+        "pano": "mHbDifRQIXxLuKMB7kpVXg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 16,
@@ -19,23 +65,39 @@
     "trailerParkingCapacity": 30,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 30.0,
+    "siteAreaAcres": 30,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@40.671600,-82.908600,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "connectivityIssue"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "ownership": "Roster sourced this from a stale Hyster GM plant list. The Martel bakery-mix plant was a General Mills facility 2001-2016 but was sold to The Mennel Milling Company in 2016; current signage at the gate reads 'Mennel'. The physical building audited is the correct site for the roster's 'Martel OH plant' entry.",
     "geocode": "Roster geocode moved 22.7km but landed correctly on the actual Martel industrial plant; the city-level coords were far off and the geocoder corrected them. Confirmed by web search (4136 Martel Rd) and Street View signage.",

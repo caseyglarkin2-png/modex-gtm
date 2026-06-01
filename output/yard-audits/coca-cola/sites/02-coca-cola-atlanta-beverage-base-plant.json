@@ -1,17 +1,108 @@
 {
   "name": "Coca-Cola Atlanta Beverage Base Plant - Atlanta GA",
   "type": "Concentrate / Beverage Base Plant",
-  "coords": { "lat": 33.73430, "lng": -84.56900 },
+  "coords": {
+    "lat": 33.7343,
+    "lng": -84.569
+  },
   "geofences": {
-    "perimeter": { "south": 33.73200, "west": -84.57050, "north": 33.73600, "east": -84.56790 },
-    "truckGate": { "south": 33.73320, "west": -84.56990, "north": 33.73360, "east": -84.56930 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.734586,
+          "lng": -84.569961
+        },
+        {
+          "lat": 33.734528,
+          "lng": -84.568176
+        },
+        {
+          "lat": 33.733044,
+          "lng": -84.568176
+        },
+        {
+          "lat": 33.733044,
+          "lng": -84.569961
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.733101,
+          "lng": -84.569687
+        },
+        {
+          "lat": 33.733101,
+          "lng": -84.569206
+        },
+        {
+          "lat": 33.732758,
+          "lng": -84.569206
+        },
+        {
+          "lat": 33.732758,
+          "lng": -84.569687
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 33.73450, "west": -84.57000, "north": 33.73550, "east": -84.56920 }
+      {
+        "ring": [
+          {
+            "lat": 33.7343,
+            "lng": -84.569893
+          },
+          {
+            "lat": 33.7343,
+            "lng": -84.569206
+          },
+          {
+            "lat": 33.733843,
+            "lng": -84.569206
+          },
+          {
+            "lat": 33.733843,
+            "lng": -84.569893
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.73420, "west": -84.56990, "north": 33.73510, "east": -84.56930 }
+      {
+        "ring": [
+          {
+            "lat": 33.734528,
+            "lng": -84.569549
+          },
+          {
+            "lat": 33.734471,
+            "lng": -84.568451
+          },
+          {
+            "lat": 33.734243,
+            "lng": -84.568451
+          },
+          {
+            "lat": 33.7343,
+            "lng": -84.569549
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 7,
+        "pano": "c54npnLBeQ7jxxIbFBcrng",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 7,
+        "pano": "c54npnLBeQ7jxxIbFBcrng",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 16,
@@ -19,23 +110,41 @@
     "trailerParkingCapacity": 30,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 24.0,
+    "siteAreaAcres": 24,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.73430,-84.56900,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "dockDoors", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "dockDoors",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Single controlled entrance drive off the southwest connector road; z21 satellite shows a small structure with the drive splitting into lanes around it and a barrier across the lane.",
     "guardShack": "A small dark-roofed booth sits in the entrance drive (z21 satellite); Street View obscured by trees so flagged as uncertain, but layout strongly indicates a staffed/controlled booth.",

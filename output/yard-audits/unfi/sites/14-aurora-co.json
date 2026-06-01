@@ -1,15 +1,94 @@
 {
   "name": "UNFI - Aurora CO DC (Denver)",
   "type": "Distribution Center",
-  "coords": { "lat": 39.774031, "lng": -104.776628 },
+  "coords": {
+    "lat": 39.774031,
+    "lng": -104.776628
+  },
   "geofences": {
-    "perimeter": { "south": 39.77080, "west": -104.77950, "north": 39.77720, "east": -104.77330 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.775086,
+          "lng": -104.779649
+        },
+        {
+          "lat": 39.775614,
+          "lng": -104.773881
+        },
+        {
+          "lat": 39.772342,
+          "lng": -104.773332
+        },
+        {
+          "lat": 39.771814,
+          "lng": -104.7791
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.774031,
+          "lng": -104.780061
+        },
+        {
+          "lat": 39.774137,
+          "lng": -104.779237
+        },
+        {
+          "lat": 39.773503,
+          "lng": -104.7791
+        },
+        {
+          "lat": 39.773398,
+          "lng": -104.779924
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 39.77400, "west": -104.77520, "north": 39.77640, "east": -104.77350 }
+      {
+        "ring": [
+          {
+            "lat": 39.772342,
+            "lng": -104.777177
+          },
+          {
+            "lat": 39.772659,
+            "lng": -104.774431
+          },
+          {
+            "lat": 39.771076,
+            "lng": -104.774019
+          },
+          {
+            "lat": 39.770759,
+            "lng": -104.776765
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.77090, "west": -104.77900, "north": 39.77620, "east": -104.77470 }
+      {
+        "ring": [
+          {
+            "lat": 39.774453,
+            "lng": -104.779375
+          },
+          {
+            "lat": 39.774981,
+            "lng": -104.774156
+          },
+          {
+            "lat": 39.774559,
+            "lng": -104.774087
+          },
+          {
+            "lat": 39.774031,
+            "lng": -104.779306
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -19,23 +98,39 @@
     "trailerParkingCapacity": 200,
     "truckGateCount": 0,
     "buildingCount": 1,
-    "siteAreaAcres": 32.0,
+    "siteAreaAcres": 32,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.774031,-104.776628,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Open campus. The large white-roof DC is set well back from E 40th Ave behind open lawn and employee parking; truck driveways run unobstructed onto the dock yard. No barrier arm, sliding/swing gate, or checkpoint pinch-point observed at any entry across multiple satellite passes and Street View headings.",
     "guardShack": "No guard booth at any entrance. Modern set-back industrial-park design with no checkpoint structure.",

@@ -1,39 +1,120 @@
 {
   "name": "Home Depot RDC - West Columbia SC",
   "type": "Rapid Deployment Center",
-  "coords": { "lat": 33.908633, "lng": -81.074818 },
+  "coords": {
+    "lat": 33.908633,
+    "lng": -81.074818
+  },
   "geofences": {
-    "perimeter": { "south": 33.90700, "west": -81.07860, "north": 33.91110, "east": -81.07100 },
-    "truckGate": { "south": 33.90880, "west": -81.07200, "north": 33.90970, "east": -81.07060 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.910001,
+          "lng": -81.077839
+        },
+        {
+          "lat": 33.909773,
+          "lng": -81.072346
+        },
+        {
+          "lat": 33.907265,
+          "lng": -81.072346
+        },
+        {
+          "lat": 33.907493,
+          "lng": -81.077839
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 33.90950, "west": -81.07820, "north": 33.91090, "east": -81.07120 },
-      { "south": 33.90720, "west": -81.07800, "north": 33.90830, "east": -81.07150 }
+      {
+        "ring": [
+          {
+            "lat": 33.910001,
+            "lng": -81.077839
+          },
+          {
+            "lat": 33.909773,
+            "lng": -81.07317
+          },
+          {
+            "lat": 33.909203,
+            "lng": -81.07317
+          },
+          {
+            "lat": 33.909431,
+            "lng": -81.077839
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.90900, "west": -81.07780, "north": 33.90990, "east": -81.07150 },
-      { "south": 33.90770, "west": -81.07780, "north": 33.90860, "east": -81.07150 }
+      {
+        "ring": [
+          {
+            "lat": 33.909203,
+            "lng": -81.07729
+          },
+          {
+            "lat": 33.909089,
+            "lng": -81.072621
+          },
+          {
+            "lat": 33.907607,
+            "lng": -81.072621
+          },
+          {
+            "lat": 33.907721,
+            "lng": -81.07729
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 130, "trailersVisible": 230, "trailerParkingCapacity": 320,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 62.0,
+    "dockDoorCount": 130,
+    "trailersVisible": 230,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 62,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.908633,-81.074818,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "No barrier arm, sliding gate, or guard-booth checkpoint structure found at any road-edge entrance across zoom 19-20 satellite and Street View (2023-08). Building sits well back inside a logistics park behind retention ponds and grass buffers; truck access is via uncontrolled internal park roads. A web listing cites 'entrance security and strict appointments' — interpreted as appointment-based dock scheduling and a security desk at the building dock office rather than a physical road gate. Marked medium-confidence; the office/check-in area was partly obscured by ponds in available imagery.",
     "guardShack": "No standalone staffed booth structure visible at any entrance.",

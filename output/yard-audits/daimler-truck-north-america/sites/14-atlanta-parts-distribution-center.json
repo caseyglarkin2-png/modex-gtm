@@ -1,17 +1,98 @@
 {
   "name": "Atlanta Parts Distribution Center - Buford GA",
   "type": "Parts distribution center",
-  "coords": { "lat": 34.117850, "lng": -83.982650 },
+  "coords": {
+    "lat": 34.11785,
+    "lng": -83.98265
+  },
   "geofences": {
-    "perimeter": { "south": 34.116100, "west": -83.984050, "north": 34.119450, "east": -83.981300 },
-    "truckGate": { "south": 34.116150, "west": -83.982950, "north": 34.116400, "east": -83.982600 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.119157,
+          "lng": -83.98574
+        },
+        {
+          "lat": 34.119953,
+          "lng": -83.981826
+        },
+        {
+          "lat": 34.117566,
+          "lng": -83.980727
+        },
+        {
+          "lat": 34.116429,
+          "lng": -83.98471
+        },
+        {
+          "lat": 34.118134,
+          "lng": -83.985877
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.117964,
+          "lng": -83.985671
+        },
+        {
+          "lat": 34.118077,
+          "lng": -83.985259
+        },
+        {
+          "lat": 34.117736,
+          "lng": -83.985122
+        },
+        {
+          "lat": 34.117623,
+          "lng": -83.985534
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 34.116300, "west": -83.984050, "north": 34.116900, "east": -83.981500 },
-      { "south": 34.118450, "west": -83.984050, "north": 34.119450, "east": -83.981500 }
+      {
+        "ring": [
+          {
+            "lat": 34.116713,
+            "lng": -83.985603
+          },
+          {
+            "lat": 34.117168,
+            "lng": -83.983337
+          },
+          {
+            "lat": 34.116713,
+            "lng": -83.983199
+          },
+          {
+            "lat": 34.116258,
+            "lng": -83.985465
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 34.116650, "west": -83.984000, "north": 34.117050, "east": -83.981500 },
-      { "south": 34.118300, "west": -83.984000, "north": 34.118700, "east": -83.981500 }
+      {
+        "ring": [
+          {
+            "lat": 34.11694,
+            "lng": -83.985397
+          },
+          {
+            "lat": 34.117395,
+            "lng": -83.983131
+          },
+          {
+            "lat": 34.117168,
+            "lng": -83.983062
+          },
+          {
+            "lat": 34.116713,
+            "lng": -83.985328
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -21,23 +102,42 @@
     "trailerParkingCapacity": 110,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 26.0,
+    "siteAreaAcres": 26,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.117850,-83.982650,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Positively confirmed: Street View shows a large 'DAIMLER - Daimler Trucks North America' sign on the building wall at the SW corner. Address 2510 Mill Center Parkway, Suite 100, Buford GA — building 'Bldg I', an 870,480 sq ft cross-dock distribution facility (built 2006) in the Mill Center / Hamilton Mill business park. Roster geocode moved 4,842 m; the corrected pin landed on the correct building. DTNA occupies Suite 100 (a portion of the multi-tenant building; Radial and RNC Industries occupy other suites). Center locked at 34.117850, -83.982650.",
     "truckGate": "TRUE. Street View shows a black ornamental perimeter fence with a swing gate enclosing the DTNA dock yard, separating the secured truck court from the public car parking lot at the DTNA suite.",

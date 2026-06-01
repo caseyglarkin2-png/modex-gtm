@@ -1,38 +1,146 @@
 {
   "name": "Progressive Processing - Dubuque IA",
   "type": "Production Facility",
-  "coords": { "lat": 42.48790, "lng": -90.76610 },
+  "coords": {
+    "lat": 42.4879,
+    "lng": -90.7661
+  },
   "geofences": {
-    "perimeter": { "south": 42.48620, "west": -90.76870, "north": 42.48950, "east": -90.76340 },
-    "truckGate": { "south": 42.48650, "west": -90.76590, "north": 42.48700, "east": -90.76510 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.489115,
+          "lng": -90.76816
+        },
+        {
+          "lat": 42.489318,
+          "lng": -90.764452
+        },
+        {
+          "lat": 42.486685,
+          "lng": -90.76404
+        },
+        {
+          "lat": 42.486178,
+          "lng": -90.764727
+        },
+        {
+          "lat": 42.48628,
+          "lng": -90.768297
+        },
+        {
+          "lat": 42.4879,
+          "lng": -90.768435
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.486685,
+          "lng": -90.765413
+        },
+        {
+          "lat": 42.486786,
+          "lng": -90.764452
+        },
+        {
+          "lat": 42.48628,
+          "lng": -90.764315
+        },
+        {
+          "lat": 42.486178,
+          "lng": -90.765276
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 42.48700, "west": -90.76800, "north": 42.48800, "east": -90.76690 },
-      { "south": 42.48680, "west": -90.76720, "north": 42.48720, "east": -90.76590 }
+      {
+        "ring": [
+          {
+            "lat": 42.487394,
+            "lng": -90.768572
+          },
+          {
+            "lat": 42.487394,
+            "lng": -90.767748
+          },
+          {
+            "lat": 42.486685,
+            "lng": -90.767748
+          },
+          {
+            "lat": 42.486685,
+            "lng": -90.768572
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 42.48680, "west": -90.76760, "north": 42.48730, "east": -90.76560 }
+      {
+        "ring": [
+          {
+            "lat": 42.488406,
+            "lng": -90.765413
+          },
+          {
+            "lat": 42.488406,
+            "lng": -90.764452
+          },
+          {
+            "lat": 42.486887,
+            "lng": -90.764452
+          },
+          {
+            "lat": 42.486887,
+            "lng": -90.764864
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 30, "trailersVisible": 55, "trailerParkingCapacity": 80,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 37.0,
+    "dockDoorCount": 30,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 37,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@42.4879,-90.7661,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "urbanRural", "dockDoorCount"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "urbanRural",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "location": "Roster address '11400 Stratton Dr' and coordinates were wrong (geocode APPROXIMATE, 9396 m off). Web research found the real address: 1205 Chavenelle Court, Dubuque IA 52002, in the Dubuque Industrial Center West. Locked center 42.4879,-90.7661 — a 348,000 sq ft Hormel-owned production plant (Compleats meals, chunk chicken, bacon toppings, SPAM), opened 2010.",
     "truckGate": "No barrier arm, gate, or checkpoint at the plant entrance; no perimeter fence around the property. The plant is set back behind a landscaped lawn off the public industrial-park road (Chavenelle Court). Open access driveway with a wide truck apron. Classified false.",

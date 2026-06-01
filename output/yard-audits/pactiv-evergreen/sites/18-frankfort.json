@@ -1,18 +1,84 @@
 {
   "name": "Pactiv Evergreen - Frankfort IL",
   "type": "Manufacturing Plant (Foodservice; co-located warehouse)",
-  "coords": { "lat": 41.490600, "lng": -87.846800 },
+  "coords": {
+    "lat": 41.4906,
+    "lng": -87.8468
+  },
   "geofences": {
-    "perimeter": { "south": 41.48700, "west": -87.85050, "north": 41.49330, "east": -87.84130 },
-    "truckGate": { "south": 41.48740, "west": -87.84780, "north": 41.48790, "east": -87.84680 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.49204,
+          "lng": -87.849821
+        },
+        {
+          "lat": 41.491629,
+          "lng": -87.842955
+        },
+        {
+          "lat": 41.488748,
+          "lng": -87.843229
+        },
+        {
+          "lat": 41.488954,
+          "lng": -87.850096
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 41.49080, "west": -87.84850, "north": 41.49260, "east": -87.84610 },
-      { "south": 41.48820, "west": -87.85020, "north": 41.48970, "east": -87.84830 }
+      {
+        "ring": [
+          {
+            "lat": 41.490086,
+            "lng": -87.847899
+          },
+          {
+            "lat": 41.489983,
+            "lng": -87.844603
+          },
+          {
+            "lat": 41.488954,
+            "lng": -87.844603
+          },
+          {
+            "lat": 41.489057,
+            "lng": -87.847899
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.48880, "west": -87.84620, "north": 41.49120, "east": -87.84380 }
+      {
+        "ring": [
+          {
+            "lat": 41.491011,
+            "lng": -87.8468
+          },
+          {
+            "lat": 41.490806,
+            "lng": -87.843504
+          },
+          {
+            "lat": 41.490291,
+            "lng": -87.843504
+          },
+          {
+            "lat": 41.490497,
+            "lng": -87.8468
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 27,
+        "pano": "NhRkCgzxPa8Ro4IFMYgBbQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 70,
@@ -20,7 +86,7 @@
     "trailerParkingCapacity": 130,
     "truckGateCount": 2,
     "buildingCount": 4,
-    "siteAreaAcres": 55.0,
+    "siteAreaAcres": 55,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@41.490600,-87.846800,400m/data=!3m1!1e3",
@@ -49,7 +115,13 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount", "truckGate", "guardShack"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "truckGate",
+    "guardShack"
+  ],
   "fieldNotes": {
     "truckGate": "No barrier arm, sliding gate or checkpoint pinch-point is visible at the property-line entrances off Center Rd / the south road in available satellite imagery. The only Street View panos on Center Rd are indoor office shots so a road-level verification was not possible — classified false, flagged as uncertain.",
     "guardShack": "No guard-booth structure visible at the entrances in z17-z19 satellite imagery; flagged uncertain because Street View at the entrance was unavailable (office-interior panos only).",

@@ -1,19 +1,83 @@
 {
   "name": "Pactiv Evergreen - Covington GA Distribution Center",
   "type": "Distribution Center / Regional Mixing Center",
-  "coords": { "lat": 33.60620, "lng": -83.81260 },
+  "coords": {
+    "lat": 33.6062,
+    "lng": -83.8126
+  },
   "geofences": {
-    "perimeter": { "south": 33.60440, "west": -83.81480, "north": 33.60825, "east": -83.81040 },
-    "truckGate": { "south": 33.60490, "west": -83.81400, "north": 33.60525, "east": -83.81340 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.608602,
+          "lng": -83.813561
+        },
+        {
+          "lat": 33.608144,
+          "lng": -83.810677
+        },
+        {
+          "lat": 33.604827,
+          "lng": -83.811501
+        },
+        {
+          "lat": 33.605285,
+          "lng": -83.814385
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 33.60460, "west": -83.81330, "north": 33.60560, "east": -83.81150 },
-      { "south": 33.60700, "west": -83.81230, "north": 33.60820, "east": -83.81080 }
+      {
+        "ring": [
+          {
+            "lat": 33.607916,
+            "lng": -83.813973
+          },
+          {
+            "lat": 33.607801,
+            "lng": -83.813149
+          },
+          {
+            "lat": 33.605514,
+            "lng": -83.813424
+          },
+          {
+            "lat": 33.605628,
+            "lng": -83.814248
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.608144,
+            "lng": -83.8126
+          },
+          {
+            "lat": 33.60803,
+            "lng": -83.811501
+          },
+          {
+            "lat": 33.605285,
+            "lng": -83.811776
+          },
+          {
+            "lat": 33.605399,
+            "lng": -83.812875
+          }
+        ]
+      }
     ],
-    "dockAprons": [
-      { "south": 33.60480, "west": -83.81360, "north": 33.60790, "east": -83.81230 },
-      { "south": 33.60540, "west": -83.81220, "north": 33.60830, "east": -83.81060 }
-    ],
-    "staging": { "south": 33.60470, "west": -83.81410, "north": 33.60530, "east": -83.81350 }
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 34,
+        "pano": "A-gnuWvrnAsFiKE90XZwaw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 70,
@@ -21,7 +85,7 @@
     "trailerParkingCapacity": 140,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 30.0,
+    "siteAreaAcres": 30,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.60620,-83.81260,400m/data=!3m1!1e3",
@@ -50,7 +114,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "shipRcvSeparate", "multiStep"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "shipRcvSeparate",
+    "multiStep"
+  ],
   "fieldNotes": {
     "truckGate": "Barrier-arm gate clearly visible across the truck lane on the entry drive, with a tractor-trailer queued behind it (2020-01 Street View, multiple headings). Bollards and a 'TRUCKS' directional sign confirm a controlled truck checkpoint.",
     "guardShack": "A small structure beside the barrier arm at the entry checkpoint, consistent with a guard booth (z19 satellite). The site is a branded 24/7 Pactiv Regional Mixing Center; barrier-arm gates of this kind are normally booth-operated.",

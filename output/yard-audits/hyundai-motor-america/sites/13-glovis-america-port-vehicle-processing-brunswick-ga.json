@@ -1,16 +1,56 @@
 {
   "name": "Glovis America Port Vehicle Processing - Brunswick GA",
   "type": "Port / Vehicle Import Processing Center",
-  "coords": { "lat": 31.127000, "lng": -81.539000 },
+  "coords": {
+    "lat": 31.127,
+    "lng": -81.539
+  },
   "geofences": {
-    "perimeter": { "south": 31.108000, "west": -81.553000, "north": 31.135500, "east": -81.530000 },
-    "truckGate": { "south": 31.123000, "west": -81.543900, "north": 31.124600, "east": -81.542400 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 31.136404,
+          "lng": -81.548888
+        },
+        {
+          "lat": 31.136404,
+          "lng": -81.534605
+        },
+        {
+          "lat": 31.113833,
+          "lng": -81.532408
+        },
+        {
+          "lat": 31.107248,
+          "lng": -81.556578
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 31.108500, "west": -81.552500, "north": 31.122000, "east": -81.540000 },
-      { "south": 31.124000, "west": -81.546000, "north": 31.133000, "east": -81.534000 }
+      {
+        "ring": [
+          {
+            "lat": 31.113833,
+            "lng": -81.555479
+          },
+          {
+            "lat": 31.116654,
+            "lng": -81.544493
+          },
+          {
+            "lat": 31.108189,
+            "lng": -81.542296
+          },
+          {
+            "lat": 31.106308,
+            "lng": -81.554381
+          }
+        ]
+      }
     ],
     "dockAprons": [],
-    "staging": { "south": 31.121500, "west": -81.545000, "north": 31.124000, "east": -81.542500 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 0,
@@ -18,23 +58,43 @@
     "trailerParkingCapacity": 40,
     "truckGateCount": 1,
     "buildingCount": 8,
-    "siteAreaAcres": 1627.0,
+    "siteAreaAcres": 1627,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@31.1270,-81.5390,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "NONE", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": true
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "NONE",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": true
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "scale", "multiStep", "preGateStaging"],
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "multiStep",
+    "preGateStaging"
+  ],
   "fieldNotes": {
     "siteSelection": "Roster point (1 Joe Frank Harris Blvd) lands inside the Georgia Ports Authority Colonel's Island Terminal at the Port of Brunswick - confirmed via web research (GPA facilities page, glovisusa.com, Automotive Logistics). Colonel's Island is a ~1,700-acre RoRo auto terminal with multiple on-terminal vehicle processors; Glovis America operates as one of those processors. The audited facility is the GPA secured terminal as a whole, since the on-terminal processors share the gate, fence line and storage. Center placed on the terminal core at 31.1270,-81.5390.",
     "facilityType": "Port / RoRo vehicle import-export processing terminal. No traditional loading docks - vehicles roll on/off ships at the RoRo berths and move within the terminal by drive-away and by rail. dockDoorCount=0 / dockDoors=NONE reflect this.",

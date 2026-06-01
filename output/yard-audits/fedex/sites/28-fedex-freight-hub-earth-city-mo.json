@@ -1,38 +1,124 @@
 {
   "name": "FedEx Freight Hub - Earth City MO (St. Louis, STL)",
   "type": "Freight LTL hub service center (~240 doors)",
-  "coords": { "lat": 38.8350, "lng": -90.5210 },
+  "coords": {
+    "lat": 38.835,
+    "lng": -90.521
+  },
   "geofences": {
-    "perimeter": { "south": 38.8330, "west": -90.5240, "north": 38.8378, "east": -90.5165 },
-    "truckGate": { "south": 38.8334, "west": -90.5228, "north": 38.8340, "east": -90.5218 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.837567,
+          "lng": -90.525395
+        },
+        {
+          "lat": 38.837781,
+          "lng": -90.520176
+        },
+        {
+          "lat": 38.833716,
+          "lng": -90.519352
+        },
+        {
+          "lat": 38.832861,
+          "lng": -90.522373
+        },
+        {
+          "lat": 38.83393,
+          "lng": -90.525669
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 38.8345, "west": -90.5200, "north": 38.8375, "east": -90.5168 },
-      { "south": 38.8358, "west": -90.5240, "north": 38.8375, "east": -90.5215 }
+      {
+        "ring": [
+          {
+            "lat": 38.83607,
+            "lng": -90.52512
+          },
+          {
+            "lat": 38.836284,
+            "lng": -90.520176
+          },
+          {
+            "lat": 38.834144,
+            "lng": -90.519901
+          },
+          {
+            "lat": 38.833716,
+            "lng": -90.524845
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 38.8344, "west": -90.5240, "north": 38.8354, "east": -90.5180 }
+      {
+        "ring": [
+          {
+            "lat": 38.836712,
+            "lng": -90.524845
+          },
+          {
+            "lat": 38.836925,
+            "lng": -90.520725
+          },
+          {
+            "lat": 38.83607,
+            "lng": -90.520725
+          },
+          {
+            "lat": 38.835856,
+            "lng": -90.524845
+          }
+        ]
+      }
     ],
-    "staging": { "south": 38.8340, "west": -90.5232, "north": 38.8346, "east": -90.5210 }
+    "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 240, "trailersVisible": 320, "trailerParkingCapacity": 600,
-    "truckGateCount": 1, "buildingCount": 3, "siteAreaAcres": 86.0,
+    "dockDoorCount": 240,
+    "trailersVisible": 320,
+    "trailerParkingCapacity": 600,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 86,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@38.8350,-90.5210,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "dockDoorCount", "truckGate"],
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "truckGate"
+  ],
   "fieldNotes": {
     "location": "Roster address '3300 Rider Trl S, Earth City MO' and coordinates (38.761891, -90.455962, ROOFTOP) resolve to a multi-story glass OFFICE building in the Earth City office park - NOT a freight hub. The correct FedEx Freight STL break-bulk hub is at 3951 New Town Blvd, St Charles, MO 63301, centered approximately 38.8350, -90.5210 (across the Missouri River, ~9 km NW of the roster point). Confirmed by satellite showing a classic LTL break-bulk cross-dock building with hundreds of trailers, and by the FedEx Freight STL service-center locator page (local.fedex.com/mo/saint-charles/freight-STL).",
     "truckGate": "Large dedicated LTL hub property; truck yard access controlled via the New Town Blvd access road on the south/SW side. Perimeter is defined; exact gate position inferred from the access corridor (Street View coverage near the gate is limited). FedEx Freight break-bulk hubs are universally gated.",

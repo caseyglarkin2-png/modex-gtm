@@ -1,13 +1,94 @@
 {
   "name": "Constellation Beer DC - Jurupa Valley CA",
   "type": "Distribution Center (beer/wine/spirits)",
-  "coords": { "lat": 34.02585, "lng": -117.53575 },
+  "coords": {
+    "lat": 34.02585,
+    "lng": -117.53575
+  },
   "geofences": {
-    "perimeter": { "south": 34.02410, "west": -117.54000, "north": 34.02730, "east": -117.53150 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.026874,
+          "lng": -117.539183
+        },
+        {
+          "lat": 34.026647,
+          "lng": -117.531905
+        },
+        {
+          "lat": 34.024484,
+          "lng": -117.532042
+        },
+        {
+          "lat": 34.024712,
+          "lng": -117.539321
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.025053,
+          "lng": -117.539321
+        },
+        {
+          "lat": 34.025053,
+          "lng": -117.538771
+        },
+        {
+          "lat": 34.024712,
+          "lng": -117.538771
+        },
+        {
+          "lat": 34.024712,
+          "lng": -117.539321
+        }
+      ]
+    },
     "dropYards": [],
-    "dockAprons": [],
-    "staging": null
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 34.02585,
+            "lng": -117.534926
+          },
+          {
+            "lat": 34.025736,
+            "lng": -117.532454
+          },
+          {
+            "lat": 34.025053,
+            "lng": -117.532454
+          },
+          {
+            "lat": 34.025167,
+            "lng": -117.534926
+          }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        {
+          "lat": 34.026761,
+          "lng": -117.539046
+        },
+        {
+          "lat": 34.026647,
+          "lng": -117.535063
+        },
+        {
+          "lat": 34.024826,
+          "lng": -117.535063
+        },
+        {
+          "lat": 34.024939,
+          "lng": -117.539046
+        }
+      ]
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 0,
@@ -15,7 +96,7 @@
     "trailerParkingCapacity": 0,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 71.0,
+    "siteAreaAcres": 71,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.02585,-117.53575,400m/data=!3m1!1e3",
@@ -45,10 +126,25 @@
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "scale", "dropYard", "multiStep"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "scale",
+    "dropYard",
+    "multiStep"
   ],
   "fieldNotes": {
     "_site": "Building POSITIVELY IDENTIFIED as the Constellation Brands DC at 3413 Manitou Court (Link Logistics 'Space Center' development, Jurupa Valley CA). However, the most recent Maxar/Airbus satellite imagery shows the site MID-CONSTRUCTION: the ~1.4M sq ft warehouse shell is structurally topped out but the surrounding truck court, dock equipment, parking, and trailer yard are still raw graded dirt with construction material stockpiles. No operational yard infrastructure exists in imagery yet.",

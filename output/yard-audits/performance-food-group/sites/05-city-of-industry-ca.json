@@ -1,37 +1,149 @@
 {
   "name": "Performance Foodservice - Southern California (City of Industry)",
   "type": "Broadline Foodservice Distribution Center",
-  "coords": { "lat": 34.00485, "lng": -117.94160 },
+  "coords": {
+    "lat": 34.00485,
+    "lng": -117.9416
+  },
   "geofences": {
-    "perimeter": { "south": 34.00300, "west": -117.94320, "north": 34.00680, "east": -117.93980 },
-    "truckGate": { "south": 34.00330, "west": -117.94090, "north": 34.00380, "east": -117.94010 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.006159,
+          "lng": -117.943179
+        },
+        {
+          "lat": 34.006159,
+          "lng": -117.940227
+        },
+        {
+          "lat": 34.003939,
+          "lng": -117.940227
+        },
+        {
+          "lat": 34.003939,
+          "lng": -117.943179
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.00411,
+          "lng": -117.942287
+        },
+        {
+          "lat": 34.00411,
+          "lng": -117.9416
+        },
+        {
+          "lat": 34.003825,
+          "lng": -117.9416
+        },
+        {
+          "lat": 34.003825,
+          "lng": -117.942287
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 34.00340, "west": -117.94090, "north": 34.00560, "east": -117.93990 }
+      {
+        "ring": [
+          {
+            "lat": 34.005419,
+            "lng": -117.941051
+          },
+          {
+            "lat": 34.005419,
+            "lng": -117.940089
+          },
+          {
+            "lat": 34.004565,
+            "lng": -117.940089
+          },
+          {
+            "lat": 34.004565,
+            "lng": -117.941051
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 34.00370, "west": -117.94080, "north": 34.00620, "east": -117.94000 }
+      {
+        "ring": [
+          {
+            "lat": 34.004395,
+            "lng": -117.941943
+          },
+          {
+            "lat": 34.004395,
+            "lng": -117.940227
+          },
+          {
+            "lat": 34.004167,
+            "lng": -117.940227
+          },
+          {
+            "lat": 34.004167,
+            "lng": -117.941943
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 14,
+        "pano": "y2GYRHamLzlgIHXPr-dN4A",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 14,
+        "pano": "y2GYRHamLzlgIHXPr-dN4A",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 50, "trailersVisible": 35, "trailerParkingCapacity": 65,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 24.0,
+    "dockDoorCount": 50,
+    "trailersVisible": 35,
+    "trailerParkingCapacity": 65,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 24,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.00485,-117.9416,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "location": "Confirmed via Street View — building carries the red 'PERFORMANCE foodservice' logo on the west face along Gale Ave. Address 16639 Gale Ave, City of Industry CA; coord cross-checked against LoopNet/assessor parcel 8242-011-065/067 (~34.00485,-117.94161). Roster 'movedMeters 1352' is a stale-geocode artifact — rooftop coord is accurate.",
     "truckGate": "Street View clearly shows a blue sliding gate spanning the truck driveway off Gale Ave, with chain-link perimeter fencing and a 'VISITOR' parking sign by the office. Controlled truck entrance confirmed.",

@@ -1,19 +1,96 @@
 {
   "name": "Honda of South Carolina Mfg. (ATV/UTV Plant) - Timmonsville SC",
   "type": "ATV / UTV / Side-by-Side Plant",
-  "coords": { "lat": 34.11050, "lng": -79.91650 },
+  "coords": {
+    "lat": 34.1105,
+    "lng": -79.9165
+  },
   "geofences": {
-    "perimeter": { "south": 34.10650, "west": -79.92350, "north": 34.11550, "east": -79.91150 },
-    "truckGate": { "south": 34.11340, "west": -79.91490, "north": 34.11420, "east": -79.91390 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.113684,
+          "lng": -79.922542
+        },
+        {
+          "lat": 34.112774,
+          "lng": -79.914852
+        },
+        {
+          "lat": 34.107771,
+          "lng": -79.9165
+        },
+        {
+          "lat": 34.109136,
+          "lng": -79.92419
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.111637,
+          "lng": -79.9165
+        },
+        {
+          "lat": 34.11141,
+          "lng": -79.915127
+        },
+        {
+          "lat": 34.1105,
+          "lng": -79.915401
+        },
+        {
+          "lat": 34.110727,
+          "lng": -79.916775
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 34.10780, "west": -79.92320, "north": 34.11030, "east": -79.92020 },
-      { "south": 34.10880, "west": -79.91950, "north": 34.11080, "east": -79.91700 }
+      {
+        "ring": [
+          {
+            "lat": 34.1105,
+            "lng": -79.922542
+          },
+          {
+            "lat": 34.110045,
+            "lng": -79.919247
+          },
+          {
+            "lat": 34.108226,
+            "lng": -79.919796
+          },
+          {
+            "lat": 34.108908,
+            "lng": -79.923092
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 34.11050, "west": -79.91550, "north": 34.11280, "east": -79.91350 },
-      { "south": 34.10950, "west": -79.92000, "north": 34.11150, "east": -79.91800 }
+      {
+        "ring": [
+          {
+            "lat": 34.111864,
+            "lng": -79.920895
+          },
+          {
+            "lat": 34.111182,
+            "lng": -79.9165
+          },
+          {
+            "lat": 34.110273,
+            "lng": -79.916775
+          },
+          {
+            "lat": 34.110955,
+            "lng": -79.921169
+          }
+        ]
+      }
     ],
-    "staging": { "south": 34.11150, "west": -79.91500, "north": 34.11340, "east": -79.91300 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 55,
@@ -21,23 +98,42 @@
     "trailerParkingCapacity": 320,
     "truckGateCount": 1,
     "buildingCount": 4,
-    "siteAreaAcres": 230.0,
+    "siteAreaAcres": 230,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.1105,-79.9165,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount", "trailersVisible", "scale"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "trailersVisible",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "Confirmed in Street View and z20 satellite: a controlled entrance on the access road (Honda Way) with a guard booth straddling the entry, traffic cones marking multiple lanes, and an island. Clear controlled truck gate.",
     "guardShack": "Confirmed - Street View (2019 capture) shows a uniformed guard standing at the gate beside a small multi-window guard booth. High confidence.",

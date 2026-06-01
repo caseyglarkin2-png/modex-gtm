@@ -1,17 +1,112 @@
 {
   "name": "Nabisco Richmond Biscuit Bakery - Richmond VA",
   "type": "Manufacturing - biscuit/cookie bakery",
-  "coords": { "lat": 37.49600, "lng": -77.35400 },
+  "coords": {
+    "lat": 37.496,
+    "lng": -77.354
+  },
   "geofences": {
-    "perimeter": { "south": 37.49280, "west": -77.35720, "north": 37.49830, "east": -77.35070 },
-    "truckGate": { "south": 37.49440, "west": -77.35540, "north": 37.49490, "east": -77.35470 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.498506,
+          "lng": -77.355373
+        },
+        {
+          "lat": 37.498397,
+          "lng": -77.350979
+        },
+        {
+          "lat": 37.493603,
+          "lng": -77.35194
+        },
+        {
+          "lat": 37.493821,
+          "lng": -77.355373
+        },
+        {
+          "lat": 37.496,
+          "lng": -77.356335
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 37.492949,
+          "lng": -77.354275
+        },
+        {
+          "lat": 37.492949,
+          "lng": -77.353176
+        },
+        {
+          "lat": 37.492186,
+          "lng": -77.353313
+        },
+        {
+          "lat": 37.492186,
+          "lng": -77.354412
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 37.49460, "west": -77.35640, "north": 37.49720, "east": -77.35510 }
+      {
+        "ring": [
+          {
+            "lat": 37.496109,
+            "lng": -77.355785
+          },
+          {
+            "lat": 37.496,
+            "lng": -77.354687
+          },
+          {
+            "lat": 37.494257,
+            "lng": -77.354961
+          },
+          {
+            "lat": 37.494366,
+            "lng": -77.35606
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 37.49500, "west": -77.35480, "north": 37.49600, "east": -77.35200 }
+      {
+        "ring": [
+          {
+            "lat": 37.496,
+            "lng": -77.354961
+          },
+          {
+            "lat": 37.496,
+            "lng": -77.354
+          },
+          {
+            "lat": 37.494366,
+            "lng": -77.354137
+          },
+          {
+            "lat": 37.494366,
+            "lng": -77.355099
+          }
+        ]
+      }
     ],
-    "staging": { "south": 37.49380, "west": -77.35460, "north": 37.49490, "east": -77.35360 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 353,
+        "pano": "xyF_Fi0uXSBkW5aqHzDDcw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 353,
+        "pano": "xyF_Fi0uXSBkW5aqHzDDcw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 40,
@@ -19,7 +114,7 @@
     "trailerParkingCapacity": 90,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 84.0,
+    "siteAreaAcres": 84,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@37.49600,-77.35400,400m/data=!3m1!1e3",
@@ -48,7 +143,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "exitLanes"],
+  "uncertainFields": [
+    "scale",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Internal truck gate inside the property: chain-link fencing crosses the truck driveway ~150m in from S Laburnum Ave, with a gate where the drive meets the fenced trailer/dock yard (z21 imagery at 37.4947,-77.3551). The road-edge driveway entrance itself is open (no road-side barrier).",
     "guardShack": "Small white/brown-roofed 1-2 vehicle-footprint structure beside the internal gate (visible z21 at 37.4943,-77.3551) - consistent with a staffed guard booth controlling truck-yard access.",

@@ -1,37 +1,142 @@
 {
   "name": "KDP Beverage Plant - Waco TX",
   "type": "Manufacturing - Beverage",
-  "coords": { "lat": 31.626000, "lng": -97.063500 },
+  "coords": {
+    "lat": 31.626,
+    "lng": -97.0635
+  },
   "geofences": {
-    "perimeter": { "south": 31.623400, "west": -97.067500, "north": 31.628800, "east": -97.060500 },
-    "truckGate": { "south": 31.626700, "west": -97.066600, "north": 31.627300, "east": -97.066000 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 31.628689,
+          "lng": -97.06556
+        },
+        {
+          "lat": 31.628339,
+          "lng": -97.060616
+        },
+        {
+          "lat": 31.625532,
+          "lng": -97.060479
+        },
+        {
+          "lat": 31.625415,
+          "lng": -97.065423
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 31.626935,
+          "lng": -97.06556
+        },
+        {
+          "lat": 31.626935,
+          "lng": -97.064873
+        },
+        {
+          "lat": 31.626234,
+          "lng": -97.064873
+        },
+        {
+          "lat": 31.626234,
+          "lng": -97.06556
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 31.624800, "west": -97.063600, "north": 31.625800, "east": -97.060900 }
+      {
+        "ring": [
+          {
+            "lat": 31.626819,
+            "lng": -97.063637
+          },
+          {
+            "lat": 31.626585,
+            "lng": -97.060616
+          },
+          {
+            "lat": 31.625766,
+            "lng": -97.060616
+          },
+          {
+            "lat": 31.625883,
+            "lng": -97.063637
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 31.624900, "west": -97.063800, "north": 31.625600, "east": -97.060800 }
+      {
+        "ring": [
+          {
+            "lat": 31.628573,
+            "lng": -97.064599
+          },
+          {
+            "lat": 31.628222,
+            "lng": -97.060753
+          },
+          {
+            "lat": 31.62752,
+            "lng": -97.060753
+          },
+          {
+            "lat": 31.627754,
+            "lng": -97.064599
+          }
+        ]
+      }
     ],
-    "staging": { "south": 31.626400, "west": -97.066000, "north": 31.627400, "east": -97.064600 }
+    "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 70, "trailersVisible": 110, "trailerParkingCapacity": 180,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 92.0,
+    "dockDoorCount": 70,
+    "trailersVisible": 110,
+    "trailerParkingCapacity": 180,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 92,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@31.626000,-97.063500,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "scale", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "scale",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Roster address (5301 Bagby Ave) was wrong/approximate - the pin landed on a golf course / apartments in south Waco. Web research (Greater Waco Chamber directory, Yelp, Dennis Group, Quandel) resolved the facility to 100 Aviation Pkwy, Waco TX 76705, in the Waco International Aviation Park beside TSTC Waco Airport. KDP bought a 92-acre former Kraft-Heinz campus (730,000 SF distribution center) and added a new ~811,000 SF manufacturing & warehouse building connected to the DC by tram. Satellite confirms a large fenced industrial campus at ~31.626,-97.0635.",
     "truckGate": "The campus is fully enclosed by a continuous chain-link perimeter fence (visible on all sides in Street View 2023-05 and 2025-11). The main entrance off the NW access road has fencing, signage and a portable/modular office building. A 92-acre flagship KDP manufacturing + DC campus of this scale operates a controlled, gated truck entrance.",

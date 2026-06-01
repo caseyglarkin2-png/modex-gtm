@@ -1,12 +1,76 @@
 {
   "name": "Swire Coca-Cola USA - Salt Lake City Production Plant, UT",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 40.72870, "lng": -111.97120 },
+  "coords": {
+    "lat": 40.7287,
+    "lng": -111.9712
+  },
   "geofences": {
-    "perimeter": { "south": 40.72760, "west": -111.97250, "north": 40.73000, "east": -111.96900 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.730469,
+          "lng": -111.971887
+        },
+        {
+          "lat": 40.730469,
+          "lng": -111.970101
+        },
+        {
+          "lat": 40.728596,
+          "lng": -111.970101
+        },
+        {
+          "lat": 40.728596,
+          "lng": -111.971887
+        }
+      ]
+    },
     "truckGate": null,
-    "dropYards": [],
-    "dockAprons": [],
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 40.730417,
+            "lng": -111.970857
+          },
+          {
+            "lat": 40.730417,
+            "lng": -111.970239
+          },
+          {
+            "lat": 40.729741,
+            "lng": -111.970239
+          },
+          {
+            "lat": 40.729741,
+            "lng": -111.970857
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 40.730365,
+            "lng": -111.971749
+          },
+          {
+            "lat": 40.730365,
+            "lng": -111.971063
+          },
+          {
+            "lat": 40.728804,
+            "lng": -111.971063
+          },
+          {
+            "lat": 40.728804,
+            "lng": -111.971749
+          }
+        ]
+      }
+    ],
     "staging": null
   },
   "yardMetrics": {
@@ -15,29 +79,62 @@
     "trailerParkingCapacity": 0,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 12.0,
+    "siteAreaAcres": 12,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.72870,-111.97120,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "NONE", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "multipleFacilities", "scale",
-    "dropYard", "multiStep", "dockDoorCount", "trailersVisible",
-    "trailerParkingCapacity", "siteAreaAcres", "railServed", "coords",
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "multipleFacilities",
+    "scale",
+    "dropYard",
+    "multiStep",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "siteAreaAcres",
+    "railServed",
+    "coords",
     "perimeter"
   ],
   "fieldNotes": {

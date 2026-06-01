@@ -1,10 +1,11 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Rectangle, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Polygon, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import type { Bbox, ScenarioStep, Site, SiteScenario } from '@/lib/demo/pack-schema';
+import type { GeoShape, ScenarioStep, Site, SiteScenario } from '@/lib/demo/pack-schema';
+import { shapeBounds, shapeCentroid, shapePositions } from '@/lib/demo/geofence-geometry';
 import { NARRATIONS } from '@/lib/demo/scenarios';
 import { GEOFENCE_COLORS } from './archetype-palette';
 
@@ -47,16 +48,9 @@ interface LatLng {
   lng: number;
 }
 
-function toBounds(b: Bbox): [[number, number], [number, number]] {
-  return [
-    [b.south, b.west],
-    [b.north, b.east],
-  ];
-}
-
-function centroid(b: Bbox): LatLng {
-  return { lat: (b.south + b.north) / 2, lng: (b.west + b.east) / 2 };
-}
+// Geofence shapes may be legacy bboxes or v2 oriented polygons; the
+// shared helpers read either. centroid = shape centroid (vertex average).
+const centroid = shapeCentroid;
 
 function targetCentroid(site: Site, step: ScenarioStep): LatLng | null {
   const g = site.geofences;
@@ -91,10 +85,10 @@ function makeTruckIcon(): L.DivIcon {
   });
 }
 
-function FitToPerimeter({ perimeter }: { perimeter: Bbox }) {
+function FitToPerimeter({ perimeter }: { perimeter: GeoShape }) {
   const map = useMap();
   useEffect(() => {
-    map.fitBounds(toBounds(perimeter), { padding: [20, 20], animate: false });
+    map.fitBounds(shapeBounds(perimeter), { padding: [20, 20], animate: false });
   }, [map, perimeter]);
   return null;
 }
@@ -256,18 +250,18 @@ export default function DriverJourneyReplayInner({
       />
       <FitToPerimeter perimeter={gf.perimeter} />
 
-      <Rectangle
-        bounds={toBounds(gf.perimeter)}
+      <Polygon
+        positions={shapePositions(gf.perimeter)}
         pathOptions={{ color: GEOFENCE_COLORS.perimeter, weight: 2, fillOpacity: 0.04, dashArray: '4 4' }}
       />
       {gf.dropYards.map((b, i) => (
-        <Rectangle key={`d-${i}`} bounds={toBounds(b)} pathOptions={layerStyle('dropYard', i)} />
+        <Polygon key={`d-${i}`} positions={shapePositions(b)} pathOptions={layerStyle('dropYard', i)} />
       ))}
       {gf.dockAprons.map((b, i) => (
-        <Rectangle key={`a-${i}`} bounds={toBounds(b)} pathOptions={layerStyle('dockApron', i)} />
+        <Polygon key={`a-${i}`} positions={shapePositions(b)} pathOptions={layerStyle('dockApron', i)} />
       ))}
-      {gf.staging && <Rectangle bounds={toBounds(gf.staging)} pathOptions={layerStyle('staging')} />}
-      {gf.truckGate && <Rectangle bounds={toBounds(gf.truckGate)} pathOptions={layerStyle('truckGate')} />}
+      {gf.staging && <Polygon positions={shapePositions(gf.staging)} pathOptions={layerStyle('staging')} />}
+      {gf.truckGate && <Polygon positions={shapePositions(gf.truckGate)} pathOptions={layerStyle('truckGate')} />}
 
       <Marker position={[pos.lat, pos.lng]} icon={truckIcon} />
     </MapContainer>

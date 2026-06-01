@@ -1,18 +1,108 @@
 {
   "name": "Anheuser-Busch Brewery - Fort Collins CO",
   "type": "Brewery",
-  "coords": { "lat": 40.62000, "lng": -105.00750 },
+  "coords": {
+    "lat": 40.62,
+    "lng": -105.0075
+  },
   "geofences": {
-    "perimeter": { "south": 40.6140, "west": -105.0110, "north": 40.6255, "east": -105.0010 },
-    "truckGate": { "south": 40.61410, "west": -105.00480, "north": 40.61490, "east": -105.00390 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.623752,
+          "lng": -105.011345
+        },
+        {
+          "lat": 40.623752,
+          "lng": -105.003105
+        },
+        {
+          "lat": 40.613745,
+          "lng": -105.003105
+        },
+        {
+          "lat": 40.613745,
+          "lng": -105.011345
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.61583,
+          "lng": -105.004204
+        },
+        {
+          "lat": 40.61583,
+          "lng": -105.002556
+        },
+        {
+          "lat": 40.614579,
+          "lng": -105.002556
+        },
+        {
+          "lat": 40.614579,
+          "lng": -105.004204
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.61500, "west": -105.01000, "north": 40.61850, "east": -105.00600 },
-      { "south": 40.61800, "west": -105.01000, "north": 40.62050, "east": -105.00750 }
+      {
+        "ring": [
+          {
+            "lat": 40.615413,
+            "lng": -105.010247
+          },
+          {
+            "lat": 40.615413,
+            "lng": -105.004204
+          },
+          {
+            "lat": 40.613745,
+            "lng": -105.004204
+          },
+          {
+            "lat": 40.613745,
+            "lng": -105.010247
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.61650, "west": -105.00800, "north": 40.61850, "east": -105.00600 }
+      {
+        "ring": [
+          {
+            "lat": 40.617915,
+            "lng": -105.010247
+          },
+          {
+            "lat": 40.617915,
+            "lng": -105.005303
+          },
+          {
+            "lat": 40.616664,
+            "lng": -105.005303
+          },
+          {
+            "lat": 40.616664,
+            "lng": -105.010247
+          }
+        ]
+      }
     ],
-    "staging": { "south": 40.61450, "west": -105.00550, "north": 40.61600, "east": -105.00400 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 209,
+        "pano": "50KcsbdXerkqqWx78mwCtg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 209,
+        "pano": "50KcsbdXerkqqWx78mwCtg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 40,
@@ -20,23 +110,40 @@
     "trailerParkingCapacity": 400,
     "truckGateCount": 1,
     "buildingCount": 10,
-    "siteAreaAcres": 267.0,
+    "siteAreaAcres": 267,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@40.62000,-105.00750,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": true, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "scale",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "site": "Fort Collins CO A-B brewery (opened 1988) at 2351 Busch Dr; Budweiser brewery-tour site with Clydesdale paddock. Large rural brewery campus surrounded by farmland, with brewery, distribution warehouse, extensive trailer drop yards, and a large on-site rail yard.",
     "truckGate": "CONFIRMED. z19/z20 satellite shows a dedicated truck checkpoint structure on the south access road - a building/canopy over the truck lane with a truck positioned at it. Clear controlled truck gate, separate from the landscaped visitor/Clydesdale entrance off Busch Dr.",

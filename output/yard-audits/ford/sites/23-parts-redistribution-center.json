@@ -1,39 +1,107 @@
 {
   "name": "Ford - Parts Redistribution Center, Brownstown Township MI",
   "type": "Parts Distribution / Redistribution Center",
-  "coords": { "lat": 42.17640, "lng": -83.28120 },
+  "coords": {
+    "lat": 42.1764,
+    "lng": -83.2812
+  },
   "geofences": {
-    "perimeter": { "south": 42.17250, "west": -83.28720, "north": 42.18150, "east": -83.27550 },
-    "truckGate": { "south": 42.17450, "west": -83.28700, "north": 42.17560, "east": -83.28600 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.178435,
+          "lng": -83.286693
+        },
+        {
+          "lat": 42.178435,
+          "lng": -83.278453
+        },
+        {
+          "lat": 42.172736,
+          "lng": -83.277904
+        },
+        {
+          "lat": 42.172736,
+          "lng": -83.286693
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 42.17260, "west": -83.28560, "north": 42.17420, "east": -83.28000 },
-      { "south": 42.18000, "west": -83.28500, "north": 42.18120, "east": -83.27900 }
+      {
+        "ring": [
+          {
+            "lat": 42.173957,
+            "lng": -83.286693
+          },
+          {
+            "lat": 42.173957,
+            "lng": -83.278453
+          },
+          {
+            "lat": 42.171922,
+            "lng": -83.278453
+          },
+          {
+            "lat": 42.171922,
+            "lng": -83.286693
+          }
+        ]
+      }
     ],
-    "dockAprons": [
-      { "south": 42.17400, "west": -83.28560, "north": 42.17460, "east": -83.28000 },
-      { "south": 42.17920, "west": -83.28480, "north": 42.17990, "east": -83.27900 }
-    ],
-    "staging": { "south": 42.17600, "west": -83.27780, "north": 42.17900, "east": -83.27600 }
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 154,
+        "pano": "u1yYW-6yyksk16_2pX4B9w",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 90, "trailersVisible": 200, "trailerParkingCapacity": 350,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 200.0,
+    "dockDoorCount": 90,
+    "trailersVisible": 200,
+    "trailerParkingCapacity": 350,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 200,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@42.17640,-83.28120,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Continuous chain-link perimeter fence rings the property (confirmed in 2024 Street View along Inkster Rd). Single controlled entry via a long ~600m private access road from Pennsylvania Rd to the north.",
     "guardShack": "Access road is private - Street View does not go down it. A small structure is visible near the building-end yard entrance but cannot be confirmed as a staffed guard booth. Flagged uncertain.",

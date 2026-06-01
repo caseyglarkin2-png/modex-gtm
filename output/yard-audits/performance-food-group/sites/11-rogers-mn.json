@@ -1,17 +1,108 @@
 {
   "name": "Performance Foodservice - Twin Cities (Rogers MN)",
   "type": "Broadline Foodservice Distribution Center",
-  "coords": { "lat": 45.197902, "lng": -93.54305 },
+  "coords": {
+    "lat": 45.197902,
+    "lng": -93.54305
+  },
   "geofences": {
-    "perimeter": { "south": 45.19510, "west": -93.54560, "north": 45.19900, "east": -93.54000 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 45.199063,
+          "lng": -93.545659
+        },
+        {
+          "lat": 45.199063,
+          "lng": -93.542089
+        },
+        {
+          "lat": 45.195773,
+          "lng": -93.542089
+        },
+        {
+          "lat": 45.195773,
+          "lng": -93.545659
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 45.19887,
+          "lng": -93.545385
+        },
+        {
+          "lat": 45.19887,
+          "lng": -93.544423
+        },
+        {
+          "lat": 45.198289,
+          "lng": -93.544423
+        },
+        {
+          "lat": 45.198289,
+          "lng": -93.545385
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 45.19560, "west": -93.54560, "north": 45.19900, "east": -93.54440 }
+      {
+        "ring": [
+          {
+            "lat": 45.197902,
+            "lng": -93.545385
+          },
+          {
+            "lat": 45.197902,
+            "lng": -93.543737
+          },
+          {
+            "lat": 45.195967,
+            "lng": -93.543737
+          },
+          {
+            "lat": 45.195967,
+            "lng": -93.545385
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 45.19560, "west": -93.54440, "north": 45.19900, "east": -93.54330 }
+      {
+        "ring": [
+          {
+            "lat": 45.197902,
+            "lng": -93.543599
+          },
+          {
+            "lat": 45.197902,
+            "lng": -93.542363
+          },
+          {
+            "lat": 45.195967,
+            "lng": -93.542363
+          },
+          {
+            "lat": 45.195967,
+            "lng": -93.543599
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 147,
+        "pano": "gfT4YqqzpbcIj39Bv_tKEQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 147,
+        "pano": "gfT4YqqzpbcIj39Bv_tKEQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 55,
@@ -19,23 +110,39 @@
     "trailerParkingCapacity": 110,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 23.0,
+    "siteAreaAcres": 23,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@45.197902,-93.54305,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "scale"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "No controlled truck gate. The main access driveway runs straight from Commerce Blvd into the property with no barrier arm, sliding gate, or checkpoint pinch-point. The trailer yard along the west side is open to the property road; perimeter is a grassy berm and trees, no security fence.",
     "guardShack": "No guard booth anywhere on the property. Entrance from Street View shows an open driveway directly to the building forecourt with employee parking — no gatehouse structure.",

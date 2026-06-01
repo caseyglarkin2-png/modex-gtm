@@ -1,38 +1,136 @@
 {
   "name": "Frito-Lay - Denver CO",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 39.77066, "lng": -104.85292 },
+  "coords": {
+    "lat": 39.77066,
+    "lng": -104.85292
+  },
   "geofences": {
-    "perimeter": { "south": 39.76840, "west": -104.85620, "north": 39.77470, "east": -104.84900 },
-    "truckGate": { "south": 39.76840, "west": -104.85580, "north": 39.76890, "east": -104.85500 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.774038,
+          "lng": -104.856765
+        },
+        {
+          "lat": 39.774038,
+          "lng": -104.853195
+        },
+        {
+          "lat": 39.771293,
+          "lng": -104.853195
+        },
+        {
+          "lat": 39.771293,
+          "lng": -104.856765
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.771293,
+          "lng": -104.855667
+        },
+        {
+          "lat": 39.771293,
+          "lng": -104.854705
+        },
+        {
+          "lat": 39.770871,
+          "lng": -104.854705
+        },
+        {
+          "lat": 39.770871,
+          "lng": -104.855667
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 39.77000, "west": -104.85620, "north": 39.77470, "east": -104.85420 },
-      { "south": 39.76870, "west": -104.85060, "north": 39.77300, "east": -104.84940 }
+      {
+        "ring": [
+          {
+            "lat": 39.774038,
+            "lng": -104.852233
+          },
+          {
+            "lat": 39.774038,
+            "lng": -104.849899
+          },
+          {
+            "lat": 39.772349,
+            "lng": -104.849899
+          },
+          {
+            "lat": 39.772349,
+            "lng": -104.852233
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.76900, "west": -104.85420, "north": 39.76970, "east": -104.85060 }
+      {
+        "ring": [
+          {
+            "lat": 39.772771,
+            "lng": -104.856353
+          },
+          {
+            "lat": 39.772771,
+            "lng": -104.853744
+          },
+          {
+            "lat": 39.772138,
+            "lng": -104.853744
+          },
+          {
+            "lat": 39.772138,
+            "lng": -104.856353
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 60, "trailersVisible": 180, "trailerParkingCapacity": 260,
-    "truckGateCount": 2, "buildingCount": 3, "siteAreaAcres": 38.0,
+    "dockDoorCount": 60,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 260,
+    "truckGateCount": 2,
+    "buildingCount": 3,
+    "siteAreaAcres": 38,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@39.77066,-104.85292,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["truckGateCount", "guardShack"],
+  "uncertainFields": [
+    "truckGateCount",
+    "guardShack"
+  ],
   "fieldNotes": {
     "addressCorrection": "Roster address (3601 Brighton Blvd) is wrong — that point falls in the redeveloped RiNo district of central Denver with no industrial facility. The real Frito-Lay Denver plant & warehouse is at 3995 Nome St / 11645 E 37th Ave, Denver CO 80239 (Montbello/Gateway), coords 39.77066,-104.85292. Confirmed via web search and satellite.",
     "truckGate": "Street View of the south side shows a chain-link sliding gate across a truck driveway with a STOP sign and a posted sign reading 'GATE 8' — a numbered, controlled truck entry. The entire property is enclosed by chain-link perimeter fence (confirmed on multiple SV faces).",

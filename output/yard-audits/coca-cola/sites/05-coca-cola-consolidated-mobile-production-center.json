@@ -1,17 +1,82 @@
 {
   "name": "Coca-Cola Consolidated - Mobile Production Center, AL",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 30.58700, "lng": -88.16800 },
+  "coords": {
+    "lat": 30.587,
+    "lng": -88.168
+  },
   "geofences": {
-    "perimeter": { "south": 30.58540, "west": -88.17000, "north": 30.58910, "east": -88.16590 },
-    "truckGate": { "south": 30.58600, "west": -88.16930, "north": 30.58650, "east": -88.16870 },
-    "dropYards": [
-      { "south": 30.58620, "west": -88.16760, "north": 30.58800, "east": -88.16640 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 30.589128,
+          "lng": -88.169579
+        },
+        {
+          "lat": 30.58901,
+          "lng": -88.167176
+        },
+        {
+          "lat": 30.586409,
+          "lng": -88.167176
+        },
+        {
+          "lat": 30.586291,
+          "lng": -88.169579
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 30.58700, "west": -88.16760, "north": 30.58850, "east": -88.16660 }
+      {
+        "ring": [
+          {
+            "lat": 30.588182,
+            "lng": -88.169373
+          },
+          {
+            "lat": 30.588123,
+            "lng": -88.167451
+          },
+          {
+            "lat": 30.587768,
+            "lng": -88.167451
+          },
+          {
+            "lat": 30.587828,
+            "lng": -88.169373
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": {
+      "ring": [
+        {
+          "lat": 30.588892,
+          "lng": -88.169511
+        },
+        {
+          "lat": 30.588892,
+          "lng": -88.168343
+        },
+        {
+          "lat": 30.5883,
+          "lng": -88.168343
+        },
+        {
+          "lat": 30.5883,
+          "lng": -88.169511
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 109,
+        "pano": "2WRE0g_jG__Sj45cDYbeHQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 22,
@@ -19,23 +84,45 @@
     "trailerParkingCapacity": 50,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 38.0,
+    "siteAreaAcres": 38,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@30.58700,-88.16800,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoors", "dropArea", "entryLanes", "exitLanes", "trailersVisible"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoors",
+    "dropArea",
+    "entryLanes",
+    "exitLanes",
+    "trailersVisible"
+  ],
   "fieldNotes": {
     "locationCorrection": "Roster address (6350 Rangeline Rd) and operator label (Coca-Cola Consolidated) are incorrect. The Mobile production/distribution facility is operated by Coca-Cola UNITED at 5300 Coca-Cola Rd, Mobile AL 36619 (Tillmans Corner). Audited at the corrected location (30.5851, -88.1688 area).",
     "truckGate": "The facility is enclosed by an ornamental metal perimeter fence (seen in Street View); access is via Coca-Cola Rd. A controlled entry is implied by the fenced perimeter but no formal checkpoint structure is clearly visible in satellite imagery — flagged uncertain.",

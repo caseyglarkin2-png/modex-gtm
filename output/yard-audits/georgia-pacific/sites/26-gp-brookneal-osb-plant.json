@@ -1,15 +1,100 @@
 {
   "name": "GP Brookneal OSB Plant - Brookneal VA",
   "type": "OSB Plant",
-  "coords": { "lat": 37.123200, "lng": -79.032000 },
+  "coords": {
+    "lat": 37.1232,
+    "lng": -79.032
+  },
   "geofences": {
-    "perimeter": { "south": 37.120000, "west": -79.036000, "north": 37.128500, "east": -79.028500 },
-    "truckGate": { "south": 37.126200, "west": -79.033800, "north": 37.127400, "east": -79.032400 },
-    "dropYards": [],
-    "dockAprons": [
-      { "south": 37.122000, "west": -79.031300, "north": 37.123200, "east": -79.030000 }
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.127142,
+          "lng": -79.035296
+        },
+        {
+          "lat": 37.126704,
+          "lng": -79.029803
+        },
+        {
+          "lat": 37.12101,
+          "lng": -79.029253
+        },
+        {
+          "lat": 37.120572,
+          "lng": -79.034197
+        },
+        {
+          "lat": 37.124295,
+          "lng": -79.035845
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 37.121886,
+          "lng": -79.033099
+        },
+        {
+          "lat": 37.121886,
+          "lng": -79.031451
+        },
+        {
+          "lat": 37.120791,
+          "lng": -79.031451
+        },
+        {
+          "lat": 37.120791,
+          "lng": -79.033099
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 37.126266,
+            "lng": -79.034747
+          },
+          {
+            "lat": 37.126047,
+            "lng": -79.032
+          },
+          {
+            "lat": 37.124076,
+            "lng": -79.032275
+          },
+          {
+            "lat": 37.124295,
+            "lng": -79.035021
+          }
+        ]
+      }
     ],
-    "staging": { "south": 37.122200, "west": -79.030400, "north": 37.123600, "east": -79.029400 }
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 37.124076,
+            "lng": -79.033099
+          },
+          {
+            "lat": 37.123857,
+            "lng": -79.029803
+          },
+          {
+            "lat": 37.122762,
+            "lng": -79.030077
+          },
+          {
+            "lat": 37.122981,
+            "lng": -79.033373
+          }
+        ]
+      }
+    ],
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 8,
@@ -17,7 +102,7 @@
     "trailerParkingCapacity": 20,
     "truckGateCount": 1,
     "buildingCount": 6,
-    "siteAreaAcres": 156.0,
+    "siteAreaAcres": 156,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@37.1232,-79.0320,400m/data=!3m1!1e3",
@@ -46,7 +131,16 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoors", "dropArea", "trailerParkingCapacity", "trailersVisible", "scale", "connectivityIssue", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "dockDoors",
+    "dropArea",
+    "trailerParkingCapacity",
+    "trailersVisible",
+    "scale",
+    "connectivityIssue",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Roster coords pointed at downtown Brookneal town center (wrong). Actual GP Brookneal OSB mill is at 11795 Brookneal Hwy (Hwy 501S), Gladys VA 24554 — confirmed via Forest Products Locator and multiple business listings; precise rooftop center ~37.1232,-79.0320.",
     "truckGate": "Street View along the plant access road shows a divided entrance with a structure, flags and signage ~150m in from the road bend — a controlled mill entrance typical of OSB plants.",

@@ -1,37 +1,134 @@
 {
   "name": "Caterpillar - Lafayette IN Large Engine Center",
   "type": "Manufacturing plant (large engines; $725M campus expansion underway)",
-  "coords": { "lat": 40.4138, "lng": -86.8460 },
+  "coords": {
+    "lat": 40.4138,
+    "lng": -86.846
+  },
   "geofences": {
-    "perimeter": { "south": 40.4095, "west": -86.8512, "north": 40.4178, "east": -86.8420 },
-    "truckGate": { "south": 40.4118, "west": -86.8470, "north": 40.4128, "east": -86.8458 },
-    "dropYards": [
-      { "south": 40.4118, "west": -86.8475, "north": 40.4135, "east": -86.8452 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.416728,
+          "lng": -86.85012
+        },
+        {
+          "lat": 40.416728,
+          "lng": -86.844352
+        },
+        {
+          "lat": 40.411918,
+          "lng": -86.844352
+        },
+        {
+          "lat": 40.411918,
+          "lng": -86.85012
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.412336,
+          "lng": -86.847099
+        },
+        {
+          "lat": 40.412336,
+          "lng": -86.845451
+        },
+        {
+          "lat": 40.4115,
+          "lng": -86.845451
+        },
+        {
+          "lat": 40.4115,
+          "lng": -86.847099
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 40.4125, "west": -86.8480, "north": 40.4138, "east": -86.8455 }
+      {
+        "ring": [
+          {
+            "lat": 40.4138,
+            "lng": -86.849571
+          },
+          {
+            "lat": 40.4138,
+            "lng": -86.845176
+          },
+          {
+            "lat": 40.412964,
+            "lng": -86.845176
+          },
+          {
+            "lat": 40.412964,
+            "lng": -86.849571
+          }
+        ]
+      }
     ],
-    "staging": { "south": 40.4112, "west": -86.8470, "north": 40.4122, "east": -86.8450 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 193,
+        "pano": "4t3Rp5o9sqd6_Ct56uIAQA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 193,
+        "pano": "4t3Rp5o9sqd6_Ct56uIAQA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 22, "trailersVisible": 24, "trailerParkingCapacity": 45,
-    "truckGateCount": 1, "buildingCount": 4, "siteAreaAcres": 230.0,
+    "dockDoorCount": 22,
+    "trailersVisible": 24,
+    "trailerParkingCapacity": 45,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 230,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@40.4138,-86.8460,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "truckGate", "entryLanes", "exitLanes", "scale", "dockDoors", "railServed", "multiStep"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "truckGate",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "dockDoors",
+    "railServed",
+    "multiStep"
+  ],
   "fieldNotes": {
     "location": "Roster geocode (40.4165,-86.8443) is ROOFTOP and lands at the Caterpillar Large Engine Center campus. Locked the 1.6M sq ft main building center at 40.4138,-86.8460. Confirmed: long Caterpillar-branded engine plant building seen from South St in Street View, plus a separate customer/training building to the SE, employee parking, tank farms and a substation on the SW.",
     "truckGate": "Truck/dock operations are on the south/SE face of the building - a large paved truck yard with canopied dock aprons, trailers, and extensive material laydown reached by a long internal road. The South St (north) frontage is open office/employee access with no fence; the truck area is set deep on internal roads, implying a controlled service gate inside the campus.",

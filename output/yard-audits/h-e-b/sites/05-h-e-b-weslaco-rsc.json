@@ -1,18 +1,112 @@
 {
   "name": "H-E-B Weslaco RSC - Weslaco TX",
   "type": "Retail Support Center / Distribution Center",
-  "coords": { "lat": 26.162800, "lng": -98.002200 },
+  "coords": {
+    "lat": 26.1628,
+    "lng": -98.0022
+  },
   "geofences": {
-    "perimeter": { "south": 26.160800, "west": -98.006000, "north": 26.165800, "east": -97.999500 },
-    "truckGate": { "south": 26.164900, "west": -98.004700, "north": 26.165500, "east": -98.004000 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 26.165758,
+          "lng": -98.005908
+        },
+        {
+          "lat": 26.165635,
+          "lng": -98.000003
+        },
+        {
+          "lat": 26.162184,
+          "lng": -98.000003
+        },
+        {
+          "lat": 26.162184,
+          "lng": -98.005908
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 26.162184,
+          "lng": -98.004947
+        },
+        {
+          "lat": 26.162184,
+          "lng": -98.004123
+        },
+        {
+          "lat": 26.161814,
+          "lng": -98.004123
+        },
+        {
+          "lat": 26.161814,
+          "lng": -98.004947
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 26.163400, "west": -98.005000, "north": 26.165400, "east": -98.003600 },
-      { "south": 26.161200, "west": -98.004600, "north": 26.162400, "east": -98.002400 }
+      {
+        "ring": [
+          {
+            "lat": 26.164526,
+            "lng": -98.005221
+          },
+          {
+            "lat": 26.164526,
+            "lng": -98.003436
+          },
+          {
+            "lat": 26.16354,
+            "lng": -98.003436
+          },
+          {
+            "lat": 26.16354,
+            "lng": -98.005221
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 26.161600, "west": -98.003600, "north": 26.164400, "east": -98.002900 }
+      {
+        "ring": [
+          {
+            "lat": 26.165265,
+            "lng": -98.003024
+          },
+          {
+            "lat": 26.165265,
+            "lng": -98.000552
+          },
+          {
+            "lat": 26.1628,
+            "lng": -98.000552
+          },
+          {
+            "lat": 26.1628,
+            "lng": -98.000964
+          },
+          {
+            "lat": 26.165019,
+            "lng": -98.003436
+          }
+        ]
+      }
     ],
-    "staging": { "south": 26.164900, "west": -98.004600, "north": 26.165600, "east": -98.003600 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 37,
+        "pano": "4--KBfnjWln5zD6wXw0Uqg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 37,
+        "pano": "4--KBfnjWln5zD6wXw0Uqg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 70,
@@ -20,23 +114,44 @@
     "trailerParkingCapacity": 170,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 60.0,
+    "siteAreaAcres": 60,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@26.162800,-98.002200,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "shipRcvSeparate", "scale", "multiStep"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate",
+    "scale",
+    "multiStep"
+  ],
   "fieldNotes": {
     "location": "Roster coordinates (26.163308, -98.003269) had a 3912 m geocode shift flag but actually land correctly on the campus. Web search confirmed H-E-B Weslaco Retail Distribution Support Center, 1100 Panther Dr, Weslaco TX 78596 — the RGV distribution + transportation/dispatch hub at ~26.1638, -98.0014.",
     "truckGate": "Campus is enclosed by a chain-link perimeter fence (confirmed in Street View, 2026-04). Main truck entrance off Panther Dr (north) with an H-E-B sign and a defined driveway with bollards. truckGate true.",

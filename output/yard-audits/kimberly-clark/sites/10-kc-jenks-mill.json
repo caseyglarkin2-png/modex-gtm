@@ -1,17 +1,104 @@
 {
   "name": "K-C Jenks Mill - Jenks OK",
   "type": "Tissue paper mill (Cottonelle, Scott bathroom tissue) with regional distribution center",
-  "coords": { "lat": 35.971500, "lng": -95.927200 },
+  "coords": {
+    "lat": 35.9715,
+    "lng": -95.9272
+  },
   "geofences": {
-    "perimeter": { "south": 35.964500, "west": -95.932500, "north": 35.977500, "east": -95.919500 },
-    "truckGate": { "south": 35.966700, "west": -95.930700, "north": 35.967500, "east": -95.929700 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.971945,
+          "lng": -95.930496
+        },
+        {
+          "lat": 35.9715,
+          "lng": -95.923355
+        },
+        {
+          "lat": 35.968833,
+          "lng": -95.921158
+        },
+        {
+          "lat": 35.96661,
+          "lng": -95.923355
+        },
+        {
+          "lat": 35.96661,
+          "lng": -95.929947
+        },
+        {
+          "lat": 35.969722,
+          "lng": -95.931045
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.967943,
+          "lng": -95.931045
+        },
+        {
+          "lat": 35.967943,
+          "lng": -95.929397
+        },
+        {
+          "lat": 35.966832,
+          "lng": -95.929397
+        },
+        {
+          "lat": 35.966832,
+          "lng": -95.931045
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 35.968000, "west": -95.925500, "north": 35.972500, "east": -95.921500 }
+      {
+        "ring": [
+          {
+            "lat": 35.968833,
+            "lng": -95.925827
+          },
+          {
+            "lat": 35.96861,
+            "lng": -95.921707
+          },
+          {
+            "lat": 35.967054,
+            "lng": -95.921707
+          },
+          {
+            "lat": 35.967277,
+            "lng": -95.925827
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.969300, "west": -95.930000, "north": 35.970200, "east": -95.927500 }
+      {
+        "ring": [
+          {
+            "lat": 35.969277,
+            "lng": -95.929947
+          },
+          {
+            "lat": 35.969055,
+            "lng": -95.923904
+          },
+          {
+            "lat": 35.967943,
+            "lng": -95.923904
+          },
+          {
+            "lat": 35.968166,
+            "lng": -95.929947
+          }
+        ]
+      }
     ],
-    "staging": { "south": 35.966800, "west": -95.930200, "north": 35.968200, "east": -95.929000 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 45,
@@ -19,23 +106,44 @@
     "trailerParkingCapacity": 140,
     "truckGateCount": 1,
     "buildingCount": 5,
-    "siteAreaAcres": 320.0,
+    "siteAreaAcres": 320,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.971500,-95.927200,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": true, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "scale", "dockDoorCount", "entryLanes", "exitLanes", "railServed", "multiStep"],
+  "uncertainFields": [
+    "guardShack",
+    "scale",
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes",
+    "railServed",
+    "multiStep"
+  ],
   "fieldNotes": {
     "location": "Roster supplied only a city-level address and a coordinate (35.9953,-95.9727) that landed in a Jenks residential subdivision ~10 km from the mill. Directory addresses (13252 S Yale Pl / 13219 S Kimberly-Clark Pl) geocode poorly. Resolved via a documented detail (Tulsa World): the mill 'sits on the Arkansas River between Jenks and Bixby' — a 1.8M sq ft factory on 342 acres. Found and confirmed the large riverside industrial complex at ~35.9715,-95.9272: a multi-building tissue mill + regional DC overlooking the Arkansas River, consistent with the facility (opened 1990).",
     "truckGate": "Controlled truck entrance at the SW corner where the long access road from the public road reaches the mill. z19 imagery shows a pinch-point with a gatehouse structure, marked lanes, and a parked truck in a staging position; Street View confirms a small gate building with a truck at the access road. Classed truckGate true.",

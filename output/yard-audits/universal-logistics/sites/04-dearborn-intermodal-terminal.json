@@ -1,16 +1,94 @@
 {
   "name": "Universal Intermodal Services - Dearborn Terminal - Dearborn MI",
   "type": "Intermodal / Drayage Terminal (owned)",
-  "coords": { "lat": 42.321600, "lng": -83.154800 },
+  "coords": {
+    "lat": 42.3216,
+    "lng": -83.1548
+  },
   "geofences": {
-    "perimeter": { "south": 42.319500, "west": -83.157000, "north": 42.323500, "east": -83.152500 },
-    "truckGate": { "south": 42.321300, "west": -83.157100, "north": 42.321900, "east": -83.156500 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.325661,
+          "lng": -83.157547
+        },
+        {
+          "lat": 42.324849,
+          "lng": -83.153152
+        },
+        {
+          "lat": 42.317945,
+          "lng": -83.156173
+        },
+        {
+          "lat": 42.319163,
+          "lng": -83.160293
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.319163,
+          "lng": -83.159469
+        },
+        {
+          "lat": 42.31896,
+          "lng": -83.158371
+        },
+        {
+          "lat": 42.318249,
+          "lng": -83.158645
+        },
+        {
+          "lat": 42.318452,
+          "lng": -83.159744
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 42.321800, "west": -83.155400, "north": 42.323400, "east": -83.152600 },
-      { "south": 42.319600, "west": -83.156200, "north": 42.321400, "east": -83.153000 }
+      {
+        "ring": [
+          {
+            "lat": 42.323834,
+            "lng": -83.157547
+          },
+          {
+            "lat": 42.323326,
+            "lng": -83.1548
+          },
+          {
+            "lat": 42.320382,
+            "lng": -83.155899
+          },
+          {
+            "lat": 42.320889,
+            "lng": -83.158645
+          }
+        ]
+      }
     ],
     "dockAprons": [],
-    "staging": { "south": 42.321200, "west": -83.156600, "north": 42.322000, "east": -83.155600 }
+    "staging": {
+      "ring": [
+        {
+          "lat": 42.325052,
+          "lng": -83.157272
+        },
+        {
+          "lat": 42.324545,
+          "lng": -83.154525
+        },
+        {
+          "lat": 42.323631,
+          "lng": -83.154937
+        },
+        {
+          "lat": 42.324138,
+          "lng": -83.157684
+        }
+      ]
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 0,
@@ -18,23 +96,44 @@
     "trailerParkingCapacity": 450,
     "truckGateCount": 2,
     "buildingCount": 3,
-    "siteAreaAcres": 41.0,
+    "siteAreaAcres": 41,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@42.321600,-83.154800,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "NONE", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "NONE",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "scale", "entryLanes", "exitLanes", "truckGateCount", "railServed"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "truckGateCount",
+    "railServed"
+  ],
   "fieldNotes": {
     "facility": "Universal Intermodal Services drayage / intermodal terminal at 4440 Wyoming Ave (St), Dearborn MI — a 10-K named owned terminal property. Per Universal Intermodal's own description these are 'secure container yards coupled with maintenance and repair facilities offering container storage.' Confirmed via loadmatch.com directory and a Universal-branded sign visible at the yard entrance in 2025 Street View. The roster geocode landed on a small red-roofed office building on the west side of Wyoming Ave; the operational terminal yard is the large fenced container/chassis lot on the east side of Wyoming.",
     "type": "This is an intermodal/drayage CONTAINER YARD, not a dock-door warehouse — it stores and stages ocean/domestic containers and chassis and contains a container maintenance & repair (M&R) building. dockDoors classified NONE accordingly.",

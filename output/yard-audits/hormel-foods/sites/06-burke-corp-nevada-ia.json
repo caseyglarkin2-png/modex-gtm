@@ -1,18 +1,116 @@
 {
   "name": "Burke Corp. - Nevada IA",
   "type": "Production Facility",
-  "coords": { "lat": 42.0085, "lng": -93.4392 },
+  "coords": {
+    "lat": 42.0085,
+    "lng": -93.4392
+  },
   "geofences": {
-    "perimeter": { "south": 42.00730, "west": -93.44180, "north": 42.01070, "east": -93.43650 },
-    "truckGate": { "south": 42.01000, "west": -93.44150, "north": 42.01055, "east": -93.44090 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.00952,
+          "lng": -93.443869
+        },
+        {
+          "lat": 42.009724,
+          "lng": -93.43714
+        },
+        {
+          "lat": 42.007684,
+          "lng": -93.436728
+        },
+        {
+          "lat": 42.007275,
+          "lng": -93.438513
+        },
+        {
+          "lat": 42.007275,
+          "lng": -93.443869
+        },
+        {
+          "lat": 42.0085,
+          "lng": -93.444144
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.0085,
+          "lng": -93.444281
+        },
+        {
+          "lat": 42.008602,
+          "lng": -93.443457
+        },
+        {
+          "lat": 42.00799,
+          "lng": -93.44332
+        },
+        {
+          "lat": 42.007888,
+          "lng": -93.444144
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 42.00855, "west": -93.43720, "north": 42.00910, "east": -93.43660 },
-      { "south": 42.01000, "west": -93.44060, "north": 42.01030, "east": -93.43900 }
+      {
+        "ring": [
+          {
+            "lat": 42.009418,
+            "lng": -93.444007
+          },
+          {
+            "lat": 42.00952,
+            "lng": -93.441672
+          },
+          {
+            "lat": 42.008806,
+            "lng": -93.441535
+          },
+          {
+            "lat": 42.008704,
+            "lng": -93.443869
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 42.00790, "west": -93.43850, "north": 42.00840, "east": -93.43740 }
+      {
+        "ring": [
+          {
+            "lat": 42.009214,
+            "lng": -93.440573
+          },
+          {
+            "lat": 42.009316,
+            "lng": -93.437552
+          },
+          {
+            "lat": 42.00901,
+            "lng": -93.437552
+          },
+          {
+            "lat": 42.008908,
+            "lng": -93.440573
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 78,
+        "pano": "CAoSF0NJSE0wb2dLRUlDQWdJQ182dnJRNndF",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 78,
+        "pano": "CAoSF0NJSE0wb2dLRUlDQWdJQ182dnJRNndF",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 35,
@@ -20,7 +118,7 @@
     "trailerParkingCapacity": 70,
     "truckGateCount": 2,
     "buildingCount": 4,
-    "siteAreaAcres": 41.0,
+    "siteAreaAcres": 41,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@42.0085,-93.4392,400m/data=!3m1!1e3",
@@ -49,7 +147,14 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "truckGate", "guardShack", "entryLanes", "exitLanes", "shipRcvSeparate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "truckGate",
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "location": "Roster coords (42.0268,-93.4482) were ~2.3km off in a residential district. Correct facility is 1516 S D Avenue, Nevada IA 50201, confirmed via Ames Chamber/Panjiva/USDA FSIS listings (Burke Marketing Corporation). Locked center ~42.0085,-93.4392.",
     "truckGate": "No barrier arm, sliding gate, or pinch-point checkpoint visible at any perimeter road junction. Driveways from the bounding public roads run open into the campus paved yard. Marked false.",

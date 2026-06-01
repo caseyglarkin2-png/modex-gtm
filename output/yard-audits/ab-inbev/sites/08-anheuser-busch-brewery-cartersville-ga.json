@@ -1,19 +1,128 @@
 {
   "name": "Anheuser-Busch Brewery - Cartersville GA",
   "type": "Brewery",
-  "coords": { "lat": 34.25700, "lng": -84.78300 },
+  "coords": {
+    "lat": 34.257,
+    "lng": -84.783
+  },
   "geofences": {
-    "perimeter": { "south": 34.25320, "west": -84.78870, "north": 34.26150, "east": -84.77900 },
-    "truckGate": { "south": 34.25350, "west": -84.78680, "north": 34.25420, "east": -84.78580 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.259951,
+          "lng": -84.785747
+        },
+        {
+          "lat": 34.259838,
+          "lng": -84.779704
+        },
+        {
+          "lat": 34.253822,
+          "lng": -84.779979
+        },
+        {
+          "lat": 34.254503,
+          "lng": -84.786021
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.254276,
+          "lng": -84.783
+        },
+        {
+          "lat": 34.254276,
+          "lng": -84.781901
+        },
+        {
+          "lat": 34.253595,
+          "lng": -84.781901
+        },
+        {
+          "lat": 34.253595,
+          "lng": -84.783
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 34.25800, "west": -84.78350, "north": 34.26000, "east": -84.78050 },
-      { "south": 34.25750, "west": -84.78050, "north": 34.25920, "east": -84.77900 }
+      {
+        "ring": [
+          {
+            "lat": 34.259724,
+            "lng": -84.783275
+          },
+          {
+            "lat": 34.259497,
+            "lng": -84.779979
+          },
+          {
+            "lat": 34.258589,
+            "lng": -84.780116
+          },
+          {
+            "lat": 34.258816,
+            "lng": -84.783412
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 34.255638,
+            "lng": -84.785197
+          },
+          {
+            "lat": 34.255524,
+            "lng": -84.783
+          },
+          {
+            "lat": 34.25473,
+            "lng": -84.783137
+          },
+          {
+            "lat": 34.254843,
+            "lng": -84.785335
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 34.25800, "west": -84.78420, "north": 34.25900, "east": -84.78300 },
-      { "south": 34.25620, "west": -84.78280, "north": 34.25720, "east": -84.78180 }
+      {
+        "ring": [
+          {
+            "lat": 34.258589,
+            "lng": -84.784373
+          },
+          {
+            "lat": 34.258476,
+            "lng": -84.781901
+          },
+          {
+            "lat": 34.257795,
+            "lng": -84.782039
+          },
+          {
+            "lat": 34.257908,
+            "lng": -84.784511
+          }
+        ]
+      }
     ],
-    "staging": { "south": 34.25750, "west": -84.78480, "north": 34.25840, "east": -84.78380 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 63,
+        "pano": "5cY_hevXcZPhmt3mBvgp5w",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 63,
+        "pano": "5cY_hevXcZPhmt3mBvgp5w",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 60,
@@ -21,23 +130,40 @@
     "trailerParkingCapacity": 260,
     "truckGateCount": 1,
     "buildingCount": 4,
-    "siteAreaAcres": 70.0,
+    "siteAreaAcres": 70,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.25700,-84.78300,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": true, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "guardShack", "dockDoorCount"],
+  "uncertainFields": [
+    "scale",
+    "guardShack",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "location": "Confirmed Anheuser-Busch Cartersville Brewery, 100 Busch Dr NE. Roster coords were ~4.9 km off (geocode movedMeters 4905). Locked center on the main brewery/warehouse mass at 34.25700,-84.78300. Street View at the public-road intersection (34.2538,-84.7863) shows the 'Budweiser' lettering on the brewhouse confirming identity.",
     "truckGate": "Long private access road runs ~700 m NNE from the public road; the entry has a divided entry/exit with chevron-channelized lanes and a small structure in the median where the road splits. Controlled entrance to a fenced industrial campus.",

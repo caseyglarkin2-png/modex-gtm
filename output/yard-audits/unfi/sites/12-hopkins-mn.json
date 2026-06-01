@@ -1,19 +1,56 @@
 {
   "name": "UNFI - Hopkins MN DC",
   "type": "Distribution Center",
-  "coords": { "lat": 44.91900, "lng": -93.40550 },
+  "coords": {
+    "lat": 44.919,
+    "lng": -93.4055
+  },
   "geofences": {
-    "perimeter": { "south": 44.91540, "west": -93.41450, "north": 44.92120, "east": -93.40180 },
-    "truckGate": { "south": 44.91950, "west": -93.40380, "north": 44.92030, "east": -93.40280 },
-    "dropYards": [
-      { "south": 44.91960, "west": -93.40620, "north": 44.92070, "east": -93.40320 },
-      { "south": 44.91610, "west": -93.41400, "north": 44.91860, "east": -93.41050 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 44.920167,
+          "lng": -93.408247
+        },
+        {
+          "lat": 44.919778,
+          "lng": -93.402204
+        },
+        {
+          "lat": 44.915888,
+          "lng": -93.402753
+        },
+        {
+          "lat": 44.916277,
+          "lng": -93.408796
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 44.91950, "west": -93.40640, "north": 44.92000, "east": -93.40300 },
-      { "south": 44.91640, "west": -93.41320, "north": 44.91790, "east": -93.41050 }
+      {
+        "ring": [
+          {
+            "lat": 44.919583,
+            "lng": -93.407972
+          },
+          {
+            "lat": 44.919194,
+            "lng": -93.403303
+          },
+          {
+            "lat": 44.918611,
+            "lng": -93.40344
+          },
+          {
+            "lat": 44.919,
+            "lng": -93.408109
+          }
+        ]
+      }
     ],
-    "staging": { "south": 44.91920, "west": -93.40360, "north": 44.92010, "east": -93.40250 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 130,
@@ -21,7 +58,7 @@
     "trailerParkingCapacity": 200,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 150.0,
+    "siteAreaAcres": 150,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@44.91900,-93.40550,400m/data=!3m1!1e3",
@@ -50,7 +87,12 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes", "scale"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes",
+    "scale"
+  ],
   "fieldNotes": {
     "resolution": "Roster coord (44.91914, -93.40308, ROOFTOP) landed on the east edge of the main DC building. Confirmed UNFI/SUPERVALU Distribution Center, 300 2nd Ave S, Hopkins MN 55343 via Waze, dcontrol, TruckMap, businessyab and an NLRB case (UNFI Wholesale Inc, formerly SuperValu Wholesale Operations Inc). Legacy-SuperValu conventional-grocery DC - the Minneapolis-metro hub.",
     "truckGate": "Truck checkpoint confirmed. z19-z20 imagery shows a distinct red-roofed guard booth straddling the inbound truck lane on the NE side of the main building, with a long covered canopy/awning over the lane. The property is perimeter-fenced (chain-link visible in 2025 Street View).",

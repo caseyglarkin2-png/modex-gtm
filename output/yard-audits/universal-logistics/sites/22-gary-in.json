@@ -1,9 +1,31 @@
 {
   "name": "Universal Intermodal Services - Gary Terminal - Gary IN",
   "type": "Intermodal / Drayage Terminal / Container Yard (owned)",
-  "coords": { "lat": 41.6020, "lng": -87.3370 },
+  "coords": {
+    "lat": 41.602,
+    "lng": -87.337
+  },
   "geofences": {
-    "perimeter": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.604054,
+          "lng": -87.339747
+        },
+        {
+          "lat": 41.604054,
+          "lng": -87.335627
+        },
+        {
+          "lat": 41.600973,
+          "lng": -87.335627
+        },
+        {
+          "lat": 41.600973,
+          "lng": -87.339747
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [],
@@ -15,7 +37,7 @@
     "trailerParkingCapacity": 0,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 0.0,
+    "siteAreaAcres": 0,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.602,-87.337,400m/data=!3m1!1e3",
@@ -44,7 +66,28 @@
     "multiStep": false
   },
   "confidence": "low",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging", "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether", "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity", "dockDoors", "dropArea", "shipRcvSeparate", "multipleFacilities", "scale", "dropYard", "multiStep"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "multipleFacilities",
+    "scale",
+    "dropYard",
+    "multiStep"
+  ],
   "fieldNotes": {
     "siteResolution": "UNRESOLVED — facility could not be located. No street address and no coordinates in the roster; the ULH 2025 10-K names Gary IN only as an owned terminal/yard / container-yard property. Extensive web research (Universal Intermodal service-locations page, loadmatch intermodal directory, FMCSA SAFER, IANA terminal lists, company directories) returned NO street address for a Universal Intermodal / Universal Logistics terminal in Gary IN. FMCSA lists only the Warren MI corporate address. The loadmatch Indiana terminal directory shows no Gary facility and no Universal Intermodal terminal in Indiana. A satellite scan of the Gary IN industrial corridor found no positively identifiable Universal-operated drayage/container yard. The coordinate (41.602, -87.337) is a representative point in the Gary IN industrial area, NOT a confirmed facility location.",
     "resolutionFlag": "FLAGGED FOR HUMAN REVIEW — the Universal Intermodal Gary IN terminal/container-yard has no findable public street address or imagery. All classification fields and yard metrics are unknown placeholders. This site needs a verified address (e.g. from internal ULH property records) before it can be audited.",

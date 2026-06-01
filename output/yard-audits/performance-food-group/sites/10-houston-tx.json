@@ -1,17 +1,75 @@
 {
   "name": "Performance Foodservice - Houston TX",
   "type": "Broadline Foodservice Distribution Center",
-  "coords": { "lat": 29.97850, "lng": -95.38680 },
+  "coords": {
+    "lat": 29.9785,
+    "lng": -95.3868
+  },
   "geofences": {
-    "perimeter": { "south": 29.97560, "west": -95.38830, "north": 29.98080, "east": -95.38470 },
-    "truckGate": { "south": 29.97880, "west": -95.38930, "north": 29.97935, "east": -95.38870 },
-    "dropYards": [
-      { "south": 29.97640, "west": -95.38830, "north": 29.97830, "east": -95.38700 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.97969,
+          "lng": -95.388585
+        },
+        {
+          "lat": 29.97969,
+          "lng": -95.385564
+        },
+        {
+          "lat": 29.975883,
+          "lng": -95.385564
+        },
+        {
+          "lat": 29.975883,
+          "lng": -95.388585
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 29.976597,
+          "lng": -95.388723
+        },
+        {
+          "lat": 29.976597,
+          "lng": -95.387761
+        },
+        {
+          "lat": 29.975883,
+          "lng": -95.387761
+        },
+        {
+          "lat": 29.975883,
+          "lng": -95.388723
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 29.97620, "west": -95.38700, "north": 29.98000, "east": -95.38640 }
+      {
+        "ring": [
+          {
+            "lat": 29.979333,
+            "lng": -95.388173
+          },
+          {
+            "lat": 29.976716,
+            "lng": -95.388173
+          },
+          {
+            "lat": 29.976716,
+            "lng": -95.387761
+          },
+          {
+            "lat": 29.979333,
+            "lng": -95.387761
+          }
+        ]
+      }
     ],
-    "staging": { "south": 29.97900, "west": -95.38830, "north": 29.98000, "east": -95.38700 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 60,
@@ -19,23 +77,43 @@
     "trailerParkingCapacity": 120,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 41.0,
+    "siteAreaAcres": 41,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@29.97850,-95.38680,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "dockDoors", "dropArea", "trailerParkingCapacity", "postGateStaging", "scale"],
+  "uncertainFields": [
+    "guardShack",
+    "dockDoors",
+    "dropArea",
+    "trailerParkingCapacity",
+    "postGateStaging",
+    "scale"
+  ],
   "fieldNotes": {
     "site": "Imagery captured mid-construction (Dec 2024 Street View; satellite shows building substantially complete with most of the site still bare graded dirt). Counts are honest projections for the completed facility, not finished-state observations.",
     "truckGate": "Dedicated truck entrance on the SW corner off Farrell Rd: chain-link sliding gate across the truck lane with facility signage ('NORTH HOUS...'). A separate car/visitor entrance ~120m north is signed 'NO TRUCKS' and has a yellow barrier arm. Trucks have their own controlled gate.",

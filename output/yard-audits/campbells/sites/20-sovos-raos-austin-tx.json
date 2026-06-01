@@ -1,17 +1,92 @@
 {
   "name": "Sovos / Rao's - Austin TX",
   "type": "Manufacturing - premium pasta sauces / frozen Italian foods (Michael Angelo's Gourmet Foods; Rao's Made for Home)",
-  "coords": { "lat": 30.47105, "lng": -97.67700 },
+  "coords": {
+    "lat": 30.47105,
+    "lng": -97.677
+  },
   "geofences": {
-    "perimeter": { "south": 30.47015, "west": -97.67830, "north": 30.47230, "east": -97.67600 },
-    "truckGate": { "south": 30.47075, "west": -97.67625, "north": 30.47120, "east": -97.67575 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 30.471642,
+          "lng": -97.678099
+        },
+        {
+          "lat": 30.471583,
+          "lng": -97.676313
+        },
+        {
+          "lat": 30.470695,
+          "lng": -97.676313
+        },
+        {
+          "lat": 30.470458,
+          "lng": -97.677
+        },
+        {
+          "lat": 30.470636,
+          "lng": -97.678099
+        },
+        {
+          "lat": 30.471287,
+          "lng": -97.678167
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 30.47030, "west": -97.67710, "north": 30.47085, "east": -97.67600 }
+      {
+        "ring": [
+          {
+            "lat": 30.47105,
+            "lng": -97.677
+          },
+          {
+            "lat": 30.47102,
+            "lng": -97.676313
+          },
+          {
+            "lat": 30.470695,
+            "lng": -97.676331
+          },
+          {
+            "lat": 30.470725,
+            "lng": -97.677017
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 30.47055, "west": -97.67790, "north": 30.47100, "east": -97.67620 }
+      {
+        "ring": [
+          {
+            "lat": 30.47105,
+            "lng": -97.677961
+          },
+          {
+            "lat": 30.47102,
+            "lng": -97.677137
+          },
+          {
+            "lat": 30.470843,
+            "lng": -97.677154
+          },
+          {
+            "lat": 30.470872,
+            "lng": -97.677978
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 308,
+        "pano": "NFwEbhZAv8xW9_AnRKEnNg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 22,
@@ -24,18 +99,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@30.47105,-97.677,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible"
+  ],
   "fieldNotes": {
     "location": "Roster gave only 'Austin, TX' (city centroid). The Sovos/Rao's Austin operation is the Michael Angelo's Gourmet Foods plant at 200 Michael Angelo Way, Austin TX 78728 (Wells Branch / north Austin) - where Sovos produced Rao's Made for Home and Michael Angelo's frozen Italian foods. Confirmed via web research and Street View signage reading 'MICHAEL ANGELO'S Gourmet Foods, Inc.' Google Maps places 200 Michael Angelo Way at 30.4713683,-97.6768125; locked plant center 30.47105,-97.67700.",
     "truckGate": "The truck dock yard on the south side of the building is enclosed by chain-link fence (confirmed in Street View). A sliding gate controls the truck-yard access opening on the east side; classified truckGate true.",

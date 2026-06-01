@@ -1,33 +1,77 @@
 {
   "name": "Angry Orchard Innovation Cidery - Walden NY",
   "type": "Cidery / production facility (company-owned 60-acre apple orchard + Innovation Cider House; specialty/small-batch cider production)",
-  "coords": { "lat": 41.5901, "lng": -74.2240 },
+  "coords": {
+    "lat": 41.5901,
+    "lng": -74.224
+  },
   "geofences": {
-    "perimeter": { "south": 41.5878, "west": -74.2262, "north": 41.5928, "east": -74.2196 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.590305,
+          "lng": -74.224961
+        },
+        {
+          "lat": 41.590203,
+          "lng": -74.223039
+        },
+        {
+          "lat": 41.589073,
+          "lng": -74.223176
+        },
+        {
+          "lat": 41.589176,
+          "lng": -74.225099
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 1, "trailersVisible": 0, "trailerParkingCapacity": 0,
-    "truckGateCount": 0, "buildingCount": 2, "siteAreaAcres": 75.6,
+    "dockDoorCount": 1,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 0,
+    "buildingCount": 2,
+    "siteAreaAcres": 75.6,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.5901,-74.224,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "0-10", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": true, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": true,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["connectivityIssue", "dockDoorCount", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "connectivityIssue",
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "No truck gate. The Innovation Cider House sits in the middle of a company-owned apple orchard reached by a long winding private driveway off Albany Post Road. The driveway is open with no barrier arm, sliding gate, or checkpoint. The orchard is ringed by agricultural deer fencing, not a security fence.",
     "guardShack": "No guard booth — the only structure is the 15,000 sq ft timber-frame cider house with a tasting room and small-batch production. This is a hospitality/destination + R&D facility.",

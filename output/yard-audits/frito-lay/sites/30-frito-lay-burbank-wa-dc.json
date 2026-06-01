@@ -1,33 +1,173 @@
 {
   "name": "Frito-Lay - Burbank WA (DC)",
   "type": "Distribution Center",
-  "coords": { "lat": 46.20650, "lng": -119.01500 },
+  "coords": {
+    "lat": 46.2065,
+    "lng": -119.015
+  },
   "geofences": {
-    "perimeter": { "south": 46.20500, "west": -119.01700, "north": 46.20850, "east": -119.01350 },
-    "truckGate": null,
-    "dropYards": [],
-    "dockAprons": [],
-    "staging": null
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 46.208021,
+          "lng": -119.017747
+        },
+        {
+          "lat": 46.208021,
+          "lng": -119.014313
+        },
+        {
+          "lat": 46.20612,
+          "lng": -119.014313
+        },
+        {
+          "lat": 46.20612,
+          "lng": -119.017747
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 46.206405,
+          "lng": -119.014657
+        },
+        {
+          "lat": 46.206405,
+          "lng": -119.014176
+        },
+        {
+          "lat": 46.206167,
+          "lng": -119.014176
+        },
+        {
+          "lat": 46.206167,
+          "lng": -119.014657
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 46.207736,
+            "lng": -119.015824
+          },
+          {
+            "lat": 46.207736,
+            "lng": -119.014176
+          },
+          {
+            "lat": 46.20726,
+            "lng": -119.014176
+          },
+          {
+            "lat": 46.20726,
+            "lng": -119.015824
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 46.206975,
+            "lng": -119.015275
+          },
+          {
+            "lat": 46.206975,
+            "lng": -119.014588
+          },
+          {
+            "lat": 46.2065,
+            "lng": -119.014588
+          },
+          {
+            "lat": 46.2065,
+            "lng": -119.015275
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 308,
+        "pano": "PpWd0502C9mkpA9P3EGBIA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 308,
+        "pano": "PpWd0502C9mkpA9P3EGBIA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 0, "trailersVisible": 0, "trailerParkingCapacity": 0,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 0.0,
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 0,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@46.20650,-119.01500,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "NONE", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "low",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging", "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether", "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity", "dockDoors", "dropArea", "shipRcvSeparate", "connectivityIssue", "multipleFacilities", "scale", "dropYard", "multiStep", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "buildingCount", "siteAreaAcres", "railServed"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "connectivityIssue",
+    "multipleFacilities",
+    "scale",
+    "dropYard",
+    "multiStep",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "buildingCount",
+    "siteAreaAcres",
+    "railServed"
+  ],
   "fieldNotes": {
     "locationProblem": "Roster gave no street address and an APPROXIMATE geocode. Web search (The Registry, Crexi, Syndicated Equities, Neagley+Chase) places the facility at 458 Second Avenue, Burbank, WA — a NEWLY CONSTRUCTED ~107,200 sq ft pre-engineered-metal-building (PEMB) Frito-Lay distribution warehouse, listed for sale in early 2024.",
     "imageryGap": "The address '458 Second Avenue' could not be geocoded to a precise rooftop. Probing the Burbank industrial park near the US-12/SR-124 interchange found: (a) the 'Precision' building (confirmed NOT Frito-Lay via its rooftop sign in 2026 Street View), (b) several unbranded smaller warehouses, and (c) multiple still-vacant lots. Current Maxar/USDA-FPAC satellite imagery appears to PREDATE the completed Frito-Lay DC — no ~107k sq ft building matching the listing, and no Frito-Lay-branded structure, could be positively identified.",

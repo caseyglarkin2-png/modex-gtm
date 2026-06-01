@@ -1,17 +1,116 @@
 {
   "name": "Nabisco Portland Bakery - Portland OR",
   "type": "Manufacturing - biscuit/cookie bakery",
-  "coords": { "lat": 45.58110, "lng": -122.66520 },
+  "coords": {
+    "lat": 45.5811,
+    "lng": -122.6652
+  },
   "geofences": {
-    "perimeter": { "south": 45.57970, "west": -122.66800, "north": 45.58250, "east": -122.66250 },
-    "truckGate": { "south": 45.58040, "west": -122.66340, "north": 45.58095, "east": -122.66280 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 45.582157,
+          "lng": -122.667123
+        },
+        {
+          "lat": 45.581773,
+          "lng": -122.664101
+        },
+        {
+          "lat": 45.580139,
+          "lng": -122.664376
+        },
+        {
+          "lat": 45.578985,
+          "lng": -122.665475
+        },
+        {
+          "lat": 45.579274,
+          "lng": -122.667947
+        },
+        {
+          "lat": 45.581484,
+          "lng": -122.667397
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 45.579658,
+          "lng": -122.667947
+        },
+        {
+          "lat": 45.579562,
+          "lng": -122.667123
+        },
+        {
+          "lat": 45.578985,
+          "lng": -122.66726
+        },
+        {
+          "lat": 45.579082,
+          "lng": -122.668084
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 45.57950, "west": -122.66480, "north": 45.58030, "east": -122.66300 }
+      {
+        "ring": [
+          {
+            "lat": 45.581965,
+            "lng": -122.66726
+          },
+          {
+            "lat": 45.581677,
+            "lng": -122.664925
+          },
+          {
+            "lat": 45.580619,
+            "lng": -122.6652
+          },
+          {
+            "lat": 45.580908,
+            "lng": -122.667397
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 45.58050, "west": -122.66380, "north": 45.58120, "east": -122.66280 }
+      {
+        "ring": [
+          {
+            "lat": 45.580523,
+            "lng": -122.667123
+          },
+          {
+            "lat": 45.580331,
+            "lng": -122.6652
+          },
+          {
+            "lat": 45.579754,
+            "lng": -122.665337
+          },
+          {
+            "lat": 45.579947,
+            "lng": -122.66726
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 42,
+        "pano": "CAoSFkNJSE0wb2dLRUlDQWdJRGE2YmZzV1E.",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 42,
+        "pano": "CAoSFkNJSE0wb2dLRUlDQWdJRGE2YmZzV1E.",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 18,
@@ -19,7 +118,7 @@
     "trailerParkingCapacity": 60,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 33.0,
+    "siteAreaAcres": 33,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@45.58110,-122.66520,400m/data=!3m1!1e3",
@@ -48,7 +147,13 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "scale", "dropArea", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "scale",
+    "dropArea",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Legacy urban plant. The SE truck-dock court is open access off a side street - Street View (2025-07) shows trucks/trailers parked at dock doors with no barrier arm or gate at the public road. Main bakery is perimeter-fenced along NE Columbia Blvd, but the active truck-dock court has open driveway access. Called false (open driveway, no road-side control); flagged uncertain.",
     "guardShack": "A small square roofed structure sits internally near the dock court (~45.5808,-122.6634) - possibly a booth or covered checkpoint, but it is not positioned at a road-side gate. No clear staffed booth at a controlled truck entrance; called false, flagged uncertain.",

@@ -1,15 +1,75 @@
 {
   "name": "Kenco Devens DC - Devens MA",
   "type": "Distribution Center / Northeast Warehouse",
-  "coords": { "lat": 42.54620, "lng": -71.59450 },
+  "coords": {
+    "lat": 42.5462,
+    "lng": -71.5945
+  },
   "geofences": {
-    "perimeter": { "south": 42.54470, "west": -71.59680, "north": 42.54790, "east": -71.59250 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.547616,
+          "lng": -71.595461
+        },
+        {
+          "lat": 42.547363,
+          "lng": -71.592852
+        },
+        {
+          "lat": 42.545441,
+          "lng": -71.593401
+        },
+        {
+          "lat": 42.545694,
+          "lng": -71.596011
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [
-      { "south": 42.54520, "west": -71.59440, "north": 42.54700, "east": -71.59300 }
+      {
+        "ring": [
+          {
+            "lat": 42.547363,
+            "lng": -71.593676
+          },
+          {
+            "lat": 42.547313,
+            "lng": -71.592989
+          },
+          {
+            "lat": 42.545593,
+            "lng": -71.59347
+          },
+          {
+            "lat": 42.545694,
+            "lng": -71.594157
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 42.54500, "west": -71.59620, "north": 42.54620, "east": -71.59470 }
+      {
+        "ring": [
+          {
+            "lat": 42.547515,
+            "lng": -71.595461
+          },
+          {
+            "lat": 42.547363,
+            "lng": -71.594157
+          },
+          {
+            "lat": 42.545593,
+            "lng": -71.5945
+          },
+          {
+            "lat": 42.545745,
+            "lng": -71.595805
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -24,18 +84,37 @@
   },
   "mapsUrl": "https://www.google.com/maps/@42.54620,-71.59450,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "railServed", "dockDoorCount", "dropArea"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "railServed",
+    "dockDoorCount",
+    "dropArea"
+  ],
   "fieldNotes": {
     "location": "Roster coords (42.546746,-71.594485, geocode ROOFTOP) landed on a long warehouse building at 50 Independence Drive, Devens MA - confirmed correct. The facility is also branded 'Kenco's USG Boston' (a Kenco distribution operation for USG / United States Gypsum building products), per multiple business listings. Audit locked on the building footprint at 42.54620,-71.59450.",
     "truckGate": "A chain-link perimeter fence rings the property (visible in Aug 2023 Street View). No barrier arm or sliding/swing gate structure was observed at the driveway off Independence Drive; the Devens commerce-park roads are open public roads and the property entrances appear open. truckGate marked false (fence present, no controlled checkpoint structure confirmed); flagged uncertain.",

@@ -1,17 +1,82 @@
 {
   "name": "Pactiv Evergreen - Kinston NC Plant",
   "type": "Manufacturing Plant / Distribution (Foodservice paper packaging; ex-Dopaco facility)",
-  "coords": { "lat": 35.271813, "lng": -77.667863 },
+  "coords": {
+    "lat": 35.271813,
+    "lng": -77.667863
+  },
   "geofences": {
-    "perimeter": { "south": 35.269700, "west": -77.669600, "north": 35.273600, "east": -77.665800 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.273719,
+          "lng": -77.669099
+        },
+        {
+          "lat": 35.273607,
+          "lng": -77.66649
+        },
+        {
+          "lat": 35.271252,
+          "lng": -77.666764
+        },
+        {
+          "lat": 35.271365,
+          "lng": -77.669236
+        }
+      ]
+    },
     "truckGate": null,
-    "dropYards": [
-      { "south": 35.270700, "west": -77.666800, "north": 35.272700, "east": -77.665900 }
-    ],
+    "dropYards": [],
     "dockAprons": [
-      { "south": 35.270800, "west": -77.667100, "north": 35.272700, "east": -77.666300 }
+      {
+        "ring": [
+          {
+            "lat": 35.272374,
+            "lng": -77.668962
+          },
+          {
+            "lat": 35.272318,
+            "lng": -77.668206
+          },
+          {
+            "lat": 35.271365,
+            "lng": -77.668275
+          },
+          {
+            "lat": 35.271421,
+            "lng": -77.66903
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": {
+      "ring": [
+        {
+          "lat": 35.27114,
+          "lng": -77.668893
+        },
+        {
+          "lat": 35.271084,
+          "lng": -77.66752
+        },
+        {
+          "lat": 35.27058,
+          "lng": -77.667588
+        },
+        {
+          "lat": 35.270636,
+          "lng": -77.668962
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 338,
+        "pano": "1nZVDzjZ11TE2DFI_uih7A",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 30,
@@ -19,7 +84,7 @@
     "trailerParkingCapacity": 50,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 23.0,
+    "siteAreaAcres": 23,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.271813,-77.667863,400m/data=!3m1!1e3",
@@ -48,7 +113,12 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "RESOLVED. The roster geocode (35.262664, -77.581635, APPROXIMATE, moved 2103 m) landed in downtown Kinston - wrong. The facility is actually in the Lenoir County industrial park WEST of Kinston, off Enterprise Blvd near West Pharmaceutical Services and Sanderson Farms. Confirmed via property listings (LoopNet/Reonomy/clustrmaps: 1447 Enterprise Blvd, ~400,000 SF, built 1994, 23.02-acre site; clustrmaps also lists prior occupant 'Dopaco Inc' - a paper/foodservice packaging firm absorbed into the Pactiv/Reynolds family) and fresh 2026-03 Street View showing the plant on Enterprise Blvd. Locked center 35.271813, -77.667863 on the large white-roofed building.",
     "truckGate": "Open campus. Fresh 2026-03 Street View along Enterprise Blvd shows NO perimeter fence and NO gate - the road runs open up to the east dock apron and the front employee parking. Driveways are uncontrolled. truckGate false.",

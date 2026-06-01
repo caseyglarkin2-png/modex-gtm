@@ -1,39 +1,127 @@
 {
   "name": "General Mills - Cedar Rapids IA (Wenig Rd)",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 41.93220, "lng": -91.72020 },
+  "coords": {
+    "lat": 41.9322,
+    "lng": -91.7202
+  },
   "geofences": {
-    "perimeter": { "south": 41.92850, "west": -91.72700, "north": 41.93580, "east": -91.71350 },
-    "truckGate": { "south": 41.93390, "west": -91.71830, "north": 41.93470, "east": -91.71720 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.93833,
+          "lng": -91.726517
+        },
+        {
+          "lat": 41.936082,
+          "lng": -91.715805
+        },
+        {
+          "lat": 41.930565,
+          "lng": -91.718827
+        },
+        {
+          "lat": 41.933017,
+          "lng": -91.730088
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 41.93280, "west": -91.72620, "north": 41.93450, "east": -91.72330 },
-      { "south": 41.93100, "west": -91.72540, "north": 41.93280, "east": -91.72350 }
+      {
+        "ring": [
+          {
+            "lat": 41.934243,
+            "lng": -91.725144
+          },
+          {
+            "lat": 41.93363,
+            "lng": -91.721573
+          },
+          {
+            "lat": 41.931178,
+            "lng": -91.722123
+          },
+          {
+            "lat": 41.931791,
+            "lng": -91.725693
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.93120, "west": -91.72440, "north": 41.93220, "east": -91.72210 },
-      { "south": 41.93250, "west": -91.71920, "north": 41.93340, "east": -91.71700 }
+      {
+        "ring": [
+          {
+            "lat": 41.933017,
+            "lng": -91.725693
+          },
+          {
+            "lat": 41.931587,
+            "lng": -91.718827
+          },
+          {
+            "lat": 41.93077,
+            "lng": -91.719101
+          },
+          {
+            "lat": 41.9322,
+            "lng": -91.725968
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 266,
+        "pano": "Fte9dGyZxLb9mmloikXtmg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 55, "trailersVisible": 170, "trailerParkingCapacity": 200,
-    "truckGateCount": 1, "buildingCount": 6, "siteAreaAcres": 224.0,
+    "dockDoorCount": 55,
+    "trailersVisible": 170,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 224,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@41.93220,-91.72020,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "scale"
+  ],
   "fieldNotes": {
     "ROSTER_ERROR": "The roster address for idx 1 (1000 Wenig Rd NE, Cedar Rapids) is incorrect. Satellite imagery of that point shows the Cedar Rapids Water Pollution Control Facility (wastewater treatment - circular clarifier/aeration tanks), NOT a General Mills plant. Web research (Cedar Rapids Metro Economic Alliance directory) confirms there is only ONE General Mills facility in Cedar Rapids: the cereal plant at 4800 Edgewood Rd SW. idx 1 and idx 2 are therefore the SAME physical facility. This file audits that actual GM plant; it is a duplicate of idx 2.",
     "location": "Audited the real General Mills Cedar Rapids cereal plant at 4800 Edgewood Rd SW (41.9322,-91.7202). The Wenig Rd NE coordinate in the roster was discarded as erroneous.",

@@ -1,37 +1,126 @@
 {
   "name": "Campbell's Soup - Maxton NC",
   "type": "Manufacturing - thermal/aseptic soup",
-  "coords": { "lat": 34.770800, "lng": -79.325200 },
+  "coords": {
+    "lat": 34.7708,
+    "lng": -79.3252
+  },
   "geofences": {
-    "perimeter": { "south": 34.76600, "west": -79.32920, "north": 34.77560, "east": -79.32150 },
-    "truckGate": { "south": 34.77400, "west": -79.32345, "north": 34.77470, "east": -79.32270 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.775312,
+          "lng": -79.327947
+        },
+        {
+          "lat": 34.77441,
+          "lng": -79.321904
+        },
+        {
+          "lat": 34.769672,
+          "lng": -79.322453
+        },
+        {
+          "lat": 34.765385,
+          "lng": -79.323003
+        },
+        {
+          "lat": 34.765385,
+          "lng": -79.326299
+        },
+        {
+          "lat": 34.7708,
+          "lng": -79.328496
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 34.76610, "west": -79.32760, "north": 34.76960, "east": -79.32320 }
+      {
+        "ring": [
+          {
+            "lat": 34.775312,
+            "lng": -79.327397
+          },
+          {
+            "lat": 34.774861,
+            "lng": -79.3252
+          },
+          {
+            "lat": 34.772831,
+            "lng": -79.325475
+          },
+          {
+            "lat": 34.773282,
+            "lng": -79.327672
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 34.76920, "west": -79.32560, "north": 34.77060, "east": -79.32400 }
+      {
+        "ring": [
+          {
+            "lat": 34.767416,
+            "lng": -79.326573
+          },
+          {
+            "lat": 34.76719,
+            "lng": -79.323003
+          },
+          {
+            "lat": 34.766062,
+            "lng": -79.32314
+          },
+          {
+            "lat": 34.766288,
+            "lng": -79.326711
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 40, "trailersVisible": 95, "trailerParkingCapacity": 130,
-    "truckGateCount": 1, "buildingCount": 8, "siteAreaAcres": 165.0,
+    "dockDoorCount": 40,
+    "trailersVisible": 95,
+    "trailerParkingCapacity": 130,
+    "truckGateCount": 1,
+    "buildingCount": 8,
+    "siteAreaAcres": 165,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.770800,-79.325200,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "scale", "shipRcvSeparate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "scale",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Main entrance off NC-71 N; entrance road splits, guarded checkpoint visible at z20-21 ~34.7743,-79.3231",
     "guardShack": "Small guard-booth structure with dark roof at the checkpoint apron, ~1-vehicle footprint, confirmed at z21",

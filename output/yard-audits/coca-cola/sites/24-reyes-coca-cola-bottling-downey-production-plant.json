@@ -1,38 +1,126 @@
 {
   "name": "Reyes Coca-Cola Bottling - Downey Production Plant, CA",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 33.93400, "lng": -118.12880 },
+  "coords": {
+    "lat": 33.934,
+    "lng": -118.1288
+  },
   "geofences": {
-    "perimeter": { "south": 33.93180, "west": -118.13150, "north": 33.93580, "east": -118.12560 },
-    "truckGate": { "south": 33.93170, "west": -118.12980, "north": 33.93230, "east": -118.12880 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.934912,
+          "lng": -118.129899
+        },
+        {
+          "lat": 33.934912,
+          "lng": -118.126053
+        },
+        {
+          "lat": 33.931265,
+          "lng": -118.126053
+        },
+        {
+          "lat": 33.931265,
+          "lng": -118.129899
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 33.93210, "west": -118.13130, "north": 33.93320, "east": -118.12900 },
-      { "south": 33.93420, "west": -118.12780, "north": 33.93560, "east": -118.12560 }
+      {
+        "ring": [
+          {
+            "lat": 33.934684,
+            "lng": -118.129624
+          },
+          {
+            "lat": 33.93457,
+            "lng": -118.126603
+          },
+          {
+            "lat": 33.933772,
+            "lng": -118.126603
+          },
+          {
+            "lat": 33.933886,
+            "lng": -118.129624
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.93230, "west": -118.12950, "north": 33.93330, "east": -118.12700 }
+      {
+        "ring": [
+          {
+            "lat": 33.933316,
+            "lng": -118.129624
+          },
+          {
+            "lat": 33.933316,
+            "lng": -118.126603
+          },
+          {
+            "lat": 33.932633,
+            "lng": -118.126603
+          },
+          {
+            "lat": 33.932633,
+            "lng": -118.129624
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 141,
+        "pano": "6WRiu23jO3tOczwtfWBxcg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 55, "trailersVisible": 80, "trailerParkingCapacity": 120,
-    "truckGateCount": 2, "buildingCount": 4, "siteAreaAcres": 40.0,
+    "dockDoorCount": 55,
+    "trailersVisible": 80,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 2,
+    "buildingCount": 4,
+    "siteAreaAcres": 40,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@33.93400,-118.12880,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "scale"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "scale"
+  ],
   "fieldNotes": {
     "location": "Roster names this the 'Downey Production Plant' but supplied address '12320 Smith Ave, Santa Fe Springs CA 90670' with coords (33.9489,-118.0727). That address/coords land on a generic warehouse street in Santa Fe Springs with no Coca-Cola signage. Web/business research (Buzzfile, OpenGovUS LA business registry) gives the Reyes Coca-Cola Bottling Downey manufacturing address as 11634 Patton Rd, Downey CA 90241. Satellite probing of that location revealed a large bottling/distribution complex, and Street View confirmed it: Coca-Cola red branding stripe on the building plus Coca-Cola-branded red trailers parked inside the fenced yard.",
     "truckGate": "The plant perimeter is fully secured - masonry walls and chain-link fencing topped with barbed wire. The truck yard is entered through a chain-link rolling/sliding gate (seen open in Street View) - controlled truck gate confirmed. truckGate true.",

@@ -1,20 +1,104 @@
 {
   "name": "K-C Hendersonville Nonwovens Plant (Berkeley Mill) - Hendersonville NC",
   "type": "Nonwovens manufacturing plant (materials for Depend, Poise, U by Kotex)",
-  "coords": { "lat": 35.34630, "lng": -82.46880 },
+  "coords": {
+    "lat": 35.3463,
+    "lng": -82.4688
+  },
   "geofences": {
-    "perimeter": { "south": 35.34250, "west": -82.47230, "north": 35.35000, "east": -82.46550 },
-    "truckGate": { "south": 35.34860, "west": -82.47020, "north": 35.34940, "east": -82.46880 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.347868,
+          "lng": -82.471821
+        },
+        {
+          "lat": 35.34742,
+          "lng": -82.467701
+        },
+        {
+          "lat": 35.345404,
+          "lng": -82.467152
+        },
+        {
+          "lat": 35.343164,
+          "lng": -82.467976
+        },
+        {
+          "lat": 35.343388,
+          "lng": -82.471272
+        },
+        {
+          "lat": 35.34574,
+          "lng": -82.472096
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.3463,
+          "lng": -82.471821
+        },
+        {
+          "lat": 35.3463,
+          "lng": -82.470997
+        },
+        {
+          "lat": 35.34574,
+          "lng": -82.470997
+        },
+        {
+          "lat": 35.34574,
+          "lng": -82.471821
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 35.34620, "west": -82.46820, "north": 35.34830, "east": -82.46580 },
-      { "south": 35.34280, "west": -82.47120, "north": 35.34480, "east": -82.46900 },
-      { "south": 35.34380, "west": -82.46900, "north": 35.34540, "east": -82.46680 }
+      {
+        "ring": [
+          {
+            "lat": 35.347644,
+            "lng": -82.469349
+          },
+          {
+            "lat": 35.34742,
+            "lng": -82.466877
+          },
+          {
+            "lat": 35.3463,
+            "lng": -82.467015
+          },
+          {
+            "lat": 35.346524,
+            "lng": -82.469487
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.34440, "west": -82.47090, "north": 35.34560, "east": -82.46950 },
-      { "south": 35.34560, "west": -82.46760, "north": 35.34660, "east": -82.46620 }
+      {
+        "ring": [
+          {
+            "lat": 35.346076,
+            "lng": -82.471272
+          },
+          {
+            "lat": 35.345852,
+            "lng": -82.468251
+          },
+          {
+            "lat": 35.34518,
+            "lng": -82.468388
+          },
+          {
+            "lat": 35.345404,
+            "lng": -82.471409
+          }
+        ]
+      }
     ],
-    "staging": { "south": 35.34780, "west": -82.46900, "north": 35.34860, "east": -82.46780 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 36,
@@ -22,7 +106,7 @@
     "trailerParkingCapacity": 320,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 78.0,
+    "siteAreaAcres": 78,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@35.34630,-82.46880,400m/data=!3m1!1e3",
@@ -51,7 +135,12 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "shipRcvSeparate"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "location": "Roster lat/lng (35.318728,-82.460953, APPROXIMATE) landed in downtown Hendersonville - wrong. Web research (PR Newswire, Henderson County EDP, Yelp) gave 32 Smyth Ave (the historic Balfour Mills / Berkeley Mill site). Satellite confirmed a large nonwovens manufacturing plant ~3 km NW of downtown. Locked center 35.34630,-82.46880.",
     "truckGate": "A dedicated K-C wayfinding sign on the public access road reads 'Kimberly-Clark - TRUCK ENTRANCE - 1/4 MILE NORTH - DOCKS 1-6'. The whole property is enclosed by a continuous chain-link perimeter fence; the truck entrance is a controlled, signed gate on the internal access road set well back from public roads.",

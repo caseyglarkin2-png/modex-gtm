@@ -1,39 +1,97 @@
 {
   "name": "CJ Logistics - Riverside CA",
   "type": "Distribution Center",
-  "coords": { "lat": 33.93700, "lng": -117.30720 },
+  "coords": {
+    "lat": 33.937,
+    "lng": -117.3072
+  },
   "geofences": {
-    "perimeter": { "south": 33.9352, "west": -117.3088, "north": 33.9388, "east": -117.3050 },
-    "truckGate": { "south": 33.9355, "west": -117.3066, "north": 33.9361, "east": -117.3059 },
-    "dropYards": [
-      { "south": 33.9353, "west": -117.3088, "north": 33.9383, "east": -117.3082 },
-      { "south": 33.9352, "west": -117.3082, "north": 33.9358, "east": -117.3062 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.939734,
+          "lng": -117.309809
+        },
+        {
+          "lat": 33.939677,
+          "lng": -117.305827
+        },
+        {
+          "lat": 33.935747,
+          "lng": -117.305895
+        },
+        {
+          "lat": 33.935804,
+          "lng": -117.309878
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 33.9357, "west": -117.3085, "north": 33.9385, "east": -117.3081 },
-      { "south": 33.9357, "west": -117.3065, "north": 33.9385, "east": -117.3061 }
+      {
+        "ring": [
+          {
+            "lat": 33.938937,
+            "lng": -117.309741
+          },
+          {
+            "lat": 33.938908,
+            "lng": -117.309191
+          },
+          {
+            "lat": 33.936089,
+            "lng": -117.309226
+          },
+          {
+            "lat": 33.936117,
+            "lng": -117.309775
+          }
+        ]
+      }
     ],
-    "staging": { "south": 33.9354, "west": -117.3064, "north": 33.9360, "east": -117.3057 }
+    "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 105, "trailersVisible": 110, "trailerParkingCapacity": 170,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 34.8,
+    "dockDoorCount": 105,
+    "trailersVisible": 110,
+    "trailerParkingCapacity": 170,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 34.8,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.93700,-117.30720,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "scale"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "Truck entrance at the S/SE side of the building is a controlled checkpoint - the truck lane has anti-tailgating chevron markings and the yard is enclosed (zoom-19/21 satellite).",
     "guardShack": "A small orange-roofed guard-booth structure sits at the truck-yard entrance on the south side of the building (zoom-19 satellite at ~33.9358,-117.3063), beside the checkpoint lane.",

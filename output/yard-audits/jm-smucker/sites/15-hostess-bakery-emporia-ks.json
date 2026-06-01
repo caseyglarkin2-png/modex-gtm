@@ -1,19 +1,63 @@
 {
   "name": "Hostess Bakery - Emporia KS",
   "type": "Manufacturing - Sweet baked snacks (Hostess)",
-  "coords": { "lat": 38.4173, "lng": -96.2192 },
+  "coords": {
+    "lat": 38.4173,
+    "lng": -96.2192
+  },
   "geofences": {
-    "perimeter": { "south": 38.4153, "west": -96.2216, "north": 38.4197, "east": -96.2168 },
-    "truckGate": { "south": 38.41685, "west": -96.21755, "north": 38.41715, "east": -96.21720 },
-    "dropYards": [
-      { "south": 38.4185, "west": -96.2208, "north": 38.4197, "east": -96.2185 },
-      { "south": 38.4160, "west": -96.2200, "north": 38.4172, "east": -96.2192 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.419022,
+          "lng": -96.220299
+        },
+        {
+          "lat": 38.418806,
+          "lng": -96.217552
+        },
+        {
+          "lat": 38.416224,
+          "lng": -96.217827
+        },
+        {
+          "lat": 38.416439,
+          "lng": -96.220573
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 38.4163, "west": -96.2192, "north": 38.4172, "east": -96.2182 },
-      { "south": 38.4172, "west": -96.2200, "north": 38.4180, "east": -96.2190 }
+      {
+        "ring": [
+          {
+            "lat": 38.4173,
+            "lng": -96.220299
+          },
+          {
+            "lat": 38.417085,
+            "lng": -96.217827
+          },
+          {
+            "lat": 38.416439,
+            "lng": -96.217964
+          },
+          {
+            "lat": 38.416654,
+            "lng": -96.220436
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 29,
+        "pano": "LDwK5XI-fP18yg8DgeJohg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 40,
@@ -26,18 +70,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@38.4173,-96.2192,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "guardShack"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "guardShack"
+  ],
   "fieldNotes": {
     "truckGate": "Open driveway openings from Industrial Rd; no barrier arm or sliding gate seen in any Street View pass (2025 imagery). South property edge has chain-link fence but the road frontage is open lawn/parking.",
     "guardShack": "No staffed booth observed at any entrance. Office front is open with employee parking; truck dock driveways are open. Low residual uncertainty since some panos are inside the property.",

@@ -1,17 +1,75 @@
 {
   "name": "SC Johnson Professional Plant - Stanley NC",
   "type": "Manufacturing Plant (Professional - hand care / floor care)",
-  "coords": { "lat": 35.34030, "lng": -81.07800 },
+  "coords": {
+    "lat": 35.3403,
+    "lng": -81.078
+  },
   "geofences": {
-    "perimeter": { "south": 35.33930, "west": -81.07980, "north": 35.34130, "east": -81.07620 },
-    "truckGate": null,
-    "dropYards": [
-      { "south": 35.33970, "west": -81.07760, "north": 35.34060, "east": -81.07640 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.341084,
+          "lng": -81.078343
+        },
+        {
+          "lat": 35.340524,
+          "lng": -81.075528
+        },
+        {
+          "lat": 35.339068,
+          "lng": -81.076077
+        },
+        {
+          "lat": 35.33974,
+          "lng": -81.078687
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.340076,
+          "lng": -81.078549
+        },
+        {
+          "lat": 35.34002,
+          "lng": -81.078206
+        },
+        {
+          "lat": 35.33974,
+          "lng": -81.078275
+        },
+        {
+          "lat": 35.339796,
+          "lng": -81.078618
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 35.34040, "west": -81.07740, "north": 35.34110, "east": -81.07620 }
+      {
+        "ring": [
+          {
+            "lat": 35.34086,
+            "lng": -81.077588
+          },
+          {
+            "lat": 35.34058,
+            "lng": -81.076352
+          },
+          {
+            "lat": 35.340244,
+            "lng": -81.076489
+          },
+          {
+            "lat": 35.340524,
+            "lng": -81.077725
+          }
+        ]
+      }
     ],
-    "staging": { "south": 35.34050, "west": -81.07760, "north": 35.34120, "east": -81.07640 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 12,
@@ -19,23 +77,41 @@
     "trailerParkingCapacity": 20,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 14.0,
+    "siteAreaAcres": 14,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@35.3403,-81.078,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "railServed", "siteAreaAcres"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "railServed",
+    "siteAreaAcres"
+  ],
   "fieldNotes": {
     "addressCorrection": "Roster address '100 Technology Center Dr' is incorrect. Verified address is 1100 S Highway 27 (NC-27), Stanley, NC 28164 — the former Deb USA plant, now SC Johnson Professional USA (Waze, LoopNet APN 176716, FDA/Panjiva records). Roster coordinate (35.353526, -81.090317) was a city-centroid in downtown Stanley; corrected to the plant at ~35.3403, -81.0780.",
     "truckGate": "No barrier arm, gate or checkpoint. The dock face fronts NC-27 directly with an open paved truck apron; trucks pull in straight off the highway. truckGate false.",

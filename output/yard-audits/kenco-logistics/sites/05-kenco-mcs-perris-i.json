@@ -1,19 +1,128 @@
 {
   "name": "Kenco MCS Perris I - Perris CA",
   "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
-  "coords": { "lat": 33.84200, "lng": -117.22890 },
+  "coords": {
+    "lat": 33.842,
+    "lng": -117.2289
+  },
   "geofences": {
-    "perimeter": { "south": 33.8404, "west": -117.2310, "north": 33.8434, "east": -117.2270 },
-    "truckGate": { "south": 33.84260, "west": -117.23110, "north": 33.84305, "east": -117.23050 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.842798,
+          "lng": -117.231166
+        },
+        {
+          "lat": 33.842798,
+          "lng": -117.226977
+        },
+        {
+          "lat": 33.840688,
+          "lng": -117.226977
+        },
+        {
+          "lat": 33.840688,
+          "lng": -117.231166
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.842456,
+          "lng": -117.227183
+        },
+        {
+          "lat": 33.842456,
+          "lng": -117.22684
+        },
+        {
+          "lat": 33.842,
+          "lng": -117.22684
+        },
+        {
+          "lat": 33.842,
+          "lng": -117.227183
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 33.8425, "west": -117.2303, "north": 33.8434, "east": -117.2271 },
-      { "south": 33.8404, "west": -117.2308, "north": 33.8411, "east": -117.2271 }
+      {
+        "ring": [
+          {
+            "lat": 33.842741,
+            "lng": -117.230273
+          },
+          {
+            "lat": 33.842741,
+            "lng": -117.227389
+          },
+          {
+            "lat": 33.842456,
+            "lng": -117.227389
+          },
+          {
+            "lat": 33.842456,
+            "lng": -117.230273
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.841087,
+            "lng": -117.231097
+          },
+          {
+            "lat": 33.841087,
+            "lng": -117.227389
+          },
+          {
+            "lat": 33.840745,
+            "lng": -117.227389
+          },
+          {
+            "lat": 33.840745,
+            "lng": -117.231097
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.8424, "west": -117.2305, "north": 33.8428, "east": -117.2273 },
-      { "south": 33.8410, "west": -117.2305, "north": 33.8413, "east": -117.2273 }
+      {
+        "ring": [
+          {
+            "lat": 33.841316,
+            "lng": -117.231097
+          },
+          {
+            "lat": 33.841316,
+            "lng": -117.227389
+          },
+          {
+            "lat": 33.841087,
+            "lng": -117.227389
+          },
+          {
+            "lat": 33.841087,
+            "lng": -117.231097
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 249,
+        "pano": "qLpAQHpz34-l3wrPRsUVrw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 249,
+        "pano": "qLpAQHpz34-l3wrPRsUVrw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 90,
@@ -26,18 +135,38 @@
   },
   "mapsUrl": "https://www.google.com/maps/@33.84200,-117.22890,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "trailersVisible", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "The N and S truck courts are bounded by chain-link fencing (fence line visible in z20 satellite and 2018 Street View along the entrance driveway). Truck access is a single private driveway off Indian Avenue into the fenced court. No barrier-arm hardware could be positively resolved at the road in available imagery, but the fenced court with a single controlled driveway reads as a truck gate. Medium confidence on the exact gate hardware.",
     "guardShack": "No guard booth visible at the driveway entrance or anywhere on the property in z20/z21 satellite or Street View.",

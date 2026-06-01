@@ -1,13 +1,77 @@
 {
   "name": "GP Anchor Packaging Plant - Janesville WI",
   "type": "Packaging/Film Plant",
-  "coords": { "lat": 42.71205, "lng": -89.00955 },
+  "coords": {
+    "lat": 42.71205,
+    "lng": -89.00955
+  },
   "geofences": {
-    "perimeter": { "south": 42.7108, "west": -89.0107, "north": 42.7130, "east": -89.0083 },
-    "truckGate": { "south": 42.71210, "west": -89.00930, "north": 42.71260, "east": -89.00870 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.714068,
+          "lng": -89.009207
+        },
+        {
+          "lat": 42.713664,
+          "lng": -89.007627
+        },
+        {
+          "lat": 42.711798,
+          "lng": -89.008451
+        },
+        {
+          "lat": 42.712151,
+          "lng": -89.009825
+        },
+        {
+          "lat": 42.713311,
+          "lng": -89.00955
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.712555,
+          "lng": -89.009207
+        },
+        {
+          "lat": 42.712454,
+          "lng": -89.008795
+        },
+        {
+          "lat": 42.712151,
+          "lng": -89.008932
+        },
+        {
+          "lat": 42.712252,
+          "lng": -89.009344
+        }
+      ]
+    },
     "dropYards": [],
     "dockAprons": [
-      { "south": 42.71200, "west": -89.00910, "north": 42.71270, "east": -89.00850 }
+      {
+        "ring": [
+          {
+            "lat": 42.713564,
+            "lng": -89.009138
+          },
+          {
+            "lat": 42.713261,
+            "lng": -89.008039
+          },
+          {
+            "lat": 42.713009,
+            "lng": -89.008177
+          },
+          {
+            "lat": 42.713311,
+            "lng": -89.009275
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -22,18 +86,35 @@
   },
   "mapsUrl": "https://www.google.com/maps/@42.71205,-89.00955,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "urbanRural"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "urbanRural"
+  ],
   "fieldNotes": {
     "location": "Resolved to the former Panoramic Inc. plant (acquired by Anchor Packaging, which Georgia-Pacific acquired Oct 2025) at 1500 N Parker Dr, Janesville WI, in the Arrow Park industrial complex (former Parker Pen site). The roster's geocoded point (42.6442,-88.9605) was ~9 km SSE in open farmland and wrong. Building centroid locked at 42.71205,-89.00955.",
     "truckGate": "Open industrial-park facility. North Parker Drive has no gate or fence; the building's parking lots and dock-side driveways are open with no barrier arm, sliding gate, or checkpoint. Confirmed in Street View 2019-08 from multiple headings. False.",

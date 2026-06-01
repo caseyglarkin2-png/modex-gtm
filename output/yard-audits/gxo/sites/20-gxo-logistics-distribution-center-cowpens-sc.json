@@ -1,17 +1,54 @@
 {
   "name": "GXO Logistics Distribution Center - Cowpens SC",
   "type": "Distribution Center",
-  "coords": { "lat": 35.060500, "lng": -81.812000 },
+  "coords": {
+    "lat": 35.0605,
+    "lng": -81.812
+  },
   "geofences": {
-    "perimeter": { "south": 35.056500, "west": -81.814800, "north": 35.063500, "east": -81.810500 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.061624,
+          "lng": -81.814609
+        },
+        {
+          "lat": 35.062074,
+          "lng": -81.810489
+        },
+        {
+          "lat": 35.056678,
+          "lng": -81.809116
+        },
+        {
+          "lat": 35.056228,
+          "lng": -81.813236
+        }
+      ]
+    },
     "truckGate": null,
-    "dropYards": [
-      { "south": 35.057000, "west": -81.814600, "north": 35.062300, "east": -81.813000 },
-      { "south": 35.057500, "west": -81.811500, "north": 35.062500, "east": -81.810500 }
-    ],
+    "dropYards": [],
     "dockAprons": [
-      { "south": 35.057300, "west": -81.814200, "north": 35.062200, "east": -81.812900 },
-      { "south": 35.057800, "west": -81.811800, "north": 35.062300, "east": -81.810800 }
+      {
+        "ring": [
+          {
+            "lat": 35.061399,
+            "lng": -81.814335
+          },
+          {
+            "lat": 35.061849,
+            "lng": -81.810627
+          },
+          {
+            "lat": 35.060837,
+            "lng": -81.810352
+          },
+          {
+            "lat": 35.060388,
+            "lng": -81.81406
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -21,23 +58,45 @@
     "trailerParkingCapacity": 160,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 75.0,
+    "siteAreaAcres": 75,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.060500,-81.812000,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "1120 E Mountain Olive Rd, Cowpens SC = 'Upstate Corporate Park Building 1', a ~1,189,440 SF cross-dock distribution building, ~1 mile from I-85 in Spartanburg County. Confirmed via roster ROOFTOP geocode (12 m) landing on the building, GXO jobs site (active Cowpens hiring for this 'new distribution center'), and LoopNet (Upstate Corporate Park listing).",
     "truckGate": "No barrier arm, sliding gate, or guard booth visible at the access-road entry or at either truck-court entrance in available satellite imagery. The building sits at the end of a private access road in a brand-new corporate park; the access-road / truck-court junctions read as open roadway. Classified false; flagged uncertain - no Street View reaches the building entrance and the park is still under development, so a perimeter gate may yet be installed.",

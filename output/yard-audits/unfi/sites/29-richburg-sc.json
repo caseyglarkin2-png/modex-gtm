@@ -1,35 +1,155 @@
 {
   "name": "UNFI - Richburg SC DC (Charlotte area)",
   "type": "Distribution Center",
-  "coords": { "lat": 34.70980, "lng": -81.00420 },
+  "coords": {
+    "lat": 34.7098,
+    "lng": -81.0042
+  },
   "geofences": {
-    "perimeter": { "south": 34.70830, "west": -81.00560, "north": 34.71090, "east": -81.00280 },
-    "truckGate": null,
-    "dropYards": [],
-    "dockAprons": [
-      { "south": 34.70850, "west": -81.00560, "north": 34.71060, "east": -81.00490 }
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.710929,
+          "lng": -81.005573
+        },
+        {
+          "lat": 34.710703,
+          "lng": -81.002689
+        },
+        {
+          "lat": 34.708784,
+          "lng": -81.002964
+        },
+        {
+          "lat": 34.70901,
+          "lng": -81.005848
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.711606,
+          "lng": -81.004475
+        },
+        {
+          "lat": 34.711493,
+          "lng": -81.003788
+        },
+        {
+          "lat": 34.711042,
+          "lng": -81.003857
+        },
+        {
+          "lat": 34.711155,
+          "lng": -81.004543
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 34.710252,
+            "lng": -81.005573
+          },
+          {
+            "lat": 34.710195,
+            "lng": -81.004887
+          },
+          {
+            "lat": 34.709123,
+            "lng": -81.004955
+          },
+          {
+            "lat": 34.709179,
+            "lng": -81.005642
+          }
+        ]
+      }
     ],
-    "staging": null
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 34.710139,
+            "lng": -81.004887
+          },
+          {
+            "lat": 34.710026,
+            "lng": -81.003651
+          },
+          {
+            "lat": 34.709856,
+            "lng": -81.003685
+          },
+          {
+            "lat": 34.709969,
+            "lng": -81.004921
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 222,
+        "pano": "m3UOBl-zyBatoitA4V9T2w",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 222,
+        "pano": "m3UOBl-zyBatoitA4V9T2w",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 20, "trailersVisible": 14, "trailerParkingCapacity": 30,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 9.0,
+    "dockDoorCount": 20,
+    "trailersVisible": 14,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 9,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.70980,-81.00420,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "dropArea", "trailerParkingCapacity", "siteAreaAcres", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "dropArea",
+    "trailerParkingCapacity",
+    "siteAreaAcres",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Resolved with medium confidence. UNFI Richburg DC sits in the L&C Distribution Park, Richburg SC 29729 (directories give 578 / 578B L&C Distribution Park; the adjacent building 546 L&C Distribution Park is a separately-listed ~110,000 sq ft warehouse). The roster's APPROXIMATE geocode landed in the rural town center ~1.7km NW; the L&C Distribution Park industrial cluster is off Old Richburg Rd E near a highway. The audited building (locked ~34.70980,-81.00420) is the warehouse in this park whose layout - a dock bank with canopies and a trailer-parking apron - is most consistent with a UNFI conventional-grocery satellite DC. Could not get UNFI signage in Street View (panos snap to the highway, not the park access road), so building identity within the multi-tenant park is not 100% certain.",
     "truckGate": "Uncertain - no controlled gate visible at the audited building; the truck yard and dock apron appear open to the L&C Distribution Park internal road. No barrier arm or booth seen at z19. Listed uncertain because Street View could not corroborate the property line.",

@@ -1,16 +1,73 @@
 {
   "name": "KDP Beverage Plant - Victorville CA",
   "type": "Manufacturing - Beverage",
-  "coords": { "lat": 34.584000, "lng": -117.395500 },
+  "coords": {
+    "lat": 34.584,
+    "lng": -117.3955
+  },
   "geofences": {
-    "perimeter": { "south": 34.58000, "west": -117.39850, "north": 34.58880, "east": -117.39350 },
-    "truckGate": { "south": 34.58050, "west": -117.39740, "north": 34.58130, "east": -117.39640 },
-    "dropYards": [
-      { "south": 34.58520, "west": -117.39800, "north": 34.58870, "east": -117.39560 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.585809,
+          "lng": -117.400993
+        },
+        {
+          "lat": 34.585809,
+          "lng": -117.3955
+        },
+        {
+          "lat": 34.579251,
+          "lng": -117.3955
+        },
+        {
+          "lat": 34.579251,
+          "lng": -117.400993
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.581286,
+          "lng": -117.400993
+        },
+        {
+          "lat": 34.581286,
+          "lng": -117.399895
+        },
+        {
+          "lat": 34.580156,
+          "lng": -117.399895
+        },
+        {
+          "lat": 34.580156,
+          "lng": -117.400993
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 34.58280, "west": -117.39770, "north": 34.58620, "east": -117.39680 },
-      { "south": 34.58560, "west": -117.39680, "north": 34.58680, "east": -117.39400 }
+      {
+        "ring": [
+          {
+            "lat": 34.585131,
+            "lng": -117.400719
+          },
+          {
+            "lat": 34.585131,
+            "lng": -117.39962
+          },
+          {
+            "lat": 34.57993,
+            "lng": -117.39962
+          },
+          {
+            "lat": 34.57993,
+            "lng": -117.400719
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -20,23 +77,43 @@
     "trailerParkingCapacity": 160,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 57.0,
+    "siteAreaAcres": 57,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.584000,-117.395500,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "trailerParkingCapacity", "urbanRural"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "urbanRural"
+  ],
   "fieldNotes": {
     "location": "Roster address '16200 Nisqualli Rd' and pin (34.485332,-117.310196) were wrong - landed in a Victorville residential neighborhood. Correct facility is the KDP (former Dr Pepper Snapple) West Coast beverage plant at 18180 Gateway Dr, Victorville CA 92394, inside the Southern California Logistics Airport (SCLA, former George AFB). Confirmed via Beverage Industry, ReliablePlant, ARCO National Construction and Yelp/CalStateDir/Waze listings. ~850,000 sq ft building (300k production + 550k warehouse) on 57 acres; opened ~2010-2011, ~$150M investment.",
     "truckGate": "The plant is fully enclosed by a chain-link perimeter fence with privacy screening (confirmed in multiple May 2025 Street View frames). A fenced production plant of this scale has controlled truck access. Truck gate classified TRUE on the strength of the continuous perimeter fence and entrance infrastructure visible in Street View, but flagged uncertain - no crisp close-up of the gate barrier was obtainable.",

@@ -1,17 +1,84 @@
 {
   "name": "Liberty Coca-Cola Beverages - Philadelphia Production Plant, PA",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 40.00700, "lng": -75.11150 },
+  "coords": {
+    "lat": 40.007,
+    "lng": -75.1115
+  },
   "geofences": {
-    "perimeter": { "south": 40.00540, "west": -75.11380, "north": 40.00920, "east": -75.10920 },
-    "truckGate": { "south": 40.00825, "west": -75.11010, "north": 40.00865, "east": -75.10955 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.008578,
+          "lng": -75.113285
+        },
+        {
+          "lat": 40.008578,
+          "lng": -75.110813
+        },
+        {
+          "lat": 40.005843,
+          "lng": -75.110676
+        },
+        {
+          "lat": 40.005738,
+          "lng": -75.113285
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 40.00640, "west": -75.11150, "north": 40.00900, "east": -75.10960 }
+      {
+        "ring": [
+          {
+            "lat": 40.008473,
+            "lng": -75.112187
+          },
+          {
+            "lat": 40.008473,
+            "lng": -75.110951
+          },
+          {
+            "lat": 40.007421,
+            "lng": -75.110951
+          },
+          {
+            "lat": 40.007421,
+            "lng": -75.112187
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.00600, "west": -75.11280, "north": 40.00800, "east": -75.11150 }
+      {
+        "ring": [
+          {
+            "lat": 40.00721,
+            "lng": -75.113148
+          },
+          {
+            "lat": 40.007158,
+            "lng": -75.111157
+          },
+          {
+            "lat": 40.006895,
+            "lng": -75.111157
+          },
+          {
+            "lat": 40.006947,
+            "lng": -75.113148
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 38,
+        "pano": "pjJ4C18B4XpTlxELXvIqTQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 55,
@@ -19,23 +86,41 @@
     "trailerParkingCapacity": 130,
     "truckGateCount": 2,
     "buildingCount": 3,
-    "siteAreaAcres": 14.0,
+    "siteAreaAcres": 14,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.00700,-75.11150,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": true,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": true,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes", "shipRcvSeparate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "location": "Roster coords 40.006386,-75.113266 (725 E Erie Ave) confirmed. The plant is positively identified: a large Coca-Cola logo is painted on the building's NE face, and an enclosed pedestrian skybridge over the side street is Coca-Cola branded. Coca-Cola trucks and trailers fill the yard.",
     "truckGate": "Multiple chain-link sliding gates along E Erie Ave control the yard - one is explicitly marked 'EXIT'. Carrier-instruction signage on the fence: 'ALL CARRIERS Park on the Street ... Check in With Guard With Paper Work ... Coiled in By Appointment ... DO NOT DOUBLE PARK'.",

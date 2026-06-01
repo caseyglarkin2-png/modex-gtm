@@ -1,18 +1,63 @@
 {
   "name": "Pactiv Evergreen - Plattsburgh NY",
   "type": "Manufacturing Plant (Food Merchandising)",
-  "coords": { "lat": 44.71100, "lng": -73.45250 },
+  "coords": {
+    "lat": 44.711,
+    "lng": -73.4525
+  },
   "geofences": {
-    "perimeter": { "south": 44.70850, "west": -73.45520, "north": 44.71370, "east": -73.44900 },
-    "truckGate": { "south": 44.71080, "west": -73.45050, "north": 44.71130, "east": -73.44970 },
-    "dropYards": [
-      { "south": 44.71110, "west": -73.45430, "north": 44.71230, "east": -73.45300 },
-      { "south": 44.71190, "west": -73.45040, "north": 44.71280, "east": -73.44930 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 44.714123,
+          "lng": -73.456895
+        },
+        {
+          "lat": 44.714318,
+          "lng": -73.449479
+        },
+        {
+          "lat": 44.708853,
+          "lng": -73.449204
+        },
+        {
+          "lat": 44.708267,
+          "lng": -73.456345
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 44.71130, "west": -73.45390, "north": 44.71220, "east": -73.45290 }
+      {
+        "ring": [
+          {
+            "lat": 44.710512,
+            "lng": -73.453187
+          },
+          {
+            "lat": 44.710414,
+            "lng": -73.450852
+          },
+          {
+            "lat": 44.709829,
+            "lng": -73.450989
+          },
+          {
+            "lat": 44.709926,
+            "lng": -73.453324
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 11,
+        "pano": "mg5r735YkbRmLlvPwWBbwQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 22,
@@ -20,7 +65,7 @@
     "trailerParkingCapacity": 50,
     "truckGateCount": 2,
     "buildingCount": 8,
-    "siteAreaAcres": 39.0,
+    "siteAreaAcres": 39,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@44.71100,-73.45250,400m/data=!3m1!1e3",
@@ -49,7 +94,15 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "dockDoorCount", "buildingCount", "entryLanes", "exitLanes", "railServed", "siteAreaAcres"],
+  "uncertainFields": [
+    "truckGate",
+    "dockDoorCount",
+    "buildingCount",
+    "entryLanes",
+    "exitLanes",
+    "railServed",
+    "siteAreaAcres"
+  ],
   "fieldNotes": {
     "coords": "ROSTER COORDS WERE WRONG. The roster point (44.708769, -73.453892, geocode RANGE_INTERPOLATED) landed on a small orange-roofed building in a residential block ~0.35 km SW of the plant. The actual Pactiv Evergreen plant is the large multi-building industrial campus at 74 Weed Street, centered ~44.7110, -73.4525, ~0.3 km NE of the roster point. Corrected via web research (Yelp, CMac, Breakroom job posts all list 74 Weed Street) and satellite identification of the only industrial campus matching the address.",
     "truckGate": "The entire campus is enclosed by continuous chain-link perimeter fencing - visible in every 2023/2025 Street View pass along Weed Street. Truck and dock yards (north and NW of the legacy mill buildings) are reached through gated openings in that fence. Verdict: gated. Flagged uncertain because the specific gate openings/arms could not be crisply resolved - the fence-line itself is unambiguous but no single barrier-arm checkpoint was clearly imaged.",

@@ -1,16 +1,75 @@
 {
   "name": "Pactiv Evergreen - Abilene TX",
   "type": "Manufacturing Plant (Food Merchandising)",
-  "coords": { "lat": 32.459931, "lng": -99.81015 },
+  "coords": {
+    "lat": 32.459931,
+    "lng": -99.81015
+  },
   "geofences": {
-    "perimeter": { "south": 32.45670, "west": -99.81200, "north": 32.46150, "east": -99.80820 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.46445,
+          "lng": -99.815643
+        },
+        {
+          "lat": 32.464218,
+          "lng": -99.809463
+        },
+        {
+          "lat": 32.457845,
+          "lng": -99.809738
+        },
+        {
+          "lat": 32.457382,
+          "lng": -99.814545
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [
-      { "south": 32.46010, "west": -99.81050, "north": 32.46075, "east": -99.80870 }
+      {
+        "ring": [
+          {
+            "lat": 32.463986,
+            "lng": -99.814545
+          },
+          {
+            "lat": 32.463871,
+            "lng": -99.811523
+          },
+          {
+            "lat": 32.462248,
+            "lng": -99.811523
+          },
+          {
+            "lat": 32.462364,
+            "lng": -99.814545
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 32.46010, "west": -99.81050, "north": 32.46075, "east": -99.80870 },
-      { "south": 32.45760, "west": -99.81160, "north": 32.45850, "east": -99.81020 }
+      {
+        "ring": [
+          {
+            "lat": 32.46109,
+            "lng": -99.811249
+          },
+          {
+            "lat": 32.460858,
+            "lng": -99.809463
+          },
+          {
+            "lat": 32.459699,
+            "lng": -99.809601
+          },
+          {
+            "lat": 32.459931,
+            "lng": -99.811386
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -20,23 +79,39 @@
     "trailerParkingCapacity": 20,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 49.0,
+    "siteAreaAcres": 49,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.459931,-99.81015,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "shipRcvSeparate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Open site. The truck driveway off Five Points Pkwy enters the property as an uncontrolled loop road with no barrier arm, gate, or pinch-point checkpoint at any point along the property line (confirmed in Street View 2025-01 from multiple headings).",
     "guardShack": "No staffed booth anywhere along the entrance road or dock aprons.",

@@ -1,15 +1,108 @@
 {
   "name": "Sea Smoke Cellars - Lompoc CA",
   "type": "Winery / Production Facility",
-  "coords": { "lat": 34.664044, "lng": -120.465851 },
+  "coords": {
+    "lat": 34.664044,
+    "lng": -120.465851
+  },
   "geofences": {
-    "perimeter": { "south": 34.663250, "west": -120.466500, "north": 34.664850, "east": -120.465250 },
-    "truckGate": null,
-    "dropYards": [],
-    "dockAprons": [
-      { "south": 34.663600, "west": -120.465700, "north": 34.664550, "east": -120.465350 }
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.664439,
+          "lng": -120.466194
+        },
+        {
+          "lat": 34.664439,
+          "lng": -120.465164
+        },
+        {
+          "lat": 34.663564,
+          "lng": -120.465164
+        },
+        {
+          "lat": 34.663564,
+          "lng": -120.466194
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.664326,
+          "lng": -120.466194
+        },
+        {
+          "lat": 34.664326,
+          "lng": -120.466057
+        },
+        {
+          "lat": 34.664213,
+          "lng": -120.466057
+        },
+        {
+          "lat": 34.664213,
+          "lng": -120.466194
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 34.664326,
+            "lng": -120.465679
+          },
+          {
+            "lat": 34.664326,
+            "lng": -120.465302
+          },
+          {
+            "lat": 34.663705,
+            "lng": -120.465302
+          },
+          {
+            "lat": 34.663705,
+            "lng": -120.465679
+          }
+        ]
+      }
     ],
-    "staging": null
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 34.664326,
+            "lng": -120.466057
+          },
+          {
+            "lat": 34.664326,
+            "lng": -120.465748
+          },
+          {
+            "lat": 34.663677,
+            "lng": -120.465748
+          },
+          {
+            "lat": 34.663677,
+            "lng": -120.466057
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 113,
+        "pano": "H8VBrtXkINh_A4pGNwsv2g",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 113,
+        "pano": "H8VBrtXkINh_A4pGNwsv2g",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 3,
@@ -46,7 +139,9 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoors"],
+  "uncertainFields": [
+    "dockDoors"
+  ],
   "fieldNotes": {
     "truckGate": "No controlled truck entrance. Property fronts a public street (N O Street) that ends in a cul-de-sac turnaround; the building's parking and the east-side tank/work yard are reached directly from the street with no barrier arm, gate, or checkpoint.",
     "guardShack": "No staffed booth anywhere on the property. Modern office facade on the west end, but no guard structure.",

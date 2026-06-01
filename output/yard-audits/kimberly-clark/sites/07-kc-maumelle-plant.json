@@ -1,17 +1,136 @@
 {
   "name": "K-C Maumelle Plant - Maumelle AR",
   "type": "Huggies baby wipes manufacturing plant (~400,000 sq ft)",
-  "coords": { "lat": 34.864832, "lng": -92.393775 },
+  "coords": {
+    "lat": 34.864832,
+    "lng": -92.393775
+  },
   "geofences": {
-    "perimeter": { "south": 34.862900, "west": -92.395600, "north": 34.866600, "east": -92.391400 },
-    "truckGate": { "south": 34.865850, "west": -92.393650, "north": 34.866250, "east": -92.393150 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.865395,
+          "lng": -92.395835
+        },
+        {
+          "lat": 34.865395,
+          "lng": -92.392539
+        },
+        {
+          "lat": 34.864269,
+          "lng": -92.392264
+        },
+        {
+          "lat": 34.863593,
+          "lng": -92.392539
+        },
+        {
+          "lat": 34.863593,
+          "lng": -92.395835
+        },
+        {
+          "lat": 34.86455,
+          "lng": -92.395972
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.864832,
+          "lng": -92.395972
+        },
+        {
+          "lat": 34.864832,
+          "lng": -92.39556
+        },
+        {
+          "lat": 34.86455,
+          "lng": -92.39556
+        },
+        {
+          "lat": 34.86455,
+          "lng": -92.395972
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 34.865500, "west": -92.394400, "north": 34.866400, "east": -92.391900 }
+      {
+        "ring": [
+          {
+            "lat": 34.865959,
+            "lng": -92.394187
+          },
+          {
+            "lat": 34.865959,
+            "lng": -92.392676
+          },
+          {
+            "lat": 34.865452,
+            "lng": -92.392676
+          },
+          {
+            "lat": 34.865452,
+            "lng": -92.394187
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 34.86348,
+            "lng": -92.395835
+          },
+          {
+            "lat": 34.86348,
+            "lng": -92.392951
+          },
+          {
+            "lat": 34.863142,
+            "lng": -92.392951
+          },
+          {
+            "lat": 34.863142,
+            "lng": -92.395835
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 34.865000, "west": -92.394100, "north": 34.865900, "east": -92.392200 }
+      {
+        "ring": [
+          {
+            "lat": 34.865283,
+            "lng": -92.392951
+          },
+          {
+            "lat": 34.865283,
+            "lng": -92.392402
+          },
+          {
+            "lat": 34.864043,
+            "lng": -92.392402
+          },
+          {
+            "lat": 34.864043,
+            "lng": -92.392951
+          }
+        ]
+      }
     ],
-    "staging": { "south": 34.865700, "west": -92.393700, "north": 34.866400, "east": -92.392600 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 78,
+        "pano": "TsfDpj7d5tJSLetwn_1uvA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 78,
+        "pano": "TsfDpj7d5tJSLetwn_1uvA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 36,
@@ -19,23 +138,39 @@
     "trailerParkingCapacity": 70,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 33.0,
+    "siteAreaAcres": 33,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.864832,-92.393775,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "railServed"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "railServed"
+  ],
   "fieldNotes": {
     "location": "Confirmed as 500 Murphy Dr, Maumelle, AR 72113 — K-C's Huggies baby-wipes manufacturing plant. Roster coords were ~700m NW of the building; web research yielded the street address and an address-level coordinate (34.864832,-92.393775) that lands squarely on the large white-roofed manufacturing building with extensive trailer parking. Locked center there.",
     "truckGate": "Confirmed guarded truck gate at the NE corner where the access road from Murphy Dr enters. z21 imagery shows a small white guard booth astride the driveway with barrier arms across the inbound and outbound lanes.",

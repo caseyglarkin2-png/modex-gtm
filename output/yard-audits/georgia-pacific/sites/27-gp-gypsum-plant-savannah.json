@@ -1,17 +1,100 @@
 {
   "name": "GP Gypsum Plant - Savannah GA",
   "type": "Gypsum Wallboard Plant",
-  "coords": { "lat": 32.077000, "lng": -81.052500 },
+  "coords": {
+    "lat": 32.077,
+    "lng": -81.0525
+  },
   "geofences": {
-    "perimeter": { "south": 32.073500, "west": -81.056500, "north": 32.080500, "east": -81.047000 },
-    "truckGate": { "south": 32.073000, "west": -81.054200, "north": 32.074200, "east": -81.052800 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.078164,
+          "lng": -81.055521
+        },
+        {
+          "lat": 32.078862,
+          "lng": -81.049204
+        },
+        {
+          "lat": 32.073974,
+          "lng": -81.048105
+        },
+        {
+          "lat": 32.072578,
+          "lng": -81.053599
+        },
+        {
+          "lat": 32.076418,
+          "lng": -81.055796
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.072927,
+          "lng": -81.055247
+        },
+        {
+          "lat": 32.073044,
+          "lng": -81.054423
+        },
+        {
+          "lat": 32.072345,
+          "lng": -81.054285
+        },
+        {
+          "lat": 32.072229,
+          "lng": -81.055109
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 32.075800, "west": -81.054400, "north": 32.077200, "east": -81.052800 }
+      {
+        "ring": [
+          {
+            "lat": 32.076418,
+            "lng": -81.053187
+          },
+          {
+            "lat": 32.077,
+            "lng": -81.049479
+          },
+          {
+            "lat": 32.075371,
+            "lng": -81.049204
+          },
+          {
+            "lat": 32.074789,
+            "lng": -81.052912
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 32.077000, "west": -81.052600, "north": 32.079000, "east": -81.051200 }
+      {
+        "ring": [
+          {
+            "lat": 32.077931,
+            "lng": -81.053873
+          },
+          {
+            "lat": 32.078396,
+            "lng": -81.050852
+          },
+          {
+            "lat": 32.077815,
+            "lng": -81.050715
+          },
+          {
+            "lat": 32.077349,
+            "lng": -81.053736
+          }
+        ]
+      }
     ],
-    "staging": { "south": 32.074400, "west": -81.053400, "north": 32.075600, "east": -81.052000 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 10,
@@ -19,7 +102,7 @@
     "trailerParkingCapacity": 50,
     "truckGateCount": 1,
     "buildingCount": 9,
-    "siteAreaAcres": 172.0,
+    "siteAreaAcres": 172,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@32.0770,-81.0525,400m/data=!3m1!1e3",
@@ -48,7 +131,18 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "truckGate", "dockDoors", "dropArea", "trailersVisible", "trailerParkingCapacity", "scale", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "truckGate",
+    "dockDoors",
+    "dropArea",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "scale",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Roster coords (2861 Tremont Rd) pointed at a mixed industrial area ~2.5 km away with no gypsum plant. Actual GP Gypsum Savannah is at 151 Wahlstrom Road, Savannah GA 31404 on the Savannah River, ~1.13 mi downstream of the Talmadge Bridge. Confirmed via Georgia EPD permit narrative and business listings; locked center ~32.0770,-81.0525.",
     "truckGate": "Plant approached by a long private industrial access road (Wahlstrom Rd) off the public network; controlled-access industrial site. Street View shows perimeter fencing with brick gate pillars at the road. A gatehouse/checkpoint exists but is not crisply resolved.",

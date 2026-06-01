@@ -1,20 +1,87 @@
 {
   "name": "Honda Power Equipment Mfg. - Swepsonville NC",
   "type": "Power Equipment / General-Purpose Engine Plant",
-  "coords": { "lat": 36.033436, "lng": -79.344443 },
+  "coords": {
+    "lat": 36.033436,
+    "lng": -79.344443
+  },
   "geofences": {
-    "perimeter": { "south": 36.02980, "west": -79.34880, "north": 36.03720, "east": -79.34120 },
-    "truckGate": { "south": 36.03196, "west": -79.34250, "north": 36.03236, "east": -79.34180 },
-    "dropYards": [
-      { "south": 36.03150, "west": -79.34680, "north": 36.03420, "east": -79.34600 },
-      { "south": 36.03340, "west": -79.34680, "north": 36.03520, "east": -79.34560 },
-      { "south": 36.03300, "west": -79.34480, "north": 36.03470, "east": -79.34360 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.035213,
+          "lng": -79.34719
+        },
+        {
+          "lat": 36.034991,
+          "lng": -79.341422
+        },
+        {
+          "lat": 36.031215,
+          "lng": -79.341559
+        },
+        {
+          "lat": 36.031437,
+          "lng": -79.347327
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 36.031881,
+          "lng": -79.345816
+        },
+        {
+          "lat": 36.03177,
+          "lng": -79.344992
+        },
+        {
+          "lat": 36.031326,
+          "lng": -79.34513
+        },
+        {
+          "lat": 36.031437,
+          "lng": -79.345954
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 36.03260, "west": -79.34560, "north": 36.03420, "east": -79.34440 },
-      { "south": 36.03420, "west": -79.34480, "north": 36.03560, "east": -79.34380 }
+      {
+        "ring": [
+          {
+            "lat": 36.032325,
+            "lng": -79.345542
+          },
+          {
+            "lat": 36.032214,
+            "lng": -79.342795
+          },
+          {
+            "lat": 36.03177,
+            "lng": -79.342932
+          },
+          {
+            "lat": 36.031881,
+            "lng": -79.345679
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 63,
+        "pano": "CFA1i_fadL9lcfU2qGi6HA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 63,
+        "pano": "CFA1i_fadL9lcfU2qGi6HA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 60,
@@ -22,23 +89,41 @@
     "trailerParkingCapacity": 130,
     "truckGateCount": 1,
     "buildingCount": 4,
-    "siteAreaAcres": 95.0,
+    "siteAreaAcres": 95,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@36.033436,-79.344443,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["truckGate", "entryLanes", "exitLanes", "dockDoorCount"],
+  "uncertainFields": [
+    "truckGate",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "truckGate": "No controlled truck gate at any public road. The campus is set well back from NC-119 (west) behind dense woods; the main access is an open driveway off the east-side road into the parking lot — no barrier arm, no guard booth, no checkpoint pinch-point. Truck docks and drop yards are reached via private internal roads inside the wooded campus. Classified false.",
     "guardShack": "No guard booth observed at the entrance driveway or anywhere along the property perimeter in Street View (2023) or satellite.",

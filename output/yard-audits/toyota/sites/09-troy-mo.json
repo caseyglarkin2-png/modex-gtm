@@ -1,15 +1,58 @@
 {
   "name": "Toyota Motor Manufacturing Missouri - Troy MO",
   "type": "Powertrain Plant (aluminum castings)",
-  "coords": { "lat": 38.96360, "lng": -90.96904 },
+  "coords": {
+    "lat": 38.9636,
+    "lng": -90.96904
+  },
   "geofences": {
-    "perimeter": { "south": 38.9608, "west": -90.9712, "north": 38.9662, "east": -90.9655 },
-    "truckGate": { "south": 38.96535, "west": -90.96845, "north": 38.96575, "east": -90.96795 },
-    "dropYards": [
-      { "south": 38.9637, "west": -90.96730, "north": 38.96560, "east": -90.96530 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.964668,
+          "lng": -90.972061
+        },
+        {
+          "lat": 38.964668,
+          "lng": -90.967941
+        },
+        {
+          "lat": 38.962319,
+          "lng": -90.967667
+        },
+        {
+          "lat": 38.961892,
+          "lng": -90.970413
+        },
+        {
+          "lat": 38.962746,
+          "lng": -90.972611
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 38.96255, "west": -90.96850, "north": 38.96310, "east": -90.96680 }
+      {
+        "ring": [
+          {
+            "lat": 38.964027,
+            "lng": -90.971512
+          },
+          {
+            "lat": 38.964027,
+            "lng": -90.968216
+          },
+          {
+            "lat": 38.963386,
+            "lng": -90.968216
+          },
+          {
+            "lat": 38.963386,
+            "lng": -90.971512
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -48,7 +91,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Single controlled entrance off the public road on the north side; Toyota monument sign + paved entrance with lane split.",
     "guardShack": "Staffed gatehouse confirmed in Street View (2024-09): a small grey 1-2-vehicle-footprint booth set in the median of the entrance drive, lanes splitting around it.",

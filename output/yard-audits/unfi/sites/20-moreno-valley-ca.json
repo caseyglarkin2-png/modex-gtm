@@ -1,17 +1,87 @@
 {
   "name": "UNFI - Moreno Valley CA DC",
   "type": "Distribution Center",
-  "coords": { "lat": 33.91240, "lng": -117.27620 },
+  "coords": {
+    "lat": 33.9124,
+    "lng": -117.2762
+  },
   "geofences": {
-    "perimeter": { "south": 33.91140, "west": -117.27895, "north": 33.91360, "east": -117.27355 },
-    "truckGate": { "south": 33.91290, "west": -117.27875, "north": 33.91340, "east": -117.27790 },
-    "dropYards": [
-      { "south": 33.91320, "west": -117.27885, "north": 33.91360, "east": -117.27360 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.913084,
+          "lng": -117.278672
+        },
+        {
+          "lat": 33.913084,
+          "lng": -117.274003
+        },
+        {
+          "lat": 33.911032,
+          "lng": -117.274003
+        },
+        {
+          "lat": 33.911032,
+          "lng": -117.278672
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.911716,
+          "lng": -117.278672
+        },
+        {
+          "lat": 33.911716,
+          "lng": -117.277985
+        },
+        {
+          "lat": 33.911032,
+          "lng": -117.277985
+        },
+        {
+          "lat": 33.911032,
+          "lng": -117.278672
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 33.91305, "west": -117.27880, "north": 33.91325, "east": -117.27360 }
+      {
+        "ring": [
+          {
+            "lat": 33.912856,
+            "lng": -117.278535
+          },
+          {
+            "lat": 33.912856,
+            "lng": -117.274277
+          },
+          {
+            "lat": 33.912514,
+            "lng": -117.274277
+          },
+          {
+            "lat": 33.912514,
+            "lng": -117.278535
+          }
+        ]
+      }
     ],
-    "staging": { "south": 33.91305, "west": -117.27790, "north": 33.91340, "east": -117.27620 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 15,
+        "pano": "Wy2nxl_AOtS8gkDBN-Foeg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 15,
+        "pano": "Wy2nxl_AOtS8gkDBN-Foeg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 95,
@@ -24,18 +94,35 @@
   },
   "mapsUrl": "https://www.google.com/maps/@33.91240,-117.27620,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "truckGate": "Single controlled entrance off Day St at the NW corner of the property. 2025-12 Street View shows a wide entrance driveway with a perimeter wall/fence and a defined checkpoint where the drive enters the truck yard.",
     "guardShack": "A small tan/beige guard booth (~1-vehicle footprint, windows on multiple sides) sits beside the inbound lane just inside the entrance. Clearly visible in 2025-12 Street View from two angles. Staffed guarded entry.",

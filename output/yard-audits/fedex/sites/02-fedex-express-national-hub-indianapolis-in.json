@@ -1,17 +1,85 @@
 {
   "name": "FedEx Express National Hub - Indianapolis IN",
   "type": "Express national hub (2.4M sq ft, second-largest cargo facility)",
-  "coords": { "lat": 39.715335, "lng": -86.277815 },
+  "coords": {
+    "lat": 39.715335,
+    "lng": -86.277815
+  },
   "geofences": {
-    "perimeter": { "south": 39.7085, "west": -86.2870, "north": 39.7240, "east": -86.2680 },
-    "truckGate": { "south": 39.71050, "west": -86.27330, "north": 39.71160, "east": -86.27210 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.719138,
+          "lng": -86.284132
+        },
+        {
+          "lat": 39.720194,
+          "lng": -86.277266
+        },
+        {
+          "lat": 39.715335,
+          "lng": -86.270125
+        },
+        {
+          "lat": 39.711109,
+          "lng": -86.274519
+        },
+        {
+          "lat": 39.710687,
+          "lng": -86.282759
+        },
+        {
+          "lat": 39.714279,
+          "lng": -86.284132
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 39.71350, "west": -86.27800, "north": 39.71550, "east": -86.27500 }
+      {
+        "ring": [
+          {
+            "lat": 39.720194,
+            "lng": -86.274519
+          },
+          {
+            "lat": 39.716814,
+            "lng": -86.270949
+          },
+          {
+            "lat": 39.715335,
+            "lng": -86.272322
+          },
+          {
+            "lat": 39.718715,
+            "lng": -86.276167
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.71250, "west": -86.27950, "north": 39.71600, "east": -86.27450 }
+      {
+        "ring": [
+          {
+            "lat": 39.718293,
+            "lng": -86.283308
+          },
+          {
+            "lat": 39.719138,
+            "lng": -86.275618
+          },
+          {
+            "lat": 39.714279,
+            "lng": -86.274519
+          },
+          {
+            "lat": 39.7128,
+            "lng": -86.28221
+          }
+        ]
+      }
     ],
-    "staging": { "south": 39.71000, "west": -86.27450, "north": 39.71200, "east": -86.27250 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 50,
@@ -19,23 +87,43 @@
     "trailerParkingCapacity": 150,
     "truckGateCount": 1,
     "buildingCount": 5,
-    "siteAreaAcres": 220.0,
+    "siteAreaAcres": 220,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.715335,-86.277815,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes", "siteAreaAcres"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes",
+    "siteAreaAcres"
+  ],
   "fieldNotes": {
     "siteConfirmation": "Roster point lands on the main sort building of the FedEx Express National Hub at Indianapolis International Airport. Confirmed via satellite (one very large dark-roofed sort building with airside aircraft positions and extensive ULD/air-container staging) and web research (Encyclopedia of Indianapolis / FedEx aviation page: built 1988, second-largest cargo facility in the FedEx Express system, ~6,000 employees, ~650 flights/month).",
     "truckGate": "Web research explicitly references a 'Truck Gate' and a 'South Perimeter Security Station' controlling access to the hub. The facility sits entirely inside the secured airport perimeter; the support/parking area connects to the airside hub only through the staffed security station. Internal roads have no public Street View coverage (secured property).",

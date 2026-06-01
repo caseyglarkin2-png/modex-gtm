@@ -1,15 +1,84 @@
 {
   "name": "Detroit Reman East - Byesville OH",
   "type": "Remanufacturing plant (engines/components)",
-  "coords": { "lat": 39.97815, "lng": -81.56675 },
+  "coords": {
+    "lat": 39.97815,
+    "lng": -81.56675
+  },
   "geofences": {
-    "perimeter": { "south": 39.9768, "west": -81.5680, "north": 39.9796, "east": -81.5656 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.979202,
+          "lng": -81.569085
+        },
+        {
+          "lat": 39.979202,
+          "lng": -81.565926
+        },
+        {
+          "lat": 39.977887,
+          "lng": -81.565926
+        },
+        {
+          "lat": 39.977887,
+          "lng": -81.569085
+        }
+      ]
+    },
     "truckGate": null,
-    "dropYards": [],
-    "dockAprons": [
-      { "south": 39.9789, "west": -81.5677, "north": 39.9795, "east": -81.5658 }
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 39.979202,
+            "lng": -81.568947
+          },
+          {
+            "lat": 39.979202,
+            "lng": -81.567986
+          },
+          {
+            "lat": 39.97815,
+            "lng": -81.567986
+          },
+          {
+            "lat": 39.97815,
+            "lng": -81.568947
+          }
+        ]
+      }
     ],
-    "staging": null
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 39.978045,
+            "lng": -81.567986
+          },
+          {
+            "lat": 39.978045,
+            "lng": -81.566063
+          },
+          {
+            "lat": 39.977887,
+            "lng": -81.566063
+          },
+          {
+            "lat": 39.977887,
+            "lng": -81.567986
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 123,
+        "pano": "gaGWV14einylcjgLpO1iAA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 14,
@@ -17,23 +86,43 @@
     "trailerParkingCapacity": 20,
     "truckGateCount": 0,
     "buildingCount": 1,
-    "siteAreaAcres": 17.0,
+    "siteAreaAcres": 17,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.97815,-81.56675,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "dropArea", "buildingCount", "shipRcvSeparate"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoors",
+    "dropArea",
+    "buildingCount",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "location": "Geocoded point (ROOFTOP, moved 2417m) landed on the large modern blue/dark-roofed industrial building in the Southgate industrial park area near Byesville OH, just west of the Cambridge Country Club golf course (consistent with 'Country Club Road'). Identified this building as Detroit Reman East -- the largest, most modern facility on the parcel. A separate lighter-roofed building sits to the west (a different occupant). DTNA / Yelp / D&B confirm Detroit Diesel Remanufacturing at 60703 Country Club Rd, Byesville.",
     "truckGate": "No controlled truck gate observed. The buildings sit in an open industrial-park road network; access roads and the shared parking lot connect directly to public roads with no barrier arm, sliding gate or guard booth at the entrance. Some perimeter chain-link fencing exists but the truck approach is uncontrolled. Flagged uncertain.",

@@ -1,17 +1,83 @@
 {
   "name": "Coffee Roasting - New Orleans LA",
   "type": "Manufacturing - Coffee roasting/packaging (bulk)",
-  "coords": { "lat": 30.0335, "lng": -89.9112 },
+  "coords": {
+    "lat": 30.0335,
+    "lng": -89.9112
+  },
   "geofences": {
-    "perimeter": { "south": 30.0312, "west": -89.9140, "north": 30.0360, "east": -89.9082 },
-    "truckGate": { "south": 30.03145, "west": -89.91375, "north": 30.03175, "east": -89.91325 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 30.035878,
+          "lng": -89.914359
+        },
+        {
+          "lat": 30.036234,
+          "lng": -89.909552
+        },
+        {
+          "lat": 30.034808,
+          "lng": -89.905295
+        },
+        {
+          "lat": 30.02815,
+          "lng": -89.907355
+        },
+        {
+          "lat": 30.030171,
+          "lng": -89.91532
+        },
+        {
+          "lat": 30.033738,
+          "lng": -89.915595
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 30.03255, "west": -89.91185, "north": 30.03300, "east": -89.91120 }
+      {
+        "ring": [
+          {
+            "lat": 30.034689,
+            "lng": -89.9112
+          },
+          {
+            "lat": 30.034808,
+            "lng": -89.905295
+          },
+          {
+            "lat": 30.032073,
+            "lng": -89.905707
+          },
+          {
+            "lat": 30.032549,
+            "lng": -89.911475
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 30.032073,
+            "lng": -89.911475
+          },
+          {
+            "lat": 30.031598,
+            "lng": -89.905981
+          },
+          {
+            "lat": 30.02922,
+            "lng": -89.906531
+          },
+          {
+            "lat": 30.030171,
+            "lng": -89.911749
+          }
+        ]
+      }
     ],
-    "dockAprons": [
-      { "south": 30.03260, "west": -89.91240, "north": 30.03310, "east": -89.91100 },
-      { "south": 30.03285, "west": -89.91130, "north": 30.03340, "east": -89.91020 }
-    ],
+    "dockAprons": [],
     "staging": null
   },
   "yardMetrics": {
@@ -25,18 +91,36 @@
   },
   "mapsUrl": "https://www.google.com/maps/@30.0335,-89.9112,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "scale", "dockDoorCount"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "scale",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "location": "Folgers/J.M. Smucker Old Gentilly Rd coffee roasting plant, New Orleans East. Confirmed via Street View (Nov 2025) showing the large industrial roasting building with processing tower and continuous perimeter fence/hedge, plus web research (largest bulk coffee facility of its kind in the world; opened 1960).",
     "truckGate": "Wide gated truck entrance on the SW frontage road (~30.0316,-89.9135): a fence opening with sliding/swing gate panels set back from the road and an overhead gantry sign structure spanning the driveway. Clear controlled checkpoint.",

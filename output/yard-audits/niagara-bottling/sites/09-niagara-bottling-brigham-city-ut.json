@@ -1,17 +1,108 @@
 {
   "name": "Niagara Bottling - Brigham City UT",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 41.511870, "lng": -112.042220 },
+  "coords": {
+    "lat": 41.51187,
+    "lng": -112.04222
+  },
   "geofences": {
-    "perimeter": { "south": 41.51080, "west": -112.04470, "north": 41.51350, "east": -112.04050 },
-    "truckGate": { "south": 41.51075, "west": -112.04360, "north": 41.51110, "east": -112.04300 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.512847,
+          "lng": -112.043799
+        },
+        {
+          "lat": 41.512847,
+          "lng": -112.040709
+        },
+        {
+          "lat": 41.510739,
+          "lng": -112.040709
+        },
+        {
+          "lat": 41.510739,
+          "lng": -112.043799
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.51223,
+          "lng": -112.044417
+        },
+        {
+          "lat": 41.51223,
+          "lng": -112.043799
+        },
+        {
+          "lat": 41.511973,
+          "lng": -112.043799
+        },
+        {
+          "lat": 41.511973,
+          "lng": -112.044417
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 41.51250, "west": -112.04400, "north": 41.51330, "east": -112.04080 }
+      {
+        "ring": [
+          {
+            "lat": 41.512744,
+            "lng": -112.043799
+          },
+          {
+            "lat": 41.512744,
+            "lng": -112.041877
+          },
+          {
+            "lat": 41.512384,
+            "lng": -112.041877
+          },
+          {
+            "lat": 41.512384,
+            "lng": -112.043799
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.51210, "west": -112.04390, "north": 41.51270, "east": -112.04090 }
+      {
+        "ring": [
+          {
+            "lat": 41.512384,
+            "lng": -112.043799
+          },
+          {
+            "lat": 41.512384,
+            "lng": -112.041877
+          },
+          {
+            "lat": 41.512179,
+            "lng": -112.041877
+          },
+          {
+            "lat": 41.512179,
+            "lng": -112.043799
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 56,
+        "pano": "gNJ3EwJcZ6Tfgd2q-JTvbA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 56,
+        "pano": "gNJ3EwJcZ6Tfgd2q-JTvbA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 34,
@@ -19,23 +110,41 @@
     "trailerParkingCapacity": 45,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 30.0,
+    "siteAreaAcres": 30,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.511870,-112.042220,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "entryLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "entryLanes"
+  ],
   "fieldNotes": {
     "facility": "Niagara Bottling Brigham City, 77 N Industrial Way, ~257,000 sq ft plant opened 2017. Confirmed by the red 'niagara' logo on the east office face and water-treatment silos along the building's east side in Street View (2023-08).",
     "truckGate": "Truck yard is fully enclosed by a continuous chain-link perimeter fence (clearly visible in Street View). The truck drive enters the fenced yard at the SW corner where the perimeter loop meets W Forest St. A controlled gate is present where the drive crosses the fence; the exact barrier element is obscured by landscaping at max zoom.",

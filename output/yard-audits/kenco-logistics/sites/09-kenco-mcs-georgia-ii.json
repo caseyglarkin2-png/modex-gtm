@@ -1,9 +1,31 @@
 {
   "name": "Kenco MCS Georgia II - Austell GA",
   "type": "Multi-Client Distribution Center",
-  "coords": { "lat": 33.777949, "lng": -84.574624 },
+  "coords": {
+    "lat": 33.777949,
+    "lng": -84.574624
+  },
   "geofences": {
-    "perimeter": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.778234,
+          "lng": -84.575173
+        },
+        {
+          "lat": 33.778234,
+          "lng": -84.574487
+        },
+        {
+          "lat": 33.777492,
+          "lng": -84.574487
+        },
+        {
+          "lat": 33.777492,
+          "lng": -84.575173
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [],
@@ -15,28 +37,58 @@
     "trailerParkingCapacity": 0,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 0.0,
+    "siteAreaAcres": 0,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.777949,-84.574624,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "NONE", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural", "connectivityIssue",
-    "multipleFacilities", "scale", "dropYard", "multiStep"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "urbanRural",
+    "connectivityIssue",
+    "multipleFacilities",
+    "scale",
+    "dropYard",
+    "multiStep"
   ],
   "fieldNotes": {
     "locationStatus": "FACILITY NOT POSITIVELY LOCATED. Roster supplies only 'Austell, GA 30168' with an APPROXIMATE geocode (33.777949, -84.574624) identical to idx 8 (Georgia I); the point lands on a residential apartment complex / water tower, not an industrial building.",

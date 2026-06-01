@@ -1,12 +1,72 @@
 {
   "name": "SalSon Logistics - Houston TX",
   "type": "Drayage Terminal / Truck & Trailer Parking Yard",
-  "coords": { "lat": 29.806200, "lng": -95.275000 },
+  "coords": {
+    "lat": 29.8062,
+    "lng": -95.275
+  },
   "geofences": {
-    "perimeter": { "south": 29.804500, "west": -95.276900, "north": 29.807400, "east": -95.272600 },
-    "truckGate": { "south": 29.805350, "west": -95.274700, "north": 29.805650, "east": -95.274200 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.806796,
+          "lng": -95.277026
+        },
+        {
+          "lat": 29.807392,
+          "lng": -95.274485
+        },
+        {
+          "lat": 29.805872,
+          "lng": -95.273901
+        },
+        {
+          "lat": 29.805217,
+          "lng": -95.276373
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 29.806677,
+          "lng": -95.276957
+        },
+        {
+          "lat": 29.806736,
+          "lng": -95.276614
+        },
+        {
+          "lat": 29.806438,
+          "lng": -95.276476
+        },
+        {
+          "lat": 29.806349,
+          "lng": -95.27682
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 29.804900, "west": -95.276700, "north": 29.807300, "east": -95.272800 }
+      {
+        "ring": [
+          {
+            "lat": 29.806677,
+            "lng": -95.276682
+          },
+          {
+            "lat": 29.807183,
+            "lng": -95.274657
+          },
+          {
+            "lat": 29.8062,
+            "lng": -95.274313
+          },
+          {
+            "lat": 29.805634,
+            "lng": -95.276305
+          }
+        ]
+      }
     ],
     "dockAprons": [],
     "staging": null
@@ -17,23 +77,40 @@
     "trailerParkingCapacity": 500,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 16.0,
+    "siteAreaAcres": 16,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@29.806200,-95.275000,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "NONE", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "NONE",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "8357 Liberty Rd is the 'Outpost' / 'Secure Trailer Lots' commercial truck-parking yard — a fully fenced 16-acre lot. 2021 Street View shows metal-panel perimeter fencing with a gravel driveway gap; the yard is gated.",
     "guardShack": "No staffed guard booth visible at the gate. Outpost truck-parking yards operate self-service with app/keypad access, so remoteGs is true. Flagged uncertain — 2021 imagery is the most recent Street View.",

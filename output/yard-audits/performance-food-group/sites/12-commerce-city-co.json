@@ -1,17 +1,108 @@
 {
   "name": "Performance Foodservice - Denver (Commerce City CO)",
   "type": "Broadline Foodservice Distribution Center",
-  "coords": { "lat": 39.877035, "lng": -104.864645 },
+  "coords": {
+    "lat": 39.877035,
+    "lng": -104.864645
+  },
   "geofences": {
-    "perimeter": { "south": 39.87520, "west": -104.86560, "north": 39.87870, "east": -104.86250 },
-    "truckGate": { "south": 39.87600, "west": -104.86560, "north": 39.87680, "east": -104.86480 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.877878,
+          "lng": -104.865332
+        },
+        {
+          "lat": 39.877878,
+          "lng": -104.861761
+        },
+        {
+          "lat": 39.875876,
+          "lng": -104.861761
+        },
+        {
+          "lat": 39.875876,
+          "lng": -104.865332
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.876245,
+          "lng": -104.865332
+        },
+        {
+          "lat": 39.876245,
+          "lng": -104.864782
+        },
+        {
+          "lat": 39.875928,
+          "lng": -104.864782
+        },
+        {
+          "lat": 39.875928,
+          "lng": -104.865332
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 39.87520, "west": -104.86460, "north": 39.87650, "east": -104.86250 }
+      {
+        "ring": [
+          {
+            "lat": 39.879459,
+            "lng": -104.867941
+          },
+          {
+            "lat": 39.879459,
+            "lng": -104.866018
+          },
+          {
+            "lat": 39.876403,
+            "lng": -104.866018
+          },
+          {
+            "lat": 39.876403,
+            "lng": -104.867941
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.87620, "west": -104.86440, "north": 39.87800, "east": -104.86250 }
+      {
+        "ring": [
+          {
+            "lat": 39.877667,
+            "lng": -104.865126
+          },
+          {
+            "lat": 39.876086,
+            "lng": -104.865126
+          },
+          {
+            "lat": 39.876086,
+            "lng": -104.864851
+          },
+          {
+            "lat": 39.877667,
+            "lng": -104.864851
+          }
+        ]
+      }
     ],
-    "staging": { "south": 39.87600, "west": -104.86560, "north": 39.87750, "east": -104.86460 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 46,
+        "pano": "eFXpRImK1oZ6PEq6ze2SDQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 46,
+        "pano": "eFXpRImK1oZ6PEq6ze2SDQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 45,
@@ -19,23 +110,44 @@
     "trailerParkingCapacity": 90,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 26.0,
+    "siteAreaAcres": 26,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.877035,-104.864645,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "dropArea", "trailerParkingCapacity", "scale", "postGateStaging"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "dropArea",
+    "trailerParkingCapacity",
+    "scale",
+    "postGateStaging"
+  ],
   "fieldNotes": {
     "site": "New ~265,000 sq ft Performance Foodservice Denver DC (groundbreaking Sept 2022, completed late 2023). All imagery is construction-era: Street View Sept 2023 shows the building shell up and the perimeter fence installed but the site otherwise bare dirt; satellite tiles likewise show graded dirt around a completed building. Counts are projections for the finished facility.",
     "truckGate": "A full-length black metal security/perimeter fence is installed along the Havana St frontage (clearly visible in Sept 2023 Street View). The property is fenced with a controlled entry off Havana St — classified as a controlled truck gate.",

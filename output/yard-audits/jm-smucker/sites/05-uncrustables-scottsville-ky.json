@@ -1,19 +1,67 @@
 {
   "name": "Uncrustables - Scottsville KY",
   "type": "Manufacturing - Frozen handhelds (Uncrustables)",
-  "coords": { "lat": 36.76280, "lng": -86.18150 },
+  "coords": {
+    "lat": 36.7628,
+    "lng": -86.1815
+  },
   "geofences": {
-    "perimeter": { "south": 36.76080, "west": -86.18500, "north": 36.76560, "east": -86.17900 },
-    "truckGate": { "south": 36.76385, "west": -86.18510, "north": 36.76425, "east": -86.18460 },
-    "dropYards": [
-      { "south": 36.76360, "west": -86.18120, "north": 36.76500, "east": -86.17980 },
-      { "south": 36.76090, "west": -86.18290, "north": 36.76210, "east": -86.18160 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.76544,
+          "lng": -86.183697
+        },
+        {
+          "lat": 36.76522,
+          "lng": -86.180813
+        },
+        {
+          "lat": 36.76225,
+          "lng": -86.180676
+        },
+        {
+          "lat": 36.7617,
+          "lng": -86.182873
+        },
+        {
+          "lat": 36.76335,
+          "lng": -86.184247
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 36.76380, "west": -86.18420, "north": 36.76480, "east": -86.18300 },
-      { "south": 36.76300, "west": -86.18280, "north": 36.76440, "east": -86.18150 }
+      {
+        "ring": [
+          {
+            "lat": 36.76522,
+            "lng": -86.182873
+          },
+          {
+            "lat": 36.765,
+            "lng": -86.180813
+          },
+          {
+            "lat": 36.76423,
+            "lng": -86.180951
+          },
+          {
+            "lat": 36.76445,
+            "lng": -86.183011
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 60,
+        "pano": "xShJnDDnG0zMMP_szCaqeg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 38,
@@ -26,18 +74,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@36.7628,-86.1815,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "J.M. Smucker Uncrustables plant, 299 Smucker Way, Scottsville KY (Allen County). The original (first) Uncrustables plant — opened 2004, ~180,000 sq ft, since expanded by 80,000+ sq ft; also makes Snack-N-Waffle; ~288-500 employees. Roster pin (ROOFTOP) was ~1400m off the building centroid; resolved by satellite — a large irregular white food-plant building with processing silos, two large trailer drop yards (NE and SW) and extensive dock banks. Confirmed by Street View (Mar 2026) showing the plant and a 'Receiving / Employee Entrance' sign at the access driveway.",
     "truckGate": "FALSE — the plant access driveway off Smucker Way is signed 'Receiving / Employee Entrance' and is a wide OPEN driveway with no barrier arm, sliding gate or checkpoint pinch-point at the public road (confirmed in Street View Mar 2026). The truck route runs in openly and loops around the building to the dock yards. No controlled gate at the property line.",

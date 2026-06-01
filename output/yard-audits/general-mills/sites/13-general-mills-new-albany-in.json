@@ -1,38 +1,128 @@
 {
   "name": "General Mills - New Albany IN",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 38.32840, "lng": -85.82400 },
+  "coords": {
+    "lat": 38.3284,
+    "lng": -85.824
+  },
   "geofences": {
-    "perimeter": { "south": 38.32700, "west": -85.82700, "north": 38.33000, "east": -85.82100 },
-    "truckGate": { "south": 38.32720, "west": -85.82230, "north": 38.32780, "east": -85.82130 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.329908,
+          "lng": -85.827021
+        },
+        {
+          "lat": 38.329693,
+          "lng": -85.822901
+        },
+        {
+          "lat": 38.327107,
+          "lng": -85.823176
+        },
+        {
+          "lat": 38.327323,
+          "lng": -85.827296
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 38.32720, "west": -85.82480, "north": 38.32770, "east": -85.82230 },
-      { "south": 38.32790, "west": -85.82660, "north": 38.32870, "east": -85.82560 }
+      {
+        "ring": [
+          {
+            "lat": 38.327861,
+            "lng": -85.825373
+          },
+          {
+            "lat": 38.327646,
+            "lng": -85.822901
+          },
+          {
+            "lat": 38.327107,
+            "lng": -85.823039
+          },
+          {
+            "lat": 38.327323,
+            "lng": -85.825511
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 38.32740, "west": -85.82540, "north": 38.32810, "east": -85.82280 }
+      {
+        "ring": [
+          {
+            "lat": 38.3284,
+            "lng": -85.826747
+          },
+          {
+            "lat": 38.328185,
+            "lng": -85.824
+          },
+          {
+            "lat": 38.327754,
+            "lng": -85.824137
+          },
+          {
+            "lat": 38.327969,
+            "lng": -85.826884
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 191,
+        "pano": "mDj5KhKcv64apMSVbzZA1A",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 30, "trailersVisible": 40, "trailerParkingCapacity": 55,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 43.0,
+    "dockDoorCount": 30,
+    "trailersVisible": 40,
+    "trailerParkingCapacity": 55,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 43,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@38.32840,-85.82400,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "railServed"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "railServed"
+  ],
   "fieldNotes": {
     "location": "Roster coordinates (38.328544,-85.82367, GEOMETRIC_CENTER) landed on the large industrial complex at 707 Pillsbury Lane, New Albany IN - correct site. Locked center 38.3284,-85.8240.",
     "ownership": "OWNERSHIP CHANGE - this is the former General Mills Pillsbury dough/biscuit plant (founded 1959, ~460,000 sq ft). General Mills closed it in 2016 and sold it (via New Mill Capital / Tiger Group) to The Sazerac Company in June 2018. It now operates as Northwest Ordinance Distilling (Sazerac), a spirits processing/blending/bottling/distribution facility, ~200+ employees. The roster's General Mills attribution (Hyster GM plant list) is stale; the physical freight facility is audited as it stands today.",

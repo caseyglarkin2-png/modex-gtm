@@ -1,37 +1,165 @@
 {
   "name": "KDP Coffee Roasting / Distribution - Knoxville TN",
   "type": "Manufacturing & Distribution - Coffee",
-  "coords": { "lat": 35.943600, "lng": -83.824200 },
+  "coords": {
+    "lat": 35.9436,
+    "lng": -83.8242
+  },
   "geofences": {
-    "perimeter": { "south": 35.941800, "west": -83.826200, "north": 35.945500, "east": -83.822400 },
-    "truckGate": { "south": 35.944300, "west": -83.822900, "north": 35.944700, "east": -83.822400 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.943822,
+          "lng": -83.826741
+        },
+        {
+          "lat": 35.945268,
+          "lng": -83.824543
+        },
+        {
+          "lat": 35.944434,
+          "lng": -83.82214
+        },
+        {
+          "lat": 35.943711,
+          "lng": -83.822689
+        },
+        {
+          "lat": 35.943155,
+          "lng": -83.824887
+        },
+        {
+          "lat": 35.943266,
+          "lng": -83.826397
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.943711,
+          "lng": -83.826672
+        },
+        {
+          "lat": 35.943822,
+          "lng": -83.826329
+        },
+        {
+          "lat": 35.943544,
+          "lng": -83.826191
+        },
+        {
+          "lat": 35.943433,
+          "lng": -83.826535
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 35.941800, "west": -83.825900, "north": 35.943200, "east": -83.823200 }
+      {
+        "ring": [
+          {
+            "lat": 35.943544,
+            "lng": -83.824749
+          },
+          {
+            "lat": 35.944045,
+            "lng": -83.822827
+          },
+          {
+            "lat": 35.943656,
+            "lng": -83.822689
+          },
+          {
+            "lat": 35.943155,
+            "lng": -83.824612
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.943200, "west": -83.825100, "north": 35.944600, "east": -83.822700 }
+      {
+        "ring": [
+          {
+            "lat": 35.9436,
+            "lng": -83.82626
+          },
+          {
+            "lat": 35.944211,
+            "lng": -83.824749
+          },
+          {
+            "lat": 35.943822,
+            "lng": -83.824543
+          },
+          {
+            "lat": 35.943211,
+            "lng": -83.826054
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 35.944823,
+            "lng": -83.824337
+          },
+          {
+            "lat": 35.944156,
+            "lng": -83.822483
+          },
+          {
+            "lat": 35.943822,
+            "lng": -83.822689
+          },
+          {
+            "lat": 35.944489,
+            "lng": -83.824543
+          }
+        ]
+      }
     ],
-    "staging": { "south": 35.943400, "west": -83.824200, "north": 35.944400, "east": -83.823100 }
+    "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 34, "trailersVisible": 70, "trailerParkingCapacity": 110,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 31.0,
+    "dockDoorCount": 34,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 31,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@35.943600,-83.824200,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "Roster coords (5000 Western Ave, 35.9727/-84.0032) were wrong - that point is residential NW Knoxville (geocode itself flagged movedMeters 1701). Web research (Waze, Manta, D&B, Green Mountain press releases) confirms the actual facility is the former Green Mountain Coffee / Keurig Knox County plant at 3109 Water Plant Rd, Knoxville TN 37914, in the Forks of the River Industrial Park - a 334,000 sq ft building on ~31 acres, K-Cup manufacturing + coffee roasting/distribution. Positively confirmed by Street View: building front carries the 'Keurig Dr Pepper' logo and address '3109'. Locked center 35.9436/-83.8242.",
     "truckGate": "No controlled truck gate. The dock apron and truck yard are open directly to Water Plant Rd via wide unbarred driveways; Street View shows no barrier arm and no guard booth - employee parking and the dock bank front the road.",

@@ -1,15 +1,135 @@
 {
   "name": "Bob Evans Farms - Sulphur Springs TX Plant",
   "type": "Manufacturing plant (refrigerated sides, including Bob Evans Macaroni & Cheese)",
-  "coords": { "lat": 33.129500, "lng": -95.580600 },
+  "coords": {
+    "lat": 33.1295,
+    "lng": -95.5806
+  },
   "geofences": {
-    "perimeter": { "south": 33.127800, "west": -95.582100, "north": 33.130900, "east": -95.579100 },
-    "truckGate": null,
-    "dropYards": [],
-    "dockAprons": [
-      { "south": 33.128900, "west": -95.581300, "north": 33.129300, "east": -95.580300 }
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.13065,
+          "lng": -95.582523
+        },
+        {
+          "lat": 33.130823,
+          "lng": -95.580257
+        },
+        {
+          "lat": 33.129788,
+          "lng": -95.579501
+        },
+        {
+          "lat": 33.12858,
+          "lng": -95.579913
+        },
+        {
+          "lat": 33.128637,
+          "lng": -95.582111
+        },
+        {
+          "lat": 33.129788,
+          "lng": -95.582797
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.130823,
+          "lng": -95.579776
+        },
+        {
+          "lat": 33.130765,
+          "lng": -95.579433
+        },
+        {
+          "lat": 33.130535,
+          "lng": -95.579501
+        },
+        {
+          "lat": 33.130593,
+          "lng": -95.579845
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 33.12881,
+            "lng": -95.581081
+          },
+          {
+            "lat": 33.128867,
+            "lng": -95.580463
+          },
+          {
+            "lat": 33.128407,
+            "lng": -95.580394
+          },
+          {
+            "lat": 33.12835,
+            "lng": -95.581012
+          }
+        ]
+      }
     ],
-    "staging": null
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 33.130018,
+            "lng": -95.582111
+          },
+          {
+            "lat": 33.130133,
+            "lng": -95.580257
+          },
+          {
+            "lat": 33.129788,
+            "lng": -95.580188
+          },
+          {
+            "lat": 33.129673,
+            "lng": -95.582042
+          }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        {
+          "lat": 33.128867,
+          "lng": -95.581287
+        },
+        {
+          "lat": 33.128925,
+          "lng": -95.580325
+        },
+        {
+          "lat": 33.12835,
+          "lng": -95.580257
+        },
+        {
+          "lat": 33.128292,
+          "lng": -95.581218
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 258,
+        "pano": "uw4eGpvTllv4CrgfF0647Q",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 258,
+        "pano": "uw4eGpvTllv4CrgfF0647Q",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 12,
@@ -22,18 +142,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@33.129500,-95.580600,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Two open driveways off Industrial Dr E (front employee/visitor drive and a west truck drive). Both are open curb cuts with no barrier arm, gate, or pinch-point. Confirmed in Street View (2025-06) — no perimeter fence around the property.",
     "guardShack": "No booth at either driveway. A covered shelter near the parking lot is a carport/break shelter, not a guard booth.",

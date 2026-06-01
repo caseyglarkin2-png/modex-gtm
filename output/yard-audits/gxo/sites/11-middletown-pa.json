@@ -1,15 +1,74 @@
 {
   "name": "GXO Logistics Distribution Center - Middletown PA",
   "type": "Fulfillment Center",
-  "coords": { "lat": 40.20785, "lng": -76.74640 },
+  "coords": {
+    "lat": 40.20785,
+    "lng": -76.7464
+  },
   "geofences": {
-    "perimeter": { "south": 40.20640, "west": -76.74920, "north": 40.20920, "east": -76.74380 },
-    "truckGate": { "south": 40.20835, "west": -76.74400, "north": 40.20885, "east": -76.74340 },
-    "dropYards": [
-      { "south": 40.20840, "west": -76.74920, "north": 40.20910, "east": -76.74400 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.208899,
+          "lng": -76.748872
+        },
+        {
+          "lat": 40.208899,
+          "lng": -76.743516
+        },
+        {
+          "lat": 40.205752,
+          "lng": -76.743516
+        },
+        {
+          "lat": 40.205752,
+          "lng": -76.748872
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 40.20815, "west": -76.74920, "north": 40.20855, "east": -76.74400 }
+      {
+        "ring": [
+          {
+            "lat": 40.208689,
+            "lng": -76.748597
+          },
+          {
+            "lat": 40.208689,
+            "lng": -76.743791
+          },
+          {
+            "lat": 40.208165,
+            "lng": -76.743791
+          },
+          {
+            "lat": 40.208165,
+            "lng": -76.748597
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.207221,
+            "lng": -76.748597
+          },
+          {
+            "lat": 40.207221,
+            "lng": -76.743791
+          },
+          {
+            "lat": 40.206696,
+            "lng": -76.743791
+          },
+          {
+            "lat": 40.206696,
+            "lng": -76.748597
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -24,18 +83,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@40.20785,-76.74640,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "truckGate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "truckGate"
+  ],
   "fieldNotes": {
     "truckGate": "Truck court is accessed from the internal east road at the NE corner of the property; the access is an open paved connection with no barrier arm or sliding gate visible in z20 satellite. Chain-link truck-court fencing is present along the dock face (seen in Street View) but the road entrance itself is uncontrolled. Classed false.",
     "guardShack": "No guard booth visible at any entrance in z20 satellite or Street View. Capital Logistics Center monument-sign entrance is wide and open.",

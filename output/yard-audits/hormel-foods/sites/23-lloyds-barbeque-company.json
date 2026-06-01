@@ -1,17 +1,116 @@
 {
   "name": "Lloyd's Barbeque Company - Mendota Heights MN",
   "type": "Production Facility",
-  "coords": { "lat": 44.86640, "lng": -93.17050 },
+  "coords": {
+    "lat": 44.8664,
+    "lng": -93.1705
+  },
   "geofences": {
-    "perimeter": { "south": 44.86530, "west": -93.17175, "north": 44.86790, "east": -93.16940 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 44.867665,
+          "lng": -93.171461
+        },
+        {
+          "lat": 44.867568,
+          "lng": -93.170157
+        },
+        {
+          "lat": 44.866157,
+          "lng": -93.170088
+        },
+        {
+          "lat": 44.865816,
+          "lng": -93.1705
+        },
+        {
+          "lat": 44.865913,
+          "lng": -93.171461
+        },
+        {
+          "lat": 44.866887,
+          "lng": -93.171599
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 44.866157,
+          "lng": -93.1705
+        },
+        {
+          "lat": 44.866157,
+          "lng": -93.170088
+        },
+        {
+          "lat": 44.865865,
+          "lng": -93.170088
+        },
+        {
+          "lat": 44.865865,
+          "lng": -93.1705
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 44.86680, "west": -93.17080, "north": 44.86770, "east": -93.16970 }
+      {
+        "ring": [
+          {
+            "lat": 44.867568,
+            "lng": -93.171187
+          },
+          {
+            "lat": 44.867519,
+            "lng": -93.170363
+          },
+          {
+            "lat": 44.86713,
+            "lng": -93.170363
+          },
+          {
+            "lat": 44.867179,
+            "lng": -93.171187
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 44.86620, "west": -93.17080, "north": 44.86680, "east": -93.16990 }
+      {
+        "ring": [
+          {
+            "lat": 44.866789,
+            "lng": -93.171324
+          },
+          {
+            "lat": 44.866741,
+            "lng": -93.170225
+          },
+          {
+            "lat": 44.866546,
+            "lng": -93.170225
+          },
+          {
+            "lat": 44.866595,
+            "lng": -93.171324
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 359,
+        "pano": "NKMyrZjFGuDBbkq3vHBuEQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 359,
+        "pano": "NKMyrZjFGuDBbkq3vHBuEQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 14,
@@ -19,7 +118,7 @@
     "trailerParkingCapacity": 24,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 12.0,
+    "siteAreaAcres": 12,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@44.86640,-93.17050,400m/data=!3m1!1e3",
@@ -48,7 +147,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "truckGate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "truckGate"
+  ],
   "fieldNotes": {
     "location": "Roster coords (44.86629,-93.170877, ROOFTOP) landed on/near the plant. Confirmed via Hormel ownership and the 1455 Mendota Heights Rd address: a single large white-roofed meat-processing building with heavy rooftop refrigeration/processing equipment in the Mendota Heights industrial park. Locked center 44.86640,-93.17050.",
     "truckGate": "Open site. Satellite shows no perimeter fence; the truck yard, dock apron and employee parking form one continuous paved lot off Mendota Heights Rd. StreetView confirms open landscaped frontage with no gate or barrier arm. truckGate false. (StreetView has no road access into the truck yard itself, so a low-likelihood internal gate cannot be 100% excluded -> flagged.)",

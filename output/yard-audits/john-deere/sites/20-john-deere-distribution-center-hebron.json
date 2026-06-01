@@ -1,38 +1,93 @@
 {
   "name": "John Deere Distribution Center - Hebron IN",
   "type": "Parts Distribution Center",
-  "coords": { "lat": 41.2820, "lng": -87.3020 },
+  "coords": {
+    "lat": 41.282,
+    "lng": -87.302
+  },
   "geofences": {
-    "perimeter": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.283651,
+          "lng": -87.304747
+        },
+        {
+          "lat": 41.282826,
+          "lng": -87.302
+        },
+        {
+          "lat": 41.280762,
+          "lng": -87.303099
+        },
+        {
+          "lat": 41.281484,
+          "lng": -87.305571
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 0, "trailersVisible": 0, "trailerParkingCapacity": 0,
-    "truckGateCount": 0, "buildingCount": 0, "siteAreaAcres": 234.0,
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 0,
+    "buildingCount": 0,
+    "siteAreaAcres": 234,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.2820,-87.3020,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "NONE", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "connectivityIssue",
-    "multipleFacilities", "scale", "dropYard", "multiStep"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "connectivityIssue",
+    "multipleFacilities",
+    "scale",
+    "dropYard",
+    "multiStep"
   ],
   "fieldNotes": {
     "site": "Greenfield site. John Deere purchased the 234-acre parcel SW of the I-65 / SR-2 (181st Ave) interchange near Hebron/Lowell IN in July 2024 for $7M and broke ground on the $125M, 1.2M-sq-ft warehouse/distribution center in late January 2026. As of the available ©2026 Airbus satellite imagery, the SW quadrant of the interchange is entirely undeveloped farmland (with a small pond / borrow area) - no graded building pad, no foundation, no truck infrastructure is visible. Nothing to audit yet.",

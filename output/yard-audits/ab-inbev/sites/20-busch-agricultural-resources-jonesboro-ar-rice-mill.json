@@ -1,13 +1,87 @@
 {
   "name": "Busch Agricultural Resources - Jonesboro AR Rice Mill",
   "type": "Agricultural Processing - Rice Mill",
-  "coords": { "lat": 35.8748, "lng": -90.6005 },
+  "coords": {
+    "lat": 35.8748,
+    "lng": -90.6005
+  },
   "geofences": {
-    "perimeter": { "south": 35.87320, "west": -90.60280, "north": 35.87680, "east": -90.59880 },
-    "truckGate": { "south": 35.87420, "west": -90.59930, "north": 35.87460, "east": -90.59870 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.876024,
+          "lng": -90.602011
+        },
+        {
+          "lat": 35.876247,
+          "lng": -90.598577
+        },
+        {
+          "lat": 35.87391,
+          "lng": -90.59844
+        },
+        {
+          "lat": 35.873687,
+          "lng": -90.601873
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.874132,
+          "lng": -90.602285
+        },
+        {
+          "lat": 35.874132,
+          "lng": -90.601736
+        },
+        {
+          "lat": 35.873798,
+          "lng": -90.601805
+        },
+        {
+          "lat": 35.873798,
+          "lng": -90.602354
+        }
+      ]
+    },
     "dropYards": [],
-    "dockAprons": [],
-    "staging": { "south": 35.87370, "west": -90.60100, "north": 35.87450, "east": -90.59980 }
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 35.874355,
+            "lng": -90.601187
+          },
+          {
+            "lat": 35.874411,
+            "lng": -90.599676
+          },
+          {
+            "lat": 35.874077,
+            "lng": -90.599676
+          },
+          {
+            "lat": 35.874021,
+            "lng": -90.601187
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 68,
+        "pano": "8KAUYC9FOqty130Vucmj1w",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 68,
+        "pano": "8KAUYC9FOqty130Vucmj1w",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 4,
@@ -15,7 +89,7 @@
     "trailerParkingCapacity": 15,
     "truckGateCount": 2,
     "buildingCount": 6,
-    "siteAreaAcres": 36.0,
+    "siteAreaAcres": 36,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@35.8748,-90.6005,400m/data=!3m1!1e3",
@@ -44,7 +118,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "scale",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Two open driveways connect the mill yard to County Road 905 on the east side - both are wide gravel/paved entrances with no barrier arm, sliding gate, or checkpoint structure. Street View Dec 2024 shows the truck entrance has only loose orange jersey barriers placed near the apron (likely traffic-channeling), not an access-control gate, and no guard booth. The west side is bounded by US-49/Hwy 49 and a rail corridor.",
     "guardShack": "No staffed guard booth at either CR 905 entrance in satellite or Street View Dec 2024.",

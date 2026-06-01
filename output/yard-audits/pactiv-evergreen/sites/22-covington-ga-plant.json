@@ -1,17 +1,63 @@
 {
   "name": "Pactiv Evergreen - Covington GA Plant",
   "type": "Manufacturing Plant (Foodservice)",
-  "coords": { "lat": 33.61225, "lng": -83.84620 },
+  "coords": {
+    "lat": 33.61225,
+    "lng": -83.8462
+  },
   "geofences": {
-    "perimeter": { "south": 33.60960, "west": -83.84830, "north": 33.61480, "east": -83.84300 },
-    "truckGate": { "south": 33.61430, "west": -83.84580, "north": 33.61475, "east": -83.84520 },
-    "dropYards": [
-      { "south": 33.61050, "west": -83.84480, "north": 33.61320, "east": -83.84360 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.614309,
+          "lng": -83.848947
+        },
+        {
+          "lat": 33.61408,
+          "lng": -83.844552
+        },
+        {
+          "lat": 33.609734,
+          "lng": -83.844827
+        },
+        {
+          "lat": 33.609963,
+          "lng": -83.849221
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 33.61080, "west": -83.84560, "north": 33.61340, "east": -83.84440 }
+      {
+        "ring": [
+          {
+            "lat": 33.611678,
+            "lng": -83.848672
+          },
+          {
+            "lat": 33.611449,
+            "lng": -83.845101
+          },
+          {
+            "lat": 33.610763,
+            "lng": -83.845239
+          },
+          {
+            "lat": 33.610992,
+            "lng": -83.848809
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 180,
+        "pano": "babLK4Z5a89Wnu9AiOZ7Fg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 45,
@@ -19,7 +65,7 @@
     "trailerParkingCapacity": 110,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 52.0,
+    "siteAreaAcres": 52,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.61225,-83.84620,400m/data=!3m1!1e3",
@@ -48,7 +94,15 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "shipRcvSeparate", "multiStep"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "shipRcvSeparate",
+    "multiStep"
+  ],
   "fieldNotes": {
     "truckGate": "Very large foam-manufacturing complex enclosed by a continuous chain-link perimeter fence (privacy slats visible on the SW and NW sides in 2026-02 Street View). A facility of this scale and 24/7 operation with full perimeter fencing has a controlled truck entrance.",
     "guardShack": "Could not be visually confirmed - the internal plant entry road off the Alcovy Rd signalized intersection has no Street View coverage and z20/z21 satellite over the entry/office is overexposed. No booth positively identified. Flagged uncertain.",

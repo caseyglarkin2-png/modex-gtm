@@ -1,18 +1,63 @@
 {
   "name": "CJ Logistics - Lebanon TN",
   "type": "Distribution Center",
-  "coords": { "lat": 36.131, "lng": -86.4064 },
+  "coords": {
+    "lat": 36.131,
+    "lng": -86.4064
+  },
   "geofences": {
-    "perimeter": { "south": 36.12930, "west": -86.40850, "north": 36.13270, "east": -86.40430 },
-    "truckGate": { "south": 36.12955, "west": -86.40790, "north": 36.13000, "east": -86.40730 },
-    "dropYards": [
-      { "south": 36.13070, "west": -86.40570, "north": 36.13230, "east": -86.40470 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.132608,
+          "lng": -86.407361
+        },
+        {
+          "lat": 36.132775,
+          "lng": -86.4064
+        },
+        {
+          "lat": 36.12917,
+          "lng": -86.404889
+        },
+        {
+          "lat": 36.129003,
+          "lng": -86.405851
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 36.12950, "west": -86.40820, "north": 36.13230, "east": -86.40640 },
-      { "south": 36.13000, "west": -86.40640, "north": 36.13270, "east": -86.40470 }
+      {
+        "ring": [
+          {
+            "lat": 36.132525,
+            "lng": -86.407396
+          },
+          {
+            "lat": 36.132691,
+            "lng": -86.406469
+          },
+          {
+            "lat": 36.132303,
+            "lng": -86.406331
+          },
+          {
+            "lat": 36.132137,
+            "lng": -86.407258
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 174,
+        "pano": "NsKgXMVi0xT_JMltw_M7hw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 70,
@@ -25,18 +70,38 @@
   },
   "mapsUrl": "https://www.google.com/maps/@36.131,-86.4064,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "dropArea", "trailerParkingCapacity", "entryLanes", "exitLanes", "truckGateCount"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "dropArea",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes",
+    "truckGateCount"
+  ],
   "fieldNotes": {
     "location": "Roster supplied no street address (Indeed locations list) and city-centroid coords (36.2081, -86.2911) in downtown Lebanon, ~9km off. Resolved to 14840 Central Pike / 14840 Duke Dr, Lebanon TN 37090 - the documented DSC Logistics Lebanon facility (B&G Foods distribution). DSC Logistics is the legacy company CJ Logistics America was formed from, so this is the CJ Logistics Lebanon site. Geocoded ROOFTOP to ~36.130, -86.406; satellite confirmed a large cross-dock DC in the Lebanon / I-840 logistics corridor.",
     "truckGate": "z20-z21 satellite clearly shows a gate (cantilever / swing gate) spanning the truck lane at the SW end of the truck court, with perimeter fencing along the court. truckGate=true.",

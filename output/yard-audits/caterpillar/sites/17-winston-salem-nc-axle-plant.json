@@ -1,18 +1,108 @@
 {
   "name": "Caterpillar - Winston-Salem NC Axle Plant",
   "type": "Manufacturing plant (axles, ~850k sq ft on 102 acres)",
-  "coords": { "lat": 36.06030, "lng": -80.11800 },
+  "coords": {
+    "lat": 36.0603,
+    "lng": -80.118
+  },
   "geofences": {
-    "perimeter": { "south": 36.05750, "west": -80.12100, "north": 36.06350, "east": -80.11450 },
-    "truckGate": { "south": 36.06150, "west": -80.11820, "north": 36.06220, "east": -80.11730 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.062076,
+          "lng": -80.120335
+        },
+        {
+          "lat": 36.061854,
+          "lng": -80.115803
+        },
+        {
+          "lat": 36.058524,
+          "lng": -80.116077
+        },
+        {
+          "lat": 36.058746,
+          "lng": -80.120609
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 36.058524,
+          "lng": -80.119099
+        },
+        {
+          "lat": 36.058413,
+          "lng": -80.118
+        },
+        {
+          "lat": 36.057858,
+          "lng": -80.118137
+        },
+        {
+          "lat": 36.057969,
+          "lng": -80.119236
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 36.06090, "west": -80.11830, "north": 36.06250, "east": -80.11620 },
-      { "south": 36.05950, "west": -80.12020, "north": 36.06120, "east": -80.11880 }
+      {
+        "ring": [
+          {
+            "lat": 36.058968,
+            "lng": -80.118
+          },
+          {
+            "lat": 36.058857,
+            "lng": -80.115803
+          },
+          {
+            "lat": 36.05808,
+            "lng": -80.11594
+          },
+          {
+            "lat": 36.058191,
+            "lng": -80.118137
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 36.06100, "west": -80.11830, "north": 36.06180, "east": -80.11600 }
+      {
+        "ring": [
+          {
+            "lat": 36.061188,
+            "lng": -80.120197
+          },
+          {
+            "lat": 36.060966,
+            "lng": -80.117313
+          },
+          {
+            "lat": 36.060522,
+            "lng": -80.117451
+          },
+          {
+            "lat": 36.060744,
+            "lng": -80.120335
+          }
+        ]
+      }
     ],
-    "staging": { "south": 36.06150, "west": -80.11830, "north": 36.06240, "east": -80.11720 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 126,
+        "pano": "2OaLvrkNg8R5eNtGL30Zfw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 126,
+        "pano": "2OaLvrkNg8R5eNtGL30Zfw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 14,
@@ -20,23 +110,40 @@
     "trailerParkingCapacity": 35,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 96.0,
+    "siteAreaAcres": 96,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@36.06030,-80.11800,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "exitLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Roster lat/lng (ROOFTOP, movedMeters 63) landed directly on the plant building - accurate. Confirmed via Gray Construction / Dun & Bradstreet (4770 Axle Dr) and Caterpillar's own description: 850,000 sq ft axle-machining/assembly/test/paint plant on a 102-acre site, opened 2011, produces axle assemblies for the largest Cat mining trucks.",
     "truckGate": "Controlled entrance: a private access road runs from the public road (Axle Dr) past a CATERPILLAR monument sign to a gatehouse/booth structure where the road forks into the operational area (36.0618,-80.1178). Confirmed in z21 satellite and 2026 Street View.",

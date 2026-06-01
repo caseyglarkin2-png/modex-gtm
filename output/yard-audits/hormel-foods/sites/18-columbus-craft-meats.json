@@ -1,35 +1,153 @@
 {
   "name": "Columbus Craft Meats - Hayward CA",
   "type": "Meat Processing Plant",
-  "coords": { "lat": 37.61330, "lng": -122.05260 },
+  "coords": {
+    "lat": 37.6133,
+    "lng": -122.0526
+  },
   "geofences": {
-    "perimeter": { "south": 37.61240, "west": -122.05420, "north": 37.61420, "east": -122.05230 },
-    "truckGate": null,
-    "dropYards": [],
-    "dockAprons": [
-      { "south": 37.61300, "west": -122.05290, "north": 37.61400, "east": -122.05240 }
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.61417,
+          "lng": -122.053699
+        },
+        {
+          "lat": 37.614197,
+          "lng": -122.052875
+        },
+        {
+          "lat": 37.61243,
+          "lng": -122.05284
+        },
+        {
+          "lat": 37.612348,
+          "lng": -122.05363
+        },
+        {
+          "lat": 37.6133,
+          "lng": -122.053767
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 37.613164,
+          "lng": -122.053767
+        },
+        {
+          "lat": 37.613191,
+          "lng": -122.053561
+        },
+        {
+          "lat": 37.613001,
+          "lng": -122.053527
+        },
+        {
+          "lat": 37.612974,
+          "lng": -122.053733
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 37.613844,
+            "lng": -122.054179
+          },
+          {
+            "lat": 37.613871,
+            "lng": -122.053767
+          },
+          {
+            "lat": 37.613518,
+            "lng": -122.053733
+          },
+          {
+            "lat": 37.61349,
+            "lng": -122.054145
+          }
+        ]
+      }
     ],
-    "staging": null
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 37.614061,
+            "lng": -122.05363
+          },
+          {
+            "lat": 37.614089,
+            "lng": -122.052943
+          },
+          {
+            "lat": 37.61398,
+            "lng": -122.052943
+          },
+          {
+            "lat": 37.613953,
+            "lng": -122.05363
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 333,
+        "pano": "4r7dFSOwRNPUPbxf4jA5SA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 333,
+        "pano": "4r7dFSOwRNPUPbxf4jA5SA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 13, "trailersVisible": 4, "trailerParkingCapacity": 8,
-    "truckGateCount": 0, "buildingCount": 1, "siteAreaAcres": 7.0,
+    "dockDoorCount": 13,
+    "trailersVisible": 4,
+    "trailerParkingCapacity": 8,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 7,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@37.61330,-122.05260,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Roster coords landed in a dense Hayward industrial park; address 30977 San Clemente St geocoded (OSM) to 37.6133,-122.0526. Note: Hormel/Columbus has TWO Hayward plants - the San Antonio St plant was announced for closure (March 2025), the San Clemente St plant remains. This audit is the San Clemente St facility. Locked center 37.6133,-122.0526.",
     "truckGate": "No perimeter fence, barrier arm, or gate. The building's dock face fronts directly on San Clemente St with open parking-lot access on all sides - fully uncontrolled.",

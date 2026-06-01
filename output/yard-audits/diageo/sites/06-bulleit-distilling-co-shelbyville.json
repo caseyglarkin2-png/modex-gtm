@@ -1,35 +1,137 @@
 {
   "name": "Bulleit Distilling Co. (Shelbyville) - Shelbyville KY",
   "type": "Distillery",
-  "coords": { "lat": 38.22280, "lng": -85.14320 },
+  "coords": {
+    "lat": 38.2228,
+    "lng": -85.1432
+  },
   "geofences": {
-    "perimeter": { "south": 38.21550, "west": -85.14950, "north": 38.22760, "east": -85.14000 },
-    "truckGate": null,
-    "dropYards": [],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.227763,
+          "lng": -85.14732
+        },
+        {
+          "lat": 38.226252,
+          "lng": -85.137158
+        },
+        {
+          "lat": 38.221721,
+          "lng": -85.137707
+        },
+        {
+          "lat": 38.2228,
+          "lng": -85.147869
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 38.222368,
+          "lng": -85.141827
+        },
+        {
+          "lat": 38.222153,
+          "lng": -85.139904
+        },
+        {
+          "lat": 38.22129,
+          "lng": -85.140179
+        },
+        {
+          "lat": 38.221505,
+          "lng": -85.142101
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 38.225821,
+            "lng": -85.146221
+          },
+          {
+            "lat": 38.224958,
+            "lng": -85.138805
+          },
+          {
+            "lat": 38.223663,
+            "lng": -85.13908
+          },
+          {
+            "lat": 38.224526,
+            "lng": -85.146496
+          }
+        ]
+      }
+    ],
     "dockAprons": [
-      { "south": 38.22250, "west": -85.14400, "north": 38.22360, "east": -85.14260 }
+      {
+        "ring": [
+          {
+            "lat": 38.224742,
+            "lng": -85.145947
+          },
+          {
+            "lat": 38.22431,
+            "lng": -85.141827
+          },
+          {
+            "lat": 38.223447,
+            "lng": -85.142101
+          },
+          {
+            "lat": 38.223879,
+            "lng": -85.146221
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 4, "trailersVisible": 1, "trailerParkingCapacity": 8,
-    "truckGateCount": 1, "buildingCount": 14, "siteAreaAcres": 38.0,
+    "dockDoorCount": 4,
+    "trailersVisible": 1,
+    "trailerParkingCapacity": 8,
+    "truckGateCount": 1,
+    "buildingCount": 14,
+    "siteAreaAcres": 38,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@38.22280,-85.14320,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "0-10", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": true, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "0-10",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoors", "scale", "connectivityIssue"],
+  "uncertainFields": [
+    "dockDoors",
+    "scale",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "truckGate": "Campus access drive off Benson Pike is open: a wide landscaped two-lane drive into a roundabout with a visitor center; no barrier arm, sliding gate, or checkpoint visible at the road junction in 2024-11 Street View.",
     "guardShack": "No staffed booth at the entrance. The first structure inside the drive is the public visitor/tasting center, not a guard booth.",

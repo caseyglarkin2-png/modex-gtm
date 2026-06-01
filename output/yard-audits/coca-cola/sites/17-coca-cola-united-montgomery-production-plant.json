@@ -1,37 +1,144 @@
 {
   "name": "Coca-Cola UNITED - Montgomery Production Plant, AL",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 32.293000, "lng": -86.342800 },
+  "coords": {
+    "lat": 32.293,
+    "lng": -86.3428
+  },
   "geofences": {
-    "perimeter": { "south": 32.2915, "west": -86.3450, "north": 32.2950, "east": -86.3415 },
-    "truckGate": { "south": 32.2939, "west": -86.3440, "north": 32.2944, "east": -86.3432 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.294625,
+          "lng": -86.344379
+        },
+        {
+          "lat": 32.294741,
+          "lng": -86.340946
+        },
+        {
+          "lat": 32.291955,
+          "lng": -86.340877
+        },
+        {
+          "lat": 32.291839,
+          "lng": -86.344311
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 32.2942, "west": -86.3438, "north": 32.2952, "east": -86.3418 }
+      {
+        "ring": [
+          {
+            "lat": 32.294509,
+            "lng": -86.343349
+          },
+          {
+            "lat": 32.294509,
+            "lng": -86.341839
+          },
+          {
+            "lat": 32.294045,
+            "lng": -86.341839
+          },
+          {
+            "lat": 32.294045,
+            "lng": -86.343349
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 32.2924, "west": -86.3434, "north": 32.2930, "east": -86.3418 }
+      {
+        "ring": [
+          {
+            "lat": 32.293697,
+            "lng": -86.342663
+          },
+          {
+            "lat": 32.293697,
+            "lng": -86.341083
+          },
+          {
+            "lat": 32.293406,
+            "lng": -86.341083
+          },
+          {
+            "lat": 32.293406,
+            "lng": -86.342663
+          }
+        ]
+      }
     ],
-    "staging": { "south": 32.2940, "west": -86.3434, "north": 32.2944, "east": -86.3425 }
+    "staging": {
+      "ring": [
+        {
+          "lat": 32.294509,
+          "lng": -86.344173
+        },
+        {
+          "lat": 32.294509,
+          "lng": -86.343349
+        },
+        {
+          "lat": 32.294045,
+          "lng": -86.343349
+        },
+        {
+          "lat": 32.294045,
+          "lng": -86.344173
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 113,
+        "pano": "GBQonw8Ifv5dEQRcN-3DBw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 30, "trailersVisible": 55, "trailerParkingCapacity": 85,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 31.7,
+    "dockDoorCount": 30,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 85,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 31.7,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.293,-86.3428,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Roster lat/lng (32.294107,-86.347673, GEOMETRIC_CENTER) and roster address (2000 Coca Cola Rd) geocoded to a street centerline on empty land. The real facility is the Coca-Cola UNITED Montgomery Production Plant, 300 Coca-Cola Road, Montgomery AL 36105 - a $35M Dasani/beverage production facility opened 2016, ~120 associates, ~25M cases/year. Building positively identified ~32.2930,-86.3428; Street View shows the red 'Coca-Cola' logo and a branded canopied truck gate.",
     "truckGate": "STRONG positive. Street View shows a large canopied gatehouse spanning multiple lanes off Coca-Cola Road, with the red Coca-Cola script logo on the canopy, gate barrier arms across the lanes, and a 'Do Not Enter' sign on an outbound lane. Fully controlled truck entrance.",

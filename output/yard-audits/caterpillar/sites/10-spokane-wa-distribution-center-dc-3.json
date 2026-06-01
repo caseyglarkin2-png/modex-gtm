@@ -1,19 +1,108 @@
 {
   "name": "Caterpillar - Spokane WA Distribution Center (DC-3)",
   "type": "Parts distribution center (~562k-600k sq ft, 24/7 three-shift)",
-  "coords": { "lat": 47.59660, "lng": -117.54650 },
+  "coords": {
+    "lat": 47.5966,
+    "lng": -117.5465
+  },
   "geofences": {
-    "perimeter": { "south": 47.59420, "west": -117.54900, "north": 47.59900, "east": -117.54400 },
-    "truckGate": { "south": 47.59440, "west": -117.54880, "north": 47.59560, "east": -117.54780 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 47.59873,
+          "lng": -117.549521
+        },
+        {
+          "lat": 47.59873,
+          "lng": -117.544852
+        },
+        {
+          "lat": 47.594563,
+          "lng": -117.544852
+        },
+        {
+          "lat": 47.594563,
+          "lng": -117.549521
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 47.595489,
+          "lng": -117.549521
+        },
+        {
+          "lat": 47.595489,
+          "lng": -117.548697
+        },
+        {
+          "lat": 47.595026,
+          "lng": -117.548697
+        },
+        {
+          "lat": 47.595026,
+          "lng": -117.549521
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 47.59600, "west": -117.54850, "north": 47.59850, "east": -117.54550 },
-      { "south": 47.59480, "west": -117.54870, "north": 47.59620, "east": -117.54750 }
+      {
+        "ring": [
+          {
+            "lat": 47.598637,
+            "lng": -117.549247
+          },
+          {
+            "lat": 47.598637,
+            "lng": -117.545813
+          },
+          {
+            "lat": 47.597989,
+            "lng": -117.545813
+          },
+          {
+            "lat": 47.597989,
+            "lng": -117.549247
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 47.59530, "west": -117.54550, "north": 47.59850, "east": -117.54440 },
-      { "south": 47.59820, "west": -117.54820, "north": 47.59900, "east": -117.54450 }
+      {
+        "ring": [
+          {
+            "lat": 47.597526,
+            "lng": -117.545813
+          },
+          {
+            "lat": 47.597526,
+            "lng": -117.545127
+          },
+          {
+            "lat": 47.595211,
+            "lng": -117.545127
+          },
+          {
+            "lat": 47.595211,
+            "lng": -117.545813
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 10,
+        "pano": "zN_dn8imCjlUOZswpA9YDA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 10,
+        "pano": "zN_dn8imCjlUOZswpA9YDA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 45,
@@ -21,23 +110,44 @@
     "trailerParkingCapacity": 60,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 49.0,
+    "siteAreaAcres": 49,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@47.5966,-117.5465,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "scale"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "scale"
+  ],
   "fieldNotes": {
     "site": "Confirmed via Street View - 'CATERPILLAR' wall signage clearly visible on the center building. This is the Caterpillar Spokane Distribution Center (DC-3), a ~562k sq ft 24/7 three-shift parts DC on the West Plains west of Spokane. Roster geocode (47.597017, -117.546908, moved 7941m) landed correctly inside the property.",
     "truckGate": "Site has chain-link perimeter fencing (confirmed in Street View along the SW frontage). Truck route circulates around the building from a perimeter access road into fenced dock yards. No barrier arm or guard booth could be cleanly imaged - frontages are landscaped berms screening the lot. truckGate set true on fence + 24/7 controlled-DC layout; flagged uncertain.",

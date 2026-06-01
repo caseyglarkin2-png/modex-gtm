@@ -1,48 +1,35 @@
 {
-  "schemaVersion": "1",
-  "builtAt": "2026-05-29T18:39:44.212Z",
+  "schemaVersion": "2",
+  "builtAt": "2026-06-01T01:34:45.734Z",
   "account": {
     "slug": "kraft-heinz",
     "displayName": "Kraft Heinz",
     "archetype": "cpg",
-    "siteCount": 27,
+    "siteCount": 10,
     "coverageNote": {
-      "auditedCount": 27,
-      "estimatedFootprint": 40,
+      "auditedCount": 10,
+      "estimatedFootprint": null,
       "droppedStubCount": 17,
       "capHit": false,
-      "note": "We audited 10 of an estimated ~40 NA Kraft Heinz manufacturing + DC facilities (Aurora cold storage, Holland Lunchables, Davenport Oscar Mayer, Garland TX Oscar Mayer, Massillon, Fremont ketchup, Mason City Jell-O, Fort Myers Bagel Bites, Jacksonville warehouse + portion control). Kraft Heinz operates ~50 plants globally (~80% NA-concentrated). The remaining 17 NA sites are stubs from the calibration set; backfill in progress on the highest-volume plants first.",
-      "auditedScope": "NA",
-      "totalGlobalFootprint": 50,
-      "legacyYmsFacilityCount": 25
+      "note": "Audited all 10 identifiable facilities (17 additional were unresolvable from public sources)."
     },
-    "featuredSiteId": "05-kraft-foods-jacksonville-portion-control",
-    "dossierIntro": "Kraft Heinz is the first network we used as the audit rubric. 50+ facilities; we audited 27. Davenport IA covers 72 acres with 55 docks. Fremont OH is 88 acres. 525 dock doors and 722 trailer spots. The 22-field classification framework was calibrated here. YardFlow runs the network the rubric was built for.",
-    "surprisingFindings": [
-      "27 audited sites span 10 distinct yard archetypes. Kraft is the calibration rubric for the entire dataset.",
-      "Mason City IA has 2 distinct Kraft Heinz facilities, one with a guard shack and one without. Same brand, different yard.",
-      "4 of 27 audited sites are rail-served. CPG inbound increasingly moves on truckload, not rail."
-    ]
+    "featuredSiteId": "05-kraft-foods-jacksonville-portion-control"
   },
   "research": null,
   "network": {
     "bbox": [
-      -121.2851431,
-      26.66568,
-      -75.4830318,
-      44.2987287
+      -96.66536,
+      26.664637,
+      -81.534281,
+      43.165352
     ],
     "archetypeMix": {
-      "#1": 3,
-      "#2": 2,
-      "#3": 10,
-      "#4": 2,
-      "#5": 1,
-      "#6": 3,
-      "#7": 2,
-      "#8": 1,
-      "#9": 2,
-      "#10": 1
+      "#1": 2,
+      "#3": 3,
+      "#4": 1,
+      "#6": 2,
+      "#7": 1,
+      "#9": 1
     },
     "totals": {
       "dockDoors": 525,
@@ -69,38 +56,108 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 41.78175,
-            "west": -88.37427,
-            "north": 41.7836,
-            "east": -88.37205
+            "ring": [
+              {
+                "lat": 41.783588,
+                "lng": -88.374867
+              },
+              {
+                "lat": 41.783639,
+                "lng": -88.371536
+              },
+              {
+                "lat": 41.781847,
+                "lng": -88.371468
+              },
+              {
+                "lat": 41.781796,
+                "lng": -88.374867
+              }
+            ]
           },
           "truckGate": {
-            "south": 41.78195,
-            "west": -88.3726,
-            "north": 41.78225,
-            "east": -88.3723
+            "ring": [
+              {
+                "lat": 41.782154,
+                "lng": -88.372429
+              },
+              {
+                "lat": 41.78218,
+                "lng": -88.372154
+              },
+              {
+                "lat": 41.781949,
+                "lng": -88.37212
+              },
+              {
+                "lat": 41.781924,
+                "lng": -88.372395
+              }
+            ]
           },
           "dropYards": [
             {
-              "south": 41.78175,
-              "west": -88.37427,
-              "north": 41.7824,
-              "east": -88.3723
+              "ring": [
+                {
+                  "lat": 41.782333,
+                  "lng": -88.374867
+                },
+                {
+                  "lat": 41.782384,
+                  "lng": -88.373322
+                },
+                {
+                  "lat": 41.781796,
+                  "lng": -88.373287
+                },
+                {
+                  "lat": 41.781796,
+                  "lng": -88.374867
+                }
+              ]
             }
           ],
           "dockAprons": [
             {
-              "south": 41.7824,
-              "west": -88.37427,
-              "north": 41.7829,
-              "east": -88.37245
+              "ring": [
+                {
+                  "lat": 41.782743,
+                  "lng": -88.374867
+                },
+                {
+                  "lat": 41.78282,
+                  "lng": -88.371914
+                },
+                {
+                  "lat": 41.782564,
+                  "lng": -88.37188
+                },
+                {
+                  "lat": 41.782487,
+                  "lng": -88.374867
+                }
+              ]
             }
           ],
           "staging": {
-            "south": 41.78195,
-            "west": -88.37235,
-            "north": 41.7823,
-            "east": -88.37205
+            "ring": [
+              {
+                "lat": 41.782436,
+                "lng": -88.373322
+              },
+              {
+                "lat": 41.782461,
+                "lng": -88.372463
+              },
+              {
+                "lat": 41.782077,
+                "lng": -88.372429
+              },
+              {
+                "lat": 41.782052,
+                "lng": -88.373287
+              }
+            ]
           }
         },
         "yardMetrics": {
@@ -205,71 +262,6 @@
         }
       },
       {
-        "id": "02-kh-muscatine",
-        "name": "Kraft Heinz - Muscatine",
-        "type": "Food Products Supplier",
-        "archetype": "#2",
-        "archetypeName": "Gate + GS (not BU sens.)+separate",
-        "confidence": "medium",
-        "uncertainFields": [
-          "dockDoorCount",
-          "trailerParkingCapacity",
-          "truckGateCount",
-          "buildingCount",
-          "siteAreaAcres"
-        ],
-        "center": {
-          "lat": 41.4372813,
-          "lng": -91.0430826
-        },
-        "geofences": {
-          "perimeter": {
-            "south": 41.434781300000004,
-            "north": 41.4397813,
-            "west": -91.0455826,
-            "east": -91.04058260000001
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": null,
-          "trailersVisible": null,
-          "trailerParkingCapacity": null,
-          "truckGateCount": null,
-          "buildingCount": null,
-          "siteAreaAcres": null,
-          "railServed": null
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": true,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": false,
-          "entryExitSeparate": true,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "10-25",
-          "dropArea": "50+",
-          "shipRcvSeparate": false,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "mapsUrl": "https://www.google.com/maps/@41.4372813,-91.0430826,581m/data=!3m1!1e3?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
-      },
-      {
         "id": "03-kraft-heinz-holland",
         "name": "Kraft Heinz - Holland",
         "type": "Food Manufacturer",
@@ -288,40 +280,146 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 42.7826,
-            "west": -86.1308,
-            "north": 42.7848,
-            "east": -86.12585
+            "ring": [
+              {
+                "lat": 42.783953,
+                "lng": -86.131047
+              },
+              {
+                "lat": 42.785616,
+                "lng": -86.127476
+              },
+              {
+                "lat": 42.785061,
+                "lng": -86.125141
+              },
+              {
+                "lat": 42.782995,
+                "lng": -86.12521
+              },
+              {
+                "lat": 42.782794,
+                "lng": -86.130841
+              }
+            ]
           },
           "truckGate": {
-            "south": 42.78258,
-            "west": -86.127,
-            "north": 42.7828,
-            "east": -86.1262
+            "ring": [
+              {
+                "lat": 42.782995,
+                "lng": -86.127476
+              },
+              {
+                "lat": 42.782995,
+                "lng": -86.126927
+              },
+              {
+                "lat": 42.782642,
+                "lng": -86.126927
+              },
+              {
+                "lat": 42.782642,
+                "lng": -86.127476
+              }
+            ]
           },
           "dropYards": [
             {
-              "south": 42.783,
-              "west": -86.1267,
-              "north": 42.7843,
-              "east": -86.1259
+              "ring": [
+                {
+                  "lat": 42.78491,
+                  "lng": -86.126789
+                },
+                {
+                  "lat": 42.785061,
+                  "lng": -86.12521
+                },
+                {
+                  "lat": 42.783953,
+                  "lng": -86.125141
+                },
+                {
+                  "lat": 42.783802,
+                  "lng": -86.126721
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 42.783802,
+                  "lng": -86.126721
+                },
+                {
+                  "lat": 42.783902,
+                  "lng": -86.12521
+                },
+                {
+                  "lat": 42.783197,
+                  "lng": -86.12521
+                },
+                {
+                  "lat": 42.783096,
+                  "lng": -86.126652
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 42.784608,
+                  "lng": -86.129124
+                },
+                {
+                  "lat": 42.784709,
+                  "lng": -86.1283
+                },
+                {
+                  "lat": 42.783953,
+                  "lng": -86.128231
+                },
+                {
+                  "lat": 42.783852,
+                  "lng": -86.129055
+                }
+              ]
             }
           ],
           "dockAprons": [
             {
-              "south": 42.783,
-              "west": -86.13,
-              "north": 42.7833,
-              "east": -86.1287
-            },
-            {
-              "south": 42.7831,
-              "west": -86.1273,
-              "north": 42.7837,
-              "east": -86.1267
+              "ring": [
+                {
+                  "lat": 42.783348,
+                  "lng": -86.129879
+                },
+                {
+                  "lat": 42.783499,
+                  "lng": -86.127613
+                },
+                {
+                  "lat": 42.783096,
+                  "lng": -86.127545
+                },
+                {
+                  "lat": 42.782945,
+                  "lng": -86.129811
+                }
+              ]
             }
           ],
-          "staging": null
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 14,
+              "pano": "v_4dzsJiKq_v51HMGEDg2w",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 14,
+              "pano": "v_4dzsJiKq_v51HMGEDg2w",
+              "hasCoverage": true
+            }
+          }
         },
         "yardMetrics": {
           "dockDoorCount": 35,
@@ -433,53 +531,121 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 30.37535,
-            "west": -81.78735,
-            "north": 30.37865,
-            "east": -81.7831
+            "ring": [
+              {
+                "lat": 30.379823,
+                "lng": -81.787751
+              },
+              {
+                "lat": 30.379645,
+                "lng": -81.782326
+              },
+              {
+                "lat": 30.375261,
+                "lng": -81.782326
+              },
+              {
+                "lat": 30.375498,
+                "lng": -81.787751
+              }
+            ]
           },
-          "truckGate": null,
-          "dropYards": [
-            {
-              "south": 30.37635,
-              "west": -81.78705,
-              "north": 30.3771,
-              "east": -81.7832
-            },
-            {
-              "south": 30.3776,
-              "west": -81.78705,
-              "north": 30.3783,
-              "east": -81.7832
-            }
-          ],
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 30.377927,
+                "lng": -81.787751
+              },
+              {
+                "lat": 30.377927,
+                "lng": -81.787339
+              },
+              {
+                "lat": 30.377512,
+                "lng": -81.787339
+              },
+              {
+                "lat": 30.377512,
+                "lng": -81.787751
+              }
+            ]
+          },
+          "dropYards": [],
           "dockAprons": [
             {
-              "south": 30.37635,
-              "west": -81.78705,
-              "north": 30.37665,
-              "east": -81.7832
+              "ring": [
+                {
+                  "lat": 30.378934,
+                  "lng": -81.787407
+                },
+                {
+                  "lat": 30.378816,
+                  "lng": -81.782738
+                },
+                {
+                  "lat": 30.378401,
+                  "lng": -81.782807
+                },
+                {
+                  "lat": 30.378519,
+                  "lng": -81.787476
+                }
+              ]
             },
             {
-              "south": 30.3769,
-              "west": -81.78705,
-              "north": 30.3772,
-              "east": -81.7832
+              "ring": [
+                {
+                  "lat": 30.377512,
+                  "lng": -81.787476
+                },
+                {
+                  "lat": 30.377394,
+                  "lng": -81.782601
+                },
+                {
+                  "lat": 30.376979,
+                  "lng": -81.782669
+                },
+                {
+                  "lat": 30.377098,
+                  "lng": -81.787545
+                }
+              ]
             },
             {
-              "south": 30.3776,
-              "west": -81.78705,
-              "north": 30.3779,
-              "east": -81.7832
-            },
-            {
-              "south": 30.37815,
-              "west": -81.78705,
-              "north": 30.37845,
-              "east": -81.7832
+              "ring": [
+                {
+                  "lat": 30.37615,
+                  "lng": -81.787476
+                },
+                {
+                  "lat": 30.375972,
+                  "lng": -81.782601
+                },
+                {
+                  "lat": 30.375558,
+                  "lng": -81.782669
+                },
+                {
+                  "lat": 30.375735,
+                  "lng": -81.787545
+                }
+              ]
             }
           ],
-          "staging": null
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 103,
+              "pano": "QuH78IM5IxO9kgpXxrwN8w",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 103,
+              "pano": "QuH78IM5IxO9kgpXxrwN8w",
+              "hasCoverage": true
+            }
+          }
         },
         "yardMetrics": {
           "dockDoorCount": 198,
@@ -555,40 +721,85 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 30.38055,
-            "west": -81.7758,
-            "north": 30.3826,
-            "east": -81.7731
+            "ring": [
+              {
+                "lat": 30.382368,
+                "lng": -81.776441
+              },
+              {
+                "lat": 30.382368,
+                "lng": -81.773351
+              },
+              {
+                "lat": 30.380472,
+                "lng": -81.773077
+              },
+              {
+                "lat": 30.380295,
+                "lng": -81.775823
+              },
+              {
+                "lat": 30.380828,
+                "lng": -81.776579
+              }
+            ]
           },
           "truckGate": {
-            "south": 30.3821,
-            "west": -81.77555,
-            "north": 30.3826,
-            "east": -81.77525
+            "ring": [
+              {
+                "lat": 30.380591,
+                "lng": -81.775823
+              },
+              {
+                "lat": 30.380591,
+                "lng": -81.775274
+              },
+              {
+                "lat": 30.380176,
+                "lng": -81.775274
+              },
+              {
+                "lat": 30.380176,
+                "lng": -81.775823
+              }
+            ]
           },
-          "dropYards": [
-            {
-              "south": 30.3808,
-              "west": -81.775,
-              "north": 30.38115,
-              "east": -81.7743
-            }
-          ],
+          "dropYards": [],
           "dockAprons": [
             {
-              "south": 30.3808,
-              "west": -81.77405,
-              "north": 30.382,
-              "east": -81.77345
-            },
-            {
-              "south": 30.38085,
-              "west": -81.77485,
-              "north": 30.38115,
-              "east": -81.77405
+              "ring": [
+                {
+                  "lat": 30.380946,
+                  "lng": -81.776029
+                },
+                {
+                  "lat": 30.380946,
+                  "lng": -81.773351
+                },
+                {
+                  "lat": 30.380472,
+                  "lng": -81.773351
+                },
+                {
+                  "lat": 30.380472,
+                  "lng": -81.775961
+                }
+              ]
             }
           ],
-          "staging": null
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 191,
+              "pano": "xUg1QZLTfcn4-G_Qu3wVbg",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 191,
+              "pano": "xUg1QZLTfcn4-G_Qu3wVbg",
+              "hasCoverage": true
+            }
+          }
         },
         "yardMetrics": {
           "dockDoorCount": 38,
@@ -686,8 +897,8 @@
         "id": "06-kraft-heinz-davenport",
         "name": "Kraft Heinz - Davenport",
         "type": "Food Processing Company",
-        "archetype": "#5",
-        "archetypeName": "Gate + GS (not BU sens.) + multi-step",
+        "archetype": "#1",
+        "archetypeName": "Gate + GS (not BU sens.)",
         "confidence": "high",
         "uncertainFields": [
           "guardShack",
@@ -702,51 +913,69 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 41.6125,
-            "west": -90.6135,
-            "north": 41.6182,
-            "east": -90.608
+            "ring": [
+              {
+                "lat": 41.618053,
+                "lng": -90.612697
+              },
+              {
+                "lat": 41.618053,
+                "lng": -90.608852
+              },
+              {
+                "lat": 41.614768,
+                "lng": -90.608715
+              },
+              {
+                "lat": 41.614768,
+                "lng": -90.612697
+              }
+            ]
           },
           "truckGate": {
-            "south": 41.61795,
-            "west": -90.6098,
-            "north": 41.61835,
-            "east": -90.6088
+            "ring": [
+              {
+                "lat": 41.615487,
+                "lng": -90.612835
+              },
+              {
+                "lat": 41.615487,
+                "lng": -90.611873
+              },
+              {
+                "lat": 41.614768,
+                "lng": -90.611873
+              },
+              {
+                "lat": 41.614768,
+                "lng": -90.612835
+              }
+            ]
           },
           "dropYards": [
             {
-              "south": 41.6155,
-              "west": -90.6095,
-              "north": 41.617,
-              "east": -90.6082
-            },
-            {
-              "south": 41.614,
-              "west": -90.6118,
-              "north": 41.615,
-              "east": -90.6098
+              "ring": [
+                {
+                  "lat": 41.616924,
+                  "lng": -90.608715
+                },
+                {
+                  "lat": 41.616924,
+                  "lng": -90.607204
+                },
+                {
+                  "lat": 41.615795,
+                  "lng": -90.607204
+                },
+                {
+                  "lat": 41.615795,
+                  "lng": -90.608715
+                }
+              ]
             }
           ],
-          "dockAprons": [
-            {
-              "south": 41.6148,
-              "west": -90.613,
-              "north": 41.6157,
-              "east": -90.6098
-            },
-            {
-              "south": 41.6155,
-              "west": -90.6098,
-              "north": 41.617,
-              "east": -90.6088
-            }
-          ],
-          "staging": {
-            "south": 41.6172,
-            "west": -90.6118,
-            "north": 41.6182,
-            "east": -90.609
-          }
+          "dockAprons": [],
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 55,
@@ -781,50 +1010,6 @@
           "dropYard": true,
           "multiStep": false
         },
-        "scenario": {
-          "archetypeId": "#1",
-          "steps": [
-            {
-              "step": "Arrive at gate, queue for guard scan",
-              "geofenceTarget": "truckGate",
-              "durationMs": 30000,
-              "narrationKey": "gate.arrive",
-              "baselineWaitMs": 600000,
-              "ynsWaitMs": 30000
-            },
-            {
-              "step": "Pass through gate to drop yard",
-              "geofenceTarget": "dropYard",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Spotter pulls trailer to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 90000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 1200000,
-              "ynsWaitMs": 120000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Driver exits through gate",
-              "geofenceTarget": "exit",
-              "durationMs": 60000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 4440000,
-          "totalYnsMs": 2790000
-        },
         "dossierExcerpt": "The brief gave approximate coordinates 41.6154, -90.6125, an \"industrial park\" hint\nand a Velveeta archetype guess. A web search resolved the actual facility to the\nKraft Heinz meat-processing plant at 9401 Granite Way, Davenport IA, in the\nEastern Iowa Industrial Center, ~12 km north of downtown Davenport. The plant is\na 382,000 sq ft greenfield facility built by Gray Construction, commissioned\n2017, on a 70-acre site. It produces Oscar Mayer Deli Fresh and Lunchables\n(not Velveeta cheese — that's a separate KHC line).\n\nSatellite probes at z16-z21 around the given lat/lng resolved the building center\nto ~41.6160, -90.6105 (the approximate coords were ~300 m WSW of the true center).\nOnce locked, the building footprint is the large white industrial block centered\nin the wide z16 frame, with Slopertown Road on the north, a rail mainline + east-",
         "mapsUrl": "https://www.google.com/maps/@41.6160,-90.6105,400m/data=!3m1!1e3",
         "fieldNotes": {
@@ -848,71 +1033,6 @@
         }
       },
       {
-        "id": "07-kh-winchester",
-        "name": "Kraft Heinz - Winchester",
-        "type": "Food Proccessing Company",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "uncertainFields": [
-          "dockDoorCount",
-          "trailerParkingCapacity",
-          "truckGateCount",
-          "buildingCount",
-          "siteAreaAcres"
-        ],
-        "center": {
-          "lat": 39.2076604,
-          "lng": -78.147096
-        },
-        "geofences": {
-          "perimeter": {
-            "south": 39.205160400000004,
-            "north": 39.2101604,
-            "west": -78.149596,
-            "east": -78.144596
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": null,
-          "trailersVisible": null,
-          "trailerParkingCapacity": null,
-          "truckGateCount": null,
-          "buildingCount": null,
-          "siteAreaAcres": null,
-          "railServed": null
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "10-25",
-          "dropArea": "25-50",
-          "shipRcvSeparate": false,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "mapsUrl": "https://www.google.com/maps/place/Kraft+Heinz-Winchester/@39.2076604,-78.147096,939m/data=!3m1!1e3!4m6!3m5!1s0x89b5efd71a1feb5f:0x89dc6bd73b1b15a8!8m2!3d39.2074209!4d-78.1471792!16s%2Fg%2F1tjbt15p?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
-      },
-      {
         "id": "08-kraft-heinz-massillon",
         "name": "Kraft Heinz - Massillon",
         "type": "Manufacturer",
@@ -932,45 +1052,94 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 40.7765,
-            "west": -81.543,
-            "north": 40.7805,
-            "east": -81.5375
+            "ring": [
+              {
+                "lat": 40.780456,
+                "lng": -81.54362
+              },
+              {
+                "lat": 40.780872,
+                "lng": -81.534693
+              },
+              {
+                "lat": 40.776712,
+                "lng": -81.534281
+              },
+              {
+                "lat": 40.776088,
+                "lng": -81.542247
+              },
+              {
+                "lat": 40.779,
+                "lng": -81.543895
+              }
+            ]
           },
           "truckGate": {
-            "south": 40.7799,
-            "west": -81.5397,
-            "north": 40.7803,
-            "east": -81.5388
+            "ring": [
+              {
+                "lat": 40.780664,
+                "lng": -81.542247
+              },
+              {
+                "lat": 40.780768,
+                "lng": -81.541285
+              },
+              {
+                "lat": 40.78004,
+                "lng": -81.541148
+              },
+              {
+                "lat": 40.779936,
+                "lng": -81.542109
+              }
+            ]
           },
           "dropYards": [
             {
-              "south": 40.778,
-              "west": -81.5408,
-              "north": 40.7785,
-              "east": -81.5395
+              "ring": [
+                {
+                  "lat": 40.779624,
+                  "lng": -81.544581
+                },
+                {
+                  "lat": 40.779,
+                  "lng": -81.542933
+                },
+                {
+                  "lat": 40.778168,
+                  "lng": -81.54362
+                },
+                {
+                  "lat": 40.778792,
+                  "lng": -81.545268
+                }
+              ]
             }
           ],
           "dockAprons": [
             {
-              "south": 40.7779,
-              "west": -81.5415,
-              "north": 40.7784,
-              "east": -81.5398
-            },
-            {
-              "south": 40.7775,
-              "west": -81.5398,
-              "north": 40.778,
-              "east": -81.538
+              "ring": [
+                {
+                  "lat": 40.779832,
+                  "lng": -81.541423
+                },
+                {
+                  "lat": 40.779936,
+                  "lng": -81.538813
+                },
+                {
+                  "lat": 40.779104,
+                  "lng": -81.538676
+                },
+                {
+                  "lat": 40.779,
+                  "lng": -81.541285
+                }
+              ]
             }
           ],
-          "staging": {
-            "south": 40.7785,
-            "west": -81.5395,
-            "north": 40.7798,
-            "east": -81.538
-          }
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 28,
@@ -1094,50 +1263,124 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 32.9059,
-            "west": -96.6657,
-            "north": 32.9091,
-            "east": -96.6608
+            "ring": [
+              {
+                "lat": 32.908484,
+                "lng": -96.665085
+              },
+              {
+                "lat": 32.908426,
+                "lng": -96.661721
+              },
+              {
+                "lat": 32.905832,
+                "lng": -96.661789
+              },
+              {
+                "lat": 32.905486,
+                "lng": -96.664536
+              },
+              {
+                "lat": 32.907562,
+                "lng": -96.66536
+              }
+            ]
           },
           "truckGate": {
-            "south": 32.90855,
-            "west": -96.66235,
-            "north": 32.90895,
-            "east": -96.66185
+            "ring": [
+              {
+                "lat": 32.908138,
+                "lng": -96.665085
+              },
+              {
+                "lat": 32.908138,
+                "lng": -96.664605
+              },
+              {
+                "lat": 32.907735,
+                "lng": -96.664605
+              },
+              {
+                "lat": 32.907735,
+                "lng": -96.665085
+              }
+            ]
           },
           "dropYards": [
             {
-              "south": 32.90865,
-              "west": -96.66515,
-              "north": 32.90905,
-              "east": -96.66415
-            },
-            {
-              "south": 32.9073,
-              "west": -96.6616,
-              "north": 32.90825,
-              "east": -96.66105
+              "ring": [
+                {
+                  "lat": 32.905775,
+                  "lng": -96.662957
+                },
+                {
+                  "lat": 32.905659,
+                  "lng": -96.660691
+                },
+                {
+                  "lat": 32.905198,
+                  "lng": -96.660759
+                },
+                {
+                  "lat": 32.905313,
+                  "lng": -96.663025
+                }
+              ]
             }
           ],
           "dockAprons": [
             {
-              "south": 32.9082,
-              "west": -96.665,
-              "north": 32.9088,
-              "east": -96.66305
-            },
-            {
-              "south": 32.9072,
-              "west": -96.6626,
-              "north": 32.9081,
-              "east": -96.6618
+              "ring": [
+                {
+                  "lat": 32.907158,
+                  "lng": -96.665017
+                },
+                {
+                  "lat": 32.907158,
+                  "lng": -96.663849
+                },
+                {
+                  "lat": 32.906466,
+                  "lng": -96.663781
+                },
+                {
+                  "lat": 32.906466,
+                  "lng": -96.664948
+                }
+              ]
             }
           ],
           "staging": {
-            "south": 32.9083,
-            "west": -96.6646,
-            "north": 32.9088,
-            "east": -96.6634
+            "ring": [
+              {
+                "lat": 32.908484,
+                "lng": -96.664879
+              },
+              {
+                "lat": 32.908426,
+                "lng": -96.662957
+              },
+              {
+                "lat": 32.908081,
+                "lng": -96.662957
+              },
+              {
+                "lat": 32.908138,
+                "lng": -96.664879
+              }
+            ]
+          },
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 155,
+              "pano": "p1-id9auyYaIoYE_t6nlJg",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 155,
+              "pano": "p1-id9auyYaIoYE_t6nlJg",
+              "hasCoverage": true
+            }
           }
         },
         "yardMetrics": {
@@ -1258,50 +1501,133 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 41.3578,
-            "west": -83.0945,
-            "north": 41.365,
-            "east": -83.0892
+            "ring": [
+              {
+                "lat": 41.364492,
+                "lng": -83.093373
+              },
+              {
+                "lat": 41.36408,
+                "lng": -83.090352
+              },
+              {
+                "lat": 41.361915,
+                "lng": -83.091313
+              },
+              {
+                "lat": 41.359545,
+                "lng": -83.092687
+              },
+              {
+                "lat": 41.358926,
+                "lng": -83.095159
+              },
+              {
+                "lat": 41.360885,
+                "lng": -83.09612
+              },
+              {
+                "lat": 41.363771,
+                "lng": -83.094747
+              }
+            ]
           },
           "truckGate": {
-            "south": 41.3615,
-            "west": -83.0912,
-            "north": 41.3622,
-            "east": -83.0902
+            "ring": [
+              {
+                "lat": 41.363461,
+                "lng": -83.093923
+              },
+              {
+                "lat": 41.363358,
+                "lng": -83.092961
+              },
+              {
+                "lat": 41.362637,
+                "lng": -83.093099
+              },
+              {
+                "lat": 41.36274,
+                "lng": -83.09406
+              }
+            ]
           },
           "dropYards": [
             {
-              "south": 41.3618,
-              "west": -83.0908,
-              "north": 41.364,
-              "east": -83.0895
+              "ring": [
+                {
+                  "lat": 41.363358,
+                  "lng": -83.096395
+                },
+                {
+                  "lat": 41.363049,
+                  "lng": -83.094609
+                },
+                {
+                  "lat": 41.361812,
+                  "lng": -83.095021
+                },
+                {
+                  "lat": 41.362122,
+                  "lng": -83.096807
+                }
+              ]
             },
             {
-              "south": 41.3595,
-              "west": -83.0908,
-              "north": 41.3612,
-              "east": -83.0895
+              "ring": [
+                {
+                  "lat": 41.363771,
+                  "lng": -83.092687
+                },
+                {
+                  "lat": 41.363461,
+                  "lng": -83.090352
+                },
+                {
+                  "lat": 41.362534,
+                  "lng": -83.090627
+                },
+                {
+                  "lat": 41.362843,
+                  "lng": -83.092961
+                }
+              ]
             }
           ],
           "dockAprons": [
             {
-              "south": 41.3608,
-              "west": -83.0918,
-              "north": 41.364,
-              "east": -83.0908
-            },
-            {
-              "south": 41.359,
-              "west": -83.0925,
-              "north": 41.36,
-              "east": -83.0908
+              "ring": [
+                {
+                  "lat": 41.361812,
+                  "lng": -83.093099
+                },
+                {
+                  "lat": 41.361606,
+                  "lng": -83.091176
+                },
+                {
+                  "lat": 41.360885,
+                  "lng": -83.091313
+                },
+                {
+                  "lat": 41.361091,
+                  "lng": -83.093236
+                }
+              ]
             }
           ],
-          "staging": {
-            "south": 41.3618,
-            "west": -83.0908,
-            "north": 41.3628,
-            "east": -83.0898
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 198,
+              "pano": "lOGHVyPExdYoSs12MAzkAw",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 198,
+              "pano": "lOGHVyPExdYoSs12MAzkAw",
+              "hasCoverage": true
+            }
           }
         },
         "yardMetrics": {
@@ -1403,136 +1729,6 @@
         }
       },
       {
-        "id": "11-kh-springfield",
-        "name": "Kraft Foods - Springfield",
-        "type": "Manufacturer",
-        "archetype": "#1",
-        "archetypeName": "Gate + GS (not BU sens.)",
-        "confidence": "medium",
-        "uncertainFields": [
-          "dockDoorCount",
-          "trailerParkingCapacity",
-          "truckGateCount",
-          "buildingCount",
-          "siteAreaAcres"
-        ],
-        "center": {
-          "lat": 37.2353356,
-          "lng": -93.2186898
-        },
-        "geofences": {
-          "perimeter": {
-            "south": 37.2328356,
-            "north": 37.2378356,
-            "west": -93.2211898,
-            "east": -93.21618980000001
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": null,
-          "trailersVisible": null,
-          "trailerParkingCapacity": null,
-          "truckGateCount": null,
-          "buildingCount": null,
-          "siteAreaAcres": null,
-          "railServed": null
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": true,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "50+",
-          "dropArea": "50+",
-          "shipRcvSeparate": false,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "mapsUrl": "https://www.google.com/maps/place/Kraft+Foods+Distribution/@37.2353356,-93.2186898,2181m/data=!3m1!1e3!4m10!1m2!2m1!1skraft+heinz+springfield+mo!3m6!1s0x87cf7d74255f62d3:0x9abeaa8a7b1f5dda!8m2!3d37.2309646!4d-93.2134017!15sChprcmFmdCBoZWlueiBzcHJpbmdmaWVsZCBtbyIDiAEBkgEMbWFudWZhY3R1cmVy4AEA!16s%2Fg%2F11c48mqdkg?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
-      },
-      {
-        "id": "12-kh-dover",
-        "name": "Kraft Heinz - Dover",
-        "type": "Food Manufacturer",
-        "archetype": "#1",
-        "archetypeName": "Gate + GS (not BU sens.)",
-        "confidence": "medium",
-        "uncertainFields": [
-          "dockDoorCount",
-          "trailerParkingCapacity",
-          "truckGateCount",
-          "buildingCount",
-          "siteAreaAcres"
-        ],
-        "center": {
-          "lat": 39.149205,
-          "lng": -75.5443487
-        },
-        "geofences": {
-          "perimeter": {
-            "south": 39.146705000000004,
-            "north": 39.151705,
-            "west": -75.5468487,
-            "east": -75.5418487
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": null,
-          "trailersVisible": null,
-          "trailerParkingCapacity": null,
-          "truckGateCount": null,
-          "buildingCount": null,
-          "siteAreaAcres": null,
-          "railServed": null
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": true,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": false,
-          "drivewayShort": true,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 2,
-          "exitLanes": 2,
-          "fastLaneOpportunity": false,
-          "dockDoors": "10-25",
-          "dropArea": "50+",
-          "shipRcvSeparate": false,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "mapsUrl": "https://www.google.com/maps/place/Kraft+Heinz-Dover/@39.149205,-75.5443487,1524m/data=!3m1!1e3!4m6!3m5!1s0x89c77d0ec971296b:0xf9dc50ad0e2932a7!8m2!3d39.1487688!4d-75.5432442!16s%2Fg%2F11fmq0x8zf?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
-      },
-      {
         "id": "13-kraft-heinz-mason-city",
         "name": "Kraft Heinz - Mason City",
         "type": "Food Manufacturer",
@@ -1550,50 +1746,80 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 43.16275,
-            "west": -93.21825,
-            "north": 43.1656,
-            "east": -93.2143
+            "ring": [
+              {
+                "lat": 43.165252,
+                "lng": -93.21929
+              },
+              {
+                "lat": 43.165352,
+                "lng": -93.214277
+              },
+              {
+                "lat": 43.163299,
+                "lng": -93.21414
+              },
+              {
+                "lat": 43.163148,
+                "lng": -93.219221
+              }
+            ]
           },
           "truckGate": {
-            "south": 43.16275,
-            "west": -93.2168,
-            "north": 43.1631,
-            "east": -93.21625
+            "ring": [
+              {
+                "lat": 43.164901,
+                "lng": -93.21929
+              },
+              {
+                "lat": 43.164901,
+                "lng": -93.218809
+              },
+              {
+                "lat": 43.164551,
+                "lng": -93.218809
+              },
+              {
+                "lat": 43.164551,
+                "lng": -93.21929
+              }
+            ]
           },
-          "dropYards": [
-            {
-              "south": 43.16465,
-              "west": -93.21525,
-              "north": 43.16555,
-              "east": -93.2143
-            },
-            {
-              "south": 43.1641,
-              "west": -93.218,
-              "north": 43.16465,
-              "east": -93.2168
-            }
-          ],
+          "dropYards": [],
           "dockAprons": [
             {
-              "south": 43.1644,
-              "west": -93.2156,
-              "north": 43.165,
-              "east": -93.2143
-            },
-            {
-              "south": 43.1632,
-              "west": -93.2181,
-              "north": 43.1647,
-              "east": -93.2177
+              "ring": [
+                {
+                  "lat": 43.163499,
+                  "lng": -93.218741
+                },
+                {
+                  "lat": 43.163549,
+                  "lng": -93.214827
+                },
+                {
+                  "lat": 43.163198,
+                  "lng": -93.214758
+                },
+                {
+                  "lat": 43.163148,
+                  "lng": -93.218672
+                }
+              ]
             }
           ],
-          "staging": {
-            "south": 43.1631,
-            "west": -93.2168,
-            "north": 43.1641,
-            "east": -93.2156
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 358,
+              "pano": "J826XA5QjgNYf-49t9quYQ",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 358,
+              "pano": "J826XA5QjgNYf-49t9quYQ",
+              "hasCoverage": true
+            }
           }
         },
         "yardMetrics": {
@@ -1687,396 +1913,6 @@
         }
       },
       {
-        "id": "14-kh-mason-city",
-        "name": "Kraft Heinz - Mason City",
-        "type": "Food Manufacturer",
-        "archetype": "#8",
-        "archetypeName": "Gate + GS (not BU sens.) + scale",
-        "confidence": "medium",
-        "uncertainFields": [
-          "dockDoorCount",
-          "trailerParkingCapacity",
-          "truckGateCount",
-          "buildingCount",
-          "siteAreaAcres"
-        ],
-        "center": {
-          "lat": 43.1627479,
-          "lng": -93.2164507
-        },
-        "geofences": {
-          "perimeter": {
-            "south": 43.1602479,
-            "north": 43.1652479,
-            "west": -93.2189507,
-            "east": -93.2139507
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": null,
-          "trailersVisible": null,
-          "trailerParkingCapacity": null,
-          "truckGateCount": null,
-          "buildingCount": null,
-          "siteAreaAcres": null,
-          "railServed": null
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": true,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "10-25",
-          "dropArea": "25-50",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": true,
-          "multipleFacilities": false,
-          "scale": true,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "mapsUrl": "https://www.google.com/maps/place/Kraft+Heinz-Mason+City/@43.1627479,-93.2164507,500m/data=!3m1!1e3!4m6!3m5!1s0x87f107aa0ed70c1b:0x34076eae1343f74d!8m2!3d43.1639539!4d-93.2176109!16s%2Fg%2F1thl5_5q?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
-      },
-      {
-        "id": "15-kh-cedar-rapids",
-        "name": "Kraft Heinz - Cedar Rapids",
-        "type": "Food Manufacturer",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "uncertainFields": [
-          "dockDoorCount",
-          "trailerParkingCapacity",
-          "truckGateCount",
-          "buildingCount",
-          "siteAreaAcres"
-        ],
-        "center": {
-          "lat": 41.9354082,
-          "lng": -91.636307
-        },
-        "geofences": {
-          "perimeter": {
-            "south": 41.9329082,
-            "north": 41.937908199999995,
-            "west": -91.638807,
-            "east": -91.633807
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": null,
-          "trailersVisible": null,
-          "trailerParkingCapacity": null,
-          "truckGateCount": null,
-          "buildingCount": null,
-          "siteAreaAcres": null,
-          "railServed": null
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "0-10",
-          "dropArea": "0-10",
-          "shipRcvSeparate": false,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "mapsUrl": "https://www.google.com/maps/place/Kraft+Heinz-Cedar+Rapids/@41.9354082,-91.636307,2588m/data=!3m1!1e3!4m6!3m5!1s0x87e4f64ac353a299:0x65bacfc16da321d2!8m2!3d41.932207!4d-91.6361763!16s%2Fg%2F1tnpf_5z?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
-      },
-      {
-        "id": "16-kh-beaver-dam",
-        "name": "Kraft Heinz - Beaver Dam",
-        "type": "Food Products Supplier",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "uncertainFields": [
-          "dockDoorCount",
-          "trailerParkingCapacity",
-          "truckGateCount",
-          "buildingCount",
-          "siteAreaAcres"
-        ],
-        "center": {
-          "lat": 43.4531347,
-          "lng": -88.8351231
-        },
-        "geofences": {
-          "perimeter": {
-            "south": 43.4506347,
-            "north": 43.4556347,
-            "west": -88.8376231,
-            "east": -88.8326231
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": null,
-          "trailersVisible": null,
-          "trailerParkingCapacity": null,
-          "truckGateCount": null,
-          "buildingCount": null,
-          "siteAreaAcres": null,
-          "railServed": null
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": true,
-          "postGateStaging": false,
-          "drivewayLong": false,
-          "drivewayShort": true,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "0-10",
-          "dropArea": "NONE",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": true,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "mapsUrl": "https://www.google.com/maps/place/Kraft+Heinz-Beaver+Dam/@43.4531347,-88.8351231,3299m/data=!3m1!1e3!4m14!1m7!3m6!1s0x88069f1103b70f25:0xb1afe36d1395e6ef!2sKraft+Heinz-Beaver+Dam!8m2!3d43.4518323!4d-88.8387536!16s%2Fg%2F12hqqqp_d!3m5!1s0x88069f1103b70f25:0xb1afe36d1395e6ef!8m2!3d43.4518323!4d-88.8387536!16s%2Fg%2F12hqqqp_d?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
-      },
-      {
-        "id": "17-kh-coshocton",
-        "name": "Kraft Heinz - Coshocton",
-        "type": "Manufacturer",
-        "archetype": "#7",
-        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
-        "confidence": "medium",
-        "uncertainFields": [
-          "dockDoorCount",
-          "trailerParkingCapacity",
-          "truckGateCount",
-          "buildingCount",
-          "siteAreaAcres"
-        ],
-        "center": {
-          "lat": 40.2498672,
-          "lng": -81.8695447
-        },
-        "geofences": {
-          "perimeter": {
-            "south": 40.2473672,
-            "north": 40.252367199999995,
-            "west": -81.8720447,
-            "east": -81.86704470000001
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": null,
-          "trailersVisible": null,
-          "trailerParkingCapacity": null,
-          "truckGateCount": null,
-          "buildingCount": null,
-          "siteAreaAcres": null,
-          "railServed": null
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": true,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 2,
-          "exitLanes": 1,
-          "fastLaneOpportunity": true,
-          "dockDoors": "10-25",
-          "dropArea": "0-10",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": true,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "mapsUrl": "https://www.google.com/maps/place/Kraft+Foods/@40.2498672,-81.8695447,332m/data=!3m1!1e3!4m6!3m5!1s0x883798a19b04d9a3:0x7dff8c73abd2d20!8m2!3d40.2497856!4d-81.8697284!16s%2Fg%2F1v76_b0f?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
-      },
-      {
-        "id": "18-kh-champaign",
-        "name": "Kraft Heinz - Champaign",
-        "type": "Food Manufacturer",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "medium",
-        "uncertainFields": [
-          "dockDoorCount",
-          "trailerParkingCapacity",
-          "truckGateCount",
-          "buildingCount",
-          "siteAreaAcres"
-        ],
-        "center": {
-          "lat": 40.1206549,
-          "lng": -88.2691814
-        },
-        "geofences": {
-          "perimeter": {
-            "south": 40.1181549,
-            "north": 40.123154899999996,
-            "west": -88.27168139999999,
-            "east": -88.2666814
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": null,
-          "trailersVisible": null,
-          "trailerParkingCapacity": null,
-          "truckGateCount": null,
-          "buildingCount": null,
-          "siteAreaAcres": null,
-          "railServed": null
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": true,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": false,
-          "drivewayShort": true,
-          "backupSensitive": true,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "25-50",
-          "dropArea": "0-10",
-          "shipRcvSeparate": false,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": true,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "mapsUrl": "https://www.google.com/maps/place/Kraft+Heinz-Champaign/@40.1206549,-88.2691814,2387m/data=!3m1!1e3!4m6!3m5!1s0x880cd09c9dfe8a83:0x560a91cb4c58ff81!8m2!3d40.1259519!4d-88.2717434!16s%2Fg%2F1wl4r5gm?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
-      },
-      {
-        "id": "19-kh-woodstock",
-        "name": "Kraft Heinz - Woodstock",
-        "type": "Manufacturer",
-        "archetype": "#2",
-        "archetypeName": "Gate + GS (not BU sens.)+separate",
-        "confidence": "medium",
-        "uncertainFields": [
-          "dockDoorCount",
-          "trailerParkingCapacity",
-          "truckGateCount",
-          "buildingCount",
-          "siteAreaAcres"
-        ],
-        "center": {
-          "lat": 42.3200967,
-          "lng": -88.4692426
-        },
-        "geofences": {
-          "perimeter": {
-            "south": 42.3175967,
-            "north": 42.3225967,
-            "west": -88.4717426,
-            "east": -88.4667426
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": null,
-          "trailersVisible": null,
-          "trailerParkingCapacity": null,
-          "truckGateCount": null,
-          "buildingCount": null,
-          "siteAreaAcres": null,
-          "railServed": null
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": true,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": true,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "0-10",
-          "dropArea": "0-10",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": true,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "mapsUrl": "https://www.google.com/maps/place/Kraft+Heinz-Woodstock/@42.3200967,-88.4692426,507m/data=!3m1!1e3!4m6!3m5!1s0x880f69e8cfb5217b:0x16b31c053d9a03d!8m2!3d42.3209369!4d-88.4714377!16s%2Fg%2F11dztqgxpw?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
-      },
-      {
         "id": "20-kraft-heinz-ft-myers",
         "name": "Kraft Heinz - Ft Myers",
         "type": "Manufacturer",
@@ -2093,34 +1929,102 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 26.6647,
-            "west": -81.8033,
-            "north": 26.66665,
-            "east": -81.802
+            "ring": [
+              {
+                "lat": 26.665956,
+                "lng": -81.803817
+              },
+              {
+                "lat": 26.666017,
+                "lng": -81.802307
+              },
+              {
+                "lat": 26.664698,
+                "lng": -81.802238
+              },
+              {
+                "lat": 26.664637,
+                "lng": -81.803749
+              }
+            ]
           },
           "truckGate": {
-            "south": 26.66631,
-            "west": -81.8033,
-            "north": 26.66645,
-            "east": -81.80306
+            "ring": [
+              {
+                "lat": 26.665956,
+                "lng": -81.80344
+              },
+              {
+                "lat": 26.665956,
+                "lng": -81.803165
+              },
+              {
+                "lat": 26.665741,
+                "lng": -81.803165
+              },
+              {
+                "lat": 26.665741,
+                "lng": -81.80344
+              }
+            ]
           },
           "dropYards": [
             {
-              "south": 26.66585,
-              "west": -81.80285,
-              "north": 26.6662,
-              "east": -81.8022
+              "ring": [
+                {
+                  "lat": 26.665987,
+                  "lng": -81.803337
+                },
+                {
+                  "lat": 26.665987,
+                  "lng": -81.802375
+                },
+                {
+                  "lat": 26.665711,
+                  "lng": -81.802375
+                },
+                {
+                  "lat": 26.665711,
+                  "lng": -81.803337
+                }
+              ]
             }
           ],
           "dockAprons": [
             {
-              "south": 26.66572,
-              "west": -81.80285,
-              "north": 26.666,
-              "east": -81.8021
+              "ring": [
+                {
+                  "lat": 26.665833,
+                  "lng": -81.803577
+                },
+                {
+                  "lat": 26.665864,
+                  "lng": -81.803337
+                },
+                {
+                  "lat": 26.665189,
+                  "lng": -81.803199
+                },
+                {
+                  "lat": 26.665158,
+                  "lng": -81.80344
+                }
+              ]
             }
           ],
-          "staging": null
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 135,
+              "pano": "hOs1HHzOhaNaSQXIkypLgw",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 135,
+              "pano": "hOs1HHzOhaNaSQXIkypLgw",
+              "hasCoverage": true
+            }
+          }
         },
         "yardMetrics": {
           "dockDoorCount": 8,
@@ -2215,461 +2119,6 @@
           "siteAreaAcres": "Perimeter bbox ≈ 217 m N-S × 129 m E-W ≈ 6.9 acres. Honest overhead estimate; flagged as fieldNote only because the exact fence-line on the south (lake bank) is screened by trees.",
           "shipRcvSeparate": "Could not positively distinguish a dedicated receiving dock from the shipping dock in overhead imagery — all visible dock activity is on the north face. Conservatively marked false."
         }
-      },
-      {
-        "id": "21-kh-kendallville",
-        "name": "Kraft Heinz - Kendallville",
-        "type": "Manufacturer",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "uncertainFields": [
-          "dockDoorCount",
-          "trailerParkingCapacity",
-          "truckGateCount",
-          "buildingCount",
-          "siteAreaAcres"
-        ],
-        "center": {
-          "lat": 41.4313632,
-          "lng": -85.2652943
-        },
-        "geofences": {
-          "perimeter": {
-            "south": 41.4288632,
-            "north": 41.4338632,
-            "west": -85.26779429999999,
-            "east": -85.2627943
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": null,
-          "trailersVisible": null,
-          "trailerParkingCapacity": null,
-          "truckGateCount": null,
-          "buildingCount": null,
-          "siteAreaAcres": null,
-          "railServed": null
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": true,
-          "postGateStaging": false,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "10-25",
-          "dropArea": "10-25",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": true,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "mapsUrl": "https://www.google.com/maps/place/Kraft+Heinz-Kendallville/@41.4313632,-85.2652943,514m/data=!3m1!1e3!4m6!3m5!1s0x881614ac243f78d9:0x81253beb1ab62fe5!8m2!3d41.4323654!4d-85.2673645!16s%2Fg%2F1tk1zn87?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
-      },
-      {
-        "id": "22-kh-lowville",
-        "name": "Kraft Heinz - Lowville",
-        "type": "Cheese Manufacturer",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "uncertainFields": [
-          "dockDoorCount",
-          "trailerParkingCapacity",
-          "truckGateCount",
-          "buildingCount",
-          "siteAreaAcres"
-        ],
-        "center": {
-          "lat": 43.7796387,
-          "lng": -75.4830318
-        },
-        "geofences": {
-          "perimeter": {
-            "south": 43.7771387,
-            "north": 43.7821387,
-            "west": -75.4855318,
-            "east": -75.48053180000001
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": null,
-          "trailersVisible": null,
-          "trailerParkingCapacity": null,
-          "truckGateCount": null,
-          "buildingCount": null,
-          "siteAreaAcres": null,
-          "railServed": null
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "0-10",
-          "dropArea": "10-25",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": true,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "mapsUrl": "https://www.google.com/maps/place/Kraft+Heinz-Lowville/@43.7796387,-75.4830318,2222m/data=!3m1!1e3!4m6!3m5!1s0x89d892d726fd28c5:0x1ac5377ca0e961b9!8m2!3d43.777538!4d-75.4803505!16s%2Fg%2F1tks7979?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
-      },
-      {
-        "id": "23-kh-new-ulm",
-        "name": "Kraft Heinz - New Ulm",
-        "type": "Food",
-        "archetype": "#4",
-        "archetypeName": "Gate + GS (BU sens.)",
-        "confidence": "medium",
-        "uncertainFields": [
-          "dockDoorCount",
-          "trailerParkingCapacity",
-          "truckGateCount",
-          "buildingCount",
-          "siteAreaAcres"
-        ],
-        "center": {
-          "lat": 44.2987287,
-          "lng": -94.4352836
-        },
-        "geofences": {
-          "perimeter": {
-            "south": 44.2962287,
-            "north": 44.301228699999996,
-            "west": -94.4377836,
-            "east": -94.43278360000001
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": null,
-          "trailersVisible": null,
-          "trailerParkingCapacity": null,
-          "truckGateCount": null,
-          "buildingCount": null,
-          "siteAreaAcres": null,
-          "railServed": null
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": true,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": false,
-          "drivewayShort": true,
-          "backupSensitive": true,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 2,
-          "fastLaneOpportunity": false,
-          "dockDoors": "10-25",
-          "dropArea": "25-50",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": true,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "mapsUrl": "https://www.google.com/maps/place/Kraft+Foods/@44.2987287,-94.4352836,5126m/data=!3m1!1e3!4m6!3m5!1s0x87f4ffb17c91cf33:0x90274f47ee473c7b!8m2!3d44.2894712!4d-94.4336481!16s%2Fg%2F1tczfg5z?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
-      },
-      {
-        "id": "24-kh-avon",
-        "name": "Kraft Heinz - Avon",
-        "type": "Food Products Supplier",
-        "archetype": "#10",
-        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
-        "confidence": "medium",
-        "uncertainFields": [
-          "dockDoorCount",
-          "trailerParkingCapacity",
-          "truckGateCount",
-          "buildingCount",
-          "siteAreaAcres"
-        ],
-        "center": {
-          "lat": 42.9061295,
-          "lng": -77.75834
-        },
-        "geofences": {
-          "perimeter": {
-            "south": 42.9036295,
-            "north": 42.908629499999996,
-            "west": -77.76084,
-            "east": -77.75584
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": null,
-          "trailersVisible": null,
-          "trailerParkingCapacity": null,
-          "truckGateCount": null,
-          "buildingCount": null,
-          "siteAreaAcres": null,
-          "railServed": null
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": true,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "0-10",
-          "dropArea": "0-10",
-          "shipRcvSeparate": true,
-          "urbanRural": "Rural",
-          "connectivityIssue": true,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "mapsUrl": "https://www.google.com/maps/place/KraftHeinz/@42.9061295,-77.75834,1776m/data=!3m1!1e3!4m6!3m5!1s0x89d15b579bf7a8cd:0x1d2c595299f09848!8m2!3d42.9050843!4d-77.755732!16s%2Fg%2F1td4fjl6?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
-      },
-      {
-        "id": "25-kh-granite-city",
-        "name": "Kraft Heinz - Granite City",
-        "type": "Food Manufacturer",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "uncertainFields": [
-          "dockDoorCount",
-          "trailerParkingCapacity",
-          "truckGateCount",
-          "buildingCount",
-          "siteAreaAcres"
-        ],
-        "center": {
-          "lat": 38.7210163,
-          "lng": -90.1226516
-        },
-        "geofences": {
-          "perimeter": {
-            "south": 38.718516300000005,
-            "north": 38.7235163,
-            "west": -90.1251516,
-            "east": -90.1201516
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": null,
-          "trailersVisible": null,
-          "trailerParkingCapacity": null,
-          "truckGateCount": null,
-          "buildingCount": null,
-          "siteAreaAcres": null,
-          "railServed": null
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": false,
-          "remoteGs": true,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "10-25",
-          "dropArea": "50+",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": true,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "mapsUrl": "https://www.google.com/maps/place/Kraft+Heinz-Granite+City/@38.7210163,-90.1226516,9956m/data=!3m1!1e3!4m6!3m5!1s0x87df520b1c7a7ccb:0x9eee6d5101a5f011!8m2!3d38.720034!4d-90.1468659!16s%2Fg%2F1tmqgrn2?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
-      },
-      {
-        "id": "26-kh-columbia",
-        "name": "Kraft Heinz - Columbia",
-        "type": "Manufacturer",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "uncertainFields": [
-          "dockDoorCount",
-          "trailerParkingCapacity",
-          "truckGateCount",
-          "buildingCount",
-          "siteAreaAcres"
-        ],
-        "center": {
-          "lat": 39.0123455,
-          "lng": -92.2664494
-        },
-        "geofences": {
-          "perimeter": {
-            "south": 39.009845500000004,
-            "north": 39.0148455,
-            "west": -92.2689494,
-            "east": -92.2639494
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": null,
-          "trailersVisible": null,
-          "trailerParkingCapacity": null,
-          "truckGateCount": null,
-          "buildingCount": null,
-          "siteAreaAcres": null,
-          "railServed": null
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": true,
-          "postGateStaging": false,
-          "drivewayLong": false,
-          "drivewayShort": true,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "0-10",
-          "dropArea": "0-10",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": true,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "mapsUrl": "https://www.google.com/maps/place/Kraft+Heinz-Columbia/@39.0123455,-92.2664494,1619m/data=!3m1!1e3!4m6!3m5!1s0x87dcc6548ac4d44f:0xe2514f2375afdccf!8m2!3d39.0100596!4d-92.2675202!16s%2Fg%2F1tf9tchh?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
-      },
-      {
-        "id": "27-kh-ryder-lathrop",
-        "name": "Kraft Heinz/Ryder - Lathrop",
-        "type": "Distribution Service",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "uncertainFields": [
-          "dockDoorCount",
-          "trailerParkingCapacity",
-          "truckGateCount",
-          "buildingCount",
-          "siteAreaAcres"
-        ],
-        "center": {
-          "lat": 37.8091942,
-          "lng": -121.2851431
-        },
-        "geofences": {
-          "perimeter": {
-            "south": 37.8066942,
-            "north": 37.8116942,
-            "west": -121.2876431,
-            "east": -121.2826431
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": null,
-          "trailersVisible": null,
-          "trailerParkingCapacity": null,
-          "truckGateCount": null,
-          "buildingCount": null,
-          "siteAreaAcres": null,
-          "railServed": null
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": true,
-          "postGateStaging": false,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 2,
-          "fastLaneOpportunity": false,
-          "dockDoors": "50+",
-          "dropArea": "50+",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": true,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "mapsUrl": "https://www.google.com/maps/place/Ryder%2F+KRAFT/@37.8091942,-121.2851431,1083m/data=!3m1!1e3!4m6!3m5!1s0x8090157f8cdc83a5:0x41147353c268eb43!8m2!3d37.8096478!4d-121.2817099!16s%2Fg%2F11g_x43fzq?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D"
       }
     ]
   }

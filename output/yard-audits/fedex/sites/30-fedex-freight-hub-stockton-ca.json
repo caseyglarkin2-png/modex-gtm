@@ -1,37 +1,136 @@
 {
   "name": "FedEx Freight Hub - Stockton CA",
   "type": "Freight LTL hub service center (Northern California)",
-  "coords": { "lat": 37.9118, "lng": -121.2235 },
+  "coords": {
+    "lat": 37.9118,
+    "lng": -121.2235
+  },
   "geofences": {
-    "perimeter": { "south": 37.9098, "west": -121.2258, "north": 37.9135, "east": -121.2208 },
-    "truckGate": { "south": 37.9104, "west": -121.2252, "north": 37.9109, "east": -121.2244 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.912342,
+          "lng": -121.22556
+        },
+        {
+          "lat": 37.913317,
+          "lng": -121.222401
+        },
+        {
+          "lat": 37.912017,
+          "lng": -121.221715
+        },
+        {
+          "lat": 37.910608,
+          "lng": -121.223775
+        },
+        {
+          "lat": 37.91115,
+          "lng": -121.225285
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 37.9110, "west": -121.2250, "north": 37.9132, "east": -121.2212 }
+      {
+        "ring": [
+          {
+            "lat": 37.912233,
+            "lng": -121.225285
+          },
+          {
+            "lat": 37.912883,
+            "lng": -121.222951
+          },
+          {
+            "lat": 37.912017,
+            "lng": -121.222539
+          },
+          {
+            "lat": 37.911367,
+            "lng": -121.224599
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 37.9112, "west": -121.2248, "north": 37.9124, "east": -121.2222 }
+      {
+        "ring": [
+          {
+            "lat": 37.912017,
+            "lng": -121.225011
+          },
+          {
+            "lat": 37.912558,
+            "lng": -121.223088
+          },
+          {
+            "lat": 37.912125,
+            "lng": -121.222882
+          },
+          {
+            "lat": 37.911583,
+            "lng": -121.224805
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 80,
+        "pano": "W-ijYnP67TBT4szIGPCE-Q",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 90, "trailersVisible": 130, "trailerParkingCapacity": 280,
-    "truckGateCount": 1, "buildingCount": 4, "siteAreaAcres": 40.0,
+    "dockDoorCount": 90,
+    "trailersVisible": 130,
+    "trailerParkingCapacity": 280,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 40,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@37.9118,-121.2235,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "multipleFacilities", "postGateStaging", "siteAreaAcres", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "multipleFacilities",
+    "postGateStaging",
+    "siteAreaAcres",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "Roster address '4444 S B St, Stockton CA 95206' and coordinates (37.908392, -121.244053, RANGE_INTERPOLATED) resolve to a modern big-box distribution-warehouse park in south Stockton - NOT an LTL freight hub. The FedEx Freight STK service center is consistently listed (FedEx Freight STK page, Waze, Yellow Pages, Indeed) at 4520 S Highway 99 / 4520 CA-99, Stockton, CA 95215. Geocoding places that address at ~37.9118, -121.2235, where satellite reveals an LTL cross-dock terminal complex along the SR-99 corridor (long narrow cross-dock buildings with trailers backed in on both faces, dock aprons, dense rows of pup trailers).",
     "facilityIdentity": "The cross-dock terminal complex at the resolved location is unmistakably an LTL truck terminal. Street View (2026-03) shows SAIA branding at the main cross-dock's SW frontage, indicating the complex hosts SAIA LTL Freight; the FedEx Freight STK terminal (address 4520 S Hwy 99) is either co-located in this multi-carrier terminal complex or occupies an adjacent cross-dock within it. Facility type and corridor location are confident; the exact FedEx building footprint within the complex could not be confirmed with FedEx signage - medium confidence.",

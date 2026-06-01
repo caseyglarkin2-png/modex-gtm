@@ -1,15 +1,58 @@
 {
   "name": "Pepperidge Farm - Downingtown PA",
   "type": "Manufacturing - bakery",
-  "coords": { "lat": 40.00420, "lng": -75.68550 },
+  "coords": {
+    "lat": 40.0042,
+    "lng": -75.6855
+  },
   "geofences": {
-    "perimeter": { "south": 40.00300, "west": -75.68900, "north": 40.00500, "east": -75.68350 },
-    "truckGate": { "south": 40.00345, "west": -75.68530, "north": 40.00375, "east": -75.68480 },
-    "dropYards": [
-      { "south": 40.00420, "west": -75.68500, "north": 40.00485, "east": -75.68380 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.005147,
+          "lng": -75.687423
+        },
+        {
+          "lat": 40.005252,
+          "lng": -75.684951
+        },
+        {
+          "lat": 40.003674,
+          "lng": -75.684813
+        },
+        {
+          "lat": 40.003358,
+          "lng": -75.686873
+        },
+        {
+          "lat": 40.0042,
+          "lng": -75.687697
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 40.00455, "west": -75.68530, "north": 40.00500, "east": -75.68450 }
+      {
+        "ring": [
+          {
+            "lat": 40.0042,
+            "lng": -75.687148
+          },
+          {
+            "lat": 40.004305,
+            "lng": -75.685225
+          },
+          {
+            "lat": 40.003779,
+            "lng": -75.685157
+          },
+          {
+            "lat": 40.003674,
+            "lng": -75.687079
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -19,23 +62,41 @@
     "trailerParkingCapacity": 18,
     "truckGateCount": 3,
     "buildingCount": 2,
-    "siteAreaAcres": 14.0,
+    "siteAreaAcres": 14,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.00420,-75.68550,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "buildingCount"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "buildingCount"
+  ],
   "fieldNotes": {
     "truckGate": "Older 1949 urban bakery; multiple driveways open directly off Boot Road into a combined parking/yard area. No barrier arm, sliding gate, or checkpoint pinch-point visible in 2023-08 Street View of all road frontage.",
     "guardShack": "No guard booth at any entrance. Small employee break gazebos near building 425 are not gate booths.",

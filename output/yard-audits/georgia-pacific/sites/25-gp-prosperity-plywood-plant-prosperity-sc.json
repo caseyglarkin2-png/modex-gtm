@@ -1,16 +1,112 @@
 {
   "name": "GP Prosperity Plywood Plant - Prosperity SC",
   "type": "Plywood Plant",
-  "coords": { "lat": 34.21600, "lng": -81.49400 },
+  "coords": {
+    "lat": 34.216,
+    "lng": -81.494
+  },
   "geofences": {
-    "perimeter": { "south": 34.2118, "west": -81.4995, "north": 34.2195, "east": -81.4870 },
-    "truckGate": { "south": 34.21940, "west": -81.49560, "north": 34.21990, "east": -81.49480 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.217817,
+          "lng": -81.500592
+        },
+        {
+          "lat": 34.218271,
+          "lng": -81.494
+        },
+        {
+          "lat": 34.214637,
+          "lng": -81.489605
+        },
+        {
+          "lat": 34.212366,
+          "lng": -81.492627
+        },
+        {
+          "lat": 34.214864,
+          "lng": -81.500042
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.216454,
+          "lng": -81.499493
+        },
+        {
+          "lat": 34.216908,
+          "lng": -81.497845
+        },
+        {
+          "lat": 34.215546,
+          "lng": -81.497296
+        },
+        {
+          "lat": 34.215092,
+          "lng": -81.498944
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 34.21380, "west": -81.49350, "north": 34.21600, "east": -81.49000 },
-      { "south": 34.21550, "west": -81.49900, "north": 34.21720, "east": -81.49550 }
+      {
+        "ring": [
+          {
+            "lat": 34.216,
+            "lng": -81.494
+          },
+          {
+            "lat": 34.214864,
+            "lng": -81.490155
+          },
+          {
+            "lat": 34.213274,
+            "lng": -81.490704
+          },
+          {
+            "lat": 34.21441,
+            "lng": -81.494549
+          }
+        ]
+      }
     ],
-    "dockAprons": [],
-    "staging": null
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 34.217363,
+            "lng": -81.498944
+          },
+          {
+            "lat": 34.21759,
+            "lng": -81.494549
+          },
+          {
+            "lat": 34.216454,
+            "lng": -81.494275
+          },
+          {
+            "lat": 34.216227,
+            "lng": -81.498669
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 113,
+        "pano": "tsbgqnoeDTaXkNR5hLUjag",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 113,
+        "pano": "tsbgqnoeDTaXkNR5hLUjag",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 6,
@@ -23,18 +119,37 @@
   },
   "mapsUrl": "https://www.google.com/maps/@34.21600,-81.49400,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "0-10", "dropArea": "NONE",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "0-10",
+    "dropArea": "NONE",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "scale", "dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "scale",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "Resolved to GP's Prosperity plywood/sawmill operations at 191 Georgia Pacific Blvd, off Hwy 76 E of Prosperity SC (~34.2169,-81.4954, cross-checked against the Forest Products Locator). The roster's geocoded point (34.2093,-81.5332) was ~3 km W in downtown Prosperity and wrong. Site centroid locked at 34.21600,-81.49400.",
     "truckGate": "The plant access road (Georgia Pacific Blvd) connects to the public road as an open, wide entrance with only a GP sign — no barrier arm, gate, or checkpoint at the public-road junction (Street View 2026-02). No gate structure was resolved further in along the entrance road either. Marked false; flagged uncertain because Street View does not cover the interior of the access road.",

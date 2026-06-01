@@ -1,17 +1,60 @@
 {
   "name": "John Deere Horicon Works - Horicon WI",
   "type": "Assembly Plant",
-  "coords": { "lat": 43.4540, "lng": -88.6336 },
+  "coords": {
+    "lat": 43.454,
+    "lng": -88.6336
+  },
   "geofences": {
-    "perimeter": { "south": 43.44850, "west": -88.63620, "north": 43.45780, "east": -88.63140 },
-    "truckGate": { "south": 43.45380, "west": -88.63320, "north": 43.45460, "east": -88.63220 },
-    "dropYards": [
-      { "south": 43.45560, "west": -88.63500, "north": 43.45770, "east": -88.63280 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 43.457988,
+          "lng": -88.636347
+        },
+        {
+          "lat": 43.457589,
+          "lng": -88.631952
+        },
+        {
+          "lat": 43.450012,
+          "lng": -88.632501
+        },
+        {
+          "lat": 43.449613,
+          "lng": -88.634699
+        },
+        {
+          "lat": 43.454,
+          "lng": -88.636347
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 43.45470, "west": -88.63440, "north": 43.45620, "east": -88.63300 }
+      {
+        "ring": [
+          {
+            "lat": 43.454997,
+            "lng": -88.635523
+          },
+          {
+            "lat": 43.454798,
+            "lng": -88.632776
+          },
+          {
+            "lat": 43.451607,
+            "lng": -88.632913
+          },
+          {
+            "lat": 43.451807,
+            "lng": -88.63566
+          }
+        ]
+      }
     ],
-    "staging": { "south": 43.45200, "west": -88.63320, "north": 43.45380, "east": -88.63200 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 35,
@@ -19,7 +62,7 @@
     "trailerParkingCapacity": 80,
     "truckGateCount": 1,
     "buildingCount": 12,
-    "siteAreaAcres": 105.0,
+    "siteAreaAcres": 105,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@43.4540,-88.6336,400m/data=!3m1!1e3",
@@ -48,7 +91,16 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoors", "shipRcvSeparate", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoors",
+    "shipRcvSeparate",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Old-style urban factory campus straddling the public street grid (W Lake St, N Vine St, E Walnut St run THROUGH the campus). No barrier arm or gate observed at any public-road / property-line interface in 2024-2025 Street View. Truck access into the north trailer yard is via an internal private campus drive; classified false because no controlled checkpoint exists where the property meets the public road.",
     "guardShack": "No guard booth observed at any street-level entrance. One small ~1-vehicle structure seen on an internal campus road near E Walnut St may be a watchman post, but it does not control a property-line truck gate, so guardShack=false.",

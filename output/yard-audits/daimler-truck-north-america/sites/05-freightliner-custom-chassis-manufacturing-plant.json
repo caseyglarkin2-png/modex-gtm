@@ -1,16 +1,102 @@
 {
   "name": "Freightliner Custom Chassis Manufacturing Plant - Gaffney SC",
   "type": "Custom chassis assembly plant",
-  "coords": { "lat": 35.075000, "lng": -81.681000 },
+  "coords": {
+    "lat": 35.075,
+    "lng": -81.681
+  },
   "geofences": {
-    "perimeter": { "south": 35.071500, "west": -81.684500, "north": 35.079000, "east": -81.676000 },
-    "truckGate": { "south": 35.075500, "west": -81.679800, "north": 35.075900, "east": -81.679100 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.074438,
+          "lng": -81.68512
+        },
+        {
+          "lat": 35.077473,
+          "lng": -81.682373
+        },
+        {
+          "lat": 35.077248,
+          "lng": -81.680176
+        },
+        {
+          "lat": 35.074438,
+          "lng": -81.679901
+        },
+        {
+          "lat": 35.073202,
+          "lng": -81.681687
+        },
+        {
+          "lat": 35.073651,
+          "lng": -81.684708
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.074101,
+          "lng": -81.68512
+        },
+        {
+          "lat": 35.074326,
+          "lng": -81.684296
+        },
+        {
+          "lat": 35.073764,
+          "lng": -81.684021
+        },
+        {
+          "lat": 35.073539,
+          "lng": -81.684845
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 35.074800, "west": -81.679400, "north": 35.077400, "east": -81.676200 },
-      { "south": 35.075600, "west": -81.683800, "north": 35.077800, "east": -81.680700 }
+      {
+        "ring": [
+          {
+            "lat": 35.077023,
+            "lng": -81.682923
+          },
+          {
+            "lat": 35.076798,
+            "lng": -81.680725
+          },
+          {
+            "lat": 35.075899,
+            "lng": -81.680863
+          },
+          {
+            "lat": 35.076124,
+            "lng": -81.68306
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.076100, "west": -81.682200, "north": 35.077100, "east": -81.680200 }
+      {
+        "ring": [
+          {
+            "lat": 35.074326,
+            "lng": -81.684571
+          },
+          {
+            "lat": 35.074213,
+            "lng": -81.681687
+          },
+          {
+            "lat": 35.073764,
+            "lng": -81.681687
+          },
+          {
+            "lat": 35.073876,
+            "lng": -81.684571
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -20,23 +106,44 @@
     "trailerParkingCapacity": 250,
     "truckGateCount": 1,
     "buildingCount": 5,
-    "siteAreaAcres": 120.0,
+    "siteAreaAcres": 120,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@35.075000,-81.681000,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "scale", "multiStep"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "scale",
+    "multiStep"
+  ],
   "fieldNotes": {
     "location": "Roster coords (ROOFTOP, moved 2489m) landed near the FCCC plant. Confirmed via FCCC contact page and SC Commerce / SC Governor releases - 552 Hyatt Street, Gaffney SC, ~289,000 sq ft, three production lines, building RV/motorhome and walk-in-van custom chassis. Working center set on the main plant building.",
     "truckGate": "Campus is fenced (chain-link along the road frontage and around the east storage yard). A small white ~1-vehicle-footprint structure sits at a gated internal road junction between the main plant and the east chassis-storage building, controlling truck movement - treated as a controlled truck gate.",

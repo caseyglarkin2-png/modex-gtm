@@ -1,17 +1,108 @@
 {
   "name": "Performance Foodservice - Kansas City (Lee's Summit MO)",
   "type": "Broadline Foodservice Distribution Center",
-  "coords": { "lat": 38.89000, "lng": -94.36640 },
+  "coords": {
+    "lat": 38.89,
+    "lng": -94.3664
+  },
   "geofences": {
-    "perimeter": { "south": 38.88840, "west": -94.36760, "north": 38.89150, "east": -94.36480 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.89,
+          "lng": -94.367361
+        },
+        {
+          "lat": 38.89,
+          "lng": -94.364752
+        },
+        {
+          "lat": 38.888504,
+          "lng": -94.364752
+        },
+        {
+          "lat": 38.888504,
+          "lng": -94.367361
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 38.888504,
+          "lng": -94.3664
+        },
+        {
+          "lat": 38.888504,
+          "lng": -94.365851
+        },
+        {
+          "lat": 38.888236,
+          "lng": -94.365851
+        },
+        {
+          "lat": 38.888236,
+          "lng": -94.3664
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 38.88880, "west": -94.36720, "north": 38.88980, "east": -94.36540 }
+      {
+        "ring": [
+          {
+            "lat": 38.888717,
+            "lng": -94.367361
+          },
+          {
+            "lat": 38.888717,
+            "lng": -94.365576
+          },
+          {
+            "lat": 38.88829,
+            "lng": -94.365576
+          },
+          {
+            "lat": 38.88829,
+            "lng": -94.367361
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 38.88980, "west": -94.36720, "north": 38.89030, "east": -94.36560 }
+      {
+        "ring": [
+          {
+            "lat": 38.889145,
+            "lng": -94.367087
+          },
+          {
+            "lat": 38.889145,
+            "lng": -94.366537
+          },
+          {
+            "lat": 38.888504,
+            "lng": -94.366537
+          },
+          {
+            "lat": 38.888504,
+            "lng": -94.367087
+          }
+        ]
+      }
     ],
-    "staging": { "south": 38.88930, "west": -94.36720, "north": 38.88990, "east": -94.36560 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 18,
+        "pano": "uqBrUAgoZA8qK4XdR4O28Q",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 18,
+        "pano": "uqBrUAgoZA8qK4XdR4O28Q",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 30,
@@ -19,7 +110,7 @@
     "trailerParkingCapacity": 90,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 13.0,
+    "siteAreaAcres": 13,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@38.89,-94.3664,400m/data=!3m1!1e3",
@@ -48,7 +139,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["truckGate", "dockDoorCount"],
+  "uncertainFields": [
+    "truckGate",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "truckGate": "Open uncontrolled access from SE Thompson Dr; the truck yard has partial chain-link fencing but no barrier arm, sliding gate or checkpoint structure where the access driveway meets the public road. An internal chain-link gate exists between yard sub-zones but is not a property-line truck gate.",
     "guardShack": "No guard booth observed at any entrance.",

@@ -1,38 +1,99 @@
 {
   "name": "H-E-B Frisco Electronic Fulfillment Center (in development) - Frisco TX",
   "type": "E-commerce Fulfillment Center (planned, construction 2026-2027)",
-  "coords": { "lat": 33.221200, "lng": -96.878100 },
+  "coords": {
+    "lat": 33.2212,
+    "lng": -96.8781
+  },
   "geofences": {
-    "perimeter": { "south": 33.219600, "west": -96.879600, "north": 33.222200, "east": -96.876800 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.22143,
+          "lng": -96.878581
+        },
+        {
+          "lat": 33.221372,
+          "lng": -96.876727
+        },
+        {
+          "lat": 33.220338,
+          "lng": -96.876727
+        },
+        {
+          "lat": 33.220396,
+          "lng": -96.878649
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 48,
+        "pano": "B_EWcaMEnMknGoBd4t4TqA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 0, "trailersVisible": 0, "trailerParkingCapacity": 0,
-    "truckGateCount": 0, "buildingCount": 1, "siteAreaAcres": 23.0,
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 23,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.221200,-96.878100,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "NONE", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "multipleFacilities",
-    "scale", "dropYard", "multiStep"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "multipleFacilities",
+    "scale",
+    "dropYard",
+    "multiStep"
   ],
   "fieldNotes": {
     "status": "NOT YET BUILT. The H-E-B Frisco Electronic Fulfillment Center is a planned facility - per Community Impact (Dec 2025) and TDLR project TABS2026005469, construction is slated to begin July 2026 and complete June 2027. As of the audit date (May 2026) no EFC building exists; its truck yard, gate, and docks cannot be physically audited.",

@@ -1,15 +1,63 @@
 {
   "name": "DHL Supply Chain - IDS Fulfillment DC - Atlanta GA",
   "type": "Multi-Customer E-Commerce Fulfillment Center",
-  "coords": { "lat": 33.41010, "lng": -84.72560 },
+  "coords": {
+    "lat": 33.4101,
+    "lng": -84.7256
+  },
   "geofences": {
-    "perimeter": { "south": 33.40895, "west": -84.72720, "north": 33.41155, "east": -84.72470 },
-    "truckGate": { "south": 33.40895, "west": -84.72740, "north": 33.40935, "east": -84.72680 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.411418,
+          "lng": -84.728209
+        },
+        {
+          "lat": 33.410673,
+          "lng": -84.725257
+        },
+        {
+          "lat": 33.40924,
+          "lng": -84.725806
+        },
+        {
+          "lat": 33.409985,
+          "lng": -84.72869
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 33.40905, "west": -84.72690, "north": 33.41115, "east": -84.72510 }
+      {
+        "ring": [
+          {
+            "lat": 33.411017,
+            "lng": -84.728347
+          },
+          {
+            "lat": 33.410272,
+            "lng": -84.7256
+          },
+          {
+            "lat": 33.409928,
+            "lng": -84.725737
+          },
+          {
+            "lat": 33.410673,
+            "lng": -84.728484
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 24,
+        "pano": "DZWf1lEtBzm0tyjv-uVorQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 40,
@@ -22,18 +70,37 @@
   },
   "mapsUrl": "https://www.google.com/maps/@33.4101,-84.7256,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "remoteGs", "dockDoors", "trailerParkingCapacity", "dropArea"],
+  "uncertainFields": [
+    "truckGate",
+    "remoteGs",
+    "dockDoors",
+    "trailerParkingCapacity",
+    "dropArea"
+  ],
   "fieldNotes": {
     "location": "Roster had no address/coords. Resolved via web research: IDS Fulfillment's Atlanta-metro DC is at 495 Coweta Industrial Parkway, Newnan GA 30265 ('Scout 85 Logistics' / 'Scout Cold Logistics Center Atlanta-II'), a 215,822 sq ft Class A rear-load building completed 2022, full-building lease to IDS Fulfillment (now DHL Supply Chain). Building is in Coweta Industrial Park, ~3 mi east of I-85 Exit 47.",
     "buildingIdNote": "Audited the large single-tenant white tilt-up rear-load building at ~33.4101,-84.7256 on the south side of Coweta Industrial Parkway. Street View read a building plate as '355' on the NW end, which conflicts with the marketed address '495'; the 355 plate may be a suite/door designation. This is the only building in the park matching the Scout description (single-tenant, ~215k sq ft, rear-load, fully secured/fenced, 2022 construction). Building identity is high-probability but the street-number discrepancy is unresolved — confidence set to medium.",

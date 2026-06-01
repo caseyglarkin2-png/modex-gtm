@@ -1,13 +1,73 @@
 {
   "name": "Kenco MCS Allentown - Northampton PA",
   "type": "Multi-Client Distribution Center",
-  "coords": { "lat": 40.59820, "lng": -75.61650 },
+  "coords": {
+    "lat": 40.5982,
+    "lng": -75.6165
+  },
   "geofences": {
-    "perimeter": { "south": 40.5969, "west": -75.6182, "north": 40.5992, "east": -75.6151 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.598461,
+          "lng": -75.617873
+        },
+        {
+          "lat": 40.599399,
+          "lng": -75.615745
+        },
+        {
+          "lat": 40.598721,
+          "lng": -75.615195
+        },
+        {
+          "lat": 40.597731,
+          "lng": -75.617255
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.598826,
+          "lng": -75.615401
+        },
+        {
+          "lat": 40.598669,
+          "lng": -75.615058
+        },
+        {
+          "lat": 40.598461,
+          "lng": -75.615264
+        },
+        {
+          "lat": 40.598617,
+          "lng": -75.615607
+        }
+      ]
+    },
     "dropYards": [],
     "dockAprons": [
-      { "south": 40.5984, "west": -75.6175, "north": 40.5991, "east": -75.6158 }
+      {
+        "ring": [
+          {
+            "lat": 40.598409,
+            "lng": -75.617736
+          },
+          {
+            "lat": 40.599347,
+            "lng": -75.615745
+          },
+          {
+            "lat": 40.599138,
+            "lng": -75.615607
+          },
+          {
+            "lat": 40.5982,
+            "lng": -75.617599
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -22,18 +82,37 @@
   },
   "mapsUrl": "https://www.google.com/maps/@40.59820,-75.61650,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "dockDoors", "trailersVisible", "trailerParkingCapacity", "shipRcvSeparate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "dockDoors",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "siteDiscrepancy": "Roster source cites 601,836 SF / 92 dock doors for the Kenco Allentown MCS site, but the building at the ROOFTOP-geocoded 6975 Ambassador Drive is a mid-size warehouse of roughly 150,000-250,000 SF with a modest single-face dock bank. The roster figure likely aggregates Kenco's total Allentown footprint or is mislabeled. Audited the physical building at the confirmed address; the '6975' address number is visible on the building wall in 2025-05 Street View.",
     "truckGate": "No controlled entrance. The site driveway connects to Ambassador Drive as an open driveway with no barrier arm, gate, or checkpoint (2025-05 Street View + z19/z20 satellite).",

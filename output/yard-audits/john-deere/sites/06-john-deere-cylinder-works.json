@@ -1,15 +1,54 @@
 {
   "name": "John Deere Cylinder Works - Moline IL",
   "type": "Component Plant",
-  "coords": { "lat": 41.508049, "lng": -90.52593 },
+  "coords": {
+    "lat": 41.508049,
+    "lng": -90.52593
+  },
   "geofences": {
-    "perimeter": { "south": 41.50650, "west": -90.52960, "north": 41.50970, "east": -90.52380 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.50918,
+          "lng": -90.530187
+        },
+        {
+          "lat": 41.509077,
+          "lng": -90.524557
+        },
+        {
+          "lat": 41.506815,
+          "lng": -90.524282
+        },
+        {
+          "lat": 41.506815,
+          "lng": -90.529913
+        }
+      ]
+    },
     "truckGate": null,
-    "dropYards": [
-      { "south": 41.50855, "west": -90.52900, "north": 41.50935, "east": -90.52760 }
-    ],
+    "dropYards": [],
     "dockAprons": [
-      { "south": 41.50870, "west": -90.52780, "north": 41.50960, "east": -90.52480 }
+      {
+        "ring": [
+          {
+            "lat": 41.508769,
+            "lng": -90.529089
+          },
+          {
+            "lat": 41.508769,
+            "lng": -90.524694
+          },
+          {
+            "lat": 41.508358,
+            "lng": -90.524694
+          },
+          {
+            "lat": 41.508358,
+            "lng": -90.529089
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -19,23 +58,42 @@
     "trailerParkingCapacity": 30,
     "truckGateCount": 0,
     "buildingCount": 4,
-    "siteAreaAcres": 18.0,
+    "siteAreaAcres": 18,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.508049,-90.52593,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoors", "truckGate", "entryLanes", "exitLanes", "shipRcvSeparate"],
+  "uncertainFields": [
+    "dockDoors",
+    "truckGate",
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Building fronts River Drive directly with no controlled perimeter checkpoint visible in 2023-2025 Street View; drive-in dock doors face the road with no fence or barrier arm. 'Gate 24' in shipping records is an internal Deere dock/department number, not a guarded perimeter gate.",
     "multipleFacilities": "Four distinct building masses on the riverfront campus, shares the corridor with adjacent Deere Planter Works (idx 7).",

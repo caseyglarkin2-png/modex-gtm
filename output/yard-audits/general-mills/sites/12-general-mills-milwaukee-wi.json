@@ -1,17 +1,63 @@
 {
   "name": "General Mills - Milwaukee WI",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 42.96105, "lng": -87.92190 },
+  "coords": {
+    "lat": 42.96105,
+    "lng": -87.9219
+  },
   "geofences": {
-    "perimeter": { "south": 42.95980, "west": -87.92380, "north": 42.96235, "east": -87.92000 },
-    "truckGate": { "south": 42.96155, "west": -87.92150, "north": 42.96185, "east": -87.92090 },
-    "dropYards": [
-      { "south": 42.96130, "west": -87.92330, "north": 42.96200, "east": -87.92240 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.961653,
+          "lng": -87.924921
+        },
+        {
+          "lat": 42.961653,
+          "lng": -87.91984
+        },
+        {
+          "lat": 42.959241,
+          "lng": -87.91984
+        },
+        {
+          "lat": 42.959241,
+          "lng": -87.924921
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 42.96185, "west": -87.92330, "north": 42.96235, "east": -87.92090 }
+      {
+        "ring": [
+          {
+            "lat": 42.961552,
+            "lng": -87.924647
+          },
+          {
+            "lat": 42.961552,
+            "lng": -87.9219
+          },
+          {
+            "lat": 42.961351,
+            "lng": -87.9219
+          },
+          {
+            "lat": 42.961351,
+            "lng": -87.924647
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 356,
+        "pano": "o-gSki8owbJERa52-tAflQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 26,
@@ -19,7 +65,7 @@
     "trailerParkingCapacity": 30,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 18.0,
+    "siteAreaAcres": 18,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@42.96105,-87.92190,400m/data=!3m1!1e3",
@@ -48,7 +94,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["truckGate", "exitLanes", "buildingCount"],
+  "uncertainFields": [
+    "truckGate",
+    "exitLanes",
+    "buildingCount"
+  ],
   "fieldNotes": {
     "truckGate": "The truck side is an open quasi-public service road running along the building's north face. Trucks and trailers park freely along it. The fenced dock/trailer yard has chain-link gates in its fence, but there is no barrier arm or staffed checkpoint at the property entrance from S 6th St. Classed false; flagged uncertain because the operational yard is fenced.",
     "guardShack": "No staffed booth visible at any entrance in 2025-08 Street View.",

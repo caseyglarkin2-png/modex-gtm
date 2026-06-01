@@ -1,38 +1,127 @@
 {
   "name": "John Deere Harvester Works - East Moline IL",
   "type": "Assembly Plant",
-  "coords": { "lat": 41.5240, "lng": -90.4360 },
+  "coords": {
+    "lat": 41.524,
+    "lng": -90.436
+  },
   "geofences": {
-    "perimeter": { "south": 41.5175, "west": -90.4430, "north": 41.5320, "east": -90.4300 },
-    "truckGate": { "south": 41.5234, "west": -90.4340, "north": 41.5246, "east": -90.4325 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.53058,
+          "lng": -90.442317
+        },
+        {
+          "lat": 41.531608,
+          "lng": -90.431605
+        },
+        {
+          "lat": 41.522972,
+          "lng": -90.429408
+        },
+        {
+          "lat": 41.52071,
+          "lng": -90.434627
+        },
+        {
+          "lat": 41.524823,
+          "lng": -90.442592
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 41.5260, "west": -90.4400, "north": 41.5310, "east": -90.4340 },
-      { "south": 41.5225, "west": -90.4345, "north": 41.5255, "east": -90.4300 }
+      {
+        "ring": [
+          {
+            "lat": 41.524,
+            "lng": -90.437099
+          },
+          {
+            "lat": 41.524617,
+            "lng": -90.431605
+          },
+          {
+            "lat": 41.522972,
+            "lng": -90.431331
+          },
+          {
+            "lat": 41.522355,
+            "lng": -90.436824
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.5235, "west": -90.4385, "north": 41.5270, "east": -90.4335 }
+      {
+        "ring": [
+          {
+            "lat": 41.528524,
+            "lng": -90.438747
+          },
+          {
+            "lat": 41.529141,
+            "lng": -90.432704
+          },
+          {
+            "lat": 41.528112,
+            "lng": -90.432429
+          },
+          {
+            "lat": 41.527496,
+            "lng": -90.438472
+          }
+        ]
+      }
     ],
-    "staging": { "south": 41.5215, "west": -90.4345, "north": 41.5245, "east": -90.4305 }
+    "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 40, "trailersVisible": 70, "trailerParkingCapacity": 180,
-    "truckGateCount": 3, "buildingCount": 8, "siteAreaAcres": 410.0,
+    "dockDoorCount": 40,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 180,
+    "truckGateCount": 3,
+    "buildingCount": 8,
+    "siteAreaAcres": 410,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@41.5240,-90.4360,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "shipRcvSeparate", "multiStep"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "shipRcvSeparate",
+    "multiStep"
+  ],
   "fieldNotes": {
     "location": "Confirmed John Deere Harvester Works at 1100 13th Ave, East Moline IL — the world's largest combine manufacturing facility (~4M sq ft, ~90 acres under roof). Roster GEOMETRIC_CENTER coords (moved 2007m) landed on the complex; Google Maps place (41.5234,-90.4355) corroborates. Locked center placed on the main building mass at 41.5240,-90.4360.",
     "truckGate": "Inferred true, medium confidence. Street View shows a 'John Deere Harvester Works Gate 12' sign at a private access drive — the plant uses a formal numbered-gate security system, with a continuous chain-link perimeter fence visible along 13th Ave. The actual gate barrier sits at the end of the private drive beyond Street View coverage.",

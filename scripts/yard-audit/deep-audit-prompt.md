@@ -49,19 +49,55 @@ site.
 4. Web-research the facility for corroborating operational detail (company
    pages, news, driver reviews).
 5. Classify every field, backing each call with specific evidence.
-6. Geofence and measure the yard. Boxes are `{south, west, north, east}` in
-   decimal degrees — compute them from your locked center coordinate: 1 degree
-   of latitude is about 111,320 m; 1 degree of longitude is about
-   111,320 x cos(latitude) m.
-   PRIMARY — `perimeter` is the geofence that matters most: capture the whole
+6. Geofence and measure the yard. **Each geofence is an oriented polygon: an
+   ordered ring of `{ "lat": 0.0, "lng": 0.0 }` vertices that traces the REAL
+   edge of the feature at its true orientation.** Most yards are not square to
+   north, so a north-aligned box visibly misses the fence line — trace the
+   actual corners instead. 4-8 vertices is plenty for a rectangle-ish lot;
+   use more only where the boundary genuinely bends. Do not repeat the first
+   vertex at the end (the renderer closes the ring). Latitude/longitude scale:
+   1° latitude ≈ 111,320 m; 1° longitude ≈ 111,320 × cos(latitude) m.
+
+   ORIENTATION IS THE WHOLE POINT — and it applies to EVERY zone, not just the
+   perimeter. Each sub-zone must be a rotated quad whose edges run PARALLEL to
+   the structure it covers: the dock apron is a long thin quad hugging the dock
+   wall at the building's angle; the truck gate aligns to the entrance drive;
+   drop yards align to the trailer rows. A north-aligned box laid over a
+   building that sits at an angle is the exact defect we are removing — if the
+   building is rotated 30°, the box is rotated 30°.
+
+   CONFIRM-OR-IMPROVE — if a zone is already given to you as a tight box
+   `{south, west, north, east}` that genuinely matches the footprint, you may
+   keep it (the pipeline reads a box as a 4-corner rectangle); but if it is
+   crooked, loose, or rotated relative to the real lot, **re-trace it as a
+   polygon ring**. You are never required to keep a box that is wrong, and you
+   are free to improve any other field you have better evidence for.
+
+   PRIMARY — `perimeter` is the geofence that matters most: trace the whole
    property inside the fence line accurately. Always fill this.
-   SECONDARY — also box these sub-zones when they are reasonably clear, but do
-   not agonize; leave a zone `null` / `[]` when it is not obvious:
+   SECONDARY — also trace these sub-zones when reasonably clear, but do not
+   agonize; leave a zone `null` / `[]` when it is not obvious:
    - `truckGate`  — the main truck entrance / guard-booth area.
-   - `dropYards`  — array, one box per trailer drop / parking area.
-   - `dockAprons` — array, one box per dock apron (the strip trucks back
+   - `dropYards`  — array, one ring per trailer drop / parking area.
+   - `dockAprons` — array, one ring per dock apron (the strip trucks back
      through in front of a bank of dock doors).
    - `staging`    — pre-/post-gate staging area.
+
+   STREET VIEW (`streetViewMeta`) — for each zone you trace, record the
+   ground-level camera that best shows it, so the microsite can render a
+   driver's-eye view of that exact spot:
+   - Query Street View metadata at the zone's centroid:
+     `https://maps.googleapis.com/maps/api/streetview/metadata?location=<lat>,<lng>&key=$GOOGLE_MAPS_STATIC_API_KEY`
+     (probe.ts `sv` does this too). If `status` is `"OK"`, set
+     `hasCoverage: true`, copy the returned `pano_id` into `pano`, and set
+     `heading` (0-359°) to point the camera FROM the pano location TOWARD the
+     zone (bearing = atan2(Δlng·cos(lat), Δlat) in degrees, normalized 0-359).
+   - If `status` is not `"OK"` (no nearby pano — common at rural DCs), set
+     `hasCoverage: false`, `heading: 0`, `pano: ""` for that zone. Never invent
+     a pano id. Omit a zone from `streetViewMeta` entirely if you did not trace it.
+   - Prefer the truckGate / perimeter-entrance pano: that is the frame a real
+     driver sees on arrival and is the most valuable single image.
+
    Then fill `yardMetrics` by counting from the tight (zoom 20-21) imagery.
    These are honest estimates from overhead imagery, not exact figures:
    - `dockDoorCount`          — total loading-dock doors across the site.
@@ -69,7 +105,7 @@ site.
    - `trailerParkingCapacity` — trailers the drop / yard space could hold.
    - `truckGateCount`         — number of truck entrances.
    - `buildingCount`          — distinct buildings on the site.
-   - `siteAreaAcres`          — site area derived from the `perimeter` box.
+   - `siteAreaAcres`          — site area derived from the `perimeter` polygon.
    - `railServed`             — true if a rail spur runs into the property.
    Approximate is expected; flag any low-confidence count in `fieldNotes`.
 
@@ -86,11 +122,21 @@ evidence to look for, and the bands. Read it.
   "type": "<facility type>",
   "coords": { "lat": 0.0, "lng": 0.0 },
   "geofences": {
-    "perimeter": { "south": 0.0, "west": 0.0, "north": 0.0, "east": 0.0 },
-    "truckGate": { "south": 0.0, "west": 0.0, "north": 0.0, "east": 0.0 },
+    "perimeter": { "ring": [
+      { "lat": 0.0, "lng": 0.0 }, { "lat": 0.0, "lng": 0.0 },
+      { "lat": 0.0, "lng": 0.0 }, { "lat": 0.0, "lng": 0.0 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 0.0, "lng": 0.0 }, { "lat": 0.0, "lng": 0.0 },
+      { "lat": 0.0, "lng": 0.0 }, { "lat": 0.0, "lng": 0.0 }
+    ] },
     "dropYards": [],
     "dockAprons": [],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
+      "truckGate": { "heading": 0, "pano": "", "hasCoverage": false }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 0, "trailersVisible": 0, "trailerParkingCapacity": 0,

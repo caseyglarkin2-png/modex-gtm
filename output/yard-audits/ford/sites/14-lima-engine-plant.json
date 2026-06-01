@@ -1,17 +1,35 @@
 {
   "name": "Ford - Lima Engine Plant, Lima OH",
   "type": "Engine Plant",
-  "coords": { "lat": 40.77750, "lng": -84.08600 },
+  "coords": {
+    "lat": 40.7775,
+    "lng": -84.086
+  },
   "geofences": {
-    "perimeter": { "south": 40.77350, "west": -84.09100, "north": 40.78250, "east": -84.08050 },
-    "truckGate": { "south": 40.77380, "west": -84.08280, "north": 40.77480, "east": -84.08120 },
-    "dropYards": [
-      { "south": 40.78000, "west": -84.08620, "north": 40.78130, "east": -84.08280 }
-    ],
-    "dockAprons": [
-      { "south": 40.77930, "west": -84.08620, "north": 40.78010, "east": -84.08350 }
-    ],
-    "staging": { "south": 40.77410, "west": -84.08250, "north": 40.77530, "east": -84.08100 }
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.779996,
+          "lng": -84.09012
+        },
+        {
+          "lat": 40.779996,
+          "lng": -84.082704
+        },
+        {
+          "lat": 40.774172,
+          "lng": -84.082704
+        },
+        {
+          "lat": 40.774172,
+          "lng": -84.09012
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 20,
@@ -19,23 +37,42 @@
     "trailerParkingCapacity": 50,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 219.0,
+    "siteAreaAcres": 219,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@40.7775,-84.086,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "dockDoors", "shipRcvSeparate"],
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "dockDoors",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "site": "Ford Lima Engine Plant, 1155 Bible Rd, Lima (Allen County) OH - active Ford powertrain plant (produces V6/V8 engines, ~1,500+ employees). Roster geocode (40.7775,-84.0866) lands directly on the large multi-roof plant building - confirmed correct. The plant sits on the semi-rural edge of Lima, surrounded by farmland and woods, with rail lines on the west and east sides and Bible Rd along the south.",
     "truckGate": "Confirmed - Street View (2024-08) along Bible Rd shows a marked 'TRUCK ENTRANCE' sign on the chain-link perimeter fence at a wide paved entry apron (~40.7743,-84.0820 area). Chain-link fence encircles the property; the truck entrance opens off Bible Rd into a deep paved staging apron before the internal gate.",

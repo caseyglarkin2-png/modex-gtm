@@ -1,18 +1,108 @@
 {
   "name": "Anheuser-Busch Brewery - Williamsburg VA",
   "type": "Brewery",
-  "coords": { "lat": 37.23800, "lng": -76.65350 },
+  "coords": {
+    "lat": 37.238,
+    "lng": -76.6535
+  },
   "geofences": {
-    "perimeter": { "south": 37.2340, "west": -76.6585, "north": 37.2420, "east": -76.6490 },
-    "truckGate": { "south": 37.24010, "west": -76.65760, "north": 37.24090, "east": -76.65640 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.240405,
+          "lng": -76.656659
+        },
+        {
+          "lat": 37.240187,
+          "lng": -76.650479
+        },
+        {
+          "lat": 37.235376,
+          "lng": -76.650753
+        },
+        {
+          "lat": 37.235595,
+          "lng": -76.656933
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 37.240187,
+          "lng": -76.652813
+        },
+        {
+          "lat": 37.240187,
+          "lng": -76.651715
+        },
+        {
+          "lat": 37.239531,
+          "lng": -76.651715
+        },
+        {
+          "lat": 37.239531,
+          "lng": -76.652813
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 37.23980, "west": -76.65780, "north": 37.24180, "east": -76.65580 },
-      { "south": 37.23600, "west": -76.65300, "north": 37.23850, "east": -76.65050 }
+      {
+        "ring": [
+          {
+            "lat": 37.236251,
+            "lng": -76.653775
+          },
+          {
+            "lat": 37.236141,
+            "lng": -76.651303
+          },
+          {
+            "lat": 37.235485,
+            "lng": -76.65144
+          },
+          {
+            "lat": 37.235595,
+            "lng": -76.653912
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 37.23560, "west": -76.65380, "north": 37.23700, "east": -76.65150 }
+      {
+        "ring": [
+          {
+            "lat": 37.239203,
+            "lng": -76.658169
+          },
+          {
+            "lat": 37.239093,
+            "lng": -76.656247
+          },
+          {
+            "lat": 37.238,
+            "lng": -76.656384
+          },
+          {
+            "lat": 37.238109,
+            "lng": -76.658307
+          }
+        ]
+      }
     ],
-    "staging": { "south": 37.24000, "west": -76.65680, "north": 37.24130, "east": -76.65540 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 243,
+        "pano": "DURvWzhv4rtlw1ibTd9YwA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 243,
+        "pano": "DURvWzhv4rtlw1ibTd9YwA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 35,
@@ -20,23 +110,40 @@
     "trailerParkingCapacity": 280,
     "truckGateCount": 1,
     "buildingCount": 8,
-    "siteAreaAcres": 185.0,
+    "siteAreaAcres": 185,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@37.23800,-76.65350,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "scale",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "site": "Williamsburg A-B brewery (opened 1972) at 7801 Pocahontas Trail, adjacent to Busch Gardens. Large brewery building in a wooded campus setting; trailer drop yards and rail.",
     "truckGate": "CONFIRMED. Street View showed a posted 'TRUCK ENTRANCE' sign at the dedicated truck entrance road; z19 satellite shows a multi-lane guarded truck-gate building with a canopy over the lanes and trucks queued at it. Clear controlled checkpoint.",

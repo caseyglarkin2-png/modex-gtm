@@ -1,18 +1,108 @@
 {
   "name": "General Mills - Lodi CA",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 38.14280, "lng": -121.30030 },
+  "coords": {
+    "lat": 38.1428,
+    "lng": -121.3003
+  },
   "geofences": {
-    "perimeter": { "south": 38.14130, "west": -121.30330, "north": 38.14555, "east": -121.29730 },
-    "truckGate": { "south": 38.14490, "west": -121.30250, "north": 38.14555, "east": -121.30150 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.145392,
+          "lng": -121.303047
+        },
+        {
+          "lat": 38.145392,
+          "lng": -121.298103
+        },
+        {
+          "lat": 38.140424,
+          "lng": -121.298103
+        },
+        {
+          "lat": 38.140424,
+          "lng": -121.303047
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 38.145284,
+          "lng": -121.303047
+        },
+        {
+          "lat": 38.145284,
+          "lng": -121.301673
+        },
+        {
+          "lat": 38.144744,
+          "lng": -121.301673
+        },
+        {
+          "lat": 38.144744,
+          "lng": -121.303047
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 38.14250, "west": -121.30290, "north": 38.14545, "east": -121.30130 }
+      {
+        "ring": [
+          {
+            "lat": 38.143664,
+            "lng": -121.302772
+          },
+          {
+            "lat": 38.143664,
+            "lng": -121.300025
+          },
+          {
+            "lat": 38.142152,
+            "lng": -121.300025
+          },
+          {
+            "lat": 38.142152,
+            "lng": -121.302772
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 38.14490, "west": -121.30200, "north": 38.14545, "east": -121.29900 },
-      { "south": 38.14280, "west": -121.29800, "north": 38.14530, "east": -121.29740 }
+      {
+        "ring": [
+          {
+            "lat": 38.14496,
+            "lng": -121.302223
+          },
+          {
+            "lat": 38.14496,
+            "lng": -121.299201
+          },
+          {
+            "lat": 38.144312,
+            "lng": -121.299201
+          },
+          {
+            "lat": 38.144312,
+            "lng": -121.302223
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 142,
+        "pano": "8Vc-Mj55KpfPmQAvMmpaYQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 142,
+        "pano": "8Vc-Mj55KpfPmQAvMmpaYQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 45,
@@ -25,18 +115,38 @@
   },
   "mapsUrl": "https://www.google.com/maps/@38.14280,-121.30030,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "truckGateCount"],
+  "uncertainFields": [
+    "truckGate",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "truckGateCount"
+  ],
   "fieldNotes": {
     "facilityStatus": "General Mills closed this Lodi Cheerios plant in 2015; the 1.1M sq ft complex on 66+ acres is now a multi-tenant industrial property (Bond Manufacturing and others). Audited as the physical freight site at the roster address.",
     "truckGate": "Property is fully enclosed by continuous chain-link fence; the truck driveways off W Turner Rd are gated openings (rolling chain-link gates). Medium confidence - gates not clearly closed in 2025 Street View.",

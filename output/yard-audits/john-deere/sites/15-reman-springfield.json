@@ -1,15 +1,63 @@
 {
   "name": "John Deere Reman - Springfield MO",
   "type": "Remanufacturing Plant",
-  "coords": { "lat": 37.243981, "lng": -93.200702 },
+  "coords": {
+    "lat": 37.243981,
+    "lng": -93.200702
+  },
   "geofences": {
-    "perimeter": { "south": 37.24270, "west": -93.20290, "north": 37.24480, "east": -93.19920 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.2442,
+          "lng": -93.202281
+        },
+        {
+          "lat": 37.244364,
+          "lng": -93.199878
+        },
+        {
+          "lat": 37.243106,
+          "lng": -93.199741
+        },
+        {
+          "lat": 37.242997,
+          "lng": -93.202144
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 37.24320, "west": -93.20210, "north": 37.24400, "east": -93.20030 }
+      {
+        "ring": [
+          {
+            "lat": 37.244036,
+            "lng": -93.202075
+          },
+          {
+            "lat": 37.244145,
+            "lng": -93.200015
+          },
+          {
+            "lat": 37.243872,
+            "lng": -93.199981
+          },
+          {
+            "lat": 37.243762,
+            "lng": -93.202041
+          }
+        ]
+      }
     ],
-    "staging": { "south": 37.24310, "west": -93.20200, "north": 37.24390, "east": -93.19990 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 191,
+        "pano": "kcKPDG9tQ9exYH4_kPMAlA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 14,
@@ -17,23 +65,38 @@
     "trailerParkingCapacity": 10,
     "truckGateCount": 0,
     "buildingCount": 1,
-    "siteAreaAcres": 22.0,
+    "siteAreaAcres": 22,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@37.243981,-93.200702,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount"],
+  "uncertainFields": [
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "resolvedLocation": "Geocode (4500 E Mustard Way, Partnership Industrial Center) landed on the correct John Deere Reman building - confirmed by Street View (2026-03) showing the building front with entrance canopy on Mustard Way and the 4500 E Mustard Way address sign at the property.",
     "truckGate": "Open campus - no controlled truck entrance. Employee parking lots front Mustard Way with an open driveway; a single internal driveway loops around the building's SW corner to the south dock yard. No barrier arm, gate, guard booth, or perimeter fence observed in satellite or Street View.",

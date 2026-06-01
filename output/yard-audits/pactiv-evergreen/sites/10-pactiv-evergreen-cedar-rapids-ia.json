@@ -1,15 +1,63 @@
 {
   "name": "Pactiv Evergreen - Cedar Rapids IA",
   "type": "Manufacturing Plant (Filling Equipment / carton filling machinery)",
-  "coords": { "lat": 41.95460, "lng": -91.67890 },
+  "coords": {
+    "lat": 41.9546,
+    "lng": -91.6789
+  },
   "geofences": {
-    "perimeter": { "south": 41.95230, "west": -91.68080, "north": 41.95620, "east": -91.67700 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.955928,
+          "lng": -91.680411
+        },
+        {
+          "lat": 41.955826,
+          "lng": -91.677252
+        },
+        {
+          "lat": 41.953579,
+          "lng": -91.677389
+        },
+        {
+          "lat": 41.953681,
+          "lng": -91.680548
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 41.95330, "west": -91.67900, "north": 41.95440, "east": -91.67760 }
+      {
+        "ring": [
+          {
+            "lat": 41.954191,
+            "lng": -91.680273
+          },
+          {
+            "lat": 41.954089,
+            "lng": -91.677527
+          },
+          {
+            "lat": 41.953681,
+            "lng": -91.677527
+          },
+          {
+            "lat": 41.953783,
+            "lng": -91.680273
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 222,
+        "pano": "1YENb-c5n9nrBI3M5JvLmA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 8,
@@ -17,23 +65,39 @@
     "trailerParkingCapacity": 6,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 17.0,
+    "siteAreaAcres": 17,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.95460,-91.67890,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "0-10", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "siteAreaAcres"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "siteAreaAcres"
+  ],
   "fieldNotes": {
     "location": "Roster geocode (ROOFTOP, 41.95494,-91.678837, movedMeters 111) lands on a large industrial building at the SW corner of 6th St SW and Wilson Ave SW, Cedar Rapids — confirmed at satellite z16-z19. This is the Pactiv Evergreen / Evergreen Packaging Equipment facility (gable-top carton filling-equipment manufacture and 24/7 parts/service). The building appears to be multi-tenant — a Street View sign at the south parking lot reads 'ALTORFER' (a Caterpillar dealer), indicating shared occupancy of the industrial block.",
     "truckGate": "Open site — no perimeter fence enclosing a controlled truck entrance. The building fronts directly on public streets with open parking lots and driveways; no barrier arm, gate, or checkpoint pinch-point. truckGate = false.",

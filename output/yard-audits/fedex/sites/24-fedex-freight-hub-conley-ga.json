@@ -1,37 +1,127 @@
 {
   "name": "FedEx Freight Hub - Conley GA (Atlanta, ATL)",
   "type": "Freight LTL hub service center (~304 doors, one of the largest)",
-  "coords": { "lat": 33.6510, "lng": -84.3388 },
+  "coords": {
+    "lat": 33.651,
+    "lng": -84.3388
+  },
   "geofences": {
-    "perimeter": { "south": 33.6475, "west": -84.3420, "north": 33.6548, "east": -84.3355 },
-    "truckGate": { "south": 33.6531, "west": -84.3402, "north": 33.6537, "east": -84.3393 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.653744,
+          "lng": -84.341547
+        },
+        {
+          "lat": 33.654429,
+          "lng": -84.337976
+        },
+        {
+          "lat": 33.650428,
+          "lng": -84.336328
+        },
+        {
+          "lat": 33.648256,
+          "lng": -84.3388
+        },
+        {
+          "lat": 33.650085,
+          "lng": -84.342645
+        },
+        {
+          "lat": 33.6526,
+          "lng": -84.342371
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 33.6478, "west": -84.3415, "north": 33.6520, "east": -84.3360 }
+      {
+        "ring": [
+          {
+            "lat": 33.653286,
+            "lng": -84.341547
+          },
+          {
+            "lat": 33.653972,
+            "lng": -84.338525
+          },
+          {
+            "lat": 33.650771,
+            "lng": -84.337427
+          },
+          {
+            "lat": 33.649857,
+            "lng": -84.340448
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.6516, "west": -84.3412, "north": 33.6528, "east": -84.3375 }
+      {
+        "ring": [
+          {
+            "lat": 33.652143,
+            "lng": -84.340723
+          },
+          {
+            "lat": 33.652829,
+            "lng": -84.337976
+          },
+          {
+            "lat": 33.651915,
+            "lng": -84.337701
+          },
+          {
+            "lat": 33.651229,
+            "lng": -84.340448
+          }
+        ]
+      }
     ],
-    "staging": { "south": 33.6520, "west": -84.3408, "north": 33.6528, "east": -84.3380 }
+    "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 304, "trailersVisible": 360, "trailerParkingCapacity": 750,
-    "truckGateCount": 1, "buildingCount": 3, "siteAreaAcres": 121.0,
+    "dockDoorCount": 304,
+    "trailersVisible": 360,
+    "trailerParkingCapacity": 750,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 121,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.6510,-84.3388,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "truckGate"],
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "truckGate"
+  ],
   "fieldNotes": {
     "location": "Roster address '4900 Welcome All Rd' and roster coordinates (33.620745, -84.525293) both pointed to a residential area in the College Park/Camp Creek area, NOT a freight facility. The correct FedEx Freight ATL break-bulk hub is in the Conley GA 30288 industrial district near Thurman Rd, centered approximately 33.6510, -84.3388. Confirmed by Street View (2025-02) showing fenced parking with a 3-story FedEx Freight office building and FedEx-branded tractors and trailers, and by satellite showing a long cross-dock building with hundreds of trailers.",
     "truckGate": "Entire ~121-acre property is perimeter-fenced (chain-link visible in Street View around the visitor parking and trailer yard). The truck yard is gated and separated from the front parking by an internal fence line; FedEx Freight break-bulk hubs are universally guard-controlled. Exact truck gate position inferred from the access corridor on the north side near the office; not directly Street-View confirmed because all panos are inside the visitor parking.",

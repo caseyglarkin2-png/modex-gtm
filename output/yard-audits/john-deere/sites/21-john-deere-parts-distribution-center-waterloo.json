@@ -1,38 +1,107 @@
 {
   "name": "John Deere Parts Distribution Center - Waterloo IA",
   "type": "Parts Distribution Center",
-  "coords": { "lat": 42.50990, "lng": -92.28540 },
+  "coords": {
+    "lat": 42.5099,
+    "lng": -92.2854
+  },
   "geofences": {
-    "perimeter": { "south": 42.50770, "west": -92.28720, "north": 42.51290, "east": -92.28320 },
-    "truckGate": { "south": 42.51190, "west": -92.28680, "north": 42.51250, "east": -92.28610 },
-    "dropYards": [
-      { "south": 42.50790, "west": -92.28430, "north": 42.51170, "east": -92.28330 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.51233,
+          "lng": -92.286499
+        },
+        {
+          "lat": 42.512127,
+          "lng": -92.284027
+        },
+        {
+          "lat": 42.507673,
+          "lng": -92.284301
+        },
+        {
+          "lat": 42.507875,
+          "lng": -92.286773
+        },
+        {
+          "lat": 42.510912,
+          "lng": -92.286773
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 42.50800, "west": -92.28480, "north": 42.51140, "east": -92.28430 },
-      { "south": 42.51150, "west": -92.28460, "north": 42.51230, "east": -92.28400 }
+      {
+        "ring": [
+          {
+            "lat": 42.510912,
+            "lng": -92.286361
+          },
+          {
+            "lat": 42.51071,
+            "lng": -92.284439
+          },
+          {
+            "lat": 42.50828,
+            "lng": -92.284507
+          },
+          {
+            "lat": 42.508483,
+            "lng": -92.28643
+          }
+        ]
+      }
     ],
-    "staging": { "south": 42.51190, "west": -92.28470, "north": 42.51280, "east": -92.28370 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 184,
+        "pano": "E280w-6L_MshYV2TtHtR3Q",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 40, "trailersVisible": 65, "trailerParkingCapacity": 90,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 45.0,
+    "dockDoorCount": 40,
+    "trailersVisible": 65,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 45,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@42.50990,-92.28540,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoors", "connectivityIssue"],
+  "uncertainFields": [
+    "dockDoors",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "site": "Confirmed John Deere Parts Distribution Center at 2280 Northeast Dr, Waterloo IA, NE of the city in an edge-of-town industrial area. Panjiva buyer report and Waze list this address; Ryder Integrated Logistics operates 3PL logistics on site (typical for a Deere parts DC). A blue 'JOHN DEERE' monument sign at the entrance was visible in Street View, positively identifying the property.",
     "buildings": "Two buildings on one campus: a large gray-roofed distribution warehouse running N-S (the main DC) and a separate blue-roofed building to its north (offices / secondary warehouse). multipleFacilities = true.",

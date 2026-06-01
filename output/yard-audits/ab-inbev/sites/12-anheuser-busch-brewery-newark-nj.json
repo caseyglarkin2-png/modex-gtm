@@ -1,19 +1,96 @@
 {
   "name": "Anheuser-Busch Brewery - Newark NJ",
   "type": "Brewery",
-  "coords": { "lat": 40.69400, "lng": -74.19250 },
+  "coords": {
+    "lat": 40.694,
+    "lng": -74.1925
+  },
   "geofences": {
-    "perimeter": { "south": 40.69000, "west": -74.19650, "north": 40.69850, "east": -74.18850 },
-    "truckGate": { "south": 40.69570, "west": -74.19050, "north": 40.69640, "east": -74.18950 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.698165,
+          "lng": -74.196345
+        },
+        {
+          "lat": 40.697957,
+          "lng": -74.189753
+        },
+        {
+          "lat": 40.690668,
+          "lng": -74.190303
+        },
+        {
+          "lat": 40.691084,
+          "lng": -74.196895
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.692334,
+          "lng": -74.196345
+        },
+        {
+          "lat": 40.692126,
+          "lng": -74.194148
+        },
+        {
+          "lat": 40.691084,
+          "lng": -74.194423
+        },
+        {
+          "lat": 40.691293,
+          "lng": -74.19662
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.69500, "west": -74.19500, "north": 40.69700, "east": -74.19250 },
-      { "south": 40.69620, "west": -74.19150, "north": 40.69780, "east": -74.18950 }
+      {
+        "ring": [
+          {
+            "lat": 40.693584,
+            "lng": -74.195247
+          },
+          {
+            "lat": 40.693375,
+            "lng": -74.190303
+          },
+          {
+            "lat": 40.691918,
+            "lng": -74.190577
+          },
+          {
+            "lat": 40.692126,
+            "lng": -74.195521
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.69300, "west": -74.19550, "north": 40.69450, "east": -74.19400 },
-      { "south": 40.69550, "west": -74.19400, "north": 40.69700, "east": -74.19250 }
+      {
+        "ring": [
+          {
+            "lat": 40.696082,
+            "lng": -74.195247
+          },
+          {
+            "lat": 40.695874,
+            "lng": -74.190852
+          },
+          {
+            "lat": 40.694625,
+            "lng": -74.191127
+          },
+          {
+            "lat": 40.694833,
+            "lng": -74.195521
+          }
+        ]
+      }
     ],
-    "staging": { "south": 40.69480, "west": -74.19250, "north": 40.69580, "east": -74.19100 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 45,
@@ -21,23 +98,43 @@
     "trailerParkingCapacity": 250,
     "truckGateCount": 2,
     "buildingCount": 7,
-    "siteAreaAcres": 86.0,
+    "siteAreaAcres": 86,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@40.69400,-74.19250,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "scale", "entryLanes", "exitLanes", "dockDoorCount", "truckGateCount"],
+  "uncertainFields": [
+    "guardShack",
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "truckGateCount"
+  ],
   "fieldNotes": {
     "location": "Confirmed Anheuser-Busch Newark Brewery, 200 US-1, Newark NJ. Roster coords were ~2.4 km off (movedMeters 2445). Locked center on the main brewhouse/warehouse mass at 40.69400,-74.19250. Identity confirmed by the brewing complex (brick brewhouse, grain-silo tank farm), extensive trailer yards, and the 86-acre footprint on Route 1 between rail lines and Newark Liberty Airport - matching the property described in the $360M Goodman Group sale.",
     "operatingStatus": "IMPORTANT - the Newark brewery (opened 1951, AB's 2nd-oldest) CLOSED in early 2026 and the 86-acre site was SOLD to Goodman Group for ~$360M (deed filed March 2026); Goodman plans an industrial/logistics redevelopment. As of the audit date (May 2026) the facility is no longer operating as a brewery. Audit reflects the physical yard infrastructure from pre-closure imagery.",

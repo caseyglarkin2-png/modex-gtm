@@ -1,18 +1,108 @@
 {
   "name": "Home Depot RDC - Dallas TX",
   "type": "Rapid Deployment Center",
-  "coords": { "lat": 32.63905, "lng": -96.85100 },
+  "coords": {
+    "lat": 32.63905,
+    "lng": -96.851
+  },
   "geofences": {
-    "perimeter": { "south": 32.63620, "west": -96.85320, "north": 32.64080, "east": -96.84920 },
-    "truckGate": { "south": 32.63990, "west": -96.85180, "north": 32.64050, "east": -96.85080 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.639859,
+          "lng": -96.851549
+        },
+        {
+          "lat": 32.639859,
+          "lng": -96.848803
+        },
+        {
+          "lat": 32.633268,
+          "lng": -96.848803
+        },
+        {
+          "lat": 32.633268,
+          "lng": -96.851549
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.639513,
+          "lng": -96.851687
+        },
+        {
+          "lat": 32.639513,
+          "lng": -96.850863
+        },
+        {
+          "lat": 32.638934,
+          "lng": -96.850863
+        },
+        {
+          "lat": 32.638934,
+          "lng": -96.851687
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 32.63640, "west": -96.85300, "north": 32.64030, "east": -96.85160 }
+      {
+        "ring": [
+          {
+            "lat": 32.639513,
+            "lng": -96.852373
+          },
+          {
+            "lat": 32.639513,
+            "lng": -96.851549
+          },
+          {
+            "lat": 32.634193,
+            "lng": -96.851549
+          },
+          {
+            "lat": 32.634193,
+            "lng": -96.852373
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 32.63680, "west": -96.85160, "north": 32.64040, "east": -96.85090 },
-      { "south": 32.63700, "west": -96.84970, "north": 32.64040, "east": -96.84920 }
+      {
+        "ring": [
+          {
+            "lat": 32.639397,
+            "lng": -96.851549
+          },
+          {
+            "lat": 32.639397,
+            "lng": -96.850725
+          },
+          {
+            "lat": 32.633383,
+            "lng": -96.850725
+          },
+          {
+            "lat": 32.633383,
+            "lng": -96.851549
+          }
+        ]
+      }
     ],
-    "staging": { "south": 32.63990, "west": -96.85120, "north": 32.64060, "east": -96.84960 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 162,
+        "pano": "OZ_Lbk2SnDaqWm0X7s0vEg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 162,
+        "pano": "OZ_Lbk2SnDaqWm0X7s0vEg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 130,
@@ -20,23 +110,40 @@
     "trailerParkingCapacity": 300,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 55.0,
+    "siteAreaAcres": 55,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.63905,-96.851,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "location": "Resolved with high confidence. Roster geocode (movedMeters 5664) lands directly on the long cross-dock RDC building at 2300 Beckleymeade Ave in the Dallas Logistics Hub (south Dallas, zip 75232). Confirmed as HD RDC #5023 / XD06 via SupplierWiki and FCC license records (DC 5023).",
     "truckGate": "CONFIRMED via Street View on Beckleymeade Ave: a swing/sliding gate spans the truck entrance driveway, set well back from the public road with a deep paved apron; full perimeter security fencing (black ornamental + chain-link) wraps the property.",

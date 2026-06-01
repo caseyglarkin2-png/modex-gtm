@@ -1,13 +1,75 @@
 {
   "name": "Kenco MCS Clearfield - Clearfield UT",
   "type": "Multi-Client Distribution Center",
-  "coords": { "lat": 41.10090, "lng": -112.03460 },
+  "coords": {
+    "lat": 41.1009,
+    "lng": -112.0346
+  },
   "geofences": {
-    "perimeter": { "south": 41.10005, "west": -112.03570, "north": 41.10180, "east": -112.03360 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.101417,
+          "lng": -112.035081
+        },
+        {
+          "lat": 41.101417,
+          "lng": -112.034188
+        },
+        {
+          "lat": 41.10059,
+          "lng": -112.034188
+        },
+        {
+          "lat": 41.10059,
+          "lng": -112.035081
+        }
+      ]
+    },
     "truckGate": null,
-    "dropYards": [],
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 41.101003,
+            "lng": -112.034875
+          },
+          {
+            "lat": 41.101003,
+            "lng": -112.034188
+          },
+          {
+            "lat": 41.100771,
+            "lng": -112.034188
+          },
+          {
+            "lat": 41.100771,
+            "lng": -112.034875
+          }
+        ]
+      }
+    ],
     "dockAprons": [
-      { "south": 41.10025, "west": -112.03555, "north": 41.10165, "east": -112.03445 }
+      {
+        "ring": [
+          {
+            "lat": 41.101159,
+            "lng": -112.035046
+          },
+          {
+            "lat": 41.101159,
+            "lng": -112.034188
+          },
+          {
+            "lat": 41.101055,
+            "lng": -112.034188
+          },
+          {
+            "lat": 41.101055,
+            "lng": -112.035046
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -22,18 +84,36 @@
   },
   "mapsUrl": "https://www.google.com/maps/@41.10090,-112.03460,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "dropArea", "shipRcvSeparate", "siteAreaAcres"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "dropArea",
+    "shipRcvSeparate",
+    "siteAreaAcres"
+  ],
   "fieldNotes": {
     "location": "Building G8, 7th Street, Freeport Center, Clearfield UT 84016 - positively confirmed. Roster ROOFTOP geocode (41.100339,-112.035023) matches the Google geocode for 'G-8, 7th St' exactly, and Street View shows a 'G-8 7th Street' sign on the building. Freeport Center is a 680-acre former WWII military depot with 78 long warehouse buildings on an internal street grid; Kenco occupies building G8 (~90,000 SF, food grade).",
     "buildingLayout": "G8 is one long, narrow Freeport Center warehouse (~230 m x 35 m) running NW-SE. Per Freeport Center's published description, most buildings have a railroad loading dock on one side and a truck loading dock on the other.",

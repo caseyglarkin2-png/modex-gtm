@@ -1,39 +1,106 @@
 {
   "name": "DHL Supply Chain - Mann+Hummel DC - Cowpens SC",
   "type": "Dedicated Customer Distribution Center (filtration)",
-  "coords": { "lat": 35.06105, "lng": -81.78200 },
+  "coords": {
+    "lat": 35.06105,
+    "lng": -81.782
+  },
   "geofences": {
-    "perimeter": { "south": 35.05780, "west": -81.78760, "north": 35.06480, "east": -81.77620 },
-    "truckGate": { "south": 35.06300, "west": -81.77800, "north": 35.06400, "east": -81.77700 },
-    "dropYards": [
-      { "south": 35.05900, "west": -81.78720, "north": 35.06150, "east": -81.78400 },
-      { "south": 35.06250, "west": -81.78250, "north": 35.06450, "east": -81.77820 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.063523,
+          "lng": -81.785845
+        },
+        {
+          "lat": 35.063298,
+          "lng": -81.777605
+        },
+        {
+          "lat": 35.059027,
+          "lng": -81.777605
+        },
+        {
+          "lat": 35.059251,
+          "lng": -81.785845
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 35.06150, "west": -81.78550, "north": 35.06420, "east": -81.77780 },
-      { "south": 35.05850, "west": -81.78700, "north": 35.06250, "east": -81.77920 }
+      {
+        "ring": [
+          {
+            "lat": 35.063073,
+            "lng": -81.785571
+          },
+          {
+            "lat": 35.062849,
+            "lng": -81.77788
+          },
+          {
+            "lat": 35.061949,
+            "lng": -81.77788
+          },
+          {
+            "lat": 35.062174,
+            "lng": -81.785571
+          }
+        ]
+      }
     ],
-    "staging": { "south": 35.06250, "west": -81.77900, "north": 35.06380, "east": -81.77720 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 38,
+        "pano": "Xg3QqtsbW6jOxaPmIdskeA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 104, "trailersVisible": 95, "trailerParkingCapacity": 220,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 90.0,
+    "dockDoorCount": 104,
+    "trailersVisible": 95,
+    "trailerParkingCapacity": 220,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 90,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.06105,-81.78200,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "shipRcvSeparate", "siteAreaAcres"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "shipRcvSeparate",
+    "siteAreaAcres"
+  ],
   "fieldNotes": {
     "location": "Roster lat/lng landed on the NE edge of the building (ROOFTOP, moved 44m). Re-centered on the single massive cross-dock at 35.0610,-81.7820. Confirmed via web research as the 1,401,200 sq ft DHL/Mann+Hummel spec DC at 600 Webber Drive, Cowpens SC, opened July 2021 - the largest single building in the roster.",
     "truckGate": "Single controlled entrance off Webber Drive on the NE side - a divided 2-lane drive into the site. Site fenced (chain-link visible in Apr-2024 Street View). Long internal approach.",

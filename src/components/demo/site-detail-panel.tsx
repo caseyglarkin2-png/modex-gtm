@@ -5,6 +5,7 @@ import { useState } from 'react';
 import type { Site } from '@/lib/demo/pack-schema';
 import { GEOFENCE_COLORS } from './archetype-palette';
 import { DriverJourneyReplay } from './driver-journey-replay';
+import { ZoneStreetView } from './zone-street-view';
 
 const SiteDetailMap = dynamic(() => import('./site-detail-map-inner'), {
   ssr: false,
@@ -113,6 +114,10 @@ export function SiteDetailPanel({ site, onClose, autoPlay = false }: Props) {
 
       {/* Scrollable detail */}
       <div className="flex-1 overflow-y-auto px-5 py-4">
+        {/* Driver's-eye Street View — ground-level frames anchored to the zones,
+            rendered only where the audit found usable pano coverage. */}
+        <ZoneStreetView geofences={site.geofences} />
+
         {/* Yard metrics */}
         <div className="mb-4">
           <div className="mb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-white/55">Yard</div>

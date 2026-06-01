@@ -1,18 +1,81 @@
 {
   "name": "John Deere Dubuque Works - Dubuque IA",
   "type": "Assembly Plant",
-  "coords": { "lat": 42.566837, "lng": -90.690881 },
+  "coords": {
+    "lat": 42.566837,
+    "lng": -90.690881
+  },
   "geofences": {
-    "perimeter": { "south": 42.55650, "west": -90.69900, "north": 42.57400, "east": -90.68150 },
-    "truckGate": { "south": 42.56250, "west": -90.69400, "north": 42.56400, "east": -90.69150 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.570073,
+          "lng": -90.696374
+        },
+        {
+          "lat": 42.567242,
+          "lng": -90.682092
+        },
+        {
+          "lat": 42.55915,
+          "lng": -90.678796
+        },
+        {
+          "lat": 42.556722,
+          "lng": -90.684289
+        },
+        {
+          "lat": 42.566837,
+          "lng": -90.698571
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 42.56560, "west": -90.68650, "north": 42.56950, "east": -90.68350 },
-      { "south": 42.56280, "west": -90.68800, "north": 42.56560, "east": -90.68450 }
+      {
+        "ring": [
+          {
+            "lat": 42.562387,
+            "lng": -90.690881
+          },
+          {
+            "lat": 42.561173,
+            "lng": -90.682092
+          },
+          {
+            "lat": 42.558745,
+            "lng": -90.682641
+          },
+          {
+            "lat": 42.560364,
+            "lng": -90.69143
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 42.56500, "west": -90.68750, "north": 42.56950, "east": -90.68550 }
+      {
+        "ring": [
+          {
+            "lat": 42.565623,
+            "lng": -90.693078
+          },
+          {
+            "lat": 42.564005,
+            "lng": -90.68374
+          },
+          {
+            "lat": 42.562387,
+            "lng": -90.684289
+          },
+          {
+            "lat": 42.564005,
+            "lng": -90.693628
+          }
+        ]
+      }
     ],
-    "staging": { "south": 42.56050, "west": -90.69300, "north": 42.56450, "east": -90.68900 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 30,
@@ -20,23 +83,46 @@
     "trailerParkingCapacity": 120,
     "truckGateCount": 2,
     "buildingCount": 6,
-    "siteAreaAcres": 480.0,
+    "siteAreaAcres": 480,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@42.566837,-90.690881,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoors", "entryLanes", "exitLanes", "entryExitSeparate", "scale", "shipRcvSeparate"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoors",
+    "entryLanes",
+    "exitLanes",
+    "entryExitSeparate",
+    "scale",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Mile-long plant on a 1,465-acre tract; reached by a long internal access road with multiple roundabouts off S John Deere Rd. Multi-lane managed entries at the building edge are inferred from the campus scale and layout; exact gate hardware not resolved (no Street View past the property edge).",
     "guardShack": "No guard booth resolved at entries in available satellite imagery.",

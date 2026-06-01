@@ -1,17 +1,108 @@
 {
   "name": "Niagara Bottling - Groveland FL",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 28.63920, "lng": -81.82750 },
+  "coords": {
+    "lat": 28.6392,
+    "lng": -81.8275
+  },
   "geofences": {
-    "perimeter": { "south": 28.63770, "west": -81.82960, "north": 28.64085, "east": -81.82610 },
-    "truckGate": { "south": 28.63790, "west": -81.82850, "north": 28.63820, "east": -81.82800 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 28.640224,
+          "lng": -81.828461
+        },
+        {
+          "lat": 28.640224,
+          "lng": -81.82647
+        },
+        {
+          "lat": 28.637874,
+          "lng": -81.82647
+        },
+        {
+          "lat": 28.637874,
+          "lng": -81.828461
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 28.638115,
+          "lng": -81.828599
+        },
+        {
+          "lat": 28.638115,
+          "lng": -81.828049
+        },
+        {
+          "lat": 28.637814,
+          "lng": -81.828049
+        },
+        {
+          "lat": 28.637814,
+          "lng": -81.828599
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 28.63800, "west": -81.82920, "north": 28.64060, "east": -81.82830 }
+      {
+        "ring": [
+          {
+            "lat": 28.639983,
+            "lng": -81.828324
+          },
+          {
+            "lat": 28.639983,
+            "lng": -81.826607
+          },
+          {
+            "lat": 28.638115,
+            "lng": -81.826607
+          },
+          {
+            "lat": 28.638115,
+            "lng": -81.828324
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 28.63800, "west": -81.82890, "north": 28.64060, "east": -81.82820 }
+      {
+        "ring": [
+          {
+            "lat": 28.640104,
+            "lng": -81.828461
+          },
+          {
+            "lat": 28.640104,
+            "lng": -81.82647
+          },
+          {
+            "lat": 28.639863,
+            "lng": -81.82647
+          },
+          {
+            "lat": 28.639863,
+            "lng": -81.828461
+          }
+        ]
+      }
     ],
-    "staging": { "south": 28.63760, "west": -81.82850, "north": 28.63800, "east": -81.82800 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 42,
+        "pano": "pb4BaXRjfy9BC6nVw8QjxA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 42,
+        "pano": "pb4BaXRjfy9BC6nVw8QjxA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 55,
@@ -19,23 +110,40 @@
     "trailerParkingCapacity": 70,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 42.0,
+    "siteAreaAcres": 42,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@28.63920,-81.82750,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "dropArea", "scale"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "dropArea",
+    "scale"
+  ],
   "fieldNotes": {
     "facility": "Niagara Bottling Groveland plant, 7633 American Way, operating since 2007. Confirmed via Street View: building with bulk silos/storage tanks (bottling water tanks), gated entry. Located in a multi-tenant industrial park; the Niagara building is the standalone large building, distinct from neighboring warehouses.",
     "truckGate": "Street View up the entry driveway shows a controlled checkpoint: a gate with a stop sign, perimeter chain-link fencing across the property line, and a guard booth with a canopy beside the lane.",

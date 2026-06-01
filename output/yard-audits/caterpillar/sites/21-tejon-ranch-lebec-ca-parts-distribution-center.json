@@ -1,17 +1,108 @@
 {
   "name": "Caterpillar - Tejon Ranch (Lebec) CA Parts Distribution Center",
   "type": "Parts distribution center (~400k sq ft, opened ~2012)",
-  "coords": { "lat": 35.00120, "lng": -118.94050 },
+  "coords": {
+    "lat": 35.0012,
+    "lng": -118.9405
+  },
   "geofences": {
-    "perimeter": { "south": 34.99950, "west": -118.94250, "north": 35.00310, "east": -118.93720 },
-    "truckGate": { "south": 35.00000, "west": -118.94120, "north": 35.00060, "east": -118.94020 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.002325,
+          "lng": -118.942835
+        },
+        {
+          "lat": 35.002325,
+          "lng": -118.937753
+        },
+        {
+          "lat": 34.99985,
+          "lng": -118.937753
+        },
+        {
+          "lat": 34.99985,
+          "lng": -118.942835
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.0021,
+          "lng": -118.942835
+        },
+        {
+          "lat": 35.0021,
+          "lng": -118.942011
+        },
+        {
+          "lat": 35.001537,
+          "lng": -118.942011
+        },
+        {
+          "lat": 35.001537,
+          "lng": -118.942835
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 35.00050, "west": -118.93920, "north": 35.00280, "east": -118.93730 }
+      {
+        "ring": [
+          {
+            "lat": 35.001875,
+            "lng": -118.939813
+          },
+          {
+            "lat": 35.001875,
+            "lng": -118.938028
+          },
+          {
+            "lat": 35.000075,
+            "lng": -118.938028
+          },
+          {
+            "lat": 35.000075,
+            "lng": -118.939813
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 34.99990, "west": -118.94110, "north": 35.00060, "east": -118.93870 }
+      {
+        "ring": [
+          {
+            "lat": 35.001425,
+            "lng": -118.942423
+          },
+          {
+            "lat": 35.001425,
+            "lng": -118.940225
+          },
+          {
+            "lat": 35.000975,
+            "lng": -118.940225
+          },
+          {
+            "lat": 35.000975,
+            "lng": -118.942423
+          }
+        ]
+      }
     ],
-    "staging": { "south": 35.00000, "west": -118.94100, "north": 35.00070, "east": -118.93950 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 119,
+        "pano": "tSWIqn9G-ARAmhbbZtNu0g",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 119,
+        "pano": "tSWIqn9G-ARAmhbbZtNu0g",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 24,
@@ -19,23 +110,48 @@
     "trailerParkingCapacity": 45,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 46.0,
+    "siteAreaAcres": 46,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.00120,-118.94050,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "low",
-  "uncertainFields": ["coords", "truckGate", "guardShack", "remoteGs", "dockDoors", "dockDoorCount", "dropArea", "trailerParkingCapacity", "entryLanes", "exitLanes", "buildingCount"],
+  "uncertainFields": [
+    "coords",
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoors",
+    "dockDoorCount",
+    "dropArea",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes",
+    "buildingCount"
+  ],
   "fieldNotes": {
     "location": "LOW CONFIDENCE on exact building. Roster had no street address (geocode APPROXIMATE) and the roster point was in hills near I-5, ~16 km from the actual site. Confirmed via Tejon Ranch Co. / Clayco that the facility IS at the Tejon Ranch Commerce Center (TRCC), at the I-5/Hwy 99 junction near Lebec/Grapevine: a 409,000 sq ft one-level tilt-up parts distribution center plus a 200,000 sq ft outdoor oversized-parts storage area, on a 46-acre site, dedicated Jan 2013.",
     "building": "Best-match building locked at ~35.0012,-118.9405: a large (~400k+ sq ft) one-level distribution building with two-phase construction (original white-roof section + grey-roof expansion - consistent with the documented 'room next door for an additional 350k sq ft'), a large outdoor yard on the E side (consistent with the 200k sq ft oversized-parts outdoor storage), dock doors on the S face, and employee car parking on the W. Could NOT positively confirm via signage that this specific TRCC building is Caterpillar versus an adjacent tenant - flagged.",

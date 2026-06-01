@@ -1,18 +1,103 @@
 {
   "name": "FedEx Ground Hub - Keasbey NJ",
   "type": "Ground regional sortation hub (NY/NJ metro)",
-  "coords": { "lat": 40.50650, "lng": -74.32600 },
+  "coords": {
+    "lat": 40.5065,
+    "lng": -74.326
+  },
   "geofences": {
-    "perimeter": { "south": 40.50250, "west": -74.32950, "north": 40.51020, "east": -74.32250 },
-    "truckGate": { "south": 40.50690, "west": -74.32760, "north": 40.50760, "east": -74.32660 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.510676,
+          "lng": -74.331219
+        },
+        {
+          "lat": 40.511303,
+          "lng": -74.323253
+        },
+        {
+          "lat": 40.507022,
+          "lng": -74.32188
+        },
+        {
+          "lat": 40.504412,
+          "lng": -74.324352
+        },
+        {
+          "lat": 40.504829,
+          "lng": -74.33012
+        },
+        {
+          "lat": 40.508588,
+          "lng": -74.331493
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 40.50550, "west": -74.32900, "north": 40.50820, "east": -74.32600 },
-      { "south": 40.50350, "west": -74.32700, "north": 40.50700, "east": -74.32350 },
-      { "south": 40.50750, "west": -74.32550, "north": 40.51000, "east": -74.32280 }
+      {
+        "ring": [
+          {
+            "lat": 40.507544,
+            "lng": -74.326
+          },
+          {
+            "lat": 40.507753,
+            "lng": -74.322704
+          },
+          {
+            "lat": 40.505247,
+            "lng": -74.322979
+          },
+          {
+            "lat": 40.505038,
+            "lng": -74.326275
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.506709,
+            "lng": -74.328747
+          },
+          {
+            "lat": 40.506918,
+            "lng": -74.326275
+          },
+          {
+            "lat": 40.505038,
+            "lng": -74.326275
+          },
+          {
+            "lat": 40.504829,
+            "lng": -74.328747
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.50700, "west": -74.32650, "north": 40.51000, "east": -74.32380 },
-      { "south": 40.50400, "west": -74.32600, "north": 40.50700, "east": -74.32330 }
+      {
+        "ring": [
+          {
+            "lat": 40.510259,
+            "lng": -74.330395
+          },
+          {
+            "lat": 40.510676,
+            "lng": -74.324352
+          },
+          {
+            "lat": 40.509215,
+            "lng": -74.324352
+          },
+          {
+            "lat": 40.508797,
+            "lng": -74.330395
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -22,23 +107,43 @@
     "trailerParkingCapacity": 900,
     "truckGateCount": 2,
     "buildingCount": 2,
-    "siteAreaAcres": 125.0,
+    "siteAreaAcres": 125,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.50650,-74.32600,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "truckGateCount", "entryLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "truckGateCount",
+    "entryLanes"
+  ],
   "fieldNotes": {
     "location": "Confirmed FedEx Ground regional sortation hub at 6000 Riverside Dr, Keasbey NJ (Woodbridge Township), a 24/7 NY/NJ-metro hub on the Raritan River. Roster coordinate (GEOMETRIC_CENTER, moved 1.2 km) landed correctly on the FedEx complex. FedEx Ground branding directly confirmed on the office building and on numerous trailers in Street View.",
     "campus": "The property is a large FedEx Ground campus with two distinct large sort-building clusters (a northwest building with a big solar roof and a southeast building cluster), each with continuous dock banks and surrounding trailer fields, plus a central office building with a curved entry canopy. multipleFacilities marked true.",

@@ -1,18 +1,79 @@
 {
   "name": "GP Brunswick Cellulose Mill - Brunswick GA",
   "type": "Cellulose/Pulp Mill",
-  "coords": { "lat": 31.1760, "lng": -81.5120 },
+  "coords": {
+    "lat": 31.176,
+    "lng": -81.512
+  },
   "geofences": {
-    "perimeter": { "south": 31.169263, "west": -81.521974, "north": 31.182737, "east": -81.502026 },
-    "truckGate": { "south": 31.180500, "west": -81.509800, "north": 31.181400, "east": -81.508400 },
-    "dropYards": [
-      { "south": 31.180000, "west": -81.509000, "north": 31.182500, "east": -81.504800 },
-      { "south": 31.175200, "west": -81.515500, "north": 31.177000, "east": -81.512500 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 31.1807,
+          "lng": -81.524634
+        },
+        {
+          "lat": 31.17929,
+          "lng": -81.517493
+        },
+        {
+          "lat": 31.17318,
+          "lng": -81.516669
+        },
+        {
+          "lat": 31.16942,
+          "lng": -81.520789
+        },
+        {
+          "lat": 31.174825,
+          "lng": -81.525184
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 31.17929,
+          "lng": -81.522986
+        },
+        {
+          "lat": 31.17976,
+          "lng": -81.521338
+        },
+        {
+          "lat": 31.17835,
+          "lng": -81.520789
+        },
+        {
+          "lat": 31.17788,
+          "lng": -81.522437
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 31.172500, "west": -81.518500, "north": 31.174500, "east": -81.516000 }
+      {
+        "ring": [
+          {
+            "lat": 31.17788,
+            "lng": -81.522986
+          },
+          {
+            "lat": 31.177175,
+            "lng": -81.518042
+          },
+          {
+            "lat": 31.176,
+            "lng": -81.518317
+          },
+          {
+            "lat": 31.176705,
+            "lng": -81.523261
+          }
+        ]
+      }
     ],
-    "staging": { "south": 31.179500, "west": -81.510000, "north": 31.180500, "east": -81.508500 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 20,
@@ -20,23 +81,44 @@
     "trailerParkingCapacity": 450,
     "truckGateCount": 1,
     "buildingCount": 22,
-    "siteAreaAcres": 704.0,
+    "siteAreaAcres": 704,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@31.176,-81.512,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": true, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "scale", "dockDoorCount", "entryLanes", "exitLanes", "shipRcvSeparate", "multiStep"],
+  "uncertainFields": [
+    "guardShack",
+    "scale",
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate",
+    "multiStep"
+  ],
   "fieldNotes": {
     "truckGate": "Large bleached-kraft pulp mill receiving ~1,000 truckloads of pine logs per day; single controlled access road off the city street network; container/trailer yard is fenced with chain-link and privacy screening (Street View, Nov 2024).",
     "guardShack": "No frontal booth view obtained (no Street View on the private mill road), but a 600-employee pulp mill handling ~1,000 trucks/day operates a staffed gatehouse by standard. Flagged uncertain.",

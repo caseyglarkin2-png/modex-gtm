@@ -1,13 +1,63 @@
 {
   "name": "Frito-Lay - Arlington TX",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 32.7370, "lng": -97.0915 },
+  "coords": {
+    "lat": 32.737,
+    "lng": -97.0915
+  },
   "geofences": {
-    "perimeter": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.73804,
+          "lng": -97.094659
+        },
+        {
+          "lat": 32.73804,
+          "lng": -97.092461
+        },
+        {
+          "lat": 32.737231,
+          "lng": -97.092461
+        },
+        {
+          "lat": 32.737231,
+          "lng": -97.094659
+        }
+      ]
+    },
     "truckGate": null,
-    "dropYards": [],
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 32.738848,
+            "lng": -97.094453
+          },
+          {
+            "lat": 32.738848,
+            "lng": -97.09253
+          },
+          {
+            "lat": 32.738155,
+            "lng": -97.09253
+          },
+          {
+            "lat": 32.738155,
+            "lng": -97.094453
+          }
+        ]
+      }
+    ],
     "dockAprons": [],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 58,
+        "pano": "boZ6YLY9iGjonWPcZ2NZSw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 0,
@@ -15,28 +65,58 @@
     "trailerParkingCapacity": 0,
     "truckGateCount": 0,
     "buildingCount": 0,
-    "siteAreaAcres": 0.0,
+    "siteAreaAcres": 0,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.7370,-97.0915,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "NONE", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural", "connectivityIssue",
-    "multipleFacilities", "scale", "dropYard", "multiStep"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "urbanRural",
+    "connectivityIssue",
+    "multipleFacilities",
+    "scale",
+    "dropYard",
+    "multiStep"
   ],
   "fieldNotes": {
     "location": "COULD NOT POSITIVELY CONFIRM the building. Roster address '5500 Watson Rd, Arlington TX 76018' is incorrect: it geocoded (RANGE_INTERPOLATED) into a residential subdivision near a highway, not an industrial site. Web research consistently identifies the real Frito-Lay Arlington plant as '948 Avenue H E, Arlington TX 76011' — listed as 'Frito-Lay Inc - Dip Plant', production began 1971, ~80 employees (Yelp, Cylex, PotatoPro, D&B).",

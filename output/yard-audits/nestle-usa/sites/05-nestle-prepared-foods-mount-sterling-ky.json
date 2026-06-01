@@ -1,19 +1,100 @@
 {
   "name": "Nestlé Prepared Foods - Mount Sterling KY",
   "type": "Frozen food manufacturing plant (Hot Pockets)",
-  "coords": { "lat": 38.09700, "lng": -83.90650 },
+  "coords": {
+    "lat": 38.097,
+    "lng": -83.9065
+  },
   "geofences": {
-    "perimeter": { "south": 38.09380, "west": -83.90950, "north": 38.09870, "east": -83.90380 },
-    "truckGate": { "south": 38.09450, "west": -83.90500, "north": 38.09500, "east": -83.90430 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.097432,
+          "lng": -83.908972
+        },
+        {
+          "lat": 38.097,
+          "lng": -83.904852
+        },
+        {
+          "lat": 38.094838,
+          "lng": -83.90444
+        },
+        {
+          "lat": 38.094622,
+          "lng": -83.908148
+        },
+        {
+          "lat": 38.096135,
+          "lng": -83.909247
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 38.096352,
+          "lng": -83.904715
+        },
+        {
+          "lat": 38.096352,
+          "lng": -83.903891
+        },
+        {
+          "lat": 38.095811,
+          "lng": -83.903891
+        },
+        {
+          "lat": 38.095811,
+          "lng": -83.904715
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 38.09650, "west": -83.90880, "north": 38.09790, "east": -83.90720 },
-      { "south": 38.09530, "west": -83.90620, "north": 38.09600, "east": -83.90480 }
+      {
+        "ring": [
+          {
+            "lat": 38.098297,
+            "lng": -83.908148
+          },
+          {
+            "lat": 38.098081,
+            "lng": -83.905264
+          },
+          {
+            "lat": 38.097216,
+            "lng": -83.905333
+          },
+          {
+            "lat": 38.097432,
+            "lng": -83.908217
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 38.09790, "west": -83.90720, "north": 38.09850, "east": -83.90480 },
-      { "south": 38.09580, "west": -83.90680, "north": 38.09640, "east": -83.90480 }
+      {
+        "ring": [
+          {
+            "lat": 38.09646,
+            "lng": -83.908697
+          },
+          {
+            "lat": 38.096243,
+            "lng": -83.905401
+          },
+          {
+            "lat": 38.095703,
+            "lng": -83.90547
+          },
+          {
+            "lat": 38.095919,
+            "lng": -83.908766
+          }
+        ]
+      }
     ],
-    "staging": { "south": 38.09500, "west": -83.90680, "north": 38.09600, "east": -83.90500 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 45,
@@ -50,7 +131,12 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount", "scale"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "Definitive - a single guarded entry off Oak Grove Dr on the SE. The campus is fully ringed by chain-link perimeter fence (confirmed in Street View 2025-06).",
     "guardShack": "Definitive - a blue-roofed guard booth sits on a raised median island in the entry road with traffic lanes on both sides and directional arrows painted on the pavement; a barrier-arm structure is visible. Clear in z20-z21 imagery and Street View 2025-06.",

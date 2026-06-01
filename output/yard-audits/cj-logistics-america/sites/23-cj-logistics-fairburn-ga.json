@@ -1,16 +1,54 @@
 {
   "name": "CJ Logistics - Fairburn GA",
   "type": "Distribution Center",
-  "coords": { "lat": 33.5441, "lng": -84.5873 },
+  "coords": {
+    "lat": 33.5441,
+    "lng": -84.5873
+  },
   "geofences": {
-    "perimeter": { "south": 33.54100, "west": -84.59080, "north": 33.54720, "east": -84.58380 },
-    "truckGate": { "south": 33.54170, "west": -84.59110, "north": 33.54230, "east": -84.59000 },
-    "dropYards": [
-      { "south": 33.54480, "west": -84.58520, "north": 33.54680, "east": -84.58380 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.54513,
+          "lng": -84.591695
+        },
+        {
+          "lat": 33.547419,
+          "lng": -84.585652
+        },
+        {
+          "lat": 33.545245,
+          "lng": -84.584553
+        },
+        {
+          "lat": 33.542841,
+          "lng": -84.590459
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 33.54100, "west": -84.59000, "north": 33.54500, "east": -84.58550 },
-      { "south": 33.54350, "west": -84.59030, "north": 33.54700, "east": -84.58550 }
+      {
+        "ring": [
+          {
+            "lat": 33.544844,
+            "lng": -84.591557
+          },
+          {
+            "lat": 33.546904,
+            "lng": -84.586064
+          },
+          {
+            "lat": 33.546332,
+            "lng": -84.585721
+          },
+          {
+            "lat": 33.544272,
+            "lng": -84.591214
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -25,18 +63,36 @@
   },
   "mapsUrl": "https://www.google.com/maps/@33.5441,-84.5873,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "5000A Bohannon Road, Fairburn GA 30213 = Shugart Farms Lake Park Industrial Building A, a Class-A cross-dock DC (~1,037,400 sq ft, built 2016) along I-85 in the Atlanta-South industrial corridor. Roster coords moved 3088m; relocated and confirmed via web (Yellowpages/Waze/TruckMap all place CJ Logistics America at 5000 Bohannon Rd) and satellite.",
     "truckGate": "Chain-link perimeter fencing runs along Bohannon Road frontage (2023 + 2025 Street View). The truck/auto entrance is a divided driveway with separate in/out lanes around a central island; gates set back within the fence line. truckGate=true.",

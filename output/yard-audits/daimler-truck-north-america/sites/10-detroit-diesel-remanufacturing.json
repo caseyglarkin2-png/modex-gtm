@@ -1,15 +1,108 @@
 {
   "name": "Detroit Diesel Remanufacturing - Hibbing MN",
   "type": "Remanufacturing plant (engines/components)",
-  "coords": { "lat": 47.393282, "lng": -92.829402 },
+  "coords": {
+    "lat": 47.393282,
+    "lng": -92.829402
+  },
   "geofences": {
-    "perimeter": { "south": 47.3922, "west": -92.8308, "north": 47.3944, "east": -92.8276 },
-    "truckGate": null,
-    "dropYards": [],
-    "dockAprons": [
-      { "south": 47.3935, "west": -92.8302, "north": 47.3940, "east": -92.8294 }
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 47.393607,
+          "lng": -92.830569
+        },
+        {
+          "lat": 47.393607,
+          "lng": -92.828715
+        },
+        {
+          "lat": 47.392352,
+          "lng": -92.828578
+        },
+        {
+          "lat": 47.392213,
+          "lng": -92.830569
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 47.394212,
+          "lng": -92.828578
+        },
+        {
+          "lat": 47.394212,
+          "lng": -92.828029
+        },
+        {
+          "lat": 47.393979,
+          "lng": -92.828029
+        },
+        {
+          "lat": 47.393979,
+          "lng": -92.828578
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 47.392724,
+            "lng": -92.830501
+          },
+          {
+            "lat": 47.392724,
+            "lng": -92.828853
+          },
+          {
+            "lat": 47.392259,
+            "lng": -92.828853
+          },
+          {
+            "lat": 47.392259,
+            "lng": -92.830501
+          }
+        ]
+      }
     ],
-    "staging": null
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 47.39291,
+            "lng": -92.830363
+          },
+          {
+            "lat": 47.39291,
+            "lng": -92.828853
+          },
+          {
+            "lat": 47.392771,
+            "lng": -92.828853
+          },
+          {
+            "lat": 47.392771,
+            "lng": -92.830363
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 215,
+        "pano": "KkjYJexkmVyT9eMCRtby2g",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 215,
+        "pano": "KkjYJexkmVyT9eMCRtby2g",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 8,
@@ -17,23 +110,39 @@
     "trailerParkingCapacity": 14,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 14.0,
+    "siteAreaAcres": 14,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@47.393282,-92.829402,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "0-10", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": true, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": true,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "connectivityIssue"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "location": "Geocoded point (ROOFTOP, moved 115m) lands accurately on a single tan industrial building in open country on the Range Regional Airport property south of US-169 near Hibbing MN. Confirmed via DTNA press releases as Detroit Diesel Remanufacturing -- the Hibbing reman plant whose 2024 expansion doubled the footprint to ~120,000 sq ft and added BEV battery/inverter remanufacturing. Address 3895 South Hughes Road.",
     "truckGate": "No controlled truck gate. A single open driveway runs from US-169 down to the building's parking lots; Street View (captured 2025-08) shows no barrier arm, gate or guard booth, and no perimeter fence at the road -- the site is fully open.",

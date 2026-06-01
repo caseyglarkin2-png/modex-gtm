@@ -1,17 +1,112 @@
 {
   "name": "GP Leaf River Cellulose Mill - New Augusta MS",
   "type": "Cellulose/Pulp Mill",
-  "coords": { "lat": 31.2432, "lng": -89.0455 },
+  "coords": {
+    "lat": 31.2432,
+    "lng": -89.0455
+  },
   "geofences": {
-    "perimeter": { "south": 31.2360, "west": -89.0512, "north": 31.2505, "east": -89.0388 },
-    "truckGate": { "south": 31.2434, "west": -89.0478, "north": 31.2444, "east": -89.0466 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 31.248836,
+          "lng": -89.048247
+        },
+        {
+          "lat": 31.248366,
+          "lng": -89.042204
+        },
+        {
+          "lat": 31.235216,
+          "lng": -89.041105
+        },
+        {
+          "lat": 31.234746,
+          "lng": -89.046599
+        },
+        {
+          "lat": 31.2432,
+          "lng": -89.048247
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 31.246957,
+          "lng": -89.047148
+        },
+        {
+          "lat": 31.246957,
+          "lng": -89.0455
+        },
+        {
+          "lat": 31.245783,
+          "lng": -89.0455
+        },
+        {
+          "lat": 31.245783,
+          "lng": -89.047148
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 31.2386, "west": -89.0470, "north": 31.2402, "east": -89.0451 }
+      {
+        "ring": [
+          {
+            "lat": 31.246957,
+            "lng": -89.044951
+          },
+          {
+            "lat": 31.246722,
+            "lng": -89.041105
+          },
+          {
+            "lat": 31.2432,
+            "lng": -89.04138
+          },
+          {
+            "lat": 31.243435,
+            "lng": -89.045225
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 31.2388, "west": -89.0467, "north": 31.2399, "east": -89.0450 }
+      {
+        "ring": [
+          {
+            "lat": 31.245548,
+            "lng": -89.047148
+          },
+          {
+            "lat": 31.245313,
+            "lng": -89.042753
+          },
+          {
+            "lat": 31.244139,
+            "lng": -89.043028
+          },
+          {
+            "lat": 31.244374,
+            "lng": -89.047423
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 111,
+        "pano": "o1A7F-QjyWGhsy5kAOApuQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 111,
+        "pano": "o1A7F-QjyWGhsy5kAOApuQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 14,
@@ -19,23 +114,44 @@
     "trailerParkingCapacity": 30,
     "truckGateCount": 1,
     "buildingCount": 12,
-    "siteAreaAcres": 285.0,
+    "siteAreaAcres": 285,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@31.2432,-89.0455,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": true, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "scale", "dockDoors", "entryLanes", "exitLanes", "connectivityIssue"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "scale",
+    "dockDoors",
+    "entryLanes",
+    "exitLanes",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "location": "Geocoded roster point (31.2189,-89.0521) was a rural residential property ~2.7 km south of the mill; mill core relocated via satellite + web research to ~31.2432,-89.0455.",
     "truckGate": "Mill is fully enclosed by chain-link perimeter fencing (clearly visible in Street View along the west boundary road). Main controlled access road enters the fenced property from the intersection near the admin/control building at ~31.2438,-89.0473.",

@@ -1,13 +1,96 @@
 {
   "name": "Universal Intermodal Services - Savannah Terminal - Savannah GA",
   "type": "Intermodal / Drayage Terminal (owned)",
-  "coords": { "lat": 32.13320, "lng": -81.17500 },
+  "coords": {
+    "lat": 32.1332,
+    "lng": -81.175
+  },
   "geofences": {
-    "perimeter": { "south": 32.13150, "west": -81.17700, "north": 32.13470, "east": -81.17320 },
-    "truckGate": { "south": 32.13230, "west": -81.17620, "north": 32.13290, "east": -81.17540 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.135061,
+          "lng": -81.17809
+        },
+        {
+          "lat": 32.135061,
+          "lng": -81.175
+        },
+        {
+          "lat": 32.132909,
+          "lng": -81.174451
+        },
+        {
+          "lat": 32.131456,
+          "lng": -81.175687
+        },
+        {
+          "lat": 32.132502,
+          "lng": -81.17809
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.134363,
+          "lng": -81.175687
+        },
+        {
+          "lat": 32.134363,
+          "lng": -81.175206
+        },
+        {
+          "lat": 32.134014,
+          "lng": -81.175206
+        },
+        {
+          "lat": 32.134014,
+          "lng": -81.175687
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 32.13290, "west": -81.17500, "north": 32.13460, "east": -81.17330 },
-      { "south": 32.13150, "west": -81.17560, "north": 32.13280, "east": -81.17420 }
+      {
+        "ring": [
+          {
+            "lat": 32.134363,
+            "lng": -81.177747
+          },
+          {
+            "lat": 32.134247,
+            "lng": -81.176373
+          },
+          {
+            "lat": 32.132909,
+            "lng": -81.176579
+          },
+          {
+            "lat": 32.133026,
+            "lng": -81.177884
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 32.132619,
+            "lng": -81.17706
+          },
+          {
+            "lat": 32.132502,
+            "lng": -81.175687
+          },
+          {
+            "lat": 32.131572,
+            "lng": -81.175893
+          },
+          {
+            "lat": 32.131804,
+            "lng": -81.177197
+          }
+        ]
+      }
     ],
     "dockAprons": [],
     "staging": null
@@ -18,7 +101,7 @@
     "trailerParkingCapacity": 150,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 9.0,
+    "siteAreaAcres": 9,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.1332,-81.175,400m/data=!3m1!1e3",
@@ -47,7 +130,13 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "scale"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "scale"
+  ],
   "fieldNotes": {
     "siteResolution": "No street address in roster. Web search + loadmatch directory resolved Universal Intermodal Services' Savannah terminal to 6052 Commerce Court, Garden City/Savannah GA 31408 — ~1.6 mi from the Port of Savannah. Geocoded to 32.1329, -81.1751 and confirmed by satellite as a truck/intermodal terminal: a central shop/office building surrounded by a paved truck yard full of tractors and trailers, fuel tanks, and adjacent trailer-storage parcels. Street View (2025-11) shows tractors and trailers parked behind chain-link fencing. Note: 6052 Commerce Ct is shared with Mason Dixon Intermodal in directories — the audited yard is the Universal Intermodal drayage terminal at that address. Medium confidence.",
     "truckGate": "The terminal yard is perimeter chain-link fenced; truck access is via a gated fenced opening off the access road on the west side. No barrier arm was directly resolved — classed truckGate true / remoteGs true (gated fenced access, no clearly visible staffed booth). C-TPAT/FAST-certified secure terminal status corroborates access control.",

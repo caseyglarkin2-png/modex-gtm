@@ -1,19 +1,84 @@
 {
   "name": "Detroit Diesel Corporation Engine Plant - Redford MI",
   "type": "Engine / powertrain plant",
-  "coords": { "lat": 42.37745, "lng": -83.2675 },
+  "coords": {
+    "lat": 42.37745,
+    "lng": -83.2675
+  },
   "geofences": {
-    "perimeter": { "south": 42.3735, "west": -83.2753, "north": 42.3787, "east": -83.2635 },
-    "truckGate": { "south": 42.37605, "west": -83.27520, "north": 42.37665, "east": -83.27440 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.378262,
+          "lng": -83.276289
+        },
+        {
+          "lat": 42.378262,
+          "lng": -83.265852
+        },
+        {
+          "lat": 42.374204,
+          "lng": -83.264753
+        },
+        {
+          "lat": 42.374204,
+          "lng": -83.27574
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 42.3760, "west": -83.2752, "north": 42.3782, "east": -83.2725 },
-      { "south": 42.3768, "west": -83.2668, "north": 42.3786, "east": -83.2632 }
+      {
+        "ring": [
+          {
+            "lat": 42.377856,
+            "lng": -83.2675
+          },
+          {
+            "lat": 42.377856,
+            "lng": -83.264753
+          },
+          {
+            "lat": 42.375015,
+            "lng": -83.264753
+          },
+          {
+            "lat": 42.375015,
+            "lng": -83.2675
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 42.3782, "west": -83.2720, "north": 42.3788, "east": -83.2660 },
-      { "south": 42.3770, "west": -83.2752, "north": 42.3785, "east": -83.2745 }
+      {
+        "ring": [
+          {
+            "lat": 42.375015,
+            "lng": -83.27574
+          },
+          {
+            "lat": 42.375015,
+            "lng": -83.2675
+          },
+          {
+            "lat": 42.374406,
+            "lng": -83.2675
+          },
+          {
+            "lat": 42.374406,
+            "lng": -83.27574
+          }
+        ]
+      }
     ],
-    "staging": { "south": 42.3760, "west": -83.2752, "north": 42.3766, "east": -83.2742 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 108,
+        "pano": "7uaadCUlLgiz1RIJ57JwxA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 40,
@@ -21,23 +86,41 @@
     "trailerParkingCapacity": 180,
     "truckGateCount": 1,
     "buildingCount": 4,
-    "siteAreaAcres": 138.0,
+    "siteAreaAcres": 138,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@42.37745,-83.2675,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "exitLanes", "scale", "shipRcvSeparate"],
+  "uncertainFields": [
+    "guardShack",
+    "exitLanes",
+    "scale",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "location": "Geocoded point (GEOMETRIC_CENTER, moved 1434m) landed in an east-side staging lot. Confirmed the correct facility: the very large blue/gray-roofed Detroit Diesel engine plant complex bounded by Telegraph Rd / W Outer Drive on the west and a rail line on the north. A Street View 'TRUCK ENTRANCE -> 12200 TELEGRAPH' sign and DAIMLER TRUCK building branding positively identify the site.",
     "truckGate": "Clear controlled truck entrance on the SW corner off Telegraph Rd: dedicated 'TRUCK ENTRANCE' signage, a wide gated opening in tall chain-link perimeter fence with privacy screening, and a checkpoint apron set back from the road.",

@@ -1,16 +1,63 @@
 {
   "name": "DHL Supply Chain - DC - Dallas/Irving TX",
   "type": "Distribution Center",
-  "coords": { "lat": 32.83480, "lng": -97.03130 },
+  "coords": {
+    "lat": 32.8348,
+    "lng": -97.0313
+  },
   "geofences": {
-    "perimeter": { "south": 32.8336, "west": -97.0332, "north": 32.8362, "east": -97.0298 },
-    "truckGate": { "south": 32.83400, "west": -97.03065, "north": 32.83440, "east": -97.03020 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.835723,
+          "lng": -97.033909
+        },
+        {
+          "lat": 32.835954,
+          "lng": -97.030957
+        },
+        {
+          "lat": 32.834512,
+          "lng": -97.030613
+        },
+        {
+          "lat": 32.834108,
+          "lng": -97.033497
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 32.8338, "west": -97.0320, "north": 32.8350, "east": -97.0301 },
-      { "south": 32.8347, "west": -97.0327, "north": 32.8358, "east": -97.0307 }
+      {
+        "ring": [
+          {
+            "lat": 32.835377,
+            "lng": -97.033772
+          },
+          {
+            "lat": 32.83555,
+            "lng": -97.0313
+          },
+          {
+            "lat": 32.835204,
+            "lng": -97.031231
+          },
+          {
+            "lat": 32.835031,
+            "lng": -97.033703
+          }
+        ]
+      }
     ],
-    "staging": { "south": 32.8338, "west": -97.0307, "north": 32.8345, "east": -97.0301 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 241,
+        "pano": "abSaAANwnY1_GxFQkfUidw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 55,
@@ -23,18 +70,37 @@
   },
   "mapsUrl": "https://www.google.com/maps/@32.83480,-97.03130,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": true, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "0-10",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": true,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "0-10",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "dockDoorCount", "dockDoors", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "dockDoorCount",
+    "dockDoors",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Resolved to 5320 W Airport Freeway, Irving TX 75062 — the $57.5M, 220,000 sq ft DHL distribution center opened 2024 (relocated from Grand Prairie), the marquee DHL distribution facility in Irving. The roster gave no address ('contract-logistics DC building street addresses not publicly enumerated'); web research (DHL press release, Supply Chain Dive, WFAA, Commercial Real Estate Direct) identified this as the DHL DC in Irving and Google Geocoding API returned ROOFTOP precision (32.83530, -97.03138). Street View confirmed the DHL red/yellow brand livery on the building. NOTE: this is operated by the DHL eCommerce division (parcel sortation) rather than the DHL Supply Chain contract-logistics division — but it is the verifiable DHL DC matching the roster's 'Dallas/Irving' entry; the roster compiler could not pin a separate DHL Supply Chain street address. An alternative DHL Supply Chain / Discount Tire dedicated warehouse exists at 10101 Bonnie View Rd, but that is in Dallas proper, not Irving.",
     "truckGate": "The SE truck court is enclosed by a continuous perimeter fence (regularly-spaced posts clearly visible in z21 satellite along the dock-apron edge). The gate hardware at the entrance driveway could not be seen directly because a mature tree buffer screens the property from the public loop road — flagged uncertain. A 2024 purpose-built dedicated DHL DC with a fenced court is consistent with a controlled truck gate.",

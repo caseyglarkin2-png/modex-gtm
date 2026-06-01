@@ -1,13 +1,73 @@
 {
   "name": "Kenco MCS Jeffersonville II - Jeffersonville IN",
   "type": "Multi-Client Distribution Center",
-  "coords": { "lat": 38.39105, "lng": -85.67900 },
+  "coords": {
+    "lat": 38.39105,
+    "lng": -85.679
+  },
   "geofences": {
-    "perimeter": { "south": 38.38900, "west": -85.68085, "north": 38.39310, "east": -85.67670 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.392557,
+          "lng": -85.680236
+        },
+        {
+          "lat": 38.392665,
+          "lng": -85.677764
+        },
+        {
+          "lat": 38.388897,
+          "lng": -85.677352
+        },
+        {
+          "lat": 38.38879,
+          "lng": -85.680373
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 38.392126,
+          "lng": -85.680373
+        },
+        {
+          "lat": 38.392234,
+          "lng": -85.679687
+        },
+        {
+          "lat": 38.391481,
+          "lng": -85.679687
+        },
+        {
+          "lat": 38.391373,
+          "lng": -85.680373
+        }
+      ]
+    },
     "dropYards": [],
     "dockAprons": [
-      { "south": 38.38980, "west": -85.67880, "north": 38.39250, "east": -85.67690 }
+      {
+        "ring": [
+          {
+            "lat": 38.392449,
+            "lng": -85.680236
+          },
+          {
+            "lat": 38.392557,
+            "lng": -85.677764
+          },
+          {
+            "lat": 38.392126,
+            "lng": -85.677627
+          },
+          {
+            "lat": 38.392019,
+            "lng": -85.680099
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -22,18 +82,36 @@
   },
   "mapsUrl": "https://www.google.com/maps/@38.39105,-85.67900,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "dropArea", "multipleFacilities", "truckGateCount"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "dropArea",
+    "multipleFacilities",
+    "truckGateCount"
+  ],
   "fieldNotes": {
     "site": "Kenco has two logistics buildings on the Jeffersonville side of River Ridge Commerce Center. idx 1 (Jeffersonville I) is documented at 201 River Ridge Parkway, 664,800 SF, AutoStore robotics - it is the central NE-SW building at the idx 1 roster geocode. idx 10 (Jeffersonville II, 468,635 SF, food grade) was audited as the adjacent large warehouse to the NW (the second Kenco building), centered ~38.3911, -85.6790. The roster's idx 10 geocode (38.356949, -85.66387) is wrong - it lands on an unrelated corporate visitor building several km south.",
     "truckGate": "No controlled truck gate. The truck yard along the SE dock face is open to River Ridge Parkway with only a grassed setback - no perimeter fence, barrier arm, sliding gate or guard booth visible in any Street View. Typical open-layout River Ridge spec building.",

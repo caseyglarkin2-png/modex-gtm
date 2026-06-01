@@ -1,15 +1,58 @@
 {
   "name": "Pepperidge Farm - Lakeland FL",
   "type": "Manufacturing - bakery and crackers",
-  "coords": { "lat": 28.07405, "lng": -81.98150 },
+  "coords": {
+    "lat": 28.07405,
+    "lng": -81.9815
+  },
   "geofences": {
-    "perimeter": { "south": 28.07270, "west": -81.98400, "north": 28.07600, "east": -81.97850 },
-    "truckGate": { "south": 28.07315, "west": -81.98210, "north": 28.07345, "east": -81.98165 },
-    "dropYards": [
-      { "south": 28.07400, "west": -81.98290, "north": 28.07475, "east": -81.98180 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 28.074898,
+          "lng": -81.982873
+        },
+        {
+          "lat": 28.074777,
+          "lng": -81.980401
+        },
+        {
+          "lat": 28.073081,
+          "lng": -81.980401
+        },
+        {
+          "lat": 28.072838,
+          "lng": -81.982599
+        },
+        {
+          "lat": 28.07405,
+          "lng": -81.983011
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 28.07355, "west": -81.98230, "north": 28.07420, "east": -81.97990 }
+      {
+        "ring": [
+          {
+            "lat": 28.073808,
+            "lng": -81.982599
+          },
+          {
+            "lat": 28.073686,
+            "lng": -81.980676
+          },
+          {
+            "lat": 28.073081,
+            "lng": -81.980745
+          },
+          {
+            "lat": 28.073202,
+            "lng": -81.982667
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -19,23 +62,41 @@
     "trailerParkingCapacity": 40,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 38.0,
+    "siteAreaAcres": 38,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@28.07405,-81.98150,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "postGateStaging"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "postGateStaging"
+  ],
   "fieldNotes": {
     "truckGate": "Controlled fenced entry. Perimeter chain-link fence runs continuously along Interstate Drive; the truck driveway enters through a single gap in the fence at ~28.0733, -81.9819. Web listings note visitors must show a driver's license at the gate for a parking pass - corroborates a manned/controlled gate.",
     "guardShack": "A small ~1-vehicle-footprint structure sits on the east side of the driveway opening at the property line - a gatehouse/guard booth. A second small structure visible in the dock-apron imagery near the entry.",

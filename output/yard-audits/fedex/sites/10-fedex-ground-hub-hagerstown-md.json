@@ -1,20 +1,92 @@
 {
   "name": "FedEx Ground Hub - Hagerstown MD",
   "type": "Ground regional sortation hub",
-  "coords": { "lat": 39.63850, "lng": -77.79150 },
+  "coords": {
+    "lat": 39.6385,
+    "lng": -77.7915
+  },
   "geofences": {
-    "perimeter": { "south": 39.63640, "west": -77.79500, "north": 39.64180, "east": -77.78600 },
-    "truckGate": { "south": 39.63780, "west": -77.78760, "north": 39.63870, "east": -77.78680 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.640404,
+          "lng": -77.794796
+        },
+        {
+          "lat": 39.640827,
+          "lng": -77.790676
+        },
+        {
+          "lat": 39.637971,
+          "lng": -77.78738
+        },
+        {
+          "lat": 39.636173,
+          "lng": -77.789303
+        },
+        {
+          "lat": 39.635962,
+          "lng": -77.794247
+        },
+        {
+          "lat": 39.6385,
+          "lng": -77.795895
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 39.63680, "west": -77.79490, "north": 39.63940, "east": -77.79180 },
-      { "south": 39.63900, "west": -77.79350, "north": 39.64080, "east": -77.78900 },
-      { "south": 39.63680, "west": -77.79050, "north": 39.63850, "east": -77.78700 }
+      {
+        "ring": [
+          {
+            "lat": 39.639981,
+            "lng": -77.794521
+          },
+          {
+            "lat": 39.640192,
+            "lng": -77.792049
+          },
+          {
+            "lat": 39.637231,
+            "lng": -77.791775
+          },
+          {
+            "lat": 39.637019,
+            "lng": -77.794247
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.63700, "west": -77.79350, "north": 39.63780, "east": -77.78720 },
-      { "south": 39.63850, "west": -77.79350, "north": 39.63920, "east": -77.78720 }
+      {
+        "ring": [
+          {
+            "lat": 39.639769,
+            "lng": -77.7915
+          },
+          {
+            "lat": 39.6385,
+            "lng": -77.788204
+          },
+          {
+            "lat": 39.637442,
+            "lng": -77.788753
+          },
+          {
+            "lat": 39.638712,
+            "lng": -77.792049
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 296,
+        "pano": "oYpk3yzXx5gt8e3tjckn0w",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 160,
@@ -22,23 +94,42 @@
     "trailerParkingCapacity": 500,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 115.0,
+    "siteAreaAcres": 115,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.63850,-77.79150,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "entryLanes"
+  ],
   "fieldNotes": {
     "location": "Confirmed FedEx Ground regional sortation hub at 11825 Newgate Blvd, Newgate Industrial Park, Hagerstown MD. 325,000 sq ft on a 114-acre site, ~22,500 packages/hour, one of FedEx Ground's centralized distribution hubs. Roster coordinate moved 8.4 km (GEOMETRIC_CENTER geocode) but landed correctly on the hub. FedEx Ground branding directly confirmed on the building face and on dozens of trailers in Street View along Newgate Blvd.",
     "truckGate": "Site is fully enclosed by a chain-link perimeter fence (confirmed in multiple 2024 Street View frames along Newgate Blvd). Single controlled private access road off the Newgate Blvd intersection, with painted dashed lane markings on the approach and a sign monument. Counted as a controlled truck gate.",

@@ -1,17 +1,108 @@
 {
   "name": "Niagara Bottling - Mesa AZ",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 33.35260, "lng": -111.62580 },
+  "coords": {
+    "lat": 33.3526,
+    "lng": -111.6258
+  },
   "geofences": {
-    "perimeter": { "south": 33.35150, "west": -111.62750, "north": 33.35420, "east": -111.62350 },
-    "truckGate": { "south": 33.35345, "west": -111.62680, "north": 33.35385, "east": -111.62620 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.35369,
+          "lng": -111.626761
+        },
+        {
+          "lat": 33.35369,
+          "lng": -111.622641
+        },
+        {
+          "lat": 33.352084,
+          "lng": -111.622641
+        },
+        {
+          "lat": 33.352084,
+          "lng": -111.626761
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.353632,
+          "lng": -111.627036
+        },
+        {
+          "lat": 33.353632,
+          "lng": -111.626624
+        },
+        {
+          "lat": 33.353346,
+          "lng": -111.626624
+        },
+        {
+          "lat": 33.353346,
+          "lng": -111.627036
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 33.35330, "west": -111.62680, "north": 33.35390, "east": -111.62360 }
+      {
+        "ring": [
+          {
+            "lat": 33.353747,
+            "lng": -111.626624
+          },
+          {
+            "lat": 33.353747,
+            "lng": -111.622641
+          },
+          {
+            "lat": 33.353403,
+            "lng": -111.622641
+          },
+          {
+            "lat": 33.353403,
+            "lng": -111.626624
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.35305, "west": -111.62680, "north": 33.35335, "east": -111.62360 }
+      {
+        "ring": [
+          {
+            "lat": 33.353403,
+            "lng": -111.626487
+          },
+          {
+            "lat": 33.353403,
+            "lng": -111.622641
+          },
+          {
+            "lat": 33.353174,
+            "lng": -111.622641
+          },
+          {
+            "lat": 33.353174,
+            "lng": -111.626487
+          }
+        ]
+      }
     ],
-    "staging": { "south": 33.35335, "west": -111.62680, "north": 33.35390, "east": -111.62550 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 114,
+        "pano": "OMPqsIoSOhDizzKe1zlH2Q",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 114,
+        "pano": "OMPqsIoSOhDizzKe1zlH2Q",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 55,
@@ -19,7 +110,7 @@
     "trailerParkingCapacity": 65,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 28.0,
+    "siteAreaAcres": 28,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.35260,-111.62580,400m/data=!3m1!1e3",
@@ -48,7 +139,13 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "trailerParkingCapacity", "connectivityIssue"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "buildingId": "Confirmed Niagara via the 'niagara' wordmark on the building's west/NW face (Street View, captured 2024-12). 450,183 sq ft single-story water-manufacturing plant, established 2018, 3453 S 96th St.",
     "truckGate": "Fenced truck dock yard along the building's north face. Truck access is a driveway off S 96th St on the NW; a small standalone structure sits at the road edge by the entrance.",

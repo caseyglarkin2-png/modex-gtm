@@ -1,16 +1,54 @@
 {
   "name": "DHL Supply Chain - Keurig DC - Union City GA",
   "type": "Dedicated Customer Distribution Center (beverage)",
-  "coords": { "lat": 33.572741, "lng": -84.534200 },
+  "coords": {
+    "lat": 33.572741,
+    "lng": -84.5342
+  },
   "geofences": {
-    "perimeter": { "south": 33.570800, "west": -84.537200, "north": 33.574500, "east": -84.531000 },
-    "truckGate": { "south": 33.571800, "west": -84.536500, "north": 33.572300, "east": -84.536000 },
-    "dropYards": [
-      { "south": 33.571100, "west": -84.536300, "north": 33.571800, "east": -84.531600 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.574114,
+          "lng": -84.537221
+        },
+        {
+          "lat": 33.574343,
+          "lng": -84.531041
+        },
+        {
+          "lat": 33.571368,
+          "lng": -84.531041
+        },
+        {
+          "lat": 33.571139,
+          "lng": -84.537221
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 33.573500, "west": -84.536300, "north": 33.574100, "east": -84.531600 },
-      { "south": 33.571300, "west": -84.536300, "north": 33.572000, "east": -84.531600 }
+      {
+        "ring": [
+          {
+            "lat": 33.574,
+            "lng": -84.537084
+          },
+          {
+            "lat": 33.574228,
+            "lng": -84.531179
+          },
+          {
+            "lat": 33.573542,
+            "lng": -84.531179
+          },
+          {
+            "lat": 33.573313,
+            "lng": -84.537084
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -20,7 +58,7 @@
     "trailerParkingCapacity": 110,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 54.0,
+    "siteAreaAcres": 54,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.572741,-84.534200,400m/data=!3m1!1e3",
@@ -49,7 +87,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "truckGate": "Street View (2025-10) clearly shows a chain-link perimeter fence separating the office/car-parking area from the truck yard, with a gate where the truck access drive crosses the fence line. A 'DEAD END / NO TRACTOR TRAILERS BEYOND THIS POINT' sign marks the car/office side, confirming a controlled separation of truck and visitor traffic.",
     "guardShack": "No large multi-window staffed guard booth visible at the gate in any Street View capture (2019, 2025). The gate structure is small. Classified guardShack false / remoteGs true (kiosk or automated check-in implied) - flagged as a medium-confidence call given the small/obscured structure.",

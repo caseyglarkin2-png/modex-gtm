@@ -1,15 +1,116 @@
 {
   "name": "Rochelle Foods - Rochelle IL",
   "type": "Meat Processing Plant",
-  "coords": { "lat": 41.92050, "lng": -89.06980 },
+  "coords": {
+    "lat": 41.9205,
+    "lng": -89.0698
+  },
   "geofences": {
-    "perimeter": { "south": 41.919467, "west": -89.071792, "north": 41.921533, "east": -89.067808 },
-    "truckGate": null,
-    "dropYards": [],
-    "dockAprons": [
-      { "south": 41.919786, "west": -89.070924, "north": 41.920414, "east": -89.069476 }
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.921522,
+          "lng": -89.070899
+        },
+        {
+          "lat": 41.921522,
+          "lng": -89.069388
+        },
+        {
+          "lat": 41.920398,
+          "lng": -89.069251
+        },
+        {
+          "lat": 41.920091,
+          "lng": -89.069388
+        },
+        {
+          "lat": 41.920091,
+          "lng": -89.070967
+        },
+        {
+          "lat": 41.920909,
+          "lng": -89.071036
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.920602,
+          "lng": -89.071036
+        },
+        {
+          "lat": 41.920653,
+          "lng": -89.070624
+        },
+        {
+          "lat": 41.920296,
+          "lng": -89.070555
+        },
+        {
+          "lat": 41.920245,
+          "lng": -89.070967
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 41.9205,
+            "lng": -89.070143
+          },
+          {
+            "lat": 41.920551,
+            "lng": -89.069388
+          },
+          {
+            "lat": 41.920142,
+            "lng": -89.069388
+          },
+          {
+            "lat": 41.920091,
+            "lng": -89.070075
+          }
+        ]
+      }
     ],
-    "staging": null
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 41.920755,
+            "lng": -89.070761
+          },
+          {
+            "lat": 41.920807,
+            "lng": -89.069457
+          },
+          {
+            "lat": 41.920653,
+            "lng": -89.069457
+          },
+          {
+            "lat": 41.920602,
+            "lng": -89.070761
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 356,
+        "pano": "HbELL5wWrsFNgHdTp_DVZg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 356,
+        "pano": "HbELL5wWrsFNgHdTp_DVZg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 8,
@@ -22,18 +123,36 @@
   },
   "mapsUrl": "https://www.google.com/maps/@41.92050,-89.06980,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "0-10", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "dropArea", "trailerParkingCapacity", "buildingCount"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "dropArea",
+    "trailerParkingCapacity",
+    "buildingCount"
+  ],
   "fieldNotes": {
     "location": "Roster's geocode (200 Caron Rd / 41.9356,-89.0546) landed on a large white retail/warehouse-type building with no docks or trailer yard — NOT the meat plant. Hormel's own page lists the plant at 1001 S Main St. Resolved the plant to the old rail-served industrial parcel at the Main St rail crossing (~41.9205,-89.0698), confirmed by Street View showing a tall smokestack, water tower, ammonia/refrigeration tanks and rail tank cars — classic markers of an older urban meat-packing plant.",
     "truckGate": "No barrier arm, sliding gate, or checkpoint visible at any access point. The plant is an old, compact, open urban facility hemmed by residential streets and rail; truck access is via the rail-crossing road and an unpaved/gravel lot on the east side (Street View 2022).",

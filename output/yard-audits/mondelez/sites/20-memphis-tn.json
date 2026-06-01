@@ -1,17 +1,63 @@
 {
   "name": "Nabisco Memphis Sales Distribution Center - Memphis TN",
   "type": "Distribution center / sales warehouse",
-  "coords": { "lat": 35.0184, "lng": -89.8695 },
+  "coords": {
+    "lat": 35.0184,
+    "lng": -89.8695
+  },
   "geofences": {
-    "perimeter": { "south": 35.0173, "west": -89.8712, "north": 35.0196, "east": -89.8678 },
-    "truckGate": { "south": 35.0182, "west": -89.8692, "north": 35.0187, "east": -89.8686 },
-    "dropYards": [
-      { "south": 35.0186, "west": -89.8708, "north": 35.0193, "east": -89.8682 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.019525,
+          "lng": -89.872521
+        },
+        {
+          "lat": 35.019637,
+          "lng": -89.866479
+        },
+        {
+          "lat": 35.018063,
+          "lng": -89.866479
+        },
+        {
+          "lat": 35.01795,
+          "lng": -89.872521
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 35.0184, "west": -89.8710, "north": 35.0190, "east": -89.8680 }
+      {
+        "ring": [
+          {
+            "lat": 35.019356,
+            "lng": -89.872247
+          },
+          {
+            "lat": 35.019412,
+            "lng": -89.869843
+          },
+          {
+            "lat": 35.019075,
+            "lng": -89.869843
+          },
+          {
+            "lat": 35.019019,
+            "lng": -89.872247
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 178,
+        "pano": "ivTK5YZWBYFNnNtY5Ztkqg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 22,
@@ -24,18 +70,35 @@
   },
   "mapsUrl": "https://www.google.com/maps/@35.0184,-89.8695,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "railServed"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "railServed"
+  ],
   "fieldNotes": {
     "location": "Roster coords (35.1175,-89.9711) were a downtown-Memphis centroid ~16 km NW of the real site. Resolved to 5812 Distribution Dr, Memphis TN 38141 via web research; Shelby County tax-assessor records confirm the 5812 parcel is owned by MONDELEZ GLOBAL LLC. Locked center 35.0184,-89.8695 in the SE Memphis (Lamar/Getwell) industrial corridor.",
     "facilityType": "Genuine freight facility - a single-story Nabisco/Mondelez sales-distribution warehouse, not an office. Freight relevance HIGH.",

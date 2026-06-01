@@ -1,17 +1,94 @@
 {
   "name": "Frito-Lay - Lynchburg VA",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 37.40036, "lng": -79.238328 },
+  "coords": {
+    "lat": 37.40036,
+    "lng": -79.238328
+  },
   "geofences": {
-    "perimeter": { "south": 37.3982, "west": -79.2405, "north": 37.4030, "east": -79.2360 },
-    "truckGate": { "south": 37.4022, "west": -79.2368, "north": 37.4029, "east": -79.2359 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.402542,
+          "lng": -79.240525
+        },
+        {
+          "lat": 37.401669,
+          "lng": -79.23668
+        },
+        {
+          "lat": 37.397742,
+          "lng": -79.238877
+        },
+        {
+          "lat": 37.398614,
+          "lng": -79.241075
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 37.402542,
+          "lng": -79.239427
+        },
+        {
+          "lat": 37.402433,
+          "lng": -79.238603
+        },
+        {
+          "lat": 37.401887,
+          "lng": -79.23874
+        },
+        {
+          "lat": 37.401996,
+          "lng": -79.239564
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 37.4011, "west": -79.2374, "north": 37.4025, "east": -79.2362 },
-      { "south": 37.3994, "west": -79.2390, "north": 37.4011, "east": -79.2363 }
+      {
+        "ring": [
+          {
+            "lat": 37.402106,
+            "lng": -79.239152
+          },
+          {
+            "lat": 37.401451,
+            "lng": -79.23668
+          },
+          {
+            "lat": 37.400142,
+            "lng": -79.237229
+          },
+          {
+            "lat": 37.400796,
+            "lng": -79.239701
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 37.3995, "west": -79.2382, "north": 37.4012, "east": -79.2373 },
-      { "south": 37.3984, "west": -79.2397, "north": 37.3992, "east": -79.2378 }
+      {
+        "ring": [
+          {
+            "lat": 37.399815,
+            "lng": -79.240251
+          },
+          {
+            "lat": 37.399269,
+            "lng": -79.238328
+          },
+          {
+            "lat": 37.398724,
+            "lng": -79.238603
+          },
+          {
+            "lat": 37.399269,
+            "lng": -79.240525
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -21,23 +98,39 @@
     "trailerParkingCapacity": 140,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 45.0,
+    "siteAreaAcres": 45,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@37.40036,-79.238328,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "multipleFacilities"],
+  "uncertainFields": [
+    "guardShack",
+    "multipleFacilities"
+  ],
   "fieldNotes": {
     "location": "Roster address (4500 Murray Pl) is wrong. Real plant confirmed at 230 Jefferson Ridge Pkwy, Lynchburg VA 24501 via Waze/Yelp/PotatoPro. Locked center 37.40036,-79.238328.",
     "truckGate": "Truck driveway connects to Jefferson Ridge Pkwy as a wide open paved apron at z19/z20 imagery with no barrier arm, sliding gate, or pinch-point checkpoint. Open ingress.",

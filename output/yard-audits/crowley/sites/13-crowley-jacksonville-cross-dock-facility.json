@@ -1,18 +1,136 @@
 {
   "name": "Crowley Jacksonville Cross Dock Facility - Jacksonville FL",
   "type": "Cross-dock / distribution warehouse",
-  "coords": { "lat": 30.34640, "lng": -81.69680 },
+  "coords": {
+    "lat": 30.3464,
+    "lng": -81.6968
+  },
   "geofences": {
-    "perimeter": { "south": 30.34470, "west": -81.69820, "north": 30.34810, "east": -81.69540 },
-    "truckGate": { "south": 30.34735, "west": -81.69605, "north": 30.34775, "east": -81.69560 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 30.347585,
+          "lng": -81.699547
+        },
+        {
+          "lat": 30.347585,
+          "lng": -81.696457
+        },
+        {
+          "lat": 30.346637,
+          "lng": -81.695701
+        },
+        {
+          "lat": 30.344622,
+          "lng": -81.695976
+        },
+        {
+          "lat": 30.344622,
+          "lng": -81.698173
+        },
+        {
+          "lat": 30.346104,
+          "lng": -81.699684
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 30.347585,
+          "lng": -81.696663
+        },
+        {
+          "lat": 30.347644,
+          "lng": -81.696113
+        },
+        {
+          "lat": 30.34723,
+          "lng": -81.695976
+        },
+        {
+          "lat": 30.34717,
+          "lng": -81.696525
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 30.34490, "west": -81.69820, "north": 30.34620, "east": -81.69640 },
-      { "south": 30.34620, "west": -81.69620, "north": 30.34760, "east": -81.69545 }
+      {
+        "ring": [
+          {
+            "lat": 30.347348,
+            "lng": -81.699272
+          },
+          {
+            "lat": 30.347348,
+            "lng": -81.697075
+          },
+          {
+            "lat": 30.346519,
+            "lng": -81.697075
+          },
+          {
+            "lat": 30.346519,
+            "lng": -81.699272
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 30.346281,
+            "lng": -81.698173
+          },
+          {
+            "lat": 30.346281,
+            "lng": -81.696388
+          },
+          {
+            "lat": 30.345452,
+            "lng": -81.696388
+          },
+          {
+            "lat": 30.345452,
+            "lng": -81.698173
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 30.34620, "west": -81.69790, "north": 30.34700, "east": -81.69620 }
+      {
+        "ring": [
+          {
+            "lat": 30.34723,
+            "lng": -81.69886
+          },
+          {
+            "lat": 30.34723,
+            "lng": -81.6968
+          },
+          {
+            "lat": 30.346874,
+            "lng": -81.696869
+          },
+          {
+            "lat": 30.346874,
+            "lng": -81.698929
+          }
+        ]
+      }
     ],
-    "staging": { "south": 30.34700, "west": -81.69640, "north": 30.34800, "east": -81.69555 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 197,
+        "pano": "436zNq5yzQ1LEzSJ02e8Pg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 197,
+        "pano": "436zNq5yzQ1LEzSJ02e8Pg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 58,
@@ -49,7 +167,13 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["entryLanes", "exitLanes", "guardShack", "trailerParkingCapacity", "railServed"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "guardShack",
+    "trailerParkingCapacity",
+    "railServed"
+  ],
   "fieldNotes": {
     "facility": "Crowley Jacksonville Cross Dock at 2061 Seaboard Coast Line (SCL) Drive, 32209. The roster's geocoded coordinate (30.324541,-81.663312, GEOMETRIC_CENTER) was WRONG — it pointed at downtown Jacksonville's St. Johns riverfront. SCL Drive is named for the Seaboard Coast Line railroad; web research places the cross-dock near I-95 / MLK Jr Parkway adjacent to the West Jacksonville rail yard. The resolved site is the large LTL/cross-dock terminal complex hard against the CSX/Seaboard rail yard at ~30.3464,-81.6968.",
     "identification": "No explicit Crowley nameplate was visible in available Street View, so identification is by strong circumstantial match: it is the only large cross-dock/LTL terminal complex on SCL Drive beside the rail yard in 32209, and its physical profile matches Crowley's published spec exactly (12.1 acres, ~45,580 sq ft of buildings with a 31,500 sq ft long cross-dock, a separate ~10,000 sq ft trailer maintenance building, 150+ trailer yard). Hapag-Lloyd / China Shipping ocean containers in the yard fit an ocean-carrier LCL/cross-dock operation.",

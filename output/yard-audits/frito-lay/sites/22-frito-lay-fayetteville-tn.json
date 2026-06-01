@@ -1,39 +1,141 @@
 {
   "name": "Frito-Lay - Fayetteville TN",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 35.15600, "lng": -86.51010 },
+  "coords": {
+    "lat": 35.156,
+    "lng": -86.5101
+  },
   "geofences": {
-    "perimeter": { "south": 35.15330, "west": -86.51270, "north": 35.15850, "east": -86.50780 },
-    "truckGate": { "south": 35.15700, "west": -86.50950, "north": 35.15780, "east": -86.50850 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.157572,
+          "lng": -86.512297
+        },
+        {
+          "lat": 35.157572,
+          "lng": -86.507903
+        },
+        {
+          "lat": 35.153305,
+          "lng": -86.507903
+        },
+        {
+          "lat": 35.153305,
+          "lng": -86.512297
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.157796,
+          "lng": -86.511473
+        },
+        {
+          "lat": 35.157796,
+          "lng": -86.510512
+        },
+        {
+          "lat": 35.157347,
+          "lng": -86.510512
+        },
+        {
+          "lat": 35.157347,
+          "lng": -86.511473
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 35.15600, "west": -86.50940, "north": 35.15820, "east": -86.50780 },
-      { "south": 35.15400, "west": -86.51270, "north": 35.15680, "east": -86.51150 }
+      {
+        "ring": [
+          {
+            "lat": 35.157123,
+            "lng": -86.509413
+          },
+          {
+            "lat": 35.157123,
+            "lng": -86.507353
+          },
+          {
+            "lat": 35.156,
+            "lng": -86.507353
+          },
+          {
+            "lat": 35.156,
+            "lng": -86.509413
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.15440, "west": -86.51100, "north": 35.15560, "east": -86.50880 },
-      { "south": 35.15700, "west": -86.51080, "north": 35.15820, "east": -86.50950 }
+      {
+        "ring": [
+          {
+            "lat": 35.154653,
+            "lng": -86.511748
+          },
+          {
+            "lat": 35.154653,
+            "lng": -86.508727
+          },
+          {
+            "lat": 35.153979,
+            "lng": -86.508727
+          },
+          {
+            "lat": 35.153979,
+            "lng": -86.511748
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 55, "trailersVisible": 140, "trailerParkingCapacity": 180,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 71.0,
+    "dockDoorCount": 55,
+    "trailersVisible": 140,
+    "trailerParkingCapacity": 180,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 71,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.156,-86.5101,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "scale", "fastLaneOpportunity"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "scale",
+    "fastLaneOpportunity"
+  ],
   "fieldNotes": {
     "location": "Roster point (35.156146,-86.510063, geocode ROOFTOP, moved 93 m) landed directly on the plant. Web research confirmed 101 Industrial Blvd, Fayetteville TN 37334 - a Frito-Lay manufacturing plant operating since 1997 (~500 employees; the company bought the plant from Eagle Snacks). Street View confirmed the plant with silos and Frito-Lay/Eagle-era trailers.",
     "truckGate": "The plant access road runs from a wide entrance off US-64; Street View (2023 pano) shows a checkpoint structure with yellow bollards at the entrance to the plant proper, and the trailer drop yard is enclosed by chain-link fencing. Controlled truck gate confirmed.",

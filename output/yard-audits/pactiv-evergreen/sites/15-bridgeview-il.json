@@ -1,17 +1,63 @@
 {
   "name": "Pactiv Evergreen - Bridgeview IL",
   "type": "Manufacturing Plant (Foodservice; ISCC PLUS certified)",
-  "coords": { "lat": 41.746000, "lng": -87.810400 },
+  "coords": {
+    "lat": 41.746,
+    "lng": -87.8104
+  },
   "geofences": {
-    "perimeter": { "south": 41.744500, "west": -87.811800, "north": 41.747300, "east": -87.809400 },
-    "truckGate": { "south": 41.744900, "west": -87.811500, "north": 41.745300, "east": -87.811000 },
-    "dropYards": [
-      { "south": 41.744600, "west": -87.810400, "north": 41.745400, "east": -87.809500 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.747127,
+          "lng": -87.811224
+        },
+        {
+          "lat": 41.747025,
+          "lng": -87.809576
+        },
+        {
+          "lat": 41.744873,
+          "lng": -87.810057
+        },
+        {
+          "lat": 41.744975,
+          "lng": -87.811636
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 41.745200, "west": -87.811500, "north": 41.746400, "east": -87.810900 }
+      {
+        "ring": [
+          {
+            "lat": 41.745488,
+            "lng": -87.811087
+          },
+          {
+            "lat": 41.745385,
+            "lng": -87.810057
+          },
+          {
+            "lat": 41.745078,
+            "lng": -87.810125
+          },
+          {
+            "lat": 41.74518,
+            "lng": -87.811155
+          }
+        ]
+      }
     ],
-    "staging": { "south": 41.744600, "west": -87.810900, "north": 41.745300, "east": -87.809500 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 149,
+        "pano": "mXeicnQ1eTUdELZofL1vhw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 28,
@@ -19,7 +65,7 @@
     "trailerParkingCapacity": 30,
     "truckGateCount": 2,
     "buildingCount": 1,
-    "siteAreaAcres": 16.0,
+    "siteAreaAcres": 16,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.746000,-87.810400,400m/data=!3m1!1e3",
@@ -48,7 +94,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "railServed"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "railServed"
+  ],
   "fieldNotes": {
     "truckGate": "Property fully enclosed in chain-link fencing with privacy-screened sliding gates across the truck-yard drives — confirmed in 2018 and 2025 Street View (sv-gate, sv-79th-e). At least two gated vehicle entrances along the south/southwest perimeter.",
     "guardShack": "No guard booth structure at any gate in any Street View heading probed.",

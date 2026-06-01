@@ -1,17 +1,87 @@
 {
   "name": "Performance Foodservice - Detroit (Warren MI)",
   "type": "Broadline Foodservice Distribution Center",
-  "coords": { "lat": 42.474855, "lng": -83.063823 },
+  "coords": {
+    "lat": 42.474855,
+    "lng": -83.063823
+  },
   "geofences": {
-    "perimeter": { "south": 42.47330, "west": -83.06490, "north": 42.47600, "east": -83.06200 },
-    "truckGate": { "south": 42.47550, "west": -83.06420, "north": 42.47600, "east": -83.06340 },
-    "dropYards": [
-      { "south": 42.47540, "west": -83.06420, "north": 42.47600, "east": -83.06210 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.475463,
+          "lng": -83.064716
+        },
+        {
+          "lat": 42.475463,
+          "lng": -83.062724
+        },
+        {
+          "lat": 42.473437,
+          "lng": -83.062724
+        },
+        {
+          "lat": 42.473437,
+          "lng": -83.064716
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.475108,
+          "lng": -83.064784
+        },
+        {
+          "lat": 42.475108,
+          "lng": -83.064304
+        },
+        {
+          "lat": 42.474804,
+          "lng": -83.064304
+        },
+        {
+          "lat": 42.474804,
+          "lng": -83.064784
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 42.47400, "west": -83.06330, "north": 42.47560, "east": -83.06210 }
+      {
+        "ring": [
+          {
+            "lat": 42.475361,
+            "lng": -83.06451
+          },
+          {
+            "lat": 42.475361,
+            "lng": -83.063274
+          },
+          {
+            "lat": 42.475159,
+            "lng": -83.063274
+          },
+          {
+            "lat": 42.475159,
+            "lng": -83.06451
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 141,
+        "pano": "lLrMTRWILcI39Ol5l9ecXw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 141,
+        "pano": "lLrMTRWILcI39Ol5l9ecXw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 35,
@@ -24,18 +94,36 @@
   },
   "mapsUrl": "https://www.google.com/maps/@42.474855,-83.063823,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayShort": true, "drivewayLong": false, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayShort": true,
+    "drivewayLong": false,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "scale"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "The truck yard (dock aprons + drop/fleet parking on the north and east of the buildings) is enclosed by a chain-link perimeter fence, visible in 2022 Street View along the north property line and in tight satellite. The truck yard is entered through a controlled gate off the north-side service drive. The separate front office entrance on Ryan Rd is an open visitor driveway.",
     "guardShack": "No guard booth visible at the truck gate in any imagery (2018/2019/2022/2025 Street View, current satellite). Classified guardShack false / remoteGs true (fenced gated yard with no booth implies kiosk / intercom check-in). Both flagged uncertain — this is an older urban Reinhart-era DC and a small booth could be obscured by trees.",

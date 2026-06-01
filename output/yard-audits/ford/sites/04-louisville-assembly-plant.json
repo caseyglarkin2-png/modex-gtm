@@ -1,39 +1,106 @@
 {
   "name": "Ford - Louisville Assembly Plant, Louisville KY",
   "type": "Vehicle Assembly Plant",
-  "coords": { "lat": 38.15470, "lng": -85.72850 },
+  "coords": {
+    "lat": 38.1547,
+    "lng": -85.7285
+  },
   "geofences": {
-    "perimeter": { "south": 38.14930, "west": -85.73400, "north": 38.15850, "east": -85.72180 },
-    "truckGate": { "south": 38.15680, "west": -85.73120, "north": 38.15780, "east": -85.72950 },
-    "dropYards": [
-      { "south": 38.15300, "west": -85.73380, "north": 38.15620, "east": -85.73180 },
-      { "south": 38.15180, "west": -85.73180, "north": 38.15360, "east": -85.72880 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.157292,
+          "lng": -85.733444
+        },
+        {
+          "lat": 38.157292,
+          "lng": -85.72081
+        },
+        {
+          "lat": 38.152972,
+          "lng": -85.72081
+        },
+        {
+          "lat": 38.152972,
+          "lng": -85.733444
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 38.15280, "west": -85.73180, "north": 38.15420, "east": -85.72900 },
-      { "south": 38.15480, "west": -85.73320, "north": 38.15600, "east": -85.73100 }
+      {
+        "ring": [
+          {
+            "lat": 38.154268,
+            "lng": -85.732345
+          },
+          {
+            "lat": 38.154268,
+            "lng": -85.726303
+          },
+          {
+            "lat": 38.153188,
+            "lng": -85.726303
+          },
+          {
+            "lat": 38.153188,
+            "lng": -85.732345
+          }
+        ]
+      }
     ],
-    "staging": { "south": 38.15600, "west": -85.73120, "north": 38.15700, "east": -85.72950 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 180,
+        "pano": "sbePv_CLAUWZBGqWYquSVA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 45, "trailersVisible": 90, "trailerParkingCapacity": 160,
-    "truckGateCount": 2, "buildingCount": 6, "siteAreaAcres": 277.0,
+    "dockDoorCount": 45,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 2,
+    "buildingCount": 6,
+    "siteAreaAcres": 277,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@38.15470,-85.72850,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": true
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": true
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "scale", "entryLanes", "exitLanes", "dockDoorCount"],
+  "uncertainFields": [
+    "guardShack",
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "facility": "Louisville Assembly Plant (Ford Escape, Lincoln Corsair), 2000 Fern Valley Rd. Geocode landed on the rooftop (moved 15m); confirmed as the large assembly complex immediately south of Louisville International Airport / UPS Worldport, bounded by Fern Valley Rd to the north, Grade Lane to the west, and a rail corridor to the south. ~3.15M sq ft of building.",
     "truckGate": "Secured Ford assembly campus with continuous perimeter chain-link fencing visible in multiple Street View captures along Grade Lane and Fern Valley Rd. Controlled truck access driveway off Fern Valley Rd into the west dock/yard area. A clearly visible internal vehicle-control gate (blue-roofed booth with gate arms and crosswalk markings) controls movement between the plant and finished-vehicle lots on the east side.",

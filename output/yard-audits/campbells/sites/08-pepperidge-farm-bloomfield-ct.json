@@ -1,18 +1,88 @@
 {
   "name": "Pepperidge Farm - Bloomfield CT",
   "type": "Manufacturing - bakery (bread, rolls, stuffing, croutons)",
-  "coords": { "lat": 41.86885, "lng": -72.71900 },
+  "coords": {
+    "lat": 41.86885,
+    "lng": -72.719
+  },
   "geofences": {
-    "perimeter": { "south": 41.86640, "west": -72.72120, "north": 41.87055, "east": -72.71690 },
-    "truckGate": { "south": 41.86890, "west": -72.72190, "north": 41.86925, "east": -72.72140 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.870077,
+          "lng": -72.720923
+        },
+        {
+          "lat": 41.869873,
+          "lng": -72.717352
+        },
+        {
+          "lat": 41.868032,
+          "lng": -72.717489
+        },
+        {
+          "lat": 41.867623,
+          "lng": -72.720373
+        },
+        {
+          "lat": 41.86885,
+          "lng": -72.721197
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 41.86975, "west": -72.72075, "north": 41.87045, "east": -72.71960 }
+      {
+        "ring": [
+          {
+            "lat": 41.869873,
+            "lng": -72.720648
+          },
+          {
+            "lat": 41.86977,
+            "lng": -72.719
+          },
+          {
+            "lat": 41.869055,
+            "lng": -72.719069
+          },
+          {
+            "lat": 41.869157,
+            "lng": -72.720717
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.86955, "west": -72.71970, "north": 41.87010, "east": -72.71840 },
-      { "south": 41.86780, "west": -72.71830, "north": 41.86850, "east": -72.71740 }
+      {
+        "ring": [
+          {
+            "lat": 41.868645,
+            "lng": -72.720373
+          },
+          {
+            "lat": 41.868543,
+            "lng": -72.717901
+          },
+          {
+            "lat": 41.868032,
+            "lng": -72.71797
+          },
+          {
+            "lat": 41.868134,
+            "lng": -72.720442
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 98,
+        "pano": "j3FHvVaLxTUEQIu-2P8tWA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 38,
@@ -20,23 +90,42 @@
     "trailerParkingCapacity": 55,
     "truckGateCount": 2,
     "buildingCount": 1,
-    "siteAreaAcres": 33.0,
+    "siteAreaAcres": 33,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.86885,-72.71900,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Both the NW driveway (signalized junction with Blue Hills Ave) and the SE driveway are wide-open uncontrolled entrances - no barrier arm, sliding gate, or pinch-point checkpoint visible in 2025-07 Street View or satellite imagery.",
     "guardShack": "No guard booth at either entrance. Small utility cabinet at the NW driveway mouth, not a staffed booth.",

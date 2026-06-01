@@ -1,18 +1,75 @@
 {
   "name": "Universal Logistics - Nissan Integrated Logistics Center - Smyrna TN",
   "type": "Integrated Logistics Center / Sequencing Warehouse",
-  "coords": { "lat": 35.95250, "lng": -86.48480 },
+  "coords": {
+    "lat": 35.9525,
+    "lng": -86.4848
+  },
   "geofences": {
-    "perimeter": { "south": 35.94850, "west": -86.48780, "north": 35.95680, "east": -86.48280 },
-    "truckGate": { "south": 35.94900, "west": -86.48470, "north": 35.94960, "east": -86.48380 },
-    "dropYards": [
-      { "south": 35.95080, "west": -86.48740, "north": 35.95560, "east": -86.48600 },
-      { "south": 35.95480, "west": -86.48560, "north": 35.95620, "east": -86.48420 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.955613,
+          "lng": -86.487547
+        },
+        {
+          "lat": 35.955168,
+          "lng": -86.482603
+        },
+        {
+          "lat": 35.947608,
+          "lng": -86.484251
+        },
+        {
+          "lat": 35.948275,
+          "lng": -86.489195
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.948943,
+          "lng": -86.489469
+        },
+        {
+          "lat": 35.94872,
+          "lng": -86.487547
+        },
+        {
+          "lat": 35.947608,
+          "lng": -86.487821
+        },
+        {
+          "lat": 35.947831,
+          "lng": -86.489744
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 35.95020, "west": -86.48680, "north": 35.95560, "east": -86.48560 }
+      {
+        "ring": [
+          {
+            "lat": 35.954946,
+            "lng": -86.486997
+          },
+          {
+            "lat": 35.954723,
+            "lng": -86.483152
+          },
+          {
+            "lat": 35.953612,
+            "lng": -86.483427
+          },
+          {
+            "lat": 35.953834,
+            "lng": -86.487272
+          }
+        ]
+      }
     ],
-    "staging": { "south": 35.94940, "west": -86.48560, "north": 35.95060, "east": -86.48400 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 70,
@@ -20,7 +77,7 @@
     "trailerParkingCapacity": 230,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 70.0,
+    "siteAreaAcres": 70,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.9525,-86.4848,400m/data=!3m1!1e3",
@@ -49,7 +106,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "buildingCount"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "buildingCount"
+  ],
   "fieldNotes": {
     "siteResolution": "Confirmed via TruckMap, ImportYeti, Indeed and Chamber of Commerce listings as the Nissan Integrated Logistics Center operated by Universal Logistics at 200 Sam Griffin Rd, Smyrna TN 37167. A single very large (~1.5M sq ft) low white-roof warehouse running roughly NNE-SSW, immediately southwest of the Nissan Smyrna assembly plant. Roster coords landed mid-roof; locked center at 35.95250,-86.48480.",
     "truckGate": "Z19 satellite of the SW corner shows a clear controlled checkpoint where the main driveway meets the access road: a small guard-booth structure straddling the lane with pedestrian turnstiles alongside, perimeter chain-link fence around the whole property. Street View of Sam Griffin Rd / the back access road confirms continuous perimeter fencing. truckGate = true.",

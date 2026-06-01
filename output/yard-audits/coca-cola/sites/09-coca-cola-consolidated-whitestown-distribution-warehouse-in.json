@@ -1,17 +1,84 @@
 {
   "name": "Coca-Cola Consolidated - Whitestown Distribution & Warehouse, IN",
   "type": "Distribution Center / Automated Warehouse",
-  "coords": { "lat": 39.95200, "lng": -86.37200 },
+  "coords": {
+    "lat": 39.952,
+    "lng": -86.372
+  },
   "geofences": {
-    "perimeter": { "south": 39.94920, "west": -86.37280, "north": 39.95400, "east": -86.37050 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.953474,
+          "lng": -86.372275
+        },
+        {
+          "lat": 39.953474,
+          "lng": -86.368155
+        },
+        {
+          "lat": 39.948631,
+          "lng": -86.368155
+        },
+        {
+          "lat": 39.948631,
+          "lng": -86.372275
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [
-      { "south": 39.95000, "west": -86.37280, "north": 39.95350, "east": -86.37230 }
+      {
+        "ring": [
+          {
+            "lat": 39.953263,
+            "lng": -86.370352
+          },
+          {
+            "lat": 39.953263,
+            "lng": -86.368429
+          },
+          {
+            "lat": 39.948842,
+            "lng": -86.368429
+          },
+          {
+            "lat": 39.948842,
+            "lng": -86.370352
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.95000, "west": -86.37250, "north": 39.95350, "east": -86.37200 }
+      {
+        "ring": [
+          {
+            "lat": 39.953053,
+            "lng": -86.372
+          },
+          {
+            "lat": 39.953053,
+            "lng": -86.370627
+          },
+          {
+            "lat": 39.949052,
+            "lng": -86.370627
+          },
+          {
+            "lat": 39.949052,
+            "lng": -86.372
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 5,
+        "pano": "eot1Llej0K_ipbeedBSELg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 40,
@@ -19,7 +86,7 @@
     "trailerParkingCapacity": 50,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 17.0,
+    "siteAreaAcres": 17,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.952,-86.372,400m/data=!3m1!1e3",
@@ -49,12 +116,32 @@
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural", "multipleFacilities",
-    "scale", "dropYard", "multiStep", "dockDoorCount", "trailersVisible",
-    "trailerParkingCapacity", "siteAreaAcres", "buildingCount"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "urbanRural",
+    "multipleFacilities",
+    "scale",
+    "dropYard",
+    "multiStep",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "siteAreaAcres",
+    "buildingCount"
   ],
   "fieldNotes": {
     "RESOLUTION_WARNING": "EXACT BUILDING NOT POSITIVELY CONFIRMED. The roster lat/lng (39.966379,-86.381749) are wrong - they land on a large multi-thousand-car surface parking lot / auto-auction-type campus, not a beverage distribution center. The real facility, per web research, is Coca-Cola Consolidated's $60M, 400,000 sq ft automated distribution & warehouse facility (opened April 19, 2021; 26,000 sq ft office; separate 15,000 sq ft Red Classic fleet shop; 450 employees) at 3690 S 500 E, Whitestown IN 46075, in Fishback Creek Business Park (north side of Albert S. White Blvd, between CR 450E and CR 575E, east of I-65 exit 133).",

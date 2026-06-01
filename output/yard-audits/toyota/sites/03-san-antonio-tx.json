@@ -1,19 +1,100 @@
 {
   "name": "Toyota Motor Manufacturing Texas - San Antonio TX",
   "type": "Vehicle Assembly Plant",
-  "coords": { "lat": 29.2625, "lng": -98.5425 },
+  "coords": {
+    "lat": 29.2625,
+    "lng": -98.5425
+  },
   "geofences": {
-    "perimeter": { "south": 29.2520, "west": -98.5530, "north": 29.2700, "east": -98.5340 },
-    "truckGate": { "south": 29.25880, "west": -98.54620, "north": 29.25980, "east": -98.54460 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.269209,
+          "lng": -98.556782
+        },
+        {
+          "lat": 29.267292,
+          "lng": -98.530415
+        },
+        {
+          "lat": 29.251957,
+          "lng": -98.530415
+        },
+        {
+          "lat": 29.248122,
+          "lng": -98.553486
+        },
+        {
+          "lat": 29.260104,
+          "lng": -98.557881
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 29.246205,
+          "lng": -98.551289
+        },
+        {
+          "lat": 29.246205,
+          "lng": -98.547993
+        },
+        {
+          "lat": 29.243329,
+          "lng": -98.547993
+        },
+        {
+          "lat": 29.243329,
+          "lng": -98.551289
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 29.26350, "west": -98.54550, "north": 29.26700, "east": -98.54250 },
-      { "south": 29.26000, "west": -98.54300, "north": 29.26350, "east": -98.53950 }
+      {
+        "ring": [
+          {
+            "lat": 29.265854,
+            "lng": -98.546895
+          },
+          {
+            "lat": 29.265854,
+            "lng": -98.5425
+          },
+          {
+            "lat": 29.256749,
+            "lng": -98.5425
+          },
+          {
+            "lat": 29.256749,
+            "lng": -98.546895
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 29.26100, "west": -98.54350, "north": 29.26450, "east": -98.53900 },
-      { "south": 29.25950, "west": -98.54550, "north": 29.26250, "east": -98.54250 }
+      {
+        "ring": [
+          {
+            "lat": 29.264896,
+            "lng": -98.545796
+          },
+          {
+            "lat": 29.264417,
+            "lng": -98.53481
+          },
+          {
+            "lat": 29.262021,
+            "lng": -98.53481
+          },
+          {
+            "lat": 29.2625,
+            "lng": -98.545796
+          }
+        ]
+      }
     ],
-    "staging": { "south": 29.25800, "west": -98.54550, "north": 29.26050, "east": -98.54300 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 130,
@@ -21,23 +102,43 @@
     "trailerParkingCapacity": 600,
     "truckGateCount": 2,
     "buildingCount": 20,
-    "siteAreaAcres": 900.0,
+    "siteAreaAcres": 900,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@29.2625,-98.5425,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "entryLanes", "exitLanes", "dockDoorCount", "dropArea", "multiStep"],
+  "uncertainFields": [
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "dropArea",
+    "multiStep"
+  ],
   "fieldNotes": {
     "site": "TMMTX — the $1.2B San Antonio assembly plant that Chris Nielsen designed and built (2003-2006); produces Tundra and Tacoma trucks. Notable for an integrated on-site supplier park: ~20 co-located Tier-1 supplier buildings inside the campus feeding the assembly line directly.",
     "truckGate": "Fully fenced, security-controlled campus. Web sources confirm the main gate is reached where Lone Star Pass / Watson Rd dead-ends into the campus at Applewhite Rd, with visitors continuing through the intersection to the Main Gate. Truck entrances are controlled checkpoints. truckGate true, high confidence.",

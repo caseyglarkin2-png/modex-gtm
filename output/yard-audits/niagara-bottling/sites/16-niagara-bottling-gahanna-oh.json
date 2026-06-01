@@ -1,37 +1,148 @@
 {
   "name": "Niagara Bottling - Gahanna OH",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 39.99610, "lng": -82.82290 },
+  "coords": {
+    "lat": 39.9961,
+    "lng": -82.8229
+  },
   "geofences": {
-    "perimeter": { "south": 39.99520, "west": -82.82480, "north": 39.99730, "east": -82.82110 },
-    "truckGate": { "south": 39.99630, "west": -82.82210, "north": 39.99685, "east": -82.82150 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.996889,
+          "lng": -82.82496
+        },
+        {
+          "lat": 39.996889,
+          "lng": -82.820634
+        },
+        {
+          "lat": 39.995153,
+          "lng": -82.820634
+        },
+        {
+          "lat": 39.995153,
+          "lng": -82.82496
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.995416,
+          "lng": -82.825097
+        },
+        {
+          "lat": 39.995416,
+          "lng": -82.824548
+        },
+        {
+          "lat": 39.995153,
+          "lng": -82.824548
+        },
+        {
+          "lat": 39.995153,
+          "lng": -82.825097
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 39.99650, "west": -82.82460, "north": 39.99720, "east": -82.82280 }
+      {
+        "ring": [
+          {
+            "lat": 39.996784,
+            "lng": -82.824823
+          },
+          {
+            "lat": 39.996784,
+            "lng": -82.823587
+          },
+          {
+            "lat": 39.995837,
+            "lng": -82.823587
+          },
+          {
+            "lat": 39.995837,
+            "lng": -82.824823
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.99660, "west": -82.82460, "north": 39.99700, "east": -82.82120 }
+      {
+        "ring": [
+          {
+            "lat": 39.996679,
+            "lng": -82.823587
+          },
+          {
+            "lat": 39.996679,
+            "lng": -82.82084
+          },
+          {
+            "lat": 39.996468,
+            "lng": -82.82084
+          },
+          {
+            "lat": 39.996468,
+            "lng": -82.823587
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 51,
+        "pano": "ywWGHK_MJWcA2iJDC6neFw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 51,
+        "pano": "ywWGHK_MJWcA2iJDC6neFw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 40, "trailersVisible": 55, "trailerParkingCapacity": 70,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 11.0,
+    "dockDoorCount": 40,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 11,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.99610,-82.82290,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point at either road connection. NE driveway off Eastgate Pkwy has only a directional 'TRUCKS ONLY / VISITORS' sign at the road (confirmed in 2024-06 Street View) - an open uncontrolled drive.",
     "guardShack": "No small staffed booth visible at any entrance in satellite or Street View.",

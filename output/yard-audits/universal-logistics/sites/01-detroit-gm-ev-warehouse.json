@@ -1,18 +1,108 @@
 {
   "name": "Logistics Insight Corp - GM EV Parts Warehouse - Detroit MI",
   "type": "Value-Added Logistics Center / Sequencing Warehouse",
-  "coords": { "lat": 42.375600, "lng": -83.184600 },
+  "coords": {
+    "lat": 42.3756,
+    "lng": -83.1846
+  },
   "geofences": {
-    "perimeter": { "south": 42.372650, "west": -83.186600, "north": 42.379400, "east": -83.181900 },
-    "truckGate": { "south": 42.372750, "west": -83.185100, "north": 42.373300, "east": -83.184400 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.378846,
+          "lng": -83.186797
+        },
+        {
+          "lat": 42.378846,
+          "lng": -83.183364
+        },
+        {
+          "lat": 42.373267,
+          "lng": -83.184737
+        },
+        {
+          "lat": 42.373368,
+          "lng": -83.186523
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.373469,
+          "lng": -83.185699
+        },
+        {
+          "lat": 42.373469,
+          "lng": -83.184737
+        },
+        {
+          "lat": 42.372962,
+          "lng": -83.184806
+        },
+        {
+          "lat": 42.372962,
+          "lng": -83.185767
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 42.373400, "west": -83.186300, "north": 42.377100, "east": -83.185500 }
+      {
+        "ring": [
+          {
+            "lat": 42.376412,
+            "lng": -83.186729
+          },
+          {
+            "lat": 42.376412,
+            "lng": -83.185973
+          },
+          {
+            "lat": 42.374991,
+            "lng": -83.186179
+          },
+          {
+            "lat": 42.374991,
+            "lng": -83.186935
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 42.373300, "west": -83.185600, "north": 42.377600, "east": -83.184900 },
-      { "south": 42.378700, "west": -83.185300, "north": 42.379200, "east": -83.183600 }
+      {
+        "ring": [
+          {
+            "lat": 42.378441,
+            "lng": -83.186591
+          },
+          {
+            "lat": 42.378441,
+            "lng": -83.185973
+          },
+          {
+            "lat": 42.373571,
+            "lng": -83.186797
+          },
+          {
+            "lat": 42.373571,
+            "lng": -83.187347
+          }
+        ]
+      }
     ],
-    "staging": { "south": 42.373300, "west": -83.184900, "north": 42.374000, "east": -83.184200 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 359,
+        "pano": "sPrPLQ7xIDMz-7JGjbk0nw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 359,
+        "pano": "sPrPLQ7xIDMz-7JGjbk0nw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 110,
@@ -20,23 +110,40 @@
     "trailerParkingCapacity": 60,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 68.0,
+    "siteAreaAcres": 68,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@42.375600,-83.184600,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "facility": "Brand-new (~2023-2024) 793,520 sq ft single warehouse on the redeveloped former AMC headquarters site at 14250 Plymouth Rd; built by NorthPoint Development, GM-owned, operated by Logistics Insight Corp (LINC, a Universal Logistics Holdings company) supplying EV parts to GM Factory Zero. Confirmed via Crain's Detroit / GM Authority and current satellite imagery.",
     "truckGate": "Single controlled truck entrance off Plymouth Rd via a wide divided access drive that leads into the SW truck yard. Property is fully fenced/landscaped-bermed. No barrier arm or booth resolvable in current imagery at the road, but the truck yard is a secured private GM-owned operation; classified as a controlled gate.",

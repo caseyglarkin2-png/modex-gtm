@@ -1,17 +1,108 @@
 {
   "name": "Dallas Parts Distribution Center - Grand Prairie TX",
   "type": "Parts distribution center",
-  "coords": { "lat": 32.797300, "lng": -97.031700 },
+  "coords": {
+    "lat": 32.7973,
+    "lng": -97.0317
+  },
   "geofences": {
-    "perimeter": { "south": 32.795900, "west": -97.033400, "north": 32.798050, "east": -97.029900 },
-    "truckGate": { "south": 32.796300, "west": -97.030800, "north": 32.796600, "east": -97.030400 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.797877,
+          "lng": -97.033897
+        },
+        {
+          "lat": 32.797877,
+          "lng": -97.029777
+        },
+        {
+          "lat": 32.796376,
+          "lng": -97.02964
+        },
+        {
+          "lat": 32.796261,
+          "lng": -97.03376
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.797762,
+          "lng": -97.029777
+        },
+        {
+          "lat": 32.797762,
+          "lng": -97.029365
+        },
+        {
+          "lat": 32.797415,
+          "lng": -97.029365
+        },
+        {
+          "lat": 32.797415,
+          "lng": -97.029777
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 32.796150, "west": -97.033100, "north": 32.796800, "east": -97.030200 }
+      {
+        "ring": [
+          {
+            "lat": 32.796607,
+            "lng": -97.03376
+          },
+          {
+            "lat": 32.796607,
+            "lng": -97.029777
+          },
+          {
+            "lat": 32.796261,
+            "lng": -97.029777
+          },
+          {
+            "lat": 32.796261,
+            "lng": -97.03376
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 32.796550, "west": -97.033100, "north": 32.796950, "east": -97.030200 }
+      {
+        "ring": [
+          {
+            "lat": 32.796838,
+            "lng": -97.03376
+          },
+          {
+            "lat": 32.796838,
+            "lng": -97.029777
+          },
+          {
+            "lat": 32.796665,
+            "lng": -97.029777
+          },
+          {
+            "lat": 32.796665,
+            "lng": -97.03376
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 297,
+        "pano": "Tsoq5iiEifok4MM-cM4p0Q",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 297,
+        "pano": "Tsoq5iiEifok4MM-cM4p0Q",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 40,
@@ -19,23 +110,40 @@
     "trailerParkingCapacity": 80,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 19.0,
+    "siteAreaAcres": 19,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.797300,-97.031700,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "Address 3010 Roy Orr Blvd, Suite 140, Grand Prairie TX 75050 — DTNA Dallas PDC, a 275,000 sq ft facility, confirmed via Daimler careers location page and business listings. Roster rooftop geocode moved only 111 m and landed on the correct building. Center locked at 32.797300, -97.031700.",
     "truckGate": "TRUE. Street View (2024-12) shows a chain-link perimeter fence enclosing the south truck court / dock yard, with a controlled slide gate at the driveway entrance — a truck was captured driving in through the gate.",

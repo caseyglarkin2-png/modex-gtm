@@ -1,18 +1,60 @@
 {
   "name": "Campbell's Distribution Center - Findlay OH",
   "type": "Distribution center (740,000 sq ft; DHL Supply Chain operated)",
-  "coords": { "lat": 41.07900, "lng": -83.63550 },
+  "coords": {
+    "lat": 41.079,
+    "lng": -83.6355
+  },
   "geofences": {
-    "perimeter": { "south": 41.07550, "west": -83.64120, "north": 41.08230, "east": -83.63080 },
-    "truckGate": { "south": 41.07785, "west": -83.63290, "north": 41.07855, "east": -83.63200 },
-    "dropYards": [
-      { "south": 41.07955, "west": -83.64100, "north": 41.08130, "east": -83.63850 },
-      { "south": 41.07560, "west": -83.63950, "north": 41.07720, "east": -83.63150 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.076515,
+          "lng": -83.640993
+        },
+        {
+          "lat": 41.076515,
+          "lng": -83.632204
+        },
+        {
+          "lat": 41.072789,
+          "lng": -83.632204
+        },
+        {
+          "lat": 41.072374,
+          "lng": -83.639895
+        },
+        {
+          "lat": 41.074445,
+          "lng": -83.640993
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 41.07720, "west": -83.63870, "north": 41.07790, "east": -83.63250 }
+      {
+        "ring": [
+          {
+            "lat": 41.075687,
+            "lng": -83.639895
+          },
+          {
+            "lat": 41.07548,
+            "lng": -83.632753
+          },
+          {
+            "lat": 41.074238,
+            "lng": -83.632891
+          },
+          {
+            "lat": 41.074445,
+            "lng": -83.640032
+          }
+        ]
+      }
     ],
-    "staging": { "south": 41.07790, "west": -83.63350, "north": 41.07880, "east": -83.63150 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 90,
@@ -20,23 +62,40 @@
     "trailerParkingCapacity": 320,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 58.0,
+    "siteAreaAcres": 58,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.079,-83.6355,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "connectivityIssue"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "location": "Roster gave only 'Findlay, OH 45840' with APPROXIMATE geocode at downtown Findlay. The facility is the $44M, 740,000 sq ft Campbell's distribution center (DHL Supply Chain operated) at 1000 E Bigelow Ave, Findlay OH 45840, in the Tall Timbers West Industrial Park along I-75, across from the Lowe's RDC. OSM reverse-geocode of the building returns 'Campbell's, 1000 East Bigelow Avenue, Findlay'. Locked center 41.0790,-83.6355.",
     "truckGate": "Controlled truck entrance: a truck lane pinches at a checkpoint on the SE side of the building leading into the dock yard.",

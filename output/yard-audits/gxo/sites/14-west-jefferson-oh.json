@@ -1,17 +1,54 @@
 {
   "name": "GXO Logistics Distribution Center - West Jefferson OH",
   "type": "Distribution Center",
-  "coords": { "lat": 39.94550, "lng": -83.33280 },
+  "coords": {
+    "lat": 39.9455,
+    "lng": -83.3328
+  },
   "geofences": {
-    "perimeter": { "south": 39.94300, "west": -83.33530, "north": 39.94780, "east": -83.33010 },
-    "truckGate": { "south": 39.94320, "west": -83.33450, "north": 39.94390, "east": -83.33370 },
-    "dropYards": [
-      { "south": 39.94310, "west": -83.33470, "north": 39.94700, "east": -83.33340 },
-      { "south": 39.94470, "west": -83.33200, "north": 39.94780, "east": -83.33010 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.946342,
+          "lng": -83.334723
+        },
+        {
+          "lat": 39.946342,
+          "lng": -83.331152
+        },
+        {
+          "lat": 39.942026,
+          "lng": -83.331152
+        },
+        {
+          "lat": 39.942026,
+          "lng": -83.334723
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 39.94310, "west": -83.33420, "north": 39.94700, "east": -83.33330 },
-      { "south": 39.94470, "west": -83.33260, "north": 39.94780, "east": -83.33170 }
+      {
+        "ring": [
+          {
+            "lat": 39.946132,
+            "lng": -83.334585
+          },
+          {
+            "lat": 39.946132,
+            "lng": -83.331427
+          },
+          {
+            "lat": 39.945605,
+            "lng": -83.331427
+          },
+          {
+            "lat": 39.945605,
+            "lng": -83.334585
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -26,18 +63,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@39.94550,-83.33280,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "10-25",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "dropArea"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "dropArea"
+  ],
   "fieldNotes": {
     "truckGate": "Building I sits on an open Park West Drive frontage with a perimeter loop road. z18/z19 satellite and Street View (2024) show no barrier arm, sliding gate, or checkpoint pinch-point at any property-line connection, and no perimeter fence around the operational yard. Classed false.",
     "guardShack": "No 1-3-vehicle booth at any entrance in z19/z20 satellite or Street View. A small box-shaped structure at the NW edge of the employee parking lot is a utility cabinet/transformer, not a staffed guard booth at a truck lane.",

@@ -1,39 +1,134 @@
 {
   "name": "Hormel Flagship Austin Plant - Austin MN",
   "type": "Meat Processing Plant",
-  "coords": { "lat": 43.6765, "lng": -92.9665 },
+  "coords": {
+    "lat": 43.6765,
+    "lng": -92.9665
+  },
   "geofences": {
-    "perimeter": { "south": 43.67080, "west": -92.97250, "north": 43.68080, "east": -92.96250 },
-    "truckGate": { "south": 43.67370, "west": -92.96700, "north": 43.67420, "east": -92.96620 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 43.679678,
+          "lng": -92.969247
+        },
+        {
+          "lat": 43.67948,
+          "lng": -92.964577
+        },
+        {
+          "lat": 43.675507,
+          "lng": -92.964303
+        },
+        {
+          "lat": 43.672924,
+          "lng": -92.964852
+        },
+        {
+          "lat": 43.672924,
+          "lng": -92.970345
+        },
+        {
+          "lat": 43.675507,
+          "lng": -92.970071
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 43.67180, "west": -92.97180, "north": 43.67620, "east": -92.96900 },
-      { "south": 43.67480, "west": -92.96820, "north": 43.67620, "east": -92.96680 }
+      {
+        "ring": [
+          {
+            "lat": 43.674514,
+            "lng": -92.970895
+          },
+          {
+            "lat": 43.674116,
+            "lng": -92.967599
+          },
+          {
+            "lat": 43.672924,
+            "lng": -92.967873
+          },
+          {
+            "lat": 43.673322,
+            "lng": -92.971169
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 43.67490, "west": -92.96810, "north": 43.67620, "east": -92.96700 },
-      { "south": 43.67380, "west": -92.96680, "north": 43.67480, "east": -92.96560 }
+      {
+        "ring": [
+          {
+            "lat": 43.676301,
+            "lng": -92.969247
+          },
+          {
+            "lat": 43.676103,
+            "lng": -92.965127
+          },
+          {
+            "lat": 43.675507,
+            "lng": -92.965127
+          },
+          {
+            "lat": 43.675705,
+            "lng": -92.969247
+          }
+        ]
+      }
     ],
-    "staging": { "south": 43.67300, "west": -92.96720, "north": 43.67400, "east": -92.96600 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 14,
+        "pano": "Nt88ph6EMDtcLQmZACsZmg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 60, "trailersVisible": 70, "trailerParkingCapacity": 110,
-    "truckGateCount": 2, "buildingCount": 12, "siteAreaAcres": 120.0,
+    "dockDoorCount": 60,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 2,
+    "buildingCount": 12,
+    "siteAreaAcres": 120,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@43.6765,-92.9665,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": true, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "scale", "multiStep"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "multiStep"
+  ],
   "fieldNotes": {
     "location": "Roster lat/lng (43.68237,-92.968394) pointed at Hormel World HQ / R&D campus, not the production plant. The flagship 1.3M sq ft processing plant is ~1.1 km south, centered ~43.6765,-92.9665, bounded by the Cedar River on the west and 14th Ave NE / residential streets on the east.",
     "truckGate": "Entire property is fenced with chain-link plus privacy slats (confirmed in multiple Street Views). A guard-booth checkpoint with an apparent barrier arm straddles the internal truck road at ~43.6740,-92.9665 (z20 satellite). Web research confirms a 'guarded gate for security clearance' (CMac listing for Hormel Austin Plant main gate on 14th Ave, 507-437-5293).",

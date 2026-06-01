@@ -1,13 +1,108 @@
 {
   "name": "Metal Container Corporation - Oklahoma City OK Lid Plant",
   "type": "Lid Manufacturing Plant",
-  "coords": { "lat": 35.425, "lng": -97.608 },
+  "coords": {
+    "lat": 35.425,
+    "lng": -97.608
+  },
   "geofences": {
-    "perimeter": { "south": 35.42400, "west": -97.60880, "north": 35.42660, "east": -97.60680 },
-    "truckGate": null,
-    "dropYards": [],
-    "dockAprons": [],
-    "staging": null
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.426231,
+          "lng": -97.608549
+        },
+        {
+          "lat": 35.426063,
+          "lng": -97.607176
+        },
+        {
+          "lat": 35.424105,
+          "lng": -97.607725
+        },
+        {
+          "lat": 35.424273,
+          "lng": -97.609099
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.424552,
+          "lng": -97.608687
+        },
+        {
+          "lat": 35.424496,
+          "lng": -97.608137
+        },
+        {
+          "lat": 35.424217,
+          "lng": -97.608206
+        },
+        {
+          "lat": 35.424273,
+          "lng": -97.608755
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 35.426119,
+            "lng": -97.608412
+          },
+          {
+            "lat": 35.426007,
+            "lng": -97.607313
+          },
+          {
+            "lat": 35.425448,
+            "lng": -97.607451
+          },
+          {
+            "lat": 35.42556,
+            "lng": -97.608549
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 35.425224,
+            "lng": -97.608824
+          },
+          {
+            "lat": 35.425112,
+            "lng": -97.607863
+          },
+          {
+            "lat": 35.42472,
+            "lng": -97.607931
+          },
+          {
+            "lat": 35.424832,
+            "lng": -97.608893
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 28,
+        "pano": "IlzihRlFhG4DVwYvswfbTQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 28,
+        "pano": "IlzihRlFhG4DVwYvswfbTQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 0,
@@ -15,7 +110,7 @@
     "trailerParkingCapacity": 0,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 0.0,
+    "siteAreaAcres": 0,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.425,-97.608,400m/data=!3m1!1e3",
@@ -45,11 +140,28 @@
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural", "connectivityIssue",
-    "multipleFacilities", "scale", "dropYard", "multiStep"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "urbanRural",
+    "connectivityIssue",
+    "multipleFacilities",
+    "scale",
+    "dropYard",
+    "multiStep"
   ],
   "fieldNotes": {
     "_locationUncertainty": "The exact MCC OKC Lid Plant building could not be positively identified. The roster supplied only city-level coordinates (35.4676, -97.5164) and no address. Web research resolved the address to 3713 Harmon Ave, Oklahoma City, OK 73179 (Yelp, Manta, CMac, EPA TRI facility 73179MTLCN3713H), and the EPA TRI Explorer reports facility coordinates of lat 35.425, lng -97.608 - a SW Oklahoma City industrial district. Extensive satellite + Street View probing of that district (2024-2025 imagery) identified the large nearby buildings as Veritiv (a packaging distributor, curved-canopy building), a Walmart distribution center, self-storage complexes, and multi-tenant spec warehouses (FedEx-served dock bays) - none of which could be confirmed as the MCC lid plant via signage or layout. The MCC OKC Lid Plant is a major facility (~13 billion lids/year, est. 100-249 employees, operating since 1986) and should be a distinct dedicated industrial building, but no such building could be conclusively isolated at or near the EPA-recorded coordinate. Coordinates recorded here are the EPA TRI point as a best estimate; the perimeter box is a nominal placeholder and yardMetrics are zeroed. Recommend human review with parcel/GIS data or a direct facility contact to confirm the building footprint.",

@@ -1,38 +1,127 @@
 {
   "name": "General Mills - Vineland NJ",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 39.46100, "lng": -75.03650 },
+  "coords": {
+    "lat": 39.461,
+    "lng": -75.0365
+  },
   "geofences": {
-    "perimeter": { "south": 39.45930, "west": -75.03950, "north": 39.46400, "east": -75.03350 },
-    "truckGate": { "south": 39.45930, "west": -75.03570, "north": 39.46010, "east": -75.03490 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.463545,
+          "lng": -75.037873
+        },
+        {
+          "lat": 39.462908,
+          "lng": -75.034852
+        },
+        {
+          "lat": 39.459304,
+          "lng": -75.036225
+        },
+        {
+          "lat": 39.45994,
+          "lng": -75.039247
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 39.46330, "west": -75.03720, "north": 39.46420, "east": -75.03450 }
+      {
+        "ring": [
+          {
+            "lat": 39.46312,
+            "lng": -75.037599
+          },
+          {
+            "lat": 39.462696,
+            "lng": -75.035676
+          },
+          {
+            "lat": 39.461848,
+            "lng": -75.035951
+          },
+          {
+            "lat": 39.462272,
+            "lng": -75.037873
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.46060, "west": -75.03840, "north": 39.46280, "east": -75.03740 },
-      { "south": 39.46280, "west": -75.03740, "north": 39.46380, "east": -75.03540 }
+      {
+        "ring": [
+          {
+            "lat": 39.461,
+            "lng": -75.038423
+          },
+          {
+            "lat": 39.460576,
+            "lng": -75.0365
+          },
+          {
+            "lat": 39.460046,
+            "lng": -75.036637
+          },
+          {
+            "lat": 39.46047,
+            "lng": -75.03856
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 12,
+        "pano": "6UgHJopwL0um7-TjlYyhUw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 40, "trailersVisible": 55, "trailerParkingCapacity": 75,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 67.0,
+    "dockDoorCount": 40,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 75,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 67,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.46100,-75.03650,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "scale"
+  ],
   "fieldNotes": {
     "location": "Roster coordinates (39.461246,-75.036652, ROOFTOP) correctly landed on the large industrial plant at 500 W Elmer Rd, Vineland NJ. Locked center 39.4610,-75.0365.",
     "ownership": "OWNERSHIP CHANGE - this is the former General Mills Progresso soup plant (built 1970, 580,000 sq ft, 65 acres). General Mills closed the plant in 2017/2018 and sold it for ~$4.5M to F&S Produce Co. (now F&S Fresh Foods), which retrofitted it for fresh-cut produce, salsas, IQF fruits/vegetables and purees. The roster's General Mills attribution (from the Hyster GM plant list) is stale - the physical freight facility is audited as it stands today.",

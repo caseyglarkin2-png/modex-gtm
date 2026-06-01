@@ -1,37 +1,135 @@
 {
   "name": "Pepperidge Farm - Richmond UT",
   "type": "Manufacturing - bakery (Goldfish crackers, +50% capacity 2024)",
-  "coords": { "lat": 41.939600, "lng": -111.816300 },
+  "coords": {
+    "lat": 41.9396,
+    "lng": -111.8163
+  },
   "geofences": {
-    "perimeter": { "south": 41.93620, "west": -111.81850, "north": 41.94300, "east": -111.81400 },
-    "truckGate": { "south": 41.93950, "west": -111.81490, "north": 41.94020, "east": -111.81400 },
-    "dropYards": [
-      { "south": 41.93720, "west": -111.81720, "north": 41.93810, "east": -111.81530 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.942256,
+          "lng": -111.816849
+        },
+        {
+          "lat": 41.941949,
+          "lng": -111.814652
+        },
+        {
+          "lat": 41.939089,
+          "lng": -111.815201
+        },
+        {
+          "lat": 41.937148,
+          "lng": -111.8163
+        },
+        {
+          "lat": 41.937353,
+          "lng": -111.817673
+        },
+        {
+          "lat": 41.940622,
+          "lng": -111.817399
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 41.93730, "west": -111.81720, "north": 41.93800, "east": -111.81450 }
+      {
+        "ring": [
+          {
+            "lat": 41.941643,
+            "lng": -111.816987
+          },
+          {
+            "lat": 41.941439,
+            "lng": -111.815476
+          },
+          {
+            "lat": 41.937761,
+            "lng": -111.8163
+          },
+          {
+            "lat": 41.937966,
+            "lng": -111.817399
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": {
+      "ring": [
+        {
+          "lat": 41.937966,
+          "lng": -111.817399
+        },
+        {
+          "lat": 41.937761,
+          "lng": -111.816025
+        },
+        {
+          "lat": 41.937148,
+          "lng": -111.816094
+        },
+        {
+          "lat": 41.937353,
+          "lng": -111.817467
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 213,
+        "pano": "tB9PuwoSnq3AkPMs7CqJSg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 35, "trailersVisible": 25, "trailerParkingCapacity": 50,
-    "truckGateCount": 1, "buildingCount": 3, "siteAreaAcres": 80.0,
+    "dockDoorCount": 35,
+    "trailersVisible": 25,
+    "trailerParkingCapacity": 50,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 80,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@41.939600,-111.816300,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "truckGate", "entryLanes", "exitLanes", "scale", "dockDoorCount"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "truckGate",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "truckGate": "Plant set back from 200 West behind grass buffers; access road off 200 West into the yard. No barrier/booth visible from Street View - controlled gate inferred at low-medium confidence.",
     "guardShack": "No guard booth visible from public-road Street View. Marked false / remoteGs true at low-medium confidence.",

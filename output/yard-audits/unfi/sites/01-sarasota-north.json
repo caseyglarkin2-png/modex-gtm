@@ -1,13 +1,54 @@
 {
   "name": "UNFI - Sarasota North DC, Sarasota FL",
   "type": "Distribution Center",
-  "coords": { "lat": 27.39350, "lng": -82.54180 },
+  "coords": {
+    "lat": 27.3935,
+    "lng": -82.5418
+  },
   "geofences": {
-    "perimeter": { "south": 27.39000, "west": -82.54450, "north": 27.39720, "east": -82.53850 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 27.397402,
+          "lng": -82.542349
+        },
+        {
+          "lat": 27.397402,
+          "lng": -82.53974
+        },
+        {
+          "lat": 27.388257,
+          "lng": -82.538916
+        },
+        {
+          "lat": 27.388257,
+          "lng": -82.5418
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 27.39100, "west": -82.54300, "north": 27.39600, "east": -82.54150 }
+      {
+        "ring": [
+          {
+            "lat": 27.395939,
+            "lng": -82.542349
+          },
+          {
+            "lat": 27.395939,
+            "lng": -82.5418
+          },
+          {
+            "lat": 27.392037,
+            "lng": -82.5418
+          },
+          {
+            "lat": 27.392037,
+            "lng": -82.542349
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -17,27 +58,53 @@
     "trailerParkingCapacity": 300,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 95.0,
+    "siteAreaAcres": 95,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@27.39350,-82.54180,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "entryExitTogether", "entryLanes", "exitLanes",
-    "fastLaneOpportunity", "dockDoors", "dropArea", "shipRcvSeparate", "scale",
-    "dropYard", "multiStep"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "entryExitTogether",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "scale",
+    "dropYard",
+    "multiStep"
   ],
   "fieldNotes": {
     "location": "Roster geocoded the WRONG building. roster lat/lng 27.264831,-82.484075 / address 6272 McIntosh Rd is UNFI's OLD ~734k sq ft Sarasota DC (Sarasota County). The roster facility NAME explicitly is the new 'Sarasota North DC' / '1M sq ft automated DC opened FY26 (KNAPP robotics)'. That facility is at 8380 21st Street East, in the SRQ Logistics Center on the Manatee-Sarasota county line, east of Sarasota-Bradenton International Airport (KSRQ), near University Pkwy/US-301 and I-75. Resolved coordinates ~27.3935,-82.5418.",

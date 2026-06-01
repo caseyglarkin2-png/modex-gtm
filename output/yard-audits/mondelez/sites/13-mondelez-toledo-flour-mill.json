@@ -1,33 +1,79 @@
 {
   "name": "Mondelez Toledo Flour Mill - Toledo OH",
   "type": "Manufacturing - flour mill (input/ingredient)",
-  "coords": { "lat": 41.66510, "lng": -83.49930 },
+  "coords": {
+    "lat": 41.6651,
+    "lng": -83.4993
+  },
   "geofences": {
-    "perimeter": { "south": 41.66300, "west": -83.50220, "north": 41.66720, "east": -83.49650 },
-    "truckGate": { "south": 41.66400, "west": -83.49850, "north": 41.66490, "east": -83.49750 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.667972,
+          "lng": -83.499987
+        },
+        {
+          "lat": 41.667562,
+          "lng": -83.497652
+        },
+        {
+          "lat": 41.663869,
+          "lng": -83.497927
+        },
+        {
+          "lat": 41.663459,
+          "lng": -83.500399
+        },
+        {
+          "lat": 41.667152,
+          "lng": -83.500673
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [],
     "dockAprons": [],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 6, "trailersVisible": 2, "trailerParkingCapacity": 10,
-    "truckGateCount": 1, "buildingCount": 6, "siteAreaAcres": 22.0,
+    "dockDoorCount": 6,
+    "trailersVisible": 2,
+    "trailerParkingCapacity": 10,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 22,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@41.66510,-83.49930,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "0-10", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": true, "dropYard": false, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "scale"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "scale"
+  ],
   "fieldNotes": {
     "location": "Positively resolved to 2221 Front St, Toledo OH 43605 — the historic Toledo Flour Mill on the east bank of the Maumee River in the Birmingham/Ironville industrial district of East Toledo. Street View (Aug 2023) shows the riverside grain-elevator silo cluster branded 'Mondelez'. Roster city-centroid (41.6528,-83.5379) was ~2km SW in a downtown riverfront park; corrected via Nominatim geocode of the street address plus satellite + Street View confirmation. NOTE: Mennel Milling acquired this mill from Mondelez in November 2025 — under Mondelez ownership for the campaign period, now Mennel-operated.",
     "facilityType": "Bulk soft-wheat flour mill, not a packaged-goods DC. ~61,000 sq ft six-story mill plus extensive grain-elevator silos; 4.9-5.5M bushel storage. Truck activity is bulk flour loadout and bulk wheat receiving via silo spouts, plus heavy rail; there is no conventional packaged-goods dock-door bank.",

@@ -1,19 +1,148 @@
 {
   "name": "Westrock Coffee - Conway AR Single-Serve \"Clark\" Plant",
   "type": "Manufacturing Plant (single-serve / K-cup pods)",
-  "coords": { "lat": 35.057900, "lng": -92.405000 },
+  "coords": {
+    "lat": 35.0579,
+    "lng": -92.405
+  },
   "geofences": {
-    "perimeter": { "south": 35.056100, "west": -92.407000, "north": 35.059000, "east": -92.403000 },
-    "truckGate": { "south": 35.058500, "west": -92.407600, "north": 35.058900, "east": -92.407000 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.05835,
+          "lng": -92.407918
+        },
+        {
+          "lat": 35.058293,
+          "lng": -92.403421
+        },
+        {
+          "lat": 35.056523,
+          "lng": -92.403421
+        },
+        {
+          "lat": 35.056607,
+          "lng": -92.40785
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.058181,
+          "lng": -92.408021
+        },
+        {
+          "lat": 35.058209,
+          "lng": -92.407781
+        },
+        {
+          "lat": 35.057928,
+          "lng": -92.407747
+        },
+        {
+          "lat": 35.0579,
+          "lng": -92.407987
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 35.057200, "west": -92.406700, "north": 35.057700, "east": -92.403300 },
-      { "south": 35.058200, "west": -92.406700, "north": 35.058700, "east": -92.403300 }
+      {
+        "ring": [
+          {
+            "lat": 35.058181,
+            "lng": -92.407678
+          },
+          {
+            "lat": 35.058125,
+            "lng": -92.403489
+          },
+          {
+            "lat": 35.057956,
+            "lng": -92.403489
+          },
+          {
+            "lat": 35.058012,
+            "lng": -92.407678
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 35.056832,
+            "lng": -92.407678
+          },
+          {
+            "lat": 35.056776,
+            "lng": -92.403489
+          },
+          {
+            "lat": 35.056607,
+            "lng": -92.403489
+          },
+          {
+            "lat": 35.056663,
+            "lng": -92.407678
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.058000, "west": -92.406700, "north": 35.058500, "east": -92.403300 },
-      { "south": 35.057300, "west": -92.406700, "north": 35.057800, "east": -92.403300 }
+      {
+        "ring": [
+          {
+            "lat": 35.057956,
+            "lng": -92.407644
+          },
+          {
+            "lat": 35.0579,
+            "lng": -92.403524
+          },
+          {
+            "lat": 35.057759,
+            "lng": -92.403524
+          },
+          {
+            "lat": 35.057816,
+            "lng": -92.407644
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 35.057001,
+            "lng": -92.407644
+          },
+          {
+            "lat": 35.056944,
+            "lng": -92.403524
+          },
+          {
+            "lat": 35.056804,
+            "lng": -92.403524
+          },
+          {
+            "lat": 35.05686,
+            "lng": -92.407644
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 123,
+        "pano": "IL_GmNuD-qGmJ9e480LUXA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 123,
+        "pano": "IL_GmNuD-qGmJ9e480LUXA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 60,
@@ -21,23 +150,43 @@
     "trailerParkingCapacity": 95,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 28.0,
+    "siteAreaAcres": 28,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.057900,-92.405000,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "dockDoorCount", "shipRcvSeparate", "entryLanes", "exitLanes", "scale"],
+  "uncertainFields": [
+    "guardShack",
+    "dockDoorCount",
+    "shipRcvSeparate",
+    "entryLanes",
+    "exitLanes",
+    "scale"
+  ],
   "fieldNotes": {
     "location": "Identified as the large gray-roof warehouse/manufacturing building on William J. Clark Drive immediately SOUTH of the Westrock DC. This is the 525,000 sq ft 'Clark' single-serve (K-cup pod) facility — 130,000 sq ft manufacturing plus fulfillment/distribution — that Westrock opened July 2025. The shell appears in 2024 imagery (likely a Tempus-developed spec building that Westrock fitted out and occupied in 2025). The roster pin (-92.409215) sat ~350m too far west on an unrelated older trucking yard; center re-locked to the gray building at 35.0578,-92.4050.",
     "truckGate": "Continuous chain-link perimeter fencing surrounds the property (clearly visible in 2024-07 Street View along the south frontage and around the yard). A sliding chain-link gate across the truck driveway is visible at the NW/SW corner where the yard connects to William J. Clark Drive. The truck yard is fully enclosed.",

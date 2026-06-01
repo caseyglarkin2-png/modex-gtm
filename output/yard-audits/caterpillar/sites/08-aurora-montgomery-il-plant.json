@@ -1,18 +1,108 @@
 {
   "name": "Caterpillar - Aurora (Montgomery) IL Plant",
   "type": "Manufacturing plant (wheel loaders; site reportedly listed for sale)",
-  "coords": { "lat": 41.71400, "lng": -88.36450 },
+  "coords": {
+    "lat": 41.714,
+    "lng": -88.3645
+  },
   "geofences": {
-    "perimeter": { "south": 41.70950, "west": -88.37200, "north": 41.71880, "east": -88.35800 },
-    "truckGate": { "south": 41.71760, "west": -88.37160, "north": 41.71880, "east": -88.37080 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.7181,
+          "lng": -88.371641
+        },
+        {
+          "lat": 41.71769,
+          "lng": -88.361204
+        },
+        {
+          "lat": 41.708259,
+          "lng": -88.361753
+        },
+        {
+          "lat": 41.708669,
+          "lng": -88.37219
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.7181,
+          "lng": -88.371641
+        },
+        {
+          "lat": 41.7181,
+          "lng": -88.369993
+        },
+        {
+          "lat": 41.717075,
+          "lng": -88.369993
+        },
+        {
+          "lat": 41.717075,
+          "lng": -88.371641
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 41.71840, "west": -88.36450, "north": 41.71960, "east": -88.36280 },
-      { "south": 41.71050, "west": -88.36700, "north": 41.71450, "east": -88.36200 }
+      {
+        "ring": [
+          {
+            "lat": 41.71236,
+            "lng": -88.370817
+          },
+          {
+            "lat": 41.71236,
+            "lng": -88.366697
+          },
+          {
+            "lat": 41.709489,
+            "lng": -88.366697
+          },
+          {
+            "lat": 41.709489,
+            "lng": -88.370817
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.71840, "west": -88.36480, "north": 41.71910, "east": -88.36340 }
+      {
+        "ring": [
+          {
+            "lat": 41.71605,
+            "lng": -88.371092
+          },
+          {
+            "lat": 41.71605,
+            "lng": -88.366697
+          },
+          {
+            "lat": 41.715025,
+            "lng": -88.366697
+          },
+          {
+            "lat": 41.715025,
+            "lng": -88.371092
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 135,
+        "pano": "FxVngNLSkdnwdpjvJ1cFEQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 135,
+        "pano": "FxVngNLSkdnwdpjvJ1cFEQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 20,
@@ -20,23 +110,39 @@
     "trailerParkingCapacity": 80,
     "truckGateCount": 1,
     "buildingCount": 8,
-    "siteAreaAcres": 298.0,
+    "siteAreaAcres": 298,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@41.714,-88.3645,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "scale"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "scale"
+  ],
   "fieldNotes": {
     "site": "Confirmed via web search as the former Caterpillar Aurora/Montgomery wheel-loader plant at 325 S Route 31, ~350-acre / 4M+ sq ft campus now marketed as 'The Grid at Route 31'. Geocoded point sits inside the main manufacturing complex.",
     "truckGate": "Divided entry boulevard off Route 31 (NW corner) with a gatehouse in the median - confirmed in z20 satellite and 2018 Street View showing the booth straight ahead and a CATERPILLAR sign on the main building.",

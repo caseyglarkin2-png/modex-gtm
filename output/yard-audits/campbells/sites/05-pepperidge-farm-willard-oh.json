@@ -1,37 +1,132 @@
 {
   "name": "Pepperidge Farm - Willard OH",
   "type": "Manufacturing - bakery (primary Goldfish cracker plant)",
-  "coords": { "lat": 41.054400, "lng": -82.708500 },
+  "coords": {
+    "lat": 41.0544,
+    "lng": -82.7085
+  },
   "geofences": {
-    "perimeter": { "south": 41.05180, "west": -82.71300, "north": 41.05700, "east": -82.70380 },
-    "truckGate": { "south": 41.05330, "west": -82.71370, "north": 41.05400, "east": -82.71270 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.055436,
+          "lng": -82.712071
+        },
+        {
+          "lat": 41.055228,
+          "lng": -82.70438
+        },
+        {
+          "lat": 41.053572,
+          "lng": -82.70438
+        },
+        {
+          "lat": 41.053157,
+          "lng": -82.709873
+        },
+        {
+          "lat": 41.054193,
+          "lng": -82.712345
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 41.05420, "west": -82.70720, "north": 41.05620, "east": -82.70400 }
+      {
+        "ring": [
+          {
+            "lat": 41.055125,
+            "lng": -82.706852
+          },
+          {
+            "lat": 41.055021,
+            "lng": -82.70438
+          },
+          {
+            "lat": 41.054193,
+            "lng": -82.704449
+          },
+          {
+            "lat": 41.054296,
+            "lng": -82.706921
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.05480, "west": -82.71000, "north": 41.05640, "east": -82.70720 }
+      {
+        "ring": [
+          {
+            "lat": 41.055125,
+            "lng": -82.709873
+          },
+          {
+            "lat": 41.055021,
+            "lng": -82.707127
+          },
+          {
+            "lat": 41.0544,
+            "lng": -82.707195
+          },
+          {
+            "lat": 41.054504,
+            "lng": -82.709942
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 49,
+        "pano": "TzCA986t_RV-_IuV3WkYtQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 50, "trailersVisible": 130, "trailerParkingCapacity": 180,
-    "truckGateCount": 1, "buildingCount": 5, "siteAreaAcres": 110.0,
+    "dockDoorCount": 50,
+    "trailersVisible": 130,
+    "trailerParkingCapacity": 180,
+    "truckGateCount": 1,
+    "buildingCount": 5,
+    "siteAreaAcres": 110,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.054400,-82.708500,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "dockDoorCount"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "truckGate": "Single access road off State Route 103 E (~41.0533,-82.7137) with a Pepperidge Farm sign; chain-link perimeter fence visible along the access drive. Controlled gate inferred, set back from the public road.",
     "guardShack": "No guard booth visible at the public-road junction (plant set back behind grass buffer). Marked false / remoteGs true at medium confidence.",

@@ -1,15 +1,91 @@
 {
   "name": "Tate's Bake Shop Factory - East Moriches NY",
   "type": "Manufacturing - cookie bakery",
-  "coords": { "lat": 40.81055, "lng": -72.76535 },
+  "coords": {
+    "lat": 40.81055,
+    "lng": -72.76535
+  },
   "geofences": {
-    "perimeter": { "south": 40.80980, "west": -72.76610, "north": 40.81170, "east": -72.76425 },
-    "truckGate": { "south": 40.81055, "west": -72.76475, "north": 40.81085, "east": -72.76430 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.8112,
+          "lng": -72.765831
+        },
+        {
+          "lat": 40.81107,
+          "lng": -72.764526
+        },
+        {
+          "lat": 40.810134,
+          "lng": -72.764595
+        },
+        {
+          "lat": 40.810082,
+          "lng": -72.765693
+        },
+        {
+          "lat": 40.81068,
+          "lng": -72.765762
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.81081,
+          "lng": -72.765831
+        },
+        {
+          "lat": 40.810784,
+          "lng": -72.765625
+        },
+        {
+          "lat": 40.810602,
+          "lng": -72.765659
+        },
+        {
+          "lat": 40.810628,
+          "lng": -72.765865
+        }
+      ]
+    },
     "dropYards": [],
     "dockAprons": [
-      { "south": 40.81080, "west": -72.76555, "north": 40.81105, "east": -72.76490 }
+      {
+        "ring": [
+          {
+            "lat": 40.81042,
+            "lng": -72.765693
+          },
+          {
+            "lat": 40.810342,
+            "lng": -72.764801
+          },
+          {
+            "lat": 40.810186,
+            "lng": -72.764835
+          },
+          {
+            "lat": 40.810264,
+            "lng": -72.765728
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 261,
+        "pano": "Rqmu82c2N_X6Re6-j-qrzw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 261,
+        "pano": "Rqmu82c2N_X6Re6-j-qrzw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 5,
@@ -46,7 +122,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "shipRcvSeparate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Single open driveway off Pine St with a TATE'S monument sign at the corner; no barrier arm, no controlled checkpoint. A short decorative fence segment exists near the sign but is pedestrian-scale, not a truck barrier.",
     "guardShack": "No staffed booth at the entrance. Only a small office annex on the NE side of the building, well inside the property, not a gate-side guard structure.",

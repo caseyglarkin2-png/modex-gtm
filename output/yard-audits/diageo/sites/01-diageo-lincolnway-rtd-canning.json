@@ -1,17 +1,108 @@
 {
   "name": "Diageo Lincolnway RTD Canning - Plainfield IL",
   "type": "Manufacturing - RTD Canning Facility",
-  "coords": { "lat": 41.6241, "lng": -88.2155 },
+  "coords": {
+    "lat": 41.6241,
+    "lng": -88.2155
+  },
   "geofences": {
-    "perimeter": { "south": 41.6210, "west": -88.2192, "north": 41.6272, "east": -88.2135 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.626153,
+          "lng": -88.216599
+        },
+        {
+          "lat": 41.625024,
+          "lng": -88.212204
+        },
+        {
+          "lat": 41.62215,
+          "lng": -88.212753
+        },
+        {
+          "lat": 41.622457,
+          "lng": -88.217423
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.622457,
+          "lng": -88.216873
+        },
+        {
+          "lat": 41.622457,
+          "lng": -88.215912
+        },
+        {
+          "lat": 41.622047,
+          "lng": -88.215912
+        },
+        {
+          "lat": 41.622047,
+          "lng": -88.216873
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 41.6228, "west": -88.2192, "north": 41.6253, "east": -88.2170 }
+      {
+        "ring": [
+          {
+            "lat": 41.6241,
+            "lng": -88.219071
+          },
+          {
+            "lat": 41.623792,
+            "lng": -88.216599
+          },
+          {
+            "lat": 41.622457,
+            "lng": -88.216736
+          },
+          {
+            "lat": 41.622765,
+            "lng": -88.219208
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.6240, "west": -88.2168, "north": 41.6248, "east": -88.2160 }
+      {
+        "ring": [
+          {
+            "lat": 41.623587,
+            "lng": -88.216324
+          },
+          {
+            "lat": 41.623279,
+            "lng": -88.213852
+          },
+          {
+            "lat": 41.622868,
+            "lng": -88.213989
+          },
+          {
+            "lat": 41.623176,
+            "lng": -88.216461
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 40,
+        "pano": "Brr-6phprJUws2_eskDvCA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 40,
+        "pano": "Brr-6phprJUws2_eskDvCA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 30,
@@ -24,18 +115,35 @@
   },
   "mapsUrl": "https://www.google.com/maps/@41.6241,-88.2155,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "entryExitTogether", "entryExitSeparate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "entryExitTogether",
+    "entryExitSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Two driveways off W 143rd St (a divided campus boulevard near -88.2174 and an office drive near -88.2154). Street View at both, captured 2023-05 and 2024-07, shows open ungated entries with no barrier arm, sliding gate, or checkpoint pinch-point at the public road. Internal road junctions also show no checkpoint.",
     "guardShack": "No staffed booth at any entrance. The small orange/red structure at the trailer-yard road junction (41.6245,-88.2173) sits at the drop-yard edge, not on the truck entry path, and is not a multi-window guard booth.",

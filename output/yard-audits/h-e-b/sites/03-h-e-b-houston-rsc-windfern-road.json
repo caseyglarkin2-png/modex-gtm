@@ -1,18 +1,94 @@
 {
   "name": "H-E-B Houston RSC (Windfern Road) - Houston TX",
   "type": "Retail Support Center / Distribution Center",
-  "coords": { "lat": 29.837000, "lng": -95.539000 },
+  "coords": {
+    "lat": 29.837,
+    "lng": -95.539
+  },
   "geofences": {
-    "perimeter": { "south": 29.831500, "west": -95.541800, "north": 29.842800, "east": -95.536200 },
-    "truckGate": { "south": 29.832100, "west": -95.539900, "north": 29.832700, "east": -95.539300 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.841765,
+          "lng": -95.542571
+        },
+        {
+          "lat": 29.841765,
+          "lng": -95.536803
+        },
+        {
+          "lat": 29.833188,
+          "lng": -95.536803
+        },
+        {
+          "lat": 29.833188,
+          "lng": -95.542571
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 29.837238,
+          "lng": -95.542845
+        },
+        {
+          "lat": 29.837238,
+          "lng": -95.542021
+        },
+        {
+          "lat": 29.836285,
+          "lng": -95.542021
+        },
+        {
+          "lat": 29.836285,
+          "lng": -95.542845
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 29.834600, "west": -95.541000, "north": 29.836200, "east": -95.537800 },
-      { "south": 29.838000, "west": -95.541200, "north": 29.840500, "east": -95.537600 },
-      { "south": 29.840800, "west": -95.541000, "north": 29.842500, "east": -95.538000 }
+      {
+        "ring": [
+          {
+            "lat": 29.838191,
+            "lng": -95.542021
+          },
+          {
+            "lat": 29.838191,
+            "lng": -95.537627
+          },
+          {
+            "lat": 29.83557,
+            "lng": -95.537627
+          },
+          {
+            "lat": 29.83557,
+            "lng": -95.542021
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 29.836000, "west": -95.540400, "north": 29.836500, "east": -95.537900 },
-      { "south": 29.839700, "west": -95.540800, "north": 29.840400, "east": -95.537900 }
+      {
+        "ring": [
+          {
+            "lat": 29.840812,
+            "lng": -95.541747
+          },
+          {
+            "lat": 29.840812,
+            "lng": -95.537352
+          },
+          {
+            "lat": 29.840097,
+            "lng": -95.537352
+          },
+          {
+            "lat": 29.840097,
+            "lng": -95.541747
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -22,23 +98,43 @@
     "trailerParkingCapacity": 400,
     "truckGateCount": 2,
     "buildingCount": 7,
-    "siteAreaAcres": 130.0,
+    "siteAreaAcres": 130,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@29.837000,-95.539000,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "truckGateCount", "scale", "multiStep"],
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "truckGateCount",
+    "scale",
+    "multiStep"
+  ],
   "fieldNotes": {
     "facility": "Large H-E-B distribution + production campus on the Windfern Rd corridor, NW Houston. Multiple solar-roofed warehouse buildings (the RSC) plus production buildings with silos (bakery/dairy). Roster idx 8 and 9 (snack plant, milk/bread plant) are separate buildings in this same corridor.",
     "truckGate": "Campus is fully enclosed by a decorative metal perimeter fence with masonry columns (confirmed in Street View, 2026-01). Web source (hub.biz / chamber listing) explicitly states the facility 'accepts vendor deliveries through a security check-in process' — a controlled truck gate. truckGate true.",

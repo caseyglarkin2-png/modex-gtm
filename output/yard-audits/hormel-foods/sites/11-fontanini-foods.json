@@ -1,18 +1,116 @@
 {
   "name": "Fontanini Foods - McCook IL",
   "type": "Meat Processing Plant",
-  "coords": { "lat": 41.79935, "lng": -87.83780 },
+  "coords": {
+    "lat": 41.79935,
+    "lng": -87.8378
+  },
   "geofences": {
-    "perimeter": { "south": 41.797868, "west": -87.839367, "north": 41.800832, "east": -87.836233 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.799964,
+          "lng": -87.839036
+        },
+        {
+          "lat": 41.799964,
+          "lng": -87.836976
+        },
+        {
+          "lat": 41.798736,
+          "lng": -87.836701
+        },
+        {
+          "lat": 41.798224,
+          "lng": -87.836976
+        },
+        {
+          "lat": 41.798224,
+          "lng": -87.838967
+        },
+        {
+          "lat": 41.79935,
+          "lng": -87.839173
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.799248,
+          "lng": -87.839311
+        },
+        {
+          "lat": 41.799299,
+          "lng": -87.838899
+        },
+        {
+          "lat": 41.79894,
+          "lng": -87.83883
+        },
+        {
+          "lat": 41.798889,
+          "lng": -87.839242
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 41.80072, "west": -87.838624, "north": 41.80108, "east": -87.836576 }
+      {
+        "ring": [
+          {
+            "lat": 41.799862,
+            "lng": -87.839173
+          },
+          {
+            "lat": 41.799862,
+            "lng": -87.838487
+          },
+          {
+            "lat": 41.79935,
+            "lng": -87.838487
+          },
+          {
+            "lat": 41.79935,
+            "lng": -87.839173
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.798792, "west": -87.839562, "north": 41.800408, "east": -87.838838 },
-      { "south": 41.798596, "west": -87.839404, "north": 41.799404, "east": -87.837596 }
+      {
+        "ring": [
+          {
+            "lat": 41.799606,
+            "lng": -87.837457
+          },
+          {
+            "lat": 41.799606,
+            "lng": -87.836907
+          },
+          {
+            "lat": 41.798582,
+            "lng": -87.836907
+          },
+          {
+            "lat": 41.798582,
+            "lng": -87.837113
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 152,
+        "pano": "zFZNgrcDrXFgH7l8tpA99A",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 152,
+        "pano": "zFZNgrcDrXFgH7l8tpA99A",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 22,
@@ -25,18 +123,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@41.79935,-87.83780,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "No barrier arm, sliding gate, or pinch-point checkpoint at any property access. Site sits within the McCook industrial park; truck yard opens directly onto private/industrial-park streets. Confirmed via 2019, 2025-09 and 2025-10 Street View of the north and west roads.",
     "guardShack": "No staffed booth structure visible at any access point.",

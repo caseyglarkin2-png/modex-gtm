@@ -1,18 +1,97 @@
 {
   "name": "GXO Logistics Distribution Center - Carlisle PA",
   "type": "Distribution Center",
-  "coords": { "lat": 40.20490, "lng": -77.23330 },
+  "coords": {
+    "lat": 40.2049,
+    "lng": -77.2333
+  },
   "geofences": {
-    "perimeter": { "south": 40.20305, "west": -77.23800, "north": 40.20680, "east": -77.22870 },
-    "truckGate": { "south": 40.20520, "west": -77.23755, "north": 40.20560, "east": -77.23700 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.207942,
+          "lng": -77.238381
+        },
+        {
+          "lat": 40.208466,
+          "lng": -77.231515
+        },
+        {
+          "lat": 40.202802,
+          "lng": -77.230553
+        },
+        {
+          "lat": 40.202278,
+          "lng": -77.23742
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 40.20355, "west": -77.23055, "north": 40.20620, "east": -77.22900 }
+      {
+        "ring": [
+          {
+            "lat": 40.205634,
+            "lng": -77.231103
+          },
+          {
+            "lat": 40.205739,
+            "lng": -77.229455
+          },
+          {
+            "lat": 40.203641,
+            "lng": -77.229317
+          },
+          {
+            "lat": 40.203536,
+            "lng": -77.230965
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.20545, "west": -77.23740, "north": 40.20650, "east": -77.22980 },
-      { "south": 40.20335, "west": -77.23720, "north": 40.20435, "east": -77.22980 }
+      {
+        "ring": [
+          {
+            "lat": 40.207837,
+            "lng": -77.237969
+          },
+          {
+            "lat": 40.208361,
+            "lng": -77.231652
+          },
+          {
+            "lat": 40.207732,
+            "lng": -77.231515
+          },
+          {
+            "lat": 40.207207,
+            "lng": -77.237832
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.2049,
+            "lng": -77.23742
+          },
+          {
+            "lat": 40.20532,
+            "lng": -77.231103
+          },
+          {
+            "lat": 40.20469,
+            "lng": -77.230965
+          },
+          {
+            "lat": 40.204271,
+            "lng": -77.237283
+          }
+        ]
+      }
     ],
-    "staging": { "south": 40.20475, "west": -77.23770, "north": 40.20560, "east": -77.23700 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 110,
@@ -20,23 +99,40 @@
     "trailerParkingCapacity": 180,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 78.0,
+    "siteAreaAcres": 78,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.2049,-77.2333,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Confirmed the large cross-dock DC at 1200 Distribution Dr, Carlisle PA (I-81 logistics park, Cumberland County). Roster ROOFTOP geocode landed on the roof of the SOUTHERN of two adjacent GXO buildings; the northern building is GXO's 1301 Distribution Dr (a separate roster-noted facility). Locked center on the southern building (1200).",
     "truckGate": "Street View (2021) at the SW driveway clearly shows a controlled entrance: chain-link sliding gates across the lanes with a center island, plus a 'NO TRUCKS' sign segregating a car lane from the truck lane. The whole truck yard is enclosed by continuous chain-link perimeter fencing. truckGate = true.",

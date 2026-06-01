@@ -1,19 +1,108 @@
 {
   "name": "Anheuser-Busch Brewery - Van Nuys (Los Angeles) CA",
   "type": "Brewery",
-  "coords": { "lat": 34.21850, "lng": -118.47900 },
+  "coords": {
+    "lat": 34.2185,
+    "lng": -118.479
+  },
   "geofences": {
-    "perimeter": { "south": 34.21500, "west": -118.48280, "north": 34.22100, "east": -118.47600 },
-    "truckGate": { "south": 34.22060, "west": -118.47820, "north": 34.22130, "east": -118.47720 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.220771,
+          "lng": -118.48312
+        },
+        {
+          "lat": 34.220771,
+          "lng": -118.477352
+        },
+        {
+          "lat": 34.217932,
+          "lng": -118.477352
+        },
+        {
+          "lat": 34.217932,
+          "lng": -118.48312
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.218954,
+          "lng": -118.48312
+        },
+        {
+          "lat": 34.218954,
+          "lng": -118.482296
+        },
+        {
+          "lat": 34.218273,
+          "lng": -118.482296
+        },
+        {
+          "lat": 34.218273,
+          "lng": -118.48312
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 34.21560, "west": -118.48280, "north": 34.21780, "east": -118.48120 },
-      { "south": 34.21570, "west": -118.48120, "north": 34.21720, "east": -118.47960 }
+      {
+        "ring": [
+          {
+            "lat": 34.219636,
+            "lng": -118.482296
+          },
+          {
+            "lat": 34.219636,
+            "lng": -118.479549
+          },
+          {
+            "lat": 34.218273,
+            "lng": -118.479549
+          },
+          {
+            "lat": 34.218273,
+            "lng": -118.482296
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 34.21760, "west": -118.48060, "north": 34.21900, "east": -118.47900 },
-      { "south": 34.21650, "west": -118.48120, "north": 34.21780, "east": -118.47980 }
+      {
+        "ring": [
+          {
+            "lat": 34.220544,
+            "lng": -118.481747
+          },
+          {
+            "lat": 34.220544,
+            "lng": -118.479
+          },
+          {
+            "lat": 34.219863,
+            "lng": -118.479
+          },
+          {
+            "lat": 34.219863,
+            "lng": -118.481747
+          }
+        ]
+      }
     ],
-    "staging": { "south": 34.21950, "west": -118.47850, "north": 34.22050, "east": -118.47720 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 206,
+        "pano": "Y13TLagMcbrr9ovhZ9qA0A",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 206,
+        "pano": "Y13TLagMcbrr9ovhZ9qA0A",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 45,
@@ -21,23 +110,41 @@
     "trailerParkingCapacity": 200,
     "truckGateCount": 2,
     "buildingCount": 8,
-    "siteAreaAcres": 60.0,
+    "siteAreaAcres": 60,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@34.21850,-118.47900,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "dockDoorCount", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "scale",
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Confirmed Anheuser-Busch Los Angeles (Van Nuys) Brewery, 15800 Roscoe Blvd. Roster coords were rooftop-accurate (movedMeters 55). Locked center on the main brewhouse/warehouse mass at 34.21850,-118.47900. Street View on the E street shows brewery storage tanks behind a hedge, and the Roscoe Blvd frontage carries a 'Bud...' building sign.",
     "truckGate": "Sliding gate across the main entrance off Roscoe Blvd at the NE corner (34.2210,-118.4775); Street View shows a sliding security gate with a wide multi-lane apron. A second gated truck entrance serves the SW/rail side. truckGateCount 2.",

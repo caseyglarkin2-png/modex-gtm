@@ -1,16 +1,94 @@
 {
   "name": "Metal Container Corporation - Arnold MO Can Plant",
   "type": "Can Manufacturing Plant",
-  "coords": { "lat": 38.43380, "lng": -90.35350 },
+  "coords": {
+    "lat": 38.4338,
+    "lng": -90.3535
+  },
   "geofences": {
-    "perimeter": { "south": 38.43220, "west": -90.35500, "north": 38.43650, "east": -90.35000 },
-    "truckGate": { "south": 38.43400, "west": -90.35460, "north": 38.43460, "east": -90.35390 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.435951,
+          "lng": -90.357895
+        },
+        {
+          "lat": 38.435736,
+          "lng": -90.350753
+        },
+        {
+          "lat": 38.430358,
+          "lng": -90.351303
+        },
+        {
+          "lat": 38.431003,
+          "lng": -90.358444
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 38.431218,
+          "lng": -90.356247
+        },
+        {
+          "lat": 38.431111,
+          "lng": -90.355148
+        },
+        {
+          "lat": 38.430573,
+          "lng": -90.355285
+        },
+        {
+          "lat": 38.43068,
+          "lng": -90.356384
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 38.43380, "west": -90.35280, "north": 38.43620, "east": -90.35020 }
+      {
+        "ring": [
+          {
+            "lat": 38.435306,
+            "lng": -90.354049
+          },
+          {
+            "lat": 38.435091,
+            "lng": -90.350753
+          },
+          {
+            "lat": 38.434338,
+            "lng": -90.350891
+          },
+          {
+            "lat": 38.434553,
+            "lng": -90.354187
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 38.43280, "west": -90.35420, "north": 38.43400, "east": -90.35280 },
-      { "south": 38.43330, "west": -90.35300, "north": 38.43450, "east": -90.35150 }
+      {
+        "ring": [
+          {
+            "lat": 38.434015,
+            "lng": -90.35762
+          },
+          {
+            "lat": 38.4338,
+            "lng": -90.355697
+          },
+          {
+            "lat": 38.432509,
+            "lng": -90.355835
+          },
+          {
+            "lat": 38.432724,
+            "lng": -90.357757
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -20,23 +98,44 @@
     "trailerParkingCapacity": 160,
     "truckGateCount": 1,
     "buildingCount": 5,
-    "siteAreaAcres": 35.0,
+    "siteAreaAcres": 35,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@38.43380,-90.35350,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "scale", "dockDoorCount", "railServed", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "scale",
+    "dockDoorCount",
+    "railServed",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Confirmed Metal Container Corporation (MCC) can plant, 42 Tenbrook Industrial Park, Arnold MO 63010 - AB-owned, the nation's largest can manufacturing operation. Roster coords were ~1.9 km off (movedMeters 1926). Locked center on the MCC manufacturing complex at 38.43380,-90.35350. Identity confirmed by web research (Yelp, TruckMap, EPA TRI facility 63010MTLCN42TEN) and the large manufacturing complex with extensive trailer yards in Tenbrook Industrial Park.",
     "truckGate": "No controlled truck gate positively identified. The plant sits inside a multi-tenant industrial park; W-side driveways are open paved access with cars parked, and the NE trailer yard is open dirt/gravel with no fence on the powerline-easement side. A slatted chain-link fence is present along part of the W edge but the driveways appear ungated - classified false (no checkpoint), flagged uncertain.",

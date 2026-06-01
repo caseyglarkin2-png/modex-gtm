@@ -1,15 +1,54 @@
 {
   "name": "Niagara Bottling - Seguin TX",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 29.588439, "lng": -97.979524 },
+  "coords": {
+    "lat": 29.588439,
+    "lng": -97.979524
+  },
   "geofences": {
-    "perimeter": { "south": 29.586000, "west": -97.982200, "north": 29.589700, "east": -97.976300 },
-    "truckGate": { "south": 29.588900, "west": -97.977200, "north": 29.589500, "east": -97.976500 },
-    "dropYards": [
-      { "south": 29.586800, "west": -97.981800, "north": 29.587600, "east": -97.976700 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.589036,
+          "lng": -97.982271
+        },
+        {
+          "lat": 29.589514,
+          "lng": -97.977464
+        },
+        {
+          "lat": 29.587006,
+          "lng": -97.976915
+        },
+        {
+          "lat": 29.586528,
+          "lng": -97.981721
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 29.587100, "west": -97.981800, "north": 29.587900, "east": -97.976700 }
+      {
+        "ring": [
+          {
+            "lat": 29.588678,
+            "lng": -97.982133
+          },
+          {
+            "lat": 29.589156,
+            "lng": -97.977464
+          },
+          {
+            "lat": 29.588558,
+            "lng": -97.977327
+          },
+          {
+            "lat": 29.588081,
+            "lng": -97.981996
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -19,23 +58,45 @@
     "trailerParkingCapacity": 100,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 32.0,
+    "siteAreaAcres": 32,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@29.588439,-97.979524,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity", "connectivityIssue"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "truckGate": "No controlled checkpoint found. The site sits in open farm fields with no perimeter security fence; the access road off the E-side public road shows no barrier arm and no guard booth. Classified false, medium confidence. Note: Street View coverage of the immediate plant driveway is sparse (ZERO_RESULTS at several nearby points); call relies mainly on satellite.",
     "guardShack": "No staffed-booth structure visible at the entrance in satellite imagery.",

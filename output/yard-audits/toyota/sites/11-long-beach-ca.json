@@ -1,15 +1,84 @@
 {
   "name": "TABC Inc - Long Beach CA",
   "type": "Parts/Components Plant (stamping, welding, catalytic converters)",
-  "coords": { "lat": 33.87150, "lng": -118.16200 },
+  "coords": {
+    "lat": 33.8715,
+    "lng": -118.162
+  },
   "geofences": {
-    "perimeter": { "south": 33.8700, "west": -118.1645, "north": 33.8725, "east": -118.1603 },
-    "truckGate": { "south": 33.87250, "west": -118.16095, "north": 33.87290, "east": -118.16030 },
-    "dropYards": [],
-    "dockAprons": [
-      { "south": 33.87100, "west": -118.16280, "north": 33.87200, "east": -118.16190 }
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.872982,
+          "lng": -118.164335
+        },
+        {
+          "lat": 33.872868,
+          "lng": -118.160077
+        },
+        {
+          "lat": 33.870246,
+          "lng": -118.160077
+        },
+        {
+          "lat": 33.87036,
+          "lng": -118.164335
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 33.869904,
+            "lng": -118.16406
+          },
+          {
+            "lat": 33.869904,
+            "lng": -118.160077
+          },
+          {
+            "lat": 33.86922,
+            "lng": -118.160077
+          },
+          {
+            "lat": 33.86922,
+            "lng": -118.16406
+          }
+        ]
+      }
     ],
-    "staging": null
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 33.87264,
+            "lng": -118.16406
+          },
+          {
+            "lat": 33.87264,
+            "lng": -118.162
+          },
+          {
+            "lat": 33.87207,
+            "lng": -118.162
+          },
+          {
+            "lat": 33.87207,
+            "lng": -118.16406
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 274,
+        "pano": "UUtzwI23M4PoE9ezSxXc_A",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 10,
@@ -46,7 +115,17 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "truckGateCount", "buildingCount", "drivewayShort", "backupSensitive"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "truckGateCount",
+    "buildingCount",
+    "drivewayShort",
+    "backupSensitive"
+  ],
   "fieldNotes": {
     "truckGate": "Fully fenced urban plant; controlled vehicle gates in the steel perimeter fence off N Paramount Blvd confirmed in Street View (2022/2025). Truck access is gated.",
     "guardShack": "No distinct freestanding guard-booth structure beside a truck lane was visible in imagery. A modern office building sits at the north entrance — check-in is likely handled at/near the office rather than a standalone booth. Flagged uncertain.",

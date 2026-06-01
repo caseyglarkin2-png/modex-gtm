@@ -1,17 +1,127 @@
 {
   "name": "Westrock Coffee - Concord NC Roasting & Extract Campus (S&D legacy)",
   "type": "Roasting Plant / Extract Manufacturing",
-  "coords": { "lat": 35.396271, "lng": -80.614895 },
+  "coords": {
+    "lat": 35.396271,
+    "lng": -80.614895
+  },
   "geofences": {
-    "perimeter": { "south": 35.394700, "west": -80.616750, "north": 35.398100, "east": -80.613100 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.397558,
+          "lng": -80.615891
+        },
+        {
+          "lat": 35.39767,
+          "lng": -80.614071
+        },
+        {
+          "lat": 35.395795,
+          "lng": -80.613899
+        },
+        {
+          "lat": 35.395655,
+          "lng": -80.615719
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.395935,
+          "lng": -80.615959
+        },
+        {
+          "lat": 35.395963,
+          "lng": -80.615685
+        },
+        {
+          "lat": 35.395711,
+          "lng": -80.615637
+        },
+        {
+          "lat": 35.395683,
+          "lng": -80.615911
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 35.397250, "west": -80.616450, "north": 35.397950, "east": -80.615550 }
+      {
+        "ring": [
+          {
+            "lat": 35.397558,
+            "lng": -80.615444
+          },
+          {
+            "lat": 35.397642,
+            "lng": -80.61414
+          },
+          {
+            "lat": 35.39739,
+            "lng": -80.614105
+          },
+          {
+            "lat": 35.397306,
+            "lng": -80.61541
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.396750, "west": -80.616100, "north": 35.397600, "east": -80.615150 }
+      {
+        "ring": [
+          {
+            "lat": 35.39739,
+            "lng": -80.615616
+          },
+          {
+            "lat": 35.397491,
+            "lng": -80.614174
+          },
+          {
+            "lat": 35.397251,
+            "lng": -80.61414
+          },
+          {
+            "lat": 35.39715,
+            "lng": -80.615582
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": {
+      "ring": [
+        {
+          "lat": 35.397334,
+          "lng": -80.616612
+        },
+        {
+          "lat": 35.397379,
+          "lng": -80.615925
+        },
+        {
+          "lat": 35.397139,
+          "lng": -80.615891
+        },
+        {
+          "lat": 35.397094,
+          "lng": -80.616577
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 33,
+        "pano": "XcFQqGphxW2KivvDUWB9zQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 33,
+        "pano": "XcFQqGphxW2KivvDUWB9zQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 22,
@@ -19,23 +129,40 @@
     "trailerParkingCapacity": 30,
     "truckGateCount": 1,
     "buildingCount": 4,
-    "siteAreaAcres": 23.0,
+    "siteAreaAcres": 23,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.396271,-80.614895,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "truckGate",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "No barrier arm or sliding gate found at the truck entrance off the campus drive. The truck yard is reached by a curved private campus drive from Concord Parkway South; satellite shows wide open paved aprons and no checkpoint pinch-point. Some campus drives off Concord Pkwy could not be Street-Viewed at the actual yard entrance (2017/2026 panos cover the highway frontage and the across-road dealership side), so this is marked uncertain — but no gate structure is visible in overhead imagery.",
     "guardShack": "No staffed booth visible at the yard entrance or along the campus drive.",

@@ -1,19 +1,116 @@
 {
   "name": "Frito-Lay - Topeka KS",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 38.987236, "lng": -95.691136 },
+  "coords": {
+    "lat": 38.987236,
+    "lng": -95.691136
+  },
   "geofences": {
-    "perimeter": { "south": 38.983500, "west": -95.694500, "north": 38.990500, "east": -95.688500 },
-    "truckGate": { "south": 38.988900, "west": -95.692600, "north": 38.989600, "east": -95.692000 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.989371,
+          "lng": -95.696217
+        },
+        {
+          "lat": 38.989371,
+          "lng": -95.688115
+        },
+        {
+          "lat": 38.984247,
+          "lng": -95.688115
+        },
+        {
+          "lat": 38.984247,
+          "lng": -95.696217
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 38.986702,
+          "lng": -95.696217
+        },
+        {
+          "lat": 38.986702,
+          "lng": -95.695531
+        },
+        {
+          "lat": 38.986169,
+          "lng": -95.695531
+        },
+        {
+          "lat": 38.986169,
+          "lng": -95.696217
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 38.987800, "west": -95.690500, "north": 38.990200, "east": -95.688700 },
-      { "south": 38.983800, "west": -95.693200, "north": 38.986500, "east": -95.690000 }
+      {
+        "ring": [
+          {
+            "lat": 38.989051,
+            "lng": -95.690449
+          },
+          {
+            "lat": 38.989051,
+            "lng": -95.688389
+          },
+          {
+            "lat": 38.986169,
+            "lng": -95.688389
+          },
+          {
+            "lat": 38.986169,
+            "lng": -95.690449
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 38.988944,
+            "lng": -95.695805
+          },
+          {
+            "lat": 38.988944,
+            "lng": -95.694707
+          },
+          {
+            "lat": 38.985955,
+            "lng": -95.694707
+          },
+          {
+            "lat": 38.985955,
+            "lng": -95.695805
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 38.986800, "west": -95.692300, "north": 38.989000, "east": -95.690800 },
-      { "south": 38.985800, "west": -95.690800, "north": 38.987800, "east": -95.689200 }
+      {
+        "ring": [
+          {
+            "lat": 38.985955,
+            "lng": -95.693883
+          },
+          {
+            "lat": 38.985955,
+            "lng": -95.690449
+          },
+          {
+            "lat": 38.985421,
+            "lng": -95.690449
+          },
+          {
+            "lat": 38.985421,
+            "lng": -95.693883
+          }
+        ]
+      }
     ],
-    "staging": { "south": 38.988800, "west": -95.692600, "north": 38.989500, "east": -95.691600 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 55,
@@ -21,23 +118,44 @@
     "trailerParkingCapacity": 380,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 105.0,
+    "siteAreaAcres": 105,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@38.987236,-95.691136,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "dockDoorCount"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "truckGate": "Single main truck entrance off SW Kirklawn Ave on the north side. The plant perimeter is chain-link fenced throughout (confirmed in multiple 2024 Street View captures). The entrance is a wide divided/curving driveway with lane markings; a sliding gate is likely (consistent with the fenced perimeter) though it was open in the imagery. Marked true at medium confidence and flagged.",
     "guardShack": "No guard booth is visible at the truck entrance in clear 2024 Street View or z20-z21 satellite - the entrance off Kirklawn Ave is a wide open driveway with no checkpoint structure at the property line. Marked false.",

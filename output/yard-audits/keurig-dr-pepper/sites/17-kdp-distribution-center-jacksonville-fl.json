@@ -1,38 +1,147 @@
 {
   "name": "KDP Distribution Center - Jacksonville FL",
   "type": "Distribution Center - Beverage",
-  "coords": { "lat": 30.3522, "lng": -81.76505 },
+  "coords": {
+    "lat": 30.3522,
+    "lng": -81.76505
+  },
   "geofences": {
-    "perimeter": { "south": 30.34946, "west": -81.766611, "north": 30.35494, "east": -81.763489 },
-    "truckGate": { "south": 30.351053, "west": -81.764386, "north": 30.351547, "east": -81.763814 },
-    "dropYards": [
-      { "south": 30.353992, "west": -81.764981, "north": 30.355608, "east": -81.763419 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 30.354452,
+          "lng": -81.767659
+        },
+        {
+          "lat": 30.35457,
+          "lng": -81.764913
+        },
+        {
+          "lat": 30.350185,
+          "lng": -81.764363
+        },
+        {
+          "lat": 30.350067,
+          "lng": -81.76711
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 30.353859,
+          "lng": -81.764913
+        },
+        {
+          "lat": 30.353859,
+          "lng": -81.764226
+        },
+        {
+          "lat": 30.353148,
+          "lng": -81.764226
+        },
+        {
+          "lat": 30.353148,
+          "lng": -81.764913
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 30.349685, "west": -81.764208, "north": 30.354715, "east": -81.763792 },
-      { "south": 30.349685, "west": -81.766408, "north": 30.354715, "east": -81.765992 }
+      {
+        "ring": [
+          {
+            "lat": 30.354096,
+            "lng": -81.767522
+          },
+          {
+            "lat": 30.354215,
+            "lng": -81.766561
+          },
+          {
+            "lat": 30.350304,
+            "lng": -81.766149
+          },
+          {
+            "lat": 30.350185,
+            "lng": -81.76711
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 30.354333,
+            "lng": -81.765462
+          },
+          {
+            "lat": 30.354333,
+            "lng": -81.764775
+          },
+          {
+            "lat": 30.350422,
+            "lng": -81.764363
+          },
+          {
+            "lat": 30.350422,
+            "lng": -81.76505
+          }
+        ]
+      }
     ],
-    "staging": { "south": 30.350896, "west": -81.765268, "north": 30.351704, "east": -81.764332 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 336,
+        "pano": "1P6mQkO5IulSuCsH833VTA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 336,
+        "pano": "1P6mQkO5IulSuCsH833VTA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 128, "trailersVisible": 110, "trailerParkingCapacity": 118,
-    "truckGateCount": 2, "buildingCount": 1, "siteAreaAcres": 45.2,
+    "dockDoorCount": 128,
+    "trailersVisible": 110,
+    "trailerParkingCapacity": 118,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 45.2,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@30.3522,-81.76505,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs"
+  ],
   "fieldNotes": {
     "location": "Roster address (3800 Fairchild St) is incorrect — that parcel (0839720000R, owned by First Global Import & Export) is a 5.95-acre junk yard / open-storage lot, confirmed by Florida Parcels land-use record and Street View. The actual KDP Jacksonville Distribution Center is at 2300 Pickettville Rd, Jacksonville FL 32220, coords 30.3522,-81.76505. Confirmed by KDP brand mural (A&W, RC, Snapple) on the building wall and a 'Keurig Dr Pepper Visitor & Vendor Entrance' sign at the gate.",
     "facility": "598,587 sq ft cross-dock distribution warehouse built 2009 (former Hillwood spec building); KDP southeast distribution hub; 32' clear height. Per leasing records: 128 dock doors, 326 car spaces, 118 trailer parking spaces.",

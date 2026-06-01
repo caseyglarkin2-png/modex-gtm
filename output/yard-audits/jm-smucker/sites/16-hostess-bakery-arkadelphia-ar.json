@@ -1,18 +1,81 @@
 {
   "name": "Hostess Bakery - Arkadelphia AR",
   "type": "Manufacturing - Sweet baked snacks (Hostess Donettes)",
-  "coords": { "lat": 34.0535, "lng": -93.0935 },
+  "coords": {
+    "lat": 34.0535,
+    "lng": -93.0935
+  },
   "geofences": {
-    "perimeter": { "south": 34.0518, "west": -93.0958, "north": 34.0560, "east": -93.0915 },
-    "truckGate": { "south": 34.04995, "west": -93.09480, "north": 34.05025, "east": -93.09440 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.054638,
+          "lng": -93.094873
+        },
+        {
+          "lat": 34.054638,
+          "lng": -93.092676
+        },
+        {
+          "lat": 34.05259,
+          "lng": -93.092401
+        },
+        {
+          "lat": 34.052362,
+          "lng": -93.094736
+        },
+        {
+          "lat": 34.053614,
+          "lng": -93.095011
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 34.0530, "west": -93.0928, "north": 34.0556, "east": -93.0913 }
+      {
+        "ring": [
+          {
+            "lat": 34.05441,
+            "lng": -93.093157
+          },
+          {
+            "lat": 34.054296,
+            "lng": -93.092127
+          },
+          {
+            "lat": 34.0535,
+            "lng": -93.092264
+          },
+          {
+            "lat": 34.053614,
+            "lng": -93.093294
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 34.0524, "west": -93.0933, "north": 34.0540, "east": -93.0925 },
-      { "south": 34.0518, "west": -93.0950, "north": 34.0524, "east": -93.0928 }
+      {
+        "ring": [
+          {
+            "lat": 34.05441,
+            "lng": -93.093363
+          },
+          {
+            "lat": 34.054353,
+            "lng": -93.092676
+          },
+          {
+            "lat": 34.053216,
+            "lng": -93.092745
+          },
+          {
+            "lat": 34.053272,
+            "lng": -93.093431
+          }
+        ]
+      }
     ],
-    "staging": { "south": 34.0502, "west": -93.0948, "north": 34.0530, "east": -93.0943 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 22,
@@ -25,18 +88,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@34.0535,-93.0935,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "connectivityIssue"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "truckGate": "Long private access drive (1 Hostess Way) runs ~250 m from the rural public road to the plant. Street View at the road entrance (2024-02) shows only a Hostess monument sign - no barrier arm, gate, or checkpoint. No checkpoint structure on the drive in z20 satellite.",
     "guardShack": "No staffed booth at the road entrance or anywhere on the access drive.",

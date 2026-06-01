@@ -1,15 +1,54 @@
 {
   "name": "GXO Logistics Distribution Center - Hillsboro OR",
   "type": "Distribution Center",
-  "coords": { "lat": 45.555200, "lng": -122.943800 },
+  "coords": {
+    "lat": 45.5552,
+    "lng": -122.9438
+  },
   "geofences": {
-    "perimeter": { "south": 45.55330, "west": -122.94470, "north": 45.55650, "east": -122.94250 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 45.556065,
+          "lng": -122.946821
+        },
+        {
+          "lat": 45.556065,
+          "lng": -122.945036
+        },
+        {
+          "lat": 45.553661,
+          "lng": -122.945036
+        },
+        {
+          "lat": 45.553661,
+          "lng": -122.946821
+        }
+      ]
+    },
     "truckGate": null,
-    "dropYards": [
-      { "south": 45.55420, "west": -122.94470, "north": 45.55600, "east": -122.94420 }
-    ],
+    "dropYards": [],
     "dockAprons": [
-      { "south": 45.55400, "west": -122.94440, "north": 45.55610, "east": -122.94410 }
+      {
+        "ring": [
+          {
+            "lat": 45.555969,
+            "lng": -122.945173
+          },
+          {
+            "lat": 45.555969,
+            "lng": -122.945036
+          },
+          {
+            "lat": 45.553854,
+            "lng": -122.945036
+          },
+          {
+            "lat": 45.553854,
+            "lng": -122.945173
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -19,23 +58,42 @@
     "trailerParkingCapacity": 30,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 15.0,
+    "siteAreaAcres": 15,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@45.555200,-122.943800,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "dockDoorCount", "dropArea", "trailerParkingCapacity", "urbanRural"],
+  "uncertainFields": [
+    "truckGate",
+    "dockDoorCount",
+    "dropArea",
+    "trailerParkingCapacity",
+    "urbanRural"
+  ],
   "fieldNotes": {
     "location": "Roster address '2501 NE Century Blvd' geocoded (GEOMETRIC_CENTER) to an Intel-campus parking lot - wrong. Washington County tax record + OSHA inspection confirm GXO at 4800 NE 30th Ave, Hillsboro OR 97124 (parcel R2227009). A GXO monument sign at the development entrance off NE 30th Ave positively confirms the site in 2024-08 Street View. Coordinates relocated to the GXO building.",
     "truckGate": "Open development entrance drive off NE 30th Ave - no gate or guard booth at the property entrance. Individual dock yards have low chain-link separators but no controlled truck checkpoint was observed; entrance is essentially open. Counted as no gate.",

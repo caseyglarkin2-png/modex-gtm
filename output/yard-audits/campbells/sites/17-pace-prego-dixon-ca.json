@@ -1,37 +1,127 @@
 {
   "name": "Pace / Prego - Dixon CA",
   "type": "Manufacturing - tomato processing for sauces (Prego / Pace), Campbell Soup Supply Co.",
-  "coords": { "lat": 38.4745, "lng": -121.8025 },
+  "coords": {
+    "lat": 38.4745,
+    "lng": -121.8025
+  },
   "geofences": {
-    "perimeter": { "south": 38.4722, "west": -121.8042, "north": 38.4770, "east": -121.8008 },
-    "truckGate": { "south": 38.47550, "west": -121.80405, "north": 38.47585, "east": -121.80365 },
-    "dropYards": [
-      { "south": 38.47305, "west": -121.80300, "north": 38.47420, "east": -121.80140 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.476865,
+          "lng": -121.804423
+        },
+        {
+          "lat": 38.47665,
+          "lng": -121.800303
+        },
+        {
+          "lat": 38.4745,
+          "lng": -121.800303
+        },
+        {
+          "lat": 38.47106,
+          "lng": -121.801127
+        },
+        {
+          "lat": 38.47106,
+          "lng": -121.803599
+        },
+        {
+          "lat": 38.47493,
+          "lng": -121.804423
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 38.47390, "west": -121.80290, "north": 38.47430, "east": -121.80210 }
+      {
+        "ring": [
+          {
+            "lat": 38.475575,
+            "lng": -121.803599
+          },
+          {
+            "lat": 38.475468,
+            "lng": -121.800852
+          },
+          {
+            "lat": 38.474823,
+            "lng": -121.800921
+          },
+          {
+            "lat": 38.47493,
+            "lng": -121.803667
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": {
+      "ring": [
+        {
+          "lat": 38.47192,
+          "lng": -121.803324
+        },
+        {
+          "lat": 38.471812,
+          "lng": -121.801401
+        },
+        {
+          "lat": 38.471167,
+          "lng": -121.80147
+        },
+        {
+          "lat": 38.471275,
+          "lng": -121.803393
+        }
+      ]
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 12, "trailersVisible": 55, "trailerParkingCapacity": 90,
-    "truckGateCount": 2, "buildingCount": 8, "siteAreaAcres": 39.0,
+    "dockDoorCount": 12,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 2,
+    "buildingCount": 8,
+    "siteAreaAcres": 39,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@38.4745,-121.8025,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoors", "dockDoorCount", "scale", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoors",
+    "dockDoorCount",
+    "scale",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "identity": "Roster address (1606 Pedrick Road) is incorrect. The Campbell's Dixon facility is the Campbell Soup Supply Co. tomato-processing plant at 8380 Pedrick Road, Dixon CA 95620 - it processes ~660,000 tons of tomatoes/year into Prego spaghetti sauce and Pace picante sauce base. OSM places 8380 Pedrick Rd at 38.4743,-121.8038. Satellite confirms a large multi-building agricultural processing campus surrounded by farmland. Locked center 38.4745,-121.8025.",
     "truckGate": "Main entrance off Pedrick Road has a fenced driveway with a sliding/rolling chain-link gate (visible parked open in 2024 Street View) and white jersey-barrier lane chicane creating a checkpoint pinch-point. truckGate=true.",

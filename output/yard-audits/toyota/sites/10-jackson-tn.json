@@ -1,17 +1,81 @@
 {
   "name": "Toyota Motor Manufacturing Tennessee - Jackson TN",
   "type": "Powertrain Plant (aluminum castings)",
-  "coords": { "lat": 35.59800, "lng": -88.94100 },
+  "coords": {
+    "lat": 35.598,
+    "lng": -88.941
+  },
   "geofences": {
-    "perimeter": { "south": 35.5945, "west": -88.9445, "north": 35.6020, "east": -88.9380 },
-    "truckGate": { "south": 35.59700, "west": -88.93995, "north": 35.59740, "east": -88.93940 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.60068,
+          "lng": -88.943747
+        },
+        {
+          "lat": 35.60068,
+          "lng": -88.939901
+        },
+        {
+          "lat": 35.597107,
+          "lng": -88.939627
+        },
+        {
+          "lat": 35.59666,
+          "lng": -88.942099
+        },
+        {
+          "lat": 35.597777,
+          "lng": -88.944296
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 35.59980, "west": -88.94310, "north": 35.60080, "east": -88.94170 }
+      {
+        "ring": [
+          {
+            "lat": 35.597553,
+            "lng": -88.942099
+          },
+          {
+            "lat": 35.597553,
+            "lng": -88.939901
+          },
+          {
+            "lat": 35.59666,
+            "lng": -88.939901
+          },
+          {
+            "lat": 35.59666,
+            "lng": -88.942099
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.59760, "west": -88.94250, "north": 35.59900, "east": -88.94120 }
+      {
+        "ring": [
+          {
+            "lat": 35.600233,
+            "lng": -88.941549
+          },
+          {
+            "lat": 35.600233,
+            "lng": -88.939901
+          },
+          {
+            "lat": 35.598447,
+            "lng": -88.939901
+          },
+          {
+            "lat": 35.598447,
+            "lng": -88.941549
+          }
+        ]
+      }
     ],
-    "staging": { "south": 35.59720, "west": -88.94060, "north": 35.59830, "east": -88.93950 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 12,
@@ -19,7 +83,7 @@
     "trailerParkingCapacity": 30,
     "truckGateCount": 1,
     "buildingCount": 4,
-    "siteAreaAcres": 121.0,
+    "siteAreaAcres": 121,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.59800,-88.94100,400m/data=!3m1!1e3",
@@ -48,7 +112,12 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "dropArea"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "dropArea"
+  ],
   "fieldNotes": {
     "truckGate": "Single controlled entrance off the public road on the south side; long access drive leads to a gatehouse with a barrier arm visible across the road in zoom-20 imagery.",
     "guardShack": "Staffed gatehouse confirmed: a white security building set beside the entrance drive with a horizontal barrier-arm gate spanning the truck lane; trucks/trailers staged just inside.",

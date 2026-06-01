@@ -1,19 +1,56 @@
 {
   "name": "Ford - Sharonville Transmission Plant, Sharonville OH",
   "type": "Transmission Plant",
-  "coords": { "lat": 39.27229, "lng": -84.42525 },
+  "coords": {
+    "lat": 39.27229,
+    "lng": -84.42525
+  },
   "geofences": {
-    "perimeter": { "south": 39.26850, "west": -84.43110, "north": 39.27585, "east": -84.41960 },
-    "truckGate": { "south": 39.27475, "west": -84.43010, "north": 39.27540, "east": -84.42930 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.275267,
+          "lng": -84.430743
+        },
+        {
+          "lat": 39.275267,
+          "lng": -84.421954
+        },
+        {
+          "lat": 39.268888,
+          "lng": -84.421405
+        },
+        {
+          "lat": 39.268888,
+          "lng": -84.430743
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 39.27370, "west": -84.43000, "north": 39.27530, "east": -84.42850 },
-      { "south": 39.27080, "west": -84.42870, "north": 39.27240, "east": -84.42730 }
+      {
+        "ring": [
+          {
+            "lat": 39.271014,
+            "lng": -84.430743
+          },
+          {
+            "lat": 39.271014,
+            "lng": -84.421954
+          },
+          {
+            "lat": 39.268888,
+            "lng": -84.421954
+          },
+          {
+            "lat": 39.268888,
+            "lng": -84.430743
+          }
+        ]
+      }
     ],
-    "dockAprons": [
-      { "south": 39.27150, "west": -84.42830, "north": 39.27230, "east": -84.42700 },
-      { "south": 39.27500, "west": -84.42700, "north": 39.27560, "east": -84.42480 }
-    ],
-    "staging": { "south": 39.27240, "west": -84.43000, "north": 39.27370, "east": -84.42850 }
+    "dockAprons": [],
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 30,
@@ -21,23 +58,41 @@
     "trailerParkingCapacity": 130,
     "truckGateCount": 2,
     "buildingCount": 1,
-    "siteAreaAcres": 168.0,
+    "siteAreaAcres": 168,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@39.27229,-84.42525,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "dockDoorCount"],
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "location": "Roster point landed mid-building; locked center to 39.27229,-84.42525, the centroid of the single large transmission-plant complex on E Sharon Rd. Confirmed via Ford Authority / AmericanAutoWorker as Sharonville Transmission Plant (est. 1958, 10R140/10R80 transmissions).",
     "truckGate": "Fenced truck-yard entrance on the NW side off Mosteller Rd: continuous chain-link perimeter fence, Ford signboard, wide paved apron and gate opening into the trailer-canopy drop yard (Street View 2025-06).",

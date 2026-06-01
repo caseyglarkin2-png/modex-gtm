@@ -1,41 +1,150 @@
 {
   "name": "FedEx Freight Hub - Hodgkins IL (Chicago)",
   "type": "Freight LTL hub service center (Chicago metro)",
-  "coords": { "lat": 41.791181, "lng": -87.856685 },
+  "coords": {
+    "lat": 41.791181,
+    "lng": -87.856685
+  },
   "geofences": {
-    "perimeter": { "south": 41.7900, "west": -87.8595, "north": 41.7935, "east": -87.8540 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.793229,
+          "lng": -87.858608
+        },
+        {
+          "lat": 41.793229,
+          "lng": -87.85284
+        },
+        {
+          "lat": 41.790976,
+          "lng": -87.852565
+        },
+        {
+          "lat": 41.790771,
+          "lng": -87.858058
+        },
+        {
+          "lat": 41.792,
+          "lng": -87.858882
+        }
+      ]
+    },
     "truckGate": null,
-    "dropYards": [],
-    "dockAprons": [
-      { "south": 41.7905, "west": -87.8580, "north": 41.7922, "east": -87.8562 }
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 41.792922,
+            "lng": -87.858333
+          },
+          {
+            "lat": 41.792922,
+            "lng": -87.853114
+          },
+          {
+            "lat": 41.791386,
+            "lng": -87.853114
+          },
+          {
+            "lat": 41.791181,
+            "lng": -87.858058
+          }
+        ]
+      }
     ],
-    "staging": null
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 41.792717,
+            "lng": -87.858058
+          },
+          {
+            "lat": 41.792717,
+            "lng": -87.853389
+          },
+          {
+            "lat": 41.792,
+            "lng": -87.853389
+          },
+          {
+            "lat": 41.791795,
+            "lng": -87.858058
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 55,
+        "pano": "MfLTWHAFscV16S45K1AaKg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 0, "trailersVisible": 25, "trailerParkingCapacity": 60,
-    "truckGateCount": 0, "buildingCount": 4, "siteAreaAcres": 30.0,
+    "dockDoorCount": 0,
+    "trailersVisible": 25,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 0,
+    "buildingCount": 4,
+    "siteAreaAcres": 30,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.791181,-87.856685,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "multipleFacilities", "scale",
-    "dropYard", "multiStep", "dockDoorCount", "trailersVisible",
-    "trailerParkingCapacity", "buildingCount", "siteAreaAcres"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "multipleFacilities",
+    "scale",
+    "dropYard",
+    "multiStep",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "buildingCount",
+    "siteAreaAcres"
   ],
   "fieldNotes": {
     "location": "FACILITY NOT POSITIVELY IDENTIFIED. The roster address '9501 W 55th St, Hodgkins IL' (RANGE_INTERPOLATED geocode) resolves to a generic multi-tenant big-box industrial/warehouse park in the Hodgkins/McCook IL corridor. Satellite probes (z15-z19) and Street View (2022-2025) across the area found wide-footprint distribution warehouses but NO dedicated FedEx Freight LTL cross-dock hub (no characteristic long-narrow break-bulk building with a large trailer drop yard) and NO FedEx Freight signage. Web research confirms the historical Chicago FedEx Freight terminal (CGO, Lyons/Summit area) was reported closed years ago and the active FedEx Freight Chicago-area service center is BOL at 310 E Crossroads Pkwy, Bolingbrook IL. The Hodgkins roster entry appears to be based on a stale or incorrect locator listing; FedEx Freight may lease cross-dock space within this industrial park, but it could not be visually confirmed.",

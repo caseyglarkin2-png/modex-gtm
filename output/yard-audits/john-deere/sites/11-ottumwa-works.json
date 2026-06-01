@@ -1,18 +1,81 @@
 {
   "name": "John Deere Ottumwa Works - Ottumwa IA",
   "type": "Assembly Plant",
-  "coords": { "lat": 41.003824, "lng": -92.4103 },
+  "coords": {
+    "lat": 41.003824,
+    "lng": -92.4103
+  },
   "geofences": {
-    "perimeter": { "south": 40.99980, "west": -92.41280, "north": 41.00680, "east": -92.40620 },
-    "truckGate": { "south": 41.00030, "west": -92.41090, "north": 41.00075, "east": -92.41020 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.006104,
+          "lng": -92.413321
+        },
+        {
+          "lat": 41.006208,
+          "lng": -92.407004
+        },
+        {
+          "lat": 41.000922,
+          "lng": -92.406455
+        },
+        {
+          "lat": 41.000197,
+          "lng": -92.411399
+        },
+        {
+          "lat": 41.003306,
+          "lng": -92.413733
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 40.99970, "west": -92.40820, "north": 41.00130, "east": -92.40560 },
-      { "south": 41.00370, "west": -92.41150, "north": 41.00560, "east": -92.40880 }
+      {
+        "ring": [
+          {
+            "lat": 41.000922,
+            "lng": -92.413047
+          },
+          {
+            "lat": 41.001129,
+            "lng": -92.408103
+          },
+          {
+            "lat": 41.000508,
+            "lng": -92.407965
+          },
+          {
+            "lat": 41.0003,
+            "lng": -92.412909
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.00100, "west": -92.41050, "north": 41.00210, "east": -92.40880 }
+      {
+        "ring": [
+          {
+            "lat": 41.005482,
+            "lng": -92.412497
+          },
+          {
+            "lat": 41.005586,
+            "lng": -92.408103
+          },
+          {
+            "lat": 41.005068,
+            "lng": -92.408034
+          },
+          {
+            "lat": 41.004964,
+            "lng": -92.412429
+          }
+        ]
+      }
     ],
-    "staging": { "south": 41.00200, "west": -92.40920, "north": 41.00400, "east": -92.40700 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 30,
@@ -20,23 +83,40 @@
     "trailerParkingCapacity": 70,
     "truckGateCount": 1,
     "buildingCount": 8,
-    "siteAreaAcres": 110.0,
+    "siteAreaAcres": 110,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.003824,-92.4103,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "exitLanes", "scale"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "exitLanes",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "Controlled truck entrance off the south access road from E Vine St; satellite z21 shows a gatehouse structure sitting in the drive with an apron in front and a perimeter fence line running off both sides.",
     "guardShack": "Small standalone gatehouse booth at the entrance (~1-2 vehicle footprint). Corroborated by driver reviews referencing 'friendly staff from the gate house to the docks' and on-site security.",

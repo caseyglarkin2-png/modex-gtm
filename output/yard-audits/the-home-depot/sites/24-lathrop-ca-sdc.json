@@ -1,17 +1,75 @@
 {
   "name": "Home Depot SDC - Lathrop CA",
   "type": "Stocking Distribution Center",
-  "coords": { "lat": 37.792762, "lng": -121.295676 },
+  "coords": {
+    "lat": 37.792762,
+    "lng": -121.295676
+  },
   "geofences": {
-    "perimeter": { "south": 37.78950, "west": -121.29900, "north": 37.79730, "east": -121.28850 },
-    "truckGate": { "south": 37.79490, "west": -121.29230, "north": 37.79560, "east": -121.29150 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.800141,
+          "lng": -121.300071
+        },
+        {
+          "lat": 37.799707,
+          "lng": -121.294028
+        },
+        {
+          "lat": 37.792328,
+          "lng": -121.294577
+        },
+        {
+          "lat": 37.792762,
+          "lng": -121.30062
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 37.79280, "west": -121.29710, "north": 37.79610, "east": -121.29230 },
-      { "south": 37.78990, "west": -121.29850, "north": 37.79350, "east": -121.29380 }
+      {
+        "ring": [
+          {
+            "lat": 37.794932,
+            "lng": -121.30062
+          },
+          {
+            "lat": 37.794498,
+            "lng": -121.294577
+          },
+          {
+            "lat": 37.792328,
+            "lng": -121.294577
+          },
+          {
+            "lat": 37.792762,
+            "lng": -121.30062
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 37.79320, "west": -121.29650, "north": 37.79620, "east": -121.29260 },
-      { "south": 37.79020, "west": -121.29760, "north": 37.79320, "east": -121.29370 }
+      {
+        "ring": [
+          {
+            "lat": 37.796669,
+            "lng": -121.300071
+          },
+          {
+            "lat": 37.796235,
+            "lng": -121.294577
+          },
+          {
+            "lat": 37.795149,
+            "lng": -121.294577
+          },
+          {
+            "lat": 37.795584,
+            "lng": -121.300071
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -21,7 +79,7 @@
     "trailerParkingCapacity": 280,
     "truckGateCount": 2,
     "buildingCount": 1,
-    "siteAreaAcres": 75.0,
+    "siteAreaAcres": 75,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@37.792762,-121.295676,400m/data=!3m1!1e3",
@@ -50,7 +108,13 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "truckGateCount", "guardShack", "entryLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "truckGateCount",
+    "guardShack",
+    "entryLanes"
+  ],
   "fieldNotes": {
     "truckGate": "The truck court is wrapped in a chainlink perimeter fence (confirmed in 2023 Street View); truck access is via gate openings in that fence on the NE-side access road. Controlled entry but spec-building style.",
     "guardShack": "No staffed guard booth seen along any perimeter access — only an open/sliding gate in the chainlink fence. Flagged as uncertain (booth could be small/obscured), but the building reads as a modern Prologis-style spec DC without a manned gatehouse.",

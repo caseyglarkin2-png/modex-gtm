@@ -1,17 +1,116 @@
 {
   "name": "Nestlé Prepared Foods - Gaffney SC",
   "type": "Frozen food manufacturing plant",
-  "coords": { "lat": 35.05400, "lng": -81.68720 },
+  "coords": {
+    "lat": 35.054,
+    "lng": -81.6872
+  },
   "geofences": {
-    "perimeter": { "south": 35.05130, "west": -81.69000, "north": 35.05680, "east": -81.68480 },
-    "truckGate": { "south": 35.05230, "west": -81.68930, "north": 35.05280, "east": -81.68870 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.057597,
+          "lng": -81.689947
+        },
+        {
+          "lat": 35.056698,
+          "lng": -81.685552
+        },
+        {
+          "lat": 35.054,
+          "lng": -81.685003
+        },
+        {
+          "lat": 35.052651,
+          "lng": -81.6872
+        },
+        {
+          "lat": 35.053438,
+          "lng": -81.690359
+        },
+        {
+          "lat": 35.056024,
+          "lng": -81.690359
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.052988,
+          "lng": -81.688161
+        },
+        {
+          "lat": 35.052876,
+          "lng": -81.687337
+        },
+        {
+          "lat": 35.052201,
+          "lng": -81.687475
+        },
+        {
+          "lat": 35.052314,
+          "lng": -81.688299
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 35.05250, "west": -81.68820, "north": 35.05330, "east": -81.68700 }
+      {
+        "ring": [
+          {
+            "lat": 35.057485,
+            "lng": -81.689123
+          },
+          {
+            "lat": 35.056923,
+            "lng": -81.686513
+          },
+          {
+            "lat": 35.056136,
+            "lng": -81.686788
+          },
+          {
+            "lat": 35.056698,
+            "lng": -81.689397
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.05290, "west": -81.68830, "north": 35.05370, "east": -81.68700 }
+      {
+        "ring": [
+          {
+            "lat": 35.055237,
+            "lng": -81.688299
+          },
+          {
+            "lat": 35.054899,
+            "lng": -81.686101
+          },
+          {
+            "lat": 35.054337,
+            "lng": -81.68617
+          },
+          {
+            "lat": 35.054675,
+            "lng": -81.688367
+          }
+        ]
+      }
     ],
-    "staging": { "south": 35.05280, "west": -81.68900, "north": 35.05380, "east": -81.68760 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 357,
+        "pano": "Va6UlIyjc-BNmj78tY7v2g",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 357,
+        "pano": "Va6UlIyjc-BNmj78tY7v2g",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 28,
@@ -48,7 +147,12 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount", "scale"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "Definitive - Street View (2024-05) shows a 'TRUCK ENTRANCE' sign, a stop sign, a 'SPEED LIMIT 10' sign and a controlled driveway leaving Old Georgia Hwy into the fenced plant property.",
     "guardShack": "Definitive - a guard booth with a canopy over the truck lane, with traffic cones and check-in equipment beside it, sits at the truck entrance (clear in Street View 2024-05).",

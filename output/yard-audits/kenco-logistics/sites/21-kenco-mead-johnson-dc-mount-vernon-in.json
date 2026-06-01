@@ -1,17 +1,66 @@
 {
   "name": "Kenco Mead Johnson DC - Mount Vernon IN",
   "type": "Dedicated Distribution Center",
-  "coords": { "lat": 37.93550, "lng": -87.87000 },
+  "coords": {
+    "lat": 37.9355,
+    "lng": -87.87
+  },
   "geofences": {
-    "perimeter": { "south": 37.93300, "west": -87.87200, "north": 37.93960, "east": -87.86790 },
-    "truckGate": { "south": 37.93760, "west": -87.86970, "north": 37.93810, "east": -87.86900 },
-    "dropYards": [
-      { "south": 37.93820, "west": -87.87050, "north": 37.93960, "east": -87.86810 }
-    ],
-    "dockAprons": [
-      { "south": 37.93780, "west": -87.87100, "north": 37.93840, "east": -87.86810 }
-    ],
-    "staging": null
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.937666,
+          "lng": -87.870961
+        },
+        {
+          "lat": 37.937666,
+          "lng": -87.86794
+        },
+        {
+          "lat": 37.93355,
+          "lng": -87.86794
+        },
+        {
+          "lat": 37.93355,
+          "lng": -87.870961
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 37.93745,
+          "lng": -87.870961
+        },
+        {
+          "lat": 37.93745,
+          "lng": -87.87
+        },
+        {
+          "lat": 37.936583,
+          "lng": -87.87
+        },
+        {
+          "lat": 37.936583,
+          "lng": -87.870961
+        }
+      ]
+    },
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 174,
+        "pano": "vu3O1Od-97BtvZ5M4dkk2Q",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 174,
+        "pano": "vu3O1Od-97BtvZ5M4dkk2Q",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 40,
@@ -19,23 +68,49 @@
     "trailerParkingCapacity": 60,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 53.0,
+    "siteAreaAcres": 53,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@37.93550,-87.87000,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "low",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "postGateStaging", "drivewayLong", "entryLanes", "exitLanes", "fastLaneOpportunity", "dockDoors", "dropArea", "dropYard", "shipRcvSeparate"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "postGateStaging",
+    "drivewayLong",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "dropYard",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "SITE_STATUS": "FACILITY DESTROYED AND DEMOLISHED. An EF-3 tornado struck the Mead Johnson / Kenco DC on 9 Jul 2024, collapsing the roof and multiple walls. Current 2026 Maxar imagery and 2025-09 Street View show the warehouse fully razed to a bare concrete slab with exposed foundation footings and demolition debris. The site is non-operational. All operational classification fields are inferred from the surviving slab footprint and access roads, not a working yard.",
     "truckGate": "No barrier arm or guard structure visible at the NE entrance off the loop road; classified false but the pre-tornado state is unknowable from current imagery.",

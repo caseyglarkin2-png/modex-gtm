@@ -1,18 +1,112 @@
 {
   "name": "Nestlé Pizza Division - Little Chute WI",
   "type": "Frozen pizza manufacturing plant",
-  "coords": { "lat": 44.28530, "lng": -88.32420 },
+  "coords": {
+    "lat": 44.2853,
+    "lng": -88.3242
+  },
   "geofences": {
-    "perimeter": { "south": 44.28350, "west": -88.32750, "north": 44.28720, "east": -88.32100 },
-    "truckGate": { "south": 44.28630, "west": -88.32530, "north": 44.28680, "east": -88.32460 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 44.286381,
+          "lng": -88.328045
+        },
+        {
+          "lat": 44.28648,
+          "lng": -88.322003
+        },
+        {
+          "lat": 44.285398,
+          "lng": -88.321728
+        },
+        {
+          "lat": 44.28412,
+          "lng": -88.326397
+        },
+        {
+          "lat": 44.284808,
+          "lng": -88.32832
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 44.286283,
+          "lng": -88.328183
+        },
+        {
+          "lat": 44.286283,
+          "lng": -88.327359
+        },
+        {
+          "lat": 44.285792,
+          "lng": -88.327359
+        },
+        {
+          "lat": 44.285792,
+          "lng": -88.328183
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 44.28560, "west": -88.32530, "north": 44.28680, "east": -88.32230 },
-      { "south": 44.28480, "west": -88.32260, "north": 44.28560, "east": -88.32140 }
+      {
+        "ring": [
+          {
+            "lat": 44.286283,
+            "lng": -88.327771
+          },
+          {
+            "lat": 44.286283,
+            "lng": -88.326397
+          },
+          {
+            "lat": 44.285398,
+            "lng": -88.326466
+          },
+          {
+            "lat": 44.285398,
+            "lng": -88.327839
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 44.28560, "west": -88.32600, "north": 44.28610, "east": -88.32260 }
+      {
+        "ring": [
+          {
+            "lat": 44.286283,
+            "lng": -88.325573
+          },
+          {
+            "lat": 44.286234,
+            "lng": -88.322552
+          },
+          {
+            "lat": 44.285792,
+            "lng": -88.322621
+          },
+          {
+            "lat": 44.285841,
+            "lng": -88.325642
+          }
+        ]
+      }
     ],
-    "staging": { "south": 44.28570, "west": -88.32620, "north": 44.28640, "east": -88.32480 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 118,
+        "pano": "CJXrwuAlAChTcrsOv8Q2pQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 118,
+        "pano": "CJXrwuAlAChTcrsOv8Q2pQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 35,
@@ -49,7 +143,15 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "dockDoorCount", "truckGateCount", "scale", "urbanRural"],
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "truckGateCount",
+    "scale",
+    "urbanRural"
+  ],
   "fieldNotes": {
     "truckGate": "The north truck yard is fully enclosed by chain-link perimeter fencing. Street View (2024-10) shows a sliding/swing gate across the truck driveway off W North Ave. Two driveway openings serve the fenced yard.",
     "guardShack": "A small white-roofed booth-footprint structure with a vehicle beside it sits at the truck-yard driveway entrance (z21 imagery). Reads as a guard booth - flagged uncertain as Street View did not give a clean booth view.",

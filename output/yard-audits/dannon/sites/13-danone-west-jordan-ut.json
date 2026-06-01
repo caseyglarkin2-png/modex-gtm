@@ -1,37 +1,130 @@
 {
   "name": "Danone - West Jordan UT",
   "type": "Fresh yogurt plant",
-  "coords": { "lat": 40.58110, "lng": -112.03600 },
+  "coords": {
+    "lat": 40.5811,
+    "lng": -112.036
+  },
   "geofences": {
-    "perimeter": { "south": 40.57920, "west": -112.03880, "north": 40.58300, "east": -112.03340 },
-    "truckGate": { "south": 40.58235, "west": -112.03690, "north": 40.58265, "east": -112.03650 },
-    "dropYards": [
-      { "south": 40.57990, "west": -112.03500, "north": 40.58110, "east": -112.03380 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.58256,
+          "lng": -112.039159
+        },
+        {
+          "lat": 40.582352,
+          "lng": -112.034352
+        },
+        {
+          "lat": 40.579535,
+          "lng": -112.034489
+        },
+        {
+          "lat": 40.579744,
+          "lng": -112.039296
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.580057,
+          "lng": -112.038472
+        },
+        {
+          "lat": 40.579953,
+          "lng": -112.037511
+        },
+        {
+          "lat": 40.579431,
+          "lng": -112.037579
+        },
+        {
+          "lat": 40.579535,
+          "lng": -112.038541
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 40.57990, "west": -112.03520, "north": 40.58160, "east": -112.03420 }
+      {
+        "ring": [
+          {
+            "lat": 40.582143,
+            "lng": -112.038747
+          },
+          {
+            "lat": 40.581934,
+            "lng": -112.035313
+          },
+          {
+            "lat": 40.581413,
+            "lng": -112.035382
+          },
+          {
+            "lat": 40.581621,
+            "lng": -112.038815
+          }
+        ]
+      }
     ],
-    "staging": { "south": 40.58060, "west": -112.03560, "north": 40.58160, "east": -112.03470 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 122,
+        "pano": "DOcnDtnkDA9G4VXR3vJ7AA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 122,
+        "pano": "DOcnDtnkDA9G4VXR3vJ7AA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 30, "trailersVisible": 45, "trailerParkingCapacity": 70,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 51.0,
+    "dockDoorCount": 30,
+    "trailersVisible": 45,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 51,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.58110,-112.03600,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "trailerParkingCapacity", "scale"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "Large 51-acre plant fully enclosed by a tall iron perimeter fence (confirmed on all sides in 2024/2025 Street View). Vehicle entrance off Dannon Way has a kerbed checkpoint island in the driveway - controlled entry.",
     "guardShack": "No clearly visible freestanding guard booth beside the truck lane in available imagery; entrance area is cluttered with staged construction/expansion material. Marked false but flagged uncertain.",

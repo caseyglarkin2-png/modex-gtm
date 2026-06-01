@@ -1,40 +1,139 @@
 {
   "name": "UNFI - Mechanicsville VA DC (Richmond)",
   "type": "Distribution Center",
-  "coords": { "lat": 37.63407, "lng": -77.40284 },
+  "coords": {
+    "lat": 37.63407,
+    "lng": -77.40284
+  },
   "geofences": {
-    "perimeter": { "south": 37.62930, "west": -77.40720, "north": 37.63780, "east": -77.39830 },
-    "truckGate": { "south": 37.63080, "west": -77.40340, "north": 37.63140, "east": -77.40250 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.63581,
+          "lng": -77.406685
+        },
+        {
+          "lat": 37.635375,
+          "lng": -77.400643
+        },
+        {
+          "lat": 37.630155,
+          "lng": -77.401192
+        },
+        {
+          "lat": 37.63059,
+          "lng": -77.407235
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 37.630155,
+          "lng": -77.405587
+        },
+        {
+          "lat": 37.629937,
+          "lng": -77.403389
+        },
+        {
+          "lat": 37.62885,
+          "lng": -77.403664
+        },
+        {
+          "lat": 37.629067,
+          "lng": -77.405861
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 37.63070, "west": -77.40660, "north": 37.63340, "east": -77.40480 },
-      { "south": 37.63420, "west": -77.40320, "north": 37.63620, "east": -77.40000 },
-      { "south": 37.63250, "west": -77.39970, "north": 37.63520, "east": -77.39840 }
+      {
+        "ring": [
+          {
+            "lat": 37.635375,
+            "lng": -77.406411
+          },
+          {
+            "lat": 37.635158,
+            "lng": -77.404213
+          },
+          {
+            "lat": 37.631025,
+            "lng": -77.404488
+          },
+          {
+            "lat": 37.631242,
+            "lng": -77.406685
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 37.63430, "west": -77.40720, "north": 37.63620, "east": -77.40430 },
-      { "south": 37.63260, "west": -77.39990, "north": 37.63520, "east": -77.39860 }
+      {
+        "ring": [
+          {
+            "lat": 37.635158,
+            "lng": -77.404213
+          },
+          {
+            "lat": 37.63494,
+            "lng": -77.401467
+          },
+          {
+            "lat": 37.634288,
+            "lng": -77.401604
+          },
+          {
+            "lat": 37.634505,
+            "lng": -77.404351
+          }
+        ]
+      }
     ],
-    "staging": { "south": 37.63100, "west": -77.40460, "north": 37.63270, "east": -77.40300 }
+    "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 110, "trailersVisible": 130, "trailerParkingCapacity": 240,
-    "truckGateCount": 1, "buildingCount": 4, "siteAreaAcres": 70.0,
+    "dockDoorCount": 110,
+    "trailersVisible": 130,
+    "trailerParkingCapacity": 240,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 70,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@37.63407,-77.40284,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "siteAreaAcres", "scale"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "siteAreaAcres",
+    "scale"
+  ],
   "fieldNotes": {
     "location": "Confirmed. UNFI Mechanicsville DC at 8258 Richfood Rd, Mechanicsville, VA 23116 (geocoded ROOFTOP to 37.63407,-77.40284, matching the roster coords almost exactly). Legacy Richfood / SuperValu conventional-grocery distribution complex serving the Richmond mid-Atlantic region; the road name 'Richfood Rd' is itself the heritage tell.",
     "truckGate": "TRUE - the main truck entrance off Richfood Rd / the south access road has a guard checkpoint: at z19-z20 a booth structure with a lane canopy/island, queue lanes and a checkpoint apron is visible where the truck road enters the property.",

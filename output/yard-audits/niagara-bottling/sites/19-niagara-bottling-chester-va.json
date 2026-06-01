@@ -1,37 +1,115 @@
 {
   "name": "Niagara Bottling - Chester VA",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 37.35420, "lng": -77.32990 },
+  "coords": {
+    "lat": 37.3542,
+    "lng": -77.3299
+  },
   "geofences": {
-    "perimeter": { "south": 37.35190, "west": -77.33190, "north": 37.35710, "east": -77.32840 },
-    "truckGate": { "south": 37.35610, "west": -77.33010, "north": 37.35680, "east": -77.32940 },
-    "dropYards": [
-      { "south": 37.35260, "west": -77.33150, "north": 37.35560, "east": -77.33010 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.355401,
+          "lng": -77.331273
+        },
+        {
+          "lat": 37.355073,
+          "lng": -77.327703
+        },
+        {
+          "lat": 37.349397,
+          "lng": -77.329213
+        },
+        {
+          "lat": 37.349724,
+          "lng": -77.332784
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 37.355292,
+          "lng": -77.330999
+        },
+        {
+          "lat": 37.355182,
+          "lng": -77.3299
+        },
+        {
+          "lat": 37.354637,
+          "lng": -77.330037
+        },
+        {
+          "lat": 37.354746,
+          "lng": -77.331136
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 37.35260, "west": -77.33090, "north": 37.35560, "east": -77.32960 }
+      {
+        "ring": [
+          {
+            "lat": 37.3542,
+            "lng": -77.331548
+          },
+          {
+            "lat": 37.353873,
+            "lng": -77.328252
+          },
+          {
+            "lat": 37.353327,
+            "lng": -77.328389
+          },
+          {
+            "lat": 37.353654,
+            "lng": -77.331685
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 50, "trailersVisible": 65, "trailerParkingCapacity": 90,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 35.0,
+    "dockDoorCount": 50,
+    "trailersVisible": 65,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 35,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@37.35420,-77.32990,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "The access drive connects to Digital Drive as an open, uncontrolled driveway. Street View (2025-02) of the Digital Drive frontage shows no barrier arm, sliding gate, or checkpoint pinch-point - just a landscaped open entrance. The perimeter access road wrapping the building is likewise ungated.",
     "guardShack": "No staffed booth visible at the entrance or anywhere on the perimeter drive in satellite or Street View imagery.",

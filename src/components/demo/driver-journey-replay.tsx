@@ -151,6 +151,52 @@ export function DriverJourneyReplay({ site, scenario, onClose }: Props) {
           </div>
         </div>
 
+        {/* Capability strip — names the real YNS modules behind the run so the
+            demo doesn't reduce the platform to a single gate->dock->exit move.
+            Module names mirror the live operator console (flowGATE / flowTWIN /
+            Yard Spot Mgt / Dock Mgt / Appointments). */}
+        <div className="mb-3 rounded-lg border border-white/10 bg-white/[0.02] px-4 py-3">
+          <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/45">
+            The system behind this run
+          </div>
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            {[
+              { name: 'flowGATE', note: 'machine-vision gate check-in' },
+              { name: 'flowTWIN', note: 'RTLS yard twin' },
+              { name: 'Yard Spot Mgt', note: 'spotter dispatch' },
+              { name: 'Dock Mgt', note: 'door orchestration' },
+              { name: 'Appointments', note: 'drop-and-hook planning' },
+            ].map((m) => (
+              <span
+                key={m.name}
+                title={m.note}
+                className="inline-flex items-center gap-1.5 rounded-md border border-[#00B4FF]/25 bg-[#00B4FF]/[0.06] px-2 py-1 text-[11px] text-white/85"
+              >
+                <span className="font-semibold text-[#00B4FF]">{m.name}</span>
+                <span className="text-white/50">{m.note}</span>
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Flagship proof — anchors the modeled per-run delta above in a real,
+            named-customer result so the value reads as proven, not projected.
+            Primo Brands is YardFlow's flagship reference account. */}
+        <div className="mb-3 rounded-lg border border-emerald-400/30 bg-emerald-400/[0.06] px-4 py-3">
+          <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-emerald-400">
+            Flagship result · Primo Brands
+          </div>
+          <p className="mt-1 text-sm leading-relaxed text-white/90">
+            <span className="font-semibold text-white">Drop-and-hook</span> turns cut from{' '}
+            <span className="font-semibold text-white">~48 min</span> to{' '}
+            <span className="font-semibold text-emerald-300">~24 min</span>, measured in pilot.
+          </p>
+          <p className="mt-1 text-[11px] leading-relaxed text-white/55">
+            Live loads are driver- and shipper-paced — but with the right planning, YNS turns more of
+            them into drop-and-hook, where the time is won.
+          </p>
+        </div>
+
         {/* Conversion CTA — fires right after the prospect sees the YNS-saves
             delta on their own yard. The 30-min audit is the canonical next
             step on yardflow.ai; this just makes it one click away. */}

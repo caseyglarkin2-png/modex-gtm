@@ -1,18 +1,63 @@
 {
   "name": "CJ Logistics - Mira Loma CA",
   "type": "Distribution Center",
-  "coords": { "lat": 34.0319, "lng": -117.5520 },
+  "coords": {
+    "lat": 34.0319,
+    "lng": -117.552
+  },
   "geofences": {
-    "perimeter": { "south": 34.0297, "west": -117.5540, "north": 34.0339, "east": -117.5504 },
-    "truckGate": { "south": 34.0309, "west": -117.5544, "north": 34.0317, "east": -117.5536 },
-    "dropYards": [
-      { "south": 34.0298, "west": -117.5524, "north": 34.0332, "east": -117.5508 },
-      { "south": 34.0306, "west": -117.5538, "north": 34.0316, "east": -117.5527 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.033266,
+          "lng": -117.554953
+        },
+        {
+          "lat": 34.033266,
+          "lng": -117.551657
+        },
+        {
+          "lat": 34.03099,
+          "lng": -117.551657
+        },
+        {
+          "lat": 34.03099,
+          "lng": -117.554953
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 34.0299, "west": -117.5524, "north": 34.0333, "east": -117.5512 }
+      {
+        "ring": [
+          {
+            "lat": 34.031217,
+            "lng": -117.554884
+          },
+          {
+            "lat": 34.031217,
+            "lng": -117.552
+          },
+          {
+            "lat": 34.030876,
+            "lng": -117.551966
+          },
+          {
+            "lat": 34.030876,
+            "lng": -117.55485
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 204,
+        "pano": "tNvJpSkl8CEtojKHs95jrg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 70,
@@ -25,18 +70,38 @@
   },
   "mapsUrl": "https://www.google.com/maps/@34.0319,-117.5520,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "location": "Confirmed 12350 Philadelphia Ave, Mira Loma/Eastvale CA - historically DSC Logistics Bldg 3, now CJ Logistics America. Large N-S oriented warehouse running along the I-15 freeway.",
     "truckGate": "No barrier arm, sliding gate or guard booth visible at any access point in Street View probes from 2025. Truck court connects to the road network at the SW corner via an open paved driveway crossing a rail spur. Typical open multi-tenant industrial-park access. Perimeter is partially fenced (chain-link visible on the south side).",

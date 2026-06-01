@@ -1,17 +1,87 @@
 {
   "name": "UNFI - Racine WI DC (Sturtevant)",
   "type": "Distribution Center",
-  "coords": { "lat": 42.69450, "lng": -87.91870 },
+  "coords": {
+    "lat": 42.6945,
+    "lng": -87.9187
+  },
   "geofences": {
-    "perimeter": { "south": 42.68950, "west": -87.92200, "north": 42.69760, "east": -87.91440 },
-    "truckGate": { "south": 42.69620, "west": -87.91540, "north": 42.69720, "east": -87.91440 },
-    "dropYards": [
-      { "south": 42.69200, "west": -87.91680, "north": 42.69700, "east": -87.91500 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.697528,
+          "lng": -87.919249
+        },
+        {
+          "lat": 42.697124,
+          "lng": -87.915404
+        },
+        {
+          "lat": 42.691472,
+          "lng": -87.916503
+        },
+        {
+          "lat": 42.691876,
+          "lng": -87.920073
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.692885,
+          "lng": -87.917327
+        },
+        {
+          "lat": 42.692683,
+          "lng": -87.915679
+        },
+        {
+          "lat": 42.691472,
+          "lng": -87.915953
+        },
+        {
+          "lat": 42.691674,
+          "lng": -87.917601
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 42.69150, "west": -87.91720, "north": 42.69720, "east": -87.91620 }
+      {
+        "ring": [
+          {
+            "lat": 42.696922,
+            "lng": -87.918975
+          },
+          {
+            "lat": 42.696519,
+            "lng": -87.915679
+          },
+          {
+            "lat": 42.695711,
+            "lng": -87.915816
+          },
+          {
+            "lat": 42.696115,
+            "lng": -87.919112
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 191,
+        "pano": "lLfE17oHgIptn8r3eZANJg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 191,
+        "pano": "lLfE17oHgIptn8r3eZANJg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 54,
@@ -19,7 +89,7 @@
     "trailerParkingCapacity": 110,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 55.0,
+    "siteAreaAcres": 55,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@42.69450,-87.91870,400m/data=!3m1!1e3",
@@ -48,7 +118,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["trailerParkingCapacity", "buildingCount"],
+  "uncertainFields": [
+    "trailerParkingCapacity",
+    "buildingCount"
+  ],
   "fieldNotes": {
     "truckGate": "Truck driveway curves off County Highway H (105th St) into the truck court as an open paved entrance. z20 satellite of the road entrance and three Street-View headings along Highway H show no barrier arm, no sliding gate, and no checkpoint pinch-point. No perimeter fence at the road.",
     "guardShack": "No staffed booth at the entrance. No 1-3-vehicle-footprint structure beside the truck lane in any view.",

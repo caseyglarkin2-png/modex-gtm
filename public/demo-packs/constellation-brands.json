@@ -1,6 +1,6 @@
 {
-  "schemaVersion": "1",
-  "builtAt": "2026-05-29T18:39:44.184Z",
+  "schemaVersion": "2",
+  "builtAt": "2026-06-01T01:08:41.734Z",
   "account": {
     "slug": "constellation-brands",
     "displayName": "Constellation Brands",
@@ -8,36 +8,20 @@
     "siteCount": 11,
     "coverageNote": {
       "auditedCount": 11,
-      "estimatedFootprint": 12,
+      "estimatedFootprint": null,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Constellation Brands operates ~12 NA production facilities (US + Mexico) + a few in Italy / NZ. We audited 11 NA sites; the international count is small enough to call.",
-      "auditedScope": "NA",
-      "totalGlobalFootprint": 12
+      "note": "Audited all 11 identifiable facilities."
     },
-    "featuredSiteId": "02-constellation-beer-dc-wilmer-tx-dallas-i-45",
-    "dossierIntro": "Constellation Brands runs the Corona and Modelo import network. 12 distribution centers; we audited 11. Wilmer TX (Dallas I-45) has 64 dock doors. Jurupa Valley CA is 71 acres. 2 of 11 audited sites are rail-served. Mexican imports cross at Texas and California, then fan out to retail. YardFlow runs the cross-dock as a deterministic protocol regardless of which port the trailer crossed at.",
-    "surprisingFindings": [
-      "11 of 12 facilities are import-distribution. Mexican beer flows into Texas and California, then fans out.",
-      "Jurupa Valley CA is 71 acres of beverage cross-dock. Largest single-site beer DC on the West Coast.",
-      "Wilmer TX runs 64 docks. Dallas I-45 is the Mexican beer pipeline."
-    ]
+    "featuredSiteId": "02-constellation-beer-dc-wilmer-tx-dallas-i-45"
   },
-  "research": {
-    "facility_count": 11,
-    "audited_facilities": 11,
-    "source": "yard-audit",
-    "confidence": "verified",
-    "caveats": [
-      "Mount Veeder Winery / Franciscan Estate - Napa CA: audit note mentions 'sold'"
-    ]
-  },
+  "research": null,
   "network": {
     "bbox": [
-      -123.0943,
-      30.42175,
-      -81.6307,
-      45.0746
+      -123.094274,
+      30.422192,
+      -81.631281,
+      45.073685
     ],
     "archetypeMix": {
       "#3": 9,
@@ -86,15 +70,88 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 34.0241,
-            "west": -117.54,
-            "north": 34.0273,
-            "east": -117.5315
+            "ring": [
+              {
+                "lat": 34.026874,
+                "lng": -117.539183
+              },
+              {
+                "lat": 34.026647,
+                "lng": -117.531905
+              },
+              {
+                "lat": 34.024484,
+                "lng": -117.532042
+              },
+              {
+                "lat": 34.024712,
+                "lng": -117.539321
+              }
+            ]
           },
-          "truckGate": null,
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 34.025053,
+                "lng": -117.539321
+              },
+              {
+                "lat": 34.025053,
+                "lng": -117.538771
+              },
+              {
+                "lat": 34.024712,
+                "lng": -117.538771
+              },
+              {
+                "lat": 34.024712,
+                "lng": -117.539321
+              }
+            ]
+          },
           "dropYards": [],
-          "dockAprons": [],
-          "staging": null
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 34.02585,
+                  "lng": -117.534926
+                },
+                {
+                  "lat": 34.025736,
+                  "lng": -117.532454
+                },
+                {
+                  "lat": 34.025053,
+                  "lng": -117.532454
+                },
+                {
+                  "lat": 34.025167,
+                  "lng": -117.534926
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 34.026761,
+                "lng": -117.539046
+              },
+              {
+                "lat": 34.026647,
+                "lng": -117.535063
+              },
+              {
+                "lat": 34.024826,
+                "lng": -117.535063
+              },
+              {
+                "lat": 34.024939,
+                "lng": -117.539046
+              }
+            ]
+          }
         },
         "yardMetrics": {
           "dockDoorCount": 0,
@@ -128,6 +185,42 @@
           "scale": false,
           "dropYard": false,
           "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
         },
         "dossierExcerpt": "- Name: Constellation Beer DC - Jurupa Valley CA\n- Type: Distribution Center (beer/wine/spirits)\n- Address: 3413 Manitou Court, Jurupa Valley, CA 92509 (also styled 91752 / Mira Loma)\n- Roster source: Commercial Observer 2023 — Constellation preleased 1.4M sq ft at the\n  \"Space Center\" development (Link Logistics / Blackstone) near I-15/SR-60; primary\n  US receiving/distribution hub for Mexico-origin beer.",
         "mapsUrl": "https://www.google.com/maps/@34.02585,-117.53575,400m/data=!3m1!1e3",
@@ -187,40 +280,88 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 32.6193,
-            "west": -96.7327,
-            "north": 32.6239,
-            "east": -96.7256
+            "ring": [
+              {
+                "lat": 32.623051,
+                "lng": -96.726753
+              },
+              {
+                "lat": 32.622357,
+                "lng": -96.725655
+              },
+              {
+                "lat": 32.618887,
+                "lng": -96.730873
+              },
+              {
+                "lat": 32.619581,
+                "lng": -96.732109
+              }
+            ]
           },
           "truckGate": {
-            "south": 32.6184,
-            "west": -96.7323,
-            "north": 32.6196,
-            "east": -96.7308
+            "ring": [
+              {
+                "lat": 32.619349,
+                "lng": -96.732247
+              },
+              {
+                "lat": 32.619696,
+                "lng": -96.731697
+              },
+              {
+                "lat": 32.619349,
+                "lng": -96.731285
+              },
+              {
+                "lat": 32.619002,
+                "lng": -96.731835
+              }
+            ]
           },
-          "dropYards": [
-            {
-              "south": 32.6198,
-              "west": -96.73,
-              "north": 32.6231,
-              "east": -96.7262
-            }
-          ],
+          "dropYards": [],
           "dockAprons": [
             {
-              "south": 32.6197,
-              "west": -96.7312,
-              "north": 32.6233,
-              "east": -96.7266
-            },
-            {
-              "south": 32.6199,
-              "west": -96.7327,
-              "north": 32.6234,
-              "east": -96.729
+              "ring": [
+                {
+                  "lat": 32.619928,
+                  "lng": -96.731423
+                },
+                {
+                  "lat": 32.622472,
+                  "lng": -96.726616
+                },
+                {
+                  "lat": 32.62201,
+                  "lng": -96.726204
+                },
+                {
+                  "lat": 32.619465,
+                  "lng": -96.731011
+                }
+              ]
             }
           ],
-          "staging": null
+          "staging": {
+            "ring": [
+              {
+                "lat": 32.619696,
+                "lng": -96.731835
+              },
+              {
+                "lat": 32.620969,
+                "lng": -96.7295
+              },
+              {
+                "lat": 32.620275,
+                "lng": -96.728813
+              },
+              {
+                "lat": 32.619002,
+                "lng": -96.731148
+              }
+            ]
+          }
         },
         "yardMetrics": {
           "dockDoorCount": 64,
@@ -350,40 +491,101 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 30.42175,
-            "west": -81.634,
-            "north": 30.4256,
-            "east": -81.6307
+            "ring": [
+              {
+                "lat": 30.425212,
+                "lng": -81.633341
+              },
+              {
+                "lat": 30.425153,
+                "lng": -81.631281
+              },
+              {
+                "lat": 30.422192,
+                "lng": -81.63135
+              },
+              {
+                "lat": 30.422251,
+                "lng": -81.63341
+              }
+            ]
           },
           "truckGate": {
-            "south": 30.4251,
-            "west": -81.6318,
-            "north": 30.42585,
-            "east": -81.631
+            "ring": [
+              {
+                "lat": 30.425212,
+                "lng": -81.633273
+              },
+              {
+                "lat": 30.425212,
+                "lng": -81.632792
+              },
+              {
+                "lat": 30.425034,
+                "lng": -81.632792
+              },
+              {
+                "lat": 30.425034,
+                "lng": -81.633273
+              }
+            ]
           },
-          "dropYards": [
-            {
-              "south": 30.4218,
-              "west": -81.6317,
-              "north": 30.4253,
-              "east": -81.6307
-            }
-          ],
+          "dropYards": [],
           "dockAprons": [
             {
-              "south": 30.4219,
-              "west": -81.63215,
-              "north": 30.4253,
-              "east": -81.6315
+              "ring": [
+                {
+                  "lat": 30.425034,
+                  "lng": -81.633341
+                },
+                {
+                  "lat": 30.425034,
+                  "lng": -81.632929
+                },
+                {
+                  "lat": 30.42237,
+                  "lng": -81.632929
+                },
+                {
+                  "lat": 30.42237,
+                  "lng": -81.633341
+                }
+              ]
             },
             {
-              "south": 30.4219,
-              "west": -81.6334,
-              "north": 30.4253,
-              "east": -81.6327
+              "ring": [
+                {
+                  "lat": 30.425034,
+                  "lng": -81.631693
+                },
+                {
+                  "lat": 30.425034,
+                  "lng": -81.63135
+                },
+                {
+                  "lat": 30.42237,
+                  "lng": -81.631419
+                },
+                {
+                  "lat": 30.42237,
+                  "lng": -81.631762
+                }
+              ]
             }
           ],
-          "staging": null
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 161,
+              "pano": "bl9cwO1gWMOtSvV9ubnmdg",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 161,
+              "pano": "bl9cwO1gWMOtSvV9ubnmdg",
+              "hasCoverage": true
+            }
+          }
         },
         "yardMetrics": {
           "dockDoorCount": 54,
@@ -417,52 +619,6 @@
           "scale": false,
           "dropYard": true,
           "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#10",
-          "steps": [
-            {
-              "step": "Arrive at gate, queue for guard",
-              "geofenceTarget": "truckGate",
-              "durationMs": 30000,
-              "narrationKey": "gate.arrive",
-              "baselineWaitMs": 600000,
-              "ynsWaitMs": 30000
-            },
-            {
-              "step": "Route to correct (shipping vs receiving) drop yard",
-              "geofenceTarget": "dropYard",
-              "targetIndex": 0,
-              "durationMs": 120000,
-              "narrationKey": "shiprcv.split",
-              "baselineWaitMs": 720000,
-              "ynsWaitMs": 0
-            },
-            {
-              "step": "Spotter pulls to dock apron on correct side",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 90000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 1320000,
-              "ynsWaitMs": 120000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit through gate",
-              "geofenceTarget": "exit",
-              "durationMs": 60000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 5340000,
-          "totalYnsMs": 2850000
         },
         "dossierExcerpt": "- Name: Constellation Beer DC - Jacksonville FL\n- Type: Distribution Center (beer, rail-served)\n- Address: 600 Whittaker Road, Imeson Industrial Park, Jacksonville, FL 32218\n- Roster source: Jacksonville Daily Record 2022 — 469,830 sq ft warehouse on 24 acres,\n  ~1.5 mi east of I-95; first Constellation DC in North Florida; receives beer by rail,\n  distributes by truck; 54 docks plus trailer yard and guard house.",
         "mapsUrl": "https://www.google.com/maps/@30.42385,-81.63238,400m/data=!3m1!1e3",
@@ -531,38 +687,87 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 36.4999,
-            "west": -121.4367,
-            "north": 36.5046,
-            "east": -121.4329
+            "ring": [
+              {
+                "lat": 36.503945,
+                "lng": -121.437447
+              },
+              {
+                "lat": 36.503945,
+                "lng": -121.433052
+              },
+              {
+                "lat": 36.499971,
+                "lng": -121.433052
+              },
+              {
+                "lat": 36.499971,
+                "lng": -121.437447
+              }
+            ]
           },
           "truckGate": {
-            "south": 36.50025,
-            "west": -121.4349,
-            "north": 36.50065,
-            "east": -121.43435
+            "ring": [
+              {
+                "lat": 36.501848,
+                "lng": -121.434013
+              },
+              {
+                "lat": 36.501848,
+                "lng": -121.433189
+              },
+              {
+                "lat": 36.501406,
+                "lng": -121.433189
+              },
+              {
+                "lat": 36.501406,
+                "lng": -121.434013
+              }
+            ]
           },
-          "dropYards": [
-            {
-              "south": 36.5019,
-              "west": -121.4357,
-              "north": 36.5027,
-              "east": -121.4349
-            }
-          ],
+          "dropYards": [],
           "dockAprons": [
             {
-              "south": 36.5017,
-              "west": -121.4349,
-              "north": 36.5023,
-              "east": -121.4341
+              "ring": [
+                {
+                  "lat": 36.5024,
+                  "lng": -121.435112
+                },
+                {
+                  "lat": 36.5024,
+                  "lng": -121.433327
+                },
+                {
+                  "lat": 36.501848,
+                  "lng": -121.433327
+                },
+                {
+                  "lat": 36.501848,
+                  "lng": -121.435112
+                }
+              ]
             }
           ],
           "staging": {
-            "south": 36.5005,
-            "west": -121.4351,
-            "north": 36.5013,
-            "east": -121.4342
+            "ring": [
+              {
+                "lat": 36.503504,
+                "lng": -121.437035
+              },
+              {
+                "lat": 36.503504,
+                "lng": -121.435249
+              },
+              {
+                "lat": 36.502179,
+                "lng": -121.435249
+              },
+              {
+                "lat": 36.502179,
+                "lng": -121.437035
+              }
+            ]
           }
         },
         "yardMetrics": {
@@ -702,31 +907,35 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 38.4336,
-            "west": -122.4031,
-            "north": 38.4378,
-            "east": -122.3994
+            "ring": [
+              {
+                "lat": 38.437206,
+                "lng": -122.402948
+              },
+              {
+                "lat": 38.437206,
+                "lng": -122.400201
+              },
+              {
+                "lat": 38.435055,
+                "lng": -122.400201
+              },
+              {
+                "lat": 38.435055,
+                "lng": -122.402948
+              }
+            ]
           },
-          "truckGate": {
-            "south": 38.4365,
-            "west": -122.4026,
-            "north": 38.43695,
-            "east": -122.40215
-          },
+          "truckGate": null,
           "dropYards": [],
-          "dockAprons": [
-            {
-              "south": 38.4359,
-              "west": -122.4011,
-              "north": 38.4364,
-              "east": -122.4005
+          "dockAprons": [],
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 218,
+              "pano": "rmQ6VdRH_9Nfo9MFvFyHDg",
+              "hasCoverage": true
             }
-          ],
-          "staging": {
-            "south": 38.4365,
-            "west": -122.4023,
-            "north": 38.43695,
-            "east": -122.4017
           }
         },
         "yardMetrics": {
@@ -761,42 +970,6 @@
           "scale": false,
           "dropYard": false,
           "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#3",
-          "steps": [
-            {
-              "step": "Arrive on site (no gate)",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Drive to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 480000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 3030000,
-          "totalYnsMs": 2640000
         },
         "dossierExcerpt": "The roster coordinate (38.434323, -122.400476, RANGE_INTERPOLATED, moved only\n4 m) was placed precisely against the street address, but the address\ninterpolation landed in the To Kalon vineyard just SE of the actual built\ncampus. Satellite probing at zoom 16-21 located the real building complex\n~150 m NW of the roster point, centered ~38.4357, -122.4013.\n\nThis is positively the Robert Mondavi Winery — the historic Napa Valley\nestate winery in Oakville, anchored by the renowned To Kalon Vineyard, with\nthe iconic Cliff May Mission-style arch and bell tower. Web research confirms\nthe estate reopened to visitors on April 20, 2026 following a multi-year\ntransformation (PRNewswire / Constellation press releases). The estate sits on\nthe EAST side of CA-29 / St. Helena Highway, surrounded by vineyards.",
         "mapsUrl": "https://www.google.com/maps/@38.435700,-122.401300,400m/data=!3m1!1e3",
@@ -859,27 +1032,36 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 38.4726,
-            "west": -122.4339,
-            "north": 38.4764,
-            "east": -122.4303
+            "ring": [
+              {
+                "lat": 38.475771,
+                "lng": -122.433361
+              },
+              {
+                "lat": 38.475771,
+                "lng": -122.431301
+              },
+              {
+                "lat": 38.474105,
+                "lng": -122.431163
+              },
+              {
+                "lat": 38.473997,
+                "lng": -122.433223
+              }
+            ]
           },
-          "truckGate": {
-            "south": 38.47275,
-            "west": -122.434,
-            "north": 38.47298,
-            "east": -122.4337
-          },
+          "truckGate": null,
           "dropYards": [],
-          "dockAprons": [
-            {
-              "south": 38.47475,
-              "west": -122.43225,
-              "north": 38.4752,
-              "east": -122.4318
+          "dockAprons": [],
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 96,
+              "pano": "pKV8neyh4MeDgzeYhFrbWA",
+              "hasCoverage": true
             }
-          ],
-          "staging": null
+          }
         },
         "yardMetrics": {
           "dockDoorCount": 3,
@@ -913,42 +1095,6 @@
           "scale": false,
           "dropYard": false,
           "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#3",
-          "steps": [
-            {
-              "step": "Arrive on site (no gate)",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Drive to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 480000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 3030000,
-          "totalYnsMs": 2640000
         },
         "dossierExcerpt": "Roster coordinates (38.474583, -122.432152, ROOFTOP, moved 98 m) landed directly\non the winery. Satellite probe at z17/z18 showed a large industrial winery\nbuilding with a solar-panel roof, an outdoor stainless-steel tank farm, and\nwater-treatment ponds — all surrounded by vineyards. Web search confirmed The\nPrisoner Wine Company operates a production estate and tasting room at this\naddress (1178 Galleron Road). Locked center on the production building cluster.",
         "mapsUrl": "https://www.google.com/maps/@38.474750,-122.431850,400m/data=!3m1!1e3",
@@ -1004,10 +1150,24 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 38.3575,
-            "west": -122.4052,
-            "north": 38.3635,
-            "east": -122.399
+            "ring": [
+              {
+                "lat": 38.361311,
+                "lng": -122.403823
+              },
+              {
+                "lat": 38.361204,
+                "lng": -122.401213
+              },
+              {
+                "lat": 38.359158,
+                "lng": -122.401351
+              },
+              {
+                "lat": 38.359265,
+                "lng": -122.40396
+              }
+            ]
           },
           "truckGate": null,
           "dropYards": [],
@@ -1101,27 +1261,36 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 35.5779,
-            "west": -120.7412,
-            "north": 35.5796,
-            "east": -120.7388
+            "ring": [
+              {
+                "lat": 35.578985,
+                "lng": -120.74015
+              },
+              {
+                "lat": 35.578873,
+                "lng": -120.739326
+              },
+              {
+                "lat": 35.578315,
+                "lng": -120.739463
+              },
+              {
+                "lat": 35.578427,
+                "lng": -120.740287
+              }
+            ]
           },
-          "truckGate": {
-            "south": 35.57812,
-            "west": -120.7403,
-            "north": 35.57832,
-            "east": -120.74
-          },
+          "truckGate": null,
           "dropYards": [],
-          "dockAprons": [
-            {
-              "south": 35.5784,
-              "west": -120.74035,
-              "north": 35.5788,
-              "east": -120.7399
+          "dockAprons": [],
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 54,
+              "pano": "OEQu4ccZ0t0i22vn9DF6lg",
+              "hasCoverage": true
             }
-          ],
-          "staging": null
+          }
         },
         "yardMetrics": {
           "dockDoorCount": 2,
@@ -1155,42 +1324,6 @@
           "scale": false,
           "dropYard": false,
           "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#3",
-          "steps": [
-            {
-              "step": "Arrive on site (no gate)",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Drive to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 480000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 3030000,
-          "totalYnsMs": 2640000
         },
         "dossierExcerpt": "Roster coordinates (35.578597, -120.739649, ROOFTOP, moved 44 m) landed on the\nwinery. Satellite probes (z17-z21) showed an estate winery on Paso Robles'\nwestside: a production building cluster, a hospitality/tasting building, and\nestate vineyards/olive groves on all sides. Web search confirmed Booker Vineyard\noperates at 2644 Anderson Rd and produces the My Favorite Neighbor Cabernet\nbrand in which Constellation holds a stake. Locked center on the production\ncomplex.",
         "mapsUrl": "https://www.google.com/maps/@35.578650,-120.740150,400m/data=!3m1!1e3",
@@ -1244,22 +1377,102 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 34.66325,
-            "west": -120.4665,
-            "north": 34.66485,
-            "east": -120.46525
+            "ring": [
+              {
+                "lat": 34.664439,
+                "lng": -120.466194
+              },
+              {
+                "lat": 34.664439,
+                "lng": -120.465164
+              },
+              {
+                "lat": 34.663564,
+                "lng": -120.465164
+              },
+              {
+                "lat": 34.663564,
+                "lng": -120.466194
+              }
+            ]
           },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 34.664326,
+                "lng": -120.466194
+              },
+              {
+                "lat": 34.664326,
+                "lng": -120.466057
+              },
+              {
+                "lat": 34.664213,
+                "lng": -120.466057
+              },
+              {
+                "lat": 34.664213,
+                "lng": -120.466194
+              }
+            ]
+          },
+          "dropYards": [
             {
-              "south": 34.6636,
-              "west": -120.4657,
-              "north": 34.66455,
-              "east": -120.46535
+              "ring": [
+                {
+                  "lat": 34.664326,
+                  "lng": -120.465679
+                },
+                {
+                  "lat": 34.664326,
+                  "lng": -120.465302
+                },
+                {
+                  "lat": 34.663705,
+                  "lng": -120.465302
+                },
+                {
+                  "lat": 34.663705,
+                  "lng": -120.465679
+                }
+              ]
             }
           ],
-          "staging": null
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 34.664326,
+                  "lng": -120.466057
+                },
+                {
+                  "lat": 34.664326,
+                  "lng": -120.465748
+                },
+                {
+                  "lat": 34.663677,
+                  "lng": -120.465748
+                },
+                {
+                  "lat": 34.663677,
+                  "lng": -120.466057
+                }
+              ]
+            }
+          ],
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 113,
+              "pano": "H8VBrtXkINh_A4pGNwsv2g",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 113,
+              "pano": "H8VBrtXkINh_A4pGNwsv2g",
+              "hasCoverage": true
+            }
+          }
         },
         "yardMetrics": {
           "dockDoorCount": 3,
@@ -1383,22 +1596,36 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 45.0724,
-            "west": -123.0943,
-            "north": 45.0746,
-            "east": -123.0923
+            "ring": [
+              {
+                "lat": 45.073685,
+                "lng": -123.094274
+              },
+              {
+                "lat": 45.073685,
+                "lng": -123.093038
+              },
+              {
+                "lat": 45.072812,
+                "lng": -123.093038
+              },
+              {
+                "lat": 45.072812,
+                "lng": -123.094274
+              }
+            ]
           },
           "truckGate": null,
           "dropYards": [],
-          "dockAprons": [
-            {
-              "south": 45.0728,
-              "west": -123.0937,
-              "north": 45.07315,
-              "east": -123.09325
+          "dockAprons": [],
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 240,
+              "pano": "dJ8aa1b_tDq6fZqeCaoljw",
+              "hasCoverage": true
             }
-          ],
-          "staging": null
+          }
         },
         "yardMetrics": {
           "dockDoorCount": 3,
@@ -1432,42 +1659,6 @@
           "scale": false,
           "dropYard": false,
           "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#3",
-          "steps": [
-            {
-              "step": "Arrive on site (no gate)",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Drive to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 480000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 3030000,
-          "totalYnsMs": 2640000
         },
         "dossierExcerpt": "Roster coordinates (45.073266, -123.093419, ROOFTOP, moved 15 m) landed on the\nwinery. Satellite probes (z17-z21) showed a large winery production building\n(blue-grey roof) with a separate smaller building, parking, and a pond, set\namid vineyards and farmland in the Eola-Amity Hills. Web search confirmed Lingua\nFranca operates its estate winery at 9675 Hopewell Rd NW; Constellation Brands\nacquired Lingua Franca in April 2022 and retains it. Locked center on the\nproduction building.",
         "mapsUrl": "https://www.google.com/maps/@45.073200,-123.093450,400m/data=!3m1!1e3",
@@ -1526,26 +1717,28 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 40.8066,
-            "west": -111.4458,
-            "north": 40.8094,
-            "east": -111.4432
+            "ring": [
+              {
+                "lat": 40.80868,
+                "lng": -111.445243
+              },
+              {
+                "lat": 40.808524,
+                "lng": -111.444144
+              },
+              {
+                "lat": 40.807536,
+                "lng": -111.44435
+              },
+              {
+                "lat": 40.807692,
+                "lng": -111.445449
+              }
+            ]
           },
-          "truckGate": {
-            "south": 40.7981,
-            "west": -111.4474,
-            "north": 40.7985,
-            "east": -111.4469
-          },
+          "truckGate": null,
           "dropYards": [],
-          "dockAprons": [
-            {
-              "south": 40.8085,
-              "west": -111.44495,
-              "north": 40.80885,
-              "east": -111.44455
-            }
-          ],
+          "dockAprons": [],
           "staging": null
         },
         "yardMetrics": {

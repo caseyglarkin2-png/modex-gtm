@@ -1,18 +1,108 @@
 {
   "name": "Anheuser-Busch Brewery - Columbus OH",
   "type": "Brewery",
-  "coords": { "lat": 40.10500, "lng": -82.99350 },
+  "coords": {
+    "lat": 40.105,
+    "lng": -82.9935
+  },
   "geofences": {
-    "perimeter": { "south": 40.1018, "west": -82.9975, "north": 40.1085, "east": -82.9895 },
-    "truckGate": { "south": 40.10210, "west": -82.99360, "north": 40.10270, "east": -82.99260 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.106681,
+          "lng": -82.995697
+        },
+        {
+          "lat": 40.107101,
+          "lng": -82.989929
+        },
+        {
+          "lat": 40.103319,
+          "lng": -82.989105
+        },
+        {
+          "lat": 40.102689,
+          "lng": -82.994873
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.10605,
+          "lng": -82.990204
+        },
+        {
+          "lat": 40.105945,
+          "lng": -82.989243
+        },
+        {
+          "lat": 40.10521,
+          "lng": -82.98938
+        },
+        {
+          "lat": 40.105315,
+          "lng": -82.990341
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.10560, "west": -82.99720, "north": 40.10820, "east": -82.99480 },
-      { "south": 40.10300, "west": -82.99720, "north": 40.10550, "east": -82.99520 }
+      {
+        "ring": [
+          {
+            "lat": 40.106471,
+            "lng": -82.991852
+          },
+          {
+            "lat": 40.106576,
+            "lng": -82.990204
+          },
+          {
+            "lat": 40.105315,
+            "lng": -82.990067
+          },
+          {
+            "lat": 40.10521,
+            "lng": -82.991715
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.10440, "west": -82.99500, "north": 40.10560, "east": -82.99300 }
+      {
+        "ring": [
+          {
+            "lat": 40.10605,
+            "lng": -82.994049
+          },
+          {
+            "lat": 40.106155,
+            "lng": -82.992401
+          },
+          {
+            "lat": 40.10374,
+            "lng": -82.992264
+          },
+          {
+            "lat": 40.103634,
+            "lng": -82.993912
+          }
+        ]
+      }
     ],
-    "staging": { "south": 40.10400, "west": -82.99450, "north": 40.10520, "east": -82.99280 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 91,
+        "pano": "KBPGufyQIZfiByZHNso09g",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 91,
+        "pano": "KBPGufyQIZfiByZHNso09g",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 32,
@@ -20,23 +110,42 @@
     "trailerParkingCapacity": 350,
     "truckGateCount": 1,
     "buildingCount": 6,
-    "siteAreaAcres": 138.0,
+    "siteAreaAcres": 138,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@40.10500,-82.99350,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "truckGate", "entryLanes", "exitLanes", "scale"],
+  "uncertainFields": [
+    "guardShack",
+    "truckGate",
+    "entryLanes",
+    "exitLanes",
+    "scale"
+  ],
   "fieldNotes": {
     "site": "Columbus A-B brewery (opened 1968), documented ~138-acre site at 700 Schrock Rd. Brewery building with adjacent large trailer drop yards to the NW/W and rail service.",
     "truckGate": "Campus is fully fenced (chain-link confirmed along Schrock Rd in Street View). Main Schrock Rd entrance is a landscaped boulevard with an A-B monument sign and a 'No Trucks' sign - trucks are routed to a dedicated truck gate elsewhere on the perimeter. Truck gate not crisply resolved in Street View (internal roads not on SV) - flagged uncertain.",

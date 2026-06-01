@@ -1,20 +1,112 @@
 {
   "name": "H-E-B San Marcos RSC - San Marcos TX",
   "type": "Retail Support Center / Distribution Center",
-  "coords": { "lat": 29.857237, "lng": -97.963000 },
+  "coords": {
+    "lat": 29.857237,
+    "lng": -97.963
+  },
   "geofences": {
-    "perimeter": { "south": 29.85430, "west": -97.96750, "north": 29.86050, "east": -97.96030 },
-    "truckGate": { "south": 29.85990, "west": -97.96510, "north": 29.86025, "east": -97.96440 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.859619,
+          "lng": -97.966571
+        },
+        {
+          "lat": 29.861048,
+          "lng": -97.963412
+        },
+        {
+          "lat": 29.85819,
+          "lng": -97.960803
+        },
+        {
+          "lat": 29.856403,
+          "lng": -97.964099
+        },
+        {
+          "lat": 29.858904,
+          "lng": -97.966845
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 29.8595,
+          "lng": -97.966983
+        },
+        {
+          "lat": 29.859857,
+          "lng": -97.966433
+        },
+        {
+          "lat": 29.8595,
+          "lng": -97.966159
+        },
+        {
+          "lat": 29.859143,
+          "lng": -97.966708
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 29.85360, "west": -97.96700, "north": 29.85530, "east": -97.96450 },
-      { "south": 29.85770, "west": -97.96320, "north": 29.85900, "east": -97.96150 }
+      {
+        "ring": [
+          {
+            "lat": 29.859143,
+            "lng": -97.966159
+          },
+          {
+            "lat": 29.860334,
+            "lng": -97.964099
+          },
+          {
+            "lat": 29.859381,
+            "lng": -97.963412
+          },
+          {
+            "lat": 29.85819,
+            "lng": -97.965472
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 29.85780, "west": -97.96420, "north": 29.86000, "east": -97.96200 },
-      { "south": 29.85470, "west": -97.96320, "north": 29.85620, "east": -97.96100 },
-      { "south": 29.85650, "west": -97.96420, "north": 29.85820, "east": -97.96280 }
+      {
+        "ring": [
+          {
+            "lat": 29.85819,
+            "lng": -97.963687
+          },
+          {
+            "lat": 29.859381,
+            "lng": -97.961627
+          },
+          {
+            "lat": 29.859024,
+            "lng": -97.961352
+          },
+          {
+            "lat": 29.857833,
+            "lng": -97.963412
+          }
+        ]
+      }
     ],
-    "staging": { "south": 29.85920, "west": -97.96510, "north": 29.86010, "east": -97.96380 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 101,
+        "pano": "i7V1IK4NOs_EMa88NjHAVw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 101,
+        "pano": "i7V1IK4NOs_EMa88NjHAVw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 110,
@@ -22,23 +114,40 @@
     "trailerParkingCapacity": 160,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 85.0,
+    "siteAreaAcres": 85,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@29.857237,-97.963000,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "truckGate": "Truck gate at the north entrance off the Hunter Rd / private access road; wide paved checkpoint apron with painted lane markings splitting around the booth.",
     "guardShack": "Distinct red-roofed booth, ~1-2 vehicle footprint, set between the truck lanes at the entrance apron (z20/z21 imagery). A separate small kiosk-like structure also visible in an adjacent lane.",

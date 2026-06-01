@@ -1,17 +1,147 @@
 {
   "name": "Bob Evans Farms - Rigby ID Plant",
   "type": "Manufacturing plant (refrigerated and frozen potato products; Potato Products of Idaho facility absorbed under Post Holdings)",
-  "coords": { "lat": 43.683900, "lng": -111.900400 },
+  "coords": {
+    "lat": 43.6839,
+    "lng": -111.9004
+  },
   "geofences": {
-    "perimeter": { "south": 43.682100, "west": -111.902100, "north": 43.684550, "east": -111.898000 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 43.684397,
+          "lng": -111.902597
+        },
+        {
+          "lat": 43.684397,
+          "lng": -111.898752
+        },
+        {
+          "lat": 43.682013,
+          "lng": -111.898752
+        },
+        {
+          "lat": 43.681914,
+          "lng": -111.902597
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 43.684148,
+          "lng": -111.902941
+        },
+        {
+          "lat": 43.684198,
+          "lng": -111.902597
+        },
+        {
+          "lat": 43.683999,
+          "lng": -111.902529
+        },
+        {
+          "lat": 43.68395,
+          "lng": -111.902872
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 43.683500, "west": -111.901600, "north": 43.684000, "east": -111.900900 }
+      {
+        "ring": [
+          {
+            "lat": 43.684099,
+            "lng": -111.900881
+          },
+          {
+            "lat": 43.684148,
+            "lng": -111.899782
+          },
+          {
+            "lat": 43.683652,
+            "lng": -111.899713
+          },
+          {
+            "lat": 43.683602,
+            "lng": -111.900812
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 43.682907,
+            "lng": -111.902117
+          },
+          {
+            "lat": 43.682957,
+            "lng": -111.900812
+          },
+          {
+            "lat": 43.68241,
+            "lng": -111.900743
+          },
+          {
+            "lat": 43.682311,
+            "lng": -111.902048
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 43.683600, "west": -111.901300, "north": 43.683950, "east": -111.900600 }
+      {
+        "ring": [
+          {
+            "lat": 43.684248,
+            "lng": -111.901087
+          },
+          {
+            "lat": 43.684297,
+            "lng": -111.899027
+          },
+          {
+            "lat": 43.683999,
+            "lng": -111.898958
+          },
+          {
+            "lat": 43.68395,
+            "lng": -111.901018
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": {
+      "ring": [
+        {
+          "lat": 43.684099,
+          "lng": -111.900881
+        },
+        {
+          "lat": 43.684148,
+          "lng": -111.899713
+        },
+        {
+          "lat": 43.683552,
+          "lng": -111.899645
+        },
+        {
+          "lat": 43.683503,
+          "lng": -111.900812
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 118,
+        "pano": "6gesQjyFaKEIwymDZNZepw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 118,
+        "pano": "6gesQjyFaKEIwymDZNZepw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 10,
@@ -19,23 +149,40 @@
     "trailerParkingCapacity": 20,
     "truckGateCount": 2,
     "buildingCount": 4,
-    "siteAreaAcres": 22.0,
+    "siteAreaAcres": 22,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@43.683900,-111.900400,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "0-10", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Plant accessed via open gravel/paved yards off N Yellowstone Hwy frontage; multiple open driveways with no barrier arm, gate, or checkpoint pinch-point. No perimeter fence around the property. Confirmed in satellite z19-z20.",
     "guardShack": "No booth structure at any driveway or on the access yards.",

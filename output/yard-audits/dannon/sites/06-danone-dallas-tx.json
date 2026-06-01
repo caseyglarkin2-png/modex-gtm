@@ -1,18 +1,108 @@
 {
   "name": "Danone - Dallas TX",
   "type": "Multi-category beverage plant (refrigerated)",
-  "coords": { "lat": 32.704900, "lng": -96.921000 },
+  "coords": {
+    "lat": 32.7049,
+    "lng": -96.921
+  },
   "geofences": {
-    "perimeter": { "south": 32.702800, "west": -96.924300, "north": 32.706200, "east": -96.917000 },
-    "truckGate": { "south": 32.706000, "west": -96.923900, "north": 32.706400, "east": -96.923400 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.705709,
+          "lng": -96.924021
+        },
+        {
+          "lat": 32.705362,
+          "lng": -96.917155
+        },
+        {
+          "lat": 32.702358,
+          "lng": -96.917292
+        },
+        {
+          "lat": 32.702589,
+          "lng": -96.924159
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.705709,
+          "lng": -96.922373
+        },
+        {
+          "lat": 32.705709,
+          "lng": -96.921549
+        },
+        {
+          "lat": 32.705131,
+          "lng": -96.921549
+        },
+        {
+          "lat": 32.705131,
+          "lng": -96.922373
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 32.704300, "west": -96.923700, "north": 32.705700, "east": -96.922600 }
+      {
+        "ring": [
+          {
+            "lat": 32.708598,
+            "lng": -96.923747
+          },
+          {
+            "lat": 32.708598,
+            "lng": -96.918803
+          },
+          {
+            "lat": 32.706056,
+            "lng": -96.91894
+          },
+          {
+            "lat": 32.706056,
+            "lng": -96.923815
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 32.705100, "west": -96.923000, "north": 32.705700, "east": -96.919200 },
-      { "south": 32.705100, "west": -96.918900, "north": 32.705700, "east": -96.917300 }
+      {
+        "ring": [
+          {
+            "lat": 32.705247,
+            "lng": -96.922373
+          },
+          {
+            "lat": 32.705016,
+            "lng": -96.918803
+          },
+          {
+            "lat": 32.704322,
+            "lng": -96.918871
+          },
+          {
+            "lat": 32.704553,
+            "lng": -96.922442
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 111,
+        "pano": "g38WW-Hu8VwYnQNk9_eUqg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 111,
+        "pano": "g38WW-Hu8VwYnQNk9_eUqg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 60,
@@ -20,23 +110,39 @@
     "trailerParkingCapacity": 55,
     "truckGateCount": 2,
     "buildingCount": 2,
-    "siteAreaAcres": 39.0,
+    "siteAreaAcres": 39,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.704900,-96.921000,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Both road entrances off Dan Morton Drive are wide, open driveways with no barrier arm or sliding gate. Street View (Jan 2025) shows a tractor freely turning into the west driveway with no checkpoint pinch-point. Perimeter is fenced but road access is uncontrolled.",
     "guardShack": "No staffed booth at either entrance in Street View or satellite imagery. Web research confirms drivers 'check in at the office' for door assignment - check-in is at the building, not a gate booth.",

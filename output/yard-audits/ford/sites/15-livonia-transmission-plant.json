@@ -1,17 +1,34 @@
 {
   "name": "Ford - Livonia Transmission Plant, Livonia MI",
   "type": "Transmission Plant",
-  "coords": { "lat": 42.37150, "lng": -83.39800 },
+  "coords": {
+    "lat": 42.3715,
+    "lng": -83.398
+  },
   "geofences": {
-    "perimeter": { "south": 42.36780, "west": -83.40250, "north": 42.37620, "east": -83.39250 },
-    "truckGate": { "south": 42.37380, "west": -83.40220, "north": 42.37470, "east": -83.40080 },
-    "dropYards": [
-      { "south": 42.37430, "west": -83.40050, "north": 42.37520, "east": -83.39700 }
-    ],
-    "dockAprons": [
-      { "south": 42.37420, "west": -83.40050, "north": 42.37500, "east": -83.39850 },
-      { "south": 42.37050, "west": -83.39580, "north": 42.37300, "east": -83.39480 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.374341,
+          "lng": -83.401845
+        },
+        {
+          "lat": 42.374341,
+          "lng": -83.392507
+        },
+        {
+          "lat": 42.367442,
+          "lng": -83.392507
+        },
+        {
+          "lat": 42.367442,
+          "lng": -83.401845
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
     "staging": null
   },
   "yardMetrics": {
@@ -20,23 +37,46 @@
     "trailerParkingCapacity": 30,
     "truckGateCount": 2,
     "buildingCount": 3,
-    "siteAreaAcres": 190.0,
+    "siteAreaAcres": 190,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@42.3715,-83.398,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "truckGateCount", "entryLanes", "exitLanes", "dockDoors", "dropArea", "shipRcvSeparate", "preGateStaging", "multiStep"],
+  "uncertainFields": [
+    "guardShack",
+    "truckGateCount",
+    "entryLanes",
+    "exitLanes",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "preGateStaging",
+    "multiStep"
+  ],
   "fieldNotes": {
     "site": "Ford Livonia Transmission Plant, 36200 Plymouth Rd, Livonia (Wayne County) MI - the largest transmission plant in North America (~3.3M sq ft, ~182 acres, est. 1952; produces the 6R/10R transmission families). Roster geocode (42.3722,-83.3990, GEOMETRIC_CENTER, moved 1204m) lands within the plant complex; refined center to ~42.3715,-83.3980 on the main plant building cluster. Web research (Wikipedia, Ford Authority) confirms identity and the 182-acre / 3.3M sq ft figures.",
     "layout": "A large sprawling integrated multi-building plant in dense industrial Livonia; employee parking lots ring the building on the south (Plymouth Rd) and west (Levan Rd); a vehicle test-track oval occupies the east of the property; rail lines run along the north edge with spurs into the plant.",

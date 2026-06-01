@@ -1,14 +1,38 @@
 {
   "name": "K-C Neenah Experimental Mill - Neenah WI",
   "type": "Manufacturing / experimental mill (product & process innovation, Family Care)",
-  "coords": { "lat": 44.18830, "lng": -88.46260 },
+  "coords": {
+    "lat": 44.1883,
+    "lng": -88.4626
+  },
   "geofences": {
-    "perimeter": { "south": 44.18680, "west": -88.46470, "north": 44.18950, "east": -88.46110 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 44.188792,
+          "lng": -88.464797
+        },
+        {
+          "lat": 44.188989,
+          "lng": -88.461913
+        },
+        {
+          "lat": 44.188103,
+          "lng": -88.461501
+        },
+        {
+          "lat": 44.187709,
+          "lng": -88.463149
+        },
+        {
+          "lat": 44.187906,
+          "lng": -88.464935
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
-    "dockAprons": [
-      { "south": 44.18800, "west": -88.46300, "north": 44.18870, "east": -88.46200 }
-    ],
+    "dockAprons": [],
     "staging": null
   },
   "yardMetrics": {
@@ -17,7 +41,7 @@
     "trailerParkingCapacity": 4,
     "truckGateCount": 1,
     "buildingCount": 5,
-    "siteAreaAcres": 14.0,
+    "siteAreaAcres": 14,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@44.18830,-88.46260,400m/data=!3m1!1e3",
@@ -46,7 +70,16 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "remoteGs", "dockDoorCount", "dockDoors", "buildingCount", "siteAreaAcres", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "remoteGs",
+    "dockDoorCount",
+    "dockDoors",
+    "buildingCount",
+    "siteAreaAcres",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Roster lat/lng (44.185819,-88.462609, APPROXIMATE) landed in downtown Neenah - close. Web research (Wisconsin DNR Green Tier, Waze, Foursquare) gave the X-Mill / Experimental Mill at 126 N Commercial St - K-C's original Globe Mill site in the downtown core. Locked center 44.18830,-88.46260.",
     "site": "This is an atypical site: a downtown-embedded R&D / experimental mill, NOT a freight-oriented plant or DC. The K-C campus occupies a riverfront block with the X-Mill industrial building, connected office buildings, a multi-story parking deck, and surface lots, fronting city streets on all sides. Heavy shadow in available imagery limits dock/structure detail.",

@@ -1,15 +1,71 @@
 {
   "name": "Kettle Brand - Salem OR",
   "type": "Manufacturing - kettle potato chips",
-  "coords": { "lat": 44.92530, "lng": -122.99850 },
+  "coords": {
+    "lat": 44.9253,
+    "lng": -122.9985
+  },
   "geofences": {
-    "perimeter": { "south": 44.92420, "west": -123.00010, "north": 44.92680, "east": -122.99650 },
-    "truckGate": { "south": 44.92500, "west": -122.99720, "north": 44.92535, "east": -122.99670 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 44.926272,
+          "lng": -122.999324
+        },
+        {
+          "lat": 44.926272,
+          "lng": -122.997676
+        },
+        {
+          "lat": 44.925057,
+          "lng": -122.997676
+        },
+        {
+          "lat": 44.924717,
+          "lng": -122.998157
+        },
+        {
+          "lat": 44.924814,
+          "lng": -122.999324
+        },
+        {
+          "lat": 44.925689,
+          "lng": -122.999461
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 44.92520, "west": -122.99800, "north": 44.92580, "east": -122.99720 }
+      {
+        "ring": [
+          {
+            "lat": 44.925397,
+            "lng": -122.999049
+          },
+          {
+            "lat": 44.925397,
+            "lng": -122.997813
+          },
+          {
+            "lat": 44.925106,
+            "lng": -122.997848
+          },
+          {
+            "lat": 44.925106,
+            "lng": -122.999084
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 217,
+        "pano": "E4xM4m-tt8hUCJmpj0WH2Q",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 12,
@@ -17,23 +73,41 @@
     "trailerParkingCapacity": 12,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 16.0,
+    "siteAreaAcres": 16,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@44.92530,-122.99850,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "dropArea"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "dropArea"
+  ],
   "fieldNotes": {
     "truckGate": "Open-access site. Kettle Court SE ends in a wide open paved cul-de-sac/apron directly in front of the plant's dock face. 2025-06 Street View shows no barrier arm, sliding gate, or checkpoint - and no perimeter fence on the truck side. A Campbell's sign confirms the facility identity.",
     "guardShack": "No guard booth at the entrance - only the plant building and a Campbell's identity sign.",

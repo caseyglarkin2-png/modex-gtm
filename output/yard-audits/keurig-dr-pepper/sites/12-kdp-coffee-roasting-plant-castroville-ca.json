@@ -1,41 +1,152 @@
 {
   "name": "KDP Coffee Roasting Plant - Castroville CA",
   "type": "Manufacturing - Coffee",
-  "coords": { "lat": 36.757300, "lng": -121.740100 },
+  "coords": {
+    "lat": 36.7573,
+    "lng": -121.7401
+  },
   "geofences": {
-    "perimeter": { "south": 36.756300, "west": -121.740900, "north": 36.758100, "east": -121.739400 },
-    "truckGate": { "south": 36.757500, "west": -121.740900, "north": 36.757800, "east": -121.740600 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.758318,
+          "lng": -121.739825
+        },
+        {
+          "lat": 36.758318,
+          "lng": -121.738898
+        },
+        {
+          "lat": 36.757135,
+          "lng": -121.738864
+        },
+        {
+          "lat": 36.757107,
+          "lng": -121.739791
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 36.7573,
+          "lng": -121.739825
+        },
+        {
+          "lat": 36.7573,
+          "lng": -121.739654
+        },
+        {
+          "lat": 36.757135,
+          "lng": -121.739654
+        },
+        {
+          "lat": 36.757135,
+          "lng": -121.739825
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 36.756600, "west": -121.740300, "north": 36.757500, "east": -121.739600 }
+      {
+        "ring": [
+          {
+            "lat": 36.757575,
+            "lng": -121.739757
+          },
+          {
+            "lat": 36.757575,
+            "lng": -121.739413
+          },
+          {
+            "lat": 36.757162,
+            "lng": -121.739413
+          },
+          {
+            "lat": 36.757162,
+            "lng": -121.739757
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 36.756600, "west": -121.740100, "north": 36.756900, "east": -121.739500 }
+      {
+        "ring": [
+          {
+            "lat": 36.758235,
+            "lng": -121.739757
+          },
+          {
+            "lat": 36.758235,
+            "lng": -121.738933
+          },
+          {
+            "lat": 36.758043,
+            "lng": -121.738933
+          },
+          {
+            "lat": 36.758043,
+            "lng": -121.739757
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 14, "trailersVisible": 6, "trailerParkingCapacity": 20,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 4.5,
+    "dockDoorCount": 14,
+    "trailersVisible": 6,
+    "trailerParkingCapacity": 20,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 4.5,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@36.757300,-121.740100,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "entryLanes", "exitLanes", "dockDoors",
-    "dropArea", "shipRcvSeparate", "dropYard", "dockDoorCount", "trailersVisible",
-    "trailerParkingCapacity", "buildingCount", "siteAreaAcres", "multipleFacilities"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "entryLanes",
+    "exitLanes",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "dropYard",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "buildingCount",
+    "siteAreaAcres",
+    "multipleFacilities"
   ],
   "fieldNotes": {
     "FACILITY_STATUS": "DEFUNCT - The Keurig Green Mountain Castroville, CA manufacturing/distribution center CLOSED on July 3, 2017 (183 employees laid off; plant contents auctioned September 2017, per CoffeeTalk, Vending Market Watch, Center for Jobs). This is NOT an active KDP facility. The roster source ('one of six KDP US coffee roasting facilities') is outdated. KDP has no current operations here.",

@@ -1,12 +1,76 @@
 {
   "name": "Reyes Coca-Cola Bottling - Rancho Cucamonga Bottling & Distribution Center, CA",
   "type": "Bottling / Manufacturing + Distribution Center",
-  "coords": { "lat": 34.08240, "lng": -117.55300 },
+  "coords": {
+    "lat": 34.0824,
+    "lng": -117.553
+  },
   "geofences": {
-    "perimeter": { "south": 34.08120, "west": -117.55450, "north": 34.08340, "east": -117.55150 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.083196,
+          "lng": -117.554579
+        },
+        {
+          "lat": 34.083196,
+          "lng": -117.552588
+        },
+        {
+          "lat": 34.080808,
+          "lng": -117.552588
+        },
+        {
+          "lat": 34.080808,
+          "lng": -117.554579
+        }
+      ]
+    },
     "truckGate": null,
-    "dropYards": [],
-    "dockAprons": [],
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 34.0824,
+            "lng": -117.556021
+          },
+          {
+            "lat": 34.0824,
+            "lng": -117.55506
+          },
+          {
+            "lat": 34.081547,
+            "lng": -117.55506
+          },
+          {
+            "lat": 34.081547,
+            "lng": -117.556021
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 34.082116,
+            "lng": -117.554442
+          },
+          {
+            "lat": 34.082116,
+            "lng": -117.552725
+          },
+          {
+            "lat": 34.081718,
+            "lng": -117.552725
+          },
+          {
+            "lat": 34.081718,
+            "lng": -117.554442
+          }
+        ]
+      }
+    ],
     "staging": null
   },
   "yardMetrics": {
@@ -15,29 +79,62 @@
     "trailerParkingCapacity": 0,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 14.0,
+    "siteAreaAcres": 14,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.08240,-117.55300,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "NONE", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "multipleFacilities", "scale",
-    "dropYard", "multiStep", "dockDoorCount", "trailersVisible",
-    "trailerParkingCapacity", "siteAreaAcres", "railServed", "coords",
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "multipleFacilities",
+    "scale",
+    "dropYard",
+    "multiStep",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "siteAreaAcres",
+    "railServed",
+    "coords",
     "perimeter"
   ],
   "fieldNotes": {

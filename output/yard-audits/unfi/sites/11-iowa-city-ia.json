@@ -1,17 +1,108 @@
 {
   "name": "UNFI - Iowa City IA DC",
   "type": "Distribution Center",
-  "coords": { "lat": 41.63490, "lng": -91.48630 },
+  "coords": {
+    "lat": 41.6349,
+    "lng": -91.4863
+  },
   "geofences": {
-    "perimeter": { "south": 41.63300, "west": -91.48850, "north": 41.63660, "east": -91.48430 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.636029,
+          "lng": -91.488017
+        },
+        {
+          "lat": 41.635926,
+          "lng": -91.485476
+        },
+        {
+          "lat": 41.634592,
+          "lng": -91.485613
+        },
+        {
+          "lat": 41.634695,
+          "lng": -91.488154
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.635105,
+          "lng": -91.48836
+        },
+        {
+          "lat": 41.635054,
+          "lng": -91.487948
+        },
+        {
+          "lat": 41.634746,
+          "lng": -91.488017
+        },
+        {
+          "lat": 41.634797,
+          "lng": -91.488429
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 41.63360, "west": -91.48700, "north": 41.63430, "east": -91.48480 }
+      {
+        "ring": [
+          {
+            "lat": 41.634643,
+            "lng": -91.487261
+          },
+          {
+            "lat": 41.634541,
+            "lng": -91.485751
+          },
+          {
+            "lat": 41.634233,
+            "lng": -91.485819
+          },
+          {
+            "lat": 41.634335,
+            "lng": -91.48733
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.63400, "west": -91.48720, "north": 41.63460, "east": -91.48450 }
+      {
+        "ring": [
+          {
+            "lat": 41.6349,
+            "lng": -91.487948
+          },
+          {
+            "lat": 41.634797,
+            "lng": -91.4863
+          },
+          {
+            "lat": 41.634643,
+            "lng": -91.486334
+          },
+          {
+            "lat": 41.634746,
+            "lng": -91.487982
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 58,
+        "pano": "8VBY0bDm32JhXlfVBeeKZw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 58,
+        "pano": "8VBY0bDm32JhXlfVBeeKZw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 32,
@@ -19,7 +110,7 @@
     "trailerParkingCapacity": 40,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 33.0,
+    "siteAreaAcres": 33,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.63490,-91.48630,400m/data=!3m1!1e3",
@@ -48,7 +139,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "dockDoorCount"],
+  "uncertainFields": [
+    "guardShack",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "resolution": "Roster coord (41.635358, -91.486512, ROOFTOP) landed on the facility. Confirmed UNFI DC, 2340 Heinz Rd, Iowa City IA 52240 via Yahoo Local, hub.biz, OpenGovUS and the 2003 UNFI IR press release. Legacy-UNFI DC acquired with Blooming Prairie Cooperative (Oct 2002); expanded from ~120,000 to ~260,000 sq ft after 2003.",
     "truckGate": "No barrier arm or sliding/swing gate at any property edge. The DC sits in an industrial park; the truck driveway runs from the park road around the building to the south dock apron with no checkpoint structure. Open-campus archetype.",

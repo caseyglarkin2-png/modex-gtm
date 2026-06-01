@@ -1,19 +1,108 @@
 {
   "name": "Caterpillar - York PA Distribution Center",
   "type": "Parts distribution center (~1.1M sq ft, opened 1953)",
-  "coords": { "lat": 39.98120, "lng": -76.68570 },
+  "coords": {
+    "lat": 39.9812,
+    "lng": -76.6857
+  },
   "geofences": {
-    "perimeter": { "south": 39.97850, "west": -76.68950, "north": 39.98400, "east": -76.68200 },
-    "truckGate": { "south": 39.98180, "west": -76.68340, "north": 39.98280, "east": -76.68220 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.982673,
+          "lng": -76.68982
+        },
+        {
+          "lat": 39.982252,
+          "lng": -76.684052
+        },
+        {
+          "lat": 39.978885,
+          "lng": -76.684601
+        },
+        {
+          "lat": 39.979306,
+          "lng": -76.690369
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.979622,
+          "lng": -76.685013
+        },
+        {
+          "lat": 39.979516,
+          "lng": -76.684052
+        },
+        {
+          "lat": 39.97899,
+          "lng": -76.684189
+        },
+        {
+          "lat": 39.979095,
+          "lng": -76.685151
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 39.98150, "west": -76.68400, "north": 39.98380, "east": -76.68150 },
-      { "south": 39.97920, "west": -76.68450, "north": 39.98080, "east": -76.68200 }
+      {
+        "ring": [
+          {
+            "lat": 39.982042,
+            "lng": -76.685013
+          },
+          {
+            "lat": 39.981937,
+            "lng": -76.683777
+          },
+          {
+            "lat": 39.979937,
+            "lng": -76.684052
+          },
+          {
+            "lat": 39.980042,
+            "lng": -76.685288
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.98150, "west": -76.68380, "north": 39.98330, "east": -76.68180 },
-      { "south": 39.97900, "west": -76.68850, "north": 39.98050, "east": -76.68650 }
+      {
+        "ring": [
+          {
+            "lat": 39.9812,
+            "lng": -76.689545
+          },
+          {
+            "lat": 39.98099,
+            "lng": -76.686387
+          },
+          {
+            "lat": 39.980569,
+            "lng": -76.686524
+          },
+          {
+            "lat": 39.980779,
+            "lng": -76.689683
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 185,
+        "pano": "VlWPPDB6cKGebFyqynOALw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 185,
+        "pano": "VlWPPDB6cKGebFyqynOALw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 55,
@@ -21,23 +110,44 @@
     "trailerParkingCapacity": 70,
     "truckGateCount": 2,
     "buildingCount": 2,
-    "siteAreaAcres": 97.0,
+    "siteAreaAcres": 97,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@39.9812,-76.6857,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "scale"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "scale"
+  ],
   "fieldNotes": {
     "site": "Confirmed as the Caterpillar York Distribution Center, 600 Memory Lane, Springettsbury Township - a ~1.1M sq ft parts depot opened 1953. Roster geocode (39.981109, -76.686396, ROOFTOP, moved 808m) landed on the building. Identified by the green-and-white industrial building visible in Street View along Memory Lane, the depot layout, and adjacency to US-30.",
     "truckGate": "Truck/dock yards are enclosed by chain-link perimeter fencing (confirmed at the SW building face in Street View). Truck operations on the NE and SW are access-controlled behind the fence. A small white structure near the SE truck yard may be a booth. No barrier arm cleanly imaged. truckGate set true; flagged uncertain.",

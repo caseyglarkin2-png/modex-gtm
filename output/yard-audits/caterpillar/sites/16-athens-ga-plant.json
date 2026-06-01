@@ -1,18 +1,108 @@
 {
   "name": "Caterpillar - Athens GA Plant",
   "type": "Manufacturing plant (BCP - mini hydraulic excavators, small track-type tractors)",
-  "coords": { "lat": 33.94000, "lng": -83.51850 },
+  "coords": {
+    "lat": 33.94,
+    "lng": -83.5185
+  },
   "geofences": {
-    "perimeter": { "south": 33.93680, "west": -83.52200, "north": 33.94420, "east": -83.51100 },
-    "truckGate": { "south": 33.94090, "west": -83.51590, "north": 33.94160, "east": -83.51490 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.940911,
+          "lng": -83.523993
+        },
+        {
+          "lat": 33.940456,
+          "lng": -83.517127
+        },
+        {
+          "lat": 33.935443,
+          "lng": -83.5185
+        },
+        {
+          "lat": 33.936354,
+          "lng": -83.525092
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.938177,
+          "lng": -83.525092
+        },
+        {
+          "lat": 33.937949,
+          "lng": -83.523444
+        },
+        {
+          "lat": 33.93681,
+          "lng": -83.523719
+        },
+        {
+          "lat": 33.937038,
+          "lng": -83.525366
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 33.93980, "west": -83.52100, "north": 33.94220, "east": -83.51820 },
-      { "south": 33.93870, "west": -83.51720, "north": 33.94320, "east": -83.51280 }
+      {
+        "ring": [
+          {
+            "lat": 33.940911,
+            "lng": -83.521247
+          },
+          {
+            "lat": 33.940684,
+            "lng": -83.517951
+          },
+          {
+            "lat": 33.939089,
+            "lng": -83.518225
+          },
+          {
+            "lat": 33.939316,
+            "lng": -83.521521
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.93980, "west": -83.52090, "north": 33.94210, "east": -83.51870 }
+      {
+        "ring": [
+          {
+            "lat": 33.938177,
+            "lng": -83.523444
+          },
+          {
+            "lat": 33.937721,
+            "lng": -83.519049
+          },
+          {
+            "lat": 33.93681,
+            "lng": -83.519324
+          },
+          {
+            "lat": 33.937266,
+            "lng": -83.523719
+          }
+        ]
+      }
     ],
-    "staging": { "south": 33.94060, "west": -83.51640, "north": 33.94160, "east": -83.51460 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 51,
+        "pano": "c38i6C0QKYaFXwM73SW8Rg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 51,
+        "pano": "c38i6C0QKYaFXwM73SW8Rg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 18,
@@ -20,23 +110,39 @@
     "trailerParkingCapacity": 70,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 180.0,
+    "siteAreaAcres": 180,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.94000,-83.51850,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "Roster lat/lng (ROOFTOP, movedMeters 7) sat in woods at a road intersection ~0.7 km SE of the plant. Plant building is just NW. Confirmed via Athens Area Chamber / Panjiva (250 Dozer Dr) and the 850k sq ft / 3-building / 250-acre campus described in web sources. Locked center on the main building at 33.9400,-83.5185.",
     "truckGate": "Controlled truck/visitor entrance: a guard booth with a canopy over the lane sits on a paved island in the wide entrance road at 33.9412,-83.5154, with a stop sign and a vehicle parked beside it - confirmed in both z21 satellite and 2025 Street View.",

@@ -1,37 +1,130 @@
 {
   "name": "Performance Foodservice - Florence SC (legacy DC)",
   "type": "Broadline Foodservice Distribution Center",
-  "coords": { "lat": 34.26505, "lng": -79.69285 },
+  "coords": {
+    "lat": 34.26505,
+    "lng": -79.69285
+  },
   "geofences": {
-    "perimeter": { "south": 34.26210, "west": -79.69730, "north": 34.26720, "east": -79.69045 },
-    "truckGate": { "south": 34.26370, "west": -79.69540, "north": 34.26430, "east": -79.69460 },
-    "dropYards": [
-      { "south": 34.26340, "west": -79.69510, "north": 34.26460, "east": -79.69100 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.266185,
+          "lng": -79.696558
+        },
+        {
+          "lat": 34.266185,
+          "lng": -79.690653
+        },
+        {
+          "lat": 34.264142,
+          "lng": -79.690515
+        },
+        {
+          "lat": 34.264029,
+          "lng": -79.696421
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.264483,
+          "lng": -79.69697
+        },
+        {
+          "lat": 34.264483,
+          "lng": -79.696009
+        },
+        {
+          "lat": 34.263688,
+          "lng": -79.696009
+        },
+        {
+          "lat": 34.263688,
+          "lng": -79.69697
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 34.26420, "west": -79.69540, "north": 34.26480, "east": -79.69090 }
+      {
+        "ring": [
+          {
+            "lat": 34.264483,
+            "lng": -79.696283
+          },
+          {
+            "lat": 34.264369,
+            "lng": -79.691202
+          },
+          {
+            "lat": 34.264029,
+            "lng": -79.691202
+          },
+          {
+            "lat": 34.264142,
+            "lng": -79.696283
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 83,
+        "pano": "aVilvlONc6BPKgS3Jciv8A",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 83,
+        "pano": "aVilvlONc6BPKgS3Jciv8A",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 60, "trailersVisible": 38, "trailerParkingCapacity": 70,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 33.0,
+    "dockDoorCount": 60,
+    "trailersVisible": 38,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 33,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.26505,-79.69285,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "truckGate", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "truckGate",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Roster coord (34.275934,-79.688271, GEOMETRIC_CENTER, moved 13.1km flag) was imprecise. Resolved the legacy Performance Foodservice DC to ~34.26505,-79.69285 in the Florence industrial park off Alex Lee Blvd — a single long white rectangular DC, ~620m x ~110m, with a continuous dock bank along its south face. Distinct from idx 1 (Cheney Brothers new cold DC, ~34.271,-79.6947, still a graded pad/under construction immediately NE).",
     "truckGate": "No barrier arm or sliding gate observed across the truck lane in available imagery; the dock yard sits behind only a low wood-rail fence along the perimeter loop road. Marked true at medium confidence because the property is fenced and the truck approach pinches at a single SW driveway off the loop road — but the control structure is not visually confirmed.",

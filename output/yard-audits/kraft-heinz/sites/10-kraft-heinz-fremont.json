@@ -1,19 +1,140 @@
 {
   "name": "Kraft Heinz - Fremont",
   "type": "Food Products Supplier",
-  "coords": { "lat": 41.3614, "lng": -83.0920 },
+  "coords": {
+    "lat": 41.3614,
+    "lng": -83.092
+  },
   "geofences": {
-    "perimeter": { "south": 41.3578, "west": -83.0945, "north": 41.3650, "east": -83.0892 },
-    "truckGate": { "south": 41.3615, "west": -83.0912, "north": 41.3622, "east": -83.0902 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.364492,
+          "lng": -83.093373
+        },
+        {
+          "lat": 41.36408,
+          "lng": -83.090352
+        },
+        {
+          "lat": 41.361915,
+          "lng": -83.091313
+        },
+        {
+          "lat": 41.359545,
+          "lng": -83.092687
+        },
+        {
+          "lat": 41.358926,
+          "lng": -83.095159
+        },
+        {
+          "lat": 41.360885,
+          "lng": -83.09612
+        },
+        {
+          "lat": 41.363771,
+          "lng": -83.094747
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.363461,
+          "lng": -83.093923
+        },
+        {
+          "lat": 41.363358,
+          "lng": -83.092961
+        },
+        {
+          "lat": 41.362637,
+          "lng": -83.093099
+        },
+        {
+          "lat": 41.36274,
+          "lng": -83.09406
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 41.3618, "west": -83.0908, "north": 41.3640, "east": -83.0895 },
-      { "south": 41.3595, "west": -83.0908, "north": 41.3612, "east": -83.0895 }
+      {
+        "ring": [
+          {
+            "lat": 41.363358,
+            "lng": -83.096395
+          },
+          {
+            "lat": 41.363049,
+            "lng": -83.094609
+          },
+          {
+            "lat": 41.361812,
+            "lng": -83.095021
+          },
+          {
+            "lat": 41.362122,
+            "lng": -83.096807
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 41.363771,
+            "lng": -83.092687
+          },
+          {
+            "lat": 41.363461,
+            "lng": -83.090352
+          },
+          {
+            "lat": 41.362534,
+            "lng": -83.090627
+          },
+          {
+            "lat": 41.362843,
+            "lng": -83.092961
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.3608, "west": -83.0918, "north": 41.3640, "east": -83.0908 },
-      { "south": 41.3590, "west": -83.0925, "north": 41.3600, "east": -83.0908 }
+      {
+        "ring": [
+          {
+            "lat": 41.361812,
+            "lng": -83.093099
+          },
+          {
+            "lat": 41.361606,
+            "lng": -83.091176
+          },
+          {
+            "lat": 41.360885,
+            "lng": -83.091313
+          },
+          {
+            "lat": 41.361091,
+            "lng": -83.093236
+          }
+        ]
+      }
     ],
-    "staging": { "south": 41.3618, "west": -83.0908, "north": 41.3628, "east": -83.0898 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 198,
+        "pano": "lOGHVyPExdYoSs12MAzkAw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 198,
+        "pano": "lOGHVyPExdYoSs12MAzkAw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 60,
@@ -21,7 +142,7 @@
     "trailerParkingCapacity": 120,
     "truckGateCount": 1,
     "buildingCount": 7,
-    "siteAreaAcres": 88.0,
+    "siteAreaAcres": 88,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@41.3614,-83.0920,400m/data=!3m1!1e3",
@@ -50,7 +171,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "scale", "buildingCount"],
+  "uncertainFields": [
+    "guardShack",
+    "scale",
+    "buildingCount"
+  ],
   "fieldNotes": {
     "truckGate": "Confirmed at 1301 Heinz Dr off N 5th St (~41.3618, -83.0905). Street View 2024-05 shows sliding metal gates pulled open at a wide truck-only driveway, lined with orange bollards, with a tall Heinz 57 logo sign on a pole and a freestanding 'Kraft Heinz Distribution Center / Shipping & Receiving / No Trespassing — 1301 Heinz Drive' sign. Lane markings and curb cut are clearly truck-scaled.",
     "guardShack": "No classic 1-3-bay guard booth positively identified at the Heinz Drive truck gate. Ancillary small flat-roofed structures sit near the warehouse SE corner inside the gate but their function is unclear from imagery; gate operation appears remote/automated.",

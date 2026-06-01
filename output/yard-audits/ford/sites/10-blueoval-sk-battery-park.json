@@ -1,17 +1,35 @@
 {
   "name": "Ford - BlueOval SK Battery Park, Glendale KY",
   "type": "Battery Manufacturing Plant (JV with SK On)",
-  "coords": { "lat": 37.58600, "lng": -85.88000 },
+  "coords": {
+    "lat": 37.586,
+    "lng": -85.88
+  },
   "geofences": {
-    "perimeter": { "south": 37.57800, "west": -85.88950, "north": 37.59450, "east": -85.87100 },
-    "truckGate": { "south": 37.59050, "west": -85.87600, "north": 37.59180, "east": -85.87400 },
-    "dropYards": [
-      { "south": 37.58000, "west": -85.87950, "north": 37.58350, "east": -85.87500 }
-    ],
-    "dockAprons": [
-      { "south": 37.58150, "west": -85.88700, "north": 37.58400, "east": -85.88350 }
-    ],
-    "staging": { "south": 37.58900, "west": -85.87700, "north": 37.59100, "east": -85.87450 }
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.593835,
+          "lng": -85.890986
+        },
+        {
+          "lat": 37.593835,
+          "lng": -85.873408
+        },
+        {
+          "lat": 37.575552,
+          "lng": -85.873408
+        },
+        {
+          "lat": 37.575552,
+          "lng": -85.890986
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 30,
@@ -19,23 +37,53 @@
     "trailerParkingCapacity": 40,
     "truckGateCount": 1,
     "buildingCount": 6,
-    "siteAreaAcres": 740.0,
+    "siteAreaAcres": 740,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@37.586,-85.88,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "low",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging", "entryLanes", "exitLanes", "dockDoors", "dropArea", "shipRcvSeparate", "trailersVisible", "trailerParkingCapacity", "dockDoorCount", "fastLaneOpportunity", "multiStep", "scale"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "entryLanes",
+    "exitLanes",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "dockDoorCount",
+    "fastLaneOpportunity",
+    "multiStep",
+    "scale"
+  ],
   "fieldNotes": {
     "site": "BlueOval SK Battery Park, Glendale (Hardin County) KY - a Ford / SK On joint-venture EV battery campus on the Glendale Megasite, two ~4M sq ft battery plant buildings (~8M sq ft combined). Roster coordinates (37.6017,-85.9055) point at Glendale town center, ~2.4 km NW of the actual plant. Corrected center to ~37.5860,-85.8800 (the white-roof dual-plant complex) confirmed by satellite: two giant battery plant buildings sit immediately west of I-65, with employee parking lots full of cars on the west side and process/utility structures (tank farms, conveyor bridges) at the south. Production officially began Aug 2025; Ford announced the workforce would be idled by Feb 2026 with rehire planned for 2027 after retooling - so the plant is operational but currently in a retooling pause.",
     "imagery": "Available Maxar/Airbus satellite tiles capture the site during the active construction / early-ramp phase: surrounding ground is largely bare graded dirt and construction laydown, so the final operational truck-yard, drop-yard and gate configuration is NOT fully built out in imagery. Most layout/count fields are therefore low-confidence estimates and flagged uncertain.",

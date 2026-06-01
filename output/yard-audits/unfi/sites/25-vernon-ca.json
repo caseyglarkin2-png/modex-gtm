@@ -1,35 +1,106 @@
 {
   "name": "UNFI - Vernon CA DC (Los Angeles / Albert's Organics West)",
   "type": "Distribution Center",
-  "coords": { "lat": 33.99940, "lng": -118.22170 },
+  "coords": {
+    "lat": 33.9994,
+    "lng": -118.2217
+  },
   "geofences": {
-    "perimeter": { "south": 33.99875, "west": -118.22270, "north": 33.99985, "east": -118.22075 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.999969,
+          "lng": -118.222387
+        },
+        {
+          "lat": 33.999969,
+          "lng": -118.221357
+        },
+        {
+          "lat": 33.999229,
+          "lng": -118.221357
+        },
+        {
+          "lat": 33.999229,
+          "lng": -118.222387
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 33.99905, "west": -118.22120, "north": 33.99975, "east": -118.22075 }
+      {
+        "ring": [
+          {
+            "lat": 33.999912,
+            "lng": -118.222352
+          },
+          {
+            "lat": 33.999912,
+            "lng": -118.2217
+          },
+          {
+            "lat": 33.999827,
+            "lng": -118.2217
+          },
+          {
+            "lat": 33.999827,
+            "lng": -118.222352
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 132,
+        "pano": "rBlkeBcKh__yIlm3llCkJw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 22, "trailersVisible": 6, "trailerParkingCapacity": 12,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 4.0,
+    "dockDoorCount": 22,
+    "trailersVisible": 6,
+    "trailerParkingCapacity": 12,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 4,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@33.99940,-118.22170,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "dropArea", "siteAreaAcres"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "dropArea",
+    "siteAreaAcres"
+  ],
   "fieldNotes": {
     "location": "Confirmed. Albert's Organics West Division (UNFI Fresh produce/specialty distributor) at 2724 Leonis Blvd, Vernon, CA 90058. Address geocoded ROOFTOP to 33.99958,-118.22139; Street View at heading 180 from the road pano shows the building street number '2724' on the office facade, positively confirming identity. Locked building center ~33.99940,-118.22170 (a single warehouse south of Leonis Blvd).",
     "truckGate": "No controlled truck entrance. This is a dense Vernon (LA industrial core) infill parcel; the warehouse meets the street with an open driveway and dock apron. No barrier arm, sliding gate, or checkpoint pinch-point visible at z19-z20 satellite or in Street View along Leonis Blvd.",

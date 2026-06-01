@@ -1,17 +1,77 @@
 {
   "name": "Home Depot SDC - Jersey Village TX",
   "type": "Stocking Distribution Center",
-  "coords": { "lat": 29.87742, "lng": -95.557076 },
+  "coords": {
+    "lat": 29.87742,
+    "lng": -95.557076
+  },
   "geofences": {
-    "perimeter": { "south": 29.87480, "west": -95.55880, "north": 29.88010, "east": -95.55580 },
-    "truckGate": { "south": 29.87635, "west": -95.55665, "north": 29.87675, "east": -95.55630 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.880278,
+          "lng": -95.558999
+        },
+        {
+          "lat": 29.880159,
+          "lng": -95.557076
+        },
+        {
+          "lat": 29.875991,
+          "lng": -95.557213
+        },
+        {
+          "lat": 29.87611,
+          "lng": -95.559273
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 29.87520, "west": -95.55855, "north": 29.87960, "east": -95.55755 }
+      {
+        "ring": [
+          {
+            "lat": 29.880159,
+            "lng": -95.559273
+          },
+          {
+            "lat": 29.880159,
+            "lng": -95.558449
+          },
+          {
+            "lat": 29.876229,
+            "lng": -95.558587
+          },
+          {
+            "lat": 29.876229,
+            "lng": -95.559411
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 29.87510, "west": -95.55780, "north": 29.87980, "east": -95.55720 }
+      {
+        "ring": [
+          {
+            "lat": 29.88004,
+            "lng": -95.558449
+          },
+          {
+            "lat": 29.88004,
+            "lng": -95.557625
+          },
+          {
+            "lat": 29.87611,
+            "lng": -95.557763
+          },
+          {
+            "lat": 29.87611,
+            "lng": -95.558587
+          }
+        ]
+      }
     ],
-    "staging": { "south": 29.87560, "west": -95.55720, "north": 29.87960, "east": -95.55620 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 71,
@@ -48,7 +108,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["trailerParkingCapacity", "dropArea"],
+  "uncertainFields": [
+    "trailerParkingCapacity",
+    "dropArea"
+  ],
   "fieldNotes": {
     "truckGate": "The truck dock court is fully enclosed by a black metal perimeter fence; a cantilever/rolling gate spans the truck driveway at the SE entrance (~29.8766,-95.5565). Confirmed in 2025 Street View — controlled truck entrance.",
     "guardShack": "No guard booth anywhere along the fenced perimeter — Street View shows only the automated rolling gate, no staffed structure.",

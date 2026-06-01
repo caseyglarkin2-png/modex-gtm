@@ -1,37 +1,147 @@
 {
   "name": "Hormel Algona Plant - Algona IA",
   "type": "Meat Processing Plant",
-  "coords": { "lat": 43.07930, "lng": -94.22330 },
+  "coords": {
+    "lat": 43.0793,
+    "lng": -94.2233
+  },
   "geofences": {
-    "perimeter": { "south": 43.07740, "west": -94.22560, "north": 43.08130, "east": -94.22150 },
-    "truckGate": { "south": 43.08050, "west": -94.22440, "north": 43.08110, "east": -94.22380 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 43.080303,
+          "lng": -94.225085
+        },
+        {
+          "lat": 43.080704,
+          "lng": -94.222339
+        },
+        {
+          "lat": 43.079099,
+          "lng": -94.221927
+        },
+        {
+          "lat": 43.078498,
+          "lng": -94.222339
+        },
+        {
+          "lat": 43.078297,
+          "lng": -94.224673
+        },
+        {
+          "lat": 43.0793,
+          "lng": -94.225223
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 43.078798,
+          "lng": -94.225085
+        },
+        {
+          "lat": 43.078899,
+          "lng": -94.224399
+        },
+        {
+          "lat": 43.078397,
+          "lng": -94.224261
+        },
+        {
+          "lat": 43.078297,
+          "lng": -94.224948
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 43.07960, "west": -94.22290, "north": 43.08030, "east": -94.22180 }
+      {
+        "ring": [
+          {
+            "lat": 43.080905,
+            "lng": -94.223849
+          },
+          {
+            "lat": 43.081005,
+            "lng": -94.222613
+          },
+          {
+            "lat": 43.080403,
+            "lng": -94.222476
+          },
+          {
+            "lat": 43.080303,
+            "lng": -94.223712
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 43.07880, "west": -94.22250, "north": 43.07970, "east": -94.22160 }
+      {
+        "ring": [
+          {
+            "lat": 43.0794,
+            "lng": -94.224399
+          },
+          {
+            "lat": 43.079601,
+            "lng": -94.222476
+          },
+          {
+            "lat": 43.0793,
+            "lng": -94.222339
+          },
+          {
+            "lat": 43.079099,
+            "lng": -94.224261
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 14, "trailersVisible": 8, "trailerParkingCapacity": 20,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 30.0,
+    "dockDoorCount": 14,
+    "trailersVisible": 8,
+    "trailerParkingCapacity": 20,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 30,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@43.0793,-94.2233,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "dropArea", "scale"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoorCount",
+    "dropArea",
+    "scale"
+  ],
   "fieldNotes": {
     "location": "Roster lat/lng confirmed accurate (geocode moved 1042 m, ROOFTOP). Plant centered ~43.0793,-94.2233 — a single ~150,000 sq ft pepperoni/sausage plant on the SW edge of Algona, IA, accessed by a private road off the public road to the north.",
     "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point at the public-road junction — the entrance is an open driveway with Hormel signage (Street View 2025-08). No continuous perimeter fence around the property. A small structure sits beside the ~250 m private access road (~43.0807,-94.2241) which could be a small check-in/booth, but no controlled barrier is visible. Classified false; flagged uncertain.",

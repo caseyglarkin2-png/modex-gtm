@@ -1,17 +1,63 @@
 {
   "name": "Pactiv Evergreen - Columbus OH",
   "type": "Manufacturing Plant (Food Merchandising)",
-  "coords": { "lat": 39.99585, "lng": -83.12255 },
+  "coords": {
+    "lat": 39.99585,
+    "lng": -83.12255
+  },
   "geofences": {
-    "perimeter": { "south": 39.99455, "west": -83.12360, "north": 39.99735, "east": -83.12155 },
-    "truckGate": { "south": 39.99478, "west": -83.12345, "north": 39.99500, "east": -83.12315 },
-    "dropYards": [
-      { "south": 39.99478, "west": -83.12320, "north": 39.99545, "east": -83.12210 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.996692,
+          "lng": -83.123237
+        },
+        {
+          "lat": 39.996586,
+          "lng": -83.121726
+        },
+        {
+          "lat": 39.995219,
+          "lng": -83.122001
+        },
+        {
+          "lat": 39.995324,
+          "lng": -83.123511
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 39.99500, "west": -83.12320, "north": 39.99545, "east": -83.12210 }
+      {
+        "ring": [
+          {
+            "lat": 39.995587,
+            "lng": -83.123099
+          },
+          {
+            "lat": 39.995482,
+            "lng": -83.122001
+          },
+          {
+            "lat": 39.995271,
+            "lng": -83.122069
+          },
+          {
+            "lat": 39.995377,
+            "lng": -83.123168
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 197,
+        "pano": "1B-_BGQXAWYLxsaLwqILYA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 10,
@@ -48,7 +94,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dropYard", "fastLaneOpportunity"],
+  "uncertainFields": [
+    "dropYard",
+    "fastLaneOpportunity"
+  ],
   "fieldNotes": {
     "truckGate": "Fenced truck yard south of the building; gated driveway off the internal loop road with chain-link fence and a row of bollards/posts across the lane (2023-07 Street View).",
     "guardShack": "No staffed booth visible at the entrance in any Street View heading (2019 & 2023 panos). Gate controlled by fence/bollards only.",

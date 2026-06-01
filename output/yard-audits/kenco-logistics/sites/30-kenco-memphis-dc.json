@@ -1,17 +1,63 @@
 {
   "name": "Kenco Memphis DC - Memphis TN",
   "type": "Distribution Center / Warehouse",
-  "coords": { "lat": 35.07060, "lng": -89.95290 },
+  "coords": {
+    "lat": 35.0706,
+    "lng": -89.9529
+  },
   "geofences": {
-    "perimeter": { "south": 35.06900, "west": -89.95470, "north": 35.07210, "east": -89.95130 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.072061,
+          "lng": -89.954479
+        },
+        {
+          "lat": 35.0706,
+          "lng": -89.952076
+        },
+        {
+          "lat": 35.069251,
+          "lng": -89.953243
+        },
+        {
+          "lat": 35.070712,
+          "lng": -89.955647
+        }
+      ]
+    },
     "truckGate": null,
-    "dropYards": [
-      { "south": 35.06960, "west": -89.95400, "north": 35.07150, "east": -89.95250 }
-    ],
+    "dropYards": [],
     "dockAprons": [
-      { "south": 35.06960, "west": -89.95420, "north": 35.07150, "east": -89.95280 }
+      {
+        "ring": [
+          {
+            "lat": 35.071949,
+            "lng": -89.954685
+          },
+          {
+            "lat": 35.070544,
+            "lng": -89.952282
+          },
+          {
+            "lat": 35.070375,
+            "lng": -89.952419
+          },
+          {
+            "lat": 35.07178,
+            "lng": -89.954823
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 28,
+        "pano": "63hypI5SjicIUPqr4aYLcQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 40,
@@ -19,23 +65,45 @@
     "trailerParkingCapacity": 35,
     "truckGateCount": 0,
     "buildingCount": 2,
-    "siteAreaAcres": 16.0,
+    "siteAreaAcres": 16,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@35.07060,-89.95290,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "low",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "dropArea", "railServed", "buildingCount", "shipRcvSeparate", "entryExitTogether"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoors",
+    "dropArea",
+    "railServed",
+    "buildingCount",
+    "shipRcvSeparate",
+    "entryExitTogether"
+  ],
   "fieldNotes": {
     "IDENTITY_MISMATCH": "CRITICAL: The address 3346 Democrat Drive, Memphis TN 38118 belongs to 'KenCo Distributors Inc' - an unrelated Nashville-based building-materials wholesaler (drywall, insulation, steel framing, flooring; ~7:30am-4:30pm operation). This is NOT 'Kenco Logistics Services' / Kenco Group, the 3PL being audited in this roster. Kenco Group's official warehousing map (kencogroup.com/warehousing-map) lists NO Memphis facility - only Chattanooga TN (already covered as roster idx 16-18). The roster's idx 30 was derived from a Manta/Yellow Pages 'Kenco Logistic Service Memphis' listing that conflated the two companies by name similarity. This roster entry is most likely a name-collision error; Kenco Logistics Services probably has no Memphis DC. The classification below describes the physical building actually at the locked coordinates (the KenCo Distributors warehouse) so the audit is still complete, but it should NOT be treated as a Kenco Logistics Services site. confidence=low.",
     "location": "Roster coords (35.070065,-89.952907, geocode ROOFTOP) land on a long multi-tenant warehouse at 3346 Democrat Drive, Memphis TN. The building is real and is a distribution warehouse, but its occupant is KenCo Distributors (building materials), not the 3PL. Audited the physical building at 35.07060,-89.95290.",

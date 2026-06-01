@@ -1,37 +1,154 @@
 {
   "name": "KDP Distribution Center - Irving TX",
   "type": "Distribution Center - Beverage/DSD",
-  "coords": { "lat": 32.8428, "lng": -96.89475 },
+  "coords": {
+    "lat": 32.8428,
+    "lng": -96.89475
+  },
   "geofences": {
-    "perimeter": { "south": 32.839566, "west": -96.898278, "north": 32.846034, "east": -96.891222 },
-    "truckGate": { "south": 32.842853, "west": -96.897521, "north": 32.843347, "east": -96.896879 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.845454,
+          "lng": -96.896947
+        },
+        {
+          "lat": 32.8458,
+          "lng": -96.893377
+        },
+        {
+          "lat": 32.8428,
+          "lng": -96.892553
+        },
+        {
+          "lat": 32.842108,
+          "lng": -96.895849
+        },
+        {
+          "lat": 32.843723,
+          "lng": -96.897222
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.844185,
+          "lng": -96.897222
+        },
+        {
+          "lat": 32.8443,
+          "lng": -96.896535
+        },
+        {
+          "lat": 32.843723,
+          "lng": -96.896261
+        },
+        {
+          "lat": 32.843608,
+          "lng": -96.896947
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 32.841132, "west": -96.89389, "north": 32.843468, "east": -96.89111 }
+      {
+        "ring": [
+          {
+            "lat": 32.843031,
+            "lng": -96.896123
+          },
+          {
+            "lat": 32.843608,
+            "lng": -96.893102
+          },
+          {
+            "lat": 32.842569,
+            "lng": -96.892827
+          },
+          {
+            "lat": 32.841992,
+            "lng": -96.895849
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 32.84182, "west": -96.896069, "north": 32.84218, "east": -96.893931 }
+      {
+        "ring": [
+          {
+            "lat": 32.845108,
+            "lng": -96.896673
+          },
+          {
+            "lat": 32.845569,
+            "lng": -96.893651
+          },
+          {
+            "lat": 32.844761,
+            "lng": -96.893514
+          },
+          {
+            "lat": 32.8443,
+            "lng": -96.896535
+          }
+        ]
+      }
     ],
-    "staging": { "south": 32.841961, "west": -96.896481, "north": 32.843039, "east": -96.895519 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 119,
+        "pano": "saIeFgw63AH0FCnUpXKRjQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 119,
+        "pano": "saIeFgw63AH0FCnUpXKRjQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 70, "trailersVisible": 180, "trailerParkingCapacity": 240,
-    "truckGateCount": 2, "buildingCount": 6, "siteAreaAcres": 117.4,
+    "dockDoorCount": 70,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 240,
+    "truckGateCount": 2,
+    "buildingCount": 6,
+    "siteAreaAcres": 117.4,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.8428,-96.89475,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "guardShack", "entryExitSeparate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "guardShack",
+    "entryExitSeparate"
+  ],
   "fieldNotes": {
     "location": "Roster geocode (GEOMETRIC_CENTER, moved 6209m) landed directly on the correct facility. Confirmed by a 'Keurig Dr Pepper' monument sign reading '2304' at the main entrance off Century Center Blvd. This is the Dr Pepper / Dallas-Fort Worth Bottling Company campus (The American Bottling Company, a KDP subsidiary).",
     "facility": "Very large beverage manufacturing + distribution campus. One massive main warehouse/bottling building (with rooftop processing tanks/silos visible) plus several separate office, dock and shop buildings — campus → multipleFacilities true.",

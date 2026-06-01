@@ -1,19 +1,87 @@
 {
   "name": "UNFI - Rocklin CA DC (Western Region)",
   "type": "Distribution Center",
-  "coords": { "lat": 38.81370, "lng": -121.28320 },
+  "coords": {
+    "lat": 38.8137,
+    "lng": -121.2832
+  },
   "geofences": {
-    "perimeter": { "south": 38.81130, "west": -121.28560, "north": 38.81610, "east": -121.28100 },
-    "truckGate": { "south": 38.81460, "west": -121.28480, "north": 38.81560, "east": -121.28380 },
-    "dropYards": [
-      { "south": 38.81470, "west": -121.28430, "north": 38.81560, "east": -121.28230 },
-      { "south": 38.81200, "west": -121.28220, "north": 38.81520, "east": -121.28150 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.814984,
+          "lng": -121.284848
+        },
+        {
+          "lat": 38.814984,
+          "lng": -121.281552
+        },
+        {
+          "lat": 38.811988,
+          "lng": -121.281552
+        },
+        {
+          "lat": 38.811988,
+          "lng": -121.284848
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 38.812844,
+          "lng": -121.284848
+        },
+        {
+          "lat": 38.812844,
+          "lng": -121.284161
+        },
+        {
+          "lat": 38.811988,
+          "lng": -121.284161
+        },
+        {
+          "lat": 38.811988,
+          "lng": -121.284848
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 38.81300, "west": -121.28440, "north": 38.81540, "east": -121.28360 },
-      { "south": 38.81470, "west": -121.28380, "north": 38.81560, "east": -121.28220 }
+      {
+        "ring": [
+          {
+            "lat": 38.81477,
+            "lng": -121.284711
+          },
+          {
+            "lat": 38.81477,
+            "lng": -121.283887
+          },
+          {
+            "lat": 38.812416,
+            "lng": -121.283887
+          },
+          {
+            "lat": 38.812416,
+            "lng": -121.284161
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 25,
+        "pano": "CAoSF0NJSE0wb2dLRUlDQWdJQ2s0b2V2dGdF",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 25,
+        "pano": "CAoSF0NJSE0wb2dLRUlDQWdJQ2s0b2V2dGdF",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 70,
@@ -21,7 +89,7 @@
     "trailerParkingCapacity": 100,
     "truckGateCount": 2,
     "buildingCount": 2,
-    "siteAreaAcres": 38.0,
+    "siteAreaAcres": 38,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@38.81370,-121.28320,400m/data=!3m1!1e3",
@@ -50,7 +118,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "shipRcvSeparate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "No controlled truck entrance. The truck court wraps the W, N and E faces and connects to the surrounding street network by open paved driveways. z19 satellite of every entry point and 2020-era Street-View on Sunset Blvd and the SE service road show no barrier arm, no sliding gate, no guard booth and no perimeter fence. Open-access urban infill DC.",
     "guardShack": "No staffed booth anywhere on the truck circulation.",

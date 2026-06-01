@@ -1,16 +1,94 @@
 {
   "name": "Frito-Lay - Canton OH",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 40.78310, "lng": -81.42220 },
+  "coords": {
+    "lat": 40.7831,
+    "lng": -81.4222
+  },
   "geofences": {
-    "perimeter": { "south": 40.78175, "west": -81.42520, "north": 40.78480, "east": -81.42050 },
-    "truckGate": { "south": 40.78305, "west": -81.42180, "north": 40.78350, "east": -81.42110 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.785492,
+          "lng": -81.424947
+        },
+        {
+          "lat": 40.785492,
+          "lng": -81.421101
+        },
+        {
+          "lat": 40.783516,
+          "lng": -81.421101
+        },
+        {
+          "lat": 40.783516,
+          "lng": -81.424947
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.78362,
+          "lng": -81.422887
+        },
+        {
+          "lat": 40.78362,
+          "lng": -81.422406
+        },
+        {
+          "lat": 40.783412,
+          "lng": -81.422406
+        },
+        {
+          "lat": 40.783412,
+          "lng": -81.422887
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.78250, "west": -81.42470, "north": 40.78400, "east": -81.42330 }
+      {
+        "ring": [
+          {
+            "lat": 40.78518,
+            "lng": -81.42426
+          },
+          {
+            "lat": 40.78518,
+            "lng": -81.421376
+          },
+          {
+            "lat": 40.784244,
+            "lng": -81.421376
+          },
+          {
+            "lat": 40.784244,
+            "lng": -81.42426
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.78290, "west": -81.42330, "north": 40.78380, "east": -81.42260 },
-      { "south": 40.78215, "west": -81.42290, "north": 40.78280, "east": -81.42190 }
+      {
+        "ring": [
+          {
+            "lat": 40.7831,
+            "lng": -81.422749
+          },
+          {
+            "lat": 40.7831,
+            "lng": -81.421788
+          },
+          {
+            "lat": 40.782476,
+            "lng": -81.421788
+          },
+          {
+            "lat": 40.782476,
+            "lng": -81.422749
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -20,23 +98,44 @@
     "trailerParkingCapacity": 70,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 33.0,
+    "siteAreaAcres": 33,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.78310,-81.42220,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "railServed", "scale"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "railServed",
+    "scale"
+  ],
   "fieldNotes": {
     "location": "ROSTER ADDRESS WRONG. Roster gave '5555 Sterilite St SE, Canton OH 44730' which geocoded 17.1 km off into a generic warehouse/distribution area in eastern Canton. Web research identifies the real plant as '4030 16th St SW, Canton OH 44710' (Frito-Lay North America / Rold Gold Foods Division — pretzels; production began 1967, ~150 employees). Positively confirmed in 2019 Street View: the Frito-Lay red sun logo on the building and an orange/yellow Frito-Lay 'Canton Plant' monument sign. Locked center at 40.78310, -81.42220.",
     "truckGate": "No controlled barrier gate or checkpoint resolved at the plant entrance — the office/parking and building front are open directly to the access road in Street View. Classified false; flagged as the drop-yard perimeter has some fencing but no clear truck-gate barrier was visible.",

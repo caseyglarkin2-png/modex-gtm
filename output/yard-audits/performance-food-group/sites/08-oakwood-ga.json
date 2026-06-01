@@ -1,17 +1,66 @@
 {
   "name": "Performance Foodservice - Atlanta (Oakwood GA)",
   "type": "Broadline Foodservice Distribution Center",
-  "coords": { "lat": 34.238400, "lng": -83.873000 },
+  "coords": {
+    "lat": 34.2384,
+    "lng": -83.873
+  },
   "geofences": {
-    "perimeter": { "south": 34.23600, "west": -83.87550, "north": 34.24100, "east": -83.87050 },
-    "truckGate": null,
-    "dropYards": [
-      { "south": 34.23950, "west": -83.87260, "north": 34.24080, "east": -83.87000 }
-    ],
-    "dockAprons": [
-      { "south": 34.23770, "west": -83.87420, "north": 34.23890, "east": -83.87250 }
-    ],
-    "staging": null
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.239422,
+          "lng": -83.875197
+        },
+        {
+          "lat": 34.239422,
+          "lng": -83.871352
+        },
+        {
+          "lat": 34.237038,
+          "lng": -83.871352
+        },
+        {
+          "lat": 34.237038,
+          "lng": -83.875197
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.237832,
+          "lng": -83.875472
+        },
+        {
+          "lat": 34.237832,
+          "lng": -83.874511
+        },
+        {
+          "lat": 34.237151,
+          "lng": -83.874511
+        },
+        {
+          "lat": 34.237151,
+          "lng": -83.875472
+        }
+      ]
+    },
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 76,
+        "pano": "j2_aTsGyAJhBPQeEPQ0epg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 76,
+        "pano": "j2_aTsGyAJhBPQeEPQ0epg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 60,
@@ -19,23 +68,41 @@
     "trailerParkingCapacity": 90,
     "truckGateCount": 2,
     "buildingCount": 4,
-    "siteAreaAcres": 38.0,
+    "siteAreaAcres": 38,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.2384,-83.873,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "truckGateCount", "shipRcvSeparate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "truckGateCount",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "No controlled truck gate identified. PFG Milton's is a multi-building campus set back behind a treeline buffer from the public road (Mundy Mill Rd / Old Oakwood Rd). Internal access roads connect the buildings; Street View (Apr 2022) shows Google's car drove onto the interior truck-yard pavement and dock face, indicating an open/uncontrolled entrance. A chain-link fence separates an employee parking lot from the truck yard but there is no barrier arm or checkpoint at the property entrance.",
     "guardShack": "No guard booth visible at any entrance to the campus.",

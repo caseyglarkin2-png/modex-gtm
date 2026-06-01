@@ -1,38 +1,121 @@
 {
   "name": "Coca-Cola UNITED - Birmingham Production Plant, AL",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 33.561277, "lng": -86.768222 },
+  "coords": {
+    "lat": 33.561277,
+    "lng": -86.768222
+  },
   "geofences": {
-    "perimeter": { "south": 33.5600, "west": -86.7705, "north": 33.5635, "east": -86.7655 },
-    "truckGate": { "south": 33.5601, "west": -86.7698, "north": 33.5607, "east": -86.7690 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.562879,
+          "lng": -86.769801
+        },
+        {
+          "lat": 33.562765,
+          "lng": -86.767398
+        },
+        {
+          "lat": 33.56059,
+          "lng": -86.767535
+        },
+        {
+          "lat": 33.560705,
+          "lng": -86.769939
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 33.5618, "west": -86.7702, "north": 33.5628, "east": -86.7682 },
-      { "south": 33.5620, "west": -86.7672, "north": 33.5630, "east": -86.7656 }
+      {
+        "ring": [
+          {
+            "lat": 33.562765,
+            "lng": -86.769595
+          },
+          {
+            "lat": 33.562707,
+            "lng": -86.767879
+          },
+          {
+            "lat": 33.562192,
+            "lng": -86.767947
+          },
+          {
+            "lat": 33.56225,
+            "lng": -86.769664
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.5605, "west": -86.7702, "north": 33.5618, "east": -86.7688 }
+      {
+        "ring": [
+          {
+            "lat": 33.561735,
+            "lng": -86.769733
+          },
+          {
+            "lat": 33.56162,
+            "lng": -86.76781
+          },
+          {
+            "lat": 33.561277,
+            "lng": -86.767879
+          },
+          {
+            "lat": 33.561391,
+            "lng": -86.769801
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 50, "trailersVisible": 90, "trailerParkingCapacity": 140,
-    "truckGateCount": 2, "buildingCount": 3, "siteAreaAcres": 44.7,
+    "dockDoorCount": 50,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 140,
+    "truckGateCount": 2,
+    "buildingCount": 3,
+    "siteAreaAcres": 44.7,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.561277,-86.768222,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "truckGate", "truckGateCount", "dockDoorCount", "entryExitSeparate"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "truckGate",
+    "truckGateCount",
+    "dockDoorCount",
+    "entryExitSeparate"
+  ],
   "fieldNotes": {
     "location": "Roster geocode flagged 'moved 5725 m' but the supplied lat/lng (33.561277,-86.768222) is correct - it lands on the Coca-Cola UNITED Birmingham campus. Confirmed in Street View: a large red 'Coca-Cola' script logo is mounted on the building facing East Lake Blvd. This is the Coca-Cola Bottling Company UNITED corporate HQ + Birmingham Production Plant, 4600 E Lake Blvd, Birmingham AL 35217 - ~350,000 sq ft on ~39 acres, in operation since 1979, 750+ employees.",
     "campus": "Multi-building HQ + production campus: a large sawtooth-roof production warehouse, a separate north warehouse, and an attached office complex. multipleFacilities=true.",

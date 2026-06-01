@@ -1,37 +1,136 @@
 {
   "name": "GP Halsey Mill - Halsey OR",
   "type": "Tissue/Pulp Mill",
-  "coords": { "lat": 44.3792, "lng": -123.1605 },
+  "coords": {
+    "lat": 44.3792,
+    "lng": -123.1605
+  },
   "geofences": {
-    "perimeter": { "south": 44.3735, "west": -123.1675, "north": 44.3925, "east": -123.1525 },
-    "truckGate": { "south": 44.3800, "west": -123.1648, "north": 44.3812, "east": -123.1632 },
-    "dropYards": [
-      { "south": 44.3760, "west": -123.1635, "north": 44.3792, "east": -123.1588 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 44.392547,
+          "lng": -123.164895
+        },
+        {
+          "lat": 44.39137,
+          "lng": -123.153359
+        },
+        {
+          "lat": 44.377237,
+          "lng": -123.151711
+        },
+        {
+          "lat": 44.377237,
+          "lng": -123.165993
+        },
+        {
+          "lat": 44.390977,
+          "lng": -123.165993
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 44.38077,
+          "lng": -123.165444
+        },
+        {
+          "lat": 44.38077,
+          "lng": -123.162697
+        },
+        {
+          "lat": 44.378807,
+          "lng": -123.162697
+        },
+        {
+          "lat": 44.378807,
+          "lng": -123.165444
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 44.3782, "west": -123.1602, "north": 44.3792, "east": -123.1582 }
+      {
+        "ring": [
+          {
+            "lat": 44.381163,
+            "lng": -123.163247
+          },
+          {
+            "lat": 44.38077,
+            "lng": -123.153908
+          },
+          {
+            "lat": 44.378807,
+            "lng": -123.153908
+          },
+          {
+            "lat": 44.3792,
+            "lng": -123.163247
+          }
+        ]
+      }
     ],
-    "staging": { "south": 44.3792, "west": -123.1648, "north": 44.3805, "east": -123.1632 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 57,
+        "pano": "P7C6poFM01yhdVSiWB1Gsw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 57,
+        "pano": "P7C6poFM01yhdVSiWB1Gsw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 20, "trailersVisible": 55, "trailerParkingCapacity": 90,
-    "truckGateCount": 1, "buildingCount": 10, "siteAreaAcres": 180.0,
+    "dockDoorCount": 20,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 10,
+    "siteAreaAcres": 180,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@44.3792,-123.1605,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": true, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "scale", "multiStep", "entryLanes", "exitLanes", "dockDoorCount"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "scale",
+    "multiStep",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "location": "Roster coords (44.316671,-123.107215 / 31831 Cartney Dr) landed in farmland ~8 km SE of the mill. The GP Halsey / Cascade Pacific Pulp mill is at 30470-30480 American Drive, NW of Halsey town. Located via EPA FRS bounding box; mill core locked at 44.3792,-123.1605.",
     "truckGate": "Single dedicated access road off American Drive is the only land route into the operational yard. Integrated pulp+tissue mill (~250-550 employees) is a controlled-access site. The security checkpoint is internal on the access road; Street View covers only public roads and did not reach it.",

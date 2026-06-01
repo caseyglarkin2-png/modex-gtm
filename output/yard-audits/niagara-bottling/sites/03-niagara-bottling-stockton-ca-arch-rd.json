@@ -1,17 +1,66 @@
 {
   "name": "Niagara Bottling - Stockton CA (Arch Rd)",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 37.90620, "lng": -121.19720 },
+  "coords": {
+    "lat": 37.9062,
+    "lng": -121.1972
+  },
   "geofences": {
-    "perimeter": { "south": 37.90500, "west": -121.19950, "north": 37.90800, "east": -121.19380 },
-    "truckGate": { "south": 37.90600, "west": -121.19490, "north": 37.90650, "east": -121.19430 },
-    "dropYards": [
-      { "south": 37.90680, "west": -121.19900, "north": 37.90785, "east": -121.19480 }
-    ],
-    "dockAprons": [
-      { "south": 37.90665, "west": -121.19900, "north": 37.90700, "east": -121.19480 }
-    ],
-    "staging": { "south": 37.90655, "west": -121.19550, "north": 37.90785, "east": -121.19430 }
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.906742,
+          "lng": -121.199397
+        },
+        {
+          "lat": 37.906742,
+          "lng": -121.194591
+        },
+        {
+          "lat": 37.905225,
+          "lng": -121.194591
+        },
+        {
+          "lat": 37.905225,
+          "lng": -121.199397
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 37.905442,
+          "lng": -121.195003
+        },
+        {
+          "lat": 37.905442,
+          "lng": -121.194316
+        },
+        {
+          "lat": 37.905008,
+          "lng": -121.194316
+        },
+        {
+          "lat": 37.905008,
+          "lng": -121.195003
+        }
+      ]
+    },
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 78,
+        "pano": "NgUByrgYA3ykJ6bRBUjwUQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 78,
+        "pano": "NgUByrgYA3ykJ6bRBUjwUQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 45,
@@ -19,7 +68,7 @@
     "trailerParkingCapacity": 70,
     "truckGateCount": 2,
     "buildingCount": 1,
-    "siteAreaAcres": 41.0,
+    "siteAreaAcres": 41,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@37.90620,-121.19720,400m/data=!3m1!1e3",
@@ -48,7 +97,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "urbanRural"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "urbanRural"
+  ],
   "fieldNotes": {
     "buildingId": "Confirmed Niagara via the 'niagara' wordmark on the east building face and a Niagara monument sign at the east entrance (Street View, captured 2026-03). ~600,000 sq ft single-story concrete tilt-up plant, operational 2023, 5959 Arch Rd.",
     "truckGate": "Fully fenced site (black metal perimeter fence). The SE truck/yard entrance has a wide rolling chain-link gate across the driveway - clearly visible in 2026-03 Street View. A second gated driveway exists at the NE corner.",

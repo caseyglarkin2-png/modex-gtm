@@ -1,39 +1,125 @@
 {
   "name": "GXO Logistics Distribution Center - Fort Worth TX (Everman)",
   "type": "Distribution Center",
-  "coords": { "lat": 32.62890, "lng": -97.30680 },
+  "coords": {
+    "lat": 32.6289,
+    "lng": -97.3068
+  },
   "geofences": {
-    "perimeter": { "south": 32.62755, "west": -97.30930, "north": 32.63025, "east": -97.30480 },
-    "truckGate": { "south": 32.62725, "west": -97.30790, "north": 32.62760, "east": -97.30720 },
-    "dropYards": [
-      { "south": 32.62995, "west": -97.30850, "north": 32.63025, "east": -97.30560 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.630057,
+          "lng": -97.308997
+        },
+        {
+          "lat": 32.629999,
+          "lng": -97.305152
+        },
+        {
+          "lat": 32.627628,
+          "lng": -97.305152
+        },
+        {
+          "lat": 32.627686,
+          "lng": -97.308997
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 32.62760, "west": -97.30880, "north": 32.62805, "east": -97.30540 },
-      { "south": 32.62955, "west": -97.30870, "north": 32.63000, "east": -97.30540 },
-      { "south": 32.62810, "west": -97.30920, "north": 32.62960, "east": -97.30890 }
+      {
+        "ring": [
+          {
+            "lat": 32.629941,
+            "lng": -97.30886
+          },
+          {
+            "lat": 32.629883,
+            "lng": -97.305289
+          },
+          {
+            "lat": 32.629652,
+            "lng": -97.305289
+          },
+          {
+            "lat": 32.62971,
+            "lng": -97.30886
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 32.627975,
+            "lng": -97.30886
+          },
+          {
+            "lat": 32.627917,
+            "lng": -97.305289
+          },
+          {
+            "lat": 32.627686,
+            "lng": -97.305289
+          },
+          {
+            "lat": 32.627743,
+            "lng": -97.30886
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 349,
+        "pano": "454GpdiPYWw_82j_TQlX5g",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 110, "trailersVisible": 22, "trailerParkingCapacity": 60,
-    "truckGateCount": 2, "buildingCount": 1, "siteAreaAcres": 31.2,
+    "dockDoorCount": 110,
+    "trailersVisible": 22,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 31.2,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.62890,-97.30680,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "site": "GXO leases the 644,318 SF 'Building Two' of the Everman Crossroads campus (developer MDH Partners) on a ~31.5-acre site at 1401 Everman Pkwy. Pin lands on this southern bulk distribution building; address and lease confirmed via GlobeSt / REBusinessOnline / Realgraph. 40-ft clear height, 241 car spaces.",
     "truckGate": "No barrier arm, sliding/swing gate, or guard booth at any driveway. Driveways from Everman Pkwy and the campus interior drive are wide and fully open. Modern speculative Class-A bulk building with no perimeter security gate.",

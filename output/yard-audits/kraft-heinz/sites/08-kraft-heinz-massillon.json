@@ -1,18 +1,100 @@
 {
   "name": "Kraft Heinz - Massillon",
   "type": "Manufacturer",
-  "coords": { "lat": 40.7790, "lng": -81.5395 },
+  "coords": {
+    "lat": 40.779,
+    "lng": -81.5395
+  },
   "geofences": {
-    "perimeter": { "south": 40.7765, "west": -81.5430, "north": 40.7805, "east": -81.5375 },
-    "truckGate": { "south": 40.7799, "west": -81.5397, "north": 40.7803, "east": -81.5388 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.780456,
+          "lng": -81.54362
+        },
+        {
+          "lat": 40.780872,
+          "lng": -81.534693
+        },
+        {
+          "lat": 40.776712,
+          "lng": -81.534281
+        },
+        {
+          "lat": 40.776088,
+          "lng": -81.542247
+        },
+        {
+          "lat": 40.779,
+          "lng": -81.543895
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.780664,
+          "lng": -81.542247
+        },
+        {
+          "lat": 40.780768,
+          "lng": -81.541285
+        },
+        {
+          "lat": 40.78004,
+          "lng": -81.541148
+        },
+        {
+          "lat": 40.779936,
+          "lng": -81.542109
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.7780, "west": -81.5408, "north": 40.7785, "east": -81.5395 }
+      {
+        "ring": [
+          {
+            "lat": 40.779624,
+            "lng": -81.544581
+          },
+          {
+            "lat": 40.779,
+            "lng": -81.542933
+          },
+          {
+            "lat": 40.778168,
+            "lng": -81.54362
+          },
+          {
+            "lat": 40.778792,
+            "lng": -81.545268
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.7779, "west": -81.5415, "north": 40.7784, "east": -81.5398 },
-      { "south": 40.7775, "west": -81.5398, "north": 40.7780, "east": -81.5380 }
+      {
+        "ring": [
+          {
+            "lat": 40.779832,
+            "lng": -81.541423
+          },
+          {
+            "lat": 40.779936,
+            "lng": -81.538813
+          },
+          {
+            "lat": 40.779104,
+            "lng": -81.538676
+          },
+          {
+            "lat": 40.779,
+            "lng": -81.541285
+          }
+        ]
+      }
     ],
-    "staging": { "south": 40.7785, "west": -81.5395, "north": 40.7798, "east": -81.5380 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 28,
@@ -20,7 +102,7 @@
     "trailerParkingCapacity": 25,
     "truckGateCount": 2,
     "buildingCount": 6,
-    "siteAreaAcres": 51.0,
+    "siteAreaAcres": 51,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.779,-81.5395,400m/data=!3m1!1e3",
@@ -49,7 +131,13 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "Two access points off Oberlin Ave SW funnel into the property: a wide open driveway at ~40.7805,-81.5395 leading south through the campus, and a fenced/gated south-side entry at ~40.7800,-81.5388 with chain-link sliding gate visible in Street View (May 2024). Both serve truck traffic; the south-side fenced entry is clearly the controlled commercial gate.",
     "guardShack": "No clear staffed guard booth resolved in either satellite or Street View. The fenced south entry has bollards and signage but no obvious staffed shack at the lane. Marked uncertain — could be an unmanned kiosk/remote check-in.",

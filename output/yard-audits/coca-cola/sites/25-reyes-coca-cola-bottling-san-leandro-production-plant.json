@@ -1,15 +1,75 @@
 {
   "name": "Reyes Coca-Cola Bottling - San Leandro Production Plant, CA",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 37.69910, "lng": -122.16835 },
+  "coords": {
+    "lat": 37.6991,
+    "lng": -122.16835
+  },
   "geofences": {
-    "perimeter": { "south": 37.69730, "west": -122.16990, "north": 37.70060, "east": -122.16640 },
-    "truckGate": { "south": 37.69760, "west": -122.16800, "north": 37.69800, "east": -122.16745 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.699861,
+          "lng": -122.170547
+        },
+        {
+          "lat": 37.699861,
+          "lng": -122.166977
+        },
+        {
+          "lat": 37.698448,
+          "lng": -122.166977
+        },
+        {
+          "lat": 37.698448,
+          "lng": -122.170547
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 37.69760, "west": -122.16985, "north": 37.69820, "east": -122.16700 }
+      {
+        "ring": [
+          {
+            "lat": 37.698828,
+            "lng": -122.17041
+          },
+          {
+            "lat": 37.698774,
+            "lng": -122.168007
+          },
+          {
+            "lat": 37.698448,
+            "lng": -122.168007
+          },
+          {
+            "lat": 37.698502,
+            "lng": -122.17041
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 37.69770, "west": -122.16985, "north": 37.69830, "east": -122.16700 }
+      {
+        "ring": [
+          {
+            "lat": 37.6991,
+            "lng": -122.17041
+          },
+          {
+            "lat": 37.699046,
+            "lng": -122.167114
+          },
+          {
+            "lat": 37.698828,
+            "lng": -122.167114
+          },
+          {
+            "lat": 37.698883,
+            "lng": -122.17041
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -19,23 +79,42 @@
     "trailerParkingCapacity": 25,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 9.0,
+    "siteAreaAcres": 9,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@37.69910,-122.16835,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": true, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": true,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes", "guardShack", "remoteGs"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes",
+    "guardShack",
+    "remoteGs"
+  ],
   "fieldNotes": {
     "location": "Roster coords (37.7129,-122.1609 / 1101 Marina Blvd) landed in a retail district and were wrong. Multiple business directories and a Birdeye 'Reyes Coca-Cola Truck Entrance' listing confirm the facility at 14655 Wicks Blvd, San Leandro 94577, coordinates 37.7003,-122.1658. The plant is the large gray-roofed multi-tenant warehouse centered ~37.6991,-122.1684.",
     "building": "Large industrial warehouse shared by Reyes Coca-Cola Bottling and at least one co-tenant (Accu-Logistics LLC signage visible on the east end). Reyes runs a distribution/production operation in the western/larger portion; red Coca-Cola trailers backed into the south-face docks confirm identity.",

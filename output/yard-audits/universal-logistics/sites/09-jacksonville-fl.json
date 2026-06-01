@@ -1,19 +1,91 @@
 {
   "name": "Universal Intermodal Services - Jacksonville Terminal - Jacksonville FL",
   "type": "Intermodal / Drayage Terminal (owned)",
-  "coords": { "lat": 30.34550, "lng": -81.69650 },
+  "coords": {
+    "lat": 30.3455,
+    "lng": -81.6965
+  },
   "geofences": {
-    "perimeter": { "south": 30.34300, "west": -81.69900, "north": 30.34780, "east": -81.69520 },
-    "truckGate": { "south": 30.34700, "west": -81.69720, "north": 30.34740, "east": -81.69640 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 30.347633,
+          "lng": -81.700071
+        },
+        {
+          "lat": 30.347633,
+          "lng": -81.694303
+        },
+        {
+          "lat": 30.344078,
+          "lng": -81.694852
+        },
+        {
+          "lat": 30.344078,
+          "lng": -81.697873
+        },
+        {
+          "lat": 30.345263,
+          "lng": -81.700071
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 30.34787,
+          "lng": -81.695813
+        },
+        {
+          "lat": 30.34787,
+          "lng": -81.694852
+        },
+        {
+          "lat": 30.347278,
+          "lng": -81.694852
+        },
+        {
+          "lat": 30.347278,
+          "lng": -81.695813
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 30.34300, "west": -81.69770, "north": 30.34430, "east": -81.69600 },
-      { "south": 30.34480, "west": -81.69900, "north": 30.34620, "east": -81.69700 },
-      { "south": 30.34560, "west": -81.69700, "north": 30.34700, "east": -81.69560 }
+      {
+        "ring": [
+          {
+            "lat": 30.347396,
+            "lng": -81.699659
+          },
+          {
+            "lat": 30.347396,
+            "lng": -81.696225
+          },
+          {
+            "lat": 30.345619,
+            "lng": -81.696363
+          },
+          {
+            "lat": 30.345619,
+            "lng": -81.699659
+          }
+        ]
+      }
     ],
-    "dockAprons": [
-      { "south": 30.34620, "west": -81.69740, "north": 30.34680, "east": -81.69560 }
-    ],
-    "staging": null
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 223,
+        "pano": "UjFBNOdmPmN9n_fNZvisHw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 223,
+        "pano": "UjFBNOdmPmN9n_fNZvisHw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 28,
@@ -21,7 +93,7 @@
     "trailerParkingCapacity": 420,
     "truckGateCount": 2,
     "buildingCount": 5,
-    "siteAreaAcres": 48.0,
+    "siteAreaAcres": 48,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@30.3455,-81.6965,400m/data=!3m1!1e3",
@@ -50,7 +122,13 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "remoteGs", "guardShack", "dockDoors", "multipleFacilities"],
+  "uncertainFields": [
+    "truckGate",
+    "remoteGs",
+    "guardShack",
+    "dockDoors",
+    "multipleFacilities"
+  ],
   "fieldNotes": {
     "siteResolution": "Universal Intermodal Services occupies the trailer/container drayage yard portion of a large multi-tenant industrial complex at 2050 Kings Rd, Jacksonville FL, immediately east of the CSX Moncrief rail yard. The complex is shared with an Amazon delivery/sortation tenant (the long dock-door building on the south carries an Amazon banner). 'Bldg 3' in the roster address reflects the multi-building campus.",
     "truckGate": "Site is perimeter chain-link fenced with swing gates at multiple internal points; access driveways run south off the residential streets (off Kings Rd). No barrier arm seen in Street View, but the fenced yard openings act as controlled truck-gate pinch points — classed as truckGate true / remoteGs true (no staffed booth).",

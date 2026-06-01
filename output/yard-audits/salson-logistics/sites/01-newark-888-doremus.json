@@ -1,16 +1,114 @@
 {
   "name": "SalSon Logistics - Newark NJ (Flagship Campus)",
   "type": "Warehouse / Container Yard",
-  "coords": { "lat": 40.701641, "lng": -74.131704 },
+  "coords": {
+    "lat": 40.701641,
+    "lng": -74.131704
+  },
   "geofences": {
-    "perimeter": { "south": 40.69905, "west": -74.13560, "north": 40.70470, "east": -74.12830 },
-    "truckGate": { "south": 40.70075, "west": -74.13310, "north": 40.70130, "east": -74.13230 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.703151,
+          "lng": -74.136442
+        },
+        {
+          "lat": 40.704712,
+          "lng": -74.130537
+        },
+        {
+          "lat": 40.701901,
+          "lng": -74.129438
+        },
+        {
+          "lat": 40.70034,
+          "lng": -74.135343
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.703151,
+          "lng": -74.136442
+        },
+        {
+          "lat": 40.703307,
+          "lng": -74.135755
+        },
+        {
+          "lat": 40.702682,
+          "lng": -74.135481
+        },
+        {
+          "lat": 40.702526,
+          "lng": -74.136167
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.69960, "west": -74.13280, "north": 40.70100, "east": -74.13070 },
-      { "south": 40.70150, "west": -74.13170, "north": 40.70460, "east": -74.12850 }
+      {
+        "ring": [
+          {
+            "lat": 40.704712,
+            "lng": -74.130399
+          },
+          {
+            "lat": 40.703983,
+            "lng": -74.127859
+          },
+          {
+            "lat": 40.701901,
+            "lng": -74.129438
+          },
+          {
+            "lat": 40.702838,
+            "lng": -74.130262
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.702318,
+            "lng": -74.136717
+          },
+          {
+            "lat": 40.702682,
+            "lng": -74.135343
+          },
+          {
+            "lat": 40.700756,
+            "lng": -74.134451
+          },
+          {
+            "lat": 40.700392,
+            "lng": -74.135824
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.70080, "west": -74.13230, "north": 40.70150, "east": -74.12950 }
+      {
+        "ring": [
+          {
+            "lat": 40.702682,
+            "lng": -74.136305
+          },
+          {
+            "lat": 40.704192,
+            "lng": -74.130674
+          },
+          {
+            "lat": 40.703723,
+            "lng": -74.130468
+          },
+          {
+            "lat": 40.702214,
+            "lng": -74.136099
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -20,7 +118,7 @@
     "trailerParkingCapacity": 600,
     "truckGateCount": 1,
     "buildingCount": 4,
-    "siteAreaAcres": 53.0,
+    "siteAreaAcres": 53,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@40.701641,-74.131704,400m/data=!3m1!1e3",
@@ -49,7 +147,10 @@
     "multiStep": true
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "exitLanes"],
+  "uncertainFields": [
+    "scale",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Main truck entrance off Doremus Ave at SW corner (~40.7010,-74.1326). Z20 satellite shows yellow-painted entry apron with painted STOP lines and a yellow OCR/portal gantry spanning the truck lanes; Street View confirms a steel portal gantry over the gated entry with chainlink fencing on both sides.",
     "guardShack": "Small structure(s) beside the yellow gantry visible in z20 satellite and Street View at the gate apron — consistent with a gate/check-in booth for a 24/7 port drayage operation tracking ~2,000 containers/week.",

@@ -1,39 +1,118 @@
 {
   "name": "CJ Logistics - New Century KS (Cold Storage)",
   "type": "Cold Storage Distribution Center",
-  "coords": { "lat": 38.842000, "lng": -94.901500 },
+  "coords": {
+    "lat": 38.842,
+    "lng": -94.9015
+  },
   "geofences": {
-    "perimeter": { "south": 38.840500, "west": -94.903500, "north": 38.843800, "east": -94.900000 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.844567,
+          "lng": -94.903079
+        },
+        {
+          "lat": 38.844567,
+          "lng": -94.900401
+        },
+        {
+          "lat": 38.843925,
+          "lng": -94.900401
+        },
+        {
+          "lat": 38.843925,
+          "lng": -94.903079
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
-    "dockAprons": [],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 38.843925,
+            "lng": -94.903011
+          },
+          {
+            "lat": 38.843925,
+            "lng": -94.900676
+          },
+          {
+            "lat": 38.843604,
+            "lng": -94.900642
+          },
+          {
+            "lat": 38.843604,
+            "lng": -94.902976
+          }
+        ]
+      }
+    ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 0, "trailersVisible": 0, "trailerParkingCapacity": 0,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 28.0,
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 28,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@38.842000,-94.901500,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "NONE", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "connectivityIssue",
-    "multipleFacilities", "scale", "dropYard", "multiStep",
-    "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "siteAreaAcres"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "connectivityIssue",
+    "multipleFacilities",
+    "scale",
+    "dropYard",
+    "multiStep",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "siteAreaAcres"
   ],
   "fieldNotes": {
     "locationNote": "The CJ Logistics New Century cold storage is a brand-new facility (291,000 sq ft, opened Q3 2025) at 27302 W 159th St, New Century KS, immediately west of / adjacent to the Upfield (Flora) production plant at 27080 159th St. The available 2026 Maxar satellite imagery PREDATES construction - the parcel west of the Upfield plant still shows vacant farmland, so the building, docks, gate, and yard cannot be observed. Coordinates and perimeter are a best-effort estimate of the parcel location based on web research and the Upfield plant adjacency.",

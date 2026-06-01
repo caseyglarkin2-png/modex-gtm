@@ -1,19 +1,56 @@
 {
   "name": "GXO Logistics Distribution Center - Bethlehem PA",
   "type": "Distribution Center",
-  "coords": { "lat": 40.61090, "lng": -75.31565 },
+  "coords": {
+    "lat": 40.6109,
+    "lng": -75.31565
+  },
   "geofences": {
-    "perimeter": { "south": 40.60870, "west": -75.31760, "north": 40.61300, "east": -75.31320 },
-    "truckGate": { "south": 40.60887, "west": -75.31708, "north": 40.60923, "east": -75.31662 },
-    "dropYards": [
-      { "south": 40.60955, "west": -75.31680, "north": 40.61280, "east": -75.31575 },
-      { "south": 40.60975, "west": -75.31430, "north": 40.61215, "east": -75.31330 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.6158,
+          "lng": -75.322242
+        },
+        {
+          "lat": 40.613298,
+          "lng": -75.312354
+        },
+        {
+          "lat": 40.607981,
+          "lng": -75.314002
+        },
+        {
+          "lat": 40.609232,
+          "lng": -75.322242
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 40.60955, "west": -75.31650, "north": 40.61270, "east": -75.31585 },
-      { "south": 40.60980, "west": -75.31415, "north": 40.61210, "east": -75.31360 }
+      {
+        "ring": [
+          {
+            "lat": 40.613298,
+            "lng": -75.318809
+          },
+          {
+            "lat": 40.612881,
+            "lng": -75.316611
+          },
+          {
+            "lat": 40.611421,
+            "lng": -75.317023
+          },
+          {
+            "lat": 40.611838,
+            "lng": -75.319221
+          }
+        ]
+      }
     ],
-    "staging": { "south": 40.60840, "west": -75.31720, "north": 40.60900, "east": -75.31640 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 150,
@@ -21,23 +58,42 @@
     "trailerParkingCapacity": 220,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 44.0,
+    "siteAreaAcres": 44,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.61090,-75.31565,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "preGateStaging", "dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "preGateStaging",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Controlled truck entrance at the SW corner of the building: a gatehouse/canopy structure sits squarely in the truck lane at the entry to the SW dock court, with channeled lanes (a separate down-arrow lane left of the booth, truck lane past it). A truck with a blue trailer is stopped at the booth in the 2026 Maxar imagery.",
     "guardShack": "Built gatehouse structure (flat-roofed canopy booth, ~2-3 vehicle footprint) positioned in the truck driveway median at the gate; truck actively stopped at it confirms a staffed check-in point.",

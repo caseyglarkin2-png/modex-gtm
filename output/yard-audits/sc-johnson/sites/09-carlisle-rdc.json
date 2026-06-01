@@ -1,39 +1,147 @@
 {
   "name": "Carlisle Regional Distribution Center - Carlisle PA",
   "type": "Regional Distribution Center (aerosol storage)",
-  "coords": { "lat": 40.17510, "lng": -77.24280 },
+  "coords": {
+    "lat": 40.1751,
+    "lng": -77.2428
+  },
   "geofences": {
-    "perimeter": { "south": 40.17330, "west": -77.24500, "north": 40.17700, "east": -77.24080 },
-    "truckGate": { "south": 40.17600, "west": -77.24200, "north": 40.17660, "east": -77.24100 },
-    "dropYards": [
-      { "south": 40.17360, "west": -77.24480, "north": 40.17640, "east": -77.24380 },
-      { "south": 40.17360, "west": -77.24210, "north": 40.17640, "east": -77.24100 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.176149,
+          "lng": -77.245547
+        },
+        {
+          "lat": 40.176307,
+          "lng": -77.240328
+        },
+        {
+          "lat": 40.173946,
+          "lng": -77.240191
+        },
+        {
+          "lat": 40.173736,
+          "lng": -77.245409
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.17552,
+          "lng": -77.245959
+        },
+        {
+          "lat": 40.17552,
+          "lng": -77.245615
+        },
+        {
+          "lat": 40.175257,
+          "lng": -77.245615
+        },
+        {
+          "lat": 40.175257,
+          "lng": -77.245959
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 40.17370, "west": -77.24430, "north": 40.17630, "east": -77.24390 },
-      { "south": 40.17370, "west": -77.24240, "north": 40.17630, "east": -77.24200 }
+      {
+        "ring": [
+          {
+            "lat": 40.175992,
+            "lng": -77.245272
+          },
+          {
+            "lat": 40.176149,
+            "lng": -77.240603
+          },
+          {
+            "lat": 40.175835,
+            "lng": -77.240603
+          },
+          {
+            "lat": 40.175677,
+            "lng": -77.245272
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.174261,
+            "lng": -77.245135
+          },
+          {
+            "lat": 40.174418,
+            "lng": -77.240465
+          },
+          {
+            "lat": 40.174103,
+            "lng": -77.240465
+          },
+          {
+            "lat": 40.173946,
+            "lng": -77.245135
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 187,
+        "pano": "w0b_wCY9EiCBAZHdsKZzag",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 187,
+        "pano": "w0b_wCY9EiCBAZHdsKZzag",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 110, "trailersVisible": 90, "trailerParkingCapacity": 150,
-    "truckGateCount": 2, "buildingCount": 1, "siteAreaAcres": 38.0,
+    "dockDoorCount": 110,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 150,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 38,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.17510,-77.24280,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Confirmed via EPA RMP record (Carlisle Regional Distribution Center, 5 True Temper Dr) + Margulies Hoelzli Architecture project page + FCC ULS license 'EXEL SC JOHNSON' + LoopNet/FCC listings. 500,000 sq ft, 450 ft x 1,100 ft cross-dock built by First Industrial Realty Trust, tilt-wall, with local operations offices; operated with DHL/Exel. Roster geocode moved 8,791 m -> the supplied coords were far off; correct building locked from satellite at the True Temper Dr cross-dock.",
     "truckGate": "The truck loop road wraps the entire building; the access road comes in from the NE off True Temper Dr. Street View (Nov 2023) of the entrance shows open driveways with no barrier arm, sliding gate, or checkpoint. Open site.",

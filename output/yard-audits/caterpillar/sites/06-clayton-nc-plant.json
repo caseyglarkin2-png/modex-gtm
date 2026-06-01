@@ -1,38 +1,142 @@
 {
   "name": "Caterpillar - Clayton NC Plant",
   "type": "Manufacturing plant (BCP - small wheel loader assembly)",
-  "coords": { "lat": 35.6405, "lng": -78.4248 },
+  "coords": {
+    "lat": 35.6405,
+    "lng": -78.4248
+  },
   "geofences": {
-    "perimeter": { "south": 35.6372, "west": -78.4282, "north": 35.6435, "east": -78.4205 },
-    "truckGate": { "south": 35.6398, "west": -78.4222, "north": 35.6408, "east": -78.4210 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.642732,
+          "lng": -78.426448
+        },
+        {
+          "lat": 35.64262,
+          "lng": -78.423152
+        },
+        {
+          "lat": 35.639161,
+          "lng": -78.423427
+        },
+        {
+          "lat": 35.639272,
+          "lng": -78.426723
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.64262,
+          "lng": -78.424113
+        },
+        {
+          "lat": 35.642509,
+          "lng": -78.423152
+        },
+        {
+          "lat": 35.641951,
+          "lng": -78.423289
+        },
+        {
+          "lat": 35.642062,
+          "lng": -78.424251
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 35.6412, "west": -78.4248, "north": 35.6432, "east": -78.4222 },
-      { "south": 35.6388, "west": -78.4240, "north": 35.6402, "east": -78.4218 }
+      {
+        "ring": [
+          {
+            "lat": 35.641728,
+            "lng": -78.424113
+          },
+          {
+            "lat": 35.641616,
+            "lng": -78.422877
+          },
+          {
+            "lat": 35.639161,
+            "lng": -78.423015
+          },
+          {
+            "lat": 35.639272,
+            "lng": -78.424113
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.6398, "west": -78.4248, "north": 35.6412, "east": -78.4228 }
+      {
+        "ring": [
+          {
+            "lat": 35.6405,
+            "lng": -78.426173
+          },
+          {
+            "lat": 35.640388,
+            "lng": -78.423976
+          },
+          {
+            "lat": 35.639942,
+            "lng": -78.424113
+          },
+          {
+            "lat": 35.640054,
+            "lng": -78.426311
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 16, "trailersVisible": 22, "trailerParkingCapacity": 40,
-    "truckGateCount": 1, "buildingCount": 3, "siteAreaAcres": 130.0,
+    "dockDoorCount": 16,
+    "trailersVisible": 22,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 130,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.6405,-78.4248,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "truckGate", "entryLanes", "exitLanes", "scale", "dockDoors", "multiStep"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "truckGate",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "dockDoors",
+    "multiStep"
+  ],
   "fieldNotes": {
     "location": "Roster geocode (35.6405,-78.4243) is ROOFTOP and lands on the Caterpillar Clayton plant. Locked the main building center at 35.6405,-78.4248. Confirmed: large single manufacturing building with rows of finished yellow Caterpillar small wheel loaders staged in the yard - directly confirms the BCP small-wheel-loader assembly plant at 954 NC-42 E. The Rapp Customer & Training Center is the separate distinctive-roof building on the SW of the campus.",
     "truckGate": "Truck access via a long entrance driveway off NC-42 E (confirmed in Street View) running back to the plant; product-staging yards and dock aprons are reached through internal roads. The property is buffered from NC-42 by woods; controlled access via the internal entrance.",

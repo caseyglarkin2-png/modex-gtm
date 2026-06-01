@@ -1,38 +1,149 @@
 {
   "name": "Danone - Portland OR",
   "type": "Frozen yogurt / ice cream plant",
-  "coords": { "lat": 45.56475, "lng": -122.57250 },
+  "coords": {
+    "lat": 45.56475,
+    "lng": -122.5725
+  },
   "geofences": {
-    "perimeter": { "south": 45.56405, "west": -122.57335, "north": 45.56545, "east": -122.57185 },
-    "truckGate": { "south": 45.56450, "west": -122.57305, "north": 45.56462, "east": -122.57288 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 45.565303,
+          "lng": -122.57329
+        },
+        {
+          "lat": 45.565303,
+          "lng": -122.572088
+        },
+        {
+          "lat": 45.564221,
+          "lng": -122.571985
+        },
+        {
+          "lat": 45.564077,
+          "lng": -122.573187
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 45.564221,
+          "lng": -122.573084
+        },
+        {
+          "lat": 45.564197,
+          "lng": -122.572843
+        },
+        {
+          "lat": 45.564077,
+          "lng": -122.572878
+        },
+        {
+          "lat": 45.564101,
+          "lng": -122.573118
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 45.56500, "west": -122.57270, "north": 45.56545, "east": -122.57205 }
+      {
+        "ring": [
+          {
+            "lat": 45.565231,
+            "lng": -122.572328
+          },
+          {
+            "lat": 45.565183,
+            "lng": -122.571951
+          },
+          {
+            "lat": 45.56475,
+            "lng": -122.572088
+          },
+          {
+            "lat": 45.564798,
+            "lng": -122.572466
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 45.56412, "west": -122.57305, "north": 45.56445, "east": -122.57260 },
-      { "south": 45.56445, "west": -122.57225, "north": 45.56500, "east": -122.57195 }
+      {
+        "ring": [
+          {
+            "lat": 45.56463,
+            "lng": -122.573187
+          },
+          {
+            "lat": 45.564582,
+            "lng": -122.572328
+          },
+          {
+            "lat": 45.564438,
+            "lng": -122.572346
+          },
+          {
+            "lat": 45.564486,
+            "lng": -122.573204
+          }
+        ]
+      }
     ],
-    "staging": { "south": 45.56448, "west": -122.57290, "north": 45.56490, "east": -122.57255 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 93,
+        "pano": "yUlD2mLdGKKyuyF9woYmYA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 93,
+        "pano": "yUlD2mLdGKKyuyF9woYmYA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 12, "trailersVisible": 9, "trailerParkingCapacity": 15,
-    "truckGateCount": 2, "buildingCount": 1, "siteAreaAcres": 6.0,
+    "dockDoorCount": 12,
+    "trailersVisible": 9,
+    "trailerParkingCapacity": 15,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 6,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@45.56475,-122.57250,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "railServed"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "railServed"
+  ],
   "fieldNotes": {
     "truckGate": "Sliding iron gate across the NE 87th Ave entrance into the parking/yard, plus a gated dock driveway to the south dock apron. Whole site fenced with tall iron perimeter fence.",
     "guardShack": "No staffed booth structure at either gate.",

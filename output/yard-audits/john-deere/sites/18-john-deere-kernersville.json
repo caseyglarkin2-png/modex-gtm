@@ -1,19 +1,63 @@
 {
   "name": "John Deere Kernersville (Deere-Hitachi Construction) - Kernersville NC",
   "type": "Assembly Plant",
-  "coords": { "lat": 36.13670, "lng": -80.09250 },
+  "coords": {
+    "lat": 36.1367,
+    "lng": -80.0925
+  },
   "geofences": {
-    "perimeter": { "south": 36.12950, "west": -80.09720, "north": 36.14050, "east": -80.08250 },
-    "truckGate": { "south": 36.13450, "west": -80.09160, "north": 36.13530, "east": -80.09060 },
-    "dropYards": [
-      { "south": 36.13420, "west": -80.09080, "north": 36.13680, "east": -80.08820 },
-      { "south": 36.13180, "west": -80.08560, "north": 36.13420, "east": -80.08340 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.137809,
+          "lng": -80.095247
+        },
+        {
+          "lat": 36.137809,
+          "lng": -80.089204
+        },
+        {
+          "lat": 36.133373,
+          "lng": -80.089204
+        },
+        {
+          "lat": 36.133373,
+          "lng": -80.095247
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 36.13560, "west": -80.09380, "north": 36.13720, "east": -80.09180 },
-      { "south": 36.13320, "west": -80.08800, "north": 36.13460, "east": -80.08660 }
+      {
+        "ring": [
+          {
+            "lat": 36.137144,
+            "lng": -80.094697
+          },
+          {
+            "lat": 36.137144,
+            "lng": -80.089753
+          },
+          {
+            "lat": 36.136256,
+            "lng": -80.089753
+          },
+          {
+            "lat": 36.136256,
+            "lng": -80.094697
+          }
+        ]
+      }
     ],
-    "staging": { "south": 36.13380, "west": -80.09120, "north": 36.13470, "east": -80.08980 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 60,
+        "pano": "yXQ8J8wyEIlNNNOklaKMTQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 30,
@@ -21,7 +65,7 @@
     "trailerParkingCapacity": 120,
     "truckGateCount": 2,
     "buildingCount": 6,
-    "siteAreaAcres": 145.0,
+    "siteAreaAcres": 145,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@36.13670,-80.09250,400m/data=!3m1!1e3",
@@ -50,7 +94,13 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity", "truckGateCount"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "truckGateCount"
+  ],
   "fieldNotes": {
     "truckGate": "Confirmed in 2026-03 Street View on John Deere Rd: a controlled truck entrance to the Main Campus - chain-link perimeter fence with sliding gate sections across the drive, entrance lane pinch-point. The East Campus has its own gated access on a separate internal/access road; truckGateCount set to 2.",
     "guardShack": "Confirmed: a white guard booth (~1-vehicle footprint) sits beside the Main Campus entrance lane, clearly visible in 2026-03 Street View and z19 satellite. Staffed checkpoint.",

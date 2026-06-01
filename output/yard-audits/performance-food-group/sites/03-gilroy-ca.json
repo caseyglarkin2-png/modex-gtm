@@ -1,37 +1,131 @@
 {
   "name": "Performance Foodservice - Gilroy CA",
   "type": "Broadline Foodservice Distribution Center",
-  "coords": { "lat": 36.98045, "lng": -121.55430 },
+  "coords": {
+    "lat": 36.98045,
+    "lng": -121.5543
+  },
   "geofences": {
-    "perimeter": { "south": 36.97840, "west": -121.55720, "north": 36.98260, "east": -121.55140 },
-    "truckGate": { "south": 36.98095, "west": -121.55650, "north": 36.98150, "east": -121.55580 },
-    "dropYards": [
-      { "south": 36.97900, "west": -121.55600, "north": 36.98010, "east": -121.55190 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.981437,
+          "lng": -121.556909
+        },
+        {
+          "lat": 36.981437,
+          "lng": -121.552103
+        },
+        {
+          "lat": 36.979134,
+          "lng": -121.552103
+        },
+        {
+          "lat": 36.979134,
+          "lng": -121.556909
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 36.979901,
+          "lng": -121.557047
+        },
+        {
+          "lat": 36.979901,
+          "lng": -121.556085
+        },
+        {
+          "lat": 36.979243,
+          "lng": -121.556085
+        },
+        {
+          "lat": 36.979243,
+          "lng": -121.557047
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 36.97980, "west": -121.55650, "north": 36.98040, "east": -121.55200 }
+      {
+        "ring": [
+          {
+            "lat": 36.981108,
+            "lng": -121.553613
+          },
+          {
+            "lat": 36.981218,
+            "lng": -121.551279
+          },
+          {
+            "lat": 36.980889,
+            "lng": -121.551279
+          },
+          {
+            "lat": 36.980779,
+            "lng": -121.553613
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 51,
+        "pano": "ADX2418IsKmi8SJh0eiWvQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 51,
+        "pano": "ADX2418IsKmi8SJh0eiWvQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 45, "trailersVisible": 30, "trailerParkingCapacity": 60,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 22.0,
+    "dockDoorCount": 45,
+    "trailersVisible": 30,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 22,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@36.98045,-121.5543,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "location": "Confirmed via roster address 5480 Monterey Rd and PFG/BusinessWire 'Sustainable DC of the Future' coverage. The building is unmistakable: a ~189,000 sq ft DC with a near-fully solar-paneled roof, ZEV charging, the only solar-roof warehouse on this stretch of Monterey Rd between Hwy 101 and the rail line. Center ~36.98045,-121.5543.",
     "truckGate": "Building fronts Monterey Rd (office/landscaped courtyard) with the truck driveway and yard wrapping the NE/E side. No barrier or sliding gate positively confirmed in available imagery (no internal Street View; Hwy-101-side panos only). Marked true at medium confidence — the yard is fenced/walled and the truck approach funnels to a single NE driveway, consistent with a controlled entrance.",

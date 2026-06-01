@@ -1,18 +1,108 @@
 {
   "name": "K-C Loudon Mill - Loudon TN",
   "type": "Tissue manufacturing mill (K-C Professional / consumer tissue)",
-  "coords": { "lat": 35.76764, "lng": -84.32992 },
+  "coords": {
+    "lat": 35.76764,
+    "lng": -84.32992
+  },
   "geofences": {
-    "perimeter": { "south": 35.76350, "west": -84.33250, "north": 35.77250, "east": -84.32250 },
-    "truckGate": { "south": 35.76430, "west": -84.33020, "north": 35.76510, "east": -84.32920 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.7692,
+          "lng": -84.332667
+        },
+        {
+          "lat": 35.769869,
+          "lng": -84.326624
+        },
+        {
+          "lat": 35.768531,
+          "lng": -84.32223
+        },
+        {
+          "lat": 35.766303,
+          "lng": -84.325525
+        },
+        {
+          "lat": 35.764966,
+          "lng": -84.328547
+        },
+        {
+          "lat": 35.764966,
+          "lng": -84.332117
+        },
+        {
+          "lat": 35.767194,
+          "lng": -84.333216
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.764966,
+          "lng": -84.32992
+        },
+        {
+          "lat": 35.764966,
+          "lng": -84.328272
+        },
+        {
+          "lat": 35.763851,
+          "lng": -84.328272
+        },
+        {
+          "lat": 35.763851,
+          "lng": -84.32992
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 35.76830, "west": -84.32820, "north": 35.77080, "east": -84.32430 }
+      {
+        "ring": [
+          {
+            "lat": 35.769423,
+            "lng": -84.325525
+          },
+          {
+            "lat": 35.768531,
+            "lng": -84.32168
+          },
+          {
+            "lat": 35.766749,
+            "lng": -84.323328
+          },
+          {
+            "lat": 35.76764,
+            "lng": -84.326624
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.76600, "west": -84.33150, "north": 35.76850, "east": -84.33000 },
-      { "south": 35.76760, "west": -84.32600, "north": 35.76920, "east": -84.32420 }
+      {
+        "ring": [
+          {
+            "lat": 35.768977,
+            "lng": -84.332117
+          },
+          {
+            "lat": 35.769423,
+            "lng": -84.327173
+          },
+          {
+            "lat": 35.768309,
+            "lng": -84.326899
+          },
+          {
+            "lat": 35.767863,
+            "lng": -84.331843
+          }
+        ]
+      }
     ],
-    "staging": { "south": 35.76800, "west": -84.32780, "north": 35.76900, "east": -84.32550 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 30,
@@ -20,23 +110,42 @@
     "trailerParkingCapacity": 180,
     "truckGateCount": 1,
     "buildingCount": 4,
-    "siteAreaAcres": 80.0,
+    "siteAreaAcres": 80,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.76764,-84.32992,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "scale"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "No barrier arm, sliding gate, or staffed checkpoint found at the property entrance in satellite or 2024 Street View. The entry road passes a landscaped monument-sign roundabout but is otherwise an open industrial driveway. Set false; flagged uncertain - a gate further inside the yard cannot be ruled out due to limited Street View coverage of the internal road.",
     "guardShack": "No guard booth visible at any entrance. Set false.",

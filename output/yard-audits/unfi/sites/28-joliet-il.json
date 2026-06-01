@@ -1,37 +1,169 @@
 {
   "name": "UNFI - Joliet IL DC (Chicago)",
   "type": "Distribution Center",
-  "coords": { "lat": 41.50620, "lng": -88.01870 },
+  "coords": {
+    "lat": 41.5062,
+    "lng": -88.0187
+  },
   "geofences": {
-    "perimeter": { "south": 41.50360, "west": -88.02030, "north": 41.50880, "east": -88.01700 },
-    "truckGate": { "south": 41.50430, "west": -88.01880, "north": 41.50475, "east": -88.01800 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.510622,
+          "lng": -88.020897
+        },
+        {
+          "lat": 41.510314,
+          "lng": -88.017601
+        },
+        {
+          "lat": 41.504966,
+          "lng": -88.018425
+        },
+        {
+          "lat": 41.505274,
+          "lng": -88.021721
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.505583,
+          "lng": -88.021172
+        },
+        {
+          "lat": 41.50548,
+          "lng": -88.020348
+        },
+        {
+          "lat": 41.504863,
+          "lng": -88.020485
+        },
+        {
+          "lat": 41.504966,
+          "lng": -88.021309
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 41.50420, "west": -88.02010, "north": 41.50560, "east": -88.01900 }
+      {
+        "ring": [
+          {
+            "lat": 41.509285,
+            "lng": -88.021447
+          },
+          {
+            "lat": 41.50908,
+            "lng": -88.019799
+          },
+          {
+            "lat": 41.505686,
+            "lng": -88.020211
+          },
+          {
+            "lat": 41.505891,
+            "lng": -88.021859
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.50450, "west": -88.01760, "north": 41.50840, "east": -88.01700 }
+      {
+        "ring": [
+          {
+            "lat": 41.50908,
+            "lng": -88.019799
+          },
+          {
+            "lat": 41.508874,
+            "lng": -88.017876
+          },
+          {
+            "lat": 41.508565,
+            "lng": -88.017945
+          },
+          {
+            "lat": 41.508771,
+            "lng": -88.019867
+          }
+        ]
+      }
     ],
-    "staging": { "south": 41.50455, "west": -88.01890, "north": 41.50640, "east": -88.01790 }
+    "staging": {
+      "ring": [
+        {
+          "lat": 41.504966,
+          "lng": -88.020897
+        },
+        {
+          "lat": 41.50476,
+          "lng": -88.0187
+        },
+        {
+          "lat": 41.504143,
+          "lng": -88.018837
+        },
+        {
+          "lat": 41.504349,
+          "lng": -88.021035
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 5,
+        "pano": "B_onOBhlT28EQ5Uzbz9YnA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 5,
+        "pano": "B_onOBhlT28EQ5Uzbz9YnA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 70, "trailersVisible": 45, "trailerParkingCapacity": 90,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 38.0,
+    "dockDoorCount": 70,
+    "trailersVisible": 45,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 38,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.50620,-88.01870,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "siteAreaAcres", "exitLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "siteAreaAcres",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Confirmed. UNFI Joliet DC at 2601 Ellis Rd, Joliet, IL 60433 (street address geocoded ROOFTOP to 41.50567,-88.01851; Waze and TruckMap both name a 'UNFI - Truck Entrance' at 2601 Ellis Rd). The roster's city-level coords (41.5250,-88.0830) were ~8km off; corrected to the resolved Ellis Rd building. A modern logistics-park warehouse running N-S in the Joliet/CenterPoint-area industrial corridor; trade press notes UNFI is investing in full-case automation here. Absorbed Sturtevant WI volume per roster.",
     "truckGate": "TRUE - the truck driveway from Ellis Rd runs north into the property to a checkpoint. At z20 a clear guard-booth structure sits in the lane with a circular landscaped island, lane control and a concrete checkpoint apron; perimeter chain-link/metal fencing runs the property line (visible behind the Ellis Rd treeline in Street View).",

@@ -1,18 +1,108 @@
 {
   "name": "Mondelez Fort Worth Distribution Center - Fort Worth TX",
   "type": "Distribution center / cross-dock warehouse",
-  "coords": { "lat": 33.03158, "lng": -97.30073 },
+  "coords": {
+    "lat": 33.03158,
+    "lng": -97.30073
+  },
   "geofences": {
-    "perimeter": { "south": 33.03010, "west": -97.30380, "north": 33.03340, "east": -97.29750 },
-    "truckGate": { "south": 33.03060, "west": -97.29590, "north": 33.03110, "east": -97.29510 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.033883,
+          "lng": -97.302927
+        },
+        {
+          "lat": 33.033883,
+          "lng": -97.299082
+        },
+        {
+          "lat": 33.028356,
+          "lng": -97.299082
+        },
+        {
+          "lat": 33.028356,
+          "lng": -97.302927
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.030198,
+          "lng": -97.302927
+        },
+        {
+          "lat": 33.030198,
+          "lng": -97.302103
+        },
+        {
+          "lat": 33.029508,
+          "lng": -97.302103
+        },
+        {
+          "lat": 33.029508,
+          "lng": -97.302927
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 33.03230, "west": -97.30340, "north": 33.03330, "east": -97.29760 }
+      {
+        "ring": [
+          {
+            "lat": 33.033652,
+            "lng": -97.302653
+          },
+          {
+            "lat": 33.033652,
+            "lng": -97.30073
+          },
+          {
+            "lat": 33.032041,
+            "lng": -97.30073
+          },
+          {
+            "lat": 33.032041,
+            "lng": -97.302653
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.03190, "west": -97.30340, "north": 33.03250, "east": -97.29760 },
-      { "south": 33.03070, "west": -97.30340, "north": 33.03110, "east": -97.29780 }
+      {
+        "ring": [
+          {
+            "lat": 33.032041,
+            "lng": -97.302653
+          },
+          {
+            "lat": 33.032041,
+            "lng": -97.299357
+          },
+          {
+            "lat": 33.03135,
+            "lng": -97.299357
+          },
+          {
+            "lat": 33.03135,
+            "lng": -97.302653
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 33,
+        "pano": "JM60CYA1tjTefi2Xfl8Nuw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 33,
+        "pano": "JM60CYA1tjTefi2Xfl8Nuw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 115,
@@ -49,7 +139,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "guardShack"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "guardShack"
+  ],
   "fieldNotes": {
     "locate": "Resolved to 16200 Three Wide Dr, Fort Worth TX 76177 (IDI/Speedway Distribution Center Building C), in the AllianceTexas industrial corridor near Texas Motor Speedway. Google geocode returned a ROOFTOP hit at 33.0315793,-97.3007312 (returned with the 76247 Northlake ZIP, but the building is the one a confirmed-address probe pinned). Satellite confirms a large completed Class-A cross-dock distribution building consistent with the listed 316,128 SF Building C. The old stub mislabeled this site 'Garland TX' — corrected to Fort Worth.",
     "shipRcvSeparate": "Cross-dock building: dock banks on BOTH the north and the south building faces. The north face carries the bulk of the trailer activity plus the drop yard; the south face has a second dock bank fronting the office/car-parking side. Counted as separate ship/receive clusters.",

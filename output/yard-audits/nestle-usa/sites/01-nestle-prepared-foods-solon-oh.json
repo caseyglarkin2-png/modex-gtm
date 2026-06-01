@@ -1,18 +1,100 @@
 {
   "name": "Nestlé Prepared Foods - Solon OH",
   "type": "Frozen food manufacturing plant",
-  "coords": { "lat": 41.404568, "lng": -81.469555 },
+  "coords": {
+    "lat": 41.404568,
+    "lng": -81.469555
+  },
   "geofences": {
-    "perimeter": { "south": 41.40280, "west": -81.47230, "north": 41.40720, "east": -81.46720 },
-    "truckGate": { "south": 41.40430, "west": -81.46840, "north": 41.40470, "east": -81.46780 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.407864,
+          "lng": -81.472302
+        },
+        {
+          "lat": 41.406937,
+          "lng": -81.467907
+        },
+        {
+          "lat": 41.403744,
+          "lng": -81.468182
+        },
+        {
+          "lat": 41.402096,
+          "lng": -81.472714
+        },
+        {
+          "lat": 41.404568,
+          "lng": -81.47395
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.402096,
+          "lng": -81.472302
+        },
+        {
+          "lat": 41.402302,
+          "lng": -81.471478
+        },
+        {
+          "lat": 41.401684,
+          "lng": -81.471203
+        },
+        {
+          "lat": 41.401478,
+          "lng": -81.472027
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 41.40540, "west": -81.47280, "north": 41.40650, "east": -81.47120 },
-      { "south": 41.40560, "west": -81.47120, "north": 41.40660, "east": -81.46980 }
+      {
+        "ring": [
+          {
+            "lat": 41.406216,
+            "lng": -81.472714
+          },
+          {
+            "lat": 41.405804,
+            "lng": -81.470928
+          },
+          {
+            "lat": 41.405083,
+            "lng": -81.471066
+          },
+          {
+            "lat": 41.405495,
+            "lng": -81.472851
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.40470, "west": -81.47230, "north": 41.40560, "east": -81.47090 }
+      {
+        "ring": [
+          {
+            "lat": 41.40498,
+            "lng": -81.470242
+          },
+          {
+            "lat": 41.404568,
+            "lng": -81.468319
+          },
+          {
+            "lat": 41.404053,
+            "lng": -81.468388
+          },
+          {
+            "lat": 41.404465,
+            "lng": -81.47031
+          }
+        ]
+      }
     ],
-    "staging": { "south": 41.40500, "west": -81.47100, "north": 41.40620, "east": -81.46980 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 30,
@@ -49,7 +131,14 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "scale"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "Continuous chain-link perimeter fence runs the full Harper Rd frontage (confirmed in multiple Street View panos). A single controlled main drive leaves Harper Rd into the property. A driver review explicitly states 'when coming in through the gate ... go to Dock A and check in.' Gate is positively present.",
     "guardShack": "No distinct guard booth resolved in overhead or Street View imagery; the office building sits immediately at the front circle. Check-in appears to be at 'Dock A' inside the plant. Classified guardShack false / remoteGs true, but flagged uncertain - a booth may be obscured by trees at the drive entrance.",

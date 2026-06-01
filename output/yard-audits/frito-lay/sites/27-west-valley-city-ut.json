@@ -1,19 +1,108 @@
 {
   "name": "Frito-Lay - West Valley City UT (DC)",
   "type": "Distribution Center",
-  "coords": { "lat": 40.6662, "lng": -112.0402 },
+  "coords": {
+    "lat": 40.6662,
+    "lng": -112.0402
+  },
   "geofences": {
-    "perimeter": { "south": 40.6645, "west": -112.0425, "north": 40.6680, "east": -112.0368 },
-    "truckGate": { "south": 40.66700, "west": -112.04090, "north": 40.66760, "east": -112.04055 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.667242,
+          "lng": -112.044045
+        },
+        {
+          "lat": 40.667242,
+          "lng": -112.038827
+        },
+        {
+          "lat": 40.664533,
+          "lng": -112.038827
+        },
+        {
+          "lat": 40.664533,
+          "lng": -112.044045
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.666721,
+          "lng": -112.044045
+        },
+        {
+          "lat": 40.666721,
+          "lng": -112.043221
+        },
+        {
+          "lat": 40.6662,
+          "lng": -112.043221
+        },
+        {
+          "lat": 40.6662,
+          "lng": -112.044045
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.6655, "west": -112.0388, "north": 40.6678, "east": -112.0368 },
-      { "south": 40.6663, "west": -112.04250, "north": 40.6678, "east": -112.0412 }
+      {
+        "ring": [
+          {
+            "lat": 40.667033,
+            "lng": -112.043771
+          },
+          {
+            "lat": 40.667033,
+            "lng": -112.042672
+          },
+          {
+            "lat": 40.665575,
+            "lng": -112.042672
+          },
+          {
+            "lat": 40.665575,
+            "lng": -112.043771
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.6648, "west": -112.0408, "north": 40.6658, "east": -112.0392 },
-      { "south": 40.6658, "west": -112.04250, "north": 40.6672, "east": -112.0415 }
+      {
+        "ring": [
+          {
+            "lat": 40.666408,
+            "lng": -112.042397
+          },
+          {
+            "lat": 40.666408,
+            "lng": -112.039651
+          },
+          {
+            "lat": 40.665783,
+            "lng": -112.039651
+          },
+          {
+            "lat": 40.665783,
+            "lng": -112.042397
+          }
+        ]
+      }
     ],
-    "staging": { "south": 40.6664, "west": -112.0412, "north": 40.6678, "east": -112.0398 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 140,
+        "pano": "cXPP-47VJI_bfFgZOYT3PQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 140,
+        "pano": "cXPP-47VJI_bfFgZOYT3PQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 45,
@@ -21,7 +110,7 @@
     "trailerParkingCapacity": 140,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 43.0,
+    "siteAreaAcres": 43,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.6662,-112.0402,400m/data=!3m1!1e3",
@@ -50,7 +139,12 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "guardShack", "remoteGs", "shipRcvSeparate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "guardShack",
+    "remoteGs",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "location": "Roster address 3450 W 2100 S is wrong (a generic industrial-park point). Resolved to the real Frito-Lay West Valley City facility at 6301 W 4700 S, West Valley City UT 84118 (40.6662,-112.0402). Confirmed via web research and satellite + 2024-10 Street View: large industrial complex with red Frito-Lay logo signage, rooftop snack-food processing equipment, corn silos, and a steam plume.",
     "facilityType": "Roster types this as a Distribution Center; the site is actually a combined production plant + distribution operation (produces Doritos, Lay's, Ruffles). Audited as the freight/truck yard regardless.",

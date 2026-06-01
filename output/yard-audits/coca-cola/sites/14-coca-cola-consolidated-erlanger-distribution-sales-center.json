@@ -1,37 +1,122 @@
 {
   "name": "Coca-Cola Consolidated - Erlanger Distribution & Sales Center, KY",
   "type": "Distribution / Sales Center",
-  "coords": { "lat": 39.036800, "lng": -84.609800 },
+  "coords": {
+    "lat": 39.0368,
+    "lng": -84.6098
+  },
   "geofences": {
-    "perimeter": { "south": 39.0345, "west": -84.6120, "north": 39.0384, "east": -84.6080 },
-    "truckGate": { "south": 39.0349, "west": -84.6118, "north": 39.0355, "east": -84.6110 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.038293,
+          "lng": -84.610487
+        },
+        {
+          "lat": 39.038187,
+          "lng": -84.607603
+        },
+        {
+          "lat": 39.03616,
+          "lng": -84.607603
+        },
+        {
+          "lat": 39.036267,
+          "lng": -84.610487
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 39.0370, "west": -84.6116, "north": 39.0382, "east": -84.6101 }
+      {
+        "ring": [
+          {
+            "lat": 39.038187,
+            "lng": -84.610349
+          },
+          {
+            "lat": 39.038133,
+            "lng": -84.608976
+          },
+          {
+            "lat": 39.037333,
+            "lng": -84.609045
+          },
+          {
+            "lat": 39.037387,
+            "lng": -84.610349
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.0354, "west": -84.6116, "north": 39.0372, "east": -84.6098 }
+      {
+        "ring": [
+          {
+            "lat": 39.0368,
+            "lng": -84.610349
+          },
+          {
+            "lat": 39.036747,
+            "lng": -84.608152
+          },
+          {
+            "lat": 39.03648,
+            "lng": -84.608152
+          },
+          {
+            "lat": 39.036533,
+            "lng": -84.610349
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 55, "trailersVisible": 60, "trailerParkingCapacity": 90,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 31.6,
+    "dockDoorCount": 55,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 31.6,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.0368,-84.6098,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "dropArea", "fastLaneOpportunity", "shipRcvSeparate"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "dropArea",
+    "fastLaneOpportunity",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "location": "Roster lat/lng (39.0514,-84.6323) and roster address (600 Circleport Dr) geocoded to a street centerline in the Circleport office park near CVG airport - that area has only office/flex buildings, not a 300,000 sq ft DC. The real Coca-Cola Consolidated Erlanger Distribution & Sales Center is at 680 Erlanger Road (confirmed by company and city of Erlanger sources; 300,000 sq ft on ~32 acres, built on the old Showcase Cinema site, $30M / 430-job project by Hillwood + Al Neyer, opened ~2019-2020). US Census geocoder places 680 Erlanger Rd at the edge of a 3-building Hillwood commerce park beside I-71/75. The northernmost building (audited here, ~39.0368,-84.6098) shows red Coca-Cola Consolidated / Red Classic fleet vehicles and bobtail delivery trucks at its dock apron - the strongest match.",
     "buildingMatch": "MEDIUM confidence on exact building. Three similar warehouses sit in this Hillwood commerce park; the audited building best matches the 32-acre figure and is the only one showing an active red Coke fleet. The other two appeared larger / lower-activity.",

@@ -1,17 +1,84 @@
 {
   "name": "Meow Mix Pet Food - Decatur AL",
   "type": "Manufacturing - Cat food (Meow Mix)",
-  "coords": { "lat": 34.606800, "lng": -86.968500 },
+  "coords": {
+    "lat": 34.6068,
+    "lng": -86.9685
+  },
   "geofences": {
-    "perimeter": { "south": 34.60480, "west": -86.97050, "north": 34.60840, "east": -86.96680 },
-    "truckGate": { "south": 34.60480, "west": -86.97020, "north": 34.60510, "east": -86.96960 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.60793,
+          "lng": -86.970285
+        },
+        {
+          "lat": 34.607365,
+          "lng": -86.965891
+        },
+        {
+          "lat": 34.604991,
+          "lng": -86.966165
+        },
+        {
+          "lat": 34.606122,
+          "lng": -86.97056
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 34.60540, "west": -86.97010, "north": 34.60680, "east": -86.96850 }
+      {
+        "ring": [
+          {
+            "lat": 34.606687,
+            "lng": -86.970148
+          },
+          {
+            "lat": 34.606517,
+            "lng": -86.969049
+          },
+          {
+            "lat": 34.605896,
+            "lng": -86.969187
+          },
+          {
+            "lat": 34.606122,
+            "lng": -86.970285
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 34.60660, "west": -86.96850, "north": 34.60730, "east": -86.96760 }
+      {
+        "ring": [
+          {
+            "lat": 34.607478,
+            "lng": -86.970011
+          },
+          {
+            "lat": 34.607252,
+            "lng": -86.967951
+          },
+          {
+            "lat": 34.6068,
+            "lng": -86.968019
+          },
+          {
+            "lat": 34.607026,
+            "lng": -86.970079
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 55,
+        "pano": "HAOkeXgrPeS20Z0MVpUx6Q",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 18,
@@ -24,18 +91,36 @@
   },
   "mapsUrl": "https://www.google.com/maps/@34.606800,-86.968500,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "scale", "dockDoorCount", "entryExitSeparate"],
+  "uncertainFields": [
+    "guardShack",
+    "scale",
+    "dockDoorCount",
+    "entryExitSeparate"
+  ],
   "fieldNotes": {
     "location": "1200 Market St NE, Decatur AL. ROOFTOP geocode confirmed (moved 190m). Building positively identified: large white ~200,000 sq ft manufacturing building on the Tennessee River riverfront, with an adjacent dock building, a chain-link-fenced trailer yard, and ingredient/process tanks. Web-confirmed as the J.M. Smucker Meow Mix plant (Meow Mix Decatur Production LLC) - ~40% of Smucker's cat food, ~600 tons/day, recent $21.4M expansion.",
     "truckGate": "Property is fully chain-link fenced. Truck entrances are gated with sliding chain-link gates (visible in Street View 2022 from Market St and from the rail-side road). At least 2 truck access points: one off Market St NE at the SW, one off the rail-side gravel road on the east. truckGateCount = 2.",

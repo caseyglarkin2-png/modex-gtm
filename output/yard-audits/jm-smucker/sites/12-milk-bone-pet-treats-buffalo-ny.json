@@ -1,16 +1,34 @@
 {
   "name": "Milk-Bone Pet Treats - Buffalo NY",
   "type": "Manufacturing - Pet treats (Milk-Bone), ambient + refrigerated",
-  "coords": { "lat": 42.909089, "lng": -78.829817 },
+  "coords": {
+    "lat": 42.909089,
+    "lng": -78.829817
+  },
   "geofences": {
-    "perimeter": { "south": 42.90810, "west": -78.83180, "north": 42.91090, "east": -78.82900 },
-    "truckGate": { "south": 42.90920, "west": -78.83110, "north": 42.90945, "east": -78.83060 },
-    "dropYards": [
-      { "south": 42.90940, "west": -78.83150, "north": 42.91060, "east": -78.82930 }
-    ],
-    "dockAprons": [
-      { "south": 42.90825, "west": -78.83000, "north": 42.90880, "east": -78.82935 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.90929,
+          "lng": -78.83174
+        },
+        {
+          "lat": 42.90929,
+          "lng": -78.829268
+        },
+        {
+          "lat": 42.908184,
+          "lng": -78.829268
+        },
+        {
+          "lat": 42.908184,
+          "lng": -78.83174
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
     "staging": null
   },
   "yardMetrics": {
@@ -24,18 +42,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@42.909089,-78.829817,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "dockDoorCount"],
+  "uncertainFields": [
+    "guardShack",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "location": "243 Urban St, Buffalo NY. ROOFTOP geocode confirmed (moved 99m). Building positively identified: large multi-section/multi-story historic brick manufacturing complex on Buffalo's East Side, pink grain-silo tower landmark, rail line on the east side. Web-confirmed as the J.M. Smucker Milk-Bone plant (550,000 sq ft, dog-treat ops since 1925, $53M renovation underway, completion April 2027).",
     "truckGate": "TWO controlled truck entrances. (1) The dedicated drop yard NW of the plant has a wide chain-link SLIDING GATE across its truck driveway (Street View 2025-07 from Urban St shows the slider clearly). (2) The fenced truck/dock yard at the building has sliding chain-link gates. truckGateCount set to 2.",

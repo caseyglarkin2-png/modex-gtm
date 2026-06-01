@@ -1,17 +1,108 @@
 {
   "name": "Metal Container Corporation - Mira Loma CA Can Plant",
   "type": "Can Manufacturing Plant",
-  "coords": { "lat": 34.032, "lng": -117.5226 },
+  "coords": {
+    "lat": 34.032,
+    "lng": -117.5226
+  },
   "geofences": {
-    "perimeter": { "south": 34.03025, "west": -117.52405, "north": 34.03395, "east": -117.52085 },
-    "truckGate": { "south": 34.03012, "west": -117.52320, "north": 34.03045, "east": -117.52280 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.032797,
+          "lng": -117.523836
+        },
+        {
+          "lat": 34.032797,
+          "lng": -117.520952
+        },
+        {
+          "lat": 34.030748,
+          "lng": -117.520952
+        },
+        {
+          "lat": 34.030748,
+          "lng": -117.523836
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.03109,
+          "lng": -117.523699
+        },
+        {
+          "lat": 34.03109,
+          "lng": -117.523149
+        },
+        {
+          "lat": 34.030748,
+          "lng": -117.523149
+        },
+        {
+          "lat": 34.030748,
+          "lng": -117.523699
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 34.03055, "west": -117.52395, "north": 34.03155, "east": -117.52290 }
+      {
+        "ring": [
+          {
+            "lat": 34.03109,
+            "lng": -117.522737
+          },
+          {
+            "lat": 34.03109,
+            "lng": -117.521227
+          },
+          {
+            "lat": 34.030634,
+            "lng": -117.521227
+          },
+          {
+            "lat": 34.030634,
+            "lng": -117.522737
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 34.03110, "west": -117.52385, "north": 34.03155, "east": -117.52250 }
+      {
+        "ring": [
+          {
+            "lat": 34.032569,
+            "lng": -117.523699
+          },
+          {
+            "lat": 34.032569,
+            "lng": -117.5226
+          },
+          {
+            "lat": 34.031317,
+            "lng": -117.5226
+          },
+          {
+            "lat": 34.031317,
+            "lng": -117.523699
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 132,
+        "pano": "r7a7JaWU8M7UXDBaIQ-2SQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 132,
+        "pano": "r7a7JaWU8M7UXDBaIQ-2SQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 14,
@@ -19,7 +110,7 @@
     "trailerParkingCapacity": 40,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 27.0,
+    "siteAreaAcres": 27,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.032,-117.5226,400m/data=!3m1!1e3",
@@ -48,7 +139,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "guardShack"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "guardShack"
+  ],
   "fieldNotes": {
     "truckGate": "South-side main driveway is a wide open entrance with a landscaped median (rock + agave) and no barrier arm, sliding gate, or checkpoint pinch-point. Street View Feb 2025 from Inland-area road shows free-flowing access. North and west property lines are palisade-fenced perimeter with grassy buffers and no vehicle gate.",
     "guardShack": "No staffed booth visible at the south entrance in satellite or Street View. A small structure exists on the NE annex but it is part of the can-end processing building, not an entrance booth. Low-confidence negative — booth could be obscured by entrance landscaping, but no evidence of one.",

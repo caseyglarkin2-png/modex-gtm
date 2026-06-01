@@ -1,18 +1,84 @@
 {
   "name": "Memphis Parts Distribution Center - Memphis TN",
   "type": "Parts distribution center",
-  "coords": { "lat": 35.037650, "lng": -89.874050 },
+  "coords": {
+    "lat": 35.03765,
+    "lng": -89.87405
+  },
   "geofences": {
-    "perimeter": { "south": 35.035550, "west": -89.875700, "north": 35.039750, "east": -89.873400 },
-    "truckGate": { "south": 35.039400, "west": -89.874100, "north": 35.039750, "east": -89.873500 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.039449,
+          "lng": -89.877209
+        },
+        {
+          "lat": 35.039449,
+          "lng": -89.872951
+        },
+        {
+          "lat": 35.034502,
+          "lng": -89.872951
+        },
+        {
+          "lat": 35.034502,
+          "lng": -89.877209
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 35.036000, "west": -89.873650, "north": 35.039300, "east": -89.873400 }
+      {
+        "ring": [
+          {
+            "lat": 35.039449,
+            "lng": -89.875149
+          },
+          {
+            "lat": 35.039449,
+            "lng": -89.872951
+          },
+          {
+            "lat": 35.034502,
+            "lng": -89.872951
+          },
+          {
+            "lat": 35.034502,
+            "lng": -89.875149
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.036000, "west": -89.874000, "north": 35.039300, "east": -89.873500 },
-      { "south": 35.039300, "west": -89.875600, "north": 35.039750, "east": -89.873500 }
+      {
+        "ring": [
+          {
+            "lat": 35.039449,
+            "lng": -89.875423
+          },
+          {
+            "lat": 35.039449,
+            "lng": -89.875011
+          },
+          {
+            "lat": 35.034502,
+            "lng": -89.875011
+          },
+          {
+            "lat": 35.034502,
+            "lng": -89.875423
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 40,
+        "pano": "W53ydgqbqviCQ5QpQ2zoSQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 60,
@@ -20,23 +86,43 @@
     "trailerParkingCapacity": 90,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 24.0,
+    "siteAreaAcres": 24,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.037650,-89.874050,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "shipRcvSeparate", "buildingCount", "siteAreaAcres"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "shipRcvSeparate",
+    "buildingCount",
+    "siteAreaAcres"
+  ],
   "fieldNotes": {
     "location": "Address 5745 Challenge Drive in the MDC (Memphis Distribution Center) industrial park, Hickory Hill, Memphis TN 38115 — confirmed via web (Daimler careers page, LoopNet parcel APN 09-3400-0-0603). Roster geocode moved 3,427 m; the corrected pin landed on a large warehouse in the MDC park. Center locked at 35.037650, -89.874050 on that building. Note: MDC is a multi-tenant park (5625 = Bldg K, 5750 = Bldg J, Cummins at 5800); DTNA leases the 5745 suite. The exact tenant footprint and dock allocation cannot be isolated from imagery alone — medium confidence on the precise building/zone boundaries.",
     "truckGate": "No barrier arm, sliding/swing gate, or guarded checkpoint on the truck side. Dock corridors are internal MDC park roads, open. A chain-link fence around the south-end CAR parking lot has an open vehicle gate — that is car-park perimeter security, not a truck gate.",

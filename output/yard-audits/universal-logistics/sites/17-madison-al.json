@@ -1,18 +1,79 @@
 {
   "name": "Universal Logistics - Polaris Madison Plant Contract Logistics - Madison AL",
   "type": "Contract Logistics / inbound logistics inside manufacturing plant",
-  "coords": { "lat": 34.65205, "lng": -86.85300 },
+  "coords": {
+    "lat": 34.65205,
+    "lng": -86.853
+  },
   "geofences": {
-    "perimeter": { "south": 34.64880, "west": -86.85800, "north": 34.65650, "east": -86.84800 },
-    "truckGate": { "south": 34.65400, "west": -86.85320, "north": 34.65460, "east": -86.85240 },
-    "dropYards": [
-      { "south": 34.64950, "west": -86.85700, "north": 34.65420, "east": -86.85500 },
-      { "south": 34.65450, "west": -86.85350, "north": 34.65620, "east": -86.85100 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.654309,
+          "lng": -86.856845
+        },
+        {
+          "lat": 34.654196,
+          "lng": -86.852313
+        },
+        {
+          "lat": 34.652954,
+          "lng": -86.849704
+        },
+        {
+          "lat": 34.650017,
+          "lng": -86.849979
+        },
+        {
+          "lat": 34.650017,
+          "lng": -86.856845
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.65318,
+          "lng": -86.856983
+        },
+        {
+          "lat": 34.65318,
+          "lng": -86.856159
+        },
+        {
+          "lat": 34.652502,
+          "lng": -86.856159
+        },
+        {
+          "lat": 34.652502,
+          "lng": -86.856983
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 34.64980, "west": -86.85450, "north": 34.65300, "east": -86.85360 }
+      {
+        "ring": [
+          {
+            "lat": 34.652841,
+            "lng": -86.856708
+          },
+          {
+            "lat": 34.652841,
+            "lng": -86.855747
+          },
+          {
+            "lat": 34.650242,
+            "lng": -86.856021
+          },
+          {
+            "lat": 34.650242,
+            "lng": -86.856845
+          }
+        ]
+      }
     ],
-    "staging": { "south": 34.65380, "west": -86.85450, "north": 34.65470, "east": -86.85200 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 70,
@@ -20,7 +81,7 @@
     "trailerParkingCapacity": 600,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 194.0,
+    "siteAreaAcres": 194,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.65205,-86.85300,400m/data=!3m1!1e3",
@@ -49,7 +110,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "locate": "Resolved to 7049 Greenbrier Pkwy NW, Madison AL 35756 — the Polaris Industries off-road-vehicle manufacturing plant in the Limestone County / Huntsville-area Greenbrier corridor. Universal Logistics runs inbound contract logistics (sequencing/value-added warehousing) INSIDE the Polaris plant; the audited yard is the Polaris plant's captive freight yard. Confirmed NOT the Mazda-Toyota plant at 9000 Greenbrier Pkwy (a separate, larger facility ~1.5 mi NE). Google geocode returned a ROOFTOP match at 34.6521957,-86.8525792.",
     "truckGate": "The main plant entrance on the north access loop has a clear controlled checkpoint: a guard house structure in the road median with multiple barrier-arm-controlled lanes (visible as striped barrier marks across the lanes), with vehicles queued. truckGate = true.",

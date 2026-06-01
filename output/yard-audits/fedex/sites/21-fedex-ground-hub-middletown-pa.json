@@ -1,20 +1,105 @@
 {
   "name": "FedEx Ground Hub - Middletown PA (Harrisburg)",
   "type": "Ground regional sortation hub",
-  "coords": { "lat": 40.23310, "lng": -76.73080 },
+  "coords": {
+    "lat": 40.2331,
+    "lng": -76.7308
+  },
   "geofences": {
-    "perimeter": { "south": 40.23040, "west": -76.73380, "north": 40.23600, "east": -76.72820 },
-    "truckGate": { "south": 40.23085, "west": -76.73295, "north": 40.23125, "east": -76.73230 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.235406,
+          "lng": -76.736842
+        },
+        {
+          "lat": 40.235616,
+          "lng": -76.731349
+        },
+        {
+          "lat": 40.231842,
+          "lng": -76.728053
+        },
+        {
+          "lat": 40.229745,
+          "lng": -76.729976
+        },
+        {
+          "lat": 40.230164,
+          "lng": -76.73492
+        },
+        {
+          "lat": 40.233519,
+          "lng": -76.737117
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 40.23330, "west": -76.73380, "north": 40.23560, "east": -76.73020 },
-      { "south": 40.23300, "west": -76.73000, "north": 40.23420, "east": -76.72830 }
+      {
+        "ring": [
+          {
+            "lat": 40.235197,
+            "lng": -76.736293
+          },
+          {
+            "lat": 40.235406,
+            "lng": -76.731624
+          },
+          {
+            "lat": 40.233519,
+            "lng": -76.731349
+          },
+          {
+            "lat": 40.2331,
+            "lng": -76.736019
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.233729,
+            "lng": -76.731349
+          },
+          {
+            "lat": 40.232052,
+            "lng": -76.728877
+          },
+          {
+            "lat": 40.230584,
+            "lng": -76.729701
+          },
+          {
+            "lat": 40.232261,
+            "lng": -76.732173
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.23150, "west": -76.73230, "north": 40.23330, "east": -76.73120 },
-      { "south": 40.23130, "west": -76.73120, "north": 40.23290, "east": -76.72870 },
-      { "south": 40.23420, "west": -76.73250, "north": 40.23560, "east": -76.72900 }
+      {
+        "ring": [
+          {
+            "lat": 40.2331,
+            "lng": -76.733547
+          },
+          {
+            "lat": 40.23331,
+            "lng": -76.730525
+          },
+          {
+            "lat": 40.231842,
+            "lng": -76.730251
+          },
+          {
+            "lat": 40.231632,
+            "lng": -76.733272
+          }
+        ]
+      }
     ],
-    "staging": { "south": 40.23040, "west": -76.73250, "north": 40.23130, "east": -76.73000 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 230,
@@ -22,23 +107,42 @@
     "trailerParkingCapacity": 600,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 76.0,
+    "siteAreaAcres": 76,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.23310,-76.73080,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "postGateStaging"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "postGateStaging"
+  ],
   "fieldNotes": {
     "facility": "Confirmed FedEx Ground hub at 111 Fulling Mill Rd via FedEx logo visible on building face in Street View (panos along internal driveway, captured 2019/2023). Geocoded point landed on the central sort building; correct facility.",
     "truckGate": "Truck yard is fully fenced - perimeter fence lines clearly visible on N, NW, W and NE boundaries on satellite. Truck route enters the secured yard through a controlled point; classified truckGate true.",

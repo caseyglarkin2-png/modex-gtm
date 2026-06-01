@@ -1,18 +1,77 @@
 {
   "name": "Home Depot RDC - Locust Grove GA",
   "type": "Rapid Deployment Center",
-  "coords": { "lat": 33.36300, "lng": -84.11900 },
+  "coords": {
+    "lat": 33.363,
+    "lng": -84.119
+  },
   "geofences": {
-    "perimeter": { "south": 33.35950, "west": -84.12300, "north": 33.36700, "east": -84.11450 },
-    "truckGate": { "south": 33.36050, "west": -84.12030, "north": 33.36180, "east": -84.11880 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.365065,
+          "lng": -84.119824
+        },
+        {
+          "lat": 33.364376,
+          "lng": -84.116803
+        },
+        {
+          "lat": 33.361394,
+          "lng": -84.117764
+        },
+        {
+          "lat": 33.362082,
+          "lng": -84.120785
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 33.36280, "west": -84.11720, "north": 33.36600, "east": -84.11550 }
+      {
+        "ring": [
+          {
+            "lat": 33.365294,
+            "lng": -84.117901
+          },
+          {
+            "lat": 33.365065,
+            "lng": -84.116803
+          },
+          {
+            "lat": 33.363918,
+            "lng": -84.117352
+          },
+          {
+            "lat": 33.364147,
+            "lng": -84.118313
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.36100, "west": -84.11800, "north": 33.36560, "east": -84.11620 },
-      { "south": 33.36080, "west": -84.12130, "north": 33.36380, "east": -84.11980 }
+      {
+        "ring": [
+          {
+            "lat": 33.364376,
+            "lng": -84.120099
+          },
+          {
+            "lat": 33.363803,
+            "lng": -84.117352
+          },
+          {
+            "lat": 33.362312,
+            "lng": -84.117901
+          },
+          {
+            "lat": 33.362885,
+            "lng": -84.120511
+          }
+        ]
+      }
     ],
-    "staging": { "south": 33.36080, "west": -84.12000, "north": 33.36280, "east": -84.11820 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 130,
@@ -20,23 +79,45 @@
     "trailerParkingCapacity": 200,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 130.0,
+    "siteAreaAcres": 130,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.36300,-84.11900,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "10-25",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dropArea", "trailersVisible", "scale"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dropArea",
+    "trailersVisible",
+    "scale"
+  ],
   "fieldNotes": {
     "resolution": "Roster geocode (33.216581,-83.930773) was wrong by ~25 km — landed in rural farmland SE of Locust Grove. Correct facility resolved via web research to 3150 Hwy 42 S, Locust Grove (HD DC #5250 / RDC 5250), a 657,518 sq ft RDC on ~130 acres off I-75, bought by Monmouth REIT for $96.7M in 2020. Building positively located at ~33.363,-84.119.",
     "imagery": "Satellite imagery of this site is significantly cloud-affected at z16-z19 — the central building roof and the truck entrance are partially obscured. Building outline, the SE-face dock bank, and trailer rows are still readable; the gate structure itself could not be directly imaged.",

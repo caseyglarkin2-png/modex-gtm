@@ -1,17 +1,108 @@
 {
   "name": "Mondelez Houston Distribution Center - Houston TX",
   "type": "Distribution center / multi-tenant warehouse (tenant)",
-  "coords": { "lat": 29.87074, "lng": -95.56503 },
+  "coords": {
+    "lat": 29.87074,
+    "lng": -95.56503
+  },
   "geofences": {
-    "perimeter": { "south": 29.87015, "west": -95.56565, "north": 29.87195, "east": -95.56400 },
-    "truckGate": { "south": 29.87215, "west": -95.56430, "north": 29.87255, "east": -95.56380 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.871157,
+          "lng": -95.565717
+        },
+        {
+          "lat": 29.871127,
+          "lng": -95.564275
+        },
+        {
+          "lat": 29.870264,
+          "lng": -95.564275
+        },
+        {
+          "lat": 29.870264,
+          "lng": -95.565717
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 29.870591,
+          "lng": -95.565717
+        },
+        {
+          "lat": 29.870591,
+          "lng": -95.565511
+        },
+        {
+          "lat": 29.870383,
+          "lng": -95.565511
+        },
+        {
+          "lat": 29.870383,
+          "lng": -95.565717
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 29.87120, "west": -95.56560, "north": 29.87195, "east": -95.56410 }
+      {
+        "ring": [
+          {
+            "lat": 29.871455,
+            "lng": -95.565717
+          },
+          {
+            "lat": 29.871425,
+            "lng": -95.564343
+          },
+          {
+            "lat": 29.871187,
+            "lng": -95.564343
+          },
+          {
+            "lat": 29.871216,
+            "lng": -95.565717
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 29.87105, "west": -95.56560, "north": 29.87145, "east": -95.56420 }
+      {
+        "ring": [
+          {
+            "lat": 29.871127,
+            "lng": -95.565648
+          },
+          {
+            "lat": 29.871097,
+            "lng": -95.564343
+          },
+          {
+            "lat": 29.870919,
+            "lng": -95.564343
+          },
+          {
+            "lat": 29.870948,
+            "lng": -95.565648
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 61,
+        "pano": "K8i6xmkzI-Tt3VacXeHM7A",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 61,
+        "pano": "K8i6xmkzI-Tt3VacXeHM7A",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 22,
@@ -48,7 +139,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "guardShack"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "guardShack"
+  ],
   "fieldNotes": {
     "locate": "Resolved to 6903 W Sam Houston Pkwy N, Houston TX 77041 — a ~105,594 SF industrial distribution building in a corporate park off Beltway 8 (W Sam Houston Pkwy N) in NW Houston. Google geocode returned a ROOFTOP hit at 29.870738,-95.565030. This is a multi-tenant warehouse; Mondelez is one tenant of the building (the building also shows other industrial tenants / FMCSA-registered carriers).",
     "facilityNature": "Multi-tenant warehouse. The audit covers the geocoded building and its shared truck yard. Dock doors run along the building's NORTH face under a dock canopy; the south face is a two-story office with landscaped employee/visitor parking and an open (uncontrolled) car entrance.",

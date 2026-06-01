@@ -1,18 +1,67 @@
 {
   "name": "Smucker's Spreads/Toppings - Orrville OH",
   "type": "Manufacturing - Fruit spreads, syrups, ice cream toppings",
-  "coords": { "lat": 40.84780, "lng": -81.76050 },
+  "coords": {
+    "lat": 40.8478,
+    "lng": -81.7605
+  },
   "geofences": {
-    "perimeter": { "south": 40.84370, "west": -81.76480, "north": 40.85250, "east": -81.75600 },
-    "truckGate": { "south": 40.84395, "west": -81.76010, "north": 40.84455, "east": -81.75900 },
-    "dropYards": [
-      { "south": 40.84430, "west": -81.76130, "north": 40.84650, "east": -81.75880 },
-      { "south": 40.84690, "west": -81.76130, "north": 40.84810, "east": -81.75980 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.85154,
+          "lng": -81.764345
+        },
+        {
+          "lat": 40.85154,
+          "lng": -81.757204
+        },
+        {
+          "lat": 40.845307,
+          "lng": -81.756105
+        },
+        {
+          "lat": 40.84406,
+          "lng": -81.762697
+        },
+        {
+          "lat": 40.8478,
+          "lng": -81.764895
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 40.84720, "west": -81.76070, "north": 40.84900, "east": -81.75980 }
+      {
+        "ring": [
+          {
+            "lat": 40.846761,
+            "lng": -81.759127
+          },
+          {
+            "lat": 40.846138,
+            "lng": -81.756105
+          },
+          {
+            "lat": 40.844476,
+            "lng": -81.756655
+          },
+          {
+            "lat": 40.845099,
+            "lng": -81.759676
+          }
+        ]
+      }
     ],
-    "staging": { "south": 40.84660, "west": -81.76070, "north": 40.84740, "east": -81.75960 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 6,
+        "pano": "_0UkNn2IYgI1Q-E0CobVyg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 38,
@@ -20,23 +69,39 @@
     "trailerParkingCapacity": 110,
     "truckGateCount": 1,
     "buildingCount": 8,
-    "siteAreaAcres": 64.0,
+    "siteAreaAcres": 64,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@40.84780,-81.76050,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "scale"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "South truck driveway opens directly onto the public road with no barrier arm, sliding gate, or checkpoint pinch-point (Street View Apr-2023, Jan-2025). Open uncontrolled entrance into the drop yard / dock area.",
     "guardShack": "No staffed booth at the south entrance; only a small free-standing yard sign. No booth structure visible at any campus truck access.",

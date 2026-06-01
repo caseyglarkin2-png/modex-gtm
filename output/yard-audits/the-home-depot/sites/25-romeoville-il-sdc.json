@@ -1,17 +1,77 @@
 {
   "name": "Home Depot SDC - Romeoville IL",
   "type": "Stocking Distribution Center",
-  "coords": { "lat": 41.663229, "lng": -88.112651 },
+  "coords": {
+    "lat": 41.663229,
+    "lng": -88.112651
+  },
   "geofences": {
-    "perimeter": { "south": 41.66250, "west": -88.11420, "north": 41.66850, "east": -88.11080 },
-    "truckGate": { "south": 41.66305, "west": -88.11330, "north": 41.66350, "east": -88.11270 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.667743,
+          "lng": -88.114024
+        },
+        {
+          "lat": 41.666307,
+          "lng": -88.110454
+        },
+        {
+          "lat": 41.663229,
+          "lng": -88.112651
+        },
+        {
+          "lat": 41.664665,
+          "lng": -88.115947
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 41.66380, "west": -88.11390, "north": 41.66760, "east": -88.11270 }
+      {
+        "ring": [
+          {
+            "lat": 41.665281,
+            "lng": -88.115672
+          },
+          {
+            "lat": 41.666307,
+            "lng": -88.113475
+          },
+          {
+            "lat": 41.665281,
+            "lng": -88.112651
+          },
+          {
+            "lat": 41.66405,
+            "lng": -88.114848
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.66370, "west": -88.11290, "north": 41.66780, "east": -88.11210 }
+      {
+        "ring": [
+          {
+            "lat": 41.666922,
+            "lng": -88.114024
+          },
+          {
+            "lat": 41.665896,
+            "lng": -88.111278
+          },
+          {
+            "lat": 41.663845,
+            "lng": -88.112651
+          },
+          {
+            "lat": 41.66487,
+            "lng": -88.114848
+          }
+        ]
+      }
     ],
-    "staging": { "south": 41.66320, "west": -88.11320, "north": 41.66400, "east": -88.11240 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 90,
@@ -19,7 +79,7 @@
     "trailerParkingCapacity": 120,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 45.0,
+    "siteAreaAcres": 45,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.663229,-88.112651,400m/data=!3m1!1e3",
@@ -48,7 +108,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "A guarded checkpoint at the SW corner (~41.6633,-88.1130): the truck driveway curves in from the access road and passes a guard booth with barrier-arm gates and a chainlink fence corner. Confirmed in 2022 Street View — controlled truck entrance.",
     "guardShack": "Small white guard booth with windows on multiple sides, ~1-vehicle footprint, set beside the truck gate lanes. Clearly visible in Street View — distinct from the DC building.",

@@ -1,18 +1,112 @@
 {
   "name": "Gastonia Components and Logistics - Gastonia NC",
   "type": "Component / parts subassembly and logistics plant",
-  "coords": { "lat": 35.288, "lng": -81.2052 },
+  "coords": {
+    "lat": 35.288,
+    "lng": -81.2052
+  },
   "geofences": {
-    "perimeter": { "south": 35.2858, "west": -81.2082, "north": 35.2902, "east": -81.2010 },
-    "truckGate": { "south": 35.28785, "west": -81.20325, "north": 35.28825, "east": -81.20275 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.289121,
+          "lng": -81.207123
+        },
+        {
+          "lat": 35.289121,
+          "lng": -81.204101
+        },
+        {
+          "lat": 35.286655,
+          "lng": -81.203552
+        },
+        {
+          "lat": 35.286431,
+          "lng": -81.206573
+        },
+        {
+          "lat": 35.288,
+          "lng": -81.207397
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.286655,
+          "lng": -81.205749
+        },
+        {
+          "lat": 35.286655,
+          "lng": -81.204925
+        },
+        {
+          "lat": 35.286206,
+          "lng": -81.204925
+        },
+        {
+          "lat": 35.286206,
+          "lng": -81.205749
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 35.2884, "west": -81.2072, "north": 35.2900, "east": -81.2050 }
+      {
+        "ring": [
+          {
+            "lat": 35.28744,
+            "lng": -81.204513
+          },
+          {
+            "lat": 35.28744,
+            "lng": -81.203003
+          },
+          {
+            "lat": 35.286206,
+            "lng": -81.203003
+          },
+          {
+            "lat": 35.286206,
+            "lng": -81.204513
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.2884, "west": -81.2068, "north": 35.2890, "east": -81.2045 },
-      { "south": 35.2868, "west": -81.2074, "north": 35.2884, "east": -81.2068 }
+      {
+        "ring": [
+          {
+            "lat": 35.287103,
+            "lng": -81.206848
+          },
+          {
+            "lat": 35.287103,
+            "lng": -81.204513
+          },
+          {
+            "lat": 35.286767,
+            "lng": -81.204513
+          },
+          {
+            "lat": 35.286767,
+            "lng": -81.206848
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 352,
+        "pano": "fYFk5hFIKYmu-LqhupWhtg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 352,
+        "pano": "fYFk5hFIKYmu-LqhupWhtg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 35,
@@ -20,23 +114,41 @@
     "trailerParkingCapacity": 95,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 73.0,
+    "siteAreaAcres": 73,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.288,-81.2052,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "shipRcvSeparate"],
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "location": "Geocoded point (GEOMETRIC_CENTER, moved only 44m) landed accurately on the campus. Confirmed: a large white-roofed components/logistics plant plus a separate gray-roofed building to the east, on a wooded campus off Tulip Drive south of I-85. DTNA / Waze listings confirm 'Daimler Truck North America Components & Logistics, 1400 Tulip Dr.'",
     "truckGate": "Controlled vehicle entrance on the SE: Street View (captured 2026-02) shows a checkpoint canopy/gatehouse with orange bollards lining the lane and chain-link fencing; satellite shows a small white-canopy structure spanning the entry drive with a trailer passing through.",

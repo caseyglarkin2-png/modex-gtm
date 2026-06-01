@@ -1,15 +1,42 @@
 {
   "name": "Robert Mondavi Winery - Oakville CA",
   "type": "Winery / Production Facility",
-  "coords": { "lat": 38.435700, "lng": -122.401300 },
+  "coords": {
+    "lat": 38.4357,
+    "lng": -122.4013
+  },
   "geofences": {
-    "perimeter": { "south": 38.433600, "west": -122.403100, "north": 38.437800, "east": -122.399400 },
-    "truckGate": { "south": 38.436500, "west": -122.402600, "north": 38.436950, "east": -122.402150 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.437206,
+          "lng": -122.402948
+        },
+        {
+          "lat": 38.437206,
+          "lng": -122.400201
+        },
+        {
+          "lat": 38.435055,
+          "lng": -122.400201
+        },
+        {
+          "lat": 38.435055,
+          "lng": -122.402948
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [],
-    "dockAprons": [
-      { "south": 38.435900, "west": -122.401100, "north": 38.436400, "east": -122.400500 }
-    ],
-    "staging": { "south": 38.436500, "west": -122.402300, "north": 38.436950, "east": -122.401700 }
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 218,
+        "pano": "rmQ6VdRH_9Nfo9MFvFyHDg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 5,
@@ -17,7 +44,7 @@
     "trailerParkingCapacity": 4,
     "truckGateCount": 1,
     "buildingCount": 5,
-    "siteAreaAcres": 14.0,
+    "siteAreaAcres": 14,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@38.435700,-122.401300,400m/data=!3m1!1e3",
@@ -46,7 +73,16 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoors", "dropArea", "scale", "trailersVisible", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoors",
+    "dropArea",
+    "scale",
+    "trailersVisible",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "facilityId": "Robert Mondavi Winery confirmed at 7801 St. Helena Highway, Oakville CA - the iconic Napa Valley estate winery (To Kalon Vineyard), reopened April 2026 after a multi-year transformation. The estate sits on the EAST side of CA-29 / St. Helena Highway. The roster coordinate (38.434323, -122.400476) landed in the To Kalon vineyard just SE of the building complex; the actual built campus center is ~38.4357, -122.4013.",
     "truckGate": "Main entrance is an open landscaped driveway off CA-29 with a stone monument sign pier and visitor parking; no barrier arm, sliding/swing gate, or checkpoint pinch-point across the lane (Street View 2024-08). Open winery estate entrance - marked false.",

@@ -1,39 +1,168 @@
 {
   "name": "Sturtevant Regional Distribution Center - Sturtevant WI",
   "type": "Regional Distribution Center (aerosol storage)",
-  "coords": { "lat": 42.70360, "lng": -87.91160 },
+  "coords": {
+    "lat": 42.7036,
+    "lng": -87.9116
+  },
   "geofences": {
-    "perimeter": { "south": 42.70250, "west": -87.91340, "north": 42.70480, "east": -87.90940 },
-    "truckGate": { "south": 42.70290, "west": -87.91240, "north": 42.70320, "east": -87.91160 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.705114,
+          "lng": -87.913111
+        },
+        {
+          "lat": 42.705013,
+          "lng": -87.909952
+        },
+        {
+          "lat": 42.703348,
+          "lng": -87.909815
+        },
+        {
+          "lat": 42.703247,
+          "lng": -87.912973
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.703146,
+          "lng": -87.91469
+        },
+        {
+          "lat": 42.703146,
+          "lng": -87.914347
+        },
+        {
+          "lat": 42.702894,
+          "lng": -87.914347
+        },
+        {
+          "lat": 42.702894,
+          "lng": -87.91469
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 42.70285, "west": -87.91300, "north": 42.70320, "east": -87.90990 },
-      { "south": 42.70435, "west": -87.91300, "north": 42.70475, "east": -87.90990 }
+      {
+        "ring": [
+          {
+            "lat": 42.702793,
+            "lng": -87.91366
+          },
+          {
+            "lat": 42.702742,
+            "lng": -87.9116
+          },
+          {
+            "lat": 42.702288,
+            "lng": -87.9116
+          },
+          {
+            "lat": 42.702338,
+            "lng": -87.91366
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 42.70295, "west": -87.91300, "north": 42.70322, "east": -87.90990 },
-      { "south": 42.70432, "west": -87.91300, "north": 42.70458, "east": -87.90990 }
+      {
+        "ring": [
+          {
+            "lat": 42.7036,
+            "lng": -87.912973
+          },
+          {
+            "lat": 42.70355,
+            "lng": -87.910089
+          },
+          {
+            "lat": 42.703247,
+            "lng": -87.910089
+          },
+          {
+            "lat": 42.703297,
+            "lng": -87.912973
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": {
+      "ring": [
+        {
+          "lat": 42.702944,
+          "lng": -87.911257
+        },
+        {
+          "lat": 42.702944,
+          "lng": -87.910227
+        },
+        {
+          "lat": 42.70249,
+          "lng": -87.910227
+        },
+        {
+          "lat": 42.70249,
+          "lng": -87.911257
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 63,
+        "pano": "vAISN1_R-N_-5sA8MzFvzg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 63,
+        "pano": "vAISN1_R-N_-5sA8MzFvzg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 60, "trailersVisible": 70, "trailerParkingCapacity": 118,
-    "truckGateCount": 2, "buildingCount": 2, "siteAreaAcres": 33.0,
+    "dockDoorCount": 60,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 118,
+    "truckGateCount": 2,
+    "buildingCount": 2,
+    "siteAreaAcres": 33,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@42.70360,-87.91160,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "multiStep"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "multiStep"
+  ],
   "fieldNotes": {
     "location": "Confirmed via EPA RMP record (Sturtevant Regional Distribution Center, 2600 Enterprise Dr) + LoopNet/Colliers listings: 552,000 sq ft SCJ-owned aerosol-storage warehouse, LEED-Gold, 32-ft clear, 55 docks, 118 trailer staging positions. Roster coords (42.704751,-87.90962) sat near the NE office corner; building center relocated to ~42.70360,-87.91160 from satellite.",
     "truckGate": "The truck yards on both the north and south long faces are fully enclosed by chain-link perimeter fencing — Street View (Jun 2019) along Enterprise Dr clearly shows continuous chain-link with trailers parked behind it on the south side. Controlled-access fenced compound with truck gates in the fence line where the perimeter loop road enters the yards.",

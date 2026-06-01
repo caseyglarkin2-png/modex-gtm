@@ -1,19 +1,56 @@
 {
   "name": "DHL Supply Chain - DC - Houston TX",
   "type": "Distribution Center",
-  "coords": { "lat": 29.80440, "lng": -95.27275 },
+  "coords": {
+    "lat": 29.8044,
+    "lng": -95.27275
+  },
   "geofences": {
-    "perimeter": { "south": 29.8024, "west": -95.2738, "north": 29.8064, "east": -95.2717 },
-    "truckGate": { "south": 29.80255, "west": -95.27345, "north": 29.80300, "east": -95.27300 },
-    "dropYards": [
-      { "south": 29.8028, "west": -95.2737, "north": 29.8062, "east": -95.2730 },
-      { "south": 29.8028, "west": -95.2724, "north": 29.8062, "east": -95.2718 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.805592,
+          "lng": -95.274123
+        },
+        {
+          "lat": 29.806068,
+          "lng": -95.271926
+        },
+        {
+          "lat": 29.802732,
+          "lng": -95.270827
+        },
+        {
+          "lat": 29.802255,
+          "lng": -95.273025
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 29.8028, "west": -95.2734, "north": 29.8062, "east": -95.2731 },
-      { "south": 29.8028, "west": -95.2723, "north": 29.8062, "east": -95.2721 }
+      {
+        "ring": [
+          {
+            "lat": 29.805234,
+            "lng": -95.273917
+          },
+          {
+            "lat": 29.805472,
+            "lng": -95.27275
+          },
+          {
+            "lat": 29.802613,
+            "lng": -95.271926
+          },
+          {
+            "lat": 29.802374,
+            "lng": -95.273093
+          }
+        ]
+      }
     ],
-    "staging": { "south": 29.8024, "west": -95.2735, "north": 29.8028, "east": -95.2730 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 80,
@@ -26,18 +63,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@29.80440,-95.27275,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": true, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": true,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "truckGate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "truckGate"
+  ],
   "fieldNotes": {
     "location": "Resolved to 8609 Citypark Loop, Houston TX 77013 (CityPark / East Freeway logistics park). Roster gave no address; a Panjiva import record explicitly names 'Dhl Supply Chain, 8609 City Park Loop, Houston Texas 77013'. Google Geocoding API returned ROOFTOP precision (29.80377, -95.27271). Street View confirmed the building marked '8609' on its SW office front.",
     "truckGate": "The west truck court is enclosed by chain-link fence with a gate at the driveway from Citypark Loop, visible in 2021 Street View and 2026 satellite. Marked uncertain because the gate hardware is partly tree-obscured in Street View; the perimeter fence is clear.",

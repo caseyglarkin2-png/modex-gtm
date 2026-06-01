@@ -1,17 +1,108 @@
 {
   "name": "Performance Foodservice - Arizona (Phoenix AZ)",
   "type": "Broadline Foodservice Distribution Center",
-  "coords": { "lat": 33.44260, "lng": -112.21950 },
+  "coords": {
+    "lat": 33.4426,
+    "lng": -112.2195
+  },
   "geofences": {
-    "perimeter": { "south": 33.44080, "west": -112.22090, "north": 33.44400, "east": -112.21830 },
-    "truckGate": { "south": 33.44150, "west": -112.22080, "north": 33.44210, "east": -112.22020 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.444204,
+          "lng": -112.221011
+        },
+        {
+          "lat": 33.444204,
+          "lng": -112.218401
+        },
+        {
+          "lat": 33.441912,
+          "lng": -112.218401
+        },
+        {
+          "lat": 33.441912,
+          "lng": -112.221011
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.443173,
+          "lng": -112.221079
+        },
+        {
+          "lat": 33.443173,
+          "lng": -112.220599
+        },
+        {
+          "lat": 33.442829,
+          "lng": -112.220599
+        },
+        {
+          "lat": 33.442829,
+          "lng": -112.221079
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 33.44090, "west": -112.21990, "north": 33.44200, "east": -112.21830 }
+      {
+        "ring": [
+          {
+            "lat": 33.442715,
+            "lng": -112.219843
+          },
+          {
+            "lat": 33.442715,
+            "lng": -112.218676
+          },
+          {
+            "lat": 33.442027,
+            "lng": -112.218676
+          },
+          {
+            "lat": 33.442027,
+            "lng": -112.219843
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.44210, "west": -112.22010, "north": 33.44280, "east": -112.21850 }
+      {
+        "ring": [
+          {
+            "lat": 33.443058,
+            "lng": -112.220873
+          },
+          {
+            "lat": 33.443058,
+            "lng": -112.219981
+          },
+          {
+            "lat": 33.442829,
+            "lng": -112.219981
+          },
+          {
+            "lat": 33.442829,
+            "lng": -112.220873
+          }
+        ]
+      }
     ],
-    "staging": { "south": 33.44200, "west": -112.22080, "north": 33.44270, "east": -112.21980 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 139,
+        "pano": "Rrc1fMmqW-Q2w2vCv2cQRQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 139,
+        "pano": "Rrc1fMmqW-Q2w2vCv2cQRQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 24,
@@ -48,7 +139,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "guardShack"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "guardShack"
+  ],
   "fieldNotes": {
     "truckGate": "The truck/dock yard is enclosed by a block wall plus chain-link fence; a curving paved entrance driveway leads through a gated opening at the SW. Controlled entry confirmed in satellite + Street View.",
     "guardShack": "No staffed guard booth observed beside the gate; entry appears gate-only (kiosk/call-box style) — set remoteGs true. Flagged as uncertain since the curving driveway corner is partly tree-shaded.",

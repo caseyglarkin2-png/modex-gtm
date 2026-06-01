@@ -1,19 +1,108 @@
 {
   "name": "Frito-Lay - Perry GA (Kathleen)",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 32.483737, "lng": -83.609766 },
+  "coords": {
+    "lat": 32.483737,
+    "lng": -83.609766
+  },
   "geofences": {
-    "perimeter": { "south": 32.479500, "west": -83.613500, "north": 32.487200, "east": -83.604200 },
-    "truckGate": { "south": 32.485400, "west": -83.611400, "north": 32.485900, "east": -83.610600 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.485938,
+          "lng": -83.612513
+        },
+        {
+          "lat": 32.485938,
+          "lng": -83.605921
+        },
+        {
+          "lat": 32.480493,
+          "lng": -83.605646
+        },
+        {
+          "lat": 32.480262,
+          "lng": -83.612513
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.480957,
+          "lng": -83.612787
+        },
+        {
+          "lat": 32.480957,
+          "lng": -83.611963
+        },
+        {
+          "lat": 32.480377,
+          "lng": -83.611963
+        },
+        {
+          "lat": 32.480377,
+          "lng": -83.612787
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 32.481800, "west": -83.608200, "north": 32.484800, "east": -83.604800 },
-      { "south": 32.480200, "west": -83.612400, "north": 32.481400, "east": -83.610000 }
+      {
+        "ring": [
+          {
+            "lat": 32.483158,
+            "lng": -83.612238
+          },
+          {
+            "lat": 32.483158,
+            "lng": -83.610453
+          },
+          {
+            "lat": 32.480493,
+            "lng": -83.610453
+          },
+          {
+            "lat": 32.480493,
+            "lng": -83.612238
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 32.483500, "west": -83.606300, "north": 32.485200, "east": -83.605300 },
-      { "south": 32.485400, "west": -83.610600, "north": 32.486400, "east": -83.608600 }
+      {
+        "ring": [
+          {
+            "lat": 32.480957,
+            "lng": -83.610315
+          },
+          {
+            "lat": 32.480957,
+            "lng": -83.605921
+          },
+          {
+            "lat": 32.480493,
+            "lng": -83.605921
+          },
+          {
+            "lat": 32.480493,
+            "lng": -83.610315
+          }
+        ]
+      }
     ],
-    "staging": { "south": 32.480100, "west": -83.612500, "north": 32.481400, "east": -83.610600 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 106,
+        "pano": "fJgeEM7e4vZTMaUgrszOmw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 106,
+        "pano": "fJgeEM7e4vZTMaUgrszOmw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 70,
@@ -21,23 +110,43 @@
     "trailerParkingCapacity": 420,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 130.0,
+    "siteAreaAcres": 130,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@32.483737,-83.609766,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "scale", "dockDoorCount", "multiStep"],
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "dockDoorCount",
+    "multiStep"
+  ],
   "fieldNotes": {
     "truckGate": "Single primary entrance road off GA Highway 247 in the NW. The entrance road crosses the BNSF/Norfolk Southern mainline at a grade crossing (confirmed in Street View) then runs into the secured plant property. The whole campus is fenced; the controlled entrance is a clear pinch-point.",
     "guardShack": "A guard booth is almost certainly present at this flagship secured plant - the largest Frito-Lay snack plant in the US with 1000+ employees and tightly controlled internal roads. However it could not be directly confirmed: Street View does not reach the internal entrance road and z20-z21 satellite at the gate zone is washed out. Marked true at medium confidence.",

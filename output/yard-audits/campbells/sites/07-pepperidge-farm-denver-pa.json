@@ -1,37 +1,116 @@
 {
   "name": "Pepperidge Farm - Denver PA",
   "type": "Manufacturing - bakery (baked goods and cookies)",
-  "coords": { "lat": 40.222800, "lng": -76.085500 },
+  "coords": {
+    "lat": 40.2228,
+    "lng": -76.0855
+  },
   "geofences": {
-    "perimeter": { "south": 40.21920, "west": -76.09050, "north": 40.22700, "east": -76.08200 },
-    "truckGate": { "south": 40.22250, "west": -76.08900, "north": 40.22320, "east": -76.08800 },
-    "dropYards": [
-      { "south": 40.22020, "west": -76.08470, "north": 40.22210, "east": -76.08250 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.224478,
+          "lng": -76.088796
+        },
+        {
+          "lat": 40.224897,
+          "lng": -76.083852
+        },
+        {
+          "lat": 40.221542,
+          "lng": -76.082204
+        },
+        {
+          "lat": 40.219445,
+          "lng": -76.084951
+        },
+        {
+          "lat": 40.219864,
+          "lng": -76.088247
+        },
+        {
+          "lat": 40.222381,
+          "lng": -76.089345
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 40.22070, "west": -76.08560, "north": 40.22220, "east": -76.08330 }
+      {
+        "ring": [
+          {
+            "lat": 40.222381,
+            "lng": -76.087697
+          },
+          {
+            "lat": 40.2228,
+            "lng": -76.083852
+          },
+          {
+            "lat": 40.221542,
+            "lng": -76.08344
+          },
+          {
+            "lat": 40.221122,
+            "lng": -76.087285
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 84,
+        "pano": "HmHw_8PwFunRpx1vEJTjsQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 45, "trailersVisible": 70, "trailerParkingCapacity": 110,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 95.0,
+    "dockDoorCount": 45,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 95,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.222800,-76.085500,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "dockDoorCount", "entryExitSeparate"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "dockDoorCount",
+    "entryExitSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Single private entrance road (Pepperidge Farm Drive) off the public road; entrance has a monument sign and a posted 'TRUCKS' directional sign separating truck and car routes. Controlled gate inferred inside.",
     "guardShack": "No guard booth visible at the public-road junction; plant set back. Marked false / remoteGs true at medium confidence.",

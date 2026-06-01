@@ -1,18 +1,112 @@
 {
   "name": "GP Plattsburgh Mill - Plattsburgh NY",
   "type": "Tissue/Towel Mill",
-  "coords": { "lat": 44.7112, "lng": -73.4525 },
+  "coords": {
+    "lat": 44.7112,
+    "lng": -73.4525
+  },
   "geofences": {
-    "perimeter": { "south": 44.707786, "west": -73.456798, "north": 44.714614, "east": -73.448202 },
-    "truckGate": { "south": 44.709700, "west": -73.454800, "north": 44.710400, "east": -73.453900 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 44.714518,
+          "lng": -73.456345
+        },
+        {
+          "lat": 44.714518,
+          "lng": -73.449479
+        },
+        {
+          "lat": 44.709053,
+          "lng": -73.449479
+        },
+        {
+          "lat": 44.708467,
+          "lng": -73.453873
+        },
+        {
+          "lat": 44.710224,
+          "lng": -73.456345
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 44.710712,
+          "lng": -73.451813
+        },
+        {
+          "lat": 44.710712,
+          "lng": -73.450852
+        },
+        {
+          "lat": 44.710126,
+          "lng": -73.450852
+        },
+        {
+          "lat": 44.710126,
+          "lng": -73.451813
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 44.709500, "west": -73.454500, "north": 44.711000, "east": -73.452800 },
-      { "south": 44.712500, "west": -73.455800, "north": 44.713300, "east": -73.454500 }
+      {
+        "ring": [
+          {
+            "lat": 44.714323,
+            "lng": -73.453873
+          },
+          {
+            "lat": 44.714225,
+            "lng": -73.449753
+          },
+          {
+            "lat": 44.713152,
+            "lng": -73.449891
+          },
+          {
+            "lat": 44.713249,
+            "lng": -73.454011
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 44.712800, "west": -73.453200, "north": 44.714300, "east": -73.451500 }
+      {
+        "ring": [
+          {
+            "lat": 44.712176,
+            "lng": -73.4525
+          },
+          {
+            "lat": 44.712078,
+            "lng": -73.45044
+          },
+          {
+            "lat": 44.711493,
+            "lng": -73.450577
+          },
+          {
+            "lat": 44.71159,
+            "lng": -73.452637
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 337,
+        "pano": "wAACuKi9ozz4q8Jl10PllA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 337,
+        "pano": "wAACuKi9ozz4q8Jl10PllA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 28,
@@ -20,23 +114,41 @@
     "trailerParkingCapacity": 70,
     "truckGateCount": 2,
     "buildingCount": 14,
-    "siteAreaAcres": 128.0,
+    "siteAreaAcres": 128,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@44.7112,-73.4525,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "dockDoorCount", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "scale",
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Street View (Oct 2022) shows a chain-link gate with green privacy slats labeled 'GATE 1' on a swing/sliding gate on the SW side of the property; trailers staged immediately inside the fence.",
     "guardShack": "No staffed guard booth visible at GATE 1 — it is an unattended labeled swing gate; access appears to be remote/badge-based, so remoteGs is true.",

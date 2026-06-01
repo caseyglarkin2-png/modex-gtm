@@ -1,15 +1,112 @@
 {
   "name": "GP Anchor Packaging Plant - Jonesboro AR",
   "type": "Thermoformed Packaging Plant",
-  "coords": { "lat": 35.8122, "lng": -90.6390 },
+  "coords": {
+    "lat": 35.8122,
+    "lng": -90.639
+  },
   "geofences": {
-    "perimeter": { "south": 35.810853, "west": -90.641437, "north": 35.813727, "east": -90.635455 },
-    "truckGate": { "south": 35.813031, "west": -90.640743, "north": 35.813569, "east": -90.639857 },
-    "dropYards": [],
-    "dockAprons": [
-      { "south": 35.812071, "west": -90.641132, "north": 35.813329, "east": -90.640468 }
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.813091,
+          "lng": -90.641197
+        },
+        {
+          "lat": 35.812757,
+          "lng": -90.638176
+        },
+        {
+          "lat": 35.810418,
+          "lng": -90.638725
+        },
+        {
+          "lat": 35.810864,
+          "lng": -90.641197
+        },
+        {
+          "lat": 35.8122,
+          "lng": -90.641472
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.811977,
+          "lng": -90.639
+        },
+        {
+          "lat": 35.811977,
+          "lng": -90.638176
+        },
+        {
+          "lat": 35.81142,
+          "lng": -90.638176
+        },
+        {
+          "lat": 35.81142,
+          "lng": -90.639
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 35.812757,
+            "lng": -90.640099
+          },
+          {
+            "lat": 35.812645,
+            "lng": -90.638725
+          },
+          {
+            "lat": 35.812089,
+            "lng": -90.638863
+          },
+          {
+            "lat": 35.8122,
+            "lng": -90.640236
+          }
+        ]
+      }
     ],
-    "staging": { "south": 35.812351, "west": -90.640443, "north": 35.813249, "east": -90.639557 }
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 35.8122,
+            "lng": -90.640923
+          },
+          {
+            "lat": 35.811977,
+            "lng": -90.638725
+          },
+          {
+            "lat": 35.81142,
+            "lng": -90.638863
+          },
+          {
+            "lat": 35.811643,
+            "lng": -90.64106
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 42,
+        "pano": "k54QyZpN4gyJ2iUIrxiI-Q",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 42,
+        "pano": "k54QyZpN4gyJ2iUIrxiI-Q",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 18,
@@ -17,7 +114,7 @@
     "trailerParkingCapacity": 25,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 43.0,
+    "siteAreaAcres": 43,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.8122,-90.6390,400m/data=!3m1!1e3",
@@ -46,7 +143,13 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoors", "trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "dockDoors",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "facility": "Anchor Packaging thermoformed-packaging manufacturing plant at 4708 Krueger Drive, Jonesboro AR — acquired by Georgia-Pacific in Oct 2025 (net-new yard ops). Roster coordinate (35.891617, -90.658333) was ~9 km NW in farmland; relocated via web research (4708 Krueger Drive, GPS 35.8135/-90.6392) and confirmed by the 'Anchor Packaging - NOW HIRING' sign with the Anchor logo and the blue Anchor plant sign, both visible in Jan-2026 Street View.",
     "truckGate": "No controlled truck entrance. The truck driveway enters directly off Krueger Drive as an open driveway — no barrier arm, no sliding/swing gate, no perimeter gate, no guard booth. The plant frontage (employee parking, office) is openly accessible from the public road. Typical light-industrial converting plant in the Jonesboro Industrial Park. truckGate false, guardShack false, remoteGs false.",

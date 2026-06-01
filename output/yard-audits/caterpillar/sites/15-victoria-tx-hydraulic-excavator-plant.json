@@ -1,17 +1,96 @@
 {
   "name": "Caterpillar - Victoria TX Hydraulic Excavator Plant",
   "type": "Manufacturing plant (hydraulic / large excavators)",
-  "coords": { "lat": 28.81950, "lng": -96.93750 },
+  "coords": {
+    "lat": 28.8195,
+    "lng": -96.9375
+  },
   "geofences": {
-    "perimeter": { "south": 28.81450, "west": -96.94250, "north": 28.82350, "east": -96.93350 },
-    "truckGate": { "south": 28.81600, "west": -96.93900, "north": 28.81700, "east": -96.93780 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 28.822869,
+          "lng": -96.941345
+        },
+        {
+          "lat": 28.822388,
+          "lng": -96.934753
+        },
+        {
+          "lat": 28.816612,
+          "lng": -96.935303
+        },
+        {
+          "lat": 28.817094,
+          "lng": -96.941895
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 28.8195,
+          "lng": -96.941895
+        },
+        {
+          "lat": 28.8195,
+          "lng": -96.940247
+        },
+        {
+          "lat": 28.818297,
+          "lng": -96.940247
+        },
+        {
+          "lat": 28.818297,
+          "lng": -96.941895
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 28.81850, "west": -96.94120, "north": 28.82080, "east": -96.93920 }
+      {
+        "ring": [
+          {
+            "lat": 28.822388,
+            "lng": -96.939697
+          },
+          {
+            "lat": 28.822147,
+            "lng": -96.936951
+          },
+          {
+            "lat": 28.820463,
+            "lng": -96.937225
+          },
+          {
+            "lat": 28.820703,
+            "lng": -96.939972
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 28.81700, "west": -96.93870, "north": 28.82050, "east": -96.93720 }
+      {
+        "ring": [
+          {
+            "lat": 28.8195,
+            "lng": -96.940796
+          },
+          {
+            "lat": 28.819259,
+            "lng": -96.936127
+          },
+          {
+            "lat": 28.818297,
+            "lng": -96.936401
+          },
+          {
+            "lat": 28.818537,
+            "lng": -96.941071
+          }
+        ]
+      }
     ],
-    "staging": { "south": 28.81620, "west": -96.93870, "north": 28.81720, "east": -96.93720 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 20,
@@ -19,23 +98,44 @@
     "trailerParkingCapacity": 60,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 161.0,
+    "siteAreaAcres": 161,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@28.81950,-96.93750,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoors", "dropArea", "entryLanes", "exitLanes", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoors",
+    "dropArea",
+    "entryLanes",
+    "exitLanes",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "Roster address '203 Holt Rd' geocoded to the HOLT CAT dealership, NOT the Caterpillar manufacturing plant. Correct site is the ~1.1M sq ft Caterpillar North American Hydraulic Excavator plant at 7300 Lone Tree Rd, Victoria TX 77905, ~3.3 km WSW of the roster point, just SW of Victoria Regional Airport. Confirmed via Victoria Chamber of Commerce listing and the massive modern tilt-up building visible in satellite at 28.8195,-96.9375.",
     "truckGate": "Fully fenced manufacturing campus (chain-link perimeter fence visible in Street View). Truck operations enter via wide internal divided campus roads from Lone Tree Rd; a controlled truck check-in is consistent with a major Cat plant. No barrier arm positively imaged.",

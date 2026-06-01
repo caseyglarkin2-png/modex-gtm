@@ -1,39 +1,131 @@
 {
   "name": "General Mills - Wellston OH",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 39.09580, "lng": -82.54100 },
+  "coords": {
+    "lat": 39.0958,
+    "lng": -82.541
+  },
   "geofences": {
-    "perimeter": { "south": 39.09000, "west": -82.54850, "north": 39.10150, "east": -82.53650 },
-    "truckGate": { "south": 39.09620, "west": -82.53980, "north": 39.09700, "east": -82.53850 },
-    "dropYards": [
-      { "south": 39.09940, "west": -82.54300, "north": 39.10050, "east": -82.53950 },
-      { "south": 39.09600, "west": -82.54080, "north": 39.09720, "east": -82.53880 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.098784,
+          "lng": -82.544845
+        },
+        {
+          "lat": 39.097932,
+          "lng": -82.537704
+        },
+        {
+          "lat": 39.093242,
+          "lng": -82.538803
+        },
+        {
+          "lat": 39.094095,
+          "lng": -82.545944
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.0958,
+          "lng": -82.538803
+        },
+        {
+          "lat": 39.095587,
+          "lng": -82.536605
+        },
+        {
+          "lat": 39.094521,
+          "lng": -82.53688
+        },
+        {
+          "lat": 39.094734,
+          "lng": -82.539077
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 39.09620, "west": -82.53990, "north": 39.09700, "east": -82.53830 },
-      { "south": 39.09640, "west": -82.54080, "north": 39.09710, "east": -82.53980 }
+      {
+        "ring": [
+          {
+            "lat": 39.096653,
+            "lng": -82.543472
+          },
+          {
+            "lat": 39.096226,
+            "lng": -82.539627
+          },
+          {
+            "lat": 39.095161,
+            "lng": -82.539901
+          },
+          {
+            "lat": 39.095587,
+            "lng": -82.543747
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 332,
+        "pano": "9oBUTaHNHOdtk1_VY7ktpA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 332,
+        "pano": "9oBUTaHNHOdtk1_VY7ktpA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 45, "trailersVisible": 60, "trailerParkingCapacity": 110,
-    "truckGateCount": 1, "buildingCount": 5, "siteAreaAcres": 328.0,
+    "dockDoorCount": 45,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 5,
+    "siteAreaAcres": 328,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.09580,-82.54100,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "dockDoorCount"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "location": "Confirmed General Mills frozen-food plant (Totino's pizza / pizza rolls) at 2403 S Pennsylvania Ave, Wellston OH. Geocode was GEOMETRIC_CENTER (moved 1935m) but landed on the large industrial complex; locked center 39.0958,-82.5410. Building bears the General Mills 'G' logo and 'GENERAL MILLS' text, confirmed in 2025 Street View. One of the largest frozen food manufacturing facilities in the US, 1,000+ employees.",
     "truckGate": "TRUE. The entire campus is enclosed by chain-link perimeter fencing with barbed wire (confirmed on multiple sides in 2024/2025 Street View). A wide industrial access drive leaves S Pennsylvania Ave at a 'GENERAL MILLS'-signed entrance near the warehouse; a secondary chain-link swing gate was also seen on a south perimeter lane. Controlled truck entrance.",

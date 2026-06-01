@@ -1,40 +1,128 @@
 {
   "name": "General Mills - Hannibal MO",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 39.68180, "lng": -91.41440 },
+  "coords": {
+    "lat": 39.6818,
+    "lng": -91.4144
+  },
   "geofences": {
-    "perimeter": { "south": 39.67900, "west": -91.41800, "north": 39.68500, "east": -91.41050 },
-    "truckGate": { "south": 39.67980, "west": -91.41450, "north": 39.68060, "east": -91.41330 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.682857,
+          "lng": -91.4144
+        },
+        {
+          "lat": 39.682223,
+          "lng": -91.410555
+        },
+        {
+          "lat": 39.678841,
+          "lng": -91.411379
+        },
+        {
+          "lat": 39.679475,
+          "lng": -91.415224
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 39.68080, "west": -91.41620, "north": 39.68280, "east": -91.41470 },
-      { "south": 39.68140, "west": -91.41460, "north": 39.68290, "east": -91.41330 },
-      { "south": 39.68220, "west": -91.41700, "north": 39.68330, "east": -91.41560 },
-      { "south": 39.67830, "west": -91.41600, "north": 39.67920, "east": -91.41470 }
+      {
+        "ring": [
+          {
+            "lat": 39.68254,
+            "lng": -91.41646
+          },
+          {
+            "lat": 39.682223,
+            "lng": -91.414125
+          },
+          {
+            "lat": 39.680954,
+            "lng": -91.4144
+          },
+          {
+            "lat": 39.681272,
+            "lng": -91.416735
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.68190, "west": -91.41360, "north": 39.68290, "east": -91.41220 }
+      {
+        "ring": [
+          {
+            "lat": 39.6818,
+            "lng": -91.413851
+          },
+          {
+            "lat": 39.681377,
+            "lng": -91.411104
+          },
+          {
+            "lat": 39.680743,
+            "lng": -91.411241
+          },
+          {
+            "lat": 39.681166,
+            "lng": -91.413988
+          }
+        ]
+      }
     ],
-    "staging": { "south": 39.67980, "west": -91.41420, "north": 39.68120, "east": -91.41290 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 326,
+        "pano": "Wzw-oYvxV9EbKBpcbkSW7g",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 35, "trailersVisible": 150, "trailerParkingCapacity": 220,
-    "truckGateCount": 1, "buildingCount": 4, "siteAreaAcres": 106.0,
+    "dockDoorCount": 35,
+    "trailersVisible": 150,
+    "trailerParkingCapacity": 220,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 106,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.68180,-91.41440,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["truckGate", "guardShack", "shipRcvSeparate", "scale", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "shipRcvSeparate",
+    "scale",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Confirmed large General Mills food plant at 1 Red Devil Rd, Hannibal MO (Nature Valley, Betty Crocker, Old El Paso, Progresso per Muddy River News). Roster geocode was GEOMETRIC_CENTER but landed within the industrial park; satellite confirmed the large plant; locked center 39.6818,-91.4144.",
     "truckGate": "No barrier arm or gate identified at the property line. The plant access road runs from the public road past an electrical substation, over a creek bridge, and opens directly into the truck yard with no checkpoint structure - treated as open access. Flagged uncertain (Street View coverage on the private access road is partial).",

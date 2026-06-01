@@ -1,39 +1,125 @@
 {
   "name": "CJ Logistics - Elwood IL (Logistics Center 1)",
   "type": "Distribution Center",
-  "coords": { "lat": 41.4040, "lng": -88.1384 },
+  "coords": {
+    "lat": 41.404,
+    "lng": -88.1384
+  },
   "geofences": {
-    "perimeter": { "south": 41.4010, "west": -88.1408, "north": 41.4070, "east": -88.1365 },
-    "truckGate": { "south": 41.4056, "west": -88.1404, "north": 41.4065, "east": -88.1394 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.406369,
+          "lng": -88.142795
+        },
+        {
+          "lat": 41.406678,
+          "lng": -88.136752
+        },
+        {
+          "lat": 41.400395,
+          "lng": -88.136203
+        },
+        {
+          "lat": 41.400086,
+          "lng": -88.142245
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 41.4012, "west": -88.1408, "north": 41.4068, "east": -88.1392 },
-      { "south": 41.4012, "west": -88.1376, "north": 41.4068, "east": -88.1365 }
+      {
+        "ring": [
+          {
+            "lat": 41.405442,
+            "lng": -88.144992
+          },
+          {
+            "lat": 41.405648,
+            "lng": -88.143069
+          },
+          {
+            "lat": 41.400292,
+            "lng": -88.142795
+          },
+          {
+            "lat": 41.400086,
+            "lng": -88.144717
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.4012, "west": -88.1392, "north": 41.4068, "east": -88.1388 },
-      { "south": 41.4012, "west": -88.1380, "north": 41.4068, "east": -88.1376 }
+      {
+        "ring": [
+          {
+            "lat": 41.40503,
+            "lng": -88.14252
+          },
+          {
+            "lat": 41.405185,
+            "lng": -88.139499
+          },
+          {
+            "lat": 41.404,
+            "lng": -88.139361
+          },
+          {
+            "lat": 41.403845,
+            "lng": -88.142383
+          }
+        ]
+      }
     ],
-    "staging": { "south": 41.4052, "west": -88.1402, "north": 41.4060, "east": -88.1392 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 187,
+        "pano": "agxoSzETwTQOl4KtSLGySA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 116, "trailersVisible": 140, "trailerParkingCapacity": 200,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 59.3,
+    "dockDoorCount": 116,
+    "trailersVisible": 140,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 59.3,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@41.4040,-88.1384,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "scale"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "Truck yard is fully enclosed by chain-link perimeter fencing (visible in Street View 2025-05). The truck driveway off W Mississippi St funnels into a controlled, fenced yard.",
     "guardShack": "Small blue-roofed guard-booth structure sits mid-driveway inside the truck yard entrance (zoom-20 satellite at 41.4058,-88.1401), with a truck being processed beside it - footprint ~1-2 vehicle spaces.",

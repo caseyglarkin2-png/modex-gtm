@@ -1,18 +1,63 @@
 {
   "name": "Pactiv Evergreen - Franklin Park IL",
   "type": "Manufacturing Plant (Food Merchandising)",
-  "coords": { "lat": 41.926483, "lng": -87.864226 },
+  "coords": {
+    "lat": 41.926483,
+    "lng": -87.864226
+  },
   "geofences": {
-    "perimeter": { "south": 41.92365, "west": -87.86530, "north": 41.92790, "east": -87.86230 },
-    "truckGate": { "south": 41.92540, "west": -87.86470, "north": 41.92580, "east": -87.86420 },
-    "dropYards": [
-      { "south": 41.92560, "west": -87.86310, "north": 41.92660, "east": -87.86230 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.930263,
+          "lng": -87.865325
+        },
+        {
+          "lat": 41.930161,
+          "lng": -87.862578
+        },
+        {
+          "lat": 41.926687,
+          "lng": -87.863127
+        },
+        {
+          "lat": 41.92679,
+          "lng": -87.865737
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 41.92400, "west": -87.86470, "north": 41.92470, "east": -87.86360 },
-      { "south": 41.92620, "west": -87.86430, "north": 41.92700, "east": -87.86340 }
+      {
+        "ring": [
+          {
+            "lat": 41.929752,
+            "lng": -87.865325
+          },
+          {
+            "lat": 41.92965,
+            "lng": -87.862853
+          },
+          {
+            "lat": 41.929139,
+            "lng": -87.862853
+          },
+          {
+            "lat": 41.929242,
+            "lng": -87.865325
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 195,
+        "pano": "dwq-gWi5iopDRwnhPCQdbA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 24,
@@ -20,7 +65,7 @@
     "trailerParkingCapacity": 30,
     "truckGateCount": 2,
     "buildingCount": 4,
-    "siteAreaAcres": 22.0,
+    "siteAreaAcres": 22,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@41.926483,-87.864226,400m/data=!3m1!1e3",
@@ -49,7 +94,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "truckGate": "Open industrial driveways off N. 25th Ave / Rose St lead directly into the complex; no barrier arm, sliding gate or pinch-point checkpoint visible at the property line on either entrance. Classified false.",
     "guardShack": "No guard booth structure at any entrance — confirmed in 2025-03 Street View along 25th Ave; entrances are open paved drives flanked by parking.",

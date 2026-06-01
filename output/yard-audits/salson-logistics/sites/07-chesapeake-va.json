@@ -1,15 +1,107 @@
 {
   "name": "SalSon Logistics - Chesapeake VA (Norfolk)",
   "type": "Drayage Terminal / Container & Trailer Yard",
-  "coords": { "lat": 36.770500, "lng": -76.376100 },
+  "coords": {
+    "lat": 36.7705,
+    "lng": -76.3761
+  },
   "geofences": {
-    "perimeter": { "south": 36.768900, "west": -76.377600, "north": 36.772400, "east": -76.374000 },
-    "truckGate": { "south": 36.772050, "west": -76.375700, "north": 36.772350, "east": -76.375300 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.77226,
+          "lng": -76.3761
+        },
+        {
+          "lat": 36.771903,
+          "lng": -76.374177
+        },
+        {
+          "lat": 36.76819,
+          "lng": -76.374658
+        },
+        {
+          "lat": 36.76852,
+          "lng": -76.376581
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 36.77215,
+          "lng": -76.375963
+        },
+        {
+          "lat": 36.772233,
+          "lng": -76.375482
+        },
+        {
+          "lat": 36.771958,
+          "lng": -76.375345
+        },
+        {
+          "lat": 36.771875,
+          "lng": -76.37586
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 36.769200, "west": -76.377100, "north": 36.771400, "east": -76.374600 }
+      {
+        "ring": [
+          {
+            "lat": 36.771765,
+            "lng": -76.376031
+          },
+          {
+            "lat": 36.77149,
+            "lng": -76.374246
+          },
+          {
+            "lat": 36.76995,
+            "lng": -76.374452
+          },
+          {
+            "lat": 36.770225,
+            "lng": -76.376237
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 36.76984,
+            "lng": -76.376237
+          },
+          {
+            "lat": 36.76962,
+            "lng": -76.374452
+          },
+          {
+            "lat": 36.76841,
+            "lng": -76.374658
+          },
+          {
+            "lat": 36.768685,
+            "lng": -76.376443
+          }
+        ]
+      }
     ],
     "dockAprons": [],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 166,
+        "pano": "oAlo5guJeQDT-rH7FynPCg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 166,
+        "pano": "oAlo5guJeQDT-rH7FynPCg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 0,
@@ -17,23 +109,42 @@
     "trailerParkingCapacity": 400,
     "truckGateCount": 2,
     "buildingCount": 4,
-    "siteAreaAcres": 16.0,
+    "siteAreaAcres": 16,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@36.770500,-76.376100,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "NONE", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "NONE",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "entryLanes", "exitLanes", "buildingCount"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "buildingCount"
+  ],
   "fieldNotes": {
     "truckGate": "3832 S Military Hwy is a multi-tenant industrial address shared by several trucking/logistics firms (M&J Transport, Sheridan Logistics, CDS Trucking, SalSon-Norfolk). The complex is accessed by an open dirt/gravel driveway with no barrier arm or gate visible in 2026-04 Street View — entrance is uncontrolled at the road, so truckGate is false.",
     "guardShack": "No guard booth visible. The 3832 address marker is just a wooden sign with a bank of mailboxes at the open driveway entrance.",

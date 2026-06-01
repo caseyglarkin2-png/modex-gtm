@@ -1,39 +1,149 @@
 {
   "name": "K-C Logan Township Distribution Center - Logan Township NJ",
   "type": "Distribution center (~600,000 sq ft, LEED-certified)",
-  "coords": { "lat": 39.7385, "lng": -75.4135 },
+  "coords": {
+    "lat": 39.7385,
+    "lng": -75.4135
+  },
   "geofences": {
-    "perimeter": { "south": 39.7340, "west": -75.4162, "north": 39.7423, "east": -75.4108 },
-    "truckGate": { "south": 39.7411, "west": -75.4123, "north": 39.7420, "east": -75.4108 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.741457,
+          "lng": -75.418993
+        },
+        {
+          "lat": 39.741034,
+          "lng": -75.411303
+        },
+        {
+          "lat": 39.737444,
+          "lng": -75.410204
+        },
+        {
+          "lat": 39.733853,
+          "lng": -75.411852
+        },
+        {
+          "lat": 39.733431,
+          "lng": -75.417895
+        },
+        {
+          "lat": 39.737444,
+          "lng": -75.419542
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.733853,
+          "lng": -75.416247
+        },
+        {
+          "lat": 39.733853,
+          "lng": -75.414599
+        },
+        {
+          "lat": 39.732797,
+          "lng": -75.414599
+        },
+        {
+          "lat": 39.732797,
+          "lng": -75.416247
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 39.7340, "west": -75.4150, "north": 39.7356, "east": -75.4108 },
-      { "south": 39.7356, "west": -75.4118, "north": 39.7415, "east": -75.4108 }
+      {
+        "ring": [
+          {
+            "lat": 39.740612,
+            "lng": -75.412127
+          },
+          {
+            "lat": 39.740401,
+            "lng": -75.409105
+          },
+          {
+            "lat": 39.737444,
+            "lng": -75.40938
+          },
+          {
+            "lat": 39.737655,
+            "lng": -75.412401
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.7352, "west": -75.4122, "north": 39.7418, "east": -75.4112 },
-      { "south": 39.7352, "west": -75.4150, "north": 39.7418, "east": -75.4140 }
+      {
+        "ring": [
+          {
+            "lat": 39.740612,
+            "lng": -75.417895
+          },
+          {
+            "lat": 39.74019,
+            "lng": -75.412951
+          },
+          {
+            "lat": 39.735121,
+            "lng": -75.413225
+          },
+          {
+            "lat": 39.735543,
+            "lng": -75.418169
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 110, "trailersVisible": 130, "trailerParkingCapacity": 150,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 101.0,
+    "dockDoorCount": 110,
+    "trailersVisible": 130,
+    "trailerParkingCapacity": 150,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 101,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.7385,-75.4135,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "Roster coordinates (39.747335, -75.310914) were wrong - they fell in the Bridgeport residential village ~9 km NE of the site. The K-C Logan Township DC is documented by its general contractor (Blue Rock Construction) as 'Building GHI at LogistiCenter at Logan', 2651 Oldmans Creek Rd, Logan Township NJ - a 599,500 sq ft, LEED-certified 2007 Dermody Properties build. Locked the large single-tenant white-roofed warehouse at ~39.7385,-75.4135 inside the LogistiCenter at Logan / Logan North logistics park, off I-295.",
     "tenancy": "Multiple sources indicate Amazon later leased ~1M sq ft at 2651 Oldmans Creek Rd (Amazon FC 'TEB3'). The building audited here is that DC structure regardless of current tenant - it is the facility the roster targets.",

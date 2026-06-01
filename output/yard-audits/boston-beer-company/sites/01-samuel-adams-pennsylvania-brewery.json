@@ -1,38 +1,174 @@
 {
   "name": "Samuel Adams Pennsylvania Brewery - Breinigsville PA",
   "type": "Brewery / production facility (largest in network; includes ~1M sq ft brewery + warehouse space on ~76 acres)",
-  "coords": { "lat": 40.5755, "lng": -75.6285 },
+  "coords": {
+    "lat": 40.5755,
+    "lng": -75.6285
+  },
   "geofences": {
-    "perimeter": { "south": 40.5722, "west": -75.6315, "north": 40.5775, "east": -75.6258 },
-    "truckGate": { "south": 40.5760, "west": -75.6303, "north": 40.5766, "east": -75.6295 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.578212,
+          "lng": -75.631247
+        },
+        {
+          "lat": 40.577899,
+          "lng": -75.626852
+        },
+        {
+          "lat": 40.577273,
+          "lng": -75.626303
+        },
+        {
+          "lat": 40.574978,
+          "lng": -75.626577
+        },
+        {
+          "lat": 40.574248,
+          "lng": -75.627813
+        },
+        {
+          "lat": 40.574353,
+          "lng": -75.630011
+        },
+        {
+          "lat": 40.574874,
+          "lng": -75.631659
+        },
+        {
+          "lat": 40.575813,
+          "lng": -75.631659
+        },
+        {
+          "lat": 40.576543,
+          "lng": -75.631247
+        },
+        {
+          "lat": 40.577586,
+          "lng": -75.631521
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.578108,
+          "lng": -75.630835
+        },
+        {
+          "lat": 40.578212,
+          "lng": -75.629873
+        },
+        {
+          "lat": 40.577795,
+          "lng": -75.629736
+        },
+        {
+          "lat": 40.57769,
+          "lng": -75.630697
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.5730, "west": -75.6303, "north": 40.5748, "east": -75.6280 },
-      { "south": 40.5746, "west": -75.6313, "north": 40.5760, "east": -75.6300 }
+      {
+        "ring": [
+          {
+            "lat": 40.576022,
+            "lng": -75.631521
+          },
+          {
+            "lat": 40.575865,
+            "lng": -75.629873
+          },
+          {
+            "lat": 40.574613,
+            "lng": -75.630011
+          },
+          {
+            "lat": 40.57477,
+            "lng": -75.631659
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.5740, "west": -75.6280, "north": 40.5762, "east": -75.6268 }
+      {
+        "ring": [
+          {
+            "lat": 40.575969,
+            "lng": -75.629873
+          },
+          {
+            "lat": 40.576282,
+            "lng": -75.627127
+          },
+          {
+            "lat": 40.575761,
+            "lng": -75.626989
+          },
+          {
+            "lat": 40.575448,
+            "lng": -75.629736
+          }
+        ]
+      }
     ],
-    "staging": { "south": 40.5748, "west": -75.6300, "north": 40.5758, "east": -75.6288 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 170,
+        "pano": "8bFNJZbLZyqBL2rzlsrJOQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 170,
+        "pano": "8bFNJZbLZyqBL2rzlsrJOQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 40, "trailersVisible": 170, "trailerParkingCapacity": 250,
-    "truckGateCount": 1, "buildingCount": 4, "siteAreaAcres": 70.3,
+    "dockDoorCount": 40,
+    "trailersVisible": 170,
+    "trailerParkingCapacity": 250,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 70.3,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@40.5755,-75.6285,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": true, "dropYard": true, "multiStep": true
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": true
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount", "multiStep"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "multiStep"
+  ],
   "fieldNotes": {
     "truckGate": "Driver reviews explicitly describe a manned front gate and check-in; satellite shows a fully fenced perimeter with controlled access. Street View does not reach the brewery's internal truck gate, but the gate is corroborated by web research.",
     "guardShack": "Driver reviews reference 'guard shack personnel' and 'professional front-gate staff' at this brewery — staffed guard booth confirmed.",

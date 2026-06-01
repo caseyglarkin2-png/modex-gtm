@@ -1,15 +1,75 @@
 {
   "name": "Niagara Bottling - Plainfield IN",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 39.68500, "lng": -86.34900 },
+  "coords": {
+    "lat": 39.685,
+    "lng": -86.349
+  },
   "geofences": {
-    "perimeter": { "south": 39.68280, "west": -86.35100, "north": 39.68730, "east": -86.34800 },
-    "truckGate": { "south": 39.68300, "west": -86.34990, "north": 39.68360, "east": -86.34930 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.68891,
+          "lng": -86.353395
+        },
+        {
+          "lat": 39.68891,
+          "lng": -86.348313
+        },
+        {
+          "lat": 39.684472,
+          "lng": -86.348313
+        },
+        {
+          "lat": 39.684472,
+          "lng": -86.353395
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 39.68400, "west": -86.35080, "north": 39.68700, "east": -86.34960 }
+      {
+        "ring": [
+          {
+            "lat": 39.68817,
+            "lng": -86.350099
+          },
+          {
+            "lat": 39.68817,
+            "lng": -86.348313
+          },
+          {
+            "lat": 39.684789,
+            "lng": -86.348313
+          },
+          {
+            "lat": 39.684789,
+            "lng": -86.350099
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.68420, "west": -86.35020, "north": 39.68700, "east": -86.34930 }
+      {
+        "ring": [
+          {
+            "lat": 39.68817,
+            "lng": -86.350373
+          },
+          {
+            "lat": 39.68817,
+            "lng": -86.349961
+          },
+          {
+            "lat": 39.684789,
+            "lng": -86.349961
+          },
+          {
+            "lat": 39.684789,
+            "lng": -86.350373
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -19,23 +79,42 @@
     "trailerParkingCapacity": 80,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 30.0,
+    "siteAreaAcres": 30,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.68500,-86.34900,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "trailerParkingCapacity", "buildingId"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "buildingId"
+  ],
   "fieldNotes": {
     "buildingId": "Address 1250 Whitaker Rd geocoded onto an intersection inside a dense Plainfield logistics park (AllPoints area near Indianapolis airport). Neighbouring buildings carry other addresses (a FedEx building reads '1399 South Perry Rd'). The audited building is the long N-S grey-roofed warehouse on the W side of the pin whose office and check-in driveway front Whitaker Rd at the pin. Web research confirms Niagara Plainfield is 442,215 sq ft at 1250 Whitaker Rd. No on-building Niagara signage was readable in available panos, so building ID is medium-confidence.",
     "truckGate": "The entrance driveway off Whitaker Rd has a controlled-entry setup: a small blue kiosk/booth structure beside the drive, a digital sign monument, a fence/gate across the lane, and traffic cones in the entry lane. truckGate = true.",

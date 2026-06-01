@@ -1,15 +1,54 @@
 {
   "name": "DHL Supply Chain - Groveport DC - Groveport OH",
   "type": "Distribution Center",
-  "coords": { "lat": 39.845500, "lng": -82.900800 },
+  "coords": {
+    "lat": 39.8455,
+    "lng": -82.9008
+  },
   "geofences": {
-    "perimeter": { "south": 39.843800, "west": -82.902200, "north": 39.847000, "east": -82.898800 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.846343,
+          "lng": -82.902173
+        },
+        {
+          "lat": 39.846713,
+          "lng": -82.899152
+        },
+        {
+          "lat": 39.845184,
+          "lng": -82.89874
+        },
+        {
+          "lat": 39.844235,
+          "lng": -82.901487
+        }
+      ]
+    },
     "truckGate": null,
-    "dropYards": [
-      { "south": 39.845900, "west": -82.901300, "north": 39.846400, "east": -82.900400 }
-    ],
+    "dropYards": [],
     "dockAprons": [
-      { "south": 39.845650, "west": -82.901300, "north": 39.846500, "east": -82.900100 }
+      {
+        "ring": [
+          {
+            "lat": 39.846291,
+            "lng": -82.902173
+          },
+          {
+            "lat": 39.846554,
+            "lng": -82.900457
+          },
+          {
+            "lat": 39.846185,
+            "lng": -82.900388
+          },
+          {
+            "lat": 39.845922,
+            "lng": -82.902105
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -48,7 +87,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoors", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoors",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "No barrier arm, sliding gate, or checkpoint anywhere on the property. Trucks enter from Commerce Ct (a private dead-end court shared with adjacent buildings), loop around the SW corner of the building, into the open NW dock yard. The dock apron is open to the access drive with no pinch-point.",
     "guardShack": "No guard booth structure visible at any approach. Street View of all faces confirms an open, unsecured site.",

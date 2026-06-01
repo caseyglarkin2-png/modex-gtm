@@ -1,18 +1,108 @@
 {
   "name": "Caterpillar - Morton IL Global Parts Distribution Center",
   "type": "Parts distribution center (anchor depot, 3M+ sq ft)",
-  "coords": { "lat": 40.61850, "lng": -89.45850 },
+  "coords": {
+    "lat": 40.6185,
+    "lng": -89.4585
+  },
   "geofences": {
-    "perimeter": { "south": 40.61400, "west": -89.46500, "north": 40.62300, "east": -89.45200 },
-    "truckGate": { "south": 40.61650, "west": -89.45800, "north": 40.61780, "east": -89.45600 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.620585,
+          "lng": -89.464817
+        },
+        {
+          "lat": 40.620585,
+          "lng": -89.454105
+        },
+        {
+          "lat": 40.615998,
+          "lng": -89.454105
+        },
+        {
+          "lat": 40.615998,
+          "lng": -89.464817
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.620168,
+          "lng": -89.464817
+        },
+        {
+          "lat": 40.620168,
+          "lng": -89.463444
+        },
+        {
+          "lat": 40.619125,
+          "lng": -89.463444
+        },
+        {
+          "lat": 40.619125,
+          "lng": -89.464817
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.61450, "west": -89.46200, "north": 40.61750, "east": -89.45500 },
-      { "south": 40.61900, "west": -89.45600, "north": 40.62150, "east": -89.45250 }
+      {
+        "ring": [
+          {
+            "lat": 40.617249,
+            "lng": -89.463993
+          },
+          {
+            "lat": 40.617249,
+            "lng": -89.457127
+          },
+          {
+            "lat": 40.615998,
+            "lng": -89.457127
+          },
+          {
+            "lat": 40.615998,
+            "lng": -89.463993
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.61880, "west": -89.45550, "north": 40.62020, "east": -89.45300 }
+      {
+        "ring": [
+          {
+            "lat": 40.618917,
+            "lng": -89.463993
+          },
+          {
+            "lat": 40.618917,
+            "lng": -89.457127
+          },
+          {
+            "lat": 40.618083,
+            "lng": -89.457127
+          },
+          {
+            "lat": 40.618083,
+            "lng": -89.463993
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 116,
+        "pano": "k4BIHkgKDLPNISNJ-iGf5A",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 116,
+        "pano": "k4BIHkgKDLPNISNJ-iGf5A",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 60,
@@ -20,23 +110,44 @@
     "trailerParkingCapacity": 100,
     "truckGateCount": 2,
     "buildingCount": 5,
-    "siteAreaAcres": 272.0,
+    "siteAreaAcres": 272,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@40.6185,-89.4585,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "scale"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "scale"
+  ],
   "fieldNotes": {
     "site": "Caterpillar Morton Global Parts Distribution Center - the company's anchor depot (~3M+ sq ft, original Cat Logistics HQ). Geocoded point lands inside the complex; confirmed by scale, layout and adjacency to I-74 in Morton IL.",
     "truckGate": "Whole campus is continuously fenced (ornamental steel on the west along Detroit Ave, chain-link/green-screen on the south along the rail line, chain-link on the highway-frontage east). Truck operations and storage yards sit behind that fence, implying controlled truck access. No barrier arm or booth could be cleanly imaged - SE/SW frontages are residential, W/E frontages are screened by employee parking. Flagged uncertain.",

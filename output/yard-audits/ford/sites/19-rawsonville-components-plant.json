@@ -1,39 +1,84 @@
 {
   "name": "Ford - Rawsonville Components Plant, Ypsilanti MI",
   "type": "Components / Battery Plant",
-  "coords": { "lat": 42.19920, "lng": -83.55700 },
+  "coords": {
+    "lat": 42.1992,
+    "lng": -83.557
+  },
   "geofences": {
-    "perimeter": { "south": 42.19500, "west": -83.56150, "north": 42.20350, "east": -83.55200 },
-    "truckGate": { "south": 42.19720, "west": -83.55300, "north": 42.19780, "east": -83.55230 },
-    "dropYards": [
-      { "south": 42.19680, "west": -83.55700, "north": 42.19790, "east": -83.55540 },
-      { "south": 42.20000, "west": -83.55530, "north": 42.20110, "east": -83.55380 }
-    ],
-    "dockAprons": [
-      { "south": 42.19700, "west": -83.55920, "north": 42.19800, "east": -83.55780 },
-      { "south": 42.19720, "west": -83.55580, "north": 42.19830, "east": -83.55470 }
-    ],
-    "staging": { "south": 42.19850, "west": -83.55520, "north": 42.20000, "east": -83.55380 }
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.202862,
+          "lng": -83.559197
+        },
+        {
+          "lat": 42.202862,
+          "lng": -83.552605
+        },
+        {
+          "lat": 42.19513,
+          "lng": -83.552605
+        },
+        {
+          "lat": 42.19513,
+          "lng": -83.559197
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 148,
+        "pano": "irqS1zCdXPG5tHXxlHKJ8w",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 35, "trailersVisible": 30, "trailerParkingCapacity": 70,
-    "truckGateCount": 2, "buildingCount": 2, "siteAreaAcres": 145.0,
+    "dockDoorCount": 35,
+    "trailersVisible": 30,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 2,
+    "buildingCount": 2,
+    "siteAreaAcres": 145,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@42.19920,-83.55700,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Chain-link perimeter fence rings the property; closed double-swing vehicle gate on the SW (truck-yard) side and a rolling chain-link gate on the NE both confirmed in 2024-25 Street View.",
     "guardShack": "No staffed booth at any gate in Street View - gates are plain chain-link, no booth structure beside the lane.",

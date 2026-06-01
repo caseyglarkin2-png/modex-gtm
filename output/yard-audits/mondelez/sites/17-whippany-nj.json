@@ -1,13 +1,46 @@
 {
   "name": "Mondelez Global R&D Innovation Center - Whippany NJ",
   "type": "R&D / global innovation center (office + lab, pilot & scale-up lines)",
-  "coords": { "lat": 40.82, "lng": -74.4097 },
+  "coords": {
+    "lat": 40.82,
+    "lng": -74.4097
+  },
   "geofences": {
-    "perimeter": { "south": 40.8186, "west": -74.4118, "north": 40.8214, "east": -74.4076 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.820727,
+          "lng": -74.410249
+        },
+        {
+          "lat": 40.82,
+          "lng": -74.408052
+        },
+        {
+          "lat": 40.818857,
+          "lng": -74.408601
+        },
+        {
+          "lat": 40.818545,
+          "lng": -74.410249
+        },
+        {
+          "lat": 40.820208,
+          "lng": -74.410524
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 155,
+        "pano": "hhpUTiKl800KrdOtUZewew",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 1,
@@ -15,23 +48,39 @@
     "trailerParkingCapacity": 0,
     "truckGateCount": 0,
     "buildingCount": 1,
-    "siteAreaAcres": 9.0,
+    "siteAreaAcres": 9,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.82,-74.4097,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "NONE", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoors", "dockDoorCount"],
+  "uncertainFields": [
+    "dockDoors",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "location": "Roster coords (40.8198,-74.4179) were an approximate Route 10 / Whippany centroid ~700m WNW of the real building. Resolved via web research to 941/945 State Route 10 (the former Cadbury 'Channel Building', a ~148-150k sq ft former Cadbury Adams candy/gum lab) and confirmed via satellite. Locked center 40.8200,-74.4097.",
     "facilityType": "This is a corporate R&D / global innovation center - office + lab, NOT a freight plant. ~150,000 sq ft, ~$50M repurposed Cadbury R&D building, opened May 2023, houses ~50 R&D makers/bakers plus pilot and scale-up lines for cookies, crackers and candy. Freight relevance is LOW: it consumes small material shipments, not a distribution operation.",

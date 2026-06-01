@@ -1,19 +1,87 @@
 {
   "name": "Niagara Bottling - Temple TX",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 31.156095, "lng": -97.354586 },
+  "coords": {
+    "lat": 31.156095,
+    "lng": -97.354586
+  },
   "geofences": {
-    "perimeter": { "south": 31.151200, "west": -97.355900, "north": 31.158600, "east": -97.350400 },
-    "truckGate": { "south": 31.154500, "west": -97.355900, "north": 31.155200, "east": -97.355100 },
-    "dropYards": [
-      { "south": 31.155800, "west": -97.352600, "north": 31.158100, "east": -97.351200 },
-      { "south": 31.151500, "west": -97.355600, "north": 31.153100, "east": -97.351800 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 31.15868,
+          "lng": -97.355135
+        },
+        {
+          "lat": 31.158328,
+          "lng": -97.351565
+        },
+        {
+          "lat": 31.154215,
+          "lng": -97.352526
+        },
+        {
+          "lat": 31.154567,
+          "lng": -97.355959
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 31.155507,
+          "lng": -97.355685
+        },
+        {
+          "lat": 31.15539,
+          "lng": -97.354586
+        },
+        {
+          "lat": 31.154802,
+          "lng": -97.354723
+        },
+        {
+          "lat": 31.15492,
+          "lng": -97.355822
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 31.155500, "west": -97.353000, "north": 31.158200, "east": -97.351600 },
-      { "south": 31.151500, "west": -97.355000, "north": 31.153100, "east": -97.351000 }
+      {
+        "ring": [
+          {
+            "lat": 31.156095,
+            "lng": -97.355547
+          },
+          {
+            "lat": 31.155742,
+            "lng": -97.352114
+          },
+          {
+            "lat": 31.155155,
+            "lng": -97.352251
+          },
+          {
+            "lat": 31.155507,
+            "lng": -97.355685
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 153,
+        "pano": "TJMseGAp5XzKmMZwgkrTOw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 153,
+        "pano": "TJMseGAp5XzKmMZwgkrTOw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 90,
@@ -21,23 +89,45 @@
     "trailerParkingCapacity": 140,
     "truckGateCount": 2,
     "buildingCount": 2,
-    "siteAreaAcres": 78.0,
+    "siteAreaAcres": 78,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@31.156095,-97.354586,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity", "scale"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "No controlled checkpoint found. The campus has only a landscaped grass buffer along Wendland Rd with a Niagara monument sign at the entrance driveway (Street View 2026-04) — no perimeter security fence, no barrier arm and no guard booth across any driveway. Classified false, medium confidence.",
     "guardShack": "No staffed-booth structure visible at any entrance. A small white structure near the main plant NE corner appears to be a process/utility building, not a gatehouse.",

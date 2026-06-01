@@ -1,17 +1,91 @@
 {
   "name": "Universal Logistics - Clearfield Terminal - Clearfield UT",
   "type": "Intermodal / Rail-Served Transload & Distribution Terminal (owned)",
-  "coords": { "lat": 41.10540, "lng": -112.02320 },
+  "coords": {
+    "lat": 41.1054,
+    "lng": -112.0232
+  },
   "geofences": {
-    "perimeter": { "south": 41.10455, "west": -112.02455, "north": 41.10625, "east": -112.02200 },
-    "truckGate": null,
-    "dropYards": [
-      { "south": 41.10560, "west": -112.02455, "north": 41.10625, "east": -112.02360 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.106331,
+          "lng": -112.025397
+        },
+        {
+          "lat": 41.107159,
+          "lng": -112.022376
+        },
+        {
+          "lat": 41.106228,
+          "lng": -112.021827
+        },
+        {
+          "lat": 41.1054,
+          "lng": -112.024573
+        },
+        {
+          "lat": 41.105607,
+          "lng": -112.02526
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.105814,
+          "lng": -112.02526
+        },
+        {
+          "lat": 41.105917,
+          "lng": -112.024848
+        },
+        {
+          "lat": 41.105607,
+          "lng": -112.024711
+        },
+        {
+          "lat": 41.105503,
+          "lng": -112.025123
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 41.10470, "west": -112.02360, "north": 41.10600, "east": -112.02250 }
+      {
+        "ring": [
+          {
+            "lat": 41.106228,
+            "lng": -112.024711
+          },
+          {
+            "lat": 41.1069,
+            "lng": -112.022376
+          },
+          {
+            "lat": 41.10659,
+            "lng": -112.02217
+          },
+          {
+            "lat": 41.105917,
+            "lng": -112.024505
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 359,
+        "pano": "dv2J_BLBfRmyvkqG9ZgQVA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 359,
+        "pano": "dv2J_BLBfRmyvkqG9ZgQVA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 14,
@@ -24,18 +98,41 @@
   },
   "mapsUrl": "https://www.google.com/maps/@41.1054,-112.0232,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["location", "truckGate", "guardShack", "dockDoors", "dropArea", "trailersVisible", "trailerParkingCapacity", "siteAreaAcres", "dropYard"],
+  "uncertainFields": [
+    "location",
+    "truckGate",
+    "guardShack",
+    "dockDoors",
+    "dropArea",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "siteAreaAcres",
+    "dropYard"
+  ],
   "fieldNotes": {
     "location": "MEDIUM-CONFIDENCE LOCATION. Resolved to 120 E 700 S, Clearfield, UT 84015 — the Specialized Rail Service, Inc. (SRS) facility. SRS is a Clearfield-based intermodal drayage / transload / warehousing operator acquired by Universal Logistics Holdings in October 2018 ($12.3M); it is the ULH operating presence behind the 10-K-named 'Clearfield UT owned terminal property'. Address is firm: confirmed identically by FMCSA SAFER (USDOT 506498), loadmatch.com, Yelp, D&B, and Loc8NearMe. However, 120 E 700 S sits inside a dense multi-tenant industrial district and NO SRS signage was visible in any Street View; the exact parcel is address-interpolated. Resolved to the rail-served warehouse/transload building at ~41.1054,-112.0232 because (a) it is directly served by a Union Pacific rail line/spur — the defining feature of a 'Specialized Rail Service' transload facility, (b) it sits on the 700 South surface street where the address interpolates, and (c) SRS's stated business is rail transload + cross-dock + warehouse distribution. The exact parcel within this district could not be positively confirmed.",
     "truckGate": "MEDIUM CONFIDENCE. Street View (2022-11) of the building frontage and yard shows internal industrial-park roads with employee parking and decorative block walls; no barrier arm or sliding/swing gate was observed across a truck lane. Classified false (open, uncontrolled industrial-park access), but the exact entrance could not be definitively walked.",

@@ -1,19 +1,108 @@
 {
   "name": "Home Depot RDC - Redlands CA",
   "type": "Rapid Deployment Center",
-  "coords": { "lat": 34.08820, "lng": -117.20440 },
+  "coords": {
+    "lat": 34.0882,
+    "lng": -117.2044
+  },
   "geofences": {
-    "perimeter": { "south": 34.08560, "west": -117.20850, "north": 34.09100, "east": -117.20020 },
-    "truckGate": { "south": 34.08640, "west": -117.20780, "north": 34.08720, "east": -117.20680 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.089565,
+          "lng": -117.20852
+        },
+        {
+          "lat": 34.089337,
+          "lng": -117.201379
+        },
+        {
+          "lat": 34.086494,
+          "lng": -117.201379
+        },
+        {
+          "lat": 34.086721,
+          "lng": -117.20852
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.088769,
+          "lng": -117.208795
+        },
+        {
+          "lat": 34.088769,
+          "lng": -117.207971
+        },
+        {
+          "lat": 34.0882,
+          "lng": -117.207971
+        },
+        {
+          "lat": 34.0882,
+          "lng": -117.208795
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 34.08920, "west": -117.20680, "north": 34.09060, "east": -117.20100 }
+      {
+        "ring": [
+          {
+            "lat": 34.089792,
+            "lng": -117.205499
+          },
+          {
+            "lat": 34.089565,
+            "lng": -117.201379
+          },
+          {
+            "lat": 34.088882,
+            "lng": -117.201379
+          },
+          {
+            "lat": 34.08911,
+            "lng": -117.205499
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 34.08660, "west": -117.20680, "north": 34.08720, "east": -117.20080 },
-      { "south": 34.08900, "west": -117.20680, "north": 34.08960, "east": -117.20080 },
-      { "south": 34.08700, "west": -117.20080, "north": 34.08920, "east": -117.20020 }
+      {
+        "ring": [
+          {
+            "lat": 34.088769,
+            "lng": -117.207971
+          },
+          {
+            "lat": 34.088541,
+            "lng": -117.201928
+          },
+          {
+            "lat": 34.08729,
+            "lng": -117.201928
+          },
+          {
+            "lat": 34.087518,
+            "lng": -117.207971
+          }
+        ]
+      }
     ],
-    "staging": { "south": 34.08720, "west": -117.20780, "north": 34.08900, "east": -117.20700 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 63,
+        "pano": "v0xjkh7_Zd-O18j8Uq4q3w",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 63,
+        "pano": "v0xjkh7_Zd-O18j8Uq4q3w",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 200,
@@ -21,23 +110,42 @@
     "trailerParkingCapacity": 320,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 57.0,
+    "siteAreaAcres": 57,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.08820,-117.20440,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "Street View confirms a continuous black metal perimeter security fence enclosing the entire truck yard along River Bluff Avenue, with gate sections in the fence line. Driver reviews report a check-in process ('easy and quick check in and out'), confirming a controlled gated entrance.",
     "guardShack": "Inferred TRUE — fully fenced/gated truck yard with a driver check-in process; a guard booth is the HD-RDC norm and the dense SoCal logistics-park standard. Booth not isolated in a clean view (palms/landscaping screen the fence line) — flagged uncertain.",

@@ -1,16 +1,54 @@
 {
   "name": "DHL Supply Chain - East Coast Center of Excellence - Annville PA",
   "type": "Life Sciences & Healthcare Distribution Center (Foreign Trade Zone)",
-  "coords": { "lat": 40.318500, "lng": -76.535800 },
+  "coords": {
+    "lat": 40.3185,
+    "lng": -76.5358
+  },
   "geofences": {
-    "perimeter": { "south": 40.31530, "west": -76.54120, "north": 40.32080, "east": -76.53050 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.320175,
+          "lng": -76.541293
+        },
+        {
+          "lat": 40.319756,
+          "lng": -76.533603
+        },
+        {
+          "lat": 40.316825,
+          "lng": -76.533877
+        },
+        {
+          "lat": 40.317243,
+          "lng": -76.541568
+        }
+      ]
+    },
     "truckGate": null,
-    "dropYards": [
-      { "south": 40.31560, "west": -76.53850, "north": 40.31720, "east": -76.53250 }
-    ],
+    "dropYards": [],
     "dockAprons": [
-      { "south": 40.31700, "west": -76.53880, "north": 40.31760, "east": -76.53290 },
-      { "south": 40.31920, "west": -76.53880, "north": 40.31980, "east": -76.53290 }
+      {
+        "ring": [
+          {
+            "lat": 40.319756,
+            "lng": -76.541019
+          },
+          {
+            "lat": 40.319338,
+            "lng": -76.533877
+          },
+          {
+            "lat": 40.3185,
+            "lng": -76.534152
+          },
+          {
+            "lat": 40.318919,
+            "lng": -76.541293
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -20,23 +58,49 @@
     "trailerParkingCapacity": 230,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 70.0,
+    "siteAreaAcres": 70,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.318500,-76.535800,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "NONE",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "NONE",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging", "entryExitTogether", "entryLanes", "exitLanes", "fastLaneOpportunity", "dropArea", "trailersVisible", "dropYard"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "entryExitTogether",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dropArea",
+    "trailersVisible",
+    "dropYard"
+  ],
   "fieldNotes": {
     "_general": "Brand-new facility — DHL East Coast Center of Excellence, 700 Killinger Rd, Clear Springs Logistics Park, Annville PA. 1,000,000 sq ft, opened/opening 2026. Available satellite imagery was captured DURING construction: the building shell is complete but the surrounding truck yard and trailer-stall lot were still graded dirt (unpaved), and no Street View coverage exists. Gate/guard/yard finishing cannot be confirmed from imagery.",
     "truckGate": "INFERRED. Not visible in construction-stage imagery. A new FDA/GMP-compliant pharma DC operating as a Foreign Trade Zone is, by industry norm, fully fenced and gated for customs/security control. Marked true on that basis but flagged uncertain.",

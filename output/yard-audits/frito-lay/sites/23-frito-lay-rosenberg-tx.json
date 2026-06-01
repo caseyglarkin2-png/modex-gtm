@@ -1,37 +1,137 @@
 {
   "name": "Frito-Lay - Rosenberg TX",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 29.57769, "lng": -95.86902 },
+  "coords": {
+    "lat": 29.57769,
+    "lng": -95.86902
+  },
   "geofences": {
-    "perimeter": { "south": 29.57400, "west": -95.87320, "north": 29.58110, "east": -95.86480 },
-    "truckGate": { "south": 29.57400, "west": -95.87020, "north": 29.57480, "east": -95.86950 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.580437,
+          "lng": -95.872041
+        },
+        {
+          "lat": 29.580079,
+          "lng": -95.867647
+        },
+        {
+          "lat": 29.574346,
+          "lng": -95.868196
+        },
+        {
+          "lat": 29.574824,
+          "lng": -95.872591
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 29.574346,
+          "lng": -95.870668
+        },
+        {
+          "lat": 29.574226,
+          "lng": -95.869707
+        },
+        {
+          "lat": 29.573749,
+          "lng": -95.869844
+        },
+        {
+          "lat": 29.573868,
+          "lng": -95.870805
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 29.57440, "west": -95.87320, "north": 29.58000, "east": -95.87000 }
+      {
+        "ring": [
+          {
+            "lat": 29.579601,
+            "lng": -95.872179
+          },
+          {
+            "lat": 29.579362,
+            "lng": -95.870119
+          },
+          {
+            "lat": 29.575301,
+            "lng": -95.870393
+          },
+          {
+            "lat": 29.57554,
+            "lng": -95.872453
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 29.57650, "west": -95.87060, "north": 29.58020, "east": -95.86960 }
+      {
+        "ring": [
+          {
+            "lat": 29.577093,
+            "lng": -95.869844
+          },
+          {
+            "lat": 29.576854,
+            "lng": -95.867921
+          },
+          {
+            "lat": 29.576137,
+            "lng": -95.868059
+          },
+          {
+            "lat": 29.576376,
+            "lng": -95.869981
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 70, "trailersVisible": 220, "trailerParkingCapacity": 320,
-    "truckGateCount": 1, "buildingCount": 6, "siteAreaAcres": 95.0,
+    "dockDoorCount": 70,
+    "trailersVisible": 220,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 95,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@29.57769,-95.86902,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "scale"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "Single private access driveway leaves Hwy 36 S, crosses a railroad spur, and runs ~350 m north into the plant — a clear single controlled approach / pinch-point. No barrier arm visible at the highway, but the long private drive functions as the controlled entry.",
     "guardShack": "No guard booth visible at the Hwy 36 entrance; trees and the rail crossing partly obscure the inner approach. Booth-style structure not confirmed in imagery, so guardShack=false / remoteGs=true (kiosk/call-box likely on a plant this size).",

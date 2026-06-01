@@ -1,37 +1,125 @@
 {
   "name": "Coca-Cola Consolidated - Louisville Distribution Center, KY",
   "type": "Distribution Center",
-  "coords": { "lat": 38.137800, "lng": -85.890600 },
+  "coords": {
+    "lat": 38.1378,
+    "lng": -85.8906
+  },
   "geofences": {
-    "perimeter": { "south": 38.1343, "west": -85.8918, "north": 38.1392, "east": -85.8895 },
-    "truckGate": { "south": 38.1385, "west": -85.8915, "north": 38.1391, "east": -85.8908 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.13996,
+          "lng": -85.896093
+        },
+        {
+          "lat": 38.139744,
+          "lng": -85.891699
+        },
+        {
+          "lat": 38.134776,
+          "lng": -85.891973
+        },
+        {
+          "lat": 38.135208,
+          "lng": -85.896368
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 38.1345, "west": -85.8915, "north": 38.1368, "east": -85.8895 }
+      {
+        "ring": [
+          {
+            "lat": 38.139528,
+            "lng": -85.895544
+          },
+          {
+            "lat": 38.13942,
+            "lng": -85.893347
+          },
+          {
+            "lat": 38.136936,
+            "lng": -85.893621
+          },
+          {
+            "lat": 38.137044,
+            "lng": -85.895681
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 38.1360, "west": -85.8918, "north": 38.1388, "east": -85.8910 }
+      {
+        "ring": [
+          {
+            "lat": 38.139312,
+            "lng": -85.893072
+          },
+          {
+            "lat": 38.139204,
+            "lng": -85.891973
+          },
+          {
+            "lat": 38.136504,
+            "lng": -85.892111
+          },
+          {
+            "lat": 38.136612,
+            "lng": -85.893209
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 220,
+        "pano": "spJnX6n_3Sw4gk_wfgJDVA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 40, "trailersVisible": 80, "trailerParkingCapacity": 130,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 27.0,
+    "dockDoorCount": 40,
+    "trailersVisible": 80,
+    "trailerParkingCapacity": 130,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 27,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@38.1378,-85.8906,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "location": "Roster lat/lng (38.138117,-85.890606, ROOFTOP) is accurate - landed on the correct building. Confirmed as Coca-Cola Consolidated Louisville Distribution Center, 7100 Global Drive, Louisville KY 40258: a 305,000 sq ft sales/distribution center, a renovated former Circuit City warehouse on a ~25-acre site, ~210 employees. Street View shows the red 'Coca-Cola' script logo on the building's north facade.",
     "truckGate": "Single fenced truck entrance off Global Drive at the NW; the property is fully enclosed by chain-link perimeter fence (visible in Street View). Truck drive runs south down the building's west side into the trailer yard. Gate hardware not directly resolvable in imagery - controlled entrance inferred from continuous fence + single drive.",

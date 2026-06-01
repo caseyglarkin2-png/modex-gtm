@@ -1,6 +1,6 @@
 {
-  "schemaVersion": "1",
-  "builtAt": "2026-05-29T18:39:44.176Z",
+  "schemaVersion": "2",
+  "builtAt": "2026-06-01T01:04:44.862Z",
   "account": {
     "slug": "barnes-noble",
     "displayName": "Barnes & Noble",
@@ -8,32 +8,20 @@
     "siteCount": 2,
     "coverageNote": {
       "auditedCount": 2,
-      "estimatedFootprint": 6,
+      "estimatedFootprint": null,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Barnes & Noble has ~600 US stores fed by ~6 regional DCs; we mapped the DC network (the only sites where trailer ops matter).",
-      "auditedScope": "US"
+      "note": "Audited all 2 identifiable facilities."
     },
-    "featuredSiteId": "01-barnes-noble-monroe-township-nj-dc",
-    "dossierIntro": "Book retail runs slow-moving SKUs through high-throughput RDCs. Barnes & Noble runs 6 distribution centers. We audited 2. Monroe NJ alone has 110 dock doors on 73.5 acres. YardFlow turns the trickle-flow seasonal staffing into a steady-state schedule even when volume swings 5x peak to trough.",
-    "surprisingFindings": [
-      "110 dock doors at Monroe NJ. Most Barnes & Noble inbound moves in a tight 4-month holiday window.",
-      "148 total dock doors across 2 audited sites. Density per facility is higher than most retailers.",
-      "0 of 2 audited sites are rail-served. Print product moves on truckload."
-    ]
+    "featuredSiteId": "01-barnes-noble-monroe-township-nj-dc"
   },
-  "research": {
-    "facility_count": 8,
-    "audited_facilities": 2,
-    "source": "yard-audit",
-    "confidence": "third-party"
-  },
+  "research": null,
   "network": {
     "bbox": [
-      -119.7525,
-      39.4163,
-      -74.4623,
-      40.3611
+      -119.751599,
+      39.417003,
+      -74.461735,
+      40.360973
     ],
     "archetypeMix": {
       "#9": 2
@@ -66,40 +54,81 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 40.3563,
-            "west": -74.4689,
-            "north": 40.3611,
-            "east": -74.4623
+            "ring": [
+              {
+                "lat": 40.360345,
+                "lng": -74.469151
+              },
+              {
+                "lat": 40.360973,
+                "lng": -74.462147
+              },
+              {
+                "lat": 40.356473,
+                "lng": -74.461735
+              },
+              {
+                "lat": 40.355793,
+                "lng": -74.468739
+              }
+            ]
           },
           "truckGate": {
-            "south": 40.3588,
-            "west": -74.463,
-            "north": 40.3596,
-            "east": -74.4622
+            "ring": [
+              {
+                "lat": 40.357572,
+                "lng": -74.469014
+              },
+              {
+                "lat": 40.357729,
+                "lng": -74.468327
+              },
+              {
+                "lat": 40.357206,
+                "lng": -74.46819
+              },
+              {
+                "lat": 40.357049,
+                "lng": -74.468877
+              }
+            ]
           },
-          "dropYards": [
-            {
-              "south": 40.3566,
-              "west": -74.4678,
-              "north": 40.3573,
-              "east": -74.4662
-            },
-            {
-              "south": 40.3562,
-              "west": -74.4642,
-              "north": 40.3569,
-              "east": -74.4623
-            }
-          ],
+          "dropYards": [],
           "dockAprons": [
             {
-              "south": 40.3568,
-              "west": -74.4676,
-              "north": 40.3574,
-              "east": -74.4628
+              "ring": [
+                {
+                  "lat": 40.356735,
+                  "lng": -74.469014
+                },
+                {
+                  "lat": 40.357415,
+                  "lng": -74.462353
+                },
+                {
+                  "lat": 40.356473,
+                  "lng": -74.462147
+                },
+                {
+                  "lat": 40.355845,
+                  "lng": -74.468808
+                }
+              ]
             }
           ],
-          "staging": null
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 91,
+              "pano": "sySwFB0_4hJCttEM87KVtw",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 91,
+              "pano": "sySwFB0_4hJCttEM87KVtw",
+              "hasCoverage": true
+            }
+          }
         },
         "yardMetrics": {
           "dockDoorCount": 110,
@@ -133,50 +162,6 @@
           "scale": false,
           "dropYard": true,
           "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#9",
-          "steps": [
-            {
-              "step": "Arrive at gate (no guard, kiosk or call box)",
-              "geofenceTarget": "truckGate",
-              "durationMs": 60000,
-              "narrationKey": "gate.through.kiosk",
-              "baselineWaitMs": 720000,
-              "ynsWaitMs": 0
-            },
-            {
-              "step": "Pass through to drop yard",
-              "geofenceTarget": "dropYard",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Spotter pulls to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 90000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 1200000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit through gate",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 4560000,
-          "totalYnsMs": 2730000
         },
         "dossierExcerpt": "The roster pin (40.358049, -74.464912, geocoded ROOFTOP) landed directly on the\nroof of a very large single-building distribution center in the Docks Corner /\nCranbury-Monroe industrial submarket, alongside the NJ Turnpike and Route 33.\nWeb search confirmed \"Barnes & Noble Distribution, 1 Barnes & Noble Way, Monroe\nTownship NJ 08831\" at this location (Yellowpages, Chamber of Commerce, Waze,\nLoc8NearMe). The building footprint derived from the perimeter geofence works\nout to ~73.5 acres, matching the dossier's stated 73-acre footprint and ~1.15M\nsq ft building — a strong independent corroboration. Location locked at the\nbuilding centroid 40.35820, -74.46510.",
         "mapsUrl": "https://www.google.com/maps/@40.35820,-74.46510,400m/data=!3m1!1e3",
@@ -237,38 +222,105 @@
         },
         "geofences": {
           "perimeter": {
-            "south": 39.4163,
-            "west": -119.7525,
-            "north": 39.4205,
-            "east": -119.7485
+            "ring": [
+              {
+                "lat": 39.419973,
+                "lng": -119.751599
+              },
+              {
+                "lat": 39.420238,
+                "lng": -119.748509
+              },
+              {
+                "lat": 39.417692,
+                "lng": -119.748234
+              },
+              {
+                "lat": 39.417003,
+                "lng": -119.750912
+              },
+              {
+                "lat": 39.418063,
+                "lng": -119.751599
+              }
+            ]
           },
           "truckGate": {
-            "south": 39.4168,
-            "west": -119.7512,
-            "north": 39.4172,
-            "east": -119.7507
+            "ring": [
+              {
+                "lat": 39.417374,
+                "lng": -119.751187
+              },
+              {
+                "lat": 39.41748,
+                "lng": -119.750569
+              },
+              {
+                "lat": 39.417056,
+                "lng": -119.750431
+              },
+              {
+                "lat": 39.416949,
+                "lng": -119.751049
+              }
+            ]
           },
           "dropYards": [
             {
-              "south": 39.417,
-              "west": -119.751,
-              "north": 39.4176,
-              "east": -119.749
+              "ring": [
+                {
+                  "lat": 39.417533,
+                  "lng": -119.751461
+                },
+                {
+                  "lat": 39.417692,
+                  "lng": -119.749676
+                },
+                {
+                  "lat": 39.416684,
+                  "lng": -119.74947
+                },
+                {
+                  "lat": 39.416578,
+                  "lng": -119.751187
+                }
+              ]
             }
           ],
           "dockAprons": [
             {
-              "south": 39.4171,
-              "west": -119.7518,
-              "north": 39.4178,
-              "east": -119.7489
+              "ring": [
+                {
+                  "lat": 39.417692,
+                  "lng": -119.751461
+                },
+                {
+                  "lat": 39.418063,
+                  "lng": -119.748577
+                },
+                {
+                  "lat": 39.417533,
+                  "lng": -119.74844
+                },
+                {
+                  "lat": 39.417162,
+                  "lng": -119.751324
+                }
+              ]
             }
           ],
-          "staging": {
-            "south": 39.4166,
-            "west": -119.7512,
-            "north": 39.4171,
-            "east": -119.75
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 327,
+              "pano": "znMxrPPpGw0X0amLLIcwCQ",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 327,
+              "pano": "znMxrPPpGw0X0amLLIcwCQ",
+              "hasCoverage": true
+            }
           }
         },
         "yardMetrics": {

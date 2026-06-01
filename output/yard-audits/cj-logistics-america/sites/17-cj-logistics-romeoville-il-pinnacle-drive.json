@@ -1,17 +1,63 @@
 {
   "name": "CJ Logistics - Romeoville IL (Pinnacle Drive)",
   "type": "Distribution Center",
-  "coords": { "lat": 41.6042, "lng": -88.1158 },
+  "coords": {
+    "lat": 41.6042,
+    "lng": -88.1158
+  },
   "geofences": {
-    "perimeter": { "south": 41.6028, "west": -88.1172, "north": 41.6052, "east": -88.1140 },
-    "truckGate": { "south": 41.6033, "west": -88.1145, "north": 41.6038, "east": -88.1138 },
-    "dropYards": [
-      { "south": 41.6029, "west": -88.1168, "north": 41.6034, "east": -88.1144 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.604559,
+          "lng": -88.11786
+        },
+        {
+          "lat": 41.604765,
+          "lng": -88.113877
+        },
+        {
+          "lat": 41.603378,
+          "lng": -88.113809
+        },
+        {
+          "lat": 41.603173,
+          "lng": -88.117791
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 41.6033, "west": -88.1168, "north": 41.6037, "east": -88.1144 }
+      {
+        "ring": [
+          {
+            "lat": 41.603481,
+            "lng": -88.117791
+          },
+          {
+            "lat": 41.603635,
+            "lng": -88.113877
+          },
+          {
+            "lat": 41.603122,
+            "lng": -88.113843
+          },
+          {
+            "lat": 41.602968,
+            "lng": -88.117757
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 219,
+        "pano": "fwdVwBkofahAcmqiHlvrCQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 55,
@@ -24,18 +70,37 @@
   },
   "mapsUrl": "https://www.google.com/maps/@41.6042,-88.1158,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "location": "Confirmed 500 S Pinnacle Dr, Romeoville IL - CJ Logistics America DC, a modern speculative-build warehouse in a Will County industrial park, occupied/operated by CJ Logistics (TruckMap, FDA inspection records, Birdeye reviews all cite this address).",
     "truckGate": "Truck court on the south side is enclosed by a chain-link perimeter fence; the truck driveway enters from Pinnacle Dr through a fence gap with a sliding gate (visible in 2025 Street View). Controlled truck entrance.",

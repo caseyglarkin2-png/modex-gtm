@@ -1,19 +1,108 @@
 {
   "name": "K-C Corinth Plant - Corinth MS",
   "type": "Manufacturing plant (nonwovens components for Huggies, Pull-Ups, Poise, Depend, WypAll)",
-  "coords": { "lat": 34.93560, "lng": -88.49080 },
+  "coords": {
+    "lat": 34.9356,
+    "lng": -88.4908
+  },
   "geofences": {
-    "perimeter": { "south": 34.93350, "west": -88.49185, "north": 34.93720, "east": -88.48950 },
-    "truckGate": { "south": 34.93540, "west": -88.49150, "north": 34.93600, "east": -88.49100 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.936895,
+          "lng": -88.492379
+        },
+        {
+          "lat": 34.936838,
+          "lng": -88.489152
+        },
+        {
+          "lat": 34.934024,
+          "lng": -88.489152
+        },
+        {
+          "lat": 34.934024,
+          "lng": -88.492379
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.934362,
+          "lng": -88.492173
+        },
+        {
+          "lat": 34.934362,
+          "lng": -88.491761
+        },
+        {
+          "lat": 34.93408,
+          "lng": -88.491761
+        },
+        {
+          "lat": 34.93408,
+          "lng": -88.492173
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 34.93570, "west": -88.49100, "north": 34.93680, "east": -88.48980 },
-      { "south": 34.93450, "west": -88.49120, "north": 34.93570, "east": -88.49000 }
+      {
+        "ring": [
+          {
+            "lat": 34.934699,
+            "lng": -88.491487
+          },
+          {
+            "lat": 34.934587,
+            "lng": -88.489152
+          },
+          {
+            "lat": 34.934249,
+            "lng": -88.489152
+          },
+          {
+            "lat": 34.934362,
+            "lng": -88.491487
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 34.93560, "west": -88.49130, "north": 34.93660, "east": -88.49010 },
-      { "south": 34.93440, "west": -88.49130, "north": 34.93540, "east": -88.49030 }
+      {
+        "ring": [
+          {
+            "lat": 34.93605,
+            "lng": -88.491143
+          },
+          {
+            "lat": 34.93605,
+            "lng": -88.489701
+          },
+          {
+            "lat": 34.9356,
+            "lng": -88.489701
+          },
+          {
+            "lat": 34.9356,
+            "lng": -88.491143
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 166,
+        "pano": "DKjCDajTbfaxNJ2ZcqKwyg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 166,
+        "pano": "DKjCDajTbfaxNJ2ZcqKwyg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 22,
@@ -21,7 +110,7 @@
     "trailerParkingCapacity": 95,
     "truckGateCount": 2,
     "buildingCount": 9,
-    "siteAreaAcres": 24.0,
+    "siteAreaAcres": 24,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.93560,-88.49080,400m/data=!3m1!1e3",
@@ -50,7 +139,12 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "dockDoors", "buildingCount", "truckGateCount"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "dockDoors",
+    "buildingCount",
+    "truckGateCount"
+  ],
   "fieldNotes": {
     "location": "Roster lat/lng (34.935342,-88.490748, ROOFTOP, moved 54m) landed directly on the K-C Corinth industrial campus - correct. Web research (Area Development, Mississippi Development Authority) confirms the nonwovens plant at 610 Pinecrest St (K-C invested $140M+ in expansions). Locked center 34.93560,-88.49080.",
     "truckGate": "Campus is enclosed by a continuous chain-link perimeter fence; truck entrances off Pinecrest St have chain-link double swing gates across the drive (seen open in Street View 2025-11), with 'No Trespassing' signage and a K-C signboard. Controlled gated entry.",

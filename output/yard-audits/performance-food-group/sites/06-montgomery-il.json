@@ -1,15 +1,112 @@
 {
   "name": "Performance Foodservice - Chicago (Montgomery IL)",
   "type": "Broadline Foodservice Distribution Center",
-  "coords": { "lat": 41.721400, "lng": -88.358500 },
+  "coords": {
+    "lat": 41.7214,
+    "lng": -88.3585
+  },
   "geofences": {
-    "perimeter": { "south": 41.71850, "west": -88.36000, "north": 41.72340, "east": -88.35650 },
-    "truckGate": null,
-    "dropYards": [],
-    "dockAprons": [
-      { "south": 41.72020, "west": -88.35870, "north": 41.72260, "east": -88.35760 }
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.722835,
+          "lng": -88.36468
+        },
+        {
+          "lat": 41.722835,
+          "lng": -88.359049
+        },
+        {
+          "lat": 41.71894,
+          "lng": -88.359049
+        },
+        {
+          "lat": 41.71894,
+          "lng": -88.36468
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.71935,
+          "lng": -88.360697
+        },
+        {
+          "lat": 41.71935,
+          "lng": -88.359599
+        },
+        {
+          "lat": 41.718735,
+          "lng": -88.359599
+        },
+        {
+          "lat": 41.718735,
+          "lng": -88.360697
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 41.72181,
+            "lng": -88.364268
+          },
+          {
+            "lat": 41.72181,
+            "lng": -88.361247
+          },
+          {
+            "lat": 41.71935,
+            "lng": -88.361247
+          },
+          {
+            "lat": 41.71935,
+            "lng": -88.364268
+          }
+        ]
+      }
     ],
-    "staging": { "south": 41.72240, "west": -88.35840, "north": 41.72340, "east": -88.35700 }
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 41.722425,
+            "lng": -88.360423
+          },
+          {
+            "lat": 41.722425,
+            "lng": -88.358637
+          },
+          {
+            "lat": 41.71935,
+            "lng": -88.358637
+          },
+          {
+            "lat": 41.71935,
+            "lng": -88.359049
+          },
+          {
+            "lat": 41.72222,
+            "lng": -88.360423
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 340,
+        "pano": "kX9Vv3rsvVWoBAlE1f1N5A",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 340,
+        "pano": "kX9Vv3rsvVWoBAlE1f1N5A",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 34,
@@ -17,23 +114,39 @@
     "trailerParkingCapacity": 25,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 14.0,
+    "siteAreaAcres": 14,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.7214,-88.3585,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["trailerParkingCapacity", "dropArea"],
+  "uncertainFields": [
+    "trailerParkingCapacity",
+    "dropArea"
+  ],
   "fieldNotes": {
     "truckGate": "No controlled truck gate. The truck driveway leaves Baseline Rd on the NE corner of the property as a wide open paved drive and curves south into the truck court between the PFG building (west) and a neighboring industrial building (east). Street View (Apr 2024) of the entrance shows no barrier arm, no sliding/swing gate, and no checkpoint pinch-point — only a red 'SHIPPING / RECEIVING' sign at the driveway mouth. No perimeter security fence along Baseline Rd.",
     "guardShack": "No guard booth at the entrance or anywhere on the property. The entrance Street View shows an open landscaped driveway with no gatehouse structure.",

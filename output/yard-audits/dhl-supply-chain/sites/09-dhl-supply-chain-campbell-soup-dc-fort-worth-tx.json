@@ -1,39 +1,118 @@
 {
   "name": "DHL Supply Chain - Campbell Soup DC - Fort Worth TX",
   "type": "Dedicated Customer Distribution Center (CPG/food)",
-  "coords": { "lat": 32.84600, "lng": -97.31570 },
+  "coords": {
+    "lat": 32.846,
+    "lng": -97.3157
+  },
   "geofences": {
-    "perimeter": { "south": 32.84370, "west": -97.31730, "north": 32.84840, "east": -97.31470 },
-    "truckGate": { "south": 32.84630, "west": -97.31720, "north": 32.84710, "east": -97.31660 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.847615,
+          "lng": -97.316661
+        },
+        {
+          "lat": 32.8475,
+          "lng": -97.314052
+        },
+        {
+          "lat": 32.841154,
+          "lng": -97.314189
+        },
+        {
+          "lat": 32.84127,
+          "lng": -97.316799
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 32.84420, "west": -97.31695, "north": 32.84780, "east": -97.31635 },
-      { "south": 32.84420, "west": -97.31510, "north": 32.84780, "east": -97.31460 }
+      {
+        "ring": [
+          {
+            "lat": 32.847384,
+            "lng": -97.315013
+          },
+          {
+            "lat": 32.847384,
+            "lng": -97.314052
+          },
+          {
+            "lat": 32.842769,
+            "lng": -97.314189
+          },
+          {
+            "lat": 32.842769,
+            "lng": -97.315151
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 32.84420, "west": -97.31660, "north": 32.84790, "east": -97.31610 },
-      { "south": 32.84420, "west": -97.31555, "north": 32.84790, "east": -97.31505 }
+      {
+        "ring": [
+          {
+            "lat": 32.847384,
+            "lng": -97.316661
+          },
+          {
+            "lat": 32.847384,
+            "lng": -97.315837
+          },
+          {
+            "lat": 32.841385,
+            "lng": -97.315975
+          },
+          {
+            "lat": 32.841385,
+            "lng": -97.316799
+          }
+        ]
+      }
     ],
-    "staging": { "south": 32.84620, "west": -97.31700, "north": 32.84790, "east": -97.31640 }
+    "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 100, "trailersVisible": 115, "trailerParkingCapacity": 165,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 30.0,
+    "dockDoorCount": 100,
+    "trailersVisible": 115,
+    "trailerParkingCapacity": 165,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 30,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.84600,-97.31570,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "shipRcvSeparate", "scale"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "shipRcvSeparate",
+    "scale"
+  ],
   "fieldNotes": {
     "location": "Roster lat/lng (ROOFTOP, moved 89m) landed on the building. Confirmed as the DHL/Campbell Soup Supply Company DC at 3000 Cantrell Sansom Rd, Fort Worth (AllianceTexas area), ~578,000 sq ft - Aug-2025 Street View shows the building marked '3000' with US/Texas flags.",
     "truckGate": "Single controlled truck entrance on the NW side, reached by a long (~250m+) divided internal drive running south from Cantrell Sansom Road between the Campbell DC and the neighboring warehouse.",

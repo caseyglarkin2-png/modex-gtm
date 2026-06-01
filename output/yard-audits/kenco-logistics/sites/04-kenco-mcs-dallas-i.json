@@ -1,19 +1,108 @@
 {
   "name": "Kenco MCS Dallas I - DeSoto TX",
   "type": "Multi-Client Distribution Center / E-Commerce Fulfillment",
-  "coords": { "lat": 32.63200, "lng": -96.82960 },
+  "coords": {
+    "lat": 32.632,
+    "lng": -96.8296
+  },
   "geofences": {
-    "perimeter": { "south": 32.6300, "west": -96.8316, "north": 32.6336, "east": -96.8278 },
-    "truckGate": { "south": 32.63035, "west": -96.83025, "north": 32.63075, "east": -96.82960 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.632925,
+          "lng": -96.831385
+        },
+        {
+          "lat": 32.632983,
+          "lng": -96.826647
+        },
+        {
+          "lat": 32.630728,
+          "lng": -96.826647
+        },
+        {
+          "lat": 32.63067,
+          "lng": -96.831385
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.632,
+          "lng": -96.831385
+        },
+        {
+          "lat": 32.632,
+          "lng": -96.830973
+        },
+        {
+          "lat": 32.631422,
+          "lng": -96.830973
+        },
+        {
+          "lat": 32.631422,
+          "lng": -96.831385
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 32.6304, "west": -96.8316, "north": 32.6328, "east": -96.8305 },
-      { "south": 32.6304, "west": -96.8305, "north": 32.6312, "east": -96.8281 }
+      {
+        "ring": [
+          {
+            "lat": 32.63281,
+            "lng": -96.831317
+          },
+          {
+            "lat": 32.63281,
+            "lng": -96.830218
+          },
+          {
+            "lat": 32.630843,
+            "lng": -96.830218
+          },
+          {
+            "lat": 32.630843,
+            "lng": -96.831317
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 32.6311, "west": -96.8307, "north": 32.6314, "east": -96.8281 },
-      { "south": 32.6329, "west": -96.8307, "north": 32.6332, "east": -96.8281 }
+      {
+        "ring": [
+          {
+            "lat": 32.632925,
+            "lng": -96.830287
+          },
+          {
+            "lat": 32.632925,
+            "lng": -96.826647
+          },
+          {
+            "lat": 32.632694,
+            "lng": -96.826647
+          },
+          {
+            "lat": 32.632694,
+            "lng": -96.830287
+          }
+        ]
+      }
     ],
-    "staging": { "south": 32.62985, "west": -96.8307, "north": 32.6303, "east": -96.8281 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 100,
+        "pano": "Op5LmfD9hlohr9Fpy1THwQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 100,
+        "pano": "Op5LmfD9hlohr9Fpy1THwQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 80,
@@ -26,18 +115,35 @@
   },
   "mapsUrl": "https://www.google.com/maps/@32.63200,-96.82960,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Fully fenced perimeter with a controlled truck gate on the S/SW driveway off the I-35E service road. Confirmed in 2025-02 Street View and z20 satellite — chain-link perimeter fence, gated truck driveway with gate arms.",
     "guardShack": "A small 1-vehicle-footprint guard booth sits beside the gate driveway, visible in both z20 satellite and 2025-02 Street View.",

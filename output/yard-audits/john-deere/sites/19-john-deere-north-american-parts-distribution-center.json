@@ -1,19 +1,81 @@
 {
   "name": "John Deere North American Parts Distribution Center - Milan IL",
   "type": "Parts Distribution Center",
-  "coords": { "lat": 41.44750, "lng": -90.54550 },
+  "coords": {
+    "lat": 41.4475,
+    "lng": -90.5455
+  },
   "geofences": {
-    "perimeter": { "south": 41.44230, "west": -90.54980, "north": 41.45230, "east": -90.53950 },
-    "truckGate": { "south": 41.45100, "west": -90.54480, "north": 41.45180, "east": -90.54380 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.450794,
+          "lng": -90.550993
+        },
+        {
+          "lat": 41.451411,
+          "lng": -90.543852
+        },
+        {
+          "lat": 41.445029,
+          "lng": -90.542753
+        },
+        {
+          "lat": 41.444412,
+          "lng": -90.549895
+        },
+        {
+          "lat": 41.447912,
+          "lng": -90.551542
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 41.44640, "west": -90.54320, "north": 41.45000, "east": -90.53980 },
-      { "south": 41.44320, "west": -90.54820, "north": 41.44680, "east": -90.54320 },
-      { "south": 41.44680, "west": -90.54420, "north": 41.44980, "east": -90.54180 }
+      {
+        "ring": [
+          {
+            "lat": 41.449559,
+            "lng": -90.544127
+          },
+          {
+            "lat": 41.449765,
+            "lng": -90.541105
+          },
+          {
+            "lat": 41.445853,
+            "lng": -90.540831
+          },
+          {
+            "lat": 41.445647,
+            "lng": -90.543852
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.44620, "west": -90.54580, "north": 41.45020, "east": -90.54360 }
+      {
+        "ring": [
+          {
+            "lat": 41.44997,
+            "lng": -90.549895
+          },
+          {
+            "lat": 41.450382,
+            "lng": -90.544127
+          },
+          {
+            "lat": 41.449353,
+            "lng": -90.543989
+          },
+          {
+            "lat": 41.448941,
+            "lng": -90.549757
+          }
+        ]
+      }
     ],
-    "staging": { "south": 41.45000, "west": -90.54420, "north": 41.45120, "east": -90.54260 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 90,
@@ -21,7 +83,7 @@
     "trailerParkingCapacity": 500,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 215.0,
+    "siteAreaAcres": 215,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.44750,-90.54550,400m/data=!3m1!1e3",
@@ -50,7 +112,17 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "fastLaneOpportunity"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "fastLaneOpportunity"
+  ],
   "fieldNotes": {
     "truckGate": "No barrier arm, gate, or controlled checkpoint observed at the property-line entrance. The DC is accessed via a wide private entrance drive off the north arterial road; the drive is open at the street (z20 satellite and 2019/2025 Street View). The office entrance at the NE is a circular drive with no control. A facility this large likely has internal gates at the dock yard, but no street-level controlled gate was visible - classified false on visible evidence.",
     "guardShack": "No guard booth observed at the property-line entrance or office entrance. Web tips mention drivers referencing 'gate' numbers (e.g. Gate 4), suggesting internal gate stations exist, but none was confirmed as a staffed booth at a property-line truck entrance.",

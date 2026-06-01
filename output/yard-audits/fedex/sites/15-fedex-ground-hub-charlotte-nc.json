@@ -1,18 +1,85 @@
 {
   "name": "FedEx Ground Hub - Charlotte NC",
   "type": "Ground regional sortation hub",
-  "coords": { "lat": 35.27270, "lng": -80.91810 },
+  "coords": {
+    "lat": 35.2727,
+    "lng": -80.9181
+  },
   "geofences": {
-    "perimeter": { "south": 35.27050, "west": -80.92080, "north": 35.27430, "east": -80.91540 },
-    "truckGate": { "south": 35.27210, "west": -80.92050, "north": 35.27270, "east": -80.91980 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.273821,
+          "lng": -80.922495
+        },
+        {
+          "lat": 35.274382,
+          "lng": -80.918375
+        },
+        {
+          "lat": 35.273597,
+          "lng": -80.916452
+        },
+        {
+          "lat": 35.271355,
+          "lng": -80.916727
+        },
+        {
+          "lat": 35.270906,
+          "lng": -80.921121
+        },
+        {
+          "lat": 35.272476,
+          "lng": -80.922769
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 35.27190, "west": -80.91720, "north": 35.27400, "east": -80.91540 }
+      {
+        "ring": [
+          {
+            "lat": 35.27427,
+            "lng": -80.92222
+          },
+          {
+            "lat": 35.2727,
+            "lng": -80.922769
+          },
+          {
+            "lat": 35.2727,
+            "lng": -80.923044
+          },
+          {
+            "lat": 35.27427,
+            "lng": -80.922495
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.27240, "west": -80.91890, "north": 35.27420, "east": -80.91800 },
-      { "south": 35.27210, "west": -80.91980, "north": 35.27390, "east": -80.91890 }
+      {
+        "ring": [
+          {
+            "lat": 35.273597,
+            "lng": -80.921121
+          },
+          {
+            "lat": 35.273821,
+            "lng": -80.9181
+          },
+          {
+            "lat": 35.2727,
+            "lng": -80.9181
+          },
+          {
+            "lat": 35.272476,
+            "lng": -80.921121
+          }
+        ]
+      }
     ],
-    "staging": { "south": 35.27200, "west": -80.91990, "north": 35.27280, "east": -80.91870 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 110,
@@ -20,7 +87,7 @@
     "trailerParkingCapacity": 200,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 28.0,
+    "siteAreaAcres": 28,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.27270,-80.91810,400m/data=!3m1!1e3",
@@ -49,7 +116,13 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Controlled truck entrance on the W side of the property where the access road off CSX Way meets the yard - z20 satellite (fedex-15-gate-z20b) clearly shows a barrier across the truck lane, a pinch-point with lane markings, and 'NO PARKING' painted on the apron.",
     "guardShack": "A small detached structure with a distinctive orange/brown roof sits immediately beside the gate lane at the entrance pinch-point - a staffed guard booth (~1-2 vehicle footprint). remoteGs therefore false.",

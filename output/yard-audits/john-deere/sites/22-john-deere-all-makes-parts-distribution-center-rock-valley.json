@@ -1,35 +1,100 @@
 {
   "name": "John Deere All-Makes Parts Distribution Center - Rock Valley IA",
   "type": "Parts Distribution Center",
-  "coords": { "lat": 43.19680, "lng": -96.31370 },
+  "coords": {
+    "lat": 43.1968,
+    "lng": -96.3137
+  },
   "geofences": {
-    "perimeter": { "south": 43.19520, "west": -96.31520, "north": 43.19850, "east": -96.31220 },
-    "truckGate": { "south": 43.19690, "west": -96.31510, "north": 43.19740, "east": -96.31460 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 43.1972,
+          "lng": -96.314661
+        },
+        {
+          "lat": 43.19715,
+          "lng": -96.312876
+        },
+        {
+          "lat": 43.195799,
+          "lng": -96.312876
+        },
+        {
+          "lat": 43.195799,
+          "lng": -96.314661
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 43.19640, "west": -96.31460, "north": 43.19710, "east": -96.31370 }
+      {
+        "ring": [
+          {
+            "lat": 43.197,
+            "lng": -96.314524
+          },
+          {
+            "lat": 43.19695,
+            "lng": -96.313013
+          },
+          {
+            "lat": 43.19675,
+            "lng": -96.313013
+          },
+          {
+            "lat": 43.1968,
+            "lng": -96.314524
+          }
+        ]
+      }
     ],
-    "staging": { "south": 43.19640, "west": -96.31470, "north": 43.19720, "east": -96.31350 }
+    "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 16, "trailersVisible": 8, "trailerParkingCapacity": 12,
-    "truckGateCount": 1, "buildingCount": 3, "siteAreaAcres": 22.0,
+    "dockDoorCount": 16,
+    "trailersVisible": 8,
+    "trailerParkingCapacity": 12,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 22,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@43.19680,-96.31370,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoors", "dropArea", "trailersVisible", "trailerParkingCapacity", "siteAreaAcres", "connectivityIssue"],
+  "uncertainFields": [
+    "dockDoors",
+    "dropArea",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "siteAreaAcres",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "site": "Resolved to the John Deere A&I Products complex in Rock Valley IA. A&I Products is John Deere's all-makes aftermarket-parts subsidiary (Deere acquired A&I in Dec 2010); Rock Valley is its corporate HQ, main manufacturing facility and central distribution hub - 750,000+ sq ft of warehouse space across roughly three connected/adjacent buildings. The roster address (1300 16th Ave) could not be confirmed; Waze lists 'John Deere A&I Products, 2200-2298 10th St' and Yelp lists 1020 22nd Ave for A&I HQ - both point to the same industrial-park complex SW of downtown Rock Valley, which is what was audited.",
     "coords": "Locked center (43.19680, -96.31370) on the A&I warehouse/manufacturing complex. Roster coords (43.203456, -96.294498) plotted in downtown Rock Valley among small-town commercial/residential blocks and grain elevators - not the DC - and were not used.",

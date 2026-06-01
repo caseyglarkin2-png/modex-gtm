@@ -1,38 +1,137 @@
 {
   "name": "Campbell's Soup - Napoleon OH",
   "type": "Manufacturing - soup/broth/V8 juice",
-  "coords": { "lat": 41.397500, "lng": -84.103500 },
+  "coords": {
+    "lat": 41.3975,
+    "lng": -84.1035
+  },
   "geofences": {
-    "perimeter": { "south": 41.39350, "west": -84.10850, "north": 41.40150, "east": -84.09850 },
-    "truckGate": { "south": 41.39370, "west": -84.10680, "north": 41.39440, "east": -84.10580 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.401621,
+          "lng": -84.108993
+        },
+        {
+          "lat": 41.401208,
+          "lng": -84.099105
+        },
+        {
+          "lat": 41.39647,
+          "lng": -84.098556
+        },
+        {
+          "lat": 41.392555,
+          "lng": -84.102127
+        },
+        {
+          "lat": 41.393379,
+          "lng": -84.109542
+        },
+        {
+          "lat": 41.39853,
+          "lng": -84.110092
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 41.39680, "west": -84.10220, "north": 41.39990, "east": -84.09870 },
-      { "south": 41.39230, "west": -84.10520, "north": 41.39300, "east": -84.10250 }
+      {
+        "ring": [
+          {
+            "lat": 41.39956,
+            "lng": -84.102951
+          },
+          {
+            "lat": 41.399354,
+            "lng": -84.099105
+          },
+          {
+            "lat": 41.397088,
+            "lng": -84.099243
+          },
+          {
+            "lat": 41.397294,
+            "lng": -84.103088
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.39620, "west": -84.10350, "north": 41.39780, "east": -84.10100 }
+      {
+        "ring": [
+          {
+            "lat": 41.399148,
+            "lng": -84.107895
+          },
+          {
+            "lat": 41.398942,
+            "lng": -84.1035
+          },
+          {
+            "lat": 41.397706,
+            "lng": -84.103637
+          },
+          {
+            "lat": 41.397912,
+            "lng": -84.108032
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 138,
+        "pano": "kPCnQmoiV64tDj6TszuFfQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 55, "trailersVisible": 130, "trailerParkingCapacity": 200,
-    "truckGateCount": 1, "buildingCount": 9, "siteAreaAcres": 175.0,
+    "dockDoorCount": 55,
+    "trailersVisible": 130,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 1,
+    "buildingCount": 9,
+    "siteAreaAcres": 175,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.397500,-84.103500,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "dockDoorCount", "shipRcvSeparate"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "dockDoorCount",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Large fenced manufacturing campus; perimeter chain-link fence confirmed all around in Street View. Controlled truck entry inferred via internal driveway off the south road / SR-110.",
     "guardShack": "No guard booth positively identified on public-road Street View frontage (all visible frontage is employee parking behind fence). Marked false / remoteGs true at medium confidence.",

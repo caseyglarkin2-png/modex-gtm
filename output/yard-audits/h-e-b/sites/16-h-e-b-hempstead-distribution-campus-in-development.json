@@ -1,37 +1,99 @@
 {
   "name": "H-E-B Hempstead Distribution Campus (in development) - Hempstead TX",
   "type": "Distribution Campus (multi-phase, Phase 1 under construction)",
-  "coords": { "lat": 30.105200, "lng": -96.064000 },
+  "coords": {
+    "lat": 30.1052,
+    "lng": -96.064
+  },
   "geofences": {
-    "perimeter": { "south": 30.098000, "west": -96.072000, "north": 30.108000, "east": -96.056000 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 30.107576,
+          "lng": -96.070866
+        },
+        {
+          "lat": 30.108051,
+          "lng": -96.05988
+        },
+        {
+          "lat": 30.1052,
+          "lng": -96.057958
+        },
+        {
+          "lat": 30.099972,
+          "lng": -96.061253
+        },
+        {
+          "lat": 30.099497,
+          "lng": -96.066747
+        },
+        {
+          "lat": 30.104012,
+          "lng": -96.070317
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 0, "trailersVisible": 0, "trailerParkingCapacity": 0,
-    "truckGateCount": 0, "buildingCount": 0, "siteAreaAcres": 423.0,
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 0,
+    "buildingCount": 0,
+    "siteAreaAcres": 423,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@30.105200,-96.064000,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "NONE", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "scale", "dropYard", "multiStep",
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "scale",
+    "dropYard",
+    "multiStep",
     "connectivityIssue"
   ],
   "fieldNotes": {

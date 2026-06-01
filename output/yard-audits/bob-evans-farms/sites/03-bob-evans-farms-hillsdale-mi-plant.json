@@ -1,18 +1,155 @@
 {
   "name": "Bob Evans Farms - Hillsdale MI Plant",
   "type": "Manufacturing plant (fresh pork sausage rolls & patties; USDA FSIS inspected)",
-  "coords": { "lat": 41.921600, "lng": -84.615300 },
+  "coords": {
+    "lat": 41.9216,
+    "lng": -84.6153
+  },
   "geofences": {
-    "perimeter": { "south": 41.919900, "west": -84.616900, "north": 41.923100, "east": -84.613700 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.922417,
+          "lng": -84.617085
+        },
+        {
+          "lat": 41.922826,
+          "lng": -84.614476
+        },
+        {
+          "lat": 41.921958,
+          "lng": -84.613995
+        },
+        {
+          "lat": 41.920987,
+          "lng": -84.614201
+        },
+        {
+          "lat": 41.920783,
+          "lng": -84.616811
+        },
+        {
+          "lat": 41.921702,
+          "lng": -84.617154
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.920118,
+          "lng": -84.617017
+        },
+        {
+          "lat": 41.920169,
+          "lng": -84.616673
+        },
+        {
+          "lat": 41.919965,
+          "lng": -84.616605
+        },
+        {
+          "lat": 41.919914,
+          "lng": -84.616948
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 41.921700, "west": -84.614900, "north": 41.922500, "east": -84.613900 }
+      {
+        "ring": [
+          {
+            "lat": 41.922213,
+            "lng": -84.6153
+          },
+          {
+            "lat": 41.922315,
+            "lng": -84.614407
+          },
+          {
+            "lat": 41.921958,
+            "lng": -84.614339
+          },
+          {
+            "lat": 41.921855,
+            "lng": -84.615231
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 41.922111,
+            "lng": -84.616879
+          },
+          {
+            "lat": 41.922264,
+            "lng": -84.615781
+          },
+          {
+            "lat": 41.921958,
+            "lng": -84.615712
+          },
+          {
+            "lat": 41.921804,
+            "lng": -84.616811
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.921250, "west": -84.615450, "north": 41.921600, "east": -84.614700 },
-      { "south": 41.921750, "west": -84.615800, "north": 41.922050, "east": -84.615200 }
+      {
+        "ring": [
+          {
+            "lat": 41.921804,
+            "lng": -84.615712
+          },
+          {
+            "lat": 41.921907,
+            "lng": -84.614476
+          },
+          {
+            "lat": 41.921549,
+            "lng": -84.614407
+          },
+          {
+            "lat": 41.921447,
+            "lng": -84.615643
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": {
+      "ring": [
+        {
+          "lat": 41.921345,
+          "lng": -84.616879
+        },
+        {
+          "lat": 41.921447,
+          "lng": -84.615643
+        },
+        {
+          "lat": 41.921089,
+          "lng": -84.615575
+        },
+        {
+          "lat": 41.920987,
+          "lng": -84.616811
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 32,
+        "pano": "hD77uVJQhZCAFaE-cGrOHA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 32,
+        "pano": "hD77uVJQhZCAFaE-cGrOHA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 16,
@@ -25,18 +162,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@41.921600,-84.615300,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Plant set well back from public roads on a long private access drive that connects to a residential side street SW of the site. The entrance has a Bob Evans Farms sign and decorative split-rail fence along the road, but the driveway is an open curb cut with no barrier arm, gate, or pinch-point. Confirmed in Street View (2024-09).",
     "guardShack": "No booth structure at the entrance drive or anywhere on the access path; confirmed in Street View and satellite.",

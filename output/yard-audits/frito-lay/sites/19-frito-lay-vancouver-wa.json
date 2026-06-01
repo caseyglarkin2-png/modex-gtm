@@ -1,37 +1,142 @@
 {
   "name": "Frito-Lay - Vancouver WA",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 45.65685, "lng": -122.69180 },
+  "coords": {
+    "lat": 45.65685,
+    "lng": -122.6918
+  },
   "geofences": {
-    "perimeter": { "south": 45.65350, "west": -122.69470, "north": 45.66000, "east": -122.69010 },
-    "truckGate": { "south": 45.65500, "west": -122.69160, "north": 45.65600, "east": -122.69080 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 45.65877,
+          "lng": -122.695096
+        },
+        {
+          "lat": 45.65781,
+          "lng": -122.690976
+        },
+        {
+          "lat": 45.654162,
+          "lng": -122.693173
+        },
+        {
+          "lat": 45.655698,
+          "lng": -122.695645
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 45.658194,
+          "lng": -122.693173
+        },
+        {
+          "lat": 45.658002,
+          "lng": -122.692349
+        },
+        {
+          "lat": 45.657522,
+          "lng": -122.692487
+        },
+        {
+          "lat": 45.657714,
+          "lng": -122.693311
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 45.65560, "west": -122.69440, "north": 45.65900, "east": -122.69230 }
+      {
+        "ring": [
+          {
+            "lat": 45.65781,
+            "lng": -122.694821
+          },
+          {
+            "lat": 45.65733,
+            "lng": -122.692624
+          },
+          {
+            "lat": 45.656082,
+            "lng": -122.693173
+          },
+          {
+            "lat": 45.656562,
+            "lng": -122.695371
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 45.65480, "west": -122.69130, "north": 45.65820, "east": -122.69060 }
+      {
+        "ring": [
+          {
+            "lat": 45.65637,
+            "lng": -122.694547
+          },
+          {
+            "lat": 45.65589,
+            "lng": -122.692349
+          },
+          {
+            "lat": 45.65541,
+            "lng": -122.692624
+          },
+          {
+            "lat": 45.65589,
+            "lng": -122.694821
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 35, "trailersVisible": 90, "trailerParkingCapacity": 110,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 56.0,
+    "dockDoorCount": 35,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 56,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@45.65685,-122.6918,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "buildingCount", "scale"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "buildingCount",
+    "scale"
+  ],
   "fieldNotes": {
     "location": "Roster point (45.656846,-122.691343, geocode GEOMETRIC_CENTER) landed directly on the plant. Web research confirmed 4808 NW Fruit Valley Rd, Vancouver WA - a ~300,000 sq ft Frito-Lay manufacturing/warehousing/distribution complex (operating since 1972, ~460 employees). Street View confirmed a Lay's-branded trailer at the dock and tall black security fencing around the entire property.",
     "truckGate": "The entire property is enclosed by tall black ornamental/security fencing seen in every Street View along NW Fruit Valley Rd; the dock apron is fenced off from the public road. Truck access is via a controlled gate, but the specific barrier-arm opening could not be pinpointed in available imagery. Classified truckGate true; flagged uncertain.",

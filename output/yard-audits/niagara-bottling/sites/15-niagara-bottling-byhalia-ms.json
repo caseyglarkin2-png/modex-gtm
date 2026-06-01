@@ -1,17 +1,94 @@
 {
   "name": "Niagara Bottling - Byhalia MS",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 34.97800, "lng": -89.60680 },
+  "coords": {
+    "lat": 34.978,
+    "lng": -89.6068
+  },
   "geofences": {
-    "perimeter": { "south": 34.97550, "west": -89.60880, "north": 34.98060, "east": -89.60480 },
-    "truckGate": { "south": 34.97550, "west": -89.60570, "north": 34.97640, "east": -89.60480 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.979125,
+          "lng": -89.607899
+        },
+        {
+          "lat": 34.979125,
+          "lng": -89.60474
+        },
+        {
+          "lat": 34.975862,
+          "lng": -89.60474
+        },
+        {
+          "lat": 34.975862,
+          "lng": -89.607899
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.978563,
+          "lng": -89.607899
+        },
+        {
+          "lat": 34.978563,
+          "lng": -89.607075
+        },
+        {
+          "lat": 34.978,
+          "lng": -89.607075
+        },
+        {
+          "lat": 34.978,
+          "lng": -89.607899
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 34.97600, "west": -89.60850, "north": 34.98000, "east": -89.60760 },
-      { "south": 34.97650, "west": -89.60540, "north": 34.98000, "east": -89.60480 }
+      {
+        "ring": [
+          {
+            "lat": 34.979013,
+            "lng": -89.607761
+          },
+          {
+            "lat": 34.979013,
+            "lng": -89.604877
+          },
+          {
+            "lat": 34.97845,
+            "lng": -89.604877
+          },
+          {
+            "lat": 34.97845,
+            "lng": -89.607761
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 34.97600, "west": -89.60790, "north": 34.98000, "east": -89.60720 },
-      { "south": 34.97650, "west": -89.60600, "north": 34.98000, "east": -89.60540 }
+      {
+        "ring": [
+          {
+            "lat": 34.97845,
+            "lng": -89.607761
+          },
+          {
+            "lat": 34.97845,
+            "lng": -89.604877
+          },
+          {
+            "lat": 34.978,
+            "lng": -89.604877
+          },
+          {
+            "lat": 34.978,
+            "lng": -89.607761
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -21,23 +98,42 @@
     "trailerParkingCapacity": 150,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 48.0,
+    "siteAreaAcres": 48,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.97800,-89.60680,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "trailerParkingCapacity", "entryExitSeparate"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "entryExitSeparate"
+  ],
   "fieldNotes": {
     "buildingId": "Address 168 E Wingo Rd geocoded ROOFTOP onto a large warehouse/manufacturing building in a Byhalia MS logistics park outside Memphis. Confirmed Niagara: a cluster of tall white process silos and water-treatment tanks lines the S/SE building face - the classic bottling-plant signature - matching a web facility note describing the delivery entrance 'adjacent to the large silos'. The plant opened 2018.",
     "truckGate": "The site has a continuous chain-link perimeter fence along E Wingo Rd. The truck entrance at the SE corner is a controlled gated drive with a digital driver check-in sign board. truckGate = true.",

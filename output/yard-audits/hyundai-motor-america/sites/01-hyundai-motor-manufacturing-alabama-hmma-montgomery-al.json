@@ -1,39 +1,118 @@
 {
   "name": "Hyundai Motor Manufacturing Alabama (HMMA) - Montgomery AL",
   "type": "Auto Assembly Plant",
-  "coords": { "lat": 32.281200, "lng": -86.323500 },
+  "coords": {
+    "lat": 32.2812,
+    "lng": -86.3235
+  },
   "geofences": {
-    "perimeter": { "south": 32.27550, "west": -86.33300, "north": 32.29150, "east": -86.31000 },
-    "truckGate": { "south": 32.27680, "west": -86.32620, "north": 32.27820, "east": -86.32440 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.285844,
+          "lng": -86.336134
+        },
+        {
+          "lat": 32.285844,
+          "lng": -86.311415
+        },
+        {
+          "lat": 32.275627,
+          "lng": -86.311415
+        },
+        {
+          "lat": 32.275627,
+          "lng": -86.336134
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 32.27770, "west": -86.31530, "north": 32.27980, "east": -86.31230 },
-      { "south": 32.28000, "west": -86.31900, "north": 32.28220, "east": -86.31550 }
+      {
+        "ring": [
+          {
+            "lat": 32.284915,
+            "lng": -86.334486
+          },
+          {
+            "lat": 32.284915,
+            "lng": -86.320753
+          },
+          {
+            "lat": 32.281664,
+            "lng": -86.320753
+          },
+          {
+            "lat": 32.281664,
+            "lng": -86.334486
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 32.28030, "west": -86.31850, "north": 32.28230, "east": -86.31500 },
-      { "south": 32.28150, "west": -86.32830, "north": 32.28350, "east": -86.32600 }
+      {
+        "ring": [
+          {
+            "lat": 32.2812,
+            "lng": -86.334486
+          },
+          {
+            "lat": 32.2812,
+            "lng": -86.320753
+          },
+          {
+            "lat": 32.279807,
+            "lng": -86.320753
+          },
+          {
+            "lat": 32.279807,
+            "lng": -86.334486
+          }
+        ]
+      }
     ],
-    "staging": { "south": 32.27850, "west": -86.31480, "north": 32.27990, "east": -86.31230 }
+    "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 90, "trailersVisible": 220, "trailerParkingCapacity": 320,
-    "truckGateCount": 2, "buildingCount": 12, "siteAreaAcres": 620.0,
+    "dockDoorCount": 90,
+    "trailersVisible": 220,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 2,
+    "buildingCount": 12,
+    "siteAreaAcres": 620,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.281200,-86.323500,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "exitLanes", "multiStep"],
+  "uncertainFields": [
+    "scale",
+    "exitLanes",
+    "multiStep"
+  ],
   "fieldNotes": {
     "site": "1,744-acre HMMA campus (per hmmausa.com / Wikipedia). Operational developed footprint geofenced here is ~620 acres; full owned land much larger. 3.4M sq ft of buildings: stamping, weld, paint, assembly, three engine shops, plus an east logistics/parts warehouse complex and a 2-mile test track at the north edge.",
     "truckGate": "HMMA uses controlled, numbered gates (web research confirms 'Gate 2' as the visitor entrance). Main multi-lane entry off Hyundai Blvd at 32.2769,-86.3253; access control is set back inside the property, standard for a large guarded automotive campus.",

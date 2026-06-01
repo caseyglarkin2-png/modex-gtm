@@ -1,15 +1,87 @@
 {
   "name": "SalSon Logistics - Florence NJ",
   "type": "Warehouse / Transload Hub",
-  "coords": { "lat": 40.097016, "lng": -74.808053 },
+  "coords": {
+    "lat": 40.097016,
+    "lng": -74.808053
+  },
   "geofences": {
-    "perimeter": { "south": 40.09560, "west": -74.81000, "north": 40.09870, "east": -74.80560 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.097279,
+          "lng": -74.810113
+        },
+        {
+          "lat": 40.098066,
+          "lng": -74.80668
+        },
+        {
+          "lat": 40.096753,
+          "lng": -74.806405
+        },
+        {
+          "lat": 40.096044,
+          "lng": -74.809735
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.096176,
+          "lng": -74.809117
+        },
+        {
+          "lat": 40.096254,
+          "lng": -74.80874
+        },
+        {
+          "lat": 40.096018,
+          "lng": -74.808637
+        },
+        {
+          "lat": 40.095939,
+          "lng": -74.809014
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.09680, "west": -74.80790, "north": 40.09850, "east": -74.80580 }
+      {
+        "ring": [
+          {
+            "lat": 40.09804,
+            "lng": -74.807916
+          },
+          {
+            "lat": 40.097751,
+            "lng": -74.806577
+          },
+          {
+            "lat": 40.097016,
+            "lng": -74.80668
+          },
+          {
+            "lat": 40.097279,
+            "lng": -74.808053
+          }
+        ]
+      }
     ],
     "dockAprons": [],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 19,
+        "pano": "iCrK2bX9ByHx1n5AWmYtDQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 19,
+        "pano": "iCrK2bX9ByHx1n5AWmYtDQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 4,
@@ -46,7 +118,9 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoors"],
+  "uncertainFields": [
+    "dockDoors"
+  ],
   "fieldNotes": {
     "truckGate": "No controlled truck gate. Street View (2023) shows an open driveway from US Highway 130 with no barrier arm or sliding gate; the gravel trailer yard has a low chainlink fence but the property entrance off US-130 is open. A 'For Lease' sign was still posted in 2023, consistent with this being a recently-acquired (2024-25) terminal.",
     "guardShack": "No guard booth visible anywhere on the property in satellite or Street View.",

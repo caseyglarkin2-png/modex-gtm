@@ -1,18 +1,87 @@
 {
   "name": "Barnes & Noble - Monroe Township NJ DC",
   "type": "Distribution Center / E-commerce Fulfillment Center",
-  "coords": { "lat": 40.35820, "lng": -74.46510 },
+  "coords": {
+    "lat": 40.3582,
+    "lng": -74.4651
+  },
   "geofences": {
-    "perimeter": { "south": 40.35630, "west": -74.46890, "north": 40.36110, "east": -74.46230 },
-    "truckGate": { "south": 40.35880, "west": -74.46300, "north": 40.35960, "east": -74.46220 },
-    "dropYards": [
-      { "south": 40.35660, "west": -74.46780, "north": 40.35730, "east": -74.46620 },
-      { "south": 40.35620, "west": -74.46420, "north": 40.35690, "east": -74.46230 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.360345,
+          "lng": -74.469151
+        },
+        {
+          "lat": 40.360973,
+          "lng": -74.462147
+        },
+        {
+          "lat": 40.356473,
+          "lng": -74.461735
+        },
+        {
+          "lat": 40.355793,
+          "lng": -74.468739
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.357572,
+          "lng": -74.469014
+        },
+        {
+          "lat": 40.357729,
+          "lng": -74.468327
+        },
+        {
+          "lat": 40.357206,
+          "lng": -74.46819
+        },
+        {
+          "lat": 40.357049,
+          "lng": -74.468877
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 40.35680, "west": -74.46760, "north": 40.35740, "east": -74.46280 }
+      {
+        "ring": [
+          {
+            "lat": 40.356735,
+            "lng": -74.469014
+          },
+          {
+            "lat": 40.357415,
+            "lng": -74.462353
+          },
+          {
+            "lat": 40.356473,
+            "lng": -74.462147
+          },
+          {
+            "lat": 40.355845,
+            "lng": -74.468808
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 91,
+        "pano": "sySwFB0_4hJCttEM87KVtw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 91,
+        "pano": "sySwFB0_4hJCttEM87KVtw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 110,
@@ -25,18 +94,37 @@
   },
   "mapsUrl": "https://www.google.com/maps/@40.35820,-74.46510,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "remoteGs", "entryLanes", "exitLanes", "postGateStaging"],
+  "uncertainFields": [
+    "truckGate",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "postGateStaging"
+  ],
   "fieldNotes": {
     "location": "Confirmed 1 Barnes & Noble Way, Monroe Township NJ. Single ~1.15M sq ft DC building; derived site area 73.5 acres matches dossier's stated 73 acres, strongly corroborating the building identification.",
     "truckGate": "Property is fully chain-link fenced (fence confirmed via Street View on the west side and visible in satellite along the south). The dock yard is a secured enclosure and the truck route necessarily passes a fence line, implying a controlled gate. No barrier-arm or sliding-gate STRUCTURE was directly captured in available imagery (Street View covers only public roads and the east perimeter loop, not the truck-yard entrance), so this is a medium-confidence inference from the fenced perimeter.",

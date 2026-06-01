@@ -1,37 +1,131 @@
 {
   "name": "Milton Brewery (Dogfish Head) - Milton DE",
   "type": "Brewery / production facility (Dogfish Head main production; acquired by Boston Beer 2019)",
-  "coords": { "lat": 38.7705, "lng": -75.3100 },
+  "coords": {
+    "lat": 38.7705,
+    "lng": -75.31
+  },
   "geofences": {
-    "perimeter": { "south": 38.7692, "west": -75.3120, "north": 38.7714, "east": -75.3082 },
-    "truckGate": null,
-    "dropYards": [
-      { "south": 38.7703, "west": -75.3094, "north": 38.7711, "east": -75.3083 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.771035,
+          "lng": -75.311167
+        },
+        {
+          "lat": 38.770928,
+          "lng": -75.309313
+        },
+        {
+          "lat": 38.769643,
+          "lng": -75.309451
+        },
+        {
+          "lat": 38.769751,
+          "lng": -75.311305
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 38.770179,
+          "lng": -75.309657
+        },
+        {
+          "lat": 38.770125,
+          "lng": -75.309176
+        },
+        {
+          "lat": 38.769858,
+          "lng": -75.309245
+        },
+        {
+          "lat": 38.769911,
+          "lng": -75.309725
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 38.7706, "west": -75.3110, "north": 38.7712, "east": -75.3100 }
+      {
+        "ring": [
+          {
+            "lat": 38.770714,
+            "lng": -75.31103
+          },
+          {
+            "lat": 38.770661,
+            "lng": -75.31
+          },
+          {
+            "lat": 38.770446,
+            "lng": -75.310069
+          },
+          {
+            "lat": 38.7705,
+            "lng": -75.311099
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 53,
+        "pano": "5tIzb7Z8iTh9tJPoMdbuLA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 53,
+        "pano": "5tIzb7Z8iTh9tJPoMdbuLA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 12, "trailersVisible": 3, "trailerParkingCapacity": 15,
-    "truckGateCount": 0, "buildingCount": 2, "siteAreaAcres": 20.0,
+    "dockDoorCount": 12,
+    "trailersVisible": 3,
+    "trailerParkingCapacity": 15,
+    "truckGateCount": 0,
+    "buildingCount": 2,
+    "siteAreaAcres": 20,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@38.7705,-75.31,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "dropArea", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoorCount",
+    "dropArea",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "No controlled truck gate. The brewery is set within the Cannery Village mixed-use development; trucks reach the operational yard directly from public development roads. Street View (2024) shows open road frontage with employee parking and no barrier arm or sliding gate.",
     "guardShack": "No guard booth visible at any approach in Street View or satellite.",

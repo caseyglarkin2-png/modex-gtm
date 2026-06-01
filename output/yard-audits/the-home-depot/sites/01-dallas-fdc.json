@@ -1,14 +1,99 @@
 {
   "name": "Home Depot FDC - Dallas TX",
   "type": "Flatbed Distribution Center",
-  "coords": { "lat": 32.7415, "lng": -96.9755 },
+  "coords": {
+    "lat": 32.7415,
+    "lng": -96.9755
+  },
   "geofences": {
-    "perimeter": { "south": 32.7385, "west": -96.9800, "north": 32.7445, "east": -96.9720 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.745196,
+          "lng": -96.976461
+        },
+        {
+          "lat": 32.74485,
+          "lng": -96.973852
+        },
+        {
+          "lat": 32.738843,
+          "lng": -96.973303
+        },
+        {
+          "lat": 32.738266,
+          "lng": -96.976873
+        },
+        {
+          "lat": 32.742655,
+          "lng": -96.977423
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.738728,
+          "lng": -96.97756
+        },
+        {
+          "lat": 32.738728,
+          "lng": -96.976736
+        },
+        {
+          "lat": 32.73815,
+          "lng": -96.976736
+        },
+        {
+          "lat": 32.73815,
+          "lng": -96.97756
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 32.7390, "west": -96.9730, "north": 32.7430, "east": -96.9715 }
+      {
+        "ring": [
+          {
+            "lat": 32.744157,
+            "lng": -96.973852
+          },
+          {
+            "lat": 32.74381,
+            "lng": -96.972479
+          },
+          {
+            "lat": 32.739421,
+            "lng": -96.972891
+          },
+          {
+            "lat": 32.739652,
+            "lng": -96.974264
+          }
+        ]
+      }
     ],
-    "dockAprons": [],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 32.743348,
+            "lng": -96.976187
+          },
+          {
+            "lat": 32.743117,
+            "lng": -96.973852
+          },
+          {
+            "lat": 32.739305,
+            "lng": -96.974127
+          },
+          {
+            "lat": 32.739536,
+            "lng": -96.976461
+          }
+        ]
+      }
+    ],
     "staging": null
   },
   "yardMetrics": {
@@ -17,27 +102,55 @@
     "trailerParkingCapacity": 200,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 70.0,
+    "siteAreaAcres": 70,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.7415,-96.9755,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "scale", "dropYard", "multiStep"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "scale",
+    "dropYard",
+    "multiStep"
   ],
   "fieldNotes": {
     "location": "FACILITY NOT POSITIVELY RESOLVED. Roster geocode (32.747894,-96.923588 / 9222 W Jefferson Blvd) lands on a small empty dirt lot at a road intersection with auto-salvage lots and small commercial buildings — NOT an 800,000 sq ft distribution center. Public sources conflict: SupplierWiki HD DC list ties DC #5824 to 9222/9302 W Jefferson Blvd, while press coverage places HD's first FDC at 3730/4721 Mountain Creek Parkway, Dallas 75236. The coords used here (32.7415,-96.9755) are a best-estimate placement on the largest dock-and-drop-yard warehouse in the Mountain Creek industrial corridor, but it was NOT confirmed as HD-operated. Multiple large warehouses exist in this corridor and the FDC's distinctive drive-through tunnel was not clearly identifiable from satellite. Flag for human review / Google Maps place-ID lookup.",

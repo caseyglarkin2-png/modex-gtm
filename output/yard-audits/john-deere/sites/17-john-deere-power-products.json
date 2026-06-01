@@ -1,19 +1,81 @@
 {
   "name": "John Deere Power Products - Greeneville TN",
   "type": "Assembly Plant",
-  "coords": { "lat": 36.15268, "lng": -82.88965 },
+  "coords": {
+    "lat": 36.15268,
+    "lng": -82.88965
+  },
   "geofences": {
-    "perimeter": { "south": 36.14920, "west": -82.89400, "north": 36.15660, "east": -82.88560 },
-    "truckGate": { "south": 36.15500, "west": -82.88880, "north": 36.15570, "east": -82.88790 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.154676,
+          "lng": -82.895692
+        },
+        {
+          "lat": 36.155119,
+          "lng": -82.887453
+        },
+        {
+          "lat": 36.151349,
+          "lng": -82.886903
+        },
+        {
+          "lat": 36.15024,
+          "lng": -82.891847
+        },
+        {
+          "lat": 36.153234,
+          "lng": -82.895555
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 36.15280, "west": -82.89230, "north": 36.15470, "east": -82.89020 },
-      { "south": 36.15080, "west": -82.89380, "north": 36.15280, "east": -82.89120 }
+      {
+        "ring": [
+          {
+            "lat": 36.154454,
+            "lng": -82.895418
+          },
+          {
+            "lat": 36.154676,
+            "lng": -82.891023
+          },
+          {
+            "lat": 36.15268,
+            "lng": -82.890886
+          },
+          {
+            "lat": 36.152458,
+            "lng": -82.89528
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 36.15280, "west": -82.88960, "north": 36.15420, "east": -82.88780 },
-      { "south": 36.15080, "west": -82.89060, "north": 36.15230, "east": -82.88880 }
+      {
+        "ring": [
+          {
+            "lat": 36.153789,
+            "lng": -82.890474
+          },
+          {
+            "lat": 36.154011,
+            "lng": -82.887453
+          },
+          {
+            "lat": 36.153456,
+            "lng": -82.887384
+          },
+          {
+            "lat": 36.153234,
+            "lng": -82.890405
+          }
+        ]
+      }
     ],
-    "staging": { "south": 36.15450, "west": -82.88820, "north": 36.15540, "east": -82.88680 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 60,
@@ -21,7 +83,7 @@
     "trailerParkingCapacity": 70,
     "truckGateCount": 1,
     "buildingCount": 8,
-    "siteAreaAcres": 95.0,
+    "siteAreaAcres": 95,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@36.15268,-82.88965,400m/data=!3m1!1e3",
@@ -50,7 +112,13 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity", "connectivityIssue"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "truckGate": "Confirmed in 2023-11 Street View: a controlled, fully fenced truck entrance on the NE access drive (~36.1552, -82.8882). Chain-link perimeter fence with sliding gate sections; entrance lane pinch-point.",
     "guardShack": "Confirmed: a small white guard booth (~1-vehicle footprint) set beside the entrance lane, visible in Street View and z20 satellite. Staffed checkpoint controlling truck access into the plant.",

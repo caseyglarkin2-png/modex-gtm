@@ -1,39 +1,99 @@
 {
   "name": "General Mills (Blue Buffalo) - Richmond IN",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 39.85500, "lng": -84.96450 },
+  "coords": {
+    "lat": 39.855,
+    "lng": -84.9645
+  },
   "geofences": {
-    "perimeter": { "south": 39.85050, "west": -84.96700, "north": 39.85850, "east": -84.96050 },
-    "truckGate": { "south": 39.85230, "west": -84.96560, "north": 39.85310, "east": -84.96470 },
-    "dropYards": [
-      { "south": 39.85320, "west": -84.96700, "north": 39.85620, "east": -84.96620 },
-      { "south": 39.85050, "west": -84.96680, "north": 39.85230, "east": -84.96550 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.859849,
+          "lng": -84.966972
+        },
+        {
+          "lat": 39.859849,
+          "lng": -84.960105
+        },
+        {
+          "lat": 39.85247,
+          "lng": -84.960105
+        },
+        {
+          "lat": 39.85247,
+          "lng": -84.967247
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 39.85100, "west": -84.96650, "north": 39.85580, "east": -84.96520 },
-      { "south": 39.85850, "west": -84.96280, "north": 39.86000, "east": -84.96180 }
+      {
+        "ring": [
+          {
+            "lat": 39.856687,
+            "lng": -84.966697
+          },
+          {
+            "lat": 39.856687,
+            "lng": -84.963951
+          },
+          {
+            "lat": 39.85247,
+            "lng": -84.963951
+          },
+          {
+            "lat": 39.85247,
+            "lng": -84.966697
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 50, "trailersVisible": 70, "trailerParkingCapacity": 90,
-    "truckGateCount": 1, "buildingCount": 3, "siteAreaAcres": 122.0,
+    "dockDoorCount": 50,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 122,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.85500,-84.96450,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "scale"
+  ],
   "fieldNotes": {
     "location": "Roster coordinates (39.828255,-84.898477, APPROXIMATE) pointed at downtown Richmond - wrong. Web research (PetfoodIndustry, EDC Wayne County, Citymapper) identified the $200M Blue Buffalo natural pet food plant at 4878/4748 W Industries Rd in the Wayne County Midwest Industrial Park west of Richmond, off I-70. Locked center 39.8550,-84.9645 by satellite - a large 125-acre manufacturing campus.",
     "truckGate": "Single private access road leaves W Industries Rd on the SE side and feeds the loop road that encircles the plant. The whole 125-acre campus is enclosed by a chain-link perimeter fence (clearly visible in 2024-08 Street View along W Industries Rd). Treated as a controlled truck entrance.",

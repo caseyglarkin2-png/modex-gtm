@@ -1,40 +1,104 @@
 {
   "name": "CJ Logistics - Champaign IL",
   "type": "Distribution Center",
-  "coords": { "lat": 40.123100, "lng": -88.274000 },
+  "coords": {
+    "lat": 40.1231,
+    "lng": -88.274
+  },
   "geofences": {
-    "perimeter": { "south": 40.121000, "west": -88.277000, "north": 40.125300, "east": -88.271000 },
-    "truckGate": { "south": 40.121850, "west": -88.277100, "north": 40.122500, "east": -88.276200 },
-    "dropYards": [
-      { "south": 40.121200, "west": -88.276600, "north": 40.122150, "east": -88.272500 },
-      { "south": 40.124700, "west": -88.275500, "north": 40.125300, "east": -88.272000 },
-      { "south": 40.122900, "west": -88.272000, "north": 40.124700, "east": -88.271000 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.12457,
+          "lng": -88.277021
+        },
+        {
+          "lat": 40.12457,
+          "lng": -88.27194
+        },
+        {
+          "lat": 40.12226,
+          "lng": -88.271803
+        },
+        {
+          "lat": 40.12226,
+          "lng": -88.276884
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 40.121900, "west": -88.276600, "north": 40.122500, "east": -88.272500 },
-      { "south": 40.122800, "west": -88.272400, "north": 40.124600, "east": -88.271800 }
+      {
+        "ring": [
+          {
+            "lat": 40.12247,
+            "lng": -88.276884
+          },
+          {
+            "lat": 40.12247,
+            "lng": -88.272352
+          },
+          {
+            "lat": 40.12163,
+            "lng": -88.272283
+          },
+          {
+            "lat": 40.12163,
+            "lng": -88.276815
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 85,
+        "pano": "1x5AaZK7U4spAc-YA5u_qg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 110, "trailersVisible": 180, "trailerParkingCapacity": 260,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 58.0,
+    "dockDoorCount": 110,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 260,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 58,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.123100,-88.274000,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["railServed", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "railServed",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Single wide signalized entrance drive off N Mattis Ave at SW corner. No barrier arm, sliding/swing gate, or pinch-point checkpoint visible in z21 satellite or 2025-08 Street View. Drive is open through a gap in the chain-link perimeter fence; a Walmart monument sign sits at the entrance. Open driveway = no controlled truck gate.",
     "guardShack": "No guard booth structure beside the entrance lane in satellite or Street View.",

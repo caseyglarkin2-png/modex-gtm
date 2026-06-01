@@ -25,3 +25,5 @@ public/demo-packs/tiles/
 docs/
 *.csv
 *.xlsx
+.vercel/
+scripts/yard-audit/output/

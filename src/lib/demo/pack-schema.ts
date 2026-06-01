@@ -38,6 +38,29 @@ export type Bbox = z.infer<typeof Bbox>;
 const BboxTuple = z.tuple([z.number(), z.number(), z.number(), z.number()]);
 export type BboxTuple = z.infer<typeof BboxTuple>;
 
+/**
+ * Schema v2 — oriented geofence polygon. An ordered ring of lat/lng
+ * vertices (>= 3) that traces the *real* shape of a feature at its true
+ * orientation, instead of a north-aligned bounding box. The ring need
+ * not repeat the first point as the last (renderers close it). This is
+ * how the geofence annotation tool will store property lines, gates,
+ * drop yards, dock aprons, and staging once a site is migrated.
+ */
+const GeoPolygon = z.object({
+  ring: z.array(LatLng).min(3),
+});
+export type GeoPolygon = z.infer<typeof GeoPolygon>;
+
+/**
+ * A geofence shape is EITHER a legacy axis-aligned `Bbox` (north-square
+ * approximation, the pre-v2 data) OR an oriented `GeoPolygon` (v2). The
+ * union keeps every existing pack valid while migrated sites carry true
+ * polygons. Use the helpers in `lib/demo/geofence-geometry.ts` to read
+ * either shape uniformly (ring / bounds / centroid).
+ */
+const GeoShape = z.union([Bbox, GeoPolygon]);
+export type GeoShape = z.infer<typeof GeoShape>;
+
 const Confidence = z.enum(['high', 'medium', 'low']);
 export type Confidence = z.infer<typeof Confidence>;
 
@@ -59,15 +82,41 @@ const DropBand = z.enum(['NONE', '0-10', '10-25', '25-50', '50+']);
 // ── Site-level shapes ───────────────────────────────────────────────────────
 
 /**
+ * Per-zone Street View metadata captured by the audit. `heading` points the
+ * camera at the feature; `pano` is Google's pano_id (stable, so the proxy can
+ * request it directly); `hasCoverage` gates the driver's-eye walkthrough so we
+ * never render a broken image where Street View has no usable pano (common at
+ * rural DCs). Stored alongside — not inside — the geometry so `GeoShape` stays
+ * a pure geometry primitive.
+ */
+const ZoneStreetView = z.object({
+  heading: z.number().gte(0).lt(360),
+  pano: z.string().min(1),
+  hasCoverage: z.boolean(),
+});
+export type ZoneStreetView = z.infer<typeof ZoneStreetView>;
+
+/**
  * The five geofence layers per site, mirroring the yard-audit JSON output.
  * `staging` and `dropYards` may be absent on open sites (#3 No Gate / No GS).
+ * `streetViewMeta` (optional) carries the per-zone ground-level camera info for
+ * the driver's-eye walkthrough; absent on pre-v2 packs, which stay valid.
  */
 const SiteGeofences = z.object({
-  perimeter: Bbox,
-  truckGate: Bbox.nullable(),
-  dropYards: z.array(Bbox),
-  dockAprons: z.array(Bbox),
-  staging: Bbox.nullable(),
+  perimeter: GeoShape,
+  truckGate: GeoShape.nullable(),
+  dropYards: z.array(GeoShape),
+  dockAprons: z.array(GeoShape),
+  staging: GeoShape.nullable(),
+  streetViewMeta: z
+    .object({
+      perimeter: ZoneStreetView.optional(),
+      truckGate: ZoneStreetView.optional(),
+      dropYards: z.array(ZoneStreetView).optional(),
+      dockAprons: z.array(ZoneStreetView).optional(),
+      staging: ZoneStreetView.optional(),
+    })
+    .optional(),
 });
 export type SiteGeofences = z.infer<typeof SiteGeofences>;
 
@@ -273,8 +322,12 @@ export type Network = z.infer<typeof Network>;
 // ── Pack root ───────────────────────────────────────────────────────────────
 
 export const DemoPackSchema = z.object({
-  /** Schema version. Bump when the contract changes. */
-  schemaVersion: z.literal('1'),
+  /**
+   * Schema version. `'1'` = legacy bbox-only packs; `'2'` = oriented polygons +
+   * per-zone `streetViewMeta`. Both accepted so existing packs validate while
+   * accounts migrate; `build-demo-pack.ts` emits `'2'` for freshly built packs.
+   */
+  schemaVersion: z.union([z.literal('1'), z.literal('2')]),
   /** ISO date the pack was built. */
   builtAt: z.string().datetime(),
   account: z.object({

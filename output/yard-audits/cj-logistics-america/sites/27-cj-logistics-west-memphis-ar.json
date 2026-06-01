@@ -1,18 +1,75 @@
 {
   "name": "CJ Logistics - West Memphis AR",
   "type": "Distribution Center",
-  "coords": { "lat": 35.18595, "lng": -90.2467 },
+  "coords": {
+    "lat": 35.18595,
+    "lng": -90.2467
+  },
   "geofences": {
-    "perimeter": { "south": 35.18430, "west": -90.24920, "north": 35.18760, "east": -90.24420 },
-    "truckGate": { "south": 35.18540, "west": -90.24650, "north": 35.18585, "east": -90.24590 },
-    "dropYards": [
-      { "south": 35.18680, "west": -90.24900, "north": 35.18760, "east": -90.24450 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.187634,
+          "lng": -90.249447
+        },
+        {
+          "lat": 35.187634,
+          "lng": -90.244777
+        },
+        {
+          "lat": 35.185669,
+          "lng": -90.244777
+        },
+        {
+          "lat": 35.185669,
+          "lng": -90.249447
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 35.18460, "west": -90.24880, "north": 35.18540, "east": -90.24470 },
-      { "south": 35.18670, "west": -90.24880, "north": 35.18740, "east": -90.24470 }
+      {
+        "ring": [
+          {
+            "lat": 35.187802,
+            "lng": -90.249378
+          },
+          {
+            "lat": 35.187802,
+            "lng": -90.245876
+          },
+          {
+            "lat": 35.187577,
+            "lng": -90.245876
+          },
+          {
+            "lat": 35.187577,
+            "lng": -90.249378
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": {
+      "ring": [
+        {
+          "lat": 35.188111,
+          "lng": -90.249378
+        },
+        {
+          "lat": 35.188111,
+          "lng": -90.245876
+        },
+        {
+          "lat": 35.18783,
+          "lng": -90.245876
+        },
+        {
+          "lat": 35.18783,
+          "lng": -90.249378
+        }
+      ]
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 70,
@@ -25,18 +82,38 @@
   },
   "mapsUrl": "https://www.google.com/maps/@35.18595,-90.2467,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "dropArea", "trailerParkingCapacity", "connectivityIssue", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "dropArea",
+    "trailerParkingCapacity",
+    "connectivityIssue",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Roster supplied no street address (Indeed locations list) and city-centroid coords (35.1465, -90.1842), ~7km off. Resolved to 3271 Infinity Parkway, West Memphis AR 72301 - the documented CJ Logistics America (legacy DSC Logistics) West Memphis DC (Yahoo Local, Indeed). Geocoded ROOFTOP to 35.1869, -90.2472; satellite confirmed a large cross-dock DC in open farmland.",
     "truckGate": "z20-z21 satellite shows a controlled truck gate on the south side: a guard booth, gate spanning the lane (sliding/swing), and chain-link perimeter fencing. A semi-truck is visible at the gate. 2013 Street View confirms continuous chain-link perimeter fencing around the property. truckGate=true.",

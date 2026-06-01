@@ -1,37 +1,150 @@
 {
   "name": "Performance Foodservice - Little Rock AR",
   "type": "Broadline Foodservice Distribution Center",
-  "coords": { "lat": 34.71940, "lng": -92.32700 },
+  "coords": {
+    "lat": 34.7194,
+    "lng": -92.327
+  },
   "geofences": {
-    "perimeter": { "south": 34.71760, "west": -92.32900, "north": 34.72120, "east": -92.32520 },
-    "truckGate": { "south": 34.71970, "west": -92.32880, "north": 34.72010, "east": -92.32820 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.72098,
+          "lng": -92.328373
+        },
+        {
+          "lat": 34.720642,
+          "lng": -92.326176
+        },
+        {
+          "lat": 34.717707,
+          "lng": -92.327549
+        },
+        {
+          "lat": 34.718045,
+          "lng": -92.329747
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.720867,
+          "lng": -92.328373
+        },
+        {
+          "lat": 34.720811,
+          "lng": -92.327893
+        },
+        {
+          "lat": 34.720472,
+          "lng": -92.327961
+        },
+        {
+          "lat": 34.720529,
+          "lng": -92.328442
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 34.71790, "west": -92.32760, "north": 34.72000, "east": -92.32560 }
+      {
+        "ring": [
+          {
+            "lat": 34.718723,
+            "lng": -92.329609
+          },
+          {
+            "lat": 34.718553,
+            "lng": -92.328511
+          },
+          {
+            "lat": 34.71782,
+            "lng": -92.328648
+          },
+          {
+            "lat": 34.717989,
+            "lng": -92.329747
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 34.71820, "west": -92.32820, "north": 34.71990, "east": -92.32680 }
+      {
+        "ring": [
+          {
+            "lat": 34.719964,
+            "lng": -92.328099
+          },
+          {
+            "lat": 34.719852,
+            "lng": -92.327275
+          },
+          {
+            "lat": 34.719287,
+            "lng": -92.327412
+          },
+          {
+            "lat": 34.7194,
+            "lng": -92.328236
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 153,
+        "pano": "ShkBsFdMwwspeBtUKm9-Sg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 153,
+        "pano": "ShkBsFdMwwspeBtUKm9-Sg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 40, "trailersVisible": 40, "trailerParkingCapacity": 65,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 17.0,
+    "dockDoorCount": 40,
+    "trailersVisible": 40,
+    "trailerParkingCapacity": 65,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 17,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.7194,-92.327,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Roster coord (34.719308,-92.326965, ROOFTOP, movedMeters 137) is accurate — lands on the PFG DC at 4901 Asher Avenue, Little Rock AR 72204. A long distribution building running NW-SE with docks on its SW face and trailer parking lots to the west and north.",
     "truckGate": "Street View of the entrance off the access cul-de-sac clearly shows a chain-link sliding/swing gate spanning the full truck driveway, with trailers backed into docks just inside. Controlled truck entrance confirmed — truckGate true.",

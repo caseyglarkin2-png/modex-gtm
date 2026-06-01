@@ -1,17 +1,84 @@
 {
   "name": "Mobis Parts America PDC - Lawrenceville GA",
   "type": "Parts Distribution Center",
-  "coords": { "lat": 33.96768, "lng": -84.08648 },
+  "coords": {
+    "lat": 33.96768,
+    "lng": -84.08648
+  },
   "geofences": {
-    "perimeter": { "south": 33.96600, "west": -84.08740, "north": 33.96940, "east": -84.08560 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.969673,
+          "lng": -84.08957
+        },
+        {
+          "lat": 33.969958,
+          "lng": -84.08648
+        },
+        {
+          "lat": 33.965288,
+          "lng": -84.086137
+        },
+        {
+          "lat": 33.965117,
+          "lng": -84.089227
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [
-      { "south": 33.96650, "west": -84.08760, "north": 33.96900, "east": -84.08690 }
+      {
+        "ring": [
+          {
+            "lat": 33.967395,
+            "lng": -84.089227
+          },
+          {
+            "lat": 33.967509,
+            "lng": -84.087716
+          },
+          {
+            "lat": 33.965288,
+            "lng": -84.087579
+          },
+          {
+            "lat": 33.965174,
+            "lng": -84.089089
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.96650, "west": -84.08720, "north": 33.96910, "east": -84.08670 }
+      {
+        "ring": [
+          {
+            "lat": 33.969502,
+            "lng": -84.087647
+          },
+          {
+            "lat": 33.969559,
+            "lng": -84.087029
+          },
+          {
+            "lat": 33.965402,
+            "lng": -84.086755
+          },
+          {
+            "lat": 33.965345,
+            "lng": -84.087373
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 216,
+        "pano": "vEGQmV0t8YTVzH9X9sZQhQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 38,
@@ -24,18 +91,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@33.96768,-84.08648,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Open multi-tenant industrial park (Breckinridge Industrial Park). Street View drove freely into the shared dock court; no barrier arm, sliding gate, or checkpoint at any property/road interface.",
     "guardShack": "No booth structure anywhere at the building or court entrance.",

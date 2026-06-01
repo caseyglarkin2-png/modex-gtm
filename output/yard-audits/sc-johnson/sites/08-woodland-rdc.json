@@ -1,39 +1,167 @@
 {
   "name": "Woodland Regional Distribution Center - Woodland CA",
   "type": "Regional Distribution Center (aerosol storage)",
-  "coords": { "lat": 38.67840, "lng": -121.72730 },
+  "coords": {
+    "lat": 38.6784,
+    "lng": -121.7273
+  },
   "geofences": {
-    "perimeter": { "south": 38.67740, "west": -121.72850, "north": 38.67930, "east": -121.72620 },
-    "truckGate": { "south": 38.67760, "west": -121.72670, "north": 38.67800, "east": -121.72620 },
-    "dropYards": [
-      { "south": 38.67760, "west": -121.72820, "north": 38.67800, "east": -121.72640 },
-      { "south": 38.67890, "west": -121.72820, "north": 38.67925, "east": -121.72640 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.679258,
+          "lng": -121.72809
+        },
+        {
+          "lat": 38.679258,
+          "lng": -121.725686
+        },
+        {
+          "lat": 38.67781,
+          "lng": -121.725686
+        },
+        {
+          "lat": 38.67781,
+          "lng": -121.72809
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 38.677864,
+          "lng": -121.728673
+        },
+        {
+          "lat": 38.677864,
+          "lng": -121.728467
+        },
+        {
+          "lat": 38.677757,
+          "lng": -121.728467
+        },
+        {
+          "lat": 38.677757,
+          "lng": -121.728673
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 38.67772, "west": -121.72810, "north": 38.67795, "east": -121.72650 },
-      { "south": 38.67875, "west": -121.72810, "north": 38.67898, "east": -121.72650 }
+      {
+        "ring": [
+          {
+            "lat": 38.679258,
+            "lng": -121.728055
+          },
+          {
+            "lat": 38.679258,
+            "lng": -121.726888
+          },
+          {
+            "lat": 38.679124,
+            "lng": -121.726888
+          },
+          {
+            "lat": 38.679124,
+            "lng": -121.728055
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 38.677918,
+            "lng": -121.728055
+          },
+          {
+            "lat": 38.677918,
+            "lng": -121.726339
+          },
+          {
+            "lat": 38.677784,
+            "lng": -121.726339
+          },
+          {
+            "lat": 38.677784,
+            "lng": -121.728055
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": {
+      "ring": [
+        {
+          "lat": 38.677596,
+          "lng": -121.727987
+        },
+        {
+          "lat": 38.677596,
+          "lng": -121.726957
+        },
+        {
+          "lat": 38.677408,
+          "lng": -121.726957
+        },
+        {
+          "lat": 38.677408,
+          "lng": -121.727987
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 48,
+        "pano": "hhScSKz4KktbdwcXdAI8VA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 48,
+        "pano": "hhScSKz4KktbdwcXdAI8VA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 42, "trailersVisible": 25, "trailerParkingCapacity": 70,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 14.0,
+    "dockDoorCount": 42,
+    "trailersVisible": 25,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 14,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@38.67840,-121.72730,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "trailersVisible"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "trailersVisible"
+  ],
   "fieldNotes": {
     "location": "Confirmed via EPA RMP record (Woodland Regional Distribution Center, 2030 Hanson Way) + Panjiva buyer record + LoopNet 'Hanson Way Distribution Center'. JournalTimes reported SCJ leasing a ~200,000 sq ft Woodland facility. Building (built 2002, ~200,000 sq ft, 30-ft clear, 40 docks + 1 drive-in) is the lone mid-size white-roof warehouse; surrounding much larger buildings are separate tenants. Roster coords (geocode moved 103 m) land correctly on the building.",
     "truckGate": "The truck-side parking/yard areas on the north and south faces are bounded by chain-link fencing; the west-side office parking is also chain-link fenced (Street View Jan/Mar 2026). Controlled-access fenced parcel with gate openings where the perimeter drive enters the truck yards.",

@@ -1,18 +1,87 @@
 {
   "name": "Universal Intermodal Services - Compton/Rancho Dominguez Terminal - Rancho Dominguez CA",
   "type": "Intermodal / Drayage Terminal / Container Yard (owned)",
-  "coords": { "lat": 33.86810, "lng": -118.21210 },
+  "coords": {
+    "lat": 33.8681,
+    "lng": -118.2121
+  },
   "geofences": {
-    "perimeter": { "south": 33.86640, "west": -118.21330, "north": 33.86970, "east": -118.21050 },
-    "truckGate": { "south": 33.86760, "west": -118.21290, "north": 33.86820, "east": -118.21230 },
-    "dropYards": [
-      { "south": 33.86660, "west": -118.21320, "north": 33.86790, "east": -118.21130 },
-      { "south": 33.86870, "west": -118.21300, "north": 33.86960, "east": -118.21100 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.86867,
+          "lng": -118.212375
+        },
+        {
+          "lat": 33.86867,
+          "lng": -118.211276
+        },
+        {
+          "lat": 33.867245,
+          "lng": -118.211276
+        },
+        {
+          "lat": 33.867245,
+          "lng": -118.212375
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.86753,
+          "lng": -118.212375
+        },
+        {
+          "lat": 33.86753,
+          "lng": -118.211963
+        },
+        {
+          "lat": 33.867245,
+          "lng": -118.211963
+        },
+        {
+          "lat": 33.867245,
+          "lng": -118.212375
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 33.86840, "west": -118.21270, "north": 33.86890, "east": -118.21130 }
+      {
+        "ring": [
+          {
+            "lat": 33.868613,
+            "lng": -118.212306
+          },
+          {
+            "lat": 33.868613,
+            "lng": -118.211345
+          },
+          {
+            "lat": 33.868385,
+            "lng": -118.211345
+          },
+          {
+            "lat": 33.868385,
+            "lng": -118.212306
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 36,
+        "pano": "WUsAyq3vpvIMJzVQI_86Ag",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 36,
+        "pano": "WUsAyq3vpvIMJzVQI_86Ag",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 18,
@@ -20,7 +89,7 @@
     "trailerParkingCapacity": 320,
     "truckGateCount": 2,
     "buildingCount": 2,
-    "siteAreaAcres": 11.0,
+    "siteAreaAcres": 11,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.8681,-118.2121,400m/data=!3m1!1e3",
@@ -49,7 +118,14 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "trailerParkingCapacity", "truckGateCount"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "truckGateCount"
+  ],
   "fieldNotes": {
     "siteResolution": "Universal Intermodal Services / Southern Counties Express Inc dba Universal Intermodal Services, Rancho Dominguez CA terminal at 18020 S Santa Fe Ave, Rancho Dominguez CA 90221 - confirmed via loadmatch.com directory and FMCSA. A drayage / container-yard terminal serving the LA/Long Beach ports in the dense Rancho Dominguez industrial district. Roster geocode moved 149 m; the fenced building-plus-yard property fronting S Santa Fe Ave is the audit target. Center locked at 33.86810,-118.21210.",
     "truckGate": "The whole property is ringed by chain-link perimeter fence. Street View of the S Santa Fe Ave frontage shows fenced front yards with sliding gates set in the fence line at the driveway openings - controlled truck access. Universal Intermodal markets itself as a C-TPAT certified secure carrier, consistent with access control. truckGate = true (flagged uncertain - sliding gates seen but the gate lane was not captured open / in use in Street View).",

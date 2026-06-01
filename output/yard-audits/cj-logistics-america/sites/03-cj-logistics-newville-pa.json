@@ -1,39 +1,138 @@
 {
   "name": "CJ Logistics - Newville PA",
   "type": "Distribution Center",
-  "coords": { "lat": 40.13260, "lng": -77.35050 },
+  "coords": {
+    "lat": 40.1326,
+    "lng": -77.3505
+  },
   "geofences": {
-    "perimeter": { "south": 40.1300, "west": -77.3522, "north": 40.1352, "east": -77.3475 },
-    "truckGate": { "south": 40.1322, "west": -77.3524, "north": 40.1330, "east": -77.3514 },
-    "dropYards": [
-      { "south": 40.1336, "west": -77.3493, "north": 40.1352, "east": -77.3475 },
-      { "south": 40.1303, "west": -77.3500, "north": 40.1320, "east": -77.3480 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.13596,
+          "lng": -77.353521
+        },
+        {
+          "lat": 40.134385,
+          "lng": -77.346105
+        },
+        {
+          "lat": 40.13008,
+          "lng": -77.348852
+        },
+        {
+          "lat": 40.13092,
+          "lng": -77.353247
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.13134,
+          "lng": -77.353247
+        },
+        {
+          "lat": 40.131025,
+          "lng": -77.352011
+        },
+        {
+          "lat": 40.13029,
+          "lng": -77.352285
+        },
+        {
+          "lat": 40.130605,
+          "lng": -77.353521
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 40.1322, "west": -77.3520, "north": 40.1345, "east": -77.3490 },
-      { "south": 40.1335, "west": -77.3500, "north": 40.1352, "east": -77.3478 }
+      {
+        "ring": [
+          {
+            "lat": 40.133125,
+            "lng": -77.352972
+          },
+          {
+            "lat": 40.131865,
+            "lng": -77.347204
+          },
+          {
+            "lat": 40.131235,
+            "lng": -77.347341
+          },
+          {
+            "lat": 40.132495,
+            "lng": -77.353109
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.13533,
+            "lng": -77.351873
+          },
+          {
+            "lat": 40.134122,
+            "lng": -77.346655
+          },
+          {
+            "lat": 40.13365,
+            "lng": -77.346792
+          },
+          {
+            "lat": 40.134857,
+            "lng": -77.352011
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 130, "trailersVisible": 180, "trailerParkingCapacity": 260,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 57.2,
+    "dockDoorCount": 130,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 260,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 57.2,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.13260,-77.35050,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "Site is enclosed by chain-link perimeter fencing (visible in Street View 2025-06 along Centerville Road). A single wide truck driveway curves off Centerville Road into the truck yard - a controlled entry point.",
     "guardShack": "No guard-booth structure visible at the entrance driveway in zoom-20/21 satellite. The standalone structure on the SW farmland is a barn/silo, not a guard shack.",

@@ -1,38 +1,124 @@
 {
   "name": "K-C Graniteville Distribution Center - Graniteville SC",
   "type": "Distribution center",
-  "coords": { "lat": 33.62405, "lng": -81.84755 },
+  "coords": {
+    "lat": 33.62405,
+    "lng": -81.84755
+  },
   "geofences": {
-    "perimeter": { "south": 33.62150, "west": -81.85010, "north": 33.62650, "east": -81.84480 },
-    "truckGate": { "south": 33.62290, "west": -81.84680, "north": 33.62340, "east": -81.84610 },
-    "dropYards": [
-      { "south": 33.62480, "west": -81.84960, "north": 33.62620, "east": -81.84860 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.626337,
+          "lng": -81.849473
+        },
+        {
+          "lat": 33.626108,
+          "lng": -81.846726
+        },
+        {
+          "lat": 33.623478,
+          "lng": -81.846177
+        },
+        {
+          "lat": 33.62222,
+          "lng": -81.848099
+        },
+        {
+          "lat": 33.623593,
+          "lng": -81.850297
+        },
+        {
+          "lat": 33.625194,
+          "lng": -81.850022
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.622678,
+          "lng": -81.849473
+        },
+        {
+          "lat": 33.622678,
+          "lng": -81.848649
+        },
+        {
+          "lat": 33.622106,
+          "lng": -81.848649
+        },
+        {
+          "lat": 33.622106,
+          "lng": -81.849473
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 33.62380, "west": -81.84920, "north": 33.62620, "east": -81.84790 },
-      { "south": 33.62240, "west": -81.84740, "north": 33.62500, "east": -81.84600 }
+      {
+        "ring": [
+          {
+            "lat": 33.625651,
+            "lng": -81.849747
+          },
+          {
+            "lat": 33.625422,
+            "lng": -81.847001
+          },
+          {
+            "lat": 33.623135,
+            "lng": -81.847275
+          },
+          {
+            "lat": 33.623364,
+            "lng": -81.850022
+          }
+        ]
+      }
     ],
-    "staging": { "south": 33.62200, "west": -81.84720, "north": 33.62290, "east": -81.84600 }
+    "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 120, "trailersVisible": 55, "trailerParkingCapacity": 70,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 30.1,
+    "dockDoorCount": 120,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 30.1,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.62405,-81.84755,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "dropArea", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "dropArea",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "Confirmed at 1043 Global Ave, Graniteville SC, in Sage Mill Industrial Park. The DC is the 'Global Avenue Logistics Center' - a 450,033 sq ft Class-A cross-dock building on 30.1 acres, leased in full by Kimberly-Clark (CoStar reports K-C renewed its 450,000 sq ft lease). Roster ROOFTOP coords landed within the building footprint; locked center ~33.62405,-81.84755.",
     "truckGate": "TRUE - Street View (2024-03) of the truck-court entrance off Global Ave clearly shows a chain-link sliding gate across the truck lane plus a chain-link perimeter fence around the property (corroborated by leasing materials describing a 'fully secured site').",

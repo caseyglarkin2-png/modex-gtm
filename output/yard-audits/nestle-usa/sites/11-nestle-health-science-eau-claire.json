@@ -1,18 +1,112 @@
 {
   "name": "Nestlé Health Science - Eau Claire WI",
   "type": "Nutritional beverage manufacturing plant",
-  "coords": { "lat": 44.831500, "lng": -91.525300 },
+  "coords": {
+    "lat": 44.8315,
+    "lng": -91.5253
+  },
   "geofences": {
-    "perimeter": { "south": 44.829500, "west": -91.527800, "north": 44.834000, "east": -91.523200 },
-    "truckGate": { "south": 44.832950, "west": -91.528100, "north": 44.833400, "east": -91.527400 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 44.833253,
+          "lng": -91.528459
+        },
+        {
+          "lat": 44.834616,
+          "lng": -91.524476
+        },
+        {
+          "lat": 44.832474,
+          "lng": -91.523103
+        },
+        {
+          "lat": 44.830916,
+          "lng": -91.525849
+        },
+        {
+          "lat": 44.832279,
+          "lng": -91.528733
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 44.832863,
+          "lng": -91.528321
+        },
+        {
+          "lat": 44.833058,
+          "lng": -91.527497
+        },
+        {
+          "lat": 44.832474,
+          "lng": -91.527223
+        },
+        {
+          "lat": 44.832279,
+          "lng": -91.528047
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 44.832600, "west": -91.527000, "north": 44.833300, "east": -91.525900 }
+      {
+        "ring": [
+          {
+            "lat": 44.832474,
+            "lng": -91.52942
+          },
+          {
+            "lat": 44.833058,
+            "lng": -91.527772
+          },
+          {
+            "lat": 44.832377,
+            "lng": -91.527291
+          },
+          {
+            "lat": 44.831792,
+            "lng": -91.528939
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 44.830200, "west": -91.524600, "north": 44.832300, "east": -91.523600 },
-      { "south": 44.832300, "west": -91.526500, "north": 44.833000, "east": -91.525200 }
+      {
+        "ring": [
+          {
+            "lat": 44.833448,
+            "lng": -91.528047
+          },
+          {
+            "lat": 44.834324,
+            "lng": -91.525025
+          },
+          {
+            "lat": 44.833837,
+            "lng": -91.524751
+          },
+          {
+            "lat": 44.832961,
+            "lng": -91.527772
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 122,
+        "pano": "CAoSF0NJSE0wb2dLRUlDQWdJRGFrWml1NEFF",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 122,
+        "pano": "CAoSF0NJSE0wb2dLRUlDQWdJRGFrWml1NEFF",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 32,
@@ -20,7 +114,7 @@
     "trailerParkingCapacity": 30,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 33.0,
+    "siteAreaAcres": 33,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@44.8315,-91.5253,400m/data=!3m1!1e3",
@@ -49,7 +143,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "shipRcvSeparate", "exitLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "shipRcvSeparate",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "locationResolution": "Roster address (3185 Galloway St) and coordinates (44.8212, -91.4667) were approximate / RANGE_INTERPOLATED. Web research confirmed the actual plant address as 1200 Nestlé Ave, Eau Claire WI 54703. Satellite at 44.8321,-91.5260 showed the large NW-SE-oriented manufacturing complex; locked center 44.8315,-91.5253. Roster point was ~6 km off.",
     "truckGate": "Street View (2023-07 and 2024-08) of the NW driveway off the property frontage road shows a controlled checkpoint: a guard booth with canopy in the driveway throat plus perimeter fencing (decorative brick wall + black metal fence) running the property line.",

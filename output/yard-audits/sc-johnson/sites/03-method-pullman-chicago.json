@@ -1,17 +1,147 @@
 {
   "name": "South Side Soapbox Plant (method / Ecover) - Chicago IL",
   "type": "Manufacturing Plant + Distribution (method / Ecover)",
-  "coords": { "lat": 41.69700, "lng": -87.60160 },
+  "coords": {
+    "lat": 41.697,
+    "lng": -87.6016
+  },
   "geofences": {
-    "perimeter": { "south": 41.69540, "west": -87.60320, "north": 41.69870, "east": -87.59980 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.698128,
+          "lng": -87.602149
+        },
+        {
+          "lat": 41.697718,
+          "lng": -87.600913
+        },
+        {
+          "lat": 41.696385,
+          "lng": -87.6016
+        },
+        {
+          "lat": 41.696795,
+          "lng": -87.602905
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.697256,
+          "lng": -87.602973
+        },
+        {
+          "lat": 41.697154,
+          "lng": -87.60263
+        },
+        {
+          "lat": 41.696897,
+          "lng": -87.602767
+        },
+        {
+          "lat": 41.697,
+          "lng": -87.603111
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 41.69770, "west": -87.60240, "north": 41.69870, "east": -87.60000 }
+      {
+        "ring": [
+          {
+            "lat": 41.698641,
+            "lng": -87.601257
+          },
+          {
+            "lat": 41.698436,
+            "lng": -87.599677
+          },
+          {
+            "lat": 41.698025,
+            "lng": -87.599815
+          },
+          {
+            "lat": 41.69823,
+            "lng": -87.601394
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 41.698436,
+            "lng": -87.604896
+          },
+          {
+            "lat": 41.69823,
+            "lng": -87.603935
+          },
+          {
+            "lat": 41.697513,
+            "lng": -87.604072
+          },
+          {
+            "lat": 41.697718,
+            "lng": -87.605033
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.69780, "west": -87.60260, "north": 41.69850, "east": -87.60080 }
+      {
+        "ring": [
+          {
+            "lat": 41.697718,
+            "lng": -87.602012
+          },
+          {
+            "lat": 41.69741,
+            "lng": -87.601051
+          },
+          {
+            "lat": 41.697,
+            "lng": -87.601257
+          },
+          {
+            "lat": 41.697308,
+            "lng": -87.602218
+          }
+        ]
+      }
     ],
-    "staging": { "south": 41.69780, "west": -87.60110, "north": 41.69850, "east": -87.59990 }
+    "staging": {
+      "ring": [
+        {
+          "lat": 41.69618,
+          "lng": -87.602287
+        },
+        {
+          "lat": 41.695975,
+          "lng": -87.601257
+        },
+        {
+          "lat": 41.695564,
+          "lng": -87.601394
+        },
+        {
+          "lat": 41.69577,
+          "lng": -87.602424
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 46,
+        "pano": "LVE4AygWYp226oWwdAdiWw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 46,
+        "pano": "LVE4AygWYp226oWwdAdiWw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 16,
@@ -19,23 +149,40 @@
     "trailerParkingCapacity": 45,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 22.0,
+    "siteAreaAcres": 22,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.697,-87.6016,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "railServed"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "railServed"
+  ],
   "fieldNotes": {
     "truckGate": "No barrier arm, sliding gate or checkpoint pinch-point observed. The truck driveway runs open from the public road into the dock yard; the building fronts open paved drives with no controlled entry. truckGate false.",
     "guardShack": "No guard booth anywhere on the site. False.",

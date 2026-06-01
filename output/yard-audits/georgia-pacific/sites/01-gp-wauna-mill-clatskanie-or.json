@@ -1,38 +1,149 @@
 {
   "name": "GP Wauna Mill - Clatskanie OR",
   "type": "Tissue/Towel Mill",
-  "coords": { "lat": 46.1552, "lng": -123.4078 },
+  "coords": {
+    "lat": 46.1552,
+    "lng": -123.4078
+  },
   "geofences": {
-    "perimeter": { "south": 46.1485, "west": -123.4135, "north": 46.1605, "east": -123.4015 },
-    "truckGate": { "south": 46.1500, "west": -123.4078, "north": 46.1512, "east": -123.4060 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 46.16338,
+          "lng": -123.413842
+        },
+        {
+          "lat": 46.159576,
+          "lng": -123.401208
+        },
+        {
+          "lat": 46.149873,
+          "lng": -123.404504
+        },
+        {
+          "lat": 46.152156,
+          "lng": -123.413842
+        },
+        {
+          "lat": 46.1552,
+          "lng": -123.414941
+        },
+        {
+          "lat": 46.160907,
+          "lng": -123.414941
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 46.150634,
+          "lng": -123.406427
+        },
+        {
+          "lat": 46.151014,
+          "lng": -123.404504
+        },
+        {
+          "lat": 46.149682,
+          "lng": -123.403955
+        },
+        {
+          "lat": 46.149302,
+          "lng": -123.405877
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 46.1571, "west": -123.4098, "north": 46.1581, "east": -123.4082 },
-      { "south": 46.1500, "west": -123.4078, "north": 46.1512, "east": -123.4055 }
+      {
+        "ring": [
+          {
+            "lat": 46.152917,
+            "lng": -123.4078
+          },
+          {
+            "lat": 46.151204,
+            "lng": -123.401758
+          },
+          {
+            "lat": 46.149111,
+            "lng": -123.402856
+          },
+          {
+            "lat": 46.150824,
+            "lng": -123.408899
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 46.1568, "west": -123.4098, "north": 46.1576, "east": -123.4088 }
+      {
+        "ring": [
+          {
+            "lat": 46.160717,
+            "lng": -123.414117
+          },
+          {
+            "lat": 46.159005,
+            "lng": -123.408075
+          },
+          {
+            "lat": 46.158054,
+            "lng": -123.408624
+          },
+          {
+            "lat": 46.159766,
+            "lng": -123.414666
+          }
+        ]
+      }
     ],
-    "staging": { "south": 46.1497, "west": -123.4080, "north": 46.1510, "east": -123.4062 }
+    "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 16, "trailersVisible": 23, "trailerParkingCapacity": 50,
-    "truckGateCount": 1, "buildingCount": 12, "siteAreaAcres": 165.0,
+    "dockDoorCount": 16,
+    "trailersVisible": 23,
+    "trailerParkingCapacity": 50,
+    "truckGateCount": 1,
+    "buildingCount": 12,
+    "siteAreaAcres": 165,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@46.1552,-123.4078,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": true, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "scale", "multiStep", "entryLanes", "exitLanes", "dockDoorCount"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "scale",
+    "multiStep",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "location": "Roster coords (46.10414,-123.203936) landed in downtown Clatskanie, ~17 km SE of the actual mill. The Wauna Mill is on the Columbia River near Westport OR, ~92326 Taylorville Rd; mill core relocated to 46.1552,-123.4078.",
     "truckGate": "Single ~1 km dedicated access road runs from US-30 through forest to the mill; integrated 1200-acre, 1100-employee mill universally has a controlled security entrance. Gate is internal/deep on the access road, not reachable by Street View panos which only cover US-30.",

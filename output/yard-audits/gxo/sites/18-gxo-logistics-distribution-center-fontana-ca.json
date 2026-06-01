@@ -1,15 +1,63 @@
 {
   "name": "GXO Logistics Distribution Center - Fontana CA",
   "type": "Distribution Center",
-  "coords": { "lat": 34.058587, "lng": -117.513810 },
+  "coords": {
+    "lat": 34.058587,
+    "lng": -117.51381
+  },
   "geofences": {
-    "perimeter": { "south": 34.055200, "west": -117.515100, "north": 34.062500, "east": -117.513200 },
-    "truckGate": { "south": 34.062200, "west": -117.514900, "north": 34.062800, "east": -117.514400 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.062228,
+          "lng": -117.515046
+        },
+        {
+          "lat": 34.062228,
+          "lng": -117.513123
+        },
+        {
+          "lat": 34.058587,
+          "lng": -117.513123
+        },
+        {
+          "lat": 34.058587,
+          "lng": -117.515046
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 34.055400, "west": -117.514900, "north": 34.062200, "east": -117.514200 }
+      {
+        "ring": [
+          {
+            "lat": 34.062,
+            "lng": -117.515046
+          },
+          {
+            "lat": 34.062,
+            "lng": -117.513261
+          },
+          {
+            "lat": 34.061545,
+            "lng": -117.513261
+          },
+          {
+            "lat": 34.061545,
+            "lng": -117.515046
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 159,
+        "pano": "-7MSLu38J3JjiGU_ps6YUA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 38,
@@ -17,23 +65,43 @@
     "trailerParkingCapacity": 35,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 16.0,
+    "siteAreaAcres": 16,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.058587,-117.513810,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "trailersVisible", "dropArea"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "trailersVisible",
+    "dropArea"
+  ],
   "fieldNotes": {
     "location": "10746 Commerce Way, Fontana CA = the 'Sierra Gateway Center' (addresses 10746-10788 Commerce Way), a ~253,000 SF multi-tenant industrial / distribution building built 1989, ~253 auto parking spaces. GXO Warehouse Company operates here (Buzzfile, Waze). Roster ROOFTOP geocode (54 m) landed correctly on the long N-S building. Located in a dense Inland Empire logistics corridor in Fontana.",
     "truckGate": "The truck yard / dock apron is on the building's west (rail-adjacent) side. A driveway from the public road at the north connects into the dock apron; chain-link fence runs along the rail corridor but the driveway entrance shows no barrier arm and no guard booth in 2025 Street View. Classified false; flagged uncertain - the driveway is partly tree-screened.",

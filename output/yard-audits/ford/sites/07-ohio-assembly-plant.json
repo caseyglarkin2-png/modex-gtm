@@ -1,39 +1,99 @@
 {
   "name": "Ford - Ohio Assembly Plant, Avon Lake OH",
   "type": "Vehicle Assembly Plant",
-  "coords": { "lat": 41.48720, "lng": -82.06550 },
+  "coords": {
+    "lat": 41.4872,
+    "lng": -82.0655
+  },
   "geofences": {
-    "perimeter": { "south": 41.47950, "west": -82.07550, "north": 41.49350, "east": -82.05700 },
-    "truckGate": { "south": 41.48560, "west": -82.07170, "north": 41.48680, "east": -82.07000 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.491315,
+          "lng": -82.070993
+        },
+        {
+          "lat": 41.490903,
+          "lng": -82.062204
+        },
+        {
+          "lat": 41.482673,
+          "lng": -82.062204
+        },
+        {
+          "lat": 41.482673,
+          "lng": -82.071542
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 41.49000, "west": -82.06600, "north": 41.49250, "east": -82.06150 },
-      { "south": 41.48560, "west": -82.07350, "north": 41.48720, "east": -82.07100 }
+      {
+        "ring": [
+          {
+            "lat": 41.481439,
+            "lng": -82.076486
+          },
+          {
+            "lat": 41.481439,
+            "lng": -82.070993
+          },
+          {
+            "lat": 41.479381,
+            "lng": -82.070993
+          },
+          {
+            "lat": 41.479381,
+            "lng": -82.076486
+          }
+        ]
+      }
     ],
-    "dockAprons": [
-      { "south": 41.48450, "west": -82.06350, "north": 41.48700, "east": -82.06050 },
-      { "south": 41.48800, "west": -82.06400, "north": 41.49000, "east": -82.06100 }
-    ],
-    "staging": { "south": 41.48650, "west": -82.07150, "north": 41.48820, "east": -82.06900 }
+    "dockAprons": [],
+    "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 45, "trailersVisible": 80, "trailerParkingCapacity": 170,
-    "truckGateCount": 2, "buildingCount": 6, "siteAreaAcres": 419.0,
+    "dockDoorCount": 45,
+    "trailersVisible": 80,
+    "trailerParkingCapacity": 170,
+    "truckGateCount": 2,
+    "buildingCount": 6,
+    "siteAreaAcres": 419,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@41.48720,-82.06550,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": true
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": true
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "entryLanes", "exitLanes", "dockDoorCount", "connectivityIssue"],
+  "uncertainFields": [
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "facility": "Ohio Assembly Plant (Super Duty chassis cab, F-650/750 medium-duty, E-Series), 650 Miller Rd, Avon Lake OH. Geocode landed on the rooftop (moved 348m); confirmed as the large multi-roof assembly complex - ~3.7M sq ft of building on a 419-acre site (web-confirmed).",
     "truckGate": "CONFIRMED. A definitive truck gate with a guard shack is visible at z19/z20 on the west side: a square guard building with a central courtyard, multiple truck lanes splitting around it, gate canopies/arms over the lanes, and a wide paved staging apron upstream. Clear controlled checkpoint where the truck route meets the access road.",

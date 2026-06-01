@@ -1,13 +1,100 @@
 {
   "name": "Crowley Conley Container Yard - Conley GA (Atlanta)",
   "type": "Inland container yard / intermodal logistics hub",
-  "coords": { "lat": 33.65645, "lng": -84.34470 },
+  "coords": {
+    "lat": 33.65645,
+    "lng": -84.3447
+  },
   "geofences": {
-    "perimeter": { "south": 33.65480, "west": -84.34620, "north": 33.65730, "east": -84.34330 },
-    "truckGate": { "south": 33.65655, "west": -84.34430, "north": 33.65685, "east": -84.34395 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.65885,
+          "lng": -84.346073
+        },
+        {
+          "lat": 33.658965,
+          "lng": -84.343876
+        },
+        {
+          "lat": 33.657593,
+          "lng": -84.343601
+        },
+        {
+          "lat": 33.657364,
+          "lng": -84.344013
+        },
+        {
+          "lat": 33.657593,
+          "lng": -84.344357
+        },
+        {
+          "lat": 33.657479,
+          "lng": -84.345936
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.657593,
+          "lng": -84.344425
+        },
+        {
+          "lat": 33.657593,
+          "lng": -84.343876
+        },
+        {
+          "lat": 33.657193,
+          "lng": -84.343876
+        },
+        {
+          "lat": 33.657193,
+          "lng": -84.344425
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 33.65555, "west": -84.34610, "north": 33.65730, "east": -84.34420 },
-      { "south": 33.65500, "west": -84.34420, "north": 33.65650, "east": -84.34335 }
+      {
+        "ring": [
+          {
+            "lat": 33.658736,
+            "lng": -84.345799
+          },
+          {
+            "lat": 33.658793,
+            "lng": -84.344013
+          },
+          {
+            "lat": 33.657822,
+            "lng": -84.343945
+          },
+          {
+            "lat": 33.657765,
+            "lng": -84.34573
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.657364,
+            "lng": -84.345661
+          },
+          {
+            "lat": 33.657364,
+            "lng": -84.3447
+          },
+          {
+            "lat": 33.656679,
+            "lng": -84.3447
+          },
+          {
+            "lat": 33.656679,
+            "lng": -84.345661
+          }
+        ]
+      }
     ],
     "dockAprons": [],
     "staging": null
@@ -47,7 +134,12 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["entryLanes", "exitLanes", "buildingCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "buildingCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "facility": "Crowley's Conley (Atlanta) inland container yard sits inside the 'Transport City' industrial outdoor storage park off Transport City Drive. It is a drayage/intermodal container drop yard, not a dock-door warehouse.",
     "truckGate": "Street View (pano 33.65675,-84.34416, captured 2025-02) shows a chain-link SWING GATE across a single yard drive, with multiple signs mounted on the gate/fence. Whole yard ringed by chain-link perimeter fence.",

@@ -1,20 +1,92 @@
 {
   "name": "Toyota Motor Manufacturing Kentucky - Georgetown KY",
   "type": "Vehicle Assembly Plant",
-  "coords": { "lat": 38.262, "lng": -84.535 },
+  "coords": {
+    "lat": 38.262,
+    "lng": -84.535
+  },
   "geofences": {
-    "perimeter": { "south": 38.2475, "west": -84.5475, "north": 38.2705, "east": -84.5265 },
-    "truckGate": { "south": 38.25180, "west": -84.53180, "north": 38.25280, "east": -84.53020 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.270626,
+          "lng": -84.544338
+        },
+        {
+          "lat": 38.27192,
+          "lng": -84.528408
+        },
+        {
+          "lat": 38.255099,
+          "lng": -84.522915
+        },
+        {
+          "lat": 38.246471,
+          "lng": -84.530605
+        },
+        {
+          "lat": 38.248197,
+          "lng": -84.54269
+        },
+        {
+          "lat": 38.259843,
+          "lng": -84.545986
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 38.24700, "west": -84.53180, "north": 38.25020, "east": -84.52650 },
-      { "south": 38.25450, "west": -84.54850, "north": 38.25900, "east": -84.54350 },
-      { "south": 38.25100, "west": -84.54300, "north": 38.25500, "east": -84.53850 }
+      {
+        "ring": [
+          {
+            "lat": 38.251648,
+            "lng": -84.543789
+          },
+          {
+            "lat": 38.252079,
+            "lng": -84.537747
+          },
+          {
+            "lat": 38.249059,
+            "lng": -84.537197
+          },
+          {
+            "lat": 38.248628,
+            "lng": -84.54324
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 38.25700, "west": -84.54100, "north": 38.26050, "east": -84.53700 },
-      { "south": 38.25300, "west": -84.53400, "north": 38.25700, "east": -84.52900 }
+      {
+        "ring": [
+          {
+            "lat": 38.268038,
+            "lng": -84.54269
+          },
+          {
+            "lat": 38.269332,
+            "lng": -84.530605
+          },
+          {
+            "lat": 38.266744,
+            "lng": -84.530056
+          },
+          {
+            "lat": 38.26545,
+            "lng": -84.542141
+          }
+        ]
+      }
     ],
-    "staging": { "south": 38.25250, "west": -84.53000, "north": 38.25600, "east": -84.52650 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 208,
+        "pano": "tCiW6GcEYXX10o36Isug3g",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 220,
@@ -22,23 +94,42 @@
     "trailerParkingCapacity": 1100,
     "truckGateCount": 3,
     "buildingCount": 14,
-    "siteAreaAcres": 1050.0,
+    "siteAreaAcres": 1050,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@38.262,-84.535,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "entryLanes", "exitLanes", "dockDoorCount", "multiStep"],
+  "uncertainFields": [
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "multiStep"
+  ],
   "fieldNotes": {
     "site": "Toyota's largest plant globally (~7.5M sq ft under roof, ~1,300-acre campus). Fully fenced, multi-building manufacturing campus with central assembly plant, two large inbound-logistics/cross-dock buildings on the SE side, powertrain/engine buildings, and a paint/utility cluster.",
     "truckGate": "TMMK is a fully fenced, security-controlled campus. Toyota numbers its gates (visitor route uses 'Gate 2'). Street View on internal roads and at a perimeter fence line shows chain-link perimeter fencing with a cantilever/swing gate across an access drive. Truck gates are controlled checkpoints.",

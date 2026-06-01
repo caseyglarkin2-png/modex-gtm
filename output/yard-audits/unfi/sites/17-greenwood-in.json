@@ -1,20 +1,108 @@
 {
   "name": "UNFI - Greenwood IN DC (Indianapolis)",
   "type": "Distribution Center",
-  "coords": { "lat": 39.61015, "lng": -86.05775 },
+  "coords": {
+    "lat": 39.61015,
+    "lng": -86.05775
+  },
   "geofences": {
-    "perimeter": { "south": 39.60855, "west": -86.05920, "north": 39.61190, "east": -86.05600 },
-    "truckGate": { "south": 39.61105, "west": -86.05945, "north": 39.61150, "east": -86.05880 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.611314,
+          "lng": -86.058849
+        },
+        {
+          "lat": 39.611314,
+          "lng": -86.056651
+        },
+        {
+          "lat": 39.608986,
+          "lng": -86.056651
+        },
+        {
+          "lat": 39.608986,
+          "lng": -86.058849
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.610362,
+          "lng": -86.059123
+        },
+        {
+          "lat": 39.610362,
+          "lng": -86.058711
+        },
+        {
+          "lat": 39.609938,
+          "lng": -86.058711
+        },
+        {
+          "lat": 39.609938,
+          "lng": -86.059123
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 39.60960, "west": -86.05700, "north": 39.61175, "east": -86.05600 },
-      { "south": 39.60900, "west": -86.05920, "north": 39.61175, "east": -86.05840 }
+      {
+        "ring": [
+          {
+            "lat": 39.611208,
+            "lng": -86.057407
+          },
+          {
+            "lat": 39.611208,
+            "lng": -86.056651
+          },
+          {
+            "lat": 39.609092,
+            "lng": -86.056651
+          },
+          {
+            "lat": 39.609092,
+            "lng": -86.057407
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.60900, "west": -86.05720, "north": 39.61175, "east": -86.05660 },
-      { "south": 39.60900, "west": -86.05870, "north": 39.61175, "east": -86.05810 },
-      { "south": 39.61150, "west": -86.05870, "north": 39.61195, "east": -86.05660 }
+      {
+        "ring": [
+          {
+            "lat": 39.611208,
+            "lng": -86.058711
+          },
+          {
+            "lat": 39.611208,
+            "lng": -86.058574
+          },
+          {
+            "lat": 39.609092,
+            "lng": -86.058574
+          },
+          {
+            "lat": 39.609092,
+            "lng": -86.058711
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 34,
+        "pano": "ZZgqGDqaVGHnywi8Xo9Spg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 34,
+        "pano": "ZZgqGDqaVGHnywi8Xo9Spg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 95,
@@ -27,18 +115,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@39.61015,-86.05775,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible"
+  ],
   "fieldNotes": {
     "truckGate": "Main truck entrance is mid-west side off Commerce Pkwy E Dr. Street View shows a wide paved curb-cut with yellow bollards opening directly onto the truck yard — no barrier arm and no swing/sliding gate across the truck lane. Open driveway = truckGate false.",
     "guardShack": "No staffed booth at or beside the truck entrance in any Street View pass; uncontrolled open driveway.",

@@ -1,35 +1,132 @@
 {
   "name": "Campbell's - Stockton CA",
   "type": "Manufacturing - tomato processing (Campbell Soup Supply Co.)",
-  "coords": { "lat": 37.9087, "lng": -121.2654 },
+  "coords": {
+    "lat": 37.9087,
+    "lng": -121.2654
+  },
   "geofences": {
-    "perimeter": { "south": 37.9075, "west": -121.2662, "north": 37.9096, "east": -121.2640 },
-    "truckGate": { "south": 37.90910, "west": -121.26525, "north": 37.90945, "east": -121.26485 },
-    "dropYards": [],
-    "dockAprons": [
-      { "south": 37.90830, "west": -121.26545, "north": 37.90875, "east": -121.26490 }
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.909133,
+          "lng": -121.266087
+        },
+        {
+          "lat": 37.909025,
+          "lng": -121.264576
+        },
+        {
+          "lat": 37.907833,
+          "lng": -121.264576
+        },
+        {
+          "lat": 37.907833,
+          "lng": -121.265949
+        },
+        {
+          "lat": 37.908483,
+          "lng": -121.266155
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 37.908917,
+            "lng": -121.264576
+          },
+          {
+            "lat": 37.908863,
+            "lng": -121.263477
+          },
+          {
+            "lat": 37.90805,
+            "lng": -121.263512
+          },
+          {
+            "lat": 37.908104,
+            "lng": -121.26461
+          }
+        ]
+      }
     ],
-    "staging": null
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 37.908158,
+            "lng": -121.265949
+          },
+          {
+            "lat": 37.908104,
+            "lng": -121.264713
+          },
+          {
+            "lat": 37.907833,
+            "lng": -121.264748
+          },
+          {
+            "lat": 37.907887,
+            "lng": -121.265984
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 120,
+        "pano": "E3Bwmc5sSTZcXekpUSGX2A",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 6, "trailersVisible": 8, "trailerParkingCapacity": 12,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 11.0,
+    "dockDoorCount": 6,
+    "trailersVisible": 8,
+    "trailerParkingCapacity": 12,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 11,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@37.9087,-121.2654,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "0-10", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoors", "dockDoorCount", "dropArea", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoors",
+    "dockDoorCount",
+    "dropArea",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "identity": "Roster address (1330 W Fremont Street) is incorrect - it lands in a mixed urban area near the Stockton channel. The Campbell's Stockton facility is the Campbell Soup Supply Co. tomato-processing plant at 750/760 Industrial Drive, Stockton CA 95206 (Ortega area, south Stockton). OSM places 750 Industrial Drive at 37.9090,-121.2657; 2023 Street View shows a process tank bearing the red Campbell's logo. Locked center 37.9087,-121.2654.",
     "truckGate": "Main entrance off Industrial Drive is a fenced driveway with a chain-link sliding gate (gate panels visible parked open in 2023 Street View). The whole frontage is fenced with privacy-slat chain-link. truckGate=true.",

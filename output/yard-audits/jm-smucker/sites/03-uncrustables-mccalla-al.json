@@ -1,17 +1,99 @@
 {
   "name": "Uncrustables - McCalla AL",
   "type": "Manufacturing - Frozen handhelds (Uncrustables)",
-  "coords": { "lat": 33.29920, "lng": -87.05950 },
+  "coords": {
+    "lat": 33.2992,
+    "lng": -87.0595
+  },
   "geofences": {
-    "perimeter": { "south": 33.29690, "west": -87.06320, "north": 33.30240, "east": -87.05680 },
-    "truckGate": { "south": 33.29840, "west": -87.05800, "north": 33.29900, "east": -87.05730 },
-    "dropYards": [
-      { "south": 33.29720, "west": -87.06150, "north": 33.29850, "east": -87.06030 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.303447,
+          "lng": -87.061697
+        },
+        {
+          "lat": 33.303217,
+          "lng": -87.058401
+        },
+        {
+          "lat": 33.301266,
+          "lng": -87.056204
+        },
+        {
+          "lat": 33.298741,
+          "lng": -87.056479
+        },
+        {
+          "lat": 33.297823,
+          "lng": -87.060049
+        },
+        {
+          "lat": 33.299659,
+          "lng": -87.062521
+        },
+        {
+          "lat": 33.302184,
+          "lng": -87.062659
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.297823,
+          "lng": -87.0595
+        },
+        {
+          "lat": 33.297823,
+          "lng": -87.058401
+        },
+        {
+          "lat": 33.296904,
+          "lng": -87.058401
+        },
+        {
+          "lat": 33.296904,
+          "lng": -87.0595
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 33.29760, "west": -87.06250, "north": 33.30060, "east": -87.06080 }
+      {
+        "ring": [
+          {
+            "lat": 33.2992,
+            "lng": -87.061835
+          },
+          {
+            "lat": 33.298626,
+            "lng": -87.057852
+          },
+          {
+            "lat": 33.297937,
+            "lng": -87.057989
+          },
+          {
+            "lat": 33.298511,
+            "lng": -87.061972
+          }
+        ]
+      }
     ],
-    "staging": { "south": 33.29760, "west": -87.05880, "north": 33.29890, "east": -87.05740 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 12,
+        "pano": "hSOlBwuQ8ehUeV3YbU9jVg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 12,
+        "pano": "hSOlBwuQ8ehUeV3YbU9jVg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 55,
@@ -24,18 +106,38 @@
   },
   "mapsUrl": "https://www.google.com/maps/@33.2992,-87.0595,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity", "scale"],
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "scale"
+  ],
   "fieldNotes": {
     "location": "J.M. Smucker Uncrustables plant, 7351 Old Tuscaloosa Highway, JeffMet McCalla industrial park, Jefferson County AL. $1.1B, ~900,000 sq ft, opened Nov 2024 — the largest single-line bakery in the US, third Uncrustables plant. The roster pin was 5963m off (geocode flagged APPROXIMATE); resolved by web research (JeffMet McCalla park bordered by Old Tuscaloosa Hwy/US-11 NW, Norfolk Southern rail SE) and satellite — a single very large modern food-plant building with a complex roof, rooftop refrigeration banks (frozen-product plant), dock banks and a controlled gated entrance.",
     "truckGate": "TRUE — satellite (z20-z22) shows a divided entrance road at the building's SE corner with separate marked IN and OUT lanes (directional arrows), lane striping, and a barrier-arm gate structure spanning the lanes. Clear controlled truck checkpoint.",

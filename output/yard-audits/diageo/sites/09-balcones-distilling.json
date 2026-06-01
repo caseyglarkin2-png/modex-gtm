@@ -1,35 +1,147 @@
 {
   "name": "Balcones Distilling - Waco TX",
   "type": "Distillery",
-  "coords": { "lat": 31.550293, "lng": -97.135725 },
+  "coords": {
+    "lat": 31.550293,
+    "lng": -97.135725
+  },
   "geofences": {
-    "perimeter": { "south": 31.54985, "west": -97.13625, "north": 31.55075, "east": -97.13525 },
-    "truckGate": null,
-    "dropYards": [],
-    "dockAprons": [
-      { "south": 31.55000, "west": -97.13620, "north": 31.55060, "east": -97.13590 }
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 31.550673,
+          "lng": -97.135879
+        },
+        {
+          "lat": 31.550644,
+          "lng": -97.13545
+        },
+        {
+          "lat": 31.549883,
+          "lng": -97.135485
+        },
+        {
+          "lat": 31.549913,
+          "lng": -97.135914
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 31.55022,
+          "lng": -97.135897
+        },
+        {
+          "lat": 31.55022,
+          "lng": -97.135794
+        },
+        {
+          "lat": 31.550147,
+          "lng": -97.135794
+        },
+        {
+          "lat": 31.550147,
+          "lng": -97.135897
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 31.550586,
+            "lng": -97.135725
+          },
+          {
+            "lat": 31.550571,
+            "lng": -97.13545
+          },
+          {
+            "lat": 31.550293,
+            "lng": -97.135468
+          },
+          {
+            "lat": 31.550308,
+            "lng": -97.135742
+          }
+        ]
+      }
     ],
-    "staging": null
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 31.550556,
+            "lng": -97.135862
+          },
+          {
+            "lat": 31.550556,
+            "lng": -97.135742
+          },
+          {
+            "lat": 31.550059,
+            "lng": -97.135759
+          },
+          {
+            "lat": 31.550059,
+            "lng": -97.135879
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 181,
+        "pano": "FlXrijwX1gQvaq9pLOtNrw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 181,
+        "pano": "FlXrijwX1gQvaq9pLOtNrw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 2, "trailersVisible": 0, "trailerParkingCapacity": 0,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 1.1,
+    "dockDoorCount": 2,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 1.1,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@31.550293,-97.135725,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "0-10", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount"],
+  "uncertainFields": [
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "truckGate": "No controlled truck entrance. Balcones occupies the historic multi-story Texas Fireproof Storage Company building, which fronts directly onto the downtown Waco street grid (S 11th St). No barrier arm, sliding gate, or checkpoint - trucks load from the public street / alley.",
     "guardShack": "No guard booth - this is a downtown urban building with no yard.",

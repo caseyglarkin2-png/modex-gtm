@@ -1,17 +1,136 @@
 {
   "name": "Papillion Foods - Papillion NE",
   "type": "Production Facility",
-  "coords": { "lat": 41.15200, "lng": -96.12400 },
+  "coords": {
+    "lat": 41.152,
+    "lng": -96.124
+  },
   "geofences": {
-    "perimeter": { "south": 41.149485, "west": -96.127698, "north": 41.154515, "east": -96.120302 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.154068,
+          "lng": -96.128807
+        },
+        {
+          "lat": 41.154068,
+          "lng": -96.122352
+        },
+        {
+          "lat": 41.151483,
+          "lng": -96.121803
+        },
+        {
+          "lat": 41.150966,
+          "lng": -96.123313
+        },
+        {
+          "lat": 41.150966,
+          "lng": -96.128807
+        },
+        {
+          "lat": 41.152827,
+          "lng": -96.129081
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.154068,
+          "lng": -96.123313
+        },
+        {
+          "lat": 41.154068,
+          "lng": -96.122352
+        },
+        {
+          "lat": 41.153448,
+          "lng": -96.122352
+        },
+        {
+          "lat": 41.153448,
+          "lng": -96.123313
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 41.150471, "west": -96.123374, "north": 41.151729, "east": -96.121226 }
+      {
+        "ring": [
+          {
+            "lat": 41.152517,
+            "lng": -96.128807
+          },
+          {
+            "lat": 41.15262,
+            "lng": -96.127021
+          },
+          {
+            "lat": 41.151793,
+            "lng": -96.126884
+          },
+          {
+            "lat": 41.15169,
+            "lng": -96.128669
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 41.152207,
+            "lng": -96.125373
+          },
+          {
+            "lat": 41.15231,
+            "lng": -96.123313
+          },
+          {
+            "lat": 41.15138,
+            "lng": -96.123313
+          },
+          {
+            "lat": 41.151276,
+            "lng": -96.125236
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.150031, "west": -96.126051, "north": 41.150569, "east": -96.122949 }
+      {
+        "ring": [
+          {
+            "lat": 41.152827,
+            "lng": -96.12812
+          },
+          {
+            "lat": 41.152931,
+            "lng": -96.124
+          },
+          {
+            "lat": 41.15262,
+            "lng": -96.124
+          },
+          {
+            "lat": 41.152517,
+            "lng": -96.12812
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 237,
+        "pano": "zJzjrJroKYyKb5gIXIVFkA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 237,
+        "pano": "zJzjrJroKYyKb5gIXIVFkA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 40,
@@ -24,18 +143,37 @@
   },
   "mapsUrl": "https://www.google.com/maps/@41.15200,-96.12400,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "trailerParkingCapacity", "dropArea"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "dropArea"
+  ],
   "fieldNotes": {
     "location": "Roster geocode (11840 Standing Stone Dr / 41.1544,-96.0430) landed in downtown Papillion — wrong. Hormel's own page and CRE reporting confirm Papillion Foods is the former Shopko distribution center at 10808 S 132nd St, Papillion NE 68138 (built 2000, +2004 addition, 535,000 sq ft, 80-acre site, converted by Hormel and opened 2020 for Columbus dry sausage/salami). Resolved to the large converted DC at ~41.1518,-96.1245 in the Sarpy West industrial submarket: footprint and ~86-acre parcel match the 535k sq ft / 80-acre figures, the roof shows a two-phase (2000/2004) addition seam, large ammonia-refrigeration condenser arrays and rooftop solar, a south-facing dock bank with trailers, employee parking, and a formal flagpole-circle entrance. Confidence medium because the corridor has several large warehouses and recent on-site Street View was unavailable to read current signage.",
     "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point seen in satellite imagery; truck access road runs openly from the public road into the dock yard. A small utility building sits in a landscaped grass island near the access road but is NOT a guard booth (not astride the lane). Flagged uncertain — only older (2007-2010) interior Street View was available.",

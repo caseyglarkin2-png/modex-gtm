@@ -1,39 +1,126 @@
 {
   "name": "Ford - Dearborn Truck Plant, Dearborn MI",
   "type": "Vehicle Assembly Plant",
-  "coords": { "lat": 42.31280, "lng": -83.16400 },
+  "coords": {
+    "lat": 42.3128,
+    "lng": -83.164
+  },
   "geofences": {
-    "perimeter": { "south": 42.3085, "west": -83.1720, "north": 42.3175, "east": -83.1580 },
-    "truckGate": { "south": 42.30300, "west": -83.16780, "north": 42.30420, "east": -83.16620 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.314831,
+          "lng": -83.170042
+        },
+        {
+          "lat": 42.314831,
+          "lng": -83.157408
+        },
+        {
+          "lat": 42.302847,
+          "lng": -83.157408
+        },
+        {
+          "lat": 42.302847,
+          "lng": -83.172789
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 42.31050, "west": -83.16350, "north": 42.31250, "east": -83.16080 },
-      { "south": 42.31480, "west": -83.16380, "north": 42.31620, "east": -83.16100 }
+      {
+        "ring": [
+          {
+            "lat": 42.314628,
+            "lng": -83.165923
+          },
+          {
+            "lat": 42.314628,
+            "lng": -83.162352
+          },
+          {
+            "lat": 42.312394,
+            "lng": -83.162352
+          },
+          {
+            "lat": 42.312394,
+            "lng": -83.165923
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 42.31040, "west": -83.16700, "north": 42.31150, "east": -83.16480 },
-      { "south": 42.31460, "west": -83.16550, "north": 42.31560, "east": -83.16280 }
+      {
+        "ring": [
+          {
+            "lat": 42.310363,
+            "lng": -83.160704
+          },
+          {
+            "lat": 42.310363,
+            "lng": -83.158781
+          },
+          {
+            "lat": 42.3063,
+            "lng": -83.158781
+          },
+          {
+            "lat": 42.3063,
+            "lng": -83.160704
+          }
+        ]
+      }
     ],
-    "staging": { "south": 42.30420, "west": -83.16780, "north": 42.30560, "east": -83.16560 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 182,
+        "pano": "ofDn_t_QnLOJ_ot0HRwDzQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 40, "trailersVisible": 35, "trailerParkingCapacity": 80,
-    "truckGateCount": 2, "buildingCount": 6, "siteAreaAcres": 285.3,
+    "dockDoorCount": 40,
+    "trailersVisible": 35,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 2,
+    "buildingCount": 6,
+    "siteAreaAcres": 285.3,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@42.31280,-83.16400,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": true
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": true
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "entryLanes", "exitLanes", "dockDoorCount"],
+  "uncertainFields": [
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "facility": "Dearborn Truck Plant inside the Ford Rouge Complex; coords land exactly on the DTP's 10.4-acre living (green) roof, an unmistakable landmark confirming identity.",
     "truckGate": "Rouge Complex is a fully fenced, controlled-access campus. Truck and employee traffic enters via guarded Miller Rd gates; gate infrastructure, fencing and Ford gate signage visible in Street View.",

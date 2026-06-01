@@ -1,20 +1,96 @@
 {
   "name": "Honda Manufacturing of Indiana (HMIN) - Greensburg IN",
   "type": "Auto Assembly Plant",
-  "coords": { "lat": 39.36800, "lng": -85.54100 },
+  "coords": {
+    "lat": 39.368,
+    "lng": -85.541
+  },
   "geofences": {
-    "perimeter": { "south": 39.35550, "west": -85.55750, "north": 39.37850, "east": -85.52600 },
-    "truckGate": { "south": 39.36640, "west": -85.54700, "north": 39.36760, "east": -85.54550 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.379041,
+          "lng": -85.554184
+        },
+        {
+          "lat": 39.375644,
+          "lng": -85.534408
+        },
+        {
+          "lat": 39.361205,
+          "lng": -85.538253
+        },
+        {
+          "lat": 39.364603,
+          "lng": -85.557479
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.367151,
+          "lng": -85.546493
+        },
+        {
+          "lat": 39.366726,
+          "lng": -85.543197
+        },
+        {
+          "lat": 39.364603,
+          "lng": -85.543747
+        },
+        {
+          "lat": 39.365027,
+          "lng": -85.547042
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 39.37150, "west": -85.54450, "north": 39.37500, "east": -85.53550 },
-      { "south": 39.36880, "west": -85.54480, "north": 39.37130, "east": -85.53600 },
-      { "south": 39.36950, "west": -85.53550, "north": 39.37550, "east": -85.52950 }
+      {
+        "ring": [
+          {
+            "lat": 39.372247,
+            "lng": -85.545395
+          },
+          {
+            "lat": 39.371397,
+            "lng": -85.539901
+          },
+          {
+            "lat": 39.367151,
+            "lng": -85.541
+          },
+          {
+            "lat": 39.368,
+            "lng": -85.546493
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.36930, "west": -85.54480, "north": 39.37020, "east": -85.53550 },
-      { "south": 39.36980, "west": -85.54250, "north": 39.37100, "east": -85.53600 }
+      {
+        "ring": [
+          {
+            "lat": 39.369699,
+            "lng": -85.546493
+          },
+          {
+            "lat": 39.368425,
+            "lng": -85.538803
+          },
+          {
+            "lat": 39.366726,
+            "lng": -85.539352
+          },
+          {
+            "lat": 39.368,
+            "lng": -85.547042
+          }
+        ]
+      }
     ],
-    "staging": { "south": 39.36400, "west": -85.54250, "north": 39.36750, "east": -85.53850 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 70,
@@ -22,23 +98,44 @@
     "trailerParkingCapacity": 600,
     "truckGateCount": 1,
     "buildingCount": 6,
-    "siteAreaAcres": 1480.0,
+    "siteAreaAcres": 1480,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@39.368,-85.541,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "multiStep", "scale", "truckGateCount"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "multiStep",
+    "scale",
+    "truckGateCount"
+  ],
   "fieldNotes": {
     "truckGate": "Waze records a distinct 'Truck entrance' at 2755 N Michigan Ave separate from the visitor 'Main entrance'. Entire campus is fenced and set ~400m back from public roads with a single managed industrial access corridor. truckGate=true is high confidence; the specific gate structure could not be directly imaged.",
     "guardShack": "Not directly visible in available satellite crops and Street View pano coverage stops at the employee lot. A 24/7 auto assembly plant of this scale (Civic + CR-V, 250k vehicles/yr) effectively always has a staffed guarded truck gate; classified true on facility-class basis, flagged uncertain.",

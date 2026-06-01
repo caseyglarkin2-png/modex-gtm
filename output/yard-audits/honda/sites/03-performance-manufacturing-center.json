@@ -1,37 +1,131 @@
 {
   "name": "Honda - Performance Manufacturing Center (PMC) - Marysville OH",
   "type": "Auto Assembly Plant (low-volume)",
-  "coords": { "lat": 40.27930, "lng": -83.52530 },
+  "coords": {
+    "lat": 40.2793,
+    "lng": -83.5253
+  },
   "geofences": {
-    "perimeter": { "south": 40.27700, "west": -83.52720, "north": 40.28110, "east": -83.52280 },
-    "truckGate": { "south": 40.27780, "west": -83.52440, "north": 40.27850, "east": -83.52360 },
-    "dropYards": [
-      { "south": 40.27880, "west": -83.52470, "north": 40.28020, "east": -83.52340 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.280767,
+          "lng": -83.526673
+        },
+        {
+          "lat": 40.279929,
+          "lng": -83.522279
+        },
+        {
+          "lat": 40.278043,
+          "lng": -83.523103
+        },
+        {
+          "lat": 40.278776,
+          "lng": -83.527223
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.278776,
+          "lng": -83.523652
+        },
+        {
+          "lat": 40.278671,
+          "lng": -83.522828
+        },
+        {
+          "lat": 40.278148,
+          "lng": -83.522965
+        },
+        {
+          "lat": 40.278252,
+          "lng": -83.523789
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 40.27880, "west": -83.52520, "north": 40.28010, "east": -83.52440 }
+      {
+        "ring": [
+          {
+            "lat": 40.27909,
+            "lng": -83.526124
+          },
+          {
+            "lat": 40.278671,
+            "lng": -83.523652
+          },
+          {
+            "lat": 40.278252,
+            "lng": -83.523789
+          },
+          {
+            "lat": 40.278671,
+            "lng": -83.526261
+          }
+        ]
+      }
     ],
-    "staging": { "south": 40.27840, "west": -83.52470, "north": 40.27920, "east": -83.52380 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 65,
+        "pano": "tKrFDINs1nTxJzGjyX6HLw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 65,
+        "pano": "tKrFDINs1nTxJzGjyX6HLw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 9, "trailersVisible": 8, "trailerParkingCapacity": 18,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 36.0,
+    "dockDoorCount": 9,
+    "trailersVisible": 8,
+    "trailerParkingCapacity": 18,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 36,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.2793,-83.5253,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "0-10", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "PMC confirmed - roster geocode moved only 26 m. Satellite shows a single dark-roof main building with a white-roof east annex; a user-contributed Street View interior photo shows the NSX assembly floor, positively identifying the Performance Manufacturing Center.",
     "scale_of_facility": "PMC is a small low-volume specialty plant (~184,000 sq ft, ~100 associates) housed in Honda's former North American Logistics facility (per hondanews / Gardner Web). Modest yard footprint compared to the big assembly plants.",

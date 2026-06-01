@@ -1,14 +1,34 @@
 {
   "name": "Ford - Dearborn Engine Plant, Dearborn MI",
   "type": "Engine Plant",
-  "coords": { "lat": 42.31280, "lng": -83.15880 },
+  "coords": {
+    "lat": 42.3128,
+    "lng": -83.1588
+  },
   "geofences": {
-    "perimeter": { "south": 42.31090, "west": -83.16080, "north": 42.31470, "east": -83.15700 },
-    "truckGate": { "south": 42.30940, "west": -83.16010, "north": 42.31000, "east": -83.15900 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.314831,
+          "lng": -83.165392
+        },
+        {
+          "lat": 42.314831,
+          "lng": -83.160997
+        },
+        {
+          "lat": 42.308535,
+          "lng": -83.160997
+        },
+        {
+          "lat": 42.308535,
+          "lng": -83.165392
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [],
-    "dockAprons": [
-      { "south": 42.31180, "west": -83.16000, "north": 42.31330, "east": -83.15920 }
-    ],
+    "dockAprons": [],
     "staging": null
   },
   "yardMetrics": {
@@ -17,23 +37,42 @@
     "trailerParkingCapacity": 12,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 31.0,
+    "siteAreaAcres": 31,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@42.3128,-83.1588,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": false,
-    "dockDoors": "0-10", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoors", "entryLanes", "exitLanes", "postGateStaging", "shipRcvSeparate"],
+  "uncertainFields": [
+    "dockDoors",
+    "entryLanes",
+    "exitLanes",
+    "postGateStaging",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "site": "Dearborn Engine Plant (DEP / Dearborn Engine and Fuel Tank Plant) is an interior building of Ford's Rouge Center campus. Roster geocode (42.3145,-83.1621) landed on the north edge of the green-roofed Dearborn Truck Plant. Satellite identification (z16-z19) located the engine plant as the long large NW-SE building immediately east of the Truck Plant, flanked by rail spurs on its NE face; center relocated to ~42.3128,-83.1588.",
     "truckGate": "The Rouge Center is a fully fenced, guarded campus. Street View along the internal access road shows chain-link perimeter fence with privacy slats around the engine plant; the plant is served by the Rouge gate/guard system rather than its own street-facing gate.",

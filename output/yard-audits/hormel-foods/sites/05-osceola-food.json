@@ -1,39 +1,159 @@
 {
   "name": "Osceola Food - Osceola IA",
   "type": "Meat Processing Plant",
-  "coords": { "lat": 41.02380, "lng": -93.78600 },
+  "coords": {
+    "lat": 41.0238,
+    "lng": -93.786
+  },
   "geofences": {
-    "perimeter": { "south": 41.02100, "west": -93.79100, "north": 41.02650, "east": -93.78200 },
-    "truckGate": { "south": 41.02180, "west": -93.78760, "north": 41.02240, "east": -93.78680 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.02525,
+          "lng": -93.789159
+        },
+        {
+          "lat": 41.02525,
+          "lng": -93.784352
+        },
+        {
+          "lat": 41.020899,
+          "lng": -93.784215
+        },
+        {
+          "lat": 41.020277,
+          "lng": -93.787373
+        },
+        {
+          "lat": 41.020692,
+          "lng": -93.789159
+        },
+        {
+          "lat": 41.023282,
+          "lng": -93.790395
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.023178,
+          "lng": -93.79012
+        },
+        {
+          "lat": 41.023282,
+          "lng": -93.789159
+        },
+        {
+          "lat": 41.022557,
+          "lng": -93.789021
+        },
+        {
+          "lat": 41.022453,
+          "lng": -93.789983
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 41.02130, "west": -93.78580, "north": 41.02300, "east": -93.78340 },
-      { "south": 41.02480, "west": -93.78760, "north": 41.02620, "east": -93.78560 },
-      { "south": 41.02340, "west": -93.79080, "north": 41.02430, "east": -93.78930 }
+      {
+        "ring": [
+          {
+            "lat": 41.021935,
+            "lng": -93.786961
+          },
+          {
+            "lat": 41.022039,
+            "lng": -93.784352
+          },
+          {
+            "lat": 41.020692,
+            "lng": -93.784352
+          },
+          {
+            "lat": 41.020485,
+            "lng": -93.786824
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.02250, "west": -93.78580, "north": 41.02320, "east": -93.78340 }
+      {
+        "ring": [
+          {
+            "lat": 41.024111,
+            "lng": -93.789021
+          },
+          {
+            "lat": 41.024214,
+            "lng": -93.786687
+          },
+          {
+            "lat": 41.023904,
+            "lng": -93.786687
+          },
+          {
+            "lat": 41.0238,
+            "lng": -93.789021
+          }
+        ]
+      }
     ],
-    "staging": { "south": 41.02200, "west": -93.78760, "north": 41.02300, "east": -93.78640 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 169,
+        "pano": "996YpoNZcTWLt126pNTIdQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 169,
+        "pano": "996YpoNZcTWLt126pNTIdQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 45, "trailersVisible": 90, "trailerParkingCapacity": 140,
-    "truckGateCount": 1, "buildingCount": 6, "siteAreaAcres": 90.0,
+    "dockDoorCount": 45,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 140,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 90,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.0238,-93.786,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "scale", "dockDoorCount", "multiStep"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "dockDoorCount",
+    "multiStep"
+  ],
   "fieldNotes": {
     "location": "Roster address '2280 W McLane St' and coordinates were wrong (GEOMETRIC_CENTER, landed in residential Osceola). Web research found the real address: 1027 Warren Ave, Osceola IA 50213. Locked center 41.0238,-93.7860 — a large multi-building meat-processing campus (Osceola Food LLC, Hormel-owned since 1995/1996, originally Jimmy Dean, 900+ employees, 24/7 operations).",
     "truckGate": "A guard booth with an apparent gate arm controls the truck entrance on the SW access road (~41.0221,-93.7872, clearly visible at z20). The campus is enclosed by chain-link perimeter fence (confirmed in Street View). Trucks were observed queued at the checkpoint.",

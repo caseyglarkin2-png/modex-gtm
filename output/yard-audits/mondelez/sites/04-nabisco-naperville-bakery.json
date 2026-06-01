@@ -1,17 +1,112 @@
 {
   "name": "Nabisco Naperville Bakery - Naperville IL",
   "type": "Manufacturing - cracker bakery",
-  "coords": { "lat": 41.77140, "lng": -88.18800 },
+  "coords": {
+    "lat": 41.7714,
+    "lng": -88.188
+  },
   "geofences": {
-    "perimeter": { "south": 41.77000, "west": -88.19150, "north": 41.77420, "east": -88.18450 },
-    "truckGate": { "south": 41.77030, "west": -88.18920, "north": 41.77085, "east": -88.18850 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.772117,
+          "lng": -88.191159
+        },
+        {
+          "lat": 41.772015,
+          "lng": -88.187313
+        },
+        {
+          "lat": 41.770171,
+          "lng": -88.187313
+        },
+        {
+          "lat": 41.770069,
+          "lng": -88.189373
+        },
+        {
+          "lat": 41.770273,
+          "lng": -88.191296
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.770888,
+          "lng": -88.191159
+        },
+        {
+          "lat": 41.770888,
+          "lng": -88.190335
+        },
+        {
+          "lat": 41.770273,
+          "lng": -88.190335
+        },
+        {
+          "lat": 41.770273,
+          "lng": -88.191159
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 41.77100, "west": -88.19100, "north": 41.77340, "east": -88.18900 }
+      {
+        "ring": [
+          {
+            "lat": 41.77181,
+            "lng": -88.191159
+          },
+          {
+            "lat": 41.77181,
+            "lng": -88.189373
+          },
+          {
+            "lat": 41.770888,
+            "lng": -88.189373
+          },
+          {
+            "lat": 41.770888,
+            "lng": -88.191159
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.77260, "west": -88.18960, "north": 41.77360, "east": -88.18850 }
+      {
+        "ring": [
+          {
+            "lat": 41.771707,
+            "lng": -88.189373
+          },
+          {
+            "lat": 41.771605,
+            "lng": -88.187451
+          },
+          {
+            "lat": 41.771093,
+            "lng": -88.187451
+          },
+          {
+            "lat": 41.771195,
+            "lng": -88.189373
+          }
+        ]
+      }
     ],
-    "staging": { "south": 41.77100, "west": -88.18820, "north": 41.77200, "east": -88.18720 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 34,
+        "pano": "-NtHW8eY0Ir91VqetRc4NQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 34,
+        "pano": "-NtHW8eY0Ir91VqetRc4NQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 32,
@@ -19,7 +114,7 @@
     "trailerParkingCapacity": 100,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 58.0,
+    "siteAreaAcres": 58,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@41.77140,-88.18800,400m/data=!3m1!1e3",
@@ -48,7 +143,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "scale", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "scale",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Plant is fully perimeter-fenced (chain-link with barbed wire confirmed in Street View 2018/2024). The internal truck road off Quincy Ave (south) passes a gate/checkpoint structure with a canopy near the rail-car loading area (~41.7705,-88.1888) - a controlled truck entrance.",
     "guardShack": "A canopy-covered checkpoint structure stands at the truck gate lane (visible in Street View background, panos at 41.7694/-88.1895 and 41.7701/-88.1884). Consistent with a staffed guard booth/checkpoint; called true at medium confidence and flagged uncertain.",

@@ -1,17 +1,84 @@
 {
   "name": "Pactiv Evergreen - Corsicana TX Plant",
   "type": "Manufacturing Plant (Foodservice)",
-  "coords": { "lat": 32.09865, "lng": -96.42055 },
+  "coords": {
+    "lat": 32.09865,
+    "lng": -96.42055
+  },
   "geofences": {
-    "perimeter": { "south": 32.09590, "west": -96.42330, "north": 32.10030, "east": -96.41780 },
-    "truckGate": { "south": 32.09990, "west": -96.42130, "north": 32.10030, "east": -96.42050 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.101326,
+          "lng": -96.425631
+        },
+        {
+          "lat": 32.099813,
+          "lng": -96.420275
+        },
+        {
+          "lat": 32.096905,
+          "lng": -96.421237
+        },
+        {
+          "lat": 32.098417,
+          "lng": -96.426592
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 32.09640, "west": -96.42320, "north": 32.09930, "east": -96.42090 }
+      {
+        "ring": [
+          {
+            "lat": 32.099464,
+            "lng": -96.422473
+          },
+          {
+            "lat": 32.098999,
+            "lng": -96.42055
+          },
+          {
+            "lat": 32.098068,
+            "lng": -96.420687
+          },
+          {
+            "lat": 32.098534,
+            "lng": -96.42261
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 32.09700, "west": -96.42130, "north": 32.09950, "east": -96.42010 }
+      {
+        "ring": [
+          {
+            "lat": 32.099232,
+            "lng": -96.425494
+          },
+          {
+            "lat": 32.09865,
+            "lng": -96.423571
+          },
+          {
+            "lat": 32.098068,
+            "lng": -96.423709
+          },
+          {
+            "lat": 32.09865,
+            "lng": -96.425631
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 226,
+        "pano": "q2qdlgvF-cwnYFZlhhCDsA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 22,
@@ -19,23 +86,42 @@
     "trailerParkingCapacity": 120,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 28.0,
+    "siteAreaAcres": 28,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.09865,-96.42055,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "guardShack", "remoteGs", "siteAreaAcres", "buildingCount"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "guardShack",
+    "remoteGs",
+    "siteAreaAcres",
+    "buildingCount"
+  ],
   "fieldNotes": {
     "location": "Roster geocode (32.075885,-96.397359, RANGE_INTERPOLATED) was wrong — it placed the point ~5 km SE in open woodland/farmland on the SH-31 bypass (confirmed empty by satellite z14-z17 and Street View, captured 2024-02). Address is '4501 E. Business State Highway 31' (Business 31, not the bypass). The Pactiv plant was positively re-located at 32.0987,-96.4206 on the north side of the E State Highway 31 service road: a fully fenced plastics manufacturing complex with a long L-shaped white metal manufacturing building, a row of resin storage silos along the frontage (diagnostic of a plastics/thermoforming plant — confirmed in Street View 2024-02), a brick office building, and an extensive trailer drop yard. Plant built ~1999, ~500 employees, makes cups/lids/to-go containers/breakfast trays (corsicanadailysun, Corsicana Chamber).",
     "truckGate": "Property is fully enclosed by chain-link perimeter fence (visible in satellite and behind the highway hedge in Street View). A single access driveway connects the yard to the E SH-31 service road at the NE corner — a controlled pinch-point. truckGate = true.",

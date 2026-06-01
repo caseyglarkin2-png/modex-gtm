@@ -1,19 +1,107 @@
 {
   "name": "Niagara Bottling - Phoenix AZ",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 33.44700, "lng": -112.20170 },
+  "coords": {
+    "lat": 33.447,
+    "lng": -112.2017
+  },
   "geofences": {
-    "perimeter": { "south": 33.44520, "west": -112.20330, "north": 33.44870, "east": -112.20020 },
-    "truckGate": { "south": 33.44800, "west": -112.20320, "north": 33.44850, "east": -112.20250 },
-    "dropYards": [
-      { "south": 33.44680, "west": -112.20310, "north": 33.44740, "east": -112.20040 },
-      { "south": 33.44790, "west": -112.20300, "north": 33.44850, "east": -112.20040 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.447745,
+          "lng": -112.203211
+        },
+        {
+          "lat": 33.447745,
+          "lng": -112.199571
+        },
+        {
+          "lat": 33.444937,
+          "lng": -112.199571
+        },
+        {
+          "lat": 33.444937,
+          "lng": -112.203211
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.446943,
+          "lng": -112.203485
+        },
+        {
+          "lat": 33.446943,
+          "lng": -112.203073
+        },
+        {
+          "lat": 33.446656,
+          "lng": -112.203073
+        },
+        {
+          "lat": 33.446656,
+          "lng": -112.203485
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 33.44665, "west": -112.20310, "north": 33.44695, "east": -112.20040 },
-      { "south": 33.44740, "west": -112.20310, "north": 33.44770, "east": -112.20040 }
+      {
+        "ring": [
+          {
+            "lat": 33.44763,
+            "lng": -112.203211
+          },
+          {
+            "lat": 33.44763,
+            "lng": -112.199571
+          },
+          {
+            "lat": 33.447344,
+            "lng": -112.199571
+          },
+          {
+            "lat": 33.447344,
+            "lng": -112.203211
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.446026,
+            "lng": -112.203211
+          },
+          {
+            "lat": 33.446026,
+            "lng": -112.199571
+          },
+          {
+            "lat": 33.44574,
+            "lng": -112.199571
+          },
+          {
+            "lat": 33.44574,
+            "lng": -112.203211
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 41,
+        "pano": "_bJd4hWaFExKgiRWJBbpuw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 41,
+        "pano": "_bJd4hWaFExKgiRWJBbpuw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 90,
@@ -21,7 +109,7 @@
     "trailerParkingCapacity": 110,
     "truckGateCount": 2,
     "buildingCount": 2,
-    "siteAreaAcres": 28.0,
+    "siteAreaAcres": 28,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.44700,-112.20170,400m/data=!3m1!1e3",
@@ -50,7 +138,17 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "trailerParkingCapacity", "buildingCount", "shipRcvSeparate", "multipleFacilities", "siteAreaAcres"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "buildingCount",
+    "shipRcvSeparate",
+    "multipleFacilities",
+    "siteAreaAcres"
+  ],
   "fieldNotes": {
     "locating": "Roster had no address/coords. Resolved via web research: Niagara Bottling Phoenix is consistently listed at 275 S 67th Ave, Phoenix, AZ 85043 (TruckMap, Yahoo Local, Yellowpages, D&B, chamber listings). Geocoded that address to a two-building warehouse/distribution complex on the east side of S 67th Ave just south of Washington St.",
     "buildingId": "MEDIUM confidence on identity. The 275 S 67th Ave address is solidly Niagara's, but source data on building size conflicts: Wikipedia cites a 252,000 sq ft Phoenix plant, while a real-estate listing for 275 S 67th Ave describes a 626,970 sq ft warehouse + 3,030 sq ft office + 32 dock doors. The geocoded site is a two-building complex larger than either figure. Could not read a 'Niagara' sign in Street View (heavy tree screening of both office fronts). Audited the complex as the Niagara Phoenix facility per the confirmed address; flagged.",

@@ -1,17 +1,87 @@
 {
   "name": "Performance Foodservice - East Tennessee (Morristown TN)",
   "type": "Broadline Foodservice Distribution Center",
-  "coords": { "lat": 36.17760, "lng": -83.37150 },
+  "coords": {
+    "lat": 36.1776,
+    "lng": -83.3715
+  },
   "geofences": {
-    "perimeter": { "south": 36.175803, "west": -83.374394, "north": 36.179397, "east": -83.368606 },
-    "truckGate": { "south": 36.176156, "west": -83.370662, "north": 36.177144, "east": -83.369438 },
-    "dropYards": [
-      { "south": 36.177212, "west": -83.371024, "north": 36.179188, "east": -83.368576 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.18015,
+          "lng": -83.373423
+        },
+        {
+          "lat": 36.179706,
+          "lng": -83.370401
+        },
+        {
+          "lat": 36.177046,
+          "lng": -83.371225
+        },
+        {
+          "lat": 36.177489,
+          "lng": -83.374247
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 36.178154,
+          "lng": -83.37356
+        },
+        {
+          "lat": 36.178043,
+          "lng": -83.372599
+        },
+        {
+          "lat": 36.177378,
+          "lng": -83.372736
+        },
+        {
+          "lat": 36.177489,
+          "lng": -83.373697
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 36.176261, "west": -83.373592, "north": 36.177339, "east": -83.369808 }
+      {
+        "ring": [
+          {
+            "lat": 36.179374,
+            "lng": -83.37356
+          },
+          {
+            "lat": 36.179152,
+            "lng": -83.3715
+          },
+          {
+            "lat": 36.178487,
+            "lng": -83.371637
+          },
+          {
+            "lat": 36.178709,
+            "lng": -83.373697
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 319,
+        "pano": "d3j8t1WicciE0nd8ZlmLZw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 319,
+        "pano": "d3j8t1WicciE0nd8ZlmLZw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 45,
@@ -48,7 +118,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible"
+  ],
   "fieldNotes": {
     "truckGate": "Confirmed via Street View (April 2025): a barrier-arm gate spans the truck lane at the property entrance off the airport-business-park road, with painted lane markings and a paved gate island. Perimeter chain-link fencing visible on both sides.",
     "guardShack": "A small peaked-roof guard booth with windows on multiple sides sits on a paved island between the entry and exit lanes at the gate — classic staffed guard-shack footprint.",

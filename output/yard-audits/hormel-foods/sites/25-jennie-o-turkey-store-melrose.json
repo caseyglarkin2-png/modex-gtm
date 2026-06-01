@@ -1,15 +1,102 @@
 {
   "name": "Jennie-O Turkey Store - Melrose MN",
   "type": "Meat Processing Plant",
-  "coords": { "lat": 45.67630, "lng": -94.79420 },
+  "coords": {
+    "lat": 45.6763,
+    "lng": -94.7942
+  },
   "geofences": {
-    "perimeter": { "south": 45.67380, "west": -94.79620, "north": 45.67790, "east": -94.79210 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 45.678603,
+          "lng": -94.796947
+        },
+        {
+          "lat": 45.678219,
+          "lng": -94.79214
+        },
+        {
+          "lat": 45.67582,
+          "lng": -94.792003
+        },
+        {
+          "lat": 45.67534,
+          "lng": -94.793513
+        },
+        {
+          "lat": 45.676108,
+          "lng": -94.797221
+        },
+        {
+          "lat": 45.677643,
+          "lng": -94.797496
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 45.67582,
+          "lng": -94.796947
+        },
+        {
+          "lat": 45.675724,
+          "lng": -94.795573
+        },
+        {
+          "lat": 45.675149,
+          "lng": -94.795711
+        },
+        {
+          "lat": 45.675245,
+          "lng": -94.797084
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 45.67560, "west": -94.79320, "north": 45.67680, "east": -94.79220 }
+      {
+        "ring": [
+          {
+            "lat": 45.677068,
+            "lng": -94.793513
+          },
+          {
+            "lat": 45.676972,
+            "lng": -94.792003
+          },
+          {
+            "lat": 45.676108,
+            "lng": -94.79214
+          },
+          {
+            "lat": 45.676204,
+            "lng": -94.793651
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 45.67620, "west": -94.79320, "north": 45.67720, "east": -94.79230 }
+      {
+        "ring": [
+          {
+            "lat": 45.67726,
+            "lng": -94.795573
+          },
+          {
+            "lat": 45.677068,
+            "lng": -94.792827
+          },
+          {
+            "lat": 45.676684,
+            "lng": -94.792964
+          },
+          {
+            "lat": 45.676876,
+            "lng": -94.795711
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -19,7 +106,7 @@
     "trailerParkingCapacity": 35,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 34.0,
+    "siteAreaAcres": 34,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@45.67630,-94.79420,400m/data=!3m1!1e3",
@@ -48,7 +135,14 @@
     "multiStep": false
   },
   "confidence": "low",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "trailerParkingCapacity", "buildingCount", "shipRcvSeparate"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "buildingCount",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "location": "LOW-CONFIDENCE LOCATION. Roster coords (45.675694,-94.807948) for '123 5th Ave E' landed in downtown Melrose with no plant. The large food-processing complex at ~45.6705,-94.800 was positively identified by StreetView signage as a LAND O'LAKES Inc. plant, not Jennie-O. The audited building is the next-largest modern processing plant on the NE edge of Melrose by the Sauk River (~45.6763,-94.7942) -- a large single-building plant with numbered truck drive-in bays (1B-5B), dock doors with trailers, an E-side trailer drop yard, and a perimeter loop drive. This best matches the new $137M / ~300k-sq-ft Jennie-O Melrose plant profile but could NOT be confirmed by signage; treat the identity as unverified.",
     "truckGate": "Open site -- StreetView shows no perimeter fence and no gate/barrier at the plant approach. Classified false but flagged given the location uncertainty.",

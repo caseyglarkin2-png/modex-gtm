@@ -33,11 +33,11 @@ export interface Narration {
 export const NARRATIONS: Record<string, Narration> = {
   'gate.arrive': {
     baseline: 'Truck queues at the gate. Guard checks paper BOL, runs the plate, types data into a screen, prints a gate pass.',
-    yns: 'Driver checked in remotely en route. Gate camera reads the plate, opens the arm.',
+    yns: 'flowGATE machine vision reads the tractor and chassis at the lane — Carrier Accountability binds them to the load. The arm opens; no booth stop.',
   },
   'gate.arrive.backup': {
     baseline: 'Queue spills past the gate into the public road. Guard works through paperwork one truck at a time.',
-    yns: 'Pre-arrival check-in keeps the gate flow continuous. Queue depth never exceeds the property line.',
+    yns: 'flowGATE pre-arrival check-in keeps the lane flowing. Queue depth never spills past the property line.',
   },
   'gate.scale': {
     baseline: 'Driver stops at the scale house, hands the BOL down, waits for the weigh ticket to print.',
@@ -49,7 +49,7 @@ export const NARRATIONS: Record<string, Narration> = {
   },
   'gate.through': {
     baseline: 'Driver rolls past the gate, looks for instructions on where to drop.',
-    yns: 'Drop spot is on the in-cab display before the arm closes behind the truck.',
+    yns: 'Appointment and drop spot are on the in-cab display before the arm closes behind the truck.',
   },
   'gate.through.kiosk': {
     baseline: 'No guard. Driver finds the call box, hits the buzzer, waits for someone inside to respond.',
@@ -69,7 +69,7 @@ export const NARRATIONS: Record<string, Narration> = {
   },
   'spotter.dispatch': {
     baseline: 'Yard spotter waits for a dispatch radio call. Driver waits for the spotter to find the trailer.',
-    yns: 'Spotter app sees the move the moment the gate posts. Dispatch is the trip, not a radio call.',
+    yns: 'Yard Spot Mgt posts the move the instant flowGATE checks the truck in; the spotter sees the trailer\'s live position in flowTWIN (RTLS) and drives straight to it.',
   },
   'spotter.dispatch.fastlane': {
     baseline: 'Driver gets stuck behind queued trucks. No bypass — every truck waits the same time.',
@@ -77,7 +77,7 @@ export const NARRATIONS: Record<string, Narration> = {
   },
   'dock.load': {
     baseline: 'Physical load. Same time regardless of system.',
-    yns: 'Physical load. Same time regardless of system.',
+    yns: 'Physical load time is the same — but Dock Mgt sequenced the door so the trailer was staged and ready, not waiting on a free dock.',
   },
   'shiprcv.split': {
     baseline: 'Shipping and receiving live on separate building faces with separate spotters and separate radio channels. Cross-contamination of moves wastes the spotter behind a wrong dispatch.',

@@ -1,39 +1,113 @@
 {
   "name": "KDP Mott's Plant - Williamson NY",
   "type": "Manufacturing - Juice/Applesauce",
-  "coords": { "lat": 43.236600, "lng": -77.175500 },
+  "coords": {
+    "lat": 43.2366,
+    "lng": -77.1755
+  },
   "geofences": {
-    "perimeter": { "south": 43.233900, "west": -77.181500, "north": 43.241000, "east": -77.170000 },
-    "truckGate": { "south": 43.237300, "west": -77.173800, "north": 43.238100, "east": -77.172800 },
-    "dropYards": [
-      { "south": 43.237600, "west": -77.174600, "north": 43.239400, "east": -77.172600 },
-      { "south": 43.235300, "west": -77.176800, "north": 43.236400, "east": -77.174800 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 43.241202,
+          "lng": -77.178247
+        },
+        {
+          "lat": 43.240402,
+          "lng": -77.173852
+        },
+        {
+          "lat": 43.237,
+          "lng": -77.172204
+        },
+        {
+          "lat": 43.234999,
+          "lng": -77.174951
+        },
+        {
+          "lat": 43.2362,
+          "lng": -77.178247
+        },
+        {
+          "lat": 43.239001,
+          "lng": -77.179071
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 43.237600, "west": -77.176000, "north": 43.238500, "east": -77.173800 },
-      { "south": 43.234700, "west": -77.178400, "north": 43.235300, "east": -77.176800 }
+      {
+        "ring": [
+          {
+            "lat": 43.2374,
+            "lng": -77.177697
+          },
+          {
+            "lat": 43.2368,
+            "lng": -77.174127
+          },
+          {
+            "lat": 43.2356,
+            "lng": -77.174401
+          },
+          {
+            "lat": 43.2362,
+            "lng": -77.177972
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 353,
+        "pano": "GGvWlbz3mLPjFRgK1-EpzQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 36, "trailersVisible": 70, "trailerParkingCapacity": 140,
-    "truckGateCount": 1, "buildingCount": 4, "siteAreaAcres": 105.0,
+    "dockDoorCount": 36,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 140,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 105,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@43.236600,-77.175500,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "scale"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "Truck yard, docks and trailer drop lots are wide open directly off the public access road on the east side of the property. Multiple Street View headings (2024-08) along that road show no barrier arm, no sliding/swing gate, and no pinch-point checkpoint where the yard meets the road - the paved truck apron simply abuts the road.",
     "guardShack": "No staffed booth at any truck approach. A metal gantry frame stands in the yard but is a lighting/sign structure, not a guard booth.",

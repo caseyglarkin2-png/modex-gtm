@@ -112,7 +112,8 @@ export default async function DemoAccountPage({
   const requestedSiteId = sp.site && pack.network.sites.find((s) => s.id === sp.site) ? sp.site : null;
   const initialSiteId = requestedSiteId ?? pack.account.featuredSiteId ?? null;
   const autoPlay = sp.play === '1';
-  const initialView: 'atlas' | 'sim' = sp.view === 'sim' ? 'sim' : 'atlas';
+  const initialView: 'atlas' | 'sim' | 'replay' =
+    sp.view === 'sim' ? 'sim' : sp.view === 'replay' ? 'replay' : 'atlas';
   // Sprint 2.5 — anonymized template framing flag. When set, the
   // DemoSurface renders the page as a "sample template for [Industry]"
   // rather than as the prospect's personalized memo extension.

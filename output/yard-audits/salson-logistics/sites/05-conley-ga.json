@@ -1,17 +1,107 @@
 {
   "name": "SalSon Logistics - Conley GA (Atlanta)",
   "type": "Warehouse / Dedicated Fleet Terminal",
-  "coords": { "lat": 33.635450, "lng": -84.317050 },
+  "coords": {
+    "lat": 33.63545,
+    "lng": -84.31705
+  },
   "geofences": {
-    "perimeter": { "south": 33.634750, "west": -84.318100, "north": 33.636450, "east": -84.316350 },
-    "truckGate": { "south": 33.634950, "west": -84.318000, "north": 33.635250, "east": -84.317650 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.636079,
+          "lng": -84.31784
+        },
+        {
+          "lat": 33.636579,
+          "lng": -84.316226
+        },
+        {
+          "lat": 33.634993,
+          "lng": -84.316089
+        },
+        {
+          "lat": 33.634764,
+          "lng": -84.317857
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.634993,
+          "lng": -84.317822
+        },
+        {
+          "lat": 33.635021,
+          "lng": -84.317668
+        },
+        {
+          "lat": 33.634864,
+          "lng": -84.317616
+        },
+        {
+          "lat": 33.634835,
+          "lng": -84.317771
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 33.635900, "west": -84.317650, "north": 33.636450, "east": -84.316700 }
+      {
+        "ring": [
+          {
+            "lat": 33.636207,
+            "lng": -84.317668
+          },
+          {
+            "lat": 33.636165,
+            "lng": -84.316501
+          },
+          {
+            "lat": 33.635736,
+            "lng": -84.316569
+          },
+          {
+            "lat": 33.635779,
+            "lng": -84.317737
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.635393,
+            "lng": -84.317822
+          },
+          {
+            "lat": 33.63545,
+            "lng": -84.316878
+          },
+          {
+            "lat": 33.634993,
+            "lng": -84.316793
+          },
+          {
+            "lat": 33.634907,
+            "lng": -84.317771
+          }
+        ]
+      }
     ],
-    "dockAprons": [
-      { "south": 33.635250, "west": -84.317250, "north": 33.635600, "east": -84.316700 }
-    ],
-    "staging": null
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 63,
+        "pano": "2kUIpjFwpid-1-kZsGjDsw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 63,
+        "pano": "2kUIpjFwpid-1-kZsGjDsw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 22,
@@ -24,18 +114,35 @@
   },
   "mapsUrl": "https://www.google.com/maps/@33.635450,-84.317050,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "truckGate": "Property is fully enclosed by chain-link fence along the Moreland Ave (US-23) frontage; truck traffic enters/exits through gated driveway gaps in the fence line.",
     "guardShack": "No staffed booth visible at any driveway gap in 2025-02 Street View or satellite — entry is through a fence-gap gate with no checkpoint structure, so remoteGs is true.",

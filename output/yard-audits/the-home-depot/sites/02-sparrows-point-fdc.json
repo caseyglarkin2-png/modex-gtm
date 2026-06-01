@@ -1,18 +1,96 @@
 {
   "name": "Home Depot FDC - Sparrows Point MD",
   "type": "Flatbed Distribution Center",
-  "coords": { "lat": 39.22255, "lng": -76.48420 },
+  "coords": {
+    "lat": 39.22255,
+    "lng": -76.4842
+  },
   "geofences": {
-    "perimeter": { "south": 39.21940, "west": -76.48720, "north": 39.22560, "east": -76.48150 },
-    "truckGate": { "south": 39.21960, "west": -76.48560, "north": 39.22020, "east": -76.48470 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.225529,
+          "lng": -76.485299
+        },
+        {
+          "lat": 39.224891,
+          "lng": -76.482552
+        },
+        {
+          "lat": 39.219997,
+          "lng": -76.483513
+        },
+        {
+          "lat": 39.220848,
+          "lng": -76.486123
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 39.21990, "west": -76.48700, "north": 39.22480, "east": -76.48530 }
+      {
+        "ring": [
+          {
+            "lat": 39.219997,
+            "lng": -76.483513
+          },
+          {
+            "lat": 39.219465,
+            "lng": -76.481179
+          },
+          {
+            "lat": 39.217337,
+            "lng": -76.481865
+          },
+          {
+            "lat": 39.217656,
+            "lng": -76.484337
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.22030, "west": -76.48510, "north": 39.22500, "east": -76.48400 },
-      { "south": 39.22050, "west": -76.48360, "north": 39.22520, "east": -76.48230 }
+      {
+        "ring": [
+          {
+            "lat": 39.224678,
+            "lng": -76.485024
+          },
+          {
+            "lat": 39.224252,
+            "lng": -76.483101
+          },
+          {
+            "lat": 39.221273,
+            "lng": -76.483788
+          },
+          {
+            "lat": 39.221699,
+            "lng": -76.485711
+          }
+        ]
+      }
     ],
-    "staging": { "south": 39.21950, "west": -76.48500, "north": 39.22030, "east": -76.48360 }
+    "staging": {
+      "ring": [
+        {
+          "lat": 39.225954,
+          "lng": -76.485573
+        },
+        {
+          "lat": 39.225316,
+          "lng": -76.482827
+        },
+        {
+          "lat": 39.224891,
+          "lng": -76.483101
+        },
+        {
+          "lat": 39.225529,
+          "lng": -76.485848
+        }
+      ]
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 70,
@@ -20,23 +98,42 @@
     "trailerParkingCapacity": 240,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 64.0,
+    "siteAreaAcres": 64,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@39.22255,-76.4842,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "dockDoorCount", "scale"],
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "scale"
+  ],
   "fieldNotes": {
     "location": "Resolved with medium-high confidence. Roster geocode moved 1439 m within the Tradepoint Atlantic megasite; the FDC building is the long (~520 m) NE-SW oriented warehouse at ~39.2225,-76.4842 with a roof half-covered in a large solar PV array. Identified by: (a) HD press confirms a 3-building, 1.5M sq ft HD campus at 6311 Tradepoint Ave including a flatbed delivery center; (b) the building's distinctive bulk-material yard — rows of stacked lumber/blocks/pallets in open air along its NW side — matches an FDC handling oversized building materials. The two larger plain-roofed warehouses to the NE/SE are the HD appliance and online-fulfillment buildings or other Tradepoint tenants (Amazon, Under Armour also occupy this park).",
     "guardShack": "truckGate true with high confidence (enterprise HD FDC, fenced campus). guardShack inferred true from the HD-DC norm of staffed gate check-in; a discrete booth structure was not unambiguously isolated in imagery — listed uncertain.",

@@ -1,17 +1,87 @@
 {
   "name": "Performance Foodservice - Manassas VA",
   "type": "Broadline Foodservice Distribution Center",
-  "coords": { "lat": 38.79250, "lng": -77.54270 },
+  "coords": {
+    "lat": 38.7925,
+    "lng": -77.5427
+  },
   "geofences": {
-    "perimeter": { "south": 38.79130, "west": -77.54400, "north": 38.79355, "east": -77.54155 },
-    "truckGate": null,
-    "dropYards": [
-      { "south": 38.79150, "west": -77.54330, "north": 38.79235, "east": -77.54225 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.7925,
+          "lng": -77.543249
+        },
+        {
+          "lat": 38.7925,
+          "lng": -77.541601
+        },
+        {
+          "lat": 38.791216,
+          "lng": -77.541601
+        },
+        {
+          "lat": 38.791216,
+          "lng": -77.543249
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 38.792232,
+          "lng": -77.543318
+        },
+        {
+          "lat": 38.792232,
+          "lng": -77.542837
+        },
+        {
+          "lat": 38.791911,
+          "lng": -77.542837
+        },
+        {
+          "lat": 38.791911,
+          "lng": -77.543318
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 38.79175, "west": -77.54355, "north": 38.79310, "east": -77.54300 }
+      {
+        "ring": [
+          {
+            "lat": 38.791697,
+            "lng": -77.543043
+          },
+          {
+            "lat": 38.791697,
+            "lng": -77.541876
+          },
+          {
+            "lat": 38.791483,
+            "lng": -77.541876
+          },
+          {
+            "lat": 38.791483,
+            "lng": -77.543043
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 141,
+        "pano": "LxkZWFVOogRG4tKMJyWXHA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 141,
+        "pano": "LxkZWFVOogRG4tKMJyWXHA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 32,
@@ -48,7 +118,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoors", "guardShack"],
+  "uncertainFields": [
+    "dockDoors",
+    "guardShack"
+  ],
   "fieldNotes": {
     "location": "Supplied coords were ROOFTOP precision (movedMeters 84) and landed on the correct building. Confirmed via web research (11777 Balls Ford Road, Manassas VA 20109, Performance Foodservice Manassas, former Reinhart, 703-368-8777, 105,000 sq ft multi-temp) and Street View, which shows the warehouse set behind a stormwater pond off the Balls Ford Road / Doane Drive intersection with a branded sign at the entrance.",
     "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point. The truck driveway runs open from Doane Drive into the south/west truck yard. Only low chain-link fencing along the road frontage; the entrance itself is uncontrolled.",

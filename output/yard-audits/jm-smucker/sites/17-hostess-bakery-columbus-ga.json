@@ -1,17 +1,84 @@
 {
   "name": "Hostess Bakery - Columbus GA",
   "type": "Manufacturing - Sweet baked snacks (Hostess), $120M expansion underway",
-  "coords": { "lat": 32.4442, "lng": -84.9676 },
+  "coords": {
+    "lat": 32.4442,
+    "lng": -84.9676
+  },
   "geofences": {
-    "perimeter": { "south": 32.4422, "west": -84.9698, "north": 32.4460, "east": -84.9663 },
-    "truckGate": { "south": 32.44390, "west": -84.96710, "north": 32.44420, "east": -84.96675 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.445359,
+          "lng": -84.970141
+        },
+        {
+          "lat": 32.445359,
+          "lng": -84.967257
+        },
+        {
+          "lat": 32.443273,
+          "lng": -84.967257
+        },
+        {
+          "lat": 32.443273,
+          "lng": -84.970141
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 32.4438, "west": -84.9676, "north": 32.4458, "east": -84.9664 }
+      {
+        "ring": [
+          {
+            "lat": 32.445127,
+            "lng": -84.968149
+          },
+          {
+            "lat": 32.445011,
+            "lng": -84.966776
+          },
+          {
+            "lat": 32.443505,
+            "lng": -84.966913
+          },
+          {
+            "lat": 32.443621,
+            "lng": -84.968287
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 32.4435, "west": -84.9682, "north": 32.4447, "east": -84.9670 }
+      {
+        "ring": [
+          {
+            "lat": 32.44391,
+            "lng": -84.968973
+          },
+          {
+            "lat": 32.443852,
+            "lng": -84.967257
+          },
+          {
+            "lat": 32.443505,
+            "lng": -84.967325
+          },
+          {
+            "lat": 32.443563,
+            "lng": -84.969042
+          }
+        ]
+      }
     ],
-    "staging": { "south": 32.4434, "west": -84.9666, "north": 32.4452, "east": -84.9662 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 348,
+        "pano": "-1WyLxfdFK0lb4Cg9ghbmA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 35,
@@ -24,18 +91,37 @@
   },
   "mapsUrl": "https://www.google.com/maps/@32.4442,-84.9676,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "backupSensitive"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "backupSensitive"
+  ],
   "fieldNotes": {
     "truckGate": "Property has a confirmed chain-link perimeter fence (visible in 2024-12 Street View along the E side). The truck driveway necessarily passes through a fence opening = a controlled pinch-point, so truckGate set true. No barrier arm directly resolved in imagery - medium confidence.",
     "guardShack": "No staffed guard booth observed at the truck driveway or any entrance. The small blue-roof structure in the NE yard is an ancillary building, not a gate booth.",

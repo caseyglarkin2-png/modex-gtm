@@ -1,17 +1,63 @@
 {
   "name": "CJ Logistics - Kernersville NC",
   "type": "Distribution Center",
-  "coords": { "lat": 36.1263, "lng": -80.06235 },
+  "coords": {
+    "lat": 36.1263,
+    "lng": -80.06235
+  },
   "geofences": {
-    "perimeter": { "south": 36.12500, "west": -80.06420, "north": 36.12760, "east": -80.06050 },
-    "truckGate": { "south": 36.12615, "west": -80.06110, "north": 36.12665, "east": -80.06055 },
-    "dropYards": [
-      { "south": 36.12530, "west": -80.06380, "north": 36.12595, "east": -80.06110 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.127631,
+          "lng": -80.064273
+        },
+        {
+          "lat": 36.127631,
+          "lng": -80.061389
+        },
+        {
+          "lat": 36.125856,
+          "lng": -80.06132
+        },
+        {
+          "lat": 36.125634,
+          "lng": -80.064204
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 36.12560, "west": -80.06400, "north": 36.12620, "east": -80.06100 }
+      {
+        "ring": [
+          {
+            "lat": 36.125856,
+            "lng": -80.064204
+          },
+          {
+            "lat": 36.125995,
+            "lng": -80.061526
+          },
+          {
+            "lat": 36.125662,
+            "lng": -80.061492
+          },
+          {
+            "lat": 36.125524,
+            "lng": -80.06417
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 125,
+        "pano": "d8bvM_YYBUW2KFpn0YaeUA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 35,
@@ -24,18 +70,40 @@
   },
   "mapsUrl": "https://www.google.com/maps/@36.1263,-80.06235,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "dropArea", "trailerParkingCapacity", "shipRcvSeparate", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "dropArea",
+    "trailerParkingCapacity",
+    "shipRcvSeparate",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Roster supplied no street address (Indeed locations list) and city-centroid coords (36.1199, -80.0736). Resolved to 700 N Main St, Kernersville NC 27284 - the documented CJ Logistics America Kernersville facility (Yahoo Local listing for CJ Logistics America Kernersville; Indeed NC locations). Geocoded ROOFTOP to 36.1261, -80.0627; satellite confirmed a large industrial / distribution building. (200 Forum Pkwy, Rural Hall NC is a separate nearby CJ location, not this one.)",
     "truckGate": "2026-03 Street View clearly shows a rolling/cantilever gate across the truck driveway at the SE corner, with a STOP sign and PRIVATE PROPERTY NO TRESPASSING signage, and continuous chain-link perimeter fencing around the property. truckGate=true.",

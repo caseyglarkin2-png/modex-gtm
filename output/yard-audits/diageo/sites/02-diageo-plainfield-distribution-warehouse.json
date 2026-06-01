@@ -1,19 +1,155 @@
 {
   "name": "Diageo Plainfield Distribution Warehouse - Plainfield IL",
   "type": "Distribution Center / Warehouse",
-  "coords": { "lat": 41.6250, "lng": -88.2487 },
+  "coords": {
+    "lat": 41.625,
+    "lng": -88.2487
+  },
   "geofences": {
-    "perimeter": { "south": 41.6220, "west": -88.2510, "north": 41.6285, "east": -88.2455 },
-    "truckGate": { "south": 41.6235, "west": -88.2473, "north": 41.6246, "east": -88.2463 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.628798,
+          "lng": -88.250897
+        },
+        {
+          "lat": 41.62849,
+          "lng": -88.246503
+        },
+        {
+          "lat": 41.621612,
+          "lng": -88.247052
+        },
+        {
+          "lat": 41.62192,
+          "lng": -88.251447
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.62192,
+          "lng": -88.250073
+        },
+        {
+          "lat": 41.62192,
+          "lng": -88.2487
+        },
+        {
+          "lat": 41.62151,
+          "lng": -88.2487
+        },
+        {
+          "lat": 41.62151,
+          "lng": -88.250073
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 41.6235, "west": -88.2473, "north": 41.6283, "east": -88.2457 },
-      { "south": 41.6235, "west": -88.2508, "north": 41.6283, "east": -88.2500 }
+      {
+        "ring": [
+          {
+            "lat": 41.628593,
+            "lng": -88.251447
+          },
+          {
+            "lat": 41.62849,
+            "lng": -88.250348
+          },
+          {
+            "lat": 41.622023,
+            "lng": -88.250897
+          },
+          {
+            "lat": 41.622126,
+            "lng": -88.251859
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 41.628285,
+            "lng": -88.247327
+          },
+          {
+            "lat": 41.628182,
+            "lng": -88.246228
+          },
+          {
+            "lat": 41.623358,
+            "lng": -88.246777
+          },
+          {
+            "lat": 41.62346,
+            "lng": -88.247739
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.6235, "west": -88.2500, "north": 41.6283, "east": -88.2491 },
-      { "south": 41.6235, "west": -88.2474, "north": 41.6283, "east": -88.2466 }
+      {
+        "ring": [
+          {
+            "lat": 41.62849,
+            "lng": -88.251309
+          },
+          {
+            "lat": 41.628388,
+            "lng": -88.250485
+          },
+          {
+            "lat": 41.622126,
+            "lng": -88.251035
+          },
+          {
+            "lat": 41.622228,
+            "lng": -88.251721
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 41.628182,
+            "lng": -88.247464
+          },
+          {
+            "lat": 41.62808,
+            "lng": -88.24664
+          },
+          {
+            "lat": 41.623152,
+            "lng": -88.247052
+          },
+          {
+            "lat": 41.623255,
+            "lng": -88.247876
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": {
+      "ring": [
+        {
+          "lat": 41.622126,
+          "lng": -88.250623
+        },
+        {
+          "lat": 41.62192,
+          "lng": -88.247601
+        },
+        {
+          "lat": 41.621304,
+          "lng": -88.247739
+        },
+        {
+          "lat": 41.62151,
+          "lng": -88.25076
+        }
+      ]
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 130,
@@ -26,18 +162,35 @@
   },
   "mapsUrl": "https://www.google.com/maps/@41.6250,-88.2487,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "guardShack", "shipRcvSeparate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "guardShack",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Large cross-dock distribution warehouse. The truck path runs from an open access road along the south side, through a gap in the employee parking, into the east dock yard. No barrier arm or sliding gate at the public road; Street View (2024-07) at the SE/SW corners shows open driveways. A small orange structure sits at the east dock-yard pinch point (41.6243,-88.2468) but reads as a yard office among trailers, not a multi-window guard booth at a gate.",
     "guardShack": "No clearly identifiable staffed guard booth at a controlled gate. Two small structures near the east dock-yard entrance are ambiguous from overhead; flagged uncertain. No barrier arm to guard.",

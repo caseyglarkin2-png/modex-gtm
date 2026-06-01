@@ -1,15 +1,63 @@
 {
   "name": "Glovis America Vehicle Processing Center - Tacoma WA (Hyundai)",
   "type": "Port / Vehicle Import Processing Center",
-  "coords": { "lat": 47.261300, "lng": -122.370000 },
+  "coords": {
+    "lat": 47.2613,
+    "lng": -122.37
+  },
   "geofences": {
-    "perimeter": { "south": 47.25720, "west": -122.37420, "north": 47.26560, "east": -122.36560 },
-    "truckGate": { "south": 47.26280, "west": -122.37340, "north": 47.26340, "east": -122.37250 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 47.26596,
+          "lng": -122.37824
+        },
+        {
+          "lat": 47.267264,
+          "lng": -122.368627
+        },
+        {
+          "lat": 47.257572,
+          "lng": -122.366704
+        },
+        {
+          "lat": 47.256081,
+          "lng": -122.376317
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 47.25760, "west": -122.37400, "north": 47.26500, "east": -122.36900 }
+      {
+        "ring": [
+          {
+            "lat": 47.264096,
+            "lng": -122.377141
+          },
+          {
+            "lat": 47.265401,
+            "lng": -122.37
+          },
+          {
+            "lat": 47.259063,
+            "lng": -122.368627
+          },
+          {
+            "lat": 47.257572,
+            "lng": -122.375493
+          }
+        ]
+      }
     ],
     "dockAprons": [],
-    "staging": { "south": 47.26300, "west": -122.37250, "north": 47.26380, "east": -122.37050 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 217,
+        "pano": "CAoSF0NJSE0wb2dLRUlDQWdJRHFoOUwwaFFF",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 0,
@@ -17,23 +65,44 @@
     "trailerParkingCapacity": 8000,
     "truckGateCount": 1,
     "buildingCount": 4,
-    "siteAreaAcres": 110.0,
+    "siteAreaAcres": 110,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@47.261300,-122.370000,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "NONE", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "NONE",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "trailerParkingCapacity", "siteAreaAcres", "multiStep"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "trailerParkingCapacity",
+    "siteAreaAcres",
+    "multiStep"
+  ],
   "fieldNotes": {
     "facility": "Port of Tacoma vehicle processing center operated by Glovis America / WWS for Hyundai-Kia auto imports. Confirmed via Glovis locations page + NWSA press release naming 3400 Taylor Way, Tacoma. Massive finished-vehicle marshalling yard, not a freight warehouse.",
     "truckGate": "Double-leaf chain-link swing gate across the gravel driveway entering the NW corner of the vehicle yard, confirmed in two Street View headings (2024-04). Rail crossing immediately in front of the gate on the access road.",

@@ -1,17 +1,106 @@
 {
   "name": "UNFI - Carlisle PA DC",
   "type": "Distribution Center",
-  "coords": { "lat": 40.22880, "lng": -77.08760 },
+  "coords": {
+    "lat": 40.2288,
+    "lng": -77.0876
+  },
   "geofences": {
-    "perimeter": { "south": 40.22620, "west": -77.09180, "north": 40.23080, "east": -77.08350 },
-    "truckGate": { "south": 40.22640, "west": -77.09150, "north": 40.22730, "east": -77.09000 },
-    "dropYards": [
-      { "south": 40.22920, "west": -77.08900, "north": 40.23060, "east": -77.08420 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.229219,
+          "lng": -77.091171
+        },
+        {
+          "lat": 40.229953,
+          "lng": -77.085403
+        },
+        {
+          "lat": 40.228066,
+          "lng": -77.084991
+        },
+        {
+          "lat": 40.227332,
+          "lng": -77.090759
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.228485,
+          "lng": -77.091033
+        },
+        {
+          "lat": 40.22859,
+          "lng": -77.090347
+        },
+        {
+          "lat": 40.227961,
+          "lng": -77.090209
+        },
+        {
+          "lat": 40.227856,
+          "lng": -77.090896
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 40.22730, "west": -77.09140, "north": 40.22960, "east": -77.08560 }
+      {
+        "ring": [
+          {
+            "lat": 40.229429,
+            "lng": -77.090759
+          },
+          {
+            "lat": 40.229848,
+            "lng": -77.085403
+          },
+          {
+            "lat": 40.229429,
+            "lng": -77.085334
+          },
+          {
+            "lat": 40.22901,
+            "lng": -77.09069
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": {
+      "ring": [
+        {
+          "lat": 40.229744,
+          "lng": -77.090759
+        },
+        {
+          "lat": 40.230058,
+          "lng": -77.08554
+        },
+        {
+          "lat": 40.229744,
+          "lng": -77.085403
+        },
+        {
+          "lat": 40.229429,
+          "lng": -77.09069
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 140,
+        "pano": "ziyOZbTim2nScN3yHrwqeg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 140,
+        "pano": "ziyOZbTim2nScN3yHrwqeg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 95,
@@ -19,25 +108,45 @@
     "trailerParkingCapacity": 110,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 52.0,
+    "siteAreaAcres": 52,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.22880,-77.08760,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes",
-    "preGateStaging", "postGateStaging", "scale", "multiStep"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "preGateStaging",
+    "postGateStaging",
+    "scale",
+    "multiStep"
   ],
   "fieldNotes": {
     "location": "Confirmed UNFI Carlisle DC, 192 Kost Rd, Carlisle PA 17015. Roster ROOFTOP geocode 40.22871,-77.088179 lands squarely on the large rectangular DC building on the NE/upper side of the Kost Rd industrial cluster. The building is a cross-dock-style food DC oriented WSW-ENE, ~1100 ft long. Web-corroborated via TruckMap / UNFI locations / OpenGovUS (Unfi Distribution Company LLC, 192 Kost Rd) - a legacy-SuperValu mid-Atlantic conventional grocery DC.",

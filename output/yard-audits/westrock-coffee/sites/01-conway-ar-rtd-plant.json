@@ -1,18 +1,127 @@
 {
   "name": "Westrock Coffee - Conway AR Roast-to-RTD Plant",
   "type": "Manufacturing Plant (roast-to-ready-to-drink)",
-  "coords": { "lat": 35.072100, "lng": -92.418800 },
+  "coords": {
+    "lat": 35.0721,
+    "lng": -92.4188
+  },
   "geofences": {
-    "perimeter": { "south": 35.069600, "west": -92.422300, "north": 35.076400, "east": -92.416300 },
-    "truckGate": { "south": 35.075900, "west": -92.419100, "north": 35.076400, "east": -92.418400 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.073842,
+          "lng": -92.420791
+        },
+        {
+          "lat": 35.074348,
+          "lng": -92.417358
+        },
+        {
+          "lat": 35.071145,
+          "lng": -92.416809
+        },
+        {
+          "lat": 35.070526,
+          "lng": -92.420379
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.071875,
+          "lng": -92.420929
+        },
+        {
+          "lat": 35.071988,
+          "lng": -92.420448
+        },
+        {
+          "lat": 35.071482,
+          "lng": -92.420311
+        },
+        {
+          "lat": 35.071369,
+          "lng": -92.420791
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 35.073100, "west": -92.418800, "north": 35.074400, "east": -92.417300 }
+      {
+        "ring": [
+          {
+            "lat": 35.074011,
+            "lng": -92.419418
+          },
+          {
+            "lat": 35.074235,
+            "lng": -92.417289
+          },
+          {
+            "lat": 35.073674,
+            "lng": -92.417152
+          },
+          {
+            "lat": 35.073449,
+            "lng": -92.419281
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.073000, "west": -92.419100, "north": 35.073700, "east": -92.417100 },
-      { "south": 35.070600, "west": -92.418400, "north": 35.071400, "east": -92.417300 }
+      {
+        "ring": [
+          {
+            "lat": 35.07373,
+            "lng": -92.419761
+          },
+          {
+            "lat": 35.074011,
+            "lng": -92.417358
+          },
+          {
+            "lat": 35.073505,
+            "lng": -92.417262
+          },
+          {
+            "lat": 35.073224,
+            "lng": -92.419665
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": {
+      "ring": [
+        {
+          "lat": 35.072999,
+          "lng": -92.420448
+        },
+        {
+          "lat": 35.073089,
+          "lng": -92.419761
+        },
+        {
+          "lat": 35.072325,
+          "lng": -92.419624
+        },
+        {
+          "lat": 35.072235,
+          "lng": -92.420311
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 79,
+        "pano": "IxyBry2YmXnU4akvtIn8Ag",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 79,
+        "pano": "IxyBry2YmXnU4akvtIn8Ag",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 40,
@@ -20,23 +129,43 @@
     "trailerParkingCapacity": 110,
     "truckGateCount": 2,
     "buildingCount": 4,
-    "siteAreaAcres": 47.0,
+    "siteAreaAcres": 47,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@35.072100,-92.418800,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "dockDoorCount", "scale", "multiStep", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "dockDoorCount",
+    "scale",
+    "multiStep",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Confirmed as the former Kimberly-Clark Conway paper-products plant at 480 Exchange Avenue, now Westrock Coffee's roast-to-RTD facility ($315M, 570K sq ft, ~45 acres, opened June 2024). The roster pin sat at the NE construction/laydown corner; locked center moved SW to the main building mass at 35.0721,-92.4188.",
     "truckGate": "A sliding chain-link gate across a truck driveway is clearly visible in 2024-08 Street View on the NE side of the property (near 35.0760,-92.4188), with continuous chain-link perimeter fencing running along the warehouse face. The truck/yard side of the campus is access-controlled.",

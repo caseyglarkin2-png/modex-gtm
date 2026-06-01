@@ -1,16 +1,94 @@
 {
   "name": "Performance Foodservice - Eastern PA (Coal Township PA)",
   "type": "Broadline Foodservice Distribution Center",
-  "coords": { "lat": 40.78785, "lng": -76.49245 },
+  "coords": {
+    "lat": 40.78785,
+    "lng": -76.49245
+  },
   "geofences": {
-    "perimeter": { "south": 40.78555, "west": -76.49520, "north": 40.78975, "east": -76.49010 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.78785,
+          "lng": -76.495609
+        },
+        {
+          "lat": 40.78889,
+          "lng": -76.489703
+        },
+        {
+          "lat": 40.787226,
+          "lng": -76.489154
+        },
+        {
+          "lat": 40.786186,
+          "lng": -76.495059
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.787018,
+          "lng": -76.495609
+        },
+        {
+          "lat": 40.787226,
+          "lng": -76.494647
+        },
+        {
+          "lat": 40.786602,
+          "lng": -76.49451
+        },
+        {
+          "lat": 40.786394,
+          "lng": -76.495471
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.78715, "west": -76.49370, "north": 40.78870, "east": -76.49215 }
+      {
+        "ring": [
+          {
+            "lat": 40.78837,
+            "lng": -76.495197
+          },
+          {
+            "lat": 40.788682,
+            "lng": -76.493137
+          },
+          {
+            "lat": 40.78785,
+            "lng": -76.492862
+          },
+          {
+            "lat": 40.787538,
+            "lng": -76.494922
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.78735, "west": -76.49270, "north": 40.78815, "east": -76.49080 },
-      { "south": 40.78650, "west": -76.49500, "north": 40.78720, "east": -76.49420 }
+      {
+        "ring": [
+          {
+            "lat": 40.788578,
+            "lng": -76.49245
+          },
+          {
+            "lat": 40.788682,
+            "lng": -76.489703
+          },
+          {
+            "lat": 40.788162,
+            "lng": -76.489566
+          },
+          {
+            "lat": 40.788058,
+            "lng": -76.492313
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -49,7 +127,12 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoors", "guardShack", "connectivityIssue", "multiStep"],
+  "uncertainFields": [
+    "dockDoors",
+    "guardShack",
+    "connectivityIssue",
+    "multiStep"
+  ],
   "fieldNotes": {
     "location": "Supplied coords were ~5.7 km off (geocode movedMeters 5761 was understated; actual building is SW of the pin). Resolved to the large DC building inside the Coal Township industrial park, 100 Industrial Park Road, on a raised pad above Industrial Park Road.",
     "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point visible at the single driveway connecting Industrial Park Road to the site. The driveway runs uphill, open, to a loop road serving both buildings. Two teardrop islands seen in the car-park area are landscaped parking medians, not a guarded checkpoint.",

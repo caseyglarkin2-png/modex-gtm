@@ -1,17 +1,87 @@
 {
   "name": "Niagara Bottling - Kansas City MO (Airworld Dr)",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 39.30040, "lng": -94.67520 },
+  "coords": {
+    "lat": 39.3004,
+    "lng": -94.6752
+  },
   "geofences": {
-    "perimeter": { "south": 39.29820, "west": -94.67720, "north": 39.30260, "east": -94.67350 },
-    "truckGate": { "south": 39.29790, "west": -94.67560, "north": 39.29850, "east": -94.67480 },
-    "dropYards": [
-      { "south": 39.29900, "west": -94.67690, "north": 39.30230, "east": -94.67560 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.302844,
+          "lng": -94.676711
+        },
+        {
+          "lat": 39.301888,
+          "lng": -94.671904
+        },
+        {
+          "lat": 39.298275,
+          "lng": -94.673552
+        },
+        {
+          "lat": 39.299231,
+          "lng": -94.678359
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.299125,
+          "lng": -94.676299
+        },
+        {
+          "lat": 39.298806,
+          "lng": -94.674925
+        },
+        {
+          "lat": 39.298168,
+          "lng": -94.6752
+        },
+        {
+          "lat": 39.298487,
+          "lng": -94.676573
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 39.29900, "west": -94.67670, "north": 39.30230, "east": -94.67580 }
+      {
+        "ring": [
+          {
+            "lat": 39.299869,
+            "lng": -94.677947
+          },
+          {
+            "lat": 39.298912,
+            "lng": -94.67314
+          },
+          {
+            "lat": 39.298381,
+            "lng": -94.673415
+          },
+          {
+            "lat": 39.299337,
+            "lng": -94.678221
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 11,
+        "pano": "jiRnTJomLgiBh5q3pfjaTg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 11,
+        "pano": "jiRnTJomLgiBh5q3pfjaTg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 95,
@@ -19,23 +89,42 @@
     "trailerParkingCapacity": 120,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 31.0,
+    "siteAreaAcres": 31,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.30040,-94.67520,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "trailerParkingCapacity", "urbanRural"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "urbanRural"
+  ],
   "fieldNotes": {
     "buildingId": "Address 11400 N Airworld Dr geocoded ROOFTOP onto a single large ~634,000 sq ft warehouse/manufacturing building in the Congress Corporate Centre near Kansas City International Airport (KCI). Web research confirms this is Niagara's second KC plant (Congress Commerce Building B, opened 2021). Street View on Airworld Dr predates construction (2014/2019 panos), so the gate call rests on current satellite imagery.",
     "truckGate": "The truck driveway off N Airworld Dr curves up to the SW dock apron with no barrier arm, sliding gate, or guard booth visible at the property line or along the approach. Open access - truckGate false.",

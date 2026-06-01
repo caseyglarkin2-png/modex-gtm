@@ -1,19 +1,115 @@
 {
   "name": "UNFI - New Stanton PA DC (Hunker)",
   "type": "Distribution Center",
-  "coords": { "lat": 40.21250, "lng": -79.61300 },
+  "coords": {
+    "lat": 40.2125,
+    "lng": -79.613
+  },
   "geofences": {
-    "perimeter": { "south": 40.20850, "west": -79.61650, "north": 40.21620, "east": -79.61020 },
-    "truckGate": { "south": 40.21300, "west": -79.61470, "north": 40.21380, "east": -79.61370 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.213339,
+          "lng": -79.614373
+        },
+        {
+          "lat": 40.213234,
+          "lng": -79.610528
+        },
+        {
+          "lat": 40.210193,
+          "lng": -79.610665
+        },
+        {
+          "lat": 40.210298,
+          "lng": -79.614511
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.213339,
+          "lng": -79.615197
+        },
+        {
+          "lat": 40.213234,
+          "lng": -79.614373
+        },
+        {
+          "lat": 40.212605,
+          "lng": -79.614511
+        },
+        {
+          "lat": 40.21271,
+          "lng": -79.615335
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.21210, "west": -79.61620, "north": 40.21470, "east": -79.61490 },
-      { "south": 40.21350, "west": -79.61320, "north": 40.21470, "east": -79.61120 }
+      {
+        "ring": [
+          {
+            "lat": 40.213654,
+            "lng": -79.615197
+          },
+          {
+            "lat": 40.213549,
+            "lng": -79.612313
+          },
+          {
+            "lat": 40.213234,
+            "lng": -79.612313
+          },
+          {
+            "lat": 40.213339,
+            "lng": -79.615197
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.21180, "west": -79.61560, "north": 40.21380, "east": -79.61480 },
-      { "south": 40.21170, "west": -79.61460, "north": 40.21250, "east": -79.61100 }
+      {
+        "ring": [
+          {
+            "lat": 40.213129,
+            "lng": -79.614373
+          },
+          {
+            "lat": 40.213024,
+            "lng": -79.610803
+          },
+          {
+            "lat": 40.212605,
+            "lng": -79.610871
+          },
+          {
+            "lat": 40.21271,
+            "lng": -79.614442
+          }
+        ]
+      }
     ],
-    "staging": { "south": 40.21300, "west": -79.61500, "north": 40.21420, "east": -79.61370 }
+    "staging": {
+      "ring": [
+        {
+          "lat": 40.210822,
+          "lng": -79.614373
+        },
+        {
+          "lat": 40.210717,
+          "lng": -79.610665
+        },
+        {
+          "lat": 40.210403,
+          "lng": -79.610665
+        },
+        {
+          "lat": 40.210507,
+          "lng": -79.614373
+        }
+      ]
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 95,
@@ -21,23 +117,43 @@
     "trailerParkingCapacity": 130,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 52.0,
+    "siteAreaAcres": 52,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@40.21250,-79.61300,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "scale", "multiStep", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "scale",
+    "multiStep",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Single controlled access road off the I-70 / PA Turnpike New Stanton interchange roundabout, crossing a bridge over Sewickley Creek; Street View shows 'ALL TRUCK TRAFFIC KEEP RIGHT' and 'SPEED LIMIT 15' signage directing trucks into the property — a controlled industrial entrance.",
     "guardShack": "No guard booth resolvable at the property line; Street View coverage stops at the public bridge and the gate point sits inside the property. The only small structure visible is mid-yard. Marked remoteGs / no shack at medium confidence.",

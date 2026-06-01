@@ -1,37 +1,125 @@
 {
   "name": "Coca-Cola UNITED - College Park Production Plant, GA",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 33.626800, "lng": -84.468000 },
+  "coords": {
+    "lat": 33.6268,
+    "lng": -84.468
+  },
   "geofences": {
-    "perimeter": { "south": 33.6244, "west": -84.4698, "north": 33.6288, "east": -84.4662 },
-    "truckGate": { "south": 33.6245, "west": -84.4694, "north": 33.6250, "east": -84.4688 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.628172,
+          "lng": -84.471159
+        },
+        {
+          "lat": 33.627943,
+          "lng": -84.467313
+        },
+        {
+          "lat": 33.62497,
+          "lng": -84.468
+        },
+        {
+          "lat": 33.625199,
+          "lng": -84.471845
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 33.6258, "west": -84.4698, "north": 33.6285, "east": -84.4682 }
+      {
+        "ring": [
+          {
+            "lat": 33.627486,
+            "lng": -84.471159
+          },
+          {
+            "lat": 33.627257,
+            "lng": -84.469099
+          },
+          {
+            "lat": 33.625428,
+            "lng": -84.469373
+          },
+          {
+            "lat": 33.625657,
+            "lng": -84.471433
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.6252, "west": -84.4678, "north": 33.6282, "east": -84.4670 }
+      {
+        "ring": [
+          {
+            "lat": 33.627715,
+            "lng": -84.468824
+          },
+          {
+            "lat": 33.6276,
+            "lng": -84.467451
+          },
+          {
+            "lat": 33.625428,
+            "lng": -84.468
+          },
+          {
+            "lat": 33.625657,
+            "lng": -84.469236
+          }
+        ]
+      }
     ],
-    "staging": { "south": 33.6248, "west": -84.4690, "north": 33.6256, "east": -84.4680 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 46,
+        "pano": "ZZu9g9SeQAUIQpBqWTiRPA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 45, "trailersVisible": 120, "trailerParkingCapacity": 180,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 40.4,
+    "dockDoorCount": 45,
+    "trailersVisible": 120,
+    "trailerParkingCapacity": 180,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 40.4,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@33.6268,-84.468,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "location": "Roster lat/lng (33.623174,-84.482599) and roster address (3151 Sullivan Rd) landed on a vacant paved lot ~1.5 km west of the real site - wrong location. The Census/Nominatim geocoders for the correct address (2355 Sullivan Rd) also interpolated onto a rural stretch. The actual Coca-Cola UNITED College Park Production Plant is at ~33.6268,-84.4680, off Sullivan Road in the Cooks Crossing industrial area near the I-85/I-285 interchange. Confirmed via an OSM 'Coca-Cola' POI and Street View: the building carries a red 'Coca-Cola' logo and the yard entrance has red 'TRUCK ENTRANCE' signs. It is a production + distribution facility, 325+ associates, acquired by Coca-Cola UNITED in April 2017 from The Coca-Cola Company.",
     "truckGate": "Positive. Street View shows red 'TRUCK ENTRANCE' signs at a driveway off Sullivan Road and a chain-link perimeter fence. The property is fenced with a controlled truck entrance. Gate barrier hardware not clearly resolved in the available views; truckGate=true.",

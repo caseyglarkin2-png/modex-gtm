@@ -1,15 +1,108 @@
 {
   "name": "Caterpillar Global Mining - South Milwaukee WI Plant",
   "type": "Manufacturing plant (large mining equipment - electric rope shovels, draglines)",
-  "coords": { "lat": 42.91270, "lng": -87.86150 },
+  "coords": {
+    "lat": 42.9127,
+    "lng": -87.8615
+  },
   "geofences": {
-    "perimeter": { "south": 42.90850, "west": -87.86420, "north": 42.91650, "east": -87.86010 },
-    "truckGate": { "south": 42.91400, "west": -87.86140, "north": 42.91470, "east": -87.86040 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.918332,
+          "lng": -87.865895
+        },
+        {
+          "lat": 42.91793,
+          "lng": -87.859852
+        },
+        {
+          "lat": 42.909481,
+          "lng": -87.862599
+        },
+        {
+          "lat": 42.910286,
+          "lng": -87.866444
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.911091,
+          "lng": -87.866444
+        },
+        {
+          "lat": 42.91089,
+          "lng": -87.864796
+        },
+        {
+          "lat": 42.909884,
+          "lng": -87.865071
+        },
+        {
+          "lat": 42.910085,
+          "lng": -87.866719
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 42.91300, "west": -87.86250, "north": 42.91450, "east": -87.86120 }
+      {
+        "ring": [
+          {
+            "lat": 42.913907,
+            "lng": -87.864247
+          },
+          {
+            "lat": 42.913505,
+            "lng": -87.860127
+          },
+          {
+            "lat": 42.911493,
+            "lng": -87.860676
+          },
+          {
+            "lat": 42.911895,
+            "lng": -87.864796
+          }
+        ]
+      }
     ],
-    "dockAprons": [],
-    "staging": { "south": 42.91350, "west": -87.86200, "north": 42.91450, "east": -87.86080 }
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 42.915516,
+            "lng": -87.865345
+          },
+          {
+            "lat": 42.915114,
+            "lng": -87.860951
+          },
+          {
+            "lat": 42.913505,
+            "lng": -87.8615
+          },
+          {
+            "lat": 42.913907,
+            "lng": -87.865895
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 107,
+        "pano": "x3-4V4T6G9QjJcTvcog5eQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 107,
+        "pano": "x3-4V4T6G9QjJcTvcog5eQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 8,
@@ -17,23 +110,44 @@
     "trailerParkingCapacity": 20,
     "truckGateCount": 2,
     "buildingCount": 8,
-    "siteAreaAcres": 72.0,
+    "siteAreaAcres": 72,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@42.91270,-87.86150,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "0-10", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "dockDoors", "dropArea", "truckGateCount", "entryLanes", "exitLanes", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "guardShack",
+    "dockDoors",
+    "dropArea",
+    "truckGateCount",
+    "entryLanes",
+    "exitLanes",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "Roster lat/lng (GEOMETRIC_CENTER, movedMeters 234) sits on the campus. Confirmed: the historic former Bucyrus heavy-equipment works in South Milwaukee, operated by Caterpillar Global Mining since 2011; produces massive Cat electric rope shovels (7495 series) and draglines. Address 1100 Milwaukee Ave. Locked center on the main building corridor at 42.9127,-87.8615.",
     "type": "Heavy-manufacturing / fabrication complex, NOT a distribution facility. The site assembles room-sized mining-shovel components; it has large open paved assembly/staging yards rather than a conventional bank of loading-dock doors.",

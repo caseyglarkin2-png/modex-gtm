@@ -1,18 +1,108 @@
 {
   "name": "Universal Intermodal Services - Houston Terminal - Houston TX",
   "type": "Intermodal / Drayage Terminal (owned)",
-  "coords": { "lat": 29.87010, "lng": -95.28610 },
+  "coords": {
+    "lat": 29.8701,
+    "lng": -95.2861
+  },
   "geofences": {
-    "perimeter": { "south": 29.86620, "west": -95.28760, "north": 29.87150, "east": -95.28470 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.871767,
+          "lng": -95.289259
+        },
+        {
+          "lat": 29.871767,
+          "lng": -95.285413
+        },
+        {
+          "lat": 29.867718,
+          "lng": -95.285551
+        },
+        {
+          "lat": 29.867718,
+          "lng": -95.289259
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 29.871767,
+          "lng": -95.289259
+        },
+        {
+          "lat": 29.871767,
+          "lng": -95.288435
+        },
+        {
+          "lat": 29.871172,
+          "lng": -95.288435
+        },
+        {
+          "lat": 29.871172,
+          "lng": -95.289259
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 29.86640, "west": -95.28740, "north": 29.87000, "east": -95.28490 },
-      { "south": 29.86980, "west": -95.28720, "north": 29.87120, "east": -95.28500 }
+      {
+        "ring": [
+          {
+            "lat": 29.871053,
+            "lng": -95.288847
+          },
+          {
+            "lat": 29.871053,
+            "lng": -95.287061
+          },
+          {
+            "lat": 29.868195,
+            "lng": -95.287199
+          },
+          {
+            "lat": 29.868195,
+            "lng": -95.288984
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 29.86930, "west": -95.28680, "north": 29.87080, "east": -95.28560 }
+      {
+        "ring": [
+          {
+            "lat": 29.871291,
+            "lng": -95.286924
+          },
+          {
+            "lat": 29.871291,
+            "lng": -95.285825
+          },
+          {
+            "lat": 29.868195,
+            "lng": -95.285825
+          },
+          {
+            "lat": 29.868195,
+            "lng": -95.286924
+          }
+        ]
+      }
     ],
-    "staging": { "south": 29.87080, "west": -95.28700, "north": 29.87150, "east": -95.28500 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 136,
+        "pano": "uALTEZVJ_VIQ_3RLCdPWEg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 136,
+        "pano": "uALTEZVJ_VIQ_3RLCdPWEg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 20,
@@ -20,7 +110,7 @@
     "trailerParkingCapacity": 350,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 22.0,
+    "siteAreaAcres": 22,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@29.8701,-95.2861,400m/data=!3m1!1e3",
@@ -49,7 +139,11 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "truckGate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "truckGate"
+  ],
   "fieldNotes": {
     "siteResolution": "loadmatch.com directory lists the Universal Intermodal Services Houston terminal at 7800 E Little York Rd, Houston TX 77016; the address is also tied to Universal Truckload Service (both Universal Logistics Holdings companies). A drayage / intermodal terminal in NE Houston south of E Little York Rd, with residential to the W and open field to the E. Roster coords land in the yard; center locked at 29.87010,-95.28610.",
     "truckGate": "The property fronts E Little York Rd with an OPEN, ungated yard apron. Street View (2025) of the road frontage shows no perimeter fence, no barrier arm, no sliding gate, and no checkpoint pinch-point - trucks drive straight off the public road into the yard. truckGate = false (flagged uncertain - the deep interior of the yard could not be walked, but the road-frontage entrance is clearly uncontrolled).",

@@ -1,18 +1,108 @@
 {
   "name": "Kenco MCS Chino - Chino CA",
   "type": "Multi-Client Distribution Center",
-  "coords": { "lat": 33.96700, "lng": -117.66150 },
+  "coords": {
+    "lat": 33.967,
+    "lng": -117.6615
+  },
   "geofences": {
-    "perimeter": { "south": 33.96465, "west": -117.66290, "north": 33.96875, "east": -117.66045 },
-    "truckGate": { "south": 33.96810, "west": -117.66095, "north": 33.96865, "east": -117.66030 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.968139,
+          "lng": -117.662599
+        },
+        {
+          "lat": 33.968139,
+          "lng": -117.660676
+        },
+        {
+          "lat": 33.964608,
+          "lng": -117.660676
+        },
+        {
+          "lat": 33.964608,
+          "lng": -117.662599
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.968025,
+          "lng": -117.662599
+        },
+        {
+          "lat": 33.968025,
+          "lng": -117.662187
+        },
+        {
+          "lat": 33.967626,
+          "lng": -117.662187
+        },
+        {
+          "lat": 33.967626,
+          "lng": -117.662599
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 33.96500, "west": -117.66290, "north": 33.96720, "east": -117.66200 }
+      {
+        "ring": [
+          {
+            "lat": 33.968082,
+            "lng": -117.662599
+          },
+          {
+            "lat": 33.968082,
+            "lng": -117.661843
+          },
+          {
+            "lat": 33.967285,
+            "lng": -117.661843
+          },
+          {
+            "lat": 33.967285,
+            "lng": -117.662599
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.96500, "west": -117.66290, "north": 33.96810, "east": -117.66220 },
-      { "south": 33.96500, "west": -117.66100, "north": 33.96810, "east": -117.66045 }
+      {
+        "ring": [
+          {
+            "lat": 33.96495,
+            "lng": -117.662461
+          },
+          {
+            "lat": 33.96495,
+            "lng": -117.660813
+          },
+          {
+            "lat": 33.964722,
+            "lng": -117.660813
+          },
+          {
+            "lat": 33.964722,
+            "lng": -117.662461
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 159,
+        "pano": "W7SyvefT7aCAba83foV_mA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 159,
+        "pano": "W7SyvefT7aCAba83foV_mA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 105,
@@ -25,18 +115,36 @@
   },
   "mapsUrl": "https://www.google.com/maps/@33.96700,-117.66150,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "site": "Positively identified as 6509 Kimball Avenue, Chino CA - the roof number '6509' is legible on the west building's roof in z20 satellite imagery. Cross-dock Class-A Inland Empire warehouse in the dense Chino logistics district south of Kimball Avenue.",
     "truckGate": "Truck yards on both the west and east faces are enclosed by chain-link fencing (visible in Street View off Kimball Avenue and around the perimeter). Two truck entrances: the east truck corridor off Kimball Avenue (shared drive between this building and the solar-roofed building east) and a SW perimeter-road drive into the west drop yard.",

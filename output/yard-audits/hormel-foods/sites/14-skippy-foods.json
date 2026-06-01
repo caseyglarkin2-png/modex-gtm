@@ -1,18 +1,104 @@
 {
   "name": "Skippy Foods - Little Rock AR",
   "type": "Production Facility",
-  "coords": { "lat": 34.70790, "lng": -92.18430 },
+  "coords": {
+    "lat": 34.7079,
+    "lng": -92.1843
+  },
   "geofences": {
-    "perimeter": { "south": 34.705924, "west": -92.187032, "north": 34.709876, "east": -92.181568 },
-    "truckGate": { "south": 34.707041, "west": -92.182037, "north": 34.707759, "east": -92.181163 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.710158,
+          "lng": -92.186772
+        },
+        {
+          "lat": 34.710158,
+          "lng": -92.182927
+        },
+        {
+          "lat": 34.707336,
+          "lng": -92.182652
+        },
+        {
+          "lat": 34.706545,
+          "lng": -92.183201
+        },
+        {
+          "lat": 34.706545,
+          "lng": -92.187047
+        },
+        {
+          "lat": 34.708464,
+          "lng": -92.187321
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.707336,
+          "lng": -92.187047
+        },
+        {
+          "lat": 34.707448,
+          "lng": -92.185948
+        },
+        {
+          "lat": 34.706658,
+          "lng": -92.185811
+        },
+        {
+          "lat": 34.706545,
+          "lng": -92.186909
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 34.708896, "west": -92.185839, "north": 34.709704, "east": -92.182561 },
-      { "south": 34.706992, "west": -92.183292, "north": 34.708608, "east": -92.182308 }
+      {
+        "ring": [
+          {
+            "lat": 34.709706,
+            "lng": -92.183613
+          },
+          {
+            "lat": 34.711287,
+            "lng": -92.181828
+          },
+          {
+            "lat": 34.710609,
+            "lng": -92.181004
+          },
+          {
+            "lat": 34.709029,
+            "lng": -92.182789
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 34.708341, "west": -92.186321, "north": 34.709059, "east": -92.183479 }
+      {
+        "ring": [
+          {
+            "lat": 34.708352,
+            "lng": -92.186223
+          },
+          {
+            "lat": 34.708464,
+            "lng": -92.183613
+          },
+          {
+            "lat": 34.708126,
+            "lng": -92.183613
+          },
+          {
+            "lat": 34.708013,
+            "lng": -92.186223
+          }
+        ]
+      }
     ],
-    "staging": { "south": 34.706961, "west": -92.183456, "north": 34.708039, "east": -92.182144 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 22,
@@ -25,18 +111,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@34.70790,-92.18430,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "dockDoorCount"],
+  "uncertainFields": [
+    "guardShack",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "location": "Roster address (5111 Fairway Ave) and geocode landed in a residential neighborhood — wrong. Skippy Foods is at 8201 Frazier Pike, at the Port of Little Rock (confirmed by Hormel/Little Rock Chamber/ADEQ). Resolved to 34.7079,-92.1843 — the 'Skippy' logo is visible on the building tower in 2026 Street View.",
     "truckGate": "Property is fully enclosed by chain-link perimeter fence. The truck entrance off Frazier Pike (a long paved/gravel driveway on the SE) passes through a chain-link sliding gate at the fence opening near the building yard (gate rail visible in z21 satellite; chain-link gate visible in 2026 Street View). truckGate = true.",

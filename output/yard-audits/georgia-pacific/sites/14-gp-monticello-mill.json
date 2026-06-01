@@ -1,18 +1,100 @@
 {
   "name": "GP Monticello Mill - Monticello MS",
   "type": "Containerboard Mill",
-  "coords": { "lat": 31.6282, "lng": -90.0815 },
+  "coords": {
+    "lat": 31.6282,
+    "lng": -90.0815
+  },
   "geofences": {
-    "perimeter": { "south": 31.6195, "west": -90.0960, "north": 31.6360, "east": -90.0720 },
-    "truckGate": { "south": 31.6228, "west": -90.0850, "north": 31.6244, "east": -90.0826 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 31.631942,
+          "lng": -90.088092
+        },
+        {
+          "lat": 31.631006,
+          "lng": -90.076007
+        },
+        {
+          "lat": 31.622587,
+          "lng": -90.074908
+        },
+        {
+          "lat": 31.621652,
+          "lng": -90.086993
+        },
+        {
+          "lat": 31.627265,
+          "lng": -90.08919
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 31.623055,
+          "lng": -90.0815
+        },
+        {
+          "lat": 31.623055,
+          "lng": -90.078204
+        },
+        {
+          "lat": 31.620716,
+          "lng": -90.078204
+        },
+        {
+          "lat": 31.620716,
+          "lng": -90.0815
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 31.6280, "west": -90.0875, "north": 31.6310, "east": -90.0840 },
-      { "south": 31.6224, "west": -90.0820, "north": 31.6256, "east": -90.0795 }
+      {
+        "ring": [
+          {
+            "lat": 31.630071,
+            "lng": -90.086993
+          },
+          {
+            "lat": 31.629603,
+            "lng": -90.077105
+          },
+          {
+            "lat": 31.626329,
+            "lng": -90.077655
+          },
+          {
+            "lat": 31.626797,
+            "lng": -90.087542
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 31.6288, "west": -90.0862, "north": 31.6312, "east": -90.0838 }
+      {
+        "ring": [
+          {
+            "lat": 31.626329,
+            "lng": -90.086993
+          },
+          {
+            "lat": 31.625861,
+            "lng": -90.078204
+          },
+          {
+            "lat": 31.62399,
+            "lng": -90.078753
+          },
+          {
+            "lat": 31.624458,
+            "lng": -90.087542
+          }
+        ]
+      }
     ],
-    "staging": { "south": 31.6212, "west": -90.0815, "north": 31.6238, "east": -90.0792 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 18,
@@ -20,23 +102,43 @@
     "trailerParkingCapacity": 110,
     "truckGateCount": 1,
     "buildingCount": 22,
-    "siteAreaAcres": 320.0,
+    "siteAreaAcres": 320,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@31.6282,-90.0815,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": true, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "scale", "dockDoors", "entryLanes", "exitLanes", "multiStep"],
+  "uncertainFields": [
+    "guardShack",
+    "scale",
+    "dockDoors",
+    "entryLanes",
+    "exitLanes",
+    "multiStep"
+  ],
   "fieldNotes": {
     "location": "Roster geocode (31.5795,-90.0394, address 1715 Highway 84 E) sat on Highway 84 in open forest ~5.6 km SSE of the actual mill - a city-level geocode error. Mill core relocated via CLUI/Global Energy Monitor coordinates and satellite to ~31.6282,-90.0815, on Na Sandifer Hwy (Old Highway 84) along the Pearl River, ~1 mile east of Monticello, Lawrence County MS.",
     "facility": "Georgia-Pacific Monticello Mill - an integrated kraft pulp and linerboard (containerboard) mill. In 2024 it became one of few North American facilities to produce over 1 million tons of product. Subject of a $91M upgrade announced 2023 (Infor Phase 2 per dossier). Large campus: paper machine buildings, woodyard with two radial log/chip storage piles, wastewater treatment clarifiers and ponds, finished-goods shipping warehouse, rail yard, support structures.",

@@ -1,15 +1,42 @@
 {
   "name": "The Prisoner Wine Company - St. Helena CA",
   "type": "Winery / Production Facility",
-  "coords": { "lat": 38.474750, "lng": -122.431850 },
+  "coords": {
+    "lat": 38.47475,
+    "lng": -122.43185
+  },
   "geofences": {
-    "perimeter": { "south": 38.472600, "west": -122.433900, "north": 38.476400, "east": -122.430300 },
-    "truckGate": { "south": 38.472750, "west": -122.434000, "north": 38.472980, "east": -122.433700 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.475771,
+          "lng": -122.433361
+        },
+        {
+          "lat": 38.475771,
+          "lng": -122.431301
+        },
+        {
+          "lat": 38.474105,
+          "lng": -122.431163
+        },
+        {
+          "lat": 38.473997,
+          "lng": -122.433223
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [],
-    "dockAprons": [
-      { "south": 38.474750, "west": -122.432250, "north": 38.475200, "east": -122.431800 }
-    ],
-    "staging": null
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 96,
+        "pano": "pKV8neyh4MeDgzeYhFrbWA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 3,
@@ -17,7 +44,7 @@
     "trailerParkingCapacity": 4,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 33.0,
+    "siteAreaAcres": 33,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@38.474750,-122.431850,400m/data=!3m1!1e3",
@@ -46,7 +73,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoors", "connectivityIssue"],
+  "uncertainFields": [
+    "dockDoors",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "truckGate": "Driveway entrance off Galleron Road flanked by two decorative stone monument pillars; no barrier arm, sliding/swing gate, or checkpoint pinch-point across the lane. Open winery entrance.",
     "guardShack": "No staffed booth at the entrance. Only a small white utility cabinet beside the lane and the two ornamental stone pillars.",

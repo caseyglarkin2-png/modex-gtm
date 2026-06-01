@@ -14,6 +14,7 @@ import { SurprisingFindings } from './surprising-findings';
 import { AnchorTeardownVideo } from './anchor-teardown-video';
 import { RoiCtaButton } from './roi-cta-button';
 import { ShareMicrosite } from './share-microsite';
+import { DriverJourneySpotlight } from './driver-journey-spotlight';
 
 /**
  * Top-level client surface for /demo/[account]. Manages cross-component
@@ -24,7 +25,7 @@ import { ShareMicrosite } from './share-microsite';
  * is purely the atlas + click-to-detail; the microsite owns the chrome.
  */
 
-type View = 'atlas' | 'sim';
+type View = 'atlas' | 'sim' | 'replay';
 
 interface Props {
   pack: DemoPack;
@@ -144,6 +145,10 @@ export function DemoSurface({
   // a prefilled prospect_site field (the rep sees it on the booking
   // notification). Falls back to the contact form until Casey sets the
   // slug (out-of-band item) via NEXT_PUBLIC_HUBSPOT_MEETINGS_SLUG.
+  // Show the "Watch the run" tab only when at least one site has a
+  // scenario-modeled driver journey.
+  const hasReplay = pack.network.sites.some((s) => s.scenario);
+
   const meetingsSlug = process.env.NEXT_PUBLIC_HUBSPOT_MEETINGS_SLUG;
   const bookAuditHref = meetingsSlug
     ? `https://meetings.hubspot.com/${meetingsSlug}?prospect_site=${encodeURIComponent(displayName)}`
@@ -317,7 +322,8 @@ export function DemoSurface({
               [
                 { id: 'atlas', label: 'Network atlas' },
                 { id: 'sim', label: 'Network simulator' },
-              ] as const
+                ...(hasReplay ? [{ id: 'replay', label: '▶ Watch the run' }] : []),
+              ] as { id: View; label: string }[]
             ).map((tab) => (
               <button
                 key={tab.id}
@@ -501,6 +507,13 @@ export function DemoSurface({
       {view === 'sim' && (
         <main className="flex flex-1 overflow-hidden">
           <NetworkSimulator pack={pack} />
+        </main>
+      )}
+
+      {/* Driver-journey view: the truck replay promoted to a primary tab. */}
+      {view === 'replay' && (
+        <main className="flex flex-1 overflow-hidden">
+          <DriverJourneySpotlight pack={pack} initialSiteId={initialSiteId} onExit={() => setView('atlas')} />
         </main>
       )}
 

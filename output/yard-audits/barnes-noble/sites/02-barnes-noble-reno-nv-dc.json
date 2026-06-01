@@ -1,17 +1,112 @@
 {
   "name": "Barnes & Noble - Reno NV DC",
   "type": "Distribution Center / West-Coast Replenishment Center",
-  "coords": { "lat": 39.41870, "lng": -119.75050 },
+  "coords": {
+    "lat": 39.4187,
+    "lng": -119.7505
+  },
   "geofences": {
-    "perimeter": { "south": 39.41630, "west": -119.75250, "north": 39.42050, "east": -119.74850 },
-    "truckGate": { "south": 39.41680, "west": -119.75120, "north": 39.41720, "east": -119.75070 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.419973,
+          "lng": -119.751599
+        },
+        {
+          "lat": 39.420238,
+          "lng": -119.748509
+        },
+        {
+          "lat": 39.417692,
+          "lng": -119.748234
+        },
+        {
+          "lat": 39.417003,
+          "lng": -119.750912
+        },
+        {
+          "lat": 39.418063,
+          "lng": -119.751599
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.417374,
+          "lng": -119.751187
+        },
+        {
+          "lat": 39.41748,
+          "lng": -119.750569
+        },
+        {
+          "lat": 39.417056,
+          "lng": -119.750431
+        },
+        {
+          "lat": 39.416949,
+          "lng": -119.751049
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 39.41700, "west": -119.75100, "north": 39.41760, "east": -119.74900 }
+      {
+        "ring": [
+          {
+            "lat": 39.417533,
+            "lng": -119.751461
+          },
+          {
+            "lat": 39.417692,
+            "lng": -119.749676
+          },
+          {
+            "lat": 39.416684,
+            "lng": -119.74947
+          },
+          {
+            "lat": 39.416578,
+            "lng": -119.751187
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.41710, "west": -119.75180, "north": 39.41780, "east": -119.74890 }
+      {
+        "ring": [
+          {
+            "lat": 39.417692,
+            "lng": -119.751461
+          },
+          {
+            "lat": 39.418063,
+            "lng": -119.748577
+          },
+          {
+            "lat": 39.417533,
+            "lng": -119.74844
+          },
+          {
+            "lat": 39.417162,
+            "lng": -119.751324
+          }
+        ]
+      }
     ],
-    "staging": { "south": 39.41660, "west": -119.75120, "north": 39.41710, "east": -119.75000 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 327,
+        "pano": "znMxrPPpGw0X0amLLIcwCQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 327,
+        "pano": "znMxrPPpGw0X0amLLIcwCQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 38,
@@ -24,18 +119,36 @@
   },
   "mapsUrl": "https://www.google.com/maps/@39.41870,-119.75050,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoors", "entryLanes", "exitLanes", "dropArea"],
+  "uncertainFields": [
+    "dockDoors",
+    "entryLanes",
+    "exitLanes",
+    "dropArea"
+  ],
   "fieldNotes": {
     "location": "Confirmed 12660 Old Virginia Rd, Reno NV 89521 in the Damonte Ranch industrial park, alongside I-580/US-395. Single ~601K sq ft DC building. Address verified via Panjiva, Chamber of Commerce, and Facebook (Barnes & Noble Reno Distribution Center).",
     "truckGate": "CONFIRMED via Street View (2022 and 2025 panos): a yellow-and-white striped barrier arm spans the entrance driveway lane, flanked by yellow protective bollards, with a STOP sign. The 2015 pano shows the same driveway WITHOUT the arm, so the barrier was installed after 2015. High confidence.",

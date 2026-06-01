@@ -1,17 +1,94 @@
 {
   "name": "Constellation Gonzales Winery - Gonzales CA",
   "type": "Winery / Production Facility",
-  "coords": { "lat": 36.502400, "lng": -121.434700 },
+  "coords": {
+    "lat": 36.5024,
+    "lng": -121.4347
+  },
   "geofences": {
-    "perimeter": { "south": 36.499900, "west": -121.436700, "north": 36.504600, "east": -121.432900 },
-    "truckGate": { "south": 36.500250, "west": -121.434900, "north": 36.500650, "east": -121.434350 },
-    "dropYards": [
-      { "south": 36.501900, "west": -121.435700, "north": 36.502700, "east": -121.434900 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.503945,
+          "lng": -121.437447
+        },
+        {
+          "lat": 36.503945,
+          "lng": -121.433052
+        },
+        {
+          "lat": 36.499971,
+          "lng": -121.433052
+        },
+        {
+          "lat": 36.499971,
+          "lng": -121.437447
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 36.501848,
+          "lng": -121.434013
+        },
+        {
+          "lat": 36.501848,
+          "lng": -121.433189
+        },
+        {
+          "lat": 36.501406,
+          "lng": -121.433189
+        },
+        {
+          "lat": 36.501406,
+          "lng": -121.434013
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 36.501700, "west": -121.434900, "north": 36.502300, "east": -121.434100 }
+      {
+        "ring": [
+          {
+            "lat": 36.5024,
+            "lng": -121.435112
+          },
+          {
+            "lat": 36.5024,
+            "lng": -121.433327
+          },
+          {
+            "lat": 36.501848,
+            "lng": -121.433327
+          },
+          {
+            "lat": 36.501848,
+            "lng": -121.435112
+          }
+        ]
+      }
     ],
-    "staging": { "south": 36.500500, "west": -121.435100, "north": 36.501300, "east": -121.434200 }
+    "staging": {
+      "ring": [
+        {
+          "lat": 36.503504,
+          "lng": -121.437035
+        },
+        {
+          "lat": 36.503504,
+          "lng": -121.435249
+        },
+        {
+          "lat": 36.502179,
+          "lng": -121.435249
+        },
+        {
+          "lat": 36.502179,
+          "lng": -121.437035
+        }
+      ]
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 10,
@@ -19,7 +96,7 @@
     "trailerParkingCapacity": 20,
     "truckGateCount": 1,
     "buildingCount": 4,
-    "siteAreaAcres": 41.0,
+    "siteAreaAcres": 41,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@36.502400,-121.434700,400m/data=!3m1!1e3",
@@ -48,7 +125,16 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoors", "dropArea", "scale", "trailersVisible", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoors",
+    "dropArea",
+    "scale",
+    "trailersVisible",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "facilityId": "Constellation Gonzales Winery confirmed at 800 S Alta St, Gonzales CA. The large warehouse + tank farm + crush-pad campus NE of the road is the winery. The SW industrial building with a heavy trailer yard is a SEPARATE company - Braga Fresh produce (500 S Alta St) - confirmed by a 'braga ... LINE TRUCK ENTRANCE' sign in Street View; it was excluded from this audit.",
     "truckGate": "Winery main entrance is a divided in/out road off the public road at the SE of the campus, with a small admin/office structure beside it. No barrier arm or sliding/swing gate is visible across the truck lane in satellite imagery; Street View does not cover the private drive. Treated as an open/uncontrolled industrial entrance - marked false but low confidence.",

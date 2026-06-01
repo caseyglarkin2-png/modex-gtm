@@ -1,15 +1,63 @@
 {
   "name": "Pactiv Evergreen - Turlock CA",
   "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
-  "coords": { "lat": 37.491536, "lng": -120.866032 },
+  "coords": {
+    "lat": 37.491536,
+    "lng": -120.866032
+  },
   "geofences": {
-    "perimeter": { "south": 37.490400, "west": -120.867350, "north": 37.492450, "east": -120.864900 },
-    "truckGate": { "south": 37.491000, "west": -120.867350, "north": 37.491300, "east": -120.866900 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.492517,
+          "lng": -120.867955
+        },
+        {
+          "lat": 37.492408,
+          "lng": -120.865208
+        },
+        {
+          "lat": 37.490555,
+          "lng": -120.865345
+        },
+        {
+          "lat": 37.490664,
+          "lng": -120.868092
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 37.490950, "west": -120.866900, "north": 37.491400, "east": -120.865200 }
+      {
+        "ring": [
+          {
+            "lat": 37.491808,
+            "lng": -120.867955
+          },
+          {
+            "lat": 37.491754,
+            "lng": -120.865689
+          },
+          {
+            "lat": 37.491482,
+            "lng": -120.865689
+          },
+          {
+            "lat": 37.491536,
+            "lng": -120.867955
+          }
+        ]
+      }
     ],
-    "staging": { "south": 37.490400, "west": -120.867000, "north": 37.490950, "east": -120.865000 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 160,
+        "pano": "0h5JhSLlxOGkWCPvfgOfvg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 16,
@@ -17,7 +65,7 @@
     "trailerParkingCapacity": 25,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 14.0,
+    "siteAreaAcres": 14,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@37.491536,-120.866032,400m/data=!3m1!1e3",
@@ -46,7 +94,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Chain-link sliding gate across the dock-apron drive on the south side, confirmed in 2026-03 Street View (sv-gate2). The whole property is chain-link fenced.",
     "guardShack": "No guard booth structure beside the gate in any heading; gate is an unstaffed chain-link slider.",

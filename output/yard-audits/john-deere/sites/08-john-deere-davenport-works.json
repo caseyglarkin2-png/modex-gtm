@@ -1,18 +1,81 @@
 {
   "name": "John Deere Davenport Works - Davenport IA",
   "type": "Assembly Plant",
-  "coords": { "lat": 41.601800, "lng": -90.551500 },
+  "coords": {
+    "lat": 41.6018,
+    "lng": -90.5515
+  },
   "geofences": {
-    "perimeter": { "south": 41.59700, "west": -90.55850, "north": 41.60750, "east": -90.54550 },
-    "truckGate": { "south": 41.61020, "west": -90.55800, "north": 41.61120, "east": -90.55600 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.604675,
+          "lng": -90.556993
+        },
+        {
+          "lat": 41.604675,
+          "lng": -90.548204
+        },
+        {
+          "lat": 41.598719,
+          "lng": -90.547105
+        },
+        {
+          "lat": 41.598719,
+          "lng": -90.555895
+        },
+        {
+          "lat": 41.602622,
+          "lng": -90.557268
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 41.60100, "west": -90.54900, "north": 41.60280, "east": -90.54600 },
-      { "south": 41.60330, "west": -90.55600, "north": 41.60500, "east": -90.54850 }
+      {
+        "ring": [
+          {
+            "lat": 41.600773,
+            "lng": -90.555895
+          },
+          {
+            "lat": 41.600773,
+            "lng": -90.548204
+          },
+          {
+            "lat": 41.599335,
+            "lng": -90.548204
+          },
+          {
+            "lat": 41.599335,
+            "lng": -90.555895
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.60260, "west": -90.55600, "north": 41.60360, "east": -90.54850 }
+      {
+        "ring": [
+          {
+            "lat": 41.603854,
+            "lng": -90.555895
+          },
+          {
+            "lat": 41.603854,
+            "lng": -90.548753
+          },
+          {
+            "lat": 41.603032,
+            "lng": -90.548753
+          },
+          {
+            "lat": 41.603032,
+            "lng": -90.555895
+          }
+        ]
+      }
     ],
-    "staging": { "south": 41.60280, "west": -90.55400, "north": 41.60520, "east": -90.54950 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 20,
@@ -20,23 +83,44 @@
     "trailerParkingCapacity": 60,
     "truckGateCount": 1,
     "buildingCount": 5,
-    "siteAreaAcres": 290.0,
+    "siteAreaAcres": 290,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.601800,-90.551500,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoors", "entryLanes", "exitLanes", "scale"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoors",
+    "entryLanes",
+    "exitLanes",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "Site is set ~600 m back from the public road across landscaped grounds, reached by a wide private internal access road off a controlled intersection on E 90th St. Multi-lane markings at the road junction indicate a controlled private entry. No Street View coverage on the internal road and no booth resolved in satellite, so a perimeter control point is inferred from the campus layout.",
     "guardShack": "No guard booth resolved at the public-road entry or along the access road in available imagery; large Deere assembly campuses of this era typically use a check-in point near the building rather than a road booth.",

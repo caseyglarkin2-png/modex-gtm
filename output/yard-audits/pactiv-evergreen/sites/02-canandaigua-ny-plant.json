@@ -1,19 +1,77 @@
 {
   "name": "Pactiv Evergreen - Canandaigua NY",
   "type": "Manufacturing Plant (Food Merchandising campus)",
-  "coords": { "lat": 42.905500, "lng": -77.299800 },
+  "coords": {
+    "lat": 42.9055,
+    "lng": -77.2998
+  },
   "geofences": {
-    "perimeter": { "south": 42.90200, "west": -77.30720, "north": 42.90820, "east": -77.29720 },
-    "truckGate": { "south": 42.90250, "west": -77.30330, "north": 42.90305, "east": -77.30255 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.908015,
+          "lng": -77.304881
+        },
+        {
+          "lat": 42.907512,
+          "lng": -77.299113
+        },
+        {
+          "lat": 42.903086,
+          "lng": -77.2998
+        },
+        {
+          "lat": 42.903891,
+          "lng": -77.305293
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 42.90490, "west": -77.30700, "north": 42.90690, "east": -77.30420 },
-      { "south": 42.90530, "west": -77.30340, "north": 42.90680, "east": -77.30180 }
+      {
+        "ring": [
+          {
+            "lat": 42.907814,
+            "lng": -77.305293
+          },
+          {
+            "lat": 42.907512,
+            "lng": -77.302547
+          },
+          {
+            "lat": 42.905902,
+            "lng": -77.302821
+          },
+          {
+            "lat": 42.906204,
+            "lng": -77.30543
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 42.90590, "west": -77.30130, "north": 42.90660, "east": -77.30000 },
-      { "south": 42.90460, "west": -77.30100, "north": 42.90560, "east": -77.29970 }
+      {
+        "ring": [
+          {
+            "lat": 42.906405,
+            "lng": -77.304469
+          },
+          {
+            "lat": 42.906104,
+            "lng": -77.301173
+          },
+          {
+            "lat": 42.905601,
+            "lng": -77.301311
+          },
+          {
+            "lat": 42.905902,
+            "lng": -77.304607
+          }
+        ]
+      }
     ],
-    "staging": { "south": 42.90290, "west": -77.30330, "north": 42.90460, "east": -77.30180 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 40,
@@ -21,23 +79,41 @@
     "trailerParkingCapacity": 320,
     "truckGateCount": 1,
     "buildingCount": 6,
-    "siteAreaAcres": 145.0,
+    "siteAreaAcres": 145,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@42.9055,-77.2998,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "shipRcvSeparate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Confirmed in Street View (2016-09) at the campus south entrance ~42.9028,-77.3030: a black-and-white striped barrier arm spans the truck lane, flanked by two sliding chain-link gates and STOP signs. Perimeter chain-link fencing rings the whole property. This is the single shared gate for the whole Pactiv Canandaigua campus.",
     "guardShack": "A small flat-roof booth sits immediately left of the gate (windowed on multiple sides, ~1-2 vehicle footprint, set beside the gate lane). It carries an 'Adecco' staffing-agency sign and a US flag pole — it is the staffed check-in booth at the gate.",

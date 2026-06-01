@@ -1,35 +1,106 @@
 {
   "name": "CJ Logistics - Glendale AZ",
   "type": "Distribution Center",
-  "coords": { "lat": 33.509600, "lng": -112.399200 },
+  "coords": {
+    "lat": 33.5096,
+    "lng": -112.3992
+  },
   "geofences": {
-    "perimeter": { "south": 33.508300, "west": -112.402000, "north": 33.511200, "east": -112.396500 },
-    "truckGate": { "south": 33.508300, "west": -112.401500, "north": 33.508900, "east": -112.400700 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.511203,
+          "lng": -112.401123
+        },
+        {
+          "lat": 33.511203,
+          "lng": -112.396591
+        },
+        {
+          "lat": 33.508569,
+          "lng": -112.396591
+        },
+        {
+          "lat": 33.508569,
+          "lng": -112.401123
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 33.508500, "west": -112.401200, "north": 33.509200, "east": -112.397300 }
+      {
+        "ring": [
+          {
+            "lat": 33.508627,
+            "lng": -112.400985
+          },
+          {
+            "lat": 33.508627,
+            "lng": -112.397003
+          },
+          {
+            "lat": 33.507997,
+            "lng": -112.396934
+          },
+          {
+            "lat": 33.507997,
+            "lng": -112.400917
+          }
+        ]
+      }
     ],
-    "staging": { "south": 33.508500, "west": -112.401200, "north": 33.509200, "east": -112.397300 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 60,
+        "pano": "N9Bale0RXockPfX0db0TUw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 70, "trailersVisible": 12, "trailerParkingCapacity": 90,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 32.0,
+    "dockDoorCount": 70,
+    "trailersVisible": 12,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 32,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.509600,-112.399200,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "entryLanes", "exitLanes", "dropArea"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes",
+    "dropArea"
+  ],
   "fieldNotes": {
     "truckGate": "Single truck entrance is an open driveway off the E-W public road (N Alsup Rd / industrial collector) at the SW corner of the property. No barrier arm, sliding/swing gate, guard booth, or checkpoint pinch-point visible in z20 satellite (2026) or 2024 Street View. The dock apron is not enclosed by perimeter fence - open desert site. Open driveway = no controlled truck gate.",
     "guardShack": "No guard booth structure at the entrance in any view.",

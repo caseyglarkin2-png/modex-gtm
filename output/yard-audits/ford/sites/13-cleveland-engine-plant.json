@@ -1,17 +1,35 @@
 {
   "name": "Ford - Cleveland Engine Plant, Brook Park OH",
   "type": "Engine Plant",
-  "coords": { "lat": 41.41645, "lng": -81.82190 },
+  "coords": {
+    "lat": 41.41645,
+    "lng": -81.8219
+  },
   "geofences": {
-    "perimeter": { "south": 41.41260, "west": -81.82680, "north": 41.41960, "east": -81.81800 },
-    "truckGate": { "south": 41.41330, "west": -81.82180, "north": 41.41420, "east": -81.82050 },
-    "dropYards": [
-      { "south": 41.41330, "west": -81.82200, "north": 41.41470, "east": -81.81950 }
-    ],
-    "dockAprons": [
-      { "south": 41.41360, "west": -81.82400, "north": 41.41470, "east": -81.82150 }
-    ],
-    "staging": { "south": 41.41300, "west": -81.82200, "north": 41.41360, "east": -81.82000 }
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.41851,
+          "lng": -81.824921
+        },
+        {
+          "lat": 41.41851,
+          "lng": -81.819703
+        },
+        {
+          "lat": 41.413566,
+          "lng": -81.819703
+        },
+        {
+          "lat": 41.413566,
+          "lng": -81.824921
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 18,
@@ -19,23 +37,42 @@
     "trailerParkingCapacity": 35,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 95.0,
+    "siteAreaAcres": 95,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@41.41645,-81.8219,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "dockDoors", "multipleFacilities"],
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "dockDoors",
+    "multipleFacilities"
+  ],
   "fieldNotes": {
     "site": "Ford Cleveland Engine Plant (No. 1), Brook Park OH - active engine plant producing 2.0/2.3L EcoBoost I4 and 3.5L EcoBoost V6 engines, ~2,055 employees, 1.6M sq ft. Roster geocode (41.4167,-81.8220) lands directly on the large multi-roof plant building - confirmed correct. Former Cleveland Engine Plant No. 2 immediately to the SW has been demolished (cleared land visible; the former plant parcel sold for $31.5M).",
     "truckGate": "Chain-link perimeter fence encircles the property; Street View (2016 & 2025) shows the fenced property line with gated entry points. The plant's south-side truck/drop yard connects to the public road via a controlled driveway.",
