@@ -16,7 +16,6 @@ import { RoiCtaButton } from './roi-cta-button';
 import { ShareMicrosite } from './share-microsite';
 import { DriverJourneySpotlight } from './driver-journey-spotlight';
 import { NetworkInsight } from './network-insight';
-import { InlineRoi } from './inline-roi';
 
 /**
  * Top-level client surface for /demo/[account]. Manages cross-component
@@ -497,10 +496,6 @@ export function DemoSurface({
             brand={displayName}
             poster={featuredSiteThumbSrc}
           />
-          {/* #4 — inline ROI: the closing value beat before the interactive
-              atlas. Modeled on the canonical calculator engine so the number
-              here agrees with the full /roi calculator the CTA opens. */}
-          <InlineRoi pack={pack} />
         </>
       )}
 
