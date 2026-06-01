@@ -6,6 +6,27 @@ import type { Site } from '@/lib/demo/pack-schema';
 import { GEOFENCE_COLORS } from './archetype-palette';
 import { DriverJourneyReplay } from './driver-journey-replay';
 import { ZoneStreetView } from './zone-street-view';
+import { scoreSite } from '@/lib/demo/yard-complexity';
+
+/**
+ * #3 — "what this means". Each audit factor maps to one plain, analytical
+ * implication for how the yard runs. Observational, not a pitch: we say what
+ * the layout implies and let the operator connect it to their day. No em
+ * dashes, no hard sell (see voice rules).
+ */
+const FACTOR_INSIGHTS: Record<string, string> = {
+  docks: 'A high dock-door count means many concurrent loads to sequence and assign.',
+  trailers: 'A large trailer yard means more standing inventory to locate and move.',
+  drop: 'An active drop yard makes spotter moves the dominant task, and sequencing them is where hours are won or lost.',
+  guard: 'A staffed gate ties check-in throughput to a person at the lane.',
+  sepgate: 'Separate in and out gates split the flow, so both have to stay coordinated.',
+  multistep: 'Multi-step check-in adds handoffs before a truck reaches a door.',
+  staging: 'Gate staging means trucks hold before and after the gate, a visible queue and a hidden wait.',
+  shiprcv: 'Separate ship and receive means two flows to balance against one yard.',
+  backup: 'Backup-sensitive docks make door assignment and timing matter more.',
+  conn: 'Connectivity gaps slow anything coordinated by radio or paper.',
+  fastlane: 'The layout suggests a fast lane is feasible for known, pre-cleared trucks.',
+};
 
 const SiteDetailMap = dynamic(() => import('./site-detail-map-inner'), {
   ssr: false,
@@ -32,8 +53,6 @@ function metric(label: string, value: string | number | null | undefined): React
   );
 }
 
-const LAYER_LEGEND: { color: string; label: string; count?: number }[] = [];
-
 export function SiteDetailPanel({ site, onClose, autoPlay = false }: Props) {
   // Replay mode toggle. Default to autoPlay when the URL deep-link said so
   // (D3.4) AND we actually have a scenario to play; otherwise start on the
@@ -55,6 +74,16 @@ export function SiteDetailPanel({ site, onClose, autoPlay = false }: Props) {
 
   const c = site.classification;
   const ym = site.yardMetrics;
+
+  // #3 — per-site read. The factor scoring is shared with the atlas glow (#2)
+  // so the map and the panel always tell the same story about a site.
+  const { raw: complexityRaw, factors: complexityFactors } = scoreSite(site);
+  const complexityLevel =
+    complexityRaw >= 4 ? 'Coordination-heavy yard.' : complexityRaw >= 2 ? 'A few moving parts to keep aligned.' : complexityRaw > 0 ? 'A relatively straightforward yard.' : null;
+  const insightLines = complexityFactors
+    .map((f) => FACTOR_INSIGHTS[f.key])
+    .filter((line): line is string => Boolean(line))
+    .slice(0, 3);
 
   return (
     <div className="flex h-full flex-col overflow-hidden">
@@ -118,6 +147,35 @@ export function SiteDetailPanel({ site, onClose, autoPlay = false }: Props) {
             rendered only where the audit found usable pano coverage. */}
         <ZoneStreetView geofences={site.geofences} />
 
+        {/* #3 — "What this means": the analytical read that turns the metric
+            grids below into something an operator can act on. Self-suppresses
+            on a site with no notable factors (compact offices, small docks). */}
+        {insightLines.length > 0 && (
+          <section data-ms-section-id="site-what-this-means" className="mb-5">
+            <div className="mb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-[#00B4FF]/85">
+              What this means
+            </div>
+            <div className="rounded-lg border border-[#00B4FF]/[0.16] bg-[#00B4FF]/[0.04] px-4 py-3">
+              {complexityLevel && (
+                <p className="mb-2 text-sm font-semibold text-white">{complexityLevel}</p>
+              )}
+              <ul className="space-y-1.5">
+                {insightLines.map((line) => (
+                  <li key={line} className="flex gap-2 text-[12.5px] leading-snug text-white/80">
+                    <span aria-hidden className="mt-[2px] shrink-0 text-[#00B4FF]/70">›</span>
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ul>
+              {complexityRaw >= 2 && (
+                <p className="mt-2.5 border-t border-white/10 pt-2 text-[11.5px] leading-snug text-white/55">
+                  The time here is in the moves between gate and dock, not the work at either end.
+                </p>
+              )}
+            </div>
+          </section>
+        )}
+
         {/* Yard metrics */}
         <div className="mb-4">
           <div className="mb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-white/55">Yard</div>
@@ -174,7 +232,7 @@ export function SiteDetailPanel({ site, onClose, autoPlay = false }: Props) {
             is rebuilt.) */}
         {site.uncertainFields.length > 0 && (
           <p className="border-t border-[#00B4FF]/[0.16] pt-3 text-[11px] text-white/55">
-            Low-confidence fields: {site.uncertainFields.join(', ')}. Imagery couldn't resolve these.{' '}
+            Low-confidence fields: {site.uncertainFields.join(', ')}. Imagery couldn&rsquo;t resolve these.{' '}
             <a
               href={`mailto:sales@freightroll.com?subject=Audit correction: ${encodeURIComponent(site.name)}&body=${encodeURIComponent(
                 `Site: ${site.name}\nField: \nCorrection: \n\n`,
