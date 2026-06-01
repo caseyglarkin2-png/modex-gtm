@@ -90,7 +90,7 @@ export function ZoneStreetView({ geofences }: { geofences: SiteGeofences }) {
     <section className="mb-5 mt-1">
       <div className="mb-2 flex items-baseline justify-between">
         <div className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-[#00B4FF]">
-          Driver&apos;s-eye walkthrough
+          {visible.length > 1 ? "Driver's-eye walkthrough" : "Driver's-eye view"}
         </div>
         <div className="font-mono text-[10px] text-white/40">
           {visible.length > 1 ? `Stop ${idx + 1} / ${visible.length} · ` : ''}Street View
