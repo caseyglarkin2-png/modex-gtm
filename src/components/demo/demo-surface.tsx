@@ -9,9 +9,6 @@ import { SiteDetailPanel } from './site-detail-panel';
 import { ArchetypeMixChart } from './archetype-mix-chart';
 import { CoverageHonesty } from './coverage-honesty';
 import { NetworkSimulator } from './network-simulator';
-import { DossierIntro } from './dossier-intro';
-import { SurprisingFindings } from './surprising-findings';
-import { AnchorTeardownVideo } from './anchor-teardown-video';
 import { RoiCtaButton } from './roi-cta-button';
 import { ShareMicrosite } from './share-microsite';
 import { DriverJourneySpotlight } from './driver-journey-spotlight';
@@ -477,27 +474,9 @@ export function DemoSurface({
         );
       })()}
 
-      {/* Network Insight — the "why" layer between the sim hook and the
-          atlas/proof: synthesizes the audit into the prospect's own friction
-          profile + the YNS levers that remove it. */}
+      {/* Network band — the single "what's my opportunity + what's it worth"
+          beat between the sim hook and the atlas/proof. */}
       {mode === 'standalone' && <NetworkInsight pack={pack} />}
-
-      {/* B.T3 + B.T7 — DossierIntro and SurprisingFindings sit between
-          the header / featured-site hero and the atlas. Both components
-          self-suppress on packs without the optional schema fields, so
-          legacy packs render unchanged. */}
-      {mode === 'standalone' && (
-        <>
-          <DossierIntro pack={pack} />
-          <SurprisingFindings pack={pack} />
-          {/* I.T6 — teardown video (renders only when the pack has a src). */}
-          <AnchorTeardownVideo
-            src={pack.account.teardownVideoSrc}
-            brand={displayName}
-            poster={featuredSiteThumbSrc}
-          />
-        </>
-      )}
 
       {/* Atlas view: split — map + donut/site-panel */}
       {view === 'atlas' && (
