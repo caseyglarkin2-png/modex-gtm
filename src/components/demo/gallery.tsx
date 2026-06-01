@@ -289,7 +289,7 @@ export function Gallery({ tiles, activeArchetype = null, totalTiles, initialDemo
   const gridRef = useParallaxGrid();
   return (
     <div
-      className="relative flex min-h-screen flex-col bg-[#050505] text-white"
+      className="relative flex min-h-screen flex-col overflow-x-clip bg-[#050505] text-white"
       style={{
         // Apply Mona Sans (loaded by the root layout as --font-memo-sans)
         // so prose inherits a proper operator sans. The Tailwind
