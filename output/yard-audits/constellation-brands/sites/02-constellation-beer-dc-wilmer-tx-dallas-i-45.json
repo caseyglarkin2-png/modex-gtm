@@ -1,18 +1,94 @@
 {
   "name": "Constellation Beer DC - Wilmer TX (Dallas I-45)",
   "type": "Distribution Center (beer cross-dock, rail-served)",
-  "coords": { "lat": 32.62120, "lng": -96.72950 },
+  "coords": {
+    "lat": 32.6212,
+    "lng": -96.7295
+  },
   "geofences": {
-    "perimeter": { "south": 32.61930, "west": -96.73270, "north": 32.62390, "east": -96.72560 },
-    "truckGate": { "south": 32.61840, "west": -96.73230, "north": 32.61960, "east": -96.73080 },
-    "dropYards": [
-      { "south": 32.61980, "west": -96.73000, "north": 32.62310, "east": -96.72620 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.623051,
+          "lng": -96.726753
+        },
+        {
+          "lat": 32.622357,
+          "lng": -96.725655
+        },
+        {
+          "lat": 32.618887,
+          "lng": -96.730873
+        },
+        {
+          "lat": 32.619581,
+          "lng": -96.732109
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.619349,
+          "lng": -96.732247
+        },
+        {
+          "lat": 32.619696,
+          "lng": -96.731697
+        },
+        {
+          "lat": 32.619349,
+          "lng": -96.731285
+        },
+        {
+          "lat": 32.619002,
+          "lng": -96.731835
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 32.61970, "west": -96.73120, "north": 32.62330, "east": -96.72660 },
-      { "south": 32.61990, "west": -96.73270, "north": 32.62340, "east": -96.72900 }
+      {
+        "ring": [
+          {
+            "lat": 32.619928,
+            "lng": -96.731423
+          },
+          {
+            "lat": 32.622472,
+            "lng": -96.726616
+          },
+          {
+            "lat": 32.62201,
+            "lng": -96.726204
+          },
+          {
+            "lat": 32.619465,
+            "lng": -96.731011
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": {
+      "ring": [
+        {
+          "lat": 32.619696,
+          "lng": -96.731835
+        },
+        {
+          "lat": 32.620969,
+          "lng": -96.7295
+        },
+        {
+          "lat": 32.620275,
+          "lng": -96.728813
+        },
+        {
+          "lat": 32.619002,
+          "lng": -96.731148
+        }
+      ]
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 64,
@@ -20,7 +96,7 @@
     "trailerParkingCapacity": 80,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 41.0,
+    "siteAreaAcres": 41,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@32.62120,-96.72950,400m/data=!3m1!1e3",
@@ -50,8 +126,13 @@
   },
   "confidence": "medium",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes",
-    "railServed", "dockDoorCount"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "railServed",
+    "dockDoorCount"
   ],
   "fieldNotes": {
     "_site": "Facility identified as the Biagi Bros / Constellation Brands beer cross-dock at 1401 W Wintergreen Rd, Hutchins TX 75141 (roster listed it as Wilmer, but the actual operating address per Biagi Bros' own website is W Wintergreen Rd, Hutchins — same I-45/I-20 logistics corridor immediately adjacent to Wilmer). Confirmed via Biagi Bros website, Evans General Contractors project page, Good Beer Hunting 2016 Sightlines, and current (2026-02) Street View showing the operating building.",

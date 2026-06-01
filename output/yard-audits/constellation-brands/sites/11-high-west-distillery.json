@@ -1,14 +1,34 @@
 {
   "name": "High West Distillery - Wanship UT",
   "type": "Distillery / Production Facility",
-  "coords": { "lat": 40.808264, "lng": -111.444419 },
+  "coords": {
+    "lat": 40.808264,
+    "lng": -111.444419
+  },
   "geofences": {
-    "perimeter": { "south": 40.806600, "west": -111.445800, "north": 40.809400, "east": -111.443200 },
-    "truckGate": { "south": 40.798100, "west": -111.447400, "north": 40.798500, "east": -111.446900 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.80868,
+          "lng": -111.445243
+        },
+        {
+          "lat": 40.808524,
+          "lng": -111.444144
+        },
+        {
+          "lat": 40.807536,
+          "lng": -111.44435
+        },
+        {
+          "lat": 40.807692,
+          "lng": -111.445449
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [],
-    "dockAprons": [
-      { "south": 40.808500, "west": -111.444950, "north": 40.808850, "east": -111.444550 }
-    ],
+    "dockAprons": [],
     "staging": null
   },
   "yardMetrics": {
@@ -17,7 +37,7 @@
     "trailerParkingCapacity": 3,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 11.0,
+    "siteAreaAcres": 11,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.808264,-111.444419,400m/data=!3m1!1e3",
@@ -46,7 +66,14 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "connectivityIssue", "multiStep", "buildingCount"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoors",
+    "connectivityIssue",
+    "multiStep",
+    "buildingCount"
+  ],
   "fieldNotes": {
     "truckGate": "High West's official distillery directions state visitors and deliveries follow Old Lincoln Highway ~2 miles to the 'Blue Sky Ranch gatehouse', after which they are directed to the distillery. The entire Blue Sky Ranch is gated private property reached by one access road — so a controlled property gate exists. Marked uncertain because the gatehouse structure could not be pinpointed in satellite imagery (no Street View on the private road) and it controls the whole ranch resort, not the distillery dock specifically. The truckGate geofence is an approximate box near the base parking area.",
     "guardShack": "A 'gatehouse' is explicitly described in High West's official directions, implying a staffed booth at the ranch entrance. Could not be visually confirmed in imagery; marked uncertain.",

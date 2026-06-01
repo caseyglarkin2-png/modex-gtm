@@ -1,18 +1,107 @@
 {
   "name": "Constellation Beer DC - Jacksonville FL",
   "type": "Distribution Center (beer, rail-served)",
-  "coords": { "lat": 30.42385, "lng": -81.63238 },
+  "coords": {
+    "lat": 30.42385,
+    "lng": -81.63238
+  },
   "geofences": {
-    "perimeter": { "south": 30.42175, "west": -81.63400, "north": 30.42560, "east": -81.63070 },
-    "truckGate": { "south": 30.42510, "west": -81.63180, "north": 30.42585, "east": -81.63100 },
-    "dropYards": [
-      { "south": 30.42180, "west": -81.63170, "north": 30.42530, "east": -81.63070 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 30.425212,
+          "lng": -81.633341
+        },
+        {
+          "lat": 30.425153,
+          "lng": -81.631281
+        },
+        {
+          "lat": 30.422192,
+          "lng": -81.63135
+        },
+        {
+          "lat": 30.422251,
+          "lng": -81.63341
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 30.425212,
+          "lng": -81.633273
+        },
+        {
+          "lat": 30.425212,
+          "lng": -81.632792
+        },
+        {
+          "lat": 30.425034,
+          "lng": -81.632792
+        },
+        {
+          "lat": 30.425034,
+          "lng": -81.633273
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 30.42190, "west": -81.63215, "north": 30.42530, "east": -81.63150 },
-      { "south": 30.42190, "west": -81.63340, "north": 30.42530, "east": -81.63270 }
+      {
+        "ring": [
+          {
+            "lat": 30.425034,
+            "lng": -81.633341
+          },
+          {
+            "lat": 30.425034,
+            "lng": -81.632929
+          },
+          {
+            "lat": 30.42237,
+            "lng": -81.632929
+          },
+          {
+            "lat": 30.42237,
+            "lng": -81.633341
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 30.425034,
+            "lng": -81.631693
+          },
+          {
+            "lat": 30.425034,
+            "lng": -81.63135
+          },
+          {
+            "lat": 30.42237,
+            "lng": -81.631419
+          },
+          {
+            "lat": 30.42237,
+            "lng": -81.631762
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 161,
+        "pano": "bl9cwO1gWMOtSvV9ubnmdg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 161,
+        "pano": "bl9cwO1gWMOtSvV9ubnmdg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 54,
@@ -20,7 +109,7 @@
     "trailerParkingCapacity": 60,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 25.0,
+    "siteAreaAcres": 25,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@30.42385,-81.63238,400m/data=!3m1!1e3",
@@ -49,7 +138,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["trailersVisible", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "trailersVisible",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "_site": "Positively identified as the Constellation Brands beer DC at 600 Whittaker Road, Imeson Industrial Park, North Jacksonville FL — 469,830 SF on 24 acres, 54 docks, ~1.5 mi east of I-95, first Constellation DC in North Florida; receives beer by rail, distributes by truck. Confirmed via Jacksonville Daily Record (2022), CBRE, REBusinessOnline, and current 2025/2026 satellite + 2025-02 Street View.",
     "_geocode": "Roster pin (ROOFTOP, moved 204 m) landed on the correct building; locked center refined to the building centroid 30.42385, -81.63238.",

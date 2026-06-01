@@ -1,39 +1,147 @@
 {
   "name": "Fort Worth Regional Distribution Center - Fort Worth TX",
   "type": "Regional Distribution Center (aerosol storage)",
-  "coords": { "lat": 32.96895, "lng": -97.33145 },
+  "coords": {
+    "lat": 32.96895,
+    "lng": -97.33145
+  },
   "geofences": {
-    "perimeter": { "south": 32.96690, "west": -97.33300, "north": 32.97090, "east": -97.32990 },
-    "truckGate": { "south": 32.96720, "west": -97.33380, "north": 32.96770, "east": -97.33310 },
-    "dropYards": [
-      { "south": 32.96730, "west": -97.33290, "north": 32.97090, "east": -97.33200 },
-      { "south": 32.96730, "west": -97.33080, "north": 32.97090, "east": -97.32990 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.970102,
+          "lng": -97.332823
+        },
+        {
+          "lat": 32.970102,
+          "lng": -97.330626
+        },
+        {
+          "lat": 32.967683,
+          "lng": -97.330626
+        },
+        {
+          "lat": 32.967683,
+          "lng": -97.332823
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.967337,
+          "lng": -97.333647
+        },
+        {
+          "lat": 32.967337,
+          "lng": -97.333235
+        },
+        {
+          "lat": 32.967107,
+          "lng": -97.333235
+        },
+        {
+          "lat": 32.967107,
+          "lng": -97.333647
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 32.96740, "west": -97.33220, "north": 32.97070, "east": -97.33170 },
-      { "south": 32.96740, "west": -97.33130, "north": 32.97070, "east": -97.33080 }
+      {
+        "ring": [
+          {
+            "lat": 32.969929,
+            "lng": -97.332961
+          },
+          {
+            "lat": 32.969929,
+            "lng": -97.332686
+          },
+          {
+            "lat": 32.967798,
+            "lng": -97.332686
+          },
+          {
+            "lat": 32.967798,
+            "lng": -97.332961
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 32.969929,
+            "lng": -97.330626
+          },
+          {
+            "lat": 32.969929,
+            "lng": -97.330351
+          },
+          {
+            "lat": 32.967798,
+            "lng": -97.330351
+          },
+          {
+            "lat": 32.967798,
+            "lng": -97.330626
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 54,
+        "pano": "cAPFAwg17eu3Ulx3ZCNkQw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 54,
+        "pano": "cAPFAwg17eu3Ulx3ZCNkQw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 120, "trailersVisible": 95, "trailerParkingCapacity": 140,
-    "truckGateCount": 2, "buildingCount": 1, "siteAreaAcres": 30.0,
+    "dockDoorCount": 120,
+    "trailersVisible": 95,
+    "trailerParkingCapacity": 140,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 30,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.96895,-97.33145,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Truck driveways enter the site from the perimeter industrial road on the SW (Transport Dr side) and around the building with no barrier arm, sliding gate, or checkpoint. Street View (Sep 2025) of the truck roads shows wide-open paved driveways with no control. Open site.",
     "guardShack": "No staffed booth at any truck entrance. The dark elongated structure beside the SW driveway in z20 imagery is a parked trailer/container, not a guard booth.",

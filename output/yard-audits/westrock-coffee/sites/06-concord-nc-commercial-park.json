@@ -1,15 +1,108 @@
 {
   "name": "Westrock Coffee - Concord NC Commercial Park Extract & Tea Facility",
   "type": "Extract & Tea Manufacturing",
-  "coords": { "lat": 35.392817, "lng": -80.616512 },
+  "coords": {
+    "lat": 35.392817,
+    "lng": -80.616512
+  },
   "geofences": {
-    "perimeter": { "south": 35.391650, "west": -80.617900, "north": 35.393900, "east": -80.615700 },
-    "truckGate": null,
-    "dropYards": [],
-    "dockAprons": [
-      { "south": 35.392050, "west": -80.617350, "north": 35.392500, "east": -80.616750 }
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.393349,
+          "lng": -80.617508
+        },
+        {
+          "lat": 35.393629,
+          "lng": -80.616134
+        },
+        {
+          "lat": 35.392481,
+          "lng": -80.615551
+        },
+        {
+          "lat": 35.392201,
+          "lng": -80.616924
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.393377,
+          "lng": -80.617679
+        },
+        {
+          "lat": 35.393433,
+          "lng": -80.617405
+        },
+        {
+          "lat": 35.393181,
+          "lng": -80.617322
+        },
+        {
+          "lat": 35.393125,
+          "lng": -80.617597
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 35.392481,
+            "lng": -80.617473
+          },
+          {
+            "lat": 35.392638,
+            "lng": -80.616718
+          },
+          {
+            "lat": 35.39238,
+            "lng": -80.616636
+          },
+          {
+            "lat": 35.392224,
+            "lng": -80.617391
+          }
+        ]
+      }
     ],
-    "staging": null
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 35.392677,
+            "lng": -80.61737
+          },
+          {
+            "lat": 35.392817,
+            "lng": -80.616718
+          },
+          {
+            "lat": 35.392565,
+            "lng": -80.616636
+          },
+          {
+            "lat": 35.392425,
+            "lng": -80.617288
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 169,
+        "pano": "uVxespRzwavoxDgZjwBjZA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 169,
+        "pano": "uVxespRzwavoxDgZjwBjZA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 9,
@@ -17,23 +110,39 @@
     "trailerParkingCapacity": 8,
     "truckGateCount": 0,
     "buildingCount": 1,
-    "siteAreaAcres": 6.0,
+    "siteAreaAcres": 6,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.392817,-80.616512,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "0-10", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "No controlled truck entrance. Multiple Street View captures (2019, 2020, 2023, 2026) of Commercial Park Drive SW and the building's dock side show open driveways, no barrier arm, no sliding gate, and no checkpoint pinch-point. The only fencing seen is a small chain-link enclosure around process/utility equipment on the building flank — not a perimeter or gate.",
     "guardShack": "No staffed booth visible at the entrance or anywhere on the parcel.",

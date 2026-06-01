@@ -1,19 +1,87 @@
 {
   "name": "Bay City Plant (Ziploc) - Bay City MI",
   "type": "Manufacturing Plant (Home Storage - Ziploc)",
-  "coords": { "lat": 43.62050, "lng": -83.87050 },
+  "coords": {
+    "lat": 43.6205,
+    "lng": -83.8705
+  },
   "geofences": {
-    "perimeter": { "south": 43.61560, "west": -83.87380, "north": 43.62560, "east": -83.86450 },
-    "truckGate": { "south": 43.62300, "west": -83.87340, "north": 43.62390, "east": -83.87230 },
-    "dropYards": [
-      { "south": 43.62360, "west": -83.87340, "north": 43.62540, "east": -83.86950 },
-      { "south": 43.61860, "west": -83.87120, "north": 43.62000, "east": -83.86850 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 43.622488,
+          "lng": -83.873247
+        },
+        {
+          "lat": 43.622091,
+          "lng": -83.867204
+        },
+        {
+          "lat": 43.616126,
+          "lng": -83.867479
+        },
+        {
+          "lat": 43.616523,
+          "lng": -83.873521
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 43.619506,
+          "lng": -83.874345
+        },
+        {
+          "lat": 43.619506,
+          "lng": -83.873247
+        },
+        {
+          "lat": 43.618512,
+          "lng": -83.873247
+        },
+        {
+          "lat": 43.618512,
+          "lng": -83.874345
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 43.62240, "west": -83.87340, "north": 43.62330, "east": -83.86650 },
-      { "south": 43.61940, "west": -83.87320, "north": 43.62030, "east": -83.87200 }
+      {
+        "ring": [
+          {
+            "lat": 43.6205,
+            "lng": -83.872148
+          },
+          {
+            "lat": 43.620301,
+            "lng": -83.868303
+          },
+          {
+            "lat": 43.619506,
+            "lng": -83.868303
+          },
+          {
+            "lat": 43.619705,
+            "lng": -83.872148
+          }
+        ]
+      }
     ],
-    "staging": { "south": 43.62000, "west": -83.87320, "north": 43.62160, "east": -83.87170 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 127,
+        "pano": "0wJL8NwknUVf9QsdIP40AA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 127,
+        "pano": "0wJL8NwknUVf9QsdIP40AA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 45,
@@ -21,23 +89,44 @@
     "trailerParkingCapacity": 130,
     "truckGateCount": 2,
     "buildingCount": 8,
-    "siteAreaAcres": 400.0,
+    "siteAreaAcres": 400,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@43.6205,-83.8705,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "truckGateCount", "scale", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "truckGateCount",
+    "scale",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Large perimeter-fenced campus (chain-link fencing confirmed in Street View along the property edge). Buildings sit behind the fence with controlled access drives; classified as a gated site.",
     "guardShack": "No manned guard booth positively identified at any entrance from available Street View; entrances appear to be fenced drives without a visible booth. Left false but flagged uncertain.",

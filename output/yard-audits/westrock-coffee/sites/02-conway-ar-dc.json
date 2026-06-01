@@ -1,18 +1,94 @@
 {
   "name": "Westrock Coffee - Conway AR Distribution Center",
   "type": "Distribution Center",
-  "coords": { "lat": 35.060700, "lng": -92.406700 },
+  "coords": {
+    "lat": 35.0607,
+    "lng": -92.4067
+  },
   "geofences": {
-    "perimeter": { "south": 35.058900, "west": -92.408500, "north": 35.062100, "east": -92.404900 },
-    "truckGate": { "south": 35.059000, "west": -92.408300, "north": 35.059400, "east": -92.407700 },
-    "dropYards": [
-      { "south": 35.059500, "west": -92.408400, "north": 35.061400, "east": -92.407800 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.06188,
+          "lng": -92.408073
+        },
+        {
+          "lat": 35.061965,
+          "lng": -92.405052
+        },
+        {
+          "lat": 35.060756,
+          "lng": -92.404915
+        },
+        {
+          "lat": 35.060644,
+          "lng": -92.407867
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.061796,
+          "lng": -92.408073
+        },
+        {
+          "lat": 35.061824,
+          "lng": -92.407764
+        },
+        {
+          "lat": 35.061571,
+          "lng": -92.40773
+        },
+        {
+          "lat": 35.061543,
+          "lng": -92.408039
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 35.059400, "west": -92.408000, "north": 35.061700, "east": -92.407300 },
-      { "south": 35.059300, "west": -92.407300, "north": 35.059800, "east": -92.405400 }
+      {
+        "ring": [
+          {
+            "lat": 35.060953,
+            "lng": -92.407867
+          },
+          {
+            "lat": 35.061093,
+            "lng": -92.405601
+          },
+          {
+            "lat": 35.060756,
+            "lng": -92.405546
+          },
+          {
+            "lat": 35.060616,
+            "lng": -92.407812
+          }
+        ]
+      }
     ],
-    "staging": { "south": 35.059000, "west": -92.407800, "north": 35.059500, "east": -92.406400 }
+    "staging": {
+      "ring": [
+        {
+          "lat": 35.059182,
+          "lng": -92.407764
+        },
+        {
+          "lat": 35.059239,
+          "lng": -92.405327
+        },
+        {
+          "lat": 35.05893,
+          "lng": -92.405292
+        },
+        {
+          "lat": 35.058873,
+          "lng": -92.40773
+        }
+      ]
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 72,
@@ -20,23 +96,40 @@
     "trailerParkingCapacity": 90,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 30.0,
+    "siteAreaAcres": 30,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.060700,-92.406700,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Confirmed as 1430 William J. Clark Drive. Street View (2024-07) from William J. Clark Dr looking NE shows '1430' clearly on the building's office-entry facade. This is the Westrock Coffee DC: $70M, 530,000 sq ft, ~30-acre site, 36-ft clear, ~72 dock doors, ESFR, developed by Tempus Realty Partners, completed late 2023.",
     "truckGate": "Chain-link perimeter fencing runs across the property frontage along William J. Clark Drive (visible in 2024-07 Street View and z19/z20 satellite). A truck driveway enters at the SW with a gate in the fence line; the truck yard is fully enclosed.",

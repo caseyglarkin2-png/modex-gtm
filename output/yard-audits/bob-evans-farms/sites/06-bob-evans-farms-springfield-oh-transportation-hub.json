@@ -1,16 +1,183 @@
 {
   "name": "Bob Evans Farms - Springfield OH Transportation Hub",
   "type": "Distribution / transportation hub (private fleet terminal - Bob Evans Transportation Company LLC, USDOT 911163; ~100 tractor-trailers)",
-  "coords": { "lat": 39.838000, "lng": -83.857200 },
+  "coords": {
+    "lat": 39.838,
+    "lng": -83.8572
+  },
   "geofences": {
-    "perimeter": { "south": 39.836100, "west": -83.858700, "north": 39.839700, "east": -83.855600 },
-    "truckGate": { "south": 39.838300, "west": -83.856500, "north": 39.838700, "east": -83.855900 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.840109,
+          "lng": -83.858985
+        },
+        {
+          "lat": 39.840425,
+          "lng": -83.857543
+        },
+        {
+          "lat": 39.838422,
+          "lng": -83.856376
+        },
+        {
+          "lat": 39.836524,
+          "lng": -83.856513
+        },
+        {
+          "lat": 39.836102,
+          "lng": -83.858573
+        },
+        {
+          "lat": 39.837736,
+          "lng": -83.859535
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.83626,
+          "lng": -83.858779
+        },
+        {
+          "lat": 39.836313,
+          "lng": -83.858436
+        },
+        {
+          "lat": 39.836049,
+          "lng": -83.858367
+        },
+        {
+          "lat": 39.835996,
+          "lng": -83.858711
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 39.837100, "west": -83.858400, "north": 39.838900, "east": -83.857500 },
-      { "south": 39.837100, "west": -83.857000, "north": 39.838900, "east": -83.856100 }
+      {
+        "ring": [
+          {
+            "lat": 39.839371,
+            "lng": -83.858367
+          },
+          {
+            "lat": 39.839582,
+            "lng": -83.856857
+          },
+          {
+            "lat": 39.838844,
+            "lng": -83.856719
+          },
+          {
+            "lat": 39.838633,
+            "lng": -83.85823
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 39.838422,
+            "lng": -83.858573
+          },
+          {
+            "lat": 39.83858,
+            "lng": -83.8572
+          },
+          {
+            "lat": 39.838,
+            "lng": -83.857131
+          },
+          {
+            "lat": 39.837842,
+            "lng": -83.858505
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 39.837736,
+            "lng": -83.858573
+          },
+          {
+            "lat": 39.837895,
+            "lng": -83.857337
+          },
+          {
+            "lat": 39.837209,
+            "lng": -83.857269
+          },
+          {
+            "lat": 39.837051,
+            "lng": -83.858505
+          }
+        ]
+      }
     ],
-    "dockAprons": [],
-    "staging": { "south": 39.837600, "west": -83.857500, "north": 39.838500, "east": -83.857000 }
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 39.838158,
+            "lng": -83.858367
+          },
+          {
+            "lat": 39.838264,
+            "lng": -83.857543
+          },
+          {
+            "lat": 39.837895,
+            "lng": -83.857475
+          },
+          {
+            "lat": 39.837789,
+            "lng": -83.858299
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 39.837051,
+            "lng": -83.858779
+          },
+          {
+            "lat": 39.837209,
+            "lng": -83.8572
+          },
+          {
+            "lat": 39.836893,
+            "lng": -83.857131
+          },
+          {
+            "lat": 39.836735,
+            "lng": -83.858711
+          }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        {
+          "lat": 39.838422,
+          "lng": -83.858573
+        },
+        {
+          "lat": 39.83858,
+          "lng": -83.857131
+        },
+        {
+          "lat": 39.837156,
+          "lng": -83.857063
+        },
+        {
+          "lat": 39.837051,
+          "lng": -83.858505
+        }
+      ]
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 4,
@@ -18,23 +185,45 @@
     "trailerParkingCapacity": 160,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 26.0,
+    "siteAreaAcres": 26,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.838000,-83.857200,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "0-10", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "imagery": "Only available satellite coverage of this site is heavy snow-cover imagery, which obscures fine ground detail (gate hardware, booths, lane markings). No Street View coverage reaches the property. Overall confidence set to medium.",
     "truckGate": "This is a private fleet terminal (Bob Evans Transportation Company, USDOT 911163; ~126 tractors, 100+ tractor-trailers, 20,000 deliveries/yr). The terminal is reached via an internal campus road off Green-Field Dr. A controlled truck entrance is the strong norm for a private fleet hub of this scale, but the gate hardware cannot be positively confirmed in the snow imagery -- flagged uncertain.",

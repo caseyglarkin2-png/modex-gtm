@@ -1,15 +1,42 @@
 {
   "name": "Booker Vineyard / My Favorite Neighbor - Paso Robles CA",
   "type": "Winery / Production Facility",
-  "coords": { "lat": 35.578650, "lng": -120.740150 },
+  "coords": {
+    "lat": 35.57865,
+    "lng": -120.74015
+  },
   "geofences": {
-    "perimeter": { "south": 35.577900, "west": -120.741200, "north": 35.579600, "east": -120.738800 },
-    "truckGate": { "south": 35.578120, "west": -120.740300, "north": 35.578320, "east": -120.740000 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.578985,
+          "lng": -120.74015
+        },
+        {
+          "lat": 35.578873,
+          "lng": -120.739326
+        },
+        {
+          "lat": 35.578315,
+          "lng": -120.739463
+        },
+        {
+          "lat": 35.578427,
+          "lng": -120.740287
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [],
-    "dockAprons": [
-      { "south": 35.578400, "west": -120.740350, "north": 35.578800, "east": -120.739900 }
-    ],
-    "staging": null
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 54,
+        "pano": "OEQu4ccZ0t0i22vn9DF6lg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 2,
@@ -17,7 +44,7 @@
     "trailerParkingCapacity": 3,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 14.0,
+    "siteAreaAcres": 14,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.578650,-120.740150,400m/data=!3m1!1e3",
@@ -46,7 +73,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoors", "connectivityIssue"],
+  "uncertainFields": [
+    "dockDoors",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "truckGate": "Driveway entrance off Anderson Road has a low decorative metal arch / cattle-grate gate frame, not a barrier arm or a controlled checkpoint that closes the truck lane. Wire stock fencing along the property line. Treated as open estate access — truckGate false.",
     "guardShack": "No staffed booth at the entrance. Estate-style entry with decorative metalwork only.",

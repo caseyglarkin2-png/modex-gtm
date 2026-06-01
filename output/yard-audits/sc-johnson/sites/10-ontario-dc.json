@@ -1,38 +1,116 @@
 {
   "name": "Ontario Distribution Center - Ontario CA",
   "type": "Distribution Center (aerosol storage)",
-  "coords": { "lat": 34.04610, "lng": -117.61840 },
+  "coords": {
+    "lat": 34.0461,
+    "lng": -117.6184
+  },
   "geofences": {
-    "perimeter": { "south": 34.04500, "west": -117.61970, "north": 34.04720, "east": -117.61730 },
-    "truckGate": { "south": 34.04530, "west": -117.61960, "north": 34.04570, "east": -117.61910 },
-    "dropYards": [
-      { "south": 34.04545, "west": -117.61960, "north": 34.04690, "east": -117.61905 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.046783,
+          "lng": -117.619224
+        },
+        {
+          "lat": 34.046783,
+          "lng": -117.617576
+        },
+        {
+          "lat": 34.044962,
+          "lng": -117.617576
+        },
+        {
+          "lat": 34.044962,
+          "lng": -117.619224
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.046555,
+          "lng": -117.619499
+        },
+        {
+          "lat": 34.046555,
+          "lng": -117.619224
+        },
+        {
+          "lat": 34.046328,
+          "lng": -117.619224
+        },
+        {
+          "lat": 34.046328,
+          "lng": -117.619499
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 34.04545, "west": -117.61905, "north": 34.04690, "east": -117.61870 },
-      { "south": 34.04510, "west": -117.61870, "north": 34.04540, "east": -117.61740 }
+      {
+        "ring": [
+          {
+            "lat": 34.046669,
+            "lng": -117.619224
+          },
+          {
+            "lat": 34.046669,
+            "lng": -117.618949
+          },
+          {
+            "lat": 34.045076,
+            "lng": -117.618949
+          },
+          {
+            "lat": 34.045076,
+            "lng": -117.619224
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 45, "trailersVisible": 20, "trailerParkingCapacity": 55,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 13.0,
+    "dockDoorCount": 45,
+    "trailersVisible": 20,
+    "trailerParkingCapacity": 55,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 13,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.04610,-117.61840,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "trailersVisible"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "trailersVisible"
+  ],
   "fieldNotes": {
     "tenancy": "ROSTER NOTE CONFIRMED: the building at 1545 E Locust St, Bldg 7 (Thoroughbred Business Park Phase II, APN 0113-441-12, ~268,830 sq ft, built 1997/98) is now branded and operated by Smart Warehousing, a 3PL — Street View (Feb/May 2025) shows a 'Smart Warehousing' sign on the office face. The EPA RMP 'Ontario Distribution Center' historically tied SC Johnson aerosol storage to this address; SCJ's current direct tenancy here is doubtful — likely a 3PL-operated DC that may still handle SCJ aerosol product or have transitioned. Audited as the physical RDC site per the roster.",
     "location": "Confirmed via EPA RMP record (Ontario Distribution Center) + LoopNet APN listing (0113-441-12, 1545 E Locust St) + Smart Warehousing 'Ontario #2' warehouse listing. Roster geocode moved 125 m and lands on the correct building.",

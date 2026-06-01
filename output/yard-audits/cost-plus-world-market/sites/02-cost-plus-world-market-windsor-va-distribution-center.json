@@ -1,19 +1,128 @@
 {
   "name": "Cost Plus World Market - Windsor VA Distribution Center",
   "type": "Distribution Center / Import Warehouse (East Coast)",
-  "coords": { "lat": 36.799902, "lng": -76.713042 },
+  "coords": {
+    "lat": 36.799902,
+    "lng": -76.713042
+  },
   "geofences": {
-    "perimeter": { "south": 36.79800, "west": -76.71900, "north": 36.80160, "east": -76.71050 },
-    "truckGate": { "south": 36.79820, "west": -76.71320, "north": 36.79870, "east": -76.71250 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.800122,
+          "lng": -76.71984
+        },
+        {
+          "lat": 36.800452,
+          "lng": -76.712287
+        },
+        {
+          "lat": 36.798088,
+          "lng": -76.712149
+        },
+        {
+          "lat": 36.797703,
+          "lng": -76.719702
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 36.800232,
+          "lng": -76.71984
+        },
+        {
+          "lat": 36.800254,
+          "lng": -76.719084
+        },
+        {
+          "lat": 36.799902,
+          "lng": -76.719057
+        },
+        {
+          "lat": 36.79988,
+          "lng": -76.719812
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 36.80020, "west": -76.71800, "north": 36.80080, "east": -76.71150 },
-      { "south": 36.79830, "west": -76.71800, "north": 36.79890, "east": -76.71250 }
+      {
+        "ring": [
+          {
+            "lat": 36.800672,
+            "lng": -76.71984
+          },
+          {
+            "lat": 36.800782,
+            "lng": -76.71675
+          },
+          {
+            "lat": 36.800177,
+            "lng": -76.716709
+          },
+          {
+            "lat": 36.800144,
+            "lng": -76.719799
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 36.80000, "west": -76.71800, "north": 36.80020, "east": -76.71150 },
-      { "south": 36.79880, "west": -76.71800, "north": 36.79900, "east": -76.71200 }
+      {
+        "ring": [
+          {
+            "lat": 36.800232,
+            "lng": -76.719634
+          },
+          {
+            "lat": 36.800507,
+            "lng": -76.712218
+          },
+          {
+            "lat": 36.800122,
+            "lng": -76.712177
+          },
+          {
+            "lat": 36.799847,
+            "lng": -76.719593
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 36.798253,
+            "lng": -76.719661
+          },
+          {
+            "lat": 36.798527,
+            "lng": -76.712218
+          },
+          {
+            "lat": 36.798088,
+            "lng": -76.712177
+          },
+          {
+            "lat": 36.797758,
+            "lng": -76.71962
+          }
+        ]
+      }
     ],
-    "staging": { "south": 36.79830, "west": -76.71350, "north": 36.79900, "east": -76.71240 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 195,
+        "pano": "aQPcAPNr_jd3rMBr-K7MHg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 195,
+        "pano": "aQPcAPNr_jd3rMBr-K7MHg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 110,
@@ -21,7 +130,7 @@
     "trailerParkingCapacity": 180,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 75.0,
+    "siteAreaAcres": 75,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@36.799902,-76.713042,400m/data=!3m1!1e3",
@@ -50,7 +159,12 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "shipRcvSeparate", "connectivityIssue"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "truckGate": "Trucks use a dedicated gate separate from the car/office entrance. The west driveway off Route 460 carries a 'NO TRUCKS' sign (Street View). The truck route wraps to the SE corner of the building where a controlled gate / guard-booth pinch-point sits beside the truck lane.",
     "guardShack": "A small rectangular guard-booth structure is clearly visible at z20 sitting on a triangular paved island at the SE corner of the building, with the truck lane splitting around it (in/out). Web research (TruckMap driver notes) explicitly states 'Check-in is at the security guard shack.' High confidence.",

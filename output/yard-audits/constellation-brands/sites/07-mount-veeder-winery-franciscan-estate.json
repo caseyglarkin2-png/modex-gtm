@@ -1,9 +1,31 @@
 {
   "name": "Mount Veeder Winery / Franciscan Estate - Napa CA",
   "type": "Winery / Production Facility",
-  "coords": { "lat": 38.360450, "lng": -122.401900 },
+  "coords": {
+    "lat": 38.36045,
+    "lng": -122.4019
+  },
   "geofences": {
-    "perimeter": { "south": 38.357500, "west": -122.405200, "north": 38.363500, "east": -122.399000 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.361311,
+          "lng": -122.403823
+        },
+        {
+          "lat": 38.361204,
+          "lng": -122.401213
+        },
+        {
+          "lat": 38.359158,
+          "lng": -122.401351
+        },
+        {
+          "lat": 38.359265,
+          "lng": -122.40396
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [],
@@ -15,7 +37,7 @@
     "trailerParkingCapacity": 0,
     "truckGateCount": 0,
     "buildingCount": 1,
-    "siteAreaAcres": 60.0,
+    "siteAreaAcres": 60,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@38.360450,-122.401900,400m/data=!3m1!1e3",
@@ -44,7 +66,12 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoors", "connectivityIssue", "siteAreaAcres", "drivewayShort"],
+  "uncertainFields": [
+    "dockDoors",
+    "connectivityIssue",
+    "siteAreaAcres",
+    "drivewayShort"
+  ],
   "fieldNotes": {
     "facilityResolution": "Roster coords (38.298851, -122.282898) landed on the downtown Napa tasting room (930 3rd St). The actual Mount Veeder estate is the hillside vineyard at 1999 Mt Veeder Rd, Napa — geocoded via Google Geocoding API to 38.3606213, -122.4017761 (ROOFTOP). Audited the estate.",
     "facilityNature": "This is a hillside vineyard estate, not a freight/production warehouse. Web research: Mount Veeder Winery is a Constellation brand whose bulk wine has historically been produced at the shared Franciscan/Galleron Road facility (now The Prisoner Wine Co., idx 6). The Mt Veeder Rd site is a terraced mountain vineyard with one modest estate building. Franciscan Estate brand itself was sold to E&J Gallo in 2021 and is no longer Constellation-owned; Mount Veeder remains with Constellation.",

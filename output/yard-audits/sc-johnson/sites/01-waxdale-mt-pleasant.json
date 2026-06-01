@@ -1,20 +1,108 @@
 {
   "name": "Waxdale Plant - Mt. Pleasant WI",
   "type": "Manufacturing Plant (Aerosol / Liquid / Gel)",
-  "coords": { "lat": 42.70750, "lng": -87.88500 },
+  "coords": {
+    "lat": 42.7075,
+    "lng": -87.885
+  },
   "geofences": {
-    "perimeter": { "south": 42.70180, "west": -87.89050, "north": 42.71280, "east": -87.88100 },
-    "truckGate": { "south": 42.71160, "west": -87.88660, "north": 42.71300, "east": -87.88520 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.711536,
+          "lng": -87.88912
+        },
+        {
+          "lat": 42.710729,
+          "lng": -87.880605
+        },
+        {
+          "lat": 42.706491,
+          "lng": -87.879507
+        },
+        {
+          "lat": 42.703463,
+          "lng": -87.880056
+        },
+        {
+          "lat": 42.702858,
+          "lng": -87.885
+        },
+        {
+          "lat": 42.703867,
+          "lng": -87.887747
+        },
+        {
+          "lat": 42.708509,
+          "lng": -87.888845
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.703262,
+          "lng": -87.886099
+        },
+        {
+          "lat": 42.703262,
+          "lng": -87.884451
+        },
+        {
+          "lat": 42.702454,
+          "lng": -87.884451
+        },
+        {
+          "lat": 42.702454,
+          "lng": -87.886099
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 42.70980, "west": -87.88780, "north": 42.71150, "east": -87.88560 },
-      { "south": 42.70700, "west": -87.88780, "north": 42.70880, "east": -87.88560 },
-      { "south": 42.70560, "west": -87.88560, "north": 42.70900, "east": -87.88420 }
+      {
+        "ring": [
+          {
+            "lat": 42.710931,
+            "lng": -87.888571
+          },
+          {
+            "lat": 42.710729,
+            "lng": -87.886373
+          },
+          {
+            "lat": 42.708913,
+            "lng": -87.886373
+          },
+          {
+            "lat": 42.709115,
+            "lng": -87.888571
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 42.70820, "west": -87.88560, "north": 42.70920, "east": -87.88380 },
-      { "south": 42.70560, "west": -87.88420, "north": 42.70680, "east": -87.88250 }
+      {
+        "ring": [
+          {
+            "lat": 42.710124,
+            "lng": -87.884451
+          },
+          {
+            "lat": 42.70972,
+            "lng": -87.881155
+          },
+          {
+            "lat": 42.708711,
+            "lng": -87.881429
+          },
+          {
+            "lat": 42.709115,
+            "lng": -87.884451
+          }
+        ]
+      }
     ],
-    "staging": { "south": 42.70950, "west": -87.88660, "north": 42.71160, "east": -87.88520 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 90,
@@ -22,23 +110,40 @@
     "trailerParkingCapacity": 320,
     "truckGateCount": 1,
     "buildingCount": 9,
-    "siteAreaAcres": 218.0,
+    "siteAreaAcres": 218,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@42.7075,-87.885,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "scale"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "Engineered multi-lane controlled entry at the head of the private north boulevard (~42.7121, -87.8860); white directional lane arrows split inbound/outbound around a central guard building.",
     "guardShack": "Substantial central guardhouse with hipped roof, ~3-4 vehicle footprint, set in the median of the entry boulevard with traffic lanes routed around both sides. Larger than a typical booth but functions as the manned gate house.",

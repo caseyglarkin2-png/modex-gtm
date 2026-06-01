@@ -1,15 +1,42 @@
 {
   "name": "Lingua Franca Winery - Salem OR",
   "type": "Winery / Production Facility",
-  "coords": { "lat": 45.073200, "lng": -123.093450 },
+  "coords": {
+    "lat": 45.0732,
+    "lng": -123.09345
+  },
   "geofences": {
-    "perimeter": { "south": 45.072400, "west": -123.094300, "north": 45.074600, "east": -123.092300 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 45.073685,
+          "lng": -123.094274
+        },
+        {
+          "lat": 45.073685,
+          "lng": -123.093038
+        },
+        {
+          "lat": 45.072812,
+          "lng": -123.093038
+        },
+        {
+          "lat": 45.072812,
+          "lng": -123.094274
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
-    "dockAprons": [
-      { "south": 45.072800, "west": -123.093700, "north": 45.073150, "east": -123.093250 }
-    ],
-    "staging": null
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 240,
+        "pano": "dJ8aa1b_tDq6fZqeCaoljw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 3,
@@ -17,7 +44,7 @@
     "trailerParkingCapacity": 3,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 9.0,
+    "siteAreaAcres": 9,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@45.073200,-123.093450,400m/data=!3m1!1e3",
@@ -46,7 +73,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoors", "connectivityIssue"],
+  "uncertainFields": [
+    "dockDoors",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "truckGate": "No controlled truck entrance. A long winery driveway runs off Hopewell Road NW (set back, screened by trees/hedgerow with winery signs at the road) to the parking lot and building; no barrier arm, gate, or checkpoint visible.",
     "guardShack": "No staffed booth anywhere on the property.",

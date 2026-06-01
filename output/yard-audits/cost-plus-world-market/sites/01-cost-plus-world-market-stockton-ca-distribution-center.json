@@ -1,20 +1,147 @@
 {
   "name": "Cost Plus World Market - Stockton CA Distribution Center",
   "type": "Distribution Center / Import Warehouse (West Coast)",
-  "coords": { "lat": 37.916788, "lng": -121.25568 },
+  "coords": {
+    "lat": 37.916788,
+    "lng": -121.25568
+  },
   "geofences": {
-    "perimeter": { "south": 37.91350, "west": -121.25960, "north": 37.91870, "east": -121.25180 },
-    "truckGate": { "south": 37.91560, "west": -121.25300, "north": 37.91640, "east": -121.25210 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.919009,
+          "lng": -121.260143
+        },
+        {
+          "lat": 37.919226,
+          "lng": -121.253963
+        },
+        {
+          "lat": 37.915434,
+          "lng": -121.253826
+        },
+        {
+          "lat": 37.915271,
+          "lng": -121.260006
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 37.915975,
+          "lng": -121.260143
+        },
+        {
+          "lat": 37.91603,
+          "lng": -121.259731
+        },
+        {
+          "lat": 37.915488,
+          "lng": -121.259663
+        },
+        {
+          "lat": 37.915434,
+          "lng": -121.260075
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 37.91790, "west": -121.25600, "north": 37.91880, "east": -121.25300 },
-      { "south": 37.91610, "west": -121.25320, "north": 37.91860, "east": -121.25180 },
-      { "south": 37.91350, "west": -121.25960, "north": 37.91470, "east": -121.25180 }
+      {
+        "ring": [
+          {
+            "lat": 37.918088,
+            "lng": -121.256367
+          },
+          {
+            "lat": 37.918196,
+            "lng": -121.254032
+          },
+          {
+            "lat": 37.916788,
+            "lng": -121.253963
+          },
+          {
+            "lat": 37.91668,
+            "lng": -121.256298
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 37.916138,
+            "lng": -121.259731
+          },
+          {
+            "lat": 37.916192,
+            "lng": -121.257809
+          },
+          {
+            "lat": 37.915271,
+            "lng": -121.25774
+          },
+          {
+            "lat": 37.915217,
+            "lng": -121.259663
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 37.91820, "west": -121.25960, "north": 37.91870, "east": -121.25240 },
-      { "south": 37.91500, "west": -121.25920, "north": 37.91560, "east": -121.25220 }
+      {
+        "ring": [
+          {
+            "lat": 37.916192,
+            "lng": -121.259937
+          },
+          {
+            "lat": 37.916463,
+            "lng": -121.253963
+          },
+          {
+            "lat": 37.915975,
+            "lng": -121.253922
+          },
+          {
+            "lat": 37.915705,
+            "lng": -121.259896
+          }
+        ]
+      }
     ],
-    "staging": { "south": 37.91440, "west": -121.25960, "north": 37.91490, "east": -121.25180 }
+    "staging": {
+      "ring": [
+        {
+          "lat": 37.918034,
+          "lng": -121.25774
+        },
+        {
+          "lat": 37.918088,
+          "lng": -121.256367
+        },
+        {
+          "lat": 37.91668,
+          "lng": -121.256298
+        },
+        {
+          "lat": 37.916625,
+          "lng": -121.257671
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 49,
+        "pano": "s8KzwjBmctqyuxQa-MA1og",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 49,
+        "pano": "s8KzwjBmctqyuxQa-MA1og",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 90,
@@ -22,7 +149,7 @@
     "trailerParkingCapacity": 320,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 95.0,
+    "siteAreaAcres": 95,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@37.916788,-121.25568,400m/data=!3m1!1e3",
@@ -51,7 +178,14 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "truckGate", "shipRcvSeparate"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "truckGate",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "A named 'Cost Plus World Market Truck Gate' business exists at 1735 Zephyr St per Waze, with managed hours (Mon-Sat 07:00-16:00). The entire property is enclosed by a continuous block/concrete perimeter wall plus hedge along Zephyr St and chain-link fence around the north and south trailer yards. Truck gate confirmed by listing; treated as true.",
     "guardShack": "No guard booth was visible in any Street View pano along Zephyr St (continuous wall), nor at the open office driveway on the east side. No 1-3-vehicle-footprint booth structure identified at any entrance - low confidence.",
