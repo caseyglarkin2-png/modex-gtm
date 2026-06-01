@@ -14,6 +14,7 @@ export const config = {
      * - /api/webhooks (inbound webhooks from HubSpot, etc.)
      * - /api/unsubscribe (public unsubscribe endpoint)
      * - /api/microsites/track (public microsite engagement endpoint)
+     * - /api/demo (public demo Street View image proxy for /demo microsites)
      * - /api/cron (Vercel cron endpoints with their own auth)
      * - /api/proof (local deterministic e2e seed helpers)
      * - /unsubscribe (public unsubscribe page)
@@ -29,6 +30,6 @@ export const config = {
      * - /_next (Next.js internals)
      * - /manifest.json, /robots.txt, /favicon.ico (static assets)
      */
-    '/((?!login|api/auth|api/webhooks|api/unsubscribe|api/microsites/track|api/cron|api/proposal|api/proof|unsubscribe|proposal|for|demo|demo-packs|opengraph-image|twitter-image|audio|video|artifacts|_next|manifest\\.json|robots\\.txt|favicon\\.ico).*)',
+    '/((?!login|api/auth|api/webhooks|api/unsubscribe|api/microsites/track|api/demo|api/cron|api/proposal|api/proof|unsubscribe|proposal|for|demo|demo-packs|opengraph-image|twitter-image|audio|video|artifacts|_next|manifest\\.json|robots\\.txt|favicon\\.ico).*)',
   ],
 };
