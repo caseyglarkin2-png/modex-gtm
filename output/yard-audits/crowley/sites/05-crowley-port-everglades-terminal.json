@@ -1,16 +1,122 @@
 {
   "name": "Crowley Port Everglades Terminal - Fort Lauderdale FL",
   "type": "Marine terminal / container port",
-  "coords": { "lat": 26.065508, "lng": -80.124022 },
+  "coords": {
+    "lat": 26.065508,
+    "lng": -80.124022
+  },
   "geofences": {
-    "perimeter": { "south": 26.063500, "west": -80.126200, "north": 26.070000, "east": -80.121500 },
-    "truckGate": { "south": 26.064900, "west": -80.124600, "north": 26.066200, "east": -80.123400 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 26.071429,
+          "lng": -80.126769
+        },
+        {
+          "lat": 26.071182,
+          "lng": -80.117842
+        },
+        {
+          "lat": 26.062794,
+          "lng": -80.117842
+        },
+        {
+          "lat": 26.061807,
+          "lng": -80.123335
+        },
+        {
+          "lat": 26.062547,
+          "lng": -80.126769
+        },
+        {
+          "lat": 26.066742,
+          "lng": -80.127593
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 26.067235,
+          "lng": -80.125121
+        },
+        {
+          "lat": 26.067482,
+          "lng": -80.124022
+        },
+        {
+          "lat": 26.066618,
+          "lng": -80.123747
+        },
+        {
+          "lat": 26.066372,
+          "lng": -80.124846
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 26.063600, "west": -80.123600, "north": 26.069500, "east": -80.121600 },
-      { "south": 26.064000, "west": -80.126100, "north": 26.069000, "east": -80.124700 }
+      {
+        "ring": [
+          {
+            "lat": 26.066495,
+            "lng": -80.126219
+          },
+          {
+            "lat": 26.067235,
+            "lng": -80.118254
+          },
+          {
+            "lat": 26.064028,
+            "lng": -80.11798
+          },
+          {
+            "lat": 26.063041,
+            "lng": -80.125945
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 26.070442,
+            "lng": -80.12567
+          },
+          {
+            "lat": 26.070689,
+            "lng": -80.118529
+          },
+          {
+            "lat": 26.067975,
+            "lng": -80.118392
+          },
+          {
+            "lat": 26.067728,
+            "lng": -80.125533
+          }
+        ]
+      }
     ],
     "dockAprons": [],
-    "staging": { "south": 26.066400, "west": -80.123900, "north": 26.067200, "east": -80.122800 }
+    "staging": {
+      "ring": [
+        {
+          "lat": 26.069209,
+          "lng": -80.126769
+        },
+        {
+          "lat": 26.069209,
+          "lng": -80.125395
+        },
+        {
+          "lat": 26.066742,
+          "lng": -80.125395
+        },
+        {
+          "lat": 26.066742,
+          "lng": -80.126769
+        }
+      ]
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 0,
@@ -18,23 +124,38 @@
     "trailerParkingCapacity": 1500,
     "truckGateCount": 1,
     "buildingCount": 7,
-    "siteAreaAcres": 78.0,
+    "siteAreaAcres": 78,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@26.065508,-80.124022,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 4, "exitLanes": 4, "fastLaneOpportunity": true,
-    "dockDoors": "NONE", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": true, "dropYard": true, "multiStep": true
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 4,
+    "exitLanes": 4,
+    "fastLaneOpportunity": true,
+    "dockDoors": "NONE",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": true
   },
   "confidence": "high",
-  "uncertainFields": ["exitLanes"],
+  "uncertainFields": [
+    "exitLanes"
+  ],
   "fieldNotes": {
     "siteIdentification": "4300 McIntosh Road = Crowley Port Everglades Terminal, a 78-acre container terminal in Port Everglades' Southport area. Confirmed by imagery + web (crowley.com, porteverglades.net, petpev.com): container stacks, chassis yards, 3 gantry-crane berths, rail spurs. Roster coords accurate.",
     "truckGate": "Confirmed - the terminal has a covered multi-lane in-gate (white canopy structures at z20 with painted lane arrows and an office/check-in building). Trucks also pass the outer McIntosh Road port security checkpoint. Web: 8 lanes, 4 scales.",

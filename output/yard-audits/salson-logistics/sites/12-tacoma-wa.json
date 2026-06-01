@@ -1,37 +1,139 @@
 {
   "name": "SalSon Logistics - Tacoma WA (TriPak Inc)",
   "type": "Port Drayage / Rail Transload Warehouse",
-  "coords": { "lat": 47.258525, "lng": -122.392010 },
+  "coords": {
+    "lat": 47.258525,
+    "lng": -122.39201
+  },
   "geofences": {
-    "perimeter": { "south": 47.257450, "west": -122.393100, "north": 47.259500, "east": -122.390700 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 47.259177,
+          "lng": -122.394207
+        },
+        {
+          "lat": 47.259807,
+          "lng": -122.390637
+        },
+        {
+          "lat": 47.258851,
+          "lng": -122.390259
+        },
+        {
+          "lat": 47.258222,
+          "lng": -122.39383
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 47.258362,
+          "lng": -122.393761
+        },
+        {
+          "lat": 47.258432,
+          "lng": -122.393383
+        },
+        {
+          "lat": 47.258199,
+          "lng": -122.39328
+        },
+        {
+          "lat": 47.258129,
+          "lng": -122.393658
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 47.257500, "west": -122.392900, "north": 47.258300, "east": -122.391500 }
+      {
+        "ring": [
+          {
+            "lat": 47.259667,
+            "lng": -122.3928
+          },
+          {
+            "lat": 47.259434,
+            "lng": -122.390877
+          },
+          {
+            "lat": 47.258898,
+            "lng": -122.391049
+          },
+          {
+            "lat": 47.259131,
+            "lng": -122.392971
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 47.258200, "west": -122.392800, "north": 47.259200, "east": -122.391100 }
+      {
+        "ring": [
+          {
+            "lat": 47.258944,
+            "lng": -122.392697
+          },
+          {
+            "lat": 47.259317,
+            "lng": -122.390637
+          },
+          {
+            "lat": 47.259061,
+            "lng": -122.390534
+          },
+          {
+            "lat": 47.258688,
+            "lng": -122.392594
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 22, "trailersVisible": 30, "trailerParkingCapacity": 60,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 6.5,
+    "dockDoorCount": 22,
+    "trailersVisible": 30,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 6.5,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@47.258525,-122.392010,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "dockDoorCount", "entryLanes", "exitLanes", "siteAreaAcres"],
+  "uncertainFields": [
+    "truckGate",
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes",
+    "siteAreaAcres"
+  ],
   "fieldNotes": {
     "location": "2330 Port of Tacoma Rd, Tacoma WA 98421. SalSon's Tacoma market is operated by TriPak Inc — one of the seven companies merged into SalSon in Aug 2024 (the dossier's 'TriPack Logistics'); TriPak was earlier a TTSI division. Confirmed via loadmatch ('SalSon Logistics (Tri Pak, Inc. div. of TTSI) / Tacoma, WA') and Commtrex/LoopNet listings for 2330 Port of Tacoma Rd. The building is a ~94,590 SF transload warehouse built 1966, rail-served, with a ~3-acre paved fenced yard per the LoopNet lease listing.",
     "truckGate": "No barrier arm or gate seen across the truck approach in Street View — the transload warehouse fronts a public port-industrial street and trucks pull straight onto the yard apron. Some lease copy describes the yard as 'fenced'; no controlled checkpoint structure is visible. Left FALSE, flagged uncertain.",

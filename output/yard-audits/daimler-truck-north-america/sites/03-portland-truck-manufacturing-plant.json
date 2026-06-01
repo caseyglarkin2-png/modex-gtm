@@ -1,18 +1,112 @@
 {
   "name": "Portland Truck Manufacturing Plant - Portland OR",
   "type": "Truck assembly plant (battery-electric)",
-  "coords": { "lat": 45.573869, "lng": -122.714444 },
+  "coords": {
+    "lat": 45.573869,
+    "lng": -122.714444
+  },
   "geofences": {
-    "perimeter": { "south": 45.571000, "west": -122.717200, "north": 45.575600, "east": -122.709500 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 45.574254,
+          "lng": -122.718289
+        },
+        {
+          "lat": 45.574638,
+          "lng": -122.713071
+        },
+        {
+          "lat": 45.572139,
+          "lng": -122.712796
+        },
+        {
+          "lat": 45.570985,
+          "lng": -122.718015
+        },
+        {
+          "lat": 45.5731,
+          "lng": -122.719525
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 45.573388,
+          "lng": -122.719525
+        },
+        {
+          "lat": 45.573581,
+          "lng": -122.718839
+        },
+        {
+          "lat": 45.5731,
+          "lng": -122.718564
+        },
+        {
+          "lat": 45.572908,
+          "lng": -122.719251
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 45.573600, "west": -122.712200, "north": 45.574600, "east": -122.710300 }
+      {
+        "ring": [
+          {
+            "lat": 45.574638,
+            "lng": -122.712247
+          },
+          {
+            "lat": 45.574638,
+            "lng": -122.7095
+          },
+          {
+            "lat": 45.5731,
+            "lng": -122.7095
+          },
+          {
+            "lat": 45.5731,
+            "lng": -122.712247
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 45.572400, "west": -122.716200, "north": 45.575000, "east": -122.713800 },
-      { "south": 45.574100, "west": -122.713600, "north": 45.575100, "east": -122.711200 }
+      {
+        "ring": [
+          {
+            "lat": 45.574254,
+            "lng": -122.718289
+          },
+          {
+            "lat": 45.574542,
+            "lng": -122.713345
+          },
+          {
+            "lat": 45.574061,
+            "lng": -122.713345
+          },
+          {
+            "lat": 45.573773,
+            "lng": -122.718289
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 123,
+        "pano": "35KVBgsmnOSTW_XFPX5MPQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 123,
+        "pano": "35KVBgsmnOSTW_XFPX5MPQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 45,
@@ -20,23 +114,42 @@
     "trailerParkingCapacity": 130,
     "truckGateCount": 0,
     "buildingCount": 5,
-    "siteAreaAcres": 72.0,
+    "siteAreaAcres": 72,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@45.573869,-122.714444,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dropArea", "dockDoorCount", "scale"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dropArea",
+    "dockDoorCount",
+    "scale"
+  ],
   "fieldNotes": {
     "location": "Roster coords (ROOFTOP, moved 188m) landed on the roof of the main Portland Truck Manufacturing Plant in the Swan Island Industrial Park. Confirmed via DTNA career-locations page and OPB/Oregon Business reporting - DTNA's Portland operation (Western Star X-Series, Freightliner eCascadia/eM2) at 6936 N Fathom Street.",
     "truckGate": "Open industrial-park layout: the plant and DTNA's adjacent buildings front directly onto N Fathom Street / N Channel Avenue with no single controlled perimeter gate. Dock yards are open to the park roads. Some rail-side yards have chain-link fencing but no manned gate/barrier arm was identified - truckGate set false, flagged uncertain.",

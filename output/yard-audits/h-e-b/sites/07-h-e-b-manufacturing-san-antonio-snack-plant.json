@@ -1,17 +1,84 @@
 {
   "name": "H-E-B Manufacturing - San Antonio Snack Plant - San Antonio TX",
   "type": "Manufacturing Plant (Snacks / Chips)",
-  "coords": { "lat": 29.485000, "lng": -98.389300 },
+  "coords": {
+    "lat": 29.485,
+    "lng": -98.3893
+  },
   "geofences": {
-    "perimeter": { "south": 29.48430, "west": -98.39010, "north": 29.48590, "east": -98.38830 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.486375,
+          "lng": -98.390879
+        },
+        {
+          "lat": 29.486375,
+          "lng": -98.387858
+        },
+        {
+          "lat": 29.484163,
+          "lng": -98.387858
+        },
+        {
+          "lat": 29.484163,
+          "lng": -98.390879
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [
-      { "south": 29.48560, "west": -98.39010, "north": 29.48650, "east": -98.38830 }
+      {
+        "ring": [
+          {
+            "lat": 29.485956,
+            "lng": -98.390845
+          },
+          {
+            "lat": 29.485956,
+            "lng": -98.389472
+          },
+          {
+            "lat": 29.485478,
+            "lng": -98.389472
+          },
+          {
+            "lat": 29.485478,
+            "lng": -98.390845
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 29.48450, "west": -98.39010, "north": 29.48560, "east": -98.38960 }
+      {
+        "ring": [
+          {
+            "lat": 29.486106,
+            "lng": -98.390845
+          },
+          {
+            "lat": 29.486106,
+            "lng": -98.387858
+          },
+          {
+            "lat": 29.485986,
+            "lng": -98.387858
+          },
+          {
+            "lat": 29.485986,
+            "lng": -98.390845
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 10,
+        "pano": "mcZBV6fP0t5CuC-188wUpA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 8,
@@ -24,18 +91,39 @@
   },
   "mapsUrl": "https://www.google.com/maps/@29.485000,-98.389300,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "0-10", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "entryLanes", "exitLanes", "buildingCount"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes",
+    "buildingCount"
+  ],
   "fieldNotes": {
     "location": "Address 5311 Rittiman Rd, San Antonio TX 78218 confirmed by web research (TDLR/Zabalist 'H.E.B. SAS Bakery Chips' renovation project, Waze, city-data). The plant sits within the larger H-E-B Rittiman/Fratt Rd manufacturing & distribution campus on NE San Antonio. The roster's APPROXIMATE coordinate (moved 6794 m) was wrong; relocated to the Rittiman Rd campus.",
     "buildingIdentification": "The audited building (~29.4850, -98.3893) is a square food-processing building with extensive rooftop process/HVAC equipment and a small annex - the strongest manufacturing-plant candidate within the campus. Exact snack-plant building could not be confirmed by signage; medium confidence on the building-level pin.",

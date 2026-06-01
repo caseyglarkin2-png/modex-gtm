@@ -1,19 +1,112 @@
 {
   "name": "Nestlé USA Distribution Center - McDonough GA",
   "type": "Distribution center",
-  "coords": { "lat": 33.408400, "lng": -84.154300 },
+  "coords": {
+    "lat": 33.4084,
+    "lng": -84.1543
+  },
   "geofences": {
-    "perimeter": { "south": 33.405800, "west": -84.156800, "north": 33.410300, "east": -84.151800 },
-    "truckGate": { "south": 33.410200, "west": -84.154900, "north": 33.410700, "east": -84.153900 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.410693,
+          "lng": -84.156635
+        },
+        {
+          "lat": 33.411381,
+          "lng": -84.1543
+        },
+        {
+          "lat": 33.406566,
+          "lng": -84.151279
+        },
+        {
+          "lat": 33.405534,
+          "lng": -84.153613
+        },
+        {
+          "lat": 33.410234,
+          "lng": -84.156909
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.406107,
+          "lng": -84.153476
+        },
+        {
+          "lat": 33.406336,
+          "lng": -84.152652
+        },
+        {
+          "lat": 33.405649,
+          "lng": -84.15224
+        },
+        {
+          "lat": 33.405419,
+          "lng": -84.153064
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 33.405900, "west": -84.153400, "north": 33.408300, "east": -84.151900 },
-      { "south": 33.408400, "west": -84.154500, "north": 33.410400, "east": -84.153200 }
+      {
+        "ring": [
+          {
+            "lat": 33.410234,
+            "lng": -84.156497
+          },
+          {
+            "lat": 33.410693,
+            "lng": -84.155124
+          },
+          {
+            "lat": 33.406566,
+            "lng": -84.152652
+          },
+          {
+            "lat": 33.405993,
+            "lng": -84.154025
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.406200, "west": -84.155400, "north": 33.409600, "east": -84.154200 },
-      { "south": 33.407100, "west": -84.153100, "north": 33.408500, "east": -84.152100 }
+      {
+        "ring": [
+          {
+            "lat": 33.410463,
+            "lng": -84.156223
+          },
+          {
+            "lat": 33.411037,
+            "lng": -84.154437
+          },
+          {
+            "lat": 33.407024,
+            "lng": -84.152103
+          },
+          {
+            "lat": 33.406336,
+            "lng": -84.153888
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 170,
+        "pano": "W_2ANtIFxbTLb1Wo_3CDbQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 170,
+        "pano": "W_2ANtIFxbTLb1Wo_3CDbQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 110,
@@ -21,7 +114,7 @@
     "trailerParkingCapacity": 150,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 42.0,
+    "siteAreaAcres": 42,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@33.4084,-84.1543,400m/data=!3m1!1e3",
@@ -50,7 +143,12 @@
     "multiStep": true
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "exitLanes", "scale"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "exitLanes",
+    "scale"
+  ],
   "fieldNotes": {
     "locationResolution": "Roster coords (33.40872,-84.15465) and search-derived coords (33.40806,-84.15425) point at the same large NW-SE-oriented warehouse off Nestle Ct. Confirmed via Waze/Yelp/Henry County directory as the Nestlé Distribution Center, 1 Nestle Ct, McDonough GA 30253. Locked center 33.4084,-84.1543.",
     "truckGate": "Web research describing the site's gate-guard duties confirms a controlled gated entry: the guard 'opens the gate to release the driver'. The compound is fully fenced (chain-link fencing visible in Street View of the access-road corridor).",

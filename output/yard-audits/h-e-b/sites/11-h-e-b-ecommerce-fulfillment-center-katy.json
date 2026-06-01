@@ -1,35 +1,148 @@
 {
   "name": "H-E-B eCommerce Fulfillment Center - Katy - Katy TX",
   "type": "E-commerce Fulfillment Center",
-  "coords": { "lat": 29.803050, "lng": -95.760550 },
+  "coords": {
+    "lat": 29.80305,
+    "lng": -95.76055
+  },
   "geofences": {
-    "perimeter": { "south": 29.801750, "west": -95.761350, "north": 29.804000, "east": -95.759600 },
-    "truckGate": { "south": 29.803280, "west": -95.761200, "north": 29.803560, "east": -95.760950 },
-    "dropYards": [],
-    "dockAprons": [
-      { "south": 29.802550, "west": -95.761150, "north": 29.804000, "east": -95.760700 }
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.804242,
+          "lng": -95.761168
+        },
+        {
+          "lat": 29.804242,
+          "lng": -95.759451
+        },
+        {
+          "lat": 29.802335,
+          "lng": -95.759451
+        },
+        {
+          "lat": 29.802335,
+          "lng": -95.761168
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 29.803527,
+          "lng": -95.761237
+        },
+        {
+          "lat": 29.803527,
+          "lng": -95.761031
+        },
+        {
+          "lat": 29.803288,
+          "lng": -95.761031
+        },
+        {
+          "lat": 29.803288,
+          "lng": -95.761237
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 29.802752,
+            "lng": -95.760207
+          },
+          {
+            "lat": 29.802752,
+            "lng": -95.759451
+          },
+          {
+            "lat": 29.802335,
+            "lng": -95.759451
+          },
+          {
+            "lat": 29.802335,
+            "lng": -95.760207
+          }
+        ]
+      }
     ],
-    "staging": { "south": 29.802550, "west": -95.760950, "north": 29.804000, "east": -95.760450 }
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 29.804003,
+            "lng": -95.760962
+          },
+          {
+            "lat": 29.804003,
+            "lng": -95.759726
+          },
+          {
+            "lat": 29.803825,
+            "lng": -95.759726
+          },
+          {
+            "lat": 29.803825,
+            "lng": -95.760962
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 38,
+        "pano": "eK1g3krfhYiqiRpArGECIQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 38,
+        "pano": "eK1g3krfhYiqiRpArGECIQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 14, "trailersVisible": 7, "trailerParkingCapacity": 12,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 10.5,
+    "dockDoorCount": 14,
+    "trailersVisible": 7,
+    "trailerParkingCapacity": 12,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 10.5,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@29.803050,-95.760550,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dropArea", "trailersVisible"],
+  "uncertainFields": [
+    "dropArea",
+    "trailersVisible"
+  ],
   "fieldNotes": {
     "truckGate": "Truck entrance is a wide open curb-cut off Elrod Rd at the NW of the property; green ornamental security fence runs along the road frontage but terminates open at the driveway - no barrier arm, sliding gate, or pinch-point checkpoint. Confirmed in 2023-07 Street View.",
     "guardShack": "No guard booth at the truck entrance; only a tall H-E-B monument sign at the corner.",

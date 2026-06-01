@@ -1,17 +1,106 @@
 {
   "name": "Danone - Bridgeton NJ",
   "type": "Plant-based beverage plant (refrigerated)",
-  "coords": { "lat": 39.445900, "lng": -75.213800 },
+  "coords": {
+    "lat": 39.4459,
+    "lng": -75.2138
+  },
   "geofences": {
-    "perimeter": { "south": 39.444500, "west": -75.215100, "north": 39.447500, "east": -75.212200 },
-    "truckGate": { "south": 39.446900, "west": -75.213500, "north": 39.447400, "east": -75.213000 },
-    "dropYards": [
-      { "south": 39.444900, "west": -75.213500, "north": 39.445700, "east": -75.212600 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.446801,
+          "lng": -75.215379
+        },
+        {
+          "lat": 39.446907,
+          "lng": -75.212976
+        },
+        {
+          "lat": 39.445105,
+          "lng": -75.212701
+        },
+        {
+          "lat": 39.444893,
+          "lng": -75.215105
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.446907,
+          "lng": -75.214075
+        },
+        {
+          "lat": 39.446907,
+          "lng": -75.213594
+        },
+        {
+          "lat": 39.446642,
+          "lng": -75.213594
+        },
+        {
+          "lat": 39.446642,
+          "lng": -75.214075
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 39.445100, "west": -75.214400, "north": 39.445700, "east": -75.213400 }
+      {
+        "ring": [
+          {
+            "lat": 39.445635,
+            "lng": -75.215036
+          },
+          {
+            "lat": 39.445635,
+            "lng": -75.213113
+          },
+          {
+            "lat": 39.445211,
+            "lng": -75.213113
+          },
+          {
+            "lat": 39.445211,
+            "lng": -75.215036
+          }
+        ]
+      }
     ],
-    "staging": { "south": 39.445500, "west": -75.214400, "north": 39.446200, "east": -75.213000 }
+    "staging": {
+      "ring": [
+        {
+          "lat": 39.446695,
+          "lng": -75.215036
+        },
+        {
+          "lat": 39.446695,
+          "lng": -75.214075
+        },
+        {
+          "lat": 39.446324,
+          "lng": -75.214075
+        },
+        {
+          "lat": 39.446324,
+          "lng": -75.215036
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 218,
+        "pano": "UoA8tZXed8-lbMvj8NWnQg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 218,
+        "pano": "UoA8tZXed8-lbMvj8NWnQg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 22,
@@ -24,18 +113,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@39.445900,-75.213800,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "The main driveway off Rosenhayn Avenue is a wide open driveway with no barrier arm or sliding gate at the road. There are pavement stop/lane markings partway down the drive but no controlled checkpoint structure. The driveway feeds a perimeter loop road to the docks.",
     "guardShack": "No staffed guard booth at the driveway or anywhere on the perimeter. A Danone monument sign and flags stand at the front; the small structures by the south dock are tank/silo pads (process equipment), not gate booths.",

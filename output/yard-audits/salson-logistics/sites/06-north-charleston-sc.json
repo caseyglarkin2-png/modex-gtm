@@ -1,17 +1,108 @@
 {
   "name": "SalSon Logistics - North Charleston SC",
   "type": "Drayage Terminal / Food-Grade Warehouse",
-  "coords": { "lat": 32.919050, "lng": -80.066800 },
+  "coords": {
+    "lat": 32.91905,
+    "lng": -80.0668
+  },
   "geofences": {
-    "perimeter": { "south": 32.918100, "west": -80.068000, "north": 32.919650, "east": -80.065900 },
-    "truckGate": { "south": 32.919150, "west": -80.068050, "north": 32.919400, "east": -80.067700 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.919583,
+          "lng": -80.068122
+        },
+        {
+          "lat": 32.919511,
+          "lng": -80.066388
+        },
+        {
+          "lat": 32.918185,
+          "lng": -80.066508
+        },
+        {
+          "lat": 32.918243,
+          "lng": -80.068173
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.919007,
+          "lng": -80.068122
+        },
+        {
+          "lat": 32.919021,
+          "lng": -80.067984
+        },
+        {
+          "lat": 32.918863,
+          "lng": -80.06795
+        },
+        {
+          "lat": 32.918848,
+          "lng": -80.068105
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 32.918150, "west": -80.067350, "north": 32.918900, "east": -80.066050 }
+      {
+        "ring": [
+          {
+            "lat": 32.918762,
+            "lng": -80.067075
+          },
+          {
+            "lat": 32.918704,
+            "lng": -80.065324
+          },
+          {
+            "lat": 32.918358,
+            "lng": -80.065358
+          },
+          {
+            "lat": 32.91843,
+            "lng": -80.067075
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 32.918850, "west": -80.067350, "north": 32.919250, "east": -80.066850 }
+      {
+        "ring": [
+          {
+            "lat": 32.919468,
+            "lng": -80.067555
+          },
+          {
+            "lat": 32.919425,
+            "lng": -80.066422
+          },
+          {
+            "lat": 32.919237,
+            "lng": -80.06644
+          },
+          {
+            "lat": 32.919281,
+            "lng": -80.067572
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 118,
+        "pano": "Rc0NFDojvU1kJTThFa9Kww",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 118,
+        "pano": "Rc0NFDojvU1kJTThFa9Kww",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 16,
@@ -24,18 +115,35 @@
   },
   "mapsUrl": "https://www.google.com/maps/@32.919050,-80.066800,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "guardShack"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "guardShack"
+  ],
   "fieldNotes": {
     "truckGate": "Per LoopNet, 7225 Cross County Rd is a 17-door truck terminal with a 3.3-acre rock/gravel fenced yard. The site is fully enclosed; trucks enter via a single internal driveway off Cross County Rd.",
     "guardShack": "No staffed booth resolvable. The terminal is set well back behind a treeline and Street View cannot see the gate; satellite shows an internal driveway with no booth structure. remoteGs marked true; flagged uncertain.",

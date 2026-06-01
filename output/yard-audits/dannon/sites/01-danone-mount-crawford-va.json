@@ -1,39 +1,169 @@
 {
   "name": "Danone - Mount Crawford VA",
   "type": "Multi-category beverage plant (refrigerated)",
-  "coords": { "lat": 38.36880, "lng": -78.93980 },
+  "coords": {
+    "lat": 38.3688,
+    "lng": -78.9398
+  },
   "geofences": {
-    "perimeter": { "south": 38.36590, "west": -78.94280, "north": 38.37240, "east": -78.93680 },
-    "truckGate": { "south": 38.36560, "west": -78.93800, "north": 38.36620, "east": -78.93720 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.371223,
+          "lng": -78.941791
+        },
+        {
+          "lat": 38.371115,
+          "lng": -78.936573
+        },
+        {
+          "lat": 38.366162,
+          "lng": -78.936847
+        },
+        {
+          "lat": 38.36627,
+          "lng": -78.941929
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 38.366485,
+          "lng": -78.939045
+        },
+        {
+          "lat": 38.366539,
+          "lng": -78.938152
+        },
+        {
+          "lat": 38.366001,
+          "lng": -78.938083
+        },
+        {
+          "lat": 38.365947,
+          "lng": -78.938976
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 38.36830, "west": -78.94170, "north": 38.37060, "east": -78.94010 },
-      { "south": 38.36950, "west": -78.94010, "north": 38.37150, "east": -78.93820 },
-      { "south": 38.36680, "west": -78.94150, "north": 38.36810, "east": -78.94000 }
+      {
+        "ring": [
+          {
+            "lat": 38.371115,
+            "lng": -78.940349
+          },
+          {
+            "lat": 38.371061,
+            "lng": -78.938495
+          },
+          {
+            "lat": 38.369877,
+            "lng": -78.938564
+          },
+          {
+            "lat": 38.369931,
+            "lng": -78.940418
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 38.371061,
+            "lng": -78.938427
+          },
+          {
+            "lat": 38.371007,
+            "lng": -78.936641
+          },
+          {
+            "lat": 38.369769,
+            "lng": -78.93671
+          },
+          {
+            "lat": 38.369823,
+            "lng": -78.938495
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 38.36720, "west": -78.94060, "north": 38.36980, "east": -78.94010 }
+      {
+        "ring": [
+          {
+            "lat": 38.370738,
+            "lng": -78.941791
+          },
+          {
+            "lat": 38.370684,
+            "lng": -78.939937
+          },
+          {
+            "lat": 38.370038,
+            "lng": -78.940006
+          },
+          {
+            "lat": 38.370092,
+            "lng": -78.94186
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 349,
+        "pano": "JBM0YT3UTLUuoTHURvz_ZA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 349,
+        "pano": "JBM0YT3UTLUuoTHURvz_ZA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 60, "trailersVisible": 180, "trailerParkingCapacity": 220,
-    "truckGateCount": 2, "buildingCount": 4, "siteAreaAcres": 93.0,
+    "dockDoorCount": 60,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 220,
+    "truckGateCount": 2,
+    "buildingCount": 4,
+    "siteAreaAcres": 93,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@38.36880,-78.93980,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "scale",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Both road accesses off South Valley Pike are wide open driveways with no barrier arm, sliding gate, or checkpoint pinch-point. Street View at the east main entry (38.3657,-78.9376) shows an open driveway with only directional signage ('ALL LIQUID AND OKARA RECEIVING / ALL COLD & DRY STORAGE RECEIVING OFF #1'), confirming a self-routed ungated site.",
     "guardShack": "No staffed booth visible at any entrance; drivers self-route via posted signs.",

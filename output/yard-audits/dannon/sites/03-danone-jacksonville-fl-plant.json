@@ -1,38 +1,150 @@
 {
   "name": "Danone - Jacksonville FL (plant)",
   "type": "Coffee & creamer plant (refrigerated)",
-  "coords": { "lat": 30.33240, "lng": -81.69790 },
+  "coords": {
+    "lat": 30.3324,
+    "lng": -81.6979
+  },
   "geofences": {
-    "perimeter": { "south": 30.33115, "west": -81.69925, "north": 30.33345, "east": -81.69625 },
-    "truckGate": { "south": 30.33195, "west": -81.69730, "north": 30.33235, "east": -81.69680 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 30.332874,
+          "lng": -81.699136
+        },
+        {
+          "lat": 30.332933,
+          "lng": -81.697419
+        },
+        {
+          "lat": 30.331867,
+          "lng": -81.697213
+        },
+        {
+          "lat": 30.331807,
+          "lng": -81.69893
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 30.332459,
+          "lng": -81.697557
+        },
+        {
+          "lat": 30.3324,
+          "lng": -81.697213
+        },
+        {
+          "lat": 30.332104,
+          "lng": -81.697282
+        },
+        {
+          "lat": 30.332163,
+          "lng": -81.697625
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 30.33260, "west": -81.69700, "north": 30.33345, "east": -81.69625 },
-      { "south": 30.33150, "west": -81.69925, "north": 30.33230, "east": -81.69850 }
+      {
+        "ring": [
+          {
+            "lat": 30.332933,
+            "lng": -81.697213
+          },
+          {
+            "lat": 30.332933,
+            "lng": -81.695634
+          },
+          {
+            "lat": 30.332459,
+            "lng": -81.695634
+          },
+          {
+            "lat": 30.332459,
+            "lng": -81.697213
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 30.33150, "west": -81.69830, "north": 30.33220, "east": -81.69750 }
+      {
+        "ring": [
+          {
+            "lat": 30.332281,
+            "lng": -81.69893
+          },
+          {
+            "lat": 30.332281,
+            "lng": -81.697488
+          },
+          {
+            "lat": 30.332044,
+            "lng": -81.697522
+          },
+          {
+            "lat": 30.332044,
+            "lng": -81.698964
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 233,
+        "pano": "VmSzNJOgvrxP54JFTeyeFA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 233,
+        "pano": "VmSzNJOgvrxP54JFTeyeFA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 16, "trailersVisible": 18, "trailerParkingCapacity": 28,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 17.0,
+    "dockDoorCount": 16,
+    "trailersVisible": 18,
+    "trailerParkingCapacity": 28,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 17,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@30.33240,-81.69790,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "entryLanes", "exitLanes", "dockDoors"],
+  "uncertainFields": [
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoors"
+  ],
   "fieldNotes": {
     "truckGate": "The entire site is enclosed by black chain-link fence topped with barbed wire along West Beaver Street and the cross street. A controlled vehicle entrance with yellow bollard-defined lanes leads into the yard/parking.",
     "guardShack": "Street View (pano 30.33214,-81.69696, heading 250) clearly shows a small standalone guard booth set in the middle of the entrance drive, with yellow bollards channelizing traffic around it - a classic staffed checkpoint.",

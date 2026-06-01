@@ -1,17 +1,88 @@
 {
   "name": "Thomas Built Buses Manufacturing Plant - High Point NC",
   "type": "Bus assembly plant",
-  "coords": { "lat": 35.941867, "lng": -80.022076 },
+  "coords": {
+    "lat": 35.941867,
+    "lng": -80.022076
+  },
   "geofences": {
-    "perimeter": { "south": 35.938500, "west": -80.026000, "north": 35.944500, "east": -80.019000 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.943868,
+          "lng": -80.025097
+        },
+        {
+          "lat": 35.946314,
+          "lng": -80.020428
+        },
+        {
+          "lat": 35.944758,
+          "lng": -80.019055
+        },
+        {
+          "lat": 35.942312,
+          "lng": -80.023449
+        },
+        {
+          "lat": 35.942979,
+          "lng": -80.025235
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [
-      { "south": 35.941700, "west": -80.021600, "north": 35.942800, "east": -80.020100 }
+      {
+        "ring": [
+          {
+            "lat": 35.943424,
+            "lng": -80.024823
+          },
+          {
+            "lat": 35.944424,
+            "lng": -80.023175
+          },
+          {
+            "lat": 35.943868,
+            "lng": -80.022625
+          },
+          {
+            "lat": 35.942868,
+            "lng": -80.024273
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.940200, "west": -80.024100, "north": 35.942600, "east": -80.022000 }
+      {
+        "ring": [
+          {
+            "lat": 35.944091,
+            "lng": -80.024823
+          },
+          {
+            "lat": 35.946203,
+            "lng": -80.020703
+          },
+          {
+            "lat": 35.945758,
+            "lng": -80.020291
+          },
+          {
+            "lat": 35.943646,
+            "lng": -80.024411
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 46,
+        "pano": "4PHfKqSLaoIDCwioG_Ru3w",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 25,
@@ -19,23 +90,42 @@
     "trailerParkingCapacity": 80,
     "truckGateCount": 0,
     "buildingCount": 8,
-    "siteAreaAcres": 80.0,
+    "siteAreaAcres": 80,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@35.941867,-80.022076,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "dropArea", "scale"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoorCount",
+    "dropArea",
+    "scale"
+  ],
   "fieldNotes": {
     "location": "Roster coords (ROOFTOP, moved 30m) landed on the legacy Thomas Built Buses plant. Confirmed via Thomas Built Buses / DTNA news pages - 1408 Courtesy Road, High Point NC, the company's original site since 1916, building Type A Minotour / Type C / Type D school buses (Minotour capacity expansion announced Dec 2025).",
     "truckGate": "Sprawling legacy urban industrial complex straddling Courtesy Road; buildings line both sides of the public street. Individual yards are fenced (privacy-slat chain-link seen in Street View) but there is no single dominant manned perimeter gate or barrier arm controlling all truck traffic - access is from the public road into multiple fenced yards. truckGate set false, flagged uncertain.",

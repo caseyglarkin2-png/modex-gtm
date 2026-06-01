@@ -1,18 +1,95 @@
 {
   "name": "Crowley Gulfport Terminal - Gulfport MS",
   "type": "Marine terminal / port facility",
-  "coords": { "lat": 30.36000, "lng": -89.09500 },
+  "coords": {
+    "lat": 30.36,
+    "lng": -89.095
+  },
   "geofences": {
-    "perimeter": { "south": 30.35500, "west": -89.09700, "north": 30.36450, "east": -89.09050 },
-    "truckGate": { "south": 30.36280, "west": -89.09520, "north": 30.36420, "east": -89.09420 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 30.36474,
+          "lng": -89.100493
+        },
+        {
+          "lat": 30.36474,
+          "lng": -89.095549
+        },
+        {
+          "lat": 30.358815,
+          "lng": -89.095
+        },
+        {
+          "lat": 30.350046,
+          "lng": -89.097197
+        },
+        {
+          "lat": 30.350046,
+          "lng": -89.101042
+        },
+        {
+          "lat": 30.358815,
+          "lng": -89.102141
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 30.365214,
+          "lng": -89.101592
+        },
+        {
+          "lat": 30.365688,
+          "lng": -89.099395
+        },
+        {
+          "lat": 30.364029,
+          "lng": -89.09912
+        },
+        {
+          "lat": 30.363555,
+          "lng": -89.101317
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 30.35550, "west": -89.09600, "north": 30.36100, "east": -89.09250 },
-      { "south": 30.36100, "west": -89.09650, "north": 30.36400, "east": -89.09400 }
+      {
+        "ring": [
+          {
+            "lat": 30.357156,
+            "lng": -89.101042
+          },
+          {
+            "lat": 30.35763,
+            "lng": -89.096099
+          },
+          {
+            "lat": 30.351468,
+            "lng": -89.096373
+          },
+          {
+            "lat": 30.350994,
+            "lng": -89.101317
+          }
+        ]
+      }
     ],
-    "dockAprons": [
-      { "south": 30.35550, "west": -89.09650, "north": 30.36000, "east": -89.09480 }
-    ],
-    "staging": { "south": 30.36280, "west": -89.09600, "north": 30.36420, "east": -89.09450 }
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 165,
+        "pano": "bVBNekeThPa4ylujhFw5Pg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 165,
+        "pano": "bVBNekeThPa4ylujhFw5Pg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 10,
@@ -20,23 +97,42 @@
     "trailerParkingCapacity": 450,
     "truckGateCount": 1,
     "buildingCount": 6,
-    "siteAreaAcres": 163.0,
+    "siteAreaAcres": 163,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@30.36000,-89.09500,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "0-10", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "0-10",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "scale", "dockDoorCount"],
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "location": "Roster coords (30.363167,-89.096963, RANGE_INTERPOLATED) landed near the Gulfport small-craft harbor / port edge. 692 30th Avenue / 692 West Pier is the West Pier Terminal of the Port of Gulfport (MS State Port Authority), where Crowley leases space alongside Dole and Chiquita. The operational marine terminal is the pier complex extending into the Gulf — locked center ~30.3600,-89.0950.",
     "truckGate": "Confirmed — the entire Port of Gulfport is enclosed by a tall ornamental steel security fence (visible in multiple Street View frames). The truck access road runs into the secured terminal through a controlled checkpoint; a 'GULFPORT' port-entrance sign and CROWLEY-branded containers are visible at the entrance. Marine terminal under MTSA security.",

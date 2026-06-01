@@ -1,15 +1,94 @@
 {
   "name": "Indianapolis Parts Distribution Center - Whitestown IN",
   "type": "Parts distribution center",
-  "coords": { "lat": 39.979000, "lng": -86.386300 },
+  "coords": {
+    "lat": 39.979,
+    "lng": -86.3863
+  },
   "geofences": {
-    "perimeter": { "south": 39.977850, "west": -86.387900, "north": 39.980050, "east": -86.384700 },
-    "truckGate": { "south": 39.978900, "west": -86.385200, "north": 39.979250, "east": -86.384800 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.979894,
+          "lng": -86.388017
+        },
+        {
+          "lat": 39.979894,
+          "lng": -86.384789
+        },
+        {
+          "lat": 39.977842,
+          "lng": -86.384789
+        },
+        {
+          "lat": 39.977842,
+          "lng": -86.388017
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.979947,
+          "lng": -86.384927
+        },
+        {
+          "lat": 39.979947,
+          "lng": -86.384515
+        },
+        {
+          "lat": 39.979631,
+          "lng": -86.384515
+        },
+        {
+          "lat": 39.979631,
+          "lng": -86.384927
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 39.977850, "west": -86.387100, "north": 39.978200, "east": -86.385000 }
+      {
+        "ring": [
+          {
+            "lat": 39.978263,
+            "lng": -86.387673
+          },
+          {
+            "lat": 39.978263,
+            "lng": -86.385476
+          },
+          {
+            "lat": 39.977948,
+            "lng": -86.385476
+          },
+          {
+            "lat": 39.977948,
+            "lng": -86.387673
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.978150, "west": -86.387200, "north": 39.978550, "east": -86.385000 }
+      {
+        "ring": [
+          {
+            "lat": 39.978474,
+            "lng": -86.387811
+          },
+          {
+            "lat": 39.978474,
+            "lng": -86.385476
+          },
+          {
+            "lat": 39.978316,
+            "lng": -86.385476
+          },
+          {
+            "lat": 39.978316,
+            "lng": -86.387811
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -19,23 +98,39 @@
     "trailerParkingCapacity": 40,
     "truckGateCount": 2,
     "buildingCount": 1,
-    "siteAreaAcres": 12.0,
+    "siteAreaAcres": 12,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.979000,-86.386300,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "Confirmed via web research as the 283,500 sq ft Indianapolis PDC at 4140 Anson Boulevard, AllPoints at Anson park, opened 2017 by DTNA ($12.35M lease/build). Roster rooftop geocode moved only 181 m and landed on the correct building. Center locked at 39.979000, -86.386300.",
     "truckGate": "No perimeter fence, no barrier arm, no gate, no checkpoint at any road connection. Street View (2023-05) along Anson Boulevard shows open grass frontage and open driveways. Standard open spec-park layout.",

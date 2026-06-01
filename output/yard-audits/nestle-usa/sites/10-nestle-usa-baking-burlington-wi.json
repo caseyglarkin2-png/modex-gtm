@@ -1,17 +1,98 @@
 {
   "name": "Nestlé USA Baking - Burlington WI",
   "type": "Baking ingredients manufacturing plant",
-  "coords": { "lat": 42.66550, "lng": -88.26800 },
+  "coords": {
+    "lat": 42.6655,
+    "lng": -88.268
+  },
   "geofences": {
-    "perimeter": { "south": 42.66380, "west": -88.27210, "north": 42.66790, "east": -88.26540 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.667722,
+          "lng": -88.271159
+        },
+        {
+          "lat": 42.66752,
+          "lng": -88.266901
+        },
+        {
+          "lat": 42.664692,
+          "lng": -88.265528
+        },
+        {
+          "lat": 42.663884,
+          "lng": -88.269373
+        },
+        {
+          "lat": 42.666005,
+          "lng": -88.271845
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.664288,
+          "lng": -88.270197
+        },
+        {
+          "lat": 42.664288,
+          "lng": -88.269373
+        },
+        {
+          "lat": 42.663783,
+          "lng": -88.269373
+        },
+        {
+          "lat": 42.663783,
+          "lng": -88.270197
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 42.66640, "west": -88.27110, "north": 42.66720, "east": -88.26900 },
-      { "south": 42.66440, "west": -88.27010, "north": 42.66540, "east": -88.26830 }
+      {
+        "ring": [
+          {
+            "lat": 42.66752,
+            "lng": -88.270747
+          },
+          {
+            "lat": 42.667217,
+            "lng": -88.268
+          },
+          {
+            "lat": 42.666409,
+            "lng": -88.268206
+          },
+          {
+            "lat": 42.666712,
+            "lng": -88.270953
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 42.66460, "west": -88.27030, "north": 42.66560, "east": -88.26780 },
-      { "south": 42.66640, "west": -88.27120, "north": 42.66700, "east": -88.26880 }
+      {
+        "ring": [
+          {
+            "lat": 42.665904,
+            "lng": -88.269373
+          },
+          {
+            "lat": 42.6655,
+            "lng": -88.266352
+          },
+          {
+            "lat": 42.664995,
+            "lng": -88.266489
+          },
+          {
+            "lat": 42.665399,
+            "lng": -88.269511
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -21,23 +102,44 @@
     "trailerParkingCapacity": 90,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 30.0,
+    "siteAreaAcres": 30,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@42.66550,-88.26800,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "entryLanes", "exitLanes", "dockDoorCount", "shipRcvSeparate", "scale"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "shipRcvSeparate",
+    "scale"
+  ],
   "fieldNotes": {
     "locating": "Roster coords (42.666811, -88.267276, ROOFTOP, moved 103m) landed accurately on the plant. Web research confirmed the Nestlé USA baking plant at 637 S Pine St, Burlington WI - the Toll House plant (chocolate-chip morsels + refrigerated cookie dough; began 1966; ~520,000 sq ft; recent $70M+ cookie-dough conversion). Locked center 42.66550, -88.26800.",
     "truckGate": "No controlled truck gate identified. The plant sits in an industrial park; the SW truck yard reads as open paved area continuous with the industrial-park streets - Google Street View cars drove freely into the truck yard, capturing parked tractors and box trucks with no barrier arm or pinch-point. The corporate office frontage on S Pine St is also open (monument sign, lawn, no gate). Classified false; flagged uncertain (a gate could be open/unstaffed during capture, and an active Nestlé plant typically has some entry control).",

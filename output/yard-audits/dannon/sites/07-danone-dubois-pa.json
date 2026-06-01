@@ -1,17 +1,106 @@
 {
   "name": "Danone - DuBois PA",
   "type": "Plant-based yogurt plant",
-  "coords": { "lat": 41.105800, "lng": -78.731100 },
+  "coords": {
+    "lat": 41.1058,
+    "lng": -78.7311
+  },
   "geofences": {
-    "perimeter": { "south": 41.103900, "west": -78.733100, "north": 41.107600, "east": -78.729400 },
-    "truckGate": { "south": 41.104600, "west": -78.732900, "north": 41.105000, "east": -78.732400 },
-    "dropYards": [
-      { "south": 41.105900, "west": -78.730500, "north": 41.106400, "east": -78.729900 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.107249,
+          "lng": -78.732679
+        },
+        {
+          "lat": 41.107042,
+          "lng": -78.730001
+        },
+        {
+          "lat": 41.104351,
+          "lng": -78.73007
+        },
+        {
+          "lat": 41.104558,
+          "lng": -78.732405
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.104765,
+          "lng": -78.732336
+        },
+        {
+          "lat": 41.104765,
+          "lng": -78.731855
+        },
+        {
+          "lat": 41.104455,
+          "lng": -78.731855
+        },
+        {
+          "lat": 41.104455,
+          "lng": -78.732336
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 41.105500, "west": -78.732200, "north": 41.106100, "east": -78.731600 }
+      {
+        "ring": [
+          {
+            "lat": 41.106214,
+            "lng": -78.732405
+          },
+          {
+            "lat": 41.106214,
+            "lng": -78.731443
+          },
+          {
+            "lat": 41.1058,
+            "lng": -78.731478
+          },
+          {
+            "lat": 41.1058,
+            "lng": -78.732439
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": {
+      "ring": [
+        {
+          "lat": 41.105283,
+          "lng": -78.732405
+        },
+        {
+          "lat": 41.105179,
+          "lng": -78.730757
+        },
+        {
+          "lat": 41.104817,
+          "lng": -78.730791
+        },
+        {
+          "lat": 41.10492,
+          "lng": -78.732439
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 46,
+        "pano": "_IFSq3qlHTBt5ONvyQGboA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 46,
+        "pano": "_IFSq3qlHTBt5ONvyQGboA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 14,
@@ -19,23 +108,42 @@
     "trailerParkingCapacity": 12,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 24.0,
+    "siteAreaAcres": 24,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.105800,-78.731100,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "dockDoors", "connectivityIssue"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "dockDoors",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "truckGate": "The plant driveway off Oklahoma-Salem Road is a paved open driveway with directional pavement arrows but no barrier arm or sliding gate at the road. A decorative metal fence with stone pillars runs along the road frontage, but the driveway entrance itself is uncontrolled (Street View Jun 2025).",
     "guardShack": "No staffed booth visible at the driveway entrance or the internal Y-fork in Street View or satellite. A small orange-roofed structure near the building SE corner is a pump/utility house, not a gate booth.",

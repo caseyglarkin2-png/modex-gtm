@@ -1,18 +1,95 @@
 {
   "name": "Crowley CrowleyFresh Distribution Center (Temperature Controlled) - Medley FL",
   "type": "Temperature-controlled distribution center / warehouse",
-  "coords": { "lat": 25.87360, "lng": -80.35850 },
+  "coords": {
+    "lat": 25.8736,
+    "lng": -80.3585
+  },
   "geofences": {
-    "perimeter": { "south": 25.87280, "west": -80.35935, "north": 25.87445, "east": -80.35720 },
-    "truckGate": null,
-    "dropYards": [
-      { "south": 25.87290, "west": -80.35830, "north": 25.87385, "east": -80.35730 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 25.874218,
+          "lng": -80.358981
+        },
+        {
+          "lat": 25.874589,
+          "lng": -80.357539
+        },
+        {
+          "lat": 25.873724,
+          "lng": -80.357195
+        },
+        {
+          "lat": 25.873353,
+          "lng": -80.3585
+        },
+        {
+          "lat": 25.873291,
+          "lng": -80.359118
+        },
+        {
+          "lat": 25.873847,
+          "lng": -80.359255
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 25.873847,
+          "lng": -80.359187
+        },
+        {
+          "lat": 25.873909,
+          "lng": -80.358912
+        },
+        {
+          "lat": 25.873693,
+          "lng": -80.358843
+        },
+        {
+          "lat": 25.873631,
+          "lng": -80.359118
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 25.87295, "west": -80.35930, "north": 25.87380, "east": -80.35790 },
-      { "south": 25.87370, "west": -80.35870, "north": 25.87445, "east": -80.35735 }
+      {
+        "ring": [
+          {
+            "lat": 25.873724,
+            "lng": -80.359049
+          },
+          {
+            "lat": 25.874032,
+            "lng": -80.357951
+          },
+          {
+            "lat": 25.873785,
+            "lng": -80.357848
+          },
+          {
+            "lat": 25.873476,
+            "lng": -80.358946
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 100,
+        "pano": "A_4AeQ06GFiuj0dJUupryA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 100,
+        "pano": "A_4AeQ06GFiuj0dJUupryA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 52,
@@ -49,7 +126,12 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "facility": "CrowleyFresh temperature-controlled distribution center, 11401 NW 100th Road, Suite 1, Medley FL. The address is a SUITE — CrowleyFresh occupies one tenant unit (the cold-storage section, 9 refrigerated dock doors per Crowley's spec) within a larger multi-tenant industrial warehouse. Positively identified by multiple CROWLEY reefer trailers backed into the dock face and parked in the yard (Street View 2025-11).",
     "truckGate": "FALSE. No controlled truck entrance. Street View shows open, ungated access from the industrial-park street directly into a shared paved dock court; only a stop sign at the road. No barrier arm, gate, or pinch-point.",

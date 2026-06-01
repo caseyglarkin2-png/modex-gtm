@@ -1,15 +1,87 @@
 {
   "name": "SalSon Logistics - Bakersfield CA",
   "type": "Intermodal / Fleet Location",
-  "coords": { "lat": 35.239200, "lng": -119.109300 },
+  "coords": {
+    "lat": 35.2392,
+    "lng": -119.1093
+  },
   "geofences": {
-    "perimeter": { "south": 35.237987, "west": -119.110455, "north": 35.240413, "east": -119.108145 },
-    "truckGate": { "south": 35.237803, "west": -119.109852, "north": 35.238297, "east": -119.109248 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.241163,
+          "lng": -119.109849
+        },
+        {
+          "lat": 35.241135,
+          "lng": -119.107652
+        },
+        {
+          "lat": 35.237854,
+          "lng": -119.107652
+        },
+        {
+          "lat": 35.237854,
+          "lng": -119.109849
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.238583,
+          "lng": -119.109849
+        },
+        {
+          "lat": 35.238583,
+          "lng": -119.10954
+        },
+        {
+          "lat": 35.238303,
+          "lng": -119.10954
+        },
+        {
+          "lat": 35.238303,
+          "lng": -119.109849
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 35.239611, "west": -119.110595, "north": 35.240689, "east": -119.109605 }
+      {
+        "ring": [
+          {
+            "lat": 35.241023,
+            "lng": -119.109712
+          },
+          {
+            "lat": 35.240995,
+            "lng": -119.108545
+          },
+          {
+            "lat": 35.2392,
+            "lng": -119.108579
+          },
+          {
+            "lat": 35.239228,
+            "lng": -119.109712
+          }
+        ]
+      }
     ],
     "dockAprons": [],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 29,
+        "pano": "-fnTzPwk6q7EypveHl6e7w",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 29,
+        "pano": "-fnTzPwk6q7EypveHl6e7w",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 0,
@@ -17,25 +89,46 @@
     "trailerParkingCapacity": 60,
     "truckGateCount": 1,
     "buildingCount": 6,
-    "siteAreaAcres": 14.0,
+    "siteAreaAcres": 14,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.239200,-119.109300,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "NONE", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "NONE",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "postGateStaging", "fastLaneOpportunity",
-    "dropArea", "scale", "dropYard", "buildingCount", "trailersVisible",
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "postGateStaging",
+    "fastLaneOpportunity",
+    "dropArea",
+    "scale",
+    "dropYard",
+    "buildingCount",
+    "trailersVisible",
     "trailerParkingCapacity"
   ],
   "fieldNotes": {

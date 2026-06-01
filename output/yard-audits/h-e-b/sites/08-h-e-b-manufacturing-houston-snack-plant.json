@@ -1,18 +1,108 @@
 {
   "name": "H-E-B Manufacturing - Houston Snack Plant (Genard Road) - Houston TX",
   "type": "Manufacturing Plant (Snacks / Tortilla Chips)",
-  "coords": { "lat": 29.843800, "lng": -95.541300 },
+  "coords": {
+    "lat": 29.8438,
+    "lng": -95.5413
+  },
   "geofences": {
-    "perimeter": { "south": 29.84230, "west": -95.54185, "north": 29.84510, "east": -95.54000 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.844217,
+          "lng": -95.542124
+        },
+        {
+          "lat": 29.844217,
+          "lng": -95.538004
+        },
+        {
+          "lat": 29.841835,
+          "lng": -95.538004
+        },
+        {
+          "lat": 29.841775,
+          "lng": -95.542124
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 29.8438,
+          "lng": -95.541987
+        },
+        {
+          "lat": 29.8438,
+          "lng": -95.541781
+        },
+        {
+          "lat": 29.843621,
+          "lng": -95.541781
+        },
+        {
+          "lat": 29.843621,
+          "lng": -95.541987
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 29.84230, "west": -95.54175, "north": 29.84320, "east": -95.54030 },
-      { "south": 29.84380, "west": -95.54060, "north": 29.84510, "east": -95.54000 }
+      {
+        "ring": [
+          {
+            "lat": 29.843085,
+            "lng": -95.541987
+          },
+          {
+            "lat": 29.843085,
+            "lng": -95.539789
+          },
+          {
+            "lat": 29.842132,
+            "lng": -95.539789
+          },
+          {
+            "lat": 29.842132,
+            "lng": -95.541987
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 29.84340, "west": -95.54090, "north": 29.84470, "east": -95.54020 }
+      {
+        "ring": [
+          {
+            "lat": 29.844038,
+            "lng": -95.541849
+          },
+          {
+            "lat": 29.844038,
+            "lng": -95.539652
+          },
+          {
+            "lat": 29.84386,
+            "lng": -95.539652
+          },
+          {
+            "lat": 29.84386,
+            "lng": -95.541849
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 130,
+        "pano": "4sJEeArUUY1y1qXb5BGRbQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 130,
+        "pano": "4sJEeArUUY1y1qXb5BGRbQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 16,
@@ -20,23 +110,43 @@
     "trailerParkingCapacity": 130,
     "truckGateCount": 0,
     "buildingCount": 1,
-    "siteAreaAcres": 14.0,
+    "siteAreaAcres": 14,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@29.843800,-95.541300,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "10000 Genard Rd, Houston TX 77041 confirmed - roster ROOFTOP geocode (moved 4 m) landed correctly on the snack-plant building. Verified by satellite (manufacturing building with heavy rooftop process equipment and corn/grain silos consistent with a tortilla-chip plant) and web research.",
     "truckGate": "The snack plant sits within the large fenced H-E-B Houston manufacturing campus. Campus perimeter has decorative metal fencing, but no barrier arm, sliding gate or guard booth was positively identified at the campus entrances in satellite or Street View - entrances appear as open paved driveways. Classified false but flagged uncertain; a controlled campus gate may exist out of the imagery probed.",

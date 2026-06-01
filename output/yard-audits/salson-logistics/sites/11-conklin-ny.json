@@ -1,17 +1,108 @@
 {
   "name": "SalSon Logistics - Dick's Sporting Goods Conklin DC (Dedicated Fleet) - Conklin NY",
   "type": "E-commerce distribution center (SalSon dedicated-fleet operation)",
-  "coords": { "lat": 42.04280, "lng": -75.81000 },
+  "coords": {
+    "lat": 42.0428,
+    "lng": -75.81
+  },
   "geofences": {
-    "perimeter": { "south": 42.03950, "west": -75.81250, "north": 42.04550, "east": -75.80700 },
-    "truckGate": { "south": 42.04140, "west": -75.81020, "north": 42.04190, "east": -75.80940 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.045809,
+          "lng": -75.815493
+        },
+        {
+          "lat": 42.046165,
+          "lng": -75.81
+        },
+        {
+          "lat": 42.039842,
+          "lng": -75.808833
+        },
+        {
+          "lat": 42.039332,
+          "lng": -75.814601
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.040301,
+          "lng": -75.811236
+        },
+        {
+          "lat": 42.040199,
+          "lng": -75.810343
+        },
+        {
+          "lat": 42.039689,
+          "lng": -75.810481
+        },
+        {
+          "lat": 42.039791,
+          "lng": -75.811373
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 42.04130, "west": -75.80950, "north": 42.04500, "east": -75.80700 }
+      {
+        "ring": [
+          {
+            "lat": 42.044789,
+            "lng": -75.810412
+          },
+          {
+            "lat": 42.044585,
+            "lng": -75.808695
+          },
+          {
+            "lat": 42.040607,
+            "lng": -75.809245
+          },
+          {
+            "lat": 42.040811,
+            "lng": -75.810961
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 42.04060, "west": -75.81120, "north": 42.04470, "east": -75.80980 }
+      {
+        "ring": [
+          {
+            "lat": 42.04535,
+            "lng": -75.814601
+          },
+          {
+            "lat": 42.045605,
+            "lng": -75.810275
+          },
+          {
+            "lat": 42.04484,
+            "lng": -75.81
+          },
+          {
+            "lat": 42.044585,
+            "lng": -75.814326
+          }
+        ]
+      }
     ],
-    "staging": { "south": 42.04150, "west": -75.80980, "north": 42.04280, "east": -75.80850 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 343,
+        "pano": "W1SVh8DCHZQOqEkIIhnZNQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 343,
+        "pano": "W1SVh8DCHZQOqEkIIhnZNQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 120,
@@ -19,7 +110,7 @@
     "trailerParkingCapacity": 550,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 68.0,
+    "siteAreaAcres": 68,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@42.04280,-75.81000,400m/data=!3m1!1e3",
@@ -48,7 +139,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "guardShack",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "locate": "Resolved to 1314 Conklin Road, Conklin NY 13748 — the Dick's Sporting Goods Conklin e-commerce distribution center, a large single-tenant DC in the Susquehanna River valley south of Binghamton. SalSon Logistics runs a DEDICATED-FLEET transportation operation out of this DC (SalSon is the carrier/transport partner, not the DC operator). Google geocode returned a ROOFTOP hit at 42.0411656,-75.8098423; the locked center is moved onto the building footprint. The old stub mislabeled this site 'Fishkill NY' — corrected to Conklin, NY.",
     "facilityNature": "A very large modern e-commerce DC building with an extensive trailer drop yard along its NE/east side. The building runs roughly NW-SE; docks face the east into the truck court / drop yard; employee car-parking is at the SE corner with the office.",

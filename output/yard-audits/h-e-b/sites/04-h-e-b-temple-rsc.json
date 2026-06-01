@@ -1,20 +1,77 @@
 {
   "name": "H-E-B Temple RSC - Temple TX",
   "type": "Retail Support Center / Distribution Center",
-  "coords": { "lat": 31.152500, "lng": -97.361700 },
+  "coords": {
+    "lat": 31.1525,
+    "lng": -97.3617
+  },
   "geofences": {
-    "perimeter": { "south": 31.148600, "west": -97.366500, "north": 31.156800, "east": -97.356000 },
-    "truckGate": { "south": 31.150300, "west": -97.359600, "north": 31.150900, "east": -97.358900 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 31.155321,
+          "lng": -97.369116
+        },
+        {
+          "lat": 31.155321,
+          "lng": -97.358404
+        },
+        {
+          "lat": 31.149679,
+          "lng": -97.358129
+        },
+        {
+          "lat": 31.149444,
+          "lng": -97.368841
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 31.149600, "west": -97.362400, "north": 31.151400, "east": -97.359800 },
-      { "south": 31.153400, "west": -97.366200, "north": 31.155800, "east": -97.363400 },
-      { "south": 31.150400, "west": -97.358900, "north": 31.151600, "east": -97.357200 }
+      {
+        "ring": [
+          {
+            "lat": 31.15203,
+            "lng": -97.364447
+          },
+          {
+            "lat": 31.15203,
+            "lng": -97.359503
+          },
+          {
+            "lat": 31.150149,
+            "lng": -97.359503
+          },
+          {
+            "lat": 31.150149,
+            "lng": -97.364447
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 31.152000, "west": -97.364200, "north": 31.154400, "east": -97.363400 },
-      { "south": 31.152200, "west": -97.362000, "north": 31.154200, "east": -97.361200 }
+      {
+        "ring": [
+          {
+            "lat": 31.1525,
+            "lng": -97.364447
+          },
+          {
+            "lat": 31.1525,
+            "lng": -97.359503
+          },
+          {
+            "lat": 31.15203,
+            "lng": -97.359503
+          },
+          {
+            "lat": 31.15203,
+            "lng": -97.364447
+          }
+        ]
+      }
     ],
-    "staging": { "south": 31.149400, "west": -97.359000, "north": 31.150600, "east": -97.357200 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 110,
@@ -22,23 +79,44 @@
     "trailerParkingCapacity": 280,
     "truckGateCount": 1,
     "buildingCount": 4,
-    "siteAreaAcres": 105.0,
+    "siteAreaAcres": 105,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@31.152500,-97.361700,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "multiStep", "connectivityIssue"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "multiStep",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "facility": "H-E-B Temple Retail Support Center, 4750 Wendland Rd — Central Texas distribution hub. Roster coordinates landed correctly inside the campus. A major $200M expansion adding an automated frozen-distribution line was under construction at the time of imagery (large active construction zone on the east half of the campus).",
     "truckGate": "Controlled truck entrance off the campus access road; Street View (2026-04) shows a red overhead gantry sign spanning the entrance driveway (check-in / routing instructions) and green perimeter fencing. truckGate true.",

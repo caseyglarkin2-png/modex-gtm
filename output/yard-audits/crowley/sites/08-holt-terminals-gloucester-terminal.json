@@ -1,18 +1,74 @@
 {
   "name": "Crowley Holt Terminals (Gloucester Terminal) - Gloucester City NJ",
   "type": "Marine terminal / breakbulk yard",
-  "coords": { "lat": 39.90350, "lng": -75.12550 },
+  "coords": {
+    "lat": 39.9035,
+    "lng": -75.1255
+  },
   "geofences": {
-    "perimeter": { "south": 39.90050, "west": -75.13050, "north": 39.90700, "east": -75.12150 },
-    "truckGate": { "south": 39.90230, "west": -75.12420, "north": 39.90300, "east": -75.12300 },
-    "dropYards": [
-      { "south": 39.90100, "west": -75.12700, "north": 39.90350, "east": -75.12250 },
-      { "south": 39.90400, "west": -75.12750, "north": 39.90680, "east": -75.12300 }
-    ],
-    "dockAprons": [
-      { "south": 39.90100, "west": -75.12950, "north": 39.90320, "east": -75.12650 }
-    ],
-    "staging": { "south": 39.90230, "west": -75.12600, "north": 39.90330, "east": -75.12350 }
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.903921,
+          "lng": -75.128247
+        },
+        {
+          "lat": 39.905607,
+          "lng": -75.124401
+        },
+        {
+          "lat": 39.9035,
+          "lng": -75.122479
+        },
+        {
+          "lat": 39.900129,
+          "lng": -75.124813
+        },
+        {
+          "lat": 39.899075,
+          "lng": -75.128247
+        },
+        {
+          "lat": 39.902236,
+          "lng": -75.129895
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.904343,
+          "lng": -75.124813
+        },
+        {
+          "lat": 39.904553,
+          "lng": -75.123852
+        },
+        {
+          "lat": 39.903816,
+          "lng": -75.123577
+        },
+        {
+          "lat": 39.903605,
+          "lng": -75.124539
+        }
+      ]
+    },
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 240,
+        "pano": "Jfmo8wH-x7wH8m5WTwWsKw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 240,
+        "pano": "Jfmo8wH-x7wH8m5WTwWsKw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 90,
@@ -20,23 +76,41 @@
     "trailerParkingCapacity": 350,
     "truckGateCount": 1,
     "buildingCount": 7,
-    "siteAreaAcres": 137.0,
+    "siteAreaAcres": 137,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@39.90350,-75.12550,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "scale", "trailersVisible"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "trailersVisible"
+  ],
   "fieldNotes": {
     "location": "Roster coords (39.903121,-75.122743) land at the terminal — confirmed correct. 160 Essex Street is the Pier 8 & 9 Warehouse (solar-powered, 25M cu ft refrigerated, 100+ dock doors) within the Holt-operated Gloucester Marine Terminal. Identified via satellite (solar-roofed warehouse complex on the Delaware River) and Street View (signed TRUCK ENTRANCE / GATE).",
     "truckGate": "Confirmed — Street View shows a posted 'TRUCK ENTRANCE' sign and a 'GATE' sign at the east entrance off Essex/King Street; a gate building and cone-managed gate lanes are visible (sv2/sv4). Satellite z20 shows a gate booth structure and a gate barrier arm across the lane.",

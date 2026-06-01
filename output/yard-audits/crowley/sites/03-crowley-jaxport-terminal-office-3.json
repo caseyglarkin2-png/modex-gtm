@@ -1,16 +1,108 @@
 {
   "name": "Crowley JAXPORT Terminal Office #3 - Jacksonville FL",
   "type": "Marine terminal / container yard",
-  "coords": { "lat": 30.356990, "lng": -81.625431 },
+  "coords": {
+    "lat": 30.35699,
+    "lng": -81.625431
+  },
   "geofences": {
-    "perimeter": { "south": 30.354000, "west": -81.628000, "north": 30.359000, "east": -81.621000 },
-    "truckGate": { "south": 30.356550, "west": -81.626100, "north": 30.357600, "east": -81.625000 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 30.36173,
+          "lng": -81.628178
+        },
+        {
+          "lat": 30.362441,
+          "lng": -81.621586
+        },
+        {
+          "lat": 30.357938,
+          "lng": -81.619663
+        },
+        {
+          "lat": 30.353672,
+          "lng": -81.621586
+        },
+        {
+          "lat": 30.352013,
+          "lng": -81.624744
+        },
+        {
+          "lat": 30.355568,
+          "lng": -81.626804
+        },
+        {
+          "lat": 30.358175,
+          "lng": -81.627903
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 30.357464,
+          "lng": -81.627354
+        },
+        {
+          "lat": 30.357701,
+          "lng": -81.626255
+        },
+        {
+          "lat": 30.356871,
+          "lng": -81.62598
+        },
+        {
+          "lat": 30.356634,
+          "lng": -81.627079
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 30.354000, "west": -81.625900, "north": 30.356700, "east": -81.622200 },
-      { "south": 30.356500, "west": -81.622600, "north": 30.358500, "east": -81.621000 }
+      {
+        "ring": [
+          {
+            "lat": 30.355568,
+            "lng": -81.624744
+          },
+          {
+            "lat": 30.356042,
+            "lng": -81.621586
+          },
+          {
+            "lat": 30.354146,
+            "lng": -81.621174
+          },
+          {
+            "lat": 30.353672,
+            "lng": -81.624332
+          }
+        ]
+      }
     ],
-    "dockAprons": [],
-    "staging": { "south": 30.356800, "west": -81.626200, "north": 30.357600, "east": -81.625400 }
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 30.357464,
+            "lng": -81.625431
+          },
+          {
+            "lat": 30.358175,
+            "lng": -81.620762
+          },
+          {
+            "lat": 30.357227,
+            "lng": -81.620624
+          },
+          {
+            "lat": 30.356516,
+            "lng": -81.625294
+          }
+        ]
+      }
+    ],
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 6,
@@ -18,23 +110,40 @@
     "trailerParkingCapacity": 900,
     "truckGateCount": 1,
     "buildingCount": 6,
-    "siteAreaAcres": 93.0,
+    "siteAreaAcres": 93,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@30.356990,-81.625431,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 3, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "0-10", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": true, "dropYard": true, "multiStep": true
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 3,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "0-10",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": true
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "dockDoors", "exitLanes"],
+  "uncertainFields": [
+    "scale",
+    "dockDoors",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "siteIdentification": "3001 Talleyrand Ave = Crowley Port Office #3. The roster point sits essentially ON the modernized north-gate canopy of the Talleyrand terminal. Idx 1 (2831), idx 3 (3001) and idx 4 (2085) are three Crowley offices on the SAME physical Talleyrand terminal complex; idx 3 is the gate/office at the north end. Audited as the northern terminal section centered on the gate.",
     "truckGate": "Confirmed at satellite z20: a multi-lane covered gate canopy with yellow lane chevrons painted on the apron - the modernized 'north gate'. A check-in booth structure sits at the head of the canopy.",

@@ -1,17 +1,104 @@
 {
   "name": "Crowley Wilmington Port Terminal - Wilmington NC",
   "type": "Marine terminal / cargo yard",
-  "coords": { "lat": 34.19300, "lng": -77.95200 },
+  "coords": {
+    "lat": 34.193,
+    "lng": -77.952
+  },
   "geofences": {
-    "perimeter": { "south": 34.18700, "west": -77.95550, "north": 34.19800, "east": -77.94850 },
-    "truckGate": { "south": 34.19130, "west": -77.94970, "north": 34.19200, "east": -77.94850 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.203904,
+          "lng": -77.956395
+        },
+        {
+          "lat": 34.20345,
+          "lng": -77.952
+        },
+        {
+          "lat": 34.193,
+          "lng": -77.952549
+        },
+        {
+          "lat": 34.185275,
+          "lng": -77.954197
+        },
+        {
+          "lat": 34.18573,
+          "lng": -77.957493
+        },
+        {
+          "lat": 34.195272,
+          "lng": -77.958592
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.194817,
+          "lng": -77.954747
+        },
+        {
+          "lat": 34.195045,
+          "lng": -77.952824
+        },
+        {
+          "lat": 34.193454,
+          "lng": -77.952549
+        },
+        {
+          "lat": 34.193227,
+          "lng": -77.954472
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 34.18900, "west": -77.95350, "north": 34.19450, "east": -77.94900 }
+      {
+        "ring": [
+          {
+            "lat": 34.191864,
+            "lng": -77.957493
+          },
+          {
+            "lat": 34.192318,
+            "lng": -77.952824
+          },
+          {
+            "lat": 34.187547,
+            "lng": -77.953099
+          },
+          {
+            "lat": 34.187093,
+            "lng": -77.957768
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 34.18800, "west": -77.95550, "north": 34.19600, "east": -77.95300 }
+      {
+        "ring": [
+          {
+            "lat": 34.198907,
+            "lng": -77.958592
+          },
+          {
+            "lat": 34.199361,
+            "lng": -77.954747
+          },
+          {
+            "lat": 34.195272,
+            "lng": -77.954472
+          },
+          {
+            "lat": 34.194817,
+            "lng": -77.958317
+          }
+        ]
+      }
     ],
-    "staging": { "south": 34.19120, "west": -77.95100, "north": 34.19250, "east": -77.94900 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 8,
@@ -19,23 +106,41 @@
     "trailerParkingCapacity": 400,
     "truckGateCount": 1,
     "buildingCount": 8,
-    "siteAreaAcres": 182.0,
+    "siteAreaAcres": 182,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@34.19300,-77.95200,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "0-10", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "0-10",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes", "scale"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes",
+    "scale"
+  ],
   "fieldNotes": {
     "location": "Roster coords (34.196262,-77.948378) landed at the port's administrative/office area on Burnett Boulevard. 2202 Burnett Blvd is the address of the Port of Wilmington (NC State Ports Authority) container terminal, where Crowley operates its Wilmington marine service. The operational container terminal is SW of the office cluster — locked center ~34.1930,-77.9520.",
     "truckGate": "Confirmed — Street View shows the divided port access road leading to a controlled gate; z20 satellite shows a gate booth structure with lane markings and a barrier arm, with a tractor-trailer passing through.",

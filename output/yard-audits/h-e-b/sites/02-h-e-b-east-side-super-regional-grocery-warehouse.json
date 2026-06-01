@@ -1,20 +1,104 @@
 {
   "name": "H-E-B East Side Super Regional Grocery Warehouse - San Antonio TX",
   "type": "Super Regional Grocery Distribution Center",
-  "coords": { "lat": 29.406300, "lng": -98.367000 },
+  "coords": {
+    "lat": 29.4063,
+    "lng": -98.367
+  },
   "geofences": {
-    "perimeter": { "south": 29.400900, "west": -98.372200, "north": 29.409200, "east": -98.362400 },
-    "truckGate": { "south": 29.401000, "west": -98.364800, "north": 29.401600, "east": -98.364000 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.407736,
+          "lng": -98.372905
+        },
+        {
+          "lat": 29.407975,
+          "lng": -98.366313
+        },
+        {
+          "lat": 29.405702,
+          "lng": -98.365489
+        },
+        {
+          "lat": 29.401275,
+          "lng": -98.365764
+        },
+        {
+          "lat": 29.401036,
+          "lng": -98.369747
+        },
+        {
+          "lat": 29.405702,
+          "lng": -98.372493
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 29.407496,
+          "lng": -98.366313
+        },
+        {
+          "lat": 29.407496,
+          "lng": -98.365489
+        },
+        {
+          "lat": 29.407018,
+          "lng": -98.365489
+        },
+        {
+          "lat": 29.407018,
+          "lng": -98.366313
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 29.404400, "west": -98.371800, "north": 29.405400, "east": -98.367000 },
-      { "south": 29.408800, "west": -98.370200, "north": 29.409200, "east": -98.364800 },
-      { "south": 29.401700, "west": -98.365400, "north": 29.402400, "east": -98.363900 }
+      {
+        "ring": [
+          {
+            "lat": 29.402472,
+            "lng": -98.369335
+          },
+          {
+            "lat": 29.402591,
+            "lng": -98.366313
+          },
+          {
+            "lat": 29.401275,
+            "lng": -98.366176
+          },
+          {
+            "lat": 29.401156,
+            "lng": -98.369197
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 29.405300, "west": -98.371800, "north": 29.405900, "east": -98.367000 },
-      { "south": 29.408200, "west": -98.370200, "north": 29.408800, "east": -98.364800 }
+      {
+        "ring": [
+          {
+            "lat": 29.407257,
+            "lng": -98.366313
+          },
+          {
+            "lat": 29.405343,
+            "lng": -98.365764
+          },
+          {
+            "lat": 29.405223,
+            "lng": -98.366176
+          },
+          {
+            "lat": 29.407137,
+            "lng": -98.366725
+          }
+        ]
+      }
     ],
-    "staging": { "south": 29.401700, "west": -98.365400, "north": 29.402600, "east": -98.363800 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 200,
@@ -22,23 +106,41 @@
     "trailerParkingCapacity": 280,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 130.0,
+    "siteAreaAcres": 130,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@29.406300,-98.367000,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "scale", "multiStep"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "multiStep"
+  ],
   "fieldNotes": {
     "location": "Roster coordinates (29.365943, -98.360808) were ~5.5 km off (GEOMETRIC_CENTER of a city polygon over farmland). Web search resolved the facility to 2045 S Foster Rd, San Antonio TX 78222; the 1.6M sq ft warehouse sits at ~29.4063, -98.3670 along I-10 / Foster Rd on H-E-B's 871-acre East Side campus.",
     "truckGate": "Dedicated truck entrance off Foster Rd, separate from the 'Partner/Visitor Entrance (No Trucks)' roundabout at the NE. A gatehouse building (red roof) with an attached smaller white-roofed structure sits beside the truck lanes; sliding perimeter gate visible on the fence line at z21. Clear controlled, fenced entrance.",

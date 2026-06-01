@@ -1,18 +1,112 @@
 {
   "name": "Nestlé Professional - Trenton MO",
   "type": "Food manufacturing plant (foodservice / Chef-mate)",
-  "coords": { "lat": 40.08080, "lng": -93.61050 },
+  "coords": {
+    "lat": 40.0808,
+    "lng": -93.6105
+  },
   "geofences": {
-    "perimeter": { "south": 40.07880, "west": -93.61245, "north": 40.08210, "east": -93.60775 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.081115,
+          "lng": -93.612011
+        },
+        {
+          "lat": 40.080958,
+          "lng": -93.608577
+        },
+        {
+          "lat": 40.079329,
+          "lng": -93.608646
+        },
+        {
+          "lat": 40.079224,
+          "lng": -93.611461
+        },
+        {
+          "lat": 40.08017,
+          "lng": -93.612079
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.081063,
+          "lng": -93.609401
+        },
+        {
+          "lat": 40.081063,
+          "lng": -93.608989
+        },
+        {
+          "lat": 40.0808,
+          "lng": -93.608989
+        },
+        {
+          "lat": 40.0808,
+          "lng": -93.609401
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.08130, "west": -93.60930, "north": 40.08210, "east": -93.60840 }
+      {
+        "ring": [
+          {
+            "lat": 40.0808,
+            "lng": -93.609264
+          },
+          {
+            "lat": 40.080747,
+            "lng": -93.608577
+          },
+          {
+            "lat": 40.079434,
+            "lng": -93.608612
+          },
+          {
+            "lat": 40.079487,
+            "lng": -93.609298
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.07955, "west": -93.61190, "north": 40.08120, "east": -93.61120 },
-      { "south": 40.07880, "west": -93.61120, "north": 40.07955, "east": -93.61020 }
+      {
+        "ring": [
+          {
+            "lat": 40.0808,
+            "lng": -93.611873
+          },
+          {
+            "lat": 40.080695,
+            "lng": -93.610157
+          },
+          {
+            "lat": 40.080432,
+            "lng": -93.610191
+          },
+          {
+            "lat": 40.080537,
+            "lng": -93.611908
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 212,
+        "pano": "c3_-r4Aw66eMYeu9R7g1HA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 212,
+        "pano": "c3_-r4Aw66eMYeu9R7g1HA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 14,
@@ -20,23 +114,44 @@
     "trailerParkingCapacity": 35,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 12.0,
+    "siteAreaAcres": 12,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@40.08080,-93.61050,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "entryLanes", "exitLanes", "scale", "shipRcvSeparate"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "locating": "Roster coords (40.094265, -93.603911) and the roster's stated address (1011 Industrial Rd) are both wrong/unconfirmed; the roster itself flags the street as approximate. The plant's real address is 1401 Harris Ave, Trenton MO (per Waze/Manta/LoopNet, APN 110516030601100). The correct building was found ~1.5 km SW of the roster point and positively confirmed by a Street View showing a 'Nestlé PROFESSIONAL - Making MORE Possible' employee-entrance sign on the building's east face. Locked center 40.08080, -93.61050.",
     "truckGate": "No controlled truck gate identified. The plant is an older urban-fabric food plant; the SW/S truck yard reads as open paved area continuous with the adjacent street, with tractors and trailers parked freely. Chain-link fencing exists along parts of the perimeter (W and S) but the truck yard entrance shows no barrier arm or pinch-point in 2023 Street View. Classified false; flagged uncertain.",

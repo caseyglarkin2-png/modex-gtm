@@ -1,17 +1,128 @@
 {
   "name": "SalSon Logistics - Compton CA",
   "type": "Intermodal / Transload Warehouse + Secured Yard",
-  "coords": { "lat": 33.860150, "lng": -118.229800 },
+  "coords": {
+    "lat": 33.86015,
+    "lng": -118.2298
+  },
   "geofences": {
-    "perimeter": { "south": 33.85920, "west": -118.23120, "north": 33.86150, "east": -118.22840 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.861547,
+          "lng": -118.232066
+        },
+        {
+          "lat": 33.861547,
+          "lng": -118.229216
+        },
+        {
+          "lat": 33.85824,
+          "lng": -118.229216
+        },
+        {
+          "lat": 33.85824,
+          "lng": -118.232066
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.86015,
+          "lng": -118.232066
+        },
+        {
+          "lat": 33.86015,
+          "lng": -118.231757
+        },
+        {
+          "lat": 33.859865,
+          "lng": -118.231757
+        },
+        {
+          "lat": 33.859865,
+          "lng": -118.232066
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 33.86010, "west": -118.23090, "north": 33.86110, "east": -118.22960 }
+      {
+        "ring": [
+          {
+            "lat": 33.860036,
+            "lng": -118.230418
+          },
+          {
+            "lat": 33.860036,
+            "lng": -118.229251
+          },
+          {
+            "lat": 33.859124,
+            "lng": -118.229251
+          },
+          {
+            "lat": 33.859124,
+            "lng": -118.230418
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.86040, "west": -118.23090, "north": 33.86110, "east": -118.22920 }
+      {
+        "ring": [
+          {
+            "lat": 33.860977,
+            "lng": -118.231585
+          },
+          {
+            "lat": 33.860977,
+            "lng": -118.230555
+          },
+          {
+            "lat": 33.860692,
+            "lng": -118.230555
+          },
+          {
+            "lat": 33.860692,
+            "lng": -118.231585
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.85995,
+            "lng": -118.231791
+          },
+          {
+            "lat": 33.85995,
+            "lng": -118.230487
+          },
+          {
+            "lat": 33.859665,
+            "lng": -118.230487
+          },
+          {
+            "lat": 33.859665,
+            "lng": -118.231791
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 101,
+        "pano": "R5o-gIKDR3yfMTZE4xGXOQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 101,
+        "pano": "R5o-gIKDR3yfMTZE4xGXOQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 30,
@@ -48,7 +159,12 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "dropArea"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoors",
+    "dropArea"
+  ],
   "fieldNotes": {
     "_addressDiscrepancy": "ROSTER vs DOSSIER mismatch. The roster address 18735 S Ferris Pl, Compton CA geocodes to the existing Total Transportation Services (TTSI) headquarters building (PropertyShark/LoopNet: ~118,740 sq ft warehouse, built 1998). TTSI acquired SalSon Logistics in Sept 2022, so SalSon Logistics Services LLC (USDOT 3968944) is registered at the TTSI corporate campus. The dossier separately describes a 'brand-new West Compton site, still under construction, 260,000 sq ft, 66 dock doors, 20-acre secured yard' — that is a DIFFERENT, future facility with no public street address. This audit covers the building at the roster address (the operational TTSI/SalSon Compton warehouse), not the unbuilt West Compton site.",
     "truckGate": "No controlled truck gate at the property line. Street View (2025) shows an open paved driveway off S Ferris Place leading into the dock/truck court between buildings, with no barrier arm or sliding gate. Flagged uncertain — interior court fencing/gates within the multi-tenant logistics park were not fully resolvable.",

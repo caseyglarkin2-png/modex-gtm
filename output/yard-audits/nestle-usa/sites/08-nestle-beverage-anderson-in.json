@@ -1,19 +1,132 @@
 {
   "name": "Nestlé Beverage - Anderson IN",
   "type": "Beverage manufacturing plant + distribution center",
-  "coords": { "lat": 40.03820, "lng": -85.74400 },
+  "coords": {
+    "lat": 40.0382,
+    "lng": -85.744
+  },
   "geofences": {
-    "perimeter": { "south": 40.03390, "west": -85.74920, "north": 40.04160, "east": -85.73980 },
-    "truckGate": { "south": 40.03850, "west": -85.74820, "north": 40.03930, "east": -85.74720 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.039251,
+          "lng": -85.747845
+        },
+        {
+          "lat": 40.039462,
+          "lng": -85.740704
+        },
+        {
+          "lat": 40.036518,
+          "lng": -85.740155
+        },
+        {
+          "lat": 40.035887,
+          "lng": -85.745373
+        },
+        {
+          "lat": 40.037359,
+          "lng": -85.74812
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.036728,
+          "lng": -85.740979
+        },
+        {
+          "lat": 40.036728,
+          "lng": -85.740155
+        },
+        {
+          "lat": 40.036202,
+          "lng": -85.740155
+        },
+        {
+          "lat": 40.036202,
+          "lng": -85.740979
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.03520, "west": -85.74720, "north": 40.03900, "east": -85.74480 },
-      { "south": 40.03640, "west": -85.74480, "north": 40.03940, "east": -85.74380 }
+      {
+        "ring": [
+          {
+            "lat": 40.036938,
+            "lng": -85.747296
+          },
+          {
+            "lat": 40.036938,
+            "lng": -85.744549
+          },
+          {
+            "lat": 40.035992,
+            "lng": -85.744618
+          },
+          {
+            "lat": 40.035992,
+            "lng": -85.747365
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.039041,
+            "lng": -85.747845
+          },
+          {
+            "lat": 40.039041,
+            "lng": -85.745373
+          },
+          {
+            "lat": 40.038305,
+            "lng": -85.745442
+          },
+          {
+            "lat": 40.038305,
+            "lng": -85.747914
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.03640, "west": -85.74660, "north": 40.03960, "east": -85.74560 },
-      { "south": 40.03560, "west": -85.74560, "north": 40.03680, "east": -85.74420 }
+      {
+        "ring": [
+          {
+            "lat": 40.037149,
+            "lng": -85.745099
+          },
+          {
+            "lat": 40.037201,
+            "lng": -85.741528
+          },
+          {
+            "lat": 40.036728,
+            "lng": -85.741597
+          },
+          {
+            "lat": 40.036675,
+            "lng": -85.745167
+          }
+        ]
+      }
     ],
-    "staging": { "south": 40.03840, "west": -85.74720, "north": 40.03960, "east": -85.74480 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 248,
+        "pano": "tXGsCtpcUq6rIZPwcPbdbw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 248,
+        "pano": "tXGsCtpcUq6rIZPwcPbdbw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 70,
@@ -21,23 +134,43 @@
     "trailerParkingCapacity": 260,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 80.0,
+    "siteAreaAcres": 80,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.03820,-85.74400,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "truckGateCount"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "truckGateCount"
+  ],
   "fieldNotes": {
     "locating": "Roster coords (40.171509, -85.766582) landed in farmland ~15 km NW of the plant. Web research established the Nestlé beverage factory + DC is south of Anderson along I-69 (a.k.a. 4301 W 450 S / 4301 W 73rd St). The correct building - a ~1.1M sq ft multi-section plant with milk/liquid storage tanks on the NE and large trailer drop yards on the W - was located at approximately 40.0382, -85.7440 ('I-69/Hwy 38 west of exit 222, north side', per the Nesquik Bunny landmark). Locked center 40.03820, -85.74400.",
     "truckGate": "Modern (2008-built, $359M) Nestlé beverage factory + distribution center on a fully private campus with a perimeter road loop, surrounded by buffer land, ponds and farmland. A controlled, guarded truck gate is near-certain for a food-grade beverage plant + DC of this scale; the truck flow enters from the W side. The exact barrier arm could not be isolated in satellite imagery and there is no public Street View reaching the entrance, so flagged uncertain.",

@@ -1,37 +1,168 @@
 {
   "name": "SalSon Logistics - Savannah GA",
   "type": "Drayage Terminal / Crossdock Warehouse + Container Yard",
-  "coords": { "lat": 32.089450, "lng": -81.134250 },
+  "coords": {
+    "lat": 32.08945,
+    "lng": -81.13425
+  },
   "geofences": {
-    "perimeter": { "south": 32.088600, "west": -81.135150, "north": 32.090300, "east": -81.133300 },
-    "truckGate": { "south": 32.089060, "west": -81.134700, "north": 32.089200, "east": -81.134450 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.090163,
+          "lng": -81.135263
+        },
+        {
+          "lat": 32.090163,
+          "lng": -81.133701
+        },
+        {
+          "lat": 32.088403,
+          "lng": -81.133615
+        },
+        {
+          "lat": 32.088403,
+          "lng": -81.135091
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.090134,
+          "lng": -81.134593
+        },
+        {
+          "lat": 32.090134,
+          "lng": -81.134387
+        },
+        {
+          "lat": 32.090003,
+          "lng": -81.134387
+        },
+        {
+          "lat": 32.090003,
+          "lng": -81.134593
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 32.088650, "west": -81.134400, "north": 32.089350, "east": -81.133350 }
+      {
+        "ring": [
+          {
+            "lat": 32.089857,
+            "lng": -81.134422
+          },
+          {
+            "lat": 32.089857,
+            "lng": -81.133632
+          },
+          {
+            "lat": 32.089101,
+            "lng": -81.133615
+          },
+          {
+            "lat": 32.089101,
+            "lng": -81.134387
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 32.088926,
+            "lng": -81.134593
+          },
+          {
+            "lat": 32.088926,
+            "lng": -81.133701
+          },
+          {
+            "lat": 32.088403,
+            "lng": -81.133701
+          },
+          {
+            "lat": 32.088403,
+            "lng": -81.134559
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 32.089250, "west": -81.134550, "north": 32.089650, "east": -81.133900 }
+      {
+        "ring": [
+          {
+            "lat": 32.089421,
+            "lng": -81.135417
+          },
+          {
+            "lat": 32.089566,
+            "lng": -81.134628
+          },
+          {
+            "lat": 32.089159,
+            "lng": -81.134593
+          },
+          {
+            "lat": 32.089014,
+            "lng": -81.135383
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 176,
+        "pano": "AVq49npxlnK28Hw8nH4oHg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 176,
+        "pano": "AVq49npxlnK28Hw8nH4oHg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 28, "trailersVisible": 55, "trailerParkingCapacity": 90,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 3.8,
+    "dockDoorCount": 28,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 3.8,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.089450,-81.134250,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "1501 Lissner Ave, Savannah GA 31408 — confirmed via Colliers/LoopNet commercial listing describing the property as a 'Truck Terminal / Container Yard with Crossdock Warehouse', 3.75 acres, 7,800 SF crossdock with 28 dock doors (expandable to 34), 2,550 SF office. SalSon-branded tractors and Ryder trailers visible in Street View along Lissner Ave. The neighboring red-brick TForce office building is a separate property.",
     "truckGate": "2018 Street View shows a chain-link sliding/swing gate across the yard driveway with a STOP sign — controlled entry.",

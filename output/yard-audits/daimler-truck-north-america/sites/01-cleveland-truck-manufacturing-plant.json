@@ -1,15 +1,98 @@
 {
   "name": "Cleveland Truck Manufacturing Plant - Cleveland NC",
   "type": "Truck assembly plant",
-  "coords": { "lat": 35.732000, "lng": -80.691000 },
+  "coords": {
+    "lat": 35.732,
+    "lng": -80.691
+  },
   "geofences": {
-    "perimeter": { "south": 35.728900, "west": -80.698800, "north": 35.735400, "east": -80.684500 },
-    "truckGate": { "south": 35.730350, "west": -80.694900, "north": 35.730900, "east": -80.694200 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.733784,
+          "lng": -80.698965
+        },
+        {
+          "lat": 35.733115,
+          "lng": -80.686605
+        },
+        {
+          "lat": 35.72977,
+          "lng": -80.685781
+        },
+        {
+          "lat": 35.728433,
+          "lng": -80.694021
+        },
+        {
+          "lat": 35.730885,
+          "lng": -80.699789
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.729102,
+          "lng": -80.693747
+        },
+        {
+          "lat": 35.729102,
+          "lng": -80.692099
+        },
+        {
+          "lat": 35.72821,
+          "lng": -80.692099
+        },
+        {
+          "lat": 35.72821,
+          "lng": -80.693747
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 35.732600, "west": -80.700200, "north": 35.735300, "east": -80.694400 }
+      {
+        "ring": [
+          {
+            "lat": 35.730885,
+            "lng": -80.693197
+          },
+          {
+            "lat": 35.730662,
+            "lng": -80.686605
+          },
+          {
+            "lat": 35.729993,
+            "lng": -80.686605
+          },
+          {
+            "lat": 35.730216,
+            "lng": -80.693197
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.731600, "west": -80.692400, "north": 35.733000, "east": -80.689000 }
+      {
+        "ring": [
+          {
+            "lat": 35.73122,
+            "lng": -80.693747
+          },
+          {
+            "lat": 35.730997,
+            "lng": -80.68688
+          },
+          {
+            "lat": 35.730774,
+            "lng": -80.68688
+          },
+          {
+            "lat": 35.730997,
+            "lng": -80.693747
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -19,23 +102,41 @@
     "trailerParkingCapacity": 450,
     "truckGateCount": 1,
     "buildingCount": 6,
-    "siteAreaAcres": 200.0,
+    "siteAreaAcres": 200,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@35.732000,-80.691000,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "scale", "multiStep"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "scale",
+    "multiStep"
+  ],
   "fieldNotes": {
     "truckGate": "Main controlled entrance on Statesville Blvd (US-70) at a signalized intersection, with a 'DAIMLER TRUCK' canopy gateway structure over a divided entry drive. Campus fully fenced (continuous chain-link confirmed in multiple Street Views along the road frontage).",
     "guardShack": "No discrete 1-3-vehicle guard booth visible at the canopy entrance in satellite or Street View; entrance is a canopy/gateway-sign structure, so a staffed booth could not be confirmed - treated as remote/kiosk check-in.",

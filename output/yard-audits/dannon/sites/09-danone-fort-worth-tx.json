@@ -1,17 +1,108 @@
 {
   "name": "Danone - Fort Worth TX",
   "type": "Fresh yogurt plant",
-  "coords": { "lat": 32.741022, "lng": -97.339329 },
+  "coords": {
+    "lat": 32.741022,
+    "lng": -97.339329
+  },
   "geofences": {
-    "perimeter": { "south": 32.739700, "west": -97.341000, "north": 32.742350, "east": -97.337800 },
-    "truckGate": { "south": 32.740400, "west": -97.340700, "north": 32.740900, "east": -97.340200 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.742004,
+          "lng": -97.341526
+        },
+        {
+          "lat": 32.741831,
+          "lng": -97.338299
+        },
+        {
+          "lat": 32.739751,
+          "lng": -97.338436
+        },
+        {
+          "lat": 32.739982,
+          "lng": -97.341664
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.739925,
+          "lng": -97.340016
+        },
+        {
+          "lat": 32.739867,
+          "lng": -97.339604
+        },
+        {
+          "lat": 32.739636,
+          "lng": -97.339638
+        },
+        {
+          "lat": 32.739694,
+          "lng": -97.34005
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 32.740400, "west": -97.341000, "north": 32.741400, "east": -97.340300 }
+      {
+        "ring": [
+          {
+            "lat": 32.741831,
+            "lng": -97.341046
+          },
+          {
+            "lat": 32.741773,
+            "lng": -97.340359
+          },
+          {
+            "lat": 32.740156,
+            "lng": -97.340393
+          },
+          {
+            "lat": 32.740213,
+            "lng": -97.34108
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 32.741400, "west": -97.339800, "north": 32.742100, "east": -97.338600 }
+      {
+        "ring": [
+          {
+            "lat": 32.7416,
+            "lng": -97.340702
+          },
+          {
+            "lat": 32.741484,
+            "lng": -97.338986
+          },
+          {
+            "lat": 32.741195,
+            "lng": -97.33902
+          },
+          {
+            "lat": 32.741311,
+            "lng": -97.340737
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 356,
+        "pano": "ZJf9GFqdMhONeP7_fjptwQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 356,
+        "pano": "ZJf9GFqdMhONeP7_fjptwQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 18,
@@ -24,18 +115,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@32.741022,-97.339329,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "A sliding chain-link gate spans the truck driveway off the west street, with a 'Shipping & Receiving' directional sign at the entrance (Street View Jan 2025). Clear controlled truck gate.",
     "guardShack": "No staffed guard booth - no small windowed structure beside the gate in Street View or satellite. The 'Shipping & Receiving' sign directs drivers; check-in is at the building.",

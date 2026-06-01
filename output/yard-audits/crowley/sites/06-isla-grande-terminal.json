@@ -1,18 +1,103 @@
 {
   "name": "Crowley Isla Grande Terminal - San Juan PR",
   "type": "Marine terminal / container port (LNG-fueled microgrid, ConRo)",
-  "coords": { "lat": 18.45400, "lng": -66.10050 },
+  "coords": {
+    "lat": 18.454,
+    "lng": -66.1005
+  },
   "geofences": {
-    "perimeter": { "south": 18.45000, "west": -66.10450, "north": 18.45650, "east": -66.09600 },
-    "truckGate": { "south": 18.45420, "west": -66.10210, "north": 18.45480, "east": -66.10130 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 18.459732,
+          "lng": -66.104895
+        },
+        {
+          "lat": 18.460253,
+          "lng": -66.098852
+        },
+        {
+          "lat": 18.455303,
+          "lng": -66.09432
+        },
+        {
+          "lat": 18.449831,
+          "lng": -66.09638
+        },
+        {
+          "lat": 18.44905,
+          "lng": -66.101187
+        },
+        {
+          "lat": 18.454651,
+          "lng": -66.105993
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 18.458169,
+          "lng": -66.099127
+        },
+        {
+          "lat": 18.458429,
+          "lng": -66.098028
+        },
+        {
+          "lat": 18.457517,
+          "lng": -66.097753
+        },
+        {
+          "lat": 18.457257,
+          "lng": -66.098852
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 18.45250, "west": -66.10180, "north": 18.45470, "east": -66.09650 },
-      { "south": 18.45050, "west": -66.10080, "north": 18.45300, "east": -66.09700 }
+      {
+        "ring": [
+          {
+            "lat": 18.453739,
+            "lng": -66.101599
+          },
+          {
+            "lat": 18.454,
+            "lng": -66.097479
+          },
+          {
+            "lat": 18.450352,
+            "lng": -66.097204
+          },
+          {
+            "lat": 18.450092,
+            "lng": -66.101324
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 18.454,
+            "lng": -66.097204
+          },
+          {
+            "lat": 18.454261,
+            "lng": -66.094458
+          },
+          {
+            "lat": 18.450874,
+            "lng": -66.09432
+          },
+          {
+            "lat": 18.450352,
+            "lng": -66.096929
+          }
+        ]
+      }
     ],
-    "dockAprons": [
-      { "south": 18.45380, "west": -66.10420, "north": 18.45520, "east": -66.10250 }
-    ],
-    "staging": { "south": 18.45470, "west": -66.10250, "north": 18.45530, "east": -66.09850 }
+    "dockAprons": [],
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 12,
@@ -20,23 +105,40 @@
     "trailerParkingCapacity": 600,
     "truckGateCount": 1,
     "buildingCount": 9,
-    "siteAreaAcres": 160.0,
+    "siteAreaAcres": 160,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@18.45400,-66.10050,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": true,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 3, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": true,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 3,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "exitLanes", "scale"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "exitLanes",
+    "scale"
+  ],
   "fieldNotes": {
     "location": "Roster coords (18.45679,-66.093211) landed on the Isla Grande airport runway ~1km NE of the terminal. True terminal located SW of the runway via satellite + Street View; access road is Calle Lindbergh running along the airport's south edge.",
     "truckGate": "Multi-lane gate complex with a long overhead steel canopy spanning the inbound/outbound lanes, visible in Street View (sv12/sv14) at ~18.4546,-66.1015. Controlled marine-terminal gate.",

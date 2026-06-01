@@ -1,18 +1,115 @@
 {
   "name": "Crowley Jacksonville Distribution Center (Dry/LCL) - Jacksonville FL",
   "type": "Distribution center / dry + LCL warehouse",
-  "coords": { "lat": 30.36340, "lng": -81.69445 },
+  "coords": {
+    "lat": 30.3634,
+    "lng": -81.69445
+  },
   "geofences": {
-    "perimeter": { "south": 30.36270, "west": -81.69560, "north": 30.36405, "east": -81.69335 },
-    "truckGate": { "south": 30.36290, "west": -81.69560, "north": 30.36320, "east": -81.69525 },
-    "dropYards": [
-      { "south": 30.36280, "west": -81.69430, "north": 30.36360, "east": -81.69335 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 30.364703,
+          "lng": -81.695205
+        },
+        {
+          "lat": 30.364644,
+          "lng": -81.693351
+        },
+        {
+          "lat": 30.362571,
+          "lng": -81.693351
+        },
+        {
+          "lat": 30.362452,
+          "lng": -81.694793
+        },
+        {
+          "lat": 30.363104,
+          "lng": -81.695205
+        },
+        {
+          "lat": 30.363992,
+          "lng": -81.695137
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 30.363696,
+          "lng": -81.695274
+        },
+        {
+          "lat": 30.363726,
+          "lng": -81.694999
+        },
+        {
+          "lat": 30.363518,
+          "lng": -81.694965
+        },
+        {
+          "lat": 30.363489,
+          "lng": -81.69524
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 30.36320, "west": -81.69500, "north": 30.36390, "east": -81.69455 },
-      { "south": 30.36280, "west": -81.69455, "north": 30.36335, "east": -81.69385 }
+      {
+        "ring": [
+          {
+            "lat": 30.363045,
+            "lng": -81.695068
+          },
+          {
+            "lat": 30.363104,
+            "lng": -81.693695
+          },
+          {
+            "lat": 30.362808,
+            "lng": -81.69366
+          },
+          {
+            "lat": 30.362748,
+            "lng": -81.695034
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 30.364348,
+            "lng": -81.69342
+          },
+          {
+            "lat": 30.364407,
+            "lng": -81.693214
+          },
+          {
+            "lat": 30.363696,
+            "lng": -81.693008
+          },
+          {
+            "lat": 30.363637,
+            "lng": -81.693248
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 183,
+        "pano": "xIxAYc00w6wkLafYt9bnJw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 183,
+        "pano": "xIxAYc00w6wkLafYt9bnJw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 27,
@@ -49,7 +146,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "facility": "Crowley Jacksonville Dry/LCL Distribution Center, 2113 W 30th Street. Identified positively by CROWLEY-branded trailers backed into the dock face in 2025-03 Street View. The roster's geocoded point landed on this white L-shaped warehouse; the brown-roofed building to the north is a separate tenant ('USA Big Mountain Paper, 2160').",
     "truckGate": "The fenced truck yard (chain-link perimeter) is entered from the unnamed industrial street on the SW side. Street View shows a chain-link gate opening; no barrier-arm at the public road but a controlled fenced yard entrance.",

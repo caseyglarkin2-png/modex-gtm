@@ -1,37 +1,125 @@
 {
   "name": "Danone - City of Industry CA",
   "type": "Plant-based & coffee beverage plant (refrigerated)",
-  "coords": { "lat": 34.00460, "lng": -117.90590 },
+  "coords": {
+    "lat": 34.0046,
+    "lng": -117.9059
+  },
   "geofences": {
-    "perimeter": { "south": 34.00355, "west": -117.90730, "north": 34.00580, "east": -117.90480 },
-    "truckGate": { "south": 34.00400, "west": -117.90605, "north": 34.00440, "east": -117.90560 },
-    "dropYards": [
-      { "south": 34.00430, "west": -117.90680, "north": 34.00470, "east": -117.90580 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.005625,
+          "lng": -117.907788
+        },
+        {
+          "lat": 34.005454,
+          "lng": -117.905522
+        },
+        {
+          "lat": 34.004486,
+          "lng": -117.904801
+        },
+        {
+          "lat": 34.003917,
+          "lng": -117.905076
+        },
+        {
+          "lat": 34.004145,
+          "lng": -117.90693
+        },
+        {
+          "lat": 34.005169,
+          "lng": -117.907891
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.005169,
+          "lng": -117.907479
+        },
+        {
+          "lat": 34.005283,
+          "lng": -117.907136
+        },
+        {
+          "lat": 34.004998,
+          "lng": -117.90693
+        },
+        {
+          "lat": 34.004885,
+          "lng": -117.907273
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 34.00430, "west": -117.90600, "north": 34.00475, "east": -117.90510 }
+      {
+        "ring": [
+          {
+            "lat": 34.005568,
+            "lng": -117.907685
+          },
+          {
+            "lat": 34.005397,
+            "lng": -117.905557
+          },
+          {
+            "lat": 34.005112,
+            "lng": -117.905625
+          },
+          {
+            "lat": 34.005283,
+            "lng": -117.90772
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 14, "trailersVisible": 8, "trailerParkingCapacity": 14,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 14.0,
+    "dockDoorCount": 14,
+    "trailersVisible": 8,
+    "trailerParkingCapacity": 14,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 14,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.00460,-117.90590,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "entryLanes", "exitLanes", "dockDoors"],
+  "uncertainFields": [
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoors"
+  ],
   "fieldNotes": {
     "truckGate": "The site is fully enclosed by a metal perimeter fence and masonry wall. Street View on Arenth Avenue (pano 34.00407,-117.90599) clearly shows a swing/sliding metal gate across the truck entrance lane, with the process plant (silos, tanks) behind it.",
     "guardShack": "No staffed guard booth at the gate - Street View shows only wall-mounted signs beside the gate; no 1-3-vehicle-footprint booth structure. Small structures visible inside the fence are process/utility, not a gatehouse.",

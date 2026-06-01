@@ -1,33 +1,74 @@
 {
   "name": "Danone - Scottsdale AZ",
   "type": "Equipment / dispensing operations site",
-  "coords": { "lat": 33.61915, "lng": -111.91230 },
+  "coords": {
+    "lat": 33.61915,
+    "lng": -111.9123
+  },
   "geofences": {
-    "perimeter": { "south": 33.61878, "west": -111.91285, "north": 33.61952, "east": -111.91178 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.61915,
+          "lng": -111.912849
+        },
+        {
+          "lat": 33.619407,
+          "lng": -111.912437
+        },
+        {
+          "lat": 33.619193,
+          "lng": -111.912214
+        },
+        {
+          "lat": 33.618936,
+          "lng": -111.912626
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 2, "trailersVisible": 0, "trailerParkingCapacity": 0,
-    "truckGateCount": 0, "buildingCount": 1, "siteAreaAcres": 0.7,
+    "dockDoorCount": 2,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 0.7,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.61915,-111.91230,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "0-10", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount"],
+  "uncertainFields": [
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "truckGate": "No controlled truck entrance. The building is a small multi-tenant-style flex/industrial unit in the Scottsdale Airpark business park; access is via open, ungated business-park drive aisles and a shared surface parking lot.",
     "guardShack": "No guard booth - open business-park site.",

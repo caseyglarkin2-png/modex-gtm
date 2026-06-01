@@ -1,15 +1,73 @@
 {
   "name": "Whitestown Redistribution Center (RDC) - Whitestown IN",
   "type": "Parts redistribution center",
-  "coords": { "lat": 39.977550, "lng": -86.363000 },
+  "coords": {
+    "lat": 39.97755,
+    "lng": -86.363
+  },
   "geofences": {
-    "perimeter": { "south": 39.976300, "west": -86.364800, "north": 39.978800, "east": -86.361900 },
-    "truckGate": { "south": 39.978450, "west": -86.364300, "north": 39.978800, "east": -86.363900 },
-    "dropYards": [
-      { "south": 39.976300, "west": -86.364200, "north": 39.976700, "east": -86.361950 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.978918,
+          "lng": -86.365197
+        },
+        {
+          "lat": 39.978918,
+          "lng": -86.361077
+        },
+        {
+          "lat": 39.975656,
+          "lng": -86.361077
+        },
+        {
+          "lat": 39.975656,
+          "lng": -86.365197
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.976077,
+          "lng": -86.365197
+        },
+        {
+          "lat": 39.976077,
+          "lng": -86.364648
+        },
+        {
+          "lat": 39.975761,
+          "lng": -86.364648
+        },
+        {
+          "lat": 39.975761,
+          "lng": -86.365197
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 39.976550, "west": -86.364150, "north": 39.976950, "east": -86.361950 }
+      {
+        "ring": [
+          {
+            "lat": 39.975971,
+            "lng": -86.364373
+          },
+          {
+            "lat": 39.975971,
+            "lng": -86.362176
+          },
+          {
+            "lat": 39.975761,
+            "lng": -86.362176
+          },
+          {
+            "lat": 39.975761,
+            "lng": -86.364373
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -24,18 +82,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@39.977550,-86.363000,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["trailersVisible", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "trailersVisible",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "Confirmed via web research as AllPoints at Anson Building 10, 4337 AllPoints Drive — a 605,000 sq ft (570' x 1,026') build-to-suit RDC opened 2023 for DTNA. Roster geocode moved 1,950 m; the rooftop pin landed near the building. Building center locked at 39.977550, -86.363000.",
     "truckGate": "No fencing, no gate, no guard booth visible anywhere on the property. Spec-built Prologis park building with open perimeter drive and two open driveway connections (north and southwest) to AllPoints Drive. Open-site archetype.",

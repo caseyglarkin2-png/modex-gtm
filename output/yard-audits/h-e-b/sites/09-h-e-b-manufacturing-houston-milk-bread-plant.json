@@ -1,18 +1,108 @@
 {
   "name": "H-E-B Manufacturing - Houston Milk & Bread Plant - Houston TX",
   "type": "Manufacturing Plant (Dairy / Bakery)",
-  "coords": { "lat": 29.843200, "lng": -95.538400 },
+  "coords": {
+    "lat": 29.8432,
+    "lng": -95.5384
+  },
   "geofences": {
-    "perimeter": { "south": 29.84190, "west": -95.54050, "north": 29.84440, "east": -95.53600 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.844272,
+          "lng": -95.539911
+        },
+        {
+          "lat": 29.844272,
+          "lng": -95.537576
+        },
+        {
+          "lat": 29.84189,
+          "lng": -95.537576
+        },
+        {
+          "lat": 29.84189,
+          "lng": -95.539911
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 29.843438,
+          "lng": -95.539979
+        },
+        {
+          "lat": 29.843438,
+          "lng": -95.539773
+        },
+        {
+          "lat": 29.8432,
+          "lng": -95.539773
+        },
+        {
+          "lat": 29.8432,
+          "lng": -95.539979
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 29.84230, "west": -95.54050, "north": 29.84420, "east": -95.53980 },
-      { "south": 29.84320, "west": -95.53760, "north": 29.84430, "east": -95.53620 }
+      {
+        "ring": [
+          {
+            "lat": 29.844153,
+            "lng": -95.54149
+          },
+          {
+            "lat": 29.844153,
+            "lng": -95.540597
+          },
+          {
+            "lat": 29.842902,
+            "lng": -95.540597
+          },
+          {
+            "lat": 29.842902,
+            "lng": -95.54149
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 29.84260, "west": -95.53980, "north": 29.84410, "east": -95.53900 }
+      {
+        "ring": [
+          {
+            "lat": 29.844034,
+            "lng": -95.539705
+          },
+          {
+            "lat": 29.844034,
+            "lng": -95.537851
+          },
+          {
+            "lat": 29.843855,
+            "lng": -95.537851
+          },
+          {
+            "lat": 29.843855,
+            "lng": -95.539705
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 140,
+        "pano": "G8ODGwtVJ8H7uEMC7pqIIw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 140,
+        "pano": "G8ODGwtVJ8H7uEMC7pqIIw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 35,
@@ -20,23 +110,44 @@
     "trailerParkingCapacity": 110,
     "truckGateCount": 0,
     "buildingCount": 2,
-    "siteAreaAcres": 22.0,
+    "siteAreaAcres": 22,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@29.843200,-95.538400,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "entryLanes", "exitLanes", "buildingCount"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes",
+    "buildingCount"
+  ],
   "fieldNotes": {
     "location": "Roster GEOMETRIC_CENTER coordinate (29.843857, -95.537401) is roughly the campus center. The milk & bread plant complex was identified as the two large manufacturing buildings immediately E of the snack plant on the H-E-B Windfern campus. The bakery building is confirmed by 'BAKE...' branded trailers backed into its W dock face. All H-E-B Windfern facilities (RSC, milk plant, bread plant) share address 4625 Windfern Rd, Houston TX 77041.",
     "buildingIdentification": "Two distinct manufacturing buildings audited - the eastern building (bakery, confirmed by branded trailers) and the western building (milk plant, with a process annex). Exact milk-vs-bread assignment and door counts are estimates - medium confidence.",

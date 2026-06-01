@@ -1,37 +1,157 @@
 {
   "name": "Danone - Minster OH",
   "type": "Fresh yogurt plant",
-  "coords": { "lat": 40.38440, "lng": -84.37300 },
+  "coords": {
+    "lat": 40.3844,
+    "lng": -84.373
+  },
   "geofences": {
-    "perimeter": { "south": 40.38255, "west": -84.37610, "north": 40.38660, "east": -84.36970 },
-    "truckGate": { "south": 40.38320, "west": -84.37320, "north": 40.38370, "east": -84.37250 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.385603,
+          "lng": -84.376639
+        },
+        {
+          "lat": 40.385446,
+          "lng": -84.369017
+        },
+        {
+          "lat": 40.382412,
+          "lng": -84.369155
+        },
+        {
+          "lat": 40.382569,
+          "lng": -84.376777
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.382726,
+          "lng": -84.373
+        },
+        {
+          "lat": 40.382726,
+          "lng": -84.372176
+        },
+        {
+          "lat": 40.382203,
+          "lng": -84.372176
+        },
+        {
+          "lat": 40.382203,
+          "lng": -84.373
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.38350, "west": -84.37320, "north": 40.38600, "east": -84.37000 }
+      {
+        "ring": [
+          {
+            "lat": 40.385237,
+            "lng": -84.370253
+          },
+          {
+            "lat": 40.385185,
+            "lng": -84.36888
+          },
+          {
+            "lat": 40.383145,
+            "lng": -84.368949
+          },
+          {
+            "lat": 40.383197,
+            "lng": -84.370322
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.38390, "west": -84.37170, "north": 40.38640, "east": -84.37120 }
+      {
+        "ring": [
+          {
+            "lat": 40.385237,
+            "lng": -84.371627
+          },
+          {
+            "lat": 40.385185,
+            "lng": -84.370391
+          },
+          {
+            "lat": 40.383145,
+            "lng": -84.370459
+          },
+          {
+            "lat": 40.383197,
+            "lng": -84.371695
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.383145,
+            "lng": -84.376159
+          },
+          {
+            "lat": 40.383092,
+            "lng": -84.373
+          },
+          {
+            "lat": 40.382726,
+            "lng": -84.373027
+          },
+          {
+            "lat": 40.382779,
+            "lng": -84.376186
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 38, "trailersVisible": 60, "trailerParkingCapacity": 80,
-    "truckGateCount": 1, "buildingCount": 3, "siteAreaAcres": 58.0,
+    "dockDoorCount": 38,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 58,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.38440,-84.37300,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "scale",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "The truck/trailer yard on the south side is fully enclosed by chain-link fence. Street View (pano 40.38332,-84.37285) shows a rolling/sliding gate in the fence across the truck entrance lane.",
     "guardShack": "No staffed guard booth at the gate - Street View shows only signage ('NO PARKING') at the fenced gate, no 1-3-vehicle structure beside the lane.",

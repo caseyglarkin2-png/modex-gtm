@@ -1,18 +1,116 @@
 {
   "name": "Crowley Penn Terminals - Eddystone PA",
   "type": "Marine terminal with dry + refrigerated warehouse",
-  "coords": { "lat": 39.85300, "lng": -75.33800 },
+  "coords": {
+    "lat": 39.853,
+    "lng": -75.338
+  },
   "geofences": {
-    "perimeter": { "south": 39.84950, "west": -75.34150, "north": 39.85600, "east": -75.33450 },
-    "truckGate": { "south": 39.85490, "west": -75.33920, "north": 39.85560, "east": -75.33800 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.856374,
+          "lng": -75.343493
+        },
+        {
+          "lat": 39.85806,
+          "lng": -75.336352
+        },
+        {
+          "lat": 39.856374,
+          "lng": -75.332232
+        },
+        {
+          "lat": 39.853,
+          "lng": -75.336352
+        },
+        {
+          "lat": 39.849837,
+          "lng": -75.340747
+        },
+        {
+          "lat": 39.852473,
+          "lng": -75.34418
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.856163,
+          "lng": -75.34212
+        },
+        {
+          "lat": 39.856584,
+          "lng": -75.341021
+        },
+        {
+          "lat": 39.855952,
+          "lng": -75.340609
+        },
+        {
+          "lat": 39.85553,
+          "lng": -75.341708
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 39.85100, "west": -75.34000, "north": 39.85450, "east": -75.33550 },
-      { "south": 39.85250, "west": -75.33800, "north": 39.85550, "east": -75.33500 }
+      {
+        "ring": [
+          {
+            "lat": 39.854054,
+            "lng": -75.343493
+          },
+          {
+            "lat": 39.855319,
+            "lng": -75.339373
+          },
+          {
+            "lat": 39.853843,
+            "lng": -75.338549
+          },
+          {
+            "lat": 39.852473,
+            "lng": -75.342669
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.85320, "west": -75.34000, "north": 39.85470, "east": -75.33700 }
+      {
+        "ring": [
+          {
+            "lat": 39.855952,
+            "lng": -75.341021
+          },
+          {
+            "lat": 39.854687,
+            "lng": -75.337176
+          },
+          {
+            "lat": 39.853738,
+            "lng": -75.337725
+          },
+          {
+            "lat": 39.855003,
+            "lng": -75.341571
+          }
+        ]
+      }
     ],
-    "staging": { "south": 39.85440, "west": -75.34050, "north": 39.85560, "east": -75.33800 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 136,
+        "pano": "esN5BzOjbhnwXVWwuQDc_g",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 136,
+        "pano": "esN5BzOjbhnwXVWwuQDc_g",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 35,
@@ -20,23 +118,43 @@
     "trailerParkingCapacity": 500,
     "truckGateCount": 1,
     "buildingCount": 8,
-    "siteAreaAcres": 107.0,
+    "siteAreaAcres": 107,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@39.85300,-75.33800,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "entryLanes", "exitLanes", "scale", "dockDoorCount"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "location": "Roster coords (39.853752,-75.338927) landed inside the terminal — confirmed correct. Penn Terminals at the end of Saville Avenue, Eddystone PA, on the Delaware River. Confirmed via satellite (warehouses + container yard + pier) and Street View along Saville Ave (terminal warehouse, perimeter fence, historic brick Penn Terminals office building).",
     "truckGate": "Marine terminal operated under MTSA/ISPS security regime — access is via a controlled gate at the east end of Saville Avenue. Street View coverage ended at the warehouse before the gate itself, so the gate structure was not directly imaged; marked uncertain. Chain-link perimeter fencing visible in multiple Street View frames.",

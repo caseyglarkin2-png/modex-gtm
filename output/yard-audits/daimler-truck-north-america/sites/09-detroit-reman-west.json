@@ -1,16 +1,75 @@
 {
   "name": "Detroit Reman West - Tooele UT",
   "type": "Remanufacturing plant (engines/components)",
-  "coords": { "lat": 40.52945, "lng": -112.34998 },
+  "coords": {
+    "lat": 40.52945,
+    "lng": -112.34998
+  },
   "geofences": {
-    "perimeter": { "south": 40.5266, "west": -112.3524, "north": 40.5310, "east": -112.3483 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.530494,
+          "lng": -112.350941
+        },
+        {
+          "lat": 40.530494,
+          "lng": -112.348332
+        },
+        {
+          "lat": 40.528406,
+          "lng": -112.348332
+        },
+        {
+          "lat": 40.528406,
+          "lng": -112.350941
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [
-      { "south": 40.5280, "west": -112.3520, "north": 40.5288, "east": -112.3500 },
-      { "south": 40.5288, "west": -112.3524, "north": 40.5300, "east": -112.3512 }
+      {
+        "ring": [
+          {
+            "lat": 40.531955,
+            "lng": -112.350392
+          },
+          {
+            "lat": 40.531955,
+            "lng": -112.347783
+          },
+          {
+            "lat": 40.530494,
+            "lng": -112.347783
+          },
+          {
+            "lat": 40.530494,
+            "lng": -112.350392
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.5282, "west": -112.3514, "north": 40.5286, "east": -112.3495 }
+      {
+        "ring": [
+          {
+            "lat": 40.528615,
+            "lng": -112.350941
+          },
+          {
+            "lat": 40.528615,
+            "lng": -112.348332
+          },
+          {
+            "lat": 40.528302,
+            "lng": -112.348332
+          },
+          {
+            "lat": 40.528302,
+            "lng": -112.350941
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -20,23 +79,44 @@
     "trailerParkingCapacity": 70,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 55.0,
+    "siteAreaAcres": 55,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.52945,-112.34998,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoors", "shipRcvSeparate", "connectivityIssue", "railServed"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoors",
+    "shipRcvSeparate",
+    "connectivityIssue",
+    "railServed"
+  ],
   "fieldNotes": {
     "location": "Geocoded point (ROOFTOP, moved 145m) lands squarely on the large white-roofed plant building in the Utah Industrial Depot (former Tooele Army Depot, built by the Army early 1990s, converted to commercial use by Penske 1996). Confirmed as Detroit Reman West -- the second-largest Detroit Reman plant (~330 workers), per DTNA, Tooele Chamber and Yelp at 100 South Lodestone Way.",
     "truckGate": "Perimeter chain-link fencing is visible on multiple building faces, implying controlled access, but Street View coverage at the entrances is sparse (mostly 2015-2018) and shows no barrier arm, sliding gate or guard booth. Recorded truckGate=false with the field flagged uncertain -- a gate is plausible for a 330-worker DTNA plant but is not visually confirmed.",
