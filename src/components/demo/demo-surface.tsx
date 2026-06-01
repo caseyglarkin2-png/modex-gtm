@@ -15,6 +15,7 @@ import { AnchorTeardownVideo } from './anchor-teardown-video';
 import { RoiCtaButton } from './roi-cta-button';
 import { ShareMicrosite } from './share-microsite';
 import { DriverJourneySpotlight } from './driver-journey-spotlight';
+import { NetworkInsight } from './network-insight';
 
 /**
  * Top-level client surface for /demo/[account]. Manages cross-component
@@ -475,6 +476,11 @@ export function DemoSurface({
           </section>
         );
       })()}
+
+      {/* Network Insight — the "why" layer between the sim hook and the
+          atlas/proof: synthesizes the audit into the prospect's own friction
+          profile + the YNS levers that remove it. */}
+      {mode === 'standalone' && <NetworkInsight pack={pack} />}
 
       {/* B.T3 + B.T7 — DossierIntro and SurprisingFindings sit between
           the header / featured-site hero and the atlas. Both components
