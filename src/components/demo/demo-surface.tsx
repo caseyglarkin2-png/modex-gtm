@@ -232,7 +232,7 @@ export function DemoSurface({
                 <div
                   data-confidence-stamp
                   title="Confidence is the dominant per-site audit rating across the network. Fields resolved is the average count of the 22-field rubric we could read from imagery per site."
-                  className="mb-1.5 inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-white/55"
+                  className="mb-1.5 hidden items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-white/55 md:inline-flex"
                 >
                   <span
                     className={
@@ -299,7 +299,7 @@ export function DemoSurface({
                 target="_blank"
                 rel="noopener noreferrer"
                 data-ms-cta-id={fromGallery ? 'gallery-pack-book-audit' : 'demo-book-audit'}
-                className="inline-flex min-h-[36px] items-center gap-1.5 rounded-[10px] border border-white/15 bg-transparent px-3 py-1.5 text-xs font-semibold text-white/85 transition-all hover:border-[#00B4FF]/55 hover:text-white"
+                className="hidden min-h-[36px] items-center gap-1.5 rounded-[10px] border border-white/15 bg-transparent px-3 py-1.5 text-xs font-semibold text-white/85 transition-all hover:border-[#00B4FF]/55 hover:text-white md:inline-flex"
               >
                 Book a network audit →
               </a>
@@ -308,7 +308,7 @@ export function DemoSurface({
                 ctaId="microsite-run-roi"
                 utmMedium={fromGallery ? 'gallery-header' : 'demo-header'}
                 source="microsite"
-                className="inline-flex min-h-[36px] items-center gap-1.5 rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.12] px-3 py-1.5 text-xs font-bold text-white transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22] hover:shadow-[0_0_22px_rgba(0,180,255,0.32)]"
+                className="hidden min-h-[36px] items-center gap-1.5 rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.12] px-3 py-1.5 text-xs font-bold text-white transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22] hover:shadow-[0_0_22px_rgba(0,180,255,0.32)] md:inline-flex"
               >
                 Run ROI →
               </RoiCtaButton>
