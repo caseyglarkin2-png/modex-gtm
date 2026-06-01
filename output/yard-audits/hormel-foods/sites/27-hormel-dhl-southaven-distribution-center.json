@@ -1,16 +1,102 @@
 {
   "name": "Hormel / DHL Southaven Distribution Center - Southaven MS",
   "type": "Distribution Center",
-  "coords": { "lat": 34.98820, "lng": -90.04100 },
+  "coords": {
+    "lat": 34.9882,
+    "lng": -90.041
+  },
   "geofences": {
-    "perimeter": { "south": 34.98620, "west": -90.04340, "north": 34.99080, "east": -90.03950 },
-    "truckGate": { "south": 34.98640, "west": -90.04300, "north": 34.98700, "east": -90.04230 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.99135,
+          "lng": -90.042923
+        },
+        {
+          "lat": 34.991125,
+          "lng": -90.039077
+        },
+        {
+          "lat": 34.9873,
+          "lng": -90.038803
+        },
+        {
+          "lat": 34.9864,
+          "lng": -90.040313
+        },
+        {
+          "lat": 34.98685,
+          "lng": -90.042923
+        },
+        {
+          "lat": 34.989325,
+          "lng": -90.043197
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.9882,
+          "lng": -90.043197
+        },
+        {
+          "lat": 34.988313,
+          "lng": -90.042236
+        },
+        {
+          "lat": 34.987525,
+          "lng": -90.042099
+        },
+        {
+          "lat": 34.987412,
+          "lng": -90.04306
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 34.98660, "west": -90.04300, "north": 34.98980, "east": -90.04130 }
+      {
+        "ring": [
+          {
+            "lat": 34.9891,
+            "lng": -90.039352
+          },
+          {
+            "lat": 34.988988,
+            "lng": -90.035232
+          },
+          {
+            "lat": 34.98685,
+            "lng": -90.03537
+          },
+          {
+            "lat": 34.986962,
+            "lng": -90.039489
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 34.98680, "west": -90.04280, "north": 34.99000, "east": -90.04180 },
-      { "south": 34.98640, "west": -90.04180, "north": 34.98700, "east": -90.03990 }
+      {
+        "ring": [
+          {
+            "lat": 34.9891,
+            "lng": -90.042373
+          },
+          {
+            "lat": 34.9891,
+            "lng": -90.039901
+          },
+          {
+            "lat": 34.98865,
+            "lng": -90.039901
+          },
+          {
+            "lat": 34.98865,
+            "lng": -90.042373
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -20,7 +106,7 @@
     "trailerParkingCapacity": 110,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 44.0,
+    "siteAreaAcres": 44,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.98820,-90.04100,400m/data=!3m1!1e3",
@@ -49,7 +135,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "guardShack"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "guardShack"
+  ],
   "fieldNotes": {
     "location": "Roster coords (34.988048,-90.040999) landed in the correct industrial park (geocode flagged 6135 m moved). Confirmed via the 8690 Tulane Rd address and web reporting: this is the former Associated Wholesale Grocers (AWG) distribution center in Southaven, MS, renovated (>$12M) and reopened in 2025 as Hormel's largest DC, operated by DHL Supply Chain. Locked center 34.98820,-90.04100 on the large white-roofed warehouse.",
     "truckGate": "The truck yard is fully enclosed by a barbed-wire-topped chain-link fence (StreetView 2025-04 and 2025-12). A chain-link gate (flanked by yellow bollards) controls the truck drive entrance on the SW side. truckGate true.",

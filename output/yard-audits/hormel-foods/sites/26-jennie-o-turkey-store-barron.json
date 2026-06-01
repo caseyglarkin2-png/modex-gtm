@@ -1,19 +1,116 @@
 {
   "name": "Jennie-O Turkey Store - Barron WI",
   "type": "Meat Processing Plant",
-  "coords": { "lat": 45.40240, "lng": -91.84680 },
+  "coords": {
+    "lat": 45.4024,
+    "lng": -91.8468
+  },
   "geofences": {
-    "perimeter": { "south": 45.40110, "west": -91.84930, "north": 45.40410, "east": -91.84320 },
-    "truckGate": { "south": 45.40115, "west": -91.84520, "north": 45.40155, "east": -91.84450 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 45.403171,
+          "lng": -91.849821
+        },
+        {
+          "lat": 45.402979,
+          "lng": -91.843779
+        },
+        {
+          "lat": 45.401629,
+          "lng": -91.843504
+        },
+        {
+          "lat": 45.40105,
+          "lng": -91.846113
+        },
+        {
+          "lat": 45.401436,
+          "lng": -91.849821
+        },
+        {
+          "lat": 45.4024,
+          "lng": -91.850096
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 45.4024,
+          "lng": -91.850096
+        },
+        {
+          "lat": 45.402496,
+          "lng": -91.849272
+        },
+        {
+          "lat": 45.401821,
+          "lng": -91.849135
+        },
+        {
+          "lat": 45.401725,
+          "lng": -91.849959
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 45.40240, "west": -91.84480, "north": 45.40360, "east": -91.84330 },
-      { "south": 45.40140, "west": -91.84740, "north": 45.40220, "east": -91.84600 }
+      {
+        "ring": [
+          {
+            "lat": 45.401629,
+            "lng": -91.846113
+          },
+          {
+            "lat": 45.401725,
+            "lng": -91.843504
+          },
+          {
+            "lat": 45.401147,
+            "lng": -91.843504
+          },
+          {
+            "lat": 45.40105,
+            "lng": -91.845976
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 45.40280, "west": -91.84780, "north": 45.40370, "east": -91.84600 },
-      { "south": 45.40140, "west": -91.84780, "north": 45.40220, "east": -91.84620 }
+      {
+        "ring": [
+          {
+            "lat": 45.4024,
+            "lng": -91.848997
+          },
+          {
+            "lat": 45.4024,
+            "lng": -91.846113
+          },
+          {
+            "lat": 45.402014,
+            "lng": -91.846113
+          },
+          {
+            "lat": 45.402014,
+            "lng": -91.848997
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 53,
+        "pano": "ktxLUsDnuD-YNzxbg5fqPQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 53,
+        "pano": "ktxLUsDnuD-YNzxbg5fqPQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 40,
@@ -21,7 +118,7 @@
     "trailerParkingCapacity": 80,
     "truckGateCount": 1,
     "buildingCount": 7,
-    "siteAreaAcres": 37.0,
+    "siteAreaAcres": 37,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@45.40240,-91.84680,400m/data=!3m1!1e3",
@@ -50,7 +147,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "scale"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "scale"
+  ],
   "fieldNotes": {
     "location": "Roster coords (45.40239,-91.847592, ROOFTOP) landed directly on the plant. Confirmed Jennie-O via the green Jennie-O logo on the 3-story office building (StreetView 2024) and the 34 N 7th St address. Locked center 45.40240,-91.84680 on the main turkey-processing complex in Barron, WI.",
     "truckGate": "Open truck entrance. StreetView (2024) shows the main truck driveway off the public road running uncontrolled into the plant yard -- no barrier arm and no gate across the truck drive. A green privacy-slat chain-link fence encloses the office/employee area and part of the south yard, but the truck entry itself is open. truckGate false.",

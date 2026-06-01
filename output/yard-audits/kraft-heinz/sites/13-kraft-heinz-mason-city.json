@@ -1,19 +1,87 @@
 {
   "name": "Kraft Heinz - Mason City",
   "type": "Food Manufacturer",
-  "coords": { "lat": 43.1641, "lng": -93.21620 },
+  "coords": {
+    "lat": 43.1641,
+    "lng": -93.2162
+  },
   "geofences": {
-    "perimeter": { "south": 43.16275, "west": -93.21825, "north": 43.16560, "east": -93.21430 },
-    "truckGate": { "south": 43.16275, "west": -93.21680, "north": 43.16310, "east": -93.21625 },
-    "dropYards": [
-      { "south": 43.16465, "west": -93.21525, "north": 43.16555, "east": -93.21430 },
-      { "south": 43.16410, "west": -93.21800, "north": 43.16465, "east": -93.21680 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 43.165252,
+          "lng": -93.21929
+        },
+        {
+          "lat": 43.165352,
+          "lng": -93.214277
+        },
+        {
+          "lat": 43.163299,
+          "lng": -93.21414
+        },
+        {
+          "lat": 43.163148,
+          "lng": -93.219221
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 43.164901,
+          "lng": -93.21929
+        },
+        {
+          "lat": 43.164901,
+          "lng": -93.218809
+        },
+        {
+          "lat": 43.164551,
+          "lng": -93.218809
+        },
+        {
+          "lat": 43.164551,
+          "lng": -93.21929
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 43.16440, "west": -93.21560, "north": 43.16500, "east": -93.21430 },
-      { "south": 43.16320, "west": -93.21810, "north": 43.16470, "east": -93.21770 }
+      {
+        "ring": [
+          {
+            "lat": 43.163499,
+            "lng": -93.218741
+          },
+          {
+            "lat": 43.163549,
+            "lng": -93.214827
+          },
+          {
+            "lat": 43.163198,
+            "lng": -93.214758
+          },
+          {
+            "lat": 43.163148,
+            "lng": -93.218672
+          }
+        ]
+      }
     ],
-    "staging": { "south": 43.16310, "west": -93.21680, "north": 43.16410, "east": -93.21560 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 358,
+        "pano": "J826XA5QjgNYf-49t9quYQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 358,
+        "pano": "J826XA5QjgNYf-49t9quYQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 18,
@@ -50,7 +118,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "exitLanes", "shipRcvSeparate"],
+  "uncertainFields": [
+    "scale",
+    "exitLanes",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Single fenced entry from 12th St NW at ~43.16285,-93.21655. Chain-link perimeter fence funnels all traffic through one driveway opening; clear pinch point with monument-sign island and internal lane markings. No barrier arm/swing gate visible in 2024-09 Street View.",
     "guardShack": "No staffed booth at the entry in 2024-09 Street View. The two structures flanking the entry are landscaping monument signs (blue Kraft Heinz marker + 'Information' visitor sign), not occupied booths.",

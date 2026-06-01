@@ -1,37 +1,126 @@
 {
   "name": "Coca-Cola UNITED - Chattanooga Production Plant, TN",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 35.09230, "lng": -85.25300 },
+  "coords": {
+    "lat": 35.0923,
+    "lng": -85.253
+  },
   "geofences": {
-    "perimeter": { "south": 35.09050, "west": -85.25540, "north": 35.09450, "east": -85.25080 },
-    "truckGate": { "south": 35.09100, "west": -85.25530, "north": 35.09180, "east": -85.25440 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.093424,
+          "lng": -85.254373
+        },
+        {
+          "lat": 35.093311,
+          "lng": -85.251764
+        },
+        {
+          "lat": 35.090502,
+          "lng": -85.251901
+        },
+        {
+          "lat": 35.090614,
+          "lng": -85.254511
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 35.09060, "west": -85.25420, "north": 35.09160, "east": -85.25240 }
+      {
+        "ring": [
+          {
+            "lat": 35.090727,
+            "lng": -85.253275
+          },
+          {
+            "lat": 35.090671,
+            "lng": -85.251901
+          },
+          {
+            "lat": 35.08994,
+            "lng": -85.25197
+          },
+          {
+            "lat": 35.089996,
+            "lng": -85.253343
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.09120, "west": -85.25430, "north": 35.09230, "east": -85.25320 }
+      {
+        "ring": [
+          {
+            "lat": 35.092862,
+            "lng": -85.254373
+          },
+          {
+            "lat": 35.092806,
+            "lng": -85.252657
+          },
+          {
+            "lat": 35.092525,
+            "lng": -85.252657
+          },
+          {
+            "lat": 35.092581,
+            "lng": -85.254373
+          }
+        ]
+      }
     ],
-    "staging": { "south": 35.09080, "west": -85.25500, "north": 35.09160, "east": -85.25420 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 148,
+        "pano": "usRC6_8tNAZH5ogCWiOaDA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 35, "trailersVisible": 30, "trailerParkingCapacity": 50,
-    "truckGateCount": 1, "buildingCount": 4, "siteAreaAcres": 19.0,
+    "dockDoorCount": 35,
+    "trailersVisible": 30,
+    "trailerParkingCapacity": 50,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 19,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.09230,-85.25300,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "remoteGs", "guardShack", "scale"],
+  "uncertainFields": [
+    "truckGate",
+    "remoteGs",
+    "guardShack",
+    "scale"
+  ],
   "fieldNotes": {
     "location": "Roster address (2111 Polymer Dr) and roster coords (35.0459,-85.1932) do not match the production plant. The roster label 'Production Plant' corresponds to the Coca-Cola UNITED Chattanooga PRODUCTION CENTER at 4000 Amnicola Hwy, Chattanooga TN 37406 (Coca-Cola UNITED Chattanooga-2 location page; Google Maps place pin 35.0923,-85.2532). Note: 2111 W Shepherd Rd is a SEPARATE Coca-Cola UNITED distribution center/regional HQ - the roster's '2111 Polymer Dr' appears to conflate the two. Confirmed the Amnicola plant by Street View showing Coca-Cola script branding on the building facade plus a 'TRUCK DELIVERY' wayfinding sign.",
     "truckGate": "The truck/dock yard is enclosed by chain-link fencing; Street View shows the dock yard fenced with gate sections and trailers backed into docks inside. Trucks enter the fenced yard via a gated opening off the internal west-side road - recorded truckGate true. Flagged uncertain as the gate hardware (barrier vs rolling gate) is partly tree-obscured.",

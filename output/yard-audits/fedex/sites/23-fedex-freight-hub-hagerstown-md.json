@@ -1,19 +1,77 @@
 {
   "name": "FedEx Freight Hub - Hagerstown MD (HGR)",
   "type": "Freight LTL hub service center",
-  "coords": { "lat": 39.62500, "lng": -77.80350 },
+  "coords": {
+    "lat": 39.625,
+    "lng": -77.8035
+  },
   "geofences": {
-    "perimeter": { "south": 39.62330, "west": -77.80850, "north": 39.62720, "east": -77.79980 },
-    "truckGate": { "south": 39.62420, "west": -77.80800, "north": 39.62490, "east": -77.80700 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.626058,
+          "lng": -77.808444
+        },
+        {
+          "lat": 39.626481,
+          "lng": -77.800204
+        },
+        {
+          "lat": 39.624365,
+          "lng": -77.799655
+        },
+        {
+          "lat": 39.623942,
+          "lng": -77.80762
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 39.62380, "west": -77.80700, "north": 39.62470, "east": -77.80050 },
-      { "south": 39.62560, "west": -77.80650, "north": 39.62650, "east": -77.80050 }
+      {
+        "ring": [
+          {
+            "lat": 39.625846,
+            "lng": -77.808169
+          },
+          {
+            "lat": 39.626269,
+            "lng": -77.800479
+          },
+          {
+            "lat": 39.625,
+            "lng": -77.800341
+          },
+          {
+            "lat": 39.624577,
+            "lng": -77.808032
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.62470, "west": -77.80700, "north": 39.62530, "east": -77.80050 },
-      { "south": 39.62520, "west": -77.80700, "north": 39.62580, "east": -77.80050 }
+      {
+        "ring": [
+          {
+            "lat": 39.625529,
+            "lng": -77.807345
+          },
+          {
+            "lat": 39.625846,
+            "lng": -77.801028
+          },
+          {
+            "lat": 39.625212,
+            "lng": -77.801028
+          },
+          {
+            "lat": 39.624894,
+            "lng": -77.807345
+          }
+        ]
+      }
     ],
-    "staging": { "south": 39.62440, "west": -77.80730, "north": 39.62520, "east": -77.80620 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 290,
@@ -21,7 +79,7 @@
     "trailerParkingCapacity": 400,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 55.0,
+    "siteAreaAcres": 55,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.62500,-77.80350,400m/data=!3m1!1e3",
@@ -50,7 +108,14 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes", "scale"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "Controlled truck entrance at the SW corner off Transportation Circle - 2024 Street View (sv3) clearly shows chain-link security fencing with sliding gates across the truck lanes, bollards, and lane markings; the whole property is fully fenced.",
     "guardShack": "A gray windowed guard booth stands in the truck lane at the SW gate (windows on multiple sides, ~1-vehicle footprint), with inbound and outbound lanes splitting around it - clearly visible in z20 satellite and 2024 Street View sv3. Staffed booth - remoteGs false.",

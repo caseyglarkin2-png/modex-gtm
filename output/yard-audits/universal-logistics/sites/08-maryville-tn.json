@@ -1,18 +1,108 @@
 {
   "name": "Universal Logistics Services - Maryville Terminal - Maryville TN",
   "type": "Trucking / Logistics Terminal",
-  "coords": { "lat": 35.75479, "lng": -84.01224 },
+  "coords": {
+    "lat": 35.75479,
+    "lng": -84.01224
+  },
   "geofences": {
-    "perimeter": { "south": 35.75380, "west": -84.01340, "north": 35.75640, "east": -84.01080 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.756907,
+          "lng": -84.013064
+        },
+        {
+          "lat": 35.756796,
+          "lng": -84.010592
+        },
+        {
+          "lat": 35.754511,
+          "lng": -84.010729
+        },
+        {
+          "lat": 35.754511,
+          "lng": -84.013133
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.754901,
+          "lng": -84.013133
+        },
+        {
+          "lat": 35.754901,
+          "lng": -84.012789
+        },
+        {
+          "lat": 35.754567,
+          "lng": -84.012789
+        },
+        {
+          "lat": 35.754567,
+          "lng": -84.013133
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 35.75490, "west": -84.01300, "north": 35.75570, "east": -84.01180 }
+      {
+        "ring": [
+          {
+            "lat": 35.75674,
+            "lng": -84.012515
+          },
+          {
+            "lat": 35.756685,
+            "lng": -84.011141
+          },
+          {
+            "lat": 35.756072,
+            "lng": -84.01121
+          },
+          {
+            "lat": 35.756127,
+            "lng": -84.012583
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.75490, "west": -84.01300, "north": 35.75540, "east": -84.01170 },
-      { "south": 35.75570, "west": -84.01290, "north": 35.75640, "east": -84.01150 }
+      {
+        "ring": [
+          {
+            "lat": 35.755236,
+            "lng": -84.012927
+          },
+          {
+            "lat": 35.75557,
+            "lng": -84.011416
+          },
+          {
+            "lat": 35.755292,
+            "lng": -84.011279
+          },
+          {
+            "lat": 35.754957,
+            "lng": -84.012789
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 50,
+        "pano": "X0iQya4RGOEIfca2siktVg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 50,
+        "pano": "X0iQya4RGOEIfca2siktVg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 40,
@@ -49,7 +139,12 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "buildingCount", "truckGate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "buildingCount",
+    "truckGate"
+  ],
   "fieldNotes": {
     "siteResolution": "FMCSA SAFER (USDOT 839281, MC371555) lists Universal Logistics Services Inc at 1615 Robert C Jackson Dr, Maryville TN 37801 - confirmed via TruckMap, Waze, Buzzfile and D&B. The roster ROOFTOP geocode (35.754792,-84.012239) lands on a tan/white-roof metal warehouse at the corner of W Lamar Alexander Pkwy (US-321) and the Robert C Jackson Dr industrial park, immediately SE of a long cross-dock LTL freight terminal building. The two buildings share one paved truck yard. Center locked at the warehouse, 35.75479,-84.01224.",
     "operatorNote": "Universal Logistics Services Inc, Maryville TN (est. 2005, GM Jim Brinkley, ~77-unit fleet) is a small independent freight carrier/brokerage. It is most likely NOT a subsidiary of Universal Logistics Holdings (ULH/NASDAQ:ULH) - the roster pulled it from an FMCSA name match. The site is audited as instructed, but the account linkage should be treated as uncertain.",

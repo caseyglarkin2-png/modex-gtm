@@ -1,17 +1,67 @@
 {
   "name": "FedEx Express Regional Hub - Oakland CA",
   "type": "Express regional hub (Oakland International Airport)",
-  "coords": { "lat": 37.720113, "lng": -122.219569 },
+  "coords": {
+    "lat": 37.720113,
+    "lng": -122.219569
+  },
   "geofences": {
-    "perimeter": { "south": 37.71600, "west": -122.22300, "north": 37.72350, "east": -122.21400 },
-    "truckGate": { "south": 37.72270, "west": -122.21810, "north": 37.72360, "east": -122.21680 },
-    "dropYards": [
-      { "south": 37.71850, "west": -122.22100, "north": 37.72050, "east": -122.21900 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.722286,
+          "lng": -122.22259
+        },
+        {
+          "lat": 37.721634,
+          "lng": -122.216548
+        },
+        {
+          "lat": 37.717071,
+          "lng": -122.216273
+        },
+        {
+          "lat": 37.716202,
+          "lng": -122.220942
+        },
+        {
+          "lat": 37.71794,
+          "lng": -122.222865
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 37.71950, "west": -122.21900, "north": 37.72120, "east": -122.21750 }
+      {
+        "ring": [
+          {
+            "lat": 37.720113,
+            "lng": -122.221766
+          },
+          {
+            "lat": 37.721199,
+            "lng": -122.219569
+          },
+          {
+            "lat": 37.72033,
+            "lng": -122.218745
+          },
+          {
+            "lat": 37.719244,
+            "lng": -122.220942
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 200,
+        "pano": "mglYgU-pLG4HSetavCYUKg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 35,
@@ -19,23 +69,48 @@
     "trailerParkingCapacity": 80,
     "truckGateCount": 1,
     "buildingCount": 4,
-    "siteAreaAcres": 70.0,
+    "siteAreaAcres": 70,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@37.720113,-122.219569,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes", "siteAreaAcres", "postGateStaging", "drivewayLong"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes",
+    "siteAreaAcres",
+    "postGateStaging",
+    "drivewayLong"
+  ],
   "fieldNotes": {
     "siteConfirmation": "Roster address (8455 Pardee Dr) is a FedEx Ship Center - a customer-facing retail/pickup site about 2 miles from the airport, NOT the regional hub. Web research established the FedEx Express Oakland Regional Hub (the West Coast hub) is at 1 Sally Ride Way, Oakland CA 94621, on the airside at Oakland International Airport - a ~233,000 sq ft air/ground/trucking sort center able to sort ~12,000 packages/day for the Bay Area. Satellite at 37.72011,-122.21957 confirmed multiple FedEx sort buildings, an aircraft maintenance hangar, FedEx-livery freighter aircraft (purple/red tails) at airside positions, ULD/dolly staging, and rooftop solar. Street View confirmed a barbed-wire secured airport perimeter with 'Restricted Area / Authorized Personnel Only' signage. Locked center 37.72011, -122.21957.",
     "truckGate": "The FedEx hub sits entirely inside the secured OAK airport perimeter - Street View at the perimeter road shows barbed-wire chain-link fence and a 'No Trespassing / Restricted Area / Authorized Personnel' sign. Truck access into the hub is through a controlled airport security gate off Air Cargo Way. A controlled truck gate is inferred from this secured-airport context; the FedEx-specific gate could not be directly imaged (no public Street View on the internal hub roads). Flagged uncertain.",

@@ -1,16 +1,87 @@
 {
   "name": "Universal Intermodal Services - Harvey Chicago Operations Center - Harvey IL",
   "type": "Intermodal / Drayage container & chassis yard",
-  "coords": { "lat": 41.58770, "lng": -87.64400 },
+  "coords": {
+    "lat": 41.5877,
+    "lng": -87.644
+  },
   "geofences": {
-    "perimeter": { "south": 41.58620, "west": -87.64550, "north": 41.58880, "east": -87.64200 },
-    "truckGate": { "south": 41.58625, "west": -87.64400, "north": 41.58660, "east": -87.64340 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.589138,
+          "lng": -87.646266
+        },
+        {
+          "lat": 41.589138,
+          "lng": -87.642077
+        },
+        {
+          "lat": 41.586262,
+          "lng": -87.64194
+        },
+        {
+          "lat": 41.586262,
+          "lng": -87.646266
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.58657,
+          "lng": -87.646266
+        },
+        {
+          "lat": 41.58657,
+          "lng": -87.645785
+        },
+        {
+          "lat": 41.586262,
+          "lng": -87.645785
+        },
+        {
+          "lat": 41.586262,
+          "lng": -87.646266
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 41.58660, "west": -87.64550, "north": 41.58870, "east": -87.64360 },
-      { "south": 41.58680, "west": -87.64300, "north": 41.58860, "east": -87.64210 }
+      {
+        "ring": [
+          {
+            "lat": 41.588727,
+            "lng": -87.64606
+          },
+          {
+            "lat": 41.588727,
+            "lng": -87.644
+          },
+          {
+            "lat": 41.587443,
+            "lng": -87.644
+          },
+          {
+            "lat": 41.587443,
+            "lng": -87.64606
+          }
+        ]
+      }
     ],
     "dockAprons": [],
-    "staging": { "south": 41.58680, "west": -87.64360, "north": 41.58780, "east": -87.64260 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 35,
+        "pano": "CgVI0i-x-L6pOUNuewwPbw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 35,
+        "pano": "CgVI0i-x-L6pOUNuewwPbw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 4,
@@ -47,7 +118,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "guardShack",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "locate": "Re-resolved to 250 E 167th St, Harvey IL 60426 — Universal Intermodal Services' Chicago operations center. The EARLIER audit geocoded the wrong building (an older brick industrial building on a mixed residential block) and was flagged low-confidence; this re-audit uses the confirmed address and pins the actual operating drayage yard. Google geocode returned 41.5877278,-87.6439306. Satellite confirms a large open container/chassis drayage yard with an office and maintenance buildings, sitting directly against the CN Harvey rail corridor.",
     "facilityNature": "An open intermodal/drayage yard — NOT a warehouse. The site is a large paved lot used for chassis storage, container storage, and drayage-tractor parking, with a small office building and maintenance/repair shop buildings. There is essentially no dock-warehouse function.",

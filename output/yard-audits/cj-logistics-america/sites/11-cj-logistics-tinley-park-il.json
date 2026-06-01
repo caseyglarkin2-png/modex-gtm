@@ -1,35 +1,130 @@
 {
   "name": "CJ Logistics - Tinley Park IL",
   "type": "Distribution Center",
-  "coords": { "lat": 41.585600, "lng": -87.733400 },
+  "coords": {
+    "lat": 41.5856,
+    "lng": -87.7334
+  },
   "geofences": {
-    "perimeter": { "south": 41.583800, "west": -87.735500, "north": 41.587700, "east": -87.731000 },
-    "truckGate": { "south": 41.583900, "west": -87.735300, "north": 41.584500, "east": -87.734600 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.587962,
+          "lng": -87.735185
+        },
+        {
+          "lat": 41.587962,
+          "lng": -87.731477
+        },
+        {
+          "lat": 41.58447,
+          "lng": -87.731477
+        },
+        {
+          "lat": 41.58447,
+          "lng": -87.735185
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.586422,
+          "lng": -87.735597
+        },
+        {
+          "lat": 41.586422,
+          "lng": -87.735048
+        },
+        {
+          "lat": 41.5856,
+          "lng": -87.735048
+        },
+        {
+          "lat": 41.5856,
+          "lng": -87.735597
+        }
+      ]
+    },
     "dropYards": [],
     "dockAprons": [
-      { "south": 41.584700, "west": -87.735000, "north": 41.587000, "east": -87.734200 }
+      {
+        "ring": [
+          {
+            "lat": 41.58483,
+            "lng": -87.735048
+          },
+          {
+            "lat": 41.58483,
+            "lng": -87.731752
+          },
+          {
+            "lat": 41.584265,
+            "lng": -87.731683
+          },
+          {
+            "lat": 41.584265,
+            "lng": -87.734979
+          }
+        ]
+      }
     ],
-    "staging": { "south": 41.584700, "west": -87.735000, "north": 41.587000, "east": -87.734200 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 139,
+        "pano": "fW6pP4iW6YH-SobE9CwSvA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 139,
+        "pano": "fW6pP4iW6YH-SobE9CwSvA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 65, "trailersVisible": 8, "trailerParkingCapacity": 70,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 40.0,
+    "dockDoorCount": 65,
+    "trailersVisible": 8,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 40,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.585600,-87.733400,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "dockDoors", "trailerParkingCapacity", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "dockDoors",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Single truck entrance is an open driveway off S Cicero Ave at the SW corner of the property. Pavement turn-arrow markings are present but there is no barrier arm, sliding/swing gate, guard booth, or checkpoint pinch-point in z19-z20 satellite (2026) or 2024 Street View. Open driveway = no controlled truck gate.",
     "guardShack": "No guard booth structure at the entrance in any view.",

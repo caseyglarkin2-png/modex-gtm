@@ -1,15 +1,112 @@
 {
   "name": "Universal Logistics - Columbus Terminal - Columbus OH",
   "type": "Intermodal / Drayage Terminal Yard (owned)",
-  "coords": { "lat": 40.01300, "lng": -83.13080 },
+  "coords": {
+    "lat": 40.013,
+    "lng": -83.1308
+  },
   "geofences": {
-    "perimeter": { "south": 40.01170, "west": -83.13190, "north": 40.01470, "east": -83.12880 },
-    "truckGate": { "south": 40.01278, "west": -83.13195, "north": 40.01305, "east": -83.13150 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.014473,
+          "lng": -83.132173
+        },
+        {
+          "lat": 40.014157,
+          "lng": -83.12874
+        },
+        {
+          "lat": 40.011738,
+          "lng": -83.128877
+        },
+        {
+          "lat": 40.011527,
+          "lng": -83.131899
+        },
+        {
+          "lat": 40.013,
+          "lng": -83.132311
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.012159,
+          "lng": -83.132173
+        },
+        {
+          "lat": 40.012159,
+          "lng": -83.131761
+        },
+        {
+          "lat": 40.011843,
+          "lng": -83.131761
+        },
+        {
+          "lat": 40.011843,
+          "lng": -83.132173
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.01180, "west": -83.13120, "north": 40.01450, "east": -83.12890 }
+      {
+        "ring": [
+          {
+            "lat": 40.013526,
+            "lng": -83.131761
+          },
+          {
+            "lat": 40.013421,
+            "lng": -83.129976
+          },
+          {
+            "lat": 40.012369,
+            "lng": -83.130045
+          },
+          {
+            "lat": 40.012474,
+            "lng": -83.13183
+          }
+        ]
+      }
     ],
-    "dockAprons": [],
-    "staging": null
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 40.013421,
+            "lng": -83.131761
+          },
+          {
+            "lat": 40.013316,
+            "lng": -83.130251
+          },
+          {
+            "lat": 40.013053,
+            "lng": -83.130319
+          },
+          {
+            "lat": 40.013158,
+            "lng": -83.13183
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 23,
+        "pano": "HFZGILUjn9n8wao57xL1Fw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 23,
+        "pano": "HFZGILUjn9n8wao57xL1Fw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 0,
@@ -22,18 +119,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@40.013,-83.1308,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "NONE", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "NONE",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["trailersVisible", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "trailersVisible",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "Resolved to 2950 International St, Columbus, OH 43228 via the loadmatch.com intermodal directory (Universal Intermodal Services, Inc. / Columbus OH, companyID 5853). Address independently corroborated by iBegin, Superpages, and Yelp listings (all show 2950 International St, phone 614-777-9393, also branded 'Mason Dixon Lines' — a Universal/ULH operating brand). The geocoding-API rooftop point (40.0129, -83.1330) landed on a neighboring multi-tenant DC; the terminal yard is the parcel ~150 m east, fronting International St — confirmed by a Street View 'Universal Intermodal Services' sign on the property fence (pano 2021-07).",
     "truckGate": "Street View along International St (2021-07) shows the truck entrance driveway is a wide open paved apron meeting International St — NO barrier arm, NO sliding/swing gate across the truck lane. The container yard has perimeter chain-link fencing along the road frontage, but the entrance driveway itself is uncontrolled and open.",

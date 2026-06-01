@@ -1,38 +1,100 @@
 {
   "name": "CJ Logistics - Fontana CA",
   "type": "Distribution Center",
-  "coords": { "lat": 34.049300, "lng": -117.517400 },
+  "coords": {
+    "lat": 34.0493,
+    "lng": -117.5174
+  },
   "geofences": {
-    "perimeter": { "south": 34.047900, "west": -117.519000, "north": 34.050800, "east": -117.515000 },
-    "truckGate": { "south": 34.048000, "west": -117.516400, "north": 34.048600, "east": -117.515600 },
-    "dropYards": [
-      { "south": 34.048300, "west": -117.516300, "north": 34.050400, "east": -117.515100 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.049698,
+          "lng": -117.518842
+        },
+        {
+          "lat": 34.049698,
+          "lng": -117.516576
+        },
+        {
+          "lat": 34.048105,
+          "lng": -117.516576
+        },
+        {
+          "lat": 34.048105,
+          "lng": -117.518842
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 34.048300, "west": -117.516300, "north": 34.050400, "east": -117.515800 },
-      { "south": 34.048100, "west": -117.518500, "north": 34.048600, "east": -117.517400 }
+      {
+        "ring": [
+          {
+            "lat": 34.048219,
+            "lng": -117.518773
+          },
+          {
+            "lat": 34.048219,
+            "lng": -117.516851
+          },
+          {
+            "lat": 34.047935,
+            "lng": -117.516816
+          },
+          {
+            "lat": 34.047935,
+            "lng": -117.518739
+          }
+        ]
+      }
     ],
-    "staging": { "south": 34.048300, "west": -117.516300, "north": 34.050400, "east": -117.515100 }
+    "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 45, "trailersVisible": 14, "trailerParkingCapacity": 80,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 29.0,
+    "dockDoorCount": 45,
+    "trailersVisible": 14,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 29,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.049300,-117.517400,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "0-10",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "0-10",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "remoteGs", "dockDoorCount", "trailerParkingCapacity", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "remoteGs",
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "The large east-side truck yard is enclosed by chain-link fence (confirmed in multiple 2023-2025 Street Views) with a single wide driveway opening off Jurupa Ave at the SE corner - a controlled fenced enclosure with one pinch-point entrance. A sliding gate at the opening is implied by the perimeter fence but could not be positively resolved in imagery; classed truckGate true with medium confidence.",
     "guardShack": "No guard booth structure visible at the truck-yard entrance in z21 satellite or Street View.",

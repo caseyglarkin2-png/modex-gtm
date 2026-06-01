@@ -1,18 +1,116 @@
 {
   "name": "Hormel Fort Smith Plant - Fort Smith AR",
   "type": "Production Facility",
-  "coords": { "lat": 35.30350, "lng": -94.38130 },
+  "coords": {
+    "lat": 35.3035,
+    "lng": -94.3813
+  },
   "geofences": {
-    "perimeter": { "south": 35.300985, "west": -94.383612, "north": 35.306015, "east": -94.378988 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.305741,
+          "lng": -94.381987
+        },
+        {
+          "lat": 35.305517,
+          "lng": -94.378828
+        },
+        {
+          "lat": 35.302155,
+          "lng": -94.378553
+        },
+        {
+          "lat": 35.30081,
+          "lng": -94.379652
+        },
+        {
+          "lat": 35.301034,
+          "lng": -94.382399
+        },
+        {
+          "lat": 35.30406,
+          "lng": -94.382399
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.305069,
+          "lng": -94.382399
+        },
+        {
+          "lat": 35.305069,
+          "lng": -94.3813
+        },
+        {
+          "lat": 35.304397,
+          "lng": -94.3813
+        },
+        {
+          "lat": 35.304397,
+          "lng": -94.382399
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 35.304161, "west": -94.381071, "north": 35.305239, "east": -94.379529 }
+      {
+        "ring": [
+          {
+            "lat": 35.30294,
+            "lng": -94.382124
+          },
+          {
+            "lat": 35.302155,
+            "lng": -94.379652
+          },
+          {
+            "lat": 35.301258,
+            "lng": -94.380064
+          },
+          {
+            "lat": 35.302043,
+            "lng": -94.382536
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.301702, "west": -94.381885, "north": 35.303498, "east": -94.381115 },
-      { "south": 35.304586, "west": -94.382401, "north": 35.305214, "east": -94.380199 }
+      {
+        "ring": [
+          {
+            "lat": 35.304621,
+            "lng": -94.380613
+          },
+          {
+            "lat": 35.304397,
+            "lng": -94.378828
+          },
+          {
+            "lat": 35.30406,
+            "lng": -94.378965
+          },
+          {
+            "lat": 35.304285,
+            "lng": -94.380751
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 142,
+        "pano": "pjnxn4SUVX_mubiiSgMURg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 142,
+        "pano": "pjnxn4SUVX_mubiiSgMURg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 45,
@@ -25,18 +123,36 @@
   },
   "mapsUrl": "https://www.google.com/maps/@35.30350,-94.38130,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "Roster address (4307 Planters Rd) is wrong — Hormel-Planters' Fort Smith plant is at 4020 Planters Rd, Fort Smith AR 72908 (confirmed by Hormel, Fort Smith Chamber, ADEQ permit records; a 'Mr Peanut Sign' landmark sits at 4020). 4307, 4215 (International Paper) and 3807 (Grainger) are separate neighboring addresses on Planters Rd. Resolved to the large multi-building rail-served processing complex at ~35.3035,-94.3813; the roster's geocoded pin landed at the NW employee parking of this complex, so the complex itself is confirmed.",
     "truckGate": "No controlled perimeter gate, barrier arm, or checkpoint pinch-point identified. The Google Street View vehicle drove freely along internal plant roads and dock areas with no gate, and the public-road frontage / employee parking entrances are open. Flagged uncertain because the sprawling complex has several access points. truckGateCount kept at 1 as a nominal value for the primary truck entrance.",

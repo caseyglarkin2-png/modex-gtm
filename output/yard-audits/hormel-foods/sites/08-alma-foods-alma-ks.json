@@ -1,17 +1,116 @@
 {
   "name": "Alma Foods - Alma KS",
   "type": "Production Facility",
-  "coords": { "lat": 39.0110, "lng": -96.2879 },
+  "coords": {
+    "lat": 39.011,
+    "lng": -96.2879
+  },
   "geofences": {
-    "perimeter": { "south": 39.01000, "west": -96.28920, "north": 39.01190, "east": -96.28730 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.011667,
+          "lng": -96.288758
+        },
+        {
+          "lat": 39.011667,
+          "lng": -96.287488
+        },
+        {
+          "lat": 39.010787,
+          "lng": -96.287454
+        },
+        {
+          "lat": 39.01068,
+          "lng": -96.288243
+        },
+        {
+          "lat": 39.010787,
+          "lng": -96.288827
+        },
+        {
+          "lat": 39.011267,
+          "lng": -96.288861
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.010867,
+          "lng": -96.288587
+        },
+        {
+          "lat": 39.010893,
+          "lng": -96.288243
+        },
+        {
+          "lat": 39.010707,
+          "lng": -96.288209
+        },
+        {
+          "lat": 39.01068,
+          "lng": -96.288552
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 39.01010, "west": -96.28850, "north": 39.01070, "east": -96.28790 }
+      {
+        "ring": [
+          {
+            "lat": 39.010573,
+            "lng": -96.288518
+          },
+          {
+            "lat": 39.010466,
+            "lng": -96.2879
+          },
+          {
+            "lat": 39.010253,
+            "lng": -96.287969
+          },
+          {
+            "lat": 39.01036,
+            "lng": -96.288587
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.01075, "west": -96.28840, "north": 39.01110, "east": -96.28790 }
+      {
+        "ring": [
+          {
+            "lat": 39.011187,
+            "lng": -96.288655
+          },
+          {
+            "lat": 39.011187,
+            "lng": -96.288072
+          },
+          {
+            "lat": 39.01108,
+            "lng": -96.288072
+          },
+          {
+            "lat": 39.01108,
+            "lng": -96.288655
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 114,
+        "pano": "8Il2sh6WQnBT2d0S7qPwbQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 114,
+        "pano": "8Il2sh6WQnBT2d0S7qPwbQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 7,
@@ -48,7 +147,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Roster coords (39.012236,-96.289857) landed near the correct block; the plant proper is at ~39.0110,-96.2879. Real address is 110/114 E First St, Alma KS 66401 (geocoded as 215 Missouri St in roster). Confirmed via Street View - a metal industrial plant with office annex, process equipment and trailers in a small-town industrial pocket.",
     "truckGate": "No barrier arm, gate, or controlled checkpoint. The site is open to the gravel town streets; vehicles park right up to the buildings and a residential house sits across the street. truckGateCount=1 reflects the single open driveway access, not a controlled gate.",

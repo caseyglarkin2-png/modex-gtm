@@ -1,18 +1,60 @@
 {
   "name": "FedEx Express Regional Hub - Fort Worth TX",
   "type": "Express regional hub (Fort Worth Alliance Airport)",
-  "coords": { "lat": 32.994650, "lng": -97.312900 },
+  "coords": {
+    "lat": 32.99465,
+    "lng": -97.3129
+  },
   "geofences": {
-    "perimeter": { "south": 32.99020, "west": -97.31760, "north": 33.00050, "east": -97.30760 },
-    "truckGate": { "south": 32.99175, "west": -97.30960, "north": 32.99250, "east": -97.30855 },
-    "dropYards": [
-      { "south": 32.99180, "west": -97.31280, "north": 32.99360, "east": -97.31050 },
-      { "south": 32.99000, "west": -97.31320, "north": 32.99130, "east": -97.31180 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.002021,
+          "lng": -97.318393
+        },
+        {
+          "lat": 33.002021,
+          "lng": -97.309604
+        },
+        {
+          "lat": 32.991886,
+          "lng": -97.308505
+        },
+        {
+          "lat": 32.990964,
+          "lng": -97.3129
+        },
+        {
+          "lat": 32.992807,
+          "lng": -97.318393
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 32.99100, "west": -97.31420, "north": 32.99280, "east": -97.31230 }
+      {
+        "ring": [
+          {
+            "lat": 32.996954,
+            "lng": -97.315097
+          },
+          {
+            "lat": 32.996954,
+            "lng": -97.310153
+          },
+          {
+            "lat": 32.993498,
+            "lng": -97.310153
+          },
+          {
+            "lat": 32.993498,
+            "lng": -97.315097
+          }
+        ]
+      }
     ],
-    "staging": { "south": 32.99155, "west": -97.30960, "north": 32.99260, "east": -97.30760 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 45,
@@ -20,23 +62,43 @@
     "trailerParkingCapacity": 160,
     "truckGateCount": 1,
     "buildingCount": 4,
-    "siteAreaAcres": 95.0,
+    "siteAreaAcres": 95,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.994650,-97.312900,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "siteAreaAcres", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "siteAreaAcres",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "siteConfirmation": "Roster address (2851 Alliance Gateway Fwy) was RANGE_INTERPOLATED onto a residential block ~3 km south of the actual hub - the supplied coords were wrong. Web research established the FedEx Express Fort Worth Hub is at 2001 World Wide Dr, on the east cargo apron of Perot Field / Fort Worth Alliance Airport. Satellite confirmed a large white-roofed sort building with aircraft at airside positions, a second large sort/cross-dock building, an office building, and an extensive ULD/trailer drop yard. Locked center 32.99465, -97.31290. FedEx Express opened the Fort Worth Hub in 1997; ~600,000 sq ft, 800+ employees, ~100,000 packages/day on two sorts, ~650 flights/month.",
     "truckGate": "Z20 satellite at 32.9921,-97.3092 shows a controlled checkpoint where the public access road enters the hub: a small guard booth flanked by sliding gates, perimeter fencing, and lane striping. Street View (2016/2021 panos) confirms a manned gate with a green-windowed guard booth, an overhead gate canopy/barrier frame, multiple in/out lanes, and a 'FedEx Security' sign on the booth. Definitive controlled truck gate.",

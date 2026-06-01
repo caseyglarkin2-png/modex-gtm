@@ -1,14 +1,54 @@
 {
   "name": "CJ Logistics - Dallas TX (Regal Row)",
   "type": "Distribution Center",
-  "coords": { "lat": 32.8130, "lng": -96.9013 },
+  "coords": {
+    "lat": 32.813,
+    "lng": -96.9013
+  },
   "geofences": {
-    "perimeter": { "south": 32.8123, "west": -96.9027, "north": 32.8137, "east": -96.8999 },
-    "truckGate": { "south": 32.8132, "west": -96.9003, "north": 32.8136, "east": -96.8999 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.813115,
+          "lng": -96.90336
+        },
+        {
+          "lat": 32.813289,
+          "lng": -96.900751
+        },
+        {
+          "lat": 32.812134,
+          "lng": -96.900613
+        },
+        {
+          "lat": 32.811961,
+          "lng": -96.903223
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 32.8131, "west": -96.9026, "north": 32.8135, "east": -96.9000 },
-      { "south": 32.8123, "west": -96.9026, "north": 32.8126, "east": -96.9000 }
+      {
+        "ring": [
+          {
+            "lat": 32.812307,
+            "lng": -96.903223
+          },
+          {
+            "lat": 32.812452,
+            "lng": -96.900819
+          },
+          {
+            "lat": 32.812077,
+            "lng": -96.900785
+          },
+          {
+            "lat": 32.811932,
+            "lng": -96.903188
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -23,18 +63,36 @@
   },
   "mapsUrl": "https://www.google.com/maps/@32.8130,-96.9013,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "10-25",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes", "dropArea"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes",
+    "dropArea"
+  ],
   "fieldNotes": {
     "location": "Confirmed 151 Regal Row, Dallas TX 75247 - Prologis Stemmons Industrial Center Building 11, a 217,290 sq ft 1974-era Class B multi-tenant warehouse. CJ Logistics USA Corp occupies a suite (151 Regal Row Suite 112) per Panjiva buyer report.",
     "truckGate": "Open multi-tenant industrial park - no perimeter fence, no barrier arm, no checkpoint at any driveway. Truck courts on the north and south faces are accessed via open driveways directly off Regal Row. 2025 Street View shows fully open access with trucks parked along the dock court.",

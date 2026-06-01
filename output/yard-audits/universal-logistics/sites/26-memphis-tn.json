@@ -1,15 +1,108 @@
 {
   "name": "Universal Logistics - Memphis Terminal - Memphis TN",
   "type": "Intermodal / Drayage Terminal & Container Yard (owned)",
-  "coords": { "lat": 35.03800, "lng": -89.90020 },
+  "coords": {
+    "lat": 35.038,
+    "lng": -89.9002
+  },
   "geofences": {
-    "perimeter": { "south": 35.03650, "west": -89.90130, "north": 35.03980, "east": -89.89870 },
-    "truckGate": { "south": 35.03855, "west": -89.90120, "north": 35.03895, "east": -89.90080 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.039237,
+          "lng": -89.901573
+        },
+        {
+          "lat": 35.039237,
+          "lng": -89.897591
+        },
+        {
+          "lat": 35.035976,
+          "lng": -89.897591
+        },
+        {
+          "lat": 35.035976,
+          "lng": -89.901573
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.039124,
+          "lng": -89.901573
+        },
+        {
+          "lat": 35.039124,
+          "lng": -89.901093
+        },
+        {
+          "lat": 35.038787,
+          "lng": -89.901093
+        },
+        {
+          "lat": 35.038787,
+          "lng": -89.901573
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 35.03660, "west": -89.90115, "north": 35.03960, "east": -89.89880 }
+      {
+        "ring": [
+          {
+            "lat": 35.038562,
+            "lng": -89.901299
+          },
+          {
+            "lat": 35.038562,
+            "lng": -89.899857
+          },
+          {
+            "lat": 35.036426,
+            "lng": -89.899857
+          },
+          {
+            "lat": 35.036426,
+            "lng": -89.901299
+          }
+        ]
+      }
     ],
-    "dockAprons": [],
-    "staging": null
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 35.039124,
+            "lng": -89.899788
+          },
+          {
+            "lat": 35.039124,
+            "lng": -89.899376
+          },
+          {
+            "lat": 35.036088,
+            "lng": -89.899376
+          },
+          {
+            "lat": 35.036088,
+            "lng": -89.899788
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 128,
+        "pano": "xcxvr7dKoz6Mc8xbyJQbKQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 128,
+        "pano": "xcxvr7dKoz6Mc8xbyJQbKQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 0,
@@ -22,18 +115,35 @@
   },
   "mapsUrl": "https://www.google.com/maps/@35.038,-89.9002,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "NONE", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "NONE",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["trailersVisible", "trailerParkingCapacity", "siteAreaAcres"],
+  "uncertainFields": [
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "siteAreaAcres"
+  ],
   "fieldNotes": {
     "location": "Resolved to 4014 Outland Rd, Memphis, TN 38118 via the loadmatch.com intermodal directory (Universal Intermodal Services, Inc. / Memphis, TN, companyID 2565). The same address appears across third-party directories branded 'Mason Dixon Intermodal' (phone 901-546-9273) — Mason Dixon is a Universal/ULH operating brand; some listings show 'Universal Intermodal Svc' at the identical address. The loadmatch profile describes a 58-acre container-yard depot handling APL/Evergreen and other private container pools, with top-lift handlers, private 20'/40' chassis, and ~35 drivers. Street View confirms stacked Evergreen ocean containers in the yard.",
     "truckGate": "Street View along Outland Rd (2025-04 / 2025-11) shows the yard frontage is tree-screened with the container yard directly behind. The truck entrance is a wide open gravel/paved apron meeting Outland Rd near the north end of the yard — NO barrier arm, NO sliding/swing gate across the truck lane visible. The yard's road edge is largely open dirt apron rather than a continuous controlled gate line.",

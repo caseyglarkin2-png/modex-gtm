@@ -1,38 +1,133 @@
 {
   "name": "FedEx Freight Hub - Harrison AR (HRO)",
   "type": "Freight LTL hub / former American Freightways HQ campus",
-  "coords": { "lat": 36.2575, "lng": -93.1320 },
+  "coords": {
+    "lat": 36.2575,
+    "lng": -93.132
+  },
   "geofences": {
-    "perimeter": { "south": 36.2545, "west": -93.1355, "north": 36.2605, "east": -93.1285 },
-    "truckGate": { "south": 36.2552, "west": -93.1308, "north": 36.2558, "east": -93.1300 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.258829,
+          "lng": -93.134747
+        },
+        {
+          "lat": 36.25905,
+          "lng": -93.130901
+        },
+        {
+          "lat": 36.25595,
+          "lng": -93.130352
+        },
+        {
+          "lat": 36.255285,
+          "lng": -93.134197
+        },
+        {
+          "lat": 36.257279,
+          "lng": -93.135021
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 36.2560, "west": -93.1352, "north": 36.2592, "east": -93.1330 }
+      {
+        "ring": [
+          {
+            "lat": 36.258607,
+            "lng": -93.131725
+          },
+          {
+            "lat": 36.258607,
+            "lng": -93.130352
+          },
+          {
+            "lat": 36.256171,
+            "lng": -93.130352
+          },
+          {
+            "lat": 36.256171,
+            "lng": -93.131725
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 36.2580, "west": -93.1340, "north": 36.2590, "east": -93.1322 },
-      { "south": 36.2562, "west": -93.1340, "north": 36.2572, "east": -93.1322 }
+      {
+        "ring": [
+          {
+            "lat": 36.258607,
+            "lng": -93.134197
+          },
+          {
+            "lat": 36.258607,
+            "lng": -93.132549
+          },
+          {
+            "lat": 36.256171,
+            "lng": -93.132549
+          },
+          {
+            "lat": 36.256171,
+            "lng": -93.134197
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 186,
+        "pano": "aAfmrnwy2Jn4ZlK23HZtGg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 90, "trailersVisible": 70, "trailerParkingCapacity": 160,
-    "truckGateCount": 1, "buildingCount": 5, "siteAreaAcres": 104.0,
+    "dockDoorCount": 90,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 1,
+    "buildingCount": 5,
+    "siteAreaAcres": 104,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@36.2575,-93.1320,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "truckGate", "entryLanes", "exitLanes", "dockDoorCount", "postGateStaging"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "truckGate",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "postGateStaging"
+  ],
   "fieldNotes": {
     "location": "Roster address '2200 Forward Dr, Harrison AR' and coordinates (36.256793, -93.132174, GEOMETRIC_CENTER) resolve to the correct campus. This is the FedEx Freight HRO service center co-located with FedEx Freight Corporate Offices on the heritage American Freightways HQ campus. Confirmed by satellite (corporate office complex + two LTL cross-dock buildings + large employee parking) and Street View (2024) showing FedEx-branded trailers in the operations yard and perimeter fencing.",
     "multipleFacilities": "Campus has distinct building clusters: a connected corporate-office complex on the east side plus two separate long LTL cross-dock terminal buildings on the west side, with internal roads and ponds between them.",

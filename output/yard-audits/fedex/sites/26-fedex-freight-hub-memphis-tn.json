@@ -1,38 +1,130 @@
 {
   "name": "FedEx Freight Hub - Memphis TN",
   "type": "Freight LTL hub service center (FedEx Freight national HQ market)",
-  "coords": { "lat": 35.05305, "lng": -90.04885 },
+  "coords": {
+    "lat": 35.05305,
+    "lng": -90.04885
+  },
   "geofences": {
-    "perimeter": { "south": 35.0508, "west": -90.0508, "north": 35.0552, "east": -90.0470 },
-    "truckGate": { "south": 35.0543, "west": -90.0494, "north": 35.0547, "east": -90.0487 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.054174,
+          "lng": -90.052146
+        },
+        {
+          "lat": 35.054399,
+          "lng": -90.047477
+        },
+        {
+          "lat": 35.051251,
+          "lng": -90.046653
+        },
+        {
+          "lat": 35.050352,
+          "lng": -90.050223
+        },
+        {
+          "lat": 35.052151,
+          "lng": -90.052421
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 35.0508, "west": -90.0508, "north": 35.0535, "east": -90.0470 }
+      {
+        "ring": [
+          {
+            "lat": 35.052488,
+            "lng": -90.052146
+          },
+          {
+            "lat": 35.052825,
+            "lng": -90.047477
+          },
+          {
+            "lat": 35.050802,
+            "lng": -90.047202
+          },
+          {
+            "lat": 35.050577,
+            "lng": -90.051871
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.0533, "west": -90.0500, "north": 35.0543, "east": -90.0472 },
-      { "south": 35.0526, "west": -90.0492, "north": 35.0533, "east": -90.0470 }
+      {
+        "ring": [
+          {
+            "lat": 35.053275,
+            "lng": -90.051597
+          },
+          {
+            "lat": 35.053612,
+            "lng": -90.048026
+          },
+          {
+            "lat": 35.0526,
+            "lng": -90.047889
+          },
+          {
+            "lat": 35.052263,
+            "lng": -90.051459
+          }
+        ]
+      }
     ],
-    "staging": { "south": 35.0535, "west": -90.0500, "north": 35.0542, "east": -90.0482 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 221,
+        "pano": "lW4F-pHwvdK_qCoxYQ3b5Q",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 220, "trailersVisible": 320, "trailerParkingCapacity": 600,
-    "truckGateCount": 1, "buildingCount": 3, "siteAreaAcres": 41.9,
+    "dockDoorCount": 220,
+    "trailersVisible": 320,
+    "trailerParkingCapacity": 600,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 41.9,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.05305,-90.04885,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "dockDoorCount"],
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "location": "Roster address '2851 Bartlett Rd' geocoded to an unrelated commercial strip in central Memphis (38112). Correct facility is the FedEx Freight LTL hub at 461 Winchester Rd, Memphis, TN 38109 (FedEx Freight terminal code MEM), confirmed by Street View showing FedEx Freight tractors/trailers and FedEx Freight building signage.",
     "truckGate": "Entire property is fenced with black privacy screening (2025 imagery). Inner controlled gate line separates the front employee/visitor parking from the secured trailer yard; gate openings visible at z21.",

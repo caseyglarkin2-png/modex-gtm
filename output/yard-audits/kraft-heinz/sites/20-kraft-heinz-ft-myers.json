@@ -1,17 +1,108 @@
 {
   "name": "Kraft Heinz - Ft Myers",
   "type": "Manufacturer",
-  "coords": { "lat": 26.66568, "lng": -81.80265 },
+  "coords": {
+    "lat": 26.66568,
+    "lng": -81.80265
+  },
   "geofences": {
-    "perimeter": { "south": 26.66470, "west": -81.80330, "north": 26.66665, "east": -81.80200 },
-    "truckGate": { "south": 26.66631, "west": -81.80330, "north": 26.66645, "east": -81.80306 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 26.665956,
+          "lng": -81.803817
+        },
+        {
+          "lat": 26.666017,
+          "lng": -81.802307
+        },
+        {
+          "lat": 26.664698,
+          "lng": -81.802238
+        },
+        {
+          "lat": 26.664637,
+          "lng": -81.803749
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 26.665956,
+          "lng": -81.80344
+        },
+        {
+          "lat": 26.665956,
+          "lng": -81.803165
+        },
+        {
+          "lat": 26.665741,
+          "lng": -81.803165
+        },
+        {
+          "lat": 26.665741,
+          "lng": -81.80344
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 26.66585, "west": -81.80285, "north": 26.66620, "east": -81.80220 }
+      {
+        "ring": [
+          {
+            "lat": 26.665987,
+            "lng": -81.803337
+          },
+          {
+            "lat": 26.665987,
+            "lng": -81.802375
+          },
+          {
+            "lat": 26.665711,
+            "lng": -81.802375
+          },
+          {
+            "lat": 26.665711,
+            "lng": -81.803337
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 26.66572, "west": -81.80285, "north": 26.66600, "east": -81.80210 }
+      {
+        "ring": [
+          {
+            "lat": 26.665833,
+            "lng": -81.803577
+          },
+          {
+            "lat": 26.665864,
+            "lng": -81.803337
+          },
+          {
+            "lat": 26.665189,
+            "lng": -81.803199
+          },
+          {
+            "lat": 26.665158,
+            "lng": -81.80344
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 135,
+        "pano": "hOs1HHzOhaNaSQXIkypLgw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 135,
+        "pano": "hOs1HHzOhaNaSQXIkypLgw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 8,
@@ -48,7 +139,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "shipRcvSeparate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Street View (Dec-2024) at 26.66640,-81.80320 heading 90° shows a closed double-leaf chain-link swing gate across the access driveway off Division Dr, with chain-link perimeter fence on both sides and gate posts clearly visible.",
     "guardShack": "No staffed booth at the gate. The nearest structure beyond the gate is the octagonal Kraft Heinz visitor reception/admin building set back ~30m from the gate — not a guard booth (multi-room, not lane-side).",

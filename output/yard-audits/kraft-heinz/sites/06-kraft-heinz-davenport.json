@@ -1,19 +1,75 @@
 {
   "name": "Kraft Heinz - Davenport",
   "type": "Food Processing Company",
-  "coords": { "lat": 41.6160, "lng": -90.6105 },
+  "coords": {
+    "lat": 41.616,
+    "lng": -90.6105
+  },
   "geofences": {
-    "perimeter": { "south": 41.6125, "west": -90.6135, "north": 41.6182, "east": -90.6080 },
-    "truckGate": { "south": 41.61795, "west": -90.6098, "north": 41.61835, "east": -90.6088 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.618053,
+          "lng": -90.612697
+        },
+        {
+          "lat": 41.618053,
+          "lng": -90.608852
+        },
+        {
+          "lat": 41.614768,
+          "lng": -90.608715
+        },
+        {
+          "lat": 41.614768,
+          "lng": -90.612697
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.615487,
+          "lng": -90.612835
+        },
+        {
+          "lat": 41.615487,
+          "lng": -90.611873
+        },
+        {
+          "lat": 41.614768,
+          "lng": -90.611873
+        },
+        {
+          "lat": 41.614768,
+          "lng": -90.612835
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 41.6155, "west": -90.6095, "north": 41.6170, "east": -90.6082 },
-      { "south": 41.6140, "west": -90.6118, "north": 41.6150, "east": -90.6098 }
+      {
+        "ring": [
+          {
+            "lat": 41.616924,
+            "lng": -90.608715
+          },
+          {
+            "lat": 41.616924,
+            "lng": -90.607204
+          },
+          {
+            "lat": 41.615795,
+            "lng": -90.607204
+          },
+          {
+            "lat": 41.615795,
+            "lng": -90.608715
+          }
+        ]
+      }
     ],
-    "dockAprons": [
-      { "south": 41.6148, "west": -90.6130, "north": 41.6157, "east": -90.6098 },
-      { "south": 41.6155, "west": -90.6098, "north": 41.6170, "east": -90.6088 }
-    ],
-    "staging": { "south": 41.6172, "west": -90.6118, "north": 41.6182, "east": -90.6090 }
+    "dockAprons": [],
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 55,
@@ -21,7 +77,7 @@
     "trailerParkingCapacity": 110,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 72.0,
+    "siteAreaAcres": 72,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.6160,-90.6105,400m/data=!3m1!1e3",
@@ -50,7 +106,13 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "scale", "multiStep", "connectivityIssue"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "scale",
+    "multiStep",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "siteIdentification": "Confirmed via web search: 9401 Granite Way, Davenport IA 52806, Eastern Iowa Industrial Center, 382,000 sq ft Oscar Mayer Deli Fresh / Lunchables meat-processing plant on 70 acres (Gray Construction, 2017). The given lat/lng (41.6154, -90.6125) was ~300 m WSW of the building center; locked center to ~41.6160, -90.6105.",
     "truckGate": "Single controlled entry off Slopertown Road at NW corner of employee parking. Property is fully enclosed by chain-link perimeter fence (confirmed on west, north, and east faces via Street View 2025-06). No barrier-arm visible from satellite but the fenced single-entrance pinch-point qualifies as a truck gate per rubric.",

@@ -1,13 +1,58 @@
 {
   "name": "FedEx Express Regional Hub - Greensboro NC",
   "type": "Express regional hub (Piedmont Triad / Mid-Atlantic)",
-  "coords": { "lat": 36.10580, "lng": -79.93820 },
+  "coords": {
+    "lat": 36.1058,
+    "lng": -79.9382
+  },
   "geofences": {
-    "perimeter": { "south": 36.10200, "west": -79.94200, "north": 36.11000, "east": -79.93350 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.108352,
+          "lng": -79.940947
+        },
+        {
+          "lat": 36.108352,
+          "lng": -79.934355
+        },
+        {
+          "lat": 36.103359,
+          "lng": -79.93408
+        },
+        {
+          "lat": 36.101806,
+          "lng": -79.939573
+        },
+        {
+          "lat": 36.105245,
+          "lng": -79.942595
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 36.10420, "west": -79.93920, "north": 36.10720, "east": -79.93800 }
+      {
+        "ring": [
+          {
+            "lat": 36.106355,
+            "lng": -79.9382
+          },
+          {
+            "lat": 36.106688,
+            "lng": -79.934355
+          },
+          {
+            "lat": 36.105245,
+            "lng": -79.93408
+          },
+          {
+            "lat": 36.104912,
+            "lng": -79.937925
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -17,23 +62,45 @@
     "trailerParkingCapacity": 40,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 168.0,
+    "siteAreaAcres": 168,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@36.10580,-79.93820,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": false, "multiStep": true
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": true
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "multiStep", "dockDoors", "dropArea"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "multiStep",
+    "dockDoors",
+    "dropArea"
+  ],
   "fieldNotes": {
     "location": "FedEx Express Mid-Atlantic regional air hub on the secured airside of Piedmont Triad International Airport (GSO), Greensboro NC. Roster geocode (36.1043,-79.9838) landed ~4 km west on unrelated warehouses; corrected via web research (hub opened June 2009, ~1M sq ft, 24,000 pkg/hr) and satellite confirmation of the main sort building plus aircraft apron.",
     "truckGate": "No street-level imagery of a dedicated FedEx truck gate is available — the hub sits inside the airport AOA, so vehicle access is controlled at airport-wide SIDA security checkpoints rather than a single FedEx booth. Marked truckGate=true (controlled access exists) but this is an airport-security control, not a typical yard gate; flagged uncertain.",

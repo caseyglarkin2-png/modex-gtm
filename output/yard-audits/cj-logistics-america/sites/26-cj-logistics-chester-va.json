@@ -1,14 +1,54 @@
 {
   "name": "CJ Logistics - Chester VA",
   "type": "Distribution Center",
-  "coords": { "lat": 37.29775, "lng": -77.39925 },
+  "coords": {
+    "lat": 37.29775,
+    "lng": -77.39925
+  },
   "geofences": {
-    "perimeter": { "south": 37.29550, "west": -77.40150, "north": 37.30000, "east": -77.39700 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.298624,
+          "lng": -77.400623
+        },
+        {
+          "lat": 37.299279,
+          "lng": -77.399387
+        },
+        {
+          "lat": 37.294582,
+          "lng": -77.395405
+        },
+        {
+          "lat": 37.293817,
+          "lng": -77.396641
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 37.29570, "west": -77.40110, "north": 37.29920, "east": -77.39880 },
-      { "south": 37.29600, "west": -77.39950, "north": 37.29950, "east": -77.39730 }
+      {
+        "ring": [
+          {
+            "lat": 37.298187,
+            "lng": -77.400898
+          },
+          {
+            "lat": 37.298733,
+            "lng": -77.399937
+          },
+          {
+            "lat": 37.294254,
+            "lng": -77.395954
+          },
+          {
+            "lat": 37.293708,
+            "lng": -77.396915
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -23,18 +63,39 @@
   },
   "mapsUrl": "https://www.google.com/maps/@37.29775,-77.39925,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "10-25",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "dropArea", "trailerParkingCapacity", "connectivityIssue", "dropYard"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoorCount",
+    "dropArea",
+    "trailerParkingCapacity",
+    "connectivityIssue",
+    "dropYard"
+  ],
   "fieldNotes": {
     "location": "Roster supplied no street address (Indeed locations list) and city-centroid coords (37.3565, -77.4317) for Chester VA, ~7km off. Resolved to 16000 Walthall Industrial Pkwy, South Chesterfield VA 23834 - the documented DSC Logistics / CJ Logistics America Richmond-area facility (the Manta/Yellowpages/D&B listings give cjlogistics.com as the company site). DSC Logistics is CJ Logistics America's legacy brand. Geocoded ROOFTOP to 37.2983, -77.3998; satellite confirmed a large multi-section cross-dock DC.",
     "truckGate": "The facility is reached by a winding access road through woods from Walthall Industrial Pkwy. At the building, the truck driveway runs into the truck court as an open approach - no barrier arm, sliding gate, or guard booth observed on the truck route (z19-z21 satellite; only utility transformers near the entry). truckGate=false.",

@@ -1,16 +1,75 @@
 {
   "name": "Coca-Cola Consolidated - Indianapolis Production Facility, IN",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 39.80390, "lng": -86.24550 },
+  "coords": {
+    "lat": 39.8039,
+    "lng": -86.2455
+  },
   "geofences": {
-    "perimeter": { "south": 39.80240, "west": -86.24970, "north": 39.80500, "east": -86.24340 },
-    "truckGate": { "south": 39.80280, "west": -86.24770, "north": 39.80320, "east": -86.24710 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.804322,
+          "lng": -86.248659
+        },
+        {
+          "lat": 39.804322,
+          "lng": -86.24344
+        },
+        {
+          "lat": 39.802001,
+          "lng": -86.24344
+        },
+        {
+          "lat": 39.802001,
+          "lng": -86.248659
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 39.80300, "west": -86.24830, "north": 39.80470, "east": -86.24680 }
+      {
+        "ring": [
+          {
+            "lat": 39.804006,
+            "lng": -86.248521
+          },
+          {
+            "lat": 39.804006,
+            "lng": -86.246873
+          },
+          {
+            "lat": 39.802212,
+            "lng": -86.246873
+          },
+          {
+            "lat": 39.802212,
+            "lng": -86.248521
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.80450, "west": -86.24640, "north": 39.80500, "east": -86.24420 },
-      { "south": 39.80280, "west": -86.24420, "north": 39.80470, "east": -86.24340 }
+      {
+        "ring": [
+          {
+            "lat": 39.804217,
+            "lng": -86.246599
+          },
+          {
+            "lat": 39.804217,
+            "lng": -86.243715
+          },
+          {
+            "lat": 39.803689,
+            "lng": -86.243715
+          },
+          {
+            "lat": 39.803689,
+            "lng": -86.246599
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -20,7 +79,7 @@
     "trailerParkingCapacity": 90,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 38.0,
+    "siteAreaAcres": 38,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.8039,-86.2455,400m/data=!3m1!1e3",
@@ -49,7 +108,13 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "dockDoorCount", "dockDoors", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "dockDoorCount",
+    "dockDoors",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "facility": "Coca-Cola Consolidated Indianapolis manufacturing facility at 5000 W 25th St, operating since 1968. Four production lines (2 PET/rPET bottle, 2 can) plus a production warehouse; $35M glass-bottle line expansion announced May 2026. Roster lat/lng (geocode moved 1523m) landed on-target; the large white-roofed plant at the coordinates matches.",
     "truckGate": "No barrier arm, gate, or guard booth. Street View (2024-07) of the main driveway off W 25th St shows a wide open entrance with a Coca-Cola entrance sign but no barrier or checkpoint. The driveway leads into the car parking lot and onward to the trailer yard.",

@@ -1,15 +1,54 @@
 {
   "name": "CJ Logistics - Secaucus NJ",
   "type": "Distribution Center",
-  "coords": { "lat": 40.7717, "lng": -74.0806 },
+  "coords": {
+    "lat": 40.7717,
+    "lng": -74.0806
+  },
   "geofences": {
-    "perimeter": { "south": 40.7704, "west": -74.0815, "north": 40.7726, "east": -74.0799 },
-    "truckGate": { "south": 40.7704, "west": -74.0812, "north": 40.7708, "east": -74.0807 },
-    "dropYards": [
-      { "south": 40.7705, "west": -74.0812, "north": 40.7712, "east": -74.0800 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.772896,
+          "lng": -74.082111
+        },
+        {
+          "lat": 40.773468,
+          "lng": -74.080875
+        },
+        {
+          "lat": 40.771752,
+          "lng": -74.079501
+        },
+        {
+          "lat": 40.77118,
+          "lng": -74.080737
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 40.7707, "west": -74.0813, "north": 40.7712, "east": -74.0801 }
+      {
+        "ring": [
+          {
+            "lat": 40.771232,
+            "lng": -74.081973
+          },
+          {
+            "lat": 40.771752,
+            "lng": -74.080806
+          },
+          {
+            "lat": 40.771518,
+            "lng": -74.0806
+          },
+          {
+            "lat": 40.770998,
+            "lng": -74.081767
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -24,18 +63,37 @@
   },
   "mapsUrl": "https://www.google.com/maps/@40.7717,-74.0806,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "siteAreaAcres"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "siteAreaAcres"
+  ],
   "fieldNotes": {
     "location": "Confirmed 901 Castle Rd, Secaucus NJ - CJ Logistics America NJ Secaucus Center. CJ open-space spec sheet: 107,929 SF warehouse, 188,615 SF total property (~4.33 acres), 19 exterior docks, 19 trailer positions, 4 drive-in doors, 20 ft clear height.",
     "truckGate": "The property is enclosed by a continuous chain-link perimeter fence (visible in 2019 and 2024 Street View). The truck driveway off Castle Rd passes through a fence gate opening - a controlled truck entrance.",

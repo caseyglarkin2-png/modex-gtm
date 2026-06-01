@@ -1,20 +1,112 @@
 {
   "name": "FedEx Ground Hub - Kernersville NC",
   "type": "Ground regional sortation hub",
-  "coords": { "lat": 36.10625, "lng": -80.03550 },
+  "coords": {
+    "lat": 36.10625,
+    "lng": -80.0355
+  },
   "geofences": {
-    "perimeter": { "south": 36.10350, "west": -80.03980, "north": 36.10950, "east": -80.03200 },
-    "truckGate": { "south": 36.10895, "west": -80.03665, "north": 36.10935, "east": -80.03615 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.110022,
+          "lng": -80.038247
+        },
+        {
+          "lat": 36.109578,
+          "lng": -80.033852
+        },
+        {
+          "lat": 36.106805,
+          "lng": -80.031105
+        },
+        {
+          "lat": 36.104586,
+          "lng": -80.032753
+        },
+        {
+          "lat": 36.10514,
+          "lng": -80.037972
+        },
+        {
+          "lat": 36.10736,
+          "lng": -80.039895
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 36.10630, "west": -80.03980, "north": 36.10900, "east": -80.03700 },
-      { "south": 36.10550, "west": -80.03450, "north": 36.10850, "east": -80.03210 },
-      { "south": 36.10380, "west": -80.03700, "north": 36.10560, "east": -80.03350 }
+      {
+        "ring": [
+          {
+            "lat": 36.108691,
+            "lng": -80.039895
+          },
+          {
+            "lat": 36.108691,
+            "lng": -80.036873
+          },
+          {
+            "lat": 36.107138,
+            "lng": -80.036873
+          },
+          {
+            "lat": 36.107138,
+            "lng": -80.039895
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 36.109578,
+            "lng": -80.0355
+          },
+          {
+            "lat": 36.10736,
+            "lng": -80.031655
+          },
+          {
+            "lat": 36.106472,
+            "lng": -80.032204
+          },
+          {
+            "lat": 36.108691,
+            "lng": -80.036049
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 36.10560, "west": -80.03700, "north": 36.10760, "east": -80.03350 },
-      { "south": 36.10380, "west": -80.03600, "north": 36.10480, "east": -80.03250 }
+      {
+        "ring": [
+          {
+            "lat": 36.107803,
+            "lng": -80.037972
+          },
+          {
+            "lat": 36.10736,
+            "lng": -80.033303
+          },
+          {
+            "lat": 36.106028,
+            "lng": -80.033577
+          },
+          {
+            "lat": 36.106472,
+            "lng": -80.038247
+          }
+        ]
+      }
     ],
-    "staging": { "south": 36.10780, "west": -80.03680, "north": 36.10890, "east": -80.03450 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 192,
+        "pano": "mpUfOEUwVTSSac_xaupILg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 200,
@@ -22,23 +114,40 @@
     "trailerParkingCapacity": 700,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 116.0,
+    "siteAreaAcres": 116,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@36.10625,-80.03550,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "Confirmed FedEx Ground regional sortation hub in Triad Business Park, ~493,000 sq ft on a ~125-acre site (opened 2011 at 410K sq ft, expanded 2015 to 493K sq ft). Roster coordinate landed directly on the hub building despite a 9.1 km geocode move from the listed Old Greensboro Rd address.",
     "truckGate": "Controlled truck gate confirmed on the north access road off the public road. z20 satellite shows a checkpoint with painted multi-lane markings and a small booth structure straddling the entrance lanes.",

@@ -1,20 +1,92 @@
 {
   "name": "FedEx Ground Hub - Lewisberry PA",
   "type": "Ground regional sortation hub (Harrisburg market)",
-  "coords": { "lat": 40.16450, "lng": -76.84050 },
+  "coords": {
+    "lat": 40.1645,
+    "lng": -76.8405
+  },
   "geofences": {
-    "perimeter": { "south": 40.16190, "west": -76.84380, "north": 40.16760, "east": -76.83520 },
-    "truckGate": { "south": 40.16370, "west": -76.83620, "north": 40.16420, "east": -76.83550 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.167019,
+          "lng": -76.843247
+        },
+        {
+          "lat": 40.166914,
+          "lng": -76.839127
+        },
+        {
+          "lat": 40.16534,
+          "lng": -76.837204
+        },
+        {
+          "lat": 40.163451,
+          "lng": -76.838852
+        },
+        {
+          "lat": 40.163241,
+          "lng": -76.843247
+        },
+        {
+          "lat": 40.16534,
+          "lng": -76.844345
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 40.16560, "west": -76.84300, "north": 40.16760, "east": -76.83850 },
-      { "south": 40.16240, "west": -76.84280, "north": 40.16480, "east": -76.83950 },
-      { "south": 40.16210, "west": -76.83950, "north": 40.16330, "east": -76.83650 }
+      {
+        "ring": [
+          {
+            "lat": 40.166809,
+            "lng": -76.843247
+          },
+          {
+            "lat": 40.166809,
+            "lng": -76.839813
+          },
+          {
+            "lat": 40.165549,
+            "lng": -76.839676
+          },
+          {
+            "lat": 40.16534,
+            "lng": -76.843109
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.16420, "west": -76.84200, "north": 40.16560, "east": -76.83700 },
-      { "south": 40.16300, "west": -76.84200, "north": 40.16450, "east": -76.83700 }
+      {
+        "ring": [
+          {
+            "lat": 40.16534,
+            "lng": -76.844071
+          },
+          {
+            "lat": 40.16534,
+            "lng": -76.839813
+          },
+          {
+            "lat": 40.16429,
+            "lng": -76.839813
+          },
+          {
+            "lat": 40.16408,
+            "lng": -76.843933
+          }
+        ]
+      }
     ],
-    "staging": { "south": 40.16360, "west": -76.83680, "north": 40.16470, "east": -76.83560 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 30,
+        "pano": "WjbQTiwSGZHlq40OHSRxdg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 150,
@@ -22,7 +94,7 @@
     "trailerParkingCapacity": 420,
     "truckGateCount": 1,
     "buildingCount": 4,
-    "siteAreaAcres": 62.0,
+    "siteAreaAcres": 62,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.16450,-76.84050,400m/data=!3m1!1e3",
@@ -51,7 +123,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "truckGate": "Multi-lane controlled gate canopy with guard booth visible at z21 on the E-side access driveway (~40.1640,-76.8358); lane separators and barrier/gate equipment present.",
     "guardShack": "Small ~1-2 vehicle-footprint white booth set beside the gate lanes, distinct from the main sort building.",

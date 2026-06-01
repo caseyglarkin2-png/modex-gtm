@@ -1,12 +1,90 @@
 {
   "name": "Universal Logistics - Vance Value-Added Facility - Vance AL",
   "type": "Value-Added Logistics / Sequencing Warehouse",
-  "coords": { "lat": 33.18450, "lng": -87.27200 },
+  "coords": {
+    "lat": 33.1845,
+    "lng": -87.272
+  },
   "geofences": {
-    "perimeter": null,
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.185937,
+          "lng": -87.275433
+        },
+        {
+          "lat": 33.185937,
+          "lng": -87.272343
+        },
+        {
+          "lat": 33.184213,
+          "lng": -87.272343
+        },
+        {
+          "lat": 33.184213,
+          "lng": -87.270627
+        },
+        {
+          "lat": 33.185305,
+          "lng": -87.270627
+        },
+        {
+          "lat": 33.185305,
+          "lng": -87.270352
+        },
+        {
+          "lat": 33.18404,
+          "lng": -87.270352
+        },
+        {
+          "lat": 33.18404,
+          "lng": -87.275433
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.185075,
+          "lng": -87.272687
+        },
+        {
+          "lat": 33.185075,
+          "lng": -87.272275
+        },
+        {
+          "lat": 33.18473,
+          "lng": -87.272275
+        },
+        {
+          "lat": 33.18473,
+          "lng": -87.272687
+        }
+      ]
+    },
     "dropYards": [],
-    "dockAprons": [],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 33.185764,
+            "lng": -87.275433
+          },
+          {
+            "lat": 33.185764,
+            "lng": -87.272549
+          },
+          {
+            "lat": 33.185477,
+            "lng": -87.272549
+          },
+          {
+            "lat": 33.185477,
+            "lng": -87.275433
+          }
+        ]
+      }
+    ],
     "staging": null
   },
   "yardMetrics": {
@@ -15,28 +93,58 @@
     "trailerParkingCapacity": 0,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 0.0,
+    "siteAreaAcres": 0,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.18450,-87.27200,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "NONE", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural", "connectivityIssue",
-    "multipleFacilities", "scale", "dropYard", "multiStep"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "urbanRural",
+    "connectivityIssue",
+    "multipleFacilities",
+    "scale",
+    "dropYard",
+    "multiStep"
   ],
   "fieldNotes": {
     "_location": "Could NOT positively resolve to a discrete building. The roster supplied no address/coords and was sourced only from an Indeed locations list. Universal Logistics does post Vance/Brookwood AL warehouse-associate and warehouse-supervisor job openings (Salary.com archive 2021, Glassdoor), confirming an operating Universal value-added presence in the Vance automotive-supplier corridor serving Mercedes-Benz U.S. International (MBUSI). However, the publicly-named MBUSI sequencing logistics partners are BLG Logistics, ARD Logistics, and Schnellecke Logistics - Universal/LINC is NOT a publicly-identified MBUSI on-site LSP at a named building, so its specific operating address cannot be confirmed.",

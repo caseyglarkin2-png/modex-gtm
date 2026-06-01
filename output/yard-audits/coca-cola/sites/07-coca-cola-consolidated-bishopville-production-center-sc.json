@@ -1,17 +1,75 @@
 {
   "name": "Coca-Cola Consolidated - Bishopville Production Center, SC",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 34.2231, "lng": -80.2337 },
+  "coords": {
+    "lat": 34.2231,
+    "lng": -80.2337
+  },
   "geofences": {
-    "perimeter": { "south": 34.2216, "west": -80.2364, "north": 34.2252, "east": -80.2306 },
-    "truckGate": { "south": 34.2215, "west": -80.2358, "north": 34.2220, "east": -80.2349 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.22469,
+          "lng": -80.236035
+        },
+        {
+          "lat": 34.224349,
+          "lng": -80.232327
+        },
+        {
+          "lat": 34.221737,
+          "lng": -80.232876
+        },
+        {
+          "lat": 34.222078,
+          "lng": -80.236447
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 34.2218, "west": -80.2362, "north": 34.2236, "east": -80.2353 },
-      { "south": 34.2230, "west": -80.2330, "north": 34.2244, "east": -80.2316 }
+      {
+        "ring": [
+          {
+            "lat": 34.223214,
+            "lng": -80.236172
+          },
+          {
+            "lat": 34.2231,
+            "lng": -80.235073
+          },
+          {
+            "lat": 34.222078,
+            "lng": -80.235211
+          },
+          {
+            "lat": 34.222192,
+            "lng": -80.236309
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 34.2216, "west": -80.2350, "north": 34.2222, "east": -80.2320 },
-      { "south": 34.2222, "west": -80.2362, "north": 34.2240, "east": -80.2356 }
+      {
+        "ring": [
+          {
+            "lat": 34.223668,
+            "lng": -80.235485
+          },
+          {
+            "lat": 34.223554,
+            "lng": -80.2337
+          },
+          {
+            "lat": 34.2231,
+            "lng": -80.233837
+          },
+          {
+            "lat": 34.223214,
+            "lng": -80.235623
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -21,7 +79,7 @@
     "trailerParkingCapacity": 110,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 44.0,
+    "siteAreaAcres": 44,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.2231,-80.2337,400m/data=!3m1!1e3",
@@ -50,7 +108,12 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "dockDoorCount"],
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "facility": "South Atlantic Canners, Inc. at 601 Cousar St, Bishopville SC - a Coca-Cola production cooperative managed by Coca-Cola Consolidated. Confirmed via Street View signage ('Coca-Cola' building branding and 'RED CLASSIC' trailers, Coke Consolidated's logistics arm). Roster lat/lng (245 Cale Yarborough Hwy) landed in downtown Bishopville ~1.4km off; corrected to the industrial complex.",
     "truckGate": "No barrier arm, sliding/swing gate, or guard checkpoint observed at any access point. Multiple Street View headings (2024-05) show the south/southwest dock face opening directly onto Cousar St with open paved access; trucks back off the road into docks. Chain-link perimeter fencing rings the trailer yard but the truck-access driveways are ungated open curb cuts.",

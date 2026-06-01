@@ -1,16 +1,102 @@
 {
   "name": "Dan's Prize - Long Prairie MN",
   "type": "Meat Processing Plant",
-  "coords": { "lat": 45.97720, "lng": -94.86780 },
+  "coords": {
+    "lat": 45.9772,
+    "lng": -94.8678
+  },
   "geofences": {
-    "perimeter": { "south": 45.97480, "west": -94.87010, "north": 45.97900, "east": -94.86510 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 45.979109,
+          "lng": -94.869997
+        },
+        {
+          "lat": 45.978918,
+          "lng": -94.866701
+        },
+        {
+          "lat": 45.976723,
+          "lng": -94.866427
+        },
+        {
+          "lat": 45.976055,
+          "lng": -94.867113
+        },
+        {
+          "lat": 45.976055,
+          "lng": -94.869723
+        },
+        {
+          "lat": 45.977677,
+          "lng": -94.870135
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 45.9772,
+          "lng": -94.870135
+        },
+        {
+          "lat": 45.977295,
+          "lng": -94.869173
+        },
+        {
+          "lat": 45.976627,
+          "lng": -94.869036
+        },
+        {
+          "lat": 45.976532,
+          "lng": -94.869997
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 45.97670, "west": -94.86940, "north": 45.97790, "east": -94.86780 },
-      { "south": 45.97500, "west": -94.86940, "north": 45.97580, "east": -94.86780 }
+      {
+        "ring": [
+          {
+            "lat": 45.976723,
+            "lng": -94.869173
+          },
+          {
+            "lat": 45.976818,
+            "lng": -94.866976
+          },
+          {
+            "lat": 45.976055,
+            "lng": -94.866976
+          },
+          {
+            "lat": 45.975959,
+            "lng": -94.869036
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 45.97700, "west": -94.86730, "north": 45.97800, "east": -94.86600 }
+      {
+        "ring": [
+          {
+            "lat": 45.977582,
+            "lng": -94.869723
+          },
+          {
+            "lat": 45.977582,
+            "lng": -94.867113
+          },
+          {
+            "lat": 45.977295,
+            "lng": -94.867113
+          },
+          {
+            "lat": 45.977295,
+            "lng": -94.869723
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -20,7 +106,7 @@
     "trailerParkingCapacity": 70,
     "truckGateCount": 1,
     "buildingCount": 5,
-    "siteAreaAcres": 28.0,
+    "siteAreaAcres": 28,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@45.97720,-94.86780,400m/data=!3m1!1e3",
@@ -49,7 +135,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "Roster coords (45.975374,-94.865992) landed at the SE corner of the property near the river; the plant complex sits NW of that point. Locked center 45.97720,-94.86780 on the main plant building. Confirmed via Hormel careers page and the 20 Riverside Dr address.",
     "truckGate": "Open site. StreetView (2014) shows the access road running straight into the complex with no barrier arm, no gate across the truck drive, and no perimeter fence. A tractor-trailer is parked in the open yard directly off the public road. truckGate false.",

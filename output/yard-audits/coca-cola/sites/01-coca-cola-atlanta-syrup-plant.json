@@ -1,19 +1,84 @@
 {
   "name": "Coca-Cola Atlanta Syrup Plant - Atlanta GA",
   "type": "Concentrate / Syrup Plant",
-  "coords": { "lat": 33.65735, "lng": -84.39335 },
+  "coords": {
+    "lat": 33.65735,
+    "lng": -84.39335
+  },
   "geofences": {
-    "perimeter": { "south": 33.65480, "west": -84.39450, "north": 33.65970, "east": -84.39120 },
-    "truckGate": { "south": 33.65580, "west": -84.39250, "north": 33.65640, "east": -84.39200 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.65895,
+          "lng": -84.394723
+        },
+        {
+          "lat": 33.658607,
+          "lng": -84.391702
+        },
+        {
+          "lat": 33.65575,
+          "lng": -84.392663
+        },
+        {
+          "lat": 33.656207,
+          "lng": -84.395685
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 33.65490, "west": -84.39300, "north": 33.65640, "east": -84.39170 },
-      { "south": 33.65700, "west": -84.39280, "north": 33.65840, "east": -84.39160 }
+      {
+        "ring": [
+          {
+            "lat": 33.656093,
+            "lng": -84.393625
+          },
+          {
+            "lat": 33.655978,
+            "lng": -84.392251
+          },
+          {
+            "lat": 33.655178,
+            "lng": -84.392389
+          },
+          {
+            "lat": 33.655292,
+            "lng": -84.393762
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.65820, "west": -84.39400, "north": 33.65900, "east": -84.39300 },
-      { "south": 33.65640, "west": -84.39450, "north": 33.65780, "east": -84.39400 }
+      {
+        "ring": [
+          {
+            "lat": 33.658379,
+            "lng": -84.394449
+          },
+          {
+            "lat": 33.65815,
+            "lng": -84.391977
+          },
+          {
+            "lat": 33.657579,
+            "lng": -84.392114
+          },
+          {
+            "lat": 33.657807,
+            "lng": -84.394586
+          }
+        ]
+      }
     ],
-    "staging": { "south": 33.65560, "west": -84.39260, "north": 33.65620, "east": -84.39180 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 67,
+        "pano": "WKnEWNek7ZtQpS_o3D4pUg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 35,
@@ -21,23 +86,39 @@
     "trailerParkingCapacity": 160,
     "truckGateCount": 1,
     "buildingCount": 4,
-    "siteAreaAcres": 33.0,
+    "siteAreaAcres": 33,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@33.65735,-84.39335,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "shipRcvSeparate"],
+  "uncertainFields": [
+    "scale",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Controlled entrance off Browns Mill Rd SE; checkpoint canopy/structure visible in Street View (2025-03) near flagpoles, with barrier across the truck lane visible in z20 satellite.",
     "guardShack": "Small staffed booth/checkpoint canopy beside the truck lane at the entrance drive, distinct from the main building.",

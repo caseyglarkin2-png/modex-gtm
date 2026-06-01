@@ -1,17 +1,84 @@
 {
   "name": "Coca-Cola Consolidated - Nashville Production Center, TN",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 36.12400, "lng": -86.76930 },
+  "coords": {
+    "lat": 36.124,
+    "lng": -86.7693
+  },
   "geofences": {
-    "perimeter": { "south": 36.12250, "west": -86.77100, "north": 36.12580, "east": -86.76820 },
-    "truckGate": { "south": 36.12530, "west": -86.76990, "north": 36.12570, "east": -86.76930 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.125553,
+          "lng": -86.769849
+        },
+        {
+          "lat": 36.125664,
+          "lng": -86.767377
+        },
+        {
+          "lat": 36.123723,
+          "lng": -86.76724
+        },
+        {
+          "lat": 36.123612,
+          "lng": -86.769712
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 36.12270, "west": -86.77080, "north": 36.12480, "east": -86.76950 }
+      {
+        "ring": [
+          {
+            "lat": 36.124,
+            "lng": -86.771085
+          },
+          {
+            "lat": 36.123556,
+            "lng": -86.769575
+          },
+          {
+            "lat": 36.122669,
+            "lng": -86.769987
+          },
+          {
+            "lat": 36.123113,
+            "lng": -86.771497
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 36.12300, "west": -86.76970, "north": 36.12450, "east": -86.76900 }
+      {
+        "ring": [
+          {
+            "lat": 36.124055,
+            "lng": -86.769781
+          },
+          {
+            "lat": 36.124,
+            "lng": -86.768201
+          },
+          {
+            "lat": 36.123723,
+            "lng": -86.768201
+          },
+          {
+            "lat": 36.123778,
+            "lng": -86.769781
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 146,
+        "pano": "30OfNX2rQazrvYq0xH_kMQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 28,
@@ -19,23 +86,42 @@
     "trailerParkingCapacity": 120,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 22.0,
+    "siteAreaAcres": 22,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@36.12400,-86.76930,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoors",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "locationCorrection": "Roster address 2451 Atrium Way is an office park (wrong site). Web research (Nashville Post, Berry Hill directory) identified the actual Coca-Cola Consolidated production/distribution facility at 407 Craighead St, Nashville TN 37204 (Tennessee Soft Drink Production Co., 21.76-acre property). Audited at the corrected location.",
     "truckGate": "Older urban infill industrial site reached via a private internal industrial drive shared with adjacent properties; no formal guarded checkpoint at a public road is visible in satellite or Street View. Left false, flagged uncertain.",

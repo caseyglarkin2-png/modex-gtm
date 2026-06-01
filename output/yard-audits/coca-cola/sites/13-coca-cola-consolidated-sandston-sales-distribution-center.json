@@ -1,38 +1,126 @@
 {
   "name": "Coca-Cola Consolidated - Sandston Sales & Distribution Center, VA",
   "type": "Sales / Distribution Center",
-  "coords": { "lat": 37.532500, "lng": -77.337200 },
+  "coords": {
+    "lat": 37.5325,
+    "lng": -77.3372
+  },
   "geofences": {
-    "perimeter": { "south": 37.5306, "west": -77.3408, "north": 37.5347, "east": -77.3345 },
-    "truckGate": { "south": 37.5337, "west": -77.3372, "north": 37.5343, "east": -77.3363 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.533807,
+          "lng": -77.340771
+        },
+        {
+          "lat": 37.533698,
+          "lng": -77.335552
+        },
+        {
+          "lat": 37.531193,
+          "lng": -77.335552
+        },
+        {
+          "lat": 37.531302,
+          "lng": -77.340771
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 37.5331, "west": -77.3407, "north": 37.5340, "east": -77.3392 },
-      { "south": 37.5333, "west": -77.3358, "north": 37.5341, "east": -77.3347 }
+      {
+        "ring": [
+          {
+            "lat": 37.533262,
+            "lng": -77.340633
+          },
+          {
+            "lat": 37.533262,
+            "lng": -77.338573
+          },
+          {
+            "lat": 37.531738,
+            "lng": -77.338711
+          },
+          {
+            "lat": 37.531847,
+            "lng": -77.340633
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 37.5324, "west": -77.3402, "north": 37.5331, "east": -77.3388 }
+      {
+        "ring": [
+          {
+            "lat": 37.533153,
+            "lng": -77.338299
+          },
+          {
+            "lat": 37.533045,
+            "lng": -77.335827
+          },
+          {
+            "lat": 37.5325,
+            "lng": -77.335827
+          },
+          {
+            "lat": 37.532609,
+            "lng": -77.338299
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 9,
+        "pano": "CAoSF0NJSE0wb2dLRUlDQWdJRE9pSUtSa0FF",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 45, "trailersVisible": 70, "trailerParkingCapacity": 110,
-    "truckGateCount": 1, "buildingCount": 4, "siteAreaAcres": 62.6,
+    "dockDoorCount": 45,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 62.6,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@37.5325,-77.3372,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "truckGate", "dockDoorCount"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "truckGate",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "location": "Roster lat/lng (37.5108,-77.3446) landed in a residential neighborhood ~1.5 km SW of the real site and roster address (5301 Eubank Rd) is also off. Correct facility is Coca-Cola Consolidated at 500 Eastpark Ct, Sandston/Highland Springs VA (37.5324,-77.3369), confirmed via Nominatim geocode and company press releases describing the 63-acre campus, 300,000 sq ft plant/DC plus a new 210,000 sq ft warehouse.",
     "truckGate": "Single private access drive enters the campus from Eastpark Court at the NE corner; campus is fully fenced/tree-buffered with one controlled entrance. No Street View on the private drive, so the exact gate hardware is inferred from layout - rated as a controlled truck gate at medium confidence.",

@@ -1,17 +1,115 @@
 {
   "name": "Kraft Heinz - Aurora",
   "type": "Cold Storage Facility",
-  "coords": { "lat": 41.78305, "lng": -88.37315 },
+  "coords": {
+    "lat": 41.78305,
+    "lng": -88.37315
+  },
   "geofences": {
-    "perimeter": { "south": 41.78175, "west": -88.37427, "north": 41.78360, "east": -88.37205 },
-    "truckGate": { "south": 41.78195, "west": -88.37260, "north": 41.78225, "east": -88.37230 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.783588,
+          "lng": -88.374867
+        },
+        {
+          "lat": 41.783639,
+          "lng": -88.371536
+        },
+        {
+          "lat": 41.781847,
+          "lng": -88.371468
+        },
+        {
+          "lat": 41.781796,
+          "lng": -88.374867
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.782154,
+          "lng": -88.372429
+        },
+        {
+          "lat": 41.78218,
+          "lng": -88.372154
+        },
+        {
+          "lat": 41.781949,
+          "lng": -88.37212
+        },
+        {
+          "lat": 41.781924,
+          "lng": -88.372395
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 41.78175, "west": -88.37427, "north": 41.78240, "east": -88.37230 }
+      {
+        "ring": [
+          {
+            "lat": 41.782333,
+            "lng": -88.374867
+          },
+          {
+            "lat": 41.782384,
+            "lng": -88.373322
+          },
+          {
+            "lat": 41.781796,
+            "lng": -88.373287
+          },
+          {
+            "lat": 41.781796,
+            "lng": -88.374867
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.78240, "west": -88.37427, "north": 41.78290, "east": -88.37245 }
+      {
+        "ring": [
+          {
+            "lat": 41.782743,
+            "lng": -88.374867
+          },
+          {
+            "lat": 41.78282,
+            "lng": -88.371914
+          },
+          {
+            "lat": 41.782564,
+            "lng": -88.37188
+          },
+          {
+            "lat": 41.782487,
+            "lng": -88.374867
+          }
+        ]
+      }
     ],
-    "staging": { "south": 41.78195, "west": -88.37235, "north": 41.78230, "east": -88.37205 }
+    "staging": {
+      "ring": [
+        {
+          "lat": 41.782436,
+          "lng": -88.373322
+        },
+        {
+          "lat": 41.782461,
+          "lng": -88.372463
+        },
+        {
+          "lat": 41.782077,
+          "lng": -88.372429
+        },
+        {
+          "lat": 41.782052,
+          "lng": -88.373287
+        }
+      ]
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 30,
@@ -48,7 +146,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "facility": "1203 Bilter Rd, Aurora, IL - Kraft Foods/Heinz cold-storage portion of the multi-tenant Aurora Distribution Center. Confirmed via web research (HSA Commercial, Manta, Yellow Pages) plus visual lock on industrial building at supplied coords.",
     "truckGate": "Z21 satellite shows a small dark rectangular structure (guard-shack footprint) sitting in the middle of the truck entry apron at the SE corner where the drive opens onto Bilter Rd. Single controlled pinch-point for both inbound and outbound trucks.",

@@ -1,17 +1,63 @@
 {
   "name": "CJ Logistics - Romeoville IL (Normantown)",
   "type": "Distribution Center",
-  "coords": { "lat": 41.6510, "lng": -88.1310 },
+  "coords": {
+    "lat": 41.651,
+    "lng": -88.131
+  },
   "geofences": {
-    "perimeter": { "south": 41.6498, "west": -88.1338, "north": 41.6524, "east": -88.1282 },
-    "truckGate": { "south": 41.6516, "west": -88.1328, "north": 41.6521, "east": -88.1320 },
-    "dropYards": [
-      { "south": 41.6500, "west": -88.1295, "north": 41.6516, "east": -88.1284 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.65141,
+          "lng": -88.134021
+        },
+        {
+          "lat": 41.651616,
+          "lng": -88.129352
+        },
+        {
+          "lat": 41.64905,
+          "lng": -88.129077
+        },
+        {
+          "lat": 41.648845,
+          "lng": -88.133747
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 41.6515, "west": -88.1332, "north": 41.6521, "east": -88.1286 }
+      {
+        "ring": [
+          {
+            "lat": 41.649358,
+            "lng": -88.133884
+          },
+          {
+            "lat": 41.649563,
+            "lng": -88.129352
+          },
+          {
+            "lat": 41.648948,
+            "lng": -88.129283
+          },
+          {
+            "lat": 41.648742,
+            "lng": -88.133815
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 188,
+        "pano": "armX5IjoPhrYBH8r0mL5RQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 90,
@@ -24,18 +70,38 @@
   },
   "mapsUrl": "https://www.google.com/maps/@41.6510,-88.1310,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "truckGateCount"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "truckGateCount"
+  ],
   "fieldNotes": {
     "location": "Confirmed 1401 W Normantown Rd, Romeoville IL - CJ Logistics America (former DSC Logistics) DC. Single large warehouse off I-55 / Weber Rd, between Normantown Rd (north) and a retention pond (south).",
     "truckGate": "Property truck court is enclosed by a continuous black ornamental (wrought-iron-style) perimeter fence visible in 2018-2025 Street View. The truck driveway breaks through the fence with a gate opening - classified as a controlled truck entrance.",

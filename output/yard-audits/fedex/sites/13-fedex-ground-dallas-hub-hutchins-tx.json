@@ -1,17 +1,103 @@
 {
   "name": "FedEx Ground Dallas Hub - Hutchins TX",
   "type": "Ground regional distribution hub",
-  "coords": { "lat": 32.65760, "lng": -96.70650 },
+  "coords": {
+    "lat": 32.6576,
+    "lng": -96.7065
+  },
   "geofences": {
-    "perimeter": { "south": 32.65480, "west": -96.71000, "north": 32.66050, "east": -96.70300 },
-    "truckGate": { "south": 32.65530, "west": -96.70720, "north": 32.65600, "east": -96.70640 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.659912,
+          "lng": -96.710895
+        },
+        {
+          "lat": 32.661068,
+          "lng": -96.7065
+        },
+        {
+          "lat": 32.658525,
+          "lng": -96.704852
+        },
+        {
+          "lat": 32.655288,
+          "lng": -96.7065
+        },
+        {
+          "lat": 32.65575,
+          "lng": -96.710345
+        },
+        {
+          "lat": 32.658062,
+          "lng": -96.711444
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 32.65820, "west": -96.70950, "north": 32.66040, "east": -96.70600 },
-      { "south": 32.65560, "west": -96.70620, "north": 32.65920, "east": -96.70350 },
-      { "south": 32.65560, "west": -96.71000, "north": 32.65800, "east": -96.70720 }
+      {
+        "ring": [
+          {
+            "lat": 32.660837,
+            "lng": -96.710345
+          },
+          {
+            "lat": 32.6613,
+            "lng": -96.707049
+          },
+          {
+            "lat": 32.659681,
+            "lng": -96.7065
+          },
+          {
+            "lat": 32.659219,
+            "lng": -96.709796
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 32.658756,
+            "lng": -96.710895
+          },
+          {
+            "lat": 32.658987,
+            "lng": -96.707873
+          },
+          {
+            "lat": 32.656213,
+            "lng": -96.707599
+          },
+          {
+            "lat": 32.655981,
+            "lng": -96.71062
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 32.65650, "west": -96.70720, "north": 32.65900, "east": -96.70450 }
+      {
+        "ring": [
+          {
+            "lat": 32.658756,
+            "lng": -96.707599
+          },
+          {
+            "lat": 32.658756,
+            "lng": -96.705401
+          },
+          {
+            "lat": 32.656675,
+            "lng": -96.705676
+          },
+          {
+            "lat": 32.656675,
+            "lng": -96.707873
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -21,23 +107,43 @@
     "trailerParkingCapacity": 850,
     "truckGateCount": 2,
     "buildingCount": 1,
-    "siteAreaAcres": 103.0,
+    "siteAreaAcres": 103,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.65760,-96.70650,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "truckGateCount", "entryLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "truckGateCount",
+    "entryLanes"
+  ],
   "fieldNotes": {
     "location": "Confirmed FedEx Ground Dallas Hub at 1101 E Cleveland St, Hutchins TX — one of the largest FedEx Ground facilities, 720,000+ sq ft on a 102-acre site, processing 230,000+ packages/day with ~1,600 workers. Roster coordinate (GEOMETRIC_CENTER, moved 1.4 km) landed correctly on the hub. FedEx branding directly confirmed on the building face in 2026 Street View.",
     "buildingId": "The FedEx hub is the distinctive solar-paneled-roof building at the center of the industrial campus; several neighboring large warehouses (different occupants) surround it, so care was taken to box only the FedEx property.",

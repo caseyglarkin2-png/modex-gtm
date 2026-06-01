@@ -1,19 +1,108 @@
 {
   "name": "Universal Logistics / LINC - Sturtevant Contract Logistics Warehouse - Sturtevant WI",
   "type": "Contract Logistics / Value-Added Warehouse",
-  "coords": { "lat": 42.70030, "lng": -87.87400 },
+  "coords": {
+    "lat": 42.7003,
+    "lng": -87.874
+  },
   "geofences": {
-    "perimeter": { "south": 42.69850, "west": -87.87620, "north": 42.70360, "east": -87.87150 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.70353,
+          "lng": -87.874549
+        },
+        {
+          "lat": 42.70353,
+          "lng": -87.871253
+        },
+        {
+          "lat": 42.699089,
+          "lng": -87.872215
+        },
+        {
+          "lat": 42.69919,
+          "lng": -87.874961
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.699795,
+          "lng": -87.874687
+        },
+        {
+          "lat": 42.699795,
+          "lng": -87.873725
+        },
+        {
+          "lat": 42.69919,
+          "lng": -87.873863
+        },
+        {
+          "lat": 42.69919,
+          "lng": -87.874824
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 42.70020, "west": -87.87560, "north": 42.70360, "east": -87.87420 },
-      { "south": 42.69960, "west": -87.87340, "north": 42.70180, "east": -87.87170 }
+      {
+        "ring": [
+          {
+            "lat": 42.701006,
+            "lng": -87.874687
+          },
+          {
+            "lat": 42.701006,
+            "lng": -87.873313
+          },
+          {
+            "lat": 42.699291,
+            "lng": -87.873725
+          },
+          {
+            "lat": 42.699392,
+            "lng": -87.874961
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 42.69970, "west": -87.87480, "north": 42.70340, "east": -87.87420 },
-      { "south": 42.69970, "west": -87.87370, "north": 42.70300, "east": -87.87320 }
+      {
+        "ring": [
+          {
+            "lat": 42.703328,
+            "lng": -87.874412
+          },
+          {
+            "lat": 42.703328,
+            "lng": -87.871528
+          },
+          {
+            "lat": 42.699795,
+            "lng": -87.872352
+          },
+          {
+            "lat": 42.699896,
+            "lng": -87.874412
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 23,
+        "pano": "UVV97ieIVqY6Qbljdtn3QA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 23,
+        "pano": "UVV97ieIVqY6Qbljdtn3QA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 70,
@@ -21,23 +110,39 @@
     "trailerParkingCapacity": 90,
     "truckGateCount": 2,
     "buildingCount": 1,
-    "siteAreaAcres": 47.0,
+    "siteAreaAcres": 47,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@42.70030,-87.87400,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Open site. The building sits behind a wide grass setback on a business-park road; truck driveways connect directly to the public road with no barrier arm, sliding gate, or checkpoint pinch-point. No perimeter fence on the east frontage.",
     "guardShack": "No guard booth at any driveway. Street View of the east frontage and the south end shows only open paved aprons and a small office at the south corner of the building - no 1-3-space booth structure.",

@@ -1,17 +1,87 @@
 {
   "name": "Universal Logistics - Chillicothe Contract Logistics Warehouse - Chillicothe IL",
   "type": "Contract Logistics / Value-Added Warehouse",
-  "coords": { "lat": 40.84820, "lng": -89.55350 },
+  "coords": {
+    "lat": 40.8482,
+    "lng": -89.5535
+  },
   "geofences": {
-    "perimeter": { "south": 40.84620, "west": -89.55700, "north": 40.85020, "east": -89.54950 },
-    "truckGate": null,
-    "dropYards": [
-      { "south": 40.84700, "west": -89.55150, "north": 40.84950, "east": -89.55000 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.849239,
+          "lng": -89.558169
+        },
+        {
+          "lat": 40.849239,
+          "lng": -89.550479
+        },
+        {
+          "lat": 40.845915,
+          "lng": -89.550479
+        },
+        {
+          "lat": 40.845915,
+          "lng": -89.558169
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.849031,
+          "lng": -89.558169
+        },
+        {
+          "lat": 40.849031,
+          "lng": -89.557345
+        },
+        {
+          "lat": 40.848408,
+          "lng": -89.557345
+        },
+        {
+          "lat": 40.848408,
+          "lng": -89.558169
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 40.84680, "west": -89.55280, "north": 40.84960, "east": -89.55170 }
+      {
+        "ring": [
+          {
+            "lat": 40.849031,
+            "lng": -89.557895
+          },
+          {
+            "lat": 40.849031,
+            "lng": -89.550753
+          },
+          {
+            "lat": 40.848616,
+            "lng": -89.550753
+          },
+          {
+            "lat": 40.848616,
+            "lng": -89.557895
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 144,
+        "pano": "tPP85n2sL-8UjFS9fPdGLA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 144,
+        "pano": "tPP85n2sL-8UjFS9fPdGLA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 55,
@@ -19,7 +89,7 @@
     "trailerParkingCapacity": 90,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 78.0,
+    "siteAreaAcres": 78,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.8482,-89.5535,400m/data=!3m1!1e3",
@@ -48,7 +118,12 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "shipRcvSeparate"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoorCount",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "siteResolution": "No street address in roster. Resolved to the large Caterpillar parts/distribution warehouse on E Cedar Hills Drive, Chillicothe IL (~40.8482, -89.5535) — web search identified a Caterpillar 'General Warehousing and Storage' facility at 2800 E Cedar Hills Drive handling parts-distribution logistics; the Cedar Hills residential subdivision sits immediately north of the building, matching the address. This is the type of pick/pack/sequencing/inventory facility Universal Logistics operates for Caterpillar in Chillicothe. The exact Universal-operated sub-area within the Caterpillar Chillicothe campus is not crisply confirmed — medium confidence.",
     "truckGate": "No barrier arm, sliding gate, or guard booth visible at the road edge in Street View along E Cedar Hills Drive — the rural campus warehouse has open driveway access from the public road into the parking/apron area. Classed truckGate false.",

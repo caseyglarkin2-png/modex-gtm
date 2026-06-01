@@ -1,17 +1,84 @@
 {
   "name": "Coca-Cola Consolidated - Cincinnati Sales & Distribution Center, OH",
   "type": "Sales / Distribution Center",
-  "coords": { "lat": 39.29470, "lng": -84.53630 },
+  "coords": {
+    "lat": 39.2947,
+    "lng": -84.5363
+  },
   "geofences": {
-    "perimeter": { "south": 39.29360, "west": -84.53740, "north": 39.29570, "east": -84.53520 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.295231,
+          "lng": -84.536781
+        },
+        {
+          "lat": 39.295125,
+          "lng": -84.535201
+        },
+        {
+          "lat": 39.29385,
+          "lng": -84.535476
+        },
+        {
+          "lat": 39.294062,
+          "lng": -84.536987
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [
-      { "south": 39.29490, "west": -84.53720, "north": 39.29560, "east": -84.53650 }
+      {
+        "ring": [
+          {
+            "lat": 39.294434,
+            "lng": -84.536712
+          },
+          {
+            "lat": 39.294328,
+            "lng": -84.535751
+          },
+          {
+            "lat": 39.293903,
+            "lng": -84.535888
+          },
+          {
+            "lat": 39.294009,
+            "lng": -84.536849
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.29470, "west": -84.53710, "north": 39.29560, "east": -84.53650 }
+      {
+        "ring": [
+          {
+            "lat": 39.294966,
+            "lng": -84.536643
+          },
+          {
+            "lat": 39.294913,
+            "lng": -84.535407
+          },
+          {
+            "lat": 39.294647,
+            "lng": -84.535476
+          },
+          {
+            "lat": 39.2947,
+            "lng": -84.536712
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 31,
+        "pano": "vPdplj5cH1dPlgaFJJ9vYg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 14,
@@ -19,7 +86,7 @@
     "trailerParkingCapacity": 20,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 11.0,
+    "siteAreaAcres": 11,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.2947,-84.5363,400m/data=!3m1!1e3",
@@ -48,7 +115,16 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "dockDoors", "dropArea", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "dockDoors",
+    "dropArea",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "facility": "Coca-Cola Consolidated Cincinnati Sales & Distribution Center. The roster address (1547 Kemper Meadow Dr, Cincinnati OH 45240) is in the Kemper Meadow / Forest Park business park. The roster lat/lng (39.292889,-84.53697, RANGE_INTERPOLATED) landed at the Kemper Meadow Dr intersection ~250m southwest of the building; corrected to the large flex/warehouse building at 39.29470,-84.53630.",
     "identification": "MEDIUM confidence on building identity. The candidate is a large flex/warehouse building with an attached office wing on Kemper Meadow Dr; satellite shows white trailers and red-cab (Red Classic, Coca-Cola Consolidated's logistics fleet) tractors backed into a dock row on its NW face plus a small trailer drop yard - consistent with a Coca-Cola sales/distribution center. No road-level Coca-Cola signage was confirmable: Street View on Kemper Meadow Dr is from 2019 and the dock side is screened by mature trees.",

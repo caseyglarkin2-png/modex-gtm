@@ -1,39 +1,128 @@
 {
   "name": "FedEx Ground Hub - Nashville TN",
   "type": "Ground regional sortation hub",
-  "coords": { "lat": 36.23900, "lng": -86.79350 },
+  "coords": {
+    "lat": 36.239,
+    "lng": -86.7935
+  },
   "geofences": {
-    "perimeter": { "south": 36.23600, "west": -86.79900, "north": 36.24150, "east": -86.79100 },
-    "truckGate": { "south": 36.23640, "west": -86.79680, "north": 36.23720, "east": -86.79580 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.238446,
+          "lng": -86.798444
+        },
+        {
+          "lat": 36.239886,
+          "lng": -86.792127
+        },
+        {
+          "lat": 36.238446,
+          "lng": -86.791303
+        },
+        {
+          "lat": 36.236785,
+          "lng": -86.794873
+        },
+        {
+          "lat": 36.237228,
+          "lng": -86.798444
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 36.23950, "west": -86.79280, "north": 36.24080, "east": -86.79120 },
-      { "south": 36.23680, "west": -86.79850, "north": 36.23900, "east": -86.79550 }
+      {
+        "ring": [
+          {
+            "lat": 36.239665,
+            "lng": -86.791852
+          },
+          {
+            "lat": 36.239665,
+            "lng": -86.788556
+          },
+          {
+            "lat": 36.238446,
+            "lng": -86.788556
+          },
+          {
+            "lat": 36.238446,
+            "lng": -86.791852
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 36.23850, "west": -86.79550, "north": 36.24050, "east": -86.79150 },
-      { "south": 36.23750, "west": -86.79480, "north": 36.23950, "east": -86.79180 }
+      {
+        "ring": [
+          {
+            "lat": 36.238778,
+            "lng": -86.796247
+          },
+          {
+            "lat": 36.239443,
+            "lng": -86.792676
+          },
+          {
+            "lat": 36.238335,
+            "lng": -86.792401
+          },
+          {
+            "lat": 36.237671,
+            "lng": -86.795972
+          }
+        ]
+      }
     ],
-    "staging": { "south": 36.23680, "west": -86.79620, "north": 36.23820, "east": -86.79420 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 29,
+        "pano": "eL6WhsCgiG62B9lpaq3JaQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 150, "trailersVisible": 180, "trailerParkingCapacity": 260,
-    "truckGateCount": 1, "buildingCount": 3, "siteAreaAcres": 75.0,
+    "dockDoorCount": 150,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 260,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 75,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@36.239,-86.7935,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Street View (2019, Knight Dr) shows a controlled, fenced truck entrance: a check-in canopy spanning the drive lanes with a guard/admin building beside it; perimeter chain-link fencing and a US flag.",
     "guardShack": "Low building with a green awning beside the entrance lanes plus a canopy over the check-in lanes - a staffed gate/security building. remoteGs therefore false.",

@@ -1,17 +1,102 @@
 {
   "name": "Hormel Suffolk Plant - Suffolk VA",
   "type": "Production Facility",
-  "coords": { "lat": 36.72320, "lng": -76.58270 },
+  "coords": {
+    "lat": 36.7232,
+    "lng": -76.5827
+  },
   "geofences": {
-    "perimeter": { "south": 36.71980, "west": -76.58530, "north": 36.72530, "east": -76.57990 },
-    "truckGate": { "south": 36.72385, "west": -76.58325, "north": 36.72425, "east": -76.58280 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.725401,
+          "lng": -76.585447
+        },
+        {
+          "lat": 36.724961,
+          "lng": -76.581052
+        },
+        {
+          "lat": 36.722319,
+          "lng": -76.580777
+        },
+        {
+          "lat": 36.720118,
+          "lng": -76.582013
+        },
+        {
+          "lat": 36.720558,
+          "lng": -76.585447
+        },
+        {
+          "lat": 36.72342,
+          "lng": -76.585721
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 36.721439,
+          "lng": -76.585447
+        },
+        {
+          "lat": 36.721439,
+          "lng": -76.584348
+        },
+        {
+          "lat": 36.720778,
+          "lng": -76.584348
+        },
+        {
+          "lat": 36.720778,
+          "lng": -76.585447
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 36.72280, "west": -76.58330, "north": 36.72400, "east": -76.58230 },
-      { "south": 36.72020, "west": -76.58500, "north": 36.72120, "east": -76.58400 }
+      {
+        "ring": [
+          {
+            "lat": 36.721219,
+            "lng": -76.585447
+          },
+          {
+            "lat": 36.720998,
+            "lng": -76.5827
+          },
+          {
+            "lat": 36.720118,
+            "lng": -76.582837
+          },
+          {
+            "lat": 36.720338,
+            "lng": -76.585584
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 36.72290, "west": -76.58320, "north": 36.72400, "east": -76.58250 },
-      { "south": 36.72290, "west": -76.58250, "north": 36.72400, "east": -76.58170 }
+      {
+        "ring": [
+          {
+            "lat": 36.724081,
+            "lng": -76.584623
+          },
+          {
+            "lat": 36.72375,
+            "lng": -76.581601
+          },
+          {
+            "lat": 36.72331,
+            "lng": -76.581739
+          },
+          {
+            "lat": 36.72364,
+            "lng": -76.58476
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -21,7 +106,7 @@
     "trailerParkingCapacity": 35,
     "truckGateCount": 1,
     "buildingCount": 4,
-    "siteAreaAcres": 32.0,
+    "siteAreaAcres": 32,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@36.72320,-76.58270,400m/data=!3m1!1e3",
@@ -50,7 +135,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "Roster lat/lng (36.723019,-76.619984) landed in a residential subdivision ~3.5 km west of the real plant. Corrected via EPA FRS registry 110001135762 and the 245 Culloden St address to the historic Planters/Mr. Peanut factory complex in downtown Suffolk; locked center 36.72320,-76.58270.",
     "truckGate": "Truck yard is fully enclosed by chain-link fence with privacy slats (StreetView 2022-2023). A chain-link gate spans the truck drive at the north end of the internal yard. No barrier arm but a controlled fenced gate = truckGate true.",

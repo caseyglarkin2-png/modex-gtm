@@ -1,17 +1,116 @@
 {
   "name": "Hormel Atlanta Plant - Tucker GA",
   "type": "Production Facility",
-  "coords": { "lat": 33.83930, "lng": -84.25060 },
+  "coords": {
+    "lat": 33.8393,
+    "lng": -84.2506
+  },
   "geofences": {
-    "perimeter": { "south": 33.83850, "west": -84.25150, "north": 33.84080, "east": -84.24930 },
-    "truckGate": { "south": 33.84015, "west": -84.25090, "north": 33.84055, "east": -84.25020 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.83987,
+          "lng": -84.25266
+        },
+        {
+          "lat": 33.83987,
+          "lng": -84.250257
+        },
+        {
+          "lat": 33.838445,
+          "lng": -84.250188
+        },
+        {
+          "lat": 33.838045,
+          "lng": -84.251287
+        },
+        {
+          "lat": 33.838387,
+          "lng": -84.252797
+        },
+        {
+          "lat": 33.8393,
+          "lng": -84.252797
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.83987,
+          "lng": -84.252111
+        },
+        {
+          "lat": 33.83987,
+          "lng": -84.251561
+        },
+        {
+          "lat": 33.839585,
+          "lng": -84.251561
+        },
+        {
+          "lat": 33.839585,
+          "lng": -84.252111
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 33.83870, "west": -84.24970, "north": 33.83990, "east": -84.24930 }
+      {
+        "ring": [
+          {
+            "lat": 33.839528,
+            "lng": -84.2506
+          },
+          {
+            "lat": 33.839585,
+            "lng": -84.250051
+          },
+          {
+            "lat": 33.83873,
+            "lng": -84.249982
+          },
+          {
+            "lat": 33.838673,
+            "lng": -84.250463
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.83870, "west": -84.25010, "north": 33.83990, "east": -84.24960 }
+      {
+        "ring": [
+          {
+            "lat": 33.839585,
+            "lng": -84.252317
+          },
+          {
+            "lat": 33.839585,
+            "lng": -84.2506
+          },
+          {
+            "lat": 33.839357,
+            "lng": -84.2506
+          },
+          {
+            "lat": 33.839357,
+            "lng": -84.252317
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 146,
+        "pano": "E5RCS44OEeVlyhv5hMzK3A",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 146,
+        "pano": "E5RCS44OEeVlyhv5hMzK3A",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 28,
@@ -48,7 +147,14 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "entryLanes", "exitLanes", "truckGateCount"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes",
+    "truckGateCount"
+  ],
   "fieldNotes": {
     "location": "Roster coords (33.86701,-84.188105) and the roster address '3700 Mountain Industrial Blvd' were both wrong - that point is ~6km NE in a commercial/residential area. The real plant is 3367 Montreal Industrial Way, Tucker GA 30084, confirmed via Hormel/Waze/FSIS listings and a Street View sign reading 'ATLANTA PLANT'. Locked center ~33.8393,-84.2506.",
     "truckGate": "Property has a perimeter chain-link fence, but the truck driveways from Montreal Industrial Way and the east road appear to be open driveway gaps without barrier arms or a guard booth. No controlled checkpoint identified - marked false at medium confidence (Street View coverage does not reach the dock-yard entrance directly).",

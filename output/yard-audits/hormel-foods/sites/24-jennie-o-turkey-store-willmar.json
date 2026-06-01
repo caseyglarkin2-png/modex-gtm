@@ -1,15 +1,102 @@
 {
   "name": "Jennie-O Turkey Store - Willmar MN",
   "type": "Meat Processing Plant",
-  "coords": { "lat": 45.10870, "lng": -95.07950 },
+  "coords": {
+    "lat": 45.1087,
+    "lng": -95.0795
+  },
   "geofences": {
-    "perimeter": { "south": 45.10560, "west": -95.08360, "north": 45.11060, "east": -95.07650 },
-    "truckGate": { "south": 45.10905, "west": -95.08320, "north": 45.10960, "east": -95.08250 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 45.110638,
+          "lng": -95.083895
+        },
+        {
+          "lat": 45.110638,
+          "lng": -95.078813
+        },
+        {
+          "lat": 45.107925,
+          "lng": -95.078401
+        },
+        {
+          "lat": 45.107149,
+          "lng": -95.0795
+        },
+        {
+          "lat": 45.107537,
+          "lng": -95.083895
+        },
+        {
+          "lat": 45.109185,
+          "lng": -95.084307
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 45.1087,
+          "lng": -95.084307
+        },
+        {
+          "lat": 45.108797,
+          "lng": -95.083345
+        },
+        {
+          "lat": 45.108118,
+          "lng": -95.083208
+        },
+        {
+          "lat": 45.108022,
+          "lng": -95.084169
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 45.10580, "west": -95.08330, "north": 45.10780, "east": -95.08020 }
+      {
+        "ring": [
+          {
+            "lat": 45.108215,
+            "lng": -95.08362
+          },
+          {
+            "lat": 45.108312,
+            "lng": -95.08156
+          },
+          {
+            "lat": 45.107537,
+            "lng": -95.08156
+          },
+          {
+            "lat": 45.10744,
+            "lng": -95.08362
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 45.10800, "west": -95.08200, "north": 45.10920, "east": -95.07980 }
+      {
+        "ring": [
+          {
+            "lat": 45.109475,
+            "lng": -95.082247
+          },
+          {
+            "lat": 45.109572,
+            "lng": -95.079225
+          },
+          {
+            "lat": 45.109185,
+            "lng": -95.079225
+          },
+          {
+            "lat": 45.109088,
+            "lng": -95.082247
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -19,7 +106,7 @@
     "trailerParkingCapacity": 200,
     "truckGateCount": 2,
     "buildingCount": 8,
-    "siteAreaAcres": 75.0,
+    "siteAreaAcres": 75,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@45.10870,-95.07950,400m/data=!3m1!1e3",
@@ -48,7 +135,13 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "trailerParkingCapacity", "scale"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "scale"
+  ],
   "fieldNotes": {
     "location": "Roster coords (45.110536,-95.008269) landed in farmland ~5.5 km east of the plant; address listed 'SE' but is actually Willmar Ave SW. Corrected via web search to 2505 Willmar Ave SW; locked center 45.10870,-95.07950 on the main processing campus on the SW edge of Willmar.",
     "truckGate": "Plant is fully enclosed by a continuous white privacy-slat chain-link fence (StreetView 2025). A posted sign at the north visitor gate reads 'ALL TRUCKS MUST USE SOUTH ENTRANCE' -> there is a controlled, function-separated truck gate. truckGate true.",

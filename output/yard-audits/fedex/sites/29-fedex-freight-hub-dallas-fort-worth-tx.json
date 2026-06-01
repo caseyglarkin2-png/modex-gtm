@@ -1,37 +1,125 @@
 {
   "name": "FedEx Freight Hub - Dallas/Fort Worth TX",
   "type": "Freight LTL hub service center (DFW metro)",
-  "coords": { "lat": 32.8378, "lng": -97.3340 },
+  "coords": {
+    "lat": 32.8378,
+    "lng": -97.334
+  },
   "geofences": {
-    "perimeter": { "south": 32.8362, "west": -97.3395, "north": 32.8398, "east": -97.3300 },
-    "truckGate": { "south": 32.8384, "west": -97.3318, "north": 32.8390, "east": -97.3308 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.837223,
+          "lng": -97.33812
+        },
+        {
+          "lat": 32.837569,
+          "lng": -97.331253
+        },
+        {
+          "lat": 32.835954,
+          "lng": -97.330979
+        },
+        {
+          "lat": 32.835492,
+          "lng": -97.337845
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 32.8366, "west": -97.3392, "north": 32.8384, "east": -97.3305 }
+      {
+        "ring": [
+          {
+            "lat": 32.836992,
+            "lng": -97.337845
+          },
+          {
+            "lat": 32.837338,
+            "lng": -97.331528
+          },
+          {
+            "lat": 32.836185,
+            "lng": -97.331391
+          },
+          {
+            "lat": 32.835838,
+            "lng": -97.337708
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 32.8378, "west": -97.3392, "north": 32.8388, "east": -97.3305 }
+      {
+        "ring": [
+          {
+            "lat": 32.836762,
+            "lng": -97.337296
+          },
+          {
+            "lat": 32.837108,
+            "lng": -97.332077
+          },
+          {
+            "lat": 32.836415,
+            "lng": -97.332077
+          },
+          {
+            "lat": 32.836069,
+            "lng": -97.337296
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 130, "trailersVisible": 110, "trailerParkingCapacity": 250,
-    "truckGateCount": 1, "buildingCount": 4, "siteAreaAcres": 70.0,
+    "dockDoorCount": 130,
+    "trailersVisible": 110,
+    "trailerParkingCapacity": 250,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 70,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.8378,-97.3340,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "dropArea", "multipleFacilities", "postGateStaging", "siteAreaAcres"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "dropArea",
+    "multipleFacilities",
+    "postGateStaging",
+    "siteAreaAcres"
+  ],
   "fieldNotes": {
     "location": "Roster address '3600 Reeves Pl, Fort Worth TX 76119' and coordinates (32.790629, -97.223508, RANGE_INTERPOLATED) resolve to a small multi-tenant flex/industrial building in the Carter Industrial Park (SE Fort Worth) - NOT a freight LTL hub. The official FedEx Freight FTW service center is at 1909 Great Southwest Pkwy, Fort Worth, TX 76106 (confirmed by the FedEx Freight FTW service-center map PDF and locator). That address sits in the Great Southwest Industrial District (GSID), inside Loop 820 north of Meacham Blvd. Satellite at the geocoded GSID location reveals an LTL cross-dock terminal complex (multiple long narrow cross-dock buildings with trailers backed in on both faces, dock aprons, trailer parking, rail along the south edge) at approximately 32.8378, -97.3340.",
     "facilityIdentity": "The cross-dock terminal complex at the resolved GSID location is unmistakably an LTL truck terminal, but it appears to be a multi-carrier terminal corridor (a 'C.M.I.' trailer was seen at one cross-dock in Street View). FedEx Freight FTW occupies a cross-dock within this complex; the exact building could not be 100% confirmed with FedEx signage in Street View. Facility-type and location are confident; the precise FedEx footprint within the complex is medium-confidence.",

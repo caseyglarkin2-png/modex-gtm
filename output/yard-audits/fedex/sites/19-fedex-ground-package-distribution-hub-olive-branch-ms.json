@@ -1,17 +1,75 @@
 {
   "name": "FedEx Ground Package Distribution Hub - Olive Branch MS (Memphis metro)",
   "type": "Ground regional package distribution hub",
-  "coords": { "lat": 34.99080, "lng": -89.77850 },
+  "coords": {
+    "lat": 34.9908,
+    "lng": -89.7785
+  },
   "geofences": {
-    "perimeter": { "south": 34.98830, "west": -89.78020, "north": 34.99320, "east": -89.77700 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.992375,
+          "lng": -89.784542
+        },
+        {
+          "lat": 34.992825,
+          "lng": -89.781247
+        },
+        {
+          "lat": 34.986075,
+          "lng": -89.781247
+        },
+        {
+          "lat": 34.985625,
+          "lng": -89.784542
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [
-      { "south": 34.98850, "west": -89.78020, "north": 34.99320, "east": -89.77930 },
-      { "south": 34.98850, "west": -89.77790, "north": 34.99320, "east": -89.77700 }
+      {
+        "ring": [
+          {
+            "lat": 34.99215,
+            "lng": -89.784268
+          },
+          {
+            "lat": 34.992375,
+            "lng": -89.782071
+          },
+          {
+            "lat": 34.9863,
+            "lng": -89.782071
+          },
+          {
+            "lat": 34.986075,
+            "lng": -89.784268
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 34.98850, "west": -89.77930, "north": 34.99320, "east": -89.77880 },
-      { "south": 34.98850, "west": -89.77820, "north": 34.99320, "east": -89.77770 }
+      {
+        "ring": [
+          {
+            "lat": 34.991925,
+            "lng": -89.783993
+          },
+          {
+            "lat": 34.992038,
+            "lng": -89.78262
+          },
+          {
+            "lat": 34.986525,
+            "lng": -89.78262
+          },
+          {
+            "lat": 34.9863,
+            "lng": -89.783993
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -21,7 +79,7 @@
     "trailerParkingCapacity": 220,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 26.0,
+    "siteAreaAcres": 26,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.99080,-89.77850,400m/data=!3m1!1e3",
@@ -50,7 +108,19 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "dropArea", "shipRcvSeparate", "siteAreaAcres"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "dropArea",
+    "shipRcvSeparate",
+    "siteAreaAcres"
+  ],
   "fieldNotes": {
     "_identity": "FedEx-specific branding could NOT be visually confirmed. 9181 Polk Ln sits in the Crossroads Distribution Center, a large multi-tenant industrial park in Olive Branch (Memphis metro). The roster geocode (RANGE_INTERPOLATED, moved 4m) is precise to the street address and lands on Polk Lane between two long cross-dock buildings; the building fronting Polk Lane at the roster point was audited. 2026 Street View shows mixed-carrier trailers (orange/blue/red dry vans, not the uniform white FedEx Ground fleet) backed in along the dock face - consistent with either a multi-tenant cross-dock or a FedEx Ground linehaul hub serving many contractors. Web research locates the documented FedEx Ground hub in Olive Branch at 8505 Nail Rd (330K sq ft, 94 acres); 9181 Polk Ln may be an address mismatch. Classification reflects the observed physical layout; identity flagged for human review.",
     "truckGate": "The audited building's dock apron runs directly along Polk Lane with no perimeter fence and no barrier/gate across the apron - an open cross-dock face. No controlled truck gate observed; a sliding gate with call box exists at a DIFFERENT building on the E side of Polk Lane. Flagged uncertain.",

@@ -1,17 +1,112 @@
 {
   "name": "Universal Logistics - Louisville Terminal - Louisville KY",
   "type": "Terminal Yard / Intermodal Cross-Dock Terminal (owned)",
-  "coords": { "lat": 38.21422, "lng": -85.80280 },
+  "coords": {
+    "lat": 38.21422,
+    "lng": -85.8028
+  },
   "geofences": {
-    "perimeter": { "south": 38.21345, "west": -85.80360, "north": 38.21500, "east": -85.80205 },
-    "truckGate": { "south": 38.21490, "west": -85.80305, "north": 38.21512, "east": -85.80270 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.215029,
+          "lng": -85.803899
+        },
+        {
+          "lat": 38.215029,
+          "lng": -85.802113
+        },
+        {
+          "lat": 38.213465,
+          "lng": -85.802182
+        },
+        {
+          "lat": 38.213249,
+          "lng": -85.803487
+        },
+        {
+          "lat": 38.21395,
+          "lng": -85.803899
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 38.215083,
+          "lng": -85.803075
+        },
+        {
+          "lat": 38.215083,
+          "lng": -85.8028
+        },
+        {
+          "lat": 38.214921,
+          "lng": -85.8028
+        },
+        {
+          "lat": 38.214921,
+          "lng": -85.803075
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 38.21345, "west": -85.80360, "north": 38.21455, "east": -85.80305 }
+      {
+        "ring": [
+          {
+            "lat": 38.214759,
+            "lng": -85.803555
+          },
+          {
+            "lat": 38.214759,
+            "lng": -85.803075
+          },
+          {
+            "lat": 38.213465,
+            "lng": -85.803143
+          },
+          {
+            "lat": 38.213573,
+            "lng": -85.803624
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 38.21400, "west": -85.80315, "north": 38.21475, "east": -85.80265 }
+      {
+        "ring": [
+          {
+            "lat": 38.214867,
+            "lng": -85.803006
+          },
+          {
+            "lat": 38.214867,
+            "lng": -85.802388
+          },
+          {
+            "lat": 38.214085,
+            "lng": -85.802457
+          },
+          {
+            "lat": 38.214085,
+            "lng": -85.80304
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 186,
+        "pano": "assMxkmETP2Wms2MjUjBzw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 186,
+        "pano": "assMxkmETP2Wms2MjUjBzw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 46,
@@ -24,18 +119,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@38.21422,-85.8028,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["trailerParkingCapacity", "trailersVisible"],
+  "uncertainFields": [
+    "trailerParkingCapacity",
+    "trailersVisible"
+  ],
   "fieldNotes": {
     "location": "Resolved to 2338 Millers Ln, Louisville KY 40216 via loadmatch.com directory (Universal Intermodal Services) and the Crown Enterprises real-estate listing (gocrown.ws), which is the Moroun-family property company that holds ULH/Universal real estate. Crown's Google Maps embed placed the parcel at 38.214222,-85.802804.",
     "truckGate": "Street View (2024-07) from Millers Lane shows the yard frontage fully open — no barrier arm, no sliding/swing gate, no fencing across the truck driveway at the public road. Trucks enter directly off Millers Lane.",

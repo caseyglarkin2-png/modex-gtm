@@ -1,39 +1,126 @@
 {
   "name": "CJ Logistics - Perris CA",
   "type": "Distribution Center",
-  "coords": { "lat": 33.86070, "lng": -117.26520 },
+  "coords": {
+    "lat": 33.8607,
+    "lng": -117.2652
+  },
   "geofences": {
-    "perimeter": { "south": 33.8589, "west": -117.2671, "north": 33.8625, "east": -117.2632 },
-    "truckGate": { "south": 33.8619, "west": -117.2670, "north": 33.8625, "east": -117.2662 },
-    "dropYards": [
-      { "south": 33.8591, "west": -117.2671, "north": 33.8621, "east": -117.2663 },
-      { "south": 33.8589, "west": -117.2641, "north": 33.8621, "east": -117.2632 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.862125,
+          "lng": -117.266779
+        },
+        {
+          "lat": 33.862125,
+          "lng": -117.263895
+        },
+        {
+          "lat": 33.859046,
+          "lng": -117.263895
+        },
+        {
+          "lat": 33.859046,
+          "lng": -117.266779
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 33.8592, "west": -117.2666, "north": 33.8620, "east": -117.2661 },
-      { "south": 33.8591, "west": -117.2643, "north": 33.8620, "east": -117.2638 }
+      {
+        "ring": [
+          {
+            "lat": 33.862011,
+            "lng": -117.266779
+          },
+          {
+            "lat": 33.862011,
+            "lng": -117.266299
+          },
+          {
+            "lat": 33.85916,
+            "lng": -117.266299
+          },
+          {
+            "lat": 33.85916,
+            "lng": -117.266779
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.862011,
+            "lng": -117.264376
+          },
+          {
+            "lat": 33.862011,
+            "lng": -117.263895
+          },
+          {
+            "lat": 33.85916,
+            "lng": -117.263895
+          },
+          {
+            "lat": 33.85916,
+            "lng": -117.264376
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 170,
+        "pano": "GC2eguw_Z5Wnqlt7OlIVYw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 90, "trailersVisible": 130, "trailerParkingCapacity": 170,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 35.7,
+    "dockDoorCount": 90,
+    "trailersVisible": 130,
+    "trailerParkingCapacity": 170,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 35.7,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.86070,-117.26520,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "Truck yard is enclosed by black metal perimeter fencing with a sliding gate at the truck-court entrance (clearly visible in Street View 2026-02 at the NW truck-court driveway).",
     "guardShack": "No staffed guard-booth structure visible at the gated truck entrance in satellite or Street View - the gate appears remotely controlled.",

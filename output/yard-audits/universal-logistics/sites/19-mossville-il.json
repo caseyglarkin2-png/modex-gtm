@@ -1,15 +1,81 @@
 {
   "name": "Universal Logistics - Mossville Contract Logistics Warehouse - Mossville IL",
   "type": "Contract Logistics / Value-Added Warehouse",
-  "coords": { "lat": 40.84100, "lng": -89.55600 },
+  "coords": {
+    "lat": 40.841,
+    "lng": -89.556
+  },
   "geofences": {
-    "perimeter": { "south": 40.83550, "west": -89.56350, "north": 40.84600, "east": -89.54850 },
-    "truckGate": null,
-    "dropYards": [
-      { "south": 40.84150, "west": -89.55400, "north": 40.84400, "east": -89.55050 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.839961,
+          "lng": -89.566986
+        },
+        {
+          "lat": 40.841,
+          "lng": -89.558197
+        },
+        {
+          "lat": 40.838922,
+          "lng": -89.551605
+        },
+        {
+          "lat": 40.836429,
+          "lng": -89.552704
+        },
+        {
+          "lat": 40.835182,
+          "lng": -89.561493
+        },
+        {
+          "lat": 40.836844,
+          "lng": -89.564789
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.837675,
+          "lng": -89.56424
+        },
+        {
+          "lat": 40.837675,
+          "lng": -89.562592
+        },
+        {
+          "lat": 40.836429,
+          "lng": -89.562592
+        },
+        {
+          "lat": 40.836429,
+          "lng": -89.56424
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 40.84050, "west": -89.55600, "north": 40.84300, "east": -89.55350 }
+      {
+        "ring": [
+          {
+            "lat": 40.840377,
+            "lng": -89.558747
+          },
+          {
+            "lat": 40.838507,
+            "lng": -89.552155
+          },
+          {
+            "lat": 40.837468,
+            "lng": -89.552704
+          },
+          {
+            "lat": 40.839338,
+            "lng": -89.559296
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -19,7 +85,7 @@
     "trailerParkingCapacity": 110,
     "truckGateCount": 2,
     "buildingCount": 4,
-    "siteAreaAcres": 180.0,
+    "siteAreaAcres": 180,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.841,-89.556,400m/data=!3m1!1e3",
@@ -48,7 +114,14 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "shipRcvSeparate", "scale"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "shipRcvSeparate",
+    "scale"
+  ],
   "fieldNotes": {
     "siteResolution": "No street address in roster. Resolved to the Caterpillar Mossville manufacturing plant complex along Old Galena Road / IL-29, Mossville IL (~40.8410, -89.5560) — the large contiguous Caterpillar plant identified via the Caterpillar Mossville plant address (1900 E Old Galena Road) and EPA Superfund records. Universal Logistics' Mossville operation provides value-added / sequencing / contract-logistics support embedded in the Caterpillar engine/manufacturing complex. The Universal-operated sub-area within this very large Caterpillar campus cannot be isolated from imagery — medium confidence.",
     "truckGate": "A Caterpillar manufacturing plant of this scale operates controlled truck-side access; internal entrance roads off Old Galena Road run into the plant. No barrier arm / booth was directly resolved in available imagery — classed truckGate true with remoteGs true (gate/checkpoint access without a clearly visible staffed booth). Flagged uncertain.",

@@ -1,15 +1,58 @@
 {
   "name": "FedEx Express Regional Hub - Miami FL",
   "type": "Express regional hub (Latin America gateway)",
-  "coords": { "lat": 25.79255, "lng": -80.29525 },
+  "coords": {
+    "lat": 25.79255,
+    "lng": -80.29525
+  },
   "geofences": {
-    "perimeter": { "south": 25.79098, "west": -80.29700, "north": 25.79412, "east": -80.29350 },
-    "truckGate": { "south": 25.79055, "west": -80.29380, "north": 25.79095, "east": -80.29330 },
-    "dropYards": [
-      { "south": 25.79110, "west": -80.29480, "north": 25.79200, "east": -80.29360 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 25.794652,
+          "lng": -80.297447
+        },
+        {
+          "lat": 25.795023,
+          "lng": -80.295937
+        },
+        {
+          "lat": 25.790819,
+          "lng": -80.292366
+        },
+        {
+          "lat": 25.790077,
+          "lng": -80.293327
+        },
+        {
+          "lat": 25.793786,
+          "lng": -80.297447
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 25.79150, "west": -80.29620, "north": 25.79320, "east": -80.29380 }
+      {
+        "ring": [
+          {
+            "lat": 25.793786,
+            "lng": -80.297035
+          },
+          {
+            "lat": 25.791808,
+            "lng": -80.294426
+          },
+          {
+            "lat": 25.791314,
+            "lng": -80.294838
+          },
+          {
+            "lat": 25.793292,
+            "lng": -80.297447
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -19,23 +62,43 @@
     "trailerParkingCapacity": 40,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 30.0,
+    "siteAreaAcres": 30,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@25.79255,-80.29525,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": true
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": true
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "multiStep", "dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "multiStep",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "Airport air-cargo hub on the southwest cargo apron of Miami International Airport (MIA). The roster street address 7150 NW 25th St geocodes to a generic warehouse/lease park ~1.5 km west of the airport with no FedEx presence (Street View at NW 72nd Ave shows 'AVAILABLE' lease signs); the operational FedEx Express Americas-gateway hub is the airfield cargo distribution facility, a ~282,000 sq ft single building with airside aircraft apron and landside truck docks.",
     "buildingAttribution": "MIA's cargo complex is shared by many carriers (a DHL building is confirmed by signage at the east end of the cargo row in 2022 Street View). The exact FedEx building could not be 100% confirmed by visible branding from Street View; identification rests on facility type, scale (~282K sq ft / ~30-acre site per PGAL/GRAEF project pages), and configuration (airside freighter apron + landside truck dock row). Confidence reduced to medium for this reason.",

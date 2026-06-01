@@ -1,13 +1,75 @@
 {
   "name": "Liberty Coca-Cola Beverages - Maspeth Production Plant, NY",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 40.72120, "lng": -73.91450 },
+  "coords": {
+    "lat": 40.7212,
+    "lng": -73.9145
+  },
   "geofences": {
-    "perimeter": { "south": 40.71980, "west": -73.91620, "north": 40.72260, "east": -73.91320 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.722449,
+          "lng": -73.916697
+        },
+        {
+          "lat": 40.722553,
+          "lng": -73.914157
+        },
+        {
+          "lat": 40.720888,
+          "lng": -73.914019
+        },
+        {
+          "lat": 40.720784,
+          "lng": -73.91656
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
-    "dockAprons": [],
-    "staging": null
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 40.722449,
+            "lng": -73.914912
+          },
+          {
+            "lat": 40.722449,
+            "lng": -73.914157
+          },
+          {
+            "lat": 40.721408,
+            "lng": -73.914157
+          },
+          {
+            "lat": 40.721408,
+            "lng": -73.914912
+          }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        {
+          "lat": 40.722241,
+          "lng": -73.91656
+        },
+        {
+          "lat": 40.722241,
+          "lng": -73.915049
+        },
+        {
+          "lat": 40.721096,
+          "lng": -73.915049
+        },
+        {
+          "lat": 40.721096,
+          "lng": -73.91656
+        }
+      ]
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 0,
@@ -20,25 +82,59 @@
   },
   "mapsUrl": "https://www.google.com/maps/@40.72120,-73.91450,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "NONE", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "multipleFacilities", "scale",
-    "dropYard", "multiStep", "dockDoorCount", "trailersVisible",
-    "trailerParkingCapacity", "siteAreaAcres", "railServed", "coords",
-    "perimeter", "buildingCount"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "multipleFacilities",
+    "scale",
+    "dropYard",
+    "multiStep",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "siteAreaAcres",
+    "railServed",
+    "coords",
+    "perimeter",
+    "buildingCount"
   ],
   "fieldNotes": {
     "status": "ROSTER ENTRY IS OBSOLETE / MISCLASSIFIED. The Coca-Cola Maspeth PRODUCTION/BOTTLING plant no longer exists. The original bottling plant at 59-02 Borden Ave (202,000 sq ft warehouse on a 7.3-acre site) was sold to Home Depot in 2017 for $63M; Coca-Cola's triple-net lease ended March 2020 and the site became a Home Depot store. Liberty Coca-Cola Beverages' current Maspeth presence is a SALES/DISTRIBUTION CENTER at 58-40 Borden Ave (Block 2657 Lot 23, a 'fireproof warehouse'), which Liberty Coca-Cola purchased in October 2017 for ~$10.4M. Liberty's production now runs from Philadelphia PA, Moorestown NJ, and Elmsford NY - not Maspeth.",

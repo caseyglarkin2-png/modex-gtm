@@ -1,18 +1,88 @@
 {
   "name": "FedEx Ground Hub - Grove City OH",
   "type": "Ground regional sortation hub (Columbus market)",
-  "coords": { "lat": 39.90360, "lng": -83.09660 },
+  "coords": {
+    "lat": 39.9036,
+    "lng": -83.0966
+  },
   "geofences": {
-    "perimeter": { "south": 39.90150, "west": -83.09730, "north": 39.90580, "east": -83.09480 },
-    "truckGate": { "south": 39.90490, "west": -83.09560, "north": 39.90550, "east": -83.09500 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.905707,
+          "lng": -83.097973
+        },
+        {
+          "lat": 39.905707,
+          "lng": -83.095227
+        },
+        {
+          "lat": 39.901914,
+          "lng": -83.094403
+        },
+        {
+          "lat": 39.901704,
+          "lng": -83.097149
+        },
+        {
+          "lat": 39.9036,
+          "lng": -83.097699
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 39.90200, "west": -83.09730, "north": 39.90520, "east": -83.09660 }
+      {
+        "ring": [
+          {
+            "lat": 39.905496,
+            "lng": -83.097699
+          },
+          {
+            "lat": 39.905496,
+            "lng": -83.095501
+          },
+          {
+            "lat": 39.902336,
+            "lng": -83.095227
+          },
+          {
+            "lat": 39.902125,
+            "lng": -83.097424
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.90180, "west": -83.09700, "north": 39.90540, "east": -83.09640 },
-      { "south": 39.90180, "west": -83.09600, "north": 39.90540, "east": -83.09530 }
+      {
+        "ring": [
+          {
+            "lat": 39.905286,
+            "lng": -83.0966
+          },
+          {
+            "lat": 39.905286,
+            "lng": -83.095501
+          },
+          {
+            "lat": 39.902336,
+            "lng": -83.095227
+          },
+          {
+            "lat": 39.902336,
+            "lng": -83.096325
+          }
+        ]
+      }
     ],
-    "staging": { "south": 39.90470, "west": -83.09640, "north": 39.90560, "east": -83.09520 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 178,
+        "pano": "icu1FyEAGBhOMcbZF3VAOQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 90,
@@ -20,7 +90,7 @@
     "trailerParkingCapacity": 110,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 22.0,
+    "siteAreaAcres": 22,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.90360,-83.09660,400m/data=!3m1!1e3",
@@ -49,7 +119,12 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes", "dropArea"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes",
+    "dropArea"
+  ],
   "fieldNotes": {
     "truckGate": "Chain-link perimeter fence around the truck yard with a gate across the W-side truck driveway, visible in 2025 Street View (sv6/sv8).",
     "guardShack": "No staffed booth observed at the yard entrance - gated but unmanned, so remoteGs = true (kiosk / app check-in implied).",

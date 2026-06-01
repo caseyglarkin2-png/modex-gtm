@@ -1,19 +1,103 @@
 {
   "name": "Coca-Cola Consolidated - Columbus Distribution Center, OH",
   "type": "Distribution Center",
-  "coords": { "lat": 39.84250, "lng": -82.96250 },
+  "coords": {
+    "lat": 39.8425,
+    "lng": -82.9625
+  },
   "geofences": {
-    "perimeter": { "south": 39.84000, "west": -82.96500, "north": 39.84580, "east": -82.96050 },
-    "truckGate": { "south": 39.84440, "west": -82.96080, "north": 39.84500, "east": -82.96000 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.845241,
+          "lng": -82.965247
+        },
+        {
+          "lat": 39.845031,
+          "lng": -82.959204
+        },
+        {
+          "lat": 39.839337,
+          "lng": -82.959204
+        },
+        {
+          "lat": 39.839337,
+          "lng": -82.965247
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 39.84050, "west": -82.96200, "north": 39.84400, "east": -82.96080 },
-      { "south": 39.84320, "west": -82.96450, "north": 39.84480, "east": -82.96280 }
+      {
+        "ring": [
+          {
+            "lat": 39.843344,
+            "lng": -82.964423
+          },
+          {
+            "lat": 39.843344,
+            "lng": -82.961813
+          },
+          {
+            "lat": 39.841446,
+            "lng": -82.961813
+          },
+          {
+            "lat": 39.841446,
+            "lng": -82.964423
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.84050, "west": -82.96270, "north": 39.84430, "east": -82.96180 },
-      { "south": 39.84080, "west": -82.96520, "north": 39.84420, "east": -82.96440 }
+      {
+        "ring": [
+          {
+            "lat": 39.844609,
+            "lng": -82.960715
+          },
+          {
+            "lat": 39.844609,
+            "lng": -82.959753
+          },
+          {
+            "lat": 39.84018,
+            "lng": -82.959753
+          },
+          {
+            "lat": 39.84018,
+            "lng": -82.960715
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": {
+      "ring": [
+        {
+          "lat": 39.84482,
+          "lng": -82.964972
+        },
+        {
+          "lat": 39.84482,
+          "lng": -82.962225
+        },
+        {
+          "lat": 39.843765,
+          "lng": -82.962225
+        },
+        {
+          "lat": 39.843765,
+          "lng": -82.964972
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 148,
+        "pano": "Fu_N4WblW7L18p38yRemkA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 60,
@@ -21,7 +105,7 @@
     "trailerParkingCapacity": 170,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 60.0,
+    "siteAreaAcres": 60,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.8425,-82.9625,400m/data=!3m1!1e3",
@@ -50,7 +134,12 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "dockDoorCount", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "facility": "Coca-Cola Consolidated Columbus Distribution Center - a $90M, 60-acre campus in the Rickenbacker Industrial Center on Rohr Road, opened/unveiled May 2025 (groundbreaking Oct 2023). 400,000 sq ft distribution & warehouse building plus two 15,000 sq ft buildings for equipment repair and fleet maintenance; ~350 employees; 16M+ cases/year. Confirmed visually by the fleet of red Coca-Cola Consolidated / Red Classic tractors parked on site.",
     "location": "Roster lat/lng (39.845821,-82.956124, GEOMETRIC_CENTER on Rohr Rd) landed ~700m east of the campus on undeveloped land. Corrected to the campus center at 39.84250,-82.96250 via satellite identification (fleet shop buildings + red Coke tractors).",

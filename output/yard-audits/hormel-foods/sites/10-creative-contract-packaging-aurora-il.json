@@ -1,18 +1,136 @@
 {
   "name": "Creative Contract Packaging - Aurora IL",
   "type": "Production Facility",
-  "coords": { "lat": 41.80475, "lng": -88.27090 },
+  "coords": {
+    "lat": 41.80475,
+    "lng": -88.2709
+  },
   "geofences": {
-    "perimeter": { "south": 41.80360, "west": -88.27180, "north": 41.80610, "east": -88.27000 },
-    "truckGate": { "south": 41.80550, "west": -88.27040, "north": 41.80600, "east": -88.27000 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.805774,
+          "lng": -88.272479
+        },
+        {
+          "lat": 41.805927,
+          "lng": -88.271449
+        },
+        {
+          "lat": 41.804955,
+          "lng": -88.270076
+        },
+        {
+          "lat": 41.804341,
+          "lng": -88.270351
+        },
+        {
+          "lat": 41.803829,
+          "lng": -88.272273
+        },
+        {
+          "lat": 41.805006,
+          "lng": -88.272617
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.806388,
+          "lng": -88.272685
+        },
+        {
+          "lat": 41.806388,
+          "lng": -88.272136
+        },
+        {
+          "lat": 41.806081,
+          "lng": -88.272136
+        },
+        {
+          "lat": 41.806081,
+          "lng": -88.272685
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 41.80385, "west": -88.27120, "north": 41.80440, "east": -88.27010 },
-      { "south": 41.80440, "west": -88.27050, "north": 41.80560, "east": -88.27010 }
+      {
+        "ring": [
+          {
+            "lat": 41.804341,
+            "lng": -88.272273
+          },
+          {
+            "lat": 41.804494,
+            "lng": -88.270557
+          },
+          {
+            "lat": 41.804085,
+            "lng": -88.270419
+          },
+          {
+            "lat": 41.803931,
+            "lng": -88.272136
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 41.805927,
+            "lng": -88.272273
+          },
+          {
+            "lat": 41.805978,
+            "lng": -88.271587
+          },
+          {
+            "lat": 41.805671,
+            "lng": -88.271518
+          },
+          {
+            "lat": 41.80562,
+            "lng": -88.272205
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.80400, "west": -88.27085, "north": 41.80520, "east": -88.27050 }
+      {
+        "ring": [
+          {
+            "lat": 41.805262,
+            "lng": -88.271587
+          },
+          {
+            "lat": 41.804852,
+            "lng": -88.270557
+          },
+          {
+            "lat": 41.804699,
+            "lng": -88.270694
+          },
+          {
+            "lat": 41.805108,
+            "lng": -88.271724
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 156,
+        "pano": "0IRMtfCiGkTCeXgKhZ_wiA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 156,
+        "pano": "0IRMtfCiGkTCeXgKhZ_wiA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 22,
@@ -49,7 +167,14 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "entryLanes", "exitLanes", "urbanRural"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes",
+    "urbanRural"
+  ],
   "fieldNotes": {
     "location": "Roster gave '2001 Bilter Rd, Aurora IL 60502' with coords (41.806642,-88.267623). The roster point itself is a residential strip; ~250m south sits a large warehouse/packaging facility with an office annex and a big trailer yard, in the 60502 (NE Aurora) area - consistent with the roster. CCP operates TWO Aurora facilities (Hormel says so); the web-listed 3777 Exchange Ave (60504) is the other one. Audited the building at ~41.8047,-88.2709 as the roster-intended site.",
     "truckGate": "The truck yard is enclosed by chain-link fencing (visible in Street View), but the driveway entrances appear to be open gate gaps with no barrier arm and no staffed booth. No controlled checkpoint identified - marked false at medium confidence.",

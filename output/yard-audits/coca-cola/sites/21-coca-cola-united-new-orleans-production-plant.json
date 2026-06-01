@@ -1,40 +1,141 @@
 {
   "name": "Coca-Cola UNITED - New Orleans Production Plant, LA",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 29.94680, "lng": -90.19150 },
+  "coords": {
+    "lat": 29.9468,
+    "lng": -90.1915
+  },
   "geofences": {
-    "perimeter": { "south": 29.94500, "west": -90.19320, "north": 29.94850, "east": -90.18950 },
-    "truckGate": { "south": 29.94560, "west": -90.19310, "north": 29.94620, "east": -90.19230 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.948704,
+          "lng": -90.193697
+        },
+        {
+          "lat": 29.948466,
+          "lng": -90.189852
+        },
+        {
+          "lat": 29.945372,
+          "lng": -90.190401
+        },
+        {
+          "lat": 29.94561,
+          "lng": -90.194247
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 29.94500, "west": -90.19180, "north": 29.94600, "east": -90.19050 }
+      {
+        "ring": [
+          {
+            "lat": 29.948585,
+            "lng": -90.193835
+          },
+          {
+            "lat": 29.948406,
+            "lng": -90.1915
+          },
+          {
+            "lat": 29.947276,
+            "lng": -90.191706
+          },
+          {
+            "lat": 29.947454,
+            "lng": -90.194041
+          }
+        ]
+      }
     ],
-    "dockAprons": [],
-    "staging": null
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 29.947038,
+            "lng": -90.192187
+          },
+          {
+            "lat": 29.946919,
+            "lng": -90.190676
+          },
+          {
+            "lat": 29.946205,
+            "lng": -90.190813
+          },
+          {
+            "lat": 29.946324,
+            "lng": -90.192324
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 25,
+        "pano": "k_ImSeiONI_F-dnM0e8wNQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 0, "trailersVisible": 12, "trailerParkingCapacity": 25,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 12.0,
+    "dockDoorCount": 0,
+    "trailersVisible": 12,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 12,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@29.94680,-90.19150,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "multipleFacilities", "scale",
-    "dropYard", "multiStep"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "multipleFacilities",
+    "scale",
+    "dropYard",
+    "multiStep"
   ],
   "fieldNotes": {
     "location": "EXACT BUILDING NOT POSITIVELY CONFIRMED. Roster address (12970 I-10 Service Rd, New Orleans East) and roster coords (30.0524,-89.9520) are wrong - that point is a residential/stadium area with no industrial plant. Web research is consistent: the Coca-Cola UNITED New Orleans production plant ('New Orleans Production Center', operated by Crescent City Coca-Cola Bottling Company UNITED) is at 5601 Citrus Blvd, Harahan/Elmwood LA 70123 - the largest Coca-Cola plant in Louisiana, described as a 12-story tower spanning a football field, in the Elmwood industrial park.",

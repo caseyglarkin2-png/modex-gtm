@@ -1,17 +1,84 @@
 {
   "name": "Coca-Cola Consolidated - Roanoke Production Center, VA",
   "type": "Bottling / Manufacturing Plant",
-  "coords": { "lat": 37.27550, "lng": -79.94830 },
+  "coords": {
+    "lat": 37.2755,
+    "lng": -79.9483
+  },
   "geofences": {
-    "perimeter": { "south": 37.27350, "west": -79.95000, "north": 37.27750, "east": -79.94600 },
-    "truckGate": { "south": 37.27580, "west": -79.94900, "north": 37.27640, "east": -79.94840 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.276265,
+          "lng": -79.948231
+        },
+        {
+          "lat": 37.276156,
+          "lng": -79.945416
+        },
+        {
+          "lat": 37.274189,
+          "lng": -79.945416
+        },
+        {
+          "lat": 37.274189,
+          "lng": -79.948231
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 37.27430, "west": -79.94900, "north": 37.27680, "east": -79.94760 }
+      {
+        "ring": [
+          {
+            "lat": 37.275882,
+            "lng": -79.948781
+          },
+          {
+            "lat": 37.275719,
+            "lng": -79.948094
+          },
+          {
+            "lat": 37.275227,
+            "lng": -79.9483
+          },
+          {
+            "lat": 37.275391,
+            "lng": -79.948987
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 37.27500, "west": -79.94760, "north": 37.27680, "east": -79.94640 }
+      {
+        "ring": [
+          {
+            "lat": 37.274626,
+            "lng": -79.947957
+          },
+          {
+            "lat": 37.274571,
+            "lng": -79.945897
+          },
+          {
+            "lat": 37.274298,
+            "lng": -79.945897
+          },
+          {
+            "lat": 37.274353,
+            "lng": -79.947957
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 135,
+        "pano": "0CyGpyHuwlRKfk4OPqz7HA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 30,
@@ -19,23 +86,43 @@
     "trailerParkingCapacity": 90,
     "truckGateCount": 1,
     "buildingCount": 4,
-    "siteAreaAcres": 28.0,
+    "siteAreaAcres": 28,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@37.27550,-79.94830,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoors", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoors",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "locationCorrection": "Roster address 2001 Towne Square Blvd NW is a retail/mall address (Valley View area) — wrong site. The actual Coca-Cola Consolidated Roanoke production/distribution facility is at 235 Shenandoah Ave NW, Roanoke VA 24016 (37.27386, -79.94698). Audited at the corrected location.",
     "truckGate": "Chain-link perimeter fence fully encloses the trailer yard along the public road; a driveway gate provides controlled entry. No formal guard booth structure is visible in satellite or Street View — flagged uncertain.",
