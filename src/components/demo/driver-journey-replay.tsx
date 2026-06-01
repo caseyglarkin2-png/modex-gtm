@@ -1,8 +1,8 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
-import type { Site, SiteScenario } from '@/lib/demo/pack-schema';
+import { useEffect, useMemo, useState } from 'react';
+import type { Site, SiteScenario, ZoneStreetView } from '@/lib/demo/pack-schema';
 import { NARRATIONS } from '@/lib/demo/scenarios';
 import { GEOFENCE_COLORS } from './archetype-palette';
 
@@ -37,6 +37,133 @@ function formatMs(ms: number): string {
   return m === 0 ? `${h} hr` : `${h} hr ${m} min`;
 }
 
+/**
+ * #1 (fusion) — the map run and the ground-level ride-along, locked together.
+ *
+ * As the truck dot crosses each geofence in the Leaflet replay, the synced
+ * Street View pane swaps in that zone's driver's-eye frame, so map position
+ * and what-the-driver-sees stay in step. The opening "waiting" beat of step 0
+ * holds on the perimeter pano — the approach, what a driver sees pulling up —
+ * then the run carries the eye gate -> dock -> drop.
+ */
+
+interface SyncedFrame {
+  pano: string;
+  heading: number;
+  label: string;
+  color: string;
+}
+
+function svSrc(pano: string, heading: number): string {
+  return `/api/demo/streetview?pano=${encodeURIComponent(pano)}&heading=${heading}`;
+}
+
+/** True when the pack carries at least one usable ground-level pano. */
+function hasAnyStreetView(site: Site): boolean {
+  const m = site.geofences.streetViewMeta;
+  if (!m) return false;
+  const ok = (z?: ZoneStreetView | null) => !!(z && z.hasCoverage && z.pano);
+  return (
+    ok(m.perimeter) ||
+    ok(m.truckGate) ||
+    ok(m.staging) ||
+    (m.dropYards?.some(ok) ?? false) ||
+    (m.dockAprons?.some(ok) ?? false)
+  );
+}
+
+/**
+ * Resolve the driver's-eye frame for the truck's current position. Never
+ * returns blank mid-run while any pano exists — the switch picks the exact
+ * zone, then a fallback chain covers steps whose own pano has no coverage.
+ */
+function resolveFrame(
+  site: Site,
+  scenario: SiteScenario,
+  stepIdx: number,
+  phase: 'waiting' | 'moving' | 'done',
+): SyncedFrame | null {
+  const m = site.geofences.streetViewMeta;
+  if (!m) return null;
+  const ok = (z?: ZoneStreetView | null) => (z && z.hasCoverage && z.pano ? z : null);
+
+  // The approach: hold on the perimeter frame during the opening beat.
+  if (stepIdx === 0 && phase === 'waiting') {
+    const p = ok(m.perimeter);
+    if (p) return { pano: p.pano, heading: p.heading, label: 'The approach', color: GEOFENCE_COLORS.perimeter };
+  }
+
+  const step = scenario.steps[stepIdx];
+  const i = step?.targetIndex ?? 0;
+  let frame: ZoneStreetView | null = null;
+  let label = '';
+  let color: string = GEOFENCE_COLORS.perimeter;
+  switch (step?.geofenceTarget) {
+    case 'truckGate':
+      frame = ok(m.truckGate);
+      label = 'Truck gate';
+      color = GEOFENCE_COLORS.truckGate;
+      break;
+    case 'dropYard':
+      frame = ok(m.dropYards?.[i]) ?? ok(m.dropYards?.[0]);
+      label = 'Drop yard';
+      color = GEOFENCE_COLORS.dropYard;
+      break;
+    case 'dockApron':
+      frame = ok(m.dockAprons?.[i]) ?? ok(m.dockAprons?.[0]);
+      label = 'Dock apron';
+      color = GEOFENCE_COLORS.dockApron;
+      break;
+    case 'staging':
+      frame = ok(m.staging);
+      label = 'Staging';
+      color = GEOFENCE_COLORS.staging;
+      break;
+    case 'exit':
+      frame = ok(m.truckGate) ?? ok(m.perimeter);
+      label = 'Exit';
+      color = GEOFENCE_COLORS.truckGate;
+      break;
+  }
+
+  if (!frame) {
+    frame = ok(m.truckGate) ?? ok(m.perimeter) ?? ok(m.staging) ?? ok(m.dockAprons?.[0]) ?? ok(m.dropYards?.[0]);
+    if (frame && !label) label = "Driver’s-eye";
+  }
+
+  return frame ? { pano: frame.pano, heading: frame.heading, label, color } : null;
+}
+
+/** The synced ground-level pane. Cross-fades on each frame change. */
+function SyncedStreetView({ frame }: { frame: SyncedFrame }) {
+  const src = svSrc(frame.pano, frame.heading);
+  const [loaded, setLoaded] = useState(false);
+  // Re-arm the fade whenever the underlying pano/heading changes.
+  useEffect(() => {
+    setLoaded(false);
+  }, [src]);
+
+  return (
+    <div className="relative h-72 w-full shrink-0 overflow-hidden border-t border-[#00B4FF]/[0.16] bg-black md:h-80 md:w-[44%] md:border-l md:border-t-0">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        key={src}
+        src={src}
+        alt={`Driver's-eye view at ${frame.label}`}
+        onLoad={() => setLoaded(true)}
+        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+      />
+      <div aria-hidden className="absolute inset-x-0 top-0 h-14 bg-gradient-to-b from-black/65 to-transparent" />
+      <div className="absolute left-2 top-2 flex items-center gap-1.5 rounded-md bg-black/55 px-2 py-1 backdrop-blur">
+        <span className="inline-block h-2.5 w-2.5 shrink-0 rounded-sm" style={{ background: frame.color }} />
+        <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/85">
+          Driver&rsquo;s-eye · {frame.label}
+        </span>
+      </div>
+    </div>
+  );
+}
+
 export function DriverJourneyReplay({ site, scenario, onClose }: Props) {
   const [mode, setMode] = useState<'baseline' | 'yns'>('baseline');
   const [restartKey, setRestartKey] = useState(0);
@@ -49,6 +176,11 @@ export function DriverJourneyReplay({ site, scenario, onClose }: Props) {
   const totalMs = mode === 'baseline' ? scenario.totalBaselineMs : scenario.totalYnsMs;
   const altMs = mode === 'baseline' ? scenario.totalYnsMs : scenario.totalBaselineMs;
   const savedMs = scenario.totalBaselineMs - scenario.totalYnsMs;
+
+  // #1 fusion — does this site carry ground-level panos? Decided once so the
+  // layout doesn't reflow between steps; the per-step frame is resolved live.
+  const svAvailable = useMemo(() => hasAnyStreetView(site), [site]);
+  const svFrame = svAvailable ? resolveFrame(site, scenario, stepIdx, phase) : null;
 
   return (
     <div className="flex h-full flex-col overflow-hidden">
@@ -74,8 +206,11 @@ export function DriverJourneyReplay({ site, scenario, onClose }: Props) {
         </button>
       </div>
 
-      {/* Map */}
-      <div className="relative h-80 w-full shrink-0 overflow-hidden border-b border-[#00B4FF]/[0.16]">
+      {/* Map + synced driver's-eye view (#1 fusion). On md+ they sit side by
+          side; on mobile the ground-level pane stacks under the map. When the
+          site has no usable panos the map keeps the full width, unchanged. */}
+      <div className="flex shrink-0 flex-col border-b border-[#00B4FF]/[0.16] md:flex-row">
+      <div className="relative h-80 w-full overflow-hidden md:flex-1">
         <Inner
           site={site}
           scenario={scenario}
@@ -121,6 +256,8 @@ export function DriverJourneyReplay({ site, scenario, onClose }: Props) {
         >
           ⟲ Replay
         </button>
+      </div>
+        {svFrame && <SyncedStreetView frame={svFrame} />}
       </div>
 
       {/* Narration + delta */}
