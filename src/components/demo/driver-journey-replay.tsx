@@ -159,8 +159,12 @@ export function DriverJourneyReplay({ site, scenario, onClose }: Props) {
             Flagship result · Primo Brands
           </div>
           <p className="mt-1 text-sm leading-relaxed text-white/90">
-            Drop-and-hook turn times cut from <span className="font-semibold text-white">~48 min</span> to{' '}
-            <span className="font-semibold text-emerald-300">~24 min</span> — cut in half across the yard.
+            <span className="font-semibold text-white">Drop-and-hook</span> turns cut from{' '}
+            <span className="font-semibold text-white">~48 min</span> to{' '}
+            <span className="font-semibold text-emerald-300">~24 min</span>, measured in pilot.
+          </p>
+          <p className="mt-1 text-[11px] leading-relaxed text-white/55">
+            Live loads stay driver- and shipper-paced — the protocol&apos;s gains land on drop-and-hook.
           </p>
         </div>
 
