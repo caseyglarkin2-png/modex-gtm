@@ -267,12 +267,12 @@ export function MemoAudioBrief({
             {playing ? <PauseGlyph /> : <PlayGlyph />}
           </button>
 
-          <div className="flex flex-1 flex-col gap-2">
+          <div className="flex min-w-0 flex-1 flex-col gap-2">
             <div
               id={`${playStripId}-label`}
-              className={`flex items-baseline justify-between gap-3 text-[11.5px] uppercase tracking-[0.18em] text-[#8a847b] ${FONT_MONO}`}
+              className={`flex min-w-0 items-baseline justify-between gap-3 text-[11.5px] uppercase tracking-[0.18em] text-[#8a847b] ${FONT_MONO}`}
             >
-              <span className="truncate">
+              <span className="min-w-0 truncate">
                 {chapters[activeChapterIdx]
                   ? `${toRoman(activeChapterIdx + 1)} · ${chapters[activeChapterIdx].label}`
                   : 'Run time'}
