@@ -1,18 +1,87 @@
 {
   "name": "UNFI - Ridgefield WA DC",
   "type": "Distribution Center",
-  "coords": { "lat": 45.80660, "lng": -122.66585 },
+  "coords": {
+    "lat": 45.8066,
+    "lng": -122.66585
+  },
   "geofences": {
-    "perimeter": { "south": 45.80420, "west": -122.66800, "north": 45.80870, "east": -122.66280 },
-    "truckGate": { "south": 45.80790, "west": -122.66445, "north": 45.80860, "east": -122.66380 },
-    "dropYards": [
-      { "south": 45.80560, "west": -122.66440, "north": 45.80820, "east": -122.66300 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 45.80794,
+          "lng": -122.668871
+        },
+        {
+          "lat": 45.80794,
+          "lng": -122.664202
+        },
+        {
+          "lat": 45.804877,
+          "lng": -122.664202
+        },
+        {
+          "lat": 45.804877,
+          "lng": -122.668871
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 45.807557,
+          "lng": -122.668871
+        },
+        {
+          "lat": 45.807557,
+          "lng": -122.668185
+        },
+        {
+          "lat": 45.806983,
+          "lng": -122.668185
+        },
+        {
+          "lat": 45.806983,
+          "lng": -122.668871
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 45.80540, "west": -122.66445, "north": 45.80820, "east": -122.66415 },
-      { "south": 45.80540, "west": -122.66790, "north": 45.80800, "east": -122.66760 }
+      {
+        "ring": [
+          {
+            "lat": 45.807749,
+            "lng": -122.668597
+          },
+          {
+            "lat": 45.807749,
+            "lng": -122.664477
+          },
+          {
+            "lat": 45.807462,
+            "lng": -122.664477
+          },
+          {
+            "lat": 45.807462,
+            "lng": -122.668597
+          }
+        ]
+      }
     ],
-    "staging": { "south": 45.80790, "west": -122.66445, "north": 45.80850, "east": -122.66360 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 168,
+        "pano": "ytlP2DEJ7DjI3oFOuTqJhA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 168,
+        "pano": "ytlP2DEJ7DjI3oFOuTqJhA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 150,
@@ -20,23 +89,43 @@
     "trailerParkingCapacity": 180,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 50.0,
+    "siteAreaAcres": 50,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@45.80660,-122.66585,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "shipRcvSeparate", "dockDoorCount"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "truckGate": "Dedicated controlled truck entrance off S Union Ridge Pkwy at the NE corner — a posted 'TRUCK ENTRANCE' sign at the parkway (confirmed in 2025-09 Street View), a structured entrance island and painted directional lane arrows where the drive meets the truck yard.",
     "guardShack": "No staffed guard booth could be visually confirmed. The truck entrance is heavily screened by a landscaped berm and conifer trees, and no Street View pano penetrates past the parkway frontage. A booth may exist but is not imaging-confirmed — flagged uncertain.",

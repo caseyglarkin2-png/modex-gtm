@@ -1,16 +1,55 @@
 {
   "name": "Pactiv Evergreen - Manteno IL",
   "type": "Manufacturing Plant (Food Merchandising)",
-  "coords": { "lat": 41.237499, "lng": -87.817748 },
+  "coords": {
+    "lat": 41.237499,
+    "lng": -87.817748
+  },
   "geofences": {
-    "perimeter": { "south": 41.23560, "west": -87.82010, "north": 41.24010, "east": -87.81560 },
-    "truckGate": { "south": 41.23590, "west": -87.81830, "north": 41.23640, "east": -87.81740 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.238532,
+          "lng": -87.819121
+        },
+        {
+          "lat": 41.238532,
+          "lng": -87.817061
+        },
+        {
+          "lat": 41.236673,
+          "lng": -87.817199
+        },
+        {
+          "lat": 41.236673,
+          "lng": -87.819259
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 41.23830, "west": -87.81720, "north": 41.23960, "east": -87.81560 }
+      {
+        "ring": [
+          {
+            "lat": 41.24039,
+            "lng": -87.817061
+          },
+          {
+            "lat": 41.24039,
+            "lng": -87.814727
+          },
+          {
+            "lat": 41.238532,
+            "lng": -87.814727
+          },
+          {
+            "lat": 41.238532,
+            "lng": -87.817061
+          }
+        ]
+      }
     ],
-    "dockAprons": [
-      { "south": 41.23690, "west": -87.81830, "north": 41.23820, "east": -87.81700 }
-    ],
+    "dockAprons": [],
     "staging": null
   },
   "yardMetrics": {
@@ -19,7 +58,7 @@
     "trailerParkingCapacity": 40,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 30.0,
+    "siteAreaAcres": 30,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.237499,-87.817748,400m/data=!3m1!1e3",
@@ -48,7 +87,12 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount", "connectivityIssue"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "truckGate": "The plant is reached by a paved access driveway from Sycamore St; the entrance is an open drive with a wide paved apron and no barrier arm, sliding gate or checkpoint structure at the property line. Classified false.",
     "guardShack": "No guard booth visible at the entrance in 2024-07 Street View or in z18-z20 satellite — the entrance apron is open paved area with no 1-3-vehicle structure beside the lane.",

@@ -1,17 +1,63 @@
 {
   "name": "Pactiv Evergreen - Athens GA",
   "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
-  "coords": { "lat": 33.97990, "lng": -83.38900 },
+  "coords": {
+    "lat": 33.9799,
+    "lng": -83.389
+  },
   "geofences": {
-    "perimeter": { "south": 33.97750, "west": -83.39120, "north": 33.98180, "east": -83.38680 },
-    "truckGate": { "south": 33.97870, "west": -83.39060, "north": 33.97950, "east": -83.38960 },
-    "dropYards": [
-      { "south": 33.97950, "west": -83.38900, "north": 33.98100, "east": -83.38760 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.982405,
+          "lng": -83.392845
+        },
+        {
+          "lat": 33.982178,
+          "lng": -83.388313
+        },
+        {
+          "lat": 33.978533,
+          "lng": -83.388451
+        },
+        {
+          "lat": 33.978761,
+          "lng": -83.39312
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 33.97950, "west": -83.38900, "north": 33.98120, "east": -83.38730 }
+      {
+        "ring": [
+          {
+            "lat": 33.980811,
+            "lng": -83.390373
+          },
+          {
+            "lat": 33.980697,
+            "lng": -83.388451
+          },
+          {
+            "lat": 33.979672,
+            "lng": -83.388588
+          },
+          {
+            "lat": 33.979786,
+            "lng": -83.390511
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 39,
+        "pano": "CMhC3oLV9_mqZF_YgRMX1A",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 24,
@@ -19,23 +65,42 @@
     "trailerParkingCapacity": 45,
     "truckGateCount": 1,
     "buildingCount": 6,
-    "siteAreaAcres": 32.0,
+    "siteAreaAcres": 32,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@33.97990,-83.38900,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "guardShack", "remoteGs", "buildingCount", "railServed"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "guardShack",
+    "remoteGs",
+    "buildingCount",
+    "railServed"
+  ],
   "fieldNotes": {
     "location": "Roster geocode (ROOFTOP, 33.979548,-83.389046) lands on the main plant building of a multi-building industrial campus off Dairy Pak Road, Athens GA — confirmed at satellite z16-z19. This is the legacy Evergreen Packaging / Pactiv Athens carton-converting plant (Beverage Merchandising; gable-top carton stock).",
     "truckGate": "The campus is bounded by fencing; the access roads (Dairy Pak Rd and the internal loop) reach the dock/yard area through controlled openings. A fenced compound with a chain-link gate and access-controlled entry is visible in Street View 2025-02 near the southwest entrance. truckGate = true.",

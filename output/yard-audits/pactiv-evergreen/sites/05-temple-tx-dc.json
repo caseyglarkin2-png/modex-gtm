@@ -1,18 +1,56 @@
 {
   "name": "Pactiv Evergreen - Temple TX Distribution Center",
   "type": "Distribution Center / Regional Mixing Center",
-  "coords": { "lat": 31.133300, "lng": -97.337600 },
+  "coords": {
+    "lat": 31.1333,
+    "lng": -97.3376
+  },
   "geofences": {
-    "perimeter": { "south": 31.13050, "west": -97.34050, "north": 31.13560, "east": -97.33530 },
-    "truckGate": { "south": 31.13290, "west": -97.33680, "north": 31.13360, "east": -97.33580 },
-    "dropYards": [
-      { "south": 31.13320, "west": -97.33720, "north": 31.13540, "east": -97.33560 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 31.134475,
+          "lng": -97.340347
+        },
+        {
+          "lat": 31.134475,
+          "lng": -97.336913
+        },
+        {
+          "lat": 31.129538,
+          "lng": -97.337188
+        },
+        {
+          "lat": 31.129538,
+          "lng": -97.340621
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 31.13110, "west": -97.34010, "north": 31.13470, "east": -97.33880 },
-      { "south": 31.13330, "west": -97.33800, "north": 31.13540, "east": -97.33650 }
+      {
+        "ring": [
+          {
+            "lat": 31.133888,
+            "lng": -97.3376
+          },
+          {
+            "lat": 31.133888,
+            "lng": -97.336776
+          },
+          {
+            "lat": 31.130009,
+            "lng": -97.336913
+          },
+          {
+            "lat": 31.130009,
+            "lng": -97.337737
+          }
+        ]
+      }
     ],
-    "staging": { "south": 31.13320, "west": -97.33720, "north": 31.13460, "east": -97.33580 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 60,
@@ -20,23 +58,41 @@
     "trailerParkingCapacity": 90,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 70.0,
+    "siteAreaAcres": 70,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@31.1333,-97.3376,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "dockDoorCount", "trailersVisible", "shipRcvSeparate"],
+  "uncertainFields": [
+    "truckGate",
+    "dockDoorCount",
+    "trailersVisible",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "The DC has full chain-link perimeter fencing (with dark privacy mesh) confirmed in Street View (2026-04). The entrance driveway off Pegasus Drive (marked with a '3776' address sign on the road) reads as an open / uncontrolled driveway opening in the fence — no barrier arm, sliding gate, or pinch-point checkpoint structure was visible in Street View or z20 satellite. Marked false; flagged uncertain (the fence may carry a swing gate that is normally open).",
     "guardShack": "No staffed guard booth visible at the entrance. The small structure at the building's NE corner is an office/maintenance building set against the warehouse, not a gate booth.",

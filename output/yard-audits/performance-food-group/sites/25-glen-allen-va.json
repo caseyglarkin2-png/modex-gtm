@@ -1,17 +1,87 @@
 {
   "name": "Performance Foodservice - Glen Allen VA",
   "type": "Broadline Foodservice Distribution Center",
-  "coords": { "lat": 37.69430, "lng": -77.46680 },
+  "coords": {
+    "lat": 37.6943,
+    "lng": -77.4668
+  },
   "geofences": {
-    "perimeter": { "south": 37.69240, "west": -77.46920, "north": 37.69570, "east": -77.46470 },
-    "truckGate": null,
-    "dropYards": [
-      { "south": 37.69280, "west": -77.46850, "north": 37.69420, "east": -77.46680 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.695495,
+          "lng": -77.468585
+        },
+        {
+          "lat": 37.695387,
+          "lng": -77.464877
+        },
+        {
+          "lat": 37.693974,
+          "lng": -77.465015
+        },
+        {
+          "lat": 37.694083,
+          "lng": -77.468723
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 37.694572,
+          "lng": -77.468585
+        },
+        {
+          "lat": 37.694572,
+          "lng": -77.468105
+        },
+        {
+          "lat": 37.694246,
+          "lng": -77.468105
+        },
+        {
+          "lat": 37.694246,
+          "lng": -77.468585
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 37.69300, "west": -77.46850, "north": 37.69430, "east": -77.46690 }
+      {
+        "ring": [
+          {
+            "lat": 37.694789,
+            "lng": -77.468379
+          },
+          {
+            "lat": 37.694137,
+            "lng": -77.468379
+          },
+          {
+            "lat": 37.694137,
+            "lng": -77.468105
+          },
+          {
+            "lat": 37.694789,
+            "lng": -77.468105
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 62,
+        "pano": "AMYI0Ofxxagtf7h9pGHKKw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 62,
+        "pano": "AMYI0Ofxxagtf7h9pGHKKw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 70,
@@ -19,7 +89,7 @@
     "trailerParkingCapacity": 60,
     "truckGateCount": 2,
     "buildingCount": 1,
-    "siteAreaAcres": 30.0,
+    "siteAreaAcres": 30,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@37.69430,-77.46680,400m/data=!3m1!1e3",
@@ -48,7 +118,12 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoors", "guardShack", "truckGate", "fastLaneOpportunity"],
+  "uncertainFields": [
+    "dockDoors",
+    "guardShack",
+    "truckGate",
+    "fastLaneOpportunity"
+  ],
   "fieldNotes": {
     "location": "Supplied coords (movedMeters 2662) landed in the Cardinal Commerce Center area but not exactly on the building. Resolved via web research: PFG occupies Phase I-Building B of Cardinal Commerce Center, a 420,000 SF building (PFG leases 332,000 SF) at 10399 Washington Highway, Hanover County. The building was positively ID'd in March 2026 Street View — a red 'Performance Foodservice' wall logo faces the fenced front employee lot. Locked center: 37.69430, -77.46680.",
     "truckGate": "No barrier arm, sliding gate across a lane, or guard booth visible at the truck court entrance or at the two front employee-lot driveway openings. The front employee parking lot is enclosed by a black ornamental security fence, but the driveway openings are uncontrolled curb cuts. The truck court is open paved area on a loop road. Because no gate is confirmed across any lane, truckGate is false — flagged given the perimeter fencing could imply a gate not resolvable in imagery.",

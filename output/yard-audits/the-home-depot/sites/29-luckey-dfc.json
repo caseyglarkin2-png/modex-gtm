@@ -1,38 +1,127 @@
 {
   "name": "Home Depot DFC - Luckey OH",
   "type": "Direct Fulfillment Center",
-  "coords": { "lat": 41.48068, "lng": -83.46420 },
+  "coords": {
+    "lat": 41.48068,
+    "lng": -83.4642
+  },
   "geofences": {
-    "perimeter": { "south": 41.47720, "west": -83.47180, "north": 41.48430, "east": -83.45680 },
-    "truckGate": { "south": 41.47800, "west": -83.47120, "north": 41.47900, "east": -83.46980 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.48068,
+          "lng": -83.470517
+        },
+        {
+          "lat": 41.481709,
+          "lng": -83.458707
+        },
+        {
+          "lat": 41.477799,
+          "lng": -83.458158
+        },
+        {
+          "lat": 41.47677,
+          "lng": -83.469968
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 41.47930, "west": -83.47100, "north": 41.48280, "east": -83.46550 }
+      {
+        "ring": [
+          {
+            "lat": 41.482326,
+            "lng": -83.469693
+          },
+          {
+            "lat": 41.482738,
+            "lng": -83.462827
+          },
+          {
+            "lat": 41.481092,
+            "lng": -83.462552
+          },
+          {
+            "lat": 41.48068,
+            "lng": -83.469419
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.48050, "west": -83.47080, "north": 41.48330, "east": -83.45720 },
-      { "south": 41.47760, "west": -83.47080, "north": 41.47980, "east": -83.45720 }
+      {
+        "ring": [
+          {
+            "lat": 41.480268,
+            "lng": -83.469968
+          },
+          {
+            "lat": 41.481297,
+            "lng": -83.458707
+          },
+          {
+            "lat": 41.479651,
+            "lng": -83.458432
+          },
+          {
+            "lat": 41.478622,
+            "lng": -83.469693
+          }
+        ]
+      }
     ],
-    "staging": { "south": 41.48180, "west": -83.46950, "north": 41.48340, "east": -83.46550 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 144,
+        "pano": "ZjMgcg04dR0VPCm-iARuLw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 200, "trailersVisible": 180, "trailerParkingCapacity": 230,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 130.0,
+    "dockDoorCount": 200,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 230,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 130,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.48068,-83.46420,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": true, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": true,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "connectivityIssue"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "truckGate": "Single access drive from Pemberville Rd runs through farmland to a controlled entrance at the building's SW; the truck court is ringed by perimeter fencing.",
     "guardShack": "No staffed booth positively resolved at the entrance; classified as remote kiosk/app check-in. Lower-confidence call.",

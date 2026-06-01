@@ -1,17 +1,84 @@
 {
   "name": "Pactiv Evergreen - Mooresville NC",
   "type": "Manufacturing Plant (Foodservice; foodservice & grocery packaging converting; ISCC PLUS certified)",
-  "coords": { "lat": 35.631400, "lng": -80.786700 },
+  "coords": {
+    "lat": 35.6314,
+    "lng": -80.7867
+  },
   "geofences": {
-    "perimeter": { "south": 35.629700, "west": -80.789000, "north": 35.633300, "east": -80.785000 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.632684,
+          "lng": -80.788211
+        },
+        {
+          "lat": 35.632516,
+          "lng": -80.785876
+        },
+        {
+          "lat": 35.630172,
+          "lng": -80.786151
+        },
+        {
+          "lat": 35.630395,
+          "lng": -80.788485
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [
-      { "south": 35.629700, "west": -80.788400, "north": 35.631100, "east": -80.787000 }
+      {
+        "ring": [
+          {
+            "lat": 35.631121,
+            "lng": -80.788348
+          },
+          {
+            "lat": 35.630954,
+            "lng": -80.786975
+          },
+          {
+            "lat": 35.630172,
+            "lng": -80.787043
+          },
+          {
+            "lat": 35.63034,
+            "lng": -80.788417
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.630200, "west": -80.787700, "north": 35.631100, "east": -80.786200 }
+      {
+        "ring": [
+          {
+            "lat": 35.631679,
+            "lng": -80.788073
+          },
+          {
+            "lat": 35.631512,
+            "lng": -80.786288
+          },
+          {
+            "lat": 35.631177,
+            "lng": -80.786357
+          },
+          {
+            "lat": 35.631344,
+            "lng": -80.788142
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 178,
+        "pano": "NbSVOeh1J38ObDVRUOR1tQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 22,
@@ -19,7 +86,7 @@
     "trailerParkingCapacity": 70,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 34.0,
+    "siteAreaAcres": 34,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.631400,-80.786700,400m/data=!3m1!1e3",
@@ -48,7 +115,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Confirmed via 2026-01 Street View on Mooresville Blvd showing the long industrial building with office front and Pactiv signage, in the south-Iredell industrial park. Web search corroborates the foodservice/grocery packaging plant at 314 Mooresville Blvd (~250 employees, 24/7 operation, $53.7M sales). Roster geocode (ROOFTOP) lands on the plant building - confirmed.",
     "truckGate": "Open campus. Fresh 2026-01 Street View shows NO perimeter fence along the Mooresville Blvd frontage and NO gate - the lawn runs open from the public road to the parking lots and building. Driveways are uncontrolled open entrances. truckGate false.",

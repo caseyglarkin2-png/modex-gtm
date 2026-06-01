@@ -1,15 +1,63 @@
 {
   "name": "Pactiv Evergreen - Plant City FL",
   "type": "Manufacturing Plant (Beverage Merchandising; carton converting)",
-  "coords": { "lat": 28.01800, "lng": -82.10030 },
+  "coords": {
+    "lat": 28.018,
+    "lng": -82.1003
+  },
   "geofences": {
-    "perimeter": { "south": 28.01700, "west": -82.10190, "north": 28.01905, "east": -82.09850 },
-    "truckGate": { "south": 28.01695, "west": -82.09930, "north": 28.01735, "east": -82.09860 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 28.018485,
+          "lng": -82.102017
+        },
+        {
+          "lat": 28.018485,
+          "lng": -82.098789
+        },
+        {
+          "lat": 28.01703,
+          "lng": -82.098858
+        },
+        {
+          "lat": 28.01703,
+          "lng": -82.102085
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 28.01735, "west": -82.09930, "north": 28.01880, "east": -82.09855 }
+      {
+        "ring": [
+          {
+            "lat": 28.017394,
+            "lng": -82.101948
+          },
+          {
+            "lat": 28.017394,
+            "lng": -82.099476
+          },
+          {
+            "lat": 28.01703,
+            "lng": -82.099476
+          },
+          {
+            "lat": 28.01703,
+            "lng": -82.101948
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 352,
+        "pano": "zCgAGVReRc-HK5ta2B9whw",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 16,
@@ -46,7 +94,9 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoors"],
+  "uncertainFields": [
+    "dockDoors"
+  ],
   "fieldNotes": {
     "truckGate": "2025 Street View at the dock-apron entrance shows an open paved apron directly off the public road (Henderson Way internal road) with only a 'SHIPPING' directional sign - no barrier arm, sliding gate, or pinch-point lane control.",
     "guardShack": "No booth structure anywhere at the apron entrance or office entrance; both are open.",

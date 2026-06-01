@@ -1,39 +1,137 @@
 {
   "name": "Home Depot RDC - Breinigsville PA",
   "type": "Rapid Deployment Center",
-  "coords": { "lat": 40.551634, "lng": -75.627668 },
+  "coords": {
+    "lat": 40.551634,
+    "lng": -75.627668
+  },
   "geofences": {
-    "perimeter": { "south": 40.54880, "west": -75.63240, "north": 40.55460, "east": -75.62330 },
-    "truckGate": { "south": 40.55075, "west": -75.62470, "north": 40.55135, "east": -75.62360 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.555182,
+          "lng": -75.631788
+        },
+        {
+          "lat": 40.556434,
+          "lng": -75.62602
+        },
+        {
+          "lat": 40.552677,
+          "lng": -75.623823
+        },
+        {
+          "lat": 40.551112,
+          "lng": -75.629041
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 40.54935, "west": -75.62700, "north": 40.55175, "east": -75.62360 },
-      { "south": 40.55230, "west": -75.63060, "north": 40.55460, "east": -75.62680 }
+      {
+        "ring": [
+          {
+            "lat": 40.55226,
+            "lng": -75.628767
+          },
+          {
+            "lat": 40.553721,
+            "lng": -75.624372
+          },
+          {
+            "lat": 40.552677,
+            "lng": -75.623823
+          },
+          {
+            "lat": 40.551112,
+            "lng": -75.628217
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.555182,
+            "lng": -75.631788
+          },
+          {
+            "lat": 40.555808,
+            "lng": -75.628767
+          },
+          {
+            "lat": 40.554764,
+            "lng": -75.628217
+          },
+          {
+            "lat": 40.554034,
+            "lng": -75.631239
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.55115, "west": -75.62960, "north": 40.55340, "east": -75.62520 },
-      { "south": 40.54995, "west": -75.63190, "north": 40.55200, "east": -75.62760 }
+      {
+        "ring": [
+          {
+            "lat": 40.554764,
+            "lng": -75.630415
+          },
+          {
+            "lat": 40.555808,
+            "lng": -75.62602
+          },
+          {
+            "lat": 40.554556,
+            "lng": -75.625471
+          },
+          {
+            "lat": 40.553408,
+            "lng": -75.629865
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 130, "trailersVisible": 240, "trailerParkingCapacity": 320,
-    "truckGateCount": 2, "buildingCount": 1, "siteAreaAcres": 64.0,
+    "dockDoorCount": 130,
+    "trailersVisible": 240,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 64,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.551634,-75.627668,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "No barrier arm, sliding gate, or guard checkpoint found at any road-edge entrance. Building sits ~120m back from Willard Drive behind a wide landscaped tree buffer; Street View along the public road shows open lawn with no gate. Truck circulation enters via uncontrolled internal logistics-park drives.",
     "guardShack": "No staffed booth structure visible at any entrance in zoom-19/20 imagery.",

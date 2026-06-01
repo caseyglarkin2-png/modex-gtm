@@ -1,17 +1,84 @@
 {
   "name": "Pactiv Evergreen - Moorhead MN",
   "type": "Manufacturing Plant (Food Merchandising)",
-  "coords": { "lat": 46.84175, "lng": -96.70685 },
+  "coords": {
+    "lat": 46.84175,
+    "lng": -96.70685
+  },
   "geofences": {
-    "perimeter": { "south": 46.84090, "west": -96.70790, "north": 46.84265, "east": -96.70555 },
-    "truckGate": { "south": 46.84130, "west": -96.70790, "north": 46.84170, "east": -96.70740 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 46.84222,
+          "lng": -96.707949
+        },
+        {
+          "lat": 46.84222,
+          "lng": -96.705477
+        },
+        {
+          "lat": 46.841186,
+          "lng": -96.705477
+        },
+        {
+          "lat": 46.841186,
+          "lng": -96.707949
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 46.84175, "west": -96.70790, "north": 46.84235, "east": -96.70745 }
+      {
+        "ring": [
+          {
+            "lat": 46.842079,
+            "lng": -96.707811
+          },
+          {
+            "lat": 46.842079,
+            "lng": -96.707125
+          },
+          {
+            "lat": 46.841515,
+            "lng": -96.707125
+          },
+          {
+            "lat": 46.841515,
+            "lng": -96.707811
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 46.84165, "west": -96.70745, "north": 46.84245, "east": -96.70700 }
+      {
+        "ring": [
+          {
+            "lat": 46.841374,
+            "lng": -96.707537
+          },
+          {
+            "lat": 46.841374,
+            "lng": -96.705614
+          },
+          {
+            "lat": 46.841186,
+            "lng": -96.705614
+          },
+          {
+            "lat": 46.841186,
+            "lng": -96.707537
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 53,
+        "pano": "rfl8wp1MIWwyP85czc64Kg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 16,
@@ -48,7 +115,9 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount"],
+  "uncertainFields": [
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "truckGate": "Aug-2025 Street View from 42nd Street S shows the entrance driveway and the entire west-face dock apron open directly to the public road. A chain-link perimeter fence exists between Pactiv and the neighbor to the north, but there is NO barrier arm, sliding gate, or pinch-point lane control across either the visitor driveway or the truck apron. The corner monument sign reading 'pactiv evergreen' positively confirms the facility.",
     "guardShack": "No staffed booth anywhere at the entrance. The only protruding structure on the dock face is a dock office/penthouse flush against the building, not a free-standing 1-3-space guard booth beside a gate.",

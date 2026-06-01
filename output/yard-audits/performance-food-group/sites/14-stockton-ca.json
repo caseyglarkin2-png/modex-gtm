@@ -1,17 +1,87 @@
 {
   "name": "Performance Foodservice - Northern California (Stockton CA)",
   "type": "Broadline Foodservice Distribution Center",
-  "coords": { "lat": 37.93255, "lng": -121.32450 },
+  "coords": {
+    "lat": 37.93255,
+    "lng": -121.3245
+  },
   "geofences": {
-    "perimeter": { "south": 37.93060, "west": -121.32560, "north": 37.93470, "east": -121.32290 },
-    "truckGate": { "south": 37.93250, "west": -121.32345, "north": 37.93300, "east": -121.32305 },
-    "dropYards": [
-      { "south": 37.93290, "west": -121.32430, "north": 37.93420, "east": -121.32340 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.934716,
+          "lng": -121.325461
+        },
+        {
+          "lat": 37.934716,
+          "lng": -121.320655
+        },
+        {
+          "lat": 37.9306,
+          "lng": -121.320655
+        },
+        {
+          "lat": 37.9306,
+          "lng": -121.325461
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 37.931467,
+          "lng": -121.325599
+        },
+        {
+          "lat": 37.931467,
+          "lng": -121.324637
+        },
+        {
+          "lat": 37.930817,
+          "lng": -121.324637
+        },
+        {
+          "lat": 37.930817,
+          "lng": -121.325599
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 37.93090, "west": -121.32430, "north": 37.93420, "east": -121.32370 }
+      {
+        "ring": [
+          {
+            "lat": 37.934283,
+            "lng": -121.325049
+          },
+          {
+            "lat": 37.93125,
+            "lng": -121.325049
+          },
+          {
+            "lat": 37.93125,
+            "lng": -121.3245
+          },
+          {
+            "lat": 37.934283,
+            "lng": -121.3245
+          }
+        ]
+      }
     ],
-    "staging": { "south": 37.93230, "west": -121.32330, "north": 37.93300, "east": -121.32270 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 33,
+        "pano": "-Xuh2-F_zNyo2PTs5xTu_w",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 33,
+        "pano": "-Xuh2-F_zNyo2PTs5xTu_w",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 64,
@@ -48,7 +118,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Street View (2022-01) shows a chain-link sliding gate across the truck driveway off the cul-de-sac on the building's east side.",
     "guardShack": "A small single-room guard booth with windows sits on the right side of the gate lane, beside the sliding gate.",

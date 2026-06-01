@@ -1,17 +1,84 @@
 {
   "name": "Home Depot RDC - Tolleson AZ",
   "type": "Rapid Deployment Center",
-  "coords": { "lat": 33.44480, "lng": -112.25300 },
+  "coords": {
+    "lat": 33.4448,
+    "lng": -112.253
+  },
   "geofences": {
-    "perimeter": { "south": 33.44260, "west": -112.25620, "north": 33.44640, "east": -112.24900 },
-    "truckGate": { "south": 33.44480, "west": -112.25600, "north": 33.44560, "east": -112.25490 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.446175,
+          "lng": -112.254923
+        },
+        {
+          "lat": 33.446175,
+          "lng": -112.251077
+        },
+        {
+          "lat": 33.443883,
+          "lng": -112.251077
+        },
+        {
+          "lat": 33.443883,
+          "lng": -112.254923
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 33.44320, "west": -112.25500, "north": 33.44460, "east": -112.24950 }
+      {
+        "ring": [
+          {
+            "lat": 33.443883,
+            "lng": -112.254648
+          },
+          {
+            "lat": 33.443883,
+            "lng": -112.251077
+          },
+          {
+            "lat": 33.44331,
+            "lng": -112.251077
+          },
+          {
+            "lat": 33.44331,
+            "lng": -112.254648
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.44440, "west": -112.25500, "north": 33.44510, "east": -112.24950 }
+      {
+        "ring": [
+          {
+            "lat": 33.444571,
+            "lng": -112.254648
+          },
+          {
+            "lat": 33.444571,
+            "lng": -112.251352
+          },
+          {
+            "lat": 33.443998,
+            "lng": -112.251352
+          },
+          {
+            "lat": 33.443998,
+            "lng": -112.254648
+          }
+        ]
+      }
     ],
-    "staging": { "south": 33.44480, "west": -112.25560, "north": 33.44560, "east": -112.25400 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 43,
+        "pano": "drhSc_hy9to4NVC_ABHdWA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 130,
@@ -19,23 +86,40 @@
     "trailerParkingCapacity": 330,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 55.0,
+    "siteAreaAcres": 55,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@33.44480,-112.25300,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "shipRcvSeparate"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "RDC #5643. Truck yard entrance at the SW/W corner off the road; driver reviews explicitly mention a guard shack and a gate where trucks check in.",
     "guardShack": "Confirmed by web reviews: drivers describe 'friendly staff at the guard shack' and report waiting 'over an hour to enter' at the gate — a staffed guard booth with significant check-in queuing.",

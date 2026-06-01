@@ -1,18 +1,87 @@
 {
   "name": "Performance Foodservice - Cincinnati OH",
   "type": "Broadline Foodservice Distribution Center",
-  "coords": { "lat": 39.23030, "lng": -84.44910 },
+  "coords": {
+    "lat": 39.2303,
+    "lng": -84.4491
+  },
   "geofences": {
-    "perimeter": { "south": 39.227875, "west": -84.450956, "north": 39.232725, "east": -84.447244 },
-    "truckGate": { "south": 39.229196, "west": -84.449138, "north": 39.230004, "east": -84.447862 },
-    "dropYards": [
-      { "south": 39.228212, "west": -84.450144, "north": 39.230188, "east": -84.448056 },
-      { "south": 39.229453, "west": -84.448548, "north": 39.232147, "east": -84.447852 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.232215,
+          "lng": -84.450061
+        },
+        {
+          "lat": 39.232002,
+          "lng": -84.446903
+        },
+        {
+          "lat": 39.228172,
+          "lng": -84.447727
+        },
+        {
+          "lat": 39.228598,
+          "lng": -84.450473
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.232002,
+          "lng": -84.449787
+        },
+        {
+          "lat": 39.231896,
+          "lng": -84.448825
+        },
+        {
+          "lat": 39.231364,
+          "lng": -84.448963
+        },
+        {
+          "lat": 39.23147,
+          "lng": -84.449924
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 39.229642, "west": -84.448964, "north": 39.232158, "east": -84.448036 }
+      {
+        "ring": [
+          {
+            "lat": 39.231151,
+            "lng": -84.449787
+          },
+          {
+            "lat": 39.231045,
+            "lng": -84.448413
+          },
+          {
+            "lat": 39.2303,
+            "lng": -84.448551
+          },
+          {
+            "lat": 39.230406,
+            "lng": -84.449924
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 173,
+        "pano": "h-RPbzCSlG72ZbHQKJPiSA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 173,
+        "pano": "h-RPbzCSlG72ZbHQKJPiSA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 35,
@@ -49,7 +118,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible"
+  ],
   "fieldNotes": {
     "truckGate": "The truck yard is enclosed by an ornamental black metal perimeter fence along the Shepherd Ave frontage (clearly visible in June-2025 Street View, with PFG-branded tractors lined up behind it). However the fence has wide OPEN driveway gaps with no barrier arm, sliding gate, or staffed checkpoint — no controlled gate in any view. Fenced yard with open driveway entrances = truckGate false.",
     "guardShack": "No guard booth at any driveway opening — none seen along the full Shepherd Ave frontage in Street View or in z19-z20 satellite.",

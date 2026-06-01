@@ -1,17 +1,87 @@
 {
   "name": "UNFI - Prescott WI DC (Twin Cities)",
   "type": "Distribution Center",
-  "coords": { "lat": 44.76235, "lng": -92.78495 },
+  "coords": {
+    "lat": 44.76235,
+    "lng": -92.78495
+  },
   "geofences": {
-    "perimeter": { "south": 44.76075, "west": -92.78780, "north": 44.76445, "east": -92.78340 },
-    "truckGate": { "south": 44.76110, "west": -92.78720, "north": 44.76170, "east": -92.78640 },
-    "dropYards": [
-      { "south": 44.76155, "west": -92.78640, "north": 44.76330, "east": -92.78560 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 44.7643,
+          "lng": -92.787697
+        },
+        {
+          "lat": 44.7643,
+          "lng": -92.783851
+        },
+        {
+          "lat": 44.761472,
+          "lng": -92.783851
+        },
+        {
+          "lat": 44.761472,
+          "lng": -92.787697
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 44.762155,
+          "lng": -92.787697
+        },
+        {
+          "lat": 44.762155,
+          "lng": -92.78701
+        },
+        {
+          "lat": 44.761472,
+          "lng": -92.78701
+        },
+        {
+          "lat": 44.761472,
+          "lng": -92.787697
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 44.76155, "west": -92.78580, "north": 44.76420, "east": -92.78490 }
+      {
+        "ring": [
+          {
+            "lat": 44.761862,
+            "lng": -92.787559
+          },
+          {
+            "lat": 44.761862,
+            "lng": -92.784126
+          },
+          {
+            "lat": 44.761472,
+            "lng": -92.784195
+          },
+          {
+            "lat": 44.761472,
+            "lng": -92.787628
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 34,
+        "pano": "gNW_rlfvlRXpO3qs_np1IQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 34,
+        "pano": "gNW_rlfvlRXpO3qs_np1IQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 44,
@@ -19,7 +89,7 @@
     "trailerParkingCapacity": 70,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 36.0,
+    "siteAreaAcres": 36,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@44.76235,-92.78495,400m/data=!3m1!1e3",
@@ -48,7 +118,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point where the truck driveway leaves Eagle Ridge Dr. The entrance from the public road is an open paved driveway directly into the lot; satellite at z19 and three Street-View headings along Eagle Ridge Dr show no gate structure and no perimeter fence line.",
     "guardShack": "No staffed booth at the entrance. No 1-3-vehicle-footprint structure beside the truck lane in any imagery.",

@@ -1,19 +1,84 @@
 {
   "name": "Home Depot SDC - Savannah GA",
   "type": "Stocking Distribution Center",
-  "coords": { "lat": 32.15820, "lng": -81.20380 },
+  "coords": {
+    "lat": 32.1582,
+    "lng": -81.2038
+  },
   "geofences": {
-    "perimeter": { "south": 32.15450, "west": -81.20850, "north": 32.16150, "east": -81.20000 },
-    "truckGate": { "south": 32.15920, "west": -81.20720, "north": 32.16030, "east": -81.20580 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.16099,
+          "lng": -81.205997
+        },
+        {
+          "lat": 32.162153,
+          "lng": -81.202701
+        },
+        {
+          "lat": 32.1582,
+          "lng": -81.200779
+        },
+        {
+          "lat": 32.157037,
+          "lng": -81.204075
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 32.15550, "west": -81.20850, "north": 32.16030, "east": -81.20620 },
-      { "south": 32.15500, "west": -81.20350, "north": 32.16020, "east": -81.20020 }
+      {
+        "ring": [
+          {
+            "lat": 32.160874,
+            "lng": -81.206547
+          },
+          {
+            "lat": 32.161339,
+            "lng": -81.205173
+          },
+          {
+            "lat": 32.157619,
+            "lng": -81.2038
+          },
+          {
+            "lat": 32.15727,
+            "lng": -81.205173
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 32.15560, "west": -81.20680, "north": 32.16030, "east": -81.20560 },
-      { "south": 32.15520, "west": -81.20480, "north": 32.16000, "east": -81.20360 }
+      {
+        "ring": [
+          {
+            "lat": 32.161455,
+            "lng": -81.204899
+          },
+          {
+            "lat": 32.16192,
+            "lng": -81.202701
+          },
+          {
+            "lat": 32.158433,
+            "lng": -81.201328
+          },
+          {
+            "lat": 32.157735,
+            "lng": -81.203525
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 124,
+        "pano": "Mlr7p6fyXYPN-lHrsUiagg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 200,
@@ -21,7 +86,7 @@
     "trailerParkingCapacity": 380,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 154.0,
+    "siteAreaAcres": 154,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.15820,-81.20380,400m/data=!3m1!1e3",
@@ -50,7 +115,12 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Confirmed: Street View (2025-11) shows a metal swing-gate / barrier with a central island and bollards across the access road; the truck yards are fully fenced (perimeter fence visible in multiple satellite views).",
     "guardShack": "No standalone guard booth positively resolved. The roadway barrier in the woods has no booth; the NW truck-yard entrance has a maintenance canopy and a round storage tank, not a clear guard booth. Flagged uncertain.",

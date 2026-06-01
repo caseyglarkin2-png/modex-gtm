@@ -1,39 +1,117 @@
 {
   "name": "Home Depot RDC - McCalla AL",
   "type": "Rapid Deployment Center",
-  "coords": { "lat": 33.322267, "lng": -87.025569 },
+  "coords": {
+    "lat": 33.322267,
+    "lng": -87.025569
+  },
   "geofences": {
-    "perimeter": { "south": 33.31870, "west": -87.02960, "north": 33.32530, "east": -87.02150 },
-    "truckGate": { "south": 33.31870, "west": -87.02840, "north": 33.31960, "east": -87.02720 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.324333,
+          "lng": -87.026668
+        },
+        {
+          "lat": 33.325939,
+          "lng": -87.023372
+        },
+        {
+          "lat": 33.323185,
+          "lng": -87.021724
+        },
+        {
+          "lat": 33.321349,
+          "lng": -87.025294
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 33.32230, "west": -87.02500, "north": 33.32520, "east": -87.02160 },
-      { "south": 33.31960, "west": -87.02900, "north": 33.32230, "east": -87.02520 }
+      {
+        "ring": [
+          {
+            "lat": 33.323874,
+            "lng": -87.027492
+          },
+          {
+            "lat": 33.324906,
+            "lng": -87.025569
+          },
+          {
+            "lat": 33.323415,
+            "lng": -87.024745
+          },
+          {
+            "lat": 33.322267,
+            "lng": -87.026668
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.32050, "west": -87.02720, "north": 33.32400, "east": -87.02320 },
-      { "south": 33.31920, "west": -87.02880, "north": 33.32260, "east": -87.02470 }
+      {
+        "ring": [
+          {
+            "lat": 33.324562,
+            "lng": -87.025844
+          },
+          {
+            "lat": 33.32525,
+            "lng": -87.022822
+          },
+          {
+            "lat": 33.323415,
+            "lng": -87.022273
+          },
+          {
+            "lat": 33.322267,
+            "lng": -87.025294
+          }
+        ]
+      }
     ],
-    "staging": { "south": 33.31900, "west": -87.02830, "north": 33.32040, "east": -87.02650 }
+    "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 150, "trailersVisible": 280, "trailerParkingCapacity": 360,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 70.0,
+    "dockDoorCount": 150,
+    "trailersVisible": 280,
+    "trailerParkingCapacity": 360,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 70,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.322267,-87.025569,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Controlled truck gate confirmed at the SW-end entrance: a guard-booth island where the access road narrows and splits, with an orange/yellow barrier-arm/gate object visible on the lane in zoom-21 satellite. Street View (2023-01) shows perimeter fencing, an 'ATTENTION' sign and a '10 mph' speed sign at the entrance. Web driver review explicitly cites 'security and receiving personnel'.",
     "guardShack": "Small square guard-booth building (~1-2 vehicle footprint) with a flagpole and an attached canopy/awning, sitting on a triangular island in the truck lane — classic gatehouse, separate from the main building.",

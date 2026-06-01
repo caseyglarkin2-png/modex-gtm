@@ -1,38 +1,94 @@
 {
   "name": "UNFI - Mansfield OH DC",
   "type": "Distribution Center",
-  "coords": { "lat": 40.758536, "lng": -82.514085 },
+  "coords": {
+    "lat": 40.758536,
+    "lng": -82.514085
+  },
   "geofences": {
-    "perimeter": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.759576,
+          "lng": -82.515458
+        },
+        {
+          "lat": 40.759576,
+          "lng": -82.512986
+        },
+        {
+          "lat": 40.757704,
+          "lng": -82.512986
+        },
+        {
+          "lat": 40.757704,
+          "lng": -82.515458
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 0, "trailersVisible": 0, "trailerParkingCapacity": 0,
-    "truckGateCount": 0, "buildingCount": 0, "siteAreaAcres": 0.0,
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 0,
+    "buildingCount": 0,
+    "siteAreaAcres": 0,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.758536,-82.514085,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "NONE", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural", "connectivityIssue",
-    "multipleFacilities", "scale", "dropYard", "multiStep"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "urbanRural",
+    "connectivityIssue",
+    "multipleFacilities",
+    "scale",
+    "dropYard",
+    "multiStep"
   ],
   "fieldNotes": {
     "location": "COULD NOT RESOLVE. No UNFI distribution center could be confirmed in Mansfield, Ohio. The roster entry derives only from an Indeed company 'office locations' listing (which shows Cleveland OH and Mansfield OH for UNFI but provides no address); the roster's own geocode was APPROXIMATE and moved 7,198 m. The supplied coordinates land in downtown Mansfield (retail/civic, no DC).",

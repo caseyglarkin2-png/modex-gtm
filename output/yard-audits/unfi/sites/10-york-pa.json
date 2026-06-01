@@ -1,16 +1,94 @@
 {
   "name": "UNFI - York PA DC (Harrisburg area)",
   "type": "Distribution Center",
-  "coords": { "lat": 40.06860, "lng": -76.77470 },
+  "coords": {
+    "lat": 40.0686,
+    "lng": -76.7747
+  },
   "geofences": {
-    "perimeter": { "south": 40.06540, "west": -76.77640, "north": 40.07230, "east": -76.77290 },
-    "truckGate": { "south": 40.06820, "west": -76.77430, "north": 40.06910, "east": -76.77330 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.071753,
+          "lng": -76.775799
+        },
+        {
+          "lat": 40.071963,
+          "lng": -76.773052
+        },
+        {
+          "lat": 40.067339,
+          "lng": -76.771679
+        },
+        {
+          "lat": 40.066918,
+          "lng": -76.7747
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.067339,
+          "lng": -76.775249
+        },
+        {
+          "lat": 40.067339,
+          "lng": -76.774425
+        },
+        {
+          "lat": 40.066708,
+          "lng": -76.774425
+        },
+        {
+          "lat": 40.066708,
+          "lng": -76.775249
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.07120, "west": -76.77500, "north": 40.07230, "east": -76.77290 }
+      {
+        "ring": [
+          {
+            "lat": 40.072173,
+            "lng": -76.774975
+          },
+          {
+            "lat": 40.072383,
+            "lng": -76.772915
+          },
+          {
+            "lat": 40.071753,
+            "lng": -76.772777
+          },
+          {
+            "lat": 40.071543,
+            "lng": -76.774837
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.06640, "west": -76.77620, "north": 40.07090, "east": -76.77540 },
-      { "south": 40.07060, "west": -76.77540, "north": 40.07150, "east": -76.77320 }
+      {
+        "ring": [
+          {
+            "lat": 40.071332,
+            "lng": -76.775524
+          },
+          {
+            "lat": 40.071543,
+            "lng": -76.773601
+          },
+          {
+            "lat": 40.071122,
+            "lng": -76.773533
+          },
+          {
+            "lat": 40.070912,
+            "lng": -76.775455
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -20,7 +98,7 @@
     "trailerParkingCapacity": 160,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 41.0,
+    "siteAreaAcres": 41,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.06860,-76.77470,400m/data=!3m1!1e3",
@@ -49,7 +127,12 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "dockDoorCount", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "resolution": "Roster gave only city-level coords (downtown York, wrong site). Resolved to UNFI York DC, 225 Cross Farm Lane, York PA 17406, Greenspring Industrial Park - a 675,000 sq ft legacy-UNFI DC opened 2008. Confirmed via warehouse.ninja, LoopNet/JLL listing, TruckMap and the 2008 UNFI IR press release.",
     "truckGate": "No barrier arm or sliding/swing gate at the public road (Cross Farm Lane) or on the internal access driveway. Street View 2012/2023 shows an open-campus driveway with a turnaround near the office; trucks reach the dock yard via a wide internal driveway with no checkpoint structure. Open-campus archetype.",

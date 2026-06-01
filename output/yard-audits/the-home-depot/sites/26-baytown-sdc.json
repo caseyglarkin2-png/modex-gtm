@@ -1,39 +1,126 @@
 {
   "name": "Home Depot SDC - Baytown TX",
   "type": "Stocking Distribution Center",
-  "coords": { "lat": 29.732166, "lng": -94.917884 },
+  "coords": {
+    "lat": 29.732166,
+    "lng": -94.917884
+  },
   "geofences": {
-    "perimeter": { "south": 29.72860, "west": -94.92115, "north": 29.73560, "east": -94.91460 },
-    "truckGate": { "south": 29.73130, "west": -94.91680, "north": 29.73220, "east": -94.91570 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.734312,
+          "lng": -94.920631
+        },
+        {
+          "lat": 29.735624,
+          "lng": -94.918433
+        },
+        {
+          "lat": 29.732166,
+          "lng": -94.915687
+        },
+        {
+          "lat": 29.730735,
+          "lng": -94.918159
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 29.72950, "west": -94.92030, "north": 29.73480, "east": -94.91720 },
-      { "south": 29.73000, "west": -94.91560, "north": 29.73500, "east": -94.91460 }
+      {
+        "ring": [
+          {
+            "lat": 29.734312,
+            "lng": -94.920631
+          },
+          {
+            "lat": 29.735147,
+            "lng": -94.919257
+          },
+          {
+            "lat": 29.733358,
+            "lng": -94.917884
+          },
+          {
+            "lat": 29.732524,
+            "lng": -94.919257
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 29.72950, "west": -94.91990, "north": 29.73510, "east": -94.91760 },
-      { "south": 29.73010, "west": -94.91570, "north": 29.73520, "east": -94.91470 }
+      {
+        "ring": [
+          {
+            "lat": 29.735147,
+            "lng": -94.918708
+          },
+          {
+            "lat": 29.733835,
+            "lng": -94.91706
+          },
+          {
+            "lat": 29.732643,
+            "lng": -94.917884
+          },
+          {
+            "lat": 29.733597,
+            "lng": -94.918983
+          }
+        ]
+      }
     ],
-    "staging": { "south": 29.73120, "west": -94.91720, "north": 29.73250, "east": -94.91560 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 20,
+        "pano": "0WVti9cTC4fqLhSFTEDm7A",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 130, "trailersVisible": 95, "trailerParkingCapacity": 130,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 53.0,
+    "dockDoorCount": 130,
+    "trailersVisible": 95,
+    "trailerParkingCapacity": 130,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 53,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@29.732166,-94.917884,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Single internal access road off FM 1405 funnels truck traffic to a controlled property entrance at the SE of the building; perimeter fencing rings the truck yard.",
     "guardShack": "No clearly resolvable staffed booth at the entrance in current imagery; treated as kiosk/app check-in (remoteGs true). Low-confidence call — modern HD DC, security typically gate-controlled.",

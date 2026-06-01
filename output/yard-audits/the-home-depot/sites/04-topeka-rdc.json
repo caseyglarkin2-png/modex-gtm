@@ -1,17 +1,128 @@
 {
   "name": "Home Depot RDC - Topeka KS",
   "type": "Rapid Deployment Center",
-  "coords": { "lat": 38.97299, "lng": -95.69715 },
+  "coords": {
+    "lat": 38.97299,
+    "lng": -95.69715
+  },
   "geofences": {
-    "perimeter": { "south": 38.96930, "west": -95.70000, "north": 38.97520, "east": -95.69430 },
-    "truckGate": { "south": 38.97090, "west": -95.69870, "north": 38.97160, "east": -95.69770 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.974058,
+          "lng": -95.699759
+        },
+        {
+          "lat": 38.974058,
+          "lng": -95.694953
+        },
+        {
+          "lat": 38.971282,
+          "lng": -95.694541
+        },
+        {
+          "lat": 38.971068,
+          "lng": -95.699347
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 38.972456,
+          "lng": -95.700171
+        },
+        {
+          "lat": 38.972456,
+          "lng": -95.699347
+        },
+        {
+          "lat": 38.971922,
+          "lng": -95.699347
+        },
+        {
+          "lat": 38.971922,
+          "lng": -95.700171
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 38.96960, "west": -95.69850, "north": 38.97230, "east": -95.69470 }
+      {
+        "ring": [
+          {
+            "lat": 38.974058,
+            "lng": -95.699073
+          },
+          {
+            "lat": 38.974058,
+            "lng": -95.694953
+          },
+          {
+            "lat": 38.973524,
+            "lng": -95.694953
+          },
+          {
+            "lat": 38.973524,
+            "lng": -95.699073
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 38.971709,
+            "lng": -95.699073
+          },
+          {
+            "lat": 38.971709,
+            "lng": -95.694953
+          },
+          {
+            "lat": 38.971068,
+            "lng": -95.694953
+          },
+          {
+            "lat": 38.971068,
+            "lng": -95.699073
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 38.97240, "west": -95.69840, "north": 38.97470, "east": -95.69440 }
+      {
+        "ring": [
+          {
+            "lat": 38.973417,
+            "lng": -95.699073
+          },
+          {
+            "lat": 38.973417,
+            "lng": -95.694953
+          },
+          {
+            "lat": 38.97299,
+            "lng": -95.694953
+          },
+          {
+            "lat": 38.97299,
+            "lng": -95.699073
+          }
+        ]
+      }
     ],
-    "staging": { "south": 38.97070, "west": -95.69900, "north": 38.97180, "east": -95.69720 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 113,
+        "pano": "jEsF8MeWfZCf3XT3_Ru23Q",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 113,
+        "pano": "jEsF8MeWfZCf3XT3_Ru23Q",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 120,
@@ -19,23 +130,41 @@
     "trailerParkingCapacity": 320,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 60.0,
+    "siteAreaAcres": 60,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@38.97299,-95.69715,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "dockDoorCount"],
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "location": "Resolved with high confidence. Roster geocode (movedMeters 5133) lands directly on the long cross-dock RDC building at 5200 SW Wenger Drive, Topeka KS 66609. Confirmed as HD RDC #5024 via SupplierWiki and Waze (\"The Home Depot Rapid Deployment Center\").",
     "truckGate": "truckGate true with high confidence. A single curved truck access road runs up from SW Wenger Drive to the trailer yard; it is the only vehicle entry and pinches into a controlled gate where it meets the fenced yard. Trucks observed staged along the access road in Street View. Perimeter chain-link fencing encloses the trailer yard.",

@@ -1,19 +1,97 @@
 {
   "name": "Pactiv Evergreen - Canandaigua CTC Distribution Center NY",
   "type": "Distribution Center",
-  "coords": { "lat": 42.905300, "lng": -77.303500 },
+  "coords": {
+    "lat": 42.9053,
+    "lng": -77.3035
+  },
   "geofences": {
-    "perimeter": { "south": 42.90200, "west": -77.30720, "north": 42.90820, "east": -77.29720 },
-    "truckGate": { "south": 42.90250, "west": -77.30330, "north": 42.90305, "east": -77.30255 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.908318,
+          "lng": -77.306521
+        },
+        {
+          "lat": 42.907614,
+          "lng": -77.300753
+        },
+        {
+          "lat": 42.903087,
+          "lng": -77.301852
+        },
+        {
+          "lat": 42.904093,
+          "lng": -77.307483
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 42.90490, "west": -77.30700, "north": 42.90700, "east": -77.30420 },
-      { "south": 42.90420, "west": -77.30480, "north": 42.90560, "east": -77.30280 }
+      {
+        "ring": [
+          {
+            "lat": 42.909826,
+            "lng": -77.30762
+          },
+          {
+            "lat": 42.909625,
+            "lng": -77.302813
+          },
+          {
+            "lat": 42.908318,
+            "lng": -77.302951
+          },
+          {
+            "lat": 42.908519,
+            "lng": -77.307757
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 42.907815,
+            "lng": -77.306659
+          },
+          {
+            "lat": 42.907614,
+            "lng": -77.304187
+          },
+          {
+            "lat": 42.906306,
+            "lng": -77.304324
+          },
+          {
+            "lat": 42.906507,
+            "lng": -77.306796
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 42.90540, "west": -77.30440, "north": 42.90650, "east": -77.30330 },
-      { "south": 42.90450, "west": -77.30360, "north": 42.90560, "east": -77.30260 }
+      {
+        "ring": [
+          {
+            "lat": 42.906708,
+            "lng": -77.304873
+          },
+          {
+            "lat": 42.906306,
+            "lng": -77.301852
+          },
+          {
+            "lat": 42.905803,
+            "lng": -77.301989
+          },
+          {
+            "lat": 42.906205,
+            "lng": -77.305011
+          }
+        ]
+      }
     ],
-    "staging": { "south": 42.90290, "west": -77.30330, "north": 42.90460, "east": -77.30180 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 35,
@@ -21,23 +99,41 @@
     "trailerParkingCapacity": 280,
     "truckGateCount": 1,
     "buildingCount": 4,
-    "siteAreaAcres": 145.0,
+    "siteAreaAcres": 145,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@42.9053,-77.3035,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "shipRcvSeparate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Confirmed in Street View (2016-09) at the shared campus south entrance ~42.9028,-77.3030: a black-and-white striped barrier arm spans the truck lane, flanked by two sliding chain-link gates and STOP signs, with perimeter chain-link fencing. The CTC Distribution Center (2480 Sommers Drive) sits on the same gated Pactiv campus as the Canandaigua plant and shares this single truck gate.",
     "guardShack": "Small flat-roof staffed booth (windowed multiple sides, ~1-2 vehicle footprint, 'Adecco' sign, US flag pole) sits immediately beside the gate lane — the staffed check-in booth.",

@@ -1,16 +1,84 @@
 {
   "name": "Pactiv Evergreen - Bedford Park IL",
   "type": "Manufacturing Plant (Foodservice)",
-  "coords": { "lat": 41.761600, "lng": -87.769100 },
+  "coords": {
+    "lat": 41.7616,
+    "lng": -87.7691
+  },
   "geofences": {
-    "perimeter": { "south": 41.759900, "west": -87.770700, "north": 41.763200, "east": -87.767500 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.762778,
+          "lng": -87.771847
+        },
+        {
+          "lat": 41.762778,
+          "lng": -87.7691
+        },
+        {
+          "lat": 41.760166,
+          "lng": -87.768963
+        },
+        {
+          "lat": 41.760063,
+          "lng": -87.771847
+        }
+      ]
+    },
     "truckGate": null,
-    "dropYards": [],
-    "dockAprons": [
-      { "south": 41.761200, "west": -87.769200, "north": 41.761700, "east": -87.768300 },
-      { "south": 41.760700, "west": -87.770200, "north": 41.761000, "east": -87.769400 }
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 41.76201,
+            "lng": -87.769443
+          },
+          {
+            "lat": 41.76201,
+            "lng": -87.768276
+          },
+          {
+            "lat": 41.760985,
+            "lng": -87.768276
+          },
+          {
+            "lat": 41.760985,
+            "lng": -87.769443
+          }
+        ]
+      }
     ],
-    "staging": null
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 41.762624,
+            "lng": -87.769787
+          },
+          {
+            "lat": 41.762624,
+            "lng": -87.769443
+          },
+          {
+            "lat": 41.761344,
+            "lng": -87.769443
+          },
+          {
+            "lat": 41.761344,
+            "lng": -87.769787
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 17,
+        "pano": "oOIF5mTwjQ7yibh4wy9Z2w",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 22,
@@ -18,7 +86,7 @@
     "trailerParkingCapacity": 20,
     "truckGateCount": 1,
     "buildingCount": 4,
-    "siteAreaAcres": 28.0,
+    "siteAreaAcres": 28,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@41.761600,-87.769100,400m/data=!3m1!1e3",
@@ -47,7 +115,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "buildingCount"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "buildingCount"
+  ],
   "fieldNotes": {
     "truckGate": "No controlled truck gate. The campus access road off S. Mason Avenue is an open, unbarriered private drive — confirmed in 2018-10 and 2025-04 Street View. No barrier arm or gate at the property line.",
     "guardShack": "No guard booth at the campus entrance in any Street View heading.",

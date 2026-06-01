@@ -1,15 +1,73 @@
 {
   "name": "Performance Foodservice - Louisville KY",
   "type": "Broadline Foodservice Distribution Center",
-  "coords": { "lat": 38.21080, "lng": -85.54900 },
+  "coords": {
+    "lat": 38.2108,
+    "lng": -85.549
+  },
   "geofences": {
-    "perimeter": { "south": 38.209632, "west": -85.550944, "north": 38.211968, "east": -85.547056 },
-    "truckGate": null,
-    "dropYards": [
-      { "south": 38.210191, "west": -85.548629, "north": 38.210909, "east": -85.547371 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.211879,
+          "lng": -85.550099
+        },
+        {
+          "lat": 38.211879,
+          "lng": -85.548313
+        },
+        {
+          "lat": 38.2108,
+          "lng": -85.548313
+        },
+        {
+          "lat": 38.2108,
+          "lng": -85.550099
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 38.211232,
+          "lng": -85.550167
+        },
+        {
+          "lat": 38.211232,
+          "lng": -85.549687
+        },
+        {
+          "lat": 38.210908,
+          "lng": -85.549687
+        },
+        {
+          "lat": 38.210908,
+          "lng": -85.550167
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 38.209896, "west": -85.550315, "north": 38.210704, "east": -85.546885 }
+      {
+        "ring": [
+          {
+            "lat": 38.211016,
+            "lng": -85.549961
+          },
+          {
+            "lat": 38.211016,
+            "lng": -85.548657
+          },
+          {
+            "lat": 38.2108,
+            "lng": -85.548657
+          },
+          {
+            "lat": 38.2108,
+            "lng": -85.549961
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -48,7 +106,12 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "dockDoors", "trailersVisible", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "dockDoors",
+    "trailersVisible",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "No barrier arm, sliding gate, or checkpoint. The dock-side truck apron is reached by open driveways within the Bluegrass Industrial Park; no perimeter fence around the building. Open multi-tenant industrial-park layout.",
     "guardShack": "No guard booth anywhere along the building approach. The street-facing side seen in Nov-2024 Street View is a flush office/flex frontage with employee parking — no booth.",

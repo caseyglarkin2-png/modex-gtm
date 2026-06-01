@@ -1,15 +1,75 @@
 {
   "name": "Pactiv Evergreen - Corsicana TX Warehouse",
   "type": "Warehouse / Distribution",
-  "coords": { "lat": 32.07520, "lng": -96.45745 },
+  "coords": {
+    "lat": 32.0752,
+    "lng": -96.45745
+  },
   "geofences": {
-    "perimeter": { "south": 32.07210, "west": -96.46150, "north": 32.07800, "east": -96.45330 },
-    "truckGate": { "south": 32.07390, "west": -96.45470, "north": 32.07470, "east": -96.45350 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.077527,
+          "lng": -96.461845
+        },
+        {
+          "lat": 32.077527,
+          "lng": -96.455802
+        },
+        {
+          "lat": 32.07264,
+          "lng": -96.456077
+        },
+        {
+          "lat": 32.07264,
+          "lng": -96.462119
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 32.07260, "west": -96.46120, "north": 32.07480, "east": -96.45850 }
+      {
+        "ring": [
+          {
+            "lat": 32.074269,
+            "lng": -96.461845
+          },
+          {
+            "lat": 32.073804,
+            "lng": -96.459647
+          },
+          {
+            "lat": 32.071942,
+            "lng": -96.459785
+          },
+          {
+            "lat": 32.072407,
+            "lng": -96.461982
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 32.07320, "west": -96.45900, "north": 32.07640, "east": -96.45520 }
+      {
+        "ring": [
+          {
+            "lat": 32.074618,
+            "lng": -96.460197
+          },
+          {
+            "lat": 32.074618,
+            "lng": -96.456351
+          },
+          {
+            "lat": 32.074036,
+            "lng": -96.456351
+          },
+          {
+            "lat": 32.074036,
+            "lng": -96.460197
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -19,23 +79,40 @@
     "trailerParkingCapacity": 200,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 58.0,
+    "siteAreaAcres": 58,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.07520,-96.45745,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "guardShack", "remoteGs"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "guardShack",
+    "remoteGs"
+  ],
   "fieldNotes": {
     "location": "Roster geocode (ROOFTOP, 32.075124,-96.457637) lands directly on a very large modern single-block distribution warehouse — confirmed in satellite z16-z19. Address 2200 S. Business 45, Corsicana. Building is ~1,150 ft x ~400 ft.",
     "truckGate": "Property is fully fenced; the building sits ~250 m back from S. Business 45 behind a deep landscaped buffer. A single entrance driveway off Business 45 at the SE corner reaches the yard through a perimeter-fence gate (pinch-point). truckGate = true.",

@@ -1,19 +1,81 @@
 {
   "name": "Home Depot RDC - Salem OR",
   "type": "Rapid Deployment Center",
-  "coords": { "lat": 44.90460, "lng": -122.96170 },
+  "coords": {
+    "lat": 44.9046,
+    "lng": -122.9617
+  },
   "geofences": {
-    "perimeter": { "south": 44.90080, "west": -122.96450, "north": 44.90750, "east": -122.95950 },
-    "truckGate": { "south": 44.90460, "west": -122.96320, "north": 44.90520, "east": -122.96230 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 44.905573,
+          "lng": -122.964447
+        },
+        {
+          "lat": 44.906351,
+          "lng": -122.960601
+        },
+        {
+          "lat": 44.903044,
+          "lng": -122.958679
+        },
+        {
+          "lat": 44.900515,
+          "lng": -122.96788
+        },
+        {
+          "lat": 44.903433,
+          "lng": -122.968566
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 44.90090, "west": -122.96440, "north": 44.90460, "east": -122.96100 },
-      { "south": 44.90420, "west": -122.96320, "north": 44.90560, "east": -122.96130 }
+      {
+        "ring": [
+          {
+            "lat": 44.906254,
+            "lng": -122.962799
+          },
+          {
+            "lat": 44.906351,
+            "lng": -122.960601
+          },
+          {
+            "lat": 44.903822,
+            "lng": -122.959228
+          },
+          {
+            "lat": 44.903433,
+            "lng": -122.9617
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 44.90300, "west": -122.96270, "north": 44.90650, "east": -122.96050 },
-      { "south": 44.90480, "west": -122.96250, "north": 44.90780, "east": -122.96030 }
+      {
+        "ring": [
+          {
+            "lat": 44.903627,
+            "lng": -122.967193
+          },
+          {
+            "lat": 44.905086,
+            "lng": -122.963073
+          },
+          {
+            "lat": 44.903822,
+            "lng": -122.962249
+          },
+          {
+            "lat": 44.902266,
+            "lng": -122.966369
+          }
+        ]
+      }
     ],
-    "staging": { "south": 44.90420, "west": -122.96280, "north": 44.90490, "east": -122.96180 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 130,
@@ -21,7 +83,7 @@
     "trailerParkingCapacity": 300,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 72.0,
+    "siteAreaAcres": 72,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@44.90460,-122.96170,400m/data=!3m1!1e3",
@@ -50,7 +112,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Truck-only entrance off Depot Court SE; internal yard controlled by a checkpoint with gate islands and lane markings.",
     "guardShack": "Small dark-roofed booth (~1-vehicle footprint) sits in the middle of the central truck drive between the RDC building and the trailer drop yard, with gate islands and a queuing truck visible at z20.",

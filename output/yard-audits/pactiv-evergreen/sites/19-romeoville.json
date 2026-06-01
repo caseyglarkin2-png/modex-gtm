@@ -1,19 +1,63 @@
 {
   "name": "Pactiv Evergreen - Romeoville Regional Mixing Center IL",
   "type": "Distribution Center / Regional Mixing Center",
-  "coords": { "lat": 41.627000, "lng": -88.116500 },
+  "coords": {
+    "lat": 41.627,
+    "lng": -88.1165
+  },
   "geofences": {
-    "perimeter": { "south": 41.62290, "west": -88.11920, "north": 41.63080, "east": -88.11270 },
-    "truckGate": { "south": 41.62600, "west": -88.11600, "north": 41.62650, "east": -88.11520 },
-    "dropYards": [
-      { "south": 41.62420, "west": -88.11920, "north": 41.63010, "east": -88.11790 },
-      { "south": 41.62450, "west": -88.11420, "north": 41.62960, "east": -88.11290 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.629053,
+          "lng": -88.123641
+        },
+        {
+          "lat": 41.629053,
+          "lng": -88.118697
+        },
+        {
+          "lat": 41.622483,
+          "lng": -88.118697
+        },
+        {
+          "lat": 41.622483,
+          "lng": -88.123641
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 41.62430, "west": -88.11830, "north": 41.62990, "east": -88.11760 },
-      { "south": 41.62460, "west": -88.11460, "north": 41.62950, "east": -88.11390 }
+      {
+        "ring": [
+          {
+            "lat": 41.628642,
+            "lng": -88.123641
+          },
+          {
+            "lat": 41.628642,
+            "lng": -88.121993
+          },
+          {
+            "lat": 41.622894,
+            "lng": -88.121993
+          },
+          {
+            "lat": 41.622894,
+            "lng": -88.123641
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 149,
+        "pano": "fem7WJxqX4aIYjGk0iVS1A",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 91,
@@ -21,7 +65,7 @@
     "trailerParkingCapacity": 180,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 50.0,
+    "siteAreaAcres": 50,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@41.627000,-88.116500,400m/data=!3m1!1e3",
@@ -50,7 +94,12 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "truckGate", "guardShack"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "truckGate",
+    "guardShack"
+  ],
   "fieldNotes": {
     "truckGate": "The RMC is reached by an open access drive off Taylor Rd; no barrier arm, sliding gate or checkpoint pinch-point is visible at the property line. A perimeter fence is visible around the dock yard edges, but the road entrance itself reads as an open drive. Classified false, flagged uncertain (entrance Street View panos placed the camera inside the yard rather than at the road gate).",
     "guardShack": "No clear guard-booth structure resolved at the road entrance; a small white structure sits near the entrance drive but could not be confirmed as a staffed booth versus a utility/water structure. Classified false, flagged uncertain.",

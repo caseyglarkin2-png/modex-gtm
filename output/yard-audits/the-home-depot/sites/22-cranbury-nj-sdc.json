@@ -1,19 +1,77 @@
 {
   "name": "Home Depot SDC - Cranbury NJ",
   "type": "Stocking Distribution Center",
-  "coords": { "lat": 40.307257, "lng": -74.498028 },
+  "coords": {
+    "lat": 40.307257,
+    "lng": -74.498028
+  },
   "geofences": {
-    "perimeter": { "south": 40.30490, "west": -74.50220, "north": 40.30960, "east": -74.49380 },
-    "truckGate": { "south": 40.30610, "west": -74.50040, "north": 40.30660, "east": -74.49980 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.308095,
+          "lng": -74.501187
+        },
+        {
+          "lat": 40.308095,
+          "lng": -74.495556
+        },
+        {
+          "lat": 40.306,
+          "lng": -74.495556
+        },
+        {
+          "lat": 40.306,
+          "lng": -74.501187
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 40.30790, "west": -74.50130, "north": 40.30940, "east": -74.49430 },
-      { "south": 40.30530, "west": -74.50000, "north": 40.30680, "east": -74.49420 }
+      {
+        "ring": [
+          {
+            "lat": 40.308304,
+            "lng": -74.501187
+          },
+          {
+            "lat": 40.308304,
+            "lng": -74.49638
+          },
+          {
+            "lat": 40.307781,
+            "lng": -74.49638
+          },
+          {
+            "lat": 40.307885,
+            "lng": -74.501187
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.30740, "west": -74.50130, "north": 40.30810, "east": -74.49440 },
-      { "south": 40.30650, "west": -74.50130, "north": 40.30720, "east": -74.49440 }
+      {
+        "ring": [
+          {
+            "lat": 40.306314,
+            "lng": -74.500775
+          },
+          {
+            "lat": 40.30621,
+            "lng": -74.495831
+          },
+          {
+            "lat": 40.305686,
+            "lng": -74.495831
+          },
+          {
+            "lat": 40.305791,
+            "lng": -74.500775
+          }
+        ]
+      }
     ],
-    "staging": { "south": 40.30620, "west": -74.50010, "north": 40.30720, "east": -74.49850 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 175,
@@ -21,7 +79,7 @@
     "trailerParkingCapacity": 260,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 56.0,
+    "siteAreaAcres": 56,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.307257,-74.498028,400m/data=!3m1!1e3",
@@ -50,7 +108,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Guarded checkpoint on the truck driveway ~150m in from Cranbury Station Road (~40.3063,-74.5001): a guard booth in a center median island with barrier arms extending across the inbound and outbound lanes — clear controlled entrance.",
     "guardShack": "Small booth with a distinctive pyramidal roof set in the median island between the two truck lanes, beside the barrier arms. Distinct from the DC building.",

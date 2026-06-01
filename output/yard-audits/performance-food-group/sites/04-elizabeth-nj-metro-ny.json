@@ -1,37 +1,151 @@
 {
   "name": "Performance Foodservice - Metro NY (Elizabeth NJ)",
   "type": "Broadline Foodservice Distribution Center",
-  "coords": { "lat": 40.67085, "lng": -74.17055 },
+  "coords": {
+    "lat": 40.67085,
+    "lng": -74.17055
+  },
   "geofences": {
-    "perimeter": { "south": 40.66950, "west": -74.17220, "north": 40.67230, "east": -74.16830 },
-    "truckGate": { "south": 40.67120, "west": -74.17110, "north": 40.67170, "east": -74.17030 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.67184,
+          "lng": -74.171511
+        },
+        {
+          "lat": 40.671892,
+          "lng": -74.169451
+        },
+        {
+          "lat": 40.669756,
+          "lng": -74.169245
+        },
+        {
+          "lat": 40.669704,
+          "lng": -74.171305
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.670069,
+          "lng": -74.171443
+        },
+        {
+          "lat": 40.670069,
+          "lng": -74.170893
+        },
+        {
+          "lat": 40.669756,
+          "lng": -74.170893
+        },
+        {
+          "lat": 40.669756,
+          "lng": -74.171443
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.67120, "west": -74.17000, "north": 40.67230, "east": -74.16830 }
+      {
+        "ring": [
+          {
+            "lat": 40.672517,
+            "lng": -74.170138
+          },
+          {
+            "lat": 40.672569,
+            "lng": -74.169177
+          },
+          {
+            "lat": 40.671215,
+            "lng": -74.169108
+          },
+          {
+            "lat": 40.671162,
+            "lng": -74.170069
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.67100, "west": -74.17080, "north": 40.67180, "east": -74.16900 }
+      {
+        "ring": [
+          {
+            "lat": 40.672308,
+            "lng": -74.170207
+          },
+          {
+            "lat": 40.67059,
+            "lng": -74.170207
+          },
+          {
+            "lat": 40.67059,
+            "lng": -74.169932
+          },
+          {
+            "lat": 40.672308,
+            "lng": -74.169932
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 31,
+        "pano": "suH3HIEEH1mGNREsdF-6GA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 31,
+        "pano": "suH3HIEEH1mGNREsdF-6GA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 45, "trailersVisible": 55, "trailerParkingCapacity": 90,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 20.0,
+    "dockDoorCount": 45,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 20,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.67085,-74.17055,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "location": "Confirmed via Street View — the building carries the red 'PERFORMANCE foodservice' logo on its office front facing Ikea Drive. Located at 1 Ikea Drive, Elizabeth NJ, in the Elizabeth port-industrial district adjacent to IKEA, Floor & Decor and the Maher container terminals. Center ~40.67085,-74.17055.",
     "truckGate": "Property is fully chain-link fenced along Ikea Drive (clearly visible in Street View). The truck yard and dock face are on the NE side; truck traffic enters through a fenced driveway. Gate hardware not individually resolved but the fenced single-driveway funnel supports a controlled entrance.",

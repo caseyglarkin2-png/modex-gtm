@@ -1,18 +1,75 @@
 {
   "name": "UNFI - Manchester PA DC",
   "type": "Distribution Center",
-  "coords": { "lat": 40.07043, "lng": -76.74648 },
+  "coords": {
+    "lat": 40.07043,
+    "lng": -76.74648
+  },
   "geofences": {
-    "perimeter": { "south": 40.06400, "west": -76.75250, "north": 40.07650, "east": -76.73950 },
-    "truckGate": { "south": 40.06620, "west": -76.74560, "north": 40.06740, "east": -76.74380 },
-    "dropYards": [
-      { "south": 40.06550, "west": -76.74300, "north": 40.07350, "east": -76.74050 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.075264,
+          "lng": -76.748677
+        },
+        {
+          "lat": 40.074634,
+          "lng": -76.742085
+        },
+        {
+          "lat": 40.068118,
+          "lng": -76.743184
+        },
+        {
+          "lat": 40.068959,
+          "lng": -76.749227
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.067908,
+          "lng": -76.747579
+        },
+        {
+          "lat": 40.067698,
+          "lng": -76.745931
+        },
+        {
+          "lat": 40.066436,
+          "lng": -76.746205
+        },
+        {
+          "lat": 40.066647,
+          "lng": -76.747853
+        }
+      ]
+    },
+    "dropYards": [],
     "dockAprons": [
-      { "south": 40.06800, "west": -76.75100, "north": 40.07550, "east": -76.74700 },
-      { "south": 40.06500, "west": -76.74700, "north": 40.07250, "east": -76.74350 }
+      {
+        "ring": [
+          {
+            "lat": 40.074634,
+            "lng": -76.748128
+          },
+          {
+            "lat": 40.074213,
+            "lng": -76.741811
+          },
+          {
+            "lat": 40.073373,
+            "lng": -76.742085
+          },
+          {
+            "lat": 40.073793,
+            "lng": -76.748403
+          }
+        ]
+      }
     ],
-    "staging": { "south": 40.06550, "west": -76.74600, "north": 40.06800, "east": -76.74300 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 214,
@@ -20,25 +77,44 @@
     "trailerParkingCapacity": 492,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 129.0,
+    "siteAreaAcres": 129,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.07043,-76.74648,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
   "uncertainFields": [
-    "guardShack", "remoteGs", "truckGate", "entryLanes", "exitLanes",
-    "preGateStaging", "scale", "multiStep"
+    "guardShack",
+    "remoteGs",
+    "truckGate",
+    "entryLanes",
+    "exitLanes",
+    "preGateStaging",
+    "scale",
+    "multiStep"
   ],
   "fieldNotes": {
     "location": "Confirmed: 1025 Locust Point Rd, Manchester PA. Roster ROOFTOP geocode 40.070433,-76.746475 lands squarely on the building. A single very large (~1.3M sq ft) DC building, oriented NE-SW, on a 129-acre parcel along the I-83 corridor in York County. Web-corroborated as UNFI's Class-A tri-temp build-to-suit, opened Q1 FY25.",

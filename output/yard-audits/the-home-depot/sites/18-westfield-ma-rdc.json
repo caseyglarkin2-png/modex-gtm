@@ -1,18 +1,77 @@
 {
   "name": "Home Depot RDC - Westfield MA",
   "type": "Rapid Deployment Center",
-  "coords": { "lat": 42.17030, "lng": -72.73620 },
+  "coords": {
+    "lat": 42.1703,
+    "lng": -72.7362
+  },
   "geofences": {
-    "perimeter": { "south": 42.16850, "west": -72.73850, "north": 42.17280, "east": -72.73330 },
-    "truckGate": { "south": 42.16910, "west": -72.73490, "north": 42.16965, "east": -72.73410 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.174371,
+          "lng": -72.7362
+        },
+        {
+          "lat": 42.173353,
+          "lng": -72.733179
+        },
+        {
+          "lat": 42.169689,
+          "lng": -72.735513
+        },
+        {
+          "lat": 42.170605,
+          "lng": -72.738123
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 42.16830, "west": -72.73620, "north": 42.16980, "east": -72.73470 }
+      {
+        "ring": [
+          {
+            "lat": 42.1703,
+            "lng": -72.737024
+          },
+          {
+            "lat": 42.169689,
+            "lng": -72.735101
+          },
+          {
+            "lat": 42.168977,
+            "lng": -72.735513
+          },
+          {
+            "lat": 42.169588,
+            "lng": -72.737436
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 42.16980, "west": -72.73790, "north": 42.17280, "east": -72.73620 },
-      { "south": 42.16980, "west": -72.73600, "north": 42.17280, "east": -72.73420 }
+      {
+        "ring": [
+          {
+            "lat": 42.173557,
+            "lng": -72.736749
+          },
+          {
+            "lat": 42.172641,
+            "lng": -72.734003
+          },
+          {
+            "lat": 42.169893,
+            "lng": -72.7362
+          },
+          {
+            "lat": 42.170605,
+            "lng": -72.737848
+          }
+        ]
+      }
     ],
-    "staging": { "south": 42.16965, "west": -72.73560, "north": 42.17030, "east": -72.73470 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 110,
@@ -20,7 +79,7 @@
     "trailerParkingCapacity": 130,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 50.0,
+    "siteAreaAcres": 50,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@42.17030,-72.73620,400m/data=!3m1!1e3",
@@ -49,7 +108,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "dropArea"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "dropArea"
+  ],
   "fieldNotes": {
     "truckGate": "Clear checkpoint with painted striped lane markings (pinch-point) on the SE access drive; a vehicle is stopped at it in z21 imagery.",
     "guardShack": "A small light-coloured booth sits right at the striped checkpoint with a car parked beside it — a staffed guard booth, not the main building.",

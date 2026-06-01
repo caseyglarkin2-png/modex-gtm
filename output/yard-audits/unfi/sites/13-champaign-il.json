@@ -1,17 +1,94 @@
 {
   "name": "UNFI - Champaign IL DC (Newell)",
   "type": "Distribution Center",
-  "coords": { "lat": 40.151009, "lng": -88.232322 },
+  "coords": {
+    "lat": 40.151009,
+    "lng": -88.232322
+  },
   "geofences": {
-    "perimeter": { "south": 0.14790, "west": -88.23560, "north": 0.15300, "east": -88.22870 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.152059,
+          "lng": -88.233283
+        },
+        {
+          "lat": 40.151954,
+          "lng": -88.230674
+        },
+        {
+          "lat": 40.149749,
+          "lng": -88.230811
+        },
+        {
+          "lat": 40.149854,
+          "lng": -88.233421
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.150274,
+          "lng": -88.233283
+        },
+        {
+          "lat": 40.150274,
+          "lng": -88.232459
+        },
+        {
+          "lat": 40.149644,
+          "lng": -88.232459
+        },
+        {
+          "lat": 40.149644,
+          "lng": -88.233283
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 0.14820, "west": -88.23480, "north": 0.15010, "east": -88.23380 },
-      { "south": 0.14900, "west": -88.23090, "north": 0.15240, "east": -88.22980 }
+      {
+        "ring": [
+          {
+            "lat": 40.152059,
+            "lng": -88.230262
+          },
+          {
+            "lat": 40.151954,
+            "lng": -88.228202
+          },
+          {
+            "lat": 40.150169,
+            "lng": -88.228339
+          },
+          {
+            "lat": 40.150274,
+            "lng": -88.230399
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 0.14920, "west": -88.23400, "north": 0.15240, "east": -88.23300 },
-      { "south": 0.14920, "west": -88.23260, "north": 0.15250, "east": -88.23150 }
+      {
+        "ring": [
+          {
+            "lat": 40.151744,
+            "lng": -88.233146
+          },
+          {
+            "lat": 40.151639,
+            "lng": -88.230949
+          },
+          {
+            "lat": 40.151324,
+            "lng": -88.231017
+          },
+          {
+            "lat": 40.151429,
+            "lng": -88.233215
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -21,23 +98,40 @@
     "trailerParkingCapacity": 130,
     "truckGateCount": 0,
     "buildingCount": 2,
-    "siteAreaAcres": 36.0,
+    "siteAreaAcres": 36,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.151009,-88.232322,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "multiStep"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "multiStep"
+  ],
   "fieldNotes": {
     "truckGate": "Open campus. No barrier arm, sliding/swing gate, or checkpoint pinch-point at any entry. Truck driveways run unobstructed off the shared industrial-park access road (Apollo Dr area) directly onto the truck pavement.",
     "guardShack": "No guard booth at any entrance. Only a UNFI directional sign at the access-road junction.",

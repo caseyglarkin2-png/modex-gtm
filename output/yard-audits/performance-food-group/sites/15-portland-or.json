@@ -1,15 +1,54 @@
 {
   "name": "Performance Foodservice - Pacific Northwest (Portland OR)",
   "type": "Broadline Foodservice Distribution Center",
-  "coords": { "lat": 45.53600, "lng": -122.46080 },
+  "coords": {
+    "lat": 45.536,
+    "lng": -122.4608
+  },
   "geofences": {
-    "perimeter": { "south": 45.53480, "west": -122.46180, "north": 45.53690, "east": -122.45980 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 45.537058,
+          "lng": -122.464233
+        },
+        {
+          "lat": 45.537058,
+          "lng": -122.46286
+        },
+        {
+          "lat": 45.534653,
+          "lng": -122.462723
+        },
+        {
+          "lat": 45.534653,
+          "lng": -122.464233
+        }
+      ]
+    },
     "truckGate": null,
-    "dropYards": [
-      { "south": 45.53510, "west": -122.46160, "north": 45.53590, "east": -122.46010 }
-    ],
+    "dropYards": [],
     "dockAprons": [
-      { "south": 45.53560, "west": -122.46160, "north": 45.53600, "east": -122.46000 }
+      {
+        "ring": [
+          {
+            "lat": 45.536962,
+            "lng": -122.464233
+          },
+          {
+            "lat": 45.536962,
+            "lng": -122.463821
+          },
+          {
+            "lat": 45.534942,
+            "lng": -122.463753
+          },
+          {
+            "lat": 45.534942,
+            "lng": -122.464233
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -48,7 +87,11 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "truckGate",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "No barrier arm or sliding gate observed at the truck-yard entrance; the building sits in an open multi-tenant Gresham/Portland industrial park and the access driveway from NE San Rafael St area is uncontrolled. Some perimeter fencing exists but no checkpoint structure.",
     "guardShack": "No guard booth observed at any entrance.",

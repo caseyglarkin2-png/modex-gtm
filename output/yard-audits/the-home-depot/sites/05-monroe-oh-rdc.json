@@ -1,19 +1,96 @@
 {
   "name": "Home Depot RDC - Monroe OH",
   "type": "Rapid Deployment Center",
-  "coords": { "lat": 39.43460, "lng": -84.32130 },
+  "coords": {
+    "lat": 39.4346,
+    "lng": -84.3213
+  },
   "geofences": {
-    "perimeter": { "south": 39.43100, "west": -84.32360, "north": 39.43850, "east": -84.31900 },
-    "truckGate": { "south": 39.43340, "west": -84.32320, "north": 39.43420, "east": -84.32230 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.437464,
+          "lng": -84.322673
+        },
+        {
+          "lat": 39.436721,
+          "lng": -84.319515
+        },
+        {
+          "lat": 39.431312,
+          "lng": -84.321437
+        },
+        {
+          "lat": 39.432054,
+          "lng": -84.324459
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 39.43620, "west": -84.32130, "north": 39.43770, "east": -84.31960 },
-      { "south": 39.43180, "west": -84.32060, "north": 39.43620, "east": -84.31960 }
+      {
+        "ring": [
+          {
+            "lat": 39.432585,
+            "lng": -84.323909
+          },
+          {
+            "lat": 39.431842,
+            "lng": -84.320613
+          },
+          {
+            "lat": 39.4311,
+            "lng": -84.320888
+          },
+          {
+            "lat": 39.431842,
+            "lng": -84.324184
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.43180, "west": -84.32230, "north": 39.43770, "east": -84.32130 },
-      { "south": 39.43180, "west": -84.32130, "north": 39.43770, "east": -84.32030 }
+      {
+        "ring": [
+          {
+            "lat": 39.436721,
+            "lng": -84.323223
+          },
+          {
+            "lat": 39.436085,
+            "lng": -84.320201
+          },
+          {
+            "lat": 39.43163,
+            "lng": -84.321987
+          },
+          {
+            "lat": 39.432267,
+            "lng": -84.323635
+          }
+        ]
+      }
     ],
-    "staging": { "south": 39.43250, "west": -84.32320, "north": 39.43420, "east": -84.32230 }
+    "staging": {
+      "ring": [
+        {
+          "lat": 39.437676,
+          "lng": -84.322124
+        },
+        {
+          "lat": 39.437146,
+          "lng": -84.319652
+        },
+        {
+          "lat": 39.436721,
+          "lng": -84.319927
+        },
+        {
+          "lat": 39.437252,
+          "lng": -84.322399
+        }
+      ]
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 220,
@@ -21,23 +98,40 @@
     "trailerParkingCapacity": 360,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 73.0,
+    "siteAreaAcres": 73,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.43460,-84.32130,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "scale"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "Trucker reviews of RDC 5084 explicitly describe a gated check-in with 10-20 min in-gate processing and 10-12 trucks queued at the entrance; the private campus ring road is the controlled truck approach to the building.",
     "guardShack": "Trucker reviews explicitly reference a 'guard shack' staffed by check-in personnel at this RDC. Booth not directly visible in public Street View (gate is internal to the private Gateway-park campus), but operational evidence is strong.",

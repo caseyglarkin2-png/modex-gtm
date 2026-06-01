@@ -1,17 +1,75 @@
 {
   "name": "UNFI - Dayville CT DC",
   "type": "Distribution Center",
-  "coords": { "lat": 41.86310, "lng": -71.90720 },
+  "coords": {
+    "lat": 41.8631,
+    "lng": -71.9072
+  },
   "geofences": {
-    "perimeter": { "south": 41.86120, "west": -71.90960, "north": 41.86560, "east": -71.90460 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.864736,
+          "lng": -71.909809
+        },
+        {
+          "lat": 41.864736,
+          "lng": -71.905552
+        },
+        {
+          "lat": 41.861873,
+          "lng": -71.905552
+        },
+        {
+          "lat": 41.861873,
+          "lng": -71.909809
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [
-      { "south": 41.86330, "west": -71.90640, "north": 41.86470, "east": -71.90420 },
-      { "south": 41.86450, "west": -71.90820, "north": 41.86560, "east": -71.90520 }
+      {
+        "ring": [
+          {
+            "lat": 41.864532,
+            "lng": -71.909535
+          },
+          {
+            "lat": 41.864532,
+            "lng": -71.908161
+          },
+          {
+            "lat": 41.862589,
+            "lng": -71.908161
+          },
+          {
+            "lat": 41.862589,
+            "lng": -71.909535
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.86140, "west": -71.90830, "north": 41.86230, "east": -71.90560 },
-      { "south": 41.86230, "west": -71.90910, "north": 41.86380, "east": -71.90840 }
+      {
+        "ring": [
+          {
+            "lat": 41.864532,
+            "lng": -71.908161
+          },
+          {
+            "lat": 41.864532,
+            "lng": -71.907887
+          },
+          {
+            "lat": 41.862589,
+            "lng": -71.907887
+          },
+          {
+            "lat": 41.862589,
+            "lng": -71.908161
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -50,7 +108,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "guardShack"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "guardShack"
+  ],
   "fieldNotes": {
     "truckGate": "No barrier arm or sliding gate at the public road (Lake Rd) or anywhere on the long internal access driveway. Street View 2009/2019 confirms an open campus driveway running from Lake Rd, past a pond, with only a monument sign at the road entrance. Open-campus archetype.",
     "guardShack": "No small staffed booth visible at the building, the trailer-yard mouth, or the driveway. The DC operates from a wholly internal driveway with no checkpoint structure. Listed uncertain because z20 winter imagery is mid-resolution; no booth-footprint structure found in any view.",

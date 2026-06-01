@@ -1,19 +1,96 @@
 {
   "name": "Home Depot SDC - Winchester VA",
   "type": "Stocking Distribution Center",
-  "coords": { "lat": 39.080075, "lng": -78.153229 },
+  "coords": {
+    "lat": 39.080075,
+    "lng": -78.153229
+  },
   "geofences": {
-    "perimeter": { "south": 39.07680, "west": -78.15720, "north": 39.08380, "east": -78.14880 },
-    "truckGate": { "south": 39.07985, "west": -78.15090, "north": 39.08035, "east": -78.15010 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.081567,
+          "lng": -78.155976
+        },
+        {
+          "lat": 39.0821,
+          "lng": -78.152542
+        },
+        {
+          "lat": 39.078369,
+          "lng": -78.150482
+        },
+        {
+          "lat": 39.07773,
+          "lng": -78.153916
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 39.08055, "west": -78.15230, "north": 39.08300, "east": -78.14980 },
-      { "south": 39.08130, "west": -78.15560, "north": 39.08320, "east": -78.15350 }
+      {
+        "ring": [
+          {
+            "lat": 39.081141,
+            "lng": -78.156388
+          },
+          {
+            "lat": 39.081674,
+            "lng": -78.154602
+          },
+          {
+            "lat": 39.078369,
+            "lng": -78.152954
+          },
+          {
+            "lat": 39.077836,
+            "lng": -78.154602
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.08000, "west": -78.15300, "north": 39.08260, "east": -78.15010 },
-      { "south": 39.07720, "west": -78.15620, "north": 39.08010, "east": -78.15280 }
+      {
+        "ring": [
+          {
+            "lat": 39.081781,
+            "lng": -78.154328
+          },
+          {
+            "lat": 39.081994,
+            "lng": -78.152405
+          },
+          {
+            "lat": 39.078796,
+            "lng": -78.151032
+          },
+          {
+            "lat": 39.078369,
+            "lng": -78.152954
+          }
+        ]
+      }
     ],
-    "staging": { "south": 39.07995, "west": -78.15140, "north": 39.08070, "east": -78.15010 }
+    "staging": {
+      "ring": [
+        {
+          "lat": 39.082527,
+          "lng": -78.155152
+        },
+        {
+          "lat": 39.082847,
+          "lng": -78.153229
+        },
+        {
+          "lat": 39.082207,
+          "lng": -78.152954
+        },
+        {
+          "lat": 39.081887,
+          "lng": -78.154877
+        }
+      ]
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 200,
@@ -21,7 +98,7 @@
     "trailerParkingCapacity": 220,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 62.0,
+    "siteAreaAcres": 62,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.080075,-78.153229,400m/data=!3m1!1e3",
@@ -50,7 +127,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Guarded checkpoint where the dedicated truck access road meets the truck yard at the SE corner; canopy structures span the inbound/outbound lanes with a striped channelizing median and painted directional arrows.",
     "guardShack": "Small booth-footprint structure with canopy spanning the lanes at the gate checkpoint (~39.0801,-78.1506), set beside the truck lanes — distinct from the main DC building.",

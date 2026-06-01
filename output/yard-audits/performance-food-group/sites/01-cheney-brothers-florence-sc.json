@@ -1,9 +1,31 @@
 {
   "name": "Cheney Brothers - Florence SC (new cold DC)",
   "type": "Refrigerated/Freezer Distribution Center",
-  "coords": { "lat": 34.271014, "lng": -79.694676 },
+  "coords": {
+    "lat": 34.271014,
+    "lng": -79.694676
+  },
   "geofences": {
-    "perimeter": { "south": 34.268400, "west": -79.698200, "north": 34.273600, "east": -79.690800 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.272603,
+          "lng": -79.697285
+        },
+        {
+          "lat": 34.273624,
+          "lng": -79.693577
+        },
+        {
+          "lat": 34.270447,
+          "lng": -79.692479
+        },
+        {
+          "lat": 34.269312,
+          "lng": -79.696049
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [],
@@ -15,28 +37,56 @@
     "trailerParkingCapacity": 0,
     "truckGateCount": 1,
     "buildingCount": 0,
-    "siteAreaAcres": 50.0,
+    "siteAreaAcres": 50,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.271014,-79.694676,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "NONE", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "multipleFacilities",
-    "scale", "dropYard", "multiStep"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "multipleFacilities",
+    "scale",
+    "dropYard",
+    "multiStep"
   ],
   "fieldNotes": {
     "siteStatus": "GREENFIELD UNDER CONSTRUCTION. Roster coordinates land on an active earthwork/grading pad in the Pee Dee Commerce City East Industrial Park. Latest available Maxar satellite and Feb-2024 Street View both show bare graded earth, silt fencing, and construction equipment - NO building, docks, gate, or trailers exist in imagery.",

@@ -1,38 +1,120 @@
 {
   "name": "Home Depot DFC - Locust Grove GA",
   "type": "Direct Fulfillment Center",
-  "coords": { "lat": 33.37055, "lng": -84.18450 },
+  "coords": {
+    "lat": 33.37055,
+    "lng": -84.1845
+  },
   "geofences": {
-    "perimeter": { "south": 33.36720, "west": -84.19030, "north": 33.37430, "east": -84.17880 },
-    "truckGate": { "south": 33.37300, "west": -84.18180, "north": 33.37390, "east": -84.18060 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.375137,
+          "lng": -84.189169
+        },
+        {
+          "lat": 33.374449,
+          "lng": -84.181204
+        },
+        {
+          "lat": 33.370091,
+          "lng": -84.181753
+        },
+        {
+          "lat": 33.37055,
+          "lng": -84.189719
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 33.37230, "west": -84.18950, "north": 33.37430, "east": -84.18000 }
+      {
+        "ring": [
+          {
+            "lat": 33.375137,
+            "lng": -84.189169
+          },
+          {
+            "lat": 33.374449,
+            "lng": -84.181753
+          },
+          {
+            "lat": 33.372844,
+            "lng": -84.182028
+          },
+          {
+            "lat": 33.373532,
+            "lng": -84.189169
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.37060, "west": -84.18960, "north": 33.37260, "east": -84.17900 },
-      { "south": 33.36740, "west": -84.18960, "north": 33.36880, "east": -84.18000 }
+      {
+        "ring": [
+          {
+            "lat": 33.371926,
+            "lng": -84.189169
+          },
+          {
+            "lat": 33.371467,
+            "lng": -84.181753
+          },
+          {
+            "lat": 33.370321,
+            "lng": -84.181753
+          },
+          {
+            "lat": 33.370779,
+            "lng": -84.189169
+          }
+        ]
+      }
     ],
-    "staging": { "south": 33.37230, "west": -84.18250, "north": 33.37320, "east": -84.18000 }
+    "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 160, "trailersVisible": 260, "trailerParkingCapacity": 320,
-    "truckGateCount": 2, "buildingCount": 2, "siteAreaAcres": 105.0,
+    "dockDoorCount": 160,
+    "trailersVisible": 260,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 2,
+    "buildingCount": 2,
+    "siteAreaAcres": 105,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.37055,-84.18450,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "buildingCount"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "buildingCount"
+  ],
   "fieldNotes": {
     "truckGate": "Controlled entrances off the perimeter road into a fenced truck court; the campus is fully enclosed with truck circulation wrapping the buildings.",
     "guardShack": "No staffed booth positively resolved at the entry in current imagery; classified as remote kiosk/app check-in. Lower-confidence call.",

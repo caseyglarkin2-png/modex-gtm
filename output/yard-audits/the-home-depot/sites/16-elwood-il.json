@@ -1,19 +1,77 @@
 {
   "name": "Home Depot RDC - Elwood IL",
   "type": "Rapid Deployment Center",
-  "coords": { "lat": 41.44010, "lng": -88.14320 },
+  "coords": {
+    "lat": 41.4401,
+    "lng": -88.1432
+  },
   "geofences": {
-    "perimeter": { "south": 41.43620, "west": -88.14620, "north": 41.44320, "east": -88.14070 },
-    "truckGate": { "south": 41.43620, "west": -88.14470, "north": 41.43710, "east": -88.14300 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.442159,
+          "lng": -88.146221
+        },
+        {
+          "lat": 41.444012,
+          "lng": -88.141552
+        },
+        {
+          "lat": 41.439585,
+          "lng": -88.138256
+        },
+        {
+          "lat": 41.437629,
+          "lng": -88.142925
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 41.43760, "west": -88.14600, "north": 41.44280, "east": -88.14470 },
-      { "south": 41.43800, "west": -88.14250, "north": 41.44280, "east": -88.14090 }
+      {
+        "ring": [
+          {
+            "lat": 41.441953,
+            "lng": -88.145947
+          },
+          {
+            "lat": 41.442468,
+            "lng": -88.144299
+          },
+          {
+            "lat": 41.438556,
+            "lng": -88.1432
+          },
+          {
+            "lat": 41.438041,
+            "lng": -88.144848
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.43760, "west": -88.14470, "north": 41.44280, "east": -88.14380 },
-      { "south": 41.43760, "west": -88.14260, "north": 41.44280, "east": -88.14180 }
+      {
+        "ring": [
+          {
+            "lat": 41.443394,
+            "lng": -88.142101
+          },
+          {
+            "lat": 41.443806,
+            "lng": -88.139904
+          },
+          {
+            "lat": 41.439894,
+            "lng": -88.138805
+          },
+          {
+            "lat": 41.439585,
+            "lng": -88.141003
+          }
+        ]
+      }
     ],
-    "staging": { "south": 41.43650, "west": -88.14430, "north": 41.43760, "east": -88.14250 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 150,
@@ -21,23 +79,39 @@
     "trailerParkingCapacity": 360,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 60.0,
+    "siteAreaAcres": 60,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.44010,-88.14320,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 3, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 3,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Cross-dock RDC #5851 (657K sq ft) in the CenterPoint Intermodal Center, Joliet/Elwood. A clear guarded gate complex on the south side: guard booth with a canopy, multiple inbound/outbound lanes, and a chevron-striped apron with trucks queued through the checkpoint (z19 imagery).",
     "guardShack": "A canopy-roofed guard booth straddling the gate lanes is plainly visible at the south truck entrance. remoteGs = false accordingly.",

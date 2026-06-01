@@ -1,17 +1,84 @@
 {
   "name": "Pactiv Evergreen - Conyers GA",
   "type": "Manufacturing Plant (Foodservice)",
-  "coords": { "lat": 33.67700, "lng": -84.03680 },
+  "coords": {
+    "lat": 33.677,
+    "lng": -84.0368
+  },
   "geofences": {
-    "perimeter": { "south": 33.67540, "west": -84.03840, "north": 33.67835, "east": -84.03570 },
-    "truckGate": { "south": 33.67555, "west": -84.03690, "north": 33.67580, "east": -84.03650 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.677457,
+          "lng": -84.037899
+        },
+        {
+          "lat": 33.677343,
+          "lng": -84.036113
+        },
+        {
+          "lat": 33.6754,
+          "lng": -84.036663
+        },
+        {
+          "lat": 33.675514,
+          "lng": -84.038448
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 33.67540, "west": -84.03760, "north": 33.67610, "east": -84.03650 }
+      {
+        "ring": [
+          {
+            "lat": 33.675857,
+            "lng": -84.037487
+          },
+          {
+            "lat": 33.675743,
+            "lng": -84.036251
+          },
+          {
+            "lat": 33.675171,
+            "lng": -84.036319
+          },
+          {
+            "lat": 33.675286,
+            "lng": -84.037555
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.67555, "west": -84.03760, "north": 33.67640, "east": -84.03660 }
+      {
+        "ring": [
+          {
+            "lat": 33.677,
+            "lng": -84.037967
+          },
+          {
+            "lat": 33.676886,
+            "lng": -84.036457
+          },
+          {
+            "lat": 33.676543,
+            "lng": -84.036525
+          },
+          {
+            "lat": 33.676657,
+            "lng": -84.038036
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 32,
+        "pano": "CTIoAsZMk8DvA_9SoAlh_g",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 18,
@@ -19,7 +86,7 @@
     "trailerParkingCapacity": 55,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 17.0,
+    "siteAreaAcres": 17,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.67700,-84.03680,400m/data=!3m1!1e3",
@@ -48,7 +115,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Compound fully enclosed by chain-link fence; single access road off Rockdale Industrial Blvd terminates in a chain-link gate across the truck lane (2026-02 Street View).",
     "guardShack": "No staffed booth visible at the fence gate or building front in any Street View heading (2026-02 imagery). Gate is chain-link only.",

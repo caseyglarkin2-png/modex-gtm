@@ -1,17 +1,63 @@
 {
   "name": "Pactiv Evergreen - Stockton CA",
   "type": "Manufacturing Plant (Foodservice; co-located warehouse)",
-  "coords": { "lat": 37.89400, "lng": -121.26035 },
+  "coords": {
+    "lat": 37.894,
+    "lng": -121.26035
+  },
   "geofences": {
-    "perimeter": { "south": 37.89255, "west": -121.26165, "north": 37.89540, "east": -121.25910 },
-    "truckGate": { "south": 37.89255, "west": -121.26020, "north": 37.89300, "east": -121.25955 },
-    "dropYards": [
-      { "south": 37.89300, "west": -121.26100, "north": 37.89470, "east": -121.25985 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.895734,
+          "lng": -121.262067
+        },
+        {
+          "lat": 37.895734,
+          "lng": -121.259251
+        },
+        {
+          "lat": 37.892483,
+          "lng": -121.25932
+        },
+        {
+          "lat": 37.892483,
+          "lng": -121.262135
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 37.89300, "west": -121.26110, "north": 37.89480, "east": -121.26005 }
+      {
+        "ring": [
+          {
+            "lat": 37.895084,
+            "lng": -121.261998
+          },
+          {
+            "lat": 37.895084,
+            "lng": -121.261723
+          },
+          {
+            "lat": 37.89335,
+            "lng": -121.261723
+          },
+          {
+            "lat": 37.89335,
+            "lng": -121.261998
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 348,
+        "pano": "doYF0-Ly82BOe5Gn_4P5_A",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 40,
@@ -48,7 +94,12 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes", "truckGate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes",
+    "truckGate"
+  ],
   "fieldNotes": {
     "truckGate": "The truck dock court runs along the SW face of the building - a long fenced corridor shared with the rail spur. Mar-2026 Street View at the SE corridor mouth (where it meets the public street and crosses the rail) shows a chain-link perimeter fence with a sliding gate across the truck corridor entrance. The NE office/visitor frontage on Performance Drive is open (no barrier, no booth) but the truck/dock side is fence-and-gate controlled. Verdict: gated truck side.",
     "guardShack": "No staffed guard booth visible at either the SE corridor gate or the NE office entrance. The corridor gate is an unmanned chain-link sliding gate.",

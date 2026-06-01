@@ -1,17 +1,108 @@
 {
   "name": "UNFI - Howell NJ DC",
   "type": "Distribution Center",
-  "coords": { "lat": 40.13970, "lng": -74.18790 },
+  "coords": {
+    "lat": 40.1397,
+    "lng": -74.1879
+  },
   "geofences": {
-    "perimeter": { "south": 40.13650, "west": -74.19150, "north": 40.14250, "east": -74.18550 },
-    "truckGate": { "south": 40.13750, "west": -74.19000, "north": 40.13850, "east": -74.18850 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.14138,
+          "lng": -74.190235
+        },
+        {
+          "lat": 40.140645,
+          "lng": -74.186252
+        },
+        {
+          "lat": 40.13802,
+          "lng": -74.187213
+        },
+        {
+          "lat": 40.138755,
+          "lng": -74.191059
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.139175,
+          "lng": -74.190784
+        },
+        {
+          "lat": 40.13907,
+          "lng": -74.190097
+        },
+        {
+          "lat": 40.138545,
+          "lng": -74.190235
+        },
+        {
+          "lat": 40.13865,
+          "lng": -74.190921
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.13900, "west": -74.19000, "north": 40.14150, "east": -74.18820 }
+      {
+        "ring": [
+          {
+            "lat": 40.138125,
+            "lng": -74.189548
+          },
+          {
+            "lat": 40.13781,
+            "lng": -74.187625
+          },
+          {
+            "lat": 40.13718,
+            "lng": -74.187763
+          },
+          {
+            "lat": 40.137495,
+            "lng": -74.189685
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.13780, "west": -74.18980, "north": 40.14100, "east": -74.18800 }
+      {
+        "ring": [
+          {
+            "lat": 40.140855,
+            "lng": -74.190097
+          },
+          {
+            "lat": 40.140225,
+            "lng": -74.186527
+          },
+          {
+            "lat": 40.139805,
+            "lng": -74.186664
+          },
+          {
+            "lat": 40.140435,
+            "lng": -74.190235
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 144,
+        "pano": "L2aIWhz9f4JERiZxrG6WPA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 144,
+        "pano": "L2aIWhz9f4JERiZxrG6WPA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 55,
@@ -19,26 +110,48 @@
     "trailerParkingCapacity": 70,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 42.0,
+    "siteAreaAcres": 42,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.13970,-74.18790,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes",
-    "preGateStaging", "postGateStaging", "fastLaneOpportunity", "dropArea",
-    "urbanRural", "scale", "multiStep"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "preGateStaging",
+    "postGateStaging",
+    "fastLaneOpportunity",
+    "dropArea",
+    "urbanRural",
+    "scale",
+    "multiStep"
   ],
   "fieldNotes": {
     "location": "Confirmed UNFI Howell NJ DC, 433 Oak Glen Rd, Howell NJ 07731. Roster ROOFTOP geocode 40.139697,-74.187949 lands squarely on a large distribution building with near-full rooftop solar coverage in a heavily wooded parcel off Oak Glen Rd, Monmouth County NJ. Web-corroborated: BBB / Panjiva / NJ BPU filing / Yellow Pages - a 385,000 sq ft UNFI natural/organic specialty DC; the NJ BPU filing documents two rooftop solar arrays (1.575 MW Project A + 1.652 MW Project B), matching the solar-covered roof in imagery.",

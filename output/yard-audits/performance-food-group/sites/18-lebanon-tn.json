@@ -1,17 +1,74 @@
 {
   "name": "Performance Foodservice - Nashville (Lebanon TN)",
   "type": "Broadline Foodservice Distribution Center",
-  "coords": { "lat": 36.17540, "lng": -86.28810 },
+  "coords": {
+    "lat": 36.1754,
+    "lng": -86.2881
+  },
   "geofences": {
-    "perimeter": { "south": 36.173514, "west": -86.290882, "north": 36.177286, "east": -86.285318 },
-    "truckGate": { "south": 36.175061, "west": -86.287079, "north": 36.176139, "east": -86.285521 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.176619,
+          "lng": -86.289473
+        },
+        {
+          "lat": 36.176619,
+          "lng": -86.286452
+        },
+        {
+          "lat": 36.174513,
+          "lng": -86.286452
+        },
+        {
+          "lat": 36.174513,
+          "lng": -86.289473
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 36.175622,
+          "lng": -86.289611
+        },
+        {
+          "lat": 36.175622,
+          "lng": -86.288787
+        },
+        {
+          "lat": 36.174957,
+          "lng": -86.288787
+        },
+        {
+          "lat": 36.174957,
+          "lng": -86.289611
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 36.173953, "west": -86.290602, "north": 36.176647, "east": -86.288598 },
-      { "south": 36.173881, "west": -86.286324, "north": 36.175319, "east": -86.283876 }
+      {
+        "ring": [
+          {
+            "lat": 36.175622,
+            "lng": -86.289473
+          },
+          {
+            "lat": 36.175622,
+            "lng": -86.287551
+          },
+          {
+            "lat": 36.174513,
+            "lng": -86.287551
+          },
+          {
+            "lat": 36.174513,
+            "lng": -86.289473
+          }
+        ]
+      }
     ],
-    "dockAprons": [
-      { "south": 36.174271, "west": -86.289781, "north": 36.175529, "east": -86.286219 }
-    ],
+    "dockAprons": [],
     "staging": null
   },
   "yardMetrics": {
@@ -49,7 +106,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point at any driveway. Street View (Dec 2024) along the full Maddox-Simpson Pkwy frontage from multiple headings shows open driveways onto the industrial-park loop road with no control structure. Site is an open campus typical of a small-town industrial park.",
     "guardShack": "No staffed booth at any entrance. The brick building with garage bays seen in Street View on the south access road is a separate maintenance/shop building, not a guard booth.",

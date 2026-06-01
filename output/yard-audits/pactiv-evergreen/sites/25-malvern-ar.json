@@ -1,18 +1,84 @@
 {
   "name": "Pactiv Evergreen - Malvern AR",
   "type": "Manufacturing Plant (Food Merchandising; polystyrene foam food tray converting; ISCC PLUS certified)",
-  "coords": { "lat": 34.378750, "lng": -92.819200 },
+  "coords": {
+    "lat": 34.37875,
+    "lng": -92.8192
+  },
   "geofences": {
-    "perimeter": { "south": 34.376900, "west": -92.821200, "north": 34.381100, "east": -92.817400 },
-    "truckGate": { "south": 34.377900, "west": -92.819700, "north": 34.378250, "east": -92.819300 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.38011,
+          "lng": -92.821397
+        },
+        {
+          "lat": 34.379883,
+          "lng": -92.817552
+        },
+        {
+          "lat": 34.376937,
+          "lng": -92.817827
+        },
+        {
+          "lat": 34.377163,
+          "lng": -92.821672
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 34.377100, "west": -92.819200, "north": 34.378100, "east": -92.817800 },
-      { "south": 34.380000, "west": -92.821000, "north": 34.381000, "east": -92.819600 }
+      {
+        "ring": [
+          {
+            "lat": 34.380903,
+            "lng": -92.820573
+          },
+          {
+            "lat": 34.380677,
+            "lng": -92.817552
+          },
+          {
+            "lat": 34.379997,
+            "lng": -92.817689
+          },
+          {
+            "lat": 34.380223,
+            "lng": -92.820711
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 34.377900, "west": -92.819300, "north": 34.378250, "east": -92.817900 }
+      {
+        "ring": [
+          {
+            "lat": 34.37875,
+            "lng": -92.820848
+          },
+          {
+            "lat": 34.37875,
+            "lng": -92.820161
+          },
+          {
+            "lat": 34.376937,
+            "lng": -92.820299
+          },
+          {
+            "lat": 34.37705,
+            "lng": -92.820985
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 14,
+        "pano": "as3UT9lHKorm_n6lBwHF4g",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 22,
@@ -20,7 +86,7 @@
     "trailerParkingCapacity": 90,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 33.0,
+    "siteAreaAcres": 33,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@34.378750,-92.819200,400m/data=!3m1!1e3",
@@ -49,7 +115,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "Confirmed via 2023-01 Street View showing a blue 'PACTIV' silo/tank and the plant's office front on Industrial Lane, plus the company sign post at the driveway. Web search corroborates the polystyrene-foam-tray plant at 1105 Industrial Lane, Malvern AR (~160 employees, plant manager Bruce Deer). The roster geocode (moved 290 m) lands on the western half of the main plant building; locked center moved to the building cluster centroid.",
     "truckGate": "Continuous chain-link perimeter fence rings the property along Industrial Lane (confirmed in three 2023 Street View headings). The SE driveway entrance has a rolling/sliding gate panel in the fence line with the Pactiv sign beside it - a controlled truck gate. truckGate true.",
