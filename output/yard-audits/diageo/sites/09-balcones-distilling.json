@@ -9,34 +9,96 @@
     "perimeter": {
       "ring": [
         {
-          "lat": 31.550629,
-          "lng": -97.135897
+          "lat": 31.550673,
+          "lng": -97.135879
         },
         {
-          "lat": 31.550556,
-          "lng": -97.135553
+          "lat": 31.550644,
+          "lng": -97.13545
         },
         {
           "lat": 31.549883,
-          "lng": -97.135553
+          "lng": -97.135485
         },
         {
-          "lat": 31.549854,
-          "lng": -97.135897
-        },
-        {
-          "lat": 31.550439,
-          "lng": -97.135948
+          "lat": 31.549913,
+          "lng": -97.135914
         }
       ]
     },
-    "truckGate": null,
-    "dropYards": [],
-    "dockAprons": [],
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 31.55022,
+          "lng": -97.135897
+        },
+        {
+          "lat": 31.55022,
+          "lng": -97.135794
+        },
+        {
+          "lat": 31.550147,
+          "lng": -97.135794
+        },
+        {
+          "lat": 31.550147,
+          "lng": -97.135897
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 31.550586,
+            "lng": -97.135725
+          },
+          {
+            "lat": 31.550571,
+            "lng": -97.13545
+          },
+          {
+            "lat": 31.550293,
+            "lng": -97.135468
+          },
+          {
+            "lat": 31.550308,
+            "lng": -97.135742
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 31.550556,
+            "lng": -97.135862
+          },
+          {
+            "lat": 31.550556,
+            "lng": -97.135742
+          },
+          {
+            "lat": 31.550059,
+            "lng": -97.135759
+          },
+          {
+            "lat": 31.550059,
+            "lng": -97.135879
+          }
+        ]
+      }
+    ],
     "staging": null,
     "streetViewMeta": {
       "perimeter": {
-        "heading": 191,
+        "heading": 181,
+        "pano": "FlXrijwX1gQvaq9pLOtNrw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 181,
         "pano": "FlXrijwX1gQvaq9pLOtNrw",
         "hasCoverage": true
       }

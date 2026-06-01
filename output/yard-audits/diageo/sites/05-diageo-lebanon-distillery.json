@@ -9,39 +9,97 @@
     "perimeter": {
       "ring": [
         {
-          "lat": 37.547804,
-          "lng": -85.285592
+          "lat": 37.547695,
+          "lng": -85.285317
         },
         {
           "lat": 37.547804,
-          "lng": -85.278313
-        },
-        {
-          "lat": 37.545844,
           "lng": -85.277352
         },
         {
-          "lat": 37.543993,
-          "lng": -85.277901
-        },
-        {
-          "lat": 37.543993,
-          "lng": -85.283395
-        },
-        {
           "lat": 37.544756,
-          "lng": -85.285592
+          "lng": -85.277352
+        },
+        {
+          "lat": 37.544647,
+          "lng": -85.285317
         }
       ]
     },
-    "truckGate": null,
-    "dropYards": [],
-    "dockAprons": [],
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 37.545736,
+          "lng": -85.278176
+        },
+        {
+          "lat": 37.545736,
+          "lng": -85.277352
+        },
+        {
+          "lat": 37.5453,
+          "lng": -85.277352
+        },
+        {
+          "lat": 37.5453,
+          "lng": -85.278176
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 37.547478,
+            "lng": -85.284081
+          },
+          {
+            "lat": 37.547478,
+            "lng": -85.279137
+          },
+          {
+            "lat": 37.545844,
+            "lng": -85.279137
+          },
+          {
+            "lat": 37.545844,
+            "lng": -85.284081
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 37.54628,
+            "lng": -85.279
+          },
+          {
+            "lat": 37.54628,
+            "lng": -85.277352
+          },
+          {
+            "lat": 37.545736,
+            "lng": -85.277352
+          },
+          {
+            "lat": 37.545736,
+            "lng": -85.279
+          }
+        ]
+      }
+    ],
     "staging": null,
     "streetViewMeta": {
       "perimeter": {
-        "heading": 260,
-        "pano": "F2Lr3LASMsgcjwOGXmc17Q",
+        "heading": 278,
+        "pano": "9yuFSnHIihONDfc3XxiSdw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 278,
+        "pano": "9yuFSnHIihONDfc3XxiSdw",
         "hasCoverage": true
       }
     }

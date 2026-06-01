@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-05-31T23:39:59.466Z",
+  "builtAt": "2026-06-01T00:33:58.903Z",
   "account": {
     "slug": "boston-beer-company",
     "displayName": "The Boston Beer Company",
@@ -18,10 +18,10 @@
   "research": null,
   "network": {
     "bbox": [
-      -84.523081,
+      -84.523699,
       38.769643,
       -71.102139,
-      42.314932
+      42.314906
     ],
     "archetypeMix": {
       "#6": 1,
@@ -100,20 +100,20 @@
           "truckGate": {
             "ring": [
               {
-                "lat": 40.578212,
-                "lng": -75.630697
+                "lat": 40.578108,
+                "lng": -75.630835
               },
               {
-                "lat": 40.578316,
+                "lat": 40.578212,
                 "lng": -75.629873
               },
               {
-                "lat": 40.577899,
+                "lat": 40.577795,
                 "lng": -75.629736
               },
               {
-                "lat": 40.577795,
-                "lng": -75.63056
+                "lat": 40.57769,
+                "lng": -75.630697
               }
             ]
           },
@@ -121,40 +121,20 @@
             {
               "ring": [
                 {
-                  "lat": 40.576126,
-                  "lng": -75.631659
+                  "lat": 40.576022,
+                  "lng": -75.631521
                 },
                 {
-                  "lat": 40.575917,
+                  "lat": 40.575865,
                   "lng": -75.629873
                 },
                 {
-                  "lat": 40.574561,
-                  "lng": -75.629873
+                  "lat": 40.574613,
+                  "lng": -75.630011
                 },
                 {
                   "lat": 40.57477,
                   "lng": -75.631659
-                }
-              ]
-            },
-            {
-              "ring": [
-                {
-                  "lat": 40.574978,
-                  "lng": -75.629599
-                },
-                {
-                  "lat": 40.574978,
-                  "lng": -75.627676
-                },
-                {
-                  "lat": 40.574248,
-                  "lng": -75.627676
-                },
-                {
-                  "lat": 40.574248,
-                  "lng": -75.629599
                 }
               ]
             }
@@ -163,20 +143,20 @@
             {
               "ring": [
                 {
-                  "lat": 40.5755,
-                  "lng": -75.629187
+                  "lat": 40.575969,
+                  "lng": -75.629873
                 },
                 {
-                  "lat": 40.5755,
+                  "lat": 40.576282,
                   "lng": -75.627127
                 },
                 {
-                  "lat": 40.574874,
-                  "lng": -75.627127
+                  "lat": 40.575761,
+                  "lng": -75.626989
                 },
                 {
-                  "lat": 40.574874,
-                  "lng": -75.629187
+                  "lat": 40.575448,
+                  "lng": -75.629736
                 }
               ]
             }
@@ -337,63 +317,96 @@
             "ring": [
               {
                 "lat": 39.115438,
-                "lng": -84.523081
+                "lng": -84.523149
               },
               {
-                "lat": 39.115172,
-                "lng": -84.521501
-              },
-              {
-                "lat": 39.114266,
-                "lng": -84.521433
-              },
-              {
-                "lat": 39.113893,
+                "lat": 39.115225,
                 "lng": -84.521776
               },
               {
-                "lat": 39.113893,
-                "lng": -84.5226
+                "lat": 39.113734,
+                "lng": -84.522257
               },
               {
-                "lat": 39.114266,
-                "lng": -84.522943
-              },
-              {
-                "lat": 39.114906,
-                "lng": -84.523012
+                "lat": 39.113947,
+                "lng": -84.523699
               }
             ]
           },
-          "truckGate": null,
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 39.114533,
+                "lng": -84.523287
+              },
+              {
+                "lat": 39.114479,
+                "lng": -84.522875
+              },
+              {
+                "lat": 39.114213,
+                "lng": -84.522943
+              },
+              {
+                "lat": 39.114266,
+                "lng": -84.523355
+              }
+            ]
+          },
           "dropYards": [
             {
               "ring": [
                 {
-                  "lat": 39.115066,
-                  "lng": -84.524523
+                  "lat": 39.114746,
+                  "lng": -84.524797
                 },
                 {
-                  "lat": 39.114906,
-                  "lng": -84.523424
+                  "lat": 39.114586,
+                  "lng": -84.523973
                 },
                 {
                   "lat": 39.114,
-                  "lng": -84.523493
+                  "lng": -84.524179
                 },
                 {
                   "lat": 39.11416,
-                  "lng": -84.524523
+                  "lng": -84.525003
                 }
               ]
             }
           ],
-          "dockAprons": [],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 39.115066,
+                  "lng": -84.523287
+                },
+                {
+                  "lat": 39.114906,
+                  "lng": -84.522325
+                },
+                {
+                  "lat": 39.114693,
+                  "lng": -84.522394
+                },
+                {
+                  "lat": 39.114852,
+                  "lng": -84.523355
+                }
+              ]
+            }
+          ],
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 29,
-              "pano": "0UkHYeCBPb5tL7e_NAPJKQ",
+              "heading": 28,
+              "pano": "ZNSO9k8BqXAs7mT9Nx34eg",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 28,
+              "pano": "ZNSO9k8BqXAs7mT9Nx34eg",
               "hasCoverage": true
             }
           }
@@ -430,6 +443,42 @@
           "scale": false,
           "dropYard": true,
           "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
         },
         "dossierExcerpt": "The roster's ROOFTOP geocode (39.114319, -84.522324) landed directly on the\nbrewery complex. Satellite probing (z17-z20) confirmed a dense industrial\ncomplex with extensive brewing process equipment, tank/silo clusters, and\nmulti-story manufacturing buildings — the unmistakable signature of a production\nbrewery. Web research confirms 1625 Central Parkway is the former Schoenling /\nHudepohl-Schoenling plant, acquired by Boston Beer in 1997 and operated as the\nSamuel Adams Cincinnati Brewery; the company invested $85M in 2020 to quadruple\ncanning capacity. The attached taproom is at 1727 Logan St on the same block.",
         "mapsUrl": "https://www.google.com/maps/@39.114,-84.5226,400m/data=!3m1!1e3",
@@ -492,59 +541,62 @@
           "perimeter": {
             "ring": [
               {
-                "lat": 38.771249,
-                "lng": -75.311099
-              },
-              {
                 "lat": 38.771035,
-                "lng": -75.309176
+                "lng": -75.311167
               },
               {
-                "lat": 38.770393,
-                "lng": -75.309107
-              },
-              {
-                "lat": 38.770018,
+                "lat": 38.770928,
                 "lng": -75.309313
               },
               {
                 "lat": 38.769643,
-                "lng": -75.310206
+                "lng": -75.309451
               },
               {
-                "lat": 38.769858,
-                "lng": -75.310961
-              },
-              {
-                "lat": 38.770393,
+                "lat": 38.769751,
                 "lng": -75.311305
-              },
-              {
-                "lat": 38.770875,
-                "lng": -75.311167
               }
             ]
           },
-          "truckGate": null,
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 38.770179,
+                "lng": -75.309657
+              },
+              {
+                "lat": 38.770125,
+                "lng": -75.309176
+              },
+              {
+                "lat": 38.769858,
+                "lng": -75.309245
+              },
+              {
+                "lat": 38.769911,
+                "lng": -75.309725
+              }
+            ]
+          },
           "dropYards": [],
           "dockAprons": [
             {
               "ring": [
                 {
-                  "lat": 38.770232,
+                  "lat": 38.770714,
+                  "lng": -75.31103
+                },
+                {
+                  "lat": 38.770661,
                   "lng": -75.31
                 },
                 {
-                  "lat": 38.770179,
-                  "lng": -75.309176
+                  "lat": 38.770446,
+                  "lng": -75.310069
                 },
                 {
-                  "lat": 38.769911,
-                  "lng": -75.309176
-                },
-                {
-                  "lat": 38.769911,
-                  "lng": -75.31
+                  "lat": 38.7705,
+                  "lng": -75.311099
                 }
               ]
             }
@@ -552,8 +604,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 131,
-              "pano": "Q-1Uynp79tTe9FgdFQ322g",
+              "heading": 53,
+              "pano": "5tIzb7Z8iTh9tJPoMdbuLA",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 53,
+              "pano": "5tIzb7Z8iTh9tJPoMdbuLA",
               "hasCoverage": true
             }
           }
@@ -687,31 +744,19 @@
             "ring": [
               {
                 "lat": 42.314906,
-                "lng": -71.10334
+                "lng": -71.103306
               },
               {
-                "lat": 42.314932,
-                "lng": -71.102688
-              },
-              {
-                "lat": 42.314779,
+                "lat": 42.314855,
                 "lng": -71.102139
               },
               {
-                "lat": 42.314449,
+                "lat": 42.314373,
                 "lng": -71.102276
               },
               {
-                "lat": 42.314322,
-                "lng": -71.102825
-              },
-              {
-                "lat": 42.314373,
-                "lng": -71.103272
-              },
-              {
-                "lat": 42.314627,
-                "lng": -71.103375
+                "lat": 42.314424,
+                "lng": -71.103443
               }
             ]
           },
@@ -721,8 +766,8 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 65,
-              "pano": "dQvUT_TKclR8mtVx5esQWg",
+              "heading": 73,
+              "pano": "FjbQdcCym_JtO5db3maTgQ",
               "hasCoverage": true
             }
           }
@@ -819,36 +864,20 @@
           "perimeter": {
             "ring": [
               {
-                "lat": 41.590203,
-                "lng": -74.225373
+                "lat": 41.590305,
+                "lng": -74.224961
               },
               {
                 "lat": 41.590203,
-                "lng": -74.223313
+                "lng": -74.223039
               },
               {
-                "lat": 41.589689,
-                "lng": -74.222627
+                "lat": 41.589073,
+                "lng": -74.223176
               },
               {
-                "lat": 41.588251,
-                "lng": -74.222352
-              },
-              {
-                "lat": 41.587019,
-                "lng": -74.223313
-              },
-              {
-                "lat": 41.586813,
-                "lng": -74.224687
-              },
-              {
-                "lat": 41.587635,
-                "lng": -74.225648
-              },
-              {
-                "lat": 41.589278,
-                "lng": -74.225785
+                "lat": 41.589176,
+                "lng": -74.225099
               }
             ]
           },

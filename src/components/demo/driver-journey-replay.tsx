@@ -151,6 +151,19 @@ export function DriverJourneyReplay({ site, scenario, onClose }: Props) {
           </div>
         </div>
 
+        {/* Flagship proof — anchors the modeled per-run delta above in a real,
+            named-customer result so the value reads as proven, not projected.
+            Primo Brands is YardFlow's flagship reference account. */}
+        <div className="mb-3 rounded-lg border border-emerald-400/30 bg-emerald-400/[0.06] px-4 py-3">
+          <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-emerald-400">
+            Flagship result · Primo Brands
+          </div>
+          <p className="mt-1 text-sm leading-relaxed text-white/90">
+            Drop-and-hook turn times cut from <span className="font-semibold text-white">~48 min</span> to{' '}
+            <span className="font-semibold text-emerald-300">~24 min</span> — cut in half across the yard.
+          </p>
+        </div>
+
         {/* Conversion CTA — fires right after the prospect sees the YNS-saves
             delta on their own yard. The 30-min audit is the canonical next
             step on yardflow.ai; this just makes it one click away. */}

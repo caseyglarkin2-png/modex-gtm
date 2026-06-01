@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-05-31T23:43:52.053Z",
+  "builtAt": "2026-06-01T00:34:33.268Z",
   "account": {
     "slug": "diageo",
     "displayName": "Diageo",
@@ -18,9 +18,9 @@
   "research": null,
   "network": {
     "bbox": [
-      -97.135948,
+      -97.135914,
       17.7048,
-      -64.841427,
+      -64.841701,
       41.628798
     ],
     "archetypeMix": {
@@ -56,49 +56,60 @@
           "perimeter": {
             "ring": [
               {
-                "lat": 41.625127,
+                "lat": 41.626153,
                 "lng": -88.216599
               },
               {
-                "lat": 41.624819,
+                "lat": 41.625024,
                 "lng": -88.212204
-              },
-              {
-                "lat": 41.622457,
-                "lng": -88.212204
-              },
-              {
-                "lat": 41.621842,
-                "lng": -88.213303
               },
               {
                 "lat": 41.62215,
-                "lng": -88.216461
+                "lng": -88.212753
               },
               {
-                "lat": 41.623587,
+                "lat": 41.622457,
+                "lng": -88.217423
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 41.622457,
+                "lng": -88.216873
+              },
+              {
+                "lat": 41.622457,
+                "lng": -88.215912
+              },
+              {
+                "lat": 41.622047,
+                "lng": -88.215912
+              },
+              {
+                "lat": 41.622047,
                 "lng": -88.216873
               }
             ]
           },
-          "truckGate": null,
           "dropYards": [
             {
               "ring": [
                 {
                   "lat": 41.6241,
-                  "lng": -88.219208
+                  "lng": -88.219071
                 },
                 {
-                  "lat": 41.623997,
+                  "lat": 41.623792,
                   "lng": -88.216599
+                },
+                {
+                  "lat": 41.622457,
+                  "lng": -88.216736
                 },
                 {
                   "lat": 41.622765,
-                  "lng": -88.216599
-                },
-                {
-                  "lat": 41.622868,
                   "lng": -88.219208
                 }
               ]
@@ -108,19 +119,19 @@
             {
               "ring": [
                 {
-                  "lat": 41.6241,
-                  "lng": -88.216461
-                },
-                {
-                  "lat": 41.623997,
-                  "lng": -88.213852
-                },
-                {
                   "lat": 41.623587,
+                  "lng": -88.216324
+                },
+                {
+                  "lat": 41.623279,
                   "lng": -88.213852
                 },
                 {
-                  "lat": 41.623689,
+                  "lat": 41.622868,
+                  "lng": -88.213989
+                },
+                {
+                  "lat": 41.623176,
                   "lng": -88.216461
                 }
               ]
@@ -129,8 +140,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 50,
-              "pano": "iZq4rka_pQ9T2lK5eid_CQ",
+              "heading": 40,
+              "pano": "Brr-6phprJUws2_eskDvCA",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 40,
+              "pano": "Brr-6phprJUws2_eskDvCA",
               "hasCoverage": true
             }
           }
@@ -260,22 +276,18 @@
             "ring": [
               {
                 "lat": 41.628798,
-                "lng": -88.251172
+                "lng": -88.250897
               },
               {
                 "lat": 41.62849,
-                "lng": -88.246091
-              },
-              {
-                "lat": 41.622126,
                 "lng": -88.246503
               },
               {
-                "lat": 41.62192,
-                "lng": -88.251035
+                "lat": 41.621612,
+                "lng": -88.247052
               },
               {
-                "lat": 41.62849,
+                "lat": 41.62192,
                 "lng": -88.251447
               }
             ]
@@ -283,20 +295,20 @@
           "truckGate": {
             "ring": [
               {
-                "lat": 41.622023,
-                "lng": -88.251035
+                "lat": 41.62192,
+                "lng": -88.250073
               },
               {
                 "lat": 41.62192,
-                "lng": -88.249799
+                "lng": -88.2487
               },
               {
                 "lat": 41.62151,
-                "lng": -88.249799
+                "lng": -88.2487
               },
               {
-                "lat": 41.621612,
-                "lng": -88.251035
+                "lat": 41.62151,
+                "lng": -88.250073
               }
             ]
           },
@@ -304,20 +316,40 @@
             {
               "ring": [
                 {
-                  "lat": 41.628798,
-                  "lng": -88.251035
-                },
-                {
                   "lat": 41.628593,
-                  "lng": -88.246503
+                  "lng": -88.251447
                 },
                 {
-                  "lat": 41.626848,
-                  "lng": -88.246503
+                  "lat": 41.62849,
+                  "lng": -88.250348
                 },
                 {
-                  "lat": 41.627053,
-                  "lng": -88.251035
+                  "lat": 41.622023,
+                  "lng": -88.250897
+                },
+                {
+                  "lat": 41.622126,
+                  "lng": -88.251859
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 41.628285,
+                  "lng": -88.247327
+                },
+                {
+                  "lat": 41.628182,
+                  "lng": -88.246228
+                },
+                {
+                  "lat": 41.623358,
+                  "lng": -88.246777
+                },
+                {
+                  "lat": 41.62346,
+                  "lng": -88.247739
                 }
               ]
             }
@@ -326,40 +358,40 @@
             {
               "ring": [
                 {
-                  "lat": 41.628285,
-                  "lng": -88.251447
+                  "lat": 41.62849,
+                  "lng": -88.251309
                 },
                 {
-                  "lat": 41.628285,
-                  "lng": -88.250897
-                },
-                {
-                  "lat": 41.622126,
-                  "lng": -88.250897
+                  "lat": 41.628388,
+                  "lng": -88.250485
                 },
                 {
                   "lat": 41.622126,
-                  "lng": -88.251447
+                  "lng": -88.251035
+                },
+                {
+                  "lat": 41.622228,
+                  "lng": -88.251721
                 }
               ]
             },
             {
               "ring": [
                 {
-                  "lat": 41.628285,
+                  "lat": 41.628182,
+                  "lng": -88.247464
+                },
+                {
+                  "lat": 41.62808,
+                  "lng": -88.24664
+                },
+                {
+                  "lat": 41.623152,
                   "lng": -88.247052
                 },
                 {
-                  "lat": 41.628285,
-                  "lng": -88.246503
-                },
-                {
-                  "lat": 41.624487,
-                  "lng": -88.246503
-                },
-                {
-                  "lat": 41.624487,
-                  "lng": -88.247052
+                  "lat": 41.623255,
+                  "lng": -88.247876
                 }
               ]
             }
@@ -368,19 +400,19 @@
             "ring": [
               {
                 "lat": 41.622126,
-                "lng": -88.251035
+                "lng": -88.250623
               },
               {
-                "lat": 41.622023,
-                "lng": -88.247052
+                "lat": 41.62192,
+                "lng": -88.247601
+              },
+              {
+                "lat": 41.621304,
+                "lng": -88.247739
               },
               {
                 "lat": 41.62151,
-                "lng": -88.247052
-              },
-              {
-                "lat": 41.621612,
-                "lng": -88.251035
+                "lng": -88.25076
               }
             ]
           }
@@ -514,46 +546,57 @@
                 "lng": -88.216747
               },
               {
-                "lat": 41.625321,
+                "lat": 41.625219,
                 "lng": -88.212352
               },
               {
-                "lat": 41.623268,
-                "lng": -88.211803
+                "lat": 41.622242,
+                "lng": -88.212764
               },
               {
-                "lat": 41.622447,
-                "lng": -88.212901
-              },
-              {
-                "lat": 41.622652,
-                "lng": -88.216472
-              },
-              {
-                "lat": 41.624295,
+                "lat": 41.62255,
                 "lng": -88.217159
               }
             ]
           },
-          "truckGate": null,
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 41.622652,
+                "lng": -88.216609
+              },
+              {
+                "lat": 41.622652,
+                "lng": -88.215648
+              },
+              {
+                "lat": 41.622242,
+                "lng": -88.215648
+              },
+              {
+                "lat": 41.622242,
+                "lng": -88.216609
+              }
+            ]
+          },
           "dropYards": [
             {
               "ring": [
                 {
-                  "lat": 41.624397,
+                  "lat": 41.624295,
                   "lng": -88.219081
                 },
                 {
-                  "lat": 41.624295,
+                  "lat": 41.623987,
                   "lng": -88.216747
                 },
                 {
                   "lat": 41.622857,
-                  "lng": -88.216747
+                  "lng": -88.216884
                 },
                 {
-                  "lat": 41.623063,
-                  "lng": -88.219081
+                  "lat": 41.623165,
+                  "lng": -88.219219
                 }
               ]
             }
@@ -562,20 +605,20 @@
             {
               "ring": [
                 {
-                  "lat": 41.625321,
-                  "lng": -88.216747
-                },
-                {
-                  "lat": 41.625219,
-                  "lng": -88.213313
-                },
-                {
-                  "lat": 41.624808,
-                  "lng": -88.213313
-                },
-                {
                   "lat": 41.624911,
-                  "lng": -88.216747
+                  "lng": -88.216335
+                },
+                {
+                  "lat": 41.624603,
+                  "lng": -88.213313
+                },
+                {
+                  "lat": 41.624192,
+                  "lng": -88.213451
+                },
+                {
+                  "lat": 41.6245,
+                  "lng": -88.216472
                 }
               ]
             }
@@ -583,7 +626,12 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 46,
+              "heading": 44,
+              "pano": "TS7EKeehAD4hBzmTYaLEQw",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 44,
               "pano": "TS7EKeehAD4hBzmTYaLEQw",
               "hasCoverage": true
             }
@@ -621,6 +669,52 @@
           "scale": false,
           "dropYard": true,
           "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
         },
         "dossierExcerpt": "The roster geocode (41.624158, -88.213886) carried a 4,526 m correction flag.\nWeb research confirms 24440 W 143rd St is Diageo's legacy Plainfield bottling\nplant: opened 1966 as a gin distiller/bottler, expanded with a $120M project in\n2013, now Diageo's largest North American bottling operation — five\nbottling/packaging lines, ~600 employees, on a 62-acre site (Patch; Diageo\npress; D&B). Satellite probing showed the plant occupies the eastern core of\nthe large connected Diageo Plainfield campus that also includes the Lincolnway\nRTD canning facility (roster idx 1) and a process tank farm. Locked center at\n41.6245, -88.2140.",
         "mapsUrl": "https://www.google.com/maps/@41.6245,-88.2140,400m/data=!3m1!1e3",
@@ -700,58 +794,82 @@
           "perimeter": {
             "ring": [
               {
-                "lat": 32.28117,
+                "lat": 32.281054,
                 "lng": -86.366423
               },
               {
                 "lat": 32.280822,
-                "lng": -86.363127
+                "lng": -86.362303
               },
               {
-                "lat": 32.277107,
-                "lng": -86.362852
+                "lat": 32.273623,
+                "lng": -86.362577
               },
               {
-                "lat": 32.276642,
-                "lng": -86.363813
-              },
-              {
-                "lat": 32.275249,
-                "lng": -86.368345
-              },
-              {
-                "lat": 32.274785,
+                "lat": 32.273856,
                 "lng": -86.36862
-              },
-              {
-                "lat": 32.275017,
-                "lng": -86.369169
-              },
-              {
-                "lat": 32.279661,
-                "lng": -86.367247
               }
             ]
           },
-          "truckGate": null,
-          "dropYards": [],
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 32.280706,
+                "lng": -86.365873
+              },
+              {
+                "lat": 32.280706,
+                "lng": -86.3645
+              },
+              {
+                "lat": 32.280242,
+                "lng": -86.3645
+              },
+              {
+                "lat": 32.280242,
+                "lng": -86.365873
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 32.275249,
+                  "lng": -86.368483
+                },
+                {
+                  "lat": 32.275017,
+                  "lng": -86.3645
+                },
+                {
+                  "lat": 32.273623,
+                  "lng": -86.364637
+                },
+                {
+                  "lat": 32.273856,
+                  "lng": -86.36862
+                }
+              ]
+            }
+          ],
           "dockAprons": [
             {
               "ring": [
                 {
-                  "lat": 32.280822,
-                  "lng": -86.365873
-                },
-                {
-                  "lat": 32.280706,
-                  "lng": -86.363401
-                },
-                {
                   "lat": 32.280125,
+                  "lng": -86.365736
+                },
+                {
+                  "lat": 32.280009,
                   "lng": -86.363401
                 },
                 {
-                  "lat": 32.280242,
+                  "lat": 32.277107,
+                  "lng": -86.363539
+                },
+                {
+                  "lat": 32.277223,
                   "lng": -86.365873
                 }
               ]
@@ -888,39 +1006,97 @@
           "perimeter": {
             "ring": [
               {
-                "lat": 37.547804,
-                "lng": -85.285592
+                "lat": 37.547695,
+                "lng": -85.285317
               },
               {
                 "lat": 37.547804,
-                "lng": -85.278313
-              },
-              {
-                "lat": 37.545844,
                 "lng": -85.277352
               },
               {
-                "lat": 37.543993,
-                "lng": -85.277901
-              },
-              {
-                "lat": 37.543993,
-                "lng": -85.283395
-              },
-              {
                 "lat": 37.544756,
-                "lng": -85.285592
+                "lng": -85.277352
+              },
+              {
+                "lat": 37.544647,
+                "lng": -85.285317
               }
             ]
           },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 37.545736,
+                "lng": -85.278176
+              },
+              {
+                "lat": 37.545736,
+                "lng": -85.277352
+              },
+              {
+                "lat": 37.5453,
+                "lng": -85.277352
+              },
+              {
+                "lat": 37.5453,
+                "lng": -85.278176
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 37.547478,
+                  "lng": -85.284081
+                },
+                {
+                  "lat": 37.547478,
+                  "lng": -85.279137
+                },
+                {
+                  "lat": 37.545844,
+                  "lng": -85.279137
+                },
+                {
+                  "lat": 37.545844,
+                  "lng": -85.284081
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 37.54628,
+                  "lng": -85.279
+                },
+                {
+                  "lat": 37.54628,
+                  "lng": -85.277352
+                },
+                {
+                  "lat": 37.545736,
+                  "lng": -85.277352
+                },
+                {
+                  "lat": 37.545736,
+                  "lng": -85.279
+                }
+              ]
+            }
+          ],
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 260,
-              "pano": "F2Lr3LASMsgcjwOGXmc17Q",
+              "heading": 278,
+              "pano": "9yuFSnHIihONDfc3XxiSdw",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 278,
+              "pano": "9yuFSnHIihONDfc3XxiSdw",
               "hasCoverage": true
             }
           }
@@ -957,6 +1133,42 @@
           "scale": false,
           "dropYard": false,
           "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
         },
         "dossierExcerpt": "The roster geocode (37.544187, -85.282906) carried a 3,808 m correction flag.\nWeb research confirms 100 Bourbon Drive, Lebanon KY is Diageo's carbon-neutral\nBulleit distillery: a 144-acre property with a 72,000 sq ft distillery and dry\nhouse plus 12 barrel-aging warehouses, opened 2021, capacity ~10M proof gal/yr\n(Diageo press; MarionCountyKY.com; Distillery Trail). Satellite probing around\nthe geocode point revealed exactly this layout — a modern distillery/dry-house\nbuilding with process tanks plus rows of long barrel warehouses on rolling rural\nland. Locked center on the distillery building at 37.5453, -85.2790.",
         "mapsUrl": "https://www.google.com/maps/@37.5453,-85.2790,400m/data=!3m1!1e3",
@@ -1016,34 +1228,87 @@
           "perimeter": {
             "ring": [
               {
-                "lat": 38.226684,
-                "lng": -85.147869
+                "lat": 38.227763,
+                "lng": -85.14732
               },
               {
                 "lat": 38.226252,
                 "lng": -85.137158
               },
               {
-                "lat": 38.223663,
-                "lng": -85.136608
-              },
-              {
-                "lat": 38.221505,
-                "lng": -85.139904
-              },
-              {
                 "lat": 38.221721,
-                "lng": -85.145397
+                "lng": -85.137707
               },
               {
-                "lat": 38.223663,
-                "lng": -85.147045
+                "lat": 38.2228,
+                "lng": -85.147869
               }
             ]
           },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 38.222368,
+                "lng": -85.141827
+              },
+              {
+                "lat": 38.222153,
+                "lng": -85.139904
+              },
+              {
+                "lat": 38.22129,
+                "lng": -85.140179
+              },
+              {
+                "lat": 38.221505,
+                "lng": -85.142101
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 38.225821,
+                  "lng": -85.146221
+                },
+                {
+                  "lat": 38.224958,
+                  "lng": -85.138805
+                },
+                {
+                  "lat": 38.223663,
+                  "lng": -85.13908
+                },
+                {
+                  "lat": 38.224526,
+                  "lng": -85.146496
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 38.224742,
+                  "lng": -85.145947
+                },
+                {
+                  "lat": 38.22431,
+                  "lng": -85.141827
+                },
+                {
+                  "lat": 38.223447,
+                  "lng": -85.142101
+                },
+                {
+                  "lat": 38.223879,
+                  "lng": -85.146221
+                }
+              ]
+            }
+          ],
           "staging": null
         },
         "yardMetrics": {
@@ -1078,6 +1343,42 @@
           "scale": true,
           "dropYard": false,
           "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
         },
         "dossierExcerpt": "The roster coordinate (38.22032, -85.145372, geocoded ROOFTOP, moved 25 m)\npinned the visitor / tasting center at the south end of the campus, not the\nfreight-relevant buildings. Satellite probes at z15-z17 revealed the full\ncampus: a fan of ~10 large two-story rickhouses to the north, a\nproduction/still-house complex in the center, and the visitor center to the\nsouth, all served by a single private drive off Benson Pike. Street View at the\nentrance shows a Bulleit Distilling Co. branded tour shuttle, confirming\nidentity. The freight center of gravity is the production complex, so the locked\ncenter was moved north to 38.22280, -85.14320.",
         "mapsUrl": "https://www.google.com/maps/@38.22280,-85.14320,400m/data=!3m1!1e3",
@@ -1134,42 +1435,88 @@
           "perimeter": {
             "ring": [
               {
-                "lat": 38.211982,
-                "lng": -85.814081
-              },
-              {
-                "lat": 38.211658,
-                "lng": -85.809275
-              },
-              {
-                "lat": 38.20896,
-                "lng": -85.808725
-              },
-              {
-                "lat": 38.207126,
-                "lng": -85.809687
-              },
-              {
-                "lat": 38.207558,
+                "lat": 38.212521,
                 "lng": -85.813395
               },
               {
-                "lat": 38.21004,
-                "lng": -85.814493
+                "lat": 38.211226,
+                "lng": -85.809549
+              },
+              {
+                "lat": 38.208205,
+                "lng": -85.810923
+              },
+              {
+                "lat": 38.2095,
+                "lng": -85.814768
               }
             ]
           },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 23,
-              "pano": "TzEHSVTQlJVkRwJgbygHkA",
-              "hasCoverage": true
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 38.2095,
+                "lng": -85.814081
+              },
+              {
+                "lat": 38.209176,
+                "lng": -85.81312
+              },
+              {
+                "lat": 38.208745,
+                "lng": -85.813395
+              },
+              {
+                "lat": 38.209068,
+                "lng": -85.814356
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 38.207773,
+                  "lng": -85.807352
+                },
+                {
+                  "lat": 38.207126,
+                  "lng": -85.804056
+                },
+                {
+                  "lat": 38.206155,
+                  "lng": -85.804331
+                },
+                {
+                  "lat": 38.206802,
+                  "lng": -85.807627
+                }
+              ]
             }
-          }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 38.211011,
+                  "lng": -85.812845
+                },
+                {
+                  "lat": 38.210363,
+                  "lng": -85.810648
+                },
+                {
+                  "lat": 38.209824,
+                  "lng": -85.810923
+                },
+                {
+                  "lat": 38.210471,
+                  "lng": -85.81312
+                }
+              ]
+            }
+          ],
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 14,
@@ -1203,6 +1550,52 @@
           "scale": false,
           "dropYard": true,
           "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
         },
         "dossierExcerpt": "The roster coordinate (38.209594, -85.808741, geocoded ROOFTOP, moved 12 m)\nlanded squarely on the Stitzel-Weller campus. Satellite probes at z16-z17\nconfirmed the historic distillery footprint: a fan of ~18 multi-story brick\nrickhouses, a production/bottling building cluster, and the historic distillery\nbuilding now serving as the Bulleit Frontier Whiskey Experience visitor center.\nStreet View confirmed the brick distillery building and the gated freight\nentrance. Locked center placed on the production complex (the freight center of\ngravity).",
         "mapsUrl": "https://www.google.com/maps/@38.20950,-85.80900,400m/data=!3m1!1e3",
@@ -1263,34 +1656,78 @@
             "ring": [
               {
                 "lat": 35.439059,
-                "lng": -86.246747
+                "lng": -86.245923
               },
               {
-                "lat": 35.439283,
+                "lat": 35.438948,
                 "lng": -86.243313
               },
               {
-                "lat": 35.438276,
-                "lng": -86.242352
-              },
-              {
                 "lat": 35.437605,
-                "lng": -86.243176
+                "lng": -86.243313
               },
               {
-                "lat": 35.437605,
-                "lng": -86.246335
-              },
-              {
-                "lat": 35.438276,
-                "lng": -86.247021
+                "lat": 35.437717,
+                "lng": -86.245923
               }
             ]
           },
-          "truckGate": null,
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 35.4385,
+                "lng": -86.245923
+              },
+              {
+                "lat": 35.4385,
+                "lng": -86.245373
+              },
+              {
+                "lat": 35.438052,
+                "lng": -86.245373
+              },
+              {
+                "lat": 35.438052,
+                "lng": -86.245923
+              }
+            ]
+          },
           "dropYards": [],
-          "dockAprons": [],
-          "staging": null
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 35.438724,
+                  "lng": -86.244687
+                },
+                {
+                  "lat": 35.438612,
+                  "lng": -86.243451
+                },
+                {
+                  "lat": 35.438164,
+                  "lng": -86.243451
+                },
+                {
+                  "lat": 35.438276,
+                  "lng": -86.244687
+                }
+              ]
+            }
+          ],
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 94,
+              "pano": "CAoSFkNJSE0wb2dLRUlDQWdJQ0VpUGZGTFE.",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 94,
+              "pano": "CAoSFkNJSE0wb2dLRUlDQWdJQ0VpUGZGTFE.",
+              "hasCoverage": true
+            }
+          }
         },
         "yardMetrics": {
           "dockDoorCount": 6,
@@ -1324,6 +1761,42 @@
           "scale": false,
           "dropYard": false,
           "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
         },
         "dossierExcerpt": "The roster coordinate (35.438419, -86.246097, geocoded ROOFTOP, moved 53 m)\nlanded on the George Dickel campus. Satellite probes at z16-z18 confirmed the\ndistillery layout: two main production buildings, a visitor center, and ~2\nsingle-story sheet-metal rickhouses set in the woods to the southeast. Street\nView showed the \"Cascade Hollow Distilling Co.\" welcome sign at the entrance,\npositively confirming identity. The campus sits in a deep wooded hollow.",
         "mapsUrl": "https://www.google.com/maps/@35.43850,-86.24400,400m/data=!3m1!1e3",
@@ -1383,34 +1856,96 @@
           "perimeter": {
             "ring": [
               {
-                "lat": 31.550629,
-                "lng": -97.135897
+                "lat": 31.550673,
+                "lng": -97.135879
               },
               {
-                "lat": 31.550556,
-                "lng": -97.135553
+                "lat": 31.550644,
+                "lng": -97.13545
               },
               {
                 "lat": 31.549883,
-                "lng": -97.135553
+                "lng": -97.135485
               },
               {
-                "lat": 31.549854,
-                "lng": -97.135897
-              },
-              {
-                "lat": 31.550439,
-                "lng": -97.135948
+                "lat": 31.549913,
+                "lng": -97.135914
               }
             ]
           },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 31.55022,
+                "lng": -97.135897
+              },
+              {
+                "lat": 31.55022,
+                "lng": -97.135794
+              },
+              {
+                "lat": 31.550147,
+                "lng": -97.135794
+              },
+              {
+                "lat": 31.550147,
+                "lng": -97.135897
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 31.550586,
+                  "lng": -97.135725
+                },
+                {
+                  "lat": 31.550571,
+                  "lng": -97.13545
+                },
+                {
+                  "lat": 31.550293,
+                  "lng": -97.135468
+                },
+                {
+                  "lat": 31.550308,
+                  "lng": -97.135742
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 31.550556,
+                  "lng": -97.135862
+                },
+                {
+                  "lat": 31.550556,
+                  "lng": -97.135742
+                },
+                {
+                  "lat": 31.550059,
+                  "lng": -97.135759
+                },
+                {
+                  "lat": 31.550059,
+                  "lng": -97.135879
+                }
+              ]
+            }
+          ],
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 191,
+              "heading": 181,
+              "pano": "FlXrijwX1gQvaq9pLOtNrw",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 181,
               "pano": "FlXrijwX1gQvaq9pLOtNrw",
               "hasCoverage": true
             }
@@ -1448,6 +1983,42 @@
           "scale": false,
           "dropYard": false,
           "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
         },
         "dossierExcerpt": "The roster coordinate (31.550293, -97.135725, geocoded ROOFTOP, moved 19 m)\nlanded on the Balcones building. Satellite probes at z19-z20 and Street View\nconfirmed it: a long multi-story historic brick warehouse — the century-old\nTexas Fireproof Storage Company building — in downtown Waco, with a distinctive\nround rooftop feature. Web research confirms Balcones distills all of its whisky\ninside this building. Location confirmed.",
         "mapsUrl": "https://www.google.com/maps/@31.550293,-97.135725,400m/data=!3m1!1e3",
@@ -1510,51 +2081,83 @@
           "perimeter": {
             "ring": [
               {
-                "lat": 17.707809,
+                "lat": 17.707416,
                 "lng": -64.844997
               },
               {
-                "lat": 17.707809,
+                "lat": 17.707155,
                 "lng": -64.841701
               },
               {
-                "lat": 17.705454,
-                "lng": -64.841427
-              },
-              {
                 "lat": 17.7048,
-                "lng": -64.842113
+                "lng": -64.841976
               },
               {
-                "lat": 17.7048,
-                "lng": -64.844723
-              },
-              {
-                "lat": 17.70637,
+                "lat": 17.705062,
                 "lng": -64.845272
               }
             ]
           },
-          "truckGate": null,
-          "dropYards": [],
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 17.705323,
+                "lng": -64.843899
+              },
+              {
+                "lat": 17.705192,
+                "lng": -64.8428
+              },
+              {
+                "lat": 17.704669,
+                "lng": -64.842937
+              },
+              {
+                "lat": 17.7048,
+                "lng": -64.844036
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 17.708725,
+                  "lng": -64.844723
+                },
+                {
+                  "lat": 17.708463,
+                  "lng": -64.842525
+                },
+                {
+                  "lat": 17.707416,
+                  "lng": -64.842663
+                },
+                {
+                  "lat": 17.707678,
+                  "lng": -64.84486
+                }
+              ]
+            }
+          ],
           "dockAprons": [
             {
               "ring": [
                 {
-                  "lat": 17.705716,
-                  "lng": -64.844723
+                  "lat": 17.706108,
+                  "lng": -64.844997
                 },
                 {
-                  "lat": 17.705716,
+                  "lat": 17.705847,
                   "lng": -64.842113
                 },
                 {
-                  "lat": 17.705062,
-                  "lng": -64.842113
+                  "lat": 17.705323,
+                  "lng": -64.842251
                 },
                 {
-                  "lat": 17.705062,
-                  "lng": -64.844723
+                  "lat": 17.705585,
+                  "lng": -64.845135
                 }
               ]
             }
@@ -1562,8 +2165,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 87,
-              "pano": "ibd0PwEkjxU48_IGhLUd-g",
+              "heading": 90,
+              "pano": "wEzjKsHfRmSWUk2l4e1OOw",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 90,
+              "pano": "wEzjKsHfRmSWUk2l4e1OOw",
               "hasCoverage": true
             }
           }
@@ -1600,6 +2208,50 @@
           "scale": false,
           "dropYard": true,
           "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
         },
         "dossierExcerpt": "The roster coordinate (17.69168, -64.84829, geocoded GEOMETRIC_CENTER, moved\n4 m) landed on a residential coastal area south of Melvin Evans Highway — NOT\nthe distillery. Web research (PR Newswire, St. Croix Source) places the facility\non property bordering Melvin Evans Highway in Estate Diamond, near Henry E.\nRohlsen Airport. A satellite search along the highway found the large\nindustrial complex at ~17.7048, -64.8428: a cluster of big white-roofed\ndistillery/warehouse buildings plus a separate row of long barrel-aging\nwarehouses to the northwest — consistent with the Captain Morgan rum distillery\nand its two ~100K sq ft barrel warehouses. The locked center was moved ~1.6 km\nNNE of the roster point.",
         "mapsUrl": "https://www.google.com/maps/@17.70480,-64.84280,400m/data=!3m1!1e3",

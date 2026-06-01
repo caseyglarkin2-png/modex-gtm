@@ -58,6 +58,14 @@ site.
    vertex at the end (the renderer closes the ring). Latitude/longitude scale:
    1° latitude ≈ 111,320 m; 1° longitude ≈ 111,320 × cos(latitude) m.
 
+   ORIENTATION IS THE WHOLE POINT — and it applies to EVERY zone, not just the
+   perimeter. Each sub-zone must be a rotated quad whose edges run PARALLEL to
+   the structure it covers: the dock apron is a long thin quad hugging the dock
+   wall at the building's angle; the truck gate aligns to the entrance drive;
+   drop yards align to the trailer rows. A north-aligned box laid over a
+   building that sits at an angle is the exact defect we are removing — if the
+   building is rotated 30°, the box is rotated 30°.
+
    CONFIRM-OR-IMPROVE — if a zone is already given to you as a tight box
    `{south, west, north, east}` that genuinely matches the footprint, you may
    keep it (the pipeline reads a box as a 4-corner rectangle); but if it is

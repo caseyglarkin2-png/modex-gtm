@@ -10,31 +10,19 @@
       "ring": [
         {
           "lat": 42.314906,
-          "lng": -71.10334
+          "lng": -71.103306
         },
         {
-          "lat": 42.314932,
-          "lng": -71.102688
-        },
-        {
-          "lat": 42.314779,
+          "lat": 42.314855,
           "lng": -71.102139
         },
         {
-          "lat": 42.314449,
+          "lat": 42.314373,
           "lng": -71.102276
         },
         {
-          "lat": 42.314322,
-          "lng": -71.102825
-        },
-        {
-          "lat": 42.314373,
-          "lng": -71.103272
-        },
-        {
-          "lat": 42.314627,
-          "lng": -71.103375
+          "lat": 42.314424,
+          "lng": -71.103443
         }
       ]
     },
@@ -44,8 +32,8 @@
     "staging": null,
     "streetViewMeta": {
       "perimeter": {
-        "heading": 65,
-        "pano": "dQvUT_TKclR8mtVx5esQWg",
+        "heading": 73,
+        "pano": "FjbQdcCym_JtO5db3maTgQ",
         "hasCoverage": true
       }
     }
